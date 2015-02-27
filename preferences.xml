@@ -1240,9 +1240,6 @@ Started September 2000 by David Megginson, david@megginson.com
     <tutorial>
       <enabled type="bool" userarchive="n">false</enabled>
     </tutorial>
-    <atc-chatter>
-      <enabled type="bool" userarchive="n">false</enabled>
-    </atc-chatter>
     <local_weather>
       <enabled type="bool" userarchive="y">false</enabled>
     </local_weather>

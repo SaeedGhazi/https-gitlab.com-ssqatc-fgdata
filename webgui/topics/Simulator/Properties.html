@@ -1,7 +1,59 @@
 <style>
+.pointer-icon {
+	cursor: pointer;
+}
 
+.property-list {
+	list-style-type: none;
+	list-style-image: none;
+	padding-left: 26px;
+}
+
+.property-name {
+	width: 12em;
+	display: inline-block;
+}
+
+.property-value {
+  padding: 0 0.2em;
+  min-width: 8em;
+  display: inline-block;
+  text-align: right;
+}
 </style>
-
-<div data-bind="foreach: properties">
-
+<div class="ui-widget ui-widget-content ui-corner-all">
+<div class="ui-widget-header">Property Tree</div>
+<div data-bind="template: { name: 'propertytree-template', data: properties }"></div>
 </div>
+<script type="text/html" id="propertytree-template">
+  <ul class="property-list" data-bind="foreach: $data">
+    <li>
+        <span class="property-name" 
+              data-bind="
+                text: name,
+                css: { 
+                  'pointer-icon': hasChildren, 
+                },
+                click: toggle,
+              "></span>
+
+        <span class="property-value ui-state-hover pointer-icon ui-corner-all" 
+              data-bind="
+                text: value, 
+                visible: hasValue,
+                click: valueEdit,
+              "></span>
+
+        <div data-bind="
+               template: { 
+                 name: 'propertytree-template',
+                 data: children
+               },
+               visible: isExpanded
+             "></div>
+    </li>
+  </ul>
+</script>
+<script type="text/html" id="inplace-editor-template">
+  <input style="width: 8em" >
+</script>

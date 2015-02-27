@@ -8,6 +8,7 @@ define([
         function load() {
             jquery.get('/json' + self.path, null, function(data) {
                 self.hasChildren = data.nChildren > 0;
+                self.index = data.index;
                 if (typeof (data.value) != 'undefined') {
                     self.value(data.value);
                     self.hasValue = true;
@@ -22,6 +23,7 @@ define([
                         var p = new PropertyViewModel();
                         p.name = prop.name;
                         p.path = prop.path;
+                        p.index = prop.index;
                         p.hasChildren = prop.nChildren > 0;
                         if (typeof (prop.value) != 'undefined') {
                             p.value(prop.value);
@@ -48,6 +50,11 @@ define([
         self.path = '';
         self.hasChildren = false;
         self.hasValue = false;
+
+        self.indexedName = ko.pureComputed(function() { 
+          if( 0 == self.index ) return self.name;
+          return self.name + "[" + self.index + "]";
+        });
 
         self.isExpanded = ko.observable(false);
         self.isExpanded.subscribe(function(newValue) {

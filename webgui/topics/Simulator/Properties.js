@@ -85,11 +85,11 @@ define([
             }
 
             inplaceEditor.on('keyup', function(evt) {
-                switch (evt.key) {
-                case 'Esc':
+                switch (evt.keyCode) {
+                case 27:
                     endEdit();
                     break;
-                case 'Enter':
+                case 13:
                     endEdit(inplaceEditor.val());
                     break;
                 }

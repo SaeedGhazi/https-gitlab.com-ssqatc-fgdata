@@ -167,7 +167,7 @@ define(
                 });
 
                 self.heading = ko.observable(0).extend({
-                    fgprop : 'heading'
+                    fgprop : 'true-heading'
                 });
 
                 self.position = ko.computed(function() {

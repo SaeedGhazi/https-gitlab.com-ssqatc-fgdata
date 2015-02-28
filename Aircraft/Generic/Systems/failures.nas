@@ -31,16 +31,16 @@
 
 var set_unserviceable = func(path) {
 
-	var prop = path ~ "/serviceable";
+    var prop = path ~ "/serviceable";
 
-	if (props.globals.getNode(prop) == nil)
-		props.globals.initNode(prop, 1, "BOOL");
+    if (props.globals.getNode(prop) == nil)
+        props.globals.initNode(prop, 1, "BOOL");
 
-	return {
-		parents: [FailureMgr.FailureActuator],
-		set_failure_level: func(level) setprop(prop, level > 0 ? 0 : 1),
-		get_failure_level: func { getprop(prop) ? 0 : 1 }
-	}
+    return {
+        parents: [FailureMgr.FailureActuator],
+        set_failure_level: func(level) setprop(prop, level > 0 ? 0 : 1),
+        get_failure_level: func { getprop(prop) ? 0 : 1 }
+    }
 }
 
 ##
@@ -49,19 +49,19 @@ var set_unserviceable = func(path) {
 # whatever it is that is controlling.
 
 var set_readonly = func(property) {
-	return {
-		parents: [FailureMgr.FailureActuator],
+    return {
+        parents: [FailureMgr.FailureActuator],
 
-		set_failure_level: func(level) {
-			var pnode = props.globals.getNode(property);
-			pnode.setAttribute("writable", level > 0 ? 0 : 1);
-		},
+        set_failure_level: func(level) {
+            var pnode = props.globals.getNode(property);
+            pnode.setAttribute("writable", level > 0 ? 0 : 1);
+        },
 
-		get_failure_level: func {
-			var pnode = props.globals.getNode(property);
-			pnode.getAttribute("writable") ? 0 : 1;
-		}
-	}
+        get_failure_level: func {
+            var pnode = props.globals.getNode(property);
+            pnode.getAttribute("writable") ? 0 : 1;
+        }
+    }
 }
 
 ##
@@ -70,32 +70,32 @@ var set_readonly = func(property) {
 # while the system is failed.
 
 var fail_engine = func(engine) {
-	return {
-		parents: [FailureMgr.FailureActuator],
-		level: 0,
-		magnetos: props.globals.getNode("/controls/engines/" ~ engine ~ "/magnetos", 1),
-		cutoff: props.globals.getNode("/controls/engines/" ~ engine ~ "/cutoff", 1),
+    return {
+        parents: [FailureMgr.FailureActuator],
+        level: 0,
+        magnetos: props.globals.getNode("/controls/engines/" ~ engine ~ "/magnetos", 1),
+        cutoff: props.globals.getNode("/controls/engines/" ~ engine ~ "/cutoff", 1),
 
-		get_failure_level: func me.level,
+        get_failure_level: func me.level,
 
-		set_failure_level: func(level) {
-			if (level) {
-				# Switch off the engine, and disable writing to it.
-				me.magnetos.setValue(0);
-				me.magnetos.setAttribute("writable", 0);
-				me.cutoff.setValue(1);
-				me.cutoff.setAttribute("writable", 0);
-			}
-			else {
-				# Enable the properties, but don't set the magnetos, as they may
-				# be off for a reason.
-				me.magnetos.setAttribute("writable", 1);
-				me.cutoff.setAttribute("writable", 1);
-				me.cutoff.setValue(0);
-			}
-			me.level = level;
-		}
-	}
+        set_failure_level: func(level) {
+            if (level) {
+                # Switch off the engine, and disable writing to it.
+                me.magnetos.setValue(0);
+                me.magnetos.setAttribute("writable", 0);
+                me.cutoff.setValue(1);
+                me.cutoff.setAttribute("writable", 0);
+            }
+            else {
+                # Enable the properties, but don't set the magnetos, as they may
+                # be off for a reason.
+                me.magnetos.setAttribute("writable", 1);
+                me.cutoff.setAttribute("writable", 1);
+                me.cutoff.setValue(0);
+            }
+            me.level = level;
+        }
+    }
 }
 
 
@@ -108,9 +108,9 @@ var fail_engine = func(engine) {
 # standard deviation.
 
 var norm_rand = func(mean, std) {
-	var r = -2 * math.ln(1 - rand());
-	var a = 2 * math.pi * (1 - rand());
-	return mean + (math.sqrt(r) * math.sin(a) * std);
+    var r = -2 * math.ln(1 - rand());
+    var a = 2 * math.pi * (1 - rand());
+    return mean + (math.sqrt(r) * math.sin(a) * std);
 };
 
 ##
@@ -120,40 +120,40 @@ var norm_rand = func(mean, std) {
 
 var AltitudeTrigger = {
 
-	parents: [FailureMgr.Trigger],
-	type: "altitude",
-	requires_polling: 1,
+    parents: [FailureMgr.Trigger],
+    type: "altitude",
+    requires_polling: 1,
 
-	new: func(min, max) {
-		min != nil or max != nil or
-			die("AltitudeTrigger.new: either min or max must be specified");
+    new: func(min, max) {
+        min != nil or max != nil or
+            die("AltitudeTrigger.new: either min or max must be specified");
 
-		var m = FailureMgr.Trigger.new();
-		m.parents = [AltitudeTrigger];
-		m.params["min-altitude-ft"] = min;
-		m.params["max-altitude-ft"] = max;
-		m._altitude_prop = "/position/altitude-ft";
-		return m;
-	},
+        var m = FailureMgr.Trigger.new();
+        m.parents = [AltitudeTrigger];
+        m.params["min-altitude-ft"] = min;
+        m.params["max-altitude-ft"] = max;
+        m._altitude_prop = "/position/altitude-ft";
+        return m;
+    },
 
-	to_str: func {
-		var min = me.params["min-altitude-ft"];
-		var max = me.params["max-altitude-ft"];
+    to_str: func {
+        var min = me.params["min-altitude-ft"];
+        var max = me.params["max-altitude-ft"];
 
-		if (min == nil) sprintf("Altitude below %d ft", int(max));
-		elsif (max == nil) sprintf("Altitude above %d ft", int(min));
-		else sprintf("Altitude between %d and %d ft", int(min), int(max));
-	},
+        if (min == nil) sprintf("Altitude below %d ft", int(max));
+        elsif (max == nil) sprintf("Altitude above %d ft", int(min));
+        else sprintf("Altitude between %d and %d ft", int(min), int(max));
+    },
 
-	update: func {
-		var alt = getprop(me._altitude_prop);
+    update: func {
+        var alt = getprop(me._altitude_prop);
 
-		var min = me.params["min-altitude-ft"];
-		var max = me.params["max-altitude-ft"];
+        var min = me.params["min-altitude-ft"];
+        var max = me.params["max-altitude-ft"];
 
-		me.fired = min != nil ? min < alt : 1;
-		me.fired = max != nil ? me.fired and alt < max : me.fired;
-	}
+        me.fired = min != nil ? min < alt : 1;
+        me.fired = max != nil ? me.fired and alt < max : me.fired;
+    }
 };
 
 ##
@@ -162,38 +162,38 @@ var AltitudeTrigger = {
 
 var WaypointTrigger = {
 
-	parents: [FailureMgr.Trigger],
-	type: "waypoint",
-	requires_polling: 1,
+    parents: [FailureMgr.Trigger],
+    type: "waypoint",
+    requires_polling: 1,
 
-	new: func(lat, lon, distance) {
-		var wp = geo.Coord.new();
-		wp.set_latlon(lat, lon);
+    new: func(lat, lon, distance) {
+        var wp = geo.Coord.new();
+        wp.set_latlon(lat, lon);
 
-		var m = FailureMgr.Trigger.new();
-		m.parents = [WaypointTrigger];
-		m.params["latitude-deg"] = lat;
-		m.params["longitude-deg"] = lon;
-		m.params["distance-nm"] = distance;
-		m.waypoint = wp;
-		return m;
-	},
+        var m = FailureMgr.Trigger.new();
+        m.parents = [WaypointTrigger];
+        m.params["latitude-deg"] = lat;
+        m.params["longitude-deg"] = lon;
+        m.params["distance-nm"] = distance;
+        m.waypoint = wp;
+        return m;
+    },
 
-	arm: func {
-		call(FailureMgr.Trigger.arm, [], me);
-		me.waypoint.set_latlon(me.params["latitude-deg"],
-		                       me.params["longitude-deg"]);
-	},
+    arm: func {
+        call(FailureMgr.Trigger.arm, [], me);
+        me.waypoint.set_latlon(me.params["latitude-deg"],
+                               me.params["longitude-deg"]);
+    },
 
-	to_str: func {
-		sprintf("Within %.2f miles of %s", me.params["distance-nm"],
-			    geo.format(me.waypoint.lat(), me.waypoint.lon()));
-	},
+    to_str: func {
+        sprintf("Within %.2f miles of %s", me.params["distance-nm"],
+                geo.format(me.waypoint.lat(), me.waypoint.lon()));
+    },
 
-	update: func {
-		var d = geo.aircraft_position().distance_to(me.waypoint) * M2NM;
-		me.fired = d < me.params["distance-nm"];
-	}
+    update: func {
+        var d = geo.aircraft_position().distance_to(me.waypoint) * M2NM;
+        me.fired = d < me.params["distance-nm"];
+    }
 };
 
 ##
@@ -201,47 +201,47 @@ var WaypointTrigger = {
 
 var MtbfTrigger = {
 
-	parents: [FailureMgr.Trigger],
-	type: "mtbf",
-	requires_polling: 0,
+    parents: [FailureMgr.Trigger],
+    type: "mtbf",
+    requires_polling: 0,
 
-	new: func(mtbf) {
-		var m = FailureMgr.Trigger.new();
-		m.parents = [MtbfTrigger];
-		m.params["mtbf"] = mtbf;
-		m.timer = maketimer(0, func m.on_fire());
-		m.timer.singleShot = 1;
-		return m;
-	},
+    new: func(mtbf) {
+        var m = FailureMgr.Trigger.new();
+        m.parents = [MtbfTrigger];
+        m.params["mtbf"] = mtbf;
+        m.timer = maketimer(0, func m.on_fire());
+        m.timer.singleShot = 1;
+        return m;
+    },
 
-	enable: func {
-		me.armed and me.timer.start();
-		me.enabled = 1;
-	},
+    enable: func {
+        me.armed and me.timer.start();
+        me.enabled = 1;
+    },
 
-	disable: func {
-		me.timer.stop();
-		me.enabled = 0;
-	},
+    disable: func {
+        me.timer.stop();
+        me.enabled = 0;
+    },
 
-	arm: func {
-		call(FailureMgr.Trigger.arm, [], me);
-		me.timer.restart(norm_rand(me.params["mtbf"], me.params["mtbf"] / 10));
-		me.enabled and me.timer.start();
-	},
+    arm: func {
+        call(FailureMgr.Trigger.arm, [], me);
+        me.timer.restart(norm_rand(me.params["mtbf"], me.params["mtbf"] / 10));
+        me.enabled and me.timer.start();
+    },
 
-	disarm: func {
-		call(FailureMgr.Trigger.disarm, [], me);
-		me.timer.stop();
-	},
+    disarm: func {
+        call(FailureMgr.Trigger.disarm, [], me);
+        me.timer.stop();
+    },
 
-	to_str: func {
-		sprintf("Mean time between failures: %.1f mins", me.params["mtbf"] / 60);
-	},
+    to_str: func {
+        sprintf("Mean time between failures: %.1f mins", me.params["mtbf"] / 60);
+    },
 
-	update: func {
-		me.fired = getprop(me._time_prop) > me.fire_time;
-	}
+    update: func {
+        me.fired = getprop(me._time_prop) > me.fire_time;
+    }
 };
 
 ##
@@ -249,47 +249,47 @@ var MtbfTrigger = {
 
 var TimeoutTrigger = {
 
-	parents: [FailureMgr.Trigger],
-	type: "timeout",
-	requires_polling: 0,
+    parents: [FailureMgr.Trigger],
+    type: "timeout",
+    requires_polling: 0,
 
-	new: func(timeout) {
-		var m = FailureMgr.Trigger.new();
-		m.parents = [TimeoutTrigger];
-		m.params["timeout-sec"] = timeout;
-		m.timer = maketimer(0, func m.on_fire());
-		m.timer.singleShot = 1;
-		return m;
-	},
+    new: func(timeout) {
+        var m = FailureMgr.Trigger.new();
+        m.parents = [TimeoutTrigger];
+        m.params["timeout-sec"] = timeout;
+        m.timer = maketimer(0, func m.on_fire());
+        m.timer.singleShot = 1;
+        return m;
+    },
 
-	enable: func {
-		me.armed and me.timer.start();
-		me.enabled = 1;
-	},
+    enable: func {
+        me.armed and me.timer.start();
+        me.enabled = 1;
+    },
 
-	disable: func {
-		me.timer.stop();
-		me.enabled = 0;
-	},
+    disable: func {
+        me.timer.stop();
+        me.enabled = 0;
+    },
 
-	arm: func {
-		call(FailureMgr.Trigger.arm, [], me);
-		me.timer.restart(me.params["timeout-sec"]);
-		me.enabled and me.timer.start();
-	},
+    arm: func {
+        call(FailureMgr.Trigger.arm, [], me);
+        me.timer.restart(me.params["timeout-sec"]);
+        me.enabled and me.timer.start();
+    },
 
-	disarm: func {
-		call(FailureMgr.Trigger.disarm, [], me);
-		me.timer.stop();
-	},
+    disarm: func {
+        call(FailureMgr.Trigger.disarm, [], me);
+        me.timer.stop();
+    },
 
-	to_str: func {
-		sprintf("Fixed delay: %d minutes", me.params["timeout-sec"] / 60);
-	},
+    to_str: func {
+        sprintf("Fixed delay: %d minutes", me.params["timeout-sec"] / 60);
+    },
 
-	update: func {
-		me.fired = getprop("/sim/time/elapsed-sec") > me.fire_time;
-	}
+    update: func {
+        me.fired = getprop("/sim/time/elapsed-sec") > me.fire_time;
+    }
 };
 
 ##
@@ -300,53 +300,53 @@ var TimeoutTrigger = {
 
 var CycleCounter = {
 
-	new: func(property, on_update = nil) {
-		return {
-			parents: [CycleCounter],
-			cycles: 0,
-			_property: property,
-			_on_update: on_update,
-			_prev_value: getprop(property),
-			_prev_delta: 0,
-			_lsnr: nil
-		};
-	},
+    new: func(property, on_update = nil) {
+        return {
+            parents: [CycleCounter],
+            cycles: 0,
+            _property: property,
+            _on_update: on_update,
+            _prev_value: getprop(property),
+            _prev_delta: 0,
+            _lsnr: nil
+        };
+    },
 
-	enable: func {
-		if (me._lsnr == nil)
-			me._lsnr = setlistener(me._property, func (p) me._on_prop_change(p), 0, 0);
-	},
+    enable: func {
+        if (me._lsnr == nil)
+            me._lsnr = setlistener(me._property, func (p) me._on_prop_change(p), 0, 0);
+    },
 
-	disable: func {
-		if (me._lsnr != nil) {
-			removelistener(me._lsnr);
-			me._lsnr = nil;
-		}
-	},
+    disable: func {
+        if (me._lsnr != nil) {
+            removelistener(me._lsnr);
+            me._lsnr = nil;
+        }
+    },
 
-	reset: func {
-		me.cycles = 0;
-		me._prev_value = getprop(me._property);
-		me._prev_delta = 0;
-	},
+    reset: func {
+        me.cycles = 0;
+        me._prev_value = getprop(me._property);
+        me._prev_delta = 0;
+    },
 
-	_on_prop_change: func(prop) {
+    _on_prop_change: func(prop) {
 
-		# TODO: Implement a filter for avoiding spureous values.
+        # TODO: Implement a filter for avoiding spureous values.
 
-		var value = prop.getValue();
-		var delta = value - me._prev_value;
-		if (delta == 0) return;
+        var value = prop.getValue();
+        var delta = value - me._prev_value;
+        if (delta == 0) return;
 
-		if (delta * me._prev_delta < 0) {
-			# Property variation has changed direction
-			me.cycles += 0.5;
-			if (me._on_update != nil) me._on_update(me.cycles);
-		}
+        if (delta * me._prev_delta < 0) {
+            # Property variation has changed direction
+            me.cycles += 0.5;
+            if (me._on_update != nil) me._on_update(me.cycles);
+        }
 
-		me._prev_delta = delta;
-		me._prev_value = value;
-	}
+        me._prev_delta = delta;
+        me._prev_value = value;
+    }
 };
 
 ##
@@ -355,51 +355,51 @@ var CycleCounter = {
 
 var McbfTrigger = {
 
-	parents: [FailureMgr.Trigger],
-	type: "mcbf",
-	requires_polling: 0,
+    parents: [FailureMgr.Trigger],
+    type: "mcbf",
+    requires_polling: 0,
 
-	new: func(property, mcbf) {
-		var m = FailureMgr.Trigger.new();
-		m.parents = [McbfTrigger];
-		m.params["mcbf"] = mcbf;
-		m.counter = CycleCounter.new(property, func(c) call(m._on_cycle, [c], m));
-		m.activation_cycles = 0;
-		return m;
-	},
+    new: func(property, mcbf) {
+        var m = FailureMgr.Trigger.new();
+        m.parents = [McbfTrigger];
+        m.params["mcbf"] = mcbf;
+        m.counter = CycleCounter.new(property, func(c) call(m._on_cycle, [c], m));
+        m.activation_cycles = 0;
+        return m;
+    },
 
-	enable: func {
-		me.counter.enable();
-		me.enabled = 1;
-	},
+    enable: func {
+        me.armed and me.counter.enable();
+        me.enabled = 1;
+    },
 
-	disable: func {
-		me.counter.disable();
-		me.enabled = 0;
-	},
+    disable: func {
+        me.counter.disable();
+        me.enabled = 0;
+    },
 
-	arm: func {
-		call(FailureMgr.Trigger.arm, [], me);
-		me.counter.reset();
-		me.activation_cycles =
-			norm_rand(me.params["mcbf"], me.params["mcbf"] / 10);
+    arm: func {
+        call(FailureMgr.Trigger.arm, [], me);
+        me.counter.reset();
+        me.activation_cycles =
+            norm_rand(me.params["mcbf"], me.params["mcbf"] / 10);
 
-		me.enabled and me.counter.enable();
-	},
+        me.enabled and me.counter.enable();
+    },
 
-	disarm: func {
-		call(FailureMgr.Trigger.disarm, [], me);
-		me.enabled and me.counter.disable();
-	},
+    disarm: func {
+        call(FailureMgr.Trigger.disarm, [], me);
+        me.counter.disable();
+    },
 
-	to_str: func {
-		sprintf("Mean cycles between failures: %.2f", me.params["mcbf"]);
-	},
+    to_str: func {
+        sprintf("Mean cycles between failures: %.2f", me.params["mcbf"]);
+    },
 
-	_on_cycle: func(cycles) {
-		if (!me.fired and cycles > me.activation_cycles) {
-			me.fired = 1;
-			me.on_fire();
-		}
-	}
+    _on_cycle: func(cycles) {
+        if (!me.fired and cycles > me.activation_cycles) {
+            me.fired = 1;
+            me.on_fire();
+        }
+    }
 };

@@ -10,6 +10,7 @@ require.config({
         text : '3rdparty/require/text',
         flot : '3rdparty/flot/jquery.flot',
         flotresize : '3rdparty/flot/jquery.flot.resize',
+        flottime : '3rdparty/flot/jquery.flot.time',
         fgcommand : 'lib/fgcommand',
     }
 });
@@ -56,8 +57,8 @@ require([
                 c.forEach(function(e) {
                     self.addListener(e.prop, e.koObservable);
                 });
-                for( var p in self.listeners ) {
-                    self.addListener( p, self.listeners[p] );
+                for ( var p in self.listeners) {
+                    self.addListener(p, self.listeners[p]);
                 }
             }
 
@@ -73,6 +74,16 @@ require([
         }
 
         self.listeners = {}
+
+        self.getListener = function(pathOrAlias) {
+            if( pathOrAlias in self.listeners ) {
+                return self.listeners[pathOrAlias];
+            }
+        }
+
+        self.removeListener = function(pathOrAlias) {
+
+        }
 
         self.addListener = function(alias, koObservable) {
             if (self.openCache) {
@@ -292,7 +303,7 @@ require([
         }
 
         self.selectTopic(self.topics[0]);
-        
+
         self.refresh = function() {
             location.reload();
         }
@@ -337,6 +348,30 @@ require([
     ko.components.register('stopwatch', {
         require : 'widgets/Stopwatch'
     });
+
+    ko.bindingHandlers.flotchart = {
+        init : function(element, valueAccessor, allBindings) {
+            // This will be called when the binding is first applied to an
+            // element
+            // Set up any initial state, event handlers, etc. here
+            var value = valueAccessor() || {};
+
+            if (value.hover && typeof (value.hover) === 'function') {
+                $(element).bind("plothover", function(event, pos, item) {
+                    value.hover(pos, item);
+                });
+            }
+        },
+
+        update : function(element, valueAccessor, allBindings) {
+            var value = valueAccessor() || {};
+            var data = ko.unwrap( value.data );
+            var options = ko.unwrap( value.options );
+            jquery.plot(element, data,  options );
+
+        },
+
+    };
 
     ko.applyBindings(new PhiViewModel());
 

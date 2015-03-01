@@ -2,57 +2,6 @@ define([
         'jquery', 'knockout', 'text!./MassBalance.html', 'flot', 'kojqui/slider', 'flotresize'
 ], function(jquery, ko, htmlString) {
 
-    ko.bindingHandlers.flotchart = {
-        init : function(element, valueAccessor, allBindings) {
-            // This will be called when the binding is first applied to an
-            // element
-            // Set up any initial state, event handlers, etc. here
-            var value = valueAccessor() || {};
-
-            var plot = jquery.plot(element, []);
-            ko.utils.domData.set(element, "flotchart-plot", plot);
-
-            if (value.hover && typeof (value.hover) === 'function') {
-                $(element).bind("plothover", function(event, pos, item) {
-                    value.hover(pos, item);
-                });
-            }
-
-            if (ko.isObservable(value.options)) {
-                value.options.subscribe(function(newValue) {
-                    var element = this;
-                    // options changed - start with a new plot, reuse data
-                    var plot = ko.utils.domData.get(element, "flotchart-plot");
-                    plot = jquery.plot(element, plot.getData(), newValue);
-                    ko.utils.domData.set(element, "flotchart-plot", plot);
-                }, element);
-            }
-
-            if (ko.isObservable(value.data)) {
-                value.data.subscribe(function(newValue) {
-                    var element = this;
-
-                    var plot = ko.utils.domData.get(element, "flotchart-plot");
-                    plot.setData(newValue);
-                    // TODO: setupGrid not always required
-                    plot.setupGrid();
-                    plot.draw();
-
-                }, element);
-            }
-
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-                // This will be called when the element is removed by Knockout
-                // or
-                // if some other part of your code calls ko.removeNode(element)
-                var plot = ko.utils.domData.set(element, "flotchart-plot", null);
-                // TODO: unsubscribe from data and options observables!!
-            });
-
-        },
-
-    };
-
     function ViewModel(params) {
         var self = this;
 

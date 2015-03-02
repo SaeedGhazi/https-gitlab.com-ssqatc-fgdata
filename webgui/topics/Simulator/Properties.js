@@ -220,10 +220,14 @@ define([
 
             ],
             legend : {
-                show : false,
+                show : true,
+                labelFormatter: null,
+                backgroundOpacity: 0.5,
+                sorted: "ascending",
             },
             grid : {
-                hoverable : true,
+                hoverable : false,
+                backgroundColor: { colors: ["#eee", "#888"] }
             }
         });
 
@@ -272,7 +276,7 @@ define([
                 data.push({
                     // color : 'rgb(192, 128, 0)',
                     data : source.samples,
-                    label : "hallO",
+                    label : key,
                     lines : {
                         show : true
                     },

@@ -11,7 +11,6 @@ define([
 
         this.samples = [];
         this.sample = function(timeStamp) {
-            console.log(this.samples.length,this.maxSamples);
             while (this.samples.length >= this.maxSamples) {
                 this.samples.shift();
             }
@@ -205,6 +204,30 @@ define([
         self.root.isExpanded(true);
         self.properties = self.root.children;
 
+       self.startLabel = ko.pureComputed(function() {
+            return self.running() ? "Pause" : "Start";
+        });
+    
+        self.startIcons = ko.pureComputed(function() {
+            return self.running() ? {
+                primary : 'ui-icon-pause'
+            } : {
+                primary : 'ui-icon-play'
+            };
+        });
+
+        self.settings = function() {
+        }
+
+        self.running = ko.observable(false);
+        self.startPause = function() {
+          if( self.running() ) {
+            self.stop();
+          } else {
+            self.start();
+          }
+        }
+
         self.flotOptions = ko.observable({
             xaxes : [
                 {
@@ -245,6 +268,7 @@ define([
         });
 
         self.propertySampler.start();
+        self.running(true);
 
         self.toggleProp = function(prop) {
 
@@ -298,7 +322,20 @@ define([
             }, 100);
         }
 
-        self.update(++self.updateId);
+        self.start = function() {
+          self.update(++self.updateId);
+          self.propertySampler.start();
+          self.running(true);
+        }
+
+        self.stop = function() {
+          self.updateId++;
+          self.propertySampler.stop();
+          self.running(false);
+        }
+
+        self.start();
+
     }
 
     ViewModel.prototype.dispose = function() {

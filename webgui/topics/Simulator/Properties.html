@@ -21,10 +21,16 @@
 	text-align: right;
 }
 </style>
-<div class="ui-widget ui-widget-content ui-corner-all" data-bind="visible: hasGraphItems">
+<div class="ui-widget ui-widget-content ui-corner-all" data-bind="visible: hasGraphItems" style="padding-bottom: 1ex; margin-bottom: 1ex;">
     <div class="ui-widget-header">Property Graph</div>
     <div style="height: 300px; width: 100%"
         data-bind="flotchart: { data: flotData, options: flotOptions, hover: graphHover }"></div>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <div style="display: inline; float: left">
+        <div data-bind="button: { icons: { primary : 'ui-icon-gear' }, text: true, label: 'Settings' }, click: settings"></div>
+        <div data-bind="button: { icons: startIcons, text: true, label: startLabel }, click: startPause "></div>
+      </div>
+    </div>
 </div>
 <div class=" ui-widget
         ui-widget-contentui-corner-all">

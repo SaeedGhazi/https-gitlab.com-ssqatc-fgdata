@@ -17,6 +17,10 @@ define([
         require : 'topics/Aircraft/Help'
     });
 
+    ko.components.register('Aircraft/Panel', {
+        require : 'topics/Aircraft/Panel'
+    });
+
     function ViewModel(params) {
         var self = this;
         

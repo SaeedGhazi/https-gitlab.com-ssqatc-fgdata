@@ -11,8 +11,10 @@ define([
 
         this.samples = [];
         this.sample = function(timeStamp) {
-            while (this.samples.length >= this.maxSamples)
+            console.log(this.samples.length,this.maxSamples);
+            while (this.samples.length >= this.maxSamples) {
                 this.samples.shift();
+            }
             this.samples.push([
                     timeStamp, this.source()
             ]);
@@ -42,8 +44,9 @@ define([
         }
 
         this.removeSource = function(source) {
+            var s = this.sources[source].source;
             delete this.sources[source];
-            return this;
+            return s;
         }
 
         this.containsSource = function(source) {
@@ -242,19 +245,23 @@ define([
         self.toggleProp = function(prop) {
 
             if (self.propertySampler.containsSource(prop.path)) {
-                self.propertySampler.removeSource(prop.path);
+                var obs = self.propertySampler.removeSource(prop.path);
+                ko.utils.knockprops.removeListener(prop.path, obs);
                 return;
             }
 
-            var obs = ko.utils.knockprops.getListener(prop.path);
-            if (obs) {
-                self.propertySampler.addSource(new SampleSource(prop, obs, {
-                    maxSamples : 1000,
-                }));
-            }
+            var obs = ko.observable(0);
+            ko.utils.knockprops.addListener(prop.path, obs);
+            self.propertySampler.addSource(new SampleSource(prop, obs, {
+                maxSamples : 300,
+            }));
         }
 
-        self.update = function() {
+        self.updateId = 0;
+        self.update = function(id) {
+
+            if (self.updateId != id)
+                return;
 
             var sources = self.propertySampler.sources;
             var data = [];
@@ -265,7 +272,7 @@ define([
                 data.push({
                     // color : 'rgb(192, 128, 0)',
                     data : source.samples,
-                    label : key,
+                    label : "hallO",
                     lines : {
                         show : true
                     },
@@ -276,23 +283,24 @@ define([
                         show : false
                     },
                     shadowSize : 0,
-                    yaxis: i++,
+                    yaxis : i++,
                 });
             }
 
             self.flotData(data);
 
             setTimeout(function() {
-                self.update();
+                self.update(id);
             }, 100);
         }
 
-        self.update();
+        self.update(++self.updateId);
     }
 
     ViewModel.prototype.dispose = function() {
         console.log("disposing pal");
         this.propertySampler.stop();
+        this.updateId++;
     }
 
     // Return component definition

@@ -67,22 +67,48 @@ require([
         self.initWebsocket();
 
         self.fire = function(json) {
-            var koObservable = self.listeners[json.path] || null;
-            if (!koObservable)
-                return;
+            var value = json.value;
+            var listeners = self.listeners[json.path] || [];
+            listeners.forEach(function(koObservable) {
+                koObservable(value)
+            });
             koObservable(json.value);
+        }
+
+        function resolvePropertyPath(self, pathOrAlias) {
+            if (pathOrAlias in self.aliases)
+                return self.aliases[pathOrAlias];
+            if (pathOrAlias.charAt(0) == '/')
+                return pathOrAlias;
+            return null;
         }
 
         self.listeners = {}
 
-        self.getListener = function(pathOrAlias) {
-            if( pathOrAlias in self.listeners ) {
-                return self.listeners[pathOrAlias];
+        self.removeListener = function(pathOrAlias, koObservable) {
+            var path = resolvePropertyPath(self, pathOrAlias);
+            if (path == null) {
+                console.log("can't remove listener for " + pathOrAlias + ": unknown alias or invalid path.");
+                return self;
             }
-        }
 
-        self.removeListener = function(pathOrAlias) {
+            var listeners = self.listeners[path] || [];
+            var idx = listeners.indexOf(koObservable);
+            if (idx == -1) {
+                console.log("can't remove listener for " + path + ": not a listener.");
+                return self;
+            }
 
+            listeners.splice(idx, 1);
+
+            if (0 == listeners.length) {
+                self.ws.send(JSON.stringify({
+                    command : 'removeListener',
+                    node : path
+                }));
+            }
+
+            return self;
         }
 
         self.addListener = function(alias, koObservable) {
@@ -92,29 +118,35 @@ require([
                     "prop" : alias,
                     "koObservable" : koObservable
                 });
-                return;
+                return self;
             }
 
-            var path = this.aliases[alias] || "";
-            if (path.length == 0) {
-                if (alias.charAt(0) == '/') {
-                    path = alias;
-                } else {
-                    console.log("can't listen to " + alias + ": unknown alias.");
-                    return;
-                }
+            var path = resolvePropertyPath(self, alias);
+            if (path == null) {
+                console.log("can't listen to " + alias + ": unknown alias or invalid path.");
+                return self;
             }
 
-            self.listeners[path] = koObservable;
+            var listeners = self.listeners[path] = (self.listeners[path] || []);
+            if (listeners.indexOf(koObservable) != -1) {
+                console.log("won't listen to " + path + ": duplicate.");
+                return self;
+            }
 
-            self.ws.send(JSON.stringify({
-                command : 'addListener',
-                node : path
-            }));
+            listeners.push(koObservable);
+
+            if (1 == listeners.length) {
+                self.ws.send(JSON.stringify({
+                    command : 'addListener',
+                    node : path
+                }));
+            }
             self.ws.send(JSON.stringify({
                 command : 'get',
                 node : path
             }));
+
+            return self;
         }
 
         self.aliases = aliases || {};
@@ -365,9 +397,9 @@ require([
 
         update : function(element, valueAccessor, allBindings) {
             var value = valueAccessor() || {};
-            var data = ko.unwrap( value.data );
-            var options = ko.unwrap( value.options );
-            jquery.plot(element, data,  options );
+            var data = ko.unwrap(value.data);
+            var options = ko.unwrap(value.options);
+            jquery.plot(element, data, options);
 
         },
 

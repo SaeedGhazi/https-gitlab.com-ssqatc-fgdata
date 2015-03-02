@@ -6,6 +6,16 @@ define([
 
         self.helpTitle = ko.observable("");
         self.helpContent = ko.observableArray([]);
+        self.description = ko.observable('');
+        self.longDescription = ko.observable('');
+
+        jquery.get('/json/sim/description', null, function(data) {
+            self.description(data.value);
+        });
+
+        jquery.get('/json/sim/long-description', null, function(data) {
+            self.longDescription(data.value);
+        });
 
         jquery.get('/json/sim/help?d=2', null, function(data) {
 

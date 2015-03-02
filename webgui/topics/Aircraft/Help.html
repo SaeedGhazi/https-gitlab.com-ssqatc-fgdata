@@ -1,6 +1,10 @@
 <style>
 </style>
 
+<div class="ui-widget-content ui-corner-all" data-bind="if: longDescription().length">
+    <div class="ui-widget-header ui-corner-all" data-bind="text: description"></div>
+    <div data-bind="text: longDescription"></div>
+</div>
 <table id="phi-aircraft-helptable" class="ui-widget-content ui-corner-all">
     <caption class="ui-widget-header ui-corner-all" data-bind="text: helpTitle"></caption>
     <tbody data-bind="foreach: helpContent">

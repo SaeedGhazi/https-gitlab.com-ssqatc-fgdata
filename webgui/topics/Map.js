@@ -6,16 +6,43 @@ define([
         var self = this;
 
         var trackLayer = new L.GeoJSON(null, {});
+
+        trackLayer.maxTrackPoints = 1000;
+
+        trackLayer.track = {
+            "type" : "Feature",
+            "geometry" : {
+                "type" : "LineString",
+                "coordinates" : []
+            },
+            "properties" : {
+                "type" : "FlightHistory",
+                "last" : 0
+            }
+        }
+
         trackLayer.update = function(id) {
             var self = this;
             if (id != self.updateId)
                 return;
 
-            var url = "/flighthistory/track.json";
+            var url = "/flighthistory/track.json?count=" + self.maxTrackPoints + "&last=" + trackLayer.track.properties.last;
 
             var jqxhr = $.get(url).done(function(data) {
                 self.clearLayers();
-                self.addData(data);
+                Array.prototype.push.apply(trackLayer.track.geometry.coordinates, data.geometry.coordinates);
+                if (data.properties) {
+                    trackLayer.track.properties.last = data.properties.last || 0;
+                }
+                self.addData(trackLayer.track);
+
+                // update fast until we have all points
+                var updateDelay = data.geometry.coordinates.length < self.maxTrackPoints ? 120000 : 200;
+
+                setTimeout(function() {
+                    self.update(id)
+                }, updateDelay);
+
             }).fail(function() {
                 var r = confirm("Error loading flight history. Retry?");
                 if (!r)
@@ -23,9 +50,6 @@ define([
             }).always(function() {
             });
 
-            setTimeout(function() {
-                self.update(id)
-            }, 10000);
         }
 
         trackLayer.updateId = 0;

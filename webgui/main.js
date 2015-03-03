@@ -405,6 +405,6 @@ require([
 
     };
 
-    ko.applyBindings(new PhiViewModel());
+    ko.applyBindings(new PhiViewModel(),document.getElementById('wrapper'));
 
 });

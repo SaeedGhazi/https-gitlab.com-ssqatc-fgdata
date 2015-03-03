@@ -170,7 +170,7 @@ define(
                     fgprop : 'true-heading'
                 });
 
-                self.position = ko.computed(function() {
+                self.position = ko.pureComputed(function() {
                     return leaflet.latLng(self.latitude(), self.longitude());
                 }).extend({
                     rateLimit : 200
@@ -184,7 +184,7 @@ define(
                     aircraftMarker.options.angle = newValue;
                 });
 
-                self.mapCenter = ko.computed(function() {
+                self.mapCenter = ko.pureComputed(function() {
                     return leaflet.latLng(self.latitude(), self.longitude());
                 }).extend({
                     rateLimit : 2000
@@ -203,6 +203,11 @@ define(
                     trail.push(newValue);
                     aircraftTrack.setLatLngs(trail);
                 });
+
+                var center = leaflet.latLng(self.latitude(), self.longitude());
+                self.map.setView( center );
+                aircraftMarker.options.angle = self.heading();
+                aircraftMarker.setLatLng(center);
             }
 
             // Return component definition

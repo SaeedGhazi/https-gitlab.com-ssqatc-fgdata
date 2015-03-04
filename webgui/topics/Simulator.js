@@ -1,6 +1,10 @@
 define([
         'knockout', 'text!./Simulator.html'
 ], function(ko, htmlString) {
+    ko.components.register('Simulator/Screenshot', {
+        require : 'topics/Simulator/Screenshot'
+    });
+
     ko.components.register('Simulator/Properties', {
         require : 'topics/Simulator/Properties'
     });
@@ -21,7 +25,7 @@ define([
         var self = this;
 
         self.topics = [
-                'Properties', 'Config', 'Reset', 'Exit'
+                'Screenshot', 'Properties', 'Config', 'Reset', 'Exit'
         ];
 
         self.selectedTopic = ko.observable();

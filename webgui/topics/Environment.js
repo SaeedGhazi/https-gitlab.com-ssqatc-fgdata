@@ -1,6 +1,6 @@
 define([
-        'knockout', 'text!./Environment.html'
-], function(ko, htmlString) {
+        'knockout', 'text!./Environment.html', './SubtopicViewmodel'
+], function(ko, htmlString, SubtopicViewmodel) {
     ko.components.register('Environment/Date & Time', {
         require : 'topics/Environment/DateTime'
     });
@@ -13,36 +13,15 @@ define([
         require : 'topics/Environment/Position'
     });
 
-    function ViewModel(params) {
-        var self = this;
-        
-        
-        self.topics = [
-                'Date & Time', 
-                'Weather', 
-                'Position',
-        ];
-        
-        self.selectedTopic = ko.observable();
-        
-        self.selectedComponent = ko.pureComputed(function(){
-            return "Environment/" + self.selectedTopic();
-        });
-
-        self.selectTopic = function(topic) {
-            self.selectedTopic(topic);
-        }
-
-       self.selectTopic(self.topics[0]);
-
-    }
-
-    ViewModel.prototype.dispose = function() {
-    }
-
     // Return component definition
     return {
-        viewModel : ViewModel,
+        viewModel : {
+            createViewModel : function(params, componentInfo) {
+                return new SubtopicViewmodel([
+                        'Date & Time', 'Weather', 'Position',
+                ], "Environment", params);
+            },
+        },
         template : htmlString
     };
 });

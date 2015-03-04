@@ -95,7 +95,7 @@ define([
                 bounds : L.latLngBounds(L.latLng(16.0, -179.0), L.latLng(72.0, -60.0)),
             }),
 
-            "dfs.de VFR" : new L.TileLayer(
+            "Germany VFR" : new L.TileLayer(
                     'https://secais.dfs.de/static-maps/ICAO500-2014-DACH-Reprojected_01/tiles/{z}/{x}/{y}.png', {
                         minZoom : 5,
                         maxZoom : 15,
@@ -103,7 +103,7 @@ define([
                         bounds : L.latLngBounds(L.latLng(46.0, 5.0), L.latLng(55.1, 16.5)),
                     }),
 
-            "Lower Airspace (Germany)" : new L.TileLayer('https://secais.dfs.de/static-maps/lower_20131114/tiles/{z}/{x}/{y}.png',
+            "Germany Lower Airspace" : new L.TileLayer('https://secais.dfs.de/static-maps/lower_20131114/tiles/{z}/{x}/{y}.png',
                     {
                         minZoom : 5,
                         maxZoom : 15,
@@ -132,7 +132,7 @@ define([
                 bounds : L.latLngBounds(L.latLng(41.0, -5.3), L.latLng(51.2, 10.1)),
             }),
 
-            "Clouds" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png', {
+            "OpenWeatherMap - Clouds" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png', {
                 maxZoom : 14,
                 minZoom : 0,
                 subdomains : '12',
@@ -142,7 +142,7 @@ define([
                 attribution : '&copy; <a target="_blank" href="http://openweathermap.org/">open weather map</a>',
             }),
 
-            "Precipitation" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png', {
+            "OpenWeatherMap - Precipitation" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png', {
                 maxZoom : 14,
                 minZoom : 0,
                 subdomains : '12',
@@ -152,7 +152,7 @@ define([
                 attribution : '&copy; <a target="_blank" href="http://openweathermap.org/">open weather map</a>',
             }),
 
-            "Isobares" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/pressure_cntr/{z}/{x}/{y}.png', {
+            "OpenWeatherMap - Isobares" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/pressure_cntr/{z}/{x}/{y}.png', {
                 maxZoom : 7,
                 minZoom : 0,
                 subdomains : '12',
@@ -162,7 +162,7 @@ define([
                 attribution : '&copy; <a target="_blank" href="http://openweathermap.org/">open weather map</a>',
             }),
 
-            "Wind" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/wind/{z}/{x}/{y}.png', {
+            "OpenWeatherMap - Wind" : new L.TileLayer('http://{s}.tile.openweathermap.org/map/wind/{z}/{x}/{y}.png', {
                 maxZoom : 7,
                 minZoom : 0,
                 subdomains : '12',

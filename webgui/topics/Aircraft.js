@@ -1,6 +1,6 @@
 define([
-        'knockout', 'text!./Aircraft.html', 
-], function(ko, htmlString) {
+        'knockout', 'text!./Aircraft.html', './SubtopicViewmodel'
+], function(ko, htmlString, SubtopicViewmodel) {
     ko.components.register('Aircraft/Select', {
         require : 'topics/Aircraft/Select'
     });
@@ -21,33 +21,15 @@ define([
         require : 'topics/Aircraft/Panel'
     });
 
-    function ViewModel(params) {
-        var self = this;
-        
-        self.topics = [
-                'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Select', 'Help'
-        ];
-        
-        self.selectedTopic = ko.observable();
-        
-        self.selectedComponent = ko.pureComputed(function(){
-            return "Aircraft/" + self.selectedTopic();
-        });
-
-        self.selectTopic = function(topic) {
-            self.selectedTopic(topic);
-        }
-
-       self.selectTopic(self.topics[self.topics.length-1]);
-
-    }
-
-    ViewModel.prototype.dispose = function() {
-    }
-
     // Return component definition
     return {
-        viewModel : ViewModel,
+        viewModel : {
+            createViewModel : function(params, componentInfo) {
+                return new SubtopicViewmodel([
+                        'Help', 'Mass & Balance', 'Checklists', 'Failures', 'Panel', 'Select'
+                ], "Aircraft", params);
+            },
+        },
         template : htmlString
     };
 });

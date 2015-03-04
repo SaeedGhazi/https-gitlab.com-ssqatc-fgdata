@@ -1,6 +1,6 @@
 define([
-        'knockout', 'text!./Simulator.html'
-], function(ko, htmlString) {
+        'knockout', 'text!./Simulator.html', './SubtopicViewmodel'
+], function(ko, htmlString, SubtopicViewmodel) {
     ko.components.register('Simulator/Screenshot', {
         require : 'topics/Simulator/Screenshot'
     });
@@ -21,33 +21,15 @@ define([
         require : 'topics/Simulator/Exit'
     });
 
-    function ViewModel(params) {
-        var self = this;
-
-        self.topics = [
-                'Screenshot', 'Properties', 'Config', 'Reset', 'Exit'
-        ];
-
-        self.selectedTopic = ko.observable();
-
-        self.selectedComponent = ko.pureComputed(function() {
-            return "Simulator/" + self.selectedTopic();
-        });
-
-        self.selectTopic = function(topic) {
-            self.selectedTopic(topic);
-        }
-
-        self.selectTopic(self.topics[0]);
-
-    }
-
-    ViewModel.prototype.dispose = function() {
-    }
-
     // Return component definition
     return {
-        viewModel : ViewModel,
+        viewModel : {
+            createViewModel : function(params, componentInfo) {
+                return new SubtopicViewmodel([
+                        'Screenshot', 'Properties', 'Config', 'Reset', 'Exit'
+                ], "Simulator", params);
+            },
+        },
         template : htmlString
     };
 });

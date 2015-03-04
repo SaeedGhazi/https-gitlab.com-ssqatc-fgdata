@@ -12,12 +12,13 @@ require.config({
         flotresize : '3rdparty/flot/jquery.flot.resize',
         flottime : '3rdparty/flot/jquery.flot.time',
         fgcommand : 'lib/fgcommand',
+        sammy: '3rdparty/sammy-latest.min'
     }
 });
 
 require([
-        'knockout', 'jquery', 'themeswitch', 'kojqui/button', 'flot'
-], function(ko, jquery) {
+        'knockout', 'jquery','sammy',  'themeswitch', 'kojqui/button', 'flot', 'leaflet'
+], function(ko, jquery, Sammy) {
 
     function KnockProps(aliases) {
 
@@ -329,16 +330,34 @@ require([
         ];
 
         self.selectedTopic = ko.observable();
+        self.selectedSubtopic = ko.observable();
 
         self.selectTopic = function(topic) {
-            self.selectedTopic(topic);
+            location.hash = topic;
         }
-
-        self.selectTopic(self.topics[0]);
 
         self.refresh = function() {
             location.reload();
         }
+
+        // Client-side routes
+        Sammy(function() {
+            this.get('#:topic', function() {
+                console.log("a", this.params );
+                self.selectedTopic( this.params.topic );
+                self.selectedSubtopic('');
+            });
+
+            this.get('#:topic/:subtopic', function() {
+                console.log("b", this.params );
+                self.selectedTopic( this.params.topic );
+                self.selectedSubtopic( this.params.subtopic );
+            });
+            // empty route
+            this.get('', function() {
+                this.app.runRoute( 'get', '#' + self.topics[0] );
+            });
+        }).run();
     }
 
     ko.components.register('Aircraft', {

@@ -65,12 +65,13 @@ html, body, #wrapper {
 }
 
 #widgetarea {
-	position: absolute;
+    overflow-y: auto;
+	position: fixed;
 	top: 104px;
 	right: 0;
 	width: 220px;
 	bottom: 14pt;
-	background: gray;
+//	background: gray;
 }
 
 #statusbar {
@@ -247,7 +248,7 @@ html, body, #wrapper {
                     data-bind="button: { icons: { primary: 'ui-icon-refresh' }, text: false }, click: refresh">Refresh Page</button>
                 <div id="ui-theme-switcher"></div>
             </div>
-            <div id="htabs-content" data-bind="component: { name: selectedTopic }"></div>
+            <div id="htabs-content" data-bind="component: { name: selectedTopic, params: { topic: selectedSubtopic } }"></div>
         </div>
         <div id="widgetarea">
             <div data-bind="foreach: widgets">

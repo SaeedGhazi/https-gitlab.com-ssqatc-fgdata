@@ -21,6 +21,7 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
     <cockpit type="int">4</cockpit>
   </rating>
 
+  <variant-of>c172p</variant-of>
 
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c172p</aero>

@@ -3,7 +3,7 @@
 <PropertyList include="c172p-set.xml">
 	<sim>
 		<description>Panel only for IFR-training (Cessna 172P)</description>
-
+        <variant-of>c172p</variant-of>
  <startup>
 			<splash-texture>Aircraft/c172p/splash.png</splash-texture>
 		</startup>

@@ -312,8 +312,6 @@ require([
             ], [
                     "gnd-dewp", "/environment/config/boundary/entry/dewpoint-degc"
             ], [
-                    "metar", "/environment/metar/data"
-            ], [
                     "metar-valid", "/environment/metar/valid"
             ],
     ]);
@@ -322,7 +320,7 @@ require([
         var self = this;
         self.props = props;
         self.widgets = ko.observableArray([
-                "efis", "radiostack", "map"
+                "metar", "efis", "radiostack", "map"
         ]);
 
         self.topics = [
@@ -343,13 +341,11 @@ require([
         // Client-side routes
         Sammy(function() {
             this.get('#:topic', function() {
-                console.log("a", this.params );
                 self.selectedTopic( this.params.topic );
                 self.selectedSubtopic('');
             });
 
             this.get('#:topic/:subtopic', function() {
-                console.log("b", this.params );
                 self.selectedTopic( this.params.topic );
                 self.selectedSubtopic( this.params.subtopic );
             });
@@ -390,6 +386,10 @@ require([
 
     ko.components.register('radiostack', {
         require : 'widgets/radiostack'
+    });
+
+    ko.components.register('metar', {
+        require : 'widgets/metar'
     });
 
     ko.components.register('efis', {

@@ -1,5 +1,5 @@
 define([
-        'knockout', 'text!./radiostack.html', 'kojqui/tooltip'
+        'knockout', 'text!./radiostack.html', 'kojqui/tooltip', 'kojqui/spinner'
 ], function(ko, htmlString) {
 
     function DualFrequencyViewModel(label, pfx) {
@@ -22,9 +22,27 @@ define([
         });
 
         self.swap = function() {
-            ko.utils.knockprops.write(self.useKey, this.stby());
-            ko.utils.knockprops.write(self.sbyKey, this.use());
+            ko.utils.knockprops.write(self.useKey, self.stby());
+            ko.utils.knockprops.write(self.sbyKey, self.use());
         };
+
+        self.onUseBlur = function() {
+            ko.utils.knockprops.write(self.useKey, self.use());
+        }
+
+        self.onUseKey = function(ui,evt) {
+            if( evt.keyCode == 13 )
+                ko.utils.knockprops.write(self.useKey, self.use());
+        }
+
+        self.onStbyKey = function(ui,evt) {
+            if( evt.keyCode == 13 )
+                ko.utils.knockprops.write(self.sbyKey, self.stby());
+        }
+
+        self.onStbyBlur = function() {
+            ko.utils.knockprops.write(self.sbyKey, self.stby());
+        }
     }
 
     function ViewModel(params) {

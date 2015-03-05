@@ -25,8 +25,10 @@
 .phi-radiostack input {
     background-color: #404040;
     color: red;
+    font-weight: bold;
     border: 2px inset silver;
     width: 8ex;
+    display: inline-block;
 }
 
 .phi-radiostack button {
@@ -39,8 +41,8 @@
 <div class="phi-radiostack" data-bind="foreach: radios">
 	<div class="phi-radio">
 		<span data-bind="text: label"></span> 
-		<input data-bind="value: use, attr: { title: stn }, tooltip: {}"/>
+		<input data-bind="value: use, attr: { title: stn }, tooltip: {}, event: { blur: onUseBlur, keyup: onUseKey }"/>
 		<button data-bind="click: swap">&harr;</button>
-		<input data-bind="value: stby"/>
+		<input data-bind="value: stby, event: { blur: onStbyBlur, keyup: onStbyKey }"/>
 	</div>
 </div>

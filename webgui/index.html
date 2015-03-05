@@ -71,7 +71,6 @@ html, body, #wrapper {
 	right: 0;
 	width: 220px;
 	bottom: 14pt;
-//	background: gray;
 }
 
 #statusbar {
@@ -81,6 +80,27 @@ html, body, #wrapper {
 	height: 14pt;
 	bottom: 0;
 	text-align: center;
+}
+
+#statusbar a {
+        color: black;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 1px;
+}
+
+#statusbar a:active {
+	color: black;
+}
+
+#statusbar a:visited {
+	color: black;
+}
+
+#statusbar a:hover {
+        color: black;
+	padding: 0;
+        border: 1px dotted silver;
 }
 
 .htabs {
@@ -256,7 +276,7 @@ html, body, #wrapper {
             </div>
         </div>
         <div id="statusbar">
-            <span>FlightGear. Fly free, be happy. http://www.flightgear.org/</span>
+            <span>FlightGear. Fly free, be happy. <a href="http://www.flightgear.org/">http://www.flightgear.org/</a></span>
         </div>
     </div>
 </body>

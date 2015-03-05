@@ -78,6 +78,10 @@ define(
                     L.control.layers(baseLayers, params.overlays).addTo(self.map);
                 }
 
+                if (params && params.scale) {
+                  L.control.scale(params.scale).addTo(self.map);
+                }
+
                 L.RotatedMarker = L.Marker.extend({
                     options : {
                         angle : 0

@@ -1,6 +1,6 @@
 define([
-        'knockout', 'text!./Map.html'
-], function(ko, htmlString) {
+        'knockout', 'text!./Map.html', './Map/NavdbLayer'
+], function(ko, htmlString, NavdbLayer ) {
 
     function ViewModel(params) {
         var self = this;
@@ -76,6 +76,8 @@ define([
 
         self.overlays = {
             "Track" : trackLayer,
+
+            "NavDB": L.navdbLayer(),
 
             "VFRMap.com Sectionals (US)" : new L.TileLayer('http://vfrmap.com/20140918/tiles/vfrc/{z}/{y}/{x}.jpg', {
                 maxZoom : 12,

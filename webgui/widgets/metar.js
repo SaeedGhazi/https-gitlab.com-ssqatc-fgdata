@@ -22,20 +22,30 @@ define([
       });
 
       self.textLength = 20;
-      self.timeout = 300;
-      self.timerId = setInterval(function() {
+      self.timerId = 0;
+      self.longTimeout = 1500;
+      self.shortTimeout = 50;
+
+      function scrollText ( id ){
+          if( id != self.timerId )
+              return;
+
           var t = self.metar() + " " + self.metar();
           var a = self.textStart;
           var b = a+self.textLength;
           self.scrolledMetar( t.substring(a,b) );
+          var timeout = t.charAt(a) == ' ' ? self.longTimeout : self.shortTimeout;
           if( ++a  >= self.metar().length )
             a = 0;
           self.textStart = a;
-      }, self.timeout );
+          setTimeout(function() { scrollText(id); }, timeout );
+      }
+
+      scrollText( ++self.timerId );
     }
 
     ViewModel.prototype.dispose = function() {
-      clearInterval( self.timerId );
+      self.timerId++;
     }
 
     // Return component definition

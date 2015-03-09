@@ -1,5 +1,5 @@
 define([
-        'knockout', 'text!./Map.html', './Map/NavdbLayer'
+        'knockout', 'text!./Map.html', './Map/NavdbLayer', './Map/AILayer'
 ], function(ko, htmlString, NavdbLayer ) {
 
     function ViewModel(params) {
@@ -78,6 +78,7 @@ define([
             "Track" : trackLayer,
 
             "NavDB": L.navdbLayer(),
+            "AI": L.aiLayer(),
 
             "VFRMap.com Sectionals (US)" : new L.TileLayer('http://vfrmap.com/20140918/tiles/vfrc/{z}/{y}/{x}.jpg', {
                 maxZoom : 12,

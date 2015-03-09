@@ -51,6 +51,14 @@ define(
                         53.5, 10.0
                 ], MapOptions.zoom || 13);
 
+                if( params && params.on ) {
+                    for ( var p in params.on ) {
+                        var h = params.on[p];
+                        if( typeof(h) === 'function' )
+                            self.map.on(p,h);
+                    }
+                }
+
                 var baseLayers = {
                     "OpenStreetMaps" : new leaflet.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom : 18,

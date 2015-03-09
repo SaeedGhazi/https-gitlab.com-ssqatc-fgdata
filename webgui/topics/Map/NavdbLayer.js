@@ -142,11 +142,13 @@
         dirty : true,
         updateId : 0,
         update : function(id) {
+            var that = this;
+
             if (this.updateId != id)
                 return;
 
             if (this.dirty) {
-                // this.dirty = false;
+                this.dirty = false;
                 var bounds = this._map.getBounds();
                 // radius in NM
                 var radius = bounds.getSouthWest().distanceTo(bounds.getNorthEast()) / 3704;
@@ -168,7 +170,6 @@
 
                 var url = "/navdb?q=findWithinRange&type=" + filter + "&range=" + radius + "&lat=" + lat + "&lon=" + lon;
 
-                var that = this;
                 var jqxhr = $.get(url).done(function(data) {
                     if (that.updateId == id) {
                         that.clearLayers();

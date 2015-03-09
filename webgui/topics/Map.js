@@ -174,6 +174,18 @@ define([
                 attribution : '&copy; <a target="_blank" href="http://openweathermap.org/">open weather map</a>',
             }),
         }
+        self.mapResize = function(a,b) {
+          self.overlays.NavDB.invalidate();
+        }
+
+        self.mapZoomend = function() {
+          self.overlays.NavDB.invalidate();
+        }
+
+        self.mapMoveend = function() {
+          self.overlays.NavDB.invalidate();
+        }
+
     }
 
     ViewModel.prototype.dispose = function() {

@@ -86,6 +86,12 @@ define(
                     L.control.layers(baseLayers, params.overlays).addTo(self.map);
                 }
 
+                if( params && params.selectedOverlays && params.overlays ) {
+                    params.selectedOverlays.forEach(function(ovl) {
+                        params.overlays[ovl].addTo(self.map);
+                    });
+                }
+
                 if (params && params.scale) {
                   L.control.scale(params.scale).addTo(self.map);
                 }
@@ -220,6 +226,10 @@ define(
                 self.map.setView( center );
                 aircraftMarker.options.angle = self.heading();
                 aircraftMarker.setLatLng(center);
+            }
+
+            ViewModel.prototype.dispose = function() {
+                this.map.remove();
             }
 
             // Return component definition

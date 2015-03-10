@@ -212,6 +212,26 @@ require([
         return ko.utils.knockprops.get(target, prop);
     };
 
+    ko.extenders.fgPropertyGetSet = function(target,option) {
+
+        fgCommand.getPropertyValue(option, function(value) {
+          target(value);
+        }, self);
+
+        var p = ko.pureComputed({
+            read : target,
+            write : function(newValue) {
+                if (newValue == target())
+                    return;
+                target(newValue);
+                target.notifySubscribers(newValue);
+                fgCommand.setPropertyValue(option, newValue );
+            }
+        });
+        return p;
+    }
+
+
     ko.utils.knockprops = new KnockProps();
 
     ko.utils.knockprops.setAliases([

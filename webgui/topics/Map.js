@@ -2,8 +2,60 @@ define([
         'knockout', 'text!./Map.html', './Map/NavdbLayer', './Map/AILayer'
 ], function(ko, htmlString, NavdbLayer ) {
 
+    function StoredSettings(key, settings, session ) {
+      this.key = key;
+      this.settings = settings;
+      if( session ) this.session = true;
+      else this.session = false;
+    }
+
+    StoredSettings.prototype.save = function() {
+      if(typeof(Storage) === "undefined") {
+        console.log("Storage not supported :-(");
+        return;
+      }
+
+      var storage = this.session ? sessionStorage : localStorage;
+
+      for( var setting in this.settings ) {
+        var settingKey = this.key + "_" + setting;
+        if( null == this.settings[setting] ) {
+            storage.removeItem(settingKey);
+        } else {
+            var t = JSON.stringify(this.settings[setting]);
+            storage.setItem(settingKey,JSON.stringify(this.settings[setting]));
+        }
+      }
+    }
+
+    StoredSettings.prototype.load = function() {
+      if(typeof(Storage) === "undefined") {
+        console.log("Storage not supported :-(");
+        return;
+      }
+
+      var storage = this.session ? sessionStorage : localStorage;
+
+      for( var setting in this.settings ) {
+        var settingKey = this.key + "_" + setting;
+        var storedSetting = storage.getItem(settingKey);
+        if( storedSetting != null ) {
+          this.settings[setting] = JSON.parse(storedSetting);
+        }
+      }
+    }
+
+
     function ViewModel(params) {
         var self = this;
+
+        this.storedSettings = new StoredSettings("flightgear_map", {
+          selectedBase: null,
+          selectedOverlays: [],
+        }, true);
+
+        this.storedSettings.load();
+        self.selectedOverlays = this.storedSettings.settings.selectedOverlays;
 
         var trackLayer = new L.GeoJSON(null, {});
 
@@ -175,6 +227,7 @@ define([
                 attribution : '&copy; <a target="_blank" href="http://openweathermap.org/">open weather map</a>',
             }),
         }
+
         self.mapResize = function(a,b) {
           self.overlays.NavDB.invalidate();
         }
@@ -187,9 +240,23 @@ define([
           self.overlays.NavDB.invalidate();
         }
 
-    }
+        self.mapLoad = function(a,b) {
+console.log("load",a,b);
+        }
 
-    ViewModel.prototype.dispose = function() {
+        self.mapUnload = function(evt) {
+          var map = evt.target
+          var settings = self.storedSettings.settings;
+          settings.selectedOverlays.length = 0;
+          for( var layerName in self.overlays ) {
+            var layer = self.overlays[layerName];
+            if( map.hasLayer(layer) ) { 
+              settings.selectedOverlays.push(layerName);
+            }
+          }
+          self.storedSettings.save();
+        }
+
     }
 
     // Return component definition

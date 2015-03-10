@@ -104,7 +104,7 @@
 
           jquery.get(url).done(function(data) {
               if( context ) callback.call( context, data.value );
-              else callback(value);
+              else callback(data.value);
             }).fail(function(a,b) {
               console.log("failed to getPropertyValue(): ", a, b );
             }).always(function() {

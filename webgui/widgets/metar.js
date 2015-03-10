@@ -1,9 +1,9 @@
 define([
-        'jquery', 'knockout', 'text!./metar.html' 
-], function(jquery, ko, htmlString) {
+        'knockout', 'text!./metar.html', 'fgcommand', 'kojqui/tooltip'
+], function(ko, htmlString, fgCommand ) {
 
     function ViewModel(params) {
-      var NO_METAR = "no METAR";
+      var NO_METAR = "*** no METAR ";
       self.scrolledMetar = ko.observable("");
       self.textStart = 0;
       self.metar = ko.observable(NO_METAR);
@@ -14,10 +14,13 @@ define([
           self.metar(NO_METAR);
           return;
         }
-        self.metar("Wait..");
-        jquery.get('/json/environment/metar/data', null, function(data) {
+        self.metar("Wait.. ");
+        fgCommand.getPropertyValue('/environment/metar/data', function(value) {
           self.textStart = 0;
-          self.metar(data.value);
+          // start with station id (4 upcase chars), skip leading garbage
+          var idx = value.search("[A-Z]{4}");
+          if( idx >= 0 ) value = value.substring(idx);
+          self.metar(value);
         });
       });
 

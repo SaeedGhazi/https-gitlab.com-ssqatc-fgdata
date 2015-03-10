@@ -449,4 +449,14 @@
      <clip-distance type="float" userarchive="n">5.0</clip-distance>
   </precipitation-control>
 
+<!-- definitions for environent/aircraft interaction effects -->
+  <aircraft-effects>
+      <splash-vector-x type="float" userarchive="n">0.0</splash-vector-x>
+      <splash-vector-y type="float" userarchive="n">0.1</splash-vector-y>
+      <splash-vector-z type="float" userarchive="n">1.0</splash-vector-z>
+      <frost-level type="float" userarchive="n">0.0</frost-level>
+      <ground-splash-norm type="float" userarchive="n">0.0</ground-splash-norm>
+  </aircraft-effects>
+
+
 </PropertyList>

@@ -7,6 +7,8 @@
 // * Noise3D(in vec3 coord, in float wavelength) is 3d Perlin noise
 // * DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dDensity)
 //   is sparse dot noise and takes a dot density parameter
+// * DropletNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dDensity)
+//   is sparse dot noise modified to look like liquid and takes a dot density parameter
 // * VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand)
 //   is a function mapping the terrain into random domains, based on Voronoi tiling of a regular grid
 //   distorted with xrand and yrand
@@ -135,6 +137,43 @@ float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSi
 return dotNoise2D(coord.x/wavelength, coord.y/wavelength, fractionalMaxDotSize, dDensity);
 }
 
+float dropletNoise2D(in float x, in float y, in float fractionalMaxDotSize, in float dDensity)
+{
+    float integer_x    = x - fract(x);
+    float fractional_x = x - integer_x;
+
+    float integer_y    = y - fract(y);
+    float fractional_y = y - integer_y;
+
+	if (rand2D(vec2(integer_x+1.0, integer_y +1.0)) > dDensity)
+		{return 0.0;}
+
+    float xoffset = (rand2D(vec2(integer_x, integer_y)) -0.5);
+    float yoffset = (rand2D(vec2(integer_x+1.0, integer_y)) - 0.5);
+    float dotSize = 0.5 * fractionalMaxDotSize * max(0.25,rand2D(vec2(integer_x, integer_y+1.0)));
+
+    float x1offset = 2.0 * (rand2D(vec2(integer_x+5.0, integer_y)) -0.5);
+    float y1offset = 2.0 * (rand2D(vec2(integer_x, integer_y + 5.0)) - 0.5);
+    float x2offset = 2.0 * (rand2D(vec2(integer_x-5.0, integer_y)) -0.5);
+    float y2offset = 2.0 * (rand2D(vec2(integer_x-5.0, integer_y -5.0)) - 0.5);
+    float smear = (rand2D(vec2(integer_x + 3.0, integer_y)) -0.5);
+
+	
+	vec2 truePos = vec2 (0.5 + xoffset * (1.0 - 4.0 * dotSize) , 0.5 + yoffset * (1.0 -4.0 * dotSize));
+	vec2 secondPos = truePos + vec2 (dotSize * x1offset, dotSize * y1offset);
+	vec2 thirdPos = truePos + vec2 (dotSize * x2offset, dotSize * y2offset);
+
+	float distance = length(truePos - vec2(fractional_x, fractional_y));
+	float dist1 = length(secondPos - vec2(fractional_x, fractional_y));
+	float dist2 = length(thirdPos - vec2(fractional_x, fractional_y));	
+
+	return clamp(3.0 - smoothstep (0.3 * dotSize, 1.0* dotSize, distance) - smoothstep (0.3 * dotSize, 1.0* dotSize, dist1) - smoothstep ((0.1 + 0.5 * smear) * dotSize, 1.0* dotSize, dist2), 0.0,1.0);
+}
+
+float DropletNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dDensity)
+{
+return dropletNoise2D(coord.x/wavelength, coord.y/wavelength, fractionalMaxDotSize, dDensity);
+}
 
 float voronoiNoise2D(in float x, in float y, in float xrand, in float yrand)
 {

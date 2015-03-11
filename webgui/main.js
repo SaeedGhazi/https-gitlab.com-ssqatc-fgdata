@@ -12,6 +12,7 @@ require.config({
         flotresize : '3rdparty/flot/jquery.flot.resize',
         flottime : '3rdparty/flot/jquery.flot.time',
         fgcommand : 'lib/fgcommand',
+        props : 'lib/props2',
         sammy: '3rdparty/sammy-latest.min'
     }
 });

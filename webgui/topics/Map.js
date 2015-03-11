@@ -127,10 +127,10 @@ define([
         }
 
         self.overlays = {
-            "Track" : trackLayer,
+            "Flight History" : trackLayer,
 
-            "NavDB": L.navdbLayer(),
-            "AI": L.aiLayer(),
+            "Navigation Data": L.navdbLayer(),
+            "Other Traffic": L.aiLayer(),
 
             "VFRMap.com Sectionals (US)" : new L.TileLayer('http://vfrmap.com/20140918/tiles/vfrc/{z}/{y}/{x}.jpg', {
                 maxZoom : 12,
@@ -229,15 +229,15 @@ define([
         }
 
         self.mapResize = function(a,b) {
-          self.overlays.NavDB.invalidate();
+          self.overlays["Navigation Data"].invalidate();
         }
 
         self.mapZoomend = function() {
-          self.overlays.NavDB.invalidate();
+          self.overlays["Navigation Data"].invalidate();
         }
 
         self.mapMoveend = function() {
-          self.overlays.NavDB.invalidate();
+          self.overlays["Navigation Data"].invalidate();
         }
 
         self.mapLoad = function(a,b) {

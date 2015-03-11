@@ -2,13 +2,11 @@
  * 
  */
 (function(factory) {
-    if (typeof define === "function" && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else {
-        // Browser globals
-        factory(jquery);
-    }
+    if (typeof define === "function" && define.amd)// AMD. Register as an anonymous module.
+    define([
+        'jquery'
+    ], factory); else // Browser globals
+    factory(jQuery);
 }(function(jquery) {
 
     fgCommand = {
@@ -53,7 +51,7 @@
             if (typeof (args) == 'undefined ')
                 jquery.post("/run.cgi?value=" + name);
             else
-                jquery$.post("/run.cgi?value=" + name, JSON.stringify(args));
+                jquery.post("/run.cgi?value=" + name, JSON.stringify(args));
         },
 
         propertySwap : function(p1, p2) {
@@ -65,15 +63,35 @@
         },
 
         pause : function() {
-            $.post("/run.cgi?value=pause");
+            jquery.post("/run.cgi?value=pause");
         },
-        
+
         reset : function() {
-            $.post("/run.cgi?value=reset");
+            jquery.post("/run.cgi?value=reset");
         },
-        
+
         exit : function() {
-            $.post("/run.cgi?value=exit");
+            jquery.post("/run.cgi?value=exit");
+        },
+
+        reinit : function(subsys) {
+            var arg = {
+                name : '',
+                children : []
+            };
+            if (typeof (subsys) === 'string')arg.children.push({
+                name : 'subsystem',
+                index : 0,
+                value : subsys
+            });else
+                subsys.forEach(function(s, i) {
+                    arg.children.push({
+                        name : 'subsystem',
+                        index : i,
+                        value : s
+                    });
+                });
+            this.sendCommand("reinit", arg);
         },
 
         dialogShow : function(dlg) {
@@ -83,7 +101,7 @@
             this.sendCommand("dialog-close", this.oneArg("dialog-name", dlg));
         },
         reposition : function() {
-            $.post("/run.cgi?value=reposition");
+            jquery.post("/run.cgi?value=reposition");
         },
         timeofday : function(type, offset) {
             this.sendCommand("timeofday", this.twoArgs("timeofday", type, "offset", null != offset ? offset : 0));
@@ -91,31 +109,66 @@
         switchAircraft : function(id) {
             this.sendCommand("switch-aircraft", this.oneArg("aircraft", id));
         },
-        requestMetar : function(id,path) {
-            this.sendCommand("request-metar", this.twoArgs("station", id, "path", path ));
+
+        requestMetar : function(id, path) {
+            this.sendCommand("request-metar", this.twoArgs("station", id, "path", path));
         },
+
+        multiplayer : function(cmd) {
+            cmd = cmd || {};
+            var arg = {
+                'name' : '',
+                'children' : [
+                    {
+                        'name' : 'command',
+                        'value' : '',
+                        'index' : 0,
+                    }
+                ],
+            };
+            if (cmd.connect) {
+                arg.children[0].value = 'connect';
+                arg.children.push({
+                    'name' : 'servername',
+                    'value' : cmd.connect.servername
+                });
+                if (cmd.connect.rxport)arg.children.push({
+                    'name' : 'rxport',
+                    'value' : Number(cmd.connect.rxport)
+                });
+                if (cmd.connect.txport)arg.children.push({
+                    'name' : 'txport',
+                    'value' : Number(cmd.connect.txport)
+                });
+            } else if (cmd.disconnect)arg.children[0].value = 'disconnect';else if (cmd.refreshserverlist)arg.children[0].value = 'refreshserverlist';
+            this.sendCommand("multiplayer", arg);
+        },
+
         clearMetar : function(path) {
-            this.sendCommand("clear-metar", this.oneArg( "path", path ));
+            this.sendCommand("clear-metar", this.oneArg("path", path));
         },
 
-        // not really commands, but very useful to get/set a single properties value
-        getPropertyValue: function(path,callback,context) {
-          var url = "/json/" + path;
+        // not really commands, but very useful to get/set a single properties
+        // value
+        getPropertyValue : function(path, callback, context) {
+            var url = "/json/" + path;
 
-          jquery.get(url).done(function(data) {
-              if( context ) callback.call( context, data.value );
-              else callback(data.value);
-            }).fail(function(a,b) {
-              console.log("failed to getPropertyValue(): ", a, b );
+            jquery.get(url).done(function(data) {
+                if (context)
+                    callback.call(context, data.value);
+                else
+                    callback(data.value);
+            }).fail(function(a, b) {
+                console.log("failed to getPropertyValue(): ", a, b);
             }).always(function() {
             });
         },
 
-        setPropertyValue: function(path,value) {
-          var url = "/json/" + path;
-          jquery.post(url, JSON.stringify({
-                    'value' : value
-          }));
+        setPropertyValue : function(path, value) {
+            var url = "/json/" + path;
+            jquery.post(url, JSON.stringify({
+                'value' : value
+            }));
         },
     };
 

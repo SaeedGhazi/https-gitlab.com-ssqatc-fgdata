@@ -2,11 +2,14 @@
  * 
  */
 (function(factory) {
-    if (typeof define === "function" && define.amd)// AMD. Register as an anonymous module.
-    define([
-        'jquery'
-    ], factory); else // Browser globals
-    factory(jQuery);
+    if (typeof define === "function" && define.amd)// AMD. Register as an
+                                                    // anonymous module.
+        define([
+            'jquery'
+        ], factory);
+    else
+        // Browser globals
+        factory(jQuery);
 }(function(jquery) {
 
     fgCommand = {
@@ -79,11 +82,13 @@
                 name : '',
                 children : []
             };
-            if (typeof (subsys) === 'string')arg.children.push({
-                name : 'subsystem',
-                index : 0,
-                value : subsys
-            });else
+            if (typeof (subsys) === 'string')
+                arg.children.push({
+                    name : 'subsystem',
+                    index : 0,
+                    value : subsys
+                });
+            else
                 subsys.forEach(function(s, i) {
                     arg.children.push({
                         name : 'subsystem',
@@ -114,34 +119,39 @@
             this.sendCommand("request-metar", this.twoArgs("station", id, "path", path));
         },
 
-        multiplayer : function(cmd) {
+        multiplayerConnect : function(cmd) {
             cmd = cmd || {};
             var arg = {
                 'name' : '',
-                'children' : [
-                    {
-                        'name' : 'command',
-                        'value' : '',
-                        'index' : 0,
-                    }
-                ],
+                'children' : [],
             };
-            if (cmd.connect) {
-                arg.children[0].value = 'connect';
+            arg.children.push({
+                'name' : 'servername',
+                'value' : cmd.servername
+            });
+            if (cmd.rxport)
                 arg.children.push({
-                    'name' : 'servername',
-                    'value' : cmd.connect.servername
-                });
-                if (cmd.connect.rxport)arg.children.push({
                     'name' : 'rxport',
-                    'value' : Number(cmd.connect.rxport)
+                    'value' : Number(cmd.rxport)
                 });
-                if (cmd.connect.txport)arg.children.push({
+            if (cmd.txport)
+                arg.children.push({
                     'name' : 'txport',
-                    'value' : Number(cmd.connect.txport)
+                    'value' : Number(cmd.txport)
                 });
-            } else if (cmd.disconnect)arg.children[0].value = 'disconnect';else if (cmd.refreshserverlist)arg.children[0].value = 'refreshserverlist';
-            this.sendCommand("multiplayer", arg);
+            this.sendCommand("multiplayer-connect", arg);
+        },
+
+        multiplayerDisconnect : function() {
+            var arg = {
+                'name' : '',
+                'children' : [],
+            };
+            this.sendCommand("multiplayer-disconnect");
+        },
+
+        multiplayerRefreshserverlist : function() {
+            this.sendCommand('multiplayer-refreshserverlist');
         },
 
         clearMetar : function(path) {

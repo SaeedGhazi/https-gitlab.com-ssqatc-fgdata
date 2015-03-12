@@ -76,16 +76,10 @@
                 gui.dialog_update("multiplayer", "host");
             }
             
-            # listen for results arriving  
+            # listen for results arriving
             setlistener("/sim/multiplay/got-servers", updateServers);
             setlistener("/sim/multiplay/get-servers-failure", updateServersFailed);
-            
-            fgcommand("xmlhttprequest",  props.Node.new({
-              "url" : "http://liveries.flightgear.org/mpstatus/mpservers.xml",
-              "targetnode" : "/sim/multiplay/server-list",
-              "complete" : "/sim/multiplay/got-servers",
-              "failure" : "/sim/multiplay/get-servers-failure"
-            }));
+            fgcommand("multiplayer-refreshserverlist");
             ]]>
         </open>
         
@@ -235,20 +229,10 @@
           <binding>
             <command>nasal</command>
             <script>
-              var server = getprop("/sim/multiplay/selected-server");
-              # Get the server name by splitting on the space between
-              # the hostname and the comment.
-              server = split(" ", server)[0];
-              setprop("/sim/multiplay/txhost", server);
-
-              # Standard port is 5000
-              setprop("/sim/multiplay/txport", 5000);
-              setprop("/sim/multiplay/rxport", 5000);
+            fgcommand("multiplayer-connect",  props.Node.new({
+              "servername": getprop("/sim/multiplay/selected-server")
+            }));
             </script> 
-          </binding>
-          <binding>
-            <command>reinit</command>
-            <subsystem>mp</subsystem>
           </binding>
         </button>
 
@@ -262,13 +246,7 @@
             <command>dialog-apply</command>
           </binding>
           <binding>
-            <command>nasal</command>
-            <script>
-              setprop("/sim/multiplay/txhost", "");
-            </script> 
-          </binding>
-          <binding>
-            <command>reinit</command>
+            <command>multiplayer-disconnect</command>
             <subsystem>mp</subsystem>
           </binding>
         </button>

@@ -57,17 +57,17 @@ define([
         
         self.toggleConnect = function() {
             if( self.online() ) {
-              fgCommand.multiplayer({ disconnect: {} });
+              fgCommand.multiplayerDisconnect();
             } else {
-              fgCommand.multiplayer({ connect: {
-                'servername': self.selectedServer(),
-              } });
+              fgCommand.multiplayerConnect({ 
+                  'servername': self.selectedServer(),
+              });
             }
         }
         
         self.serverListVisible = ko.observable(true);
         
-        fgCommand.multiplayer({ refreshserverlist: {} });
+        fgCommand.multiplayerRefreshserverlist();
     }
 
     // Return component definition

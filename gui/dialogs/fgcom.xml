@@ -103,13 +103,25 @@
     <button>
       <pref-width>16</pref-width>
       <pref-height>16</pref-height>
-      <border>1</border>
+      <border>2</border>
       <legend>?</legend>
       <binding>
         <command>open-browser</command>
         <path>http://wiki.flightgear.org/FGCom_3.0</path>
       </binding>
     </button>
+
+    <button>
+      <legend/>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
   </group>
   <hrule/>
 
@@ -154,7 +166,7 @@
     <text>
       <row>1</row>
       <col>0</col>
-      <label>Display messages:</label>
+      <label>  Display messages:</label>
       <halign>right</halign>
     </text>
     <checkbox>
@@ -254,7 +266,7 @@
     <text>
       <row>5</row>
       <col>0</col>
-      <label>Speaker Volume:</label>
+      <label>Speaker volume:</label>
       <halign>right</halign>
     </text>
     <slider>
@@ -446,6 +458,18 @@
 
     <text>
       <label>Server</label>
+      <enable>
+        <and>
+          <equals>
+            <property>/sim/fgcom/enabled</property>
+            <value>1</value>
+          </equals>
+          <equals>
+            <property>/sim/fgcom/test</property>
+            <value>0</value>
+          </equals>
+        </and>
+      </enable>
     </text>
 
     <empty>
@@ -455,16 +479,15 @@
 
   <group>
     <layout>table</layout>
-    <halign>left</halign>
-
-
+    <halign>center</halign>
+    <default-padding>10</default-padding>
 
     <combo>
       <name>server</name>
       <row>1</row>
       <col>0</col>
       <colspan>6</colspan>
-      <pref-width>275</pref-width>
+      <pref-width>350</pref-width>
       <editable>false</editable>
       <property>/sim/fgcom/selected-server</property>
       <properties>/sim/gui/dialogs/multiplay/fgcom-servers</properties>
@@ -511,7 +534,7 @@
   <hrule/>
   <group>
     <layout>hbox</layout>
-    <default-padding>10</default-padding>
+    <default-padding>5</default-padding>
     <empty>
       <stretch>true</stretch>
     </empty>
@@ -520,7 +543,6 @@
       <legend>Close</legend>
       <default>true</default>
       <equal>true</equal>
-      <border>1</border>
       <binding>
         <command>dialog-close</command>
       </binding>

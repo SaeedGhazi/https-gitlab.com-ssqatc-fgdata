@@ -53,7 +53,7 @@
       <row>0</row>
       <col>0</col>
       <halign>right</halign>
-      <label>QNH setting:</label>
+      <label>  QNH Setting:</label>
     </text>
 
     <group>
@@ -124,7 +124,7 @@
       <row>1</row>
       <col>0</col>
       <halign>right</halign>
-      <label>ALT setting:</label>
+      <label>ALT Setting:</label>
     </text>
 
     <group>
@@ -221,13 +221,19 @@
           <command>dialog-update</command>
         </binding>
       </button>
+
+      <!-- only for a gap -->
+      <text>
+        <label>  </label>
+      </text>
+
     </group>
 
     <text>
       <row>2</row>
       <col>0</col>
       <halign>right</halign>
-      <label>HI offset:</label>
+      <label>HI Offset:</label>
     </text>
 
     <group>
@@ -322,6 +328,12 @@
           <command>dialog-update</command>
         </binding>
       </button>
+
+      <!-- only for a gap -->
+      <text>
+        <label>  </label>
+      </text>
+
     </group>
   </group>
 

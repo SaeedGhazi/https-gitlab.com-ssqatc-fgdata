@@ -2,13 +2,9 @@
 
 <PropertyList>
 
-
-
  <name>earthview</name>
  <layout>vbox</layout>
  <default-padding>3</default-padding>
- <!--<width>150</width>
- <height>50</height>-->
  <modal>false</modal>
 
    <group>
@@ -42,107 +38,115 @@
   <hrule/>
  
   <group>
-  <layout>table</layout>
+    <layout>hbox</layout>
+
+      <!-- gap -->
+      <text>
+        <label> </label>
+      </text>
+
+    <group>
+      <layout>vbox</layout>
+      <checkbox>
+     	  <name>cloudsphere-flag</name>
+        <row>0</row>
+        <col>1</col>
+        <label> Show cloud layer</label>
+        <halign>left</halign>
+        <property>/earthview/cloudsphere-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+  	      <object-name>cloudsphere-flag</object-name>
+         </binding>
+      </checkbox>
+      <checkbox>
+        <enable><property>/earthview/cloudsphere-flag</property></enable>
+        <name>cloud-shadow-flag</name>
+        <row>1</row>
+        <col>1</col>
+        <label> Show cloud shadows</label>
+        <halign>left</halign>
+        <property>/earthview/cloud-shadow-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+  	      <object-name>cloud-shadow-flag</object-name>
+  	      <script>
+  		      if(getprop("/earthview/cloud-shadow-flag")==1) {setprop("/earthview/cloudsphere-angle",0.0);}
+  	      </script>
+        </binding>
+      </checkbox>
+      <checkbox>
+        <row>2</row>
+        <col>1</col>
+        <label> Automatic light scattering</label>
+        <halign>left</halign>
+        <property>/earthview/mrd-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+    </group>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <row>3</row>
+      <col>1</col>
+      <legend>  Start  </legend>
+      <equal>true</equal>
+      <binding>
+        <command>nasal</command>
+        <script>earthview.start()</script>
+      </binding>
+    </button>
  
-   <text>
-   <row>0</row>
-   <col>0</col>
-   <halign>right</halign>
-   <label>Show cloud layer</label>
-   </text>
+    <button>
+      <row>3</row>
+      <col>2</col>
+      <legend>  Stop  </legend>
+      <equal>true</equal>
+      <binding>
+        <command>nasal</command>
+        <script>earthview.stop()</script>
+      </binding>
+    </button>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
 
-   <checkbox>
-   	<name>cloudsphere-flag</name>
-   <row>0</row>
-   <col>1</col>
-   <halign>left</halign>
-   <property>/earthview/cloudsphere-flag</property>
-   <binding>
-     <command>dialog-apply</command>
-	 <object-name>cloudsphere-flag</object-name>
-    </binding>
-    </checkbox>
-	
-   <text>
-   <enable><property>/earthview/cloudsphere-flag</property></enable>
-   <row>1</row>
-   <col>0</col>
-   <halign>right</halign>
-   <label>Show cloud shadows</label>
-   </text>
-
-   <checkbox>
-   <enable><property>/earthview/cloudsphere-flag</property></enable>
-   <name>cloud-shadow-flag</name>
-   <row>1</row>
-   <col>1</col>
-   <halign>left</halign>
-   <property>/earthview/cloud-shadow-flag</property>
-   <binding>
-     <command>dialog-apply</command>
-	 <object-name>cloud-shadow-flag</object-name>
-	 <script>
-		if(getprop("/earthview/cloud-shadow-flag")==1) {setprop("/earthview/cloudsphere-angle",0.0);}
-	</script>
-    </binding>
-    </checkbox>
-	
-   <text>
-   <row>2</row>
-   <col>0</col>
-   <halign>right</halign>
-   <label>Automatic light scattering</label>
-   </text>
-
-   <checkbox>
-   <row>2</row>
-   <col>1</col>
-   <halign>left</halign>
-   <property>/earthview/mrd-flag</property>
-   <binding>
-     <command>dialog-apply</command>
-    </binding>
-    </checkbox>
-  
-   <button>
-   <row>3</row>
-   <col>0</col>
-   <legend>Start</legend>
-   <equal>true</equal>
-   <binding>
-    <command>nasal</command>
-    <script>earthview.start()</script>
-   </binding>
-  </button>
- 
-  <button>
-   <row>3</row>
-   <col>1</col>
-   <legend>Stop</legend>
-   <equal>true</equal>
-   <binding>
-    <command>nasal</command>
-    <script>earthview.stop()</script>
-   </binding>
-  </button>
-  
-  <button>
-   <row>3</row>
-   <col>2</col>
-   <legend>Cancel</legend>
-   <equal>true</equal>
-   <key>Esc</key>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>
-  
   </group>
   
   <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <!-- gap -->
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+  </group>
+
+  <group>
 		<layout>hbox</layout>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
 		<text>
-			<label>Cloudsphere rotation</label>
+			<label>Cloudsphere Rotation</label>
 			<halign>left</halign>
 		</text>
 		<hrule>
@@ -153,6 +157,12 @@
   <group>
 		<layout>hbox</layout>
 		<halign>right</halign>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
 		<text>
 			<enable><not><property>/earthview/cloud-shadow-flag</property></not></enable>
 			<label>Rotation angle</label>
@@ -178,10 +188,25 @@
 		</text>
 	</group>
  
- <group>
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <!-- gap -->
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+  </group>
+
+  <group>
 		<layout>hbox</layout>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
 		<text>
-			<label>Atmospheric effects</label>
+			<label>Atmospheric Effects</label>
 			<halign>left</halign>
 		</text>
 		<hrule>
@@ -192,6 +217,12 @@
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 		<text>
 			<enable><not><property>/earthview/mrd-flag</property></not></enable>
 			<label>Mie factor</label>
@@ -215,11 +246,23 @@
 			<live>true</live>
 			<property>/sim/rendering/mie</property>
 		</text>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 	</group>
 
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 		<text>
 			<enable><not><property>/earthview/mrd-flag</property></not></enable>
 			<label>Rayleigh factor</label>
@@ -242,11 +285,23 @@
 			<live>true</live>
 			<property>/sim/rendering/rayleigh</property>
 		</text>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 	</group>
 
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 		<text>
 			<enable><not><property>/earthview/mrd-flag</property></not></enable>
 			<label>Density factor</label>
@@ -269,11 +324,23 @@
 			<live>true</live>
 			<property>/sim/rendering/dome-density</property>
 		</text>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 	</group>
 	
 	<group>
 		<layout>hbox</layout>
 		<halign>right</halign>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 		<text>
 			<label>Visibility</label>
 		</text>
@@ -295,38 +362,45 @@
 			<live>true</live>
 			<property>/environment/visibility-m</property>
 		</text>
+
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
 	</group>
-<!--<button>
-   <x>10</x>
-   <y>10</y>
-   <legend>Start</legend>
-   <equal>true</equal>
-   <binding>
-    <command>nasal</command>
-    <script>earthview.start()</script>
-   </binding>
-  </button>
 
-<button>
-   <x>50</x>
-   <y>10</y>
-   <legend>Stop</legend>
-   <equal>true</equal>
- <binding>
-    <command>nasal</command>
-    <script>earthview.stop()</script>
-   </binding>
-  </button>
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <!-- gap -->
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+  </group>
 
- <button>
-   <x>90</x>
-   <y>10</y>
-   <legend>Cancel</legend>
-   <equal>true</equal>
-   <key>Esc</key>
-   <binding>
-    <command>dialog-close</command>
-   </binding>
-  </button>-->
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>-->
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+  </group>
 
 </PropertyList>

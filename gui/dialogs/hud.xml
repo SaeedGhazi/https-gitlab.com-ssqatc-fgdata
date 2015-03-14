@@ -29,32 +29,50 @@
 
 	<hrule/>
 
-	<checkbox>
-		<label>Enable 3D</label>
-		<halign>left</halign>
-		<property>/sim/hud/enable3d[1]</property>
-		<binding>
-			<command>dialog-apply</command>
-		</binding>
-	</checkbox>
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
 
-	<checkbox>
-		<label>Transparent</label>
-		<halign>left</halign>
-		<property>/sim/hud/color/transparent</property>
-		<binding>
-			<command>dialog-apply</command>
-		</binding>
-	</checkbox>
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
 
-	<checkbox>
-		<label>Antialiased</label>
-		<halign>left</halign>
-		<property>/sim/hud/color/antialiased</property>
-		<binding>
-			<command>dialog-apply</command>
-		</binding>
-	</checkbox>
+    <group>
+      <layout>vbox</layout>
+      <halign>left</halign>
+    	<checkbox>
+    		<label>Enable 3D</label>
+    		<halign>left</halign>
+    		<property>/sim/hud/enable3d[1]</property>
+    		<binding>
+    			<command>dialog-apply</command>
+    		</binding>
+    	</checkbox>
+
+    	<checkbox>
+    		<label>Transparent</label>
+    		<halign>left</halign>
+    		<property>/sim/hud/color/transparent</property>
+    		<binding>
+    			<command>dialog-apply</command>
+    		</binding>
+    	</checkbox>
+
+    	<checkbox>
+    		<label>Antialiased</label>
+    		<halign>left</halign>
+    		<property>/sim/hud/color/antialiased</property>
+    		<binding>
+    			<command>dialog-apply</command>
+    		</binding>
+    	</checkbox>
+    </group>
+  </group>
 
 	<hrule/>
 
@@ -63,49 +81,64 @@
 		<halign>center</halign>
 	</text>
 
-	<group>
-		<layout>vbox</layout>
-		<radio>
-			<halign>left</halign>
-			<property>/sim/gui/dialogs/hud/lon-lat-format-0</property>
-			<value>0</value>
-			<live>true</live>
-			<label>Decimal degrees</label>
-			<binding>
-				<command>nasal</command>
-				<script>set_radio(0);</script>
-			</binding>
-		</radio>
-		<radio>
-			<halign>left</halign>
-			<property>/sim/gui/dialogs/hud/lon-lat-format-1</property>
-			<value>1</value>
-			<label>Degrees, minutes</label>
-			<live>true</live>
-			<binding>
-				<command>nasal</command>
-				<script>set_radio(1);</script>
-			</binding>
-		</radio>
-		<radio>
-			<halign>left</halign>
-			<property>/sim/gui/dialogs/hud/lon-lat-format-2</property>
-			<value>2</value>
-			<live>true</live>
-			<label>Degrees, minutes, seconds</label>
-			<binding>
-				<command>nasal</command>
-				<script>set_radio(2);</script>
-			</binding>
-		</radio>
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+  	<group>
+  		<layout>vbox</layout>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-0</property>
+  			<value>0</value>
+  			<live>true</live>
+  			<label>Decimal degrees</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(0);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-1</property>
+  			<value>1</value>
+  			<label>Degrees, minutes</label>
+  			<live>true</live>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(1);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-2</property>
+  			<value>2</value>
+  			<live>true</live>
+  			<label>Degrees, minutes, seconds </label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(2);</script>
+  			</binding>
+  		</radio>
+  	</group>
 	</group>
 
 	<hrule/>
 
 	<group>
 		<layout>hbox</layout>
+
 		<text>
-			<label>Alpha:</label>
+			<label>  Alpha:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
@@ -117,13 +150,18 @@
 				<command>dialog-apply</command>
 			</binding>
 		</slider>
+
+		<text>
+			<label>  </label>
+		</text>
+
 	</group>
 
 	<group>
 		<name>devel-stuff</name>
 		<layout>hbox</layout>
 		<text>
-			<label>Clamp:</label>
+			<label>  Clamp:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
@@ -135,6 +173,11 @@
 				<command>dialog-apply</command>
 			</binding>
 		</slider>
+
+		<text>
+			<label>  </label>
+		</text>
+
 	</group>
 
 	<hrule><name>devel-stuff</name></hrule>
@@ -142,7 +185,7 @@
 	<group>
 		<layout>hbox</layout>
 		<text>
-			<label>Brightness:</label>
+			<label>  Brightness:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
@@ -155,13 +198,18 @@
 				<command>dialog-apply</command>
 			</binding>
 		</slider>
+
+		<text>
+			<label>  </label>
+		</text>
+
 	</group>
 
 	<group>
 		<name>devel-stuff</name>
 		<layout>hbox</layout>
 		<text>
-			<label>Red:</label>
+			<label>  Red:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
@@ -178,13 +226,18 @@
 				<blue>0.5</blue>
 			</color>
 		</slider>
+
+		<text>
+			<label>  </label>
+		</text>
+
 	</group>
 
 	<group>
 		<name>devel-stuff</name>
 		<layout>hbox</layout>
 		<text>
-			<label>Green:</label>
+			<label>  Green:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
@@ -201,13 +254,18 @@
 				<blue>0.5</blue>
 			</color>
 		</slider>
+
+		<text>
+			<label>  </label>
+		</text>
+
 	</group>
 
 	<group>
 		<name>devel-stuff</name>
 		<layout>hbox</layout>
 		<text>
-			<label>Blue:</label>
+			<label>  Blue:</label>
 		</text>
 
 		<empty><stretch>true</stretch></empty>
@@ -224,6 +282,11 @@
 				<blue>1.0</blue>
 			</color>
 		</slider>
+
+		<text>
+			<label>  </label>
+		</text>
+
 	</group>
 
   <hrule/>
@@ -240,7 +303,7 @@
 	<nasal>
 		<open><![CDATA[
 			gui.enable_widgets(cmdarg(), "devel-stuff", getprop("/sim/gui/devel-widgets"));
-			var radios = cmdarg().getChildren("group")[1].getChildren("radio");
+			var radios = cmdarg().getChildren("group")[2].getChildren("group")[1].getChildren("radio");
 			var set_radio = func(n) {
 				for (var i = 0; i < size(radios); i +=1) {
 					var prop = radios[i].getChild("property").getValue();

@@ -40,16 +40,18 @@
 
   <group>
     <layout>table</layout>
-    
+    <default-padding>5</default-padding>
+
     <text>
       <row>0</row>
       <col>0</col>
-      <label>Ground textures:</label>
-      <halign>right</halign>
+      <label>  Ground Textures:</label>
+      <halign>left</halign>
     </text>
     <combo>
       <row>0</row>
       <col>1</col>
+      <pref-width>90</pref-width>
       <name>season</name>
       <halign>left</halign>
       <live>true</live>
@@ -78,32 +80,38 @@
   
     
   <group>
-    <layout>table</layout>
-    
+    <layout>vbox</layout>
+    <halign>left</halign>
+
     <text>
-      <row>0</row>
-      <col>0</col>
-      <colspan>4</colspan>
-      <halign>left</halign>
-      <label>Ground conditions (requires shaders effects)</label>
+      <label>  Ground conditions (require shader effects)</label>
     </text>
     
-    <checkbox>
-      <row>1</row>
-      <col>0</col>
-      <colspan>4</colspan>
+    <group>
+      <layout>hbox</layout>
       <halign>left</halign>
-      <label>Set maximum snow level from METAR</label>
-      <name>metar-snow</name>
-      <property>/environment/params/metar-updates-snow-level</property>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>metar-snow</object-name>
-      </binding>
-    </checkbox>
-    
+      <text>
+        <label> </label>
+        <halign>left</halign>
+      </text>
+
+      <checkbox>
+        <label> Set maximum snow level from METAR</label>
+        <name>metar-snow</name>
+        <property>/environment/params/metar-updates-snow-level</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>metar-snow</object-name>
+        </binding>
+      </checkbox>
+    </group>
+  </group>
+
+  <group>
+    <layout>table</layout>
+
     <text>
-      <label>Snow line</label>
+      <label>  Snow line</label>
       <halign>left</halign>
       <row>2</row>
       <col>0</col>
@@ -151,7 +159,7 @@
       <enable>
        <property>/sim/rendering/shaders/skydome</property>
       </enable>
-      <label>Snow thickness</label>
+      <label>  Snow thickness</label>
       <halign>left</halign>
       <row>3</row>
       <col>0</col>
@@ -199,7 +207,7 @@
     <enable>
      <property>/sim/rendering/shaders/skydome</property>
      </enable>
-     <label>Ice cover</label>
+     <label>  Ice cover</label>
      <halign>left</halign>
      <row>4</row>
      <col>0</col>
@@ -248,7 +256,7 @@
       <enable>
        <property>/sim/rendering/shaders/skydome</property>
       </enable>
-      <label>Dust cover</label>
+      <label>  Dust cover</label>
       <halign>left</halign>
       <row>5</row>
       <col>0</col>
@@ -295,7 +303,7 @@
       <enable>
        <property>/sim/rendering/shaders/skydome</property>
       </enable>
-      <label>Wetness</label>
+      <label>  Wetness</label>
       <halign>left</halign>
       <row>6</row>
       <col>0</col>
@@ -343,7 +351,7 @@
       <enable>
        <property>/sim/rendering/shaders/skydome</property>
       </enable>
-      <label>Vegetation</label>
+      <label>  Vegetation</label>
       <halign>left</halign>
       <row>7</row>
       <col>0</col>
@@ -391,7 +399,7 @@
       <enable>
        <property>/sim/rendering/shaders/skydome</property>
       </enable>
-      <label>Season (experimental)</label>
+      <label>  Season (experimental)</label>
       <halign>left</halign>
       <row>8</row>
       <col>0</col>
@@ -434,11 +442,11 @@
       <col>3</col>
     </text>
 
- <text>
+    <text>
       <enable>
        <property>/sim/rendering/shaders/skydome</property>
       </enable>
-      <label>Moonlight</label>
+      <label>  Moonlight</label>
       <halign>left</halign>
       <row>9</row>
       <col>0</col>

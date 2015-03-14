@@ -273,24 +273,86 @@
 		<key n="116">
 			<name>t</name>
 			<desc>Time Settings</desc>
-			<!-- only Clock Time and noon are implemented -->
 			<key n="99">
 				<name>c</name>
-				<desc>Time = Clock Time</desc>
+				<desc>Clock Time</desc>
+				<exit/>
 				<binding>
 					<command>timeofday</command>
 					<timeofday>real</timeofday>
 				</binding>
 			</key>
 
-			<key n="110">
-				<name>n</name>
-				<desc>Time = noon</desc>
+			<key n="49">
+				<name>1</name>
+				<desc>Dawn</desc>
+				<exit/>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>dawn</timeofday>
+				</binding>
+			</key>
+
+			<key n="50">
+				<name>2</name>
+				<desc>Morning</desc>
+				<exit/>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>morning</timeofday>
+				</binding>
+			</key>
+
+			<key n="51">
+				<name>3</name>
+				<desc>Noon</desc>
+				<exit/>
 				<binding>
 					<command>timeofday</command>
 					<timeofday>noon</timeofday>
 				</binding>
 			</key>
+
+			<key n="52">
+				<name>4</name>
+				<desc>Afternoon</desc>
+				<exit/>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>afternoon</timeofday>
+				</binding>
+			</key>
+
+			<key n="53">
+				<name>5</name>
+				<desc>Dusk</desc>
+				<exit/>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>dusk</timeofday>
+				</binding>
+			</key>
+
+			<key n="54">
+				<name>6</name>
+				<desc>Evening</desc>
+				<exit/>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>evening</timeofday>
+				</binding>
+			</key>
+
+			<key n="55">
+				<name>7</name>
+				<desc>Midnight</desc>
+				<exit/>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>midnight</timeofday>
+				</binding>
+			</key>
+
 		</key>
 	</key>
 

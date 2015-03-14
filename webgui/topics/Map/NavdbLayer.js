@@ -112,6 +112,10 @@
             leaflet.GeoJSON.prototype.onRemove.call(this, map);
         },
 
+        stop : function() {
+            this.updateId++;
+        },
+
         invalidate : function() {
             this.dirty = true;
         },

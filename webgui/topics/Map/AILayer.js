@@ -51,6 +51,10 @@
             leaflet.GeoJSON.prototype.onRemove.call(this, map);
         },
 
+        stop : function() {
+            this.updateId++;
+        },
+
         updateId : 0,
         update : function(id) {
             var self = this;

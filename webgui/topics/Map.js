@@ -126,9 +126,13 @@ define([
             return L.GeoJSON.prototype.onRemove.call(this, map);
         }
 
+        var NavDBLayerName = "Navigation Data",
+            TrackLayerName = "Flight History",
+            AILayerName = "Other Traffic";
+
+
         self.overlays = {
             "Flight History" : trackLayer,
-
             "Navigation Data": L.navdbLayer(),
             "Other Traffic": L.aiLayer(),
 
@@ -229,27 +233,26 @@ define([
         }
 
         self.mapResize = function(a,b) {
-          self.overlays["Navigation Data"].invalidate();
+          self.overlays[NavDBLayerName].invalidate();
         }
 
         self.mapZoomend = function() {
-          self.overlays["Navigation Data"].invalidate();
+          self.overlays[NavDBLayerName].invalidate();
         }
 
         self.mapMoveend = function() {
-          self.overlays["Navigation Data"].invalidate();
-        }
-
-        self.mapLoad = function(a,b) {
-console.log("load",a,b);
+          self.overlays[NavDBLayerName].invalidate();
         }
 
         self.mapUnload = function(evt) {
-          var map = evt.target
-          var settings = self.storedSettings.settings;
+          var map = evt.target,
+              settings = self.storedSettings.settings;
           settings.selectedOverlays.length = 0;
           for( var layerName in self.overlays ) {
             var layer = self.overlays[layerName];
+            if( layer.stop && typeof(layer.stop === 'function' )) {
+                layer.stop();
+            }
             if( map.hasLayer(layer) ) { 
               settings.selectedOverlays.push(layerName);
             }

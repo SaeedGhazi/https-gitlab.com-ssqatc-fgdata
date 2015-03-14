@@ -434,8 +434,8 @@
         <halign>fill</halign>
         <stretch>true</stretch>
         <pref-width>260</pref-width>
-        <pref-height>60</pref-height>
-        <slider>1</slider>
+        <pref-height>70</pref-height>
+        <slider>15</slider>
         <editable>false</editable>
         <wrap>true</wrap>
         <live>true</live>

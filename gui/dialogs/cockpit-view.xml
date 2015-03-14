@@ -7,55 +7,75 @@
 
   <group>
     <layout>hbox</layout>
-	<empty><stretch>1</stretch></empty>
+    <empty><stretch>1</stretch></empty>
 
     <text>
       <label>Cockpit View Options</label>
     </text>
 
-	<empty><stretch>1</stretch></empty>
+    <empty><stretch>1</stretch></empty>
 
-	<button>
-	  <pref-width>16</pref-width>
-	  <pref-height>16</pref-height>
-	  <legend></legend>
-	  <keynum>27</keynum>
-	  <border>2</border>
-	  <binding>
-	  	<command>dialog-close</command>
-	  </binding>
-	</button>
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+          <command>dialog-close</command>
+      </binding>
+    </button>
 
   </group>
 
   <hrule/>
 
-  <checkbox>
-    <halign>left</halign>
-    <label>Enable dynamic cockpit view</label>
-    <property>/sim/current-view/dynamic-view</property>
-    <binding>
-      <command>dialog-apply</command>
-    </binding>
-  </checkbox>
+  <group>
+    <layout>hbox</layout>
 
-  <checkbox>
-    <halign>left</halign>
-    <label>Enable view movement due to G-force</label>
-    <property>/sim/rendering/headshake/enabled</property>
-    <binding>
-      <command>dialog-apply</command>
-    </binding>
-  </checkbox>
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
 
-  <checkbox>
-    <halign>left</halign>
-    <label>Enable Blackout and Redout due to G-force</label>
-    <property>/sim/rendering/redout/enabled</property>
-    <binding>
-      <command>dialog-apply</command>
-    </binding>
-  </checkbox>
+    <group>
+      <layout>vbox</layout>
+      <checkbox>
+        <halign>left</halign>
+        <label>Enable dynamic Cockpit View</label>
+        <property>/sim/current-view/dynamic-view</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Enable View Movement due to G-Force</label>
+        <property>/sim/rendering/headshake/enabled</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Enable Blackout and Redout due to G-Force</label>
+        <property>/sim/rendering/redout/enabled</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+    </group>
+
+  </group>
 
   <hrule/>
 

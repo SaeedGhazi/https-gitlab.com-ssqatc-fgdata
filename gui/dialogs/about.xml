@@ -252,7 +252,7 @@
     </button>
 
     <button>
-      <legend>Take screen shot</legend>
+      <legend>Take Screenshot</legend>
       <equal>true</equal>
       <default>false</default>
       <binding>

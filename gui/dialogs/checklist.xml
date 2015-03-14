@@ -8,10 +8,6 @@
 	<default-padding>1</default-padding>
 
   <color>
-    <red type="float">0.41</red>
-    <green type="float">0.4</green>
-    <blue type="float">0.42</blue>
-    <alpha type="float">1.0</alpha>
     <alpha type="float">1.0</alpha>
   </color>
 
@@ -132,8 +128,9 @@
 										c.getNode("red", 1).setValue(0.2);
 										c.getNode("green", 1).setValue(1.0);
 										c.getNode("blue", 1).setValue(0.2);
-										
-										# Now create an yellow version for when the condition
+
+
+										# Now create an amber version for when the condition
 										# is not met.
 										t = table.getChild("text", txtcount, 1);
 										txtcount += 1;            
@@ -154,8 +151,8 @@
 										
 										c = t.getNode("color", 1);
 										c.getNode("red", 1).setValue(1.0);
-										c.getNode("green", 1).setValue(1.0);
-										c.getNode("blue", 1).setValue(0.2);                
+										c.getNode("green", 1).setValue(0.7);
+										c.getNode("blue", 1).setValue(0.2);
 										
 										vis = t.getNode("visible", 1).getNode("not", 1);
 										props.copy(condition, vis);                
@@ -271,9 +268,6 @@
       var setTransparency = func(updateDialog){
           var alpha = (getprop("/sim/gui/dialogs/checklist/transparent") or 0);
           dlgRoot.getNode("color/alpha").setValue(1-alpha*0.3);
-          dlgRoot.getNode("color/red").setValue(0.41-alpha*0.2);
-          dlgRoot.getNode("color/green").setValue(0.4-alpha*0.2);
-          dlgRoot.getNode("color/blue").setValue(0.42-alpha*0.2);
           var n = props.Node.new({ "dialog-name": "checklist" });
           if (updateDialog)
           {
@@ -299,7 +293,7 @@
       <label>Aircraft Checklists</label>
     </text>
 
-    <empty><stretch>1</stretch></empty>
+    <empty><stretch>true</stretch></empty>
 
     <button>
       <pref-width>16</pref-width>
@@ -318,6 +312,12 @@
   <group>
     <layout>hbox</layout>
 
+    <!-- gap to left border -->
+    <text>
+      <halign>right</halign>
+      <label> </label>
+    </text>
+
     <text>
       <halign>right</halign>
       <label>Checklist:</label>
@@ -327,7 +327,7 @@
       <name>checklist-combo</name>
       <property>/sim/gui/dialogs/checklist/selected-checklist</property>
       <editable>false</editable>
-      <pref-width>200</pref-width>
+      <pref-width>230</pref-width>
       <halign>fill</halign>
       <binding>
         <command>dialog-apply</command>
@@ -350,9 +350,14 @@
     
     <empty><stretch>true</stretch></empty>
     
+    <!-- gap to next element -->
+    <text>
+      <halign>right</halign>
+      <label> </label>
+    </text>
+
     <checkbox>
-        <label>Transparent</label>
-        <pref-width>100</pref-width>
+        <label> Transparent</label>
         <property>/sim/gui/dialogs/checklist/transparent</property>
         <live>true</live>
         <halign>right</halign>
@@ -366,6 +371,7 @@
             <command>nasal</command>
             <script>setTransparency(1);</script>
         </binding>
+        <halign>right</halign>
     </checkbox>
   </group>
   
@@ -379,7 +385,7 @@
   </group>
   
   <group>
-    <default-padding>4</default-padding>
+    <default-padding>5</default-padding>
     <halign>fill</halign>
     <layout>hbox</layout>
     

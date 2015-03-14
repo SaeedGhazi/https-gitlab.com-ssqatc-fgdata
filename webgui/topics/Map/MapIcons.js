@@ -29,6 +29,7 @@
     MAP_ICON["VOR"] = SquareIcon(30, 'images/vor.svg');
     MAP_ICON["NDB"] = SquareIcon(30, 'images/ndb.svg');
     MAP_ICON["dme"] = SquareIcon(30, 'images/dme.svg');
+    MAP_ICON["fix"] = SquareIcon(20, 'images/fix.svg');
     MAP_ICON["airport-paved"] = SquareIcon(30, 'images/airport-paved.svg');
     MAP_ICON["airport-unpaved"] = SquareIcon(30, 'images/airport-unpaved.svg');
     MAP_ICON["airport-unknown"] = SquareIcon(30, 'images/airport-unknown.svg');

@@ -137,7 +137,7 @@
 
                 var filter = "vor,ndb,airport";
                 if (radius < 60)
-                    filter += ",ils,dme,loc,om";
+                    filter += ",ils,dme,loc,om,fix";
                 if (radius < 20)
                     filter += ",mm";
 

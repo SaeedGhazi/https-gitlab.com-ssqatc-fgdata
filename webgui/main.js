@@ -18,8 +18,8 @@ require.config({
 });
 
 require([
-        'knockout', 'jquery','sammy',  'themeswitch', 'kojqui/button', 'flot', 'leaflet'
-], function(ko, jquery, Sammy) {
+        'knockout', 'jquery','sammy', 'fgcommand', 'themeswitch', 'kojqui/button', 'kojqui/buttonset', 'kojqui/selectmenu', 'flot', 'leaflet'
+], function(ko, jquery, Sammy, fgcommand ) {
 
     function KnockProps(aliases) {
 
@@ -359,6 +359,14 @@ require([
             location.reload();
         }
 
+        self.doPause = function() {
+            fgcommand.pause();
+        }
+
+        self.doUnpause = function() {
+            fgcommand.unpause();
+        }
+
         // Client-side routes
         Sammy(function() {
             this.get('#:topic', function() {
@@ -375,6 +383,7 @@ require([
                 this.app.runRoute( 'get', '#' + self.topics[0] );
             });
         }).run();
+
     }
 
     ko.components.register('Aircraft', {
@@ -399,6 +408,10 @@ require([
 
     ko.components.register('Help', {
         require : 'topics/Help'
+    });
+
+    ko.components.register('sidebarwidget', {
+        require : 'widgets/sidebarwidget'
     });
 
     ko.components.register('map', {

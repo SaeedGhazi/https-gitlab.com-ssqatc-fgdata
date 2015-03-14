@@ -119,6 +119,18 @@
             this.sendCommand("request-metar", this.twoArgs("station", id, "path", path));
         },
 
+        togglepause : function() {
+            this.sendCommand("pause");
+        },
+
+        unpause : function() {
+            this.sendCommand("pause", this.oneArg("force-play", true));
+        },
+
+        pause : function() {
+            this.sendCommand("pause", this.oneArg("force-pause", true));
+        },
+
         multiplayerConnect : function(cmd) {
             cmd = cmd || {};
             var arg = {

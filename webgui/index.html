@@ -224,14 +224,8 @@ html, body, #wrapper {
 	height: 100%;
 }
 
-#refresh-button {
+.right-floating {
 	float: right;
-}
-
-.switcher_container:before {
-	content: 'Theme';
-	padding-right: 0.5em;
-	color: white;
 }
 
 .switcher_container {
@@ -240,7 +234,6 @@ html, body, #wrapper {
 }
 
 .switcher_list {
-	padding: 2px;
 }
 
 .switcher_label {
@@ -264,15 +257,19 @@ html, body, #wrapper {
                    click: $root.selectTopic">
                     </li>
                 </ul>
-                <button id="refresh-button"
-                    data-bind="button: { icons: { primary: 'ui-icon-refresh' }, text: false }, click: refresh">Refresh Page</button>
-                <div id="ui-theme-switcher"></div>
+                <div class="right-floating" data-bind="buttonset: {}">
+                    <button data-bind="button: { icons: { primary: 'ui-icon-refresh' }, text: false }, click: refresh" title="Refresh Page"></button>
+                    <button data-bind="button: { icons: { primary: 'ui-icon-pause' }, text: false}, click: doPause" title="Pause"></button>
+                    <button data-bind="button: { icons: { primary: 'ui-icon-play' }, text: false}, click: doUnpause" title="Play"></button>
+                    <div id="ui-theme-switcher"></div>
+                </div>
             </div>
             <div id="htabs-content" data-bind="component: { name: selectedTopic, params: { topic: selectedSubtopic } }"></div>
         </div>
         <div id="widgetarea">
             <div data-bind="foreach: widgets">
-                <div class="phi-widget" data-bind="component: { name: $data }"></div>
+              <sidebarwidget params="widget: $data">
+              </sidebarwidget>
             </div>
         </div>
         <div id="statusbar">

@@ -23,7 +23,8 @@
             }
             
             var servers = props.globals.getNode("/sim/gui/dialogs/multiplay/servers", 1);
-            var updateServers = func {
+            var updateServers = func(n) {
+                if( !n.getValue() ) return;
                 servers.removeChildren("value");                
                 # get the results list from the server
                 var serverlist = props.globals.getNode("/sim/multiplay/server-list", 1);
@@ -61,7 +62,8 @@
                     ['mpserver13.flightgear.org', 'Grenoble, France']
                 ];
                 
-            var updateServersFailed = func {
+            var updateServersFailed = func(n) {
+                if( !n.getValue() ) return;
                 debug.dump("Failed to retrieve server list!");
     
                 servers.removeChildren("value"); 

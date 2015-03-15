@@ -2,9 +2,13 @@
 .widget-header-button {
 	font-size: unset;
 }
+.widget-handle {
+    cursor: pointer;
+    font-weight: bold;
+}
 </style>
 <div data-bind="event: { mouseover: onMouseover, mouseout: onMouseout }">
-    <div>
+    <div class="ui-state-default widget-handle">
         <button 
           data-bind="
              button: { 

@@ -18,7 +18,7 @@ require.config({
 });
 
 require([
-        'knockout', 'jquery','sammy', 'fgcommand', 'themeswitch', 'kojqui/button', 'kojqui/buttonset', 'kojqui/selectmenu', 'flot', 'leaflet'
+        'knockout', 'jquery','sammy', 'fgcommand', 'themeswitch', 'kojqui/button', 'kojqui/buttonset', 'kojqui/selectmenu', 'jquery-ui/sortable', 'flot', 'leaflet'
 ], function(ko, jquery, Sammy, fgcommand ) {
 
     function KnockProps(aliases) {
@@ -341,7 +341,7 @@ require([
         var self = this;
         self.props = props;
         self.widgets = ko.observableArray([
-                "metar", "efis", "radiostack", "map"
+                "METAR", "PFD", "Radiostack", "Small Map", "Stopwatch"
         ]);
 
         self.topics = [
@@ -366,6 +366,13 @@ require([
         self.doUnpause = function() {
             fgcommand.unpause();
         }
+
+        jquery("#widgetarea").sortable({
+            handle: ".widget-handle",
+            axis: "y",
+            cursor: "move",
+        });
+        jquery("#widgetarea").disableSelection();
 
         // Client-side routes
         Sammy(function() {
@@ -414,23 +421,23 @@ require([
         require : 'widgets/sidebarwidget'
     });
 
-    ko.components.register('map', {
+    ko.components.register('Small Map', {
         require : 'widgets/map'
     });
 
-    ko.components.register('radiostack', {
+    ko.components.register('Radiostack', {
         require : 'widgets/radiostack'
     });
 
-    ko.components.register('metar', {
+    ko.components.register('METAR', {
         require : 'widgets/metar'
     });
 
-    ko.components.register('efis', {
+    ko.components.register('PFD', {
         require : 'widgets/efis'
     });
 
-    ko.components.register('stopwatch', {
+    ko.components.register('Stopwatch', {
         require : 'widgets/Stopwatch'
     });
 

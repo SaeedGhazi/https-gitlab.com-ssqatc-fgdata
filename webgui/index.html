@@ -266,11 +266,9 @@ html, body, #wrapper {
             </div>
             <div id="htabs-content" data-bind="component: { name: selectedTopic, params: { topic: selectedSubtopic } }"></div>
         </div>
-        <div id="widgetarea">
-            <div data-bind="foreach: widgets">
+        <div id="widgetarea" data-bind="foreach: widgets">
               <sidebarwidget params="widget: $data">
               </sidebarwidget>
-            </div>
         </div>
         <div id="statusbar">
             <span>FlightGear. Fly free, be happy. <a href="http://www.flightgear.org/">http://www.flightgear.org/</a></span>

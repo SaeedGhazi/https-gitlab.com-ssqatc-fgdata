@@ -230,7 +230,9 @@
             <command>nasal</command>
             <script>
             fgcommand("multiplayer-connect",  props.Node.new({
-              "servername": getprop("/sim/multiplay/selected-server")
+              "servername": getprop("/sim/multiplay/selected-server"),
+              "rxport": 5000,
+              "txport": 5000
             }));
             </script> 
           </binding>

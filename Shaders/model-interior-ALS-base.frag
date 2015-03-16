@@ -121,19 +121,20 @@ void main()
     vec4 opacity = textureCube(cube_texture, lookup_vec);
    
 
-   
+    vec4 diffuse = diffuse_term;
     NdotL = dot(n, lightDir);
-//NdotL = dot(n, (gl_ModelViewMatrix * vec4 (light_vec,0.0)).xyz);
+    //NdotL = dot(n, (gl_ModelViewMatrix * vec4 (light_vec,0.0)).xyz);
     if (NdotL > 0.0) {
-	diffuse_term.rgb += 2.0 * diffuse_term.rgb * (1.0 - opacity.a);
-        color += diffuse_term * NdotL * opacity;
+
+	diffuse.rgb += 2.0 * diffuse.rgb * (1.0 - opacity.a);
+        color += diffuse * NdotL * opacity;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
-    color.a = diffuse_term.a;
+    color.a = diffuse.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
@@ -148,6 +149,5 @@ void main()
 
 
 gl_FragColor = fragColor;
-
 }
 

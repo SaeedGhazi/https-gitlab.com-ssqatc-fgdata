@@ -196,6 +196,11 @@
         <type>float</type>
         <value><use>overcast</use></value>
       </uniform>
+       <uniform>
+        <name>hazeLayerAltitude</name>
+        <type>float</type>
+        <value><use>lthickness</use></value>
+      </uniform>
      <uniform>
         <name>eye_alt</name>
         <type>float</type>

@@ -13,7 +13,8 @@ require.config({
         flottime : '3rdparty/flot/jquery.flot.time',
         fgcommand : 'lib/fgcommand',
         props : 'lib/props2',
-        sammy: '3rdparty/sammy-latest.min'
+        sammy: '3rdparty/sammy-latest.min',
+        aircraft: '../aircraft-dir',
     }
 });
 
@@ -135,6 +136,14 @@ require([
                 return self;
             }
 
+            koObservable.fgPropertyPath = path;
+            koObservable.fgBaseDispose = koObservable.dispose;
+            koObservable.dispose = function() {
+                if( this.fgPropertyPath ) {
+                    self.removeListener( this.fgPropertyPath, this );
+                }
+                this.fgBaseDispose.call(this);
+            }
             listeners.push(koObservable);
 
             if (1 == listeners.length) {
@@ -165,19 +174,21 @@ require([
                 return self.props[prop];
             }
 
-            var p = (self.props[prop] = ko.pureComputed({
-                read : target,
-                write : function(newValue) {
-                    if (newValue == target())
+            return (self.props[prop] = self.observedProperty( target, prop )); 
+        }
+        
+        self.observedProperty = function( target, prop ) {
+            var reply = ko.pureComputed({
+                read: target,
+                write: function(newValue) {
+                    if( newValue == target() )
                         return;
                     target(newValue);
                     target.notifySubscribers(newValue);
                 }
-            }));
-
-            self.addListener(prop, p);
-
-            return p;
+            });
+            self.addListener(prop, reply);
+            return reply;
         }
 
         self.write = function(prop, value) {
@@ -186,6 +197,11 @@ require([
                 console.log("can't write " + prop + ": unknown alias.");
                 return;
             }
+
+            self.setPropertyValue(path,value);
+        }
+
+        self.setPropertyValue = function(path, value) {
             this.ws.send(JSON.stringify({
                 command : 'set',
                 node : path,
@@ -211,6 +227,10 @@ require([
 
     ko.extenders.fgprop = function(target, prop) {
         return ko.utils.knockprops.get(target, prop);
+    };
+    
+    ko.extenders.observedProperty = function(target,prop) {
+        return ko.utils.knockprops.observedProperty(target,prop);
     };
 
     ko.extenders.fgPropertyGetSet = function(target,option) {
@@ -440,6 +460,10 @@ require([
     ko.components.register('Stopwatch', {
         require : 'widgets/Stopwatch'
     });
+    
+    ko.components.register('dualarcgauge', {
+        require: 'instruments/DualArcGauge'
+    })
 
     ko.bindingHandlers.flotchart = {
         init : function(element, valueAccessor, allBindings) {

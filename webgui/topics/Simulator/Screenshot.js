@@ -1,6 +1,6 @@
 define([
         'jquery', 'knockout', 'text!./Screenshot.html', 'kojqui/spinner'
-], function(jquery, ko, htmlString, fgcommand ) {
+], function(jquery, ko, htmlString ) {
     
     function ViewModel(params) {
         var self = this;
@@ -18,11 +18,9 @@ define([
             if( id != self.updateId )
                 return;
             self.imageUrl("/screenshot?type=jpg&t=" + Date.now());
-            console.log(self.updateInterval(), self.imageUrl());
-            
             setTimeout( function() { self.update(id); }, self.updateInterval()*1000);
         };
-        
+
         self.update(++self.updateId);
     }
 

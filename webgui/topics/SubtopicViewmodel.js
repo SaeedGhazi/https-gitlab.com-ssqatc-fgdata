@@ -11,7 +11,7 @@
     function SubtopicViewModel(topics, prefix, params) {
         var self = this;
         
-        self.topics = topics;
+        self.topics = ko.observableArray(topics);
 
         self.selectedTopic = ko.observable();
 
@@ -24,9 +24,9 @@
             self.selectedTopic(topic);
         }
 
-        var topic = (params && params.topic) ? ko.unwrap(params.topic) : self.topics[0];
+        var topic = (params && params.topic) ? ko.unwrap(params.topic) : self.topics()[0];
         if( self.topics.indexOf(topic) == -1 )
-            topic = self.topics[0];
+            topic = self.topics()[0];
         self.selectTopic(topic);
     }
     

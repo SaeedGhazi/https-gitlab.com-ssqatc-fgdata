@@ -21,8 +21,10 @@
       
       if (size(checklists) > 0) {
 
-				setprop("sim/gui/dialogs/checklist/selected-checklist", checklists[0].getNode("title", 1).getValue());
-				setprop("sim/gui/dialogs/checklist/selected-page", 0);
+        if (getprop("sim/gui/dialogs/checklist/selected-checklist") == nil) {
+		  setprop("sim/gui/dialogs/checklist/selected-checklist", checklists[0].getNode("title", 1).getValue());
+		  setprop("sim/gui/dialogs/checklist/selected-page", 0);
+        }
         
         var combo = gui.findElementByName(dlgRoot, "checklist-combo");
         var group = gui.findElementByName(dlgRoot, "checklist-table-group");        
@@ -213,8 +215,6 @@
           }
         }
         
-        setprop("sim/gui/dialogs/checklist/selected-checklist", 
-                checklists[0].getNode("title").getValue());
       } else {
 				var group = gui.findElementByName(dlgRoot, "checklist-table-group");
 				var table = group.getNode("text", 1);

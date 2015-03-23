@@ -145,6 +145,9 @@ require([
                 this.fgBaseDispose.call(this);
             }
             listeners.push(koObservable);
+            koObservable.fgSetPropertyValue = function(value) {
+                self.setPropertyValue( this.fgPropertyPath, value );
+            }
 
             if (1 == listeners.length) {
                 self.ws.send(JSON.stringify({

@@ -1,5 +1,5 @@
 define([
-        'knockout', 'text!./Map.html', './Map/NavdbLayer', './Map/AILayer'
+        'knockout', 'text!./Map.html', './Map/NavdbLayer', './Map/AILayer', './Map/RouteLayer'
 ], function(ko, htmlString, NavdbLayer ) {
 
     function StoredSettings(key, settings, session ) {
@@ -133,6 +133,7 @@ define([
 
         self.overlays = {
             "Flight History" : trackLayer,
+            "Route Manager" : L.routeLayer(),
             "Navigation Data": L.navdbLayer(),
             "Other Traffic": L.aiLayer(),
 

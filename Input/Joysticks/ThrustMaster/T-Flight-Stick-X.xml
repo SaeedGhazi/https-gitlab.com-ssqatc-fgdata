@@ -7,6 +7,7 @@ by Joffrey Paris
 
 <PropertyList>
  <name type="string">T.Flight Stick X</name>
+ <name type="string">Thrustmaster T.Flight Stick X</name>
 
  <axis n="0">
   <desc>Aileron</desc>

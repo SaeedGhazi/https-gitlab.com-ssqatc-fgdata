@@ -131,6 +131,7 @@ vec4 diffuse_color = gl_FrontMaterial.diffuse;
 vec4 ambient_color = gl_FrontMaterial.ambient;
 
 vec4 constant_term = gl_FrontMaterial.emission + ambient_color * vec4 (light_diffuse.rgb + light_ambient.rgb,1.0);
+constant_term.a = min(diffuse_color.a, ambient_color.a);
 
 gl_FrontColor = constant_term;
 gl_BackColor = gl_FrontColor;

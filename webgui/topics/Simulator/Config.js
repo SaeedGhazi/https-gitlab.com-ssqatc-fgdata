@@ -61,6 +61,8 @@ define([
             } else {
               fgCommand.multiplayerConnect({ 
                   'servername': self.selectedServer(),
+                  'rxport': 5000,
+                  'txport': 5000
               });
             }
         }

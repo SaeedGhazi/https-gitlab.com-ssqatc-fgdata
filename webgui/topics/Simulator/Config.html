@@ -24,13 +24,12 @@
         </div>
         <div>
             <button data-bind="button: { disabled: online }, click: toggleConnect">Connect to</button>
-            <label for="sim-config-multiplayer-serverlist">foo</label>
-            <select id="sim-config-multiplayer-serverlist"
-                    data-bind=" enable: offline
+            <select data-bind="enable: offline
                                value: selectedServer, 
                                options: serverList, 
                                optionsText: 'longname',
-                               optionsValue: 'longname'"></select>
+                               optionsValue: 'longname',
+                               "></select>
         </div>
 
     </fieldset>

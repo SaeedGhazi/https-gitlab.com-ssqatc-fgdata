@@ -1,46 +1,45 @@
 define([
-        'jquery', 'knockout', 'text!./Checklists.html','jquery-ui/accordion', 
-], function(jquery, ko, htmlString) {
+        'jquery', 'knockout', 'props', 'text!./Checklists.html', 'jquery-ui/accordion',
+], function(jquery, ko, SGPropertyNode, htmlString) {
     function ViewModel(params) {
         var self = this;
 
         self.checklists = ko.observableArray([]);
+        self.selectedChecklist = ko.observable('').extend({
+            observedProperty : '/sim/gui/dialogs/checklist/selected-checklist'
+        });
+
+        self.selectedChecklistSubscription = self.selectedChecklist.subscribe(function(newValue) {
+            self.openChecklist(newValue);
+        });
+
+        self.openChecklist = function(title) {
+            jquery("#checklists h4").each(function(idx) {
+                if ($(this).text() == title) {
+                    jquery("#checklists").accordion("option", "active", idx);
+                }
+            });
+        }
 
         jquery.get('/json/sim/checklists?d=3', null, function(data) {
 
             var assembleChecklists = function(data) {
 
                 var checklists = [];
-                data.children.forEach(function(prop) {
-                    if (prop.name === 'checklist') {
-                        var checklist = {
-                            title : 'unnamed',
-                            abnormal: false,
-                            items : []
-                        };
-                        checklists.push(checklist);
-                        prop.children.forEach(function(prop) {
-                            if (prop.name === 'title') {
-                                checklist.title = prop.value;
-                            } else if (prop.name === 'type') {
-                                checklist.abnormal = ( "abnormal" == prop.value );
-                            } else if (prop.name == 'item') {
-                                var item = {
-                                    name : 'unnamed',
-                                    value : 'empty'
-                                }
-                                checklist.items.push(item);
-                                prop.children.forEach(function(prop) {
-                                    if (prop.name === 'name') {
-                                        item.name = prop.value;
-                                    } else if (prop.name === 'value') {
-                                        item.value = prop.value;
-                                    }
-                                });
-                            }
+                var root = new SGPropertyNode(data);
+                root.getChildren("checklist").forEach(function(checklistNode) {
+                    var checklist = {
+                        title : checklistNode.getValue('title', 'unnamed'),
+                        abnormal : checklistNode.getValue('type', '') == 'abnormal',
+                        items : []
+                    };
+                    checklists.push(checklist);
+                    checklistNode.getChildren("item").forEach(function(itemNode) {
+                        checklist.items.push({
+                            name : itemNode.getValue('name', 'unnamed'),
+                            value : itemNode.getValue('value', ''),
                         });
-
-                    }
+                    });
                 });
                 return checklists;
 
@@ -48,21 +47,25 @@ define([
 
             self.checklists(assembleChecklists(data));
             jquery("#checklists").accordion({
-              collapsible: true,
-              heightStyle: "content",
-              active: false,
+                collapsible : true,
+                heightStyle : "content",
+                active : false,
             });
             jquery("#checklists li").hover(function() {
                 $(this).addClass("ui-state-highlight").addClass("ui-corner-all");
-                
+
             }, function() {
                 $(this).removeClass("ui-state-highlight").removeClass("ui-corner-all");
 
-            })
+            });
+            self.openChecklist( self.selectedChecklist() );
         });
     }
 
     ViewModel.prototype.dispose = function() {
+        var self = this;
+        self.selectedChecklistSubscription.dispose();
+        self.selectedChecklist.dispose();
     }
 
     // Return component definition

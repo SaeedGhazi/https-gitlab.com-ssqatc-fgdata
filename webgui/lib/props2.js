@@ -12,8 +12,13 @@
         this.json = json;
     };
 
-    SGPropertyNode.prototype.getValue = function() {
-        return this.json.value;
+    SGPropertyNode.prototype.getValue = function(child,deflt) {
+        if( typeof(child) === 'undefined' )
+            return this.json.value;
+
+        var c = this.getNode(child);
+        if( c ) return c.getValue();
+        else return deflt;
     }
 
     SGPropertyNode.prototype.getName = function() {

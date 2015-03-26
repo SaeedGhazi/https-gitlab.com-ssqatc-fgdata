@@ -67,7 +67,9 @@
             var url = "/json/autopilot/route-manager/route?d=3";
             var jqxhr = $.get(url).done(function(data) {
                 self.clearLayers();
-                self.addData(self.routePropsToGeoJson(data));
+                var geoJSON = self.routePropsToGeoJson(data);
+                if( geoJSON )
+                    self.addData(geoJSON);
             }).fail(function(a, b) {
                 self.updateId++;
                 console.log(a, b);
@@ -115,10 +117,8 @@
                 "coordinates" : lineString,
             });
             
-            if( lineString.length < 2 )
-                return {}
-            
-            return geoJSON;
+            if( lineString.length >= 2 )
+                return geoJSON;
         },
 
     });

@@ -28,11 +28,11 @@ define(
 
                 if (params && params.css) {
                     for ( var p in params.css) {
-                        $(self.element).css(p, params.css[p]);
+                        jquery(self.element).css(p, params.css[p]);
                     }
                 }
-                if ($(self.element).height() < 1) {
-                    $(self.element).css("min-height", $(self.element).width());
+                if (jquery(self.element).height() < 1) {
+                    jquery(self.element).css("min-height", jquery(self.element).width());
                 }
 
                 var MapOptions = {

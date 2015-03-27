@@ -14,7 +14,6 @@
         options : {
 
             style : function(feature) {
-                console.log(this,feature);
                 if (feature.geometry.type == "LineString")
                     return {
                         'color' : '#4d56db',
@@ -43,8 +42,10 @@
         },
 
         stop : function() {
-            this.waypointCountSubscription.dispose();
-            this.waypointCount.dispose();
+            if (this.waypointCountSubscription) {
+                this.waypointCountSubscription.dispose();
+                this.waypointCount.dispose();
+            }
         },
 
         update : function(id) {

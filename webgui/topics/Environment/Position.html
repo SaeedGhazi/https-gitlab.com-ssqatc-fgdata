@@ -1,0 +1,68 @@
+<style>
+
+</style>
+<fieldset data-bind="visible: hasAirports">
+    <legend>Airports</legend>
+    <input type="text" data-bind="autocomplete: { source: airports, select: onSelect }" style="width: 100%;">
+</fieldset>
+
+<div style="width=100%" data-bind="with: selectedAirport">
+  <div style="float: left;">
+    <div style="font-size: 20pt; font-weight: bold;" data-bind="text: id"></div>
+    <div>
+      <span style="font-size: 12pt; font-weight: normal;">Apt Elev </span>
+      <span style="font-size: 14pt; font-weight: bold;" data-bind="text: elevation"></span>
+      <span style="font-size: 14pt; font-weight: bold;">&apos;</span>
+    </div>
+    <div>
+      <span style="font-size: 12pt; font-weight: normal;" data-bind="text: arpFormatted"></span>
+    </div>
+  </div>
+  <div style="float: right;">
+    <div>
+<!--
+      <span style="font-size: 20pt; font-weight: bold;" data-bind="text: city"></span> 
+      <span style="font-size: 20pt; font-weight: bold;">, </span>
+      <span style="font-size: 20pt; font-weight: bold;" data-bind="text: country"></span>
+-->
+    </div>
+    <div>
+      <span style="font-size: 14pt; font-weight: normal; float: right" data-bind="text: name"></span> 
+    </div>
+  </div>
+</div>
+<div class="ui-helper-clearfix"></div>
+
+<fieldset data-bind="with: selectedAirport">
+    <legend>Communication</legend>
+<table style="width: 100%">
+<tr data-bind="foreach: comm">
+  <td>
+    <div data-bind="text: name" style="text-align: center"></div>
+    <div data-bind="foreach: frequencies" style="text-align: center">
+      <span data-bind="text: $data"></span>
+    </div>
+  </td>
+</tr>
+</table>
+</fieldset>
+
+<fieldset>
+<div id="phi-environment-position-map" style="height: 400px;"></div>
+</fieldset>
+
+<fieldset data-bind="with: selectedAirport">
+    <legend>Runway Information</legend>
+<table style="width: 100%" data-bind="foreach: runway">
+<tr>
+  <td><span data-bind="text: id"></span></td>
+  <td><span data-bind="text: heading"></span>&deg;</td>
+  <td><span data-bind="text: surface"></span></td>
+  <td><span data-bind="text: lengthFt"></span>ft <span data-bind="text: lengthM"></span>m</td>
+  <td><span data-bind="text: widthFt"></span>ft <span data-bind="text: widthM"></span>m</td>
+  <td><span data-bind="text: displacedThresholdFt"></span>ft <span data-bind="text: displacedThresholdM"></span>m</td>
+  <td><span data-bind="text: stopwayFt"></span>ft <span data-bind="text: stopwayM"></span>m</td>
+</tr>
+</table>
+</fieldset>
+

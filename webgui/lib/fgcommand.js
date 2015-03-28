@@ -186,11 +186,35 @@
             });
         },
 
-        setPropertyValue : function(path, value) {
+        setPropertyValue : function(path, value, callback, context) {
+            if( value == null )
+              return;
+
             var url = "/json/" + path;
-            jquery.post(url, JSON.stringify({
-                'value' : value
-            }));
+            switch( typeof(value) ) {
+              case 'number':
+              case 'string':
+              case 'boolean':
+                jquery.post(url, JSON.stringify({
+                    'value' : value
+                })).done(function(data){
+                  if( !callback ) return;
+                  if (context) callback.call(context, data.value);
+                  else callback(data.value);
+                });
+                return;
+
+              case 'object':
+                jquery.post(url, JSON.stringify(value)).done(function(data){
+                  if( !callback ) return;
+                  if (context) callback.call(context, data.value);
+                  else callback(data.value);
+                });
+                return;
+
+              default:
+                return;
+            }
         },
     };
 

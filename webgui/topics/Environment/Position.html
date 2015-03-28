@@ -6,6 +6,11 @@ overflow-y: auto;
 overflow-x: hidden;
 }
 
+.metric {
+  font-style: italic;
+  font-size: 90%;
+}
+
 </style>
 <fieldset data-bind="visible: hasAirports">
     <legend>Search (enter at least two characters of airport name or id)</legend>
@@ -59,16 +64,31 @@ overflow-x: hidden;
 
 <fieldset data-bind="with: selectedAirport, visible: selectedAirport">
     <legend>Runway Information</legend>
-<table style="width: 100%" data-bind="foreach: runway">
+<table style="width: 100%">
+ <thead>
+            <tr>
+                <th style="text-align: left">RWY</th>
+                <th style="text-align: right">True</th>
+                <th style="text-align: left">Surface</th>
+                <th style="text-align: left">Length</th>
+                <th style="text-align: left">Width</th>
+                <th style="text-align: left">Displ. Threshold</th>
+                <th style="text-align: left">Stopway</th>
+                <th style="text-align: left"></th>
+            </tr>
+        </thead>
+<tbody data-bind="foreach: runway">
 <tr>
   <td><span data-bind="text: id"></span></td>
-  <td><span data-bind="text: heading"></span>&deg;</td>
+  <td style="text-align: right;"><span data-bind="text: heading"></span>&deg;</td>
   <td><span data-bind="text: surface"></span></td>
-  <td><span data-bind="text: lengthFt"></span>ft <span data-bind="text: lengthM"></span>m</td>
-  <td><span data-bind="text: widthFt"></span>ft <span data-bind="text: widthM"></span>m</td>
-  <td><span data-bind="text: displacedThresholdFt"></span>ft <span data-bind="text: displacedThresholdM"></span>m</td>
-  <td><span data-bind="text: stopwayFt"></span>ft <span data-bind="text: stopwayM"></span>m</td>
+  <td><span data-bind="text: lengthFt"></span>ft <span data-bind="text: lengthM" class="metric"></span><span class="metric">m</span></td>
+  <td><span data-bind="text: widthFt"></span>ft <span data-bind="text: widthM" class="metric"></span><span class="metric">m</span></td>
+  <td><span data-bind="text: displacedThresholdFt"></span>ft <span data-bind="text: displacedThresholdM" class="metric"></span><span class="metric">m</span></td>
+  <td><span data-bind="text: stopwayFt"></span>ft <span data-bind="text: stopwayM" class="metric"></span><span class="metric">m</span></td>
+  <td><button data-bind="button: { text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' } }, click: $parent.gotoRwy">Restart here</button></td>
 </tr>
+</tbody>
 </table>
 </fieldset>
 

@@ -1,6 +1,6 @@
 define([
-        'jquery', 'knockout', 'text!./Position.html', 'sprintf', 'leaflet', 'kojqui/autocomplete'
-], function( jquery, ko, htmlString, sprintf, leaflet ) {
+        'jquery', 'knockout', 'text!./Position.html', 'sprintf', 'leaflet', 'fgcommand', 'kojqui/autocomplete'
+], function( jquery, ko, htmlString, sprintf, leaflet, fgcommand ) {
 
     function getAirportList(obs) {
         if(typeof(Storage) !== "undefined") {
@@ -54,6 +54,7 @@ define([
       });
 
       self.surface = ko.observable(rwy.surface);
+
     }
 
     function AirportViewModel(geoJson, id) {
@@ -131,6 +132,58 @@ define([
 
       self.comm = ko.observableArray([]);
       self.runway = ko.observableArray([]);
+
+      self.gotoRwy = function(ui,evt) {
+        var presets = {
+          children: [
+            {
+              'name': 'airport-id',
+              'value': self.id(),
+            },
+            {
+              'name': 'longitude-deg',
+              'value': -9999,
+            },
+            {
+              'name': 'latitude-deg',
+              'value': -9999,
+            },
+            {
+              'name': 'altitude-ft',
+              'value': -9999,
+            },
+            {
+              'name': 'airspeed-kt',
+              'value': 0,
+            },
+            {
+              'name': 'offset-distance-nm',
+              'value': 0,
+            },
+            {
+              'name': 'offset-azimuth-deg',
+              'value': 0,
+            },
+            {
+              'name': 'glideslope-deg',
+              'value': 0,
+            },
+            {
+              'name': 'heading-deg',
+              'value': 0,
+            },
+            {
+              'name': 'runway',
+              'value': ui.id(),
+            },
+          ],
+        };
+
+        fgcommand.setPropertyValue( '/sim/presets', presets, function() {
+          fgcommand.reposition();
+        }, self );
+
+      }
     }
 
     function ViewModel(params) {

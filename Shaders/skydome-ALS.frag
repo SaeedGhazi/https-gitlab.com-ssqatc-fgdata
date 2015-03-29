@@ -224,7 +224,7 @@ float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
 vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
 
 // this is for the bare Rayleigh and Mie sky, highly altitude dependent
-color.rgb = max(color.rgb, minLight.rgb * (1.0- alt/100000.0) * (1.0 - costheta));
+color.rgb = max(color.rgb, minLight.rgb * (1.0- min(alt/100000.0,1.0)) * (1.0 - costheta));
 
 // this is for the terrain drawn
 terrainHazeColor = max(terrainHazeColor.rgb, minLight.rgb);

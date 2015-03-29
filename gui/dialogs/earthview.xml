@@ -85,6 +85,16 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
+     <checkbox>
+        <row>3</row>
+        <col>1</col>
+        <label> Overlay textures</label>
+        <halign>left</halign>
+        <property>/earthview/overlay-texture-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
 
     </group>
   </group>

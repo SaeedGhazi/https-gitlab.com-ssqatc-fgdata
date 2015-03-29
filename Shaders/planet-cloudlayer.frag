@@ -8,9 +8,10 @@ varying vec3 normal;
 varying vec3 ecViewDir;
 varying vec3 VTangent;
 
+uniform bool use_overlay;
 
 uniform sampler2D texture;
-
+uniform sampler2D structure_texture;
 
 
 
@@ -28,6 +29,7 @@ void main()
 
 	vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewDir));
     vec4 texel;
+    vec4 structureTexel;
 
     vec4 fragColor;
     vec4 specular = vec4(0.0);
@@ -40,6 +42,7 @@ void main()
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
     NdotL = dot(n, lightDir);
+    NdotL = smoothstep(-0.2,0.2,NdotL);	
 
     float intensity = length(diffuse_term);
     vec4 dawn = intensity * normalize (vec4 (1.0,0.4,0.4,1.0));
@@ -60,6 +63,9 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
+    structureTexel = texture2D(structure_texture, 20.0 * gl_TexCoord[0].st);
+    if (use_overlay) {texel = vec4(structureTexel.rgb, texel.a * structureTexel.a);}
+
     fragColor = color * texel + specular;
 	
     gl_FragColor = fragColor;

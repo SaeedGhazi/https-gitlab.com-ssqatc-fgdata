@@ -11,8 +11,10 @@ varying vec3 VTangent;
 uniform float visibility;
 uniform bool use_clouds;
 uniform bool use_cloud_shadows;
+uniform bool use_overlay;
 uniform sampler2D texture;
 uniform sampler2D shadowtex;
+uniform sampler2D grain_texture;
 
 
 
@@ -27,10 +29,11 @@ void main()
     float NdotL, NdotHV;
     vec4 color = gl_Color;
     vec3 lightDir = gl_LightSource[0].position.xyz;
-    //vec3 halfVector = gl_LightSource[0].halfVector.xyz;
+
 	vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewDir));
     vec4 texel;
-	vec4 shadowTexel;
+    vec4 shadowTexel;
+    vec4 grainTexel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
 
@@ -51,18 +54,27 @@ void main()
 		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}	
  
 	texel = texture2D(texture, gl_TexCoord[0].st);
+	grainTexel = texture2D(grain_texture, gl_TexCoord[0].st * 40.0);
+
+
+
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
     NdotL = dot(n, lightDir);
-
+    // due to atmosphere scattering, we should make this harder
+    NdotL = smoothstep(-0.2,0.2,NdotL);	
+   
     float intensity = length(diffuse_term);
     vec4 dawn = intensity * normalize (vec4 (1.0,0.4,0.4,1.0));
     vec4 diff_term = mix(dawn, diffuse_term, smoothstep(0.0, 0.2, NdotL));
 	
     intensity = length(light_specular);
     light_specular = mix(dawn.rgb, light_specular, smoothstep(0.0, 0.2, NdotL));
+    
+    float oceanness = smoothstep(0.0, 0.1,length(texel.rgb - vec3 (0.007,0.019, 0.078)));
+    float specular_enhancement = 4.0 * (1.0 - oceanness);
 
-    float specular_enhancement = 4.0 * (1.0 -smoothstep(0.0, 0.1,length(texel.rgb - vec3 (0.007,0.019, 0.078))));
+    if (use_overlay) {texel.rgb = mix(texel.rgb, grainTexel.rgb, 0.4* grainTexel.a * oceanness);}
 
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL * (1.0-shadowTexel.a);
@@ -85,7 +97,7 @@ void main()
 	float angle = dot(normalize(ecViewDir), normalize(normal));
 	float distance_through_atmosphere = 10.0 / ((angle)+0.001);
 	
-	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb * clamp(NdotL,0.01, 0.99)),0.0,1.0);
+	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb/1.73 * clamp(NdotL,0.01, 0.99)),0.0,1.0);
 	//float visibility = 80.0;
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
 	

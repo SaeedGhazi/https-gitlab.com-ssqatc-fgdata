@@ -49,7 +49,7 @@ void main()
         ambient_color = gl_FrontMaterial.ambient;
     }
     vec4 light_diffuse = vec4 (1.0,1.0,1.0,1.0);
-    vec4 light_ambient = vec4 (0.05, 0.05, 0.05, 1.0);
+    vec4 light_ambient = vec4 (0.03, 0.03, 0.03, 1.0);
    
     diffuse_term = diffuse_color *  light_diffuse;//gl_LightSource[0].diffuse;
     vec4 constant_term = gl_FrontMaterial.emission + ambient_color *

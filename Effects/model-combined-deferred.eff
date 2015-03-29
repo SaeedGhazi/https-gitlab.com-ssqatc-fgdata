@@ -244,9 +244,9 @@ the objects that use it, and replaces it with the default shader.
 
 	  <program n="0">
 		<vertex-shader n="0">Shaders/ubershader.vert</vertex-shader>
-		<fragment-shader>Shaders/ubershader-gbuffer.frag</fragment-shader>
-		<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
-		<fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>
+		<fragment-shader n="0">Shaders/ubershader-gbuffer.frag</fragment-shader>
+		<fragment-shader n="1">Shaders/gbuffer-functions.frag</fragment-shader>
+		<fragment-shader n="2">Shaders/gbuffer-encode.frag</fragment-shader>
 	  </program>
 
 			<uniform>
@@ -284,18 +284,6 @@ the objects that use it, and replaces it with the default shader.
 				<type>sampler-cube</type>
 				<value type="int">5</value>
 			</uniform>
-
-<!--			<uniform>
-				<name>ReflFresnelTex</name>
-				<type>sampler-2d</type>
-				<value type="int">6</value>
-			</uniform>
-
-			<uniform>
-				<name>ReflRainbowTex</name>
-				<type>sampler-2d</type>
-				<value type="int">7</value>
-			</uniform>-->
 
             <uniform>
                 <name>ReflGradientsTex</name>
@@ -548,31 +536,23 @@ the objects that use it, and replaces it with the default shader.
 			</uniform>
 
 			<uniform>
-				<name>hdg</name>
+				<name>lonDeg</name>
 				<type>float</type>
 				<value>
-					<use>model-hdg</use>
+					<use>pos-lon</use>
 				</value>
 			</uniform>
 
 			<uniform>
-				<name>pitch</name>
+				<name>latDeg</name>
 				<type>float</type>
 				<value>
-					<use>model-pitch</use>
-				</value>
-			</uniform>
-
-			<uniform>
-				<name>roll</name>
-				<type>float</type>
-				<value>
-					<use>model-roll</use>
+					<use>pos-lat</use>
 				</value>
 			</uniform>
 
 			<!-- 	    BEGIN fog include -->
-			<uniform>
+			<!--<uniform>
 				<name>visibility</name>
 				<type>float</type>
 				<value>
@@ -613,7 +593,7 @@ the objects that use it, and replaces it with the default shader.
 				<value>
 					<use>fogtype</use>
 				</value>
-			</uniform>
+			</uniform>-->
 			<!-- 			END fog include -->
 			<uniform>
 			  <name>rembrandt_enabled</name>

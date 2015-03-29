@@ -128,6 +128,12 @@ please see Docs/README.model-combined.eff for documentation
 		<model-roll>
 			<use>orientation/model/roll-deg</use>
 		</model-roll>
+		<pos-lon>
+			<use>position/longitude-deg</use>
+		</pos-lon>
+		<pos-lat>
+			<use>position/latitude-deg</use>
+		</pos-lat>
 		<!-- 	fog include	 -->
 		<visibility><use>/environment/ground-visibility-m</use></visibility>
 		<avisibility><use>/environment/visibility-m</use></avisibility>
@@ -1137,6 +1143,21 @@ please see Docs/README.model-combined.eff for documentation
 			  <use>rembrandt</use>
 			</value>
 		  </uniform>
+		  <uniform>
+			  <name>lonDeg</name>
+			  <type>float</type>
+			  <value>
+				  <use>pos-lon</use>
+			  </value>
+		  </uniform>
+
+		  <uniform>
+			  <name>latDeg</name>
+			  <type>float</type>
+			  <value>
+				  <use>pos-lat</use>
+			  </value>
+		  </uniform>
 		  </pass>
 		</technique>
 
@@ -1357,18 +1378,9 @@ please see Docs/README.model-combined.eff for documentation
 		  </vertex-program-two-side>
 
 		  <program n="0">
-			<!-- <vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
-			  <vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
+			  <vertex-shader n="0">Shaders/ubershader.vert</vertex-shader>
 			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 			  <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
-			  <!--<attribute>
-			  <name>tangent</name>
-			  <index>6</index>
-			</attribute>
-			<attribute>
-			  <name>binormal</name>
-			  <index>7</index>
-			</attribute>-->
 		  </program>
 
 		  <uniform>
@@ -1657,32 +1669,25 @@ please see Docs/README.model-combined.eff for documentation
 			</value>
 		  </uniform>
 
+
 		  <uniform>
-			<name>hdg</name>
-			<type>float</type>
-			<value>
-			  <use>model-hdg</use>
-			</value>
+			  <name>lonDeg</name>
+			  <type>float</type>
+			  <value>
+				  <use>pos-lon</use>
+			  </value>
 		  </uniform>
 
 		  <uniform>
-			<name>pitch</name>
-			<type>float</type>
-			<value>
-			  <use>model-pitch</use>
-			</value>
-		  </uniform>
-
-		  <uniform>
-			<name>roll</name>
-			<type>float</type>
-			<value>
-			  <use>model-roll</use>
-			</value>
+			  <name>latDeg</name>
+			  <type>float</type>
+			  <value>
+				  <use>pos-lat</use>
+			  </value>
 		  </uniform>
 
 		  <!-- 	    BEGIN fog include -->
-		  <uniform>
+		  <!--<uniform>
 			<name>visibility</name>
 			<type>float</type>
 			<value>
@@ -1716,7 +1721,7 @@ please see Docs/README.model-combined.eff for documentation
 			<value>
 			  <use>terminator</use>
 			</value>
-		  </uniform>
+		  </uniform>-->
 		  <uniform>
 			<name>fogType</name>
 			<type>int</type>

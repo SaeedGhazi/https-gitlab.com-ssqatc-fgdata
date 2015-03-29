@@ -329,18 +329,9 @@ and fallback to plain transparency when the model shader is disabled.
 			   </vertex-program-two-side>
 			   
 			   <program>
-				   <!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
-					   <vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
+					   <vertex-shader n="0">Shaders/ubershader.vert</vertex-shader>
 					   <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 					   <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
-					   <!--<attribute>
-					   <name>tangent</name>
-					   <index>6</index>
-				   </attribute>
-				   <attribute>
-					   <name>binormal</name>
-					   <index>7</index>
-				   </attribute>-->
 			   </program>
 			   
 			   <uniform>
@@ -628,33 +619,25 @@ and fallback to plain transparency when the model shader is disabled.
 					   <use>ambient-correction</use>
 				   </value>
 			   </uniform>
-			   
+
 			   <uniform>
-				   <name>hdg</name>
+				   <name>lonDeg</name>
 				   <type>float</type>
 				   <value>
-					   <use>model-hdg</use>
+					   <use>pos-lon</use>
 				   </value>
 			   </uniform>
-			   
+
 			   <uniform>
-				   <name>pitch</name>
+				   <name>latDeg</name>
 				   <type>float</type>
 				   <value>
-					   <use>model-pitch</use>
-				   </value>
-			   </uniform>
-			   
-			   <uniform>
-				   <name>roll</name>
-				   <type>float</type>
-				   <value>
-					   <use>model-roll</use>
+					   <use>pos-lat</use>
 				   </value>
 			   </uniform>
 			   
 			   <!-- 	    BEGIN fog include -->
-			   <uniform>
+			   <!--<uniform>
 				   <name>visibility</name>
 				   <type>float</type>
 				   <value>
@@ -688,7 +671,7 @@ and fallback to plain transparency when the model shader is disabled.
 				   <value>
 					   <use>terminator</use>
 				   </value>
-			   </uniform>
+			   </uniform>-->
 			   <uniform>
 				   <name>fogType</name>
 				   <type>int</type>

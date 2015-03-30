@@ -1,6 +1,8 @@
 define([
         'jquery', 'knockout', 'text!./Position.html', 'sprintf', 'leaflet', 'fgcommand', 'kojqui/autocomplete'
 ], function( jquery, ko, htmlString, sprintf, leaflet, fgcommand ) {
+    
+    var MetarPropertiesPath = "/aaa";
 
     function getAirportList(obs) {
         if(typeof(Storage) !== "undefined") {
@@ -59,7 +61,6 @@ define([
 
     function AirportViewModel(geoJson, id) {
       var self = this;
-      self.geoJson = geoJson;
 
       jquery.get("/navdb?q=airport&id=" + id ).done(function(data) {
         // expect geoJSON FeatureCollection
@@ -82,6 +83,10 @@ define([
         self.name(airport.properties.name);
         self.city(airport.properties.name);
         self.country(airport.properties.name);
+        self.hasMetar(airport.properties.metar);
+        if(self.hasMetar()) {
+            fgcommand.requestMetar( self.id(), MetarPropertiesPath );
+        }
 
         var comm = {};
         airport.properties.comm.forEach(function(c){
@@ -100,9 +105,9 @@ define([
         self.longitude(Number(arp[0]||0));
         self.latitude(Number(arp[1]||0));
 
-        self.geoJson.clearLayers();
-        self.geoJson.addData(airport);
-        self.geoJson._map.setView([ self.latitude(), self.longitude() ], 13);
+        geoJson.clearLayers();
+        geoJson.addData(airport);
+        geoJson._map.setView([ self.latitude(), self.longitude() ], 13);
       });
 
       self.id = ko.observable('');
@@ -112,6 +117,7 @@ define([
       self.elevation = ko.observable(0);
       self.longitude = ko.observable(0);
       self.latitude = ko.observable(0);
+      self.hasMetar = ko.observable(false);
       self.arpFormatted = ko.pureComputed(function() {
         function dm(v) {
           var s = v < 0;
@@ -189,12 +195,12 @@ define([
     function ViewModel(params) {
         var self = this;
 
-        self.map = leaflet.map("phi-environment-position-map", {
+        var map = leaflet.map("phi-environment-position-map", {
           dragging: false,
           touchZoom: false,
           scrollWheelZoom: false,
         });
-        self.geoJson = leaflet.geoJson(null,{
+        var geoJson = leaflet.geoJson(null,{
             style : function(feature) {
                     return {
                         color : 'black',
@@ -206,8 +212,8 @@ define([
                     };
             }
         });
-        self.geoJson._map = self.map;
-        self.geoJson.addTo(self.map);
+        geoJson._map = map;
+        geoJson.addTo(map);
 
         self.airports = ko.observableArray([]);
         getAirportList(self.airports);
@@ -215,14 +221,34 @@ define([
           return self.airports().length;
         });
 
+        self.isLoading = ko.pureComputed(function() {
+           return self.airports().length < 1;
+        });
+
         self.selectedAirport = ko.observable();
+
+        self.metarValidFlag = ko.observable(0).extend({
+            observedProperty : MetarPropertiesPath + "/valid"
+        });
+
+        self.metarValid = ko.pureComputed(function(){
+          return self.metarValidFlag() && self.selectedAirport() && self.selectedAirport().hasMetar();
+        });
+
+        self.metar = ko.observable(0).extend({
+            observedProperty : MetarPropertiesPath + "/data"
+        });
         
         self.onSelect = function(ev,ui) {
-            self.selectedAirport(new AirportViewModel(self.geoJson,getAirportId(ui.item.value)));
+            var id = getAirportId(ui.item.value);
+            self.selectedAirport(new AirportViewModel(geoJson,id));
         }
     }
 
     ViewModel.prototype.dispose = function() {
+        fgcommand.clearMetar(MetarPropertiesPath);
+        self.metar.dispose();
+        self.metarValidFlag.dispose();
     }
 
     // Return component definition

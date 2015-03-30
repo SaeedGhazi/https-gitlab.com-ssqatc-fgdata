@@ -121,13 +121,11 @@
 
           if (info.has_metar) {
             # Retrieve an updated METAR, and indicate that we've not got one currently.
-            setprop("/sim/gui/dialogs/airports/selected-airport/metar/station-id", airport_id);
-            setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 0);
-            setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "Retrieving METAR, please wait.");
+            fgcommand("request-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar",
+                                                         "station": airport_id}));
           } else {
             # This airport has no METAR. Rather than cancelling the retrieve-metar command, simply set the TTL
             # to a very long time so it won't over-ride our message.
-            setprop("/sim/gui/dialogs/airports/selected-airport/metar/data", "No METAR available from this airport");
             setprop("/sim/gui/dialogs/airports/selected-airport/metar/time-to-live", 9999);
           }
 

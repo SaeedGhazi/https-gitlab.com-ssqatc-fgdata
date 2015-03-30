@@ -1259,10 +1259,10 @@ Started September 2000 by David Megginson, david@megginson.com
   </scenery>
   <earthview>
     <cloudsphere-flag type="bool" userarchive="y">true</cloudsphere-flag>
-    <cloud-shadow-flag type="bool" userarchive="y"/>true</cloud-shadow-flag>
+    <cloud-shadow-flag type="bool" userarchive="y">true</cloud-shadow-flag>
     <overlay-texture-flag type="bool" userarchive="y">true</overlay-texture-flag>
-    <mrd-flag type="bool" userarchive="y"/>true</mrd-flag>
-    <cloudsphere-angle type="double" userarchive="y">0.0</cloudsphere-angle>
+    <mrd-flag type="bool" userarchive="y">true</mrd-flag>
+    <cloudsphere-angle type="double" userarchive="n">0.0</cloudsphere-angle>
   </earthview>
 </PropertyList>
 <!-- end of preferences.xml -->

@@ -49,10 +49,16 @@ define([
       self.displacedThresholdFt = ko.pureComputed(function(){
         return (self.displacedThresholdM()/0.3048).toFixed(0);
       });
+      self.hasDisplacedThreshold = ko.pureComputed(function() {
+        return self.displacedThresholdM() > 0;
+      });
 
       self.stopwayM = ko.observable(Number(rwy.stopway_m||0).toFixed(0));
       self.stopwayFt = ko.pureComputed(function(){
         return (self.stopwayM()/0.3048).toFixed(0);
+      });
+      self.hasStopway = ko.pureComputed(function() {
+        return self.stopwayM() > 0;
       });
 
       self.surface = ko.observable(rwy.surface);

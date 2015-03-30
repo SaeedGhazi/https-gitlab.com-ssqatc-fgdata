@@ -84,10 +84,18 @@
                     class="metric">m</span></td>
                 <td><span data-bind="text: widthFt"></span>ft <span data-bind="text: widthM" class="metric"></span><span
                     class="metric">m</span></td>
-                <td><span data-bind="text: displacedThresholdFt"></span>ft <span data-bind="text: displacedThresholdM"
-                    class="metric"></span><span class="metric">m</span></td>
-                <td><span data-bind="text: stopwayFt"></span>ft <span data-bind="text: stopwayM" class="metric"></span><span
-                    class="metric">m</span></td>
+                <td>
+                    <span data-bind="visible: hasDisplacedThreshold">
+                        <span data-bind="text: displacedThresholdFt"></span>ft <span data-bind="text: displacedThresholdM"
+                        class="metric"></span><span class="metric">m</span>
+                    </span>
+                </td>
+                <td>
+                    <span data-bind="visible: hasStopway">
+                        <span data-bind="text: stopwayFt"></span>ft <span data-bind="text: stopwayM" class="metric"></span><span
+                        class="metric">m</span>
+                    </span>
+                </td>
                 <td><button
                         data-bind="button: { text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' } }, click: $parent.gotoRwy">Restart
                         here</button></td>

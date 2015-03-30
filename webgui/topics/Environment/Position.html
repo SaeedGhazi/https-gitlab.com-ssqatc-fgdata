@@ -32,6 +32,11 @@
             <span style="font-size: 20pt; font-weight: normal; float: right" data-bind="text: name"></span>
         </div>
         <div>
+            <span style="float: right">
+                 <a data-bind="button: { text: false, icons: { primary: 'ui-icon-extlink' }}, 
+                               attr { href: 'http://ourairports.com/airports/' + id() + '/' }"
+                    target="_bank">View on ourairports.com</a>
+            </span>
             <!--
       <span style="font-size: 20pt; font-weight: bold;" data-bind="text: city"></span> 
       <span style="font-size: 20pt; font-weight: bold;">, </span>

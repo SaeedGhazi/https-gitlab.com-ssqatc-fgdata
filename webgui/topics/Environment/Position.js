@@ -241,7 +241,7 @@ define([
           return self.metarValidFlag() && self.selectedAirport() && self.selectedAirport().hasMetar();
         });
 
-        self.metar = ko.observable(0).extend({
+        self.metar = ko.observable('').extend({
             observedProperty : MetarPropertiesPath + "/data"
         });
         
@@ -252,6 +252,7 @@ define([
     }
 
     ViewModel.prototype.dispose = function() {
+        var self = this;
         fgcommand.clearMetar(MetarPropertiesPath);
         self.metar.dispose();
         self.metarValidFlag.dispose();

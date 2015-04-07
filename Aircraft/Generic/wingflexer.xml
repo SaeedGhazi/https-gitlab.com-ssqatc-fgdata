@@ -127,7 +127,7 @@
 
     <!-- integrate the ODE -->
     <filter>
-        <type>damped-osci</type>
+        <type>damped-oscillation</type>
 	<output>/sim/systems/wingflexer/z-raw-m</output>
         <a>
 	    <expression>

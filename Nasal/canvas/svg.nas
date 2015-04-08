@@ -525,13 +525,21 @@ var parsesvg = func(group, path, options = nil)
       }
       else
         parsePath(attr['d']);
-
-      stack[-1].set('fill', style['fill']);
+      
+      fillOpacity = style['fill-opacity'];
+      if( fillOpacity != nil)
+        stack[-1].set('fill', style['fill'] ~ sprintf("%02x", int(style['fill-opacity']*255)));
+      else
+        stack[-1].set('fill', style['fill']);
 
       var w = style['stroke-width'];
       stack[-1].setStrokeLineWidth( w != nil ? evalCSSNum(w) : 1 );
-      stack[-1].set('stroke', style['stroke'] or "none");
-
+      strokeOpacity = style['stroke-opacity'];
+      if(strokeOpacity != nil)
+        stack[-1].set('stroke', (style['stroke']  ~ sprintf("%02x", int(style['stroke-opacity']*255))));
+      else
+        stack[-1].set('stroke', style['stroke'] or "none");
+      
       var linecap = style['stroke-linecap'];
       if( linecap != nil )
         stack[-1].setStrokeLineCap(style['stroke-linecap']);

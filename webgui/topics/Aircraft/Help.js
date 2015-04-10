@@ -1,6 +1,9 @@
 define([
-        'jquery', 'knockout', 'text!./Help.html'
+        'jquery', 'knockout', 'text!./Help.html', 'pagedown/Markdown.Converter'
 ], function(jquery, ko, htmlString) {
+
+    var converter = new Markdown.Converter();
+
     function ViewModel(params) {
         var self = this;
 
@@ -31,7 +34,7 @@ define([
                 } else if (prop.name == 'text') {
                     helpContent.push({
                         type: 'text',
-                        text: prop.value,
+                        text: converter.makeHtml(prop.value),
                     });
                 } else if (prop.name == 'key') {
                     var content = {

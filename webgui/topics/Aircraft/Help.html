@@ -10,7 +10,7 @@
     <tbody data-bind="foreach: helpContent">
         <tr>
             <!--  ko if: $data.type == 'line' || $data.type == 'text' -->
-            <td colspan="2" data-bind="text: $data.text"></td>
+            <td colspan="2" data-bind="html: $data.text"></td>
             <!-- /ko -->
             <!--  ko if: $data.type == 'key' -->
             <td><span>Key</span><span data-bind="text: $data.name" style="padding: 0 1em 0 0.5em; font-weight: bold;"></span></td>

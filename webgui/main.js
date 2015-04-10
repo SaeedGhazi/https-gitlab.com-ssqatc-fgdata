@@ -15,6 +15,7 @@ require.config({
         props : 'lib/props2',
         sammy: '3rdparty/sammy-latest.min',
         aircraft: '../aircraft-dir',
+        pagedown: '3rdparty/pagedown'
     }
 });
 

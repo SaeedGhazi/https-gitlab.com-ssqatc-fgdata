@@ -526,7 +526,7 @@ var parsesvg = func(group, path, options = nil)
       else
         parsePath(attr['d']);
       
-      fillOpacity = style['fill-opacity'];
+      var fillOpacity = style['fill-opacity'];
       if( fillOpacity != nil)
         stack[-1].set('fill', style['fill'] ~ sprintf("%02x", int(style['fill-opacity']*255)));
       else
@@ -534,7 +534,8 @@ var parsesvg = func(group, path, options = nil)
 
       var w = style['stroke-width'];
       stack[-1].setStrokeLineWidth( w != nil ? evalCSSNum(w) : 1 );
-      strokeOpacity = style['stroke-opacity'];
+      
+      var strokeOpacity = style['stroke-opacity'];
       if(strokeOpacity != nil)
         stack[-1].set('stroke', (style['stroke']  ~ sprintf("%02x", int(style['stroke-opacity']*255))));
       else

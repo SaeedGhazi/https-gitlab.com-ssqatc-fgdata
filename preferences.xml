@@ -24,6 +24,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <read type="string"/>
         <write type="string"/>
       </validate>
+      <download-dir type="string" userarchive="n"/>
     </paths>
     <intl include="Translations/locale.xml"/>
     <aircraft>c172p</aircraft>
@@ -791,10 +792,10 @@ Started September 2000 by David Megginson, david@megginson.com
       <svn-server userarchive="y">http://terrascenery.googlecode.com/svn/trunk/data/Scenery</svn-server>
       <svn-data-server userarchive="y">http://fgfs.goneabitbursar.com/fgfsai/trunk</svn-data-server>
       <rsync-server userarchive="n">scenery.flightgear.org::Scenery</rsync-server>
-      <scenery-dir userarchive="y">
+      <scenery-dir userarchive="n">
         <!-- INTENTIONALLY LEFT BLANK! Do NOT edit.
-				This (empty) value is the initial/default value only. Actual data is stored/read from
-				$HOME/.fgfs/autosave.xml. Use command-line option "terrasync-dir", GUI-dialog, or
+				This (empty) value is the initial/default value only. Use command-line option 
+                "terrasync-dir", GUI-dialog, or
 				property browser to configure actual directory. -->
       </scenery-dir>
       <ext-svn-utility type="string">svn</ext-svn-utility>

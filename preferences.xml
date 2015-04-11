@@ -789,18 +789,18 @@ Started September 2000 by David Megginson, david@megginson.com
       <enabled type="bool" userarchive="y">false</enabled>
       <use-built-in-svn type="bool" userarchive="y">true</use-built-in-svn>
       <use-svn type="bool" userarchive="n">true</use-svn>
-      <svn-server userarchive="y">http://terrascenery.googlecode.com/svn/trunk/data/Scenery</svn-server>
+      <!-- INTENTIONALLY LEFT BLANK so we query the server from Martin's web service -->
+      <svn-server userarchive="n"/>
       <svn-data-server userarchive="y">http://fgfs.goneabitbursar.com/fgfsai/trunk</svn-data-server>
       <rsync-server userarchive="n">scenery.flightgear.org::Scenery</rsync-server>
-      <scenery-dir userarchive="n">
         <!-- INTENTIONALLY LEFT BLANK! Do NOT edit.
-				This (empty) value is the initial/default value only. Use command-line option 
+                This (empty) value is the initial/default value only. Use command-line option
                 "terrasync-dir", GUI-dialog, or
-				property browser to configure actual directory. -->
-      </scenery-dir>
+                property browser to configure actual directory. -->
+      <scenery-dir userarchive="n"/>
       <ext-svn-utility type="string">svn</ext-svn-utility>
       <!-- use absolute path if "svn"
-				 isn't on system PATH (external SVN only)-->
+                 isn't on system PATH (external SVN only)-->
       <max-errors type="int">10</max-errors>
       <!-- abort when too many errors occurred, or -1=don't abort -->
     </terrasync>

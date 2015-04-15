@@ -477,8 +477,13 @@ require([
             var value = valueAccessor() || {};
 
             if (value.hover && typeof (value.hover) === 'function') {
-                $(element).bind("plothover", function(event, pos, item) {
-                    value.hover(pos, item);
+                jquery(element).bind("plothover", function(event, pos, item) {
+                    value.hover.call(jquery(this).data("flotplot"), pos, item);
+                });
+            }
+            if (value.click && typeof (value.click) === 'function') {
+                jquery(element).bind("plotclick", function(event, pos, item) {
+                    value.click.call(jquery(this).data("flotplot"), pos, item);
                 });
             }
         },
@@ -487,7 +492,12 @@ require([
             var value = valueAccessor() || {};
             var data = ko.unwrap(value.data);
             var options = ko.unwrap(value.options);
-            jquery.plot(element, data, options);
+            var plot = jquery.plot(element, data, options);
+            jquery(element).data("flotplot", plot );
+            var postUpdate = ko.unwrap(value.postUpdate);
+            if( postUpdate ) {
+                postUpdate.call( value, element );
+            }
 
         },
 

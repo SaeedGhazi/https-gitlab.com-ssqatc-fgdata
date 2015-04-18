@@ -16,7 +16,7 @@ uniform sampler2D texture;
 uniform sampler2D shadowtex;
 uniform sampler2D grain_texture;
 
-
+float Noise2D(in vec2 coord, in float wavelength);
 
 float luminance(vec3 color)
 {
@@ -56,7 +56,11 @@ void main()
 	texel = texture2D(texture, gl_TexCoord[0].st);
 	grainTexel = texture2D(grain_texture, gl_TexCoord[0].st * 40.0);
 
-
+	float noise = Noise2D( gl_TexCoord[0].st, 0.00005);
+	 noise += Noise2D( gl_TexCoord[0].st, 0.0002);
+	 noise += Noise2D( gl_TexCoord[0].st, 0.0001);
+	
+	noise= noise/3.0;
 
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
@@ -74,7 +78,17 @@ void main()
     float oceanness = smoothstep(0.0, 0.1,length(texel.rgb - vec3 (0.007,0.019, 0.078)));
     float specular_enhancement = 4.0 * (1.0 - oceanness);
 
-    if (use_overlay) {texel.rgb = mix(texel.rgb, grainTexel.rgb, 0.4* grainTexel.a * oceanness);}
+    if (use_overlay) {
+		//texel.rgb = mix(texel.rgb, grainTexel.rgb, 0.4* grainTexel.a * oceanness);
+		texel.rgb = texel.rgb * (0.85 + 0.3 * noise);
+		texel.r = smoothstep(0.0, 0.95, texel.r);
+		texel.g = smoothstep(0.0, 0.95, texel.g);
+		texel.b = smoothstep(0.0, 0.95, texel.b);
+		float intensity = length(texel.rgb);
+		texel.rgb = mix(texel.rgb, intensity * vec3 (1.0,1.0,1.0), 0.3);
+		}
+
+	//texel.rgb = vec3 (0.5,0.5,0.5);
 
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL * (1.0-shadowTexel.a);
@@ -95,13 +109,15 @@ void main()
 	//fragColor = mix(fragColor, shadowTexel, shadowTexel.a);
 	
 	float angle = dot(normalize(ecViewDir), normalize(normal));
-	float distance_through_atmosphere = 10.0 / ((angle)+0.001);
+	float distance_through_atmosphere = min(10.0 / (abs(angle)+0.001),500.0);
 	
 	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb/1.73 * clamp(NdotL,0.01, 0.99)),0.0,1.0);
-	//float visibility = 80.0;
+
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
-	
+
+
 	fragColor = mix(fogColor, fragColor, fogFactor);
-	
+
+
     gl_FragColor = fragColor;
 }

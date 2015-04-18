@@ -112,6 +112,7 @@
 			<program>
 				<vertex-shader>Shaders/planet.vert</vertex-shader>
 				<fragment-shader>Shaders/planet-cloudlayer.frag</fragment-shader>
+				<fragment-shader>Shaders/noise.frag</fragment-shader>
 			</program>
 			
 			<uniform>

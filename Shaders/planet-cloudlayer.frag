@@ -13,7 +13,7 @@ uniform bool use_overlay;
 uniform sampler2D texture;
 uniform sampler2D structure_texture;
 
-
+float Noise2D(in vec2 coord, in float wavelength);
 
 float luminance(vec3 color)
 {
@@ -64,7 +64,20 @@ void main()
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     structureTexel = texture2D(structure_texture, 20.0 * gl_TexCoord[0].st);
-    if (use_overlay) {texel = vec4(structureTexel.rgb, texel.a * structureTexel.a);}
+
+    float noise = Noise2D( gl_TexCoord[0].st, 0.01);
+    noise += Noise2D( gl_TexCoord[0].st, 0.005);
+    noise += Noise2D( gl_TexCoord[0].st, 0.002);
+	
+    //vec4 noiseTexel = vec4 (1.0,1.0,1.0,  smoothstep(0.3,1.2,noise) * texel.a);
+    vec4 noiseTexel = vec4 (1.0,1.0,1.0, 0.5* noise * texel.a);
+    structureTexel = mix(structureTexel, noiseTexel,noiseTexel.a);
+
+
+    if (use_overlay) 
+	{
+	texel = vec4(structureTexel.rgb, texel.a * structureTexel.a);
+	}	
 
     fragColor = color * texel + specular;
 	

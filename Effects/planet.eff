@@ -118,6 +118,7 @@
 			<program>
 				<vertex-shader>Shaders/planet.vert</vertex-shader>
 				<fragment-shader>Shaders/planet.frag</fragment-shader>
+				<fragment-shader>Shaders/noise.frag</fragment-shader>
 			<attribute>
 				<name>tangent</name>
 				<index>6</index>

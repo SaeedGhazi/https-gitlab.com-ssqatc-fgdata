@@ -2,6 +2,12 @@ define([
         'knockout', 'jquery', 'text!./Weather2.html', 'props', 'flot', 'flotresize'
 ], function(ko, jquery, htmlString, SGPropertyNode) {
 
+    if(typeof Math.roundTo === "undefined") {
+        Math.roundTo = function(num, step) { 
+            return Math.floor((num / step) + .5) * step; 
+        } 
+    }
+
     function ViewModel(params, componentInfo) {
         // componentInfo.element
 
@@ -281,7 +287,8 @@ define([
                         function drawSeriesWindarrows(datapoints) {
                             var points = datapoints.points, ps = datapoints.pointsize;
                             for (var i = 0; i < points.length; i += ps) {
-                                var ws = points[i], y = points[i+1], wd = points[i+2];
+                                var ws = Math.roundTo( points[i],5 ), 
+                                    y = points[i+1], wd = points[i+2];
                                 
                                 var x = series.xaxis.p2c(40);
                                 y = series.yaxis.p2c(y);

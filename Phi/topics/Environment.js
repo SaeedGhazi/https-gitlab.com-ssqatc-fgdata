@@ -6,7 +6,7 @@ define([
     });
 
     ko.components.register('Environment/Weather', {
-        require : 'topics/Environment/Weather'
+        require : 'topics/Environment/Weather2'
     });
 
     ko.components.register('Environment/Position', {

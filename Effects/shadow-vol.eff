@@ -86,7 +86,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/shadow-vol-ALS.vert</vertex-shader>
-        <fragment-shader>Shaders/trivial.frag</fragment-shader>
+        <fragment-shader>Shaders/shadow-ALS.frag</fragment-shader>
       </program>
        <uniform>
         <name>hazeLayerAltitude</name>
@@ -179,26 +179,13 @@
       </render-bin>
       <rendering-hint><use>rendering-hint</use></rendering-hint>
       <texture-unit>
-        <!-- The texture unit is always active because the shaders expect
-             that. -->
         <unit>0</unit>
-        <!-- If there is a texture, the type in the derived effect
-        will be "2d". -->
         <type><use>texture[0]/type</use></type>
         <image><use>texture[0]/image</use></image>
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        <!--
-        <internal-format>
-          <use>texture[0]/internal-format</use>
-        </internal-format>
-        -->
       </texture-unit>
-	<!--<alpha-to-coverage>true</alpha-to-coverage>-->
-      <!--<vertex-program-two-side>
-        <use>vertex-program-two-side</use>
-      </vertex-program-two-side>-->
       <program>
         <vertex-shader>Shaders/shadow-vol-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/shadow-ALS.frag</fragment-shader>
@@ -279,7 +266,7 @@
 	<value><use>gear_clearance</use></value>
       </uniform>
       <depth>
-	<function>equal</function>
+	<function>lequal</function>
 	<write-mask type="bool">true</write-mask>
       </depth>
     </pass>

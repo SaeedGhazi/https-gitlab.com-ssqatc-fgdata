@@ -34,7 +34,7 @@
 		<!-- cgi-interpreter>/path/to/cgi/interpreter/executable</cgi-interpreter -->
 
 		<!-- set the doucment root directory here, defaults to fg-root, paths relative to fg-root -->
-		<document-root>Docs</document-root>
+		<document-root>Phi</document-root>
 
 		<enable-directory-listing>yes</enable-directory-listing>
 
@@ -58,7 +58,6 @@
 		<!-- run-as-user>THIS IS NOT SUPPORTED IN FLIGHTGEAR <run-as-user -->
 
 		<!-- all paths are relative to fg-root -->
-		<!-- (not yet implemented) -->
-		<url-rewrites>/gui/=webgui/,/fonts/=Fonts/</url-rewrites>
+		<url-rewrites>/fonts/=Fonts/</url-rewrites>
 	</options>
 </PropertyList>

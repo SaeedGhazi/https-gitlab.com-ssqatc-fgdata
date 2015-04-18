@@ -425,7 +425,7 @@ void main(void)
 	//specular_color += (ctrefl*ctrefl) * fresnel*  specular_light.rgb;
 
 	specular_color += ((0.15*(1.0-ctrefl* ctrefl) * fresnel) - 0.3) * specular_light.rgb;
-
+		
 
 	vec4 specular = vec4(specular_color, 0.5);
 
@@ -478,8 +478,11 @@ void main(void)
 		}
 	}
 
+	
+
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering) + vec4 (secondary_light, 0.0) * light_distance_fading(dist) * 2.0 * pow(max(0.0,dot(E,N)), water_shininess);
 
+	finalColor = clamp(finalColor, 0.0,1.0);
 
 	//add foam
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
@@ -700,10 +703,9 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 	finalColor.rgb = mix(hazeColor  +secondary_light * fog_backscatter(mvisibility), finalColor.rgb,transmission);
-
-
 	}
 
 gl_FragColor = finalColor;
+
 
 }

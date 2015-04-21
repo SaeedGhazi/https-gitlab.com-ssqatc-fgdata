@@ -24,14 +24,20 @@ uniform float overcast;
 uniform float eye_alt;
 uniform float cloud_self_shading;
 uniform float angle;
+uniform float threshold_low;
+uniform float threshold_high;
+uniform float emit_intensity;
 
 uniform vec3 offset_vec;
 uniform vec3 scale_vec;
+uniform vec3 tag_color;
+uniform vec3 emit_color;
     
 
 uniform int quality_level;
 uniform int tquality_level;
 uniform int use_searchlight;
+uniform int implicit_lightmap_enabled;
 
 
 const float EarthRadius = 5800000.0;
@@ -145,9 +151,19 @@ void main()
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
 
-    //fragColor.rgb = vec3(1.0,1.0,1.0) * (1.0 - opacity.a);
+   // implicit lightmap - the user gets to select 
 
+   if (implicit_lightmap_enabled == 1)
+	{
+	float cdiff = (length(texel.rgb - tag_color));
+	float enhance = 1.0 - smoothstep(threshold_low, threshold_high, cdiff); 
+	fragColor.rgb = fragColor.rgb + enhance * emit_color * emit_intensity;
+	}
+
+
+	
 
 gl_FragColor = fragColor;
+
 }
 

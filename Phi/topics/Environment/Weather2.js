@@ -2,10 +2,10 @@ define([
         'knockout', 'jquery', 'text!./Weather2.html', 'props', 'flot', 'flotresize'
 ], function(ko, jquery, htmlString, SGPropertyNode) {
 
-    if(typeof Math.roundTo === "undefined") {
-        Math.roundTo = function(num, step) { 
-            return Math.floor((num / step) + .5) * step; 
-        } 
+    if (typeof Math.roundTo === "undefined") {
+        Math.roundTo = function(num, step) {
+            return Math.floor((num / step) + .5) * step;
+        }
     }
 
     function ViewModel(params, componentInfo) {
@@ -37,27 +37,6 @@ define([
              * for (x = -35; x <= 200; x += 20) { reply.push([ x, 1050 ]);
              * reply.push([ x-160, 100 ]); reply.push(null); }
              */
-            return reply;
-        }
-
-        function createClouds() {
-            var reply = [];
-
-            reply.push([
-                    -50, 0.3, 0.
-            ]);
-            reply.push([
-                    -30, 3.0, 1.8
-            ]);
-            reply.push([
-                    -10, 5.0, 4
-            ]);
-            reply.push([
-                    10, 7.5, 4
-            ]);
-            reply.push([
-                    30, 12, 11.5
-            ]);
             return reply;
         }
 
@@ -104,6 +83,35 @@ define([
             self.wxData.notifySubscribers(self.wxData.peek());
         });
 
+        jquery.get('/json/environment/clouds?d=4', null, function(data) {
+            var clouds = new SGPropertyNode(data);
+            function createClouds() {
+                var reply = [];
+                clouds.getChildren("layer").forEach(function(layer) {
+                    var coverage = layer.getValue("coverage");
+                    if( coverage == "clear" ) return;
+
+                    var base = layer.getValue("elevation-ft", -9999 );
+                    if( base < -9000 ) return;
+
+                    var tops = base + layer.getValue("thickness-ft",0) + base;
+                    if( tops == base ) return;
+
+                    base *= 0.3048/1000;
+                    tops *= 0.3048/1000;
+
+                    reply.push( [reply.length, tops, base] );
+                });
+
+                return reply;
+            }
+
+
+            self.wxData()[2].data = createClouds();
+            self.wxData.notifySubscribers(self.wxData.peek());
+        });
+
+
         self.wxData = ko.observableArray([
                 {// Series: Isotherms
                     color : 'rgb(0, 0, 255)',
@@ -121,6 +129,7 @@ define([
                     },
                     shadowSize : 0,
                     yaxis : 2, // on linear scale
+                    xaxis : 1,
                 }, {// Series: Dry Adiabat
                     color : 'rgb(0, 255, 0)',
                     data : createDryAdiabates(),
@@ -137,9 +146,10 @@ define([
                     },
                     shadowSize : 0,
                     yaxis : 1,
+                    xaxis : 1,
                 }, { // clouds
                     color : 'rgb(128,128,128)',
-                    data : createClouds(),
+                    data : [],
                     label : 'clouds',
                     lines : {
                         show : false
@@ -147,7 +157,7 @@ define([
                     bars : {
                         show : true,
                         lineWidth : 0,
-                        barWidth : 20,
+                        barWidth : 1,
                         fillColor : {
                             colors : [
                                     {
@@ -160,6 +170,7 @@ define([
                     },
                     shadowSize : 2,
                     yaxis : 2,
+                    xaxis : 2,
                 }, { // Temperature
                     color : 'rgb(255, 0, 0)',
                     data : [],
@@ -176,6 +187,7 @@ define([
                     },
                     shadowSize : 0,
                     yaxis : 2,
+                    xaxis : 1,
                 }, { // dewpoint
                     color : 'rgb(0, 255, 0)',
                     data : [],
@@ -192,6 +204,7 @@ define([
                     },
                     shadowSize : 0,
                     yaxis : 2,
+                    xaxis : 1,
                 }, {
                     color : 'rgb(0, 255, 0)',
                     data : [],
@@ -210,7 +223,7 @@ define([
                     },
                     shadowSize : 0,
                     yaxis : 2,
-
+                    xaxis : 1,
                 }
         ]);
 
@@ -218,15 +231,21 @@ define([
             legend : {
                 show : false,
             },
-            xaxis : {
-                show : true,
-                position : "bottom",
-                color : 'blue',
-                tickColor : 'green',
-                min : -56,
-                max : 50,
-                tickLength : 0,
-            },
+            xaxes : [
+                    { // Axis 1: Temperature
+                        show : true,
+                        position : "bottom",
+                        color : 'blue',
+                        tickColor : 'green',
+                        min : -56,
+                        max : 50,
+                        tickLength : 0,
+                    }, { // Axis 2: Cloud Layer
+                        show : false,
+                        min : 0,
+                        max : 5,
+                    },
+            ],
             yaxes : [
                     { // Axis 1: Pressure (hpa), Log-P
                         show : true,
@@ -251,6 +270,7 @@ define([
                         min : -.020,
                         max : 16,
                         tickLength : 0,
+
                     }
             ],
 
@@ -287,46 +307,46 @@ define([
                         function drawSeriesWindarrows(datapoints) {
                             var points = datapoints.points, ps = datapoints.pointsize;
                             for (var i = 0; i < points.length; i += ps) {
-                                var ws = Math.roundTo( points[i],5 ), 
-                                    y = points[i+1], wd = points[i+2];
-                                
+                                var ws = Math.roundTo(points[i], 5), y = points[i + 1], wd = points[i + 2];
+
                                 var x = series.xaxis.p2c(40);
                                 y = series.yaxis.p2c(y);
 
                                 ctx.save();
-                                ctx.translate(x,y);
-                                ctx.rotate((wd+180) * Math.PI/180);
-                             
+                                ctx.translate(x, y);
+                                ctx.rotate((wd + 180) * Math.PI / 180);
+
                                 ctx.beginPath();
-                                ctx.arc(0,0, 3, 0, Math.PI * 2, false);
+                                ctx.arc(0, 0, 3, 0, Math.PI * 2, false);
                                 ctx.closePath();
-                                
-                                ctx.moveTo(0,0);
-                                ctx.lineTo(0,9*5);
+
+                                ctx.moveTo(0, 0);
+                                ctx.lineTo(0, 9 * 5);
                                 var pos = 0;
-                                while( ws >= 5 ) {
-                                    if( ws >= 50 ) {
+                                while (ws >= 5) {
+                                    if (ws >= 50) {
                                         ws -= 50;
-                                        ctx.moveTo(0,(9-pos)*5);
-                                        ctx.lineTo(-10,(8.5-pos)*5);
-                                        ctx.lineTo(0,(8-pos)*5);
+                                        ctx.moveTo(0, (9 - pos) * 5);
+                                        ctx.lineTo(-10, (8.5 - pos) * 5);
+                                        ctx.lineTo(0, (8 - pos) * 5);
                                         pos++;
-                                    } else if( ws >= 10 ) {
-                                        if( pos > 0 ) pos++;
+                                    } else if (ws >= 10) {
+                                        if (pos > 0)
+                                            pos++;
                                         ws -= 10;
-                                        ctx.moveTo(0,(9-pos)*5);
-                                        ctx.lineTo(-10,(9.5-pos)*5);
+                                        ctx.moveTo(0, (9 - pos) * 5);
+                                        ctx.lineTo(-10, (9.5 - pos) * 5);
                                     } else {
                                         pos++;
                                         ws -= 5;
-                                        ctx.moveTo(0,(9-pos)*5);
-                                        ctx.lineTo(-5,(9.25-pos)*5);
+                                        ctx.moveTo(0, (9 - pos) * 5);
+                                        ctx.lineTo(-5, (9.25 - pos) * 5);
                                     }
                                 }
-                                
+
                                 ctx.stroke();
                                 ctx.restore();
-                                
+
                             }
 
                         }

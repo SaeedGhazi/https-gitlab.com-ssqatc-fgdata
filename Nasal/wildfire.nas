@@ -1111,7 +1111,7 @@ var dialog = {
         var titlebar = me.dialog.addChild("group");
         titlebar.set("layout", "hbox");
         titlebar.addChild("empty").set("stretch", 1);
-        titlebar.addChild("text").set("label", "Wildfire settings");
+        titlebar.addChild("text").set("label", "Wildfire Settings");
         titlebar.addChild("empty").set("stretch", 1);
         var w = titlebar.addChild("button");
         w.set("pref-width", 16);

@@ -4,11 +4,10 @@
     <name>map-canvas</name>
     <layout>vbox</layout>
     <resizable>true</resizable>
+    <!-- mhab -->
+    <default-padding>3</default-padding>
 
     <color>
-        <red type="float">0.41</red>
-        <green type="float">0.4</green>
-        <blue type="float">0.42</blue>
         <alpha type="float">1.0</alpha>
     </color>
 
@@ -19,9 +18,6 @@
             var setTransparency = func(updateDialog){
                 var alpha = (getprop("/sim/gui/dialogs/map-canvas/transparent") or 0);
                 self.getNode("color/alpha").setValue(1-alpha*0.3);
-                self.getNode("color/red").setValue(0.41-alpha*0.2);
-                self.getNode("color/green").setValue(0.4-alpha*0.2);
-                self.getNode("color/blue").setValue(0.42-alpha*0.2);
                 var n = props.Node.new({ "dialog-name": "map-canvas" });
                 if (updateDialog)
                 {
@@ -42,6 +38,7 @@
 
     <group>
         <layout>hbox</layout>
+        <default-padding>1</default-padding>
         <empty><stretch>1</stretch></empty>
 
         <text>
@@ -62,22 +59,27 @@
             </binding>
         </button>
     </group>
+
     <hrule/>
 
     <group>
         <layout>hbox</layout>
         <stretch>true</stretch>
+        <halign>left</halign>
 
         <!-- sidebar -->
         <group>
             <layout>vbox</layout>
+            <stretch>true</stretch>
+            <halign>left</halign>
+
             <text>
                 <label>Display:</label>
             </text>
 
             <checkbox>
                 <label>Airports</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-APT</property>
                 <live>true</live>
                 <binding>
@@ -90,7 +92,7 @@
 
             <checkbox>
                 <label>Fixes</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-FIX</property>
                 <live>true</live>
                 <binding>
@@ -103,7 +105,7 @@
 
             <checkbox>
                 <label>VORs</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-VOR</property>
                 <live>true</live>
                 <binding>
@@ -116,7 +118,7 @@
 
             <checkbox>
                 <label>DMEs</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-DME</property>
                 <live>true</live>
                 <binding>
@@ -129,7 +131,7 @@
 
             <checkbox>
                 <label>NDBs</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-NDB</property>
                 <live>true</live>
                 <binding>
@@ -149,7 +151,7 @@
 
             <checkbox>
                 <label>Traffic</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-TFC</property>
                 <live>true</live>
                 <binding>
@@ -169,7 +171,7 @@
 
             <checkbox>
                 <label>Data</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-data</property>
                 <live>true</live>
                 <binding>
@@ -182,7 +184,7 @@
             
             <checkbox>
                 <label>Flight History</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/draw-FLT</property>
                 <live>true</live>
                 <binding>
@@ -194,14 +196,15 @@
             </checkbox>
  
             <checkbox>
-		<!-- layer only supported if LW/AW is active -->
-		<enable>
-                    <property>/sim/gui/dialogs/metar/mode/local-weather</property>
-                    <value>1</value>
-                 </enable>
-
                 <label>Weather</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
+
+                <!-- layer only supported if LW/AW is active -->
+		            <enable>
+                   <property>/sim/gui/dialogs/metar/mode/local-weather</property>
+                   <value>1</value>
+                </enable>
+
                 <property>/sim/gui/dialogs/map-canvas/draw-WXR</property>
                 <live>true</live>
                 <binding>
@@ -212,14 +215,16 @@
                 </binding>
             </checkbox>
  
-		<!-- layer only supported if tutorial system is active and targets specified-->
-		<!--
+            <!-- layer only supported if tutorial system is active and targets specified-->
+	 <!--
             <checkbox>
-		<enable>
-                    <property>/sim/gui/dialogs/metar/mode/local-weather</property>
-                    <value>1</value>
-                 </enable>
+	              <enable>
+                   <property>/sim/gui/dialogs/metar/mode/local-weather</property>
+                   <value>1</value>
+                </enable>
                 <label>Tutorial Goals</label>
+                <label>Weather</label>
+                <halign>left</halign>
                 <pref-width>100</pref-width>
                 <property>/sim/gui/dialogs/map-canvas/draw-TUT</property>
                 <live>true</live>
@@ -236,7 +241,7 @@
 
             <checkbox>
                 <label>Magnetic Hdgs</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/magnetic-headings</property>
                 <live>true</live>
                 <binding>
@@ -249,7 +254,7 @@
 
             <checkbox>
                 <label>Center on Acft</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/centre-on-aircraft</property>
                 <live>true</live>
                 <binding>
@@ -262,7 +267,7 @@
 
             <checkbox>
                 <label>Aircraft Hdg Up</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/aircraft-heading-up</property>
                 <live>true</live>
                 <binding>
@@ -275,7 +280,7 @@
 
             <checkbox>
                 <label>Transparent</label>
-                <pref-width>100</pref-width>
+                <halign>left</halign>
                 <property>/sim/gui/dialogs/map-canvas/transparent</property>
                 <live>true</live>
                 <binding>
@@ -295,7 +300,6 @@
             <button>
                 <name>close</name>
                 <legend>Close</legend>
-                <pref-width>100</pref-width>
                 <default>true</default>
                 <binding>
                   <command>dialog-close</command>

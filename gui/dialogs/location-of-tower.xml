@@ -6,13 +6,13 @@
 
   <group>
     <layout>hbox</layout>
-	  <empty><stretch>1</stretch></empty>
+      <empty><stretch>1</stretch></empty>
 
     <text>
       <label>Tower Position</label>
     </text>
 
-	  <empty><stretch>1</stretch></empty>
+      <empty><stretch>1</stretch></empty>
 
     <button>
       <pref-width>16</pref-width>
@@ -29,7 +29,7 @@
   <hrule/>
 
   <text>
-    <label>Select position of tower for the Tower Views</label>
+    <label>  Select Position of Tower for the Tower Views  </label>
   </text>
 
   <group>
@@ -50,22 +50,25 @@
     </checkbox>
 
     <text>
-      <row>1</row><col>0</col>
+      <row>1</row>
+      <col>0</col>
       <halign>right</halign>
       <label>Airport ID:</label>
     </text>
     <input>
       <name>airport-id</name>
-      <row>1</row><col>1</col>
+      <row>1</row>
+      <col>1</col>
       <property>/sim/tower/airport-id</property>
-	  <enable>
+      <enable>
         <not>
           <property>/sim/tower/auto-position</property>
         </not>
       </enable>
     </input>
     <empty>
-      <row>0</row><col>3</col>
+      <row>0</row>
+      <col>3</col>
       <stretch>true</stretch>
     </empty>
 
@@ -131,11 +134,12 @@
 
     <button>
       <legend>Preset</legend>
-      <row>4</row><col>0</col>
+      <row>4</row>
+      <col>0</col>
       <!--
         Is there a way in the GUI (other than via a dynamic
-	NASAL dialog) to assign text to the widget rather
-	than to the underlying property and doing an update?
+        NASAL dialog) to assign text to the widget rather
+        than to the underlying property and doing an update?
 
         The way it is now CANCEL doesn't undo PRESET  :-(
       -->
@@ -153,11 +157,13 @@
       </binding>
     </button>
     <text>
-      <row>4</row><col>1</col>
+      <row>4</row>
+      <col>1</col>
       <property>/sim/presets/airport-id</property>
     </text>
     <empty>
-      <row>4</row><col>3</col>
+      <row>4</row>
+      <col>3</col>
       <stretch>true</stretch>
     </empty>
   </group>

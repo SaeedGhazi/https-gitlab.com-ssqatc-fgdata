@@ -301,14 +301,14 @@ command interface /autopilot/route-manager/input:
             <row>0</row>
             <col>0</col>
             <halign>right</halign>
-            <label>Departure:</label>
+            <label> Departure:</label>
         </text>
         <input>
             <row>0</row>
             <col>1</col>
             <halign>left</halign>
             <name>departure-airport</name>
-            <pref-width>60</pref-width>
+            <pref-width>70</pref-width>
             <property>/autopilot/route-manager/departure/airport</property>
             <live>true</live>
             <binding>
@@ -388,7 +388,7 @@ command interface /autopilot/route-manager/input:
             <row>1</row>
             <col>1</col>
             <halign>left</halign>
-            <pref-width>60</pref-width>
+            <pref-width>70</pref-width>
             <name>destination-airport</name>
             <property>/autopilot/route-manager/destination/airport</property>
             <live>true</live>
@@ -450,6 +450,7 @@ command interface /autopilot/route-manager/input:
         <combo>
             <row>1</row>
             <col>6</col>
+            <pref-width>120</pref-width>
             <halign>left</halign>
             <name>approach</name>
             <property>/autopilot/route-manager/destination/approach</property>
@@ -505,7 +506,7 @@ command interface /autopilot/route-manager/input:
         <layout>hbox</layout>
         <text>
             <halign>right</halign>
-            <label>Cruise Speed (kts):</label>
+            <label>  Cruise Speed (kts):</label>
         </text>
         <input>
             <name>cruise-speed</name>
@@ -566,26 +567,44 @@ command interface /autopilot/route-manager/input:
         </text>
     </group>
 
-    <waypointlist>
-        <name>list</name>
-        <halign>fill</halign>
-        <valign>fill</valign>
-        <stretch>true</stretch>
-        <pref-height>150</pref-height>
-        <property>/sim/gui/dialogs/route-manager/selection</property>
-        <binding>
-            <command>dialog-apply</command>
-            <object-name>list</object-name>
-        </binding>
-    </waypointlist>
+    <group>
+        <layout>hbox</layout>
+        <default-padding>2</default-padding>
+
+        <!-- gap -->
+        <text>
+          <label> </label>
+        </text>
+
+        <waypointlist>
+            <name>list</name>
+            <halign>fill</halign>
+            <valign>fill</valign>
+            <stretch>true</stretch>
+            <pref-height>150</pref-height>
+            <property>/sim/gui/dialogs/route-manager/selection</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>list</object-name>
+            </binding>
+        </waypointlist>
+
+        <!-- gap -->
+        <text>
+          <label> </label>
+        </text>
+
+    </group>
 
     <group>
         <layout>hbox</layout>
         <default-padding>4</default-padding>
 
         <text>
-            <label>Waypoint:</label>
+            <label>  Waypoint:</label>
+<!--
             <pref-width>60</pref-width>
+-->
         </text>
 
         <input>
@@ -599,10 +618,12 @@ command interface /autopilot/route-manager/input:
         <button>
             <legend>Add</legend>
             <default>true</default>
+<!--
             <pref-width>70</pref-width>
+-->
             <binding>
                 <command>dialog-apply</command>
-				<object-name>input</object-name>
+                <object-name>input</object-name>
             </binding>
             <binding>
                 <command>nasal</command>
@@ -612,22 +633,28 @@ command interface /autopilot/route-manager/input:
                 <command>dialog-update</command>
             </binding>
         </button>
+
+        <!-- gap -->
+        <text>
+          <label></label>
+        </text>
     </group>
 
     <text>
         <padding>1</padding>
         <label>Format: (airport|fix|nav|lon,lat)[@alt] -- e.g. "KSFO@900"</label>
         <color>
-            <red>0.5</red>
-            <green>0.5</green>
-            <blue>0.5</blue>
+            <red>0.7</red>
+            <green>0.7</green>
+            <blue>0.7</blue>
         </color>
     </text>
 
+    <!-- button field -->
     <group>
         <layout>hbox</layout>
         <halign>fill</halign>
-        <default-padding>6</default-padding>
+        <default-padding>8</default-padding>
 
         <button>
             <legend>Clear List</legend>
@@ -640,6 +667,7 @@ command interface /autopilot/route-manager/input:
 
         <button>
             <legend>Remove</legend>
+            <equal>true</equal>
             <enable>
                 <greater-than>
                 <property>/sim/gui/dialogs/route-manager/selection</property>
@@ -652,13 +680,14 @@ command interface /autopilot/route-manager/input:
             </binding>
         </button>
 
-		<button>
-			<legend>Route</legend>
-			<binding>
-				<command>nasal</command>
-				<script>route()</script>
-			</binding>
-		</button>
+        <button>
+            <legend>Route</legend>
+            <equal>true</equal>
+            <binding>
+              <command>nasal</command>
+              <script>route()</script>
+            </binding>
+        </button>
 <!--
         <button>
             <legend>Auto-route</legend>
@@ -699,9 +728,13 @@ command interface /autopilot/route-manager/input:
         </button>
 
         <empty><stretch>true</stretch></empty>
+        <!-- gap -->
+        <text>
+          <label></label>
+        </text>
 
         <button>
-            <legend>Load...</legend>
+            <legend>Load ...</legend>
             <equal>true</equal>
             <enable>
             <not><property>/autopilot/route-manager/active</property></not>
@@ -712,7 +745,7 @@ command interface /autopilot/route-manager/input:
             </binding>
         </button>
         <button>
-            <legend>Save...</legend>
+            <legend>Save ...</legend>
             <equal>true</equal>
             <binding>
                 <command>nasal</command>
@@ -721,6 +754,7 @@ command interface /autopilot/route-manager/input:
         </button>
         <button>
             <legend>Close</legend>
+            <equal>true</equal>
             <key>Esc</key>
             <binding>
                 <command>dialog-close</command>

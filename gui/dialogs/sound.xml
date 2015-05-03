@@ -34,6 +34,12 @@
 
   <group>
     <layout>hbox</layout>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
     <text>
     <halign>right</halign>
     <label>Sound Device:</label>
@@ -53,6 +59,12 @@
         <object-name>sound-dialog</object-name>
       </binding>
     </combo>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
   </group>
 
   <hrule/>

@@ -35,12 +35,17 @@
       </binding>
     </button>
   </group>
+
   <hrule/>
+
+  <empty>
+    <stretch>true</stretch>
+  </empty>
 
   <group>
     <layout>hbox</layout>
     <default-padding>1</default-padding>
-    <text><label>Stereo Mode</label></text>
+    <text><label>  Stereo Mode</label></text>
     <empty><stretch>true</stretch></empty>
     <combo>
       <pref-width>250</pref-width>
@@ -60,12 +65,17 @@
         <command>dialog-apply</command>
       </binding>
     </combo>
+    <!-- gap -->
+    <text>
+      <label> </label>
+    </text>
+
   </group>
 
   <group>
     <layout>hbox</layout>
     <default-padding>1</default-padding>
-    <text><label>Screen Distance</label></text>
+    <text><label>  Screen Distance</label></text>
     <empty><stretch>true</stretch></empty>
     <slider>
       <min>0</min>
@@ -86,7 +96,7 @@
   <group>
     <layout>hbox</layout>
     <default-padding>1</default-padding>
-    <text><label>Eye Separation</label></text>
+    <text><label>  Eye Separation</label></text>
     <empty><stretch>true</stretch></empty>
     <slider>
       <min>0</min>
@@ -103,6 +113,10 @@
         <property>/sim/rendering/osg-displaysettings/eye-separation</property>
       </text>
   </group>
+
+  <empty>
+    <stretch>true</stretch>
+  </empty>
 
   <hrule/>
 

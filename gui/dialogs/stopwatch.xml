@@ -8,9 +8,6 @@
 	<x>-5</x>
 	<y>5</y>
 	<color>
-		<red>0.2</red>
-		<green>0.2</green>
-		<blue>0.2</blue>
 		<alpha>0.7</alpha>
 	</color>
 
@@ -87,7 +84,7 @@
 	</nasal>
 
 	<text>
-		<label>xxxxx000 : 00 : 00.000</label>
+		<label>xxxxx000 : 00 : 00.0</label>
 		<halign>center</halign>
 		<live>true</live>
 		<property>/sim/gui/dialogs/stopwatch-dialog/display</property>
@@ -109,11 +106,7 @@
 		<button>
 			<legend>Start</legend>
 			<equal>true</equal>
-			<pref-width>47</pref-width>
 			<color>
-				<red type="float">0.3</red>
-				<green type="float">0.3</green>
-				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
@@ -125,11 +118,7 @@
 		<button>
 			<legend>Stop</legend>
 			<default>true</default>
-			<pref-width>47</pref-width>
 			<color>
-				<red type="float">0.3</red>
-				<green type="float">0.3</green>
-				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
@@ -141,11 +130,7 @@
 		<button>
 			<legend>Reset</legend>
 			<key>Delete</key>
-			<pref-width>47</pref-width>
 			<color>
-				<red type="float">0.3</red>
-				<green type="float">0.3</green>
-				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
 			<binding>
@@ -157,13 +142,9 @@
 		<button>
 			<legend>Close</legend>
 			<color>
-				<red type="float">0.3</red>
-				<green type="float">0.3</green>
-				<blue type="float">0.3</blue>
 				<alpha type="float">0.8</alpha>
 			</color>
 			<key>Esc</key>
-			<pref-width>47</pref-width>
 			<binding>
 				<command>dialog-close</command>
 			</binding>

@@ -100,7 +100,7 @@
 
   <text>
     <halign>left</halign>
-    <label>Uncheck a system to fail it, or set the Mean Time/Cycles Between Failures.</label>
+    <label>  Uncheck a system to fail it, or set the Mean Time/Cycles Between Failures.  </label>
   </text>
 
   <hrule/>
@@ -187,7 +187,7 @@
         <row>4</row>
         <col>0</col>
         <halign>right</halign>
-        <label>Electrical System</label>
+        <label>  Electrical System</label>
       </text>
 
       <checkbox>
@@ -378,12 +378,23 @@
       </input-template>
 
     </group>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label>  </label>
+      </text>
+    </group>
+
   </group>
 
   <hrule/>
 
   <group>
     <layout>hbox</layout>
+    <default-padding>7</default-padding>
 
     <button>
       <legend>OK</legend>

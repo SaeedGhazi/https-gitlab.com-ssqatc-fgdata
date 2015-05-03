@@ -3,7 +3,9 @@
 <PropertyList>
 
   <name>radios</name>
+<!--
   <width>550</width>
+-->
   <modal>false</modal>
 
   <nasal>
@@ -496,17 +498,16 @@
 
   <hrule/>
   <group>
-
     <layout>hbox</layout>
 
     <text>
-      <label>TACAN</label>
+      <label>  TACAN       </label>
     </text>
 
 
     <combo>
       <name>tacan-1</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/tacan/frequencies/selected-channel[1]</property>
@@ -528,7 +529,7 @@
     <!---->
     <combo>
       <name>tacan-2</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/tacan/frequencies/selected-channel[2]</property>
@@ -550,7 +551,7 @@
 
     <combo>
       <name>tacan-3</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/tacan/frequencies/selected-channel[3]</property>
@@ -572,7 +573,7 @@
 
     <combo>
       <name>tacan-4</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/tacan/frequencies/selected-channel[4]</property>
@@ -595,21 +596,25 @@
       </binding>
     </button>
 
+    <text>
+      <label>  </label>
+    </text>
   </group>
   <!-- of TACAN group -->
 
   <!-- transponder controls -->
 
   <hrule/>
+
   <group>
     <layout>hbox</layout>
     <text>
-      <label>Transponder</label>
+      <label>  Transponder</label>
     </text>
 
     <combo>
       <name>Tponder-1</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/transponder/inputs/digit[3]</property>
@@ -629,7 +634,7 @@
     <!-- -->
     <combo>
       <name>Tponder-2</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/transponder/inputs/digit[2]</property>
@@ -648,7 +653,7 @@
     </combo>
     <combo>
       <name>Tponder-3</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/transponder/inputs/digit[1]</property>
@@ -667,7 +672,7 @@
     </combo>
     <combo>
       <name>Tponder-4</name>
-      <pref-width>45</pref-width>
+      <pref-width>55</pref-width>
       <pref-height>25</pref-height>
       <live>true</live>
       <property>/instrumentation/transponder/inputs/digit[0]</property>
@@ -731,6 +736,10 @@
         <command>dialog-apply</command>
       </binding>
     </button>
+
+    <text>
+      <label>  </label>
+    </text>
   </group>
   <!-- Transponder group -->
 

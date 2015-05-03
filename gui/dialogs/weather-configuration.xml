@@ -44,9 +44,15 @@
     <layout>hbox</layout>
     <default-padding>0</default-padding>
 
+    <!-- gap -->
+    <text>
+      <label> </label>
+    </text>
+
     <!-- Left Column -->
     <group>
       <layout>vbox</layout>
+
       <group>
         <layout>vbox</layout>
         <default-padding>1</default-padding>
@@ -363,7 +369,7 @@
               <name>pressure-sea-level-inhg</name>
               <row>1</row>
               <col>3</col>
-              <pref-width>50</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/boundary/entry[0]/pressure-sea-level-inhg</property>
               <live>true</live>
               <binding>
@@ -382,6 +388,9 @@
         </group>
       </group>
       <!-- Precipitation End  -->
+      <empty>
+        <stretch>true</stretch>
+      </empty>
     </group>
     <!-- Left Column End -->
 
@@ -401,7 +410,7 @@
         <group>
           <layout>hbox</layout>
           <text>
-            <label>Aloft (All Altitudes ft-AMSL)</label>
+            <label> Aloft (All Altitudes ft-AMSL)</label>
           </text>
           <hrule>
             <stretch>true</stretch>
@@ -410,12 +419,16 @@
 
         <group>
           <layout>hbox</layout>
+          <!-- gap -->
+          <text>
+            <label> </label>
+          </text>
           <group>
             <layout>table</layout>
             <text>
               <row>0</row>
               <col>0</col>
-              <label>Altitude</label>
+              <label>Altitude </label>
             </text>
 
             <text>
@@ -453,7 +466,7 @@
               <name>aloft-4-elevation-ft</name>
               <row>1</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/aloft/entry[4]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -466,7 +479,7 @@
               <name>aloft-4-wind-from-heading-deg</name>
               <row>1</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/aloft/entry[4]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -479,7 +492,7 @@
               <name>aloft-4-wind-speed-kt</name>
               <row>1</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/aloft/entry[4]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -492,7 +505,7 @@
               <name>aloft-4-visibility-m</name>
               <row>1</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/aloft/entry[4]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -552,7 +565,7 @@
               <name>aloft-3-elevation-ft</name>
               <row>2</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/aloft/entry[3]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -565,7 +578,7 @@
               <name>aloft-3-wind-from-heading-deg</name>
               <row>2</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/aloft/entry[3]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -578,7 +591,7 @@
               <name>aloft-3-wind-speed-kt</name>
               <row>2</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/aloft/entry[3]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -591,7 +604,7 @@
               <name>aloft-3-visibility-m</name>
               <row>2</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/aloft/entry[3]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -651,7 +664,7 @@
               <name>aloft-2-elevation-ft</name>
               <row>3</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/aloft/entry[2]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -664,7 +677,7 @@
               <name>aloft-2-wind-from-heading-deg</name>
               <row>3</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/aloft/entry[2]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -677,7 +690,7 @@
               <name>aloft-2-wind-speed-kt</name>
               <row>3</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/aloft/entry[2]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -690,7 +703,7 @@
               <name>aloft-2-visibility-m</name>
               <row>3</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/aloft/entry[2]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -751,7 +764,7 @@
               <name>aloft-1-elevation-ft</name>
               <row>4</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/aloft/entry[1]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -764,7 +777,7 @@
               <name>aloft-1-wind-from-heading-deg</name>
               <row>4</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/aloft/entry[1]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -777,7 +790,7 @@
               <name>aloft-1-wind-speed-kt</name>
               <row>4</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/aloft/entry[1]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -790,7 +803,7 @@
               <name>aloft-1-visibility-m</name>
               <row>4</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/aloft/entry[1]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -850,7 +863,7 @@
               <name>aloft-0-elevation-ft</name>
               <row>5</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/aloft/entry[0]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -863,7 +876,7 @@
               <name>aloft-0-wind-from-heading-deg</name>
               <row>5</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/aloft/entry[0]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -876,7 +889,7 @@
               <name>aloft-0-wind-speed-kt</name>
               <row>5</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/aloft/entry[0]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -889,7 +902,7 @@
               <name>aloft-0-visibility-m</name>
               <row>5</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/aloft/entry[0]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -962,7 +975,7 @@
         <group>
           <layout>hbox</layout>
           <text>
-            <label>Boundary (All Elevations ft-AGL)</label>
+            <label> Boundary (All Elevations ft-AGL)</label>
           </text>
           <hrule>
             <stretch>true</stretch>
@@ -971,6 +984,10 @@
 
         <group>
           <layout>hbox</layout>
+          <!-- gap -->
+          <text>
+            <label> </label>
+          </text>
           <group>
 
             <layout>table</layout>
@@ -1006,11 +1023,17 @@
               <label>Dewpt (C)</label>
             </text>
 
+            <text>
+              <row>0</row>
+              <col>6</col>
+              <label>Turbulence</label>
+            </text>
+
             <input>
               <name>boundary-1-elevation-ft</name>
               <row>1</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/boundary/entry[1]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -1023,7 +1046,7 @@
               <name>boundary-1-wind-from-heading-deg</name>
               <row>1</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/boundary/entry[1]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -1036,7 +1059,7 @@
               <name>boundary-1-wind-speed-kt</name>
               <row>1</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/boundary/entry[1]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -1049,7 +1072,7 @@
               <name>boundary-1-visibility-m</name>
               <row>1</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/boundary/entry[1]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -1109,7 +1132,7 @@
               <name>boundary-0-elevation-ft</name>
               <row>2</row>
               <col>0</col>
-              <pref-width>52</pref-width>
+              <pref-width>70</pref-width>
               <property>/environment/config/boundary/entry[0]/elevation-ft</property>
               <live>true</live>
               <binding>
@@ -1122,7 +1145,7 @@
               <name>boundary-0-wind-from-heading-deg</name>
               <row>2</row>
               <col>1</col>
-              <pref-width>40</pref-width>
+              <pref-width>50</pref-width>
               <property>/environment/config/boundary/entry[0]/wind-from-heading-deg</property>
               <live>true</live>
               <binding>
@@ -1135,7 +1158,7 @@
               <name>boundary-0-wind-speed-kt</name>
               <row>2</row>
               <col>2</col>
-              <pref-width>35</pref-width>
+              <pref-width>45</pref-width>
               <property>/environment/config/boundary/entry[0]/wind-speed-kt</property>
               <live>true</live>
               <binding>
@@ -1148,7 +1171,7 @@
               <name>boundary-0-visibility-m</name>
               <row>2</row>
               <col>3</col>
-              <pref-width>55</pref-width>
+              <pref-width>75</pref-width>
               <property>/environment/config/boundary/entry[0]/visibility-m</property>
               <live>true</live>
               <binding>
@@ -1210,6 +1233,9 @@
           </empty>
         </group>
 
+        <empty>
+          <stretch>true</stretch>
+        </empty>
       </group>
       <!-- Boundary  End -->
 

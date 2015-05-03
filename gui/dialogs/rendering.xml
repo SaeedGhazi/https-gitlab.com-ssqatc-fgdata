@@ -53,6 +53,15 @@
 		<halign>center</halign>
 		<layout>hbox</layout>
 
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
 		<group>
 			<layout>vbox</layout>
 
@@ -218,6 +227,10 @@
 				</binding>
 			</checkbox>
 
+  		<empty>
+  			<stretch>1</stretch>
+  		</empty>
+
 			<group>
 				<layout>hbox</layout>
 				<text>
@@ -330,17 +343,20 @@
 						<object-name>random-vegetation</object-name>
 					</binding>
 				</checkbox>
+<!--
 				<text>
 					<row>4</row>
 					<col>1</col>
-					<label>density</label>
+					<label>Density</label>
 					<enable>
 						<property>/sim/rendering/random-vegetation</property>
 					</enable>
 				</text>
+-->
 				<slider>
 					<row>4</row>
-					<col>2</col>
+					<col>1</col>
+          <halign>left</halign>
 					<name>vegetation-density</name>
 					<min>0</min>
 					<max>10.0</max>
@@ -353,8 +369,9 @@
 				</slider>
 				<text>
 					<row>4</row>
-					<col>3</col>
-					<label>12345678</label>
+					<col>2</col>
+					<label>1234567890   </label>
+          <halign>left</halign>
 					<format>%.1f</format>
 					<live>true</live>
 					<property>/sim/rendering/vegetation-density</property>
@@ -363,11 +380,10 @@
 					</enable>
 				</text>
 
-
 				<checkbox>
-    					<enable>
-    					  <property>/sim/rendering/shaders/skydome</property>
-    					</enable>
+ 					<enable>
+					  <property>/sim/rendering/shaders/skydome</property>
+    			</enable>
 					<row>5</row>
 					<col>0</col>
 					<halign>left</halign>
@@ -381,19 +397,19 @@
 				</checkbox>
 
 				<text>
-    					<enable>
-    					  <property>/sim/rendering/shaders/skydome</property>
-    					</enable>
+    			<enable>
+    				<property>/sim/rendering/shaders/skydome</property>
+    			</enable>
 				 	<row>5</row>
-				  	<col>1</col>
-					<colspan>3</colspan>
-          				<color>
-           			 	 <red>1.0</red>
-          			  	 <green>0.6</green>
-         			   	 <blue>0.6</blue>
-         			 	 </color>
-				  	<label>(needs ALS and antialiasing)</label>
-        			</text>
+				  <col>1</col>
+					<colspan>2</colspan>
+          <color>
+            <red>1.0</red>
+            <green>0.6</green>
+            <blue>0.6</blue>
+         	</color>
+				  <label>(needs ALS and Antialiasing)</label>
+        </text>
 
 			</group>
 
@@ -404,7 +420,25 @@
 
 		</group>
 
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
 		<vrule/>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
 
 		<group>
 			<layout>vbox</layout>
@@ -412,7 +446,7 @@
 			<group>
 				<layout>hbox</layout>
 				<text>
-					<label>Shader effects</label>
+					<label>Shader Effects</label>
 					<halign>left</halign>
 				</text>
 				<hrule>
@@ -536,7 +570,7 @@
 			<group>
 				<layout>hbox</layout>
 				<text>
-					<label>Atmospheric effects</label>
+					<label>Atmospheric Effects</label>
 					<halign>left</halign>
 				</text>
 				<hrule>
@@ -658,82 +692,56 @@
 				</text>
 			</group>
 
+      <!-- mhab modified -->
 			<group>
 				<layout>table</layout>
+
 				<group>
-					<layout>hbox</layout>
+					<layout>vbox</layout>
+          <pref-height>35</pref-height>
 					<halign>left</halign>
 					<row>0</row>
 					<col>0</col>
 					<checkbox>
 						<halign>left</halign>
-						<label>Atmospheric light scattering (ALS)</label>
+						<label>Atmospheric Light Scattering (ALS)</label>
 						<name>skydome-scattering</name>
-						<visible>
+						<enable>
 							<not>
 								<property>/sim/rendering/rembrandt/enabled</property>
 							</not>
-						</visible>
+						</enable>
 						<property>/sim/rendering/shaders/skydome</property>
 						<binding>
 							<command>dialog-apply</command>
 							<object-name>skydome-scattering</object-name>
 						</binding>
 					</checkbox>
-					<!--<text>
-						<label>(Experimental)</label>
-						<visible>
-							<not>
-								<property>/sim/rendering/rembrandt/enabled</property>
-							</not>
-						</visible>
-						<color>
-							<red>1.0</red>
-							<green>0.6</green>
-							<blue>0.6</blue>
-						</color>
-					</text>-->
 				</group>
-				<!--<text>
-					<row>1</row>
-					<col>0</col>
-					<label>This disables most effects/shaders.</label>
-					<halign>left</halign>
-					<visible>
-						<not>
-							<property>/sim/rendering/rembrandt/enabled</property>
-						</not>
-					</visible>
-					<color>
-						<red>1.0</red>
-						<green>0.6</green>
-						<blue>0.6</blue>
-					</color>
-				</text>-->
 
 				<group>
 					<layout>hbox</layout>
-					<row>0</row>
+					<row>1</row>
 					<col>0</col>
 
 					<text>
 						<label>Rembrandt</label>
 						<halign>left</halign>
-						<visible>
+						<enable>
 							<property>/sim/rendering/rembrandt/enabled</property>
-						</visible>
+						</enable>
 					</text>
 					<text>
-						<label>(Experimental)</label>
+						<label>(experimental)</label>
 						<halign>left</halign>
 						<color>
 							<red>1.0</red>
 							<green>0.6</green>
 							<blue>0.6</blue>
 						</color>
-						<visible>
+						<enable>
 							<property>/sim/rendering/rembrandt/enabled</property>
-						</visible>
+						</enable>
 					</text>
 					<hrule>
 						<stretch>true</stretch>
@@ -744,11 +752,11 @@
 				</group>
 
 				<button>
-					<row>1</row>
+					<row>2</row>
 					<col>0</col>
-					<visible>
+					<enable>
 						<property>/sim/rendering/rembrandt/enabled</property>
-					</visible>
+					</enable>
 					<legend>Rembrandt Options</legend>
 					<halign>center</halign>
 					<binding>
@@ -769,12 +777,22 @@
 			</empty>
 
 		</group>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
 	</group>
 
 	<hrule/>
 
 	<button>
-		<legend>OK</legend>
+		<legend>  OK  </legend>
         <default>true</default>
         <binding>
             <command>nasal</command>
@@ -830,7 +848,7 @@
         "/sim/rendering/random-buildings",
         "/sim/rendering/random-objects",
         "/sim/rendering/random-vegetation",
-	"/sim/rendering/random-vegetation-shadows",
+        "/sim/rendering/random-vegetation-shadows",
         "/sim/rendering/vegetation-density",
         "/sim/rendering/clouds3d-enable",
         "/sim/rendering/clouds3d-density"];

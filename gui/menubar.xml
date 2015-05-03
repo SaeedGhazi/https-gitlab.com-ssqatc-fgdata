@@ -753,6 +753,14 @@
 			<enabled>false</enabled>
 		</item>
 
+		<item>
+			<name>cycle-gui</name>
+			<binding>
+				<command>nasal</command>
+				<script>gui.nextStyle()</script>
+			</binding>
+		</item>
+
 	</menu>
 
 	<menu>

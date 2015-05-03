@@ -188,37 +188,37 @@ var updateConfig = func() {
 	
 	<text>
 	  <halign>left</halign>
-	  <label>To configure your joystick/yoke/pedals:</label>
+	  <label>  To configure your joystick/yoke/pedals:</label>
   </text>
 
 	<text>
 	  <halign>left</halign>
-	  <label>  1) Select the device your wish to configure from the drop-down.</label>
+	  <label>    1) Select the device your wish to configure from the drop-down.</label>
   </text>
 
 	<text>
 	  <halign>left</halign>
-	  <label>  2) Identify the control you wish to configure by moving the joystick or pressing the button.  The result is shown in the Input column.</label>
+	  <label>    2) Identify the control you wish to configure by moving the joystick or pressing the button.  The result is shown in the Input column.</label>
   </text>
 
 	<text>
 	  <halign>left</halign>
-	  <label>  3) Using the drop-down or dialog button, select what you want the control to do.  "Custom" indicates a manually configured command.</label>
+	  <label>    3) Using the drop-down or dialog button, select what you want the control to do.  "Custom" indicates a manually configured command.</label>
   </text>
 
 	<text>
 	  <halign>left</halign>
-	  <label>  Your selection will take effect immediately.</label>
+	  <label>    Your selection will take effect immediately.</label>
   </text>
   
 	<text>
 	  <halign>left</halign>
-	  <label>  4) Test your control.  Some joystick controls can be "inverted" if you wish the control to take effect in the opposite direction.</label>
+	  <label>    4) Test your control.  Some joystick controls can be "inverted" if you wish the control to take effect in the opposite direction.</label>
   </text>
 
 	<text>
 	  <halign>left</halign>
-	  <label>Your modified joystick configuration is saved automatically.  You can reset the configuration to the default by pressing Reset Configuration.</label>
+	  <label>  Your modified joystick configuration is saved automatically.  You can reset the configuration to the default by pressing Reset Configuration.  </label>
   </text>
   
   <hrule/>
@@ -291,7 +291,7 @@ var updateConfig = func() {
 	    <row>1</row>
 	    <col>0</col>
 	    <halign>right</halign>
-	    <label>Configuration File:</label>
+	    <label>  Configuration File:</label>
     </text>
     
 	  <text>

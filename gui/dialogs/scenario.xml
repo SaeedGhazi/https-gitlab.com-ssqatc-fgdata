@@ -49,17 +49,32 @@
 
   <hrule/>
 
-  <checkbox>
+  <group>
+    <layout>hbox</layout>
     <halign>left</halign>
-    <label>Enable AI traffic</label>
-    <name>enable-ai-traffic</name>
-    <property>/sim/traffic-manager/enabled</property>
-    <live>true</live>
-    <binding>
-        <command>dialog-apply</command>
-        <object-name>enable-ai-traffic</object-name>
-    </binding>
-  </checkbox>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Enable AI traffic</label>
+      <name>enable-ai-traffic</name>
+      <property>/sim/traffic-manager/enabled</property>
+      <live>true</live>
+      <binding>
+          <command>dialog-apply</command>
+          <object-name>enable-ai-traffic</object-name>
+      </binding>
+    </checkbox>
+
+  </group>
 
   <text><label/></text>
 
@@ -71,6 +86,15 @@
 
   <group>
     <layout>hbox</layout>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
 
     <group>
       <name>left-column</name>

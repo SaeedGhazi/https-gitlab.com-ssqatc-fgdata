@@ -103,10 +103,10 @@
         <use>vertex-program-two-side</use>
       </vertex-program-two-side>
       <program>
-        <vertex-shader>Shaders/generic-ALS-base.vert</vertex-shader>
-        <fragment-shader>Shaders/model-ALS-base.frag</fragment-shader>
-        <fragment-shader>Shaders/hazes.frag</fragment-shader>
-        <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <vertex-shader n="1">Shaders/generic-ALS-base.vert</vertex-shader>
+        <fragment-shader n="1">Shaders/model-ALS-base.frag</fragment-shader>
+        <fragment-shader n="2">Shaders/hazes.frag</fragment-shader>
+        <fragment-shader n="3">Shaders/secondary_lights.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

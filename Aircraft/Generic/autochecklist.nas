@@ -102,6 +102,7 @@
 var checklists = nil;
 var auto = nil;
 var active = nil;
+var expedited = nil;
 var timeout_sec = nil;
 var timeout_start = nil;
 var wait_sec = nil;
@@ -125,6 +126,12 @@ var autochecklist_init = func()
     # items that display dialogs.
     #
     active = auto.initNode("active", 0, "BOOL");
+
+    # Flag to indicate that checklist execution is expedited, i.e. there
+    # is no wait time between items. Typically indicates an in-air start. Note
+    # that the expedited flag does not imply automated checklists are active.
+    #
+    expedited = auto.initNode("expedited", 0, "BOOL");
 
     # Timeout for completion of a checklist item. If the previous condition
     # is still not satisifed after this timeout, the checklist fails.
@@ -265,6 +272,7 @@ var complete_checklists = func(sequence, wait = 1)
         if (wait) {
             announce(startup_message.getValue());
         }
+        expedited.setValue(!wait);
         complete(node, wait);
     } else {
         announce("Could not find checklist sequence called '"~sequence~"'");

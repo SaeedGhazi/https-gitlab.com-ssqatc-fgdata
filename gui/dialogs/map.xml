@@ -15,15 +15,9 @@ command interface /autopilot/route-manager/input:
     <name>map</name>
     <layout>vbox</layout>
     <resizable>true</resizable>
-    <!-- mhab -->
     <default-padding>3</default-padding>
 
     <color>
-<!-- mhab commented out
-        <red type="float">0.41</red>
-        <green type="float">0.4</green>
-        <blue type="float">0.42</blue>
--->
         <alpha type="float">1.0</alpha>
     </color>
 
@@ -81,7 +75,7 @@ command interface /autopilot/route-manager/input:
     <group>
         <layout>hbox</layout>
         <stretch>true</stretch>
-        <halign>left</halign>
+        <halign>fill</halign>
 
         <!-- sidebar -->
         <group>
@@ -93,9 +87,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Fixes</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/draw-fixes</property>
                 <live>true</live>
                 <binding>
@@ -109,9 +100,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Navaids</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/draw-navaids</property>
                 <live>true</live>
                 <binding>
@@ -131,9 +119,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Traffic</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/draw-traffic</property>
                 <live>true</live>
                 <binding>
@@ -154,9 +139,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Data</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/draw-data</property>
                 <live>true</live>
                 <binding>
@@ -170,9 +152,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Flight History</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/draw-flight-history</property>
                 <live>true</live>
                 <binding>
@@ -204,9 +183,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Center on Acft</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/centre-on-aircraft</property>
                 <live>true</live>
                 <binding>
@@ -220,9 +196,6 @@ command interface /autopilot/route-manager/input:
             <checkbox>
                 <label>Aircraft Hdg Up</label>
                 <halign>left</halign>
-<!--
-                <pref-width>100</pref-width>
--->
                 <property>/gui/map/aircraft-heading-up</property>
                 <live>true</live>
                 <binding>
@@ -274,9 +247,8 @@ command interface /autopilot/route-manager/input:
             <stretch>true</stretch>
 
             <map>
-                <!-- <halign>fill</halign> -->
-                <valign>fill</valign>
                 <halign>fill</halign>
+                <valign>fill</valign>
                 <stretch>true</stretch>
                 <pref-height>400</pref-height>
                 <pref-width>600</pref-width>

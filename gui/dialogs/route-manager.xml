@@ -37,7 +37,7 @@ command interface /autopilot/route-manager/input:
                 return int(selection.getValue());
             }
 
-            var clear = func {             
+            var clear = func {
                 flightplan().cleanPlan();
                 selection.setIntValue(-1);
             }
@@ -62,16 +62,16 @@ command interface /autopilot/route-manager/input:
                 flightplan().deleteWP(sel_index());
             }
 
-            var route = func {            
+            var route = func {
                 var fp = flightplan();
                 var from = fp.getWP(sel_index() - 1);
                 var to = fp.getWP(sel_index());
-                
+
                 if ((from  == nil ) or (to == nil)) {
                     printlog('info', 'unable to route, invalid start ad end points');
                     return;
                 }
-                
+
                 var route = airwaysRoute(from, to);
                 fp.insertWaypoints(route, sel_index());
             }
@@ -104,11 +104,11 @@ command interface /autopilot/route-manager/input:
             var sids = dlg.getNode("sids", 1);
             var stars = dlg.getNode("stars", 1);
             var approaches = dlg.getNode("approaches", 1);
-            
+
             var updateRunways = func {
                 departureRunways.removeChildren("value");
                 destRunways.removeChildren("value");
- 
+
                 var apt = flightplan().departure;
                 if (apt != nil) {
                     var i=0;
@@ -132,13 +132,13 @@ command interface /autopilot/route-manager/input:
 
             var updateSIDs = func {
                 sids.removeChildren("value");
-   
+
                 var apt = flightplan().departure;
                 var rwy = flightplan().departure_runway;
                 if (apt == nil) {
                     return;
-                }                
-                
+                }
+
                 if (size(apt.sids(rwy)) == 0) {
                     sids.getNode("value[0]", 1).setValue("DEFAULT");
                     sids.getNode("value[1]", 1).setValue("(none)");
@@ -151,7 +151,7 @@ command interface /autopilot/route-manager/input:
                 foreach (var s; apt.sids(rwy)) {
                     var sid = apt.getSid(s);
                     var transVec = sid.transitions;
-                    
+
                     if (size(transVec) > 0) {
                         # list each transition of the SID
                         foreach (var trans; transVec) {
@@ -175,13 +175,13 @@ command interface /autopilot/route-manager/input:
                 if (apt == nil or apt.stars(rwy) == nil) {
                     return;
                 }
-                
+
                 var i=1;
                 stars.getNode("value[0]", 1).setValue("(none)");
                 foreach (var s; apt.stars(rwy)) {
                     var star = apt.getStar(s);
                     var transVec = star.transitions;
-                    
+
                     if (size(transVec) > 0) {
                         # list each transition of the STAR
                         foreach (var trans; transVec) {
@@ -197,23 +197,23 @@ command interface /autopilot/route-manager/input:
 
                 gui.dialog_update("route-manager", "star");
             }
-            
+
             var updateApproaches = func {
                 approaches.removeChildren("value");
                 var apt = flightplan().destination;
                 var rwy = flightplan().destination_runway;
-                
+
                 if (apt == nil) {
                     return;
                 }
-                
+
                 if (size(apt.getApproachList(rwy)) == 0) {
                     approaches.getNode("value[0]", 1).setValue("DEFAULT");
                     approaches.getNode("value[1]", 1).setValue("(none)");
                     gui.dialog_update("route-manager", "approach");
                     return;
                 }
-                
+
                 var i=1;
                 approaches.getNode("value[0]", 1).setValue("(none)");
                 foreach (var s; apt.getApproachList(rwy)) {
@@ -223,37 +223,37 @@ command interface /autopilot/route-manager/input:
 
                 gui.dialog_update("route-manager", "approach");
             }
-            
+
             var initPosition = func {
               var routeActive = routem.getNode("active").getValue();
               if (routeActive) return;
-              
+
               # FIXME have user waypoints check
               var fp = flightplan();
-              
+
               var airborne = getprop('/gear/gear[0]/wow') == 0;
               if (airborne) {
                 printlog('info', 'route-manager dialog, init in-air, clearing departure settings');
                 fp.departure = nil;
                 return;
               }
-              
-              
-              
+
+
+
               # we're on the ground, find the nearest airport to start from
               if (fp.departure == nil) {
                 var apts = findAirportsWithinRange(25.0);
                 if (size(apts) == 0) return; # no airports nearby
                 fp.departure = apts[0]; # use the closest one
               }
-              
+
               if (fp.departure_runway == nil) {
                 printlog('info', 'selecting departure runway');
                 var rwy = fp.departure.findBestRunwayForPos( geo.aircraft_position() );
                 fp.departure_runway = rwy;
               }
             }
-            
+
         # initialise departure values based on current position
             initPosition();
 
@@ -462,8 +462,8 @@ command interface /autopilot/route-manager/input:
                 <object-name>approach</object-name>
             </binding>
         </combo>
-        
-        
+
+
         <text>
             <row>1</row>
             <col>7</col>
@@ -570,6 +570,9 @@ command interface /autopilot/route-manager/input:
     <group>
         <layout>hbox</layout>
         <default-padding>2</default-padding>
+        <stretch>true</stretch>
+        <halign>fill</halign>
+        <valign>fill</valign>
 
         <!-- gap -->
         <text>

@@ -4,7 +4,6 @@
     <name>map-canvas</name>
     <layout>vbox</layout>
     <resizable>true</resizable>
-    <!-- mhab -->
     <default-padding>3</default-padding>
 
     <color>
@@ -65,12 +64,11 @@
     <group>
         <layout>hbox</layout>
         <stretch>true</stretch>
-        <halign>left</halign>
+        <halign>fill</halign>
 
         <!-- sidebar -->
         <group>
             <layout>vbox</layout>
-            <stretch>true</stretch>
             <halign>left</halign>
 
             <text>
@@ -181,7 +179,7 @@
                   <command>property-toggle</command>
                 </binding>
             </checkbox>
-            
+
             <checkbox>
                 <label>Flight History</label>
                 <halign>left</halign>
@@ -194,7 +192,7 @@
                   <command>property-toggle</command>
                 </binding>
             </checkbox>
- 
+
             <checkbox>
                 <label>Weather</label>
                 <halign>left</halign>
@@ -214,7 +212,7 @@
                   <command>property-toggle</command>
                 </binding>
             </checkbox>
- 
+
             <!-- layer only supported if tutorial system is active and targets specified-->
 	 <!--
             <checkbox>
@@ -236,7 +234,7 @@
                 </binding>
             </checkbox>
 		-->
-            
+
             <empty><stretch>true</stretch></empty>
 
             <checkbox>
@@ -362,7 +360,7 @@
                         );
 
                         ##
-                        # Styling: This is a bit crude at the moment, i.e. no dedicated APIs yet - but it's 
+                        # Styling: This is a bit crude at the moment, i.e. no dedicated APIs yet - but it's
                         # just there to prototype things for now
                         var Styles = {};
                         Styles.get = func(type) return Styles[type];
@@ -375,13 +373,13 @@
                         Styles.DME.animation_test = 0; # for prototyping animated symbols
 
                         Styles.DME.scale_factor = 0.4; # 40% (applied to whole group)
-                        Styles.DME.line_width = 3.0; 
+                        Styles.DME.line_width = 3.0;
                         Styles.DME.color_tuned = [0,1,0]; #rgb
                         Styles.DME.color_default = [1,1,0];  #rgb
 
                         Styles.APT = {};
                         Styles.APT.scale_factor = 0.4; # 40% (applied to whole group)
-                        Styles.APT.line_width = 3.0; 
+                        Styles.APT.line_width = 3.0;
                         Styles.APT.color_default = [0,0.6,0.85];  #rgb
                         Styles.APT.label_font_color = Styles.APT.color_default;
                         Styles.APT.label_font_size=28;
@@ -450,12 +448,16 @@
                     ]]></load></nasal>
                 </canvas>
                 <layout>hbox</layout>
+                <stretch>true</stretch>
+                <halign>fill</halign>
+                <valign>fill</valign>
             </group>
 
             <hrule/>
+
             <group>
                 <layout>hbox</layout>
-                
+
                 <button>
                     <name>zoomout</name>
                     <legend>out</legend>
@@ -471,7 +473,7 @@
                         </script>
                     </binding>
                 </button>
-                
+
                 <text>
                     <name>zoomdisplay</name>
                     <label>MMM</label>
@@ -479,7 +481,7 @@
                     <property>/gui/radar-mapstructure/zoom</property>
                     <live>true</live>
                 </text>
-                
+
                 <button>
                     <name>zoomin</name>
                     <legend>in</legend>

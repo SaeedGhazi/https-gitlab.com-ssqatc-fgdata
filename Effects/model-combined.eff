@@ -141,7 +141,7 @@ please see Docs/README.model-combined.eff for documentation
 		<scattering><use>/rendering/scene/scattering</use></scattering>
 		<terminator><use>/environment/terminator-relative-position-m</use></terminator>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
-    		<wetness><use>/environment/surface/wetness</use></wetness>
+		<wetness><use>/environment/surface/wetness</use></wetness>
 		<rnorm><use>/environment/rain-norm</use></rnorm>
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
@@ -432,7 +432,7 @@ please see Docs/README.model-combined.eff for documentation
 			   </vertex-program-two-side>
 			   
 			   <program>
-				<vertex-shader n="1">Shaders/ubershader.vert</vertex-shader>
+				<vertex-shader n="0">Shaders/model-ALS-ultra.vert</vertex-shader>
 			 	<fragment-shader n="1">Shaders/model-ALS-ultra.frag</fragment-shader>
 				<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
@@ -1142,21 +1142,6 @@ please see Docs/README.model-combined.eff for documentation
 			<value>
 			  <use>rembrandt</use>
 			</value>
-		  </uniform>
-		  <uniform>
-			  <name>lonDeg</name>
-			  <type>float</type>
-			  <value>
-				  <use>pos-lon</use>
-			  </value>
-		  </uniform>
-
-		  <uniform>
-			  <name>latDeg</name>
-			  <type>float</type>
-			  <value>
-				  <use>pos-lat</use>
-			  </value>
 		  </uniform>
 		  </pass>
 		</technique>

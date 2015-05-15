@@ -10,7 +10,8 @@
 					"directly or a set of manually defined parameters. Recommended for use with Multiplayer.");
         setprop("sim/gui/dialogs/metar/description[2]",
 					"Advanced weather engine that gives more detailed and realistic results based on METAR " ~
-					"data and a set of predefiend parameters.");
+					"data and a set of predefined parameters. Click on 'Apply' to run the engine, as the engine " ~
+					"does not automatically load upon startup.");
       
         var normalize_string = func(src) {
           if( src == nil ) src = "";
@@ -536,7 +537,7 @@
   <!--
         <pref-width>250</pref-width>
   -->
-        <pref-height>70</pref-height>
+        <pref-height>90</pref-height>
         <slider>15</slider>
         <editable>false</editable>
         <wrap>true</wrap>

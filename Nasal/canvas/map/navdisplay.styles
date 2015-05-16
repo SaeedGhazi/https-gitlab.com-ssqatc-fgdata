@@ -826,8 +826,8 @@ var NDStyles = {
 						var windSpd = getprop("environment/wind-speed-kt");
 						if(!nd.get_switch('toggle_true_north'))
 							windDir = windDir - getprop("environment/magnetic-variation-deg");
-						if(windDir < 0.5) windDir = 360 + windDir;
-						elsif(windDir >= 360.5) windDir = windDir - 360;
+						while(windDir < 0.5) windDir += 360;
+						while(windDir > 360.5) windDir -= 360;
 						if (windSpd > 6)
 							nd.windShown = 1;
 						if (nd.windShown != 0) {
@@ -943,6 +943,104 @@ var NDStyles = {
 						nd.symbols.dmeL.show();
 					},
 					is_false: func(nd) nd.symbols.dmeL.hide(),
+				},
+			},
+			# TACAN added by tikibar (J. Williams)
+			{
+				id:'TCNArrow',
+				impl: {
+					init: func(nd,symbol),
+#					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and !nd.get_switch('toggle_centered') and getprop("instrumentation/efis/enable-canvas-tacan-display")),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and !nd.get_switch('toggle_centered') and nd.efis_switches['toggle_tacan'] != nil),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_tacan')) {
+						    nd.symbols.TCNArrow.show();
+						    nd.symbols.TCNArrow.setRotation((getprop("instrumentation/tacan/indicated-bearing-true-deg")-nd.aircraft_source.get_hdg_tru())*D2R);
+						} else {
+						    nd.symbols.TCNArrow.hide();
+						}
+					},
+					is_false: func(nd) nd.symbols.TCNArrow.hide(),
+				},
+			},
+			{
+				id:'TCNArrow2',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.get_switch('toggle_centered') and nd.efis_switches['toggle_tacan'] != nil),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_tacan')) {
+						    nd.symbols.TCNArrow2.show();
+						    nd.symbols.TCNArrow2.setRotation((getprop("instrumentation/tacan/indicated-bearing-true-deg")-nd.aircraft_source.get_hdg_tru())*D2R);
+						} else {
+						    nd.symbols.TCNArrow2.hide();
+						}
+					},
+					is_false: func(nd) nd.symbols.TCNArrow2.hide(),
+				},
+			},
+			{
+				id:'TACAN',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_tacan')) {
+						    nd.symbols.TACAN.setText("TACAN");
+						    nd.symbols.TACAN.show();
+						} else {
+						    nd.symbols.TACAN.hide();
+						}
+					},
+					is_false: func(nd) nd.symbols.TACAN.hide(),
+				},
+			},
+			{
+				id:'TACANId',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_tacan') and getprop("instrumentation/tacan/in-range")) {
+						    nd.symbols.TACANId.setText(getprop("instrumentation/tacan/ident"));
+						    nd.symbols.TACANId.show();
+						} else {
+						    nd.symbols.TACANId.hide();
+						}
+					},
+					is_false: func(nd) nd.symbols.TACANId.hide(),
+				},
+			},
+			{
+				id:'TACANdme',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_tacan') and getprop("instrumentation/tacan/in-range")) {
+						    nd.symbols.TACANdme.setText("DIST");
+						    nd.symbols.TACANdme.show();
+						} else {
+						    nd.symbols.TACANdme.hide();
+						}
+					},
+					is_false: func(nd) nd.symbols.TACANdme.hide(),
+				},
+			},
+			{
+				id:'TACANdmeDist',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					is_true: func(nd) {
+						if (nd.get_switch('toggle_tacan') and getprop("instrumentation/tacan/in-range")) {
+						    nd.symbols.TACANdmeDist.setText(sprintf("%3.1f",getprop("instrumentation/tacan/indicated-distance-nm")));
+						    nd.symbols.TACANdmeDist.show();
+						} else {
+						    nd.symbols.TACANdmeDist.hide();
+						}
+					},
+					is_false: func(nd) nd.symbols.TACANdmeDist.hide(),
 				},
 			},
 

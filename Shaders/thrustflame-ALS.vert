@@ -1,5 +1,7 @@
 // -*-C++-*-
 
+#version 120
+
 varying vec3 vertex;
 varying vec3 viewDir;
 

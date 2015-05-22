@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PropertyList>
 
   <!--
@@ -758,7 +758,7 @@
         </condition>
         <command>property-adjust</command>
         <property alias="../../../../params/nav-frq-standby"/>
-        <factor>0.025</factor>
+        <factor>0.05</factor>
         <min>0.0</min>
         <max>1.0</max>
         <wrap>true</wrap>

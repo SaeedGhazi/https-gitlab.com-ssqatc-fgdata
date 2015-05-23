@@ -7,11 +7,13 @@ varying vec3 viewDir;
 
 uniform float osg_SimulationTime;
 uniform float thrust_collimation;
+uniform float flame_radius_fraction;
 uniform float thrust_density;
 uniform float base_flame_density;
 uniform float shock_frequency;
 uniform float noise_strength;
 uniform float noise_scale;
+uniform float deflection_coeff;
 
 uniform float flame_color_low_r;
 uniform float flame_color_low_g;
@@ -38,7 +40,7 @@ float spherical_smoothstep (in vec3 pos)
 
 float l = length(vec3 (pos.x/2.0, pos.y,pos.z) );
 
-return 10.0 * thrust_density * base_flame_density *  (1.0 - smoothstep(0.1, 0.2, l));
+return 10.0 * thrust_density * base_flame_density *  (1.0 - smoothstep(0.5* flame_radius_fraction, flame_radius_fraction, l));
 
 }
 
@@ -51,12 +53,14 @@ float thrust_flame (in vec3 pos)
 //float noise = Noise3D(vec3(pos.x - osg_SimulationTime * 20.0 , pos.y, pos.z), 0.3);
 float noise = 0.0;
 
-float d_rad = length(pos.yz);
+pos.z +=8.0 * deflection_coeff;
+
+float d_rad = length(pos.yz - vec2 (0.0, deflection_coeff * pos.x * pos.x));
 //float longFade = smoothstep(0.0, 5.0, pos.x) ;
 float longFade = pos.x/5.0;
 
 float density = 1.0 - longFade;
-float radius = 0.2 + thrust_collimation * 1.2 * pow((pos.x+0.1),0.5);
+float radius = flame_radius_fraction + thrust_collimation * 1.0 * pow((pos.x+0.1),0.5);
 
 if (d_rad > radius) {return 0.0;}
 
@@ -71,7 +75,7 @@ density *= (1.0 - smoothstep(0.125, radius, d_rad)) * (1.0 - noise_strength + no
 if (use_shocks == 1)
 	{
 	float shock = sin(pos.x * 10.0 * shock_frequency);
-	density += shock * shock * shock * shock * (1.0 - longFade) * (1.0 - smoothstep(0.05, 0.1, d_rad)) *  (1.0 - smoothstep(0.0, 1.0, thrust_collimation));
+	density += shock * shock * shock * shock * (1.0 - longFade) * (1.0 - smoothstep(0.25*flame_radius_fraction, 0.5*flame_radius_fraction, d_rad)) *  (1.0 - smoothstep(0.0, 1.0, thrust_collimation));
 	}
 
 

@@ -139,12 +139,12 @@ void main (void)
 		vec3 wVertVec	= normalize(reflMatrix * vec4(viewVec,0.0)).xyz;
 		vec3 wNormal	= normalize(reflMatrix * vec4(N,0.0)).xyz;
 
-		float latRad = radians(90. - latDeg);
+		float latRad = radians(90.-latDeg);
 		float lonRad = radians(lonDeg);
 
-		mat3 rotCorrX = rotX(-lonRad);
 		mat3 rotCorrY = rotY(latRad);
-		mat3 reflCorr = rotCorrX * rotCorrY;
+		mat3 rotCorrZ = rotZ(lonRad);
+		mat3 reflCorr = rotCorrY * rotCorrZ;
 		wRefVec	= reflect(wVertVec,wNormal);
 		wRefVec = normalize(reflCorr * wRefVec);
 	} else {	///static reflection

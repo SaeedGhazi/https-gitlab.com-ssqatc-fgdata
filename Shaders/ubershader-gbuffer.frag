@@ -142,12 +142,12 @@ void main (void)
 		float latRad = radians(90. - latDeg);
 		float lonRad = radians(lonDeg);
 
-		mat3 rotCorrX = rotX(-lonRad);
 		mat3 rotCorrY = rotY(latRad);
-		mat3 reflCorr = rotCorrX * rotCorrY;
+		mat3 rotCorrZ = rotZ(lonRad);
+		mat3 reflCorr = rotCorrY * rotCorrZ;
 		wRefVec	= reflect(wVertVec,wNormal);
 		wRefVec = normalize(reflCorr * wRefVec);
-	} else if (refl_enabled > 0) {	///static reflection
+	} else {	///static reflection
 		wRefVec = normalize(reflMatrix * vec4(wRefVec,0.0)).xyz;
 	}
 

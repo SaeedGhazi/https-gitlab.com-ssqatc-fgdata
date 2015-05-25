@@ -129,10 +129,10 @@ please see Docs/README.model-combined.eff for documentation
 			<use>orientation/model/roll-deg</use>
 		</model-roll>
 		<pos-lon>
-			<use>position/longitude-deg</use>
+			<use>position/model/longitude-deg</use>
 		</pos-lon>
 		<pos-lat>
-			<use>position/latitude-deg</use>
+			<use>position/model/latitude-deg</use>
 		</pos-lat>
 		<!-- 	fog include	 -->
 		<visibility><use>/environment/ground-visibility-m</use></visibility>

@@ -246,6 +246,22 @@
   </filter>
 
   <filter>
+	  <name>EnvironmentInterpolator:model:latitude</name>
+	  <input>/position/latitude-deg</input>
+	  <output>/position/model/latitude-deg</output>
+	  <type>gain</type>
+	  <gain>1</gain>
+  </filter>
+
+  <filter>
+	  <name>EnvironmentInterpolator:model:longitude</name>
+	  <input>/position/longitude-deg</input>
+	  <output>/position/model/longitude-deg</output>
+	  <type>gain</type>
+	  <gain>1</gain>
+  </filter>
+
+  <filter>
     <name>EnvironmentInterpolator:wave:amp</name>
     <type>gain</type>
     <gain>1</gain>

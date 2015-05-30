@@ -360,6 +360,46 @@ var Group = {
 
     return children;
   },
+  # Recursively get all children of class specified by first param
+  getChildrenOfType: func(type, array = nil){
+      var children = array;
+      if(children == nil)
+          children = [];
+      var my_children = me.getChildren();
+      if(typeof(type) != 'vector')
+          type = [type];
+      foreach(var c; my_children){
+          foreach(var t; type){
+              if(isa(c, t)){
+                  append(children, c);
+              }
+          }
+          if(isa(c, canvas.Group)){
+              c.getChildrenOfType(type, children);
+          }
+      }
+      return children;
+  },
+  # Set color to children of type Path and Text. It is possible to optionally
+  # specify which types of children should be affected by passing a vector as
+  # the last agrument, ie. my_group.setColor(1,1,1,[Path]);
+  setColor: func(){
+      var color = arg;
+      var types = [Path, Text];
+      var arg_c = size(color);
+      if(arg_c > 1 and typeof(color[-1]) == 'vector'){
+          types = color[-1];
+          color = subvec(color, 0, arg_c - 1);
+      }
+      var children = me.getChildrenOfType(types);
+      if(typeof(color) == 'vector'){
+          var first = color[0];
+          if(typeof(first) == 'vector')
+              color = first;
+      }
+      foreach(var c; children)
+      c.setColor(color);
+  },
   # Get first child with given id (breadth-first search)
   #
   # @note Use with care as it can take several miliseconds (for me eg. ~2ms).
@@ -460,11 +500,12 @@ var Map = {
 
     return me;
   },
-  addLayer: func(factory, type_arg=nil, priority=nil, style=nil, options=nil, visible=1)
+  addLayer: func(factory, type_arg=nil, priority=nil, style=nil, opts=nil, visible=1)
   {
     if(contains(me.layers, type_arg))
       printlog("warn", "addLayer() warning: overwriting existing layer:", type_arg);
 
+    var options = opts;
     # Argument handling
     if (type_arg != nil) {
       var layer = factory.new(type:type_arg, group:me, map:me, style:style, options:options, visible:visible);

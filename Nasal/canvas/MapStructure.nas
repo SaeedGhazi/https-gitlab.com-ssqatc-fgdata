@@ -261,6 +261,17 @@ var hashdup = func(_,rkeys=nil) {
 	var h={}; var k=rkeys!=nil?rkeys:members(_);
 	foreach (var k;k) h[tryintern(k)]=member(_,k); h
 }
+var opt_member = func(h,k) {
+	if (contains(h, k)) return h[k];
+	if (contains(h, "parents")) {
+		var _=h.parents;
+		for (var i=0;i<size(_);i+=1){
+			var v = opt_member(_[i], k);
+			if (v != nil) return v;
+		}
+	}
+	return nil;
+}
 var member = func(h,k) {
 	if (contains(h, k)) return h[k];
 	if (contains(h, "parents")) {
@@ -434,6 +445,118 @@ var Symbol = {
 			t.setColor(color);
 		return t;
 	},
+	# Helper method that can be used to create a formatted String using
+	# values extracted from the current model.
+	#
+	# SYNOPSIS:
+	#
+	#   symbol.formattedString(format, model_property_names)
+	#
+	#   Arguments:
+	#       - format: string
+	#       - model_property_names: a vector of strings representing the model
+	#                               property names to be used as arguments
+	#
+	# EXAMPLE:
+	#
+	#   var label = waypoint.formattedString('Waypoint %s: lat %.4f, lng %.4f', [model.id, model.lat, model.lon]);
+	formattedString: func(frmt, model_props){
+		if(me.model == nil) return frmt;
+		var args = [];
+		foreach(var prop; model_props){
+			if(contains(me.model, prop)){
+				var val = me.model[prop];
+				var tp = typeof(val);
+				if(tp != 'scalar'){
+					val = '';
+					#printlog("warn", "formattedString: invalid type for "~prop~" (" ~ tp ~ ")");
+				} else {
+					append(args, val);
+				}
+			}
+		}
+		return call(sprintf, [frmt] ~ args);
+	},
+
+	# Wrapper method for accessing options. It allows to pass a default value
+	# if the requested option is not defined.
+	#
+	# EXAMPLE:
+	#      var ok = (contains(me.options, 'enabled') ? me.options.enabled : 0);
+	#      var ok = me.getOption('enabled', 0);
+	getOption: func(name,  default = nil){
+		var opt = me.options;
+		if(opt == nil)
+			opt = me.layer.options;
+		if(opt == nil) return default;
+		var val = opt_member(opt, name);
+		if(val == nil) return default;
+		return val;
+	},
+
+	# Wrapper method for accessing style. It allows to pass a default value
+	# if the requested style is not defined.
+	# It also automatically resolves style properties when they're defined as
+	# functions, by calling the corresponding function using the 'me' context
+	#
+	# EXAMPLE:
+	#
+	#   me.style = {
+	#       color: [1,1,1],
+	#       line_color: func(){
+	#           me.model.tuned ? [0,0,1] : [1,1,1]
+	#       }
+	#   }
+	#   var color = me.getStyle('color'); # --> [1,1,1]
+	#   me.model.tuned = 1;
+	#   var line_color = me.getStyle('line_color'); # --> [0,0,1]
+	#   var txt_color = me.getStyle('text_color', [1,1,1]); # --> [1,1,1]
+	getStyle: func(name, default = nil){
+		var st = me.style;
+		if(st == nil)
+			st = me.layer.style;
+		if(st == nil) return default;
+		var val = opt_member(st, name);
+		if(typeof(val) == 'func'){
+			val = (call(val,[],me));
+		}
+		if(val == nil) return default;
+		return val;
+	},
+	getLabelFromModel: func(default_val = nil){
+		if(me.model == nil) return default_val;
+		if(default_val == nil and contains(me.model, 'id'))
+		default_val = me.model.id;
+		var label_content = me.getOption('label_content');
+		if(label_content == nil) return default_val;
+		if(typeof(label_content) == 'scalar')
+			label_content = [label_content];
+		var format_s = me.getOption('label_format');
+		var label = '';
+		if(format_s == nil){
+			format_s = "%s";
+		}
+		return me.formattedString(format_s, label_content);
+	},
+	# Executes callback function specified by the first argument with
+	# variable arguments. The callback is executed within the 'me' context.
+	# Callbacks must be defined inside the options hash.
+	#
+	# EXAMPLE:
+	#
+	#   me.options = {
+	#       dump_callback: func(){
+	#           print('Waypoint '~ me.model.id);
+	#       }
+	#   }
+	#   me.callback('dump');
+	callback: func(name, args...){
+		name = name ~'_callback';
+		var f = me.getOption(name);
+		if(typeof(f) == 'func'){
+			return call(f, args, me);
+		}
+	}
 }; # of Symbol
 
 
@@ -611,6 +734,7 @@ var DotSym = {
 		} else
 		me.element.show();
 		me.draw();
+		if(me.getOption('disable_position', 0)) return;
 		var pos = me.controller.getpos(me.model);
 		if (size(pos) == 2)
 			pos~=[nil]; # fall through
@@ -632,17 +756,27 @@ var SVGSymbol = {
 	element_type: "group",
 	cacheable: 0,
 	init: func() {
+		me.callback('init_before');
+		var opt_path = me.getStyle('svg_path');
+		if(opt_path != nil)
+			me.svg_path = opt_path;
 		if (!me.cacheable) {
-			canvas.parsesvg(me.element, me.svg_path);
+			if(me.svg_path != nil and me.svg_path != '')
+				canvas.parsesvg(me.element, me.svg_path);
 			# hack:
 			if (var scale = me.layer.style['scale_factor'])
 				me.element.setScale(scale);
+			if ((var transl = me.layer.style['translate']) != nil)
+				me.element.setTranslation(transl);
 		} else {
 			__die("cacheable not implemented yet!");
 		}
+		me.callback('init_after');
 		me.draw();
 	},
-	draw: func,
+	draw: func{
+		me.callback('draw');
+	},
 }; # of SVGSymbol
 
 
@@ -685,7 +819,13 @@ var LineSymbol = {
 # For the instances returned from makeinstance:
 	new: func(group, layer, model, controller=nil) {
 		if (me == nil) __die("Need me reference for LineSymbol.new()");
-		if (typeof(model) != 'vector') __die("LineSymbol.new(): need a vector of points");
+		if (typeof(model) != 'vector') {
+			if(typeof(model) == 'hash'){
+				if(!contains(model, 'path'))
+					__die("LineSymbol.new(): model hash requires path");
+			}
+			else __die("LineSymbol.new(): need a vector of points or a hash");
+		}
 		var m = {
 			parents: [me],
 			group: group,
@@ -705,19 +845,32 @@ var LineSymbol = {
 # Non-static:
 	draw: func() {
 		if (!me.needs_update) return;
+		me.callback('draw_before');
 		printlog(_MP_dbg_lvl, "redrawing a LineSymbol "~me.layer.type);
 		me.element.reset();
 		var cmds = [];
 		var coords = [];
 		var cmd = canvas.Path.VG_MOVE_TO;
-		foreach (var m; me.model) {
-			var (lat,lon) = me.controller.getpos(m);
-			append(coords,"N"~lat);
-			append(coords,"E"~lon);
-			append(cmds,cmd); cmd = canvas.Path.VG_LINE_TO;
+		var path = me.model;
+		if(typeof(path) == 'hash'){
+			path = me.model.path;
+			if(path == nil) 
+				__die("LineSymbol model requires a 'path' member (vector)");
+		}
+		foreach (var m; path) {
+			if(size(keys(m)) >= 2){
+				var (lat,lon) = me.controller.getpos(m);
+				append(coords,"N"~lat);
+				append(coords,"E"~lon);
+				append(cmds,cmd); 
+				cmd = canvas.Path.VG_LINE_TO;
+			} else {
+				cmd = canvas.Path.VG_MOVE_TO;
+			}
 		}
 		me.element.setDataGeo(cmds, coords);
 		me.element.update(); # this doesn't help with flickering, it seems
+		me.callback('draw_after');
 	},
 	del: func() {
 		printlog(_MP_dbg_lvl, "LineSymbol.del()");
@@ -791,6 +944,24 @@ var SymbolLayer = {
 		assert_m(controller.parents[0], "parents");
 		if (controller.parents[0].parents[0] != SymbolLayer.Controller)
 			__die("MultiSymbolLayer: OOP error");
+		if(options != nil){
+			var listeners = opt_member(controller, 'listeners');
+			var listen = opt_member(options, 'listen');
+			if (listen != nil and listeners != nil){
+				var listen_tp = typeof(listen);
+				if(listen_tp != 'vector' and listen_tp != 'scalar')
+					__die("Options 'listen' cannot be a "~ listen_tp);
+				if(typeof(listen) == 'scalar')
+					listen = [listen];
+				foreach(var node_name; listen){
+					var node = opt_member(options, node_name);
+					if(node == nil)
+						node = node_name;
+					append(controller.listeners,
+						   setlistener(node, func call(m.update,[],m),0,0));
+				}
+			}
+		}
 		m.controller = controller;
 	},
 # For instances:
@@ -1010,6 +1181,67 @@ var SingleSymbolLayer = {
 # set up a cache for 32x32 symbols (initialized below in load_MapStructure)
 var SymbolCache32x32 = nil;
 
+var MapStructure = {
+    # Generalized load methods used to load various symbols, layer controllers,...
+    loadFile : func(file, name) {
+        if (name == nil)
+            var name = split("/", file)[-1];
+        var code = io.readfile(file);
+        var code = call(func compile(code, file), [code], var err=[]);
+        if (size(err)) {
+            if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
+                var e = split(" at line ", err[0]);
+                if (size(e) == 2)
+                err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
+            }
+            for (var i = 1; (var c = caller(i)) != nil; i += 1)
+            err ~= subvec(c, 2, 2);
+            debug.printerror(err);
+            return;
+        }
+        #code=bind(
+        call(code, nil, nil, var hash = {});
+
+        # validate
+        var url = ' http://wiki.flightgear.org/MapStructure#';
+        # TODO: these rules should be extended for all main files lcontroller/scontroller and symbol
+        var checks = [
+            { extension:'symbol', symbol:'update', type:'func', error:' update() must not be overridden:', id:300},
+            # Sorry, this one doesn't work with the new LineSymbol
+            #					{ extension:'symbol', symbol:'draw', type:'func', required:1, error:' symbol files need to export a draw()             routine:', id:301},
+            # Sorry, this one doesn't work with the new SingleSymbolLayer
+            #					{ extension:'lcontroller', symbol:'searchCmd', type:'func', required:1, error:' lcontroller without searchCmd method:', id:100},
+        ];
+
+
+        var makeurl = func(scope, id) url ~ scope ~ ':' ~ id;
+        var bailout = func(file, message, scope, id) __die(file~message~"\n"~makeurl(scope,id) );
+
+        var current_ext = split('.', file)[-1];
+        foreach(var check; checks) {
+            # check if we have any rules matching the current file extension
+            if (current_ext == check.extension) {
+                # check for fields that must not be overridden
+                if (check['error'] != nil and
+                    hash[check.symbol]!=nil and !check['required']  and
+                    typeof(hash[check.symbol])==check.type ) {
+                    bailout(file,check.error,check.extension,check.id);
+                }
+
+                # check for required fields
+                if (check['required'] != nil and
+                    hash[check.symbol]==nil and
+                    typeof( hash[check.symbol]) != check.type) {
+                    bailout(file,check.error,check.extension,check.id);
+                }
+            }
+        }
+
+        return hash;
+    }
+};
+
+
 var load_MapStructure = func {
 	canvas.load_MapStructure = func; # disable any subsequent attempt to load
 
@@ -1063,62 +1295,6 @@ var load_MapStructure = func {
 	####### LOAD FILES #######
 	(func {
 		var FG_ROOT = getprop("/sim/fg-root");
-		var load = func(file, name) {
-			if (name == nil)
-				var name = split("/", file)[-1];
-			var code = io.readfile(file);
-			var code = call(func compile(code, file), [code], var err=[]);
-			if (size(err)) {
-				if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
-					var e = split(" at line ", err[0]);
-					if (size(e) == 2)
-						err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
-				}
-				for (var i = 1; (var c = caller(i)) != nil; i += 1)
-					err ~= subvec(c, 2, 2);
-				debug.printerror(err);
-				return;
-			}
-			#code=bind(
-			call(code, nil, nil, var hash = {});
-
-			# validate
-			var url = ' http://wiki.flightgear.org/MapStructure#';
-			# TODO: these rules should be extended for all main files lcontroller/scontroller and symbol
-			var checks = [
-					{ extension:'symbol', symbol:'update', type:'func', error:' update() must not be overridden:', id:300},
-					# Sorry, this one doesn't work with the new LineSymbol
-#					{ extension:'symbol', symbol:'draw', type:'func', required:1, error:' symbol files need to export a draw() routine:', id:301},
-					# Sorry, this one doesn't work with the new SingleSymbolLayer
-#					{ extension:'lcontroller', symbol:'searchCmd', type:'func', required:1, error:' lcontroller without searchCmd method:', id:100},
-					];
-
-
-			var makeurl = func(scope, id) url ~ scope ~ ':' ~ id;
-			var bailout = func(file, message, scope, id) __die(file~message~"\n"~makeurl(scope,id) );
-
-			var current_ext = split('.', file)[-1];
-			foreach(var check; checks) {
-				# check if we have any rules matching the current file extension
-				if (current_ext == check.extension) {
-					# check for fields that must not be overridden
-					if (check['error'] != nil and 
-						hash[check.symbol]!=nil and !check['required']  and 
-						typeof(hash[check.symbol])==check.type ) {
-						bailout(file,check.error,check.extension,check.id);
-					}
-
-					# check for required fields
-					if (check['required'] != nil and 
-						hash[check.symbol]==nil and
-						typeof( hash[check.symbol]) != check.type) {
-						bailout(file,check.error,check.extension,check.id);
-					}
-				}
-			}
-
-			return hash;
-		};
 
 		# sets up a shared symbol cache, which will be used by all MapStructure maps and layers
 		canvas.SymbolCache32x32 = SymbolCache.new(1024,32);
@@ -1146,7 +1322,7 @@ var load_MapStructure = func {
 		foreach (var d; dep_names) {
 			foreach (var f; deps[d]) {
 				var name = split(".", f)[0];
-				load(contents_dir~f, name);
+				MapStructure.loadFile(contents_dir~f, name);
 			}
 		}
 	})();

@@ -103,28 +103,42 @@ var init_cache = func {
 #
 var init = func {
 	# debug.dump(me.layer.style);
-	me.icon_dme = me.element.createChild("path")
-		.moveTo(-15,0)
-		.line(-12.5,-7.5)
-		.line(7.5,-12.5)
-		.line(12.5,7.5)
-		.lineTo(7.5,-12.5)
-		.line(12.5,-7.5)
-		.line(7.5,12.5)
-		.line(-12.5,7.5)
-		.lineTo(15,0)
-		.lineTo(7.5,12.5)
-		.vert(14.5)
-		.horiz(-14.5)
-		.vert(-14.5)
-		.close()
-		.setStrokeLineWidth( me.layer.style.line_width );
+	var draw_func = me.getOption('draw_dme');
+	if(typeof(draw_func) == 'func'){
+		me.icon_dme = draw_func(me);
+	} else {
+		me.icon_dme = me.element.createChild("path")
+			.moveTo(-15,0)
+			.line(-12.5,-7.5)
+			.line(7.5,-12.5)
+			.line(12.5,7.5)
+			.lineTo(7.5,-12.5)
+			.line(12.5,-7.5)
+			.line(7.5,12.5)
+			.line(-12.5,7.5)
+			.lineTo(15,0)
+			.lineTo(7.5,12.5)
+			.vert(14.5)
+			.horiz(-14.5)
+			.vert(-14.5)
+			.close()
+			.setStrokeLineWidth( me.layer.style.line_width );
+	}
 
 	# finally scale the symbol as requested, this is done last so that people can override this when creating the layer
 	me.apply_scale();
 	if (me.layer.style.animation_test) {
 		me.timer = maketimer(0.33, func me.animate() );
 		me.timer.start();
+	}
+	if(me.getOption('draw_text', 0)){
+		me.dme_text = me.element.createChild("text")
+			.setDrawMode( canvas.Text.TEXT )
+			.setText(me.model.id)
+			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+			.setFontSize(28)
+			.setColor(me.getStyle('text_color', [1,1,1]))
+			.setTranslation(me.getStyle('translation', [45,25]));
 	}
 	me.draw();
 }

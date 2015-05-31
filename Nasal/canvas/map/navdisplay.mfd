@@ -255,6 +255,7 @@ var NavDisplay = {
 		nd_options = default_hash(nd_options, me.df_options);
 		me.options = nd_options;
 		me.route_driver = nil;
+		if (me.options == nil) me.options = {};
 		if (contains(me.options, 'route_driver')) {
 			me.route_driver = me.options.route_driver;
 		}
@@ -290,11 +291,11 @@ var NavDisplay = {
 			me.symbols[element] = me.nd.getElementById(element).updateCenter();
 		
 		var map_rect = [124, 1024, 1024, 0];
-		var map_opts = me.options.map;
+		var map_opts = me.options['map'];
 		if (map_opts == nil) map_opts = {};
-		if (typeof(map_opts.rect) == 'vector')
+		if (typeof(map_opts['rect']) == 'vector')
 			map_rect = map_opts.rect;
-		map_rect = join(', ', map_rect);
+		map_rect = string.join(', ', map_rect);
 
 		me.map = me.nd.createChild("map","map")
 			.set("clip", map_rect)

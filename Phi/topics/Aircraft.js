@@ -27,6 +27,8 @@ define([
 
         self.config = ko.observable({});
 
+        self.thumbnailUrl = "/aircraft-dir/thumbnail.jpg?N=" + Date.now();
+
         jquery.get('/aircraft-dir/Phi/config.json', null, function(config) {
             self.config(config);
             

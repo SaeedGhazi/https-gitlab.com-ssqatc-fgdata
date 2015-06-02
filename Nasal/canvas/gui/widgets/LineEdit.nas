@@ -149,7 +149,9 @@ gui.widgets.LineEdit = {
       if( me._view == nil )
         return;
 
-      if( e.key == "Backspace" )
+      if( e.key == "Enter" )
+        me._trigger("editingFinished", {text: me.text()}); # TODO validator/etc.
+      else if( e.key == "Backspace" )
         me.backspace();
       else if( e.key == "Delete" )
         me.del();

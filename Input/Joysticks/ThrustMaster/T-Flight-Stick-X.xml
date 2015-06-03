@@ -28,7 +28,11 @@ by Joffrey Paris
   </binding>
  </axis>
 
- <axis n="2">
+ <axis>
+  <number>
+	<windows>2</windows>
+  	<unix>3</unix>
+  </number>
   <desc>Increase/Reduce Throttle</desc>
   <binding>
    <command>nasal</command>
@@ -36,7 +40,11 @@ by Joffrey Paris
   </binding>
  </axis>
 
- <axis n="3">
+ <axis>
+  <number>
+	<windows>3</windows>
+  	<unix>2</unix>
+  </number>
   <desc>Rudder Left/Right</desc>
   <binding>
    <command>property-scale</command>
@@ -45,7 +53,11 @@ by Joffrey Paris
   </binding>
  </axis>
 
- <axis n="6">
+ <axis>
+  <number>
+	<windows>6</windows>
+  	<unix>4</unix>
+  </number>
   <desc>View Direction</desc>
   <low>
    <repeatable>true</repeatable>
@@ -65,7 +77,10 @@ by Joffrey Paris
   </high>
  </axis>
 
- <axis n="7">
+ <axis>
+  <number>
+	<windows>7</windows>
+  </number>
   <desc>View Elevation</desc>
   <low>
    <repeatable>true</repeatable>
@@ -81,6 +96,29 @@ by Joffrey Paris
     <command>property-adjust</command>
     <property>/sim/current-view/goal-pitch-offset-deg</property>
     <step type="double">2.0</step>
+   </binding>
+  </high>
+ </axis>
+
+ <axis>
+  <number>
+	<unix>5</unix>
+  </number>
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">2.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-2.0</step>
    </binding>
   </high>
  </axis>

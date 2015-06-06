@@ -83,6 +83,7 @@
 	<mp-chat-menu>Chat Menu</mp-chat-menu>
 	<mp-list>Pilot List</mp-list>
 	<mp-carrier>MPCarrier Selection</mp-carrier>
+	<lag-adjust>lag options</lag-adjust>
 
 	<!-- Debug menu -->
 	<debug>Debug</debug>

@@ -771,6 +771,14 @@ Started September 2000 by David Megginson, david@megginson.com
       <callsign type="string" userarchive="y">callsign</callsign>
       <selected-server type="string" userarchive="y"/>
       <txhost type="string" preserve="y"/>
+      <lag>
+		<range type="float" userarchive="y">3.0</range>
+		<offset type="float" userarchive="y">0</offset>
+		<master type="bool" userarchive="y">0</master>
+		<spectator type="bool" userarchive="y">0</spectator>
+		<spectator-offset type="float" userarchive="y">0</spectator-offset>
+		<apply-close type="bool" userarchive="y">0</apply-close>
+	  </lag>
     </multiplay>
     <user>
       <callsign type="string" preserve="y">Golf Foxtrot Sierra</callsign>

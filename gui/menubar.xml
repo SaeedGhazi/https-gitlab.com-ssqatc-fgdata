@@ -547,6 +547,13 @@
 			</binding>
 		</item>
 
+		<item>
+			<name>lag-adjust</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>lag-adjust</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

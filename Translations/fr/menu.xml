@@ -97,7 +97,7 @@
     <mp-chat-menu>Menu de clavardage</mp-chat-menu>   <!-- English: "Chat Menu" -->
     <mp-list>Liste des pilotes</mp-list>   <!-- English: "Pilot List" -->
     <mp-carrier>Choix du porte-avions multijoueurs</mp-carrier>   <!-- English: "MPCarrier Selection" -->
-
+	<lag-adjust>Correction de lag</lag-adjust>
     <!-- Debug menu -->
     <debug>Débogage</debug>   <!-- English: "Debug" -->
     <!-- Note: Debug menu items may not need to be translated

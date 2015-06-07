@@ -5,6 +5,10 @@
   <path>A330-MRTT.ac</path>
 
   <animation>
+    <enable-hot>false</enable-hot>
+  </animation>
+
+  <animation>
     <object-name>fuselage</object-name>
     <object-name>ailes</object-name>
     <object-name>ailes2</object-name>

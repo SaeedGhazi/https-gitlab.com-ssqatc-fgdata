@@ -37,6 +37,24 @@ if (angularDist < lightRadius)
 else return vec3 (0.0,0.0,0.0);
 }
 
+vec3 flashlight(in vec3 color, in float radius)
+{
+
+vec2 center = vec2 (float(display_xsize) * 0.5, float(display_ysize) * 0.4);
+
+float headlightIntensity;
+float lightRadius = (float(display_xsize) *radius /field_of_view);
+float angularDist = length(gl_FragCoord.xy -center);
+
+if (angularDist < lightRadius)
+ 	{
+ 	headlightIntensity = pow(cos(angularDist/lightRadius * 1.57075),2.0);
+ 	return headlightIntensity * color;
+ 	}
+else return vec3 (0.0,0.0,0.0);
+}
+
+
 vec3 landing_light(in float offset)
 {
 
@@ -68,4 +86,5 @@ if (angularDist < lightRadius)
 	return  landingLightIntensity * vec3 (0.5,0.5, 0.5);
 	}
 else return vec3 (0.0,0.0,0.0);
+
 }

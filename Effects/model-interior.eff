@@ -25,6 +25,10 @@
 	<implicit-lightmap-threshold-high type="float">1.5</implicit-lightmap-threshold-high>
 	<implicit-lightmap-emit-color type="vec3d">1.0 1.0 1.0</implicit-lightmap-emit-color>
 	<implicit-lightmap-intensity type="float">0.0</implicit-lightmap-intensity>
+	<light-filter-one type="vec3d">0.5 0.5 0.5</light-filter-one>
+	<light-filter-two type="vec3d">0.9 0.2 0.2</light-filter-two>
+	<light-radius type="float">9.6</light-radius>
+	<use_flashlight><use>/sim/rendering/als-secondary-lights/use-flashlight</use></use_flashlight>
   </parameters>
 
   <technique n="4">
@@ -172,6 +176,21 @@
         <value><use>implicit-lightmap-emit-color</use></value>
      </uniform>
      <uniform>
+        <name>light_filter_one</name>
+        <type>float-vec3</type>
+        <value><use>light-filter-one</use></value>
+     </uniform>
+     <uniform>
+        <name>light_filter_two</name>
+        <type>float-vec3</type>
+        <value><use>light-filter-two</use></value>
+     </uniform>
+     <uniform>
+        <name>light_radius</name>
+        <type>float</type>
+        <value><use>light-radius</use></value>
+     </uniform>
+     <uniform>
         <name>threshold_low</name>
         <type>float</type>
         <value><use>implicit-lightmap-threshold-low</use></value>
@@ -186,6 +205,31 @@
         <type>float</type>
         <value><use>implicit-lightmap-intensity</use></value>
      </uniform>
+     <uniform>
+        <name>view_pitch_offset</name>
+        <type>float</type>
+        <value><use>view_pitch_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>view_heading_offset</name>
+        <type>float</type>
+        <value><use>view_heading_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>field_of_view</name>
+        <type>float</type>
+        <value><use>view_fov</use></value>
+      </uniform>
+     <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
@@ -215,6 +259,11 @@
         <name>implicit_lightmap_enabled</name>
         <type>int</type>
         <value><use>implicit-lightmap-enabled</use></value>
+      </uniform>
+      <uniform>
+ 	<name>use_flashlight</name>
+ 	<type>int</type>
+ 	<value><use>use_flashlight</use></value>
       </uniform>
     </pass>
   </technique>

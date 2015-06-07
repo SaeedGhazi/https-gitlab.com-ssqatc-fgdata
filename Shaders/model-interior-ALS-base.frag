@@ -27,17 +27,20 @@ uniform float angle;
 uniform float threshold_low;
 uniform float threshold_high;
 uniform float emit_intensity;
+uniform float light_radius;
 
 uniform vec3 offset_vec;
 uniform vec3 scale_vec;
 uniform vec3 tag_color;
 uniform vec3 emit_color;
-    
+uniform vec3 light_filter_one;
+uniform vec3 light_filter_two;
 
 uniform int quality_level;
 uniform int tquality_level;
 uniform int use_searchlight;
 uniform int implicit_lightmap_enabled;
+uniform int use_flashlight;
 
 
 const float EarthRadius = 5800000.0;
@@ -53,7 +56,7 @@ float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
 
 vec3 get_hazeColor(in float light_arg);
-
+vec3 flashlight(in vec3 color, in float radius);
 
 
 float luminance(vec3 color)
@@ -146,7 +149,18 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     //color = clamp(color, 0.0, 1.0);
 
-    
+    vec3 secondary_light = vec3 (0.0,0.0,0.0);
+
+    if (use_flashlight == 1)
+ 	{
+ 	secondary_light.rgb += flashlight(light_filter_one, light_radius);
+ 	}
+    if (use_flashlight == 2)
+ 	{
+ 	secondary_light.rgb += flashlight(light_filter_two, light_radius);
+ 	}
+ 	float dist = length(relPos);
+ 	color.rgb += secondary_light * light_distance_fading(dist);
 
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;

@@ -70,7 +70,6 @@ var visibilityOverrideProp = nil;
 var auxvisibilityProp = nil;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	print ("environment init");
 	visibilityProp = props.globals.initNode("/environment/config/presets/visibility-m", 0, "DOUBLE" );
 	visibilityOverrideProp = props.globals.initNode("/environment/config/presets/visibility-m-override", 0, "BOOL" );
 	auxvisibilityProp = props.globals.initNode("/local-weather/config/aux-max-vis-range-m", 0, "DOUBLE" );

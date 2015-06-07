@@ -52,7 +52,8 @@ ki266.new = func(idx) {
 
   obj.update();
 
-  print( "KI266 dme indicator #" ~ idx ~ " initialized" ); 
+  # 3 = SG_INFO log level
+  logprint( 3, "KI266 dme indicator #" ~ idx ~ " initialized" ); 
   return obj;
 };
 

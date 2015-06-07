@@ -254,12 +254,12 @@ var apPower = func {
 #  print("v_test = ", v_test);
   if (valueTest > 0.5) {
     # autopilot just powered up
-    print("KAP140 power up");
+    logprint(3, "KAP140 power up");
     apInit();
     altAlert();
   } elsif (valueTest < -0.5) {
     # autopilot just lost power
-    print("KAP140 power lost");
+    logprint(3, "KAP140 power lost");
     apInit();
     annunciatorAltAlert.getNode("state").setBoolValue(0);
     annunciatorBeep.getNode("state").setBoolValue(0);

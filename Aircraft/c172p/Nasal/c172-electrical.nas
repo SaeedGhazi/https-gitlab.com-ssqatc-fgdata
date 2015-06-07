@@ -36,7 +36,7 @@ init_electrical = func {
 
     # Request that the update function be called next frame
     settimer(update_electrical, 0);
-    print("Electrical system initialized");
+    logprint(3, "Electrical system initialized");
 }
 
 

@@ -15,23 +15,23 @@ var mpCheck = func() {
 			setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 3);
 			setprop("/ai/models/multiplayer["~i~"]/controls/player-lag", -spectator_offset);
 		} else {
-            var server = getprop("/sim/multiplay/txhost");
-			var lag = offset
-		} if (apply_close) {
-			var self = geo.aircraft_position();
-			var x = getprop("/ai/models/multiplayer["~i~"]/position/global-x");
-			var y = getprop("/ai/models/multiplayer["~i~"]/position/global-y");
-			var z = getprop("/ai/models/multiplayer["~i~"]/position/global-z");
-			var ac = geo.Coord.new().set_xyz(x, y, z);
-			var distance = self.distance_to(ac)*M2NM;
-			if ((distance > range)or(distance==nil)) {
-			setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 1);
+            var lag = offset;
+		    if (apply_close) {
+				var self = geo.aircraft_position();
+				var x = getprop("/ai/models/multiplayer["~i~"]/position/global-x");
+				var y = getprop("/ai/models/multiplayer["~i~"]/position/global-y");
+				var z = getprop("/ai/models/multiplayer["~i~"]/position/global-z");
+				var ac = geo.Coord.new().set_xyz(x, y, z);
+				var distance = self.distance_to(ac)*M2NM;
+				if ((distance > range)or(distance==nil)) {
+					setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 1);
+				} else {
+					setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 2);
+					setprop("/ai/models/multiplayer["~i~"]/controls/player-lag", lag);
+				}
 			} else {
-				setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 2);
-				setprop("/ai/models/multiplayer["~i~"]/controls/player-lag", lag);
-			};
-		} else {
-			setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 1);
+				setprop("/ai/models/multiplayer["~i~"]/controls/compensate-lag", 1);
+			}
 		}
 	    i += 1;
 	} else {

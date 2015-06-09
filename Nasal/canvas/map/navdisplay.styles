@@ -950,8 +950,7 @@ var NDStyles = {
 				id:'TCNArrow',
 				impl: {
 					init: func(nd,symbol),
-#					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and !nd.get_switch('toggle_centered') and getprop("instrumentation/efis/enable-canvas-tacan-display")),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and !nd.get_switch('toggle_centered') and nd.efis_switches['toggle_tacan'] != nil),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and !nd.get_switch('toggle_centered') and nd.efis_switches['toggle_tacan'] != nil),
 					is_true: func(nd) {
 						if (nd.get_switch('toggle_tacan')) {
 						    nd.symbols.TCNArrow.show();
@@ -967,7 +966,7 @@ var NDStyles = {
 				id:'TCNArrow2',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.get_switch('toggle_centered') and nd.efis_switches['toggle_tacan'] != nil),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.get_switch('toggle_centered') and nd.efis_switches['toggle_tacan'] != nil),
 					is_true: func(nd) {
 						if (nd.get_switch('toggle_tacan')) {
 						    nd.symbols.TCNArrow2.show();
@@ -983,7 +982,7 @@ var NDStyles = {
 				id:'TACAN',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.efis_switches['toggle_tacan'] != nil),
 					is_true: func(nd) {
 						if (nd.get_switch('toggle_tacan')) {
 						    nd.symbols.TACAN.setText("TACAN");
@@ -999,7 +998,7 @@ var NDStyles = {
 				id:'TACANId',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.efis_switches['toggle_tacan'] != nil),
 					is_true: func(nd) {
 						if (nd.get_switch('toggle_tacan') and getprop("instrumentation/tacan/in-range")) {
 						    nd.symbols.TACANId.setText(getprop("instrumentation/tacan/ident"));
@@ -1015,7 +1014,7 @@ var NDStyles = {
 				id:'TACANdme',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.efis_switches['toggle_tacan'] != nil),
 					is_true: func(nd) {
 						if (nd.get_switch('toggle_tacan') and getprop("instrumentation/tacan/in-range")) {
 						    nd.symbols.TACANdme.setText("DIST");
@@ -1031,7 +1030,7 @@ var NDStyles = {
 				id:'TACANdmeDist',
 				impl: {
 					init: func(nd,symbol),
-					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP']) and nd.efis_switches['toggle_tacan'] != nil),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP','APP','VOR']) and nd.efis_switches['toggle_tacan'] != nil),
 					is_true: func(nd) {
 						if (nd.get_switch('toggle_tacan') and getprop("instrumentation/tacan/in-range")) {
 						    nd.symbols.TACANdmeDist.setText(sprintf("%3.1f",getprop("instrumentation/tacan/indicated-distance-nm")));

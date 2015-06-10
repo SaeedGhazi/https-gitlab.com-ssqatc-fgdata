@@ -289,7 +289,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <use-alt-landing-light type="bool">false</use-alt-landing-light>
         <landing-light1-offset-deg type="float">0.0</landing-light1-offset-deg>
         <landing-light2-offset-deg type="float">0.0</landing-light2-offset-deg>
-	<use-flashlight type="bool">false</use-flashlight>
+	<use-flashlight type="int">0</use-flashlight>
       </als-secondary-lights>
     </rendering>
     <model-hz type="int">120</model-hz>

@@ -28,28 +28,42 @@
 
 <!-- North America -->
 <region include="Materials/regions/alaska.xml"/>
-<region include="Materials/regions/florida.xml"/>
 <region include="Materials/regions/us_southwest.xml"/>
 <region include="Materials/regions/california.xml"/>
 <region include="Materials/regions/sierras.xml"/>
 
 <!-- South America -->
 <region include="Materials/regions/tropical_south_america.xml"/>
+<region include="Materials/regions/latin_american_cities.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/caribbean.xml"/>
 <region include="Materials/regions/ascension.xml"/>
-
-<!-- Middle East-->
-<region include="Materials/regions/middle_east.xml"/>
+<region include="Materials/regions/brazil_cerrado.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_brasilia.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_southern_cerrado.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_caatinga.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_mata_atlantica.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_amazon_forest.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_manaus.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_pantanal.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_pampas.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/brazil_lencois.xml"/> <!-- added by gsagostinho -->
 
 <!-- Asia -->
 <region include="Materials/regions/asia.xml"/>
 
 <!-- Pacific-->
-<region include="Materials/regions/indonesia.xml"/>
+<region include="Materials/regions/indonesia.xml"/> <!-- modified by gsagostinho -->
+<region include="Materials/regions/southeast_asia.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/hawaii.xml"/>
 <region include="Materials/regions/oahu.xml"/>
 
 <!-- Africa -->
+<region include="Materials/regions/africa_savanna.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/africa_desert.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/africa_rainforest.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/africa_mediterranean.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/africa_kilimanjaro.xml"/> <!-- added by gsagostinho -->
+<region include="Materials/regions/mediterranean_cities.xml"/> <!-- added by gsagostinho. These cities also apply to Northern Africa and Middle East -->
 <region include="Materials/regions/south_africa.xml"/>
 <region include="Materials/regions/madagascar.xml"/>
 
@@ -60,5 +74,9 @@
 <region include="Materials/regions/ireland.xml"/>
 <region include="Materials/regions/corse.xml"/>
 <region include="Materials/regions/iceland.xml"/>
+
+<!-- Middle East-->
+<region include="Materials/regions/middle_east.xml"/>
+<region include="Materials/regions/middle_east_large_cities.xml"/>  <!-- added by gsagostinho -->
 
 </PropertyList>

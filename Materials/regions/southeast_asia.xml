@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <PropertyList>
-  <name>Indonesia</name>
+  <name>Southeast Asia</name>
   <area>
     <lon1>90.0</lon1>
-    <lon2>160.0</lon2>
-    <lat1>-20.0</lat1>
-    <lat2>0.0</lat2>
+    <lon2>170.0</lon2>
+    <lat1>-11.5</lat1>
+    <lat2>27.0</lat2>
   </area>
 
   <material>
@@ -14,12 +14,15 @@
     <name>MixedForest</name>
     <name>RainForest</name>
     <name>EvergreenBroadCover</name>
-    <name>EvergreenForest</name> <!-- added by gsagostinho -->
+    <name>EvergreenForest</name>     
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>DeciduousNeedleCover</name>
     <texture-set>
-      <texture>Terrain/rainforest-hawaii.png</texture>
-      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture>Terrain/rainforest-hires.png</texture>
+      <texture n="11">Terrain/rainforest-hires.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
-      <texture n="13">Terrain/shrub-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
     </texture-set>
     <parameters>
       <transition_model>0.8</transition_model>
@@ -28,7 +31,7 @@
     <ysize>2000</ysize>
     <light-coverage>5000000.0</light-coverage>
     <wood-coverage>4000.0</wood-coverage>
-    <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
+    <tree-texture>Trees/tropical-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
@@ -42,19 +45,21 @@
     <name>BareTundraCover</name>
     <name>MixedTundraCover</name>
     <name>Cemetery</name>
+    <name>HerbTundra</name>
+    <name>HerbTundraCover</name>
     <effect>Effects/landmass-nowood</effect>
     <texture-set>
       <texture>Terrain/tundra-hawaii-green.png</texture>
-      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hires.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
-      <texture n="13">Terrain/shrub-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
       <texture n="15">Terrain/airport_grass2.png</texture>
     </texture-set>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>25000.0</wood-coverage>
-    <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
+    <tree-texture>Trees/tropical.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
@@ -88,9 +93,9 @@
     <name>Rice</name>
     <texture-set>
       <texture>Terrain/rice1.png</texture>
-      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hires.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
-      <texture n="13">Terrain/shrub-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
     </texture-set>
     <parameters>
       <hires_overlay_bias>-0.1</hires_overlay_bias>
@@ -107,7 +112,7 @@
     <load-resistance>1e30</load-resistance>
     <!--<object-group include="Materials/base/farm-buildings.xml"/>-->
     <wood-coverage>120000.0</wood-coverage>
-    <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
+    <tree-texture>Trees/tropical.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
@@ -118,11 +123,13 @@
     <name>DryCropPastureCover</name>
     <name>MixedCropPastureCover</name>
     <name>DryCrop</name>
+    <name>MixedCrop</name>
+    <name>ComplexCrop</name>
     <texture-set>
       <texture>Terrain/dry_pasture4.png</texture>
-      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hires.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
-      <texture n="13">Terrain/shrub-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
       <texture n="15">Terrain/airport_grass2.png</texture>
     </texture-set>
     <parameters>
@@ -137,11 +144,48 @@
     <load-resistance>1e30</load-resistance>
     <light-coverage>2000000.0</light-coverage>
     <wood-coverage>80000.0</wood-coverage>
-    <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
+    <tree-texture>Trees/tropical.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
+  </material>
+  
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <name>Greenspace</name>
+    <texture-set>
+      <texture>Terrain/grass_dry2.png</texture>      
+      <texture n="11">Terrain/shrub-hawaii-green.png</texture>
+      <texture n="15">Terrain/airport_grass2.png</texture>
+    </texture-set>
+		<parameters>
+			<grain_strength>0.5</grain_strength>			
+			<hires_overlay_bias>-0.1</hires_overlay_bias>
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
   </material>
 
 </PropertyList>

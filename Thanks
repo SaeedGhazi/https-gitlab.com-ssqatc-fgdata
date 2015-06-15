@@ -605,7 +605,7 @@ David Culp <davidculp2@comcast.net>
   model that creates an updraft around it's center.
 
 
-Mathias Fr�hlich <Mathias.Froehlich@gmx.net>
+Mathias Fröhlich <Mathias.Froehlich@gmx.net>
   Implemented the groundcache code which made it possible for aircraft
   to follow the ground precisely and, as a result, made it possible to
   land on aircraft carriers.
@@ -690,6 +690,31 @@ The following individuals have contributed to the scenery object database:
   Daniel Leygnat, Bertrand Gilot, Morten Skyt Eriksen, Alex
   Bamesreiter, Oliver Predelli, Georg Vollnhals, and Paul Richter.
 
+For regional texturing, support by the following people and organization is
+gratefully acknowledged:
+
+ - Instituto Brasileiro de Geografia e Estatistica (IBGE) for the 
+   satellite images of the Brazilian cerrado: 
+   http://downloads.ibge.gov.br/downloads_geociencias.htm
+
+ - Diogo Sergio for the image of the caatinga trees: 
+   http://commons.wikimedia.org/wiki/File:Caatinga_Xiquexique_pedras_01.JPG
+
+ - Maria Hsu for the image of a caatinga tree: 
+   https://www.flickr.com/photos/14323530@N05/2150992479/
+
+ - Leonardo "Leguas" Carvalho for the image of the Ipe-Amarelo tree: 
+   http://pt.wikipedia.org/wiki/Ficheiro:Ipe_detail.jpg
+
+ - Spoladore for the image of the Lixeira tree: 
+   http://pt.wikipedia.org/wiki/Cajueiro-bravo-do-campo#/media/File:Lixeira_do_cerrado_de_Mato_Grosso.JPG
+
+ - Otávio Nogueira for the image of a cerrado tree: 
+   https://www.flickr.com/photos/55953988@N00/3896942038
+
+ - P199 for the image of Las Piñas City, the Philippines: 
+   http://commons.wikimedia.org/wiki/File:Las_Pinas_City.jpg
+
 
 NOTE:
 ----
@@ -706,3 +731,4 @@ Updated 2003-04-17,
 Updated 2004-06-01,
 Updated 2005-04-02 by Erik Hofman, erik@ehofman.com
 Updated 2007-05-16 for 0.9.11 release
+Updates 2015-06-15 by Thorsten Renk

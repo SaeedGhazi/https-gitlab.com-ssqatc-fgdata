@@ -34,7 +34,7 @@ kma20.new = func(rootPath) {
   setlistener(rootPath ~ "/adf",  func(v) {setprop("/instrumentation/adf/ident-audible",      (v.getValue() != 0));}, 1);
   setlistener(rootPath ~ "/dme",  func(v) {setprop("/instrumentation/dme/ident",              (v.getValue() != 0));}, 1);
   setlistener(rootPath ~ "/mkr",  func(v) {setprop("/instrumentation/marker-beacon/audio-btn",(v.getValue() != 0));}, 1);
-  logprint(3,  "KMA20 audio panel initialized" );
+  print( "KMA20 audio panel initialized" );
   return obj;
 };
 

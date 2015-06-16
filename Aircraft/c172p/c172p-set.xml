@@ -1,17 +1,25 @@
-<?xml version="1.0"?>
+<?xml version="1.0"  encoding="UTF-8" ?>
 <!--
 ************************************************************************
 JSBSim Cessna 172P with 3D cockpit.
 
 Started October 23 2001 by John Check, fgpanels@rockfish.net
+
+Detailed version January, 2015
+http://forum.flightgear.org/viewtopic.php?f=4&t=25157
+
+- Main model based on the original c172p by Jon Check
+- Enhanced model by thevirtualfer
+- Small details and systems by ludomotico (Juan Vera) and gsagostinho 
+
 ************************************************************************
 -->
 
-<PropertyList>
+<PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml" >
 
  <sim>
 
-  <description>Cessna 172P Skyhawk (1981 model)</description>
+  <description>Cessna 172P Skyhawk (1981 model, detailed)</description>
   <long-description>The Cessna 172 Skyhawk is a four-seat, single-engine, high-wing fixed-wing aircraft. 
       First flown in 1955 and still in production, more Cessna 172s have been built than any other aircraft.
   </long-description>
@@ -22,6 +30,13 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
         </long-description>
   </fr>
   
+  <es>
+    <long-description>La Cessna 172 Skyhawk es un avión de cuatro plazas, monomotor y de ala alta.
+      Se empezó a producir en 1955 y, con equipos modernizados, aún sigue en producción.
+      La Cessna 172 es el avión del que unidades se han construido en la historia.
+      </long-description>
+  </es>
+  
   <tags>
       <tag>ga</tag>
       <tag>cessna</tag>
@@ -30,16 +45,17 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
       <tag>fixed-gear</tag>
   </tags>
   
-  <author>David Megginson</author>
-  <status>early production</status>
+  <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), dg-505 (Jonathan Schellhase), IHAM-COL (Israel Hernandez), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen</author>
+  <status>advanced production</status>
   <rating>
-    <FDM type="int">3</FDM>
-    <systems type="int">4</systems>
-    <model type="int">5</model>
-    <cockpit type="int">4</cockpit>
+    <FDM type="int">4</FDM>
+    <systems type="int">5</systems>
+    <model type="int">4</model>
+    <cockpit type="int">5</cockpit>
   </rating>
 
-
+  <!--variant-of>c172p</variant-of-->
+  
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c172p</aero>
 
@@ -49,31 +65,113 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
     <path archive="y">Aircraft/c172p/Models/c172p.xml</path>
 
     <livery>
-      <file type="string">n301dp</file>
+      <file type="string">D-EEQA</file>
       <index type="int">0</index>
     </livery>
 
     <liverytail>
-      <file type="string">n301dp</file>
+      <file type="string">D-EEQA</file>
       <index type="int">0</index>
     </liverytail>
 
     <liverywing>
-      <file type="string">n301dp</file>
+      <file type="string">D-EEQA</file>
       <index type="int">0</index>
     </liverywing>
+	
+	<liveryfloat>
+      <file type="string">D-EEQA</file>
+      <index type="int">0</index>
+    </liveryfloat>
 
     <c172p>
-      <immat type="bool">false</immat>
+      <regnum1 type="int">0</regnum1>
+      <regnum2 type="int">0</regnum2>
+      <regnum3 type="int">0</regnum3>
+      <regnum4 type="int">0</regnum4>
+      <regnum5 type="int">0</regnum5>
+      <regnum6 type="int">0</regnum6>
+      <immat-on-panel type="bool">true</immat-on-panel>
       <fairing1 type="bool">true</fairing1>
       <fairing2 type="bool">false</fairing2>
       <fairing3 type="bool">false</fairing3>
+      <sound>
+        <click-light type="bool">false</click-light>
+        <click-master type="bool">false</click-master>
+        <click-avionics type="bool">false</click-avionics>
+        <click-cb type="bool">false</click-cb>
+        <click-parking type="bool">false</click-parking>
+        <click-magneto-forward type="bool">false</click-magneto-forward>
+        <click-magneto-back type="bool">false</click-magneto-back>
+        <click-flaps type="bool">false</click-flaps>
+
+        <!-- Radio stack -->
+        <click-dme-mode type="bool">false</click-dme-mode>
+        <click-dme-power type="bool">false</click-dme-power>
+        <click-dme-source type="bool">false</click-dme-source>
+        <click-kap140 type="bool">false</click-kap140>
+        <click-kap140-dial type="bool">false</click-kap140-dial>
+        <click-kma20 type="bool">false</click-kma20>
+        <click-kma20-dial type="bool">false</click-kma20-dial>
+        <click-kr87-adf type="bool">false</click-kr87-adf>
+        <click-kr87-adf-dial type="bool">false</click-kr87-adf-dial>
+        <click-kt76a-mode type="bool">false</click-kt76a-mode>
+        <click-kt76a-ident type="bool">false</click-kt76a-ident>
+        <click-kt76a-dial type="bool">false</click-kt76a-dial>
+        <click-kx165-1 type="bool">false</click-kx165-1>
+        <click-kx165-2 type="bool">false</click-kx165-2>
+        <click-kx165-1-dial type="bool">false</click-kx165-1-dial>
+        <click-kx165-2-dial type="bool">false</click-kx165-2-dial>
+      </sound>
     </c172p>
     <hide-yoke type="bool">false</hide-yoke>
+    
+    <crew>
+      <pilot n="0">
+		<pose include = "Models/Human/pose-pilot.xml"></pose>
+		<character>0</character>
+		<outfit>0</outfit>
+		<equipment>0</equipment>
+	  </pilot>
+	  <pilot n="1">
+		<pose include = "Models/Human/pose-copilot.xml"></pose>
+		<character>0</character>
+		<outfit>0</outfit>
+		<equipment>0</equipment>
+      </pilot>
+    </crew>
+	
+	<!-- human models persistent menu choice -->
+	<occupants type="bool">0</occupants>
+  
+    <!-- an exit for the walker -->
+    <map>
+      <default_exit>
+        <x-offset-m type="float">-0.35</x-offset-m>
+        <y-offset-m type="float">-0.84</y-offset-m>
+      </default_exit>
+    </map>
   </model>
+  
+  <aircraft-data>
+    <path>/sim/rendering/shadow</path>
+    <path>/sim/rendering/shadow-volume</path>
+    <path>/sim/model/occupants</path>
+    <path>/fdm/jsbsim/damage</path>
+    <path>/fdm/jsbsim/bushkit</path>
+    <path>/environment/aircraft-effects/cabin-heat-set</path>
+    <path>/environment/aircraft-effects/cabin-air-set</path>
+    <path>/fdm/jsbsim/running</path>
+    <path>/fdm/jsbsim/complex</path>
+    <path>/fdm/jsbsim/weather</path>
+  </aircraft-data>
 
   <startup>
-    <splash-texture>Aircraft/c172p/splash.png</splash-texture>
+	  <splash-texture>Aircraft/c172p/splash1.png</splash-texture>
+	  <splash-texture>Aircraft/c172p/splash2.png</splash-texture>
+	  <splash-texture>Aircraft/c172p/splash3.png</splash-texture>
+	  <splash-texture>Aircraft/c172p/splash4.png</splash-texture>
+	  <splash-texture>Aircraft/c172p/splash5.png</splash-texture>
   </startup>
 
   <!-- hide the 2D panel -->
@@ -88,29 +186,40 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
    <internal type="bool" archive="y">true</internal>
    <config>
      <x-offset-m archive="y" type="double">-0.21</x-offset-m>
-     <y-offset-m archive="y" type="double">0.235</y-offset-m>
+     <y-offset-m archive="y" type="double">0.19</y-offset-m>
      <z-offset-m archive="y" type="double">0.36</z-offset-m>
      <pitch-offset-deg type="double">-12</pitch-offset-deg>
+     <default-field-of-view-deg>73.6</default-field-of-view-deg>
    </config>
   </view>
 
   <systems>
     <autopilot>
-      <path>Aircraft/c172p/Systems/KAP140.xml</path>
+      <path>Systems/KAP140.xml</path>
     </autopilot>
     <property-rule n="100">
       <name>FiltersOnly</name>
-      <path>Aircraft/c172p/Systems/NAVandGSfilters.xml</path>
+      <path>Systems/NAVandGSfilters.xml</path>
     </property-rule>
     <electrical>
       <!-- null electrical system path here so we can use a nasal based -->
       <!-- model defined later in the nasal section of this file. -->
       <path></path>
     </electrical>
+     
+    <!-- needed by shadows in ALS: http://forum.flightgear.org/viewtopic.php?f=4&t=25157&start=75#p232120 -->
+	<!-- and other ground effects -->
+    <property-rule n="101">
+      <path>Aircraft/c172p/Systems/ground-effects.xml</path>
+    </property-rule>
+
+    <property-rule n="102">
+      <path>Aircraft/c172p/Systems/als-lights.xml</path>
+    </property-rule>
   </systems>
 
   <sound>
-   <path archive="y">Aircraft/c172p/c172-sound.xml</path>
+   <path archive="y">c172-sound.xml</path>
   </sound>
 
   <help include="c172-help.xml"/>
@@ -131,29 +240,57 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
         <float n="0" alias="/sim/model/door-positions/rightDoor/position-norm"/>
         <float n="1" alias="/sim/model/door-positions/leftDoor/position-norm"/>
         <float n="2" alias="/sim/model/door-positions/baggageDoor/position-norm"/>
-        <int type="int">0</int>
-        <int type="int">0</int>
-        <int type="int">0</int>
-        <int type="int">0</int>
-        <int type="int">0</int>
-        <int type="int">0</int>
+		<float n="3" alias="/systems/electrical/outputs/nav-lights"/>
+        <float n="4" alias="/systems/electrical/outputs/taxi-light"/>
+        <float n="5" alias="/systems/electrical/outputs/landing-lights"/>
+		<float n="6" alias="/fdm/jsbsim/hydro/spray-wake-speed-kt-actual"/>
+		<float n="7" alias="/fdm/jsbsim/hydro/left-ground-effect-speed-kt-actual"/>
+		<float n="8" alias="/fdm/jsbsim/hydro/right-ground-effect-speed-kt-actual"/>	
+		<float n="9" alias="/fdm/jsbsim/ground/tail-ground-effect-speed-kt-actual"/>
+		<float n="10" alias="/fdm/jsbsim/ground/left-wing-ground-effect-speed-kt-actual"/>
+		<float n="11" alias="/fdm/jsbsim/ground/right-wing-ground-effect-speed-kt-actual"/>
+		<float n="12" alias="/fdm/jsbsim/ground/nose-gear-ground-effect-speed-kt-actual"/>
+		<float n="13" alias="/fdm/jsbsim/ground/left-gear-ground-effect-speed-kt-actual"/>
+		<float n="14" alias="/fdm/jsbsim/ground/right-gear-ground-effect-speed-kt-actual"/>
+		<float n="15" alias="/fdm/jsbsim/ground/nose-tyre-smoke-ground-effect-speed-kt-actual"/>
+		<float n="16" alias="/fdm/jsbsim/ground/left-tyre-smoke-ground-effect-speed-kt-actual"/>
+		<float n="17" alias="/fdm/jsbsim/ground/right-tyre-smoke-ground-effect-speed-kt-actual"/>
+
+        <int n="1" alias="/sim/model/c172p/lighting/beacon-top/state"/>
+        <int n="2" alias="/sim/model/c172p/lighting/strobes/state"/>
+        <int n="3" alias="/fdm/jsbsim/crash"/>
+        <int n="4" alias="/fdm/jsbsim/contact/unit[4]/broken"/>
+        <int n="5" alias="/fdm/jsbsim/contact/unit[5]/broken"/>
+        <int n="6" alias="/fdm/jsbsim/gear/unit[0]/broken"/>
+        <int n="7" alias="/fdm/jsbsim/gear/unit[1]/broken"/>
+        <int n="8" alias="/fdm/jsbsim/gear/unit[2]/broken"/>
+        <int n="9" alias="/fdm/jsbsim/bushkit"/>
+        <int n="10" alias="/fdm/jsbsim/left-pontoon/damaged"/>
+        <int n="11" alias="/fdm/jsbsim/left-pontoon/broken"/>
+        <int n="12" alias="/fdm/jsbsim/right-pontoon/damaged"/>
+        <int n="13" alias="/fdm/jsbsim/right-pontoon/broken"/>
+        <!-- 14 to 19, both included, are used by the immat system. There is not any alias for these properties -->
+		<int n="20" alias="/fdm/jsbsim/wing-both/broken"/>
+		<int n="21" alias="/fdm/jsbsim/wing-damage/left-wing"/>
+		<int n="22" alias="/fdm/jsbsim/wing-damage/right-wing"/>
+
+        <!-- Registration number over MP -->
+        <string n="0" alias="/sim/model/immat"/>
       </generic>
   </multiplay>
 
   <flight-recorder>
     <replay-config type="int">0</replay-config>
-    <config n="0" include="/Aircraft/Generic/flightrecorder/generic-piston-propeller-1.xml">
-      <name type="string">C172p Flight Recorder</name>
+    <config n="0" include="Systems/flight-recorder/flight-recorder.xml">
+      <name type="string">Cessna 172P Flight Recorder</name>
     </config>
   </flight-recorder>
 
-  <menubar include="Dialogs/c172p-menu.xml"/>
-  <instrumentation n="0">
-    <path>Aircraft/c172p/Systems/instrumentation.xml</path>
+  <menubar include="gui/dialogs/c172p-menu.xml"/>
+  <instrumentation>
+    <path>Systems/instrumentation.xml</path>
   </instrumentation>
  </sim>
-
- <!-- trim for level cruise -->
 
  <controls>
   <flight>
@@ -162,28 +299,24 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
   </flight>
   <engines>
    <engine n="0">
-    <magnetos type="int">3</magnetos>
-    <master-bat type="bool">true</master-bat>
-    <master-alt type="bool">true</master-alt>
+    <throttle type="double">0</throttle>
+    <primer type="double">0</primer>
+    <primer-lever type="bool">false</primer-lever>
+    <use-primer type="bool">false</use-primer>
+    <master-alt type="bool">false</master-alt>
+    <master-bat type="bool">false</master-bat>
    </engine>
   </engines>
-  <lighting>
-   <landing-lights type="bool">false</landing-lights>
-   <taxi-light type="bool">false</taxi-light>
-   <strobe type="bool">false</strobe>
-   <beacon type="bool">false</beacon>
-   <nav-lights type="bool">false</nav-lights>
-  </lighting>
   <switches>
-   <master-avionics type="bool">true</master-avionics>
-   <starter type="bool">false</starter>
+    <master-avionics type="bool">false</master-avionics>
+    <starter type="bool">false</starter>
   </switches>
-  <engines>
-    <engine>
-      <master-bat type="bool">true</master-bat>
-      <master-alt type="bool">true</master-alt>
-    </engine>
-  </engines>
+
+  <gear>
+      <water-rudder type="bool">0</water-rudder>
+      <water-rudder-down type="double">0</water-rudder-down>
+  </gear>
+
  </controls>
 
  <autopilot>
@@ -197,11 +330,18 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
  <consumables>
   <fuel>
    <tank n="0">
+    <name>LeftTank</name>
     <level-gal_us type="double">20</level-gal_us>
     <selected type="bool">true</selected>
    </tank>
    <tank n="1">
+    <name>RightTank</name>
     <level-gal_us type="double">20</level-gal_us>
+    <selected type="bool">true</selected>
+   </tank>
+   <tank n="2">
+    <name>Float chamber</name>
+    <capacity unit="LBS"> 0.1 </capacity>
     <selected type="bool">true</selected>
    </tank>
   </fuel>
@@ -250,38 +390,43 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
  <nasal>
  
     <c172p>
-      <file>Aircraft/c172p/Nasal/liveries.nas</file>
-      <file>Aircraft/c172p/Nasal/immat.nas</file>
-      <file>Aircraft/c172p/Nasal/doors.nas</file>
-      <file>Aircraft/c172p/Nasal/light.nas</file>
-      <file>Aircraft/c172p/Nasal/tanks.nas</file>
-      <file>Aircraft/c172p/Nasal/kma20.nas</file>
-      <file>Aircraft/c172p/Nasal/ki266.nas</file>
-      <script><![CDATA[
-        ki266.new(0);
-        aircraft.data.add( "engines/engine[0]/egt-bug-norm" );
-      ]]></script>
-    </c172p>
+      <file>Nasal/liveries.nas</file>
+      <file>Nasal/immat.nas</file>
+      <file>Nasal/doors.nas</file>
+      <file>Nasal/light.nas</file>
+      <file>Nasal/tanks.nas</file>
+      <file>Nasal/kma20.nas</file>
+      <file>Nasal/ki266.nas</file>
+      <file>Nasal/engine.nas</file>
+	  <file>Nasal/shadow.nas</file>
+	  <file>Nasal/avionics.nas</file>
+	  <file>Nasal/weather.nas</file>
+	  <file>Nasal/flashlight.nas</file>
+	  <!-- Damage Mod -->
+      <file>Nasal/physics.nas</file>
+      <file>Nasal/c172p.nas</file>
+  </c172p>
 
   <electrical>
-   <file>Aircraft/c172p/Nasal/c172-electrical.nas</file>
+   <file>Nasal/electrical.nas</file>
   </electrical>
   <kap140>
    <file>Aircraft/Generic/kap140.nas</file>
-   <!-- We can set some variables that might be
-        aircraft specific. We must do it after the file
-        to override the ones that are in the .nas file.-->
-   <script><![CDATA[
-                    headingNeedleDeflection = "/instrumentation/nav/heading-needle-deflection";
-                    gsNeedleDeflection = "/instrumentation/nav/gs-needle-deflection-norm";
-                    staticPressure = "systems/static/pressure-inhg";
-    ]]>
-   </script>
   </kap140>
   <kr87>
-    <file>Aircraft/c172p/Nasal/kr87.nas</file>
+    <file>Nasal/kr87.nas</file>
   </kr87>
+  
+  <tyresmoke>
+   <file>Nasal/tyresmoke.nas</file>
+  </tyresmoke>
+
+  <hydrodynamics>
+   <file>Nasal/jsbsim-hydrodynamics.nas</file>
+  </hydrodynamics>
+
  </nasal>
+ 
  <payload>
   <weight>
    <name type="string">Pilot</name>
@@ -354,50 +499,71 @@ Started October 23 2001 by John Check, fgpanels@rockfish.net
  </limits>
 
  <input>
-  <keyboard>
-   <key n="76">
-    <name>L</name>
-    <desc>Decrease Panel lighting</desc>
-    <repeatable type="bool">true</repeatable>
-    <binding>
-     <command>property-adjust</command>
-     <property>controls/lighting/instruments-norm</property>
-     <step>-0.1</step>
-     <min>0</min>
-     <max>1.0</max>
-     <wrap>0</wrap>
-    </binding>
-   </key>
-   <key n="108">
-    <name>l</name>
-    <desc>Increase Panel lighting</desc>
-    <repeatable type="bool">true</repeatable>
-    <binding>
-     <command>property-adjust</command>
-     <property>controls/lighting/instruments-norm</property>
-     <step>0.1</step>
-     <min>0</min>
-     <max>1.0</max>
-     <wrap>0</wrap>
-    </binding>
-   </key>
-   <key n="115">
-   <name>s</name>
-   <desc>Toggle Starter Switch</desc>
-   <binding>
-    <command>property-assign</command>
-    <property>/controls/switches/starter</property>
-    <value >1</value>
-   </binding>
-   <mod-up>
-    <binding>
-     <command>property-assign</command>
-     <property>/controls/switches/starter</property>
-     <value>0</value>
-    </binding>
-   </mod-up>
-  </key>
-  </keyboard> 
+  <keyboard include="c172p-keyboard.xml"/>
  </input>
 
+ <gear>
+	<gear n="0">
+      <tyre-smoke type="int">0</tyre-smoke>
+      <sprayspeed-ms type="double">0</sprayspeed-ms>
+      <spray-density type="double">0</spray-density>
+    </gear>
+    <gear n="1">
+      <tyre-smoke type="int">0</tyre-smoke>
+      <sprayspeed-ms type="double">0</sprayspeed-ms>
+      <spray-density type="double">0</spray-density>
+    </gear>
+    <gear n="2">
+      <tyre-smoke type="int">0</tyre-smoke>
+      <sprayspeed-ms type="double">0</sprayspeed-ms>
+      <spray-density type="double">0</spray-density>
+    </gear>
+  </gear>
+  
+ <!-- Damage Mod -->
+  <fdm>
+    <jsbsim>
+		<gear>
+			<unit n="0">
+			  <broken type="bool">0</broken>
+			</unit>
+			<unit n="1">
+			  <broken type="bool">0</broken>
+			</unit>
+			<unit n="2">
+			  <broken type="bool">0</broken>
+			</unit>	
+		</gear>
+		<contact>
+			<unit n="4">
+			  <broken type="bool">0</broken>
+			</unit>
+			<unit n="5">
+			  <broken type="bool">0</broken>
+			</unit>
+		</contact>
+		<crash type="bool">0</crash>
+		<damage type="bool">0</damage>
+		<running type="bool">0</running>
+		<complex type="bool">0</complex>
+		<weather type="bool">0</weather>
+		<wing-damage>
+            <left-wing type="double">0</left-wing>
+            <right-wing type="double">0</right-wing>
+        </wing-damage>
+		<wing-both>
+            <broken type="bool">0</broken>
+		</wing-both>
+		<left-pontoon>
+			<damaged type="bool">0</damaged>
+			<broken type="bool">0</broken>
+		</left-pontoon>
+		<right-pontoon>
+			<damaged type="bool">0</damaged>
+			<broken type="bool">0</broken>
+		</right-pontoon>
+    </jsbsim>
+  </fdm>
+  <!-- End Damage Mod -->
+  
 </PropertyList>

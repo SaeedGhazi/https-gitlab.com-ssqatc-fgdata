@@ -24,6 +24,15 @@ var new = func(layer) {
 	};
 	layer.searcher._equals = func(l,r) l.equals(r);
 	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ), setlistener(layer.options.wp_num, func m.layer.update() ));
+	var driver = opt_member(m.layer.options, 'route_driver');
+	if(driver == nil){
+		driver = RouteDriver.new();
+	}
+	var driver_listeners = driver.getListeners();
+	foreach(var listener; driver_listeners){
+		append(m.listeners, setlistener(listener, func m.layer.update()));
+	}
+	m.route_driver = driver;
 	m.addVisibilityListener();
 
 	return m;
@@ -59,12 +68,16 @@ var searchCmd = func {
 	printlog(_MP_dbg_lvl, "Running query: "~name);
 
 	if (!getprop(me.options.active_node)) return [];
-
-	var fp = flightplan();
-	var fpSize = fp.getPlanSize();
+	var driver = me.route_driver;
+	driver.update();
 	var result = [];
-	for (var i = 0; i < fpSize; i+=1)
-		append(result, WPT_model.new(fp, i));
+	var planCount = driver.getNumberOfFlightPlans();
+	for(var idx = 0; idx < planCount; idx += 1){
+		var fp = driver.getFlightPlan(idx);
+		var fpSize = fp.getPlanSize(idx);
+		for (var i = 0; i < fpSize; i+=1)
+			append(result, WPT_model.new(fp, i));
+	}
 	return result;
 };
 

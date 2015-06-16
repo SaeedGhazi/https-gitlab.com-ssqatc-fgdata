@@ -9,9 +9,9 @@ SymbolLayer.add(name, {
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
 	df_options: { # default configuration options
-		active_node: "/autopilot/route-manager/active",
+		fplan_active: "/autopilot/route-manager/active",
 		vnav_node: "/autopilot/route-manager/vnav/",
-		types: ["tc", "td", "sc", "ed"],
+		types: ["tc", "td", "ec", "ed","sc", "sd"],
 	}
 });
 var new = func(layer) {
@@ -22,7 +22,8 @@ var new = func(layer) {
 		listeners: [],
 	};
 	layer.searcher._equals = func(a,b) a.getName() == b.getName();
-	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ));
+	append(m.listeners, setlistener(layer.options.fplan_active,
+									func m.layer.update() ));
 	m.addVisibilityListener();
 
 	return m;

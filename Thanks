@@ -11,6 +11,13 @@ A1 Free Sounds <techie@mail.ev1.net> http://www.a1freesoundeffects.com
   Granted permission for the flightgear project to use some of the
   sound effects from their site.
 
+Syd Adams:
+  Added clipping to 2d instruments.  Added volume control to ATC-chatter.
+  Created and maintain: DHC2, B1900D, Aerostar 700, S76C+ helicopter,
+  Cessna Citation Bravo & CitationX, A6M2 'Zero'.  Assisted with Cessna
+  Citation II with Curt and 777-200 with Justin Smithies.
+
+
 Mark Akermann <flightgear@akermann.org>
   Redone sun code. The sun now consists of three textures with individual 
   colors which are calculated based on the effect of light scattering.
@@ -28,6 +35,9 @@ Raul Alonzo <amil@las.es>
 Michele America <nomimarketing@mail.telepac.pt>
   Contributed to the HUD code.
 
+
+Emmanuel Baranger <>
+  Many, many very nice aircraft models.
 
 Andrei Barbu "T"Eval" teval@myrealbox.com
   Designed and implemented the current version of the FlightGear website.
@@ -65,6 +75,20 @@ Paul Bleisch <pbleisch@acm.org>
   system.
 
 
+Matthias Boerner <>
+  Coorganizer of the FlightGear booth at the annual LinuxTag event in
+  Germany.
+
+
+Thorsten Brehm
+  Thorsten provided the TCAS system and fixed an uncountable number of
+  bugs, closed memory leaks and helps creating new releases.
+
+
+Alexis Bory
+  Very nice models, including the F14-B.
+
+
 Jim Brennan <jj@kingmont.com>
   Provided a big chunk of online space to store USA scenery for Flight Gear.
 
@@ -73,6 +97,11 @@ Bernie Bright <bbright@bigpond.net.au>
   Many C++ style, usage, and implementation improvements.
   STL portability, tons o' stuff. :-)
   Threading support and threaded tile pager.
+
+
+Francesco Brisa <>
+  Scenery models and ground networks for Italian airports.
+  Scripts for automated source downloads and builds.
 
 
 Bernhard H. Buckel <buckel@mail.uni-wuerzburg.de>
@@ -108,6 +137,11 @@ John Check <j4strngs@rockfish.net>
   New instrument panel configurations
 
 
+Bertrand Coconnier
+  Contributed several bugfixes and improvements for the integration of
+  the JSBSim flight dynamics model
+
+
 Dave Cornish <dmc@halcyon.com>
   Created our new, super cool, runway textures.
   Created some of our cloud textures.
@@ -118,6 +152,22 @@ Oliver Delise <delise@mail.isis.de>
   Author of (the now depreciated) networking / multi-user support.
   Founder of the FlightGear MultiPilot Project :
   http://www.isis.de/members/~odelise/progs/flightgear
+
+
+John Denker
+  Contributed bugfixes and improvements to the navigation and ATIS code.
+
+
+Martin Eschen <>
+ Helped enourmously toward finishing the full scale traffic demo at EHAM.
+
+
+Torsten Dreyer
+  Contributed the very nice Piper Seneca, closely modelled after the
+  real thing. Also added many other nice aircraft (such as the ogeL, also
+  closely modelled after the real thing), buildings, etc.
+  Creator of fgpanel. Code maintainer of weather, environment, autopilot
+  and many other core systems.
 
 
 Dave Eberly <eberly@magic-software.com>
@@ -144,8 +194,27 @@ Oscar Everitt <bigoc@premier.net>
   them to our little project.
 
 
+Detlef Faber
+  Many WWII era aircraft.
+
+
+Leidson Campos A. Ferreira <leidson@planetamessenger.org>
+  Rewrote the Jpeg screen httpd streaming (--jpg-httpd option)
+
+
+Olaf Flebbe
+  Improved the build system for Windows and provided pre-built
+  dependencies.
+
+
 Bruce Finney <bfinney@gte.net>
   MSVC5 compatibility.
+
+
+Thomas Forster <>
+   Updates to the AI system, including the Dykstra route finding algorithm,
+   adding a performance class, and many code clean-ups.
+   Co-organizer of the annual LinuxTag booth.
 
 
 Melchior Franz <mfranz@aon.at>
@@ -170,6 +239,18 @@ Thomas Gellekum <tg@ihf.rwth-aachen.de>
   Changes and updates for compiling on FreeBSD
 
 
+Ralf Gerlich <>
+  Technical Genius behind the Custom Scenery Project.
+  Current maintainer of TaxiDraw
+
+
+Anders Gidenstam <>
+  Added support for lighter than air vehicles to JSBSim.
+  Contributed simulation of wildfires and a basic system for dual control
+  of an aircraft over the multiplayer network.
+  Author of several airships and one aircraft.
+
+
 Neetha Girish <neethagirish@usa.net>
   Contributed the xml configurable HUD changes.
 
@@ -187,6 +268,21 @@ Michael I. Gold <gold@puck.asd.sgi.com>
 
 Habibie <habibie@MailandNews.com>
   RedHat package building changes for SimGear.
+
+
+Csaba Hal�sz <>
+  Many bugfixes and code checking.
+
+
+Ampere Hardraade <>
+  Many detailed 3D models of aircraft, including the MD11, and several
+  Airbuses.
+
+
+Brett Harrison <>
+  Ground networks for various airports.
+  Most of the liveries for the new C172p by HHS.
+  AI Repaints for several 737's and C172's
 
 
 Dave Haskell <dave@haskell.demon.co.uk>
@@ -218,6 +314,10 @@ Bruce Jackson of NASA <e.b.jackson@larc.nasa.gov>
   Developed the LaRCsim code under funding by NASA which we use to provide
   the flight model. Bruce has patiently answered my many, many questions.
   http://dcb.larc.nasa.gov/www/DCBStaff/ebj/ebj.html
+
+
+Ron Jensen
+  Contributed to the piston engine code in JSBSim.
 
 
 Maik Justus <fg@mjustus.de>
@@ -315,7 +415,14 @@ Cameron Moore <cameron@unbeatenpath.net>
   Reigning list admin.
   Provided man pages.
   Self-proclaimed code janitor.
-  FAQ maintainer.
+  Has been maintaining FAQ for some years.
+
+
+Tim Moore <>
+  Many innovations to the OpenSceneGraph based graphics system.
+  Counseling of other developers toward learning OSG
+  Maintaing a GIT repository containing a mirror of FlightGear's
+  source code, speficially for bugfix releases.
 
 
 Anders Morken <amrken@online.no>
@@ -335,6 +442,11 @@ Alan Murta <amurta@cs.man.ac.uk>
 Phil Nelson  <phil@cs.wwu.edu>
   Author of GNU dbm.  gdbm is a set of database routines that use
   extendible hashing and works similar to the standard UNIX dbm routines.
+
+
+Tatsuhiro Nishioka
+  Maintainer of the Mac port.
+  Contributed some very nice Japanese aircraft models.
 
 
 Alexei Novikov <anovikov@heron.itep.ru>
@@ -377,17 +489,24 @@ Alex Perry <alex.perry@ieee.org>
   Contributed to the Install and Getting Started manual.
 
 
+Pigeon <>
+  Developed the multiplayer network infrastructure.
+
+
 Friedemann Reinhard <mpt218@faupt212.physik.uni-erlangen.de>
   Contributed beginnings of a textured instrument panel.
 
 
 Frederic Bouvier <frbouvi@wanadoo.fr>
-   Added French language support
-   Keeps FlightGear MSVC compatible.
-   Did a number of code changes to improve the animation code.
-   Added a number of animations that improves the visual system quite a lot.
-   Did a nice job populating the San Francisco bay area by adding a lot
-   of static scenery.
+  Added French language support
+  Keeps FlightGear MSVC compatible.
+  Did a number of code changes to improve the animation code.
+  Added a number of animations that improves the visual system quite a lot.
+  For a long time built the FlightGear binary windows distributions.
+  Did a nice job populating the San Francisco bay area by adding a lot
+  of static scenery.
+  Maintainer of fgrun, the defacto launcher on windows and many other platforms.
+  Author of fgsd, a standalone scenery designer.
 
 
 Petter Reinholdtsen <pere@games.no>
@@ -403,6 +522,21 @@ William Riley <riley@technologist.com>
   World scenery based on vmap0 data.
 
 
+Gijs de Rooy <>
+  Contributed some very nice building models, including a very
+  detailed layout of the Amsterdam airport terminals, and many
+  downtown buildings.
+  Redid the Boeing 747-400 3D model.
+  Greatly contributed to the FlightGear community as a very active
+  first aid responder on the official Flightgear forum, as a forum
+  and wiki admin, and as the editor of the monthly FlightGear
+  newsletter.
+
+
+Gerard Robin <>
+  Many nice Aircraft models
+
+
 Andy Ross <andy@plausible.org>
   Contributed a new configurable FDM, "YASim", based on geometry
   information rather than aerodynamic coefficients.
@@ -412,11 +546,20 @@ Andy Ross <andy@plausible.org>
   Added the Nasal scripting language and added FlightGear integration.
 
 
+Brian Schack <>
+  Current maintainer of Atlas, the moving map program for FlightGear
+
+
 Paul Schlyter <pausch@saaf.se>  
   Mr. Schlyter provided Durk Talsma with all the information 
   he needed to write the astro code. Mr. S. is also willing 
   to answer astro-related questions whenever one needs to.
   http://welcome.to/pausch
+
+
+Christian Schmitt <>
+  Detailed Frankfurt airport buildings.
+  Contributions to the custom scenery project.
 
 
 Chris Schoeneman <crs@millpond.engr.sgi.com>
@@ -428,6 +571,12 @@ Chris Schoeneman <crs@millpond.engr.sgi.com>
 Phil Schubert <philip@zedley.com>
   Contributed various textures and engine modelling.
   http://www.zedley.com/Philip/index.htm
+
+
+Heiko Schulz <>
+  Contributed AI traffic for EDDF
+  EDDF Night lights
+  ground networks
  
 
 Jonathan R Shewchuk <Jonathan_R_Shewchuk@ux4.sp.cs.cmu.edu>
@@ -449,6 +598,15 @@ Michael Smith <msmith99@flash.net>
 
 Martin Spott <Martin.Spott@uni-duisburg.de>
   Contributed to the installation / user guide.
+  Coorganizer of the FlightGear booth at the annual LinuxTag event in
+  Germany.
+  Manages the "World Scenery" releases.
+  Maintains world's biggest repository and toolchain for free and
+  open map and scenery data at http://mapserver.flightgear.org/
+
+
+Jon Stockill <>
+  Maintainer of the object database.
 
 
 Martin Dressler <dr@musicabona.cz>
@@ -470,6 +628,18 @@ Durk Talsma <d.talsma@chello.nl>
   Added the AirTraffic module for scheduled AI airliners and other aircraft.
   2D Cloud layers (nifty).
   http://people.a2000.nl/dtals
+
+
+Gabor Toth <>
+  Contributed some Livery repaints for AI Aircraft
+  Contributed many ideas leading towards the Traffic Manager II format
+  Runs FGTracker, an online flight tracking service for FlightGear
+
+
+James Turner <>
+  Many code cleanups of the internal structure of the airport database,
+  runway parsing, route management.
+  Is currently working on adding flightmanagement support.
 
 
 UIUC - Department of Aeronautical and Astronautical Engineering
@@ -573,9 +743,18 @@ Jean-Claude Wippler <jcw@equi4.com>
   http://www.equi4.com/metakit
 
 
+Holger Wirtz <>
+  Author of FGCom, a voice communication program intented for FlightGear
+  multiplayer/ATC.
+
+
 John Wojnaroski <castle@mminternet.com>
   Open Glass Cockpit project
   3d clouds
+
+
+Marcus Zojer <>
+   Contributed a B1B aircraft model.
 
 
 Lee Elliot <leee@spatial.freeserve.co.uk>
@@ -611,6 +790,7 @@ Mathias Fröhlich <Mathias.Froehlich@gmx.net>
   land on aircraft carriers.
   Modified YASim, JSBSim  and LaRCsim to support the groundcache code.
   Reorganized the code to eliminate the viewer jitter for close by objects.
+  Mathias is responsible for the transition to OSG and he added HLA support.
 
 
 Harald Johnsen <hjohnsen@evc.net>
@@ -636,18 +816,26 @@ Stuart Buchanan <stuart_d_buchanan@yahoo.co.uk>
   Enhancements to the Cessna-310 3d model.
   Added a generic yoke model, a generic throttle quadrant model and a 
   generic pedal set model.
+  OSG based three 3D clouds.
+  Forum moderator.
 
 
 Stefan Seifert <nine@detonation.org>
   Added the save-on-exit option to save the user preferences at program exit.
+
+Thorsten Renk <thorsten.i.renk@jyu.fi>
+  Created the local weather system with Thermals, Ridge lift and Wave lift
+  which creates an accurate meteorological simulation.
+  Added the Atmospheric light scattering (ALS) framework
+   (http://wiki.flightgear.org/Atmospheric_light_scattering)
+  Worked a quite a number of aircraft shaders like the interior shader,
+   rain shader and exhaust flume shader
 
 
 Space Imaging, Inc  http://www.spaceimaging.com/
   Space Imaging has allowed us to use the images in their archive for
   commercial and non-commercial use, provided the original image can't be
   extracted  from the textures.
-  Some (if not all) of the best textures in use by FlightGear wouldn't be
-  possible without the satellite images provided by them.
 
 
 Airservices Australia

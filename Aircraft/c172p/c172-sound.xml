@@ -243,7 +243,7 @@
   <stall>
    <name>stall</name>
    <mode>looped</mode>
-   <path>Sounds/stall.wav</path>
+   <path>Sounds/stall2.wav</path>
    <condition>
     <and>
      <property>sim/alarms/stall-warning</property>
@@ -360,7 +360,7 @@
     <switch>
         <name>click-parking-brake</name>
         <mode>once</mode>
-        <path>Sounds/click.wav</path>
+        <path>Sounds/lever.wav</path>
         <condition>
             <property>/sim/model/c172p/sound/click-parking</property>
         </condition>
@@ -844,7 +844,7 @@
     <dial>
         <name>dial-trim-wheel</name>
         <mode>in-transit</mode>
-        <path>Sounds/scroll.wav</path>
+        <path>Sounds/trim.wav</path>
         <property>/controls/flight/elevator-trim</property>
         <position>
             <x>-0.3660</x>

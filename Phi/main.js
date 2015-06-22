@@ -7,6 +7,7 @@ require.config({
         kojqui : '3rdparty/knockout-jqueryui',
         sprintf : '3rdparty/sprintf/sprintf.min',
         leaflet : '3rdparty/leaflet-0.7.3/leaflet',
+        geodesic : '3rdparty/leaflet-0.7.3/Leaflet.Geodesic.min',
         text : '3rdparty/require/text',
         flot : '3rdparty/flot/jquery.flot',
         flotresize : '3rdparty/flot/jquery.flot.resize',

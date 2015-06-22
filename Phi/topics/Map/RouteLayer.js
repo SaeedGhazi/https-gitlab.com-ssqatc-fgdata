@@ -2,7 +2,7 @@
     if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
         define([
-                'leaflet', 'props', './MapIcons', 'knockout'
+                'leaflet', 'props', './MapIcons', 'knockout', 'geodesic'
         ], factory);
     } else {
         // Browser globals
@@ -31,13 +31,21 @@
             });
             self.waypointCountSubscription = self.waypointCount.subscribe(function() {
                 self.update();
+            });
 
-            })
+            self.geodesic = L.geodesic([], {
+                weight: 5,
+                opacity: 0.5,
+                color: 'blue',
+                steps: 20,
+            }).addTo(map);
         },
 
         onRemove : function(map) {
-            this.waypointCountSubscription.dispose();
-            this.waypointCount.dispose();
+            var self = this;
+            self.waypointCountSubscription.dispose();
+            self.waypointCount.dispose();
+            map.removeLayer(self.geodesic);
             leaflet.GeoJSON.prototype.onRemove.call(this, map);
         },
 
@@ -55,8 +63,15 @@
             var jqxhr = $.get(url).done(function(data) {
                 self.clearLayers();
                 var geoJSON = self.routePropsToGeoJson(data);
-                if (geoJSON)
+                if (geoJSON) {
                     self.addData(geoJSON);
+                    var latlngs = [];
+                    geoJSON.features.forEach( function(f) {
+                        if( f.geometry && f.geometry.coordinates )
+                            latlngs.push( new L.LatLng(f.geometry.coordinates[1], f.geometry.coordinates[0] ) );
+                    });
+                    self.geodesic.setLatLngs([latlngs]);
+                }
             }).fail(function(a, b) {
                 // self.stop(); // TODO: Should we?
                 alert('failed to load RouteManager data');
@@ -69,7 +84,6 @@
                 type : "FeatureCollection",
                 features : [],
             };
-            var lineString = [];
 
             var root = new SGPropertyNode(props);
             root.getChildren("wp").forEach(function(wp) {
@@ -80,7 +94,6 @@
                 var position = [
                         lon, lat
                 ];
-                lineString.push(position);
 
                 geoJSON.features.push({
                     "type" : "Feature",
@@ -93,12 +106,7 @@
                 });
             });
 
-            geoJSON.features.push({
-                "type" : "LineString",
-                "coordinates" : lineString,
-            });
-
-            if (lineString.length >= 2)
+            if (geoJSON.features.length >= 2)
                 return geoJSON;
         },
 

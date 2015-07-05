@@ -3,7 +3,7 @@
 <!--
 ***********************************************************************************
 c172p-detailed, May 2015 
-Extra weight and drag due to bush wheels or floats
+Extra weight and drag due to bush wheels, floats and 180 hp engine
 ***********************************************************************************
  -->
 
@@ -34,13 +34,21 @@ Extra weight and drag due to bush wheels or floats
             </test>            
             <output>/fdm/jsbsim/inertia/pointmass-weight-lbs[7]</output>
         </switch>
-        
+
         <switch name="extra-weight-right-36-in">
             <default value="0"/>
             <test logic="AND" value="15">
                 bushkit EQ 2
             </test>            
             <output>/fdm/jsbsim/inertia/pointmass-weight-lbs[8]</output>
+        </switch>
+
+        <switch name="extra-weight-180hp">
+            <default value="0"/>
+            <test logic="AND" value="142">
+                /controls/engines/active-engine EQ 1
+            </test>            
+            <output>/fdm/jsbsim/inertia/pointmass-weight-lbs[13]</output>
         </switch>
 
         <fcs_function name="extra-weight-left-float">
@@ -240,15 +248,13 @@ Extra weight and drag due to bush wheels or floats
         <fcs_function name="left-pontoon/leakage-lbs_sec">
             <function>
                 <product>
-                    <value>5.0</value>
                     <property>hydro/active-norm</property>
-                    <sum>
-                        <property>left-pontoon/damaged</property>
-                        <product>
-                            <value>50.0</value>
-                            <property>left-pontoon/broken</property>
-                        </product>
-                    </sum>
+                    <switch>
+                        <property>pontoon-damage/left-pontoon</property>
+                        <value>0.0</value>
+                        <value>250.0</value>
+                        <value>5.0</value>
+                    </switch>
                 </product>
             </function>
         </fcs_function>
@@ -268,15 +274,13 @@ Extra weight and drag due to bush wheels or floats
         <fcs_function name="right-pontoon/leakage-lbs_sec">
             <function>
                 <product>
-                    <value>5.0</value>
                     <property>hydro/active-norm</property>
-                    <sum>
-                        <property>right-pontoon/damaged</property>
-                        <product>
-                            <value>50.0</value>
-                            <property>right-pontoon/broken</property>
-                        </product>
-                    </sum>
+                    <switch>
+                        <property>pontoon-damage/right-pontoon</property>
+                        <value>0.0</value>
+                        <value>250.0</value>
+                        <value>5.0</value>
+                    </switch>
                 </product>
             </function>
         </fcs_function>

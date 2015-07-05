@@ -18,6 +18,10 @@
         <type>float</type>
         <property type="string">/systems/pitot/measured-total-pressure-inhg</property>
     </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/systems/electrical/battery-charge-percent</property>
+    </signal>
 
     <!-- ============================================================== -->
     <!-- Instruments                                                    -->
@@ -79,6 +83,12 @@
         <property type="string">/instrumentation/adf[0]/rotation-deg</property>
     </signal>
 
+    <!-- EGT -->
+    <signal>
+        <type>float</type>
+        <property type="string">/engines/engine[0]/egt-bug-norm</property>
+    </signal>
+
     <!-- ============================================================== -->
     <!-- Climate Control                                                -->
     <!-- ============================================================== -->
@@ -94,6 +104,19 @@
     <signal>
         <type>float</type>
         <property type="string">/environment/aircraft-effects/cabinairdewpointC</property>
+    </signal>
+
+    <!-- ============================================================== -->
+    <!-- Stall Horn                                                     -->
+    <!-- ============================================================== -->
+
+    <signal>
+        <type>float</type>
+        <property type="string">/fdm/jsbsim/sounds/stall-horn-volume-actual</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/fdm/jsbsim/sounds/stall-horn-pitch-actual</property>
     </signal>
 
 </PropertyList>

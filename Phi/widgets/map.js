@@ -1,8 +1,8 @@
 define(
         [
-                'knockout', 'jquery', 'leaflet', 'text!./map.html'
+                'knockout', 'jquery', 'leaflet', 'text!./map.html', 'text!../images/aircraft.svg'
         ],
-        function(ko, jquery, leaflet, htmlString) {
+        function(ko, jquery, leaflet, htmlString, aircraftSvg ) {
 
             function ViewModel(params, componentInfo) {
                 var self = this;
@@ -122,7 +122,7 @@ define(
                                                     30, 30
                                             ],
                                             className : 'aircraft-marker-icon',
-                                            html : '<svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet"><path d="M250.2,59.002c11.001,0,20.176,9.165,20.176,20.777v122.24l171.12,95.954v42.779l-171.12-49.501v89.227l40.337,29.946v35.446l-60.52-20.18-60.502,20.166v-35.45l40.341-29.946v-89.227l-171.14,49.51v-42.779l171.14-95.954v-122.24c0-11.612,9.15-20.777,20.16-20.777z" fill="#808080" stroke="black" stroke-width="5"/></svg>',
+                                            html : aircraftSvg,
                                         }),
                                 zIndexOffset : 10000,
                                 updateInterval : 100,

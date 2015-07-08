@@ -7,6 +7,11 @@ define(
             function ViewModel(params, componentInfo) {
                 var self = this;
 
+                { // extract <svg> element from image xml (strip pi)
+                    var xmlDoc = jquery.parseXML( aircraftSvg );
+                    aircraftSvg = jquery( xmlDoc ).find("svg")[0].outerHTML;
+                }
+
                 self.element = componentInfo.element;
                 self.followAircraft = ko.observable(true);
 

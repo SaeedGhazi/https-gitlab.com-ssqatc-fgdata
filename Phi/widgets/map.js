@@ -199,7 +199,11 @@ define(
                 });
 
                 self.heading.subscribe(function(newValue) {
-                    aircraftMarker.options.angle = newValue;
+                    var h = Math.round( newValue );
+                    if( aircraftMarker.options.angle != h ) {
+                      aircraftMarker.options.angle = h;
+                      aircraftMarker.setLatLng(self.position());
+                    }
                 });
 
                 self.mapCenter = ko.pureComputed(function() {

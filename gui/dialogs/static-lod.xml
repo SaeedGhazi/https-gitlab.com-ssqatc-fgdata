@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+  <nasal>
+    <open>
+      <![CDATA[
+          var modePixel = (getprop("/sim/rendering/static-lod/ai-range-mode-pixel") == 1);
+          setprop( "/sim/gui/dialogs/static-lod/mode/pixel", modePixel );
+          setprop( "/sim/gui/dialogs/static-lod/mode/distance", !modePixel );
+    ]]>
+    </open>
+  </nasal>
+
   <name>static-lod</name>
   <layout>vbox</layout>
 
@@ -85,6 +95,56 @@
       <halign>fill</halign>
       <property>/sim/rendering/static-lod/ai-detailed</property>
     </input>
+
+    <radio>
+      <row>3</row>
+      <col>2</col>
+      <halign>left</halign>
+      <name>pixel</name>
+      <property>sim/gui/dialogs/static-lod/mode/pixel</property>
+      <live>true</live>
+      <label>Pixel</label>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/gui/dialogs/static-lod/mode/distance</property>
+        <value>0</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/gui/dialogs/static-lod/mode/pixel</property>
+        <value>1</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/rendering/static-lod/ai-range-mode-pixel</property>
+        <value>1</value>
+      </binding>
+    </radio>
+
+    <radio>
+      <row>3</row>
+      <col>3</col>
+      <halign>left</halign>
+      <name>distance</name>
+      <property>sim/gui/dialogs/static-lod/mode/distance</property>
+      <live>true</live>
+      <label>Distance (m)</label>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/gui/dialogs/static-lod/mode/distance</property>
+        <value>1</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/gui/dialogs/static-lod/mode/pixel</property>
+        <value>0</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/rendering/static-lod/ai-range-mode-pixel</property>
+        <value>0</value>
+      </binding>
+    </radio>
 
     <text>
       <row>4</row><col>0</col>

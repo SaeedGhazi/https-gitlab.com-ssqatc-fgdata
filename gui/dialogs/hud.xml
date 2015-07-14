@@ -101,7 +101,7 @@
   			<property>/sim/gui/dialogs/hud/lon-lat-format-0</property>
   			<value>0</value>
   			<live>true</live>
-  			<label>Decimal degrees</label>
+  			<label>DDD format (37.618890N 122.375000W)</label>
   			<binding>
   				<command>nasal</command>
   				<script>set_radio(0);</script>
@@ -111,7 +111,7 @@
   			<halign>left</halign>
   			<property>/sim/gui/dialogs/hud/lon-lat-format-1</property>
   			<value>1</value>
-  			<label>Degrees, minutes</label>
+  			<label>DMM format (37*37.133'N 122*22.500'W)</label>
   			<live>true</live>
   			<binding>
   				<command>nasal</command>
@@ -123,10 +123,87 @@
   			<property>/sim/gui/dialogs/hud/lon-lat-format-2</property>
   			<value>2</value>
   			<live>true</live>
-  			<label>Degrees, minutes, seconds </label>
+  			<label>DMS format (37*37'08.0"N 122*22'30.0"W)</label>
   			<binding>
   				<command>nasal</command>
   				<script>set_radio(2);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-3</property>
+  			<value>3</value>
+  			<live>true</live>
+  			<label>Signed DDD format (37.618890 -122.375000)</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(3);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-4</property>
+  			<value>4</value>
+  			<live>true</live>
+  			<label>Signed DMM format (37*37.133' -122*22.500')</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(4);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-5</property>
+  			<value>5</value>
+  			<live>true</live>
+  			<label>Signed DMS format (37*37'08.0" -122*22'30.0")</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(5);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-6</property>
+  			<value>6</value>
+  			<live>true</live>
+  			<label>Zero padded DDD (51.477500N 000.461389W)</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(6);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-7</property>
+  			<value>7</value>
+  			<live>true</live>
+  			<label>Zero padded DMM (51*28.650'N 000*27.683'W)</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(7);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-8</property>
+  			<value>8</value>
+  			<live>true</live>
+  			<label>Zero padded DMS (51*28'39.0"N 000*27'41.0"W)</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(8);</script>
+  			</binding>
+  		</radio>
+  		<radio>
+  			<halign>left</halign>
+  			<property>/sim/gui/dialogs/hud/lon-lat-format-9</property>
+  			<value>9</value>
+  			<live>true</live>
+  			<label>Trinity House Navigation (51* 28'.650N 000* 27'.683W)</label>
+  			<binding>
+  				<command>nasal</command>
+  				<script>set_radio(9);</script>
   			</binding>
   		</radio>
   	</group>

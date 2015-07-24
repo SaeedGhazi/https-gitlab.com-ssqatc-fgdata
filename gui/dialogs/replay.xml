@@ -33,9 +33,12 @@
 				var current_view = getprop("/sim/current-view/view-number");
 				var i = 0;
 				foreach (var v; view.views) {
-					var name = "Unnamed view " ~ v.getIndex();
-					if (v.getNode("name") != nil) {
-						name = v.getNode("name").getValue();
+					if (v.getNode("name") == nil) {
+						continue;
+					}
+					var name = v.getNode("name").getValue();
+					if (name == nil) {
+						continue;
 					}
 
 					# Pre-populate the combo box selected value

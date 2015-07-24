@@ -96,8 +96,8 @@ var reset_system = func {
 	{
 		c172p.autostart(0);
 	    setprop("/controls/switches/starter", 1);
-		var engineRunning = setlistener("/engines/engine[0]/running", func{
-			if (getprop("/engines/engine[0]/running"))
+		var engineRunning = setlistener("/engines/active-engine/running", func{
+			if (getprop("/engines/active-engine/running"))
 			{
 				setprop("/controls/switches/starter", 0);
 				removelistener(engineRunning);
@@ -196,6 +196,19 @@ setlistener("/controls/engines/active-engine", func (node) {
     click("engine-repair", 6.0);
 }, 0, 0);
 
+var update_pax = func {
+    var state = 0;
+    state = bits.switch(state, 0, getprop("pax/co-pilot/present"));
+    state = bits.switch(state, 1, getprop("pax/left-passenger/present"));
+    state = bits.switch(state, 2, getprop("pax/right-passenger/present"));
+    setprop("/payload/pax-state", state);
+};
+
+setlistener("/pax/co-pilot/present", update_pax, 0, 0);
+setlistener("/pax/left-passenger/present", update_pax, 0, 0);
+setlistener("/pax/right-passenger/present", update_pax, 0, 0);
+update_pax();
+
 var nasalInit = setlistener("/sim/signals/fdm-initialized", func{
     # Use Nasal to make some properties persistent. <aircraft-data> does
     # not work reliably.
@@ -204,6 +217,14 @@ var nasalInit = setlistener("/sim/signals/fdm-initialized", func{
 
     # Initialize mass limits
     set_limits(props.globals.getNode("/controls/engines/active-engine"));
+
+    # Set alt alert of KAP 140 autopilot to 20_000 ft to get rid of annoying beep
+    setlistener("/autopilot/KAP140/settings/target-alt-ft", func (n) {
+        if (n.getValue() == 0) {
+            kap140.altPreselect = 20000;
+            setprop("/autopilot/KAP140/settings/target-alt-ft", kap140.altPreselect);
+        }
+    });
 
     reset_system();
     var c172_timer = maketimer(0.25, func{global_system_loop()});

@@ -27,31 +27,6 @@ var ammeter_ave = 0.0;
 var init_electrical = func {
     battery = BatteryClass.new();
     alternator = AlternatorClass.new();
-    
-    props.globals.getNode("controls/circuit-breakers/aircond", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/master", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/flaps", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/pitot-heat", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/instr", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/intlt", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/navlt", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/bcnlt", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/landing", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/strobe", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/turn-coordinator", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/radio1", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/radio2", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/radio3", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/radio4", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/radio5", 1).setBoolValue(1);
-    props.globals.getNode("controls/circuit-breakers/autopilot", 1).setBoolValue(1);
-
-    # These two properties are aliased to MP properties in /sim/multiplay/generic/.
-    # This aliasing seems to work in both ways, because the two properties below
-    # appear to receive the random values from the MP properties during initialization.
-    # Therefore, override these random values with the proper values we want.
-    props.globals.getNode("sim/model/c172p/lighting/beacon-top/state", 0).setBoolValue(0);
-    props.globals.getNode("sim/model/c172p/lighting/strobes/state", 0).setBoolValue(0);
 
     # Request that the update function be called next frame
     settimer(update_electrical, 0);
@@ -115,7 +90,7 @@ BatteryClass.apply_load = func (amps, dt) {
     var new_charge_percent = std.max(0.0, std.min(old_charge_percent - percent_used, 1.0));
 
     if (new_charge_percent < 0.1 and old_charge_percent >= 0.1)
-        gui.popupTip("Warning: Low battery! Enable alternator or apply external power to recharge battery.", 10);
+        gui.popupTip("Warning: Low battery! Enable alternator or apply external power to recharge battery!", 10);
 
     setprop("/systems/electrical/battery-charge-percent", new_charge_percent);
     return me.amp_hours * new_charge_percent;
@@ -164,7 +139,7 @@ var AlternatorClass = {};
 
 AlternatorClass.new = func {
     var obj = { parents : [AlternatorClass],
-                rpm_source : "/engines/engine[0]/rpm",
+                rpm_source : "/engines/active-engine/rpm",
                 rpm_threshold : 800.0,
                 ideal_volts : 28.0,
                 ideal_amps : 60.0 };

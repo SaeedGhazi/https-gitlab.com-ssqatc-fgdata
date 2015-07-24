@@ -42,11 +42,17 @@ aircraft.data.add(
     "instrumentation/comm[0]/volume",
     "instrumentation/comm[0]/frequencies/selected-mhz",
     "instrumentation/comm[0]/frequencies/standby-mhz",
+    "instrumentation/comm[0]/frequencies/dial-khz",
+    "instrumentation/comm[0]/frequencies/dial-mhz",
     "instrumentation/comm[0]/test-btn",
     "instrumentation/nav[0]/audio-btn",
     "instrumentation/nav[0]/power-btn",
+    "instrumentation/nav[0]/volume",
     "instrumentation/nav[0]/frequencies/selected-mhz",
     "instrumentation/nav[0]/frequencies/standby-mhz",
+    "instrumentation/nav[0]/frequencies/dial-khz",
+    "instrumentation/nav[0]/frequencies/dial-mhz",
+    "instrumentation/nav[0]/radials/selected-deg",
 );
 
 # COMM2 (according to its documentation)
@@ -55,11 +61,36 @@ aircraft.data.add(
     "instrumentation/comm[1]/volume",
     "instrumentation/comm[1]/frequencies/selected-mhz",
     "instrumentation/comm[1]/frequencies/standby-mhz",
+    "instrumentation/comm[1]/frequencies/dial-khz",
+    "instrumentation/comm[1]/frequencies/dial-mhz",
     "instrumentation/comm[1]/test-btn",
     "instrumentation/nav[1]/audio-btn",
     "instrumentation/nav[1]/power-btn",
+    "instrumentation/nav[1]/volume",
     "instrumentation/nav[1]/frequencies/selected-mhz",
     "instrumentation/nav[1]/frequencies/standby-mhz",
+    "instrumentation/nav[1]/frequencies/dial-khz",
+    "instrumentation/nav[1]/frequencies/dial-mhz",
+    "instrumentation/nav[1]/radials/selected-deg",
+);
+
+aircraft.data.add(
+    "instrumentation/dme/switch-position",
+    "instrumentation/dme/frequencies/source",
+    "instrumentation/dme/frequencies/selected-mhz",
+);
+
+# Instruments
+aircraft.data.add(
+    "instrumentation/altimeter/setting-inhg",
+    "instrumentation/attitude-indicator/horizon-offset-deg",
+    "autopilot/settings/heading-bug-deg",
+    "instrumentation/heading-indicator/offset-deg",
+    "instrumentation/adf[0]/rotation-deg",
+    "instrumentation/adf[0]/frequencies/dial-1-khz",
+    "instrumentation/adf[0]/frequencies/dial-100-khz",
+    "autopilot/KAP140/settings/dial-10-ft",
+    "autopilot/KAP140/settings/dial-100-ft",
 );
 
 # DME saves power-btn in ki266.nas
@@ -83,7 +114,11 @@ aircraft.data.add(
     "/controls/lighting/landing-lights",
     "/controls/lighting/nav-lights",
     "/controls/lighting/strobe",
-    "/controls/lighting/taxi-light"
+    "/controls/lighting/taxi-light",
+    "/controls/switches/magnetos",
+    "/controls/switches/master-bat",
+    "/controls/switches/master-alt",
+    "/controls/switches/master-avionics",
 );
 
 # Other controls
@@ -91,5 +126,32 @@ aircraft.data.add(
     "/controls/anti-ice/engine/carb-heat",
     "/controls/anti-ice/pitot-heat",
     "/consumables/fuel/tank/selected",
-    "/consumables/fuel/tank[1]/selected"
+    "/consumables/fuel/tank[1]/selected",
+    "/controls/gear/brake-parking",
+    "/controls/flight/flaps",
+    "/controls/flight/elevator-trim",
+    "/controls/engines/current-engine/throttle",
+    "/controls/engines/current-engine/mixture",
+    "/controls/engines/engine[0]/primer-lever",
+);
+
+# Circuit breakers
+aircraft.data.add(
+    "/controls/circuit-breakers/aircond",
+    "/controls/circuit-breakers/autopilot",
+    "/controls/circuit-breakers/bcnlt",
+    "/controls/circuit-breakers/flaps",
+    "/controls/circuit-breakers/instr",
+    "/controls/circuit-breakers/intlt",
+    "/controls/circuit-breakers/landing",
+    "/controls/circuit-breakers/master",
+    "/controls/circuit-breakers/navlt",
+    "/controls/circuit-breakers/pitot-heat",
+    "/controls/circuit-breakers/radio1",
+    "/controls/circuit-breakers/radio2",
+    "/controls/circuit-breakers/radio3",
+    "/controls/circuit-breakers/radio4",
+    "/controls/circuit-breakers/radio5",
+    "/controls/circuit-breakers/strobe",
+    "/controls/circuit-breakers/turn-coordinator",
 );

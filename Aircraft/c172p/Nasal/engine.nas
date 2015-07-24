@@ -32,7 +32,7 @@ var init_hobbs_meter = func(index, meter) {
 init_hobbs_meter(0, hobbsmeter_engine_160hp);
 init_hobbs_meter(1, hobbsmeter_engine_180hp);
 
-setlistener("/sim/time/hobbs/engine[0]", func {
+var update_hobbs_meter = func {
     # in seconds
     var hobbs_160hp = getprop("/sim/time/hobbs/engine[0]") or 0.0;
     var hobbs_180hp = getprop("/sim/time/hobbs/engine[1]") or 0.0;
@@ -47,7 +47,10 @@ setlistener("/sim/time/hobbs/engine[0]", func {
     setprop("/instrumentation/hobbs-meter/digits2", math.mod(int(hobbs / 10), 10));
     setprop("/instrumentation/hobbs-meter/digits3", math.mod(int(hobbs / 100), 10));
     setprop("/instrumentation/hobbs-meter/digits4", math.mod(int(hobbs / 1000), 10));
-}, 1, 0);
+};
+
+setlistener("/sim/time/hobbs/engine[0]", update_hobbs_meter, 1, 0);
+setlistener("/sim/time/hobbs/engine[1]", update_hobbs_meter, 1, 0);
 
 # ========== primer stuff ======================
 
@@ -96,13 +99,13 @@ var update = func {
     # We use the mixture to control the engines, so set the mixture
     var usePrimer = getprop("/controls/engines/engine/use-primer") or 0;
 
-    var engine_running = getprop("/engines/current-engine/running");
+    var engine_running = getprop("/engines/active-engine/running");
 
     if (outOfFuel and (engine_running or usePrimer)) {
         print("Out of fuel!");
         gui.popupTip("Out of fuel!");
     }
-    elsif (usePrimer and getprop("/engines/engine/oil-temperature-degf") <= 75) {
+    elsif (usePrimer and !engine_running and getprop("/engines/active-engine/oil-temperature-degf") <= 75) {
         # Mixture is controlled by start conditions
         var primer = getprop("/controls/engines/engine/primer");
         if (!getprop("/fdm/jsbsim/fcs/mixture-primer") and getprop("/controls/switches/starter")) {
@@ -123,15 +126,16 @@ var update = func {
 };
 
 var autostart = func (msg=1) {
-    if (getprop("/engines/current-engine/running")) {
+    if (getprop("/engines/active-engine/running")) {
 		if (msg)
-            gui.popupTip("Engine already running.", 5);
+            gui.popupTip("Engine already running", 5);
         return;
     }
 
     setprop("/controls/switches/magnetos", 3);
     setprop("/controls/engines/current-engine/throttle", 0.2);
     setprop("/controls/engines/current-engine/mixture", 1.0);
+    setprop("/controls/flight/elevator-trim", 0.0);
     setprop("/controls/switches/master-bat", 1);
     setprop("/controls/switches/master-alt", 1);
     setprop("/controls/switches/master-avionics", 1);
@@ -147,6 +151,7 @@ var autostart = func (msg=1) {
     setprop("/instrumentation/altimeter/setting-inhg", getprop("/environment/pressure-sea-level-inhg"));
 
     #c172p.autoPrime();
+    setprop("/controls/engines/engine[0]/primer-lever", 0);
     setprop("/controls/engines/engine/primer", 3);
 	if (msg)
 	    gui.popupTip("Hold down \"s\" to start the engine", 5);
@@ -215,13 +220,15 @@ controls.mixtureAxis = func {
 # key 's' calls to this function when it is pressed DOWN even if I overwrite the binding in the -set.xml file!
 # fun fact: the key UP event can be overwriten!
 controls.startEngine = func(v = 1) {
-    if (getprop("/engines/current-engine/running"))
+    if (getprop("/engines/active-engine/running"))
 	{
         setprop("/controls/switches/starter", 0);
 		return;
 	}
-	else
+	else {
+        setprop("/controls/switches/magnetos", 3);
 		setprop("/controls/switches/starter", v);
+    }
 };
 
 setlistener("/sim/signals/fdm-initialized", func {

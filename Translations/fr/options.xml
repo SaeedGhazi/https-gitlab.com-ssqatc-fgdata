@@ -70,6 +70,7 @@
     <config-desc>Charge des propriétés additionnelles à partir de l'emplacement.</config-desc>   <!-- English: "Load additional properties from path" -->
     <units-feet-desc>Utilise le pied comme unité de mesure.</units-feet-desc>   <!-- English: "Use feet for distances" -->
     <units-meters-desc>Utilise le mètre comme unité de mesure.</units-meters-desc>   <!-- English: "Use meters for distances" -->
+    <console-desc>Affichage de la console (spécificité Windows)</console-desc>   <!--English: "Display console (Windows specific)" -->
 
     <!-- Features options -->
     <environment-options>Options d'environnement </environment-options>   <!-- English: "Environment Options" -->
@@ -84,7 +85,7 @@
     <enable-hud-3d-desc>Active le collimateur 3D.</enable-hud-3d-desc>   <!-- English: "Enable 3D HUD" -->
 
     <!-- Aircraft options -->
-    <aircraft-options>Options des aéronefs </aircraft-options>   <!-- English: "Aircraft" -->
+    <aircraft-options>Aéronef</aircraft-options>   <!-- English: "Aircraft" -->
     <aircraft-desc>Choisit un profil d'aéronef défini par un fichier &lt;nom&gt;-set.xml.</aircraft-desc>   <!-- English: "Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml" -->
     <show-aircraft-desc>Affiche une liste des types d'aéronefs actuellement disponibles.</show-aircraft-desc>   <!-- English: "Print a list of the currently available aircraft types" -->
     <min-aircraft-status>Permet de définir le niveau de statut minimum (= statut de développement) pour tous les aéronefs listés.</min-aircraft-status>   <!-- English: "Allows you to define a minimum status level (=development status) for all listed aircraft" -->
@@ -122,7 +123,7 @@
     <vor-freq-desc>Précise la fréquence du VOR. A utiliser avec --vor=ID.</vor-freq-desc>   <!-- English: "Specify the frequency of the VOR. Use with -_vor=ID" -->
     <ndb-desc>Précise la position de démarrage relative à un NDB.</ndb-desc>   <!-- English: "Specify starting position relative to an NDB" -->
     <ndb-freq-desc>Précise la fréquence du NDB. A utiliser avec --ndb=ID.</ndb-freq-desc>   <!-- English: "Specify the frequency of the NDB. Use with -_ndb=ID" -->
-    <fix-desc>Précise la position de démarre relative à un fix.</fix-desc>   <!-- English: "Specify starting position relative to a fix" -->
+    <fix-desc>Précise la position de démarre relative à un point fixe.</fix-desc>   <!-- English: "Specify starting position relative to a fix" -->
     <runway-no-desc>Précise la piste de départ (un aéroport doit également être précisé).</runway-no-desc>   <!-- English: "Specify starting runway (must also specify an airport)" -->
     <offset-distance-desc>Précise la distance par rapport un un point de référence (en miles).</offset-distance-desc>   <!-- English: "Specify distance to reference point (statute miles)" -->
     <offset-azimuth-desc>Précise le cap par rapport à un point de référence.</offset-azimuth-desc>   <!-- English: "Specify heading to reference point" -->
@@ -148,10 +149,12 @@
     <disable-sound-desc>Désactive les effets sonores.</disable-sound-desc>   <!-- English: "Disable sound effects" -->
     <enable-sound-desc>Active les effets sonores.</enable-sound-desc>   <!-- English: "Enable sound effects" -->
     <show-sound-devices-desc>Affiche une liste des ressources audio disponibles.</show-sound-devices-desc>   <!-- English: "Show a list of available audio device" -->
-    <sound-device-desc>Précise spécifiquement la ressource audio à utiliser.</sound-device-desc>   <!-- English: "Explicitly specify the audio device to use" -->
+    <sound-device-desc>Précise explicitement la ressource audio à utiliser.</sound-device-desc>   <!-- English: "Explicitly specify the audio device to use" -->
 
     <!-- Rendering options -->
     <rendering-options>Options de rendu </rendering-options>   <!-- English: "Rendering Options" -->
+    <enable-rembrandt-desc>Active le rendu Rembrandt</enable-rembrandt-desc>   <!-- English: "Enable Rembrandt rendering" -->
+    <disable-rembrandt-desc>Désactive le rendu Rembrandt</disable-rembrandt-desc>   <!-- English: "Disable Rembrandt rendering" -->
     <bpp-desc>Précise le nombre de bits par pixel.</bpp-desc>   <!-- English: "Specify the bits per pixel" -->
     <fog-disable-desc>Active le brouillard/brume.</fog-disable-desc>   <!-- English: "Disable fog/haze" -->
     <fog-fastest-desc>Active un rendu brouillard/brume plus rapide.</fog-fastest-desc>   <!-- English: "Enable fastest fog/haze" -->
@@ -205,10 +208,12 @@
     <httpd-desc>Active un serveur HTTP sur un port spécifié.</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
     <proxy-desc>Précise quel serveur proxy (et port) à utiliser. Le nom d'utilisateur et le mot de passe sont optionnels et doivent déjà être hachés avec l'algorithme MD5. Cette option n'est utilise que si elle est utilisée en conjonction avec l'option real-weather-fetch.</proxy-desc>   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
     <telnet-desc>Active un serveur telnet sur le port précisé.</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-    <jpg-httpd-desc>Active le serveur HTTP de captures d'écran sur le port précisé. (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+    <jpg-httpd-desc>Active le serveur HTTP de captures d'écran sur le port précisé (remplacé par --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
     <disable-terrasync-desc>Désactive le téléchargement/la mise à jour automatique des scènes.</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
     <enable-terrasync-desc>Active le téléchargement/la mise à jour automatique des scènes.</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
     <terrasync-dir-desc>Précise le répertoire cible pour les téléchargements des scènes.</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->
+    <enable-fgcom-desc>Active la version intégrée de FGCom</enable-fgcom-desc>   <!-- English: "Enable FGCom built-in" -->Disable FGCom built-in
+    <disable-fgcom-desc>Désactive la version intégrée de FGCom</disable-fgcom-desc>   <!-- English: "Disable FGCom built-in" -->
 
     <!-- MultiPlayer options -->
     <multiplayer-options>Options multijoueurs </multiplayer-options>   <!-- English: "MultiPlayer Options" -->
@@ -217,7 +222,7 @@
 
     <!-- Route/Way Point Options -->
     <route-options>Options de point tournant de route </route-options>   <!-- English: "Route/Way Point Options" -->
-    <wp-desc>Précise un point tournant (waypoint) pour le pilote automatique GC.</wp-desc>   <!-- English: "Specify a waypoint for the GC autopilot;" -->
+    <wp-desc>Précise un point tournant pour le pilote automatique GC.</wp-desc>   <!-- English: "Specify a waypoint for the GC autopilot;" -->
     <flight-plan-desc>Lire tous les points tournants à partir d'un fichier.</flight-plan-desc>   <!-- English: "Read all waypoints from a file" -->
 
     <!-- IO Options -->
@@ -252,7 +257,7 @@
     <dme-desc>Rend l'ADF esclave d'une des radios NAV, ou précise sa fréquence interne.</dme-desc>   <!-- English: "Slave the ADF to one of the NAV radios, or set its internal frequency." -->
 
     <situation-options>Options de situation </situation-options>   <!-- English: "Situation Options" -->
-    <failure-desc>Met en panne les systèmes pitot, statique, de vide, ou électrique (répéter l'option pour des pannes système multiples).</failure-desc>   <!-- English: "Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures)." -->
+    <failure-desc>Met en panne les systèmes pitot, statique, de vide ou électrique (répéter l'option pour des pannes système multiples).</failure-desc>   <!-- English: "Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures)." -->
 
     <!-- Debugging Options -->
     <debugging-options>Options de débogage </debugging-options>   <!-- English: "Debugging Options" -->

@@ -30,6 +30,8 @@
     <snap-shot-dir>Répertoire des captures</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
     <sound-config>Configuration du son</sound-config>   <!-- English: "Sound Configuration" -->
     <input-config>Configuration des périphériques</input-config>   <!-- English: "Input Configuration" -->
+    <terrasync>Téléchargement des scènes</terrasync>   <!-- English: "Scenery Download" -->
+    <aircraft-center>Hangar des avions (Expérimental)</aircraft-center>   <!-- English: "Aircraft Center (Experimental)" -->
     <exit>Quitter</exit>   <!-- English: "Quit          " -->
 
     <!-- View menu -->
@@ -70,6 +72,8 @@
     <!-- Equipment menu -->
     <equipment>Equipement</equipment>   <!-- English: "Equipment" -->
     <map>Carte</map>   <!-- English: "Map" -->
+    <map-canvas>Carte (Canvas)</map-canvas>   <!-- English: "Map (Canvas)" -->
+    <map-browser>Carte (s'ouvre dans le navigateur)</map-browser>  <!-- English: "Map (opens in browser)" -->
     <stopwatch>Chronomètre</stopwatch>   <!-- English: "Stopwatch" -->
     <fuel-and-payload>Carburant et chargement</fuel-and-payload>   <!-- English: "Fuel and Payload" -->
     <radio>Paramètres radio</radio>   <!-- English: "Radio Settings" -->
@@ -97,7 +101,8 @@
     <mp-chat-menu>Menu de clavardage</mp-chat-menu>   <!-- English: "Chat Menu" -->
     <mp-list>Liste des pilotes</mp-list>   <!-- English: "Pilot List" -->
     <mp-carrier>Choix du porte-avions multijoueurs</mp-carrier>   <!-- English: "MPCarrier Selection" -->
-	<lag-adjust>Correction de lag</lag-adjust>
+    <lag-adjust>Correction de lag</lag-adjust>
+
     <!-- Debug menu -->
     <debug>Débogage</debug>   <!-- English: "Debug" -->
     <!-- Note: Debug menu items may not need to be translated
@@ -112,6 +117,7 @@
     <reload-materials>Recharger les matériaux</reload-materials>   <!-- English: "Reload Materials" -->
     <reload-scenery>Recharger les scènes</reload-scenery>   <!-- English: "Reload Scenery" -->
     <nasal-console>Console Nasal</nasal-console>   <!-- English: "Nasal Console" -->
+    <nasal-repl-interpreter>Interpréteur REPL Nasal</nasal-repl-interpreter>   <!-- English: "Nasal REPL Interpreter" -->
     <development-keys>Touches de développement</development-keys>   <!-- English: "Development Keys" -->
     <configure-dev-extension>Configurer les extensions de développement</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
     <display-marker>Afficher le marqueur de tutoriel</display-marker>   <!-- English: "Display Tutorial Marker" -->

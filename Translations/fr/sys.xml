@@ -21,20 +21,24 @@
 ### -->
 <PropertyList>
 
-    <splash>
-        <init>Initialisation</init>   <!-- English: "initializing" -->
-        <loading-aircraft-list>Chargement de la liste des aeronefs</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
-        <loading-aircraft>Chargement des aeronefs</loading-aircraft>   <!-- English: "loading aircraft" -->
-        <loading-nav-dat>Chargement des donnees de navigation</loading-nav-dat>   <!-- English: "loading navigation data" -->
-        <init-scenery>Initialisation des scenes</init-scenery>   <!-- English: "initializing scenery" -->
-        <creating-subsystems>Creation des sous-systemes</creating-subsystems>   <!-- English: "creating subsystems" -->
-        <init-subsystems>Initialisation des sous-systemes</init-subsystems>   <!-- English: "initializing subsystems" -->
-        <binding-subsystems>Attribution des sous-systemes</binding-subsystems>   <!-- English: "binding subsystems" -->
-        <finishing-subsystems>Finalisation des sous-systemes</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
-        <init-graphics>Initialisation du moteur graphique</init-graphics>   <!-- English: "initializing graphics engine" -->
-        <loading-scenery>Chargement des scenes</loading-scenery>   <!-- English: "loading scenery" -->
+	<splash>
+		<init>Initialisation</init>   <!-- English: "initializing" -->
+       		<loading-aircraft-list>Chargement de la liste des aeronefs</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
+	        <loading-aircraft>Chargement des aeronefs</loading-aircraft>   <!-- English: "loading aircraft" -->
+        	<loading-nav-dat>Chargement des donnees de navigation</loading-nav-dat>   <!-- English: "loading navigation data" -->
+        <navdata-airports>Chargement des donnees des aeroports</navdata-airports>   <!-- English: "loading airport data" -->
+        <navdata-navaids>Chargement des donnees d'aide a la navigation</navdata-navaids>   <!-- English: "loading navigation aid data" -->
+        <navdata-fixes>Chargement des points fixes</navdata-fixes>   <!-- English: "loading fixes" -->
+        <navdata-pois>Chargement des points d'interet</navdata-pois>   <!-- English: "loading points of interest" -->
+        	<init-scenery>Initialisation des scenes</init-scenery>   <!-- English: "initializing scenery" -->
+        	<creating-subsystems>Creation des sous-systemes</creating-subsystems>   <!-- English: "creating subsystems" -->
+        	<init-subsystems>Initialisation des sous-systemes</init-subsystems>   <!-- English: "initializing subsystems" -->
+        	<binding-subsystems>Attribution des sous-systemes</binding-subsystems>   <!-- English: "binding subsystems" -->
+        	<finishing-subsystems>Finalisation des sous-systemes</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
+        	<init-graphics>Initialisation du moteur graphique</init-graphics>   <!-- English: "initializing graphics engine" -->
+        	<loading-scenery>Chargement des scenes</loading-scenery>   <!-- English: "loading scenery" -->
         <downloading-scenery>Telechargement des scenes</downloading-scenery> <!-- English: "downloading scenery" -->
         <finalize-position>Finalisation de la position</finalize-position> <!-- English: "finalizing position" -->
-    </splash>
+    	</splash>
 
 </PropertyList>

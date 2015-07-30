@@ -454,6 +454,10 @@ require([
         require : 'widgets/radiostack'
     });
 
+    ko.components.register('AircraftMarker', {
+        require : 'widgets/AircraftMarker'
+    });
+
     ko.components.register('METAR', {
         require : 'widgets/metar'
     });

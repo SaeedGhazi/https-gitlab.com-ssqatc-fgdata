@@ -2,13 +2,20 @@
     if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
         define([
-                'leaflet', 'props', './MapIcons'
+                'knockout', 'leaflet', 'props'
         ], factory);
     } else {
         // Browser globals
         factory();
     }
-}(function(leaflet, SGPropertyNode, MAP_ICON) {
+}(function(ko, leaflet, SGPropertyNode ) {
+
+    function ViewModel(h,l1,l2) {
+        var self = this;
+
+        self.heading = h;
+        self.labelLines = [ l1,l2 ];
+    }
 
     leaflet.AILayer = leaflet.GeoJSON.extend({
         options : {
@@ -20,27 +27,22 @@
                 };
 
                 if (feature.properties.type == "aircraft" || feature.properties.type == "multiplayer") {
-                    options.angle = feature.properties.heading;
-                    options.icon = MAP_ICON["aircraft"];
+                      var l1 = feature.properties.callsign,
+                          l2 = feature.properties.heading + 'T ' + feature.properties.speed + 'KTAS ' + 
+                               'F' + (feature.geometry.coordinates[2]/100).toFixed(0);
+                      var m = L.aircraftMarker(latlng);
+                      m.on('add', function(e) {
+                          ko.applyBindings( new ViewModel(feature.properties.heading,l1,l2), e.target._icon);
+                      });
+                      return m;
                 }
-                return new leaflet.RotatedMarker(latlng, options);
+                return new leaflet.Marker(latlng, options);
             },
 
-            onEachFeature : function(feature, layer) {
-                if (feature.properties) {
-                    var popupString = '<div class="popup">';
-                    for ( var k in feature.properties) {
-                        var v = feature.properties[k];
-                        popupString += k + ': ' + v + '<br />';
-                    }
-                    popupString += '</div>';
-                    layer.bindPopup(popupString, {
-                        maxHeight : 200
-                    });
-                }
-            },
-
+//            onEachFeature : function(feature, layer) {
+//            },
         },
+
         onAdd : function(map) {
             leaflet.GeoJSON.prototype.onAdd.call(this, map);
             this.update(++this.updateId);
@@ -67,22 +69,21 @@
                 self.clearLayers();
                 self.addData(self.aiPropsToGeoJson(data, [
                         "aircraft", "multiplayer", "carrier"
-                ]));
+                ], self._map.getBounds()));
             }).fail(function(a, b) {
                 self.updateId++;
-                console.log(a, b);
                 alert('failed to load AI data');
             }).always(function() {
             });
 
             if (self.updateId == id) {
                 setTimeout(function() {
-                    self.update(id)
+                   self.update(id)
                 }, 10000);
             }
         },
 
-        aiPropsToGeoJson : function(props, types) {
+        aiPropsToGeoJson : function(props, types, bounds ) {
             var geoJSON = {
                 type : "FeatureCollection",
                 features : [],
@@ -100,7 +101,10 @@
                     var velocities = child.getNode("velocities");
                     var lon = position.getNode("longitude-deg").getValue();
                     var lat = position.getNode("latitude-deg").getValue();
-                    var alt = position.getNode("altitude-ft") * 0.3048;
+                    if( false == bounds.contains(L.latLng(lat,lon)) ) {
+                        return;
+                    }
+                    var alt = position.getNode("altitude-ft").getValue();
                     var heading = orientation.getNode("true-heading-deg").getValue();
                     var id = child.getNode("id").getValue();
                     var callsign = "";

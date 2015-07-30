@@ -43,7 +43,7 @@
                     }
                 }
 
-                return new leaflet.RotatedMarker(latlng, options);
+                return new leaflet./*Rotated*/Marker(latlng, options);
             },
 
             onEachFeature : function(feature, layer) {

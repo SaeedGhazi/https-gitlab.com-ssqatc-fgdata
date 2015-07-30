@@ -1,16 +1,48 @@
 define(
         [
-                'knockout', 'jquery', 'leaflet', 'text!./map.html', 'text!../images/aircraft.svg'
+                'knockout', 'jquery', 'leaflet', 'text!./map.html'
         ],
-        function(ko, jquery, leaflet, htmlString, aircraftSvg ) {
+        function(ko, jquery, leaflet, htmlString ) {
+            if( !L.AircraftMarker ) {
+                L.AircraftMarker = L.Marker
+                        .extend({
+                            options : {
+                                clickable : false,
+                                keyboard : false,
+                                icon : L
+                                        .divIcon({
+                                            iconSize : [
+                                                    60, 60
+                                            ],
+                                            iconAnchor : [
+                                                    30, 30
+                                            ],
+                                            className : 'aircraft-marker-icon',
+                                            html :
+                                              '<div data-bind="component: { ' +
+                                                'name: \'AircraftMarker\', ' +
+                                                'params: { rotate: heading, label: labelLines } ' +
+                                              '}"></div>',
+                                        }),
+                                zIndexOffset : 10000,
+                                updateInterval : 100,
+                            },
+
+                            initialize : function(latlng, options) {
+                                L.Marker.prototype.initialize(latlng, options);
+                                L.Util.setOptions(this, options);
+                            },
+
+                        });
+
+                L.aircraftMarker = function(latlng, options) {
+                    return new L.AircraftMarker(latlng, options);
+                }
+             }
+
 
             function ViewModel(params, componentInfo) {
                 var self = this;
-
-                { // extract <svg> element from image xml (strip pi)
-                    var xmlDoc = jquery.parseXML( aircraftSvg );
-                    aircraftSvg = jquery( xmlDoc ).find("svg")[0].outerHTML;
-                }
 
                 self.element = componentInfo.element;
                 self.followAircraft = ko.observable(true);
@@ -18,17 +50,13 @@ define(
                 self.toggleFollowAircraft = function(a) {
                     self.followAircraft(!self.followAircraft());
                 }
-
+                
                 self.altitude = ko.observable(0).extend({
                     fgprop : 'altitude'
                 });
 
                 self.tas = ko.observable(0).extend({
                     fgprop : 'groundspeed'
-                });
-
-                self.heading = ko.observable(0).extend({
-                    fgprop : 'heading'
                 });
 
                 if (params && params.css) {
@@ -101,78 +129,6 @@ define(
                   L.control.scale(params.scale).addTo(self.map);
                 }
 
-                L.RotatedMarker = L.Marker.extend({
-                    options : {
-                        angle : 0
-                    },
-
-                    _setPos : function(pos) {
-                        L.Marker.prototype._setPos.call(this, pos);
-                        this._icon.style[L.DomUtil.TRANSFORM] += ' rotate(' + this.options.angle + 'deg)';
-                    }
-                });
-
-                L.AircraftMarker = L.RotatedMarker
-                        .extend({
-                            options : {
-                                angle : 0,
-                                clickable : false,
-                                keyboard : false,
-                                icon : L
-                                        .divIcon({
-                                            iconSize : [
-                                                    60, 60
-                                            ],
-                                            iconAnchor : [
-                                                    30, 30
-                                            ],
-                                            className : 'aircraft-marker-icon',
-                                            html : aircraftSvg,
-                                        }),
-                                zIndexOffset : 10000,
-                                updateInterval : 100,
-                            },
-
-                            initialize : function(latlng, options) {
-                                L.RotatedMarker.prototype.initialize(latlng, options);
-                                L.Util.setOptions(this, options);
-                            },
-
-                            onAdd : function(map) {
-                                L.RotatedMarker.prototype.onAdd.call(this, map);
-                                this.popup = L.popup({
-                                    autoPan : false,
-                                    keepInView : false,
-                                    closeButton : false,
-                                    className : 'aircraft-marker-popup',
-                                    closeOnClick : false,
-                                    maxWidth : 200,
-                                    minWidth : 120,
-                                    offset : [
-                                            30, 30
-                                    ],
-                                }, this);
-                                this.popup
-                                        .setContent('<div class="aircraft-marker aircraft-marker-altitude"><span data-bind="text: altitude().toFixed(0)"></span>ft</div>'
-                                                + '<div class="aircraft-marker aircraft-marker-heading"><span data-bind="text: heading().toFixed(0)"></span>&deg</div>'
-                                                + '<div class="aircraft-marker aircraft-marker-tas"><span data-bind="text: tas().toFixed(0)"></span>kt</div><div style="clear: both"/>');
-                                this.bindPopup(this.popup);
-                                this.addTo(this._map);
-                                this.openPopup();
-                            },
-
-                            onRemove : function(map) {
-                                if (this.timeoutid != null)
-                                    clearTimeout(this.timeoutid);
-                                L.RotatedMarker.prototype.onRemove.call(this, map);
-                            },
-
-                        });
-
-                L.aircraftMarker = function(latlng, options) {
-                    return new L.AircraftMarker(latlng, options);
-                }
-
                 var aircraftMarker = L.aircraftMarker(self.map.getCenter());
 
                 aircraftMarker.addTo(self.map);
@@ -203,13 +159,15 @@ define(
                     aircraftMarker.setLatLng(newValue);
                 });
 
-                self.heading.subscribe(function(newValue) {
-                    var h = Math.round( newValue );
-                    if( aircraftMarker.options.angle != h ) {
-                      aircraftMarker.options.angle = h;
-                      aircraftMarker.setLatLng(self.position());
-                    }
-                });
+                self.labelLines = [
+                  'You',
+                  ko.pureComputed(function() {
+                    var h = Math.round(self.heading());
+                    var t = Math.round(self.tas());
+                    var a = Math.round(self.altitude());
+                    return '' + h + "T " + t + "KTAS " + a + "ft";
+                  }),
+                ];
 
                 self.mapCenter = ko.pureComputed(function() {
                     return leaflet.latLng(self.latitude(), self.longitude());
@@ -233,7 +191,6 @@ define(
 
                 var center = leaflet.latLng(self.latitude(), self.longitude());
                 self.map.setView( center );
-                aircraftMarker.options.angle = self.heading();
                 aircraftMarker.setLatLng(center);
             }
 

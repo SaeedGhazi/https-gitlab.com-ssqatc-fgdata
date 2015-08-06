@@ -17,7 +17,20 @@
 	<texture n="2">
 		<type>white</type>
 	</texture>	
+	<!-- texture for reflections in the glass -->
 	<texture n="3">
+		<type>cubemap</type>
+		<images>
+			<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
+			<negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
+			<positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
+			<negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
+			<positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
+			<negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
+		</images>
+		</texture>
+	<!-- placeholder lightmap texture for reflections in the glass -->
+	<texture n="4">
 		<type>cubemap</type>
 		<images>
 			<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
@@ -45,6 +58,16 @@
 	<use-reflection type="int">0</use-reflection>
 	<reflection-strength type="float">1.0</reflection-strength>
 	<use-mask type="int">0</use-mask>
+	<use-reflection-lightmap type="int">0</use-reflection-lightmap>
+	<lightmap-multi type="int">0</lightmap-multi>
+	<lightmap-factor type="float" n="0">1.0</lightmap-factor>
+	<lightmap-color type="vec3d" n="0"> 1.0 1.0 1.0 </lightmap-color>
+	<lightmap-factor type="float" n="1">1.0</lightmap-factor>
+	<lightmap-color type="vec3d" n="1"> 1.0 1.0 1.0 </lightmap-color>
+	<lightmap-factor type="float" n="2">1.0</lightmap-factor>
+	<lightmap-color type="vec3d" n="2"> 1.0 1.0 1.0 </lightmap-color>
+	<lightmap-factor type="float" n="3">1.0</lightmap-factor>
+	<lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
 </parameters>
 
 <technique n="4">
@@ -122,6 +145,11 @@
 	<type><use>texture[3]/type</use></type>
 	<images><use>texture[3]/images</use></images>
       </texture-unit>
+      <texture-unit>
+	<unit>4</unit>
+	<type><use>texture[4]/type</use></type>
+	<images><use>texture[4]/images</use></images>
+      </texture-unit>
       <vertex-program-two-side>
         <use>vertex-program-two-side</use>
       </vertex-program-two-side>
@@ -140,6 +168,46 @@
         <name>overlay_color</name>
         <type>float-vec3</type>
         <value><use>overlay-color</use></value>
+     </uniform>
+     <uniform>
+	<name>lightmap_r_factor</name>
+	<type>float</type>
+	<value><use>lightmap-factor[0]</use></value>
+     </uniform>	   
+     <uniform>
+	<name>lightmap_r_color</name>
+	<type>float-vec3</type>
+	<value><use>lightmap-color[0]</use></value>
+     </uniform>
+    <uniform>
+	<name>lightmap_g_factor</name>
+	<type>float</type>
+	<value><use>lightmap-factor[1]</use></value>
+     </uniform>	   
+     <uniform>
+	<name>lightmap_g_color</name>
+	<type>float-vec3</type>
+	<value><use>lightmap-color[1]</use></value>
+     </uniform>
+    <uniform>
+	<name>lightmap_b_factor</name>
+	<type>float</type>
+	<value><use>lightmap-factor[2]</use></value>
+     </uniform>	   
+     <uniform>
+	<name>lightmap_b_color</name>
+	<type>float-vec3</type>
+	<value><use>lightmap-color[2]</use></value>
+     </uniform>
+    <uniform>
+	<name>lightmap_a_factor</name>
+	<type>float</type>
+	<value><use>lightmap-factor[3]</use></value>
+     </uniform>	   
+     <uniform>
+	<name>lightmap_a_color</name>
+	<type>float-vec3</type>
+	<value><use>lightmap-color[3]</use></value>
      </uniform>
      <uniform>
         <name>splash_x</name>
@@ -262,6 +330,11 @@
 	<value type="int">3</value>
       </uniform>
       <uniform>
+	<name>cube_light_texture</name>
+        <type>sampler-cube</type>
+	<value type="int">4</value>
+      </uniform>
+      <uniform>
 	<name>use_reflection</name>
 	<type>int</type>
 	<value><use>use-reflection</use></value>
@@ -280,6 +353,16 @@
 	<name>use_overlay</name>
 	<type>int</type>
 	<value><use>use-overlay</use></value>
+      </uniform>
+      <uniform>
+	<name>use_reflection_lightmap</name>
+	<type>int</type>
+	<value><use>use-reflection-lightmap</use></value>
+      </uniform>
+      <uniform>
+	<name>lightmap_multi</name>
+	<type>int</type>
+	<value><use>lightmap-multi</use></value>
       </uniform>
       <uniform>
 	<name>adaptive_mapping</name>

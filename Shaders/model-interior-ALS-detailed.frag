@@ -9,6 +9,7 @@ varying vec3 relPos;
 
 uniform sampler2D texture;
 uniform sampler2D lightmap_texture;
+uniform sampler2D grain_texture;
 uniform samplerCube cube_texture;
 
 
@@ -34,6 +35,7 @@ uniform float lightmap_r_factor;
 uniform float lightmap_g_factor;
 uniform float lightmap_b_factor;
 uniform float lightmap_a_factor;
+uniform float grain_magnification;
 
 uniform vec3 offset_vec;
 uniform vec3 scale_vec;
@@ -51,8 +53,9 @@ uniform int tquality_level;
 uniform int use_searchlight;
 uniform int implicit_lightmap_enabled;
 uniform int use_flashlight;
-uniform int use_lightmap;
+uniform int lightmap_enabled;
 uniform int lightmap_multi;
+uniform int grain_texture_enabled;
 
 
 const float EarthRadius = 5800000.0;
@@ -176,10 +179,16 @@ void main()
 
     texel = texture2D(texture, gl_TexCoord[0].st);
 
+    if (grain_texture_enabled ==1)
+        {
+        vec4 grainTexel = texture2D(grain_texture, gl_TexCoord[0].st * grain_magnification);
+        texel.rgb = mix(texel.rgb, grainTexel.rgb,  grainTexel.a );
+        }
+
 
     fragColor = color * texel + specular;
 
-   // implicit lightmap - the user gets to select 
+   // implicit lightmap - the user gets to select a color which is then made emissive
 
    if (implicit_lightmap_enabled == 1)
 	{
@@ -191,10 +200,11 @@ void main()
    // explicit lightmap
 
     vec3 lightmapcolor = vec3(0.0, 0.0, 0.0);
-    vec4 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st);
 
-    if (use_lightmap == 1)
+
+    if (lightmap_enabled == 1)
 	{
+        vec4 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st);
 	vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor, lightmap_b_factor, lightmap_a_factor);
         lightmapFactor = lightmapFactor * lightmapTexel;
         if (lightmap_multi > 0 )
@@ -208,7 +218,7 @@ void main()
 		{
                 lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;
             	}
-       fragColor.rgb = max(fragColor.rgb, lightmapcolor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, texel*.5 + lightmapcolor*.5));
+       fragColor.rgb = max(fragColor.rgb, lightmapcolor.rgb * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, texel.rgb*.5 + lightmapcolor.rgb*.5));
 	}
 
 	

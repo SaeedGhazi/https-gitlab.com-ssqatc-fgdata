@@ -10,6 +10,15 @@
     }
 }(function(ko, leaflet, SGPropertyNode ) {
 
+    var AITypeToCssClassMap = {
+            aircraft: "ai-aircraft-marker-icon",
+            multiplayer: "mp-aircraft-marker-icon"
+    }
+
+    function formatFL(num) {
+      return "F" + ("000" + (num/100).toFixed(0)).substr(-3,3);
+    }
+
     function ViewModel(h,l1,l2) {
         var self = this;
 
@@ -29,8 +38,8 @@
                 if (feature.properties.type == "aircraft" || feature.properties.type == "multiplayer") {
                       var l1 = feature.properties.callsign,
                           l2 = feature.properties.heading + 'T ' + feature.properties.speed + 'KTAS ' + 
-                               'F' + (feature.geometry.coordinates[2]/100).toFixed(0);
-                      var m = L.aircraftMarker(latlng);
+                               formatFL(feature.geometry.coordinates[2]);
+                      var m = L.aircraftMarker(latlng, { className: AITypeToCssClassMap[feature.properties.type] } );
                       m.on('add', function(e) {
                           ko.applyBindings( new ViewModel(feature.properties.heading,l1,l2), e.target._icon);
                       });

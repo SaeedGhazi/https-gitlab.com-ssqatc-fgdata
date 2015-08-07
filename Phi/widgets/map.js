@@ -3,34 +3,33 @@ define(
                 'knockout', 'jquery', 'leaflet', 'text!./map.html'
         ],
         function(ko, jquery, leaflet, htmlString ) {
+//TODO: Don't extend Marker but Icon
+
             if( !L.AircraftMarker ) {
                 L.AircraftMarker = L.Marker
                         .extend({
                             options : {
                                 clickable : false,
                                 keyboard : false,
-                                icon : L
-                                        .divIcon({
-                                            iconSize : [
-                                                    60, 60
-                                            ],
-                                            iconAnchor : [
-                                                    30, 30
-                                            ],
-                                            className : 'aircraft-marker-icon',
+                                zIndexOffset : 10000,
+                            },
+
+                            initialize : function(latlng, options) {
+                                var extraIconClass = '';
+                                if( options && options.className ) {
+                                    extraIconClass = ' ' + options.className;
+                                }
+                                L.Marker.prototype.initialize(latlng, options);
+                                L.Util.setOptions(this, options);
+                                this.setIcon( L.divIcon({
+                                            iconSize: null,
+                                            className : 'aircraft-marker-icon' + extraIconClass,
                                             html :
                                               '<div data-bind="component: { ' +
                                                 'name: \'AircraftMarker\', ' +
                                                 'params: { rotate: heading, label: labelLines } ' +
                                               '}"></div>',
-                                        }),
-                                zIndexOffset : 10000,
-                                updateInterval : 100,
-                            },
-
-                            initialize : function(latlng, options) {
-                                L.Marker.prototype.initialize(latlng, options);
-                                L.Util.setOptions(this, options);
+                                        }));
                             },
 
                         });
@@ -129,7 +128,7 @@ define(
                   L.control.scale(params.scale).addTo(self.map);
                 }
 
-                var aircraftMarker = L.aircraftMarker(self.map.getCenter());
+                var aircraftMarker = L.aircraftMarker(self.map.getCenter(), { className: 'you-aircraft-marker-icon' });
 
                 aircraftMarker.addTo(self.map);
 

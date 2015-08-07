@@ -48,6 +48,9 @@ define(
 
                 self.toggleFollowAircraft = function(a) {
                     self.followAircraft(!self.followAircraft());
+                    if( self.followAircraft() ) {
+                        self.map.setView(self.mapCenter());
+                    }
                 }
                 
                 self.altitude = ko.observable(0).extend({

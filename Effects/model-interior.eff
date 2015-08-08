@@ -56,7 +56,14 @@
 	<lightmap-factor type="float" n="3">1.0</lightmap-factor>
 	<lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
 	<grain-texture-enabled type="int">0</grain-texture-enabled>
-	<grain-magnification type="float">10</grain-magnification>
+	<grain-magnification type="float">10.0</grain-magnification>
+	<irradiance-map-type type="int">0</irradiance-map-type>
+	<irradiance-map-strength type="float">0.0</irradiance-map-strength>
+	<residual-ambience-r type="float">0.0</residual-ambience-r>
+	<residual-ambience-g type="float">0.0</residual-ambience-g>
+	<residual-ambience-b type="float">0.0</residual-ambience-b>
+	<ra-irradiance-map-type type="int">0</ra-irradiance-map-type>
+	<ra-irradiance-map-strength type="float">0.0</ra-irradiance-map-strength>
   </parameters>
 
   <technique n="3">
@@ -133,7 +140,7 @@
         <use>vertex-program-two-side</use>
       </vertex-program-two-side>
       <program>
-        <vertex-shader>Shaders/generic-ALS-base.vert</vertex-shader>
+        <vertex-shader>Shaders/model-interior-ALS-detailed.vert</vertex-shader>
         <fragment-shader>Shaders/model-interior-ALS-detailed.frag</fragment-shader>
         <!--<fragment-shader>Shaders/hazes.frag</fragment-shader>-->
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
@@ -318,11 +325,36 @@
 	<type>float-vec3</type>
 	<value><use>lightmap-color[3]</use></value>
      </uniform>
-    <uniform>
+     <uniform>
 	<name>grain_magnification</name>
 	<type>float</type>
 	<value><use>grain-magnification</use></value>
      </uniform>	 
+     <uniform>
+	<name>irradiance_map_strength</name>
+	<type>float</type>
+	<value><use>irradiance-map-strength</use></value>
+     </uniform>
+     <uniform>
+	<name>ra_irradiance_map_strength</name>
+	<type>float</type>
+	<value><use>ra-irradiance-map-strength</use></value>
+     </uniform>
+     <uniform>
+	<name>residual_ambience_r</name>
+	<type>float</type>
+	<value><use>residual-ambience-r</use></value>
+     </uniform>
+     <uniform>
+	<name>residual_ambience_g</name>
+	<type>float</type>
+	<value><use>residual-ambience-g</use></value>
+     </uniform>
+     <uniform>
+	<name>residual_ambience_b</name>
+	<type>float</type>
+	<value><use>residual-ambience-b</use></value>
+     </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
@@ -377,6 +409,16 @@
 	<name>lightmap_multi</name>
 	<type>int</type>
 	<value><use>lightmap-multi</use></value>
+      </uniform>
+      <uniform>
+	<name>irradiance_map_type</name>
+	<type>int</type>
+	<value><use>irradiance-map-type</use></value>
+      </uniform>
+      <uniform>
+	<name>ra_irradiance_map_type</name>
+	<type>int</type>
+	<value><use>ra-irradiance-map-type</use></value>
       </uniform>
       <uniform>
 	<name>grain_texture_enabled</name>

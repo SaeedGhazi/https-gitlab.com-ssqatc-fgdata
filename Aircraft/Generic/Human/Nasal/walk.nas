@@ -779,7 +779,7 @@ var reinit_walker = func {
 	setprop("sim/walker/parachute-opened-altitude-ft", 0);
 	parachute_deployed_sec = 0;
 	setprop("sim/walker/parachute-opened-sec", 0);
-	setprop("sim/walker/key-triggers/outside-toggle",1);
+	#setprop("sim/walker/key-triggers/outside-toggle",1);
 	walker_model.remove();
 }
 

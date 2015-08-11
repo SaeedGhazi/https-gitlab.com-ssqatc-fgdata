@@ -230,7 +230,7 @@ else // the faster, full-day version without lightfields
     yprime_alt = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);
 }
  
-// irradiance mapping
+// irradiance mapping for ambient light
   
   float ambient_irradiance_factor = 1.0;
   float steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
@@ -253,6 +253,8 @@ else // the faster, full-day version without lightfields
 
   light_ambient = light_ambient * ambient_irradiance_factor;
 
+// residual ambience - comes with its own irradiance map
+
   vec3 residual_ambience = vec3 (residual_ambience_r, residual_ambience_g, residual_ambience_b);
 
   ambient_irradiance_factor = 1.0;
@@ -272,7 +274,10 @@ else // the faster, full-day version without lightfields
 	ambient_irradiance_factor = (1.0 - ra_irradiance_map_strength) + 1.5 * ra_irradiance_map_strength * (1.0 - abs(steepness)) * (0.5 + 0.5 * forwardness);
 	}
 
-  light_ambient.rgb += residual_ambience.rgb * ambient_irradiance_factor;
+  // make sure the residual ambience is only visible when it's dark enough 
+  float residual_fraction = length(residual_ambience.rgb) / (length(light_ambient.rgb + residual_ambience.rgb) + 0.01);
+
+  light_ambient.rgb += residual_ambience.rgb * ambient_irradiance_factor * smoothstep(0.4, 0.6, residual_fraction);
 
 // default lighting based on texture and material using the light we have just computed
 

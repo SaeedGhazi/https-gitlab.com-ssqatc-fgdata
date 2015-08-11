@@ -17,6 +17,8 @@
 # remove_impostors		to delete a ring of impostors to mimick distant clouds
 # create_impostors		to create a ring of impostors to mimick distant clouds
 # shadow_management_loop	to manage cloud shadow information
+# thunderstorm_management_loop	to manage information on thunderstorm position
+# lightning_strike		to get the timing for a lightning strike to the property tree
 # watchdog loop			(debug helping structure)
 # calc_geo			to get local Cartesian geometry for latitude conversion
 # get_lat			to get latitude from Cartesian coordinates
@@ -1261,6 +1263,86 @@ if (local_weather.debug_output_flag == 1)
 weather_tiles.create_impostor_ring(lat, lon, alt, alpha, type, n);
 }
 
+##################################
+# Thunderstorm positon management
+##################################
+
+var thunderstorm_management_loop = func {
+
+if (local_weather.local_weather_running_flag == 0) {return;}
+
+# compute some general-purpose stuff for the loop
+	
+var eyeLat = lwObserverLat; 
+var eyeLon = lwObserverLon; 
+
+var n = size(thunderstormArray);
+
+#print("We have ",n," storms.");
+
+for (var i = 0; i < n; i=i+1)
+	{
+	var tstorm = thunderstormArray[i];
+
+	var rn = rand();
+	#if (i == 0) {rn = 0;} else {rn = 1;}
+	if (rn < tstorm.strength)
+		{
+		#print("Lightning strike storm ", i,"!");
+
+		var diffx = -(tstorm.lat - eyeLat) * local_weather.lat_to_m;
+		var diffy = (tstorm.lon - eyeLon) * local_weather.lon_to_m ;
+		var offset_x = -3000.0 + rand() * 6000.0; 
+		var offset_y = -3000.0 + rand() * 6000.0; 
+
+		var dist = math.sqrt(diffx * diffx + diffy * diffy) ;
+
+		setprop("/environment/lightning/lightning-pos-x", diffx + offset_x);
+		setprop("/environment/lightning/lightning-pos-y", diffy + offset_y);
+		setprop("/environment/lightning/lightning-range", tstorm.size);
+		setprop("/local-weather/lightning/latitude-deg", tstorm.lat - offset_x * local_weather.m_to_lat);
+		setprop("/local-weather/lightning/longitude-deg", tstorm.lon + offset_y * local_weather.m_to_lon);
+		setprop("/local-weather/lightning/altitude-ft", tstorm.alt);
+		lightning_strike();
+
+		if (dist > 50000.0)
+			{
+			thunderstormArray = delete_from_vector(thunderstormArray,i);
+			print("Removing storm ", i);
+			break;
+			}
+		}
+
+
+	}
+
+
+if (getprop(lw~"thunderstorm-loop-flag") ==1) {settimer( func {thunderstorm_management_loop()}, 1.0);}	
+}
+
+var lightning_strike = func {
+
+var rn = rand();
+
+var repeat = 1;
+
+if (rn > 0.5) {repeat = 2;}
+
+var duration = 0.1 + 0.1 * rand();
+var strength = 0.5 + 1.0 * rand();
+
+setprop("/environment/lightning/flash", strength);
+settimer( func{ setprop("/environment/lightning/flash", 0.0);}, duration);
+
+var duration1 = 0.1 +  0.1 * rand();
+
+if (repeat == 2)
+	{
+	settimer( func{ setprop("/environment/lightning/flash", strength);}, duration + 0.1);
+	settimer( func{ setprop("/environment/lightning/flash", 0.0);}, duration + 0.1 + duration1);
+	}
+
+}
 
 ###############################
 # Cloud shadow management
@@ -1528,6 +1610,7 @@ var cloud_view_distance = getprop(lw~"config/clouds-visible-range-m");
 
 var modelArrays = [];
 var active_tile_list = [];
+var thunderstormArray = [];
 
 # a bunch of variables to be updated per frame used by different
 # routines, managed by the housekeeping loop
@@ -1542,6 +1625,8 @@ var lwTileIndex = 0;
 #####################################################
 # hashes to manage clouds in scenery or in the buffer
 #####################################################
+
+
 
 var cloudBufferArray = [];
 
@@ -1617,6 +1702,18 @@ var cloudShadow = {
 		return s;
 	},
 };	
+
+var thunderstormHash = {
+	new: func (lat, lon, alt, size, strength) {
+			var t = {parents: [thunderstormHash] };
+		t.lat = lat;
+		t.lon = lon;
+		t.alt = alt;
+		t.size = size;
+		t.strength = strength;
+		return t;
+	},
+};
 
 
 var cloudSceneryArray = [];

@@ -618,6 +618,54 @@ model.getNode("load", 1).remove();
 
 }
 
+###########################################################
+# place a  model with control properties
+###########################################################
+
+var place_model_controlled = func(string, path, lat, lon, alt, heading, pitch, roll) {
+
+
+
+var m = props.globals.getNode("models", 1);
+		for (var i = 0; 1; i += 1)
+			if (m.getChild("model", i, 0) == nil)
+				break;
+var model = m.getChild("model", i, 1);
+
+
+setprop("/local-weather/"~string~"/latitude-deg", lat);
+setprop("/local-weather/"~string~"/longitude-deg", lon);
+setprop("/local-weather/"~string~"/elevation-ft", alt);
+setprop("/local-weather/"~string~"/heading-deg", heading);
+setprop("/local-weather/"~string~"/pitch-deg", pitch);
+setprop("/local-weather/"~string~"/roll-deg", roll);
+
+
+
+var cmodel = props.globals.getNode("/local-weather/"~string, 1);
+var latN = cmodel.getNode("latitude-deg",1);
+var lonN = cmodel.getNode("longitude-deg",1);
+var altN = cmodel.getNode("elevation-ft",1);
+var headN = cmodel.getNode("heading-deg",1);
+var pitchN = cmodel.getNode("pitch-deg",1);
+var rollN = cmodel.getNode("roll-deg",1);
+
+
+
+model.getNode("path", 1).setValue(path);
+model.getNode("latitude-deg-prop", 1).setValue(latN.getPath());
+model.getNode("longitude-deg-prop", 1).setValue(lonN.getPath());
+model.getNode("elevation-ft-prop", 1).setValue(altN.getPath());
+model.getNode("heading-deg-prop", 1).setValue(headN.getPath());
+model.getNode("pitch-deg-prop", 1).setValue(pitchN.getPath());
+model.getNode("roll-deg-prop", 1).setValue(rollN.getPath());
+model.getNode("tile-index",1).setValue(0);
+model.getNode("load", 1).remove();
+
+
+#return model;
+}
+
 
 
 

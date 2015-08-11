@@ -13,6 +13,10 @@ uniform float cloud_self_shading;
 uniform float visibility;
 uniform float moonlight;
 uniform float air_pollution;
+uniform float flash;
+uniform float lightning_pos_x;
+uniform float lightning_pos_y;
+uniform float lightning_range;
 
 attribute vec3 usrAttr1;
 attribute vec3 usrAttr2;
@@ -171,10 +175,21 @@ void main(void)
      
     }
 
+
+
     gl_FrontColor.rgb = intensity * shade * normalize(mix(light_diffuse.rgb, shadedFogColor, smoothstep(0.1,0.4, (1.0 - shade)  ))) ; 
      
+    // lightning
+    vec2 lightningRelVector = relVector.xy - vec2(lightning_pos_x, lightning_pos_y);
+    float rCoord = length(lightningRelVector);
+
+
+    float rn = 0.5 + 0.5 * fract(gl_Color.x);
+    gl_FrontColor.rgb += flash * vec3 (0.43, 0.57, 1.0) * (1.0 - smoothstep(lightning_range, 5.0 * lightning_range, rCoord)) * rn;
     
     
+    // fading of cloudlets
+
     if ((fogCoord > (0.9 * detail_range)) && (fogCoord > center_dist) && (shade_factor < 0.7)) {
       // cloudlet is almost at the detail range, so fade it out.
       gl_FrontColor.a = 1.0 - smoothstep(0.9 * detail_range, detail_range, fogCoord);

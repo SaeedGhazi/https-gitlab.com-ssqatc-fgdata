@@ -440,6 +440,15 @@
     <snow-thickness-factor type="double" userarchive="y">1.0</snow-thickness-factor>
   </surface>
 
+ <!-- definitions for lightning functionality -->
+
+ <lightning>
+    <flash type="double" userarchive="n">0.0</flash>
+    <lightning-pos-x type="double" userarchive="n">0.0</lightning-pos-x>
+    <lightning-pos-y type="double" userarchive="n">0.0</lightning-pos-y>
+    <lightning-range type="double" userarchive="n">0.0</lightning-range>
+ </lightning>
+
  <!-- definitions for the detailed precipitation manager -->
  <precipitation-control>
      <rain-droplet-size type="float" userarchive="n">0.015</rain-droplet-size>

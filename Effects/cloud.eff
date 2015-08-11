@@ -13,6 +13,10 @@
     <moonlight><use>/environment/moonlight</use></moonlight>
     <air_pollution><use>/environment/air-pollution-norm</use></air_pollution>			
     <visibility><use>/environment/visibility-m</use></visibility>
+    <flash><use>/environment/lightning/flash</use></flash>
+    <lightning-pos-x><use>/environment/lightning/lightning-pos-x</use></lightning-pos-x>
+    <lightning-pos-y><use>/environment/lightning/lightning-pos-y</use></lightning-pos-y>
+    <lightning-range><use>/environment/lightning/lightning-range</use></lightning-range>
   </parameters>
   
   <technique n="9">
@@ -117,6 +121,26 @@
         <name>visibility</name>
         <type>float</type>
         <value><use>visibility</use></value>
+      </uniform>
+      <uniform>
+        <name>flash</name>
+        <type>float</type>
+        <value><use>flash</use></value>
+      </uniform>
+      <uniform>
+        <name>lightning_pos_x</name>
+        <type>float</type>
+        <value><use>lightning-pos-x</use></value>
+      </uniform>
+      <uniform>
+        <name>lightning_pos_y</name>
+        <type>float</type>
+        <value><use>lightning-pos-y</use></value>
+      </uniform>
+      <uniform>
+        <name>lightning_range</name>
+        <type>float</type>
+        <value><use>lightning-range</use></value>
       </uniform>
       <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>

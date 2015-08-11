@@ -8,6 +8,10 @@ uniform float range; // From /sim/rendering/clouds3d-vis-range
 uniform float scattering;
 uniform float terminator;
 uniform float altitude;
+uniform float flash;
+uniform float lightning_pos_x;
+uniform float lightning_pos_y;
+uniform float lightning_range;
 
 
 float shade = 0.8;
@@ -88,6 +92,18 @@ void main(void)
   gl_FrontColor = mix(backlight, gl_LightSource[0].diffuse, n);
   gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
 
+ // two times terminator width governs how quickly light fades into shadow
+  float terminator_width = 200000.0;
+  float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
+  gl_FrontColor.rgb = gl_FrontColor.rgb * earthShade;
+
+  // lightning
+  vec2 lightningRelVector = relVector.xy - vec2(lightning_pos_x, lightning_pos_y);
+  float rCoord = length(lightningRelVector);
+
+    gl_FrontColor.rgb += 2.0 * flash * vec3 (0.43, 0.57, 1.0) * (1.0 - smoothstep(lightning_range, 5.0 * lightning_range, rCoord));
+    gl_FrontColor.rgb = clamp(gl_FrontColor.rgb,0.0,1.0);
+
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
   gl_FrontColor.a = min(smoothstep(100.0, 250.0, fogCoord), 1.0 - smoothstep(range*0.9, range, fogCoord));
   gl_BackColor = gl_FrontColor;
@@ -100,7 +116,7 @@ float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
   if (fadeScale < 0.05) fadeScale = 0.05;
   fogFactor = exp( -gl_Fog.density * 1.0 * fogCoord * fadeScale);
 
-  hazeColor = light_diffuse.xyz;
+  hazeColor = light_diffuse.rgb;
   hazeColor.x = hazeColor.x * 0.83;
   hazeColor.y = hazeColor.y * 0.9; 
   hazeColor = hazeColor * scattering;
@@ -109,14 +125,9 @@ float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
   intensity = length(hazeColor);
   hazeColor = intensity * normalize(mix(hazeColor,  2.0 * vec3 (0.55, 0.6, 0.8), (1.0-smoothstep(0.3,0.8,scattering)))); 
 
- // two times terminator width governs how quickly light fades into shadow
-  float terminator_width = 200000.0;
 
-  // now dim the light
-  float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
 
-  hazeColor = hazeColor * earthShade;
-  gl_FrontColor.xyz = gl_FrontColor.xyz * earthShade;
-  gl_BackColor = gl_FrontColor;
+  hazeColor = clamp(hazeColor * earthShade, 0.0,1.0);
+
 
 }

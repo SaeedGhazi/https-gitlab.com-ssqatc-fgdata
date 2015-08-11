@@ -1720,7 +1720,7 @@ local_weather.convective_size_bias = 0.3 + rand() * 0.3;
 
 
 # and specify the atmosphere
-	local_weather.set_atmosphere_ipoint(blat, blon, vis + 12000.0, alt+alt_offset, vis + 20000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.85, alt+alt_offset, alt+alt_offset + 2500.0); 
+	local_weather.set_atmosphere_ipoint(blat, blon, vis + 12000.0, alt+alt_offset, vis + 20000.0, 0.0, alt+alt_offset +20000.0, alt+alt_offset + 25000.0, 0.75, alt+alt_offset, alt+alt_offset + 2500.0); 
 
 var rn = rand();
 
@@ -4295,18 +4295,34 @@ x = 2.0 * (rand()-0.5) * 12000;
 y = 2.0 * (rand()-0.5) * 12000;
 
 if (rand() > 0.6)
-	{create_medium_thunderstorm(lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, alpha);}
+	{
+	create_medium_thunderstorm(lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, alpha);
+	var ts = local_weather.thunderstormHash.new (lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, 3000.0, 0.2);
+	append(local_weather.thunderstormArray,ts);
+	}
 else	
-	{create_small_thunderstorm(lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, alpha);}
+	{
+	create_small_thunderstorm(lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, alpha);
+	var ts = local_weather.thunderstormHash.new (lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, 1000.0, 0.15);
+	append(local_weather.thunderstormArray,ts);
+	}
 
 if (rand() > 0.5) # we do a second thunderstorm
 	{
 	x = 2.0 * (rand()-0.5) * 12000;
 	y = 2.0 * (rand()-0.5) * 12000;
 	if (rand() > 0.8)
-		{create_medium_thunderstorm(lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, alpha);}
+		{
+		create_medium_thunderstorm(lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, alpha);
+		var ts = local_weather.thunderstormHash.new (lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, 3000.0, 0.2);
+		append(local_weather.thunderstormArray,ts);	
+		}
 	else
-		{create_small_thunderstorm(lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, alpha);}
+		{
+		create_small_thunderstorm(lat+get_lat(x,y,phi), lon+get_lon(x,y,phi), alt, alpha);
+		var ts = local_weather.thunderstormHash.new (lat +get_lat(x,y,phi), lon + get_lon(x,y,phi), alt, 1000.0, 0.15);
+		append(local_weather.thunderstormArray,ts);
+		}
 	}
 
 # the convective layer
@@ -4314,6 +4330,10 @@ if (rand() > 0.5) # we do a second thunderstorm
 var strength = 0.10;
 var n = int(4000 * strength) * 0.5;
 local_weather.cumulus_exclusion_layer(lat, lon, alt, n, 20000.0, 20000.0, alpha, 0.3,2.5 , size(elat), elat, elon, erad);
+
+# some additional cloud cover
+
+create_4_8_sstratus_domains(lat, lon, alt,alpha);
 
 
 # some turbulence in the convection layer

@@ -1667,6 +1667,7 @@ setprop(lw~"buffer-loop-flag",0);
 setprop(lw~"housekeeping-loop-flag",0);
 setprop(lw~"convective-loop-flag",0);
 setprop(lw~"shadow-loop-flag",0);
+setprop(lw~"thunderstorm-loop-flag",0);
 
 weather_dynamics.convective_loop_kill_flag = 1; # long-running loop needs a different scheme to end
 
@@ -1731,6 +1732,7 @@ settimer ( func {
 	setsize(alt_min_array,0);
 	setsize(alt_mean_array,0);
 	setsize(weather_dynamics.cloudShadowArray,0);
+	setsize(local_weather.thunderstormArray,0);
 	setsize(weather_dynamics.cloudShadowCandidateArray,0);
 	setsize(weather_dynamics.tile_convective_altitude,0);
 	setsize(weather_dynamics.tile_convective_strength,0);
@@ -4051,6 +4053,14 @@ if (local_weather.cloud_shadow_flag == 1)
 	}
 
 # weather_tile_management.watchdog_loop();
+
+# start thunderstorm management
+
+setprop(lw~"thunderstorm-loop-flag",1);
+
+local_weather.place_model_controlled("lightning", "Models/Weather/lightning1.xml", lat, lon, 0.0, 0.0, 0.0, 0.0);
+
+local_weather.thunderstorm_management_loop();
 
 }
 

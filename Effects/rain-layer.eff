@@ -11,6 +11,7 @@
     <lightning-pos-x><use>/environment/lightning/lightning-pos-x</use></lightning-pos-x>
     <lightning-pos-y><use>/environment/lightning/lightning-pos-y</use></lightning-pos-y>
     <lightning-range><use>/environment/lightning/lightning-range</use></lightning-range>
+    <is-lightning type="bool">0</is-lightning>
   </parameters>
 <technique n="9">
     <predicate>
@@ -100,6 +101,11 @@
         <name>lightning_range</name>
         <type>float</type>
         <value><use>lightning-range</use></value>
+      </uniform>
+      <uniform>
+        <name>is_lightning</name>
+        <type>bool</type>
+        <value><use>is-lightning</use></value>
       </uniform>
       <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>

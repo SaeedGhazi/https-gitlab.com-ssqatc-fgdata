@@ -101,7 +101,9 @@ void main(void)
   vec2 lightningRelVector = relVector.xy - vec2(lightning_pos_x, lightning_pos_y);
   float rCoord = length(lightningRelVector);
 
-    gl_FrontColor.rgb += 2.0 * flash * vec3 (0.43, 0.57, 1.0) * (1.0 - smoothstep(lightning_range, 5.0 * lightning_range, rCoord));
+  vec3 flashColor = 2.0 * flash * vec3 (0.43, 0.57, 1.0) * (1.0 - smoothstep(lightning_range, 5.0 * lightning_range, rCoord));
+
+    gl_FrontColor.rgb += flashColor;
     gl_FrontColor.rgb = clamp(gl_FrontColor.rgb,0.0,1.0);
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.

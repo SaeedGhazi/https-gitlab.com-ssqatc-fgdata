@@ -1303,6 +1303,13 @@ for (var i = 0; i < n; i=i+1)
 		setprop("/local-weather/lightning/latitude-deg", tstorm.lat - offset_x * local_weather.m_to_lat);
 		setprop("/local-weather/lightning/longitude-deg", tstorm.lon + offset_y * local_weather.m_to_lon);
 		setprop("/local-weather/lightning/altitude-ft", tstorm.alt);
+
+		var rn = rand();
+		var type = 0;
+		if (rn > 0.7) {type = 1;}
+		else if (rn > 0.3) {type = 2;}
+		setprop("/local-weather/lightning/model-index", type);	
+
 		lightning_strike();
 
 		if (dist > 50000.0)

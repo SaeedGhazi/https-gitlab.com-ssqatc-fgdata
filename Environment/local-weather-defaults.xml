@@ -108,6 +108,10 @@
     <cloud-shadow-flag type="bool" userarchive="y">0</cloud-shadow-flag>
     <cloud-shadow-fov-flag type="bool" userarchive="y">0</cloud-shadow-fov-flag>
 </cloud-shadows>
+
+ <lightning>
+    <model-index type="int" userarchive="n">0</model-index>
+ </lightning>
 </PropertyList>
 
 

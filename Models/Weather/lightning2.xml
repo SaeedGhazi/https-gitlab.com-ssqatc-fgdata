@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <PropertyList>
- <path>lightning1.ac</path>
+ <path>lightning2.ac</path>
   	<offsets>
       	 	<x-m> 0.00 </x-m>
-       		<y-m> 0.01</y-m>
+       		<y-m> 0.02 </y-m>
        		<z-m>-1.20 </z-m>
     	</offsets>
 
@@ -41,7 +41,7 @@
    </greater-than>
    <equals>
      <property>/local-weather/lightning/model-index</property>
-     <value>1</value>
+     <value>2</value>
    </equals>
   </and>
   </condition>

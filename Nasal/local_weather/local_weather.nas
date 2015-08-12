@@ -4058,7 +4058,7 @@ if (local_weather.cloud_shadow_flag == 1)
 
 setprop(lw~"thunderstorm-loop-flag",1);
 
-local_weather.place_model_controlled("lightning", "Models/Weather/lightning1.xml", lat, lon, 0.0, 0.0, 0.0, 0.0);
+local_weather.place_model_controlled("lightning", "Models/Weather/lightning_combined.xml", lat, lon, 0.0, 0.0, 0.0, 0.0);
 
 local_weather.thunderstorm_management_loop();
 

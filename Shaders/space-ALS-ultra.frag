@@ -35,6 +35,7 @@ uniform int nmap_enabled;
 uniform int refl_enabled;
 uniform int refl_map;
 uniform int grain_texture_enabled;
+uniform int darkmap_enabled;
 uniform int rain_enabled;
 uniform int cloud_shadow_flag;
 uniform int use_searchlight;
@@ -57,6 +58,7 @@ uniform float refl_rainbow;
 uniform float grain_magnification;
 uniform float wetness;
 uniform float rain_norm;
+uniform float darkmap_factor;
 
 uniform float avisibility;
 uniform float cloud_self_shading;
@@ -230,6 +232,15 @@ void main (void)
     intensity = length(light_diffuse.rgb); 
     light_diffuse.rgb = mix(light_diffuse.rgb, intensity * vec3 (1.0,1.0,1.0), alt_desat_factor);
 
+
+
+    if (darkmap_enabled == 1)
+	{
+	float diffuse_reduction = mix(1.0,lightmapTexel.a, darkmap_factor);
+   	light_diffuse.rgb = light_diffuse.rgb * diffuse_reduction;
+	}
+
+   
 
     /// END light
 

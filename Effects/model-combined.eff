@@ -34,6 +34,8 @@ please see Docs/README.model-combined.eff for documentation
 		<lightmap-color type="vec3d" n="2"> 1.0 1.0 1.0 </lightmap-color>
 		<lightmap-factor type="float" n="3">1.0</lightmap-factor>
 		<lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
+		<darkmap-enabled type="int">0</darkmap-enabled>
+		<darkmap-factor type="float">0.0</darkmap-factor>
 		<texture n="3">
 			<image>Aircraft/Generic/Effects/greymap.png</image>
 			<type>2d</type>
@@ -596,6 +598,14 @@ please see Docs/README.model-combined.eff for documentation
 					   <use>lightmap-color[3]</use>
 				   </value>
 			   </uniform>
+
+		  	<uniform>
+				<name>darkmap_factor</name>
+				<type>float</type>
+				<value>
+			 	 <use>darkmap-factor</use>
+				</value>
+		  	</uniform>
 			   
 			   <!-- 			reflection is used -->
 			   <uniform>
@@ -1134,6 +1144,11 @@ please see Docs/README.model-combined.eff for documentation
       				  <type>int</type>
       				  <value><use>display_ysize</use></value>
     			   </uniform>  
+			   <uniform>
+				  <name>darkmap_enabled</name>
+	 			  <type>int</type>
+				  <value><use>darkmap-enabled</use></value>
+     			   </uniform>
 
 		  <!-- 			END fog include -->
 		  <uniform>

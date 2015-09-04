@@ -397,7 +397,7 @@ require([
             axis: "y",
             cursor: "move",
         });
-        jquery("#widgetarea").disableSelection();
+//        jquery("#widgetarea").disableSelection();
 
         // Client-side routes
         Sammy(function() {

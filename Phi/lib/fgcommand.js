@@ -170,6 +170,14 @@
             this.sendCommand("clear-metar", this.oneArg("path", path));
         },
 
+        profilerStart : function(filename) {
+            this.sendCommand("profiler-start", filename ? this.oneArg("filename", filename) : null );
+        },
+
+        profilerStop : function() {
+            this.sendCommand("profiler-stop");
+        },
+
         // not really commands, but very useful to get/set a single properties
         // value
         getPropertyValue : function(path, callback, context) {

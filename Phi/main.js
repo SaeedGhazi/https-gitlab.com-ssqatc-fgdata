@@ -16,7 +16,8 @@ require.config({
         props : 'lib/props2',
         sammy: '3rdparty/sammy-latest.min',
         aircraft: '../aircraft-dir',
-        pagedown: '3rdparty/pagedown'
+        pagedown: '3rdparty/pagedown',
+        clockpicker: '3rdparty/clockpicker/jquery-clockpicker.min',
     }
 });
 
@@ -265,7 +266,7 @@ require([
             [
                     "gmt", "/sim/time/gmt"
             ], [
-                    "local-offset", "/sim/time/local-offset"
+                    "timeWarp", "/sim/time/warp"
             ],
 
             // flight

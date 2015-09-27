@@ -2,43 +2,63 @@ define(
         [
                 'knockout', 'jquery', 'leaflet', 'text!./map.html'
         ],
-        function(ko, jquery, leaflet, htmlString ) {
-//TODO: Don't extend Marker but Icon
+        function(ko, jquery, leaflet, htmlString) {
 
-            if( !L.AircraftMarker ) {
-                L.AircraftMarker = L.Marker
-                        .extend({
-                            options : {
-                                clickable : false,
-                                keyboard : false,
-                                zIndexOffset : 10000,
-                            },
+            if (!L.AircraftMarker) {
+                L.AircraftMarker = L.Marker.extend({
+                    options : {
+                        draggable : true,
+                        clickable : true,
+                        keyboard : false,
+                        zIndexOffset : 10000,
+                    },
 
-                            initialize : function(latlng, options) {
-                                var extraIconClass = '';
-                                if( options && options.className ) {
-                                    extraIconClass = ' ' + options.className;
-                                }
-                                L.Marker.prototype.initialize(latlng, options);
-                                L.Util.setOptions(this, options);
-                                this.setIcon( L.divIcon({
-                                            iconSize: null,
-                                            className : 'aircraft-marker-icon' + extraIconClass,
-                                            html :
-                                              '<div data-bind="component: { ' +
-                                                'name: \'AircraftMarker\', ' +
-                                                'params: { rotate: heading, label: labelLines } ' +
-                                              '}"></div>',
-                                        }));
-                            },
+                    initialize : function(latlng, options) {
+                        var extraIconClass = '';
+                        if (options && options.className) {
+                            extraIconClass = ' ' + options.className;
+                        }
+                        L.Marker.prototype.initialize(latlng, options);
+                        L.Util.setOptions(this, options);
+                        this.setIcon(L.divIcon({
+                            iconSize : null,
+                            className : 'aircraft-marker-icon' + extraIconClass,
+                            html : '<div data-bind="component: { ' + 'name: \'AircraftMarker\', '
+                                    + 'params: { rotate: heading, label: labelLines } ' + '}"></div>',
+                        }));
 
+                        this.isDragging = false;
+
+                        this.on('dragstart', function(evt) {
+                            evt.target.isDragging = true;
                         });
+
+                        this.on('dragend', function(evt) {
+                            var pos = evt.target.getLatLng();
+
+                            var props = {
+                                name : "position",
+                                children : [
+                                        {
+                                            name : "latitude-deg",
+                                            value : pos.lat,
+                                        }, {
+                                            name : "longitude-deg",
+                                            value : pos.lng,
+                                        },
+                                ],
+                            };
+                            $.post("/json/", JSON.stringify(props));
+                            evt.target.isDragging = false;
+                        });
+                    },
+
+                });
 
                 L.aircraftMarker = function(latlng, options) {
                     return new L.AircraftMarker(latlng, options);
                 }
-             }
-
+            }
 
             function ViewModel(params, componentInfo) {
                 var self = this;
@@ -48,11 +68,11 @@ define(
 
                 self.toggleFollowAircraft = function(a) {
                     self.followAircraft(!self.followAircraft());
-                    if( self.followAircraft() ) {
+                    if (self.followAircraft()) {
                         self.map.setView(self.mapCenter());
                     }
                 }
-                
+
                 self.altitude = ko.observable(0).extend({
                     fgprop : 'altitude'
                 });
@@ -72,7 +92,7 @@ define(
 
                 var MapOptions = {
                     attributionControl : false,
-                    dragging: false,
+                    dragging : false,
                 };
 
                 if (params && params.map) {
@@ -86,23 +106,25 @@ define(
                         53.5, 10.0
                 ], MapOptions.zoom || 13);
 
-                if( params && params.on ) {
-                    for ( var p in params.on ) {
+                if (params && params.on) {
+                    for ( var p in params.on) {
                         var h = params.on[p];
-                        if( typeof(h) === 'function' )
-                            self.map.on(p,h);
+                        if (typeof (h) === 'function')
+                            self.map.on(p, h);
                     }
                 }
 
                 var baseLayers = {
-                    "OpenStreetMaps" : new leaflet.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom : 18,
-                        attribution : 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-                    })
+                    "OpenStreetMaps" : new leaflet.TileLayer(
+                            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            {
+                                maxZoom : 18,
+                                attribution : 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                            })
                 }
                 self.map.addLayer(baseLayers["OpenStreetMaps"]);
 
-                if (params && params.hasFollowAircraft ) {
+                if (params && params.hasFollowAircraft) {
                     self.map.on('dragstart', function(e) {
                         self.followAircraft(false);
                     });
@@ -121,17 +143,19 @@ define(
                     L.control.layers(baseLayers, params.overlays).addTo(self.map);
                 }
 
-                if( params && params.selectedOverlays && params.overlays ) {
+                if (params && params.selectedOverlays && params.overlays) {
                     params.selectedOverlays.forEach(function(ovl) {
                         params.overlays[ovl].addTo(self.map);
                     });
                 }
 
                 if (params && params.scale) {
-                  L.control.scale(params.scale).addTo(self.map);
+                    L.control.scale(params.scale).addTo(self.map);
                 }
 
-                var aircraftMarker = L.aircraftMarker(self.map.getCenter(), { className: 'you-aircraft-marker-icon' });
+                var aircraftMarker = L.aircraftMarker(self.map.getCenter(), {
+                    className : 'you-aircraft-marker-icon'
+                });
 
                 aircraftMarker.addTo(self.map);
 
@@ -158,17 +182,17 @@ define(
                 });
 
                 self.position.subscribe(function(newValue) {
-                    aircraftMarker.setLatLng(newValue);
+                    if (!aircraftMarker.isDragging)
+                        aircraftMarker.setLatLng(newValue);
                 });
 
                 self.labelLines = [
-                  'You',
-                  ko.pureComputed(function() {
-                    var h = Math.round(self.heading());
-                    var t = Math.round(self.tas());
-                    var a = Math.round(self.altitude());
-                    return '' + h + "T " + t + "KTAS " + a + "ft";
-                  }),
+                        'You', ko.pureComputed(function() {
+                            var h = Math.round(self.heading());
+                            var t = Math.round(self.tas());
+                            var a = Math.round(self.altitude());
+                            return '' + h + "T " + t + "KTAS " + a + "ft";
+                        }),
                 ];
 
                 self.mapCenter = ko.pureComputed(function() {
@@ -192,7 +216,7 @@ define(
                 });
 
                 var center = leaflet.latLng(self.latitude(), self.longitude());
-                self.map.setView( center );
+                self.map.setView(center);
                 aircraftMarker.setLatLng(center);
             }
 

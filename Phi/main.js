@@ -14,16 +14,17 @@ require.config({
         flottime : '3rdparty/flot/jquery.flot.time',
         fgcommand : 'lib/fgcommand',
         props : 'lib/props2',
-        sammy: '3rdparty/sammy-latest.min',
-        aircraft: '../aircraft-dir',
-        pagedown: '3rdparty/pagedown',
-        clockpicker: '3rdparty/clockpicker/jquery-clockpicker.min',
+        sammy : '3rdparty/sammy-latest.min',
+        aircraft : '../aircraft-dir',
+        pagedown : '3rdparty/pagedown',
+        clockpicker : '3rdparty/clockpicker/jquery-clockpicker.min',
     }
 });
 
 require([
-        'knockout', 'jquery','sammy', 'fgcommand', 'themeswitch', 'kojqui/button', 'kojqui/buttonset', 'kojqui/selectmenu', 'jquery-ui/sortable', 'flot', 'leaflet'
-], function(ko, jquery, Sammy, fgcommand ) {
+        'knockout', 'jquery', 'sammy', 'fgcommand', 'themeswitch', 'kojqui/button', 'kojqui/buttonset', 'kojqui/selectmenu',
+        'jquery-ui/sortable', 'flot', 'leaflet'
+], function(ko, jquery, Sammy, fgcommand) {
 
     function KnockProps(aliases) {
 
@@ -142,14 +143,14 @@ require([
             koObservable.fgPropertyPath = path;
             koObservable.fgBaseDispose = koObservable.dispose;
             koObservable.dispose = function() {
-                if( this.fgPropertyPath ) {
-                    self.removeListener( this.fgPropertyPath, this );
+                if (this.fgPropertyPath) {
+                    self.removeListener(this.fgPropertyPath, this);
                 }
                 this.fgBaseDispose.call(this);
             }
             listeners.push(koObservable);
             koObservable.fgSetPropertyValue = function(value) {
-                self.setPropertyValue( this.fgPropertyPath, value );
+                self.setPropertyValue(this.fgPropertyPath, value);
             }
 
             if (1 == listeners.length) {
@@ -180,14 +181,14 @@ require([
                 return self.props[prop];
             }
 
-            return (self.props[prop] = self.observedProperty( target, prop )); 
+            return (self.props[prop] = self.observedProperty(target, prop));
         }
-        
-        self.observedProperty = function( target, prop ) {
+
+        self.observedProperty = function(target, prop) {
             var reply = ko.pureComputed({
-                read: target,
-                write: function(newValue) {
-                    if( newValue == target() )
+                read : target,
+                write : function(newValue) {
+                    if (newValue == target())
                         return;
                     target(newValue);
                     target.notifySubscribers(newValue);
@@ -204,7 +205,7 @@ require([
                 return;
             }
 
-            self.setPropertyValue(path,value);
+            self.setPropertyValue(path, value);
         }
 
         self.setPropertyValue = function(path, value) {
@@ -234,15 +235,15 @@ require([
     ko.extenders.fgprop = function(target, prop) {
         return ko.utils.knockprops.get(target, prop);
     };
-    
-    ko.extenders.observedProperty = function(target,prop) {
-        return ko.utils.knockprops.observedProperty(target,prop);
+
+    ko.extenders.observedProperty = function(target, prop) {
+        return ko.utils.knockprops.observedProperty(target, prop);
     };
 
-    ko.extenders.fgPropertyGetSet = function(target,option) {
+    ko.extenders.fgPropertyGetSet = function(target, option) {
 
         fgCommand.getPropertyValue(option, function(value) {
-          target(value);
+            target(value);
         }, self);
 
         var p = ko.pureComputed({
@@ -252,12 +253,11 @@ require([
                     return;
                 target(newValue);
                 target.notifySubscribers(newValue);
-                fgCommand.setPropertyValue(option, newValue );
+                fgCommand.setPropertyValue(option, newValue);
             }
         });
         return p;
     }
-
 
     ko.utils.knockprops = new KnockProps();
 
@@ -394,26 +394,26 @@ require([
         }
 
         jquery("#widgetarea").sortable({
-            handle: ".widget-handle",
-            axis: "y",
-            cursor: "move",
+            handle : ".widget-handle",
+            axis : "y",
+            cursor : "move",
         });
-//        jquery("#widgetarea").disableSelection();
+        // jquery("#widgetarea").disableSelection();
 
         // Client-side routes
         Sammy(function() {
             this.get('#:topic', function() {
-                self.selectedTopic( this.params.topic );
+                self.selectedTopic(this.params.topic);
                 self.selectedSubtopic('');
             });
 
             this.get('#:topic/:subtopic', function() {
-                self.selectedTopic( this.params.topic );
-                self.selectedSubtopic( this.params.subtopic );
+                self.selectedTopic(this.params.topic);
+                self.selectedSubtopic(this.params.subtopic);
             });
             // empty route
             this.get('', function() {
-                this.app.runRoute( 'get', '#' + self.topics[0] );
+                this.app.runRoute('get', '#' + self.topics[0]);
             });
         }).run();
 
@@ -470,9 +470,9 @@ require([
     ko.components.register('Stopwatch', {
         require : 'widgets/Stopwatch'
     });
-    
+
     ko.components.register('dualarcgauge', {
-        require: 'instruments/DualArcGauge'
+        require : 'instruments/DualArcGauge'
     })
 
     ko.bindingHandlers.flotchart = {
@@ -499,16 +499,27 @@ require([
             var data = ko.unwrap(value.data);
             var options = ko.unwrap(value.options);
             var plot = jquery.plot(element, data, options);
-            jquery(element).data("flotplot", plot );
+            jquery(element).data("flotplot", plot);
             var postUpdate = ko.unwrap(value.postUpdate);
-            if( postUpdate ) {
-                postUpdate.call( value, element );
+            if (postUpdate) {
+                postUpdate.call(value, element);
             }
 
         },
 
     };
 
-    ko.applyBindings(new PhiViewModel(),document.getElementById('wrapper'));
+    ko.applyBindings(new PhiViewModel(), document.getElementById('wrapper'));
+
+    jquery("#toolbar").click(function() {
+        jquery("#content").animate({
+            top : 0
+        }, 1000, null, function() {
+            jquery(".htabs").css('background', '#427EBF url("images/FI_logo.svg") no-repeat scroll left center');
+        });
+        jquery("#widgetarea").animate({
+            top : 29
+        }, 1000);
+    });
 
 });

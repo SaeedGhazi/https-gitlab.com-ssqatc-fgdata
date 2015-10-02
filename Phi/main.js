@@ -18,7 +18,9 @@ require.config({
         aircraft : '../aircraft-dir',
         pagedown : '3rdparty/pagedown',
         clockpicker : '3rdparty/clockpicker/jquery-clockpicker.min',
-    }
+        stamen: 'http://maps.stamen.com/js/tile.stamen',
+    },
+    waitSeconds: 30,
 });
 
 require([

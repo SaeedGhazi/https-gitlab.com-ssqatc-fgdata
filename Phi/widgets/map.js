@@ -1,6 +1,6 @@
 define(
         [
-                'knockout', 'jquery', 'leaflet', 'text!./map.html'
+                'knockout', 'jquery', 'leaflet', 'text!./map.html', 'stamen'
         ],
         function(ko, jquery, leaflet, htmlString) {
 
@@ -120,7 +120,12 @@ define(
                             {
                                 maxZoom : 18,
                                 attribution : 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-                            })
+                            }),
+                    "Stamen - toner" : new L.StamenTileLayer("toner"),
+                    "Stamen - toner-background" : new L.StamenTileLayer("toner-background"),
+                    "Stamen - toner-hybrid" : new L.StamenTileLayer("toner-hybrid"),
+                    "Stamen - watercolor" : new L.StamenTileLayer("watercolor"),
+                    "None" : new L.layerGroup(),
                 }
                 self.map.addLayer(baseLayers["OpenStreetMaps"]);
 

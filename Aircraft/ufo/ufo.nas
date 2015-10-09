@@ -759,8 +759,26 @@ var up = func(dir) {
 		return vert_factor = 1;
 	var alt = "position/altitude-ft";
 	setprop(alt, getprop(alt) + 0.15 * vert_factor * dir);
-	vert_factor += 0.25;
+	vert_factor += 0.50;
 }
+
+
+var hor_factor = 1;
+var leftright = func(dir) {
+	if (!dir)
+		return hor_factor = 1;
+	var lat = getprop("position/latitude-deg");
+    var lon = getprop("position/longitude-deg");
+    var alt = getprop("position/altitude-ft");
+    var heading = getprop("orientation/heading-deg");
+  	var ep = geo.Coord.new();
+	ep.set_latlon(lat, lon,alt);
+	ep.apply_course_distance(heading+90, 0.15 * hor_factor * dir);
+	setprop("/position/latitude-deg", ep.lat());
+	setprop("/position/longitude-deg", ep.lon());
+	hor_factor += 0.50;
+}
+
 
 
 var print_data = func {

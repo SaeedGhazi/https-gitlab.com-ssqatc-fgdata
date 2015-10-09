@@ -1,9 +1,11 @@
 define([
-        'jquery', 'knockout', 'text!./sidebarwidget.html', 'jquery-ui/draggable',
+        'jquery', 'knockout', 'text!./sidebarwidget.html', 'jquery-ui/draggable', 'jquery-ui/dialog'
 ], function(jquery, ko, htmlString) {
 
-    function ViewModel(params) {
+    function ViewModel(params, componentInfo) {
         var self = this;
+
+        self.element = componentInfo.element;
 
         self.widget = ko.observable(params.widget);
 
@@ -13,6 +15,12 @@ define([
         }
 
         self.close = function() {
+            jquery(self.element).remove();
+        }
+
+        self.detach = function() {
+            jquery(self.element).find('.phi-widget').dialog();
+            jquery(self.element).remove();
         }
 
         self.expanded = ko.observable(true);
@@ -29,7 +37,11 @@ define([
 
     // Return component definition
     return {
-        viewModel : ViewModel,
+        viewModel : {
+            createViewModel : function(params, componentInfo) {
+                return new ViewModel(params, componentInfo);
+            },
+        },
         template : htmlString
     };
 });

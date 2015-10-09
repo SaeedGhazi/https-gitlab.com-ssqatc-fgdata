@@ -227,12 +227,9 @@ void main (void)
     //vec3 sky_blue = normalize (vec3 (0.17, 0.52, 0.87));
     //intensity = length(light_ambient.rgb); 
     //light_ambient.rgb = mix(light_ambient.rgb, intensity * sky_blue, alt_desat_factor);
- 
 
     intensity = length(light_diffuse.rgb); 
     light_diffuse.rgb = mix(light_diffuse.rgb, intensity * vec3 (1.0,1.0,1.0), alt_desat_factor);
-
-
 
     if (darkmap_enabled == 1)
 	{
@@ -240,7 +237,7 @@ void main (void)
    	light_diffuse.rgb = light_diffuse.rgb * diffuse_reduction;
 	}
 
-   
+       light_diffuse.rgb = clamp(light_diffuse.rgb, 0.0, 1.2);
 
     /// END light
 

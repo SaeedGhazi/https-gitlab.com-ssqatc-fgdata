@@ -46,11 +46,11 @@ define([
         });
 
         this.headingTextAnimation = ko.pureComputed(function() {
-            return sprintf.sprintf("%03d", self.heading());
+            return sprintf.sprintf("%03d", Math.round(self.heading()));
         });
 
         this.asiTextAnimation = ko.pureComputed(function() {
-            return sprintf.sprintf("%3d", self.airspeed());
+            return sprintf.sprintf("%3d", Math.round(self.airspeed()));
         });
 
         this.altimeterThousandsTextAnimation = ko.pureComputed(function() {

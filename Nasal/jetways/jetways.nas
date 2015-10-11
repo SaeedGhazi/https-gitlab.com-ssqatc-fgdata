@@ -288,7 +288,7 @@ var scenery = [];
 var UPDATE_PERIOD = 0;
 var LOAD_PERIOD = 10;
 var LOAD_DISTANCE = 50;				# in nautical miles
-var LOAD_JETWAY_PERIOD = 0.05;
+var LOAD_JETWAY_PERIOD = 0.25;
 var NUMBER_OF_JETWAYS = 1000;			# approx max number of jetways loadable in FG
 var runtime_files = NUMBER_OF_JETWAYS / LOAD_PERIOD * LOAD_JETWAY_PERIOD;
 runtime_files = int(runtime_files) == runtime_files ? runtime_files : int(runtime_files) + 1;
@@ -735,9 +735,22 @@ var load_airport_jetways = func(airport)
   var airline = jetway.getNode("airline", 1).getValue() or "None";
   var lat = jetway.getNode("latitude-deg", 1).getValue() or return;
   var lon = jetway.getNode("longitude-deg", 1).getValue() or return;
-  var elev = jetway.getNode("elevation-m", 1).getValue() or 0;
-  var alt = geo.elevation(lat, lon) + elev;
+  
+  # elevation offset from XML will be ignored! 
+  #var elev = jetway.getNode("elevation-m", 1).getValue() or 0;
   var heading = jetway.getNode("heading-deg", 1).getValue() or 0;
+  
+  # probe the terrain where the jetway-wheels are
+  var ep = geo.Coord.new();
+  ep.set_latlon(lat, lon);
+  #geo.put_model("Aircraft/ufo/Models/sign.ac", ep);
+  #print_debug ("before lat:" ~ ep.lat() ~ " lon:" ~ ep.lon() );
+  ep.apply_course_distance(360-heading, -12.0);
+  #print_debug ("after lat:" ~ ep.lat() ~ " lon:" ~ ep.lon() );
+  #geo.put_model("Aircraft/ufo/Models/cursor.ac", ep);
+  var alt = geo.elevation(ep.lat(), ep.lon()) ;
+  print_debug ("probed elevation under wheels:" ~ alt);
+ 
   var init_extend = jetway.getNode("initial-position/jetway-extension-m", 1).getValue() or 0;
   var init_heading = jetway.getNode("initial-position/jetway-heading-deg", 1).getValue() or 0;
   var init_pitch = jetway.getNode("initial-position/jetway-pitch-deg", 1).getValue() or 0;

@@ -403,13 +403,29 @@ var export = func
   print("jetway definitions for airport " ~ airport ~ " exported to " ~ file);
   }
  };
-var convert_stg = func
- {
- fgcommand("dialog-show", props.Node.new({ "dialog-name": "file-select" }));
- setprop("/sim/gui/dialogs/file-select/path", "");
- filedialog_listener = setlistener("/sim/gui/dialogs/file-select/path", func(n)
+ 
+ 
+ 
+
+#  var report = func(n) { print("file ", n.getValue(), " selected") }
+
+
+var convert_stg = func()
+{
+	var selector = gui.FileSelector.new(
+             convert_stg2,                 # callback function
+             "choose stg file",          # dialog title
+             "open",                 # button text
+             ["*.stg",],     # pattern for displayed files
+             "/",                 # start dir
+             "input.stg");          # default file name
+    selector.open();
+
+    # selector.close();
+}
+ 
+var convert_stg2 = func(n)
   {
-  removelistener(filedialog_listener);
   var path = n.getValue();
   if (path == "") return;
   var stg = io.readfile(path);
@@ -481,8 +497,8 @@ var convert_stg = func
    };
   settimer(loop, 0);
   jetways.alert("Creating " ~ size(jetway_array) ~ " jetways for airport " ~ airport);
-  }, 0, 1);
- };
+  };
+ 
 var flash = func(jetway)
  {
  if (!contains(jetway, "_flashnum") or jetway._flashnum == -1)

@@ -156,7 +156,7 @@ define([
             }),
 
             "Germany VFR" : new L.TileLayer(
-                    'https://secais.dfs.de/static-maps/ICAO500-2014-DACH-Reprojected_01/tiles/{z}/{x}/{y}.png', {
+                    'https://secais.dfs.de/static-maps/ICAO500-2015-EUR-Reprojected_07/tiles/{z}/{x}/{y}.png', {
                         minZoom : 5,
                         maxZoom : 15,
                         attribution : '&copy; <a target="_blank" href="http://www.dfs.de">DFS</a>',

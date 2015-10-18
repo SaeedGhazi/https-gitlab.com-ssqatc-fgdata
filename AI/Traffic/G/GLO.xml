@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
 
-<!-- 737 replaced by Aircraft/A319/A319-TAM.xml -->
-
 <trafficlist>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -18,7 +16,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -32,7 +30,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -46,7 +44,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -60,7 +58,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -74,7 +72,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -88,7 +86,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -102,7 +100,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -116,7 +114,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -130,7 +128,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -144,7 +142,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -158,7 +156,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -172,7 +170,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -186,7 +184,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -200,7 +198,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -214,7 +212,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -228,7 +226,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -242,7 +240,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -256,7 +254,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -270,7 +268,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -284,7 +282,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -298,7 +296,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -312,7 +310,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -326,7 +324,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -340,7 +338,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -354,7 +352,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -368,7 +366,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -382,7 +380,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -396,7 +394,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -410,7 +408,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -424,7 +422,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -438,7 +436,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -452,7 +450,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -466,7 +464,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -480,7 +478,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -494,7 +492,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -508,7 +506,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -522,7 +520,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -536,7 +534,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -550,7 +548,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -564,7 +562,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -578,7 +576,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -592,7 +590,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -606,7 +604,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -620,7 +618,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -634,7 +632,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -648,7 +646,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -662,7 +660,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -676,7 +674,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -690,7 +688,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -704,7 +702,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -718,7 +716,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -732,7 +730,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -746,7 +744,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -760,7 +758,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -774,7 +772,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -788,7 +786,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -802,7 +800,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -816,7 +814,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -830,7 +828,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -844,7 +842,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -858,7 +856,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -872,7 +870,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -886,7 +884,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -900,7 +898,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -914,7 +912,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -928,7 +926,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -942,7 +940,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -956,7 +954,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -970,7 +968,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -984,7 +982,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -998,7 +996,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>KBRD</home-port>
@@ -1012,7 +1010,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1026,7 +1024,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -1040,7 +1038,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1054,7 +1052,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -1068,7 +1066,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1082,7 +1080,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -1096,7 +1094,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -1110,7 +1108,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -1124,7 +1122,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1138,7 +1136,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -1152,7 +1150,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1166,7 +1164,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1180,7 +1178,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -1194,7 +1192,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1208,7 +1206,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -1222,7 +1220,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1236,7 +1234,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -1250,7 +1248,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1264,7 +1262,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1278,7 +1276,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGO</home-port>
@@ -1292,7 +1290,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1306,7 +1304,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1320,7 +1318,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1334,7 +1332,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -1348,7 +1346,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1362,7 +1360,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1376,7 +1374,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>
@@ -1390,7 +1388,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -1404,7 +1402,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -1418,7 +1416,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -1432,7 +1430,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1446,7 +1444,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1460,7 +1458,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>MDST</home-port>
@@ -1474,7 +1472,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBPA</home-port>
@@ -1488,7 +1486,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBCF</home-port>
@@ -1502,7 +1500,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBVT</home-port>
@@ -1516,7 +1514,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-TAM.xml</model>
+        <model>Aircraft/738/738-GOL.xml</model>
         <livery>GLO</livery>
         <airline>GLO</airline>
         <home-port>SBGL</home-port>

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTAY</home-port>
         <required-aircraft>737PGT</required-aircraft>
         <actype>737-4Y0</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -15,13 +15,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTAY</home-port>
         <required-aircraft>737PGT</required-aircraft>
         <actype>737-48E</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -29,13 +29,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTAY</home-port>
         <required-aircraft>737PGT</required-aircraft>
         <actype>737-5Q8</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -43,13 +43,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTAY</home-port>
         <required-aircraft>737PGT</required-aircraft>
         <actype>737-42R</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -57,13 +57,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTAY</home-port>
         <required-aircraft>737PGT</required-aircraft>
         <actype>737-58E</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -71,13 +71,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTAY</home-port>
         <required-aircraft>737PGT</required-aircraft>
         <actype>737-5L9</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -85,13 +85,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTFJ</home-port>
         <required-aircraft>737LTFJPGT</required-aircraft>
         <actype>737-8S3</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -99,13 +99,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTFJ</home-port>
         <required-aircraft>737LTFJPGT</required-aircraft>
         <actype>737-86N</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -113,13 +113,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTFJ</home-port>
         <required-aircraft>737LTFJPGT</required-aircraft>
         <actype>737-86N</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -127,13 +127,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTFJ</home-port>
         <required-aircraft>737LTFJPGT</required-aircraft>
         <actype>737-4FH</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -141,13 +141,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTFJ</home-port>
         <required-aircraft>737LTFJPGT</required-aircraft>
         <actype>737-82R</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -155,13 +155,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-PegasusAirlines.xml</model>
+        <model>Aircraft/738/738-Pegasus.xml</model>
         <livery>PGT</livery>
         <airline>PGT</airline>
         <home-port>LTFJ</home-port>
         <required-aircraft>737LTFJPGT</required-aircraft>
         <actype>737-82R</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

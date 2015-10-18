@@ -4,13 +4,13 @@
     <!--Virgin Blue 73Gfleet--> 
      
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -18,13 +18,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -32,13 +32,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -47,13 +47,13 @@
     </aircraft> 
      
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -61,13 +61,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YPPH</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -75,13 +75,13 @@
         <heavy>false</heavy>    
     </aircraft>     
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YPPH</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -89,13 +89,13 @@
         <heavy>false</heavy>    
     </aircraft>
 <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YPPH</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -103,13 +103,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YPPH</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -117,13 +117,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YMML</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -131,13 +131,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YMML</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -145,13 +145,13 @@
         <heavy>false</heavy>    
     </aircraft>     
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YMML</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -159,13 +159,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YMML</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -173,13 +173,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YMML</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -187,13 +187,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -201,13 +201,13 @@
         <heavy>false</heavy>    
     </aircraft>      
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -215,13 +215,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -229,13 +229,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -243,13 +243,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -257,13 +257,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -271,13 +271,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -285,13 +285,13 @@
         <heavy>false</heavy>    
     </aircraft>    
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -299,13 +299,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -313,13 +313,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -327,13 +327,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -341,13 +341,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -355,13 +355,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -369,13 +369,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -383,13 +383,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -397,13 +397,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -411,13 +411,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -425,13 +425,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -439,13 +439,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -453,13 +453,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -467,13 +467,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -481,13 +481,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -495,13 +495,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -509,13 +509,13 @@
         <heavy>false</heavy>    
     </aircraft> 
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -523,13 +523,13 @@
         <heavy>false</heavy>    
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/73G-VirginBlue.xml</model>
+        <model>Aircraft/738/738-VirginAustralia.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>73G</required-aircraft>
         <actype>73G</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

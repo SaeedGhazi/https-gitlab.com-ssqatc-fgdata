@@ -4,13 +4,13 @@
 
 <trafficlist>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-2B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -18,13 +18,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-2B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -32,13 +32,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-2B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -46,13 +46,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-5B7</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -60,13 +60,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-5B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -74,13 +74,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-5B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -88,13 +88,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-5B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -102,13 +102,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-5B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -116,13 +116,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -130,13 +130,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -144,13 +144,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-7B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -158,13 +158,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -172,13 +172,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-7B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -186,13 +186,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-7B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -200,13 +200,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-7B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -214,13 +214,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -228,13 +228,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-7B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -242,13 +242,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -256,13 +256,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -270,13 +270,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -284,13 +284,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -298,13 +298,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -312,13 +312,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-7B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -326,13 +326,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -340,13 +340,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -354,13 +354,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -368,13 +368,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -382,13 +382,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-8B6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -396,13 +396,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-85P</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -410,13 +410,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-RoyalAirMaroc.xml</model>
+        <model>Aircraft/738/738-RoyalAirMaroc.xml</model>
         <livery>RAM</livery>
         <airline>RAM</airline>
         <home-port>GMMN</home-port>
         <required-aircraft>737RAM</required-aircraft>
         <actype>737-85P</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

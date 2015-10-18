@@ -2283,13 +2283,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2297,13 +2297,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2311,13 +2311,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2325,13 +2325,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2339,13 +2339,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2353,13 +2353,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2367,13 +2367,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2381,13 +2381,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2395,13 +2395,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2409,13 +2409,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2423,13 +2423,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2437,13 +2437,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2451,13 +2451,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2465,13 +2465,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2479,13 +2479,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2493,13 +2493,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2507,13 +2507,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2521,13 +2521,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2535,13 +2535,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2549,13 +2549,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2563,13 +2563,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2577,13 +2577,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2591,13 +2591,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2605,13 +2605,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2619,13 +2619,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2633,13 +2633,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2647,13 +2647,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2661,13 +2661,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2675,13 +2675,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2689,13 +2689,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2703,13 +2703,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2717,13 +2717,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2731,13 +2731,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2745,13 +2745,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2759,13 +2759,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2773,13 +2773,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2787,13 +2787,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2801,13 +2801,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2815,13 +2815,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2829,13 +2829,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2843,13 +2843,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2857,13 +2857,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2871,13 +2871,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2885,13 +2885,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2899,13 +2899,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2913,13 +2913,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2927,13 +2927,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2941,13 +2941,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2955,13 +2955,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2969,13 +2969,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2983,13 +2983,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2997,13 +2997,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3011,13 +3011,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>738-DAL</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3025,13 +3025,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3039,13 +3039,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3053,13 +3053,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3067,13 +3067,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3081,13 +3081,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3095,13 +3095,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3109,13 +3109,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3123,13 +3123,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3137,13 +3137,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3151,13 +3151,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3165,13 +3165,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3179,13 +3179,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3193,13 +3193,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3207,13 +3207,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3221,13 +3221,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3235,13 +3235,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3249,13 +3249,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3263,13 +3263,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3277,13 +3277,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3291,13 +3291,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>73H-DAL</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3305,13 +3305,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3319,13 +3319,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3333,13 +3333,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3347,13 +3347,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3361,13 +3361,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3375,13 +3375,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3389,13 +3389,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3403,13 +3403,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3417,13 +3417,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3431,13 +3431,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Delta.xml</model>
+        <model>Aircraft/738/738-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>73W-DAL</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

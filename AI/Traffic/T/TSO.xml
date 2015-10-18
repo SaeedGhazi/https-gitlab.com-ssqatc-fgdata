@@ -323,13 +323,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B737TSO</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -337,13 +337,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B737TSO</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -351,13 +351,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B737TSO</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -365,13 +365,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B737TSO</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -379,13 +379,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B737TSO</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -393,13 +393,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -407,13 +407,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -421,13 +421,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -435,13 +435,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -449,13 +449,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -463,13 +463,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -477,13 +477,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -491,13 +491,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -505,13 +505,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -519,13 +519,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -533,13 +533,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -547,13 +547,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Transaero.xml</model>
+    <model>Aircraft/738/738-Transaero.xml</model>
     <livery>TSO</livery>
     <airline>TSO</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738TSO</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>

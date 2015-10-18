@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- A342 & A343 replaced by A332
-     737  replaced by A320 -->
+<!-- A342 & A343 replaced by A332 -->
 
 <trafficlist>
     <aircraft>
@@ -523,7 +522,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -537,7 +536,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -551,7 +550,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -565,7 +564,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FACT</home-port>
@@ -579,7 +578,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FACT</home-port>
@@ -593,7 +592,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -607,7 +606,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FACT</home-port>
@@ -621,7 +620,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FACT</home-port>
@@ -635,7 +634,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -649,7 +648,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -663,7 +662,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -677,7 +676,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FACT</home-port>
@@ -691,7 +690,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -705,7 +704,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>
@@ -719,7 +718,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-SouthAfrican.xml</model>
+        <model>Aircraft/738/738-SouthAfrican.xml</model>
         <livery>SAA</livery>
         <airline>SAA</airline>
         <home-port>FAJS</home-port>

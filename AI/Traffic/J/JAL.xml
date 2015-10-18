@@ -1,12 +1,10 @@
 <?xml version="1.0"?>
 
-<!-- 734 (737-JALExpress)  replaced by   Aircraft\A321\A321-Dragonair.xml
-          737    replaced by   Aircraft/A321/A321-Asiana.xml
-          E70     replaced by Aircraft/CRJ-200/CRJ-200-JAL.xml -->
+<!-- E70     replaced by Aircraft/CRJ-200/CRJ-200-JAL.xml -->
 
 <trafficlist>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -20,7 +18,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -34,7 +32,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -48,7 +46,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -62,7 +60,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -76,7 +74,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -90,7 +88,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft\A321\A321-Dragonair.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -104,7 +102,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJBB</home-port>
@@ -118,7 +116,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJTT</home-port>
@@ -132,7 +130,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -146,7 +144,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJCC</home-port>
@@ -160,7 +158,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -174,7 +172,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJBB</home-port>
@@ -188,7 +186,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJTT</home-port>
@@ -202,7 +200,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>
@@ -216,7 +214,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJCC</home-port>
@@ -230,7 +228,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJTT</home-port>
@@ -244,7 +242,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-Asiana.xml</model>
+        <model>Aircraft/738/738-JAL.xml</model>
         <livery>JAL</livery>
         <airline>JAL</airline>
         <home-port>RJAA</home-port>

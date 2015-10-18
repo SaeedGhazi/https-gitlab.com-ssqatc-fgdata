@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 
-<!-- 738  replaced by  Aircraft/A321/A321-USAirways.xml
-     737  replaced by   Aircraft/A319/A319-UnitedAirlines.xml -->
+<!-- 737  replaced by   Aircraft/738/738-Aeromexico.xml -->
 
 <trafficlist>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -19,7 +18,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -33,7 +32,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -47,7 +46,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -61,7 +60,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -75,7 +74,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -89,7 +88,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -103,7 +102,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -117,7 +116,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -131,7 +130,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -145,7 +144,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -159,7 +158,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -173,7 +172,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -187,7 +186,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -201,7 +200,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -215,7 +214,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -229,7 +228,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -243,7 +242,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -257,7 +256,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -271,7 +270,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -285,7 +284,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -299,7 +298,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -313,7 +312,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -327,7 +326,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -341,7 +340,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -355,7 +354,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -369,7 +368,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -383,7 +382,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -397,7 +396,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -411,7 +410,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A319/A319-UnitedAirlines.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -425,7 +424,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -439,7 +438,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -453,7 +452,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -467,7 +466,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -481,7 +480,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -495,7 +494,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -509,7 +508,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -523,7 +522,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -537,7 +536,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -551,7 +550,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -565,7 +564,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>
@@ -579,7 +578,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A321/A321-USAirways.xml</model>
+        <model>Aircraft/738/738-Aeromexico.xml</model>
         <livery>AMX</livery>
         <airline>AMX</airline>
         <home-port>MMMX</home-port>

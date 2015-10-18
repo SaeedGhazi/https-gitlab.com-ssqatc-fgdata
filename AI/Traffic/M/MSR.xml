@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- 737 replaced by A320
-     773 added 772 replaced by 773
+<!-- 773 added 772 replaced by 773
      E70 replaced by A320
      A343 replaced by A332 -->
 
@@ -455,7 +454,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -469,7 +468,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -483,7 +482,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -497,7 +496,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HEAX</home-port>
@@ -511,7 +510,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HEAX</home-port>
@@ -525,7 +524,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -539,7 +538,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HELX</home-port>
@@ -553,7 +552,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HEAX</home-port>
@@ -567,7 +566,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -581,7 +580,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HEAX</home-port>
@@ -595,7 +594,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HELX</home-port>
@@ -609,7 +608,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -623,7 +622,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HELX</home-port>
@@ -637,7 +636,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HEAX</home-port>
@@ -651,7 +650,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HELX</home-port>
@@ -665,7 +664,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>
@@ -679,7 +678,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A320/A320-EgyptAir.xml</model>
+        <model>Aircraft/738/738-EgyptAir.xml</model>
         <livery>MSR</livery>
         <airline>MSR</airline>
         <home-port>HECA</home-port>

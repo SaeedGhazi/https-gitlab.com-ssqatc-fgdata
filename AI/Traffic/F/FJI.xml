@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/737/737-AirPacific.xml</model>
+        <model>Aircraft/738/738-FijiAirways.xml</model>
         <livery>FJI</livery>
         <airline>FJI</airline>
         <home-port>NFFN</home-port>
         <required-aircraft>737FJI</required-aircraft>
         <actype>737-529</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -15,13 +15,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-AirPacific.xml</model>
+        <model>Aircraft/738/738-FijiAirways.xml</model>
         <livery>FJI</livery>
         <airline>FJI</airline>
         <home-port>NFFN</home-port>
         <required-aircraft>737FJI</required-aircraft>
         <actype>737-529</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -29,13 +29,13 @@
         <heavy>false</heavy>
     </aircraft>
      <aircraft>
-        <model>Aircraft/737/737-AirPacific.xml</model>
+        <model>Aircraft/738/738-FijiAirways.xml</model>
         <livery>FJI</livery>
         <airline>FJI</airline>
         <home-port>NFFN</home-port>
         <required-aircraft>737FJI</required-aircraft>
         <actype>737-529</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

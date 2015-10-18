@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-330QC</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -15,13 +15,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-330</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -29,13 +29,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-330</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -43,13 +43,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-330</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -57,13 +57,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-330</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -71,13 +71,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-330</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -85,13 +85,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377QC</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -99,13 +99,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -113,13 +113,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377QC</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -127,13 +127,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377F</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -141,13 +141,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -155,13 +155,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -169,13 +169,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377QC</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -183,13 +183,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -197,13 +197,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-33A</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -211,13 +211,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-33A</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -225,13 +225,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-33AQC</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -239,13 +239,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-33A</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -253,13 +253,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -267,13 +267,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Jet2.xml</model>
+        <model>Aircraft/738/738-Jet2.xml</model>
         <livery>EXS</livery>
         <airline>EXS</airline>
         <home-port>EGNM</home-port>
         <required-aircraft>737EXS</required-aircraft>
         <actype>737-377</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

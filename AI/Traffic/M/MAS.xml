@@ -673,13 +673,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4Y0</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -687,13 +687,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -701,13 +701,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -715,13 +715,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -729,13 +729,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -743,13 +743,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -757,13 +757,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -771,13 +771,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -785,13 +785,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -799,13 +799,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -813,13 +813,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -827,13 +827,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -841,13 +841,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -855,13 +855,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -869,13 +869,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -883,13 +883,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -897,13 +897,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -911,13 +911,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -925,13 +925,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -939,13 +939,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -953,13 +953,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -967,13 +967,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -981,13 +981,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -995,13 +995,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1009,13 +1009,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1023,13 +1023,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1037,13 +1037,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1051,13 +1051,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1065,13 +1065,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1079,13 +1079,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1093,13 +1093,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1107,13 +1107,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1121,13 +1121,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKP</home-port>
         <required-aircraft>737WMKPMAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1135,13 +1135,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WBKK</home-port>
         <required-aircraft>737WBKKMAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1149,13 +1149,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WBKK</home-port>
         <required-aircraft>737WBKKMAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1163,13 +1163,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WBKK</home-port>
         <required-aircraft>737WBKKMAS</required-aircraft>
         <actype>737-4H6</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1177,13 +1177,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WBKK</home-port>
         <required-aircraft>737WBKKMAS</required-aircraft>
         <actype>737-46J</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1191,13 +1191,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-8Q8</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1205,13 +1205,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-8Q8</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1219,13 +1219,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-86N</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1233,13 +1233,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Malaysia.xml</model>
+        <model>Aircraft/738/738-MalaysiaAirlines.xml</model>
         <livery>MAS</livery>
         <airline>MAS</airline>
         <home-port>WMKK</home-port>
         <required-aircraft>737MAS</required-aircraft>
         <actype>737-8GQ</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

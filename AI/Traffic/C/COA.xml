@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -15,13 +15,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -29,13 +29,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -43,13 +43,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -57,13 +57,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -71,13 +71,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -85,13 +85,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -99,13 +99,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -113,13 +113,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -127,13 +127,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -141,13 +141,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -155,13 +155,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -169,13 +169,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -183,13 +183,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -197,13 +197,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -211,13 +211,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -225,13 +225,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -239,13 +239,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -253,13 +253,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -267,13 +267,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -281,13 +281,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -295,13 +295,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -309,13 +309,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -323,13 +323,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -337,13 +337,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -351,13 +351,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -365,13 +365,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -379,13 +379,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -393,13 +393,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>735-COA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -407,13 +407,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -421,13 +421,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -435,13 +435,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -449,13 +449,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -463,13 +463,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -477,13 +477,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -491,13 +491,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -505,13 +505,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -519,13 +519,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -533,13 +533,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -547,13 +547,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -561,13 +561,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -575,13 +575,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -589,13 +589,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -603,13 +603,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -617,13 +617,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -631,13 +631,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -645,13 +645,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -659,13 +659,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -673,13 +673,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -687,13 +687,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -701,13 +701,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -715,13 +715,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -729,13 +729,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -743,13 +743,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -757,13 +757,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -771,13 +771,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -785,13 +785,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -799,13 +799,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -813,13 +813,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -827,13 +827,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -841,13 +841,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -855,13 +855,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -869,13 +869,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -883,13 +883,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -897,13 +897,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -911,13 +911,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -925,13 +925,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -939,13 +939,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -953,13 +953,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -967,13 +967,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -981,13 +981,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -995,13 +995,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1009,13 +1009,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1023,13 +1023,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1037,13 +1037,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1051,13 +1051,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1065,13 +1065,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1079,13 +1079,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1093,13 +1093,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1107,13 +1107,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1121,13 +1121,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1135,13 +1135,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1149,13 +1149,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1163,13 +1163,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1177,13 +1177,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1191,13 +1191,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1205,13 +1205,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1219,13 +1219,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1233,13 +1233,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1247,13 +1247,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1261,13 +1261,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1275,13 +1275,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1289,13 +1289,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1303,13 +1303,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1317,13 +1317,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1331,13 +1331,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1345,13 +1345,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1359,13 +1359,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1373,13 +1373,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1387,13 +1387,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1401,13 +1401,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1415,13 +1415,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1429,13 +1429,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1443,13 +1443,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1457,13 +1457,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1471,13 +1471,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1485,13 +1485,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1499,13 +1499,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1513,13 +1513,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1527,13 +1527,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1541,13 +1541,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1555,13 +1555,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1569,13 +1569,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1583,13 +1583,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1597,13 +1597,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1611,13 +1611,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1625,13 +1625,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1639,13 +1639,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1653,13 +1653,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1667,13 +1667,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1681,13 +1681,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1695,13 +1695,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1709,13 +1709,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1723,13 +1723,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1737,13 +1737,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1751,13 +1751,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1765,13 +1765,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1779,13 +1779,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1793,13 +1793,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1807,13 +1807,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1821,13 +1821,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1835,13 +1835,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1849,13 +1849,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1863,13 +1863,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1877,13 +1877,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1891,13 +1891,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1905,13 +1905,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1919,13 +1919,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1933,13 +1933,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1947,13 +1947,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1961,13 +1961,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1975,13 +1975,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1989,13 +1989,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2003,13 +2003,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2017,13 +2017,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2031,13 +2031,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2045,13 +2045,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2059,13 +2059,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2073,13 +2073,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2087,13 +2087,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2101,13 +2101,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2115,13 +2115,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2129,13 +2129,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2143,13 +2143,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2157,13 +2157,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2171,13 +2171,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2185,13 +2185,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2199,13 +2199,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2213,13 +2213,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>738-COA</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2227,13 +2227,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2241,13 +2241,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2255,13 +2255,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2269,13 +2269,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2283,13 +2283,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2297,13 +2297,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2311,13 +2311,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2325,13 +2325,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2339,13 +2339,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2353,13 +2353,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2367,13 +2367,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2381,13 +2381,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2395,13 +2395,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2409,13 +2409,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2423,13 +2423,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2437,13 +2437,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2451,13 +2451,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2465,13 +2465,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2479,13 +2479,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2493,13 +2493,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2507,13 +2507,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2521,13 +2521,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2535,13 +2535,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2549,13 +2549,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2563,13 +2563,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2577,13 +2577,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2591,13 +2591,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2605,13 +2605,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2619,13 +2619,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2633,13 +2633,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2647,13 +2647,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2661,13 +2661,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2675,13 +2675,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2689,13 +2689,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2703,13 +2703,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2717,13 +2717,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2731,13 +2731,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2745,13 +2745,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2759,13 +2759,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2773,13 +2773,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2787,13 +2787,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2801,13 +2801,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2815,13 +2815,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2829,13 +2829,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2843,13 +2843,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>739-COA</required-aircraft>
         <actype>739</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2857,13 +2857,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2871,13 +2871,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2885,13 +2885,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2899,13 +2899,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2913,13 +2913,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2927,13 +2927,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2941,13 +2941,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2955,13 +2955,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2969,13 +2969,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2983,13 +2983,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2997,13 +2997,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3011,13 +3011,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3025,13 +3025,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3039,13 +3039,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3053,13 +3053,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3067,13 +3067,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3081,13 +3081,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3095,13 +3095,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3109,13 +3109,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3123,13 +3123,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3137,13 +3137,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3151,13 +3151,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3165,13 +3165,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3179,13 +3179,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3193,13 +3193,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3207,13 +3207,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3221,13 +3221,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3235,13 +3235,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>PGUM</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3249,13 +3249,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3263,13 +3263,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3277,13 +3277,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3291,13 +3291,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KIAH</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3305,13 +3305,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3319,13 +3319,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3333,13 +3333,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KCLE</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -3347,13 +3347,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-Continental.xml</model>
+        <model>Aircraft/738/738-UnitedAirlines.xml</model>
         <livery>COA</livery>
         <airline>COA</airline>
         <home-port>KEWR</home-port>
         <required-aircraft>73G-COA</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

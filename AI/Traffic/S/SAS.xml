@@ -284,13 +284,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>734-SAS</required-aircraft>
         <actype>734</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -298,13 +298,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>734-SAS</required-aircraft>
         <actype>734</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -312,13 +312,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>734-SAS</required-aircraft>
         <actype>734</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -326,13 +326,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -340,13 +340,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -354,13 +354,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -368,13 +368,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -382,13 +382,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -396,13 +396,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -410,13 +410,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>735-SAS</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -424,13 +424,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -438,13 +438,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -452,13 +452,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -466,13 +466,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -480,13 +480,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -494,13 +494,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -508,13 +508,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -522,13 +522,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -536,13 +536,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -550,13 +550,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -564,13 +564,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -578,13 +578,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -592,13 +592,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -606,13 +606,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -620,13 +620,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -634,13 +634,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -648,13 +648,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -662,13 +662,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -676,13 +676,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -690,13 +690,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -704,13 +704,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -718,13 +718,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -732,13 +732,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -746,13 +746,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -760,13 +760,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -774,13 +774,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -788,13 +788,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -802,13 +802,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>736-SAS</required-aircraft>
         <actype>736</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -816,13 +816,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -830,13 +830,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -844,13 +844,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -858,13 +858,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -872,13 +872,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -886,13 +886,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -900,13 +900,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>738-SAS</required-aircraft>
         <actype>738</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -914,13 +914,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -928,13 +928,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -942,13 +942,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -956,13 +956,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -970,13 +970,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -984,13 +984,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -998,13 +998,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1012,13 +1012,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1026,13 +1026,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1040,13 +1040,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1054,13 +1054,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1068,13 +1068,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1082,13 +1082,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1096,13 +1096,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1110,13 +1110,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1124,13 +1124,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1138,13 +1138,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1152,13 +1152,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1166,13 +1166,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73G-SAS</required-aircraft>
         <actype>73G</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1180,13 +1180,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1194,13 +1194,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1208,13 +1208,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1222,13 +1222,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1236,13 +1236,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1250,13 +1250,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1264,13 +1264,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73H-SAS</required-aircraft>
         <actype>73H</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1278,13 +1278,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73W-SAS</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1292,13 +1292,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73W-SAS</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1306,13 +1306,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73W-SAS</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1320,13 +1320,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ESSA</home-port>
         <required-aircraft>73W-SAS</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1334,13 +1334,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>EKCH</home-port>
         <required-aircraft>73W-SAS</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -1348,13 +1348,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/737/737-ScandinavianAirlines.xml</model>
+        <model>Aircraft/738/738-SAS.xml</model>
         <livery>SAS</livery>
         <airline>SAS</airline>
         <home-port>ENGM</home-port>
         <required-aircraft>73W-SAS</required-aircraft>
         <actype>73W</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

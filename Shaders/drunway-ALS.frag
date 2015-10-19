@@ -12,6 +12,7 @@ varying vec3 ecViewdir;
 uniform sampler2D texture;
 uniform sampler2D NormalTex;
 uniform sampler2D mix_texture;
+uniform sampler2D grain_texture;
 
 varying float steepness;
 
@@ -27,6 +28,19 @@ uniform float eye_alt;
 uniform float snowlevel;
 uniform float dust_cover_factor;
 uniform float lichen_cover_factor;
+uniform float filter_threshold;
+uniform float filter_transition;
+uniform float size_base;
+uniform float size_overlay;
+uniform float size_grain;
+uniform float strength_05m;
+uniform float strength_1m;
+uniform float strength_2m;
+uniform float strength_5m;
+uniform float strength_10m;
+uniform float relief_strength;
+uniform float grain_strength;
+uniform float bias_center_strength;
 uniform float wetness;
 uniform float fogstructure;
 uniform float snow_thickness_factor;
@@ -39,6 +53,7 @@ uniform float air_pollution;
 uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
+uniform int bias_center;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
@@ -72,6 +87,7 @@ void main()
 {
 
 
+
 yprime_alt = diffuse_term.a;
 //diffuse_term.a = 1.0;
 mie_angle = gl_Color.a;
@@ -98,8 +114,8 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
     vec4 texel;
     vec4 snow_texel;
-    vec4 detail_texel;
     vec4 mix_texel;
+    vec4 grain_texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     float intensity;
@@ -115,11 +131,12 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 //		2000m: overlay, detail, snow, fog
 
 float noise_01m;
+float noise_05m = Noise2D(rawPos.xy, 0.5);
 float noise_1m = Noise2D(rawPos.xy, 1.0); 
-float noise_10m; 
-float noise_5m;  
-noise_10m = Noise2D(rawPos.xy, 10.0);
-noise_5m = Noise2D(rawPos.xy ,5.0);
+float noise_2m = Noise2D(rawPos.xy, 2.0); 
+float noise_10m = Noise2D(rawPos.xy, 10.0);
+float noise_5m  = Noise2D(rawPos.xy ,5.0); 
+
 
 float noisegrad_10m;
 float noisegrad_5m;
@@ -139,9 +156,13 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
 
 // get the texels
 
-    texel = texture2D(texture, gl_TexCoord[0].st);
-    mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 5.0);
+    //texel = texture2D(texture, gl_TexCoord[0].st);
+    //mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 5.0);
+    texel = texture2D(texture, rawPos * 1.0/size_base);
+    mix_texel = texture2D(mix_texture, rawPos * 1.0/size_overlay);
+    grain_texel = texture2D(grain_texture, rawPos * 1.0/size_grain);
 	vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
+    //vec4 nmap  = texture2D(NormalTex, rawPos * 0.01);
 	vec3 N = nmap.rgb * 2.0 - 1.0;
 
     float distortion_factor = 1.0;
@@ -152,8 +173,33 @@ float noise_2000m = Noise2D(rawPos.xy, 2000.0);
     float snow_alpha;
 
 	
-	noise_term = smoothstep(0.8,1.0,noise_1m);
-	texel = mix(texel, mix_texel, noise_term);        
+	//noise_term = smoothstep(overlay_limit ,1.0,noise_1m);
+	//noise_term = smoothstep(overlay_limit, 1.0, 0.5 * noise_1m + 0.5 * noise_10m);
+	noise_term = strength_05m * noise_05m;
+	noise_term += strength_1m * noise_1m;
+	noise_term += strength_2m * noise_2m;
+	noise_term += strength_5m * noise_5m;
+	noise_term += strength_10m * noise_10m;
+
+
+
+	if (bias_center == 1)
+		{
+		float centerness = smoothstep(0.02, 0.1, (0.14 - abs(gl_TexCoord[0].s - 0.14)));
+		centerness *= smoothstep(0.05, 0.15, gl_TexCoord[0].t);
+		centerness = 1.0 - centerness;
+		
+		noise_term *= (1.0 - bias_center_strength) + bias_center_strength *  centerness;
+		noise_term = clamp(noise_term, 0.0, 1.0);
+		}	
+
+	float filtered_noise_term = smoothstep(filter_threshold, filter_threshold + filter_transition, noise_term);	
+
+	texel = mix(texel, mix_texel, filtered_noise_term);
+
+   	texel.rgb = mix(texel.rgb, grain_texel.rgb, grain_strength * grain_texel.a * (1.0 - noise_term));// * (1.0-smoothstep(2000.0,5000.0, dist)));
+
+
 
     //float view_angle = abs(dot(normal, normalize(ecViewdir)));
 
@@ -232,7 +278,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
     
 	if (quality_level > 4)
 		{
-		NdotL = NdotL + (3.0 * N.r + 0.1 * (noise_01m-0.5))* (1.0 - water_factor) ;
+		NdotL = NdotL + (3.0 * N.r + 0.1 * (noise_01m-0.5))* (1.0 - water_factor) * relief_strength;
 		//NdotL = NdotL + 3.0 * N.r + 0.1 * (noise_01m-0.5) ;
 		}
     if (NdotL > 0.0) {

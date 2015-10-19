@@ -5,8 +5,34 @@
 
   <material>
     <name>grass_rwy</name>
-    <effect>Effects/airfield</effect>
+    <!--<effect>Effects/airfield</effect>-->
+    <effect>Effects/dirt-runway</effect>
+    <texture-set>
+      <texture>Runway/dirt_rwy.png</texture>
+      <texture n="16">Terrain/sand_hires_ochre.png</texture>
+      <texture n="17">Terrain/airport_grass2.png</texture>
+    </texture-set>
+    <parameters>
+ 	<strength_05m>0.3</strength_05m>
+	<strength_1m>0.4</strength_1m>
+	<strength_2m>0.0</strength_2m>
+	<strength_5m>0.1</strength_5m>
+	<strength_10m>0.2</strength_10m>
+	<filter_threshold>0.15</filter_threshold>
+	<filter_transition>0.1</filter_transition>
+	<bias_center>1</bias_center>
+	<bias_center_strength>0.6</bias_center_strength>
+        <relief_strength>0.35</relief_strength>
+	<size_base>25.0</size_base>
+	<size_overlay>30.0</size_overlay>
+	<size_grain>50.0</size_grain>
+    	<grain_strength>0.8</grain_strength>
+    </parameters>
+    <texture-set>
     <texture>Runway/grass_rwy.png</texture>
+      <texture n="16">Terrain/airport_grass2.png</texture>
+      <texture n="17">Terrain/sand_hires_ochre.png</texture>
+    </texture-set>
     <xsize>75</xsize>
     <ysize>75</ysize>
     <solid>1</solid>
@@ -26,8 +52,29 @@
   </material>
 
   <material>
+    <effect>Effects/dirt-runway</effect>
     <name>lakebed_taxiway</name>
-    <texture>Runway/lakebed_taxiway.png</texture>
+    <texture-set>
+      <texture>Runway/lakebed_taxiway.png</texture>
+      <texture n="16">Terrain/sand_hires.png</texture>
+      <texture n="17">Terrain/sand1.png</texture>
+    </texture-set>
+    <parameters>
+ 	<strength_05m>0.0</strength_05m>
+	<strength_1m>0.4</strength_1m>
+	<strength_2m>0.3</strength_2m>
+	<strength_5m>0.2</strength_5m>
+	<strength_10m>0.1</strength_10m>
+	<filter_threshold>0.2</filter_threshold>
+	<filter_transition>0.2</filter_transition>
+	<bias_center>1</bias_center>
+	<bias_center_strength>0.6</bias_center_strength>
+        <relief_strength>0.35</relief_strength>
+	<size_base>25.0</size_base>
+	<size_overlay>100.0</size_overlay>
+	<size_grain>100.0</size_grain>
+    	<grain_strength>0.3</grain_strength>
+    </parameters>
     <rolling-friction>0.04</rolling-friction>
     <bumpiness>0.05</bumpiness>
   </material>

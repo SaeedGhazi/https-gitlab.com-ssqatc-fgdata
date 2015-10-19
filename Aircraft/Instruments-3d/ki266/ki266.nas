@@ -67,10 +67,10 @@ ki266.update = func {
     v = 0.0;
   }
   if( v < 100.0 ) {
-    me.milesDisplayNode.setIntValue( v * 10.0 );
+    me.milesDisplayNode.setIntValue( v * 10.0 + 0.5 );
     me.leftDotNode.setBoolValue( 1 );
   } else {
-    me.milesDisplayNode.setIntValue( v );
+    me.milesDisplayNode.setIntValue( v + 0.5 );
     me.leftDotNode.setBoolValue( 0 );
   }
 

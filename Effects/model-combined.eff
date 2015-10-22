@@ -914,6 +914,11 @@ please see Docs/README.model-combined.eff for documentation
     				   <type>float</type>
      				   <value><use>landing_light2_offset</use></value>
      			   </uniform>
+                   <uniform>
+                       <name>landing_light3_offset</name>
+                       <type>float</type>
+                       <value><use>landing_light3_offset</use></value>
+                   </uniform>
  			   <uniform>
        				  <name>cloudpos1_x</name>
         			  <type>float</type>

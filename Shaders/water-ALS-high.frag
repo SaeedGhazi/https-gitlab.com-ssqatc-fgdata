@@ -61,6 +61,7 @@ uniform float sea_b;
 uniform float air_pollution;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float landing_light3_offset;
 
 uniform int quality_level;
 uniform int tquality_level;
@@ -90,7 +91,7 @@ float fog_backscatter(in float avisibility);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 vec3 searchlight();
-vec3 landing_light(in float offset);
+vec3 landing_light(in float offset, in float offsetv);
 
 //////////////////////
 
@@ -470,11 +471,11 @@ void main(void)
 		}
     	if (use_landing_light == 1)
 		{
-		secondary_light += landing_light(landing_light1_offset);
+		secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
 		}
     	if (use_alt_landing_light == 1)
 		{
-		secondary_light += landing_light(landing_light2_offset);
+		secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 		}
 	}
 

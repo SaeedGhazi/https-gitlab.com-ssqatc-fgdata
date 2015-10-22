@@ -47,6 +47,7 @@ uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float landing_light3_offset;
 uniform float air_pollution;
 
 
@@ -76,7 +77,7 @@ float fog_backscatter(in float avisibility);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 
 vec3 searchlight();
-vec3 landing_light(in float offset);
+vec3 landing_light(in float offset, in float offsetv);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 
@@ -305,14 +306,13 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	}
     if (use_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light1_offset);
+	secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
 	}
     if (use_alt_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light2_offset);
+	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
     color.rgb +=secondary_light * light_distance_fading(dist);
-
 
     fragColor = color * texel + specular;
 
@@ -320,7 +320,6 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 float lightArg = (terminator-yprime_alt)/100000.0;
 
 vec3 hazeColor = get_hazeColor(lightArg);
-
 
 
 // Rayleigh color shifts 
@@ -338,14 +337,13 @@ vec3 hazeColor = get_hazeColor(lightArg);
   	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
 	}
 
+
 // here comes the terrain haze model
 
-
 float delta_z = hazeLayerAltitude - eye_alt;
-float mvisibility = min(visibility,avisibility);
+float mvisibility = min(visibility, avisibility);
 
 if (dist > 0.04 * mvisibility) 
-
 {
 
 alt = eye_alt;
@@ -438,16 +436,10 @@ else
 	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 - effective_scattering);
 	}
 
-
-
 transmission =  fog_func(transmission_arg, alt);
 
 // there's always residual intensity, we should never be driven to zero
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
-
-
-
-
 
 // now dim the light for haze
 eShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
@@ -490,6 +482,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 	}
 
+
 // don't let the light fade out too rapidly
 lightArg = (terminator + 200000.0)/100000.0;
 float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
@@ -498,13 +491,11 @@ vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
 hazeColor.rgb *= eqColorFactor * eShade;
 hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
-fragColor.rgb = mix( hazeColor +secondary_light * fog_backscatter(mvisibility) , fragColor.rgb,transmission);
-
+fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility) , fragColor.rgb,transmission);
 
 }
 
 gl_FragColor = fragColor;
-
 
 }
 

@@ -54,8 +54,7 @@ if (angularDist < lightRadius)
 else return vec3 (0.0,0.0,0.0);
 }
 
-
-vec3 landing_light(in float offset)
+vec3 landing_light(in float offset, in float offsetv)
 {
 
 float fov_h = field_of_view;
@@ -69,7 +68,7 @@ else
 	{yaw_offset = view_heading_offset;}
 
 float x_offset = (float(display_xsize) / fov_h * (yaw_offset + offset));
-float y_offset = -(float(display_ysize) / fov_v * view_pitch_offset);
+float y_offset = -(float(display_ysize) / fov_v * (view_pitch_offset + offsetv));
 
 vec2 center = vec2 (float(display_xsize) * 0.5 + x_offset, float(display_ysize) * 0.4 + y_offset);
 

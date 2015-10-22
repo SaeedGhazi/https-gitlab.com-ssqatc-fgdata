@@ -20,24 +20,25 @@
 		<ground_scattering><use>/environment/surface/scattering</use></ground_scattering>
 		<terminator><use>/environment/terminator-relative-position-m</use></terminator>
 		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
-    		<overcast><use>/rendering/scene/overcast</use></overcast>
-    		<eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
- 		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
-    		<moonlight><use>/environment/moonlight</use></moonlight>
+		<overcast><use>/rendering/scene/overcast</use></overcast>
+		<eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
+		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
+		<moonlight><use>/environment/moonlight</use></moonlight>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
-   		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
 		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
-   		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
-    		<view_pitch_offset><use>/sim/current-view/pitch-offset-deg</use></view_pitch_offset>
-    		<view_heading_offset><use>/sim/current-view/heading-offset-deg</use></view_heading_offset>
-    		<view_fov><use>/sim/current-view/field-of-view</use></view_fov>
-    		<use_searchlight><use>/sim/rendering/als-secondary-lights/use-searchlight</use></use_searchlight>
-    		<use_landing_light><use>/sim/rendering/als-secondary-lights/use-landing-light</use></use_landing_light>
-    		<use_alt_landing_light><use>/sim/rendering/als-secondary-lights/use-alt-landing-light</use></use_alt_landing_light>
-    		<landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
-    		<landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
+		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+		<view_pitch_offset><use>/sim/current-view/pitch-offset-deg</use></view_pitch_offset>
+		<view_heading_offset><use>/sim/current-view/heading-offset-deg</use></view_heading_offset>
+		<view_fov><use>/sim/current-view/field-of-view</use></view_fov>
+		<use_searchlight><use>/sim/rendering/als-secondary-lights/use-searchlight</use></use_searchlight>
+		<use_landing_light><use>/sim/rendering/als-secondary-lights/use-landing-light</use></use_landing_light>
+		<use_alt_landing_light><use>/sim/rendering/als-secondary-lights/use-alt-landing-light</use></use_alt_landing_light>
+		<landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
+		<landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
+		<landing_light3_offset><use>/sim/rendering/als-secondary-lights/landing-light3-offset-deg</use></landing_light3_offset>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
-    		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
+		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<!-- 		END fog include -->
 	</parameters>
 
@@ -197,6 +198,11 @@
         <name>landing_light2_offset</name>
         <type>float</type>
         <value><use>landing_light2_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>landing_light3_offset</name>
+        <type>float</type>
+        <value><use>landing_light3_offset</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

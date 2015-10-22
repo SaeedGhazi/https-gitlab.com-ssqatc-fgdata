@@ -35,6 +35,7 @@ uniform float cloud_self_shading;
 uniform float uvstretch;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float landing_light3_offset;
 uniform float air_pollution;
 uniform float osg_SimulationTime;
 
@@ -64,7 +65,7 @@ float fog_backscatter(in float avisibility);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 
 vec3 searchlight();
-vec3 landing_light(in float offset);
+vec3 landing_light(in float offset, in float offsetv);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 
@@ -272,11 +273,11 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	}
     if (use_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light1_offset);
+	secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
 	}
     if (use_alt_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light2_offset);
+	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
     color.rgb +=secondary_light * light_distance_fading(dist);
 
@@ -285,7 +286,7 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 
 float lightArg = (terminator-yprime_alt)/100000.0;
 
-    vec3 hazeColor = get_hazeColor(lightArg);
+vec3 hazeColor = get_hazeColor(lightArg);
 
 
 // Rayleigh color shifts 
@@ -304,9 +305,7 @@ float lightArg = (terminator-yprime_alt)/100000.0;
 	}
 
 
-
 // here comes the terrain haze model
-
 
 float delta_z = hazeLayerAltitude - eye_alt;
 float mvisibility = min(visibility, avisibility);
@@ -412,8 +411,6 @@ transmission =  fog_func(transmission_arg, alt);
 if (eqColorFactor < 0.2) eqColorFactor = 0.2;
 
 
-
-
 // Mie-like factor
 
 	if (lightArg < 10.0)
@@ -463,12 +460,7 @@ hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
-
-
-
-
 }
-
 
 gl_FragColor = fragColor;
 

@@ -27,6 +27,7 @@ uniform float cloud_self_shading;
 uniform float horizon_roughness;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float landing_light3_offset;
 
 uniform int use_searchlight;
 uniform int use_landing_light;
@@ -38,7 +39,7 @@ float Noise2D(in vec2 coord, in float wavelength);
 float fog_backscatter(in float avisibility);
 
 vec3 searchlight();
-vec3 landing_light(in float offset);
+vec3 landing_light(in float offset, in float offsetv);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -242,11 +243,11 @@ color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+
 	}
     if (use_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light1_offset);
+	secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
 	}
     if (use_alt_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light2_offset);
+	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
 
 

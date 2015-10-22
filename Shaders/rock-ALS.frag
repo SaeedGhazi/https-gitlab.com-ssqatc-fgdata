@@ -44,6 +44,7 @@ uniform float dust_resistance;
 uniform float slopeline_strength;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
+uniform float landing_light3_offset;
 uniform float osg_SimulationTime;
 
 uniform vec3 base_color;
@@ -79,7 +80,7 @@ float fog_backscatter(in float avisibility);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 vec3 searchlight();
-vec3 landing_light(in float offset);
+vec3 landing_light(in float offset, in float offsetv);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -466,11 +467,11 @@ if ((dist < 5000.0) && (combined_wetness>0.0))
 	}
     if (use_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light1_offset);
+	secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
 	}
     if (use_alt_landing_light == 1)
 	{
-	secondary_light += landing_light(landing_light2_offset);
+	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
     color.rgb +=secondary_light * light_distance_fading(dist);
 

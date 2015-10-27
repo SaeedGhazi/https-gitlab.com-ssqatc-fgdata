@@ -137,6 +137,16 @@ define([
             "Navigation Data": L.navdbLayer(),
             "Other Traffic": L.aiLayer(),
 
+            "OpenAIP":  new L.TileLayer("http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.png", {
+                maxZoom: 14,
+                minZoom: 4,
+                tms: true,
+                detectRetina: true,
+                subdomains: '12',
+                format: 'image/png',
+                transparent: true
+            }),
+
             "VFRMap.com Sectionals (US)" : new L.TileLayer('http://vfrmap.com/20140918/tiles/vfrc/{z}/{y}/{x}.jpg', {
                 maxZoom : 12,
                 minZoom : 3,

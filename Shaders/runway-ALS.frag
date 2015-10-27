@@ -45,6 +45,7 @@ uniform int cloud_shadow_flag;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+uniform int overlay_flag;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -118,13 +119,11 @@ void main()
 
 float noise_01m;
 float noise_1m = Noise2D(rawPos.xy, 1.0); 
-float noise_10m; 
-float noise_5m;  
-noise_10m = Noise2D(rawPos.xy, 10.0);
-noise_5m = Noise2D(rawPos.xy ,5.0);
+float noise_10m = Noise2D(rawPos.xy, 10.0);
+float noise_20m = Noise2D(rawPos.xy, 20.0);
+float noise_5m = Noise2D(rawPos.xy ,5.0);
 
-float noisegrad_10m;
-float noisegrad_5m;
+
 
 float noise_50m = Noise2D(rawPos.xy, 50.0);
 
@@ -143,6 +142,61 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
     texel = texture2D(texture, vec2 (gl_TexCoord[0].s, gl_TexCoord[0].t * uvstretch));
 	vec4 nmap  = texture2D(NormalTex, gl_TexCoord[0].st * 8.0);
 	vec3 N = nmap.rgb * 2.0 - 1.0;
+
+
+	// skid marks by procedural darkening
+			
+	float mix_factor = smoothstep(0.0, 0.3, 1.0 - gl_TexCoord[0].t)* smoothstep(0.0, 0.1, gl_TexCoord[0].t);
+	float threshold;
+
+	if (overlay_flag > 0)
+		{
+		float centerness = 2.0 * (0.5 - abs(gl_TexCoord[0].s - 0.5));
+
+		if (overlay_flag == 1)
+			{
+			threshold = 0.4 + 0.3 * (1.0 -noise_50m);
+			}
+		else if (overlay_flag == 2)
+			{
+			threshold = mix(0.4 + 0.3 * (1.0 -noise_50m), 0.4, mix_factor);
+			}
+		else if (overlay_flag == 3)
+			{
+			threshold = 0.4 + 0.3 * (1.0 -noise_50m);
+			}
+
+		centerness = smoothstep(threshold, 1.0, centerness);
+
+		float sine_factor1 = smoothstep(0.6, 1.0,  abs(sin(1.0 * noise_50m + 2.0 * gl_TexCoord[0].s + gl_TexCoord[0].s * 40.0)));
+		float sine_factor2 = smoothstep(0.7, 1.0,  abs(sin(2.0 * noise_10m + gl_TexCoord[0].s + gl_TexCoord[0].s * 60.0)));
+		float sine_factor3 = smoothstep(0.7, 1.0,  abs(sin(1.0 * noise_20m + gl_TexCoord[0].s + gl_TexCoord[0].s * 80.0)));
+
+		float sine_factor = sine_factor1 * smoothstep(0.4, 0.6, noise_10m);
+		sine_factor += sine_factor2 * (1.0 - smoothstep(0.5, 0.7, noise_10m));
+		sine_factor += sine_factor3 * smoothstep(0.5, 0.6, noise_20m);
+		sine_factor = min(sine_factor, 1.0);
+
+
+		centerness *=(0.7 + 0.3 *sine_factor);
+
+		float t_factor;
+
+		if (overlay_flag == 1) 
+			{t_factor =  smoothstep(0.0, 0.3, gl_TexCoord[0].t) * (0.4 + 0.2 * noise_50m);}
+		else if (overlay_flag == 2)
+			{
+			t_factor = mix (0.4 + 0.2 * noise_50m, 0.7 + 0.2 * noise_50m, mix_factor);
+			}
+		else if (overlay_flag == 3)
+			{t_factor = 0.3 + 0.2 * noise_50m;}
+
+		centerness *= t_factor;
+	
+
+		centerness = 1.0 - centerness;
+		texel.rgb = texel.rgb * (0.2 + 0.8 * centerness);
+		}
 
     float distortion_factor = 1.0;
     vec2 stprime;
@@ -464,5 +518,10 @@ fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), f
 
 gl_FragColor = fragColor;
 
+//if (overlay_flag == 1)
+//	{gl_FragColor = vec4 (1.0, 0.0, 0.0, 1.0);}
+
+//if (gl_TexCoord[0].s > 0.5) {gl_FragColor = vec4 (1.0, 0.0, 0.0, 1.0);}
+//if (gl_TexCoord[0].t > 0.5) {gl_FragColor = vec4 (0.0, 1.0, 0.0, 1.0);}
 }
 

@@ -45,7 +45,70 @@
   <material>
     <name>dirt_rwy</name>
     <effect>Effects/dirt-runway</effect>
-    <texture>Runway/dirt_rwy.png</texture>
+    <!--<texture>Runway/dirt_rwy.png</texture>-->
+    <!--<texture-set>
+      <texture>Runway/dirt_rwy.png</texture>
+      <texture n="16">Runway/dirt_rwy.png</texture>
+      <texture n="17">Terrain/sand_hires_ochre.png</texture>
+    </texture-set>
+    <parameters>
+ 	<strength_05m>0.0</strength_05m>
+	<strength_1m>0.4</strength_1m>
+	<strength_2m>0.3</strength_2m>
+	<strength_5m>0.2</strength_5m>
+	<strength_10m>0.1</strength_10m>
+	<filter_threshold>0.2</filter_threshold>
+	<filter_transition>0.2</filter_transition>
+	<bias_center>1</bias_center>
+	<bias_center_strength>0.6</bias_center_strength>
+        <relief_strength>0.35</relief_strength>
+	<size_base>25.0</size_base>
+	<size_overlay>25.0</size_overlay>
+	<size_grain>25.0</size_grain>
+    	<grain_strength>0.4</grain_strength>
+    </parameters>-->
+   <!--<texture-set>
+      <texture>Runway/dirt_rwy.png</texture>
+      <texture n="16">Runway/lakebed_taxiway.png</texture>
+      <texture n="17">Terrain/airport_grass2.png</texture>
+    </texture-set>
+    <parameters>
+ 	<strength_05m>0.2</strength_05m>
+	<strength_1m>0.6</strength_1m>
+	<strength_2m>0.2</strength_2m>
+	<strength_5m>0.0</strength_5m>
+	<strength_10m>0.0</strength_10m>
+	<filter_threshold>0.2</filter_threshold>
+	<filter_transition>0.1</filter_transition>
+	<bias_center>1</bias_center>
+	<bias_center_strength>0.8</bias_center_strength>
+        <relief_strength>0.35</relief_strength>
+	<size_base>25.0</size_base>
+	<size_overlay>25.0</size_overlay>
+	<size_grain>20.0</size_grain>
+    	<grain_strength>0.6</grain_strength>
+    </parameters>-->
+	<texture-set>
+      <texture>Runway/dirt_rwy.png</texture>
+      <texture n="16">Runway/lakebed_taxiway.png</texture>
+      <texture n="17">Terrain/sand_hires.png</texture>
+    </texture-set>
+    <parameters>
+ 	<strength_05m>0.0</strength_05m>
+	<strength_1m>0.2</strength_1m>
+	<strength_2m>0.3</strength_2m>
+	<strength_5m>0.3</strength_5m>
+	<strength_10m>0.2</strength_10m>
+	<filter_threshold>0.2</filter_threshold>
+	<filter_transition>0.4</filter_transition>
+	<bias_center>1</bias_center>
+	<bias_center_strength>0.5</bias_center_strength>
+        <relief_strength>0.35</relief_strength>
+	<size_base>25.0</size_base>
+	<size_overlay>25.0</size_overlay>
+	<size_grain>20.0</size_grain>
+    	<grain_strength>0.2</grain_strength>
+    </parameters>
     <friction-factor>0.7</friction-factor>
     <rolling-friction>0.04</rolling-friction>
     <bumpiness>0.1</bumpiness>
@@ -298,12 +361,18 @@
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_tz_three</name>
+    <parameters>
+	<overlay_flag type="int">1</overlay_flag>
+    </parameters>
     <texture>Runway/pa_tz_three.png</texture>
     <wrapu>false</wrapu>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_aim</name>
+    <parameters>
+	<overlay_flag type="int">2</overlay_flag>
+    </parameters>
     <texture>Runway/pa_aim.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -316,36 +385,54 @@
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_tz_two_a</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pa_tz_two_a.png</texture>
     <wrapu>false</wrapu>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_tz_two_b</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pa_tz_two_b.png</texture>
     <wrapu>false</wrapu>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_tz_one_a</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pa_tz_one_a.png</texture>
     <wrapu>false</wrapu>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_tz_one_b</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pa_tz_one_b.png</texture>
     <wrapu>false</wrapu>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_centerline</name>
+    <parameters>
+	<overlay_flag type="int">1</overlay_flag>
+    </parameters>
     <texture>Runway/pa_centerline.png</texture>
     <wrapu>false</wrapu>
   </material>
 
   <material include="Materials/base/runway_effect.xml">
     <name>pa_rest</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pa_rest.png</texture>
     <wrapu>false</wrapu>
   </material>

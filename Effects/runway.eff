@@ -85,6 +85,7 @@
    		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<raise_vertex type="bool">false</raise_vertex>
+		<overlay_flag type="int">0</overlay_flag>
 		<!-- 		END fog include -->
 	</parameters>
 	<generate>
@@ -536,6 +537,11 @@
         <name>display_ysize</name>
         <type>int</type>
         <value><use>display_ysize</use></value>
+      </uniform>
+      <uniform>
+        <name>overlay_flag</name>
+        <type>int</type>
+        <value><use>overlay_flag</use></value>
       </uniform>
       <uniform>
 	<name>raise_vertex</name>

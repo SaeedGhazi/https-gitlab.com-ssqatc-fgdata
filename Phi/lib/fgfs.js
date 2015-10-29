@@ -15,9 +15,29 @@ FGFS.Property.prototype.getPath = function() {
   return this.path;
 }
 
-FGFS.Property.prototype.setValue = function(val) {
-  // TODO: send this out
-  this.value = val;
+FGFS.Property.prototype.setValue = function(value) {
+  if( value == null )
+    return;
+  //this.value = val; value should be updated via PropertyListener
+  var url = "/json/" + this.path;
+  switch( typeof(value) ) {
+    case 'number':
+    case 'string':
+    case 'boolean':
+      $.post(url, JSON.stringify({'value' : value}))
+        .fail(function(err){
+          console.log("Error while setting property value: " + err);
+      });
+      return;
+    case 'object':
+      $.post(url, JSON.stringify(value))
+        .fail(function(err){
+          console.log("Error while setting property value: " + err);
+      });
+      return;
+    default:
+      return;
+  }
 }
 
 FGFS.Property.prototype.hasValue = function() {

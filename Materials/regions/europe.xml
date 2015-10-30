@@ -99,7 +99,11 @@
     <name>BuiltUpCover</name>
     <name>Urban</name>
     <tree-effect>Effects/tree-european-deciduous</tree-effect>
-    <texture>Terrain/18th_century_city.png</texture>
+    <effect>Effects/urban</effect>
+    <texture-set>
+      <texture>Terrain/18th_century_city.png</texture>
+      <texture n="2">Terrain/18th_century_city-relief-light.png</texture>
+    </texture-set>    
     <object-mask>Terrain/18th_century_city.mask.png</object-mask>
     <xsize>1000</xsize>
     <ysize>1000</ysize>
@@ -132,7 +136,11 @@
   <material>
     <name>Town</name>
     <name>SubUrban</name>
-    <texture>Terrain/town-europe-autumn.png</texture>
+    <effect>Effects/urban</effect>
+    <texture-set>
+      <texture>Terrain/town-europe.png</texture>
+      <texture n="2">Terrain/town-europe-relief-light.png</texture>
+    </texture-set>    
     <object-mask>Terrain/town-europe.mask.png</object-mask>
     <xsize>1024</xsize>
     <ysize>1024</ysize>

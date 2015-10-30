@@ -70,14 +70,20 @@
 
 <!-- Europe -->
 <region include="Materials/regions/europe.xml"/>
+<region include="Materials/regions/europe-winter.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/scandinavia.xml"/>
 <region include="Materials/regions/united_kingdom.xml"/>
 <region include="Materials/regions/ireland.xml"/>
 <region include="Materials/regions/corse.xml"/>
 <region include="Materials/regions/iceland.xml"/>
+<region include="Materials/regions/norway.xml"/>  <!-- added by D-ECHO and gsagostinho -->
 
 <!-- Middle East-->
 <region include="Materials/regions/middle_east.xml"/>
 <region include="Materials/regions/middle_east_large_cities.xml"/>  <!-- added by gsagostinho -->
+
+<!-- street illumination-->
+<region include="Materials/regions/large_cities_illumination.xml"/>  <!-- added by gsagostinho -->
+<region include="Materials/regions/mega_cities_illumination.xml"/>  <!-- added by gsagostinho -->
 
 </PropertyList>

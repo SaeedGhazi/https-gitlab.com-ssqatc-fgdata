@@ -31,7 +31,6 @@
     <bumpiness>1</bumpiness>
   </material>
 
-
   <material>
     <effect>Effects/forest</effect>
     <name>DeciduousBroadCover</name>
@@ -234,25 +233,53 @@
     <tree-width-m>15.0</tree-width-m>
   </material>
 
-  <material>
-    <name>Construction</name>
-    <name>Industrial</name>
-    <name>Port</name>
-    <texture>Terrain/city1.png</texture>
-    <texture>Terrain/city2.png</texture>
-    <object-mask>Terrain/city1.mask.png</object-mask>
-    <object-mask>Terrain/city2.mask.png</object-mask>
-    <xsize>1000</xsize>
-    <ysize>1000</ysize>
-    <light-coverage>100000.0</light-coverage>
-    <emissive>
-      <r>0.05</r>
-      <g>0.05</g>
-      <b>0.02</b>
-      <a>1.0</a>
-    </emissive>
-    <object-group include="Materials/base/industrial-buildings.xml"/>
-  </material>
+	<material>
+		<name>Construction</name>
+		<name>Industrial</name>
+		<effect>Effects/urban</effect>
+		<texture-set>
+      <texture>Terrain/industrial.png</texture>
+      <texture n="2">Terrain/industrial-relief-light.png</texture>
+    </texture-set>
+    <object-mask>Terrain/industrial-mask.png</object-mask>
+		<xsize>1000</xsize>
+		<ysize>1000</ysize>
+		<light-coverage>100000.0</light-coverage>
+		<emissive>
+		 <r>0.05</r>
+		 <g>0.05</g>
+		 <b>0.02</b>
+		 <a>1.0</a>
+		</emissive>
+		<object-group include="Materials/base/industrial-buildings.xml"/>
+	</material>
+	
+	<material>
+		<name>Railroad</name>		
+		<texture>Terrain/dark_gravel.png</texture>
+		<xsize>200</xsize>
+		<ysize>200</ysize>
+	</material>
+	
+	<material>		
+		<name>Transport</name>
+		<name>Port</name>		
+		<effect>Effects/urban</effect>
+		<texture-set>
+		  <texture>Terrain/transport.png</texture>
+		  <texture n="2">Terrain/transport-relief-light.png</texture>
+		</texture-set>    
+		<xsize>500</xsize>
+		<ysize>500</ysize>
+		<light-coverage>1000000.0</light-coverage>
+		<emissive>
+		 <r>0.05</r>
+		 <g>0.05</g>
+		 <b>0.02</b>
+		 <a>1.0</a>
+		</emissive>
+		<object-group include="Materials/base/industrial-buildings.xml"/>
+	</material>
 
   <!-- default town US style -->
   <material>
@@ -282,6 +309,19 @@
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
   </material>
+  
+	<material>
+		<name>Gravel</name>
+		<texture>Terrain/gravel_gray.png</texture>
+		<xsize>400</xsize>
+		<ysize>400</ysize>
+		<light-coverage>1000000.0</light-coverage>
+		<solid>1</solid>
+		<friction-factor>0.5</friction-factor>
+		<rolling-friction>0.04</rolling-friction>
+		<bumpiness>0.5</bumpiness>
+		<load-resistance>1e10</load-resistance>
+	</material>
 
   <material include="Materials/base/water.xml">
     <name>Ocean</name>
@@ -496,10 +536,9 @@
 
   <material>
     <effect>Effects/airfield</effect>
-    <name>Grass</name>
     <name>Airport</name>
     <name>AirportKeep</name>
-    <name>Greenspace</name>
+    <name>Grass</name>
     <texture>Terrain/airport.png</texture>
     <xsize>125</xsize>
     <ysize>125</ysize>
@@ -597,6 +636,7 @@
     <effect>Effects/crop</effect>
     <name>DryCropPastureCover</name>
     <name>DryCrop</name>
+    <name>Greenspace</name>
     <texture>Terrain/drycrop1-autumn.png</texture>
     <!--<texture>Terrain/drycrop2.png</texture>
   <texture>Terrain/drycrop3.png</texture>
@@ -774,3 +814,4 @@
   </material>
 
 </PropertyList>
+

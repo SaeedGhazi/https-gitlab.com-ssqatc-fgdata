@@ -690,6 +690,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_tz_three</name>
     <name>dirt_rwytz_three</name>
+    <parameters>
+	<overlay_flag type="int">1</overlay_flag>
+    </parameters>
     <texture>Runway/pc_tz_three.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -697,6 +700,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_aim</name>
     <name>dirt_rwyaim</name>
+    <parameters>
+	<overlay_flag type="int">2</overlay_flag>
+    </parameters>
     <texture>Runway/pc_aim.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -711,6 +717,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_tz_two_a</name>
     <name>dirt_rwytz_two_a</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pc_tz_two_a.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -718,6 +727,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_tz_two_b</name>
     <name>dirt_rwytz_two_b</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pc_tz_two_b.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -725,6 +737,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_tz_one_a</name>
     <name>dirt_rwytz_one_a</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pc_tz_one_a.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -732,6 +747,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_tz_one_b</name>
     <name>dirt_rwytz_one_b</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pc_tz_one_b.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -739,6 +757,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_centerline</name>
     <name>dirt_rwycenterline</name>
+    <parameters>
+	<overlay_flag type="int">1</overlay_flag>
+    </parameters>
     <texture>Runway/pc_centerline.png</texture>
     <wrapu>false</wrapu>
   </material>
@@ -746,6 +767,9 @@
   <material include="Materials/base/runway_effect.xml">
     <name>pc_rest</name>
     <name>dirt_rwyrest</name>
+    <parameters>
+	<overlay_flag type="int">3</overlay_flag>
+    </parameters>
     <texture>Runway/pc_rest.png</texture>
     <wrapu>false</wrapu>
   </material>

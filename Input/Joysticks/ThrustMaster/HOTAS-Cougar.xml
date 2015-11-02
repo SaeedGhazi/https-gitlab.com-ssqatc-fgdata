@@ -374,7 +374,7 @@ Bindings for THRUSTMASTER HOTAS Cougar stick/throttle combination.
                 <desc>nose wheel on/off</desc>
                 <repeatable type="bool">false</repeatable>
                 <binding>
-                        <command>nasal></command>
+                        <command>nasal</command>
                         <script>
                                 nosewheel = getprop("/controls/gear/nose-wheel-steering");
                                 if (nosewheel == 1) {

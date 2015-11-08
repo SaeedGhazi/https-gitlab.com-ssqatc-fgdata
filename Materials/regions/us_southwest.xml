@@ -156,7 +156,7 @@
     <bumpiness>0.3</bumpiness>
     <load-resistance>1e30</load-resistance>
     <wood-coverage>150000.0</wood-coverage>
-    <tree-texture>Trees/mixed.png</tree-texture>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
@@ -177,7 +177,7 @@
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
     <wood-coverage>4000.0</wood-coverage>
-    <tree-texture>Trees/deciduous.png</tree-texture>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
@@ -202,7 +202,7 @@
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
     <wood-coverage>4000.0</wood-coverage>
-    <tree-texture>Trees/coniferous.png</tree-texture>
+    <tree-texture>Trees/coniferous-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
@@ -234,7 +234,7 @@
     <load-resistance>1e30</load-resistance>
     <object-group include="Materials/base/farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
-    <tree-texture>Trees/mixed.png</tree-texture>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
@@ -255,7 +255,7 @@
     <ysize>2000</ysize>
     <light-coverage>5000000.0</light-coverage>
     <wood-coverage>4000.0</wood-coverage>
-    <tree-texture>Trees/mixed.png</tree-texture>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>

@@ -11,6 +11,73 @@ earthview_running_flag = 1;
 var lat = getprop("/position/latitude-deg");
 var lon = getprop("/position/longitude-deg");
 
+# define the tile centers
+
+
+center_N1 = geo.Coord.new();
+center_N2 = geo.Coord.new();
+center_N3 = geo.Coord.new();
+center_N4 = geo.Coord.new();
+center_S1 = geo.Coord.new();
+center_S2 = geo.Coord.new();
+center_S3 = geo.Coord.new();
+center_S4 = geo.Coord.new();
+
+center_N1.set_latlon(45.0, -135.0);
+center_N2.set_latlon(45.0,  -45.0);
+center_N3.set_latlon(45.0,   45.0);
+center_N4.set_latlon(45.0,  135.0);
+
+center_S1.set_latlon(-45.0, -135.0);
+center_S2.set_latlon(-45.0,  -45.0);
+center_S3.set_latlon(-45.0,   45.0);
+center_S4.set_latlon(-45.0,  135.0);
+
+# determine which tiles to show
+
+var shuttle_pos = geo.aircraft_position();
+
+#print(shuttle_pos.distance_to(center_N1));
+#print(shuttle_pos.distance_to(center_N2));
+#print(shuttle_pos.distance_to(center_N3));
+#print(shuttle_pos.distance_to(center_N4));
+#print(shuttle_pos.distance_to(center_S1));
+#print(shuttle_pos.distance_to(center_S2));
+#print(shuttle_pos.distance_to(center_S3));
+#print(shuttle_pos.distance_to(center_S4));
+
+if (shuttle_pos.distance_to(center_N1) > 8000000.0) 
+	{setprop("/earthview/show-n1", 0);}
+else {setprop("/earthview/show-n1", 1);}
+
+if (shuttle_pos.distance_to(center_N2) > 8000000.0) 
+	{setprop("/earthview/show-n2", 0);}
+else {setprop("/earthview/show-n2", 1);}
+
+if (shuttle_pos.distance_to(center_N3) > 8000000.0) 
+	{setprop("/earthview/show-n3", 0);}
+else {setprop("/earthview/show-n3", 1);}
+
+if (shuttle_pos.distance_to(center_N4) > 8000000.0) 
+	{setprop("/earthview/show-n4", 0);}
+else {setprop("/earthview/show-n4", 1);}
+
+if (shuttle_pos.distance_to(center_S1) > 8000000.0) 
+	{setprop("/earthview/show-s1", 0);}
+else {setprop("/earthview/show-s1", 1);}
+
+if (shuttle_pos.distance_to(center_S2) > 8000000.0) 
+	{setprop("/earthview/show-s2", 0);}
+else {setprop("/earthview/show-s2", 1);}
+
+if (shuttle_pos.distance_to(center_S3) > 8000000.0) 
+	{setprop("/earthview/show-s3", 0);}
+else {setprop("/earthview/show-s3", 1);}
+
+if (shuttle_pos.distance_to(center_S4) > 8000000.0) 
+	{setprop("/earthview/show-s4", 0);}
+else {setprop("/earthview/show-s4", 1);}
+
 earth_model.node = earthview.place_earth_model("Models/Astro/earth.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 cloudsphere_model.node = earthview.place_earth_model("Models/Astro/cloudsphere.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 
@@ -24,6 +91,8 @@ setprop("/environment/visibility-m", 80000.0);
 setprop("/sim/rendering/mie", 0.0);
 setprop("/sim/rendering/rayleigh", 0.00002);
 setprop("/sim/rendering/dome-density", 1.0);
+
+
 
 control_loop();
 
@@ -111,6 +180,40 @@ setprop("/earthview/longitude-deg", lon);
 setprop("/earthview/roll-deg", -(90-lat));
 setprop("/earthview/yaw-deg", -lon);
 
+var shuttle_pos = geo.aircraft_position();
+
+if (shuttle_pos.distance_to(center_N1) > 8000000.0) 
+	{setprop("/earthview/show-n1", 0);}
+else {setprop("/earthview/show-n1", 1);}
+
+if (shuttle_pos.distance_to(center_N2) > 8000000.0) 
+	{setprop("/earthview/show-n2", 0);}
+else {setprop("/earthview/show-n2", 1);}
+
+if (shuttle_pos.distance_to(center_N3) > 8000000.0) 
+	{setprop("/earthview/show-n3", 0);}
+else {setprop("/earthview/show-n3", 1);}
+
+if (shuttle_pos.distance_to(center_N4) > 8000000.0) 
+	{setprop("/earthview/show-n4", 0);}
+else {setprop("/earthview/show-n4", 1);}
+
+if (shuttle_pos.distance_to(center_S1) > 8000000.0) 
+	{setprop("/earthview/show-s1", 0);}
+else {setprop("/earthview/show-s1", 1);}
+
+if (shuttle_pos.distance_to(center_S2) > 8000000.0) 
+	{setprop("/earthview/show-s2", 0);}
+else {setprop("/earthview/show-s2", 1);}
+
+if (shuttle_pos.distance_to(center_S3) > 8000000.0) 
+	{setprop("/earthview/show-s3", 0);}
+else {setprop("/earthview/show-s3", 1);}
+
+if (shuttle_pos.distance_to(center_S4) > 8000000.0) 
+	{setprop("/earthview/show-s4", 0);}
+else {setprop("/earthview/show-s4", 1);}
+
 # now set scattering paramaters
 
 if (getprop("/earthview/mrd-flag") == 1)
@@ -157,4 +260,11 @@ var earth_model = {};
 var cloudsphere_model = {};
 var earthview_running_flag = 0;
 
-
+var center_N1 = {}; 
+var center_N2 = {};
+var center_N3 = {};
+var center_N4 = {};
+var center_S1 = {};
+var center_S2 = {};
+var center_S3 = {};
+var center_S4 = {};

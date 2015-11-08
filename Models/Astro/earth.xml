@@ -17,6 +17,70 @@
  </animation>
 
  <animation>
+  <object-name>earth_N1</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-n1</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_N2</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-n2</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_N3</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-n3</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_N4</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-n4</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_S1</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-s1</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_S2</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-s2</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_S3</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-s3</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <object-name>earth_S4</object-name>
+  <type>select</type>
+  <condition>
+   <property>/earthview/show-s4</property>
+  </condition>
+ </animation>
+
+ <animation>
   <!--<object-name>earth_N1</object-name>
   <object-name>earth_N2</object-name>
   <object-name>earth_N3</object-name>

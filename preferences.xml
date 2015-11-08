@@ -1274,6 +1274,14 @@ Started September 2000 by David Megginson, david@megginson.com
     <overlay-texture-flag type="bool" userarchive="y">true</overlay-texture-flag>
     <mrd-flag type="bool" userarchive="y">true</mrd-flag>
     <cloudsphere-angle type="double" userarchive="n">0.0</cloudsphere-angle>
+    <show-n1 type="bool" userarchive="n">true</show-n1>
+    <show-n2 type="bool" userarchive="n">true</show-n2>
+    <show-n3 type="bool" userarchive="n">true</show-n3>
+    <show-n4 type="bool" userarchive="n">true</show-n4>
+    <show-s1 type="bool" userarchive="n">true</show-s1>
+    <show-s2 type="bool" userarchive="n">true</show-s2>
+    <show-s3 type="bool" userarchive="n">true</show-s3>
+    <show-s4 type="bool" userarchive="n">true</show-s4>
   </earthview>
 </PropertyList>
 <!-- end of preferences.xml -->

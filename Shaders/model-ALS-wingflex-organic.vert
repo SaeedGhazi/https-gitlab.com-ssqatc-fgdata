@@ -57,8 +57,8 @@ void	main(void)
 
 		float x_factor = max((abs(vertex.x) - 1.2),0);
 		float y_factor = max(vertex.y,0.0);
-		float flex_factor1 = wingflex_alpha * wingsweep_factor;
-		float flex_factor2 = wingflex_trailing_alpha * wingsweep_factor;
+		float flex_factor1 = wingflex_alpha * (1.0 - wingsweep_factor);
+		float flex_factor2 = wingflex_trailing_alpha * (1.0 -wingsweep_factor);
 
 		if (flex_factor1<0.0) {flex_factor1 *=0.7;}
 		if (flex_factor2<0.0) {flex_factor1 *=0.7;}
@@ -74,11 +74,11 @@ void	main(void)
 
 
 		// if the wings are folded, we sweep them back
-		vertex.y += 0.5 * x_factor * (1.0-wingsweep_factor);
+		vertex.y += 0.5 * x_factor * wingsweep_factor;
 		float sweep_x = 0.5;
 		if (vertex.x > 0.0) {sweep_x = - 0.5;}
 
-		vertex.x+= sweep_x * (1.0 + 0.5 *x_factor) *   (1.0 - wingsweep_factor);
+		vertex.x+= sweep_x * (1.0 + 0.5 *x_factor) *   wingsweep_factor;
 
 
 		rawpos = vertex.xyz;

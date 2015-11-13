@@ -3,7 +3,7 @@
 
   Hydrodynamics section for JSBSim.
 
-    Copyright (C) 2008 - 2014  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -198,6 +198,7 @@
  <!-- Environment -->
  <property value="0.0">hydro/environment/water-level-ft</property>
  <property value="1.9736403">hydro/environment/rho-slug_ft3</property>
+ <property value="1.1302106e-05">hydro/environment/kinematic-viscosity-ft2_sec</property> <!-- Sea water at 20 degC. -->
 
  <property value="0.0">hydro/environment/current-from-north-fps</property>
  <property value="0.0">hydro/environment/current-from-east-fps</property>
@@ -609,6 +610,16 @@
        <cos>
         <property> attitude/pitch-rad </property>
        </cos>
+      </product>
+      <product>
+       <value> -0.083333333 </value>
+       <difference>
+        <property> metrics/hydro-rp-y-in </property>
+        <property> inertia/cg-y-in </property>
+       </difference>
+       <sin>
+        <property> attitude/roll-rad </property>
+       </sin>
       </product>
      </sum>
      <property> hydro/environment/water-level-ft </property>

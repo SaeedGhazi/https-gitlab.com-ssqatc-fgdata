@@ -55,17 +55,33 @@ void	main(void)
 {
 		vec4 vertex = gl_Vertex;
 
-		float x_factor = max((abs(vertex.x) - 1.2),0);
+
+		float body_width = 0.7;
+		float arm_reach = 4.8;
+
+		float x_factor = max((abs(vertex.x) - body_width),0);
 		float y_factor = max(vertex.y,0.0);
 		float flex_factor1 = wingflex_alpha * (1.0 - wingsweep_factor);
 		float flex_factor2 = wingflex_trailing_alpha * (1.0 -wingsweep_factor);
 
+
 		if (flex_factor1<0.0) {flex_factor1 *=0.7;}
 		if (flex_factor2<0.0) {flex_factor1 *=0.7;}
 
-		// basic flapping motion is parabolic
-		vertex.z += 0.1 * x_factor * x_factor * flex_factor1;
-		
+		// basic flapping motion is linear to arm_reach, then parabolic
+
+		float intercept_point = 0.1 * arm_reach * arm_reach * flex_factor1;
+	
+		if (x_factor < arm_reach)
+			{
+			vertex.z += x_factor/arm_reach * intercept_point;
+			}
+
+		else	
+			{		
+			vertex.z += 0.1 * x_factor * x_factor * flex_factor1;
+			}
+
 		// upward stroke is slightly forward-swept, downward stroke a bit backward
 		vertex.y += -0.25 * abs(x_factor) * flex_factor1;
 

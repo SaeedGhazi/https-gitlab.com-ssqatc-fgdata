@@ -285,8 +285,10 @@ setprop("/environment/precipitation-control/snow-flake-size", size);
 ####################################
 
 var setTurbulence = func (turbulence) {
-	
-setprop("/environment/turbulence/magnitude-norm",turbulence);
+
+var turbulence_scale = getprop("/local-weather/config/turbulence-scale");
+
+setprop("/environment/turbulence/magnitude-norm",turbulence * turbulence_scale);
 setprop("/environment/turbulence/rate-hz",3.0);
 }
 
@@ -415,10 +417,28 @@ setprop("/environment/clouds/layer[0]/elevation-ft",0.0);
 # interpolating across several frames
 ###########################################################
 
+var smoothDirection = func (dir0, dir1, factor) {
+
+var diff = ( math.mod( dir0 - dir1 + 180 + 360, 360 ) - 180 );
+diff *= factor;
+
+return math.mod( 360 + dir1 + ( diff / 2), 360);
+}
+
 
 var setWindSmoothly = func (dir, speed) {
 
-setWind(dir, speed);	
+var curDir = getprop("/environment/wind-from-heading-deg");
+var curSpeed = getprop("/environment/wind-speed-kt");
+
+dir = math.mod(dir, 360);
+
+var newSpeed = (curSpeed * 9 + speed) / 10;
+var newDir = smoothDirection(dir, curDir, 0.2);
+ 
+setWind(newDir, newSpeed);
+
+#setWind(dir, speed);	
 }
 
 

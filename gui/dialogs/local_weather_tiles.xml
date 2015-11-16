@@ -214,7 +214,7 @@
           <col>1</col>
           <halign>fill</halign>
           <min>0.0</min>
-          <max>2.0</max>
+          <max>1.0</max>
           <property>/local-weather/tmp/gust-frequency-hz</property>
           <binding>
             <command>dialog-apply</command>
@@ -441,22 +441,57 @@
           <label>low convection</label>
         </text>
 
+
+
         <text>
           <row>3</row>
           <col>0</col>
           <halign>right</halign>
-          <label>Ground Haze:</label>
+          <label> Turbulence:</label>
         </text>
 
         <text>
           <row>3</row>
           <col>1</col>
           <halign>right</halign>
-          <label>thick</label>
+          <label>weak</label>
         </text>
 
         <slider>
           <row>3</row>
+          <col>2</col>
+          <min>0.0</min>
+          <max>1.5</max>
+          <property>/local-weather/config/turbulence-scale</property>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </slider>
+
+        <text>
+          <row>3</row>
+          <col>3</col>
+          <halign>left</halign>
+          <label>strong</label>
+        </text>
+
+
+        <text>
+          <row>4</row>
+          <col>0</col>
+          <halign>right</halign>
+          <label>Ground Haze:</label>
+        </text>
+
+        <text>
+          <row>4</row>
+          <col>1</col>
+          <halign>right</halign>
+          <label>thick</label>
+        </text>
+
+        <slider>
+          <row>4</row>
           <col>2</col>
           <min>0.1</min>
           <max>1.0</max>
@@ -467,28 +502,28 @@
         </slider>
 
         <text>
-          <row>3</row>
+          <row>4</row>
           <col>3</col>
           <halign>left</halign>
           <label>thin</label>
         </text>
 
         <text>
-          <row>4</row>
+          <row>5</row>
           <col>0</col>
           <halign>right</halign>
           <label>Air Pollution:</label>
         </text>
 
         <text>
-          <row>4</row>
+          <row>5</row>
           <col>1</col>
           <halign>right</halign>
           <label>clean</label>
         </text>
 
         <slider>
-          <row>4</row>
+          <row>5</row>
           <col>2</col>
           <min>0.0</min>
           <max>1.0</max>
@@ -499,28 +534,28 @@
         </slider>
 
         <text>
-          <row>4</row>
+          <row>5</row>
           <col>3</col>
           <halign>left</halign>
           <label>smog</label>
         </text>
 
         <text>
-          <row>5</row>
+          <row>6</row>
           <col>0</col>
           <halign>right</halign>
           <label>Fog Properties:</label>
         </text>
 
         <text>
-          <row>5</row>
+          <row>6</row>
           <col>1</col>
           <halign>right</halign>
           <label>smooth</label>
         </text>
 
         <slider>
-          <row>5</row>
+          <row>6</row>
           <col>2</col>
           <min>0.0</min>
           <max>12.0</max>
@@ -531,14 +566,14 @@
         </slider>
 
         <text>
-          <row>5</row>
+          <row>6</row>
           <col>3</col>
           <halign>left</halign>
           <label>structured</label>
         </text>
 
         <text>
-          <row>6</row>
+          <row>7</row>
           <col>0</col>
           <halign>right</halign>
           <!--<enable>
@@ -551,14 +586,14 @@
         </text>
 
         <text>
-          <row>6</row>
+          <row>7</row>
           <col>1</col>
           <halign>right</halign>
           <label>20 km</label>
         </text>
 
         <slider>
-          <row>6</row>
+          <row>7</row>
           <col>2</col>
           <!--<enable>
             <equals>
@@ -575,7 +610,7 @@
         </slider>
 
         <text>
-          <row>6</row>
+          <row>7</row>
           <col>3</col>
           <halign>left</halign>
           <!--<enable>

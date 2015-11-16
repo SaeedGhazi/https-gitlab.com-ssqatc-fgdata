@@ -1493,7 +1493,14 @@ settimer( func {shadow_management_loop(i)}, 0);
 
 var watchdog_loop = func {
 
-var tNode = props.globals.getNode(lw~"tiles", 1).getChildren("tile");
+var winddir = getprop("/environment/wind-from-heading-deg");
+var windspeed = getprop("/environment/wind-speed-kt");
+
+print (windspeed, " ", winddir);
+
+
+if (0==1)
+{var tNode = props.globals.getNode(lw~"tiles", 1).getChildren("tile");
 
 var i = 0;
 
@@ -1536,6 +1543,8 @@ for (var i = 0; i < wsize; i=i+1) {
 	}
 
 print("dir_int: ", sum_wind[0], " speed_int: ", sum_wind[1]/sum_norm);
+}
+
 
 if (0==1)
 {
@@ -1589,9 +1598,9 @@ print("Mismatch: ", relangle(res[0], getprop(lw~"tiles/tile[4]/orientation-deg")
 }
 
 
-print("====================");
+#print("====================");
 
-settimer(watchdog_loop, 10.0);
+settimer(watchdog_loop, 4.0);
 }
 
 

@@ -19,6 +19,7 @@
     <detailed-terrain-interaction-flag type="bool" userarchive="y">0</detailed-terrain-interaction-flag>
     <realistic-visibility-flag type="bool" userarchive="y">0</realistic-visibility-flag>
     <thread-flag type="bool" userarchive="n">1</thread-flag>
+    <turbulence-scale type="double" userarchive="y">1.0</turbulence-scale>
     <presampling-flag type="bool" userarchive="y">1</presampling-flag>
     <fps-control-flag type="bool" userarchive="y">0</fps-control-flag>
     <target-framerate type="double" userarchive="y">25.0</target-framerate>
@@ -37,6 +38,7 @@
     <gust-frequency-hz type="double" userarchive="n">0.0</gust-frequency-hz>
     <gust-relative-strength type="double" userarchive="n">0.0</gust-relative-strength>
     <gust-angular-variation-deg type="double" userarchive="n">0.0</gust-angular-variation-deg>
+    <squall-scaling-norm type="double" userarchive="n">1.0</squall-scaling-norm>
     <tile-alt-offset-ft type="double" userarchive="n">0.0</tile-alt-offset-ft>
     <asymmetric-tile-loading-flag type="bool" userarchive="y">0</asymmetric-tile-loading-flag>
     <FL0-wind-from-heading-deg type="double" userarchive="y">260.0</FL0-wind-from-heading-deg>

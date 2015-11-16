@@ -924,7 +924,21 @@ if (gust_frequency > 0.0)
 	if (alt_scaling_factor < 1.0) {alt_scaling_factor = 1.0;}
 
 	# expected mean number of gusts in time interval (should be < 1)
-	var p_gust = gust_frequency * interpolation_loop_time;
+	var p_gust =  gust_frequency * interpolation_loop_time;
+	
+	# real time series show a ~10-30 second modulation as well
+	var p_squall =  gust_frequency * 0.1 * interpolation_loop_time;
+	var squall_scale = getprop("/local-weather/tmp/squall-scaling-norm");
+
+	if (rand() < p_squall)
+		{
+		squall_scale = rand();
+		# prefer large changes
+		if ((squall_scale > 0.3) and (squall_scale < 0.7))
+			{squall_scale = rand();}
+
+		setprop("/local-weather/tmp/squall-scaling-norm", squall_scale);
+		}
 
 	winddir_change = 0.0;
 
@@ -932,7 +946,10 @@ if (gust_frequency > 0.0)
 		{
 		var alt_fact = 1.0 - altitude_agl/(boundary_alt * alt_scaling_factor);
 		if (alt_fact < 0.0) {alt_fact = 0.0};
-		windspeed_multiplier =  (1.0 + ((rand()) * gust_relative_strength * alt_fact));
+		
+		var random_factor = 0.3 * rand()  + 0.7 * squall_scale;
+
+		windspeed_multiplier =  (1.0 + (random_factor * gust_relative_strength * alt_fact));
 		winddir_change = alt_fact * (1.0 - 2.0 * rand()) * gust_angvar;
 		winddir_change = winddir_change * 0.2; # Markov chain parameter, max. change per frame is 1/5 
 		
@@ -947,7 +964,7 @@ if (gust_frequency > 0.0)
 	winddir = winddir_last + winddir_change;
 	}
 
-	
+
 
 
 
@@ -4052,7 +4069,7 @@ if (local_weather.cloud_shadow_flag == 1)
 	weather_tile_management.shadow_management_loop(0);
 	}
 
-# weather_tile_management.watchdog_loop();
+#weather_tile_management.watchdog_loop();
 
 # start thunderstorm management
 

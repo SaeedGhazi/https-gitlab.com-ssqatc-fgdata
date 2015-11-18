@@ -7,7 +7,7 @@ define([
     });
 
     ko.components.register('Environment/Weather/Clouds', {
-        require : 'topics/Environment/Weather/CloudsLayers'
+        require : 'topics/Environment/Weather/CloudLayers'
     });
 
     ko.components.register('Environment/Weather/Boundary', {

@@ -162,9 +162,17 @@ define(['knockout'], function(ko) {
 
         self.aliases = {};
         self.setAliases = function(arg) {
-            arg.forEach(function(a) {
-                self.aliases[a[0]] = a[1];
-            });
+            if( Object.prototype.toString.call( arg ) === '[object Array]' ) {
+                // [
+                //  [ shortcut, propertypath ],
+                //  [ othercut, otherproperty ],
+                // ]
+                arg.forEach(function(a) {
+                    self.aliases[a[0]] = a[1];
+                });
+            } else {
+                self.aliases = arg;
+            }
         }
 
         self.props = {};

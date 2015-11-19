@@ -175,6 +175,16 @@ define(['knockout'], function(ko) {
             }
         }
 
+        self.makeObservablesForAllProperties = function(target) {
+            for( var p in self.aliases ) {
+                if( self.aliases.hasOwnProperty(p) ) {
+                    target[p] = ko.observable().extend({
+                        fgprop : p
+                    });
+                }
+            }
+        }
+
         self.props = {};
 
         self.get = function(target, prop) {

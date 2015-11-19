@@ -19,9 +19,9 @@ require.config({
         aircraft : '../aircraft-dir',
         pagedown : '3rdparty/pagedown',
         clockpicker : '3rdparty/clockpicker/jquery-clockpicker.min',
-        stamen: 'http://maps.stamen.com/js/tile.stamen',
+        stamen : 'http://maps.stamen.com/js/tile.stamen',
     },
-    waitSeconds: 30,
+    waitSeconds : 30,
 });
 
 require([
@@ -29,107 +29,59 @@ require([
         'jquery-ui/sortable', 'flot', 'leaflet', 'knockprops'
 ], function(ko, jquery, Sammy, fgcommand) {
 
-    ko.utils.knockprops.setAliases([
-            // time
-            [
-                    "gmt", "/sim/time/gmt"
-            ], [
-                    "timeWarp", "/sim/time/warp"
-            ],
+    ko.utils.knockprops.setAliases({
 
-            // flight
-            [
-                    "pitch", "/orientation/pitch-deg"
-            ], [
-                    "roll", "/orientation/roll-deg"
-            ], [
-                    "heading", "/orientation/heading-magnetic-deg"
-            ], [
-                    "true-heading", "/orientation/heading-deg"
-            ], [
-                    "altitude", "/position/altitude-ft"
-            ], [
-                    "latitude", "/position/latitude-deg"
-            ], [
-                    "longitude", "/position/longitude-deg"
-            ], [
-                    "airspeed", "/velocities/airspeed-kt"
-            ], [
-                    "groundspeed", "/velocities/groundspeed-kt"
-            ], [
-                    "slip", "/instrumentation/slip-skid-ball/indicated-slip-skid"
-            ], [
-                    "cg", "/fdm/jsbsim/inertia/cg-x-in"
-            ], [
-                    "weight", "/fdm/jsbsim/inertia/weight-lbs"
-            ],
-            // radio settings
-            [
-                    "com1stn", "/instrumentation/comm/station-name"
-            ], [
-                    "com1use", "/instrumentation/comm/frequencies/selected-mhz"
-            ], [
-                    "com1sby", "/instrumentation/comm/frequencies/standby-mhz"
-            ], [
-                    "com1stn", "/instrumentation/comm/station-name"
-            ], [
-                    "com2stn", "/instrumentation/comm[1]/station-name"
-            ], [
-                    "com2use", "/instrumentation/comm[1]/frequencies/selected-mhz"
-            ], [
-                    "com2sby", "/instrumentation/comm[1]/frequencies/standby-mhz"
-            ], [
-                    "com2stn", "/instrumentation/comm[1]/station-name"
-            ], [
-                    "nav1use", "/instrumentation/nav/frequencies/selected-mhz"
-            ], [
-                    "nav1sby", "/instrumentation/nav/frequencies/standby-mhz"
-            ], [
-                    "nav1stn", "/instrumentation/nav/nav-id"
-            ], [
-                    "nav2use", "/instrumentation/nav[1]/frequencies/selected-mhz"
-            ], [
-                    "nav2sby", "/instrumentation/nav[1]/frequencies/standby-mhz"
-            ], [
-                    "nav2stn", "/instrumentation/nav[1]/nav-id"
-            ], [
-                    "adf1use", "/instrumentation/adf/frequencies/selected-khz"
-            ], [
-                    "adf1sby", "/instrumentation/adf/frequencies/standby-khz"
-            ], [
-                    "adf1stn", "/instrumentation/adf/ident"
-            ], [
-                    "dme1use", "/instrumentation/dme/frequencies/selected-mhz"
-            ], [
-                    "dme1dst", "/instrumentation/dme/indicated-distance-nm"
-            ], [
-                    "xpdrcod", "/instrumentation/transponder/id-code"
-            ],
-            // weather
-            [
-                    "ac-wdir", "/environment/wind-from-heading-deg"
-            ], [
-                    "ac-wspd", "/environment/wind-speed-kt"
-            ], [
-                    "ac-visi", "/environment/visibility-m"
-            ], [
-                    "ac-temp", "/environment/temperature-degc"
-            ], [
-                    "ac-dewp", "/environment/dewpoint-degc"
-            ], [
-                    "gnd-wdir", "/environment/config/boundary/entry/wind-from-heading-deg"
-            ], [
-                    "gnd-wspd", "/environment/config/boundary/entry/wind-speed-kt"
-            ], [
-                    "gnd-visi", "/environment/config/boundary/entry/visibility-m"
-            ], [
-                    "gnd-temp", "/environment/config/boundary/entry/temperature-degc"
-            ], [
-                    "gnd-dewp", "/environment/config/boundary/entry/dewpoint-degc"
-            ], [
-                    "metar-valid", "/environment/metar/valid"
-            ],
-    ]);
+        // time
+        gmt : "/sim/time/gmt",
+        timeWarp : "/sim/time/warp",
+        // flight
+        pitch : "/orientation/pitch-deg",
+        roll : "/orientation/roll-deg",
+        heading : "/orientation/heading-magnetic-deg",
+        "true-heading" : "/orientation/heading-deg",
+        altitude : "/position/altitude-ft",
+        latitude : "/position/latitude-deg",
+        longitude : "/position/longitude-deg",
+        airspeed : "/velocities/airspeed-kt",
+        groundspeed : "/velocities/groundspeed-kt",
+        slip : "/instrumentation/slip-skid-ball/indicated-slip-skid",
+        cg : "/fdm/jsbsim/inertia/cg-x-in",
+        weight : "/fdm/jsbsim/inertia/weight-lbs",
+
+        // radio settings
+        com1stn : "/instrumentation/comm/station-name",
+        com1use : "/instrumentation/comm/frequencies/selected-mhz",
+        com1sby : "/instrumentation/comm/frequencies/standby-mhz",
+        com1stn : "/instrumentation/comm/station-name",
+        com2stn : "/instrumentation/comm[1]/station-name",
+        com2use : "/instrumentation/comm[1]/frequencies/selected-mhz",
+        com2sby : "/instrumentation/comm[1]/frequencies/standby-mhz",
+        com2stn : "/instrumentation/comm[1]/station-name",
+        nav1use : "/instrumentation/nav/frequencies/selected-mhz",
+        nav1sby : "/instrumentation/nav/frequencies/standby-mhz",
+        nav1stn : "/instrumentation/nav/nav-id",
+        nav2use : "/instrumentation/nav[1]/frequencies/selected-mhz",
+        nav2sby : "/instrumentation/nav[1]/frequencies/standby-mhz",
+        nav2stn : "/instrumentation/nav[1]/nav-id",
+        adf1use : "/instrumentation/adf/frequencies/selected-khz",
+        adf1sby : "/instrumentation/adf/frequencies/standby-khz",
+        adf1stn : "/instrumentation/adf/ident",
+        dme1use : "/instrumentation/dme/frequencies/selected-mhz",
+        dme1dst : "/instrumentation/dme/indicated-distance-nm",
+        xpdrcod : "/instrumentation/transponder/id-code",
+        // weather
+        "ac-wdir" : "/environment/wind-from-heading-deg",
+        "ac-wspd" : "/environment/wind-speed-kt",
+        "ac-visi" : "/environment/visibility-m",
+        "ac-temp" : "/environment/temperature-degc",
+        "ac-dewp" : "/environment/dewpoint-degc",
+        "gnd-wdir" : "/environment/config/boundary/entry/wind-from-heading-deg",
+        "gnd-wspd" : "/environment/config/boundary/entry/wind-speed-kt",
+        "gnd-visi" : "/environment/config/boundary/entry/visibility-m",
+        "gnd-temp" : "/environment/config/boundary/entry/temperature-degc",
+        "gnd-dewp" : "/environment/config/boundary/entry/dewpoint-degc",
+        "metar-valid" : "/environment/metar/valid",
+    });
 
     function PhiViewModel(props) {
         var self = this;

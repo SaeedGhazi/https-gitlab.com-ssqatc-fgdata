@@ -76,32 +76,6 @@ var icmp = func(a, b) cmp(lc(a), lc(b));
 var imatch = func(a, b) match(lc(a), lc(b));
 
 
-
-
-##
-# Functions that are used in the IO security code (io.nas) are defined in a
-# closure that holds safe copies of system functions. Later manipulation of
-# append(), pop() etc. doesn't affect them. Of course, any security code
-# must itself store safe copies of these tamper-proof functions before user
-# code can redefine them, and the closure() command must be made inaccessible.
-##
-
-var match = nil;
-var normpath = nil;
-var join = nil;
-var replace = nil;
-
-(func {
-	var append = append;
-	var caller = caller;
-	var pop = pop;
-	var setsize = setsize;
-	var size = size;
-	var split = split;
-	var substr = substr;
-	var subvec = subvec;
-
-
 ##
 # check if string <str> matches shell style pattern <patt>
 #
@@ -237,8 +211,6 @@ join = func(sep, list) {
 replace = func(str, old, new) {
 	return join(new, split(old, str));
 }
-
-})(); # end tamper-proof environment
 
 
 ##

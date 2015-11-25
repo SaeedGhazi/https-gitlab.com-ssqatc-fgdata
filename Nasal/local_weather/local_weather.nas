@@ -4157,28 +4157,28 @@ setlistener(lw~"tmp/presampling-status", func {manage_presampling(); });
 #setlistener(lw~"config/wind-model", func {set_wind_model_flag();});
 setlistener(lw~"config/thermal-properties", func {set_texture_mix();});
 
-setlistener(lw~"config/clouds-in-dynamics-loop", func {weather_dynamics.max_clouds_in_loop = int(getprop(lw~"config/clouds-in-dynamics-loop"));});
+setlistener(lw~"config/clouds-in-dynamics-loop", func(n) {weather_dynamics.max_clouds_in_loop = int(n.getValue());});
 
-setlistener(lw~"config/clouds-visible-range-m", func {weather_tile_management.cloud_view_distance = getprop(lw~"config/clouds-visible-range-m");});
-setlistener(lw~"config/distance-to-load-tile-m", func {setprop(lw~"config/distance-to-remove-tile-m",getprop(lw~"config/distance-to-load-tile-m") + 500.0);});
+setlistener(lw~"config/clouds-visible-range-m", func(n) {weather_tile_management.cloud_view_distance = n.getValue();});
+setlistener(lw~"config/distance-to-load-tile-m", func(n) {setprop(lw~"config/distance-to-remove-tile-m",n.getValue() + 500.0);});
 
-setlistener(lw~"config/fps-control-flag", func {fps_control_flag = getprop(lw~"config/fps-control-flag");});
-setlistener(lw~"config/target-framerate", func {target_framerate = getprop(lw~"config/target-framerate");});
+setlistener(lw~"config/fps-control-flag", func(n) {fps_control_flag = n.getValue();});
+setlistener(lw~"config/target-framerate", func(n) {target_framerate = n.getValue();});
 
-setlistener(lw~"config/small-scale-persistence", func {weather_tiles.small_scale_persistence = getprop(lw~"config/small-scale-persistence");});
-setlistener(lw~"config/ground-haze-factor", func {ground_haze_factor = getprop(lw~"config/ground-haze-factor");});
-setlistener(lw~"config/aux-max-vis-range-m", func {
-	max_vis_range = math.exp(getprop(lw~"config/aux-max-vis-range-m")); 
+setlistener(lw~"config/small-scale-persistence", func(n) {weather_tiles.small_scale_persistence = n.getValue();});
+setlistener(lw~"config/ground-haze-factor", func(n) {ground_haze_factor = n.getValue();});
+setlistener(lw~"config/aux-max-vis-range-m", func(n) {
+	max_vis_range = math.exp(n.getValue()); 
 	setprop(lw~"config/max-vis-range-m",max_vis_range);
 	if (max_vis_range>120000.0){setprop("/sim/rendering/camera-group/zfar",max_vis_range);}
 	});
 
 
-setlistener(lw~"config/temperature-offset-degc", func {temperature_offset = getprop(lw~"config/temperature-offset-degc");});
+setlistener(lw~"config/temperature-offset-degc", func(n) {temperature_offset = n.getValue();});
 
-setlistener("/environment/air-pollution-norm", func {air_pollution_norm = getprop("/environment/air-pollution-norm");});
+setlistener("/environment/air-pollution-norm", func(n) {air_pollution_norm = n.getValue() ;});
 
-setlistener("/sim/rendering/shaders/skydome", func {scattering_shader_flag = getprop("/sim/rendering/shaders/skydome"); if (scattering_shader_flag ==1) {setprop("/sim/rendering/minimum-sky-visibility",0.0);} else  {setprop("/sim/rendering/minimum-sky-visibility",1000.0);} });
+setlistener("/sim/rendering/shaders/skydome", func(n) {scattering_shader_flag = n.getValue() ; if (scattering_shader_flag ==1) {setprop("/sim/rendering/minimum-sky-visibility",0.0);} else  {setprop("/sim/rendering/minimum-sky-visibility",1000.0);} });
 }
 
 

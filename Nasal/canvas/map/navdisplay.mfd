@@ -84,6 +84,7 @@ var default_switches = {
 	'toggle_chrono': {path: '/inputs/CHRONO', value: 0, type: 'INT'},
 	'toggle_xtrk_error': {path: '/mfd/xtrk-error', value: 0, type: 'BOOL'},
 	'toggle_trk_line': {path: '/mfd/trk-line', value: 0, type: 'BOOL'},
+	'toggle_hdg_bug_only': {path: '/mfd/hdg-bug-only', value: 0, type: 'BOOL'},
 };
 
 ##
@@ -719,7 +720,7 @@ var NavDisplay = {
 			me.symbols.selHdgLine2.hide();
 			me.symbols.curHdgPtr.setVisible(staPtrVis);
 			me.symbols.HdgBugCRT.setVisible(staPtrVis and !dispLCD);
-			if(me.get_switch('toggle_track_heading'))
+			if(me.get_switch('toggle_track_heading') and !me.get_switch('toggle_hdg_bug_only'))
 			{
 				me.symbols.HdgBugLCD.hide();
 				me.symbols.TrkBugLCD.setVisible(staPtrVis and dispLCD);
@@ -767,7 +768,7 @@ var NavDisplay = {
 			me.symbols.selHdgLine.hide();
 			me.symbols.curHdgPtr2.setVisible(staPtrVis);
 			me.symbols.HdgBugCRT2.setVisible(staPtrVis and !dispLCD);
-			if(me.get_switch('toggle_track_heading'))
+			if(me.get_switch('toggle_track_heading') and !me.get_switch('toggle_hdg_bug_only'))
 			{
 				me.symbols.HdgBugLCD2.hide();
 				me.symbols.TrkBugLCD2.setVisible(staPtrVis and dispLCD);

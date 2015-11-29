@@ -871,7 +871,7 @@ var NDStyles = {
 					is_true: func(nd) {
 						if (nd.windShown != 0) {
 							nd.symbols.windArrow.show();
-							var windArrowRot = getprop("environment/wind-from-heading-deg");
+							var windArrowRot = getprop("environment/wind-from-heading-deg") - getprop("environment/magnetic-variation-deg");
 							if((nd.in_mode('toggle_display_mode', ['MAP','PLAN']) and nd.get_switch('toggle_display_type') == "CRT")
 								or (nd.get_switch('toggle_track_heading') and nd.get_switch('toggle_display_type') == "LCD"))
 									windArrowRot = windArrowRot - nd.aircraft_source.get_trk_mag();
@@ -2305,7 +2305,7 @@ var NDStyles = {
 						predicate: func(nd) (!(nd.in_mode('toggle_display_mode', ['PLAN']) and (nd.get_switch('toggle_display_type') == "LCD"))),
 						is_true: func(nd) {
 							nd.symbols.windArrow.show();
-							var windArrowRot = getprop("environment/wind-from-heading-deg");
+							var windArrowRot = getprop("environment/wind-from-heading-deg") - getprop("environment/magnetic-variation-deg");
 							if(nd.in_mode('toggle_display_mode', ['MAP','PLAN'])) {
 								if(nd.get_switch('toggle_true_north'))
 									windArrowRot = windArrowRot - nd.aircraft_source.get_trk_tru();

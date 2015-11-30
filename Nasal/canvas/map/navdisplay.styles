@@ -886,6 +886,42 @@ var NDStyles = {
 				},
 			},
 			{
+				id:'trendVector',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP'])),
+					is_true: func(nd) {
+						nd.symbols.trendVector.show();
+						var rollDeg = getprop("/orientation/roll-deg") or 0;
+						if (abs(rollDeg) > 0.2) {
+							var radius = abs(nd.aircraft_source.get_gnd_spd()*nd.aircraft_source.get_gnd_spd()/(68578.83369*math.tan(rollDeg*D2R)));
+							var sec = 90;
+							if (nd.rangeNm() == 10) sec = 30;
+							elsif (nd.rangeNm() == 20) sec = 60;
+							var L = nd.aircraft_source.get_gnd_spd()*0.0002778*sec;
+							var angle = L/radius;
+							var factor = 346/(0.5*nd.rangeNm());
+							radius = radius*factor;
+							var y = radius*math.sin(angle);
+							var x = (1-math.cos(angle))*radius;
+							if (rollDeg < 0) {
+								x = -x;
+								var cmd = 21;
+							} else var cmd = 19;
+							var y1 = 824;
+							if (nd.get_switch('toggle_centered')) y1 = 562;
+							nd.symbols.trendVector.setData([2,cmd],[512,y1,radius,radius,0,x,-y]);
+							var dash = L*factor;
+							var dashArray = [dash/3-3, 5];
+							if (nd.rangeNm() == 10) dashArray = [dash]; 
+							elsif (nd.rangeNm() == 20) dashArray = [dash/2-2, 5];
+							nd.symbols.trendVector.setStrokeDashArray(dashArray);
+						}
+					},
+					is_false: func(nd) nd.symbols.trendVector.hide(),
+				},
+			},
+			{
 				id:'vorL',
 				impl: {
 					init: func(nd,symbol),

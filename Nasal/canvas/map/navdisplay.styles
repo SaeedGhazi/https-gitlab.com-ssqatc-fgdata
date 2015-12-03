@@ -852,7 +852,7 @@ var NDStyles = {
 						if (windSpd > 6)
 							nd.windShown = 1;
 						if (nd.windShown != 0) {
-							nd.symbols.wind.setText(sprintf("%03.0f / %02.0f",windDir,windSpd));
+							nd.symbols.wind.setText(sprintf("%03.0f° / %02.0f",windDir,windSpd));
 							nd.symbols.wind.show();
 						} else
 							nd.symbols.wind.hide();
@@ -893,10 +893,10 @@ var NDStyles = {
 					is_true: func(nd) {
 						nd.symbols.trendVector.show();
 						var rollDeg = getprop("/orientation/roll-deg") or 0;
-						if (abs(rollDeg) > 0.2) {
+						if (abs(rollDeg) > 0.2 and nd.aircraft_source.get_gnd_spd() > 100) {
 							var radius = abs(nd.aircraft_source.get_gnd_spd()*nd.aircraft_source.get_gnd_spd()/(68578.83369*math.tan(rollDeg*D2R)));
 							var sec = 90;
-							if (nd.rangeNm() == 10) sec = 30;
+							if (nd.rangeNm() <= 10) sec = 30;
 							elsif (nd.rangeNm() == 20) sec = 60;
 							var L = nd.aircraft_source.get_gnd_spd()*0.0002778*sec;
 							var angle = L/radius;
@@ -913,7 +913,7 @@ var NDStyles = {
 							nd.symbols.trendVector.setData([2,cmd],[512,y1,radius,radius,0,x,-y]);
 							var dash = L*factor;
 							var dashArray = [dash/3-3, 5];
-							if (nd.rangeNm() == 10) dashArray = [dash]; 
+							if (nd.rangeNm() <= 10) dashArray = [dash]; 
 							elsif (nd.rangeNm() == 20) dashArray = [dash/2-2, 5];
 							nd.symbols.trendVector.setStrokeDashArray(dashArray);
 						}

@@ -31,6 +31,7 @@
 		<use-clouds><use>/earthview/cloudsphere-flag</use></use-clouds>
 		<use-cloud-shadows><use>/earthview/cloud-shadow-flag</use></use-cloud-shadows>
 		<use-overlay-textures><use>/earthview/overlay-texture-flag</use></use-overlay-textures>
+		<sun-angle><use>/sim/time/sun-angle-rad</use></sun-angle>
 	</parameters>
 	<generate>
 		<tangent type="int">6</tangent>
@@ -154,6 +155,13 @@
 				<type>float</type>
 				<value>
 					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>sun_angle</name>
+				<type>float</type>
+				<value>
+					<use>sun-angle</use>
 				</value>
 			</uniform>
 			<uniform>

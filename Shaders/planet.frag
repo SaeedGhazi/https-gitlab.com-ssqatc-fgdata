@@ -9,6 +9,7 @@ varying vec3 ecViewDir;
 varying vec3 VTangent;
 
 uniform float visibility;
+uniform float sun_angle;
 uniform bool use_clouds;
 uniform bool use_cloud_shadows;
 uniform bool use_overlay;
@@ -28,9 +29,9 @@ void main()
     vec3 n;
     float NdotL, NdotHV;
     vec4 color = gl_Color;
-    vec3 lightDir = gl_LightSource[0].position.xyz;
+    vec3 lightDir = normalize(gl_LightSource[0].position.xyz);
 
-	vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewDir));
+	vec3 halfVector = normalize(lightDir + normalize(ecViewDir));
     vec4 texel;
     vec4 shadowTexel;
     vec4 grainTexel;
@@ -45,8 +46,8 @@ void main()
 	vec3 VBinormal;
 	VBinormal = cross(normal, VTangent);
 	
-	float xOffset = -0.005 * dot(normalize(lightDir), normalize(VTangent));
-	float yOffset = -0.005 * dot(normalize(lightDir), normalize(VBinormal));
+	float xOffset = -0.005 * dot(lightDir, normalize(VTangent));
+	float yOffset = -0.005 * dot(lightDir, normalize(VBinormal));
 	
      	if ((use_cloud_shadows)&&(use_clouds))
 		{shadowTexel = texture2D(shadowtex, vec2(gl_TexCoord[0].s-xOffset, gl_TexCoord[0].t-yOffset));}
@@ -110,8 +111,15 @@ void main()
 	
 	float angle = dot(normalize(ecViewDir), normalize(normal));
 	float distance_through_atmosphere = min(10.0 / (abs(angle)+0.001),500.0);
-	
-	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb/1.73 * clamp(NdotL,0.01, 0.99)),0.0,1.0);
+
+
+
+	float correction = smoothstep(-0.4, 0.0, dot(n, lightDir) - 0.45  ) ;
+	correction = correction + (1.0 - correction) * (1.0 - smoothstep(1.40, 1.57, sun_angle));
+	float correction1 = 1.0 - smoothstep(1.4, 1.45, sun_angle);
+
+
+	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb/1.73 *  correction * clamp(NdotL + correction1,0.01, 0.99) ),0.0,1.0);
 
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
 
@@ -120,4 +128,5 @@ void main()
 
 
     gl_FragColor = fragColor;
+    //gl_FragColor = vec4 (NdotL - 0.5, NdotL - 0.5, NdotL - 0.5, 1.0);
 }

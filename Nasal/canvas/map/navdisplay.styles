@@ -643,7 +643,7 @@ var NDStyles = {
 					predicate: func(nd) (!nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['MAP'])),
 					is_true: func(nd) {
 						var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
-						if (abs(altDiff) > 50 and altDiff/nd.aircraft_source.get_vspd() > 0) {
+						if (abs(nd.aircraft_source.get_vspd()) > 1 and altDiff/nd.aircraft_source.get_vspd() > 0) {
 							var altRangeNm = altDiff/nd.aircraft_source.get_vspd()*nd.aircraft_source.get_gnd_spd()*KT2MPS*M2NM;
 							if(altRangeNm > 1) {
 								var altRangePx = (350/nd.rangeNm())*altRangeNm;
@@ -665,10 +665,10 @@ var NDStyles = {
 					predicate: func(nd) (nd.get_switch('toggle_centered') and nd.in_mode('toggle_display_mode', ['MAP'])),
 					is_true: func(nd) {
 						var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
-						if (abs(altDiff) > 50 and altDiff/nd.aircraft_source.get_vspd() > 0) {
+						if (abs(nd.aircraft_source.get_vspd()) > 1 and altDiff/nd.aircraft_source.get_vspd() > 0) {
 							var altRangeNm = altDiff/nd.aircraft_source.get_vspd()*nd.aircraft_source.get_gnd_spd()*KT2MPS*M2NM;
 							if(altRangeNm > 1) {
-								var altRangePx = (175/nd.rangeNm())*altRangeNm;
+								var altRangePx = (350/nd.rangeNm())*altRangeNm;
 								if (altRangePx > 350)
 									altRangePx = 350;
 								nd.symbols.altArcCtr.setTranslation(0,-altRangePx);

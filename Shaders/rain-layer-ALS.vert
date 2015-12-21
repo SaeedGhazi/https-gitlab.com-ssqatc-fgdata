@@ -3,6 +3,7 @@
 
 varying float fogFactor;
 varying vec3 hazeColor;
+varying vec3 relVector;
 
 uniform float range; // From /sim/rendering/clouds3d-vis-range
 uniform float scattering;
@@ -54,7 +55,7 @@ void main(void)
   float fogCoord = abs(ecPosition.z);
   float fract = smoothstep(0.0, cloud_height, gl_Position.z + cloud_height);
 
-  vec3 relVector = gl_Position.xyz - ep.xyz;
+  relVector = gl_Position.xyz - ep.xyz;
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
 
 

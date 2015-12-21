@@ -18,6 +18,7 @@ varying vec3 rayleigh;
 varying vec3 mie;
 varying vec3 eye;
 varying vec3 hazeColor;
+varying vec3 viewVector;
 varying float ct;
 varying float cphi;
 varying float delta_z;
@@ -109,9 +110,12 @@ void main()
     // Make sure the dome is of a correct size
     vec4 realVertex = gl_Vertex; //vec4(normalize(gl_Vertex.xyz) * domeSize, 1.0);
  
+
+
     // Ground point (skydome center) in eye coordinates
     vec4 groundPoint = gl_ModelViewMatrix * vec4(0.0, 0.0, 0.0, 1.0);
  
+
     // Calculate altitude as the distance from skydome center to camera
     // Make it so that 0.0 is ground level and 1.0 is 100km (space) level
     float altitude = distance(groundPoint, vec4(0.0, 0.0, 0.0, 1.0));
@@ -128,6 +132,8 @@ void main()
     vec3 sample = 5.0 * realVertex.xyz / domeSize; // Sample is the dome vertex
     vec3 relativePosition = camera - sample; // Relative position
  
+    viewVector = (sample-camera).xyz;
+
     // Find intersection of skydome and view ray
     float space = intersection(cameraRealAltitude, -normalize(relativePosition), 25.0);
     if(space > 0.0) {
@@ -141,6 +147,8 @@ void main()
  
     vec3 lightDirection = gl_LightSource[0].position.xyz;
  
+
+
     // Cos theta of camera's position and sample point
     // Since camera is 0,0,z, dot product is just the z coordinate
     float cameraCosTheta;
@@ -202,6 +210,8 @@ void main()
     rayleigh = rayleighK * color;
     mie = mieK * color;
     eye = gl_NormalMatrix * positionDelta;
+
+
  
 
    // We need to move the camera so that the dome appears to be centered around earth
@@ -212,6 +222,7 @@ void main()
  
     // Vertex transformed correctly so that at 100km we are at space border
     vec4 finalVertex = realVertex - vec4(0.0, 0.0, 1.0, 0.0) * moveDown;
+
 
     // prepare some stuff for a ground haze layer
   

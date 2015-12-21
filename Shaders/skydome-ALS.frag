@@ -11,6 +11,7 @@ varying vec3 rayleigh;
 varying vec3 mie;
 varying vec3 eye;
 varying vec3 hazeColor;
+varying vec3 viewVector;
 varying float ct;
 varying float cphi;
 varying float delta_z;
@@ -25,6 +26,8 @@ uniform float scattering;
 uniform float terminator;
 uniform float cloud_self_shading;
 uniform float horizon_roughness;
+uniform float ice_hex_col;
+uniform float ice_hex_sheet;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
@@ -190,6 +193,41 @@ float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 intensity = length(hColor);
 vec3 oColor = hColor;
 oColor = intensity * normalize(mix(oColor,  shadedFogColor, (smoothstep(0.1,1.0,ovc)))); 
+
+// ice crystal halo 
+
+vec3 nView =  normalize(viewVector);
+vec3 lightFull = normalize((gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz);
+float sun_altitude = dot (lightFull, vec3 (0.0, 0.0, 1.0));
+float calpha = dot(lightFull, nView);
+float cbeta = dot ( normalize(lightFull.xy), normalize(nView.xy));
+float view_altitude = dot(nView, vec3 (0.0, 0.0, 1.0));
+
+float halo_ring_enhancement =  smoothstep (0.88, 0.927, calpha) * (1.0 - smoothstep(0.927, 0.98, calpha));
+halo_ring_enhancement *= halo_ring_enhancement;
+
+// sundogs
+
+float side_sun_enhancement = smoothstep (sun_altitude-0.03, sun_altitude, view_altitude) * (1.0 - smoothstep(sun_altitude, sun_altitude+ 0.03, view_altitude));
+
+side_sun_enhancement *= halo_ring_enhancement * halo_ring_enhancement * ice_hex_sheet;
+
+// pillar 
+
+float pillar_enhancement = smoothstep (sun_altitude-0.1, sun_altitude, view_altitude) * (1.0 - smoothstep(sun_altitude, sun_altitude+ 0.22, view_altitude));
+float beta_thickness = 0.6 * smoothstep(0.999, 1.0, cbeta);
+beta_thickness += 0.8 * smoothstep(0.99998, 1.0, cbeta);
+pillar_enhancement *=  beta_thickness * beta_thickness  * smoothstep(0.99, 1.0, calpha) * ice_hex_col;
+
+
+
+float scattering_enhancements = 0.25 * halo_ring_enhancement * ovc;
+scattering_enhancements += side_sun_enhancement *0.4 * (1.0 - smoothstep(0.6, 0.95, transmission));
+scattering_enhancements += pillar_enhancement  *0.25 * (1.0 - smoothstep(0.7, 1.0, transmission));
+
+
+color.rgb += vec3(1.0, 1.0, 1.0) * (5.0-4.0* earthShade) *  scattering_enhancements   * hazeColor;
+
 oColor = clamp(oColor,0.0,1.0);
 color = ovc *  mix(color, oColor * earthShade ,smoothstep(-0.1+ctterrain, 0.0+ctterrain, ct)) + (1.0-ovc) * color; 
 
@@ -266,5 +304,8 @@ color = mix(hColor+secondary_light * fog_backscatter(avisibility),color, transmi
 
   gl_FragColor = vec4(color, 1.0);
   gl_FragDepth = 0.1;
+
+  //float test = dot (normalize(relVector), vec3 (0.0, 0.0, 1.0));
+  //gl_FragColor = vec4(test, test, test, 1.0);
 }
 

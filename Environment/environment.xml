@@ -430,6 +430,13 @@
  <!-- config for noctilucent cloud generation -->
   <create-noctilucent-clouds type="bool" userarchive="n">false</create-noctilucent-clouds>
  
+ <!-- definitions for light scattering phenomena -->
+
+  <scattering-phenomena>
+    <ice-hexagonal-column-factor type="double" userarchive="n">0.0</ice-hexagonal-column-factor>
+    <ice-hexagonal-sheet-factor type="double" userarchive="n">0.0</ice-hexagonal-sheet-factor>
+  </scattering-phenomena>
+
  <!-- definitions for the environment at surface interface -->
   <surface>
     <scattering type="double" userarchive="n">0.7</scattering>

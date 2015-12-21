@@ -10,6 +10,8 @@
     <scattering><use>/rendering/scene/scattering</use></scattering>
     <visibility><use>/environment/ground-visibility-m</use></visibility>
     <avisibility><use>/environment/visibility-m</use></avisibility>
+    <ice_hex_col><use>/environment/scattering-phenomena/ice-hexagonal-column-factor</use></ice_hex_col>
+    <ice_hex_sheet><use>/environment/scattering-phenomena/ice-hexagonal-sheet-factor</use></ice_hex_sheet>
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
     <terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
@@ -121,6 +123,16 @@
         <name>air_pollution</name>
         <type>float</type>
         <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>ice_hex_col</name>
+        <type>float</type>
+        <value><use>ice_hex_col</use></value>
+      </uniform>
+      <uniform>
+        <name>ice_hex_sheet</name>
+        <type>float</type>
+        <value><use>ice_hex_sheet</use></value>
       </uniform>
       <uniform>
         <name>horizon_roughness</name>

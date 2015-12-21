@@ -792,6 +792,30 @@ compat_layer.setDewpoint(D);
 if (p>0.0) {compat_layer.setPressure(p);}
 
 
+# determine whether low haze is icy and whether we see scattering 
+
+var ice_hex_sheet = 0.0;
+var ice_hex_column = 0.0;
+
+if (T < -5.0)
+	{
+	ice_hex_column = (-T - 5.0) /10.0;
+	ice_hex_sheet = (-T - 10.0 + (T-D)) /20.0;
+
+
+	var sheet_bias = (T-D)/ 20;
+	if (sheet_bias > 1.0) {sheet_bias = 1.0;}
+	ice_hex_column = ice_hex_column * sheet_bias;
+	
+	if (ice_hex_sheet > 1.0) {ice_hex_sheet = 1.0;}
+	if (ice_hex_column > 1.0) {ice_hex_column = 1.0;}
+	}
+	#print("Col: ",ice_hex_column);
+	#print("Sheet: ", ice_hex_sheet);
+
+setprop("/environment/scattering-phenomena/ice-hexagonal-column-factor", ice_hex_column);
+setprop("/environment/scattering-phenomena/ice-hexagonal-sheet-factor", ice_hex_sheet);
+
 # now determine the local wind 
 
 

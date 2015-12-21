@@ -1701,7 +1701,7 @@ calc_geo(blat);
 
 var vis = 9000.0 + rand() * 10000.0;
 var T = 10.0 + rand() * 15.0;
-var spread = 6.0 + 2.0 * rand();
+var spread = 8.0 + 4.0 * rand();
 var D = T - spread;
 var p = 1000 + rand() * 10.0; p = adjust_p(p);
 

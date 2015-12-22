@@ -18,6 +18,11 @@ Syd Adams:
   Citation II with Curt and 777-200 with Justin Smithies.
 
 
+Gilberto Agostinho <gilbertohasnofb@googlemail.com>
+  Contributed work to the default scenery (new textures and
+  better materials definitions, mostly committed by Thorsten into FGDATA.
+  Contributed to the highly detailed c172p (textures, sounds and programming).
+
 Mark Akermann <flightgear@akermann.org>
   Redone sun code. The sun now consists of three textures with individual 
   colors which are calculated based on the effect of light scattering.

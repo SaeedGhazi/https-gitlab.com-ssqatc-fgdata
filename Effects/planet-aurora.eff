@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/aurora</name>
+	<!-- 	<inherits-from>Effects/shadow</inherits-from> -->
+	<parameters>
+		<texture n ="0">
+			<type>white</type>
+		</texture>
+		<vertex-program-two-side type="bool">true</vertex-program-two-side>
+		<material>
+			<color-mode-uniform>1</color-mode-uniform>
+			<!-- DIFFUSE -->
+		</material>
+		<strength><use>/environment/aurora/strength</use></strength>
+		<ray_factor><use>/environment/aurora/ray-factor</use></ray_factor>
+		<upper_alt_factor><use>/environment/aurora/upper-alt-factor</use></upper_alt_factor>
+		<penetration_factor><use>/environment/aurora/penetration-factor</use></penetration_factor>
+		<patchiness><use>/environment/aurora/patchiness</use></patchiness>
+		<afterglow><use>/environment/aurora/afterglow</use></afterglow>
+	</parameters>
+
+ 
+	<technique n="10">
+		<predicate>
+			<or>
+			  <less-equal>
+				<value type="float">2.0</value>
+				<glversion/>
+			  </less-equal>
+			  <and>
+				<extension-supported>GL_ARB_shader_objects</extension-supported>
+				<extension-supported>GL_ARB_shading_language_100</extension-supported>
+				<extension-supported>GL_ARB_vertex_shader</extension-supported>
+				<extension-supported>GL_ARB_fragment_shader</extension-supported>
+ 				<property>/sim/rendering/shaders/skydome</property>
+			  </and>
+			</or>
+		</predicate>
+		<pass>
+			<lighting>true</lighting>
+			<material>
+				<active>
+					<use>material/active</use>
+				</active>
+				<ambient>
+					<use>material/ambient</use>
+				</ambient>
+				<diffuse>
+					<use>material/diffuse</use>
+				</diffuse>
+				<specular>
+					<use>material/specular</use>
+				</specular>
+				<emissive>
+					<use>material/emissive</use>
+				</emissive>
+				<shininess>
+					<use>material/shininess</use>
+				</shininess>
+				<color-mode>
+					<use>material/color-mode</use>
+				</color-mode>
+			</material>
+			<blend>
+				<source>src-alpha</source>
+				<destination>one-minus-src-alpha</destination>
+			</blend>
+			<shade-model>
+				<use>shade-model</use>
+			</shade-model>
+			<cull-face>
+				<use>cull-face</use>
+			</cull-face>
+			<rendering-hint>
+				<use>rendering-hint</use>
+			</rendering-hint>
+      			<depth>
+        			<write-mask>false</write-mask>
+      			</depth>
+      			<render-bin>
+        			<bin-number>10</bin-number>
+        			<bin-name>DepthSortedBin</bin-name>
+     			 </render-bin>
+			<texture-unit>
+				<!-- The texture unit is always active because the shaders expect
+             that. -->
+				<unit>0</unit>
+				<type>
+					<use>texture[0]/type</use>
+				</type>
+				<image>
+					<use>texture[0]/image</use>
+				</image>
+				<filter>
+					<use>texture[0]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[0]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[0]/wrap-t</use>
+				</wrap-t>
+			</texture-unit>
+			<vertex-program-two-side>
+				<use>vertex-program-two-side</use>
+			</vertex-program-two-side>
+			<program>
+				<vertex-shader>Shaders/planet-aurora.vert</vertex-shader>
+				<fragment-shader>Shaders/planet-aurora.frag</fragment-shader>
+				<fragment-shader>Shaders/noise.frag</fragment-shader>
+			</program>
+			<uniform>
+				<name>texture</name>
+				<type>sampler-2d</type>
+				<value type="int">0</value>
+			</uniform>
+			<uniform>
+				<name>strength</name>
+				<type>float</type>
+				<value><use>strength</use></value>
+			</uniform>
+			<uniform>
+				<name>ray_factor</name>
+				<type>float</type>
+				<value><use>ray_factor</use></value>
+			</uniform>
+			<uniform>
+				<name>upper_alt_factor</name>
+				<type>float</type>
+				<value><use>upper_alt_factor</use></value>
+			</uniform>
+			<uniform>
+				<name>penetration_factor</name>
+				<type>float</type>
+				<value><use>penetration_factor</use></value>
+			</uniform>
+			<uniform>
+				<name>patchiness</name>
+				<type>float</type>
+				<value><use>patchiness</use></value>
+			</uniform>
+			<uniform>
+				<name>afterglow</name>
+				<type>float</type>
+				<value><use>afterglow</use></value>
+			</uniform>
+		</pass>
+	</technique>
+
+	
+</PropertyList>

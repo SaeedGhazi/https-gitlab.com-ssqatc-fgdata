@@ -15,7 +15,7 @@
 	<fg-root-desc>Specify the root data path</fg-root-desc>
 	<fg-scenery-desc n="0">Specify the scenery path(s);</fg-scenery-desc>
 	<fg-scenery-desc n="1">Defaults to $FG_ROOT/Scenery</fg-scenery-desc>
-	<fg-aircraft-desc>Specify additional aircraft directory path(s)</fg-aircraft-desc>
+	<fg-aircraft-desc>Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</fg-aircraft-desc>
 	<language-desc>Select the language for this session</language-desc>
 	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
 	<enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
@@ -92,7 +92,7 @@
 	<random-wind-desc>Set up random wind direction and speed</random-wind-desc>
 	<turbulence-desc>Specify turbulence from 0.0 (calm) to 1.0 (severe)</turbulence-desc>
 	<ceiling-desc>Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</ceiling-desc>
-	<aircraft-dir-desc>Aircraft directory relative to the path of the executable</aircraft-dir-desc>
+	<aircraft-dir-desc>Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</aircraft-dir-desc>
 
 	<aircraft-model-options>Aircraft model directory (UIUC FDM ONLY)</aircraft-model-options>
 

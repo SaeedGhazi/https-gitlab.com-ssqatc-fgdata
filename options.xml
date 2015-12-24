@@ -499,6 +499,12 @@
    </option>
 
    <option>
+    <name>aircraft-dir</name>
+    <arg>path</arg>
+    <description>aircraft-dir-desc</description>
+   </option>
+
+   <option>
     <name>show-aircraft</name>
     <description>show-aircraft-desc</description>
     <brief/>
@@ -564,13 +570,6 @@
     <name>disable-auto-coordination</name>
     <description>disable-auto-coordination-desc</description>
    </option>
-
-<!--
-   <option>
-    <name>aircraft-dir</name>
-    <arg>path</arg>
-    <description>aircraft-dir-desc</description>
-   </option> -->
 
    <option>
      <name>livery</name>

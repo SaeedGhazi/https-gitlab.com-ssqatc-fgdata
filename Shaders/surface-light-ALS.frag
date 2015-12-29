@@ -45,7 +45,7 @@ else
 }
 
 
-vec4 light_sprite (in vec2 coord, in float transmission, in float noise)
+float light_sprite (in vec2 coord, in float transmission, in float noise)
 {
 
 coord.s = coord.s - 0.5;
@@ -66,10 +66,14 @@ else
 	{ray = clamp(pow(sinterm,10.0),0.0,1.0);}
 
 float fogEffect =  (1.0-smoothstep(0.4,0.8,transmission));
+float halo = 0.2 * exp(-10.0 * r * r);
+float base = exp(-80.0*r*r);
+ray *= exp(-40.0 * r * r);
 
-float intensity = clamp(ray * exp(-40.0 * r * r) + exp(-80.0*r*r),0.0,1.0) + 0.1 * fogEffect * (1.0-smoothstep(0.3, 0.6,r));
+float intensity = clamp(ray  + base + halo,0.0,1.0) + 0.1 * fogEffect * (1.0-smoothstep(0.3, 0.6,r));
 
-return vec4 (1.0,1.0,1.0,1.0) * intensity;
+return intensity;
+//return vec4 (1.0,1.0,1.0,1.0) * intensity;
 
 }
 
@@ -155,8 +159,12 @@ void main()
    float dist_att = exp(-dist/200.0/size/attenuationScale);
 
     //vec4 texel = texture2D(texture,gl_TexCoord[0].st);
-    vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
-    gl_FragColor =   vec4 (clamp(gl_Color.rgb,0.0,1.0), texel.a * transmission * dist_att);
+    //vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
+    float intensity = light_sprite(gl_TexCoord[0].st,transmission, noise);
+    vec3 light_color = gl_Color.rgb;
+    light_color = mix(light_color, vec3 (1.0, 1.0, 1.0), intensity * intensity);
+
+    gl_FragColor =   vec4 (clamp(light_color.rgb,0.0,1.0), intensity * transmission * dist_att);
 
 
 }

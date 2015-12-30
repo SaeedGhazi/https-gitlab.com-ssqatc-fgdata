@@ -33,43 +33,34 @@
   </material>
 
   <material>
-    <effect>Effects/airfield</effect>
     <name>Grass</name>
     <name>Airport</name>
     <name>AirportKeep</name>
-    <name>Greenspace</name>
-    <texture-set>
-      <texture>Terrain/gravel_red.png</texture>
-      <texture n="13">Terrain/gravel_red.png</texture>
-      <texture n="14">Terrain/grass_dry2.png</texture>
-    </texture-set>
-    <parameters>
-      <grit_alpha>0.4</grit_alpha>
-      <use_overlay>1</use_overlay>
-      <overlay_bias>-0.1</overlay_bias>
-    </parameters>
-    <xsize>125</xsize>
-    <ysize>125</ysize>
+	  <texture-set>
+		  <texture>Terrain/california-airport.png</texture>
+  	</texture-set>
+    <xsize>250</xsize>
+    <ysize>250</ysize>
     <light-coverage>4000000.0</light-coverage>
     <diffuse>
-    <r>0.93</r>
-    <g>0.95</g>
-    <b>0.93</b>
-    <a>1.0</a>
-   </diffuse>
-   <specular>
-     <r>0.1</r>
-     <g>0.12</g>
-     <b>0.1</b>
-     <a>1.0</a>
-   </specular>
-   <shininess>1.2</shininess>
-   <solid>1</solid>
-   <friction-factor>0.7</friction-factor>
-   <rolling-friction>0.1</rolling-friction>
-   <bumpiness>0.1</bumpiness>
-   <load-resistance>1e30</load-resistance>
- </material>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
 
   <material>
     <effect>Effects/landmass-scrub</effect>

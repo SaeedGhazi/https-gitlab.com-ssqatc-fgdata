@@ -28,15 +28,16 @@
 
 <!-- North America -->
 <region include="Materials/regions/alaska.xml"/>
-<region include="Materials/regions/us_southwest.xml"/>
-<region include="Materials/regions/california.xml"/>
+<region include="Materials/regions/us_southwest.xml"/> 
+<region include="Materials/regions/california.xml"/> <!-- modified by gsagostinho -->
 <region include="Materials/regions/sierras.xml"/>
 
 <!-- South America -->
-<region include="Materials/regions/tropical_south_america.xml"/>
+<region include="Materials/regions/tropical_south_america.xml"/> <!-- modified by gsagostinho -->
 <region include="Materials/regions/latin_american_cities.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/caribbean.xml"/>
 <region include="Materials/regions/ascension.xml"/>
+<region include="Materials/regions/mexico.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/brazil_cerrado.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/brazil_brasilia.xml"/> <!-- added by gsagostinho -->
 <region include="Materials/regions/brazil_southern_cerrado.xml"/> <!-- added by gsagostinho -->
@@ -77,6 +78,7 @@
 <region include="Materials/regions/corse.xml"/>
 <region include="Materials/regions/iceland.xml"/>
 <region include="Materials/regions/norway.xml"/>  <!-- added by D-ECHO and gsagostinho -->
+<region include="Materials/regions/southern_europe.xml"/> <!-- added by gsagostinho -->
 
 <!-- Middle East-->
 <region include="Materials/regions/middle_east.xml"/>

@@ -4,6 +4,7 @@
 
  <fx>
 
+<!--
   <thunder>
    <name>Thunder</name>
    <mode>once</mode>
@@ -17,6 +18,7 @@
    <volume>1.0</volume>
    <pitch>1.0</pitch>
   </thunder>
+-->
 
  </fx>
 

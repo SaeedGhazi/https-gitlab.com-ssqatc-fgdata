@@ -53,7 +53,7 @@ coord.t = coord.t - 0.5;
 
 float r = length(coord);
 
-if (pixelSize<1.3) {return vec4 (1.0,1.0,1.0,1.0) * 0.08;}
+if (pixelSize<1.3) {return  0.08;}
 
 float angle = noise * 6.2832;
 

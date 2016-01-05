@@ -30,46 +30,119 @@
 
 	<hrule/>
 
-	<group>
-		<layout>hbox</layout>
-		<padding>4</padding>
+    <group>
+        <layout>hbox</layout>
 
-		<group>
-			<layout>vbox</layout>
-			<default-padding>0</default-padding>
-			<text>
-				<label>UTC</label>
-			</text>
-			<text>
-				<label>00:00:00</label>
-				<live>true</live>
-				<property>/sim/time/gmt-string</property>
-			</text>
+        <group>
+            <layout>vbox</layout>
 
-			<empty>
-				<pref-height>6</pref-height>
-			</empty>
-			<hrule/>
-			<empty>
-				<pref-height>6</pref-height>
-			</empty>
+            <empty>
+                <stretch>true</stretch>
+            </empty>
+            <group>
+                <layout>hbox</layout>
+<!-- Date setting. Use the split out properties in the dialog load, this way these will remain constant when the dialog
+     is opened. Set these automatically when changed - however there appears to be a timezone/dst issue that subtracts an hour.
+-->
+                <group>
+                    <layout>vbox</layout>
+                    <text>
+                        <label>Year</label>
+                    </text>
+                    <input>
+                    <property>/sim/time/demand-year</property>
+                    <binding>
+                        <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            setprop("/sim/time/gmt",getprop("/sim/time/demand-year")~"-"~getprop("/sim/time/demand-month")~"-"~getprop("/sim/time/demand-day")~"T "~substr(getprop("/sim/time/gmt"),11));
+                        </script>
+                    </binding>
+                </input>
+                </group>
+                <group>
+                    <layout>vbox</layout>
+                    <text>
+                        <label>Month</label>
+                    </text>
+                <input>
+                    <property>/sim/time/demand-month</property>
+                    <binding>
+                        <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            setprop("/sim/time/gmt",getprop("/sim/time/demand-year")~"-"~getprop("/sim/time/demand-month")~"-"~getprop("/sim/time/demand-day")~"T "~substr(getprop("/sim/time/gmt"),11));
+                        </script>
+                    </binding>
+                </input>
+                </group>
+                <group>
+                    <layout>vbox</layout>
+                    <text>
+                        <label>Day</label>
+                    </text>
+                    <input>
+                        <property>/sim/time/demand-day</property>
+                        <binding>
+                            <command>dialog-apply</command>
+                        </binding>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                setprop("/sim/time/gmt",getprop("/sim/time/demand-year")~"-"~getprop("/sim/time/demand-month")~"-"~getprop("/sim/time/demand-day")~"T "~substr(getprop("/sim/time/gmt"),11));
+                            </script>
+                        </binding>
+                    </input>
+                </group>
+            </group>
+            <!-- end of date setting -->
+            <empty>
+                <stretch>true</stretch>
+            </empty>
+            <layout>vbox</layout>
+            <group>
+                <layout>table</layout>
+                <halign>center</halign>
 
-			<text>
-				<label>Local</label>
-			</text>
-			<text>
-				<label>00:00</label>
-				<live>true</live>
-				<property>/instrumentation/clock/local-short-string</property>
-			</text>
+                <text>
+                    <row>0</row>
+                    <col>0</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>UTC</label>
+                </text>
+                <text>
+                    <row>0</row>
+                    <col>1</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>00:00:00</label>
+                    <live>true</live>
+                    <property>/sim/time/gmt-string</property>
+                </text>
 
-			<empty>
-				<pref-height>6</pref-height>
-			</empty>
-			<hrule/>
-			<empty>
-				<pref-height>6</pref-height>
-			</empty>
+                <text>
+                    <row>1</row>
+                    <col>0</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>Local</label>
+                </text>
+                <text>
+                    <row>1</row>
+                    <col>1</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>00:00</label>
+                    <live>true</live>
+                    <property>/instrumentation/clock/local-short-string</property>
+                </text>
+            </group>
+            <hrule/>
 
 			<text>
 				<label>Simulation Rate</label>
@@ -109,12 +182,9 @@
 			</group>
 
 			<empty>
-				<pref-height>6</pref-height>
+				<pref-height>1</pref-height>
 			</empty>
 			<hrule/>
-			<empty>
-				<pref-height>6</pref-height>
-			</empty>
 
 			<text>
 				<label>Time Warp</label>
@@ -237,7 +307,21 @@
 					<timeofday>midnight</timeofday>
 				</binding>
 			</button>
-		</group>
+            <group>
+                <layout>hbox</layout>
+                <checkbox>
+                    <property>sim/time/warp-easing</property>
+                    <live>true</live>
+                    <binding>
+                        <command>property-toggle</command>
+                        <property>sim/time/warp-easing</property>
+                    </binding>
+                </checkbox>
+                <text>
+                    <label>Easing</label>
+                </text>
+            </group>
+        </group>
 	</group>
 
   <hrule/>
@@ -250,5 +334,18 @@
       <command>dialog-close</command>
     </binding>
   </button>
-
+        <nasal>
+            <open>
+                <![CDATA[
+                # Extract the year month day into properties
+                  var dtv = getprop("/sim/time/gmt");
+                  var year = substr(dtv,0,4);
+                  var month = substr(dtv,5,2);
+                  var day = substr(dtv,8,2);
+                  setprop("/sim/time/demand-year",year);
+                  setprop("/sim/time/demand-month",month);
+                  setprop("/sim/time/demand-day",day);
+                ]]>
+            </open>
+        </nasal>
 </PropertyList>

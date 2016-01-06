@@ -40,64 +40,142 @@
                 <stretch>true</stretch>
             </empty>
             <group>
-                <layout>hbox</layout>
-<!-- Date setting. Use the split out properties in the dialog load, this way these will remain constant when the dialog
+                <layout>table</layout>
+                <name>date_group</name>
+                <!-- Date setting. Use the split out properties in the dialog load, this way these will remain constant when the dialog
      is opened. Set these automatically when changed - however there appears to be a timezone/dst issue that subtracts an hour.
 -->
-                <group>
-                    <layout>vbox</layout>
-                    <text>
-                        <label>Year</label>
-                    </text>
-                    <input>
-                    <property>/sim/time/demand-year</property>
-                    <binding>
-                        <command>dialog-apply</command>
-                    </binding>
-                    <binding>
-                        <command>nasal</command>
-                        <script>
-                            setprop("/sim/time/gmt",getprop("/sim/time/demand-year")~"-"~getprop("/sim/time/demand-month")~"-"~getprop("/sim/time/demand-day")~"T "~substr(getprop("/sim/time/gmt"),11));
-                        </script>
-                    </binding>
-                </input>
-                </group>
-                <group>
-                    <layout>vbox</layout>
-                    <text>
-                        <label>Month</label>
-                    </text>
+                <text>
+                    <row>0</row>
+                    <col>0</col>
+                    <label>Year</label>
+                </text>
                 <input>
-                    <property>/sim/time/demand-month</property>
-                    <binding>
-                        <command>dialog-apply</command>
-                    </binding>
-                    <binding>
-                        <command>nasal</command>
-                        <script>
-                            setprop("/sim/time/gmt",getprop("/sim/time/demand-year")~"-"~getprop("/sim/time/demand-month")~"-"~getprop("/sim/time/demand-day")~"T "~substr(getprop("/sim/time/gmt"),11));
-                        </script>
-                    </binding>
-                </input>
-                </group>
-                <group>
-                    <layout>vbox</layout>
-                    <text>
-                        <label>Day</label>
-                    </text>
-                    <input>
-                        <property>/sim/time/demand-day</property>
+                    <row>1</row>
+                    <col>0</col>
+                    <live>1</live>
+                    <name>demand-year</name>
+                    <property>/sim/time/demand-year</property>
                         <binding>
                             <command>dialog-apply</command>
+                            <object-name>demand-year</object-name>
                         </binding>
                         <binding>
                             <command>nasal</command>
                             <script>
-                                setprop("/sim/time/gmt",getprop("/sim/time/demand-year")~"-"~getprop("/sim/time/demand-month")~"-"~getprop("/sim/time/demand-day")~"T "~substr(getprop("/sim/time/gmt"),11));
+                                tod_setdate();
                             </script>
                         </binding>
                     </input>
-                </group>
+                <slider>
+                    <row>2</row>
+                    <col>0</col>
+                    <name>sl_year</name>
+                    <property>/sim/time/demand-year</property>
+                    <live>1</live>
+                    <min>1971</min>
+                    <max>2037</max>
+                    <step>1</step>
+                    <binding>
+                        <command>dialog-apply</command>
+                        <object-name>sl_year</object-name>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </slider>
+                <text>
+                    <row>0</row>
+                    <col>1</col>
+                    <label>Month</label>
+                    </text>
+                    <combo>
+                        <row>1</row>
+                        <col>1</col>
+                        <live>1</live>
+                        <name>month-combo</name>
+                        <property>/sim/time/demand-month</property>
+                        <editable>false</editable>
+                        <pref-width>130</pref-width>
+                        <halign>fill</halign>
+                        <binding>
+                            <command>dialog-apply</command>
+                            <object-name>month-combo</object-name>
+                        </binding>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                tod_setdate();
+                            </script>
+                        </binding>
+                    </combo>
+                <slider>
+                    <row>2</row>
+                    <col>1</col>
+                    <name>sl_month</name>
+                    <property>/sim/time/demand-month-idx</property>
+                    <live>1</live>
+                    <min>0</min>
+                    <max>11</max>
+                    <step>1</step>
+                    <binding>
+                        <object-name>sl_month</object-name>
+                        <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            setprop("/sim/time/demand-month",months[getprop("/sim/time/demand-month-idx")]);
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </slider>
+
+                <text>
+                    <row>0</row>
+                    <col>2</col>
+                    <label>Day</label>
+                </text>
+                <input>
+                    <row>1</row>
+                    <col>2</col>
+                    <name>demand-day</name>
+                    <property>/sim/time/demand-day</property>
+                    <live>1</live>
+                    <binding>
+                        <command>dialog-apply</command>
+                        <object-name>demand-day</object-name>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </input>
+                <slider>
+                    <row>2</row>
+                    <col>2</col>
+                    <name>sl_day</name>
+                    <property>/sim/time/demand-day</property>
+                    <live>1</live>
+                    <min>1</min>
+                    <max>31</max>
+                    <step>1</step>
+                    <binding>
+                        <command>dialog-apply</command>
+                        <object-name>sl_day</object-name>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </slider>
             </group>
             <!-- end of date setting -->
             <empty>
@@ -233,10 +311,18 @@
 			<pref-width>2</pref-width>
 		</empty>
 
-		<group>
-			<layout>vbox</layout>
+        <vrule/>
+        <group>
+            <padding>5</padding>
+            <layout>vbox</layout>
 			<default-padding>0</default-padding>
-			<button>
+            <text>
+                <halign>center</halign>
+                <default-padding>0</default-padding>
+                <label>Time Presets</label>
+            </text>
+            <hrule/>
+            <button>
 				<legend>Clock Time</legend>
 				<equal>true</equal>
 				<binding>
@@ -318,7 +404,7 @@
                     </binding>
                 </checkbox>
                 <text>
-                    <label>Easing</label>
+                    <label>Smooth transition</label>
                 </text>
             </group>
         </group>
@@ -338,13 +424,39 @@
             <open>
                 <![CDATA[
                 # Extract the year month day into properties
-                  var dtv = getprop("/sim/time/gmt");
-                  var year = substr(dtv,0,4);
-                  var month = substr(dtv,5,2);
-                  var day = substr(dtv,8,2);
-                  setprop("/sim/time/demand-year",year);
-                  setprop("/sim/time/demand-month",month);
-                  setprop("/sim/time/demand-day",day);
+                var dlgRoot = cmdarg();
+                var cb_month = gui.findElementByName(dlgRoot, "month-combo");
+                var dtv = getprop("/sim/time/gmt");
+                var year = substr(dtv,0,4);
+                var month = substr(dtv,5,2);
+                var day = substr(dtv,8,2);
+                var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+                #
+                # populate the combo box with the months
+                forindex(var idx; months)
+                    cb_month.getChild("value", idx, 1).setValue(months[idx]);
+
+                setprop("/sim/time/demand-year",year);
+                setprop("/sim/time/demand-month",months[month-1]);
+                setprop("/sim/time/demand-month-idx",month-1);
+                setprop("/sim/time/demand-day",day);
+
+                #
+                # method to set the time of day based on the dialog values
+                tod_setdate = func{
+                      forindex (var idx; months) {
+                          if (months[idx] == getprop("/sim/time/demand-month"))
+                              month=idx+1;
+                      }
+                      setprop("/sim/time/demand-month-idx",month-1);
+                      setprop("/sim/time/demand-month",months[month-1]);
+                      var hour = substr(dtv,11,2);
+                      var minute = substr(dtv,14,2);
+                      var second = substr(dtv,18,2);
+                      var new_dt=sprintf("%04d-%02d-%02dT%02d:%02d:%02d",getprop("/sim/time/demand-year"),month,getprop("/sim/time/demand-day"),hour,minute,second*1);
+                      setprop("/sim/time/gmt",new_dt);
+                }
                 ]]>
             </open>
         </nasal>

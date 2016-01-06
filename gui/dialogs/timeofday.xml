@@ -410,17 +410,17 @@
         </group>
 	</group>
 
-  <hrule/>
+    <hrule/>
 
-  <button>
-    <legend>Close</legend>
-    <default>true</default>
-    <key>Esc</key>
-    <binding>
-      <command>dialog-close</command>
-    </binding>
-  </button>
-        <nasal>
+    <button>
+        <legend>Close</legend>
+        <default>true</default>
+        <key>Esc</key>
+        <binding>
+            <command>dialog-close</command>
+        </binding>
+    </button>
+    <nasal>
             <open>
                 <![CDATA[
                 # Extract the year month day into properties
@@ -430,7 +430,9 @@
                 var year = substr(dtv,0,4);
                 var month = substr(dtv,5,2);
                 var day = substr(dtv,8,2);
+                var daymax = gui.findElementByName(dlgRoot, "sl_day").getChild("max");
                 var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                var monthmax = [31,28,31,30,31,30,31,31,30,31,30,31];
 
                 #
                 # populate the combo box with the months
@@ -449,6 +451,11 @@
                           if (months[idx] == getprop("/sim/time/demand-month"))
                               month=idx+1;
                       }
+                      var year = getprop("/sim/time/demand-year");
+                      if ( (math.fmod(year,4) == 0 and math.fmod(year,100) != 0) or (math.fmod(year,400) == 0))
+                          monthmax[1]=29;
+                      else
+                          monthmax[1]=28;
                       setprop("/sim/time/demand-month-idx",month-1);
                       setprop("/sim/time/demand-month",months[month-1]);
                       var hour = substr(dtv,11,2);
@@ -456,6 +463,9 @@
                       var second = substr(dtv,18,2);
                       var new_dt=sprintf("%04d-%02d-%02dT%02d:%02d:%02d",getprop("/sim/time/demand-year"),month,getprop("/sim/time/demand-day"),hour,minute,second*1);
                       setprop("/sim/time/gmt",new_dt);
+                      daymax.setValue(monthmax[month-1]);
+                      if (getprop("/sim/time/demand-day") > monthmax[month-1])
+                          setprop("/sim/time/demand-day",sprintf("%02d",monthmax[month-1]));
                 }
                 ]]>
             </open>

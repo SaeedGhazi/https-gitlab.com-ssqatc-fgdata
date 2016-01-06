@@ -270,7 +270,7 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_: func(v) {
-		var dt = getprop("/sim/time/delta-sec")*getprop("/sim/speed-up");
+		var dt = getprop("/sim/time/delta-sec");
 		var c = dt / (me.coeff + dt);
 		me.value = v * c + me.value * (1 - c);
 	},
@@ -414,7 +414,7 @@ var data = {
 # EXAMPLES:
 #	var hobbs_turbine = aircraft.timer.new("/sim/time/hobbs/turbine[0]", 60);
 #	hobbs_turbine.start();
-#	
+#
 #	aircraft.timer.new("/sim/time/hobbs/battery", 60).start();  # anonymous timer
 #
 var timer = {
@@ -1042,7 +1042,7 @@ var HUD = {
 		me.paletteN = props.globals.getNode("/sim/hud/palette", 1);
 		me.brightnessN = props.globals.getNode("/sim/hud/color/brightness", 1);
 		me.currentN = me.vis1N;
-		
+
 		# keep compatibility with earlier version of FG - hud/path[1] is
 		# the default Hud
 		me.currentPathN.setIntValue(1);
@@ -1069,11 +1069,11 @@ var HUD = {
 	    me.currentPathN.setIntValue(1);
     },
     cycle_type: func {		# I-key
-	    var i = me.currentPathN.getValue() + 1;	
+	    var i = me.currentPathN.getValue() + 1;
 		if (i < 1 or i > size(me.hudN.getChildren("path"))) {
 		    # back to the start
 			me.currentPathN.setIntValue(1);
-		} else {	
+		} else {
 			me.currentPathN.setIntValue(i);
 		}
     },
@@ -1187,7 +1187,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 ##### remove this code when all references to /sim/auto-coordination are gone
 	var ac = props.globals.getNode("/sim/auto-coordination");
 	if(ac != nil ) {
-		printlog("alert", 
+		printlog("alert",
 			"WARNING: using deprecated property /sim/auto-coordination. Please change to /controls/flight/auto-coordination" );
 		ac.alias(props.globals.getNode("/controls/flight/auto-coordination", 1));
 	}
@@ -1209,4 +1209,3 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		data._loop_ = func nil;
 	}
 });
-

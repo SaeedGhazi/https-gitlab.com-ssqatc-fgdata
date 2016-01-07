@@ -220,6 +220,27 @@
                     <property>/instrumentation/clock/local-short-string</property>
                 </text>
             </group>
+            <slider>
+                <row>2</row>
+                <col>0</col>
+                <name>sl_minute</name>
+                <property>/sim/time/demand-minute-of-day</property>
+                <live>1</live>
+                <min>0</min>
+                <max>1440</max>
+                <step>1</step>
+                <pref-width>250</pref-width>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>sl_minute</object-name>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        tod_setminuteofday(getprop("/sim/time/demand-minute-of-day"));
+                    </script>
+                </binding>
+            </slider>
             <hrule/>
 
 			<text>
@@ -466,6 +487,14 @@
                       daymax.setValue(monthmax[month-1]);
                       if (getprop("/sim/time/demand-day") > monthmax[month-1])
                           setprop("/sim/time/demand-day",sprintf("%02d",monthmax[month-1]));
+                }
+                tod_setminuteofday  = func(minute){
+                      var hour = minute/60;
+                      var minute = math.fmod(minute,60);
+                      var second = 0;
+                      var new_dt=sprintf("%04d-%02d-%02dT%02d:%02d:%02d",getprop("/sim/time/demand-year"),month,getprop("/sim/time/demand-day"),hour,minute,second*1);
+                      setprop("/sim/time/gmt",new_dt);
+                      printf(new_dt);
                 }
                 ]]>
             </open>

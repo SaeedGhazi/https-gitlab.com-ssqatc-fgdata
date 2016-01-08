@@ -100,10 +100,9 @@ var UnboundAxis = {
 
 
 var PropertyScaleAxis = {
-  new: func(name, prop, deadband=0, factor=1, offset=0) {
+  new: func(name, prop, factor=1, offset=0) {
     var m = { parents: [PropertyScaleAxis, Axis.new(name, prop, 1) ] };
     m.prop=prop;
-    m.deadband = deadband;
     m.factor = factor;
     m.offset = offset;
     return m;
@@ -115,7 +114,6 @@ var PropertyScaleAxis = {
     m.inverted = me.inverted;
     
     m.prop= me.prop;
-    m.deadband = me.deadband;
     m.factor = me.factor;
     m.offset = me.offset;
     return m;
@@ -129,7 +127,6 @@ var PropertyScaleAxis = {
   },
   
   parse: func(p) { 
-    me.deadband = p.getNode("binding", 1).getNode("dead-band", 1).getValue();        
     # Don't create a null 'factor' node if it doesn't exist!
     # (value 0 wouldn't be appropriate for a default factor)
     factorNode = p.getNode("binding", 1).getNode("factor", 0);
@@ -145,7 +142,6 @@ var PropertyScaleAxis = {
     p.getNode("desc", 1).setValue(me.name);
     p.getNode("binding", 1).getNode("command", 1).setValue("property-scale");
     p.getNode("binding", 1).getNode("property", 1).setValue(me.prop);
-    p.getNode("binding", 1).getNode("dead-band", 1).setValue(me.deadband);
     if (me.inverted) {    
       p.getNode("binding", 1).getNode("factor", 1).setValue(0 - me.factor);
     } else {
@@ -272,8 +268,8 @@ var axisBindings = [
 #  PropertyScaleAxis.new("Aileron Trim",  "/controls/flight/aileron-trim"),
 #  PropertyScaleAxis.new("Elevator Trim", "/controls/flight/elevator-trim"),
 #  PropertyScaleAxis.new("Rudder Trim",  "/controls/flight/rudder-trim"),
-  PropertyScaleAxis.new("Brake Left", "/controls/gear/brake-left", 0, 0.5, 1.0),
-  PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0, 0.5, 1.0),
+  PropertyScaleAxis.new("Brake Left", "/controls/gear/brake-left", 0.5, 1.0),
+  PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0.5, 1.0),
   NasalLowHighAxis.new("Aileron Trim",  "controls.aileronTrim(-1);", "controls.aileronTrim(1);", "/controls/flight/aileron-trim"),
   NasalLowHighAxis.new("Elevator Trim", "controls.elevatorTrim(-1);", "controls.elevatorTrim(1);", "/controls/flight/elevator-trim"),
   NasalLowHighAxis.new("Rudder Trim",   "controls.rudderTrim(-1);", "controls.rudderTrim(1);", "/controls/flight/rudder-trim"), 

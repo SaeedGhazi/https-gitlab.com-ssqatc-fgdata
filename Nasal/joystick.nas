@@ -130,9 +130,12 @@ var PropertyScaleAxis = {
   
   parse: func(p) { 
     me.deadband = p.getNode("binding", 1).getNode("dead-band", 1).getValue();        
-    if (p.getNode("binding", 1).getNode("factor", 1).getValue() != nil) {
-      me.inverted = (p.getNode("binding", 1).getNode("factor", 1).getValue() < 0);
-    }
+    # Don't create a null 'factor' node if it doesn't exist!
+    # (value 0 wouldn't be appropriate for a default factor)
+    factorNode = p.getNode("binding", 1).getNode("factor", 0);
+    if (factorNode != nil)
+      me.inverted = (factorNode.getValue() < 0);
+
     me.offset = p.getNode("binding", 1).getNode("offset", 1).getValue();
   },
   

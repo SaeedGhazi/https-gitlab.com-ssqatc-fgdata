@@ -127,13 +127,16 @@ var PropertyScaleAxis = {
   },
   
   parse: func(p) { 
-    # Don't create a null 'factor' node if it doesn't exist!
+    bindingNode = p.getNode("binding", 1);
+    me.prop = bindingNode.getNode("property", 1).getValue();
+
+    # Don't create an empty 'factor' node if it doesn't exist!
     # (value 0 wouldn't be appropriate for a default factor)
-    factorNode = p.getNode("binding", 1).getNode("factor", 0);
+    factorNode = bindingNode.getNode("factor", 0);
     me.factor = (factorNode != nil) ? factorNode.getValue() : 1.0;
 
     me.inverted = (me.factor < 0);
-    me.offset = p.getNode("binding", 1).getNode("offset", 1).getValue();
+    me.offset = bindingNode.getNode("offset", 1).getValue();
   },
   
   getBinding: func(axis) {

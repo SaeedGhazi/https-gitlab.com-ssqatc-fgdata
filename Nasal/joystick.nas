@@ -130,9 +130,9 @@ var PropertyScaleAxis = {
     # Don't create a null 'factor' node if it doesn't exist!
     # (value 0 wouldn't be appropriate for a default factor)
     factorNode = p.getNode("binding", 1).getNode("factor", 0);
-    if (factorNode != nil)
-      me.inverted = (factorNode.getValue() < 0);
+    me.factor = (factorNode != nil) ? factorNode.getValue() : 1.0;
 
+    me.inverted = (me.factor < 0);
     me.offset = p.getNode("binding", 1).getNode("offset", 1).getValue();
   },
   

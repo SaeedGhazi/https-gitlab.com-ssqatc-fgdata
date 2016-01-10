@@ -126,7 +126,7 @@ void main()
 
 // Aurora Borealis / Australis
 
-  vec3 direction = vec3 (-1.0, 0.0, 0.0);
+  vec3 direction = vec3 (1.0, 0.0, 0.0);
   
   float hArg = dot(nView, direction);
 

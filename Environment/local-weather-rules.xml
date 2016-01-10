@@ -846,4 +846,77 @@
     <max>1.0</max>
   </filter>
 
+  <filter>
+    <name>EnvironmentInterpolator:Aurora:LatitudeDep</name>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+        <expression>
+	   <pow>
+	   <div>
+           <abs>
+		<property>/position/latitude-deg</property>
+	   </abs>
+	   <value>90</value>
+  	   </div>
+ 	   <value>2.0</value>
+	  </pow>
+       </expression>
+  </input>
+  <output>/environment/aurora/latitude-scale</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:Aurora:VerticalSize</name>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+	  <max>
+	     <pow>
+		<property>/environment/aurora/latitude-scale</property>
+		<value>2.0</value>
+	     </pow>
+	     <value>0.1</value>
+	  </max>
+      </expression>
+  </input>
+  <output>/environment/aurora/vsize</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:Aurora:HorizontalSize</name>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+	    <max>
+		<property>/environment/aurora/latitude-scale</property>
+		<value>0.1</value>
+	    </max>
+      </expression>
+  </input>
+  <output>/environment/aurora/hsize</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:Aurora:Strength</name>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+	<expression>
+	    <product>
+		<pow>
+		  <property>/environment/aurora/latitude-scale</property>
+		  <value>0.5</value>
+		</pow>
+		<property>/environment/aurora/set-strength</property>
+	    </product>
+      </expression>
+  </input>
+  <output>/environment/aurora/strength</output>
+  </filter>
+
+
+
 </PropertyList>

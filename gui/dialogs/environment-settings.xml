@@ -489,6 +489,53 @@
       <col>3</col>
     </text>
 
+   <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label> Aurora Borealis</label>
+      <halign>left</halign>
+      <row>10</row>
+      <col>0</col>
+    </text>
+    
+    <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label>weak</label>
+      <halign>right</halign>
+      <row>10</row>
+      <col>1</col>
+    </text>
+        
+    <slider>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <name>aurora</name>
+      <row>10</row>
+      <col>2</col>
+      <min>0.0</min>
+      <max>1.0</max>
+      <live>true</live>
+      <property>/environment/aurora/set-strength</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>aurora</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <enable>
+       <property>/sim/rendering/shaders/skydome</property>
+      </enable>
+      <label>strong</label>
+      <halign>left</halign>
+      <row>10</row>
+      <col>3</col>
+    </text>
+
 
   </group>
   

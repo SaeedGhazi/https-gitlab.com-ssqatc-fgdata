@@ -6,8 +6,8 @@
     <animation>
         <type>rotate</type>
         <object-name>Rudder</object-name>
-        <property>controls/flight/rudder</property>
-        <factor>35</factor>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>-35</factor>
         <center>
             <x-m>13.531</x-m>
             <y-m>0</y-m>
@@ -127,8 +127,8 @@
     <animation>
         <type>rotate</type>
         <object-name>FrtStrut</object-name>
-        <property>controls/flight/rudder</property>
-        <factor>35</factor>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>-35</factor>
         <condition>
             <equals>
                 <property>gear/gear[0]/position-norm</property>

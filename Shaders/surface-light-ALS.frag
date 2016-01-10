@@ -162,7 +162,7 @@ void main()
     //vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
     float intensity = light_sprite(gl_TexCoord[0].st,transmission, noise);
     vec3 light_color = gl_Color.rgb;
-    light_color = mix(light_color, vec3 (1.0, 1.0, 1.0), intensity * intensity);
+    light_color = mix(light_color, vec3 (1.0, 1.0, 1.0), 0.5 * intensity * intensity);
 
     gl_FragColor =   vec4 (clamp(light_color.rgb,0.0,1.0), intensity * transmission * dist_att);
 

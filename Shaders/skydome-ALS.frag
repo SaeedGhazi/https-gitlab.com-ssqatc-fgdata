@@ -28,9 +28,14 @@ uniform float cloud_self_shading;
 uniform float horizon_roughness;
 uniform float ice_hex_col;
 uniform float ice_hex_sheet;
+uniform float parhelic;
+uniform float aurora_strength;
+uniform float aurora_hsize;
+uniform float aurora_vsize;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
+uniform float osg_SimulationTime;
 
 uniform int use_searchlight;
 uniform int use_landing_light;
@@ -76,10 +81,18 @@ float rayleighPhase(in float cosTheta)
 void main()
 {
 
-  //vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
-   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
+
+  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   float cosTheta = dot(normalize(eye), gl_LightSource[0].position.xyz);
  
+  // some geometry
+
+  vec3 nView =  normalize(viewVector);
+  vec3 lightFull = normalize((gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz);
+  float calpha = dot(lightFull, nView);
+  float cbeta = dot ( normalize(lightFull.xy), normalize(nView.xy));
+  float costheta = ct;
+
   // position of the horizon line
 
   float lAltitude = alt + delta_z;
@@ -102,28 +115,41 @@ void main()
   float ovc = overcast;
 
 
-
   float sat = 1.0 - ((1.0 - saturation) * 2.0);
   if (sat < 0.3) sat = 0.3;
 
-
+  if (color.r > 0.58) color.r = 1.0 - exp(-1.5 * color.r);
+  if (color.g > 0.58) color.g = 1.0 - exp(-1.5 * color.g);
+  if (color.b > 0.58) color.b = 1.0 - exp(-1.5 * color.b);
   
 
-if (color.r > 0.58) color.r = 1.0 - exp(-1.5 * color.r);
-if (color.g > 0.58) color.g = 1.0 - exp(-1.5 * color.g);
-if (color.b > 0.58) color.b = 1.0 - exp(-1.5 * color.b);
-  
 
+// Aurora Borealis / Australis
+
+  vec3 direction = vec3 (-1.0, 0.0, 0.0);
+  
+  float hArg = dot(nView, direction);
+
+  
+  float aurora_v = smoothstep(0.2 - 0.6 * aurora_vsize, 0.2, costheta) * (1.0- smoothstep(0.3, 0.3 + aurora_vsize, costheta));
+  float aurora_h = smoothstep(1.0 - aurora_hsize, 1.0, hArg);
+  float aurora_time = 0.01 * osg_SimulationTime;  
+
+  vec3 auroraBaseColor = vec3 (0.0, 0.2, 0.1);
+
+  float aurora_visible_strength = 0.3 + 0.7 * Noise2D(vec2(costheta + aurora_time, 0.5 * nView.x + 0.3 * nView.y + aurora_time), 0.1) ;
+  float aurora_fade_in = 1.0 - smoothstep(0.1, 0.2, length(color.rgb));
+
+
+  color.rgb += auroraBaseColor * aurora_v * aurora_h * aurora_fade_in * aurora_visible_strength * aurora_strength;
 
 // fog computations for a ground haze layer, extending from zero to lAltitude
-
-
 
 float transmission;
 float vAltitude;
 float delta_zv;
 
-float costheta = ct;
+
 
 float vis = min(visibility, avisibility);
 
@@ -196,15 +222,21 @@ oColor = intensity * normalize(mix(oColor,  shadedFogColor, (smoothstep(0.1,1.0,
 
 // ice crystal halo 
 
-vec3 nView =  normalize(viewVector);
-vec3 lightFull = normalize((gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz);
 float sun_altitude = dot (lightFull, vec3 (0.0, 0.0, 1.0));
-float calpha = dot(lightFull, nView);
-float cbeta = dot ( normalize(lightFull.xy), normalize(nView.xy));
 float view_altitude = dot(nView, vec3 (0.0, 0.0, 1.0));
 
-float halo_ring_enhancement =  smoothstep (0.88, 0.927, calpha) * (1.0 - smoothstep(0.927, 0.98, calpha));
+//float halo_ring_enhancement =  smoothstep (0.88, 0.927, calpha) * (1.0 - smoothstep(0.927, 0.98, calpha));
+float halo_ring_enhancement =  smoothstep (0.88, 0.927, calpha) * (1.0 - smoothstep(0.927, 0.94, calpha));
 halo_ring_enhancement *= halo_ring_enhancement;
+
+
+// parhelic circle
+
+float parhelic_circle_enhancement = 0.3 * smoothstep (sun_altitude-0.01, sun_altitude, view_altitude) * (1.0 - smoothstep(sun_altitude, sun_altitude+ 0.01, view_altitude));
+
+parhelic_circle_enhancement += 0.8 * smoothstep (sun_altitude-0.08, sun_altitude, view_altitude) * (1.0 - smoothstep(sun_altitude, sun_altitude+ 0.08, view_altitude));
+
+parhelic_circle_enhancement *= parhelic * (0.2 + 0.8 * smoothstep(0.5, 1.0, cbeta));
 
 // sundogs
 
@@ -224,6 +256,7 @@ pillar_enhancement *=  beta_thickness * beta_thickness  * smoothstep(0.99, 1.0, 
 float scattering_enhancements = 0.25 * halo_ring_enhancement * ovc;
 scattering_enhancements += side_sun_enhancement *0.4 * (1.0 - smoothstep(0.6, 0.95, transmission));
 scattering_enhancements += pillar_enhancement  *0.25 * (1.0 - smoothstep(0.7, 1.0, transmission));
+scattering_enhancements += parhelic_circle_enhancement * 0.2 * (1.0 - smoothstep(0.7, 1.0, transmission));
 
 
 color.rgb += vec3(1.0, 1.0, 1.0) * (5.0-4.0* earthShade) *  scattering_enhancements   * hazeColor;
@@ -304,6 +337,8 @@ color = mix(hColor+secondary_light * fog_backscatter(avisibility),color, transmi
 
   gl_FragColor = vec4(color, 1.0);
   gl_FragDepth = 0.1;
+
+  //gl_FragColor.rgb *= aurora_v * aurora_h;
 
   //float test = dot (normalize(relVector), vec3 (0.0, 0.0, 1.0));
   //gl_FragColor = vec4(test, test, test, 1.0);

@@ -435,7 +435,21 @@
   <scattering-phenomena>
     <ice-hexagonal-column-factor type="double" userarchive="n">0.0</ice-hexagonal-column-factor>
     <ice-hexagonal-sheet-factor type="double" userarchive="n">0.0</ice-hexagonal-sheet-factor>
+    <parhelic-factor type="double" userarchive="n">0.0</parhelic-factor>
   </scattering-phenomena>
+ 
+ <!-- definitions for aurorae -->
+
+  <aurora>
+    <strength type="double" userarchive="n">0.0</strength>
+    <vsize type="double" userarchive="n">0.4</vsize>
+    <hsize type="double" userarchive="n">0.4</hsize>
+    <patchiness type="double" userarchive="n">0.0</patchiness>
+    <ray-factor type="double" userarchive="n">1.0</ray-factor>
+    <upper-alt-factor type="double" userarchive="n">1.0</upper-alt-factor>
+    <penetration-factor type="double" userarchive="n">0.0</penetration-factor>
+    <afterglow type="double" userarchive="n">0.0</afterglow>
+  </aurora>
 
  <!-- definitions for the environment at surface interface -->
   <surface>
@@ -445,6 +459,7 @@
     <wetness-set type="double" userarchive="y">0.0</wetness-set>
     <wetness type="double" userarchive="n">0.0</wetness>
     <snow-thickness-factor type="double" userarchive="y">1.0</snow-thickness-factor>
+
   </surface>
 
  <!-- definitions for lightning functionality -->

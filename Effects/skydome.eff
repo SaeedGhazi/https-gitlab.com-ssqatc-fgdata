@@ -12,6 +12,10 @@
     <avisibility><use>/environment/visibility-m</use></avisibility>
     <ice_hex_col><use>/environment/scattering-phenomena/ice-hexagonal-column-factor</use></ice_hex_col>
     <ice_hex_sheet><use>/environment/scattering-phenomena/ice-hexagonal-sheet-factor</use></ice_hex_sheet>
+    <parhelic><use>/environment/scattering-phenomena/parhelic-factor</use></parhelic>
+    <aurora_strength><use>/environment/aurora/strength</use></aurora_strength>
+    <aurora_vsize><use>/environment/aurora/vsize</use></aurora_vsize>
+    <aurora_hsize><use>/environment/aurora/hsize</use></aurora_hsize>
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
     <terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
@@ -130,9 +134,29 @@
         <value><use>ice_hex_col</use></value>
       </uniform>
       <uniform>
+        <name>parhelic</name>
+        <type>float</type>
+        <value><use>parhelic</use></value>
+      </uniform>
+      <uniform>
         <name>ice_hex_sheet</name>
         <type>float</type>
         <value><use>ice_hex_sheet</use></value>
+      </uniform>
+      <uniform>
+        <name>aurora_strength</name>
+        <type>float</type>
+        <value><use>aurora_strength</use></value>
+      </uniform>
+      <uniform>
+        <name>aurora_vsize</name>
+        <type>float</type>
+        <value><use>aurora_vsize</use></value>
+      </uniform>
+      <uniform>
+        <name>aurora_hsize</name>
+        <type>float</type>
+        <value><use>aurora_hsize</use></value>
       </uniform>
       <uniform>
         <name>horizon_roughness</name>

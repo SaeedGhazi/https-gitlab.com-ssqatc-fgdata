@@ -15,10 +15,6 @@ uniform sampler2D structure_texture;
 
 float Noise2D(in vec2 coord, in float wavelength);
 
-float luminance(vec3 color)
-{
-    return dot(vec3(0.212671, 0.715160, 0.072169), color);
-}
 
 void main()
 {

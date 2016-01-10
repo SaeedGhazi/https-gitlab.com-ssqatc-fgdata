@@ -80,6 +80,7 @@ else {setprop("/earthview/show-s4", 1);}
 
 earth_model.node = earthview.place_earth_model("Models/Astro/earth.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 cloudsphere_model.node = earthview.place_earth_model("Models/Astro/cloudsphere.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
+cloudsphere_model.node = earthview.place_earth_model("Models/Astro/aurora.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
 
 # set Basic Weather off
 props.globals.getNode("/environment/config/enabled").setBoolValue(0);

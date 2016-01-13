@@ -83,16 +83,13 @@ require([
         "metar-valid" : "/environment/metar/valid",
     });
 
-    function PhiViewModel(props) {
+    function PhiViewModel(topics) {
         var self = this;
-        self.props = props;
         self.widgets = ko.observableArray([
                 "METAR", "PFD", "Radiostack", "Small Map", "Stopwatch"
         ]);
 
-        self.topics = [
-                'Aircraft', 'Environment', 'Map', 'Tools', 'Simulator', 'Help',
-        ];
+        self.topics = topics;
 
         self.selectedTopic = ko.observable();
         self.selectedSubtopic = ko.observable();
@@ -138,31 +135,6 @@ require([
         }).run();
 
     }
-
-    ko.components.register('Aircraft', {
-        require : 'topics/Aircraft'
-    });
-
-    ko.components.register('Environment', {
-        require : 'topics/Environment'
-    });
-
-    ko.components.register('Map', {
-        require : 'topics/Map'
-    });
-
-    ko.components.register('Tools', {
-        require : 'topics/Tools'
-    });
-
-    ko.components.register('Simulator', {
-        require : 'topics/Simulator'
-    });
-
-    ko.components.register('Help', {
-        require : 'topics/Help'
-    });
-
     ko.components.register('sidebarwidget', {
         require : 'widgets/sidebarwidget'
     });
@@ -229,7 +201,24 @@ require([
 
     };
 
-    ko.applyBindings(new PhiViewModel(), document.getElementById('wrapper'));
+    jquery.get('/config.json', null, function(config) {
+
+            var topics = [];
+            if (config && config.plugins ) {
+                for ( var p in config.plugins ) {
+                    var plugin = config.plugins[p];
+                    if (plugin.component && plugin.component.key && plugin.component.lib) {
+                        if (false == ko.components.isRegistered(plugin.component.key)) {
+                            ko.components.register(plugin.component.key, { require: plugin.component.lib });
+                        }
+                    }
+
+                    topics.push(p);
+                }
+            }
+            ko.applyBindings(new PhiViewModel(topics), document.getElementById('wrapper'));
+    });
+
 
     jquery("#toolbar").click(function() {
         jquery("#content").animate({

@@ -203,20 +203,33 @@ require([
 
     jquery.get('/config.json', null, function(config) {
 
+        // merge user config into global config
+        jquery.get('/fg-home/Phi/config.json', null, function(userConfig) {
+            for ( var p in userConfig.plugins ) {
+              config.plugins[p] = userConfig.plugins[p];
+            }
+
             var topics = [];
             if (config && config.plugins ) {
                 for ( var p in config.plugins ) {
                     var plugin = config.plugins[p];
-                    if (plugin.component && plugin.component.key && plugin.component.lib) {
-                        if (false == ko.components.isRegistered(plugin.component.key)) {
-                            ko.components.register(plugin.component.key, { require: plugin.component.lib });
+                    if (plugin.component) {
+                        if (false == ko.components.isRegistered(p)) {
+                            ko.components.register(p, { require: plugin.component });
                         }
                     }
 
                     topics.push(p);
                 }
             }
+
+            topics.sort(function(a,b) {
+              indexa = config.plugins[a].index || 0;
+              indexb = config.plugins[b].index || 0;
+              return indexa - indexb;
+            });
             ko.applyBindings(new PhiViewModel(topics), document.getElementById('wrapper'));
+        });
     });
 
 

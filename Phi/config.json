@@ -1,45 +1,33 @@
 {
   "plugins": {
     "Aircraft": {
-      "component": {
-        "key": "Aircraft",
-        "lib": "topics/Aircraft"
-      }
+      "index": 100,
+      "component": "topics/Aircraft"
     },
 
     "Environment": {
-      "component": {
-        "key": "Environment",
-        "lib": "topics/Environment"
-      }
+      "index": 200,
+      "component": "topics/Environment"
     },
 
     "Map": {
-      "component": {
-        "key": "Map",
-        "lib": "topics/Map"
-      }
+      "index": 300,
+      "component": "topics/Map"
     },
 
     "Tools": {
-      "component": {
-        "key": "Tools",
-        "lib": "topics/Tools"
-      }
+      "index": 400,
+      "component": "topics/Tools"
     },
 
     "Simulator": {
-      "component": {
-        "key": "Simulator",
-        "lib": "topics/Simulator"
-      }
+      "index": 500,
+      "component": "topics/Simulator"
     },
 
     "Help": {
-      "component": {
-        "key": "Help",
-        "lib": "topics/Help"
-      }
+      "index": 600,
+      "component": "topics/Help"
     }
   }
 }

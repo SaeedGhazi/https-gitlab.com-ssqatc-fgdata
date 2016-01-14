@@ -175,9 +175,23 @@ define(['knockout'], function(ko) {
             }
         }
 
-        self.makeObservablesForAllProperties = function(target) {
-            for( var p in self.aliases ) {
+        self.addAliases = function(arg) {
+            self.aliases = self.aliases || {};
+
+            for( var p in arg ) {
                 if( self.aliases.hasOwnProperty(p) ) {
+                    console.log(p + " is already a property alias. Skipping.");
+                    continue;
+                }
+                self.aliases[p] = arg[p];
+            }
+        }
+
+        self.makeObservablesForAllProperties = function(target, aliases ) {
+            aliases = aliases || self.aliases;
+
+            for( var p in aliases ) {
+                if( aliases.hasOwnProperty(p) ) {
                     target[p] = ko.observable().extend({
                         fgprop : p
                     });

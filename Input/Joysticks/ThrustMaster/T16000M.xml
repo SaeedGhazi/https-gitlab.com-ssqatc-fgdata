@@ -12,10 +12,10 @@
 * Axis 3: throttle
 * Axis 4: Horizontal Hat
 * Axis 5: Vertical Hat
-* Axis 6: view left/right 
+* Axis 6: view left/right
 * Axis 7: view Up/down
 *
-* Button 0: (fire) all brakes 
+* Button 0: (fire) all brakes
 * Button 1: gear up/down
 * Button 4: trim up
 * Button 9: trim down
@@ -30,7 +30,7 @@
 * Button 12: Battery On/Off
 * Button 13: Fuel selector
 * Button 11: Magnetos
-* Button 14: starter  
+* Button 14: starter
 ************************************************************************
 -->
 
@@ -111,7 +111,7 @@
         <binding>
          <command>property-adjust</command>
          <property>/sim/current-view/goal-heading-offset-deg</property>
-         <step type="double">5.0</step>
+         <step type="double">2.0</step>
         </binding>
         </low>
         <high>
@@ -119,7 +119,7 @@
                 <binding>
                  <command>property-adjust</command>
                  <property>/sim/current-view/goal-heading-offset-deg</property>
-                 <step type="double">-5.0</step>
+                 <step type="double">-2.0</step>
               </binding>
          </high>
    </axis>
@@ -136,7 +136,7 @@
            <binding>
               <command>property-adjust</command>
               <property>/sim/current-view/goal-pitch-offset-deg</property>
-              <step type="double">5.0</step>
+              <step type="double">2.0</step>
            </binding>
        </low>
        <high>
@@ -144,7 +144,7 @@
          <binding>
            <command>property-adjust</command>
            <property>/sim/current-view/goal-pitch-offset-deg</property>
-           <step type="double">-5.0</step>
+           <step type="double">-2.0</step>
          </binding>
         </high>
     </axis>
@@ -164,7 +164,7 @@
   </mod-up>
  </button>
 
-<button n="4">
+<button n="1">
      <desc>Trigger</desc>
      <binding>
      <command>property-assign</command>
@@ -200,20 +200,20 @@
   </button>
 
   <button n="15">
-  <desc>Flaps up</desc>
-  <repeatable>false</repeatable>
-  <binding>
-  <command>nasal</command>
-  <script>controls.flapsDown(1)</script>
-  </binding>
-  <mod-up>
-  <binding>
-  <command>nasal</command>
-  <script>controls.flapsDown(0)</script>
-  </binding>
-  </mod-up>
+    <desc>Flaps up</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>controls.flapsDown(1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>controls.flapsDown(0)</script>
+      </binding>
+    </mod-up>
   </button>
- 
+
  <button n="10">
  <desc>Flaps down</desc>
  <repeatable>false</repeatable>
@@ -229,6 +229,7 @@
  </mod-up>
  </button>
 
+<!--
  <button n="1">
   <desc>Landing Gear Toggle</desc>
   <repeatable type="bool">false</repeatable>
@@ -237,23 +238,23 @@
    <script>controls.gearToggle()</script>
   </binding>
  </button>
-
+-->
 
 <button n="2">
-  <desc>Aileron trim left</desc>
-  <repeatable type="bool">true</repeatable>
+  <desc>Cycle view back</desc>
+  <repeatable>false</repeatable>
   <binding>
-  <command>nasal</command>
-  <script>controls.aileronTrim(-0.5)</script>
+   <command>nasal</command>
+   <script>view.stepView(-1)</script>
   </binding>
   </button>
 
 <button n="3">
-  <desc>Aileron trim right</desc>
-  <repeatable type="bool">true</repeatable>
+  <desc>Cycle view forward</desc>
+  <repeatable>false</repeatable>
   <binding>
-  <command>nasal</command>
-  <script>controls.aileronTrim(0.5)</script>
+   <command>nasal</command>
+   <script>view.stepView(1)</script>
   </binding>
   </button>
 
@@ -302,7 +303,7 @@
 <![CDATA[
   j = getprop("/controls/electric/battery-switch");
  if (j == 0)
- {  
+ {
   setprop("/controls/electric/battery-switch", 1);
 } else
 { setprop("/controls/electric/battery-switch", 0);
@@ -325,7 +326,7 @@
   setprop("/controls/fuel/tank/fuel_selector", 1);
   setprop("/controls/engines/engine/fuel-pump", 1);
 } else
-{ 
+{
   setprop("/controls/fuel/tank/fuel_selector", 0);
   setprop("/controls/engines/engine/fuel-pump", 0);
 }
@@ -345,7 +346,7 @@
 if (l == 0)
 {
  props.setAll("/controls/engines/engine", "magnetos", 1);
-} 
+}
 elsif ( l == 1 )
 {
  props.setAll("/controls/engines/engine", "magnetos", 2);
@@ -396,4 +397,3 @@ elsif ( l == 3 )
 
 
 <!-- end of TGF2PROUSB.xml -->
-

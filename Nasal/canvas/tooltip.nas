@@ -166,7 +166,7 @@ var Tooltip = {
   _remapValue: func(val)
   {
     if (me._mapping == "") return val;
-    if (me._mapping == "percent") return int(val * 100);
+    if (me._mapping == "percent") return math.round(val * 100);
 
     # TODO - translate me!
     if (me._mapping == "on-off") return (val == 1) ? "ON" : "OFF";

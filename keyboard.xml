@@ -111,7 +111,7 @@ top down before the key bindings are parsed.
 	<name>Tab</name>
 	<desc>Cycle mouse mode</desc>
 	<binding>
-    
+
         <condition>
             <not><property>/devices/status/keyboard/alt</property></not>
             <not><property>/devices/status/keyboard/ctrl</property></not>
@@ -130,7 +130,7 @@ top down before the key bindings are parsed.
    <property>/controls/flight/rudder</property>
    <step type="double">0.05</step>
   </binding>
-  
+
   <!-- Ctrl-M generates Enter, but we want to show the map in that case -->
   <mod-ctrl>
       <binding>
@@ -713,7 +713,7 @@ top down before the key bindings are parsed.
    <command>nasal</command>
    <script>aircraft.HUD.cycle_type()</script>
   </binding>
- </key> 
+ </key>
 
  <key n="77">
   <name>M</name>
@@ -769,12 +769,27 @@ top down before the key bindings are parsed.
 
  <key n="84">
   <name>T</name>
-  <desc>Decrease warp delta</desc>
+  <desc>Warp time backwards</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp-delta</property>
    <step type="int">-30</step>
+   <min type="int">-720</min>
   </binding>
+  <binding>
+   <command>show-message</command>
+   <id>warp-feedback</id>
+   <label>Current time: %s</label>
+   <property>/instrumentation/clock/local-short-string</property>
+  </binding>
+  <mod-up>
+    <binding>
+     <command>property-assign</command>
+     <property>/sim/time/warp-delta</property>
+      <value type="int">0</value>
+    </binding>
+  </mod-up>
  </key>
 
  <key n="86">
@@ -786,6 +801,9 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+
+<!-- disabling this method of adjusting warp following discussion on the
+ developer list
  <key n="87">
   <name>W</name>
   <desc>Decrease warp</desc>
@@ -795,6 +813,7 @@ top down before the key bindings are parsed.
    <step type="int">-60</step>
   </binding>
  </key>
+ -->
 
  <key n="88">
   <name>X</name>
@@ -1013,29 +1032,26 @@ top down before the key bindings are parsed.
 
  <key n="116">
   <name>t</name>
-  <desc>Increase warp delta</desc>
+  <desc>Warp time forwards</desc>
+  <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
    <property>/sim/time/warp-delta</property>
    <step type="int">30</step>
+   <max type="int">720</max>
   </binding>
   <binding>
-   <command>nasal</command>
-   <script>
-    (func(x) {
-        settimer(func {
-            x == t_id or return;
-            gui.popupTip("resetting warp");
-            setprop("/sim/time/warp-delta", 0);
-        }, 1, 1)
-    })(t_id += 1)
-   </script>
+   <command>show-message</command>
+   <id>warp-feedback</id>
+   <label>Current time: %s</label>
+   <property>/instrumentation/clock/local-short-string</property>
   </binding>
   <mod-up>
-   <binding>
-    <command>nasal</command>
-    <script>t_id += 1</script>
-   </binding>
+    <binding>
+     <command>property-assign</command>
+     <property>/sim/time/warp-delta</property>
+      <value type="int">0</value>
+    </binding>
   </mod-up>
  </key>
 
@@ -1048,6 +1064,7 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+<!--
  <key n="119">
   <name>w</name>
   <desc>Increase warp</desc>
@@ -1056,7 +1073,7 @@ top down before the key bindings are parsed.
    <property>/sim/time/warp</property>
    <step type="int">60</step>
   </binding>
- </key>
+</key> -->
 
  <key n="120">
   <name>x</name>

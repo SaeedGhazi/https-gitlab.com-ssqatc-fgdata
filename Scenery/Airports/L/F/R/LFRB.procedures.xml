@@ -1015,6 +1015,7 @@
                 <BankLimit>25</BankLimit>
                 <Sp_Turn>Auto</Sp_Turn>
             </Sid_Waypoint>
+	</Sid>
 	<Star Name="ANLEV5C" Runways="All">
             <Star_Waypoint ID="1">
                 <Name>ANLEV</Name>

@@ -203,8 +203,11 @@ require([
 
     jquery.get('/config.json', null, function(config) {
 
+        var userConfig = {}
         // merge user config into global config
-        jquery.get('/fg-home/Phi/config.json', null, function(userConfig) {
+        var jqxhr = jquery.get('/fg-home/Phi/config.json', null, function(data) {
+          userConfig = data;
+        }).always(function(){
             for ( var p in userConfig.plugins ) {
               config.plugins[p] = userConfig.plugins[p];
             }

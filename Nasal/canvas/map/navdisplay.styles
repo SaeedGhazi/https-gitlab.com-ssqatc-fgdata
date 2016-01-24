@@ -902,6 +902,7 @@ var NDStyles = {
 							var angle = L/radius;
 							var factor = 346/(0.5*nd.rangeNm());
 							radius = radius*factor;
+							if (radius > 65535) radius = 65535; # prevent 16-bit overflow
 							var y = radius*math.sin(angle);
 							var x = (1-math.cos(angle))*radius;
 							if (rollDeg < 0) {

@@ -80,31 +80,44 @@
 	</axis>
 
 	<!-- The next two axes are the view hat -->
-
-	<axis>
-		<desc>Lat-Hat</desc>
-		<number>
-			<unix>4</unix>
-			<mac>4</mac>
-			<windows>6</windows>
-		</number>
+	<axis n="4">
+	 <desc>View Direction</desc>
+	 <low>
+		<repeatable>true</repeatable>
 		<binding>
-			<command>property-scale</command>
-			<property>/sim/current-view/axes/lat</property>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-heading-offset-deg</property>
+		 <step type="double">5.0</step>
 		</binding>
+	 </low>
+	 <high>
+		<repeatable>true</repeatable>
+		<binding>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-heading-offset-deg</property>
+		 <step type="double">-5.0</step>
+		</binding>
+	 </high>
 	</axis>
 
-	<axis>
-		<desc>Long-Hat</desc>
-		<number>
-			<unix>5</unix>
-			<mac>5</mac>
-			<windows>7</windows>
-		</number>
+	<axis n="5">
+	 <desc>View Elevation</desc>
+	 <low>
+		<repeatable>true</repeatable>
 		<binding>
-			<command>property-scale</command>
-			<property>/sim/current-view/axes/long</property>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-pitch-offset-deg</property>
+		 <step type="double">5.0</step>
 		</binding>
+	 </low>
+	 <high>
+		<repeatable>true</repeatable>
+		<binding>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-pitch-offset-deg</property>
+		 <step type="double">-5.0</step>
+		</binding>
+	 </high>
 	</axis>
 
 	<button n="0">

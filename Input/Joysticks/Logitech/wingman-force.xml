@@ -99,22 +99,48 @@ $Id$
  </axis>
 
  <!-- The next two axes are the view hat -->
-
  <axis n="3">
-  <desc>View left/right</desc>
-  <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/lat</property>
-  </binding>
+  <desc>View Direction</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">5.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-heading-offset-deg</property>
+    <step type="double">-5.0</step>
+   </binding>
+  </high>
  </axis>
 
  <axis n="4">
-  <desc>View up/down</desc>
-  <binding>
-   <command>property-scale</command>
-   <property>/sim/current-view/axes/long</property>
-  </binding>
+  <desc>View Elevation</desc>
+  <low>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">5.0</step>
+   </binding>
+  </low>
+  <high>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>property-adjust</command>
+    <property>/sim/current-view/goal-pitch-offset-deg</property>
+    <step type="double">-5.0</step>
+   </binding>
+  </high>
  </axis>
+
+
+
 
  <button n="0">
   <desc>Brakes</desc>

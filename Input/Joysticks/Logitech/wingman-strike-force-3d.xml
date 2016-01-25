@@ -72,21 +72,44 @@ $Id$
 	</axis>
 
 	<!-- The next two axes are the view hat -->
-
 	<axis n="4">
-		<desc>View left</desc>
+	 <desc>View Direction</desc>
+	 <low>
+		<repeatable>true</repeatable>
 		<binding>
-			<command>property-scale</command>
-			<property>/sim/current-view/axes/lat</property>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-heading-offset-deg</property>
+		 <step type="double">5.0</step>
 		</binding>
+	 </low>
+	 <high>
+		<repeatable>true</repeatable>
+		<binding>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-heading-offset-deg</property>
+		 <step type="double">-5.0</step>
+		</binding>
+	 </high>
 	</axis>
 
 	<axis n="5">
-		<desc>View right</desc>
+	 <desc>View Elevation</desc>
+	 <low>
+		<repeatable>true</repeatable>
 		<binding>
-			<command>property-scale</command>
-			<property>/sim/current-view/axes/long</property>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-pitch-offset-deg</property>
+		 <step type="double">5.0</step>
 		</binding>
+	 </low>
+	 <high>
+		<repeatable>true</repeatable>
+		<binding>
+		 <command>property-adjust</command>
+		 <property>/sim/current-view/goal-pitch-offset-deg</property>
+		 <step type="double">-5.0</step>
+		</binding>
+	 </high>
 	</axis>
 
 	<button n="3">

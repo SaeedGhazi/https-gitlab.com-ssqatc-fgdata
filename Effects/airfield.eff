@@ -19,7 +19,10 @@
 		    <wrap-t>repeat</wrap-t>
 		    <internal-format>normalized</internal-format>
 		</texture>
+		<base_layer_magnification>5.0</base_layer_magnification>
+		<overlay_layer_magnification>4.0</overlay_layer_magnification>
 		<use_overlay>0</use_overlay>
+		<use_color_overlay>1</use_color_overlay>
 		<grit_alpha>1.0</grit_alpha>
 		<overlay_bias>0.0</overlay_bias>
 		<overlay_alpha>1.0</overlay_alpha>
@@ -204,6 +207,16 @@
 	<name>overlay_alpha</name>
 	<type>float</type>
 	<value><use>overlay_alpha</use></value>
+      </uniform>
+      <uniform>
+	<name>base_layer_magnification</name>
+	<type>float</type>
+	<value><use>base_layer_magnification</use></value>
+      </uniform>
+     <uniform>
+	<name>overlay_layer_magnification</name>
+	<type>float</type>
+	<value><use>overlay_layer_magnification</use></value>
       </uniform>
       <uniform>
         <name>cloud_self_shading</name>
@@ -474,6 +487,11 @@
 	<name>use_overlay</name>
 	<type>int</type>
 	<value>	<use>use_overlay</use></value>
+      </uniform>
+      <uniform>
+	<name>use_color_overlay</name>
+	<type>int</type>
+	<value>	<use>use_color_overlay</use></value>
       </uniform>
       <uniform>
 	<name>use_searchlight</name>

@@ -33,6 +33,8 @@ uniform float snow_thickness_factor;
 uniform float grit_alpha;
 uniform float overlay_bias;
 uniform float overlay_alpha;
+uniform float base_layer_magnification;
+uniform float overlay_layer_magnification;
 uniform float wetness;
 uniform float air_pollution;
 uniform float season;
@@ -44,6 +46,7 @@ uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
 uniform int use_overlay;
+uniform int use_color_overlay;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
@@ -151,7 +154,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
 // get the texels
 
-    texel = texture2D(texture, gl_TexCoord[0].st * 5.0); 
+    texel = texture2D(texture, gl_TexCoord[0].st * base_layer_magnification); 
     float local_autumn_factor = texel.a;
 
     float distortion_factor = 1.0;
@@ -161,22 +164,23 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
     if (quality_level > 3)
 	{
 	//snow_texel = texture2D(snow_texture, gl_TexCoord[0].st);
-	float sfactor;
+
 	snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_50m + 0.1* (1.0 - noise_10m) );
 	snow_texel.a = 1.0;
 	noise_term = 0.1 * (noise_50m-0.5);
-	sfactor = 1.0;//sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
-	noise_term = noise_term + 0.2 * (noise_10m -0.5) * (1.0 - smoothstep(10000.0*sfactor, 16000.0*sfactor, dist)  ) ;
-	noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1200.0 * sfactor, 2000.0 * sfactor, dist)  ) ;
-	if (dist < 1000.0*sfactor){ noise_term = noise_term + 0.3 * (noise_1m -0.5) * (1.0 - smoothstep(500.0 * sfactor, 1000.0 *sfactor, dist)  );}
+
+	noise_term = noise_term + 0.2 * (noise_10m -0.5) * (1.0 - smoothstep(10000.0, 16000.0, dist)  ) ;
+	noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1200.0 , 2000.0 , dist)  ) ;
+	if (dist < 1000.0){ noise_term = noise_term + 0.3 * (noise_1m -0.5) * (1.0 - smoothstep(500.0 , 1000.0 , dist)  );}
 	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
 	}
 
 if (use_overlay == 1)
 	{
-	overlay_texel = texture2D(overlay_texture, gl_TexCoord[0].st * 4.0);
+	overlay_texel = texture2D(overlay_texture, gl_TexCoord[0].st * overlay_layer_magnification);
 
-	texel = mix(texel, overlay_texel, overlay_alpha * smoothstep(0.45, 0.65, overlay_bias + (0.5 * noise_1m + 0.1 * noise_2m + 0.4 * noise_10m)));
+	texel.rgb = mix(texel.rgb, overlay_texel.rgb,  overlay_texel.a * overlay_alpha * smoothstep(0.45, 0.65, overlay_bias + (0.5 * noise_1m + 0.1 * noise_2m + 0.4 * noise_10m)));
+
 
 	}
 
@@ -203,11 +207,14 @@ if ((dist < 3000.0)&& (quality_level > 3) && (wetness>0.0))
 
 // color and shade variation of the grass
 
+if (use_color_overlay)
+	{
 	float nfact_1m = 3.0 * (noise_1m - 0.5) * detail_fade(1.0, abs(ct),dist);//* (1.0 - smoothstep(3000.0, 6000.0, dist/ abs(ct)));
 	float nfact_5m = 2.0 * (noise_5m - 0.5) * detail_fade(2.0, abs(ct),dist);;
 	float nfact_10m = 1.0 * (noise_10m - 0.5);
 	texel.rgb = texel.rgb * (0.85 + 0.1 * (nfact_1m * detail_fade(1.0, abs(ct),dist) + nfact_5m + nfact_10m) * grit_alpha);
     texel.r = texel.r * (1.0 + 0.14 * smoothstep(0.5,0.7, 0.33*(2.0 * noise_10m + (1.0-noise_5m))));
+	}
 
 
 // autumn colors

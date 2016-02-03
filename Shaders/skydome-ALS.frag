@@ -32,6 +32,7 @@ uniform float parhelic;
 uniform float aurora_strength;
 uniform float aurora_hsize;
 uniform float aurora_vsize;
+uniform float aurora_ray_factor;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
@@ -93,6 +94,11 @@ void main()
   float cbeta = dot ( normalize(lightFull.xy), normalize(nView.xy));
   float costheta = ct;
 
+  // some noise
+
+  float hNoise_03 = Noise2D(vec2(0.0,cphi), 0.3);
+  float hNoiseAurora = Noise2D(vec2(0.001 * osg_SimulationTime,cphi + nView.x + nView.y), 0.07) * 0.2 * aurora_ray_factor;
+
   // position of the horizon line
 
   float lAltitude = alt + delta_z;
@@ -130,15 +136,21 @@ void main()
   
   float hArg = dot(nView, direction);
 
-  
-  float aurora_v = smoothstep(0.2 - 0.6 * aurora_vsize, 0.2, costheta) * (1.0- smoothstep(0.3, 0.3 + aurora_vsize, costheta));
+
+  float aurora_v = smoothstep(0.2 - 0.6 * aurora_vsize * (1.0 - 0.8* aurora_ray_factor) , 0.2 , costheta +  hNoiseAurora) * (1.0- smoothstep(0.3, 0.3 + aurora_vsize, costheta + hNoiseAurora));
+  aurora_v *= (1.0 + 5.0 * aurora_ray_factor * (1.0 -smoothstep(0.2 - 0.6 * aurora_vsize * (1.0 - 0.8* aurora_ray_factor), 0.3, costheta + hNoiseAurora)));
+
   float aurora_h = smoothstep(1.0 - aurora_hsize, 1.0, hArg);
   float aurora_time = 0.01 * osg_SimulationTime;  
 
   vec3 auroraBaseColor = vec3 (0.0, 0.2, 0.1);
 
+  float aurora_ray = mix(1.0, Noise2D(vec2(cbeta, 0.01 * aurora_time), 0.001), aurora_ray_factor);
+
   float aurora_visible_strength = 0.3 + 0.7 * Noise2D(vec2(costheta + aurora_time, 0.5 * nView.x + 0.3 * nView.y + aurora_time), 0.1) ;
+  aurora_visible_strength *= aurora_ray;
   float aurora_fade_in = 1.0 - smoothstep(0.1, 0.2, length(color.rgb));
+
 
 
   color.rgb += auroraBaseColor * aurora_v * aurora_h * aurora_fade_in * aurora_visible_strength * aurora_strength;
@@ -285,7 +297,7 @@ float hazeBlendAngle = max(0.01,1000.0/avisibility + 0.3 * (1.0 - smoothstep(500
 float altFactor = smoothstep(-300.0, 0.0, delta_z);
 float altFactor2 =  0.2 + 0.8 * smoothstep(-3000.0, 0.0, delta_z);
 hazeBlendAngle = hazeBlendAngle + 0.1 * altFactor;
-hazeBlendAngle = hazeBlendAngle +  (1.0-horizon_roughness) * altFactor2 * 0.1 *  Noise2D(vec2(0.0,cphi), 0.3);
+hazeBlendAngle = hazeBlendAngle +  (1.0-horizon_roughness) * altFactor2 * 0.1 *  hNoise_03;
 
 terrainHazeColor = clamp(terrainHazeColor,0.0,1.0);
 

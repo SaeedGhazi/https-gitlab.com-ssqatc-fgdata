@@ -446,7 +446,7 @@
     <vsize type="double" userarchive="n">0.4</vsize>
     <hsize type="double" userarchive="n">0.4</hsize>
     <patchiness type="double" userarchive="n">0.0</patchiness>
-    <ray-factor type="double" userarchive="n">1.0</ray-factor>
+    <ray-factor type="double" userarchive="n">0.0</ray-factor>
     <upper-alt-factor type="double" userarchive="n">1.0</upper-alt-factor>
     <penetration-factor type="double" userarchive="n">0.0</penetration-factor>
     <afterglow type="double" userarchive="n">0.0</afterglow>

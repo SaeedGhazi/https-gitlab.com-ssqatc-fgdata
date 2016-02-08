@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- 757 no longer used, replaced by A321 -->
+
 <trafficlist>
 <aircraft>
 <model>Aircraft/A319/A319-Aegean.xml</model>
@@ -435,7 +438,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/757/757-Aegean.xml</model>
+<model>Aircraft/A321/A321-Aegean.xml</model>
 <livery>AEE</livery>
 <airline>AEE</airline>
 <home-port>LGTS</home-port>

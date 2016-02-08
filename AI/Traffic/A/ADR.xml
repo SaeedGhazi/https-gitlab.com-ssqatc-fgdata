@@ -29,7 +29,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A322/A322-Adria.xml</model>
+<model>Aircraft/A320/A320-Adria.xml</model>
 <livery>ADR</livery>
 <airline>ADR</airline>
 <home-port>LJLJ</home-port>

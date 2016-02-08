@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- Aircraft/M11/M11-EvaAir.xml no longer used replaced with Aircraft/A332/A332-EvaAir.xml -->
+
 <trafficlist>
 <aircraft>
 <model>Aircraft/A321/A321-EvaAir.xml</model>
@@ -659,7 +662,7 @@
 <heavy>TRUE</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/M11/M11-EvaAir.xml</model>
+<model>Aircraft/A332/A332-EvaAir.xml</model>
 <livery>EVA</livery>
 <airline>EVA</airline>
 <home-port>RCTP</home-port>
@@ -673,7 +676,7 @@
 <heavy>TRUE</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/M11/M11-EvaAir.xml</model>
+<model>Aircraft/A332/A332-EvaAir.xml</model>
 <livery>EVA</livery>
 <airline>EVA</airline>
 <home-port>RCTP</home-port>
@@ -687,7 +690,7 @@
 <heavy>TRUE</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/M11/M11-EvaAir.xml</model>
+<model>Aircraft/A332/A332-EvaAir.xml</model>
 <livery>EVA</livery>
 <airline>EVA</airline>
 <home-port>RCTP</home-port>
@@ -701,7 +704,7 @@
 <heavy>TRUE</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/M11/M11-EvaAir.xml</model>
+<model>Aircraft/A332/A332-EvaAir.xml</model>
 <livery>EVA</livery>
 <airline>EVA</airline>
 <home-port>RCTP</home-port>
@@ -715,7 +718,7 @@
 <heavy>TRUE</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/M11/M11-EvaAir.xml</model>
+<model>Aircraft/A332/A332-EvaAir.xml</model>
 <livery>EVA</livery>
 <airline>EVA</airline>
 <home-port>RCTP</home-port>
@@ -729,7 +732,7 @@
 <heavy>TRUE</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/M11/M11-EvaAir.xml</model>
+<model>Aircraft/A332/A332-EvaAir.xml</model>
 <livery>EVA</livery>
 <airline>EVA</airline>
 <home-port>RCTP</home-port>

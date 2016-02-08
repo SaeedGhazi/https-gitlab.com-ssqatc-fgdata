@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 
 <!-- DH4 replaced by   Aircraft/Dash8/Dash8-400-Default.xml
-     S20  replaced by   Aircraft/beech-200/beech-200-hb-gpg.xml -->
+     S20  replaced by   Aircraft/beech-200/beech-200-hb-gpg.xml
+     A333 not used replaced with A332	 -->
 
 <trafficlist>
     <aircraft>
@@ -1265,7 +1266,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-Alitalia.xml</model>
+        <model>Aircraft/A332/A332-Alitalia.xml</model>
         <livery>AZA</livery>
         <airline>AZA</airline>
         <home-port>LIRF</home-port>
@@ -1279,7 +1280,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-Alitalia.xml</model>
+        <model>Aircraft/A332/A332-Alitalia.xml</model>
         <livery>AZA</livery>
         <airline>AZA</airline>
         <home-port>LIRF</home-port>
@@ -1293,7 +1294,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-Alitalia.xml</model>
+        <model>Aircraft/A332/A332-Alitalia.xml</model>
         <livery>AZA</livery>
         <airline>AZA</airline>
         <home-port>LIRF</home-port>
@@ -1307,7 +1308,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-Alitalia.xml</model>
+        <model>Aircraft/A332/A332-Alitalia.xml</model>
         <livery>AZA</livery>
         <airline>AZA</airline>
         <home-port>LIMC</home-port>
@@ -1321,7 +1322,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-Alitalia.xml</model>
+        <model>Aircraft/A332/A332-Alitalia.xml</model>
         <livery>AZA</livery>
         <airline>AZA</airline>
         <home-port>LIRF</home-port>

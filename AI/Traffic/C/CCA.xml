@@ -1933,7 +1933,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/757/757-AirChina.xml</model>
+        <model>Aircraft/757/757-200-AirChina.xml</model>
         <livery>CCA</livery>
         <airline>CCA</airline>
         <home-port>ZBAA</home-port>
@@ -1947,7 +1947,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/757/757-AirChina.xml</model>
+        <model>Aircraft/757/757-200-AirChina.xml</model>
         <livery>CCA</livery>
         <airline>CCA</airline>
         <home-port>ZBAA</home-port>
@@ -1961,7 +1961,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/757/757-AirChina.xml</model>
+        <model>Aircraft/757/757-200-AirChina.xml</model>
         <livery>CCA</livery>
         <airline>CCA</airline>
         <home-port>ZBAA</home-port>
@@ -1975,7 +1975,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/757/757-AirChina.xml</model>
+        <model>Aircraft/757/757-200-AirChina.xml</model>
         <livery>CCA</livery>
         <airline>CCA</airline>
         <home-port>ZBAA</home-port>
@@ -1989,7 +1989,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/757/757-AirChina.xml</model>
+        <model>Aircraft/757/757-200-AirChina.xml</model>
         <livery>CCA</livery>
         <airline>CCA</airline>
         <home-port>ZBAA</home-port>
@@ -2003,7 +2003,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/757/757-AirChina.xml</model>
+        <model>Aircraft/757/757-200-AirChina.xml</model>
         <livery>CCA</livery>
         <airline>CCA</airline>
         <home-port>ZBAA</home-port>

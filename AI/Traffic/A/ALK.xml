@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <trafficlist>
 <aircraft>
-<model>Aircraft/A322/A322-Srilankan.xml</model>
+<model>Aircraft/A320/A320-Srilankan.xml</model>
 <livery>ALK</livery>
 <airline>ALK</airline>
 <home-port>VCBI</home-port>
@@ -15,7 +15,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A322/A322-Srilankan.xml</model>
+<model>Aircraft/A320/A320-Srilankan.xml</model>
 <livery>ALK</livery>
 <airline>ALK</airline>
 <home-port>VCBI</home-port>
@@ -29,7 +29,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A322/A322-Srilankan.xml</model>
+<model>Aircraft/A320/A320-Srilankan.xml</model>
 <livery>ALK</livery>
 <airline>ALK</airline>
 <home-port>VCBI</home-port>
@@ -43,7 +43,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A322/A322-Srilankan.xml</model>
+<model>Aircraft/A320/A320-Srilankan.xml</model>
 <livery>ALK</livery>
 <airline>ALK</airline>
 <home-port>VCBI</home-port>

@@ -3,7 +3,7 @@
 <trafficlist>
 
 	<aircraft>
-        <model>Aircraft/pa-28/pa-28-g-warh.xml</model> <!-- should be Piper PA-28-161 -->
+        <model>Aircraft/pa-28/pa-28-g-warh.xml</model>
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>G-WARH</required-aircraft>
@@ -17,7 +17,7 @@
     </aircraft>
 	
     <aircraft>
-        <model>AI/Aircraft/c172/ph-gys.xml</model> <!-- should be Cessna C152 -->
+        <model>Aircraft/c172/ph-gys.xml</model> <!-- should be Cessna C152 -->
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-ACH</required-aircraft>

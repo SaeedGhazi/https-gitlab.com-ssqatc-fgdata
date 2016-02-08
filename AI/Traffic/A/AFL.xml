@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+
+<!-- 767 no longer used replaced with A332
+     Il-96 no longer used replaced with A333
+     SSJ100 SSJ95 no AI model temporarily replace with A319 -->
+
 <trafficlist>
   <aircraft>
     <model>Aircraft/A319/A319-Aeroflot.xml</model>
@@ -1513,98 +1518,98 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>VP-BAV</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>VP-BAX</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>VP-BAY</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>VP-BAZ</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>VP-BDI</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>NO-REG</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Aeroflot.xml</model>
+    <model>Aircraft/A332/A332-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763AFL</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
-    <radius>24</radius>
+    <offset>0</offset>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
     <registration>NO-REG</registration>
@@ -1667,7 +1672,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/IL96/Il-96-Aeroflot.xml</model>
+    <model>Aircraft/A333/A333-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1681,7 +1686,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/IL96/Il-96-Aeroflot.xml</model>
+    <model>Aircraft/A333/A333-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1695,7 +1700,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/IL96/Il-96-Aeroflot.xml</model>
+    <model>Aircraft/A333/A333-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1709,7 +1714,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/IL96/Il-96-Aeroflot.xml</model>
+    <model>Aircraft/A333/A333-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1723,7 +1728,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/IL96/Il-96-Aeroflot.xml</model>
+    <model>Aircraft/A333/A333-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1737,7 +1742,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/IL96/Il-96-Aeroflot.xml</model>
+    <model>Aircraft/A333/A333-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1751,7 +1756,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1765,7 +1770,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1779,7 +1784,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1793,7 +1798,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1807,7 +1812,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1821,7 +1826,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1835,7 +1840,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1849,7 +1854,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1863,7 +1868,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>
@@ -1877,7 +1882,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Aeroflot.xml</model>
+    <model>Aircraft/A319/A319-Aeroflot.xml</model>
     <livery>AFL</livery>
     <airline>AFL</airline>
     <home-port>UUEE</home-port>

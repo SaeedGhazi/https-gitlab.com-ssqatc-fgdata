@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+
+<!--      AT7-AirAlgerie.xml no model or livery, temporarily replaced by ATR42-default.xml
+	 763-AirAlgerie.xml temporarily replaced with A332-AirAlgerie.xml -->
+
+
 <trafficlist>
     <aircraft>
         <model>Aircraft/A332/A332-AirAlgerie.xml</model>
@@ -71,7 +76,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -85,7 +90,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -99,7 +104,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -113,7 +118,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -127,7 +132,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -141,7 +146,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -155,7 +160,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -169,7 +174,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -183,7 +188,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -197,7 +202,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -211,7 +216,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/AT7/AT7-AirAlgerie.xml</model>
+        <model>Aircraft/ATR42/ATR42-default.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -533,7 +538,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/763/763-AirAlgerie.xml</model>
+        <model>Aircraft/A332/A332-AirAlgerie.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -547,7 +552,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/763/763-AirAlgerie.xml</model>
+        <model>Aircraft/A332/A332-AirAlgerie.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>
@@ -561,7 +566,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/763/763-AirAlgerie.xml</model>
+        <model>Aircraft/A332/A332-AirAlgerie.xml</model>
         <livery>DAH</livery>
         <airline>DAH</airline>
         <home-port>DAAG</home-port>

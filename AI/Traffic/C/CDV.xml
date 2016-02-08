@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- Cessna208Caravan/C208-SKOL.xml temporarily replaced by   beech-200/beech-200-hb-gpg.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/Cessna208Caravan/C208-SKOL.xml</model>
+    <model>Aircraft/beech-200/beech-200-hb-gpg.xml</model>
     <livery>CDV</livery>
     <airline>CDV</airline>
     <home-port>UNKM</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Cessna208Caravan/C208-SKOL.xml</model>
+    <model>Aircraft/beech-200/beech-200-hb-gpg.xml</model>
     <livery>CDV</livery>
     <airline>CDV</airline>
     <home-port>UNKM</home-port>

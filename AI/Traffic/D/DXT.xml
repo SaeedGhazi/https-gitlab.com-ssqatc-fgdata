@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!--  PC12/PC12-Dexter.xml temporarily replaced by beech-200/beech-200-EK2042.xml  -->
+
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/PC12/PC12-Dexter.xml</model>
+    <model>Aircraft/beech-200/beech-200-EK2042.xml</model>
     <livery>DXT</livery>
     <airline>DXT</airline>
     <home-port>UUBB</home-port>

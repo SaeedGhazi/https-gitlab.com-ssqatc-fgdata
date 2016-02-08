@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- 777-CHINA-SOUTHERN.xml temporarily replaced with A332-ChinaSouthern.xml -->
+
 <trafficlist>
     <aircraft>
-        <model>Aircraft/777/777-CHINA-SOUTHERN.xml</model>
+        <model>Aircraft/A332/A332-ChinaSouthern.xml</model>
         <livery>CSN</livery>
         <airline>CSN</airline>
         <home-port>ZBAA</home-port>
@@ -15,7 +18,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/777/777-CHINA-SOUTHERN.xml</model>
+        <model>Aircraft/A332/A332-ChinaSouthern.xml</model>
         <livery>CSN</livery>
         <airline>CSN</airline>
         <home-port>ZBAA</home-port>
@@ -29,7 +32,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/777/777-CHINA-SOUTHERN.xml</model>
+        <model>Aircraft/A332/A332-ChinaSouthern.xml</model>
         <livery>CSN</livery>
         <airline>CSN</airline>
         <home-port>ZBAA</home-port>
@@ -43,7 +46,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/777/777-CHINA-SOUTHERN.xml</model>
+        <model>Aircraft/A332/A332-ChinaSouthern.xml</model>
         <livery>CSN</livery>
         <airline>CSN</airline>
         <home-port>ZBAA</home-port>

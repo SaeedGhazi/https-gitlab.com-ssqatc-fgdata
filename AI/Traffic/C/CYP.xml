@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- A332-Cyprus.xml  temporarily replaced with A332-default -->
+
 <trafficlist>
     <aircraft>
         <model>Aircraft/A319/A319-Cyprus.xml</model>
@@ -127,7 +130,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A332/A332-Cyprus.xml</model>
+        <model>Aircraft/A332/A332-default.xml</model>
         <livery>CYP</livery>
         <airline>CYP</airline>
         <home-port>LCLK</home-port>
@@ -141,7 +144,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A332/A332-Cyprus.xml</model>
+        <model>Aircraft/A332/A332-default.xml</model>
         <livery>CYP</livery>
         <airline>CYP</airline>
         <home-port>LCLK</home-port>

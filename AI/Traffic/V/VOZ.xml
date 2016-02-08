@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- erj195/erj195-VirginBlue.xml - temporarily replaced with ERJ195/ERJ195-default.xml -->
+
 <trafficlist>
     
     <!--Virgin Blue 73Gfleet--> 
@@ -537,7 +540,7 @@
         <heavy>false</heavy>    
     </aircraft>    
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -551,7 +554,7 @@
         <heavy>false</heavy>
     </aircraft>     
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -565,7 +568,7 @@
         <heavy>false</heavy>
     </aircraft>              
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -579,7 +582,7 @@
         <heavy>false</heavy>
     </aircraft>  
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -594,7 +597,7 @@
     </aircraft>
      
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -609,7 +612,7 @@
     </aircraft>
               
    <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -623,7 +626,7 @@
         <heavy>false</heavy>
     </aircraft> 
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -638,7 +641,7 @@
     </aircraft>
      
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -653,7 +656,7 @@
     </aircraft>
               
    <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -667,7 +670,7 @@
         <heavy>false</heavy>
     </aircraft> 
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -682,7 +685,7 @@
     </aircraft>
      
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -697,7 +700,7 @@
     </aircraft>
       <!--        
    <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -711,7 +714,7 @@
         <heavy>false</heavy>
     </aircraft> 
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -726,7 +729,7 @@
     </aircraft>
      
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -741,7 +744,7 @@
     </aircraft>
               
    <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -755,7 +758,7 @@
         <heavy>false</heavy>
     </aircraft> 
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -770,7 +773,7 @@
     </aircraft>
      -->
     <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -785,7 +788,7 @@
     </aircraft>
               
    <aircraft>
-        <model>Aircraft/erj195/erj195-VirginBlue.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>

@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- Fokker-100-AllianceAirlines.xml - temporarily replaced with 717/717-default.xml
+fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
     <aircraft>
-        <model>Aircraft/Fokker-100/Fokker-100-AllianceAirlines.xml</model>
+        <model>Aircraft/717/717-default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
@@ -15,7 +19,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-100/Fokker-100-AllianceAirlines.xml</model>
+        <model>Aircraft/717/717-default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
@@ -29,7 +33,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-100/Fokker-100-AllianceAirlines.xml</model>
+        <model>Aircraft/717/717-default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
@@ -43,7 +47,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-100/Fokker-100-AllianceAirlines.xml</model>
+        <model>Aircraft/717/717-default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
@@ -57,7 +61,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-100/Fokker-100-AllianceAirlines.xml</model>
+        <model>Aircraft/717/717-default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
@@ -71,7 +75,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-100/Fokker-100-AllianceAirlines.xml</model>
+        <model>Aircraft/717/717-default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
@@ -2731,13 +2735,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-50/fokker50-AllianceAirlines.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>F50-QFA</required-aircraft>
         <actype>F50</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2745,13 +2749,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-50/fokker50-AllianceAirlines.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>F50-QFA</required-aircraft>
         <actype>F50</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2759,13 +2763,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-50/fokker50-AllianceAirlines.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>F50-QFA</required-aircraft>
         <actype>F50</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2773,13 +2777,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-50/fokker50-AllianceAirlines.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>F50-QFA</required-aircraft>
         <actype>F50</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2787,13 +2791,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-50/fokker50-AllianceAirlines.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>F50-QFA</required-aircraft>
         <actype>F50</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -2801,13 +2805,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Fokker-50/fokker50-AllianceAirlines.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>F50-QFA</required-aircraft>
         <actype>F50</actype>
-        <offset>9</offset>
+        <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

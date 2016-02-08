@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- 767/767-AirAstana.xml - temporarily replaced with  A300/A300-default -->
+
 <trafficlist>
     <aircraft>
-        <model>Aircraft/767/767-AirAstana.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>KZR</livery>
         <airline>KZR</airline>
         <home-port>UATG</home-port>
@@ -15,7 +18,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-AirAstana.xml</model>
+        <model>Aircraft/Dash8/Dash8-Default.xml</model>
         <livery>KZR</livery>
         <airline>KZR</airline>
         <home-port>UATG</home-port>

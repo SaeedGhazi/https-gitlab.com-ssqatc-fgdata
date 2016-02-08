@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-Tochikiston.xml - temporarily replaced with 738/738-default.xml
+757/757-200-Tochikiston.xml - temporarily replaced with 757/757-200-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-Tochikiston.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>TJK</livery>
     <airline>TJK</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B733TJK</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +19,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Tochikiston.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>TJK</livery>
     <airline>TJK</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B735TJK</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,13 +33,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Tochikiston.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>TJK</livery>
     <airline>TJK</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B735TJK</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-Tochikiston.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>TJK</livery>
     <airline>TJK</airline>
     <home-port>UTDD</home-port>

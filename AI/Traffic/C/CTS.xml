@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- TU134/Tu-134-Centre-South.xml - temporarily replaced with 717/717-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -43,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -57,7 +60,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -71,7 +74,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -85,7 +88,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -99,7 +102,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -113,7 +116,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>
@@ -127,7 +130,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Centre-South.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>CTS</livery>
     <airline>CTS</airline>
     <home-port>UUOB</home-port>

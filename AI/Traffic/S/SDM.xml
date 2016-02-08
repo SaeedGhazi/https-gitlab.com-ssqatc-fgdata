@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- An148-Rossiya.xml - no model or livery temporarily replaced with A319-Rossiya.xml -->
+
 <trafficlist>
   <aircraft>
     <model>Aircraft/A319/A319-Rossiya.xml</model>
@@ -351,7 +354,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Rossiya.xml</model>
+    <model>Aircraft/A319/A319-Rossiya.xml</model>
     <livery>SDM</livery>
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
@@ -365,7 +368,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Rossiya.xml</model>
+    <model>Aircraft/A319/A319-Rossiya.xml</model>
     <livery>SDM</livery>
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
@@ -379,7 +382,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Rossiya.xml</model>
+    <model>Aircraft/A319/A319-Rossiya.xml</model>
     <livery>SDM</livery>
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
@@ -393,7 +396,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Rossiya.xml</model>
+    <model>Aircraft/A319/A319-Rossiya.xml</model>
     <livery>SDM</livery>
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
@@ -407,7 +410,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Rossiya.xml</model>
+    <model>Aircraft/A319/A319-Rossiya.xml</model>
     <livery>SDM</livery>
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
@@ -421,7 +424,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Rossiya.xml</model>
+    <model>Aircraft/A319/A319-Rossiya.xml</model>
     <livery>SDM</livery>
     <airline>SDM</airline>
     <home-port>ULLI</home-port>

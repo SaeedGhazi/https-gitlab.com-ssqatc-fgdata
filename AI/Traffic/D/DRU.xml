@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-Alrosa.xml - temporarily replaced with Dash8/Dash8-Default.xml
+737/737-800-Alrosa.xml - temporarily replaced with 738/738-default.xml
+TU134/Tu-134-Alrosa.xml - temporarily replaced with 717/717-default.xml
+TU154/Tu-154-Alrosa.xml - temporarily replaced with A321/A321-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-Alrosa.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -15,7 +21,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Alrosa.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -29,7 +35,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Alrosa.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -43,7 +49,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Alrosa.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -57,7 +63,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Alrosa.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -71,7 +77,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Alrosa.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -85,7 +91,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU134/Tu-134-Alrosa.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -99,7 +105,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -113,7 +119,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -127,7 +133,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -141,7 +147,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -155,7 +161,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -169,7 +175,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>
@@ -183,7 +189,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU154/Tu-154-Alrosa.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>DRU</livery>
     <airline>DRU</airline>
     <home-port>UERR</home-port>

@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-Somon_Air.xml - temporarily replaced with A319/A319-default.xml
+737/737-800-Somon_Air.xml - temporarily replaced with 738/738-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-Somon_Air.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>SMR</livery>
     <airline>SMR</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B733SMR</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +19,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Somon_Air.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>SMR</livery>
     <airline>SMR</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B733SMR</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,13 +33,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Somon_Air.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SMR</livery>
     <airline>SMR</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B738SMR</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -43,13 +47,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Somon_Air.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SMR</livery>
     <airline>SMR</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B738SMR</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -57,13 +61,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Somon_Air.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SMR</livery>
     <airline>SMR</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B739SMR</required-aircraft>
     <actype>Boeing_737-900</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -71,13 +75,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Somon_Air.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SMR</livery>
     <airline>SMR</airline>
     <home-port>UTDD</home-port>
     <required-aircraft>B739SMR</required-aircraft>
     <actype>Boeing_737-900</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>

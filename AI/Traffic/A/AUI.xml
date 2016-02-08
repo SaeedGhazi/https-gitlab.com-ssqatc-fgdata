@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
+
+<!-- AN148/An148-MezhdAirUkr.xml - temporarily replaced with A319/A319-default.xml
+737/737-MezhdAirUkr.xml - temporarily replaced with 738/738-default.xml -->
+
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN148/An148-MezhdAirUkr.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -15,7 +20,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-MezhdAirUkr.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -29,7 +34,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-MezhdAirUkr.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -43,13 +48,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -57,13 +62,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -71,13 +76,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -85,13 +90,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -99,13 +104,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -113,13 +118,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -127,13 +132,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -141,13 +146,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B733AUI</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -155,13 +160,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B734AUI</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -169,13 +174,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B734AUI</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -183,13 +188,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B734AUI</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -197,13 +202,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B734AUI</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -211,13 +216,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B734AUI</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -225,13 +230,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -239,13 +244,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -253,13 +258,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -267,13 +272,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -281,13 +286,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -295,13 +300,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -309,13 +314,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -323,13 +328,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -337,13 +342,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -351,13 +356,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -365,13 +370,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -379,13 +384,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -393,13 +398,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-MezhdAirUkr.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
     <required-aircraft>B735AUI</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>

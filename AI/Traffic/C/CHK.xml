@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- An24-ChukotAvia.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-ChukotAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>CHK</livery>
     <airline>CHK</airline>
     <home-port>UHMA</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-ChukotAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>CHK</livery>
     <airline>CHK</airline>
     <home-port>UHMA</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-ChukotAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>CHK</livery>
     <airline>CHK</airline>
     <home-port>UHMA</home-port>
@@ -43,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-ChukotAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>CHK</livery>
     <airline>CHK</airline>
     <home-port>UHMA</home-port>

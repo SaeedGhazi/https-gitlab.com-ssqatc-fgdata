@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- CRJ-200/CRJ-200-Rusline.xml - temporarily replaced with CRJ-200/CRJ-200-default.xml
+E120/E120-Rusline.xml - temporarily replaced with beech-200/beech-200-vh-zmy.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -113,7 +117,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -127,7 +131,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -141,7 +145,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Rusline.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -155,7 +159,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E120/E120-Rusline.xml</model>
+    <model>Aircraft/beech-200/beech-200-vh-zmy.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -169,7 +173,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E120/E120-Rusline.xml</model>
+    <model>Aircraft/beech-200/beech-200-vh-zmy.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>
@@ -183,7 +187,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E120/E120-Rusline.xml</model>
+    <model>Aircraft/beech-200/beech-200-vh-zmy.xml</model>
     <livery>RLU</livery>
     <airline>RLU</airline>
     <home-port>UUDD</home-port>

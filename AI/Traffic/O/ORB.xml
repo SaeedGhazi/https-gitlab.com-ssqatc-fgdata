@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-800-Orenair.xml - temporarily replaced with 738/738-default.xml
+777/777-200-Orenair.xml - temporarily replaced with A332/A332-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +19,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,13 +33,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -43,13 +47,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -57,13 +61,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -71,13 +75,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -85,13 +89,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -99,13 +103,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -113,13 +117,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -127,13 +131,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -141,13 +145,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -155,13 +159,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -169,13 +173,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -183,13 +187,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -197,13 +201,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -211,13 +215,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -225,13 +229,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -239,13 +243,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -253,13 +257,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Orenair.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
     <required-aircraft>B738ORB</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -267,7 +271,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Orenair.xml</model>
+    <model>Aircraft/A332/A332-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
@@ -281,7 +285,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Orenair.xml</model>
+    <model>Aircraft/A332/A332-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>
@@ -295,7 +299,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Orenair.xml</model>
+    <model>Aircraft/A332/A332-default.xml</model>
     <livery>ORB</livery>
     <airline>ORB</airline>
     <home-port>UWOO</home-port>

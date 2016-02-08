@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-PolarniyeAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xml
+L410/LET410-PolarniyeAirlines.xml - temporarily replaced with beech-200/beech-200-vh-zmy.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-PolarniyeAirlines.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-PolarniyeAirlines.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-PolarniyeAirlines.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-PolarniyeAirlines.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-PolarniyeAirlines.xml</model>
+    <model>Aircraft/beech-200/beech-200-vh-zmy.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-PolarniyeAirlines.xml</model>
+    <model>Aircraft/beech-200/beech-200-vh-zmy.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-PolarniyeAirlines.xml</model>
+    <model>Aircraft/beech-200/beech-200-vh-zmy.xml</model>
     <livery>RKA</livery>
     <airline>RKA</airline>
     <home-port>UEEE</home-port>

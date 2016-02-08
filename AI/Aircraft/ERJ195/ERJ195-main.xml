@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <description>Embraer Regional Jet 195</description>
+ <author>Ian(Yves) Tolosa, Original Model Innis Cunningham</author> 
+ <path>Models/ERJ195.ac</path>
+  
+     <animation>
+		<type>select</type>
+		<object-name>Gear_Open</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>150</value>
+			</less-than>
+		</condition>
+	</animation>
+    
+      <animation>
+		<type>select</type>
+		<object-name>Gear_Closed</object-name>
+		<condition>
+			<more-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>150</value>
+			</more-than>
+		</condition>
+	</animation>
+</PropertyList>

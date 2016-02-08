@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-SCAT.xml - temporarily replaced with A319/A319-default.xml
+CRJ-200/CRJ-200-SCAT.xml - temporarily replaced with CRJ-200/CRJ-200-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-SCAT.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>
     <required-aircraft>B735VSV</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +19,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-SCAT.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>
     <required-aircraft>B735VSV</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-SCAT.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-SCAT.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-SCAT.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-SCAT.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-SCAT.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>VSV</livery>
     <airline>VSV</airline>
     <home-port>UAII</home-port>

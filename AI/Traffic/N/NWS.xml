@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- A321/A321-Nordwind.xml - temporarily replaced with   A321/A321-default.xml
+767/767-Nordwind.xml - temporarily replaced with  A300/A300-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A321/A321-Nordwind.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-Nordwind.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-Nordwind.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-Nordwind.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-Nordwind.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-Nordwind.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
@@ -85,13 +89,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
@@ -99,13 +103,13 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
@@ -113,13 +117,13 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
@@ -127,13 +131,13 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
@@ -141,13 +145,13 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
@@ -155,13 +159,13 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>
@@ -169,13 +173,13 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-Nordwind.xml</model>
+    <model>Aircraft/A300/A300-default.xml</model>
     <livery>NWS</livery>
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
     <actype>Boeing_767-300</actype>
-    <offset>-3</offset>
+    <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>767</performance-class>

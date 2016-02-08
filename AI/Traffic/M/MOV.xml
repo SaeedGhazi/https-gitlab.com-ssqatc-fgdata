@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- 757/757-200-VimAvia.xml - temporarily replaced with 757/757-200-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -43,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -57,7 +60,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -71,7 +74,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -85,7 +88,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -99,7 +102,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -113,7 +116,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>
@@ -127,7 +130,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-VimAvia.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>MOV</livery>
     <airline>MOV</airline>
     <home-port>UUDD</home-port>

@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-Globus.xml - temporarily replaced with A320/A320-default.xml
+737/737-800-Globus.xml - temporarily replaced with 738/738-default.xml
+ -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-Globus.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B734GLP</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +19,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Globus.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B734GLP</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,13 +33,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Globus.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B734GLP</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -43,13 +47,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Globus.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B734GLP</required-aircraft>
     <actype>Boeing_737-400</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -57,13 +61,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -71,13 +75,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -85,13 +89,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -99,13 +103,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -113,13 +117,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -127,13 +131,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -141,13 +145,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -155,13 +159,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -169,13 +173,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Globus.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GLP</livery>
     <airline>GLP</airline>
     <home-port>UUDD</home-port>
     <required-aircraft>B738GLP</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>

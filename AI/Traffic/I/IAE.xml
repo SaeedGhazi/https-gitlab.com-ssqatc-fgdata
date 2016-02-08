@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-IrAero.xml - temporarily replaced with Dash8/Dash8-Default.xml
+AN26/An26-IrAero.xml - temporarily replaced with Dash8/Dash8-Default.xml
+CRJ-200/CRJ-200-IrAero.xml - temporarily replaced with CRJ-200/CRJ-200-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -15,7 +20,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -29,7 +34,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -43,7 +48,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -57,7 +62,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -71,7 +76,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -85,7 +90,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -99,7 +104,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -113,7 +118,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -127,7 +132,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -141,7 +146,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -155,7 +160,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -169,7 +174,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -183,7 +188,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -197,7 +202,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-IrAero.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -211,7 +216,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-IrAero.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -225,7 +230,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-IrAero.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -239,7 +244,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-IrAero.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -253,7 +258,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-IrAero.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -267,7 +272,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-IrAero.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>
@@ -281,7 +286,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-IrAero.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>IAE</livery>
     <airline>IAE</airline>
     <home-port>UIII</home-port>

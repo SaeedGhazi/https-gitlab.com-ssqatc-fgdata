@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- A320/A320-AirBishkek.xml - temporarily replaced with A320/A320-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A320/A320-AirBishkek.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>EAA</livery>
     <airline>EAA</airline>
     <home-port>UCFM</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-AirBishkek.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>EAA</livery>
     <airline>EAA</airline>
     <home-port>UCFM</home-port>

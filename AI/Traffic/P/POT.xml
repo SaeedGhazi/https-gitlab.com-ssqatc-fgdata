@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN148/An148-Polet.xml - temporarily replaced with A319/A319-default.xml
+saab-340/Saab-340-Polet.xml - temporarily replaced with beech-200/beech-200-lz-yuk.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN148/An148-Polet.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Polet.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -113,7 +117,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -127,7 +131,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -141,7 +145,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>
@@ -155,7 +159,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/Saab-340-Polet.xml</model>
+    <model>Aircraft/beech-200/beech-200-lz-yuk.xml</model>
     <livery>POT</livery>
     <airline>POT</airline>
     <home-port>UUOO</home-port>

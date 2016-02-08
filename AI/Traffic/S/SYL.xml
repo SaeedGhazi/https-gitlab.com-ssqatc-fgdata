@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
+
+<!-- AN140/An140-Yakutiya.xml  - temporarily replaced with ATR42/ATR42-default.xml
+737/737-800-Yakutiya.xml - temporarily replaced with 738/738-default.xml
+757/757-200-Yakutiya.xml - temporarily replaced with 757/757-200-default.xml
+Dash8/Dash8-Yakutiya.xml - temporarily replaced with Dash8/Dash8-Default.xml
+SSJ100/SSJ95-Yakutiya.xml - temporarily replaced with A319/A319-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN140/An140-Yakutiya.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -15,7 +22,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN140/An140-Yakutiya.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -29,7 +36,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN140/An140-Yakutiya.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -43,7 +50,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN140/An140-Yakutiya.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -57,13 +64,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B737SYL</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -71,13 +78,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B737SYL</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -85,13 +92,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B737SYL</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -99,13 +106,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B737SYL</required-aircraft>
     <actype>Boeing_737-700</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -113,13 +120,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B738SYL</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -127,13 +134,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B738SYL</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -141,13 +148,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Yakutiya.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
     <required-aircraft>B738SYL</required-aircraft>
     <actype>Boeing_737-800</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -155,7 +162,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-Yakutiya.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -169,7 +176,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-Yakutiya.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -183,7 +190,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-Yakutiya.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -197,7 +204,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-Yakutiya.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -211,7 +218,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/757/757-200-Yakutiya.xml</model>
+    <model>Aircraft/757/757-200-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -225,7 +232,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Yakutiya.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -239,7 +246,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Yakutiya.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>
@@ -253,7 +260,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/SSJ100/SSJ95-Yakutiya.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>SYL</livery>
     <airline>SYL</airline>
     <home-port>UEEE</home-port>

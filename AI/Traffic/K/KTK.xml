@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-KatekAvia.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -43,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -57,7 +60,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -71,7 +74,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -85,7 +88,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -99,7 +102,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>
@@ -113,7 +116,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-KatekAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KTK</livery>
     <airline>KTK</airline>
     <home-port>UNKL</home-port>

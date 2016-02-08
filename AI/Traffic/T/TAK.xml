@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- A319/A319-Tatarstan.xml - temporarily replaced with A319/A319-default.xml
+737/737-Tatarstan.xml - temporarily replaced with 738/738-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A319/A319-Tatarstan.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>TAK</livery>
     <airline>TAK</airline>
     <home-port>UWKD</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A319/A319-Tatarstan.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>TAK</livery>
     <airline>TAK</airline>
     <home-port>UWKD</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A319/A319-Tatarstan.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>TAK</livery>
     <airline>TAK</airline>
     <home-port>UWKD</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A319/A319-Tatarstan.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>TAK</livery>
     <airline>TAK</airline>
     <home-port>UWKD</home-port>
@@ -57,13 +61,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Tatarstan.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>TAK</livery>
     <airline>TAK</airline>
     <home-port>UWKD</home-port>
     <required-aircraft>B735TAK</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>

@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- YAK42/Yak-42-GrozniyAvia.xml - temporarily replaced with 717/717-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/YAK42/Yak-42-GrozniyAvia.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>GOZ</livery>
     <airline>GOZ</airline>
     <home-port>URMG</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK42/Yak-42-GrozniyAvia.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>GOZ</livery>
     <airline>GOZ</airline>
     <home-port>URMG</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK42/Yak-42-GrozniyAvia.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>GOZ</livery>
     <airline>GOZ</airline>
     <home-port>URMG</home-port>
@@ -43,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK42/Yak-42-GrozniyAvia.xml</model>
+    <model>Aircraft/717/717-default.xml</model>
     <livery>GOZ</livery>
     <airline>GOZ</airline>
     <home-port>URMG</home-port>

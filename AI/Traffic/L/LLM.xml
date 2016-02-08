@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
+
+<!-- A320/A320-Yamal.xml - temporarily replaced with A320/A320-default.xml
+737/737-Yamal.xml - temporarily replaced with 738/738-default.xml
+CRJ-200/CRJ-200-Yamal.xml - temporarily replaced with CRJ-200/CRJ-200-default.xml
+L410/LET410-Yamal.xml - temporarily replaced with beech-200/beech-200-g-saxn.xml
+MI8/Mi-8-Yamal.xml - temporarily replaced with pa-28/pa-28-hb-png.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -15,7 +22,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -29,7 +36,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -43,7 +50,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -57,7 +64,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -71,7 +78,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -85,7 +92,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Yamal.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -99,13 +106,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -113,13 +120,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -127,13 +134,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -141,13 +148,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -155,13 +162,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -169,13 +176,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -183,13 +190,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -197,13 +204,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -211,13 +218,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-Yamal.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
     <required-aircraft>B735LLM</required-aircraft>
     <actype>Boeing_737-500</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -225,7 +232,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -239,7 +246,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -253,7 +260,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -267,7 +274,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -281,7 +288,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -295,7 +302,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -309,7 +316,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Yamal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -323,7 +330,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-Yamal.xml</model>
+    <model>Aircraft/beech-200/beech-200-g-saxn.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -337,7 +344,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-Yamal.xml</model>
+    <model>Aircraft/beech-200/beech-200-g-saxn.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -351,7 +358,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Yamal.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -365,7 +372,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Yamal.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -379,7 +386,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Yamal.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -393,7 +400,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Yamal.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>
@@ -407,7 +414,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Yamal.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>LLM</livery>
     <airline>LLM</airline>
     <home-port>USDD</home-port>

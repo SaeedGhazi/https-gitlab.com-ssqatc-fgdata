@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN28/An28-Vostok.xml - temporarily replaced with ATR42/ATR42-default.xml
+MI8/Mi-8-Vostok.xml - temporarily replaced with pa-28/pa-28-hb-png.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN28/An28-Vostok.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN28/An28-Vostok.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -113,7 +117,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -127,7 +131,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -141,7 +145,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -155,7 +159,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -169,7 +173,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -183,7 +187,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -197,7 +201,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>
@@ -211,7 +215,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VTK</livery>
     <airline>VTK</airline>
     <home-port>UHTT</home-port>

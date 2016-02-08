@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- 747-400-AirBridgeCardo.xml - temporarily replaced with A345/A345-default.xml
+ -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -15,7 +18,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -29,7 +32,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -43,7 +46,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -57,7 +60,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -71,7 +74,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -85,7 +88,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -99,7 +102,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -113,7 +116,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -127,7 +130,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>
@@ -141,7 +144,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-AirBridgeCardo.xml</model>
+    <model>Aircraft/A345/A345-default.xml</model>
     <livery>ABW</livery>
     <airline>ABW</airline>
     <home-port>UUEE</home-port>

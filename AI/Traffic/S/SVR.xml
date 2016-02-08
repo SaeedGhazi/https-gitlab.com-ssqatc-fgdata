@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- A320/A320-UralAirlines.xml - temporarily replaced with A320/A320-default.xml
+A321/A321-UralAirlines.xml - temporarily replaced with A321/A321-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -113,7 +117,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -127,7 +131,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -141,7 +145,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -155,7 +159,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -169,7 +173,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -183,7 +187,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -197,7 +201,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -211,7 +215,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -225,7 +229,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -239,7 +243,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -253,7 +257,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-UralAirlines.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -267,7 +271,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -281,7 +285,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -295,7 +299,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -309,7 +313,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -323,7 +327,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -337,7 +341,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -351,7 +355,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -365,7 +369,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>
@@ -379,7 +383,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A321/A321-UralAirlines.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>SVR</livery>
     <airline>SVR</airline>
     <home-port>USSS</home-port>

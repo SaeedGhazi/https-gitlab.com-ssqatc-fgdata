@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN26/An26-Aviastar-Tu.xml - temporarily replaced with Dash8/Dash8-Default.xml
+TU204/Tu-204-Aviastar-Tu.xml - temporarily replaced with  A321/A321-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN26/An26-Aviastar-Tu.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>TUP</livery>
     <airline>TUP</airline>
     <home-port>UUDD</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Aviastar-Tu.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>TUP</livery>
     <airline>TUP</airline>
     <home-port>UUDD</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Aviastar-Tu.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>TUP</livery>
     <airline>TUP</airline>
     <home-port>UUDD</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Aviastar-Tu.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>TUP</livery>
     <airline>TUP</airline>
     <home-port>UUDD</home-port>

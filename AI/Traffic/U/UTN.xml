@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- ATR42/ATR42-UtairUkraine.xml - temporarily replaced with ATR42/ATR42-default.xml
+CRJ-200/CRJ-200-UtairUkraine.xml - temporarily replaced with CRJ-200/CRJ-200-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-UtairUkraine.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-UtairUkraine.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-UtairUkraine.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-UtairUkraine.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-UtairUkraine.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-UtairUkraine.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-UtairUkraine.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>UTN</livery>
     <airline>UTN</airline>
     <home-port>UKCW</home-port>

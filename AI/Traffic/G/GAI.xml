@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-800-Moskovia.xml - temporarily replaced with 738/738-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-800-Moskovia.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GAI</livery>
     <airline>GAI</airline>
     <home-port>UUDD</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-800-Moskovia.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>GAI</livery>
     <airline>GAI</airline>
     <home-port>UUDD</home-port>

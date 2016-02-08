@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-HabarovskieAirlines.xml  - temporarily replaced with ATR42/ATR42-default.xml
+YAK40/Yak-40-HabarovskieAirlines.xml - temporarily replaced with ERJ145/ERJ145-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK40/Yak-40-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK40/Yak-40-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK40/Yak-40-HabarovskieAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-default.xml</model>
     <livery>RNI</livery>
     <airline>RNI</airline>
     <home-port>UHNN</home-port>

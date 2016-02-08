@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN140/An140-MotorSich.xml - temporarily replaced with ATR42/ATR42-default.xml
+AN24/An24-MotorSich.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN140/An140-MotorSich.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>MSI</livery>
     <airline>MSI</airline>
     <home-port>UKDE</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-MotorSich.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>MSI</livery>
     <airline>MSI</airline>
     <home-port>UKDE</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-MotorSich.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>MSI</livery>
     <airline>MSI</airline>
     <home-port>UKDE</home-port>

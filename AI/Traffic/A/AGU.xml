@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN148/An148-Angara.xml - temporarily replaced with A319/A319-default.xml
+     AN24/An24-Angara.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN148/An148-Angara.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Angara.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN148/An148-Angara.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Angara.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Angara.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Angara.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Angara.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Angara.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>
@@ -113,7 +117,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Angara.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>AGU</livery>
     <airline>AGU</airline>
     <home-port>UIII</home-port>

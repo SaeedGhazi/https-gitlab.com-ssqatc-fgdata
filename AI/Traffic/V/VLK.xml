@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
+
+<!-- A320/A320-Vladivostok.xml - temporarily replaced with A320/A320-default.xml
+MI8/Mi-8-Vladivostok.xml - temporarily replaced with pa-28/pa-28-hb-png.xml
+TU204/Tu-204-Vladivostok.xml - temporarily replaced with   A321/A321-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A320/A320-Vladivostok.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -15,7 +20,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Vladivostok.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -29,7 +34,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Vladivostok.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -43,7 +48,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Vladivostok.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -57,7 +62,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Vladivostok.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -71,7 +76,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Vladivostok.xml</model>
+    <model>Aircraft/A320/A320-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -85,7 +90,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -99,7 +104,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -113,7 +118,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -127,7 +132,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -141,7 +146,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -155,7 +160,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -169,7 +174,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -183,7 +188,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/MI8/Mi-8-Vladivostok.xml</model>
+    <model>Aircraft/pa-28/pa-28-hb-png.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -197,7 +202,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Vladivostok.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -211,7 +216,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Vladivostok.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -225,7 +230,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Vladivostok.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -239,7 +244,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Vladivostok.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -253,7 +258,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Vladivostok.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>
@@ -267,7 +272,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/TU204/Tu-204-Vladivostok.xml</model>
+    <model>Aircraft/A321/A321-default.xml</model>
     <livery>VLK</livery>
     <airline>VLK</airline>
     <home-port>UHWW</home-port>

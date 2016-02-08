@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-PskovAvia.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-PskovAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>PSW</livery>
     <airline>PSW</airline>
     <home-port>ULOO</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-PskovAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>PSW</livery>
     <airline>PSW</airline>
     <home-port>ULOO</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-PskovAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>PSW</livery>
     <airline>PSW</airline>
     <home-port>ULOO</home-port>
@@ -43,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-PskovAvia.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>PSW</livery>
     <airline>PSW</airline>
     <home-port>ULOO</home-port>

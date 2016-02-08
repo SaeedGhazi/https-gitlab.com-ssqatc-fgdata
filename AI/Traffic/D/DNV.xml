@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- A319/A319-DonAvia.xml - temporarily replaced with A319/A319-default.xml
+737/737-DonAvia.xml - temporarily replaced with 738/738-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/A319/A319-DonAvia.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A319/A319-DonAvia.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A319/A319-DonAvia.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A319/A319-DonAvia.xml</model>
+    <model>Aircraft/A319/A319-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-DonAvia.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-DonAvia.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-DonAvia.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-DonAvia.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>DNV</livery>
     <airline>DNV</airline>
     <home-port>URRR</home-port>

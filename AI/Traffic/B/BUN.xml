@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- An24-BuryatskieAvialinii.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-BuryatskieAvialinii.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>BUN</livery>
     <airline>BUN</airline>
     <home-port>UIUU</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-BuryatskieAvialinii.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>BUN</livery>
     <airline>BUN</airline>
     <home-port>UIUU</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-BuryatskieAvialinii.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>BUN</livery>
     <airline>BUN</airline>
     <home-port>UIUU</home-port>

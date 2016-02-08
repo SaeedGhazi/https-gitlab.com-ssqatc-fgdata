@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-AviaTrafficCompany.xml - temporarily replaced with 738/738-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-AviaTrafficCompany.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AVJ</livery>
     <airline>AVJ</airline>
     <home-port>UCFM</home-port>
     <required-aircraft>B733AVJ</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +18,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-AviaTrafficCompany.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AVJ</livery>
     <airline>AVJ</airline>
     <home-port>UCFM</home-port>
     <required-aircraft>B733AVJ</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,13 +32,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-AviaTrafficCompany.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>AVJ</livery>
     <airline>AVJ</airline>
     <home-port>UCFM</home-port>
     <required-aircraft>B733AVJ</required-aircraft>
     <actype>Boeing_737-300</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>

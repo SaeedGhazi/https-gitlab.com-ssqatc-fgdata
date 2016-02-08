@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- L410/LET410-Orenburzhie.xml - temporarily replaced with beech-200/beech-200-g-saxn.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/L410/LET410-Orenburzhie.xml</model>
+    <model>Aircraft/beech-200/beech-200-g-saxn.xml</model>
     <livery>ORN</livery>
     <airline>ORN</airline>
     <home-port>UWOO</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-Orenburzhie.xml</model>
+    <model>Aircraft/beech-200/beech-200-g-saxn.xml</model>
     <livery>ORN</livery>
     <airline>ORN</airline>
     <home-port>UWOO</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/L410/LET410-Orenburzhie.xml</model>
+    <model>Aircraft/beech-200/beech-200-g-saxn.xml</model>
     <livery>ORN</livery>
     <airline>ORN</airline>
     <home-port>UWOO</home-port>

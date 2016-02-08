@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- CRJ-200/CRJ-200-Severstal.xml - temporarily replaced with CRJ-200/CRJ-200-default.xml
+YAK40/Yak-40-Severstal.xml - temporarily replaced with ERJ145/ERJ145-default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Severstal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Severstal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Severstal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Severstal.xml</model>
+    <model>Aircraft/CRJ-200/CRJ-200-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK40/Yak-40-Severstal.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK40/Yak-40-Severstal.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/YAK40/Yak-40-Severstal.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-default.xml</model>
     <livery>SSF</livery>
     <airline>SSF</airline>
     <home-port>ULWC</home-port>

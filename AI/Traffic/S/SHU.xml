@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- 737/737-SahalinskieAT.xml - temporarily replaced with 738/738-default.xml
+Dash8/Dash8-SahalinskieAT.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-SahalinskieAT.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
     <required-aircraft>B732SHU</required-aircraft>
     <actype>Boeing_737-200</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -15,13 +19,13 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-SahalinskieAT.xml</model>
+    <model>Aircraft/738/738-default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
     <required-aircraft>B732SHU</required-aircraft>
     <actype>Boeing_737-200</actype>
-    <offset>10</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-SahalinskieAT.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-SahalinskieAT.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-SahalinskieAT.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-SahalinskieAT.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-SahalinskieAT.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>
@@ -99,7 +103,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-SahalinskieAT.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>SHU</livery>
     <airline>SHU</airline>
     <home-port>UHSS</home-port>

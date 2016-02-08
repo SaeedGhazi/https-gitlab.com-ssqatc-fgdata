@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
+
+<!-- AN24/An24-Tomsk.xml  - temporarily replaced with ATR42/ATR42-default.xml
+Cessna208Caravan/C208-Tomsk.xml - temporarily replaced by beech-200/beech-200-hb-gpg.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN24/An24-Tomsk.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>
@@ -15,7 +19,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Tomsk.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>
@@ -29,7 +33,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Tomsk.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>
@@ -43,7 +47,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Tomsk.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>
@@ -57,7 +61,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Tomsk.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>
@@ -71,7 +75,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN24/An24-Tomsk.xml</model>
+    <model>Aircraft/ATR42/ATR42-default.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>
@@ -85,7 +89,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Cessna208Caravan/C208-Tomsk.xml</model>
+    <model>Aircraft/beech-200/beech-200-hb-gpg.xml</model>
     <livery>TSK</livery>
     <airline>TSK</airline>
     <home-port>UNTT</home-port>

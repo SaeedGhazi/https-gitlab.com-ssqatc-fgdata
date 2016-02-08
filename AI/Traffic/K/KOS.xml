@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+
+<!-- AN26/An26-Kostromskoe.xml - temporarily replaced with Dash8/Dash8-Default.xml -->
+
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AN26/An26-Kostromskoe.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KOS</livery>
     <airline>KOS</airline>
     <home-port>UUBA</home-port>
@@ -15,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-Kostromskoe.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KOS</livery>
     <airline>KOS</airline>
     <home-port>UUBA</home-port>
@@ -29,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AN26/An26-Kostromskoe.xml</model>
+    <model>Aircraft/Dash8/Dash8-Default.xml</model>
     <livery>KOS</livery>
     <airline>KOS</airline>
     <home-port>UUBA</home-port>

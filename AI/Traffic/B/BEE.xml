@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<!-- Embraer-175 and 195  replaced by    Aircraft/ERJ145/ERJ145-BritishMidland.xml -->
+<!-- Embraer-175  replaced by   ERJ195/ERJ195-FlyBe.xml -->
 <trafficlist>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGNX</home-port>
@@ -30,7 +30,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -72,7 +72,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -114,7 +114,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -142,7 +142,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -184,7 +184,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -212,7 +212,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGGD</home-port>
@@ -240,7 +240,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPH</home-port>
@@ -254,7 +254,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPH</home-port>
@@ -296,7 +296,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGTE</home-port>
@@ -324,7 +324,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPF</home-port>
@@ -366,7 +366,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGJB</home-port>
@@ -380,7 +380,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EDDV</home-port>
@@ -408,7 +408,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGNS</home-port>
@@ -436,7 +436,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGJJ</home-port>
@@ -464,7 +464,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -478,7 +478,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGNT</home-port>
@@ -520,7 +520,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>
@@ -562,7 +562,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/Dash8/Dash8-400-Flybe.xml</model>
+        <model>Aircraft/Dash8/Dash8-400-Flybe-2015.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>
@@ -590,7 +590,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -604,7 +604,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -618,7 +618,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -632,7 +632,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -646,7 +646,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -660,7 +660,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -674,7 +674,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -688,7 +688,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPH</home-port>
@@ -702,7 +702,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPH</home-port>
@@ -716,7 +716,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGTE</home-port>
@@ -730,7 +730,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPF</home-port>
@@ -744,7 +744,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPF</home-port>
@@ -758,7 +758,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGJB</home-port>
@@ -772,7 +772,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPE</home-port>
@@ -786,7 +786,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPE</home-port>
@@ -800,7 +800,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGJJ</home-port>
@@ -814,7 +814,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -828,7 +828,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -842,7 +842,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -856,7 +856,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>
@@ -870,7 +870,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>
@@ -884,7 +884,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ145/ERJ145-BritishMidland.xml</model>
+        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>

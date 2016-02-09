@@ -67,7 +67,7 @@
                             </script>
                         </binding>
                     </input>
-                <slider>
+                <!--<slider>
                     <row>2</row>
                     <col>0</col>
                     <name>sl_year</name>
@@ -86,7 +86,7 @@
                             tod_setdate();
                         </script>
                     </binding>
-                </slider>
+                </slider>-->
                 <text>
                     <row>0</row>
                     <col>1</col>
@@ -112,7 +112,7 @@
                             </script>
                         </binding>
                     </combo>
-                <slider>
+                <!--<slider>
                     <row>2</row>
                     <col>1</col>
                     <name>sl_month</name>
@@ -132,7 +132,7 @@
                             tod_setdate();
                         </script>
                     </binding>
-                </slider>
+                </slider>-->
 
                 <text>
                     <row>0</row>
@@ -156,7 +156,7 @@
                         </script>
                     </binding>
                 </input>
-                <slider>
+                <!--<slider>
                     <row>2</row>
                     <col>2</col>
                     <name>sl_day</name>
@@ -175,7 +175,7 @@
                             tod_setdate();
                         </script>
                     </binding>
-                </slider>
+                </slider>-->
             </group>
             <!-- end of date setting -->
             <empty>
@@ -220,7 +220,7 @@
                     <property>/instrumentation/clock/local-short-string</property>
                 </text>
             </group>
-            <slider>
+            <!--<slider>
                 <row>2</row>
                 <col>0</col>
                 <name>sl_minute</name>
@@ -240,7 +240,7 @@
                         tod_setminuteofday(getprop("/sim/time/demand-minute-of-day"));
                     </script>
                 </binding>
-            </slider>
+            </slider>-->
             <hrule/>
 
 			<text>
@@ -414,7 +414,7 @@
 					<timeofday>midnight</timeofday>
 				</binding>
 			</button>
-            <group>
+            <!--<group>
                 <layout>hbox</layout>
                 <checkbox>
                     <property>sim/time/warp-easing</property>
@@ -427,7 +427,7 @@
                 <text>
                     <label>Smooth transition</label>
                 </text>
-            </group>
+            </group>-->
         </group>
 	</group>
 
@@ -451,7 +451,7 @@
                 var year = substr(dtv,0,4);
                 var month = substr(dtv,5,2);
                 var day = substr(dtv,8,2);
-                var daymax = gui.findElementByName(dlgRoot, "sl_day").getChild("max");
+                #var daymax = gui.findElementByName(dlgRoot, "sl_day").getChild("max");
                 var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
                 var monthmax = [31,28,31,30,31,30,31,31,30,31,30,31];
 
@@ -484,7 +484,7 @@
                       var second = substr(dtv,18,2);
                       var new_dt=sprintf("%04d-%02d-%02dT%02d:%02d:%02d",getprop("/sim/time/demand-year"),month,getprop("/sim/time/demand-day"),hour,minute,second*1);
                       setprop("/sim/time/gmt",new_dt);
-                      daymax.setValue(monthmax[month-1]);
+                      #daymax.setValue(monthmax[month-1]);
                       if (getprop("/sim/time/demand-day") > monthmax[month-1])
                           setprop("/sim/time/demand-day",sprintf("%02d",monthmax[month-1]));
                 }

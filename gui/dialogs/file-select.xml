@@ -162,9 +162,11 @@
 
 			var update = func(d) {
 				var entries = directory(d);
-				if (entries == nil)  # dir doesn't exist or no permissions
-					return 0;
-
+				var retval = 1;
+				if (entries == nil) { # dir doesn't exist or no permissions
+					entries = ["..", "Not found or access denied", "Ctrl-click .. for FG_ROOT", "Shift-click .. for FG_HOME","To allow more directories, add them to --fg-aircraft"];
+					retval = 0;
+				} else {
 				var files = [];
 				var dirs = [];
 				var hide = !dotfiles.getValue();
@@ -190,15 +192,16 @@
 					elsif (self.show_files and (!size(pattern) or matches(e)))
 						append(files, e);
 				}
+				var entries = sort(dirs, cmp) ~ sort(files, cmp);
+				}
 
 				list.removeChildren("value");
-				var entries = sort(dirs, cmp) ~ sort(files, cmp);
 				forindex (var i; entries)
 					list.getChild("value", i, 1).setValue(entries[i]);
 
 				dir.setValue(d);
 				gui.dialog_update(dlgname, "dir-input", "list");
-				return 1;
+				return retval;
 			}
 
 			var select = func {

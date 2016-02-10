@@ -3,12 +3,12 @@
 <PropertyList>
 	<nasal>
 		<open><![CDATA[
-		
+
 var assignButton = func(cmd) {
 
   var i = getprop("/sim/gui/dialogs/joystick-config/current-button");
   setprop("/sim/gui/dialogs/joystick-config/button[" ~ i ~ "]/binding", cmd);
-  
+
   joystick.writeConfig();
   fgcommand("reinit", props.Node.new({"subsystem": "input"}));
   fgcommand("dialog-close", props.Node.new({"dialog-name": "button-config"}));
@@ -53,23 +53,23 @@ var assignButton = func(cmd) {
 	</group>
 
 	<hrule/>
-	
+
 	<text>
 	  <halign>left</halign>
 	  <label>Select the command you wish to assign to this button.</label>
   </text>
-  
+
   <hrule/>
-  
+
   <group>
     <layout>table</layout>
-    
+
     <text>
       <row>0</row>
       <col>0</col>
-      <label>Flight surface trim</label>
+      <label>Flight Surface Trim</label>
     </text>
-    
+
     <button>
       <row>1</row>
       <col>0</col>
@@ -82,7 +82,7 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-    
+
     <button>
       <row>2</row>
       <col>0</col>
@@ -108,7 +108,7 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-    
+
     <button>
       <row>4</row>
       <col>0</col>
@@ -134,7 +134,7 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-    
+
     <button>
       <row>6</row>
       <col>0</col>
@@ -235,12 +235,96 @@ var assignButton = func(cmd) {
     <text>
       <row>0</row>
       <col>2</col>
-      <label>Other Aircraft Controls</label>
+      <label>Powerplant Controls</label>
     </text>
-    
+
     <button>
       <row>1</row>
       <col>2</col>
+      <halign>fill</halign>
+      <legend>Throttle Up</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Throttle Up");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>2</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>Throttle Down</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Throttle Down");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>3</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>Mixture Rich</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Mixture Rich");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>4</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>Mixture Lean</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Mixture Lean");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>5</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>Propeller Fine</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Propeller Fine");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>6</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>Propeller Coarse</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Propeller Coarse");
+        </script>
+      </binding>
+    </button>
+
+    <text>
+      <row>0</row>
+      <col>3</col>
+      <label>Other Aircraft Controls</label>
+    </text>
+
+    <button>
+      <row>1</row>
+      <col>3</col>
       <halign>fill</halign>
       <legend>Brakes</legend>
       <binding>
@@ -253,7 +337,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>2</row>
-      <col>2</col>
+      <col>3</col>
       <halign>fill</halign>
       <legend>FGCom PTT</legend>
       <binding>
@@ -266,7 +350,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>3</row>
-      <col>2</col>
+      <col>3</col>
       <halign>fill</halign>
       <legend>Trigger</legend>
       <binding>
@@ -276,10 +360,10 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-    
+
     <button>
       <row>4</row>
-      <col>2</col>
+      <col>3</col>
       <halign>fill</halign>
       <legend>Custom</legend>
       <binding>
@@ -292,7 +376,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>5</row>
-      <col>2</col>
+      <col>3</col>
       <halign>fill</halign>
       <legend>None</legend>
       <binding>
@@ -302,16 +386,16 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-        
+
     <text>
       <row>0</row>
-      <col>3</col>
+      <col>4</col>
       <label>View</label>
     </text>
-    
+
     <button>
       <row>1</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Decrease</legend>
       <binding>
@@ -321,10 +405,10 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-    
+
     <button>
       <row>2</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Increase</legend>
       <binding>
@@ -337,7 +421,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>3</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Cycle Forwards</legend>
       <binding>
@@ -350,7 +434,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>4</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Cycle Backwards</legend>
       <binding>
@@ -363,7 +447,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>5</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Left</legend>
       <binding>
@@ -376,7 +460,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>6</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Right</legend>
       <binding>
@@ -389,7 +473,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>7</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Up</legend>
       <binding>
@@ -402,7 +486,7 @@ var assignButton = func(cmd) {
 
     <button>
       <row>8</row>
-      <col>3</col>
+      <col>4</col>
       <halign>fill</halign>
       <legend>View Down</legend>
       <binding>
@@ -412,9 +496,9 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-    
+
   </group>
-  
+
   <group>
     <empty>
       <stretch>true</stretch>
@@ -433,5 +517,5 @@ var assignButton = func(cmd) {
       <stretch>true</stretch>
     </empty>
   </group>
-    
+
 </PropertyList>

@@ -17,7 +17,7 @@ var Axis = {
     m.inverted = 0;
     return m;
   },
-  
+
   clone: func() {
     var m = { parents: [Axis] };
     m.name = me.name;
@@ -26,23 +26,23 @@ var Axis = {
     m.inverted = me.inverted;
     return m;
   },
-  
+
   match: func(prop) {
     return 0;
   },
-  
+
   parse: func(prop) { },
 
   readProps: func(props) {},
-    
+
   getName: func() { return me.name; },
   getBinding: func(axis) { return props.Node.new(); },
   isInvertable: func() { return me.invertable; },
   isInverted: func() { return me.inverted; },
-  
-  setInverted: func(b) { 
+
+  setInverted: func(b) {
     if (me.invertable) me.inverted = b;
-  },  
+  },
 };
 
 var CustomAxis = {
@@ -57,10 +57,10 @@ var CustomAxis = {
     m.custom_binding = me.custom_binding;
     return m;
   },
-  
+
   match: func(prop) {
     var p = props.Node.new();
-    
+
     if (prop.getNode("binding") != nil) {
       props.copy(prop.getNode("binding"), p);
       me.custom_binding = p;
@@ -69,13 +69,13 @@ var CustomAxis = {
       return 0;
     }
   },
-  
+
   getBinding: func(axis) {
     var p = props.Node.new().getNode("axis[" ~ axis ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
-    props.copy(me.custom_binding, p.getNode("binding", 1));    
+    props.copy(me.custom_binding, p.getNode("binding", 1));
     return p;
-  },  
+  },
 };
 
 var UnboundAxis = {
@@ -88,11 +88,11 @@ var UnboundAxis = {
     var m = { parents: [UnboundAxis, Axis.new("None", "", 0) ] };
     return m;
   },
-  
+
   match: func(prop) {
     return 1;
   },
-  
+
   getBinding: func(axis) {
     return nil;
   },
@@ -112,21 +112,21 @@ var PropertyScaleAxis = {
     var m = { parents: [PropertyScaleAxis, Axis.new(me.name, me.prop, 1) ] };
 
     m.inverted = me.inverted;
-    
+
     m.prop= me.prop;
     m.factor = me.factor;
     m.offset = me.offset;
     return m;
   },
 
-  
+
   match: func(prop) {
     var cmd = prop.getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("binding", 1).getNode("property", 1).getValue();
     return ((cmd == "property-scale") and (p == me.prop));
   },
-  
-  parse: func(p) { 
+
+  parse: func(p) {
     bindingNode = p.getNode("binding", 1);
     me.prop = bindingNode.getNode("property", 1).getValue();
 
@@ -138,14 +138,14 @@ var PropertyScaleAxis = {
     me.inverted = (me.factor < 0);
     me.offset = bindingNode.getNode("offset", 1).getValue();
   },
-  
+
   getBinding: func(axis) {
     var p = props.Node.new();
     p = p.getNode("axis[" ~ axis ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
     p.getNode("binding", 1).getNode("command", 1).setValue("property-scale");
     p.getNode("binding", 1).getNode("property", 1).setValue(me.prop);
-    if (me.inverted) {    
+    if (me.inverted) {
       p.getNode("binding", 1).getNode("factor", 1).setValue(0 - me.factor);
     } else {
       p.getNode("binding", 1).getNode("factor", 1).setValue(me.factor);
@@ -153,7 +153,7 @@ var PropertyScaleAxis = {
     p.getNode("binding", 1).getNode("offset", 1).setValue(me.offset);
     return p;
   },
-  
+
 };
 
 var NasalScaleAxis = {
@@ -163,15 +163,15 @@ var NasalScaleAxis = {
     m.prop = prop;
     return m;
   },
-  
+
   clone: func() {
     var m = { parents: [NasalScaleAxis, Axis.new(me.name, me.prop, 0) ] };
-    
+
     m.script = me.script;
     m.prop = me.prop;
     return m;
   },
-  
+
   match: func(prop) {
     var cmd = prop.getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("binding", 1).getNode("script", 1).getValue();
@@ -184,7 +184,7 @@ var NasalScaleAxis = {
       return 0;
     }
   },
-  
+
   getBinding: func(axis) {
     var p = props.Node.new().getNode("axis[" ~ axis ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
@@ -201,7 +201,7 @@ var NasalLowHighAxis = {
     m.highscript = highscript;
     return m;
   },
-  
+
   clone: func() {
     var m = { parents: [NasalLowHighAxis, Axis.new(me.name, me.prop, 1) ] };
 
@@ -210,8 +210,8 @@ var NasalLowHighAxis = {
     m.lowscript = me.lowscript;
     m.highscript = me.highscript;
     return m;
-  },  
-  
+  },
+
   match: func(prop) {
     var cmd = prop.getNode("low", 1).getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("low", 1).getNode("binding", 1).getNode("script", 1).getValue();
@@ -220,26 +220,26 @@ var NasalLowHighAxis = {
     p = string.trim(p);
     p = string.replace(p, ";", "");
     p = p ~ ";";
-    
-    if (p == me.lowscript) { 
+
+    if (p == me.lowscript) {
       return 1;
     }
-    
+
     if (p == me.highscript) {
       me.inverted = 1;
-      return 1;    
+      return 1;
     }
-    
+
     return 0;
   },
-  
+
   getBinding: func(axis) {
     var p = props.Node.new().getNode("axis[" ~ axis ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
 
     p.getNode("low", 1).getNode("binding", 1).getNode("command", 1).setValue("nasal");
     p.getNode("high", 1).getNode("binding", 1).getNode("command", 1).setValue("nasal");
-    
+
     if (me.inverted) {
       p.getNode("low", 1).getNode("binding", 1).getNode("script", 1).setValue(me.highscript);
       p.getNode("high", 1).getNode("binding", 1).getNode("script", 1).setValue(me.lowscript);
@@ -247,7 +247,7 @@ var NasalLowHighAxis = {
       p.getNode("low", 1).getNode("binding", 1).getNode("script", 1).setValue(me.lowscript);
       p.getNode("high", 1).getNode("binding", 1).getNode("script", 1).setValue(me.highscript);
     }
-    
+
     return p;
   },
 };
@@ -259,15 +259,15 @@ var axisBindings = [
   PropertyScaleAxis.new("Rudder",   "/controls/flight/rudder"),
   NasalScaleAxis.new("Throttle",  "controls.throttleAxis();", "/controls/engines/engine[0]/throttle") ,
   NasalScaleAxis.new("Mixture",   "controls.mixtureAxis();", "/controls/engines/engine[0]/mixture") ,
-  NasalScaleAxis.new("Propeller", "controls.propellerAxis();", "/controls/engines/engine[0]/propeller-pitch") , 
-  NasalLowHighAxis.new("View (horizontal)",   
-                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") + 30);", 
-                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") - 30);", 
-                      "/sim/current-view/goal-heading-offset-deg"), 
+  NasalScaleAxis.new("Propeller", "controls.propellerAxis();", "/controls/engines/engine[0]/propeller-pitch") ,
+  NasalLowHighAxis.new("View (horizontal)",
+                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") + 30);",
+                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") - 30);",
+                      "/sim/current-view/goal-heading-offset-deg"),
   NasalLowHighAxis.new("View (vertical)",
-                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") - 20);", 
-                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") + 20);", 
-                       "/sim/current-view/goal-heading-offset-deg"), 
+                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") - 20);",
+                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") + 20);",
+                       "/sim/current-view/goal-heading-offset-deg"),
 #  PropertyScaleAxis.new("Aileron Trim",  "/controls/flight/aileron-trim"),
 #  PropertyScaleAxis.new("Elevator Trim", "/controls/flight/elevator-trim"),
 #  PropertyScaleAxis.new("Rudder Trim",  "/controls/flight/rudder-trim"),
@@ -275,7 +275,7 @@ var axisBindings = [
   PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0.5, 1.0),
   NasalLowHighAxis.new("Aileron Trim",  "controls.aileronTrim(-1);", "controls.aileronTrim(1);", "/controls/flight/aileron-trim"),
   NasalLowHighAxis.new("Elevator Trim", "controls.elevatorTrim(-1);", "controls.elevatorTrim(1);", "/controls/flight/elevator-trim"),
-  NasalLowHighAxis.new("Rudder Trim",   "controls.rudderTrim(-1);", "controls.rudderTrim(1);", "/controls/flight/rudder-trim"), 
+  NasalLowHighAxis.new("Rudder Trim",   "controls.rudderTrim(-1);", "controls.rudderTrim(1);", "/controls/flight/rudder-trim"),
   CustomAxis.new(),
   UnboundAxis.new(),
 ];
@@ -289,7 +289,7 @@ var ButtonBinding = {
     m.repeatable = repeatable;
     return m;
   },
-  
+
   clone: func() {
     var m = { parents: [ButtonBinding] };
     m.name = me.name;
@@ -297,7 +297,7 @@ var ButtonBinding = {
     m.repeatable = me.repeatable;
     return m;
   },
-  
+
   match: func(prop) {
     return 0;
   },
@@ -319,7 +319,7 @@ var CustomButton = {
     m.custom_binding = me.custom_binding;
     return m;
   },
-    
+
   match: func(prop) {
     if (prop.getNode("binding") != nil) {
       var p = props.Node.new();
@@ -330,13 +330,13 @@ var CustomButton = {
       return 0;
     }
   },
-  
+
   getBinding: func(button) {
     var p = props.Node.new().getNode("button[" ~ button ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
-    props.copy(me.custom_binding, p.getNode("binding", 1));    
+    props.copy(me.custom_binding, p.getNode("binding", 1));
     return p;
-  },  
+  },
 };
 
 var UnboundButton = {
@@ -349,11 +349,11 @@ var UnboundButton = {
     var m = { parents: [UnboundButton, ButtonBinding.new("None", "", 0) ] };
     return m;
   },
-  
+
   match: func(prop) {
     return (prop.getNode("binding") != nil);
   },
-  
+
   getBinding: func(button) {
     var p = props.Node.new().getNode("button[" ~ button ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
@@ -374,12 +374,12 @@ var PropertyToggleButton = {
   },
 
   match: func(prop) {
-  
+
     var c = prop.getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("binding", 1).getNode("property", 1).getValue();
     return ((c == "property-toggle") and (p == me.prop));
   },
-  
+
   getBinding: func(button) {
     var p = props.Node.new().getNode("button[" ~ button ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
@@ -402,13 +402,13 @@ var PropertyAdjustButton = {
     return m;
   },
 
-  match: func(prop) {  
+  match: func(prop) {
     var c = prop.getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("binding", 1).getNode("property", 1).getValue();
     var s = prop.getNode("binding", 1).getNode("step", 1).getValue();
     return ((c == "property-adjust") and (p == me.binding) and (s == me.step));
   },
-  
+
   getBinding: func(button) {
     var p = props.Node.new().getNode("button[" ~ button ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
@@ -430,19 +430,19 @@ var NasalButton = {
     return m;
   },
 
-  match: func(prop) {  
+  match: func(prop) {
     var c = prop.getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("binding", 1).getNode("script", 1).getValue();
-    
+
     if (p == nil) { return 0; }
-    
+
     p = string.trim(p);
     p = string.replace(p, ";", "");
     p = p ~ ";";
-    
+
     return ((c == "nasal") and (p == me.binding));
   },
-  
+
   getBinding: func(button) {
     var p = props.Node.new().getNode("button[" ~ button ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
@@ -467,21 +467,21 @@ var NasalHoldButton = {
     return m;
   },
 
-  match: func(prop) {  
-  
+  match: func(prop) {
+
     var c = prop.getNode("mod-up", 1).getNode("binding", 1).getNode("command", 1).getValue();
     var p1 = prop.getNode("binding", 1).getNode("script", 1).getValue();
     var p2 = prop.getNode("mod-up", 1).getNode("binding", 1).getNode("script", 1).getValue();
-    
+
     if (p2 == nil) { return 0; }
-    
+
     p1 = string.trim(p1);
     p1 = string.replace(p1, ";", "");
     p1 = p1 ~ ";";
-    
+
     return ((c == "nasal") and (p1 == me.binding));
   },
-  
+
   getBinding: func(button) {
     var p = props.Node.new().getNode("button[" ~ button ~ "]", 1);
     p.getNode("desc", 1).setValue(me.name);
@@ -495,6 +495,13 @@ var NasalHoldButton = {
 };
 
 var buttonBindings = [
+  NasalButton.new("Throttle Up", "controls.incThrottle(0.01, 1.0);", 1),
+  NasalButton.new("Throttle Down", "controls.incThrottle(-0.01, -1.0);", 1),
+  NasalButton.new("Mixture Rich", "controls.adjMixture(1);", 1),
+  NasalButton.new("Mixture Lean", "controls.adjMixture(-1);", 1),
+  NasalButton.new("Propeller Fine", "controls.adjPropeller(1);", 1),
+  NasalButton.new("Propeller Coarse", "controls.adjPropeller(-1);", 1),
+
   NasalButton.new("Elevator Trim Up", "controls.elevatorTrim(-1);", 1),
   NasalButton.new("Elevator Trim Down", "controls.elevatorTrim(1);", 1),
   NasalButton.new("Rudder Trim Left", "controls.rudderTrim(-1);", 1),
@@ -528,18 +535,18 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
 
   var js_name = getprop(dialog_root ~ "/selected-joystick");
   var joysticks = props.globals.getNode("/input/joysticks").getChildren("js");
-  
+
   if (size(joysticks) == 0) { return 0; }
-  
+
   if (js_name == nil) {
-    js_name = joysticks[0].getNode("id").getValue();  
+    js_name = joysticks[0].getNode("id").getValue();
   }
-  
+
   var js = nil;
-  
+
   forindex (var i; joysticks) {
-    if ((joysticks[i].getNode("id") != nil) and 
-        (joysticks[i].getNode("id").getValue() == js_name)) 
+    if ((joysticks[i].getNode("id") != nil) and
+        (joysticks[i].getNode("id").getValue() == js_name))
     {
       js = joysticks[i];
       setprop(dialog_root ~ "/selected-joystick", js_name);
@@ -547,14 +554,14 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
       setprop(dialog_root ~ "/selected-joystick-config", joysticks[i].getNode("source").getValue());
     }
   }
-  
+
   if (js == nil) {
-    # We didn't find the joystick we expected - default to the first 
+    # We didn't find the joystick we expected - default to the first
     setprop(dialog_root ~ "/selected-joystick", joysticks[0].getNode("id").getValue());
     setprop(dialog_root ~ "/selected-joystick-index", 0);
     setprop(dialog_root ~ "/selected-joystick-config", joysticks[0].getNode("source").getValue());
   }
-  
+
   # Set up the axes assignments
   var axes = js.getChildren("axis");
 
@@ -563,13 +570,13 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
     var p = props.globals.getNode(dialog_root ~ "/axis[" ~ axis ~ "]", 1);
     p.remove();
     p = props.globals.getNode(dialog_root ~ "/axis[" ~ axis ~ "]", 1);
-    
+
     # Note that we can't simply use an index into the axes array
     # as that doesn't work for a sparsley populated set of axes.
     # E.g. one with n="3"
     var a = js.getNode("axis[" ~ axis ~ "]");
-  
-    if (a != nil) {         
+
+    if (a != nil) {
       # Read properties from bindings
       props.copy(a, p.getNode("original_binding", 1));
 
@@ -583,14 +590,14 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
           p.getNode("inverted", 1).setValue(binding.isInverted());
         }
       }
-      
+
       if (binding == nil) {
         # No binding for this axis
         p.getNode("binding", 1).setValue("None");
         p.getNode("invertable", 1).setValue(0);
         p.getNode("inverted", 1).setValue(0);
         p.removeChild("original_binding");
-      }         
+      }
     } else {
       p.getNode("binding", 1).setValue("None");
       p.getNode("invertable", 1).setValue(0);
@@ -606,13 +613,13 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
     var btn = props.globals.getNode(dialog_root ~ "/button[" ~ button ~ "]", 1);
     btn.remove();
     btn = props.globals.getNode(dialog_root ~ "/button[" ~ button ~ "]", 1);
-    
+
     # Note that we can't simply use an index into the buttons array
     # as that doesn't work for a sparsley populated set of buttons.
     # E.g. one with n="3"
     var a = js.getNode("button[" ~ button ~ "]");
 
-    if (a != nil) {         
+    if (a != nil) {
       # Read properties from bindings
       props.copy(a, btn.getNode("original_binding", 1));
       var binding = nil;
@@ -623,7 +630,7 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
           props.copy(b.getBinding(button), btn.getNode("original_binding", 1));
         }
       }
-      
+
       if (b == nil) {
         btn.getNode("binding", 1).setValue("None");
         btn.removeChild("original_binding");
@@ -632,7 +639,7 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
       btn.getNode("binding", 1).setValue("None");
       btn.removeChild("original_binding");
     }
-  }  
+  }
 
   # Set up Nasal code.
   var nasals = js.getChildren("nasal");
@@ -641,7 +648,7 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
     var nas = props.globals.getNode(dialog_root ~ "/nasal[" ~ nasal ~ "]", 1);
     nas.remove();
     nas = props.globals.getNode(dialog_root ~ "/nasal[" ~ nasal ~ "]", 1);
-    
+
     # Note that we can't simply use an index into the buttons array
     # as that doesn't work for a sparsley populated set of buttons.
     # E.g. one with n="3"
@@ -649,49 +656,49 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
     if (a != nil) {
       props.copy(a, nas.getNode("original_script", 1));
     }
-  }  
+  }
 }
 
-var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) {  
+var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) {
 
   # Write out the joystick file.
   var config = props.Node.new();
   var id = getprop(dialog_root ~ "/selected-joystick");
-  
+
   if (reset == 1) {
     # We've been asked to reset the joystick config to the default.  As we can't
-    # delete the configuration file, we achieve this by setting an invalid name 
-    # tag that won't match. 
+    # delete the configuration file, we achieve this by setting an invalid name
+    # tag that won't match.
     config.getNode("name", 1).setValue("UNUSED INVALID CONFIG");
   } else {
     config.getNode("name", 1).setValue(id);
   }
-  
+
   var nasals = props.globals.getNode(dialog_root).getChildren("nasal");
   forindex (var nas; nasals) {
       var nasalscript = config.getNode("nasal[" ~ nas ~ "]", 1);
       props.copy(props.globals.getNode(dialog_root ~ "/nasal[" ~ nas ~ "]/original_script", 1), nasalscript);
-  }  
-  
+  }
+
   var axes = props.globals.getNode(dialog_root).getChildren("axis");
   forindex (var axis; axes) {
     var name = getprop(dialog_root ~ "/axis[" ~ axis ~ "]/binding");
-    
+
     if (name != "None") {
       foreach (var binding; axisBindings) {
         if (binding.getName() == name) {
           var b = binding.clone();
           b.setInverted(getprop(dialog_root ~ "/axis[" ~ axis ~ "]/inverted"));
-          
+
           # Generate the axis and binding
           var axisnode = config.getNode("axis[" ~ axis ~ "]", 1);
-          if (name == "Custom") {          
+          if (name == "Custom") {
             props.copy(props.globals.getNode(dialog_root ~ "/axis[" ~ axis ~ "]/original_binding", 1), axisnode);
           } else {
             props.copy(b.getBinding(axis), axisnode);
           }
         }
-      }    
+      }
     }
   }
 
@@ -705,21 +712,21 @@ var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) 
           var b = binding.clone();
           # Generate the axis and binding
           var buttonprop = config.getNode("button[" ~ btn ~ "]", 1);
-          if (name == "Custom") {          
+          if (name == "Custom") {
             props.copy(props.globals.getNode(dialog_root ~ "/button[" ~ btn ~ "]/original_binding", 1), buttonprop);
           } else {
             props.copy(b.getBinding(btn), buttonprop);
           }
         }
-      }    
+      }
     }
   }
-  
+
   var filename = id;
   filename = string.replace(filename, " ", "-");
   filename = string.replace(filename, ".", "");
   filename = string.replace(filename, "/", "");
-  
+
   # Write out the file
   io.write_properties(getprop("/sim/fg-home") ~ "/Input/Joysticks/" ~ filename ~ ".xml", config);
 }

@@ -66,7 +66,15 @@
 				<dialog-name>input-config</dialog-name>
 			</binding>
 		</item>
-        
+
+		<item>
+			<name>joystick-config</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>joystick-config</dialog-name>
+			</binding>
+		</item>
+
 		<item>
 			<name>terrasync</name>
 			<binding>
@@ -293,7 +301,7 @@
 
 	<menu>
 		<name>environment</name>
-		
+
 		<item>
 			<name>global-weather</name>
 			<binding>
@@ -797,7 +805,7 @@
 				<script>gui.showHelpDialog("/sim/help")</script>
 			</binding>
 		</item>
-		
+
 		<item>
 			<name>aircraft-checklists</name>
 			<binding>
@@ -819,14 +827,6 @@
 			<binding>
 				<command>nasal</command>
 				<script>gui.showHelpDialog("/sim/help/basic")</script>
-			</binding>
-		</item>
-
-		<item>
-			<name>joystick-config</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>joystick-config</dialog-name>
 			</binding>
 		</item>
 

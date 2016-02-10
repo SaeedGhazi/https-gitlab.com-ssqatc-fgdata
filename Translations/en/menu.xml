@@ -12,7 +12,8 @@
 	<snap-shot>Screenshot                      </snap-shot>
 	<snap-shot-dir>Screenshot Directory</snap-shot-dir>
 	<sound-config>Sound Configuration</sound-config>
-	<input-config>Input Configuration</input-config>
+	<input-config>Mouse Configuration</input-config>
+	<joystick-config>Joystick Configuration</joystick-config>
 	<terrasync>Scenery Download</terrasync>
 	<aircraft-center>Aircraft Center (Experimental)</aircraft-center>
 	<exit>Quit</exit>
@@ -114,7 +115,7 @@
 	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
 	<rembrandt-buffers-choice>Select Rendering Buffers</rembrandt-buffers-choice>
 	<interface-config>User-interface options</interface-config>
-        
+
 	<!-- Help menu -->
 	<help>Help</help>
 	<help-browser>Help  (opens in browser)</help-browser>
@@ -123,7 +124,6 @@
 	<aircraft-checklists>Aircraft Checklists</aircraft-checklists>
 	<common-keys>Common Aircraft Keys</common-keys>
 	<basic-keys>Basic Simulator Keys</basic-keys>
-	<joystick-config>Joystick Configuration</joystick-config>
 	<joystick-info>Joystick Information</joystick-info>
 	<tutorial-start>Tutorials</tutorial-start>
 	<menu-about>About</menu-about>

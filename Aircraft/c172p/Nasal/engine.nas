@@ -1,9 +1,7 @@
-
 # Manages the engine
 #
 # Fuel system: based on the Spitfire. Manages primer and negGCutoff
 # Hobbs meter
-
 
 # =============================== DEFINITIONS ===========================================
 
@@ -88,6 +86,63 @@ var primerTimer = maketimer(5, func {
     primerTimer.stop();
 });
 
+# ========== oil consumption ======================
+
+var oil_consumption = maketimer(1.0, func {
+    if (getprop("/engines/active-engine/oil_consumption_allowed"))
+        var oil_level = getprop("/engines/active-engine/oil-level");
+    else
+        var oil_level = 7.0;
+    var rpm = getprop("/engines/active-engine/rpm");
+
+    # Quadratic formula which outputs 1.0 for input 2300 RPM (cruise value),
+    # 0.6 for 700 RPM (idle) and 1.2 for 2700 RPM (max)
+    var rpm_factor = 0.00000012 * math.pow(rpm, 2) - 0.0001 * rpm + 0.62;
+
+    # Consumption rate defined as 1.5 quarter per 10 hours (36000 seconds)
+    # at cruise RPM
+    var consumption_rate = 1.5 / 36000; 
+
+    var low_oil_pressure_factor = 1.0;
+    var low_oil_temperature_factor = 1.0;
+
+    if (getprop("/engines/active-engine/running")) {
+        oil_level = oil_level - consumption_rate * rpm_factor;
+        setprop("/engines/active-engine/oil-level", oil_level);        
+    }
+
+    # If oil gets low (< 5.0), pressure should drop and temperature should rise
+    var oil_level_limited = std.min(oil_level, 5.0);
+
+    # Should give 1.0 for oil_level = 5 and 0.1 for oil_level 4.92,
+    # which is the min before the engine stops
+    low_oil_pressure_factor = 11.25 * oil_level_limited - 55.25;
+
+    # Should give 1.0 for oil_level = 5 and 1.5 for oil_level 4.92
+    low_oil_temperature_factor = -6.25 * oil_level_limited + 32.25;
+
+    setprop("/engines/active-engine/low-oil-pressure-factor", low_oil_pressure_factor);
+    setprop("/engines/active-engine/low-oil-temperature-factor", low_oil_temperature_factor);
+
+});
+
+# ========== engine coughing ======================
+
+var engine_coughing = maketimer(3.0, func {
+    var coughing = getprop("/engines/active-engine/coughing");
+    var running = getprop("/engines/active-engine/running");
+    if (coughing and running) {
+        var delay = 10.0 * rand();
+        settimer(func {
+            setprop("/engines/active-engine/kill-engine", 1);
+
+            # Bring the engine back to life after 0.25 seconds
+            settimer(func {
+                setprop("/engines/active-engine/kill-engine", 0);
+            }, 0.25);
+        }, delay);
+    };
+});
 
 # ========== Main loop ======================
 
@@ -125,41 +180,9 @@ var update = func {
     }
 };
 
-var autostart = func (msg=1) {
-    if (getprop("/engines/active-engine/running")) {
-		if (msg)
-            gui.popupTip("Engine already running", 5);
-        return;
-    }
-
-    setprop("/controls/switches/magnetos", 3);
-    setprop("/controls/engines/current-engine/throttle", 0.2);
-    setprop("/controls/engines/current-engine/mixture", 1.0);
-    setprop("/controls/flight/elevator-trim", 0.0);
-    setprop("/controls/switches/master-bat", 1);
-    setprop("/controls/switches/master-alt", 1);
-    setprop("/controls/switches/master-avionics", 1);
-
-    setprop("/controls/lighting/nav-lights", 1);
-    setprop("/controls/lighting/strobe", 1);
-    setprop("/controls/lighting/beacon", 1);
-
-    setprop("/consumables/fuel/tank[0]/selected", 1);
-    setprop("/consumables/fuel/tank[1]/selected", 1);
-
-    # Set the altimeter
-    setprop("/instrumentation/altimeter/setting-inhg", getprop("/environment/pressure-sea-level-inhg"));
-
-    #c172p.autoPrime();
-    setprop("/controls/engines/engine[0]/primer-lever", 0);
-    setprop("/controls/engines/engine/primer", 3);
-	if (msg)
-	    gui.popupTip("Hold down \"s\" to start the engine", 5);
-};
-
 setlistener("/controls/switches/starter", func {
-	if (!getprop("/fdm/jsbsim/complex"))
-	    autostart(0);
+    if (!getprop("/fdm/jsbsim/complex"))
+        c172p.autostart(0);
     var v = getprop("/controls/switches/starter") or 0;
     if (v == 0) {
         print("Starter off");
@@ -217,22 +240,29 @@ controls.mixtureAxis = func {
     setprop("/controls/engines/current-engine/mixture", new_value);
 };
 
+controls.stepMagnetos = func {
+    var old_value = getprop("/controls/switches/magnetos");
+    var new_value = std.max(0, std.min(old_value + arg[0], 3));
+    setprop("/controls/switches/magnetos", new_value);
+};
+
 # key 's' calls to this function when it is pressed DOWN even if I overwrite the binding in the -set.xml file!
 # fun fact: the key UP event can be overwriten!
 controls.startEngine = func(v = 1) {
     if (getprop("/engines/active-engine/running"))
-	{
+    {
         setprop("/controls/switches/starter", 0);
-		return;
-	}
-	else {
+        return;
+    }
+    else {
         setprop("/controls/switches/magnetos", 3);
-		setprop("/controls/switches/starter", v);
+        setprop("/controls/switches/starter", v);
     }
 };
 
 setlistener("/sim/signals/fdm-initialized", func {
     var engine_timer = maketimer(UPDATE_PERIOD, func { update(); });
     engine_timer.start();
+    oil_consumption.start();
+    engine_coughing.start();
 });
-

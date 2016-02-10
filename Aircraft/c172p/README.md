@@ -5,6 +5,8 @@ A high detailed version of the Cessna 172P aircraft for FlightGear.
 
 Development thread: http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 
+Creating a release: see the [wiki page "Release process and versioning"](https://github.com/Juanvvc/c172p-detailed/wiki/Release-process-and-versioning) how to do a release.
+
 ![Cessna 172P](http://s30.postimg.org/gl82bkjc1/fgfs_screen_003.png)
 
 For the repository containing the texture files for the liveries and instruments (including their .xcf files), visit: https://github.com/gilbertohasnofb/c172p-detailed-liveries
@@ -17,9 +19,9 @@ This aircraft was modified and updated in a joint effort by the following people
 
 * ludomotico: programming, 3D modeling, bug tracking, general organisation
 
-* Gilberto Agostinho (gsagostinho): texturing, sounds, bug tracking, testing
+* Gilberto Agostinho (gsagostinho): textures, sounds, bug tracking, testing, programming
 
-* thevirtualfer: 3D modeling and texturing
+* Fernando Barbosa (thevirtualfer): 3D modeling and textures
 
 * Wayne Bragg (wlbragg): effects - damage, rain/fog/ice, internal/external shadows, bushkit (Special thanks to Thorsten Renk for all the work involved in giving us the base for these effects)
 
@@ -31,4 +33,10 @@ This aircraft was modified and updated in a joint effort by the following people
 
 * Waldo Kitty (wkitty42): bug hunting/reporting
 
-* dg-505: 3D modeling, exhaust smoke, checklists
+* Jonathan Schellhase (dg-505): 3D modeling, exhaust smoke, checklists
+
+* Horacio: interior textures
+
+* D-ECHO: 3D model of pitot tube + cover
+
+* Jarl Arntzen (jarlarntzen): Interior shadow and reflection cubes

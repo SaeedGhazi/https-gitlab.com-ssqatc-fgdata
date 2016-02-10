@@ -4,6 +4,8 @@
 
   c172p damage effects for JSBSim.
 
+    Copyright (c) 2015 Wayne Bragg
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +24,335 @@
 
 <system name="c172p ground effects">
 
+    <channel name="contact-points">
+
+        <!-- ================================================================== -->
+        <!-- Contact points landing gear and yellow sparks                      -->
+        <!-- ================================================================== -->
+
+        <fcs_function name="z-position-nose-gear">
+            <output>gear/unit[0]/z-position</output>
+            <function>
+                <ifthen>
+                    <property>gear/unit[0]/broken</property>
+                    <value>0.0</value>
+                    <switch>
+                        <property>bushkit</property>
+
+                        <!-- Default/26"/36"/pontoon/amphibious/skis -->
+                        <value>-19.5</value>
+                        <value>-22.0</value>
+                        <value>-22.0</value>
+                        <value>  0.0</value>
+                        <value>  0.0</value>
+                        <value>-22.0</value>
+                    </switch>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="z-position-left-gear">
+            <output>gear/unit[1]/z-position</output>
+            <function>
+                <ifthen>
+                    <property>gear/unit[1]/broken</property>
+                    <value>0.0</value>
+                    <switch>
+                        <property>bushkit</property>
+
+                        <!-- Default/26"/36"/pontoon/amphibious/skis -->
+                        <value>-15.5</value>
+                        <value>-20.0</value>
+                        <value>-22.0</value>
+                        <value>  0.0</value>
+                        <value>  0.0</value>
+                        <value>-22.0</value>
+                    </switch>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="z-position-right-gear">
+            <output>gear/unit[2]/z-position</output>
+            <function>
+                <ifthen>
+                    <property>gear/unit[2]/broken</property>
+                    <value>0.0</value>
+                    <switch>
+                        <property>bushkit</property>
+
+                        <!-- Default/26"/36"/pontoon/amphibious/skis -->
+                        <value>-15.5</value>
+                        <value>-20.0</value>
+                        <value>-22.0</value>
+                        <value>  0.0</value>
+                        <value>  0.0</value>
+                        <value>-22.0</value>
+                    </switch>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="z-position-effect-nose-gear">
+            <output>contact/unit[6]/z-position</output>
+            <function>
+                <ifthen>
+                    <property>gear/unit[0]/broken</property>
+                    <switch>
+                        <property>bushkit</property>
+
+                        <!-- Default/26"/36"/pontoon/amphibious/skis -->
+                        <value>-10.0</value>
+                        <value>-18.5</value>
+                        <value>-17.7</value>
+                        <value>  0.0</value>
+                        <value>  0.0</value>
+                        <value>-23.0</value>
+                    </switch>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="z-position-effect-left-gear">
+            <output>contact/unit[7]/z-position</output>
+            <function>
+                <ifthen>
+                    <property>gear/unit[1]/broken</property>
+                    <switch>
+                        <property>bushkit</property>
+
+                        <!-- Default/26"/36"/pontoon/amphibious/skis -->
+                        <value> -9.5</value>
+                        <value>-14.5</value>
+                        <value>-16.0</value>
+                        <value>  0.0</value>
+                        <value>  0.0</value>
+                        <value>-21.0</value>
+                    </switch>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="z-position-effect-right-gear">
+            <output>contact/unit[8]/z-position</output>
+            <function>
+                <ifthen>
+                    <property>gear/unit[2]/broken</property>
+                    <switch>
+                        <property>bushkit</property>
+
+                        <!-- Default/26"/36"/pontoon/amphibious/skis -->
+                        <value> -8.0</value>
+                        <value>-15.5</value>
+                        <value>-17.4</value>
+                        <value>  0.0</value>
+                        <value>  0.0</value>
+                        <value>-21.0</value>
+                    </switch>
+                    <value>0.0</value>
+                </ifthen>
+            </function>
+        </fcs_function>
+
+        <!-- ================================================================== -->
+        <!-- Contact points wing tips                                           -->
+        <!-- ================================================================== -->
+
+        <switch name="z-position-left-wing-tip">
+            <output>contact/unit[4]/z-position</output>
+            <default value="50"/>
+
+            <test logic="AND" value="-8">
+                crash EQ 1
+            </test>
+
+            <!-- -10 when on/above water -->
+            <test logic="AND" value="-10">
+                contact/unit[4]/solid EQ 0
+            </test>
+
+            <test logic="AND" value="40">
+                wing-damage/left-wing EQ 1.0
+                contact/unit[12]/WOW EQ 1
+            </test>
+        </switch>
+
+        <switch name="z-position-right-wing-tip">
+            <output>contact/unit[5]/z-position</output>
+            <default value="50"/>
+
+            <test logic="AND" value="-8">
+                crash EQ 1
+            </test>
+
+            <!-- -10 when on/above water -->
+            <test logic="AND" value="-10">
+                contact/unit[5]/solid EQ 0
+            </test>
+
+            <test logic="AND" value="40">
+                wing-damage/right-wing EQ 1.0
+                contact/unit[12]/WOW EQ 1
+            </test>
+        </switch>
+
+        <!-- ================================================================== -->
+        <!-- Contact points top of fuselage and empennage                       -->
+        <!-- ================================================================== -->
+
+        <switch name="z-position-nose-top">
+            <output>contact/unit[9]/z-position</output>
+            <default value="35"/>
+
+            <test logic="AND" value="-25">
+                contact/unit[9]/solid EQ 0
+            </test>
+        </switch>
+
+        <switch name="z-position-nose">
+            <output>contact/unit[10]/z-position</output>
+            <default value="8"/>
+
+            <test logic="AND" value="-25">
+                contact/unit[10]/solid EQ 0
+            </test>
+        </switch>
+
+        <switch name="z-position-cockpit-top">
+            <output>contact/unit[11]/z-position</output>
+            <default value="60"/>
+
+            <test logic="AND" value="-25">
+                contact/unit[11]/solid EQ 0
+            </test>
+        </switch>
+
+        <switch name="z-position-top-vertical-stabilizer">
+            <output>contact/unit[12]/z-position</output>
+            <default value="90"/>
+
+            <!-- 160 puts tail higher in the air when upside down -->
+            <test logic="AND" value="160">
+                contact/unit[12]/solid EQ 0
+            </test>
+        </switch>
+
+        <!-- ================================================================== -->
+        <!-- Contact points skis                                                -->
+        <!-- ================================================================== -->
+
+        <switch name="z-position-nose-ski">
+            <output>gear/unit[23]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-22">
+                bushkit EQ 5
+                gear/unit[0]/broken EQ 0
+            </test>
+
+        </switch>
+
+        <switch name="z-position-left-ski">
+            <output>gear/unit[24]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-22">
+                bushkit EQ 5
+                gear/unit[1]/broken EQ 0
+            </test>
+
+        </switch>
+
+        <switch name="z-position-right-ski">
+            <output>gear/unit[25]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-22">
+                bushkit EQ 5
+                gear/unit[2]/broken EQ 0
+            </test>
+
+        </switch>
+
+        <!-- ================================================================== -->
+        <!-- Contact points amphibious                                          -->
+        <!-- ================================================================== -->
+
+        <switch name="z-position-left-fwd-pontoon">
+            <output>gear/unit[19]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-62">
+                bushkit EQ 4
+            </test>
+        </switch>
+
+        <switch name="z-position-right-fwd-pontoon">
+            <output>gear/unit[20]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-62">
+                bushkit EQ 4
+            </test>
+        </switch>
+
+        <switch name="z-position-left-aft-pontoon">
+            <output>gear/unit[21]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-50.5">
+                bushkit EQ 4
+            </test>
+        </switch>
+
+        <switch name="z-position-right-aft-pontoon">
+            <output>gear/unit[22]/z-position</output>
+            <default value="0"/>
+
+            <test logic="AND" value="-50.5">
+                bushkit EQ 4
+            </test>
+        </switch>
+
+    </channel>
+
     <channel name="groundeffects">
+
+        <switch name="gear-spin-nose">
+            <output>gear/gear-spin-nose</output>
+            <default value="15"/>
+            <test logic="OR" value="13">
+                bushkit EQ 1
+                bushkit EQ 2
+                bushkit EQ 5
+            </test>
+        </switch>
+
+        <switch name="gear-spin-left">
+            <output>gear/gear-spin-left</output>
+            <default value="13"/>
+            <test logic="OR" value="8">
+                bushkit EQ 2
+                bushkit EQ 5
+            </test>
+            <test logic="OR" value="10">
+                bushkit EQ 1
+            </test>
+        </switch>
+
+        <switch name="gear-spin-right">
+            <output>gear/gear-spin-right</output>
+            <default value="13"/>
+            <test logic="OR" value="8">
+                bushkit EQ 2
+                bushkit EQ 5
+            </test>
+            <test logic="OR" value="10">
+                bushkit EQ 1
+            </test>
+        </switch>
 
         <fcs_function name="ground/tail-ground-effect-speed-kt">
             <function>
@@ -86,6 +416,7 @@
             </function>
         </fcs_function>
 
+        <!-- touchdown smoke not damage-->
         <fcs_function name="ground/nose-tyre-smoke-ground-effect-speed-kt">
             <function>
                 <or>
@@ -142,6 +473,202 @@
                 </or>
             </function>
         </fcs_function>
+
+    </channel>
+
+    <channel name="tiedowns">
+
+        <fcs_function name="tiedown-left-x">
+            <output>external_reactions/tiedown-left/x</output>
+            <function>
+                <sin>
+                    <toradians>
+                        <property>/sim/model/c172p/tiedowns/left/heading-deg</property>
+                    </toradians>
+                </sin>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-left-y">
+            <output>external_reactions/tiedown-left/y</output>
+            <function>
+                <product>
+                    <value>-1</value>
+                    <cos>
+                        <toradians>
+                            <property>/sim/model/c172p/tiedowns/left/heading-deg</property>
+                        </toradians>
+                    </cos>
+                </product>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-left-z">
+            <output>external_reactions/tiedown-left/z</output>
+            <function>
+                <product>
+                    <value>-1</value>
+                    <sin>
+                        <toradians>
+                            <property>/sim/model/c172p/tiedowns/left/pitch-deg</property>
+                        </toradians>
+                    </sin>
+                </product>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-right-x">
+            <output>external_reactions/tiedown-right/x</output>
+            <function>
+                <product>
+                    <value>-1</value>
+                    <sin>
+                        <toradians>
+                            <property>/sim/model/c172p/tiedowns/right/heading-deg</property>
+                        </toradians>
+                    </sin>
+                </product>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-right-y">
+            <output>external_reactions/tiedown-right/y</output>
+            <function>
+                <cos>
+                    <toradians>
+                        <property>/sim/model/c172p/tiedowns/right/heading-deg</property>
+                    </toradians>
+                </cos>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-right-z">
+            <output>external_reactions/tiedown-right/z</output>
+            <function>
+                <product>
+                    <value>-1</value>
+                    <sin>
+                        <toradians>
+                            <property>/sim/model/c172p/tiedowns/right/pitch-deg</property>
+                        </toradians>
+                    </sin>
+                </product>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-tail-x">
+            <output>external_reactions/tiedown-tail/x</output>
+            <function>
+                <cos>
+                    <toradians>
+                        <property>/sim/model/c172p/tiedowns/tail/heading-deg</property>
+                    </toradians>
+                </cos>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-tail-y">
+            <output>external_reactions/tiedown-tail/y</output>
+            <function>
+                <sin>
+                    <toradians>
+                        <property>/sim/model/c172p/tiedowns/tail/heading-deg</property>
+                    </toradians>
+                </sin>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="tiedown-tail-z">
+            <output>external_reactions/tiedown-tail/z</output>
+            <function>
+                <product>
+                    <value>-1</value>
+                    <sin>
+                        <toradians>
+                            <property>/sim/model/c172p/tiedowns/tail/pitch-deg</property>
+                        </toradians>
+                    </sin>
+                </product>
+            </function>
+        </fcs_function>
+
+        <summer name="fcs/tiedown-left-mag-error">
+            <input>/sim/model/c172p/tiedowns/left/length</input>
+            <input>-/sim/model/c172p/tiedowns/left/ref-length</input>
+        </summer>
+
+        <summer name="fcs/tiedown-right-mag-error">
+            <input>/sim/model/c172p/tiedowns/right/length</input>
+            <input>-/sim/model/c172p/tiedowns/right/ref-length</input>
+        </summer>
+
+        <summer name="fcs/tiedown-tail-mag-error">
+            <input>/sim/model/c172p/tiedowns/tail/length</input>
+            <input>-/sim/model/c172p/tiedowns/tail/ref-length</input>
+        </summer>
+
+        <pid name="fcs/tiedown-left-magnitude-pid">
+            <input>fcs/tiedown-left-mag-error</input>
+            <kp>7000.0</kp>
+            <ki>0.0</ki>
+            <kd>500.0</kd>
+            <clipto>
+                <min>-50</min>
+                <max>1000</max>
+            </clipto>
+        </pid>
+
+        <pid name="fcs/tiedown-right-magnitude-pid">
+            <input>fcs/tiedown-right-mag-error</input>
+            <kp>7000.0</kp>
+            <ki>0.0</ki>
+            <kd>500.0</kd>
+            <clipto>
+                <min>-50</min>
+                <max>1000</max>
+            </clipto>
+        </pid>
+
+        <pid name="fcs/tiedown-tail-magnitude-pid">
+            <input>fcs/tiedown-tail-mag-error</input>
+            <kp>7000.0</kp>
+            <ki>0.0</ki>
+            <kd>500.0</kd>
+            <clipto>
+                <min>-50</min>
+                <max>1000</max>
+            </clipto>
+        </pid>
+
+        <switch name="fcs/tiedown-left-magnitude">
+            <output>external_reactions/tiedown-left/magnitude</output>
+            <default value="0"/>
+
+            <test logic="AND" value="fcs/tiedown-left-magnitude-pid">
+                /sim/model/c172p/securing/tiedownL-visible EQ 1
+                /fdm/jsbsim/damage/repairing EQ 0
+            </test>
+        </switch>
+
+        <switch name="fcs/tiedown-right-magnitude">
+            <output>external_reactions/tiedown-right/magnitude</output>
+            <default value="0"/>
+
+            <test logic="AND" value="fcs/tiedown-right-magnitude-pid">
+                /sim/model/c172p/securing/tiedownR-visible EQ 1
+                /fdm/jsbsim/damage/repairing EQ 0
+            </test>
+        </switch>
+
+        <switch name="fcs/tiedown-tail-magnitude">
+            <output>external_reactions/tiedown-tail/magnitude</output>
+            <default value="0"/>
+
+            <test logic="AND" value="fcs/tiedown-tail-magnitude-pid">
+                /sim/model/c172p/securing/tiedownT-visible EQ 1
+                /fdm/jsbsim/damage/repairing EQ 0
+            </test>
+        </switch>
 
     </channel>
 

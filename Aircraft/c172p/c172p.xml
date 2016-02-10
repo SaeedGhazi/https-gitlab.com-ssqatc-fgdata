@@ -107,7 +107,8 @@
                 <z> 24 </z>
             </location>
         </pointmass>
-        <!-- Bushkits 1 to 4, pointmass [5] to [12] -->
+
+        <!-- Bushkits 1 to 5, pointmass [5] to [14], [15] is 180 hp engine (below) -->
         <!-- Weight and drag are managed by Systems/bushkit.xml -->
         <pointmass name="Left bush wheel 26 inches">
             <weight unit="LBS"> 0 </weight>
@@ -173,8 +174,24 @@
                 <z> -25 </z>
             </location>
         </pointmass>
+        <pointmass name="Left ski">
+            <weight unit="LBS"> 0 </weight>
+            <location name="POINTMASS" unit="IN">
+                <x> 58.2 </x>
+                <y>  -43 </y>
+                <z> -15.5 </z>
+            </location>
+        </pointmass>
+        <pointmass name="Right ski">
+            <weight unit="LBS"> 0 </weight>
+            <location name="POINTMASS" unit="IN">
+                <x> 58.2 </x>
+                <y>  43 </y>
+                <z> -15.5 </z>
+            </location>
+        </pointmass>
 
-        <!-- Extra weight due to 180 hp engine, pointmass [13]; managed by Systems/bushkit.xml -->
+        <!-- Extra weight due to 180 hp engine, pointmass [15]; managed by Systems/bushkit.xml -->
         <!-- x location for empty CG at 38.1", cf. 552SP POH p.6-12, Weight and moment tabulation: 1642 lbs, 62600 lb-ins -->
         <pointmass name="extra weight 180hp">
             <weight unit="LBS"> 0 </weight>
@@ -182,6 +199,16 @@
                 <x> 7.75 </x>
                 <y>  0 </y>
                 <z> 26.6 </z>
+            </location>
+        </pointmass>
+        
+        <!-- Extra weight due to oil quantity -->
+        <pointmass name="extra weight oil">
+            <weight unit="LBS"> 0 </weight>
+            <location name="POINTMASS" unit="IN">
+                <x> -0.886 </x>
+                <y> 0.316 </y>
+                <z> 0.082 </z>
             </location>
         </pointmass>
     </mass_balance>
@@ -244,7 +271,7 @@
             <location unit="IN">
                 <x> 226.7 </x>
                 <y> 0 </y>
-                <z> 8 </z>
+                <z> 17 </z>
             </location>
             <static_friction> 0.5 </static_friction>
             <dynamic_friction> 0.25 </dynamic_friction>
@@ -484,6 +511,58 @@
             <brake_group>RIGHT</brake_group>
             <retractable>1</retractable>
         </contact>
+
+        <!-- contact 23 = 2 wheels on nose ski.
+             The ski wheels friction would have a
+             rolling friction on a hard surface and
+             slide or drag on snow -->
+        <!-- contact 23, 24, 25 -->
+        <contact type="BOGEY" name="NOSE_SKI">
+            <location unit="IN">
+                <x>  18.44 </x>
+                <y> 0 </y>
+                <z> -10 </z>
+            </location>
+            <static_friction> 0.8 </static_friction>
+            <dynamic_friction> 0.5 </dynamic_friction>
+            <rolling_friction> 0.02 </rolling_friction>
+            <spring_coeff unit="LBS/FT"> 1800 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 600 </damping_coeff>
+            <max_steer unit="DEG"> 10 </max_steer>
+            <brake_group> NONE </brake_group>
+            <retractable>0</retractable>
+        </contact>
+        <contact type="BOGEY" name="LEFT_SKI">
+            <location unit="IN">
+                <x> 93 </x>
+                <y> -51 </y>
+                <z> -10 </z>
+            </location>
+            <static_friction> 0.8 </static_friction>
+            <dynamic_friction> 0.5 </dynamic_friction>
+            <rolling_friction> 0.02 </rolling_friction>
+            <spring_coeff unit="LBS/FT"> 5400 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 400 </damping_coeff>
+            <max_steer unit="DEG"> 0.0 </max_steer>
+            <brake_group> NONE </brake_group>
+            <retractable>0</retractable>
+        </contact>
+        <contact type="BOGEY" name="RIGHT_SKI">
+            <location unit="IN">
+                <x> 93 </x>
+                <y> 52 </y>
+                <z> -10 </z>
+            </location>
+            <static_friction> 0.8 </static_friction>
+            <dynamic_friction> 0.5 </dynamic_friction>
+            <rolling_friction> 0.02 </rolling_friction>
+            <spring_coeff unit="LBS/FT"> 5400 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 400 </damping_coeff>
+            <max_steer unit="DEG"> 0.0 </max_steer>
+            <brake_group>NONE </brake_group>
+            <retractable>0</retractable>
+        </contact>
+
     </ground_reactions>
 
     <propulsion>
@@ -551,8 +630,9 @@
                 <y> -112 </y>
                 <z> 59.4 </z>
             </location>
-            <capacity unit="LBS"> 185 </capacity>
-            <contents unit="LBS"> 100 </contents>
+            <capacity unit="LBS">129.43</capacity>
+            <contents unit="LBS">100.0 </contents>
+            <type>AVGAS</type>
         </tank>
 
         <!-- Tank number 1 -->
@@ -562,8 +642,9 @@
                 <y> 112 </y>
                 <z> 59.4 </z>
             </location>
-            <capacity unit="LBS"> 185 </capacity>
-            <contents unit="LBS"> 100 </contents>
+            <capacity unit="LBS">129.43</capacity>
+            <contents unit="LBS">100.0 </contents>
+            <type>AVGAS</type>
         </tank>
 
         <!-- Tank number 2, Float chamber  -->
@@ -573,9 +654,10 @@
                 <y> 0 </y>
                 <z> 59.4 </z>
             </location>
-            <capacity unit="LBS"> 0.1 </capacity>
-            <contents unit="LBS"> 0 </contents>
+            <capacity unit="LBS">0.1</capacity>
+            <contents unit="LBS">0.0</contents>
             <priority>1</priority>
+            <type>AVGAS</type>
         </tank>
 
         <!-- Tank number 3, Float chamber  -->
@@ -585,16 +667,32 @@
                 <y> 0 </y>
                 <z> 59.4 </z>
             </location>
-            <capacity unit="LBS"> 0.1 </capacity>
-            <contents unit="LBS"> 0 </contents>
+            <capacity unit="LBS">0.1</capacity>
+            <contents unit="LBS">0.0</contents>
             <priority>1</priority>
+            <type>AVGAS</type>
         </tank>
     </propulsion>
 
     <flight_control name="FCS: c172">
         <channel name="Pitch">
-            <summer name="Pitch Trim Sum">
+            <kinematic name="fcs/elevator-cmd-norm-filtered">
                 <input>fcs/elevator-cmd-norm</input>
+                <traverse>
+                    <setting>
+                        <position>-1</position>
+                        <time>0</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>0.15</time>
+                    </setting>
+                </traverse>
+                <output>/sim/model/c172p/cockpit/yoke-elevator</output>
+            </kinematic>
+
+            <summer name="Pitch Trim Sum">
+                <input>fcs/elevator-cmd-norm-filtered</input>
                 <input>fcs/pitch-trim-cmd-norm</input>
                 <clipto>
                     <min>-1</min>
@@ -627,8 +725,23 @@
         </channel>
 
         <channel name="Roll">
-            <summer name="Roll Trim Sum">
+            <kinematic name="fcs/aileron-cmd-norm-filtered">
                 <input>fcs/aileron-cmd-norm</input>
+                <traverse>
+                    <setting>
+                        <position>-1</position>
+                        <time>0</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>0.15</time>
+                    </setting>
+                </traverse>
+                <output>/sim/model/c172p/cockpit/yoke-aileron</output>
+            </kinematic>
+
+            <summer name="Roll Trim Sum">
+                <input>fcs/aileron-cmd-norm-filtered</input>
                 <input>fcs/roll-trim-cmd-norm</input>
                 <clipto>
                     <min>-1</min>
@@ -684,8 +797,23 @@
         </channel>
 
         <channel name="Yaw">
-            <summer name="Yaw Trim Sum">
+            <kinematic name="fcs/rudder-cmd-norm-filtered">
                 <input>fcs/rudder-cmd-norm</input>
+                <traverse>
+                    <setting>
+                        <position>-1</position>
+                        <time>0</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>0.15</time>
+                    </setting>
+                </traverse>
+                <output>/sim/model/c172p/cockpit/pedals-rudder</output>
+            </kinematic>
+
+            <summer name="Yaw Trim Sum">
+                <input>fcs/rudder-cmd-norm-filtered</input>
                 <input>fcs/yaw-trim-cmd-norm</input>
                 <clipto>
                     <min>-1</min>
@@ -718,8 +846,21 @@
         </channel>
 
         <channel name="Flaps">
+            <!-- Disable flap movement if electrical voltage is too low -->
+            <switch name="Flaps Command">
+                <default value="fcs/flap-cmd-norm"/>
+                <output>fcs/flap-input-norm</output>
+
+                <!-- Route back the (normalized) output of the <kinematic>
+                     to its input in order to disable it.
+                -->
+                <test logic="AND" value="fcs/flap-pos-norm">
+                    /systems/electrical/outputs/flaps le 16
+                </test>
+            </switch>
+
             <kinematic name="Flaps Control">
-                <input>fcs/flap-cmd-norm</input>
+                <input>fcs/flap-input-norm</input>
                 <traverse>
                     <setting>
                         <position>0</position>
@@ -753,6 +894,21 @@
                 </range>
                 <output>fcs/flap-pos-norm</output>
             </aerosurface_scale>
+
+            <kinematic name="Flaps Lever">
+                <input>/controls/flight/flaps</input>
+                <traverse>
+                    <setting>
+                        <position>0</position>
+                        <time>0</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>1</time>
+                    </setting>
+                </traverse>
+                <output>/sim/model/c172p/cockpit/flaps-lever</output>
+            </kinematic>
         </channel>
 
         <channel name="Mixture">
@@ -805,8 +961,19 @@
         </channel>
 
         <channel name="Landing Gear">
+            <!-- Disable gear movement if electrical voltage is too low -->
+            <switch name="Gear Command">
+                <default value="gear/gear-cmd-norm"/>
+                <output>gear/gear-input-norm</output>
+                <!-- Route back the (normalized) output of the <kinematic>
+                     to its input in order to disable it.
+                -->
+                <test logic="AND" value="gear/gear-pos-norm">
+                    /systems/electrical/outputs/instrument-lights le 20.0
+                </test>
+            </switch>
             <kinematic name="Gr">
-                <input>gear/gear-cmd-norm</input>
+                <input>gear/gear-input-norm</input>
                 <traverse>
                     <setting>
                         <position>0</position>
@@ -829,12 +996,11 @@
                     </setting>
                     <setting>
                         <position>1</position>
-                        <time>5</time>
+                        <time>1</time>
                     </setting>
                 </traverse>
             </kinematic>
         </channel>
-
     </flight_control>
 
     <aerodynamics>
@@ -936,6 +1102,7 @@
                     <property>gear/drag-coef[2]</property> <!-- bush wheels 36" -->
                     <property>gear/drag-coef[3]</property> <!-- Floats -->
                     <property>gear/drag-coef[4]</property> <!-- Amphibious -->
+                    <property>gear/drag-coef[5]</property> <!-- Ski -->
                 </product>
             </function>
 
@@ -1002,6 +1169,7 @@
                     <property>gear/drag-coef[2]</property>
                     <property>gear/drag-coef[3]</property>
                     <property>gear/drag-coef[4]</property>
+                    <property>gear/drag-coef[5]</property>
                 </product>
             </function>
 
@@ -1026,6 +1194,7 @@
                     <property>gear/drag-coef[2]</property>
                     <property>gear/drag-coef[3]</property>
                     <property>gear/drag-coef[4]</property>
+                    <property>gear/drag-coef[5]</property>
                 </product>
             </function>
         </axis>
@@ -1647,15 +1816,59 @@
                 <z>-1.0 </z>
             </direction>
         </force>
+
+        <!-- Tiedowns use body frame (x positive forward, y positive
+             right, z positive down).
+        -->
+        <force name="tiedown-left" frame="BODY">
+            <location unit="M">
+                <x> 0.1188</x>
+                <y>-2.2998</y>
+                <z> 0.4008</z>
+            </location>
+            <direction>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>1.0</z>
+            </direction>
+        </force>
+        <force name="tiedown-right" frame="BODY">
+            <location unit="M">
+                <x> 0.1188</x>
+                <y> 2.2998</y>
+                <z> 0.4008</z>
+            </location>
+            <direction>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>1.0</z>
+            </direction>
+        </force>
+        <force name="tiedown-tail" frame="BODY">
+            <location unit="M">
+                <x> 4.7116</x>
+                <y> 0.0000</y>
+                <z>-0.6663</z>
+            </location>
+            <direction>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>1.0</z>
+            </direction>
+        </force>
     </external_reactions>
 
     <system file="bushkit"/>
     <system file="fuel"/>
+    <system file="c172p-engine"/>
+    <system file="c172p-skis"/>
     <system file="hydrodynamics"/>
     <system file="c172p-hydrodynamics"/>
     <system file="c172p-ground-effects"/>
     <system file="c172p-damage"/>
     <system file="c172p-sounds"/>
+    <system file="c172p-heat"/>
+    <system file="indicated-airspeed"/>
 
     <!--
     <output name="JSBout172C.csv" type="CSV" rate="60">

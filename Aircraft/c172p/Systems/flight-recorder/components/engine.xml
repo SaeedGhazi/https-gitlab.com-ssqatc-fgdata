@@ -28,7 +28,25 @@
 
     <signal>
         <type>bool</type>
+        <property type="string">/engines/active-engine/crash-engine</property>
+    </signal>
+    <signal>
+        <type>bool</type>
+        <property type="string">/engines/active-engine/kill-engine</property>
+    </signal>
+    <signal>
+        <type>bool</type>
         <property type="string">/engines/active-engine/killed</property>
+    </signal>
+
+    <signal>
+        <type>bool</type>
+        <property type="string">/engines/active-engine/crashed</property>
+    </signal>
+
+    <signal>
+        <type>bool</type>
+        <property type="string">/engines/active-engine/coughing</property>
     </signal>
 
     <!-- ============================================================== -->
@@ -43,6 +61,11 @@
     <signal>
         <type>float</type>
         <property type="string">/controls/engines/current-engine/mixture</property>
+    </signal>
+    
+    <signal>
+        <type>bool</type>
+        <property type="string">/controls/engines/current-engine/carb-heat</property>
     </signal>
 
     <!-- ============================================================== -->

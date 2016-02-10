@@ -27,6 +27,12 @@
     <!-- Instruments                                                    -->
     <!-- ============================================================== -->
 
+    <!-- Airspeed Indicator -->
+    <signal>
+        <type>float</type>
+        <property type="string">/fdm/jsbsim/velocities/vias-kts</property>
+    </signal>
+
     <!-- Attitude indicator -->
     <signal>
         <type>float</type>
@@ -87,23 +93,6 @@
     <signal>
         <type>float</type>
         <property type="string">/engines/engine[0]/egt-bug-norm</property>
-    </signal>
-
-    <!-- ============================================================== -->
-    <!-- Climate Control                                                -->
-    <!-- ============================================================== -->
-
-    <signal>
-        <type>float</type>
-        <property type="string">/environment/aircraft-effects/cabinairtempC</property>
-    </signal>
-    <signal>
-        <type>float</type>
-        <property type="string">/environment/aircraft-effects/surfacetempC</property>
-    </signal>
-    <signal>
-        <type>float</type>
-        <property type="string">/environment/aircraft-effects/cabinairdewpointC</property>
     </signal>
 
     <!-- ============================================================== -->

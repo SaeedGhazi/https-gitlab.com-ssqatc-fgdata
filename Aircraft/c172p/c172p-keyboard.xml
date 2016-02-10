@@ -112,5 +112,32 @@
             <value type="bool">true</value>
         </binding>
     </key>
+    
+    <key n="66">
+        <name>Shift-B</name>
+        <desc>Parking Brakes</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>/sim/model/c172p/brake-parking</property>
+        </binding>
+    </key>
+
+    <key n="121">
+        <name>y</name>
+        <desc>Show/hide yokes</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/model/hide-yoke</property>
+        </binding>
+    </key>
+
+    <key n="265">
+        <name>F9</name>
+        <desc>Popup Fuel and Payload Settings dialog</desc>
+        <binding>
+            <command>nasal</command>
+            <script>gui.showWeightDialog()</script>
+        </binding>
+    </key>
 
 </PropertyList>

@@ -8,22 +8,36 @@ Under the GPL. Used by shadows under ALS -->
     <filter>
         <type>gain</type>
         <gain>0.3048</gain>
-        <input>/position/altitude-agl-ft</input>
-        <reference>-.75</reference>
-        <output>/position/gear-agl-m</output>
-    </filter>
-
-    <filter>
-        <type>gain</type>
-        <gain>0.3048</gain>
-        <input>/position/altitude-agl-ft</input>
-        <output>/position/altitude-agl-m</output>
+        <input>
+            <property>/position/altitude-agl-ft</property>
+        </input>
+        <output>
+            <property>/position/altitude-agl-m</property>
+        </output>
     </filter>
 
     <!-- These filters are used to passthrough a value in non-replay mode.
          In replay mode, the value from the flight recorder is used.
          This filter is needed because JSBSim wins over the flight recorder.
     -->
+    <filter>
+        <name>Ski ATan</name>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <property>/fdm/jsbsim/ski/atan</property>
+        </input>
+        <output>
+            <property>/fdm/jsbsim/ski/atan-actual</property>
+        </output>
+    </filter>
+
     <filter>
         <name>Stall Horn Volume</name>
         <type>gain</type>
@@ -77,6 +91,29 @@ Under the GPL. Used by shadows under ALS -->
             <property>/controls/gear/water-rudder-down-actual</property>
         </output>
     </filter>
+
+    <filter>
+        <name>Controls Parking Brake Lever</name>
+        <type>noise-spike</type>
+        <max-rate-of-change>2.5</max-rate-of-change>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <property>/sim/model/c172p/brake-parking</property>
+        </input>
+        <output>
+            <property>/sim/model/c172p/cockpit/parking-lever</property>
+        </output>
+    </filter>
+
+    <!-- ================================================================== -->
+    <!-- Ground and water effects                                           -->
+    <!-- ================================================================== -->
 
     <filter>
         <name>Spray and Wakes Effect for Pontoons</name>
@@ -293,5 +330,332 @@ Under the GPL. Used by shadows under ALS -->
             <property>/fdm/jsbsim/ground/right-tyre-smoke-ground-effect-speed-kt-actual</property>
         </output>
     </filter>
+
+    <!-- ================================================================== -->
+    <!-- Climate effects                                                    -->
+    <!-- ================================================================== -->
+
+    <filter>
+        <name>Aircraft Effect Fog Level</name>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.1</max-rate-of-change>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>/sim/model/c172p/enable-fog-frost</property>
+            </condition>
+            <property>/fdm/jsbsim/heat/fog-level</property>
+        </input>
+        <input>
+            <value>0.0</value>
+        </input>
+        <output>
+            <property>/environment/aircraft-effects/fog-level</property>
+        </output>
+    </filter>
+
+    <filter>
+        <name>Aircraft Effect Frost Level</name>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.1</max-rate-of-change>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>/sim/model/c172p/enable-fog-frost</property>
+            </condition>
+            <property>/fdm/jsbsim/heat/frost-level</property>
+        </input>
+        <input>
+            <value>0.0</value>
+        </input>
+        <output>
+            <property>/environment/aircraft-effects/frost-level</property>
+        </output>
+    </filter>
+
+    <logic>
+        <name>Aircraft Effect Temperature In Range</name>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <and>
+                <less-than>
+                    <property>/fdm/jsbsim/heat/cabin-air-temp-degc</property>
+                    <value>32.0</value>
+                </less-than>
+                <greater-than>
+                    <property>/fdm/jsbsim/heat/cabin-air-temp-degc</property>
+                    <value>0.0</value>
+                </greater-than>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/cabin-air-temp-in-range</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Aircraft Effect Fog Or Frost Increasing</name>
+        <enable>
+            <condition>
+                <not>
+                    <property>/sim/freeze/replay-state</property>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <and>
+                <greater-than>
+                    <property>/fdm/jsbsim/heat/moisture-norm</property>
+                    <value>0.5</value>
+                </greater-than>
+                <greater-than>
+                    <property>/fdm/jsbsim/heat/surface-dewpoint-diff</property>
+                    <value>0.0</value>
+                </greater-than>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/fog-or-frost-increasing</property>
+        </output>
+    </logic>
+
+    <!-- ================================================================== -->
+    <!-- Securing aircraft                                                  -->
+    <!-- ================================================================== -->
+
+    <logic>
+        <name>Parking Brake And Chock</name>
+        <input>
+            <or>
+                <!-- The actual parking brake controlled by the pilot -->
+                <property>/sim/model/c172p/brake-parking</property>
+
+                <property>/sim/model/c172p/securing/chock-visible</property>
+
+                <!-- When changing the bushkit, hold position so that new
+                     initial length of tiedowns can be safely computed.
+                -->
+                <property>/fdm/jsbsim/damage/repairing</property>
+
+                <!-- A broken gear operates as a parking brake -->
+                <property>/fdm/jsbsim/gear/unit[1]/broken</property>
+                <property>/fdm/jsbsim/gear/unit[2]/broken</property>
+            </or>
+        </input>
+        <output>
+            <property>/controls/gear/brake-parking</property>
+        </output>
+    </logic>
+
+    <!-- Logic for chocks -->
+    <logic>
+        <name>Chock Can Have</name>
+        <input>
+            <and>
+                <less-than>
+                    <property>/fdm/jsbsim/bushkit</property>
+                    <value>3</value>
+                </less-than>
+                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
+                <less-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>1.0</value>
+                </less-than>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/chock-can-have</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Chock Visible</name>
+        <input>
+            <and>
+                <property>/sim/model/c172p/securing/chock</property>
+                <property>/sim/model/c172p/securing/chock-can-have</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/chock-visible</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Chock Addable</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/model/c172p/securing/chock</property>
+                </not>
+                <property>/sim/model/c172p/securing/chock-can-have</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/chock-addable</property>
+        </output>
+    </logic>
+
+    <!-- logic for pitot tube -->
+    <logic>
+        <name>Pitot Cover Addable</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/model/c172p/securing/pitot-cover-visible</property>
+                </not>
+                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
+                <less-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>1.0</value>
+                </less-than>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Pitot Cover Removable</name>
+        <input>
+            <and>
+                <property>/sim/model/c172p/securing/pitot-cover-visible</property>
+                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
+                <less-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>1.0</value>
+                </less-than>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+        </output>
+    </logic>
+
+    <!-- logic for tiedowns -->
+    <logic>
+        <name>Tiedowns Can Have</name>
+        <input>
+            <and>
+                <not-equals>
+                    <property>/fdm/jsbsim/bushkit</property>
+                    <value>3</value>
+                </not-equals>
+                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
+                <property>/fdm/jsbsim/ground/solid</property>
+                <less-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>1.0</value>
+                </less-than>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/tiedowns-can-have</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Left Tiedowns Addable</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/model/c172p/securing/tiedownL-visible</property>
+                </not>
+                <property>/sim/model/c172p/securing/tiedowns-can-have</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/tiedownL-addable</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Right Tiedowns Addable</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/model/c172p/securing/tiedownR-visible</property>
+                </not>
+                <property>/sim/model/c172p/securing/tiedowns-can-have</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/tiedownR-addable</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Tail Tiedowns Addable</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/model/c172p/securing/tiedownT-visible</property>
+                </not>
+                <property>/sim/model/c172p/securing/tiedowns-can-have</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/tiedownT-addable</property>
+        </output>
+    </logic>
+
+    <!-- ================================================================== -->
+    <!-- Lighting  -->
+    <!-- ================================================================== -->
+
+    <logic>
+        <name>Navigation Light Left Damaged</name>
+        <input>
+            <and>
+                <equals>
+                    <property>/sim/model/c172p/damage/left-wing</property>
+                    <value>2</value>
+                </equals>
+                <not>
+                    <property>/fdm/jsbsim/crash</property>
+                </not>
+            </and>
+        </input>
+        <output>
+            <property>sim/model/c172p/lighting/nav-lights/left-damaged</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Navigation Light Right Damaged</name>
+        <input>
+            <and>
+                <equals>
+                    <property>/sim/model/c172p/damage/right-wing</property>
+                    <value>2</value>
+                </equals>
+                <not>
+                    <property>/fdm/jsbsim/crash</property>
+                </not>
+            </and>
+        </input>
+        <output>
+            <property>sim/model/c172p/lighting/nav-lights/right-damaged</property>
+        </output>
+    </logic>
 
 </PropertyList>

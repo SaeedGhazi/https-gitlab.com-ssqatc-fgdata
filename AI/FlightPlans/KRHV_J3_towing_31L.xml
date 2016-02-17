@@ -267,8 +267,8 @@
 	 </wpt>
 
 	 <wpt>
-   <name>EOF</name>
-  </wpt>
+		 <name>END</name>
+	 </wpt>
 
  </flightplan>
 

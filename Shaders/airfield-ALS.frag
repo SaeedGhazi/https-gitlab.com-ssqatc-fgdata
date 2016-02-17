@@ -207,7 +207,7 @@ if ((dist < 3000.0)&& (quality_level > 3) && (wetness>0.0))
 
 // color and shade variation of the grass
 
-if (use_color_overlay)
+if (use_color_overlay == 1)
 	{
 	float nfact_1m = 3.0 * (noise_1m - 0.5) * detail_fade(1.0, abs(ct),dist);//* (1.0 - smoothstep(3000.0, 6000.0, dist/ abs(ct)));
 	float nfact_5m = 2.0 * (noise_5m - 0.5) * detail_fade(2.0, abs(ct),dist);;

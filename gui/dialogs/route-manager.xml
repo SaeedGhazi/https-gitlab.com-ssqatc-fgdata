@@ -44,18 +44,26 @@ command interface /autopilot/route-manager/input:
 
             var insert = func {
                 var insertIndex = sel_index();
-                if (insertIndex >= 0) {
-                    # when selection index is valid, insert *after* the waypoint
-                    insertIndex = insertIndex + 1;
+                if (insertIndex < 0) {
+                    var msg = "Select the waypoint after which new waypoints should be added";
+                    setprop("sim/messages/copilot", msg);
+                    return;
                 }
 
-                cmd.setValue("@insert" ~ insertIndex ~ ":" ~ input.getValue());
+                # Input is a list of space-separated waypoint specifications
+                var argv = split(" ", input.getValue());
+                foreach (var arg; argv) {
+                    # When argument is not empty (caused by multiple space
+                    # separators) insert *after* waypoint
+                    if (size(arg) > 0) {
+                        insertIndex += 1;
+                        cmd.setValue("@insert" ~ insertIndex ~ ":" ~ arg);
+                    }
+                }
+
                 input.setValue("");
-
-                if (insertIndex >= 0) {
-                    selection.setValue(insertIndex);
-                    gui.dialog_update("route-manager");
-                }
+                selection.setValue(insertIndex);
+                gui.dialog_update("route-manager");
             }
 
             var remove = func {
@@ -645,7 +653,7 @@ command interface /autopilot/route-manager/input:
 
     <text>
         <padding>1</padding>
-        <label>Format: (airport|fix|nav|lon,lat)[@alt] -- e.g. "KSFO@900"</label>
+        <label>Format: list of (airport|fix|nav|nav/rad/dst|lon,lat)[@alt] -- e.g. "KSFO@900", "SAHEY CIITY@6000"</label>
         <color>
             <red>0.7</red>
             <green>0.7</green>

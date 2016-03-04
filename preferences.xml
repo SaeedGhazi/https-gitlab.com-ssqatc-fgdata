@@ -30,8 +30,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <aircraft>c172p</aircraft>
     <virtual-cockpit type="bool">false</virtual-cockpit>
     <presets preserve="y">
-      <airport-id>KSFO</airport-id>
-      <runway/>
+      <airport-id>LEBL</airport-id>
+      <runway>20</runway>
       <trim type="bool">true</trim>
     </presets>
     <startup>
@@ -997,8 +997,10 @@ Started September 2000 by David Megginson, david@megginson.com
     <!-- Radio settings -->
     <comm n="0">
       <frequencies>
-        <selected-mhz type="double">120.500</selected-mhz>
-        <standby-mhz type="double">118.850</standby-mhz>
+        <!-- TWR -->
+        <selected-mhz type="double">118.100</selected-mhz>
+        <!-- APP -->
+        <standby-mhz type="double">119.100</standby-mhz>
       </frequencies>
       <volume type="double">0.6</volume>
       <serviceable type="bool">true</serviceable>
@@ -1006,8 +1008,10 @@ Started September 2000 by David Megginson, david@megginson.com
     </comm>
     <comm n="1">
       <frequencies>
-        <selected-mhz type="double">118.300</selected-mhz>
-        <standby-mhz type="double">133.775</standby-mhz>
+        <!-- ATIS -->
+        <selected-mhz type="double">118.650</selected-mhz>
+        <!-- DEP -->
+        <standby-mhz type="double">126.500</standby-mhz>
       </frequencies>
       <volume type="double">0.6</volume>
       <serviceable type="bool">true</serviceable>
@@ -1015,11 +1019,13 @@ Started September 2000 by David Megginson, david@megginson.com
     </comm>
     <nav n="0">
       <frequencies>
-        <selected-mhz type="double">115.80</selected-mhz>
-        <standby-mhz type="double">111.70</standby-mhz>
+        <!-- BCA LOC (25R) -->
+        <selected-mhz type="double">109.50</selected-mhz>
+        <!-- BARCELONA VOR/DME -->
+        <standby-mhz type="double">116.70</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">280.0</selected-deg>
+        <selected-deg type="double">246.0</selected-deg>
       </radials>
       <serviceable type="bool">true</serviceable>
       <cdi>
@@ -1035,11 +1041,13 @@ Started September 2000 by David Megginson, david@megginson.com
     </nav>
     <nav n="1">
       <frequencies>
-        <selected-mhz type="double">116.80</selected-mhz>
-        <standby-mhz type="double">113.90</standby-mhz>
+        <!-- SABADELL DVOR/DME -->
+        <selected-mhz type="double">112.00</selected-mhz>
+        <!-- BLW LOC (25L) -->
+        <standby-mhz type="double">111.50</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">029.0</selected-deg>
+        <selected-deg type="double">010.0</selected-deg>
       </radials>
       <serviceable type="bool">true</serviceable>
       <cdi>
@@ -1099,8 +1107,9 @@ Started September 2000 by David Megginson, david@megginson.com
     </magnetic-compass>
     <dme n="0">
       <serviceable type="bool" archive="y">true</serviceable>
-      <switch-position type="int" archive="y">1</switch-position>
+      <switch-position type="int" archive="y">2</switch-position>
       <frequencies>
+        <selected-mhz type="double">116.7</selected-mhz>
         <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
       </frequencies>
     </dme>
@@ -1129,8 +1138,10 @@ Started September 2000 by David Megginson, david@megginson.com
     </clock>
     <adf n="0">
       <frequencies>
-        <selected-khz type="int">379</selected-khz>
-        <standby-khz type="int">341</standby-khz>
+        <!-- BARCELONA NDB (QA) -->
+        <selected-khz type="int">338</selected-khz>
+        <!-- VILLANUEVA NDB (VNV) -->
+        <standby-khz type="int">380</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>

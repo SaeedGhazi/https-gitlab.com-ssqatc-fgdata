@@ -4,7 +4,7 @@
 ##
 ##  Inspired by the work of Stewart Andreason.
 ##
-##  Copyright (C) 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2010, 2016  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -116,8 +116,10 @@ var Walker = {
             obj.view.getNode("config/x-offset-m").getValue(),
             obj.view.getNode("config/y-offset-m").getValue()
             ];
-        obj.heading =
-            obj.view.getNode("config/heading-offset-deg").getValue();
+        var h = obj.view.getNode("config/heading-offset-deg");
+        if (h != nil and h.getValue() != nil) {
+            obj.heading = h.getValue();
+        }
         obj.speed_fwd  = 0.0;
         obj.speed_side = 0.0;
         obj.isactive = 0;

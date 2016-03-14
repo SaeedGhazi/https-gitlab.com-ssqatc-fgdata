@@ -138,6 +138,11 @@
 		<sea_r><use>/environment/sea/color_r</use></sea_r>
 		<sea_g><use>/environment/sea/color_g</use></sea_g>
 		<sea_b><use>/environment/sea/color_b</use></sea_b>
+		<!-- filtering -->
+   		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
+    		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+   		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
 		<!-- cloud shadows -->
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
@@ -377,6 +382,7 @@
 				<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>
@@ -602,6 +608,26 @@
                     		<type>float</type>
                     		<value><use>landing_light3_offset</use></value>
                 	</uniform>
+ 			 <uniform>
+        			<name>gamma</name>
+        			<type>float</type>
+        			<value><use>gamma</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>brightness</name>
+        			<type>float</type>
+        			<value><use>brightness</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_filtering</name>
+        			<type>bool</type>
+        			<value><use>use_filtering</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_night_vision</name>
+        			<type>bool</type>
+        			<value><use>use_night_vision</use></value>
+      			</uniform>
 			<uniform>
        				<name>cloudpos1_x</name>
         			<type>float</type>

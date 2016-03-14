@@ -85,7 +85,7 @@ vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
-
+vec3 filter_combined (in vec3 color) ;
 
 
 
@@ -657,6 +657,7 @@ hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 fragColor.rgb = mix(hazeColor+secondary_light * fog_backscatter(mvisibility) , fragColor.rgb,transmission);
 }
 
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
 

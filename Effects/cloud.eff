@@ -17,6 +17,10 @@
     <lightning-pos-x><use>/environment/lightning/lightning-pos-x</use></lightning-pos-x>
     <lightning-pos-y><use>/environment/lightning/lightning-pos-y</use></lightning-pos-y>
     <lightning-range><use>/environment/lightning/lightning-range</use></lightning-range>
+    <use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
+    <gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    <brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
   </parameters>
   
   <technique n="9">
@@ -63,6 +67,7 @@
       <program>
         <vertex-shader>Shaders/3dcloud-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/3dcloud-ALS.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <attribute>
           <name>usrAttr1</name>
           <index>10</index>
@@ -141,6 +146,26 @@
         <name>lightning_range</name>
         <type>float</type>
         <value><use>lightning-range</use></value>
+      </uniform>
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
       </uniform>
       <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>

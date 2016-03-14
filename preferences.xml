@@ -292,6 +292,12 @@ Started September 2000 by David Megginson, david@megginson.com
         <landing-light3-offset-deg type="float">0.0</landing-light3-offset-deg>
 	<use-flashlight type="int">0</use-flashlight>
       </als-secondary-lights>
+      <als-filters>
+	 <use-filtering type="bool">false</use-filtering>
+ 	 <gamma type="float">0.0</gamma>
+ 	 <brightness type="float">1.0</brightness>
+	 <use-night-vision type="bool">false</use-night-vision>
+      </als-filters>
     </rendering>
     <model-hz type="int">120</model-hz>
     <navdb>

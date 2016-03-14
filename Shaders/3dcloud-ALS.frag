@@ -3,6 +3,8 @@ varying float fogFactor;
 
 varying vec3 hazeColor;
 
+vec3 filter_combined (in vec3 color) ;
+
 void main(void)
 {
       vec4 base = texture2D( baseTexture, gl_TexCoord[0].st);
@@ -10,8 +12,11 @@ void main(void)
         discard;
 
       vec4 finalColor = base * gl_Color;
- 
-      gl_FragColor.rgb = mix(hazeColor, finalColor.rgb, fogFactor );
+	
+      finalColor.rgb = mix(hazeColor, finalColor.rgb, fogFactor ); 
+      finalColor.rgb = filter_combined(finalColor.rgb);
+
+      gl_FragColor.rgb = finalColor.rgb;
       gl_FragColor.a = mix(0.0, finalColor.a, 1.0 - 0.5 * (1.0 - fogFactor));
 }
 

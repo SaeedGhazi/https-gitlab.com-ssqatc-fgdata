@@ -49,6 +49,7 @@ float fog_backscatter(in float avisibility);
 
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
+vec3 filter_combined (in vec3 color) ;
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -345,7 +346,7 @@ hColor = clamp(hColor,0.0,1.0);
 
 color = mix(hColor+secondary_light * fog_backscatter(avisibility),color, transmission);
 
-
+color = filter_combined(color);
 
   gl_FragColor = vec4(color, 1.0);
   gl_FragDepth = 0.1;

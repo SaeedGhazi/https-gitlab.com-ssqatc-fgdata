@@ -130,6 +130,10 @@
     <landing_light3_offset><use>/sim/rendering/als-secondary-lights/landing-light3-offset-deg</use></landing_light3_offset>
     <quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     <tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
+    <use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
+    <gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    <brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
     <cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
     <cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
     <cloudpos2_x><use>/local-weather/cloud-shadows/cloudpos-x[1]</use></cloudpos2_x>
@@ -308,6 +312,7 @@
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
 	  <uniform>
         <name>grain_strength</name>
@@ -478,6 +483,26 @@
         <name>landing_light3_offset</name>
         <type>float</type>
         <value><use>landing_light3_offset</use></value>
+      </uniform>
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>

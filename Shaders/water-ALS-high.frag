@@ -4,7 +4,7 @@
 //  © Michael Horsch - 2005
 //  Major update and revisions - 2011-10-07
 //  © Emilian Huminiuc and Vivian Meazza
-// ported to lightfield shading Thorsten Renk 2012
+// ported to ALS Thorsten Renk 2012
 
 #version 120
 
@@ -92,6 +92,8 @@ vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
+vec3 filter_combined (in vec3 color) ;
+
 
 //////////////////////
 
@@ -214,7 +216,7 @@ void main(void)
 
 	// get depth map
 	vec4 topoTexel = texture2D(topo_map, TopoUV);
-    float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
+    	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
 	vec3 floorColour = topoTexel.rgb;
 	
 	mat4 RotationMatrix;
@@ -495,11 +497,12 @@ void main(void)
 
 	float waveSlope = N.g;
 	float surfFact = 0.0;
-	if ((windEffect >= 8.0)  || (steepness < 0.999)) 
+	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel.a > 0.98)) 
 		{ 
 		if ((waveSlope > 0.0) && (ocean_flag ==1)) 
 			{
 			surfFact = surfFact +(1.0 -smoothstep(0.97,1.0,steepness));
+			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel.a);
 			waveSlope = waveSlope + 2.0 * surfFact;
 			}
 		if (waveSlope >= foamSlope){
@@ -705,6 +708,10 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 
 	finalColor.rgb = mix(hazeColor  +secondary_light * fog_backscatter(mvisibility), finalColor.rgb,transmission);
 	}
+
+finalColor.rgb = filter_combined(finalColor.rgb);
+
+
 
 gl_FragColor = finalColor;
 

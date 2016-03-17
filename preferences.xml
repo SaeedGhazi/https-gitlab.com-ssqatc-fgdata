@@ -297,6 +297,7 @@ Started September 2000 by David Megginson, david@megginson.com
  	 <gamma type="float">0.0</gamma>
  	 <brightness type="float">1.0</brightness>
 	 <use-night-vision type="bool">false</use-night-vision>
+	 <use-IR-vision type="bool">false</use-IR-vision>
       </als-filters>
     </rendering>
     <model-hz type="int">120</model-hz>

@@ -38,6 +38,7 @@ uniform float overcast;
 //uniform float scattering;
 uniform float ground_scattering;
 
+uniform bool use_IR_vision;
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -229,6 +230,11 @@ else // the faster, full-day version without lightfields
     yprime_alt = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);
 }
  
+if (use_IR_vision)
+	{
+	light_ambient.rgb = max(light_ambient.rgb, vec3 (0.5, 0.5, 0.5));
+	}
+
 
 // default lighting based on texture and material using the light we have just computed
 

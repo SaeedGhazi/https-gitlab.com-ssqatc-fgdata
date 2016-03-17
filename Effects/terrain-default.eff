@@ -114,6 +114,7 @@
     <moonlight><use>/environment/moonlight</use></moonlight>
     <season><use>/environment/season</use></season>
     <air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+    <delta_T><use>/environment/surface/delta-T-soil</use></delta_T>
     <wind_effects><use>/sim/rendering/shaders/wind-effects</use></wind_effects>
     <windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
     <windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
@@ -134,6 +135,7 @@
     <gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
     <brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
     <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    <use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
     <cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
     <cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
     <cloudpos2_x><use>/local-weather/cloud-shadows/cloudpos-x[1]</use></cloudpos2_x>
@@ -500,9 +502,19 @@
         <value><use>use_night_vision</use></value>
       </uniform>
       <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
         <name>use_filtering</name>
         <type>bool</type>
         <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
       </uniform>
       <uniform>
         <name>cloudpos1_x</name>

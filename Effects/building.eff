@@ -104,6 +104,7 @@
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
+    		<delta_T><use>/environment/surface/delta-T-structure</use></delta_T>
 		<!-- 	END fog include -->
   </parameters>
   <!-- Atmospheric scattering technique with model shader-->
@@ -190,10 +191,11 @@
 	  </texture-unit>
       <program>
         <vertex-shader n="0">Shaders/building-model-ALS-ultra.vert</vertex-shader>
-        <fragment-shader n="1">Shaders/model-ALS-ultra.frag</fragment-shader>
-		<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
-		<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
-		<fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
+        <!--<fragment-shader n="0">Shaders/model-ALS-ultra.frag</fragment-shader>
+		<fragment-shader n="1">Shaders/cloud-shadowfunc.frag</fragment-shader>
+		<fragment-shader n="2">Shaders/hazes.frag</fragment-shader>
+		<fragment-shader n="3">Shaders/secondary_lights.frag</fragment-shader>
+		<fragment-shader n="4">Shaders/filters-ALS.frag</fragment-shader>-->
       </program>
 	</pass>
   </technique>

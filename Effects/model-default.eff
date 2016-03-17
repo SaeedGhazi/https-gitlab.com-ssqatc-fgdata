@@ -26,6 +26,12 @@
 		<moonlight><use>/environment/moonlight</use></moonlight>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
+    		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    		<delta_T><use>/environment/surface/delta-T-structure</use></delta_T>
+    		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
 		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
 		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
 		<view_pitch_offset><use>/sim/current-view/pitch-offset-deg</use></view_pitch_offset>
@@ -108,6 +114,7 @@
         <fragment-shader>Shaders/model-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -173,6 +180,36 @@
         <name>air_pollution</name>
         <type>float</type>
         <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
       </uniform>
       <uniform>
         <name>view_pitch_offset</name>

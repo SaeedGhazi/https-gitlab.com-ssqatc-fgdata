@@ -77,6 +77,8 @@ uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
 
+uniform bool use_IR_vision;
+
 // constants needed by the light and fog computations ###################################################
 
 const float EarthRadius = 5800000.0;
@@ -103,7 +105,7 @@ vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float lightArg);
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
-
+vec3 filter_combined (in vec3 color) ;
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -213,6 +215,7 @@ void main (void)
         }
 
 
+
     /// END light
 
     /// BEGIN grain overlay
@@ -297,7 +300,11 @@ void main (void)
 
 
     vec4 Diffuse  = light_diffuse * nDotVP;
-    Diffuse.rgb += secondary_light * light_distance_fading(dist);
+    Diffuse.rgb += secondary_light * light_distance_fading(dist);	
+    if (use_IR_vision)
+	{
+	Diffuse.rgb = max(Diffuse.rgb, vec3 (0.5, 0.5, 0.5));
+	}
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
@@ -558,5 +565,8 @@ void main (void)
 
 
       fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
+
+
+      fragColor.rgb = filter_combined(fragColor.rgb);
     gl_FragColor = fragColor;
     }

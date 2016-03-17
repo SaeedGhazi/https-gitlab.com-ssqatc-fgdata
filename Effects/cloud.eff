@@ -20,7 +20,11 @@
     <use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
     <gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
     <brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    <delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
     <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    <use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
+    <display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    <display_ysize><use>/sim/startup/ysize</use></display_ysize>
   </parameters>
   
   <technique n="9">
@@ -68,6 +72,7 @@
         <vertex-shader>Shaders/3dcloud-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/3dcloud-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+	<fragment-shader>Shaders/noise.frag</fragment-shader>
         <attribute>
           <name>usrAttr1</name>
           <index>10</index>
@@ -167,6 +172,26 @@
         <type>bool</type>
         <value><use>use_night_vision</use></value>
       </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
       <!--<vertex-program-two-side>true</vertex-program-two-side>-->
     </pass>
   </technique>

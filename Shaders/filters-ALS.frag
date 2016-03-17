@@ -8,10 +8,17 @@
 
 uniform float gamma;
 uniform float brightness;
+uniform float delta_T;
+uniform float osg_SimulationTime;
 
 uniform bool use_filtering;
 uniform bool use_night_vision;
+uniform bool use_IR_vision;
 
+uniform int display_xsize;
+uniform int display_ysize;
+
+float Noise2D(in vec2 coord, in float wavelength);
 
 vec3 gamma_correction (in vec3 color) {
 
@@ -31,7 +38,29 @@ vec3 night_vision (in vec3 color) {
 
 float value = length(color)/1.732;
 
-return vec3 (0.0, 1.0, 0.0) * value;
+vec2 center = vec2 (float(display_xsize) * 0.5, float(display_ysize) * 0.5);
+float noise = Noise2D( vec2 (gl_FragCoord.x + 100.0 * osg_SimulationTime, gl_FragCoord.y + 300.0 * osg_SimulationTime), 4.0);
+
+float fade = 1.0 - smoothstep( 0.3 * display_ysize, 0.55 * display_ysize, length(gl_FragCoord.xy -center));
+
+return vec3 (0.0, 1.0, 0.0) * value * (0.5 + 0.5 * noise) * fade;
+
+}
+
+
+vec3 IR_vision (in vec3 color) {
+
+float value = length(color)/1.732;
+value = 1.0 - value;
+
+float T_mapped = smoothstep(-10.0, 10.0, delta_T);
+
+float gain = mix(T_mapped, value, 0.7);
+//float gain = 0.2 * T_mapped + 0.8 * value * T_mapped;
+if (delta_T < -10.0) {gain = 0.0;}
+
+
+return vec3 (0.7, 0.7, 0.7) * gain;
 
 }
 
@@ -48,6 +77,11 @@ color = brightness_adjust(color);
 if (use_night_vision)
 	{
 	color = night_vision(color);
+	}
+
+else if (use_IR_vision)
+	{
+	color = IR_vision(color);
 	}
 
 return gamma_correction (color);

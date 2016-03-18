@@ -145,7 +145,6 @@ please see Docs/README.model-combined.eff for documentation
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<wetness><use>/environment/surface/wetness</use></wetness>
 		<rnorm><use>/environment/rain-norm</use></rnorm>
-    		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
 		<cloudpos2_x><use>/local-weather/cloud-shadows/cloudpos-x[1]</use></cloudpos2_x>

@@ -538,10 +538,15 @@ void main (void)
         hazeColor = vec3 (1.0, 1.0, 1.0);
         }
 
+    if (use_IR_vision)
+	{
+	//hazeColor.rgb = max(hazeColor.rgb, vec3 (0.5, 0.5, 0.5));
+	}
+
 
     /// END fog color
 	fragColor = clamp(fragColor, 0.0, 1.0);
-    	//hazeColor = clamp(hazeColor, 0.0, 1.0);
+    	hazeColor = clamp(hazeColor, 0.0, 1.0);
 
     ///BEGIN Rayleigh fog ///
 

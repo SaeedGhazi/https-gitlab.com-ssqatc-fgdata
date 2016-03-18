@@ -13,6 +13,8 @@
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
     <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
+    <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    <use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
   </parameters>
 
   <technique n="10">
@@ -111,6 +113,16 @@
         <type>bool</type>
 	<!-- Short-term fix for unstable normals in taxiway lights -->
         <value>false</value>
+      </uniform>
+      <uniform>
+       	<name>use_night_vision</name>
+        <type>bool</type>
+       	<value><use>use_night_vision</use></value>
+      </uniform>
+      	 <uniform>
+       	<name>use_IR_vision</name>
+        <type>bool</type>
+       	<value><use>use_IR_vision</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

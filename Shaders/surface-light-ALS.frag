@@ -9,6 +9,8 @@ uniform float eye_alt;
 uniform float terminator;
 uniform float size;
 
+uniform bool use_IR_vision;
+uniform bool use_night_vision;
 
 varying vec3 relPos;
 varying vec2 rawPos;
@@ -90,6 +92,8 @@ void main()
     float distance_in_layer;
     float transmission_arg;
 
+    if (use_IR_vision) {discard;}
+
     // Discard the second and third vertex, which are used for directional lighting
     if (gl_Color.a == 0.0) {discard;}
 
@@ -162,6 +166,10 @@ void main()
     //vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
     float intensity = light_sprite(gl_TexCoord[0].st,transmission, noise);
     vec3 light_color = gl_Color.rgb;
+
+    if (use_night_vision) 
+	{light_color.rgb = vec3 (0.0, 1.0, 0.0);}
+
     light_color = mix(light_color, vec3 (1.0, 1.0, 1.0), 0.5 * intensity * intensity);
 
     gl_FragColor =   vec4 (clamp(light_color.rgb,0.0,1.0), intensity * transmission * dist_att);

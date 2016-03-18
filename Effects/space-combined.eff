@@ -8,7 +8,7 @@
  <pass>
  <program>
         <vertex-shader n="0">Shaders/space-ALS-ultra.vert</vertex-shader>
-        <fragment-shader n="1">Shaders/space-ALS-ultra.frag</fragment-shader>
+        <fragment-shader n="0">Shaders/space-ALS-ultra.frag</fragment-shader>
   </program>
   </pass>
  </technique>

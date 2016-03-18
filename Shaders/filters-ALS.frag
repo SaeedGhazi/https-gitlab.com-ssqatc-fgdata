@@ -55,7 +55,7 @@ value = 1.0 - value;
 
 float T_mapped = smoothstep(-10.0, 10.0, delta_T);
 
-float gain = mix(T_mapped, value, 0.7);
+float gain = mix(T_mapped, value, 0.5);
 //float gain = 0.2 * T_mapped + 0.8 * value * T_mapped;
 if (delta_T < -10.0) {gain = 0.0;}
 
@@ -72,17 +72,24 @@ if (use_filtering == false)
 	}
 
 
-color = brightness_adjust(color);
+
 
 if (use_night_vision)
 	{
+	color = brightness_adjust(color);
 	color = night_vision(color);
 	}
 
 else if (use_IR_vision)
 	{
+	float IR_brightness = min(1.0/(brightness+0.01), 5.0);
+	color = clamp(IR_brightness * color, 0.0, 1.0);
 	color = IR_vision(color);
 	}
+else
+	{
+	color = brightness_adjust(color);
+	}	
 
 return gamma_correction (color);
 

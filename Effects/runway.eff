@@ -161,12 +161,13 @@
         <internal-format><use>texture[4]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader n="1">Shaders/terrain-ALS-ultra.vert</vertex-shader>
-        <fragment-shader n="1">Shaders/runway-ALS.frag</fragment-shader>        
-	<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
-	<fragment-shader n="3">Shaders/noise.frag</fragment-shader>
-	<fragment-shader n="4">Shaders/hazes.frag</fragment-shader>
-	<fragment-shader n="5">Shaders/secondary_lights.frag</fragment-shader>
+        <vertex-shader n="0">Shaders/terrain-ALS-ultra.vert</vertex-shader>
+        <fragment-shader n="0">Shaders/runway-ALS.frag</fragment-shader>        
+	<fragment-shader n="1">Shaders/cloud-shadowfunc.frag</fragment-shader>
+	<fragment-shader n="2">Shaders/noise.frag</fragment-shader>
+	<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
+	<fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
+	<fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -268,6 +269,7 @@
         <type>float</type>
         <value><use>air_pollution</use></value>
       </uniform>
+      <!-- secondary lights -->	
       <uniform>
         <name>view_pitch_offset</name>
         <type>float</type>
@@ -298,6 +300,38 @@
         <type>float</type>
         <value><use>landing_light3_offset</use></value>
       </uniform>
+      <!-- filtering -->
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+      <!-- cloud shadows -->
       <uniform>
         <name>cloudpos1_x</name>
         <type>float</type>

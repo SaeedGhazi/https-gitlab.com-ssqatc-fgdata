@@ -456,6 +456,7 @@
         <type>float</type>
         <value><use>air_pollution</use></value>
       </uniform>
+      <!-- secondary lights -->
       <uniform>
         <name>view_pitch_offset</name>
         <type>float</type>
@@ -486,6 +487,7 @@
         <type>float</type>
         <value><use>landing_light3_offset</use></value>
       </uniform>
+      <!-- filtering -->
       <uniform>
         <name>gamma</name>
         <type>float</type>
@@ -516,6 +518,7 @@
         <type>float</type>
         <value><use>delta_T</use></value>
       </uniform>
+      <!-- cloud shadows -->
       <uniform>
         <name>cloudpos1_x</name>
         <type>float</type>

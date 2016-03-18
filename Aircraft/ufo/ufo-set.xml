@@ -65,7 +65,7 @@
 		<view n="0">
 			<internal type="bool">true</internal>
 			<config>
-				<default-field-of-view-deg type="double">118.0</default-field-of-view-deg>
+				<default-field-of-view-deg type="double">60.0</default-field-of-view-deg>
 				<limits>
 					<enabled type="bool">false</enabled>
 				</limits>

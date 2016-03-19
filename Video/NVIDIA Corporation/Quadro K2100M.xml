@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!--
+  Prevent a segmentation fault for Lenovo laptops with a quadro k2100m
+  or quadro k1000m video adapter.
+-->
+
+<PropertyList>
+
+ <sim>
+  <rendering>
+   <shaders>
+    <quality-level type="float">0</quality-level>
+   <shaders>
+  </rendering>
+ </sim>
+
+</PropertyList>
+

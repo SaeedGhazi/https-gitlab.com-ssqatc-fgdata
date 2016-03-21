@@ -108,6 +108,7 @@
 	<print-rendering-statistics>Print Rendering Statistics</print-rendering-statistics>
 	<statistics-display>Cycle On-Screen Statistics</statistics-display>
 	<performance-monitor>Monitor System Performance</performance-monitor>
+        <write-video-config>Save Video Configuration</write-video-config>
 	<property-browser>Browse Internal Properties</property-browser>
 	<logging>Logging</logging>
 	<local_weather>Local Weather (Test)</local_weather>

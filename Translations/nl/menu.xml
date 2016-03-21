@@ -117,6 +117,7 @@
 	<print-rendering-statistics>Weergavestatistieken printen</print-rendering-statistics>   <!-- English: "Print Rendering Statistics" -->
 	<statistics-display>Blader door schermstatiestieken</statistics-display>   <!-- English: "Cycle On-Screen Statistics" -->
 	<performance-monitor>Monitor systeemprestaties</performance-monitor>   <!-- English: "Monitor System Performance" -->
+        <write-video-config>Bewaar Video configuratie</write-video-config>   <!-- English: "Save Video configuration" -->
 	<property-browser>Blader door interne eigenschappen</property-browser>   <!-- English: "Browse Internal Properties" -->
 	<logging>Logging</logging>   <!-- English: "Logging" -->
 	<local_weather>Local weather (test)</local_weather>   <!-- English: "Local Weather (Test)" -->

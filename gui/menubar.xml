@@ -719,6 +719,14 @@
 		</item>
 
 		<item>
+			<name>write-video-config</name>
+			<binding>
+				<command>nasal</command>
+				<script>video.save()</script>
+			</binding>
+		</item>
+
+		<item>
 			<name>property-browser</name>
 			<binding>
 				<command>nasal</command>

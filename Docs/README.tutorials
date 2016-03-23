@@ -377,7 +377,7 @@ model in its animation xml file:
       <path>lightning-f1a.ac</path>
 
       <model>
-          <path>Models/Aircraft/marker.xml</path>
+          <path>Aircraft/Generic/marker.xml</path>
       </model>
 
       ...

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- FlightGear system messages: Italian language resource -->
 
@@ -17,22 +17,28 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-September-21 for FlightGear 2.9.0
+### Last synchronized with English master resource on 2016-March-22 for FlightGear 2016.2
 ### -->
 <PropertyList>
 
 	<splash>
-<!-- 		<init>???</init> -->   <!-- English: "initializing" -->
-<!-- 		<loading-aircraft-list>???</loading-aircraft-list> -->   <!-- English: "loading aircraft list" -->
-<!-- 		<loading-aircraft>???</loading-aircraft> -->   <!-- English: "loading aircraft" -->
-<!-- 		<loading-nav-dat>???</loading-nav-dat> -->   <!-- English: "loading navigation data" -->
-<!-- 		<init-scenery>???</init-scenery> -->   <!-- English: "initializing scenery" -->
-<!-- 		<creating-subsystems>???</creating-subsystems> -->   <!-- English: "creating subsystems" -->
-<!-- 		<init-subsystems>???</init-subsystems> -->   <!-- English: "initializing subsystems" -->
-<!-- 		<binding-subsystems>???</binding-subsystems> -->   <!-- English: "binding subsystems" -->
-<!-- 		<finishing-subsystems>???</finishing-subsystems> -->   <!-- English: "finalizing subsystems" -->
-<!-- 		<init-graphics>???</init-graphics> -->   <!-- English: "initializing graphics engine" -->
-<!-- 		<loading-scenery>???</loading-scenery> -->   <!-- English: "loading scenery" -->
+		<init>inizializzazione in corso</init>
+		<loading-aircraft-list>caricamento elenco aerei in corso</loading-aircraft-list>
+		<loading-aircraft>caricamento aereo in corso</loading-aircraft>
+		<loading-nav-dat>caricamento dati di navigazione in corso</loading-nav-dat>
+		<navdata-airports>caricamento dati aeroporto in corso</navdata-airports>
+		<navdata-navaids>caricamento radioassistenze in corso</navdata-navaids>
+		<navdata-fixes>caricamento fix in corso</navdata-fixes>
+		<navdata-pois>caricamento punti di interesse in corso</navdata-pois>
+		<init-scenery>inizializzazione scenario in corso</init-scenery>
+		<creating-subsystems>creazione sottosistemi in corso</creating-subsystems>
+		<init-subsystems>inizializzazione sottosistemi in corso</init-subsystems>
+		<binding-subsystems>binding sottosistemi in corso</binding-subsystems>
+		<finishing-subsystems>finalizzazione sottosistemi in corso</finishing-subsystems>
+		<init-graphics>inizializzazione motore grafico in corso</init-graphics>
+		<loading-scenery>caricamento scenario in corso</loading-scenery>
+		<downloading-scenery>download scenario in corso</downloading-scenery>
+		<finalize-position>finalizzazione posizione in corso</finalize-position>
 	</splash>
 
 </PropertyList>

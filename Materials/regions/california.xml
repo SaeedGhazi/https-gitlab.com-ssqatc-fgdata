@@ -89,13 +89,13 @@
     <effect>Effects/airfield</effect>
     <texture-set>
       <texture>Terrain/california-airport.png</texture>
-      <texture n="13">Terrain/gravel_red.png</texture>
+      <texture n="13">Terrain/california-airport.png</texture>
       <texture n="14">Terrain/grass_dry2.png</texture>
     </texture-set>
     <parameters>
-      <grit_alpha>0.4</grit_alpha>
+      <grit_alpha>0.2</grit_alpha>
       <use_overlay>1</use_overlay>
-      <overlay_bias>-0.1</overlay_bias>
+      <overlay_bias>-0.2</overlay_bias>
     </parameters>
     <xsize>250</xsize>
     <ysize>250</ysize>
@@ -159,18 +159,21 @@
     <name>MixedTundraCover</name>
     <name>Cemetery</name>
     <texture-set>
-      <texture>Terrain/california-shrub.png</texture>
-      <texture n="12">Terrain/california-shrub2.png</texture>
-	    <texture n="13">Terrain/california-rock.png</texture>
-      <texture n="15">Terrain/gravel_red.png</texture> 
-    </texture-set>
-    <texture-set>
       <texture>Terrain/california-shrub2.png</texture>
-	    <texture n="13">Terrain/california-rock.png</texture>
-      <texture n="15">Terrain/gravel_red.png</texture> 
+      <texture n="11">Terrain/california-grass-hires.png</texture>
+      <texture n="12">Terrain/california-shrub3.png</texture>
+      <texture n="13">Terrain/california-rock.png</texture>
+      <texture n="15">Terrain/grass_hires.png</texture> 
     </texture-set>
+    <!--<texture-set>
+      <texture>Terrain/california-shrub2.png</texture>
+      <texture n="13">Terrain/california-rock.png</texture>
+      <texture n="15">Terrain/gravel_red.png</texture> 
+    </texture-set>-->
     <parameters>
-			<grain_strength>0.2</grain_strength>	
+	<grain_strength>0.2</grain_strength>
+ 	<hires_overlay_bias>-0.1</hires_overlay_bias>
+	<transition_model>0.7</transition_model>
     </parameters>
     <xsize>1000</xsize>
     <ysize>1000</ysize>
@@ -226,10 +229,16 @@
     <name>Olives</name>
     <name>Vineyard</name>
     <name>Rice</name>
-    <effect>Effects/forest</effect>
+    <effect>Effects/agriculture</effect>
     <texture-set>
 	    <texture>Terrain/california-drycrop2.png</texture>
     </texture-set> 
+    <parameters>
+ 	<rotation_flag>1</rotation_flag>
+  	<rotation_scale>2000.0</rotation_scale>
+  	<uv_xoffset>0.0</uv_xoffset>
+  	<uv_yoffset>0.0</uv_yoffset>
+    </parameters>
     <object-mask>Terrain/california-drycrop2-mask.png</object-mask>
     <xsize>1000</xsize>
     <ysize>1000</ysize>

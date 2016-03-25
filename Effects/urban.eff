@@ -178,6 +178,7 @@
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
 					<index>6</index>
@@ -386,11 +387,43 @@
       				  <type>float</type>
       				  <value><use>landing_light2_offset</use></value>
    			   </uniform>
-                  <uniform>
-                      <name>landing_light3_offset</name>
-                      <type>float</type>
-                      <value><use>landing_light3_offset</use></value>
-                  </uniform>
+                  	   <uniform>
+                      		<name>landing_light3_offset</name>
+                      		<type>float</type>
+                      		<value><use>landing_light3_offset</use></value>
+                  	   </uniform>
+			   <!-- filtering -->
+      			   <uniform>
+        			<name>gamma</name>
+        			<type>float</type>
+       			 	<value><use>gamma</use></value>
+      			   </uniform>
+      			   <uniform>
+        			<name>brightness</name>
+        			<type>float</type>
+        			<value><use>brightness</use></value>
+      			   </uniform>
+      			   <uniform>
+        			<name>use_night_vision</name>
+        			<type>bool</type>
+        			<value><use>use_night_vision</use></value>
+      			   </uniform>
+     			    <uniform>
+        			<name>use_IR_vision</name>
+        			<type>bool</type>
+        			<value><use>use_IR_vision</use></value>
+      			   </uniform>
+      			   <uniform>
+        			<name>use_filtering</name>
+        			<type>bool</type>
+        			<value><use>use_filtering</use></value>
+      			   </uniform>
+      			   <uniform>
+       			     	<name>delta_T</name>
+        			<type>float</type>
+        			<value><use>delta_T</use></value>
+      			   </uniform>
+			<!-- cloud shadows -->
 			   <uniform>
        				  <name>cloudpos1_x</name>
         			  <type>float</type>
@@ -736,6 +769,7 @@
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        			<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
 				<attribute>
 					<name>tangent</name>
 					<index>6</index>
@@ -856,11 +890,43 @@
       				  <type>float</type>
       				  <value><use>landing_light2_offset</use></value>
    			   </uniform>
-                  <uniform>
-                      <name>landing_light3_offset</name>
-                      <type>float</type>
-                      <value><use>landing_light3_offset</use></value>
-                  </uniform>
+                  	   <uniform>
+                      		<name>landing_light3_offset</name>
+                      		<type>float</type>
+                     		<value><use>landing_light3_offset</use></value>
+                  	   </uniform>
+			<!-- filtering -->
+      			   <uniform>
+        			<name>gamma</name>
+        			<type>float</type>
+       			 	<value><use>gamma</use></value>
+      			   </uniform>
+      			   <uniform>
+        			<name>brightness</name>
+        			<type>float</type>
+        			<value><use>brightness</use></value>
+      			   </uniform>
+      			   <uniform>
+        			<name>use_night_vision</name>
+        			<type>bool</type>
+        			<value><use>use_night_vision</use></value>
+      			   </uniform>
+     			    <uniform>
+        			<name>use_IR_vision</name>
+        			<type>bool</type>
+        			<value><use>use_IR_vision</use></value>
+      			   </uniform>
+      			   <uniform>
+        			<name>use_filtering</name>
+        			<type>bool</type>
+        			<value><use>use_filtering</use></value>
+      			   </uniform>
+      			   <uniform>
+       			     	<name>delta_T</name>
+        			<type>float</type>
+        			<value><use>delta_T</use></value>
+      			   </uniform>
+			<!-- cloud shadows -->
 			   <uniform>
        				  <name>cloudpos1_x</name>
         			  <type>float</type>

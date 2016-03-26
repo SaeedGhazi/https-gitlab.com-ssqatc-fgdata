@@ -52,6 +52,7 @@ float rayleigh_in_func(in float dist, in float air_pollution, in float avisibili
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 get_hazeColor(in float light_arg);
+vec3 filter_combined (in vec3 color) ;
 
 float luminance(vec3 color)
 {
@@ -378,15 +379,11 @@ hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothste
 hazeColor = clamp(hazeColor,0.0,1.0);
 fragColor.rgb = mix(eqColorFactor * hazeColor * eShade + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
-gl_FragColor = fragColor;
-
-}
-else // if dist < 40.0 no fogging at all 
-{
-
-gl_FragColor = fragColor;
 }
 
-//gl_FragColor.rgb = gl_SecondaryColor.rgb;
+fragColor.rgb = filter_combined(fragColor.rgb);
+
+gl_FragColor = fragColor;
+
 }
 

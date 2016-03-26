@@ -51,7 +51,7 @@ float rayleigh_in_func(in float dist, in float air_pollution, in float avisibili
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 get_hazeColor(in float light_arg);
-
+vec3 filter_combined (in vec3 color) ;
 
 
 
@@ -361,7 +361,8 @@ fragColor.rgb = mix( hazeColor  + secondary_light * fog_backscatter(mvisibility)
 
 }
 
-//if (autumn_flag > 0.0) {fragColor = vec4 (0.0,0.0,0.0,1.0);}
+
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
 }

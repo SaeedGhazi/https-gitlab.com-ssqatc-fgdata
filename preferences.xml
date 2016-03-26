@@ -177,6 +177,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <random-vegetation type="bool" userarchive="y">true</random-vegetation>
       <random-vegetation-shadows type="bool" userarchive="y">false</random-vegetation-shadows>
       <random-vegetation-normals type="bool" userarchive="y">false</random-vegetation-normals>
+      <random-vegetation-optimize type="bool" userarchive="y">false</random-vegetation-optimize>
       <vegetation-density type="double" userarchive="y">1.0</vegetation-density>
       <random-buildings type="bool" userarchive="y">false</random-buildings>
       <building-density type="double" userarchive="y">1.0</building-density>

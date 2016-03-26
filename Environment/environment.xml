@@ -461,6 +461,7 @@
     <wetness type="double" userarchive="n">0.0</wetness>
     <snow-thickness-factor type="double" userarchive="y">1.0</snow-thickness-factor>
     <delta-T-soil type="double" userarchive="n">0.0</delta-T-soil>
+    <delta-T-vegetation type="double" userarchive="n">0.0</delta-T-vegetation>
     <delta-T-rock type="double" userarchive="n">0.0</delta-T-rock>
     <delta-T-water type="double" userarchive="n">0.0</delta-T-water>
     <delta-T-cloud type="double" userarchive="n">0.0</delta-T-cloud>

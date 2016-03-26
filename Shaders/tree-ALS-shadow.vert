@@ -46,6 +46,8 @@ uniform float WindE;
 
 uniform bool use_tree_shadows;
 uniform bool use_forest_effect;
+uniform bool use_optimization;
+uniform bool tree_patches;
 
 uniform float osg_SimulationTime;
 
@@ -92,9 +94,44 @@ void main()
    vec3 lightFull = (gl_ModelViewMatrixInverse * gl_LightSource[0].position).xyz;
    vec3 lightHorizon = normalize(vec3(lightFull.x,lightFull.y, 0.0));
 
-// this code is copied from tree.vert
+   //  eye position in model space
+   vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
+
+  float rn_dist = length(gl_Color.xyz - ep.xyz) + 300.0 * mod(10.0 * gl_Color.x,1.0);
+  float rn = mod(100.0 * gl_Color.x + 100.0 * gl_Color.y,1.0);
 
   float numVarieties = gl_Normal.z;
+
+  bool cull_flag = false;
+
+  float factor = 1.0;
+  float factor1 = 1.0;
+
+
+  if ((rn_dist > 2000.0) && (tree_patches == true) && (use_optimization == true))
+	{
+
+	if (rn > 0.15) 
+		{cull_flag = true;}
+	else
+		{
+		numVarieties *=0.25;
+		factor = 5.2;
+		}
+	if (gl_FogCoord !=0.0) {cull_flag = true;}
+	}
+
+
+
+  if (cull_flag)
+	{
+	// move everything out of the view frustrum
+	gl_Position = vec4 (0.0,0.0,10.0,1.0);
+    	gl_FrontColor.a = 0.0;
+	}
+  else
+	{
+
   float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
 
 // determine whether the tree changes color in autumn
@@ -127,7 +164,7 @@ void main()
   vec3 position = gl_Vertex.xyz * gl_Normal.xxy;
 
   // Rotation of the generic quad to specific one for the tree.
-  position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
+  position.xy = factor *  vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
 
 
  // Shear by wind.  Note that this only applies to the top vertices    
@@ -192,10 +229,8 @@ void main()
     // here start computations for the haze layer
     // we need several geometrical quantities
 
-    // first current altitude of eye position in model space
-    vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
+
     
-    // and relative position to vector
     relPos = position - ep.xyz;
 
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
@@ -317,13 +352,10 @@ if (cloud_shadow_flag == 1)
 		{light_ambient.rgb = light_ambient.rgb * (0.5 + 0.5 * shadow_func(relPos.x, relPos.y, 1.0, dist));}
 
 
-  //vec4 ambientColor = gl_FrontLightModelProduct.sceneColor + 
-  //gl_FrontColor = ambientColor;
   gl_FrontColor = light_ambient * gl_FrontMaterial.ambient;
   gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle; 
 
-  //gl_FrontSecondaryColor = vec4 (1.0,1.0,1.0,1.0) * 5.0*(1.0-dot(gl_SecondaryColor.rgb, vec3 (0.0,0.0,1.0)));
-  //gl_BackSecondaryColor = vec4 (1.0,1.0,1.0,1.0) * 5.0 * (1.0-dot(gl_SecondaryColor.rgb, vec3 (0.0,0.0,1.0)));
+  }
 
 }
 

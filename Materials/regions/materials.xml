@@ -36,7 +36,6 @@
 <!-- South America -->
 <region include="Materials/regions/tropical_south_america.xml"/>
 <region include="Materials/regions/latin_american_cities.xml"/>
-<region include="Materials/regions/caribbean.xml"/>
 <region include="Materials/regions/ascension.xml"/>
 <region include="Materials/regions/mexico.xml"/>
 <region include="Materials/regions/brazil_amazon_forest.xml"/>
@@ -50,6 +49,7 @@
 <region include="Materials/regions/brazil_lencois.xml"/>
 <region include="Materials/regions/brazil_caatinga.xml"/>
 <region include="Materials/regions/brazil_chapada_diamantina.xml"/>
+<region include="Materials/regions/caribbean.xml"/>
 
 <!-- Asia -->
 <region include="Materials/regions/asia.xml"/>
@@ -76,10 +76,10 @@
 <region include="Materials/regions/scandinavia.xml"/>
 <region include="Materials/regions/united_kingdom.xml"/>
 <region include="Materials/regions/ireland.xml"/>
-<region include="Materials/regions/corse.xml"/>
 <region include="Materials/regions/iceland.xml"/>
 <region include="Materials/regions/norway.xml"/>
 <region include="Materials/regions/southern_europe.xml"/>
+<region include="Materials/regions/corse.xml"/>
 
 <!-- Middle East-->
 <region include="Materials/regions/middle_east.xml"/>

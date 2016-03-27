@@ -62,6 +62,7 @@ const float EarthRadius = 5800000.0;
 
 float fog_func (in float targ, in float alt);
 vec3 get_hazeColor(in float light_arg);
+vec3 filter_combined (in vec3 color) ;
 
 /////// functions /////////
 
@@ -551,6 +552,9 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 
 
 	}
+
+	finalColor.rgb = filter_combined(finalColor.rgb);
+
 	gl_FragColor = finalColor;
 
 }

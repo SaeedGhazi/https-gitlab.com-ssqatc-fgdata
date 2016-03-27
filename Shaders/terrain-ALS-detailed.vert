@@ -40,6 +40,8 @@ uniform float ground_scattering;
 uniform float eye_alt;
 uniform float moonlight;
 
+uniform bool use_IR_vision;
+
 uniform mat4 osg_ViewMatrixInverse;
 
 float earthShade;
@@ -267,6 +269,11 @@ float shade_depth =  1.0 * smoothstep (0.6,0.95,ground_scattering) * (1.0-smooth
 
    light_ambient.rgb = light_ambient.rgb * (1.0 - shade_depth);
    light_diffuse.rgb = light_diffuse.rgb * (1.0 + 1.2 * shade_depth);
+
+if (use_IR_vision)
+	{
+	light_ambient.rgb = max(light_ambient.rgb, vec3 (0.5, 0.5, 0.5));
+	}
 
 // default lighting based on texture and material using the light we have just computed
 

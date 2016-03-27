@@ -53,7 +53,7 @@ float Noise3D(in vec3 coord, in float wavelength);
 
 float fog_func (in float targ, in float alt);
 vec3 get_hazeColor(in float light_arg);
-
+vec3 filter_combined (in vec3 color) ;
 
 
 
@@ -493,6 +493,8 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 fragColor.rgb = mix(clamp(hazeColor,0.0,1.0) , clamp(fragColor.rgb,0.0,1.0),transmission);
 
 }
+
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
 

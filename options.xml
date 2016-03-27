@@ -86,6 +86,13 @@
    </option>
 
    <option>
+    <name>download-dir</name>
+    <arg>path</arg>
+    <description>download-dir-desc</description>
+    <brief/>
+   </option>
+
+   <option>
     <name>language</name>
     <arg>code</arg>
     <description>language-desc</description>

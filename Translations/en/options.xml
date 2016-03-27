@@ -33,7 +33,7 @@
 	<enable-random-buildings-desc>Include random buildings objects</enable-random-buildings-desc>
 	<disable-real-weather-fetch-desc>Disable METAR based real weather fetching</disable-real-weather-fetch-desc>
 	<enable-real-weather-fetch-desc>Enable METAR based real weather fetching (this requires an open internet connection)</enable-real-weather-fetch-desc>
-	<metar-desc>Pass a METAR to set up static weather</metar-desc>
+	<metar-desc>Pass a METAR string to set up static weather (this implies --disable-real-weather-fetch)</metar-desc>
 	<random-objects-desc>(buildings, etc.)</random-objects-desc>
 	<disable-ai-models-desc>Deprecated option (disable internal AI subsystem)</disable-ai-models-desc>
 	<enable-ai-models-desc>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</enable-ai-models-desc>

@@ -32,6 +32,7 @@ float eShade;
 
 float fog_func (in float targ, in float alt);
 vec3 get_hazeColor(in float light_arg);
+vec3 filter_combined (in vec3 color) ;
 
 float luminance(vec3 color)
 {
@@ -236,6 +237,7 @@ hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 fragColor.rgb = mix(hazeColor, fragColor.rgb,transmission);
 }
 
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
 

@@ -12,6 +12,7 @@
 
   <material>
     <effect>Effects/forest</effect>
+    <tree-effect>Effects/tree-forest</tree-effect>
     <name>MixedForestCover</name>
     <name>MixedForest</name>
     <name>RainForest</name>
@@ -38,6 +39,7 @@
 
    <material>
     <effect>Effects/forest</effect>
+    <tree-effect>Effects/tree-forest</tree-effect>
     <name>DeciduousBroadCover</name>
     <name>DeciduousForest</name>
     <name>Bog</name>
@@ -109,6 +111,7 @@
     <name>EvergreenBroadCover</name>
     <name>EvergreenForest</name>
     <effect>Effects/forest</effect>
+    <tree-effect>Effects/tree-forest</tree-effect>
     <texture-set>
      <texture>Terrain/forest1a.png</texture>
      <texture n="11">Terrain/grass_hires.png</texture>

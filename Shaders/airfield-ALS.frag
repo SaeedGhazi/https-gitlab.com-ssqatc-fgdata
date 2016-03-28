@@ -12,7 +12,7 @@ varying vec3 ecViewdir;
 
 uniform sampler2D texture;
 uniform sampler2D overlay_texture;
-
+uniform sampler2D grain_texture;
 
 varying float steepness;
 
@@ -35,6 +35,7 @@ uniform float overlay_bias;
 uniform float overlay_alpha;
 uniform float base_layer_magnification;
 uniform float overlay_layer_magnification;
+uniform float grain_layer_magnification;
 uniform float wetness;
 uniform float air_pollution;
 uniform float season;
@@ -46,6 +47,7 @@ uniform int quality_level;
 uniform int tquality_level;
 uniform int cloud_shadow_flag;
 uniform int use_overlay;
+uniform int use_grain;
 uniform int use_color_overlay;
 uniform int use_searchlight;
 uniform int use_landing_light;
@@ -119,6 +121,7 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 	{halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));}
     vec4 texel;
     vec4 overlay_texel;
+    vec4 grain_texel;
     vec4 snow_texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
@@ -182,6 +185,12 @@ if (use_overlay == 1)
 	texel.rgb = mix(texel.rgb, overlay_texel.rgb,  overlay_texel.a * overlay_alpha * smoothstep(0.45, 0.65, overlay_bias + (0.5 * noise_1m + 0.1 * noise_2m + 0.4 * noise_10m)));
 
 
+	}
+
+if (use_grain == 1)
+	{
+	grain_texel = texture2D(grain_texture, gl_TexCoord[0].st * grain_layer_magnification);	
+	texel.rgb = mix(texel.rgb, grain_texel.rgb, grain_texel.a);
 	}
 
 

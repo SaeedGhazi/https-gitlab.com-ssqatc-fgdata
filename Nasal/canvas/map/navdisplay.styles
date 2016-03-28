@@ -908,7 +908,11 @@ var NDStyles = {
 							if (rollDeg < 0) {
 								x = -x;
 								var cmd = 21;
-							} else var cmd = 19;
+								if (angle > math.pi and angle < 2 * math.pi) cmd = 25;
+							} else {
+								var cmd = 19;
+								if (angle > math.pi and angle < 2 * math.pi) cmd = 23;
+							}
 							var y1 = 824;
 							if (nd.get_switch('toggle_centered')) y1 = 562;
 							nd.symbols.trendVector.setData([2,cmd],[512,y1,radius,radius,0,x,-y]);

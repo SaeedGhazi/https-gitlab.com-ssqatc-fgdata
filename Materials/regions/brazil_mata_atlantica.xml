@@ -119,8 +119,9 @@
     <name>DeciduousNeedleCover</name>    
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-patch.png</texture>
+      <texture n="12">Terrain/rainforest-patch.png</texture>
       <texture n="13">Terrain/rock_brown.png</texture>
     </texture-set>
     <xsize>2000</xsize>
@@ -150,8 +151,9 @@
     <name>GrassCover</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-			<texture n="11">Terrain/grass_dry2a.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="12">Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/grass_dry2a.png</texture>
       <texture n="13">Terrain/rock_brown.png</texture>
     </texture-set>
 		<parameters>
@@ -177,8 +179,8 @@
     <name>DryCrop</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-patch.png</texture>
       <texture n="12">Terrain/dirtrock.png</texture>
       <texture n="13">Terrain/rock_brown.png</texture>
     </texture-set>

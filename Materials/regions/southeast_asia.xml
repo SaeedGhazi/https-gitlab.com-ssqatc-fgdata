@@ -93,8 +93,8 @@
     <name>DeciduousForest</name>
     <name>DeciduousNeedleCover</name>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
     </texture-set>
@@ -124,7 +124,7 @@
     <effect>Effects/landmass-nowood</effect>
     <texture-set>
       <texture>Terrain/tundra-hawaii-green.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
       <texture n="15">Terrain/airport_grass2.png</texture>
@@ -167,7 +167,7 @@
     <name>Rice</name>
     <texture-set>
       <texture>Terrain/rice1.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
     </texture-set>
@@ -201,7 +201,7 @@
     <name>ComplexCrop</name>
     <texture-set>
       <texture>Terrain/dry_pasture4.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="12">Terrain/shrub-hawaii.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
       <texture n="15">Terrain/airport_grass2.png</texture>

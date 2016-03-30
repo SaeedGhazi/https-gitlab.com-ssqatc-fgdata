@@ -265,8 +265,8 @@
     <name>DeciduousNeedleCover</name>    
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="13">Terrain/rock_brown.png</texture>
     </texture-set>
     <xsize>2000</xsize>

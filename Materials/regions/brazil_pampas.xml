@@ -92,7 +92,7 @@
     <name>DeciduousNeedleCover</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
 	    <texture n="11">Terrain/pampas-grass.png</texture>
     </texture-set>
 		<parameters>

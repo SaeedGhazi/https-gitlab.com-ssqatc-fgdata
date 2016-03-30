@@ -124,8 +124,8 @@
     <name>DeciduousNeedleCover</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
     </texture-set>
     <xsize>2000</xsize>
@@ -149,8 +149,8 @@
     <name>ComplexCrop</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>
-      <texture n="11">Terrain/rainforest-hires.png</texture>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
       <texture n="12">Terrain/dirtrock.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
     </texture-set>
@@ -186,7 +186,7 @@
     <name>HerbTundraCover</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hires.png</texture>      
+      <texture>Terrain/rainforest-hawaii.png</texture>      
       <texture n="11">Terrain/shrub-hawaii-green.png</texture>
       <texture n="13">Terrain/rock_red.png</texture>
       <texture n="15">Terrain/airport_grass2.png</texture>

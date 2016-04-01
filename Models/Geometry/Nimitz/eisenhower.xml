@@ -8,7 +8,32 @@ apart from most of the very excellent textures, remain. -->
 	<status>early-production</status>
 	<path>nimitz.ac</path>
 
-	<!-- crew to be added later
+    <nasal>
+        <load>
+            <![CDATA[ 
+
+            var self = cmdarg();
+            print("Model load Nimitz ", self.getPath());
+
+            fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
+            io.load_nasal(fn_an_spn_46, "an_spn_46");
+            var anspn = an_spn_46.ANSPN46_System.new("Eisenhower", self);
+            anspn.SetChannel(2);
+            var an_spn_46_timer = maketimer(6, func {
+                anspn.Update();
+                an_spn_46_timer.restart(anspn.GetUpdateRate());
+            });
+            an_spn_46_timer.restart(6);
+        ]]>
+        </load>
+
+        <unload>
+            <![CDATA[ 
+            an_spn_46_timer.stop();
+            ]]>
+        </unload>
+    </nasal>
+    <!-- crew to be added later
 
     <model>
       <path>Models/Geometry/Nimitz/Crew/crew.xml</path>

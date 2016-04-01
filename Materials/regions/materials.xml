@@ -32,6 +32,7 @@
 <region include="Materials/regions/us_southwest.xml"/> 
 <region include="Materials/regions/california.xml"/>
 <region include="Materials/regions/sierras.xml"/>
+<region include="Materials/regions/florida.xml"/>
 
 <!-- South America -->
 <region include="Materials/regions/tropical_south_america.xml"/>

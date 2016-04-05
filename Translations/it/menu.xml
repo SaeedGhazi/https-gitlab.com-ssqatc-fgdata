@@ -66,7 +66,7 @@
 	<environment>Ambiente</environment>   <!-- English: "Environment" -->
 	<global-weather>Meteo</global-weather>   <!-- English: "Weather" -->
 	<environment-settings>Impostazioni ambiente</environment-settings>   <!-- English: "Environment Settings" -->
-	<time-settings>Impostazioni tempo</time-settings>   <!-- English: "Time Settings" -->
+	<time-settings>Impostazioni orario</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Impostazioni incendi</wildfire-settings>   <!-- English: "Wildfire Settings" -->
 
 	<!-- Equipment menu -->

@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2016-April-03 for FlightGear 2016.2
 ### -->
 <PropertyList>
 
@@ -33,6 +33,7 @@
 	<fg-scenery-desc n="0">Specifica i percorsi per lo scenario/gli scenari;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">impostazione predefinita: $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 	<fg-aircraft-desc>Specifica percorsi aggiuntivi directory aerei (in alternativa, puoi utilizzare --aircraft-dir per specificare un determinato aereo in una directory data)</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
+        <download-dir-desc>Directory base da utilizzare per i download degli aerei e dello scenario (la directory dello scenario TerraSync può essere impostata esplicitamente con l'opzione --terrasync-dir)</download-dir-desc>   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Seleziona la lingua per questa sessione</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Disabilita la schermata iniziale</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Abilita la schermata iniziale</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
@@ -50,7 +51,7 @@
 	<enable-random-buildings-desc>Includi oggetti edificio casuali</enable-random-buildings-desc>   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>Disabilita recupero condizioni meteo reali basate su METAR</disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>Abilita recupero condizioni meteo reali basate su METAR (richiede una connessione a Internet attiva)</enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
-	<metar-desc>Fornisci un METAR per impostare le condizioni meteo statiche</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->
+	<metar-desc>Fornisci una stringa METAR per impostare le condizioni meteo statiche (quest'opzione implica --disable-real-weather-fetch)</metar-desc>   <!-- English: "Pass a METAR string to set up static weather (this implies -_disable-real-weather-fetch)" -->
 	<random-objects-desc>(edifici, ecc.)</random-objects-desc>   <!-- English: "(buildings, etc.)" -->
 	<disable-ai-models-desc>Opzione deprecata (disabilita il sottosistema IA interno)</disable-ai-models-desc>   <!-- English: "Deprecated option (disable internal AI subsystem)" -->
 	<enable-ai-models-desc>Abilita il sottosistema IA (richiesto per la modalità multigiocatore, il traffico IA e molte altre animazioni)</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->

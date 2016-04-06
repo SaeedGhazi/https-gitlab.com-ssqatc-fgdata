@@ -41,11 +41,15 @@
       <texture>Terrain/california-airport.png</texture>
       <texture n="13">Terrain/gravel_red.png</texture>
       <texture n="14">Terrain/grass_dry2.png</texture>
+      <texture n="15">Terrain/airport_grass_overlay.png</texture>
     </texture-set>
     <parameters>
       <grit_alpha>0.4</grit_alpha>
       <use_overlay>1</use_overlay>
-      <overlay_bias>-0.1</overlay_bias>
+      <overlay_bias>-0.05</overlay_bias>
+      <use_grain>1</use_grain>
+      <use_color_overlay>0</use_color_overlay>
+      <base_layer_magnification>0.6</base_layer_magnification>
     </parameters>
     <xsize>250</xsize>
     <ysize>250</ysize>
@@ -69,6 +73,8 @@
     <bumpiness>0.1</bumpiness>
     <load-resistance>1e30</load-resistance>
   </material>
+
+
 
   <material>
     <effect>Effects/landmass-scrub</effect>

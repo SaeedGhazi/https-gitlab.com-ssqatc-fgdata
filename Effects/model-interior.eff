@@ -142,8 +142,9 @@
       <program>
         <vertex-shader>Shaders/model-interior-ALS-detailed.vert</vertex-shader>
         <fragment-shader>Shaders/model-interior-ALS-detailed.frag</fragment-shader>
-        <!--<fragment-shader>Shaders/hazes.frag</fragment-shader>-->
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -355,6 +356,37 @@
 	<type>float</type>
 	<value><use>residual-ambience-b</use></value>
      </uniform>
+     <!-- filtering -->
+     <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
@@ -488,6 +520,8 @@
         <fragment-shader>Shaders/model-interior-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -629,6 +663,37 @@
         <type>int</type>
         <value><use>display_ysize</use></value>
       </uniform>  
+     <!-- filtering -->
+     <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

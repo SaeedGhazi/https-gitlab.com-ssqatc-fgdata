@@ -59,6 +59,7 @@ vec3 specular_light;
 float fog_func (in float targ, in float alt);
 
 vec3 get_hazeColor(in float light_arg);
+vec3 filter_combined (in vec3 color) ;
 
 const float terminator_width = 200000.0;
 const float EarthRadius = 5800000.0;
@@ -436,7 +437,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	}
 	
 	
-
+    finalColor.rgb = filter_combined(finalColor.rgb);
     gl_FragColor = vec4(finalColor.rgb, alpha0.a * 1.35);
 
 

@@ -57,7 +57,7 @@ float fog_backscatter(in float avisibility);
 
 vec3 get_hazeColor(in float light_arg);
 vec3 flashlight(in vec3 color, in float radius);
-
+vec3 filter_combined (in vec3 color) ;
 
 float luminance(vec3 color)
 {
@@ -175,7 +175,7 @@ void main()
 	}
 
 
-	
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
 

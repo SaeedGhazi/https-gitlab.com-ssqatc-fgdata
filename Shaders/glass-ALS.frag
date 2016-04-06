@@ -52,6 +52,7 @@ uniform vec3 lightmap_a_color;
 float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float DropletNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float Noise2D(in vec2 coord, in float wavelength);
+vec3 filter_combined (in vec3 color) ;
 
 void main()
 {
@@ -245,6 +246,7 @@ vec4 fragColor;
 fragColor.rgb = mix(outerColor.rgb, fog_texel.rgb, fog_texel.a);
 fragColor.a = max(outerColor.a, fog_texel.a);
 
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = clamp(fragColor,0.0,1.0);
 

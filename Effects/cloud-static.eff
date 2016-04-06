@@ -8,6 +8,14 @@
     <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     <moonlight><use>/environment/moonlight</use></moonlight>
+    <use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
+    <gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    <brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    <delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
+    <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    <use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
+    <display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    <display_ysize><use>/sim/startup/ysize</use></display_ysize>
   </parameters>
 
 <technique n="9">
@@ -58,6 +66,8 @@
       <program>
         <vertex-shader>Shaders/cloud-static-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/cloud-static-ALS.frag</fragment-shader>
+ 	<fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>baseTexture</name>
@@ -84,6 +94,46 @@
         <type>float</type>
         <value><use>moonlight</use></value>
       </uniform>
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
       <vertex-program-two-side>true</vertex-program-two-side>
     </pass>
   </technique>

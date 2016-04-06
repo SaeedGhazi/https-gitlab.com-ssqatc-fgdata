@@ -157,6 +157,7 @@
         <vertex-shader>Shaders/glass-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/glass-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
 
      <uniform>
@@ -309,6 +310,38 @@
         <type>float</type>
         <value><use>overlay-glare</use></value>
       </uniform>
+	<!-- filtering -->
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>

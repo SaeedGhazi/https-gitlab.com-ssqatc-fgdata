@@ -70,9 +70,8 @@ float alt_factor(in float eye_alt, in float vertex_alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
 
-//vec3 get_hazeColor(in float light_arg);
 vec3 flashlight(in vec3 color, in float radius);
-
+vec3 filter_combined (in vec3 color) ;
 
 float luminance(vec3 color)
 {
@@ -221,7 +220,7 @@ void main()
        fragColor.rgb = max(fragColor.rgb, lightmapcolor.rgb * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, texel.rgb*.5 + lightmapcolor.rgb*.5));
 	}
 
-	
+fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
 

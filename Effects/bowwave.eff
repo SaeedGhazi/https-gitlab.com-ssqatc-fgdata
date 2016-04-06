@@ -144,15 +144,9 @@
 			<use>/sim/rendering/shaders/landmass</use>
 		</quality_level>
 		<!-- sea colors -->
-		<sea_r>
-			<use>/environment/sea/color_r</use>
-		</sea_r>
-		<sea_g>
-			<use>/environment/sea/color_g</use>
-		</sea_g>
-		<sea_b>
-			<use>/environment/sea/color_b</use>
-		</sea_b>
+		<sea_r><use>/environment/sea/color_r</use></sea_r>
+		<sea_g><use>/environment/sea/color_g</use></sea_g>
+		<sea_b><use>/environment/sea/color_b</use></sea_b>
 		<!-- 	END fog include -->
 	</parameters>
 
@@ -378,11 +372,8 @@
 			</texture-unit>
 
 			<program>
-<!-- 				<vertex-shader>Shaders/include_fog.vert</vertex-shader> -->
-				<vertex-shader n="1">Shaders/wake-ALS.vert</vertex-shader>
-				<!--<fragment-shader>Shaders/include_fog.frag</fragment-shader>-->
-				<fragment-shader n="1">Shaders/bowwave-ALS.frag</fragment-shader>
-				<fragment-shader n="2">Shaders/hazes.frag</fragment-shader>
+				<vertex-shader n="0">Shaders/wake-ALS.vert</vertex-shader>
+				<fragment-shader n="0">Shaders/bowwave-ALS.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>water_reflection</name>
@@ -539,10 +530,42 @@
 				</value>
 			</uniform>
  			<uniform>
-        	<name>cloud_self_shading</name>
-        		<type>float</type>
-        		<value><use>cloud_self_shading</use></value>
-      		</uniform>
+        			<name>cloud_self_shading</name>
+        			<type>float</type>
+        			<value><use>cloud_self_shading</use></value>
+      			</uniform>
+
+			<!-- filtering -->
+ 			 <uniform>
+        			<name>gamma</name>
+        			<type>float</type>
+        			<value><use>gamma</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>brightness</name>
+        			<type>float</type>
+        			<value><use>brightness</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_filtering</name>
+        			<type>bool</type>
+        			<value><use>use_filtering</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_night_vision</name>
+        			<type>bool</type>
+        			<value><use>use_night_vision</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_IR_vision</name>
+        			<type>bool</type>
+        			<value><use>use_IR_vision</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>delta_T</name>
+        			<type>float</type>
+        			<value><use>delta_T</use></value>
+      			</uniform>
 
 			<!-- sea colors -->
 			<uniform>

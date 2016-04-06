@@ -1,6 +1,8 @@
 uniform sampler2D baseTexture;
 varying float fogFactor;
 
+vec3 filter_combined (in vec3 color) ;
+
 void main(void)
 {
       vec4 base = texture2D( baseTexture, gl_TexCoord[0].st);

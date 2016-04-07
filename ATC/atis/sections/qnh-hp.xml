@@ -1,9 +1,6 @@
 <?xml version="1.0" ?>
 <!--
- This file is part of FlightGear, the free flight simulator
- http://www.flightgear.org/
-
- Copyright (C) 2014  Curtis L. Olson  - http://www.flightgear.org/~curt
+ Copyright (C) 2016, Richard Senior <richard.j.senior@gmail.com>
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License as
@@ -16,18 +13,7 @@
  General Public License for more details.
 -->
 <PropertyList>
-  <!-- special for Hamburg -->
-  <atis-schema include="atis/eddh.xml"/>
-
-  <!-- German style -->
-  <atis-schema include="atis/ed.xml"/>
-
-  <!-- UK style -->
-  <atis-schema include="atis/eg.xml"/>
-
-  <!-- US, Canada and Pacific style -->
-  <atis-schema include="atis/us_ca.xml"/>
-
-  <!-- rest of the world -->
-  <atis-schema include="atis/other.xml"/>
+  <text>QNH </text>
+  <token>qnh</token>
+  <text>hektopascal. </text>
 </PropertyList>

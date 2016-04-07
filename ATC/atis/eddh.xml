@@ -18,104 +18,54 @@
 <PropertyList>
   <station-starts-with>eddh</station-starts-with>
   <atis>
-    <text>Hamburg information </text>
-    <token>id</token>
-    <text>. MET report time </text>
-    <token>time</token>
-    <text>. Expect </text>
-    <token>approach-type</token>
-    <text> approach.</text>
+    <section include="sections/airport-information.xml"/>
+    <text>MET report time </text><token>time</token><text>. </text>
+    <text>Expect </text><token>approach-type</token><text> approach. </text>
     <if>
       <equals>
         <token>rwy-land</token>
         <token>rwy-to</token>
       </equals>
       <then>
-        <text> Take off and landing runway </text>
+        <text>Take off and landing runway </text>
         <token>rwy-land</token>
       </then>
       <else>
-        <text> Landing runway </text>
+        <text>Landing runway </text>
         <token>rwy-land</token>
         <text> and take off runway </text>
         <token>rwy-to</token>
       </else>
     </if>
-    <text>. Transition level </text>
-    <token>transition-level</token>
-    <text>. Wind </text>
-    <token>wind-dir</token>
-    <text> degrees, </text>
-    <token>wind-speed-kn</token>
-    <text> knots</text>
-    <if>
-      <not-empty>
-        <token>gusts</token>
-      </not-empty>
-      <then>
-        <text>, gusts up to </text>
-        <token>gusts</token>
-        <text> knots</text>
-      </then>
-    </if>
-    <if>
-      <not-equals>
-        <token>wind-from</token>
-        <token>wind-to</token>
-      </not-equals>
-      <then>
-        <text>, varying between </text>
-        <token>wind-from</token>
-        <text> and </text>
-        <token>wind-to</token>
-        <text> degrees</text>
-      </then>
-    </if>
     <text>. </text>
+    <text>Transition level </text>
+    <token>transition-level</token>
+    <text>. </text>
+    <text>Winned </text>
     <if>
-      <not-empty>
-        <token>cavok</token>
-      </not-empty>
+      <equals>
+        <token>wind-speed-kn</token>
+        <text>zero</text>
+      </equals>
       <then>
-        <text>CAVOK</text>
+        <text>kaam.. </text>
       </then>
       <else>
-        <text>Visibility </text>
-        <token>visibility-metric</token>
-        <text>. </text>
-        <if>
-          <not-empty>
-            <token>phenomena</token>
-          </not-empty>
-          <then>
-             <token>phenomena</token>
-             <text>. </text>
-          </then>
-        </if>
-        <if>
-          <not-empty>
-            <token>clouds</token>
-          </not-empty>
-          <then>
-            <text>Clouds </text>
-            <token>clouds</token>
-          </then>
-          <else>
-            <text>No significant clouds</text>
-          </else>
-        </if>
+        <token>wind-dir</token>
+        <text> degrees, </text>
+        <token>wind-speed-kn</token>
+        <text> knots. </text>
       </else>
     </if>
-    <text>. Temperature </text>
-    <token>temperature-deg</token>
-    <text>, dewpoint </text>
-    <token>dewpoint-deg</token>
-    <text>. QNH </text>
-    <token>qnh</token>
-    <text> hektopascal. Trend </text>
-    <token>trend</token>
-    <text>. information </text>
-    <token>id</token>
-    <text> out.</text>
+    <section include="sections/gusts.xml"/>
+    <section include="sections/wind-variation.xml"/>
+    <section include="sections/cavok.xml"/>
+    <section include="sections/visibility-km.xml"/>
+    <section include="sections/phenomena.xml"/>
+    <section include="sections/clouds.xml"/>
+    <section include="sections/temperature.xml"/>
+    <section include="sections/qnh-hp.xml"/>
+    <text>Trend </text><token>trend</token><text>. </text>
+    <text>Information </text><token>id</token><text>. out.. </text>
   </atis>
 </PropertyList>

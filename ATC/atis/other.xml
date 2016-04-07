@@ -43,11 +43,22 @@
         <token>rwy-to</token>
       </else>
     </if>
-    <text>. Weather. Wind </text>
-    <token>wind-dir</token>
-    <text> degrees at </text>
-    <token>wind-speed-kn</token>
-    <text> knots</text>
+    <text>.. Weather. Winned </text>
+    <if>
+      <equals>
+        <token>wind-speed-kn</token>
+        <text>zero</text>
+      </equals>
+      <then>
+        <text>kaam.. </text>
+      </then>
+      <else>
+        <token>wind-dir</token>
+        <text> degrees at </text>
+        <token>wind-speed-kn</token>
+        <text> knots</text>
+      </else>
+    </if>
     <if>
       <not-empty>
         <token>gusts</token>

@@ -155,7 +155,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>10</step>
+				<step>-10</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -171,7 +171,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>1</step>
+				<step>-1</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -209,7 +209,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>-1</step>
+				<step>1</step>
 			</binding>
 			<binding>
 				<command>nasal</command>
@@ -225,7 +225,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/sim/model/marker/x/offset</property>
-				<step>-10</step>
+				<step>10</step>
 			</binding>
 			<binding>
 				<command>nasal</command>

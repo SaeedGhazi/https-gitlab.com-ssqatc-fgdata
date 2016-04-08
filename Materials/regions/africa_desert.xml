@@ -252,7 +252,6 @@
     <wood-coverage>30000.0</wood-coverage>
     <tree-texture>Trees/mixed-shrub.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>2.0</tree-height-m>
     <tree-width-m>2.0</tree-width-m>
     <rolling-friction>0.6</rolling-friction>
@@ -308,7 +307,6 @@
     <wood-coverage>3500.0</wood-coverage>
     <tree-texture>Trees/mixed-shrub.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>

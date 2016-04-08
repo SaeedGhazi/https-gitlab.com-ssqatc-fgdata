@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!-- Set of Urban buildings, for inclusion in a materials file -->
 <PropertyList>
-  <range-m>10000</range-m>
   <object>
     <path>Models/Buildings/factory.ac</path>
     <coverage-m2>40000000</coverage-m2>

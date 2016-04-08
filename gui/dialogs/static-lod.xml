@@ -7,6 +7,15 @@
           var modePixel = (getprop("/sim/rendering/static-lod/ai-range-mode-pixel") == 1);
           setprop( "/sim/gui/dialogs/static-lod/mode/pixel", modePixel );
           setprop( "/sim/gui/dialogs/static-lod/mode/distance", !modePixel );
+
+          var reload_props = [
+            "/sim/rendering/static-lod/rough",
+            "/sim/rendering/static-lod/bare"];
+
+          var reload_vals = {};
+          foreach (var p; reload_props) {
+            reload_vals[p] = getprop(p);
+          }
     ]]>
     </open>
   </nasal>
@@ -182,6 +191,23 @@
         <command>dialog-apply</command>
       </binding>
       <binding>
+          <command>nasal</command>
+          <script><![CDATA[
+            var reinit = 0;
+            foreach (var p; reload_props) {
+              if (reload_vals[p] != getprop(p)) {
+                reinit = 1;
+              }
+            }
+
+            if (reinit) {
+              fgcommand("reload-materials", props.Node.new());
+              fgcommand("reinit", props.Node.new({"subsystem": "tile-manager"}));
+            }
+          ]]>
+          </script>
+      </binding>
+      <binding>
         <command>dialog-close</command>
       </binding>
     </button>
@@ -210,4 +236,10 @@
       </binding>
     </button>
   </group>
+
+	<nasal>
+		<open>
+		</open>
+	</nasal>
+
 </PropertyList>

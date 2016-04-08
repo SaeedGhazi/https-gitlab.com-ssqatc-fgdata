@@ -121,7 +121,6 @@
     <wood-coverage>12000.0</wood-coverage>
     <tree-texture>Trees/mixed-shrub.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>2.0</tree-height-m>
     <tree-width-m>2.0</tree-width-m>
     <rolling-friction>0.6</rolling-friction>
@@ -163,7 +162,6 @@
     <wood-coverage>150000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>
@@ -184,7 +182,6 @@
     <wood-coverage>4000.0</wood-coverage>
     <tree-texture>Trees/deciduous-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -209,7 +206,6 @@
     <wood-coverage>4000.0</wood-coverage>
     <tree-texture>Trees/coniferous-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>18.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -241,7 +237,6 @@
     <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>
@@ -262,7 +257,6 @@
     <wood-coverage>4000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
     <rolling-friction>1</rolling-friction>

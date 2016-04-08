@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!-- Set of industrial buildings, for inclusion in a materials file -->
 <PropertyList>
-  <range-m>10000</range-m>
   <object>
     <path>Models/Industrial/Industrial110x185.xml</path>
     <path>Models/Industrial/Industrial150x115.xml</path>

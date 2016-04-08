@@ -151,7 +151,6 @@
     <wood-coverage>14000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture> 
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>25.0</tree-width-m>
     <rolling-friction>0.8</rolling-friction>
@@ -178,7 +177,6 @@
     <wood-coverage>40000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture> 
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>25.0</tree-width-m>
     <rolling-friction>0.4</rolling-friction>
@@ -214,7 +212,6 @@
     <wood-coverage>30000.0</wood-coverage>
     <tree-texture>Trees/mixed-shrub.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>10.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
     <rolling-friction>0.4</rolling-friction>
@@ -272,7 +269,6 @@
     <wood-coverage>3500.0</wood-coverage>
     <tree-texture>Trees/mixed-shrub.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>

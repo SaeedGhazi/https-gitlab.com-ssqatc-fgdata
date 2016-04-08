@@ -30,7 +30,6 @@
     <wood-coverage>4000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -56,7 +55,6 @@
     <wood-coverage>25000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
     <diffuse>
@@ -109,7 +107,6 @@
     <wood-coverage>120000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>
@@ -139,7 +136,6 @@
     <wood-coverage>80000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture> <!-- modified by gsagostinho -->
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>

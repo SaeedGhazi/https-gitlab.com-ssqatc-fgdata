@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!-- Set of town buildings, for inclusion in a materials file -->
 <PropertyList>
-  <range-m>10000</range-m>
   <object>
     <path>Models/Buildings/water-tower.ac</path>
     <path>Models/Buildings/oil-tanks.ac</path>

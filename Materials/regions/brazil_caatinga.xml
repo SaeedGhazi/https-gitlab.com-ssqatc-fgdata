@@ -105,7 +105,6 @@
     <wood-coverage>20000.0</wood-coverage>
     <tree-texture>Trees/caatinga-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>8.0</tree-height-m>
     <tree-width-m>8.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -130,7 +129,6 @@
     <wood-coverage>300000.0</wood-coverage>
     <tree-texture>Trees/caatinga-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>8.0</tree-height-m>
     <tree-width-m>8.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -158,7 +156,6 @@
     <wood-coverage>65000.0</wood-coverage>
     <tree-texture>Trees/caatinga-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>8.0</tree-height-m>
     <tree-width-m>8.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -192,7 +189,6 @@
     <wood-coverage>50000.0</wood-coverage>
     <tree-texture>Trees/caatinga-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>10.0</tree-height-m>
     <tree-width-m>10.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
@@ -219,7 +215,6 @@
     <wood-coverage>1500000.0</wood-coverage>
     <tree-texture>Trees/caatinga-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>8.0</tree-height-m>
     <tree-width-m>8.0</tree-width-m>
     <rolling-friction>0.7</rolling-friction>
@@ -247,7 +242,6 @@
     <wood-coverage>120000.0</wood-coverage>
     <tree-texture>Trees/caatinga-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>8.0</tree-height-m>
     <tree-width-m>8.0</tree-width-m>
     <rolling-friction>0.7</rolling-friction>
@@ -275,7 +269,6 @@
     <wood-coverage>7000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt2.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-range-m alias="/params/forest/tree-range-m"/>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>18.0</tree-width-m>
     <rolling-friction>1</rolling-friction>

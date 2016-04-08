@@ -44,11 +44,9 @@
   <building-small-max-depth-m>30.0</building-small-max-depth-m>
   <building-medium-ratio>0.6</building-medium-ratio>
   <building-large-ratio>0.2</building-large-ratio>
-  <building-range-m alias="/params/building/building-range-m"/>
   <wood-coverage>10000.0</wood-coverage>
   <tree-texture>Trees/mixed.png</tree-texture>
   <tree-varieties>8</tree-varieties>
-  <tree-range-m alias="/params/forest/tree-range-m"/>
   <tree-height-m>25.0</tree-height-m>
   <tree-width-m>15.0</tree-width-m>
 </material>

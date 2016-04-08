@@ -3,6 +3,8 @@ varying float fogFactor;
 varying vec3 hazeColor;
 varying vec3 relVector;
 
+vec3 filter_combined (in vec3 color) ;
+
 uniform bool is_lightning;
 
 vec3 rainbow (in float index)
@@ -31,7 +33,7 @@ void main(void)
       vec4 base = texture2D( baseTexture, gl_TexCoord[0].st);
       vec4 finalColor = base * gl_Color;
 
-     
+      vec4 fragColor;     
 
 
       if (is_lightning==false)
@@ -49,9 +51,14 @@ void main(void)
         finalColor.rgb = mix(finalColor.rgb, rainbow_color, 0.5* rainbow_shape); 
 
 
-	gl_FragColor.rgb = mix(hazeColor, finalColor.rgb, fogFactor );
+	fragColor.rgb = mix(hazeColor, finalColor.rgb, fogFactor );
 	}
       else 
-	{gl_FragColor.rgb = finalColor;}
-      gl_FragColor.a = mix(0.0, finalColor.a, fogFactor);
+	{fragColor.rgb = finalColor;}
+      fragColor.a = mix(0.0, finalColor.a, fogFactor);
+
+      fragColor.rgb = filter_combined(fragColor.rgb); 
+
+	gl_FragColor = fragColor;
+
 }

@@ -254,41 +254,41 @@
         			 <type>float</type>
        				 <value><use>gamma</use></value>
       			</uniform>
-      <uniform>
-        <name>brightness</name>
-        <type>float</type>
-        <value><use>brightness</use></value>
-      </uniform>
-      <uniform>
-        <name>use_filtering</name>
-        <type>bool</type>
-        <value><use>use_filtering</use></value>
-      </uniform>
-      <uniform>
-        <name>use_night_vision</name>
-        <type>bool</type>
-        <value><use>use_night_vision</use></value>
-      </uniform>
-      <uniform>
-        <name>use_IR_vision</name>
-        <type>bool</type>
-        <value><use>use_IR_vision</use></value>
-      </uniform>
-      <uniform>
-        <name>delta_T</name>
-        <type>float</type>
-        <value><use>delta_T</use></value>
-      </uniform>
-      <uniform>
-        <name>display_xsize</name>
-        <type>int</type>
-        <value><use>display_xsize</use></value>
-      </uniform>
-      <uniform>
-        <name>display_ysize</name>
-        <type>int</type>
-        <value><use>display_ysize</use></value>
-      </uniform>  
+      			<uniform>
+       				 <name>brightness</name>
+        			 <type>float</type>
+        			 <value><use>brightness</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_filtering</name>
+        			<type>bool</type>
+        			<value><use>use_filtering</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_night_vision</name>
+        			<type>bool</type>
+        			<value><use>use_night_vision</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_IR_vision</name>
+        			<type>bool</type>
+        			<value><use>use_IR_vision</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>delta_T</name>
+        			<type>float</type>
+        			<value><use>delta_T</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>display_xsize</name>
+        			<type>int</type>
+        			<value><use>display_xsize</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>display_ysize</name>
+        			<type>int</type>
+        			<value><use>display_ysize</use></value>
+      			</uniform>  
 			<!-- 			END fog include -->
 		</pass>
 	</technique>

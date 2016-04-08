@@ -715,6 +715,27 @@ else
 	{var ovcst = 0.0;}
 
 
+# compute heating and cooling of various terrain and object types
+
+var time = getprop("sim/time/utc/day-seconds");
+time = time + getprop("sim/time/local-offset");
+
+# low thermal inertia follows the Sun more or less directly
+# high thermal inertia takes some time to reach full heat
+
+var t_factor1 = 0.5 * (1.0-math.cos((time * sec_to_rad))); 
+var t_factor2 = 0.5 * (1.0-math.cos((time * sec_to_rad)-0.4));
+var t_factor3 = 0.5 * (1.0-math.cos((time * sec_to_rad)-0.9)); 
+
+var amp = scatt_max;
+
+setprop("/environment/surface/delta-T-soil", amp * (-5.0 + 10.0 * t_factor2));
+setprop("/environment/surface/delta-T-vegetation", amp * (-5.0 + 10.0 * t_factor1));
+setprop("/environment/surface/delta-T-rock", amp * (-7.0 + 14.0 * t_factor1));
+setprop("/environment/surface/delta-T-water", amp * (-1.0 + 2.0* t_factor3));
+setprop("/environment/surface/delta-T-structure", amp *  10.0* t_factor1);
+setprop("/environment/surface/delta-T-cloud", amp * (-2.0 + 2.0* t_factor3));
+
 # compute base turbulence
 
 var base_turbulence = 0.0;
@@ -2282,7 +2303,6 @@ var detail_flag = detailed_clouds_flag;
 
 alpha = alpha * math.pi/180.0; # the tile orientation
 
-#var sec_to_rad = 2.0 * math.pi/86400; # conversion factor for sinusoidal dependence on daytime
 
 # current aircraft position
 

@@ -82,6 +82,7 @@
     		<fogstructure><use>/environment/fog-structure</use></fogstructure>
     		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     		<moonlight><use>/environment/moonlight</use></moonlight>
+    		<delta_T><use>/environment/surface/delta-T-rock</use></delta_T>
    		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
     		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<raise_vertex type="bool">false</raise_vertex>

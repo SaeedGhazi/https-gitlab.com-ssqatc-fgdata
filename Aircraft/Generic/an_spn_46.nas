@@ -65,21 +65,53 @@ var ANSPN46ActiveNotification =
     # param(_anspn46_system): instance of ANSPN46_System which will send the notification 
     new: func(_anspn46_system)
     {
-        var new_class = emesary.Notification.new("ANSPN46ActiveNotification", _anspn46_system.Ident);
+        var ident="none";
+        if (_anspn46_system != nil)
+            ident=_anspn46_system.Ident;
+
+        var new_class = emesary.Notification.new("ANSPN46ActiveNotification", ident);
+
         new_class.ANSPN46_system = _anspn46_system;
+        new_class.Position = nil;
+        new_class.BeamPosition = nil;
+
+        new_class.BeamAngle = 35;
+        new_class.Channel = 2;
+        new_class.BeamRange = 35; ##nm
+        new_class.BeamPower = 999; ## mw ???
 
         #
         # Set notification properties from the ANSPN46_System. 
         new_class.set_from = func(_anspn)
         {
-            me.Position = _anspn.GetCarrierPosition();
-            me.BeamPosition = _anspn.GetTDZPosition();
-            me.BeamAngle = 35;
-            me.Channel = _anspn.GetChannel();
-            me.BeamRange = 35; ##nm
-            me.BeamPower = 999; ## mw ???
+            if (_anspn != nil)
+            {
+                me.Ident = _anspn.Ident;
+                me.Position = _anspn.GetCarrierPosition();
+                me.BeamPosition = _anspn.GetTDZPosition();
+
+                me.BeamAngle = 35;
+                me.Channel = _anspn.GetChannel();
+                me.BeamRange = 35; ##nm
+                me.BeamPower = 999; ## mw ???
+            }
+print("\nANSPN46ActiveNotification::set_from: ", me.Ident);
         };
-        new_class.set_from(_anspn46_system);
+        new_class.bridgeProperties = func
+        {
+            return 
+            [ 
+             {
+            getValue:func{return emesary.TransferCoord.encode(new_class.Position);},
+            setValue:func(v){new_class.Position=emesary.TransferCoord.decode(v);}, 
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.Channel);},
+            setValue:func(v){new_class.Channel=emesary.TransferByte.decode(v);}, 
+             },
+            ];
+          };
+        new_class.set_from(new_class.ANSPN46_system);
         return new_class;
     },
 };
@@ -228,7 +260,7 @@ var ANSPN46_System =
     {
         print("AN/SNP46 created for "~_ident);
 
-        var new_class = emesary.Recipient.new("ANSPN46_System "~_ident);
+        var new_class = emesary.Recipient.new(_ident~".ANSPN46");
 
         new_class.ara_63_position = geo.Coord.new();
         new_class.Model = _model;
@@ -315,7 +347,7 @@ var ANSPN46_System =
             # this will be reset if we receive something back from the aircraft.
             if (me.UpdateRate < 10)
                 me.UpdateRate = me.UpdateRate+1;
-#            print("AN/SPN 46 : update from",me.Ident," rate=",me.UpdateRate);
+            print("AN/SPN 46 : update msg: ",me.msg.Ident," sys.rate=",me.UpdateRate);
             return emesary.GlobalTransmitter.NotifyAll(me.msg);
         };
 

@@ -24,6 +24,8 @@
  #
  #---------------------------------------------------------------------------*/
 
+var __emesaryUniqueId = 14; # 0-15 are reserved, this way the global transmitter will be 15.
+
 # Transmitters send notifications to all recipients that are registered.
 var Transmitter =
 {
@@ -41,6 +43,8 @@ var Transmitter =
         var new_class = { parents: [Transmitter]};
         new_class.Recipients = [];
         new_class.Ident = _ident;
+        __emesaryUniqueId += 1;
+        new_class.UniqueId = __emesaryUniqueId;
         return new_class;
     },
 
@@ -78,9 +82,9 @@ var Transmitter =
 
     PrintRecipients: func
     {
-        print("Recpient list");
+        print("Recpient list for ",me.Ident,"(",me.UniqueId,")");
         for (var idx = 0; idx < size(me.Recipients); idx += 1)
-            print("Recpient ",idx," ",me.Recipients[idx].Ident);
+            print("Recpient ",idx," ",me.Recipients[idx].Ident," (",me.Recipients[idx].UniqueId,")");
     },
 
     # Notify all registered recipients. Stop when receipt status of abort or finished are received.
@@ -94,7 +98,7 @@ var Transmitter =
         var return_status = Transmitter.ReceiptStatus_NotProcessed;
         foreach (var recipient; me.Recipients)
         {
-            if (recipient.Active)
+            if (recipient.RecipientActive)
             {
                 var rstat = recipient.Receive(message);
 
@@ -147,13 +151,27 @@ var Transmitter =
 #
 # Base class for Notifications. By convention a Notification has a type and a value.
 #   SubClasses can add extra properties or methods.
+# Properties:
+# Ident : Generic message identity. Can be an ident, or for simple messages a value that needs transmitting.
+# Type  : Message Type
+# IsDistinct : non zero if this message supercedes previous messages of this type.
+#              Distinct messages are usually sent often and self contained
+#              (i.e. no relative state changes such as toggle value)
+#              Messages that indicate an event (such as after a pilot action)
+#              will usually be non-distinct. So an example would be gear/up down
+#              or ATC acknowledgements that all need to be transmitted
+# The IsDistinct is important for any messages that are bridged over MP as
+# only the most recently sent distinct message will be transmitted over MP
 var Notification =
 {
-    new: func(_type, _value)
+    new: func(_type, _ident)
     {
         var new_class = { parents: [Notification]};
-        new_class.Value = _value;
+        new_class.Ident = _ident;
         new_class.Type = _type;
+        new_class.IsDistinct = 1;
+        new_class.FromIncomingBridge = 0;
+        new_class.Callsign = nil;
         return new_class;
     },
 };
@@ -174,7 +192,9 @@ var Recipient =
     construct: func(_ident, new_class)
     {
         new_class.Ident = _ident;
-        new_class.Active = 1;
+        new_class.RecipientActive = 1;
+        __emesaryUniqueId += 1;
+        new_class.UniqueId = __emesaryUniqueId;
         new_class.Receive = func(notification)
         {
             # warning if required function not 
@@ -189,3 +209,52 @@ var Recipient =
 # Instantiate a Global Transmitter, this is a convenience and a known starting point. Generally most classes will
 # use this transmitters, however other transmitters can be created and merely use the global transmitter to discover each other
 var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
+
+var TransferCoord = 
+{
+    encode : func(v)
+    {
+        return mp_broadcast.Binary.encodeCoord(v);
+    },
+    decode : func(v)
+    {
+        return mp_broadcast.Binary.decodeCoord(v);
+    }
+};
+
+var TransferByte = 
+{
+    encode : func(v)
+    {
+        return mp_broadcast.Binary.encodeByte(v);
+    },
+    decode : func(v)
+    {
+        return mp_broadcast.Binary.decodeByte(v);
+    }
+};
+
+var TransferInt = 
+{
+    encode : func(v)
+    {
+        return mp_broadcast.Binary.encodeInt(v);
+    },
+    decode : func(v)
+    {
+        return mp_broadcast.Binary.decodeInt(v);
+    }
+};
+
+var TransferDouble = 
+{
+    encode : func(v)
+    {
+        return mp_broadcast.Binary.encodeDouble(v);
+    },
+    decode : func(v)
+    {
+        return mp_broadcast.Binary.decodeDouble(v);
+    }
+};
+

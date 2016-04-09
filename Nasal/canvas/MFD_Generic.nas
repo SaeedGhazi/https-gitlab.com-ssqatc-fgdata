@@ -150,6 +150,7 @@ var PFD_Device =
         obj.svg = svg;
         obj.current_page = nil;
         obj.pages = [];
+        obj.page_index = {};
         obj.buttons = setsize([], num_menu_buttons);
 
         for(var idx = 0; idx < num_menu_buttons; idx += 1)
@@ -199,6 +200,7 @@ var PFD_Device =
     {
         var np = PFD_Page.new(me.svg, title, layer_id, me);
         append(me.pages, np);
+        me.page_index[layer_id] = np;
         np.setVisible(0);
         return np;
     },

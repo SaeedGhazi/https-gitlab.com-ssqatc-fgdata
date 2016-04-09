@@ -13,6 +13,32 @@
 <PropertyList>
 
 	<path>clem-superstructure.ac</path>
+
+    <nasal>
+        <load>
+            <![CDATA[ 
+            # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
+            var self = cmdarg();
+
+            fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
+            io.load_nasal(fn_an_spn_46, "an_spn_46");
+            var anspn = an_spn_46.ANSPN46_System.new("Clemenceau", self);
+            anspn.SetChannel(2);
+            var an_spn_46_timer = maketimer(6, func {
+                anspn.Update();
+                an_spn_46_timer.restart(anspn.GetUpdateRate());
+            });
+            an_spn_46_timer.restart(6);
+        ]]>
+        </load>
+
+        <unload>
+            <![CDATA[ 
+            an_spn_46_timer.stop();
+            ]]>
+        </unload>
+    </nasal>
+    
 	<texture-path>Textures</texture-path>
  	<offsets>
 	 	<z-m>0</z-m>

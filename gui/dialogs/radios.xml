@@ -22,7 +22,7 @@
           {
           for (var i = 0; i < 4 ; i = i+1)
             {
-            setprop("/instrumentation/transponder/inputs/digit[" ~ i ~ "]", math.mod(idcode/poweroften[i], 10) );
+            setprop("/instrumentation/transponder/inputs/digit[" ~ i ~ "]", sprintf("%1d", math.mod(idcode/poweroften[i], 10)) );
             }
           }
 

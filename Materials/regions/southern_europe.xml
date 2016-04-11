@@ -2,56 +2,56 @@
 <!-- Regional definitions for the Northern Africa -->
 <PropertyList>
   <name>Southern Europe</name>
-  
+
   <area>
     <lon1>-10.2</lon1>
     <lon2>-8.0</lon2>
     <lat1>36.55</lat1>
     <lat2>41.0</lat2>
   </area>
-  
+
   <area>
     <lon1>-8.0</lon1>
     <lon2>0.9</lon2>
     <lat1>36.55</lat1>
     <lat2>42.42</lat2>
   </area>
-  
+
   <area>
     <lon1>0.9</lon1>
     <lon2>2.6</lon2>
     <lat1>38.17</lat1>
     <lat2>42.42</lat2>
   </area>
-  
+
   <area>
     <lon1>2.6</lon1>
     <lon2>10.0</lon2>
     <lat1>38.17</lat1>
     <lat2>43.78</lat2>
   </area>
-  
+
   <area>
     <lon1>10.0</lon1>
     <lon2>11.7</lon2>
     <lat1>38.17</lat1>
     <lat2>40.06</lat2>
   </area>
-  
+
   <area>
     <lon1>11.7</lon1>
     <lon2>15.5</lon2>
     <lat1>34.35</lat1>
     <lat2>40.06</lat2>
   </area>
-  
+
   <area>
     <lon1>15.5</lon1>
     <lon2>20.0</lon2>
     <lat1>34.35</lat1>
     <lat2>43.97</lat2>
   </area>
-  
+
   <area>
     <lon1>20.0</lon1>
     <lon2>25.0</lon2>
@@ -65,7 +65,7 @@
     <lat1>36.85</lat1>
     <lat2>35.97</lat2>
   </area>
-  
+
   <!-- Atlantic Islands (Madeira, Canarias, Tenerife, etc.) -->
   <area>
     <lon1>-32.4</lon1>
@@ -96,7 +96,7 @@
       <uvstretch>8.0</uvstretch>
     </parameters>
   </material>
-  
+
   <material>
     <name>pc_shoulder</name>
     <texture>Runway/pc_shoulder_mediterranean.png</texture>
@@ -157,14 +157,14 @@
     <bumpiness>0.1</bumpiness>
     <load-resistance>1e30</load-resistance>
   </material>
-  
+
   <material>
     <name>EvergreenBroadCover</name>
     <name>EvergreenForest</name>
     <name>RainForest</name>
     <name>MixedForestCover</name>
     <name>MixedForest</name>
-    <name>DeciduousBroadCover</name> 
+    <name>DeciduousBroadCover</name>
     <name>DeciduousForest</name>
     <name>DeciduousNeedleCover</name>
     <effect>Effects/forest</effect>
@@ -175,14 +175,14 @@
       <texture n="15">Terrain/airport_grass2.png</texture>
     </texture-set>
 		<parameters>
-			<grain_strength>0.5</grain_strength>			
+			<grain_strength>0.5</grain_strength>
 			<hires_overlay_bias>0.1</hires_overlay_bias>
 		</parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>14000.0</wood-coverage>
-    <tree-texture>Trees/tropical-alt.png</tree-texture> 
+    <tree-texture>Trees/tropical-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
@@ -190,7 +190,7 @@
     <bumpiness>0.85</bumpiness>
   </material>
 
-  <material>  
+  <material>
 		<name>Grassland</name>
     <name>GrassCover</name>
     <effect>Effects/forest</effect>
@@ -202,14 +202,14 @@
       <texture n="15">Terrain/airport_grass2.png</texture>
     </texture-set>
 		<parameters>
-			<grain_strength>0.5</grain_strength>			
+			<grain_strength>0.5</grain_strength>
 			<hires_overlay_bias>-0.1</hires_overlay_bias>
 		</parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>40000.0</wood-coverage>
-    <tree-texture>Trees/tropical-alt.png</tree-texture> 
+    <tree-texture>Trees/tropical-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
@@ -217,7 +217,7 @@
     <bumpiness>0.65</bumpiness>
   </material>
 
-  <material>  
+  <material>
     <name>Shrub</name>
     <name>ShrubCover</name>
     <name>ShrubGrassCover</name>
@@ -238,7 +238,7 @@
       <texture n="15">Terrain/airport_grass2.png</texture>
     </texture-set>
 		<parameters>
-			<grain_strength>0.5</grain_strength>			
+			<grain_strength>0.5</grain_strength>
 			<hires_overlay_bias>-0.08</hires_overlay_bias>
 		</parameters>
     <xsize>4000</xsize>
@@ -246,7 +246,7 @@
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>30000.0</wood-coverage>
     <tree-texture>Trees/mixed-shrub.png</tree-texture>
-    <tree-varieties>4</tree-varieties>
+    <tree-varieties>8</tree-varieties>
     <tree-height-m>10.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
     <rolling-friction>0.4</rolling-friction>
@@ -307,7 +307,7 @@
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>
-  
+
   <material>
     <name>DryLake</name>
     <name>IntermittentReservoir</name>
@@ -316,7 +316,7 @@
       <texture>Terrain/sand1.png</texture>
       <texture n="12">Terrain/grass_dry3.png</texture>
       <texture n="15">Terrain/sand_hires_ochre.png</texture>
-    </texture-set> 
+    </texture-set>
     <parameters>
       <dot_density>0.2</dot_density>
     </parameters>
@@ -338,7 +338,7 @@
     <texture-set>
       <texture>Terrain/18th_century_city.png</texture>
       <texture n="2">Terrain/18th_century_city-relief-light.png</texture>
-    </texture-set>    
+    </texture-set>
     <object-mask>Terrain/18th_century_city.mask.png</object-mask>
     <xsize>1000</xsize>
     <ysize>1000</ysize>
@@ -374,7 +374,7 @@
     <texture-set>
       <texture>Terrain/town-europe-south.png</texture>
       <texture n="2">Terrain/town-europe-south-relief-light.png</texture>
-    </texture-set>    
+    </texture-set>
     <object-mask>Terrain/town-europe.mask.png</object-mask>
     <xsize>1024</xsize>
     <ysize>1024</ysize>
@@ -399,7 +399,7 @@
     <tree-height-m>15.0</tree-height-m>
     <tree-width-m>10.0</tree-width-m>
   </material>
-  
+
    <material>
     <name>BarrenCover</name>
     <name>Dirt</name>
@@ -410,7 +410,7 @@
       <texture>Terrain/california-rock.png</texture>
       <texture n="11">Terrain/gravel_gray.png</texture>
       <texture n="14">Terrain/grain_texture.png</texture>
-    </texture-set>    
+    </texture-set>
     <parameters>
 			<hires_overlay_bias>-0.1</hires_overlay_bias>
       <grain_strength>0.7</grain_strength>
@@ -422,7 +422,7 @@
     <rolling-friction>0.1</rolling-friction>
     <bumpiness>0.3</bumpiness>
   </material>
-  
+
    <material>
     <name>Lava</name>
     <name>Burnt</name>
@@ -430,7 +430,7 @@
       <texture>Terrain/california-rock.png</texture>
       <texture n="11">Terrain/lava2.png</texture>
       <texture n="14">Terrain/grain_texture.png</texture>
-    </texture-set>    
+    </texture-set>
     <parameters>
 			<hires_overlay_bias>-0.1</hires_overlay_bias>
       <grain_strength>0.7</grain_strength>

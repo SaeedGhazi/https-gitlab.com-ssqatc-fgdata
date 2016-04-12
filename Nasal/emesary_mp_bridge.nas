@@ -1,28 +1,69 @@
+ #---------------------------------------------------------------------------
+ #
+ #	Title                : EMESARY multiplayer bridge
+ #
+ #	File Type            : Implementation File
+ #
+ #	Description          : Bridges selected emesary notifications over MP
+ #	                     : To send a message use a Transmitter with an object. That's all there is to it.
+ #  
+ #  References           : http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
+ #
+ #	Author               : Richard Harrison (richard@zaretto.com)
+ #
+ #	Creation Date        : 04 April 2016
+ #
+ #	Version              : 4.8
+ #
+ #  Copyright © 2016 Richard Harrison           Released under GPL V2
+ #
+ #---------------------------------------------------------------------------*/
+
+# Example of connecting an incoming and outgoing bridge (should reside inside an aircraft nasal file)
+# 
+# var routedNotifications = [notifications.TacticalNotification.new(nil)];
+# var incomingBridge = emesary_mp_bridge.IncomingMPBridge.startMPBridge(routedNotifications);
+# var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-15mp",routedNotifications);
+#------------------------------------------------------------------
 #
-# bridge message rules;
-#  - if distinct must be absolute and self contained as a later message will supercede any earlier ones in the outgoing queue.
-#  - use the message type and ident to identify distinct messages
-# The outgoing 'port' is a multiplay/generic/string index.
-#  - ! is used as a seperator between the elements that are used to send the notification (typeid, sequence, notification)
+# NOTES: Aircraft do not need to have both an incoming and outgoing bridge, but it is usual.
+#        Only the notifications specified will be routed via the bridge.
+#        Once routed a message will by default not be re-rerouted again by the outgoing bridge.
+#        Transmit frequency and message lifetime may need to be tuned.
+#        IsDistinct messages must be absolute and self contained as a later message will 
+#        supercede any earlier ones in the outgoing queue (possibly prior to receipt)
+#        Use the message type and ident to identify distinct messages
+#        The outgoing 'port' is a multiplay/generic/string index.
+#  - ! is used as a seperator between the elements that are used to send the 
+#       notification (typeid, sequence, notification)
+#  -   There is an extra ! at the start of the message that is used to indicate protocol version.
 #  - ; is used to seperate serialzied elemnts of the notification
-#
-# Outgoing messages are sent in a scheduled manner, usually once per second, and each message has a lifetime (to allow for propogation to
-# all clients over UDP). Clients will ignore messages that they have already received (based on the sequence id).
-#
-# The incoming bridge will usually be created part of the aircraft model file; it is important to understand that each AI/MP model will have an incoming bridge
-# as each element in /ai/models needs its own bridge to keep up with the incoming sequence id. This scheme may not work properly as it relies on the model being
-# loaded which may only happen when visible so it may be necessary to track AI models in a seperate instantiatable incoming bridge manager.
+
+# General Notes
+#----------------------------------------------------------------------
+# Outgoing messages are sent in a scheduled manner, usually once per
+# second, and each message has a lifetime (to allow for propogation to
+# all clients over UDP). Clients will ignore messages that they have
+# already received (based on the sequence id).
+
+# The incoming bridge will usually be created part of the aircraft
+# model file; it is important to understand that each AI/MP model will
+# have an incoming bridge as each element in /ai/models needs its own
+# bridge to keep up with the incoming sequence id. This scheme may not
+# work properly as it relies on the model being loaded which may only
+# happen when visible so it may be necessary to track AI models in a
+# seperate instantiatable incoming bridge manager.
 #
 # The outgoing bridge would usually be created within the aircraft loading Nasal.
+
 var OutgoingMPBridge = 
 {
-    new: func(_ident, _notifications_to_bridge=nil, _mpidx=19, _root="", _transmitter=nil)
+    new: func(_ident, _notifications_to_bridge=nil, _mpidx=18, _root="", _transmitter=nil)
     {
         if (_transmitter == nil)
             _transmitter = emesary.GlobalTransmitter;
 
         print("OutgoingMPBridge created for "~_ident);
-
         var new_class = emesary.Recipient.new("OutgoingMPBridge "~_ident);
 
         new_class.MessageIndex = 100;
@@ -33,6 +74,9 @@ var OutgoingMPBridge =
         else
             new_class.NotificationsToBridge = _notifications_to_bridge;
 
+        foreach(var n ; new_class.NotificationsToBridge)
+          print("  bridge --> ",n.NotificationType);
+
         new_class.MPout = "";
         new_class.MPidx = _mpidx;
         new_class.MessageLifeTime = 10; # seconds
@@ -42,6 +86,7 @@ var OutgoingMPBridge =
         new_class.Transmitter.Register(new_class);
         new_class.MpVariable = _root~"sim/multiplay/generic/string["~new_class.MPidx~"]";
         new_class.TransmitterActive = 0;
+        new_class.TransmitFrequencySeconds = 1;
 
         new_class.TransmitTimer = 
           maketimer(6, func
@@ -49,9 +94,8 @@ var OutgoingMPBridge =
                         if(new_class.TransmitterActive)
                             new_class.Transmit();
 
-                        new_class.TransmitTimer.restart(1);
+                        new_class.TransmitTimer.restart(new_class.TransmitFrequencySeconds);
                     });
-        new_class.TransmitTimer.restart(1);
 
         new_class.Delete = func
           {
@@ -72,20 +116,20 @@ var OutgoingMPBridge =
             if (notification.FromIncomingBridge)
                 return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
-#print("Receive ",notification.Type," (",notification.Ident);
+print("Receive ",notification.NotificationType," ",notification.Ident);
             for (var idx = 0; idx < size(me.NotificationsToBridge); idx += 1)
             {
-                if(me.NotificationsToBridge[idx].Type == notification.Type)
+                if(me.NotificationsToBridge[idx].NotificationType == notification.NotificationType)
                 {
                     me.MessageIndex += 1;
                     notification.MessageExpiryTime = systime()+me.MessageLifeTime;
                     notification.BridgeMessageId = me.MessageIndex;
-                    notification.BridgeMessageTypeId = idx;
+                    notification.BridgeMessageNotificationTypeId = idx;
                     #
                     # The message key is a composite of the type and ident to allow for multiple senders
                     # of the same message type.
-                    notification.BridgeMessageTypeKey = notification.Type~"."~notification.Ident;
-#print("Received ",notification.BridgeMessageTypeKey," expire=",notification.MessageExpiryTime);
+                    notification.BridgeMessageNotificationTypeKey = notification.NotificationType~"."~notification.Ident;
+#print("Received ",notification.BridgeMessageNotificationTypeKey," expire=",notification.MessageExpiryTime);
                     me.AddToOutgoing(notification);
                     return emesary.Transmitter.ReceiptStatus_Pending;
                 }
@@ -98,16 +142,16 @@ var OutgoingMPBridge =
             {
                 for (var idx = 0; idx < size(me.OutgoingList); idx += 1)
                 {
-                    if(me.OutgoingList[idx].BridgeMessageTypeKey == notification.BridgeMessageTypeKey)
+                    if(me.OutgoingList[idx].BridgeMessageNotificationTypeKey == notification.BridgeMessageNotificationTypeKey)
                     {
-#print("Update ",me.OutgoingList[idx].BridgeMessageTypeKey);
+#print("Update ",me.OutgoingList[idx].BridgeMessageNotificationTypeKey);
                         me.OutgoingList[idx]= notification;
                         me.TransmitterActive = size(me.OutgoingList);
                         return;
                     }
                 }
             }
-#print("Added ",notification.BridgeMessageTypeKey);
+#print("Added ",notification.BridgeMessageNotificationTypeKey);
             append(me.OutgoingList, notification);
             me.TransmitterActive = size(me.OutgoingList);
         };
@@ -133,7 +177,7 @@ var OutgoingMPBridge =
 #print("Encode ",eidx,"=",encval);
                         eidx += 1;
                     }
-                    sect = sprintf("%d!%d!%s",notification.BridgeMessageId, notification.BridgeMessageTypeId, encval);
+                    sect = sprintf("!%d!%d!%s",notification.BridgeMessageId, notification.BridgeMessageNotificationTypeId, encval);
                     outgoing = outgoing~sect;
                     me.OutgoingList[out_idx] = me.OutgoingList[idx];
 #                    print("xmit ",idx," out=",out_idx);
@@ -150,6 +194,7 @@ var OutgoingMPBridge =
             for(var del_i=0; del_i < del_count; del_i += 1)
                 pop(me.OutgoingList);
         };
+        new_class.TransmitTimer.restart(new_class.TransmitFrequencySeconds);
         return new_class;
     },
 };
@@ -160,7 +205,7 @@ var OutgoingMPBridge =
 # route messages to 
 var IncomingMPBridge = 
 {
-    new: func(_ident, _notifications_to_bridge=nil, _mpidx=19, _transmitter=nil)
+    new: func(_ident, _notifications_to_bridge=nil, _mpidx=18, _transmitter=nil)
     {
         if (_transmitter == nil)
             _transmitter = emesary.GlobalTransmitter;
@@ -216,12 +261,12 @@ var IncomingMPBridge =
             {
 # get the message parts
                 var encoded_notification = split("!", encoded_val);
-                if (size(encoded_notification) < 3)
+                if (size(encoded_notification) < 4)
                     print("Error: emesary.IncomingBridge.ProcessIncoming bad msg ",encoded_val);
                 else
                 {
-                    var msg_idx = encoded_notification[0];
-                    var msg_type_id = encoded_notification[1];
+                    var msg_idx = encoded_notification[1];
+                    var msg_type_id = encoded_notification[2];
                     if (msg_type_id >= size(me.NotificationsToBridge))
                     {
                         print("Error: emesary.IncomingBridge.ProcessIncoming invalid type_id ",msg_type_id);
@@ -229,14 +274,14 @@ var IncomingMPBridge =
                     else
                     {
                         var msg = me.NotificationsToBridge[msg_type_id];
-                        var msg_notify = encoded_notification[2];
-                        print("received idx=",msg_idx," ",msg_type_id,":",msg.Type);
+                        var msg_notify = encoded_notification[3];
+                        print("received idx=",msg_idx," ",msg_type_id,":",msg.NotificationType);
                         if(msg_idx <= me.IncomingMessageIndex)
                             print("         **Already processed");
                         else
                           {
                               # raise notification
-                              var bridged_notification = msg; #emesary.Notification.new(msg.Type,"BridgedMessage");
+                              var bridged_notification = msg; #emesary.Notification.new(msg.NotificationType,"BridgedMessage");
                               # populate fields
                               var bridgedProperties = msg.bridgeProperties();
                               var encvals=split(";", msg_notify);
@@ -267,30 +312,45 @@ var IncomingMPBridge =
         }
         foreach(var n; new_class.NotificationsToBridge)
         {
-            print("IncomingBridge: ",n.Type);
+            print("IncomingBridge: ",n.NotificationType);
         }
         return new_class;
     },
+    #
+    # Each multiplayer object will have its own incoming bridge. This is necessary to allow message ID
+    # tracking (as the bridge knows which messages have been already processed)
+    # Whenever a client connects over MP a new bridge is instantiated
     startMPBridge : func(notification_list)
     {
         var incomingBridgeList = {};
+
+        #
+        # Create bridge whenever a client connects
+        #
         setlistener("/ai/models/model-added", func(v)
         {
-#Model added /ai[0]/models[0]/multiplayer[0]
+            # Model added will be eg: /ai[0]/models[0]/multiplayer[0]
             var path = v.getValue();
+
             print("Model added ",path);
+            # Ensure we only handle multiplayer elements
             if (find("/multiplayer",path) > 0)
             {
                 var callsign = getprop(path~"/callsign");
                 print("Creating Emesary MPBridge for ",callsign);
                 if (callsign == "" or callsign == nil)
                     callsign = path;
-                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(callsign~"mp", notification_list, 19);
+
+                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(callsign~"mp", notification_list, 18);
+
                 incomingBridge.Connect(path~"/");
                 incomingBridgeList[path] = incomingBridge;
             }
         });
 
+        #
+        # when a client disconnects remove the associated bridge.
+        #
         setlistener("/ai/models/model-removed", func(v){
                         print("Model removed ",v.getValue());
             var path = v.getValue();
@@ -303,17 +363,3 @@ var IncomingMPBridge =
                     });
     },
 };
-#to setup bridges;
-#io.load_nasal(getprop("/sim/fg-root") ~ "/Nasal/emesary_mp_bridge.nas");
-#var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-15mp");
-#outgoingBridge.AddMessage(an_spn_46.ANSPN46ActiveNotification.new("template"));
-#incomingBridge = emesary_mp_bridge.IncomingMPBridge.new("F-15mp");
-#incomingBridge.AddMessage(an_spn_46.ANSPN46ActiveNotification.new("template"));
-#var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-15mp");
-#outgoingBridge.AddMessage(an_spn_46.ANSPN46ActiveNotification.new("template"));
-#    var m = emesary.notifications.TacticalNotification("rr",2);
-#    emesary.GlobalTransmitter.NotifyAll(m);
-#var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-15mp");
-#outgoingBridge.AddMessage(notifications.TacticalNotification.new(nil));
-#    var m = emesary.notifications.TacticalNotification("rr",2);
-#    emesary.GlobalTransmitter.NotifyAll(m);

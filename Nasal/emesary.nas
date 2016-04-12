@@ -153,7 +153,7 @@ var Transmitter =
 #   SubClasses can add extra properties or methods.
 # Properties:
 # Ident : Generic message identity. Can be an ident, or for simple messages a value that needs transmitting.
-# Type  : Message Type
+# NotificationType  : Notification Type
 # IsDistinct : non zero if this message supercedes previous messages of this type.
 #              Distinct messages are usually sent often and self contained
 #              (i.e. no relative state changes such as toggle value)
@@ -168,7 +168,7 @@ var Notification =
     {
         var new_class = { parents: [Notification]};
         new_class.Ident = _ident;
-        new_class.Type = _type;
+        new_class.NotificationType = _type;
         new_class.IsDistinct = 1;
         new_class.FromIncomingBridge = 0;
         new_class.Callsign = nil;
@@ -219,6 +219,43 @@ var TransferCoord =
     decode : func(v)
     {
         return mp_broadcast.Binary.decodeCoord(v);
+    }
+};
+var TransferString = 
+{
+#
+# just to pack a valid range and keep the lower and very upper control codes for seperators
+# that way we don't need to do anything special to encode the string.
+    getalphanumericchar : func(v)
+    {
+        if (find(v,"-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz") > 0)
+          return v;
+        return nil;
+    },
+    encode : func(v)
+    {
+        var l = size(v);
+        if (l > 16)
+            l = 16;
+        var rv = mp_broadcast.Binary.encodeByte(l);
+
+print ("Encode string ",v," l=",l);
+        for(var ii = 0; ii < l; ii = ii + 1)
+        {
+printf("%d,%d (%s)\n",ii+1,1,rv);
+            ev = TransferString.getalphanumericchar(substr(v,ii,1));
+            if (ev != nil)
+                rv = rv ~ ev;
+        }
+        print("String encode l=",l," val=",rv);        
+        return rv;
+    },
+    decode : func(v)
+    {
+        var l = mp_broadcast.Binary.decodeByte(v);
+        var rv = substr(v,1,l-1);
+        print("String decode l=",l," val=",rv);        
+        return rv;
     }
 };
 

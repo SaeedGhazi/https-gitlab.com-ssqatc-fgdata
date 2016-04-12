@@ -275,7 +275,7 @@ var ANSPN46_System =
 
         new_class.Receive = func(notification)
         {
-            if (notification.Type == "ANSPN46ActiveResponseNotification")
+            if (notification.NotificationType == "ANSPN46ActiveResponseNotification")
             {
                 if (notification.Tuned)
                 {

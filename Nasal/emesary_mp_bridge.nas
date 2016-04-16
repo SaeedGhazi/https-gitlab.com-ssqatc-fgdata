@@ -116,7 +116,7 @@ var OutgoingMPBridge =
             if (notification.FromIncomingBridge)
                 return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
-print("Receive ",notification.NotificationType," ",notification.Ident);
+#print("Receive ",notification.NotificationType," ",notification.Ident);
             for (var idx = 0; idx < size(me.NotificationsToBridge); idx += 1)
             {
                 if(me.NotificationsToBridge[idx].NotificationType == notification.NotificationType)
@@ -230,14 +230,16 @@ var IncomingMPBridge =
         new_class.Connect = func(_root)
         {
             me.MpVariable = _root~"sim/multiplay/generic/string["~new_class.MPidx~"]";
-            me.Callsign = getprop(_root~"callsign");
-            print("bridge ",me.MpVariable, " callsign ",me.Callsign);
+            me.CallsignPath = _root~"callsign";
             setlistener(me.MpVariable, func(v)
                         {
                             me.ProcessIncoming(v.getValue());
                         });
         };
-
+        new_class.GetCallsign = func
+        {
+            return getprop(me.CallsignPath);
+        };
         new_class.AddMessage = func(m)
         {
             append(me.NotificationsToBridge, m);
@@ -275,37 +277,34 @@ var IncomingMPBridge =
                     {
                         var msg = me.NotificationsToBridge[msg_type_id];
                         var msg_notify = encoded_notification[3];
-                        print("received idx=",msg_idx," ",msg_type_id,":",msg.NotificationType);
-                        if(msg_idx <= me.IncomingMessageIndex)
-                            print("         **Already processed");
-                        else
-                          {
-                              # raise notification
-                              var bridged_notification = msg; #emesary.Notification.new(msg.NotificationType,"BridgedMessage");
-                              # populate fields
-                              var bridgedProperties = msg.bridgeProperties();
-                              var encvals=split(";", msg_notify);
+#                        print("received idx=",msg_idx," ",msg_type_id,":",msg.NotificationType);
+                        if (msg_idx > me.IncomingMessageIndex)
+                        {
+                            # raise notification
+                            var bridged_notification = msg; #emesary.Notification.new(msg.NotificationType,"BridgedMessage");
+                            # populate fields
+                            var bridgedProperties = msg.bridgeProperties();
+                            var encvals=split(";", msg_notify);
 
-                              for (var bpi = 0; bpi < size(encvals); bpi += 1) {
-                                  if (bpi < size(bridgedProperties)) {
-                                      var bp = bridgedProperties[bpi];
-                                      print("encval ",bpi,"=",encvals[bpi]);
-                                      if (encvals[bpi] != ";" and encvals[bpi] != "") {
-                                          var bp = bridgedProperties[bpi];
-                                          bp.setValue(encvals[bpi]);
-                                      }
-                                      #else
-                                      #print("EMPTY encoded ",bpi," empty");
-                                  } else
-                                    print("Error: emesary.IncomingBridge.ProcessIncoming: supplementary encoded value at",bpi);
-                              }
-                              if (bridged_notification.Ident == "none")
-                                  bridged_notification.Ident = "mp-bridge";
-                              bridged_notification.FromIncomingBridge = 1;
-                              bridged_notification.Callsign = me.Callsign;
-                              me.Transmitter.NotifyAll(bridged_notification);
-                              me.IncomingMessageIndex = msg_idx;
-                          }
+                            for (var bpi = 0; bpi < size(encvals); bpi += 1) {
+                                if (bpi < size(bridgedProperties)) {
+                                    var bp = bridgedProperties[bpi];
+                                    if (encvals[bpi] != ";" and encvals[bpi] != "") {
+                                        var bp = bridgedProperties[bpi];
+                                        bp.setValue(encvals[bpi]);
+                                    }
+                                    #else
+                                    #print("EMPTY encoded ",bpi," empty");
+                                } else
+                                  print("Error: emesary.IncomingBridge.ProcessIncoming: supplementary encoded value at",bpi);
+                            }
+                            if (bridged_notification.Ident == "none")
+                              bridged_notification.Ident = "mp-bridge";
+                            bridged_notification.FromIncomingBridge = 1;
+                            bridged_notification.Callsign = me.GetCallsign();
+                            me.Transmitter.NotifyAll(bridged_notification);
+                            me.IncomingMessageIndex = msg_idx;
+                        }
                     }
                 }
             }
@@ -336,12 +335,13 @@ var IncomingMPBridge =
             # Ensure we only handle multiplayer elements
             if (find("/multiplayer",path) > 0)
             {
+print("Callsign path ",path~"/callsign");
                 var callsign = getprop(path~"/callsign");
                 print("Creating Emesary MPBridge for ",callsign);
                 if (callsign == "" or callsign == nil)
                     callsign = path;
 
-                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(callsign~"mp", notification_list, 18);
+                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(path, notification_list, 18);
 
                 incomingBridge.Connect(path~"/");
                 incomingBridgeList[path] = incomingBridge;

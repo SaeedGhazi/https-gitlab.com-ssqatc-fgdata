@@ -210,17 +210,71 @@ var Recipient =
 # use this transmitters, however other transmitters can be created and merely use the global transmitter to discover each other
 var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
 
-var TransferCoord = 
+#
+#
+# This is basically a base64 like encode except we just use alphanumerics which gives us a base62 encode.
+var BinaryAsciiTransfer = 
 {
-    encode : func(v)
+    alphabet : "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    encodeInt : func(num)
     {
-        return mp_broadcast.Binary.encodeCoord(v);
+        if (num == 0)
+            return substr(BinaryAsciiTransfer.alphabet,0,1);
+        
+        var arr="";
+        var _base = size(BinaryAsciiTransfer.alphabet);
+        while(num > 0)
+        {
+            var rem = math.mod(num,_base);
+            num = int(num / _base);
+            arr =substr(BinaryAsciiTransfer.alphabet, rem,1) ~ arr;
+        }
+        return arr;
     },
-    decode : func(v)
+    decodeInt : func(v)
     {
-        return mp_broadcast.Binary.decodeCoord(v);
+        var _base = size(BinaryAsciiTransfer.alphabet);
+        var power = size(v) - 1;
+        var num = 0;
+
+        var idx = 0;
+        for(var idx=0; idx < size(v); idx += 1)
+        {
+            var c = substr(v,idx,1);
+            var cc = find(c,BinaryAsciiTransfer.alphabet);
+            if (cc < 0)
+                return nil;
+            num += int(cc * math.exp(math.ln(_base) * power));
+          
+            power -= 1;
+        }
+        return num;
     }
 };
+
+var TransferCoord = 
+{
+# 28 bits = 268435456 (268 435 456)
+# to transfer lat lon (360 degree range) 268435456/360=745654
+# we could use different factors for lat lon due to the differing range, however
+# this will be fine.
+ encode : func(v)
+ {
+     return BinaryAsciiTransfer.encodeInt( (v.lat()+90)*745654) ~ "." ~
+       BinaryAsciiTransfer.encodeInt((v.lon()+180)*745654) ~ "." ~
+         BinaryAsciiTransfer.encodeInt((v.alt()+1400)*100);
+ }
+ ,
+ decode : func(v)
+ {
+     var parts = split(".", v);
+     var lat = (BinaryAsciiTransfer.decodeInt(parts[0]) / 745654)-90;
+     var lon = (BinaryAsciiTransfer.decodeInt(parts[1]) / 745654)-180;
+     var alt = (BinaryAsciiTransfer.decodeInt(parts[2]) / 100)-1400;
+     return geo.Coord.new().set_latlon(lat, lon).set_alt(alt);
+ }
+};
+
 var TransferString = 
 {
 #
@@ -237,7 +291,7 @@ var TransferString =
         var l = size(v);
         if (l > 16)
             l = 16;
-        var rv = mp_broadcast.Binary.encodeByte(l);
+        var rv = BinaryAsciiTransfer.encodeInt(l);
 
 print ("Encode string ",v," l=",l);
         for(var ii = 0; ii < l; ii = ii + 1)
@@ -252,7 +306,7 @@ printf("%d,%d (%s)\n",ii+1,1,rv);
     },
     decode : func(v)
     {
-        var l = mp_broadcast.Binary.decodeByte(v);
+        var l = BinaryAsciiTransfer.decodeInt(v);
         var rv = substr(v,1,l-1);
         print("String decode l=",l," val=",rv);        
         return rv;
@@ -263,11 +317,11 @@ var TransferByte =
 {
     encode : func(v)
     {
-        return mp_broadcast.Binary.encodeByte(v);
+        return BinaryAsciiTransfer.encodeInt(v);
     },
     decode : func(v)
     {
-        return mp_broadcast.Binary.decodeByte(v);
+        return BinaryAsciiTransfer.decodeInt(v);
     }
 };
 
@@ -275,23 +329,22 @@ var TransferInt =
 {
     encode : func(v)
     {
-        return mp_broadcast.Binary.encodeInt(v);
+        return BinaryAsciiTransfer.encodeInt(v);
     },
     decode : func(v)
     {
-        return mp_broadcast.Binary.decodeInt(v);
+        return BinaryAsciiTransfer.decodeInt(v);
     }
 };
 
-var TransferDouble = 
+var TransferFixedDouble = 
 {
-    encode : func(v)
+    encode : func(v, precision=4)
     {
-        return mp_broadcast.Binary.encodeDouble(v);
+        return BinaryAsciiTransfer.encodeInt(v*math.exp(math.ln(10) * precision));
     },
-    decode : func(v)
+    decode : func(v, precision=4)
     {
-        return mp_broadcast.Binary.decodeDouble(v);
+        return BinaryAsciiTransfer.decodeInt(v)/math.exp(math.ln(10) * precision);
     }
 };
-

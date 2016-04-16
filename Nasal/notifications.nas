@@ -39,14 +39,14 @@ var GeoEventNotification =
         {
             return 
             [ 
-#             {
-#            getValue:func{return emesary.TransferCoord.encode(new_class.Position);},
-#            setValue:func(v){new_class.Position=emesary.TransferCoord.decode(v);}, 
-#             },
-#             {
-#            getValue:func{return emesary.TransferString.encode(new_class.Name);},
-#            setValue:func(v){new_class.Name=emesary.TransferString.decode(v);}, 
-#             },
+             {
+            getValue:func{return emesary.TransferCoord.encode(new_class.Position);},
+            setValue:func(v){new_class.Position=emesary.TransferCoord.decode(v);}, 
+             },
+             {
+            getValue:func{return emesary.TransferString.encode(new_class.Name);},
+            setValue:func(v){new_class.Name=emesary.TransferString.decode(v);}, 
+             },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.Kind);},
             setValue:func(v){new_class.Kind=emesary.TransferByte.decode(v);}, 
@@ -55,18 +55,18 @@ var GeoEventNotification =
             getValue:func{return emesary.TransferByte.encode(new_class.SecondaryKind);},
             setValue:func(v){new_class.SecondaryKind=emesary.TransferByte.decode(v);}, 
              },
-#             {
-#            getValue:func{return emesary.TransferDouble.encode(new_class.u_fps);},
-#            setValue:func(v){new_class.u_fps=emesary.TransferDouble.decode(v);}, 
-#             },
-#             {
-#            getValue:func{return emesary.TransferDouble.encode(new_class.v_fps);},
-#            setValue:func(v){new_class.v_fps=emesary.TransferDouble.decode(v);}, 
-#             },
-#             {
-#            getValue:func{return emesary.TransferDouble.encode(new_class.w_fps);},
-#            setValue:func(v){new_class.w_fps=emesary.TransferDouble.decode(v);}, 
-#             },
+             {
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.u_fps);},
+            setValue:func(v){new_class.u_fps=emesary.TransferFixedDouble.decode(v);}, 
+             },
+             {
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.v_fps);},
+            setValue:func(v){new_class.v_fps=emesary.TransferFixedDouble.decode(v);}, 
+             },
+             {
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.w_fps);},
+            setValue:func(v){new_class.w_fps=emesary.TransferFixedDouble.decode(v);}, 
+             },
             ];
           };
         return new_class;

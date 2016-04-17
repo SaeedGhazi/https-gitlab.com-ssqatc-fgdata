@@ -1,11 +1,11 @@
 AC3Db
-MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.329 0.329 0.329  shi 32  trans 0
+MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0.100 0.100 0.100  spec 0.500 0.500 0.500  shi 50  trans 0
 OBJECT world
 kids 2
 OBJECT poly
 name "Gear"
 loc -11.0107 1.47146 -4.76837e-007
-texture "F:/My Games/FlightGear 2.12.0/data/AI/Aircraft/767/Textures/ECAir/763-tex.png"
+texture "763-tex.png"
 crease 45.000000
 numvert 1490
 -11.5125 -0.861179 -0.143436
@@ -12220,7 +12220,7 @@ kids 0
 OBJECT poly
 name "Fuselage"
 loc 0.53203 8.3454 0
-texture "F:/My Games/FlightGear 2.12.0/data/AI/Aircraft/767/Textures/ECAir/763-tex.png"
+texture "763-tex.png"
 crease 45.000000
 numvert 4243
 0.342352 -4.79809 6.16398

@@ -5,7 +5,7 @@ kids 6
 OBJECT poly
 name "Stabilizers"
 loc 14.2798 4.13606 4.54487
-texture "F:/My Games/FlightGear 2.12.0/data/AI/Aircraft/E70/Textures/Default/ERJ175-tex.png"
+texture "ERJ175-tex.png"
 crease 45.000000
 numvert 180
 -2.84801 -0.333437 -5.39561

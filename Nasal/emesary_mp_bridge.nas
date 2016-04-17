@@ -58,6 +58,10 @@
 
 var OutgoingMPBridge = 
 {
+   SeperatorChar : "!",
+   StartMessageIndex : 11,
+   DefaultMessageLifetime : 10,
+   MPStringMaxLen: 50,
     new: func(_ident, _notifications_to_bridge=nil, _mpidx=18, _root="", _transmitter=nil)
     {
         if (_transmitter == nil)
@@ -66,7 +70,7 @@ var OutgoingMPBridge =
         print("OutgoingMPBridge created for "~_ident);
         var new_class = emesary.Recipient.new("OutgoingMPBridge "~_ident);
 
-        new_class.MessageIndex = 100;
+        new_class.MessageIndex = OutgoingMPBridge.StartMessageIndex;
 #        foreach (var notification; _notifications_to_bridge)
 #        new_class.NotificationsToBridge = notification.new(;
         if(_notifications_to_bridge == nil)
@@ -177,7 +181,11 @@ var OutgoingMPBridge =
 #print("Encode ",eidx,"=",encval);
                         eidx += 1;
                     }
-                    sect = sprintf("!%d!%d!%s",notification.BridgeMessageId, notification.BridgeMessageNotificationTypeId, encval);
+                    #               !idx!typ!encv
+                    sect = sprintf("%s%s%s%s%s%s",
+                                   OutgoingMPBridge.SeperatorChar, emesary.BinaryAsciiTransfer.encodeInt(notification.BridgeMessageId), 
+                                   OutgoingMPBridge.SeperatorChar, emesary.BinaryAsciiTransfer.encodeInt(notification.BridgeMessageNotificationTypeId),
+                                   OutgoingMPBridge.SeperatorChar, encval);
                     outgoing = outgoing~sect;
                     me.OutgoingList[out_idx] = me.OutgoingList[idx];
 #                    print("xmit ",idx," out=",out_idx);
@@ -214,7 +222,7 @@ var IncomingMPBridge =
 
         var new_class = emesary.Transmitter.new("IncominggMPBridge "~_ident);
 
-        new_class.IncomingMessageIndex = 100;
+        new_class.IncomingMessageIndex = OutgoingMPBridge.StartMessageIndex;
         if(_notifications_to_bridge == nil)
             new_class.NotificationsToBridge = [];
         else
@@ -222,7 +230,7 @@ var IncomingMPBridge =
 
         new_class.MPout = "";
         new_class.MPidx = _mpidx;
-        new_class.MessageLifeTime = 10; # seconds
+        new_class.MessageLifeTime = OutgoingMPBridge.DefaultMessageLifetime; # seconds
         new_class.OutgoingList = [];
         new_class.Transmitter = _transmitter;
         new_class.MpVariable = "";
@@ -262,13 +270,13 @@ var IncomingMPBridge =
             for (var idx = 0; idx < size(encoded_notifications); idx += 1)
             {
 # get the message parts
-                var encoded_notification = split("!", encoded_val);
+                var encoded_notification = split(OutgoingMPBridge.SeperatorChar, encoded_val);
                 if (size(encoded_notification) < 4)
                     print("Error: emesary.IncomingBridge.ProcessIncoming bad msg ",encoded_val);
                 else
                 {
-                    var msg_idx = encoded_notification[1];
-                    var msg_type_id = encoded_notification[2];
+                    var msg_idx = emesary.BinaryAsciiTransfer.decodeInt(encoded_notification[1]);
+                    var msg_type_id = emesary.BinaryAsciiTransfer.decodeInt(encoded_notification[2]);
                     if (msg_type_id >= size(me.NotificationsToBridge))
                     {
                         print("Error: emesary.IncomingBridge.ProcessIncoming invalid type_id ",msg_type_id);
@@ -331,13 +339,11 @@ var IncomingMPBridge =
             # Model added will be eg: /ai[0]/models[0]/multiplayer[0]
             var path = v.getValue();
 
-            print("Model added ",path);
             # Ensure we only handle multiplayer elements
             if (find("/multiplayer",path) > 0)
             {
-print("Callsign path ",path~"/callsign");
                 var callsign = getprop(path~"/callsign");
-                print("Creating Emesary MPBridge for ",callsign);
+                print("Creating Emesary MPBridge for ",path);
                 if (callsign == "" or callsign == nil)
                     callsign = path;
 
@@ -352,11 +358,11 @@ print("Callsign path ",path~"/callsign");
         # when a client disconnects remove the associated bridge.
         #
         setlistener("/ai/models/model-removed", func(v){
-                        print("Model removed ",v.getValue());
             var path = v.getValue();
                         var bridge = incomingBridgeList[path];
                         if (bridge != nil)
                         {
+#                            print("Bridge removed for ",v.getValue());
                             bridge.Remove();
                             incomingBridgeList[path]=nil;
                         }

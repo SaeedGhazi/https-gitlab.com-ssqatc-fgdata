@@ -293,22 +293,18 @@ var TransferString =
             l = 16;
         var rv = BinaryAsciiTransfer.encodeInt(l);
 
-print ("Encode string ",v," l=",l);
         for(var ii = 0; ii < l; ii = ii + 1)
         {
-printf("%d,%d (%s)\n",ii+1,1,rv);
             ev = TransferString.getalphanumericchar(substr(v,ii,1));
             if (ev != nil)
                 rv = rv ~ ev;
         }
-        print("String encode l=",l," val=",rv);        
         return rv;
     },
     decode : func(v)
     {
         var l = BinaryAsciiTransfer.decodeInt(v);
         var rv = substr(v,1,l-1);
-        print("String decode l=",l," val=",rv);        
         return rv;
     }
 };

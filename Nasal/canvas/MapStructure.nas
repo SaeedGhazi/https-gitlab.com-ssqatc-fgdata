@@ -21,7 +21,7 @@
 ##  APIs to be wrapped for each layer:
 ##  printlog(), die(), debug.bt(), benchmark()
 
-var _MP_dbg_lvl = "info";
+var _MP_dbg_lvl = "debug";
 #var _MP_dbg_lvl = "alert";
 
 var makedie = func(prefix) func(msg) globals.die(prefix~" "~msg);

@@ -1,4 +1,4 @@
-print("A");
+#print("A");
 
 var save = func()
 {

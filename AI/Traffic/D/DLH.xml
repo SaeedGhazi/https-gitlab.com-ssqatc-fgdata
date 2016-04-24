@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- Author Ian Tolosa - timetable of November 2015 -->
+
 <trafficlist>
   <aircraft>
     <model>Aircraft/A319/A319-Lufthansa.xml</model>
@@ -3319,7 +3322,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3333,7 +3336,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3347,7 +3350,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3361,7 +3364,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3375,7 +3378,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3389,7 +3392,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3403,7 +3406,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3417,7 +3420,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3431,7 +3434,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3445,7 +3448,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3459,7 +3462,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3473,7 +3476,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3487,7 +3490,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3501,7 +3504,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3515,7 +3518,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3529,7 +3532,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3543,7 +3546,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3557,7 +3560,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3571,7 +3574,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3585,7 +3588,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3599,7 +3602,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3613,7 +3616,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3627,7 +3630,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3641,7 +3644,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3655,7 +3658,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3669,7 +3672,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3683,7 +3686,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3697,7 +3700,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3711,7 +3714,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3725,7 +3728,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3739,7 +3742,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>
@@ -3753,7 +3756,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-Lufthansa.xml</model>
+    <model>Aircraft/747/744-Lufthansa.xml</model>
     <livery>DLH</livery>
     <airline>DLH</airline>
     <home-port>EDDF</home-port>

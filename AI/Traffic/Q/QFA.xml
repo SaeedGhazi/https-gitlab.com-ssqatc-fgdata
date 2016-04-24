@@ -1573,13 +1573,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>false</heavy>
     </aircraft>    
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1587,13 +1587,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1601,13 +1601,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1615,13 +1615,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1629,13 +1629,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1643,13 +1643,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1657,13 +1657,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1671,13 +1671,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1685,13 +1685,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1699,13 +1699,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-48E</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1713,13 +1713,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1727,13 +1727,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>WSSS</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1741,13 +1741,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1755,13 +1755,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YSSY</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1769,13 +1769,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YBBN</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1783,13 +1783,13 @@ fokker50-AllianceAirlines.xml - temporarily replaced with Dash8/Dash8-Default.xm
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Qantas.xml</model>
+        <model>Aircraft/747/744-Qantas.xml</model>
         <livery>QFA</livery>
         <airline>QFA</airline>
         <home-port>YPAD</home-port>
         <required-aircraft>744-QFA</required-aircraft>
         <actype>747-438</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>

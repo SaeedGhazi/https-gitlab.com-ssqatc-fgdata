@@ -1208,13 +1208,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1222,13 +1222,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1236,13 +1236,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1250,13 +1250,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1264,13 +1264,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1278,13 +1278,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1292,13 +1292,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1306,13 +1306,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1320,13 +1320,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1334,13 +1334,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1348,13 +1348,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1362,13 +1362,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1376,13 +1376,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1390,13 +1390,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1404,13 +1404,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1418,13 +1418,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1432,13 +1432,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1446,13 +1446,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1460,13 +1460,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1474,13 +1474,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1488,13 +1488,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1502,13 +1502,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1516,13 +1516,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406ERF</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1530,13 +1530,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406F(ER)</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1544,13 +1544,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-KLM.xml</model>
+        <model>Aircraft/747/744-KLM.xml</model>
         <livery>KLM</livery>
         <airline>KLM</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>747KLM</required-aircraft>
         <actype>747-406ERF</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>

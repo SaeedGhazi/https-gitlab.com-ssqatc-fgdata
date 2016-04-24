@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- A346 & 747 replaced by Aircraft/A333/A333-VirginAtlantic.xml
+<!-- A346 replaced by Aircraft/A333/A333-VirginAtlantic.xml
      Change airport EGAC (Belfast City Aairport) to EGCC (Manchester), 
      Belfast may have a little problem handling all those heavies -->
 
@@ -370,7 +370,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>
@@ -384,7 +384,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>
@@ -398,7 +398,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGCC</home-port>
@@ -412,7 +412,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>
@@ -426,7 +426,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>
@@ -440,7 +440,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGCC</home-port>
@@ -454,7 +454,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>
@@ -468,7 +468,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGCC</home-port>
@@ -482,7 +482,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGCC</home-port>
@@ -496,7 +496,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>
@@ -510,7 +510,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGCC</home-port>
@@ -524,7 +524,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/A333/A333-VirginAtlantic.xml</model>
+        <model>Aircraft/747/744-VirginAtlantic.xml</model>
         <livery>VIR</livery>
         <airline>VIR</airline>
         <home-port>EGKK</home-port>

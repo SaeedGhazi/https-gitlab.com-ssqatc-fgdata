@@ -424,7 +424,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -438,7 +438,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -452,7 +452,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -466,7 +466,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -480,7 +480,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -494,7 +494,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -508,7 +508,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -522,7 +522,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -536,7 +536,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>
@@ -550,7 +550,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747-400/747-400-EvaAir.xml</model>
+    <model>Aircraft/747/744-EvaAir.xml</model>
     <livery>EVA</livery>
     <airline>EVA</airline>
     <home-port>RCTP</home-port>

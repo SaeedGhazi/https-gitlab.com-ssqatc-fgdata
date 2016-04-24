@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 
-<!-- A318    replaced by    A319
-             Fairchild-Dornier-SunAir  replaced by   Aircraft/Bombardier-Challenger/Bombardier-Challenger-SunAir.xml
-             E70 & E90  replaced by    Aircraft/ERJ145/ERJ145-BritishAirways.xml -->
+<!--
+Timetable Date Unknown
+A318 replaced by A319
+Fairchild-Dornier-SunAir replaced by Aircraft/Bombardier-Challenger/Bombardier-Challenger-SunAir.xml
+E70 & E90 replaced by Aircraft/ERJ145/ERJ145-BritishAirways.xml
+Updated APR16 with new 744 model path
+-->
 
 <trafficlist>
     <aircraft>
@@ -1924,13 +1928,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1938,13 +1942,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1952,13 +1956,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1966,13 +1970,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1980,13 +1984,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1994,13 +1998,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2008,13 +2012,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2022,13 +2026,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2036,13 +2040,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2050,13 +2054,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2064,13 +2068,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2078,13 +2082,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2092,13 +2096,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2106,13 +2110,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2120,13 +2124,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2134,13 +2138,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2148,13 +2152,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2162,13 +2166,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2176,13 +2180,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2190,13 +2194,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2204,13 +2208,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2218,13 +2222,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2232,13 +2236,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2246,13 +2250,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2260,13 +2264,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2274,13 +2278,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2288,13 +2292,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2302,13 +2306,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2316,13 +2320,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2330,13 +2334,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2344,13 +2348,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2358,13 +2362,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2372,13 +2376,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2386,13 +2390,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2400,13 +2404,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2414,13 +2418,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2428,13 +2432,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2442,13 +2446,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2456,13 +2460,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2470,13 +2474,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2484,13 +2488,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2498,13 +2502,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2512,13 +2516,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2526,13 +2530,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2540,13 +2544,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2554,13 +2558,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2568,13 +2572,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2582,13 +2586,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2596,13 +2600,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2610,13 +2614,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2624,13 +2628,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2638,13 +2642,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2652,13 +2656,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2666,13 +2670,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGLL</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2680,13 +2684,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2694,13 +2698,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2708,13 +2712,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-BritishAirways.xml</model>
+        <model>Aircraft/747/744-BritishAirways.xml</model>
         <livery>BAW</livery>
         <airline>BAW</airline>
         <home-port>EGKK</home-port>
         <required-aircraft>744-BAW</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>

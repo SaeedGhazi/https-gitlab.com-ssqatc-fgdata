@@ -2129,13 +2129,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KSFO</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2143,13 +2143,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KORD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2157,13 +2157,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KORD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2171,13 +2171,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KIAD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2185,13 +2185,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KLAX</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2199,13 +2199,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KSFO</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2213,13 +2213,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KORD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2227,13 +2227,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KIAD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2241,13 +2241,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2255,13 +2255,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KORD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2269,13 +2269,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KDEN</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2283,13 +2283,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KDEN</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2297,13 +2297,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KLAX</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2311,13 +2311,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KDEN</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2325,13 +2325,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KLAX</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2339,13 +2339,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2353,13 +2353,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KDEN</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2367,13 +2367,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KLAX</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2381,13 +2381,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KIAD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2395,13 +2395,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KSFO</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2409,13 +2409,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KSFO</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2423,13 +2423,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KIAD</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2437,13 +2437,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -2451,13 +2451,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-UnitedAirlines.xml</model>
+        <model>Aircraft/747/744-United.xml</model>
         <livery>UAL</livery>
         <airline>UAL</airline>
         <home-port>KLAX</home-port>
         <required-aircraft>744-UAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>

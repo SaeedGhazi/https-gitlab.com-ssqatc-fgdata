@@ -883,13 +883,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -897,13 +897,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -911,13 +911,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -925,13 +925,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -939,13 +939,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -953,13 +953,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -967,13 +967,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -981,13 +981,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -995,13 +995,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1009,13 +1009,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1023,13 +1023,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1037,13 +1037,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1051,13 +1051,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1065,13 +1065,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1079,13 +1079,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1093,13 +1093,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1107,13 +1107,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1121,13 +1121,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1135,13 +1135,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1149,13 +1149,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1163,13 +1163,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1177,13 +1177,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1191,13 +1191,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1205,13 +1205,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1219,13 +1219,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1233,13 +1233,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1247,13 +1247,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1261,13 +1261,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1275,13 +1275,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1289,13 +1289,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1303,13 +1303,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1317,13 +1317,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1331,13 +1331,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1345,13 +1345,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1359,13 +1359,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1373,13 +1373,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1387,13 +1387,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1401,13 +1401,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1415,13 +1415,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1429,13 +1429,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -1443,13 +1443,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Korean.xml</model>
+        <model>Aircraft/747/744-Korean.xml</model>
         <livery>KAL</livery>
         <airline>KAL</airline>
         <home-port>RKSI</home-port>
         <required-aircraft>744-KAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>

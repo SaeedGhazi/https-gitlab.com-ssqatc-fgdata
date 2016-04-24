@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+
+<!-- Author Ian Tolosa - JUN13 Timetable - Updated APR16 with 744 model link -->
+
+
+
 <trafficlist>
 <aircraft>
 <model>Aircraft/A333/A333-CathayPacific.xml</model>
@@ -673,7 +678,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -687,7 +692,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -701,7 +706,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -715,7 +720,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -729,7 +734,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -743,7 +748,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -757,7 +762,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -771,7 +776,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -785,7 +790,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -799,7 +804,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -813,7 +818,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -827,7 +832,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -841,7 +846,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -855,7 +860,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -869,7 +874,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -883,7 +888,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -897,7 +902,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -911,7 +916,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -925,7 +930,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -939,7 +944,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -953,7 +958,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -967,7 +972,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -981,7 +986,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -995,7 +1000,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1009,7 +1014,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1023,7 +1028,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1037,7 +1042,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1051,7 +1056,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1065,7 +1070,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1079,7 +1084,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1093,7 +1098,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1107,7 +1112,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1121,7 +1126,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1135,7 +1140,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1149,7 +1154,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1163,7 +1168,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>
@@ -1177,7 +1182,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/747-400/747-400-CathayPacific.xml</model>
+<model>Aircraft/747/744-CathayPacific.xml</model>
 <livery>CPA</livery>
 <airline>CPA</airline>
 <home-port>VHHH</home-port>

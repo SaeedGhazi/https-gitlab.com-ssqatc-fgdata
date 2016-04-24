@@ -3445,13 +3445,13 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3459,13 +3459,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3473,13 +3473,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3487,13 +3487,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3501,13 +3501,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3515,13 +3515,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3529,13 +3529,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3543,13 +3543,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3557,13 +3557,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3571,13 +3571,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3585,13 +3585,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3599,13 +3599,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KMEM</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3613,13 +3613,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3627,13 +3627,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>
@@ -3641,13 +3641,13 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/747-400/747-400-Delta.xml</model>
+        <model>Aircraft/747/744-Delta.xml</model>
         <livery>DAL</livery>
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>744-DAL</required-aircraft>
         <actype>744</actype>
-        <offset>19</offset>
+        <offset>0</offset>
         <radius>32</radius>
         <flighttype>gate</flighttype>
         <performance-class>heavy_jet</performance-class>

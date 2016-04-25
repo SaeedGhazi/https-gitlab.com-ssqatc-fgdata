@@ -55,6 +55,7 @@
 # seperate instantiatable incoming bridge manager.
 #
 # The outgoing bridge would usually be created within the aircraft loading Nasal.
+var EmesaryMPBridgeDefaultPropertyIndex=19;
 
 var OutgoingMPBridge = 
 {
@@ -62,12 +63,12 @@ var OutgoingMPBridge =
    StartMessageIndex : 11,
    DefaultMessageLifetime : 10,
    MPStringMaxLen: 50,
-    new: func(_ident, _notifications_to_bridge=nil, _mpidx=18, _root="", _transmitter=nil)
+    new: func(_ident, _notifications_to_bridge=nil, _mpidx=19, _root="", _transmitter=nil)
     {
         if (_transmitter == nil)
             _transmitter = emesary.GlobalTransmitter;
 
-        print("OutgoingMPBridge created for "~_ident);
+        print("OutgoingMPBridge created for "~_ident," mp=",_mpidx);
         var new_class = emesary.Recipient.new("OutgoingMPBridge "~_ident);
 
         new_class.MessageIndex = OutgoingMPBridge.StartMessageIndex;
@@ -213,12 +214,12 @@ var OutgoingMPBridge =
 # route messages to 
 var IncomingMPBridge = 
 {
-    new: func(_ident, _notifications_to_bridge=nil, _mpidx=18, _transmitter=nil)
+    new: func(_ident, _notifications_to_bridge=nil, _mpidx=19, _transmitter=nil)
     {
         if (_transmitter == nil)
             _transmitter = emesary.GlobalTransmitter;
 
-        print("IncominggMPBridge created for "~_ident);
+        print("IncominggMPBridge created for "~_ident," mp=",_mpidx);
 
         var new_class = emesary.Transmitter.new("IncominggMPBridge "~_ident);
 
@@ -347,7 +348,7 @@ var IncomingMPBridge =
                 if (callsign == "" or callsign == nil)
                     callsign = path;
 
-                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(path, notification_list, 18);
+                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(path, notification_list);
 
                 incomingBridge.Connect(path~"/");
                 incomingBridgeList[path] = incomingBridge;

@@ -136,11 +136,11 @@ var GeoEventNotification =
 #  46 0010 1110 - Fuselage Center
 #  47 0010 1111 - Fuselage Back
 #--------
-# Type 0011 : 
-#  48 0011 0000 - 
-#  49 0011 0001 - 
-#  50 0011 0010 - 
-#  51 0011 0011 - 
+# Type 0011 : External stores
+#  48 0011 0000 - Drop Tank 1
+#  49 0011 0001 - Drop Tank 2
+#  50 0011 0010 - Drop Tank 3
+#  51 0011 0011 - Drop Tank 4
 #  52 0011 0100 - 
 #  53 0011 0101 - 
 #  54 0011 0110 - 

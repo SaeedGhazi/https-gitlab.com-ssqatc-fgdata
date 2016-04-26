@@ -718,10 +718,29 @@
 						</binding>
 					</checkbox>
 				</group>
+				<button>
+			                  <row>1</row>
+			                  <col>0</col>
+			                  <enable>
+			                      <property>/sim/rendering/shaders/skydome</property>
+			                  </enable>
+			                  <legend>Filter settings (experimental)</legend>
+			                  <halign>center</halign>
+			                  <binding>
+			                      <command>dialog-show</command>
+			                      <dialog-name>als-filters</dialog-name>
+			                  </binding>
+			                  <binding>
+			                      <command>dialog-close</command>
+			                      <dialog-name>rendering</dialog-name>
+			                  </binding>
+			                  <pref-width>200</pref-width>
+			        </button>
+
 
 				<group>
 					<layout>hbox</layout>
-					<row>1</row>
+					<row>2</row>
 					<col>0</col>
 
 					<text>
@@ -752,7 +771,7 @@
 				</group>
 
 				<button>
-					<row>2</row>
+					<row>3</row>
 					<col>0</col>
 					<enable>
 						<property>/sim/rendering/rembrandt/enabled</property>

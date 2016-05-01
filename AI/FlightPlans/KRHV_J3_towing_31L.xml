@@ -23,7 +23,7 @@
 		 <lon>-121.8156347</lon>
 		 <alt>128.39233</alt>
 		 <ktas>1.743970073</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>115.842</name>
@@ -31,7 +31,7 @@
 		 <lon>-121.8157226</lon>
 		 <alt>128.9592897</alt>
 		 <ktas>5</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>127.833</name>
@@ -39,7 +39,7 @@
 		 <lon>-121.8162074</lon>
 		 <alt>128.765603</alt>
 		 <ktas>5</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <!--wpt>
 		 <name>130.817</name>
@@ -55,7 +55,7 @@
 		 <lon>-121.8163964</lon>
 		 <alt>127.9950678</alt>
 		 <ktas>9</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <!--wpt>
 		 <name>136.825</name>
@@ -71,7 +71,7 @@
 		 <lon>-121.8165878</lon>
 		 <alt>127.2711527</alt>
 		 <ktas>13</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>141.833</name>
@@ -79,7 +79,7 @@
 		 <lon>-121.8167264</lon>
 		 <alt>126.8439337</alt>
 		 <ktas>15.80336965</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>144.842</name>
@@ -87,7 +87,7 @@
 		 <lon>-121.8168903</lon>
 		 <alt>126.412212</alt>
 		 <ktas>18.91566594</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>149.833</name>
@@ -95,7 +95,7 @@
 		 <lon>-121.8172502</lon>
 		 <alt>125.7031372</alt>
 		 <ktas>23.8332506</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>153.842</name>
@@ -255,7 +255,7 @@
 		 <lon>-121.8176771</lon>
 		 <alt>125.1869758</alt>
 		 <ktas>10</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 	 <wpt>
 		 <name>500</name>
@@ -263,7 +263,7 @@
 		 <lon>-121.8156347</lon>
 		 <alt>128.39233</alt>
 		 <ktas>4</ktas>
-		 <on-ground>false</on-ground>
+		 <on-ground>true</on-ground>
 	 </wpt>
 
 	 <wpt>

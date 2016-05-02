@@ -272,6 +272,13 @@
     <rolling-friction>0.1</rolling-friction>
     <bumpiness>0.6</bumpiness>
     <load-resistance>1e30</load-resistance>
+    <object-group>
+      <object>
+         <path>Models/Effects/Birds/birdswarm.xml</path>
+         <coverage-m2>2500000</coverage-m2>
+         <heading-type>random</heading-type>
+      </object>
+    </object-group>
     <light-coverage>2000000.0</light-coverage>
   </material>
 

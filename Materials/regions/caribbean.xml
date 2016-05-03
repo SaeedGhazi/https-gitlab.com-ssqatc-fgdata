@@ -23,12 +23,19 @@
     <wood-coverage>4000.0</wood-coverage>
     <rolling-friction>1</rolling-friction>
     <bumpiness>0.95</bumpiness>
+    <object-group>
+      <object>
+         <path>Models/Effects/Birds/birdswarm.xml</path>
+         <coverage-m2>1500000</coverage-m2>
+         <heading-type>random</heading-type>
+      </object>
+    </object-group>
   </material>
 
   <material include="Materials/regions/caribbean-common.xml">
     <name>Town</name>
     <name>SubUrban</name>
-    <texture>Terrain/town-europe.png</texture>
+    <texture>Terrain/town-caribbean.png</texture>
     <object-mask>Terrain/town-europe.mask.png</object-mask>
     <xsize>1024</xsize>
     <ysize>1024</ysize>
@@ -81,7 +88,7 @@
 
   <material include="Materials/regions/caribbean-common.xml">
     <name>GolfCourse</name>
-    <texture>Terrain/golfcourse1.png</texture>
+    <texture>Terrain/golfcourse-caribbean.png</texture>
     <object-mask>Terrain/golfcourse1.mask.png</object-mask>
     <xsize>800</xsize>
     <ysize>800</ysize>

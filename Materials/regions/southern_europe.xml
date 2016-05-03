@@ -259,11 +259,14 @@
     <name>NaturalCrop</name>
     <texture-set>
       <texture>Terrain/dry_pasture4.png</texture>
-      <texture n="11">Terrain/sand_hires_ochre.png</texture>
-      <texture n="12">Terrain/dry_pasture4.png</texture>
+      <texture n="11">Terrain/grass_dry3a.png</texture>
+      <!--<texture n="11">Terrain/sand_hires_ochre.png</texture>-->
+      <texture n="12">Terrain/grass_dry3.png</texture>
+      <!--<texture n="12">Terrain/dry_pasture4.png</texture>-->
     </texture-set>
     <parameters>
-      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <hires_overlay_bias>-0.2</hires_overlay_bias>
+      <transition_model>0.8</transition_model>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

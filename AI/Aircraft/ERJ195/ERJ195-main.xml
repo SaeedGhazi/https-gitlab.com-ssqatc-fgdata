@@ -3,7 +3,7 @@
 <PropertyList>
  <description>Embraer Regional Jet 195</description>
  <author>Ian(Yves) Tolosa, Original Model Innis Cunningham</author> 
- <path>Models/ERJ195.ac</path>
+ <path>Models/erj195.ac</path>
   
      <animation>
 		<type>select</type>

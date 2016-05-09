@@ -22,9 +22,21 @@
           {
           for (var i = 0; i < 4 ; i = i+1)
             {
-            setprop("/instrumentation/transponder/inputs/digit[" ~ i ~ "]", math.mod(idcode/poweroften[i], 10) );
+            setprop("/instrumentation/transponder/inputs/digit[" ~ i ~ "]", sprintf("%1d", math.mod(idcode/poweroften[i], 10)) );
             }
           }
+
+        var updateTransponderCode = func {
+          var goodcode = 1;
+          var code = 0;
+          for (var i = 3; i >= 0 ; i -= 1)
+            {
+            goodcode = goodcode and (num(getprop("/instrumentation/transponder/inputs/digit[" ~ i ~ "]")) != nil) ;
+            code = code * 10 + (num(getprop("/instrumentation/transponder/inputs/digit[" ~ i ~ "]")) or 0);
+            }
+          setprop('/instrumentation/transponder/goodcode', goodcode);
+          setprop('/instrumentation/transponder/id-code', code);
+        }
 
       ]]>
     </open>
@@ -630,6 +642,14 @@
         <command>dialog-apply</command>
         <object-name>Tponder-1</object-name>
       </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          <![CDATA[
+            updateTransponderCode();
+          ]]>
+        </script>
+      </binding>
     </combo>
     <!-- -->
     <combo>
@@ -650,6 +670,14 @@
         <command>dialog-apply</command>
         <object-name>Tponder-2</object-name>
       </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          <![CDATA[
+            updateTransponderCode();
+          ]]>
+        </script>
+      </binding>
     </combo>
     <combo>
       <name>Tponder-3</name>
@@ -669,6 +697,14 @@
         <command>dialog-apply</command>
         <object-name>Tponder-3</object-name>
       </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          <![CDATA[
+            updateTransponderCode();
+          ]]>
+        </script>
+      </binding>
     </combo>
     <combo>
       <name>Tponder-4</name>
@@ -687,6 +723,14 @@
       <binding>
         <command>dialog-apply</command>
         <object-name>Tponder-4</object-name>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          <![CDATA[
+            updateTransponderCode();
+          ]]>
+        </script>
       </binding>
     </combo>
 

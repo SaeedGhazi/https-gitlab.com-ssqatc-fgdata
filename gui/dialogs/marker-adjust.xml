@@ -182,7 +182,7 @@
 		<slider>
 			<name>x</name>
 			<property>/sim/model/marker/x/slider</property>
-			<legend>aft/fore</legend>
+			<legend>fore/aft</legend>
 			<pref-width>250</pref-width>
 			<live>1</live>
 			<min>-1</min>

@@ -68,7 +68,7 @@
 		<object-name>marker</object-name>
 		<property>sim/model/marker/x/value</property>
 		<axis>
-			<x>-1</x>
+			<x>1</x>
 			<y>0</y>
 			<z>0</z>
 		</axis>

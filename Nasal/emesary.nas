@@ -82,9 +82,9 @@ var Transmitter =
 
     PrintRecipients: func
     {
-        print("Recpient list for ",me.Ident,"(",me.UniqueId,")");
+        print("Emesary: Recipient list for ",me.Ident,"(",me.UniqueId,")");
         for (var idx = 0; idx < size(me.Recipients); idx += 1)
-            print("Recpient ",idx," ",me.Recipients[idx].Ident," (",me.Recipients[idx].UniqueId,")");
+            print("Emesary: Recipient[",idx,"] ",me.Recipients[idx].Ident," (",me.Recipients[idx].UniqueId,")");
     },
 
     # Notify all registered recipients. Stop when receipt status of abort or finished are received.
@@ -185,7 +185,7 @@ var Recipient =
         if (_ident == nil or _ident == "")
         {
             _ident = id(new_class);
-            print("ERROR: Ident required when creating a recipient, defaulting to ",_ident);
+            print("Emesary Error: Ident required when creating a recipient, defaulting to ",_ident);
         }
         Recipient.construct(_ident, new_class);
     },

@@ -95,7 +95,6 @@ var ANSPN46ActiveNotification =
                 me.BeamRange = 35; ##nm
                 me.BeamPower = 999; ## mw ???
             }
-print("\nANSPN46ActiveNotification::set_from: ", me.Ident);
         };
         new_class.bridgeProperties = func
         {
@@ -258,8 +257,6 @@ var ANSPN46_System =
 {
     new: func(_ident,_model)
     {
-        print("AN/SNP46 created for "~_ident);
-
         var new_class = emesary.Recipient.new(_ident~".ANSPN46");
 
         new_class.ara_63_position = geo.Coord.new();
@@ -347,7 +344,6 @@ var ANSPN46_System =
             # this will be reset if we receive something back from the aircraft.
             if (me.UpdateRate < 10)
                 me.UpdateRate = me.UpdateRate+1;
-            print("AN/SPN 46 : update msg: ",me.msg.Ident," sys.rate=",me.UpdateRate);
             return emesary.GlobalTransmitter.NotifyAll(me.msg);
         };
 

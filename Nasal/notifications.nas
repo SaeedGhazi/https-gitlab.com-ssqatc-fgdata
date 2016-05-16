@@ -172,29 +172,29 @@ var GeoEventNotification =
 #  78 0100 1110 - 
 #  79 0100 1111 - 
 #--------
-# Type 0101 : Reserved for cooperating aircraft usage.
-#  80 0101 0000 - Implementation defined
-#  81 0101 0001 - Implementation defined
-#  82 0101 0010 - Implementation defined
-#  83 0101 0011 - Implementation defined
-#  84 0101 0100 - Implementation defined
-#  85 0101 0101 - Implementation defined
-#  86 0101 0110 - Implementation defined
-#  87 0101 0111 - Implementation defined
-#  88 0101 1000 - Implementation defined
-#  89 0101 1001 - Implementation defined
-#  90 0101 1010 - Implementation defined
-#  91 0101 1011 - Implementation defined
-#  92 0101 1100 - Implementation defined
-#  93 0101 1101 - Implementation defined
-#  94 0101 1110 - Implementation defined
-#  95 0101 1111 - Implementation defined
+# Type 0101 : Models/Geometry items
+#  80 0101 0000 - Aim91x.ac
+#  81 0101 0001 - Bomb-500lbs-MC/bomb-500lbs-mc.ac
+#  82 0101 0010 - Clemenceau/tracteur.ac
+#  83 0101 0011 - Crater/crater.ac
+#  84 0101 0100 - Ensign.ac
+#  85 0101 0101 - Nimitz/Models/phalanx.ac
+#  86 0101 0110 - Nimitz/Models/phalanx.xml
+#  87 0101 0111 - Nimitz/Models/sea-sparrow.ac
+#  88 0101 1000 - Nimitz/Models/sea-sparrow.xml
+#  89 0101 1001 - RP-3/RP-3.ac
+#  90 0101 1010 - RP-3/crater.ac
+#  91 0101 1011 - container_carrier.ac
+#  92 0101 1100 - droptank_300_gal.ac
+#  93 0101 1101 - flare.ac
+#  94 0101 1110 - load.ac
+#  95 0101 1111 - mk82.ac
 #--------
-# Type 0110 : 
-#  96 0110 0000 - 
-#  97 0110 0001 - 
-#  98 0110 0010 - 
-#  99 0110 0011 - 
+# Type 0110 : Models/Geometry items
+#  96 0110 0000 - puff.ac
+#  97 0110 0001 - rocket.ac
+#  98 0110 0010 - tracer.ac
+#  99 0110 0011 - tracer2.ac
 # 100 0110 0100 - 
 # 101 0110 0101 - 
 # 102 0110 0110 - 
@@ -208,7 +208,7 @@ var GeoEventNotification =
 # 110 0110 1110 - 
 # 111 0110 1111 - 
 #--------
-# Type 0111 : 
+# Type 0111 : Models/Geometry items
 # 112 0111 0000 - 
 # 113 0111 0001 - 
 # 114 0111 0010 - 
@@ -226,7 +226,7 @@ var GeoEventNotification =
 # 126 0111 1110 - 
 # 127 0111 1111 - 
 #--------
-# Type 1000 : 
+# Type 1000 : Models/Geometry items
 # 128 1000 0000 - 
 # 129 1000 0001 - 
 # 130 1000 0010 - 

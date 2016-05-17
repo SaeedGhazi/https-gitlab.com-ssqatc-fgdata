@@ -16,6 +16,11 @@
   		<z-offset>50.0</z-offset>
  </animation>
 
+<animation>
+  <object-name>birds1</object-name>
+  <enable-hot type="bool">false</enable-hot>
+</animation>
+
  <effect>
    <inherits-from>Effects/birdswarm</inherits-from>
    <object-name>birds1</object-name>

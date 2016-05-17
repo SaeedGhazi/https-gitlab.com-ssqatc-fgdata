@@ -10,6 +10,7 @@ apart from most of the very excellent textures, remain. -->
 
 	<nasal>
 		<load>
+            <![CDATA[ 
 			print("LOAD Vinson ", cmdarg().getPath());
 
 			var fg_root = getprop("/sim/fg-root");
@@ -69,62 +70,76 @@ apart from most of the very excellent textures, remain. -->
 			# the main loop
 
 			var update = func {
-			var turn = control_node.getValue();
-			var value = wind_speed_Node.getValue();
-			setprop("/environment/Vinson/rel-wind-speed-kts", value);
-			value = speed_Node.getValue();
-			setprop("/environment/Vinson/spd-kt", value);
-			value = hdg_Node.getValue();
-			setprop("/environment/Vinson/hdg-deg", value);
+			    var turn = control_node.getValue();
+			    var value = wind_speed_Node.getValue();
+			    setprop("/environment/Vinson/rel-wind-speed-kts", value);
+			    value = speed_Node.getValue();
+			    setprop("/environment/Vinson/spd-kt", value);
+			    value = hdg_Node.getValue();
+			    setprop("/environment/Vinson/hdg-deg", value);
 
-			value = getprop("/sim/rendering/rembrandt/enabled");
-			rembrandt_node.setBoolValue(value);
-			value = getprop("/sim/current-view/deck-park");
-			deckPark_node.setBoolValue(value);
-			value = getprop("/sim/time/sun-angle-rad");
-			sunAngleRad_node.setValue(value);
+			    value = getprop("/sim/rendering/rembrandt/enabled");
+			    rembrandt_node.setBoolValue(value);
+			    value = getprop("/sim/current-view/deck-park");
+			    deckPark_node.setBoolValue(value);
+			    value = getprop("/sim/time/sun-angle-rad");
+			    sunAngleRad_node.setValue(value);
 
-			if (turn_old != turn){
-			turn_old = turn;
-			move_whips();
-			}
+			    if (turn_old != turn){
+			        turn_old = turn;
+			        move_whips();
+			    }
 
-			settimer(update,0);
+			    settimer(update,0);
 			}
 
 			var move_whips = func {
-			var whip_pos = pos_node.getValue();
-			if (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 0){
-			whip_pos += 0.001;
+			    var whip_pos = pos_node.getValue();
+			    if (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 0){
+			        whip_pos += 0.001;
 
-			if (whip_pos &gt; 1)
-			whip_pos = 1;
+			        if (whip_pos &gt; 1)
+			        whip_pos = 1;
 
-			pos_node.setValue(whip_pos);
-			settimer(move_whips,0);
-			} elsif (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 1) {
-			whip_pos -= 0.001;
+			        pos_node.setValue(whip_pos);
+			        settimer(move_whips,0);
+			    } elsif (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 1) {
+			        whip_pos -= 0.001;
 
-			if (whip_pos &lt; 0)
-			whip_pos = 0;
+			        if (whip_pos &lt; 0)
+                    whip_pos = 0;
 
-			pos_node.setValue(whip_pos);
-			settimer(move_whips,0);
-			} else {
-			return;
-			}
+                    pos_node.setValue(whip_pos);
+                    settimer(move_whips,0);
+                } else {
+                return;
+                }
+            }
 
-			}
+            ########
+            #start the main loop
+            update();
 
-			########
-			#start the main loop
-			update();
-
-		</load>
+            ########
+            # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
+            fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
+            io.load_nasal(fn_an_spn_46, "an_spn_46");
+            var anspn = an_spn_46.ANSPN46_System.new("Vinson", self);
+            anspn.SetChannel(2);
+            # not using the main update as need to keep the scheduling that an_spn_46 requests.
+            var an_spn_46_timer = maketimer(6, func {
+            anspn.Update();
+            an_spn_46_timer.restart(anspn.GetUpdateRate());
+            });
+            an_spn_46_timer.restart(6);
+        ]]>
+        </load>
 	</nasal>
 
 	<unload>
-		#print("UNLOAD Vinson ", cmdarg().getPath());
+        <![CDATA[ 
+        #print("UNLOAD Vinson ", cmdarg().getPath());
+        ]]>
 	</unload>
 
 	<!-- crew to be added later

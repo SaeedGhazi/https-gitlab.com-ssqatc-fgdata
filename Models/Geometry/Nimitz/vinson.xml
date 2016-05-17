@@ -11,137 +11,136 @@ apart from most of the very excellent textures, remain. -->
 	<nasal>
 		<load>
             <![CDATA[ 
-            print("LOAD Vinson ", cmdarg().getPath());
+			print("LOAD Vinson ", cmdarg().getPath());
 
-            var fg_root = getprop("/sim/fg-root");
-            var self = cmdarg();
-            var control_node = self.getNode("controls/turn-to-base-course", 1);
-            var pos_node = self.getNode("sim/antenna-pos-norm", 1);
-            pos_node.setDoubleValue(0);
-            var turn_old = 1;
+			var fg_root = getprop("/sim/fg-root");
+			var self = cmdarg();
+			var control_node = self.getNode("controls/turn-to-base-course", 1);
+			var pos_node = self.getNode("sim/antenna-pos-norm", 1);
+			pos_node.setDoubleValue(0);
+			var turn_old = 1;
 
+			########
+			# properties used to handle rendering, lighting and to control the Pack-Park
+			# Due to a change in MPcarrier system ?
+
+			var rembrandt_node = self.getNode("sim/rendering/rembrandt/enabled", 1);
+			var sunAngleRad_node = self.getNode("sim/time/sun-angle-rad", 1);
+			var deckPark_node = self.getNode("sim/current-view/deck-park",1);
+
+			########
+			# properties used to calculate rel wind for the bow-wave shader
+
+			var speed_Node = self.getNode("velocities/speed-kts", 1);
+			var hdg_Node = self.getNode("orientation/true-heading-deg", 1);
+			var wind_speed_Node = self.getNode("environment/rel-wind-speed-kts", 1);
+			wind_speed_Node.setDoubleValue(0);
+
+			########
+			# properties to control the E2C
+
+			var gear0_Node = self.getNode("gear/gear[0]/position-norm", 1);
+			gear0_Node.setDoubleValue(1);
+
+			var gear1_Node = self.getNode("gear/gear[1]/position-norm", 1);
+			gear1_Node.setDoubleValue(1);
+
+			var gear2_Node = self.getNode("gear/gear[2]/position-norm", 1);
+			gear2_Node.setDoubleValue(1);
+
+			var compression0_Node = self.getNode("gear/gear[0]/compression-norm", 1);
+			compression0_Node.setDoubleValue(0);
+
+			var compression1_Node = self.getNode("gear/gear[1]/compression-norm", 1);
+			compression1_Node.setDoubleValue(0.9);
+
+			var compression2_Node = self.getNode("gear/gear[2]/compression-norm", 1);
+			compression2_Node.setDoubleValue(0.9);
+
+			var wingfold_Node = self.getNode("surface-positions/wing-fold-pos-norm", 1);
+			wingfold_Node.setDoubleValue(1.0);
+
+			var rpm0_Node = self.getNode("engines/engine[0]/rpm", 1);
+			rpm0_Node.setDoubleValue(0.15);
+
+			var rpm1_Node = self.getNode("engines/engine[1]/rpm", 1);
+			rpm1_Node.setDoubleValue(0.17);
+
+			########
+			# the main loop
+
+			var update = func {
+			    var turn = control_node.getValue();
+			    var value = wind_speed_Node.getValue();
+			    setprop("/environment/Vinson/rel-wind-speed-kts", value);
+			    value = speed_Node.getValue();
+			    setprop("/environment/Vinson/spd-kt", value);
+			    value = hdg_Node.getValue();
+			    setprop("/environment/Vinson/hdg-deg", value);
+
+			    value = getprop("/sim/rendering/rembrandt/enabled");
+			    rembrandt_node.setBoolValue(value);
+			    value = getprop("/sim/current-view/deck-park");
+			    deckPark_node.setBoolValue(value);
+			    value = getprop("/sim/time/sun-angle-rad");
+			    sunAngleRad_node.setValue(value);
+
+			    if (turn_old != turn){
+			        turn_old = turn;
+			        move_whips();
+			    }
+
+			    settimer(update,0);
+			}
+
+			var move_whips = func {
+			    var whip_pos = pos_node.getValue();
+			    if (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 0){
+			        whip_pos += 0.001;
+
+			        if (whip_pos &gt; 1)
+			        whip_pos = 1;
+
+			        pos_node.setValue(whip_pos);
+			        settimer(move_whips,0);
+			    } elsif (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 1) {
+			        whip_pos -= 0.001;
+
+			        if (whip_pos &lt; 0)
+                    whip_pos = 0;
+
+                    pos_node.setValue(whip_pos);
+                    settimer(move_whips,0);
+                } else {
+                return;
+                }
+            }
+
+            ########
+            #start the main loop
+            update();
+
+            ########
             # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
             fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
             io.load_nasal(fn_an_spn_46, "an_spn_46");
-            var anspn = an_spn_46.ANSPN46_System.new("Eisenhower", self);
+            var anspn = an_spn_46.ANSPN46_System.new("Vinson", self);
             anspn.SetChannel(2);
             # not using the main update as need to keep the scheduling that an_spn_46 requests.
             var an_spn_46_timer = maketimer(6, func {
-                anspn.Update();
-                an_spn_46_timer.restart(anspn.GetUpdateRate());
+            anspn.Update();
+            an_spn_46_timer.restart(anspn.GetUpdateRate());
             });
             an_spn_46_timer.restart(6);
-            
-            ########
-            # properties used to handle rendering, lighting and to control the Pack-Park
-            # Due to a change in MPcarrier system ?
-
-            var rembrandt_node = self.getNode("sim/rendering/rembrandt/enabled", 1);
-            var sunAngleRad_node = self.getNode("sim/time/sun-angle-rad", 1);
-            var deckPark_node = self.getNode("sim/current-view/deck-park",1);
-
-            ########
-            # properties used to calculate rel wind for the bow-wave shader
-
-            var speed_Node = self.getNode("velocities/speed-kts", 1);
-            var hdg_Node = self.getNode("orientation/true-heading-deg", 1);
-            var wind_speed_Node = self.getNode("environment/rel-wind-speed-kts", 1);
-            wind_speed_Node.setDoubleValue(0);
-
-            ########
-            # properties to control the E2C
-
-            var gear0_Node = self.getNode("gear/gear[0]/position-norm", 1);
-            gear0_Node.setDoubleValue(1);
-
-            var gear1_Node = self.getNode("gear/gear[1]/position-norm", 1);
-            gear1_Node.setDoubleValue(1);
-
-            var gear2_Node = self.getNode("gear/gear[2]/position-norm", 1);
-            gear2_Node.setDoubleValue(1);
-
-            var compression0_Node = self.getNode("gear/gear[0]/compression-norm", 1);
-            compression0_Node.setDoubleValue(0);
-
-            var compression1_Node = self.getNode("gear/gear[1]/compression-norm", 1);
-            compression1_Node.setDoubleValue(0.9);
-
-            var compression2_Node = self.getNode("gear/gear[2]/compression-norm", 1);
-            compression2_Node.setDoubleValue(0.9);
-
-            var wingfold_Node = self.getNode("surface-positions/wing-fold-pos-norm", 1);
-            wingfold_Node.setDoubleValue(1.0);
-
-            var rpm0_Node = self.getNode("engines/engine[0]/rpm", 1);
-            rpm0_Node.setDoubleValue(0.15);
-
-            var rpm1_Node = self.getNode("engines/engine[1]/rpm", 1);
-            rpm1_Node.setDoubleValue(0.17);
-
-            ########
-            # the main loop
-
-            var update = func {
-            var turn = control_node.getValue();
-            var value = wind_speed_Node.getValue();
-            setprop("/environment/Vinson/rel-wind-speed-kts", value);
-            value = speed_Node.getValue();
-            setprop("/environment/Vinson/spd-kt", value);
-            value = hdg_Node.getValue();
-            setprop("/environment/Vinson/hdg-deg", value);
-
-            value = getprop("/sim/rendering/rembrandt/enabled");
-            rembrandt_node.setBoolValue(value);
-            value = getprop("/sim/current-view/deck-park");
-            deckPark_node.setBoolValue(value);
-            value = getprop("/sim/time/sun-angle-rad");
-            sunAngleRad_node.setValue(value);
-
-            if (turn_old != turn){
-            turn_old = turn;
-            move_whips();
-            }
-
-            settimer(update,0);
-            }
-
-            var move_whips = func {
-            var whip_pos = pos_node.getValue();
-            if (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 0){
-			whip_pos += 0.001;
-
-			if (whip_pos &gt; 1)
-			whip_pos = 1;
-
-			pos_node.setValue(whip_pos);
-			settimer(move_whips,0);
-			} elsif (whip_pos &lt;=1 and whip_pos &gt;=0 and turn_old == 1) {
-			whip_pos -= 0.001;
-
-			if (whip_pos &lt; 0)
-			whip_pos = 0;
-
-			pos_node.setValue(whip_pos);
-			settimer(move_whips,0);
-			} else {
-			return;
-			}
-
-			}
-
-			########
-			#start the main loop
-			update();
         ]]>
         </load>
 	</nasal>
 
 	<unload>
         <![CDATA[ 
-            #print("UNLOAD Vinson ", cmdarg().getPath());
-            an_spn_46_timer.stop();
-            ]]>
-    </unload>
+        #print("UNLOAD Vinson ", cmdarg().getPath());
+        ]]>
+	</unload>
 
 	<!-- crew to be added later
     <model>

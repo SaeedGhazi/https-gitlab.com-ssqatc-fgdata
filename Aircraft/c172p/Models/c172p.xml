@@ -437,6 +437,9 @@
         <object-name>rightdoor</object-name>
         <object-name>Spinner</object-name>
         <object-name>Propeller</object-name>
+        <object-name>NoseWheel</object-name>
+        <object-name>LeftWheel</object-name>
+        <object-name>RightWheel</object-name>
     </effect>
     <effect>
         <inherits-from>Effects/exterior/bumpspec-tail</inherits-from>
@@ -514,14 +517,19 @@
         </ambient>
     </animation>
 
-    <!-- interior effects -->
-    <effect>
-        <inherits-from>Effects/interior/c172p-flashlight</inherits-from>
-        <object-name>AirVent_left</object-name>
-        <object-name>AirVent_right</object-name>
-    </effect>
+    <!-- interior effects  -->
     <effect>
         <inherits-from>Effects/interior/c172p-interior</inherits-from>
+        <object-name>wing_1L</object-name>
+        <object-name>wing_1R</object-name>
+        <object-name>Firewall</object-name>
+        <object-name>AirVent_left</object-name>
+        <object-name>AirVent_right</object-name>
+        <object-name>chassis</object-name>
+        <object-name>doorint_right</object-name>
+        <object-name>doorint_left</object-name>
+        <object-name>CeilingSpeaker</object-name>
+        <object-name>TrimWheel</object-name>
         <object-name>ElevatorTrimPos</object-name>
         <object-name>FuelSelectorFace</object-name>
         <object-name>FuelSelectorLeft</object-name>
@@ -530,10 +538,6 @@
         <object-name>FuelSelectorOff</object-name>
         <object-name>mike_mount</object-name>
         <object-name>Pedestal</object-name>
-        <object-name>InstrumentCover</object-name>
-        <object-name>panel_1_1.inf</object-name>
-        <object-name>panel_1_1_right</object-name>
-        <object-name>panel_1_gauges</object-name>
         <object-name>CabinAirMounts</object-name>
         <object-name>CabinAir</object-name>
         <object-name>CabinHeat</object-name>
@@ -542,11 +546,6 @@
         <object-name>CarbHeatMount</object-name>
         <object-name>GenSwitch</object-name>
         <object-name>LandingLightSwitch</object-name>
-        <object-name>LeftBag</object-name>
-        <object-name>bolt.012</object-name>
-        <object-name>bolt.013</object-name>
-        <object-name>bolt.014</object-name>
-        <object-name>bolt.015</object-name>
         <object-name>MasterSwitch</object-name>
         <object-name>Mixture</object-name>
         <object-name>MixtureMount</object-name>
@@ -559,11 +558,28 @@
         <object-name>ThrottleMount</object-name>
         <object-name>mike</object-name>
         <object-name>mike_chord</object-name>
-        <object-name>Panel_0</object-name>
         <object-name>doorhandleint_right</object-name>
         <object-name>doorhandleint_left</object-name>
         <object-name>ParkingBrake</object-name>
         <object-name>PrimerLever</object-name>
+        <object-name>windlocket_right</object-name>
+        <object-name>windlocket_left</object-name>
+        <object-name>windlocketbak_right</object-name>
+        <object-name>windlocketbak_left</object-name>
+        <object-name>backseat_left</object-name>
+        <object-name>carpet</object-name>
+        <object-name>pilotseat_left</object-name>
+        <object-name>pilotseat_right</object-name>
+        <object-name>InstrumentCover</object-name>
+        <object-name>panel_1_1.inf</object-name>
+        <object-name>panel_1_1_right</object-name>
+        <object-name>panel_1_gauges</object-name>
+        <object-name>LeftBag</object-name>
+        <object-name>bolt.012</object-name>
+        <object-name>bolt.013</object-name>
+        <object-name>bolt.014</object-name>
+        <object-name>bolt.015</object-name>
+        <object-name>Panel_0</object-name>
         <object-name>bolts_cabin</object-name>
         <object-name>bolts_panel</object-name>
         <object-name>bolts</object-name>
@@ -571,28 +587,6 @@
         <object-name>SeatMounts.1</object-name>
         <object-name>SeatMounts.2</object-name>
         <object-name>SeatMounts.3</object-name>
-        <object-name>windlocket_right</object-name>
-        <object-name>windlocket_left</object-name>
-        <object-name>windlocketbak_right</object-name>
-        <object-name>windlocketbak_left</object-name>
-        <object-name>CeilingSpeaker</object-name>
-        <object-name>TrimWheel</object-name>
-        <object-name>wing_1L</object-name>
-        <object-name>wing_1R</object-name>
-        <object-name>FloatReinforceLeft</object-name>
-        <object-name>FloatReinforceRight</object-name>
-        <object-name>FloatReinforceJoin</object-name>
-        <object-name>backseat_left</object-name>
-        <object-name>carpet</object-name>
-        <object-name>pilotseat_left</object-name>
-        <object-name>pilotseat_right</object-name>
-        <object-name>Firewall</object-name>
-    </effect>
-    <effect>
-        <inherits-from>Effects/interior/c172p-interior-radiance</inherits-from>
-        <object-name>chassis</object-name>
-        <object-name>doorint_right</object-name>
-        <object-name>doorint_left</object-name>
     </effect>
     <effect>
         <inherits-from>Effects/interior/c172p-interior-glass-reflection-front</inherits-from>
@@ -752,30 +746,18 @@
         <name>AI</name>
         <path>Interior/Panel/Instruments/AI/AI.xml</path>
         <offsets>
-            <!-- MOD: AI Position XYZ
-                 <x-m>-0.369</x-m>
-                 <y-m>-0.222</y-m>
-                 <z-m>0.069</z-m>
-            -->
             <x-m>-0.369</x-m>
             <y-m>-0.22147</y-m>
             <z-m>0.06863</z-m>
-            <!-- MODEND: AI Position XYZ -->
         </offsets>
     </model>
     <model>
         <name>Altimeter</name>
         <path>Interior/Panel/Instruments/alt/alt.xml</path>
         <offsets>
-            <!-- MOD: ALTIMETER Position XYZ
-                 <x-m>-0.369</x-m>
-                 <y-m>-0.133</y-m>
-                 <z-m>0.069</z-m>
-            -->
             <x-m>-0.369</x-m>
             <y-m>-0.13245</y-m>
             <z-m>0.06775</z-m>
-            <!-- MODEND: ALTIMETER Position XYZ -->
         </offsets>
     </model>
     <model>
@@ -792,9 +774,8 @@
         <path>Interior/Panel/Instruments/kap140/KAP140TwoAxisAlt.xml</path>
         <offsets>
             <x-m>-0.357879</x-m>
-            <y-m>0.116</y-m>
-            <!-- <z-m>-0.092</z-m> -->
-            <z-m>-0.135</z-m>
+            <y-m>0.115</y-m>
+            <z-m>-0.132</z-m>
         </offsets>
     </model>
     <model>
@@ -802,8 +783,7 @@
         <path>Interior/Panel/Instruments/dme/dme.xml</path>
         <offsets>
             <x-m>-0.357</x-m>
-            <y-m>0.116</y-m>
-            <!-- <z-m>-0.142</z-m> -->
+            <y-m>0.115</y-m>
             <z-m>-0.088</z-m>
         </offsets>
     </model>
@@ -811,30 +791,18 @@
         <name>asi</name>
         <path>Interior/Panel/Instruments/asi/asi.xml</path>
         <offsets>
-            <!-- MOD: ASI Position XYZ
-                 <x-m>-0.368</x-m>
-                 <y-m>-0.311</y-m>
-                 <z-m>0.068</z-m>
-            -->
             <x-m>-0.369</x-m>
             <y-m>-0.31185</y-m>
             <z-m>0.06863</z-m>
-            <!-- MODEND: ASI Position XYZ -->
         </offsets>
     </model>
     <model>
         <name>Turn</name>
         <path>Interior/Panel/Instruments/tc/tc.xml</path>
         <offsets>
-            <!-- MOD: TC Position XYZ
-                 <x-m>-0.368</x-m>
-                 <y-m>-0.311</y-m>
-                 <z-m>0.068</z-m>
-            -->
             <x-m>-0.369</x-m>
             <y-m>-0.31165</y-m>
             <z-m>-0.03574</z-m>
-            <!-- MODEND: TC Position XYZ -->
         </offsets>
     </model>
     <model>
@@ -877,45 +845,27 @@
         <name>avor</name>
         <path>Interior/Panel/Instruments/vor/vor.xml</path>
         <offsets>
-            <!-- MOD: VOR1 Position XYZ
-                 <x-m>-0.368</x-m>
-                 <y-m>-0.041</y-m>
-                 <z-m>0.069</z-m>
-            -->
             <x-m>-0.369</x-m>
             <y-m>-0.0423</y-m>
             <z-m>0.06863</z-m>
-            <!-- MODEND: VOR2 Position YZ -->
         </offsets>
     </model>
     <model>
         <name>vor2</name>
         <path>Interior/Panel/Instruments/vor/vor2.xml</path>
         <offsets>
-            <!-- MOD: VOR2 Position YZ
-                 <x-m>-0.368</x-m>
-                 <y-m>-0.041</y-m>
-                 <z-m>-0.036</z-m>
-            -->
             <x-m>-0.369</x-m>
             <y-m>-0.0423</y-m>
             <z-m>-0.03574</z-m>
-            <!-- MODEND: VOR2 Position YZ -->
         </offsets>
     </model>
     <model>
         <name>adf</name>
         <path>Interior/Panel/Instruments/kr87-adf/ki227_228.xml</path>
         <offsets>
-            <!-- MOD: ADF Position xyz
-                 <x-m>-0.368</x-m>
-                 <y-m>-0.041</y-m>
-                 <z-m>-0.141</z-m>
-            -->
             <x-m>-0.372</x-m>
             <y-m>-0.04214</y-m>
             <z-m>-0.14037</z-m>
-            <!-- MODEND: ADF Position xyz -->
         </offsets>
     </model>
     <model>
@@ -932,7 +882,6 @@
         <offsets>
             <x-m>-0.364</x-m>
             <y-m>0.113</y-m>
-            <!-- <z-m>0.017</z-m> -->
             <z-m>0.051</z-m>
         </offsets>
     </model>
@@ -950,7 +899,6 @@
         <offsets>
             <x-m>-0.364</x-m>
             <y-m>0.113</y-m>
-            <!-- <z-m>-0.036</z-m> -->
             <z-m>-0.002</z-m>
         </offsets>
     </model>
@@ -968,9 +916,8 @@
         <path>Interior/Panel/Instruments/kr87-adf/kr87.xml</path>
         <offsets>
             <x-m>-0.364</x-m>
-            <y-m>0.113</y-m>
-            <!-- <z-m>0.061</z-m> -->
-            <z-m>-0.045</z-m>
+            <y-m>0.114</y-m>
+            <z-m>-0.047</z-m>
         </offsets>
     </model>
 
@@ -988,8 +935,8 @@
         </overlay>
         <offsets>
             <x-m>-0.36</x-m>
-            <y-m>0.113</y-m>
-            <z-m>-0.178</z-m>
+            <y-m>0.115</y-m>
+            <z-m>-0.177</z-m>
         </offsets>
     </model>
     <!-- MODEND -->
@@ -7978,6 +7925,15 @@
                 <condition>
                     <and>
                         <property>/engines/active-engine/oil_consumption_allowed</property>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <or>
+                            <property>/fdm/jsbsim/gear/unit[1]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[19]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
+                            <property>/fdm/jsbsim/hydro/active-norm</property>
+                        </or>
                         <equals>
                             <property>/controls/engines/active-engine</property>
                             <value>0</value>
@@ -7991,6 +7947,15 @@
                 <condition>
                     <and>
                         <property>/engines/active-engine/oil_consumption_allowed</property>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <or>
+                            <property>/fdm/jsbsim/gear/unit[1]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[19]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
+                            <property>/fdm/jsbsim/hydro/active-norm</property>
+                        </or>
                         <equals>
                             <property>/controls/engines/active-engine</property>
                             <value>1</value>
@@ -8000,11 +7965,59 @@
                 <command>dialog-show</command>
                 <dialog-name>c172p-oil-dialog-180</dialog-name>
             </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>/engines/active-engine/running</property>
+                        <or>
+                            <property>/fdm/jsbsim/gear/unit[1]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[19]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
+                            <property>/fdm/jsbsim/hydro/active-norm</property>
+                        </or>
+                        <property>/engines/active-engine/oil_consumption_allowed</property>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>
+                    gui.popupTip("You can't check the oil level with the engine running!");
+                </script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not>
+                            <or>
+                                <property>/fdm/jsbsim/gear/unit[1]/WOW</property>
+                                <property>/fdm/jsbsim/gear/unit[19]/WOW</property>
+                                <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
+                                <property>/fdm/jsbsim/hydro/active-norm</property>
+                            </or>
+                        </not>
+                        <property>/engines/active-engine/oil_consumption_allowed</property>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>
+                    gui.popupTip("You can't check the oil level while in the air!");
+                </script>
+            </binding>
         </action>
         <hovered>
             <binding>
                 <condition>
-                    <property>/engines/active-engine/oil_consumption_allowed</property>
+                    <and>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <or>
+                            <property>/fdm/jsbsim/gear/unit[1]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[19]/WOW</property>
+                            <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
+                            <property>/fdm/jsbsim/hydro/active-norm</property>
+                        </or>
+                        <property>/engines/active-engine/oil_consumption_allowed</property>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>oil-sump</tooltip-id>

@@ -814,6 +814,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <use-svn type="bool" userarchive="n">true</use-svn>
       <!-- INTENTIONALLY LEFT BLANK so we query the server from Martin's web service -->
       <svn-server userarchive="n"/>
+      <http-server userarchive="y">automatic</http-server>
       <svn-data-server userarchive="y">http://fgfs.goneabitbursar.com/fgfsai/trunk</svn-data-server>
       <rsync-server userarchive="n">scenery.flightgear.org::Scenery</rsync-server>
         <!-- INTENTIONALLY LEFT BLANK! Do NOT edit.

@@ -42,15 +42,15 @@ require([
         // we want something "rotate(45deg) translate(30%)"
         // see http://knockoutjs.com/documentation/computed-pure.html
         self.groundTransform = ko.pureComputed(function() {
-            return "rotate(" + (-self.roll()) + "deg) " + self.groundTranslateTransform();
+            return "translateY(-50%) rotate(" + (-self.roll()) + "deg) translateY(50%)" + self.groundTranslateTransform();
         });
 
         // this little helper just scales and clamps the y-translation
         self.groundTranslateTransform = ko.pureComputed(function() {
-            var t = 100 * (self.pitch() / 45);
-            if( t > 100 ) t = 100;
-            if( t < -100 ) t = -100;
-            return "translateY(" + ( t ) + "%)";
+            var t = 20 * (self.pitch() / 30);
+            if( t > 20 ) t = 20;
+            if( t < -20 ) t = -20;
+            return "translateY(" + (t) + "%)";
         });
         
     }

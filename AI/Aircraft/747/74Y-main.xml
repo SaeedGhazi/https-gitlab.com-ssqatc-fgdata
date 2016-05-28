@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Boeing 747-400 Cargo</description>
+  <author>Ian(Yves) Tolosa. Apr 2016 </author>
+  <path>Models/74Y.ac</path>
+  
+    <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  
+    <nasal>
+  <load>
+   var model = cmdarg();
+   model.getNode("door[0]/position-x-m", 1).setValue(-23.8612);
+   model.getNode("door[0]/position-y-m", 1).setValue(5.65);
+   model.getNode("door[0]/position-z-m", 1).setValue(1.47287);
+   model.getNode("door[0]/jetway-hood-deg", 1).setValue(3);
+  </load>
+  
+   
+ </nasal>
+   
+</PropertyList>

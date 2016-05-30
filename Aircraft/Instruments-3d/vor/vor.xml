@@ -6,8 +6,8 @@
   <nav-to-flag>/instrumentation/nav[0]/to-flag</nav-to-flag>
   <nav-from-flag>/instrumentation/nav[0]/from-flag</nav-from-flag>
   <nav-radial-selected>/instrumentation/nav[0]/radials/selected-deg</nav-radial-selected>
-  <nav-gs-needle-deflection>/instrumentation/nav[0]/filtered-gsNAV0-deflection</nav-gs-needle-deflection>
-  <nav-heading-needle-deflection>/instrumentation/nav[0]/filtered-cdiNAV0-deflection</nav-heading-needle-deflection>
+  <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection</nav-gs-needle-deflection>
+  <nav-heading-needle-deflection>/instrumentation/nav[0]/heading-needle-deflection</nav-heading-needle-deflection>
   <nav-in-range>/instrumentation/nav[0]/in-range</nav-in-range>
   <gs-in-range>/instrumentation/nav[0]/gs-in-range</gs-in-range>
  </params>

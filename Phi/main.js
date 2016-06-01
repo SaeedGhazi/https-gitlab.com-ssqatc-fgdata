@@ -3,7 +3,7 @@ require.config({
     paths : {
         jquery : '3rdparty/jquery/jquery-1.11.2.min',
         'jquery-ui' : '3rdparty/jquery/ui',
-        knockout : '3rdparty/knockout/knockout-3.2.0',
+        knockout : '3rdparty/knockout/knockout-3.4.0',
         kojqui : '3rdparty/knockout-jqueryui',
         sprintf : '3rdparty/sprintf/sprintf.min',
         leaflet : '3rdparty/leaflet-0.7.7/leaflet',
@@ -28,6 +28,9 @@ require([
         'knockout', 'jquery', 'sammy', 'fgcommand', 'themeswitch', 'kojqui/button', 'kojqui/buttonset', 'kojqui/selectmenu',
         'jquery-ui/sortable', 'flot', 'leaflet', 'knockprops'
 ], function(ko, jquery, Sammy, fgcommand) {
+
+    ko.options.deferUpdates = true;
+
 
     ko.utils.knockprops.setAliases({
 

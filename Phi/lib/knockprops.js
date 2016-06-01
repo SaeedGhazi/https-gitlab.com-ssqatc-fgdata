@@ -194,6 +194,8 @@ define(['knockout'], function(ko) {
                 if( aliases.hasOwnProperty(p) ) {
                     target[p] = ko.observable().extend({
                         fgprop : p
+                    }).extend({
+                        rateLimit: 40
                     });
                 }
             }

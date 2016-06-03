@@ -163,7 +163,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <rough type="double" userarchive="y">9000</rough>
         <bare type="double" userarchive="y">30000</bare>
         <!--
-          ai-range-mode-pixel: true=use pixel size on screen, false=use distance from eyepoint 
+          ai-range-mode-pixel: true=use pixel size on screen, false=use distance from eyepoint
           With /sim/rendering/static-lod/ai-range-mode-pixel set to true
           /sim/rendering/static-lod/ai-detailed now contains the minimum size of the
           model on the screen to be displayed. Values of 10-50 seem to make some sense.
@@ -810,21 +810,12 @@ Started September 2000 by David Megginson, david@megginson.com
     </jetways>
     <terrasync preserve="y">
       <enabled type="bool" userarchive="y">false</enabled>
-      <use-built-in-svn type="bool" userarchive="y">true</use-built-in-svn>
-      <use-svn type="bool" userarchive="n">true</use-svn>
-      <!-- INTENTIONALLY LEFT BLANK so we query the server from Martin's web service -->
-      <svn-server userarchive="n"/>
       <http-server userarchive="y">automatic</http-server>
-      <svn-data-server userarchive="y">http://fgfs.goneabitbursar.com/fgfsai/trunk</svn-data-server>
-      <rsync-server userarchive="n">scenery.flightgear.org::Scenery</rsync-server>
         <!-- INTENTIONALLY LEFT BLANK! Do NOT edit.
                 This (empty) value is the initial/default value only. Use command-line option
                 "terrasync-dir", GUI-dialog, or
                 property browser to configure actual directory. -->
       <scenery-dir userarchive="n"/>
-      <ext-svn-utility type="string">svn</ext-svn-utility>
-      <!-- use absolute path if "svn"
-                 isn't on system PATH (external SVN only)-->
       <max-errors type="int">10</max-errors>
       <!-- abort when too many errors occurred, or -1=don't abort -->
     </terrasync>

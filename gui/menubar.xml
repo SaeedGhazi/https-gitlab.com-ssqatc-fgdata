@@ -86,10 +86,7 @@
 		<item>
 			<name>aircraft-center</name>
 			<binding>
-				<command>nasal</command>
-				<script>
-				  canvas.loadDialog("AircraftCenter");
-				</script>
+				<command>open-launcher</command>
 			</binding>
 		</item>
 

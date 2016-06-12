@@ -209,15 +209,16 @@ void main(void)
 
    
     // Mie correction
-    float Mie;
-    float MieFactor;
+    float Mie = 0.0;
+    float MieFactor = 0.0;
 
-     if (bottom_factor > 0.6) 
+     if (bottom_factor > 0.4) 
     {
     MieFactor =   dot(normalize(lightFull), normalize(relVector));
     Mie = 1.5 * smoothstep(0.9,1.0, MieFactor) * smoothstep(0.6, 0.8, bottom_factor) * (1.0-earthShadeFactor) ;  
+   //if (MieFactor < 0.0) {Mie = - Mie;}
     }
-     else {Mie = 0.0;}
+     //else {Mie = 0.0;}
 
      if (Mie > 0.0)
       {
@@ -229,6 +230,23 @@ void main(void)
     gl_FrontColor.g = mie_func(gl_FrontColor.g, 0.8* Mie);
     gl_FrontColor.b = mie_func(gl_FrontColor.b, 0.5*Mie);
     }
+     else if (MieFactor < 0.0)
+     {
+    float thickness_reduction = smoothstep(0.4, 0.8, bottom_factor) ;
+    float light_reduction = dot (lightFull, lightHorizon);
+    light_reduction *= light_reduction;
+
+    float factor_b = 0.8 + 0.2 * (1.0 - smoothstep(0.0, 0.7, -MieFactor) * thickness_reduction * light_reduction) ;
+    float factor_r = 0.6 + 0.4 * (1.0 - smoothstep(0.0, 0.7, -MieFactor) * thickness_reduction * light_reduction) ;
+    float factor_g = 0.65 + 0.35 * (1.0 - smoothstep(0.0, 0.7, -MieFactor) * thickness_reduction * light_reduction) ;
+    hazeColor.r *= factor_r; 
+    hazeColor.g *= factor_g;
+    hazeColor.b *= factor_b;
+
+    gl_FrontColor.r *= factor_r; 
+    gl_FrontColor.g *= factor_g;
+    gl_FrontColor.b *= factor_b;
+     }
    
     gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * earthShadeFactor;
     hazeColor.rgb = hazeColor.rgb + moonLightColor * earthShadeFactor;

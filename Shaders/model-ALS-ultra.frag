@@ -253,8 +253,8 @@ void main (void)
     //glare on the backside of tranparent objects
     if ((gl_FrontMaterial.diffuse.a < 1.0 || texel.a < 1.0)
         && dot(N, normalize(gl_LightSource[0].position.xyz)) < 0.0) {
-            nDotVP = max(0.0, dot(-N, normalize(gl_LightSource[0].position.xyz)));
-            nDotHV = max(0.0, dot(-N, normalize(gl_LightSource[0].halfVector.xyz)));
+            nDotVP = max(0.0, dot(-N, normalize(gl_LightSource[0].position.xyz)) * (1.0 -texel.a) );
+            nDotHV = max(0.0, dot(-N, normalize(gl_LightSource[0].halfVector.xyz)) * (1.0 -texel.a) );
         }
 
     float nDotVP1 = 0.0;

@@ -55,6 +55,8 @@ void main()
 		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}	
  
 	texel = texture2D(texture, gl_TexCoord[0].st);
+        float night_light = texel.a;
+	texel.a = 1.0;
 	grainTexel = texture2D(grain_texture, gl_TexCoord[0].st * 40.0);
 
 	float noise = Noise2D( gl_TexCoord[0].st, 0.00005);
@@ -66,13 +68,15 @@ void main()
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
     NdotL = dot(n, lightDir);
+    float NdotLraw = NdotL;
     // due to atmosphere scattering, we should make this harder
     NdotL = smoothstep(-0.2,0.2,NdotL);	
    
     float intensity = length(diffuse_term);
     vec4 dawn = intensity * normalize (vec4 (1.0,0.4,0.4,1.0));
     vec4 diff_term = mix(dawn, diffuse_term, smoothstep(0.0, 0.2, NdotL));
-	
+
+   
     intensity = length(light_specular);
     light_specular = mix(dawn.rgb, light_specular, smoothstep(0.0, 0.2, NdotL));
     
@@ -91,6 +95,9 @@ void main()
 
 	//texel.rgb = vec3 (0.5,0.5,0.5);
 
+
+
+
     if (NdotL > 0.0) {
         color += diffuse_term * NdotL * (1.0-shadowTexel.a);
         NdotHV = max(dot(n, halfVector), 0.0);
@@ -100,6 +107,9 @@ void main()
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
     color.a = diffuse_term.a;
+
+
+
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
@@ -108,6 +118,9 @@ void main()
     fragColor = color * texel + specular;
 	//fragColor = fragColor * (1.0 - 0.5 * shadowTexel.a);
 	//fragColor = mix(fragColor, shadowTexel, shadowTexel.a);
+
+    float night_light_factor = (1.0 -night_light) * (1.0 - smoothstep(-0.3, -0.1, NdotLraw));	
+    fragColor.rgb += vec3(0.6, 0.55, 0.4) * night_light_factor;
 	
 	float angle = dot(normalize(ecViewDir), normalize(normal));
 	float distance_through_atmosphere = min(10.0 / (abs(angle)+0.001),500.0);
@@ -125,7 +138,6 @@ void main()
 
 
 	fragColor = mix(fogColor, fragColor, fogFactor);
-
 
     gl_FragColor = fragColor;
     //gl_FragColor = vec4 (NdotL - 0.5, NdotL - 0.5, NdotL - 0.5, 1.0);

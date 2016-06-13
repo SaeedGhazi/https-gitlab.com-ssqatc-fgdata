@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
 	<name>Effects/planet</name>
-	<!-- 	<inherits-from>Effects/shadow</inherits-from> -->
 	<parameters>
 		<texture n ="0">
 			<type>white</type>
@@ -79,7 +78,9 @@
 				</color-mode>
 			</material>
 			<blend><use>transparent</use></blend>
-			<alpha-test><use>transparent</use></alpha-test>
+			<alpha-test>
+				<active type="bool">false</active>
+			</alpha-test>
 			<shade-model>
 				<use>shade-model</use>
 			</shade-model>

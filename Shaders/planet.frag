@@ -19,10 +19,7 @@ uniform sampler2D grain_texture;
 
 float Noise2D(in vec2 coord, in float wavelength);
 
-float luminance(vec3 color)
-{
-    return dot(vec3(0.212671, 0.715160, 0.072169), color);
-}
+
 
 void main()
 {
@@ -55,7 +52,7 @@ void main()
 		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}	
  
 	texel = texture2D(texture, gl_TexCoord[0].st);
-        float night_light = texel.a;
+        float night_light = (1.0 -texel.a);
 	texel.a = 1.0;
 	grainTexel = texture2D(grain_texture, gl_TexCoord[0].st * 40.0);
 
@@ -119,8 +116,18 @@ void main()
 	//fragColor = fragColor * (1.0 - 0.5 * shadowTexel.a);
 	//fragColor = mix(fragColor, shadowTexel, shadowTexel.a);
 
-    float night_light_factor = (1.0 -night_light) * (1.0 - smoothstep(-0.3, -0.1, NdotLraw));	
-    fragColor.rgb += vec3(0.6, 0.55, 0.4) * night_light_factor;
+    float night_light_factor = night_light * (1.0 - smoothstep(-0.3, 0.0, NdotLraw));
+
+    float noise_factor = (0.4 + 0.6* smoothstep(0.7 - 0.4* night_light,0.9 - 0.4 * night_light,noise));
+    night_light_factor *= noise_factor;
+    //night_light_factor *=smoothstep(0.1 + (0.3*night_light), 0.2 + (0.3*night_light), noise);
+    //night_light_factor = smoothstep(0.3, 0.4, night_light_factor);
+
+    vec3 light_color = vec3(1.0, 0.7, 0.3);
+    vec3 central_light_color = vec3 (1.0, 1.0, 1.0);
+    light_color = mix(light_color, central_light_color, smoothstep(0.3, 0.6,noise*noise * night_light));
+	
+    fragColor.rgb += light_color * night_light_factor * 1.4;
 	
 	float angle = dot(normalize(ecViewDir), normalize(normal));
 	float distance_through_atmosphere = min(10.0 / (abs(angle)+0.001),500.0);
@@ -139,6 +146,6 @@ void main()
 
 	fragColor = mix(fogColor, fragColor, fogFactor);
 
-    gl_FragColor = fragColor;
+    gl_FragColor = clamp(fragColor, 0.0, 1.0);
     //gl_FragColor = vec4 (NdotL - 0.5, NdotL - 0.5, NdotL - 0.5, 1.0);
 }

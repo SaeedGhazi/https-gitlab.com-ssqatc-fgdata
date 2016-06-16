@@ -383,7 +383,7 @@
    </chunk>
 
    <chunk>
-    <name>side-slip-rad</name>
+    <name>side-slip-deg</name>
     <type>float</type>
     <format>%f</format>
     <node>/orientation/side-slip-deg</node>

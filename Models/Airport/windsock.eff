@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <name>windsock</name>
+  <inherits-from>Effects/model-wingflex-organic</inherits-from>
+  <parameters>
+<!--
+    <wingflex-alpha><use>/environment/windsock-pos</use></wingflex-alpha>
+    <wingflex-trailing-alpha><use>/environment/windsock-pos</use></wingflex-trailing-alpha>
+    <wingsweep-factor><use>/environment/windsock-pos</use></wingsweep-factor>
+-->
+
+   <lightmap-enabled type="int">1</lightmap-enabled>
+   <texture n="3">
+    <image>Models/Airport/windsock-lightmap.png</image>
+   </texture>
+  </parameters>
+
+  <technique n="5">
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <active><use>material/active</use></active>
+        <ambient><use>material/ambient</use></ambient>
+        <diffuse><use>material/diffuse</use></diffuse>
+        <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
+        <color-mode><use>material/color-mode</use></color-mode>
+      </material>
+      <blend>
+        <active><use>blend/active</use></active>
+        <source><use>blend/source</use></source>
+        <destination><use>blend/destination</use></destination>
+      </blend>
+      <shade-model><use>shade-model</use></shade-model>
+      <cull-face><use>cull-face</use></cull-face>
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image>
+          <use>texture[0]/image</use>
+        </image>
+        <wrap-s>clamp</wrap-s>
+        <wrap-t>clamp</wrap-t>
+      </texture-unit>
+      <alpha-to-coverage>true</alpha-to-coverage>
+    </pass>
+  </technique>
+
+</PropertyList>

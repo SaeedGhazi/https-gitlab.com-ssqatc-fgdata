@@ -7,6 +7,7 @@
  <animation>
   <type>rotate</type>
   <object-name>windsock</object-name>
+  <object-name>pivot_pole</object-name>
   <object-name>frame</object-name>
   <property>/environment/wind-from-heading-deg</property>
   <offset-deg>-90</offset-deg>
@@ -23,6 +24,19 @@
   </center>
  </animation>
 
+ <effect>
+  <inherits-from>Models/Airport/windsock</inherits-from>
+  <object-name>pivot_pole</object-name>
+  <object-name>frame</object-name>
+  <object-name>2.5kt</object-name>
+  <object-name>5kt</object-name>
+  <object-name>7.5kt</object-name>
+  <object-name>10kt</object-name>
+  <object-name>12.5kt</object-name>
+  <object-name>15kt</object-name>
+ </effect>
+
+ <!-- TODO: Make the organix wing-flex shader work for the windsock -->
  <animation>
   <type>rotate</type>
   <object-name>5kt</object-name>

@@ -6,7 +6,7 @@ name "Blender_export__earth_unitscale_rawuv.ac"
 kids 8
 OBJECT poly
 name "earth_N1.001"
-texture "pale_blue_aug_N1.png"
+texture "Textures/world_N1.png"
 texrep 1 1
 numvert 1156
 0.0482988 0.9988322 0.0011857
@@ -8792,7 +8792,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_N2.001"
-texture "pale_blue_aug_N2.png"
+texture "Textures/world_N2.png"
 texrep 1 1
 numvert 1156
 0.0482988 0.9988322 -0.0011857
@@ -17578,7 +17578,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_N3.001"
-texture "pale_blue_aug_N3.png"
+texture "Textures/world_N3.png"
 texrep 1 1
 numvert 1156
 -0.0482988 0.9988322 -0.0011857
@@ -26364,7 +26364,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_N4.001"
-texture "pale_blue_aug_N4.png"
+texture "Textures/world_N4.png"
 texrep 1 1
 numvert 1156
 -0.0482988 0.9988322 0.0011857
@@ -35150,7 +35150,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_S1.001"
-texture "pale_blue_aug_S1.png"
+texture "Textures/world_S1.png"
 texrep 1 1
 numvert 1156
 0.0482988 -0.9988322 0.0011857
@@ -43936,7 +43936,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_S2.001"
-texture "pale_blue_aug_S2.png"
+texture "Textures/world_S2.png"
 texrep 1 1
 numvert 1156
 0.0482988 -0.9988322 -0.0011857
@@ -52722,7 +52722,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_S3.001"
-texture "pale_blue_aug_S3.png"
+texture "Textures/world_S3.png"
 texrep 1 1
 numvert 1156
 -0.0482988 -0.9988322 -0.0011857
@@ -61508,7 +61508,7 @@ refs 4
 kids 0
 OBJECT poly
 name "earth_S4.001"
-texture "pale_blue_aug_S4.png"
+texture "Textures/world_S4.png"
 texrep 1 1
 numvert 1156
 -0.0482988 -0.9988322 0.0011857

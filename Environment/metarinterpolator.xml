@@ -506,4 +506,34 @@
     <min>-425</min>
     <max>7500</max>
   </filter>
+  <!--
+    Windsock effects: flex and light-map
+  -->
+  <filter>
+    <name>MetarController:layer:wind-sock-pos</name>
+    <type>gain</type>
+    <gain>6.7</gain>
+    <reference>15</reference>
+    <input>/environment/wind-speed-kt</input>
+    <output>/sim/environment/windsock-pos</output>
+    <min>-90</min>
+    <max>0</max>
+  </filter>
+  <filter>
+    <name>MetarController:layer:wind-sock-light</name>
+    <type>gain</type>
+    <input>
+      <expression>
+        <table>
+          <property>/sim/time/sun-angle-rad</property>
+          <entry><ind>0.0</ind><dep>0.0</dep></entry>
+          <entry><ind>1.56999</ind><dep>0.0</dep></entry>
+          <entry><ind>1.57</ind><dep>1.0</dep></entry>
+        </table>
+      </expression>
+    </input>
+    <output>/sim/environment/windsock-light</output>
+  </filter>
+  <min>0.0</min>
+  <max>1.0</max>
 </PropertyList> 

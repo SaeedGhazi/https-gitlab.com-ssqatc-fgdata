@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <PropertyList>
 
@@ -21,6 +21,49 @@
    <y-m>0.0</y-m>
    <z-m>0.0</z-m>
   </center>
+ </animation>
+
+ <animation>
+  <type>scale</type>
+  <object-name>5kt</object-name>
+  <object-name>7.5kt</object-name>
+  <object-name>10kt</object-name>
+  <object-name>12.5kt</object-name>
+  <object-name>15kt</object-name>
+  <property>/environment/wind-speed-kt</property>
+  <x-factor>0.0</x-factor>
+  <y-factor>0.6</y-factor>
+  <z-factor>0.0</z-factor>
+  <x-min>1.0</x-min>
+  <y-min>0.6</y-min>
+  <z-min>1.0</z-min>
+  <x-max>1.0</x-max>
+  <y-max>1.0</y-max>
+  <z-max>1.0</z-max>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>5kt</object-name>
+  <object-name>7.5kt</object-name>
+  <object-name>10kt</object-name>
+  <object-name>12.5kt</object-name>
+  <object-name>15kt</object-name>
+  <expression>
+   <table>
+    <property>/environment/wind-speed-kt</property>
+    <entry><ind>1.0</ind><dep>0.762</dep></entry>
+    <entry><ind>1.25</ind><dep>0.39</dep></entry>
+    <entry><ind>1.4</ind><dep>0.2</dep></entry>
+    <entry><ind>1.65</ind><dep>0.0</dep></entry>
+    <entry><ind>15</ind><dep>0.0</dep></entry>
+   </table>
+  </expression>
+  <axis>
+   <x>0</x>
+   <y>1</y>
+   <z>0</z>
+  </axis>
  </animation>
 
  <animation>

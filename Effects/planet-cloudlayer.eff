@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/planet</name>
+	<name>Effects/planet-cloudlayer</name>
 	<!-- 	<inherits-from>Effects/shadow</inherits-from> -->
 	<parameters>
 		<texture n ="0">
@@ -77,6 +77,10 @@
 			<rendering-hint>
 				<use>rendering-hint</use>
 			</rendering-hint>
+		<render-bin>
+					<bin-number>111</bin-number>
+					<bin-name>DepthSortedBin</bin-name>
+				</render-bin>
 			<texture-unit>
 				<!-- The texture unit is always active because the shaders expect
              that. -->

@@ -359,7 +359,7 @@
           <halign>left</halign>
 					<name>vegetation-density</name>
 					<min>0</min>
-					<max>10.0</max>
+					<max>5.0</max>
 					<step>0.1</step>
 					<property>/sim/rendering/vegetation-density</property>
 					<binding>

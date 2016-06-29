@@ -196,7 +196,7 @@ if ((domain_x < 0.1) || (domain_x > 0.9)) {shapeTexel.a = 0.0;}
 domainTexel.rgb *=  color_base.rgb;
 
 vec4 birdTexel;
-birdTexel.rgb = domainTexel.rgb * light_diffuse;
+birdTexel.rgb = domainTexel.rgb * light_diffuse.rgb;
 birdTexel.a = domainTexel.a * shapeTexel.a * transmission;
 
 

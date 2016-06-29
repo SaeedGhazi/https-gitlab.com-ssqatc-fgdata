@@ -54,7 +54,7 @@ void main(void)
 	fragColor.rgb = mix(hazeColor, finalColor.rgb, fogFactor );
 	}
       else 
-	{fragColor.rgb = finalColor;}
+	{fragColor.rgb = finalColor.rgb;}
       fragColor.a = mix(0.0, finalColor.a, fogFactor);
 
       fragColor.rgb = filter_combined(fragColor.rgb); 

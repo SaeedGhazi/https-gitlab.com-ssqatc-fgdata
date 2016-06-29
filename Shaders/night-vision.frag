@@ -37,6 +37,6 @@ void main() {
 	c = c * vec2( 1.0, fg_BufferSize.y / fg_BufferSize.x );
 	float l = length(c);
 	float f = smoothstep( 0.7, 1.1, l );
-	color.rgb = (1 - f) * color.rgb;
+	color.rgb = (1.0 - f) * color.rgb;
     gl_FragColor = color;
 }

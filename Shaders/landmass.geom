@@ -1,4 +1,4 @@
-#version 120
+#version 150
 #extension GL_EXT_geometry_shader4 : enable
 
 // Geometry shader that creates a prism from a terrain triangle,
@@ -7,28 +7,28 @@
 // A geometry shader should do as little computation as possible.
 
 // See landmass-g.vert for a description of the inputs.
-varying in vec4 rawposIn[3];
-varying in vec3 NormalIn[3];
-varying in vec4 ecPosIn[3];
-varying in vec3 ecNormalIn[3];
-varying in vec3 VTangentIn[3];
-varying in vec3 VBinormalIn[3];
-varying in vec4 constantColorIn[3];
+in vec4 rawposIn[3];
+in vec3 NormalIn[3];
+in vec4 ecPosIn[3];
+in vec3 ecNormalIn[3];
+in vec3 VTangentIn[3];
+in vec3 VBinormalIn[3];
+in vec4 constantColorIn[3];
 
 uniform float canopy_height;
 
 // model position
-varying out vec4 rawpos;
+out vec4 rawpos;
 // eye position
-varying out vec4 ecPosition;
+out vec4 ecPosition;
 // eye space surface matrix
-varying out vec3 VNormal;
-varying out vec3 VTangent;
-varying out vec3 VBinormal;
+out vec3 VNormal;
+out vec3 VTangent;
+out vec3 VBinormal;
 // model normal
-varying out vec3 Normal;
-varying out vec4 constantColor;
-varying out float bump;
+out vec3 Normal;
+out vec4 constantColor;
+out float bump;
 
 // Emit one vertex of the forest geometry.
 // parameters:

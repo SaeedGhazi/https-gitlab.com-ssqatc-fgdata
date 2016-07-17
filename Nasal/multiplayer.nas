@@ -537,5 +537,11 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
   # Call-back to ensure we see our own messages.
   setlistener("/sim/multiplay/chat", chat_listener);
-});
 
+
+  if (getprop("/sim/presets/avoided-mp-runway")) {
+    _setlistener("/sim/sceneryloaded", func {
+      gui.popupTip("Multi-player enabled, start moved to runway hold short position.");
+    });
+  }
+});

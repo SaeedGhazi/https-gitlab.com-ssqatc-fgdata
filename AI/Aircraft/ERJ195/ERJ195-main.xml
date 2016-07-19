@@ -15,15 +15,4 @@
 			</less-than>
 		</condition>
 	</animation>
-    
-      <animation>
-		<type>select</type>
-		<object-name>Gear_Closed</object-name>
-		<condition>
-			<more-than>
-				<property>velocities/true-airspeed-kt</property>
-				<value>150</value>
-			</more-than>
-		</condition>
-	</animation>
 </PropertyList>

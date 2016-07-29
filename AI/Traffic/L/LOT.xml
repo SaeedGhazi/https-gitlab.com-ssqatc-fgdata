@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- 787/787-LOT- temporarily replaced with A332/A332-default.xml
-ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
+<!-- Author Ian Tolosa - Timetable week of 21OCT2013 - Updated JUL16 removed scrapped 767 added new 787 -->
 
 <trafficlist>
   <aircraft>
@@ -15,25 +14,39 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>SP-LCC</registration>
+    <registration>SP_LLG</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-LOT.xml</model>
+    <model>Aircraft/737/737-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
-    <required-aircraft>LOT-763</required-aircraft>
-    <actype>763</actype>
+    <required-aircraft>LOT-734</required-aircraft>
+    <actype>734</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>SP-LPB</registration>
-    <heavy>true</heavy>
+    <registration>SP-LE</registration>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-default.xml</model>
+    <model>Aircraft/737/737-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-734</required-aircraft>
+    <actype>734</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LLF</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -42,12 +55,12 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <offset>0</offset>
     <radius>30</radius>
     <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
+    <performance-class>heavy_jet</performance-class>
     <registration>SP-LRA</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-default.xml</model>
+    <model>Aircraft/787/788-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -56,96 +69,68 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <offset>0</offset>
     <radius>30</radius>
     <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LRE</registration>
-    <heavy>true</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A332/A332-default.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-788</required-aircraft>
-    <actype>788</actype>
-    <offset>0</offset>
-    <radius>30</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LRC</registration>
-    <heavy>true</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A332/A332-default.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-788</required-aircraft>
-    <actype>788</actype>
-    <offset>0</offset>
-    <radius>30</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LRD</registration>
-    <heavy>true</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A332/A332-default.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-788</required-aircraft>
-    <actype>788</actype>
-    <offset>0</offset>
-    <radius>30</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
+    <performance-class>heavy_jet</performance-class>
     <registration>SP-LRB</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/787/788-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
+    <required-aircraft>LOT-788</required-aircraft>
+    <actype>788</actype>
     <offset>0</offset>
-    <radius>13</radius>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LDG</registration>
-    <heavy>false</heavy>
+    <performance-class>heavy_jet</performance-class>
+    <registration>SP-LRC</registration>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/787/788-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
+    <required-aircraft>LOT-788</required-aircraft>
+    <actype>788</actype>
     <offset>0</offset>
-    <radius>13</radius>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LDH</registration>
-    <heavy>false</heavy>
+    <performance-class>heavy_jet</performance-class>
+    <registration>SP-LRD</registration>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/787/788-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
+    <required-aircraft>LOT-788</required-aircraft>
+    <actype>788</actype>
     <offset>0</offset>
-    <radius>13</radius>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LDK</registration>
-    <heavy>false</heavy>
+    <performance-class>heavy_jet</performance-class>
+    <registration>SP-LRE</registration>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/787/788-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>SP-LRF</registration>
+    <heavy>true</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -159,7 +144,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -173,7 +158,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -187,7 +172,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -201,7 +186,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -215,7 +200,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -229,7 +214,35 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LDG</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LDH</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -243,7 +256,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -253,81 +266,11 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <radius>13</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>SP-LII</registration>
+    <registration>SP-LDK</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
-    <offset>0</offset>
-    <radius>13</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LIK</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
-    <offset>0</offset>
-    <radius>13</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LIL</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
-    <offset>0</offset>
-    <radius>13</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LIM</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
-    <offset>0</offset>
-    <radius>13</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LIN</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
-    <livery>LOT</livery>
-    <airline>LOT</airline>
-    <home-port>EPWA</home-port>
-    <required-aircraft>LOT-E70</required-aircraft>
-    <actype>E70</actype>
-    <offset>0</offset>
-    <radius>13</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>SP-LIO</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -341,7 +284,21 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LIB</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -355,7 +312,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -369,7 +326,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -383,7 +340,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -397,7 +354,7 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-LOT.xml</model>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -407,7 +364,77 @@ ERJ170/ERJ170-LOT- temporarily replaced with ERJ195/ERJ195-LOT -->
     <radius>13</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>SP-LIB</registration>
+    <registration>SP-LII</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LIK</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LIL</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LIM</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LIN</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-LOT.xml</model>
+    <livery>LOT</livery>
+    <airline>LOT</airline>
+    <home-port>EPWA</home-port>
+    <required-aircraft>LOT-E70</required-aircraft>
+    <actype>E70</actype>
+    <offset>0</offset>
+    <radius>13</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>SP-LIO</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>

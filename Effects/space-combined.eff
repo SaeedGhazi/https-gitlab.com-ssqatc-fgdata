@@ -4,12 +4,63 @@
   <name>Effects/space-combined</name>
   <inherits-from>Effects/model-combined</inherits-from>
 
+<!--<parameters>
+	<geo_light_r type="float">0.0</geo_light_r>
+	<geo_light_g type="float">0.0</geo_light_g>
+	<geo_light_b type="float">0.0</geo_light_b>
+	<geo_light_x type="float">0.0</geo_light_x>
+	<geo_light_y type="float">0.0</geo_light_y>
+	<geo_light_z type="float">0.0</geo_light_z>
+	<geo_light_radius type="float">0.0</geo_light_radius>
+	<geo_ambience type="float">0.0</geo_ambience>
+</parameters> -->
+
 <technique n="4">
  <pass>
  <program>
         <vertex-shader n="0">Shaders/space-ALS-ultra.vert</vertex-shader>
         <fragment-shader n="0">Shaders/space-ALS-ultra.frag</fragment-shader>
   </program>
+  <uniform>
+	<name>geo_light_r</name>
+	<type>float</type>
+	<value><use>geo_light_r</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_g</name>
+	<type>float</type>
+	<value><use>geo_light_g</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_b</name>
+	<type>float</type>
+	<value><use>geo_light_b</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_x</name>
+	<type>float</type>
+	<value><use>geo_light_x</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_y</name>
+	<type>float</type>
+	<value><use>geo_light_y</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_z</name>
+	<type>float</type>
+	<value><use>geo_light_z</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_radius</name>
+	<type>float</type>
+	<value><use>geo_light_radius</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_ambience</name>
+	<type>float</type>
+	<value><use>geo_ambience</use></value>
+  </uniform>
   </pass>
  </technique>
 

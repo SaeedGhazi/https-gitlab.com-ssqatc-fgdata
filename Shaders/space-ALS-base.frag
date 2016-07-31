@@ -28,11 +28,22 @@ uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
 
+uniform float geo_light_x;
+uniform float geo_light_y;
+uniform float geo_light_z;
+uniform float geo_light_radius;
+uniform float geo_ambience;
+
+uniform float geo_light_r;
+uniform float geo_light_g;
+uniform float geo_light_b;
+
 uniform int quality_level;
 uniform int tquality_level;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+uniform int use_geo_light;
 
 
 const float EarthRadius = 5800000.0;
@@ -147,9 +158,26 @@ void main()
 	{
 	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
+
+   vec3 geo_light = vec3 (0.0, 0.0, 0.0);
+
+   if (use_geo_light == 1)
+	{
+   	vec3 geo_light_vec = vec3 (geo_light_x, geo_light_y, geo_light_z);
+   	vec3 geo_light_rel_vec =  geo_light_vec - (relPos + (gl_ModelViewMatrixInverse * vec4 (0.0, 0.0, 0.0, 1.0)).xyz);
+
+   	vec3 geo_lightdir = (gl_ModelViewMatrix * vec4 (geo_light_rel_vec, 0.0)).xyz;
+    	float geo_light_incidence = geo_ambience + (1.0- geo_ambience) * clamp(dot(n, geo_lightdir),0.0, 1.0);
+
+    	geo_light = vec3 (geo_light_r, geo_light_g, geo_light_b) * (1.0 - smoothstep(0.5 * geo_light_radius, geo_light_radius, length(geo_light_rel_vec))) * geo_light_incidence;
+	}
+
     if (dist > 2.0) // we don't want to light the cockpit...
-	{color.rgb +=secondary_light * light_distance_fading(dist);}
+	{color.rgb +=secondary_light * light_distance_fading(dist) + geo_light ;}
     }
+
+
+
 
     texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
@@ -324,8 +352,8 @@ fragColor.rgb = mix(hazeColor  + secondary_light * fog_backscatter(mvisibility),
 
 }
 
-gl_FragColor = fragColor;
 
+gl_FragColor = fragColor;
 
 }
 

@@ -43,6 +43,15 @@
 		<landing_light1_offset><use>/sim/rendering/als-secondary-lights/landing-light1-offset-deg</use></landing_light1_offset>
 		<landing_light2_offset><use>/sim/rendering/als-secondary-lights/landing-light2-offset-deg</use></landing_light2_offset>
 		<landing_light3_offset><use>/sim/rendering/als-secondary-lights/landing-light3-offset-deg</use></landing_light3_offset>
+		<use_geo_light type="int">0</use_geo_light>
+		<geo_light_r type="float">0.0</geo_light_r>
+		<geo_light_g type="float">0.0</geo_light_g>
+		<geo_light_b type="float">0.0</geo_light_b>
+		<geo_light_x type="float">0.0</geo_light_x>
+		<geo_light_y type="float">0.0</geo_light_y>
+		<geo_light_z type="float">0.0</geo_light_z>
+		<geo_light_radius type="float">0.0</geo_light_radius>
+		<geo_ambience type="float">0.0</geo_ambience>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<!-- 		END fog include -->
@@ -242,6 +251,46 @@
         <type>float</type>
         <value><use>landing_light3_offset</use></value>
       </uniform>
+  <uniform>
+	<name>geo_light_r</name>
+	<type>float</type>
+	<value><use>geo_light_r</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_g</name>
+	<type>float</type>
+	<value><use>geo_light_g</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_b</name>
+	<type>float</type>
+	<value><use>geo_light_b</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_x</name>
+	<type>float</type>
+	<value><use>geo_light_x</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_y</name>
+	<type>float</type>
+	<value><use>geo_light_y</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_z</name>
+	<type>float</type>
+	<value><use>geo_light_z</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_radius</name>
+	<type>float</type>
+	<value><use>geo_light_radius</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_ambience</name>
+	<type>float</type>
+	<value><use>geo_ambience</use></value>
+  </uniform>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
@@ -266,6 +315,11 @@
 	<name>use_alt_landing_light</name>
 	<type>int</type>
 	<value>	<use>use_alt_landing_light</use></value>
+      </uniform>
+      <uniform>
+	<name>use_geo_light</name>
+	<type>int</type>
+	<value>	<use>use_geo_light</use></value>
       </uniform>
       <uniform>
         <name>display_xsize</name>

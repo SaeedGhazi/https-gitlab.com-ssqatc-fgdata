@@ -79,6 +79,12 @@ uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
 
+uniform float geo_light_x;
+uniform float geo_light_y;
+uniform float geo_light_z;
+uniform float geo_light_radius;
+uniform float geo_ambience;
+
 // constants needed by the light and fog computations ###################################################
 
 const float EarthRadius = 5800000.0;
@@ -88,6 +94,10 @@ uniform vec3 lightmap_r_color;
 uniform vec3 lightmap_g_color;
 uniform vec3 lightmap_b_color;
 uniform vec3 lightmap_a_color;
+
+uniform float geo_light_r;
+uniform float geo_light_g;
+uniform float geo_light_b;
 
 uniform vec3 dirt_r_color;
 uniform vec3 dirt_g_color;
@@ -323,8 +333,15 @@ void main (void)
 	}
 
 
+    vec3 geo_light_vec = (gl_ModelViewMatrix  * vec4 (geo_light_x, geo_light_y, geo_light_z, 0.0)).xyz;
+    vec3 geo_light_rel_vec =  geo_light_vec -(gl_ModelViewMatrix * vec4 (rawpos, 0.0)).xyz;
+
+    float geo_light_incidence = geo_ambience + (1.0- geo_ambience) * clamp(dot(N, geo_light_rel_vec),0.0, 1.0);
+
+    vec3 geo_light = vec3 (geo_light_r, geo_light_g, geo_light_b) * (1.0 - smoothstep(0.5 * geo_light_radius, geo_light_radius, length(geo_light_rel_vec))) * geo_light_incidence;
+
     vec4 Diffuse  = light_diffuse * nDotVP;
-    Diffuse.rgb += secondary_light * light_distance_fading(dist);
+    Diffuse.rgb += secondary_light * light_distance_fading(dist) + geo_light;
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 

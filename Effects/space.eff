@@ -4,6 +4,7 @@
   <name>Effects/space</name>
   <inherits-from>Effects/model-default</inherits-from>
  
+
  <technique n="5">
  <pass>
  <program>

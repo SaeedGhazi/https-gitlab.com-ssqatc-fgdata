@@ -183,9 +183,17 @@ void main(void)
     vec2 lightningRelVector = relVector.xy - vec2(lightning_pos_x, lightning_pos_y);
     float rCoord = length(lightningRelVector);
 
+    vec3 flash_color = vec3 (0.43, 0.57, 1.0);
+    float flash_factor = flash; 
+
+    if (flash == 2)
+	{
+	flash_color = vec3 (0.8, 0.7, 0.4);
+	flash_factor = 1;
+	}
 
     float rn = 0.5 + 0.5 * fract(gl_Color.x);
-    gl_FrontColor.rgb += flash * vec3 (0.43, 0.57, 1.0) * (1.0 - smoothstep(lightning_range, 5.0 * lightning_range, rCoord)) * rn;
+    gl_FrontColor.rgb += flash_factor * flash_color  * (1.0 - smoothstep(lightning_range, 5.0 * lightning_range, rCoord)) * rn;
     
     
     // fading of cloudlets

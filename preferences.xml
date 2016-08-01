@@ -293,6 +293,49 @@ Started September 2000 by David Megginson, david@megginson.com
         <landing-light2-offset-deg type="float">0.0</landing-light2-offset-deg>
         <landing-light3-offset-deg type="float">0.0</landing-light3-offset-deg>
 	<use-flashlight type="int">0</use-flashlight>
+	<num-lightspots type="int">0</num-lightspots>
+	<lightspot>
+	   <eyerel-x-m type="float">0.0</eyerel-x-m>
+	   <eyerel-x-m n="1" type="float">0.0</eyerel-x-m>
+	   <eyerel-x-m n="2" type="float">0.0</eyerel-x-m>
+	   <eyerel-x-m n="3" type="float">0.0</eyerel-x-m>
+	   <eyerel-x-m n="4" type="float">0.0</eyerel-x-m>
+	   <eyerel-y-m type="float">0.0</eyerel-y-m>
+	   <eyerel-y-m n="1" type="float">0.0</eyerel-y-m>
+	   <eyerel-y-m n="2" type="float">0.0</eyerel-y-m>
+	   <eyerel-y-m n="3" type="float">0.0</eyerel-y-m>
+	   <eyerel-y-m n="4" type="float">0.0</eyerel-y-m>
+	   <eyerel-z-m type="float">0.0</eyerel-z-m>
+	   <eyerel-z-m n="1" type="float">0.0</eyerel-z-m>
+	   <eyerel-z-m n="2" type="float">0.0</eyerel-z-m>
+	   <eyerel-z-m n="3" type="float">0.0</eyerel-z-m>
+	   <eyerel-z-m n="4" type="float">0.0</eyerel-z-m>
+	   <lightspot-r type="float">0.0</lightspot-r>
+	   <lightspot-g type="float">0.0</lightspot-g>
+	   <lightspot-b type="float">0.0</lightspot-b>
+	   <lightspot-r n="1" type="float">0.0</lightspot-r>
+	   <lightspot-g n="1" type="float">0.0</lightspot-g>
+	   <lightspot-b n="1" type="float">0.0</lightspot-b>
+	   <lightspot-r n="2" type="float">0.0</lightspot-r>
+	   <lightspot-g n="2" type="float">0.0</lightspot-g>
+	   <lightspot-b n="2" type="float">0.0</lightspot-b>
+	   <lightspot-r n="3" type="float">0.0</lightspot-r>
+	   <lightspot-g n="3" type="float">0.0</lightspot-g>
+	   <lightspot-b n="3" type="float">0.0</lightspot-b>
+	   <lightspot-r n="4" type="float">0.0</lightspot-r>
+	   <lightspot-g n="4" type="float">0.0</lightspot-g>
+	   <lightspot-b n="4" type="float">0.0</lightspot-b>
+	   <size type="float">0.0</size>
+	   <size n="1" type="float">0.0</size>
+	   <size n="2" type="float">0.0</size>
+	   <size n="3" type="float">0.0</size>
+	   <size n="4" type="float">0.0</size>
+	   <dir type="float">0.0</dir>
+	   <dir n="1" type="float">0.0</dir>
+	   <stretch type="float">0.0</stretch>
+	   <stretch n="1" type="float">0.0</stretch>
+	</lightspot>
+
       </als-secondary-lights>
       <als-filters>
 	 <use-filtering type="bool">false</use-filtering>

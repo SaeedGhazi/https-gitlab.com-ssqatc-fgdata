@@ -67,6 +67,7 @@ float rayleigh_in_func(in float dist, in float air_pollution, in float avisibili
 
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
+vec3 lightspot(in vec3 relPos);
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
@@ -333,7 +334,8 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	{
 	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
-    color.rgb +=secondary_light * light_distance_fading(dist);
+
+    color.rgb +=secondary_light * light_distance_fading(dist) + lightspot(relPos);
 
     fragColor = color * texel + specular;
 

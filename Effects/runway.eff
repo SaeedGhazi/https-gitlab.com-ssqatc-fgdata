@@ -78,6 +78,46 @@
     		<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
     		<wetness><use>/environment/surface/wetness</use></wetness>
     		<uvstretch>1.0</uvstretch>
+		<num_lightspots><use>/sim/rendering/als-secondary-lights/num-lightspots</use></num_lightspots>
+		<eyerel_x1><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-x-m</use></eyerel_x1>
+		<eyerel_y1><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-y-m</use></eyerel_y1>
+		<eyerel_z1><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-z-m</use></eyerel_z1>
+		<lightspot_project1><use>/sim/rendering/als-secondary-lights/lightspot/stretch</use></lightspot_project1>
+		<lightspot_dir1><use>/sim/rendering/als-secondary-lights/lightspot/dir</use></lightspot_dir1>
+		<lightspot_size1><use>/sim/rendering/als-secondary-lights/lightspot/size</use></lightspot_size1>
+		<lightspot_r1><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-r</use></lightspot_r1>
+		<lightspot_g1><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-g</use></lightspot_g1>
+		<lightspot_b1><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-b</use></lightspot_b1>
+		<eyerel_x2><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-x-m[1]</use></eyerel_x2>
+		<eyerel_y2><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-y-m[1]</use></eyerel_y2>
+		<eyerel_z2><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-z-m[1]</use></eyerel_z2>
+		<lightspot_project2><use>/sim/rendering/als-secondary-lights/lightspot/stretch[1]</use></lightspot_project2>
+		<lightspot_dir2><use>/sim/rendering/als-secondary-lights/lightspot/dir[1]</use></lightspot_dir2>
+		<lightspot_size2><use>/sim/rendering/als-secondary-lights/lightspot/size[1]</use></lightspot_size2>
+		<lightspot_r2><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-r[1]</use></lightspot_r2>
+		<lightspot_g2><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-g[1]</use></lightspot_g2>
+		<lightspot_b2><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-b[1]</use></lightspot_b2>
+		<eyerel_x3><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-x-m[2]</use></eyerel_x3>
+		<eyerel_y3><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-y-m[2]</use></eyerel_y3>
+		<eyerel_z3><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-z-m[2]</use></eyerel_z3>
+		<lightspot_size3><use>/sim/rendering/als-secondary-lights/lightspot/size[2]</use></lightspot_size3>
+		<lightspot_r3><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-r[2]</use></lightspot_r3>
+		<lightspot_g3><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-g[2]</use></lightspot_g3>
+		<lightspot_b3><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-b[2]</use></lightspot_b3>
+		<eyerel_x4><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-x-m[3]</use></eyerel_x4>
+		<eyerel_y4><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-y-m[3]</use></eyerel_y4>
+		<eyerel_z4><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-z-m[3]</use></eyerel_z4>
+		<lightspot_size4><use>/sim/rendering/als-secondary-lights/lightspot/size[3]</use></lightspot_size4>
+		<lightspot_r4><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-r[3]</use></lightspot_r4>
+		<lightspot_g4><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-g[3]</use></lightspot_g4>
+		<lightspot_b4><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-b[3]</use></lightspot_b4>
+		<eyerel_x5><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-x-m[4]</use></eyerel_x5>
+		<eyerel_y5><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-y-m[4]</use></eyerel_y5>
+		<eyerel_z5><use>/sim/rendering/als-secondary-lights/lightspot/eyerel-z-m[4]</use></eyerel_z5>
+		<lightspot_size5><use>/sim/rendering/als-secondary-lights/lightspot/size[4]</use></lightspot_size5>
+		<lightspot_r5><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-r[4]</use></lightspot_r5>
+		<lightspot_g5><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-g[4]</use></lightspot_g5>
+		<lightspot_b5><use>/sim/rendering/als-secondary-lights/lightspot/lightspot-b[4]</use></lightspot_b5>
    		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
     		<fogstructure><use>/environment/fog-structure</use></fogstructure>
     		<cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
@@ -169,6 +209,7 @@
 	<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
 	<fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
 	<fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
+	<fragment-shader n="6">Shaders/lightspot-ALS.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -270,6 +311,7 @@
         <type>float</type>
         <value><use>air_pollution</use></value>
       </uniform>
+      
       <!-- secondary lights -->	
       <uniform>
         <name>view_pitch_offset</name>
@@ -300,6 +342,201 @@
         <name>landing_light3_offset</name>
         <type>float</type>
         <value><use>landing_light3_offset</use></value>
+      </uniform>
+<uniform>
+        <name>eyerel_x1</name>
+        <type>float</type>
+        <value><use>eyerel_x1</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_y1</name>
+        <type>float</type>
+        <value><use>eyerel_y1</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_z1</name>
+        <type>float</type>
+        <value><use>eyerel_z1</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_project1</name>
+        <type>float</type>
+        <value><use>lightspot_project1</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_dir1</name>
+        <type>float</type>
+        <value><use>lightspot_dir1</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_size1</name>
+        <type>float</type>
+        <value><use>lightspot_size1</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_r1</name>
+        <type>float</type>
+        <value><use>lightspot_r1</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_g1</name>
+        <type>float</type>
+        <value><use>lightspot_g1</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_b1</name>
+        <type>float</type>
+        <value><use>lightspot_b1</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_x2</name>
+        <type>float</type>
+        <value><use>eyerel_x2</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_y2</name>
+        <type>float</type>
+        <value><use>eyerel_y2</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_z2</name>
+        <type>float</type>
+        <value><use>eyerel_z2</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_project2</name>
+        <type>float</type>
+        <value><use>lightspot_project2</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_dir2</name>
+        <type>float</type>
+        <value><use>lightspot_dir2</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_size2</name>
+        <type>float</type>
+        <value><use>lightspot_size2</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_r2</name>
+        <type>float</type>
+        <value><use>lightspot_r2</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_g2</name>
+        <type>float</type>
+        <value><use>lightspot_g2</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_b2</name>
+        <type>float</type>
+        <value><use>lightspot_b2</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_x3</name>
+        <type>float</type>
+        <value><use>eyerel_x3</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_y3</name>
+        <type>float</type>
+        <value><use>eyerel_y3</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_z3</name>
+        <type>float</type>
+        <value><use>eyerel_z3</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_size3</name>
+        <type>float</type>
+        <value><use>lightspot_size3</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_r3</name>
+        <type>float</type>
+        <value><use>lightspot_r3</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_g3</name>
+        <type>float</type>
+        <value><use>lightspot_g3</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_b3</name>
+        <type>float</type>
+        <value><use>lightspot_b3</use></value>
+      </uniform>
+    <uniform>
+        <name>eyerel_x4</name>
+        <type>float</type>
+        <value><use>eyerel_x4</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_y4</name>
+        <type>float</type>
+        <value><use>eyerel_y4</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_z4</name>
+        <type>float</type>
+        <value><use>eyerel_z4</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_size4</name>
+        <type>float</type>
+        <value><use>lightspot_size4</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_r4</name>
+        <type>float</type>
+        <value><use>lightspot_r4</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_g4</name>
+        <type>float</type>
+        <value><use>lightspot_g4</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_b4</name>
+        <type>float</type>
+        <value><use>lightspot_b4</use></value>
+      </uniform>
+    <uniform>
+        <name>eyerel_x5</name>
+        <type>float</type>
+        <value><use>eyerel_x5</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_y5</name>
+        <type>float</type>
+        <value><use>eyerel_y5</use></value>
+      </uniform>
+      <uniform>
+        <name>eyerel_z5</name>
+        <type>float</type>
+        <value><use>eyerel_z5</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_size5</name>
+        <type>float</type>
+        <value><use>lightspot_size5</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_r5</name>
+        <type>float</type>
+        <value><use>lightspot_r5</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_g5</name>
+        <type>float</type>
+        <value><use>lightspot_g5</use></value>
+      </uniform>
+      <uniform>
+        <name>lightspot_b5</name>
+        <type>float</type>
+        <value><use>lightspot_b5</use></value>
       </uniform>
       <!-- filtering -->
       <uniform>
@@ -572,6 +809,11 @@
         <name>display_ysize</name>
         <type>int</type>
         <value><use>display_ysize</use></value>
+      </uniform>
+      <uniform>
+        <name>num_lightspots</name>
+        <type>int</type>
+        <value><use>num_lightspots</use></value>
       </uniform>
       <uniform>
         <name>overlay_flag</name>

@@ -30,9 +30,10 @@ uniform float base_flame_b;
 uniform int use_shocks;
 uniform int use_noise;
 
-float Noise2D(in vec2 coord, in float wavelength);
+float Noise3D(in vec3 coord, in float wavelength);
 
-const int n_steps = 15;
+
+const int n_steps = 25;
 
 float spherical_smoothstep (in vec3 pos)
 {
@@ -54,7 +55,6 @@ float noise = 0.0;
 pos.z +=8.0 * deflection_coeff;
 
 float d_rad = length(pos.yz - vec2 (0.0, deflection_coeff * pos.x * pos.x));
-//float longFade = smoothstep(0.0, 5.0, pos.x) ;
 float longFade = pos.x/5.0;
 
 float density = 1.0 - longFade;
@@ -65,7 +65,7 @@ if (d_rad > radius) {return 0.0;}
 
 if (use_noise ==1)
 	{
-	noise = Noise2D(vec2(pos.x - osg_SimulationTime * 30.0 , d_rad), noise_scale);
+	noise = Noise3D(vec3(pos.x - osg_SimulationTime * 30.0 , pos.y, pos.z), noise_scale);
 	}
 
 density *= (1.0 - smoothstep(0.125, radius, d_rad)) * (1.0 - noise_strength + noise_strength* noise);
@@ -122,7 +122,6 @@ for (int i = 0; i < n_steps; i++)
 
 
 float density = density1 + density2;
-//density = clamp(density,0.0,1.0);
 density = 1.0 - exp(-density);
 
 density1 = 1.0 - exp(-density1);
@@ -136,6 +135,7 @@ vec3 color = mix(flame_color_low, flame_color_high, density2);
 color = mix(color, vec3(0.8, 1.0, 1.0), density1);
 
 vec4 finalColor = vec4 (color.rgb, density);
+
 
 gl_FragColor = finalColor;
 }

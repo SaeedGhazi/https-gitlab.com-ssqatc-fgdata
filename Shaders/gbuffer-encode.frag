@@ -1,4 +1,5 @@
 // -*- mode: C; -*-
+#version 120
 // Licence: GPL v2
 // Author: Frederic Bouvier.
 

@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 // written by Thorsten Renk, Oct 2011, based on default.frag
 // Ambient term comes in gl_Color.rgb.

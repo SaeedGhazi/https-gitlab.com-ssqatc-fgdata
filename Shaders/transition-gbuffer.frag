@@ -2,7 +2,7 @@
 // Texture switching based on face slope and snow level
 // based on earlier work by Frederic Bouvier, Tim Moore, and Yves Sablonier.
 // � Emilian Huminiuc 2011
-
+#version 120
 
 varying float	RawPosZ;
 varying vec3	WorldPos;

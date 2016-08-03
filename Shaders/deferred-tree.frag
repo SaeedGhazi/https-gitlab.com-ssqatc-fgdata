@@ -1,3 +1,4 @@
+#version 120
 #extension GL_EXT_gpu_shader4 : enable
 //
 // attachment 0:  normal.x  |  normal.x  |  normal.y  |  normal.y

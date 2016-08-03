@@ -1,4 +1,5 @@
 #version 120
+
 uniform sampler2D input_tex;
 uniform vec2 fg_BufferSize;
 uniform float blurOffset_x;

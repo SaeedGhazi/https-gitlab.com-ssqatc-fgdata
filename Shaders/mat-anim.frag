@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 // Shader for use with material animations
 varying vec4 diffuse, constantColor, matSpecular;

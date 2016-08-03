@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 uniform int display_xsize;
 uniform int display_ysize;

@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 uniform float eyerel_x1;
 uniform float eyerel_y1;

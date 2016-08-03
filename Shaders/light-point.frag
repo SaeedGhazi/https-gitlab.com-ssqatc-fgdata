@@ -1,3 +1,5 @@
+#version 120
+
 uniform vec2 fg_BufferSize;
 uniform vec3 fg_Planes;
 

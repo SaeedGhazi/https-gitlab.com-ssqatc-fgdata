@@ -1,3 +1,5 @@
+#version 120
+
 //#define fog_FuncTION
 //varying vec3 PointPos;
 

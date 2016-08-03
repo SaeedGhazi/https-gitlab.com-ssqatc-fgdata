@@ -1,3 +1,5 @@
+#version 120
+
 // Night vision effect inspired by http://www.geeks3d.com/20091009/shader-library-night-vision-post-processing-filter-glsl/
 
 uniform sampler2D color_tex;

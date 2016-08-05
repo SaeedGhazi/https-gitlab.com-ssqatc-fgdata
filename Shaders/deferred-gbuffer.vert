@@ -2,6 +2,7 @@
 // Licence: GPL v2
 // Author: Frederic Bouvier.
 //
+#version 120
 
 varying vec3 ecNormal;
 varying float alpha;

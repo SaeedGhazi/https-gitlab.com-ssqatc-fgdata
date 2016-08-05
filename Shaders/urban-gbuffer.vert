@@ -1,6 +1,7 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
 // Author: Frederic Bouvier
+#version 120
 
 varying vec4  rawpos;
 varying vec4  ecPosition;

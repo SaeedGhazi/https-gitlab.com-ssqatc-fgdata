@@ -1,3 +1,4 @@
+#version 120
 //varying float fogCoord;
 varying vec3 PointPos;
 //varying vec4 EyePos;

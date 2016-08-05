@@ -1,6 +1,7 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
 // Author: Vivian Meazza.
+#version 120
 
 varying vec3  rawpos;
 varying vec3  VNormal;

@@ -1,3 +1,5 @@
+#version 120
+
 varying vec4  rawpos;
 varying vec4  ecPosition;
 varying vec3  VNormal;

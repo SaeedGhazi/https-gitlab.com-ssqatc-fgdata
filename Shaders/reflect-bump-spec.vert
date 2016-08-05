@@ -1,6 +1,7 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
 // © Emilian Huminiuc and Vivian Meazza 2011
+#version 120
 
 varying vec3  rawpos;
 varying float fogCoord;

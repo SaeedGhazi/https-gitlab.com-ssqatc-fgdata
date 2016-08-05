@@ -1,3 +1,4 @@
+#version 120
 // varying float fogCoord;
 
 void main()

@@ -2,6 +2,7 @@
 // Licence: GPL v2
 // Authors: Frederic Bouvier, Emilian Huminiuc
 //
+#version 120
 
 varying float	RawPosZ;
 varying vec3	WorldPos;

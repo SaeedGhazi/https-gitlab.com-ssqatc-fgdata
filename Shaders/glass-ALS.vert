@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 varying vec2 rawPos;
 varying vec2 nPos;

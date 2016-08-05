@@ -1,3 +1,4 @@
+#version 120
 uniform mat4 fg_ProjectionMatrixInverse;
 varying vec4 ray;
 void main() {

@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 // Shader that uses OpenGL state values to do per-pixel lighting
 //

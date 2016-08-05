@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 // written by Thorsten Renk, May 2014
 // based on ALS terrain shader

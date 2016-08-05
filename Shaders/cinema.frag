@@ -1,3 +1,5 @@
+#version 120
+
 uniform sampler2D lighting_tex;
 uniform sampler2D bloom_tex;
 uniform sampler2D film_tex;

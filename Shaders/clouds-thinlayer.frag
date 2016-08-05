@@ -1,3 +1,5 @@
+#version 120
+
 uniform sampler2D baseTexture;
 varying float fogFactor;
 

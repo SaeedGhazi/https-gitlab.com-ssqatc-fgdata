@@ -1,3 +1,5 @@
+#version 120
+
 uniform sampler2D color_tex;
 uniform sampler2D spec_emis_tex;
 void main() {

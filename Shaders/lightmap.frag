@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 // Ambient term comes in gl_Color.rgb.
 //

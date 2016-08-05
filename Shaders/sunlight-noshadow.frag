@@ -1,3 +1,5 @@
+#version 120
+
 uniform mat4 fg_ViewMatrix;
 uniform sampler2D depth_tex;
 uniform sampler2D normal_tex;

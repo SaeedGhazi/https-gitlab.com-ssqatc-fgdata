@@ -1,3 +1,5 @@
+#version 120
+
 uniform sampler2D color_tex;
 uniform sampler2D ao_tex;
 uniform sampler2D normal_tex;

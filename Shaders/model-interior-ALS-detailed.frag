@@ -1,4 +1,5 @@
 // -*-C++-*-
+#version 120
 
 // written by Thorsten Renk, Oct 2015
 

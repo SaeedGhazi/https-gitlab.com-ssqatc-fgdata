@@ -33,6 +33,8 @@
 		<fogtype>
 			<use>/sim/rendering/shaders/skydome</use>
 		</fogtype>
+		<urban_blend type="int">0</urban_blend>
+		<blend_bias type="float">0.4</blend_bias>
 		<!-- 	END fog include -->
 	</parameters>
 	<generate>
@@ -169,7 +171,24 @@
 			</texture-unit>
 			<texture-unit>
 				<unit>3</unit>
-				<type>noise</type>
+				<image>
+					<use>texture[11]/image</use>
+				</image>
+				<type>
+				  <use>texture[11]/type</use>
+				</type>
+				<filter>
+					<use>texture[11]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[11]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[11]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[11]/internal-format</use>
+				</internal-format>
 			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/urban-ALS.vert</vertex-shader>
@@ -183,10 +202,6 @@
 					<name>tangent</name>
 					<index>6</index>
 				</attribute>
-				<!--<attribute>
-					<name>binormal</name>
-					<index>7</index>
-				</attribute>-->
 				<attribute>
 					<name>normal</name>
 					<index>15</index>
@@ -208,8 +223,8 @@
 				<value type="int">2</value>
 			</uniform>
 			<uniform>
-				<name>NoiseTex</name>
-				<type>sampler-3d</type>
+				<name>BackgroundTex</name>
+				<type>sampler-2d</type>
 				<value type="int">3</value>
 			</uniform>
 			<uniform>
@@ -234,6 +249,13 @@
 				</value>
 			</uniform>
 			<uniform>
+				<name>blend_bias</name>
+				<type>float</type>
+				<value>
+					<use>blend_bias</use>
+				</value>
+			</uniform>
+			<uniform>
 				<name>quality_level</name>
 				<type>float</type>
 				<value>
@@ -249,6 +271,11 @@
         			<name>tquality_level</name>
         			<type>int</type>
         			<value><use>tquality_level</use></value>
+      			</uniform>
+			<uniform>
+        			<name>urban_blend</name>
+        			<type>int</type>
+        			<value><use>urban_blend</use></value>
       			</uniform>
 			<uniform>
 				<name>snowlevel</name>
@@ -760,8 +787,26 @@
 			</texture-unit>
 			<texture-unit>
 				<unit>2</unit>
-				<type>noise</type>
+				<image>
+					<use>texture[11]/image</use>
+				</image>
+				<type>
+				  <use>texture[11]/type</use>
+				</type>
+				<filter>
+					<use>texture[11]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[11]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[11]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[11]/internal-format</use>
+				</internal-format>
 			</texture-unit>
+
 			<program>
 				<vertex-shader>Shaders/urban-ALS.vert</vertex-shader>
 				<fragment-shader>Shaders/urban-ALS.frag</fragment-shader>
@@ -1171,8 +1216,8 @@
 				<value type="int">1</value>
 			</uniform>
 			<uniform>
-				<name>NoiseTex</name>
-				<type>sampler-3d</type>
+				<name>BackgroundTex</name>
+				<type>sampler-2d</type>
 				<value type="int">2</value>
 			</uniform>
 			<uniform>
@@ -1194,6 +1239,13 @@
 				<type>float-vec3</type>
 				<value>
 					<use>night-color</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>blend_bias</name>
+				<type>float</type>
+				<value>
+					<use>blend_bias</use>
 				</value>
 			</uniform>
 			<uniform>

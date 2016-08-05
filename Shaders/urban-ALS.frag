@@ -28,6 +28,8 @@ varying float mie_angle;
 uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform sampler2D QDMTex;
+uniform sampler2D BackgroundTex;
+uniform sampler2D OverlayTex;
 uniform float depth_factor;
 uniform float tile_size;
 uniform float quality_level;
@@ -45,6 +47,7 @@ uniform float wetness;
 uniform float fogstructure;
 uniform float cloud_self_shading;
 uniform float air_pollution;
+uniform float blend_bias;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
@@ -59,6 +62,7 @@ uniform int use_landing_light;
 uniform int use_alt_landing_light;
 uniform int gquality_level;
 uniform int tquality_level;
+uniform int urban_blend;
 
 const float scale = 1.0;
 int linear_search_steps = 10;
@@ -272,8 +276,15 @@ void main (void)
 
 
 
-    vec4 finalColor = texture2D(BaseTex, uv);
+    vec4 baseTexel = texture2D(BaseTex, uv);
 
+    vec4 finalColor =  baseTexel;
+
+    if (urban_blend == 1)
+	{
+	vec4 backgroundTexel = texture2D(BackgroundTex, uv);
+	finalColor.rgb = mix(backgroundTexel.rgb, baseTexel.rgb, clamp(baseTexel.a - blend_bias, 0.0, 1.0));
+	}
 
 // texel postprocessing by shader effects
 

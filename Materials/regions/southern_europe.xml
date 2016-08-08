@@ -349,12 +349,16 @@
       <texture>Terrain/18th_century_city_overlay.png</texture>
       <!--<texture n="11">Terrain/dry_pasture4.png</texture>-->
       <texture n="2">Terrain/18th_century_city-relief-light.png</texture>
-      <texture n="11">Terrain/grass_dry3.png</texture>
+      <!--<texture n="11">Terrain/grass_dry3.png</texture>-->
+      <texture n="11">Terrain/town-europe-south.png</texture>
     </texture-set>
     <parameters>
 	<urban_blend>1</urban_blend>
+	<urban_domains>1</urban_domains>
 	<blend_bias>0.2</blend_bias>
       	<hires_overlay_bias>-1.0</hires_overlay_bias>
+	<urban_domain_fraction>0.6</urban_domain_fraction>
+	<urban_domain_size>1000.0</urban_domain_size>
     </parameters>
     <object-mask>Terrain/18th_century_city.mask.png</object-mask>
     <xsize>1000</xsize>

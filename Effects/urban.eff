@@ -37,7 +37,7 @@
 		<blend_bias type="float">0.4</blend_bias>
 		<urban_domains type="int">0</urban_domains>
 		<urban_domain_size type="float">1000.0</urban_domain_size>
-		<urban_domain_fraction type="float">0.0</urban_domain_fraction>
+		<urban_domain_fraction type="float">1.0</urban_domain_fraction>
 		<!-- 	END fog include -->
 	</parameters>
 	<generate>

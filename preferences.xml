@@ -6,7 +6,7 @@ Global defaults for FlightGear property values.
 Started September 2000 by David Megginson, david@megginson.com
 ************************************************************************
 -->
-<PropertyList>
+<PropertyList include="location-presets.xml">
   <local-weather include="Environment/local-weather-defaults.xml"/>
   <!-- General simulation preferences -->
   <sim>
@@ -30,8 +30,6 @@ Started September 2000 by David Megginson, david@megginson.com
     <aircraft>c172p</aircraft>
     <virtual-cockpit type="bool">false</virtual-cockpit>
     <presets preserve="y">
-      <airport-id>SBRJ</airport-id>
-      <runway>20R</runway>
       <trim type="bool">true</trim>
     </presets>
     <startup>
@@ -1040,37 +1038,16 @@ Started September 2000 by David Megginson, david@megginson.com
   <instrumentation>
     <!-- Radio settings -->
     <comm n="0">
-      <frequencies>
-        <!-- TWR -->
-        <selected-mhz type="double">118.700</selected-mhz>
-        <!-- APP -->
-        <standby-mhz type="double">119.350</standby-mhz>
-      </frequencies>
       <volume type="double">0.6</volume>
       <serviceable type="bool">true</serviceable>
       <ptt type="int">0</ptt>
     </comm>
     <comm n="1">
-      <frequencies>
-        <!-- ATIS -->
-        <selected-mhz type="double">132.650</selected-mhz>
-        <!-- GND -->
-        <standby-mhz type="double">121.700</standby-mhz>
-      </frequencies>
       <volume type="double">0.6</volume>
       <serviceable type="bool">true</serviceable>
       <ptt type="int">0</ptt>
     </comm>
     <nav n="0">
-      <frequencies>
-        <!-- IRJ LOC (20R) -->
-        <selected-mhz type="double">111.10</selected-mhz>
-        <!-- MARICA (MRC) VOR/DME -->
-        <standby-mhz type="double">114.00</standby-mhz>
-      </frequencies>
-      <radials>
-        <selected-deg type="double">196.0</selected-deg>
-      </radials>
       <serviceable type="bool">true</serviceable>
       <cdi>
         <serviceable type="bool">true</serviceable>
@@ -1084,15 +1061,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <slaved-to-gps type="bool">false</slaved-to-gps>
     </nav>
     <nav n="1">
-      <frequencies>
-        <!-- CAXIAS (CAX) VOR -->
-        <selected-mhz type="double">113.00</selected-mhz>
-        <!-- PIRAI (PAI) VOR -->
-        <standby-mhz type="double">115.00</standby-mhz>
-      </frequencies>
-      <radials>
-        <selected-deg type="double">120.0</selected-deg>
-      </radials>
       <serviceable type="bool">true</serviceable>
       <cdi>
         <serviceable type="bool">true</serviceable>
@@ -1151,11 +1119,6 @@ Started September 2000 by David Megginson, david@megginson.com
     </magnetic-compass>
     <dme n="0">
       <serviceable type="bool" archive="y">true</serviceable>
-      <switch-position type="int" archive="y">2</switch-position>
-      <frequencies>
-        <selected-mhz type="double">111.1</selected-mhz>
-        <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
-      </frequencies>
     </dme>
     <gps>
       <serviceable type="bool" archive="y">true</serviceable>
@@ -1181,12 +1144,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <offset-sec type="long" archive="y">0</offset-sec>
     </clock>
     <adf n="0">
-      <frequencies>
-        <!-- PAIOL (PP) -->
-        <selected-khz type="int">415</selected-khz>
-        <!-- CAXIAS NDB (CAX) -->
-        <standby-khz type="int">400</standby-khz>
-      </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>
       <error-deg type="double">2</error-deg>
@@ -1195,10 +1152,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <volume-norm type="double">0.5</volume-norm>
     </adf>
     <adf n="1">
-      <frequencies>
-        <selected-khz type="int">379</selected-khz>
-        <standby-khz type="int">341</standby-khz>
-      </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>
       <error-deg type="double">2</error-deg>

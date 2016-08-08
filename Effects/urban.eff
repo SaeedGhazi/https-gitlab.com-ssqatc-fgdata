@@ -35,6 +35,9 @@
 		</fogtype>
 		<urban_blend type="int">0</urban_blend>
 		<blend_bias type="float">0.4</blend_bias>
+		<urban_domains type="int">0</urban_domains>
+		<urban_domain_size type="float">1000.0</urban_domain_size>
+		<urban_domain_fraction type="float">0.0</urban_domain_fraction>
 		<!-- 	END fog include -->
 	</parameters>
 	<generate>
@@ -190,6 +193,27 @@
 					<use>texture[11]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<texture-unit>
+				<unit>4</unit>
+				<image>
+					<use>texture[13]/image</use>
+				</image>
+				<type>
+				  <use>texture[13]/type</use>
+				</type>
+				<filter>
+					<use>texture[13]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[13]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[13]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[13]/internal-format</use>
+				</internal-format>
+			</texture-unit>
 			<program>
 				<vertex-shader>Shaders/urban-ALS.vert</vertex-shader>
 				<fragment-shader>Shaders/urban-ALS.frag</fragment-shader>
@@ -228,6 +252,11 @@
 				<value type="int">3</value>
 			</uniform>
 			<uniform>
+				<name>GradientTex</name>
+				<type>sampler-2d</type>
+				<value type="int">4</value>
+			</uniform>
+			<uniform>
 				<name>depth_factor</name>
 				<type>float</type>
 				<value>
@@ -239,6 +268,20 @@
 				<type>float</type>
 				<value>
 					<use>xsize</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>urban_domain_size</name>
+				<type>float</type>
+				<value>
+					<use>urban_domain_size</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>urban_domain_fraction</name>
+				<type>float</type>
+				<value>
+					<use>urban_domain_fraction</use>
 				</value>
 			</uniform>
 			<uniform>
@@ -276,6 +319,11 @@
         			<name>urban_blend</name>
         			<type>int</type>
         			<value><use>urban_blend</use></value>
+      			</uniform>
+			<uniform>
+        			<name>urban_domains</name>
+        			<type>int</type>
+        			<value><use>urban_domains</use></value>
       			</uniform>
 			<uniform>
 				<name>snowlevel</name>
@@ -806,6 +854,27 @@
 					<use>texture[11]/internal-format</use>
 				</internal-format>
 			</texture-unit>
+			<texture-unit>
+				<unit>3</unit>
+				<image>
+					<use>texture[13]/image</use>
+				</image>
+				<type>
+				  <use>texture[13]/type</use>
+				</type>
+				<filter>
+					<use>texture[13]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[13]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[13]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[13]/internal-format</use>
+				</internal-format>
+			</texture-unit>
 
 			<program>
 				<vertex-shader>Shaders/urban-ALS.vert</vertex-shader>
@@ -940,6 +1009,20 @@
                       		<type>float</type>
                      		<value><use>landing_light3_offset</use></value>
                   	   </uniform>
+			   <uniform>
+				<name>urban_domain_size</name>
+				<type>float</type>
+				<value>
+					<use>urban_domain_size</use>
+				</value>
+			   </uniform>
+			<uniform>
+				<name>urban_domain_fraction</name>
+				<type>float</type>
+				<value>
+					<use>urban_domain_fraction</use>
+				</value>
+			</uniform>
 			<!-- filtering -->
       			   <uniform>
         			<name>gamma</name>
@@ -1201,7 +1284,17 @@
        				  <name>display_ysize</name>
        				  <type>int</type>
         			  <value><use>display_ysize</use></value>
-     			  </uniform>  
+     			  </uniform> 
+			<uniform>
+        			<name>urban_blend</name>
+        			<type>int</type>
+        			<value><use>urban_blend</use></value>
+      			</uniform> 
+			<uniform>
+        			<name>urban_domains</name>
+        			<type>int</type>
+        			<value><use>urban_domains</use></value>
+      			</uniform>
  
 
 			<!-- 			END fog include -->
@@ -1219,6 +1312,11 @@
 				<name>BackgroundTex</name>
 				<type>sampler-2d</type>
 				<value type="int">2</value>
+			</uniform>
+			<uniform>
+				<name>GradientTex</name>
+				<type>sampler-2d</type>
+				<value type="int">3</value>
 			</uniform>
 			<uniform>
 				<name>depth_factor</name>

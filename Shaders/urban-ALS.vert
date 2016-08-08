@@ -32,7 +32,7 @@ varying vec3 light_diffuse;
 
 varying float yprime_alt;
 varying float mie_angle;
-
+varying float steepness;
 
 uniform int colorMode;
 uniform float hazeLayerAltitude;
@@ -52,7 +52,7 @@ uniform mat4 osg_ViewMatrixInverse;
 attribute vec3 tangent;//, binormal;
 
 float earthShade;
-float steepness;
+
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -104,7 +104,6 @@ void main()
 
 // this code is copied from default.vert
 
-    //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     //normal = gl_NormalMatrix * gl_Normal;

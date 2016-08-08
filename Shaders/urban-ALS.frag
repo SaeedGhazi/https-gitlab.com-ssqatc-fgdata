@@ -20,16 +20,18 @@ varying vec3  VNormal;
 varying vec3  VTangent;
 varying vec4  constantColor;
 varying vec3  light_diffuse;
-varying vec3 relPos;
+varying vec3  relPos;
 
 varying float yprime_alt;
 varying float mie_angle;
+varying float steepness;
 
 uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform sampler2D QDMTex;
 uniform sampler2D BackgroundTex;
 uniform sampler2D OverlayTex;
+uniform sampler2D GradientTex;
 uniform float depth_factor;
 uniform float tile_size;
 uniform float quality_level;
@@ -48,6 +50,8 @@ uniform float fogstructure;
 uniform float cloud_self_shading;
 uniform float air_pollution;
 uniform float blend_bias;
+uniform float urban_domain_size;
+uniform float urban_domain_fraction;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
@@ -63,6 +67,7 @@ uniform int use_alt_landing_light;
 uniform int gquality_level;
 uniform int tquality_level;
 uniform int urban_blend;
+uniform int urban_domains;
 
 const float scale = 1.0;
 int linear_search_steps = 10;
@@ -78,11 +83,14 @@ float eShade;
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float Noise2D(in vec2 coord, in float wavelength);
 float Noise3D(in vec3 coord, in float wavelength);
+float VoronoiNoise2D(in vec2 coord, in float wavelength, in float xrand, in float yrand);	
 float fog_func (in float targ, in float alt);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
 float alt_factor(in float eye_alt, in float vertex_alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
+
+
 
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
@@ -221,11 +229,12 @@ void main (void)
     if ( random_buildings )
         depthfactor = 0.0;
 
+    float steepness_factor = 1.0 -smoothstep(0.85, 0.9, steepness);
+
     vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     float effective_scattering = min(scattering, cloud_self_shading);
     vec3 normal = normalize(VNormal);
     vec3 tangent = normalize(VTangent);
-    //vec3 binormal = normalize(VBinormal);
     vec3 binormal = normalize(cross(normal, tangent));
     vec3 ecPos3 = ecPosition.xyz / ecPosition.w;
     vec3 V = normalize(ecPos3);
@@ -234,8 +243,23 @@ void main (void)
     vec2 dp = gl_TexCoord[0].st - ds;
     float d = ray_intersect(dp, ds);
 
-    vec2 uv = dp + ds * d;
+    vec2 uv = dp + ds * d * (1.0-steepness_factor);
+
+    vec2 samplePos = (relPos + (gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0)).xyz).xy;
+
+    float vnoise = 0;
+
+    if (urban_domains == 1)
+	{
+    	vnoise =  VoronoiNoise2D(samplePos, urban_domain_size, 1.5, 1.5);
+    	float dir = 2.0 * 3.1415 * vnoise;
+
+    	mat2 rotMat = mat2 (cos(dir), sin(dir), -sin(dir), cos(dir));
+    	uv = rotMat * uv;
+	}
+
     vec3 N = texture2D(NormalTex, uv).xyz * 2.0 - 1.0;
+
 
 
     float emis = N.z;
@@ -243,12 +267,18 @@ void main (void)
     float Nz = N.z;
     N = normalize(N.x * tangent + N.y * binormal + N.z * normal);
 
+    N = mix(N, normal, steepness_factor);
+    if ((vnoise > urban_domain_fraction) && (urban_blend == 1)) {N = mix(N,normal, 0.8);}
+
+
     vec3 l = gl_LightSource[0].position.xyz;
     vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
     
     float dist = length(relPos);
     if (cloud_shadow_flag == 1) 
 	{diffuse = diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);}
+
+
 
 
     float shadow_factor = 1.0;
@@ -262,7 +292,17 @@ void main (void)
         float dl = ray_intersect(dp, ds);
         if ( dl < d - 0.05 )
             shadow_factor = dot( constantColor.xyz, vec3( 1.0, 1.0, 1.0 ) ) * 0.25;
+
+    shadow_factor = mix(shadow_factor, 1.0, steepness_factor);
+
+    if (vnoise > urban_domain_fraction) {shadow_factor = 0.5 * (1.0  +shadow_factor);}
+
     }
+
+
+
+    
+
     // end shadow
 
     vec4 ambient_light = constantColor + vec4 (light_diffuse,1.0) * vec4(diffuse, 1.0);
@@ -280,10 +320,24 @@ void main (void)
 
     vec4 finalColor =  baseTexel;
 
+    // blending effect
+
     if (urban_blend == 1)
 	{
 	vec4 backgroundTexel = texture2D(BackgroundTex, uv);
-	finalColor.rgb = mix(backgroundTexel.rgb, baseTexel.rgb, clamp(baseTexel.a - blend_bias, 0.0, 1.0));
+	float vbias = 0.0;
+	if (vnoise > urban_domain_fraction) {vbias = 0.5 + 0.5 * vnoise;}
+
+	finalColor.rgb = mix(backgroundTexel.rgb, baseTexel.rgb, clamp(baseTexel.a - blend_bias - vbias, 0.0, 1.0));
+	}
+   
+   // steepness
+
+    vec4 gradientTexel = texture2D(GradientTex, uv);	
+
+    if (gradientTexel.a > 0.0)
+	{
+	finalColor.rgb = mix(finalColor.rgb, gradientTexel.rgb, steepness_factor);
 	}
 
 // texel postprocessing by shader effects
@@ -537,7 +591,11 @@ finalColor.rgb = mix( hazeColor +secondary_light * fog_backscatter(mvisibility),
 
 finalColor.rgb = filter_combined(finalColor.rgb);
 
+
 gl_FragColor = finalColor;
+
+
+
 
     if (dot(normal,-V) > 0.1) {
         vec4 iproj = gl_ProjectionMatrix * p;

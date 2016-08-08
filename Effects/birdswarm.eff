@@ -5,7 +5,7 @@
 
 <parameters>
     <texture n="0">
-      <image>Models/Effects/birds_in_flight.png</image>
+      <image>Models/Effects/Birds/birds_in_flight.png</image>
 	  <type>2d</type>
           <filter>linear-mipmap-linear</filter>
           <wrap-s>repeat</wrap-s>

@@ -373,12 +373,17 @@ void main (void)
 	{
     	texel.rgb = texel.rgb * (1.0 - 0.6 * wetness);
     	float rain_factor = 0.0;
-    	if (rain_norm > 0.0)
+
+	float rain_orientation = max(dot(VNormal, up),0.0);
+
+    	if ((rain_norm > 0.0) && (rain_orientation > 0.0))
 		{
     		rain_factor += DotNoise2D(rawpos.xy, 0.2 ,0.5, rain_norm) * abs(sin(6.0*osg_SimulationTime));
     		rain_factor += DotNoise2D(rawpos.xy, 0.3 ,0.4, rain_norm) * abs(sin(6.0*osg_SimulationTime + 2.094));
     		rain_factor += DotNoise2D(rawpos.xy, 0.4 ,0.3, rain_norm)* abs(sin(6.0*osg_SimulationTime + 4.188));
 		}
+
+	
 
     	// secondary reflection of sky irradiance in water film
     	float fresnelW =  ((0.8 * wetness) ) *  (1.0-smoothstep(0.0,0.4, dot(N,-normalize(vertVec)) * 1.0 - 0.2 * rain_factor * wetness));

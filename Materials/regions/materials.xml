@@ -38,6 +38,7 @@
 <region include="Materials/regions/brazil_caatinga.xml"/>
 <region include="Materials/regions/brazil_chapada_diamantina.xml"/>
 <region include="Materials/regions/caribbean.xml"/>
+<region include="Materials/regions/rio_de_janeiro.xml"/>
 
 <!-- Asia -->
 <region include="Materials/regions/asia.xml"/>

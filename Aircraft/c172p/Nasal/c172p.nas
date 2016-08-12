@@ -11,7 +11,7 @@ var autostart = func (msg=1) {
 
     setprop("/controls/switches/magnetos", 3);
     setprop("/controls/engines/current-engine/throttle", 0.2);
-    setprop("/controls/engines/current-engine/mixture", 1.0);
+    setprop("/controls/engines/current-engine/mixture", 0.95);
     setprop("/controls/flight/elevator-trim", 0.0);
     setprop("/controls/switches/master-bat", 1);
     setprop("/controls/switches/master-alt", 1);
@@ -72,12 +72,16 @@ var autostart = func (msg=1) {
 
     # All set, starting engine
     setprop("/controls/switches/starter", 1);
-    var engineRunning = setlistener("/engines/active-engine/running", func {
-        if (getprop("/engines/active-engine/running")) {
-            setprop("/controls/switches/starter", 0);
-            removelistener(engineRunning);
+    setprop("/engines/active-engine/auto-start", 1);
+
+    var engine_running_check_delay = 5.0;
+    settimer(func {
+        if (!getprop("/engines/active-engine/running")) {
+            gui.popupTip("The autostart failed to start the engine. You must lean the mixture and start the engine manually.", 5);
         }
-    });
+        setprop("/controls/switches/starter", 0);
+        setprop("/engines/active-engine/auto-start", 0);
+    }, engine_running_check_delay);
 
 };
 
@@ -317,13 +321,6 @@ var thunder = func (name) {
 var reset_system = func {
     if (getprop("/fdm/jsbsim/running")) {
         c172p.autostart(0);
-        setprop("/controls/switches/starter", 1);
-        var engineRunning = setlistener("/engines/active-engine/running", func {
-            if (getprop("/engines/active-engine/running")) {
-                setprop("/controls/switches/starter", 0);
-                removelistener(engineRunning);
-            }
-        });
     }
 
     # These properties are aliased to MP properties in /sim/multiplay/generic/.
@@ -349,6 +346,65 @@ setlistener("/engines/active-engine/killed", func (node) {
         click("coughing-engine-sound", 0.7, 0);
     };
 });
+
+############################################
+# Static objects: right safety cone
+############################################
+
+var StaticModel = {
+    new: func (name, file) {
+        var m = {
+            parents: [StaticModel],
+            index: nil,
+            model_file: file
+        };
+
+        setlistener("/sim/" ~ name ~ "/enable", func (node) {
+            if (node.getBoolValue()) {
+                m.add();
+            }
+            else {
+                m.remove();
+            }
+        });
+
+        return m;
+    },
+
+    add: func {
+        var manager = props.globals.getNode("/models", 1);
+        var i = 0;
+        for (; 1; i += 1) {
+            if (manager.getChild("model", i, 0) == nil) {
+                break;
+            }
+        }
+        var position = geo.aircraft_position().set_alt(getprop("/position/ground-elev-m"));
+        geo.put_model(me.model_file, position, getprop("/orientation/heading-deg"));
+        me.index = i;
+    },
+
+    remove: func {
+        if (me.index != nil) {
+            props.globals.getNode("/models", 1).removeChild("model", me.index);
+        }
+    }
+};
+
+StaticModel.new("coneR", "Aircraft/c172p/Models/Exterior/safety-cone/safety-cone_R.xml");
+StaticModel.new("coneL", "Aircraft/c172p/Models/Exterior/safety-cone/safety-cone_L.xml");
+StaticModel.new("gpu", "Aircraft/c172p/Models/Exterior/external-power/external-power.xml");
+StaticModel.new("ladder", "Aircraft/c172p/Models/Exterior/ladder/ladder.xml");
+StaticModel.new("fueltanktrailer", "Aircraft/c172p/Models/Exterior/fueltanktrailer/fueltanktrailer.ac");
+
+# external electrical disconnect when groundspeed higher than 0.1ktn (replace later with distance less than 0.01...)
+var ad_timer = maketimer(0.1, func {
+    groundspeed = getprop("/velocities/groundspeed-kt") or 0;
+    if (groundspeed > 0.1) {
+        setprop("/controls/electric/external-power", "false");
+    }
+});
+ad_timer.start();
 
 ############################################
 # Global loop function
@@ -448,6 +504,11 @@ var log_fog_frost = func {
 };
 var fog_frost_timer = maketimer(30.0, log_fog_frost);
 
+var dialog_battery_reload = func {
+    electrical.reset_battery_and_circuit_breakers();
+    gui.popupTip("The battery is now fully charged!");
+}
+
 setlistener("/sim/signals/fdm-initialized", func {
     # Use Nasal to make some properties persistent. <aircraft-data> does
     # not work reliably.
@@ -485,6 +546,15 @@ setlistener("/sim/signals/fdm-initialized", func {
             fog_frost_timer.stop();
         }
     }, 1, 0);
+
+    setlistener("/engines/active-engine/running", func (node) {
+        var autostart = getprop("/engines/active-engine/auto-start");
+        var cranking  = getprop("/engines/active-engine/cranking");
+        if (autostart and cranking and node.getBoolValue()) {
+            setprop("/controls/switches/starter", 0);
+            setprop("/engines/active-engine/auto-start", 0);
+        }
+    }, 0, 0);
 
     # Checking if fuel tanks should be refilled (in case save state is off)
     fuel_save_state();

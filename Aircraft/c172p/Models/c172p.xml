@@ -468,7 +468,7 @@
         <object-name>strobe2Collapse</object-name>
     </effect>
 
-	<effect>
+    <effect>
         <inherits-from>Effects/exterior/exterior-glass-reflection</inherits-from>
         <object-name>glas</object-name>
         <object-name>leftwindow</object-name>
@@ -1131,6 +1131,18 @@
         </offsets>
     </model>
     <!-- MODEND: Tyre Spray -->
+
+    <!-- MOD: Prop Spray -->
+    <model>
+        <path>Effects/propspray/rain-nose-propeller.xml</path>
+        <name>rain-nose-propeller</name>
+        <offsets>
+            <x-m> -6.0 </x-m>
+            <y-m> 0.0 </y-m>
+            <z-m> 0.0 </z-m>
+        </offsets>
+    </model>
+    <!-- MODEND: Prop Spray -->
 
     <!-- MOD: Floats Spray-->
     <model>
@@ -1944,10 +1956,8 @@
         <object-name>CarbHeatBack</object-name>
         <object-name>CarbHeatRod</object-name>
     </animation>
-    <!-- <animation>
+    <animation>
         <name>ControlsGroup</name>
-        <object-name>PanelInstruments</object-name>
-        <object-name>ElectronicsGroup</object-name>
         <object-name>LeftYoke</object-name>
         <object-name>RightYoke</object-name>
         <object-name>CarbHeatGroup</object-name>
@@ -1955,13 +1965,10 @@
         <object-name>Mixture</object-name>
         <object-name>FlapSwitchGroup</object-name>
         <object-name>TrimWheel</object-name>
-    </animation> -->
-    <!-- <animation>
-        <type>range</type>
-        <object-name>ControlsGroup</object-name>
-        <min-m>0</min-m>
-        <max-m>10.0</max-m>
-    </animation> -->
+        <object-name>PilotPedals</object-name>
+        <object-name>CoPilotPedals</object-name>
+        <object-name>MagCompass</object-name>
+    </animation>
 
     <!-- MOD: animation for the checklists -->
     <animation>
@@ -2003,7 +2010,8 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>primer</tooltip-id>
-                <label>Engine primer</label>
+                <label>Engine primer (%1d)</label>
+                <property>controls/engines/engine/primer</property>
             </binding>
         </hovered>
     </animation>
@@ -3357,19 +3365,47 @@
 
     <!-- Interior -->
     <animation>
-        <name>InteriorGroup</name>
-        <object-name>Cabin</object-name>
-        <object-name>Panel</object-name>
-        <object-name>PilotSeat</object-name>
-        <object-name>CopilotSeat</object-name>
-        <object-name>BackSeat</object-name>
-        <object-name>MagCompass</object-name>
+        <name>InstrumentsGroup</name>
+        <!-- Note: excluding AI and Turn because they are clearly visible even from a distance -->
+        <object-name>Gear</object-name>
+        <object-name>Altimeter</object-name>
+        <object-name>BatteryGauge</object-name>
+        <object-name>Kap140</object-name>
+        <object-name>dme</object-name>
+        <object-name>asi</object-name>
+        <object-name>VSI</object-name>
+        <object-name>RPM</object-name>
+        <object-name>EGT</object-name>
+        <object-name>hi</object-name>
+        <object-name>avor</object-name>
+        <object-name>vor2</object-name>
+        <object-name>adf</object-name>
+        <object-name>clock</object-name>
+        <object-name>vac</object-name>
+        <object-name>fuel</object-name>
+        <object-name>oil</object-name>
+        <object-name>BreakersAndAvionicsSwitch</object-name>
+    </animation>
+    <animation>
+        <name>RadioGroup</name>
+        <object-name>kx165-1</object-name>
+        <object-name>kx165-2</object-name>
+        <object-name>kma20</object-name>
+        <object-name>kr87</object-name>
+        <object-name>transponder</object-name>
     </animation>
     <animation>
         <type>range</type>
-        <object-name>InteriorGroup</object-name>
+        <object-name>InstrumentsGroup</object-name>
+        <object-name>ControlsGroup</object-name>
         <min-m>0</min-m>
-        <max-m>50</max-m>
+        <max-m>35</max-m>
+    </animation>
+    <animation>
+        <type>range</type>
+        <object-name>RadioGroup</object-name>
+        <min-m>0</min-m>
+        <max-m>60</max-m>
     </animation>
 
     <!-- Airframe -->
@@ -6143,7 +6179,7 @@
         <condition>
             <and>
                 <property alias="/params/lighting/strobes"/>
-				<equals>
+                <equals>
                     <property alias="/params/wing_left_damaged/property"/>
                     <value>2</value>
                 </equals>
@@ -6182,11 +6218,6 @@
     </animation>
     <!-- End Damage Mod -->
 
-    <animation>
-        <type>range</type>
-        <min-m>0</min-m>
-        <max-m>25000</max-m>
-    </animation>
     <Plane.014Xparams>
         <light-near>0.8</light-near>
         <light-med>3.2</light-med>
@@ -6313,11 +6344,6 @@
         <condition>
             <property alias="/params/lighting/beacon"/>
         </condition>
-    </animation>
-    <animation>
-        <type>range</type>
-        <min-m>0</min-m>
-        <max-m>25000</max-m>
     </animation>
     <BeaconOffXparams>
         <light-near>0.4</light-near>
@@ -7182,6 +7208,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/pitot-cover"/>
@@ -7192,6 +7221,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>remove-pitot-tube-cap</tooltip-id>
@@ -7208,6 +7240,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/pitot-cover"/>
@@ -7223,6 +7258,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>put-pitot-tube-cap</tooltip-id>
@@ -7328,6 +7366,11 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
+                <condition>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </condition>
                 <command>property-assign</command>
                 <property>/sim/model/c172p/securing/chock</property>
                 <value>false</value>
@@ -7337,6 +7380,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/chock</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>remove-wheel-chock</tooltip-id>
@@ -7354,6 +7400,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/chock-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>property-assign</command>
                 <property>sim/model/c172p/securing/chock</property>
@@ -7364,6 +7413,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/chock-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-wheel-chock</tooltip-id>
@@ -7398,6 +7450,11 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
+                <condition>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/left/visible"/>
                 <value>false</value>
@@ -7407,6 +7464,9 @@
             <binding>
                 <condition>
                     <property alias="/params/securing/tiedowns/left/visible"/>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>remove-left-tiedowns</tooltip-id>
@@ -7419,6 +7479,9 @@
         <object-name>TiedownHotSpotLeft</object-name>
         <condition>
             <property>/sim/model/c172p/securing/tiedownL-addable</property>
+            <not>
+                <property>/sim/current-view/internal</property>
+            </not>
         </condition>
     </animation>
     <animation>
@@ -7430,6 +7493,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/tiedownL-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/left/visible"/>
@@ -7440,6 +7506,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/tiedownL-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-left-tiedowns</tooltip-id>
@@ -7474,6 +7543,11 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
+                <condition>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/right/visible"/>
                 <value>false</value>
@@ -7483,6 +7557,9 @@
             <binding>
                 <condition>
                     <property alias="/params/securing/tiedowns/right/visible"/>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>remove-right-tiedowns</tooltip-id>
@@ -7495,6 +7572,9 @@
         <object-name>TiedownHotSpotRight</object-name>
         <condition>
             <property>/sim/model/c172p/securing/tiedownR-addable</property>
+            <not>
+                <property>/sim/current-view/internal</property>
+            </not>
         </condition>
     </animation>
     <animation>
@@ -7506,6 +7586,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/tiedownR-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/right/visible"/>
@@ -7516,6 +7599,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/tiedownR-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-right-tiedowns</tooltip-id>
@@ -7550,6 +7636,11 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
+                <condition>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/tail/visible"/>
                 <value>false</value>
@@ -7559,6 +7650,9 @@
             <binding>
                 <condition>
                     <property alias="/params/securing/tiedowns/tail/visible"/>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>remove-tail-tiedowns</tooltip-id>
@@ -7571,6 +7665,9 @@
         <object-name>TiedownHotSpotTail</object-name>
         <condition>
             <property>/sim/model/c172p/securing/tiedownT-addable</property>
+            <not>
+                <property>/sim/current-view/internal</property>
+            </not>
         </condition>
     </animation>
     <animation>
@@ -7582,6 +7679,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/tiedownT-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/tail/visible"/>
@@ -7592,6 +7692,9 @@
             <binding>
                 <condition>
                     <property>/sim/model/c172p/securing/tiedownT-addable</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-tail-tiedowns</tooltip-id>
@@ -7860,6 +7963,18 @@
     
     <!-- Left Tank Drain Sump -->
     <animation>
+        <type>select</type>
+        <object-name>SumpHotSpotLeft</object-name>
+            <condition>
+                <and>
+                    <property>/consumables/fuel/contamination_allowed</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </and>
+            </condition>
+    </animation>
+    <animation>
         <type>pick</type>
         <object-name>SumpHotSpotLeft</object-name>
         <visible>true</visible>
@@ -7887,6 +8002,18 @@
     </animation>
     
     <!-- Right Tank Drain Sump -->
+    <animation>
+        <type>select</type>
+        <object-name>SumpHotSpotRight</object-name>
+            <condition>
+                <and>
+                    <property>/consumables/fuel/contamination_allowed</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </and>
+            </condition>
+    </animation>
     <animation>
         <type>pick</type>
         <object-name>SumpHotSpotRight</object-name>
@@ -7916,6 +8043,18 @@
     
     <!-- oil level check -->
     <animation>
+        <type>select</type>
+        <object-name>OilDoorHotSpot</object-name>
+            <condition>
+                <and>
+                    <property>/engines/active-engine/oil_consumption_allowed</property>
+                    <not>
+                        <property>/sim/current-view/internal</property>
+                    </not>
+                </and>
+            </condition>
+    </animation>
+    <animation>
         <type>pick</type>
         <object-name>OilDoorHotSpot</object-name>
         <action>
@@ -7938,6 +8077,9 @@
                             <property>/controls/engines/active-engine</property>
                             <value>0</value>
                         </equals>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
                     </and>
                 </condition>
                 <command>dialog-show</command>

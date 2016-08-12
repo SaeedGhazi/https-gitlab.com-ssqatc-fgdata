@@ -91,6 +91,16 @@
             
             <checkbox>
                 <halign>left</halign>
+                <label>Save battery charge between sessions</label>
+                <property>/systems/electrical/save-battery-charge</property>
+                <live>true</live>
+                <binding>
+                    <command>dialog-apply</command>
+                </binding>
+            </checkbox>
+            
+            <checkbox>
+                <halign>left</halign>
                 <label>Save positions of all switches between sessions</label>
                 <property>/instrumentation/save-switches-state</property>
                 <live>true</live>
@@ -142,19 +152,65 @@
 
             <button>
                 <halign>right</halign>
-                <legend>Repair</legend>
+                <legend>Repair</legend>                
                 <pref-width>60</pref-width>
                 <pref-height>28</pref-height>
-                <visible>
-                    <not>
-                        <property>/sim/freeze/replay-state</property>
-                    </not>
-                </visible>
+                <enable>
+                    <and>
+                        <not>
+                            <property>/sim/freeze/replay-state</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                    </and>
+                </enable>
                 <binding>
                     <command>nasal</command>
                     <script>c172p.repair_damage();electrical.reset_battery_and_circuit_breakers();c172p.click("engine-repair", 6.0)</script>
                 </binding>
             </button>
+        </group>
+
+        <hrule/>
+
+        <group>
+            <layout>hbox</layout>
+
+            <text>
+                <halign>left</halign>
+                <label>Battery charge: xxxx %%</label>
+                <format>Battery charge: %3.1f %%</format>
+                <live>true</live>
+                <property>/systems/electrical/battery-charge-percent-100</property>
+            </text>
+
+            <button>
+                <halign>right</halign>
+                <legend>Recharge battery</legend>
+                <enable>
+                    <and>
+                        <not>
+                            <property>/sim/freeze/replay-state</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                    </and>
+                </enable>
+                <binding>
+                    <command>nasal</command>
+                    <script>c172p.dialog_battery_reload();</script>
+                </binding>
+            </button>               
         </group>
 
         <hrule/>
@@ -374,18 +430,23 @@
                         <command>nasal</command>
                         <script>
                             setprop("/controls/engines/active-engine", 0);
+                            setprop("controls/engines/engine/primer", 0);
                             setprop("sim/model/c172p/engine_flag_0", 1);
                             setprop("sim/model/c172p/engine_flag_1", 0);
                         </script>
                     </binding>
                     <binding>
-                        <command>property-assign</command>
-                        <property>/engines/active-engine/oil-level</property>
-                        <value>7.0</value>
+                        <command>dialog-show</command>
+                        <dialog-name>c172p-oil-dialog-180</dialog-name>
                     </binding>
                     <binding>
                         <command>dialog-close</command>
                         <dialog-name>c172p-oil-dialog-180</dialog-name>
+                    </binding>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/engines/active-engine/oil-level</property>
+                        <value>7.0</value>
                     </binding>
                 </radio>
 
@@ -406,18 +467,23 @@
                         <command>nasal</command>
                         <script>
                             setprop("/controls/engines/active-engine", 1);
+                            setprop("controls/engines/engine/primer", 0);
                             setprop("sim/model/c172p/engine_flag_0", 0);
                             setprop("sim/model/c172p/engine_flag_1", 1);
                         </script>
                     </binding>
                     <binding>
-                        <command>property-assign</command>
-                        <property>/engines/active-engine/oil-level</property>
-                        <value>8.0</value>
+                        <command>dialog-show</command>
+                        <dialog-name>c172p-oil-dialog-160</dialog-name>
                     </binding>
                     <binding>
                         <command>dialog-close</command>
                         <dialog-name>c172p-oil-dialog-160</dialog-name>
+                    </binding>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/engines/active-engine/oil-level</property>
+                        <value>8.0</value>
                     </binding>
                 </radio>
             </group>
@@ -465,9 +531,23 @@
 
                                 # Select 160 HP engine
                                 setprop("/controls/engines/active-engine", 0);
+                                setprop("controls/engines/engine/primer", 0);
                                 setprop("sim/model/c172p/engine_flag_0", 1);
                                 setprop("sim/model/c172p/engine_flag_1", 0);
                             </script>
+                        </binding>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>c172p-oil-dialog-180</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>dialog-close</command>
+                            <dialog-name>c172p-oil-dialog-180</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/engines/active-engine/oil-level</property>
+                            <value>7.0</value>
                         </binding>
                     </radio>
 
@@ -497,9 +577,23 @@
 
                                 # Select 160 HP engine
                                 setprop("/controls/engines/active-engine", 0);
+                                setprop("controls/engines/engine/primer", 0);
                                 setprop("sim/model/c172p/engine_flag_0", 1);
                                 setprop("sim/model/c172p/engine_flag_1", 0);
                             </script>
+                        </binding>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>c172p-oil-dialog-180</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>dialog-close</command>
+                            <dialog-name>c172p-oil-dialog-180</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/engines/active-engine/oil-level</property>
+                            <value>7.0</value>
                         </binding>
                     </radio>
 
@@ -529,9 +623,23 @@
 
                                 # Select 160 HP engine
                                 setprop("/controls/engines/active-engine", 0);
+                                setprop("controls/engines/engine/primer", 0);
                                 setprop("sim/model/c172p/engine_flag_0", 1);
                                 setprop("sim/model/c172p/engine_flag_1", 0);
                             </script>
+                        </binding>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>c172p-oil-dialog-180</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>dialog-close</command>
+                            <dialog-name>c172p-oil-dialog-180</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/engines/active-engine/oil-level</property>
+                            <value>7.0</value>
                         </binding>
                     </radio>
                 </group>
@@ -565,6 +673,7 @@
 
                                 # Select 180 HP engine
                                 setprop("/controls/engines/active-engine", 1);
+                                setprop("controls/engines/engine/primer", 0);
                                 setprop("sim/model/c172p/engine_flag_0", 0);
                                 setprop("sim/model/c172p/engine_flag_1", 1);
                             </script>
@@ -588,6 +697,19 @@
                             <command>property-assign</command>
                             <property>sim/model/c172p/securing/tiedownT-visible</property>
                             <value>false</value>
+                        </binding>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>c172p-oil-dialog-160</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>dialog-close</command>
+                            <dialog-name>c172p-oil-dialog-160</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/engines/active-engine/oil-level</property>
+                            <value>8.0</value>
                         </binding>
                     </radio>
 
@@ -617,6 +739,7 @@
 
                                 # Select 180 HP engine
                                 setprop("/controls/engines/active-engine", 1);
+                                setprop("controls/engines/engine/primer", 0);
                                 setprop("sim/model/c172p/engine_flag_0", 0);
                                 setprop("sim/model/c172p/engine_flag_1", 1);
                             </script>
@@ -625,6 +748,19 @@
                             <command>property-assign</command>
                             <property>sim/model/c172p/securing/chock</property>
                             <value>false</value>
+                        </binding>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>c172p-oil-dialog-160</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>dialog-close</command>
+                            <dialog-name>c172p-oil-dialog-160</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/engines/active-engine/oil-level</property>
+                            <value>8.0</value>
                         </binding>
                     </radio>
 
@@ -654,6 +790,7 @@
 
                                 # Select 180 HP engine
                                 setprop("/controls/engines/active-engine", 1);
+                                setprop("controls/engines/engine/primer", 0);
                                 setprop("sim/model/c172p/engine_flag_0", 0);
                                 setprop("sim/model/c172p/engine_flag_1", 1);
                             </script>
@@ -662,6 +799,19 @@
                             <command>property-assign</command>
                             <property>sim/model/c172p/securing/chock</property>
                             <value>false</value>
+                        </binding>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>c172p-oil-dialog-160</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>dialog-close</command>
+                            <dialog-name>c172p-oil-dialog-160</dialog-name>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/engines/active-engine/oil-level</property>
+                            <value>8.0</value>
                         </binding>
                     </radio>
                 </group>

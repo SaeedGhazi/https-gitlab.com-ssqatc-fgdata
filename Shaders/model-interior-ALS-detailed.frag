@@ -71,6 +71,7 @@ float alt_factor(in float eye_alt, in float vertex_alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
 
+vec3 addLights(in vec3 color1, in vec3 color2);
 vec3 flashlight(in vec3 color, in float radius);
 vec3 filter_combined (in vec3 color) ;
 
@@ -209,10 +210,15 @@ void main()
         lightmapFactor = lightmapFactor * lightmapTexel;
         if (lightmap_multi > 0 )
 		{
-	        lightmapcolor = lightmap_r_color * lightmapFactor.r +
-                lightmap_g_color * lightmapFactor.g +
-                lightmap_b_color * lightmapFactor.b +
-                lightmap_a_color * lightmapFactor.a ;
+	        //lightmapcolor = lightmap_r_color * lightmapFactor.r +
+                //lightmap_g_color * lightmapFactor.g +
+                // lightmap_b_color * lightmapFactor.b +
+                //lightmap_a_color * lightmapFactor.a ;
+
+		lightmapcolor = lightmap_r_color * lightmapFactor.r;
+		lightmapcolor = addLights(lightmapcolor, lightmap_g_color * lightmapFactor.g);
+		lightmapcolor = addLights(lightmapcolor, lightmap_b_color * lightmapFactor.b);
+		lightmapcolor = addLights(lightmapcolor, lightmap_a_color * lightmapFactor.a);
             	}
 	 else 
 		{

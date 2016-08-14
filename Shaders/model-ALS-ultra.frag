@@ -106,6 +106,7 @@ vec3 get_hazeColor(in float lightArg);
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
+vec3 addLights(in vec3 color1, in vec3 color2);
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -418,10 +419,17 @@ void main (void)
             lightmap_b_factor, lightmap_a_factor);
         lightmapFactor = lightmapFactor * lightmapTexel;
         if (lightmap_multi > 0 ){
-            lightmapcolor = lightmap_r_color * lightmapFactor.r +
-                lightmap_g_color * lightmapFactor.g +
-                lightmap_b_color * lightmapFactor.b +
-                lightmap_a_color * lightmapFactor.a ;
+            //lightmapcolor = lightmap_r_color * lightmapFactor.r +
+             //   lightmap_g_color * lightmapFactor.g +
+             //   lightmap_b_color * lightmapFactor.b +
+             //   lightmap_a_color * lightmapFactor.a ;
+
+		lightmapcolor = lightmap_r_color * lightmapFactor.r;
+		lightmapcolor = addLights(lightmapcolor, lightmap_g_color * lightmapFactor.g);
+		lightmapcolor = addLights(lightmapcolor, lightmap_b_color * lightmapFactor.b);
+		lightmapcolor = addLights(lightmapcolor, lightmap_a_color * lightmapFactor.a);
+
+
             } else {
                 lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;
             }

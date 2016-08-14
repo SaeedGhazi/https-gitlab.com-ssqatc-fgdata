@@ -115,7 +115,7 @@ vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float lightArg);
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
-
+vec3 addLights(in vec3 color1, in vec3 color2);
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -341,7 +341,11 @@ void main (void)
     vec3 geo_light = vec3 (geo_light_r, geo_light_g, geo_light_b) * (1.0 - smoothstep(0.5 * geo_light_radius, geo_light_radius, length(geo_light_rel_vec))) * geo_light_incidence;
 
     vec4 Diffuse  = light_diffuse * nDotVP;
-    Diffuse.rgb += secondary_light * light_distance_fading(dist) + geo_light;
+    //Diffuse.rgb += secondary_light * light_distance_fading(dist) + geo_light;
+
+    Diffuse.rgb = addLights(Diffuse.rgb, secondary_light * light_distance_fading(dist));
+    Diffuse.rgb = addLights(Diffuse.rgb, geo_light);
+	
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
@@ -452,10 +456,15 @@ void main (void)
             lightmap_b_factor, lightmap_a_factor);
         lightmapFactor = lightmapFactor * lightmapTexel;
         if (lightmap_multi > 0 ){
-            lightmapcolor = lightmap_r_color * lightmapFactor.r +
-                lightmap_g_color * lightmapFactor.g +
-                lightmap_b_color * lightmapFactor.b +
-                lightmap_a_color * lightmapFactor.a ;
+            //lightmapcolor = lightmap_r_color * lightmapFactor.r +
+             //   lightmap_g_color * lightmapFactor.g +
+             //   lightmap_b_color * lightmapFactor.b +
+             //   lightmap_a_color * lightmapFactor.a ;
+		lightmapcolor = lightmap_r_color * lightmapFactor.r;
+		lightmapcolor = addLights(lightmapcolor, lightmap_g_color * lightmapFactor.g);
+		lightmapcolor = addLights(lightmapcolor, lightmap_b_color * lightmapFactor.b);
+		lightmapcolor = addLights(lightmapcolor, lightmap_a_color * lightmapFactor.a);
+
             } else {
                 lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;
             }

@@ -457,13 +457,16 @@ void main (void)
         lightmapFactor = lightmapFactor * lightmapTexel;
         if (lightmap_multi > 0 ){
             //lightmapcolor = lightmap_r_color * lightmapFactor.r +
-             //   lightmap_g_color * lightmapFactor.g +
-             //   lightmap_b_color * lightmapFactor.b +
-             //   lightmap_a_color * lightmapFactor.a ;
+                //lightmap_g_color * lightmapFactor.g +
+                //lightmap_b_color * lightmapFactor.b +
+                //lightmap_a_color * lightmapFactor.a ;
 		lightmapcolor = lightmap_r_color * lightmapFactor.r;
 		lightmapcolor = addLights(lightmapcolor, lightmap_g_color * lightmapFactor.g);
 		lightmapcolor = addLights(lightmapcolor, lightmap_b_color * lightmapFactor.b);
-		lightmapcolor = addLights(lightmapcolor, lightmap_a_color * lightmapFactor.a);
+		if (darkmap_enabled == 0)
+			{
+			lightmapcolor = addLights(lightmapcolor, lightmap_a_color * lightmapFactor.a);
+			}
 
             } else {
                 lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;

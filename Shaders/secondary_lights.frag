@@ -94,9 +94,9 @@ vec3 addLights(in vec3 color1, in vec3 color2)
 {
 vec3 outcolor;
 
-outcolor.r  = 0.14 * log(exp(color1.r/0.14) + exp(color2.r/0.14));
-outcolor.g  = 0.14 * log(exp(color1.g/0.14) + exp(color2.g/0.14));
-outcolor.b  = 0.14 * log(exp(color1.b/0.14) + exp(color2.b/0.14));
+outcolor.r  = 0.14 * log(exp(color1.r/0.14) + exp(color2.r/0.14)-1.0);
+outcolor.g  = 0.14 * log(exp(color1.g/0.14) + exp(color2.g/0.14)-1.0);
+outcolor.b  = 0.14 * log(exp(color1.b/0.14) + exp(color2.b/0.14)-1.0);
 
 return outcolor;
 }

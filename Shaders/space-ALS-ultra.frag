@@ -242,9 +242,11 @@ void main (void)
     intensity = length(light_diffuse.rgb); 
     light_diffuse.rgb = mix(light_diffuse.rgb, intensity * vec3 (1.0,1.0,1.0), alt_desat_factor);
 
+    float diffuse_reduction = 1;
+
     if (darkmap_enabled == 1)
 	{
-	float diffuse_reduction = mix(1.0,lightmapTexel.a, darkmap_factor);
+	diffuse_reduction = mix(1.0,lightmapTexel.a, darkmap_factor);
    	light_diffuse.rgb = light_diffuse.rgb * diffuse_reduction;
 	}
 
@@ -344,7 +346,7 @@ void main (void)
     //Diffuse.rgb += secondary_light * light_distance_fading(dist) + geo_light;
 
     Diffuse.rgb = addLights(Diffuse.rgb, secondary_light * light_distance_fading(dist));
-    Diffuse.rgb = addLights(Diffuse.rgb, geo_light);
+    Diffuse.rgb = addLights(Diffuse.rgb, geo_light * diffuse_reduction );
 	
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);

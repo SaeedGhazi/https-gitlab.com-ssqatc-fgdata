@@ -27,6 +27,12 @@ var avg = func {
     return x;
 }
 
+# this follows std::clamp for argument order, as opposed to
+# qBound which uses (min, value, max)
+var clamp = func(value, min, max) {
+  return (value < min) ? min : (value > max) ? max : value;
+}
+
 # note - mathlib defines an fmod function (added after this was written)
 # It uses C-library fmod(), which has different rounding behaviour to
 # this code (eg, fmod(-5, 4) gives -1, whereas this code gives 3)

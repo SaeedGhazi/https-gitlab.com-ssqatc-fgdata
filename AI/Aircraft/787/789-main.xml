@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <PropertyList>
-  <description>Boeing 787-800</description>
-  <author>Ian(Yves) Tolosa. June 2016 </author>
-  <path>Models/788.ac</path>
+  <description>Boeing 787-900</description>
+  <author>Ian(Yves) Tolosa. August 2016 </author>
+  <path>Models/789.ac</path>
   
     <animation>
     <type>select</type>
@@ -18,9 +18,9 @@
     <nasal>
   <load>
    var model = cmdarg();
-   model.getNode("door[0]/position-x-m", 1).setValue(-21.9937);
+   model.getNode("door[0]/position-x-m", 1).setValue(-25.0467);
    model.getNode("door[0]/position-y-m", 1).setValue(5.55);
-   model.getNode("door[0]/position-z-m", 1).setValue(2.31831);
+   model.getNode("door[0]/position-z-m", 1).setValue(2.29991);
    model.getNode("door[0]/jetway-hood-deg", 1).setValue(21);
   </load>
   

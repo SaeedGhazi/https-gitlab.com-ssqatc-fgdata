@@ -374,6 +374,11 @@
             setprop("/sim/presets/fix", "");
           }
 
+          var speedRequested = getprop("/sim/presets/airspeed-kt");
+          if (speedRequested > 0) {
+            setprop("/sim/presets/speed-set", "knots");
+          }
+
         </script>
       </binding>
       <binding>

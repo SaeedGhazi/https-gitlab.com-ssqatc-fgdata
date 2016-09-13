@@ -282,8 +282,10 @@ var dialog = {
         foreach (var mp; model.list) {
             var col = 0;
             var color = me.fg[2];
-            if (mp.node.getNode("model-installed").getValue()) 
+            if (mp.node.getNode("model-installed").getValue()) {
                 color = me.fg[odd = !odd];
+                color = me.fg[1];
+            }
             else{
                 print("no model installed; check fallback");
                 var fbn = mp.node.getNode("sim/model/fallback-model-index");

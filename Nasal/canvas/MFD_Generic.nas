@@ -105,7 +105,7 @@ var PFD_Page =
 
     # base method for update; this can be overriden per page instance to provide update of the
     # elements on display (e.g. to display updated properties)
-    update : func
+    update : func(notification=nil)
     {
     },
 
@@ -194,10 +194,10 @@ var PFD_Device =
     },
     #
     # manage the update of the currently selected page
-    update : func
+    update : func(notification=nil)
     {
         if (me.current_page != nil)
-            me.current_page.update();
+            me.current_page.update(notification);
     },
     #
     # Change to display the selected page.

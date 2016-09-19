@@ -1,7 +1,4 @@
 <?xml version="1.0"?>
-
-<!-- Author Ian Tolosa - From Timetable week of 28MAR2016 - Includes Passenger and some Cargo -->
-
 <trafficlist>
   <aircraft>
     <model>Aircraft/A333/A333-SingaporeAirlines.xml</model>
@@ -5037,27 +5034,51 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>8
-<callsign>Singapore_7062</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>8
-<port>WSSS</port><time>1/12:45:00</time></departure>8
-<cruise-alt>375</cruise-alt><arrival>8
-<port>WIII</port><time>1/14:55:00</time></arrival>8
-<repeat>WEEK</repeat>
-8</flight>
-  <flight>9
-<callsign>Singapore_7061</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>9
-<port>WIII</port><time>1/16:55:00</time></departure>9
-<cruise-alt>385</cruise-alt><arrival>9
-<port>WSSS</port><time>1/18:40:00</time></arrival>9
-<repeat>WEEK</repeat>
-9</flight>
-  <flight>21
-<callsign>Singapore_7293</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>21
-<port>YMML</port><time>1/01:05:00</time></departure>21
-<cruise-alt>385</cruise-alt><arrival>21
-<port>WSSS</port><time>1/08:10:00</time></arrival>21
-<repeat>WEEK</repeat>
-21</flight>
+  <flight>
+    <callsign>Singapore_7062</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>1/12:45:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>1/14:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7061</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WIII</port>
+      <time>1/16:55:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>1/18:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7293</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YMML</port>
+      <time>1/01:05:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>1/08:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7344</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>
@@ -5553,34 +5574,66 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>10
-<callsign>Singapore_7064</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>10
-<port>WSSS</port><time>2/00:30:00</time></departure>10
-<cruise-alt>375</cruise-alt><arrival>10
-<port>WIII</port><time>2/02:40:00</time></arrival>10
-<repeat>WEEK</repeat>
-10</flight>
-  <flight>11
-<callsign>Singapore_7063</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>11
-<port>WIII</port><time>2/16:55:00</time></departure>11
-<cruise-alt>385</cruise-alt><arrival>11
-<port>WSSS</port><time>2/18:40:00</time></arrival>11
-<repeat>WEEK</repeat>
-11</flight>
-  <flight>34
-<callsign>Singapore_7298</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>34
-<port>WSSS</port><time>2/01:10:00</time></departure>34
-<cruise-alt>375</cruise-alt><arrival>34
-<port>YSSY</port><time>2/10:00:00</time></arrival>34
-<repeat>WEEK</repeat>
-34</flight>
-  <flight>35
-<callsign>Singapore_7298</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>35
-<port>YSSY</port><time>2/12:00:00</time></departure>35
-<cruise-alt>375</cruise-alt><arrival>35
-<port>NZAA</port><time>2/15:05:00</time></arrival>35
-<repeat>WEEK</repeat>
-35</flight>
+  <flight>
+    <callsign>Singapore_7064</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>2/00:30:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>2/02:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7063</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WIII</port>
+      <time>2/16:55:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>2/18:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7298</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>2/01:10:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>YSSY</port>
+      <time>2/10:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7298</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YSSY</port>
+      <time>2/12:00:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>NZAA</port>
+      <time>2/15:05:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7343</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>
@@ -6211,62 +6264,126 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>1
-<callsign>Singapore_7952</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>1
-<port>WSSS</port><time>3/19:00:00</time></departure>1
-<cruise-alt>385</cruise-alt><arrival>1
-<port>VTBS</port><time>3/21:25:00</time></arrival>1
-<repeat>WEEK</repeat>
-1</flight>
-  <flight>2
-<callsign>Singapore_7952</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>2
-<port>VTBS</port><time>3/23:10:00</time></departure>2
-<cruise-alt>370</cruise-alt><arrival>2
-<port>VHHH</port><time>4/02:00:00</time></arrival>2
-<repeat>WEEK</repeat>
-2</flight>
-  <flight>12
-<callsign>Singapore_7066</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>12
-<port>WSSS</port><time>3/00:15:00</time></departure>12
-<cruise-alt>375</cruise-alt><arrival>12
-<port>WIII</port><time>3/02:25:00</time></arrival>12
-<repeat>WEEK</repeat>
-12</flight>
-  <flight>13
-<callsign>Singapore_7063</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>13
-<port>WIII</port><time>3/16:55:00</time></departure>13
-<cruise-alt>385</cruise-alt><arrival>13
-<port>WSSS</port><time>3/18:40:00</time></arrival>13
-<repeat>WEEK</repeat>
-13</flight>
-  <flight>36
-<callsign>Singapore_7297</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>36
-<port>NZAA</port><time>3/05:35:00</time></departure>36
-<cruise-alt>380</cruise-alt><arrival>36
-<port>YMML</port><time>3/09:40:00</time></arrival>36
-<repeat>WEEK</repeat>
-36</flight>
-  <flight>37
-<callsign>Singapore_7297</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>37
-<port>YMML</port><time>3/12:30:00</time></departure>37
-<cruise-alt>385</cruise-alt><arrival>37
-<port>WSSS</port><time>3/19:15:00</time></arrival>37
-<repeat>WEEK</repeat>
-37</flight>
-  <flight>38
-<callsign>Singapore_7971</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>38
-<port>KLAX</port><time>3/04:10:00</time></departure>38
-<cruise-alt>370</cruise-alt><arrival>38
-<port>EBBR</port><time>4/13:50:00</time></arrival>38
-<repeat>WEEK</repeat>
-38</flight>
-  <flight>39
-<callsign>Singapore_7971</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>39
-<port>EBBR</port><time>3/16:50:00</time></departure>39
-<cruise-alt>375</cruise-alt><arrival>39
-<port>VOBL</port><time>4/03:20:00</time></arrival>39
-<repeat>WEEK</repeat>
-39</flight>
+  <flight>
+    <callsign>Singapore_7952</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>3/19:00:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>VTBS</port>
+      <time>3/21:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7952</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>VTBS</port>
+      <time>3/23:10:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>VHHH</port>
+      <time>4/02:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7066</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>3/00:15:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>3/02:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7063</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WIII</port>
+      <time>3/16:55:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>3/18:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7297</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>NZAA</port>
+      <time>3/05:35:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>YMML</port>
+      <time>3/09:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7297</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YMML</port>
+      <time>3/12:30:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>3/19:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7971</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>KLAX</port>
+      <time>3/04:10:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EBBR</port>
+      <time>4/13:50:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7971</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EBBR</port>
+      <time>3/16:50:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>VOBL</port>
+      <time>4/03:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7360</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>
@@ -6792,62 +6909,126 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>3
-<callsign>Singapore_7952</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>3
-<port>VHHH</port><time>4/05:10:00</time></departure>3
-<cruise-alt>370</cruise-alt><arrival>3
-<port>PANC</port><time>4/14:10:00</time></arrival>3
-<repeat>WEEK</repeat>
-3</flight>
-  <flight>4
-<callsign>Singapore_7952</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>4
-<port>PANC</port><time>4/21:20:00</time></departure>4
-<cruise-alt>375</cruise-alt><arrival>4
-<port>KDFW</port><time>4/03:25:00</time></arrival>4
-<repeat>WEEK</repeat>
-4</flight>
-  <flight>14
-<callsign>Singapore_7068</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>14
-<port>WSSS</port><time>4/00:15:00</time></departure>14
-<cruise-alt>375</cruise-alt><arrival>14
-<port>WIII</port><time>4/02:25:00</time></arrival>14
-<repeat>WEEK</repeat>
-14</flight>
-  <flight>15
-<callsign>Singapore_7067</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>15
-<port>WIII</port><time>4/16:55:00</time></departure>15
-<cruise-alt>385</cruise-alt><arrival>15
-<port>WSSS</port><time>4/18:40:00</time></arrival>15
-<repeat>WEEK</repeat>
-15</flight>
-  <flight>25
-<callsign>Singapore_7290</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>25
-<port>WSSS</port><time>4/01:10:00</time></departure>25
-<cruise-alt>375</cruise-alt><arrival>25
-<port>YSSY</port><time>4/10:00:00</time></arrival>25
-<repeat>WEEK</repeat>
-25</flight>
-  <flight>26
-<callsign>Singapore_7292</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>26
-<port>YSSY</port><time>4/12:00:00</time></departure>26
-<cruise-alt>375</cruise-alt><arrival>26
-<port>NZAA</port><time>4/15:10:00</time></arrival>26
-<repeat>WEEK</repeat>
-26</flight>
-  <flight>27
-<callsign>Singapore_7291</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>27
-<port>NZAA</port><time>4/17:40:00</time></departure>27
-<cruise-alt>385</cruise-alt><arrival>27
-<port>WSSS</port><time>5/03:20:00</time></arrival>27
-<repeat>WEEK</repeat>
-27</flight>
-  <flight>40
-<callsign>Singapore_7971</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>40
-<port>VOBL</port><time>4/05:30:00</time></departure>40
-<cruise-alt>375</cruise-alt><arrival>40
-<port>WSSS</port><time>4/10:00:00</time></arrival>40
-<repeat>WEEK</repeat>
-40</flight>
+  <flight>
+    <callsign>Singapore_7952</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>VHHH</port>
+      <time>4/05:10:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>PANC</port>
+      <time>4/14:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7952</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>PANC</port>
+      <time>4/21:20:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>KDFW</port>
+      <time>4/03:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7068</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>4/00:15:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>4/02:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7067</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WIII</port>
+      <time>4/16:55:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>4/18:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7290</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>4/01:10:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>YSSY</port>
+      <time>4/10:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7292</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YSSY</port>
+      <time>4/12:00:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>NZAA</port>
+      <time>4/15:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7291</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>NZAA</port>
+      <time>4/17:40:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>5/03:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7971</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>VOBL</port>
+      <time>4/05:30:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>4/10:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7348</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>
@@ -7553,34 +7734,66 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>5
-<callsign>Singapore_7951</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>5
-<port>KDFW</port><time>5/06:25:00</time></departure>5
-<cruise-alt>370</cruise-alt><arrival>5
-<port>EBBR</port><time>5/15:40:00</time></arrival>5
-<repeat>WEEK</repeat>
-5</flight>
-  <flight>6
-<callsign>Singapore_7951</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>6
-<port>EBBR</port><time>5/18:40:00</time></departure>6
-<cruise-alt>375</cruise-alt><arrival>6
-<port>OMSJ</port><time>6/02:15:00</time></arrival>6
-<repeat>WEEK</repeat>
-6</flight>
-  <flight>16
-<callsign>Singapore_7070</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>16
-<port>WSSS</port><time>5/00:15:00</time></departure>16
-<cruise-alt>375</cruise-alt><arrival>16
-<port>WIII</port><time>5/02:25:00</time></arrival>16
-<repeat>WEEK</repeat>
-16</flight>
-  <flight>17
-<callsign>Singapore_7069</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>17
-<port>WIII</port><time>5/04:25:00</time></departure>17
-<cruise-alt>385</cruise-alt><arrival>17
-<port>WSSS</port><time>5/06:10:00</time></arrival>17
-<repeat>WEEK</repeat>
-17</flight>
+  <flight>
+    <callsign>Singapore_7951</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>KDFW</port>
+      <time>5/06:25:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EBBR</port>
+      <time>5/15:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7951</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EBBR</port>
+      <time>5/18:40:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>OMSJ</port>
+      <time>6/02:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7070</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>5/00:15:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>5/02:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7069</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WIII</port>
+      <time>5/04:25:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>5/06:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7348</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>
@@ -8241,55 +8454,111 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>7
-<callsign>Singapore_7951</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>7
-<port>OMSJ</port><time>6/03:45:00</time></departure>7
-<cruise-alt>375</cruise-alt><arrival>7
-<port>WSSS</port><time>6/11:15:00</time></arrival>7
-<repeat>WEEK</repeat>
-7</flight>
-  <flight>18
-<callsign>Singapore_7294</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>18
-<port>WSSS</port><time>6/02:00:00</time></departure>18
-<cruise-alt>375</cruise-alt><arrival>18
-<port>YMML</port><time>6/10:35:00</time></arrival>18
-<repeat>WEEK</repeat>
-18</flight>
-  <flight>19
-<callsign>Singapore_7294</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>19
-<port>YMML</port><time>6/12:50:00</time></departure>19
-<cruise-alt>370</cruise-alt><arrival>19
-<port>NZAA</port><time>6/16:25:00</time></arrival>19
-<repeat>WEEK</repeat>
-19</flight>
-  <flight>28
-<callsign>Singapore_7296</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>28
-<port>WSSS</port><time>6/18:30:00</time></departure>28
-<cruise-alt>375</cruise-alt><arrival>28
-<port>YSSY</port><time>0/03:20:00</time></arrival>28
-<repeat>WEEK</repeat>
-28</flight>
-  <flight>31
-<callsign>Singapore_7294</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>31
-<port>WSSS</port><time>6/02:00:00</time></departure>31
-<cruise-alt>375</cruise-alt><arrival>31
-<port>YMML</port><time>6/10:35:00</time></arrival>31
-<repeat>WEEK</repeat>
-31</flight>
-  <flight>32
-<callsign>Singapore_7294</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>32
-<port>YMML</port><time>6/12:50:00</time></departure>32
-<cruise-alt>370</cruise-alt><arrival>32
-<port>NZAA</port><time>6/16:25:00</time></arrival>32
-<repeat>WEEK</repeat>
-32</flight>
-  <flight>33
-<callsign>Singapore_7293</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>33
-<port>NZAA</port><time>6/18:55:00</time></departure>33
-<cruise-alt>385</cruise-alt><arrival>33
-<port>WSSS</port><time>0/01:00:00</time></arrival>33
-<repeat>WEEK</repeat>
-33</flight>
+  <flight>
+    <callsign>Singapore_7951</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMSJ</port>
+      <time>6/03:45:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>6/11:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7294</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>6/02:00:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>YMML</port>
+      <time>6/10:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7294</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YMML</port>
+      <time>6/12:50:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>NZAA</port>
+      <time>6/16:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7296</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>6/18:30:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>YSSY</port>
+      <time>0/03:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7294</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>6/02:00:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>YMML</port>
+      <time>6/10:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7294</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YMML</port>
+      <time>6/12:50:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>NZAA</port>
+      <time>6/16:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7293</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>NZAA</port>
+      <time>6/18:55:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>0/01:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7347</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>
@@ -8905,55 +9174,111 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>20
-<callsign>Singapore_7293</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>20
-<port>NZAA</port><time>0/18:55:00</time></departure>20
-<cruise-alt>380</cruise-alt><arrival>20
-<port>YMML</port><time>0/23:00:00</time></arrival>20
-<repeat>WEEK</repeat>
-20</flight>
-  <flight>22
-<callsign>Singapore_7286</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>22
-<port>WSSS</port><time>0/01:10:00</time></departure>22
-<cruise-alt>375</cruise-alt><arrival>22
-<port>YSSY</port><time>0/10:00:00</time></arrival>22
-<repeat>WEEK</repeat>
-22</flight>
-  <flight>23
-<callsign>Singapore_7286</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>23
-<port>YSSY</port><time>0/12:15:00</time></departure>23
-<cruise-alt>380</cruise-alt><arrival>23
-<port>YMML</port><time>0/13:50:00</time></arrival>23
-<repeat>WEEK</repeat>
-23</flight>
-  <flight>24
-<callsign>Singapore_7285</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>24
-<port>YMML</port><time>0/15:50:00</time></departure>24
-<cruise-alt>385</cruise-alt><arrival>24
-<port>WSSS</port><time>0/22:35:00</time></arrival>24
-<repeat>WEEK</repeat>
-24</flight>
-  <flight>29
-<callsign>Singapore_7296</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>29
-<port>YSSY</port><time>0/05:50:00</time></departure>29
-<cruise-alt>375</cruise-alt><arrival>29
-<port>NZAA</port><time>0/09:00:00</time></arrival>29
-<repeat>WEEK</repeat>
-29</flight>
-  <flight>30
-<callsign>Singapore_7295</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>30
-<port>NZAA</port><time>0/11:30:00</time></departure>30
-<cruise-alt>385</cruise-alt><arrival>30
-<port>WSSS</port><time>0/21:10:00</time></arrival>30
-<repeat>WEEK</repeat>
-30</flight>
-  <flight>33
-<callsign>Singapore_7293</callsign><required-aircraft>SIA-74Y</required-aircraft><fltrules>IFR</fltrules><departure>33
-<port>NZAA</port><time>0/18:55:00</time></departure>33
-<cruise-alt>385</cruise-alt><arrival>33
-<port>WSSS</port><time>1/01:00:00</time></arrival>33
-<repeat>WEEK</repeat>
-33</flight>
+  <flight>
+    <callsign>Singapore_7293</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>NZAA</port>
+      <time>0/18:55:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>YMML</port>
+      <time>0/23:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7286</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>0/01:10:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>YSSY</port>
+      <time>0/10:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7286</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YSSY</port>
+      <time>0/12:15:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>YMML</port>
+      <time>0/13:50:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7285</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YMML</port>
+      <time>0/15:50:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>0/22:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7296</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>YSSY</port>
+      <time>0/05:50:00</time>
+    </departure>
+    <cruise-alt>375</cruise-alt>
+    <arrival>
+      <port>NZAA</port>
+      <time>0/09:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7295</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>NZAA</port>
+      <time>0/11:30:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>0/21:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>Singapore_7293</callsign>
+    <required-aircraft>SIA-74Y</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>NZAA</port>
+      <time>0/18:55:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>1/01:00:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
   <flight>
     <callsign>Singapore_7344</callsign>
     <required-aircraft>SIA-74Y</required-aircraft>

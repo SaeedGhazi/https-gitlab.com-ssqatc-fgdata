@@ -180,6 +180,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <vegetation-density type="double" userarchive="y">1.0</vegetation-density>
       <random-buildings type="bool" userarchive="y">false</random-buildings>
       <building-density type="double" userarchive="y">1.0</building-density>
+      <building-mesh type="bool" userarchive="y">false</building-mesh>
       <horizon-effect type="bool" userarchive="y">false</horizon-effect>
       <point-sprites type="bool" userarchive="y">true</point-sprites>
       <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>

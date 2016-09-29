@@ -1,0 +1,530 @@
+<PropertyList>
+
+  <name>GoFlight MCP Pro</name>
+  <debug-events type="bool">true</debug-events>
+
+  <nasal>
+    <open>
+      <![CDATA[
+      # map decimal digits 0..9 to standard 7-segment LCD pattern
+      # 2 should be 5b
+      # 3 should be 4f
+      var translateDigitToSevenSegment = [0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x67];
+
+      var encodeString = func(s, fieldWidth, padChar = nil)
+      {
+        var padCount = fieldWidth - size(s);
+        var r = "";
+        if (padChar == nil) padChar = chr(0);
+
+        while (padCount > 0) {
+          r ~= padChar;
+          padCount -=1;
+        }
+
+        for (var i=0; i < size(s); i += 1) {
+          if (s[i] == `.`) {
+            # set the high bit to correspond to the decimal
+            var lastIndex = size(r) - 1;
+            r[lastIndex] = r[lastIndex] + 0x80;
+          } elsif (s[i] == `-`) {
+            r ~= chr(0x40);
+          } else {
+            var digitCode = s[i] - `0`;
+            r ~= chr(translateDigitToSevenSegment[digitCode]);
+          }
+        }
+
+        return r;
+      }
+
+      var altitudeAlphanumeric = func() {
+        var alt = getprop("/autopilot/settings/target-altitude-ft");
+        var altStr = sprintf("%d", alt);
+        return encodeString(altStr, 5);
+      }
+
+      var headingAlphanumeric = func() {
+        var hdg = getprop("/autopilot/settings/heading-bug-deg");
+        return encodeString(sprintf("%d", hdg), 3);
+      }
+
+      var courseAlphanumeric = func() {
+        var crs = getprop("/instrumentation/nav[0]/radials/selected-deg");
+        return encodeString(sprintf("%d", crs), 3);
+      }
+
+      var course2Alphanumeric = func() {
+        var crs = getprop("/instrumentation/nav[1]/radials/selected-deg");
+        return encodeString(sprintf("%d", crs), 3);
+      }
+
+      var speedAlphanumeric = func() {
+        var spd = getprop("/autopilot/settings/target-speed-kt");
+        return encodeString(sprintf("%d", spd), 5);
+      }
+
+      var vspeedAlphanumeric = func() {
+        var vs = getprop("/autopilot/settings/vertical-speed-fpm");
+        return encodeString(sprintf("%d", vs), 5);
+      }
+
+      var ledState = func()
+      {
+        if (activeChannel == 1) return chr(0x04);
+        return chr(0x2);
+      }
+        ]]>
+    </open>
+  </nasal>
+
+  <event>
+    <name>rel-dial</name>
+    <interpolater>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>1</ind><dep>1</dep></entry>
+      <entry><ind>2</ind><dep>5</dep></entry>
+      <entry><ind>3</ind><dep>10</dep></entry>
+      <entry><ind>4</ind><dep>20</dep></entry>
+    </interpolater>
+    <binding>
+      <command>property-adjust</command>
+      <property>/autopilot/settings/target-altitude-ft</property>
+      <factor type="double">100</factor>
+      <min>0</min>
+    </binding>
+  </event>
+
+<event>
+  <name>rel-dial-1</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/autopilot/settings/heading-bug-deg</property>
+    <wrap type="bool">true</wrap>
+    <min>0</min>
+    <max>359</max>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>5</dep></entry>
+    <entry><ind>3</ind><dep>10</dep></entry>
+    <entry><ind>4</ind><dep>20</dep></entry>
+  </interpolater>
+</event>
+
+<event>
+  <name>rel-dial-2</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/instrumentation/nav[0]/radials/selected-deg</property>
+    <wrap type="bool">true</wrap>
+    <min>0</min>
+    <max>359</max>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>5</dep></entry>
+    <entry><ind>3</ind><dep>10</dep></entry>
+    <entry><ind>4</ind><dep>20</dep></entry>
+  </interpolater>
+</event>
+<event>
+  <name>rel-dial-3</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/autopilot/settings/vertical-speed-fpm</property>
+    <factor type="double">10</factor>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>5</dep></entry>
+    <entry><ind>3</ind><dep>10</dep></entry>
+    <entry><ind>4</ind><dep>20</dep></entry>
+  </interpolater>
+</event>
+
+<event>
+  <name>rel-dial-4</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/autopilot/settings/target-speed-kt</property>
+    <min>0</min>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>5</dep></entry>
+    <entry><ind>3</ind><dep>10</dep></entry>
+    <entry><ind>4</ind><dep>20</dep></entry>
+  </interpolater>
+</event>
+
+<event>
+  <name>rel-dial-5</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/instrumentation/nav[1]/radials/selected-deg</property>
+    <wrap type="bool">true</wrap>
+    <min>0</min>
+    <max>359</max>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>5</dep></entry>
+    <entry><ind>3</ind><dep>10</dep></entry>
+    <entry><ind>4</ind><dep>20</dep></entry>
+  </interpolater>
+</event>
+
+
+<report>
+  <report-id type="int">9</report-id>
+  <watch>/autopilot/settings/target-altitude-ft</watch>
+  <nasal-function>altitudeAlphanumeric</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">7</report-id>
+  <watch>/autopilot/settings/heading-bug-deg</watch>
+  <nasal-function>headingAlphanumeric</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">3</report-id>
+  <watch>/instrumentation/nav[0]/radials/selected-deg</watch>
+  <nasal-function>courseAlphanumeric</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">11</report-id>
+  <watch>/autopilot/settings/vertical-speed-fpm</watch>
+  <nasal-function>vspeedAlphanumeric</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">5</report-id>
+  <watch>/autopilot/settings/target-speed-kt</watch>
+  <nasal-function>speedAlphanumeric</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">13</report-id>
+  <watch>/instrumentation/nav[1]/radials/selected-deg</watch>
+  <nasal-function>course2Alphanumeric</nasal-function>
+</report>
+
+  <!-- set LED from nose gear indicator -->
+  <event>
+    <name>led-misc</name>
+    <setting>
+      <value>1</value>
+      <condition>
+        <property>/gear/gear[0]/indicator-servicable</property>
+        <greater-than>
+          <property>/gear/gear[0]/position-norm</property>
+          <value>0.9</value>
+        </greater-than>
+      </condition>
+    </setting>
+    <setting>
+      <value>0</value>
+      <condition>
+        <not>
+          <and>
+          <property>/gear/gear[0]/indicator-servicable</property>
+          <greater-than>
+            <property>/gear/gear[0]/position-norm</property>
+            <value>0.9</value>
+          </greater-than>
+          </and>
+        </not>
+      </condition>
+    </setting>
+  </event>
+
+
+  <event>
+    <name>button-1</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 1")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-2</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 2")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-3</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 3")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-4</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 4")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-5</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 5")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-6</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 6")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-7</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 7")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-8</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 8")</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Speed</desc>
+    <name>button-9</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("SPD")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-10</name>
+    <desc>Level Change</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("LVL CHG")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-11</name>
+    <desc>Heading</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("HDG")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-12</name>
+    <desc>Approach</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("APP")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-13</name>
+    <desc>Altitude</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("ALT")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-14</name>
+    <desc>Vertical Speed</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("VS")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-15</name>
+    <desc>Disengage Bar</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("Disengage")</script>
+    </binding>
+  </event>
+
+
+  <event>
+    <name>button-16</name>
+    <desc>F/O FD Enable</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("F/O FD")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-17</name>
+    <desc>Altitude Intervention</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("ALT INTV")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-18</name>
+    <desc>CWS-A</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("CWS-A")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-19</name>
+    <desc>CWS-B</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("CWS-B")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-20</name>
+    <desc>IAS knob push</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("IAS push")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-21</name>
+    <desc>HDG knob push</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("HDG push")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-22</name>
+    <desc>Altitude Knob Push</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("ALT SEL")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-23</name>
+    <desc>Captain's FD Enable</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("CAP FD")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-24</name>
+    <desc>N1 select</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("N1")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-25</name>
+    <desc>VNAV</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("VNAV")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-26</name>
+    <desc>LNAV</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("LNAV")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-27</name>
+    <desc>CMD A</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("CMD A")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-28</name>
+    <desc>CMD B</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("CMD B")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-29</name>
+    <desc>AT arm</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("A/T ARM")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-30</name>
+    <desc>Soeed crossover</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("SPD C/O")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-31</name>
+    <desc>Speed intervention</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("SPD INTV")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-32</name>
+    <desc>VOR / Localizer</desc>
+    <binding>
+      <command>nasal</command>
+      <script>print("VOR/LOC")</script>
+    </binding>
+  </event>
+</PropertyList>

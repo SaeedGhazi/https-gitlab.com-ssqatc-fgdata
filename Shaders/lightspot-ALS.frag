@@ -76,7 +76,7 @@ rotMat = mat2 (cos(lightspot_dir2), sin(lightspot_dir2), -sin(lightspot_dir2), c
 difference_vec.xy = rotMat * difference_vec.xy;
 difference_vec.x/= (1.0 +  lightspot_project2); 
 
-lightspot_arg = (1.0 - smoothstep(lightspot_size2/3.0, lightspot_size2, length(relPos - eye_rel)));
+lightspot_arg = (1.0 - smoothstep(lightspot_size2/3.0, lightspot_size2, length(difference_vec))) * (1.0 - 0.5* smoothstep(lightspot_size2/3.0, lightspot_size2/(1.0+lightspot_project2), -difference_vec.x));
 
 lightspot_color += vec3 (lightspot_r2,lightspot_g2, lightspot_b2 ) * lightspot_arg;
 

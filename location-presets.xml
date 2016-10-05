@@ -5,8 +5,8 @@
 <PropertyList>
   <sim>
     <presets>
-      <airport-id>SBRJ</airport-id>
-      <runway>20R</runway>
+      <airport-id>LSZH</airport-id>
+      <runway>16</runway>
     </presets>
   </sim>
   <instrumentation>
@@ -14,55 +14,55 @@
     <comm n="0">
       <frequencies>
         <!-- TWR -->
-        <selected-mhz type="double">118.700</selected-mhz>
-        <!-- APP -->
-        <standby-mhz type="double">119.350</standby-mhz>
+        <selected-mhz type="double">118.100</selected-mhz>
+        <!-- DEP -->
+        <standby-mhz type="double">125.950</standby-mhz>
       </frequencies>
     </comm>
     <comm n="1">
       <frequencies>
         <!-- ATIS -->
-        <selected-mhz type="double">132.650</selected-mhz>
+        <selected-mhz type="double">128.52</selected-mhz>
         <!-- GND -->
-        <standby-mhz type="double">121.700</standby-mhz>
+        <standby-mhz type="double">121.900</standby-mhz>
       </frequencies>
     </comm>
     <nav n="0">
       <frequencies>
-        <!-- IRJ LOC (20R) -->
-        <selected-mhz type="double">111.10</selected-mhz>
-        <!-- MARICA (MRC) VOR/DME -->
-        <standby-mhz type="double">114.00</standby-mhz>
+        <!-- KLOTEN VOR-DME (KLO) -->
+        <selected-mhz type="double">114.85</selected-mhz>
+        <!-- LSZH 16 DME-ILS (IZH) -->
+        <standby-mhz type="double">110.50</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">196.0</selected-deg>
+        <selected-deg type="double">161</selected-deg>
       </radials>
     </nav>
     <nav n="1">
       <frequencies>
-        <!-- CAXIAS (CAX) VOR -->
-        <selected-mhz type="double">113.00</selected-mhz>
-        <!-- PIRAI (PAI) VOR -->
-        <standby-mhz type="double">115.00</standby-mhz>
+        <!-- ZURICH EAST VOR-DME (ZUE) -->
+        <selected-mhz type="double">110.05</selected-mhz>
+        <!-- WILLISAU VOR-DME (WIL) -->
+        <standby-mhz type="double">116.90</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">120.0</selected-deg>
+        <selected-deg type="double">059</selected-deg>
       </radials>
     </nav>
     <dme n="0">
       <serviceable type="bool" archive="y">true</serviceable>
       <switch-position type="int" archive="y">2</switch-position>
       <frequencies>
-        <selected-mhz type="double">111.1</selected-mhz>
+        <selected-mhz type="double">114.85</selected-mhz>
         <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
       </frequencies>
     </dme>
     <adf n="0">
       <frequencies>
-        <!-- PAIOL (PP) -->
-        <selected-khz type="int">415</selected-khz>
-        <!-- CAXIAS NDB (CAX) -->
-        <standby-khz type="int">400</standby-khz>
+        <!-- BERN NDB (BER) -->
+        <selected-khz type="int">335</selected-khz>
+        <!-- FRIEDRICHSHAFEN NDB (FHA) -->
+        <standby-khz type="int">473</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>
@@ -73,8 +73,10 @@
     </adf>
     <adf n="1">
       <frequencies>
-        <selected-khz type="int">379</selected-khz>
-        <standby-khz type="int">341</standby-khz>
+        <!-- BALE MULHOUSE NDB (BS)-->
+        <selected-khz type="int">376</selected-khz>
+        <!-- INNSBRUCK NDB (INN) -->
+        <standby-khz type="int">420</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>

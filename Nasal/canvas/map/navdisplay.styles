@@ -58,7 +58,7 @@ var NDStyles = {
 				}, # end of layer update predicate
 				'z-index': -100,
 			},
-			{ name:'FIX', isMapStructure:1, update_on:['toggle_display_mode','toggle_range','toggle_waypoints'],
+			{ name:'FIX', isMapStructure:1, update_on:['toggle_display_mode','toggle_waypoints'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
 					# print("Running fix layer predicate");
@@ -71,6 +71,9 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
+				options: {
+					range_dependant: 1
+				},
 				'z-index': -3,
 			}, # end of FIX layer
 
@@ -103,7 +106,7 @@ var NDStyles = {
 				},
 			},
 
-			{ name:'APT', isMapStructure:1, update_on:['toggle_range','toggle_airports','toggle_display_mode'],
+			{ name:'APT', isMapStructure:1, update_on:['toggle_airports','toggle_display_mode'],
 				predicate: func(nd, layer) {
 					# toggle visibility here
 					var visible=nd.get_switch('toggle_airports') and nd.in_mode('toggle_display_mode', ['MAP']);
@@ -113,11 +116,14 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
+				options: {
+					range_dependant: 1
+				},
 				'z-index': -1,
 			}, # end of APT layer
 
 			# Should distinct between low and high altitude navaids. Hiding above 40 NM for now, to prevent clutter/lag.
-			{ name:'VOR', isMapStructure:1, update_on:['toggle_range','toggle_stations','toggle_display_mode'],
+			{ name:'VOR', isMapStructure:1, update_on:['toggle_stations','toggle_display_mode'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
 					# toggle visibility here
@@ -128,10 +134,13 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
+				options: {
+					range_dependant: 1
+				},
 				'z-index': -2,
 			}, # end of VOR layer
 
-			{ name:'DME', isMapStructure:1, update_on:['toggle_display_mode','toggle_range','toggle_stations'],
+			{ name:'DME', isMapStructure:1, update_on:['toggle_display_mode','toggle_stations'],
 				# FIXME: this is a really ugly place for controller code
 				predicate: func(nd, layer) {
 					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 40);
@@ -142,6 +151,9 @@ var NDStyles = {
 						layer.update();
 					}
 				}, # end of layer update predicate
+				options: {
+					range_dependant: 1
+				},
 				'z-index': -2,
 			}, # end of DME layer
 

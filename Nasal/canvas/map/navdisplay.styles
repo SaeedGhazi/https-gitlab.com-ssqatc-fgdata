@@ -1227,8 +1227,7 @@ var NDStyles = {
 				{
 					name:'FIX',
 					isMapStructure:1,
-					update_on:['toggle_range','toggle_waypoints',
-									   'toggle_display_mode'],
+					update_on:['toggle_waypoints','toggle_display_mode'],
 					predicate: func(nd, layer) {
 							var visible = nd.get_switch('toggle_waypoints') and
 										  nd.in_mode('toggle_display_mode', ['MAP']) and
@@ -1243,6 +1242,7 @@ var NDStyles = {
 						text_color: [1,1,1]
 					},
 					options: {
+						range_dependant: 1,
 						draw_function: func(group){
 							group.createChild('path')
 								.moveTo(-10,0)
@@ -1343,8 +1343,7 @@ var NDStyles = {
 				{
 					name:'APT',
 					isMapStructure:1,
-					update_on:['toggle_range','toggle_airports',
-							   'toggle_display_mode'],
+					update_on:['toggle_airports','toggle_display_mode'],
 					predicate: func(nd, layer) {
 							var visible = nd.get_switch('toggle_airports') and
 										  nd.in_mode('toggle_display_mode', ['MAP']);
@@ -1353,6 +1352,9 @@ var NDStyles = {
 								layer.update();
 							}
 					}, # end of layer update predicate
+					options: {
+						range_dependant: 1,
+					},
 					style: {
 						svg_path: 'Nasal/canvas/map/Airbus/Images/airbus_airport.svg',
 						text_offset: [45, 35],
@@ -1363,7 +1365,7 @@ var NDStyles = {
 				{
 					name:'VOR-airbus',
 					isMapStructure:1,
-					update_on:['toggle_range','toggle_vor','toggle_display_mode'],
+					update_on:['toggle_vor','toggle_display_mode'],
 					# FIXME: this is a really ugly place for controller code
 					predicate: func(nd, layer) {
 						# print("Running vor layer predicate");
@@ -1384,6 +1386,7 @@ var NDStyles = {
 					#  canvas.NDStyles['Airbus'].layers['VOR-airbus'].style.tuned_color = [0,0,1];
 					style: {},
 					options:{
+						range_dependant: 1,
 						listen: [
 							'nav1_frq',
 							'nav2_frq'
@@ -1394,7 +1397,7 @@ var NDStyles = {
 					name:'DME',
 					isMapStructure:1,
 					disabled:1,
-					update_on:['toggle_display_mode','toggle_range','toggle_dme'],
+					update_on:['toggle_display_mode','toggle_dme'],
 					# FIXME: this is a really ugly place for controller code
 					predicate: func(nd, layer) {
 						var visible = nd.get_switch('toggle_dme') and
@@ -1408,6 +1411,7 @@ var NDStyles = {
 						}
 					}, # end of layer update predicate
 					options: {
+						range_dependant: 1,
 						draw_dme: func(sym){
 							return sym.createChild("path")
 								.moveTo(-13, 0)
@@ -1427,7 +1431,7 @@ var NDStyles = {
 				{
 					name:'NDB',
 					isMapStructure:1,
-					update_on:['toggle_range','toggle_ndb','toggle_display_mode'],
+					update_on:['toggle_ndb','toggle_display_mode'],
 					# FIXME: this is a really ugly place for controller code
 					predicate: func(nd, layer) {
 						var visible = nd.get_switch('toggle_ndb') and
@@ -1451,6 +1455,7 @@ var NDStyles = {
 						svg_path: ''
 					},
 					options: {
+						range_dependant: 1,
 						listen: [
 							'adf1_frq',
 							'adf2_frq'

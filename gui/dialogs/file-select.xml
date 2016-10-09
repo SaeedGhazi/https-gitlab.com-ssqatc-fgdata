@@ -164,7 +164,7 @@
 				var entries = directory(d);
 				var retval = 1;
 				if (entries == nil) { # dir doesn't exist or no permissions
-					entries = ["..", "Not found or access denied", "Ctrl-click .. for FG_ROOT", "Shift-click .. for FG_HOME","To allow more directories, add them to --fg-aircraft"];
+					entries = ["..", "Not found or access denied", "Ctrl-click .. for FG_ROOT", "Shift-click .. for FG_HOME","To allow more directories, pass them to --allow-nasal-read"];
 					retval = 0;
 				} else {
 				var files = [];

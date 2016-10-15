@@ -7,7 +7,7 @@
 <PropertyList>
  <name>TQ6</name>
  <name>GoFlight TQ6</name>
- 
+
  <nasal>
   <script>
    <![CDATA[
@@ -55,7 +55,7 @@
   </number>
   <desc>Not used</desc>
  </axis>
- 
+
  <axis>
   <name>Left engine throttle</name>
   <number>
@@ -69,7 +69,7 @@
    <script>setprop('/controls/engines/engine[0]/throttle', normalisedInvertedValue());</script>
   </binding>
  </axis>
- 
+
  <axis>
   <name>Right engine throttle</name>
   <number>
@@ -83,7 +83,7 @@
    <script>setprop('/controls/engines/engine[1]/throttle', normalisedInvertedValue());</script>
   </binding>
  </axis>
- 
+
  <axis>
   <name>Lever 5</name>
   <number>
@@ -107,7 +107,7 @@
    <script>setprop('/controls/flight/flaps', normalisedValue());</script>
   </binding>
  </axis>
- 
+
  <!-- A/T disconnect button -->
  <button>
   <name>A/T disconnect</name>
@@ -123,7 +123,7 @@
    <script>debug.dump('A/T disconnect')</script>
   </binding>
  </button>
- 
+
  <button n="1">
   <name>TO/GA</name>
   <number>
@@ -137,21 +137,57 @@
    <command>nasal</command>
    <script>debug.dump('TO/GA!')</script>
   </binding>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/autoflight/toga-signal</property>
+   <value>true</value>
+  </binding>
  </button>
 
  <button n="2">
-  <name>Reverser - left</name>
+  <name>Reverser - right</name>
   <number>
    <unix>1</unix>
    <mac>1</mac>
    <windows>1</windows>
   </number>
+  <desc>Right reverser</desc>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>property-assign</command>
+   <property>/controls/engines/engine[1]/reverser</property>
+   <value>1</value>
+  </binding>
+  <mod-up>
+    <binding>
+      <command>property-assign</command>
+      <property>/controls/engines/engine[1]/reverser</property>
+      <value>0</value>
+  </binding>
+  </mod-up>
+ </button>
+
+
+ <button n="3">
+  <name>Reverser - left</name>
+  <number>
+   <unix>2</unix>
+   <mac>2</mac>
+   <windows>2</windows>
+  </number>
   <desc>Left reverser</desc>
   <repeatable>false</repeatable>
   <binding>
-   <command>nasal</command>
-   <script>debug.dump('left reverse thrust')</script>
+   <command>property-assign</command>
+   <property>/controls/engines/engine[0]/reverser</property>
+   <value>1</value>
   </binding>
+  <mod-up>
+    <binding>
+      <command>property-assign</command>
+      <property>/controls/engines/engine[0]/reverser</property>
+      <value>0</value>
+  </binding>
+  </mod-up>
  </button>
- 
 </PropertyList>

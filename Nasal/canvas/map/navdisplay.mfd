@@ -106,6 +106,7 @@ var NavDisplay = {
 			removelistener(l);
 		# clean up MapStructure
 		me.map.del();
+		# call(canvas.Map.del, [], me.map);
 		# destroy the canvas
 		if (me.canvas_handle != nil)
 			me.canvas_handle.del();
@@ -253,7 +254,7 @@ var NavDisplay = {
 		me.df_options = nil;
 		if (contains(me.nd_style, 'options'))
 			me.df_options = me.nd_style.options;
-		nd_options = default_hash(nd_options, me.df_options);
+		nd_options = canvas.default_hash(nd_options, me.df_options);
 		me.options = nd_options;
 		me.route_driver = nil;
 		if (me.options == nil) me.options = {};
@@ -275,22 +276,9 @@ var NavDisplay = {
 			if(contains(feature.impl,'init')) feature.impl.init(me.nd, feature); # call The element's init code (i.e. updateCenter)
 		}
 
-		### this is the "old" method that's less flexible, we want to use the style hash instead (see above)
-		# because things are much better configurable that way
-		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
-		foreach(var element; ["dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
-		                      "status.wxr","status.wpt","status.sta","status.arpt"])
-			me.symbols[element] = me.nd.getElementById(element);
+		me.nd_style.initialize_elements(me);
 
-		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
-		# anything that needs updatecenter called, should be added to the vector here
-		#
-		foreach(var element; ["staArrowL2","staArrowR2","staFromL2","staToL2","staFromR2","staToR2",
-		                      "hdgTrk","trkInd","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
-		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine","selHdgLine2","curHdgPtr2",
-		                      "staArrowL","staArrowR","staToL","staFromL","staToR","staFromR"] )
-			me.symbols[element] = me.nd.getElementById(element).updateCenter();
-		
+
 		var map_rect = [124, 1024, 1024, 0];
 		var map_opts = me.options['map'];
 		if (map_opts == nil) map_opts = {};
@@ -342,6 +330,7 @@ var NavDisplay = {
 			get_tuned_course:get_course_by_freq,
 			get_position: get_current_position,
 			new: func(map) return { parents:[controller], map:map },
+			del: func() {print("cleaning up nd controller");},
 			should_update_all: func {
 				# TODO: this is just copied from aircraftpos.controller,
 				# it really should be moved to somewhere common and reused
@@ -386,12 +375,12 @@ var NavDisplay = {
 			if(!layer['isMapStructure']) # set up an old INEFFICIENT and SLOW layer
 				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( me.map, layer.name, controller );
 			else {
-				printlog(_MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
+				printlog(canvas._MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
 				var opt = me.options != nil and me.options[layer.name] != nil ? me.options[layer.name] : nil;
 				if (opt == nil and contains(layer, 'options'))
 					opt = layer.options;
 				if (opt != nil and default_opts != nil)
-					opt = default_hash(opt, default_opts);
+					opt = canvas.default_hash(opt, default_opts);
 				#elsif(default_opts != nil)
 				#    opt = default_opts;
 				var style = nil;
@@ -420,7 +409,7 @@ var NavDisplay = {
 					l.predicate = func {
 						var t = systime();
 						call(_predicate, arg, me);
-						printlog(_MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update layer "~l.name);
+						printlog(canvas._MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update layer "~l.name);
 					}
 				})();
 			}
@@ -805,7 +794,7 @@ var NavDisplay = {
 		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports') and me.in_mode('toggle_display_mode', ['MAP']));
 		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') and  me.in_mode('toggle_display_mode', ['MAP']));
 		# Okay, _how_ do we hook this up with FGPlot?
-		printlog(_MP_dbg_lvl, "Total ND update took "~((systime()-_time)*100)~"ms");
+		printlog(canvas._MP_dbg_lvl, "Total ND update took "~((systime()-_time)*100)~"ms");
 		setprop("/instrumentation/navdisplay["~ NavDisplay.id ~"]/update-ms", systime() - _time);
 	} # of update() method (50% of our file ...seriously?)
 };

@@ -34,6 +34,27 @@ var NDStyles = {
 		# aircraft developers should all be editing the same ND.svg image
 		# the code can deal with the differences now
 		svg_filename: "Nasal/canvas/map/Images/boeingND.svg",
+
+		initialize_elements: func(me) {
+
+		### this is the "old" method that's less flexible, we want to use the style hash instead (see above)
+		# because things are much better configurable that way
+		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
+		foreach(var element; ["dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
+		                      "status.wxr","status.wpt","status.sta","status.arpt"])
+			me.symbols[element] = me.nd.getElementById(element);
+
+		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
+		# anything that needs updatecenter called, should be added to the vector here
+		#
+		foreach(var element; ["staArrowL2","staArrowR2","staFromL2","staToL2","staFromR2","staToR2",
+		                      "hdgTrk","trkInd","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
+		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine","selHdgLine2","curHdgPtr2",
+		                      "staArrowL","staArrowR","staToL","staFromL","staToR","staFromR"] )
+			me.symbols[element] = me.nd.getElementById(element).updateCenter();
+
+		}, # initialize_elements
+
 		##
 		## this loads and configures existing layers (currently, *.layer files in Nasal/canvas/map)
 		##
@@ -1132,6 +1153,29 @@ var NDStyles = {
 			# aircraft developers should all be editing the same ND.svg image
 			# the code can deal with the differences now
 			svg_filename: "Nasal/canvas/map/Airbus/Images/airbusND.svg",
+
+		initialize_elements: func(me) {
+
+		### this is the "old" method that's less flexible, we want to use the style hash instead (see above)
+		# because things are much better configurable that way
+		# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
+		foreach(var element; ["dmeLDist","dmeRDist","dmeL","dmeR","vorL","vorR","vorLId","vorRId",
+		                      "status.wxr","status.wpt","status.sta","status.arpt"])
+			me.symbols[element] = me.nd.getElementById(element);
+
+		# load elements from vector image, and create instance variables using identical names, and call updateCenter() on each
+		# anything that needs updatecenter called, should be added to the vector here
+		#
+		foreach(var element; ["staArrowL2","staArrowR2","staFromL2","staToL2","staFromR2","staToR2",
+		                      "hdgTrk","trkInd","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
+		                      "HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine","selHdgLine2","curHdgPtr2",
+		                      "staArrowL","staArrowR","staToL","staFromL","staToR","staFromR"] )
+			me.symbols[element] = me.nd.getElementById(element).updateCenter();
+
+		}, # initialize_elements
+
+
+
 			##
 			## this loads and configures existing layers (currently, *.layer files in Nasal/canvas/map)
 			##

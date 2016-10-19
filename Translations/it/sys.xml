@@ -26,7 +26,7 @@
 		<loading-aircraft-list>caricamento elenco aerei in corso</loading-aircraft-list>
 		<loading-aircraft>caricamento aereo in corso</loading-aircraft>
 		<loading-nav-dat>caricamento dati di navigazione in corso</loading-nav-dat>
-		<navdata-airports>caricamento dati aeroporto in corso</navdata-airports>
+		<navdata-loading-airports>caricamento dati aeroporto in corso</navdata-loading-airports>
 		<navdata-navaids>caricamento radioassistenze in corso</navdata-navaids>
 		<navdata-fixes>caricamento fix in corso</navdata-fixes>
 		<navdata-pois>caricamento punti di interesse in corso</navdata-pois>

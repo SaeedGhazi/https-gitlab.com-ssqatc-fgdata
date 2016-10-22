@@ -3,7 +3,7 @@
 
   Model of hydrodynamic planing based on [Wagner:1933:POW] for JSBSim.
 
-    Copyright (C) 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2015 - 2016  Anders Gidenstam  (anders(at)gidenstam.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -77,6 +77,10 @@
      <tan><property>hydro/hull/pitch-rad</property></tan>
     </quotient>
    </function>
+   <clipto> <!-- We don't want to get +/-inf out of this function. -->
+    <min>-10000.0</min>
+    <max>10000.0</max>
+   </clipto>
   </fcs_function>
   <fcs_function name="hydro/planing/middlebody-entry-point-x-ft">
    <function>
@@ -92,6 +96,10 @@
      <tan><property>hydro/hull/pitch-rad</property></tan>
     </quotient>
    </function>
+   <clipto> <!-- We don't want to get +/-inf out of this function. -->
+    <min>-10000.0</min>
+    <max>10000.0</max>
+   </clipto>
   </fcs_function>
   <fcs_function name="hydro/planing/afterbody-entry-point-x-ft">
    <function>
@@ -107,6 +115,10 @@
      <tan><property>hydro/hull/pitch-rad</property></tan>
     </quotient>
    </function>
+   <clipto> <!-- We don't want to get +/-inf out of this function. -->
+    <min>-10000.0</min>
+    <max>10000.0</max>
+   </clipto>
   </fcs_function>
 
   <fcs_function name="hydro/planing/forebody-wetted-keel-ft">

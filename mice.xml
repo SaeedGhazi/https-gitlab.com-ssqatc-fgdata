@@ -151,6 +151,7 @@ current mode for each mouse is held in the
     <!-- No buttons pressed: control elevator -->
     <binding>
      <condition>
+      <!--
       <and>
        <not>
         <property>/devices/status/mice/mouse[0]/button[0]</property>
@@ -159,6 +160,10 @@ current mode for each mouse is held in the
         <property>/devices/status/mice/mouse[0]/button[1]</property>
        </not>
       </and>
+      -->
+      <not>
+        <property>/devices/status/mice/mouse[0]/button[1]</property>
+      </not>
      </condition>
      <command>property-adjust</command>
      <property>/controls/flight/elevator</property>

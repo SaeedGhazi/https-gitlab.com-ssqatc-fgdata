@@ -32,6 +32,10 @@
                 var i=0;
                 foreach (var s; serverlist.getChildren("server")) {
                     
+                    # prepare some default values
+                    s.initNode("online", 1, "BOOL" );
+                    s.initNode("location", "unknown", "STRING" );
+                    s.initNode("name", s.getNode("hostname").getValue(), "STRING" );
                     if (!s.getNode("online").getBoolValue()) {
                       continue; # skip offline servers
                     }

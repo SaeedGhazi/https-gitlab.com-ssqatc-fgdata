@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2016-March-22 for FlightGear 2016.2
+### Last synchronized with English master resource on 2016-November-10 for FlightGear 2016.4
 ### -->
 <PropertyList>
 
@@ -26,6 +26,7 @@
 		<loading-aircraft-list>caricamento elenco aerei in corso</loading-aircraft-list>
 		<loading-aircraft>caricamento aereo in corso</loading-aircraft>
 		<loading-nav-dat>caricamento dati di navigazione in corso</loading-nav-dat>
+		<navdata-reading-apt-dat-files>lettura dati aeroporto in corso</navdata-reading-apt-dat-files>
 		<navdata-loading-airports>caricamento dati aeroporto in corso</navdata-loading-airports>
 		<navdata-navaids>caricamento radioassistenze in corso</navdata-navaids>
 		<navdata-fixes>caricamento fix in corso</navdata-fixes>

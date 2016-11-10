@@ -72,6 +72,7 @@
 	<units-feet-desc>Utilizza i piedi per le distanze</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Utilizza i metri per le distanze</units-meters-desc>   <!-- English: "Use meters for distances" -->
 	<console-desc>Visualizza la console (opzione specifica per Windows)</console-desc>   <!-- English: "Display console (Windows specific)" -->
+	<json-report-desc>Stampa sullo standard output un report in formato JSON che fornisce informazioni quali la versione di FlightGear, $FG_ROOT, $FG_HOME, i percorsi per gli aerei e gli scenari, ecc.</json-report-desc>   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
 
 	<!-- Features options -->
 	<environment-options>Opzioni ambiente</environment-options>   <!-- English: "Environment Options" -->

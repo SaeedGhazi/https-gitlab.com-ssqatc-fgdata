@@ -147,6 +147,11 @@
     <description>console-desc</description>
    </option>
 
+   <option>
+    <name>json-report</name>
+    <description>json-report-desc</description>
+   </option>
+
   </section>
 
   <section>

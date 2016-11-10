@@ -55,6 +55,7 @@
 	<units-feet-desc>Use feet for distances</units-feet-desc>
 	<units-meters-desc>Use meters for distances</units-meters-desc>
 	<console-desc>Display console (Windows specific)</console-desc>
+	<json-report-desc>Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</json-report-desc>
 
 	<!-- Features options -->
 	<environment-options>Environment Options</environment-options>

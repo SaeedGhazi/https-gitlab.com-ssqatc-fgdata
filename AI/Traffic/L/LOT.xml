@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
-<!-- Author Ian Tolosa - Timetable week of 21OCT2013 - Updated JUL16 removed scrapped 767 added new 787 -->
+<!-- Author Ian Tolosa - Timetable week of 21OCT2013 - 737-400 mapped to 737-300  -->
 
 <trafficlist>
   <aircraft>
-    <model>Aircraft/737/737-LOT.xml</model>
+    <model>Aircraft/733/733-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -18,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-LOT.xml</model>
+    <model>Aircraft/733/733-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>
@@ -32,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/737/737-LOT.xml</model>
+    <model>Aircraft/733/733-LOT.xml</model>
     <livery>LOT</livery>
     <airline>LOT</airline>
     <home-port>EPWA</home-port>

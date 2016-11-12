@@ -9,18 +9,10 @@
         <author> Unknown </author>
         <filecreationdate> 2002-01-01 </filecreationdate>
         <version> $Id: c172p.xml,v 1.40 June 2015 $ </version>
-        <!-- experimental stall and spin, up to flat spin March 2014 -->
+        <!-- experimental stall and spin, up to flat spin March 2014, Dany93 (Daniel Dubreuil) -->
         <!-- Source: http://forum.flightgear.org/viewtopic.php?f=25&t=21664&start=45 -->
         <!-- this file with comments for stall and spin to help -->
-        <!-- further modifications for c172p-detailed 2015 -->
-        <!-- FOR TESTS, Two-engine and Propeller choice, dany june 2015-->
-        <!-- 
-        For 180 hp, engine[1]:
-        **Manually** set Internal Properties /controls/engines/engine[1]/magnetos = 3
-        better to set original magnetos to 0 (key)
-        do not use "s" (would start engine[0], 160 hp)
-        start with controls/engines/engine[1]/starter = 1 then back to 0, or Ctrl-click on "starter = ", twice to stop starter
-         -->
+        <!-- further modifications for c172p-detailed 2015 - 2016 -->
         <description> Cessna C-172 </description>
     </fileheader>
 
@@ -49,6 +41,10 @@
         </location>
     </metrics>
 
+        <!-- 
+            Cessna 172P Skyhawk 1982 (160hp) POH p.6-10, Weight and Moment:
+            **Basic Empty** (= with full oil) 1467 lbs, 57300 lb-ins. Gives CG at 39.1 ins.
+        -->
     <mass_balance>
         <ixx unit="SLUG*FT2"> 948 </ixx>
         <iyy unit="SLUG*FT2"> 1346 </iyy>
@@ -56,9 +52,9 @@
         <ixy unit="SLUG*FT2"> -0 </ixy>
         <ixz unit="SLUG*FT2"> -0 </ixz>
         <iyz unit="SLUG*FT2"> -0 </iyz>
-        <emptywt unit="LBS"> 1500 </emptywt>
+        <emptywt unit="LBS"> 1467 </emptywt>
         <location name="CG" unit="IN">
-            <x> 41 </x>
+            <x> 39.1 </x>
             <y> 0 </y>
             <z> 36.5 </z>
         </location>
@@ -191,24 +187,24 @@
             </location>
         </pointmass>
 
-        <!-- Extra weight due to 180 hp engine, pointmass [15]; managed by Systems/bushkit.xml -->
-        <!-- x location for empty CG at 38.1", cf. 552SP POH p.6-12, Weight and moment tabulation: 1642 lbs, 62600 lb-ins -->
+        <!-- Extra weight for the aircraft with 180 hp engine, **Basic empty** (= with full oil), pointmass [15]; managed by Systems/bushkit.xml -->
+        <!-- for empty aircraft CG at x = 38.1 ins, cf. 172S - N552SP POH (1998) p.6-12, Weight and moment tabulation: 1642 lbs, 62600 lb-ins -->
         <pointmass name="extra weight 180hp">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 7.75 </x>
+                <x> 30.3 </x>
                 <y>  0 </y>
                 <z> 26.6 </z>
             </location>
         </pointmass>
         
-        <!-- Extra weight due to oil quantity -->
-        <pointmass name="extra weight oil">
+        <!-- Loss of weight due to lacking oil, pointmass [16]. engine.nas, c172p-engine.xml -->
+        <pointmass name="lacking oil weight">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> -0.886 </x>
-                <y> 0.316 </y>
-                <z> 0.082 </z>
+                <x> -19.7 </x>
+                <y> 0 </y>
+                <z> 26.6 </z>
             </location>
         </pointmass>
     </mass_balance>
@@ -1351,7 +1347,6 @@
                               0.0000	0.0000
                               0.3490	-0.0322
                         </tableData>
-                        <value>0.25</value>
                     </table>
                     <!--
                           stall and spin (1): 

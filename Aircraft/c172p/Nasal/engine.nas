@@ -89,41 +89,102 @@ var primerTimer = maketimer(5, func {
 # ========== oil consumption ======================
 
 var oil_consumption = maketimer(1.0, func {
-    if (getprop("/engines/active-engine/oil_consumption_allowed"))
-        var oil_level = getprop("/engines/active-engine/oil-level");
-    else
-        var oil_level = 7.0;
-    var rpm = getprop("/engines/active-engine/rpm");
 
-    # Quadratic formula which outputs 1.0 for input 2300 RPM (cruise value),
-    # 0.6 for 700 RPM (idle) and 1.2 for 2700 RPM (max)
-    var rpm_factor = 0.00000012 * math.pow(rpm, 2) - 0.0001 * rpm + 0.62;
+    var oil_level = getprop("/engines/active-engine/oil-level");
+    if (getprop("/controls/engines/active-engine") == 0)
+        var oil_full = 7;
+    if (getprop("/controls/engines/active-engine") == 1)
+        var oil_full = 8;
+    var oil_lacking = oil_full - oil_level;
+    setprop("/engines/active-engine/oil-lacking", oil_lacking);
+    
+    if (getprop("/engines/active-engine/oil_consumption_allowed")) {
+    
+        var rpm = getprop("/engines/active-engine/rpm");
+    
+        # Quadratic formula which outputs 1.0 for input 2300 RPM (cruise value),
+        # 0.6 for 700 RPM (idle) and 1.2 for 2700 RPM (max)
+        var rpm_factor = 0.00000012 * math.pow(rpm, 2) - 0.0001 * rpm + 0.62;
+    
+        # Consumption rate defined as 1.5 quarter per 10 hours (36000 seconds)
+        # at cruise RPM
+        var consumption_rate = 1.5 / 36000; 
+    
+        if (getprop("/engines/active-engine/running")) {
+            oil_level = oil_level - consumption_rate * rpm_factor;
+            setprop("/engines/active-engine/oil-level", oil_level);
+        }
 
-    # Consumption rate defined as 1.5 quarter per 10 hours (36000 seconds)
-    # at cruise RPM
-    var consumption_rate = 1.5 / 36000; 
+        var low_oil_pressure_factor = 1.0;
+        var low_oil_temperature_factor = 1.0;
 
-    var low_oil_pressure_factor = 1.0;
-    var low_oil_temperature_factor = 1.0;
-
-    if (getprop("/engines/active-engine/running")) {
-        oil_level = oil_level - consumption_rate * rpm_factor;
-        setprop("/engines/active-engine/oil-level", oil_level);        
+        # If oil gets low (< 5.0), pressure should drop and temperature should rise
+        var oil_level_limited = std.min(oil_level, 5.0);
+    
+        # Should give 1.0 for oil_level = 5 and 0.1 for oil_level 4.92,
+        # which is the min before the engine stops
+        low_oil_pressure_factor = 11.25 * oil_level_limited - 55.25;
+    
+        # Should give 1.0 for oil_level = 5 and 1.5 for oil_level 4.92
+        low_oil_temperature_factor = -6.25 * oil_level_limited + 32.25;
+    
+        setprop("/engines/active-engine/low-oil-pressure-factor", low_oil_pressure_factor);
+        setprop("/engines/active-engine/low-oil-temperature-factor", low_oil_temperature_factor);
     }
 
-    # If oil gets low (< 5.0), pressure should drop and temperature should rise
-    var oil_level_limited = std.min(oil_level, 5.0);
+    else {
+        if (getprop("/controls/engines/active-engine") == 0)
+            setprop("/engines/active-engine/oil-level", 7);
+        if (getprop("/controls/engines/active-engine") == 1)
+            setprop("/engines/active-engine/oil-level", 8);
+    }
+});
 
-    # Should give 1.0 for oil_level = 5 and 0.1 for oil_level 4.92,
-    # which is the min before the engine stops
-    low_oil_pressure_factor = 11.25 * oil_level_limited - 55.25;
+# ========== carburetor icing ======================
 
-    # Should give 1.0 for oil_level = 5 and 1.5 for oil_level 4.92
-    low_oil_temperature_factor = -6.25 * oil_level_limited + 32.25;
+var carb_icing_function = maketimer(1.0, func {
+    if (getprop("/engines/active-engine/carb_icing_allowed")) {
+        var rpm = getprop("/engines/active-engine/rpm");
+        var dewpointC = getprop("/environment/dewpoint-degc");
+        var dewpointF = dewpointC * 9.0 / 5.0 + 32;
+        var airtempF = getprop("/environment/temperature-degf");
+        var oil_temp = getprop("/engines/active-engine/oil-temperature-degf");
+        
+        # the formula below attempts to modle the graph found in the POH, using RPM, airtempF and dewpointF as variables
+        var factorX = 13.2 - 3.2 * math.atan2 ( ((rpm - 2000.0) * 0.008), 1);
+        var factorY = 7.0 - 2.0 * math.atan2 ( ((rpm - 2000.0) * 0.008), 1);
+        var carb_icing_formula = 0.01 * (math.exp( math.pow((0.6 * airtempF + 0.3 * dewpointF - 42.0),2) / (-2 * math.pow(factorX,2))) * math.exp( math.pow((0.3 * airtempF - 0.6 * dewpointF + 14.0),2) / (-2 * math.pow(factorY,2))) - 0.2);
+        
+        # if carb heat on, the rate decreses by a certain amount
+        if (getprop("/engines/active-engine/running") and getprop("/controls/engines/current-engine/carb-heat"))
+            var carb_heat_rate = -0.01;
+        else
+            var carb_heat_rate = 0.0;
+        
+        # carb icing rate is multiplied by an oil temp factor so a cold engine doens't accumulate ice
+        var oil_temp_factor = (oil_temp - 120) / 100;
+        oil_temp_factor = std.max(0.0, std.min(oil_temp_factor, 1.0));
+        var carb_icing_rate = oil_temp_factor * (carb_icing_formula + carb_heat_rate);
 
-    setprop("/engines/active-engine/low-oil-pressure-factor", low_oil_pressure_factor);
-    setprop("/engines/active-engine/low-oil-temperature-factor", low_oil_temperature_factor);
+        var carb_ice = getprop("/engines/active-engine/carb_ice");
+        carb_ice = carb_ice + carb_icing_rate;
+        carb_ice = std.max(0.0, std.min(carb_ice, 1.0));
 
+        # this property is used to lower the RPM of the engine as ice accumulates
+        var vol_eff_factor = 1.0 - 2.218 * carb_ice;
+
+        setprop("/engines/active-engine/carb_ice", carb_ice);
+        setprop("/engines/active-engine/carb_icing_rate", carb_icing_rate);
+        setprop("/engines/active-engine/volumetric-efficiency-factor", vol_eff_factor);
+        setprop("/engines/active-engine/oil_temp_factor", oil_temp_factor);
+
+    }
+    else {
+        setprop("/engines/active-engine/carb_ice", 0.0);
+        setprop("/engines/active-engine/carb_icing_rate", 0.0);
+        setprop("/engines/active-engine/volumetric-efficiency-factor", 1.0);
+        setprop("/engines/active-engine/oil_temp_factor", 0.0);
+    };
 });
 
 # ========== engine coughing ======================
@@ -262,5 +323,6 @@ setlistener("/sim/signals/fdm-initialized", func {
     var engine_timer = maketimer(UPDATE_PERIOD, func { update(); });
     engine_timer.start();
     oil_consumption.start();
+    carb_icing_function.start();
     engine_coughing.start();
 });

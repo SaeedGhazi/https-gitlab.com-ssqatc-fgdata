@@ -63,6 +63,21 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <cockpit type="int">5</cockpit>
         </rating>
 
+        <thumbnail>
+          <type>panel</type>
+          <name>thumbnail-panel.jpg</name>
+        </thumbnail>
+
+        <thumbnail>
+          <type>exterior</type>
+          <name>thumbnail-exterior.jpg</name>
+        </thumbnail>
+
+        <thumbnail>
+          <!-- type is optional -->
+          <name>thumbnail-ground.jpg</name>
+        </thumbnail>
+
         <!--variant-of>c172p</variant-of-->
 
         <flight-model archive="y">jsb</flight-model>

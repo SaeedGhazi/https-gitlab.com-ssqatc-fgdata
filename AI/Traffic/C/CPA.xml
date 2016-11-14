@@ -2,7 +2,7 @@
 
 <!-- Author Ian Tolosa - From Timetable of June 2016 - A350 replaced by A333 - Includes Passenger and Cargo flights -->
 
- <trafficlist>
+<trafficlist>
   <aircraft>
     <model>Aircraft/A333/A333-CathayPacific.xml</model>
     <livery>CPA</livery>
@@ -1012,7 +1012,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77L-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1026,7 +1026,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77L-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1040,7 +1040,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77L-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1054,7 +1054,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77L-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1068,7 +1068,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77L-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1082,7 +1082,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77L-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1096,7 +1096,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1110,7 +1110,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1124,7 +1124,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1138,7 +1138,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1152,7 +1152,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1166,7 +1166,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1180,7 +1180,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1194,7 +1194,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1208,7 +1208,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1222,7 +1222,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1236,7 +1236,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1250,7 +1250,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1264,7 +1264,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1278,7 +1278,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1292,7 +1292,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1306,7 +1306,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1320,7 +1320,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1334,7 +1334,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1348,7 +1348,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1362,7 +1362,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1376,7 +1376,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1390,7 +1390,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1404,7 +1404,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1418,7 +1418,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1432,7 +1432,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1446,7 +1446,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1460,7 +1460,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1474,7 +1474,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1488,7 +1488,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1502,7 +1502,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1516,7 +1516,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1530,7 +1530,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1544,7 +1544,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1558,7 +1558,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1572,7 +1572,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1586,7 +1586,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1600,7 +1600,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1614,7 +1614,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1628,7 +1628,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1642,7 +1642,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1656,7 +1656,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1670,7 +1670,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1684,7 +1684,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1698,7 +1698,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1712,7 +1712,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1726,7 +1726,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1740,7 +1740,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1754,7 +1754,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1768,7 +1768,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1782,7 +1782,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1796,7 +1796,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1810,7 +1810,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1824,7 +1824,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1838,7 +1838,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1852,7 +1852,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1866,7 +1866,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1880,7 +1880,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1894,7 +1894,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1908,7 +1908,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1922,7 +1922,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1936,7 +1936,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1950,7 +1950,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1964,7 +1964,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1978,7 +1978,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>
@@ -1992,7 +1992,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-CathayPacific.xml</model>
+    <model>Aircraft/777/77W-CathayPacific.xml</model>
     <livery>CPA</livery>
     <airline>CPA</airline>
     <home-port>VHHH</home-port>

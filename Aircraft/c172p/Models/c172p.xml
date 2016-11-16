@@ -151,13 +151,13 @@
         <condition>
             <property>/sim/model/c172p/garmin196-visible</property>
         </condition>
-    </animation>    
-    
+    </animation>
+
     <!-- Canvas local Garmin 196 GPS -->
     <!--<model>
         <name>Garmin196-GPS</name>
         <path>Interior/Panel/garmin196/garmin196.xml</path>
-        <offsets>        
+        <offsets>
             <x-m>-0.4</x-m>
             <y-m>0.36</y-m>
             <z-m>0.205</z-m>
@@ -351,7 +351,7 @@
         </wing_right_damaged>
 
         <gear>
-            <nose-rollspeed-ms>engines/engine[7]/rpm</nose-rollspeed-ms>  
+            <nose-rollspeed-ms>engines/engine[7]/rpm</nose-rollspeed-ms>
             <left-rollspeed-ms>engines/engine[7]/n1</left-rollspeed-ms>
             <right-rollspeed-ms>engines/engine[7]/n2</right-rollspeed-ms>
         </gear>
@@ -954,7 +954,7 @@
         <name>vac</name>
         <path>Interior/Panel/Instruments/vac/vac.xml</path>
         <offsets>
-            <!-- MOD: Reposition VAC 
+            <!-- MOD: Reposition VAC
                  <x-m>-0.365</x-m>
                  <y-m>-0.432</y-m>
                  <z-m>0.0228</z-m>
@@ -6069,7 +6069,7 @@
     <animation>
         <type>select</type>
         <object-name>landinglightcover</object-name>
-        <!-- Damage Mod 
+        <!-- Damage Mod
         <object-name>landinglightcoverBD</object-name>
         <object-name>landinglightcoverLD</object-name>
         <object-name>landinglightcoverRD</object-name>
@@ -6084,7 +6084,7 @@
         <type>noshadow</type>
         <object-name>landinglight</object-name>
         <object-name>taxilight</object-name>
-        <!-- Damage Mod 
+        <!-- Damage Mod
         <object-name>landinglightBD</object-name>
         <object-name>landinglightCollapse</object-name>-->
     </animation>
@@ -6093,7 +6093,7 @@
     <animation>
         <type>flash</type>
         <object-name>landinglight</object-name>
-        <!-- Damage Mod 
+        <!-- Damage Mod
         <object-name>landinglightBD</object-name>
         <object-name>landinglightCollapse</object-name>-->
         <center>
@@ -6595,8 +6595,8 @@
     <animation>
         <type>material</type>
         <!--global type="bool">true</global-->
-        <!-- MOD: resume some to GROUP_Interior 
-        door interior objects can't be grouped because it 
+        <!-- MOD: resume some to GROUP_Interior
+        door interior objects can't be grouped because it
         is inside another group -->
         <object-name>GROUP_Interior</object-name>
         <!-- MOD: resume some to GROUP_Interior -->
@@ -6620,8 +6620,8 @@
     <animation>
         <type>material</type>
         <!--global type="bool">true</global-->
-        <!-- MOD: resume some to GROUP_InteriorParts 
-        doorhandles can't be grouped because 
+        <!-- MOD: resume some to GROUP_InteriorParts
+        doorhandles can't be grouped because
         it is inside another group -->
         <object-name>GROUP_InteriorParts</object-name>
         <!-- MODEND: resume some to GROUP_InteriorParts -->
@@ -6735,7 +6735,7 @@
             </and>
         </condition>
     </animation>
-    
+
     <!-- Passangers not visible if not enough weight on their seats or if using their view -->
     <animation>
         <type>select</type>
@@ -7307,7 +7307,7 @@
             <y-m>0.0</y-m>
             <z-m>0.028</z-m>
         </offsets>
-    </model>    
+    </model>
     <animation>
         <type>translate</type>
         <object-name>chock1</object-name>
@@ -7319,7 +7319,7 @@
             <y>0</y>
             <z>1.0</z>
         </axis>
-    </animation>        
+    </animation>
     <animation>
         <type>select</type>
         <object-name>chock1</object-name>
@@ -7355,7 +7355,7 @@
             <y>0</y>
             <z>1.0</z>
         </axis>
-    </animation>        
+    </animation>
     <animation>
         <type>select</type>
         <object-name>woodenchock</object-name>
@@ -7516,14 +7516,16 @@
                 <label>Remove Left Tie-Down</label>
             </binding>
         </hovered>
-    </animation>    
+    </animation>
     <animation>
         <type>select</type>
         <object-name>TiedownHotSpotLeft</object-name>
         <condition>
             <property>/sim/model/c172p/securing/tiedownL-addable</property>
             <or>
-                <property>/sim/current-view/internal</property>
+                <not>
+                    <property>/sim/current-view/internal</property>
+                </not>
                 <property>/nasal/tutorial/loaded</property>
             </or>
         </condition>
@@ -7570,7 +7572,7 @@
             </binding>
         </hovered>
     </animation>
-    
+
     <!-- Right Tiedowns -->
     <model>
         <name>tiedownR</name>
@@ -7626,14 +7628,16 @@
                 <label>Remove Right Tie-Down</label>
             </binding>
         </hovered>
-    </animation>    
+    </animation>
     <animation>
         <type>select</type>
         <object-name>TiedownHotSpotRight</object-name>
         <condition>
             <property>/sim/model/c172p/securing/tiedownR-addable</property>
             <or>
-                <property>/sim/current-view/internal</property>
+                <not>
+                    <property>/sim/current-view/internal</property>
+                </not>
                 <property>/nasal/tutorial/loaded</property>
             </or>
         </condition>
@@ -7743,7 +7747,9 @@
         <condition>
             <property>/sim/model/c172p/securing/tiedownT-addable</property>
             <or>
-                <property>/sim/current-view/internal</property>
+                <not>
+                    <property>/sim/current-view/internal</property>
+                </not>
                 <property>/nasal/tutorial/loaded</property>
             </or>
         </condition>
@@ -8048,7 +8054,7 @@
             <property>sim/panel-hotspots</property>
         </condition>
     </animation>
-    
+
     <!-- Left Tank Drain Sump -->
     <animation>
         <type>select</type>
@@ -8088,7 +8094,7 @@
             </binding>
         </hovered>
     </animation>
-    
+
     <!-- Right Tank Drain Sump -->
     <animation>
         <type>select</type>
@@ -8128,7 +8134,7 @@
             </binding>
         </hovered>
     </animation>
-    
+
     <!-- oil level check -->
     <animation>
         <type>select</type>
@@ -8255,7 +8261,7 @@
             </binding>
         </hovered>
     </animation>
-    
+
     <model>
         <name>extinguisher</name>
         <path>Interior/FE-ELT/fe.xml</path>
@@ -8283,7 +8289,7 @@
             </and>
         </condition>
     </animation>
-    
+
    <model>
         <name>extinguisher-amphibious</name>
         <path>Interior/FE-ELT/fe2.xml</path>
@@ -8310,8 +8316,8 @@
                 </equals>
             </or>
         </condition>
-    </animation>    
-    
+    </animation>
+
     <model>
         <name>elt</name>
         <path>Interior/FE-ELT/elt.xml</path>

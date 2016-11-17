@@ -6,6 +6,7 @@
 // Written by Lauri Peltonen (Zan)
 // Implementation of O'Neil's algorithm
 // Ground haze layer added by Thorsten Renk
+// aurora and ice haze scattering Thorsten Renk 2016
  
 varying vec3 rayleigh;
 varying vec3 mie;
@@ -17,6 +18,7 @@ varying float cphi;
 varying float delta_z;
 varying float alt;
 varying float earthShade;
+
  
 uniform float overcast;
 uniform float saturation;
@@ -43,6 +45,7 @@ uniform int use_landing_light;
 uniform int use_alt_landing_light;
 
 const float EarthRadius = 5800000.0;
+
 
 float Noise2D(in vec2 coord, in float wavelength);
 float fog_backscatter(in float avisibility);
@@ -103,13 +106,20 @@ void main()
   // position of the horizon line
 
   float lAltitude = alt + delta_z;
-  float radiusEye = EarthRadius + alt;
-  float radiusLayer = EarthRadius + lAltitude;
+  float radiusEye = (EarthRadius + alt);
+  float radiusLayer = (EarthRadius + lAltitude);
   float cthorizon;
   float ctterrain;
+  //float ctsd;
+
+  float SkydomeRadius = (EarthRadius + 100000.0);
+  float rEye = (EarthRadius + alt);
 
   if (radiusEye > radiusLayer) cthorizon = -sqrt(radiusEye * radiusEye - radiusLayer * radiusLayer)/radiusEye;
   else cthorizon = sqrt(radiusLayer * radiusLayer - radiusEye * radiusEye)/radiusLayer;
+
+  //if (rEye > SkydomeRadius) ctsd = -sqrt(rEye * rEye - SkydomeRadius * SkydomeRadius)/rEye;
+  //else ctsd = 0.0;//sqrt(SkydomeRadius * SkydomeRadius - rEye * rEye)/SkydomeRadius;
 
   ctterrain = -sqrt(radiusEye * radiusEye - EarthRadius * EarthRadius)/radiusEye;
 
@@ -346,14 +356,22 @@ hColor = clamp(hColor,0.0,1.0);
 
 color = mix(hColor+secondary_light * fog_backscatter(avisibility),color, transmission);
 
+// blur the upper skydome edge when we're outside the atmosphere
+
+float asf = smoothstep (75000.0, 90000.0, alt);
+
+float asf_corr = clamp((alt-115000.0)/45000.0, 0.0,1.0) * 0.08;
+
+
+color *= (1.0 - smoothstep( -0.12 -asf_corr, -0.06 - asf_corr, costheta) * asf);
 color = filter_combined(color);
+
+
+
 
   gl_FragColor = vec4(color, 1.0);
   gl_FragDepth = 0.1;
 
-  //gl_FragColor.rgb *= aurora_v * aurora_h;
 
-  //float test = dot (normalize(relVector), vec3 (0.0, 0.0, 1.0));
-  //gl_FragColor = vec4(test, test, test, 1.0);
 }
 

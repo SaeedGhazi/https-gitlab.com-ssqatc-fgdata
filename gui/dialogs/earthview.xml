@@ -95,7 +95,26 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-
+     <checkbox>
+        <row>4</row>
+        <col>1</col>
+        <label> Terrain normal mapping</label>
+        <halign>left</halign>
+        <property>/earthview/normal-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+     <checkbox>
+        <row>5</row>
+        <col>1</col>
+        <label> Cloud normal mapping</label>
+        <halign>left</halign>
+        <property>/earthview/cloud-normal-flag</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
     </group>
   </group>
 
@@ -189,6 +208,10 @@
 				<command>dialog-apply</command>
 				<object-name>cloud-rotation-angle</object-name>
 			</binding>
+      			<binding>
+        			<command>nasal</command>
+        			<script>earthview.adjust_cloud_tiles()</script>
+      			</binding>
 		</slider>
 		<text>
 			<label>12345678</label>

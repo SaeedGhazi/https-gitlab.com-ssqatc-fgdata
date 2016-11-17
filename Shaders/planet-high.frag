@@ -16,6 +16,7 @@ uniform bool use_overlay;
 uniform sampler2D texture;
 uniform sampler2D shadowtex;
 uniform sampler2D grain_texture;
+uniform sampler2D normal_texture;
 
 float Noise2D(in vec2 coord, in float wavelength);
 vec3 filter_combined (in vec3 color) ;
@@ -40,11 +41,18 @@ void main()
     n = (2.0 * gl_Color.a - 1.0) * normal;
     n = normalize(n);
 
+    vec4 nmap  = texture2D(normal_texture, gl_TexCoord[0].st);
+
+
 	vec3 VBinormal;
-	VBinormal = cross(normal, VTangent);
+	VBinormal = normalize(cross(normal, VTangent));
+
+	vec3 N = nmap.rgb * 2.0 - 1.0;
+        N = normalize(N.x * normalize(VTangent) * 0.6 + N.y * VBinormal * 0.6 + N.z * n);
+
 	
 	float xOffset = -0.005 * dot(lightDir, normalize(VTangent));
-	float yOffset = -0.005 * dot(lightDir, normalize(VBinormal));
+	float yOffset = -0.005 * dot(lightDir, VBinormal);
 	
      	if ((use_cloud_shadows)&&(use_clouds))
 		{shadowTexel = texture2D(shadowtex, vec2(gl_TexCoord[0].s-xOffset, gl_TexCoord[0].t-yOffset));}
@@ -64,10 +72,12 @@ void main()
 
 	
     vec3 light_specular = vec3 (1.0, 1.0, 1.0);
-    NdotL = dot(n, lightDir);
+    NdotL = dot(N, lightDir);
     float NdotLraw = NdotL;
     // due to atmosphere scattering, we should make this harder
     NdotL = smoothstep(-0.2,0.2,NdotL);	
+    // fog does not feel normal map
+    float NdotLfog = smoothstep(-0.2, 0.2, dot(n, lightDir));
    
     float intensity = length(diffuse_term);
     vec4 dawn = intensity * normalize (vec4 (1.0,0.5,0.3,1.0));
@@ -138,7 +148,7 @@ void main()
 
 	//vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb/1.73 *  correction * clamp(NdotL + correction1,0.01, 0.99) ),0.0,1.0);
 
-	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(smoothstep(0.4, 1.0,NdotL),0.0,1.0) * length(diff_term.rgb/1.73);
+	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(smoothstep(0.4, 1.0,NdotLfog),0.0,1.0) * length(diff_term.rgb/1.73);
 
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
 
@@ -147,6 +157,6 @@ void main()
 
 	fragColor.rgb = filter_combined(fragColor.rgb);
 
-    gl_FragColor = clamp(fragColor, 0.0, 1.0);
+        gl_FragColor = clamp(fragColor, 0.0, 1.0);
 
 }

@@ -1,3 +1,5 @@
+// -*-C++-*-
+
 #version 120
  
 // Atmospheric scattering shader for flightgear
@@ -13,6 +15,7 @@ uniform float avisibility;
 uniform float visibility;
 uniform float terrain_alt; 
 uniform float air_pollution;
+uniform float radius_modifier;
 
 varying vec3 rayleigh;
 varying vec3 mie;
@@ -24,6 +27,7 @@ varying float cphi;
 varying float delta_z;
 varying float alt; 
 varying float earthShade;
+
 
 // Dome parameters from FG and screen
 const float domeSize = 80000.0;
@@ -118,7 +122,8 @@ void main()
 
     // Calculate altitude as the distance from skydome center to camera
     // Make it so that 0.0 is ground level and 1.0 is 100km (space) level
-    float altitude = distance(groundPoint, vec4(0.0, 0.0, 0.0, 1.0));
+    // the correction ensures compatibility with Earthview for orbits farther out
+    float altitude = distance(groundPoint, vec4(0.0, 0.0, 0.0, 1.0)) * (1.0 -0.0013);
     float scaledAltitude = altitude / realDomeSize;
 
     // the local horizon angle

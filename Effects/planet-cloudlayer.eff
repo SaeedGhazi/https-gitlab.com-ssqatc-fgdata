@@ -21,7 +21,23 @@
 		</material>
 		<visibility><use>/environment/visibility-m</use></visibility>
 		<use-overlay-textures><use>/earthview/overlay-texture-flag</use></use-overlay-textures>
+		<use-cloud-normals><use>/earthview/cloud-normal-flag</use></use-cloud-normals>
+		<shade-effect><use>/earthview/shade-effect</use></shade-effect>
+		<sun-angle><use>/sim/time/sun-angle-rad</use></sun-angle>
+    		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
+    		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    		<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
+    		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
+    		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
 	</parameters>
+	<generate>
+		<normal type="int">15</normal>
+		<tangent type="int">6</tangent>
+	</generate>
 
  
 	<technique n="10">
@@ -68,15 +84,11 @@
 				<source>src-alpha</source>
 				<destination>one-minus-src-alpha</destination>
 			</blend>
-			<shade-model>
-				<use>shade-model</use>
-			</shade-model>
+			<shade-model>smooth</shade-model>
 			<cull-face>
 				<use>cull-face</use>
 			</cull-face>
-			<rendering-hint>
-				<use>rendering-hint</use>
-			</rendering-hint>
+			<rendering-hint>transparent</rendering-hint>
 		<render-bin>
 					<bin-number>111</bin-number>
 					<bin-name>DepthSortedBin</bin-name>
@@ -110,13 +122,19 @@
 				<wrap-t><use>texture[1]/wrap-t</use></wrap-t>
 				<internal-format><use>texture[1]/internal-format</use></internal-format>
 			</texture-unit>
-			<!--<vertex-program-two-side>
-				<use>vertex-program-two-side</use>
-			</vertex-program-two-side>-->
 			<program>
 				<vertex-shader>Shaders/planet.vert</vertex-shader>
 				<fragment-shader>Shaders/planet-cloudlayer.frag</fragment-shader>
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
+       				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+			<attribute>
+				<name>tangent</name>
+				<index>6</index>
+			</attribute>
+			<attribute>
+				<name>normal</name>
+				<index>15</index>
+			</attribute>
 			</program>
 			
 			<uniform>
@@ -137,6 +155,13 @@
 				</value>
 			</uniform>
 			<uniform>
+				<name>use_cloud_normals</name>
+				<type>bool</type>
+				<value>
+					<use>use-cloud-normals</use>
+				</value>
+			</uniform>
+			<uniform>
 				<name>colorMode</name>
 				<type>int</type>
 				<value>
@@ -150,6 +175,65 @@
 					<use>visibility</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>shade_effect</name>
+				<type>float</type>
+				<value>
+					<use>shade-effect</use>
+				</value>
+			</uniform>
+      			<uniform>
+        			 <name>air_pollution</name>
+        			 <type>float</type>
+        			 <value><use>air_pollution</use></value>
+      			</uniform>
+			<uniform>
+				<name>sun_angle</name>
+				<type>float</type>
+				<value>
+					<use>sun-angle</use>
+				</value>
+			</uniform>
+<uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>  
 		</pass>
 	</technique>
 

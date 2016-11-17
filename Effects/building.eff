@@ -296,6 +296,8 @@
         <vertex-shader>Shaders/building-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

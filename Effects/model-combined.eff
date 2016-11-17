@@ -48,6 +48,8 @@ please see Docs/README.model-combined.eff for documentation
 		<reflection-enabled type="int">0</reflection-enabled>
 		<reflection-correction type="float">0.0</reflection-correction>
 		<reflect-map-enabled type="int">0</reflect-map-enabled>
+		<reflection-fresnel-factor type="float">0.0</reflection-fresnel-factor>
+		<reflection-type type="int">1</reflection-type>
 		<reflection-dynamic type="int">0</reflection-dynamic>
 		<texture n="4">
 			<image>Aircraft/Generic/Effects/ReflectMaps/reflectmap.png</image>
@@ -608,7 +610,7 @@ please see Docs/README.model-combined.eff for documentation
 				</value>
 		  	</uniform>
 			   
-			   <!-- 			reflection is used -->
+			   <!-- reflection is used -->
 			   <uniform>
 				   <name>refl_enabled</name>
 				   <type>int</type>
@@ -624,6 +626,15 @@ please see Docs/README.model-combined.eff for documentation
 					   <use>reflection-correction</use>
 				   </value>
 			   </uniform>
+
+			   <!-- Fresnel reflectivity -->
+			   <uniform>
+				   <name>refl_fresnel_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>reflection-fresnel-factor</use>
+				   </value>
+			   </uniform>
 			   
 			   <!-- use a reflection map-->
 			   <uniform>
@@ -633,6 +644,17 @@ please see Docs/README.model-combined.eff for documentation
 					   <use>reflect-map-enabled</use>
 				   </value>
 			   </uniform>
+
+			   <!-- how are colors merged in a reflection-->
+			   <uniform>
+				   <name>refl_type</name>
+				   <type>int</type>
+				   <value>
+					   <use>reflection-type</use>
+				   </value>
+			   </uniform>
+
+
 			   <!-- reflection is dynamic -->
 			   <uniform>
 				   <name>refl_dynamic</name>

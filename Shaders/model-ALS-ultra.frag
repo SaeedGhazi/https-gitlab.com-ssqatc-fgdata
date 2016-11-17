@@ -33,6 +33,7 @@ uniform int lightmap_multi;
 uniform int nmap_dds;
 uniform int nmap_enabled;
 uniform int refl_enabled;
+uniform int refl_type;
 uniform int refl_map;
 uniform int grain_texture_enabled;
 uniform int rain_enabled;
@@ -52,6 +53,7 @@ uniform float lightmap_r_factor;
 uniform float nmap_tile;
 uniform float refl_correction;
 uniform float refl_fresnel;
+uniform float refl_fresnel_factor;
 uniform float refl_noise;
 uniform float refl_rainbow;
 uniform float grain_magnification;
@@ -233,17 +235,25 @@ void main (void)
 
     /// END grain overlay
 
+    vec3 reflVecN;
+
     ///BEGIN bump
     if (nmap_enabled > 0){
         N = nmap.rgb * 2.0 - 1.0;
+	// this is exact only for viewing under 90 degrees but much faster than the real solution
+	reflVecN = normalize (N.x * VTangent + N.y * VBinormal + N.z * reflVec);
         N = normalize(N.x * VTangent + N.y * VBinormal + N.z * VNormal);
         if (nmap_dds > 0)
             N = -N;
         } else {
             N = normalize(VNormal);
+	    reflVecN = reflVec;
         }
     ///END bump
-    vec4 reflection = textureCube(Environment, reflVec * dot(N,VNormal));
+
+
+
+    vec4 reflection = textureCube(Environment, reflVecN  );
     vec3 viewVec = normalize(vViewVec);
     float v      = abs(dot(viewVec, normalize(VNormal)));// Map a rainbowish color
     vec4 fresnel = texture2D(ReflGradientsTex, vec2(v, 0.75));
@@ -329,6 +339,12 @@ void main (void)
             } else {
                 reflFactor = gl_FrontMaterial.shininess* 0.0078125 + transparency_offset;
                 }
+
+	    // enhance low angle reflection by a fresnel term
+	    float fresnel_enhance = (1.0-smoothstep(0.0,0.4, dot(N,-normalize(vertVec)))) * refl_fresnel_factor;
+
+	    reflFactor+=fresnel_enhance;
+
             reflFactor = clamp(reflFactor, 0.0, 1.0);
 
             // add fringing fresnel and rainbow effects and modulate by reflection
@@ -339,7 +355,12 @@ void main (void)
             vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
             raincolor += Specular;
             raincolor *= light_diffuse;
-            mixedcolor = mix(texel, raincolor, reflFactor).rgb;
+
+	    if (refl_type == 1)
+            	{mixedcolor = mix(texel, raincolor, reflFactor).rgb;}
+	    else if (refl_type == 2)
+		{mixedcolor = ((texel +(reflcolor * reflFactor))-(0.5*reflFactor)).rgb;}
+
         } else {
             mixedcolor = texel.rgb;
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- Author Ian Tolosa - From Timetable Week of 11JUL2016 - Does not include Thai Smile Fleet or Flights -->
+<!-- Author Ian Tolosa - Timetable Week of 11JUL2016 - Does not include Thai Smile -->
 
 <trafficlist>
   <aircraft>
@@ -508,7 +508,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -522,7 +522,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -536,7 +536,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -550,7 +550,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -564,7 +564,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -578,7 +578,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -592,7 +592,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -606,7 +606,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -620,7 +620,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -634,7 +634,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -648,7 +648,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -662,7 +662,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -676,7 +676,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -690,7 +690,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-Thai.xml</model>
+    <model>Aircraft/777/77L-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -704,7 +704,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -718,7 +718,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -732,7 +732,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -746,7 +746,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -760,7 +760,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -774,7 +774,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -788,7 +788,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -802,7 +802,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -816,7 +816,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -830,7 +830,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -844,7 +844,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -858,7 +858,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -872,7 +872,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -886,7 +886,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -900,7 +900,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -914,7 +914,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -928,7 +928,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -942,7 +942,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -956,7 +956,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>
@@ -970,7 +970,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-300-Thai.xml</model>
+    <model>Aircraft/777/77W-Thai.xml</model>
     <livery>THA</livery>
     <airline>THA</airline>
     <home-port>VTBS</home-port>

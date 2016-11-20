@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <description>A330-200 Freighter</description>
+ <author>3D Model Innis Cunningham, UV map Ian Tolosa</author> 
+ <path>Models/A33X.ac</path>
+  
+     <animation>
+		<type>select</type>
+		<object-name>gear</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>200</value>
+			</less-than>
+		</condition>
+	</animation>
+  
+</PropertyList>

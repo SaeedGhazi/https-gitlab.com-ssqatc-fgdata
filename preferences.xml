@@ -266,7 +266,7 @@ Started September 2000 by David Megginson, david@megginson.com
             <recover-slow-sec type="double">15</recover-slow-sec>
         </parameters>
         <internal>
-          <g-force type="double">1</g-force>
+          <jsb type="bool">false</jsb>
           <g-force-inv type="double">1</g-force-inv>
           <blackout type="double">0</blackout>
           <redout type="double">0</redout>
@@ -919,6 +919,11 @@ Started September 2000 by David Megginson, david@megginson.com
       <warp-easing-duration-secs type="double">10</warp-easing-duration-secs>
     </time>
   </sim>
+  <!-- accelerations -->
+  <accelerations>
+    <pilot-gdamped type="double">1.0</pilot-gdamped>
+    <pilot-g type="double">1.0</pilot-g>
+  </accelerations>
   <!-- mouse mode -->
   <devices>
     <status>

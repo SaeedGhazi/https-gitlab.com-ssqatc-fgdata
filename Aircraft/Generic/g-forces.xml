@@ -9,7 +9,7 @@
 ## Todo: Tie in with Thorstens ALS greyout and tunnel vision filters             ##
 ##                                                                               ##
 ##                                                                               ##
-## Version 2.03            License: GPL 2.0                                      ##
+## Version 2.04            License: GPL 2.0                                      ##
 ##                                                                               ##
 ###################################################################################
 -->
@@ -34,16 +34,17 @@
             <onset-r>sim/rendering/redout/internal/log/onset-r</onset-r>
             <fast-r>sim/rendering/redout/internal/log/fast-r</fast-r>
         </log>
-        <g-force>sim/rendering/redout/internal/g-force</g-force>
+        <g-damp>accelerations/pilot-gdamped</g-damp>
         <g-force-inv>sim/rendering/redout/internal/g-force-inv</g-force-inv>
         <blackout>sim/rendering/redout/internal/blackout</blackout>
         <redout>sim/rendering/redout/internal/redout</redout>
-
+        <jsb>sim/rendering/redout/internal/jsb</jsb>
         <alpha>sim/rendering/redout/alpha</alpha>
         <red>sim/rendering/redout/red</red>
         <inside>sim/current-view/internal</inside>
         <sum>sim/rendering/redout/internal/sum</sum>
         <enable>sim/rendering/redout/enabled</enable>
+        <g-force>accelerations/pilot-g[0]</g-force>
     </params>
 
     <filter><!-- check for NaN -->
@@ -214,15 +215,10 @@
         <enable>
             <!-- check if JSBSim is the FDM. -->
             <condition>
-                <property alias="/params/enable"/>
-                <less-than>
-                    <property>fdm/jsbsim/aero/alpha-deg</property>
-                    <value>180.0</value>
-                </less-than>
-                <greater-than>
-                    <property>fdm/jsbsim/aero/alpha-deg</property>
-                    <value>-180.0</value>
-                </greater-than>
+                <equals>
+                    <property alias="/params/jsb"/>
+                    <value>1</value>
+                </equals>
             </condition>
         </enable>
         <input>
@@ -237,28 +233,11 @@
     </filter>
 
     <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <!-- check if YaSim is the FDM. -->
-            <condition>
-                <property alias="/params/enable"/>
-                <not>
-                    <less-than>
-                        <property>fdm/jsbsim/aero/alpha-deg</property>
-                        <value>180.0</value>
-                    </less-than>
-                    <greater-than>
-                        <property>fdm/jsbsim/aero/alpha-deg</property>
-                        <value>-180.0</value>
-                    </greater-than>
-                </not>
-            </condition>
-        </enable>
-        <input>
-            <property>accelerations/pilot-g[0]</property>
-        </input>
-        <output alias="/params/g-force"/>
+        <!-- for backwards compatibility for planes that use gdamped property -->
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input alias="/params/g-force"/>
+        <output alias="/params/g-damp"/>
     </filter>
 
     <filter>

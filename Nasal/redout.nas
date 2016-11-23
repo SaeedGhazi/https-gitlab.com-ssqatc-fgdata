@@ -14,35 +14,7 @@ var run = func {
 
   if (running_compression)
   {
-    var GCurrent = 1.0;
-
-    if (fdm == "jsb")
-    {
-      GCurrent = getprop("/accelerations/pilot/z-accel-fps_sec");
-      if (GCurrent != nil) GCurrent = - GCurrent / 32;
-    }
-    else
-    {
-      GCurrent = getprop("/accelerations/pilot-g[0]");
-    }
-
-    if (GCurrent == nil)
-    {
-      GCurrent = 1.0;
-    }
-
-    # Updated the GDamped using a filter.
-    if (GDamped < 0)
-    {
-        # Redout happens faster and clears quicker
-        GDamped = lp_red.filter(GCurrent);
-    }
-    else
-    {
-        GDamped = lp_black.filter(GCurrent);
-    }
-
-    setprop("/accelerations/pilot-gdamped", GDamped);
+    GDamped = getprop("/accelerations/pilot-gdamped");
 
     if (internal)
     {
@@ -66,6 +38,14 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized",
   func {
     removelistener(fdm_init_listener); # uninstall, so we're only called once
     fdm = getprop("/sim/flight-model");
+
+    if (fdm == "jsb") {
+      # this is used in the g-force property rules.
+      setprop("/sim/rendering/redout/internal/jsb", 1);
+    } else {
+      setprop("/sim/rendering/redout/internal/jsb", 0);
+    }
+
     running_compression = getprop("/sim/rendering/headshake/enabled");
     internal = getprop("/sim/current-view/internal");
     lp_black = aircraft.lowpass.new(0.2);

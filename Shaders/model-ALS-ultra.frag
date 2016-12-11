@@ -134,6 +134,8 @@ void main (void)
 
     vec3 mixedcolor;
     vec3 N = vec3(0.0,0.0,1.0);
+
+    
     float pf = 0.0;
     float pf1 = 0.0;
     ///some generic light scattering parameters 
@@ -217,7 +219,9 @@ void main (void)
         light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.7,earthShade) ));
         }
 
-
+    vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
+    vec3 ecViewDir = (gl_ModelViewMatrix * (ep - vec4(rawpos, 1.0))).xyz;
+    vec3 HV = normalize(normalize(gl_LightSource[0].position.xyz) + normalize(ecViewDir));
 
     /// END light
 
@@ -260,12 +264,13 @@ void main (void)
     vec4 rainbow = texture2D(ReflGradientsTex, vec2(v, 0.25));
 
     float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
-    float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz)));
+    //float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz))); 
+    float nDotHV = max(0.0, dot(N,HV));
     //glare on the backside of tranparent objects
     if ((gl_FrontMaterial.diffuse.a < 1.0 || texel.a < 1.0)
         && dot(N, normalize(gl_LightSource[0].position.xyz)) < 0.0) {
             nDotVP = max(0.0, dot(-N, normalize(gl_LightSource[0].position.xyz)) * (1.0 -texel.a) );
-            nDotHV = max(0.0, dot(-N, normalize(gl_LightSource[0].halfVector.xyz)) * (1.0 -texel.a) );
+            nDotHV = max(0.0, dot(-N, HV) * (1.0 -texel.a) );
         }
 
     float nDotVP1 = 0.0;

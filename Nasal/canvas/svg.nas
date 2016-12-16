@@ -502,13 +502,15 @@ var parsesvg = func(group, path, options = nil)
     else if( name == "path" or name == "rect" )
     {
       pushElement('path', attr['id']);
+      var p = stack[-1];
 
       if( name == "rect" )
       {
-        var width = evalCSSNum(attr['width']);
-        var height = evalCSSNum(attr['height']);
-        var x = evalCSSNum(attr['x']);
-        var y = evalCSSNum(attr['y']);
+        p.set('rect/left', evalCSSNum(attr['x']));
+        p.set('rect/top', evalCSSNum(attr['y']));
+        p.set('rect/width', evalCSSNum(attr['width']));
+        p.set('rect/height', evalCSSNum(attr['height']));
+        
         var rx = attr['rx'];
         var ry = attr['ry'];
 
@@ -517,15 +519,14 @@ var parsesvg = func(group, path, options = nil)
         else if( rx == nil )
           rx = ry;
 
-        var cfg = {};
-        if( rx != nil )
-          cfg["border-radius"] = [evalCSSNum(rx), evalCSSNum(ry)];
-
-        stack[-1].rect(x, y, width, height, cfg);
+       if( rx != nil ) {
+          p.set('border-radius[0]', rx);
+          p.set('border-radius[1]', ry);
+        }
+      } else {
+        p.setDataSVG(attr['d']);
       }
-      else
-        parsePath(attr['d']);
-      
+
       var fillOpacity = style['fill-opacity'];
       if( fillOpacity != nil)
         stack[-1].set('fill', style['fill'] ~ sprintf("%02x", int(style['fill-opacity']*255)));
@@ -534,13 +535,13 @@ var parsesvg = func(group, path, options = nil)
 
       var w = style['stroke-width'];
       stack[-1].setStrokeLineWidth( w != nil ? evalCSSNum(w) : 1 );
-      
+
       var strokeOpacity = style['stroke-opacity'];
       if(strokeOpacity != nil)
         stack[-1].set('stroke', (style['stroke']  ~ sprintf("%02x", int(style['stroke-opacity']*255))));
       else
         stack[-1].set('stroke', style['stroke'] or "none");
-      
+
       var linecap = style['stroke-linecap'];
       if( linecap != nil )
         stack[-1].setStrokeLineCap(style['stroke-linecap']);

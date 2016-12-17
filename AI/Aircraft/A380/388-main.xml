@@ -3,7 +3,6 @@
   <description>Airbus A380-800</description>
   <author>Ian(Yves) Tolosa. July 2016 </author>
   <path>Models/388.ac</path>
-  
   <!-- Gear Showed only < 150 knotspeed -->
   <animation>
     <type>select</type>
@@ -11,13 +10,11 @@
     <condition>
       <less-than>
         <property>velocities/true-airspeed-kt</property>
-        <value>150</value>
+        <value>180</value>
       </less-than>
     </condition>
   </animation>
-  
   <!-- Animated Jetway Anchoring Point -->
-  
   <nasal>
     <load>
 	var model = cmdarg();
@@ -27,5 +24,4 @@
 	model.getNode("door[0]/jetway-hood-deg", 1).setValue(3);
 	</load>
   </nasal>
-  
 </PropertyList>

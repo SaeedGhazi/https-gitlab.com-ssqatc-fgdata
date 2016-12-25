@@ -26,7 +26,6 @@ Started September 2000 by David Megginson, david@megginson.com
       </validate>
       <download-dir type="string" userarchive="n"/>
     </paths>
-    <intl include="Translations/locale.xml"/>
     <aircraft>c172p</aircraft>
     <virtual-cockpit type="bool">false</virtual-cockpit>
     <presets preserve="y">

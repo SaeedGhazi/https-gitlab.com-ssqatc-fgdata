@@ -100,8 +100,14 @@ command interface /autopilot/route-manager/input:
                 gui.dialog_update("route-manager");
             }
 
-            var file_selector = gui.FileSelector.new(load_route, "Load flight-plan", "Load");
-            var save_selector = gui.FileSelector.new(save_route, "Save flight-plan", "Save");
+            var defaultDirInFileSelector = getprop("/sim/fg-home");
+
+            var file_selector = gui.FileSelector.new(
+              callback: load_route, title: "Load flight-plan", button: "Load",
+              dir: defaultDirInFileSelector, dotfiles: 1);
+            var save_selector = gui.FileSelector.new(
+              callback: save_route, title: "Save flight-plan", button: "Save",
+              dir: defaultDirInFileSelector, dotfiles: 1);
 
             var activate_fp = func {
                 fgcommand("activate-flightplan", props.Node.new({"activate": 1}));

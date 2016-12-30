@@ -556,7 +556,7 @@ var FileSelector = {
     # setters only take effect after the next call to open()
     set_title: func(title) { me._inner.title = title },
     set_button: func(button) { me._inner.button = button },
-    set_directory: func(dir) { me._inner.directory = directory },
+    set_directory: func(dir) { me._inner.directory = dir },
     set_file: func(file) { me._inner.placeholder = file },
     set_dotfiles: func(dot) { me._inner.show_hidden = dot },
     set_pattern: func(pattern) { me._inner.pattern = (pattern == nil) ? [] : pattern },

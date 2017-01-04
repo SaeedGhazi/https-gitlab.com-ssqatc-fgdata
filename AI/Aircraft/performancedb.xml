@@ -417,8 +417,15 @@
     <aircraft>
       <type>ATR</type>
       <base>turboprop_transport</base>
-      <!-- add ATR data -->
-    </aircraft>
+	  <rotate-speed-kts>110.0</rotate-speed-kts>
+	  <takeoff-speed-kts>115.0</takeoff-speed-kts>
+	  <climbspeed-kts>170.0</climbspeed-kts>
+	  <cruise-speed-kts>275.0</cruise-speed-kts>
+	  <decent-speed-kts>200.0</decent-speed-kts>
+	  <approach-speed-kts>145.0</approach-speed-kts>
+	  <touchdown-speed-kts>115.0</touchdown-speed-kts>
+	  <taxi-speed-kts>20.0</taxi-speed-kts>
+	</aircraft>
     <aircraft>
       <type>B1900</type>
       <base>turboprop_transport</base>

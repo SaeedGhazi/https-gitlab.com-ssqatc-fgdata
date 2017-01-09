@@ -73,7 +73,7 @@ var loop = func(id) {
 		apt = a;
 		var is_heliport = 1;
 		foreach (var rwy; keys(apt.runways))
-			if (rwy[0] != `H`)
+			if (rwy and rwy[0] != `H`)
 				is_heliport = 0;
 
 		if (!is_heliport) {

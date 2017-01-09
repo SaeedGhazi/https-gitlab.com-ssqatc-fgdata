@@ -4,6 +4,11 @@
   <author>Ian(Yves) Tolosa. June 2016 </author>
   <path>Models/788.ac</path>
   
+  
+  <offsets>
+	<pitch-deg>-0.75</pitch-deg>   
+  </offsets>  
+  
     <animation>
     <type>select</type>
     <object-name>Gear</object-name>

@@ -180,7 +180,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <vegetation-density type="double" userarchive="y">1.0</vegetation-density>
       <random-buildings type="bool" userarchive="y">false</random-buildings>
       <building-density type="double" userarchive="y">1.0</building-density>
-      <building-mesh type="bool" userarchive="y">false</building-mesh>
       <horizon-effect type="bool" userarchive="y">false</horizon-effect>
       <point-sprites type="bool" userarchive="y">true</point-sprites>
       <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
@@ -364,6 +363,33 @@ Started September 2000 by David Megginson, david@megginson.com
 	 <use-night-vision type="bool">false</use-night-vision>
 	 <use-IR-vision type="bool">false</use-IR-vision>
       </als-filters>
+
+      <scenery-path-suffix>
+        <name type="string">Pylons</name>
+        <enabled type="bool" userarchive="y">false</enabled>
+      </scenery-path-suffix>
+
+      <scenery-path-suffix>
+        <name type="string">Roads</name>
+        <enabled type="bool" userarchive="y">false</enabled>
+      </scenery-path-suffix>
+
+      <scenery-path-suffix>
+        <name type="string">Buildings</name>
+        <enabled type="bool" userarchive="y">false</enabled>
+      </scenery-path-suffix>
+
+      <scenery-path-suffix>
+        <name type="string">Objects</name>
+        <enabled type="bool" userarchive="y">true</enabled>
+      </scenery-path-suffix>
+
+      <!-- Terrain must be last, as the suffixes are searched in order -->
+      <scenery-path-suffix>
+        <name type="string">Terrain</name>
+        <enabled type="bool" userarchive="y">true</enabled>
+      </scenery-path-suffix>
+
     </rendering>
     <model-hz type="int">120</model-hz>
     <navdb>

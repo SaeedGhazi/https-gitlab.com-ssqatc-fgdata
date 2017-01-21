@@ -227,6 +227,18 @@
 				</binding>
 			</checkbox>
 
+			<checkbox>
+				<halign>left</halign>
+				<label>Animated jetways</label>
+				<name>jetways</name>
+				<property>/nasal/jetways/enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>jetways</object-name>
+				</binding>
+			</checkbox>
+
+
   		<empty>
   			<stretch>1</stretch>
   		</empty>
@@ -234,7 +246,7 @@
 			<group>
 				<layout>hbox</layout>
 				<text>
-					<label>Scenery</label>
+					<label>Scenery Layers</label>
 					<halign>left</halign>
 				</text>
 				<hrule>
@@ -249,17 +261,264 @@
 					<row>0</row>
 					<col>0</col>
 					<halign>left</halign>
-					<label>Terrain texture scheme</label>
+					<label>Pylons and power lines</label>
+				</text>
+				<combo>
+					<row>0</row>
+					<col>1</col>
+					<name>pylons</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/pylons</property>
+					<value>Disabled</value>
+					<value>Enabled</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>pylons</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/pylons");
+							if (val == "Enabled") {
+								setScenerySuffix("Pylons", 1);
+							} else {
+							  setScenerySuffix("Pylons", 0);
+							}
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>1</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Detailed Roads and Railways</label>
+				</text>
+				<combo>
+					<row>1</row>
+					<col>1</col>
+					<name>roads</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/roads</property>
+					<value>Disabled</value>
+					<value>Enabled</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>roads</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/roads");
+							if (val == "Enabled") {
+								setScenerySuffix("Roads", 1);
+							} else {
+							  setScenerySuffix("Roads", 0);
+							}
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>2</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Buildings</label>
+				</text>
+				<combo>
+					<row>2</row>
+					<col>1</col>
+					<name>buildings</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/buildings</property>
+					<value>Disabled</value>
+					<value>Randomly Generated</value>
+					<value>OpenStreetMap Data</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>buildings</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/buildings");
+							if (val == "Disabled") {
+								setprop("/sim/rendering/random-buildings", 0);
+								setScenerySuffix("Buildings", 0);
+							}
+
+							if (val == "Randomly Generated") {
+								setprop("/sim/rendering/random-buildings", 1);
+								setScenerySuffix("Buildings", 0);
+							}
+
+							if (val == "OpenStreetMap Data") {
+								setprop("/sim/rendering/random-buildings", 0);
+								setScenerySuffix("Buildings", 1);
+							}
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>3</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Random Scenery Objects</label>
+				</text>
+				<combo>
+					<row>3</row>
+					<col>1</col>
+					<name>random-objects</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/random-objects</property>
+					<value>Disabled</value>
+					<value>Enabled</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-objects</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/random-objects");
+							if (val == "Enabled") {
+								setprop("/sim/rendering/random-objects", 1);
+							} else {
+							  setprop("/sim/rendering/random-objects", 0);
+							}
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>4</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Vegetation</label>
+				</text>
+				<combo>
+					<row>4</row>
+					<col>1</col>
+					<name>random-vegetation</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/random-vegetation</property>
+					<value>Disabled</value>
+					<value>Low Density</value>
+					<value>Medium Density</value>
+					<value>High Density</value>
+					<value>Very High Density</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>random-vegetation</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/random-vegetation");
+							if (val == "Disabled") {
+								setprop("/sim/rendering/random-vegetation", 0);
+							}
+
+							if (val == "Low Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 0.5);
+							}
+
+							if (val == "Medium Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 1.0);
+							}
+
+							if (val == "High Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 4.0);
+							}
+
+							if (val == "Very High Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 10.0);
+							}
+
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>5</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Vegetation Shadows</label>
+				</text>
+				<combo>
+					<row>5</row>
+					<col>1</col>
+					<name>vegetation-shadows</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/vegetation-shadows</property>
+					<value>Disabled</value>
+					<value>Enabled</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>vegetation-shadows</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/vegetation-shadows");
+							if (val == "Enabled") {
+								setprop("/sim/rendering/vegetation-shadows", 1);
+							} else {
+								setprop("/sim/rendering/vegetation-shadows", 0);
+							}
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>6</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Scenery Objects</label>
+				</text>
+
+				<combo>
+					<row>6</row>
+					<col>1</col>
+					<name>placed-objects</name>
+					<pref-width>200</pref-width>
+					<property>/sim/gui/dialogs/rendering/placed-objects</property>
+					<value>Disabled</value>
+					<value>Enabled</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>placed-objects</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var val = getprop("/sim/gui/dialogs/rendering/placed-objects");
+							if (val == "Enabled") {
+								setScenerySuffix("Objects", 1);
+							} else {
+								setScenerySuffix("Objects", 0);
+							}
+						</script>
+					</binding>
+				</combo>
+
+				<text>
+					<row>7</row>
+					<col>0</col>
+					<halign>left</halign>
+					<label>Terrain Textures</label>
         </text>
 
         <combo>
-          <row>0</row>
+          <row>7</row>
           <col>1</col>
-          <colspan>3</colspan>
           <name>texture-set</name>
-          <halign>fill</halign>
-          <stretch>true</stretch>
-          <pref-width>180</pref-width>
+					<pref-width>200</pref-width>
           <property>sim/gui/dialogs/rendering/texture-set</property>
           <value>Region-specific</value>
           <value>Global</value>
@@ -280,135 +539,30 @@
           </binding>
         </combo>
 
-				<checkbox>
-					<row>1</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Animated jetways</label>
-					<name>jetways</name>
-					<property>/nasal/jetways/enabled</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>jetways</object-name>
-					</binding>
-				</checkbox>
-
-				<checkbox>
-					<row>2</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Random buildings</label>
-					<name>random-buildings</name>
-					<property>/sim/rendering/random-buildings</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>random-buildings</object-name>
-					</binding>
-				</checkbox>
-
 				<text>
-				  <row>2</row>
-				  <col>1</col>
-					<colspan>3</colspan>
-          <color>
-            <red>1.0</red>
-            <green>0.6</green>
-            <blue>0.6</blue>
-          </color>
-				  <label>Warning: Requires lots of memory</label>
+					<row>8</row>
+					<col>0</col>
+					<colspan>2</colspan>
+					<halign>left</halign>
+					<color>
+			      <red>1.0</red>
+			      <green>0.6</green>
+			      <blue>0.6</blue>
+			    </color>
+					<label>Warning: Pylons, Detailed Roads, Buildings use a lot of memory</label>
         </text>
 
-				<checkbox>
-					<row>3</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Random objects</label>
-					<name>random-objects</name>
-					<property>/sim/rendering/random-objects</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>random-objects</object-name>
-					</binding>
-				</checkbox>
-
-				<checkbox>
-					<row>4</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Random vegetation</label>
-					<name>random-vegetation</name>
-					<property>/sim/rendering/random-vegetation</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>random-vegetation</object-name>
-					</binding>
-				</checkbox>
-<!--
 				<text>
-					<row>4</row>
-					<col>1</col>
-					<label>Density</label>
-					<enable>
-						<property>/sim/rendering/random-vegetation</property>
-					</enable>
-				</text>
--->
-				<slider>
-					<row>4</row>
-					<col>1</col>
-          <halign>left</halign>
-					<name>vegetation-density</name>
-					<min>0</min>
-					<max>5.0</max>
-					<step>0.1</step>
-					<property>/sim/rendering/vegetation-density</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>vegetation-density</object-name>
-					</binding>
-				</slider>
-				<text>
-					<row>4</row>
-					<col>2</col>
-					<label>1234567890   </label>
-          <halign>left</halign>
-					<format>%.1f</format>
-					<live>true</live>
-					<property>/sim/rendering/vegetation-density</property>
-					<enable>
-						<property>/sim/rendering/random-vegetation</property>
-					</enable>
-				</text>
-
-				<checkbox>
- 					<enable>
-					  <property>/sim/rendering/shaders/skydome</property>
-    			</enable>
-					<row>5</row>
+					<row>9</row>
 					<col>0</col>
-					<halign>left</halign>
-					<label>Random vegetation shadows</label>
-					<name>tree-shadows</name>
-					<property>/sim/rendering/random-vegetation-shadows</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>tree-shadows</object-name>
-					</binding>
-				</checkbox>
-
-				<text>
-    			<enable>
-    				<property>/sim/rendering/shaders/skydome</property>
-    			</enable>
-				 	<row>5</row>
-				  <col>1</col>
 					<colspan>2</colspan>
-          <color>
-            <red>1.0</red>
-            <green>0.6</green>
-            <blue>0.6</blue>
-         	</color>
-				  <label>(needs ALS and Antialiasing)</label>
+					<halign>left</halign>
+					<color>
+			      <red>1.0</red>
+			      <green>0.6</green>
+			      <blue>0.6</blue>
+			    </color>
+					<label>and disk space, and are only available in limited areas.</label>
         </text>
 
 			</group>
@@ -835,6 +989,34 @@
 
 	<nasal>
 		<open>
+			<![CDATA[
+			var getScenerySuffix = func(layer) {
+				var suffixes = props.globals.getNode("/sim/rendering", 1).getChildren("scenery-path-suffix");
+				#printf("Looking for suffix " ~ layer);
+
+				foreach (var p; suffixes) {
+				  #printf("Checking suffix " ~ p.getNode("name",1).getValue());
+					#printf("Checking suffix enabled " ~ p.getNode("enabled",1).getValue());
+				  if (p.getNode("name",1).getValue() == layer) {
+						#printf("Found layer " ~ layer ~ " value: " ~ p.getNode("enabled", 1).getValue() ~ " " ~ p.getNode("enabled", 1).getBoolValue());
+					  return p.getNode("enabled", 1).getBoolValue();
+					}
+				}
+
+				return 0;
+			}
+
+			var setScenerySuffix = func(layer, enable) {
+				var suffixes = props.globals.getNode("/sim/rendering", 1).getChildren("scenery-path-suffix");
+				#printf("Setting scenery suffix" ~ layer ~ " to " ~ enable);
+
+				foreach (var p; suffixes) {
+				  if (p.getNode("name",1).getValue() == layer) {
+						#printf("Matched scenery suffix" ~ layer ~ " to " ~ enable);
+						p.getNode("enabled", 1).setBoolValue(enable);
+					}
+				}
+			}
 
       var materials = { "Region-specific" : "Materials/regions/materials.xml",
                         "Global" : "Materials/default/materials.xml",
@@ -862,21 +1044,88 @@
         }
       }
 
+			# Mapping from underlying properties to those used by the GUI.
+
+			if (getScenerySuffix("Pylons")) {
+			  setprop("/sim/gui/dialogs/rendering/pylons", "Enabled");
+      } else {
+				setprop("/sim/gui/dialogs/rendering/pylons", "Disabled");
+			}
+
+			if (getScenerySuffix("Roads")) {
+			  setprop("/sim/gui/dialogs/rendering/roads", "Enabled");
+      } else {
+				setprop("/sim/gui/dialogs/rendering/roads", "Disabled");
+			}
+
+			if (getScenerySuffix("Buildings")) {
+			  setprop("/sim/gui/dialogs/rendering/buildings", "OpenStreetMap Data");
+      } else if (getprop("/sim/rendering/random-buildings")) {
+			  setprop("/sim/gui/dialogs/rendering/buildings", "Random");
+      } else {
+			  setprop("/sim/gui/dialogs/rendering/buildings", "Disabled");
+      }
+
+			if (getprop("/sim/rendering/random-objects")) {
+			  setprop("/sim/gui/dialogs/rendering/random-objects", "Enabled");
+			} else {
+				setprop("/sim/gui/dialogs/rendering/random-objects", "Disabled");
+			}
+
+			if (getprop("/sim/rendering/random-vegetation")) {
+				var density = getprop("/sim/rendering/vegetation-density");
+				if (density < 0.99) {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Low Density");
+				} else if (density < 1.99) {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Medium Density");
+				} else if (density < 3.99) {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "High Density");
+				} else {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Very High Density");
+				}
+			} else {
+				setprop("/sim/gui/dialogs/rendering/random-vegetation", "Disabled");
+			}
+
+			if (getprop("/sim/rendering/vegetation-shadows")) {
+				setprop("/sim/gui/dialogs/rendering/vegetation-shadows", "Enabled");
+			} else {
+				setprop("/sim/gui/dialogs/rendering/vegetation-shadows", "Disabled");
+			}
+
+			if (getScenerySuffix("Objects")) {
+			  setprop("/sim/gui/dialogs/rendering/placed-objects", "Enabled");
+      } else {
+				setprop("/sim/gui/dialogs/rendering/placed-objects", "Disabled");
+			}
+
+
       var reload_props = [
         "/sim/rendering/materials-file",
+        "/sim/rendering/osm-buildings",
         "/sim/rendering/random-buildings",
         "/sim/rendering/random-objects",
         "/sim/rendering/random-vegetation",
         "/sim/rendering/random-vegetation-shadows",
         "/sim/rendering/vegetation-density",
         "/sim/rendering/clouds3d-enable",
-        "/sim/rendering/clouds3d-density"];
+        "/sim/rendering/clouds3d-density",
+				"/sim/rendering/scenery-path-suffix[0]/enabled",
+				"/sim/rendering/scenery-path-suffix[1]/enabled",
+				"/sim/rendering/scenery-path-suffix[2]/enabled",
+				"/sim/rendering/scenery-path-suffix[3]/enabled",
+				"/sim/rendering/scenery-path-suffix[4]/enabled",
+				"/sim/rendering/scenery-path-suffix[5]/enabled",
+				"/sim/rendering/scenery-path-suffix[6]/enabled"
+				];
 
       var reload_vals = {};
       foreach (var p; reload_props) {
         reload_vals[p] = getprop(p);
       }
 
+
+			]]>
 		</open>
 	</nasal>
 </PropertyList>

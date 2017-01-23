@@ -831,8 +831,9 @@ var showWeightDialog = func {
         var fdmdata = {
             grosswgt : "/yasim/gross-weight-lbs",
             payload  : "/sim",
-            cg       : nil,
+            cg       : "/fdm/yasim/cg-x-m",
         };
+		setprop("/limits/mass-and-balance/cg/dimension","m");
     } elsif(fdm == "jsb") {
         var fdmdata = {
             grosswgt : "/fdm/jsbsim/inertia/weight-lbs",
@@ -892,7 +893,7 @@ var showWeightDialog = func {
 
     if( fdmdata.cg != nil ) { 
         var n = props.globals.getNode("/limits/mass-and-balance/cg/dimension");
-        tablerow("Center of Gravity", props.globals.getNode(fdmdata.cg), "%.1f " ~ (n == nil ? "in" : n.getValue()));
+        tablerow("Center of Gravity", props.globals.getNode(fdmdata.cg), "%.2f " ~ (n == nil ? "in" : n.getValue()));
     }
 
     dialog[name].addChild("hrule");
@@ -1043,7 +1044,7 @@ var showWeightDialog = func {
         var wgts = [];
     for(var i=0; i<size(wgts); i+=1) {
         var w = wgts[i];
-        var wname = w.getNode("name", 1).getValue();
+        var wname = w.getNode("name", 1).getValue() or "";
         var wprop = fdmdata.payload ~ "/weight[" ~ i ~ "]";
 
         var title = tcell(weightTable, "text", i+1, 0);

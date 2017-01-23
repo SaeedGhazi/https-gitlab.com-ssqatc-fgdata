@@ -480,7 +480,7 @@ var Map = {
       controller = Map.df_controller;
     elsif (typeof(controller) != 'hash')
       controller = Map.Controller.get(controller);
-
+    
     if (controller == nil) {
       me.controller = nil;
     } else {
@@ -778,12 +778,6 @@ var Path = {
     me._last_coord = size(coords) - 1;
     return me;
   },
-  setDataSVG: func(svgPath)
-  {
-    me.reset();
-    me._node.setValues({'svg': svgPath});
-    return me;
-  },
   # Add a path segment
   addSegment: func(cmd, coords...)
   {
@@ -954,7 +948,7 @@ var Path = {
   },
 
   setColor: func me.setStroke(_getColor(arg)),
-  getColor: func me.getStroke(),
+  getColor: func me.getStroke(), 
 
   setColorFill: func me.setFill(_getColor(arg)),
   getColorFill: func me.getColorFill(),

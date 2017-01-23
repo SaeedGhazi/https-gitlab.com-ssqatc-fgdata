@@ -1043,7 +1043,7 @@ var showWeightDialog = func {
         var wgts = [];
     for(var i=0; i<size(wgts); i+=1) {
         var w = wgts[i];
-        var wname = w.getNode("name", 1).getValue();
+        var wname = w.getNode("name", 1).getValue() or "";
         var wprop = fdmdata.payload ~ "/weight[" ~ i ~ "]";
 
         var title = tcell(weightTable, "text", i+1, 0);

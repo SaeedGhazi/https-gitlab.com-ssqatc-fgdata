@@ -5,7 +5,7 @@
 <PropertyList>
   <sim>
     <presets>
-      <airport-id>LSZH</airport-id>
+      <airport-id>ENBR</airport-id>
       <runway>16</runway>
     </presets>
   </sim>
@@ -14,55 +14,55 @@
     <comm n="0">
       <frequencies>
         <!-- TWR -->
-        <selected-mhz type="double">118.100</selected-mhz>
+        <selected-mhz type="double">119.100</selected-mhz>
         <!-- DEP -->
-        <standby-mhz type="double">125.950</standby-mhz>
+        <standby-mhz type="double">125.000</standby-mhz>
       </frequencies>
     </comm>
     <comm n="1">
       <frequencies>
         <!-- ATIS -->
-        <selected-mhz type="double">128.52</selected-mhz>
+        <selected-mhz type="double">125.25</selected-mhz>
         <!-- GND -->
         <standby-mhz type="double">121.900</standby-mhz>
       </frequencies>
     </comm>
     <nav n="0">
       <frequencies>
-        <!-- KLOTEN VOR-DME (KLO) -->
-        <selected-mhz type="double">114.85</selected-mhz>
-        <!-- LSZH 16 DME-ILS (IZH) -->
-        <standby-mhz type="double">110.50</standby-mhz>
+        <!-- FLESLAND DVOR-DME (FLS) -->
+        <selected-mhz type="double">115.55</selected-mhz>
+        <!-- LOC 17 (BR) -->
+        <standby-mhz type="double">109.90</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">161</selected-deg>
+        <selected-deg type="double">170</selected-deg>
       </radials>
     </nav>
     <nav n="1">
       <frequencies>
-        <!-- ZURICH EAST VOR-DME (ZUE) -->
-        <selected-mhz type="double">110.05</selected-mhz>
-        <!-- WILLISAU VOR-DME (WIL) -->
-        <standby-mhz type="double">116.90</standby-mhz>
+        <!-- VOLLO DVOR-DME (VOO) -->
+        <selected-mhz type="double">114.85</selected-mhz>
+        <!-- LOC 35 (BG) -->
+        <standby-mhz type="double">110.50</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">059</selected-deg>
+        <selected-deg type="double">350</selected-deg>
       </radials>
     </nav>
     <dme n="0">
       <serviceable type="bool" archive="y">true</serviceable>
       <switch-position type="int" archive="y">2</switch-position>
       <frequencies>
-        <selected-mhz type="double">114.85</selected-mhz>
+        <selected-mhz type="double">115.55</selected-mhz>
         <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
       </frequencies>
     </dme>
     <adf n="0">
       <frequencies>
-        <!-- BERN NDB (BER) -->
-        <selected-khz type="int">335</selected-khz>
-        <!-- FRIEDRICHSHAFEN NDB (FHA) -->
-        <standby-khz type="int">473</standby-khz>
+        <!-- ASKOY NDB (ASK) -->
+        <selected-khz type="int">360</selected-khz>
+        <!-- ASKOY NDB (ASK) -->
+        <standby-khz type="int">360</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>

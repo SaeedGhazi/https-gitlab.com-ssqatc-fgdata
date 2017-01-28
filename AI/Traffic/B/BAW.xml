@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- Author Ian Tolosa - From Timetable of 16MAY2016 - Includes new 747 787 380 AI aircrafts - Passenger flights only no Cargo -->
+<!-- Author Ian Tolosa - From Timetable of 16MAY2016 - Includes new 747 777 787 & 380 AI aircrafts - Passenger flights only no Cargo -->
 
 <trafficlist>
   <aircraft>
@@ -2678,7 +2678,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2692,7 +2692,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2706,7 +2706,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2720,7 +2720,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2734,7 +2734,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2748,7 +2748,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2762,7 +2762,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2776,7 +2776,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2790,7 +2790,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2804,7 +2804,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2818,7 +2818,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2832,7 +2832,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2846,7 +2846,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2860,7 +2860,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2874,7 +2874,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2888,7 +2888,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2902,7 +2902,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2916,7 +2916,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -2930,7 +2930,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2944,7 +2944,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2958,7 +2958,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2972,7 +2972,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -2986,7 +2986,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3000,7 +3000,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -3014,7 +3014,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3028,7 +3028,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3042,7 +3042,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3056,7 +3056,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -3070,7 +3070,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3084,7 +3084,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3098,7 +3098,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3112,7 +3112,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3126,7 +3126,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3140,7 +3140,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3154,7 +3154,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3168,7 +3168,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3182,7 +3182,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3196,7 +3196,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3210,7 +3210,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3224,7 +3224,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -3238,7 +3238,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGKK</home-port>
@@ -3252,7 +3252,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3266,7 +3266,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3280,7 +3280,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3294,7 +3294,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3308,7 +3308,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77L-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3322,7 +3322,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3336,7 +3336,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3350,7 +3350,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3364,7 +3364,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3378,7 +3378,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3392,7 +3392,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3406,7 +3406,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3420,7 +3420,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3434,7 +3434,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3448,7 +3448,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3462,7 +3462,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -3476,7 +3476,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-BritishAirways.xml</model>
+    <model>Aircraft/777/77W-BritishAirways.xml</model>
     <livery>BAW</livery>
     <airline>BAW</airline>
     <home-port>EGLL</home-port>
@@ -7819,7 +7819,7 @@
     </departure>
     <cruise-alt>375</cruise-alt>
     <arrival>
-      <port>OTBD</port>
+      <port>OTHH</port>
       <time>18:50:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -7829,7 +7829,7 @@
     <required-aircraft>BAW-772</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>OTBD</port>
+      <port>OTHH</port>
       <time>20:20:00</time>
     </departure>
     <cruise-alt>385</cruise-alt>

@@ -489,6 +489,7 @@ var fullBrakeTime = 0.5;
 var applyBrakes = func(v, which = 0) {
     if (which <= 0) { interpolate("/controls/gear/brake-left", v, fullBrakeTime); }
     if (which >= 0) { interpolate("/controls/gear/brake-right", v, fullBrakeTime); }
+    setprop("/controls/gear/brake-parking", 0);
 }
 var applyPickle = func(v) {
 setprop("/controls/armament/pickle", v);

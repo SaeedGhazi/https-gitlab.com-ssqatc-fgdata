@@ -69,6 +69,7 @@
 <region include="Materials/regions/norway.xml"/>
 <region include="Materials/regions/southern_europe.xml"/>
 <region include="Materials/regions/corse.xml"/>
+<region include="Materials/regions/azores.xml"/>
 
 <!-- Middle East-->
 <region include="Materials/regions/middle_east.xml"/>

@@ -183,6 +183,43 @@
   <!-- end group 4 -->
   </group>
 
+  <!-- start group 5 -->
+  <group>
+
+    <halign>left</halign>
+    <valign>top</valign>
+    <layout>table</layout>
+
+    <!-- gap to left border -->
+    <text>
+        <halign>left</halign>
+        <label>   </label>
+        <row>0</row>
+        <col>0</col>
+    </text>
+
+    <checkbox>
+      <halign>left</halign>
+      <label> Reverse mouse wheel direction</label>
+      <property>/sim/mouse/invert-mouse-wheel</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <row>0</row>
+      <col>1</col>
+    </checkbox>
+
+    <!-- empty line before next -->
+    <text>
+      <row>1</row>
+      <col>0</col>
+      <label> </label>
+      <halign>left</halign>
+    </text>
+
+  <!-- end group 5 -->
+  </group>
+
   <hrule/>
 
   <button>

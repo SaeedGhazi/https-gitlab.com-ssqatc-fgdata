@@ -10,7 +10,7 @@
     <condition>
       <less-than>
         <property>velocities/true-airspeed-kt</property>
-        <value>150</value>
+        <value>180</value>
       </less-than>
     </condition>
   </animation>

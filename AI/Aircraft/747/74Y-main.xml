@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <PropertyList>
-  <description>Boeing 747-400 Cargo</description>
+  <description>Boeing 747-200 Cargo</description>
   <author>Ian(Yves) Tolosa. Apr 2016 </author>
   <path>Models/74Y.ac</path>
   
@@ -10,7 +10,7 @@
     <condition>
       <less-than>
         <property>velocities/true-airspeed-kt</property>
-        <value>150</value>
+        <value>180</value>
       </less-than>
     </condition>
   </animation>

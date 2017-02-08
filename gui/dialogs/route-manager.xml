@@ -100,7 +100,7 @@ command interface /autopilot/route-manager/input:
                 gui.dialog_update("route-manager");
             }
 
-            var defaultDirInFileSelector = getprop("/sim/fg-home");
+            var defaultDirInFileSelector = getprop("/sim/fg-home") ~ "/Export";
 
             var file_selector = gui.FileSelector.new(
               callback: load_route, title: "Load flight-plan", button: "Load",

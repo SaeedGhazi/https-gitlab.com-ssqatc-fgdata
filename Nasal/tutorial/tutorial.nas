@@ -415,6 +415,11 @@ var say_message = func(node, default = nil) {
 
 		if (msg != nil) {
 			display.write(msg, 1, 1, 1);
+			if (audio == nil) {
+				# Link to text-to-speech
+				setprop("/sim/sound/voices/copilot", msg);
+			}
+
 			last_messageN.setValue(msg);
 		}
 	}
@@ -481,5 +486,3 @@ var load = func(file, index = 0) {
 	props.globals.getNode("/sim/tutorials", 1).removeChild("tutorial", index);
 	io.read_properties(file, "/sim/tutorials/tutorial[" ~ index ~ "]/");
 }
-
-

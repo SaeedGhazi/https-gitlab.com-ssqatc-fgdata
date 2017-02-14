@@ -429,7 +429,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <voices>
         <host type="string" write="n">localhost</host>
         <port type="string" write="n">1314</port>
-        <enabled type="bool">false</enabled>
+        <enabled type="bool" userarchive="y">true</enabled>
         <atc alias="/sim/sound/voices/voice[0]/text"/>
         <approach alias="/sim/sound/voices/voice[0]/text"/>
         <ground alias="/sim/sound/voices/voice[0]/text"/>
@@ -443,7 +443,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <pitch type="double">100.0</pitch>
           <speed type="double">1.0</speed>
           <preamble type="string"/>
-          <festival type="bool">true</festival>
+          <festival type="bool">false</festival>
           <htsvoice type="string">cmu_us_arctic_slt.htsvoice</htsvoice>
         </voice>
         <voice>
@@ -453,7 +453,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <pitch type="double">100.0</pitch>
           <speed type="double">1.0</speed>
           <preamble type="string">(voice_us2_mbrola)</preamble>
-          <festival type="bool">true</festival>
+          <festival type="bool">false</festival>
           <htsvoice type="string">cstr_uk_female-1.0.htsvoice</htsvoice>
         </voice>
         <voice>
@@ -463,7 +463,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <pitch type="double">100.0</pitch>
           <speed type="double">1.0</speed>
           <preamble type="string">(voice_en1_mbrola)</preamble>
-          <festival type="bool">true</festival>
+          <festival type="bool">false</festival>
           <htsvoice type="string">cmu_us_arctic_slt.htsvoice</htsvoice>
         </voice>
         <voice>
@@ -473,7 +473,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <pitch type="double">100.0</pitch>
           <speed type="double">1.0</speed>
           <preamble type="string">(voice_don_diphone)</preamble>
-          <festival type="bool">true</festival>
+          <festival type="bool">false</festival>
           <htsvoice type="string">cmu_us_arctic_slt.htsvoice</htsvoice>
         </voice>
       </voices>

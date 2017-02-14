@@ -291,6 +291,38 @@
 
   <group>
     <layout>hbox</layout>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
+    <text>
+    <halign>right</halign>
+    <label>Use voice synthesis for tutorials and comms (requires restart)</label>
+    </text>
+
+    <checkbox>
+      <property>/sim/sound/voices/enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+	    <enable>
+        <property>/sim/sound/enabled</property>
+      </enable>
+    </checkbox>
+
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
     <default-padding>10</default-padding>
 
     <button>

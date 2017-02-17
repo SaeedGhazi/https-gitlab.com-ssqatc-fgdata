@@ -42,6 +42,7 @@ var autostart = func (msg=1) {
     setprop("/instrumentation/heading-indicator/offset-deg", -magnetic_variation);
 
     # Pre-flight inspection
+    setprop("/sim/model/c172p/cockpit/control-lock-placed", 0);
     setprop("/sim/model/c172p/brake-parking", 0);
     setprop("/sim/model/c172p/securing/chock", 0);
     setprop("/sim/model/c172p/securing/pitot-cover-visible", 0);
@@ -51,13 +52,15 @@ var autostart = func (msg=1) {
 
     # Removing any contamination from water
     setprop("/consumables/fuel/tank[0]/water-contamination", 0.0);
-    setprop("/consumables/fuel/tank[1]/water-contamination", 0.0);        
-
+    setprop("/consumables/fuel/tank[1]/water-contamination", 0.0);
+    setprop("/consumables/fuel/tank[0]/sample-water-contamination", 0.0);
+    setprop("/consumables/fuel/tank[1]/sample-water-contamination", 0.0);
+    
     # Setting max oil level
     var oil_enabled = getprop("/engines/active-engine/oil_consumption_allowed");
     var oil_level   = getprop("/engines/active-engine/oil-level");
     
-    if (oil_enabled and oil_level < 6.0) {
+    if (oil_enabled and oil_level < 5.0) {
         if (getprop("/controls/engines/active-engine") == 0) {
             setprop("/engines/active-engine/oil-level", 7.0);
         } 
@@ -168,8 +171,10 @@ var take_fuel_sample = func(index) {
 
     # Remove a bit of water if contaminated
     if (water > 0.0) {
-        water = std.max(0.0, water - 0.2);
+        var sample_water = std.min(0.2, water);
+        water = water - sample_water;
         setprop("/consumables/fuel/tank", index, "water-contamination", water);
+        setprop("/consumables/fuel/tank", index, "sample-water-contamination", sample_water);
     };
 };
 
@@ -179,15 +184,55 @@ var take_fuel_sample = func(index) {
 var return_fuel_sample = func(index) {
     var fuel = getprop("/consumables/fuel/tank", index, "level-gal_us");
     var water = getprop("/consumables/fuel/tank", index, "water-contamination");
+    var sample_water = getprop("/consumables/fuel/tank", index, "sample-water-contamination");
 
     # Add back the 50 ml of fuel
     setprop("/consumables/fuel/tank", index, "level-gal_us", fuel + 0.0132086);
 
     # Add back the (contaminated) water
-    if (water > 0.0) {
-        water = std.min(water + 0.2, 1.0);
+    if (sample_water > 0.0) {
+        water = water + sample_water;
         setprop("/consumables/fuel/tank", index, "water-contamination", water);
+        setprop("/consumables/fuel/tank", index, "sample-water-contamination", 0.0);
     };
+};
+
+##########################################
+# Preflight control surface check: left aileron
+##########################################
+var control_surface_check_left_aileron = func {
+    var auto_coordination = getprop("/controls/flight/auto-coordination");
+    setprop("/controls/flight/auto-coordination", 0);
+    interpolate("/controls/flight/aileron", 1.0, 0.5, -1.0, 1.0, 0.0, 0.5);
+    settimer(func(){
+        setprop("/controls/flight/auto-coordination", auto_coordination);
+    }, 2.0);
+};
+
+##########################################
+# Preflight control surface check: right aileron
+##########################################
+var control_surface_check_right_aileron = func {
+    var auto_coordination = getprop("/controls/flight/auto-coordination");
+    setprop("/controls/flight/auto-coordination", 0);
+    interpolate("/controls/flight/aileron", -1.0, 0.5, 1.0, 1.0, 0.0, 0.5);
+    settimer(func(){
+        setprop("/controls/flight/auto-coordination", auto_coordination);
+    }, 2.0);
+};
+
+##########################################
+# Preflight control surface check: elevator
+##########################################
+var control_surface_check_elevator = func {
+    interpolate("/controls/flight/elevator", 1.0, 0.8, -1.0, 1.6, 0.0, 0.8);
+};
+
+##########################################
+# Preflight control surface check: rudder
+##########################################
+var control_surface_check_rudder = func {
+    interpolate("/controls/flight/rudder", -1.0, 0.8, 1.0, 1.6, 0.0, 0.8);
 };
 
 ##########################################
@@ -368,7 +413,7 @@ var StaticModel = {
     new: func (name, file) {
         var m = {
             parents: [StaticModel],
-            index: nil,
+            model: nil,
             model_file: file
         };
 
@@ -393,13 +438,13 @@ var StaticModel = {
             }
         }
         var position = geo.aircraft_position().set_alt(getprop("/position/ground-elev-m"));
-        geo.put_model(me.model_file, position, getprop("/orientation/heading-deg"));
-        me.index = i;
+        me.model = geo.put_model(me.model_file, position, getprop("/orientation/heading-deg"));
     },
 
     remove: func {
-        if (me.index != nil) {
-            props.globals.getNode("/models", 1).removeChild("model", me.index);
+        if (me.model != nil) {
+            me.model.remove();
+            me.model = nil;
         }
     }
 };
@@ -523,6 +568,16 @@ var dialog_battery_reload = func {
 }
 
 setlistener("/sim/signals/fdm-initialized", func {
+    # Randomize callsign of new users to avoid them blocking
+    # other new users on multiplayer
+    if (getprop("/sim/multiplay/callsign") == "callsign") {
+        var digit = func {
+            return math.round(rand()*9);
+        };
+        var new_callsign = "FG-" ~ digit() ~ digit() ~ digit() ~ digit();
+        setprop("/sim/multiplay/callsign", new_callsign);
+    };
+
     # Use Nasal to make some properties persistent. <aircraft-data> does
     # not work reliably.
     aircraft.data.add("/sim/model/c172p/immat-on-panel");

@@ -151,13 +151,13 @@
         <condition>
             <property>/sim/model/c172p/garmin196-visible</property>
         </condition>
-    </animation>
-
+    </animation>    
+    
     <!-- Canvas local Garmin 196 GPS -->
     <!--<model>
         <name>Garmin196-GPS</name>
         <path>Interior/Panel/garmin196/garmin196.xml</path>
-        <offsets>
+        <offsets>        
             <x-m>-0.4</x-m>
             <y-m>0.36</y-m>
             <z-m>0.205</z-m>
@@ -351,7 +351,7 @@
         </wing_right_damaged>
 
         <gear>
-            <nose-rollspeed-ms>engines/engine[7]/rpm</nose-rollspeed-ms>
+            <nose-rollspeed-ms>engines/engine[7]/rpm</nose-rollspeed-ms>  
             <left-rollspeed-ms>engines/engine[7]/n1</left-rollspeed-ms>
             <right-rollspeed-ms>engines/engine[7]/n2</right-rollspeed-ms>
         </gear>
@@ -954,7 +954,7 @@
         <name>vac</name>
         <path>Interior/Panel/Instruments/vac/vac.xml</path>
         <offsets>
-            <!-- MOD: Reposition VAC
+            <!-- MOD: Reposition VAC 
                  <x-m>-0.365</x-m>
                  <y-m>-0.432</y-m>
                  <z-m>0.0228</z-m>
@@ -1017,6 +1017,15 @@
             <x-m>-0.36</x-m>
             <y-m> 0.239</y-m>
             <z-m>-0.130</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>ControlLock</name>
+        <path>Interior/control-lock/control-lock.xml</path>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
         </offsets>
     </model>
     <model>
@@ -2307,8 +2316,12 @@
                         <value>0</value>
                     </equals>
                 </condition>
-                <command>dialog-show</command>
-                <dialog-name>c172p-baggage-weight-dialog</dialog-name>
+                <command>nasal</command>
+                <script>
+                    settimer(func(){
+                        fgcommand("dialog-show", {"dialog-name": "c172p-baggage-weight-dialog"});
+                    }, 2.0);
+                </script>
             </binding>
         </action>
         <hovered>
@@ -6069,7 +6082,7 @@
     <animation>
         <type>select</type>
         <object-name>landinglightcover</object-name>
-        <!-- Damage Mod
+        <!-- Damage Mod 
         <object-name>landinglightcoverBD</object-name>
         <object-name>landinglightcoverLD</object-name>
         <object-name>landinglightcoverRD</object-name>
@@ -6084,7 +6097,7 @@
         <type>noshadow</type>
         <object-name>landinglight</object-name>
         <object-name>taxilight</object-name>
-        <!-- Damage Mod
+        <!-- Damage Mod 
         <object-name>landinglightBD</object-name>
         <object-name>landinglightCollapse</object-name>-->
     </animation>
@@ -6093,7 +6106,7 @@
     <animation>
         <type>flash</type>
         <object-name>landinglight</object-name>
-        <!-- Damage Mod
+        <!-- Damage Mod 
         <object-name>landinglightBD</object-name>
         <object-name>landinglightCollapse</object-name>-->
         <center>
@@ -6595,8 +6608,8 @@
     <animation>
         <type>material</type>
         <!--global type="bool">true</global-->
-        <!-- MOD: resume some to GROUP_Interior
-        door interior objects can't be grouped because it
+        <!-- MOD: resume some to GROUP_Interior 
+        door interior objects can't be grouped because it 
         is inside another group -->
         <object-name>GROUP_Interior</object-name>
         <!-- MOD: resume some to GROUP_Interior -->
@@ -6620,8 +6633,8 @@
     <animation>
         <type>material</type>
         <!--global type="bool">true</global-->
-        <!-- MOD: resume some to GROUP_InteriorParts
-        doorhandles can't be grouped because
+        <!-- MOD: resume some to GROUP_InteriorParts 
+        doorhandles can't be grouped because 
         it is inside another group -->
         <object-name>GROUP_InteriorParts</object-name>
         <!-- MODEND: resume some to GROUP_InteriorParts -->
@@ -6711,6 +6724,10 @@
                     <property>/sim/current-view/name</property>
                     <value>Cockpit View</value>
                 </not-equals>
+                <not-equals>
+                    <property>/sim/current-view/name</property>
+                    <value>IFR Training View</value>
+                </not-equals>
                 <not>
                     <property>/sim/walker/outside</property>
                 </not>
@@ -6735,7 +6752,7 @@
             </and>
         </condition>
     </animation>
-
+    
     <!-- Passangers not visible if not enough weight on their seats or if using their view -->
     <animation>
         <type>select</type>
@@ -7307,7 +7324,7 @@
             <y-m>0.0</y-m>
             <z-m>0.028</z-m>
         </offsets>
-    </model>
+    </model>    
     <animation>
         <type>translate</type>
         <object-name>chock1</object-name>
@@ -7319,7 +7336,7 @@
             <y>0</y>
             <z>1.0</z>
         </axis>
-    </animation>
+    </animation>        
     <animation>
         <type>select</type>
         <object-name>chock1</object-name>
@@ -7355,7 +7372,7 @@
             <y>0</y>
             <z>1.0</z>
         </axis>
-    </animation>
+    </animation>        
     <animation>
         <type>select</type>
         <object-name>woodenchock</object-name>
@@ -7516,7 +7533,7 @@
                 <label>Remove Left Tie-Down</label>
             </binding>
         </hovered>
-    </animation>
+    </animation>    
     <animation>
         <type>select</type>
         <object-name>TiedownHotSpotLeft</object-name>
@@ -7572,7 +7589,7 @@
             </binding>
         </hovered>
     </animation>
-
+    
     <!-- Right Tiedowns -->
     <model>
         <name>tiedownR</name>
@@ -7628,7 +7645,7 @@
                 <label>Remove Right Tie-Down</label>
             </binding>
         </hovered>
-    </animation>
+    </animation>    
     <animation>
         <type>select</type>
         <object-name>TiedownHotSpotRight</object-name>
@@ -8054,7 +8071,7 @@
             <property>sim/panel-hotspots</property>
         </condition>
     </animation>
-
+    
     <!-- Left Tank Drain Sump -->
     <animation>
         <type>select</type>
@@ -8094,7 +8111,7 @@
             </binding>
         </hovered>
     </animation>
-
+    
     <!-- Right Tank Drain Sump -->
     <animation>
         <type>select</type>
@@ -8134,7 +8151,7 @@
             </binding>
         </hovered>
     </animation>
-
+    
     <!-- oil level check -->
     <animation>
         <type>select</type>
@@ -8261,7 +8278,7 @@
             </binding>
         </hovered>
     </animation>
-
+    
     <model>
         <name>extinguisher</name>
         <path>Interior/FE-ELT/fe.xml</path>
@@ -8289,7 +8306,7 @@
             </and>
         </condition>
     </animation>
-
+    
    <model>
         <name>extinguisher-amphibious</name>
         <path>Interior/FE-ELT/fe2.xml</path>
@@ -8316,8 +8333,8 @@
                 </equals>
             </or>
         </condition>
-    </animation>
-
+    </animation>    
+    
     <model>
         <name>elt</name>
         <path>Interior/FE-ELT/elt.xml</path>
@@ -8328,5 +8345,119 @@
             <heading-deg>0.0</heading-deg>
         </offsets>
     </model>
+    
+    <!-- Preflight surface checks -->
+    <!-- elevator surface check -->
+    <animation>
+        <type>pick</type>
+        <object-name>elevatorleft</object-name>
+        <object-name>elevatorright</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <not>            
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>c172p.control_surface_check_elevator();</script>
+            </binding>
+        </action>
+    </animation>
+    
+    <!-- left aileron surface check -->
+    <animation>
+        <type>pick</type>
+        <object-name>leftaileron</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <not>            
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>c172p.control_surface_check_left_aileron();</script>
+            </binding>
+        </action>
+    </animation>
+    
+    <!-- right aileron surface check -->
+    <animation>
+        <type>pick</type>
+        <object-name>rightaileron</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <not>            
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>c172p.control_surface_check_right_aileron();</script>
+            </binding>
+        </action>
+    </animation>
+    
+    <!-- rudder surface check -->
+    <animation>
+        <type>pick</type>
+        <object-name>rudder</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <not>            
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>c172p.control_surface_check_rudder();</script>
+            </binding>
+        </action>
+    </animation>
 
 </PropertyList>

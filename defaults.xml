@@ -394,7 +394,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <model-hz type="int">120</model-hz>
     <navdb>
       <localizers>
-        <auto-align type="bool">true</auto-align>
+        <!-- disabling this for 2017.1 - code will be removed at some point soon -->
+        <auto-align type="bool">false</auto-align>
         <auto-align-threshold-deg type="double">5.0</auto-align-threshold-deg>
       </localizers>
     </navdb>

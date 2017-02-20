@@ -55,7 +55,8 @@ var Tooltip = {
       placement: {
         type: "window",
         index: me._node.getIndex()
-      }
+      },
+      name: "Tooltip"
     });
 
     # don't do anything with mouse events ourselves

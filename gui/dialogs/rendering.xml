@@ -467,9 +467,9 @@
 						<script>
 							var val = getprop("/sim/gui/dialogs/rendering/vegetation-shadows");
 							if (val == "Enabled") {
-								setprop("/sim/rendering/vegetation-shadows", 1);
+								setprop("/sim/rendering/random-vegetation-shadows", 1);
 							} else {
-								setprop("/sim/rendering/vegetation-shadows", 0);
+								setprop("/sim/rendering/random-vegetation-shadows", 0);
 							}
 						</script>
 					</binding>
@@ -1087,7 +1087,7 @@
 				setprop("/sim/gui/dialogs/rendering/random-vegetation", "Disabled");
 			}
 
-			if (getprop("/sim/rendering/vegetation-shadows")) {
+			if (getprop("/sim/rendering/random-vegetation-shadows")) {
 				setprop("/sim/gui/dialogs/rendering/vegetation-shadows", "Enabled");
 			} else {
 				setprop("/sim/gui/dialogs/rendering/vegetation-shadows", "Disabled");

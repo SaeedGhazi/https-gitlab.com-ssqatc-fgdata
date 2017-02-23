@@ -59,6 +59,7 @@ uniform float landing_light3_offset;
 uniform vec3 night_color;
 
 uniform bool random_buildings;
+uniform bool osm_buildings;
 
 uniform int cloud_shadow_flag;
 uniform int use_searchlight;
@@ -211,7 +212,7 @@ float ray_intersect_relief(vec2 dp, vec2 ds)
 
 float ray_intersect(vec2 dp, vec2 ds)
 {
-    if ( random_buildings )
+    if (( random_buildings ) || ( osm_buildings ))
         return 0.0;
     else if ( quality_level >= 4.0 )
         return ray_intersect_QDM( dp, ds );
@@ -226,7 +227,7 @@ void main (void)
     }
 
     float depthfactor = depth_factor;
-    if ( random_buildings )
+    if (( random_buildings ) || (osm_buildings))
         depthfactor = 0.0;
 
     float steepness_factor = 1.0 -smoothstep(0.85, 0.9, steepness);

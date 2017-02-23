@@ -11,6 +11,9 @@
 		<random-buildings type="bool">
 			<use>/sim/rendering/random-buildings</use>
 		</random-buildings>
+		<osm-buildings type="bool">
+			<use>/sim/rendering/osm-buildings</use>
+		</osm-buildings>
 		<quality-level>
 			<use>/sim/rendering/shaders/urban</use>
 		</quality-level>
@@ -344,6 +347,13 @@
 				<type>bool</type>
 				<value type="bool">
 					<use>random-buildings</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>osm_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>osm-buildings</use>
 				</value>
 			</uniform>
 			<!-- 	    BEGIN fog include -->
@@ -1378,6 +1388,13 @@
 					<use>random-buildings</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>osm_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>osm-buildings</use>
+				</value>
+			</uniform>
 		</pass>
 	</technique>
 
@@ -1584,6 +1601,13 @@
 					<use>random-buildings</use>
 				</value>
 			</uniform>
+			<uniform>
+				<name>osm_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>osm-buildings</use>
+				</value>
+			</uniform>
 		</pass>
 	</technique>
 	<technique n="7">
@@ -1751,6 +1775,13 @@
 				<type>bool</type>
 				<value type="bool">
 					<use>random-buildings</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>osm_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>osm-buildings</use>
 				</value>
 			</uniform>
 		</pass>
@@ -1969,6 +2000,13 @@
 				<type>bool</type>
 				<value type="bool">
 					<use>random-buildings</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>osm_buildings</name>
+				<type>bool</type>
+				<value type="bool">
+					<use>osm-buildings</use>
 				</value>
 			</uniform>
 			<!-- 	    BEGIN fog include -->

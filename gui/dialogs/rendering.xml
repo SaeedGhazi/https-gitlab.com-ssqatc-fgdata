@@ -344,16 +344,19 @@
 							var val = getprop("/sim/gui/dialogs/rendering/buildings");
 							if (val == "Disabled") {
 								setprop("/sim/rendering/random-buildings", 0);
+								setprop("/sim/rendering/osm-buildings", 0);
 								setScenerySuffix("Buildings", 0);
 							}
 
 							if (val == "Randomly Generated") {
 								setprop("/sim/rendering/random-buildings", 1);
+								setprop("/sim/rendering/osm-buildings", 0);
 								setScenerySuffix("Buildings", 0);
 							}
 
 							if (val == "OpenStreetMap Data") {
 								setprop("/sim/rendering/random-buildings", 0);
+								setprop("/sim/rendering/osm-buildings", 1);
 								setScenerySuffix("Buildings", 1);
 							}
 						</script>

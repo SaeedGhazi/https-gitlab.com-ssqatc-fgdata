@@ -32,6 +32,7 @@ uniform float quality_level;
 uniform float snowlevel;
 uniform vec3 night_color;
 uniform bool random_buildings;
+uniform bool osm_buildings;
 
 const float scale = 1.0;
 int linear_search_steps = 10;
@@ -157,12 +158,12 @@ float ray_intersect_relief(vec2 dp, vec2 ds)
 
 float ray_intersect(vec2 dp, vec2 ds)
 {
-    if ( random_buildings )
-        return 0.0;
+    if (( random_buildings ) || (osm_buildings))
+        {return 0.0;}
     else if ( quality_level >= 4.0 )
-        return ray_intersect_QDM( dp, ds );
+        {return ray_intersect_QDM( dp, ds );}
     else
-        return ray_intersect_relief( dp, ds );
+        {return ray_intersect_relief( dp, ds );}
 }
 
 void main (void)
@@ -172,7 +173,7 @@ void main (void)
     }
 
     float depthfactor = depth_factor;
-    if ( random_buildings ) depthfactor = 0.0;
+    if (( random_buildings ) || (osm_buildings)) {depthfactor = 0.0;}
 
     vec3 normal = normalize(VNormal);
     vec3 tangent = normalize(VTangent);

@@ -357,7 +357,8 @@ void main (void)
             //vec4 reflcolor = reflection;
             vec4 reflfrescolor = mix(reflcolor, fresnel, refl_fresnel  * v);
             vec4 noisecolor = mix(reflfrescolor, noisevec, refl_noise);
-            vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
+            //vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
+	    vec4 raincolor = vec4(noisecolor.rgb, 1.0);
             raincolor += Specular;
             raincolor *= light_diffuse;
 

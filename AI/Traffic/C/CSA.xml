@@ -301,7 +301,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>735-CSA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -315,7 +315,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>735-CSA</required-aircraft>
         <actype>735</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -329,7 +329,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>737-CSA</required-aircraft>
         <actype>737</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -343,7 +343,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>737-CSA</required-aircraft>
         <actype>737</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -357,7 +357,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>737-CSA</required-aircraft>
         <actype>737</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -371,7 +371,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>737-CSA</required-aircraft>
         <actype>737</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -385,7 +385,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>737-CSA</required-aircraft>
         <actype>737</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
@@ -399,7 +399,7 @@
         <home-port>LKPR</home-port>
         <required-aircraft>737-CSA</required-aircraft>
         <actype>737</actype>
-        <offset>10</offset>
+        <offset>0</offset>
         <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!-- FlightGear menu: English (=default) language resource -->
+
+<PropertyList>
+
+	<tip n="0">Drag while holding the right mouse button to look around in most views</tip>
+	<tip n="1">Hold [Shift] while looking around to move the view up, down, left or right</tip>
+	<tip n="2">Press a/A to adjust the simulation speed</tip>
+	<tip n="3">Find frequencies of nearby ATC services nearby from the Radios dialog</tip>
+
+</PropertyList>

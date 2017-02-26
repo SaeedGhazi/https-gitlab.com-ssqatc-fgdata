@@ -17,6 +17,7 @@
 			<menu>Translations/en/menu.xml</menu>
 			<sys>Translations/en/sys.xml</sys>
 			<atc>Translations/en/atc.xml</atc>
+			<tips>Translations/en/tips.xml</tips>
 		</strings>
 	</locale>
 

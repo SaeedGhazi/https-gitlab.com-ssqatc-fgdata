@@ -23,6 +23,9 @@
 		<loading-scenery>loading scenery</loading-scenery>
         <downloading-scenery>downloading scenery</downloading-scenery>
         <finalize-position>finalizing position</finalize-position>
+
+				<unstable-warning>Unstable nightly build - some features may be under active development</unstable-warning>
 	</splash>
+
 
 </PropertyList>

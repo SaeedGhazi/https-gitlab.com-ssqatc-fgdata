@@ -363,6 +363,9 @@ Started September 2000 by David Megginson, david@megginson.com
  	 <brightness type="float">1.0</brightness>
 	 <use-night-vision type="bool">false</use-night-vision>
 	 <use-IR-vision type="bool">false</use-IR-vision>
+	 <use-normal-filters type="bool">true</use-normal-filters>
+	 <grey-factor type="float">0.0</grey-factor>
+	 <black-factor type="float">0.0</black-factor>
       </als-filters>
 
       <scenery-path-suffix>

@@ -10,6 +10,8 @@ uniform float gamma;
 uniform float brightness;
 uniform float delta_T;
 uniform float osg_SimulationTime;
+uniform float fact_grey;
+uniform float fact_black;
 
 uniform bool use_filtering;
 uniform bool use_night_vision;
@@ -64,6 +66,40 @@ return vec3 (0.7, 0.7, 0.7) * gain;
 
 }
 
+
+
+vec3 g_force (in vec3 color) {
+
+vec2 center = vec2 (float(display_xsize) * 0.5, float(display_ysize) *  0.5);
+
+float greyout_band_width = 0.2;
+float blackout_band_width = 0.3;
+
+float f_grey = 1.0 - fact_grey;
+
+float greyout = smoothstep( f_grey * display_ysize, (f_grey + greyout_band_width) * display_ysize, length(gl_FragCoord.xy -center));
+
+float tgt_brightness = (1.0 - 0.5 * greyout);
+
+float noise = Noise2D( vec2 (gl_FragCoord.x + 100.0 * osg_SimulationTime,  
+gl_FragCoord.y + 300.0 * osg_SimulationTime), 8.0);
+
+float f_black = 1.0 - fact_black;
+
+noise *= (1.0 - smoothstep(0.0, 0.5, f_black));
+
+color = mix(color, vec3 (1.0, 1.0, 1.0) * mix(length(color),  
+tgt_brightness, greyout)  , 0.9* greyout + 0.6 * noise);
+color *= tgt_brightness;
+
+float blackout = 1.0 - smoothstep( f_black * display_ysize, (f_black + blackout_band_width) * display_ysize, length(gl_FragCoord.xy -center));
+
+color *= blackout;
+
+return color;
+
+}
+
 vec3 filter_combined (in vec3 color) {
 
 if (use_filtering == false)
@@ -71,7 +107,7 @@ if (use_filtering == false)
 	return color;
 	}
 
-
+color = g_force(color);
 
 
 if (use_night_vision)

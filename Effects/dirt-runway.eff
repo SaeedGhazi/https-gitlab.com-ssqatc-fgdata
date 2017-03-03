@@ -362,6 +362,16 @@
         <type>float</type>
         <value><use>delta_T</use></value>
       </uniform>
+      <uniform>
+        <name>fact_grey</name>
+        <type>float</type>
+        <value><use>fact_grey</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_black</name>
+        <type>float</type>
+        <value><use>fact_black</use></value>
+      </uniform>
       <!-- cloud shadows -->
       <uniform>
         <name>cloudpos1_x</name>

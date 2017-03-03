@@ -87,6 +87,33 @@
 
 			<radio>
 				<halign>left</halign>
+				<label>Normal</label>
+				<live>true</live>
+				<property>/sim/rendering/als-filters/use-normal-filters</property>
+				<enable>
+					<property>/sim/rendering/shaders/skydome</property>
+					<property>/sim/rendering/als-filters/use-filtering</property>
+				</enable>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-night-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-IR-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-normal-filters</property>
+					<value type="bool">true</value>
+				</binding>
+			</radio>
+
+
+			<radio>
+				<halign>left</halign>
 				<label>Night vision</label>
 				<live>true</live>
 				<property>/sim/rendering/als-filters/use-night-vision</property>
@@ -95,9 +122,14 @@
 					<property>/sim/rendering/als-filters/use-filtering</property>
 				</enable>
 				<binding>
-					<command>property-toggle</command>
+					<command>property-assign</command>
 					<property>/sim/rendering/als-filters/use-night-vision</property>
 					<value type="bool">true</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-normal-filters</property>
+					<value type="bool">false</value>
 				</binding>
 				<binding>
 					<command>property-assign</command>
@@ -116,13 +148,18 @@
 					<property>/sim/rendering/als-filters/use-filtering</property>
 				</enable>
 				<binding>
-					<command>property-toggle</command>
+					<command>property-assign</command>
 					<property>/sim/rendering/als-filters/use-IR-vision</property>
 					<value type="bool">true</value>
 				</binding>
 				<binding>
 					<command>property-assign</command>
 					<property>/sim/rendering/als-filters/use-night-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-normal-filters</property>
 					<value type="bool">false</value>
 				</binding>
 			</radio>

@@ -60,6 +60,8 @@
 		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
     		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
     		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+		<fact_grey><use>/sim/rendering/als-filters/grey-factor</use></fact_grey>
+    	        <fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
     		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
     		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
     		<delta_T><use>/environment/surface/delta-T-vegetation</use></delta_T>
@@ -304,6 +306,16 @@
         <name>delta_T</name>
         <type>float</type>
         <value><use>delta_T</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_grey</name>
+        <type>float</type>
+        <value><use>fact_grey</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_black</name>
+        <type>float</type>
+        <value><use>fact_black</use></value>
       </uniform>
 	<!-- cloud shadows -->
       <uniform>
@@ -794,6 +806,16 @@
         <type>float</type>
         <value><use>delta_T</use></value>
       </uniform>
+      <uniform>
+        <name>fact_grey</name>
+        <type>float</type>
+        <value><use>fact_grey</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_black</name>
+        <type>float</type>
+        <value><use>fact_black</use></value>
+      </uniform>
      <!-- cloud shadows -->
       <uniform>
         <name>cloudpos1_x</name>
@@ -1242,6 +1264,51 @@
         <type>float</type>
         <value><use>landing_light3_offset</use></value>
       </uniform>
+      <!-- filtering -->
+
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_grey</name>
+        <type>float</type>
+        <value><use>fact_grey</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_black</name>
+        <type>float</type>
+        <value><use>fact_black</use></value>
+      </uniform>
+
+      <!-- cloud shadows -->
+
       <uniform>
         <name>cloudpos1_x</name>
         <type>float</type>

@@ -98,8 +98,8 @@
 		<terminator><use>/environment/terminator-relative-position-m</use></terminator>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
-    <overcast><use>/rendering/scene/overcast</use></overcast>
-    <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
+    	        <overcast><use>/rendering/scene/overcast</use></overcast>
+                <eye_alt><use>/sim/rendering/eye-altitude-m</use></eye_alt>
 		<snow_level><use>/environment/snow-level-m</use></snow_level>
 		<dust_cover_factor><use>/environment/surface/dust-cover-factor</use></dust_cover_factor>
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>

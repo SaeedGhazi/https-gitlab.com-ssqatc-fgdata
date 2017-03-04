@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
 	<name>Effects/planet-cloudlayer</name>
-	<!-- 	<inherits-from>Effects/shadow</inherits-from> -->
 	<parameters>
 		<texture n ="0">
 			<type>white</type>
@@ -29,6 +28,8 @@
     		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
     		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
     		<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
+		<fact_grey><use>/sim/rendering/als-filters/grey-factor</use></fact_grey>
+    	        <fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
     		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
     		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
     		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
@@ -194,46 +195,56 @@
 					<use>sun-angle</use>
 				</value>
 			</uniform>
-<uniform>
-        <name>gamma</name>
-        <type>float</type>
-        <value><use>gamma</use></value>
-      </uniform>
-      <uniform>
-        <name>brightness</name>
-        <type>float</type>
-        <value><use>brightness</use></value>
-      </uniform>
-      <uniform>
-        <name>use_filtering</name>
-        <type>bool</type>
-        <value><use>use_filtering</use></value>
-      </uniform>
-      <uniform>
-        <name>use_night_vision</name>
-        <type>bool</type>
-        <value><use>use_night_vision</use></value>
-      </uniform>
-      <uniform>
-        <name>use_IR_vision</name>
-        <type>bool</type>
-        <value><use>use_IR_vision</use></value>
-      </uniform>
-      <uniform>
-        <name>delta_T</name>
-        <type>float</type>
-        <value><use>delta_T</use></value>
-      </uniform>
-      <uniform>
-        <name>display_xsize</name>
-        <type>int</type>
-        <value><use>display_xsize</use></value>
-      </uniform>
-      <uniform>
-        <name>display_ysize</name>
-        <type>int</type>
-        <value><use>display_ysize</use></value>
-      </uniform>  
+			<uniform>
+				<name>gamma</name>
+				<type>float</type>
+				<value><use>gamma</use></value>
+			</uniform>
+			<uniform>
+				<name>brightness</name>
+				<type>float</type>
+				<value><use>brightness</use></value>
+			</uniform>
+			<uniform>
+				<name>use_filtering</name>
+				<type>bool</type>
+				<value><use>use_filtering</use></value>
+			</uniform>
+			<uniform>
+				<name>use_night_vision</name>
+				<type>bool</type>
+				<value><use>use_night_vision</use></value>
+			</uniform>
+			<uniform>
+				<name>use_IR_vision</name>
+				<type>bool</type>
+				<value><use>use_IR_vision</use></value>
+			</uniform>
+			<uniform>
+				<name>delta_T</name>
+				<type>float</type>
+				<value><use>delta_T</use></value>
+			</uniform>
+	      		<uniform>
+				<name>fact_grey</name>
+				<type>float</type>
+				<value><use>fact_grey</use></value>
+			</uniform>
+			<uniform>
+				<name>fact_black</name>
+				<type>float</type>
+				<value><use>fact_black</use></value>
+			</uniform>
+			<uniform>
+				<name>display_xsize</name>
+				<type>int</type>
+				<value><use>display_xsize</use></value>
+			</uniform>
+			<uniform>
+				<name>display_ysize</name>
+				<type>int</type>
+				<value><use>display_ysize</use></value>
+			</uniform>  
 		</pass>
 	</technique>
 

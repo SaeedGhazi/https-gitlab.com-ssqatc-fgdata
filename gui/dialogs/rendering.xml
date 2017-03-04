@@ -1081,7 +1081,7 @@
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Low Density");
 				} else if (density < 1.99) {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Medium Density");
-				} else if (density < 3.99) {
+				} else if (density < 4.01) {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "High Density");
 				} else {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Very High Density");

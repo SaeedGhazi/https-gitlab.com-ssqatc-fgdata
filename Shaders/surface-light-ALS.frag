@@ -66,17 +66,19 @@ float ray = 0.0;
 if (sinterm == 0.0)
 	{ray = 0.0;}
 else
-	{ray = clamp(pow(sinterm,10.0),0.0,1.0);}
+	//{ray = clamp(pow(sinterm,10.0),0.0,1.0);}
+	{ray = sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm;}
+
 
 float fogEffect =  (1.0-smoothstep(0.4,0.8,transmission));
 float halo = 0.2 * exp(-10.0 * r * r);
 float base = exp(-80.0*r*r);
 ray *= exp(-40.0 * r * r);
 
-float intensity = clamp(ray  + base + halo,0.0,1.0) + 0.1 * fogEffect * (1.0-smoothstep(0.3, 0.6,r));
+
+float intensity = clamp(ray + base + halo,0.0,1.0) + 0.1 * fogEffect * (1.0-smoothstep(0.3, 0.6,r));
 
 return intensity;
-//return vec4 (1.0,1.0,1.0,1.0) * intensity;
 
 }
 
@@ -160,11 +162,8 @@ void main()
     transmission =  fog_func(transmission_arg);
     float lightArg = terminator/100000.0;
     float attenuationScale = 1.0 + 20.0 * (1.0 -smoothstep(-15.0, 0.0, lightArg));
-    //float dist_att =  exp(-100.0/attenuationScale/size);
-   float dist_att = exp(-dist/200.0/size/attenuationScale);
+    float dist_att = exp(-dist/200.0/size/attenuationScale);
 
-    //vec4 texel = texture2D(texture,gl_TexCoord[0].st);
-    //vec4 texel = light_sprite(gl_TexCoord[0].st,transmission, noise);
     float intensity = light_sprite(gl_TexCoord[0].st,transmission, noise);
     vec3 light_color = gl_Color.rgb;
 

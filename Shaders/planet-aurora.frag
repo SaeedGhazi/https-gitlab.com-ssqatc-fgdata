@@ -17,7 +17,7 @@ uniform float afterglow;
 uniform float osg_SimulationTime;
 
 float Noise2D(in vec2 coord, in float wavelength);
-
+vec3 filter_combined (in vec3 color) ;
 
 void main()
 {
@@ -68,6 +68,8 @@ float angStrength = smoothstep(0.2, 0.6, view_angle);
 
 float auroraStrength = vStrength * angStrength * noise_01 * noise_02 * strength * fade_factor;
 
+vec3 finalColor = vec3 (auroraColor.x, auroraColor.y, auroraColor.z);
+finalColor.rgb = filter_combined(finalColor.rgb);
 
-gl_FragColor = vec4 (auroraColor.x, auroraColor.y, auroraColor.z, auroraStrength);
+gl_FragColor = vec4(finalColor.r, finalColor.g, finalColor.b, auroraStrength);
 }

@@ -228,12 +228,12 @@
 				<name>gamma</name>
 				<type>float</type>
 				<value><use>gamma</use></value>
-			      </uniform>
-			      <uniform>
+			</uniform>
+			<uniform>
 				<name>brightness</name>
 				<type>float</type>
 				<value><use>brightness</use></value>
-			      </uniform>
+			</uniform>
 			      <uniform>
 				<name>use_filtering</name>
 				<type>bool</type>

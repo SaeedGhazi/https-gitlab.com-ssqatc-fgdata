@@ -104,6 +104,7 @@ float rayleigh_in_func(in float dist, in float air_pollution, in float avisibili
 float alt_factor(in float eye_alt, in float vertex_alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
+float rand2D(in vec2 co);
 
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float lightArg);
@@ -467,6 +468,56 @@ void main (void)
     //////////////////////////////////////////////////////////////////////
     // END lightmap
     /////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////
+    // BEGIN procedural lightmap
+    //////////////////////////////////////////////////////////////////////
+
+
+   if (0==1)
+	{
+	vec2 roadCoords = gl_TexCoord[0].st;
+	roadCoords.s *=8.0;
+	roadCoords.s = fract(roadCoords.s);
+	
+
+	vec3 pLMColor = vec3 (0.941, 0.682, 0.086);
+
+	float pLMIntensity = smoothstep(0.0, 0.4, roadCoords.s) * (1.0 - smoothstep(0.6, 1.0, roadCoords.s));
+	pLMIntensity = 0.5 + 0.1 * max(0.0,sin(4.0 * roadCoords.t));
+
+	pLMColor *= pLMIntensity;
+
+	float cSign = 1.0;
+	if (roadCoords.s > 0.5) {cSign = -1.0;}
+
+	roadCoords.t += 0.2 * osg_SimulationTime * cSign;
+	float cTag = fract(roadCoords.t * 10.0);
+	float cDomain = roadCoords.t * 10.0 - cTag;
+	float cRnd = rand2D(vec2 (0.1 * cDomain, 1.0));
+
+	float cPresent = 0.0;
+	if (cRnd > 0.8) {cPresent = 1.0;}
+	
+	vec3 pCLColor = vec3 (0.95, 1.0, 1.0);
+	float pCLIntensity = smoothstep(0.2, 0.5, cTag) * (1.0-smoothstep(0.5, 0.7, cTag));
+	float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
+	laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
+	laneFact += smoothstep(0.65, 0.7, roadCoords.s) * (1.0-smoothstep(0.7, 0.75, roadCoords.s));
+	laneFact += smoothstep(0.75, 0.8, roadCoords.s) * (1.0-smoothstep(0.8, 0.85, roadCoords.s));
+	pCLIntensity = pCLIntensity * laneFact * cPresent;
+
+	pCLColor = pCLColor *= pCLIntensity;
+
+	pLMColor = pLMColor +  pCLColor;		
+
+	fragColor.rgb = max(fragColor.rgb, pLMColor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + pLMColor*.5));
+	}
+
+
+    //////////////////////////////////////////////////////////////////////
+    // END procedural lightmap
+    //////////////////////////////////////////////////////////////////////
 
 
     /// BEGIN fog amount

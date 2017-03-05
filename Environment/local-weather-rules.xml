@@ -801,6 +801,45 @@
     <output>/environment/tree-season</output>
   </filter>
   
+<!-- Lighting parameter - used for city and road lighting during night -->
+  
+  <filter>
+    <name>EnvironmentInterpolator:OSM:Lightmap:Night</name>
+    <type>gain</type>
+    <enable>
+      <condition>
+            <greater-than>
+              <property>/sim/time/sun-angle-rad</property>
+              <value>1.45</value>
+            </greater-than>
+      </condition>
+    </enable>
+    <input>
+      <value>1.0</value>
+    </input>
+    <output>/environment/lightmap-factor</output>
+  </filter>
+
+  <filter>
+    <name>EnvironmentInterpolator:OSM:Lightmap:Day</name>
+    <type>gain</type>
+    <enable>
+      <condition>
+	 <not>
+            <greater-than>
+              <property>/sim/time/sun-angle-rad</property>
+              <value>1.45</value>
+            </greater-than>
+         </not>
+      </condition>
+    </enable>
+    <input>
+      <value>0.0</value>
+    </input>
+    <output>/environment/lightmap-factor</output>
+  </filter>
+
+
 
   <filter>
     <name>EnvironmentInterpolator:Precipitation:Illumination</name>

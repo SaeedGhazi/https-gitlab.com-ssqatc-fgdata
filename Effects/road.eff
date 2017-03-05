@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generic road effect for OSM detailed roads -->
+<PropertyList>
+  <name>Effects/road</name>
+  <inherits-from>Effects/model-combined-deferred</inherits-from>
+
+
+  <technique n="4">
+	<pass>
+		<program>
+			<fragment-shader n="0">Shaders/road-ALS-ultra.frag</fragment-shader>
+		</program>
+	</pass>
+  </technique>
+</PropertyList>

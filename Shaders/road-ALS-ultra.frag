@@ -20,7 +20,7 @@ varying vec3	vertVec;
 varying	float	alpha;
 
 uniform sampler2D BaseTex;
-uniform sampler2D LightMapTex;
+//uniform sampler2D LightMapTex;
 uniform sampler2D NormalTex;
 uniform sampler2D ReflMapTex;
 uniform sampler2D ReflGradientsTex;
@@ -30,8 +30,8 @@ uniform sampler2D GrainTex;
 
 uniform int dirt_enabled;
 uniform int dirt_multi;
-uniform int lightmap_enabled;
-uniform int lightmap_multi;
+//uniform int lightmap_enabled;
+//uniform int lightmap_multi;
 uniform int nmap_dds;
 uniform int nmap_enabled;
 uniform int refl_enabled;
@@ -39,6 +39,7 @@ uniform int refl_type;
 uniform int refl_map;
 uniform int grain_texture_enabled;
 uniform int rain_enabled;
+uniform int road_traffic_enabled;
 uniform int cloud_shadow_flag;
 uniform int use_searchlight;
 uniform int use_landing_light;
@@ -48,10 +49,10 @@ uniform float amb_correction;
 uniform float dirt_b_factor;
 uniform float dirt_g_factor;
 uniform float dirt_r_factor;
-uniform float lightmap_a_factor;
-uniform float lightmap_b_factor;
-uniform float lightmap_g_factor;
-uniform float lightmap_r_factor;
+//uniform float lightmap_a_factor;
+//uniform float lightmap_b_factor;
+//uniform float lightmap_g_factor;
+//uniform float lightmap_r_factor;
 uniform float nmap_tile;
 uniform float refl_correction;
 uniform float refl_fresnel;
@@ -61,6 +62,7 @@ uniform float refl_rainbow;
 uniform float grain_magnification;
 uniform float wetness;
 uniform float rain_norm;
+uniform float road_traffic_density;
 
 uniform float avisibility;
 uniform float cloud_self_shading;
@@ -88,10 +90,10 @@ uniform bool use_IR_vision;
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
-uniform vec3 lightmap_r_color;
-uniform vec3 lightmap_g_color;
-uniform vec3 lightmap_b_color;
-uniform vec3 lightmap_a_color;
+//uniform vec3 lightmap_r_color;
+//uniform vec3 lightmap_g_color;
+//uniform vec3 lightmap_b_color;
+//uniform vec3 lightmap_a_color;
 
 uniform vec3 dirt_r_color;
 uniform vec3 dirt_g_color;
@@ -122,6 +124,59 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
     }
 
 
+void road_type_mapper (in vec2 coord, out float rtype_traffic_density, out float rtype_base_illumination, out float rtype_traffic_speed)
+	{
+	if (coord.s < 0.125)
+		{
+		rtype_traffic_density = 0;
+		rtype_base_illumination = 0;
+		rtype_traffic_speed = 0.0;
+		}
+	else if (coord.s < 0.250)
+		{
+		rtype_traffic_density = 0.3;
+		rtype_base_illumination = 0.65;
+		rtype_traffic_speed = 0.5;
+		}
+	else if (coord.s < 0.375)
+		{
+		rtype_traffic_density = 1.0;
+		rtype_base_illumination = 1.0;	
+		rtype_traffic_speed = 1.0;
+		}
+	else if (coord.s < 0.5)
+		{
+		rtype_traffic_density = 0.0;
+		rtype_base_illumination = 0.0;
+		rtype_traffic_speed = 0.0;
+		}
+	else if (coord.s < 0.625)
+		{
+		rtype_traffic_density = 0.0;
+		rtype_base_illumination = 0.0;
+		rtype_traffic_speed = 0.0;
+		}
+	else if (coord.s < 0.750)
+		{
+		rtype_traffic_density = 1.0;
+		rtype_base_illumination = 0.65;
+		rtype_traffic_speed = 1.0;
+		}
+	else if (coord.s < 0.875)
+		{
+		rtype_traffic_density = 0.1;
+		rtype_base_illumination = 0.0;
+		rtype_traffic_speed = 0.3;
+		}
+	else
+		{
+		rtype_traffic_density = 0.0;
+		rtype_base_illumination = 0.0;
+		rtype_traffic_speed = 0.0;
+		}
+	
+
+	}
    
 
 
@@ -131,14 +186,19 @@ void main (void)
     vec4 nmap       = texture2D(NormalTex, gl_TexCoord[0].st * nmap_tile);
     vec4 reflmap    = texture2D(ReflMapTex, gl_TexCoord[0].st);
     vec4 noisevec   = texture3D(ReflNoiseTex, rawpos.xyz);
-    vec4 lightmapTexel = texture2D(LightMapTex, gl_TexCoord[0].st);
 
     vec4 grainTexel; 
 
     vec3 mixedcolor;
     vec3 N = vec3(0.0,0.0,1.0);
 
-    
+    // road type characteristics
+
+    float rtype_traffic_density = 0.0;
+    float rtype_base_illumination = 0.0;
+    float rtype_traffic_speed = 0.0;
+    road_type_mapper (gl_TexCoord[0].st, rtype_traffic_density, rtype_base_illumination, rtype_traffic_speed);
+
     float pf = 0.0;
     float pf1 = 0.0;
     ///some generic light scattering parameters 
@@ -151,9 +211,7 @@ void main (void)
     /// BEGIN geometry for light
 
     vec3 up = (gl_ModelViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
-    //vec4 worldPos3D = (osg_ViewMatrixInverse * vec4 (0.0,0.0,0.0, 1.0));
-    //worldPos3D.a = 0.0;
-    //vec3 up = (osg_ViewMatrix * worldPos3D).xyz;
+
     float dist = length(vertVec);
     float vertex_alt = max(100.0,dot(up, vertVec) + alt);
     float vertex_scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
@@ -443,6 +501,7 @@ void main (void)
     //////////////////////////////////////////////////////////////////////
     // BEGIN lightmap
     //////////////////////////////////////////////////////////////////////
+    /*
     if ( lightmap_enabled >= 1 ) {
         vec3 lightmapcolor = vec3(0.0);
         vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor,
@@ -465,6 +524,7 @@ void main (void)
             }
         fragColor.rgb = max(fragColor.rgb, lightmapcolor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + lightmapcolor*.5));
         }
+	*/
     //////////////////////////////////////////////////////////////////////
     // END lightmap
     /////////////////////////////////////////////////////////////////////
@@ -474,8 +534,8 @@ void main (void)
     //////////////////////////////////////////////////////////////////////
 
 
-   if (0==1)
-	{
+
+	
 	vec2 roadCoords = gl_TexCoord[0].st;
 	roadCoords.s *=8.0;
 	roadCoords.s = fract(roadCoords.s);
@@ -484,35 +544,38 @@ void main (void)
 	vec3 pLMColor = vec3 (0.941, 0.682, 0.086);
 
 	float pLMIntensity = smoothstep(0.0, 0.4, roadCoords.s) * (1.0 - smoothstep(0.6, 1.0, roadCoords.s));
-	pLMIntensity = 0.5 + 0.1 * max(0.0,sin(4.0 * roadCoords.t));
+	pLMIntensity = 0.5 * rtype_base_illumination + 0.1 * max(0.0,sin(4.0 * roadCoords.t));
 
 	pLMColor *= pLMIntensity;
 
-	float cSign = 1.0;
-	if (roadCoords.s > 0.5) {cSign = -1.0;}
+	if (road_traffic_enabled == 1)
+		{
+		float cSign = 1.0;
+		if (roadCoords.s > 0.5) {cSign = -1.0;}
 
-	roadCoords.t += 0.2 * osg_SimulationTime * cSign;
-	float cTag = fract(roadCoords.t * 10.0);
-	float cDomain = roadCoords.t * 10.0 - cTag;
-	float cRnd = rand2D(vec2 (0.1 * cDomain, 1.0));
+		roadCoords.t += 0.2 * osg_SimulationTime * cSign * rtype_traffic_speed;
+		float cTag = fract(roadCoords.t * 10.0);
+		float cDomain = roadCoords.t * 10.0 - cTag;
+		float cRnd = rand2D(vec2 (0.1 * cDomain, cSign));
 
-	float cPresent = 0.0;
-	if (cRnd > 0.8) {cPresent = 1.0;}
+		float cPresent = 0.0;
+		if (cRnd > 1.0 - 0.2 * road_traffic_density * rtype_traffic_density) {cPresent = 1.0;}
 	
-	vec3 pCLColor = vec3 (0.95, 1.0, 1.0);
-	float pCLIntensity = smoothstep(0.2, 0.5, cTag) * (1.0-smoothstep(0.5, 0.7, cTag));
-	float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
-	laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
-	laneFact += smoothstep(0.65, 0.7, roadCoords.s) * (1.0-smoothstep(0.7, 0.75, roadCoords.s));
-	laneFact += smoothstep(0.75, 0.8, roadCoords.s) * (1.0-smoothstep(0.8, 0.85, roadCoords.s));
-	pCLIntensity = pCLIntensity * laneFact * cPresent;
+		vec3 pCLColor = vec3 (0.95, 1.0, 1.0);
+		float pCLIntensity = smoothstep(0.2, 0.5, cTag) * (1.0-smoothstep(0.5, 0.7, cTag));
+		float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
+		laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
+		laneFact += smoothstep(0.65, 0.7, roadCoords.s) * (1.0-smoothstep(0.7, 0.75, roadCoords.s));
+		laneFact += smoothstep(0.75, 0.8, roadCoords.s) * (1.0-smoothstep(0.8, 0.85, roadCoords.s));
+		pCLIntensity = pCLIntensity * laneFact * cPresent;
 
-	pCLColor = pCLColor *= pCLIntensity;
+		pCLColor = pCLColor *= pCLIntensity;
 
-	pLMColor = pLMColor +  pCLColor;		
+		pLMColor = pLMColor +  pCLColor;
+		}		
 
 	fragColor.rgb = max(fragColor.rgb, pLMColor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + pLMColor*.5));
-	}
+	
 
 
     //////////////////////////////////////////////////////////////////////
@@ -631,10 +694,7 @@ void main (void)
         hazeColor = vec3 (1.0, 1.0, 1.0);
         }
 
-    if (use_IR_vision)
-	{
-	//hazeColor.rgb = max(hazeColor.rgb, vec3 (0.5, 0.5, 0.5));
-	}
+
 
 
     /// END fog color

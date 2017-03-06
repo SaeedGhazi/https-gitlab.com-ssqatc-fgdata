@@ -368,6 +368,11 @@ Started September 2000 by David Megginson, david@megginson.com
 	 <black-factor type="float">0.0</black-factor>
       </als-filters>
 
+      <osm>
+	<road-traffic-enabled type="bool">true</road-traffic-enabled>
+	<road-traffic-density type="float">1.0</road-traffic-density>
+      </osm>
+
       <scenery-path-suffix>
         <name type="string">Pylons</name>
         <enabled type="bool" userarchive="y">false</enabled>

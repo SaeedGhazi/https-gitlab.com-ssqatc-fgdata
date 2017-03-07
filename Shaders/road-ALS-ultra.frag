@@ -300,6 +300,52 @@ void main (void)
 
     /// END grain overlay
 
+
+    /// BEGIN procedural cars
+
+	float cTag = 0.0;
+	float cPresent = 0.0;
+
+	vec2 roadCoords = gl_TexCoord[0].st;
+	roadCoords.s *=8.0;
+	roadCoords.s = fract(roadCoords.s);
+
+	if (road_traffic_enabled == 1)
+		{
+		float cSign = 1.0;
+		if (roadCoords.s > 0.5) {cSign = -1.0;}
+
+		float cCoord = roadCoords.t;
+		cCoord += 0.3 * osg_SimulationTime * cSign * rtype_traffic_speed;
+		cCoord *= 5.0;
+
+		cTag = fract(cCoord);
+		float cDomain = cCoord - cTag;
+		float cRnd = rand2D(vec2 (cDomain, cSign));
+
+		cPresent = 0.0;
+		float cDisc = 0.2 * road_traffic_density * rtype_traffic_density;
+		if (cRnd > 1.0 - cDisc) {cPresent = 1.0;}
+
+		float cColorRnd = (cRnd - 1.0 + cDisc)/ max(cDisc, 0.05);
+
+		vec3 cColor = vec3 (0.7 * (1.0 - cColorRnd), 0.7 * 2.0 * (0.5 - abs(cColorRnd - 0.5)) , 0.7 * cColorRnd);
+
+		float cPos = cTag;
+		if (cSign > 0.0) {cPos = 1.0 - cPos;}
+		float cShape = smoothstep(0.0, 0.05, cPos) * (1.0-smoothstep(0.35, 0.4, cPos));
+		float laneShape =  smoothstep(0.25, 0.28, roadCoords.s) * (1.0-smoothstep(0.42, 0.45, roadCoords.s));
+		laneShape += smoothstep(0.65, 0.68, roadCoords.s) * (1.0-smoothstep(0.82, 0.85, roadCoords.s));
+
+		cShape *= laneShape;
+
+		texel.rgb = mix(texel.rgb, cColor, cPresent * cShape); 
+		}
+
+
+
+    /// END procedural cars
+
     vec3 reflVecN;
 
     ///BEGIN bump
@@ -536,9 +582,7 @@ void main (void)
 
 
 	
-	vec2 roadCoords = gl_TexCoord[0].st;
-	roadCoords.s *=8.0;
-	roadCoords.s = fract(roadCoords.s);
+
 	
 
 	vec3 pLMColor = vec3 (0.941, 0.682, 0.086);
@@ -550,19 +594,9 @@ void main (void)
 
 	if (road_traffic_enabled == 1)
 		{
-		float cSign = 1.0;
-		if (roadCoords.s > 0.5) {cSign = -1.0;}
 
-		roadCoords.t += 0.2 * osg_SimulationTime * cSign * rtype_traffic_speed;
-		float cTag = fract(roadCoords.t * 10.0);
-		float cDomain = roadCoords.t * 10.0 - cTag;
-		float cRnd = rand2D(vec2 (0.1 * cDomain, cSign));
-
-		float cPresent = 0.0;
-		if (cRnd > 1.0 - 0.2 * road_traffic_density * rtype_traffic_density) {cPresent = 1.0;}
-	
 		vec3 pCLColor = vec3 (0.95, 1.0, 1.0);
-		float pCLIntensity = smoothstep(0.2, 0.5, cTag) * (1.0-smoothstep(0.5, 0.7, cTag));
+		float pCLIntensity = smoothstep(0.4, 0.6, cTag) * (1.0-smoothstep(0.6, 0.8, cTag));
 		float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
 		laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
 		laneFact += smoothstep(0.65, 0.7, roadCoords.s) * (1.0-smoothstep(0.7, 0.75, roadCoords.s));

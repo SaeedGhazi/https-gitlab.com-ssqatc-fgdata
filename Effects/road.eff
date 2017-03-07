@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generic road effect for OSM detailed roads -->
+
 <PropertyList>
   <name>Effects/road</name>
   <inherits-from>Effects/model-combined-deferred</inherits-from>
@@ -15,6 +16,7 @@
     	</texture>
 	<grain-texture-enabled type="int">0</grain-texture-enabled>
 	<grain-magnification type="float">50</grain-magnification>
+	<lightmap-color type="vec3d" n="0"> 0.8 0.8 1.0 </lightmap-color>
 	<road-traffic-enabled><use>/sim/rendering/osm/road-traffic-enabled</use></road-traffic-enabled>
 	<road-traffic-density><use>/sim/rendering/osm/road-traffic-density</use></road-traffic-density>
   </parameters>
@@ -478,6 +480,16 @@
 				   <type>float</type>
 				   <value>
 					   <use>road-traffic-density</use>
+				   </value>
+			   </uniform>
+
+			   <!-- road illumination -->
+
+			   <uniform>
+				   <name>streetlight_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>lightmap-color</use>
 				   </value>
 			   </uniform>
 			   

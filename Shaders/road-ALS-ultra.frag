@@ -88,6 +88,8 @@ uniform vec3 dirt_r_color;
 uniform vec3 dirt_g_color;
 uniform vec3 dirt_b_color;
 
+uniform vec3 streetlight_color;
+
 float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float fog_func (in float targ, in float altitude);
@@ -304,8 +306,10 @@ void main (void)
 		float cSign = 1.0;
 		if (roadCoords.s > 0.5) {cSign = -1.0;}
 
+		float total_traffic_density = road_traffic_density * rtype_traffic_density;
+
 		float cCoord = roadCoords.t;
-		cCoord += 0.3 * osg_SimulationTime * cSign * rtype_traffic_speed;
+		cCoord += 0.3 * osg_SimulationTime * cSign * rtype_traffic_speed * (1.0 - (0.9 * smoothstep(1.0, 2.5, total_traffic_density)));
 		cCoord *= 5.0;
 
 		cTag = fract(cCoord);
@@ -313,7 +317,7 @@ void main (void)
 		float cRnd = rand2D(vec2 (cDomain, cSign));
 
 		cPresent = 0.0;
-		float cDisc = 0.2 * road_traffic_density * rtype_traffic_density;
+		float cDisc = 0.2 * total_traffic_density;
 		if (cRnd > 1.0 - cDisc) {cPresent = 1.0;}
 
 		float cColorRnd = (cRnd - 1.0 + cDisc)/ max(cDisc, 0.05);
@@ -551,7 +555,7 @@ void main (void)
 
 	
 
-	vec3 pLMColor = vec3 (0.941, 0.682, 0.086);
+	vec3 pLMColor = streetlight_color;//vec3 (0.941, 0.682, 0.086);
 
 	float pLMIntensity = smoothstep(0.0, 0.4, roadCoords.s) * (1.0 - smoothstep(0.6, 1.0, roadCoords.s));
 	pLMIntensity = 0.5 * rtype_base_illumination + 0.1 * max(0.0,sin(4.0 * roadCoords.t));

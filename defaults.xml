@@ -914,7 +914,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </jetways>
     <terrasync preserve="y">
       <enabled type="bool" userarchive="y">false</enabled>
-      <http-server userarchive="y">automatic</http-server>
+      <http-server>automatic</http-server>
         <!-- INTENTIONALLY LEFT BLANK! Do NOT edit.
                 This (empty) value is the initial/default value only. Use command-line option
                 "terrasync-dir", GUI-dialog, or

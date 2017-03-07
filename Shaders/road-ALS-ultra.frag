@@ -20,7 +20,6 @@ varying vec3	vertVec;
 varying	float	alpha;
 
 uniform sampler2D BaseTex;
-//uniform sampler2D LightMapTex;
 uniform sampler2D NormalTex;
 uniform sampler2D ReflMapTex;
 uniform sampler2D ReflGradientsTex;
@@ -30,8 +29,6 @@ uniform sampler2D GrainTex;
 
 uniform int dirt_enabled;
 uniform int dirt_multi;
-//uniform int lightmap_enabled;
-//uniform int lightmap_multi;
 uniform int nmap_dds;
 uniform int nmap_enabled;
 uniform int refl_enabled;
@@ -49,10 +46,6 @@ uniform float amb_correction;
 uniform float dirt_b_factor;
 uniform float dirt_g_factor;
 uniform float dirt_r_factor;
-//uniform float lightmap_a_factor;
-//uniform float lightmap_b_factor;
-//uniform float lightmap_g_factor;
-//uniform float lightmap_r_factor;
 uniform float nmap_tile;
 uniform float refl_correction;
 uniform float refl_fresnel;
@@ -90,10 +83,6 @@ uniform bool use_IR_vision;
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
-//uniform vec3 lightmap_r_color;
-//uniform vec3 lightmap_g_color;
-//uniform vec3 lightmap_b_color;
-//uniform vec3 lightmap_a_color;
 
 uniform vec3 dirt_r_color;
 uniform vec3 dirt_g_color;
@@ -328,8 +317,10 @@ void main (void)
 		if (cRnd > 1.0 - cDisc) {cPresent = 1.0;}
 
 		float cColorRnd = (cRnd - 1.0 + cDisc)/ max(cDisc, 0.05);
+		float cColorRnd2 =  rand2D(vec2 (cDomain, 0.5));
 
-		vec3 cColor = vec3 (0.7 * (1.0 - cColorRnd), 0.7 * 2.0 * (0.5 - abs(cColorRnd - 0.5)) , 0.7 * cColorRnd);
+		vec3 cColor = vec3 (0.8 * (1.0 - cColorRnd), 0.8 * 2.0 * (0.5 - abs(cColorRnd - 0.5)) , 0.8 * cColorRnd);
+		cColor *= cColorRnd2;
 
 		float cPos = cTag;
 		if (cSign > 0.0) {cPos = 1.0 - cPos;}
@@ -431,8 +422,11 @@ void main (void)
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
-    vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
+    //vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
+	vec4 color = Diffuse * gl_FrontMaterial.diffuse;
     color = clamp( color, 0.0, 1.0 );
+
+
 
     ////////////////////////////////////////////////////////////////////
     //BEGIN reflect
@@ -539,41 +533,13 @@ void main (void)
         * ambient_offset ;
     ambient_Correction = clamp(ambient_Correction, -1.0, 1.0);
 
+    color += ambient;
     color.a = texel.a * alpha;
     vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
 
     fragColor += Specular * nmap.a;
 
-    //////////////////////////////////////////////////////////////////////
-    // BEGIN lightmap
-    //////////////////////////////////////////////////////////////////////
-    /*
-    if ( lightmap_enabled >= 1 ) {
-        vec3 lightmapcolor = vec3(0.0);
-        vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor,
-            lightmap_b_factor, lightmap_a_factor);
-        lightmapFactor = lightmapFactor * lightmapTexel;
-        if (lightmap_multi > 0 ){
-            //lightmapcolor = lightmap_r_color * lightmapFactor.r +
-             //   lightmap_g_color * lightmapFactor.g +
-             //   lightmap_b_color * lightmapFactor.b +
-             //   lightmap_a_color * lightmapFactor.a ;
 
-		lightmapcolor = lightmap_r_color * lightmapFactor.r;
-		lightmapcolor = addLights(lightmapcolor, lightmap_g_color * lightmapFactor.g);
-		lightmapcolor = addLights(lightmapcolor, lightmap_b_color * lightmapFactor.b);
-		lightmapcolor = addLights(lightmapcolor, lightmap_a_color * lightmapFactor.a);
-
-
-            } else {
-                lightmapcolor = lightmapTexel.rgb * lightmap_r_color * lightmapFactor.r;
-            }
-        fragColor.rgb = max(fragColor.rgb, lightmapcolor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + lightmapcolor*.5));
-        }
-	*/
-    //////////////////////////////////////////////////////////////////////
-    // END lightmap
-    /////////////////////////////////////////////////////////////////////
 
     //////////////////////////////////////////////////////////////////////
     // BEGIN procedural lightmap

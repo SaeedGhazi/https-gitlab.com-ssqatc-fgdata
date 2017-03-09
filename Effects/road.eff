@@ -17,8 +17,11 @@
 	<grain-texture-enabled type="int">0</grain-texture-enabled>
 	<grain-magnification type="float">50</grain-magnification>
 	<lightmap-color type="vec3d" n="0"> 0.8 0.8 1.0 </lightmap-color>
+    	<snow_level><use>/environment/snow-level-m</use></snow_level>
+    	<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
 	<road-traffic-enabled><use>/sim/rendering/osm/road-traffic-enabled</use></road-traffic-enabled>
 	<road-traffic-density><use>/sim/rendering/osm/road-traffic-density</use></road-traffic-density>
+	<road-light-factor><use>/environment/lightmap-factor</use></road-light-factor>
   </parameters>
 
    <technique n="3">
@@ -492,6 +495,14 @@
 					   <use>lightmap-color</use>
 				   </value>
 			   </uniform>
+
+			   <uniform>
+				   <name>streetlight_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>road-light-factor</use>
+				   </value>
+			   </uniform>
 			   
 
 			   <!-- use a grain texture map-->
@@ -511,7 +522,7 @@
 				   </value>
 		  	   </uniform>
 
-			   <!-- simulate wetness and rain-->
+			   <!-- simulate wetness, snow and rain-->
 		  	   <uniform>
 				   <name>rain_enabled</name>
 				   <type>int</type>
@@ -519,6 +530,18 @@
 			  	   	<use>rain-enabled</use>
 				   </value>
 		  	   </uniform>
+
+			   <uniform>
+        			   <name>snowlevel</name>
+        			   <type>float</type>
+        			   <value><use>snow_level</use></value>
+      			   </uniform>
+
+			   <uniform>
+				   <name>snow_thickness_factor</name>
+				   <type>float</type>
+				   <value><use>snow_thickness_factor</use></value>
+			   </uniform>
 
 			   <!-- set the amount of ambient light correction 0.0 - 1.0  -->
 			   <uniform>

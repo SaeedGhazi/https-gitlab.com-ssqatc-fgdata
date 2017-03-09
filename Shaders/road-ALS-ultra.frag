@@ -56,6 +56,7 @@ uniform float grain_magnification;
 uniform float wetness;
 uniform float rain_norm;
 uniform float road_traffic_density;
+uniform float streetlight_factor;
 
 uniform float avisibility;
 uniform float cloud_self_shading;
@@ -69,6 +70,8 @@ uniform float terminator;
 uniform float terrain_alt;
 uniform float visibility;
 uniform float air_pollution;
+uniform float snowlevel;
+uniform float snow_thickness_factor;
 
 uniform float osg_SimulationTime;
 
@@ -98,6 +101,7 @@ float alt_factor(in float eye_alt, in float vertex_alt);
 float light_distance_fading(in float dist);
 float fog_backscatter(in float avisibility);
 float rand2D(in vec2 co);
+float Noise2D(in vec2 coord, in float wavelength);
 
 vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float lightArg);
@@ -182,6 +186,11 @@ void main (void)
 
     vec3 mixedcolor;
     vec3 N = vec3(0.0,0.0,1.0);
+ 
+    // noise
+
+    float noise_1m = Noise2D(rawpos.xy, 1.0); 
+    float noise_5m = Noise2D(rawpos.xy, 5.0);
 
     // road type characteristics
 
@@ -242,6 +251,8 @@ void main (void)
 
     float ct = dot(normalize(up), normalize(vertVec));
 
+    vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
+
     /// END geometry for light
 
 
@@ -292,14 +303,31 @@ void main (void)
     /// END grain overlay
 
 
-    /// BEGIN procedural cars
-
-	float cTag = 0.0;
-	float cPresent = 0.0;
+    /// BEGIN procedural textures - cars and snow
 
 	vec2 roadCoords = gl_TexCoord[0].st;
 	roadCoords.s *=8.0;
 	roadCoords.s = fract(roadCoords.s);
+
+	
+
+	vec4 snow_texel = vec4 (0.95, 0.95, 0.95, 1.0);
+	float noise_term = 0.5 * (noise_5m - 0.5);
+	noise_term +=  0.5 * (noise_1m - 0.5);
+	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + 0.5*snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
+
+	float noise_2000m = 0.0; 
+	float noise_10m = 0.0;
+		
+	float snowLaneShape =  smoothstep(0.20, 0.28, roadCoords.s) * (1.0-smoothstep(0.42, 0.5, roadCoords.s));
+	snowLaneShape += smoothstep(0.6, 0.68, roadCoords.s) * (1.0-smoothstep(0.82, 0.9, roadCoords.s));
+	snow_texel.a *= (1.0 - 0.3* snowLaneShape * rtype_traffic_density);
+
+	texel.rgb = mix(texel.rgb, snow_texel.rgb, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  1.0 * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+
+	float cTag = 0.0;
+	float cPresent = 0.0;
+
 
 	if (road_traffic_enabled == 1)
 		{
@@ -329,9 +357,9 @@ void main (void)
 		float cPos = cTag;
 		if (cSign > 0.0) {cPos = 1.0 - cPos;}
 		float cShape = smoothstep(0.0, 0.05, cPos) * (1.0-smoothstep(0.35, 0.4, cPos));
+		
 		float laneShape =  smoothstep(0.25, 0.28, roadCoords.s) * (1.0-smoothstep(0.42, 0.45, roadCoords.s));
 		laneShape += smoothstep(0.65, 0.68, roadCoords.s) * (1.0-smoothstep(0.82, 0.85, roadCoords.s));
-
 		cShape *= laneShape;
 
 		texel.rgb = mix(texel.rgb, cColor, cPresent * cShape); 
@@ -395,7 +423,7 @@ void main (void)
         {pf1 = pow(nDotHV1, 0.5*gl_FrontMaterial.shininess);}
   
 
-    vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
+
     if (cloud_shadow_flag == 1) 
 	{
 	light_diffuse = light_diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);
@@ -427,7 +455,7 @@ void main (void)
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
     //vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
-	vec4 color = Diffuse * gl_FrontMaterial.diffuse;
+    vec4 color = Diffuse * gl_FrontMaterial.diffuse;
     color = clamp( color, 0.0, 1.0 );
 
 
@@ -531,7 +559,6 @@ void main (void)
 
     // set ambient adjustment to remove bluiness with user input
     float ambient_offset = clamp(amb_correction, -1.0, 1.0);
-    //vec4 ambient = gl_LightModel.ambient + gl_LightSource[0].ambient;
     vec4 ambient = gl_LightModel.ambient + light_ambient;
     vec4 ambient_Correction = vec4(ambient.rg, ambient.b * 0.6, 1.0)
         * ambient_offset ;
@@ -558,7 +585,7 @@ void main (void)
 	vec3 pLMColor = streetlight_color;//vec3 (0.941, 0.682, 0.086);
 
 	float pLMIntensity = smoothstep(0.0, 0.4, roadCoords.s) * (1.0 - smoothstep(0.6, 1.0, roadCoords.s));
-	pLMIntensity = 0.5 * rtype_base_illumination + 0.1 * max(0.0,sin(4.0 * roadCoords.t));
+	pLMIntensity = 0.5 * rtype_base_illumination + 0.1 * max(0.0,sin(4.0 * roadCoords.t)) * streetlight_factor;
 
 	pLMColor *= pLMIntensity;
 

@@ -35,6 +35,7 @@ uniform int refl_enabled;
 uniform int refl_type;
 uniform int refl_map;
 uniform int grain_texture_enabled;
+uniform int road_traffic_direction;
 uniform int rain_enabled;
 uniform int road_traffic_enabled;
 uniform int cloud_shadow_flag;
@@ -333,6 +334,7 @@ void main (void)
 		{
 		float cSign = 1.0;
 		if (roadCoords.s > 0.5) {cSign = -1.0;}
+		cSign *= road_traffic_direction;
 
 		float total_traffic_density = road_traffic_density * rtype_traffic_density;
 

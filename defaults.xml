@@ -371,6 +371,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <osm>
 	<road-traffic-enabled type="bool">true</road-traffic-enabled>
 	<road-traffic-density type="float">1.0</road-traffic-density>
+	<road-traffic-direction type="int">1</road-traffic-direction>
       </osm>
 
       <scenery-path-suffix>

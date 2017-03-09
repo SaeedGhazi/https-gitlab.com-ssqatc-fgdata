@@ -21,6 +21,7 @@
     	<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
 	<road-traffic-enabled><use>/sim/rendering/osm/road-traffic-enabled</use></road-traffic-enabled>
 	<road-traffic-density><use>/sim/rendering/osm/road-traffic-density</use></road-traffic-density>
+	<road-traffic-direction><use>/sim/rendering/osm/road-traffic-direction</use></road-traffic-direction>
 	<road-light-factor><use>/environment/lightmap-factor</use></road-light-factor>
   </parameters>
 
@@ -483,6 +484,14 @@
 				   <type>float</type>
 				   <value>
 					   <use>road-traffic-density</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>road_traffic_direction</name>
+				   <type>int</type>
+				   <value>
+					   <use>road-traffic-direction</use>
 				   </value>
 			   </uniform>
 

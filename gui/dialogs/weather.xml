@@ -667,7 +667,7 @@
           <slider>15</slider>
           <editable>true</editable>
           <wrap>true</wrap>
-          <live>false</live>
+          <live>true</live>
           <top-line>0</top-line>
           <property>sim/gui/dialogs/metar/metar-string</property>
           <enable>

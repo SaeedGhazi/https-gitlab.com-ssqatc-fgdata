@@ -269,5 +269,6 @@
     <trace-write-desc>Trace les écritures pour une propriété.</trace-write-desc>   <!-- English: "Trace the writes for a property;" -->
     <log-level-desc>Précise quel niveau de journalisation utiliser.</log-level-desc>   <!-- English: "Specify which logging level to use" -->
     <log-class-desc>Précise quelles classe(s) de journalisation utiliser.</log-class-desc>   <!-- English: "Specify which logging class(es) to use" -->
+    <log-dir-desc>Écrit le journal dans le répertoire DIR. La valeur particulière 'desktop' fait écrire un fichier journal sur le bureau (endroit qui dépend du système d'exploitation). Cette option peut être spécifiée plusieurs fois à condition de passer une valeur différente à chaque fois. À l'intérieur du répertoire choisi, le fichier journal s'appelle FlightGear_YYYY-MM-DD_&lt;num&gt;.log, où &lt;num&gt; prend les valeurs 0, 1, 2, etc.</log-dir-desc>   <!-- English: "Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc." -->
 
 </PropertyList>

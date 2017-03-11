@@ -3,7 +3,7 @@
 
   Hydrodynamics section for JSBSim.
 
-    Copyright (C) 2008 - 2016  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2008 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -434,7 +434,7 @@
      <product>
       <property>hydro/environment/wave/hull-x-factor</property>
       <property>hydro/environment/wave/wave-number-rad_ft</property>
-      <property>hydro/hull-length-ft</property>
+      <property>metrics/hydro-length-ft</property>
      </product>
     </quotient>
    </function>

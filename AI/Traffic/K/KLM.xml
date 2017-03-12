@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- Author Ian Tolosa - Timetable of 23JAN2017 - Includes KLM, Cityhopper & Martinait, PAX & Cargo -->
+<!-- Author Ian Tolosa - Timetable of 23JAN2017 - Includes KLM, Cityhopper & Martinair, PAX & Cargo -->
 
 
 <trafficlist>
@@ -2119,7 +2119,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2133,7 +2133,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2147,7 +2147,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2161,7 +2161,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2175,7 +2175,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2189,7 +2189,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2203,7 +2203,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2217,7 +2217,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2231,7 +2231,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2245,7 +2245,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2259,7 +2259,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2273,7 +2273,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>
@@ -2287,7 +2287,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Fokker-70/fokker70-KLM.xml</model>
+    <model>Aircraft/Fokker-70/F70-KLM.xml</model>
     <livery>KLM</livery>
     <airline>KLM</airline>
     <home-port>EHAM</home-port>

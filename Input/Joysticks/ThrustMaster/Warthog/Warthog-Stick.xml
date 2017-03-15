@@ -12,6 +12,7 @@
 <PropertyList>
 	<name>Thustmaster Joystick - HOTAS Warthog</name>
 	<name>Thrustmaster Joystick - HOTAS Warthog</name> <!-- in case they ever manage to fix their name -->
+	<name>Joystick - HOTAS Warthog</name>
 
 	<nasal>
 		<script>
@@ -50,7 +51,7 @@
 			jslistener(m, func(n) mod = n.getValue());
 
 			var trimstep = 0.75;
-			var viewstep = 0.5;
+			var viewstep = 1.5;
 			var button = {18: {id: 0}};
 
 			var reset_zoom = func setprop("/sim/current-view/field-of-view", 55);
@@ -92,9 +93,12 @@
 		</binding>
 	</axis>
 
-	<axis n="2">
+	<axis>
 		<name>Trim Hat Switch Left/Right</name>
 		<desc>adjust aileron trim,  +mod: reset aileron trim</desc>
+		<number>
+			<unix>2</unix>
+		</number>
 		<low>
 			<repeatable>true</repeatable>
 			<binding>
@@ -121,9 +125,46 @@
 		</high>
 	</axis>
 
-	<axis n="3">
+<!--Please fix me: axis are duplicated due to different binding per OS-->
+
+	<axis>
+		<name>Trim Hat Switch Left/Right</name>
+		<desc>adjust aileron trim,  +mod: reset aileron trim</desc>
+		<number>
+			<windows>6</windows>
+		</number>
+		<low>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					if (mod)
+						setprop("/controls/flight/aileron-trim", 0);
+					else
+						controls.aileronTrim(-trimstep);
+				</script>
+			</binding>
+		</low>
+		<high>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					if (mod)
+						setprop("/controls/flight/aileron-trim", 0);
+					else
+						controls.aileronTrim(trimstep);
+				</script>
+			</binding>
+		</high>
+	</axis>
+
+	<axis>
 		<name>Trim Hat Switch Down/Up</name>
 		<desc>adjust elevator trim,  +mod: reset elevator trim</desc>
+		<number>
+			<unix>3</unix>
+		</number>
 		<low>
 			<repeatable>true</repeatable>
 			<binding>
@@ -145,6 +186,40 @@
 						setprop("/controls/flight/elevator-trim", 0);
 					else
 						controls.elevatorTrim(-trimstep);
+				</script>
+			</binding>
+		</high>
+	</axis>
+
+<!--Please fix me: axis are duplicated due to different binding per OS-->
+
+	<axis>
+		<name>Trim Hat Switch Down/Up</name>
+		<desc>adjust elevator trim,  +mod: reset elevator trim</desc>
+		<number>
+			<windows>7</windows>
+		</number>
+		<low>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					if (mod)
+						setprop("/controls/flight/elevator-trim", 0);
+					else
+						controls.elevatorTrim(-trimstep);
+				</script>
+			</binding>
+		</low>
+		<high>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					if (mod)
+						setprop("/controls/flight/elevator-trim", 0);
+					else
+						controls.elevatorTrim(trimstep);
 				</script>
 			</binding>
 		</high>

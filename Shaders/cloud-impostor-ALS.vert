@@ -10,6 +10,7 @@ uniform float cloud_self_shading;
 uniform float moonlight;
 uniform float air_pollution;
 uniform float range;
+uniform float visibility;
 
 const float shade = 1.0;
 const float cloud_height = 1000.0;
@@ -85,17 +86,13 @@ void main(void)
   light_diffuse.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
   light_diffuse.a = 1.0;
 
-  //float light_intensity = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
-  //vec4 light_diffuse = vec4 (0.57, 0.57, 0.9, 1.0);
-  //light_diffuse.rgb = light_intensity * light_diffuse.rgb;
   
   // two times terminator width governs how quickly light fades into shadow
   float terminator_width = 200000.0;
   float earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, yprime_alt) + 0.1;
   
-  //float intensity = length(light_diffuse.rgb);
   float intensity = (1.0 - (0.8 * (1.0 - earthShade))) *  length(light_diffuse.rgb);
-  //light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, cloud_self_shading ))));   
+  
   light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb, shadedFogColor, (1.0 - smoothstep(0.5,0.9, cloud_self_shading  ))));  
   if (earthShade < 0.6)
 	{
@@ -103,23 +100,19 @@ void main(void)
 	light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.6,earthShade ) ));
 	}
   
-  // Determine the shading of the sprite based on its vertical position and position relative to the sun.
- // n = min(smoothstep(-0.5, 0.0, n), fract);
-// Determine the shading based on a mixture from the backlight to the front
-  //vec4 backlight = light_diffuse * shade;
 
-  gl_FrontColor = light_diffuse;//mix(backlight, light_diffuse, n);
-  //gl_FrontColor += gl_FrontLightModelProduct.sceneColor;
+
+  gl_FrontColor = light_diffuse;
+
 
   // As we get within 100m of the sprite, it is faded out. Equally at large distances it also fades out.
   gl_FrontColor.a = min(smoothstep(100.0, 250.0, fogCoord), 1.0 - smoothstep(0.9 * range, range, fogCoord));
-  // During the day, noctilucent clouds are invisible
-  //gl_FrontColor.a = gl_FrontColor.a * (1.0 -  smoothstep(3.0,5.0,lightArg)); 
   
   
+  
+  gl_FrontColor.a = gl_FrontColor.a * (1.0 - smoothstep(visibility, 3.0* visibility, fogCoord));
+
   // Fog doesn't affect rain as much as other objects.
-  //fogFactor = exp( -gl_Fog.density * fogCoord * 0.4);
-  //fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
   if (fadeScale < 0.05) fadeScale = 0.05;
@@ -129,16 +122,9 @@ float fadeScale = 0.05 + 0.2 * log(fogCoord/1000.0);
   hazeColor.r = hazeColor.r * 0.83;
   hazeColor.g = hazeColor.g * 0.9; 
 
- // in sunset or sunrise conditions, do extra shading of clouds
-  
-  	
-
   
 
 
-
-  //hazeColor = hazeColor * earthShade;
-  //gl_FrontColor.rgb = gl_FrontColor.rgb * earthShade;
   gl_FrontColor.rgb = gl_FrontColor.rgb +  moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
   hazeColor.rgb = hazeColor.rgb + moonLightColor * (1.0 - smoothstep(0.4, 0.5, earthShade));
   gl_BackColor = gl_FrontColor;

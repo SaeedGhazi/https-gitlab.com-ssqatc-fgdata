@@ -10,6 +10,7 @@
     <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
     <moonlight><use>/environment/moonlight</use></moonlight>
     <air_pollution><use>/environment/air-pollution-norm</use></air_pollution>	
+    <visibility><use>/environment/visibility-m</use></visibility>
     <use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
     <gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
     <brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
@@ -103,10 +104,15 @@
         <type>float</type>
         <value><use>moonlight</use></value>
       </uniform>
-	  <uniform>
+      <uniform>
         <name>air_pollution</name>
         <type>float</type>
         <value><use>air_pollution</use></value>
+      </uniform>
+      <uniform>
+        <name>visibility</name>
+        <type>float</type>
+        <value><use>visibility</use></value>
       </uniform>
       <uniform>
         <name>gamma</name>

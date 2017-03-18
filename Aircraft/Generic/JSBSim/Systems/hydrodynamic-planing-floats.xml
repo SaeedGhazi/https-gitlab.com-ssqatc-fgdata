@@ -3,7 +3,7 @@
 
   Model of hydrodynamic planing based on [Wagner:1933:POW] for JSBSim.
 
-    Copyright (C) 2015 - 2016  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2015 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -800,6 +800,7 @@
    <function>
     <sum>
      <product>
+      <value>-1.0</value>
       <property>hydro/planing-floats/forebody-normal-force-lbs[0]</property>
       <property>hydro/planing-floats/forebody-keel-y-ft[0]</property>
      </product>
@@ -819,6 +820,7 @@
    <function>
     <sum>
      <product>
+      <value>-1.0</value>
       <property>hydro/planing-floats/afterbody-normal-force-lbs[0]</property>
       <property>hydro/planing-floats/afterbody-keel-y-ft[0]</property>
      </product>
@@ -839,6 +841,7 @@
    <function>
     <sum>
      <product>
+      <value>-1.0</value>
       <property>hydro/planing-floats/forebody-normal-force-lbs[1]</property>
       <property>hydro/planing-floats/forebody-keel-y-ft[1]</property>
      </product>
@@ -858,6 +861,7 @@
    <function>
     <sum>
      <product>
+      <value>-1.0</value>
       <property>hydro/planing-floats/afterbody-normal-force-lbs[1]</property>
       <property>hydro/planing-floats/afterbody-keel-y-ft[1]</property>
      </product>

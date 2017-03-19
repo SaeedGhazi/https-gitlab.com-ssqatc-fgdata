@@ -1862,6 +1862,18 @@
                 <z>1.0</z>
             </direction>
         </force>
+        <force name="induced-wake" frame="BODY">
+            <location unit="IN">
+                <x> 0.0000</x>
+                <y> 0.0000</y>
+                <z> 0.0000</z>
+            </location>
+            <direction>
+                <x>/fdm/ai-wake/fbx-lbf</x>
+                <y>/fdm/ai-wake/fby-lbf</y>
+                <z>/fdm/ai-wake/fbz-lbf</z>
+            </direction>
+        </force>
     </external_reactions>
 
     <system file="bushkit"/>

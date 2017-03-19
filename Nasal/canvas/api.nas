@@ -610,6 +610,39 @@ var Text = {
   {
     me.set("text", typeof(text) == 'scalar' ? text : "");
   },
+  # enable reduced property I/O update function
+  enableUpdate: func ()
+  {
+    me._lasttext = "INIT_BLANK";
+    me.updateText = func (text)
+    {
+      if (text == me._lasttext) {return;}
+      me._lasttext = text;
+      me.set("text", typeof(text) == 'scalar' ? text : "");
+    };
+  },
+  # reduced property I/O text update template
+  updateText: func (text)
+  {
+    die("updateText() requires enableUpdate() to be called first");
+  },
+     
+  # enable fast setprop-based text writing
+  enableFast: func ()
+  {
+    me._node_path = me._node.getPath()~"/text";
+    me.setTextFast = func(text)
+    {
+      setprop(me._node_path, text);
+    };
+
+  },
+  # fast, setprop-based text writing template
+  setTextFast: func (text)
+  {
+    die("setTextFast() requires enableFast() to be called first");
+  },
+  # append text to an existing string
   appendText: func(text)
   {
     me.set("text", (me.get("text") or "") ~ (typeof(text) == 'scalar' ? text : ""));

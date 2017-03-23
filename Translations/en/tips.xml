@@ -3,10 +3,16 @@
 <!-- FlightGear menu: English (=default) language resource -->
 
 <PropertyList>
-
 	<tip n="0">Drag while holding the right mouse button to look around in most views</tip>
 	<tip n="1">Hold [Shift] while looking around to move the view up, down, left or right</tip>
 	<tip n="2">Press a/A to adjust the simulation speed</tip>
 	<tip n="3">Find frequencies of nearby ATC services nearby from the Radios dialog</tip>
-
+	<tip n="4">Press v to change your viewpoint. Ctrl-V will return you to the cockpit</tip>
+	<tip n="5">Press F3 to take a screenshot</tip>
+	<tip n="6">Join the FlightGear community at http://forum.flightgear.org</tip>
+	<tip n="7">Press h to bring up a Heads Up Display</tip>
+	<tip n="8">Hide the menu bar by pressing F10</tip>
+	<tip n="9">Frame-rate too low?  Try disabling AI traffic</tip>
+	<tip n="10">Fly in different weather. Select Environment->Weather</tip>
+	<tip n="11">Press F12 to change the radio frequencies easily</tip>
 </PropertyList>

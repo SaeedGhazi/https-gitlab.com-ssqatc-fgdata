@@ -26,9 +26,11 @@ if (x < -15.0) {return 0.0;}
 return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 }
 
+varying float alpha_correction;
+
 void main()
 {
-
+    alpha_correction = 1.0;
    
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 

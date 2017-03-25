@@ -2,6 +2,7 @@
 
 uniform sampler2D texture;
 uniform float scattering;
+varying float alpha_correction;
 
 void main()
 {
@@ -15,5 +16,5 @@ void main()
     texel.a = min(0.8, texel.a);
 
     vec4 fragColor = texel;
-    gl_FragColor = fragColor;
+    gl_FragColor = fragColor * alpha_correction;;
 }

@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- Author Ian Tolosa - Timetable Feb 2016 -->
+
 <trafficlist>
 <aircraft>
 <model>Aircraft/A319/A319-Alitalia.xml</model>
@@ -1429,7 +1432,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/erj195/ERJ190-Alitalia.xml</model>
+<model>Aircraft/E90/E90-Alitalia.xml</model>
 <livery>AZA</livery>
 <airline>AZA</airline>
 <home-port>LIRF</home-port>
@@ -1443,7 +1446,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/erj195/ERJ190-Alitalia.xml</model>
+<model>Aircraft/E90/E90-Alitalia.xml</model>
 <livery>AZA</livery>
 <airline>AZA</airline>
 <home-port>LIRF</home-port>
@@ -1457,7 +1460,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/erj195/ERJ190-Alitalia.xml</model>
+<model>Aircraft/E90/E90-Alitalia.xml</model>
 <livery>AZA</livery>
 <airline>AZA</airline>
 <home-port>LIRF</home-port>
@@ -1471,7 +1474,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/erj195/ERJ190-Alitalia.xml</model>
+<model>Aircraft/E90/E90-Alitalia.xml</model>
 <livery>AZA</livery>
 <airline>AZA</airline>
 <home-port>LIRF</home-port>
@@ -1485,7 +1488,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/erj195/ERJ190-Alitalia.xml</model>
+<model>Aircraft/E90/E90-Alitalia.xml</model>
 <livery>AZA</livery>
 <airline>AZA</airline>
 <home-port>LIRF</home-port>

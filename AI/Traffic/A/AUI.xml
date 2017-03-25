@@ -410,7 +410,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ190-UkraineIntl.xml</model>
+    <model>Aircraft/E90/E90-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -424,7 +424,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ190-UkraineIntl.xml</model>
+    <model>Aircraft/E90/E90-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -438,7 +438,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ190-UkraineIntl.xml</model>
+    <model>Aircraft/E90/E90-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -452,7 +452,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ190-UkraineIntl.xml</model>
+    <model>Aircraft/E90/E90-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -466,7 +466,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ190-UkraineIntl.xml</model>
+    <model>Aircraft/E90/E90-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>

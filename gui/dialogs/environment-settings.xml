@@ -70,7 +70,7 @@
       <legend>Reload Scenery</legend>
       <binding>
         <command>reinit</command>
-        <subsystem>tile-manager</subsystem>
+        <subsystem>scenery</subsystem>
       </binding>
     </button>
     

@@ -630,7 +630,7 @@
 			<name>reload-scenery</name>
 			<binding>
 				<command>reinit</command>
-				<subsystem>tile-manager</subsystem>
+				<subsystem>scenery</subsystem>
 			</binding>
 		</item>
 

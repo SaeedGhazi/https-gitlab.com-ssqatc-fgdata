@@ -202,7 +202,7 @@
 
             if (reinit) {
               fgcommand("reload-materials", props.Node.new());
-              fgcommand("reinit", props.Node.new({"subsystem": "tile-manager"}));
+              fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
             }
           ]]>
           </script>

@@ -84,6 +84,10 @@ in detail below:
                                 <step> is entered; allowed multiple times, in
                                 which case one is chosen at random
 
+    <message-param>             optional; allowed up to 4 times.
+      <property>...</property>  property to substitute into the <message> string
+    </message-param>            using sprintf() formatting.  E.g. %d, %.2f
+
     <audio>...</audio>          optional; file name of *.wav sample to be played;
                                           may be used multiple times (random)
     <set>
@@ -473,5 +477,3 @@ terminal, for example:
   </marker>
 
 This just needs to be copied to the tutorial XML file.
-
-

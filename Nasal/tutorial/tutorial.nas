@@ -414,6 +414,20 @@ var say_message = func(node, default = nil) {
 		}
 
 		if (msg != nil) {
+		  var params = [];
+
+			foreach (var p; node.getChildren("message-param")) {
+			  if (p.getNode("property") != nil) {
+				  append(params, getprop(p.getNode("property").getValue()));
+				}
+			}
+
+			# Ugly
+			if (size(params) == 1) { msg = sprintf(msg, params[0]); }
+			if (size(params) == 2) { msg = sprintf(msg, params[0], params[1]); }
+			if (size(params) == 3) { msg = sprintf(msg, params[0], params[1], params[2]); }
+			if (size(params) == 4) { msg = sprintf(msg, params[0], params[1], params[2], params[3]); }
+
 			display.write(msg, 1, 1, 1);
 			if (audio == nil) {
 				# Link to text-to-speech

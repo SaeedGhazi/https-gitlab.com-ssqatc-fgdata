@@ -1,62 +1,54 @@
-Dear Erik,
+DSEG Font Family
+====
 
-Thank you for contacting and informing me.
+## Overview
 
-I am sorry that my explanation was not good.
-In conclusion, you can include DSEG in FlightGear (GPL licensed 
-software), and distribute it freely.
+DSEG is a free font which imitate LCD Display (7SEG, 14SEG, Weather icons etc.).
+DSEG have special features:
 
- >distribute and sell DSEG data which you modified.
-This means that I want to prevent sale this font data itself.
+ - Includes the roman-alphabet and symbol glyphs.
+ - Many types(over 50) are available.
+ - Licensed under [SIL OPEN FONT LICENSE Version 1.1](http://scripts.sil.org/OFL)
 
-OFL that you introduced me is very suitable for my opinion,
-so I will consider change license to OFL.
-(But I need a little time for changing document.)
+![DSEG Image](http://www.keshikan.net/img/DSEG_sample_github.png)
 
-Sincerely,
-Keshikan
+## Sample
+![DSEG Sample Image](http://www.keshikan.net/img/DSEG_weather_sample.png)
 
-On 2016/06/25 19:55, Erik Hofman wrote:
->
-> Dear Keshikan,
->
-> When searching for a nice 7-segement display font I found your work 
-> which was exactly what I was looking for. It's a great font set.
->
-> The reason I searched for it is because I wanted to include it in the 
-> GPL licensed Flight Simulator program FlightGear:
-> http://www.flightgear.org
->
-> The license seems to permit this at large but there is one nitpick, 
-> you state:
->
-> * You CAN'T...
->   * claim authorship of DSEG.
->
-> Which is fine, thet GPL does not allow that either.
->
-> But:
->   * distribute and sell DSEG data which you modified.
->   * sell DSEG data itself.
->
-> These conflict with the earlier statement which indicates:
-> "DSEG7 series are FREEFONTS.There are no typical regulations for usage,
->  if you use independently or commercially. You may use these fonts for
->  embedding in your softwares, original hardwares, and so on. However,
->  I DON'T waive copyrights of DSEG series."
->
-> I was wondering if you would consider placing it under the terms of 
-> the Open Font License?
->
-> http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
-> https://en.wikipedia.org/wiki/SIL_Open_Font_License
->
->
-> The OFL was written especially to protect your work and it is 
-> compatible with the GPL. It would be a great addition to FlightGear 
-> and I sure would appreciate the clear license terms of the OFL.
->
-> With Kind Regards,
->
-> Erik Hofman
->
+## Usage
+
+ - Colon and Space
+
+   ![DSEG usage 1](http://www.keshikan.net/img/dseg_usage1.png)
+
+ - Period
+
+   ![DSEG usage 2](http://www.keshikan.net/img/dseg_usage2.png)
+
+ - All-off (Exclamation)
+
+   ![DSEG usage 3](http://www.keshikan.net/img/dseg_usage3.png)
+
+ - All-on ("8" or Tilda)
+
+   ![DSEG usage 4](http://www.keshikan.net/img/dseg_usage4.png)
+
+For more information, visit DSEG support page.
+
+ - English:[http://www.keshikan.net/fonts-e.html](http://www.keshikan.net/fonts-e.html)
+ - Japanese:[http://www.keshikan.net/fonts.html](http://www.keshikan.net/fonts.html)
+
+## Changelog
+
+ - v0.41(2017/01/07)
+    - Assigned all-segment-off status to exclamation mark(U+0021).
+
+ - v0.40(2017/01/06)
+    - First released in Github.
+    - Added weather icons "DSEGWeather".
+    - The license has been changed to the [SIL OPEN FONT LICENSE Version 1.1](http://scripts.sil.org/OFL).
+
+## License
+
+- Any font files(*.ttf, *.woff, *.sfd) are licensed under the [SIL OPEN FONT LICENSE Version 1.1](http://scripts.sil.org/OFL)
+

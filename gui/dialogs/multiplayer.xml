@@ -7,7 +7,8 @@
     <resizable>false</resizable>
 
     <nasal>
-        <open><![CDATA[
+        <open>
+            <![CDATA[
             if ((getprop("/sim/multiplay/selected-server") == nil) or 
                 (getprop("/sim/multiplay/selected-server") == "" )   ){
                 var tx = getprop("/sim/multiplay/txhost");
@@ -21,7 +22,11 @@
                     }
                 }
             }
-            
+            if (getprop("/sim/multiplay/protocol-version") == 2)
+                setprop("/sim/gui/dialogs/multiplay/protocol-version", "Visible to only 2017+");
+            else
+                setprop("/sim/gui/dialogs/multiplay/protocol-version", "Visible to all");
+
             var servers = props.globals.getNode("/sim/gui/dialogs/multiplay/servers", 1);
             var updateServers = func(n) {
                 if( !n.getValue() ) return;
@@ -156,31 +161,67 @@
             </binding>
         </checkbox>
 
+        <combo>
+            <row>2</row>
+            <col>1</col>
+            <halign>left</halign>
+            <name>protocol-version</name>
+            <pref-width>300</pref-width>
+            <property>/sim/gui/dialogs/multiplay/protocol-version</property>
+            <value>Visible to all</value>
+            <value>Visible to only 2017+</value>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>protocol-version</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    var val = getprop("/sim/gui/dialogs/multiplay/protocol-version");
+                    print("MP Version :",val,":");
+                    if (val == "Visible to all") {
+                    setprop("/sim/multiplay/protocol-version", 1);
+                    }
+
+                    if (val == "Visible to only 2017+") {
+                    setprop("/sim/multiplay/protocol-version", 2);
+                    }
+                </script>
+            </binding>
+        </combo>
         <text>
-          <row>2</row><col>0</col>
-          <halign>right</halign>
-          <label>   Callsign:</label>
+            <row>2</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Compatibility</label>
         </text>
-        <input>
-          <row>2</row><col>1</col>
-          <halign>left</halign>
-          <property>/sim/multiplay/callsign</property>
-          <enable>
-            <not>
-              <property>/sim/multiplay/online</property>
-            </not>
-          </enable>
-        </input>
 
         <text>
-          <row>3</row><col>0</col>
+            <row>3</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>   Callsign:</label>
+        </text>
+        <input>
+            <row>3</row>
+            <col>1</col>
+            <halign>left</halign>
+            <property>/sim/multiplay/callsign</property>
+            <enable>
+                <not>
+                    <property>/sim/multiplay/online</property>
+                </not>
+            </enable>
+        </input>
+        <text>
+          <row>5</row><col>0</col>
           <halign>right</halign>
           <label>Server:</label>
         </text>
         <combo>
             <name>host</name>
             <halign>left</halign>
-            <row>3</row><col>1</col>
+            <row>5</row><col>1</col>
             <colspan>2</colspan>
             <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
@@ -194,7 +235,7 @@
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <halign>left</halign>
             <label>Not connected</label>
@@ -204,7 +245,7 @@
             <visible>
                 <property>/sim/multiplay/online</property>
             </visible>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <halign>left</halign>
             <label>MMMMMMMMMMMMMMMMM</label>

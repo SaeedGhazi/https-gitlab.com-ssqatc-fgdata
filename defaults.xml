@@ -899,6 +899,9 @@ Started September 2000 by David Megginson, david@megginson.com
 		<spectator-offset type="float" userarchive="y">0</spectator-offset>
 		<apply-close type="bool" userarchive="y">0</apply-close>
 	  </lag>
+      <visibility-range-nm type="int" userarchive="y">100</visibility-range-nm> <!-- MP2017 not supported in fgms so will do nothing-->
+      <debug-level type="int" userarchive="n">0</debug-level>
+      <protocol-version type="int" userarchive="y">1</protocol-version>
     </multiplay>
     <user>
       <callsign type="string" preserve="y">Golf Foxtrot Sierra</callsign>

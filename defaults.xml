@@ -1369,6 +1369,9 @@ Started September 2000 by David Megginson, david@megginson.com
     <show-dummy type="bool" userarchive="n">false</show-dummy>
     <normal-flag type="bool" userarchive="y">false</normal-flag>
     <cloud-normal-flag type="bool" userarchive="y">false</cloud-normal-flag>
+    <roi-x1 type="float" userarchive="n">0.0</roi-x1>
+    <roi-y1 type="float" userarchive="n">0.0</roi-y1>
+    <lightning type="float" userarchive="n">0.0</lightning>
   </earthview>
 </PropertyList>
 <!-- end of preferences.xml -->

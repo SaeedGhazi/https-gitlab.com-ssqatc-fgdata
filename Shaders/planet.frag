@@ -9,6 +9,7 @@ varying vec3 ecViewDir;
 varying vec3 VTangent;
 
 uniform float visibility;
+uniform float air_pollution;
 uniform float sun_angle;
 uniform bool use_clouds;
 uniform bool use_cloud_shadows;
@@ -130,19 +131,17 @@ void main()
 	float angle = dot(normalize(ecViewDir), normalize(normal));
 	float distance_through_atmosphere = min(10.0 / (abs(angle)+0.001),500.0);
 
+	float fogLighting = clamp(NdotL,0.0,1.0) * length(diff_term.rgb/1.73);
 
-	float correction = smoothstep(-0.4, 0.0, dot(n, lightDir) - 0.45  ) ;
-	//correction = correction + (1.0 - correction) * (1.0 - smoothstep(1.40, 1.57, sun_angle));
-	float correction1 = 1.0 - smoothstep(1.4, 1.45, sun_angle);
-	correction1 = 1.0;
 
-	//vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(length(diffuse_term.rgb/1.73 *  correction * clamp(NdotL + correction1,0.01, 0.99) ),0.0,1.0);
+	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * fogLighting;
+	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * fogLighting;
 
-	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * clamp(smoothstep(0.4, 1.0,NdotL),0.0,1.0) * length(diff_term.rgb/1.73);
-
+	
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
+	float rayleighFactor = exp(-distance_through_atmosphere/(300.0 / (1.0 + 4.0 * air_pollution)) );
 
-
+    fragColor.rgb = mix(rayleighColor, fragColor.rgb, rayleighFactor);
 	fragColor = mix(fogColor, fragColor, fogFactor);
 
 	fragColor.rgb = filter_combined(fragColor.rgb);

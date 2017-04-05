@@ -14,6 +14,7 @@ uniform float upper_alt_factor;
 uniform float penetration_factor;
 uniform float patchiness;
 uniform float afterglow;
+uniform float arc_id;
 uniform float osg_SimulationTime;
 
 float Noise2D(in vec2 coord, in float wavelength);
@@ -23,11 +24,12 @@ void main()
 {
 
 
-float vCoord = abs(vertex.z);
+
+float vCoord = abs(vertex.z) - 0.02 * arc_id;
 
 
 
-float aurora_time = 0.001 * osg_SimulationTime;  
+float aurora_time = 0.001 * osg_SimulationTime + arc_id;  
 
 float noise_01 = Noise2D( vec2(vertex.x +aurora_time, vertex.y), 0.05);
 float blend_factor = smoothstep(0.935, 0.955, vCoord - 0.001 * noise_01 - 0.02 * (1.0-upper_alt_factor));

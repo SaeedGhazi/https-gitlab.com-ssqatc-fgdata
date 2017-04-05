@@ -395,6 +395,42 @@
 			<live>true</live>
 			<property>/environment/visibility-m</property>
 		</text>
+		
+	<text>
+      <label>  </label>
+    </text>
+		
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+		
+    <!-- gap -->
+    <text>
+      <label>  </label>
+    </text>
+
+		<text>
+			<label>Relative dust density</label>
+		</text>
+		<slider>
+			<name>air_pollution</name>
+			<min>0.0</min>
+			<max>1.0</max>
+			<property>/environment/air-pollution-norm</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>air_pollution</object-name>
+			</binding>
+			<live>true</live>
+		</slider>
+		<text>
+			<label>12345678</label>
+			<format>%.1f</format>
+			<live>true</live>
+			<property>/environment/air-pollution-norm</property>
+		</text>
 
     <!-- gap -->
     <text>

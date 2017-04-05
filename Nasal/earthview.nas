@@ -2,6 +2,39 @@
 # Earthview orbital rendering
 ###########################################################
 
+
+var lightning_table = [];
+
+var entry = [2.85, 30.28, 0.35, 0.045];
+append(lightning_table, entry);
+
+entry = [9.3,8.0,0.1, 0.105];
+append(lightning_table, entry);
+
+entry = [6.0, -72.0, 0.2, 0.09];
+append(lightning_table, entry);
+
+entry = [30.89, -112.0, 0.72, 0.34];
+append(lightning_table, entry);
+
+
+var check_lightning_table = func (lat, lon) {
+
+for (var i=0; i< size(lightning_table); i=i+1)
+	{
+	if (math.abs(lat - lightning_table[i][0]) < 15.0)
+		{
+		if (math.abs(lon - lightning_table[i][1]) < 15.0)
+			{
+			return i;
+			}
+		}
+	}
+return -1;
+
+}
+
+
 var start = func() {
 
 if (earthview_running_flag ==1) {return;}
@@ -75,7 +108,7 @@ setprop("/environment/visibility-m", 80000.0);
 setprop("/sim/rendering/mie", 0.0);
 setprop("/sim/rendering/rayleigh", 0.00002);
 setprop("/sim/rendering/dome-density", 1.0);
-setprop("/earthview/shade-effect", 1.5);
+setprop("/earthview/shade-effect", 0.5);
 
 earth_model.l1 = setlistener("/earthview/show-n1", func(n) {load_sector (1, n);},0,0);
 earth_model.l2 = setlistener("/earthview/show-n2", func(n) {load_sector (2, n);},0,0);
@@ -88,6 +121,8 @@ earth_model.l8 = setlistener("/earthview/show-s4", func(n) {load_sector (8, n);}
 
 
 control_loop();
+
+slow_loop();
 
 }
 
@@ -289,6 +324,71 @@ if (getprop("/earthview/control_loop_flag") ==1) {settimer( func {control_loop()
 }
 
 
+var slow_loop = func {
+
+if (earthview_running_flag == 0) {return;}
+
+# thunderstorms
+
+var lat = getprop("/position/latitude-deg");
+var lon = getprop("/position/longitude-deg") + getprop("/earthview/cloudsphere-angle");
+
+
+var index = check_lightning_table(lat, lon);
+
+if (index > -1)
+	{
+	
+	
+	rn = rand();
+
+	if (rn < 0.3)
+		{
+		var roi_x_base = lightning_table[index][2];
+		var roi_y_base = lightning_table[index][3];
+	
+		var rn = 0.005 * (2.0 * rand() - 0.5);
+		setprop("/earthview/roi-x1", roi_x_base + rn);
+	
+		rn = 0.005 * (2.0 * rand() - 0.5);
+		setprop("/earthview/roi-y1", roi_y_base + rn);
+		
+		
+		lightning_strike();
+		
+		}
+	}
+
+if (getprop("/earthview/control_loop_flag") ==1) {settimer( func {slow_loop(); },1.0);}
+}
+
+
+
+var lightning_strike = func {
+
+var rn = rand();
+
+var repeat = 1;
+
+if (rn > 0.5) {repeat = 2;}
+
+var duration = 0.1 + 0.1 * rand();
+var strength = 0.5 + 1.0 * rand();
+
+setprop("/earthview/lightning", strength);
+settimer( func{ setprop("/earthview/lightning", 0.0);}, duration);
+
+var duration1 = 0.1 +  0.1 * rand();
+
+if (repeat == 2)
+	{
+	settimer( func{ setprop("/earthview/lightning", strength);}, duration + 0.1);
+	settimer( func{ setprop("/earthview/lightning", 0.0);}, duration + 0.1 + duration1);
+	}
+
+}
+
+
 # rotate position of cloud tiles
 
 var adjust_cloud_tiles = func {
@@ -370,7 +470,7 @@ if (action)
 	{
 	var lat = getprop("/position/latitude-deg");
 	var lon = getprop("/position/longitude-deg");
-
+	
 	if (i==1)
 		{
 		earth_model.node1 = place_earth_model("Models/Astro/earth_N1.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);

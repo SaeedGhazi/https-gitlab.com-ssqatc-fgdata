@@ -23,17 +23,21 @@
 		<use-cloud-normals><use>/earthview/cloud-normal-flag</use></use-cloud-normals>
 		<shade-effect><use>/earthview/shade-effect</use></shade-effect>
 		<sun-angle><use>/sim/time/sun-angle-rad</use></sun-angle>
-    		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+    	<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
+		<roi_x1><use>/earthview/roi-x1</use></roi_x1>
+		<roi_y1><use>/earthview/roi-y1</use></roi_y1>
+		<lightning><use>/earthview/lightning</use></lightning>
 		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
-    		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
-    		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
-    		<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
+    	<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    	<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    	<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
 		<fact_grey><use>/sim/rendering/als-filters/grey-factor</use></fact_grey>
-    	        <fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
-    		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
-    		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
-    		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
-    		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+    	<fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
+    	<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    	<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
+    	<display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    	<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+
 	</parameters>
 	<generate>
 		<normal type="int">15</normal>
@@ -161,7 +165,7 @@
 				<value>
 					<use>use-cloud-normals</use>
 				</value>
-			</uniform>
+			</uniform>			
 			<uniform>
 				<name>colorMode</name>
 				<type>int</type>
@@ -183,16 +187,37 @@
 					<use>shade-effect</use>
 				</value>
 			</uniform>
-      			<uniform>
+      		<uniform>
         			 <name>air_pollution</name>
         			 <type>float</type>
         			 <value><use>air_pollution</use></value>
-      			</uniform>
+      		</uniform>
 			<uniform>
 				<name>sun_angle</name>
 				<type>float</type>
 				<value>
 					<use>sun-angle</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>lightning</name>
+				<type>float</type>
+				<value>
+					<use>lightning</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>roi_x1</name>
+				<type>float</type>
+				<value>
+					<use>roi_x1</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>roi_y1</name>
+				<type>float</type>
+				<value>
+					<use>roi_y1</use>
 				</value>
 			</uniform>
 			<uniform>

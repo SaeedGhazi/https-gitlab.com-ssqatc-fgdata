@@ -17,15 +17,16 @@
 		<patchiness><use>/environment/aurora/patchiness</use></patchiness>
 		<afterglow><use>/environment/aurora/afterglow</use></afterglow>
 		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
-    		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
-    		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
-    		<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
+    	<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
+    	<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    	<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
 		<fact_grey><use>/sim/rendering/als-filters/grey-factor</use></fact_grey>
-    	        <fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
-    		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
-    		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
-    		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
-    		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+    	<fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
+		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    	<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
+    	<display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    	<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+		<arc_id>0.0</arc_id>
 	</parameters>
 
  
@@ -77,9 +78,9 @@
 			<shade-model>
 				<use>shade-model</use>
 			</shade-model>
-			<cull-face>
+			<!--<cull-face>
 				<use>cull-face</use>
-			</cull-face>
+			</cull-face>-->
 			<rendering-hint>
 				<use>rendering-hint</use>
 			</rendering-hint>
@@ -87,7 +88,7 @@
         			<write-mask>false</write-mask>
       			</depth>
       			<render-bin>
-        			<bin-number>10</bin-number>
+        			<bin-number>111</bin-number>
         			<bin-name>DepthSortedBin</bin-name>
      			 </render-bin>
 			<texture-unit>
@@ -163,6 +164,11 @@
 				<name>brightness</name>
 				<type>float</type>
 				<value><use>brightness</use></value>
+			 </uniform>
+			 <uniform>
+				<name>arc_id</name>
+				<type>float</type>
+				<value><use>arc_id</use></value>
 			 </uniform>
 			 <uniform>
 				<name>use_filtering</name>

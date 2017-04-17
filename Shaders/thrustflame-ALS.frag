@@ -14,6 +14,7 @@ uniform float shock_frequency;
 uniform float noise_strength;
 uniform float noise_scale;
 uniform float deflection_coeff;
+uniform float random_seed;
 
 uniform float flame_color_low_r;
 uniform float flame_color_low_g;
@@ -65,7 +66,7 @@ if (d_rad > radius) {return 0.0;}
 
 if (use_noise ==1)
 	{
-	noise = Noise2D(vec2(pos.x - osg_SimulationTime * 30.0 , d_rad), noise_scale);
+	noise = Noise2D(vec2(pos.x - osg_SimulationTime * 30.0 + random_seed , d_rad), noise_scale);
 	}
 
 density *= (1.0 - smoothstep(0.125, radius, d_rad)) * (1.0 - noise_strength + noise_strength* noise);
@@ -73,7 +74,7 @@ density *= (1.0 - smoothstep(0.125, radius, d_rad)) * (1.0 - noise_strength + no
 if (use_shocks == 1)
 	{
 	float shock = sin(pos.x * 10.0 * shock_frequency);
-	density += shock * shock * shock * shock * (1.0 - longFade) * (1.0 - smoothstep(0.25*flame_radius_fraction, 0.5*flame_radius_fraction, d_rad)) *  (1.0 - smoothstep(0.0, 1.0, thrust_collimation));
+	density += shock * shock * shock * shock * (1.0 - longFade) * (1.0 - smoothstep(0.25*flame_radius_fraction, 0.5*flame_radius_fraction, d_rad)) *  (1.0 - smoothstep(0.0, 1.0, thrust_collimation)) * (1.0 + 0.5 * base_flame_density);
 	}
 
 
@@ -133,7 +134,7 @@ vec3 flame_color_low = vec3 (flame_color_low_r, flame_color_low_g, flame_color_l
 vec3 flame_color_high = vec3 (flame_color_high_r, flame_color_high_g, flame_color_high_b);
 
 vec3 color = mix(flame_color_low, flame_color_high, density2);
-color = mix(color, vec3(0.8, 1.0, 1.0), density1);
+color = mix(color, vec3(base_flame_r, base_flame_g, base_flame_b), density1);
 
 vec4 finalColor = vec4 (color.rgb, density);
 

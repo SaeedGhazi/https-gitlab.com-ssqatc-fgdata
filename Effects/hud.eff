@@ -74,7 +74,7 @@
 	<lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
 	<sample-res>0.0006</sample-res>
 	<sample-far>2.5</sample-far>
-	<brightness>1.0</brightness>
+	<hud-brightness>1.0</hud-brightness>
 </parameters>
 
 <technique n="4">
@@ -266,9 +266,9 @@
         <value><use>sample-far</use></value>
       </uniform>
      <uniform>
-        <name>brightness</name>
+        <name>hud_brightness</name>
         <type>float</type>
-        <value><use>brightness</use></value>
+        <value><use>hud-brightness</use></value>
       </uniform>
       <uniform>
         <name>scattering</name>

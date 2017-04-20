@@ -110,9 +110,9 @@ var perIndexAxisHandler = func(pre, post) {
 #   2  - propeller-pitch
 # The argument engine to the returned function can be either an
 # engine number or a list of engine numbers.
-# Usage example (controlling the mixture of engines 1 and 2):
+# Usage example (controlling the mixture of engines 0 and 1):
 #   <script>
-#     controls.perEngineSelectedAxisHandler(1)([1,2]);
+#     controls.perEngineSelectedAxisHandler(1)([0,1]);
 #   </script>
 var _axisMode = {
   0: perIndexAxisHandler("/controls/engines/engine[",
@@ -513,19 +513,19 @@ var speedup = func(speed_up)
         t = (t < 32) ? t*2 : 32;
     }
     setprop("/sim/speed-up", t);
-    
+
     # reformat as a string, this is borrowed from replay.xml
-    
+
 		if (t<0.9)
 		{
 			t=1/t; # invert the value
 			t = "1/" ~ t; # convert to a string and show inverted
 		}
-        
+
     gui.popupTip("Time speed-up: " ~ t ~ "x");
 }
 
-# mouse-mode handling 
+# mouse-mode handling
 
 var cycleMouseMode = func(node)
 {
@@ -535,36 +535,36 @@ var cycleMouseMode = func(node)
             return;
         }
     }
-    
-    var modeNode = props.globals.getNode('/devices/status/mice/mouse[0]/mode');    
+
+    var modeNode = props.globals.getNode('/devices/status/mice/mouse[0]/mode');
     var mode = modeNode.getValue() + 1;
-    
+
     if ((mode == 1) and getprop('/sim/mouse/skip-flight-controls-mode')) {
         mode +=1;
     }
-    
+
     if (mode == 3) mode = 0;
     modeNode.setIntValue(mode);
-    
+
     # this is really a 'show on-screen hints' control
     if (getprop('/sim/view-name-popup') == 0)
       return;
-    
-    # some people like popups but strongly object to this one. As you wish. 
+
+    # some people like popups but strongly object to this one. As you wish.
     if (getprop('/sim/mouse/cycle-mode-popup') == 0)
       return;
-      
+
     if (mode == 0) {
       fgcommand("clear-message", props.Node.new({ "id":"mouse-mode" }));
       return;
     }
-    
+
     var msg = "";
     if (mode == 1)
         msg = "Mouse is controlling flight controls. Press TAB to change.";
     else
         msg = "Mouse is controlling view direction. Press TAB to change.";
-    
+
   	fgcommand("show-message", props.Node.new({ "label": msg, "id":"mouse-mode" }));
 }
 

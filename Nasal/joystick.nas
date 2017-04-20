@@ -257,9 +257,18 @@ var axisBindings = [
   PropertyScaleAxis.new("Aileron", "/controls/flight/aileron"),
   PropertyScaleAxis.new("Elevator", "/controls/flight/elevator"),
   PropertyScaleAxis.new("Rudder",   "/controls/flight/rudder"),
-  NasalScaleAxis.new("Throttle",  "controls.throttleAxis();", "/controls/engines/engine[0]/throttle") ,
-  NasalScaleAxis.new("Mixture",   "controls.mixtureAxis();", "/controls/engines/engine[0]/mixture") ,
-  NasalScaleAxis.new("Propeller", "controls.propellerAxis();", "/controls/engines/engine[0]/propeller-pitch") ,
+  NasalScaleAxis.new("Throttle (all)",  "controls.throttleAxis();", "/controls/engines/engine[0]/throttle") ,
+  NasalScaleAxis.new("Mixture (all)",   "controls.mixtureAxis();", "/controls/engines/engine[0]/mixture") ,
+  NasalScaleAxis.new("Propeller (all)", "controls.propellerAxis();", "/controls/engines/engine[0]/propeller-pitch") ,
+
+  # Controls of individual throttles, mixtures, propellers
+  NasalScaleAxis.new("Throttle 1",  "controls.perEngineSelectedAxisHandler(0)([0]);", "/controls/engines/engine[0]/throttle") ,
+  NasalScaleAxis.new("Mixture 1",   "controls.perEngineSelectedAxisHandler(1)([0]);", "/controls/engines/engine[0]/mixture") ,
+  NasalScaleAxis.new("Propeller 1", "controls.perEngineSelectedAxisHandler(2)([0]);", "/controls/engines/engine[0]/propeller-pitch") ,
+  NasalScaleAxis.new("Throttle 2",  "controls.perEngineSelectedAxisHandler(0)([1]);", "/controls/engines/engine[1]/throttle") ,
+  NasalScaleAxis.new("Mixture 2",   "controls.perEngineSelectedAxisHandler(1)([1]);", "/controls/engines/engine[1]/mixture") ,
+  NasalScaleAxis.new("Propeller 2", "controls.perEngineSelectedAxisHandler(2)([1]);", "/controls/engines/engine[1]/propeller-pitch") ,
+
   NasalLowHighAxis.new("View (horizontal)",
                       "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") + 30);",
                       "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") - 30);",

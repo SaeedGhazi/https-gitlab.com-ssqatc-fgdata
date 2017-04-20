@@ -11,6 +11,7 @@ varying vec3 VTangent;
 uniform float shade_effect;
 uniform float sun_angle;
 uniform float air_pollution;
+uniform float moonlight;
 
 uniform float roi_x1;
 uniform float roi_y1;
@@ -138,6 +139,9 @@ void main()
 	float darkness_fact = 1.0 - smoothstep(0.0,0.2, length(color.rgb));
 	color.rgb += lightning_color(gl_TexCoord[0].st) * (1.0 - texel.a) * lightning * darkness_fact;
 	
+	vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+	
+	color.rgb += moonLightColor;
     
     color.a = 1.0;//diffuse_term.a;
     color = clamp(color, 0.0, 1.0);

@@ -10,6 +10,7 @@ varying vec3 VTangent;
 
 uniform float visibility;
 uniform float air_pollution;
+uniform float moonlight;
 uniform float sun_angle;
 uniform bool use_clouds;
 uniform bool use_cloud_shadows;
@@ -41,26 +42,45 @@ void main()
     // normal should be reversed.
     n = (2.0 * gl_Color.a - 1.0) * normal;
     n = normalize(n);
-
-    vec4 nmap  = texture2D(normal_texture, gl_TexCoord[0].st);
-
+	
+	float parallaxFactor = max(1.0 - dot(normalize(ecViewDir), n),0.0);
 
 	vec3 VBinormal;
 	VBinormal = normalize(cross(normal, VTangent));
+	
+	float xOffset1 = -1.0 * dot(ecViewDir, normalize(VTangent));
+	float yOffset1 = -1.0 * dot(ecViewDir, VBinormal);
+	
+	vec2 grad_dir = normalize (vec2 (xOffset1, yOffset1));
+	
+    vec4 nmap  = texture2D(normal_texture, gl_TexCoord[0].st);
+	
 
+	
+
+	float hmap = 1.0 - nmap.a;
+	nmap  = texture2D(normal_texture, gl_TexCoord[0].st -  0.0005 * grad_dir * hmap * 2.0 * parallaxFactor);
+
+	// sanity processing for normal map when alpha is close to zero
+	nmap.rgb = normalize(nmap.rgb);
+	//if (nmap.b < 0.0) {nmap.b = -nmap.b;}
+		
 	vec3 N = nmap.rgb * 2.0 - 1.0;
-        N = normalize(N.x * normalize(VTangent) * 0.6 + N.y * VBinormal * 0.6 + N.z * n);
+    N = normalize(N.x * normalize(VTangent) * 0.6 + N.y * VBinormal * 0.6 + N.z * n);
 
 	
 	float xOffset = -0.005 * dot(lightDir, normalize(VTangent));
 	float yOffset = -0.005 * dot(lightDir, VBinormal);
+	
+
+
 	
      	if ((use_cloud_shadows)&&(use_clouds))
 		{shadowTexel = texture2D(shadowtex, vec2(gl_TexCoord[0].s-xOffset, gl_TexCoord[0].t-yOffset));}
 	else
 		{shadowTexel = vec4 (0.0,0.0,0.0,0.0);}	
  
-	texel = texture2D(texture, gl_TexCoord[0].st);
+	texel = texture2D(texture, gl_TexCoord[0].st -  0.0005 * grad_dir * hmap * 2.0 * parallaxFactor);
         float night_light = (1.0 -texel.a);
 	texel.a = 1.0;
 	grainTexel = texture2D(grain_texture, gl_TexCoord[0].st * 40.0);
@@ -114,6 +134,10 @@ void main()
                             * light_specular * (1.0-shadowTexel.a)
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
+	
+	vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+	color.rgb += moonLightColor;
+	
     color.a = diffuse_term.a;
 
 
@@ -146,14 +170,23 @@ void main()
 	vec4 fogColor = vec4 (0.83,0.9,1.0,1.0) * fogLighting;
 	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * fogLighting;
 		
+	float heightFactor = exp(-hmap * 0.8);
+	distance_through_atmosphere *= heightFactor;
+		
 	float fogFactor = exp(-distance_through_atmosphere/(visibility/1000.0));
 	float rayleighFactor = exp(-distance_through_atmosphere/(300.0 / (1.0 + 4.0 * air_pollution)) );
+  
+
   
     fragColor.rgb = mix(rayleighColor, fragColor.rgb, rayleighFactor);
 	fragColor = mix(fogColor, fragColor, fogFactor);
 
 	fragColor.rgb = filter_combined(fragColor.rgb);
 
-        gl_FragColor = clamp(fragColor, 0.0, 1.0);
+
+	
+
+    gl_FragColor = clamp(fragColor, 0.0, 1.0);
+		
 
 }

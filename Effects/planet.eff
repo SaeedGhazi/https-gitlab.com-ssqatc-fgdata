@@ -40,16 +40,18 @@
 		<use-cloud-shadows><use>/earthview/cloud-shadow-flag</use></use-cloud-shadows>
 		<use-overlay-textures><use>/earthview/overlay-texture-flag</use></use-overlay-textures>
 		<sun-angle><use>/sim/time/sun-angle-rad</use></sun-angle>
+		<moonlight><use>/environment/moonlight</use></moonlight>
 		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
 		<gamma><use>/sim/rendering/als-filters/gamma</use></gamma>
-    	<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
-    	<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
+    		<brightness><use>/sim/rendering/als-filters/brightness</use></brightness>
+    		<delta_T><use>/environment/surface/delta-T-cloud</use></delta_T>
 		<fact_grey><use>/sim/rendering/als-filters/grey-factor</use></fact_grey>
-    	<fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
-    	<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
-    	<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
-    	<display_xsize><use>/sim/startup/xsize</use></display_xsize>
-    	<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+    		<fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
+    		<use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
+    		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
+    		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
+    		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+
 	</parameters>
 	<generate>
 		<normal type="int">15</normal>
@@ -195,6 +197,13 @@
 				<type>float</type>
 				<value>
 					<use>visibility</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>moonlight</name>
+				<type>float</type>
+				<value>
+					<use>moonlight</use>
 				</value>
 			</uniform>
 			<uniform>

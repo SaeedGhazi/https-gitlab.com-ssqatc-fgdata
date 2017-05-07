@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2016-April-03 for FlightGear 2016.2
+### Last synchronized with English master resource on 2017-May-07 for FlightGear 2017.2
 ### -->
 <PropertyList>
 
@@ -269,5 +269,6 @@
 	<trace-write-desc>Registra le scritture di una proprietà;</trace-write-desc>   <!-- English: "Trace the writes for a property;" -->
 	<log-level-desc>Specifica il livello di log da utilizzare</log-level-desc>   <!-- English: "Specify which logging level to use" -->
 	<log-class-desc>Specifica le classi di log da utilizzare</log-class-desc>   <!-- English: "Specify which logging class(es) to use" -->
+	<log-dir-desc>Salva i file di registro nella directory DIR. Il valore speciale 'desktop' salva i file di registro sul Desktop (la posizione dipende dal sistema operativo). Quest'opzione può essere specificata più volte specificando ogni volta un valore differente. All'interno della directory specificata, il file di registro è denominato FlightGear_YYYY-MM-DD_&lt;num&gt;.log, dove &lt;num&gt; assume i valori 0, 1, 2, ecc.</log-dir-desc>   <!-- English: "Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc." -->
 
 </PropertyList>

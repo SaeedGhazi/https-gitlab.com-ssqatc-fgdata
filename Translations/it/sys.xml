@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2016-November-10 for FlightGear 2016.4
+### Last synchronized with English master resource on 2017-May-07 for FlightGear 2017.2
 ### -->
 <PropertyList>
 
@@ -40,6 +40,7 @@
 		<loading-scenery>caricamento scenario in corso</loading-scenery>
 		<downloading-scenery>download scenario in corso</downloading-scenery>
 		<finalize-position>finalizzazione posizione in corso</finalize-position>
+		<unstable-warning>Build nightly non stabile - alcune funzionalità potrebbero essere in fase di sviluppo attivo</unstable-warning>
 	</splash>
 
 </PropertyList>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- FlightGear tips: French language resource -->
+
+<!-- Style tips:  Aim to keep to a single phrase/sentence which is not terminated with a . -->
+<PropertyList>
+	<tip n="0">Faites glisser la souris en maintenant appuyé le bouton droit pour regarder autour de vous</tip>
+	<tip n="1">Gardez [Maj] appuyée pendant que vous regardez autour de vous pour déplacer la vue vers le haut, le bas, la gauche ou la droite</tip>
+	<tip n="2">Pressez a/A pour ajuster la vitesse de la simulation</tip>
+	<tip n="3">Pressez x/X pour le zoom “in” ou “out”</tip>
+	<tip n="4">Trouvez les fréquences des services ATC à proximité dans la boîte de dialogue « Fréquences radio »</tip>
+	<tip n="5">Appuyez sur v pour changer le point de vue, Ctrl-V pour retourner au cockpit</tip>
+	<tip n="6">Appuyez sur F3 pour faire une capture d'écran</tip>
+	<tip n="7">Rejoignez la communauté FlightGear sur http://forum.flightgear.org/</tip>
+	<tip n="8">Appuyez sur h pour afficher le head-up display (HUD)</tip>
+	<tip n="9">Cachez ou affichez la barre de menu avec F10</tip>
+	<tip n="10">La simulation est trop saccadée ? Essayez de désactiver le trafic IA</tip>
+	<tip n="11">Essayez Environnement->Météo pour changer les conditions météorologiques</tip>
+	<tip n="12">Appuyez sur F12 pour changer facilement les fréquences radio</tip>
+	<tip n="13">Regardez autour de vous en maintenant appuyé le bouton droit tout en déplaçant la souris</tip>
+	<tip n="14">Choisissez Multijoueurs->Paramètres pour voler avec d'autres personnes connectées</tip>
+	<tip n="15">Vous n'arrivez pas à démarrer le moteur ? Essayez Aide->Checklists de l'aéronef</tip>
+	<tip n="16">Faites glisser la souris en maintenant appuyés le bouton droit et le bouton du milieu pour déplacer le point de vue</tip>
+	<tip n="17">Appuyez sur / pour explorer les paramètres internes du simulateur (« propriétés »)</tip>
+	<tip n="18">Appuyez sur Tab pour déplacer le point de vue avec la souris et utilisez la molette pour zoomer</tip>
+</PropertyList>

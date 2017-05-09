@@ -457,7 +457,9 @@ void main (void)
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
     //vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
-    vec4 color = Diffuse * gl_FrontMaterial.diffuse;
+    vec4 color = Diffuse;// * gl_FrontMaterial.diffuse;
+
+
     color = clamp( color, 0.0, 1.0 );
 
 
@@ -580,6 +582,7 @@ void main (void)
 
 
 
+
 	
 
 	
@@ -588,6 +591,8 @@ void main (void)
 
 	float pLMIntensity = smoothstep(0.0, 0.4, roadCoords.s) * (1.0 - smoothstep(0.6, 1.0, roadCoords.s));
 	pLMIntensity = 0.5 * rtype_base_illumination + 0.1 * max(0.0,sin(4.0 * roadCoords.t)) * streetlight_factor;
+
+	if (gl_FrontMaterial.diffuse.r == 0.0)	{pLMIntensity =0.0;}
 
 	pLMColor *= pLMIntensity;
 
@@ -604,10 +609,12 @@ void main (void)
 
 		pCLColor = pCLColor *= pCLIntensity;
 
-		pLMColor = pLMColor +  pCLColor;
+		pLMColor = max(pLMColor,pCLColor);
 		}		
 
-	fragColor.rgb = max(fragColor.rgb, pLMColor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + pLMColor*.5));
+	//fragColor.rgb = max(fragColor.rgb, pLMColor * gl_FrontMaterial.diffuse.rgb * smoothstep(0.0, 1.0, mixedcolor*.5 + pLMColor*.5));
+
+	fragColor.rgb = max(fragColor.rgb, pLMColor * smoothstep(0.0, 1.0, mixedcolor*.5 + pLMColor*.5));
 	
 
 
@@ -760,5 +767,12 @@ void main (void)
 
       fragColor.rgb = filter_combined(fragColor.rgb);
       //gl_FragColor = vec4 (1.0, 0.0, 0.0,1.0);
+
+
+
+
+  
+
       gl_FragColor = fragColor;
+		
     }

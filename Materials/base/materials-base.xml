@@ -470,4 +470,19 @@
         </glyph>
     </material>
 
+<material n="2101">
+  <name>OSM_Building</name>
+  <effect>Effects/cityLM</effect>
+</material>
+
+<material n="2102">
+  <name>OSM_Road</name>
+  <effect>Effects/road-high</effect>
+</material>
+
+<material n="2103">
+  <name>OSM_Railway</name>
+  <effect>Effects/road-high</effect>
+</material>
+
 </PropertyList>

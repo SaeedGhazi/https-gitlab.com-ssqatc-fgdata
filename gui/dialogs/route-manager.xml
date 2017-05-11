@@ -88,26 +88,18 @@ command interface /autopilot/route-manager/input:
                 flightplan().current = sel_index();
             }
 
-            var load_route = func(path) {
-                routem.getNode("file-path", 1).setValue(path.getValue());
+            var load_route = func() {
+                routem.getNode("file-path", 1).setValue("");
                 cmd.setValue("@load");
                 gui.dialog_update("route-manager");
             }
 
-            var save_route = func(path) {
-                routem.getNode("file-path", 1).setValue(path.getValue());
+            var save_route = func() {
+                routem.getNode("file-path", 1).setValue("");
                 cmd.setValue("@save");
                 gui.dialog_update("route-manager");
             }
 
-            var defaultDirInFileSelector = getprop("/sim/fg-home") ~ "/Export";
-
-            var file_selector = gui.FileSelector.new(
-              callback: load_route, title: "Load flight-plan", button: "Load",
-              dir: defaultDirInFileSelector, dotfiles: 1);
-            var save_selector = gui.FileSelector.new(
-              callback: save_route, title: "Save flight-plan", button: "Save",
-              dir: defaultDirInFileSelector, dotfiles: 1);
 
             var activate_fp = func {
                 fgcommand("activate-flightplan", props.Node.new({"activate": 1}));
@@ -278,8 +270,6 @@ command interface /autopilot/route-manager/input:
         ]]></open>
 
         <close>
-            file_selector.del();
-            save_selector.del();
         </close>
     </nasal>
 
@@ -758,7 +748,7 @@ command interface /autopilot/route-manager/input:
             </enable>
             <binding>
                 <command>nasal</command>
-                <script>file_selector.open()</script>
+                <script>load_route()</script>
             </binding>
         </button>
         <button>
@@ -766,7 +756,7 @@ command interface /autopilot/route-manager/input:
             <equal>true</equal>
             <binding>
                 <command>nasal</command>
-                <script>save_selector.open();</script>
+                <script>save_route();</script>
             </binding>
         </button>
         <button>

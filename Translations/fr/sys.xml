@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- FlightGear system messages: French language resource -->
 
@@ -23,24 +23,24 @@
 
 	<splash>
 		<init>Initialisation</init>   <!-- English: "initializing" -->
-       		<loading-aircraft-list>Chargement de la liste des aeronefs</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
-	        <loading-aircraft>Chargement des aeronefs</loading-aircraft>   <!-- English: "loading aircraft" -->
-        	<loading-nav-dat>Chargement des donnees de navigation</loading-nav-dat>   <!-- English: "loading navigation data" -->
-        	<navdata-reading-apt-dat-files>Lecture des donnees des aeroports</navdata-reading-apt-dat-files>   <!-- English: "reading airport data" -->
-        	<navdata-loading-airports>Chargement des donnees des aeroports</navdata-loading-airports>   <!-- English: "loading airport data" -->
-        	<navdata-navaids>Chargement des donnees d'aide a la navigation</navdata-navaids>   <!-- English: "loading navigation aid data" -->
+       		<loading-aircraft-list>Chargement de la liste des aéronefs</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
+	        <loading-aircraft>Chargement des aéronefs</loading-aircraft>   <!-- English: "loading aircraft" -->
+        	<loading-nav-dat>Chargement des données de navigation</loading-nav-dat>   <!-- English: "loading navigation data" -->
+        	<navdata-reading-apt-dat-files>Lecture des données des aéroports</navdata-reading-apt-dat-files>   <!-- English: "reading airport data" -->
+        	<navdata-loading-airports>Chargement des données des aéroports</navdata-loading-airports>   <!-- English: "loading airport data" -->
+        	<navdata-navaids>Chargement des données d'aide à la navigation</navdata-navaids>   <!-- English: "loading navigation aid data" -->
         	<navdata-fixes>Chargement des points fixes</navdata-fixes>   <!-- English: "loading fixes" -->
-        	<navdata-pois>Chargement des points d'interet</navdata-pois>   <!-- English: "loading points of interest" -->
-        	 <init-scenery>Initialisation des scenes</init-scenery>   <!-- English: "initializing scenery" -->
-        	<creating-subsystems>Creation des sous-systemes</creating-subsystems>   <!-- English: "creating subsystems" -->
-        	<init-subsystems>Initialisation des sous-systemes</init-subsystems>   <!-- English: "initializing subsystems" -->
-        	<binding-subsystems>Attribution des sous-systemes</binding-subsystems>   <!-- English: "binding subsystems" -->
-        	<finishing-subsystems>Finalisation des sous-systemes</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
+        	<navdata-pois>Chargement des points d'intérêt</navdata-pois>   <!-- English: "loading points of interest" -->
+        	 <init-scenery>Initialisation des scènes</init-scenery>   <!-- English: "initializing scenery" -->
+        	<creating-subsystems>Création des sous-systèmes</creating-subsystems>   <!-- English: "creating subsystems" -->
+        	<init-subsystems>Initialisation des sous-systèmes</init-subsystems>   <!-- English: "initializing subsystems" -->
+        	<binding-subsystems>Attribution des sous-systèmes</binding-subsystems>   <!-- English: "binding subsystems" -->
+        	<finishing-subsystems>Finalisation des sous-systèmes</finishing-subsystems>   <!-- English: "finalizing subsystems" -->
         	<init-graphics>Initialisation du moteur graphique</init-graphics>   <!-- English: "initializing graphics engine" -->
-        	<loading-scenery>Chargement des scenes</loading-scenery>   <!-- English: "loading scenery" -->
-         	<downloading-scenery>Telechargement des scenes</downloading-scenery>   <!-- English: "downloading scenery" -->
+        	<loading-scenery>Chargement des scènes</loading-scenery>   <!-- English: "loading scenery" -->
+         	<downloading-scenery>Téléchargement des scènes</downloading-scenery>   <!-- English: "downloading scenery" -->
         	<finalize-position>Finalisation de la position</finalize-position>   <!-- English: "finalizing position" -->
-        	<unstable-warning>"Nightly build" instable -- certaines fonctionnalites peuvent etre en cours de developpement</unstable-warning>   <!-- English: "Unstable nightly build - some features may be under active development" -->
+        	<unstable-warning>“Nightly build” instable — certaines fonctionnalités peuvent être en cours de développement</unstable-warning>   <!-- English: "Unstable nightly build - some features may be under active development" -->
     	</splash>
 
 </PropertyList>

@@ -16,6 +16,7 @@
     	</texture>
 	<grain-texture-enabled type="int">0</grain-texture-enabled>
 	<grain-magnification type="float">50</grain-magnification>
+        <lightmap-enabled type="int">1</lightmap-enabled>
 	<lightmap-color type="vec3d" n="0"> 0.8 0.8 1.0 </lightmap-color>
     	<snow_level><use>/environment/snow-level-m</use></snow_level>
     	<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>

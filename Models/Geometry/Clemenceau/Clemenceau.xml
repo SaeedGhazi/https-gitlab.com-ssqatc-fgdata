@@ -94,7 +94,7 @@
 			<heading-deg>8</heading-deg>
 		</offsets>
 	</model>
-        <model>
+        <!--<model>
 		<name>Glide-path</name>
 		<path>Models/Geometry/Clemenceau/Models/glide-path.xml</path>
 		<offsets>
@@ -103,7 +103,7 @@
 			<z-m>137.228</z-m>
 			<heading-deg>0</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
 	<!--<model>
 		<path>Models/Geometry/Clemenceau/Models/Aircrafts/Alouette-III/Pedro.xml</path>
@@ -171,7 +171,7 @@
         
         
         
-        <animation>
+       <!-- <animation>
 		<type>select</type>
 		<object-name>Glide-path</object-name>
 		<condition>
@@ -180,7 +180,7 @@
                                 <value>true</value>
                     </equals>
 		</condition>
-	</animation>
+	</animation>-->
 
 
         <animation>

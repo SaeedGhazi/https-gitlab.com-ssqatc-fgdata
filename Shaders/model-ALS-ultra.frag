@@ -187,7 +187,9 @@ void main (void)
 
     float fog_lightArg = (terminator-fog_yprime_alt)/100000.0;
     float fog_earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, fog_yprime_alt) + 0.1;
+    float delta_z = hazeLayerAltitude - eye_alt;
 
+	
     float ct = dot(normalize(up), normalize(vertVec));
 
     /// END geometry for light
@@ -296,7 +298,9 @@ void main (void)
     vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
     if (cloud_shadow_flag == 1) 
 	{
-	light_diffuse = light_diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);
+		float cloud_shadow_factor = shadow_func(relPos.x, relPos.y, 1.0, dist);
+		cloud_shadow_factor =  1.0 - ((1.0 - cloud_shadow_factor) * (1.0 - smoothstep (-100.0, 100.0, vertex_alt - hazeLayerAltitude)));
+		light_diffuse = light_diffuse * cloud_shadow_factor;
 	}
  
    vec3 secondary_light = vec3 (0.0,0.0,0.0);
@@ -477,7 +481,6 @@ void main (void)
     float transmission_arg;
     float eqColorFactor;
 
-    float delta_z = hazeLayerAltitude - eye_alt;
     float mvisibility = min(visibility, avisibility);
 
     if (dist >  0.04 * mvisibility) 

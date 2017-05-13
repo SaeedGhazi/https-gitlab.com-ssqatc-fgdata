@@ -120,52 +120,60 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
     }
 
 
-void road_type_mapper (in vec2 coord, out float rtype_traffic_density, out float rtype_base_illumination, out float rtype_traffic_speed)
+void road_type_mapper (in vec2 coord, out float rtype_traffic_density, out float rtype_base_illumination, out float rtype_traffic_speed, out int rtype_dual_lane)
 	{
 	if (coord.s < 0.125)
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 0;
 		rtype_base_illumination = 0;
 		rtype_traffic_speed = 0.0;
 		}
 	else if (coord.s < 0.250)
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.3;
 		rtype_base_illumination = 0.65;
 		rtype_traffic_speed = 0.5;
 		}
 	else if (coord.s < 0.375)
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 1.0;
 		rtype_base_illumination = 1.0;	
 		rtype_traffic_speed = 1.0;
 		}
 	else if (coord.s < 0.5)
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.0;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.0;
 		}
 	else if (coord.s < 0.625)
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.0;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.0;
 		}
 	else if (coord.s < 0.750)
 		{
+		rtype_dual_lane = 1;
 		rtype_traffic_density = 1.0;
 		rtype_base_illumination = 0.65;
 		rtype_traffic_speed = 1.0;
 		}
 	else if (coord.s < 0.875)
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.1;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.3;
 		}
 	else
 		{
+		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.0;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.0;
@@ -198,7 +206,8 @@ void main (void)
     float rtype_traffic_density = 0.0;
     float rtype_base_illumination = 0.0;
     float rtype_traffic_speed = 0.0;
-    road_type_mapper (gl_TexCoord[0].st, rtype_traffic_density, rtype_base_illumination, rtype_traffic_speed);
+    int rtype_dual_lane = 0;
+    road_type_mapper (gl_TexCoord[0].st, rtype_traffic_density, rtype_base_illumination, rtype_traffic_speed, rtype_dual_lane);
 
     float pf = 0.0;
     float pf1 = 0.0;
@@ -333,12 +342,18 @@ void main (void)
 	if (road_traffic_enabled == 1)
 		{
 		float cSign = 1.0;
-		if (roadCoords.s > 0.5) {cSign = -1.0;}
+		float cOffset = 0.0;
+		if (roadCoords.s > 0.5)
+			{
+			if (rtype_dual_lane == 0) {cSign = -1.0;}
+			else {cOffset = 5.0;}
+			}
+
 		cSign *= road_traffic_direction;
 
 		float total_traffic_density = road_traffic_density * rtype_traffic_density;
 
-		float cCoord = roadCoords.t;
+		float cCoord = roadCoords.t + cOffset;
 		cCoord += 0.3 * osg_SimulationTime * cSign * rtype_traffic_speed * (1.0 - (0.9 * smoothstep(1.0, 2.5, total_traffic_density)));
 		cCoord *= 5.0;
 

@@ -349,6 +349,8 @@ void main (void)
 			else {cOffset = 5.0;}
 			}
 
+		if (rtype_dual_lane == 1) {cSign = -1.0;}
+
 		cSign *= road_traffic_direction;
 
 		float total_traffic_density = road_traffic_density * rtype_traffic_density;

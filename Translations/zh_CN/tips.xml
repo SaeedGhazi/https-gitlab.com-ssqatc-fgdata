@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- FlightGear startup tips: Simplified Chinese language resource -->
+
+<!-- Style tips: Aim to keep to a single phrase/sentence which is not
+                 terminated with a . -->
+<PropertyList>
+	<tip n="0">在按住鼠标右键时滑动鼠标以观察四周</tip>
+	<tip n="1">在观察四周时按住 [Shift] 来将视角向上、下、左、右移动</tip>
+	<tip n="2">按下 a/A 来调整模拟器速度（倍速）</tip>
+	<tip n="3">按下 x/X 来放大或缩小</tip>
+	<tip n="4">从 Radios 对话框可查询附近ATC频率</tip>
+	<tip n="5">按下 v 来更换视角, 按下 Ctrl-V 可回到驾驶舱视角</tip>
+	<tip n="6">按下 F3 可以截图</tip>
+	<tip n="7">欢迎加入FlightGear社区，网址为 http://forum.flightgear.org</tip>
+	<tip n="8">按下 h 来启用抬头显示器（HUD）</tip>
+	<tip n="9">按下 F10 来隐藏或显示菜单栏</tip>
+	<tip n="10">帧率太低？ - 试试禁用AI交通</tip>
+	<tip n="11">选择 Environment → Weather 在不同天气条件下飞行</tip>
+	<tip n="12">按下F12可轻易更换无线频率</tip>
+	<tip n="13">在按住鼠标右键时滑动鼠标以观察四周</tip>
+	<tip n="14">选择 Multiplayer → Multiplayer Settings 来加入联机飞行</tip>
+	<tip n="15">不知如何启动引擎？ - 查看 Help → Aircraft Checklists</tip>
+	<tip n="16">在按住鼠标右键与中键时滑动鼠标以移动观察点</tip>
+	<tip n="17">按下 / 来浏览FlightGear的内部属性</tip>
+	<tip n="18">按下 Tab 后使用鼠标来移动观察点，并使用滚轮放大或缩小</tip>
+</PropertyList>

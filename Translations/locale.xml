@@ -106,6 +106,22 @@
 		</strings>
 	</locale>
 
+        <locale>
+		<lang type="string">zh</lang>
+		<lang type="string">zh_CN</lang>
+
+		<strings>
+			<options>Translations/zh_CN/options.xml</options>
+			<!-- Chinese startup tips disabled for now because the
+			     font used to display them in FlightGear's splash
+			     screen doesn't have the required glyphs
+			     (2017-06-25). cf.
+			     https://sourceforge.net/p/flightgear/fgdata/merge-requests/92/
+			-->
+			<!-- <tips>Translations/zh_CN/tips.xml</tips> -->
+		</strings>
+        </locale>
+
 	<locale>
 		<!--  test character encoding using - -language=TEST -->
 		<lang type="string">TEST</lang>

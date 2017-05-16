@@ -22,6 +22,12 @@
                     }
                 }
             }
+            if (getprop("/sim/multiplay/rxport") == nil or getprop("/sim/multiplay/rxport") == 0)
+                setprop("/sim/multiplay/rxport",5000);
+
+            if (getprop("/sim/multiplay/txport") == nil or getprop("/sim/multiplay/txport") == 0)
+                setprop("/sim/multiplay/txport",5000);
+
             if (getprop("/sim/multiplay/protocol-version") == 2)
                 setprop("/sim/gui/dialogs/multiplay/protocol-version", "Visible to only 2017+");
             else
@@ -229,7 +235,26 @@
             
             <properties>/sim/gui/dialogs/multiplay/servers</properties>
         </combo>
-
+        <group>
+            <layout>hbox</layout>
+            <row>3</row>
+            <col>1</col>
+            <text>
+                <width>2</width>
+                <halign>right</halign>
+                <label>rxPort</label>
+            </text>
+            <input>
+                <pref-width>50</pref-width>
+                <halign>left</halign>
+                <property>/sim/multiplay/rxport</property>
+                <enable>
+                    <not>
+                        <property>/sim/multiplay/online</property>
+                    </not>
+                </enable>
+            </input>
+        </group>
         <!-- status area -->
         <text>
             <visible>
@@ -276,11 +301,11 @@
           <binding>
             <command>nasal</command>
             <script>
-            fgcommand("multiplayer-connect",  props.Node.new({
-              "servername": getprop("/sim/multiplay/selected-server"),
-              "rxport": 5000,
-              "txport": 5000
-            }));
+                fgcommand("multiplayer-connect",  props.Node.new({
+                "servername": getprop("/sim/multiplay/selected-server"),
+                "rxport": getprop("/sim/multiplay/rxport"),
+                "txport": getprop("/sim/multiplay/txport")
+                }));
             </script> 
           </binding>
         </button>

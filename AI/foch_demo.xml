@@ -15,7 +15,7 @@
 			<name>Foch</name>
 			<pennant-number>R99</pennant-number>
 			<TACAN-channel-ID>026X</TACAN-channel-ID>
-			<model>Models/Geometry/Foch/Foch.xml</model>
+			<model>Models/Geometry/Clemenceau/Clemenceau.xml</model>
 			<latitude>42.830</latitude>
                        <!-- <latitude>42.9834</latitude>-->
 			<longitude>6.325</longitude>

@@ -32,6 +32,7 @@
 			<menu>Translations/es/menu.xml</menu>
 			<sys>Translations/es/sys.xml</sys>
 			<atc>Translations/en/atc.xml</atc>
+			<tips>Translations/es/tips.xml</tips>
 		</strings>
 	</locale>
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- FlightGear menu: Spanish language resource -->
+
+<!-- Style tips:  Aim to keep to a single phrase/sentence which is not terminated with a . -->
+<PropertyList>
+	<tip n="0">Arrastre mientras mantiene pulsado el botón derecho del ratón para mirar a su alrededor</tip>
+	<tip n="1">Presione [Shift] mientras está mirando a su alrededor para mover la vista arriba, abajo, izquierda o derecha</tip>
+	<tip n="2">Presione a/A para ajustar la velocidad de simulación</tip>
+	<tip n="3">Presione x/X para ajustar el zoom</tip>
+	<tip n="4">Encuentre las frecuencias de servicios de control aéreo cercanos en el menú de Radios</tip>
+	<tip n="5">Presione v para cambiar su punto de vista, Ctrl-V para volver a la cabina</tip>
+	<tip n="6">Presione F3 para hacer una captura de pantalla</tip>
+	<tip n="7">Únase a la comunidad de FlightGear en http://forum.flightgear.org</tip>
+	<tip n="8">Presione h para mostrar el HUD</tip>
+	<tip n="9">Presione F10 para alternar la visibilidad de la barra de menú</tip>
+	<tip n="10">¿Tasa de refresco demasiado baja? - pruebe desactivando el tráfico IA</tip>
+	<tip n="11">Seleccione Ambiente → Clima para volar en unas condiciones atmosféricas distintas</tip>
+	<tip n="12">Presione F12 para cambiar fácilmente las frecuencias de radio</tip>
+	<tip n="13">Mire a su alrededor presionando el click derecho del ratón mientras lo mueve al mismo tiempo</tip>
+	<tip n="14">Seleccione Multijugador → Configuración multijugador para unirse a otros usuarios en red</tip>
+	<tip n="15">¿No puede arrancar el motor? - mire Ayuda → Listas de chequeo de aeronave</tip>
+	<tip n="16">Arrastre mientras mantiene presionados los botones central y derecho del ratón para mover el punto de vista</tip>
+	<tip n="17">Presione / para explorar las propiedades internas del simulador</tip>
+	<tip n="18">Presione Tab para mover el punto de vista con el ratón y mueva la rueda de desplazamiento para hacer zoom</tip>
+</PropertyList>

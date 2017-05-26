@@ -4,7 +4,7 @@
   <name>Effects/space-combined</name>
   <inherits-from>Effects/model-combined</inherits-from>
 
-<!--<parameters>
+<parameters>
 	<geo_light_r type="float">0.0</geo_light_r>
 	<geo_light_g type="float">0.0</geo_light_g>
 	<geo_light_b type="float">0.0</geo_light_b>
@@ -13,13 +13,15 @@
 	<geo_light_z type="float">0.0</geo_light_z>
 	<geo_light_radius type="float">0.0</geo_light_radius>
 	<geo_ambience type="float">0.0</geo_ambience>
-</parameters> -->
+	<use_geo_light type="int">0</use_geo_light>
+</parameters> 
 
 <technique n="4">
  <pass>
  <program>
         <vertex-shader n="0">Shaders/space-ALS-ultra.vert</vertex-shader>
         <fragment-shader n="0">Shaders/space-ALS-ultra.frag</fragment-shader>
+	<fragment-shader n="6">Shaders/color_temperature.frag</fragment-shader>
   </program>
 
 			   <uniform>
@@ -815,6 +817,11 @@
 	<name>geo_ambience</name>
 	<type>float</type>
 	<value><use>geo_ambience</use></value>
+  </uniform>
+  <uniform>
+	<name>use_geo_light</name>
+	<type>int</type>
+	<value><use>use_geo_light</use></value>
   </uniform>
   </pass>
  </technique>

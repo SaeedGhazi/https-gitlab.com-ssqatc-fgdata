@@ -41,6 +41,7 @@ uniform int cloud_shadow_flag;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+uniform int use_geo_light;
 
 uniform float amb_correction;
 uniform float dirt_b_factor;
@@ -59,6 +60,7 @@ uniform float grain_magnification;
 uniform float wetness;
 uniform float rain_norm;
 uniform float darkmap_factor;
+uniform float delta_T;
 
 uniform float avisibility;
 uniform float cloud_self_shading;
@@ -116,7 +118,7 @@ vec3 get_hazeColor(in float lightArg);
 vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 addLights(in vec3 color1, in vec3 color2);
-
+vec4 color_temperature (in float T);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
     {
@@ -346,12 +348,14 @@ void main (void)
     //Diffuse.rgb += secondary_light * light_distance_fading(dist) + geo_light;
 
     Diffuse.rgb = addLights(Diffuse.rgb, secondary_light * light_distance_fading(dist));
-    Diffuse.rgb = addLights(Diffuse.rgb, geo_light * diffuse_reduction );
+    //if (use_geo_light == 1)
+    {Diffuse.rgb = addLights(Diffuse.rgb, geo_light * diffuse_reduction );}	
 	
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
     vec4 color = gl_Color * light_ambient + gl_FrontMaterial.emission;
+
     color = color + Diffuse * gl_FrontMaterial.diffuse;
     color = clamp( color, 0.0, 1.0 );
 
@@ -444,6 +448,8 @@ void main (void)
 
     ambient_Correction = vec4 (0.0, 0.0, 0.0, 1.0);
 
+
+
     color.a = texel.a * alpha;
     vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
 
@@ -477,6 +483,24 @@ void main (void)
         }
     //////////////////////////////////////////////////////////////////////
     // END lightmap
+    /////////////////////////////////////////////////////////////////////
+
+    /// BEGIN glow
+
+    float temperature = delta_T;
+
+    if (darkmap_enabled == 2)
+	{
+	temperature *=  (1.0 - darkmap_factor * lightmapTexel.a);
+	}
+
+    vec4 glow = color_temperature(temperature);
+    float glowFactor = 0.3  + 0.6 * (1.0 - length(texel.rgb)/1.73);
+    glowFactor *= glow.a;
+    fragColor.rgb = mix(fragColor.rgb, glow.rgb, glowFactor);
+
+    //////////////////////////////////////////////////////////////////////
+    // END glow
     /////////////////////////////////////////////////////////////////////
 
 
@@ -616,8 +640,11 @@ void main (void)
 	hazeColor *= eqColorFactor * fog_earthShade;
 	hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
+	
 
       fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
+
+
     gl_FragColor = fragColor;
 
 

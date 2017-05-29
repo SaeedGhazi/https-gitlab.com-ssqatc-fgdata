@@ -15,6 +15,7 @@ var Tooltip = {
       _width: 0,
       _height: 0,
       _tipId: nil,
+      _isMessage: 0,
       _slice: 17,
       _measureText: nil,
       _measureBB: nil,
@@ -215,6 +216,11 @@ var Tooltip = {
     me.setInt("y", y + 10);
   },
 
+  isMessage: func()
+  {
+    return me._isMessage;
+  },
+
   show: func()
   {
     # don't show if undefined
@@ -243,6 +249,7 @@ var Tooltip = {
       var screenW = getprop('/sim/startup/xsize');
       me.setInt("x", (screenW - me._width) * 0.5);
     }
+    me._isMessage = 1;
     me.show();
     # https://code.google.com/p/flightgear-bugs/issues/detail?id=1273
     # when tooltip is shown for some other reason, ensure it stays for
@@ -344,6 +351,8 @@ var setTooltip = func(node)
   var screenHeight = getprop('/sim/startup/ysize');
   tooltip.setPosition(x, screenHeight - y);
   tooltip.setTooltipId(tipId);
+  tooltip._isMessage = 0;
+
   innerSetTooltip(node);
 
   # don't actually show here, we do that response to tooltip-timeout
@@ -352,6 +361,11 @@ var setTooltip = func(node)
 
 var showTooltip = func(node)
 {
+  # this is driven by the mouse-move timeout from native code,
+  # which is irrelevant for message tips
+  if (tooltip.isMessage())
+    return;
+
   var r = node.getNode("reason");
   if ((r != nil) and (r.getValue() == "click")) {
     # click triggering tooltip, show immediately

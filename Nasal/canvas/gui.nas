@@ -70,7 +70,9 @@ var Window = {
       _ghost: ghost,
       _node: props.wrapNode(ghost._node_ghost),
       _focused: 0,
-      _widgets: []
+      _widgets: [],
+      _frame_width: 4,
+      _title_bar_height: 25,
     };
 
     m.setInt("content-size[0]", size[0]);
@@ -279,6 +281,7 @@ var Window = {
 
       var suffix = me._focused ? "" : "-unfocused";
       me._title_bar_bg.set("fill", style.getColor("title" ~ suffix));
+      me._frame.set("stroke", style.getColor("title" ~ suffix));
       me._title.set(       "fill", style.getColor("title-text" ~ suffix));
       me._top_line.set(  "stroke", style.getColor("title-highlight" ~ suffix));
 
@@ -432,6 +435,9 @@ var Window = {
     var title_bar = group_deco.createChild("group", "title_bar");
     me._title_bar_bg = title_bar.createChild("path");
     me._top_line = title_bar.createChild("path", "top-line");
+    me._frame = title_bar.createChild("path");
+    me._frame.set("fill", "none");
+    me._frame.set("stroke-width", me._frame_width);
 
     # close icon
     var x = 10;
@@ -467,6 +473,11 @@ var Window = {
 
     var border_radius = 9;
     me._title_bar_bg
+        .reset()
+        .rect( 0, 0,
+               me.get("size[0]"), me._title_bar_height, 
+               {"border-top-radius": border_radius} );
+    me._frame
         .reset()
         .rect( 0, 0,
                me.get("size[0]"), me.get("size[1]"),

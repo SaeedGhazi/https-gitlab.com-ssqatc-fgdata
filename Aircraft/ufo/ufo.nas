@@ -435,15 +435,15 @@ var modelmgr = {
 		me.mouse_coord = mouse_coord;
 		status_dialog.open();
 		adjust_dialog.center_sliders();
-		
+
 		if (KbdAlt.getValue() and KbdCtrl.getValue()) { # Provide information on the selected point
       var geod = geodinfo(me.mouse_coord.lat(), me.mouse_coord.lon());
       var landclass = string.join(" ", geod[1].names);
-      var str = sprintf("lat:%.4f lon:%.4f alt:%.0fm class(es): %s", 
-                         me.mouse_coord.lat(), me.mouse_coord.lon(), 
+      var str = sprintf("lat:%.4f lon:%.4f alt:%.0fm class(es): %s",
+                         me.mouse_coord.lat(), me.mouse_coord.lon(),
                          me.mouse_coord.alt(), landclass);
       gui.popupTip(str, 3);
-      print(str);      
+      print(str);
 		  return;
 		}
 
@@ -694,8 +694,8 @@ var scan_dirs = func(csv) {
 
 
 
-var print_ufo_data = func {
-	print("\n\n------------------------------ UFO -------------------------------\n");
+var collect_ufo_data = func {
+  var s = "\n\n------------------------------ UFO -------------------------------\n";
 
 	var lat = getprop("/position/latitude-deg");
 	var lon = getprop("/position/longitude-deg");
@@ -704,34 +704,36 @@ var print_ufo_data = func {
 	var heading = getprop("/orientation/heading-deg");
 	var agl_ft = alt_ft - elev_m * M2FT;
 
-	printf("Latitude:     %.8f deg", lat);
-	printf("Longitude:    %.8f deg", lon);
-	printf("Altitude ASL: %.4f m (%.4f ft)", alt_ft * FT2M, alt_ft);
-	printf("Altitude AGL: %.4f m (%.4f ft)", agl_ft * FT2M, agl_ft);
-	printf("Heading:      %.1f deg", normdeg(heading));
-	printf("Ground Elev:  %.4f m (%.4f ft)", elev_m, elev_m * M2FT);
-	print();
-	print("# " ~ geo.tile_path(lat, lon));
-	printf("OBJECT_STATIC %.8f %.8f %.4f %.1f", lon, lat, elev_m, normdeg(360 - heading));
-	print();
+	s ~= sprintf("Latitude:     %.8f deg\n", lat);
+	s ~= sprintf("Longitude:    %.8f deg\n", lon);
+	s ~= sprintf("Altitude ASL: %.4f m (%.4f ft)\n", alt_ft * FT2M, alt_ft);
+	s ~= printf("Altitude AGL: %.4f m (%.4f ft)\n", agl_ft * FT2M, agl_ft);
+	s ~= sprintf("Heading:      %.1f deg\n", normdeg(heading));
+	s ~= sprintf("Ground Elev:  %.4f m (%.4f ft)\n", elev_m, elev_m * M2FT);
+	s ~= "\n";
+	s ~= "# " ~ geo.tile_path(lat, lon) ~ "\n";
+	s ~= sprintf("OBJECT_STATIC %.8f %.8f %.4f %.1f\n", lon, lat, elev_m, normdeg(360 - heading));
+	s ~= "\n";
 
 	var hdg = normdeg(heading + getprop("/sim/current-view/goal-pitch-offset-deg"));
-	printf("http://maps.google.com/maps?ll=%.10f,%.10f&z=12&t=h\n", lat, lon);
-	printf("$ fgfs --aircraft=ufo --lat=%.6f --lon=%.6f --altitude=%.2f --heading=%.1f\n",
+	s ~= sprintf("http://maps.google.com/maps?ll=%.10f,%.10f&z=12&t=h\n", lat, lon);
+	s ~= sprintf("$ fgfs --aircraft=ufo --lat=%.6f --lon=%.6f --altitude=%.2f --heading=%.1f\n",
 			lat, lon, alt_ft, hdg);
+	return s;
 }
 
 
-var print_model_data = func(prop) {
-	print("\n\n------------------------ Selected Object -------------------------\n");
+var collect_model_data = func(prop) {
+	var s = "\n\n------------------------ Selected Object -------------------------\n";
 	var elev = prop.getNode("elevation-ft").getValue();
-	printf("Path:         %s", prop.getNode("path").getValue());
-	printf("Latitude:     %.8f deg", prop.getNode("latitude-deg").getValue());
-	printf("Longitude:    %.8f deg", prop.getNode("longitude-deg").getValue());
-	printf("Altitude ASL: %.4f m (%.4f ft)", elev * FT2M, elev);
-	printf("Heading:      %.1f deg", prop.getNode("heading-deg").getValue());
-	printf("Pitch:        %.1f deg", prop.getNode("pitch-deg").getValue());
-	printf("Roll:        -%.1f deg", prop.getNode("roll-deg").getValue());
+	s ~= sprintf("Path:         %s\n", prop.getNode("path").getValue());
+	s ~= sprintf("Latitude:     %.8f deg\n", prop.getNode("latitude-deg").getValue());
+	s ~= sprintf("Longitude:    %.8f deg\n", prop.getNode("longitude-deg").getValue());
+	s ~= sprintf("Altitude ASL: %.4f m (%.4f ft)\n", elev * FT2M, elev);
+	s ~= sprintf("Heading:      %.1f deg\n", prop.getNode("heading-deg").getValue());
+	s ~= sprintf("Pitch:        %.1f deg\n", prop.getNode("pitch-deg").getValue());
+	s ~= sprintf("Roll:        -%.1f deg\n", prop.getNode("roll-deg").getValue());
+	return s;
 }
 
 
@@ -784,16 +786,16 @@ var leftright = func(dir) {
 var print_data = func {
 	var rule = "\n------------------------------------------------------------------\n";
 	print("\n\n");
-	print_ufo_data();
+
+	var s = collect_ufo_data();
 
 	var data = modelmgr.get_data();
 
 	var selected = data.getChild("model", 0);
-	if (selected == nil)
-		return print(rule);
-
-	print_model_data(selected);
-	print(rule);
+	if (selected != nil) {
+	    s ~= collect_model_data(selected);
+	    s ~= rule;
+  }
 
 	# group all objects of a bucket
 	var bucket = {};
@@ -806,10 +808,16 @@ var print_data = func {
 			bucket[stg] = [obj];
 	}
 	foreach (var key; keys(bucket)) {
-		print("\n# ", key);
+		s ~= sprintf("\n# \n", key);
 		foreach (var obj; bucket[key])
-			print(obj);
+			s ~= obj ~ "\n";
 	}
+
+	print(s); # send completed info to the console
+	clipboard.setText(s); # and also the clipboard
+
+	gui.popupTip("UFO wrote model data to the console and the clipboard");
+
 	print(rule);
 }
 
@@ -884,5 +892,3 @@ setlistener("/sim/signals/click", func {
 	if (!mouse.mmb)
 		modelmgr.click(geo.click_position());
 });
-
-

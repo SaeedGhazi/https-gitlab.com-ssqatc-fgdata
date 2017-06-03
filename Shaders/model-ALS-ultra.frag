@@ -41,6 +41,7 @@ uniform int cloud_shadow_flag;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+uniform int snow_enabled;
 
 uniform float amb_correction;
 uniform float dirt_b_factor;
@@ -72,6 +73,8 @@ uniform float terminator;
 uniform float terrain_alt;
 uniform float visibility;
 uniform float air_pollution;
+uniform float snowlevel;
+uniform float snow_thickness_factor;
 
 uniform float osg_SimulationTime;
 
@@ -96,6 +99,7 @@ uniform vec3 dirt_g_color;
 uniform vec3 dirt_b_color;
 
 float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
+float Noise2D(in vec2 coord, in float wavelength);
 float shadow_func (in float x, in float y, in float noise, in float dist);
 float fog_func (in float targ, in float altitude);
 float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
@@ -191,6 +195,7 @@ void main (void)
 
 	
     float ct = dot(normalize(up), normalize(vertVec));
+    vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
 
     /// END geometry for light
 
@@ -240,6 +245,31 @@ void main (void)
 	}
 
     /// END grain overlay
+
+    /// BEGIN snowcover
+	
+    vec4 snow_texel = vec4 (0.95, 0.95, 0.95, 1.0);
+
+    if (snow_enabled == 1)
+	{
+	float noise_1m = Noise2D(rawpos.xy, 1.0); 
+       	float noise_5m = Noise2D(rawpos.xy, 5.0);
+		
+	float noise_term = 0.5 * (noise_5m - 0.5);
+	noise_term +=  0.5 * (noise_1m - 0.5);		
+	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + 0.5*snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
+
+	snow_texel.a *=  smoothstep(0.5, 0.7,dot(VNormal, up));
+
+		
+	float noise_2000m = 0.0; 
+	float noise_10m = 0.0;
+		
+
+	texel.rgb = mix(texel.rgb, snow_texel.rgb, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  1.0 * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+	}
+	
+	/// END snowcover
 
     vec3 reflVecN;
 
@@ -295,7 +325,7 @@ void main (void)
         {pf1 = pow(nDotHV1, 0.5*gl_FrontMaterial.shininess);}
   
 
-    vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
+
     if (cloud_shadow_flag == 1) 
 	{
 		float cloud_shadow_factor = shadow_func(relPos.x, relPos.y, 1.0, dist);

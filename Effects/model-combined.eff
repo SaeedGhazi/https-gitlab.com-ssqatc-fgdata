@@ -104,6 +104,7 @@ please see Docs/README.model-combined.eff for documentation
 		<!-- END Grain texture -->
 		<!-- simulate rain effects -->
 		<rain-enabled type="int">0</rain-enabled>
+		<snow-enabled type="int">0</snow-enabled>
 		<!-- 		Dirt -->
 		<dirt-enabled type="int">0</dirt-enabled>
 		<dirt-multi type="int">0</dirt-multi>
@@ -147,6 +148,8 @@ please see Docs/README.model-combined.eff for documentation
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<wetness><use>/environment/surface/wetness</use></wetness>
 		<rnorm><use>/environment/rain-norm</use></rnorm>
+		<snow_level><use>/environment/snow-level-m</use></snow_level>
+    		<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
 		<cloudpos2_x><use>/local-weather/cloud-shadows/cloudpos-x[1]</use></cloudpos2_x>
@@ -774,14 +777,34 @@ please see Docs/README.model-combined.eff for documentation
 				   </value>
 		  	   </uniform>
 
-			   <!-- simulate wetness and rain-->
-		  	   <uniform>
+			   <!-- simulate wetness, rain and snow -->
+		  	    <uniform>
 				   <name>rain_enabled</name>
 				   <type>int</type>
 				   <value>
 			  	   	<use>rain-enabled</use>
 				   </value>
-		  	   </uniform>
+		  	    </uniform>
+			   
+			    <uniform>
+				   <name>snow_enabled</name>
+				   <type>int</type>
+				   <value>
+			  	   	<use>snow-enabled</use>
+				   </value>
+		  	    </uniform>
+			   
+			   	<uniform>
+        			   <name>snowlevel</name>
+        			   <type>float</type>
+        			   <value><use>snow_level</use></value>
+      			   </uniform>
+
+			   <uniform>
+				   <name>snow_thickness_factor</name>
+				   <type>float</type>
+				   <value><use>snow_thickness_factor</use></value>
+			   </uniform>
 
 			   <!-- set the amount of ambient light correction 0.0 - 1.0  -->
 			   <uniform>

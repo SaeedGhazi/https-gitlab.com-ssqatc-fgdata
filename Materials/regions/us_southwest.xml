@@ -163,10 +163,10 @@
     <shininess>1.2</shininess>
     <light-coverage>20000000.0</light-coverage>
     <wood-coverage>12000.0</wood-coverage>
-    <tree-texture>Trees/mixed-shrub.png</tree-texture>
+    <tree-texture>Trees/mojave-shrub.png</tree-texture>
     <tree-varieties>8</tree-varieties>
-    <tree-height-m>2.0</tree-height-m>
-    <tree-width-m>2.0</tree-width-m>
+    <tree-height-m>3.5</tree-height-m>
+    <tree-width-m>3.5</tree-width-m>
     <rolling-friction>0.6</rolling-friction>
     <bumpiness>0.4</bumpiness>
   </material>

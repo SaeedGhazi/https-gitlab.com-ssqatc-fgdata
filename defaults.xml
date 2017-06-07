@@ -403,13 +403,6 @@ Started September 2000 by David Megginson, david@megginson.com
 
     </rendering>
     <model-hz type="int">120</model-hz>
-    <navdb>
-      <localizers>
-        <!-- disabling this for 2017.1 - code will be removed at some point soon -->
-        <auto-align type="bool">false</auto-align>
-        <auto-align-threshold-deg type="double">5.0</auto-align-threshold-deg>
-      </localizers>
-    </navdb>
     <sound>
       <volume type="float" userarchive="y">0.8</volume>
       <enabled type="bool" userarchive="y">true</enabled>

@@ -163,6 +163,7 @@
 
           var longest_runway = 0;
           var runways = info.runways;
+          var infoAboutRunways = [];   # list of strings for display
 
           avail_runways.removeChildren("value");
           var runway_keys = sort(keys(runways), string.icmp);
@@ -172,29 +173,24 @@
               var r = runways[rwy];
               longest_runway = math.max(longest_runway, r.length * 3.28);
               avail_runways.getNode("value[" ~ i ~ "]", 1).setValue(rwy);
-
-              setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/label", rwy);
-              setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/length-hdg",
-                  sprintf("%d'/%03d deg", r.length * 3.28, r.heading));
+              var rwyInfo = sprintf("%5s %12d' / %03d deg", rwy, r.length * 3.28,
+                                    r.heading);
 
               if (r.ils != nil) {
-                  setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/ils", sprintf("%.3fMhz", r.ils.frequency / 100));
-              } else {
-                  setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/ils", "");
+                  rwyInfo = sprintf("%s %20.3f Mhz", rwyInfo,
+                                    r.ils.frequency / 100);
               }
+
+              append(infoAboutRunways, rwyInfo);
 
               i += 1;
               if (i == MAX_RUNWAYS)
                   break;
           }
 
-          while (i < MAX_RUNWAYS) {
-          # zero remaining runway data
-              setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/label", "");
-              setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/length-hdg", "");
-              setprop("sim/gui/dialogs/airports/selected-airport/runway[" ~ i ~ "]/ils", "");
-              i += 1;
-          }
+          var runwayInfoNode = dlg.getNode("selected-airport/runways-info", 1);
+          runwayInfoNode.setValue(string.join("\n", infoAboutRunways));
+          fgcommand("dialog-update", props.Node.new({"object-name": "runways-info", "dialog-name": "airports"}));
 
           # Update the list of available parking positions
           avail_parking = {};
@@ -1148,7 +1144,6 @@
               <halign>fill</halign>
               <row>0</row>
               <col>0</col>
-              <colspan>4</colspan>
 
               <text>
                 <label>Runways</label>
@@ -1157,276 +1152,21 @@
               <hrule><stretch>1</stretch></hrule>
             </group>
 
-            <text>
+            <textbox>
               <row>1</row>
               <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[0]/label</property>
-            </text>
-
-            <text>
-              <row>1</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[0]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>1</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[0]/ils</property>
-            </text>
-
-            <text>
-              <row>2</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[1]/label</property>
-            </text>
-
-            <text>
-              <row>2</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[1]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>2</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[1]/ils</property>
-            </text>
-
-            <text>
-              <row>3</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[2]/label</property>
-            </text>
-
-            <text>
-              <row>3</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[2]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>3</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[2]/ils</property>
-            </text>
-
-            <text>
-              <row>4</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[3]/label</property>
-            </text>
-
-            <text>
-              <row>4</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[3]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>4</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[3]/ils</property>
-            </text>
-
-            <text>
-              <row>5</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[4]/label</property>
-            </text>
-
-            <text>
-              <row>5</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[4]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>5</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[4]/ils</property>
-            </text>
-
-            <text>
-              <row>6</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[5]/label</property>
-            </text>
-
-            <text>
-              <row>6</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[5]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>6</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[5]/ils</property>
-            </text>
-
-            <text>
-              <row>7</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[6]/label</property>
-            </text>
-
-            <text>
-              <row>7</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[6]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>7</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[6]/ils</property>
-            </text>
-
-            <text>
-              <row>8</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[7]/label</property>
-            </text>
-
-            <text>
-              <row>8</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[7]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>8</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[7]/ils</property>
-            </text>
-
-            <text>
-              <row>9</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[8]/label</property>
-            </text>
-
-            <text>
-              <row>9</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[8]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>9</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[8]/ils</property>
-            </text>
-
-            <text>
-              <row>10</row>
-              <col>0</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>28L</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[9]/label</property>
-            </text>
-
-            <text>
-              <row>10</row>
-              <col>1</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>10000'/236*</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[9]/length-hdg</property>
-            </text>
-
-            <text>
-              <row>10</row>
-              <col>2</col>
-              <halign>left</halign>
-              <live>true</live>
-              <label>108.90Mhz</label>
-              <property>/sim/gui/dialogs/airports/selected-airport/runway[9]/ils</property>
-            </text>
-          </group>   <!-- of runways table -->
+              <name>runways-info</name>
+              <object-name>runways-info</object-name>
+              <halign>fill</halign>
+              <stretch>true</stretch>
+              <pref-width>260</pref-width>
+              <pref-height>250</pref-height>
+              <slider>15</slider>
+              <editable>false</editable>
+              <wrap>false</wrap>
+              <property>/sim/gui/dialogs/airports/selected-airport/runways-info</property>
+            </textbox>
+          </group> <!-- of runways table -->
 
         </group>   <!-- of airport info outer table -->
       </group>

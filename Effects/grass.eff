@@ -4,30 +4,7 @@
     <inherits-from>Effects/airfield</inherits-from>
 
     <parameters>
-		<!--<texture n="13">
-		    <image>Textures/Terrain/airport_grass2.png</image>
-			<type>2d</type>
-		    <filter>linear-mipmap-linear</filter>
-		    <wrap-s>repeat</wrap-s>
-		    <wrap-t>repeat</wrap-t>
-		    <internal-format>normalized</internal-format>
-		</texture>
-		<texture n="14">
-		    <image>Textures/Terrain/void.png</image>
-			<type>2d</type>
-		    <filter>linear-mipmap-linear</filter>
-		    <wrap-s>repeat</wrap-s>
-		    <wrap-t>repeat</wrap-t>
-		    <internal-format>normalized</internal-format>
-		</texture>
-		<texture n="15">
-		    <image>Textures/Terrain/void.png</image>
-			<type>2d</type>
-		    <filter>linear-mipmap-linear</filter>
-		    <wrap-s>repeat</wrap-s>
-		    <wrap-t>repeat</wrap-t>
-		    <internal-format>normalized</internal-format>
-		</texture>-->
+
         <texture n="20">
             <image>Textures/Terrain/airport-grass-autumn.png</image>
             <type>2d</type>
@@ -37,22 +14,13 @@
             <wrap-t>repeat</wrap-t>
             <internal-format>normalized</internal-format>
         </texture>
-		<!--<base_layer_magnification>5.0</base_layer_magnification>
-		<overlay_layer_magnification>4.0</overlay_layer_magnification>
-		<grain_layer_magnification>4.0</grain_layer_magnification>
-		<use_overlay>0</use_overlay>
-		<use_grain>0</use_grain>
-		<use_color_overlay>1</use_color_overlay>
-		<grit_alpha>1.0</grit_alpha>
-		<overlay_bias>0.0</overlay_bias>
-		<overlay_alpha>1.0</overlay_alpha>-->
 		<max_grass_height>0.3</max_grass_height>
 		<grass_density>1.0</grass_density>
 		<grass_groups>2</grass_groups>
 		<grass_modulate_by_overlay>0</grass_modulate_by_overlay>
 		<grass_modulate_height_min>0.0</grass_modulate_height_min>
-		<bend-x>0</bend-x>
-		<bend-y>0</bend-y>
+		<windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
+		<windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
 
     </parameters>
 
@@ -707,17 +675,17 @@
 				<value><use>scattering</use></value>
 			</uniform>
 			<uniform>
-				<name>bend_x</name>
+				<name>wind_x</name>
 				<type>float</type>
 				<value>
-					<use>bend-x</use>
+					<use>windE</use>
 				</value>
 			</uniform>
-						<uniform>
-				<name>bend_y</name>
+			<uniform>
+				<name>wind_y</name>
 				<type>float</type>
 				<value>
-					<use>bend-y</use>
+					<use>windN</use>
 				</value>
 			</uniform>
 			<uniform>
@@ -809,6 +777,11 @@
 				<name>display_ysize</name>
 				<type>int</type>
 				<value><use>display_ysize</use></value>
+			</uniform>
+			<uniform>
+				<name>wind_effects</name>
+				<type>int</type>
+				<value><use>wind_effects</use></value>
 			</uniform>
 			
             <blend>

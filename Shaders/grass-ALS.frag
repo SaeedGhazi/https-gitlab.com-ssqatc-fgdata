@@ -13,11 +13,12 @@ uniform float max_height;
 uniform float grass_density;
 uniform float grass_modulate_height_min;
 
-uniform float bend_x;
-uniform float bend_y;
+uniform float wind_x;
+uniform float wind_y;
 
 uniform int grass_modulate_by_overlay;
 uniform int grass_groups;
+uniform int wind_effects;
 
 uniform sampler2D colorTex;
 uniform sampler2D densityTex;
@@ -64,8 +65,8 @@ float bladeNoise2D(in float x, in float y, in float dDensity, in float layer, in
     float xoffset = (rand2D(vec2(integer_x, integer_y)) -0.5);
     float yoffset = (rand2D(vec2(integer_x+1.0, integer_y)) - 0.5);
 	
-	float xbend =  (rand2D(vec2(integer_x+1.0, integer_y + 1.0)) - 0.5) + bend_x;
-	float ybend =  (rand2D(vec2(integer_x, integer_y + 1.0)) - 0.5) + bend_y;
+	float xbend =  (rand2D(vec2(integer_x+1.0, integer_y + 1.0)) - 0.5);
+	float ybend =  (rand2D(vec2(integer_x, integer_y + 1.0)) - 0.5);
 	float fraction = BLADE_FRACTION * (0.5 + 0.5 * (1.0 - smoothstep(0.5, 1.0, layer)));
 
 	float bend = 0.5 * layer * layer;
@@ -83,11 +84,30 @@ return bladeNoise2D(coord.x/wavelength, coord.y/wavelength, dDensity, layer, d_f
 
 void main()
 {
-	vec2 texCoord = gl_TexCoord[0].st;
 
-	
 	if (season > 1.6) {discard;}
 	if (g_distance_to_eye > MAX_DISTANCE) {discard;}
+
+	vec2 texCoord = gl_TexCoord[0].st;
+	
+	if (wind_effects > 1)
+	{
+		vec2 windDir = normalize(vec2 (max(wind_x, 0.1), wind_y) );
+		float windStrength = 0.5 * length(vec2 (wind_x, wind_y));
+		float windAmplitude = 1.0 + 0.3 * windStrength;
+		float sineTerm = sin(0.7 * windStrength * osg_SimulationTime + 0.05 * (g_rawpos.x + g_rawpos.y));
+		sineTerm = sineTerm + sin(0.6 * windStrength * osg_SimulationTime + 0.04 * (g_rawpos.x + g_rawpos.y));
+		sineTerm = sineTerm + sin(0.44 * windStrength * osg_SimulationTime + 0.05 * (g_rawpos.x + g_rawpos.y));
+		sineTerm = sineTerm/3.0;
+		sineTerm = 5.0 * sineTerm * sineTerm;
+
+		float windDisplacement = pow(g_layer/32.0, 2.0) * clamp((windStrength + windAmplitude * sineTerm), -30.0, 30.0);
+
+
+
+		texCoord += (windDisplacement * windDir);
+	}
+
 	
 
 	

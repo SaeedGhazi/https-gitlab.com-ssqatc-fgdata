@@ -23,6 +23,7 @@
 	<road-traffic-enabled><use>/sim/rendering/osm/road-traffic-enabled</use></road-traffic-enabled>
 	<road-traffic-density><use>/sim/rendering/osm/road-traffic-density</use></road-traffic-density>
 	<road-traffic-direction><use>/sim/rendering/osm/road-traffic-direction</use></road-traffic-direction>
+	<road-traffic-variation><use>/sim/rendering/osm/road-traffic-daily-variation</use></road-traffic-variation>
 	<road-light-factor><use>/environment/lightmap-factor</use></road-light-factor>
   </parameters>
 
@@ -485,6 +486,14 @@
 				   <type>float</type>
 				   <value>
 					   <use>road-traffic-density</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>road_traffic_variation</name>
+				   <type>float</type>
+				   <value>
+					   <use>road-traffic-variation</use>
 				   </value>
 			   </uniform>
 

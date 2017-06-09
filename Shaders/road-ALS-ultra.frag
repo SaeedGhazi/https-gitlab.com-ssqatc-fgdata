@@ -57,6 +57,7 @@ uniform float grain_magnification;
 uniform float wetness;
 uniform float rain_norm;
 uniform float road_traffic_density;
+uniform float road_traffic_variation;
 uniform float streetlight_factor;
 
 uniform float avisibility;
@@ -353,7 +354,7 @@ void main (void)
 
 		cSign *= road_traffic_direction;
 
-		float total_traffic_density = road_traffic_density * rtype_traffic_density;
+		float total_traffic_density = road_traffic_density * rtype_traffic_density * road_traffic_variation;
 
 		float cCoord = roadCoords.t + cOffset;
 		cCoord += 0.3 * osg_SimulationTime * cSign * rtype_traffic_speed * (1.0 - (0.9 * smoothstep(1.0, 2.5, total_traffic_density)));

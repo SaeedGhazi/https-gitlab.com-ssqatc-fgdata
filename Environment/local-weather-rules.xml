@@ -839,7 +839,108 @@
     <output>/environment/lightmap-factor</output>
   </filter>
 
+<!-- Daily variation of road traffic for the road shader -->
 
+	
+  <filter>
+    <name>EnvironmentInterpolator:OSM:LocalTime</name>
+    <input>
+	 <expression>
+	  <sum>
+        <property>/sim/time/utc/day-seconds</property>
+		<property>/sim/time/local-offset</property>
+	  </sum>
+	 </expression>
+    </input>
+    <output>/sim/time/local-day-seconds</output>
+    <type>gain</type>
+    <gain>1.0</gain> 
+  </filter>
+  
+  <filter>
+    <name>EnvironmentInterpolator:OSM:LocalTimeOverrun</name>
+	<enable>
+      <condition>
+	    <greater-than>
+	    <property>/sim/time/local-day-seconds</property>
+		<value>86400.0</value>
+		</greater-than>
+      </condition>
+    </enable>
+    <input>
+	 <expression>
+	  <difference>
+        <property>/sim/time/local-day-seconds</property>
+		<value>86400</value>
+	  </difference>
+	 </expression>
+    </input>
+    <output>/sim/time/local-day-seconds</output>
+    <type>gain</type>
+    <gain>1.0</gain> 
+  </filter>
+  
+  <filter>
+    <name>EnvironmentInterpolator:OSM:LocalTimeUnderrun</name>
+	<enable>
+      <condition>
+	    <less-than>
+	    <property>/sim/time/local-day-seconds</property>
+		<value>0.0</value>
+		</less-than>
+      </condition>
+    </enable>
+    <input>
+	 <expression>
+	  <sum>
+        <property>/sim/time/local-day-seconds</property>
+		<value>86400</value>
+	  </sum>
+	 </expression>
+    </input>
+    <output>/sim/time/local-day-seconds</output>
+    <type>gain</type>
+    <gain>1.0</gain> 
+  </filter>
+  
+  <filter>
+    <name>EnvironmentInterpolator:OSM:TrafficDensity</name>
+	<type>gain</type>
+    <input>
+	<expression>
+      <table>
+        <property>/sim/time/local-day-seconds</property>
+        <entry><ind>0.0</ind><dep>0.32</dep></entry>
+        <entry><ind>3600.0</ind><dep>0.21</dep></entry>
+		<entry><ind>7200.0</ind><dep>0.18</dep></entry>
+		<entry><ind>10800.0</ind><dep>0.16</dep></entry>
+		<entry><ind>14400.0</ind><dep>0.19</dep></entry>
+		<entry><ind>18000.0</ind><dep>0.21</dep></entry>
+		<entry><ind>21600.0</ind><dep>0.45</dep></entry>
+		<entry><ind>25200.0</ind><dep>0.77</dep></entry>
+		<entry><ind>28800.0</ind><dep>1.30</dep></entry>
+		<entry><ind>32400.0</ind><dep>1.44</dep></entry>
+		<entry><ind>36000.0</ind><dep>1.04</dep></entry>
+		<entry><ind>39600.0</ind><dep>0.95</dep></entry>
+		<entry><ind>43200.0</ind><dep>1.03</dep></entry>
+		<entry><ind>46800.0</ind><dep>1.04</dep></entry>
+		<entry><ind>50400.0</ind><dep>1.10</dep></entry>
+		<entry><ind>54000.0</ind><dep>1.30</dep></entry>
+		<entry><ind>57600.0</ind><dep>1.50</dep></entry>
+		<entry><ind>61200.0</ind><dep>1.26</dep></entry>
+		<entry><ind>64800.0</ind><dep>0.92</dep></entry>
+		<entry><ind>68400.0</ind><dep>0.72</dep></entry>
+		<entry><ind>72000.0</ind><dep>0.56</dep></entry>
+		<entry><ind>75600.0</ind><dep>0.52</dep></entry>
+		<entry><ind>79200.0</ind><dep>0.45</dep></entry>
+		<entry><ind>82800.0</ind><dep>0.36</dep></entry>
+      </table>	
+	</expression>
+    </input>
+    <output>/sim/rendering/osm/road-traffic-daily-variation</output>
+  </filter>
+
+<!-- illumination setting for precipitation particles -->
 
   <filter>
     <name>EnvironmentInterpolator:Precipitation:Illumination</name>

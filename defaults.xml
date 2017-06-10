@@ -1367,5 +1367,11 @@ Started September 2000 by David Megginson, david@megginson.com
     <roi-y1 type="float" userarchive="n">0.0</roi-y1>
     <lightning type="float" userarchive="n">0.0</lightning>
   </earthview>
+  <fdm>
+    <ai-wake>
+      <enabled type="bool" userarchive="n">false</enabled>
+      <max-radius-nm type="double" userarchive="n">5.0</max-radius-nm>
+    </ai-wake>
+  </fdm>
 </PropertyList>
 <!-- end of preferences.xml -->

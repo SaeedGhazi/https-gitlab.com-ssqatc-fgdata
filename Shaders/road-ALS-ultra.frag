@@ -57,8 +57,8 @@ uniform float grain_magnification;
 uniform float wetness;
 uniform float rain_norm;
 uniform float road_traffic_density;
-uniform float road_traffic_variation;
 uniform float streetlight_factor;
+uniform float road_traffic_variation;
 
 uniform float avisibility;
 uniform float cloud_self_shading;
@@ -123,56 +123,56 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
 
 void road_type_mapper (in vec2 coord, out float rtype_traffic_density, out float rtype_base_illumination, out float rtype_traffic_speed, out int rtype_dual_lane)
 	{
-	if (coord.s < 0.125)
+	if (coord.s < 0.125) // railway
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 0;
 		rtype_base_illumination = 0;
 		rtype_traffic_speed = 0.0;
 		}
-	else if (coord.s < 0.250)
+	else if (coord.s < 0.250) // residential
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.3;
 		rtype_base_illumination = 0.65;
 		rtype_traffic_speed = 0.5;
 		}
-	else if (coord.s < 0.375)
+	else if (coord.s < 0.375) // single-lane major
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 1.0;
-		rtype_base_illumination = 1.0;	
+		rtype_base_illumination = 0.65;	
 		rtype_traffic_speed = 1.0;
 		}
-	else if (coord.s < 0.5)
+	else if (coord.s < 0.5) 
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.0;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.0;
 		}
-	else if (coord.s < 0.625)
+	else if (coord.s < 0.625) // grass
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.0;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.0;
 		}
-	else if (coord.s < 0.750)
+	else if (coord.s < 0.750) // dual-lane highway
 		{
 		rtype_dual_lane = 1;
 		rtype_traffic_density = 1.0;
-		rtype_base_illumination = 0.65;
+		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 1.0;
 		}
-	else if (coord.s < 0.875)
+	else if (coord.s < 0.875) // dirt
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.1;
 		rtype_base_illumination = 0.0;
 		rtype_traffic_speed = 0.3;
 		}
-	else
+	else // tramway
 		{
 		rtype_dual_lane = 0;
 		rtype_traffic_density = 0.0;
@@ -222,6 +222,8 @@ void main (void)
     /// BEGIN geometry for light
 
     vec3 up = (gl_ModelViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
+	
+	vec3 nVertVec = normalize(vertVec);
 
     float dist = length(vertVec);
     float vertex_alt = max(100.0,dot(up, vertVec) + alt);
@@ -237,7 +239,7 @@ void main (void)
 
     float mie_angle;
     if (lightArg < 10.0)
-        {mie_angle = (0.5 *  dot(normalize(vertVec), normalize(gl_LightSource[0].position.xyz)) ) + 0.5;}
+        {mie_angle = (0.5 *  dot(nVertVec, normalize(gl_LightSource[0].position.xyz)) ) + 0.5;}
     else 
         {mie_angle = 1.0;}
 
@@ -260,7 +262,7 @@ void main (void)
     float fog_lightArg = (terminator-fog_yprime_alt)/100000.0;
     float fog_earthShade = 0.9 * smoothstep(terminator_width+ terminator, -terminator_width + terminator, fog_yprime_alt) + 0.1;
 
-    float ct = dot(normalize(up), normalize(vertVec));
+    float ct = dot(normalize(up), nVertVec);
 
     vec3 relPos = (gl_ModelViewMatrixInverse * vec4 (vertVec,0.0)).xyz;		
 
@@ -339,10 +341,11 @@ void main (void)
 	float cTag = 0.0;
 	float cPresent = 0.0;
 
+	float cSign = 1.0;
+	float total_traffic_density = 0.0;
 
 	if (road_traffic_enabled == 1)
 		{
-		float cSign = 1.0;
 		float cOffset = 0.0;
 		if (roadCoords.s > 0.5)
 			{
@@ -354,7 +357,7 @@ void main (void)
 
 		cSign *= road_traffic_direction;
 
-		float total_traffic_density = road_traffic_density * rtype_traffic_density * road_traffic_variation;
+		total_traffic_density = road_traffic_density * rtype_traffic_density * road_traffic_variation;
 
 		float cCoord = roadCoords.t + cOffset;
 		cCoord += 0.3 * osg_SimulationTime * cSign * rtype_traffic_speed * (1.0 - (0.9 * smoothstep(1.0, 2.5, total_traffic_density)));
@@ -472,7 +475,7 @@ void main (void)
 	Diffuse.rgb = max(Diffuse.rgb, vec3 (0.5, 0.5, 0.5));
 	}
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
-    Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
+    Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,nVertVec)),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
     //vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
     vec4 color = Diffuse;// * gl_FrontMaterial.diffuse;
@@ -501,7 +504,7 @@ void main (void)
                 }
 
 	    // enhance low angle reflection by a fresnel term
-	    float fresnel_enhance = (1.0-smoothstep(0.0,0.4, dot(N,-normalize(vertVec)))) * refl_fresnel_factor;
+	    float fresnel_enhance = (1.0-smoothstep(0.0,0.4, dot(N,-nVertVec))) * refl_fresnel_factor;
 
 	    reflFactor+=fresnel_enhance;
 
@@ -569,7 +572,7 @@ void main (void)
 	
 
     	// secondary reflection of sky irradiance in water film
-    	float fresnelW =  ((0.8 * wetness) ) *  (1.0-smoothstep(0.0,0.4, dot(N,-normalize(vertVec)) * 1.0 - 0.2 * rain_factor * wetness));
+    	float fresnelW =  ((0.8 * wetness) ) *  (1.0-smoothstep(0.0,0.4, dot(N,-nVertVec) * 1.0 - 0.2 * rain_factor * wetness));
     	float sky_factor = (1.0-ct*ct);
     	vec3 sky_light = vec3 (1.0,1.0,1.0) * length(light_diffuse.rgb) * (1.0-effective_scattering);
     	Specular.rgb += sky_factor * fresnelW  * sky_light;
@@ -605,19 +608,26 @@ void main (void)
 
 	
 
-	vec3 pLMColor = streetlight_color;//vec3 (0.941, 0.682, 0.086);
+	vec3 pLMColor = streetlight_color;
 
 	float pLMIntensity = smoothstep(0.0, 0.4, roadCoords.s) * (1.0 - smoothstep(0.6, 1.0, roadCoords.s));
-	pLMIntensity = 0.5 * rtype_base_illumination + 0.1 * max(0.0,sin(4.0 * roadCoords.t)) * streetlight_factor;
-
+	pLMIntensity = 0.25 * rtype_base_illumination * (1.0+ streetlight_factor) + 0.1 * max(0.0,sin(4.0 * roadCoords.t)) * streetlight_factor;
+	pLMIntensity = clamp(pLMIntensity, 0.0, 1.0);
+	
 	if (gl_FrontMaterial.diffuse.r == 0.0)	{pLMIntensity =0.0;}
 
 	pLMColor *= pLMIntensity;
 
 	if (road_traffic_enabled == 1)
 		{
+		
+		float viewAngleFactor = smoothstep(-0.05, 0.0, cSign * dot(normalize(VBinormal), nVertVec));
 
 		vec3 pCLColor = vec3 (0.95, 1.0, 1.0);
+		
+		// mean illumination by car headlights
+		pLMColor = pLMColor + 0.2 * min(1.0,total_traffic_density) * pCLColor;
+		
 		float pCLIntensity = smoothstep(0.4, 0.6, cTag) * (1.0-smoothstep(0.6, 0.8, cTag));
 		float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
 		laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
@@ -625,8 +635,31 @@ void main (void)
 		laneFact += smoothstep(0.75, 0.8, roadCoords.s) * (1.0-smoothstep(0.8, 0.85, roadCoords.s));
 		pCLIntensity = pCLIntensity * laneFact * cPresent;
 
-		pCLColor = pCLColor *= pCLIntensity;
+		pCLColor *= pCLIntensity;
+		pCLColor *= (0.7 + 0.3 * viewAngleFactor);
+		
+		
+		vec3 pTLColor = vec3 (0.95, 0.0, 0.0);
+		float pTLIntensity;
 
+		if (cSign == 1.0) 
+			{
+			pTLIntensity = smoothstep(0.9, 0.94, cTag) * (1.0-smoothstep(0.96, 1.0, cTag));
+			}
+		else
+			{
+			pTLIntensity = smoothstep(0.0, 0.04, cTag) * (1.0-smoothstep(0.06, 0.1, cTag));			
+			}
+			
+			
+			
+		pTLIntensity = pTLIntensity * laneFact * cPresent * (1.0 - viewAngleFactor);
+	
+		pCLColor = pCLColor + pTLColor * pTLIntensity;
+		
+
+		pLMColor = clamp(pLMColor, 0.0, 1.0);
+		
 		pLMColor = max(pLMColor,pCLColor);
 		}		
 
@@ -782,14 +815,7 @@ void main (void)
 
       fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
-
       fragColor.rgb = filter_combined(fragColor.rgb);
-      //gl_FragColor = vec4 (1.0, 0.0, 0.0,1.0);
-
-
-
-
-  
 
       gl_FragColor = fragColor;
 		

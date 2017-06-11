@@ -17,6 +17,7 @@
 	<grain-texture-enabled type="int">0</grain-texture-enabled>
 	<grain-magnification type="float">50</grain-magnification>
         <lightmap-enabled type="int">1</lightmap-enabled>
+	<normalmap-enabled>1</normalmap-enabled>
         <lightmap-color type="vec3d" n="0"> 0.941 0.682 0.086 </lightmap-color>
     	<snow_level><use>/environment/snow-level-m</use></snow_level>
     	<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
@@ -26,6 +27,11 @@
 	<road-traffic-variation><use>/sim/rendering/osm/road-traffic-daily-variation</use></road-traffic-variation>
 	<road-light-factor><use>/environment/lightmap-factor</use></road-light-factor>
   </parameters>
+  
+  <generate>
+		    <tangent type="int">6</tangent>
+		    <binormal type="int">7</binormal>
+  </generate>
 
    <technique n="3">
 	   <predicate>
@@ -252,6 +258,15 @@
 				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+				<attribute>
+					    <name>tangent</name>
+					    <index>6</index>
+				</attribute>
+				<attribute>
+					    <name>binormal</name>
+					    <index>7</index>
+				</attribute>
+				
 			   </program>
 			   
 			   <uniform>
@@ -488,7 +503,7 @@
 					   <use>road-traffic-density</use>
 				   </value>
 			   </uniform>
-
+			   
 			   <uniform>
 				   <name>road_traffic_variation</name>
 				   <type>float</type>

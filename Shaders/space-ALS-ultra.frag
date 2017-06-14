@@ -402,6 +402,7 @@ void main (void)
         vec3 dirtFactor = reflmap.rgb * dirtFactorIn.rgb;
         //dirtFactor.r = smoothstep(0.0, 1.0, dirtFactor.r);
         mixedcolor.rgb = mix(mixedcolor.rgb, dirt_r_color, smoothstep(0.0, 1.0, dirtFactor.r));
+        texel.rgb = mix(texel.rgb, dirt_r_color, smoothstep(0.0, 1.0, dirtFactor.r));
         if (dirt_multi > 0) {
             //dirtFactor.g = smoothstep(0.0, 1.0, dirtFactor.g);
             //dirtFactor.b = smoothstep(0.0, 1.0, dirtFactor.b);

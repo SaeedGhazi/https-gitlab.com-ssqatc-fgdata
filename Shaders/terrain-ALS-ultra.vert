@@ -51,7 +51,7 @@ uniform mat4 osg_ViewMatrixInverse;
 float earthShade;
 float yprime_alt;
 
-
+vec3 moonlight_perception (in vec3 light);
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -76,6 +76,9 @@ void main()
   vec4 light_ambient;
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight + vec3 (0.005, 0.005, 0.005);
+
+  moonLightColor = moonlight_perception (moonLightColor);
+
 
   //float yprime_alt;
   float yprime;

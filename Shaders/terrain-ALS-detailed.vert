@@ -54,6 +54,8 @@ float yprime_alt;
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
+vec3 moonlight_perception (in vec3 light);
+
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
 //x = x - 0.5;
@@ -72,6 +74,7 @@ void main()
   vec4 light_ambient;
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+  moonLightColor = moonlight_perception (moonLightColor);
 
   //float yprime_alt;
   float yprime;

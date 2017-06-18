@@ -132,6 +132,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
+        <vertex-shader>Shaders/filters-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/airfield-ALS.frag</fragment-shader>
 	<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 	<fragment-shader>Shaders/noise.frag</fragment-shader>

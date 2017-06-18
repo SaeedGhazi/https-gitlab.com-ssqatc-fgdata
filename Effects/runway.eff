@@ -203,6 +203,7 @@
       </texture-unit>
       <program>
         <vertex-shader n="0">Shaders/terrain-ALS-ultra.vert</vertex-shader>
+        <vertex-shader n="1">Shaders/filters-ALS.vert</vertex-shader>
         <fragment-shader n="0">Shaders/runway-ALS.frag</fragment-shader>        
 	<fragment-shader n="1">Shaders/cloud-shadowfunc.frag</fragment-shader>
 	<fragment-shader n="2">Shaders/noise.frag</fragment-shader>

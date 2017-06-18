@@ -67,6 +67,12 @@ return vec3 (0.7, 0.7, 0.7) * gain;
 }
 
 
+vec3 moonlight_perception (in vec3 light) {
+
+return light;
+
+}
+
 
 vec3 g_force (in vec3 color) {
 

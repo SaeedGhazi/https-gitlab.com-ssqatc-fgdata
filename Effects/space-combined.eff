@@ -189,7 +189,7 @@
 				</value>
 		  	</uniform>
 			   
-			   <!-- 			reflection is used -->
+			   <!-- reflection is used -->
 			   <uniform>
 				   <name>refl_enabled</name>
 				   <type>int</type>
@@ -212,6 +212,15 @@
 				   <type>int</type>
 				   <value>
 					   <use>reflect-map-enabled</use>
+				   </value>
+			   </uniform>
+
+			   <!-- how are colors merged in a reflection-->
+			   <uniform>
+				   <name>refl_type</name>
+				   <type>int</type>
+				   <value>
+					   <use>reflection-type</use>
 				   </value>
 			   </uniform>
 
@@ -313,6 +322,22 @@
 				   <type>float</type>
 				   <value>
 					   <use>dirt-factor[2]</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>dirt_modulates_reflection</name>
+				   <type>int</type>
+				   <value>
+					   <use>dirt-modulates-reflection</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>dirt_reflection_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>dirt-reflection-factor</use>
 				   </value>
 			   </uniform>
 			   

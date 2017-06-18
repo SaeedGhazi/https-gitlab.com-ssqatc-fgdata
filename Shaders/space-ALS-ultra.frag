@@ -28,11 +28,13 @@ uniform sampler2D GrainTex;
 
 uniform int dirt_enabled;
 uniform int dirt_multi;
+uniform int dirt_modulates_reflection;
 uniform int lightmap_enabled;
 uniform int lightmap_multi;
 uniform int nmap_dds;
 uniform int nmap_enabled;
 uniform int refl_enabled;
+uniform int refl_type;
 uniform int refl_map;
 uniform int grain_texture_enabled;
 uniform int darkmap_enabled;
@@ -47,6 +49,7 @@ uniform float amb_correction;
 uniform float dirt_b_factor;
 uniform float dirt_g_factor;
 uniform float dirt_r_factor;
+uniform float dirt_reflection_factor;
 uniform float lightmap_a_factor;
 uniform float lightmap_b_factor;
 uniform float lightmap_g_factor;
@@ -350,9 +353,23 @@ void main (void)
     Diffuse.rgb = addLights(Diffuse.rgb, secondary_light * light_distance_fading(dist));
     //if (use_geo_light == 1)
     {Diffuse.rgb = addLights(Diffuse.rgb, geo_light * diffuse_reduction );}	
+
+
+    ///BEGIN reflection correction by dirt
+
+    float refl_d = 1.0;
+
+    if ((dirt_enabled == 1) && (dirt_modulates_reflection == 1))
+	{
+	refl_d =  1.0 - (reflmap.r * dirt_r_factor  * (1.0 - dirt_reflection_factor));
+	}
+
+    ///END reflection correction by dirt
 	
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
+
+    Specular *= refl_d;
 
     vec4 color = gl_Color * light_ambient + gl_FrontMaterial.emission;
 
@@ -386,7 +403,12 @@ void main (void)
             vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
             raincolor += Specular;
             raincolor *= light_diffuse;
-            mixedcolor = mix(texel, raincolor, reflFactor).rgb;
+
+	    if (refl_type == 1)
+            	{mixedcolor = mix(texel, raincolor, reflFactor * refl_d).rgb;}
+	    else if (refl_type == 2)
+		{mixedcolor = ((texel +(reflcolor * reflFactor * refl_d))-(0.5*reflFactor * refl_d)).rgb;}
+
         } else {
             mixedcolor = texel.rgb;
         }

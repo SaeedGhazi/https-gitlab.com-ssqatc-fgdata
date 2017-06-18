@@ -114,6 +114,8 @@ please see Docs/README.model-combined.eff for documentation
 		<dirt-factor type="float" n="1">0.0</dirt-factor>
 		<dirt-color type="vec3d" n="2">0.0 0.0 0.0</dirt-color>
 		<dirt-factor type="float" n="2">0.0</dirt-factor>
+		<dirt-modulates-reflection type="int">0</dirt-modulates-reflection>
+		<dirt-reflection-factor type="double">1.0</dirt-reflection-factor>
 		<!-- ambient correction -->
 		<ambient-correction type="float">0.05</ambient-correction>
 		<rendering-hint>opaque</rendering-hint>
@@ -756,6 +758,22 @@ please see Docs/README.model-combined.eff for documentation
 				   <type>float</type>
 				   <value>
 					   <use>dirt-factor[2]</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>dirt_modulates_reflection</name>
+				   <type>int</type>
+				   <value>
+					   <use>dirt-modulates-reflection</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>dirt_reflection_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>dirt-reflection-factor</use>
 				   </value>
 			   </uniform>
 			   

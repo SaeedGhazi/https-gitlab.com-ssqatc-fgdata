@@ -79,6 +79,57 @@
   <text><label/></text>
 
   <text>
+    <label>Aerodynamic interaction</label>
+  </text>
+
+  <hrule/>
+
+  <group>
+    <layout>table</layout>
+    <halign>left</halign>
+
+    <text>
+      <row>0</row>
+      <col>0</col>
+      <halign>left</halign>
+      <label>Enable AI aerodynamic wake</label>
+    </text>
+
+    <checkbox>
+      <row>0</row>
+      <col>1</col>
+      <name>enable-ai-wake</name>
+      <halign>left</halign>
+      <property>/fdm/ai-wake/enabled</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>enable-ai-wake</object-name>
+      </binding>
+    </checkbox>
+
+    <text>
+      <row>1</row>
+      <col>0</col>
+      <halign>left</halign>
+      <label>Max. radius of interaction (nm)</label>
+    </text>
+
+    <input>
+      <row>1</row>
+      <col>1</col>
+      <property>/fdm/ai-wake/max-radius-nm</property>
+      <enable>
+        <property>/fdm/ai-wake/enabled</property>
+      </enable>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </input>
+  </group>
+
+  <text><label/></text>
+
+  <text>
     <label>Choose active scenario(s) </label>
   </text>
 

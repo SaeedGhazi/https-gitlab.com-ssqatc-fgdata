@@ -31,7 +31,6 @@
 
 	<!-- View menu -->
 	<view>Ansicht</view>   <!-- English: "View" -->
-	<display-options>Anzeigeoptionen</display-options>   <!-- English: "Display Options" -->
 	<rendering-options>Grafikoptionen</rendering-options>   <!-- English: "Rendering Options" -->
 	<view-options>Sichtoptionen</view-options>   <!-- English: "View Options" -->
 	<cockpit-view-options>Cockpitoptionen</cockpit-view-options>   <!-- English: "Cockpit View Options" -->

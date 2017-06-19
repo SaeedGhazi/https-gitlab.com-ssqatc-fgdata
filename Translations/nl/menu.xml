@@ -33,7 +33,6 @@
 
 	<!-- View menu -->
 	<view>Beeld</view>   <!-- English: "View" -->
-	<display-options>Beeld instellingen</display-options>   <!-- English: "Display Options" -->
 	<rendering-options>Weergave instellingen</rendering-options>   <!-- English: "Rendering Options" -->
 	<view-options>Zicht instellingen</view-options>   <!-- English: "View Options" -->
 	<cockpit-view-options>Cockpit zicht instellingen</cockpit-view-options>   <!-- English: "Cockpit View Options" -->

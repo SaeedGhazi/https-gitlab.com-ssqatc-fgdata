@@ -39,7 +39,6 @@
 
 	<!-- View menu -->
 	<view>Widok</view>   <!-- English: "View" -->
-	<display-options>Opcje Wyswietlania</display-options>   <!-- English: "Display Options" -->
 	<rendering-options>Opcje Renderowania</rendering-options>   <!-- English: "Rendering Options" -->
 	<view-options>Dostepne Kamery</view-options>   <!-- English: "View Options" -->
 	<cockpit-view-options>Opcje Widoku z Kokpitu</cockpit-view-options>   <!-- English: "Cockpit View Options" -->

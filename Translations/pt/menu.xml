@@ -34,7 +34,6 @@
 	<!-- View menu -->
  	<view>Exibição</view>    <!-- English: "View" -->
 	<toggle-fullscreen>Tela Cheia</toggle-fullscreen> -->  <!-- English: "Toggle Fullscreen" -->
- 	<display-options>Opções de Tela</display-options>    <!-- English: "Display Options" -->
  	<rendering-options>Opções de Renderização</rendering-options>    <!-- English: "Rendering Options" -->
  	<view-options>Opções das Visões</view-options>    <!-- English: "View Options" -->
  	<cockpit-view-options>Opcões da Visão da Cabine</cockpit-view-options>    <!-- English: "Cockpit View Options" -->

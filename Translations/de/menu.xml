@@ -43,7 +43,6 @@
 
 	<!-- Location menu -->
 	<location>Ort</location>   <!-- English: "Location" -->
-	<position-on-ground>Flugzeug positionieren (am Boden)</position-on-ground>   <!-- English: "Position Aircraft On Ground" -->
 	<position-in-air>Flugzeug positionieren (in der Luft)</position-in-air>   <!-- English: "Position Aircraft In Air" -->
 	<goto-airport>Flughafenauswahl</goto-airport>   <!-- English: "Select Airport From List" -->
 	<random-attitude>Zufällige Fluglage</random-attitude>   <!-- English: "Random Attitude" -->

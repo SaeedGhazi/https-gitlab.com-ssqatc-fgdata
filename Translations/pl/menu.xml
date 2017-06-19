@@ -51,7 +51,6 @@
 
 	<!-- Location menu -->
 	<location>Pozycja</location>   <!-- English: "Location" -->
-	<position-on-ground>Na Ziemii</position-on-ground>   <!-- English: "Position Aircraft On Ground" -->
 	<position-in-air>W Powietrzu</position-in-air>   <!-- English: "Position Aircraft In Air" -->
 	<goto-airport>Wybierz Lotnisko</goto-airport>   <!-- English: "Select Airport From List" -->
 	<random-attitude>Losowa Orientacja</random-attitude>   <!-- English: "Random Attitude" -->

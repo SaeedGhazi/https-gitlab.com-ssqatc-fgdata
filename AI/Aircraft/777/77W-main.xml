@@ -4,13 +4,17 @@
   <author>Ian(Yves) Tolosa. September 2016</author>
   <path>Models/77W.ac</path>
   
+  <offsets>
+	<pitch-deg>-0.7</pitch-deg>   
+  </offsets>
+  
     <animation>
     <type>select</type>
     <object-name>Gear</object-name>
     <condition>
       <less-than>
         <property>velocities/true-airspeed-kt</property>
-        <value>150</value>
+        <value>170</value>
       </less-than>
     </condition>
   </animation>

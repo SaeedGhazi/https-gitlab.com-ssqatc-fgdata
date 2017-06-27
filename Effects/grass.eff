@@ -21,6 +21,9 @@
 		<grass_modulate_height_min>0.0</grass_modulate_height_min>
 		<windE><use>/environment/sea/surface/wind-from-east-fps</use></windE>
 		<windN><use>/environment/sea/surface/wind-from-north-fps</use></windN>
+		<wash-x><use>/environment/aircraft-effects/wash-x</use></wash-x>
+		<wash-y><use>/environment/aircraft-effects/wash-y</use></wash-y>
+		<wash-strength><use>/environment/aircraft-effects/wash-strength</use></wash-strength>
 
     </parameters>
 
@@ -687,6 +690,27 @@
 				<type>float</type>
 				<value>
 					<use>windN</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>wash_x</name>
+				<type>float</type>
+				<value>
+					<use>wash-x</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>wash_y</name>
+				<type>float</type>
+				<value>
+					<use>wash-y</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>wash_strength</name>
+				<type>float</type>
+				<value>
+					<use>wash-strength</use>
 				</value>
 			</uniform>
 			<uniform>

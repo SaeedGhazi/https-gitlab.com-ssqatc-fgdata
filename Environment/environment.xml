@@ -497,6 +497,9 @@
       <use-wipers type="int" userarchive="n">0</use-wipers>
       <use-overlay type="int" userarchive="n">0</use-overlay>
       <overlay-alpha type="float" userarchive="n">1.0</overlay-alpha>
+      <wash-x type="float" userarchive="n">0.0</wash-x>
+      <wash-y type="float" userarchive="n">0.0</wash-y>
+      <wash-strength type="float" userarchive="n">0.0</wash-strength>
   </aircraft-effects>
 
 

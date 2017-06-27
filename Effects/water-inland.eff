@@ -134,6 +134,11 @@
 		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
 		<ice_cover><use>/environment/sea/surface/ice-cover</use></ice_cover>
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
+		
+		<!-- rotor wash -->
+		<wash-x><use>/environment/aircraft-effects/wash-x</use></wash-x>
+		<wash-y><use>/environment/aircraft-effects/wash-y</use></wash-y>
+		<wash-strength><use>/environment/aircraft-effects/wash-strength</use></wash-strength>
 
 		<!-- filtering -->
    		<use_filtering><use>/sim/rendering/als-filters/use-filtering</use></use_filtering>
@@ -476,6 +481,27 @@
 				<type>float</type>
 				<value>
 					<use>windN</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>wash_x</name>
+				<type>float</type>
+				<value>
+					<use>wash-x</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>wash_y</name>
+				<type>float</type>
+				<value>
+					<use>wash-y</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>wash_strength</name>
+				<type>float</type>
+				<value>
+					<use>wash-strength</use>
 				</value>
 			</uniform>
 			<uniform>

@@ -16,6 +16,10 @@ uniform float grass_modulate_height_min;
 uniform float wind_x;
 uniform float wind_y;
 
+uniform float wash_x;
+uniform float wash_y;
+uniform float wash_strength;
+
 uniform int grass_modulate_by_overlay;
 uniform int grass_groups;
 uniform int wind_effects;
@@ -89,11 +93,19 @@ void main()
 	if (g_distance_to_eye > MAX_DISTANCE) {discard;}
 
 	vec2 texCoord = gl_TexCoord[0].st;
-	
+		
 	if (wind_effects > 1)
 	{
-		vec2 windDir = normalize(vec2 (max(wind_x, 0.1), wind_y) );
-		float windStrength = 0.5 * length(vec2 (wind_x, wind_y));
+	
+		vec2 eyePos = (gl_ModelViewMatrixInverse * vec4 (0.0, 0.0, 0.0, 1.0)).xy;
+		
+		vec2 washDir = vec2 (wash_x, wash_y) - (g_rawpos - eyePos);
+		float washStrength = 20.0 * min(14.0 * wash_strength/(length(washDir) + 1.0), 1.0);
+		washStrength *= (1.0 - 0.8 * sin(20.0 * osg_SimulationTime + length(washDir) + dot(normalize(washDir), vec2(1.0, 0.0))));
+				
+		vec2 windDir = normalize(vec2 (max(wind_x, 0.1), wind_y) + washStrength * vec2 (-washDir.y, washDir.x));
+		
+		float windStrength = 0.5 * length(vec2 (wind_x, wind_y)) + washStrength;
 		float windAmplitude = 1.0 + 0.3 * windStrength;
 		float sineTerm = sin(0.7 * windStrength * osg_SimulationTime + 0.05 * (g_rawpos.x + g_rawpos.y));
 		sineTerm = sineTerm + sin(0.6 * windStrength * osg_SimulationTime + 0.04 * (g_rawpos.x + g_rawpos.y));
@@ -101,9 +113,7 @@ void main()
 		sineTerm = sineTerm/3.0;
 		sineTerm = 5.0 * sineTerm * sineTerm;
 
-		float windDisplacement = pow(g_layer/32.0, 2.0) * clamp((windStrength + windAmplitude * sineTerm), -30.0, 30.0);
-
-
+		float windDisplacement = pow(g_layer/32.0, 2.0) * clamp((windStrength + windAmplitude * sineTerm), -35.0, 35.0);
 
 		texCoord += (windDisplacement * windDir);
 	}

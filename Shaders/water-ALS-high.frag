@@ -63,6 +63,10 @@ uniform float landing_light1_offset;
 uniform float landing_light2_offset;
 uniform float landing_light3_offset;
 
+uniform float wash_x;
+uniform float wash_y;
+uniform float wash_strength;
+
 uniform int quality_level;
 uniform int tquality_level;
 uniform int ocean_flag;
@@ -489,22 +493,42 @@ void main(void)
 
 	//add foam
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);
+	
+	
 	if (dist < 10000.0)
 	{
 	float foamSlope = 0.10 + 0.1 * windScale;
 
-
-
+	// rotor wash
+	vec2 washDir = vec2 (wash_x, wash_y) - relPos.xy;
+	
+	float washDist = length(washDir);
+	float washStrength = 3.0 * min(14.0 * wash_strength/(washDist + 1.0), 1.0);
+	
+	float timeFact =  sin(-30.0 * osg_SimulationTime + 1.5 * washDist + dot(normalize(washDir), vec2(1.0, 0.0)));
+	
+	float noiseFact = 0.5 * Noise2D(vec2 (relPos.x + 30.0 * osg_SimulationTime, relPos.y), 1.1);
+	noiseFact+= 0.5 * Noise2D(vec2 (relPos.x - 31.0 *osg_SimulationTime, relPos.y ), 1.0);
+	
+	washStrength *= (0.5 + (0.3 * noiseFact) + (0.2 * noiseFact * clamp(timeFact, -0.2, 1.0)));
+	//washStrength *= (0.5 + (0.3 * noiseFact * clamp(timeFact, -0.2, 1.0)));
+		
 	float waveSlope = N.g;
 	float surfFact = 0.0;
-	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel.a > 0.98)) 
+	surfFact += washStrength;
+	
+	
+	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel.a > 0.98) || (washStrength > 0.5)) 
 		{ 
 		if ((waveSlope > 0.0) && (ocean_flag ==1)) 
 			{
 			surfFact = surfFact +(1.0 -smoothstep(0.97,1.0,steepness));
 			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel.a);
-			waveSlope = waveSlope + 2.0 * surfFact;
+
 			}
+			waveSlope = waveSlope + 2.0 * surfFact;
+
+	
 		if (waveSlope >= foamSlope){
 			finalColor = mix(finalColor, max(finalColor, finalColor + foam_texel), smoothstep(0.01, 0.50, N.g+0.2 * surfFact));
 			}

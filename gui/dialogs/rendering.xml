@@ -407,10 +407,13 @@
 					<pref-width>200</pref-width>
 					<property>/sim/gui/dialogs/rendering/random-vegetation</property>
 					<value>Disabled</value>
+					<value>Ultra Low Density</value>
+					<value>Very Low Density</value>
 					<value>Low Density</value>
 					<value>Medium Density</value>
 					<value>High Density</value>
 					<value>Very High Density</value>
+					<value>Ultra High Density</value>
 					<binding>
 						<command>dialog-apply</command>
 						<object-name>random-vegetation</object-name>
@@ -421,6 +424,16 @@
 							var val = getprop("/sim/gui/dialogs/rendering/random-vegetation");
 							if (val == "Disabled") {
 								setprop("/sim/rendering/random-vegetation", 0);
+							}
+
+							if (val == "Ultra Low Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 0.1);
+							}
+
+							if (val == "Low Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 0.25);
 							}
 
 							if (val == "Low Density") {
@@ -435,12 +448,17 @@
 
 							if (val == "High Density") {
 								setprop("/sim/rendering/random-vegetation", 1);
-								setprop("/sim/rendering/vegetation-density", 4.0);
+								setprop("/sim/rendering/vegetation-density", 2.0);
 							}
 
 							if (val == "Very High Density") {
 								setprop("/sim/rendering/random-vegetation", 1);
-								setprop("/sim/rendering/vegetation-density", 10.0);
+								setprop("/sim/rendering/vegetation-density", 4.0);
+							}
+
+							if (val == "Ultra High Density") {
+								setprop("/sim/rendering/random-vegetation", 1);
+								setprop("/sim/rendering/vegetation-density", 8.0);
 							}
 
 						</script>
@@ -1077,14 +1095,27 @@
 
 			if (getprop("/sim/rendering/random-vegetation")) {
 				var density = getprop("/sim/rendering/vegetation-density");
-				if (density < 0.99) {
+				if (density < 0.2) {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Ultra Low Density");
+					# 0.1
+				} else if (density < 0.4) {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Very Low Density");
+					# 0.25
+				} else if (density < 0.8) {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Low Density");
-				} else if (density < 1.99) {
+					# 0.5
+				} else if (density < 1.5) {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Medium Density");
-				} else if (density < 4.01) {
+					# 1.0
+				} else if (density < 3.0) {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "High Density");
-				} else {
+					# 2.0
+				} else if (density < 6.0) {
 					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Very High Density");
+					# 4.0
+				} else {
+					setprop("/sim/gui/dialogs/rendering/random-vegetation", "Ultra High Density");
+					# 8.0
 				}
 			} else {
 				setprop("/sim/gui/dialogs/rendering/random-vegetation", "Disabled");

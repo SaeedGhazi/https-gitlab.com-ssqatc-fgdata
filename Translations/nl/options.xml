@@ -34,15 +34,11 @@
 	<fg-scenery-desc n="1">Standaard is dit $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 	<fg-aircraft-desc>Definiëer extra vliegtuigmappen</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s)" -->
 	<language-desc>Kies de taal voor deze sessie</language-desc>   <!-- English: "Select the language for this session" -->
-	<disable-game-mode-desc>Schermvullende spelode uitschakelen</disable-game-mode-desc>   <!-- English: "Disable full-screen game mode" -->
-	<enable-game-mode-desc>Schermvullende spelmode inschakelen</enable-game-mode-desc>   <!-- English: "Enable full-screen game mode" -->
 	<disable-splash-screen-desc>Introductie scherm overslaan</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Introductie scherm laten zien</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
  	<restore-defaults-desc>Reset alle instellingen naar de fabrieksinstellingen (weergave opties etc.)</restore-defaults-desc>   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 	<disable-save-on-exit>Sla de instellingen niet op bij het afsluiten</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
 	<enable-save-on-exit>Sla instellingen op bij het afsluiten</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
-	<disable-intro-music-desc>Introductie muziek overslaan</disable-intro-music-desc>   <!-- English: "Disable introduction music" -->
-	<enable-intro-music-desc>Introductie muziek laten horen</enable-intro-music-desc>   <!-- English: "Enable introduction music" -->
 	<disable-mouse-pointer-desc>Extra cursor uitschakelen</disable-mouse-pointer-desc>   <!-- English: "Disable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="0">Extra cursor inschakelen</enable-mouse-pointer-desc>   <!-- English: "Enable extra mouse pointer" -->
 	<enable-mouse-pointer-desc n="1">(voor Voodoo kaarten in volledige scherm mode)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
@@ -60,7 +56,6 @@
 	<enable-ai-models-desc>?Schakel het AI systeem in (vereiste voor multiplayer, kunstmatig verkeer en veel andere animaties)</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
 	<disable-ai-traffic-desc>Schakel kunstmatig verkeer uit</disable-ai-traffic-desc>   <!-- English: "Disable artificial traffic." -->
 	<enable-ai-traffic-desc>Schakel kunstmatig verkeer in</enable-ai-traffic-desc>   <!-- English: "Enable artificial traffic." -->
-	<disable-ai-scenarios>Schakel alle scenarios uit</disable-ai-scenarios>   <!-- English: "Disable all AI scenarios." -->
 	<ai-scenario>Voeg een nieuw scenario toe en schakel het in. Meerdere opties zijn toegestaan.</ai-scenario>   <!-- English: "Add and enable a new scenario. Multiple options are allowed." -->
 	<disable-freeze-desc>Start in een normale situatie</disable-freeze-desc>   <!-- English: "Start in a running state" -->
 	<enable-freeze-desc>Start in een bevroren situatie</enable-freeze-desc>   <!-- English: "Start in a frozen state" -->
@@ -179,8 +174,6 @@
 	<enable-fullscreen-desc>In volledige scherm modus uitvoeren</enable-fullscreen-desc>   <!-- English: "Enable fullscreen mode" -->
 	<shading-flat-desc>Gebruik scherpe schaduwen</shading-flat-desc>   <!-- English: "Enable flat shading" -->
 	<shading-smooth-desc>Gebruik natuurlijke schaduwen</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
-	<disable-skyblend-desc>Hemel opbouw verbergen</disable-skyblend-desc>   <!-- English: "Disable sky blending" -->
-	<enable-skyblend-desc>Hemel opbouw tonen</enable-skyblend-desc>   <!-- English: "Enable sky blending" -->
 	<disable-textures-desc>Textures gebruiken</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Textures niet gebruiken</enable-textures-desc>   <!-- English: "Enable textures" -->
 	<materials-file-desc>Kies het te gebruiken materialen bestand om de scenery weer te geven (standaard: materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->

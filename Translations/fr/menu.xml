@@ -67,7 +67,6 @@
     <environment-settings>Paramètres environnementaux</environment-settings>   <!-- English: "Environment Settings" -->
     <time-settings>Paramètres horaires</time-settings>   <!-- English: "Time Settings" -->
     <wildfire-settings>Paramètres de feu de forêt</wildfire-settings>   <!-- English: "Wildfire Settings" -->
-    <terrasync>Téléchargement de scènes</terrasync>   <!-- English: "Scenery Download" -->
 
     <!-- Equipment menu -->
     <equipment>Equipement</equipment>   <!-- English: "Equipment" -->

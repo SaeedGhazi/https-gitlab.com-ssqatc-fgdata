@@ -23,14 +23,14 @@
 
 	<!-- File menu -->
 	<file>Archivo</file>   <!-- English: "File" -->
-	<reset>Reiniciar                          </reset>   <!-- English: "Reset" -->
+	<reset>Reiniciar</reset>   <!-- English: "Reset" -->
 	<load-tape>Cargar grabación de vuelo</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
 	<save-tape>Guardar grabación de vuelo</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
-	<snap-shot>Capturar pantalla               </snap-shot>   <!-- English: "Screenshot  " -->
+	<snap-shot>Capturar pantalla</snap-shot>   <!-- English: "Screenshot  " -->
 	<snap-shot-dir>Directorio capturas</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Configurar sonido</sound-config>   <!-- English: "Sound Configuration" -->
 	<input-config>Configurar dispositivos de entrada</input-config>   <!-- English: "Input Configuration" -->
-	<exit>Salir                              </exit>   <!-- English: "Quit          " -->
+	<exit>Salir</exit>   <!-- English: "Quit          " -->
 
 	<!-- View menu -->
 	<view>Vista</view>   <!-- English: "View" -->
@@ -75,7 +75,7 @@
 	<radio>Configurar radio</radio>   <!-- English: "Radio Settings" -->
 	<gps>Configurar GPS</gps>   <!-- English: "GPS Settings" -->
 	<instrument-settings>Configurar instrumentos</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu> --- Fallas ---</failure-submenu>   <!-- English: " -_- Failures -_-" -->
+	<failure-submenu>--- Fallas ---</failure-submenu>   <!-- English: " -_- Failures -_-" -->
 	<random-failures>Fallas al azar</random-failures>   <!-- English: "Random Failures" -->
 	<system-failures>Fallas de sistemas</system-failures>   <!-- English: "System Failures" -->
 	<instrument-failures>Fallas de instrumental</instrument-failures>   <!-- English: "Instrument Failures" -->

@@ -85,7 +85,7 @@
 	<!-- Features options -->
 <!-- 	<environment-options>???</environment-options> -->   <!-- English: "Environment Options" -->
 	<features-options>Dodatki</features-options>   <!-- English: "Features" -->
-	<disable-hud-desc>Niedostepny wyswietlacz przezierny </disable-hud-desc>   <!-- English: "Disable Heads Up Display (HUD)" -->
+	<disable-hud-desc>Niedostepny wyswietlacz przezierny</disable-hud-desc>   <!-- English: "Disable Heads Up Display (HUD)" -->
 	<enable-hud-desc>Dostepny wyswietlacz przezierny (HUD)</enable-hud-desc>   <!-- English: "Enable Heads Up Display (HUD)" -->
 	<disable-panel-desc>Niedostepny kokpit</disable-panel-desc>   <!-- English: "Disable instrument panel" -->
 	<enable-panel-desc>Dostepny kokpit</enable-panel-desc>   <!-- English: "Enable instrument panel" -->
@@ -209,7 +209,7 @@
 	<time-offset-desc>Dodaj to przesuniecie czasu</time-offset-desc>   <!-- English: "Add this time offset" -->
 	<time-match-real-desc>Synchronizuj czas z rzeczywistym (GMT)</time-match-real-desc>   <!-- English: "Synchronize time with real-world time" -->
 	<time-match-local-desc>Synchronizuj czas z lokalnym czasem rzeczywistym</time-match-local-desc>   <!-- English: "Synchronize time with local real-world time" -->
-	<start-date-desc>Podaj date/czas startu ze wzg. na </start-date-desc>   <!-- English: "Specify a starting date/time with respect to" -->
+	<start-date-desc>Podaj date/czas startu ze wzg. na</start-date-desc>   <!-- English: "Specify a starting date/time with respect to" -->
 
 	<!-- Network options -->
 	<network-options>Opcje sieciowe</network-options>   <!-- English: "Network Options" -->
@@ -241,7 +241,7 @@
 	<joyclient-desc>Podlacz do Agwagon dzojstik</joyclient-desc>   <!-- English: "Open connection to an Agwagon joystick" -->
 <!-- 	<jsclient-desc>???</jsclient-desc> -->   <!-- English: "Open connection to a remote joystick" -->
 	<native-ctrls-desc>Polacz uzywajac protokolu FG Native Controls</native-ctrls-desc>   <!-- English: "Open connection using the FG Native Controls protocol" -->
-	<native-fdm-desc>Polacz uzywajac protokolu FG Native FDM </native-fdm-desc>   <!-- English: "Open connection using the FG Native FDM protocol" -->
+	<native-fdm-desc>Polacz uzywajac protokolu FG Native FDM</native-fdm-desc>   <!-- English: "Open connection using the FG Native FDM protocol" -->
 <!-- 	<native-gui-desc>???</native-gui-desc> -->   <!-- English: "Open connection using the FG Native GUI protocol" -->
 	<native-desc>Polacz uzywajac protokolu FG Native</native-desc>   <!-- English: "Open connection using the FG Native protocol" -->
 	<nmea-desc>Polacz uzywajac protokolu NMEA</nmea-desc>   <!-- English: "Open connection using the NMEA protocol" -->

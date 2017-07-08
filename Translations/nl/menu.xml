@@ -73,7 +73,7 @@
 	<radio>Radio instellingen</radio>   <!-- English: "Radio Settings" -->
 	<gps>GPS instellingen</gps>   <!-- English: "GPS Settings" -->
 	<instrument-settings>Instrument instellingen</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu> --- Storingen ---</failure-submenu>   <!-- English: " -_- Failures -_-" -->
+	<failure-submenu>--- Storingen ---</failure-submenu>   <!-- English: " -_- Failures -_-" -->
 	<random-failures>Willekeurige storingen</random-failures>   <!-- English: "Random Failures" -->
 	<system-failures>Systeemstoringen</system-failures>   <!-- English: "System Failures" -->
 	<instrument-failures>Instrumentstoringen</instrument-failures>   <!-- English: "Instrument Failures" -->

@@ -6,10 +6,10 @@
 
 	<!-- File menu -->
 	<file>File</file>
-	<reset>Reset                              </reset>
+	<reset>Reset</reset>
 	<load-tape>Load Flight Recorder Tape</load-tape>
 	<save-tape>Save Flight Recorder Tape</save-tape>
-	<snap-shot>Screenshot                      </snap-shot>
+	<snap-shot>Screenshot</snap-shot>
 	<snap-shot-dir>Screenshot Directory</snap-shot-dir>
 	<sound-config>Sound Configuration</sound-config>
 	<input-config>Mouse Configuration</input-config>
@@ -62,7 +62,7 @@
 	<radio>Radio Settings</radio>
 	<gps>GPS Settings</gps>
 	<instrument-settings>Instrument Settings</instrument-settings>
-	<failure-submenu> --- Failures ---</failure-submenu>
+	<failure-submenu>--- Failures ---</failure-submenu>
 	<random-failures>Random Failures</random-failures>
 	<system-failures>System Failures</system-failures>
 	<instrument-failures>Instrument Failures</instrument-failures>

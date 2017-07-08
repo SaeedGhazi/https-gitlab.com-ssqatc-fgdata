@@ -22,7 +22,7 @@
 <PropertyList>
 
 	<usage>Gebruik: fgfs [ opties ... ]</usage>   <!-- English: "Usage: fgfs [ option ... ]" -->
-	<verbose-help>Gebruik -_help -_verbose voor een complete lijst van de opties </verbose-help>   <!-- English: "For a complete list of options use -_help -_verbose" -->
+	<verbose-help>Gebruik -_help -_verbose voor een complete lijst van de opties</verbose-help>   <!-- English: "For a complete list of options use -_help -_verbose" -->
 
 	<!-- General options -->
 	<general-options>Standaard opties</general-options>   <!-- English: "General Options" -->

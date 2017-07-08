@@ -79,7 +79,7 @@
 	<radio>Impostazioni radio</radio>   <!-- English: "Radio Settings" -->
 	<gps>Impostazioni GPS</gps>   <!-- English: "GPS Settings" -->
 	<instrument-settings>Impostazioni strumenti di bordo</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu> --- Guasti ---</failure-submenu>   <!-- English: " __- Failures __-" -->
+	<failure-submenu>--- Guasti ---</failure-submenu>   <!-- English: " __- Failures __-" -->
 	<random-failures>Guasti casuali</random-failures>   <!-- English: "Random Failures" -->
 	<system-failures>Guasti di sistema</system-failures>   <!-- English: "System Failures" -->
 	<instrument-failures>Guasti degli strumenti di bordo</instrument-failures>   <!-- English: "Instrument Failures" -->

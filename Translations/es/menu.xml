@@ -35,7 +35,7 @@
 	<!-- View menu -->
 	<view>Vista</view>   <!-- English: "View" -->
 	<toggle-fullscreen>Pantalla completa</toggle-fullscreen>   <!-- English: "Toggle Fullscreen" -->
-	<rendering-options>Opciones renderizado</rendering-options>   <!-- English: "Rendering Options" -->
+	<rendering-options>Opciones de renderizado</rendering-options>   <!-- English: "Rendering Options" -->
 	<view-options>Opciones de vistas</view-options>   <!-- English: "View Options" -->
 	<cockpit-view-options>Opciones de vista de cabina</cockpit-view-options>   <!-- English: "Cockpit View Options" -->
 	<adjust-lod>Nivel de detalle</adjust-lod>   <!-- English: "Adjust LOD Ranges" -->

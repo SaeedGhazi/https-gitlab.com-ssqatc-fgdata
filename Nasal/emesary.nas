@@ -1,4 +1,4 @@
- #---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
  #
  #	Title                : EMESARY inter-object communication
  #
@@ -10,7 +10,7 @@
  #	                     : To send a message use a Transmitter with an object. That's all there is to it.
  #  
  #  References           : http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
-#                        : http://www.chateau-logic.com/content/class-based-inter-object-communication
+ #                       : http://www.chateau-logic.com/content/class-based-inter-object-communication
  #                       : http://chateau-logic.com/content/emesary-efficient-inter-object-communication-using-interfaces-and-inheritance
  #                       : http://chateau-logic.com/content/c-wpf-application-plumbing-using-emesary
  #
@@ -162,9 +162,10 @@ var Transmitter =
 #              or ATC acknowledgements that all need to be transmitted
 # The IsDistinct is important for any messages that are bridged over MP as
 # only the most recently sent distinct message will be transmitted over MP
+var NotificationAutoTypeId = 1;
 var Notification =
 {
-    new: func(_type, _ident)
+    new: func(_type, _ident, _typeid=0)
     {
         var new_class = { parents: [Notification]};
         new_class.Ident = _ident;
@@ -172,6 +173,12 @@ var Notification =
         new_class.IsDistinct = 1;
         new_class.FromIncomingBridge = 0;
         new_class.Callsign = nil;
+        if (_typeid == 0)
+        {
+            _typeid = NotificationAutoTypeId;
+            NotificationAutoTypeId = NotificationAutoTypeId + 1;
+        }
+        new_class.TypeId = _typeid;
         return new_class;
     },
 };
@@ -215,64 +222,74 @@ var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
 # This is basically a base64 like encode except we just use alphanumerics which gives us a base62 encode.
 var BinaryAsciiTransfer = 
 {
-    alphabet : "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    encodeInt : func(num)
+# alphabet : "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    alphabet : chr(1)~chr(2)~chr(3)~chr(4)~chr(5)~chr(6)~chr(7)~chr(8)~chr(9)~chr(10)~chr(11)~chr(12)~chr(13)
+               ~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)
+               ~chr(26)~chr(27)~chr(28)~chr(29)~chr(30)~chr(31)~chr(34)
+               ~"%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
+               ~chr(128)~chr(129)~chr(130)~chr(131)~chr(132)~chr(133)~chr(134)~chr(135)~chr(136)~chr(137)~chr(138)
+               ~chr(139)~chr(140)~chr(141)~chr(142)~chr(143)~chr(144)~chr(145)~chr(146)~chr(147)~chr(148)~chr(149)
+               ~chr(150)~chr(151)~chr(152)~chr(153)~chr(154)~chr(155)~chr(156)~chr(157)~chr(158)~chr(159)~chr(160)
+               ~chr(161)~chr(162)~chr(163)~chr(164)~chr(165)~chr(166)~chr(167)~chr(168)~chr(169)~chr(170)~chr(171)
+               ~chr(172)~chr(173)~chr(174)~chr(175)~chr(176)~chr(177)~chr(178)~chr(179)~chr(180)~chr(181)~chr(182)
+               ~chr(183)~chr(184)~chr(185)~chr(186)~chr(187)~chr(188)~chr(189)~chr(190)~chr(191)~chr(192)~chr(193)
+               ~chr(194)~chr(195)~chr(196)~chr(197)~chr(198)~chr(199)~chr(200)~chr(201)~chr(202)~chr(203)~chr(204)
+               ~chr(205)~chr(206)~chr(207)~chr(208)~chr(209)~chr(210)~chr(211)~chr(212)~chr(213)~chr(214)~chr(215)
+               ~chr(216)~chr(217)~chr(218)~chr(219)~chr(220)~chr(221)~chr(222)~chr(223)~chr(224)~chr(225)~chr(226)
+               ~chr(227)~chr(228)~chr(229)~chr(230)~chr(231)~chr(232)~chr(233)~chr(234)~chr(235)~chr(236)~chr(237)
+               ~chr(238)~chr(239)~chr(240)~chr(241)~chr(242)~chr(243)~chr(244)~chr(245)~chr(246)~chr(247)~chr(248)
+               ~chr(249)~chr(250)~chr(251)~chr(252)~chr(253)~chr(254)~chr(255),
+    _base: 248,
+    spaces: "                                  ",
+    empty_encoding: chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1),
+    encodeInt : func(num,length)
     {
         if (num == 0)
-            return substr(BinaryAsciiTransfer.alphabet,0,1);
+            return substr(BinaryAsciiTransfer.empty_encoding,0,length);
         
         var arr="";
-        var _base = size(BinaryAsciiTransfer.alphabet);
-        while(num > 0)
-        {
-            var rem = math.mod(num,_base);
-            num = int(num / _base);
+        while (num > 0 and length > 0) {
+            var num0 = num;
+            num = (int)(num / BinaryAsciiTransfer._base);
+            rem = num0-(num*BinaryAsciiTransfer._base);
             arr =substr(BinaryAsciiTransfer.alphabet, rem,1) ~ arr;
+            length -= 1;
         }
+        if (length>0)
+            arr = substr(BinaryAsciiTransfer.spaces,0,length)~arr;
         return arr;
     },
-    decodeInt : func(v)
+    retval : {value:0, pos:0},
+    decodeInt : func(str, length, pos)
     {
-        var _base = size(BinaryAsciiTransfer.alphabet);
-        var power = size(v) - 1;
-        var num = 0;
-
-        var idx = 0;
-        for(var idx=0; idx < size(v); idx += 1)
-        {
-            var c = substr(v,idx,1);
-            var cc = find(c,BinaryAsciiTransfer.alphabet);
-            if (cc < 0)
-                return nil;
-            num += int(cc * math.exp(math.ln(_base) * power));
-          
-            power -= 1;
+        var power = length-1;
+        BinaryAsciiTransfer.retval.value = 0;
+        BinaryAsciiTransfer.retval.pos = pos;
+        while (length > 0 and power > 0) {
+            var c = substr(str,BinaryAsciiTransfer.retval.pos,1);
+            if (c != " ") break;
+            power = power -1;
+            length = length-1;
+            BinaryAsciiTransfer.retval.pos = BinaryAsciiTransfer.retval.pos + 1;
         }
-        return num;
+        while (length >= 0 and power >= 0) {
+            var c = substr(str,BinaryAsciiTransfer.retval.pos,1);
+            # spaces are used as padding so ignore them.
+            if (c != " ") {
+                var cc = find(c,BinaryAsciiTransfer.alphabet);
+                if (cc < 0)
+                  {
+                      print("Emesary: BinaryAsciiTransfer.decodeInt: Bad encoding ");
+                      return BinaryAsciiTransfer.retval;
+                  }
+               BinaryAsciiTransfer.retval.value += int(cc * math.exp(math.ln(BinaryAsciiTransfer._base) * power));
+                power = power - 1;
+            }
+            length = length-1;
+            BinaryAsciiTransfer.retval.pos = BinaryAsciiTransfer.retval.pos + 1;
+        }
+        return BinaryAsciiTransfer.retval;
     }
-};
-
-var TransferCoord = 
-{
-# 28 bits = 268435456 (268 435 456)
-# to transfer lat lon (360 degree range) 268435456/360=745654
-# we could use different factors for lat lon due to the differing range, however
-# this will be fine.
- encode : func(v)
- {
-     return BinaryAsciiTransfer.encodeInt( (v.lat()+90)*745654) ~ "." ~
-       BinaryAsciiTransfer.encodeInt((v.lon()+180)*745654) ~ "." ~
-         BinaryAsciiTransfer.encodeInt((v.alt()+1400)*100);
- }
- ,
- decode : func(v)
- {
-     var parts = split(".", v);
-     var lat = (BinaryAsciiTransfer.decodeInt(parts[0]) / 745654)-90;
-     var lon = (BinaryAsciiTransfer.decodeInt(parts[1]) / 745654)-180;
-     var alt = (BinaryAsciiTransfer.decodeInt(parts[2]) / 100)-1400;
-     return geo.Coord.new().set_latlon(lat, lon).set_alt(alt);
- }
 };
 
 var TransferString = 
@@ -288,10 +305,12 @@ var TransferString =
     },
     encode : func(v)
     {
+        if (v==nil)
+          return "0";
         var l = size(v);
         if (l > 16)
             l = 16;
-        var rv = BinaryAsciiTransfer.encodeInt(l);
+        var rv = BinaryAsciiTransfer.encodeInt(l,1);
 
         for(var ii = 0; ii < l; ii = ii + 1)
         {
@@ -301,11 +320,71 @@ var TransferString =
         }
         return rv;
     },
-    decode : func(v)
+    decode : func(v,pos)
     {
-        var l = BinaryAsciiTransfer.decodeInt(v);
-        var rv = substr(v,1,l-1);
-        return rv;
+        var dv = BinaryAsciiTransfer.decodeInt(v,1,pos);
+        var length = dv.value;
+        var rv = substr(v,dv.pos,length);
+        dv.pos = dv.pos + length;
+        dv.value = rv;
+        return dv;
+    }
+};
+
+#
+# encode an int into a specified number of characters.
+var TransferInt = 
+{
+    encode : func(v, length)
+    {
+        return BinaryAsciiTransfer.encodeInt(v,length);
+    },
+    decode : func(v, length, pos)
+    {
+        return BinaryAsciiTransfer.decodeInt(v,length,pos);
+    }
+};
+
+var TransferFixedDouble = 
+{
+    po2: [1.0,124.0,30752.0,7626496.0,1891371008.0,469060009984.0,116326882476032.0,28849066854055936.0], # needs to match powers of BinaryAsciiTransfer._base
+
+    encode : func(v, length, factor)
+    {
+        var scale = int(me.po2[length] / factor);
+        var v = int(v * factor); 
+        if (v < -scale) v = -scale;
+        else if (v > scale) v = scale;
+        return BinaryAsciiTransfer.encodeInt(int(v), length);
+    },
+    decode : func(v, length, factor, pos)
+    {
+       var scale = int(me.po2[length] / factor);
+        var dv = BinaryAsciiTransfer.decodeInt(v, length, pos);
+        dv.value = (int(dv.value)/factor);
+        return dv;
+    }
+};
+
+var TransferNorm = 
+{
+    powers: [1,10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, 10000000.0, 100000000.0, 1000000000.0, 10000000000.0, 100000000000.0],
+    po2: [1.0,123.0,30751.0,7626495.0,1891371007,469060009983,116326882476031,28849066854055935], # needs to match powers of BinaryAsciiTransfer._base
+
+    encode : func(v, length)
+    {
+        v = v + 1;
+        if(v>2)
+            v=2;
+        else if (v < 0) 
+            v=0;
+        return BinaryAsciiTransfer.encodeInt(int(v * me.po2[length]),length);
+    },
+    decode : func(v, length, pos)
+    {
+        dv = BinaryAsciiTransfer.decodeInt(v, length,pos);
+        dv.value = (dv.value/me.po2[length]) - 1;
+        return dv;
     }
 };
 
@@ -313,34 +392,43 @@ var TransferByte =
 {
     encode : func(v)
     {
-        return BinaryAsciiTransfer.encodeInt(v);
+        return BinaryAsciiTransfer.encodeInt(v,1);
     },
-    decode : func(v)
+    decode : func(v, pos)
     {
-        return BinaryAsciiTransfer.decodeInt(v);
+        return BinaryAsciiTransfer.decodeInt(v, 1,pos);
     }
 };
 
-var TransferInt = 
+var TransferCoord = 
 {
+# 28 bits = 268435456 (268 435 456)
+# to transfer lat lon (360 degree range) 268435456/360=745654
+# we could use different factors for lat lon due to the differing range, however
+# this will be fine.
+# 1 degree = 110574 meters;
     encode : func(v)
     {
-        return BinaryAsciiTransfer.encodeInt(v);
+        return  BinaryAsciiTransfer.encodeInt((v.lat()+90)*745654,5)
+        ~ BinaryAsciiTransfer.encodeInt((v.lon()+180)*745654,5) 
+        ~ TransferInt.encode(v.alt(), 3);
     },
-    decode : func(v)
+    decode : func(v,pos)
     {
-        return BinaryAsciiTransfer.decodeInt(v);
-    }
-};
+        var dv = BinaryAsciiTransfer.decodeInt(v,5,pos); 
+        var lat = (dv.value / 745654)-90;
+        dv = BinaryAsciiTransfer.decodeInt(v,5,dv.pos);
+        var lon = (dv.value / 745654)-180;
+        dv = TransferInt.decode(v, 3, dv.pos); 
+        var alt =dv.value;
 
-var TransferFixedDouble = 
-{
-    encode : func(v, precision=4)
-    {
-        return BinaryAsciiTransfer.encodeInt(v*math.exp(math.ln(10) * precision));
-    },
-    decode : func(v, precision=4)
-    {
-        return BinaryAsciiTransfer.decodeInt(v)/math.exp(math.ln(10) * precision);
+        dv.value = geo.Coord.new().set_latlon(lat, lon).set_alt(alt);
+        return dv;
     }
 };
+#setprop("/sim/startup/terminal-ansi-colors",0);
+#for(i=-1;i<=1;i+=0.1)
+#print ("i ",i, " --> ", (TransferNorm.decode(TransferNorm.encode(i,2), 2,0)).value);
+#debug.dump(TransferNorm.decode(TransferNorm.encode(-1,2), 2,0));
+#debug.dump(TransferNorm.decode(TransferNorm.encode(0,2), 2,0));
+#debug.dump(TransferNorm.decode(TransferNorm.encode(1,2), 2,0));

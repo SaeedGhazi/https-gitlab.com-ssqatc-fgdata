@@ -17,11 +17,144 @@
  #
  #---------------------------------------------------------------------------*/
 
-var GeoEventNotification = 
+#
+# Ideally for notifications bridged over MP the message ID should be system unique.
+# with that in mind 0-16 are reserved for model use; and may well be marked as not bridgeable
+# however the most important thing is that as these notifications ID's are used the
+# wiki page  http://wiki.flightgear.org/Emesary_Notifications
+var PropertySyncNotificationBase_Id = 16;
+var AircraftControlNotification_Id = 17;
+var GeoEventNotification_Id = 18;
+
+
+#
+# PropertySyncNotificationBase is a wrapper class for allow properties to be synchronized between
+# modules. This can replace (or augment) the properties that are normally transmitted by multiplayer
+# It is reasonably efficient with the MP2017.2
+#
+# Usage example - this can all go into one Nasal module somewhere.
+#-----------
+# var PropertySyncNotification = 
+# {
+#    new: func(_ident="none", _name="", _kind=0, _secondary_kind=0)
+#    {
+#        var new_class = PropertySyncNotificationBase.new(_ident, _name, _kind, _secondary_kind);
+#
+#        new_class.addIntProperty("consumables/fuel/total-fuel-lbs", 1);
+#        new_class.addIntProperty("controls/fuel/dump-valve", 1);
+#        new_class.addIntProperty("engines/engine[0]/augmentation-burner", 1);
+#        new_class.addIntProperty("engines/engine[0]/n1", 1);
+#        new_class.addIntProperty("engines/engine[0]/n2", 1);
+#        new_class.addNormProperty("surface-positions/wing-pos-norm", 2);
+#        return new_class;
+#    }
+#};
+#
+#var routedNotifications = [notifications.PropertySyncNotification.new(nil), notifications.GeoEventNotification.new(nil)];
+#
+#var bridgedTransmitter = emesary.Transmitter.new("outgoingBridge");
+#var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-14mp",routedNotifications, 19, "", bridgedTransmitter);
+#var incomingBridge = emesary_mp_bridge.IncomingMPBridge.startMPBridge(routedNotifications);
+#var f14_aircraft_notification = notifications.PropertySyncNotification.new("F-14"~getprop("/sim/multiplay/callsign"));
+#-----------
+#
+# That's all that is required to ship properties between multiplayer modules via emesary.
+# set /sim/multiplay/transmit-only-generics to turn off all of the standard properties. this will give a packet
+# size of 280 bytes; leaving lots of space for notifications. The F-14 packet size is around 53 bytes on 2017.2
+# compared to over 1100 bytes with the traditional method.
+#
+# The other advantage with this method of transferring data is that the model is in full control of what is
+# sent, and also when it is sent. This works on a per notification basis so less important properties could be 
+# transmitted on a less frequent schedule; however this will require an instance of the notification for each one.
+#
+# PropertySyncNotificationBase is a shortcut notification; as it doesn't need to received and all
+# of the properties are simply set when the notification is unpacked over MP.
+# So although the notification will be transmitted
+var PropertySyncNotificationBase = 
 {
     new: func(_ident="none", _name="", _kind=0, _secondary_kind=0)
     {
-        var new_class = emesary.Notification.new("GeoEventNotification", _ident);
+        var new_class = emesary.Notification.new("PropertySyncNotification", _ident, PropertySyncNotificationBase_Id);
+
+        new_class.IsDistinct = 1;
+        new_class.Kind = _kind;
+        new_class.Name = _name;
+        new_class.SecondaryKind = _secondary_kind;
+        new_class.Callsign = nil; # populated automatically by the incoming bridge when routed
+        new_class._bridgeProperties = [];
+
+        new_class.addIntProperty = func(variable, property, length)
+        {
+            me[variable] = nil;
+            append(me._bridgeProperties, 
+                   {
+                       getValue:func{return emesary.TransferInt.encode(getprop(property) or 0,length);},
+                       setValue:func(v,bridge,pos){var dv=emesary.TransferInt.decode(v,length,pos);me[variable]=dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
+                   });
+        }
+        new_class.addNormProperty = func(variable, property, length)
+        {
+            me[variable] = nil;
+            append(me._bridgeProperties, 
+                   {
+                       getValue:func{return emesary.TransferNorm.encode(getprop(property) or 0,length);},
+                       setValue:func(v,bridge,pos){var dv=emesary.TransferNorm.decode(v,length,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
+                   });
+        }
+        new_class.bridgeProperties = func()
+        {
+            return me._bridgeProperties;
+        }
+        return new_class;
+    }
+};
+#
+# Transmit a generic control event. 
+# two parameters - the event Id and the event value which is a 4 byte length (+/- 1,891371.000)
+var AircraftControlNotification = 
+{
+    new: func(_ident="none")
+    {
+        var new_class = emesary.Notification.new("AircraftControlNotification", _ident, AircraftControlNotification_Id);
+
+        new_class.IsDistinct = 0;
+        new_class.EventType = 0;
+        new_class.EventValue = 0;
+        new_class.Callsign = nil; # populated automatically by the incoming bridge when routed
+
+        new_class.bridgeProperties = func
+        {
+            return 
+            [ 
+             {
+            getValue:func{return emesary.TransferInt.encode(new_class.EventType,2);},
+            setValue:func(v,bridge,pos){var dv=emesary.TransferInt.decode(v,2,pos);new_class.EventType=dv.value;return dv;}, 
+             },
+             {
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.EventValue,4,1000);},
+            setValue:func(v,bridge,pos){var dv=emesary.TransferFixedDouble.decode(v,4,1000,pos);new_class.EventValue=dv.value;print("dec ",dv.value);return dv;}, 
+             },
+            ];
+        };
+        return new_class;
+    }
+};
+
+#
+#
+# Use to transmit events that happen at a specific place; can be used to make 
+# models that are simulated locally (e.g. tankers) appear on other player's MP sessions.
+var GeoEventNotification = 
+{
+# new:
+# _ident - the identifier for the notification. not bridged.
+# _name - name of the notification, bridged.
+# _kind - created, moved, deleted (see below). This is the activity that the  notification represents, called kind to avoid confusion with notification type.
+# _secondary_kind - This is the entity on which the activity is being performed. See below for predefined types.
+##
+    new: func(_ident="none", _name="", _kind=0, _secondary_kind=0)
+    {
+        var new_class = emesary.Notification.new("GeoEventNotification", _ident, GeoEventNotification_Id);
 
         new_class.Kind = _kind;
         new_class.Name = _name;
@@ -41,31 +174,31 @@ var GeoEventNotification =
             [ 
              {
             getValue:func{return emesary.TransferCoord.encode(new_class.Position);},
-            setValue:func(v){new_class.Position=emesary.TransferCoord.decode(v);}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferCoord.decode(v, pos);new_class.Position=dv.value;return dv}, 
              },
              {
             getValue:func{return emesary.TransferString.encode(new_class.Name);},
-            setValue:func(v){new_class.Name=emesary.TransferString.decode(v);}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferString.decode(v,pos);new_class.Name=dv.value;return dv}, 
              },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.Kind);},
-            setValue:func(v){new_class.Kind=emesary.TransferByte.decode(v);}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Kind=dv.value;return dv}, 
              },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.SecondaryKind);},
-            setValue:func(v){new_class.SecondaryKind=emesary.TransferByte.decode(v);}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.SecondaryKind=dv.value;return dv}, 
              },
              {
-            getValue:func{return emesary.TransferFixedDouble.encode(new_class.u_fps);},
-            setValue:func(v){new_class.u_fps=emesary.TransferFixedDouble.decode(v);}, 
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.u_fps,2,10);},
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.u_fps=dv.value;return dv}, 
              },
              {
-            getValue:func{return emesary.TransferFixedDouble.encode(new_class.v_fps);},
-            setValue:func(v){new_class.v_fps=emesary.TransferFixedDouble.decode(v);}, 
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.v_fps,2,10);},
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.v_fps=dv.value;return dv}, 
              },
              {
-            getValue:func{return emesary.TransferFixedDouble.encode(new_class.w_fps);},
-            setValue:func(v){new_class.w_fps=emesary.TransferFixedDouble.decode(v);}, 
+            getValue:func{return emesary.TransferFixedDouble.encode(new_class.w_fps,2,10);},
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.w_fps=dv.value;return dv}, 
              },
             ];
           };

@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <trafficlist>
+
+<!-- Author Ian Tolosa - Weekly timetable of 12 SEP 2016 - PAX & Cargo -->
+
   <aircraft>
     <model>Aircraft/A320/A320-Asiana.xml</model>
     <livery>AAR</livery>
@@ -1037,7 +1040,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1051,7 +1054,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1065,7 +1068,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1079,7 +1082,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1093,7 +1096,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1107,7 +1110,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1121,7 +1124,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1135,7 +1138,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1149,7 +1152,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1163,7 +1166,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>
@@ -1177,7 +1180,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/777-200-Asiana.xml</model>
+    <model>Aircraft/777/77L-Asiana.xml</model>
     <livery>AAR</livery>
     <airline>AAR</airline>
     <home-port>RKSI</home-port>

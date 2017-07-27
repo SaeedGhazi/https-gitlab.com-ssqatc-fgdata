@@ -256,6 +256,7 @@
       <match>CR9</match>
       <match>CRJ-</match>
       <alias>CRJ</alias>
+	  <alias>CRK</alias>
     </alias>
     <alias>
       <match>AT4</match>

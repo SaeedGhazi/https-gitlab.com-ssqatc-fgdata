@@ -119,7 +119,7 @@
 
 	<!-- Help menu -->
 	<help>Help</help>
-	<help-browser>Help  (opens in browser)</help-browser>
+	<help-browser>Help (opens in browser)</help-browser>
 	<doc-browser>Documentation Browser</doc-browser>
 	<aircraft-keys>Aircraft Help</aircraft-keys>
 	<aircraft-checklists>Aircraft Checklists</aircraft-checklists>

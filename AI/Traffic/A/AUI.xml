@@ -298,7 +298,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-UkraineIntl.xml</model>
+    <model>Aircraft/739/73J-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -312,7 +312,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-UkraineIntl.xml</model>
+    <model>Aircraft/739/73J-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -326,7 +326,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-UkraineIntl.xml</model>
+    <model>Aircraft/739/73J-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>
@@ -340,7 +340,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-UkraineIntl.xml</model>
+    <model>Aircraft/739/73J-UkraineIntl.xml</model>
     <livery>AUI</livery>
     <airline>AUI</airline>
     <home-port>UKBB</home-port>

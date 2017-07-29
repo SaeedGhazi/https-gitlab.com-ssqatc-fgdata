@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
-<!-- Author Marcin Luzniar - Updated MAR 2016 - Includes PAX & Cargo - 738 mapped to Default -->
+<!-- Author Marcin Luzniar - Updated MAR 2016 - Includes PAX & Cargo - 738 mapped to 739ER -->
 
 
 <trafficlist>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -19,7 +19,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -33,7 +33,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -47,7 +47,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -61,7 +61,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -75,7 +75,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -89,7 +89,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -103,7 +103,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -117,7 +117,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -131,7 +131,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -145,7 +145,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -159,7 +159,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -173,7 +173,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -187,7 +187,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -201,7 +201,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -215,7 +215,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -229,7 +229,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -243,7 +243,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -257,7 +257,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -271,7 +271,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -285,7 +285,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -299,7 +299,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -313,7 +313,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -327,7 +327,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>
@@ -341,7 +341,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-ELAL.xml</model>
+    <model>Aircraft/739/73J-ELAL.xml</model>
     <livery>ELY</livery>
     <airline>ELY</airline>
     <home-port>LLBG</home-port>

@@ -14,6 +14,7 @@ var Node = {
     getParent        : func wrap(_getParent(me._g, arg)),
     getChild         : func wrap(_getChild(me._g, arg)),
     getChildren      : func wrap(_getChildren(me._g, arg)),
+    setChildren      : func wrap(_setChildren(me._g, arg)),
     addChild         : func wrap(_addChild(me._g, arg)),
     addChildren      : func wrap(_addChildren(me._g, arg)),
     removeChild      : func wrap(_removeChild(me._g, arg)),
@@ -28,6 +29,7 @@ var Node = {
     setAttribute   : func _setAttribute(me._g, arg),
     getValue       : func _getValue(me._g, arg),
     setValue       : func _setValue(me._g, arg),
+    setValues      : func _setValues(me._g, arg),
     setIntValue    : func _setIntValue(me._g, arg),
     setBoolValue   : func _setBoolValue(me._g, arg),
     setDoubleValue : func _setDoubleValue(me._g, arg),
@@ -65,38 +67,6 @@ Node.new = func(values = nil) {
     if(typeof(values) == "hash")
         result.setValues(values);
     return result;
-}
-
-##
-# Useful utility.  Sets a whole property tree from a Nasal hash
-# object, such that scalars become leafs in the property tree, hashes
-# become named subnodes, and vectors become indexed subnodes.  This
-# works recursively, so you can define whole property trees with
-# syntax like:
-#
-# dialog = {
-#   name : "exit", width : 180, height : 100, modal : 0,
-#   text : { x : 10, y : 70, label : "Hello World!" } };
-#
-Node.setValues = func(val) {
-    foreach(var k; keys(val)) { me._setChildren(k, val[k]); }
-}
-
-##
-# Private function to do the work of setValues().
-# The first argument is a child name, the second a nasal scalar,
-# vector, or hash.
-#
-Node._setChildren = func(name, val) {
-    var subnode = me.getNode(name, 1);
-    if(typeof(val) == "scalar") { subnode.setValue(val); }
-    elsif(typeof(val) == "hash") { subnode.setValues(val); }
-    elsif(typeof(val) == "vector") {
-        for(var i=0; i<size(val); i+=1) {
-            var iname = name ~ "[" ~ i ~ "]";
-            me._setChildren(iname, val[i]);
-        }
-    }
 }
 
 ##
@@ -376,4 +346,3 @@ var runBinding = func(node, module = nil) {
     var cmd = node.getNode("command", 1).getValue() or "null";
     condition(node.getNode("condition")) ? fgcommand(cmd, node) : 0;
 }
-

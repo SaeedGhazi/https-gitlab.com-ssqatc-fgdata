@@ -201,6 +201,7 @@
     </alias>
     <alias>
       <match>F70</match>
+	  <match>100</match>
       <alias>F100</alias>
     </alias>
     <alias>

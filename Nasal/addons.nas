@@ -13,8 +13,10 @@
 # this script loads /foo/bar/baz/main.nas into namespace __addon[0]__
 # this script calls main("/foo/bar/baz") in /foo/bar/baz/main.nas0
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-    foreach (var addon; props.globals.getNode("/addons").getChildren("addon")) {
+_setlistener("/sim/signals/fdm-initialized", func {
+    var addons = props.globals.getNode("/addons");
+    if( addons == nil ) return;
+    foreach (var addon; addons.getChildren("addon")) {
       var main_nas = addon.getNode("path",1).getValue() ~ "/main.nas";
       var namespace = "__"  ~ addon.getName() ~ "[" ~ addon.getIndex() ~ "]__";
       printlog("alert","Initializing addon from " ~ main_nas ~ " in " ~ namespace );

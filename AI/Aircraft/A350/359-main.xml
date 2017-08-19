@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Airbus A350-900</description>
+  <author>Ian(Yves) Tolosa. August 2017</author>
+  <path>Models/359.ac</path>
+  
+  <offsets>
+	<pitch-deg>-0.5</pitch-deg>   
+  </offsets>
+  
+   
+    <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  
+    <nasal>
+  <load>
+   var model = cmdarg();
+   model.getNode("door[0]/position-x-m", 1).setValue(-26.9748);
+   model.getNode("door[0]/position-y-m", 1).setValue(2.55192);
+   model.getNode("door[0]/position-z-m", 1).setValue(4.97698);
+   model.getNode("door[0]/jetway-hood-deg", 1).setValue(12.0);
+  </load>
+  
+   
+ </nasal>
+   
+</PropertyList>

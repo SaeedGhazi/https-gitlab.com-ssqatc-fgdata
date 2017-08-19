@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- Author Ian Tolosa - Timetable for week of 13MAY2016 - Includes PAX & Cargo -->
+<!-- Author Ian Tolosa - Weekly Timetable of 13MAY2016 - Includes PAX & Cargo Flights -->
 
 <trafficlist>
   <aircraft>
@@ -1026,7 +1026,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1040,7 +1040,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1054,7 +1054,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1068,7 +1068,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1082,7 +1082,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1096,7 +1096,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1110,7 +1110,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1124,7 +1124,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A346/A346-QatarAirways.xml</model>
+    <model>Aircraft/A350/359-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>

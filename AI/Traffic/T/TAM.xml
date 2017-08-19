@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- Author Ian Tolosa - Weekly Timetable of 10 JUL 2017 - Passenger only - A350 replaced by B773 -->
+<!-- Author Ian Tolosa - Weekly Timetable of 10 JUL 2017 - Passenger only -->
 
 <trafficlist>
   <aircraft>
@@ -1656,7 +1656,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/77W-TAM.xml</model>
+    <model>Aircraft/A350/359-TAM.xml</model>
     <livery>TAM</livery>
     <airline>TAM</airline>
     <home-port>SBGR</home-port>
@@ -1670,7 +1670,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/77W-TAM.xml</model>
+    <model>Aircraft/A350/359-TAM.xml</model>
     <livery>TAM</livery>
     <airline>TAM</airline>
     <home-port>SBGR</home-port>
@@ -1684,7 +1684,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/777/77W-TAM.xml</model>
+    <model>Aircraft/A350/359-TAM.xml</model>
     <livery>TAM</livery>
     <airline>TAM</airline>
     <home-port>SBGR</home-port>
@@ -1901,7 +1901,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUA</registration>
@@ -1915,7 +1915,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUB</registration>
@@ -1929,7 +1929,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUC</registration>
@@ -1943,7 +1943,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUD</registration>
@@ -1957,7 +1957,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUE</registration>
@@ -1971,7 +1971,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUF</registration>
@@ -1985,7 +1985,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUG</registration>
@@ -1999,7 +1999,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUH</registration>
@@ -2013,7 +2013,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUI</registration>
@@ -2027,7 +2027,7 @@
     <required-aircraft>TAM-77W</required-aircraft>
     <actype>77W</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>32</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>PT-MUJ</registration>

@@ -137,7 +137,8 @@
     <alias>
       <!-- match any 76x type -->
       <match>76</match>
-      <match>75</match> <!-- and any 75x for the moment -->
+      <match>75</match>
+      <!-- and any 75x for the moment -->
       <match>Boeing_767-</match>
       <alias>767</alias>
     </alias>
@@ -160,12 +161,20 @@
       <match>300-</match>
       <match>306</match>
       <match>310</match>
-      <match>A310</match> <!-- for the moment -->
+      <match>A310</match>
+      <!-- for the moment -->
       <match>Airbus_A310</match>
       <alias>A300</alias>
     </alias>
     <alias>
-      <match>34</match> <!-- any A34x prefix -->
+      <match>A359</match>
+      <match>A350-900</match>
+      <match>359</match>
+      <alias>A350</alias>
+    </alias>
+    <alias>
+      <match>34</match>
+      <!-- any A34x prefix -->
       <match>A340</match>
       <alias>A340</alias>
     </alias>
@@ -201,7 +210,7 @@
     </alias>
     <alias>
       <match>F70</match>
-	  <match>100</match>
+      <match>100</match>
       <alias>F100</alias>
     </alias>
     <alias>
@@ -221,7 +230,8 @@
       <alias>DHC4</alias>
     </alias>
     <alias>
-      <match>D95</match> <!-- Google suggests this means a DC9-50 -->
+      <match>D95</match>
+      <!-- Google suggests this means a DC9-50 -->
       <match>M80</match>
       <match>M81</match>
       <match>M82</match>
@@ -257,7 +267,7 @@
       <match>CR9</match>
       <match>CRJ-</match>
       <alias>CRJ</alias>
-	  <alias>CRK</alias>
+      <alias>CRK</alias>
     </alias>
     <alias>
       <match>AT4</match>
@@ -266,17 +276,16 @@
       <match>AT8-</match>
       <alias>ATR</alias>
     </alias>
-
     <!-- catch all for various light aicraft in the traffic DB -->
     <alias>
-      <match>CNA</match> <!-- generic Cessna apparently -->
+      <match>CNA</match>
+      <!-- generic Cessna apparently -->
       <match>c172</match>
       <match>c182</match>
       <match>pa28</match>
       <match>Cub</match>
       <alias>light</alias>
     </alias>
-
     <aircraft>
       <type>747-400</type>
       <base>heavy_jet</base>
@@ -290,6 +299,17 @@
       <rotate-speed-kts>160.0</rotate-speed-kts>
       <takeoff-speed-kts>170.0</takeoff-speed-kts>
       <cruise-speed-kts>490.0</cruise-speed-kts>
+    </aircraft>
+    <aircraft>
+      <type>A350</type>
+      <base>heavy_jet</base>
+      <!-- Data from https://www.skybrary.aero/index.php/A359 -->
+      <rotate-speed-kts>140.0</rotate-speed-kts>
+      <takeoff-speed-kts>150.0</takeoff-speed-kts>
+      <cruise-speed-kts>487.0</cruise-speed-kts>
+      <decent-speed-kts>250.0</decent-speed-kts>
+      <approach-speed-kts>140.0</approach-speed-kts>
+      <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
     <aircraft>
       <type>A340</type>
@@ -419,15 +439,15 @@
     <aircraft>
       <type>ATR</type>
       <base>turboprop_transport</base>
-	  <rotate-speed-kts>110.0</rotate-speed-kts>
-	  <takeoff-speed-kts>115.0</takeoff-speed-kts>
-	  <climbspeed-kts>170.0</climbspeed-kts>
-	  <cruise-speed-kts>275.0</cruise-speed-kts>
-	  <decent-speed-kts>200.0</decent-speed-kts>
-	  <approach-speed-kts>145.0</approach-speed-kts>
-	  <touchdown-speed-kts>115.0</touchdown-speed-kts>
-	  <taxi-speed-kts>20.0</taxi-speed-kts>
-	</aircraft>
+      <rotate-speed-kts>110.0</rotate-speed-kts>
+      <takeoff-speed-kts>115.0</takeoff-speed-kts>
+      <climbspeed-kts>170.0</climbspeed-kts>
+      <cruise-speed-kts>275.0</cruise-speed-kts>
+      <decent-speed-kts>200.0</decent-speed-kts>
+      <approach-speed-kts>145.0</approach-speed-kts>
+      <touchdown-speed-kts>115.0</touchdown-speed-kts>
+      <taxi-speed-kts>20.0</taxi-speed-kts>
+    </aircraft>
     <aircraft>
       <type>B1900</type>
       <base>turboprop_transport</base>

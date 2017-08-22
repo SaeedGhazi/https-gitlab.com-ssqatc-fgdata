@@ -2406,6 +2406,18 @@ if (coverage_above2 > coverage_above)
 
 if (coverage_above > 6) {cumulus_flag = 0;} # no Cumulus with strong layer above
 
+# check whether we have a thunderstorm reported
+
+if ((getprop("/environment/metar/weather/description") == "TS") or (getprop("/environment/metar/weather[1]/description") == "TS") or (getprop("/environment/metar/weather[2]/description") == "TS"))
+	{
+	setprop(lw~"METAR/thunderstorm-flag", 1);
+	}
+else
+	{
+	setprop(lw~"METAR/thunderstorm-flag", 0);
+	}
+
+
 # never do Cumulus when there's a thunderstorm
 if (getprop(lw~"METAR/thunderstorm-flag") ==1) {cumulus_flag = 0; thunderstorm_flag = 1;} 
 

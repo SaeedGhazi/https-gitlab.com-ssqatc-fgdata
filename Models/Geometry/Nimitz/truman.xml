@@ -3,9 +3,11 @@
 The Truman model is based on the work of user karla, who
 gave permission to use it for FG.
 
-Additional modelling, animations , Tower View control, single animation of JBD depending
-on engaged cat, etc.
-added by Michael Habarta
+Additional modelling, animations etc.
+added by Michael Habarta 2017
+
+Streamlined for inclusion in FG 
+by Thorsten Renk 2017
 
 -->
 <PropertyList>
@@ -16,8 +18,111 @@ added by Michael Habarta
 
   <nasal>
     <load><![CDATA[
+
       var carrier = "Truman";
       var pathc = cmdarg().getPath();
+      var self = cmdarg();
+
+      var elevator_transit_time = 30.0;
+      var door_transit_time = 60.0;
+      var rail_transit_time = 4.0;
+
+      # search for the next free slot in the AI menu and register the Truman control menu
+
+      #var menu_root_nd = props.globals.getNode("/sim/menubar/default/menu[6]",1);
+      #for (var i = 0; 1; i += 1)
+      #		if (menu_root_nd.getChild("item", i, 0) == nil)
+      #			break;
+      #var menu_nd = menu_root_nd.getChild("item", i, 1);
+
+      #menu_nd.getNode("enabled", 1).setBoolValue("true");
+      #menu_nd.getNode("name", 1).setValue("Truman");
+      #menu_nd.getNode("binding", 1).getNode("command", 1).setValue("dialog-show");
+      #menu_nd.getNode("binding", 1).getNode("dialog-name", 1).setValue("TrumanControls");
+      #fgcommand("gui-redraw");
+
+      # set up the animation control properties
+
+      setprop("/controls/truman/crew", 0);
+      setprop("/controls/truman/deck-park",0);
+
+
+
+      # init flight-operations flag (whip antenna animation)
+      setprop("/controls/truman/flight-operations",0);
+
+      # init ai elevators
+      setprop("/controls/truman/elevator[0]/state",1);
+      setprop("/controls/truman/elevator[1]/state",0);
+      setprop("/controls/truman/elevator[2]/state",0);
+      setprop("/controls/truman/elevator[3]/state",1);
+
+
+      # init elevator doors
+      setprop("/controls/truman/door[0]/state",0);
+      setprop("/controls/truman/door[1]/state",0);
+      setprop("/controls/truman/door[2]/state",0);
+      setprop("/controls/truman/door[3]/state",0);
+
+      ###########
+      # elevators
+
+      var elevator1 = aircraft.door.new(pathc~"/surface-positions/elevator[0]", elevator_transit_time, 1);
+      var elevator2 = aircraft.door.new(pathc~"/surface-positions/elevator[1]", elevator_transit_time, 0);
+      var elevator3 = aircraft.door.new(pathc~"/surface-positions/elevator[2]", elevator_transit_time, 0);
+      var elevator4 = aircraft.door.new(pathc~"/surface-positions/elevator[3]", elevator_transit_time, 1);
+
+      var elevator_array = [elevator1, elevator2, elevator3, elevator4];
+
+
+      ################
+      # elevator wires
+
+
+      setprop(pathc~"/surface-positions/elevator[0]/wire-norm", 0);
+      setprop(pathc~"/surface-positions/elevator[1]/wire-norm", 0);
+      setprop(pathc~"/surface-positions/elevator[2]/wire-norm", 0);
+      setprop(pathc~"/surface-positions/elevator[3]/wire-norm", 0);
+
+      ################
+      # elevator rails
+
+      var elevatorr1 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[0]", rail_transit_time, getprop("/controls/truman/elevator[0]/state"));
+      var elevatorr2 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[1]", rail_transit_time, getprop("/controls/truman/elevator[1]/state"));
+      var elevatorr3 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[2]", rail_transit_time, getprop("/controls/truman/elevator[2]/state"));
+      var elevatorr4 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[3]", rail_transit_time, getprop("/controls/truman/elevator[3]/state"));
+
+	var rail_upper_array = [elevatorr1, elevatorr2, elevatorr3, elevatorr4];
+
+
+      #####################
+      # elevator rails door
+
+      var elevatorrd1 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[0]", rail_transit_time, getprop("/controls/truman/elevator[0]/state"));
+      var elevatorrd2 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[1]", rail_transit_time, getprop("/controls/truman/elevator[1]/state"));
+      var elevatorrd3 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[2]", rail_transit_time, getprop("/controls/truman/elevator[2]/state"));
+      var elevatorrd4 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[3]", rail_transit_time, getprop("/controls/truman/elevator[3]/state"));
+
+	var rail_lower_array = [elevatorrd1, elevatorrd2, elevatorrd3, elevatorrd4];
+
+
+      ################
+      # elevator doors
+
+      var door1 = aircraft.door.new(pathc~"/surface-positions/elevator-door[0]", 60, 0);
+      var door2 = aircraft.door.new(pathc~"/surface-positions/elevator-door[1]", 60, 0);
+      var door3 = aircraft.door.new(pathc~"/surface-positions/elevator-door[2]", 60, 0);
+      var door4 = aircraft.door.new(pathc~"/surface-positions/elevator-door[3]", 60, 0);
+
+      var door_array = [door1, door2, door3, door4];
+      
+     
+      ########
+      # whips function
+
+      var whip_antennas = aircraft.door.new(pathc~"/surface-positions/whip-antennas", 6);
+
+
       print("LOAD ",carrier," prop-path: ", pathc);
 
       # set tower/active carrier if
@@ -52,233 +157,6 @@ added by Michael Habarta
       # fixme: not clear how to do ?!
       # on_carr = 1;
 
-      var carr_cnt = AIcarrier.countCarriersReady();
-
-      # find scenario of carrier and get tower offset
-      #
-      # Fixme: this works only if exactly
-      # one carrier of given name is active
-      # in all active scenarios
-      # this restriction makes sense,
-      # but it is not enforced in FG
-      var path = getprop("/sim/fg-root") ~ "/AI";
-      var s = -1;
-      foreach(var file; sort(directory(path), cmp)) {
-        if(size(file) > 4 and substr(file, -4) == ".xml") {
-          var n = io.read_properties(path ~ "/" ~ file);
-          # find carrier scenarios
-          if ( !AIscenario.containsType(n,"carrier") ) {
-            continue;
-          } else {
-            var index = AIscenario.isactive(substr(file,0,size(file)-4));
-            if ( index == -1 ) { continue; }
-            # find carrier in scenario
-            var i = -1;
-            foreach (var c; n.getNode("scenario").getChildren("entry")) {
-              i+=1;
-              if ( c.getValue("name") == carrier ) {
-                s = i;
-                break;
-              }
-            }
-            if ( s > -1 ) {
-              print("carrier: ",carrier," found in scenario: ",substr(file,0,size(file)-4)," at index: ",s);
-              break;
-            }
-          }
-        }
-      }
-      # get tower offset and first park-pos altitude
-      var carr_alt     = n.getNode("scenario/entry[" ~ s ~ "]/parking-pos").getValue("z-offset-m");
-      var tower_diff_x = n.getNode("scenario/entry[" ~ s ~ "]").getValue("tower-x-offset-m");
-      var tower_diff_y = n.getNode("scenario/entry[" ~ s ~ "]").getValue("tower-y-offset-m");
-      var tower_diff_z = n.getNode("scenario/entry[" ~ s ~ "]").getValue("tower-z-offset-m");
-
-      if ( getprop("/sim/presets/parkpos") == "" ) {
-        setprop("/sim/presets/parkpos",n.getNode("scenario/entry/parking-pos").getValue("name"));
-      }
-
-      # save tower offset and park-pos altitude
-      setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/parkpos-alt-m",carr_alt);
-      setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/tower-x-offset-m",tower_diff_x);
-      setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/tower-y-offset-m",tower_diff_y);
-      setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/tower-z-offset-m",tower_diff_z);
-
-      # save catapult positions
-      i = -1;
-      foreach( var c; n.getNode("scenario/entry[" ~ s ~ "]").getChildren("parking-pos") ) {
-        i+=1;
-        var name = c.getValue("name");
-        if ( substr(name,0,4) == "cat-" ) {
-          var cat_offset_x = c.getValue("x-offset-m");
-          var cat_offset_y = c.getValue("y-offset-m");
-          var cat_offset_z = c.getValue("z-offset-m");
-
-          setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/parking-pos[" ~ i ~ "]/name",name);
-          setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/parking-pos[" ~ i ~ "]/x-offset-m",cat_offset_x);
-          setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/parking-pos[" ~ i ~ "]/y-offset-m",cat_offset_y);
-          setprop("/ai/models/carrier[" ~ ci ~ "]/surface-positions/parking-pos[" ~ i ~ "]/z-offset-m",cat_offset_z);
-        }
-      }
-
-      var self = cmdarg();
-      var control_node = self.getNode("controls/turn-to-base-course", 1);
-      var turn_old = 1;
-
-      # init flight-operations flag (whip antenna animation)
-      setprop("/ai/models/carrier/controls/flight-operations",0);
-
-      # init ai elevators
-      setprop("ai/models/carrier/controls/elevator[0]/state",1);
-      setprop("ai/models/carrier/controls/elevator[1]/state",0);
-      setprop("ai/models/carrier/controls/elevator[2]/state",0);
-      setprop("ai/models/carrier/controls/elevator[3]/state",1);
-
-      # init ai elevator rails
-      setprop("ai/models/carrier/controls/elevator-rail[0]/state",getprop("ai/models/carrier/controls/elevator[0]/state"));
-      setprop("ai/models/carrier/controls/elevator-rail[1]/state",getprop("ai/models/carrier/controls/elevator[1]/state"));
-      setprop("ai/models/carrier/controls/elevator-rail[2]/state",getprop("ai/models/carrier/controls/elevator[2]/state"));
-      setprop("ai/models/carrier/controls/elevator-rail[3]/state",getprop("ai/models/carrier/controls/elevator[3]/state"));
-
-      # init ai elevator rails door
-      setprop("ai/models/carrier/controls/elevator-rail-door[0]/state",getprop("ai/models/carrier/controls/elevator[0]/state"));
-      setprop("ai/models/carrier/controls/elevator-rail-door[1]/state",getprop("ai/models/carrier/controls/elevator[1]/state"));
-      setprop("ai/models/carrier/controls/elevator-rail-door[2]/state",getprop("ai/models/carrier/controls/elevator[2]/state"));
-      setprop("ai/models/carrier/controls/elevator-rail-door[3]/state",getprop("ai/models/carrier/controls/elevator[3]/state"));
-
-      # init elevator doors
-      setprop("ai/models/carrier/controls/elevator-door[0]/state",0);
-      setprop("ai/models/carrier/controls/elevator-door[1]/state",0);
-      setprop("ai/models/carrier/controls/elevator-door[2]/state",0);
-      setprop("ai/models/carrier/controls/elevator-door[3]/state",0);
-
-      # listeners are set once by first loaded carrier
-      # and removed by last removed carrier
-      # remark: if this is the first carrier it is not ready yet
-      #         so count is still 0 until carrier is fully loaded
-      if ( carr_cnt == 0 ) {
-        # identify which catapult is engaged
-        # whenever "/gear/launchbar/state" is "Engaged"
-        var lblis = setlistener("/gear/launchbar/state", func {
-          if ( getprop("/gear/launchbar/state") == "Engaged" ) {
-            AIcarrier.setCatEngaged();
-          } else {
-            settimer(func { setprop("/sim/presets/cat-engaged",""); },5.0);
-          }
-        },1,0);
-        print("listener for launchbar lock set ...");
-
-        # whenever "/gear/gear/wow" is changed
-        # check and set the active carrier
-        var wowlis = setlistener("/gear/gear/wow", func {
-          AIcarrier.setActiveCarrier();
-        },0,0);
-        print("listener for aircraft on carrier set ...");
-      }
-
-      ########
-      # properties used to handle rendering, lighting and to control the Deck-Park
-      # Due to a change in MPcarrier system ?
-
-      var rembrandt_node   = self.getNode("sim/rendering/rembrandt/enabled", 1);
-      var sunAngleRad_node = self.getNode("sim/time/sun-angle-rad", 1);
-
-      ########
-      # properties to control the E2C
-
-      var gear0_Node = self.getNode("gear/gear[0]/position-norm", 1);
-      gear0_Node.setDoubleValue(1);
-
-      var gear1_Node = self.getNode("gear/gear[1]/position-norm", 1);
-      gear1_Node.setDoubleValue(1);
-
-      var gear2_Node = self.getNode("gear/gear[2]/position-norm", 1);
-      gear2_Node.setDoubleValue(1);
-
-      var compression0_Node = self.getNode("gear/gear[0]/compression-norm", 1);
-      compression0_Node.setDoubleValue(0);
-
-      var compression1_Node = self.getNode("gear/gear[1]/compression-norm", 1);
-      compression1_Node.setDoubleValue(0.9);
-
-      var compression2_Node = self.getNode("gear/gear[2]/compression-norm", 1);
-      compression2_Node.setDoubleValue(0.9);
-
-      var wingfold_Node = self.getNode("surface-positions/wing-fold-pos-norm", 1);
-      wingfold_Node.setDoubleValue(1.0);
-
-      var rpm0_Node = self.getNode("engines/engine[0]/rpm", 1);
-      rpm0_Node.setDoubleValue(1.15);
-
-      var rpm1_Node = self.getNode("engines/engine[1]/rpm", 1);
-      rpm1_Node.setDoubleValue(2.17);
-
-      ###########
-      # elevators
-
-      var elevator1 = aircraft.door.new("/surface-positions/elevator[0]", 15, 1);
-      var elevator2 = aircraft.door.new("/surface-positions/elevator[1]", 15, 0);
-      var elevator3 = aircraft.door.new("/surface-positions/elevator[2]", 15, 0);
-      var elevator4 = aircraft.door.new("/surface-positions/elevator[3]", 15, 1);
-
-      var elev1_node = self.getNode("surface-positions/elevator[0]/position-norm", 1);
-      var elev2_node = self.getNode("surface-positions/elevator[1]/position-norm", 1);
-      var elev3_node = self.getNode("surface-positions/elevator[2]/position-norm", 1);
-      var elev4_node = self.getNode("surface-positions/elevator[3]/position-norm", 1);
-
-      ################
-      # elevator wires
-
-      var elevw1_node = self.getNode("surface-positions/elevator[0]/wire-norm", 1);
-      var elevw2_node = self.getNode("surface-positions/elevator[1]/wire-norm", 1);
-      var elevw3_node = self.getNode("surface-positions/elevator[2]/wire-norm", 1);
-      var elevw4_node = self.getNode("surface-positions/elevator[3]/wire-norm", 1);
-
-      ################
-      # elevator rails
-
-      var elevatorr1 = aircraft.door.new("/surface-positions/elevator-rail[0]", 4, getprop("ai/models/carrier/controls/elevator[0]/state"));
-      var elevatorr2 = aircraft.door.new("/surface-positions/elevator-rail[1]", 4, getprop("ai/models/carrier/controls/elevator[1]/state"));
-      var elevatorr3 = aircraft.door.new("/surface-positions/elevator-rail[2]", 4, getprop("ai/models/carrier/controls/elevator[2]/state"));
-      var elevatorr4 = aircraft.door.new("/surface-positions/elevator-rail[3]", 4, getprop("ai/models/carrier/controls/elevator[3]/state"));
-
-      var elevr1_node = self.getNode("surface-positions/elevator-rail[0]/position-norm", 1);
-      var elevr2_node = self.getNode("surface-positions/elevator-rail[1]/position-norm", 1);
-      var elevr3_node = self.getNode("surface-positions/elevator-rail[2]/position-norm", 1);
-      var elevr4_node = self.getNode("surface-positions/elevator-rail[3]/position-norm", 1);
-
-      #####################
-      # elevator rails door
-
-      var elevatorrd1 = aircraft.door.new("/surface-positions/elevator-rail-door[0]", 4, getprop("ai/models/carrier/controls/elevator[0]/state"));
-      var elevatorrd2 = aircraft.door.new("/surface-positions/elevator-rail-door[1]", 4, getprop("ai/models/carrier/controls/elevator[1]/state"));
-      var elevatorrd3 = aircraft.door.new("/surface-positions/elevator-rail-door[2]", 4, getprop("ai/models/carrier/controls/elevator[2]/state"));
-      var elevatorrd4 = aircraft.door.new("/surface-positions/elevator-rail-door[3]", 4, getprop("ai/models/carrier/controls/elevator[3]/state"));
-
-      var elevrd1_node = self.getNode("surface-positions/elevator-rail-door[0]/position-norm", 1);
-      var elevrd2_node = self.getNode("surface-positions/elevator-rail-door[1]/position-norm", 1);
-      var elevrd3_node = self.getNode("surface-positions/elevator-rail-door[2]/position-norm", 1);
-      var elevrd4_node = self.getNode("surface-positions/elevator-rail-door[3]/position-norm", 1);
-
-      ################
-      # elevator doors
-
-      var elevatord1 = aircraft.door.new("/surface-positions/elevator-door[0]", 60, 0);
-      var elevatord2 = aircraft.door.new("/surface-positions/elevator-door[1]", 60, 0);
-      var elevatord3 = aircraft.door.new("/surface-positions/elevator-door[2]", 60, 0);
-      var elevatord4 = aircraft.door.new("/surface-positions/elevator-door[3]", 60, 0);
-
-      var elevd1_node = self.getNode("surface-positions/elevator-door[0]/position-norm", 1);
-      var elevd2_node = self.getNode("surface-positions/elevator-door[1]/position-norm", 1);
-      var elevd3_node = self.getNode("surface-positions/elevator-door[2]/position-norm", 1);
-      var elevd4_node = self.getNode("surface-positions/elevator-door[3]/position-norm", 1);
-
-      ########
-      # whips function
-
-      var whip_antennas = aircraft.door.new("/sim/whip-antennas", 6);
-      var antenna_node  = self.getNode("sim/antenna-pos-norm", 1);
-
       ###########
       # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
       # by Richard Harrison (2016)
@@ -292,206 +170,106 @@ added by Michael Habarta
       });
       an_spn_46_timer.restart(6);
 
-      ########
-      # the main loop
 
-      var loopid = 1;
 
-      var loop = func(id) {
-        if (id != loopid) { return; }
+    
+     var check_rails = func (i) {
 
-        var turn = control_node.getValue();
+	var el_state = getprop(pathc~"/surface-positions/elevator["~i~"]/position-norm");
+	var el_cmd = getprop("controls/truman/elevator["~i~"]/state");
+	print ("Rail check, state: ", el_state);
 
-        value = getprop("/sim/rendering/rembrandt/enabled");
-        rembrandt_node.setBoolValue(value);
+	if ((el_state == 0) and (el_cmd == 0))
+		{
+		rail_upper_array[i].close();
+		rail_lower_array[i].close();
+		}
+	else if ((el_state == 1) and (el_cmd == 1))
+		{
+		rail_upper_array[i].open();
+		rail_lower_array[i].open();
+		}
+	else if ((el_state == 0) and (el_cmd == 1))
+		{
+		rail_upper_array[i].close();
+		rail_lower_array[i].open();
+		}
+	else if ((el_state == 1) and (el_cmd == 0))
+		{
+		rail_upper_array[i].close();
+		rail_lower_array[i].open();
+		}
 
-        value = getprop("/sim/time/sun-angle-rad");
-        sunAngleRad_node.setValue(value);
+     }
 
-        # elevators
-        var elev1 = getprop("/surface-positions/elevator[0]/position-norm");
-        elev1_node.setValue(elev1);
-        var elev2 = getprop("/surface-positions/elevator[1]/position-norm");
-        elev2_node.setValue(elev2);
-        var elev3 = getprop("/surface-positions/elevator[2]/position-norm");
-        elev3_node.setValue(elev3);
-        var elev4 = getprop("/surface-positions/elevator[3]/position-norm");
-        elev4_node.setValue(elev4);
 
-        if ( getprop("ai/models/carrier/controls/elevator[0]/state") == 1) {
-          elevator1.open();
-        } else {
-          elevator1.close();
-        }
 
-        if ( getprop("ai/models/carrier/controls/elevator[1]/state") == 1) {
-          elevator2.open();
-        } else {
-          elevator2.close();
-        }
+     var elevator_operate = func (i){
 
-        if ( getprop("ai/models/carrier/controls/elevator[2]/state") == 1) {
-          elevator3.open();
-        } else {
-          elevator3.close();
-        }
+	check_rails(i);
 
-        if ( getprop("ai/models/carrier/controls/elevator[3]/state") == 1) {
-          elevator4.open();
-        } else {
-          elevator4.close();
-        }
+	var tgt = getprop("/controls/truman/elevator["~i~"]/state");
+	if (tgt == 1)
+		{
+		print ("Elevator ", i+1, " up.");
+		elevator_array[i].open();
 
-        # invert elevator wires
-        # Remark: needed for scale animation
-        elevw1_node.setValue(1-elev1);
-        elevw2_node.setValue(1-elev2);
-        elevw3_node.setValue(1-elev3);
-        elevw4_node.setValue(1-elev4);
+		}
+	else
+		{
+		print ("Elevator ", i+1, " down.");
+		elevator_array[i].close();
+		}
+	settimer( func {check_rails(i);}, elevator_transit_time);
+     }
 
-        # elevator rails
-        var elevr1 = getprop("/surface-positions/elevator-rail[0]/position-norm");
-        elevr1_node.setValue(elevr1);
-        var elevr2 = getprop("/surface-positions/elevator-rail[1]/position-norm");
-        elevr2_node.setValue(elevr2);
-        var elevr3 = getprop("/surface-positions/elevator-rail[2]/position-norm");
-        elevr3_node.setValue(elevr3);
-        var elevr4 = getprop("/surface-positions/elevator-rail[3]/position-norm");
-        elevr4_node.setValue(elevr4);
+     var door_operate = func (i){
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail[0]/state") == 1) {
-          elevatorr1.open();
-        } else {
-          elevatorr1.close();
-        }
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail[1]/state") == 1) {
-          elevatorr2.open();
-        } else {
-          elevatorr2.close();
-        }
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail[2]/state") == 1) {
-          elevatorr3.open();
-        } else {
-          elevatorr3.close();
-        }
+	var tgt = getprop("/controls/truman/door["~i~"]/state");
+	if (tgt == 1)
+		{
+		print ("Door ", i+1, " close.");
+		door_array[i].open();
+		}
+	else
+		{
+		print ("Door ", i+1, " open.");
+		door_array[i].close();
+		}
+     }
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail[3]/state") == 1) {
-          elevatorr4.open();
-        } else {
-          elevatorr4.close();
-        }
+   var flight_ops = func {
+	
+	var state = getprop("/controls/truman/flight-operations");
 
-        # elevator rails door
-        var elevrd1 = getprop("/surface-positions/elevator-rail-door[0]/position-norm");
-        elevrd1_node.setValue(elevrd1);
-        var elevrd2 = getprop("/surface-positions/elevator-rail-door[1]/position-norm");
-        elevrd2_node.setValue(elevrd2);
-        var elevrd3 = getprop("/surface-positions/elevator-rail-door[2]/position-norm");
-        elevrd3_node.setValue(elevrd3);
-        var elevrd4 = getprop("/surface-positions/elevator-rail-door[3]/position-norm");
-        elevrd4_node.setValue(elevrd4);
+	if (state == 0) 
+		{
+		whip_antennas.close();
+		print ("Whip antennas retract.");
+		}
+	else 
+		{
+		whip_antennas.open();
+		print ("Whip antennas deploy.");
+		}
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail-door[0]/state") == 1) {
-          elevatorrd1.open();
-        } else {
-          elevatorrd1.close();
-        }
+    }
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail-door[1]/state") == 1) {
-          elevatorrd2.open();
-        } else {
-          elevatorrd2.close();
-        }
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail-door[2]/state") == 1) {
-          elevatorrd3.open();
-        } else {
-          elevatorrd3.close();
-        }
+     var l_flightops = setlistener("/controls/truman/flight-operations", func {flight_ops();},0,0);
 
-        if ( getprop("ai/models/carrier/controls/elevator-rail-door[3]/state") == 1) {
-          elevatorrd4.open();
-        } else {
-          elevatorrd4.close();
-        }
+     var l_elev1 = setlistener("/controls/truman/elevator/state", func {elevator_operate(0);},0,0);
+     var l_elev2 = setlistener("/controls/truman/elevator[1]/state", func {elevator_operate(1);},0,0);
+     var l_elev3 = setlistener("/controls/truman/elevator[2]/state", func {elevator_operate(2);},0,0);
+     var l_elev4 = setlistener("/controls/truman/elevator[3]/state", func {elevator_operate(3);},0,0);
 
-        # elevator doors
-        var elevd1 = getprop("/surface-positions/elevator-door[0]/position-norm");
-        elevd1_node.setValue(elevd1);
-        var elevd2 = getprop("/surface-positions/elevator-door[1]/position-norm");
-        elevd2_node.setValue(elevd2);
-        var elevd3 = getprop("/surface-positions/elevator-door[2]/position-norm");
-        elevd3_node.setValue(elevd3);
-        var elevd4 = getprop("/surface-positions/elevator-door[3]/position-norm");
-        elevd4_node.setValue(elevd4);
+     var l_door1 = setlistener("/controls/truman/door/state", func {door_operate(0);},0,0);
+     var l_door2 = setlistener("/controls/truman/door[1]/state", func {door_operate(1);},0,0);
+     var l_door3 = setlistener("/controls/truman/door[2]/state", func {door_operate(2);},0,0);
+     var l_door4 = setlistener("/controls/truman/door[3]/state", func {door_operate(3);},0,0);
 
-        if ( getprop("ai/models/carrier/controls/elevator-door[0]/state") == 1) {
-          elevatord1.open();
-        } else {
-          elevatord1.close();
-        }
-
-        if ( getprop("ai/models/carrier/controls/elevator-door[1]/state") == 1) {
-          elevatord2.open();
-        } else {
-          elevatord2.close();
-        }
-
-        if ( getprop("ai/models/carrier/controls/elevator-door[2]/state") == 1) {
-          elevatord3.open();
-        } else {
-          elevatord3.close();
-        }
-
-        if ( getprop("ai/models/carrier/controls/elevator-door[3]/state") == 1) {
-          elevatord4.open();
-        } else {
-          elevatord4.close();
-        }
-
-        # whip antenna
-        if ( getprop("ai/models/carrier/controls/flight-operations") ){
-          whip_antennas.open();
-        } else {
-          whip_antennas.close();
-        }
-        var whipant = getprop("/sim/whip-antennas/position-norm");
-        antenna_node.setValue(whipant);
-
-        var vn = getprop("/sim/current-view/view-number");
-
-        if ( vn == 3 or vn == 4 ) {
-          if ( getprop("/sim/tower/carrier-auto-position") and !getprop("/sim/tower/auto-position") ) {
-            AIcarrier.syncTowerView();
-          }
-        }
-
-        settimer(func { loop(id); }, 0);
-      }
-
-      settimer(func { loop(loopid); }, 0);
-
-      # mark ready flag
-      setprop(pathc ~ "/ready",1);
-
-      #  fix missing parkpos
-      if ( getprop("/sim/presets/parkpos") == "" ) {
-        setprop("/sim/presets/parkpos",n.getNode("scenario/entry/parking-pos").getValue("name"));
-      }
-
-      # set tower, i.e.active carrier
-      # fixme: condition of setting should not be checked here but in setting function
-      carr_cnt = AIcarrier.countCarriersReady();
-
-      if ( carr_cnt > 0 and in_air ) {
-        # Attention:
-        # The following function waits until all carriers are ready.
-        # Check if in case more than one is active
-        # if there could be some kind of deadlock situation ?
-        AIcarrier.setActiveCarrier();
-      }
 
     ]]></load>
 
@@ -500,24 +278,7 @@ added by Michael Habarta
 
       an_spn_46_timer.stop();
 
-      loopid += 1;
 
-      var carr_cnt = AIcarrier.countCarriers();
-
-      if ( carr_cnt == 0 ) {
-        # fixme: this only works if the last unloaded carrier
-        #        was the first one loaded (= the one who set the listener)
-        removelistener(lblis);
-        print("listener for launchbar lock removed ...");
-        removelistener(wowlis);
-        print("listener for ac on carrier removed ...");
-
-        # reset presets
-        AIcarrier.resetPresets();
-      }
-
-      # cycle to next carrier or reset tower
-      AIcarrier.cycleTowers();
 
     ]]></unload>
 
@@ -574,7 +335,7 @@ added by Michael Habarta
     <type>select</type>
     <object-name>crew</object-name>
     <condition>
-      <property>/controls/crew</property>
+      <property>/controls/truman/crew</property>
     </condition>
   </animation>
 
@@ -656,7 +417,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-1</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -673,7 +434,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-2</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -690,7 +451,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-3</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <axis>
       <x1-m>-18.083</x1-m>
@@ -705,7 +466,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-4</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <axis>
       <x1-m>-18.083</x1-m>
@@ -720,7 +481,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-5</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -737,7 +498,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-6</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -754,7 +515,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-7</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>-100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -771,7 +532,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-8</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -788,7 +549,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-9</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -805,7 +566,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-10</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -822,7 +583,7 @@ added by Michael Habarta
   <animation>
     <type>rotate</type>
     <object-name>antenna-11</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <factor>100</factor>
     <center>
       <x-m>  0.000</x-m>
@@ -840,7 +601,7 @@ added by Michael Habarta
   <animation>
     <type>translate</type>
     <object-name>Howdah-cover</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <interpolation>
       <entry><ind>0.00</ind><dep>0.00</dep></entry>
       <entry><ind>0.15</ind><dep>-0.10</dep></entry>
@@ -854,7 +615,7 @@ added by Michael Habarta
   <animation>
     <type>translate</type>
     <object-name>Howdah-cover</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <interpolation>
       <entry><ind>0.00</ind><dep>0.00</dep></entry>
       <entry><ind>0.15</ind><dep>0.00</dep></entry>
@@ -870,7 +631,7 @@ added by Michael Habarta
     <type>translate</type>
     <object-name>Howdah</object-name>
     <object-name>Howdah-glass</object-name>
-    <property>sim/antenna-pos-norm</property>
+    <property>surface-positions/whip-antennas/position-norm</property>
     <interpolation>
       <entry><ind>0.00</ind><dep>0.00</dep></entry>
       <entry><ind>0.60</ind><dep>0.00</dep></entry>
@@ -3649,8 +3410,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>AIcarrier.toggleFlightOperations();</script>
+	<command>property-toggle</command>
+	<property>/controls/truman/flight-operations</property>
       </binding>
     </action>
     <hovered>
@@ -3670,10 +3431,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          AIcarrier.operateElevator(0);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator/state</property>
       </binding>
     </action>
     <hovered>
@@ -3692,10 +3451,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          AIcarrier.operateElevator(1);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator[1]/state</property>
       </binding>
     </action>
     <hovered>
@@ -3714,10 +3471,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          AIcarrier.operateElevator(2);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator[2]/state</property>
       </binding>
     </action>
     <hovered>
@@ -3736,10 +3491,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          AIcarrier.operateElevator(3);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator[3]/state</property>
       </binding>
     </action>
     <hovered>
@@ -3760,11 +3513,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          var p = !getprop("ai/models/carrier/controls/elevator-door[0]/state");
-          setprop("ai/models/carrier/controls/elevator-door[0]/state",p);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/door/state</property>
       </binding>
     </action>
     <hovered>
@@ -3784,11 +3534,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          var p = !getprop("ai/models/carrier/controls/elevator-door[1]/state");
-          setprop("ai/models/carrier/controls/elevator-door[1]/state",p);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/door[1]/state</property>
       </binding>
     </action>
     <hovered>
@@ -3808,11 +3555,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          var p = !getprop("ai/models/carrier/controls/elevator-door[2]/state");
-          setprop("ai/models/carrier/controls/elevator-door[2]/state",p);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/door[2]/state</property>
       </binding>
     </action>
     <hovered>
@@ -3832,11 +3576,8 @@ added by Michael Habarta
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
-          var p = !getprop("ai/models/carrier/controls/elevator-door[3]/state");
-          setprop("ai/models/carrier/controls/elevator-door[3]/state",p);
-        </script>
+	<command>property-toggle</command>
+	<property>/controls/truman/door[3]/state</property>
       </binding>
     </action>
     <hovered>
@@ -3847,4 +3588,29 @@ added by Michael Habarta
       </binding>
     </hovered>
   </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>island</object-name>
+    <object-name>island-details</object-name>
+    <object-name>bridge</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>dialog-show</command>
+	<dialog-name>TrumanControls</dialog-name>
+	<property></property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>bridge</tooltip-id>
+        <label>show Truman control dialog</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
 </PropertyList>

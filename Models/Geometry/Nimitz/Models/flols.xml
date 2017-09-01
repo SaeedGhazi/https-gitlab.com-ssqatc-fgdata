@@ -375,6 +375,34 @@
 		<object-name>Wave-Off-72</object-name>
 	</animation>
 
+
+	<!-- ALS procedural lights for red and orange -->
+
+		<!-- ALS procedural lights -->
+	 <model>
+	   	<path>Models/Geometry/Nimitz/Models/source-orange-proc.xml</path>
+	    	<condition>
+			<property>/sim/rendering/shaders/skydome</property>
+	    	</condition>
+	    	<offsets>
+	      		<x-m>0.1</x-m>
+	      		<y-m>0.0</y-m>
+	      		<z-m>0.0</z-m>
+	    	</offsets>
+	 </model>
+
+	 <model>
+	   	<path>Models/Geometry/Nimitz/Models/source-red-proc.xml</path>
+	    	<condition>
+			<property>/sim/rendering/shaders/skydome</property>
+	    	</condition>
+	    	<offsets>
+	      		<x-m>0.1</x-m>
+	      		<y-m>0.0</y-m>
+	      		<z-m>0.0</z-m>
+	    	</offsets>
+	 </model>
+
 	<animation>
 		<type>alpha-test</type>
 		<object-name>Source-Orange</object-name>
@@ -424,6 +452,9 @@
 					<property>controls/flols/angle-degs</property>
 					<value>3.075</value>
 				</greater-than>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 			</and>
 		</condition>
 	</animation>
@@ -440,6 +471,9 @@
 					<property>controls/flols/angle-degs</property>
 					<value>2.65</value>
 				</greater-than-equals>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 			</and>
 		</condition>
 	</animation>

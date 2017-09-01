@@ -21,6 +21,16 @@
 	</animation>
 
 	<animation>
+		<type>select</type>
+		<object-name>Cut</object-name>
+		<condition>	
+			<not>
+			<property>/sim/rendering/shaders/skydome</property>
+			</not>
+		</condition>
+	</animation>
+
+	<animation>
 		<type>scale</type>
 		<object-name>Cut</object-name>
 		<property>controls/flols/distance-m</property>
@@ -39,5 +49,18 @@
 		<min-m>0</min-m>
 		<max-m>5000</max-m>
 	</animation>
+
+	<!-- ALS procedural light -->
+	 <model>
+	   	<path>Models/Geometry/Nimitz/Models/datum-proc.xml</path>
+	    	<condition>
+			<property>/sim/rendering/shaders/skydome</property>
+	    	</condition>
+	    	<offsets>
+	      		<x-m>0.100</x-m>
+	      		<y-m>0.000</y-m>
+	      		<z-m>0.000</z-m>
+	    	</offsets>
+	 </model>
 
 </PropertyList>

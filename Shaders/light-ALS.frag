@@ -52,7 +52,8 @@ float shape (in vec3 coord, in float noise, in float fade, in float transmission
    if (sinterm == 0.0)
    	{ray = 0.0;}
    else
-	{ray = clamp(pow(sinterm,10.0),0.0,1.0);
+	//{ray = clamp(pow(sinterm,10.0),0.0,1.0);
+	{ray = sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm * sinterm;
    	ray *= exp(-40.0 * r * r) * smoothstep(0.8, 1.0,fade) * smoothstep(0.7, 1.0, glare);
 	}
 

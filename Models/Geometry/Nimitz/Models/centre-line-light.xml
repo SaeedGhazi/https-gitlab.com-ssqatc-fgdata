@@ -54,4 +54,20 @@
 		<max-m>5000</max-m>
 	</animation>-->
 
+	<!-- ALS procedural light -->
+	 <model>
+	   	<path>Models/Geometry/Nimitz/Models/center-line-light-proc.xml</path>
+	    	<condition>
+			<and>
+			<property>controls/lighting/deck-lights</property>
+			<property>/sim/rendering/shaders/skydome</property>
+			</and>
+	    	</condition>
+	    	<offsets>
+	      		<x-m>0.000</x-m>
+	      		<y-m>-0.150</y-m>
+	      		<z-m>0.000</z-m>
+	    	</offsets>
+	 </model>
+
 </PropertyList>

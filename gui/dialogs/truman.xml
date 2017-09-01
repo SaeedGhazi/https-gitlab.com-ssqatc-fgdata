@@ -122,7 +122,7 @@
 		<layout>table</layout>
 
 		<text>
-			<label>Elevators and doors</label>
+			<label>Equipment</label>
 			<row>0</row>
 			<col>0</col>
 		</text>
@@ -215,6 +215,50 @@
 			</binding>
 		</checkbox>
 
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>0</col>
+			<label>JBD 1</label>
+			<property>/controls/truman/jbd[0]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>1</col>
+			<label>JBD 2</label>
+			<property>/controls/truman/jbd[1]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>2</col>
+			<label>JBD 3</label>
+			<property>/controls/truman/jbd[2]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>3</col>
+			<label>JBD 4</label>
+			<property>/controls/truman/jbd[3]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
 		</group>
 
 
@@ -242,10 +286,32 @@
 
 		<checkbox>
 			<halign>left</halign>
-			<row>2</row>
-			<col>0</col>
+			<row>1</row>
+			<col>1</col>
 			<label>Enable Crew</label>
 			<property>/controls/truman/crew</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>0</col>
+			<label>Deck lights</label>
+			<property>/controls/truman/lights</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>1</col>
+			<label>Enable Wave motion</label>
+			<property>/controls/truman/wave-motion</property>
 			<binding>
 				<command>dialog-apply</command>
 			</binding>

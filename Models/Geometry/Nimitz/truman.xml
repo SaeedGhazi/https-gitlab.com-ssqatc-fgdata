@@ -23,9 +23,13 @@ by Thorsten Renk 2017
       var pathc = cmdarg().getPath();
       var self = cmdarg();
 
+
+      # times for components to move to their position
+
       var elevator_transit_time = 30.0;
       var door_transit_time = 60.0;
       var rail_transit_time = 4.0;
+      var jbd_transit_time = 5.0;
 
       # search for the next free slot in the AI menu and register the Truman control menu
 
@@ -45,7 +49,19 @@ by Thorsten Renk 2017
 
       setprop("/controls/truman/crew", 0);
       setprop("/controls/truman/deck-park",0);
+      setprop("/controls/truman/wave-motion",0);
+      setprop("/controls/truman/lights", 0);
 
+      setprop(pathc~"/wave-motion/pitch", 0.0);
+      setprop(pathc~"/wave-motion/roll", 0.0);
+
+
+      # init JBD
+
+      setprop("/controls/truman/jbd[0]/state", 0);
+      setprop("/controls/truman/jbd[1]/state", 0);
+      setprop("/controls/truman/jbd[2]/state", 0);
+      setprop("/controls/truman/jbd[3]/state", 0);
 
 
       # init flight-operations flag (whip antenna animation)
@@ -109,10 +125,10 @@ by Thorsten Renk 2017
       ################
       # elevator doors
 
-      var door1 = aircraft.door.new(pathc~"/surface-positions/elevator-door[0]", 60, 0);
-      var door2 = aircraft.door.new(pathc~"/surface-positions/elevator-door[1]", 60, 0);
-      var door3 = aircraft.door.new(pathc~"/surface-positions/elevator-door[2]", 60, 0);
-      var door4 = aircraft.door.new(pathc~"/surface-positions/elevator-door[3]", 60, 0);
+      var door1 = aircraft.door.new(pathc~"/surface-positions/elevator-door[0]", door_transit_time, 0);
+      var door2 = aircraft.door.new(pathc~"/surface-positions/elevator-door[1]", door_transit_time, 0);
+      var door3 = aircraft.door.new(pathc~"/surface-positions/elevator-door[2]", door_transit_time, 0);
+      var door4 = aircraft.door.new(pathc~"/surface-positions/elevator-door[3]", door_transit_time, 0);
 
       var door_array = [door1, door2, door3, door4];
       
@@ -121,6 +137,17 @@ by Thorsten Renk 2017
       # whips function
 
       var whip_antennas = aircraft.door.new(pathc~"/surface-positions/whip-antennas", 6);
+
+      ################
+      # jet blast deflectors
+
+      var jbd1 = aircraft.door.new(pathc~"/surface-positions/jbd[0]", jbd_transit_time, 0);
+      var jbd2 = aircraft.door.new(pathc~"/surface-positions/jbd[1]", jbd_transit_time, 0);
+      var jbd3 = aircraft.door.new(pathc~"/surface-positions/jbd[2]", jbd_transit_time, 0);
+      var jbd4 = aircraft.door.new(pathc~"/surface-positions/jbd[3]", jbd_transit_time, 0);
+ 
+      var jbd_array = [jbd1, jbd2, jbd3, jbd4];
+
 
 
       print("LOAD ",carrier," prop-path: ", pathc);
@@ -171,7 +198,118 @@ by Thorsten Renk 2017
       an_spn_46_timer.restart(6);
 
 
+     var wave_manager = {
 
+		wave_loop_flag: 0,
+		amp_pitch: 0.2,
+		amp_roll: 0.7,
+	
+		pitch: 0.0,
+		roll: 0.0,
+		
+		ramp_factor: 0.0,
+		ramp_flag: 0,
+	
+		beam: 40.0,
+		length: 310.0,
+
+		toggle: func {
+			var tgt = getprop("/controls/truman/wave-motion");
+
+			if (tgt == 1)
+				{
+				me.wave_loop_flag = 1;
+				print ("Wave motion on");
+				me.wave_loop();
+				me.ramp(1);
+				}
+			else
+				{
+				me.wave_loop_flag = 0;
+				me.ramp(0);
+				}
+		
+		},
+
+
+		setup: func {
+
+			var wind_angle = getprop("/environment/wind-from-heading-deg");
+			#var wavelength = (2.0 * math.pi)/getprop("/environment/wave/freq");
+			var freq = getprop("/environment/wave/freq");
+			var course = getprop(pathc~"/controls/base-course-deg");
+			var speed = getprop(pathc~"/controls/base-speed-kts") * 0.5144;
+
+
+			var encounter_angle_rad = (wind_angle - course) * math.pi/180.0;
+
+			var encounter_freq = freq * (1.0 - freq * speed/9.81 * math.cos(encounter_angle_rad));
+			
+			# the shader generates visible waves at x * freq spacing
+			var lambda = (2.0 * math.pi)/encounter_freq;
+
+
+			print ("Encounter angle: ", encounter_angle_rad * 180/math.pi);
+			print ("Encounter wavelength: ", lambda);
+			print ("Wavelength: ", (2.0 * math.pi)/freq);
+
+		},
+
+		ramp: func (tgt) {
+				
+			if (math.abs(me.ramp_factor -tgt) < 0.01) 
+				{
+				me.ramp_factor = tgt;
+				if (tgt == 0)
+					{
+					me.pitch = 0.0;
+					me.roll = 0.0;
+					setprop(pathc~"/wave-motion/pitch", 0.0);
+					setprop(pathc~"/wave-motion/roll", 0.0);
+					}
+				return;
+				}
+			else
+				{
+				if (tgt > me.ramp_factor)
+					{
+					me.ramp_factor = me.ramp_factor + 0.01;
+					}
+				else 
+					{
+					me.ramp_factor = me.ramp_factor - 0.01;
+					}
+				}
+			if (tgt == 0)
+				{
+				setprop(pathc~"/wave-motion/pitch", me.pitch * me.ramp_factor);
+				setprop(pathc~"/wave-motion/roll", me.roll * me.ramp_factor);
+				}
+
+
+			settimer(func {me.ramp(tgt); }, 0.0);
+		},
+
+		wave_loop: func {
+
+		if (me.wave_loop_flag ==0) {return;}
+
+		var t = getprop("/sim/time/elapsed-sec");
+
+		me.pitch = me.ramp_factor * me.amp_pitch * math.sin(0.6 *  t);
+		setprop(pathc~"/wave-motion/pitch", me.pitch); 
+
+		me.roll = me.ramp_factor * me.amp_roll * math.sin(0.8 *  t);
+		setprop(pathc~"/wave-motion/roll", me.roll); 
+
+		settimer(func {me.wave_loop(); } , 0.0);
+	        },
+
+
+     };
+
+
+	
     
      var check_rails = func (i) {
 
@@ -257,6 +395,40 @@ by Thorsten Renk 2017
 
     }
 
+    var jbd_operate = func (i) {
+
+	var tgt = getprop("/controls/truman/jbd["~i~"]/state");
+	if (tgt == 1)
+		{
+		print ("JBD ", i+1, " up.");
+		jbd_array[i].open();
+		}
+	else
+		{
+		print ("JBD ", i+1, " down.");
+		jbd_array[i].close();
+		}
+
+
+    }
+
+    var toggle_lights = func {
+
+   	var state = getprop(pathc~"/controls/lighting/deck-lights");
+	
+	if (state == 0)
+		{
+		setprop(pathc~"/controls/lighting/deck-lights", 1);
+		setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.7);
+		}
+	else
+		{
+		setprop(pathc~"/controls/lighting/deck-lights", 0);
+		setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.0);
+		}
+
+    }
+
 
      var l_flightops = setlistener("/controls/truman/flight-operations", func {flight_ops();},0,0);
 
@@ -270,7 +442,17 @@ by Thorsten Renk 2017
      var l_door3 = setlistener("/controls/truman/door[2]/state", func {door_operate(2);},0,0);
      var l_door4 = setlistener("/controls/truman/door[3]/state", func {door_operate(3);},0,0);
 
+     var l_jbd1 = setlistener("/controls/truman/jbd[0]/state", func {jbd_operate(0);},0,0);
+     var l_jbd2 = setlistener("/controls/truman/jbd[1]/state", func {jbd_operate(1);},0,0);
+     var l_jbd3 = setlistener("/controls/truman/jbd[2]/state", func {jbd_operate(2);},0,0);
+     var l_jbd4 = setlistener("/controls/truman/jbd[3]/state", func {jbd_operate(3);},0,0);
 
+
+     var l_wave = setlistener("/controls/truman/wave-motion", func {wave_manager.toggle();},0,0);
+     var l_lights = setlistener("/controls/truman/lights", func {toggle_lights();},0,0);
+
+     #var l_wavetest = setlistener("/test/wave", func {wave_manager.setup();},0,0);
+    
     ]]></load>
 
     <unload><![CDATA[
@@ -278,6 +460,20 @@ by Thorsten Renk 2017
 
       an_spn_46_timer.stop();
 
+     # clean up listeners
+
+     removelistener(l_elev_1);
+     removelistener(l_elev_2);
+     removelistener(l_elev_3);
+     removelistener(l_elev_4);
+
+     removelistener(l_door_1);
+     removelistener(l_door_2);
+     removelistener(l_door_3);
+     removelistener(l_door_4);
+
+     removelistener(l_wave);
+     removelistener(l_lights);
 
 
     ]]></unload>
@@ -294,6 +490,38 @@ by Thorsten Renk 2017
       <heading-deg>0</heading-deg>
     </offsets>
   </model>-->
+
+  <animation>
+  	<type>rotate</type>
+  	<property>wave-motion/pitch</property>
+  	<factor>1</factor>
+  	<center>
+   		<x-m>40</x-m>
+   		<y-m>0</y-m>
+   		<z-m>0</z-m>
+  	</center>
+  	<axis>
+   		<x>0</x>
+   		<y>1</y>
+   		<z>0</z>
+  	</axis>
+   </animation>
+
+  <animation>
+  	<type>rotate</type>
+  	<property>wave-motion/roll</property>
+  	<factor>1</factor>
+  	<center>
+   		<x-m>40</x-m>
+   		<y-m>0</y-m>
+   		<z-m>0</z-m>
+  	</center>
+  	<axis>
+   		<x>1</x>
+   		<y>0</y>
+   		<z>0</z>
+  	</axis>
+  </animation>
 
   <model>
     <path>Models/Geometry/Nimitz/Models/flols.xml</path>
@@ -1061,8 +1289,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-1</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[0]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1071,7 +1299,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-1</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -1102,8 +1330,8 @@ by Thorsten Renk 2017
     <type>rotate</type>
     <object-name>JBD-1-strut-a</object-name>
     <object-name>JBD-1-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[0]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1112,7 +1340,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-1</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -1142,8 +1370,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-1-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[0]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1152,7 +1380,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-1</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -1183,8 +1411,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-2</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[1]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1193,7 +1421,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-2</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -1224,8 +1452,8 @@ by Thorsten Renk 2017
     <type>rotate</type>
     <object-name>JBD-2-strut-a</object-name>
     <object-name>JBD-2-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[1]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1234,7 +1462,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-2</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -1264,8 +1492,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-2-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[1]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1274,7 +1502,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-2</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -1305,8 +1533,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-3</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[2]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1315,7 +1543,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-3</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -1346,8 +1574,8 @@ by Thorsten Renk 2017
     <type>rotate</type>
     <object-name>JBD-3-strut-a</object-name>
     <object-name>JBD-3-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[2]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1356,7 +1584,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-3</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -1386,8 +1614,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-3-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[2]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1396,7 +1624,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-3</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -1427,8 +1655,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-4</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[3]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1437,7 +1665,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-4</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -1468,8 +1696,8 @@ by Thorsten Renk 2017
     <type>rotate</type>
     <object-name>JBD-4-strut-a</object-name>
     <object-name>JBD-4-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[3]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1478,7 +1706,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-4</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -1508,8 +1736,8 @@ by Thorsten Renk 2017
   <animation>
     <type>rotate</type>
     <object-name>JBD-4-strut-b</object-name>
-    <property>surface-positions/jbd-pos-norm</property>
-    <condition>
+    <property>surface-positions/jbd[3]/position-norm</property>
+    <!--<condition>
       <equals>
         <property>/sim/presets/carrier</property>
         <value>Truman</value>
@@ -1518,7 +1746,7 @@ by Thorsten Renk 2017
         <property>/sim/presets/cat-engaged</property>
         <value>cat-4</value>
       </equals>
-    </condition>
+    </condition>-->
     <interpolation>
       <entry><ind>0.0000</ind><dep>0</dep></entry>
       <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -3234,6 +3462,14 @@ by Thorsten Renk 2017
     <object-name>Elevator-2-Deck</object-name>
     <object-name>Elevator-3-Deck</object-name>
     <object-name>Elevator-4-Deck</object-name>
+    <object-name>JBD1</object-name>
+    <object-name>JBD2</object-name>
+    <object-name>JBD3</object-name>
+    <object-name>JBD4</object-name>
+    <object-name>cat-deck-1</object-name>
+    <object-name>cat-deck-2</object-name>
+    <object-name>cat-deck-3</object-name>
+    <object-name>cat-deck-4</object-name>
     <condition>
       <greater-than>
         <property>/sim/time/sun-angle-rad</property>
@@ -3356,25 +3592,88 @@ by Thorsten Renk 2017
   <animation>
     <type>pick</type>
     <object-name>JBD1</object-name>
-    <object-name>JBD2</object-name>
-    <object-name>JBD3</object-name>
-    <object-name>JBD4</object-name>
+
     <action>
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>AIcarrier.launchCatapult();</script>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[0]/state</property>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <tooltip-id>cat-release</tooltip-id>
-        <label>launch Catapult</label>
+        <tooltip-id>jbd1</tooltip-id>
+        <label>operate JBD1</label>
       </binding>
     </hovered>
   </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD2</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd2</tooltip-id>
+        <label>operate JBD2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD3</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[2]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd3</tooltip-id>
+        <label>operate JBD3</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD4</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[3]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd4</tooltip-id>
+        <label>operate JBD4</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
 
   <animation>
     <type>pick</type>
@@ -3383,15 +3682,16 @@ by Thorsten Renk 2017
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
-        <command>nasal</command>
-        <script>
+        <command>property-toggle</command>
+	<property>/controls/truman/lights</property>
+        <!--<script>
           var p = !getprop("/ai/models/carrier/controls/lighting/deck-lights");
           if ( p ) { r = 0.3 } else { r = 0 }
           foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")) {
             c.getNode("controls/lighting/deck-lights",1).setBoolValue(p);
             c.getNode("controls/lighting/flood-lights-red-norm",1).setValue(r);
           }
-        </script>
+        </script>-->
       </binding>
     </action>
     <hovered>

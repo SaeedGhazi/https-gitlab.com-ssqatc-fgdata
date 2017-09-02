@@ -535,10 +535,10 @@ by Thorsten Renk 2017
 
   <model>
     <name>Bow-Wave</name>
-    <path>Models/Effects/Wakes/bow_wave.xml</path>
+    <path>Models/Geometry/Nimitz/Models/Effects/bow_wave_carrier.xml</path>
     <offsets>
       <x-m>-15</x-m>
-      <z-m>0</z-m>
+      <z-m>0.0</z-m>
     </offsets>
   </model>
 
@@ -2971,22 +2971,22 @@ by Thorsten Renk 2017
   <!-- *** Effects *** -->
   <model>
     <name>bowwake-stbd</name>
-    <path>Models/Effects/Wakes/wake.xml</path>
+    <path>Models/Geometry/Nimitz/Models/Effects/wake_carrier.xml</path>
     <offsets>
       <x-m>-98.0</x-m>
       <y-m>0</y-m>
-      <z-m>1</z-m>
+      <z-m>2</z-m>
       <heading-deg>0</heading-deg>
     </offsets>
   </model>
 
   <model>
     <name>bowwake-port</name>
-    <path>Models/Effects/Wakes/wake.xml</path>
+    <path>Models/Geometry/Nimitz/Models/Effects/wake_carrier.xml</path>
     <offsets>
       <x-m>-98.0</x-m>
       <y-m>0</y-m>
-      <z-m>1</z-m>
+      <z-m>2</z-m>
       <heading-deg>0</heading-deg>
     </offsets>
     <overlay>
@@ -3030,11 +3030,11 @@ by Thorsten Renk 2017
 
   <model>
     <name>sternwake</name>
-    <path>Models/Effects/Wakes/wake2.xml</path>
+    <path>Models/Geometry/Nimitz/Models/Effects/wake2_carrier.xml</path>
     <offsets>
       <x-m>210</x-m>
       <y-m>0</y-m>
-      <z-m>1</z-m>
+      <z-m>2</z-m>
       <heading-deg>0</heading-deg>
     </offsets>
   </model>

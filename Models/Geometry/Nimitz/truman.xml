@@ -358,7 +358,7 @@ by Thorsten Renk 2017
 		print ("Elevator ", i+1, " down.");
 		elevator_array[i].close();
 		}
-	settimer( func {check_rails(i);}, elevator_transit_time);
+	settimer( func {check_rails(i);}, elevator_transit_time + 1.0);
      }
 
      var door_operate = func (i){

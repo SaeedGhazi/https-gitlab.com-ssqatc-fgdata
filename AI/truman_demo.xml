@@ -30,7 +30,7 @@
        - 3x Oliver Perry (Guided missile frigate)
        - 1x LPD-17 San Antonio (Amphibious transport dock)
        - 1x MH-60 Helicopter
-      and 1 cruise ship (Kalaupapa to Honolulu)
+
 
 			Notes:
 			USS Harry S.Truman is a highly detailed model, and may cause
@@ -157,7 +157,7 @@
 
 		<entry>
 			<type>escort</type>
-			<model>Models/Maritime/Military/OliverPerryFFG.xml</model>
+			<model>Models/Maritime/Military/OliverPerryFFG-high-detail.xml</model>
 			<name>Escort-2</name>
 			<callsign>Escort-1</callsign>
 			<turn-radius-ft alias="../../parameters/turn-radius-ft"/>
@@ -177,7 +177,7 @@
 
 		<entry>
 			<type>escort</type>
-			<model>Models/Maritime/Military/OliverPerryFFG.xml</model>
+			<model>Models/Maritime/Military/OliverPerryFFG-high-detail.xml</model>
 			<name>Escort-3</name>
 			<callsign>Escort-2</callsign>
 			<turn-radius-ft alias="../../parameters/turn-radius-ft"/>
@@ -197,7 +197,7 @@
 
 		<entry>
 			<type>escort</type>
-			<model>Models/Maritime/Military/OliverPerryFFG.xml</model>
+			<model>Models/Maritime/Military/OliverPerryFFG-high-detail.xml</model>
 			<name>Escort-4</name>
 			<callsign>Escort-3</callsign>
 			<turn-radius-ft alias="../../parameters/turn-radius-ft"/>
@@ -217,7 +217,7 @@
 
 		<entry>
 			<type>escort</type>
-			<model>Models/Maritime/Military/LPD17.xml</model>
+			<model>Models/Maritime/Military/LPD17-high-detail.xml</model>
 			<name>LPD 17</name>
 			<callsign>LPD 17</callsign>
 			<turn-radius-ft alias="../../parameters/turn-radius-ft"/>
@@ -252,14 +252,6 @@
 			</station>
 		</entry>
 
-		<entry>
-			<type>ship</type>
-			<model>Models\Maritime\Civilian\Sun_Princess_Fantasy\Sun_Princess_Fantasy.xml</model>
-			<name>Cruise-1</name>
-			<turn-radius-ft>6000</turn-radius-ft>
-			<flightplan>CruiseShip_Hawaii.xml</flightplan>
-			<repeat>1</repeat>
-		</entry>
 
 	</scenario>
 </PropertyList>

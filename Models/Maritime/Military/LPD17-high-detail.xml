@@ -2,22 +2,11 @@
 
 <PropertyList>
 
-  <path>CG-57.ac</path>
+ <path>LPD17.ac</path>
 
-  <!-- *** Effects *** -->
-  <model>
-    <name>Ensign</name>
-    <path>Models/Maritime/Military/CG-57/ensign.xml</path>
-    <offsets>
-      <x-m>32.7427</x-m>
-      <y-m>0.0</y-m>
-      <z-m>26.6797</z-m>
-    </offsets>
-  </model>
 
-  <model>
+ <model>
     <name>Bow-Wave</name>
-    <!--<path>/Models/Effects/Wakes/bow_wave.xml</path>-->
     <path>Models/Geometry/Nimitz/Models/Effects/bow_wave_carrier.xml</path>
     <offsets>
       <x-m>25</x-m>
@@ -29,7 +18,7 @@
     <name>bowwake-stbd</name>
     <path>Models/Geometry/Nimitz/Models/Effects/wake_carrier.xml</path>
     <offsets>
-      <x-m>-45.0</x-m>
+      <x-m>-40.0</x-m>
       <y-m>0</y-m>
       <z-m>1.0</z-m>
       <heading-deg>0</heading-deg>
@@ -84,7 +73,7 @@
     <name>bowwake-port</name>
     <path>Models/Geometry/Nimitz/Models/Effects/wake_carrier.xml</path>
     <offsets>
-      <x-m>-45.0</x-m>
+      <x-m>-40.0</x-m>
       <y-m>0</y-m>
       <z-m>1.0</z-m>
       <heading-deg>0</heading-deg>
@@ -143,7 +132,7 @@
     <name>Stern-Wake</name>
     <path>Models/Geometry/Nimitz/Models/Effects/wake2_carrier.xml</path>
     <offsets>
-      <x-m>100</x-m>
+      <x-m>65</x-m>
       <y-m>0</y-m>
       <z-m>2.0</z-m>
       <heading-deg>0</heading-deg>
@@ -217,92 +206,6 @@
     </axis>
   </animation>
 
-<!--
-  <animation>
-    <type>rotate</type>
-    <object-name>Bow-Wave</object-name>
-    <object-name>Wake</object-name>
-    <object-name>Stern-Wake</object-name>
-    <property>wave-motion/damped-pitch-deg</property>
--->
-    <!--<property>wave-motion/calculated-pitch-deg</property>-->
-<!--
-    <factor>-1</factor>
-    <center>
-      <x-m>46.3938</x-m>
-      <y-m>0.0</y-m>
-      <z-m>4.13756</z-m>
-    </center>
-    <axis>
-      <x>0</x>
-      <y>1</y>
-      <z>0</z>
-    </axis>
-  </animation>
--->
-  <!--<animation>
-    <type>translate</type>
-    <property>wave-motion/calculated-elevation-ft</property>
-    <factor>0.3048</factor>
-    <center>
-      <x-m>46.3938</x-m>
-      <y-m>0.0</y-m>
-      <z-m>4.13756</z-m>
-    </center>
-    <axis>
-      <x>0</x>
-      <y>0</y>
-      <z>1</z>
-    </axis>
-  </animation>-->
-<!--
-  <animation>
-    <type>translate</type>
-    <object-name>Bow-Wave</object-name>
-    <object-name>Wake</object-name>
-    <object-name>Stern-Wake</object-name>
-    <property>position/altitude-ft</property>
-    <factor>-0.3048</factor>
-    <center>
-      <x-m>46.3938</x-m>
-      <y-m>0.0</y-m>
-      <z-m>4.2</z-m>
-    </center>
-    <axis>
-      <x>0</x>
-      <y>0</y>
-      <z>1</z>
-    </axis>
-  </animation>
--->
-<!--
-  <animation>
-    <type>rotate</type>
-    <property>orientation/pitch-deg</property>
-    <factor>-1</factor>
-    <axis>
-      <x>0</x>
-      <y>1</y>
-      <z>0</z>
-    </axis>
-  </animation>
-
-  <animation>
-    <type>rotate</type>
-    <property>wave-motion/damped-pitch-deg</property>
-    <factor>1</factor>
-    <center>
-      <x-m>46.3938</x-m>
-      <y-m>0.0</y-m>
-      <z-m>4.13756</z-m>
-    </center>
-    <axis>
-      <x>0</x>
-      <y>1</y>
-      <z>0</z>
-    </axis>
-  </animation>
--->
   <animation>
     <object-name>Bow-Wave</object-name>
     <type>scale</type>
@@ -322,7 +225,7 @@
     </center>
   </animation>
 
-  <!--<animation>
+  <animation>
     <type>select</type>
     <object-name>Wake</object-name>
     <condition>
@@ -330,65 +233,6 @@
         <property>/sim/rendering/particles</property>
       </not>
     </condition>
-  </animation>-->
-<!--
-  <animation>
-    <type>rotate</type>
-    <object-name>radar-1b</object-name>
-    <property>/sim/time/elapsed-sec</property>
-    <factor>65</factor>
-    <center>
-      <x-m>-11.7369</x-m>
-      <y-m>0.0</y-m>
-      <z-m>20.53</z-m>
-    </center>
-    <axis>
-      <x>0</x>
-      <y>0</y>
-      <z>1</z>
-    </axis>
-  </animation>
--->
-  <animation>
-    <type>rotate</type>
-    <object-name>SPS-49-Antenna</object-name>
-    <property>/sim/time/elapsed-sec</property>
-    <factor>50</factor>
-    <center>
-      <x-m>29.6884</x-m>
-      <y-m>0</y-m>
-      <z-m>27.6858</z-m>
-    </center>
-    <axis>
-      <x>0</x>
-      <y>0</y>
-      <z>1</z>
-    </axis>
   </animation>
 
-  <effect>
-    <inherits-from>/Effects/model-transparent</inherits-from>
-    <object-name>net</object-name>
-    <object-name>SPS-49-net-transparent</object-name>
-  </effect>
-
-  <!--******************* LOD *****************-->
-
-
-  <animation>
-    <type>range</type>
-    <object-name>railing</object-name>
-    <!--<object-name>Net</object-name>
-		<object-name>400ft</object-name>-->
-    <max-m>1000</max-m>
-  </animation>
-
-<!--
-  <animation>
-    <type>range</type>
-    <object-name>1000m</object-name>
-    <min-m>0</min-m>
-    <max-m>1000</max-m>
-  </animation>
--->
 </PropertyList>

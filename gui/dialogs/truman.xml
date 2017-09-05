@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<name>TrumanControls</name>
+	<name>Truman</name>
 	<modal>false</modal>
 	<layout>vbox</layout>
 

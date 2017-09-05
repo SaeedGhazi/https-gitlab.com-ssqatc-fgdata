@@ -492,6 +492,51 @@
 			</binding>
 		</item>
 
+		<item>
+			<label>AI Objects</label>
+			<name>ai-objects</name>
+			<binding>
+
+			<command>nasal</command>
+			<script>
+				<![CDATA[
+				var carriers = props.globals.getNode("/ai/models").getChildren("carrier");
+				var i = 0;
+				foreach(c; carriers)
+					{
+					var name = c.getNode("dlg-name",1).getValue();
+					if (name != nil) # check whether a dialog is defined at all
+						{
+						var aircraft_pos = geo.aircraft_position();
+					
+						var carrier_lat = c.getNode("position").getNode("latitude-deg").getValue();
+						var carrier_lon = c.getNode("position").getNode("longitude-deg").getValue();
+						var carrier_pos = geo.Coord.new();
+						carrier_pos.set_latlon(carrier_lat, carrier_lon);
+
+						var distance = aircraft_pos.distance_to(carrier_pos);
+	
+						if (distance < 50000.0) # only add nearby objects
+							{
+							setprop("/ai/control/objects-nearby/value["~i~"]", name);			
+							if (i==0)
+								{setprop("/ai/control/object-selected", name);}
+
+							i=i+1;
+							}
+						}
+
+					}
+
+			    	]]>
+			</script>
+			</binding>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>ai-objects</dialog-name>
+			</binding>
+		</item>
+
 	</menu>
 
 	<menu>

@@ -23,6 +23,9 @@ by Thorsten Renk 2017
       var pathc = cmdarg().getPath();
       var self = cmdarg();
 
+      # register the dialog
+
+      setprop(pathc~"/dlg-name", "Truman");
 
       # times for components to move to their position
 
@@ -3899,7 +3902,7 @@ by Thorsten Renk 2017
       <repeatable>false</repeatable>
       <binding>
 	<command>dialog-show</command>
-	<dialog-name>TrumanControls</dialog-name>
+	<dialog-name>Truman</dialog-name>
 	<property></property>
       </binding>
     </action>

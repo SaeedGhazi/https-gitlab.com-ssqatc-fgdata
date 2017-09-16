@@ -1455,14 +1455,19 @@ for (var i = index; i < i_max; i = i+1)
 	}
 
 var index_max = -1;
+var index_min = -1;
 var dist_max = -1.0;
+var dist_min = 1000000.0;
 
 var counter = 0;
 
+var diffx = 0.0;
+var diffy = 0.0;
+
 foreach(s; cloudShadowArray)
 	{
-	var diffx = (s.lat - eyeLat) * local_weather.lat_to_m + offset_x;
-	var diffy = -(s.lon - eyeLon) * local_weather.lon_to_m + offset_y;
+	diffx = (s.lat - eyeLat) * local_weather.lat_to_m + offset_x;
+	diffy = -(s.lon - eyeLon) * local_weather.lon_to_m + offset_y;
 	
 	var dist = math.sqrt(diffx*diffx + diffy*diffy);
 	if (getprop("/local-weather/cloud-shadows/cloud-shadow-fov-flag")==1)
@@ -1471,11 +1476,24 @@ foreach(s; cloudShadowArray)
 		if (viewDotPos <0.7) {dist = dist  -(viewDotPos - 0.7) * 10000.0;}
 		}
 	if (dist > dist_max) {dist_max = dist; index_max = counter;}
+	if (dist < dist_min) {dist_min = dist; index_min = counter;}
 	
 	setprop("/local-weather/cloud-shadows/cloudpos-x["~counter~"]",int(diffx) + s.size);
 	setprop("/local-weather/cloud-shadows/cloudpos-y["~counter~"]",int(diffy) + s.strength );
 	counter = counter+1;
 	}
+	
+	# now write out the closest cloud for the detail effects
+	
+	var s = cloudShadowArray[index_min];
+	
+	diffx = (s.lat - eyeLat) * local_weather.lat_to_m + offset_x;
+	diffy = -(s.lon - eyeLon) * local_weather.lon_to_m + offset_y;
+	
+	setprop("/local-weather/cloud-shadows/nearest-cloudpos-x",int(diffx) + s.size);
+	setprop("/local-weather/cloud-shadows/nearest-cloudpos-y",int(diffy) + s.strength );
+	
+	
 	#print("Dist_max:", dist_max, " index_max: ", index_max);
 	cloudShadowMinIndex = index_max;
 	if (dist_max > 0.0) {cloudShadowMaxDist = dist_max;}	

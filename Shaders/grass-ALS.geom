@@ -13,7 +13,7 @@ varying in vec3 v_normal[3];
 varying out vec2 g_rawpos;
 varying out float g_distance_to_eye;
 flat varying out float g_layer;
-flat varying out int g_num_layers;
+
 
 
 float min3(in float a, in float b, in float c)
@@ -34,7 +34,6 @@ void main()
     //float avgDistance = (distances[0]+distances[1]+distances[2])*0.33;
 
     int numLayers = MIN_LAYERS + int(smoothstep(500.0, 50.0, minDistance) * float(MAX_MINUS_MIN_LAYERS));
-    g_num_layers = numLayers;
 
     float deltaLayer = 1.0 / float(numLayers);
     float currDeltaLayer = deltaLayer * 0.5;

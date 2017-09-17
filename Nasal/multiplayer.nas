@@ -147,24 +147,28 @@ var handle_key = func(key)
 # multiplayer.dialog.show() -- displays pilot list dialog
 #
 var PILOTSDLG_RUNNING = 0;
-
 var dialog = {
     init: func(x = nil, y = nil) {
         me.x = x;
         me.y = y;
-        me.bg = [0, 0, 0, 0.3];    # background color
-        me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1], [1, 0.5, 0, 1]]; # alternative active & disabled color
+        me.bg = [0.1, 0.1, 0.1, 0.8];    # background color
+        me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1], [1, 0.7, 0, 1]]; # alternative active & disabled color
         me.unit = 1;
         me.toggle_unit();          # set to imperial
         #
         # "private"
-        var font = { name: "FIXED_8x13" };
+        var font = "";
+        if (getprop("/sim/gui/current-syle"))
+           font = {name: "FIXED_8x13" };
+        else
+           font = { name: "AvantGarde-Demi.txf"};
+
         me.header = ["chat", " callsign"," code"," model", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ignore" ~ " "];
         me.columns = [
-            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14},
-            { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
-            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" },
-            { type: "text", property: "model-short", format: "%s",     label: "--------------", halign: "fill" },
+            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
+            { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" , font: font },
+            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: font },
+            { type: "text", property: "model-short", format: "%s",     label: "--------------", halign: "fill" , font: font },
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: font },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: font },

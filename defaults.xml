@@ -801,7 +801,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </menubar>
     <gui preserve="y">
       <current-style type="int" userarchive="y">1</current-style>
-      <style n="0" include="gui/styles/classic.xml"/>
+      <style n="0" include="gui/styles/tortola.xml"/>
       <style n="1" include="gui/styles/anthrax.xml"/>
       <devel-widgets type="bool" userarchive="y">false</devel-widgets>
     </gui>

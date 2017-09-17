@@ -137,6 +137,10 @@ var Tanker = {
 		m.model.getNode("roll-deg-prop", 1).setValue(m.rollN.getPath());
 		m.model.getNode("load", 1).remove();
 		m.identify();
+
+        # notify any listeners that a new model has been added.
+        setprop("/ai/models/model-added", m.ai.getPath());
+
 		return Tanker.active[m.callsign] = m;
 	},
 	del: func {

@@ -85,7 +85,6 @@ var compose_message = func(msg = "")
 
   kbdlistener = setlistener("/devices/status/keyboard/event", func (event) {
     var key = event.getNode("key");
-
     # Only check the key when pressed.
     if (!event.getNode("pressed").getValue())
       return;
@@ -97,7 +96,7 @@ var compose_message = func(msg = "")
 
 var handle_key = func(key)
 {
-  if (key == `\n` or key == `\r`)
+  if (key == `\n` or key == `\r` or key == `~`)
   {
     # CR/LF -> send the message
 
@@ -105,8 +104,8 @@ var handle_key = func(key)
     input = substr(input, size(prefix));
     # Send the message and switch off the listener.
     setprop("/sim/multiplay/chat", input);
-    removelistener(kbdlistener);
     gui.popdown();
+    removelistener(kbdlistener);
     return 1;
   }
   elsif (key == 8)
@@ -125,8 +124,8 @@ var handle_key = func(key)
   elsif (key == 27)
   {
     # escape -> cancel
-    removelistener(kbdlistener);
     gui.popdown();
+    removelistener(kbdlistener);
     return 1;
   }
   elsif ((key > 31) and (key < 128))
@@ -354,9 +353,9 @@ var dialog = {
     del: func {
         PILOTSDLG_RUNNING = 0;
         me.close();
+        delete(gui.dialog, me.name);
         foreach (var l; me.listeners)
             removelistener(l);
-        delete(gui.dialog, me.name);
     },
     show: func {
         if (!PILOTSDLG_RUNNING) {
@@ -521,10 +520,10 @@ var mp_mode_changed = func(n) {
             io.write(log_file, "=====  DISCONNECT\n");
             io.flush(log_file);
             io.close(log_file);
-            foreach (var l; log_listeners)
-                removelistener(l);
             log_listeners = [];
             log_file = nil;
+            foreach (var l; log_listeners)
+                removelistener(l);
         }
     }
 }

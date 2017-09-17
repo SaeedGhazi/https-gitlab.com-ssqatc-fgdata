@@ -3,7 +3,7 @@
   <description>Airbus A380-800</description>
   <author>Ian(Yves) Tolosa. July 2016 </author>
   <path>Models/388.ac</path>
-  <!-- Gear Showed only < 150 knotspeed -->
+  <!-- Gear Showed only < 180 knotspeed -->
   <animation>
     <type>select</type>
     <object-name>Gear</object-name>
@@ -14,14 +14,23 @@
       </less-than>
     </condition>
   </animation>
-  <!-- Animated Jetway Anchoring Point -->
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/A380/Effects/388-lightMap</inherits-from>
+    <object-name>388</object-name>
+  </effect>
+<!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/388-NavLights.xml</path>
+  </model>
+  <!-- Enable Beacons and Strobes Pulse Behaviour -->
   <nasal>
-    <load>
-	var model = cmdarg();
-	model.getNode("door[0]/position-x-m", 1).setValue(-28.8479);
-	model.getNode("door[0]/position-y-m", 1).setValue(6.23);
-	model.getNode("door[0]/position-z-m", 1).setValue(2.80942);
-	model.getNode("door[0]/jetway-hood-deg", 1).setValue(3);
-	</load>
+    <load><![CDATA[
+        aircraft.light.new("/sim/model/A359/lighting/beacon", [0.7, 1.3]);
+        aircraft.light.new("/sim/model/A359/lighting/strobes", [0.02, 0.1, 0.02, 1.86]);
+        setprop("/sim/model/A359/lighting/beacon/enabled", 1);
+        setprop("/sim/model/A359/lighting/strobes/enabled", 1);
+      ]]></load>
+    <unload></unload>
   </nasal>
 </PropertyList>

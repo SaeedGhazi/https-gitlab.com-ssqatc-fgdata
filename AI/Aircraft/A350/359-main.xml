@@ -3,13 +3,12 @@
   <description>Airbus A350-900</description>
   <author>Ian(Yves) Tolosa. August 2017</author>
   <path>Models/359.ac</path>
-  
+  <!-- Pitch Aircraft towards front so all wheels on ground -->
   <offsets>
-	<pitch-deg>-0.5</pitch-deg>   
+    <pitch-deg>-0.45</pitch-deg>
   </offsets>
-  
-   
-    <animation>
+  <!-- Show Gear only when speed under 150 knots for parking and taxi and take off phases -->
+  <animation>
     <type>select</type>
     <object-name>Gear</object-name>
     <condition>
@@ -19,17 +18,23 @@
       </less-than>
     </condition>
   </animation>
-  
-    <nasal>
-  <load>
-   var model = cmdarg();
-   model.getNode("door[0]/position-x-m", 1).setValue(-26.9748);
-   model.getNode("door[0]/position-y-m", 1).setValue(2.55192);
-   model.getNode("door[0]/position-z-m", 1).setValue(4.97698);
-   model.getNode("door[0]/jetway-hood-deg", 1).setValue(12.0);
-  </load>
-  
-   
- </nasal>
-   
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/A350/Effects/359-lightMap</inherits-from>
+    <object-name>359</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/359-NavLights.xml</path>
+  </model>
+  <!-- Enable Beacons and Strobes Pulse Behaviour -->
+  <nasal>
+    <load><![CDATA[
+        aircraft.light.new("/sim/model/A359/lighting/beacon", [0.7, 1.3]);
+        aircraft.light.new("/sim/model/A359/lighting/strobes", [0.02, 0.1, 0.02, 1.86]);
+        setprop("/sim/model/A359/lighting/beacon/enabled", 1);
+        setprop("/sim/model/A359/lighting/strobes/enabled", 1);
+      ]]></load>
+    <unload></unload>
+  </nasal>
 </PropertyList>

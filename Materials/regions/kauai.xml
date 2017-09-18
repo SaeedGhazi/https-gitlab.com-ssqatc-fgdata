@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
-<!-- More green Oahu and Kaua'i cover -->
 <PropertyList>
-  <name>Oahu</name>
+  <name>Kauai</name>
   <area>
     <lon1>-160.0</lon1>
-    <lon2>-157.5</lon2>
-    <lat1>18.8</lat1>
-    <lat2>28.5</lat2>
+    <lon2>-159.0</lon2>
+    <lat1>21.5</lat1>
+    <lat2>22.5</lat2>
   </area>
 
   <condition>
@@ -15,7 +14,8 @@
       <value>summer</value>
     </equals>
   </condition>
-
+  
+  
   <material>
     <name>ShrubCover</name>
     <name>ShrubGrassCover</name>
@@ -34,7 +34,7 @@
     </texture-set>
     <parameters>
       <transition_model>1.0</transition_model>
-	  <rock_strata>0</rock_strata>
+	  <rock_strata>1</rock_strata>
 	  <max_overlay_height>2.0</max_overlay_height>
 	  <overlay_hardness>0.0</overlay_hardness>
 	  <overlay_density>0.7</overlay_density>
@@ -71,41 +71,37 @@
     <rolling-friction>0.6</rolling-friction>
     <bumpiness>0.4</bumpiness>
   </material>
-
+  
   <material>
-    <name>GrassCover</name>
-    <name>BareTundraCover</name>
-    <name>MixedTundraCover</name>
-    <name>Cemetery</name>
-    <effect>Effects/landmass-nowood</effect>
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+	<effect>Effects/terrain-overlay</effect>
     <texture-set>
-      <texture>Terrain/tundra-hawaii-green.png</texture>
-      <texture n="11">Terrain/rainforest-hawaii.png</texture>
-      <texture n="12">Terrain/shrub-hawaii-green.png</texture>
+      <texture>Terrain/shrub-hawaii.png</texture>
+      <texture n="12">Terrain/shrub-hawaii.png</texture>
       <texture n="13">Terrain/shrub-hawaii.png</texture>
-      <texture n="15">Terrain/rainforest-hawaii.png</texture>
+	  <texture n="20">Terrain/evergreen.png</texture>
     </texture-set>
-    <xsize>2000</xsize>
-    <ysize>2000</ysize>
-    <light-coverage>4000000.0</light-coverage>
-    <diffuse>
-      <r>0.93</r>
-      <g>0.95</g>
-      <b>0.93</b>
-      <a>1.0</a>
-    </diffuse>
-    <specular>
-      <r>0.1</r>
-      <g>0.12</g>
-      <b>0.1</b>
-      <a>1.0</a>
-    </specular>
-    <shininess>1.2</shininess>
+    <parameters>
+      <transition_model>0.0</transition_model>
+	  <rock_strata>1</rock_strata>
+	  <overlay_hardness>0.0</overlay_hardness>
+	  <overlay_density>0.5</overlay_density>
+	  <overlay_scale>2.0</overlay_scale>
+	  <overlay_autumn_flag>0</overlay_autumn_flag>
+	  <overlay_brightness_top>0.8</overlay_brightness_top>
+	  <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+	  <overlay_steepness_factor>0.6</overlay_steepness_factor>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
     <solid>1</solid>
-    <friction-factor>0.7</friction-factor>
+    <friction-factor>0.9</friction-factor>
     <rolling-friction>0.1</rolling-friction>
-    <bumpiness>0.15</bumpiness>
-    <load-resistance>1e30</load-resistance>
+    <bumpiness>0.3</bumpiness>
   </material>
-
-</PropertyList>
+  
+ </PropertyList>

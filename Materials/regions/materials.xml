@@ -48,6 +48,8 @@
 <region include="Materials/regions/southeast_asia.xml"/>
 <region include="Materials/regions/hawaii.xml"/>
 <region include="Materials/regions/oahu.xml"/>
+<region include="Materials/regions/hawaii_big_island.xml"/>
+<region include="Materials/regions/kauai.xml"/>
 
 <!-- Africa -->
 <region include="Materials/regions/africa_savanna.xml"/>

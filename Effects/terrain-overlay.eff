@@ -683,14 +683,16 @@
 			<!--<alpha-to-coverage>true</alpha-to-coverage>-->
 
             <cull-face>back</cull-face>
-            <!--<render-bin>
-                <bin-number>10</bin-number>
-                <bin-name>GrassBin</bin-name>
-            </render-bin>-->
-			 <render-bin>
+
+			 <!--<render-bin>
         			<bin-number>111</bin-number>
         			<bin-name>DepthSortedBin</bin-name>
-     			 </render-bin>
+     			 </render-bin>-->
+      	    <render-bin>
+        	<bin-number><use>render-bin/bin-number</use></bin-number>
+        	<bin-name><use>render-bin/bin-name</use></bin-name>
+      	    </render-bin>
+
             <texture-unit>
                 <unit>7</unit>
                 <type><use>texture[20]/type</use></type>

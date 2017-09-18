@@ -36,10 +36,8 @@ uniform float osg_SimulationTime;
 varying vec2 g_rawpos;                  // Horizontal position in model space
 varying float g_distance_to_eye;        // Distance to the camera. Layers were disregarded
 varying vec3 g_normal;
-varying in float g_altitude;
-
-
-flat in float g_layer;				       // The layer where the fragment lives (0-1 range)
+varying float g_altitude;
+varying float g_layer;				       // The layer where the fragment lives (0-1 range)
 
 
 float rand2D(in vec2 co);

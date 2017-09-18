@@ -40,6 +40,9 @@ uniform float cloudpos19_y;
 uniform float cloudpos20_x;
 uniform float cloudpos20_y;
 
+uniform float cloudpos_n_x;
+uniform float cloudpos_n_y;
+
 float shadow_func (in float x, in float y, in float noise, in float dist)
 {
 
@@ -134,4 +137,20 @@ shadeValue = shadeValue * (1.0 - smoothstep(15000.0, 30000.0,dist));
 
 return 1.0 - shadeValue;
 
+}
+
+
+float shadow_func_nearest (in float x, in float y, in float noise, in float dist)
+{
+
+if (dist > 6000.0) {return 1.0;}
+
+float width =  fract((cloudpos_n_x)) * 5000.0;
+float strength = fract((cloudpos_n_y));
+
+
+float dlength = length( vec2 (x - cloudpos_n_x, y - cloudpos_n_y));
+float shadeValue = strength * (1.0-smoothstep(width * 0.5, width, dlength));
+
+return 1.0 - shadeValue;
 }

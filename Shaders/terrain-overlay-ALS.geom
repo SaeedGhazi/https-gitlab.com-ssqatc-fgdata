@@ -14,9 +14,7 @@ varying out vec2 g_rawpos;
 varying out float g_distance_to_eye;
 varying out vec3 g_normal;
 varying out float g_altitude;
-
-
-flat varying out float g_layer;
+varying out float g_layer;
 
 
 

@@ -151,6 +151,7 @@
       </texture-unit>
       <program>
         <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
+	<vertex-shader>Shaders/filters-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-ultra.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
@@ -714,9 +715,9 @@
                 <vertex-shader>Shaders/grass-ALS.vert</vertex-shader>
                 <geometry-shader>Shaders/terrain-overlay-ALS.geom</geometry-shader>
                 <fragment-shader>Shaders/terrain-overlay-ALS.frag</fragment-shader>
-				<fragment-shader>Shaders/noise.frag</fragment-shader>
-				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
-				<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
+		<fragment-shader>Shaders/noise.frag</fragment-shader>
+		<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+		<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
                 <geometry-vertices-out type="int">96</geometry-vertices-out>
                 <geometry-input-type>triangles</geometry-input-type>
                 <geometry-output-type>triangle-strip</geometry-output-type>

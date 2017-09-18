@@ -29,9 +29,9 @@ uniform sampler2D densityTex;
 
 uniform float osg_SimulationTime;
 
-varying in vec2 g_rawpos;                  // Horizontal position in model space
-varying in float g_distance_to_eye;        // Distance to the camera. Layers were disregarded
-flat in float g_layer;				       // The layer where the fragment lives (0-1 range)
+varying vec2 g_rawpos;                  // Horizontal position in model space
+varying float g_distance_to_eye;        // Distance to the camera. Layers were disregarded
+varying float g_layer;				       // The layer where the fragment lives (0-1 range)
 
 float rand2D(in vec2 co);
 float Noise2D(in vec2 co, in float wavelength);

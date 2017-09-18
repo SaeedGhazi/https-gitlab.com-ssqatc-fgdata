@@ -12,7 +12,7 @@ varying in vec3 v_normal[3];
 
 varying out vec2 g_rawpos;
 varying out float g_distance_to_eye;
-flat varying out float g_layer;
+varying out float g_layer;
 
 
 

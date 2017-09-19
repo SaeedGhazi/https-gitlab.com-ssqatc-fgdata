@@ -233,9 +233,11 @@
           if (mode["bestrunway"].getBoolValue()) {
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/parkpos", "");
+            setprop("/sim/presets/runway-requested", 0);
           } else if (mode["runway"].getBoolValue()) {
             setprop("/sim/presets/runway", getprop("/sim/gui/dialogs/airports/selected-airport/rwy"));
             setprop("/sim/presets/parkpos", "");
+            setprop("/sim/presets/runway-requested", 1);
           } else {
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/parkpos", getprop("/sim/gui/dialogs/airports/selected-airport/parkpos"));

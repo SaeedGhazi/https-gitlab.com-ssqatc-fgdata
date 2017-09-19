@@ -42,7 +42,7 @@
         }
         setprop(propname, found[0].id);
         setprop(freqpropname, found[0].frequency / 100.0);
-       
+
       }
     </open>
 
@@ -351,6 +351,12 @@
           if (!mode.airport.getBoolValue()) {
             setprop("/sim/presets/airport-id", "");
             setprop("/sim/presets/runway", "");
+            setprop("/sim/presets/runway-requested", 0);
+          } else {
+            var runway = getprop("/sim/presets/runway");
+            if (runway != "") {
+              setprop("/sim/presets/runway-requested", 1);
+            }
           }
 
           if (!mode.lonlat.getBoolValue()) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Lighting of Tail, Flanks and Windows -->
 <PropertyList>
-  <name>A359-Lightmap</name>
+  <name>A359-LightMap</name>
   <inherits-from>Effects/model-combined-deferred</inherits-from>
   <parameters>
     <normalmap-enabled type="int">0</normalmap-enabled>
@@ -26,7 +26,7 @@
     <lightmap-color type="vec3d" n="3">1.0 1.0 1.0</lightmap-color>
     <!-- LightMap Image Location -->
     <texture n="3">
-      <image>AI/Aircraft/A350/Effects/359-lightMap.png</image>
+      <image>AI/Aircraft/A350/Effects/359-LightMap.png</image>
       <filter>linear-mipmap-linear</filter>
       <wrap-s>clamp</wrap-s>
       <wrap-t>clamp</wrap-t>

@@ -20,7 +20,7 @@
   </animation>
   <!-- Tail and Windows Lightmap Effect -->
   <effect>
-    <inherits-from>AI/Aircraft/A350/Effects/359-lightMap</inherits-from>
+    <inherits-from>AI/Aircraft/A350/Effects/359-LightMap</inherits-from>
     <object-name>359</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->

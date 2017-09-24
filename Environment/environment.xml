@@ -502,5 +502,8 @@
       <wash-strength type="float" userarchive="n">0.0</wash-strength>
   </aircraft-effects>
 
+<!-- definitions for vocanic activity -->
+  <volcanoes include="volcanoes.xml"/>
+
 
 </PropertyList>

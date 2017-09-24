@@ -330,6 +330,51 @@
 				<script>wildfire.dialog.show()</script>
 			</binding>
 		</item>
+
+
+		<item>
+			<label>Volcanoes</label>
+			<name>volcanoes</name>
+			<binding>
+
+			<command>nasal</command>
+			<script>
+				<![CDATA[
+				var varray = volcano.volcano_manager.volcano_array;
+				var n = size(varray);
+				
+				var aircraft_pos = geo.aircraft_position();
+				
+				var j = 0;
+		
+				for (var i = 0; i< n; i=i+1)
+					{
+						#print(i, " ", varray[i].name);
+						var distance = aircraft_pos.distance_to(varray[i].pos);
+				
+						if (distance < 150000.0) # only add nearby objects
+							{
+							var name = varray[i].name;
+							
+							setprop("/environment/volcanoes/volcanoes-nearby/value["~j~"]", name);			
+							if (j==0)
+								{setprop("/environment/volcanoes/volcano-selected", name);}
+
+							j=j+1;
+							}
+
+					}
+
+			    	]]>
+			</script>
+			</binding>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>volcanoes</dialog-name>
+			</binding>
+		</item>
+
+
 	</menu>
 
 	<menu>

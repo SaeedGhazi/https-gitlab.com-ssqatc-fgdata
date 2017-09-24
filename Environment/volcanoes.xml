@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<PropertyList>
+
+
+<enable-volcanoes type="int" userarchive="y">0</enable-volcanoes>
+
+<kilauea>
+	<halemaumau-activity type="int" userarchive="y">0</halemaumau-activity>
+	<puu-oo-activity type="int" userarchive="y">0</puu-oo-activity>
+</kilauea>
+
+<stromboli>
+	<central-activity type="int" userarchive="y">0</central-activity>
+	<side-activity type="int" userarchive="y">0</side-activity>
+</stromboli>
+
+</PropertyList>

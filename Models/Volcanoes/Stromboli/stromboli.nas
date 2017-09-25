@@ -1,4 +1,4 @@
-		var stromboli_loop_flag = 1;
+		var stromboli_loop_flag = 0;
 	
 		var stromboli_central_factor = 1.0;
 		var stromboli_side_factor = 1.0;
@@ -72,7 +72,7 @@
 
 		stromboli_state_manager = func {
 		
-			print ("Stromboli state manager");
+			#print ("Stromboli state manager");
 			var state1 = getprop("/environment/volcanoes/stromboli/central-activity");
 			var state2 = getprop("/environment/volcanoes/stromboli/side-activity");
 
@@ -102,13 +102,13 @@
 			var state = state1;
 			if (state2 > state) {state = state2;}
 			
-			if (state > 1)
+			if ((state > 1) and (stromboli_loop_flag == 0))
 				{
 				print("Starting Stromboli eruption simulation.");
 				stromboli_loop_flag = 1;
 				stromboli_loop(0.0, 0.0, 0.0, 0.0);
 				}
-			else
+			else if (state <= 1)
 				{
 				stromboli_loop_flag = 0;
 				}

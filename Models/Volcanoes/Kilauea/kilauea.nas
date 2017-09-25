@@ -31,7 +31,7 @@
 
 		puu_oo_state_manager = func {
 		
-			print ("Puu Oo state manager");
+			#print ("Puu Oo state manager");
 			var state = getprop("/environment/volcanoes/kilauea/puu-oo-activity");
 			
 			if (state == 3)

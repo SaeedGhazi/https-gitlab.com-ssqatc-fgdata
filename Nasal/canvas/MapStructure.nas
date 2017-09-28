@@ -16,7 +16,7 @@
 ##	- parents
 ##	- __self__
 ##	- del (managing all listeners and timers)
-## 	- searchCmd -> filtering 
+## 	- searchCmd -> filtering
 ##
 ##  APIs to be wrapped for each layer:
 ##  printlog(), die(), debug.bt(), benchmark()
@@ -79,10 +79,16 @@ var MapStructure_selfTest = func() {
 	# TODO: we'll need some z-indexing here, right now it's just random
 	# TODO: use foreach/keys to show all layers in this case by traversing SymbolLayer.registry direclty ?
 	# maybe encode implicit z-indexing for each lcontroller ctor call ? - i.e. preferred above/below order ?
-	foreach(var type; [r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('RTE'),r('WPT'),r('FLT'),r('WXR'),r('APS'), ] ) 
+	foreach(var type; [r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('RTE'),r('WPT'),r('FLT'),r('WXR'),r('APS'), ] )
 		TestMap.addLayer(factory: canvas.SymbolLayer, type_arg: type.name,
 					visible: type.vis, priority: type.zindex,
 		);
+		foreach(var type; [ r('OSM'), r('OpenAIP') ]) {
+				TestMap.addLayer(factory: canvas.OverlayLayer, type_arg: type.name,
+												 visible: type.vis, priority: type.zindex,
+												 style: Styles.get(type.name),
+												 options: Options.get(type.name) );
+		}
 }; # MapStructure_selfTest
 
 
@@ -854,7 +860,7 @@ var LineSymbol = {
 		var path = me.model;
 		if(typeof(path) == 'hash'){
 			path = me.model.path;
-			if(path == nil) 
+			if(path == nil)
 				__die("LineSymbol model requires a 'path' member (vector)");
 		}
 		foreach (var m; path) {
@@ -862,7 +868,7 @@ var LineSymbol = {
 				var (lat,lon) = me.controller.getpos(m);
 				append(coords,"N"~lat);
 				append(coords,"E"~lon);
-				append(cmds,cmd); 
+				append(cmds,cmd);
 				cmd = canvas.Path.VG_LINE_TO;
 			} else {
 				cmd = canvas.Path.VG_MOVE_TO;
@@ -934,7 +940,7 @@ var SymbolLayer = {
 		# print("SymbolLayer setup options:", m.options!=nil);
 		m.style = default_hash(style, m.df_style);
 		m.options = default_hash(options, m.df_options);
-		
+
 		if (controller == nil)
 			controller = m.df_controller;
 		assert_m(controller, "parents");
@@ -1074,15 +1080,15 @@ var MultiSymbolLayer = {
 		}
 		return 0;
 	},
-	searchCmd: func() { 
-		if (me.map.getPosCoord() == nil or me.map.getRange() == nil) { 
+	searchCmd: func() {
+		if (me.map.getPosCoord() == nil or me.map.getRange() == nil) {
 			print("Map not yet initialized, returning empty result set!");
 			return []; # handle maps not yet fully initialized
 		}
 		var result = me.controller.searchCmd();
 		# some hardening
 		var type=typeof(result);
-		if(type != 'nil' and type != 'vector') 
+		if(type != 'nil' and type != 'vector')
 			__die("MultiSymbolLayer: searchCmd() method MUST return a vector of valid positioned ghosts/Geo.Coord objects or nil! (was:"~type~")");
 		return result;
 	},
@@ -1127,7 +1133,7 @@ var NavaidSymbolLayer = {
 
 ###
 ## TODO: wrappers for Horizontal vs. Vertical layers ?
-## 
+##
 
 var SingleSymbolLayer = {
 	parents: [SymbolLayer],
@@ -1176,6 +1182,306 @@ var SingleSymbolLayer = {
 		call(SymbolLayer.del, nil, me);
 	},
 }; # of SingleSymbolLayer
+
+##
+# Base class for a OverlayLayer, e.g. a TileLayer
+#
+var OverlayLayer = {
+# Default implementations/values:
+	df_controller: nil, # default controller
+	df_priority: nil, # default priority for display sorting
+	df_style: nil,
+	df_options: nil,
+	type: nil, # type of #Symbol to add (MANDATORY)
+	id: nil, # id of the group #canvas.Element (OPTIONAL)
+# Static/singleton:
+	registry: {},
+	add: func(type, class) {
+		me.registry[type] = class;
+	},
+	get: func(type) {
+		foreach(var invalid; var invalid_types = [nil,'vector','hash'])
+			if ( (var t=typeof(type)) == invalid) __die(" invalid OverlayLayer type (non-scalar) of type:"~t);
+		if ((var class = me.registry[type]) == nil)
+			__die("OverlayLayer.get(): unknown type '"~type~"'");
+		else return class;
+	},
+	# Calls corresonding layer constructor
+	# @param group #Canvas.Group to place this on.
+	# @param map The #Canvas.Map this is a member of.
+	# @param style An alternate style.
+	# @param options Extra options/configurations.
+	# @param visible Initially set it up as visible or invisible.
+	new: func(type, group, map, controller=nil, style=nil, options=nil, visible=1, arg...) {
+		# XXX: Extra named arguments are (obviously) not preserved well...
+		if (me == nil) __die("OverlaySymbolLayer constructor needs to know its parent class");
+
+		var ret = call((var class = me.get(type)).new, [group, map, controller, style, options, visible], class);
+		ret.type = type;
+		ret.group.set("layer-type", type);
+		return ret;
+	},
+
+	# Private constructor:
+	_new: func(m, style, controller, options) {
+		m.style = default_hash(style, m.df_style);
+		m.options = default_hash(options, m.df_options);
+
+		if (controller == nil) {
+			if (m.df_controller == nil) {
+				controller = OverlayLayer.Controller;
+			} else {
+				controller = m.df_controller;
+			}
+		}
+
+		assert_m(controller, "parents");
+		if (controller.parents[0] == OverlayLayer.Controller)
+			controller = controller.new(m);
+		assert_m(controller, "parents");
+		assert_m(controller.parents[0], "parents");
+		if(options != nil){
+			var listeners = opt_member(controller, 'listeners');
+			var listen = opt_member(options, 'listen');
+			if (listen != nil and listeners != nil){
+				var listen_tp = typeof(listen);
+				if(listen_tp != 'vector' and listen_tp != 'scalar')
+					__die("Options 'listen' cannot be a "~ listen_tp);
+				if(typeof(listen) == 'scalar')
+					listen = [listen];
+				foreach(var node_name; listen){
+					var node = opt_member(options, node_name);
+					if(node == nil)
+						node = node_name;
+					append(controller.listeners,
+						   setlistener(node, func call(m.update,[],m),0,0));
+				}
+			}
+		}
+		m.controller = controller;
+	},
+# For instances:
+	del: func() if (me.controller != nil) { me.controller.del(); me.controller = nil },
+	update: func() { _die("Abstract OverlayLayer.update() not implemented for this Layer"); },
+};
+
+var TileLayer = {
+	parents: [OverlayLayer],
+	# Default implementations/values:
+	# @param group A group to place this on.
+	# @param map The #Canvas.Map this is a member of.
+	# @param controller A controller object (parents=[OverlayLayer.Controller])
+	#                   or implementation (parents[0].parents=[OverlayLayer.Controller]).
+	# @param style An alternate style.
+	# @param options Extra options/configurations.
+	# @param visible Initially set it up as visible or invisible.
+	new: func(group, map, controller=nil, style=nil, options=nil, visible=1) {
+		if (me == nil) __die("TileLayer constructor needs to know its parent class");
+		var m = {
+			parents: [me],
+			map: map,
+			group: group.createChild("group", me.type),
+			maps_base: "",
+			num_tiles: [5,5],
+			makeURL: nil,
+			makePath: nil,
+			center_tile_offset : [],
+			tile_size: 256,
+			zoom: 9,
+			tile_type: "map",
+			last_tile_type: "map",
+			last_tile : [-1,-1],
+			tiles: [],
+		};
+
+		# Determine the number of tiles dynamically based on the canvas size
+		#var width = map.getCanvas().get("size[0]");
+		#var height = map.getCanvas().get("size[1]");
+		#m.num_tiles= [ math.ceil(width / m.tile_size),
+		#                 math.ceil(height / m.tile_size) ];
+
+
+		m.maps_base = getprop("/sim/fg-home") ~ '/cache/maps';
+		m.tiles = setsize([], m.num_tiles[0]);
+		m.center_tile_offset = [
+		  (m.num_tiles[0] - 1.0) / 2.0,
+		  (m.num_tiles[1] - 1.0) / 2.0
+		];
+
+		append(m.parents, m.group);
+		m.setVisible(visible);
+		OverlayLayer._new(m, style, controller, options);
+		#m.group.setCenter(0,0);
+
+		for(var x = 0; x < m.num_tiles[0]; x += 1)
+		{
+		  m.tiles[x] = setsize([], m.num_tiles[1]);
+		  for(var y = 0; y < m.num_tiles[1]; y += 1) {
+		    m.tiles[x][y] = m.group.createChild("image", "map-tile");
+			}
+		}
+
+		m.update();
+		return m;
+	},
+	updateLayer: func()
+	{
+	  # get current position
+	  var lat = me.map.getLat();
+	  var lon = me.map.getLon();
+		var range_nm =  me.map.getRange();
+		var screen_range = me.map.getScreenRange();
+
+		if (screen_range == nil) screen_range = 200;
+
+		# Screen resolution m/pixel is range/screen_range
+		var screen_resolution = range_nm * globals.NM2M / screen_range;
+
+		# Slippy map resolution is
+		# 156543.03 meters/pixel * cos(latitude) / (2 ^ zoomlevel)
+		# Determine the closest zoom level and scaling ratio.  Each increase in zoom level doubles resolution.
+		var ideal_zoom = math.ln(156543.03 * math.cos(lat * math.pi/180.0) / screen_resolution) / math.ln(2);
+	  me.zoom = math.ceil(ideal_zoom);
+		var ratio = 1 / math.pow(2,me.zoom - ideal_zoom);
+
+		for(var x = 0; x < me.num_tiles[0]; x += 1)
+		{
+		  for(var y = 0; y < me.num_tiles[1]; y += 1) {
+				me.tiles[x][y].setTranslation(int((x - me.center_tile_offset[0]) * me.tile_size * ratio + 0.5),
+				                             int((y - me.center_tile_offset[1]) * me.tile_size * ratio + 0.5));
+				me.tiles[x][y].setScale(ratio);
+				me.tiles[x][y].scale_factor = ratio;
+			}
+		}
+
+		#var heading = me.map.getHdg();
+		#me.group.setRotation(heading);
+
+		var ymax = math.pow(2, me.zoom);
+
+		#  Slippy map location of center point
+		var slippy_center = [
+	    math.floor(ymax * ((lon + 180.0) / 360.0)),
+	    math.floor((1 - math.ln(math.tan(lat * math.pi/180.0) + 1 / math.cos(lat * math.pi/180.0)) / math.pi) / 2.0 * ymax)
+	  ];
+
+		# This is the Slippy Map location of the 0,0 tile
+	  var offset = [slippy_center[0] - me.center_tile_offset[0],
+		              slippy_center[1] - me.center_tile_offset[1]];
+
+	  var tile_index = [math.floor(offset[0]), math.floor(offset[1])];
+
+		# Find the lon, lat of the center tile
+		var center_tile_lon = slippy_center[0]/ymax * 360.0 - 180.0;
+		var nn = math.pi - 2.0 * math.pi *  slippy_center[1]/ ymax;
+		var center_tile_lat = 180.0 / math.pi * math.atan(0.5 * (math.exp(nn) - math.exp(-nn)));
+
+		me.group.setGeoPosition(center_tile_lat, center_tile_lon);
+
+	  if(    tile_index[0] != me.last_tile[0]
+	      or tile_index[1] != me.last_tile[1]
+	      or me.tile_type != me.last_tile_type )
+	  {
+	    for(var x = 0; x < me.num_tiles[0]; x += 1) {
+	      for(var y = 0; y < me.num_tiles[1]; y += 1) {
+	        var pos = {
+	          z: me.zoom,
+	          x: int(tile_index[0] + x),
+	          y: int(tile_index[1] + y),
+						tms_y: ymax - int(tile_index[1] + y) - 1,
+	          type: me.tile_type
+	        };
+
+	        (func {
+		        var img_path = me.makePath(pos);
+		        var tile = me.tiles[x][y];
+
+		        if( io.stat(img_path) == nil ) {
+							# image not found, save in $FG_HOME
+		          var img_url = me.makeURL(pos);
+		          #print('requesting ' ~ img_url);
+		          http.save(img_url, img_path)
+		              .done(func { tile.set("src", img_path);})
+		              .fail(func (r) print('Failed to get image ' ~ img_path ~ ' ' ~ r.status ~ ': ' ~ r.reason));
+		        } else {
+							# Re-use cached image
+		          #print('loading ' ~ img_path);
+		          tile.set("src", img_path)
+		        }
+	        })();
+	      }
+			}
+
+	    me.last_tile = tile_index;
+	    me.last_type = me.type;
+	  }
+	},
+	update: func() {
+		if (!me.getVisible())
+			return;
+		#debug.warn("update traceback for "~me.type);
+
+		if (me.options != nil and me.options['update_wrapper'] !=nil) {
+			me.options.update_wrapper( me, me.updateLayer ); # call external wrapper (usually for profiling purposes)
+		} else {
+			me.updateLayer();
+		}
+	},
+	del: func() {
+		printlog(_MP_dbg_lvl, "SymbolLayer.del()");
+		call(OverlayLayer.del, nil, me);
+	},
+}; # of TileLayer
+
+# Class to manage controlling a OverlayLayer.
+# Currently handles:
+#  * Simple update() call
+OverlayLayer.Controller = {
+# Static/singleton:
+	registry: {},
+	add: func(type, class)
+		me.registry[type] = class,
+	get: func(type)
+		if ((var class = me.registry[type]) == nil)
+			__die("unknown type '"~type~"'");
+		else return class,
+	# Calls corresponding controller constructor
+	# @param layer The #OverlayLayer this controller is responsible for.
+	new: func(type, layer, arg...)
+		return call((var class = me.get(type)).new, [layer]~arg, class),
+# Default implementations for derived classes:
+	# @return List of positioned objects.
+	updateLayer: func()
+		__die("Abstract method updateLayer() not implemented for this OverlayLayer.Controller type!"),
+	addVisibilityListener: func() {
+		var m = me;
+		append(m.listeners, setlistener(
+			m.layer._node.getNode("visible"),
+			func m.layer.update(),
+			#compile("m.layer.update()", "<layer visibility on node "~m.layer._node.getNode("visible").getPath()~" for layer "~m.layer.type~">"),
+			0,0
+		));
+	},
+	addRangeListener: func() {
+		var m = me;
+		append(m.listeners, setlistener(
+			m.layer._node.getNode("range",1),
+			func m.layer.update(),
+			#compile("m.layer.update()", "<layer visibility on node "~m.layer._node.getNode("visible").getPath()~" for layer "~m.layer.type~">"),
+			0,0
+		));
+	},
+	addScreenRangeListener: func() {
+		var m = me;
+		append(m.listeners, setlistener(
+			m.layer._node.getNode("screen-range",1),
+			func m.layer.update(),
+			#compile("m.layer.update()", "<layer visibility on node "~m.layer._node.getNode("visible").getPath()~" for layer "~m.layer.type~">"),
+			0,0
+		));
+	},
+}; # of OverlayLayer.Controller
+
 
 ###
 # set up a cache for 32x32 symbols (initialized below in load_MapStructure)
@@ -1307,6 +1613,7 @@ var load_MapStructure = func {
 			"symbol",
 			"scontroller",
 			"controller",
+			"overlay"
 		];
 		var deps = {};
 		foreach (var d; dep_names) deps[d] = [];

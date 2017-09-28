@@ -164,12 +164,12 @@ var Coord = {
 		me._pupdate();
 		course *= D2R;
 		dist /= ERAD;
-		
+
 		if (dist < 0.0) {
 		  dist = abs(dist);
-		  course = course - math.pi;		
+		  course = course - math.pi;
 		}
-		
+
 		me._lat = math.asin(math.sin(me._lat) * math.cos(dist)
 				+ math.cos(me._lat) * math.sin(dist) * math.cos(course));
 
@@ -398,6 +398,6 @@ var PositionedSearch = {
 	  debug.benchmark('Toggle '~from~'nm/'~to~'nm', func {
 	    s.update();
 	    s.update( func positioned.findWithinRange(to, 'fix') );
-	  }); # ~ takes 
+	  }); # ~ takes
 	}, # of test
 };

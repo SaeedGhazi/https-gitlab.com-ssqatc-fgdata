@@ -476,11 +476,13 @@ var Map = {
   setController: func(controller=nil, arg...)
   {
     if (me.controller != nil) me.controller.del(me);
-    if (controller == nil)
+    if (controller == nil) {
       controller = Map.df_controller;
-    elsif (typeof(controller) != 'hash')
+    }
+    elsif (typeof(controller) != 'hash') {
       controller = Map.Controller.get(controller);
-    
+    }
+
     if (controller == nil) {
       me.controller = nil;
     } else {
@@ -527,8 +529,8 @@ var Map = {
   },
   getLayer: func(type_arg) me.layers[type_arg],
 
-  setRange: func(range) me.set("range",range),
-  getRange: func me.get('range'),
+  setRange: func(range) { me.set("range",range); },
+  setScreenRange: func(range) { me.set("screen-range",range); },
 
   setPos: func(lat, lon, hdg=nil, range=nil, alt=nil)
   {
@@ -555,6 +557,7 @@ var Map = {
   getHdg: func me.get("hdg"),
   getAlt: func me.get("altitude"),
   getRange: func me.get("range"),
+  getScreenRange: func me.get('screen-range'),
   getLatLon: func [me.get("ref-lat"), me.get("ref-lon")],
   # N.B.: This always returns the same geo.Coord object,
   # so its values can and will change at any time (call
@@ -626,7 +629,7 @@ var Text = {
   {
     die("updateText() requires enableUpdate() to be called first");
   },
-     
+
   # enable fast setprop-based text writing
   enableFast: func ()
   {
@@ -981,7 +984,7 @@ var Path = {
   },
 
   setColor: func me.setStroke(_getColor(arg)),
-  getColor: func me.getStroke(), 
+  getColor: func me.getStroke(),
 
   setColorFill: func me.setFill(_getColor(arg)),
   getColorFill: func me.getColorFill(),

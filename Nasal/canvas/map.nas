@@ -243,7 +243,7 @@ LayeredMap.updateZoom = func {
 	z = math.max(0, math.min(z, size(me.ranges) - 1));
 	me.zoom_property.setIntValue(z);
 	var zoom = me.ranges[size(me.ranges) - 1 - z];
-	# print("Setting zoom range to:", zoom);
+	print("Setting zoom range to: " ~ z ~ " " ~ zoom);
 	benchmark("Zooming map:"~zoom, func {
 		me._node.getNode("range", 1).setDoubleValue(zoom);
 		# TODO update center/limit translation to keep airport always visible
@@ -274,7 +274,7 @@ LayeredMap.setupZoom = func(dialog) {
 		foreach(var r; ranges)
 			append(me.ranges, r.getValue() );
 
-	# print("Setting up Zoom Ranges:", size(ranges)-1);
+	print("Setting up Zoom Ranges:", size(ranges)-1);
 	me.listen(me.zoom_property, func me.updateZoom() );
 	me.updateZoom();
 	me; #chainable
@@ -441,4 +441,3 @@ setlistener("/nasal/canvas/loaded", func {
 	# TODO: should be inside a separate subfolder, i.e. canvas/map/mfd
 	load_modules( files_with('.mfd'), 'canvas' );
 });
-

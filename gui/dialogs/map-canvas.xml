@@ -25,6 +25,9 @@
                 }
             }
             setTransparency(0);
+
+
+
         ]]></open>
 
         <close><![CDATA[
@@ -213,6 +216,35 @@
                 </binding>
             </checkbox>
 
+            <checkbox>
+                <label>OSM</label>
+                <halign>left</halign>
+
+                <property>/sim/gui/dialogs/map-canvas/draw-OSM</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
+                <label>OpenAIP</label>
+                <halign>left</halign>
+
+                <property>/sim/gui/dialogs/map-canvas/draw-OpenAIP</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+
             <!-- layer only supported if tutorial system is active and targets specified-->
 	 <!--
             <checkbox>
@@ -348,7 +380,9 @@
                         TestMap.setController("Aircraft position", "map-dialog"); # from aircraftpos.controller
 
                         # Initialize a range:
-                        TestMap.setRange(20);
+                        TestMap.setRange(60);
+                        TestMap.setScreenRange(200);
+
                         var range_step = math.log10(TestMap.getRange());
 			# TODO: check if this is valid, IIRC DOM manipulation was fragile when done inside canvas/Nasal region (?)
                         gui.findElementByName(self, "zoomdisplay").setValue("property", TestMap._node.getNode("range").getPath());
@@ -423,16 +457,25 @@
                             TestMap.getLayer(name).setVisible(n);
                         };
 
+                        var SetProjection = func(projection) {
+                          TestMap._node.setValue("projection", projection);
+                        };
+
+                        setlistener("/sim/gui/dialogs/map-canvas/projection",
+                          func(n) SetProjection(n.getValue());
+                        );
+
+
 			Styles.APS = {};
 			Styles.APS.scale_factor = 0.25;
 
 			# TODO: introduce some meta NAV layer that handles both VORs and NDBs, can we instantiate those layers directly ?
                         var r = func(name,vis=1,zindex=nil) return caller(0)[0];
                         # TODO: we'll need some z-indexing here, right now it's just random
-                        foreach(var type; [r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS'),  ] ) {
+                        foreach(var type; [r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
                             if (1 and type.name != 'APS' and type.name != 'FLT') make_update_wrapper(type.name);
                             TestMap.addLayer(factory: canvas.SymbolLayer, type_arg: type.name,
-                                             visible: type.vis, priority: type.zindex,
+                                             visible: type.vis, priority: 4,
                                              style: Styles.get(type.name),
                                              options: Options.get(type.name) );
                             (func {
@@ -445,6 +488,24 @@
                                 );
                             })();
                         }
+
+                        foreach(var type; [ r('OSM'), r('OpenAIP')  ]) {
+                            TestMap.addLayer(factory: canvas.OverlayLayer, type_arg: type.name,
+                                             visible: type.vis, priority: 1,
+                                             style: Styles.get(type.name),
+                                             options: Options.get(type.name) );
+                            (func {
+                                # Notify MapStructure about layer visibility changes:
+                                var name = type.name;
+                                props.globals.initNode("/sim/gui/dialogs/map-canvas/draw-"~name, type.vis, "BOOL");
+                                append(listeners,
+                                    setlistener("/sim/gui/dialogs/map-canvas/draw-"~name,
+                                        func(n) SetLayerVisible(name,n.getValue()))
+                                );
+                            })();
+                        }
+
+
                     ]]></load></nasal>
                 </canvas>
                 <layout>hbox</layout>
@@ -498,7 +559,7 @@
                     </binding>
                 </button>
             </group>
+
         </group>
     </group>
 </PropertyList>
-

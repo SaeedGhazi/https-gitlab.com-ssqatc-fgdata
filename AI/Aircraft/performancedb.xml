@@ -122,10 +122,15 @@
       <taxi-speed-kts>15.0</taxi-speed-kts>
     </aircraft>
     <alias>
+      <!-- match any 787 type -->
+      <match>788</match>
+      <match>789</match>
+      <alias>787</alias>
+    </alias>
+    <alias>
       <!-- match any 777 type -->
       <match>777-</match>
       <match>77</match>
-      <!-- any 77x -->
       <alias>777</alias>
     </alias>
     <alias>
@@ -143,10 +148,12 @@
       <alias>767</alias>
     </alias>
     <alias>
-      <!-- match 747-400s -->
+      <!-- match 747 -->
       <match>744</match>
       <match>747-4</match>
+      <match>Boeing_747-400F</match>
       <match>747</match>
+      <match>74</match>
       <alias>747-400</alias>
     </alias>
     <alias>
@@ -185,6 +192,7 @@
       <match>332</match>
       <match>A330-</match>
       <match>A332</match>
+      <match>A33X</match>
       <match>Airbus_A330-</match>
       <alias>A330</alias>
     </alias>
@@ -196,6 +204,7 @@
       <match>321</match>
       <match>A319</match>
       <match>A321</match>
+      <match>322</match>
       <match>Airbus_A319</match>
       <match>Airbus_A32</match>
       <match>A320-</match>
@@ -248,6 +257,7 @@
       <!-- according to Google, ERD is American Egales' code for an ERJ-135 -->
       <match>ERD</match>
       <match>145</match>
+      <match>ERJ145</match>
       <match>135</match>
       <match>erj195</match>
       <alias>ERJ</alias>
@@ -271,8 +281,10 @@
     </alias>
     <alias>
       <match>AT4</match>
+	  <match>ATR_42</match>
       <match>AT5</match>
       <match>AT7</match>
+      <match>ATR_72</match>
       <match>AT8-</match>
       <alias>ATR</alias>
     </alias>
@@ -320,6 +332,15 @@
       <takeoff-speed-kts>170.0</takeoff-speed-kts>
       <cruise-speed-kts>490.0</cruise-speed-kts>
       <decent-speed-kts>300.0</decent-speed-kts>
+    </aircraft>
+    <aircraft>
+      <type>787</type>
+      <base>heavy_jet</base>
+      <acceleration-kts-hour>4.5</acceleration-kts-hour>
+      <deceleration-kts-hour>2.0</deceleration-kts-hour>
+      <cruise-speed-kts>470.0</cruise-speed-kts>
+      <approach-speed-kts>160.0</approach-speed-kts>
+      <touchdown-speed-kts>145.0</touchdown-speed-kts>
     </aircraft>
     <aircraft>
       <type>777</type>

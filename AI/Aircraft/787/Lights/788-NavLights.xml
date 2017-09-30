@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <!-- Load Lights Models -->
+  <path>../../../Lights/NavLights.xml</path>
+  <!-- Re-Position Static Light from 0,0,0 onto their final Position -->
+  <animation>
+    <type>translate</type>
+    <object-name>Left_Wing_Static_Red</object-name>
+    <offset-m>31.30</offset-m>
+    <axis>
+      <x> 9.43435</x>
+      <y> -28.9047</y>
+      <z> 7.21402</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>Right_Wing_Static_Green</object-name>
+    <offset-m>31.30</offset-m>
+    <axis>
+      <x> 9.43435</x>
+      <y> 28.9047</y>
+      <z> 7.21402</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>Tail_Static_White</object-name>
+    <offset-m>28.10</offset-m>
+    <axis>
+      <x> 27.4923</x>
+      <y> 0</y>
+      <z> 5.77517</z>
+    </axis>
+  </animation>
+  <!-- Re-Position Strobe Light from 0,0,0 onto their final Position -->
+  <animation>
+    <type>translate</type>
+    <object-name>Left_Wing_Strobe</object-name>
+    <offset-m>32</offset-m>
+    <axis>
+      <x> 9.43435</x>
+      <y> -28.9047</y>
+      <z> 7.21402</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>Right_Wing_Strobe</object-name>
+    <offset-m>32</offset-m>
+    <axis>
+      <x> 9.43435</x>
+      <y> 28.9047</y>
+      <z> 7.21402</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>Tail_Strobe</object-name>
+    <offset-m>29</offset-m>
+    <axis>
+      <x> 27.4923</x>
+      <y> 0</y>
+      <z> 5.77517</z>
+    </axis>
+  </animation>
+  <!-- Re-Position Beacons from 0,0,0 onto their final Position -->
+  <animation>
+    <type>translate</type>
+    <object-name>Top_Beacon_Red</object-name>
+    <offset-m>18.28</offset-m>
+    <axis>
+      <x> -16.2973</x>
+      <y> 0</y>
+      <z> 8.27991</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>Bottom_Beacon_Red</object-name>
+    <offset-m>8.22</offset-m>
+    <axis>
+      <x> -8.07238</x>
+      <y> 0</y>
+      <z> 1.56435</z>
+    </axis>
+  </animation>
+  <!-- Group Lights for Shared Animations -->
+  <animation>
+    <name>StaticGrouped</name>
+    <object-name>Left_Wing_Static_Red</object-name>
+    <object-name>Right_Wing_Static_Green</object-name>
+    <object-name>Tail_Static_White</object-name>
+  </animation>
+  <animation>
+    <name>StrobeGrouped</name>
+    <object-name>Left_Wing_Strobe</object-name>
+    <object-name>Right_Wing_Strobe</object-name>
+    <object-name>Tail_Strobe</object-name>
+  </animation>
+  <animation>
+    <name>BeaconGrouped</name>
+    <object-name>Top_Beacon_Red</object-name>
+    <object-name>Bottom_Beacon_Red</object-name>
+  </animation>
+  <!-- Do not compute or show transparent pixels when Rembrand is disabled -->
+  <animation>
+    <type>alpha-test</type>
+    <object-name>StaticGrouped</object-name>
+    <object-name>StrobeGrouped</object-name>
+    <object-name>BeaconGrouped</object-name>
+    <alpha-factor>0.4</alpha-factor>
+  </animation>
+  <!-- Make Navigation lights transparent when Rembrandt is enabled -->
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <condition>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </condition>
+    <object-name>Left_Wing_Static_Red</object-name>
+    <object-name>Right_Wing_Static_Green</object-name>
+    <object-name>Tail_Static_White</object-name>
+  </effect>
+  <!-- Lights are Emissive -->
+  <animation>
+    <type>material</type>
+    <object-name>StaticGrouped</object-name>
+    <object-name>StrobeGrouped</object-name>
+    <object-name>BeaconGrouped</object-name>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+    </emission>
+  </animation>
+  <!-- Lights always face viewer -->
+  <animation>
+    <type>billboard</type>
+    <object-name>StaticGrouped</object-name>
+    <object-name>StrobeGrouped</object-name>
+    <object-name>BeaconGrouped</object-name>
+    <spherical type="bool">true</spherical>
+  </animation>
+  <!-- Lights do not cast shadows -->
+  <animation>
+    <type>noshadow</type>
+    <object-name>StaticGrouped</object-name>
+    <object-name>StrobeGrouped</object-name>
+    <object-name>BeaconGrouped</object-name>
+  </animation>
+  <!-- Scale Static Lights based on Distance from Viewer -->
+  <animation>
+    <type>dist-scale</type>
+    <object-name>StaticGrouped</object-name>
+    <factor>0.0002</factor>
+    <offset>0.0</offset>
+    <min>0.1</min>
+    <max>40</max>
+  </animation>
+  <!-- Scale Beacon Lights based on Distance from Viewer -->
+  <animation>
+    <type>dist-scale</type>
+    <object-name>BeaconGrouped</object-name>
+    <factor>0.0002</factor>
+    <offset>0.0</offset>
+    <min>0.1</min>
+    <max>40</max>
+  </animation>
+  <!-- Scale Strobe Lights based on Distance from Viewer -->
+  <animation>
+    <type>dist-scale</type>
+    <object-name>StrobeGrouped</object-name>
+    <factor>0.0004</factor>
+    <offset>0.0</offset>
+    <min>0.1</min>
+    <max>40</max>
+  </animation>
+  <!-- Show Beacons when Aircraft is moving -->
+  <animation>
+    <type>select</type>
+    <object-name>BeaconGrouped</object-name>
+    <nopreview />
+    <condition>
+      <and>
+        <property>/sim/model/B777/lighting/beacon/state</property>
+        <greater-than>
+          <property>transponder-id</property>
+          <value type="string">0</value>
+        </greater-than>
+        <equals>
+          <property>valid</property>
+          <value type="bool">true</value>
+        </equals>
+      </and>
+    </condition>
+  </animation>
+  <!-- Show Strobes when Aircraft on runway or airborne -->
+  <animation>
+    <type>select</type>
+    <object-name>StrobeGrouped</object-name>
+    <nopreview />
+    <condition>
+      <and>
+        <property>/sim/model/B777/lighting/strobes/state</property>
+        <greater-than>
+          <property>velocities/true-airspeed-kt</property>
+          <value>40</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+  <!-- Show Static Lights when aircraft is moving -->
+  <animation>
+    <type>select</type>
+    <object-name>StaticGrouped</object-name>
+    <nopreview />
+    <condition>
+      <greater-than>
+        <property>transponder-id</property>
+        <value type="string">0</value>
+      </greater-than>
+    </condition>
+  </animation>
+</PropertyList>

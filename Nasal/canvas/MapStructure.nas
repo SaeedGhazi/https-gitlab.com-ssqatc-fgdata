@@ -1282,12 +1282,15 @@ var TileLayer = {
 			map: map,
 			group: group.createChild("group", me.type),
 			maps_base: "",
+			controller: controller,
 			num_tiles: [5,5],
 			makeURL: nil,
 			makePath: nil,
 			center_tile_offset : [],
 			tile_size: 256,
 			zoom: 9,
+			max_zoom: 16,
+			min_zoom: 4,
 			tile_type: "map",
 			last_tile_type: "map",
 			last_tile : [-1,-1],
@@ -1311,7 +1314,6 @@ var TileLayer = {
 		append(m.parents, m.group);
 		m.setVisible(visible);
 		OverlayLayer._new(m, style, controller, options);
-		#m.group.setCenter(0,0);
 
 		for(var x = 0; x < m.num_tiles[0]; x += 1)
 		{
@@ -1326,6 +1328,8 @@ var TileLayer = {
 	},
 	updateLayer: func()
 	{
+		if (me.controller != nil) me.controller.updateLayer();
+
 	  # get current position
 	  var lat = me.map.getLat();
 	  var lon = me.map.getLon();
@@ -1341,7 +1345,11 @@ var TileLayer = {
 		# 156543.03 meters/pixel * cos(latitude) / (2 ^ zoomlevel)
 		# Determine the closest zoom level and scaling ratio.  Each increase in zoom level doubles resolution.
 		var ideal_zoom = math.ln(156543.03 * math.cos(lat * math.pi/180.0) / screen_resolution) / math.ln(2);
+
 	  me.zoom = math.ceil(ideal_zoom);
+		if (me.zoom < me.min_zoom) me.zoom = me.min_zoom;
+		if (me.zoom > me.max_zoom) me.zoom = me.max_zoom;
+
 		var ratio = 1 / math.pow(2,me.zoom - ideal_zoom);
 
 		for(var x = 0; x < me.num_tiles[0]; x += 1)
@@ -1353,9 +1361,6 @@ var TileLayer = {
 				me.tiles[x][y].scale_factor = ratio;
 			}
 		}
-
-		#var heading = me.map.getHdg();
-		#me.group.setRotation(heading);
 
 		var ymax = math.pow(2, me.zoom);
 

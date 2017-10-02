@@ -19,8 +19,17 @@ var new = func(layer) {
 	};
 
 	# http://1.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/6/30/43.png
-	layer.makeURL = string.compileTemplate('http://1.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{tms_y}.png');
+
+	if (rand() < 0.5) {
+		layer.makeURL = string.compileTemplate('http://1.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{tms_y}.png');
+	} else {
+		layer.makeURL = string.compileTemplate('http://2.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{tms_y}.png');
+	}
+
 	layer.makePath = string.compileTemplate(layer.maps_base ~ '/openaip_basemap/{z}/{x}/{tms_y}.png');
+
+	layer.max_zoom = 14;
+	layer.min_zoom = 4;
 
 	m.addVisibilityListener();
 	m.addRangeListener();

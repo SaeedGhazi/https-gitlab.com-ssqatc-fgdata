@@ -21,6 +21,9 @@ var new = func(layer) {
 	layer.makeURL = string.compileTemplate('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png');
 	layer.makePath = string.compileTemplate(layer.maps_base ~ '/osm-intl/{z}/{x}/{y}.png');
 
+	layer.max_zoom = 18;
+	layer.min_zoom = 1;
+
 	m.addVisibilityListener();
 	m.addRangeListener();
 	m.addScreenRangeListener();

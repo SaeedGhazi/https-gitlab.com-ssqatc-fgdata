@@ -26,8 +26,6 @@
             }
             setTransparency(0);
 
-
-
         ]]></open>
 
         <close><![CDATA[
@@ -143,6 +141,46 @@
                 </binding>
             </checkbox>
 
+            <checkbox>
+                <label>Route</label>
+                <halign>left</halign>
+                <property>/sim/gui/dialogs/map-canvas/draw-RTE</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
+                <label>Waypoints</label>
+                <halign>left</halign>
+                <property>/sim/gui/dialogs/map-canvas/draw-WPT</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
+                <label>APS</label>
+                <halign>left</halign>
+                <property>/sim/gui/dialogs/map-canvas/draw-APS</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+
 <!--
             <button>
                 <legend>Airways</legend>
@@ -221,6 +259,20 @@
                 <halign>left</halign>
 
                 <property>/sim/gui/dialogs/map-canvas/draw-OSM</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
+                <label>VFRChart</label>
+                <halign>left</halign>
+
+                <property>/sim/gui/dialogs/map-canvas/draw-VFRChart</property>
                 <live>true</live>
                 <binding>
                   <command>dialog-apply</command>
@@ -353,6 +405,10 @@
                     <pref-width>600</pref-width>
                     <pref-height>400</pref-height>
                     <nasal><load><![CDATA[
+
+
+
+
                         var myCanvas = canvas.get( cmdarg() );
                         myCanvas.setColorBackground(0,0,0,0.5); # transparent
                         var TestMap = myCanvas.createGroup().createChild("map");
@@ -486,18 +542,20 @@
                                     setlistener("/sim/gui/dialogs/map-canvas/draw-"~name,
                                         func(n) SetLayerVisible(name,n.getValue()))
                                 );
+
+
                             })();
                         }
 
-                        foreach(var type; [ r('OSM'), r('OpenAIP')  ]) {
+                        foreach(var type; [ r('OSM'), r('VFRChart'), r('OpenAIP')  ]) {
                             TestMap.addLayer(factory: canvas.OverlayLayer, type_arg: type.name,
-                                             visible: type.vis, priority: 1,
+                                             visible: 0, priority: 1,
                                              style: Styles.get(type.name),
                                              options: Options.get(type.name) );
                             (func {
                                 # Notify MapStructure about layer visibility changes:
                                 var name = type.name;
-                                props.globals.initNode("/sim/gui/dialogs/map-canvas/draw-"~name, type.vis, "BOOL");
+                                props.globals.initNode("/sim/gui/dialogs/map-canvas/draw-"~name, 0, "BOOL");
                                 append(listeners,
                                     setlistener("/sim/gui/dialogs/map-canvas/draw-"~name,
                                         func(n) SetLayerVisible(name,n.getValue()))

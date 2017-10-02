@@ -47,7 +47,7 @@ var init = func {
 	);
 	cache.render(me.element, me.style).setScale(me.style.scale_factor);
 
-	var txt_offset = me.getStyle('text_offset', [17, 35]);
+	var txt_offset = me.getStyle('text_offset', [3, 0]);
 	var txt_color = me.getStyle('text_color', [0,0.6,0.85]);
 	# non-cached stuff:
 	if (me.style.show_labels){

@@ -14,8 +14,8 @@
 #
 #     .set_lat(<num>)             ... functions for setting latitude/longitude/altitude
 #     .set_lon(<num>)
-#     .set_alt(<num>)
-#     .set_latlon(<num>, <num> [, <num>])      (altitude is optional; default=0)
+#     .set_alt(<num>)             ..this is in meters
+#     .set_latlon(<num>, <num> [, <num>])      (altitude (meters) is optional; default=0)
 #
 #     .set_x(<num>)               ... functions for setting cartesian x/y/z coordinates
 #     .set_y(<num>)
@@ -49,7 +49,7 @@
 #
 # MANIPULATION METHODS:
 #
-#     .apply_course_distance(<course>, <distance>)       ... guess what
+#     .apply_course_distance(<course>, <distance>)       ... moves the coord distance in meters in course direction (true)
 #
 #
 #
@@ -127,13 +127,13 @@ var Coord = {
 	alt: func { me._pupdate(); me._alt },
 	latlon: func { me._pupdate(); [me._lat * R2D, me._lon * R2D, me._alt] },
 
-	set_x: func(x) { me._pupdate(); me._pdirty = 1; me._x = x; me },
-	set_y: func(y) { me._pupdate(); me._pdirty = 1; me._y = y; me },
-	set_z: func(z) { me._pupdate(); me._pdirty = 1; me._z = z; me },
+	set_x: func(x) { me._cupdate(); me._pdirty = 1; me._x = x; me };
+	set_y: func(y) { me._cupdate(); me._pdirty = 1; me._y = y; me },
+	set_z: func(z) { me._cupdate(); me._pdirty = 1; me._z = z; me },
 
-	set_lat: func(lat) { me._cupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
-	set_lon: func(lon) { me._cupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
-	set_alt: func(alt) { me._cupdate(); me._cdirty = 1; me._alt = alt; me },
+	set_lat: func(lat) { me._pupdate(); me._cdirty = 1; me._lat = lat * D2R; me },
+	set_lon: func(lon) { me._pupdate(); me._cdirty = 1; me._lon = lon * D2R; me },
+	set_alt: func(alt) { me._pupdate(); me._cdirty = 1; me._alt = alt; me },
 
 	set: func(c) {
 		c._pupdate();

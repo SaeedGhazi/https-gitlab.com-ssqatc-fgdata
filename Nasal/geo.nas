@@ -127,7 +127,7 @@ var Coord = {
 	alt: func { me._pupdate(); me._alt },
 	latlon: func { me._pupdate(); [me._lat * R2D, me._lon * R2D, me._alt] },
 
-	set_x: func(x) { me._cupdate(); me._pdirty = 1; me._x = x; me };
+	set_x: func(x) { me._cupdate(); me._pdirty = 1; me._x = x; me },
 	set_y: func(y) { me._cupdate(); me._pdirty = 1; me._y = y; me },
 	set_z: func(z) { me._cupdate(); me._pdirty = 1; me._z = z; me },
 

@@ -15,7 +15,7 @@ Contents
 1. The CharArrayStream and ZlibStream classes
 2. The “embedded resources” system
 3. About the XML resource declaration files
-4. The ResourceProxy class
+4. The EmbeddedResourceProxy class
 
 
 Introduction
@@ -368,18 +368,18 @@ other XML resource declaration files:
       initFlightGearEmbeddedResources();
 
 
-4) The ResourceProxy class
-   ~~~~~~~~~~~~~~~~~~~~~~~
+4) The EmbeddedResourceProxy class
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SimGear contains a ResourceProxy class that allows one to access real
-files or embedded resources in a unified way. When using it, one can
-switch from one data source to the other with minimal code changes,
-possibly even at runtime (in which case there is obviously no code
-change at all).
+SimGear contains an EmbeddedResourceProxy class that allows one to
+access real files or embedded resources in a unified way. When using it,
+one can switch from one data source to the other with minimal code
+changes, possibly even at runtime (in which case there is obviously no
+code change at all).
 
 Sample usage (from FlightGear):
 
-  simgear::ResourceProxy proxy(globals->get_fg_root(), "/FGData");
+  simgear::EmbeddedResourceProxy proxy(globals->get_fg_root(), "/FGData");
   proxy.setUseEmbeddedResources(false); // can also be set via the constructor
 
   std::string s = proxy.getString("/some/path");
@@ -466,9 +466,9 @@ Footnotes
     std::ios_base::failure exception.
 
 [9] flightgear/CMakeModules/GenerateFlightgearResources.cmake in my
-    'i18n-and-init-work-v2-rebased' branch (not merged into 'next' at
-    the time of this writing).
+    'i18n-and-init-work-v2' branch (not merged into 'next' at the time
+    of this writing).
 
-[10] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/ResourceProxy.hxx
+[10] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/EmbeddedResourceProxy.hxx
 
 [11] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/embedded_resources_test.cxx

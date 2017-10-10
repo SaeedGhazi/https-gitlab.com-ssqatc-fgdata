@@ -76,6 +76,7 @@ uniform float snowlevel;
 uniform float snow_thickness_factor;
 
 uniform float osg_SimulationTime;
+uniform mat4 osg_ViewMatrix;
 
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
@@ -221,7 +222,7 @@ void main (void)
 
     /// BEGIN geometry for light
 
-    vec3 up = (gl_ModelViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
+    vec3 up = (osg_ViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
 	
 	vec3 nVertVec = normalize(vertVec);
 

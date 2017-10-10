@@ -6,6 +6,7 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec3 rawpos;
 
 
 uniform sampler2D texture;
@@ -111,7 +112,7 @@ void main()
     vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
     vec4 fragColor;
-    vec4 specular = vec4(0.0);
+    vec3 specular = vec3(0.0);
     float intensity;
 
     float effective_scattering = min(scattering, cloud_self_shading);
@@ -153,11 +154,16 @@ void main()
 
 	diffuse.rgb += 2.0 * diffuse.rgb * (1.0 - opacity.a);
         color += diffuse * NdotL * opacity;
-        NdotHV = max(dot(n, halfVector), 0.0);
-        if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = (gl_FrontMaterial.specular.rgb
-                            * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess));
+
+        //NdotHV = max(dot(n, halfVector), 0.0);
+        if (gl_FrontMaterial.shininess > 0.0) {
+            vec3 ecViewDir = (gl_ModelViewMatrix * (ep - vec4(rawpos, 1.0))).xyz;
+            vec3 HV = normalize(normalize(gl_LightSource[0].position.xyz) + normalize(ecViewDir));
+            NdotHV = max(0.0, dot(n,HV));
+            specular = (gl_FrontMaterial.specular.rgb
+                            * (light_specular.rgb+2.0*light_specular.rgb*(1.0-opacity.a))
+                            * pow(NdotHV, gl_FrontMaterial.shininess)*opacity.rgb);
+        }
     }
     color.a = diffuse.a;
     // This shouldn't be necessary, but our lighting becomes very
@@ -187,7 +193,8 @@ void main()
         }
 
 
-    fragColor = color * texel + specular;
+    fragColor = color * texel;
+    fragColor.rgb += specular.rgb;
 
    // implicit lightmap - the user gets to select a color which is then made emissive
 

@@ -22,6 +22,7 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec3 rawpos;
 
 varying float yprime_alt;
 varying float mie_angle;
@@ -66,7 +67,7 @@ return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 
 void main()
 {
-
+  rawpos = gl_Vertex.xyz;
   vec4 light_diffuse;
   vec4 light_ambient;
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);

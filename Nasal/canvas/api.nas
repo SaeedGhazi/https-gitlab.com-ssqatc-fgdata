@@ -450,7 +450,7 @@ var Group = {
 
 # Map
 # ==============================================================================
-# Class for a group element on a canvas with possibly geopgraphic positions
+# Class for a group element on a canvas with possibly geographic positions
 # which automatically get projected according to the specified projection.
 # Each map consists of an arbitrary number of layers (canvas groups)
 #
@@ -501,6 +501,10 @@ var Map = {
     }
 
     return me;
+  },
+  getController: func()
+  {
+    return me.controller;
   },
   addLayer: func(factory, type_arg=nil, priority=nil, style=nil, opts=nil, visible=1)
   {

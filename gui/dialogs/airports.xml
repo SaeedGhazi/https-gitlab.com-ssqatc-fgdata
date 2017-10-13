@@ -42,15 +42,16 @@
       var MAX_RUNWAYS = 28; # number of entries at KEDW
 
       var DIALOG = cmdarg();
+      var listeners = [];
 
       ## "prologue" currently required by the canvas-generic-map
        var dialog_name ="airports"; #TODO: use substr() and cmdarg() to get this dynamically
        var dialog_property = func(p) return "/sim/gui/dialogs/airports/"~p; #TODO: generalize using cmdarg
        var DIALOG_CANVAS = gui.findElementByName(DIALOG, "airport-selection");
-       canvas.GenericMap.setupGUI(DIALOG_CANVAS, "canvas-control"); #TODO: this is not a method!
-      ## end of canvas-generic-map prologue
 
 
+      setprop("/sim/gui/dialogs/airports/selected-airport/lat", 0);
+      setprop("/sim/gui/dialogs/airports/selected-airport/lon", 0);
       setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
       setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
       setprop("/sim/gui/dialogs/airports/mode", "search");
@@ -115,9 +116,11 @@
           setprop("/sim/gui/dialogs/airports/selected-airport/name", info.name);
           setprop("/sim/gui/dialogs/airports/selected-airport/location", sprintf("%.3f / %.3f", info.lat, info.lon));
           setprop("/sim/gui/dialogs/airports/selected-airport/lon", info.lon);
+          setprop("/sim/gui/dialogs/airports/selected-airport/lat", info.lat);
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
           setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
           setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
+          AirportChart.getController().setPosition(info.lat, info.lon);
 
           if (info.has_metar) {
             # Retrieve an updated METAR, and indicate that we've not got one currently.
@@ -247,11 +250,15 @@
       canvas.register_callback(update_info); # FIXME: this is a workaround to run dialog-specific code in the canvas block
       ]]>
     </open>
-    <close>
+    <close><![CDATA[
 	fgcommand("clear-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar",
                                                              "station": airport_id}));
-        map.cleanup_listeners(); #TODO: We should be setting a signal when closing the dialog, so that cleanup code can be invoked automatically
-    </close>
+        #map.cleanup_listeners(); #TODO: We should be setting a signal when closing the dialog, so that cleanup code can be invoked automatically
+        AirportChart.del();
+        foreach (var l; listeners)
+            removelistener(l);
+        setsize(listeners, 0);
+      ]]></close>
   </nasal>
 
   <group>
@@ -648,86 +655,236 @@
               <hrule><stretch>1</stretch></hrule>
             </group>
 
-            <!-- Instantiate a generic canvas map and parametrize it via inclusion -->
-            <!-- TODO: use params and aliasing -->
-            <canvas include="/Nasal/canvas/generic-canvas-map.xml">
+            <canvas>
+                <name>canvas-map</name>
+                <valign>fill</valign>
+                <halign>fill</halign>
+                <stretch>true</stretch>
+                <pref-width>600</pref-width>
+                <pref-height>400</pref-height>
+                <nasal><load><![CDATA[
+                    var myCanvas = canvas.get( cmdarg() );
+                    var mapGrp = myCanvas.createGroup();
+                    var AirportChart = mapGrp.createChild("map");
 
-              <name>airport-selection</name>
-              <valign>fill</valign>
-              <halign>fill</halign>
-              <stretch>true</stretch>
-              <pref-width>400</pref-width>
-              <pref-height>400</pref-height>
+                    # Initialize the controller:
+                    AirportChart.setController("Static position", "main");
+                    var controller = AirportChart.getController();
 
-              <features>
-                <!-- TODO: use params and aliases to make this shorter -->
-                <!-- TODO: support styling, i.e. image sets/fonts and colors to be used -->
-                <!-- this will set up individual "layers" and map them to boolean "toggle" properties -->
-                <!-- providing an optional "description" tag here allows us to create all checkboxes procedurally -->
-                <dialog-root>/sim/gui/dialogs/airports</dialog-root>
-                <range-property>zoom</range-property>
+                    # Initialize a range and screen resolution.  Setting a range
+                    # to 4nm means we pick up a good set of surrounding fixes
+                    # We will use the screen range for zooming.  If we use range
+                    # then as we zoom in the airport center goes out of range
+                    # and all the runways disappear.
+                    AirportChart.setRange(4.0);
+                    AirportChart.setScreenRange(500);
 
-                <!-- These are the ranges available for the map:       var ranges = [0.1, 0.25, 0.5, 1, 2.5, 5] -->
+                    var range_step = 1.5;
 
-                <ranges>
-                  <range>0.1</range>
-                  <range>0.25</range>
-                  <range>0.5</range>
-                  <range>1</range>
-                  <range>2.5</range>
-                  <range>5</range>
-                </ranges>
+                    # Center the map's origin: FIXME: move to api.nas, i.e. allow maps to have a size/view that differs from the actual canvas ??
+                    AirportChart.setTranslation(
+                        myCanvas.get("view[0]")/2,
+                        myCanvas.get("view[1]")/2
+                    );
 
-                <!-- available layers and their toggle property (appended to dialog-root specified above) -->
+                    ##
+                    # Styling: This is a bit crude at the moment, i.e. no dedicated APIs yet - but it's
+                    # just there to prototype things for now
+                    var Styles = {};
+                    Styles.get = func(type) return Styles[type];
+                    var Options = {};
+                    Options.get = func(type) return Options[type];
 
-                <layer>
-                  <name>runways</name>					<!-- the name of the layer -->
-                  <init-property>selected-airport/id</init-property>	<!-- the init/input property that re-inits the layer MODEL -->
-                  <property>display-runways</property>			<!-- the property switch that toggles the layer on/off (show/hide) -->
-                  <description>Show Runways</description> 		<!-- the checkbox label for the property -->
-                  <default>enabled</default>				<!-- default state -->
-                  <hide-checkbox>true</hide-checkbox>  			<!-- if the checkbox should be shown or hidden -->
-                </layer>
-                <layer>
-                  <name>taxiways</name>
-                  <init-property>selected-airport/id</init-property>
-                  <property>display-taxiways</property>
-                  <description>Show Taxiways</description>
-                  <default>enabled</default>
-                </layer>
+                    ## set up a few keys supported by the DME.symbol file to customize appearance:
+                    Styles.DME = {};
+                    Styles.DME.debug = 1; # HACK for benchmarking/debugging purposes
+                    Styles.DME.animation_test = 0; # for prototyping animated symbols
 
-                <layer>
-                  <name>parkings</name>
-                  <init-property>selected-airport/id</init-property>
-                  <property>display-parking</property>
-                  <description>Show Parking</description>
-                  <default>disabled</default>
-                </layer>
+                    Styles.DME.scale_factor = 0.4; # 40% (applied to whole group)
+                    Styles.DME.line_width = 3.0;
+                    Styles.DME.color_tuned = [0,1,0]; #rgb
+                    Styles.DME.color_default = [1,1,0];  #rgb
 
-                <layer>
-                  <name>towers</name>
-                  <init-property>selected-airport/id</init-property>
-                  <property>display-tower</property>
-                  <description>Show Tower</description>
-                  <default>enabled</default>
-                </layer>
-                <!-- Uncomment this to add a navaid layer (not yet fully implemented, and no LOD yet)
-                <layer>
-                              <name>navaids</name>
-                  <init-property>selected-airport/id</init-property>
-                              <property>display-navaids</property>
-                  <description>Display Navaids within current range</description>
-                  <default>disabled</default>
-                      </layer>
-                -->
+                    Styles.APT = {};
+                    Styles.APT.scale_factor = 0.4; # 40% (applied to whole group)
+                    Styles.APT.line_width = 3.0;
+                    Styles.APT.color_default = [0,0.6,0.85];  #rgb
+                    Styles.APT.label_font_color = Styles.APT.color_default;
+                    Styles.APT.label_font_size=28;
 
-             </features>
+                    Styles.PARKING = {};
+                    Styles.PARKING.scale_factor = 0.4; # 40% (applied to whole group)
+                    Styles.PARKING.line_width = 3.0;
+                    Styles.PARKING.color_default = [0,0.85,0.6];  #rgb
+                    Styles.PARKING.label_font_color = Styles.APT.color_default;
+                    Styles.PARKING.label_font_size=28;
+
+                    Styles.FLT = {};
+                    Styles.FLT.line_width = 3;
+
+                    Styles.FIX = {};
+                    Styles.FIX.color = [1,0,0];
+                    Styles.FIX.scale_factor = 0.4; # 40%
+
+                    Styles.VOR = {};
+                    Styles.VOR.range_line_width = 2;
+                    Styles.VOR.radial_line_width = 1;
+                    Styles.VOR.scale_factor = 0.6; # 60%
+
+                    var ToggleLayerVisible = func(name) {
+                        (var l = AirportChart.getLayer(name)).setVisible(l.getVisible());
+                    };
+                    var SetLayerVisible = func(name,n=1) {
+                        AirportChart.getLayer(name).setVisible(n);
+                    };
+
+                    Styles.APS = {};
+                    Styles.APS.scale_factor = 0.25;
+
+                    var r = func(name,vis=1,zindex=nil) return caller(0)[0];
+                    # TODO: we'll need some z-indexing here, right now it's in the layer order
+                    foreach(var type; [r('TAXI',1,0),r('RWY',1,1),r('TWR',1,2),r('DME',0,3),r('VOR',0,4),r('NDB',0,5),r('FIX',0,6),r('PARKING',0,7)] ) {
+                        AirportChart.addLayer(factory: canvas.SymbolLayer, type_arg: type.name,
+                                         visible: type.vis, priority: 4,
+                                         style: Styles.get(type.name),
+                                         options: Options.get(type.name) );
+                        (func {
+                            # Notify MapStructure about layer visibility changes:
+                            var name = type.name;
+                            props.globals.initNode("/sim/gui/dialogs/map-canvas/draw-"~name, type.vis, "BOOL");
+                            append(listeners,
+                                setlistener("/sim/gui/dialogs/map-canvas/draw-"~name,
+                                    func(n) SetLayerVisible(name,n.getValue()))
+                            );
+
+
+                        })();
+                    }
+
+                    # Add some event listeners to handle mouse interactions
+                    myCanvas.addEventListener("drag", func(e)
+                    {
+                      (func {
+                      controller.applyOffset(-e.deltaX, -e.deltaY); })();
+                    });
+
+                    myCanvas.addEventListener("click", func(e)
+                    {
+                      (func {
+                      controller.applyOffset(e.localX - myCanvas.get("view[0]")/2,
+                                             e.localY - myCanvas.get("view[1]")/2); })();
+                    });
+
+                    myCanvas.addEventListener("wheel", func(e)
+                    {
+                      var range = AirportChart.getScreenRange();
+                      if (e.deltaY >0) {
+                        if (range < 10000)
+                            AirportChart.setScreenRange(range*range_step);
+                      } else {
+                        if (range > 100)
+                          AirportChart.setScreenRange(range/range_step);
+                      }
+                      setprop("/sim/gui/dialogs/airports/zoom-range", AirportChart.getScreenRange());
+                    });
+
+                    if ((getprop("/sim/gui/dialogs/airports/selected-airport/lat") != nil) and
+                        (getprop("/sim/gui/dialogs/airports/selected-airport/lon") != nil)    )
+                    {
+                      # If we've got some values from a previous instantiation of the dialog
+                      # then use them to display the correct position, consistent with the
+                      # rest of the dialog.
+                      AirportChart.getController().setPosition(
+                        getprop("/sim/gui/dialogs/airports/selected-airport/lat"),
+                        getprop("/sim/gui/dialogs/airports/selected-airport/lon"));
+                    }
+                ]]></load></nasal>
             </canvas>
 
             <group>
-                <name>canvas-control</name> <!-- this is the handle we use to procedurally add all "toggle layer" checkboxes  and the zoom control-->
                 <layout>hbox</layout>
+
+                <checkbox>
+                    <label>Nav data</label>
+                    <halign>left</halign>
+                    <property>/sim/gui/dialogs/map-canvas/draw-DME</property>
+                    <live>true</live>
+                    <binding>
+                      <command>property-toggle</command>
+                    </binding>
+                    <binding>
+                      <command>nasal</command>
+                      <script>
+                        var visible = ! getprop("/sim/gui/dialogs/map-canvas/draw-DME");
+                        setprop("/sim/gui/dialogs/map-canvas/draw-DME", visible);
+                        setprop("/sim/gui/dialogs/map-canvas/draw-VOR", visible);
+                        setprop("/sim/gui/dialogs/map-canvas/draw-NDB", visible);
+                        setprop("/sim/gui/dialogs/map-canvas/draw-FIX", visible);
+                      </script>
+                      <binding>
+                        <command>dialog-apply</command>
+                      </binding>
+                    </binding>
+                </checkbox>
+
+                <checkbox>
+                    <label>Parking</label>
+                    <halign>left</halign>
+                    <property>/sim/gui/dialogs/map-canvas/draw-PARKING</property>
+                    <live>true</live>
+                    <binding>
+                      <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                      <command>property-toggle</command>
+                    </binding>
+                </checkbox>
+
+                <empty><stretch>1</stretch></empty>
+
+                <button>
+                    <name>zoomout</name>
+                    <legend>+</legend>
+                    <pref-width>52</pref-width>
+                    <pref-height>22</pref-height>
+
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            var range = AirportChart.getScreenRange();
+                            if (range &lt; 10000)
+                                AirportChart.setScreenRange(range*range_step);
+                            setprop("/sim/gui/dialogs/airports/zoom-range", AirportChart.getScreenRange());
+                        </script>
+                    </binding>
+                </button>
+
+                <text>
+                    <name>zoomdisplay</name>
+                    <label>MMMMMMMMMMMMM</label>
+                    <format>Zoom %d</format>
+                    <property>/sim/gui/dialogs/airports/zoom-range</property>
+                    <live>true</live>
+                </text>
+
+                <button>
+                    <name>zoomin</name>
+                    <legend>-</legend>
+                    <pref-width>52</pref-width>
+                    <pref-height>22</pref-height>
+
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            var range = AirportChart.getScreenRange();
+                            if (range &gt; 100)
+                                AirportChart.setScreenRange(range/range_step);
+                            setprop("/sim/gui/dialogs/airports/zoom-range", AirportChart.getScreenRange());
+                        </script>
+                    </binding>
+                </button>
             </group>
+
           </group>
         </group>
 

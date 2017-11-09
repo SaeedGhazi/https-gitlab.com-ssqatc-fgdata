@@ -23,7 +23,7 @@
 		<type>select</type>
 		<object-name>Deck-Park</object-name>
 		<condition>
-			<property>/controls/deck-park</property>
+			<property>/controls/truman/deck-park</property>
 		</condition>
 	</animation>
 

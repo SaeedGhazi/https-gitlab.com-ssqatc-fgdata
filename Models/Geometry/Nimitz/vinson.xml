@@ -15,10 +15,55 @@ apart from most of the very excellent textures, remain. -->
 
                 var fg_root = getprop("/sim/fg-root");
                 var self = cmdarg();
+		var pathc = self.getPath();
                 var control_node = self.getNode("controls/turn-to-base-course", 1);
                 var pos_node = self.getNode("sim/antenna-pos-norm", 1);
                 pos_node.setDoubleValue(0);
                 var turn_old = 1;
+
+		# timescales
+
+      		var elevator_transit_time = 30.0;
+      		var jbd_transit_time = 5.0;
+
+      		# register the dialog
+
+      		setprop(self.getPath()~"/dlg-name", "Vinson");
+
+		# init animation and detail properties
+
+      		setprop("/controls/vinson/deck-park",0);
+      		setprop("/controls/vinson/crew",0);
+     	 	setprop("/controls/vinson/lights", 0);
+
+		################
+	        #  elevators
+
+	        setprop("/controls/vinson/elevator[0]/state",1);
+	        setprop("/controls/vinson/elevator[1]/state",0);
+
+      		var elevator1 = aircraft.door.new(pathc~"/surface-positions/elevator[0]", elevator_transit_time, 1);
+      		var elevator2 = aircraft.door.new(pathc~"/surface-positions/elevator[1]", elevator_transit_time, 0);
+      
+
+      		var elevator_array = [elevator1, elevator2];
+
+
+	        ################
+	        # jet blast deflectors
+
+		setprop("/controls/vinson/jbd[0]/state", 0);
+		setprop("/controls/vinson/jbd[1]/state", 0);
+		setprop("/controls/vinson/jbd[2]/state", 0);
+		setprop("/controls/vinson/jbd[3]/state", 0);
+
+	        var jbd1 = aircraft.door.new(pathc~"/surface-positions/jbd[0]", jbd_transit_time, 0);
+	        var jbd2 = aircraft.door.new(pathc~"/surface-positions/jbd[1]", jbd_transit_time, 0);
+	        var jbd3 = aircraft.door.new(pathc~"/surface-positions/jbd[2]", jbd_transit_time, 0);
+	        var jbd4 = aircraft.door.new(pathc~"/surface-positions/jbd[3]", jbd_transit_time, 0);
+	 
+	        var jbd_array = [jbd1, jbd2, jbd3, jbd4];
+
 
                 ########
                 # properties used to handle rendering, lighting and to control the Pack-Park
@@ -65,6 +110,63 @@ apart from most of the very excellent textures, remain. -->
 
                 var rpm1_Node = self.getNode("engines/engine[1]/rpm", 1);
                 rpm1_Node.setDoubleValue(0.17);
+
+		# elevator control 
+
+	        var elevator_operate = func (i){
+
+		var tgt = getprop("/controls/vinson/elevator["~i~"]/state");
+		if (tgt == 1)
+			{
+			print ("Elevator ", i+1, " up.");
+			elevator_array[i].open();
+
+			}
+		else
+			{
+			print ("Elevator ", i+1, " down.");
+			elevator_array[i].close();
+			}
+	        }
+
+		# JBD control
+
+	        var jbd_operate = func (i) {
+
+		var tgt = getprop("/controls/vinson/jbd["~i~"]/state");
+		if (tgt == 1)
+			{
+			print ("JBD ", i+1, " up.");
+			jbd_array[i].open();
+			}
+		else
+			{
+			print ("JBD ", i+1, " down.");
+			jbd_array[i].close();
+			}
+
+
+	         }
+
+		# lighting control
+
+	        var toggle_lights = func {
+
+	   	var state = getprop(pathc~"/controls/lighting/deck-lights");
+	
+		if (state == 0)
+			{
+			setprop(pathc~"/controls/lighting/deck-lights", 1);
+			setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.7);
+			}
+		else
+			{
+			setprop(pathc~"/controls/lighting/deck-lights", 0);
+			setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.0);
+			}
+
+	        }
+
 
                 ########
                 # the main loop
@@ -134,6 +236,22 @@ apart from most of the very excellent textures, remain. -->
                                                     an_spn_46_timer.restart(anspn.GetUpdateRate());
                                                 });
                 an_spn_46_timer.restart(6);
+
+
+		# listeners
+
+    		var l_elev1 = setlistener("/controls/vinson/elevator/state", func {elevator_operate(0);},0,0);
+     		var l_elev2 = setlistener("/controls/vinson/elevator[1]/state", func {elevator_operate(1);},0,0);
+     
+		var l_jbd1 = setlistener("/controls/vinson/jbd[0]/state", func {jbd_operate(0);},0,0);
+	 	var l_jbd2 = setlistener("/controls/vinson/jbd[1]/state", func {jbd_operate(1);},0,0);
+		var l_jbd3 = setlistener("/controls/vinson/jbd[2]/state", func {jbd_operate(2);},0,0);
+		var l_jbd4 = setlistener("/controls/vinson/jbd[3]/state", func {jbd_operate(3);},0,0);
+
+     		var l_lights = setlistener("/controls/vinson/lights", func {toggle_lights();},0,0);
+
+
+
         ]]>
         </load>
 	</nasal>
@@ -141,12 +259,28 @@ apart from most of the very excellent textures, remain. -->
 	<unload>
         <![CDATA[ 
         #print("UNLOAD Vinson ", cmdarg().getPath());
+
+     	# clean up listeners
+
+     	removelistener(l_elev_1);
+     	removelistener(l_elev_2);
+
+     	removelistener(l_jbd_1);
+     	removelistener(l_jbd_2);
+     	removelistener(l_jbd_3);
+     	removelistener(l_jbd_4);
+
+     	removelistener(l_lights);
+
         ]]>
 	</unload>
 
-	<!-- crew to be added later
-    <model>
+
+    <!--<model>
       <path>Models/Geometry/Nimitz/Crew/crew.xml</path>
+      <condition>
+	<property>/controls/vinson/crew</property>
+      </condition>
     </model>-->
 
 	<model>
@@ -483,7 +617,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>translate</type>
 		<object-name>Elevator-2</object-name>
-		<property>surface-positions/elevators-pos-norm</property>
+		<property>surface-positions/elevator[0]/position-norm</property>
 		<factor>10.62</factor>
 		<axis><z>1</z></axis>
 	</animation>
@@ -493,7 +627,7 @@ apart from most of the very excellent textures, remain. -->
 		<object-name>Elevator-1</object-name>
 		<object-name>tractor-15</object-name>
 		<!--<object-name>Crew-41</object-name>-->
-		<property>surface-positions/elevators-pos-norm</property>
+		<property>surface-positions/elevator[1]/position-norm</property>
 		<factor>10.62</factor>
 		<axis><z>1</z></axis>
 	</animation>
@@ -526,7 +660,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-1</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[0]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -555,7 +689,7 @@ apart from most of the very excellent textures, remain. -->
 		<type>rotate</type>
 		<object-name>JBD-1-strut-a</object-name>
 		<object-name>JBD-1-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[0]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -583,7 +717,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-1-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[0]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -612,7 +746,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-2</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[1]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -641,7 +775,7 @@ apart from most of the very excellent textures, remain. -->
 		<type>rotate</type>
 		<object-name>JBD-2-strut-a</object-name>
 		<object-name>JBD-2-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[1]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -669,7 +803,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-2-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[1]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -695,12 +829,12 @@ apart from most of the very excellent textures, remain. -->
 		</axis>
 	</animation>
 
-	<!-- non-op until I can figure out a way of stopping JBD3 &  4 interfering
+	<!-- non-op until I can figure out a way of stopping JBD3 &  4 interfering -->
 
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-3</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[2]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -725,7 +859,7 @@ apart from most of the very excellent textures, remain. -->
 		<type>rotate</type>
 		<object-name>JBD-3-strut-a</object-name>
 		<object-name>JBD-3-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[2]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -749,7 +883,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-3-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[2]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -769,13 +903,13 @@ apart from most of the very excellent textures, remain. -->
 			<x1-m>108.9795</x1-m><y1-m>-25.9603</y1-m><z1-m>19.8103</z1-m>
 			<x2-m>108.9795</x2-m><y2-m>-14.9366</y2-m><z2-m>19.8103</z2-m>
 		</axis>
-	</animation>-->
+	</animation>
 
 
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-4</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[3]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-12.2</dep></entry>
@@ -804,7 +938,7 @@ apart from most of the very excellent textures, remain. -->
 		<type>rotate</type>
 		<object-name>JBD-4-strut-a</object-name>
 		<object-name>JBD-4-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[3]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>5</dep></entry>
@@ -832,7 +966,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-4-strut-b</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[3]/position-norm</property>
 		<interpolation>
 			<entry><ind>0.0000</ind><dep>0</dep></entry>
 			<entry><ind>0.0833</ind><dep>-23.4</dep></entry>
@@ -2507,5 +2641,154 @@ apart from most of the very excellent textures, remain. -->
 		<object-name>wire-4</object-name>
 		<interaction-type>carrier-wire</interaction-type>
 	</animation>
+
+
+  <!-- elevators -->
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-2</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/vinson/elevator/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev1</tooltip-id>
+        <label>move elevator 1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-1</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/vinson/elevator[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev2</tooltip-id>
+        <label>move elevator 2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+<!-- jet blast deflectors -->
+
+<animation>
+    <type>pick</type>
+    <object-name>JBD-1</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/vinson/jbd[0]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd1</tooltip-id>
+        <label>operate JBD1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-2</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/vinson/jbd[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd2</tooltip-id>
+        <label>operate JBD2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-3</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/vinson/jbd[2]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd3</tooltip-id>
+        <label>operate JBD3</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-4</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/vinson/jbd[3]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd4</tooltip-id>
+        <label>operate JBD4</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Flightdeck</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/vinson/lights</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>lights</tooltip-id>
+        <label>switch lights</label>
+      </binding>
+    </hovered>
+  </animation>
+
 
 </PropertyList>

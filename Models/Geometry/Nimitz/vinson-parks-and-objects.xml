@@ -24,7 +24,7 @@
 		<type>select</type>
 		<object-name>Deck-Park</object-name>
 		<condition>
-			<property>sim/current-view/deck-park</property>
+			<property>/controls/vinson/deck-park</property>
 		</condition>
 	</animation>
 

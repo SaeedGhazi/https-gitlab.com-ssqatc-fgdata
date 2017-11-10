@@ -48,15 +48,20 @@ by Thorsten Renk 2017
       #menu_nd.getNode("binding", 1).getNode("dialog-name", 1).setValue("TrumanControls");
       #fgcommand("gui-redraw");
 
-      # set up the animation control properties
+      # set up the animation and course control properties
 
       setprop("/controls/truman/crew", 0);
       setprop("/controls/truman/deck-park",0);
       setprop("/controls/truman/wave-motion",0);
       setprop("/controls/truman/lights", 0);
 
+      setprop("/controls/truman/turn-to-launch-hdg", 0);
+      setprop("/controls/truman/turn-to-recovery-hdg", 0);
+      setprop("/controls/truman/turn-to-base-course", 1);
+
       setprop(pathc~"/wave-motion/pitch", 0.0);
       setprop(pathc~"/wave-motion/roll", 0.0);
+
 
 
       # init JBD

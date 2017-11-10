@@ -30,11 +30,15 @@ apart from most of the very excellent textures, remain. -->
 
       		setprop(self.getPath()~"/dlg-name", "Vinson");
 
-		# init animation and detail properties
+		# init course control,  animation and detail properties
 
       		setprop("/controls/vinson/deck-park",0);
       		setprop("/controls/vinson/crew",0);
      	 	setprop("/controls/vinson/lights", 0);
+
+	      setprop("/controls/vinson/turn-to-launch-hdg", 0);
+	      setprop("/controls/vinson/turn-to-recovery-hdg", 0);
+	      setprop("/controls/vinson/turn-to-base-course", 1);
 
 		################
 	        #  elevators
@@ -2786,6 +2790,29 @@ apart from most of the very excellent textures, remain. -->
         <command>set-tooltip</command>
         <tooltip-id>lights</tooltip-id>
         <label>switch lights</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Island</object-name>
+    <object-name>Nav-Bridge-Deck</object-name>
+    <object-name>Flag-Bridge-Deck</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>dialog-show</command>
+	<dialog-name>Vinson</dialog-name>
+	<property></property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>bridge</tooltip-id>
+        <label>show Vinson control dialog</label>
       </binding>
     </hovered>
   </animation>

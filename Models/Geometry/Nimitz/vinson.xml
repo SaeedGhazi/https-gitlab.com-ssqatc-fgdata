@@ -36,9 +36,9 @@ apart from most of the very excellent textures, remain. -->
       		setprop("/controls/vinson/crew",0);
      	 	setprop("/controls/vinson/lights", 0);
 
-	      setprop("/controls/vinson/turn-to-launch-hdg", 0);
-	      setprop("/controls/vinson/turn-to-recovery-hdg", 0);
-	      setprop("/controls/vinson/turn-to-base-course", 1);
+	        setprop("/controls/vinson/turn-to-launch-hdg", 0);
+	        setprop("/controls/vinson/turn-to-recovery-hdg", 0);
+	        setprop("/controls/vinson/turn-to-base-course", 1);
 
 		################
 	        #  elevators

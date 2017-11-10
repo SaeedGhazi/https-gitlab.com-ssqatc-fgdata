@@ -20,7 +20,8 @@ $Id$
  <name>CH Products  CH Pro Pedals USB Rudder Pedals </name>
  <name>CH PRO PEDALS USB </name>
  <name>CH Pro Pedals USB</name>
-
+ <name>CH Pro Pedals USB Rudder Pedals</name>
+ 
  <axis n="0">
   <desc>Brake left</desc>
   <binding>

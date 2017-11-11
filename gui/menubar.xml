@@ -521,13 +521,13 @@
 			</binding>
 		</item>
 
-		<item>
+		<!--<item>
 			<name>carrier</name>
 			<binding>
 				<command>dialog-show</command>
 				<dialog-name>AIcarrier</dialog-name>
 			</binding>
-		</item>
+		</item>-->
 
 		<item>
 			<name>jetway</name>

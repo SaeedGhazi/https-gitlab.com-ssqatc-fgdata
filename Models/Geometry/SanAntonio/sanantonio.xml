@@ -7,6 +7,19 @@
  <path>LPD17.ac</path>
  <nasal>
     <load>
+        var self = cmdarg();
+        print("Model load San Antonio ", self.getPath());
+	var pathc = self.getPath();
+
+      	# register the dialog
+
+      	setprop(pathc~"/dlg-name", "SanAntonio");
+
+	setprop("/controls/sanantonio/turn-to-launch-hdg", 0);
+	setprop("/controls/sanantonio/turn-to-recovery-hdg", 0);
+	setprop("/controls/sanantonio/turn-to-base-course", 1);
+
+
         var wind_node = props.globals.getNode("/environment/wind-speed-kt");
         var time_node = props.globals.getNode("/sim/time/elapsed-sec");
         var roll_node = props.globals.getNode("/ai/models/LPD17-boats/roll");

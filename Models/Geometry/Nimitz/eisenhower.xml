@@ -13,7 +13,114 @@ apart from most of the very excellent textures, remain. -->
             <![CDATA[ 
 
             var self = cmdarg();
-            print("Model load Nimitz ", self.getPath());
+            print("Model load Eisenhower ", self.getPath());
+	    var pathc = self.getPath();
+
+	    # timescales
+
+      	    var elevator_transit_time = 30.0;
+      	    var jbd_transit_time = 5.0;
+
+      	    # register the dialog
+
+      	    setprop(pathc~"/dlg-name", "Eisenhower");
+
+	    # init course control,  animation and detail properties
+
+      	    setprop("/controls/eisenhower/deck-park",0);
+      	    setprop("/controls/eisenhower/crew",0);
+     	    setprop("/controls/eisenhower/lights", 0);
+
+	    setprop("/controls/eisenhower/turn-to-launch-hdg", 0);
+	    setprop("/controls/eisenhower/turn-to-recovery-hdg", 0);
+	    setprop("/controls/eisenhower/turn-to-base-course", 1);
+
+	    ################
+	    #  elevators
+
+	    setprop("/controls/eisenhower/elevator[0]/state",1);
+	    setprop("/controls/eisenhower/elevator[1]/state",0);
+
+      	    var elevator1 = aircraft.door.new(pathc~"/surface-positions/elevator[0]", elevator_transit_time, 1);
+      	    var elevator2 = aircraft.door.new(pathc~"/surface-positions/elevator[1]", elevator_transit_time, 0);
+      
+
+      	    var elevator_array = [elevator1, elevator2];
+
+	    ################
+	    # jet blast deflectors
+
+	    setprop("/controls/eisenhower/jbd[0]/state", 0);
+	    setprop("/controls/eisenhower/jbd[1]/state", 0);
+	    setprop("/controls/eisenhower/jbd[2]/state", 0);
+	    setprop("/controls/eisenhower/jbd[3]/state", 0);
+
+	    var jbd1 = aircraft.door.new(pathc~"/surface-positions/jbd[0]", jbd_transit_time, 0);
+	    var jbd2 = aircraft.door.new(pathc~"/surface-positions/jbd[1]", jbd_transit_time, 0);
+	    var jbd3 = aircraft.door.new(pathc~"/surface-positions/jbd[2]", jbd_transit_time, 0);
+	    var jbd4 = aircraft.door.new(pathc~"/surface-positions/jbd[3]", jbd_transit_time, 0);
+	 
+	    var jbd_array = [jbd1, jbd2, jbd3, jbd4];
+
+
+	    # elevator control 
+
+	    var elevator_operate = func (i){
+
+	    var tgt = getprop("/controls/eisenhower/elevator["~i~"]/state");
+	    if (tgt == 1)
+		{
+		print ("Elevator ", i+1, " up.");
+		elevator_array[i].open();
+
+		}
+	    else
+		{
+		print ("Elevator ", i+1, " down.");
+		elevator_array[i].close();
+		}
+	    }
+
+	    # JBD control
+
+	    var jbd_operate = func (i) {
+
+	    var tgt = getprop("/controls/eisenhower/jbd["~i~"]/state");
+	    if (tgt == 1)
+		{
+		print ("JBD ", i+1, " up.");
+		jbd_array[i].open();
+		}
+	    else
+		{
+		print ("JBD ", i+1, " down.");
+		jbd_array[i].close();
+		}
+
+	    }
+
+
+	# lighting control
+
+	    var toggle_lights = func {
+
+	    var state = getprop(pathc~"/controls/lighting/deck-lights");
+	
+	    if (state == 0)
+		{
+		setprop(pathc~"/controls/lighting/deck-lights", 1);
+		setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.7);
+		}
+	    else
+		{
+		setprop(pathc~"/controls/lighting/deck-lights", 0);
+		setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.0);
+		}
+
+	     }
+
+
+
 
             fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
             io.load_nasal(fn_an_spn_46, "an_spn_46");
@@ -24,12 +131,38 @@ apart from most of the very excellent textures, remain. -->
                 an_spn_46_timer.restart(anspn.GetUpdateRate());
             });
             an_spn_46_timer.restart(6);
+
+
+	    # listeners
+
+    	    var l_elev1 = setlistener("/controls/eisenhower/elevator/state", func {elevator_operate(0);},0,0);
+     	    var l_elev2 = setlistener("/controls/eisenhower/elevator[1]/state", func {elevator_operate(1);},0,0);
+     
+	    var l_jbd1 = setlistener("/controls/eisenhower/jbd[0]/state", func {jbd_operate(0);},0,0);
+	    var l_jbd2 = setlistener("/controls/eisenhower/jbd[1]/state", func {jbd_operate(1);},0,0);
+	    var l_jbd3 = setlistener("/controls/eisenhower/jbd[2]/state", func {jbd_operate(2);},0,0);
+	    var l_jbd4 = setlistener("/controls/eisenhower/jbd[3]/state", func {jbd_operate(3);},0,0);
+
+     	    var l_lights = setlistener("/controls/eisenhower/lights", func {toggle_lights();},0,0);
+
         ]]>
         </load>
 
         <unload>
             <![CDATA[ 
             an_spn_46_timer.stop();
+
+    	    # clean up listeners
+
+     	    removelistener(l_elev_1);
+     	    removelistener(l_elev_2);
+
+     	    removelistener(l_jbd_1);
+     	    removelistener(l_jbd_2);
+     	    removelistener(l_jbd_3);
+     	    removelistener(l_jbd_4);
+
+     	    removelistener(l_lights);
             ]]>
         </unload>
     </nasal>
@@ -367,7 +500,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>translate</type>
 		<object-name>Elevator-2</object-name>
-		<property>surface-positions/elevators-pos-norm</property>
+		<property>surface-positions/elevator[0]/position-norm</property>
 		<factor>10.62</factor>
 		<axis>
 			<x>0</x>
@@ -380,7 +513,7 @@ apart from most of the very excellent textures, remain. -->
 		<object-name>Elevator-1</object-name>
 		<object-name>tractor-15</object-name>
 		<object-name>Crew-41</object-name>
-		<property>surface-positions/elevators-pos-norm</property>
+		<property>surface-positions/elevator[1]/position-norm</property>
 		<factor>10.62</factor>
 		<axis>
 			<x>0</x>
@@ -394,7 +527,7 @@ apart from most of the very excellent textures, remain. -->
 		<object-name>Crew</object-name>
 		<object-name>Crew-41</object-name>
 		<condition>
-			<property>controls/crew</property>
+			<property>/controls/eisenhower/crew</property>
 		</condition>
 	</animation>
 
@@ -416,7 +549,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-1</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[0]/position-norm</property>
 		<factor>70</factor>
 		<axis>
 			<x1-m>9.5327</x1-m>
@@ -431,7 +564,7 @@ apart from most of the very excellent textures, remain. -->
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-2</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[1]/position-norm</property>
 		<factor>70</factor>
 		<axis>
 			<x1-m>17.5861</x1-m>
@@ -445,25 +578,25 @@ apart from most of the very excellent textures, remain. -->
 
 	<!-- non-op until I can figure out a way of stopping JBD3 &  4 interfering -->
 
-	<!--<animation>
-      <type>rotate</type>
-      <object-name>JBD-3</object-name>
-      <property>surface-positions/jbd-pos-norm</property>
-      <factor>70</factor>
-      <axis>
-        <x1-m>107.709</x1-m>
-        <y1-m>-15.4622</y1-m>
-        <z1-m>20</z1-m>
-        <x2-m>107.71</x2-m>
-        <y2-m>-25.034</y2-m>
-        <z2-m>20</z2-m>
-      </axis>
-    </animation>-->
+	<animation>
+      		<type>rotate</type>
+      		<object-name>JBD-3</object-name>
+      		<property>surface-positions/jbd[2]/position-norm</property>
+      		<factor>70</factor>
+      		<axis>
+			<x1-m>107.709</x1-m>
+			<y1-m>-15.4622</y1-m>
+			<z1-m>20</z1-m>
+			<x2-m>107.71</x2-m>
+			<y2-m>-25.034</y2-m>
+			<z2-m>20</z2-m>
+      		</axis>
+    	</animation>
 
 	<animation>
 		<type>rotate</type>
 		<object-name>JBD-4</object-name>
-		<property>surface-positions/jbd-pos-norm</property>
+		<property>surface-positions/jbd[3]/position-norm</property>
 		<factor>70</factor>
 		<axis>
 			<x1-m>125.471</x1-m>
@@ -2899,8 +3032,181 @@ apart from most of the very excellent textures, remain. -->
 
 	<!-- *** LoD *** -->
 
-	<animation>
+	<!--<animation>
 		<type>range</type>
-		<max-m>40000</max-m>
-	</animation>
+		<max-m>60000</max-m>
+	</animation>-->
+
+ <!-- elevators -->
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-2</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/eisenhower/elevator/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev1</tooltip-id>
+        <label>move elevator 1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-1</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/eisenhower/elevator[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev2</tooltip-id>
+        <label>move elevator 2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+<!-- jet blast deflectors -->
+
+<animation>
+    <type>pick</type>
+    <object-name>JBD-1</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/eisenhower/jbd[0]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd1</tooltip-id>
+        <label>operate JBD1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-2</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/eisenhower/jbd[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd2</tooltip-id>
+        <label>operate JBD2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-3</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/eisenhower/jbd[2]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd3</tooltip-id>
+        <label>operate JBD3</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-4</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/eisenhower/jbd[3]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd4</tooltip-id>
+        <label>operate JBD4</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Flightdeck</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/eisenhower/lights</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>lights</tooltip-id>
+        <label>switch lights</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Island</object-name>
+    <object-name>Nav-Bridge-Deck</object-name>
+    <object-name>Flag-Bridge-Deck</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>dialog-show</command>
+	<dialog-name>Eisenhower</dialog-name>
+	<property></property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>bridge</tooltip-id>
+        <label>show Eisenhower control dialog</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
+
 </PropertyList>

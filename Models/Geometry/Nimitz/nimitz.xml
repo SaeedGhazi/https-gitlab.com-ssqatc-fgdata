@@ -3927,10 +3927,10 @@ apart from most of the very excellent textures, remain. -->
 	</animation>
 
 	<!-- *** LoD *** -->
-	<animation>
+	<!--<animation>
 		<type>range</type>
 		<max-m>60000</max-m>
-	</animation>
+	</animation>-->
 
   <!-- elevators -->
   <animation>

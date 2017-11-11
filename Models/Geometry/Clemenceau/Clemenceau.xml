@@ -17,8 +17,94 @@
     <nasal>
         <load>
             <![CDATA[ 
-            # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
             var self = cmdarg();
+
+	    print("Model load Clemenceau ", self.getPath());
+	    var pathc = self.getPath();
+
+	    # timescales
+
+      	    var elevator_transit_time = 30.0;
+      	    var jbd_transit_time = 5.0;
+
+      	    # register the dialog
+
+      	    setprop(pathc~"/dlg-name", "Clemenceau");
+
+	    # init course control,  animation and detail properties
+
+     	    setprop("/controls/clemenceau/lights", 0);
+
+	    setprop("/controls/clemenceau/turn-to-launch-hdg", 0);
+	    setprop("/controls/clemenceau/turn-to-recovery-hdg", 0);
+	    setprop("/controls/clemenceau/turn-to-base-course", 1);
+
+
+	    ################
+	    #  elevators
+
+	    setprop("/controls/clemenceau/elevator[0]/state",1);
+	    setprop("/controls/clemenceau/elevator[1]/state",0);
+
+      	    var elevator1 = aircraft.door.new(pathc~"/surface-positions/elevator[0]", elevator_transit_time, 1);
+      	    var elevator2 = aircraft.door.new(pathc~"/surface-positions/elevator[1]", elevator_transit_time, 0);
+      
+
+      	    var elevator_array = [elevator1, elevator2];
+
+	    ################
+	    # jet blast deflectors
+
+	    setprop("/controls/clemenceau/jbd[0]/state", 0);
+	    setprop("/controls/clemenceau/jbd[1]/state", 0);
+
+
+	    var jbd1 = aircraft.door.new(pathc~"/surface-positions/jbd[0]", jbd_transit_time, 0);
+	    var jbd2 = aircraft.door.new(pathc~"/surface-positions/jbd[1]", jbd_transit_time, 0);
+
+	 
+	    var jbd_array = [jbd1, jbd2];
+
+
+	    # elevator control 
+
+	    var elevator_operate = func (i){
+
+	    var tgt = getprop("/controls/clemenceau/elevator["~i~"]/state");
+	    if (tgt == 1)
+		{
+		print ("Elevator ", i+1, " up.");
+		elevator_array[i].open();
+
+		}
+	    else
+		{
+		print ("Elevator ", i+1, " down.");
+		elevator_array[i].close();
+		}
+	    }
+
+	    # JBD control
+
+	    var jbd_operate = func (i) {
+
+	    var tgt = getprop("/controls/clemenceau/jbd["~i~"]/state");
+	    if (tgt == 1)
+		{
+		print ("JBD ", i+1, " up.");
+		jbd_array[i].open();
+		}
+	    else
+		{
+		print ("JBD ", i+1, " down.");
+		jbd_array[i].close();
+		}
+
+	    }
+
+
+            # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
+
 
             fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
             io.load_nasal(fn_an_spn_46, "an_spn_46");
@@ -29,12 +115,30 @@
                 an_spn_46_timer.restart(anspn.GetUpdateRate());
             });
             an_spn_46_timer.restart(6);
+
+
+	    # listeners
+
+    	   var l_elev1 = setlistener("/controls/clemenceau/elevator/state", func {elevator_operate(0);},0,0);
+     	   var l_elev2 = setlistener("/controls/clemenceau/elevator[1]/state", func {elevator_operate(1);},0,0);
+     
+	   var l_jbd1 = setlistener("/controls/clemenceau/jbd[0]/state", func {jbd_operate(0);},0,0);
+	   var l_jbd2 = setlistener("/controls/clemenceau/jbd[1]/state", func {jbd_operate(1);},0,0);
+
         ]]>
         </load>
 
         <unload>
             <![CDATA[ 
             an_spn_46_timer.stop();
+
+     	    # clean up listeners
+
+     	    removelistener(l_elev_1);
+     	    removelistener(l_elev_2);
+
+     	    removelistener(l_jbd_1);
+     	    removelistener(l_jbd_2);
             ]]>
         </unload>
     </nasal>
@@ -198,7 +302,7 @@
             </condition>
             <type>rotate</type>
             <object-name>JBD-1</object-name>
-            <property>/surface-positions/jbd1-pos-norm</property>
+            <property>surface-positions/jbd[0]/position-norm</property>
             <factor>70</factor>
             <axis>
                 <x1-m>-61.8038</x1-m>
@@ -218,7 +322,7 @@
             </condition>
 	    <type>rotate</type>
 	    <object-name>JBD-1</object-name>
-	    <property>surface-positions/jbd-pos-norm</property>
+	    <property>surface-positions/jbd[0]/position-norm</property>
 	    <factor>70</factor>
 	    <axis>
 		    <x1-m>-61.8038</x1-m>
@@ -244,7 +348,7 @@
         </condition>
         <type>rotate</type>
         <object-name>JBD-2</object-name>
-        <property>/surface-positions/jbd2-pos-norm</property>
+        <property>surface-positions/jbd[1]/position-norm</property>
         <factor>70</factor>
         <axis>
             <x1-m>37.4696</x1-m>
@@ -264,7 +368,7 @@
             </condition>
 	    <type>rotate</type>
 	    <object-name>JBD-2</object-name>
-	    <property>surface-positions/jbd-pos-norm</property>
+	    <property>surface-positions/jbd[1]/position-norm</property>
 	    <factor>70</factor>
 	    <axis>
 		    <x1-m>37.4696</x1-m>
@@ -279,19 +383,20 @@
 	    <type>translate</type>
 	    <object-name>Ascenseur1</object-name>
 	    <object-name>Ascenseur1-Marquage</object-name>
-	    <property>surface-positions/elevators-pos-norm</property>
+	    <property>surface-positions/elevator[0]/position-norm</property>
 	    <factor>9.20</factor>
+	    <offset-m>-9.20</offset-m>
 	    <axis>
 		    <x>0</x>
 		    <y>0</y>
-		    <z>-1</z>
+		    <z>1</z>
 	    </axis>
 	</animation>
 	<animation>
 		<type>translate</type>
 		<object-name>Ascenseur2</object-name>
 		<object-name>Ascenseur2-Marquage</object-name>
-		<property>surface-positions/elevators-pos-norm</property>
+		<property>surface-positions/elevator[1]/position-norm</property>
 		<factor>9.20</factor>
 		<axis>
 			<x>0</x>
@@ -429,5 +534,113 @@
 		<object-name>brin-4</object-name>
 		<interaction-type>carrier-wire</interaction-type>
 	</animation>
+
+ <!-- elevators -->
+
+  <animation>
+    <type>pick</type>
+    <object-name>Ascenseur1</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/clemenceau/elevator/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev1</tooltip-id>
+        <label>move elevator 1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Ascenseur2</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/clemenceau/elevator[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev2</tooltip-id>
+        <label>move elevator 2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
+<!-- jet blast deflectors -->
+
+<animation>
+    <type>pick</type>
+    <object-name>JBD-1</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/clemenceau/jbd[0]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd1</tooltip-id>
+        <label>operate JBD1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD-2</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/clemenceau/jbd[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd2</tooltip-id>
+        <label>operate JBD2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Island</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>dialog-show</command>
+	<dialog-name>Clemenceau</dialog-name>
+	<property></property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>bridge</tooltip-id>
+        <label>show Clemenceau control dialog</label>
+      </binding>
+    </hovered>
+  </animation>
 
 </PropertyList>

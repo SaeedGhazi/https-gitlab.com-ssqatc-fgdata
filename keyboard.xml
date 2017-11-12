@@ -466,7 +466,7 @@ top down before the key bindings are parsed.
 
  <key n="49">
   <name>1</name>
-  <desc>Decrease elevator trim</desc>
+  <desc>Elevator trim down</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -481,6 +481,15 @@ top down before the key bindings are parsed.
      <property>/sim/view/config/back-left-direction-deg</property>
     </binding>
   </mod-shift>
+  <mod-ctrl>
+    <desc>Elevator trim down fast</desc>
+    <binding>
+     <command>property-assign</command>
+        <command>property-adjust</command>
+        <property>/controls/flight/elevator-trim</property>
+        <step type="double">-0.05</step>
+    </binding>
+  </mod-ctrl>
  </key>
 
  <key n="50">
@@ -541,6 +550,15 @@ top down before the key bindings are parsed.
     <property>/sim/view/config/left-direction-deg</property>
    </binding>
   </mod-shift>
+  <mod-ctrl>
+    <desc>Aileron left trim</desc>
+    <binding>
+     <command>property-assign</command>
+        <command>property-adjust</command>
+        <property>/controls/flight/aileron-trim</property>
+        <step type="double">-0.01</step>
+    </binding>
+  </mod-ctrl>
  </key>
 
  <key n="53">
@@ -550,6 +568,24 @@ top down before the key bindings are parsed.
    <command>nasal</command>
    <script>controls.centerFlightControls()</script>
   </binding>
+  <mod-ctrl>
+    <desc>Clear all trims</desc>
+      <binding>
+          <command>property-assign</command>
+          <property>/controls/flight/elevator-trim</property>
+          <value>0</value>
+      </binding>
+      <binding>
+          <command>property-assign</command>
+          <property>/controls/flight/aileron-trim</property>
+          <value>0</value>
+      </binding>
+      <binding>
+          <command>property-assign</command>
+          <property>/controls/flight/rudder-trim</property>
+          <value>0</value>
+      </binding>
+  </mod-ctrl>
  </key>
 
  <key n="54">
@@ -570,11 +606,20 @@ top down before the key bindings are parsed.
     <property>/sim/view/config/right-direction-deg</property>
    </binding>
   </mod-shift>
+     <mod-ctrl>
+         <desc>Aileron right trim</desc>
+         <binding>
+             <command>property-assign</command>
+             <command>property-adjust</command>
+             <property>/controls/flight/aileron-trim</property>
+             <step type="double">-0.01</step>
+         </binding>
+     </mod-ctrl>
  </key>
 
  <key n="55">
   <name>7</name>
-  <desc>Increase elevator trim</desc>
+  <desc>Elevator trim up</desc>
   <repeatable type="bool">true</repeatable>
   <binding>
    <command>property-adjust</command>
@@ -589,6 +634,15 @@ top down before the key bindings are parsed.
     <property>/sim/view/config/front-left-direction-deg</property>
    </binding>
   </mod-shift>
+  <mod-ctrl>
+      <desc>Elevator trim up fast</desc>
+      <binding>
+          <command>property-assign</command>
+          <command>property-adjust</command>
+          <property>/controls/flight/elevator-trim</property>
+          <step type="double">0.05</step>
+      </binding>
+  </mod-ctrl>
  </key>
 
  <key n="56">

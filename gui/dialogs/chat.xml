@@ -81,7 +81,7 @@
       <alpha>1</alpha>
     </color-legend>
     <font>
-      <name>FIXED_9x15</name>
+        <property>sim/gui/selected-style/fonts/gui-small</property>
     </font>
   </input>
 

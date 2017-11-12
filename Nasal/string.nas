@@ -44,6 +44,18 @@ var trim = func(s, lr = 0, istrim = nil) {
 	return r < l ? "" : substr(s, l, r - l + 1);
 }
 
+##
+# truncate at the first match
+#
+#  string.truncateAt("file.xml", ".xml");                      # "file.xml" -> "file"
+#  string.truncateAt("file.xml", ".txt");                      # "file.xml" -> "file.xml"
+#
+var truncateAt = func(src, match){
+    var pos = find(match,src);
+    if (pos>=0)
+      return substr(src,0,pos);
+    return src;
+}
 
 ##
 # return string converted to lower case letters

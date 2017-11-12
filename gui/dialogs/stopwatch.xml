@@ -89,8 +89,8 @@
 		<live>true</live>
 		<property>/sim/gui/dialogs/stopwatch-dialog/display</property>
 		<font>
-			<name>TIMES_24</name>
-		</font>
+            <property>sim/gui/selected-style/fonts/gui-large</property>
+        </font>
 		<color>
 			<red>1</red>
 			<green>0.9</green>

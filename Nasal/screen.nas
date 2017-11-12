@@ -30,8 +30,8 @@ var sanitize = func(s, newline = 0) {
 
 
 
-var theme_font = nil;
-
+var theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name") or "HELVETICA_14";
+var theme_fontsize = getprop("/sim/gui/selected-style/fonts/message-display/size")  or 13;
 
 
 # screen.window
@@ -133,10 +133,11 @@ var window = {
 			me.dialog.set("y", me.y);
 		me.dialog.set("layout", "vbox");
 		me.dialog.set("default-padding", 2);
+
 		if (me.font != nil)
-			me.dialog.setFont(me.font);
+			me.dialog.setFont(me.font, me.fontsize);
 		elsif (theme_font != nil)
-			me.dialog.setFont(theme_font);
+			me.dialog.setFont(theme_font, theme_fontsize);
 
 		me.dialog.setColor(me.bg[0], me.bg[1], me.bg[2], me.bg[3]);
 
@@ -209,7 +210,7 @@ var window = {
 #
 #     var dpy = screen.display.new(20, 10);    # x/y coordinate
 #     dpy.setcolor(1, 0, 1);                   # magenta (default: white)
-#     dpy.setfont("SANS_12B");                 # see $FG_ROOT/gui/styles/*.xml
+#     dpy.setfont("SANS_12B",12);              # see $FG_ROOT/gui/styles/*.xml
 #
 #     dpy.add("/position/latitude-deg", "/position/longitude-deg");
 #     dpy.add(props.globals.getNode("/orientation").getChildren());
@@ -244,7 +245,8 @@ var display = {
 		m.x = x;
 		m.y = y;
 		m.tags = show_tags;
-		m.font = "HELVETICA_14";
+		m.font =  getprop("/sim/gui/selected-style/fonts/message-display/name") or "HELVETICA_14";
+        m.fontsize =  getprop("/sim/gui/selected-style/fonts/message-display/size") or 13;
 		m.color = [1, 1, 1, 1];
 		m.tagformat = "%s";
 		m.format = "%.12g";
@@ -266,8 +268,9 @@ var display = {
 		me.redraw();
 		me;
 	},
-	setfont : func(font) {
+	setfont : func(font, size=13) {
 		me.font = font;
+		me.fontsize = size;
 		me.redraw();
 		me;
 	},
@@ -278,7 +281,7 @@ var display = {
 		me.dialog.set("y", me.y);
 		me.dialog.set("layout", "vbox");
 		me.dialog.set("default-padding", 2);
-		me.dialog.setFont(me.font);
+		me.dialog.setFont(me.font, me.fontsize);
 		me.dialog.setColor(0, 0, 0, 0);
 
 		foreach (var e; me.entries) {
@@ -416,8 +419,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	});
 
 	setlistener("/sim/gui/current-style", func {
-		var theme = getprop("/sim/gui/current-style");
-		theme_font = getprop("/sim/gui/style[" ~ theme ~ "]/fonts/message-display/name");
+		theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name");
 	}, 1);
 
 	log = window.new(nil, -30, 10, 10);

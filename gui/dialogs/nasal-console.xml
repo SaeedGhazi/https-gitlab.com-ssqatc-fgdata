@@ -45,7 +45,7 @@
 		<editable>true</editable>
 		<wrap>false</wrap>
 		<font>
-			<name>AvantGarde-Book.txf</name>
+            <property>sim/gui/selected-style/fonts/nasal-editor</property>
 		</font>
 		<property>/sim/gui/dialogs/nasal-console/edit</property>
 		<binding>

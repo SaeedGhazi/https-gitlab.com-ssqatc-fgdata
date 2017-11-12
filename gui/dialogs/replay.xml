@@ -102,8 +102,8 @@
 
 		<text>
 			<font>
-				<name>SANS_12B</name>
-			</font>
+                <property>sim/gui/selected-style/fonts/replay</property>
+            </font>
 			<label>REPLAY</label>
 			<color>
 				<red>0.9</red>
@@ -516,23 +516,6 @@
 				<blue>0.3</blue>
 				<alpha>0.8</alpha>
 			</color>
-			<visible>
-				<and>
-					<not><property>/sim/replay/disable-my-controls</property></not>
-					<or>
-						<equals>
-							<property>/sim/flight-model</property>
-							<value>yasim</value>
-						</equals>
-<!-- Not supported yet...
-						<equals>
-							<property>/sim/flight-model</property>
-							<value>jsb</value>
-						</equals>
--->
-					</or>
-				</and>
-			</visible>
 			<pref-width>90</pref-width>
 			<binding>
 				<command>property-assign</command>

@@ -62,8 +62,8 @@
 			<alpha>1</alpha>
 		</color>
 		<font>
-			<name>HELVETICA_14</name>
-		</font>
+            <property>sim/gui/selected-style/fonts/gui-large</property>
+        </font>
 	</text>
 
 	<button>

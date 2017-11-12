@@ -62,7 +62,7 @@
 			<alpha>1</alpha>
 		</color>
 		<font>
-			<name>HELVETICA_14</name>
+            <property>sim/gui/selected-style/fonts/model-view</property>
 		</font>
 	</text>
 

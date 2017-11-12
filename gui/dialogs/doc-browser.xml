@@ -62,7 +62,7 @@
       <editable>falsee</editable>
       <wrap>false</wrap>
       <font>
-        <name>FIXED_8x13</name>
+          <property>sim/gui/selected-style/fonts/fixed</property>
       </font>
       <property>/sim/gui/dialogs/doc-browser/edit</property>
     </textbox>

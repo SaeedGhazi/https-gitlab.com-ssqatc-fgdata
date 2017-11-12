@@ -7,8 +7,8 @@
 	<layout>hbox</layout>
 	<default-padding>2</default-padding>
 	<font>
-		<name>HELVETICA_12</name>
-	</font>
+        <property>sim/gui/selected-style/fonts/gui-small</property>
+    </font>
 	<color>
 		<red>0</red>
 		<green>0</green>

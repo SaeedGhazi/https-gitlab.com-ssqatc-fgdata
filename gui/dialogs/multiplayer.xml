@@ -231,7 +231,7 @@
             <colspan>2</colspan>
             <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
-            <editable>false</editable>
+            <editable>true</editable>
             
             <properties>/sim/gui/dialogs/multiplay/servers</properties>
         </combo>

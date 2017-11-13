@@ -639,10 +639,14 @@
                 <bin-number>10</bin-number>
                 <bin-name>GrassBin</bin-name>
             </render-bin>-->
-			 <render-bin>
+			 <!--<render-bin>
         			<bin-number>111</bin-number>
         			<bin-name>DepthSortedBin</bin-name>
-     			 </render-bin>
+     			 </render-bin>-->
+      	    <render-bin>
+        	<bin-number><use>render-bin/bin-number</use></bin-number>
+        	<bin-name><use>render-bin/bin-name</use></bin-name>
+      	    </render-bin>
             <texture-unit>
                 <unit>8</unit>
                 <type><use>texture[20]/type</use></type>
@@ -657,8 +661,8 @@
                 <vertex-shader n="0">Shaders/grass-ALS.vert</vertex-shader>
                 <geometry-shader>Shaders/grass-ALS.geom</geometry-shader>
                 <fragment-shader n="0">Shaders/grass-ALS.frag</fragment-shader>
-				<fragment-shader n="1">Shaders/noise.frag</fragment-shader>
-				<fragment-shader n="2">Shaders/filters-ALS.frag</fragment-shader>
+		<fragment-shader n="1">Shaders/noise.frag</fragment-shader>
+		<fragment-shader n="2">Shaders/filters-ALS.frag</fragment-shader>
                 <geometry-vertices-out type="int">96</geometry-vertices-out>
                 <geometry-input-type>triangles</geometry-input-type>
                 <geometry-output-type>triangle-strip</geometry-output-type>

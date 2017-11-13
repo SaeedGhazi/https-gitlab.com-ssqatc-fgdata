@@ -112,6 +112,7 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 vec3 addLights(in vec3 color1, in vec3 color2);
+vec3 moonlight_perception (in vec3 light);
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -216,6 +217,7 @@ void main (void)
     ///some generic light scattering parameters 
     vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+    moonLightColor = moonlight_perception (moonLightColor);	
     float alt = eye_alt; 					
     float effective_scattering = min(scattering, cloud_self_shading);
 

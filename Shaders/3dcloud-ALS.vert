@@ -30,6 +30,8 @@ float top_factor = usrAttr2.b;
 
 const float EarthRadius = 5800000.0;
 
+vec3 moonlight_perception (in vec3 light);
+
 // light_func is a generalized logistic function fit to the light intensity as a function
 // of scaled terminator position obtained from Flightgear core
 
@@ -68,6 +70,8 @@ void main(void)
 
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88); 
   vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight * scattering;
+  moonLightColor = moonlight_perception (moonLightColor);
+
   gl_TexCoord[0] = gl_MultiTexCoord0;
   vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
   vec4 l  = gl_ModelViewMatrixInverse * vec4(0.0,0.0,1.0,1.0);

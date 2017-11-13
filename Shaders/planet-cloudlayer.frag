@@ -25,6 +25,7 @@ uniform sampler2D structure_texture;
 
 float Noise2D(in vec2 coord, in float wavelength);
 vec3 filter_combined (in vec3 color) ;
+vec3 moonlight_perception (in vec3 light);
 
 
 float add_cosines (in float cos1, in float cos2, in float sign)
@@ -140,6 +141,7 @@ void main()
 	color.rgb += lightning_color(gl_TexCoord[0].st) * (1.0 - texel.a) * lightning * darkness_fact;
 	
 	vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+  	moonLightColor = moonlight_perception (moonLightColor);
 	
 	color.rgb += moonLightColor;
     

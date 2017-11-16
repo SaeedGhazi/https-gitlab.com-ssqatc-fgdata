@@ -137,7 +137,7 @@ var PFD_Device =
 # This does not actually create the canvas elements, or parse the SVG, that would typically be done in 
 # a higher level class that contains an instance of this class.
 # see: http://wiki.flightgear.org/Canvas_MFD_Framework
-    new : func(svg, num_menu_buttons, button_prefix, _canvas)
+    new : func(svg, num_menu_buttons, button_prefix, _canvas, designation="MFD")
     {
 		var obj = {parents : [PFD_Device] };
         obj.svg = svg;
@@ -146,6 +146,11 @@ var PFD_Device =
         obj.pages = [];
         obj.page_index = {};
         obj.buttons = setsize([], num_menu_buttons);
+        obj.transmitter = nil;
+
+        # change after creation if required
+        obj.device_id = 1; 
+        obj.designation = designation;
 
         for(var idx = 0; idx < num_menu_buttons; idx += 1)
         {
@@ -159,7 +164,62 @@ var PFD_Device =
                 obj.buttons[idx].setText(sprintf("M",idx));
             }
         }
+        obj.Recipient = nil;
         return obj;
+    },
+    #
+    # instead of using the direct call method this allows the use of Emesary (via a specified or default global transmitter)
+    # example to notify that a softkey has been used. The "1" in the line below is the device ID
+    # var notification = notifications.PFDEventNotification.new(me.designation, me.DeviceId, notifications.PFDEventNotification.SoftKeyPushed, me.mpcd_button_pushed);
+    # emesary.GlobalTransmitter.NotifyAll(notification);
+    # - currently supported is
+    # 1. setting menu text directly (after page has been loaded)
+    #    notifications.PFDEventNotification.new(me.designation, 1, notifications.PFDEventNotification.ChangeMenuText, [{ Id: 1, Text: "NNN"}]);
+    # 2. SoftKey selection.
+    # 
+    # the device ID must match this device ID (to allow for multiple devices).
+    RegisterWithEmesary : func(transmitter = nil){
+        if (transmitter == nil)
+          transmitter = emesary.GlobalTransmitter;
+
+        if (me.Recipient == nil){
+            me.Recipient = emesary.Recipient.new("PFD_"~me.designation);
+            var pfd_obj = me;
+            me.Recipient.Receive = func(notification)
+              {
+                  if (notification.Device_id = pfd_obj.device_id 
+                      and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+                      if (notification.Event_Id == notifications.PFDEventNotification.SoftKeyPushed 
+                          and notification.EventParameter != nil)
+                        {
+                            pfd_obj.notifyButton(notification.EventParameter);
+                        }
+                      else if (notification.Event_Id == notifications.PFDEventNotification.ChangeMenuText
+                          and notification.EventParameter != nil)
+                        {
+                            foreach(var eventMenu; notification.EventParameter) {
+                                foreach (var mi ; pfd_obj.current_page.menus) {
+                                    if (pfd_obj.buttons[eventMenu.Id] != nil) {
+                                        pfd_obj.buttons[eventMenu.Id].setText(eventMenu.Text);
+                                    }
+                                    else
+                                      printf("PFD_device: Menu for button not found. Menu ID '%s'",mi.menu_id);
+                                }
+                            }
+                        }
+                      return emesary.Transmitter.ReceiptStatus_OK;
+                  }
+                  return emesary.Transmitter.ReceiptStatus_NotProcessed;
+              };
+            transmitter.Register(me.Recipient);
+            me.transmitter = transmitter;
+        }
+    },
+    DeRegisterWithEmesary : func(transmitter = nil){
+        # remove registration from transmitter; but keep the recipient once it is created.
+        if (me.transmitter != nil)
+          me.transmitter.DeRegister(me.Recipient);
+        me.transmitter = nil;
     },
     #
     # called when a button is pushed - connecting the property to this method is implemented in the outer class

@@ -25,7 +25,8 @@
 var PropertySyncNotificationBase_Id = 16;
 var AircraftControlNotification_Id = 17;
 var GeoEventNotification_Id = 18;
-
+# event ID 19 reserved for armaments and stores (model defined).
+var PFDEventNotification_Id = 20;
 
 #
 # PropertySyncNotificationBase is a wrapper class for allow properties to be synchronized between
@@ -167,6 +168,8 @@ var GeoEventNotification =
         new_class.w_fps = getprop("/velocities/wBody-fps");
         new_class.IsDistinct = 0;
         new_class.Callsign = nil; # populated automatically by the incoming bridge when routed
+        new_class.RemoteCallsign = ""; # associated remote callsign.
+        new_class.Flags = 0; # 8 bits for whatever.
 
         new_class.bridgeProperties = func
         {
@@ -200,6 +203,14 @@ var GeoEventNotification =
             getValue:func{return emesary.TransferFixedDouble.encode(new_class.w_fps,2,10);},
             setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.w_fps=dv.value;return dv}, 
              },
+             {
+            getValue:func{return emesary.TransferString.encode(new_class.RemoteCallsign);},
+            setValue:func(v,root,pos){var dv=emesary.TransferString.decode(v,pos);new_class.RemoteCallsign=dv.value;return dv}, 
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.Flags);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Flags=dv.value;return dv}, 
+             },
             ];
           };
         return new_class;
@@ -210,7 +221,7 @@ var GeoEventNotification =
 #    1 - Created
 #    2 - Moved
 #    3 - Deleted
-#    4 - 
+#    4 - Collision
 # ----
 # Secondary kind (8 bits)
 # using the first 4 bits as the classification and the second 4 bits as the sub-classification
@@ -502,3 +513,50 @@ var GeoEventNotification =
 # 253 1111 1101 - 
 # 254 1111 1110 - 
 # 255 1111 1111 - 
+
+
+#
+#
+# Use to transmit events that happen at a specific place; can be used to make 
+# models that are simulated locally (e.g. tankers) appear on other player's MP sessions.
+var PFDEventNotification = 
+{
+# new:
+# _ident - the identifier for the notification. not bridged.
+# _pfd_id - numeric identification of the PFD within the model
+# _event_id - event ID. 
+#     1       softkey pushed.
+#     2       select page by ID
+# _event_param - param related to the event ID. implementation specific.
+##
+    SoftKeyPushed : 1,
+    SelectPageById : 2,
+    ChangeMenuText : 3, #event parameter contains hash of { Id: , Text: }
+    DefaultType : "PFDEventNotification",
+
+    new: func(_ident, _device_id,_event_id,_event_parameter_id)
+    {
+        var new_class = emesary.Notification.new(PFDEventNotification.DefaultType, _ident, PFDEventNotification_Id);
+        new_class.Device_Id = _device_id;
+        new_class.Event_Id = _event_id;
+        new_class.EventParameter = _event_parameter_id;
+
+        new_class.IsDistinct = 1; # each of these events is unique and needs to be bridged
+
+        new_class.bridgeProperties = func
+        {
+            return 
+            [ 
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.Event_Id);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Event_Id=dv.value;return dv}, 
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.EventParameter);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.EventParameter=dv.value;return dv}, 
+             },
+            ];
+          };
+        return new_class;
+    },
+};

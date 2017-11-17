@@ -36,7 +36,7 @@ var PFD_MenuItem =
 #
 #
 # Create a new PFD Page
-# - related svg 
+# - related svg
 # - Title: Page title
 # - SVG element for the page
 # - Device to attach the page to
@@ -58,8 +58,8 @@ var PFD_Page =
     },
 
     #
-    # Makes a page visible. 
-    # It is the responsibility of the caller to manage the visibility of pages - i.e. to 
+    # Makes a page visible.
+    # It is the responsibility of the caller to manage the visibility of pages - i.e. to
     # make a page that is currenty visible not visible before making a new page visible,
     # however more than one page could be visible - but only one set of menu buttons can be active
     # so if two pages are visible (e.g. an overlay) then when the overlay removed it would be necessary
@@ -77,7 +77,7 @@ var PFD_Page =
 
     #
     # Perform action when button is pushed
-    notifyButton : func(button_id) 
+    notifyButton : func(button_id)
     {        foreach(var mi; me.menus)
              {
                  if (mi.menu_id == button_id)
@@ -88,13 +88,13 @@ var PFD_Page =
              }
     },
 
-    # 
+    #
     # Add an item to a menu
     # Params:
     #  menu button id (that is set in controls/PFD/button-pressed by the model)
     #  title of the menu for the label
     #  page that will be selected when pressed
-    # 
+    #
     # The corresponding menu for the selected page will automatically be loaded
     addMenuItem : func(menu_id, title, page)
     {
@@ -134,7 +134,7 @@ var PFD_Device =
 # - button prefix (e.g MI_) is the prefix of the labels in the SVG for the menu boxes.
 # - _canvas is the canvas group.
 #NOTE:
-# This does not actually create the canvas elements, or parse the SVG, that would typically be done in 
+# This does not actually create the canvas elements, or parse the SVG, that would typically be done in
 # a higher level class that contains an instance of this class.
 # see: http://wiki.flightgear.org/Canvas_MFD_Framework
     new : func(svg, num_menu_buttons, button_prefix, _canvas, designation="MFD")
@@ -149,7 +149,7 @@ var PFD_Device =
         obj.transmitter = nil;
 
         # change after creation if required
-        obj.device_id = 1; 
+        obj.device_id = 1;
         obj.designation = designation;
 
         for(var idx = 0; idx < num_menu_buttons; idx += 1)
@@ -176,7 +176,7 @@ var PFD_Device =
     # 1. setting menu text directly (after page has been loaded)
     #    notifications.PFDEventNotification.new(me.designation, 1, notifications.PFDEventNotification.ChangeMenuText, [{ Id: 1, Text: "NNN"}]);
     # 2. SoftKey selection.
-    # 
+    #
     # the device ID must match this device ID (to allow for multiple devices).
     RegisterWithEmesary : func(transmitter = nil){
         if (transmitter == nil)
@@ -187,9 +187,9 @@ var PFD_Device =
             var pfd_obj = me;
             me.Recipient.Receive = func(notification)
               {
-                  if (notification.Device_id = pfd_obj.device_id 
+                  if (notification.Device_id == pfd_obj.device_id 
                       and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-                      if (notification.Event_Id == notifications.PFDEventNotification.SoftKeyPushed 
+                      if (notification.Event_Id == notifications.PFDEventNotification.SoftKeyPushed
                           and notification.EventParameter != nil)
                         {
                             pfd_obj.notifyButton(notification.EventParameter);
@@ -353,9 +353,9 @@ var PFD_NavDisplay =
             if (!me.nd_initialised)
             {
                 me.nd_initialised = 1;
-    
+
                 me.NDCpt = me.ND.new("instrumentation/"~me.nd_ident, me.switches,map_style);
-    
+
                 me.group = me.pfd_device.svg.getElementById(me.nd_placeholder_ident);
                 me.group.setScale(0.39,0.45);
                 me.group.setTranslation(45,0);
@@ -379,7 +379,7 @@ var PFD_NavDisplay =
         # most updates performed by the canvas nav display directly.
         obj.update = func
         {
-        };        
+        };
         return obj;
     },
 };

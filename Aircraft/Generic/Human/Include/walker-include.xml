@@ -310,11 +310,29 @@
 			<name>j</name>
 			<desc>open parachute</desc>
 			<repeatable>false</repeatable>
+
+  			<condition>
+					<or>
+   					<equals>
+   	 					<property>sim/current-view/name</property>
+  			 	 		<value>Walk View</value>
+   					</equals>
+  			 		<equals>
+   				 		<property>sim/current-view/name</property>
+   				 		<value>Walker Orbit View</value>
+   					</equals>
+					</or>
+  			</condition>
 			<binding>
 				<command>nasal</command>
 				<script>walk.open_chute()</script>
 			</binding>
+			<binding n="1">
+                <command>nasal</command>
+                <script>controls.stepSpoilers(-1)</script>
+			</binding>
 		</key>
+
 		<key n="119"> 
 			<name>w</name>
 			<desc>Walk forward</desc>

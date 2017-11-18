@@ -173,6 +173,10 @@ var Notification =
         new_class.IsDistinct = 1;
         new_class.FromIncomingBridge = 0;
         new_class.Callsign = nil;
+
+        new_class.GetBridgeMessageNotificationTypeKey = func {
+            return me.NotificationType~"."~me.Ident;
+        };
         if (_typeid == 0)
         {
             _typeid = NotificationAutoTypeId;
@@ -246,8 +250,13 @@ var BinaryAsciiTransfer =
     {
         if (num == 0)
             return substr(BinaryAsciiTransfer.empty_encoding,0,length);
-        
         var arr="";
+
+        var negate=0;
+        if (num < 0) {
+            negate = 1;
+            num = -num;
+        }
         while (num > 0 and length > 0) {
             var num0 = num;
             num = (int)(num / BinaryAsciiTransfer._base);
@@ -257,14 +266,23 @@ var BinaryAsciiTransfer =
         }
         if (length>0)
             arr = substr(BinaryAsciiTransfer.spaces,0,length)~arr;
+        if(negate) 
+          arr = "-"~arr;
         return arr;
     },
     retval : {value:0, pos:0},
     decodeInt : func(str, length, pos)
     {
         var power = length-1;
+        var negate = 0;
         BinaryAsciiTransfer.retval.value = 0;
         BinaryAsciiTransfer.retval.pos = pos;
+
+        if (substr(str,BinaryAsciiTransfer.retval.pos,1)=="-") {
+            negate=1;
+            BinaryAsciiTransfer.retval.pos = BinaryAsciiTransfer.retval.pos+1;
+        }
+
         while (length > 0 and power > 0) {
             var c = substr(str,BinaryAsciiTransfer.retval.pos,1);
             if (c != " ") break;
@@ -288,18 +306,21 @@ var BinaryAsciiTransfer =
             length = length-1;
             BinaryAsciiTransfer.retval.pos = BinaryAsciiTransfer.retval.pos + 1;
         }
+        if (negate)
+              BinaryAsciiTransfer.retval.value = -BinaryAsciiTransfer.retval.value;
         return BinaryAsciiTransfer.retval;
     }
 };
 
 var TransferString = 
 {
+    MaxLength:16,
 #
 # just to pack a valid range and keep the lower and very upper control codes for seperators
 # that way we don't need to do anything special to encode the string.
     getalphanumericchar : func(v)
     {
-        if (find(v,"-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz") > 0)
+        if (find(v,BinaryAsciiTransfer.alphabet) > 0)#"-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz") > 0)
           return v;
         return nil;
     },
@@ -308,22 +329,27 @@ var TransferString =
         if (v==nil)
           return "0";
         var l = size(v);
-        if (l > 16)
-            l = 16;
-        var rv = BinaryAsciiTransfer.encodeInt(l,1);
-
+        if (l > TransferString.MaxLength)
+            l = TransferString.MaxLength;
+        var rv = "";
+        var actual_len = 0;
         for(var ii = 0; ii < l; ii = ii + 1)
         {
             ev = TransferString.getalphanumericchar(substr(v,ii,1));
-            if (ev != nil)
+            if (ev != nil) {
                 rv = rv ~ ev;
+                actual_len = actual_len + 1;
+            }
         }
+        rv = BinaryAsciiTransfer.encodeInt(l,1) ~ rv;
         return rv;
     },
     decode : func(v,pos)
     {
         var dv = BinaryAsciiTransfer.decodeInt(v,1,pos);
         var length = dv.value;
+        if (length == 0)
+          return dv;
         var rv = substr(v,dv.pos,length);
         dv.pos = dv.pos + length;
         dv.value = rv;

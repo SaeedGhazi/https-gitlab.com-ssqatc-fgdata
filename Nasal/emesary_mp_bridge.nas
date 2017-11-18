@@ -97,6 +97,7 @@ var OutgoingMPBridge =
         new_class.MpVariable = _root~"sim/multiplay/generic/string["~new_class.MPidx~"]";
         new_class.TransmitterActive = 0;
         new_class.TransmitFrequencySeconds = 1;
+        new_class.trace = 0;
 
         new_class.TransmitTimer = 
           maketimer(6, func
@@ -139,7 +140,6 @@ var OutgoingMPBridge =
                     #
                     # The message key is a composite of the type and ident to allow for multiple senders
                     # of the same message type.
-                    notification.BridgeMessageNotificationTypeKey = notification.NotificationType~"."~notification.Ident;
 #print("Received ",notification.BridgeMessageNotificationTypeKey," expire=",notification.MessageExpiryTime);
                     me.AddToOutgoing(notification);
                     return emesary.Transmitter.ReceiptStatus_Pending;
@@ -153,16 +153,24 @@ var OutgoingMPBridge =
             {
                 for (var idx = 0; idx < size(me.OutgoingList); idx += 1)
                 {
-                    if(me.OutgoingList[idx].BridgeMessageNotificationTypeKey == notification.BridgeMessageNotificationTypeKey)
+                    if (me.trace)
+                      print("Compare [",idx,"] qId=",me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() ," noti --> ",notification.GetBridgeMessageNotificationTypeKey());
+                    if(me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() == notification.GetBridgeMessageNotificationTypeKey())
                     {
-#print("Update ",me.OutgoingList[idx].BridgeMessageNotificationTypeKey);
+                        if (me.trace)
+                          print("  --> Update ",me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() ," noti --> ",notification.GetBridgeMessageNotificationTypeKey());
                         me.OutgoingList[idx]= notification;
                         me.TransmitterActive = size(me.OutgoingList);
                         return;
                     }
                 }
             }
-#print("Added ",notification.BridgeMessageNotificationTypeKey);
+            else
+              if (me.trace)
+                print("Not distinct, adding always");
+            
+            if (me.trace)
+              print(" --> Added ",notification.GetBridgeMessageNotificationTypeKey());
             append(me.OutgoingList, notification);
             me.TransmitterActive = size(me.OutgoingList);
         };
@@ -192,16 +200,15 @@ var OutgoingMPBridge =
                                    OutgoingMPBridge.SeperatorChar, emesary.BinaryAsciiTransfer.encodeInt(notification.BridgeMessageNotificationTypeId,1),
                                    OutgoingMPBridge.SeperatorChar, encval, OutgoingMPBridge.MessageEndChar);
 
-                    if (size(outgoing) + size(sect) < OutgoingMPBridge.MPStringMaxLen)
+                    if (size(outgoing) + size(sect) < me.MPStringMaxLen)
                     {
                         outgoing = outgoing~sect;
                     }
                     else
                     {
-                        if(idx == 0)
-                            print("Emesary: ERROR Notification is too large for outgoing queue: ",notification.NotificationType);
-#                        print("outgoing buffer full: Qsize ",size(me.OutgoingList),": message lifetime extended ",notification.Ident, " xmit ",idx, " outtext=",size(outgoing), " sect=",size(sect));
+                        print("Emesary: ERROR out of space for ",notification.NotificationType, " transmitted count=",idx, " queue size ",size(me.OutgoingList));
                         notification.MessageExpiryTime = systime()+me.MessageLifeTime;
+                        break;
                     }
                 }
                 else
@@ -211,7 +218,7 @@ var OutgoingMPBridge =
             }
             me.TransmitterActive = size(me.OutgoingList);
             setprop(me.MpVariable,outgoing);
-#            print("Set ",me.MpVariable," to ",outgoing);
+#            print("Set ",me.MpVariable," size(",size(outgoing));
 #loopback test:
 # incomingBridge.ProcessIncoming(outgoing);
 
@@ -261,7 +268,7 @@ var IncomingMPBridge =
         if (_transmitter == nil)
             _transmitter = emesary.GlobalTransmitter;
 
-        print("IncominggMPBridge created for "~_ident," mp=",_mpidx, " using Transmitter ",_transmitter.Ident);
+        print("IncomingMPBridge created for "~_ident," mp=",_mpidx, " using Transmitter ",_transmitter.Ident);
 
         var new_class = emesary.Transmitter.new("IncominggMPBridge "~_ident);
 
@@ -284,6 +291,7 @@ var IncomingMPBridge =
         new_class.OutgoingList = [];
         new_class.Transmitter = _transmitter;
         new_class.MpVariable = "";
+        new_class.trace = 0;
 
         new_class.Connect = func(_root)
         {
@@ -316,57 +324,56 @@ var IncomingMPBridge =
         new_class.ProcessIncoming = func(encoded_val)
         {
             if (encoded_val == "")
-                return;
-#            print("ProcessIncoming ", encoded_val);
+              return;
+            #            print("ProcessIncoming ", encoded_val);
             var encoded_notifications = split(OutgoingMPBridge.MessageEndChar, encoded_val);
-            for (var idx = 0; idx < size(encoded_notifications); idx += 1)
-            {
+            for (var idx = 0; idx < size(encoded_notifications); idx += 1) {
                 if (encoded_notifications[idx] == "")
-                  continue;
-# get the message parts
+                  continue ;
+                # get the message parts
                 var encoded_notification = split(OutgoingMPBridge.SeperatorChar, encoded_notifications[idx]);
                 if (size(encoded_notification) < 4)
-                    print("Error: emesary.IncomingBridge.ProcessIncoming bad msg ",encoded_notifications[idx]);
-                else
-                {
+                  print("Error: emesary.IncomingBridge.ProcessIncoming bad msg ",encoded_notifications[idx]);
+                else {
                     var msg_idx = emesary.BinaryAsciiTransfer.decodeInt(encoded_notification[1],4,0).value;
                     var msg_type_id = emesary.BinaryAsciiTransfer.decodeInt(encoded_notification[2],1,0).value;
                     var bridged_notification = new_class.NotificationsToBridge_Lookup[msg_type_id];
-                    if (bridged_notification == nil)
-                    {
+                    if (bridged_notification == nil) {
                         print("Error: emesary.IncomingBridge.ProcessIncoming invalid type_id ",msg_type_id);
-                    }
-                    else
-                    {
-                        if (msg_idx > bridged_notification.IncomingMessageIndex)
-                        {
-                        var msg_body = encoded_notification[3];
-#print("received idx=",msg_idx," ",msg_type_id,":",bridged_notification.NotificationType);
+                    } else {
+                        if (msg_idx > bridged_notification.IncomingMessageIndex) {
+                            var msg_body = encoded_notification[3];
+                            if (me.trace)
+                              print("received idx=",msg_idx," ",msg_type_id,":",bridged_notification.NotificationType);
+
                             # populate fields
                             var bridgedProperties = bridged_notification.bridgeProperties();
                             var msglen = size(msg_body);
-#print("Process ",msg_body," len=",msglen, " BPsize = ",size(bridgedProperties));
-                            var bridgePropertyIndex = 0;
+                            if (me.trace)
+                              print("Process ",msg_body," len=",msglen, " BPsize = ",size(bridgedProperties));
                             var pos = 0;
-                            for (var bpi = 0; bpi < size(bridgedProperties); bpi += 1)
-                            {
-                                if (pos < msglen)
-                                {
+                            for (var bpi = 0; bpi < size(bridgedProperties); bpi += 1) {
+                                if (pos < msglen) {
+                                    if (me.trace)
+                                      print("dec: pos ",pos);
                                     var bp = bridgedProperties[bpi];
                                     dv = bp.setValue(msg_body, me, pos);
+                                    if (me.trace)
+                                      print(" --> next pos ",pos);
                                     if (dv.pos == pos or dv.pos > msglen)
-                                        break;
-#debug.dump(dv);
+                                      break;
                                     pos = dv.pos;
-                                }
-                                else
-                                {
-                                    print("Error: emesary.IncomingBridge.ProcessIncoming: supplementary encoded value at",bridgePropertyIndex);
+                                } else {
+                                    print("Error: emesary.IncomingBridge.ProcessIncoming: [",bridged_notification.NotificationType,"] supplementary encoded value at position ",bpi);
                                     break;
                                 }
                             }
+                            # maybe extend the bridge to allow certain notifications to only be routed to a specific player;
+                            # i.e. 
+                            # (notification.Callsign == nil or notification.Callsign == getprop("/sim/multiplay/callsign"))
+
                             if (bridged_notification.Ident == "none")
-                                bridged_notification.Ident = "mp-bridge";
+                              bridged_notification.Ident = "mp-bridge";
                             bridged_notification.FromIncomingBridge = 1;
                             bridged_notification.Callsign = me.GetCallsign();
                             me.Transmitter.NotifyAll(bridged_notification);
@@ -376,12 +383,12 @@ var IncomingMPBridge =
                 }
             }
         }
-        foreach(var n; new_class.NotificationsToBridge)
-        {
+        foreach (var n; new_class.NotificationsToBridge) {
             print("IncomingBridge: ",n.NotificationType);
         }
         return new_class;
-    },
+    }
+ ,
     #
     # Each multiplayer object will have its own incoming bridge. This is necessary to allow message ID
     # tracking (as the bridge knows which messages have been already processed)

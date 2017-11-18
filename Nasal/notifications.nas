@@ -102,6 +102,17 @@ var PropertySyncNotificationBase =
                        setValue:func(v,bridge,pos){var dv=emesary.TransferNorm.decode(v,length,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
                    });
         }
+
+        new_class.addStringProperty = func(variable, property)
+        {
+            me[variable] = nil;
+            append(me._bridgeProperties, 
+                   {
+                       getValue:func{return emesary.TransferString.encode(getprop(property) or 0);},
+                       setValue:func(v,bridge,pos){var dv=emesary.TransferString.decode(v,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
+                   });
+
+        }
         new_class.bridgeProperties = func()
         {
             return me._bridgeProperties;
@@ -161,6 +172,7 @@ var GeoEventNotification =
         new_class.Name = _name;
         new_class.SecondaryKind = _secondary_kind;
         new_class.Position = geo.aircraft_position();
+        new_class.UniqueIndex = 0;
 
         new_class.Heading = getprop("/orientation/heading");
         new_class.u_fps = getprop("/velocities/uBody-fps");
@@ -171,6 +183,9 @@ var GeoEventNotification =
         new_class.RemoteCallsign = ""; # associated remote callsign.
         new_class.Flags = 0; # 8 bits for whatever.
 
+        new_class.GetBridgeMessageNotificationTypeKey = func {
+            return new_class.NotificationType~"."~new_class.Ident~"."~new_class.UniqueIndex;
+        };
         new_class.bridgeProperties = func
         {
             return 

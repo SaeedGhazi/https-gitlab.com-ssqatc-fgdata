@@ -2618,7 +2618,7 @@
         <registration>G-EZWK</registration>
         <heavy>false</heavy>
     </aircraft>
-    <!-- Geneve-Cointrin	 -->
+    <!-- Geneve-Cointrin -->
     <flight>
         <callsign>Easy1525</callsign>
         <required-aircraft>LSGG-U211</required-aircraft>
@@ -4630,7 +4630,7 @@
         </arrival>
         <repeat>24Hr</repeat>
     </flight>
-    <!--  Rome - Leonardo da Vinci	 -->
+    <!--  Rome - Leonardo da Vinci -->
     <flight>
         <callsign>Easy4945</callsign>
         <required-aircraft>LIRF-U205</required-aircraft>
@@ -5502,7 +5502,7 @@
         </arrival>
         <repeat>24Hr</repeat>
     </flight>
-    <!-- 	Milan -->
+    <!-- Milan -->
     <flight>
         <callsign>Easy2733</callsign>
         <required-aircraft>LIMC-U217</required-aircraft>
@@ -6174,7 +6174,7 @@
         </departure>
         <cruise-alt>220</cruise-alt>
         <arrival>
-            <port>	EGKK</port>
+            <port>EGKK</port>
             <time>14:50:00</time>
         </arrival>
         <repeat>24Hr</repeat>
@@ -6204,7 +6204,7 @@
         </departure>
         <cruise-alt>220</cruise-alt>
         <arrival>
-            <port>	EHAM</port>
+            <port>EHAM</port>
             <time>19:35:00</time>
         </arrival>
         <repeat>24Hr</repeat>
@@ -7995,7 +7995,7 @@
         </arrival>
         <repeat>24Hr</repeat>
     </flight>
-    <!-- Toulouse–Blagnac	 -->
+    <!-- Toulouse–Blagnac -->
     <flight>
         <callsign>Easy1701</callsign>
         <required-aircraft>LFBO-U202</required-aircraft>
@@ -8236,7 +8236,7 @@
         </arrival>
         <repeat>24Hr</repeat>
     </flight>
-    <!-- Paris Orly	 -->
+    <!-- Paris Orly -->
     <flight>
         <callsign>Easy4291</callsign>
         <required-aircraft>LFPO-U206</required-aircraft>
@@ -8777,7 +8777,7 @@
         </arrival>
         <repeat>24Hr</repeat>
     </flight>
-    <!-- Nice	 -->
+    <!-- Nice -->
     <flight>
         <callsign>Easy1685</callsign>
         <required-aircraft>LFMN-U202</required-aircraft>
@@ -9529,7 +9529,7 @@
         </arrival>
         <repeat>24Hr</repeat>
     </flight>
-    <!-- 	Paris -->
+    <!-- Paris -->
     <flight>
         <callsign>Easy3915</callsign>
         <required-aircraft>LFPG-U210</required-aircraft>

@@ -123,12 +123,14 @@
 		<number>0</number>
 	</tacan>
 
-	<!-- option stuff - enabled for testing only -->
-<!-- 
 	<mk-viii>
 		<name>mk-viii</name>
 		<number>0</number>
 	</mk-viii>
--->
+
+	<tcas>
+		<name>tcas</name>
+		<number>0</number>
+	</tcas>
 
 </PropertyList>

@@ -1074,6 +1074,12 @@
    </option>
 
    <option>
+    <name>flarm</name>
+    <arg>params</arg>
+    <description>flarm-desc</description>
+   </option>
+
+   <option>
     <name>garmin</name>
     <arg>params</arg>
     <description>garmin-desc</description>

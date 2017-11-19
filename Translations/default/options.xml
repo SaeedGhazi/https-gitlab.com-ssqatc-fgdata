@@ -216,6 +216,7 @@
 	<AV400Sim-desc>Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear</AV400Sim-desc>
 	<atlas-desc>Open connection using the Atlas protocol</atlas-desc>
 	<atcsim-desc>Open connection using the ATC sim protocol (atc610x)</atcsim-desc>
+	<flarm-desc>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</flarm-desc>
 	<garmin-desc>Open connection using the Garmin GPS protocol</garmin-desc>
 	<joyclient-desc>Open connection to an Agwagon joystick</joyclient-desc>
 	<jsclient-desc>Open connection to a remote joystick</jsclient-desc>

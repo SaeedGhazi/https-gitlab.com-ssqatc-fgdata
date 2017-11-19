@@ -873,6 +873,10 @@
           <source>Abort on encountering a floating point exception;</source>
           <target />
         </trans-unit>
+        <trans-unit approved="no" id="options/flarm-desc:0" translate="yes">
+          <source>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="no" id="options/garmin-desc:0" translate="yes">
           <source>Open connection using the Garmin GPS protocol</source>
           <target />

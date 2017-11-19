@@ -98,6 +98,7 @@ var OutgoingMPBridge =
         new_class.TransmitterActive = 0;
         new_class.TransmitFrequencySeconds = 1;
         new_class.trace = 0;
+        new_class.MPStringMaxLen = OutgoingMPBridge.MPStringMaxLen;
 
         new_class.TransmitTimer = 
           maketimer(6, func

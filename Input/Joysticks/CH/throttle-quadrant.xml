@@ -170,5 +170,32 @@
       </binding>
     </mod-up>
   </button>
-
+  <button n="6">
+    <desc type="string">Gear Up</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.gearDown(-1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.gearDown(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="7">
+    <desc type="string">Gear Down</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.gearDown(1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.gearDown(0);</script>
+      </binding>
+    </mod-up>
+  </button>
 </PropertyList>

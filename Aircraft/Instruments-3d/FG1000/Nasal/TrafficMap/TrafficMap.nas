@@ -1,0 +1,172 @@
+# Traffic Map
+#
+# Functionally similar to the Garmin GTS 800 Unit
+#
+var TrafficMap =
+{
+  new : func (myCanvas, device, svg)
+  {
+    var obj = {
+      _group : myCanvas.createGroup("TrafficMapLayer"),
+      parents : [ TrafficMap, device.addPage("TrafficMap", "TrafficMapGroup") ]
+    };
+
+    obj.Styles = fg1000.TrafficMapStyles.new();
+    obj.Options = fg1000.TrafficMapOptions.new();
+    obj.mapgroup = obj._group.createChild("map");
+    obj.device = device;
+
+    # Dynamic text elements
+    obj.op_label = svg.getElementById("TrafficMapOpMode");
+    obj.alt_label = svg.getElementById("TrafficMapAltMode");
+    obj.outer_label = svg.getElementById("TrafficMapOuterRange");
+    obj.inner_label = svg.getElementById("TrafficMapInnerRange");
+
+    # Need to display this underneath the softkeys, EIS, header.
+    obj._group.set("z-index", -10.0);
+    obj._group.setVisible(0);
+
+    # Initialize the controller:
+    var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
+    var source = ctrl_ns.SOURCES["current-pos"];
+    if (source == nil) {
+        # TODO: amend
+        var source = ctrl_ns.SOURCES["current-pos"] = {
+            getPosition: func subvec(geo.aircraft_position().latlon(), 0, 2),
+            getAltitude: func getprop('/position/altitude-ft'),
+            getHeading:  func {
+                if (me.aircraft_heading)
+                    getprop('/orientation/heading-deg')
+                else 0
+            },
+            aircraft_heading: 1,
+        };
+    }
+    setlistener("/sim/gui/dialogs/map-canvas/aircraft-heading-up", func(n) {
+        source.aircraft_heading = n.getBoolValue();
+    }, 1);
+    # Make it move with our aircraft:
+    obj.mapgroup.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
+
+    # Center the map's origin, modified to take into account the surround.
+    obj.mapgroup.setTranslation(
+      fg1000.MFD.MAP_CENTER.X,
+      fg1000.MFD.MAP_CENTER.Y
+    );
+
+    var r = func(name,vis=1,zindex=nil) return caller(0)[0];
+    foreach(var type; [r('TFC',0),r('APS')] ) {
+        obj.mapgroup.addLayer(canvas.SymbolLayer,
+                               type.name,
+                               4,
+                               obj.Styles.getStyle(type.name),
+                               obj.Options.getOption(type.name),
+                               type.vis );
+    }
+
+    obj.controller = fg1000.TrafficMapController.new(obj, svg);
+
+    var topMenu = func(device, pg, menuitem) {
+      pg.clearMenu();
+      resetMenuColors(device);
+      pg.addMenuItem(4, "STANDBY", pg,
+        func(dev, pg, mi) { pg.controller.setOperate(0); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "STANDBY"); }
+      );
+
+      pg.addMenuItem(5, "OPERATE", pg,
+        func(dev, pg, mi) { pg.controller.setOperate(1); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "OPERATE"); }
+      );
+
+      pg.addMenuItem(6, "TEST", pg, func(dev, pg, mi) { printf("Traffic Map TEST mode not implemented yet."); }, nil);
+      pg.addMenuItem(7, "FLT ID", pg,
+        func(dev, pg, mi) { pg.controller.toggleFlightID(); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "FLT ID"); }
+      );
+
+      pg.addMenuItem(8, "ALT MODE", pg, altMenu);
+      device.updateMenus();
+    };
+
+    var altMenu = func(device, pg, menuitem) {
+      pg.clearMenu();
+      resetMenuColors(device);
+      pg.addMenuItem(4, "ABOVE", pg,
+        func(dev, pg, mi) { pg.controller.setAlt("ABOVE"); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "ABOVE"); }
+      );
+      pg.addMenuItem(5, "NORMAL", pg,
+        func(dev, pg, mi) { pg.controller.setAlt("NORMAL"); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "NORMAL"); }
+      );
+
+      pg.addMenuItem(6, "BELOW", pg,
+        func(dev, pg, mi) { pg.controller.setAlt("BELOW"); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "BELOW"); }
+      );
+
+      pg.addMenuItem(7, "UNREST", pg,
+        func(dev, pg, mi) { pg.controller.setAlt("UNREST"); device.updateMenus(); }, # callback
+        func(svg, mi) { display_toggle(device, svg, mi, "UNREST"); }
+      );
+
+      pg.addMenuItem(8, "BACK", pg, topMenu);
+
+      device.updateMenus();
+    };
+
+    # Display map toggle softkeys which change color depending
+    # on whether a particular layer is enabled or not.
+    var display_toggle = func(device, svg, mi, layer) {
+      var bg_name = sprintf("SoftKey%d-bg",mi.menu_id);
+      if (obj.controller.isEnabled(layer)) {
+        device.svg.getElementById(bg_name).setColorFill(0.5,0.5,0.5);
+        svg.setColor(0.0,0.0,0.0);
+      } else {
+        device.svg.getElementById(bg_name).setColorFill(0.0,0.0,0.0);
+        svg.setColor(1.0,1.0,1.0);
+      }
+      svg.setText(mi.title);
+      svg.setVisible(1); # display function
+    };
+
+    # Function to undo any colors set by display_toggle when loading a new menu
+    var resetMenuColors = func(device) {
+      for(var i = 0; i < 12; i +=1) {
+        var name = sprintf("SoftKey%d",i);
+        device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
+        device.svg.getElementById(name).setColor(1.0,1.0,1.0);
+      }
+    }
+
+    topMenu(device, obj, nil);
+
+    return obj;
+  },
+  setLayerVisible : func(name,n=1) {
+      me.mapgroup.getLayer(name).setVisible(n);
+  },
+  setRange : func(range, inner_label, outer_label) {
+    me.mapgroup.setRange(range);
+    me.inner_label.setText(inner_label);
+    me.outer_label.setText(outer_label);
+  },
+  setScreenRange : func(range) {
+    me.mapgroup.setScreenRange(range);
+  },
+  offdisplay : func() {
+    me._group.setVisible(0);
+
+    # Reset the menu colours.  Shouldn't have to do this here, but
+    # there's not currently an obvious other location to do so.
+    for(var i = 0; i < 12; i +=1) {
+      var name = sprintf("SoftKey%d",i);
+      me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
+      me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
+    }
+  },
+  ondisplay : func() {
+    me._group.setVisible(1);
+  },
+};

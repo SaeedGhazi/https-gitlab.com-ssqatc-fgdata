@@ -13,7 +13,7 @@
  #
  #	Version              : 4.8
  #
- #  Copyright © 2016 Richard Harrison           Released under GPL V2
+ #  Copyright ï¿½ 2016 Richard Harrison           Released under GPL V2
  #
  #---------------------------------------------------------------------------*/
 
@@ -35,7 +35,7 @@ var PFDEventNotification_Id = 20;
 #
 # Usage example - this can all go into one Nasal module somewhere.
 #-----------
-# var PropertySyncNotification = 
+# var PropertySyncNotification =
 # {
 #    new: func(_ident="none", _name="", _kind=0, _secondary_kind=0)
 #    {
@@ -65,13 +65,13 @@ var PFDEventNotification_Id = 20;
 # compared to over 1100 bytes with the traditional method.
 #
 # The other advantage with this method of transferring data is that the model is in full control of what is
-# sent, and also when it is sent. This works on a per notification basis so less important properties could be 
+# sent, and also when it is sent. This works on a per notification basis so less important properties could be
 # transmitted on a less frequent schedule; however this will require an instance of the notification for each one.
 #
 # PropertySyncNotificationBase is a shortcut notification; as it doesn't need to received and all
 # of the properties are simply set when the notification is unpacked over MP.
 # So although the notification will be transmitted
-var PropertySyncNotificationBase = 
+var PropertySyncNotificationBase =
 {
     new: func(_ident="none", _name="", _kind=0, _secondary_kind=0)
     {
@@ -87,29 +87,29 @@ var PropertySyncNotificationBase =
         new_class.addIntProperty = func(variable, property, length)
         {
             me[variable] = nil;
-            append(me._bridgeProperties, 
+            append(me._bridgeProperties,
                    {
                        getValue:func{return emesary.TransferInt.encode(getprop(property) or 0,length);},
-                       setValue:func(v,bridge,pos){var dv=emesary.TransferInt.decode(v,length,pos);me[variable]=dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
+                       setValue:func(v,bridge,pos){var dv=emesary.TransferInt.decode(v,length,pos);me[variable]=dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;},
                    });
         }
         new_class.addNormProperty = func(variable, property, length)
         {
             me[variable] = nil;
-            append(me._bridgeProperties, 
+            append(me._bridgeProperties,
                    {
                        getValue:func{return emesary.TransferNorm.encode(getprop(property) or 0,length);},
-                       setValue:func(v,bridge,pos){var dv=emesary.TransferNorm.decode(v,length,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
+                       setValue:func(v,bridge,pos){var dv=emesary.TransferNorm.decode(v,length,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;},
                    });
         }
 
         new_class.addStringProperty = func(variable, property)
         {
             me[variable] = nil;
-            append(me._bridgeProperties, 
+            append(me._bridgeProperties,
                    {
                        getValue:func{return emesary.TransferString.encode(getprop(property) or 0);},
-                       setValue:func(v,bridge,pos){var dv=emesary.TransferString.decode(v,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;}, 
+                       setValue:func(v,bridge,pos){var dv=emesary.TransferString.decode(v,pos);me[variable] = dv.value;setprop(bridge.PropertyRoot~property, me[variable]);return dv;},
                    });
 
         }
@@ -121,9 +121,9 @@ var PropertySyncNotificationBase =
     }
 };
 #
-# Transmit a generic control event. 
+# Transmit a generic control event.
 # two parameters - the event Id and the event value which is a 4 byte length (+/- 1,891371.000)
-var AircraftControlNotification = 
+var AircraftControlNotification =
 {
     new: func(_ident="none")
     {
@@ -136,15 +136,15 @@ var AircraftControlNotification =
 
         new_class.bridgeProperties = func
         {
-            return 
-            [ 
+            return
+            [
              {
             getValue:func{return emesary.TransferInt.encode(new_class.EventType,2);},
-            setValue:func(v,bridge,pos){var dv=emesary.TransferInt.decode(v,2,pos);new_class.EventType=dv.value;return dv;}, 
+            setValue:func(v,bridge,pos){var dv=emesary.TransferInt.decode(v,2,pos);new_class.EventType=dv.value;return dv;},
              },
              {
             getValue:func{return emesary.TransferFixedDouble.encode(new_class.EventValue,4,1000);},
-            setValue:func(v,bridge,pos){var dv=emesary.TransferFixedDouble.decode(v,4,1000,pos);new_class.EventValue=dv.value;print("dec ",dv.value);return dv;}, 
+            setValue:func(v,bridge,pos){var dv=emesary.TransferFixedDouble.decode(v,4,1000,pos);new_class.EventValue=dv.value;print("dec ",dv.value);return dv;},
              },
             ];
         };
@@ -154,9 +154,9 @@ var AircraftControlNotification =
 
 #
 #
-# Use to transmit events that happen at a specific place; can be used to make 
+# Use to transmit events that happen at a specific place; can be used to make
 # models that are simulated locally (e.g. tankers) appear on other player's MP sessions.
-var GeoEventNotification = 
+var GeoEventNotification =
 {
 # new:
 # _ident - the identifier for the notification. not bridged.
@@ -188,43 +188,43 @@ var GeoEventNotification =
         };
         new_class.bridgeProperties = func
         {
-            return 
-            [ 
+            return
+            [
              {
             getValue:func{return emesary.TransferCoord.encode(new_class.Position);},
-            setValue:func(v,root,pos){var dv=emesary.TransferCoord.decode(v, pos);new_class.Position=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferCoord.decode(v, pos);new_class.Position=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferString.encode(new_class.Name);},
-            setValue:func(v,root,pos){var dv=emesary.TransferString.decode(v,pos);new_class.Name=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferString.decode(v,pos);new_class.Name=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.Kind);},
-            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Kind=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Kind=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.SecondaryKind);},
-            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.SecondaryKind=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.SecondaryKind=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferFixedDouble.encode(new_class.u_fps,2,10);},
-            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.u_fps=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.u_fps=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferFixedDouble.encode(new_class.v_fps,2,10);},
-            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.v_fps=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.v_fps=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferFixedDouble.encode(new_class.w_fps,2,10);},
-            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.w_fps=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,2,10,pos);new_class.w_fps=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferString.encode(new_class.RemoteCallsign);},
-            setValue:func(v,root,pos){var dv=emesary.TransferString.decode(v,pos);new_class.RemoteCallsign=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferString.decode(v,pos);new_class.RemoteCallsign=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.Flags);},
-            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Flags=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Flags=dv.value;return dv},
              },
             ];
           };
@@ -232,7 +232,7 @@ var GeoEventNotification =
     },
 };
 #
-# Defined kinds: 
+# Defined kinds:
 #    1 - Created
 #    2 - Moved
 #    3 - Deleted
@@ -242,8 +242,8 @@ var GeoEventNotification =
 # using the first 4 bits as the classification and the second 4 bits as the sub-classification
 #-----------
 # Type 0000 : Cargo
-#   0 0000 0000 - Vehicle 
-#   1 0000 0001 - Person 
+#   0 0000 0000 - Vehicle
+#   1 0000 0001 - Person
 #   2 0000 0010 - 10 kg Item
 #   3 0000 0011 - 20 kg Item
 #   4 0000 0100 - 30 kg Item
@@ -256,26 +256,26 @@ var GeoEventNotification =
 #  11 0000 1011 - Chaff
 #  12 0000 1100 - Flares
 #  13 0000 1101 - Water (fire fighting)
-#  14 0000 1110 - 
+#  14 0000 1110 -
 #  15 0000 1111 - Morris Marina
 #--------
 # Type 0001 : Self propelled
 #  16 0001 0000 - X-2
 #  17 0001 0001 - X-15
 #  18 0001 0010 - X-24
-#  19 0001 0011 - 
-#  20 0001 0100 - 
-#  21 0001 0101 - 
-#  22 0001 0110 - 
-#  23 0001 0111 - 
-#  24 0001 1000 - 
-#  25 0001 1001 - 
-#  26 0001 1010 - 
-#  27 0001 1011 - 
-#  28 0001 1100 - 
-#  29 0001 1101 - 
-#  30 0001 1110 - 
-#  31 0001 1111 - 
+#  19 0001 0011 -
+#  20 0001 0100 -
+#  21 0001 0101 -
+#  22 0001 0110 -
+#  23 0001 0111 -
+#  24 0001 1000 -
+#  25 0001 1001 -
+#  26 0001 1010 -
+#  27 0001 1011 -
+#  28 0001 1100 -
+#  29 0001 1101 -
+#  30 0001 1110 -
+#  31 0001 1111 -
 #--------
 # Type 0010 : Aircraft Damage (e.g space shuttle re-entry or during launch)
 #  32 0010 0000 - Engine 1
@@ -300,36 +300,36 @@ var GeoEventNotification =
 #  49 0011 0001 - Drop Tank 2
 #  50 0011 0010 - Drop Tank 3
 #  51 0011 0011 - Drop Tank 4
-#  52 0011 0100 - 
-#  53 0011 0101 - 
-#  54 0011 0110 - 
-#  55 0011 0111 - 
-#  56 0011 1000 - 
-#  57 0011 1001 - 
-#  58 0011 1010 - 
-#  59 0011 1011 - 
-#  60 0011 1100 - 
-#  61 0011 1101 - 
-#  62 0011 1110 - 
-#  63 0011 1111 - 
+#  52 0011 0100 -
+#  53 0011 0101 -
+#  54 0011 0110 -
+#  55 0011 0111 -
+#  56 0011 1000 -
+#  57 0011 1001 -
+#  58 0011 1010 -
+#  59 0011 1011 -
+#  60 0011 1100 -
+#  61 0011 1101 -
+#  62 0011 1110 -
+#  63 0011 1111 -
 #--------
-# Type 0100 : 
-#  64 0100 0000 - 
-#  65 0100 0001 - 
-#  66 0100 0010 - 
-#  67 0100 0011 - 
-#  68 0100 0100 - 
-#  69 0100 0101 - 
-#  70 0100 0110 - 
-#  71 0100 0111 - 
-#  72 0100 1000 - 
-#  73 0100 1001 - 
-#  74 0100 1010 - 
-#  75 0100 1011 - 
-#  76 0100 1100 - 
-#  77 0100 1101 - 
-#  78 0100 1110 - 
-#  79 0100 1111 - 
+# Type 0100 :
+#  64 0100 0000 -
+#  65 0100 0001 -
+#  66 0100 0010 -
+#  67 0100 0011 -
+#  68 0100 0100 -
+#  69 0100 0101 -
+#  70 0100 0110 -
+#  71 0100 0111 -
+#  72 0100 1000 -
+#  73 0100 1001 -
+#  74 0100 1010 -
+#  75 0100 1011 -
+#  76 0100 1100 -
+#  77 0100 1101 -
+#  78 0100 1110 -
+#  79 0100 1111 -
 #--------
 # Type 0101 : Models/Geometry items
 #  80 0101 0000 - Aim91x.ac
@@ -354,199 +354,202 @@ var GeoEventNotification =
 #  97 0110 0001 - rocket.ac
 #  98 0110 0010 - tracer.ac
 #  99 0110 0011 - tracer2.ac
-# 100 0110 0100 - 
-# 101 0110 0101 - 
-# 102 0110 0110 - 
-# 103 0110 0111 - 
-# 104 0110 1000 - 
-# 105 0110 1001 - 
-# 106 0110 1010 - 
-# 107 0110 1011 - 
-# 108 0110 1100 - 
-# 109 0110 1101 - 
-# 110 0110 1110 - 
-# 111 0110 1111 - 
+# 100 0110 0100 -
+# 101 0110 0101 -
+# 102 0110 0110 -
+# 103 0110 0111 -
+# 104 0110 1000 -
+# 105 0110 1001 -
+# 106 0110 1010 -
+# 107 0110 1011 -
+# 108 0110 1100 -
+# 109 0110 1101 -
+# 110 0110 1110 -
+# 111 0110 1111 -
 #--------
 # Type 0111 : Models/Geometry items
-# 112 0111 0000 - 
-# 113 0111 0001 - 
-# 114 0111 0010 - 
-# 115 0111 0011 - 
-# 116 0111 0100 - 
-# 117 0111 0101 - 
-# 118 0111 0110 - 
-# 119 0111 0111 - 
-# 120 0111 1000 - 
-# 121 0111 1001 - 
-# 122 0111 1010 - 
-# 123 0111 1011 - 
-# 124 0111 1100 - 
-# 125 0111 1101 - 
-# 126 0111 1110 - 
-# 127 0111 1111 - 
+# 112 0111 0000 -
+# 113 0111 0001 -
+# 114 0111 0010 -
+# 115 0111 0011 -
+# 116 0111 0100 -
+# 117 0111 0101 -
+# 118 0111 0110 -
+# 119 0111 0111 -
+# 120 0111 1000 -
+# 121 0111 1001 -
+# 122 0111 1010 -
+# 123 0111 1011 -
+# 124 0111 1100 -
+# 125 0111 1101 -
+# 126 0111 1110 -
+# 127 0111 1111 -
 #--------
 # Type 1000 : Models/Geometry items
-# 128 1000 0000 - 
-# 129 1000 0001 - 
-# 130 1000 0010 - 
-# 131 1000 0011 - 
-# 132 1000 0100 - 
-# 133 1000 0101 - 
-# 134 1000 0110 - 
-# 135 1000 0111 - 
-# 136 1000 1000 - 
-# 137 1000 1001 - 
-# 138 1000 1010 - 
-# 139 1000 1011 - 
-# 140 1000 1100 - 
-# 141 1000 1101 - 
-# 142 1000 1110 - 
-# 143 1000 1111 - 
+# 128 1000 0000 -
+# 129 1000 0001 -
+# 130 1000 0010 -
+# 131 1000 0011 -
+# 132 1000 0100 -
+# 133 1000 0101 -
+# 134 1000 0110 -
+# 135 1000 0111 -
+# 136 1000 1000 -
+# 137 1000 1001 -
+# 138 1000 1010 -
+# 139 1000 1011 -
+# 140 1000 1100 -
+# 141 1000 1101 -
+# 142 1000 1110 -
+# 143 1000 1111 -
 #--------
-# Type 1001 : 
-# 144 1001 0000 - 
-# 145 1001 0001 - 
-# 146 1001 0010 - 
-# 147 1001 0011 - 
-# 148 1001 0100 - 
-# 149 1001 0101 - 
-# 150 1001 0110 - 
-# 151 1001 0111 - 
-# 152 1001 1000 - 
-# 153 1001 1001 - 
-# 154 1001 1010 - 
-# 155 1001 1011 - 
-# 156 1001 1100 - 
-# 157 1001 1101 - 
-# 158 1001 1110 - 
-# 159 1001 1111 - 
+# Type 1001 :
+# 144 1001 0000 -
+# 145 1001 0001 -
+# 146 1001 0010 -
+# 147 1001 0011 -
+# 148 1001 0100 -
+# 149 1001 0101 -
+# 150 1001 0110 -
+# 151 1001 0111 -
+# 152 1001 1000 -
+# 153 1001 1001 -
+# 154 1001 1010 -
+# 155 1001 1011 -
+# 156 1001 1100 -
+# 157 1001 1101 -
+# 158 1001 1110 -
+# 159 1001 1111 -
 #--------
-# Type 1010 : 
-# 160 1010 0000 - 
-# 161 1010 0001 - 
-# 162 1010 0010 - 
-# 163 1010 0011 - 
-# 164 1010 0100 - 
-# 165 1010 0101 - 
-# 166 1010 0110 - 
-# 167 1010 0111 - 
-# 168 1010 1000 - 
-# 169 1010 1001 - 
-# 170 1010 1010 - 
-# 171 1010 1011 - 
-# 172 1010 1100 - 
-# 173 1010 1101 - 
-# 174 1010 1110 - 
-# 175 1010 1111 - 
+# Type 1010 :
+# 160 1010 0000 -
+# 161 1010 0001 -
+# 162 1010 0010 -
+# 163 1010 0011 -
+# 164 1010 0100 -
+# 165 1010 0101 -
+# 166 1010 0110 -
+# 167 1010 0111 -
+# 168 1010 1000 -
+# 169 1010 1001 -
+# 170 1010 1010 -
+# 171 1010 1011 -
+# 172 1010 1100 -
+# 173 1010 1101 -
+# 174 1010 1110 -
+# 175 1010 1111 -
 #--------
-# Type 1011 : 
-# 176 1011 0000 - 
-# 177 1011 0001 - 
-# 178 1011 0010 - 
-# 179 1011 0011 - 
-# 180 1011 0100 - 
-# 181 1011 0101 - 
-# 182 1011 0110 - 
-# 183 1011 0111 - 
-# 184 1011 1000 - 
-# 185 1011 1001 - 
-# 186 1011 1010 - 
-# 187 1011 1011 - 
-# 188 1011 1100 - 
-# 189 1011 1101 - 
-# 190 1011 1110 - 
-# 191 1011 1111 - 
+# Type 1011 :
+# 176 1011 0000 -
+# 177 1011 0001 -
+# 178 1011 0010 -
+# 179 1011 0011 -
+# 180 1011 0100 -
+# 181 1011 0101 -
+# 182 1011 0110 -
+# 183 1011 0111 -
+# 184 1011 1000 -
+# 185 1011 1001 -
+# 186 1011 1010 -
+# 187 1011 1011 -
+# 188 1011 1100 -
+# 189 1011 1101 -
+# 190 1011 1110 -
+# 191 1011 1111 -
 #--------
-# Type 1100 : 
-# 192 1100 0000 - 
-# 193 1100 0001 - 
-# 194 1100 0010 - 
-# 195 1100 0011 - 
-# 196 1100 0100 - 
-# 197 1100 0101 - 
-# 198 1100 0110 - 
-# 199 1100 0111 - 
-# 200 1100 1000 - 
-# 201 1100 1001 - 
-# 202 1100 1010 - 
-# 203 1100 1011 - 
-# 204 1100 1100 - 
-# 205 1100 1101 - 
-# 206 1100 1110 - 
-# 207 1100 1111 - 
+# Type 1100 :
+# 192 1100 0000 -
+# 193 1100 0001 -
+# 194 1100 0010 -
+# 195 1100 0011 -
+# 196 1100 0100 -
+# 197 1100 0101 -
+# 198 1100 0110 -
+# 199 1100 0111 -
+# 200 1100 1000 -
+# 201 1100 1001 -
+# 202 1100 1010 -
+# 203 1100 1011 -
+# 204 1100 1100 -
+# 205 1100 1101 -
+# 206 1100 1110 -
+# 207 1100 1111 -
 #--------
-# Type 1101 : 
-# 208 1101 0000 - 
-# 209 1101 0001 - 
-# 210 1101 0010 - 
-# 211 1101 0011 - 
-# 212 1101 0100 - 
-# 213 1101 0101 - 
-# 214 1101 0110 - 
-# 215 1101 0111 - 
-# 216 1101 1000 - 
-# 217 1101 1001 - 
-# 218 1101 1010 - 
-# 219 1101 1011 - 
-# 220 1101 1100 - 
-# 221 1101 1101 - 
-# 222 1101 1110 - 
-# 223 1101 1111 - 
+# Type 1101 :
+# 208 1101 0000 -
+# 209 1101 0001 -
+# 210 1101 0010 -
+# 211 1101 0011 -
+# 212 1101 0100 -
+# 213 1101 0101 -
+# 214 1101 0110 -
+# 215 1101 0111 -
+# 216 1101 1000 -
+# 217 1101 1001 -
+# 218 1101 1010 -
+# 219 1101 1011 -
+# 220 1101 1100 -
+# 221 1101 1101 -
+# 222 1101 1110 -
+# 223 1101 1111 -
 #--------
-# Type 1110 : 
-# 224 1110 0000 - 
-# 225 1110 0001 - 
-# 226 1110 0010 - 
-# 227 1110 0011 - 
-# 228 1110 0100 - 
-# 229 1110 0101 - 
-# 230 1110 0110 - 
-# 231 1110 0111 - 
-# 232 1110 1000 - 
-# 233 1110 1001 - 
-# 234 1110 1010 - 
-# 235 1110 1011 - 
-# 236 1110 1100 - 
-# 237 1110 1101 - 
-# 238 1110 1110 - 
-# 239 1110 1111 - 
+# Type 1110 :
+# 224 1110 0000 -
+# 225 1110 0001 -
+# 226 1110 0010 -
+# 227 1110 0011 -
+# 228 1110 0100 -
+# 229 1110 0101 -
+# 230 1110 0110 -
+# 231 1110 0111 -
+# 232 1110 1000 -
+# 233 1110 1001 -
+# 234 1110 1010 -
+# 235 1110 1011 -
+# 236 1110 1100 -
+# 237 1110 1101 -
+# 238 1110 1110 -
+# 239 1110 1111 -
 #--------
-# Type 1111 : 
-# 240 1111 0000 - 
-# 241 1111 0001 - 
-# 242 1111 0010 - 
-# 243 1111 0011 - 
-# 244 1111 0100 - 
-# 245 1111 0101 - 
-# 246 1111 0110 - 
-# 247 1111 0111 - 
-# 248 1111 1000 - 
-# 249 1111 1001 - 
-# 250 1111 1010 - 
-# 251 1111 1011 - 
-# 252 1111 1100 - 
-# 253 1111 1101 - 
-# 254 1111 1110 - 
-# 255 1111 1111 - 
+# Type 1111 :
+# 240 1111 0000 -
+# 241 1111 0001 -
+# 242 1111 0010 -
+# 243 1111 0011 -
+# 244 1111 0100 -
+# 245 1111 0101 -
+# 246 1111 0110 -
+# 247 1111 0111 -
+# 248 1111 1000 -
+# 249 1111 1001 -
+# 250 1111 1010 -
+# 251 1111 1011 -
+# 252 1111 1100 -
+# 253 1111 1101 -
+# 254 1111 1110 -
+# 255 1111 1111 -
 
 
 #
 #
-# Use to transmit events that happen at a specific place; can be used to make 
+# Use to transmit events that happen at a specific place; can be used to make
 # models that are simulated locally (e.g. tankers) appear on other player's MP sessions.
-var PFDEventNotification = 
+var PFDEventNotification =
 {
 # new:
 # _ident - the identifier for the notification. not bridged.
 # _pfd_id - numeric identification of the PFD within the model
-# _event_id - event ID. 
+# _event_id - event ID.
 #     1       softkey pushed.
 #     2       select page by ID
+#     3       Change softkey button text
+#     4       hardkey pushed - i.e. non-soft keys that don't change function based on context.
 # _event_param - param related to the event ID. implementation specific.
 ##
     SoftKeyPushed : 1,
     SelectPageById : 2,
-    ChangeMenuText : 3, #event parameter contains hash of { Id: , Text: }
+    ChangeMenuText : 3, #event parameter contains array of { Id: , Text: } tuples
+    HardKeyPushed : 4,  #event parameter contains single { Id: , Value: } tuple
     DefaultType : "PFDEventNotification",
 
     new: func(_ident, _device_id,_event_id,_event_parameter_id)
@@ -560,15 +563,15 @@ var PFDEventNotification =
 
         new_class.bridgeProperties = func
         {
-            return 
-            [ 
+            return
+            [
              {
             getValue:func{return emesary.TransferByte.encode(new_class.Event_Id);},
-            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Event_Id=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Event_Id=dv.value;return dv},
              },
              {
             getValue:func{return emesary.TransferByte.encode(new_class.EventParameter);},
-            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.EventParameter=dv.value;return dv}, 
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.EventParameter=dv.value;return dv},
              },
             ];
           };

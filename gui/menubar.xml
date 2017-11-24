@@ -342,21 +342,21 @@
 				<![CDATA[
 				var varray = volcano.volcano_manager.volcano_array;
 				var n = size(varray);
-				
+
 				var aircraft_pos = geo.aircraft_position();
-				
+
 				var j = 0;
-		
+
 				for (var i = 0; i< n; i=i+1)
 					{
 						#print(i, " ", varray[i].name);
 						var distance = aircraft_pos.distance_to(varray[i].pos);
-				
+
 						if (distance < 150000.0) # only add nearby objects
 							{
 							var name = varray[i].name;
-							
-							setprop("/environment/volcanoes/volcanoes-nearby/value["~j~"]", name);			
+
+							setprop("/environment/volcanoes/volcanoes-nearby/value["~j~"]", name);
 							if (j==0)
 								{setprop("/environment/volcanoes/volcano-selected", name);}
 
@@ -553,17 +553,17 @@
 					if (name != nil) # check whether a dialog is defined at all
 						{
 						var aircraft_pos = geo.aircraft_position();
-					
+
 						var carrier_lat = c.getNode("position").getNode("latitude-deg").getValue();
 						var carrier_lon = c.getNode("position").getNode("longitude-deg").getValue();
 						var carrier_pos = geo.Coord.new();
 						carrier_pos.set_latlon(carrier_lat, carrier_lon);
 
 						var distance = aircraft_pos.distance_to(carrier_pos);
-	
+
 						if (distance < 50000.0) # only add nearby objects
 							{
-							setprop("/ai/control/objects-nearby/value["~i~"]", name);			
+							setprop("/ai/control/objects-nearby/value["~i~"]", name);
 							if (i==0)
 								{setprop("/ai/control/object-selected", name);}
 
@@ -818,6 +818,14 @@
 			<binding>
 				<command>nasal</command>
 				<script>gui.property_browser()</script>
+			</binding>
+		</item>
+
+		<item>
+			<name>fg1000</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>fg1000</dialog-name>
 			</binding>
 		</item>
 

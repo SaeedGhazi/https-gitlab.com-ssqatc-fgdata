@@ -17,17 +17,22 @@
 #
 # Menu Item. There is a list of these for each page changing button per display page
 # Parameters:
-# menu_id : page change event id for this menu item. e.g. button number
-# title   : Title Text (for display on the device)
-# page    : Instance of page usually returned from PFD.addPage
+# menu_id   : page change event id for this menu item. e.g. button number
+# title      : Title Text (for display on the device)
+# page       : Instance of page usually returned from PFD.addPage
+# callbackfn : Function to call when menu item is selected
+# displayfn  : Function to call when the menu item is displayed.  Used to enable
+#              highlighting of menu items, for example.
 
 var PFD_MenuItem =
 {
-    new : func (menu_id, title, page)
+    new : func (menu_id, title, page, callbackfn=nil, displayfn=nil)
     {
 		var obj = {parents : [PFD_MenuItem] };
         obj.page = page;
         obj.menu_id = menu_id;
+        obj.callbackfn = callbackfn;
+        obj.displayfn = displayfn;
         obj.title = title;
         return obj;
     },
@@ -63,7 +68,7 @@ var PFD_Page =
     # make a page that is currenty visible not visible before making a new page visible,
     # however more than one page could be visible - but only one set of menu buttons can be active
     # so if two pages are visible (e.g. an overlay) then when the overlay removed it would be necessary
-    # to call setVisible on the base page to ensure that the menus are seutp
+    # to call setVisible on the base page to ensure that the menus are setup
     setVisible : func(vis)
     {
         if(me.svg != nil)
@@ -75,6 +80,21 @@ var PFD_Page =
             me.offdisplay();
     },
 
+    # Standard callback for buttons, causing the appropriate page to be displayed
+    std_callbackfn : func (device, me, mi)
+    {
+      device.selectPage(mi.page);
+    },
+
+    # Standard display function for buttons, displaying the text and making visible
+    std_displayfn : func(svg_element, menuitem)
+    {
+      svg_element.setText(menuitem.title);
+      svg_element.setVisible(1);
+      #me.buttons[mi.menu_id].setText(mi.title);
+      #me.buttons[mi.menu_id].setVisible(1);
+    },
+
     #
     # Perform action when button is pushed
     notifyButton : func(button_id)
@@ -82,7 +102,7 @@ var PFD_Page =
              {
                  if (mi.menu_id == button_id)
                  {
-                     me.device.selectPage(mi.page);
+                     if (mi.callbackfn != nil) mi.callbackfn(me.device, me, mi);
                      break;
                  }
              }
@@ -96,14 +116,25 @@ var PFD_Page =
     #  page that will be selected when pressed
     #
     # The corresponding menu for the selected page will automatically be loaded
-    addMenuItem : func(menu_id, title, page)
+    addMenuItem : func(menu_id, title, page, callbackfn=nil, displayfn=nil)
     {
-        var nm = PFD_MenuItem.new(menu_id, title, page);
+        if (callbackfn == nil) callbackfn = me.std_callbackfn;
+        if (displayfn == nil) displayfn = me.std_displayfn;
+        var nm = PFD_MenuItem.new(menu_id, title, page, callbackfn, displayfn);
         append(me.menus, nm);
         return nm;
     },
 
-    # base method for update; this can be overriden per page instance to provide update of the
+    #
+    # Clear all items from the menu.  Use-case is where they may be a hierarchy
+    # of menus within the same page.
+    #
+    clearMenu : func()
+    {
+      me.menus = [];
+    },
+
+    # base method for update; this can be overridden per page instance to provide update of the
     # elements on display (e.g. to display updated properties)
     update : func(notification=nil)
     {
@@ -133,6 +164,7 @@ var PFD_Device =
 # - num_menu_buttons is the Number of menu buttons; starting from the bottom left then right, then top, then left.
 # - button prefix (e.g MI_) is the prefix of the labels in the SVG for the menu boxes.
 # - _canvas is the canvas group.
+# - designation (optional) is used for Emesary designation
 #NOTE:
 # This does not actually create the canvas elements, or parse the SVG, that would typically be done in
 # a higher level class that contains an instance of this class.
@@ -161,7 +193,7 @@ var PFD_Device =
             else
             {
                 obj.buttons[idx] = msvg;
-                obj.buttons[idx].setText(sprintf("M",idx));
+                obj.buttons[idx].setText(sprintf("M%d",idx));
             }
         }
         obj.Recipient = nil;
@@ -187,17 +219,19 @@ var PFD_Device =
             var pfd_obj = me;
             me.Recipient.Receive = func(notification)
               {
-                  if (notification.Device_id == pfd_obj.device_id 
+                  if (notification.Device_Id == pfd_obj.device_id
                       and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
                       if (notification.Event_Id == notifications.PFDEventNotification.SoftKeyPushed
                           and notification.EventParameter != nil)
                         {
+                            #printf("Button pressed " ~ notification.EventParameter);
                             pfd_obj.notifyButton(notification.EventParameter);
                         }
                       else if (notification.Event_Id == notifications.PFDEventNotification.ChangeMenuText
                           and notification.EventParameter != nil)
                         {
                             foreach(var eventMenu; notification.EventParameter) {
+                                #printf("Menu Text changed : " ~ eventMenu.Text);
                                 foreach (var mi ; pfd_obj.current_page.menus) {
                                     if (pfd_obj.buttons[eventMenu.Id] != nil) {
                                         pfd_obj.buttons[eventMenu.Id].setText(eventMenu.Text);
@@ -253,6 +287,17 @@ var PFD_Device =
         return np;
     },
     #
+    # Get a named page
+    #
+    getPage : func(title)
+    {
+      foreach(var p; me.pages) {
+        if (p.title == title) return p;
+      }
+
+      return nil;
+    },
+    #
     # manage the update of the currently selected page
     update : func(notification=nil)
     {
@@ -264,6 +309,8 @@ var PFD_Device =
     # - the page object method controls the visibility
     selectPage : func(p)
     {
+        if (me.current_page == p) return;
+
         if (me.current_page != nil)
             me.current_page.setVisible(0);
         if (me.buttons != nil)
@@ -276,8 +323,7 @@ var PFD_Device =
             {
                 if (me.buttons[mi.menu_id] != nil)
                 {
-                    me.buttons[mi.menu_id].setText(mi.title);
-                    me.buttons[mi.menu_id].setVisible(1);
+                  mi.displayfn(me.buttons[mi.menu_id], mi);
                 }
                 else
                     printf("PFD_device: Menu for button not found. Menu ID '%s'",mi.menu_id);
@@ -290,12 +336,17 @@ var PFD_Device =
     # ensure that the menus are display correctly for the current page.
     updateMenus : func
     {
+        foreach(var mb ; me.buttons)
+          if (mb != nil)
+            mb.setVisible(0);
+
+        if (me.current_page == nil) return;
+
         foreach(var mi ; me.current_page.menus)
         {
             if (me.buttons[mi.menu_id] != nil)
             {
-                me.buttons[mi.menu_id].setText(mi.title);
-                me.buttons[mi.menu_id].setVisible(1);
+                mi.displayfn(me.buttons[mi.menu_id], mi);
             }
             else
                 printf("No corresponding item '%s'",mi.menu_id);

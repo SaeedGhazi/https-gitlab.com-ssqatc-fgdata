@@ -1,7 +1,7 @@
 # See: http://wiki.flightgear.org/MapStructure
 # FIXME: this needs to be configurable via the ctor to optionally differentiate between MP and AI traffic, and exclude ground/sea traffic
 # or at least use a different, non-TCAS symbol for those (looking pretty weird ATM)
-# 
+#
 # Class things:
 var name = 'TFC';
 var parents = [SymbolLayer.Controller];
@@ -11,6 +11,13 @@ SymbolLayer.add(name, {
 	parents: [MultiSymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
+	df_style: {
+	},
+	df_options: { # default configuration options
+		floor_ft:   120000, # Display target from this height below the aircraft
+		ceiling_ft: 120000, # Display targets up to this height above the aircraft
+		display_id: 1,      # Display aircraft ID
+	},
 });
 
 var model_root = props.globals.getNode("/ai/models/");
@@ -67,7 +74,7 @@ var get_alt_diff = func(model) {
 	var model_alt = model.get_alt();
 	var alt = me.map.getAlt();
 	if (alt == nil or model_alt == nil) return 0;
-	return alt-model_alt;
+	return alt - model_alt;
 };
 
 ##
@@ -83,6 +90,12 @@ var searchCmd_default = func {
 	var result = [];
 	var models = 0;
 
+	var alt = me.map.getAlt();
+	if (alt == nil) alt = 0;
+
+	var min_alt = alt - me.layer.options.floor_ft;
+	var max_alt = alt + me.layer.options.ceiling_ft;
+
 	# AI and Multiplayer traffic
 	foreach (var t; model_root.getChildren()) {
 		if (!t.getValue("valid")) continue;
@@ -95,11 +108,16 @@ var searchCmd_default = func {
 			printlog("alert", "lat/lon was nil for AI node "~t.getPath());
 			continue;
 		}
-		if (me.map.controller.in_range(lat, lon))
-			append(result, TrafficModel.new(t, nil, me.layer));
+
+		var tm = TrafficModel.new(t, nil, me.layer);
+
+		if ((min_alt < tm.get_alt()) and
+		    (tm.get_alt() < max_alt) and
+			   me.map.controller.in_range(lat, lon)  ) {
+			append(result, tm);
+		}
 	}
 
 	#print("Found "~size(result)~" TrafficModel's in range out of "~models~" total.");
 	return result;
 };
-

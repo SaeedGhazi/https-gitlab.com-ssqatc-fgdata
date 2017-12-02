@@ -1,0 +1,362 @@
+-*- coding: utf-8; fill-column: 72; -*-
+
+Add-ons in FlightGear
+=====================
+
+This document explains how add-ons work in FlightGear. The add-on
+feature was first added in FlightGear 2017.3. This document describes an
+evolution of the framework that appeared in FlightGear 2017.4.
+
+
+Contents
+--------
+
+1. Terminology
+2. The addon-metadata.xml file
+3. Add-on metadata in the Property Tree
+4. How to run code after an add-on is loaded
+5. Overview of the C++ API
+6. Nasal API
+
+
+Introduction
+------------
+
+fgfs can be passed the --addon=<path> option, where <path> indicates an
+add-on directory. Such a directory, when used as the argument of
+--addon, receives special treatment :
+
+  1) The add-on directory is added to the list of aircraft paths.
+
+  2) The add-on directory must contain a PropertyList file called
+     addon-metadata.xml that gives the name of the add-on, its
+     identifier (id), its version and possibly a few other things (see
+     details below).
+
+  3) The add-on directory may contain a PropertyList file called
+     config.xml, in which case it will be loaded into the Property Tree
+     at FlightGear startup, as if it were passed to the --config fgfs
+     option.
+
+  4) The add-on directory must contain a Nasal file called main.nas.
+     This file will be loaded at startup too, and its main() function
+     run in the namespace __addon[ADDON_ID]__, where ADDON_ID is the
+     add-on identifier specified in the addon-metadata.xml file. This
+     operation is done by $FG_ROOT/Nasal/addons.nas at the time of this
+     writing.
+
+Also, the Property Tree is populated (under /addons) with information
+about registered add-ons. More details will be given below.
+
+The --addon option can be specified zero or more times; each of the
+operations indicated above is carried out for every specified add-on in
+the order given by the --addon options used: that's what we call add-on
+registration order, or add-on load order. In other words, add-ons are
+registered and loaded in the order specified by the --addon options
+used.
+
+
+1. Terminology
+   ~~~~~~~~~~~
+
+add-on base path
+
+  Path to a directory containing all of the add-on files. This is the
+  path passed to the --addon fgfs option, when one wants to load the
+  add-on in question.
+
+add-on identifier (id)
+
+  A string such as org.flightgear.addons.ATCChatter or
+  user.joe.MyGreatAddon, used to uniquely identify an add-on. The add-on
+  identifier is declared in <path>/addon-metadata.xml, where <path> is
+  the add-on base path.
+
+add-on registration
+
+  When a --addon option is processed, FlightGear ensures that the add-on
+  identifier found in the corresponding addon-metadata.xml file isn't
+  already used by an add-on from a previous --addon option on the same
+  command line, and stores the add-on metadata inside dedicated C++
+  objects. This process is called add-on registration.
+
+add-on loading
+
+  The following sequence of actions:
+
+    a) loading an add-on's main.nas file in the namespace
+       __addon[ADDON_ID]__
+    b) calling its main() function
+
+  is performed later (see $FG_ROOT/Nasal/addons.nas) and called add-on
+  loading.
+
+
+2. The addon-metadata.xml file
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Every add-on must have in its base directory a file called
+'addon-metadata.xml'. Here is an example of such a file, for a
+hypothetical add-on called “Flying Turtle” distributed by Joe User:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+
+  <PropertyList>
+    <format-version type="int">1</format-version>
+    <addon>
+      <identifier>user.joe.FlyingTurtle</identifier>
+      <name>Flying Turtle</name>
+      <version>1.0.0rc2</version>
+      <short-description>Allow flying with new foobar powers.</short-description>
+      <long-description>This add-on enables something really great involving turtles...</long-description>
+      <min-FG-version>2017.4.0</min-FG-version>
+      <max-FG-version>none</max-FG-version>
+      <home-page>https://example.com/quux</home-page>
+      <download-url>https://example.com/quux/download</download-url>
+      <support-url>https://example.com/quux/support</support-url>
+    </addon>
+  </PropertyList>
+
+The add-on name is the pretty form. It should not be overly long, but
+otherwise isn't constrained. On the other hand, the add-on identifier
+(id), which serves to uniquely identify an add-on:
+  - must contain only ASCII letters (A-Z, a-z) and dots ('.');
+  - must be in reverse DNS style (even if the domain doesn't exist),
+    e.g., org.flightgear.addons.ATCChatter for an add-on distributed in
+    FGAddon, or user.joe.FlyingTurtle for Joe User's “Flying Turtle”
+    add-on. Of course, if Joe User owns a domain name and uses it to
+    distribute his add-on, he should put it here.
+
+The short description should fit on one line (try not to exceed, say, 78
+characters), and in general consist of only one sentence.
+
+'min-FG-version' and 'max-FG-version' are optional and may be omitted
+unless the add-on is known not to work with particular FlightGear
+versions. 'min-FG-version' defaults to 2017.4.0 and 'max-FG-version' to
+the special value 'none' (only allowed for 'max-FG-version'). Apart from
+this special case, every non-empty value present in one of these two
+fields must be a proper FlightGear version number usable with
+simgear::strutils::compare_versions(), for instance '2017.4.1'.
+
+The 'version' node (XML element) gives the version of the add-on and
+must obey a strict syntax too[1], which is a subset of what is described
+in PEP 440:
+
+  https://www.python.org/dev/peps/pep-0440/
+
+Valid examples are, in increasing sort order:
+
+  1.2.5.dev1      # first development release of 1.2.5
+  1.2.5.dev4      # fourth development release of 1.2.5
+  1.2.5
+  1.2.9
+  1.2.10a1.dev2   # second dev release of the first alpha release of 1.2.10
+  1.2.10a1        # first alpha release of 1.2.10
+  1.2.10b5        # fifth beta release of 1.2.10
+  1.2.10rc12      # twelfth release candidate for 1.2.10
+  1.2.10
+  1.3.0
+  2017.4.12a2
+  2017.4.12b1
+  2017.4.12rc1
+  2017.4.12
+
+.devN suffixes can of course be used on beta and release candidates too,
+just as with the 1.2.10a1.dev2 example given above for an alpha release.
+Note that a development release always sorts before the corresponding
+non-development release (e.g., 2017.2.1b5.dev4 comes before 2017.2.1b5).
+
+The other nodes of 'addon-metadata.xml' should be self-explanatory.
+
+
+3. Add-on metadata in the Property Tree
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The most important metadata for each registered add-on is made
+accessible in the Property Tree under /addons/by-id/ADDON_ID and the
+property /addons/by-id/ADDON_ID/loaded can be checked or listened to, in
+order to determine when a particular add-on is loaded. There is also a
+Nasal interface to access add-on metadata in a convenient way (see
+below).
+
+More precisely, when an add-on is registered, its name, id, base path,
+version (converted to a string), loaded status (boolean) and load
+sequence number (int) become available in the Property Tree as
+/addons/by-id/ADDON_ID/{name,id,path,version,loaded,load-seq-num}. The
+loaded status is initially false, and set to true when the add-on
+loading phase is complete.
+
+There are also /addons/addon[i]/path nodes where i is 0 for the first
+registered add-on, 1 for the second one, etc.
+
+
+4. How to run code after an add-on is loaded
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You may want to set up Nasal code to be run after an add-on is loaded;
+here is how to do that:
+
+  var addonId = "user.joe.FlyingTurtle";
+  var loadedFlagNode = props.globals.getNode("/addons")
+                                    .getChild("by-id", 0, 1)
+                                    .getChild(addonId, 0, 1)
+                                    .getChild("loaded", 0, 1);
+
+  if (loadedFlagNode.getBoolValue()) {
+    logprint(5, addonId ~ " is already loaded");
+  } else {
+    # Define a function to be called after the add-on is loaded
+    var id = setlistener(
+      loadedFlagNode,
+      func(changedNode, listenedNode) {
+        if (listenedNode.getBoolValue()) {
+          removelistener(id);
+          logprint(5, addonId ~ " is loaded");
+        };
+      },
+      0, 0);
+  }
+
+
+5. Overview of the C++ API
+   ~~~~~~~~~~~~~~~~~~~~~~~
+
+The add-on C++ infrastructure mainly relies on the following classes:
+AddonManager, Addon and AddonVersion. AddonManager is used to register
+add-ons, which later leads to their loading. AddonManager relies on an
+std::map<std::string, AddonRef>, where keys are add-on identifiers and
+AddonRef is SGSharedPtr<Addon> at the time of this writing (changing it
+to another kind of smart pointer should be a mere one-line change). This
+map holds the metadata of each registered add-on. Accessor methods are
+available for:
+
+  - retrieving the lists of registered and loaded add-ons;
+
+  - checking if a particular add-on has already been registered or
+    loaded;
+
+  - for each add-on, obtaining an Addon instance which can be queried
+    for its identifier, its name, identifier, version, base path, the
+    minimum and maximum FlightGear versions it requires, its base node
+    in the Property Tree, its order in the load sequence...
+
+The AddonVersion class handles everything about add-on version numbers:
+  - initialization from the individual components or from a string;
+  - conversion to a string and output to an std::ostream;
+  - access to every component;
+  - comparisons using the standard operators: ==, !=, <, <=, >, >=.
+
+Registering an add-on using AddonManager::registerAddon() ensures
+uniqueness of the add-on identifier and makes its name, identifier, base
+path, version (converted to a string), loaded status (boolean) and load
+sequence number (int) available in the Property Tree as
+/addons/by-id/ADDON_ID/{name,id,path,version,loaded,load-seq-num}.
+
+Note: if C++ code needs to use the add-on base path, better use
+      AddonManager::addonBasePath() or Addon::getBasePath(), whose
+      return values can't be tampered with by Nasal code.
+
+AddonManager::registerAddon() fails with a specific exception if the
+running FlightGear instance doesn't match the min-FG-version and
+max-FG-version requirements declared in the addon-metadata.xml file, as
+well as in the obvious other cases (config.xml or addon-metadata.xml not
+found, invalid syntax in any of these files, etc.). The code in
+options.cxx (fgOptAddon()) catches such exceptions and displays the
+appropriate error message with SG_LOG() and fatalMessageBoxThenExit().
+
+
+6. Nasal API
+   ~~~~~~~~~
+
+The Nasal add-on API all lives in the 'addons' namespace. It gives Nasal
+code easy access to add-on metadata, for instance like this:
+
+  var myAddon = addons.getAddon("user.joe.FlyingTurtle");
+  print(myAddon.id);
+  print(myAddon.name);
+  print(myAddon.version.str());
+  print(myAddon.shortDescription);
+  print(myAddon.longDescription);
+  print(myAddon.basePath);
+  print(myAddon.minFGVersionRequired);
+  print(myAddon.maxFGVersionRequired);
+  print(myAddon.homePage);
+  print(myAddon.downloadUrl);
+  print(myAddon.supportUrl);
+  print(myAddon.loadSequenceNumber);
+  # myAddon.node is a props.Node object for /addons/by-id/ADDON_ID
+  print(myAddon.node.getPath());
+
+Among other things, the Nasal add-on API allows one to get the version
+of any registered add-on as a ghost and reliably compare it to another
+instance of addons.AddonVersion:
+
+  var myAddon = addons.getAddon("user.joe.FlyingTurtle");
+  var firstVersionOK = addons.AddonVersion.new("2.12.5rc1");
+  # Or alternatively:
+  #   var firstVersionOK = addons.AddonVersion.new(2, 12, 5, "rc1");
+
+  if (myAddon.version.lowerThan(firstVersionOK)) {
+    ...
+
+Here follows the complete Nasal add-on API, at the time of this writing.
+
+Queries to the AddonManager:
+
+  addons.isAddonRegistered(string addonId) -> bool (1 or 0)
+  addons.registeredAddons()                -> vector<addons.Addon>
+                                              (in registration/load order)
+  addons.isAddonLoaded(string addonId)     -> bool (1 or 0)
+  addons.loadedAddons()                    -> vector<addons.Addon>
+                                              (in lexicographic order)
+  addons.getAddon(string addonId)          -> addons.Addon instance (ghost)
+
+Read-only data members (attributes) of addons.Addon objects:
+
+  id                    the add-on identifier, in reverse DNS style (string)
+  name                  the add-on “pretty name” (string)
+  version               the add-on version (instance of addons.AddonVersion,
+                        ghost)
+  shortDescription      the add-on short description (string)
+  longDescription       the add-on long description (string)
+  basePath              path to the add-on base directory (UTF-8 string)
+  minFGVersionRequired  minimum required FG version for the add-on (string)
+  maxFGVersionRequired  max. required FG version... or "none" (string)
+  homePage              add-on home page (string)
+  downloadUrl           add-on download URL (string)
+  supportUrl            add-on support URL (string)
+  node                  base node for the add-on in the Property Tree:
+                        /addons/by-id/ADDON_ID
+  loadSequenceNumber    0 for the first registered add-on, 1 for the
+                        second one, etc. (integer)
+
+Read-only data members (attributes) of addons.AddonVersion objects:
+
+  majorNumber           non-negative integer
+  minorNumber           non-negative integer
+  patchLevel            non-negative integer
+  suffix                string such as "", "a1", "b2.dev45", "rc12"...
+
+Member functions (methods) of addons.AddonVersion objects:
+
+  new(string version)                           | construct from string
+
+  new(int major, int minor=0, int patchLevel=0, | construct
+      string suffix="")                         | from components
+
+  str()                                         | string representation
+
+  equal(addons.AddonVersion other)              |
+  nonEqual(addons.AddonVersion other)           | compare to another
+  lowerThan(addons.AddonVersion other)          | addons.AddonVersion
+  lowerThanOrEqual(addons.AddonVersion other)   | instance
+  greaterThan(addons.AddonVersion other)        |
+  greaterThanOrEqual(addons.AddonVersion other) |
+
+
+Footnote
+--------
+
+[1] MAJOR.MINOR.PATCHLEVEL[{a|b|rc}N1][.devN2] where MAJOR, MINOR and
+    PATCHLEVEL are non-negative integers, and N1 and N2 are positive
+    integers.

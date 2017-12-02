@@ -1,29 +1,39 @@
 ##
-# initialize addons configured with --addon=foobar command line switch
-# - loop over /addons/addon[n] nodes
-# - get root path in /addons/addon[n]/path property (set by options.cxx from --addon=/foo/bar)
-# - load main.nas therein into namespace __addon[n]__
-# - call function main() from that main.nas with addon-path as arg
+# Initialize addons configured with --addon=foobar command line switch:
+# - get the list of registered add-ons
+# - load the main.nas file of each add-on into namespace __addon[ADDON_ID]__
+# - call function main() from every such main.nas with the add-on path as arg.
 
-# example:
+# Example:
+#
 # fgfs --addon=/foo/bar/baz
-# options.cxx creates /addons/addon[0]/path=/foo/bar/baz
-# options.cxx loads /foo/bar/baz/config.xml
-# options.cxx add /foo/bar/baz to aircraft-dir (to get permissions to read files from there)
-# this script loads /foo/bar/baz/main.nas into namespace __addon[0]__
-# this script calls main("/foo/bar/baz") in /foo/bar/baz/main.nas0
+#
+# - AddonManager.cxx parses /foo/bar/baz/addon-metadata.xml
+# - AddonManager.cxx creates prop nodes under /addons containing add-on metadata
+# - AddonManager.cxx loads /foo/bar/baz/config.xml into the Property Tree
+# - AddonManager.cxx adds /foo/bar/baz to the list of aircraft paths (to get
+#   permissions to read files from there)
+# - this script loads /foo/bar/baz/main.nas into namespace __addon[ADDON_ID]__
+# - this script calls main("/foo/bar/baz") from /foo/bar/baz/main.nas.
+#
+# For more details, see $FG_ROOT/Docs/README.add-ons.
 
-_setlistener("/sim/signals/fdm-initialized", func {
-    var addons = props.globals.getNode("/addons");
-    if( addons == nil ) return;
-    foreach (var addon; addons.getChildren("addon")) {
-      var main_nas = addon.getNode("path",1).getValue() ~ "/main.nas";
-      var namespace = "__"  ~ addon.getName() ~ "[" ~ addon.getIndex() ~ "]__";
-      printlog("alert","Initializing addon from " ~ main_nas ~ " in " ~ namespace );
+var id = _setlistener("/sim/signals/fdm-initialized", func {
+    removelistener(id);
+
+    foreach (var addon; addons.registeredAddons()) {
+      var main_nas = addon.basePath ~ "/main.nas";
+      var namespace = "__addon" ~ "[" ~ addon.id ~ "]__";
+      logprint(5, "Initializing addon '" ~ addon.name ~
+                  "' version " ~ addon.version.str() ~ " from " ~ main_nas ~
+                  " in " ~ namespace);
       io.load_nasal( main_nas, namespace );
+
       var addon_main = globals[namespace]["main"];
-      var addon_main_args = [ addon.getNode("path").getValue() ];
+      var addon_main_args = [ addon.basePath ];
       call(addon_main, addon_main_args); #, object, namespace, error_vector);
+
+      # Tell the world that the add-on is now loaded.
+      addon.node.getChild("loaded", 0, 1).setBoolValue(1);
     }
 })
-

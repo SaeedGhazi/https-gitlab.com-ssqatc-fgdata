@@ -18,6 +18,7 @@
   <effect>
     <inherits-from>AI/Aircraft/747/Effects/74Y-LightMap</inherits-from>
     <object-name>74Y</object-name>
+	<object-name>Gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>

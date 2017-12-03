@@ -22,6 +22,7 @@
   <effect>
     <inherits-from>AI/Aircraft/777/Effects/77L-LightMap</inherits-from>
     <object-name>77L</object-name>
+	<object-name>Gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>

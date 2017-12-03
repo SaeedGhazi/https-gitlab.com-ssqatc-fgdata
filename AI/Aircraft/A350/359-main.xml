@@ -22,6 +22,7 @@
   <effect>
     <inherits-from>AI/Aircraft/A350/Effects/359-LightMap</inherits-from>
     <object-name>359</object-name>
+	<object-name>Gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>

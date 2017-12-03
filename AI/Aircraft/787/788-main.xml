@@ -22,6 +22,7 @@
   <effect>
     <inherits-from>AI/Aircraft/787/Effects/788-LightMap</inherits-from>
     <object-name>788</object-name>
+	<object-name>Gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>

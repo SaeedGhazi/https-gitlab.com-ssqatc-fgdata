@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Lighting of Tail, Flanks and Windows -->
 <PropertyList>
-  <name>343-LightMap</name>
+  <name>342-LightMap</name>
   <inherits-from>Effects/model-combined-deferred</inherits-from>
   <parameters>
     <normalmap-enabled type="int">0</normalmap-enabled>

@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
+
+
 <!-- Author Marcin Kuzniar - Fleet & Timetable of NOV and DEC 2017 -->
+
+
 <trafficlist>
   <aircraft>
     <model>Aircraft/738/738-Norwegian.xml</model>
@@ -22929,7 +22933,7 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>
+ <flight>
     <callsign>DY4035</callsign>
     <required-aircraft>NAX-738</required-aircraft>
     <fltrules>IFR</fltrules>
@@ -29844,7 +29848,7 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>
+   <flight>
     <callsign>DY4507</callsign>
     <required-aircraft>NAX-738</required-aircraft>
     <fltrules>IFR</fltrules>
@@ -36201,6 +36205,186 @@
     <arrival>
       <port>EFHK</port>
       <time>0/20:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8342</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ENGM</port>
+      <time>1/08:30:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EPWA</port>
+      <time>1/10:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8343</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EPWA</port>
+      <time>1/11:00:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ENGM</port>
+      <time>1/12:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8342</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ENGM</port>
+      <time>2/08:30:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EPWA</port>
+      <time>2/10:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8343</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EPWA</port>
+      <time>2/11:00:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ENGM</port>
+      <time>2/12:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8342</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ENGM</port>
+      <time>3/08:30:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EPWA</port>
+      <time>3/10:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8343</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EPWA</port>
+      <time>3/11:00:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ENGM</port>
+      <time>3/12:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8342</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ENGM</port>
+      <time>4/08:30:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EPWA</port>
+      <time>4/10:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8343</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EPWA</port>
+      <time>4/11:00:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ENGM</port>
+      <time>4/12:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8342</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ENGM</port>
+      <time>5/08:30:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EPWA</port>
+      <time>5/10:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8343</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EPWA</port>
+      <time>5/11:00:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ENGM</port>
+      <time>5/12:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8342</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ENGM</port>
+      <time>0/09:30:00</time>
+    </departure>
+    <cruise-alt>370</cruise-alt>
+    <arrival>
+      <port>EPWA</port>
+      <time>0/11:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>D8343</callsign>
+    <required-aircraft>NAX-738</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EPWA</port>
+      <time>0/12:00:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ENGM</port>
+      <time>0/13:55:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -55405,3 +55589,5 @@
     <repeat>24Hr</repeat>
   </flight>
 </trafficlist>
+
+

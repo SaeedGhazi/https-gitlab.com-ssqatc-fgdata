@@ -104,16 +104,32 @@ hypothetical add-on called “Flying Turtle” distributed by Joe User:
   <PropertyList>
     <format-version type="int">1</format-version>
     <addon>
-      <identifier>user.joe.FlyingTurtle</identifier>
-      <name>Flying Turtle</name>
-      <version>1.0.0rc2</version>
-      <short-description>Allow flying with new foobar powers.</short-description>
-      <long-description>This add-on enables something really great involving turtles...</long-description>
-      <min-FG-version>2017.4.0</min-FG-version>
-      <max-FG-version>none</max-FG-version>
-      <home-page>https://example.com/quux</home-page>
-      <download-url>https://example.com/quux/download</download-url>
-      <support-url>https://example.com/quux/support</support-url>
+      <identifier type="string">user.joe.FlyingTurtle</identifier>
+      <name type="string">Flying Turtle</name>
+      <version type="string">1.0.0rc2</version>
+
+      <short-description type="string">
+        Allow flying with new foobar powers.
+      </short-description>
+
+      <long-description type="string">
+        This add-on enables something really great involving turtles...
+      </long-description>
+
+      <min-FG-version type="string">2017.4.0</min-FG-version>
+      <max-FG-version type="string">none</max-FG-version>
+
+      <home-page type="string">
+        https://example.com/quux
+      </home-page>
+
+      <download-url type="string">
+        https://example.com/quux/download
+      </download-url>
+
+      <support-url type="string">
+        https://example.com/quux/support
+      </support-url>
     </addon>
   </PropertyList>
 

@@ -71,16 +71,20 @@ var NavMapController =
   # Airways levels.
   AIRWAYS : [ "AIRWAYS", "AIRWY ON", "AIRWY LO", "AIRWY HI"],
 
-  new : func (navmap, svg, zoom_label, current_zoom)
+  new : func (page, svg, zoom_label, current_zoom)
   {
     var obj = { parents : [ NavMapController ] };
     obj.current_zoom = current_zoom;
     obj.declutter = 0;
     obj.airways = 0;
-    obj.navmap = navmap;
-    obj.navmap.setScreenRange(689/2.0);
+    obj.page = page;
+    obj.page.setScreenRange(689/2.0);
     obj.label = svg.getElementById(zoom_label);
     obj.setZoom(obj.current_zoom);
+
+    # Emesary
+    obj._recipient = nil;
+
     return obj;
   },
   zoomIn : func() {
@@ -100,7 +104,7 @@ var NavMapController =
     # Ranges above represent vertical ranges, but the display is a rectangle, so
     # we need to use the diagonal range of the 1024 x 689, which is 617px.
     # 617px is 1.8 x 689/2, so we need to increase the range values by x1.8
-    me.navmap.setRange(me.RANGES[zoom].range);
+    me.page.setRange(me.RANGES[zoom].range);
     me.label.setText(me.RANGES[zoom].label);
     me.updateVisibility();
   },
@@ -112,9 +116,9 @@ var NavMapController =
           (me.RANGES[me.current_zoom].range <= layer.range) and
           (me.declutter <= layer.declutter)   )
       {
-        me.navmap.MFDMap.getLayer(layer_name).setVisible(1);
+        me.page.MFDMap.getLayer(layer_name).setVisible(1);
       } else {
-        me.navmap.MFDMap.getLayer(layer_name).setVisible(0);
+        me.page.MFDMap.getLayer(layer_name).setVisible(0);
       }
     }
   },
@@ -148,5 +152,58 @@ var NavMapController =
     device.updateMenus();
     me.updateVisibility();
   },
+  handleFMSInner : func(value) {
+    # This page has no use for the FMS knob, so we pass all such
+    # events to the pageGroupController which displays the page menu in the
+    # bottom right of the screen
+    return me.page.mfd._pageGroupController.handleFMSInner(value);
+  },
+  handleFMSOuter : func(value) {
+    # This page has no use for the FMS knob, so we pass all such
+    # events to the pageGroupController which displays the page menu in the
+    # bottom right of the screen
+    return me.page.mfd._pageGroupController.handleFMSOuter(value);
+  },
+  RegisterWithEmesary : func(transmitter = nil){
+    if (transmitter == nil)
+      transmitter = emesary.GlobalTransmitter;
 
+    if (me._recipient == nil){
+      me._recipient = emesary.Recipient.new("NavMapController_" ~ me.page.device.designation);
+      var pfd_obj = me.page.device;
+      var controller = me;
+      me._recipient.Receive = func(notification)
+      {
+        if (notification.Device_Id == pfd_obj.device_id
+            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
+              and notification.EventParameter != nil)
+          {
+            var id = notification.EventParameter.Id;
+            var value = notification.EventParameter.Value;
+            #printf("Button pressed " ~ id ~ " " ~ value);
+            if (id == fg1000.MFD.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
+            if (id == fg1000.MFD.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
+            if (id == fg1000.MFD.FASCIA.RANGE)      return controller.zoom(value);
+          }
+        }
+        return emesary.Transmitter.ReceiptStatus_NotProcessed;
+      };
+    }
+    transmitter.Register(me._recipient);
+    me.transmitter = transmitter;
+  },
+  DeRegisterWithEmesary : func(transmitter = nil){
+      # remove registration from transmitter; but keep the recipient once it is created.
+      if (me.transmitter != nil)
+        me.transmitter.DeRegister(me._recipient);
+      me.transmitter = nil;
+  },
+  # Reset controller if required when the page is displayed or hidden
+  ondisplay : func() {
+    me.RegisterWithEmesary();
+  },
+  offdisplay : func() {
+    me.DeRegisterWithEmesary();
+  },
 };

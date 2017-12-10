@@ -21,16 +21,19 @@ var TrafficMapController =
               {range: 12, inner_label: "4nm", outer_label: "12nm"} ],
 
 
-  new : func (trafficmap, svg)
+  new : func (page, svg)
   {
     var obj = { parents : [ TrafficMapController ] };
     obj.range = 1;
     obj.alt = "NORMAL";
     obj.operating = 0;
     obj.flight_id = 0;
-    obj.trafficmap = trafficmap;
-    obj.trafficmap.setScreenRange(689/2.0);
+    obj.page = page;
+    obj.page.setScreenRange(689/2.0);
 
+    # Emesary
+    obj._recipient = nil;
+    
     obj.setZoom(obj.range);
     return obj;
   },
@@ -48,33 +51,33 @@ var TrafficMapController =
   setZoom : func(zoom) {
     if ((zoom < 0) or (zoom > (size(me.RANGES) - 1))) return;
     me.current_zoom = zoom;
-    me.trafficmap.setRange(
+    me.page.setRange(
       me.RANGES[zoom].range,
       me.RANGES[zoom].inner_label,
       me.RANGES[zoom].outer_label);
   },
   setAlt : func(alt) {
     if (me.ALTS[alt] == nil) return;
-    me.trafficmap.alt_label.setText(me.ALTS[alt].label);
+    me.page.alt_label.setText(me.ALTS[alt].label);
     me.alt = alt;
     # Update the TFC controller to filter out the correct targets
-    me.trafficmap.mapgroup.getLayer("TFC").options.ceiling_ft =  me.ALTS[alt].ceiling_ft;
-    me.trafficmap.mapgroup.getLayer("TFC").options.floor_ft =  me.ALTS[alt].floor_ft;
+    me.page.mapgroup.getLayer("TFC").options.ceiling_ft =  me.ALTS[alt].ceiling_ft;
+    me.page.mapgroup.getLayer("TFC").options.floor_ft =  me.ALTS[alt].floor_ft;
   },
   setOperate : func(enabled) {
     if (enabled) {
-      me.trafficmap.op_label.setText("OPERATING");
-      me.trafficmap.setLayerVisible("TFC", 1);
+      me.page.op_label.setText("OPERATING");
+      me.page.setLayerVisible("TFC", 1);
       me.operating = 1;
     } else {
-      me.trafficmap.op_label.setText("STANDBY");
-      me.trafficmap.setLayerVisible("TFC", 0);
+      me.page.op_label.setText("STANDBY");
+      me.page.setLayerVisible("TFC", 0);
       me.operating = 0;
     }
   },
   setFlightID : func(enabled) {
     me.flight_id = enabled;
-    me.trafficmap.Options.setOption("TFC", "display_id", enabled);
+    me.page.Options.setOption("TFC", "display_id", enabled);
   },
   toggleFlightID : func() {
     me.setFlightID(! me.flight_id);
@@ -87,5 +90,60 @@ var TrafficMapController =
     if (me.operating == 0 and label == "STANDBY") return 1;
     if (me.flight_id == 1 and label == "FLT ID") return 1;
     return 0;
+  },
+  handleFMSInner : func(value) {
+    # This page has no use for the FMS knob, so we pass all such
+    # events to the pageGroupController which displays the page menu in the
+    # bottom right of the screen
+    return me.page.mfd._pageGroupController.handleFMSInner(value);
+  },
+  handleFMSOuter : func(value) {
+    # This page has no use for the FMS knob, so we pass all such
+    # events to the pageGroupController which displays the page menu in the
+    # bottom right of the screen
+    return me.page.mfd._pageGroupController.handleFMSOuter(value);
+  },
+  RegisterWithEmesary : func(transmitter = nil){
+    if (transmitter == nil)
+      transmitter = emesary.GlobalTransmitter;
+
+    if (me._recipient == nil){
+      me._recipient = emesary.Recipient.new("TrafficMapController_" ~ me.page.device.designation);
+      var pfd_obj = me.page.device;
+      var controller = me;
+      me._recipient.Receive = func(notification)
+      {
+        if (notification.Device_Id == pfd_obj.device_id
+            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
+              and notification.EventParameter != nil)
+          {
+            var id = notification.EventParameter.Id;
+            var value = notification.EventParameter.Value;
+            #printf("Button pressed " ~ id ~ " " ~ value);
+            if (id == fg1000.MFD.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
+            if (id == fg1000.MFD.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
+            if (id == fg1000.MFD.FASCIA.RANGE)      return controller.zoom(value);
+          }
+        }
+        return emesary.Transmitter.ReceiptStatus_NotProcessed;
+      };
+    }
+    transmitter.Register(me._recipient);
+    me.transmitter = transmitter;
+  },
+  DeRegisterWithEmesary : func(transmitter = nil){
+      # remove registration from transmitter; but keep the recipient once it is created.
+      if (me.transmitter != nil)
+        me.transmitter.DeRegister(me._recipient);
+      me.transmitter = nil;
+  },
+
+  # Reset controller if required when the page is displayed or hidden
+  ondisplay : func() {
+    me.RegisterWithEmesary();
+  },
+  offdisplay : func() {
+    me.DeRegisterWithEmesary();
   },
 };

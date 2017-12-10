@@ -24,10 +24,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="811.51336"
-     inkscape:cy="420.78348"
+     inkscape:cx="157.9725"
+     inkscape:cy="250.87866"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="2495"
      inkscape:window-height="1416"
@@ -65,8 +65,7 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Surround"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <g
        id="Header"
        inkscape:label="Header"
@@ -150,6 +149,18 @@
          d="m 760.00391,55.494139 0,-55.49413968969723 0,0"
          id="path4085"
          inkscape:connector-curvature="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:20px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#80ffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="511.67773"
+         y="48"
+         id="PageTitle"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text4410"><tspan
+           sodipodi:role="line"
+           id="tspan4412"
+           x="511.67773"
+           y="48">PAGE TITLE</tspan></text>
     </g>
     <g
        transform="translate(-7.0061333e-6,5.5155541e-6)"
@@ -978,8 +989,8 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="TrafficMapGroup"
-     sodipodi:insensitive="true"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <g
        id="TrafficMapGroup"
        inkscape:label="#g5736">
@@ -1032,18 +1043,18 @@
            id="tspan5673"
            x="225.26074"
            y="97.84375">UNRESTRICTED</tspan></text>
-      <circle
-         r="343.98828"
-         cy="398"
-         cx="573.5"
+      <path
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:2.02346039;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 917.48828,398 C 914.97705,587.96288 763.47948,741.98828 573.5,741.98828 383.52052,741.98828 229.51172,587.97948 229.51172,398 229.51172,208.02052 383.52052,54.011719 573.5,54.011719 763.47948,54.011719 920,208 917.48828,398 Z"
          id="path5680"
-         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:2.02346039;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="343.98828"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="sssss" />
+      <path
          style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.01173019;stroke-miterlimit:4;stroke-dasharray:6.07038122, 6.07038122;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 917.48828,398 C 914.97705,587.96288 763.47948,741.98828 573.5,741.98828 383.52052,741.98828 229.51172,587.97948 229.51172,398 229.51172,208.02052 383.52052,54.011719 573.5,54.011719 763.47948,54.011719 920,208 917.48828,398 Z"
          id="circle5682"
-         cx="573.5"
-         cy="398" />
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="sssss" />
       <rect
          y="208.68231"
          x="849.99188"
@@ -1113,18 +1124,18 @@
          width="6"
          id="rect5710"
          style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
+      <path
          style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 687.35117,398 c -0.64564,62.68991 -50.82291,113.51615 -113.51615,113.51614 -62.69323,0 -113.51614,-50.82291 -113.51614,-113.51614 0,-62.69323 50.82291,-113.51614 113.51614,-113.51614 C 636.52826,284.48385 688,335 687.35117,398 Z"
          id="circle5712"
-         cx="573.83502"
-         cy="398"
-         r="113.51614" />
-      <circle
-         cy="398"
-         cx="573.83502"
-         id="circle5714"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="sssss" />
+      <path
          style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:6, 6;stroke-dashoffset:0;stroke-opacity:1"
-         r="113.51614" />
+         d="m 687.35117,398 c -0.64564,62.68991 -50.82291,113.51615 -113.51615,113.51614 -62.69323,0 -113.51614,-50.82291 -113.51614,-113.51614 0,-62.69323 50.82291,-113.51614 113.51614,-113.51614 C 636.52826,284.48385 688,335 687.35117,398 Z"
+         id="circle5714"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="sssss" />
       <rect
          style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect5722"
@@ -1551,7 +1562,7 @@
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <text
          sodipodi:linespacing="125%"
-         id="NavigationMap"
+         id="NavMap"
          y="653.33002"
          x="774.98926"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1634,7 +1645,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="774.98926"
          y="685.68018"
-         id="ActiveFlightPlan"
+         id="ActiveFlightPlanWide"
          sodipodi:linespacing="125%"><tspan
            sodipodi:role="line"
            id="tspan5217"

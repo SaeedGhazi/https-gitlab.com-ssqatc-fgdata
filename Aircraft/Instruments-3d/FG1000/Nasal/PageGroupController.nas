@@ -6,11 +6,11 @@ var PAGE_GROUPS = [
 
   { label: "MapPageGroupLabel",
           group: "MapPageGroup",
-          pages: [ "NavigationMap", "TrafficMap", "Stormscope", "WeatherDataLink", "TAWSB"],
+          pages: [ "NavMap", "TrafficMap", "Stormscope", "WeatherDataLink", "TAWSB"],
   },
   { label: "WPTGroupLabel",
           group: "WPTPageGroup",
-          pages: [ "AirportInformation", "IntersectionInformation", "NDBInformation", "VORInformation", "UserWPTInformation"],
+          pages: [ "AirportInfo", "IntersectionInfo", "NDBInfo", "VORInfo", "UserWPTInfo"],
   },
 
   { label: "AuxGroupLabel",
@@ -20,7 +20,7 @@ var PAGE_GROUPS = [
 
   { label: "FPLGroupLabel",
           group: "FPLPageGroup",
-          pages: [ "ActiveFlightPlan", "FlightPlanCatalog", "StoredFlightPlan"],
+          pages: [ "ActiveFlightPlanWide", "FlightPlanCatalog", "StoredFlightPlan"],
   },
 
   { label: "LstGroupLabel",
@@ -49,16 +49,13 @@ var PageGroupController =
     # List of pages to be controllers.  Keys are the pages in PAGE_GROUPS;
     obj._pageList = {};
 
-    # Timers to controll when to hide the menu after inactivity, and when to load
+    # Timers to control when to hide the menu after inactivity, and when to load
     # a new page.
-    obj._hideMenuTimer = maketimer(5, obj, obj.hideMenu);
+    obj._hideMenuTimer = maketimer(3, obj, obj.hideMenu);
     obj._hideMenuTimer.singleShot = 1;
 
     obj._loadPageTimer = maketimer(0.5, obj, obj.loadPage);
     obj._loadPageTimer.singleShot = 1;
-
-    # Emesary
-    obj._recipient = nil;
 
     obj.hideMenu();
     return obj;
@@ -128,13 +125,13 @@ var PageGroupController =
     }
     me._menuVisible = 1;
     me._hideMenuTimer.stop();
-    me._hideMenuTimer.restart(5);
+    me._hideMenuTimer.restart(3);
     me._loadPageTimer.stop();
     me._loadPageTimer.restart(0.5);
 
   },
 
-  FMSOuter : func(val)
+  handleFMSOuter : func(val)
   {
     if (me._menuVisible == 1) {
       # Change page group
@@ -143,9 +140,10 @@ var PageGroupController =
       me._selectedPage = 0;
     }
     me.showMenu();
+    return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
-  FMSInner : func(val)
+  handleFMSInner : func(val)
   {
     if (me._menuVisible == 1) {
       # Change page group
@@ -153,43 +151,7 @@ var PageGroupController =
       me._selectedPage = math.mod(me._selectedPage + incr_or_decr, size(PAGE_GROUPS[me._selectedPageGroup].pages));
     }
     me.showMenu();
-  },
-  RegisterWithEmesary : func(transmitter = nil){
-    if (transmitter == nil)
-      transmitter = emesary.GlobalTransmitter;
+    return emesary.Transmitter.ReceiptStatus_Finished;
 
-    if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("PageController_" ~ me._device.designation);
-      var pfd_obj = me._device;
-      var controller = me;
-      me._recipient.Receive = func(notification)
-      {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
-              and notification.EventParameter != nil)
-          {
-            var id = notification.EventParameter.Id;
-            var value = notification.EventParameter.Value;
-            #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.MFD.FASCIA.FMS_OUTER) controller.FMSOuter(value);
-            if (id == fg1000.MFD.FASCIA.FMS_INNER) controller.FMSInner(value);
-            if (id == fg1000.MFD.FASCIA.RANGE)     { if (pfd_obj.current_page.controller.zoom != nil) pfd_obj.current_page.controller.zoom(value); }
-          }
-
-          return emesary.Transmitter.ReceiptStatus_OK;
-        }
-        return emesary.Transmitter.ReceiptStatus_NotProcessed;
-      };
-      transmitter.Register(me._recipient);
-      me.transmitter = transmitter;
-    }
   },
-  DeRegisterWithEmesary : func(transmitter = nil){
-      # remove registration from transmitter; but keep the recipient once it is created.
-      if (me.transmitter != nil)
-        me.transmitter.DeRegister(me._recipient);
-      me.transmitter = nil;
-  },
-
 };

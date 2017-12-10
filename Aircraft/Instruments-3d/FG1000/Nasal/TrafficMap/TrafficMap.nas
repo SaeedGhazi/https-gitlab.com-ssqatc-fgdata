@@ -4,9 +4,10 @@
 #
 var TrafficMap =
 {
-  new : func (myCanvas, device, svg)
+  new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
+      title : "MAP - TRAFFIC MAP",
       _group : myCanvas.createGroup("TrafficMapLayer"),
       parents : [ TrafficMap, device.addPage("TrafficMap", "TrafficMapGroup") ]
     };
@@ -15,6 +16,7 @@ var TrafficMap =
     obj.Options = fg1000.TrafficMapOptions.new();
     obj.mapgroup = obj._group.createChild("map");
     obj.device = device;
+    obj.mfd = mfd;
 
     # Dynamic text elements
     obj.op_label = svg.getElementById("TrafficMapOpMode");
@@ -50,8 +52,8 @@ var TrafficMap =
 
     # Center the map's origin, modified to take into account the surround.
     obj.mapgroup.setTranslation(
-      fg1000.MFD.MAP_CENTER.X,
-      fg1000.MFD.MAP_CENTER.Y
+      fg1000.MAP_FULL.CENTER.X,
+      fg1000.MAP_FULL.CENTER.Y
     );
 
     var r = func(name,vis=1,zindex=nil) return caller(0)[0];
@@ -165,8 +167,11 @@ var TrafficMap =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
+    me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

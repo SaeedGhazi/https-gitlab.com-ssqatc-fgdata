@@ -1,9 +1,10 @@
 # Navigation Map
 var NavMap =
 {
-  new : func (myCanvas, device, svg)
+  new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
+      title : "MAP - NAVIGATION MAP",
       _group : myCanvas.createGroup("NavigationMapLayer"),
       parents : [ NavMap, device.addPage("NavigationMap", "NavigationMapGroup") ]
     };
@@ -11,12 +12,13 @@ var NavMap =
     obj.Styles = fg1000.NavMapStyles.new();
     obj.Options = fg1000.NavMapOptions.new();
     obj.MFDMap = obj._group.createChild("map");
+    obj.device = device;
+    obj.mfd = mfd;
 
     # Need to display this underneath the softkeys, EIS, header.
     obj._group.set("z-index", -10.0);
     obj._group.setVisible(0);
 
-    obj.device = device;
 
     # Initialize the controller:
     var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
@@ -42,8 +44,8 @@ var NavMap =
 
     # Center the map's origin, modified to take into account the surround.
     obj.MFDMap.setTranslation(
-      fg1000.MFD.MAP_CENTER.X,
-      fg1000.MFD.MAP_CENTER.Y
+      fg1000.MAP_FULL.CENTER.X,
+      fg1000.MAP_FULL.CENTER.Y
     );
 
     var r = func(name,vis=1,zindex=nil) return caller(0)[0];
@@ -204,8 +206,11 @@ var NavMap =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
+    me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

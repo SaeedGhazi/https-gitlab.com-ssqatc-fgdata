@@ -418,6 +418,13 @@
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
+                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/crsr-pressed", func(v) {
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.FMS_CRSR, Value: 1.0 });
+                          emesary.GlobalTransmitter.NotifyAll(notification);
+                        } ));
+
+
+
 
                     ]]></load></nasal>
                 </canvas>
@@ -885,6 +892,11 @@
                 <legend>CRSR</legend>
                 <pref-width>50</pref-width>
                 <pref-height>25</pref-height>
+                <binding>
+                  <command>property-assign</command>
+                  <property>/sim/gui/dialogs/fg1000/crsr-pressed</property>
+                  <value>1</value>
+                </binding>
               </button>
 
             </group>

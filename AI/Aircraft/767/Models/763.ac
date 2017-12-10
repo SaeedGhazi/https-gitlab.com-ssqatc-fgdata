@@ -3,7 +3,7 @@ MATERIAL "ac3dmat1" rgb 1.0 1.0 1.0  amb 1.0 1.0 1.0  emis 0.01 0.01 0.01  spec 
 OBJECT world
 kids 2
 OBJECT poly
-name "767"
+name "763"
 loc 0.531801 8.38894 0
 texture "763-tex.png"
 crease 45.000000

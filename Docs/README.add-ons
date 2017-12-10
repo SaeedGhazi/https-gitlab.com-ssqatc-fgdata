@@ -102,7 +102,11 @@ hypothetical add-on called “Flying Turtle” distributed by Joe User:
   <?xml version="1.0" encoding="UTF-8"?>
 
   <PropertyList>
-    <format-version type="int">1</format-version>
+    <meta>
+      <file-type type="string">FlightGear add-on metadata</file-type>
+      <format-version type="int">1</format-version>
+    </meta>
+
     <addon>
       <identifier type="string">user.joe.FlyingTurtle</identifier>
       <name type="string">Flying Turtle</name>

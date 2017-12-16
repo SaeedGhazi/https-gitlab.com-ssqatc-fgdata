@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-
 <!-- Author Ian Tolosa - Weekly Timetable of 13MAY2016 - Includes PAX & Cargo Flights -->
-
 <trafficlist>
   <aircraft>
     <model>Aircraft/A320/A320-QatarAirways.xml</model>
@@ -1628,7 +1626,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1642,7 +1640,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1656,7 +1654,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1670,7 +1668,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1684,7 +1682,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1698,7 +1696,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1712,7 +1710,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>
@@ -1726,7 +1724,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-QatarAirwaysCargo.xml</model>
+    <model>Aircraft/A332/A33X-Qatar.xml</model>
     <livery>QTR</livery>
     <airline>QTR</airline>
     <home-port>OTHH</home-port>

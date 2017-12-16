@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- Author Ian Tolosa - Weekly Timetable of 18 DEC 2017 - for MAR-OCT 2017 does NOT include Airlink LNK or SA Express EXY -->
 <trafficlist>
   <aircraft>
     <model>Aircraft/738/738-SouthAfrican.xml</model>
@@ -352,7 +351,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-SoutAfricanAirways.xml</model>
+    <model>Aircraft/A332/A332-SouthAfricanAirways.xml</model>
     <livery>SAA</livery>
     <airline>SAA</airline>
     <home-port>FAOR</home-port>
@@ -366,7 +365,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-SoutAfricanAirways.xml</model>
+    <model>Aircraft/A332/A332-SouthAfricanAirways.xml</model>
     <livery>SAA</livery>
     <airline>SAA</airline>
     <home-port>FAOR</home-port>
@@ -380,7 +379,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-SoutAfricanAirways.xml</model>
+    <model>Aircraft/A332/A332-SouthAfricanAirways.xml</model>
     <livery>SAA</livery>
     <airline>SAA</airline>
     <home-port>FAOR</home-port>
@@ -394,7 +393,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-SoutAfricanAirways.xml</model>
+    <model>Aircraft/A332/A332-SouthAfricanAirways.xml</model>
     <livery>SAA</livery>
     <airline>SAA</airline>
     <home-port>FAOR</home-port>
@@ -408,7 +407,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-SoutAfricanAirways.xml</model>
+    <model>Aircraft/A332/A332-SouthAfricanAirways.xml</model>
     <livery>SAA</livery>
     <airline>SAA</airline>
     <home-port>FAOR</home-port>
@@ -422,7 +421,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A332/A332-SoutAfricanAirways.xml</model>
+    <model>Aircraft/A332/A332-SouthAfricanAirways.xml</model>
     <livery>SAA</livery>
     <airline>SAA</airline>
     <home-port>FAOR</home-port>

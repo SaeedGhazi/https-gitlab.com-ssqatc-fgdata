@@ -16,6 +16,26 @@
 
 	<animation>
 		<type>select</type>
+		<object-name>landinglight.L</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>10</value>
+			</less-than>
+		</condition>
+	</animation>
+	<animation>
+		<type>select</type>
+		<object-name>landinglight.R</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>10</value>
+			</less-than>
+		</condition>
+	</animation>
+	<animation>
+		<type>select</type>
 		<object-name>prop-left</object-name>
 		<condition>
 			<less-than>
@@ -24,16 +44,16 @@
 			</less-than>
 		</condition>
 	</animation>
-    <animation>
-        <type>select</type>
-        <object-name>prop-disc-left</object-name>
-        <condition>
-            <greater-than>
-                <property>velocities/true-airspeed-kt</property>
-                <value>20</value>
-            </greater-than>
-        </condition>
-    </animation>
+	<animation>
+		<type>select</type>
+		<object-name>prop-disc-left</object-name>
+		<condition>
+			<greater-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>20</value>
+			</greater-than>
+		</condition>
+	</animation>
 	<animation>
 		<type>select</type>
 		<object-name>prop-blur-right</object-name>

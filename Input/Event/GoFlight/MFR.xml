@@ -1,7 +1,7 @@
 <PropertyList>
 
   <name>GoFlight MFR</name>
-  <debug-events type="bool">true</debug-events>
+  <debug-events type="bool">false</debug-events>
 
 <nasal>
   <open>
@@ -10,13 +10,14 @@
     var activeNode = props.globals.getNode("/input/goflight/mfr/active", 1);
     var standbyNode = props.globals.getNode("/input/goflight/mfr/standby-mhz", 1);
     var selectedNode = props.globals.getNode("/input/goflight/mfr/selected-mhz", 1);
+    var brightnessNode = props.globals.getNode("/input/goflight/mfr/brightness", 8);
 
     var updateActive = func(newActive)
     {
       activeChannel = newActive;
       activeNode.setValue(activeChannel);
 
-      printlog("info", "Active channel is now:" ~ activeChannel);
+      printlog("info", "GoFlight MFR: Active channel is now:" ~ activeChannel);
       var prefix = "/instrumentation/nav[" ~ activeChannel ~ "]/frequencies/";
 
       standbyNode.unalias();
@@ -68,19 +69,13 @@
       return formatFrequency(selectedNode.getValue());
     }
 
-    var ledState = func()
-    {
-      if (activeChannel == 1) return chr(0x04);
-      return chr(0x2);
-    }
-
     updateActive(0);
       ]]>
   </open>
 </nasal>
 
   <event>
-    <name>rel-dial</name>
+    <name>rel-dial-0</name>
     <binding>
       <command>property-adjust</command>
       <property>/input/goflight/mfr/standby-mhz</property>
@@ -136,16 +131,10 @@
   <nasal-function>standbyAlphanumeric</nasal-function>
 </report>
 
-<report>
-  <report-id type="int">7</report-id>
-  <watch>/input/goflight/mfr/active</watch>
-  <nasal-function>ledState</nasal-function>
-</report>
-<!--
   <event>
-    <name>led-misc</name>
+    <name>led-misc-1</name>
     <setting>
-      <value>4</value>
+      <value>1</value>
       <condition>
         <equals>
           <property>/input/goflight/mfr/active</property>
@@ -154,7 +143,7 @@
       </condition>
     </setting>
     <setting>
-      <value>7</value>
+      <value>0</value>
       <condition>
         <not-equals>
           <property>/input/goflight/mfr/active</property>
@@ -165,9 +154,9 @@
   </event>
 
   <event>
-    <name>led-misc-1</name>
+    <name>led-misc-2</name>
     <setting>
-      <value>7</value>
+      <value>1</value>
       <condition>
         <equals>
           <property>/input/goflight/mfr/active</property>
@@ -185,7 +174,14 @@
       </condition>
     </setting>
   </event>
--->
+
+  <event>
+    <name>display-brightness</name>
+    <setting>
+      <property>/input/goflight/mfr/brightness</property>
+    </setting>
+  </event>
+
   <event>
     <desc>Transfer Button</desc>
     <name>button-1</name>

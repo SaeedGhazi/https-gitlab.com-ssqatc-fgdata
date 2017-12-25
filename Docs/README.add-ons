@@ -96,8 +96,13 @@ add-on loading
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Every add-on must have in its base directory a file called
-'addon-metadata.xml'. Here is an example of such a file, for a
-hypothetical add-on called “Flying Turtle” distributed by Joe User:
+'addon-metadata.xml'. This section explains how to write this file.
+
+Sample addon-metadata.xml file
+==============================
+
+Here is an example of an addon-metadata.xml file, for a hypothetical
+add-on called “Flying Turtle” distributed by Joe User:
 
   <?xml version="1.0" encoding="UTF-8"?>
 
@@ -112,6 +117,14 @@ hypothetical add-on called “Flying Turtle” distributed by Joe User:
       <name type="string">Flying Turtle</name>
       <version type="string">1.0.0rc2</version>
 
+      <authors type="string">
+        Joe user &lt;optional_address@example.com&gt;
+        Jane Maintainer &lt;jane@example.com&gt;
+      </authors>
+      <maintainers type="string">
+        Jane Maintainer &lt;jane@example.com&gt;
+      </maintainers>
+
       <short-description type="string">
         Allow flying with new foobar powers.
       </short-description>
@@ -120,22 +133,69 @@ hypothetical add-on called “Flying Turtle” distributed by Joe User:
         This add-on enables something really great involving turtles...
       </long-description>
 
+      <license>
+        <designation type="string">
+          GNU GPL version 2 or later
+        </designation>
+
+        <file type="string">
+          COPYING
+        </file>
+
+        <url type="string">
+          https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
+        </url>
+      </license>
+
       <min-FG-version type="string">2017.4.0</min-FG-version>
       <max-FG-version type="string">none</max-FG-version>
 
-      <home-page type="string">
-        https://example.com/quux
-      </home-page>
+      <urls>
+        <home-page type="string">
+          https://example.com/quux
+        </home-page>
 
-      <download-url type="string">
-        https://example.com/quux/download
-      </download-url>
+        <download type="string">
+          https://example.com/quux/download
+        </download>
 
-      <support-url type="string">
-        https://example.com/quux/support
-      </support-url>
+        <support type="string">
+          https://example.com/quux/support
+        </support>
+
+        <code-repository type="string">
+          https://example.com/quux/code-repository
+        </code-repository>
+      </urls>
+
+      <tags>
+        <tag type="string">first tag</tag>
+        <tag type="string">second tag</tag>
+        <tag type="string">etc.</tag>
+      </tags>
     </addon>
   </PropertyList>
+
+General rules
+=============
+
+We use the terms “field” or “node” interchangeably here to refer to
+nodes of the addon-metadata.xml PropertyList file (technically, a field
+always has a value, possibly empty, therefore fields are all leaf
+nodes).
+
+Leading and trailing whitespace in each field of addon-metadata.xml is
+removed. All other whitespace is a priori preserved (this could depend
+on the particular field, though).
+
+Most fields are optional. In most cases, omitting a field is the same as
+leaving it empty. But don't write empty tag fields, it is really too
+ugly. ;-)
+
+Name and id
+===========
+
+Nodes: /addon/name and /addon/identifier
 
 The add-on name is the pretty form. It should not be overly long, but
 otherwise isn't constrained. On the other hand, the add-on identifier
@@ -147,20 +207,89 @@ otherwise isn't constrained. On the other hand, the add-on identifier
     add-on. Of course, if Joe User owns a domain name and uses it to
     distribute his add-on, he should put it here.
 
+Authors and maintainers
+=======================
+
+Nodes: /addon/authors and /addon/maintainers
+
+Authors are people who contributed significantly to the add-on.
+Maintainers are people currently in charge of maintaining the add-on.
+These fields are free-form, therefore contents such as “Joe User and
+others” is allowed. However, please stick to the format used in the
+above example if possible.
+
+Short and long descriptions
+===========================
+
+Nodes: /addon/short-description and /addon/long-description
+
 The short description should fit on one line (try not to exceed, say, 78
 characters), and in general consist of only one sentence.
 
-'min-FG-version' and 'max-FG-version' are optional and may be omitted
-unless the add-on is known not to work with particular FlightGear
-versions. 'min-FG-version' defaults to 2017.4.0 and 'max-FG-version' to
-the special value 'none' (only allowed for 'max-FG-version'). Apart from
-this special case, every non-empty value present in one of these two
-fields must be a proper FlightGear version number usable with
+The long description is essentially free-form, but only break lines when
+you do want a line break at this point. In other words, don't wrap lines
+manually in the XML file: this will be automatically done by the
+software displaying the add-on description, according to the particular
+line width it uses (which can depend on the user's screen or
+configuration, etc.). A single \n inside a paragraph (see footnote [1])
+means a hard line break. Two \n in a row (i.e., a blank line) should be
+used to separate paragraphs. Example:
+
+This is a paragraph.
+This is the second line of the same paragraph. It can be very, very, very long and contain several sentences.
+
+This is a different paragraph. Again, don't break lines (i.e., don't press Enter) unless a particular formatting reason makes it necessary. For instance, it is okay to break lines in order to present a list of items, but not for line wrapping.
+
+Licensing terms
+===============
+
+Nodes: /addon/license/designation
+       /addon/license/file
+       /addon/license/url
+
+The /add-on/license/designation node should describe the add-on
+licensing terms in a short but accurate way, if possible. If this is not
+practically doable, use the value “Custom”. If the add-on is distributed
+under several licenses, use the value “Multiple”. In all cases, make
+sure the licensing terms are clearly specified in other files of the
+add-on (typically, at least README.txt or COPYING). Values for
+/add-on/license/designation could be “GNU GPL version 2 or later”, “CC0
+1.0 Universal”, “3-clause BSD”, etc.
+
+In most cases, the add-on should contain a file containing the full
+license text. Use the /add-on/license/file node to point to this file:
+it should contain a file path that is relative to the add-on base
+directory. This path must use slash separators ('/'), even if you use
+Windows.
+
+The /add-on/license/url node should contain a single URL if there is an
+official, stable URL for the license under which the add-on is
+distributed. The term “official” here is to be interpreted in the
+context of the particular license. For instance, for a GNU license
+(GPL2, LGPL2.1, etc.), the URL domain must be gnu.org; for a CC license
+(CC0 1.0 Universal, CC-BY-SA 4.0...), it must be creativecommons.org,
+etc.
+
+Minimum and maximum FlightGear versions
+=======================================
+
+Nodes: /addon/min-FG-version and /addon/max-FG-version
+
+These two nodes are optional and may be omitted unless the add-on is
+known not to work with particular FlightGear versions.
+/addon/min-FG-version defaults to 2017.4.0 and /addon/max-FG-version to
+the special value 'none' (only allowed for /addon/max-FG-version). Apart
+from this special case, every non-empty value present in one of these
+two fields must be a proper FlightGear version number usable with
 simgear::strutils::compare_versions(), for instance '2017.4.1'.
 
-The 'version' node (XML element) gives the version of the add-on and
-must obey a strict syntax too[1], which is a subset of what is described
-in PEP 440:
+Add-on version
+==============
+
+Node: /addon/version
+
+The /addon/version node gives the version of the add-on and must obey a
+strict syntax[2], which is a subset of what is described in PEP 440:
 
   https://www.python.org/dev/peps/pep-0440/
 
@@ -186,7 +315,10 @@ just as with the 1.2.10a1.dev2 example given above for an alpha release.
 Note that a development release always sorts before the corresponding
 non-development release (e.g., 2017.2.1b5.dev4 comes before 2017.2.1b5).
 
-The other nodes of 'addon-metadata.xml' should be self-explanatory.
+Other fields
+============
+
+The other nodes of 'addon-metadata.xml' should be self-explanatory. :-)
 
 
 3. Add-on metadata in the Property Tree
@@ -295,14 +427,25 @@ code easy access to add-on metadata, for instance like this:
   print(myAddon.id);
   print(myAddon.name);
   print(myAddon.version.str());
+  print(myAddon.authors);
+  print(myAddon.maintainers);
   print(myAddon.shortDescription);
   print(myAddon.longDescription);
+  print(myAddon.licenseDesignation);
+  print(myAddon.licenseFile);
+  print(myAddon.licenseUrl);
   print(myAddon.basePath);
   print(myAddon.minFGVersionRequired);
   print(myAddon.maxFGVersionRequired);
   print(myAddon.homePage);
   print(myAddon.downloadUrl);
   print(myAddon.supportUrl);
+  print(myAddon.codeRepositoryUrl);
+
+  foreach (var tag; myAddon.tags) {
+    print(tag);
+  }
+
   print(myAddon.loadSequenceNumber);
   # myAddon.node is a props.Node object for /addons/by-id/ADDON_ID
   print(myAddon.node.getPath());
@@ -320,6 +463,7 @@ instance of addons.AddonVersion:
     ...
 
 Here follows the complete Nasal add-on API, at the time of this writing.
+All strings are encoded in UTF-8.
 
 Queries to the AddonManager:
 
@@ -337,16 +481,29 @@ Read-only data members (attributes) of addons.Addon objects:
   name                  the add-on “pretty name” (string)
   version               the add-on version (instance of addons.AddonVersion,
                         ghost)
+  authors               the add-on authors (string)
+  maintainers           the add-on maintainers (string)
   shortDescription      the add-on short description (string)
   longDescription       the add-on long description (string)
-  basePath              path to the add-on base directory (UTF-8 string)
+  licenseDesignation    licensing terms: "GNU GPL version 2 or later",
+                        "CC0 1.0 Universal", etc. (string)
+  licenseFile           relative, slash-separated path to a file under
+                        the add-on base directory containing the license
+                        text (string)
+  licenseUrl            stable, official URL for the add-on license text
+                        (string)
+  basePath              path to the add-on base directory (string)
   minFGVersionRequired  minimum required FG version for the add-on (string)
   maxFGVersionRequired  max. required FG version... or "none" (string)
   homePage              add-on home page (string)
   downloadUrl           add-on download URL (string)
   supportUrl            add-on support URL (string)
+  codeRepositoryUrl     URL pointing to the development repository of
+                        the add-on (Git, Subversion, etc.; string)
+  tags                  vector containing the add-on tags used to help
+                        users find add-ons (vector of strings)
   node                  base node for the add-on in the Property Tree:
-                        /addons/by-id/ADDON_ID
+                        /addons/by-id/ADDON_ID (props.Node object)
   loadSequenceNumber    0 for the first registered add-on, 1 for the
                         second one, etc. (integer)
 
@@ -374,9 +531,13 @@ Member functions (methods) of addons.AddonVersion objects:
   greaterThanOrEqual(addons.AddonVersion other) |
 
 
-Footnote
---------
+Footnotes
+---------
 
-[1] MAJOR.MINOR.PATCHLEVEL[{a|b|rc}N1][.devN2] where MAJOR, MINOR and
+[1] \n represents end-of-line in string literals of languages such as C,
+    C++, Python and many others. We use this convention here to
+    represent the end-of-line character sequence in the XML data.
+
+[2] MAJOR.MINOR.PATCHLEVEL[{a|b|rc}N1][.devN2] where MAJOR, MINOR and
     PATCHLEVEL are non-negative integers, and N1 and N2 are positive
     integers.

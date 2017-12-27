@@ -1,9 +1,210 @@
 # NearestAirports Controller
 var NearestAirportsController =
 {
+  UIGROUP : {
+    NONE : 0, # No group currently selected,
+    APT  : 1,
+    RNWY : 2,
+    FREQ : 3,
+    APR  : 4,
+  },
+
   new : func (page, svg)
   {
     var obj = { parents : [ NearestAirportsController ] };
+
+    # Current active UI group.
+    obj.page = page;
+    obj._currentGroup = NearestAirportsController.UIGROUP.NONE;
+    obj._crsrToggle = 0;
+
+    # Emesary
+    obj._recipient = nil;
+
     return obj;
+  },
+
+  getAirports : func() {
+    # Find the airports within 200nm and display them.
+
+    # To make this more efficient for areas with a high density of airports, we'll try
+    # small radii first.
+
+    var radius = 0;
+    var apts = [];
+
+    while ((radius <= 200) and (size(apts) < 25)) {
+      radius = radius + 50;
+      apts = findAirportsWithinRange(radius);
+    }
+
+    if (size(apts) > 25) {
+      apts = subvec(apts, 0, 25);
+    }
+    me.page.updateAirports(apts);
+  },
+  selectAirports : func() {
+    me.selectGroup(NearestAirportsController.UIGROUP.APT)
+  },
+  selectRunways : func() {
+    me.selectGroup(NearestAirportsController.UIGROUP.RNWY);
+  },
+  selectFrequencies : func() {
+    me.selectGroup(NearestAirportsController.UIGROUP.FREQ);
+  },
+  selectApproaches : func() {
+    me.selectGroup(NearestAirportsController.UIGROUP.APR);
+  },
+  getSelectedGroup : func() {
+    return me._currentGroup;
+  },
+  selectGroup : func(grp) {
+    me._currentGroup = grp;
+    # The current Airport is always highlighted - we're either changing it directly,
+    # or viewing the selected airport.
+    if (grp == NearestAirportsController.UIGROUP.RNWY) me.page.runwaySelect.highlightElement()   else me.page.runwaySelect.unhighlightElement();
+    if (grp == NearestAirportsController.UIGROUP.FREQ) me.page.freqSelect.showCRSR()     else me.page.freqSelect.hideCRSR();
+    if (grp == NearestAirportsController.UIGROUP.APR)  me.page.approachSelect.showCRSR() else me.page.approachSelect.hideCRSR();
+    me._crsrToggle = 1;
+  },
+
+  # Input Handling
+  handleCRSR : func() {
+    me._crsrToggle = (! me._crsrToggle);
+    if (me._crsrToggle) {
+      me.page.selectAirports();
+      me.selectAirports();
+    } else {
+      # Hide the cursor and reset any highlighting
+      me.page.resetCRSR();
+    }
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+  handleFMSInner : func(value) {
+    if (me._crsrToggle == 1) {
+      # Scroll through whatever is the current list
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.APT) {
+        me.page.airportSelect.incrSmall(value);
+        var apt_id = me.page.getSelectedAirportID();
+        var apt_info = airportinfo(apt_id);
+        me.page.updateAirportData(apt_info);
+      }
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.RNWY) {
+        me.page.runwaySelect.incrSmall(value);
+        # Need to manually update the runway information
+        var apt_id = me.page.airportSelect.getValue();
+        var rwy    = me.page.runwaySelect.getValue();
+
+        if ((rwy != nil) and (rwy != "")) {
+          var apt_info = airportinfo(apt_id);
+          var rwy_info = apt_info.runways[rwy];
+          me.page.updateRunwayInfo(rwy_info);
+        }
+      }
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.FREQ) me.page.freqSelect.incrSmall(value);
+      if (me._currentGroup == NearestAirportsController.UIGROUP.APR)  me.page.approachSelect.incrSmall(value);
+
+      return emesary.Transmitter.ReceiptStatus_Finished;
+    } else {
+      return me.page.mfd._pageGroupController.handleFMSInner(value);
+    }
+  },
+  handleFMSOuter : func(value) {
+    if (me._crsrToggle == 1) {
+
+      # The large knob only affects the Airport selection in cursor mode.
+      # Question-mark over whether it does this when other groups
+      # are selected.  Assumption now is that it doesn't - otherwise it would
+      # be too easy to nudge it while trying to scroll through runways/approaches etc.
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.APT) {
+        me.page.airportSelect.incrLarge(value);
+        var apt_id = me.page.getSelectedAirportID();
+        var apt_info = airportinfo(apt_id);
+        me.page.updateAirportData(apt_info);
+      }
+
+      return emesary.Transmitter.ReceiptStatus_Finished;
+    } else {
+      return me.page.mfd._pageGroupController.handleFMSOuter(value);
+    }
+  },
+  handleEnter : func(value) {
+    if (me._crsrToggle == 1) {
+      if (me._currentGroup == NearestAirportsController.UIGROUP.APT) {
+        # If the airport group is selected, the ENT key selects the next airport
+        me.page.airportSelect.incrLarge(value);
+        var apt_id = me.page.getSelectedAirportID();
+        var apt_info = airportinfo(apt_id);
+        me.page.updateAirportData(apt_info);
+      }
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.RNWY) {
+        # No effect if runways are selected
+      }
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.FREQ) {
+        # TODO Select the current COM frequency.
+        var freq = me.page.getSelectedFreq();
+        if (freq != nil) print("NearestAirportController.handleEnter frequency selection " ~ freq);
+      }
+
+      if (me._currentGroup == NearestAirportsController.UIGROUP.APR) {
+        # TODO Select the current Approach
+        var appr = me.page.getSelectedApproach();
+        if (appr != nil) print("NearestAirportController.handleEnter Approach selection " ~ appr);
+      }
+    } else {
+      return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    }
+  },
+  RegisterWithEmesary : func(transmitter = nil){
+    if (transmitter == nil)
+      transmitter = emesary.GlobalTransmitter;
+
+    if (me._recipient == nil){
+      me._recipient = emesary.Recipient.new("AirportInfoController_" ~ me.page.device.designation);
+      var pfd_obj = me.page.device;
+      var controller = me;
+      me._recipient.Receive = func(notification)
+      {
+        if (notification.Device_Id == pfd_obj.device_id
+            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
+              and notification.EventParameter != nil)
+          {
+            var id = notification.EventParameter.Id;
+            var value = notification.EventParameter.Value;
+            #printf("Button pressed " ~ id ~ " " ~ value);
+            if (id == fg1000.FASCIA.FMS_CRSR)   return controller.handleCRSR();
+            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
+            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
+            if (id == fg1000.FASCIA.ENT)        return controller.handleEnter(value);
+          }
+        }
+        return emesary.Transmitter.ReceiptStatus_NotProcessed;
+      };
+    }
+    transmitter.Register(me._recipient);
+    me.transmitter = transmitter;
+  },
+  DeRegisterWithEmesary : func(transmitter = nil){
+      # remove registration from transmitter; but keep the recipient once it is created.
+      if (me.transmitter != nil)
+        me.transmitter.DeRegister(me._recipient);
+      me.transmitter = nil;
+  },
+
+  # Reset controller if required when the page is displayed or hidden
+  ondisplay : func() {
+    me._currentGroup = NearestAirportsController.UIGROUP.NONE;
+    me.RegisterWithEmesary();
+    me.getAirports();
+  },
+  offdisplay : func() {
+    me.DeRegisterWithEmesary();
   },
 };

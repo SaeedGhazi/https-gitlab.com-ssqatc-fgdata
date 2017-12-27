@@ -4,27 +4,11 @@ var AirportDeparture =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "WPT - AIRPORT DEPARTURE INFORMATION",
-      _group : myCanvas.createGroup("AirportDepartureLayer"),
-      parents : [ NavMap, device.addPage("AirportDeparture", "AirportDepartureGroup") ],
-      symbols : {},
+      parents : [
+        AirportDeparture,
+        MFDPage.new(mfd, myCanvas, device, svg, "AirportDeparture", "WPT - AIRPORT DEPARTURE INFORMATION")
+      ],
     };
-
-    obj.Styles = fg1000.AirportDepartureStyles.new();
-    obj.Options = fg1000.AirportDepartureOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.AirportDepartureController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var AirportDeparture =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.AirportDepartureController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var AirportDeparture =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

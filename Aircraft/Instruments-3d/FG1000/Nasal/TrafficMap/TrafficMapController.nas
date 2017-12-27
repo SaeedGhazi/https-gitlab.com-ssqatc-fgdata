@@ -33,7 +33,7 @@ var TrafficMapController =
 
     # Emesary
     obj._recipient = nil;
-    
+
     obj.setZoom(obj.range);
     return obj;
   },
@@ -121,9 +121,9 @@ var TrafficMapController =
             var id = notification.EventParameter.Id;
             var value = notification.EventParameter.Value;
             #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.MFD.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
-            if (id == fg1000.MFD.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
-            if (id == fg1000.MFD.FASCIA.RANGE)      return controller.zoom(value);
+            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
+            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
+            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
           }
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;

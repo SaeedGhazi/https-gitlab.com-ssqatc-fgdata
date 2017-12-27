@@ -4,27 +4,11 @@ var UserWPTInfo =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "WPT - USER WPT INFORMATION",
-      _group : myCanvas.createGroup("UserWPTInfoLayer"),
-      parents : [ NavMap, device.addPage("UserWPTInfo", "UserWPTInfoGroup") ],
-      symbols : {},
+      parents : [
+        UserWPTInfo,
+        MFDPage.new(mfd, myCanvas, device, svg, "UserWPTInfo", "WPT - USER WPT INFORMATION")
+      ],
     };
-
-    obj.Styles = fg1000.UserWPTInfoStyles.new();
-    obj.Options = fg1000.UserWPTInfoOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.UserWPTInfoController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var UserWPTInfo =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.UserWPTInfoController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var UserWPTInfo =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

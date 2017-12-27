@@ -4,27 +4,11 @@ var Checklist1 =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "LST - CHECKLIST 1",
-      _group : myCanvas.createGroup("Checklist1Layer"),
-      parents : [ NavMap, device.addPage("Checklist1", "Checklist1Group") ],
-      symbols : {},
+      parents : [
+        Checklist1,
+        MFDPage.new(mfd, myCanvas, device, svg, "Checklist1", "LST - CHECKLIST 1")
+      ],
     };
-
-    obj.Styles = fg1000.Checklist1Styles.new();
-    obj.Options = fg1000.Checklist1Options.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.Checklist1Controller.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var Checklist1 =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.Checklist1Controller.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var Checklist1 =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

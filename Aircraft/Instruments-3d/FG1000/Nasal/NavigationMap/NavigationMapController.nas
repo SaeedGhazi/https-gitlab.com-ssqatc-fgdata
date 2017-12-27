@@ -1,5 +1,5 @@
 # Navigation Map Controller
-var NavMapController =
+var NavigationMapController =
 {
   # Vertical ranges, and labels.
   # 28 ranges from 500ft to 2000nm, measuring the vertical map distance.
@@ -33,6 +33,13 @@ var NavMapController =
             {range: 1000, label: "1000nm"},
             {range: 1500, label: "1500nm"},
             {range: 2000, label: "2000nm"}, ],
+
+  ORIENTATIONS : [
+    { label: "NORTH UP" },
+    { label: "TRK UP" },
+    { label: "DTK UP" },
+    { label: "HDG UP" },
+  ],
 
   # Layer display configuration:
   # enabled   - whether this layer has been enabled by the user
@@ -71,19 +78,20 @@ var NavMapController =
   # Airways levels.
   AIRWAYS : [ "AIRWAYS", "AIRWY ON", "AIRWY LO", "AIRWY HI"],
 
-  new : func (page, svg, zoom_label, current_zoom)
+
+  new : func (page, svg)
   {
-    var obj = { parents : [ NavMapController ] };
-    obj.current_zoom = current_zoom;
+    var obj = { parents : [ NavigationMapController ] };
+    obj.current_zoom = 8;
     obj.declutter = 0;
     obj.airways = 0;
     obj.page = page;
-    obj.page.setScreenRange(689/2.0);
-    obj.label = svg.getElementById(zoom_label);
     obj.setZoom(obj.current_zoom);
+    obj.setOrientation(obj.ORIENTATIONS[0]);
 
     # Emesary
     obj._recipient = nil;
+    obj._zoomRecipient = nil;
 
     return obj;
   },
@@ -104,9 +112,11 @@ var NavMapController =
     # Ranges above represent vertical ranges, but the display is a rectangle, so
     # we need to use the diagonal range of the 1024 x 689, which is 617px.
     # 617px is 1.8 x 689/2, so we need to increase the range values by x1.8
-    me.page.setRange(me.RANGES[zoom].range);
-    me.label.setText(me.RANGES[zoom].label);
+    me.page.setRange(me.RANGES[zoom].range, me.RANGES[zoom].label);
     me.updateVisibility();
+  },
+  setOrientation : func(orientation) {
+    me.page.setOrientation(orientation.label);
   },
   updateVisibility : func() {
     # Determine which layers should be visible.
@@ -164,7 +174,7 @@ var NavMapController =
     # bottom right of the screen
     return me.page.mfd._pageGroupController.handleFMSOuter(value);
   },
-  RegisterWithEmesary : func(transmitter = nil){
+  RegisterWithEmesary : func(transmitter = nil) {
     if (transmitter == nil)
       transmitter = emesary.GlobalTransmitter;
 
@@ -182,9 +192,9 @@ var NavMapController =
             var id = notification.EventParameter.Id;
             var value = notification.EventParameter.Value;
             #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.MFD.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
-            if (id == fg1000.MFD.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
-            if (id == fg1000.MFD.FASCIA.RANGE)      return controller.zoom(value);
+            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
+            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
+            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
           }
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
@@ -193,7 +203,7 @@ var NavMapController =
     transmitter.Register(me._recipient);
     me.transmitter = transmitter;
   },
-  DeRegisterWithEmesary : func(transmitter = nil){
+  DeRegisterWithEmesary : func(transmitter = nil) {
       # remove registration from transmitter; but keep the recipient once it is created.
       if (me.transmitter != nil)
         me.transmitter.DeRegister(me._recipient);
@@ -205,5 +215,52 @@ var NavMapController =
   },
   offdisplay : func() {
     me.DeRegisterWithEmesary();
+  },
+
+  # Set controller for cases where the NavigationMap is displayed as part of
+  # another page, e.g. NearestAirports
+  #
+  # In this case we are only interested in a subset of the buttons to control
+  # the map.
+
+  RegisterZoomWithEmesary : func(transmitter = nil) {
+    if (transmitter == nil)
+      transmitter = emesary.GlobalTransmitter;
+
+    if (me._zoomRecipient == nil){
+      me._zoomRecipient = emesary.Recipient.new("NavMapController_" ~ me.page.device.designation);
+      var pfd_obj = me.page.device;
+      var controller = me;
+      me._zoomRecipient.Receive = func(notification)
+      {
+        if (notification.Device_Id == pfd_obj.device_id
+            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
+              and notification.EventParameter != nil)
+          {
+            var id = notification.EventParameter.Id;
+            var value = notification.EventParameter.Value;
+            #printf("Button pressed " ~ id ~ " " ~ value);
+            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
+          }
+        }
+        return emesary.Transmitter.ReceiptStatus_NotProcessed;
+      };
+    }
+    transmitter.Register(me._zoomRecipient);
+    me.zoomTransmitter = transmitter;
+  },
+  DeRegisterZoomWithEmesary : func(transmitter = nil) {
+      # remove registration from transmitter; but keep the recipient once it is created.
+      if (me.zoomTransmitter != nil)
+        me.zoomTransmitter.DeRegister(me._zoomRecipient);
+      me.zoomTransmitter = nil;
+  },
+
+  ondisplayPartial : func() {
+    me.RegisterZoomWithEmesary();
+  },
+  offdisplayPartial : func() {
+    me.DeRegisterZoomWithEmesary();
   },
 };

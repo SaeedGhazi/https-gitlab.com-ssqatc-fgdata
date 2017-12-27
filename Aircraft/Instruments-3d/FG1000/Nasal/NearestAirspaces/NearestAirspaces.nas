@@ -4,27 +4,11 @@ var NearestAirspaces =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "NRST - NEAREST AIRSPACES",
-      _group : myCanvas.createGroup("NearestAirspacesLayer"),
-      parents : [ NavMap, device.addPage("NearestAirspaces", "NearestAirspacesGroup") ],
-      symbols : {},
+      parents : [
+        NearestAirspaces,
+        MFDPage.new(mfd, myCanvas, device, svg, "NearestAirspaces", "NRST - NEAREST AIRSPACES")
+      ],
     };
-
-    obj.Styles = fg1000.NearestAirspacesStyles.new();
-    obj.Options = fg1000.NearestAirspacesOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.NearestAirspacesController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var NearestAirspaces =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.NearestAirspacesController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var NearestAirspaces =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

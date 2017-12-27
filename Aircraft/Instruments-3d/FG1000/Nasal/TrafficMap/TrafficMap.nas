@@ -7,26 +7,16 @@ var TrafficMap =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "MAP - TRAFFIC MAP",
-      _group : myCanvas.createGroup("TrafficMapLayer"),
-      parents : [ TrafficMap, device.addPage("TrafficMap", "TrafficMapGroup") ]
+      parents : [ TrafficMap, MFDPage.new(mfd, myCanvas, device, svg, "TrafficMap", "MAP - TRAFFIC MAP") ]
     };
 
-    obj.Styles = fg1000.TrafficMapStyles.new();
-    obj.Options = fg1000.TrafficMapOptions.new();
     obj.mapgroup = obj._group.createChild("map");
-    obj.device = device;
-    obj.mfd = mfd;
 
     # Dynamic text elements
     obj.op_label = svg.getElementById("TrafficMapOpMode");
     obj.alt_label = svg.getElementById("TrafficMapAltMode");
     obj.outer_label = svg.getElementById("TrafficMapOuterRange");
     obj.inner_label = svg.getElementById("TrafficMapInnerRange");
-
-    # Need to display this underneath the softkeys, EIS, header.
-    obj._group.set("z-index", -10.0);
-    obj._group.setVisible(0);
 
     # Initialize the controller:
     var ctrl_ns = canvas.Map.Controller.get("Aircraft position");

@@ -4,28 +4,11 @@ var Template =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "TemplateTitle",
-      _group : myCanvas.createGroup("TemplateLayer"),
-      parents : [ Template, device.addPage("Template", "TemplateGroup") ],
-      symbols : {},
+      parents : [
+        Template,
+        MFDPage.new(mfd, myCanvas, device, svg, "Template", "TemplateTitle")
+      ],
     };
-
-    obj.Styles = fg1000.TemplateStyles.new();
-    obj.Options = fg1000.TemplateOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.TemplateController.new(obj, svg);
-
-    # Dynamic text elements in the SVG file.  In the SVG these have an "AirportInfo" prefix.
-    var textelements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-      obj.symbols[element].setText("");
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -59,6 +42,8 @@ var Template =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.TemplateController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -71,9 +56,11 @@ var Template =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

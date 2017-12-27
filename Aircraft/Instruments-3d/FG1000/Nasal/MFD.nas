@@ -1,9 +1,17 @@
 # FG1000 MFD
 
+print("##############");
+print("# FG1000 MFD #");
+print("##############\n");
+
+io.include("constants.nas");
+
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
 
+io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
+
 var MFDPages = [
-  "NavMap",
+  "NavigationMap",
   "TrafficMap",
   "Stormscope",
   "WeatherDataLink",
@@ -53,58 +61,9 @@ io.load_nasal(nasal_dir ~ 'EIS.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Drivers/EISDriver.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'PageGroupController.nas', "fg1000");
 
-# Constants to define the display area, for placement of elements.  We
-# could try to do something with a layout, but the position and size of
-# elements is fixed.  Can't be member variables of MFD as they are
-# self-referential.
-
-var DISPLAY = { WIDTH : 1024, HEIGHT  : 768 };
-var HEADER_HEIGHT = 56;
-var FOOTER_HEIGHT = 25;
-var EIS_WIDTH     = 150;
-
-# Size of data display on the right hand side of the MFD
-var DATA_DISPLAY = {
-  WIDTH  : 300,
-  HEIGHT : DISPLAY.HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT,
-  X      : DISPLAY.WIDTH  - 300,
-  Y      : HEADER_HEIGHT,
-};
-
-# Map dimensions when the data display is not present
-var MAP_FULL =  {
-  CENTER : { X : ((DISPLAY.WIDTH - EIS_WIDTH) / 2 + EIS_WIDTH),
-             Y : ((DISPLAY.HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT) / 2 + HEADER_HEIGHT), },
-  X      : EIS_WIDTH,
-  Y      : HEADER_HEIGHT,
-  WIDTH  : DISPLAY.WIDTH - EIS_WIDTH,
-  HEIGHT : DISPLAY.HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT,
-};
-
-# Map dimensions when the data display is present
-var MAP_PARTIAL = {
-  X      : EIS_WIDTH,
-  Y      : HEADER_HEIGHT,
-  WIDTH  : DISPLAY.WIDTH - EIS_WIDTH - DATA_DISPLAY.WIDTH,
-  HEIGHT : DISPLAY.HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT,
-  CENTER : { X : ((DISPLAY.WIDTH - EIS_WIDTH - DATA_DISPLAY.WIDTH) / 2 + EIS_WIDTH),
-             Y : ((DISPLAY.HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT) / 2 + HEADER_HEIGHT), },
-};
-
-var HIGHLIGHT_COLOR =  "#80ffff";
-var HIGHLIGHT_TEXT_COLOR = "#000000";
-var NORMAL_TEXT_COLOR = "#80ffff";
 
 var MFD =
 {
-  # Constants for the hard-buttons on the fascia
-  FASCIA : {
-    FMS_OUTER : 0,
-    FMS_INNER : 1,
-    RANGE     : 2,
-    FMS_CRSR  : 3,
-  },
-
   new : func (myCanvas)
   {
     var obj = { parents : [ MFD ] };
@@ -152,16 +111,19 @@ var MFD =
       addPageFn();
     }
 
+    # The NavigationMap page is a special case, as it is displayed with the Nearest... pages as an overlay
+    obj.NavigationMap = obj._pageGroupController.getPage("NavigationMap");
+
     # Display the NavMap and the appropriate top level on startup.
-    obj._MFDDevice.selectPage(obj._pageGroupController.getPage("NavMap"));
+    obj._MFDDevice.selectPage(obj.NavigationMap);
 
     # Add a wheel controller., which we will attach to the zoom.
     myCanvas.addEventListener("wheel", func(e)
     {
       if (e.deltaY >0) {
-        obj._MFDDevice.current_page.controller.zoomIn();
+        obj._MFDDevice.current_page.controller.handleFMSInner(1);
       } else {
-        obj._MFDDevice.current_page.controller.zoomOut();
+        obj._MFDDevice.current_page.controller.handleFMSInner(-1);
       }
     });
 
@@ -177,7 +139,9 @@ var MFD =
   },
   del: func()
   {
-    me.getCurrentPage().DeRegisterWithEmesary();
+    me._MFDDevice.current_page.offdisplay();
+    me._MFDDevice.DeRegisterWithEmesary();
+
   },
   setPageTitle: func(title)
   {

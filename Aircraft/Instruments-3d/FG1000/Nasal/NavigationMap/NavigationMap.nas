@@ -1,26 +1,30 @@
 # Navigation Map
-var NavMap =
+var NavigationMap =
 {
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "MAP - NAVIGATION MAP",
-      _group : myCanvas.createGroup("NavigationMapLayer"),
-      parents : [ NavMap, device.addPage("NavigationMap", "NavigationMapGroup") ]
+      parents : [
+        NavigationMap,
+        MFDPage.new(mfd, myCanvas, device, svg, "NavigationMap", "MAP - NAVIGATION MAP")
+      ],
     };
 
-    obj.Styles = fg1000.NavMapStyles.new();
-    obj.Options = fg1000.NavMapOptions.new();
     obj.MFDMap = obj._group.createChild("map");
-    obj.device = device;
-    obj.mfd = mfd;
+    obj.MFDMap.setScreenRange(689/2.0);
 
-    # Need to display this underneath the softkeys, EIS, header.
-    obj._group.set("z-index", -10.0);
-    obj._group.setVisible(0);
+    # Labels for map range and orientation.  Two sets - one for the full display
+    # and another for the partial display.
+    obj.addTextElements(["RangeDisplay", "Orientation"]);
+    obj.addTextElements(["RangeDisplayPartial", "OrientationPartial"]);
 
+    obj._labelsFull = svg.getElementById("NavigationMapGroupFull");
+    assert(obj._labelsFull != nil, "Unable to find NavigationMapGroupFull");
 
-    # Initialize the controller:
+    obj._labelsPartial = svg.getElementById("NavigationMapGroupPartial");
+    assert(obj._labelsPartial != nil, "Unable to find NavigationMapGroupPartial");
+
+    # Initialize the controllers:
     var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
     var source = ctrl_ns.SOURCES["current-pos"];
     if (source == nil) {
@@ -63,8 +67,6 @@ var NavMap =
                          style: obj.Styles.getStyle(type.name),
                          options: obj.Options.getOption(type.name) );
     }
-
-    obj.controller = fg1000.NavMapController.new(obj, svg, "RangeDisplay", 8);
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -182,6 +184,8 @@ var NavMap =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.NavigationMapController.new(obj, svg);
+
     return obj;
   },
   toggleLayerVisible : func(name) {
@@ -190,8 +194,14 @@ var NavMap =
   setLayerVisible : func(name,n=1) {
       me.MFDMap.getLayer(name).setVisible(n);
   },
-  setRange : func(range) {
+  setRange : func(range, label) {
     me.MFDMap.setRange(range);
+    me.setTextElement("RangeDisplay", label);
+    me.setTextElement("RangeDisplayPartial", label);
+  },
+  setOrientation : func(orientation) {
+    me.setTextElement("Orientation", orientation);
+    me.setTextElement("OrientationPartial", orientation);
   },
   setScreenRange : func(range) {
     me.MFDMap.setScreenRange(range);
@@ -210,7 +220,36 @@ var NavMap =
   },
   ondisplay : func() {
     me._group.setVisible(1);
+
+    # Center the map's origin, modified to take into account the surround.
+    me.MFDMap.setTranslation(
+      fg1000.MAP_FULL.CENTER.X,
+      fg1000.MAP_FULL.CENTER.Y
+    );
+
+    me._labelsFull.setVisible(1);
+    me._labelsPartial.setVisible(0);
+
     me.mfd.setPageTitle(me.title);
     me.controller.ondisplay();
+  },
+
+  # Display functions when we're displaying the NavigationMap as part of another
+  # page - e.g. NearestAirports.
+  ondisplayPartial : func() {
+    me._group.setVisible(1);
+    me.MFDMap.setTranslation(
+      fg1000.MAP_PARTIAL.CENTER.X,
+      fg1000.MAP_PARTIAL.CENTER.Y
+    );
+
+    me._labelsFull.setVisible(0);
+    me._labelsPartial.setVisible(1);
+
+    me.controller.ondisplayPartial();
+  },
+  offdisplayPartial : func() {
+    me._group.setVisible(0);
+    me.controller.offdisplayPartial();
   },
 };

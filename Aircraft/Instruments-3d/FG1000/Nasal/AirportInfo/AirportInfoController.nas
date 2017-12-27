@@ -22,33 +22,16 @@ var AirportInfoController =
             {range: 0.5, label: "8nm"},
             {range: 0.4, label: "10nm"} ],
 
-  CRSR_ELEMENTS : [
-    "ID",
-    "Name",
-    "Runway",
-    "Freq1",
-    "Freq2",
-    "Freq3",
-    "Freq4",
-    "Freq5",
-    "Freq6",
-    "Freq7",
-    "Freq8",
-  ],
-
   new : func (page, svg)
   {
     var obj = { parents : [ AirportInfoController ] };
     obj.airport = "";
     obj.runway = "";
-    obj.runway_index = -1;
+    obj.runwayIdx = -1;
     obj.info = nil;
     obj.page = page;
-    obj.crsr_toggle = 0;
-    obj.crsrIdx = 0;
+    obj.crsrToggle = 0;
     obj.current_zoom = 7;
-    obj.current_id_entry = "";
-
 
     # Emesary
     obj._recipient = nil;
@@ -63,45 +46,23 @@ var AirportInfoController =
   setAirport : func(id)
   {
     if (id == me.airport) return;
-    me.airport = id;
-    me.info= airportinfo(id);
-    me.page.displayAirport(me.info);
+    var apt = airportinfo(id);
 
-    # Display the first runway.
-    me.setRunway(0);
+    if (apt != nil)  {
+      me.airport = id;
+      me.info= airportinfo(id);
+    }
+
+    # Reset airport display.  We do this irrespective of whether the id
+    # is valid, as it allows us to clear any bad user input from the ID field
+    me.page.displayAirport(me.info);
   },
-  setRunway : func(runway_index)
+  setRunway : func(runwayID)
   {
-    if (runway_index == me.runway_index) return;
-    var rwys = keys(me.info.runways);
-    if (runway_index < 0) runway_index = 0;
-    if (runway_index > (size(rwys) - 1)) runway_index = size(rwys) - 1;
-    me.runway_index = runway_index;
-    me.page.displayRunway(me.info.runways[rwys[runway_index]]);
-  },
-  incrRunway : func(value)
-  {
-    var incr_or_decr = (value > 0) ? 1 : -1;
-    me.setRunway(me.runway_index + incr_or_decr);
+    me.page.displayRunway(me.info.runways[runwayID]);
   },
 
   # Control functions for Input
-  incrAirportID : func(value)
-  {
-    var incr_or_decr = (value > 0) ? 1 : -1;
-    if (me.current_id_entry == "") {
-      me.current_id_entry = "A";
-    } else {
-      var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      var fixed = substr(me.current_id_entry, 0, size(current_id_entry) - 2);
-      var lastchar = substr(me.current_id_entry, -1);
-      var char = math.mod(find(lastchar, alphabet) + incr_or_decr, 26);
-      var nextchar = substr(alphabet, char, 1);
-      me.current_id_entry = fixed + nextchar;
-    }
-  },
-
-
   zoomIn : func() {
     me.setZoom(me.current_zoom -1);
   },
@@ -118,51 +79,58 @@ var AirportInfoController =
     me.current_zoom = zoom;
     me.page.setZoom(me.RANGES[zoom].range * fg1000.MAP_PARTIAL.HEIGHT, me.RANGES[zoom].label);
   },
-  showCRSR : func() {
-    me.page.highlightElement(me.CRSR_ELEMENTS[me.crsrIdx]);
-  },
-  hideCRSR : func() {
-    me.page.unhighlightElement(me.CRSR_ELEMENTS[me.crsrIdx]);
-    me.crsrIdx = 0;
-  },
-  moveCRSR : func(val) {
-    var incr_or_decr = (val > 0) ? 1 : -1;
-
-    me.page.unhighlightElement(me.CRSR_ELEMENTS[me.crsrIdx]);
-    me.crsrIdx = math.mod(me.crsrIdx + incr_or_decr, size(me.CRSR_ELEMENTS) -1);
-    me.page.highlightElement(me.CRSR_ELEMENTS[me.crsrIdx]);
-  },
   handleCRSR : func() {
-    me.crsr_toggle = (! me.crsr_toggle);
-    print("CRSR pressed " ~ me.crsr_toggle);
-    if (me.crsr_toggle) {
-      me.showCRSR();
+    me.crsrToggle = (! me.crsrToggle);
+    if (me.crsrToggle) {
+      me.page.showCRSR();
     } else {
-      me.hideCRSR();
+      me.page.hideCRSR();
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
   handleFMSInner : func(value) {
-    if (me.crsr_toggle == 1) {
-      print("FMSInner for AirportInfoController called " ~ me.crsr_toggle);
-      if (me.CRSR_ELEMENTS[me.crsrIdx] == "Runway") {
-        me.incrRunway(value);
+    if (me.crsrToggle == 1) {
+      var select = me.page.incrSmall(value);
+      if ((select.name == "AirportInfoRunway") and (select.value != nil)) {
+        # Selection values are of the form "06L-12R".  We need to set the
+        # runway to the left half.
+        var idx = find("-", select.value);
+        if (idx != -1) {
+          var rwy = substr(select.value, 0, idx);
+          me.setRunway(rwy);
+        }
       }
-      if (me.CRSR_ELEMENTS[me.crsrIdx] == "ID") {
-        me.incrAirportID(value);
-      }
+
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return me.page.mfd._pageGroupController.handleFMSInner(value);
     }
   },
   handleFMSOuter : func(value) {
-    if (me.crsr_toggle == 1) {
-      print("FMSOuter for AirportInfoController called " ~ me.crsr_toggle);
-      me.moveCRSR(value);
+    if (me.crsrToggle == 1) {
+      me.page.moveCRSR(value);
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return me.page.mfd._pageGroupController.handleFMSOuter(value);
+    }
+  },
+  handleEnter : func(value) {
+    if (me.crsrToggle == 1) {
+      var select = me.page.handleEnter();
+      if (select.name == "AirportInfoID") me.setAirport(select.value);
+      if (substr(select.name, 0, 15) == "AirportInfoFreq") print("Enter pressed on frequency " ~ select.value);
+
+      return emesary.Transmitter.ReceiptStatus_Finished;
+    } else {
+      return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    }
+  },
+  handleClear : func(value) {
+    if (me.crsrToggle == 1) {
+      # Cancel any data entry
+      me.page.handleClear();
+    } else {
+      return emesary.Transmitter.ReceiptStatus_NotProcessed;
     }
   },
   RegisterWithEmesary : func(transmitter = nil){
@@ -183,10 +151,12 @@ var AirportInfoController =
             var id = notification.EventParameter.Id;
             var value = notification.EventParameter.Value;
             #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.MFD.FASCIA.FMS_CRSR)   return controller.handleCRSR();
-            if (id == fg1000.MFD.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
-            if (id == fg1000.MFD.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
-            if (id == fg1000.MFD.FASCIA.RANGE)      return controller.zoom(value);
+            if (id == fg1000.FASCIA.FMS_CRSR)   return controller.handleCRSR();
+            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
+            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
+            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
+            if (id == fg1000.FASCIA.ENT)        return controller.handleEnter(value);
+            if (id == fg1000.FASCIA.CLR)        return controller.handleClear(value);
           }
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;

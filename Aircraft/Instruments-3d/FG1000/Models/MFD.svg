@@ -23,9 +23,9 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="558.90157"
-     inkscape:cy="71.595861"
+     inkscape:zoom="1"
+     inkscape:cx="713.25502"
+     inkscape:cy="157.72368"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -952,7 +952,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="PageGroup"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <g
        style="display:inline"
        id="NrstPageGroup"
@@ -1324,7 +1325,7 @@
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <text
          sodipodi:linespacing="125%"
-         id="NavMap"
+         id="NavigationMap"
          y="653.33002"
          x="774.98926"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

@@ -382,48 +382,51 @@
                         );
 
                         append(listeners, softkey_listener);
-                        #append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-incr-large-pressed", func(v) { mfd._pageGroupController.incrFMSOuter(); } ));
-                        #append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-incr-small-pressed", func(v) { mfd._pageGroupController.incrFMSInner(); } ));
-                        #append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-decr-large-pressed", func(v) { mfd._pageGroupController.decrFMSOuter(); } ));
-                        #append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-decr-small-pressed", func(v) { mfd._pageGroupController.decrFMSInner(); } ));
-
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-incr-large-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.FMS_OUTER, Value: 1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_OUTER, Value: 1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-incr-small-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.FMS_INNER, Value: 1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_INNER, Value: 1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-decr-large-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.FMS_OUTER, Value: -1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_OUTER, Value: -1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-decr-small-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.FMS_INNER, Value: -1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_INNER, Value: -1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/range-decr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.RANGE, Value: -1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.RANGE, Value: -1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/range-incr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.RANGE, Value: 1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.RANGE, Value: 1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
                         append(listeners, setlistener("/sim/gui/dialogs/fg1000/crsr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.MFD.FASCIA.FMS_CRSR, Value: 1.0 });
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_CRSR, Value: 1.0 });
                           emesary.GlobalTransmitter.NotifyAll(notification);
                         } ));
 
+                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/ent-pressed", func(v) {
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.ENT, Value: 1.0 });
+                          emesary.GlobalTransmitter.NotifyAll(notification);
+                        } ));
 
+                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/clr-pressed", func(v) {
+                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.CLR, Value: 1.0 });
+                          emesary.GlobalTransmitter.NotifyAll(notification);
+                        } ));
 
 
                     ]]></load></nasal>
@@ -824,6 +827,11 @@
                   <pref-height>25</pref-height>
                   <name>CLR</name>
                   <legend>CLR</legend>
+                  <binding>
+                    <command>property-assign</command>
+                    <property>/sim/gui/dialogs/fg1000/clr-pressed</property>
+                    <value>1</value>
+                  </binding>
                 </button>
                 <button>
                   <col>1</col><row>2</row>
@@ -831,6 +839,11 @@
                   <pref-height>25</pref-height>
                   <name>ENT</name>
                   <legend>ENT</legend>
+                  <binding>
+                    <command>property-assign</command>
+                    <property>/sim/gui/dialogs/fg1000/ent-pressed</property>
+                    <value>1</value>
+                  </binding>
                 </button>
               </group>
 

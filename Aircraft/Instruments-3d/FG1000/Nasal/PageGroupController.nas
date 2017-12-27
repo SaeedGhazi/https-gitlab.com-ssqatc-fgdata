@@ -6,7 +6,7 @@ var PAGE_GROUPS = [
 
   { label: "MapPageGroupLabel",
           group: "MapPageGroup",
-          pages: [ "NavMap", "TrafficMap", "Stormscope", "WeatherDataLink", "TAWSB"],
+          pages: [ "NavigationMap", "TrafficMap", "Stormscope", "WeatherDataLink", "TAWSB"],
   },
   { label: "WPTGroupLabel",
           group: "WPTPageGroup",
@@ -48,6 +48,22 @@ var PageGroupController =
 
     # List of pages to be controllers.  Keys are the pages in PAGE_GROUPS;
     obj._pageList = {};
+    obj._elements = {};
+
+    foreach (var pageGroup; PAGE_GROUPS) {
+      var group = svg.getElementById(pageGroup.group);
+      var label = svg.getElementById(pageGroup.label);
+      assert(group != nil, "Unable to find element " ~ pageGroup.group);
+      assert(label != nil, "Unable to find element " ~ pageGroup.label);
+      obj._elements[pageGroup.group] = group;
+      obj._elements[pageGroup.label] = label;
+
+      foreach(var pg; pageGroup.pages) {
+        var page = svg.getElementById(pg);
+        assert(page != nil, "Unable to find element " ~ pg);
+        obj._elements[pg] = page;
+      }
+    }
 
     # Timers to control when to hide the menu after inactivity, and when to load
     # a new page.
@@ -75,8 +91,8 @@ var PageGroupController =
   {
     foreach(var pageGroup; PAGE_GROUPS)
     {
-      me._svg.getElementById(pageGroup.group).setVisible(0);
-      me._svg.getElementById(pageGroup.label).setVisible(0);
+      me._elements[pageGroup.group].setVisible(0);
+      me._elements[pageGroup.label].setVisible(0);
     }
     me._menuVisible = 0;
   },
@@ -87,13 +103,9 @@ var PageGroupController =
     var pageToLoad = PAGE_GROUPS[me._selectedPageGroup].pages[me._selectedPage];
     var page = me._pageList[pageToLoad];
 
-    if (page != nil) {
-      me._device.selectPage(page);
-    } else {
-      printf("Unable to find page " ~ pageToLoad);
-    }
+    assert(page != nil, "Unable to find page " ~ pageToLoad);
+    me._device.selectPage(page);
   },
-
   showMenu : func()
   {
     foreach(var pageGroup; PAGE_GROUPS)
@@ -101,26 +113,26 @@ var PageGroupController =
       if (PAGE_GROUPS[me._selectedPageGroup].label == pageGroup.label)
       {
         # Display the page group and highlight the label
-        me._svg.getElementById(pageGroup.group).setVisible(1);
-        me._svg.getElementById(pageGroup.label).setVisible(1);
-        me._svg.getElementById(pageGroup.label).setColor(0.7,0.7,1.0);
+        me._elements[pageGroup.group].setVisible(1);
+        me._elements[pageGroup.label].setVisible(1);
+        me._elements[pageGroup.label].setColor(0.7,0.7,1.0);
 
         foreach (var page; pageGroup.pages)
         {
           # Highlight the current page.
           if (pageGroup.pages[me._selectedPage] == page) {
-            me._svg.getElementById(page).setColor(0.7,0.7,1.0);
+            me._elements[page].setColor(0.7,0.7,1.0);
           } else {
-            me._svg.getElementById(page).setColor(0.7,0.7,0.7);
+            me._elements[page].setColor(0.7,0.7,0.7);
           }
         }
       }
       else
       {
         # Hide the pagegroup and unhighlight the label on the bottom
-        me._svg.getElementById(pageGroup.group).setVisible(0);
-        me._svg.getElementById(pageGroup.label).setVisible(1);
-        me._svg.getElementById(pageGroup.label).setColor(0.7,0.7,0.7);
+        me._elements[pageGroup.group].setVisible(0);
+        me._elements[pageGroup.label].setVisible(1);
+        me._elements[pageGroup.label].setColor(0.7,0.7,0.7);
       }
     }
     me._menuVisible = 1;

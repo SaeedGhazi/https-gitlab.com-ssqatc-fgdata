@@ -4,27 +4,11 @@ var NearestFrequencies =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "NRST - NEAREST FREQUENCIES",
-      _group : myCanvas.createGroup("NearestFrequenciesLayer"),
-      parents : [ NavMap, device.addPage("NearestFrequencies", "NearestFrequenciesGroup") ],
-      symbols : {},
+      parents : [
+        NearestFrequencies,
+        MFDPage.new(mfd, myCanvas, device, svg, "NearestFrequencies", "NRST - NEAREST FREQUENCIES")
+      ],
     };
-
-    obj.Styles = fg1000.NearestFrequenciesStyles.new();
-    obj.Options = fg1000.NearestFrequenciesOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.NearestFrequenciesController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var NearestFrequencies =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.NearestFrequenciesController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var NearestFrequencies =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

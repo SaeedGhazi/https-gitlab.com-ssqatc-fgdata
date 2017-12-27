@@ -4,27 +4,11 @@ var FlightPlanCatalog =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "FPL - FLIGHT PLAN CATALOG",
-      _group : myCanvas.createGroup("FlightPlanCatalogLayer"),
-      parents : [ NavMap, device.addPage("FlightPlanCatalog", "FlightPlanCatalogGroup") ],
-      symbols : {},
+      parents : [
+        FlightPlanCatalog,
+        MFDPage.new(mfd, myCanvas, device, svg, "FlightPlanCatalog", "FPL - FLIGHT PLAN CATALOG")
+      ],
     };
-
-    obj.Styles = fg1000.FlightPlanCatalogStyles.new();
-    obj.Options = fg1000.FlightPlanCatalogOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.FlightPlanCatalogController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var FlightPlanCatalog =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.FlightPlanCatalogController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var FlightPlanCatalog =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

@@ -1,8 +1,8 @@
 # Navigation Map Options
-var NavMapOptions =
+var NavigationMapOptions =
 {
   new : func() {
-    var obj = { parents : [NavMapOptions] };
+    var obj = { parents : [NavigationMapOptions] };
     obj.Options= {};
     obj.loadOptions();
     return obj;

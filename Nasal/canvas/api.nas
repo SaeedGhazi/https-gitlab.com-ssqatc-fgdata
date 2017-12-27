@@ -617,6 +617,10 @@ var Text = {
   {
     me.set("text", typeof(text) == 'scalar' ? text : "");
   },
+  getText: func()
+  {
+    return me.get("text");
+  },
   # enable reduced property I/O update function
   enableUpdate: func ()
   {

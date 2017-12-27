@@ -4,27 +4,11 @@ var XMInfo =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "AUX - XM INFORMATION",
-      _group : myCanvas.createGroup("XMInfoLayer"),
-      parents : [ NavMap, device.addPage("XMInfo", "XMInfoGroup") ],
-      symbols : {},
+      parents : [
+        XMInfo,
+        MFDPage.new(mfd, myCanvas, device, svg, "XMInfo", "AUX - XM INFORMATION")
+      ],
     };
-
-    obj.Styles = fg1000.XMInfoStyles.new();
-    obj.Options = fg1000.XMInfoOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.XMInfoController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var XMInfo =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.XMInfoController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var XMInfo =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

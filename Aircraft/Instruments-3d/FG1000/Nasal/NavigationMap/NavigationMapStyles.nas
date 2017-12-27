@@ -1,8 +1,8 @@
 # Navigation Map Styles
-var NavMapStyles =
+var NavigationMapStyles =
 {
   new : func() {
-    var obj = { parents : [ NavMapStyles ]};
+    var obj = { parents : [ NavigationMapStyles ]};
     obj.Styles = {};
     obj.loadStyles();
     return obj;

@@ -23,9 +23,9 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9999999"
-     inkscape:cx="707.7778"
-     inkscape:cy="620.40408"
+     inkscape:zoom="1.6236979"
+     inkscape:cx="512"
+     inkscape:cy="384"
      inkscape:document-units="px"
      inkscape:current-layer="AirportInfoGroup"
      showgrid="true"
@@ -534,7 +534,7 @@
       <path
          style="fill:#404040;fill-opacity:1;fill-rule:evenodd;stroke:#404040;stroke-width:0.88437384px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 734.55781,356.83804 0,9.08226 -4.41338,-4.48437 z"
-         id="RwySelectLeft"
+         id="AirportInfoRunwayLeft"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="cccc"
          inkscape:label="#path4222" />
@@ -542,7 +542,7 @@
          inkscape:label="#path4222"
          sodipodi:nodetypes="cccc"
          inkscape:connector-curvature="0"
-         id="RwySelectorRight"
+         id="AirportInfoRunwayRight"
          d="m 799.96999,356.83804 0,9.08226 4.41338,-4.48437 z"
          style="fill:#404040;fill-opacity:1;fill-rule:evenodd;stroke:#404040;stroke-width:0.88437384px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <rect
@@ -565,6 +565,54 @@
            id="tspan4231"
            sodipodi:role="line"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:end;text-anchor:end;">2nm</tspan></text>
+      <text
+         inkscape:label="#text4166"
+         sodipodi:linespacing="125%"
+         id="AirportInfoID0"
+         y="111.96484"
+         x="711.10352"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:20px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#80ffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="111.96484"
+           x="711.10352"
+           id="tspan4227"
+           sodipodi:role="line">K</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:20px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#80ffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="722.25781"
+         y="111.96484"
+         id="AirportInfoID1"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text4166"><tspan
+           sodipodi:role="line"
+           id="tspan4232"
+           x="722.25781"
+           y="111.96484">S</tspan></text>
+      <text
+         inkscape:label="#text4166"
+         sodipodi:linespacing="125%"
+         id="AirportInfoID2"
+         y="112.08984"
+         x="732.99805"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:20px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#80ffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="112.08984"
+           x="732.99805"
+           id="tspan4236"
+           sodipodi:role="line">F</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:20px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#80ffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="743.24805"
+         y="111.96484"
+         id="AirportInfoID3"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text4166"><tspan
+           sodipodi:role="line"
+           id="tspan4240"
+           x="743.24805"
+           y="111.96484">O</tspan></text>
     </g>
   </g>
 </svg>

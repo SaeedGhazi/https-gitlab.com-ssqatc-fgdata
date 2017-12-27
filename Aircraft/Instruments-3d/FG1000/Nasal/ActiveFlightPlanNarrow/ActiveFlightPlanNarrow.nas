@@ -4,27 +4,11 @@ var ActiveFlightPlanNarrow =
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
-      title : "FPL - ACTIVE FLIGHT PLAN",
-      _group : myCanvas.createGroup("ActiveFlightPlanNarrowLayer"),
-      parents : [ NavMap, device.addPage("ActiveFlightPlanNarrow", "ActiveFlightPlanNarrowGroup") ],
-      symbols : {},
+      parents : [
+        ActiveFlightPlanNarrow,
+        MFDPage.new(mfd, myCanvas, device, svg, "ActiveFlightPlanNarrow", "FPL - ACTIVE FLIGHT PLAN")
+      ],
     };
-
-    obj.Styles = fg1000.ActiveFlightPlanNarrowStyles.new();
-    obj.Options = fg1000.ActiveFlightPlanNarrowOptions.new();
-    obj.device = device;
-    obj.mfd = mfd;
-
-    obj.controller = fg1000.ActiveFlightPlanNarrowController.new(obj, svg);
-
-    # Dynamic elements
-    var elements = [
-
-    ];
-
-    foreach (var element; elements) {
-      obj.symbols[element] = svg.getElementById(element);
-    }
 
     var topMenu = func(device, pg, menuitem) {
       pg.clearMenu();
@@ -58,6 +42,8 @@ var ActiveFlightPlanNarrow =
 
     topMenu(device, obj, nil);
 
+    obj.controller = fg1000.ActiveFlightPlanNarrowController.new(obj, svg);
+
     return obj;
   },
   offdisplay : func() {
@@ -70,9 +56,11 @@ var ActiveFlightPlanNarrow =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.controller.offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+    me.controller.ondisplay();
   },
 };

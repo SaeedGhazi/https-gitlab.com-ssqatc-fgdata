@@ -51,9 +51,14 @@ var trim = func(s, lr = 0, istrim = nil) {
 #  string.truncateAt("file.xml", ".txt");                      # "file.xml" -> "file.xml"
 #
 var truncateAt = func(src, match){
-    var pos = find(match,src);
-    if (pos>=0)
-      return substr(src,0,pos);
+    var rv = nil;
+    call(func {
+        if (src != nil and match !=nil) {
+            var pos = find(match,src);
+            if (pos>=0)
+              src=substr(src,0,pos);
+        }
+    }, nil, var err = []);
     return src;
 }
 

@@ -117,12 +117,26 @@ add-on called “Flying Turtle” distributed by Joe User:
       <name type="string">Flying Turtle</name>
       <version type="string">1.0.0rc2</version>
 
-      <authors type="string">
-        Joe user &lt;optional_address@example.com&gt;
-        Jane Maintainer &lt;jane@example.com&gt;
+      <authors>
+        <author>
+          <name type="string">Joe User</name>
+          <email type="string">optional_address@example.com</email>
+          <url type="string">http://joe.example.com/foobar/</url>
+        </author>
+
+        <author>
+          <name type="string">Jane Maintainer</name>
+          <email type="string">jane@example.com</email>
+          <url type="string">https://jane.example.com/</url>
+        </author>
       </authors>
-      <maintainers type="string">
-        Jane Maintainer &lt;jane@example.com&gt;
+
+      <maintainers>
+        <maintainer>
+          <name type="string">Jane Maintainer</name>
+          <email type="string">jane@example.com</email>
+          <url type="string">https://jane.example.com/</url>
+        </maintainer>
       </maintainers>
 
       <short-description type="string">
@@ -213,10 +227,26 @@ Authors and maintainers
 Nodes: /addon/authors and /addon/maintainers
 
 Authors are people who contributed significantly to the add-on.
-Maintainers are people currently in charge of maintaining the add-on.
-These fields are free-form, therefore contents such as “Joe User and
-others” is allowed. However, please stick to the format used in the
-above example if possible.
+Maintainers are people currently in charge of maintaining it.
+
+It is possible to declare any number of authors and any number of
+maintainers---the example above shows only one maintainer for shortness,
+but this is not a restriction.
+
+For each author and maintainer, you can give a name, an email address
+and a URL. The name must be non-empty, but the email address and URL
+need not be specified or may be left empty, which is equivalent.
+Obviously, if no email address nor URL is given for any maintainer, it
+is highly desirable that /addon/urls/support contains a usable URL for
+contacting the add-on maintainers.
+
+The data in children nodes of /addon/maintainers may refer either to
+real persons or to more abstract entities such as mailing-lists. In case
+of a real person, the corresponding URL, if specified, is expected to be
+the person's home page. On the other hand, if a declared “maintainer” is
+a mailing-list, a good use for the 'url' field is to indicate the
+address of a web page from which people can subscribe to the
+mailing-list.
 
 Short and long descriptions
 ===========================
@@ -427,8 +457,15 @@ code easy access to add-on metadata, for instance like this:
   print(myAddon.id);
   print(myAddon.name);
   print(myAddon.version.str());
-  print(myAddon.authors);
-  print(myAddon.maintainers);
+
+  foreach (var author; myAddon.authors) {
+    print(author.name, author.email, author.url);
+  }
+
+  foreach (var maintainer; myAddon.maintainers) {
+    print(maintainer.name, maintainer.email, maintainer.url);
+  }
+
   print(myAddon.shortDescription);
   print(myAddon.longDescription);
   print(myAddon.licenseDesignation);
@@ -481,8 +518,9 @@ Read-only data members (attributes) of addons.Addon objects:
   name                  the add-on “pretty name” (string)
   version               the add-on version (instance of addons.AddonVersion,
                         ghost)
-  authors               the add-on authors (string)
-  maintainers           the add-on maintainers (string)
+  authors               the add-on authors (vector of addons.Author ghosts)
+  maintainers           the add-on maintainers (vector of addons.Maintainer
+                        ghosts)
   shortDescription      the add-on short description (string)
   longDescription       the add-on long description (string)
   licenseDesignation    licensing terms: "GNU GPL version 2 or later",
@@ -530,6 +568,20 @@ Member functions (methods) of addons.AddonVersion objects:
   greaterThan(addons.AddonVersion other)        |
   greaterThanOrEqual(addons.AddonVersion other) |
 
+Read-only data members (attributes) of addons.Author objects:
+
+  name                  author name (non-empty string)
+  email                 email address of the author (string)
+  url                   home page of the author (string)
+
+Read-only data members (attributes) of addons.Maintainer objects:
+
+  name                  maintainer name (non-empty string)
+  email                 email address of the maintainer (string)
+  url                   home page of the maintainer, if a person; if the
+                        maintainer is a mailing-list, the URL can point
+                        to a web page from which people can subscribe to
+                        that mailing-list (string)
 
 Footnotes
 ---------

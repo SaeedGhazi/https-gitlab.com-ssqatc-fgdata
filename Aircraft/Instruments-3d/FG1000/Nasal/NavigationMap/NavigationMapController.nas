@@ -47,6 +47,8 @@ var NavigationMapController =
   # range     - the maximum range this layer is visible (configured by user)
   # max_range - the maximum range value that a user can configure for this layer.
   LAYER_RANGES : {
+    DTO  : { enabled: 0, declutter: 3, range: 2000, max_range: 2000 },
+
     GRID : { enabled: 0, declutter: 1, range: 20, max_range: 2000 },
     DME  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
     VOR  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
@@ -162,6 +164,16 @@ var NavigationMapController =
     device.updateMenus();
     me.updateVisibility();
   },
+
+  # Set the DTO line target
+  setDTOLineTarget : func(lat, lon) {
+    me.page.MFDMap.getLayer("DTO").controller.setTarget(lat,lon);
+  },
+  enableDTO : func(enable) {
+    me.LAYER_RANGES["DTO"].enabled = enable;
+    me.updateVisibility();
+  },
+
   handleFMSInner : func(value) {
     # This page has no use for the FMS knob, so we pass all such
     # events to the pageGroupController which displays the page menu in the

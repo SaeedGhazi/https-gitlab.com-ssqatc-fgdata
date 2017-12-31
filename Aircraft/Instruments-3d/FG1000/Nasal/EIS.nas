@@ -140,7 +140,58 @@ var EIS =
     foreach(var se; me._rotationElements) {
       se.update(me._EISDriver);
     }
+  },
 
-  }
+  # Menu tree .  engineMenu is referenced from most pages as softkey 0:
+  # pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
+
+  engineMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
+    pg.addMenuItem(1, "LEAN", pg, pg.mfd.EIS.leanMenu);
+    pg.addMenuItem(2, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
+    pg.addMenuItem(8, "BACK", pg, pg.topMenu);
+    device.updateMenus();
+  },
+
+  leanMenu : func(device, pg, menuitem) {
+      pg.clearMenu();
+      pg.resetMenuColors();
+      pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
+      pg.addMenuItem(1, "LEAN", pg, pg.mfd.EIS.leanMenu);
+      pg.addMenuItem(2, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
+      pg.addMenuItem(3, "CYL SELECT", pg);
+      pg.addMenuItem(4, "ASSIST", pg);
+      pg.addMenuItem(9, "BACK", pg, pg.mfd.EIS.engineMenu);
+      device.updateMenus();
+  },
+
+  systemMenu : func(device, pg, menuitem) {
+      pg.clearMenu();
+      pg.resetMenuColors();
+      pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
+      pg.addMenuItem(1, "LEAN", pg, pg.mfd.EIS.leanMenu);
+      pg.addMenuItem(2, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
+      pg.addMenuItem(3, "RST FUEL", pg);
+      pg.addMenuItem(4, "GAL REM", pg, pg.mfd.EIS.galRemMenu);
+      pg.addMenuItem(5, "BACK", pg, pg.mfd.EIS.engineMenu);
+      device.updateMenus();
+  },
+
+  galRemMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
+    pg.addMenuItem(1, "LEAN", pg, pg.mfd.EIS.leanMenu);
+    pg.addMenuItem(2, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
+    pg.addMenuItem(3, "-10 GAL", pg);
+    pg.addMenuItem(4, "-1 GAL", pg);
+    pg.addMenuItem(5, "+1 GAL", pg);
+    pg.addMenuItem(6, "+10 GAL", pg);
+    pg.addMenuItem(7, "44 GAL", pg);
+    pg.addMenuItem(8, "BACK", pg, pg.mfd.EIS.engineMenu);
+    device.updateMenus();
+  },
 
 };

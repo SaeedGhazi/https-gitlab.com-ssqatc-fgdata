@@ -2,13 +2,16 @@
 var GroupElement =
 {
 
-new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, style=nil)
+new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, scrollTroughElement=nil, scrollThumbElement=nil, scrollHeight=0, style=nil)
 {
   var obj = {
     parents : [ GroupElement ],
     _pageName : pageName,
     _svg : svg,
     _style : style,
+    _scrollTroughElement : nil,
+    _scrollThumbElement : nil,
+    _scrollBaseTransform : nil,
 
     # A hash mapping keys to the element name prefix of an SVG element
     _elementNames : elementNames,
@@ -27,9 +30,38 @@ new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, style=
     # hidden/shown for highlighting purposes.
     _arrow : arrow,
 
+    # Length of the scroll bar.
+    _scrollHeight : scrollHeight,
+
+    # List of values to display
+    _values : [],
+
+    # List of SVG elements to display the values
     _elements : [],
-    _crsrIndex : -1,       # Cursor index into the elements array
+
+    # Cursor index into the elements array
+    _crsrIndex : -1,
+
+    # Page index
+    _pageIndex : 0,
   };
+
+  # Optional scroll bar elements, consisting of the Thumb and the Trough *,
+  # which will be used to display the scroll position.
+  # * Yes, these are the terms of art for the elements.
+  assert(((scrollTroughElement == nil) and (scrollThumbElement == nil)) or
+         ((scrollTroughElement != nil) and (scrollThumbElement != nil)),
+         "Both the scroll trough element and the scroll thumb element must be defined, or neither");
+
+  if (scrollTroughElement != nil) {
+    obj._scrollTroughElement = svg.getElementById(pageName ~ scrollTroughElement);
+    assert(obj._scrollTroughElement != nil, "Unable to find scroll element " ~ pageName ~ scrollTroughElement);
+  }
+  if (scrollThumbElement != nil) {
+    obj._scrollThumbElement = svg.getElementById(pageName ~ scrollThumbElement);
+    assert(obj._scrollThumbElement != nil, "Unable to find scroll element " ~ pageName ~ scrollThumbElement);
+    obj._scrollBaseTransform = obj._scrollThumbElement.getTranslation();
+  }
 
   if (style == nil) obj._style = PFD.DefaultStyle;
 
@@ -47,22 +79,61 @@ new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, style=
 # Set the values of the group. values_array is an array of hashes, each of which
 # has keys that match those of ._elementNames
 setValues : func (values_array) {
+  me._values = values_array;
+  me._pageIndex = 0;
+  me._crsrIndex = 0;
 
-  # Determine how many of these we display
-  me._currentSize = math.min(me._size, size(values_array));
+  if (size(me._values) > me._size) {
+    # Number of elements exceeds our ability to display them, so enable
+    # the scroll bar.
+    me._scrollThumbElement.setVisible(1);
+    me._scrollTroughElement.setVisible(1);
+  } else {
+    # There is no scrolling to do, so hide the scrollbar.
+    me._scrollThumbElement.setVisible(0);
+    me._scrollTroughElement.setVisible(0);
+  }
+
+  me.displayPage();
+},
+
+nextPage : func() {
+  if (size(me._values) > ((me._pageIndex +1) * me._size)) {
+    me._pageIndex = me._pageIndex + 1;
+    me._crsrIndex = 0;
+    me.displayPage();
+  } else {
+    me._crsrIndex = me._currentSize -1;
+  }
+},
+
+previousPage : func() {
+  if (me._pageIndex > 0) {
+    me._pageIndex = me._pageIndex - 1;
+    me._crsrIndex = me._size -1;
+    me.displayPage();
+  } else {
+    me._crsrIndex = 0;
+  }
+},
+
+displayPage : func () {
+  # Determine how many elements to display in this page
+  me._currentSize = math.min(me._size, size(me._values) - me._size * me._pageIndex);
 
   for (var i = 0; i < me._currentSize; i = i + 1) {
-    var values = values_array[i];
-    foreach (var k; keys(values)) {
+    var value = me._values[i + me._size * me._pageIndex];
+    foreach (var k; keys(value)) {
       if (k == me._highlightElement) {
+        me._elements[i].setVisible(1);
         me._elements[i].unhighlightElement();
-        me._elements[i].setValue(values[k]);
+        me._elements[i].setValue(value[k]);
       } else {
         var name = me._pageName ~ k ~ i;
         var element  = me._svg.getElementById(name);
         assert(element != nil, "Unable to find element " ~ name);
         element.setVisible(1);
-        element.setText(values[k]);
+        element.setText(value[k]);
       }
     }
   }
@@ -73,14 +144,27 @@ setValues : func (values_array) {
       foreach (var k; me._elementNames) {
         if (k == me._highlightElement) {
           me._elements[i].setVisible(0);
+          me._elements[i].setValue("");
         } else {
-          me._svg.getElementById(k ~ i).setVisible(0);
+        var name = me._pageName ~ k ~ i;
+        var element  = me._svg.getElementById(name);
+        assert(element != nil, "Unable to find element " ~ name);
+        element.setVisible(0);
+        element.setText("");
         }
       }
     }
   }
-},
 
+  if ((me._scrollThumbElement != nil) and (me._size < size(me._values))) {
+    # Shift the scrollbar if it's relevant
+    var numScrollPositions = math.ceil(size(me._values) / me._size) -1;
+    me._scrollThumbElement.setTranslation([
+      me._scrollBaseTransform[0],
+      me._scrollBaseTransform[1] + me._scrollHeight * (me._pageIndex / numScrollPositions)
+    ]);
+  }
+},
 
 # Methods to add dynamic elements to the group.  Must be called in the
 # scroll order, as they are simply appended to the end of the list of elements!
@@ -126,6 +210,7 @@ clearElement : func() {
 },
 incrSmall : func(value) {
   if (me._crsrIndex == -1) return;
+
   var incr_or_decr = (value > 0) ? 1 : -1;
   if (me._elements[me._crsrIndex].isInEdit()) {
     # We're editing, so pass to the element.
@@ -134,7 +219,12 @@ incrSmall : func(value) {
   } else {
     # Move to next selection element
     me._elements[me._crsrIndex].unhighlightElement();
-    me._crsrIndex = math.mod(me._crsrIndex + incr_or_decr, me._currentSize);
+
+    me._crsrIndex = me._crsrIndex + incr_or_decr;
+
+    if (me._crsrIndex <  0              ) me.previousPage();
+    if (me._crsrIndex == me._currentSize) me.nextPage();
+
     me._elements[me._crsrIndex].highlightElement();
   }
 },
@@ -148,7 +238,12 @@ incrLarge : func(val) {
   } else {
     # Move to next selection element
     me._elements[me._crsrIndex].unhighlightElement();
-    me._crsrIndex = math.mod(me._crsrIndex + incr_or_decr, me._currentSize);
+
+    me._crsrIndex = me._crsrIndex + incr_or_decr;
+
+    if (me._crsrIndex <  0              ) me.previousPage();
+    if (me._crsrIndex == me._currentSize) me.nextPage();
+
     me._elements[me._crsrIndex].highlightElement();
   }
 },

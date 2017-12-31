@@ -66,7 +66,13 @@ var MFD =
 {
   new : func (myCanvas)
   {
-    var obj = { parents : [ MFD ] };
+    var obj = {
+      parents : [ MFD ],
+      EIS : nil,
+      NavigationMap: nil,
+
+
+    };
 
     obj._svg = myCanvas.createGroup("softkeys");
 
@@ -99,20 +105,23 @@ var MFD =
 
     # Engine Information System
     obj._eisDriver = fg1000.EISDriver.new();
-    obj._eis = fg1000.EIS.new(myCanvas, obj._eisDriver);
+    obj.EIS = fg1000.EIS.new(myCanvas, obj._eisDriver);
 
     # Controller for the display on the bottom left which allows selection
     # of page groups and individual pages using the FMS controller.
     obj._pageGroupController = fg1000.PageGroupController.new(myCanvas, obj._svg, obj._MFDDevice);
 
-    foreach (var page; MFDPages) {
-      var code = "obj._pageGroupController.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
-      var addPageFn = compile(code);
-      addPageFn();
-    }
-
     # The NavigationMap page is a special case, as it is displayed with the Nearest... pages as an overlay
-    obj.NavigationMap = obj._pageGroupController.getPage("NavigationMap");
+    obj.NavigationMap = obj._pageGroupController.addPage("NavigationMap", fg1000.NavigationMap.new(obj, myCanvas, obj._MFDDevice, obj._svg));
+    obj.NavigationMap.topMenu(obj._MFDDevice, obj.NavigationMap, nil);
+
+    foreach (var page; MFDPages) {
+      if (page != "NavigationMap") {
+        var code = "obj._pageGroupController.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
+        var addPageFn = compile(code);
+        addPageFn();
+      }
+    }
 
     # Display the NavMap and the appropriate top level on startup.
     obj._MFDDevice.selectPage(obj.NavigationMap);
@@ -129,7 +138,7 @@ var MFD =
 
     var updateTimer = func() {
       obj._eisDriver.update();
-      obj._eis.update();
+      obj.EIS.update();
       settimer(updateTimer, 0.1);
     };
 

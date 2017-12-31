@@ -63,6 +63,15 @@ setTextElement : func(symbolName, value) {
   assert(sym != nil, "Unknown text element " ~ symbolName ~ " (check your addTextElements call?)");
   if (value == nil ) value = "";
   sym.setValue(value);
-}
+},
+
+# Function to undo any colors set by display_toggle when loading a new menu
+resetMenuColors : func() {
+  for(var i = 0; i < 12; i +=1) {
+    var name = sprintf("SoftKey%d",i);
+    me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
+    me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
+  }
+},
 
 };

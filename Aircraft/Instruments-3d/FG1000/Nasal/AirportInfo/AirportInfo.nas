@@ -163,7 +163,7 @@ var AirportInfo =
     # runways displayed twice.
     var rwys = [];
     var recips = {};
-    foreach(var rwy; keys(apt_info.runways)) {
+    foreach(var rwy; sort(keys(apt_info.runways), string.icmp)) {
       var rwy_info = apt_info.runways[rwy];
       if (recips[rwy_info.id] == nil) {
         var lbl = rwy_info.id ~ "-" ~ rwy_info.reciprocal.id;

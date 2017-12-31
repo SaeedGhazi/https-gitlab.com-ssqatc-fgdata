@@ -99,8 +99,15 @@ var NearestAirportsController =
 
         if ((rwy != nil) and (rwy != "")) {
           var apt_info = airportinfo(apt_id);
-          var rwy_info = apt_info.runways[rwy];
-          me.page.updateRunwayInfo(rwy_info);
+
+          # Names in the runway selection are of the form "NNN-MMM", e.g. 11R-29L
+          # We just want the first of these.
+          var idx = find("-", rwy);
+          if (idx != -1) {
+            rwy = substr(rwy, 0, idx);
+            var rwy_info = apt_info.runways[rwy];
+            me.page.updateRunwayInfo(rwy_info);
+          }
         }
       }
 
@@ -203,8 +210,10 @@ var NearestAirportsController =
     me._currentGroup = NearestAirportsController.UIGROUP.NONE;
     me.RegisterWithEmesary();
     me.getAirports();
+    me.page.mfd.NavigationMap.controller.enableDTO(1);
   },
   offdisplay : func() {
+    me.page.mfd.NavigationMap.controller.enableDTO(0);
     me.DeRegisterWithEmesary();
   },
 };

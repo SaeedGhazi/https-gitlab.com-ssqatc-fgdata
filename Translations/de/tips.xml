@@ -16,23 +16,23 @@
 ### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
-<!-- 	<tip n="0">???</tip> -->   <!-- English: "Drag while holding the right mouse button to look around" -->
-<!-- 	<tip n="1">???</tip> -->   <!-- English: "Hold [Shift] while looking around to move the view up, down, left or right" -->
-	<tip n="2">Tasten a/A drücken, um die Simulationsgeschwindigkeit anzupassen</tip>   <!-- English: "Press a/A to adjust the simulation speed" -->
-<!-- 	<tip n="3">???</tip> -->   <!-- English: "Press x/X to zoom in and out" -->
-<!-- 	<tip n="4">???</tip> -->   <!-- English: "Find frequencies of nearby ATC services from the Radios dialog" -->
-	<tip n="5">Taste v drücken, um die Perspektive zu wechseln. Strg-V kehrt ins Cockpit zurück</tip>   <!-- English: "Press v to change your viewpoint, Ctrl-V to return to the cockpit" -->
-	<tip n="6">Drücke F3, um ein Bildschirmfoto zu erstellen</tip>   <!-- English: "Press F3 to take a screenshot" -->
-<!-- 	<tip n="7">???</tip> -->   <!-- English: "Join the FlightGear community at http://forum.flightgear.org" -->
-<!-- 	<tip n="8">???</tip> -->   <!-- English: "Press h to bring up a Heads Up Display" -->
-	<tip n="9">Drücke F10, um die Menüzeile ein-/auszublenden</tip>   <!-- English: "Show or hide the menu bar by pressing F10" -->
-	<tip n="10">Ruckelt die Simulation? Versuche z.B. den KI Verkehr abzuschalten</tip>   <!-- English: "Frame-rate too low? - try disabling AI traffic" -->
-	<tip n="11">Wähle Umgebung → Wetter, um in verschiedenen Wetterlagen zu fliegen</tip>   <!-- English: "Select Environment → Weather to fly in different weather" -->
-<!-- 	<tip n="12">???</tip> -->   <!-- English: "Press F12 to change the radio frequencies easily" -->
-<!-- 	<tip n="13">???</tip> -->   <!-- English: "Look around by holding down the right mouse button and moving the mouse" -->
-<!-- 	<tip n="14">???</tip> -->   <!-- English: "Select Multiplayer → Multiplayer Settings to join the shared flight environment" -->
+	<tip n="0">Zum Steuern der Blickrichtung die Maus bei gedrückter rechter Taste bewegen!</tip>   <!-- English: "Drag while holding the right mouse button to look around" -->
+	<tip n="1">Halte beim Ändern der Blickrichtung [Shift] gedrückt, um den Blick nach oben/unten/links/rechts zu bewegen.</tip>   <!-- English: "Hold [Shift] while looking around to move the view up, down, left or right" -->
+	<tip n="2">Tasten a/A drücken, um die Simulationsgeschwindigkeit anzupassen.</tip>   <!-- English: "Press a/A to adjust the simulation speed" -->
+	<tip n="3">Drücke x/X um rein oder raus zu zoomen</tip>   <!-- English: "Press x/X to zoom in and out" -->
+	<tip n="4">Die Frequenzen der umliegenden ATC Stationen können über den Radio-Dialog gefunden werden.</tip>   <!-- English: "Find frequencies of nearby ATC services from the Radios dialog" -->
+	<tip n="5">Drücke v, um die Perspektive zu wechseln. Strg-V kehrt ins Cockpit zurück.</tip>   <!-- English: "Press v to change your viewpoint, Ctrl-V to return to the cockpit" -->
+	<tip n="6">Drücke F3, um ein Bildschirmfoto zu erstellen.</tip>   <!-- English: "Press F3 to take a screenshot" -->
+	<tip n="7">Trete der FlightGear Community bei: http://forum.flightgear.org</tip>   <!-- English: "Join the FlightGear community at http://forum.flightgear.org" -->
+	<tip n="8">Drücke h, um das Heads-Up-Display zu aktivieren.</tip>   <!-- English: "Press h to bring up a Heads Up Display" -->
+	<tip n="9">Drücke F10, um die Menüzeile ein-/auszublenden.</tip>   <!-- English: "Show or hide the menu bar by pressing F10" -->
+	<tip n="10">Ruckelt die Simulation? Versuche z.B. den KI Verkehr abzuschalten.</tip>   <!-- English: "Frame-rate too low? - try disabling AI traffic" -->
+	<tip n="11">Wähle Umgebung → Wetter, um in verschiedenen Wetterlagen zu fliegen.</tip>   <!-- English: "Select Environment → Weather to fly in different weather" -->
+	<tip n="12">Drücke F12, um die Funk-Frequenzen einzustellen!</tip>   <!-- English: "Press F12 to change the radio frequencies easily" -->
+	<tip n="13">Zum Steuern der Blickrichtung die Maus bei gedrückter rechter Taste bewegen!</tip>   <!-- English: "Look around by holding down the right mouse button and moving the mouse" -->
+	<tip n="14">Wähle Multiplayer → Multiplayer Konfiguration um gemeinsam mit anderen Piloten zu fliegen!</tip>   <!-- English: "Select Multiplayer → Multiplayer Settings to join the shared flight environment" -->
 	<tip n="15">Probleme den Motor zu starten? Siehe Hilfe → Aircraft Checklists</tip>   <!-- English: "Can't get the engine started? - see Help → Aircraft Checklists" -->
-<!-- 	<tip n="16">???</tip> -->   <!-- English: "Drag while holding the middle and right mouse buttons to move the viewpoint" -->
-	<tip n="17">Drücke "/", um Internas des Simulators zu erkunden</tip>   <!-- English: "Press / to explore the internals of the simulator" -->
-<!-- 	<tip n="18">???</tip> -->   <!-- English: "Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom" -->
+	<tip n="16">Zum Steuern des Standpunkts die Maus bei gedrückter mittlerer und rechter Taste bewegen!</tip>   <!-- English: "Drag while holding the middle and right mouse buttons to move the viewpoint" -->
+	<tip n="17">Drücke "/", um Internas des Simulators zu erkunden!</tip>   <!-- English: "Press / to explore the internals of the simulator" -->
+	<tip n="18">Drücke TAB, um den Standpunkt mit der Maus zu bewegen und mit dem Scroll-Rad zu zoomen!</tip>   <!-- English: "Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom" -->
 </PropertyList>

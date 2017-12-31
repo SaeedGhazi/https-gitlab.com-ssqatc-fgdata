@@ -32,7 +32,7 @@
 	<input-config>Maus-Konfiguration</input-config>   <!-- English: "Mouse Configuration" -->
 	<joystick-config>Joystick-Konfiguration</joystick-config>   <!-- English: "Joystick Configuration" -->
 	<terrasync>Herunterladen der Szenerie</terrasync>   <!-- English: "Scenery Download" -->
-<!-- 	<aircraft-center>???</aircraft-center> -->   <!-- English: "Aircraft Center (Experimental)" -->
+	<aircraft-center>Flugzeug-Hangar (experimentell)</aircraft-center>   <!-- English: "Aircraft Center (Experimental)" -->
 	<exit>Beenden</exit>   <!-- English: "Quit" -->
 
 	<!-- View menu -->

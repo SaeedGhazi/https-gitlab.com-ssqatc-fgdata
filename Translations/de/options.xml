@@ -33,7 +33,7 @@
 	<fg-scenery-desc n="0">Konfiguriert den Pfad zu den Szeneriedaten;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">Voreinstellung ist $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 	<fg-aircraft-desc>Konfiguriert Verzeichnisse mit zusätzlichen Flugzeugen</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
-<!-- 	<download-dir-desc>???</download-dir-desc> -->   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
+	<download-dir-desc>Verzeichnis für heruntergeladene Flugzeuge und Szenerie</download-dir-desc>   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Auswahl der Sprache</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Startbildschirm deaktivieren</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Startbildschirm aktivieren</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
@@ -71,8 +71,8 @@
 	<config-desc>Pfad zu einer zusätzlichen Konfigurationsdatei mit benutzerdefinierten Einstellungen</config-desc>   <!-- English: "Load additional properties from path" -->
 	<units-feet-desc>Fuß für Entfernungen verwenden</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Meter für Entfernungen verwenden</units-meters-desc>   <!-- English: "Use meters for distances" -->
-<!-- 	<console-desc>???</console-desc> -->   <!-- English: "Display console (Windows specific)" -->
-<!-- 	<json-report-desc>???</json-report-desc> -->   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
+	<console-desc>Konsole anzeigen (nur für Windows)</console-desc>   <!-- English: "Display console (Windows specific)" -->
+	<json-report-desc>Einen Report im JSON-Format ausgeben. Enthält Details über die FlightGear Version und Einstellungen.</json-report-desc>   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
 
 	<!-- Features options -->
 	<environment-options>Umgebungs-Optionen</environment-options>   <!-- English: "Environment Options" -->
@@ -155,8 +155,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Grafikoptionen</rendering-options>   <!-- English: "Rendering Options" -->
-<!-- 	<enable-rembrandt-desc>???</enable-rembrandt-desc> -->   <!-- English: "Enable Rembrandt rendering" -->
-<!-- 	<disable-rembrandt-desc>???</disable-rembrandt-desc> -->   <!-- English: "Disable Rembrandt rendering" -->
+	<enable-rembrandt-desc>Rembrandt Rendering-Engine aktivieren</enable-rembrandt-desc>   <!-- English: "Enable Rembrandt rendering" -->
+	<disable-rembrandt-desc>Rembrandt Rendering-Engine deaktivieren</disable-rembrandt-desc>   <!-- English: "Disable Rembrandt rendering" -->
 	<bpp-desc>Bits pro Pixel angeben</bpp-desc>   <!-- English: "Specify the bits per pixel" -->
 	<fog-disable-desc>Nebel/Dunst deaktivieren</fog-disable-desc>   <!-- English: "Disable fog/haze" -->
 	<fog-fastest-desc>Schnellere Darstellung von Nebel/Dunst</fog-fastest-desc>   <!-- English: "Enable fastest fog/haze" -->
@@ -214,8 +214,8 @@
 	<disable-terrasync-desc>Automatischen Download/Update von Szenerie deaktivieren</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
 	<enable-terrasync-desc>Automatischen Download/Update von Szenerie aktivieren</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
 	<terrasync-dir-desc>Zielverzeichnis für Szenerie-Downloads</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->
-<!-- 	<enable-fgcom-desc>???</enable-fgcom-desc> -->   <!-- English: "Enable FGCom built-in" -->
-<!-- 	<disable-fgcom-desc>???</disable-fgcom-desc> -->   <!-- English: "Disable FGCom built-in" -->
+	<enable-fgcom-desc>FGCom Sprachkommunikation aktivieren</enable-fgcom-desc>   <!-- English: "Enable FGCom built-in" -->
+	<disable-fgcom-desc>FGCom Sprachkommunikation deaktivieren</disable-fgcom-desc>   <!-- English: "Disable FGCom built-in" -->
 
 	<!-- MultiPlayer options -->
 	<multiplayer-options>Multiplayer-Optionen</multiplayer-options>   <!-- English: "MultiPlayer Options" -->

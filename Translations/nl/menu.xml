@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-13 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -26,13 +26,18 @@
 	<reset>Opnieuw starten</reset>   <!-- English: "Reset" -->
 	<load-tape>Vluchtrecorder data laden</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
 	<save-tape>Vluchtrecorder data opslaan</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
-	<snap-shot>Screenshot</snap-shot>   <!-- English: "Screenshot  " -->
+	<snap-shot>Screenshot</snap-shot>   <!-- English: "Screenshot" -->
 	<snap-shot-dir>Screenshotmap</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Audio instellingen</sound-config>   <!-- English: "Sound Configuration" -->
-	<exit>Afsluiten</exit>   <!-- English: "Quit          " -->
+<!-- 	<input-config>???</input-config> -->   <!-- English: "Mouse Configuration" -->
+	<joystick-config>Joystick instellingen</joystick-config>   <!-- English: "Joystick Configuration" -->
+	<terrasync>Scenery downloaden</terrasync>   <!-- English: "Scenery Download" -->
+<!-- 	<aircraft-center>???</aircraft-center> -->   <!-- English: "Aircraft Center (Experimental)" -->
+	<exit>Afsluiten</exit>   <!-- English: "Quit" -->
 
 	<!-- View menu -->
 	<view>Beeld</view>   <!-- English: "View" -->
+<!-- 	<toggle-fullscreen>???</toggle-fullscreen> -->   <!-- English: "Toggle Fullscreen" -->
 	<rendering-options>Weergave instellingen</rendering-options>   <!-- English: "Rendering Options" -->
 	<view-options>Zicht instellingen</view-options>   <!-- English: "View Options" -->
 	<cockpit-view-options>Cockpit zicht instellingen</cockpit-view-options>   <!-- English: "Cockpit View Options" -->
@@ -63,17 +68,18 @@
 	<environment-settings>Omgevingsinstellingen</environment-settings>   <!-- English: "Environment Settings" -->
 	<time-settings>Tijdsinstellingen</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Bosbrand instellingen</wildfire-settings>   <!-- English: "Wildfire Settings" -->
-	<terrasync>Scenery downloaden</terrasync>   <!-- English: "Scenery Download" -->
 
 	<!-- Equipment menu -->
 	<equipment>Uitrusting</equipment>   <!-- English: "Equipment" -->
 	<map>Kaart</map>   <!-- English: "Map" -->
+<!-- 	<map-canvas>???</map-canvas> -->   <!-- English: "Map (Canvas)" -->
+<!-- 	<map-browser>???</map-browser> -->   <!-- English: "Map (opens in browser)" -->
 	<stopwatch>Stopwatch</stopwatch>   <!-- English: "Stopwatch" -->
 	<fuel-and-payload>Brandstof en vracht</fuel-and-payload>   <!-- English: "Fuel and Payload" -->
 	<radio>Radio instellingen</radio>   <!-- English: "Radio Settings" -->
 	<gps>GPS instellingen</gps>   <!-- English: "GPS Settings" -->
 	<instrument-settings>Instrument instellingen</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu>--- Storingen ---</failure-submenu>   <!-- English: " -_- Failures -_-" -->
+	<failure-submenu>--- Storingen ---</failure-submenu>   <!-- English: "-_- Failures -_-" -->
 	<random-failures>Willekeurige storingen</random-failures>   <!-- English: "Random Failures" -->
 	<system-failures>Systeemstoringen</system-failures>   <!-- English: "System Failures" -->
 	<instrument-failures>Instrumentstoringen</instrument-failures>   <!-- English: "Instrument Failures" -->
@@ -90,10 +96,12 @@
 	<!-- Multiplayer menu -->
 	<multiplayer>Multiplayer</multiplayer>   <!-- English: "Multiplayer" -->
 	<mp-settings>Multiplayer instellingen</mp-settings>   <!-- English: "Multiplayer Settings" -->
+<!-- 	<fgcom-settings>???</fgcom-settings> -->   <!-- English: "FGCom Settings" -->
 	<mp-chat>Chatvenster</mp-chat>   <!-- English: "Chat Dialog" -->
 	<mp-chat-menu>Chatmenu</mp-chat-menu>   <!-- English: "Chat Menu" -->
 	<mp-list>Pilotenlijst</mp-list>   <!-- English: "Pilot List" -->
 	<mp-carrier>MP vliegdekschip selectie</mp-carrier>   <!-- English: "MPCarrier Selection" -->
+<!-- 	<lag-adjust>???</lag-adjust> -->   <!-- English: "Lag Settings" -->
 
 	<!-- Debug menu -->
 	<debug>Debug</debug>   <!-- English: "Debug" -->
@@ -109,6 +117,7 @@
 	<reload-materials>Materialen herladen</reload-materials>   <!-- English: "Reload Materials" -->
 	<reload-scenery>Scenery herladen</reload-scenery>   <!-- English: "Reload Scenery" -->
 	<nasal-console>Nasal console</nasal-console>   <!-- English: "Nasal Console" -->
+<!-- 	<nasal-repl-interpreter>???</nasal-repl-interpreter> -->   <!-- English: "Nasal REPL Interpreter" -->
 	<development-keys>Ontwikkelingstoetsen</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Ontwikkelingsextensies beheren</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
 	<display-marker>Tutorial marker weergeven</display-marker>   <!-- English: "Display Tutorial Marker" -->
@@ -116,23 +125,24 @@
 	<print-rendering-statistics>Weergavestatistieken printen</print-rendering-statistics>   <!-- English: "Print Rendering Statistics" -->
 	<statistics-display>Blader door schermstatiestieken</statistics-display>   <!-- English: "Cycle On-Screen Statistics" -->
 	<performance-monitor>Monitor systeemprestaties</performance-monitor>   <!-- English: "Monitor System Performance" -->
-        <write-video-config>Bewaar Video configuratie</write-video-config>   <!-- English: "Save Video configuration" -->
+	<write-video-config>Bewaar Video configuratie</write-video-config>   <!-- English: "Save Video Configuration" -->
 	<property-browser>Blader door interne eigenschappen</property-browser>   <!-- English: "Browse Internal Properties" -->
+<!-- 	<fg1000>???</fg1000> -->   <!-- English: "FG1000 MFD" -->
 	<logging>Logging</logging>   <!-- English: "Logging" -->
 	<local_weather>Local weather (test)</local_weather>   <!-- English: "Local Weather (Test)" -->
 	<print-scene-info>Print zichtbare scene informatie</print-scene-info>   <!-- English: "Print Visible Scene Info" -->
 	<rendering-buffers>Verberg/toon weergave buffers</rendering-buffers>   <!-- English: "Hide/Show Rendering Buffers" -->
 	<rembrandt-buffers-choice>Selecteer weergave buffers</rembrandt-buffers-choice>   <!-- English: "Select Rendering Buffers" -->
+<!-- 	<interface-config>???</interface-config> -->   <!-- English: "User-interface options" -->
 
 	<!-- Help menu -->
 	<help>Help</help>   <!-- English: "Help" -->
-	<help-browser>Help (opent in browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<help-browser>Help (opent in browser)</help-browser>   <!-- English: "Help (opens in browser)" -->
 	<doc-browser>Documentatie browser</doc-browser>   <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Vliegtuig help</aircraft-keys>   <!-- English: "Aircraft Help" -->
 	<aircraft-checklists>Vliegtuig checklists</aircraft-checklists>   <!-- English: "Aircraft Checklists" -->
 	<common-keys>Algemene toetsencombinaties</common-keys>   <!-- English: "Common Aircraft Keys" -->
 	<basic-keys>Simulator toetsencombinaties</basic-keys>   <!-- English: "Basic Simulator Keys" -->
-	<joystick-config>Joystick instellingen</joystick-config>   <!-- English: "Joystick Configuration" -->
 	<joystick-info>Joystick informatie</joystick-info>   <!-- English: "Joystick Information" -->
 	<tutorial-start>Tutorials</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Over</menu-about>   <!-- English: "About" -->
@@ -141,8 +151,8 @@
 	<select-livery>Kies uitvoering</select-livery>   <!-- English: "Select livery" -->
 	<show-hide-yokes>Toon/verberg yokes</show-hide-yokes>   <!-- English: "Show/hide yokes" -->
 	<immatriculation>Registratie</immatriculation>   <!-- English: "Immatriculation" -->
-	<pushback>Pushback</pushback>   <!-- English: "Pushbac" -->
+	<pushback>Pushback</pushback>   <!-- English: "Pushback" -->
 	<autostart>Automatisch starten</autostart>   <!-- English: "Autostart" -->
 	<tiller-steering>Tiller besturing</tiller-steering>   <!-- English: "Tiller Steering" -->
-	
+
 </PropertyList>

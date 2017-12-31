@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -32,7 +32,8 @@
 	<fg-root-desc>Konfiguration des FlightGear Datenverzeichnisses</fg-root-desc>   <!-- English: "Specify the root data path" -->
 	<fg-scenery-desc n="0">Konfiguriert den Pfad zu den Szeneriedaten;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">Voreinstellung ist $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
-	<fg-aircraft-desc>Konfiguriert Verzeichnisse mit zusätzlichen Flugzeugen</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s)" -->
+	<fg-aircraft-desc>Konfiguriert Verzeichnisse mit zusätzlichen Flugzeugen</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
+<!-- 	<download-dir-desc>???</download-dir-desc> -->   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Auswahl der Sprache</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Startbildschirm deaktivieren</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Startbildschirm aktivieren</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
@@ -50,7 +51,7 @@
 	<enable-random-buildings-desc>Zufällige Gebäude anzeigen</enable-random-buildings-desc>   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>METAR-basierten Download von realem Wetter deaktivieren</disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>METAR-basierten Download von realem Wetter aktivieren (setzt eine fuktionierende Internetverbindung voraus)</enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
-	<metar-desc>Einen METAR eingeben, um statisches Wetter einzustellen</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->
+	<metar-desc>Einen METAR eingeben, um statisches Wetter einzustellen</metar-desc>   <!-- English: "Pass a METAR string to set up static weather (this implies -_disable-real-weather-fetch)" -->
 	<random-objects-desc>(Gebäude, etc.)</random-objects-desc>   <!-- English: "(buildings, etc.)" -->
 	<disable-ai-models-desc>Veraltete Option (internes KI-Subsystem deaktivieren)</disable-ai-models-desc>   <!-- English: "Deprecated option (disable internal AI subsystem)" -->
 	<enable-ai-models-desc>KI-Subsystem aktivieren (erforderlich für Multiplayer, KI-Verkehr und viele andere Animationen</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
@@ -70,6 +71,8 @@
 	<config-desc>Pfad zu einer zusätzlichen Konfigurationsdatei mit benutzerdefinierten Einstellungen</config-desc>   <!-- English: "Load additional properties from path" -->
 	<units-feet-desc>Fuß für Entfernungen verwenden</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Meter für Entfernungen verwenden</units-meters-desc>   <!-- English: "Use meters for distances" -->
+<!-- 	<console-desc>???</console-desc> -->   <!-- English: "Display console (Windows specific)" -->
+<!-- 	<json-report-desc>???</json-report-desc> -->   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
 
 	<!-- Features options -->
 	<environment-options>Umgebungs-Optionen</environment-options>   <!-- English: "Environment Options" -->
@@ -91,7 +94,7 @@
 <!-- 	<vehicle-desc>???</vehicle-desc> -->   <!-- English: "Select an vehicle profile as defined by a top level &lt;name&gt;-set.xml" -->
 	<livery-desc>Lackierung des Flugzeugs auswählen</livery-desc>   <!-- English: "Select aircraft livery" -->
 
-	<!-- Flight Dynamics Model-Optionen -->
+	<!-- Flight Dynamics Model options -->
 	<fdm-options>Optionen für die Flugphysik</fdm-options>   <!-- English: "Flight Model" -->
 	<fdm-desc n="0">Wähle das grundlegende Flugdynamikmodell aus</fdm-desc>   <!-- English: "Select the core flight dynamics model" -->
 	<fdm-desc n="1">Entweder jsb, larcsim, yasim, magic, balloon, ada, external, oder null</fdm-desc>   <!-- English: "Can be one of jsb, larcsim, yasim, magic, balloon, ada, external, or null" -->
@@ -108,7 +111,7 @@
 	<random-wind-desc>Zufällige Windrichtung und -geschwindigkeit</random-wind-desc>   <!-- English: "Set up random wind direction and speed" -->
 	<turbulence-desc>Angabe der Stärke der Turbulenz von 0.0 (gar keine) bis 1.0 (sehr stark)</turbulence-desc>   <!-- English: "Specify turbulence from 0.0 (calm) to 1.0 (severe)" -->
 	<ceiling-desc>Einen Wolkendecke erstellen, optional mit einer bestimmten Dicke (Standard ist 2000 ft)</ceiling-desc>   <!-- English: "Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft)." -->
-	<aircraft-dir-desc>Flugzeug-Verzeichnis relativ zum Pfad zu fgfs.exe</aircraft-dir-desc>   <!-- English: "Aircraft directory relative to the path of the executable" -->
+	<aircraft-dir-desc>Flugzeug-Verzeichnis relativ zum Pfad zu fgfs.exe</aircraft-dir-desc>   <!-- English: "Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as -_fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed." -->
 
 	<aircraft-model-options>Pfad zur FDM-Datei (NUR FÜR FLUGZEUGE MIT UIUC-FDM)</aircraft-model-options>   <!-- English: "Aircraft model directory (UIUC FDM ONLY)" -->
 
@@ -118,7 +121,7 @@
 	<parking-id-desc>Auswahl einer Parkposition am ausgewählten Flughafen</parking-id-desc>   <!-- English: "Specify parking position at an airport (must also specify an airport)" -->
 	<carrier-desc>Auswahl einer Startposition auf einem Flugzeugträger</carrier-desc>   <!-- English: "Specify starting position on an AI carrier" -->
 	<parkpos-desc>Eine Parkposition auf dem angegebenen Flugzeugträger wählen</parkpos-desc>   <!-- English: "Specify which starting position on an AI carrier (must also specify a carrier)" -->
-	<vor-desc>Startposition relativ zu einem VOR angeben</vor-desc>  <!-- English: "Specify starting position relative to a VOR" -->
+	<vor-desc>Startposition relativ zu einem VOR angeben</vor-desc>   <!-- English: "Specify starting position relative to a VOR" -->
 	<vor-freq-desc>Die Frequenz des VOR angeben. Verwendung zusamen mit --vor=ID</vor-freq-desc>   <!-- English: "Specify the frequency of the VOR. Use with -_vor=ID" -->
 	<ndb-desc>Startposition relativ zu einem NDB angeben</ndb-desc>   <!-- English: "Specify starting position relative to an NDB" -->
 	<ndb-freq-desc>Die Frequenz des NDB angeben. Verwendung zusamen mit --ndb=ID</ndb-freq-desc>   <!-- English: "Specify the frequency of the NDB. Use with -_ndb=ID" -->
@@ -152,6 +155,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Grafikoptionen</rendering-options>   <!-- English: "Rendering Options" -->
+<!-- 	<enable-rembrandt-desc>???</enable-rembrandt-desc> -->   <!-- English: "Enable Rembrandt rendering" -->
+<!-- 	<disable-rembrandt-desc>???</disable-rembrandt-desc> -->   <!-- English: "Disable Rembrandt rendering" -->
 	<bpp-desc>Bits pro Pixel angeben</bpp-desc>   <!-- English: "Specify the bits per pixel" -->
 	<fog-disable-desc>Nebel/Dunst deaktivieren</fog-disable-desc>   <!-- English: "Disable fog/haze" -->
 	<fog-fastest-desc>Schnellere Darstellung von Nebel/Dunst</fog-fastest-desc>   <!-- English: "Enable fastest fog/haze" -->
@@ -176,10 +181,10 @@
 	<shading-smooth-desc>Weiche Schattierung</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
 	<disable-textures-desc>Texturen deaktivieren</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Texturen aktivieren</enable-textures-desc>   <!-- English: "Enable textures" -->
-	<materials-file-desc>Die Materials-Datei angeben, die zur Darstellung der Szenerie verwendet wird (Standard: materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->
+	<materials-file-desc>Die Materials-Datei angeben, die zur Darstellung der Szenerie verwendet wird (Standard: materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)" -->
 	<texture-filtering-desc>Anisotropische Texturfilterung: Wert sollte 1 (Standard), 2, 4, 8, oder 16 sein</texture-filtering-desc>   <!-- English: "Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16" -->
 	<disable-wireframe-desc>Drahtgitterdarstellung deaktivieren</disable-wireframe-desc>   <!-- English: "Disable wireframe drawing mode" -->
-	<enable-wireframe-desc>Drahtgitterdarstellung aktivieren</enable-wireframe-desc> <!-- English: "Enable wireframe drawing mode" -->
+	<enable-wireframe-desc>Drahtgitterdarstellung aktivieren</enable-wireframe-desc>   <!-- English: "Enable wireframe drawing mode" -->
 	<geometry-desc>Fensterabmessungen angeben (z.B. 800x600, 1280x720, etc.)</geometry-desc>   <!-- English: "Specify window geometry (640x480, etc)" -->
 	<view-offset-desc>Die stadardmäßige Nach-Vorne-Blickrichtung angeben als Abweichung von geradeaus. Erlaubte Werte sind LEFT, RECHTS, CENTER, oder eine spezifische Angabe in Grad</view-offset-desc>   <!-- English: "Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees" -->
 	<visibility-desc>Die anfängliche Sichtweite in Metern angeben</visibility-desc>   <!-- English: "Specify initial visibility" -->
@@ -202,16 +207,18 @@
 
 	<!-- Network options -->
 	<network-options>Netzwerk</network-options>   <!-- English: "Network Options" -->
-	<httpd-desc>Einen HTTP-Server am angegebenen Port aktivieren</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
+	<httpd-desc>Einen HTTP-Server am angegebenen Port aktivieren</httpd-desc>   <!-- English: "Enable http server on the specified address. Specify the port or address:port to bind to." -->
 	<proxy-desc>Den zu verwendenden Proxy-Server (und Port) angeben. Nutzername und Passwort sind frei wählbar und sollten bereits MD5-codiert sein. Nur sinnvoll in Verbindung mit der Option "--real-weather-fetch"</proxy-desc>   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Telnet-Server am angegebenen Port aktivieren</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Screenshot-HTTP-Server am angegeben Port aktivieren</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Screenshot-HTTP-Server am angegeben Port aktivieren</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port (replaced by -_httpd)" -->
 	<disable-terrasync-desc>Automatischen Download/Update von Szenerie deaktivieren</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
 	<enable-terrasync-desc>Automatischen Download/Update von Szenerie aktivieren</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
 	<terrasync-dir-desc>Zielverzeichnis für Szenerie-Downloads</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->
+<!-- 	<enable-fgcom-desc>???</enable-fgcom-desc> -->   <!-- English: "Enable FGCom built-in" -->
+<!-- 	<disable-fgcom-desc>???</disable-fgcom-desc> -->   <!-- English: "Disable FGCom built-in" -->
 
 	<!-- MultiPlayer options -->
- 	<multiplayer-options>Multiplayer-Optionen</multiplayer-options>   <!-- English: "MultiPlayer Options" -->
+	<multiplayer-options>Multiplayer-Optionen</multiplayer-options>   <!-- English: "MultiPlayer Options" -->
 	<multiplay-desc>Multiplayer-Einstellungen angeben</multiplay-desc>   <!-- English: "Specify multipilot communication settings" -->
 	<callsign-desc>Dem Spieler einen spezifischen Namen zuweisen</callsign-desc>   <!-- English: "assign a unique name to a player" -->
 
@@ -263,5 +270,6 @@
 <!-- 	<trace-write-desc>???</trace-write-desc> -->   <!-- English: "Trace the writes for a property;" -->
 	<log-level-desc>Das zu verwendende Log-Level angeben</log-level-desc>   <!-- English: "Specify which logging level to use" -->
 	<log-class-desc>Die zu verwendende(n) Log-Klasse(n) angeben</log-class-desc>   <!-- English: "Specify which logging class(es) to use" -->
+<!-- 	<log-dir-desc>???</log-dir-desc> -->   <!-- English: "Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc." -->
 
 </PropertyList>

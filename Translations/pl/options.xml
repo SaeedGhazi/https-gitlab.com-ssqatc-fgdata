@@ -28,7 +28,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -43,7 +43,8 @@
 	<fg-root-desc>Sciezka do glownego katalogu danych</fg-root-desc>   <!-- English: "Specify the root data path" -->
 	<fg-scenery-desc n="0">Sciezka do scenerii;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">Domyslna sciezka $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
-<!-- 	<fg-aircraft-desc>???</fg-aircraft-desc> -->   <!-- English: "Specify additional aircraft directory path(s)" -->
+<!-- 	<fg-aircraft-desc>???</fg-aircraft-desc> -->   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
+<!-- 	<download-dir-desc>???</download-dir-desc> -->   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Wybierz jezyk dla tej sesji</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Brak ekranu powitalnego</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Wlacz ekran powitalny</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
@@ -61,7 +62,7 @@
 <!-- 	<enable-random-buildings-desc>???</enable-random-buildings-desc> -->   <!-- English: "Include random buildings objects" -->
 <!-- 	<disable-real-weather-fetch-desc>???</disable-real-weather-fetch-desc> -->   <!-- English: "Disable METAR based real weather fetching" -->
 <!-- 	<enable-real-weather-fetch-desc>???</enable-real-weather-fetch-desc> -->   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
-<!-- 	<metar-desc>???</metar-desc> -->   <!-- English: "Pass a METAR to set up static weather" -->
+<!-- 	<metar-desc>???</metar-desc> -->   <!-- English: "Pass a METAR string to set up static weather (this implies -_disable-real-weather-fetch)" -->
 	<random-objects-desc>(budynki, itp.)</random-objects-desc>   <!-- English: "(buildings, etc.)" -->
 <!-- 	<disable-ai-models-desc>???</disable-ai-models-desc> -->   <!-- English: "Deprecated option (disable internal AI subsystem)" -->
 <!-- 	<enable-ai-models-desc>???</enable-ai-models-desc> -->   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
@@ -81,6 +82,8 @@
 	<config-desc>Zaladuj dodatkowe wlasciwosci z ...</config-desc>   <!-- English: "Load additional properties from path" -->
 	<units-feet-desc>Uzyj miary w stopach dla odleglosci</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Uzyj miary w metrach dla odleglosci</units-meters-desc>   <!-- English: "Use meters for distances" -->
+<!-- 	<console-desc>???</console-desc> -->   <!-- English: "Display console (Windows specific)" -->
+<!-- 	<json-report-desc>???</json-report-desc> -->   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
 
 	<!-- Features options -->
 <!-- 	<environment-options>???</environment-options> -->   <!-- English: "Environment Options" -->
@@ -119,7 +122,7 @@
 <!-- 	<random-wind-desc>???</random-wind-desc> -->   <!-- English: "Set up random wind direction and speed" -->
 <!-- 	<turbulence-desc>???</turbulence-desc> -->   <!-- English: "Specify turbulence from 0.0 (calm) to 1.0 (severe)" -->
 <!-- 	<ceiling-desc>???</ceiling-desc> -->   <!-- English: "Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft)." -->
-	<aircraft-dir-desc>Katalog z samolotami (Sciezka wzgledem pliku startowego programu)</aircraft-dir-desc>   <!-- English: "Aircraft directory relative to the path of the executable" -->
+	<aircraft-dir-desc>Katalog z samolotami (Sciezka wzgledem pliku startowego programu)</aircraft-dir-desc>   <!-- English: "Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as -_fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed." -->
 
 	<aircraft-model-options>Katalog z samolotami (tylko dla UIUC FDM)</aircraft-model-options>   <!-- English: "Aircraft model directory (UIUC FDM ONLY)" -->
 
@@ -163,6 +166,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Opcje renderowania</rendering-options>   <!-- English: "Rendering Options" -->
+<!-- 	<enable-rembrandt-desc>???</enable-rembrandt-desc> -->   <!-- English: "Enable Rembrandt rendering" -->
+<!-- 	<disable-rembrandt-desc>???</disable-rembrandt-desc> -->   <!-- English: "Disable Rembrandt rendering" -->
 	<bpp-desc>Liczba bitow na piksel</bpp-desc>   <!-- English: "Specify the bits per pixel" -->
 	<fog-disable-desc>Niedostepna mgla/mgielka</fog-disable-desc>   <!-- English: "Disable fog/haze" -->
 	<fog-fastest-desc>Mozliwa silna mgla/mgielka</fog-fastest-desc>   <!-- English: "Enable fastest fog/haze" -->
@@ -187,7 +192,7 @@
 	<shading-smooth-desc>Zezwol na gladkie cieniowanie</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
 	<disable-textures-desc>Teksturowanie wylaczone</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Teksturowanie wlaczone</enable-textures-desc>   <!-- English: "Enable textures" -->
-<!-- 	<materials-file-desc>???</materials-file-desc> -->   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->
+<!-- 	<materials-file-desc>???</materials-file-desc> -->   <!-- English: "Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)" -->
 <!-- 	<texture-filtering-desc>???</texture-filtering-desc> -->   <!-- English: "Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16" -->
 	<disable-wireframe-desc>Niedostepny tryb rysowania konturowego</disable-wireframe-desc>   <!-- English: "Disable wireframe drawing mode" -->
 	<enable-wireframe-desc>Wlaczony tryb rysowania konturowego</enable-wireframe-desc>   <!-- English: "Enable wireframe drawing mode" -->
@@ -213,13 +218,15 @@
 
 	<!-- Network options -->
 	<network-options>Opcje sieciowe</network-options>   <!-- English: "Network Options" -->
-	<httpd-desc>Utworz serwer HTTP na podanym porcie</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
+	<httpd-desc>Utworz serwer HTTP na podanym porcie</httpd-desc>   <!-- English: "Enable http server on the specified address. Specify the port or address:port to bind to." -->
 <!-- 	<proxy-desc>???</proxy-desc> -->   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Utworz serwer telnet na podanym porcie</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Utworz serwer HTTP zrzutow ekranu na podanym porcie (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Utworz serwer HTTP zrzutow ekranu na podanym porcie (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port (replaced by -_httpd)" -->
 <!-- 	<disable-terrasync-desc>???</disable-terrasync-desc> -->   <!-- English: "Disable automatic scenery downloads/updates" -->
 <!-- 	<enable-terrasync-desc>???</enable-terrasync-desc> -->   <!-- English: "Enable automatic scenery downloads/updates" -->
 <!-- 	<terrasync-dir-desc>???</terrasync-dir-desc> -->   <!-- English: "Set target directory for scenery downloads" -->
+<!-- 	<enable-fgcom-desc>???</enable-fgcom-desc> -->   <!-- English: "Enable FGCom built-in" -->
+<!-- 	<disable-fgcom-desc>???</disable-fgcom-desc> -->   <!-- English: "Disable FGCom built-in" -->
 
 	<!-- MultiPlayer options -->
 <!-- 	<multiplayer-options>???</multiplayer-options> -->   <!-- English: "MultiPlayer Options" -->
@@ -237,6 +244,7 @@
 <!-- 	<AV400Sim-desc>???</AV400Sim-desc> -->   <!-- English: "Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear" -->
 <!-- 	<atlas-desc>???</atlas-desc> -->   <!-- English: "Open connection using the Atlas protocol" -->
 <!-- 	<atcsim-desc>???</atcsim-desc> -->   <!-- English: "Open connection using the ATC sim protocol (atc610x)" -->
+<!-- 	<flarm-desc>???</flarm-desc> -->   <!-- English: "Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages" -->
 	<garmin-desc>Polacz uzywajac protokolu Garmin GPS</garmin-desc>   <!-- English: "Open connection using the Garmin GPS protocol" -->
 	<joyclient-desc>Podlacz do Agwagon dzojstik</joyclient-desc>   <!-- English: "Open connection to an Agwagon joystick" -->
 <!-- 	<jsclient-desc>???</jsclient-desc> -->   <!-- English: "Open connection to a remote joystick" -->
@@ -273,5 +281,6 @@
 	<trace-write-desc>Sledzenie zapisow pod wzg. wlasciwosci;</trace-write-desc>   <!-- English: "Trace the writes for a property;" -->
 <!-- 	<log-level-desc>???</log-level-desc> -->   <!-- English: "Specify which logging level to use" -->
 <!-- 	<log-class-desc>???</log-class-desc> -->   <!-- English: "Specify which logging class(es) to use" -->
+<!-- 	<log-dir-desc>???</log-dir-desc> -->   <!-- English: "Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc." -->
 
 </PropertyList>

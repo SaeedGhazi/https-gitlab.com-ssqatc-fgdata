@@ -17,14 +17,14 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2017-November-26 for FlightGear 2017.4.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
 	<!-- File menu -->
 	<file>Datei</file>   <!-- English: "File" -->
 	<reset>Flug zurücksetzen</reset>   <!-- English: "Reset" -->
-	<load-tape>Flugaufzeichnung laden</load-tape>  <!-- English: "Load Flight Recorder Tape" -->
+	<load-tape>Flugaufzeichnung laden</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
 	<save-tape>Flugaufzeichnung speichern</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
 	<snap-shot>Bildschirmfoto</snap-shot>   <!-- English: "Screenshot" -->
 	<snap-shot-dir>Fotoverzeichnis festlegen</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
@@ -65,7 +65,7 @@
 	<!-- Environment menu -->
 	<environment>Umgebung</environment>   <!-- English: "Environment" -->
 	<global-weather>Wetter</global-weather>   <!-- English: "Weather" -->
-	<environment-settings>Umgebungseinstellungen</environment-settings>  <!-- English: "Environment Settings" -->
+	<environment-settings>Umgebungseinstellungen</environment-settings>   <!-- English: "Environment Settings" -->
 	<time-settings>Zeit</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Flächenbrand</wildfire-settings>   <!-- English: "Wildfire Settings" -->
 

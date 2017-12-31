@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2017-May-07 for FlightGear 2017.2
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -33,7 +33,7 @@
 	<fg-scenery-desc n="0">Specifica i percorsi per lo scenario/gli scenari;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">impostazione predefinita: $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
 	<fg-aircraft-desc>Specifica percorsi aggiuntivi directory aerei (in alternativa, puoi utilizzare --aircraft-dir per specificare un determinato aereo in una directory data)</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
-        <download-dir-desc>Directory base da utilizzare per i download degli aerei e dello scenario (la directory dello scenario TerraSync può essere impostata esplicitamente con l'opzione --terrasync-dir)</download-dir-desc>   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
+	<download-dir-desc>Directory base da utilizzare per i download degli aerei e dello scenario (la directory dello scenario TerraSync può essere impostata esplicitamente con l'opzione --terrasync-dir)</download-dir-desc>   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Seleziona la lingua per questa sessione</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Disabilita la schermata iniziale</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Abilita la schermata iniziale</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
@@ -233,6 +233,7 @@
 	<AV400Sim-desc>Emetti l'insieme delle stringhe AV400 richieste per comandare un GPS Garmin 400-series da FlightGear</AV400Sim-desc>   <!-- English: "Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear" -->
 	<atlas-desc>Apri una connessione utilizzando il protocollo Atlas</atlas-desc>   <!-- English: "Open connection using the Atlas protocol" -->
 	<atcsim-desc>Apri una connessione utilizzando il protocollo ATC sim (atc610x)</atcsim-desc>   <!-- English: "Open connection using the ATC sim protocol (atc610x)" -->
+<!-- 	<flarm-desc>???</flarm-desc> -->   <!-- English: "Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages" -->
 	<garmin-desc>Apri una connessione utilizzando il protocollo Garmin GPS</garmin-desc>   <!-- English: "Open connection using the Garmin GPS protocol" -->
 	<joyclient-desc>Apri una connessione a un joystick Agwagon</joyclient-desc>   <!-- English: "Open connection to an Agwagon joystick" -->
 	<jsclient-desc>Apri una connessione a un joystick remoto</jsclient-desc>   <!-- English: "Open connection to a remote joystick" -->

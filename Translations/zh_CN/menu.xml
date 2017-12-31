@@ -1,15 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<!-- FlightGear menu: Polish language resource -->
-
-<!--
-    To chyba powinno sie udac...
-    Autor: Zbigniew Matysek, gratki dla Krzysztofa Matyska.
-
-    Special thanks to previous translators:
-    Peter Michael Jaworski, Wojciech Jozwiak, Maciej Obarski and Krzysztof Nowak
--->
-
 <!-- ###
 ### This file is automatically synchronized with the master (=English language) resource.
 ### Please do not add comments, change order or restructure the file.
@@ -30,85 +18,85 @@
 <PropertyList>
 
 	<!-- File menu -->
-	<file>Plik</file>   <!-- English: "File" -->
-	<reset>Reset</reset>   <!-- English: "Reset" -->
+<!-- 	<file>???</file> -->   <!-- English: "File" -->
+<!-- 	<reset>???</reset> -->   <!-- English: "Reset" -->
 <!-- 	<load-tape>???</load-tape> -->   <!-- English: "Load Flight Recorder Tape" -->
 <!-- 	<save-tape>???</save-tape> -->   <!-- English: "Save Flight Recorder Tape" -->
-	<snap-shot>Zrzut ekranu</snap-shot>   <!-- English: "Screenshot" -->
-	<snap-shot-dir>Folder Zrzutow Ekr.</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
-	<sound-config>Ustawienia Dzwiekow</sound-config>   <!-- English: "Sound Configuration" -->
+<!-- 	<snap-shot>???</snap-shot> -->   <!-- English: "Screenshot" -->
+<!-- 	<snap-shot-dir>???</snap-shot-dir> -->   <!-- English: "Screenshot Directory" -->
+<!-- 	<sound-config>???</sound-config> -->   <!-- English: "Sound Configuration" -->
 <!-- 	<input-config>???</input-config> -->   <!-- English: "Mouse Configuration" -->
 <!-- 	<joystick-config>???</joystick-config> -->   <!-- English: "Joystick Configuration" -->
-	<terrasync>Pobieranie Scenerii</terrasync>   <!-- English: "Scenery Download" -->
+<!-- 	<terrasync>???</terrasync> -->   <!-- English: "Scenery Download" -->
 <!-- 	<aircraft-center>???</aircraft-center> -->   <!-- English: "Aircraft Center (Experimental)" -->
-	<exit>Zakoncz</exit>   <!-- English: "Quit" -->
+<!-- 	<exit>???</exit> -->   <!-- English: "Quit" -->
 
 	<!-- View menu -->
-	<view>Widok</view>   <!-- English: "View" -->
+<!-- 	<view>???</view> -->   <!-- English: "View" -->
 <!-- 	<toggle-fullscreen>???</toggle-fullscreen> -->   <!-- English: "Toggle Fullscreen" -->
-	<rendering-options>Opcje Renderowania</rendering-options>   <!-- English: "Rendering Options" -->
-	<view-options>Dostepne Kamery</view-options>   <!-- English: "View Options" -->
-	<cockpit-view-options>Opcje Widoku z Kokpitu</cockpit-view-options>   <!-- English: "Cockpit View Options" -->
-	<adjust-lod>Dostosuj poziom Szczegolow (LOD)</adjust-lod>   <!-- English: "Adjust LOD Ranges" -->
-	<pilot-offset>Położenie Pilota</pilot-offset>   <!-- English: "Adjust View Position" -->
-	<adjust-hud>Dostosuj HUD</adjust-hud>   <!-- English: "Adjust HUD Properties" -->
-	<toggle-glide-slope>Wl/Wyl Znaczniki Sciezki Podejscia</toggle-glide-slope>   <!-- English: "Toggle Glide Slope Tunnel" -->
-	<replay>Powtorka</replay>   <!-- English: "Instant Replay" -->
-	<stereoscopic-options>Opcje Wyswietlania 3D</stereoscopic-options>   <!-- English: "Stereoscopic View Options" -->
+<!-- 	<rendering-options>???</rendering-options> -->   <!-- English: "Rendering Options" -->
+<!-- 	<view-options>???</view-options> -->   <!-- English: "View Options" -->
+<!-- 	<cockpit-view-options>???</cockpit-view-options> -->   <!-- English: "Cockpit View Options" -->
+<!-- 	<adjust-lod>???</adjust-lod> -->   <!-- English: "Adjust LOD Ranges" -->
+<!-- 	<pilot-offset>???</pilot-offset> -->   <!-- English: "Adjust View Position" -->
+<!-- 	<adjust-hud>???</adjust-hud> -->   <!-- English: "Adjust HUD Properties" -->
+<!-- 	<toggle-glide-slope>???</toggle-glide-slope> -->   <!-- English: "Toggle Glide Slope Tunnel" -->
+<!-- 	<replay>???</replay> -->   <!-- English: "Instant Replay" -->
+<!-- 	<stereoscopic-options>???</stereoscopic-options> -->   <!-- English: "Stereoscopic View Options" -->
 
 	<!-- Location menu -->
-	<location>Pozycja</location>   <!-- English: "Location" -->
-	<position-in-air>W Powietrzu</position-in-air>   <!-- English: "Position Aircraft In Air" -->
-	<goto-airport>Wybierz Lotnisko</goto-airport>   <!-- English: "Select Airport" -->
-	<random-attitude>Losowa Orientacja</random-attitude>   <!-- English: "Random Attitude" -->
-	<tower-position>Lokalizacja Wiezy</tower-position>   <!-- English: "Tower Position" -->
+<!-- 	<location>???</location> -->   <!-- English: "Location" -->
+<!-- 	<position-in-air>???</position-in-air> -->   <!-- English: "Position Aircraft In Air" -->
+<!-- 	<goto-airport>???</goto-airport> -->   <!-- English: "Select Airport" -->
+<!-- 	<random-attitude>???</random-attitude> -->   <!-- English: "Random Attitude" -->
+<!-- 	<tower-position>???</tower-position> -->   <!-- English: "Tower Position" -->
 
 	<!-- Autopilot menu -->
-	<autopilot>Autopilot</autopilot>   <!-- English: "Autopilot" -->
-	<autopilot-settings>Ustawienia</autopilot-settings>   <!-- English: "Autopilot Settings" -->
-	<route-manager>Planowanie Lotu</route-manager>   <!-- English: "Route Manager" -->
-	<previous-waypoint>Poprzedni Punkt Nawigacyjny</previous-waypoint>   <!-- English: "Previous Waypoint" -->
-	<next-waypoint>Nastepny Punkt Nawigacyjny</next-waypoint>   <!-- English: "Next Waypoint" -->
+<!-- 	<autopilot>???</autopilot> -->   <!-- English: "Autopilot" -->
+<!-- 	<autopilot-settings>???</autopilot-settings> -->   <!-- English: "Autopilot Settings" -->
+<!-- 	<route-manager>???</route-manager> -->   <!-- English: "Route Manager" -->
+<!-- 	<previous-waypoint>???</previous-waypoint> -->   <!-- English: "Previous Waypoint" -->
+<!-- 	<next-waypoint>???</next-waypoint> -->   <!-- English: "Next Waypoint" -->
 
 	<!-- Environment menu -->
-	<environment>Środowisko</environment>   <!-- English: "Environment" -->
-	<global-weather>Pogoda</global-weather>   <!-- English: "Weather" -->
+<!-- 	<environment>???</environment> -->   <!-- English: "Environment" -->
+<!-- 	<global-weather>???</global-weather> -->   <!-- English: "Weather" -->
 <!-- 	<environment-settings>???</environment-settings> -->   <!-- English: "Environment Settings" -->
-	<time-settings>Czas</time-settings>   <!-- English: "Time Settings" -->
-	<wildfire-settings>Ustawienia Pozarow</wildfire-settings>   <!-- English: "Wildfire Settings" -->
+<!-- 	<time-settings>???</time-settings> -->   <!-- English: "Time Settings" -->
+<!-- 	<wildfire-settings>???</wildfire-settings> -->   <!-- English: "Wildfire Settings" -->
 
 	<!-- Equipment menu -->
-	<equipment>Wyposazenie</equipment>   <!-- English: "Equipment" -->
-	<map>Mapa</map>   <!-- English: "Map" -->
+<!-- 	<equipment>???</equipment> -->   <!-- English: "Equipment" -->
+<!-- 	<map>???</map> -->   <!-- English: "Map" -->
 <!-- 	<map-canvas>???</map-canvas> -->   <!-- English: "Map (Canvas)" -->
 <!-- 	<map-browser>???</map-browser> -->   <!-- English: "Map (opens in browser)" -->
-	<stopwatch>Stoper</stopwatch>   <!-- English: "Stopwatch" -->
-	<fuel-and-payload>Paliwo i Ladunek</fuel-and-payload>   <!-- English: "Fuel and Payload" -->
-	<radio>Radio</radio>   <!-- English: "Radio Settings" -->
-	<gps>Ustawienia GPS</gps>   <!-- English: "GPS Settings" -->
-	<instrument-settings>Ustawienia Przyrzadow</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu>Awarie</failure-submenu>   <!-- English: "-_- Failures -_-" -->
-	<random-failures>Awarie Losowe</random-failures>   <!-- English: "Random Failures" -->
-	<system-failures>Awarie Systemow</system-failures>   <!-- English: "System Failures" -->
-	<instrument-failures>Awarie Przyrzadow</instrument-failures>   <!-- English: "Instrument Failures" -->
+<!-- 	<stopwatch>???</stopwatch> -->   <!-- English: "Stopwatch" -->
+<!-- 	<fuel-and-payload>???</fuel-and-payload> -->   <!-- English: "Fuel and Payload" -->
+<!-- 	<radio>???</radio> -->   <!-- English: "Radio Settings" -->
+<!-- 	<gps>???</gps> -->   <!-- English: "GPS Settings" -->
+<!-- 	<instrument-settings>???</instrument-settings> -->   <!-- English: "Instrument Settings" -->
+<!-- 	<failure-submenu>???</failure-submenu> -->   <!-- English: "-_- Failures -_-" -->
+<!-- 	<random-failures>???</random-failures> -->   <!-- English: "Random Failures" -->
+<!-- 	<system-failures>???</system-failures> -->   <!-- English: "System Failures" -->
+<!-- 	<instrument-failures>???</instrument-failures> -->   <!-- English: "Instrument Failures" -->
 
 	<!-- AI menu -->
-	<ai>AI</ai>   <!-- English: "AI" -->
-	<scenario>Scenariusze AI</scenario>   <!-- English: "Traffic and Scenario Settings" -->
-	<atc-in-range>ATC w Zasiegu</atc-in-range>   <!-- English: "ATC Services in Range" -->
-	<wingman>Skrzydlowy</wingman>   <!-- English: "Wingman Controls" -->
-	<tanker>Latajaca Cysterna</tanker>   <!-- English: "Tanker Controls" -->
-	<carrier>Lotniskowiec</carrier>   <!-- English: "Carrier Controls" -->
-	<jetway>Rekaw</jetway>   <!-- English: "Jetway Settings" -->
+<!-- 	<ai>???</ai> -->   <!-- English: "AI" -->
+<!-- 	<scenario>???</scenario> -->   <!-- English: "Traffic and Scenario Settings" -->
+<!-- 	<atc-in-range>???</atc-in-range> -->   <!-- English: "ATC Services in Range" -->
+<!-- 	<wingman>???</wingman> -->   <!-- English: "Wingman Controls" -->
+<!-- 	<tanker>???</tanker> -->   <!-- English: "Tanker Controls" -->
+<!-- 	<carrier>???</carrier> -->   <!-- English: "Carrier Controls" -->
+<!-- 	<jetway>???</jetway> -->   <!-- English: "Jetway Settings" -->
 
 	<!-- Multiplayer menu -->
-	<multiplayer>Multiplayer</multiplayer>   <!-- English: "Multiplayer" -->
-	<mp-settings>Ustawienia</mp-settings>   <!-- English: "Multiplayer Settings" -->
+<!-- 	<multiplayer>???</multiplayer> -->   <!-- English: "Multiplayer" -->
+<!-- 	<mp-settings>???</mp-settings> -->   <!-- English: "Multiplayer Settings" -->
 <!-- 	<fgcom-settings>???</fgcom-settings> -->   <!-- English: "FGCom Settings" -->
-	<mp-chat>Chat</mp-chat>   <!-- English: "Chat Dialog" -->
-	<mp-chat-menu>Menu Chat</mp-chat-menu>   <!-- English: "Chat Menu" -->
-	<mp-list>Lista Pilotów</mp-list>   <!-- English: "Pilot List" -->
-	<mp-carrier>Wybor Lotniskowca MP</mp-carrier>   <!-- English: "MPCarrier Selection" -->
+<!-- 	<mp-chat>???</mp-chat> -->   <!-- English: "Chat Dialog" -->
+<!-- 	<mp-chat-menu>???</mp-chat-menu> -->   <!-- English: "Chat Menu" -->
+<!-- 	<mp-list>???</mp-list> -->   <!-- English: "Pilot List" -->
+<!-- 	<mp-carrier>???</mp-carrier> -->   <!-- English: "MPCarrier Selection" -->
 <!-- 	<lag-adjust>???</lag-adjust> -->   <!-- English: "Lag Settings" -->
 
 	<!-- Debug menu -->
@@ -144,16 +132,16 @@
 <!-- 	<interface-config>???</interface-config> -->   <!-- English: "User-interface options" -->
 
 	<!-- Help menu -->
-	<help>Pomoc</help>   <!-- English: "Help" -->
-	<help-browser>Pomoc (w pzegladarce)</help-browser>   <!-- English: "Help (opens in browser)" -->
+<!-- 	<help>???</help> -->   <!-- English: "Help" -->
+<!-- 	<help-browser>???</help-browser> -->   <!-- English: "Help (opens in browser)" -->
 <!-- 	<doc-browser>???</doc-browser> -->   <!-- English: "Documentation Browser" -->
-	<aircraft-keys>Dla Tego Samolotu</aircraft-keys>   <!-- English: "Aircraft Help" -->
+<!-- 	<aircraft-keys>???</aircraft-keys> -->   <!-- English: "Aircraft Help" -->
 <!-- 	<aircraft-checklists>???</aircraft-checklists> -->   <!-- English: "Aircraft Checklists" -->
-	<common-keys>Klawisze Sterowania</common-keys>   <!-- English: "Common Aircraft Keys" -->
-	<basic-keys>Klawiszologia Symulatora</basic-keys>   <!-- English: "Basic Simulator Keys" -->
-	<joystick-info>Informacje o Joysticku</joystick-info>   <!-- English: "Joystick Information" -->
-	<tutorial-start>Tutoriale</tutorial-start>   <!-- English: "Tutorials" -->
-	<menu-about>O Programie</menu-about>   <!-- English: "About" -->
+<!-- 	<common-keys>???</common-keys> -->   <!-- English: "Common Aircraft Keys" -->
+<!-- 	<basic-keys>???</basic-keys> -->   <!-- English: "Basic Simulator Keys" -->
+<!-- 	<joystick-info>???</joystick-info> -->   <!-- English: "Joystick Information" -->
+<!-- 	<tutorial-start>???</tutorial-start> -->   <!-- English: "Tutorials" -->
+<!-- 	<menu-about>???</menu-about> -->   <!-- English: "About" -->
 
 	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
 <!-- 	<select-livery>???</select-livery> -->   <!-- English: "Select livery" -->

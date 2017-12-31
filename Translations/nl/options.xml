@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -32,11 +32,12 @@
 	<fg-root-desc>Definiëer de locatie van de hoofd directory</fg-root-desc>   <!-- English: "Specify the root data path" -->
 	<fg-scenery-desc n="0">Definiëer de locatie van de scenery directory;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">Standaard is dit $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
-	<fg-aircraft-desc>Definiëer extra vliegtuigmappen</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s)" -->
+	<fg-aircraft-desc>Definiëer extra vliegtuigmappen</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
+<!-- 	<download-dir-desc>???</download-dir-desc> -->   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Kies de taal voor deze sessie</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Introductie scherm overslaan</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Introductie scherm laten zien</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
- 	<restore-defaults-desc>Reset alle instellingen naar de fabrieksinstellingen (weergave opties etc.)</restore-defaults-desc>   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
+	<restore-defaults-desc>Reset alle instellingen naar de fabrieksinstellingen (weergave opties etc.)</restore-defaults-desc>   <!-- English: "Reset all user settings to their defaults (rendering options etc)" -->
 	<disable-save-on-exit>Sla de instellingen niet op bij het afsluiten</disable-save-on-exit>   <!-- English: "Don't save preferences upon program exit" -->
 	<enable-save-on-exit>Sla instellingen op bij het afsluiten</enable-save-on-exit>   <!-- English: "Allow saving preferences at program exit" -->
 	<disable-mouse-pointer-desc>Extra cursor uitschakelen</disable-mouse-pointer-desc>   <!-- English: "Disable extra mouse pointer" -->
@@ -44,13 +45,13 @@
 	<enable-mouse-pointer-desc n="1">(voor Voodoo kaarten in volledige scherm mode)</enable-mouse-pointer-desc>   <!-- English: "(i.e. for full screen Voodoo based cards)" -->
 	<disable-random-objects-desc>Willekeurig geplaatste objecten verbergen</disable-random-objects-desc>   <!-- English: "Exclude random scenery objects" -->
 	<enable-random-objects-desc>Willekeurig geplaatste objecten tonen</enable-random-objects-desc>   <!-- English: "Include random scenery objects" -->
- 	<disable-random-vegetation-desc>Willekeurig geplaatste flora verbergen</disable-random-vegetation-desc>   <!-- English: "Exclude random vegetation objects" -->
- 	<enable-random-vegetation-desc>Willekeurig geplaatste flora tonen</enable-random-vegetation-desc>   <!-- English: "Include random vegetation objects" -->
- 	<disable-random-buildings-desc>Willekeurig geplaatste gebouwen verbergen</disable-random-buildings-desc>   <!-- English: "Exclude random buildings objects" -->
- 	<enable-random-buildings-desc>Willekeurig geplaatste gebouwen tonen</enable-random-buildings-desc>   <!-- English: "Include random buildings objects" -->
+	<disable-random-vegetation-desc>Willekeurig geplaatste flora verbergen</disable-random-vegetation-desc>   <!-- English: "Exclude random vegetation objects" -->
+	<enable-random-vegetation-desc>Willekeurig geplaatste flora tonen</enable-random-vegetation-desc>   <!-- English: "Include random vegetation objects" -->
+	<disable-random-buildings-desc>Willekeurig geplaatste gebouwen verbergen</disable-random-buildings-desc>   <!-- English: "Exclude random buildings objects" -->
+	<enable-random-buildings-desc>Willekeurig geplaatste gebouwen tonen</enable-random-buildings-desc>   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>Schakel live weer op basis van METAR uit</disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>Schakel live weer op basis van METAR in (hiervoor is een internetverbinding vereist)</enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
-	<metar-desc>Geef een METAR om statisch weer in te stellen</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->
+	<metar-desc>Geef een METAR om statisch weer in te stellen</metar-desc>   <!-- English: "Pass a METAR string to set up static weather (this implies -_disable-real-weather-fetch)" -->
 	<random-objects-desc>(huizen, gebouwen, etc.)</random-objects-desc>   <!-- English: "(buildings, etc.)" -->
 	<disable-ai-models-desc>Verouderde optie (schakel het interne AI systeem uit)</disable-ai-models-desc>   <!-- English: "Deprecated option (disable internal AI subsystem)" -->
 	<enable-ai-models-desc>?Schakel het AI systeem in (vereiste voor multiplayer, kunstmatig verkeer en veel andere animaties)</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
@@ -70,6 +71,8 @@
 	<config-desc>Voeg extra properties toe uit het bestand</config-desc>   <!-- English: "Load additional properties from path" -->
 	<units-feet-desc>Definiëer de afstanden in voeten</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Definiëer de afstanden in meters</units-meters-desc>   <!-- English: "Use meters for distances" -->
+<!-- 	<console-desc>???</console-desc> -->   <!-- English: "Display console (Windows specific)" -->
+<!-- 	<json-report-desc>???</json-report-desc> -->   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
 
 	<!-- Features options -->
 	<environment-options>Omgevingsinstellingen</environment-options>   <!-- English: "Environment Options" -->
@@ -108,7 +111,7 @@
 	<random-wind-desc>Kies een willekeurige windrichting en -snelheid)</random-wind-desc>   <!-- English: "Set up random wind direction and speed" -->
 	<turbulence-desc>Specificeer de turbulentie waarde. 0.0 is kalm. 1.0 is hevig</turbulence-desc>   <!-- English: "Specify turbulence from 0.0 (calm) to 1.0 (severe)" -->
 	<ceiling-desc>Start met een overtrokken wolkendek, eventuaal met een aangegeven dokte (standaard 2000 feet)</ceiling-desc>   <!-- English: "Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft)." -->
-	<aircraft-dir-desc>De locatie van het vliegtuig configuratiebestand relatief tot de locatie van het hoofdprogramma</aircraft-dir-desc>   <!-- English: "Aircraft directory relative to the path of the executable" -->
+	<aircraft-dir-desc>De locatie van het vliegtuig configuratiebestand relatief tot de locatie van het hoofdprogramma</aircraft-dir-desc>   <!-- English: "Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as -_fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed." -->
 
 	<aircraft-model-options>Vliegtuig model locatie (Alleen voor de UIUC FDM)</aircraft-model-options>   <!-- English: "Aircraft model directory (UIUC FDM ONLY)" -->
 
@@ -152,6 +155,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Weergave instellingen</rendering-options>   <!-- English: "Rendering Options" -->
+<!-- 	<enable-rembrandt-desc>???</enable-rembrandt-desc> -->   <!-- English: "Enable Rembrandt rendering" -->
+<!-- 	<disable-rembrandt-desc>???</disable-rembrandt-desc> -->   <!-- English: "Disable Rembrandt rendering" -->
 	<bpp-desc>Definiëer het aantal bits per schermpunt</bpp-desc>   <!-- English: "Specify the bits per pixel" -->
 	<fog-disable-desc>Laat geen mist zien</fog-disable-desc>   <!-- English: "Disable fog/haze" -->
 	<fog-fastest-desc>Selecteer de snelste mist generator</fog-fastest-desc>   <!-- English: "Enable fastest fog/haze" -->
@@ -176,7 +181,7 @@
 	<shading-smooth-desc>Gebruik natuurlijke schaduwen</shading-smooth-desc>   <!-- English: "Enable smooth shading" -->
 	<disable-textures-desc>Textures gebruiken</disable-textures-desc>   <!-- English: "Disable textures" -->
 	<enable-textures-desc>Textures niet gebruiken</enable-textures-desc>   <!-- English: "Enable textures" -->
-	<materials-file-desc>Kies het te gebruiken materialen bestand om de scenery weer te geven (standaard: materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: materials.xml)" -->
+	<materials-file-desc>Kies het te gebruiken materialen bestand om de scenery weer te geven (standaard: materials.xml)</materials-file-desc>   <!-- English: "Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)" -->
 	<texture-filtering-desc>Anisotropische texture filtering: waardes moeten 1 (standaard), 2, 4, 8 of 16 zijn</texture-filtering-desc>   <!-- English: "Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16" -->
 	<disable-wireframe-desc>Model frame opbouw niet gebruiken</disable-wireframe-desc>   <!-- English: "Disable wireframe drawing mode" -->
 	<enable-wireframe-desc>Model frame opbouw wel gebruiken</enable-wireframe-desc>   <!-- English: "Enable wireframe drawing mode" -->
@@ -202,13 +207,15 @@
 
 	<!-- Network options -->
 	<network-options>Netwerk Instellingen</network-options>   <!-- English: "Network Options" -->
-	<httpd-desc>Activeer de http server op dit poortnummer</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
+	<httpd-desc>Activeer de http server op dit poortnummer</httpd-desc>   <!-- English: "Enable http server on the specified address. Specify the port or address:port to bind to." -->
 	<proxy-desc>Kies een proxy server (en poort) om te gebruiken. De gebruikersnaam en het wachtwoord zijn optioneel en dienen al MD5 gecodeerd te zijn. Deze optie is alleen nuttig in samenwerking met de live-weer optie.</proxy-desc>   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Activeer de telnet server op dit poortnummer</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Activeer de schermafdruk server op dit poortnummer (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Activeer de schermafdruk server op dit poortnummer (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port (replaced by -_httpd)" -->
 	<disable-terrasync-desc>Schakel het automatisch downloaden/updaten van scenery uit</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
 	<enable-terrasync-desc>Schakel het automatisch downloaden/updaten van scenery in</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
 	<terrasync-dir-desc>Kies een doelmap voor scenery downloads</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->
+<!-- 	<enable-fgcom-desc>???</enable-fgcom-desc> -->   <!-- English: "Enable FGCom built-in" -->
+<!-- 	<disable-fgcom-desc>???</disable-fgcom-desc> -->   <!-- English: "Disable FGCom built-in" -->
 
 	<!-- MultiPlayer options -->
 	<multiplayer-options>MultiPlayer Instellingen</multiplayer-options>   <!-- English: "MultiPlayer Options" -->
@@ -226,6 +233,7 @@
 	<AV400Sim-desc>Gebruik het AV400 protocol, vereist om een Garmin 400 GPS aan te sturen</AV400Sim-desc>   <!-- English: "Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear" -->
 	<atlas-desc>Open een verbinding met het Atlas protocol</atlas-desc>   <!-- English: "Open connection using the Atlas protocol" -->
 	<atcsim-desc>Open een verbinding met het ATC sim protocol (atc610x)</atcsim-desc>   <!-- English: "Open connection using the ATC sim protocol (atc610x)" -->
+<!-- 	<flarm-desc>???</flarm-desc> -->   <!-- English: "Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages" -->
 	<garmin-desc>Open een verbinding met het Garmin GPS protocol</garmin-desc>   <!-- English: "Open connection using the Garmin GPS protocol" -->
 	<joyclient-desc>Open een verbinding met de Agwagon joystick</joyclient-desc>   <!-- English: "Open connection to an Agwagon joystick" -->
 	<jsclient-desc>Open een verbinding met een externe joystick</jsclient-desc>   <!-- English: "Open connection to a remote joystick" -->
@@ -262,5 +270,6 @@
 	<trace-write-desc>Bewaak de veranderingen van een instelling;</trace-write-desc>   <!-- English: "Trace the writes for a property;" -->
 	<log-level-desc>Kies een log level om te gebruiken</log-level-desc>   <!-- English: "Specify which logging level to use" -->
 	<log-class-desc>Kies welke log class(es) gebruikt moeten worden</log-class-desc>   <!-- English: "Specify which logging class(es) to use" -->
+<!-- 	<log-dir-desc>???</log-dir-desc> -->   <!-- English: "Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc." -->
 
 </PropertyList>

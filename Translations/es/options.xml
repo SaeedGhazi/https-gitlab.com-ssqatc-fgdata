@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-15 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -32,7 +32,8 @@
 	<fg-root-desc>Especifica la ruta básica a los datos</fg-root-desc>   <!-- English: "Specify the root data path" -->
 	<fg-scenery-desc n="0">Especifica la ruta básica a las escenografías;</fg-scenery-desc>   <!-- English: "Specify the scenery path(s);" -->
 	<fg-scenery-desc n="1">Por defecto falla a $FG_ROOT/Scenery</fg-scenery-desc>   <!-- English: "Defaults to $FG_ROOT/Scenery" -->
-	<fg-aircraft-desc>Especifica la ruta a directorios de aeronaves adicionales</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s)" -->
+	<fg-aircraft-desc>Especifica la ruta a directorios de aeronaves adicionales</fg-aircraft-desc>   <!-- English: "Specify additional aircraft directory path(s) (alternatively, you can use -_aircraft-dir to target a specific aircraft in a given directory)" -->
+<!-- 	<download-dir-desc>???</download-dir-desc> -->   <!-- English: "Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with -_terrasync-dir)" -->
 	<language-desc>Selecciona el idioma para esta sesión</language-desc>   <!-- English: "Select the language for this session" -->
 	<disable-splash-screen-desc>Desactiva splash screen</disable-splash-screen-desc>   <!-- English: "Disable splash screen" -->
 	<enable-splash-screen-desc>Activa splash screen</enable-splash-screen-desc>   <!-- English: "Enable splash screen" -->
@@ -47,10 +48,10 @@
 	<disable-random-vegetation-desc>Excluir objetos aleatorios de vegetación</disable-random-vegetation-desc>   <!-- English: "Exclude random vegetation objects" -->
 	<enable-random-vegetation-desc>Incluir objetos aleatorios de vegetación</enable-random-vegetation-desc>   <!-- English: "Include random vegetation objects" -->
 	<disable-random-buildings-desc>Excluir edificios aleatorios</disable-random-buildings-desc>   <!-- English: "Exclude random buildings objects" -->
-	<enable-random-buildings-desc>Incluir edificios aleatorios</enable-random-buildings-desc> -->   <!-- English: "Include random buildings objects" -->
+	<enable-random-buildings-desc>Incluir edificios aleatorios</enable-random-buildings-desc>   <!-- English: "Include random buildings objects" -->
 	<disable-real-weather-fetch-desc>Desactiva la recogida de meteo real basada en METAR</disable-real-weather-fetch-desc>   <!-- English: "Disable METAR based real weather fetching" -->
 	<enable-real-weather-fetch-desc>Activa la recogida de meteo real basada en METAR (esto requiere una conexión a Internet)</enable-real-weather-fetch-desc>   <!-- English: "Enable METAR based real weather fetching (this requires an open internet connection)" -->
-	<metar-desc>Pasar una METAR para establecer una meteo estática</metar-desc>   <!-- English: "Pass a METAR to set up static weather" -->
+	<metar-desc>Pasar una METAR para establecer una meteo estática</metar-desc>   <!-- English: "Pass a METAR string to set up static weather (this implies -_disable-real-weather-fetch)" -->
 	<random-objects-desc>(edificios, etc.)</random-objects-desc>   <!-- English: "(buildings, etc.)" -->
 	<disable-ai-models-desc>Opción en desuso mantenida por compatibilidad (Desactiva el subsistema de tráfico artificial)</disable-ai-models-desc>   <!-- English: "Deprecated option (disable internal AI subsystem)" -->
 	<enable-ai-models-desc>Activa el tráfico artificial.</enable-ai-models-desc>   <!-- English: "Enable AI subsystem (required for multi-player, AI traffic and many other animations)" -->
@@ -70,6 +71,8 @@
 	<config-desc>Carga propiedades adicionales de la ruta</config-desc>   <!-- English: "Load additional properties from path" -->
 	<units-feet-desc>Usar pies para distancias</units-feet-desc>   <!-- English: "Use feet for distances" -->
 	<units-meters-desc>Usar metros para distancias</units-meters-desc>   <!-- English: "Use meters for distances" -->
+<!-- 	<console-desc>???</console-desc> -->   <!-- English: "Display console (Windows specific)" -->
+<!-- 	<json-report-desc>???</json-report-desc> -->   <!-- English: "Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc." -->
 
 	<!-- Features options -->
 	<environment-options>Opciones de entorno</environment-options>   <!-- English: "Environment Options" -->
@@ -108,7 +111,7 @@
 	<random-wind-desc>Establece vientos de direccion y velocidad aleatorios</random-wind-desc>   <!-- English: "Set up random wind direction and speed" -->
 	<turbulence-desc>Especifica turbulencias desde 0.0 (calmadas) to 1.0 (severas)</turbulence-desc>   <!-- English: "Specify turbulence from 0.0 (calm) to 1.0 (severe)" -->
 	<ceiling-desc>Crear un techo encapotado, opcionalmente con un grosor específico (por defecto a los 2000 pies).</ceiling-desc>   <!-- English: "Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft)." -->
-	<aircraft-dir-desc>Directorio de aeronaves relativo a la ruta del ejecutable</aircraft-dir-desc>   <!-- English: "Aircraft directory relative to the path of the executable" -->
+	<aircraft-dir-desc>Directorio de aeronaves relativo a la ruta del ejecutable</aircraft-dir-desc>   <!-- English: "Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as -_fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed." -->
 
 	<aircraft-model-options>Directorio de modelos de aeronaves (SOLO UIUC FDM)</aircraft-model-options>   <!-- English: "Aircraft model directory (UIUC FDM ONLY)" -->
 
@@ -152,6 +155,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Opciones de Renderizado</rendering-options>   <!-- English: "Rendering Options" -->
+<!-- 	<enable-rembrandt-desc>???</enable-rembrandt-desc> -->   <!-- English: "Enable Rembrandt rendering" -->
+<!-- 	<disable-rembrandt-desc>???</disable-rembrandt-desc> -->   <!-- English: "Disable Rembrandt rendering" -->
 	<bpp-desc>Especifica los bits por pixel</bpp-desc>   <!-- English: "Specify the bits per pixel" -->
 	<fog-disable-desc>Desactiva la niebla/bruma</fog-disable-desc>   <!-- English: "Disable fog/haze" -->
 	<fog-fastest-desc>Activa la mas rápida niebla/bruma</fog-fastest-desc>   <!-- English: "Enable fastest fog/haze" -->
@@ -202,13 +207,15 @@
 
 	<!-- Network options -->
 	<network-options>Opciones de red</network-options>   <!-- English: "Network Options" -->
-	<httpd-desc>Activa el servidor http en el puerto especificado</httpd-desc>   <!-- English: "Enable http server on the specified port" -->
+	<httpd-desc>Activa el servidor http en el puerto especificado</httpd-desc>   <!-- English: "Enable http server on the specified address. Specify the port or address:port to bind to." -->
 	<proxy-desc>Especifica qué servidor proxy (y puerto) usar. El usuario y contraseña son opcionales y deberían de estar ya codificados con MD5. Esta opcion solo es útil cuando es usada conjuntamente con la opcion real-weather-fetch.</proxy-desc>   <!-- English: "Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option." -->
 	<telnet-desc>Activa el servidor telnet en el puerto especificado</telnet-desc>   <!-- English: "Enable telnet server on the specified port" -->
-	<jpg-httpd-desc>Activa screen shot en el servidor http en el puerto especificado (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port" -->
+	<jpg-httpd-desc>Activa screen shot en el servidor http en el puerto especificado (replaced by --httpd)</jpg-httpd-desc>   <!-- English: "Enable screen shot http server on the specified port (replaced by -_httpd)" -->
 	<disable-terrasync-desc>Desactiva la descarga/actualización automática de escenarios</disable-terrasync-desc>   <!-- English: "Disable automatic scenery downloads/updates" -->
 	<enable-terrasync-desc>Activa la descarga/actualización automática de escenarios</enable-terrasync-desc>   <!-- English: "Enable automatic scenery downloads/updates" -->
 	<terrasync-dir-desc>Especifica el directorio para descargas de escenarios</terrasync-dir-desc>   <!-- English: "Set target directory for scenery downloads" -->
+<!-- 	<enable-fgcom-desc>???</enable-fgcom-desc> -->   <!-- English: "Enable FGCom built-in" -->
+<!-- 	<disable-fgcom-desc>???</disable-fgcom-desc> -->   <!-- English: "Disable FGCom built-in" -->
 
 	<!-- MultiPlayer options -->
 	<multiplayer-options>Opciones multijugador</multiplayer-options>   <!-- English: "MultiPlayer Options" -->
@@ -226,6 +233,7 @@
 	<AV400Sim-desc>Emite el conjunto de cadenas AV400 de texto requeridas para usar un GPS Garmin 400-series desde FlightGear</AV400Sim-desc>   <!-- English: "Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear" -->
 	<atlas-desc>Abrir conexión usando el protocolo Atlas</atlas-desc>   <!-- English: "Open connection using the Atlas protocol" -->
 	<atcsim-desc>Abrir conexión usando el protocolo ATC sim(atc610x)</atcsim-desc>   <!-- English: "Open connection using the ATC sim protocol (atc610x)" -->
+<!-- 	<flarm-desc>???</flarm-desc> -->   <!-- English: "Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages" -->
 	<garmin-desc>Abrir conexión usando el protocolo Garmin GPS</garmin-desc>   <!-- English: "Open connection using the Garmin GPS protocol" -->
 	<joyclient-desc>Abrir conexión a un joystick Agwagon</joyclient-desc>   <!-- English: "Open connection to an Agwagon joystick" -->
 	<jsclient-desc>Abrir conexión a un joystick remoto</jsclient-desc>   <!-- English: "Open connection to a remote joystick" -->
@@ -262,5 +270,6 @@
 	<trace-write-desc>Trazar las escrituras para una propiedad;</trace-write-desc>   <!-- English: "Trace the writes for a property;" -->
 	<log-level-desc>Especifica qué nivel de registro usar</log-level-desc>   <!-- English: "Specify which logging level to use" -->
 	<log-class-desc>Especifica qué clase (o clases) de registro usar</log-class-desc>   <!-- English: "Specify which logging class(es) to use" -->
+<!-- 	<log-dir-desc>???</log-dir-desc> -->   <!-- English: "Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc." -->
 
 </PropertyList>

@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2017-November-26 for FlightGear 2017.4.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -43,5 +43,6 @@
 
 		<unstable-warning>Entwicklerversion: kann instabile/unfertige Features enthalten!</unstable-warning>   <!-- English: "Unstable nightly build - some features may be under active development" -->
 	</splash>
+
 
 </PropertyList>

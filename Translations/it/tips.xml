@@ -3,24 +3,41 @@
 <!-- FlightGear tips: Italian language resource -->
 
 <!-- Style tips:  Aim to keep to a single phrase/sentence which is not terminated with a . -->
+<!-- ###
+### This file is automatically synchronized with the master (=English language) resource.
+### Please do not add comments, change order or restructure the file.
+###
+### To translate:
+###    * Replace "???" entries with appropriate translation.
+###    * Keep untranslated items unmodified (leave the "???"). English original is the
+###      automatic default.
+###    * Remove enclosing "<!-_ ... _->" tags for completed translations.
+###    * Keep the original English text unmodified (the '<!-_ English: "..." -_>)',
+###      so we know which version of the English original the translation is based upon
+###      (and we can identify translations which need to be updated, when the original changes).
+###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
+###      consecutive "-" characters in comments).
+###
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
+### -->
 <PropertyList>
-	<tip n="0">Trascina il puntatore mentre tieni premuto il tasto destro del mouse per guardarti attorno</tip>
-	<tip n="1">Tieni premuto [MAIUSC] mentre ti guardi attorno per spostare la vista in alto, in basso, a sinistra o a destra</tip>
-	<tip n="2">Premi a/A per regolare la velocità della simulazione</tip>
-	<tip n="3">Premi x/X per aumentare/diminuire lo zoom</tip>
-	<tip n="4">Trova le frequenze dei servizi ATC nelle vicinanze nella finestra Radio</tip>
-	<tip n="5">Premi v per modificare il tuo punto di vista, Ctrl+V per tornare alla cabina di pilotaggio</tip>
-	<tip n="6">Premi F3 per catturare una schermata</tip>
-	<tip n="7">Unisciti alla comunità di FlightGear al sito http://forum.flightgear.org</tip>
-	<tip n="8">Premi h per attivare l'head up display</tip>
-	<tip n="9">Nascondi la barra dei menù premendo F10</tip>
-	<tip n="10">Framerate troppo basso? Prova a disabilitare il traffico IA</tip>
-	<tip n="11">Seleziona Ambiente → Meteo per volare in differenti condizioni metereologiche</tip>
-	<tip n="12">Premi F12 per modificare facilmente le frequenze radio</tip>
-	<tip n="13">Guardati attorno tenendo premuto il tasto destro del mouse e spostando il puntatore</tip>
-	<tip n="14">Seleziona Multigiocatore → Impostazioni multigiocatore per unirti all'ambiente di volo condiviso</tip>
-	<tip n="15">Non riesci ad avviare il motore? Vedi Aiuto → Checklist aereo</tip>
-	<tip n="16">Trascina il puntatore mentre tieni premuti i tasti centrale e destro del mouse per muovere il punto di vista</tip>
-	<tip n="17">Premi / per esplorare le proprietà interne del simulatore</tip>
-	<tip n="18">Premi TAB per muovere il punto di vista con il mouse e utilizza la rotella per modificare lo zoom</tip>
+	<tip n="0">Trascina il puntatore mentre tieni premuto il tasto destro del mouse per guardarti attorno</tip>   <!-- English: "Drag while holding the right mouse button to look around" -->
+	<tip n="1">Tieni premuto [MAIUSC] mentre ti guardi attorno per spostare la vista in alto, in basso, a sinistra o a destra</tip>   <!-- English: "Hold [Shift] while looking around to move the view up, down, left or right" -->
+	<tip n="2">Premi a/A per regolare la velocità della simulazione</tip>   <!-- English: "Press a/A to adjust the simulation speed" -->
+	<tip n="3">Premi x/X per aumentare/diminuire lo zoom</tip>   <!-- English: "Press x/X to zoom in and out" -->
+	<tip n="4">Trova le frequenze dei servizi ATC nelle vicinanze nella finestra Radio</tip>   <!-- English: "Find frequencies of nearby ATC services from the Radios dialog" -->
+	<tip n="5">Premi v per modificare il tuo punto di vista, Ctrl+V per tornare alla cabina di pilotaggio</tip>   <!-- English: "Press v to change your viewpoint, Ctrl-V to return to the cockpit" -->
+	<tip n="6">Premi F3 per catturare una schermata</tip>   <!-- English: "Press F3 to take a screenshot" -->
+	<tip n="7">Unisciti alla comunità di FlightGear al sito http://forum.flightgear.org</tip>   <!-- English: "Join the FlightGear community at http://forum.flightgear.org" -->
+	<tip n="8">Premi h per attivare l'head up display</tip>   <!-- English: "Press h to bring up a Heads Up Display" -->
+	<tip n="9">Nascondi la barra dei menù premendo F10</tip>   <!-- English: "Show or hide the menu bar by pressing F10" -->
+	<tip n="10">Framerate troppo basso? Prova a disabilitare il traffico IA</tip>   <!-- English: "Frame-rate too low? - try disabling AI traffic" -->
+	<tip n="11">Seleziona Ambiente → Meteo per volare in differenti condizioni metereologiche</tip>   <!-- English: "Select Environment → Weather to fly in different weather" -->
+	<tip n="12">Premi F12 per modificare facilmente le frequenze radio</tip>   <!-- English: "Press F12 to change the radio frequencies easily" -->
+	<tip n="13">Guardati attorno tenendo premuto il tasto destro del mouse e spostando il puntatore</tip>   <!-- English: "Look around by holding down the right mouse button and moving the mouse" -->
+	<tip n="14">Seleziona Multigiocatore → Impostazioni multigiocatore per unirti all'ambiente di volo condiviso</tip>   <!-- English: "Select Multiplayer → Multiplayer Settings to join the shared flight environment" -->
+	<tip n="15">Non riesci ad avviare il motore? Vedi Aiuto → Checklist aereo</tip>   <!-- English: "Can't get the engine started? - see Help → Aircraft Checklists" -->
+	<tip n="16">Trascina il puntatore mentre tieni premuti i tasti centrale e destro del mouse per muovere il punto di vista</tip>   <!-- English: "Drag while holding the middle and right mouse buttons to move the viewpoint" -->
+	<tip n="17">Premi / per esplorare le proprietà interne del simulatore</tip>   <!-- English: "Press / to explore the internals of the simulator" -->
+	<tip n="18">Premi TAB per muovere il punto di vista con il mouse e utilizza la rotella per modificare lo zoom</tip>   <!-- English: "Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom" -->
 </PropertyList>

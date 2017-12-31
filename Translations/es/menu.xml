@@ -17,7 +17,7 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2012-July-13 for FlightGear 2.8.0
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
@@ -26,11 +26,14 @@
 	<reset>Reiniciar</reset>   <!-- English: "Reset" -->
 	<load-tape>Cargar grabación de vuelo</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
 	<save-tape>Guardar grabación de vuelo</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
-	<snap-shot>Capturar pantalla</snap-shot>   <!-- English: "Screenshot  " -->
+	<snap-shot>Capturar pantalla</snap-shot>   <!-- English: "Screenshot" -->
 	<snap-shot-dir>Directorio capturas</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Configurar sonido</sound-config>   <!-- English: "Sound Configuration" -->
-	<input-config>Configurar dispositivos de entrada</input-config>   <!-- English: "Input Configuration" -->
-	<exit>Salir</exit>   <!-- English: "Quit          " -->
+	<input-config>Configurar dispositivos de entrada</input-config>   <!-- English: "Mouse Configuration" -->
+	<joystick-config>Configuración de joystick</joystick-config>   <!-- English: "Joystick Configuration" -->
+	<terrasync>Descargar escenarios</terrasync>   <!-- English: "Scenery Download" -->
+<!-- 	<aircraft-center>???</aircraft-center> -->   <!-- English: "Aircraft Center (Experimental)" -->
+	<exit>Salir</exit>   <!-- English: "Quit" -->
 
 	<!-- View menu -->
 	<view>Vista</view>   <!-- English: "View" -->
@@ -65,17 +68,18 @@
 	<environment-settings>Configurar ambiente</environment-settings>   <!-- English: "Environment Settings" -->
 	<time-settings>Configurar horario</time-settings>   <!-- English: "Time Settings" -->
 	<wildfire-settings>Configurar incendios</wildfire-settings>   <!-- English: "Wildfire Settings" -->
-	<terrasync>Descargar escenarios</terrasync>   <!-- English: "Scenery Download" -->
 
 	<!-- Equipment menu -->
 	<equipment>Equipamiento</equipment>   <!-- English: "Equipment" -->
 	<map>Mapa</map>   <!-- English: "Map" -->
+<!-- 	<map-canvas>???</map-canvas> -->   <!-- English: "Map (Canvas)" -->
+<!-- 	<map-browser>???</map-browser> -->   <!-- English: "Map (opens in browser)" -->
 	<stopwatch>Cronómetro</stopwatch>   <!-- English: "Stopwatch" -->
 	<fuel-and-payload>Combustible y cargamento</fuel-and-payload>   <!-- English: "Fuel and Payload" -->
 	<radio>Configurar radio</radio>   <!-- English: "Radio Settings" -->
 	<gps>Configurar GPS</gps>   <!-- English: "GPS Settings" -->
 	<instrument-settings>Configurar instrumentos</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu>--- Fallas ---</failure-submenu>   <!-- English: " -_- Failures -_-" -->
+	<failure-submenu>--- Fallas ---</failure-submenu>   <!-- English: "-_- Failures -_-" -->
 	<random-failures>Fallas al azar</random-failures>   <!-- English: "Random Failures" -->
 	<system-failures>Fallas de sistemas</system-failures>   <!-- English: "System Failures" -->
 	<instrument-failures>Fallas de instrumental</instrument-failures>   <!-- English: "Instrument Failures" -->
@@ -92,10 +96,12 @@
 	<!-- Multiplayer menu -->
 	<multiplayer>Multijugador</multiplayer>   <!-- English: "Multiplayer" -->
 	<mp-settings>Configuración multijugador</mp-settings>   <!-- English: "Multiplayer Settings" -->
+<!-- 	<fgcom-settings>???</fgcom-settings> -->   <!-- English: "FGCom Settings" -->
 	<mp-chat>Ventana de chat</mp-chat>   <!-- English: "Chat Dialog" -->
 	<mp-chat-menu>Menú de chat</mp-chat-menu>   <!-- English: "Chat Menu" -->
 	<mp-list>Lista de pilotos</mp-list>   <!-- English: "Pilot List" -->
 	<mp-carrier>Selección de portaaviones multijugador</mp-carrier>   <!-- English: "MPCarrier Selection" -->
+<!-- 	<lag-adjust>???</lag-adjust> -->   <!-- English: "Lag Settings" -->
 
 	<!-- Debug menu -->
 	<debug>Depurar</debug>   <!-- English: "Debug" -->
@@ -111,6 +117,7 @@
 	<reload-materials>Recargar materiales</reload-materials>   <!-- English: "Reload Materials" -->
 	<reload-scenery>Recargar escenarios</reload-scenery>   <!-- English: "Reload Scenery" -->
 	<nasal-console>Consola nasal</nasal-console>   <!-- English: "Nasal Console" -->
+<!-- 	<nasal-repl-interpreter>???</nasal-repl-interpreter> -->   <!-- English: "Nasal REPL Interpreter" -->
 	<development-keys>Teclas de desarrollo</development-keys>   <!-- English: "Development Keys" -->
 	<configure-dev-extension>Configurar extensiones de desarrollo</configure-dev-extension>   <!-- English: "Configure Development Extensions" -->
 	<display-marker>Mostrar marcadores de tutorial</display-marker>   <!-- English: "Display Tutorial Marker" -->
@@ -118,26 +125,28 @@
 	<print-rendering-statistics>Mostrar estadísticas de renderizado</print-rendering-statistics>   <!-- English: "Print Rendering Statistics" -->
 	<statistics-display>Mostrar estadísticas en pantalla</statistics-display>   <!-- English: "Cycle On-Screen Statistics" -->
 	<performance-monitor>Monitor de performance del sistema</performance-monitor>   <!-- English: "Monitor System Performance" -->
+<!-- 	<write-video-config>???</write-video-config> -->   <!-- English: "Save Video Configuration" -->
 	<property-browser>Visor de propiedades internas</property-browser>   <!-- English: "Browse Internal Properties" -->
+<!-- 	<fg1000>???</fg1000> -->   <!-- English: "FG1000 MFD" -->
 	<logging>Registro</logging>   <!-- English: "Logging" -->
 	<local_weather>Clima local (pruebas)</local_weather>   <!-- English: "Local Weather (Test)" -->
 	<print-scene-info>Información escena visible</print-scene-info>   <!-- English: "Print Visible Scene Info" -->
 	<rendering-buffers>Ocultar/Mostrar buffers de renderizado</rendering-buffers>   <!-- English: "Hide/Show Rendering Buffers" -->
 	<rembrandt-buffers-choice>Seleccionar buffers de renderizado</rembrandt-buffers-choice>   <!-- English: "Select Rendering Buffers" -->
+<!-- 	<interface-config>???</interface-config> -->   <!-- English: "User-interface options" -->
 
 	<!-- Help menu -->
 	<help>Ayuda</help>   <!-- English: "Help" -->
-	<help-browser>Ayuda (abre en el navegador)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<help-browser>Ayuda (abre en el navegador)</help-browser>   <!-- English: "Help (opens in browser)" -->
 	<doc-browser>Navegador de documentación</doc-browser>   <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Ayuda de aeronave</aircraft-keys>   <!-- English: "Aircraft Help" -->
 	<aircraft-checklists>Listas de chequeo de aeronave</aircraft-checklists>   <!-- English: "Aircraft Checklists" -->
 	<common-keys>Teclas comunes a toda aeronave</common-keys>   <!-- English: "Common Aircraft Keys" -->
 	<basic-keys>Teclas básicas del simulador</basic-keys>   <!-- English: "Basic Simulator Keys" -->
-	<joystick-config>Configuración de joystick</joystick-config>   <!-- English: "Joystick Configuration" -->
 	<joystick-info>Información de joystick</joystick-info>   <!-- English: "Joystick Information" -->
 	<tutorial-start>Tutoriales</tutorial-start>   <!-- English: "Tutorials" -->
 	<menu-about>Acerca de</menu-about>   <!-- English: "About" -->
-	
+
 	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
 	<select-livery>Seleccionar livery</select-livery>   <!-- English: "Select livery" -->
 	<show-hide-yokes>Mostrar/ocultar cuernos</show-hide-yokes>   <!-- English: "Show/hide yokes" -->

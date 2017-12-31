@@ -17,16 +17,16 @@
 ###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
 ###      consecutive "-" characters in comments).
 ###
-### Last synchronized with English master resource on 2016-March-22 for FlightGear 2016.2
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
 ### -->
 <PropertyList>
 
 	<!-- File menu -->
 	<file>File</file>   <!-- English: "File" -->
-	<reset>Reimposta</reset>   <!-- English: "Reset                              " -->
+	<reset>Reimposta</reset>   <!-- English: "Reset" -->
 	<load-tape>Carica nastro registratore di volo</load-tape>   <!-- English: "Load Flight Recorder Tape" -->
 	<save-tape>Salva nastro registratore di volo</save-tape>   <!-- English: "Save Flight Recorder Tape" -->
-	<snap-shot>Cattura schermata</snap-shot>   <!-- English: "Screenshot                      " -->
+	<snap-shot>Cattura schermata</snap-shot>   <!-- English: "Screenshot" -->
 	<snap-shot-dir>Directory salvataggio schermate</snap-shot-dir>   <!-- English: "Screenshot Directory" -->
 	<sound-config>Configurazione audio</sound-config>   <!-- English: "Sound Configuration" -->
 	<input-config>Configurazione mouse</input-config>   <!-- English: "Mouse Configuration" -->
@@ -79,7 +79,7 @@
 	<radio>Impostazioni radio</radio>   <!-- English: "Radio Settings" -->
 	<gps>Impostazioni GPS</gps>   <!-- English: "GPS Settings" -->
 	<instrument-settings>Impostazioni strumenti di bordo</instrument-settings>   <!-- English: "Instrument Settings" -->
-	<failure-submenu>--- Guasti ---</failure-submenu>   <!-- English: " __- Failures __-" -->
+	<failure-submenu>--- Guasti ---</failure-submenu>   <!-- English: "-_- Failures -_-" -->
 	<random-failures>Guasti casuali</random-failures>   <!-- English: "Random Failures" -->
 	<system-failures>Guasti di sistema</system-failures>   <!-- English: "System Failures" -->
 	<instrument-failures>Guasti degli strumenti di bordo</instrument-failures>   <!-- English: "Instrument Failures" -->
@@ -125,8 +125,9 @@
 	<print-rendering-statistics>Stampa statistiche rendering</print-rendering-statistics>   <!-- English: "Print Rendering Statistics" -->
 	<statistics-display>Visualizza ciclicamente le statistiche a schermo</statistics-display>   <!-- English: "Cycle On-Screen Statistics" -->
 	<performance-monitor>Controlla performance di sistema</performance-monitor>   <!-- English: "Monitor System Performance" -->
-        <write-video-config>Salva configurazione video</write-video-config>   <!-- English: "Save Video Configuration" -->
+	<write-video-config>Salva configurazione video</write-video-config>   <!-- English: "Save Video Configuration" -->
 	<property-browser>Sfoglia proprietà interne</property-browser>   <!-- English: "Browse Internal Properties" -->
+<!-- 	<fg1000>???</fg1000> -->   <!-- English: "FG1000 MFD" -->
 	<logging>Logging</logging>   <!-- English: "Logging" -->
 	<local_weather>Meteo locale (test)</local_weather>   <!-- English: "Local Weather (Test)" -->
 	<print-scene-info>Stampa informazioni scena visibile</print-scene-info>   <!-- English: "Print Visible Scene Info" -->
@@ -136,7 +137,7 @@
 
 	<!-- Help menu -->
 	<help>Aiuto</help>   <!-- English: "Help" -->
-	<help-browser>Guida (si apre nel browser)</help-browser>   <!-- English: "Help  (opens in browser)" -->
+	<help-browser>Guida (si apre nel browser)</help-browser>   <!-- English: "Help (opens in browser)" -->
 	<doc-browser>Browser documentazione</doc-browser>   <!-- English: "Documentation Browser" -->
 	<aircraft-keys>Guida aereo</aircraft-keys>   <!-- English: "Aircraft Help" -->
 	<aircraft-checklists>Checklist aereo</aircraft-checklists>   <!-- English: "Aircraft Checklists" -->
@@ -152,6 +153,6 @@
 	<immatriculation>Marche</immatriculation>   <!-- English: "Immatriculation" -->
 	<pushback>Pushback</pushback>   <!-- English: "Pushback" -->
 	<autostart>Avvio automatico</autostart>   <!-- English: "Autostart" -->
-	<tiller-steering>Tiller Steering</tiller-steering>   <!-- English: "" -->
+	<tiller-steering>Tiller Steering</tiller-steering>   <!-- English: "Tiller Steering" -->
 
 </PropertyList>

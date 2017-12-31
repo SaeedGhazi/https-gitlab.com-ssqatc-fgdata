@@ -127,7 +127,7 @@
 	<performance-monitor>Controlla performance di sistema</performance-monitor>   <!-- English: "Monitor System Performance" -->
 	<write-video-config>Salva configurazione video</write-video-config>   <!-- English: "Save Video Configuration" -->
 	<property-browser>Sfoglia proprietà interne</property-browser>   <!-- English: "Browse Internal Properties" -->
-<!-- 	<fg1000>???</fg1000> -->   <!-- English: "FG1000 MFD" -->
+	<fg1000>Display multifunzione FG1000</fg1000>   <!-- English: "FG1000 MFD" -->
 	<logging>Logging</logging>   <!-- English: "Logging" -->
 	<local_weather>Meteo locale (test)</local_weather>   <!-- English: "Local Weather (Test)" -->
 	<print-scene-info>Stampa informazioni scena visibile</print-scene-info>   <!-- English: "Print Visible Scene Info" -->

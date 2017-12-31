@@ -1399,7 +1399,7 @@
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:2" translate="yes">
           <source>Press a/A to adjust the simulation speed</source>
-          <target />
+          <target>Tasten a/A drücken, um die Simulationsgeschwindigkeit anzupassen</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:3" translate="yes">
           <source>Press x/X to zoom in and out</source>
@@ -1411,11 +1411,11 @@
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:5" translate="yes">
           <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
-          <target />
+          <target>Taste v drücken, um die Perspektive zu wechseln. Strg-V kehrt ins Cockpit zurück</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:6" translate="yes">
           <source>Press F3 to take a screenshot</source>
-          <target />
+          <target>Drücke F3, um ein Bildschirmfoto zu erstellen</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:7" translate="yes">
           <source>Join the FlightGear community at http://forum.flightgear.org</source>
@@ -1427,15 +1427,15 @@
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:9" translate="yes">
           <source>Show or hide the menu bar by pressing F10</source>
-          <target />
+          <target>Mit F10 die Menüzeile ein-/ausblenden</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:10" translate="yes">
           <source>Frame-rate too low? - try disabling AI traffic</source>
-          <target />
+          <target>Ruckelt die Simulation? Versuche es mal, den KI Verkehr abzuschalten</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:11" translate="yes">
           <source>Select Environment → Weather to fly in different weather</source>
-          <target />
+          <target>Wählte Umgebung → Wetter, um in verschiedenen Wetterlagen zu fliegen</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:12" translate="yes">
           <source>Press F12 to change the radio frequencies easily</source>
@@ -1451,7 +1451,7 @@
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:15" translate="yes">
           <source>Can't get the engine started? - see Help → Aircraft Checklists</source>
-          <target />
+          <target>Probleme den Motor zu starten? Siehe Hilfe → Aircraft Checklists</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:16" translate="yes">
           <source>Drag while holding the middle and right mouse buttons to move the viewpoint</source>
@@ -1459,7 +1459,7 @@
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:17" translate="yes">
           <source>Press / to explore the internals of the simulator</source>
-          <target />
+          <target>Drücke die Taste "/", um die Internas des Simulators zu erkunden</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:18" translate="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>

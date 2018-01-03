@@ -7,10 +7,12 @@ var loadPFDFile = func(file) io.load_nasal(mfd_dir ~ file, "PFD");
 loadPFDFile("DefaultStyle.nas");
 loadPFDFile("UIElement.nas");
 loadPFDFile("TextElement.nas");
-loadPFDFile("ArrowElement.nas");
+loadPFDFile("HighlightElement.nas");
 loadPFDFile("GroupElement.nas");
 loadPFDFile("ScrollElement.nas");
 loadPFDFile("DataEntryElement.nas");
+loadPFDFile("PointerElement.nas");
+loadPFDFile("RotatingElement.nas");
 
 var MFDPage =
 {

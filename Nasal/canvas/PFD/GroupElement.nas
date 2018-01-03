@@ -67,7 +67,7 @@ new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, scroll
 
   for (var i = 0; i < size; i = i + 1) {
     if (obj._arrow == 1) {
-      append(obj._elements, PFD.ArrowElement.new(pageName, svg, highlightElement ~ i, i, obj._style));
+      append(obj._elements, PFD.HighlightElement.new(pageName, svg, highlightElement ~ i, i, obj._style));
     } else {
       append(obj._elements, PFD.TextElement.new(pageName, svg, highlightElement ~ i, i, obj._style));
     }
@@ -168,8 +168,8 @@ displayPage : func () {
 
 # Methods to add dynamic elements to the group.  Must be called in the
 # scroll order, as they are simply appended to the end of the list of elements!
-addArrowElement : func(name, value) {
-  append(me._elements, ArrowElement.new(me._pageName, me._svg, name, value));
+addHighlightElement : func(name, value) {
+  append(me._elements, HighlightElement.new(me._pageName, me._svg, name, value));
 },
 addTextElement : func(name, value) {
   append(me._elements, TextElement.new(me._pageName, me._svg, name, value));

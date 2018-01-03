@@ -12,6 +12,7 @@ io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
 
 var MFDPages = [
   "NavigationMap",
+  "EIS",
   "TrafficMap",
   "Stormscope",
   "WeatherDataLink",
@@ -57,10 +58,7 @@ foreach (var page; MFDPages) {
   io.load_nasal(nasal_dir ~ page ~ '/' ~ page ~ 'Controller.nas', "fg1000");
 }
 
-io.load_nasal(nasal_dir ~ 'EIS.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Drivers/EISDriver.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'PageGroupController.nas', "fg1000");
-
 
 var MFD =
 {
@@ -103,13 +101,12 @@ var MFD =
     # Surround dynamic elements
     obj._pageTitle = obj._svg.getElementById("PageTitle");
 
-    # Engine Information System
-    obj._eisDriver = fg1000.EISDriver.new();
-    obj.EIS = fg1000.EIS.new(myCanvas, obj._eisDriver);
-
     # Controller for the display on the bottom left which allows selection
     # of page groups and individual pages using the FMS controller.
     obj._pageGroupController = fg1000.PageGroupController.new(myCanvas, obj._svg, obj._MFDDevice);
+
+    # Engine Information System.  A special case as it's always displayed on the MFD.
+    obj.EIS = obj._pageGroupController.addPage("EIS", fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg));
 
     # The NavigationMap page is a special case, as it is displayed with the Nearest... pages as an overlay
     obj.NavigationMap = obj._pageGroupController.addPage("NavigationMap", fg1000.NavigationMap.new(obj, myCanvas, obj._MFDDevice, obj._svg));
@@ -123,8 +120,11 @@ var MFD =
       }
     }
 
-    # Display the NavMap and the appropriate top level on startup.
+    # Display the EIS and NavMap and the appropriate top level on startup.
+    obj.EIS.setVisible(1);
+    obj.EIS.ondisplay();
     obj._MFDDevice.selectPage(obj.NavigationMap);
+
 
     # Add a wheel controller., which we will attach to the zoom.
     myCanvas.addEventListener("wheel", func(e)
@@ -135,14 +135,6 @@ var MFD =
         obj._MFDDevice.current_page.controller.handleFMSInner(-1);
       }
     });
-
-    var updateTimer = func() {
-      obj._eisDriver.update();
-      obj.EIS.update();
-      settimer(updateTimer, 0.1);
-    };
-
-    updateTimer();
 
     return obj;
   },

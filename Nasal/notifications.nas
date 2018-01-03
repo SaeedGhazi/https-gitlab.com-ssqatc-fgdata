@@ -544,12 +544,15 @@ var PFDEventNotification =
 #     2       select page by ID
 #     3       Change softkey button text
 #     4       hardkey pushed - i.e. non-soft keys that don't change function based on context.
+#     5       Engine data - e.g. RPM, EGTs, CHTs for display purposes
 # _event_param - param related to the event ID. implementation specific.
 ##
     SoftKeyPushed : 1,
     SelectPageById : 2,
     ChangeMenuText : 3, #event parameter contains array of { Id: , Text: } tuples
     HardKeyPushed : 4,  #event parameter contains single { Id: , Value: } tuple
+    EngineData : 5,     #event parameter contains an array of hashes, each containing information about a given engine.
+
     DefaultType : "PFDEventNotification",
 
     new: func(_ident, _device_id,_event_id,_event_parameter_id)

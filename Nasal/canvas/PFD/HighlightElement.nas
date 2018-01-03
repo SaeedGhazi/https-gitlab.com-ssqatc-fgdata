@@ -1,11 +1,11 @@
-# PFD UI Element - Arrow UI Element. Can have values set and retrieved
-# and has a separate arrow icon to indicate selection
-var ArrowElement =
+# PFD UI Element - Highlight UI Element. Can have values set and retrieved
+# Highlighting simply shows the element.
+var HighlightElement =
 {
-  new : func (pagename, svg, name, value, style=nil)
+  new : func (pagename, svg, name, value="", style=nil)
   {
     var obj = {
-      parents : [ ArrowElement, PFD.UIElement ],
+      parents : [ HighlightElement, PFD.UIElement ],
       _name : pagename ~ name,
       _value : value,
       _style : style,

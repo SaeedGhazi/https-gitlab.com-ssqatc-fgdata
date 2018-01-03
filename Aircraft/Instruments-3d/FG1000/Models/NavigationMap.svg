@@ -23,11 +23,11 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="1043.4675"
-     inkscape:cy="319.89557"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="723.45322"
+     inkscape:cy="612.12112"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="NavigationMapGroup"
      showgrid="true"
      inkscape:window-width="2495"
      inkscape:window-height="1416"
@@ -101,12 +101,12 @@
          width="74.343285"
          height="20.035156"
          x="952.10205"
-         y="63.956055" />
+         y="55.482422" />
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:#fffcfa;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="956.10889"
-         y="78.973633"
+         y="70.5"
          id="NavigationMapOrientation"
          sodipodi:linespacing="125%"
          inkscape:label="#text4218"><tspan
@@ -114,11 +114,12 @@
            sodipodi:role="line"
            id="tspan4220"
            x="956.10889"
-           y="78.973633">NORTH UP</tspan></text>
+           y="70.5">NORTH UP</tspan></text>
     </g>
     <g
        id="NavigationMapGroupPartial"
-       inkscape:label="#g4878">
+       inkscape:label="#g4878"
+       transform="translate(14.999977,-0.47363257)">
       <rect
          y="718.50403"
          x="640.57623"
@@ -150,21 +151,21 @@
          id="rect4817"
          width="74.343285"
          height="20.035156"
-         x="635.17432"
-         y="63.956055" />
+         x="635.48242"
+         y="55.956055" />
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#fffcfa;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="639.18115"
-         y="78.973633"
+         x="639.48926"
+         y="70.973633"
          id="NavigationMapOrientationPartial"
          sodipodi:linespacing="125%"
          inkscape:label="#text4218"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
            sodipodi:role="line"
            id="tspan4821"
-           x="639.18115"
-           y="78.973633">NORTH UP</tspan></text>
+           x="639.48926"
+           y="70.973633">NORTH UP</tspan></text>
     </g>
   </g>
 </svg>

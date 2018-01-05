@@ -30,21 +30,21 @@ var EIS =
   },
 
   updateData : func(engineData) {
-    obj.setTextElement("RPMDisplay", sprintf("%i", engineData.RPM));
-    obj.setTextElement("MBusVolts", sprintf("%.01f", engineData.MBusVolts));
-    obj.setTextElement("EBusVolts", sprintf("%.01f", engineData.MBusVolts)); # TODO: Include Emergency Bus
-    obj.setTextElement("EngineHours", sprintf("%.01f", engineData.EngineHours));
+    me.setTextElement("RPMDisplay", sprintf("%i", engineData.RPM));
+    me.setTextElement("MBusVolts", sprintf("%.01f", engineData.MBusVolts));
+    me.setTextElement("EBusVolts", sprintf("%.01f", engineData.MBusVolts)); # TODO: Include Emergency Bus
+    me.setTextElement("EngineHours", sprintf("%.01f", engineData.EngineHours));
 
-    obj._fuelFlowPointer.setValue(engineData.FuelFlowGPH);
-    obj._oilPressurePointer.setValue(engineData.OilPressurePSI);
-    obj._oilTempPointer.setValue(engineData.OilTemperatureF);
-    obj._EGTPointer.setValue(engineData.EGTNorm);
-    obj._EGTCylinder.setValue(engineData.EGTNorm);
-    obj._vacPointer.setValue(engineData.VacuumSuctionInHG);
-    obj._leftFuelPointer.setValue(engineData.LeftFuelUSGal);
-    obj._rightFuelPointer.setValue(engineData.RightFuelUSGal);
+    me._fuelFlowPointer.setValue(engineData.FuelFlowGPH);
+    me._oilPressurePointer.setValue(engineData.OilPressurePSI);
+    me._oilTempPointer.setValue(engineData.OilTemperatureF);
+    me._EGTPointer.setValue(engineData.EGTNorm);
+    me._EGTCylinder.setValue(engineData.EGTNorm);
+    me._vacPointer.setValue(engineData.VacuumSuctionInHG);
+    me._leftFuelPointer.setValue(engineData.LeftFuelUSGal);
+    me._rightFuelPointer.setValue(engineData.RightFuelUSGal);
 
-    obj._RPMPointer.setValue(engineData.RPM);
+    me._RPMPointer.setValue(engineData.RPM);
   },
 
   # Menu tree .  engineMenu is referenced from most pages as softkey 0:

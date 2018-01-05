@@ -15,6 +15,8 @@
             var self = cmdarg();
             var listeners = [];
             var mfd = nil;
+            var eisPublisher = nil;
+            var navcomPublisher = nil;
         ]]></open>
 
         <close><![CDATA[
@@ -22,6 +24,11 @@
                 removelistener(l);
             setsize(listeners, 0);
             mfd.del();
+            eisPublisher.stop();
+            eisPublisher = nil;
+            navcomPublisher.stop();
+            navcomPublisher = nil;
+
 
         ]]></close>
     </nasal>
@@ -362,7 +369,16 @@
 
                         var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
                         io.load_nasal(nasal_dir ~ 'MFD.nas', "fg1000");
+                        io.load_nasal(nasal_dir ~ 'Interfaces/PropertyPublisher.nas', "fg1000");
+                        io.load_nasal(nasal_dir ~ 'Interfaces/GenericEISPublisher.nas', "fg1000");
+                        io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas', "fg1000");
                         mfd = fg1000.MFD.new(myCanvas);
+
+                        eisPublisher = fg1000.GenericEISPublisher.new();
+                        eisPublisher.start();
+
+                        navcomPublisher = fg1000.GenericNavComPublisher.new();
+                        navcomPublisher.start();
 
                         softkeypushed = 0;
                         # Connect the buttons - using the provided model index to get the right ones from the model binding

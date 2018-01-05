@@ -11,6 +11,7 @@ var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal
 io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
 
 var MFDPages = [
+  "Surround",
   "NavigationMap",
   "EIS",
   "TrafficMap",
@@ -58,8 +59,6 @@ foreach (var page; MFDPages) {
   io.load_nasal(nasal_dir ~ page ~ '/' ~ page ~ 'Controller.nas', "fg1000");
 }
 
-io.load_nasal(nasal_dir ~ 'PageGroupController.nas', "fg1000");
-
 var MFD =
 {
   new : func (myCanvas)
@@ -68,8 +67,7 @@ var MFD =
       parents : [ MFD ],
       EIS : nil,
       NavigationMap: nil,
-
-
+      Surround : nil,      
     };
 
     obj._svg = myCanvas.createGroup("softkeys");
@@ -101,26 +99,28 @@ var MFD =
     # Surround dynamic elements
     obj._pageTitle = obj._svg.getElementById("PageTitle");
 
-    # Controller for the display on the bottom left which allows selection
+    # Controller for the header and display on the bottom left which allows selection
     # of page groups and individual pages using the FMS controller.
-    obj._pageGroupController = fg1000.PageGroupController.new(myCanvas, obj._svg, obj._MFDDevice);
+    obj.Surround = fg1000.Surround.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj._pageGroupController = obj.Surround.controller;
 
     # Engine Information System.  A special case as it's always displayed on the MFD.
-    obj.EIS = obj._pageGroupController.addPage("EIS", fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg));
+    obj.EIS = obj.Surround.addPage("EIS", fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg));
 
     # The NavigationMap page is a special case, as it is displayed with the Nearest... pages as an overlay
-    obj.NavigationMap = obj._pageGroupController.addPage("NavigationMap", fg1000.NavigationMap.new(obj, myCanvas, obj._MFDDevice, obj._svg));
+    obj.NavigationMap = obj.Surround.addPage("NavigationMap", fg1000.NavigationMap.new(obj, myCanvas, obj._MFDDevice, obj._svg));
     obj.NavigationMap.topMenu(obj._MFDDevice, obj.NavigationMap, nil);
 
     foreach (var page; MFDPages) {
-      if (page != "NavigationMap") {
-        var code = "obj._pageGroupController.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
+      if ((page != "NavigationMap") and (page != "EIS")) {
+        var code = "obj.Surround.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
         var addPageFn = compile(code);
         addPageFn();
       }
     }
 
-    # Display the EIS and NavMap and the appropriate top level on startup.
+    # Display the Surround, EIS and NavMap and the appropriate top level on startup.
+    obj.Surround.setVisible(1);
     obj.EIS.setVisible(1);
     obj.EIS.ondisplay();
     obj._MFDDevice.selectPage(obj.NavigationMap);
@@ -142,6 +142,7 @@ var MFD =
   {
     me._MFDDevice.current_page.offdisplay();
     me._MFDDevice.DeRegisterWithEmesary();
+    me._pageGroupController.del();
 
   },
   setPageTitle: func(title)

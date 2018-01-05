@@ -38,7 +38,8 @@ var EISController =
     }
 
     # Display it
-    me.page.upateData(data);
+    me._page.updateData(data);
+    return emesary.Transmitter.ReceiptStatus_OK;
   },
 
   RegisterWithEmesary : func(transmitter = nil){

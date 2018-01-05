@@ -72,6 +72,7 @@ var NearestAirportsController =
   handleCRSR : func() {
     me._crsrToggle = (! me._crsrToggle);
     if (me._crsrToggle) {
+      me.page.topMenu(me.page.device, me.page, nil);
       me.page.selectAirports();
       me.selectAirports();
     } else {

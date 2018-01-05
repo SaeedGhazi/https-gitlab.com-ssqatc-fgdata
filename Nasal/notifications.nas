@@ -545,6 +545,7 @@ var PFDEventNotification =
 #     3       Change softkey button text
 #     4       hardkey pushed - i.e. non-soft keys that don't change function based on context.
 #     5       Engine data - e.g. RPM, EGTs, CHTs for display purposes
+#     6       NavCom data - e.g. frequencies, volume, TX, RX for each of the COM and NAV radios.
 # _event_param - param related to the event ID. implementation specific.
 ##
     SoftKeyPushed : 1,
@@ -552,6 +553,7 @@ var PFDEventNotification =
     ChangeMenuText : 3, #event parameter contains array of { Id: , Text: } tuples
     HardKeyPushed : 4,  #event parameter contains single { Id: , Value: } tuple
     EngineData : 5,     #event parameter contains an array of hashes, each containing information about a given engine.
+    NavComData : 6,     #event paramterr contains a hash of updated Nav/Com settings
 
     DefaultType : "PFDEventNotification",
 

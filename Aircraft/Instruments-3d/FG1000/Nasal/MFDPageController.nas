@@ -1,0 +1,167 @@
+# Standard MFDPage Controller
+#
+# This should be extended by specific page controllers and the handle...()
+# methods over-ridden to provide specific functions for the MFD buttons.
+
+var MFDPageController = {
+
+new : func (page)
+{
+  var obj = { parents : [ MFDPageController ] };
+
+  # Emesary
+  obj._recipient = nil;
+  obj._page = page;
+  obj._transmitter = emesary.GlobalTransmitter;
+  obj._registered = 0;
+
+
+  return obj;
+},
+
+# Default handlers for all the Fascia hardkeys.  These should be over-ridden
+# as required by specific page function.
+
+handleNavVol          : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleNavVolToggle    : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleNavFreqTransfer : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleNavOuter        : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleNavInner        : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleToggle          : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleHeading         : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleHeadingPress    : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+# Joystick
+handleRange              : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleJoystickHorizontal : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleJoystickHorizontal : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+#CRS/BARO
+handleBaro      : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleCRS       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleCRSCenter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+handleComOuter  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleComInner  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleComToggle : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+handleFreqTransfer     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleFreqTransferHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; }, # Auto-tunes to 121.2 when pressed for 2 seconds
+
+handleComVol       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleComVolToggle : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },,
+
+handleDTO     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleFPL     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleCLR     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleCLRHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+# By default, the FMS knobs will select a new page.
+handleFMSOuter : func (value) { return me.page.mfd._pageGroupController.handleFMSOuter(value); },
+handleFMSOuter : func (value) { return me.page.mfd._pageGroupController.handleFMSInner(value); },
+handleCRSR     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+handleMenu  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleProc  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleEnter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+handleAltOuter  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleAltInner : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+RegisterWithEmesary : func()
+{
+  if (me._recipient == nil){
+    me._recipient = emesary.Recipient.new("MFDPageController_" ~ me.page.device.designation);
+    var pfd_obj = me.page.device;
+    var controller = me;
+    me._recipient.Receive = func(notification)
+    {
+      if (notification.Device_Id == pfd_obj.device_id
+          and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+        if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
+            and notification.EventParameter != nil)
+        {
+          var id = notification.EventParameter.Id;
+          var value = notification.EventParameter.Value;
+
+          #printf("Button pressed " ~ id ~ " " ~ value);
+
+          if (id == fg1000.FASCIA.NAV_VOL)             return controller.handleNavVol(value);
+          if (id == fg1000.FASCIA.NAV_VOL_TOGGLE)      return controller.handleNavVolToggle(value);
+          if (id == fg1000.FASCIA.NAV_FREQ_TRANSFER)   return controller.handleNavFreqTransfer(value);
+          if (id == fg1000.FASCIA.NAV_OUTER)           return controller.handleNavOuter(value);
+          if (id == fg1000.FASCIA.NAV_INNER)           return controller.handleNavInner(value);
+          if (id == fg1000.FASCIA.NAV_TOGGLE)          return controller.handleToggle(value);
+          if (id == fg1000.FASCIA.HEADING)             return controller.handleHeading(value);
+          if (id == fg1000.FASCIA.HEADING_PRESS)       return controller.handleHeadingPress(value);
+
+          # Joystick
+          if (id == fg1000.FASCIA.RANGE)               return controller.handleRange(value);
+          if (id == fg1000.FASCIA.JOYSTICK_HORIZONTAL) return controller.handleJoystickHorizontal(value);
+          if (id == fg1000.FASCIA.JOYSTICK_VERTICAL)   return controller.handleJoystickHorizontal(value);
+
+          #CRS/BARO
+          if (id == fg1000.FASCIA.BARO)         return controller.handleBaro(value);
+          if (id == fg1000.FASCIA.CRS)          return controller.handleCRS(value);
+          if (id == fg1000.FASCIA.CRS_CENTER)   return controller.handleCRSCenter(value);
+
+          if (id == fg1000.FASCIA.COM_OUTER)    return controller.handleComOuter(value);
+          if (id == fg1000.FASCIA.COM_INNER)    return controller.handleComInner(value);
+          if (id == fg1000.FASCIA.COM_TOGGLE)   return controller.handleComToggle(value);
+
+          if (id == fg1000.FASCIA.COM_FREQ_TRANSFER)        return controller.handleFreqTransfer(value);
+          if (id == fg1000.FASCIA.COM_FREQ_TRANSFER_HOLD)   return controller.handleFreqTransferHold(value); # Auto-tunes to 121.2 when pressed for 2 seconds
+
+          if (id == fg1000.FASCIA.COM_VOL)          return controller.handleComVol(value);
+          if (id == fg1000.FASCIA.COM_VOL_TOGGLE)   return controller.handleComVolToggle(value);
+
+          if (id == fg1000.FASCIA.DTO)       return controller.handleDTO(value);
+          if (id == fg1000.FASCIA.FPL)       return controller.handleFPL(value);
+          if (id == fg1000.FASCIA.CLR)       return controller.handleClear(value);
+          if (id == fg1000.FASCIA.CLR_HOLD)  return controller.handleClearHold(value);
+
+          if (id == fg1000.FASCIA.FMS_OUTER)   return controller.handleFMSOuter(value);
+          if (id == fg1000.FASCIA.FMS_INNER)   return controller.handleFMSInner(value);
+          if (id == fg1000.FASCIA.FMS_CRSR)   return controller.handleCRSR(value);
+
+          if (id == fg1000.FASCIA.MENU)   return controller.handleMenu(value);
+          if (id == fg1000.FASCIA.PROC)   return controller.handleProc(value);
+          if (id == fg1000.FASCIA.ENT)    return controller.handleEnter(value);
+
+          if (id == fg1000.FASCIA.ALT_OUTER)   return controller.handleAltOuter(value);
+          if (id == fg1000.FASCIA.ALT_INNER)   return controller.handleAltInner(value);
+
+          # Autopilot controls - ignore for now as like to be handled elsewhere
+          #if (id == fg1000.FASCIA.AP )   return controller.handle(value);
+          #if (id == fg1000.FASCIA.HDG)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.NAV)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.APR)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.VS )   return controller.handle(value);
+          #if (id == fg1000.FASCIA.FLC)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.FD )   return controller.handle(value);
+          #if (id == fg1000.FASCIA.ALT)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.VNV)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.BC )   return controller.handle(value);
+          #if (id == fg1000.FASCIA.NOSE_UP)   return controller.handle(value);
+          #if (id == fg1000.FASCIA.NOSE_DOWN)   return controller.handle(value);
+        }
+      }
+      return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    };
+  }
+
+  me._transmitter.Register(me._recipient);
+  me._registered = 1;
+
+},
+
+DeRegisterWithEmesary : func()
+{
+    # remove registration from transmitter; but keep the recipient once it is created.
+    if (me._registered == 1) me._transmitter.DeRegister(me._recipient);
+    me._registered = 0;
+},
+
+
+
+};

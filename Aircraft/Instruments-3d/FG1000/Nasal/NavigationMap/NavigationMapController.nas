@@ -83,17 +83,13 @@ var NavigationMapController =
 
   new : func (page, svg)
   {
-    var obj = { parents : [ NavigationMapController ] };
+    var obj = { parents : [ NavigationMapController, MFDPageController.new(page) ] };
     obj.current_zoom = 8;
     obj.declutter = 0;
     obj.airways = 0;
     obj.page = page;
     obj.setZoom(obj.current_zoom);
     obj.setOrientation(obj.ORIENTATIONS[0]);
-
-    # Emesary
-    obj._recipient = nil;
-    obj._zoomRecipient = nil;
 
     return obj;
   },
@@ -102,11 +98,6 @@ var NavigationMapController =
   },
   zoomOut : func() {
     me.setZoom(me.current_zoom +1);
-  },
-  zoom : func(val)
-  {
-    var incr_or_decr = (val > 0) ? 1 : -1;
-    me.setZoom(me.current_zoom + incr_or_decr);
   },
   setZoom : func(zoom) {
     if ((zoom < 0) or (zoom > (size(me.RANGES) - 1))) return;
@@ -186,41 +177,12 @@ var NavigationMapController =
     # bottom right of the screen
     return me.page.mfd._pageGroupController.handleFMSOuter(value);
   },
-  RegisterWithEmesary : func(transmitter = nil) {
-    if (transmitter == nil)
-      transmitter = emesary.GlobalTransmitter;
+  handleRange : func(val)
+  {
+    var incr_or_decr = (val > 0) ? 1 : -1;
+    me.setZoom(me.current_zoom + incr_or_decr);
+  },
 
-    if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("NavMapController_" ~ me.page.device.designation);
-      var pfd_obj = me.page.device;
-      var controller = me;
-      me._recipient.Receive = func(notification)
-      {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
-              and notification.EventParameter != nil)
-          {
-            var id = notification.EventParameter.Id;
-            var value = notification.EventParameter.Value;
-            #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
-            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
-            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
-          }
-        }
-        return emesary.Transmitter.ReceiptStatus_NotProcessed;
-      };
-    }
-    transmitter.Register(me._recipient);
-    me.transmitter = transmitter;
-  },
-  DeRegisterWithEmesary : func(transmitter = nil) {
-      # remove registration from transmitter; but keep the recipient once it is created.
-      if (me.transmitter != nil)
-        me.transmitter.DeRegister(me._recipient);
-      me.transmitter = nil;
-  },
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();
@@ -229,50 +191,4 @@ var NavigationMapController =
     me.DeRegisterWithEmesary();
   },
 
-  # Set controller for cases where the NavigationMap is displayed as part of
-  # another page, e.g. NearestAirports
-  #
-  # In this case we are only interested in a subset of the buttons to control
-  # the map.
-
-  RegisterZoomWithEmesary : func(transmitter = nil) {
-    if (transmitter == nil)
-      transmitter = emesary.GlobalTransmitter;
-
-    if (me._zoomRecipient == nil){
-      me._zoomRecipient = emesary.Recipient.new("NavMapController_" ~ me.page.device.designation);
-      var pfd_obj = me.page.device;
-      var controller = me;
-      me._zoomRecipient.Receive = func(notification)
-      {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
-              and notification.EventParameter != nil)
-          {
-            var id = notification.EventParameter.Id;
-            var value = notification.EventParameter.Value;
-            #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
-          }
-        }
-        return emesary.Transmitter.ReceiptStatus_NotProcessed;
-      };
-    }
-    transmitter.Register(me._zoomRecipient);
-    me.zoomTransmitter = transmitter;
-  },
-  DeRegisterZoomWithEmesary : func(transmitter = nil) {
-      # remove registration from transmitter; but keep the recipient once it is created.
-      if (me.zoomTransmitter != nil)
-        me.zoomTransmitter.DeRegister(me._zoomRecipient);
-      me.zoomTransmitter = nil;
-  },
-
-  ondisplayPartial : func() {
-    me.RegisterZoomWithEmesary();
-  },
-  offdisplayPartial : func() {
-    me.DeRegisterZoomWithEmesary();
-  },
 };

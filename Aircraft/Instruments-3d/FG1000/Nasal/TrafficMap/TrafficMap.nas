@@ -13,10 +13,8 @@ var TrafficMap =
     obj.mapgroup = obj._group.createChild("map");
 
     # Dynamic text elements
-    obj.op_label = svg.getElementById("TrafficMapOpMode");
-    obj.alt_label = svg.getElementById("TrafficMapAltMode");
-    obj.outer_label = svg.getElementById("TrafficMapOuterRange");
-    obj.inner_label = svg.getElementById("TrafficMapInnerRange");
+    var textelements = ["OpMode", "AltMode", "OuterRange", "InnerRange"];
+    obj.addTextElements(textelements);
 
     # Initialize the controller:
     var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
@@ -139,13 +137,28 @@ var TrafficMap =
   setLayerVisible : func(name,n=1) {
       me.mapgroup.getLayer(name).setVisible(n);
   },
+  setOperate : func(enabled) {
+    if (enabled) {
+      me.setTextElement("OpMode", "OPERATING");
+    } else {
+      me.setTextElement("OpMode", "STANDBY");
+    }
+
+    me.mapgroup.getLayer("TFC").setVisible(enabled);
+  },
   setRange : func(range, inner_label, outer_label) {
     me.mapgroup.setRange(range);
-    me.inner_label.setText(inner_label);
-    me.outer_label.setText(outer_label);
+    me.setTextElement("OuterRange", outer_label);
+    me.setTextElement("InnerRange", inner_label);
   },
   setScreenRange : func(range) {
     me.mapgroup.setScreenRange(range);
+  },
+  setAlt : func(floor_ft, ceiling_ft, label) {
+    me.setTextElement("AltMode", label);
+    # Update the TFC controller to filter out the correct targets
+    me.mapgroup.getLayer("TFC").options.floor_ft =  floor_ft;
+    me.mapgroup.getLayer("TFC").options.ceiling_ft = ceiling_ft;
   },
   offdisplay : func() {
     me._group.setVisible(0);

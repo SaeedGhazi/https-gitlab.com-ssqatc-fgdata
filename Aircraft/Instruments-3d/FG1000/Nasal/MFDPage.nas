@@ -51,7 +51,6 @@ addTextElements : func(symbols) {
 
 getTextElement : func(symbolName) {
   return me._symbols[symbolName];
-  assert(sym != nil, "Unknown text element " ~ symbolName ~ " (check your addTextElements call?)");
 },
 
 getTextValue : func(symbolName) {

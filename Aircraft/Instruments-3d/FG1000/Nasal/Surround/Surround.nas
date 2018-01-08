@@ -190,6 +190,7 @@ var Surround =
 
     assert(page != nil, "Unable to find page " ~ pageToLoad);
     me.device.selectPage(page);
+    me.hideMenu();
   },
   incrPageGroup : func(val) {
     var incr_or_decr = (val > 0) ? 1 : -1;

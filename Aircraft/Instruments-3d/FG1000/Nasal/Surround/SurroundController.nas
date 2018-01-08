@@ -41,9 +41,9 @@ var SurroundController =
   {
     if (me._page.isMenuVisible()) {
       # Change page group
-      me.incrPage(val);
+      me._page.incrPage(val);
     }
-    me.showMenu();
+    me._page.showMenu();
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 

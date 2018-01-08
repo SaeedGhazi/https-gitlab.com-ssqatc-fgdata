@@ -9,6 +9,7 @@ io.include("constants.nas");
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
 
 io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
+io.load_nasal(nasal_dir ~ '/MFDPageController.nas', "fg1000");
 
 var MFDPages = [
   "Surround",
@@ -67,7 +68,7 @@ var MFD =
       parents : [ MFD ],
       EIS : nil,
       NavigationMap: nil,
-      Surround : nil,      
+      Surround : nil,
     };
 
     obj._svg = myCanvas.createGroup("softkeys");

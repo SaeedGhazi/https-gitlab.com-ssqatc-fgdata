@@ -11,15 +11,12 @@ var NearestAirportsController =
 
   new : func (page, svg)
   {
-    var obj = { parents : [ NearestAirportsController ] };
+    var obj = { parents : [ NearestAirportsController, MFDPageController.new(page) ] };
 
     # Current active UI group.
     obj.page = page;
     obj._currentGroup = NearestAirportsController.UIGROUP.NONE;
     obj._crsrToggle = 0;
-
-    # Emesary
-    obj._recipient = nil;
 
     return obj;
   },
@@ -32,6 +29,16 @@ var NearestAirportsController =
 
     var radius = 0;
     var apts = [];
+
+    #
+    #  TODO: Use Emesary to query APT data - allows support for multiple
+    #  data sources / abstraction.
+    #
+    #var airportNotification = notifications.PFDEventNotification.new(blah);
+    #var response = Emesary.GlobalTransmitter.notifyAll(airportNotification);
+    #if (response.isSuccess()) {
+    #  me.page.updateAirports(airportNotification.value);
+    #}
 
     while ((radius <= 200) and (size(apts) < 25)) {
       radius = radius + 50;
@@ -169,42 +176,13 @@ var NearestAirportsController =
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     }
   },
-  RegisterWithEmesary : func(transmitter = nil){
-    if (transmitter == nil)
-      transmitter = emesary.GlobalTransmitter;
 
-    if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("AirportInfoController_" ~ me.page.device.designation);
-      var pfd_obj = me.page.device;
-      var controller = me;
-      me._recipient.Receive = func(notification)
-      {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
-              and notification.EventParameter != nil)
-          {
-            var id = notification.EventParameter.Id;
-            var value = notification.EventParameter.Value;
-            #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.FASCIA.FMS_CRSR)   return controller.handleCRSR();
-            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
-            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
-            if (id == fg1000.FASCIA.ENT)        return controller.handleEnter(value);
-          }
-        }
-        return emesary.Transmitter.ReceiptStatus_NotProcessed;
-      };
-    }
-    transmitter.Register(me._recipient);
-    me.transmitter = transmitter;
+  handleRange : func(val)
+  {
+    # Pass any range entries to the NavMapController
+    me.page.mfd.NavigationMap.controller.handleZoom(val);
   },
-  DeRegisterWithEmesary : func(transmitter = nil){
-      # remove registration from transmitter; but keep the recipient once it is created.
-      if (me.transmitter != nil)
-        me.transmitter.DeRegister(me._recipient);
-      me.transmitter = nil;
-  },
+
 
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {

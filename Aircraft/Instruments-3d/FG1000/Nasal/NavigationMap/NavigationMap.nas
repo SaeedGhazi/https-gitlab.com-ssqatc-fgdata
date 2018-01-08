@@ -132,11 +132,11 @@ var NavigationMap =
     me._labelsFull.setVisible(0);
     me._labelsPartial.setVisible(1);
 
-    me.controller.ondisplayPartial();
+    #me.controller.ondisplayPartial();
   },
   offdisplayPartial : func() {
     me._group.setVisible(0);
-    me.controller.offdisplayPartial();
+    #me.controller.offdisplayPartial();
   },
 
   # Softkey assigments.  For some pages (notably the NEAREST pages)
@@ -198,7 +198,5 @@ var NavigationMap =
     svg.setText(mi.title);
     svg.setVisible(1); # display function
   },
-
-
 
 };

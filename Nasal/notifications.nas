@@ -553,7 +553,7 @@ var PFDEventNotification =
     ChangeMenuText : 3, #event parameter contains array of { Id: , Text: } tuples
     HardKeyPushed : 4,  #event parameter contains single { Id: , Value: } tuple
     EngineData : 5,     #event parameter contains an array of hashes, each containing information about a given engine.
-    NavComData : 6,     #event paramterr contains a hash of updated Nav/Com settings
+    NavComData : 6,     #event parameter contains a hash of updated Nav/Com settings
 
     DefaultType : "PFDEventNotification",
 

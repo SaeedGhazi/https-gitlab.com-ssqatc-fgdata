@@ -24,7 +24,7 @@ var AirportInfoController =
 
   new : func (page, svg)
   {
-    var obj = { parents : [ AirportInfoController ] };
+    var obj = { parents : [ AirportInfoController, MFDPageController.new(page)] };
     obj.airport = "";
     obj.runway = "";
     obj.runwayIdx = -1;
@@ -69,7 +69,7 @@ var AirportInfoController =
   zoomOut : func() {
     me.setZoom(me.current_zoom +1);
   },
-  zoom : func(val)
+  handleRange : func(val)
   {
     var incr_or_decr = (val > 0) ? 1 : -1;
     me.setZoom(me.current_zoom + incr_or_decr);
@@ -132,44 +132,6 @@ var AirportInfoController =
     } else {
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     }
-  },
-  RegisterWithEmesary : func(transmitter = nil){
-    if (transmitter == nil)
-      transmitter = emesary.GlobalTransmitter;
-
-    if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("AirportInfoController_" ~ me.page.device.designation);
-      var pfd_obj = me.page.device;
-      var controller = me;
-      me._recipient.Receive = func(notification)
-      {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-          if (notification.Event_Id == notifications.PFDEventNotification.HardKeyPushed
-              and notification.EventParameter != nil)
-          {
-            var id = notification.EventParameter.Id;
-            var value = notification.EventParameter.Value;
-            #printf("Button pressed " ~ id ~ " " ~ value);
-            if (id == fg1000.FASCIA.FMS_CRSR)   return controller.handleCRSR();
-            if (id == fg1000.FASCIA.FMS_OUTER)  return controller.handleFMSOuter(value);
-            if (id == fg1000.FASCIA.FMS_INNER)  return controller.handleFMSInner(value);
-            if (id == fg1000.FASCIA.RANGE)      return controller.zoom(value);
-            if (id == fg1000.FASCIA.ENT)        return controller.handleEnter(value);
-            if (id == fg1000.FASCIA.CLR)        return controller.handleClear(value);
-          }
-        }
-        return emesary.Transmitter.ReceiptStatus_NotProcessed;
-      };
-    }
-    transmitter.Register(me._recipient);
-    me.transmitter = transmitter;
-  },
-  DeRegisterWithEmesary : func(transmitter = nil){
-      # remove registration from transmitter; but keep the recipient once it is created.
-      if (me.transmitter != nil)
-        me.transmitter.DeRegister(me._recipient);
-      me.transmitter = nil;
   },
 
   # Reset controller if required when the page is displayed or hidden

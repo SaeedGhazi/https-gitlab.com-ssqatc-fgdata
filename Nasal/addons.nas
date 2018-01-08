@@ -2,7 +2,8 @@
 # Initialize addons configured with --addon=foobar command line switch:
 # - get the list of registered add-ons
 # - load the main.nas file of each add-on into namespace __addon[ADDON_ID]__
-# - call function main() from every such main.nas with the add-on path as arg.
+# - call function main() from every such main.nas with the add-on ghost as
+#   argument (an addons.Addon instance).
 
 # Example:
 #
@@ -14,7 +15,15 @@
 # - AddonManager.cxx adds /foo/bar/baz to the list of aircraft paths (to get
 #   permissions to read files from there)
 # - this script loads /foo/bar/baz/main.nas into namespace __addon[ADDON_ID]__
-# - this script calls main("/foo/bar/baz") from /foo/bar/baz/main.nas.
+# - this script calls main(addonGhost) from /foo/bar/baz/main.nas.
+# - the add-on ghost can be used to retrieve most of the add-on metadata, for
+#   instance:
+#      addonGhost.id                   the add-on identifier
+#      addonGhost.name                 the add-on name
+#      addonGhost.version.str()        the add-on version as a string
+#      addonGhost.basePath             the add-on base path (realpath() of
+#                                      "/foo/bar/baz" here)
+#      etc.
 #
 # For more details, see $FG_ROOT/Docs/README.add-ons.
 
@@ -30,7 +39,7 @@ var id = _setlistener("/sim/signals/fdm-initialized", func {
       io.load_nasal( main_nas, namespace );
 
       var addon_main = globals[namespace]["main"];
-      var addon_main_args = [ addon.basePath ];
+      var addon_main_args = [ addon ];
       call(addon_main, addon_main_args); #, object, namespace, error_vector);
 
       # Tell the world that the add-on is now loaded.

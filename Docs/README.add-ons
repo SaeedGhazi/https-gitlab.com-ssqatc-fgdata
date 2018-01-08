@@ -41,9 +41,11 @@ add-on directory. Such a directory, when used as the argument of
   4) The add-on directory must contain a Nasal file called main.nas.
      This file will be loaded at startup too, and its main() function
      run in the namespace __addon[ADDON_ID]__, where ADDON_ID is the
-     add-on identifier specified in the addon-metadata.xml file. This
-     operation is done by $FG_ROOT/Nasal/addons.nas at the time of this
-     writing.
+     add-on identifier specified in the addon-metadata.xml file. The
+     main() function is passed one argument: the addons.Addon object
+     (a Nasal ghost, see below) corresponding to the add-on being
+     loaded. This operation is done by $FG_ROOT/Nasal/addons.nas at the
+     time of this writing.
 
 Also, the Property Tree is populated (under /addons) with information
 about registered add-ons. More details will be given below.
@@ -459,11 +461,11 @@ code easy access to add-on metadata, for instance like this:
   print(myAddon.version.str());
 
   foreach (var author; myAddon.authors) {
-    print(author.name, author.email, author.url);
+    print(author.name, " ", author.email, " ", author.url);
   }
 
   foreach (var maintainer; myAddon.maintainers) {
-    print(maintainer.name, maintainer.email, maintainer.url);
+    print(maintainer.name, " ", maintainer.email, " ", maintainer.url);
   }
 
   print(myAddon.shortDescription);

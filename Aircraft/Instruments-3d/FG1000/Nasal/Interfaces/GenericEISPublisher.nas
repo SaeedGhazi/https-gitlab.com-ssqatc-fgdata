@@ -2,9 +2,12 @@
 var GenericEISPublisher =
 {
 
-  new : func (frequency=0.25, transmitter = nil) {
+  new : func (frequency=0.25) {
     var obj = {
-      parents : [ GenericEISPublisher, PropertyPublisher.new(frequency, transmitter) ],
+      parents : [
+        GenericEISPublisher,
+        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.EngineData, frequency)
+      ],
     };
 
     # Hack to handle most aircraft not having proper engine hours
@@ -25,6 +28,9 @@ var GenericEISPublisher =
     return obj;
   },
 
+  # Custom publish method as we package the values into an array of engines,
+  # in this case, only one!
+
   publish : func() {
     var engineData0 = {};
 
@@ -36,6 +42,12 @@ var GenericEISPublisher =
     var engineData = [];
     append(engineData, engineData0);
 
-    me.notify(notifications.PFDEventNotification.EngineData, engineData);
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.EngineData,
+      engineData);
+
+    me._transmitter.NotifyAll(notification);
   },
 };

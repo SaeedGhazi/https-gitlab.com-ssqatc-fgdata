@@ -519,7 +519,6 @@
 
                         append(listeners, softkey_listener);
 
-
                     ]]></load></nasal>
                 </canvas>
                 <layout>hbox</layout>

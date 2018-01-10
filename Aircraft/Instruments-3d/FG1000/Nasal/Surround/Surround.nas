@@ -52,6 +52,7 @@ var Surround =
       "Comm2StandbyFreq", "Comm2SelectedFreq",
       "Nav1StandbyFreq", "Nav1SelectedFreq",
       "Nav2StandbyFreq", "Nav2SelectedFreq",
+      "Nav1ID", "Nav2ID"
     ];
 
     obj.addTextElements(textElements);
@@ -169,6 +170,10 @@ var Surround =
           me._nav2selected.highlightElement();
         }
       }
+
+      if (name == "Nav1ID") me.setTextElement("Nav1ID", val);
+      if (name == "Nav2ID") me.setTextElement("Nav2ID", val);
+
     }
   },
 

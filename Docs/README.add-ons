@@ -553,10 +553,9 @@ Member functions (methods) of addons.Addon objects:
                         Return a resource path suitable for use with the
                         simgear::ResourceManager. 'relPath' must be
                         relative to the add-on base directory, and
-                        mustn't start with a '/'. You should use this
-                        method to load for instance a property-rule
-                        configuration file, or an image to display in a
-                        Canvas widget.
+                        mustn't start with a '/'. You can use this
+                        method for instance to specify an image file for
+                        display in a Canvas widget.
 
                         In you want a full path to the resource file
                         (e.g., for troubleshooting), call resolvepath()

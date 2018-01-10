@@ -99,6 +99,8 @@ FASCIA = {
   NOSE_UP : 43,
   NOSE_DOWN : 44,
 
+  JOYSTICK_PRESS : 45
+
 };
 
 var SURFACE_TYPES = {

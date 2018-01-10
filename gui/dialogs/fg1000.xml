@@ -75,6 +75,19 @@
               <label>VOL</label>
               <pref-width>30</pref-width>
               <property>/gui/dialogs/fg1000/nav-vol</property>
+              <binding><command>dialog-apply</command></binding>
+              <binding>
+                <command>nasal</command>
+                <script>
+                  var notification = notifications.PFDEventNotification.new(
+                    "MFD",
+                    1,
+                    notifications.PFDEventNotification.HardKeyPushed,
+                    { Id: fg1000.FASCIA.NAV_VOL, Value: getprop("/gui/dialogs/fg1000/nav-vol") }
+                  );
+                  emesary.GlobalTransmitter.NotifyAll(notification);
+                </script>
+              </binding>
             </dial>
 
             <button>
@@ -84,22 +97,16 @@
                 <pref-height>30</pref-height>
                 <halign>right</halign>
                 <binding>
-                  <command>property-swap</command>
-                  <condition>
-                    <not>
-                      <property>/instrumentation/nav-selected</property>
-                    </not>
-                  </condition>
-                  <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
-                  <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
-                </binding>
-                <binding>
-                  <command>property-swap</command>
-                  <condition>
-                    <property>/instrumentation/nav-selected</property>
-                  </condition>
-                  <property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
-                  <property>/instrumentation/nav[1]/frequencies/standby-mhz</property>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.NAV_VOL_TOGGLE, Value: 1 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
                 </binding>
             </button>
 
@@ -114,12 +121,36 @@
                 <legend>&lt;&lt;</legend>
                 <pref-width>25</pref-width>
                 <pref-height>25</pref-height>
+                <binding>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.NAV_OUTER, Value: -1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
+                </binding>
               </button>
               <button>
                 <name>nav-decrease-KHz</name>
                 <legend>&lt;</legend>
                 <pref-width>25</pref-width>
                 <pref-height>25</pref-height>
+                <binding>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.NAV_INNER, Value: -1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
+                </binding>
               </button>
 
               <button>
@@ -127,12 +158,36 @@
                 <legend>&gt;</legend>
                 <pref-width>25</pref-width>
                 <pref-height>25</pref-height>
+                <binding>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.NAV_INNER, Value: 1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
+                </binding>
               </button>
               <button>
                 <name>nav-increase-MHz</name>
                 <legend>&gt;&gt;</legend>
                 <pref-width>25</pref-width>
                 <pref-height>25</pref-height>
+                <binding>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.NAV_OUTER, Value: 1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
+                </binding>
               </button>
             </group>
 
@@ -143,8 +198,16 @@
               <pref-height>25</pref-height>
               <default-padding>0</default-padding>
               <binding>
-                <command>property-toggle</command>
-                <property>/instrumentation/nav-selected</property>
+                <command>nasal</command>
+                <script>
+                  var notification = notifications.PFDEventNotification.new(
+                    "MFD",
+                    1,
+                    notifications.PFDEventNotification.HardKeyPushed,
+                    { Id: fg1000.FASCIA.NAV_TOGGLE, Value: 1.0 }
+                  );
+                  emesary.GlobalTransmitter.NotifyAll(notification);
+                </script>
               </binding>
             </button>
 
@@ -155,6 +218,7 @@
               <name>hdg</name>
               <width>20</width>
               <property>/gui/dialogs/fg1000/hdg</property>
+              <binding><command>dialog-apply</command></binding>
             </dial>
 
             <button>
@@ -163,8 +227,16 @@
               <pref-width>75</pref-width>
               <pref-height>25</pref-height>
               <binding>
-                <command>property-toggle</command>
-                <property>/instrumentation/nav-selected</property>
+                <command>nasal</command>
+                <script>
+                  var notification = notifications.PFDEventNotification.new(
+                    "MFD",
+                    1,
+                    notifications.PFDEventNotification.HardKeyPushed,
+                    { Id: fg1000.FASCIA.HEADING_PRESS, Value: 1.0 }
+                  );
+                  emesary.GlobalTransmitter.NotifyAll(notification);
+                </script>
               </binding>
             </button>
 
@@ -323,24 +395,72 @@
                   <legend>&lt;&lt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.ALT_OUTER, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <name>alt-decr-small</name>
                   <legend>&lt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.ALT_INNER, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <name>alt-incr-small</name>
                   <legend>&gt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.ALT_INNER, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <name>alt-incr-large</name>
                   <legend>&gt;&gt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.ALT_OUTER, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
               </group>
 
@@ -398,51 +518,6 @@
                         );
 
                         append(listeners, softkey_listener);
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-incr-large-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_OUTER, Value: 1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-incr-small-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_INNER, Value: 1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-decr-large-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_OUTER, Value: -1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/fms-decr-small-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_INNER, Value: -1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/range-decr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.RANGE, Value: -1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/range-incr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.RANGE, Value: 1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/crsr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.FMS_CRSR, Value: 1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/ent-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.ENT, Value: 1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
-
-                        append(listeners, setlistener("/sim/gui/dialogs/fg1000/clr-pressed", func(v) {
-                          var notification = notifications.PFDEventNotification.new("MFD", 1, notifications.PFDEventNotification.HardKeyPushed, { Id: fg1000.FASCIA.CLR, Value: 1.0 });
-                          emesary.GlobalTransmitter.NotifyAll(notification);
-                        } ));
 
 
                     ]]></load></nasal>
@@ -623,6 +698,7 @@
                 <label>VOL</label>
                 <pref-width>30</pref-width>
                 <property>/gui/dialogs/fg1000/com-vol</property>
+                <binding><command>dialog-apply</command></binding>
               </dial>
 
               <button>
@@ -632,22 +708,16 @@
                   <pref-height>30</pref-height>
                   <halign>left</halign>
                   <binding>
-                    <command>property-swap</command>
-                    <condition>
-                      <not>
-                        <property>/instrumentation/com-selected</property>
-                      </not>
-                    </condition>
-                    <property>/instrumentation/com[0]/frequencies/selected-mhz</property>
-                    <property>/instrumentation/com[0]/frequencies/standby-mhz</property>
-                  </binding>
-                  <binding>
-                    <command>property-swap</command>
-                    <condition>
-                      <property>/instrumentation/com-selected</property>
-                    </condition>
-                    <property>/instrumentation/com[1]/frequencies/selected-mhz</property>
-                    <property>/instrumentation/com[1]/frequencies/standby-mhz</property>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.COM_VOL_TOGGLE, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
               </button>
 
@@ -662,12 +732,36 @@
                   <legend>&lt;&lt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.COM_OUTER, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <name>com-decrease-KHz</name>
                   <legend>&lt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.COM_INNER, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
 
                 <button>
@@ -675,12 +769,36 @@
                   <legend>&gt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.COM_INNER, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <name>com-increase-MHz</name>
                   <legend>&gt;&gt;</legend>
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.COM_OUTER, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
               </group>
 
@@ -691,8 +809,16 @@
                 <pref-height>25</pref-height>
                 <default-padding>0</default-padding>
                 <binding>
-                  <command>property-toggle</command>
-                  <property>/instrumentation/nav-selected</property>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.COM_TOGGLE, Value: 1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
                 </binding>
               </button>
 
@@ -704,6 +830,7 @@
                 <name>baro</name>
                 <width>20</width>
                 <property>/gui/dialogs/fg1000/baro</property>
+                <binding><command>dialog-apply</command></binding>
               </dial>
 
               <text>
@@ -723,8 +850,16 @@
                 <pref-width>75</pref-width>
                 <pref-height>25</pref-height>
                 <binding>
-                  <command>property-toggle</command>
-                  <property>/instrumentation/com-selected</property>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.CRS_CENTER, Value: -1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
                 </binding>
               </button>
 
@@ -744,9 +879,16 @@
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/range-incr-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.RANGE, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
                 <button>
@@ -755,9 +897,16 @@
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/range-decr-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.RANGE, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
               </group>
@@ -772,6 +921,18 @@
                   <pref-height>25</pref-height>
                   <name>map-up</name>
                   <legend>^</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.JOYSTICK_VERTICAL, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <row>1</row><col>0</col>
@@ -779,6 +940,18 @@
                   <pref-height>25</pref-height>
                   <name>map-left</name>
                   <legend>&lt;</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.JOYSTICK_HORIZONTAL, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <row>1</row><col>1</col>
@@ -786,6 +959,18 @@
                   <pref-height>25</pref-height>
                   <name>map-ptr</name>
                   <legend>PTR</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.JOYSTICK_PRESS, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <row>1</row><col>2</col>
@@ -793,6 +978,18 @@
                   <pref-height>25</pref-height>
                   <name>map-right</name>
                   <legend>&gt;</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.JOYSTICK_HORIZONTAL, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <row>2</row><col>1</col>
@@ -800,6 +997,18 @@
                   <pref-height>25</pref-height>
                   <name>map-down</name>
                   <legend>v</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.JOYSTICK_VERTICAL, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
               </group>
 
@@ -813,6 +1022,18 @@
                   <pref-height>25</pref-height>
                   <name>DTO</name>
                   <legend>DTO</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.DTO, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <col>1</col><row>0</row>
@@ -820,6 +1041,18 @@
                   <pref-height>25</pref-height>
                   <name>menu</name>
                   <legend>MENU</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.MENU, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
 
                 <button>
@@ -828,6 +1061,18 @@
                   <pref-height>25</pref-height>
                   <name>FPL</name>
                   <legend>FPL</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.FPL, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
                 <button>
                   <col>1</col><row>1</row>
@@ -835,6 +1080,18 @@
                   <pref-height>25</pref-height>
                   <name>PROC</name>
                   <legend>PROC</legend>
+                  <binding>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.PROC, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
+                  </binding>
                 </button>
 
                 <button>
@@ -844,9 +1101,16 @@
                   <name>CLR</name>
                   <legend>CLR</legend>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/clr-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.CLR, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
                 <button>
@@ -856,9 +1120,16 @@
                   <name>ENT</name>
                   <legend>ENT</legend>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/ent-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.ENT, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
               </group>
@@ -876,9 +1147,16 @@
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/fms-decr-large-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.FMS_OUTER, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
                 <button>
@@ -887,9 +1165,16 @@
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/fms-decr-small-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.FMS_INNER, Value: -1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
                 <button>
@@ -898,9 +1183,16 @@
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/fms-incr-small-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.FMS_INNER, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
                 <button>
@@ -909,9 +1201,16 @@
                   <pref-width>25</pref-width>
                   <pref-height>25</pref-height>
                   <binding>
-                    <command>property-assign</command>
-                    <property>/sim/gui/dialogs/fg1000/fms-incr-large-pressed</property>
-                    <value>1</value>
+                    <command>nasal</command>
+                    <script>
+                      var notification = notifications.PFDEventNotification.new(
+                        "MFD",
+                        1,
+                        notifications.PFDEventNotification.HardKeyPushed,
+                        { Id: fg1000.FASCIA.FMS_OUTER, Value: 1.0 }
+                      );
+                      emesary.GlobalTransmitter.NotifyAll(notification);
+                    </script>
                   </binding>
                 </button>
               </group>
@@ -922,9 +1221,16 @@
                 <pref-width>50</pref-width>
                 <pref-height>25</pref-height>
                 <binding>
-                  <command>property-assign</command>
-                  <property>/sim/gui/dialogs/fg1000/crsr-pressed</property>
-                  <value>1</value>
+                  <command>nasal</command>
+                  <script>
+                    var notification = notifications.PFDEventNotification.new(
+                      "MFD",
+                      1,
+                      notifications.PFDEventNotification.HardKeyPushed,
+                      { Id: fg1000.FASCIA.FMS_CRSR, Value: 1.0 }
+                    );
+                    emesary.GlobalTransmitter.NotifyAll(notification);
+                  </script>
                 </binding>
               </button>
 

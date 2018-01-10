@@ -51,10 +51,10 @@ handleFreqTransferHold : func (value) { return emesary.Transmitter.ReceiptStatus
 handleComVol       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleComVolToggle : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },,
 
-handleDTO     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleFPL     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleCLR     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleCLRHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleDTO       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleFPL       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleClear     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleClearHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
 # By default, the FMS knobs will select a new page.
 handleFMSOuter : func (value) { return me.page.mfd._pageGroupController.handleFMSOuter(value); },
@@ -71,7 +71,7 @@ handleAltInner : func (value) { return emesary.Transmitter.ReceiptStatus_NotProc
 RegisterWithEmesary : func()
 {
   if (me._recipient == nil){
-    me._recipient = emesary.Recipient.new("MFDPageController_" ~ me.page.device.designation);
+    me._recipient = emesary.Recipient.new(me.page.pageName ~ "Controller_" ~ me.page.device.designation);
     var pfd_obj = me.page.device;
     var controller = me;
     me._recipient.Receive = func(notification)

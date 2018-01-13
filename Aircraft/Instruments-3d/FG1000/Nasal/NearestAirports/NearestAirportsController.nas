@@ -124,7 +124,7 @@ var NearestAirportsController =
 
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-      return me.page.mfd._pageGroupController.handleFMSInner(value);
+      return me.page.mfd.SurroundController.handleFMSInner(value);
     }
   },
   handleFMSOuter : func(value) {
@@ -144,7 +144,7 @@ var NearestAirportsController =
 
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-      return me.page.mfd._pageGroupController.handleFMSOuter(value);
+      return me.page.mfd.SurroundController.handleFMSOuter(value);
     }
   },
   handleEnter : func(value) {

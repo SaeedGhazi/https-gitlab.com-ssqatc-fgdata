@@ -1,8 +1,8 @@
-# TAWS Options
-var TAWSOptions =
+# TAWSB Options
+var TAWSBOptions =
 {
   new : func() {
-    var obj = { parents : [TAWSOptions] };
+    var obj = { parents : [TAWSBOptions] };
     obj.Options= {};
     obj.loadOptions();
     return obj;

@@ -1,8 +1,8 @@
-# TAWS Styles
-var TAWSStyles =
+# TAWSB Styles
+var TAWSBStyles =
 {
   new : func() {
-    var obj = { parents : [ TAWSStyles ]};
+    var obj = { parents : [ TAWSBStyles ]};
     obj.Styles = {};
     obj.loadStyles();
     return obj;

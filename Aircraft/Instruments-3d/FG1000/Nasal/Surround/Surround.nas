@@ -174,6 +174,10 @@ var Surround =
       if (name == "Nav1ID") me.setTextElement("Nav1ID", val);
       if (name == "Nav2ID") me.setTextElement("Nav2ID", val);
 
+      # TODO - COM Volume - display the current volume for 2 seconds in place of the
+      # standby frequency.
+
+
     }
   },
 

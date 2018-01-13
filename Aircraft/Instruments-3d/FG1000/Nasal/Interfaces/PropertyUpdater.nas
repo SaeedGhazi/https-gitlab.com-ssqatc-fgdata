@@ -8,7 +8,6 @@
 
 var PropertyUpdater =
 {
-
   PropMap : {
     new : func(name, property)
     {
@@ -18,35 +17,44 @@ var PropertyUpdater =
       return obj;
     },
 
-    getName  : func() { return me._name; },
-    getValue : func() { return me._prop.getValue(); },
+    getName  : func()    { return me._name; },
+    getValue : func()    { return me._prop.getValue(); },
+    setValue : func(val) { me._prop.setValue(val); },
   },
 
-  new : func (device, notificationType, eventID, transmitter = nil) {
+  new : func (device, notificationType, eventID) {
     var obj = {
-      parents : [ Interface ],
+      parents : [ PropertyUpdater ],
       _device : device,
       _notificationType : notificationType,
-      _transmitter : transmitter,
-      _recipient : recipient,
+      _eventID : eventID,
+      _recipient : nil,
+      _transmitter : nil,
+      _registered : 0,
       _propmaps : {},
     };
 
-    if (obj._transmitter == nil) obj._transmitter = emesary.GlobalTransmitter;
+    obj._transmitter = emesary.GlobalTransmitter;
 
     return obj;
   },
 
   addPropMap : func(name, prop) {
-    me._propmaps[name] = PropertyPublisher.PropMap.new(name, prop);
+    me._propmaps[name] = PropertyUpdater.PropMap.new(name, prop);
   },
 
-  handleNotificationEvent : func(eventParameter) {
+  handleNotificationEvent : func(eventParameters) {
 
     var retval = emesary.Transmitter.ReceiptStatus_NotProcessed;
     foreach(var name; keys(eventParameters)) {
+      var value = eventParameters[name];
       if (me._propmaps[name] != nil) {
-        me._propmaps[name].setValue(eventParameters[name])
+        if (me._propmaps[name].getValue() != value) {
+          # Only update on a true change.  Otherwise if there is a Publisher
+          # on this property, we risk creating a never ending loop between
+          # the Publisher and this Updater
+          me._propmaps[name].setValue(value);
+        }
         retval = emesary.Transmitter.ReceiptStatus_OK;
       }
     }
@@ -57,30 +65,30 @@ var PropertyUpdater =
   RegisterWithEmesary : func(){
 
     if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("PropertyUpdater_" ~ me._page.device.designation);
+      me._recipient = emesary.Recipient.new("PropertyUpdater");
       var pfd_obj = me._device;
+      var notificationtype = me._notificationType;
+      var eventID = me._eventID;
       var controller = me;
       me._recipient.Receive = func(notification)
       {
         if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == me._notificationType) {
-          if (notification.Event_Id == me._eventID
+            and notification.NotificationType == notificationtype) {
+          if (notification.Event_Id == eventID
               and notification.EventParameter != nil)
           {
-            return me.handleNotificationEvent(notification.EventParameter);
+            return controller.handleNotificationEvent(notification.EventParameter);
           }
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
       };
     }
-    transmitter.Register(me._recipient);
-    me.transmitter = transmitter;
+    me._transmitter.Register(me._recipient);
+    me._registered = 1;
   },
   DeRegisterWithEmesary : func(transmitter = nil){
-      # remove registration from transmitter; but keep the recipient once it is created.
-      if (me.transmitter != nil)
-        me.transmitter.DeRegister(me._recipient);
-      me.transmitter = nil;
+    if (me._registered == 1) me._transmitter.DeRegister(me._recipient);
+    me._registered = 0;
   },
 
   start : func() {

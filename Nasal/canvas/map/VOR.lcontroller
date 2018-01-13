@@ -22,7 +22,7 @@ var new = func(layer) {
 	setsize(m.active_vors, size(m.navNs));
 	foreach (var navN; m.navNs) {
 		append(m.listeners, setlistener(
-			navN.getNode("frequencies/selected-mhz"),
+			navN.getNode("frequencies/selected-mhz", 1),
 			func m.changed_freq()
 		));
 	}
@@ -53,4 +53,3 @@ var changed_freq = func(update=1) {
 };
 
 var searchCmd = NavaidSymbolLayer.make('vor');
-

@@ -1,10 +1,10 @@
-# NearestAirspaces Controller
-var NearestAirspacesController =
+# TAWSB Controller
+var TAWSBController =
 {
   new : func (page, svg)
   {
     var obj = {
-      parents : [ NearestAirspacesController, MFDPageController.new(page) ],
+      parents : [ TAWSBController, MFDPageController.new(page) ],
       _crsrToggle : 0,
       _recipient : nil,
       _page : page,

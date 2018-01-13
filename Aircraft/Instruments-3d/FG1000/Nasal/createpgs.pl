@@ -4,7 +4,7 @@ use warnings;
 
 my %pages = ("Stormscope" => "MAP - STORMSCOPE",
 "WeatherDataLink" => "MAP - WEATHER DATA LINK",
-"TAWS" => "MAP - TAWS",
+"TAWSB" => "MAP - TAWS",
 #"AirportInfo" => "WPT - AIRPORT INFORMATION",
 "AirportDirectory" => "WPT - AIRPORT DIRECTORY",
 "AirportDeparture" => "WPT - AIRPORT DEPARTURE INFORMATION",

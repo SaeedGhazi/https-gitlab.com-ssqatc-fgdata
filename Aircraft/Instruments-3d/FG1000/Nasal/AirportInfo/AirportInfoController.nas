@@ -33,9 +33,6 @@ var AirportInfoController =
     obj.crsrToggle = 0;
     obj.current_zoom = 7;
 
-    # Emesary
-    obj._recipient = nil;
-
     # Initial airport is our current location.
     var current_apt = airportinfo("airport");
     obj.setAirport(current_apt.id);
@@ -103,7 +100,7 @@ var AirportInfoController =
 
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-      return me.page.mfd._pageGroupController.handleFMSInner(value);
+      return me.page.mfd.SurroundController.handleFMSInner(value);
     }
   },
   handleFMSOuter : func(value) {
@@ -111,7 +108,7 @@ var AirportInfoController =
       me.page.moveCRSR(value);
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-      return me.page.mfd._pageGroupController.handleFMSOuter(value);
+      return me.page.mfd.SurroundController.handleFMSOuter(value);
     }
   },
   handleEnter : func(value) {

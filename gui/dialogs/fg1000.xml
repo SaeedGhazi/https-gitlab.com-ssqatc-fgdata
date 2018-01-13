@@ -17,6 +17,7 @@
             var mfd = nil;
             var eisPublisher = nil;
             var navcomPublisher = nil;
+            var navcomUpdater = nil;
         ]]></open>
 
         <close><![CDATA[
@@ -26,10 +27,12 @@
             mfd.del();
             eisPublisher.stop();
             eisPublisher = nil;
+
             navcomPublisher.stop();
             navcomPublisher = nil;
 
-
+            navcomUpdater.stop();
+            navcomUpdater = nil;
         ]]></close>
     </nasal>
 
@@ -91,7 +94,7 @@
             </dial>
 
             <button>
-                <name>toggle-nav</name>
+                <name>toggle-nav-freq</name>
                 <legend>&lt;-&gt;</legend>
                 <pref-width>30</pref-width>
                 <pref-height>30</pref-height>
@@ -103,7 +106,7 @@
                       "MFD",
                       1,
                       notifications.PFDEventNotification.HardKeyPushed,
-                      { Id: fg1000.FASCIA.NAV_VOL_TOGGLE, Value: 1 }
+                      { Id: fg1000.FASCIA.NAV_FREQ_TRANSFER, Value: 1 }
                     );
                     emesary.GlobalTransmitter.NotifyAll(notification);
                   </script>
@@ -490,8 +493,10 @@
                         var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
                         io.load_nasal(nasal_dir ~ 'MFD.nas', "fg1000");
                         io.load_nasal(nasal_dir ~ 'Interfaces/PropertyPublisher.nas', "fg1000");
+                        io.load_nasal(nasal_dir ~ 'Interfaces/PropertyUpdater.nas', "fg1000");
                         io.load_nasal(nasal_dir ~ 'Interfaces/GenericEISPublisher.nas', "fg1000");
                         io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas', "fg1000");
+                        io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas', "fg1000");
                         mfd = fg1000.MFD.new(myCanvas);
 
                         eisPublisher = fg1000.GenericEISPublisher.new();
@@ -499,6 +504,9 @@
 
                         navcomPublisher = fg1000.GenericNavComPublisher.new();
                         navcomPublisher.start();
+
+                        navcomUpdater = fg1000.GenericNavComUpdater.new(mfd.getDevice());
+                        navcomUpdater.start();
 
                         softkeypushed = 0;
                         # Connect the buttons - using the provided model index to get the right ones from the model binding
@@ -713,7 +721,7 @@
                         "MFD",
                         1,
                         notifications.PFDEventNotification.HardKeyPushed,
-                        { Id: fg1000.FASCIA.COM_VOL_TOGGLE, Value: 1.0 }
+                        { Id: fg1000.FASCIA.COM_FREQ_TRANSFER, Value: 1.0 }
                       );
                       emesary.GlobalTransmitter.NotifyAll(notification);
                     </script>
@@ -802,7 +810,7 @@
               </group>
 
               <button>
-                <name>toggle-nav</name>
+                <name>toggle-com</name>
                 <legend>1-2</legend>
                 <pref-width>50</pref-width>
                 <pref-height>25</pref-height>

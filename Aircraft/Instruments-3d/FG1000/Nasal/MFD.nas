@@ -18,7 +18,7 @@ var MFDPages = [
   "TrafficMap",
   "Stormscope",
   "WeatherDataLink",
-  "TAWS",
+  "TAWSB",
   "AirportInfo",
   "AirportDirectory",
   "AirportDeparture",
@@ -103,7 +103,7 @@ var MFD =
     # Controller for the header and display on the bottom left which allows selection
     # of page groups and individual pages using the FMS controller.
     obj.Surround = fg1000.Surround.new(obj, myCanvas, obj._MFDDevice, obj._svg);
-    obj._pageGroupController = obj.Surround.controller;
+    obj.SurroundController = obj.Surround.controller;
 
     # Engine Information System.  A special case as it's always displayed on the MFD.
     obj.EIS = obj.Surround.addPage("EIS", fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg));
@@ -139,11 +139,14 @@ var MFD =
 
     return obj;
   },
+  getDevice : func () {
+    return me._MFDDevice;
+  },
   del: func()
   {
     me._MFDDevice.current_page.offdisplay();
     me._MFDDevice.DeRegisterWithEmesary();
-    me._pageGroupController.del();
+    me.SurroundController.del();
 
   },
   setPageTitle: func(title)

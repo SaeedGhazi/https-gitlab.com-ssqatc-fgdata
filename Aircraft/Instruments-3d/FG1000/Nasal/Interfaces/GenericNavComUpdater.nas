@@ -1,20 +1,21 @@
 # NavCom Interface using Emesary for a simple dual Nav/Com system using standard properties
-#
-# This maps properties to Emesary Messages that will be publishes using the
-#
-# notifications.PFDEventNotification.NavComData
-#
-var GenericNavComPublisher =
+# This updates the properties from Emesary messages.
+
+var GenericNavComUpdater =
 {
-  new : func () {
+  new : func (device) {
     var obj = {
       parents : [
-        GenericNavComPublisher,
-        TriggeredPropertyPublisher.new(notifications.PFDEventNotification.NavComData)
+        GenericNavComUpdater,
+        PropertyUpdater.new(
+          device,
+          notifications.PFDEventNotification.DefaultType,
+          notifications.PFDEventNotification.NavComData
+        )
       ],
     };
 
-    # Hack to handle cases where there is no selected Com or NAV frequency
+    # Hack to handle cases where there is no selected COMM or NAV frequency
     if (getprop("/instrumentation/com-selected") == nil) setprop("/instrumentation/com-selected", 1);
     if (getprop("/instrumentation/nav-selected") == nil) setprop("/instrumentation/nav-selected", 1);
 

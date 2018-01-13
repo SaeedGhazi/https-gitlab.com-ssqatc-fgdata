@@ -22,12 +22,13 @@ new : func (page)
 # Default handlers for all the Fascia hardkeys.  These should be over-ridden
 # as required by specific page function.
 
-handleNavVol          : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleNavVolToggle    : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleNavFreqTransfer : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleNavOuter        : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleNavInner        : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleToggle          : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+#
+handleNavVol          : func (value) { return me.page.mfd.SurroundController.handleNavVol(value); },
+handleNavVolToggle    : func (value) { return me.page.mfd.SurroundController.handleNavVolToggle(value); },
+handleNavFreqTransfer : func (value) { return me.page.mfd.SurroundController.handleNavFreqTransfer(value); },
+handleNavOuter        : func (value) { return me.page.mfd.SurroundController.handleNavOuter(value); },
+handleNavInner        : func (value) { return me.page.mfd.SurroundController.handleNavInner(value); },
+handleNavToggle       : func (value) { return me.page.mfd.SurroundController.handleNavToggle(value); },
 handleHeading         : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleHeadingPress    : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
@@ -41,15 +42,15 @@ handleBaro      : func (value) { return emesary.Transmitter.ReceiptStatus_NotPro
 handleCRS       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleCRSCenter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
-handleComOuter  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleComInner  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleComToggle : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleComOuter  : func (value) { return me.page.mfd.SurroundController.handleComOuter(value); },
+handleComInner  : func (value) { return me.page.mfd.SurroundController.handleComInner(value); },
+handleComToggle : func (value) { return me.page.mfd.SurroundController.handleComToggle(value); },
 
-handleFreqTransfer     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleFreqTransferHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; }, # Auto-tunes to 121.2 when pressed for 2 seconds
+handleComFreqTransfer     : func (value) { return me.page.mfd.SurroundController.handleComFreqTransfer(value); },
+handleComFreqTransferHold : func (value) { return me.page.mfd.SurroundController.handleComFreqTransferHold(value); }, # Auto-tunes to 121.2 when pressed for 2 seconds
 
-handleComVol       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleComVolToggle : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },,
+handleComVol       : func (value) { return me.page.mfd.SurroundController.handleComVol(value); },
+handleComVolToggle : func (value) { return me.page.mfd.SurroundController.handleComVolToggle(value); },
 
 handleDTO       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleFPL       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
@@ -57,8 +58,8 @@ handleClear     : func (value) { return emesary.Transmitter.ReceiptStatus_NotPro
 handleClearHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
 # By default, the FMS knobs will select a new page.
-handleFMSOuter : func (value) { return me.page.mfd._pageGroupController.handleFMSOuter(value); },
-handleFMSOuter : func (value) { return me.page.mfd._pageGroupController.handleFMSInner(value); },
+handleFMSOuter : func (value) { return me.page.mfd.SurroundController.handleFMSOuter(value); },
+handleFMSInner : func (value) { return me.page.mfd.SurroundController.handleFMSInner(value); },
 handleCRSR     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
 handleMenu  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
@@ -71,8 +72,8 @@ handleAltInner : func (value) { return emesary.Transmitter.ReceiptStatus_NotProc
 RegisterWithEmesary : func()
 {
   if (me._recipient == nil){
-    me._recipient = emesary.Recipient.new(me.page.pageName ~ "Controller_" ~ me.page.device.designation);
-    var pfd_obj = me.page.device;
+    me._recipient = emesary.Recipient.new(me._page.pageName ~ "Controller_" ~ me._page.device.designation);
+    var pfd_obj = me._page.device;
     var controller = me;
     me._recipient.Receive = func(notification)
     {
@@ -91,7 +92,7 @@ RegisterWithEmesary : func()
           if (id == fg1000.FASCIA.NAV_FREQ_TRANSFER)   return controller.handleNavFreqTransfer(value);
           if (id == fg1000.FASCIA.NAV_OUTER)           return controller.handleNavOuter(value);
           if (id == fg1000.FASCIA.NAV_INNER)           return controller.handleNavInner(value);
-          if (id == fg1000.FASCIA.NAV_TOGGLE)          return controller.handleToggle(value);
+          if (id == fg1000.FASCIA.NAV_TOGGLE)          return controller.handleNavToggle(value);
           if (id == fg1000.FASCIA.HEADING)             return controller.handleHeading(value);
           if (id == fg1000.FASCIA.HEADING_PRESS)       return controller.handleHeadingPress(value);
 
@@ -109,8 +110,8 @@ RegisterWithEmesary : func()
           if (id == fg1000.FASCIA.COM_INNER)    return controller.handleComInner(value);
           if (id == fg1000.FASCIA.COM_TOGGLE)   return controller.handleComToggle(value);
 
-          if (id == fg1000.FASCIA.COM_FREQ_TRANSFER)        return controller.handleFreqTransfer(value);
-          if (id == fg1000.FASCIA.COM_FREQ_TRANSFER_HOLD)   return controller.handleFreqTransferHold(value); # Auto-tunes to 121.2 when pressed for 2 seconds
+          if (id == fg1000.FASCIA.COM_FREQ_TRANSFER)        return controller.handleComFreqTransfer(value);
+          if (id == fg1000.FASCIA.COM_FREQ_TRANSFER_HOLD)   return controller.handleComFreqTransferHold(value); # Auto-tunes to 121.2 when pressed for 2 seconds
 
           if (id == fg1000.FASCIA.COM_VOL)          return controller.handleComVol(value);
           if (id == fg1000.FASCIA.COM_VOL_TOGGLE)   return controller.handleComVolToggle(value);

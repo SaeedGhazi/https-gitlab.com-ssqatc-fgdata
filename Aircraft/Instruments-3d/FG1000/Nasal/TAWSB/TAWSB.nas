@@ -1,18 +1,18 @@
-# Checklist5
-var Checklist5 =
+# TAWSB
+var TAWSB =
 {
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
       parents : [
-        Checklist5,
-        MFDPage.new(mfd, myCanvas, device, svg, "Checklist5", "LST - CHECKLIST 5")
+        TAWSB,
+        MFDPage.new(mfd, myCanvas, device, svg, "TAWSB", "MAP - TAWS")
       ],
     };
 
     obj.topMenu(device, obj, nil);
 
-    obj.controller = fg1000.Checklist5Controller.new(obj, svg);
+    obj.controller = fg1000.TAWSBController.new(obj, svg);
 
     return obj;
   },

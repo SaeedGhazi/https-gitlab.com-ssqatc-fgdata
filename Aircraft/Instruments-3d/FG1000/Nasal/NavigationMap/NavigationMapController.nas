@@ -165,18 +165,6 @@ var NavigationMapController =
     me.updateVisibility();
   },
 
-  handleFMSInner : func(value) {
-    # This page has no use for the FMS knob, so we pass all such
-    # events to the pageGroupController which displays the page menu in the
-    # bottom right of the screen
-    return me.page.mfd._pageGroupController.handleFMSInner(value);
-  },
-  handleFMSOuter : func(value) {
-    # This page has no use for the FMS knob, so we pass all such
-    # events to the pageGroupController which displays the page menu in the
-    # bottom right of the screen
-    return me.page.mfd._pageGroupController.handleFMSOuter(value);
-  },
   handleRange : func(val)
   {
     var incr_or_decr = (val > 0) ? 1 : -1;

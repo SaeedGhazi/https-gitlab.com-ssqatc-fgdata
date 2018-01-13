@@ -22,6 +22,12 @@ var AirportInfoController =
             {range: 0.5, label: "8nm"},
             {range: 0.4, label: "10nm"} ],
 
+  UIGROUP : {
+    APT  : 0,
+    RNWY : 1,
+    FREQ : 2,
+  },
+
   new : func (page, svg)
   {
     var obj = { parents : [ AirportInfoController, MFDPageController.new(page)] };
@@ -31,12 +37,34 @@ var AirportInfoController =
     obj.info = nil;
     obj.page = page;
     obj.crsrToggle = 0;
+    obj._currentGroup = AirportInfoController.UIGROUP.APT;
     obj.current_zoom = 7;
 
     obj.setZoom(obj.current_zoom);
 
     return obj;
   },
+
+  selectAirport : func() {
+    me.selectGroup(AirportInfoController.UIGROUP.APT)
+  },
+  selectRunways : func() {
+    me.selectGroup(AirportInfoController.UIGROUP.RNWY);
+  },
+  selectFrequencies : func() {
+    me.selectGroup(AirportInfoController.UIGROUP.FREQ);
+  },
+  getSelectedGroup : func() {
+    return me._currentGroup;
+  },
+  selectGroup : func(grp) {
+    me._currentGroup = grp;
+    if (grp == AirportInfoController.UIGROUP.APT)  me.page.airportEntry.highlightElement() else me.page.airportEntry.unhighlightElement();
+    if (grp == AirportInfoController.UIGROUP.RNWY) me.page.runwaySelect.highlightElement()   else me.page.runwaySelect.unhighlightElement();
+    if (grp == AirportInfoController.UIGROUP.FREQ) me.page.freqSelect.showCRSR()     else me.page.freqSelect.hideCRSR();
+    me._crsrToggle = 1;
+  },
+
   setAirport : func(id)
   {
     if (id == me.airport) return;
@@ -76,23 +104,34 @@ var AirportInfoController =
   handleCRSR : func() {
     me.crsrToggle = (! me.crsrToggle);
     if (me.crsrToggle) {
-      me.page.showCRSR();
+      me.selectAirport();
     } else {
-      me.page.hideCRSR();
+      me.page.resetCRSR();
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
   handleFMSInner : func(value) {
     if (me.crsrToggle == 1) {
-      var select = me.page.incrSmall(value);
-      if ((select.name == "AirportInfoRunway") and (select.value != nil)) {
-        # Selection values are of the form "06L-12R".  We need to set the
-        # runway to the left half.
-        var idx = find("-", select.value);
-        if (idx != -1) {
-          var rwy = substr(select.value, 0, idx);
-          me.setRunway(rwy);
+      if (me._currentGroup == AirportInfoController.UIGROUP.APT) {
+        me.page.airportEntry.incrSmall(value);
+      }
+
+      if (me._currentGroup == AirportInfoController.UIGROUP.RNWY) {
+        me.page.runwaySelect.incrSmall(value);
+        var val = me.page.runwaySelect.getValue();
+        if (val != nil) {
+          # Selection values are of the form "06L-12R".  We need to set the
+          # runway to the left half.
+          var idx = find("-", val);
+          if (idx != -1) {
+            var rwy = substr(val, 0, idx);
+            me.setRunway(rwy);
+          }
         }
+      }
+
+      if (me._currentGroup == AirportInfoController.UIGROUP.FREQ) {
+        me.page.freqSelect.incrSmall(value);
       }
 
       return emesary.Transmitter.ReceiptStatus_Finished;
@@ -102,7 +141,14 @@ var AirportInfoController =
   },
   handleFMSOuter : func(value) {
     if (me.crsrToggle == 1) {
-      me.page.moveCRSR(value);
+      if ((me._currentGroup == AirportInfoController.UIGROUP.APT) and me.page.airportEntry.isInEdit()) {
+        me.page.airportEntry.incrLarge(value);
+      } else {
+        var incr_or_decr = (value > 0) ? 1 : -1;
+        var idx = math.mod(me._currentGroup + incr_or_decr, size(AirportInfoController.UIGROUP));
+        me.selectGroup(idx);
+      }
+
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return me.page.mfd.SurroundController.handleFMSOuter(value);
@@ -110,11 +156,15 @@ var AirportInfoController =
   },
   handleEnter : func(value) {
     if (me.crsrToggle == 1) {
-      var select = me.page.handleEnter();
-      if (select.name == "AirportInfoID") me.setAirport(select.value);
-      if (substr(select.name, 0, 15) == "AirportInfoFreq") {
-        me.page.mfd.SurroundController.setStandbyNavComFreq(select.value);
+      if ((me._currentGroup == AirportInfoController.UIGROUP.APT) and me.page.airportEntry.isInEdit()) {
+        var aptname = me.page.airportEntry.enterElement();
+        me.setAirport(aptname);
       }
+
+      if (me._currentGroup == AirportInfoController.UIGROUP.FREQ) {
+        me.page.mfd.SurroundController.setStandbyNavComFreq(me.page.freqSelect.getValue());
+      }
+
 
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
@@ -122,9 +172,11 @@ var AirportInfoController =
     }
   },
   handleClear : func(value) {
-    if (me.crsrToggle == 1) {
-      # Cancel any data entry
-      me.page.handleClear();
+    if ((me.crsrToggle == 1) and
+        (me._currentGroup == AirportInfoController.UIGROUP.APT) and
+        me.page.airportEntry.isInEdit()) {
+        me.page.airportEntry.clearElement();
+        return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     }

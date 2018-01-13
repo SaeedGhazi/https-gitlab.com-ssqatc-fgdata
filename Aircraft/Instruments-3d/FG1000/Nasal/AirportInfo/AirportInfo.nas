@@ -27,14 +27,6 @@ var AirportInfo =
       "RwyDimensions",
       "RwySurface",
       "RwyLighting",
-      "FreqLabel1", "Freq1",
-      "FreqLabel2", "Freq2",
-      "FreqLabel3", "Freq3",
-      "FreqLabel4", "Freq4",
-      "FreqLabel5", "Freq5",
-      "FreqLabel6", "Freq6",
-      "FreqLabel7", "Freq7",
-      "FreqLabel8", "Freq8",
       "Zoom"
     ];
 
@@ -55,19 +47,17 @@ var AirportInfo =
 
     obj.runwaySelect = PFD.ScrollElement.new(obj.pageName, svg, "Runway", ["36","18"]); # Dummy values
 
-    obj.cursorElements = [
-      obj.airportEntry,
-#      obj.getTextElement("Name"),
-      obj.runwaySelect,
-      obj.getTextElement("Freq1"),
-      obj.getTextElement("Freq2"),
-      obj.getTextElement("Freq3"),
-      obj.getTextElement("Freq4"),
-      obj.getTextElement("Freq5"),
-      obj.getTextElement("Freq6"),
-      obj.getTextElement("Freq7"),
-      obj.getTextElement("Freq8")
-    ];
+    obj.freqSelect = PFD.GroupElement.new(
+      obj.pageName,
+      svg,
+      ["FreqLabel", "Freq"],
+      7,
+      "Freq",
+      0,
+      "FreqScrollBar",
+      "FreqScroll",
+      150
+    );
 
     # The Airport Chart
     obj.AirportChart = obj._group.createChild("map");
@@ -149,7 +139,7 @@ var AirportInfo =
     }
 
     # Display the comms frequencies for this airport
-    var fcount = 1;
+    var freqarray = [];
 
     if (size(apt_info.comms()) > 0) {
       # Airport has one or more frequencies assigned to it.
@@ -161,9 +151,7 @@ var AirportInfo =
       }
 
       foreach (var c; sort(keys(freqs), string.icmp)) {
-        me.setTextElement("FreqLabel" ~ fcount, c);
-        me.setTextElement("Freq" ~ fcount, freqs[c]);
-        fcount += 1;
+        append(freqarray, {FreqLabel: c, Freq: freqs[c]});
       }
     }
 
@@ -173,19 +161,12 @@ var AirportInfo =
       if (rwy_info.ils_frequency_mhz != nil) {
         var label = "ILS " ~ rwy_info.id;
         var freq  = sprintf("%.3f", rwy_info.ils_frequency_mhz);
-
-        me.setTextElement("FreqLabel" ~ fcount, label);
-        me.setTextElement("Freq" ~ fcount, freq);
-        fcount += 1;
+        append(freqarray, {FreqLabel: label, Freq: freq});
       }
     }
 
-    while (fcount < 9) {
-      # zero remaining comms channels
-      me.setTextElement("FreqLabel" ~ fcount, "");
-      me.setTextElement("Freq" ~ fcount, "");
-      fcount += 1;
-    }
+    me.freqSelect.setValues(freqarray);
+
   },
   displayRunway : func(rwy_info) {
     if (rwy_info == nil) {
@@ -204,50 +185,14 @@ var AirportInfo =
     me.AirportChart.setScreenRange(zoom);
     me.setTextElement("Zoom", label);
   },
-  moveCRSR : func(val) {
-    var incr_or_decr = (val > 0) ? 1 : -1;
 
-    if (me.cursorElements[me.crsrIdx].isInEdit()) {
-      # We're editing an element, so let the element handle the movement itself
-      me.cursorElements[me.crsrIdx].incrLarge(val);
-    } else {
-      # We're not currently editing an element, so move to the next cursor position.
-      me.cursorElements[me.crsrIdx].unhighlightElement();
-      me.crsrIdx = math.mod(me.crsrIdx + incr_or_decr, size(me.cursorElements));
+  # Clear any cursor, highlights.  Used when exiting from CRSR mode
+  resetCRSR : func() {
+    me.airportEntry.unhighlightElement();
+    me.runwaySelect.unhighlightElement();
+    me.freqSelect.hideCRSR();
+  },
 
-      while ((me.cursorElements[me.crsrIdx].getValue() == nil) or
-             (me.cursorElements[me.crsrIdx].getValue() == "" )) {
-        # Handle case where we have blank frequencies by skipping them.
-        me.crsrIdx = math.mod(me.crsrIdx + incr_or_decr, size(me.cursorElements));
-      }
-
-      me.cursorElements[me.crsrIdx].highlightElement();
-    }
-  },
-  incrSmall : func(val) {
-    me.cursorElements[me.crsrIdx].incrSmall(val);
-    var ret = {};
-    ret.name  = me.cursorElements[me.crsrIdx].getName();
-    ret.value = me.cursorElements[me.crsrIdx].getValue();
-    return ret;
-  },
-  handleEnter : func() {
-    me.cursorElements[me.crsrIdx].enterElement();
-    var ret = {};
-    ret.name  = me.cursorElements[me.crsrIdx].getName();
-    ret.value = me.cursorElements[me.crsrIdx].getValue();
-    return ret;
-  },
-  handleClear : func() {
-    me.cursorElements[me.crsrIdx].clearElement();
-  },
-  showCRSR : func() {
-    me.cursorElements[me.crsrIdx].highlightElement();
-  },
-  hideCRSR : func() {
-    me.cursorElements[me.crsrIdx].unhighlightElement();
-    me.crsrIdx = 0;
-  },
   offdisplay : func() {
     me._group.setVisible(0);
 

@@ -167,6 +167,19 @@ var AirportInfo =
       }
     }
 
+    # Add any ILS frequencies as well
+    foreach(var rwy; sort(keys(apt_info.runways), string.icmp)) {
+      var rwy_info = apt_info.runways[rwy];
+      if (rwy_info.ils_frequency_mhz != nil) {
+        var label = "ILS " ~ rwy_info.id;
+        var freq  = sprintf("%.3f", rwy_info.ils_frequency_mhz);
+
+        me.setTextElement("FreqLabel" ~ fcount, label);
+        me.setTextElement("Freq" ~ fcount, freq);
+        fcount += 1;
+      }
+    }
+
     while (fcount < 9) {
       # zero remaining comms channels
       me.setTextElement("FreqLabel" ~ fcount, "");

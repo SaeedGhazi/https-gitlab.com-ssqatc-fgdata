@@ -180,16 +180,28 @@ var NearestAirports =
     }
 
     var freqarray = [];
+
+    # Add Comm Frequencies
     var apt_comms = apt.comms();
     if (size(apt_comms) > 0) {
       # Airport has one or more frequencies assigned to it.
       var freqs = {};
       foreach (var c; apt_comms) {
-        freqs[c.ident] = sprintf("%.3f", c.frequency);;
+        freqs[c.ident] = sprintf("%.3f", c.frequency);
       }
 
       foreach (var c; sort(keys(freqs), string.icmp)) {
         append(freqarray, {FreqLabel: c, Freq: freqs[c]});
+      }
+    }
+
+    # Add any ILS frequencies as well
+    foreach(var rwy; sort(keys(apt.runways), string.icmp)) {
+      var rwy_info = apt.runways[rwy];
+      if (rwy_info.ils_frequency_mhz != nil) {
+        var label = "ILS " ~ rwy_info.id;
+        var freq  = sprintf("%.3f", rwy_info.ils_frequency_mhz);
+        append(freqarray, {FreqLabel: label, Freq: freq});
       }
     }
 

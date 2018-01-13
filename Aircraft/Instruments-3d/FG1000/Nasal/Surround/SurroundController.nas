@@ -375,17 +375,34 @@ var SurroundController =
       me.transmitter = nil;
   },
 
-  # Used by other pages to set the current standby COM frequency by pressing ENT
-  setStandbyComFreq : func(value) {
+  # Used by other pages to set the current standby NAV or COM frequency by pressing ENT
+  setStandbyNavComFreq : func(value) {
     var data={};
 
-    if (value > fg1000.MAX_COM_FREQ) return;
-    if (value < fg1000.MIN_COM_FREQ) return;
+    # Determine whether this is NAV or COM based on the frequency itself
 
-    if (me._comselected == 1) {
-      data["Comm1StandbyFreq"] = value;
+    if (value < fg1000.MAX_NAV_FREQ) {
+      # Nav frequency
+      if (value > fg1000.MAX_NAV_FREQ) return;
+      if (value < fg1000.MIN_NAV_FREQ) return;
+
+      # TODO: If we're in approach phase then this should update the Active
+      # frequency
+      if (me._navselected == 1) {
+        data["Nav1StandbyFreq"] = value;
+      } else {
+        data["Nav2StandbyFreq"] = value;
+      }
     } else {
-      data["Comm2StandbyFreq"] = value;
+      # COM frequency
+      if (value > fg1000.MAX_COM_FREQ) return;
+      if (value < fg1000.MIN_COM_FREQ) return;
+
+      if (me._comselected == 1) {
+        data["Comm1StandbyFreq"] = value;
+      } else {
+        data["Comm2StandbyFreq"] = value;
+      }
     }
 
     me.sendNavComDataNotification(data);

@@ -113,7 +113,7 @@ var AirportInfoController =
       var select = me.page.handleEnter();
       if (select.name == "AirportInfoID") me.setAirport(select.value);
       if (substr(select.name, 0, 15) == "AirportInfoFreq") {
-        me.page.mfd.SurroundController.setStandbyComFreq(select.value);
+        me.page.mfd.SurroundController.setStandbyNavComFreq(select.value);
       }
 
       return emesary.Transmitter.ReceiptStatus_Finished;

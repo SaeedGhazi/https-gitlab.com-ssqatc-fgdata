@@ -141,7 +141,7 @@ var NearestAirportsController =
         # TODO Select the current COM frequency.
         var freq = me.page.getSelectedFreq();
         if (freq != nil) {
-          me.page.mfd.SurroundController.setStandbyComFreq(freq);
+          me.page.mfd.SurroundController.setStandbyNavComFreq(freq);
         }
         return emesary.Transmitter.ReceiptStatus_Finished;
       }

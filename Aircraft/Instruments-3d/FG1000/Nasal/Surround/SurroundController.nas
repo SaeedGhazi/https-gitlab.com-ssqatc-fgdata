@@ -375,4 +375,35 @@ var SurroundController =
       me.transmitter = nil;
   },
 
+  # Used by other pages to set the current standby COM frequency by pressing ENT
+  setStandbyComFreq : func(value) {
+    var data={};
+
+    if (value > fg1000.MAX_COM_FREQ) return;
+    if (value < fg1000.MIN_COM_FREQ) return;
+
+    if (me._comselected == 1) {
+      data["Comm1StandbyFreq"] = value;
+    } else {
+      data["Comm2StandbyFreq"] = value;
+    }
+
+    me.sendNavComDataNotification(data);
+  },
+
+  # Used by other pages to set the current standby NAV frequency by pressing ENT
+  setStandbyNavFreq : func(value) {
+    var data={};
+
+    if (value > fg1000.MAX_NAV_FREQ) return;
+    if (value < fg1000.MIN_NAV_FREQ) return;
+
+    if (me._navselected == 1) {
+      data["Nav1StandbyFreq"] = value;
+    } else {
+      data["Nav2StandbyFreq"] = value;
+    }
+
+    me.sendNavComDataNotification(data);
+  },
 };

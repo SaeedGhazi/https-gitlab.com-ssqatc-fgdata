@@ -115,7 +115,9 @@ var AirportInfoController =
     if (me.crsrToggle == 1) {
       var select = me.page.handleEnter();
       if (select.name == "AirportInfoID") me.setAirport(select.value);
-      if (substr(select.name, 0, 15) == "AirportInfoFreq") print("Enter pressed on frequency " ~ select.value);
+      if (substr(select.name, 0, 15) == "AirportInfoFreq") {
+        me.page.mfd.SurroundController.setStandbyComFreq(select.value);
+      }
 
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {

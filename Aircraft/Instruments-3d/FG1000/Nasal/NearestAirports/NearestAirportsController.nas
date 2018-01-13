@@ -155,16 +155,21 @@ var NearestAirportsController =
         var apt_id = me.page.getSelectedAirportID();
         var apt_info = airportinfo(apt_id);
         me.page.updateAirportData(apt_info);
+        return emesary.Transmitter.ReceiptStatus_Finished;
       }
 
       if (me._currentGroup == NearestAirportsController.UIGROUP.RNWY) {
         # No effect if runways are selected
+        return emesary.Transmitter.ReceiptStatus_Finished;
       }
 
       if (me._currentGroup == NearestAirportsController.UIGROUP.FREQ) {
         # TODO Select the current COM frequency.
         var freq = me.page.getSelectedFreq();
-        if (freq != nil) print("NearestAirportController.handleEnter frequency selection " ~ freq);
+        if (freq != nil) {
+          me.page.mfd.SurroundController.setStandbyComFreq(freq);
+        }
+        return emesary.Transmitter.ReceiptStatus_Finished;
       }
 
       if (me._currentGroup == NearestAirportsController.UIGROUP.APR) {

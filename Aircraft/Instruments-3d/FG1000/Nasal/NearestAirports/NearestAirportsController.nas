@@ -21,35 +21,6 @@ var NearestAirportsController =
     return obj;
   },
 
-  getAirports : func() {
-    # Find the airports within 200nm and display them.
-
-    # To make this more efficient for areas with a high density of airports, we'll try
-    # small radii first.
-
-    var radius = 0;
-    var apts = [];
-
-    #
-    #  TODO: Use Emesary to query APT data - allows support for multiple
-    #  data sources / abstraction.
-    #
-    #var airportNotification = notifications.PFDEventNotification.new(blah);
-    #var response = Emesary.GlobalTransmitter.notifyAll(airportNotification);
-    #if (response.isSuccess()) {
-    #  me.page.updateAirports(airportNotification.value);
-    #}
-
-    while ((radius <= 200) and (size(apts) < 25)) {
-      radius = radius + 50;
-      apts = findAirportsWithinRange(radius);
-    }
-
-    if (size(apts) > 25) {
-      apts = subvec(apts, 0, 25);
-    }
-    me.page.updateAirports(apts);
-  },
   selectAirports : func() {
     me.selectGroup(NearestAirportsController.UIGROUP.APT)
   },
@@ -95,8 +66,9 @@ var NearestAirportsController =
       if (me._currentGroup == NearestAirportsController.UIGROUP.APT) {
         me.page.airportSelect.incrSmall(value);
         var apt_id = me.page.getSelectedAirportID();
-        var apt_info = airportinfo(apt_id);
-        me.page.updateAirportData(apt_info);
+
+        var aptdata = me.getAirport(apt_id);
+        if (aptdata != nil) me.page.updateAirportData(aptdata);
       }
 
       if (me._currentGroup == NearestAirportsController.UIGROUP.RNWY) {
@@ -106,15 +78,17 @@ var NearestAirportsController =
         var rwy    = me.page.runwaySelect.getValue();
 
         if ((rwy != nil) and (rwy != "")) {
-          var apt_info = airportinfo(apt_id);
+          var apt_info = me.getAirport(apt_id);
 
-          # Names in the runway selection are of the form "NNN-MMM", e.g. 11R-29L
-          # We just want the first of these.
-          var idx = find("-", rwy);
-          if (idx != -1) {
-            rwy = substr(rwy, 0, idx);
-            var rwy_info = apt_info.runways[rwy];
-            me.page.updateRunwayInfo(rwy_info);
+          if (apt_info != nil) {
+            # Names in the runway selection are of the form "NNN-MMM", e.g. 11R-29L
+            # We just want the first of these.
+            var idx = find("-", rwy);
+            if (idx != -1) {
+              rwy = substr(rwy, 0, idx);
+              var rwy_info = apt_info.runways[rwy];
+              me.page.updateRunwayInfo(rwy_info);
+            }
           }
         }
       }
@@ -138,7 +112,7 @@ var NearestAirportsController =
       if (me._currentGroup == NearestAirportsController.UIGROUP.APT) {
         me.page.airportSelect.incrLarge(value);
         var apt_id = me.page.getSelectedAirportID();
-        var apt_info = airportinfo(apt_id);
+        var apt_info = me.getAirport(apt_id);
         me.page.updateAirportData(apt_info);
       }
 
@@ -153,7 +127,7 @@ var NearestAirportsController =
         # If the airport group is selected, the ENT key selects the next airport
         me.page.airportSelect.incrLarge(value);
         var apt_id = me.page.getSelectedAirportID();
-        var apt_info = airportinfo(apt_id);
+        var apt_info = me.getAirport(apt_id);
         me.page.updateAirportData(apt_info);
         return emesary.Transmitter.ReceiptStatus_Finished;
       }
@@ -199,5 +173,39 @@ var NearestAirportsController =
   offdisplay : func() {
     me.page.mfd.NavigationMap.controller.enableDTO(0);
     me.DeRegisterWithEmesary();
+  },
+
+  getAirports : func() {
+
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.NavData,
+      {Id: "NearestAirports", Value: nil});
+
+    var response = me._transmitter.NotifyAll(notification);
+
+    if (! me._transmitter.IsFailed(response)) {
+      me.page.updateAirports(notification.EventParameter.Value);
+    } else {
+      return nil;
+    }
+  },
+
+  getAirport : func(id) {
+    # Use Emesary to get the airport
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.NavData,
+      {Id: "AirportByID", Value: id});
+
+    var response = me._transmitter.NotifyAll(notification);
+
+    if (! me._transmitter.IsFailed(response)) {
+      return notification.EventParameter.Value;
+    } else {
+      return nil;
+    }
   },
 };

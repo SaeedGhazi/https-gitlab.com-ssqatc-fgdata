@@ -18,6 +18,7 @@
             var eisPublisher = nil;
             var navcomPublisher = nil;
             var navcomUpdater = nil;
+            var navdataInterface = nil
         ]]></open>
 
         <close><![CDATA[
@@ -33,6 +34,9 @@
 
             navcomUpdater.stop();
             navcomUpdater = nil;
+
+            navdataInterface.stop();
+            navdataInterface =nil;
         ]]></close>
     </nasal>
 
@@ -497,6 +501,8 @@
                         io.load_nasal(nasal_dir ~ 'Interfaces/GenericEISPublisher.nas', "fg1000");
                         io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas', "fg1000");
                         io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas', "fg1000");
+                        io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
+
                         mfd = fg1000.MFD.new(myCanvas);
 
                         eisPublisher = fg1000.GenericEISPublisher.new();
@@ -507,6 +513,9 @@
 
                         navcomUpdater = fg1000.GenericNavComUpdater.new(mfd.getDevice());
                         navcomUpdater.start();
+
+                        navdataInterface = fg1000.NavDataInterface.new(mfd.getDevice());
+                        navdataInterface.start();
 
                         softkeypushed = 0;
                         # Connect the buttons - using the provided model index to get the right ones from the model binding

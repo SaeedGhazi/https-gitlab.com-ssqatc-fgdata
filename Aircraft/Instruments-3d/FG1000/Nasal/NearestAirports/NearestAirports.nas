@@ -119,6 +119,8 @@ var NearestAirports =
   },
   updateAirports : func(apts) {
 
+    if (apts == nil) return;
+
     var airportlist = [];
     for (var i = 0; i < size(apts); i = i + 1) {
       var apt = apts[i];
@@ -150,6 +152,9 @@ var NearestAirports =
     }
   },
   updateAirportData : func(apt) {
+
+    if (apt == nil) return;
+
     me.setTextElement("Name", apt.name);
     me.setTextElement("Alt", sprintf("%ift", M2FT * apt.elevation));
 

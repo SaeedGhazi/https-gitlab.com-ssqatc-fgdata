@@ -200,7 +200,6 @@ var AirportInfo =
     } else {
       # We're not currently editing an element, so move to the next cursor position.
       me.cursorElements[me.crsrIdx].unhighlightElement();
-      print("Old cursor index " ~ me.crsrIdx);
       me.crsrIdx = math.mod(me.crsrIdx + incr_or_decr, size(me.cursorElements));
 
       while ((me.cursorElements[me.crsrIdx].getValue() == nil) or
@@ -209,7 +208,6 @@ var AirportInfo =
         me.crsrIdx = math.mod(me.crsrIdx + incr_or_decr, size(me.cursorElements));
       }
 
-      print("New cursor index " ~ me.crsrIdx ~ " " ~ size(me.cursorElements));
       me.cursorElements[me.crsrIdx].highlightElement();
     }
   },

@@ -33,21 +33,18 @@ var AirportInfoController =
     obj.crsrToggle = 0;
     obj.current_zoom = 7;
 
-    # Initial airport is our current location.
-    var current_apt = airportinfo("airport");
-    obj.setAirport(current_apt.id);
-    obj.setZoom(7);
+    obj.setZoom(obj.current_zoom);
 
     return obj;
   },
   setAirport : func(id)
   {
     if (id == me.airport) return;
-    var apt = airportinfo(id);
+    var apt = me.getAirport(id);
 
     if (apt != nil)  {
       me.airport = id;
-      me.info= airportinfo(id);
+      me.info = apt;
     }
 
     # Reset airport display.  We do this irrespective of whether the id
@@ -136,8 +133,33 @@ var AirportInfoController =
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();
+
+    if (me.airport == "") {
+      # Initial airport is our current location.
+      # Needs to be done here as the data provider may not be set up when
+      # we are created.
+      var current_apt = me.getAirport("airport");
+      me.setAirport(current_apt.id);
+    }
   },
   offdisplay : func() {
     me.DeRegisterWithEmesary();
+  },
+
+  getAirport : func(id) {
+    # Use Emesary to get the airport
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.NavData,
+      {Id: "AirportByID", Value: id});
+
+    var response = me._transmitter.NotifyAll(notification);
+
+    if (! me._transmitter.IsFailed(response)) {
+      return notification.EventParameter.Value;
+    } else {
+      return nil;
+    }
   },
 };

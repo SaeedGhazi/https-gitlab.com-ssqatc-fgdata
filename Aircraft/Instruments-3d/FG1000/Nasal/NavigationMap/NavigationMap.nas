@@ -11,6 +11,7 @@ var NavigationMap =
     };
 
     obj.MFDMap = obj._group.createChild("map");
+
     obj.MFDMap.setScreenRange(689/2.0);
 
     # Labels for map range and orientation.  Two sets - one for the full display

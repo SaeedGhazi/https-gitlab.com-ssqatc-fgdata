@@ -74,7 +74,7 @@ var MAX_NAV_FREQ = 118.000;
 # Constants for the hard-buttons on the fascia
 var FASCIA = {
   NAV_VOL : 0,
-  NAV_VOL_TOGGLE : 1,
+  NAV_ID : 1,
   NAV_FREQ_TRANSFER :2,
   NAV_OUTER : 3,
   NAV_INNER : 4,

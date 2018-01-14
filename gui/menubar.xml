@@ -824,8 +824,12 @@
 		<item>
 			<name>fg1000</name>
 			<binding>
-				<command>dialog-show</command>
-				<dialog-name>fg1000</dialog-name>
+				<command>nasal</command>
+				<script>
+					var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
+			    io.load_nasal(nasal_dir ~ 'gui.nas', "fg1000");
+					var MFD_GUI = fg1000.MFDGUI.new();
+				</script>
 			</binding>
 		</item>
 

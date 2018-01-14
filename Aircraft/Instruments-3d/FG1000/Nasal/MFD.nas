@@ -72,6 +72,8 @@ var MFD =
     };
 
     obj._svg = myCanvas.createGroup("softkeys");
+    obj._svg.set("clip-frame", canvas.Element.LOCAL);
+    obj._svg.set("clip", "rect(0px, 1024px, 768px, 0px)");
 
     var fontmapper = func (family, weight) {
       #if( family == "Liberation Sans" and weight == "narrow" ) {
@@ -125,17 +127,6 @@ var MFD =
     obj.EIS.setVisible(1);
     obj.EIS.ondisplay();
     obj._MFDDevice.selectPage(obj.NavigationMap);
-
-
-    # Add a wheel controller., which we will attach to the zoom.
-    myCanvas.addEventListener("wheel", func(e)
-    {
-      if (e.deltaY >0) {
-        obj._MFDDevice.current_page.controller.handleFMSInner(1);
-      } else {
-        obj._MFDDevice.current_page.controller.handleFMSInner(-1);
-      }
-    });
 
     return obj;
   },

@@ -24,7 +24,7 @@ new : func (page)
 
 #
 handleNavVol          : func (value) { return me.page.mfd.SurroundController.handleNavVol(value); },
-handleNavVolToggle    : func (value) { return me.page.mfd.SurroundController.handleNavVolToggle(value); },
+handleNavID           : func (value) { return me.page.mfd.SurroundController.handleNavID(value); },
 handleNavFreqTransfer : func (value) { return me.page.mfd.SurroundController.handleNavFreqTransfer(value); },
 handleNavOuter        : func (value) { return me.page.mfd.SurroundController.handleNavOuter(value); },
 handleNavInner        : func (value) { return me.page.mfd.SurroundController.handleNavInner(value); },
@@ -88,7 +88,7 @@ RegisterWithEmesary : func()
           #printf("Button pressed " ~ id ~ " " ~ value);
 
           if (id == fg1000.FASCIA.NAV_VOL)             return controller.handleNavVol(value);
-          if (id == fg1000.FASCIA.NAV_VOL_TOGGLE)      return controller.handleNavVolToggle(value);
+          if (id == fg1000.FASCIA.NAV_ID)              return controller.handleNavID(value);
           if (id == fg1000.FASCIA.NAV_FREQ_TRANSFER)   return controller.handleNavFreqTransfer(value);
           if (id == fg1000.FASCIA.NAV_OUTER)           return controller.handleNavOuter(value);
           if (id == fg1000.FASCIA.NAV_INNER)           return controller.handleNavInner(value);

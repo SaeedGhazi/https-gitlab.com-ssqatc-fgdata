@@ -78,7 +78,7 @@ var SurroundController =
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
-  handleNavVolToggle : func (value) {
+  handleNavID : func (value) {
     var data={};
 
     if (me._navselected == 1) {

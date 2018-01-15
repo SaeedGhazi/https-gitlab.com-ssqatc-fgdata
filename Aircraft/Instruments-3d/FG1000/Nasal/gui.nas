@@ -84,9 +84,12 @@ var MFDGUI =
       navdataInterface : nil,
       width : 1407,
       height : 918,
+      scale : 1.0,
     };
 
-    obj.window = canvas.Window.new([obj.width,obj.height],"dialog").set('title',"FG1000 MFD");
+    obj.scale = getprop("/sim/gui/mfd-scale") or 1.0;
+
+    obj.window = canvas.Window.new([obj.scale*obj.width,obj.scale*obj.height],"dialog").set('title',"FG1000 MFD");
 
     obj.window.del = func() {
       # Over-ride the window.del function so we clean up when the user closes the window
@@ -108,16 +111,36 @@ var MFDGUI =
     io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
 
     # Now create the MFD itself
-    obj.mfd = fg1000.MFD.new(obj.myCanvas);
-    obj.mfd._svg.setTranslation(186,45);
-    obj.mfd._svg.set("z-index", 150);
+    if (obj.scale > 0.999) {
+      # If we're at full scale, then create it directly in this Canvas as that
+      # produces sharper results and perhaps better performance
+      obj.mfd = fg1000.MFD.new(obj.myCanvas);
+      obj.mfd._svg.setTranslation(186,45);
+      obj.mfd._svg.set("z-index", 150);
+    } else {
+      # If we're using some scaling factor, then we create it as an image raster
+      # which scales everything for us nicely.
+      obj.mfd_canvas = canvas.new({
+        "name" : "MFD Canvas",
+        "size" : [1024, 768],
+        "view" : [1024, 768],
+        "mipmapping": 0,
+      });
+      obj.mfd = fg1000.MFD.new(obj.mfd_canvas);
+
+      var mfd_child = obj.root.createChild("image")
+        .setFile(obj.mfd_canvas.getPath())
+        .set("z-index", 150)
+        .setTranslation(obj.scale*186,obj.scale*45)
+        .setSize(obj.scale*1024, obj.scale*768);
+    }
 
     # Create the surround fascia, which is just a PNG image;
     var child = obj.root.createChild("image")
         .setFile("Aircraft/Instruments-3d/FG1000/Models/fascia.png")
         .set("z-index", 100)
         .setTranslation(0, 0)
-        .setSize(obj.width,obj.height);
+        .setSize(obj.scale*obj.width,obj.scale*obj.height);
 
     obj.eisPublisher = fg1000.GenericEISPublisher.new();
     obj.eisPublisher.start();
@@ -135,11 +158,9 @@ var MFDGUI =
     # knobs.
     obj.myCanvas.addEventListener("wheel", func(e)
     {
-      print("WHEEL: Local " ~ math.round(e.localX) ~ ", " ~ math.round(e.localY));
-
       foreach(var hotspot; MFDGUI.WHEEL_HOT_SPOTS) {
-        if ((e.localX > hotspot.top_left[0]) and (e.localX < hotspot.bottom_right[0]) and
-            (e.localY > hotspot.top_left[1]) and (e.localY < hotspot.bottom_right[1]) and
+        if ((e.localX > obj.scale*hotspot.top_left[0]) and (e.localX < obj.scale*hotspot.bottom_right[0]) and
+            (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]) and
             (e.shiftKey == hotspot.shift))
         {
           # We've found the hotspot, so send a notification to deal with it
@@ -156,14 +177,11 @@ var MFDGUI =
     });
 
     # Add a event listener for the mouse click, which is used for buttons
-
     obj.myCanvas.addEventListener("click", func(e)
     {
-      print("CLICK: Local " ~ math.round(e.localX) ~ ", " ~ math.round(e.localY));
-
       foreach(var hotspot; MFDGUI.CLICK_HOT_SPOTS) {
-        if ((e.localX > hotspot.top_left[0]) and (e.localX < hotspot.bottom_right[0]) and
-            (e.localY > hotspot.top_left[1]) and (e.localY < hotspot.bottom_right[1]) and
+        if ((e.localX > obj.scale*hotspot.top_left[0]) and (e.localX < obj.scale*hotspot.bottom_right[0]) and
+            (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]) and
             (e.shiftKey == hotspot.shift))
         {
           # We've found the hotspot, so send a notification to deal with it
@@ -179,8 +197,8 @@ var MFDGUI =
       }
 
       foreach(var hotspot; MFDGUI.SOFTKEY_HOTSPOTS) {
-        if ((e.localX > hotspot.top_left[0]) and (e.localX < hotspot.bottom_right[0]) and
-            (e.localY > hotspot.top_left[1]) and (e.localY < hotspot.bottom_right[1]))
+        if ((e.localX > obj.scale*hotspot.top_left[0]) and (e.localX < obj.scale*hotspot.bottom_right[0]) and
+            (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]))
         {
           # We've found the hotspot, so send a notification to deal with it
           var notification = notifications.PFDEventNotification.new(

@@ -55,7 +55,7 @@ handleComVolToggle : func (value) { return me.page.mfd.SurroundController.handle
 handleDTO       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleFPL       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleClear     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleClearHold : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleClearHold : func (value) { return me.page.mfd.SurroundController.handleClearHold(value); },
 
 # By default, the FMS knobs will select a new page.
 handleFMSOuter : func (value) { return me.page.mfd.SurroundController.handleFMSOuter(value); },

@@ -19,8 +19,6 @@ var SurroundController =
       _nav2standby : 0.0,
     };
 
-
-
     obj.RegisterWithEmesary();
     return obj;
   },
@@ -318,6 +316,11 @@ var SurroundController =
   },
 
   handleComVolToggle : func (value) {
+  },
+
+  # Holding the Clear button goes straight to the Navigation Map page.
+  handleClearHold : func (value) {
+    me._page.device.selectPage(me._page.getPage("NavigationMap"));
   },
 
   # These methods are slightly unusual in that they are called by other

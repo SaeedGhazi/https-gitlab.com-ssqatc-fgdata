@@ -240,6 +240,11 @@
       <match>DH4</match>
       <alias>DHC4</alias>
     </alias>
+      <!-- DHC6 Twin Otter -->	
+	 <alias>
+      <match>DH6</match>
+      <alias>DHT</alias>
+    </alias>
     <alias>
       <match>D95</match>
       <!-- Google suggests this means a DC9-50 -->
@@ -460,6 +465,18 @@
       <type>DHC4</type>
       <base>turboprop_transport</base>
     </aircraft>
+   <aircraft>
+      <type>DHT</type>
+      <base>turboprop_transport</base>
+      <rotate-speed-kts>80.0</rotate-speed-kts> 
+      <takeoff-speed-kts>90.0</takeoff-speed-kts>  
+	  <climbspeed-kts>92.0</climbspeed-kts>
+      <cruise-speed-kts>145.0</cruise-speed-kts>
+	  <decent-speed-kts>80.0</decent-speed-kts>
+	  <approach-speed-kts>70.0</approach-speed-kts>
+      <touchdown-speed-kts>64.0</touchdown-speed-kts>
+	  <taxi-speed-kts>25.0</taxi-speed-kts>	  
+    </aircraft>	
     <aircraft>
       <type>ATR</type>
       <base>turboprop_transport</base>

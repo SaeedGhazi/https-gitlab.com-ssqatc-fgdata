@@ -102,6 +102,11 @@
         <source xml:space="preserve">--- Failures ---</source>
         <target xml:space="preserve">--- Pannes ---</target>
       </trans-unit>
+      <trans-unit id="menu/fg1000:0" approved="yes">
+        <source xml:space="preserve">FG1000 MFD</source>
+        <target xml:space="preserve">Écran multifonction FG1000</target>
+        <note from="translator">« multifonction » ne prend pas de « s » dans ce cas selon larousse.fr</note>
+      </trans-unit>
       <trans-unit id="menu/fgcom-settings:0" approved="yes">
         <source xml:space="preserve">FGCom Settings</source>
         <target xml:space="preserve">Paramètres FGCom</target>
@@ -847,6 +852,10 @@
       <trans-unit id="options/fix-desc:0" approved="yes">
         <source xml:space="preserve">Specify starting position relative to a fix</source>
         <target xml:space="preserve">Précise la position de démarrage relative à un point fixe</target>
+      </trans-unit>
+      <trans-unit id="options/flarm-desc:0" approved="yes">
+        <source xml:space="preserve">Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</source>
+        <target xml:space="preserve">Ouvre une connexion avec le protocole Flarm, qui comporte des messages NMEA/GPS et des informations sur le trafic</target>
       </trans-unit>
       <trans-unit id="options/flight-plan-desc:0" approved="yes">
         <source xml:space="preserve">Read all waypoints from a file</source>

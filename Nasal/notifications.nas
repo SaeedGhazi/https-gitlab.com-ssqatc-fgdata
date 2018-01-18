@@ -554,7 +554,9 @@ var PFDEventNotification =
     HardKeyPushed : 4,  #event parameter contains single { Id: , Value: } tuple
     EngineData : 5,     #event parameter contains an array of hashes, each containing information about a given engine.
     NavComData : 6,     #event parameter contains a hash of updated Nav/Com settings
-    NavData : 7,        #event parameter contrains a singel { Id: , Value: } tuple requesting a paricular type of NavData
+    NavData : 7,        #event parameter contrains a single { Id: , Value: } tuple requesting a particular type of NavData
+    FMSData : 8,        #event parameter containing a hash of updated GPS/FMS information (track, ground-speed, waypoint legs etc.)
+    ADCData : 8,        #event parameter containing a hash of updated Air Data Computer information (track, ground-speed etc.)
 
     DefaultType : "PFDEventNotification",
 

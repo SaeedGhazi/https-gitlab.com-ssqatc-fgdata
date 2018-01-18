@@ -8,6 +8,8 @@ io.include("constants.nas");
 
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
 
+io.load_nasal(nasal_dir ~ '/ConfigStore.nas', "fg1000");
+
 io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFDPageController.nas', "fg1000");
 
@@ -70,6 +72,8 @@ var MFD =
       NavigationMap: nil,
       Surround : nil,
     };
+
+    obj.ConfigStore = fg1000.ConfigStore.new();
 
     obj._svg = myCanvas.createGroup("softkeys");
     obj._svg.set("clip-frame", canvas.Element.LOCAL);

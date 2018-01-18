@@ -23,11 +23,11 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142135"
-     inkscape:cx="208.90255"
-     inkscape:cy="491.35422"
+     inkscape:zoom="2.828427"
+     inkscape:cx="445.86013"
+     inkscape:cy="589.65442"
      inkscape:document-units="px"
-     inkscape:current-layer="SurroundGroup"
+     inkscape:current-layer="MFD-navbox"
      showgrid="true"
      inkscape:window-width="2495"
      inkscape:window-height="1416"
@@ -452,73 +452,6 @@
       </g>
       <g
          style="display:inline"
-         inkscape:label="PFD-navbox"
-         id="PFD-navbox">
-        <text
-           sodipodi:linespacing="125%"
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="263.75085"
-           y="22.123667"
-           id="LEG-text"
-           inkscape:label="LEG-text"><tspan
-             sodipodi:role="line"
-             id="tspan4549"
-             x="263.75085"
-             y="22.123667"
-             style="fill:#ff00ff" /></text>
-        <text
-           sodipodi:linespacing="125%"
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="500.63165"
-           y="21.821583"
-           id="DIS"
-           inkscape:label="DIS"><tspan
-             sodipodi:role="line"
-             id="tspan4553"
-             x="500.63165"
-             y="21.821583">DIS</tspan></text>
-        <text
-           sodipodi:linespacing="125%"
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:26.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="540.22955"
-           y="21.746063"
-           id="DIS-text"
-           inkscape:label="DIS-text"><tspan
-             sodipodi:role="line"
-             id="tspan4557"
-             x="540.22955"
-             y="21.746063">--.-</tspan></text>
-        <text
-           sodipodi:linespacing="125%"
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="639.22455"
-           y="22.123667"
-           id="ETE"
-           inkscape:label="ETE"><tspan
-             sodipodi:role="line"
-             id="tspan4561"
-             x="639.22455"
-             y="22.123667">ETE</tspan></text>
-        <text
-           sodipodi:linespacing="125%"
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:26.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="681.65094"
-           y="21.746063"
-           id="ETE-text"
-           inkscape:label="ETE-text"><tspan
-             sodipodi:role="line"
-             id="tspan4569"
-             x="681.65094"
-             y="21.746063"
-             style="fill:#ff00ff">--:--</tspan></text>
-      </g>
-      <g
-         style="display:inline"
          inkscape:label="MFD-navbox"
          id="MFD-navbox">
         <text
@@ -527,7 +460,7 @@
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="265.87216"
            y="22.002344"
-           id="DATA-FIELD1-ID-text"
+           id="SurroundHeader1Label"
            inkscape:label="DATA-FIELD1-ID-text"><tspan
              sodipodi:role="line"
              id="tspan4587"
@@ -539,39 +472,39 @@
            xml:space="preserve"
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="389.5159"
-           y="22.002344"
-           id="DATA-FIELD2-ID-text"
+           y="22.01276"
+           id="SurroundHeader2Label"
            inkscape:label="DATA-FIELD2-ID-text"><tspan
              sodipodi:role="line"
              id="tspan4587-6"
              x="389.5159"
-             y="22.002344"
+             y="22.01276"
              style="fill:#ffffff">DTK</tspan></text>
         <text
            sodipodi:linespacing="125%"
            xml:space="preserve"
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="513.15961"
-           y="22.002344"
-           id="DATA-FIELD3-ID-text"
+           y="22.01276"
+           id="SurroundHeader3Label"
            inkscape:label="DATA-FIELD3-ID-text"><tspan
              sodipodi:role="line"
              id="tspan4587-5"
              x="513.15961"
-             y="22.002344"
+             y="22.01276"
              style="fill:#ffffff">TRK</tspan></text>
         <text
            sodipodi:linespacing="125%"
            xml:space="preserve"
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="636.80328"
-           y="22.002344"
-           id="DATA-FIELD4-ID-text"
+           y="22.01276"
+           id="SurroundHeader4Label"
            inkscape:label="DATA-FIELD4-ID-text"><tspan
              sodipodi:role="line"
              id="tspan4587-62"
              x="636.80328"
-             y="22.002344"
+             y="22.01276"
              style="fill:#ffffff">ETE</tspan></text>
         <text
            sodipodi:linespacing="125%"
@@ -579,7 +512,7 @@
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="313.06903"
            y="22.002344"
-           id="DATA-FIELD1-VAL-text"
+           id="SurroundHeader1Value"
            inkscape:label="DATA-FIELD1-VAL-text"><tspan
              sodipodi:role="line"
              id="tspan4625"
@@ -591,7 +524,7 @@
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="436.71277"
            y="22.002344"
-           id="DATA-FIELD2-VAL-text"
+           id="SurroundHeader2Value"
            inkscape:label="DATA-FIELD2-VAL-text"><tspan
              sodipodi:role="line"
              id="tspan4625-1"
@@ -603,7 +536,7 @@
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="560.35645"
            y="22.002344"
-           id="DATA-FIELD3-VAL-text"
+           id="SurroundHeader3Value"
            inkscape:label="DATA-FIELD3-VAL-text"><tspan
              sodipodi:role="line"
              id="tspan4625-7"
@@ -614,13 +547,13 @@
            xml:space="preserve"
            style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="684.00012"
-           y="22.002344"
-           id="DATA-FIELD4-VAL-text"
+           y="19.752344"
+           id="SurroundHeader4Value"
            inkscape:label="DATA-FIELD4-VAL-text"><tspan
              sodipodi:role="line"
              id="tspan4625-2"
              x="684.00012"
-             y="22.002344">--:--</tspan></text>
+             y="19.752344">--:--</tspan></text>
       </g>
       <rect
          y="743.99951"

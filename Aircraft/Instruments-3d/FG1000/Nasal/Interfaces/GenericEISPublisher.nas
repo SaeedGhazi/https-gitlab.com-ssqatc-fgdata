@@ -30,7 +30,6 @@ var GenericEISPublisher =
 
   # Custom publish method as we package the values into an array of engines,
   # in this case, only one!
-
   publish : func() {
     var engineData0 = {};
 

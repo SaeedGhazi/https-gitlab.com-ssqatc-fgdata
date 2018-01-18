@@ -110,6 +110,9 @@ var MFDGUI =
     io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas', "fg1000");
     io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
 
+    io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSPublisher.nas', "fg1000");
+    io.load_nasal(nasal_dir ~ 'Interfaces/GenericADCPublisher.nas', "fg1000");
+
     # Now create the MFD itself
     if (obj.scale > 0.999) {
       # If we're at full scale, then create it directly in this Canvas as that
@@ -153,6 +156,12 @@ var MFDGUI =
 
     obj.navdataInterface = fg1000.NavDataInterface.new(obj.mfd.getDevice());
     obj.navdataInterface.start();
+
+    obj.gpsPublisher = fg1000.GenericFMSPublisher.new();
+    obj.gpsPublisher.start();
+
+    obj.adcPublisher = fg1000.GenericADCPublisher.new();
+    obj.adcPublisher.start();
 
     # Add a event listener for the mouse wheel, which is used for turning the
     # knobs.
@@ -230,6 +239,12 @@ var MFDGUI =
 
     me.navdataInterface.stop();
     me.navdataInterface =nil;
+
+    me.gpsPublisher.stop();
+    me.gpsPublisher = nil;
+
+    me.adcPublisher.stop();
+    me.adcPublisher = nil;
 
     # Clean up the window itself
     call(canvas.Window.del, [], me.window);

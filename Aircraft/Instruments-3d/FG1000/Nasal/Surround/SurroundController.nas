@@ -359,11 +359,21 @@ var SurroundController =
       {
         if (notification.Device_Id == pfd_obj.device_id
             and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+
           if (notification.Event_Id == notifications.PFDEventNotification.NavComData
               and notification.EventParameter != nil)
           {
             return controller.handleNavComData(notification.EventParameter);
           }
+
+          if (((notification.Event_Id == notifications.PFDEventNotification.FMSData) or
+               (notification.Event_Id == notifications.PFDEventNotification.ADCData)   )
+              and notification.EventParameter != nil)
+          {
+            # Pass FMS and ADC data straight to the page to display in the header fields
+            return controller._page.updateHeaderData(notification.EventParameter);
+          }
+
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
       };

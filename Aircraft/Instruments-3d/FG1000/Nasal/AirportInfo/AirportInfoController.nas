@@ -165,7 +165,6 @@ var AirportInfoController =
         me.page.mfd.SurroundController.setStandbyNavComFreq(me.page.freqSelect.getValue());
       }
 
-
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return emesary.Transmitter.ReceiptStatus_NotProcessed;

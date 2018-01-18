@@ -38,6 +38,27 @@ var PAGE_GROUPS = [
   }
 ];
 
+# Mapping for header labels to specific FMS or ADC messages, and sprintf formatting
+# to use
+var HEADER_MAPPING = {
+  "BRG" : { message : "FMSLegBearing",            format : "%d"},
+  "XTK" : { message : "FMSLegCourseError",        format : "%.1fnm"},
+  "DIS" : { message : "FMSDistance",              format : "%.1fnm"},
+  "DTK" : { message : "FMSLegDesiredTrack",       format : "%d"},
+  "END" : { message : "EnduranceHrs",             format : "%.1fhrs"},
+  "ESA" : { message : "EnRouteSafeAltitude",      format : "%dft"},    # TODO
+  "ETA" : { message : "FMSEstimatedTimeArrival",  format : ""},        # TODO
+  "ETE" : { message : "FMSEstimatedTimeEnroute",     format : ""},
+  "FOD" : { message : "FMSFuelOverDestination",      format : "%dgal"},
+  "FOB" : { message : "FuelOnBoard",                 format : "%dgal"},
+  "GS"  : { message : "FMSGroundspeed",              format : "%dkts"},
+  "MSA" : { message : "MinimumSafeAltitude",         format : "%dft"},    # TODO
+  "TAS" : { message : "ADCTrueAirspeed",             format : "%dkts"},
+  "TKE" : { message : "FMSLegTrackErrorAngle",       format : "%d"},
+  "TRK" : { message : "FMSLegTrack",                 format : "%d"},
+  "VSR" : { message : "FMSLegVerticalSpeedRequired", format : "%dfpm"},   # TODO
+};
+
 var Surround =
 {
   new : func (mfd, myCanvas, device, svg)
@@ -52,7 +73,11 @@ var Surround =
       "Comm2StandbyFreq", "Comm2SelectedFreq",
       "Nav1StandbyFreq", "Nav1SelectedFreq",
       "Nav2StandbyFreq", "Nav2SelectedFreq",
-      "Nav1ID", "Nav2ID"
+      "Nav1ID", "Nav2ID",
+      "Header1Label", "Header1Value",
+      "Header2Label", "Header2Value",
+      "Header3Label", "Header3Value",
+      "Header4Label", "Header4Value",
     ];
 
     obj.addTextElements(textElements);
@@ -178,6 +203,41 @@ var Surround =
       # standby frequency.
 
 
+    }
+  },
+
+  # Update Header data with FMS or ADC data.
+  updateHeaderData : func(data) {
+    var headers = ["Header1", "Header2", "Header3", "Header4"];
+    foreach (var header; headers) {
+
+      # Get the currently configured heading and set the surround to display it.
+      var label = me.mfd.ConfigStore.get("MFD" ~ header);
+      assert(label != nil, "No header configured in ConfigStore for " ~ header);
+      me.setTextElement(header ~ "Label", label);
+
+      # Determine how it maps to Emesary data notifications
+      var mapping = HEADER_MAPPING[label];
+      assert(mapping != nil, "No header mapping for " ~ label);
+
+      if (data[mapping.message] != nil) {
+        # Format and display the value
+        var value = sprintf(mapping.format, data[mapping.message]);
+
+        if (mapping.message == "FMSEstimatedTimeEnroute") {
+          # Special case to format time strings.
+          var hrs = int(data[mapping.message]);
+          var mins = int(60*(data[mapping.message] - hrs));
+          var secs = int(3600*(data[mapping.message] - hrs - mins/60));
+
+          if (hrs == 0) {
+            value = sprintf("%d:%02d", mins, secs);
+          } else {
+            value = sprintf("%d:%02d", hrs, mins);
+          }
+        }
+        me.setTextElement(header ~ "Value", value);
+      }
     }
   },
 

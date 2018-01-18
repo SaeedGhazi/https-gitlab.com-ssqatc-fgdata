@@ -14,9 +14,10 @@ Contents
 1. Terminology
 2. The addon-metadata.xml file
 3. Add-on metadata in the Property Tree
-4. How to run code after an add-on is loaded
-5. Overview of the C++ API
-6. Nasal API
+4. Resources under the add-on directory
+5. How to run code after an add-on is loaded
+6. Overview of the C++ API
+7. Nasal API
 
 
 Introduction
@@ -374,7 +375,47 @@ There are also /addons/addon[i]/path nodes where i is 0 for the first
 registered add-on, 1 for the second one, etc.
 
 
-4. How to run code after an add-on is loaded
+4. Resources under the add-on directory
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Many functions in FlightGear use files that are located using the
+SimGear ResourceManager class. This class allows one to point to files
+by relative path in aircraft source files and other places. The resource
+manager queries a set of providers, some of which look inside aircraft
+paths (starting with the current aircraft), others inside scenery paths,
+others under $FG_ROOT, etc. The first file that matches the specified
+resource path is used.
+
+One of these providers only handles resource paths with a very specific
+syntax, which is:
+
+  [addon=ADDON_ID]path/relative/to/the/addon/directory
+
+  (for instance, [addon=user.joe.FlyingTurtle]images/eject-button.png)
+
+When you use such a syntax in a place that is expected to contain a
+resource path, it will only find the specified file under the directory
+of the add-on whose identifier is ADDON_ID. This allows one to
+specifically target a particular file inside a particular add-on,
+instead of crossing fingers and hoping that the specified resource won't
+be found by coincidence in another place such as an aircraft directory,
+a scenery directory or inside $FG_ROOT (such mistakes can easily happen
+when unrelated places use files with rather generic names, such as
+button.png, system.xml, etc.).
+
+The [addon=ADDON_ID]relative/path syntax is useful where resources are
+specified inside non-Nasal files (e.g., in property-rule configuration
+files, which use the XML format). For the particular case of Nasal code,
+there is a better way that is explained below (see “Nasal API”): the
+resourcePath() method of addons.Addon objects returns a string like
+"[addon=ADDON_ID]relative/path" when you pass it the string
+"relative/path". This is a good thing to use, because then your Nasal
+code doesn't need to know about the particular syntax for
+add-on-specific resources and, more interestingly, doesn't have to
+hardcode the add-on identifier every time you need to access a resource
+inside the add-on directory.
+
+5. How to run code after an add-on is loaded
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You may want to set up Nasal code to be run after an add-on is loaded;
@@ -402,7 +443,7 @@ here is how to do that:
   }
 
 
-5. Overview of the C++ API
+6. Overview of the C++ API
    ~~~~~~~~~~~~~~~~~~~~~~~
 
 The add-on C++ infrastructure mainly relies on the following classes:
@@ -449,7 +490,7 @@ options.cxx (fgOptAddon()) catches such exceptions and displays the
 appropriate error message with SG_LOG() and fatalMessageBoxThenExit().
 
 
-6. Nasal API
+7. Nasal API
    ~~~~~~~~~
 
 The Nasal add-on API all lives in the 'addons' namespace. It gives Nasal

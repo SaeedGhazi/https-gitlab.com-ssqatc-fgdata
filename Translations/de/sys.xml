@@ -26,8 +26,8 @@
 		<loading-aircraft-list>Lade Flugzeugliste</loading-aircraft-list>   <!-- English: "loading aircraft list" -->
 		<loading-aircraft>Lade Flugzeug</loading-aircraft>   <!-- English: "loading aircraft" -->
 		<loading-nav-dat>Lade Navigationsdaten</loading-nav-dat>   <!-- English: "loading navigation data" -->
-		<navdata-reading-apt-dat-files>Lese Flugh√§fen</navdata-reading-apt-dat-files>   <!-- English: "reading airport data" -->
-		<navdata-loading-airports>Lade Flugh√§fen</navdata-loading-airports>   <!-- English: "loading airport data" -->
+		<navdata-reading-apt-dat-files>Lese Flugh‰fen</navdata-reading-apt-dat-files>   <!-- English: "reading airport data" -->
+		<navdata-loading-airports>Lade Flugh‰fen</navdata-loading-airports>   <!-- English: "loading airport data" -->
 		<navdata-navaids>Lade Navigationsdaten</navdata-navaids>   <!-- English: "loading navigation aid data" -->
 		<navdata-fixes>Lade Navigationsdaten</navdata-fixes>   <!-- English: "loading fixes" -->
 		<navdata-pois>Lade Navigationsdaten</navdata-pois>   <!-- English: "loading points of interest" -->

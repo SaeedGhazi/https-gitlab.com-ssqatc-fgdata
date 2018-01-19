@@ -17,7 +17,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/aircraft-center:0" translate="yes">
           <source>Aircraft Center (Experimental)</source>
-          <target />
+          <target>Flugzeug-Hangar (experimentell)</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/aircraft-checklists:0" translate="yes">
           <source>Aircraft Checklists</source>
@@ -89,7 +89,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/environment-settings:0" translate="yes">
           <source>Environment Settings</source>
-          <target />
+          <target>Umgebungseinstellungen</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/equipment:0" translate="yes">
           <source>Equipment</source>
@@ -103,9 +103,13 @@
           <source>--- Failures ---</source>
           <target>--- Fehler ---</target>
         </trans-unit>
+        <trans-unit approved="no" id="menu/fg1000:0" translate="yes">
+          <source>FG1000 MFD</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="no" id="menu/fgcom-settings:0" translate="yes">
           <source>FGCom Settings</source>
-          <target />
+          <target>FGCom Konfiguration</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/file:0" translate="yes">
           <source>File</source>
@@ -141,7 +145,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/input-config:0" translate="yes">
           <source>Mouse Configuration</source>
-          <target />
+          <target>Maus-Konfiguration</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/instrument-failures:0" translate="yes">
           <source>Instrument Failures</source>
@@ -161,7 +165,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/joystick-config:0" translate="yes">
           <source>Joystick Configuration</source>
-          <target />
+          <target>Joystick-Konfiguration</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/joystick-info:0" translate="yes">
           <source>Joystick Information</source>
@@ -169,11 +173,11 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/lag-adjust:0" translate="yes">
           <source>Lag Settings</source>
-          <target />
+          <target>MP Verzögerung</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/load-tape:0" translate="yes">
           <source>Load Flight Recorder Tape</source>
-          <target />
+          <target>Flugaufzeichnung laden</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/local_weather:0" translate="yes">
           <source>Local Weather (Test)</source>
@@ -193,7 +197,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/map-browser:0" translate="yes">
           <source>Map (opens in browser)</source>
-          <target>Karte (Im Browser)</target>
+          <target>Karte (im Browser)</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/map-canvas:0" translate="yes">
           <source>Map (Canvas)</source>
@@ -345,7 +349,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/save-tape:0" translate="yes">
           <source>Save Flight Recorder Tape</source>
-          <target />
+          <target>Flugaufzeichnung speichern</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/scenario:0" translate="yes">
           <source>Traffic and Scenario Settings</source>
@@ -393,7 +397,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/terrasync:0" translate="yes">
           <source>Scenery Download</source>
-          <target>Download von Szenerie</target>
+          <target>Herunterladen der Szenerie</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/tiller-steering:0" translate="yes">
           <source>Tiller Steering</source>
@@ -405,7 +409,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/toggle-fullscreen:0" translate="yes">
           <source>Toggle Fullscreen</source>
-          <target />
+          <target>Vollbild umschalten</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/toggle-glide-slope:0" translate="yes">
           <source>Toggle Glide Slope Tunnel</source>
@@ -543,7 +547,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/console-desc:0" translate="yes">
           <source>Display console (Windows specific)</source>
-          <target />
+          <target>Konsole anzeigen (nur für Windows)</target>
         </trans-unit>
         <trans-unit approved="no" id="options/debugging-options:0" translate="yes">
           <source>Debugging Options</source>
@@ -587,7 +591,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/disable-fgcom-desc:0" translate="yes">
           <source>Disable FGCom built-in</source>
-          <target />
+          <target>FGCom Sprachkommunikation deaktivieren</target>
         </trans-unit>
         <trans-unit approved="no" id="options/disable-freeze-desc:0" translate="yes">
           <source>Start in a running state</source>
@@ -639,7 +643,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/disable-rembrandt-desc:0" translate="yes">
           <source>Disable Rembrandt rendering</source>
-          <target />
+          <target>Rembrandt Rendering-Engine deaktivieren</target>
         </trans-unit>
         <trans-unit approved="no" id="options/disable-save-on-exit:0" translate="yes">
           <source>Don't save preferences upon program exit</source>
@@ -675,7 +679,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/download-dir-desc:0" translate="yes">
           <source>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
-          <target />
+          <target>Verzeichnis für heruntergeladene Flugzeuge und Szenerie</target>
         </trans-unit>
         <trans-unit approved="no" id="options/enable-ai-models-desc:0" translate="yes">
           <source>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</source>
@@ -715,7 +719,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/enable-fgcom-desc:0" translate="yes">
           <source>Enable FGCom built-in</source>
-          <target />
+          <target>FGCom Sprachkommunikation aktivieren</target>
         </trans-unit>
         <trans-unit approved="no" id="options/enable-freeze-desc:0" translate="yes">
           <source>Start in a frozen state</source>
@@ -771,7 +775,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/enable-rembrandt-desc:0" translate="yes">
           <source>Enable Rembrandt rendering</source>
-          <target />
+          <target>Rembrandt Rendering-Engine aktivieren</target>
         </trans-unit>
         <trans-unit approved="no" id="options/enable-save-on-exit:0" translate="yes">
           <source>Allow saving preferences at program exit</source>
@@ -848,6 +852,10 @@
         <trans-unit approved="no" id="options/fix-desc:0" translate="yes">
           <source>Specify starting position relative to a fix</source>
           <target>Startposition relativ zu einem Fix angeben</target>
+        </trans-unit>
+        <trans-unit approved="no" id="options/flarm-desc:0" translate="yes">
+          <source>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</source>
+          <target>Eine Verbindung öffnen unter Verwendung des Flarm Protokolls, welches NMEA/GPS und Verkehrsinformationen überträgt</target>
         </trans-unit>
         <trans-unit approved="no" id="options/flight-plan-desc:0" translate="yes">
           <source>Read all waypoints from a file</source>
@@ -939,7 +947,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/json-report-desc:0" translate="yes">
           <source>Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</source>
-          <target />
+          <target>Einen Report im JSON-Format ausgeben. Enthält Details über die FlightGear Version und Einstellungen.</target>
         </trans-unit>
         <trans-unit approved="no" id="options/language-desc:0" translate="yes">
           <source>Select the language for this session</source>
@@ -1321,11 +1329,11 @@
         </trans-unit>
         <trans-unit approved="no" id="sys/downloading-scenery:0" translate="yes">
           <source>downloading scenery</source>
-          <target />
+          <target>Herunterladen der Szenerie</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/finalize-position:0" translate="yes">
           <source>finalizing position</source>
-          <target />
+          <target>Vorbereiten der Ausgansposition</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/finishing-subsystems:0" translate="yes">
           <source>finalizing subsystems</source>
@@ -1365,89 +1373,89 @@
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-fixes:0" translate="yes">
           <source>loading fixes</source>
-          <target />
+          <target>Lade Navigationsdaten</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-loading-airports:0" translate="yes">
           <source>loading airport data</source>
-          <target />
+          <target>Lade Flughäfen</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-navaids:0" translate="yes">
           <source>loading navigation aid data</source>
-          <target />
+          <target>Lade Navigationsdaten</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-pois:0" translate="yes">
           <source>loading points of interest</source>
-          <target />
+          <target>Lade Navigationsdaten</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-reading-apt-dat-files:0" translate="yes">
           <source>reading airport data</source>
-          <target />
+          <target>Lese Flughäfen</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/unstable-warning:0" translate="yes">
           <source>Unstable nightly build - some features may be under active development</source>
-          <target />
+          <target>Entwicklerversion: kann instabile/unfertige Features enthalten!</target>
         </trans-unit>
       </group>
       <group resname="tips" restype="x-trolltech-linguist-context">
         <trans-unit approved="no" id="tips/tip:0" translate="yes">
           <source>Drag while holding the right mouse button to look around</source>
-          <target />
+          <target>Zum Steuern der Blickrichtung die Maus bei gedrückter rechter Taste bewegen!</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:1" translate="yes">
           <source>Hold [Shift] while looking around to move the view up, down, left or right</source>
-          <target />
+          <target>Halte beim Ändern der Blickrichtung [Shift] gedrückt, um den Blick nach oben/unten/links/rechts zu bewegen.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:2" translate="yes">
           <source>Press a/A to adjust the simulation speed</source>
-          <target>Tasten a/A drücken, um die Simulationsgeschwindigkeit anzupassen</target>
+          <target>Tasten a/A drücken, um die Simulationsgeschwindigkeit anzupassen.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:3" translate="yes">
           <source>Press x/X to zoom in and out</source>
-          <target />
+          <target>Drücke x/X um rein oder raus zu zoomen</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:4" translate="yes">
           <source>Find frequencies of nearby ATC services from the Radios dialog</source>
-          <target />
+          <target>Die Frequenzen der umliegenden ATC Stationen können über den Radio-Dialog gefunden werden.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:5" translate="yes">
           <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
-          <target>Taste v drücken, um die Perspektive zu wechseln. Strg-V kehrt ins Cockpit zurück</target>
+          <target>Drücke v, um die Perspektive zu wechseln. Strg-V kehrt ins Cockpit zurück.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:6" translate="yes">
           <source>Press F3 to take a screenshot</source>
-          <target>Drücke F3, um ein Bildschirmfoto zu erstellen</target>
+          <target>Drücke F3, um ein Bildschirmfoto zu erstellen.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:7" translate="yes">
           <source>Join the FlightGear community at http://forum.flightgear.org</source>
-          <target />
+          <target>Trete der FlightGear Community bei: http://forum.flightgear.org</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:8" translate="yes">
           <source>Press h to bring up a Heads Up Display</source>
-          <target />
+          <target>Drücke h, um das Heads-Up-Display zu aktivieren.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:9" translate="yes">
           <source>Show or hide the menu bar by pressing F10</source>
-          <target>Mit F10 die Menüzeile ein-/ausblenden</target>
+          <target>Drücke F10, um die Menüzeile ein-/auszublenden.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:10" translate="yes">
           <source>Frame-rate too low? - try disabling AI traffic</source>
-          <target>Ruckelt die Simulation? Versuche es mal, den KI Verkehr abzuschalten</target>
+          <target>Ruckelt die Simulation? Versuche z.B. den KI Verkehr abzuschalten.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:11" translate="yes">
           <source>Select Environment → Weather to fly in different weather</source>
-          <target>Wählte Umgebung → Wetter, um in verschiedenen Wetterlagen zu fliegen</target>
+          <target>Wähle Umgebung → Wetter, um in verschiedenen Wetterlagen zu fliegen.</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:12" translate="yes">
           <source>Press F12 to change the radio frequencies easily</source>
-          <target />
+          <target>Drücke F12, um die Funk-Frequenzen einzustellen!</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:13" translate="yes">
           <source>Look around by holding down the right mouse button and moving the mouse</source>
-          <target />
+          <target>Zum Steuern der Blickrichtung die Maus bei gedrückter rechter Taste bewegen!</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:14" translate="yes">
           <source>Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
-          <target />
+          <target>Wähle Multiplayer → Multiplayer Konfiguration um gemeinsam mit anderen Piloten zu fliegen!</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:15" translate="yes">
           <source>Can't get the engine started? - see Help → Aircraft Checklists</source>
@@ -1455,15 +1463,15 @@
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:16" translate="yes">
           <source>Drag while holding the middle and right mouse buttons to move the viewpoint</source>
-          <target />
+          <target>Zum Steuern des Standpunkts die Maus bei gedrückter mittlerer und rechter Taste bewegen!</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:17" translate="yes">
           <source>Press / to explore the internals of the simulator</source>
-          <target>Drücke die Taste "/", um die Internas des Simulators zu erkunden</target>
+          <target>Drücke "/", um Internas des Simulators zu erkunden!</target>
         </trans-unit>
         <trans-unit approved="no" id="tips/tip:18" translate="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
-          <target />
+          <target>Drücke TAB, um den Standpunkt mit der Maus zu bewegen und mit dem Scroll-Rad zu zoomen!</target>
         </trans-unit>
       </group>
     </body>

@@ -103,6 +103,10 @@
           <source>--- Failures ---</source>
           <target>--- Guasti ---</target>
         </trans-unit>
+        <trans-unit approved="no" id="menu/fg1000:0" translate="yes">
+          <source>FG1000 MFD</source>
+          <target>Display multifunzione FG1000</target>
+        </trans-unit>
         <trans-unit approved="no" id="menu/fgcom-settings:0" translate="yes">
           <source>FGCom Settings</source>
           <target>Impostazioni FGCom</target>
@@ -848,6 +852,10 @@
         <trans-unit approved="no" id="options/fix-desc:0" translate="yes">
           <source>Specify starting position relative to a fix</source>
           <target>Specifica la posizione iniziale relativa a un fix</target>
+        </trans-unit>
+        <trans-unit approved="no" id="options/flarm-desc:0" translate="yes">
+          <source>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</source>
+          <target>Apri una connessione utilizzando il protocollo Flarm, che include messaggi NMEA/GPS e di segnalazione del traffico</target>
         </trans-unit>
         <trans-unit approved="no" id="options/flight-plan-desc:0" translate="yes">
           <source>Read all waypoints from a file</source>

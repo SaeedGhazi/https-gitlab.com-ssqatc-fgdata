@@ -40,10 +40,10 @@ var AirportInfo =
     # .size is the number of characters of data entry
     # .chars is the set of characters, used to scroll through using the small
     # FMS knob.
-    obj.airportEntry = PFD.DataEntryElement.new(obj.pageName, svg, "ID", "", 4, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    obj.airportEntry = PFD.DataEntryElement.new(obj.pageName, svg, "ID", "", 4, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
 
     # TODO: Implement search by name - not currently supported.
-    # obj.airportNameEntry = PFD.DataEntryElement.new(obj.pageName, svg, "Name", ???, "ABCDEFGHIJKLMNOPQRSTUVWXYZ ");
+    # obj.airportNameEntry = PFD.DataEntryElement.new(obj.pageName, svg, "Name", ???, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ");
 
     obj.runwaySelect = PFD.ScrollElement.new(obj.pageName, svg, "Runway", ["36","18"]); # Dummy values
 
@@ -62,7 +62,6 @@ var AirportInfo =
     # The Airport Chart
     obj.AirportChart = obj._group.createChild("map");
     obj.AirportChart.setController("Static position", "main");
-    var controller = obj.AirportChart.getController();
 
     # Initialize a range and screen resolution.  Setting a range
     # to 4nm means we pick up a good set of surrounding fixes
@@ -86,8 +85,7 @@ var AirportInfo =
                                type.vis );
     }
 
-
-    obj.controller = fg1000.AirportInfoController.new(obj, svg);
+    obj.setController(fg1000.AirportInfoController.new(obj, svg));
 
     obj.topMenu(device, obj, nil);
 
@@ -95,7 +93,8 @@ var AirportInfo =
   },
   displayAirport : func(apt_info) {
     # Display a given airport
-    me.AirportChart.getController().setPosition(apt_info.lat,apt_info.lon);
+    me.AirportChart.getController().setPosition(apt_info.lat, apt_info.lon);
+    me.AirportChart.update();
     me.airportEntry.setValue(apt_info.id);
     me.setTextElement("Usage", "PUBLIC");
     me.setTextElement("Name", string.uc(apt_info.name));
@@ -183,6 +182,7 @@ var AirportInfo =
   setZoom : func(zoom, label) {
     # Set the zoom level for the airport chart display
     me.AirportChart.setScreenRange(zoom);
+    me.AirportChart.update();
     me.setTextElement("Zoom", label);
   },
 
@@ -203,12 +203,12 @@ var AirportInfo =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
-    me.controller.offdisplay();
+    me.getController().offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
-    me.controller.ondisplay();
+    me.getController().ondisplay();
   },
   # Softkey menus
   topMenu : func(device, pg, menuitem) {

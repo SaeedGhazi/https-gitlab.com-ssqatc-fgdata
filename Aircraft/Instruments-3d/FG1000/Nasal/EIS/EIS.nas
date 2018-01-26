@@ -10,7 +10,7 @@ var EIS =
       ],
     };
 
-    obj.controller = fg1000.EISController.new(obj, svg);
+    obj.setController(fg1000.EISController.new(obj, svg));
 
 
     obj.addTextElements(["RPMDisplay", "MBusVolts", "EBusVolts", "EngineHours"]);
@@ -109,11 +109,11 @@ var EIS =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
-    me.controller.offdisplay();
+    me.getController().offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
-    me.controller.ondisplay();
+    me.getController().ondisplay();
   },
 
 

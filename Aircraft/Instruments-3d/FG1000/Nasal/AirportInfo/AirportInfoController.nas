@@ -189,8 +189,21 @@ var AirportInfoController =
       # Initial airport is our current location.
       # Needs to be done here as the data provider may not be set up when
       # we are created.
-      var current_apt = me.getAirport("airport");
-      me.setAirport(current_apt.id);
+
+      # Use Emesary to get the airport
+      var notification = notifications.PFDEventNotification.new(
+        "MFD",
+        1,
+        notifications.PFDEventNotification.NavData,
+        {Id: "NearestAirports", Value: id});
+
+      var response = me._transmitter.NotifyAll(notification);
+      var retval = notification.EventParameter.Value;
+
+      if ((! me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
+        var current_apt = retval[0];
+        me.setAirport(current_apt.id);
+      }
     }
   },
   offdisplay : func() {
@@ -206,9 +219,10 @@ var AirportInfoController =
       {Id: "AirportByID", Value: id});
 
     var response = me._transmitter.NotifyAll(notification);
+    var retval = notification.EventParameter.Value;
 
-    if (! me._transmitter.IsFailed(response)) {
-      return notification.EventParameter.Value;
+    if ((! me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
+      return retval[0];
     } else {
       return nil;
     }

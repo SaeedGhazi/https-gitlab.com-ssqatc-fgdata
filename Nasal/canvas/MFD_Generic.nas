@@ -332,6 +332,13 @@ var PFD_Device =
         p.setVisible(1);
         me.current_page = p;
     },
+
+    # Return the current selected page.
+    getCurrentPage : func()
+    {
+      return me.current_page;
+    },
+
     #
     # ensure that the menus are display correctly for the current page.
     updateMenus : func

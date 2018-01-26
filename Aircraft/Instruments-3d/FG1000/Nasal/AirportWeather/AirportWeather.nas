@@ -12,7 +12,7 @@ var AirportWeather =
 
     obj.topMenu(device, obj, nil);
 
-    obj.controller = fg1000.AirportWeatherController.new(obj, svg);
+    obj.setController(fg1000.AirportWeatherController.new(obj, svg));
 
     return obj;
   },
@@ -26,12 +26,12 @@ var AirportWeather =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
-    me.controller.offdisplay();
+    me.getController().offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
-    me.controller.ondisplay();
+    me.getController().ondisplay();
   },
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();

@@ -318,11 +318,6 @@ var SurroundController =
   handleComVolToggle : func (value) {
   },
 
-  # Holding the Clear button goes straight to the Navigation Map page.
-  handleClearHold : func (value) {
-    me._page.device.selectPage(me._page.getPage("NavigationMap"));
-  },
-
   # These methods are slightly unusual in that they are called by other
   # controllers when the CRSR is not active.  Hence they aren't referenced
   # in the RegisterWithEmesary call below.
@@ -352,7 +347,7 @@ var SurroundController =
       transmitter = emesary.GlobalTransmitter;
 
     if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("PageGroupController_" ~ me._page.device.designation);
+      me._recipient = emesary.Recipient.new("SurroundController_" ~ me._page.device.designation);
       var pfd_obj = me._page.device;
       var controller = me;
       me._recipient.Receive = func(notification)

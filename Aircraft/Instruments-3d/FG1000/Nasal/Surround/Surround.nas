@@ -99,8 +99,6 @@ var Surround =
     obj._selectedPageGroup = 0;
     obj._selectedPage = 0;
 
-    # List of pages to be controllers.  Keys are the pages in PAGE_GROUPS;
-    obj._pageList = {};
     obj._elements = {};
 
     foreach (var pageGroup; PAGE_GROUPS) {
@@ -128,7 +126,7 @@ var Surround =
 
     obj.hideMenu();
 
-    obj.controller = fg1000.SurroundController.new(obj, svg);
+    obj.setController(fg1000.SurroundController.new(obj, svg));
     return obj;
   },
 
@@ -241,21 +239,17 @@ var Surround =
     }
   },
 
-  addPage : func(name, page)
+  getCurrentPage : func()
   {
-    me._pageList[name] = page;
-  },
-
-  getPage : func(name)
-  {
-    return me._pageList[name];
+    var currentpage = PAGE_GROUPS[me._selectedPageGroup].pages[me._selectedPage];
+    return me.getMFD().getPage(currentpage);
   },
 
   # Function to change a page based on the selection
   loadPage : func()
   {
     var pageToLoad = PAGE_GROUPS[me._selectedPageGroup].pages[me._selectedPage];
-    var page = me._pageList[pageToLoad];
+    var page = me.getMFD().getPage(pageToLoad);
 
     assert(page != nil, "Unable to find page " ~ pageToLoad);
     me.device.selectPage(page);

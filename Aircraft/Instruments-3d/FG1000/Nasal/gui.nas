@@ -99,6 +99,7 @@ var MFDGUI =
 
     # creating the top-level/root group which will contain all other elements/group
     obj.myCanvas = obj.window.createCanvas();
+    obj.myCanvas.set("name", "MFD");
     obj.root = obj.myCanvas.createGroup();
 
     var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
@@ -119,7 +120,7 @@ var MFDGUI =
       # produces sharper results and perhaps better performance
       obj.mfd = fg1000.MFD.new(obj.myCanvas);
       obj.mfd._svg.setTranslation(186,45);
-      obj.mfd._svg.set("z-index", 150);
+      #obj.mfd._svg.set("z-index", 150);
     } else {
       # If we're using some scaling factor, then we create it as an image raster
       # which scales everything for us nicely.

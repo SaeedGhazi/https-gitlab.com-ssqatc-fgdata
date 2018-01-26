@@ -25,6 +25,7 @@ new : func (mfd, myCanvas, device, SVGGroup, pageName, title)
     _SVGGroup : SVGGroup,
     parents : [ MFDPage, device.addPage(title, pageName ~ "Group") ],
     _symbols : {},
+    _controller : nil,
   };
 
   obj.device = device;
@@ -37,7 +38,7 @@ new : func (mfd, myCanvas, device, SVGGroup, pageName, title)
   createStylesAndOptions();
 
   # Need to display this underneath the softkeys, EIS, header.
-  obj._group.set("z-index", -10.0);
+  obj._group.setInt("z-index", -10.0);
   obj._group.setVisible(0);
 
   return obj;
@@ -73,6 +74,20 @@ resetMenuColors : func() {
     me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
     me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
   }
+},
+
+getController : func() {
+  return me._controller;
+},
+setController : func (controller) {
+  me._controller = controller;
+},
+
+getDevice : func() {
+  return me.device;
+},
+getMFD : func() {
+  return me.mfd;
 },
 
 };

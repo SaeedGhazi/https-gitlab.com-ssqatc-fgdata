@@ -52,10 +52,23 @@ handleComFreqTransferHold : func (value) { return me.page.mfd.SurroundController
 handleComVol       : func (value) { return me.page.mfd.SurroundController.handleComVol(value); },
 handleComVolToggle : func (value) { return me.page.mfd.SurroundController.handleComVolToggle(value); },
 
-handleDTO       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+# DTO button brings up the DirectTo Page.
+handleDTO       : func (value) {
+  var dtopage = me._page.getMFD().getPage("DirectTo");
+  assert(dtopage != nil, "Unable to find the DirectTo page.");
+  me._page.getDevice().selectPage(dtopage);
+  return emesary.Transmitter.ReceiptStatus_Finished;
+},
 handleFPL       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleClear     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleClearHold : func (value) { return me.page.mfd.SurroundController.handleClearHold(value); },
+
+# Holding the Clear button goes straight to the Navigation Map page.
+handleClearHold : func (value) {
+  var mappage = me._page.getMFD().getPage("NavigationMap");
+  assert(mappage != nil, "Unable to find NavigationMap page");
+  me._page.getDevice().selectPage(mappage);
+  return emesary.Transmitter.ReceiptStatus_Finished;
+},
 
 # By default, the FMS knobs will select a new page.
 handleFMSOuter : func (value) { return me.page.mfd.SurroundController.handleFMSOuter(value); },
@@ -153,7 +166,6 @@ RegisterWithEmesary : func()
 
   me._transmitter.Register(me._recipient);
   me._registered = 1;
-
 },
 
 DeRegisterWithEmesary : func()

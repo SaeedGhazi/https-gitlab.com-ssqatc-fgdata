@@ -56,22 +56,28 @@ var NavigationMap =
     var r = func(name,vis=1,zindex=nil) return caller(0)[0];
     # TODO: we'll need some z-indexing here, right now it's just random
     foreach(var type; [r('GRID'),r('DTO',0),r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
-        obj.MFDMap.addLayer(factory: canvas.SymbolLayer, type_arg: type.name,
-                         visible: type.vis, priority: 4,
-                         style: obj.Styles.getStyle(type.name),
-                         options: obj.Options.getOption(type.name) );
+        obj.MFDMap.addLayer(
+          factory: canvas.SymbolLayer,
+          type_arg: type.name,
+          priority: 4,
+          style: obj.Styles.getStyle(type.name),
+          options: obj.Options.getOption(type.name),
+          visible: type.vis);
     }
 
     foreach(var type; [ r('STAMEN_terrain'),r('STAMEN'), r('OpenAIP') ]) {
-        obj.MFDMap.addLayer(factory: canvas.OverlayLayer, type_arg: type.name,
-                         visible: 0, priority: 1,
-                         style: obj.Styles.getStyle(type.name),
-                         options: obj.Options.getOption(type.name) );
+        obj.MFDMap.addLayer(
+          factory: canvas.OverlayLayer,
+          type_arg: type.name,
+          priority: 1,
+          style: obj.Styles.getStyle(type.name),
+          options: obj.Options.getOption(type.name),
+          visible: 0);
     }
 
     #obj.topMenu(device, obj, nil);
 
-    obj.controller = fg1000.NavigationMapController.new(obj, svg);
+    obj.setController(fg1000.NavigationMapController.new(obj, svg));
 
     return obj;
   },
@@ -93,7 +99,7 @@ var NavigationMap =
   setScreenRange : func(range) {
     me.MFDMap.setScreenRange(range);
   },
-  offdisplay : func() {
+  offdisplay : func(controller=1) {
     me._group.setVisible(0);
 
     # Reset the menu colours.  Shouldn't have to do this here, but
@@ -103,9 +109,9 @@ var NavigationMap =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
-    me.controller.offdisplay();
+    if (controller == 1) me.getController().offdisplay();
   },
-  ondisplay : func() {
+  ondisplay : func(controller=1) {
     me._group.setVisible(1);
 
     # Center the map's origin, modified to take into account the surround.
@@ -118,7 +124,7 @@ var NavigationMap =
     me._labelsPartial.setVisible(0);
 
     me.mfd.setPageTitle(me.title);
-    me.controller.ondisplay();
+    if (controller == 1) me.getController().ondisplay();
   },
 
   # Display functions when we're displaying the NavigationMap as part of another
@@ -133,11 +139,11 @@ var NavigationMap =
     me._labelsFull.setVisible(0);
     me._labelsPartial.setVisible(1);
 
-    #me.controller.ondisplayPartial();
+    #me.getController().ondisplayPartial();
   },
   offdisplayPartial : func() {
     me._group.setVisible(0);
-    #me.controller.offdisplayPartial();
+    #me.getController().offdisplayPartial();
   },
 
   # Softkey assigments.  For some pages (notably the NEAREST pages)
@@ -150,7 +156,7 @@ var NavigationMap =
     pg.resetMenuColors();
     pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
     pg.addMenuItem(2, "MAP", pg, pg.mfd.NavigationMap.mapMenu);
-    pg.addMenuItem(8, "DCLTR", pg, func(dev, pg, mi) { pg.mfd.NavigationMap.controller.incrDCLTR(dev, mi); } );
+    pg.addMenuItem(8, "DCLTR", pg, func(dev, pg, mi) { pg.getController().incrDCLTR(dev, mi); } );
     #pg.addMenuItem(9, "SHW CHRT", pg);  # Optional
     #pg.addMenuItem(10, "CHKLIST", pg);  # Optional
     device.updateMenus();
@@ -160,22 +166,22 @@ var NavigationMap =
     pg.clearMenu();
     pg.resetMenuColors();
     pg.addMenuItem(0, "TRAFFIC", pg,
-      func(dev, pg, mi) { pg.mfd.NavigationMap.controller.toggleLayer("TFC"); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().toggleLayer("TFC"); device.updateMenus(); }, # callback
       func(svg, mi) { pg.mfd.NavigationMap.display_toggle(device, svg, mi, "TFC"); }
     );
 
     pg.addMenuItem(1, "PROFILE", pg);
     pg.addMenuItem(2, "TOPO", pg,
-      func(dev, pg, mi) { pg.mfd.NavigationMap.controller.toggleLayer("STAMEN"); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().toggleLayer("STAMEN"); device.updateMenus(); }, # callback
       func(svg, mi) { pg.mfd.NavigationMap.display_toggle(device, svg, mi, "STAMEN"); }
     );
 
     pg.addMenuItem(3, "TERRAIN", pg,
-      func(dev, pg, mi) { pg.mfd.NavigationMap.controller.toggleLayer("STAMEN_terrain"); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().toggleLayer("STAMEN_terrain"); device.updateMenus(); }, # callback
       func(svg, mi) { pg.mfd.NavigationMap.display_toggle(device, svg, mi, "STAMEN_terrain"); }
     );
 
-    pg.addMenuItem(4, "AIRWAYS", pg, func(dev, pg, mi) { pg.mfd.NavigationMap.controller.incrAIRWAYS(dev, mi); } );
+    pg.addMenuItem(4, "AIRWAYS", pg, func(dev, pg, mi) { pg.getController().incrAIRWAYS(dev, mi); } );
     #pg.addMenuItem(5, "STRMSCP", pg); Optional
     #pg.addMenuItem(6, "PRECIP", pg); Optional, or NEXRAD
     #pg.addMenuItem(7, "XM LTNG", pg); Optional, or DL LTNG
@@ -189,7 +195,7 @@ var NavigationMap =
   # on whether a particular layer is enabled or not.
   display_toggle : func(device, svg, mi, layer) {
     var bg_name = sprintf("SoftKey%d-bg",mi.menu_id);
-    if (me.controller.isEnabled(layer)) {
+    if (me.getController().isEnabled(layer)) {
       device.svg.getElementById(bg_name).setColorFill(0.5,0.5,0.5);
       svg.setColor(0.0,0.0,0.0);
     } else {

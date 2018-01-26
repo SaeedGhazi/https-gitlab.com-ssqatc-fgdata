@@ -168,10 +168,10 @@ var NearestAirportsController =
     me._currentGroup = NearestAirportsController.UIGROUP.NONE;
     me.RegisterWithEmesary();
     me.getAirports();
-    me.page.mfd.NavigationMap.controller.enableDTO(1);
+    me.page.mfd.NavigationMap.getController().enableDTO(1);
   },
   offdisplay : func() {
-    me.page.mfd.NavigationMap.controller.enableDTO(0);
+    me.page.mfd.NavigationMap.getController().enableDTO(0);
     me.DeRegisterWithEmesary();
   },
 

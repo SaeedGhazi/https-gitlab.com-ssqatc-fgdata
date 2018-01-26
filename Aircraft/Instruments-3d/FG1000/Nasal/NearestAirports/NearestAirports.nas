@@ -10,7 +10,7 @@ var NearestAirports =
       ],
     };
 
-    obj.controller = fg1000.NearestAirportsController.new(obj, svg);
+    obj.setController(fg1000.NearestAirportsController.new(obj, svg));
 
     # Dynamic elements.  There are 4 different sets of dynamic elements:
     #
@@ -70,7 +70,7 @@ var NearestAirports =
   # Indicate which group is selected by colour of the softkeys
   display_toggle : func(device, svg, mi, group) {
     var bg_name = sprintf("SoftKey%d-bg",mi.menu_id);
-    if (me.controller.getSelectedGroup() == group) {
+    if (me.getController().getSelectedGroup() == group) {
       device.svg.getElementById(bg_name).setColorFill(0.5,0.5,0.5);
       svg.setColor(0.0,0.0,0.0);
     } else {
@@ -107,10 +107,10 @@ var NearestAirports =
     # there's not currently an obvious other location to do so.
     me.resetMenuColors();
 
-    me.controller.offdisplay();
+    me.getController().offdisplay();
   },
   ondisplay : func() {
-    me.controller.ondisplay();
+    me.getController().ondisplay();
 
     # The Nearest... pages use the underlying navigation map.
     me.mfd.NavigationMap.ondisplayPartial();
@@ -212,7 +212,7 @@ var NearestAirports =
     me.approachSelect.setValues(approachList);
 
     # Display the DTO line to the airport
-    me.mfd.NavigationMap.controller.setDTOLineTarget(apt.lat, apt.lon);
+    me.mfd.NavigationMap.getController().setDTOLineTarget(apt.lat, apt.lon);
   },
   updateRunwayInfo : func(rwy_info) {
     if (rwy_info != nil ) {
@@ -243,22 +243,22 @@ var NearestAirports =
     pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
     pg.addMenuItem(2, "MAP", pg, pg.mfd.NavigationMap.mapMenu);
     pg.addMenuItem(4, "APT", pg,
-      func(dev, pg, mi) { pg.controller.selectAirports(); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().selectAirports(); device.updateMenus(); }, # callback
       func(svg, mi) { pg.display_toggle(device, svg, mi, NearestAirportsController.UIGROUP.APT); }
     );
 
     pg.addMenuItem(5, "RNWY", pg,
-      func(dev, pg, mi) { pg.controller.selectRunways(); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().selectRunways(); device.updateMenus(); }, # callback
       func(svg, mi) { pg.display_toggle(device, svg, mi, NearestAirportsController.UIGROUP.RNWY); }
     );
 
     pg.addMenuItem(6, "FREQ", pg,
-      func(dev, pg, mi) { pg.controller.selectFrequencies(); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().selectFrequencies(); device.updateMenus(); }, # callback
       func(svg, mi) { pg.display_toggle(device, svg, mi, NearestAirportsController.UIGROUP.FREQ); }
     );
 
     pg.addMenuItem(7, "APR", pg,
-      func(dev, pg, mi) { pg.controller.selectApproaches(); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.getController().selectApproaches(); device.updateMenus(); }, # callback
       func(svg, mi) { pg.display_toggle(device, svg, mi, NearestAirportsController.UIGROUP.APR); }
     );
 

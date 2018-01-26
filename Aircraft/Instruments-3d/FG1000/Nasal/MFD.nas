@@ -52,7 +52,8 @@ var MFDPages = [
   "NearestVOR",
   "NearestUserWPT",
   "NearestFrequencies",
-  "NearestAirspaces"
+  "NearestAirspaces",
+  "DirectTo",   # display at the top of the stack
 ];
 
 foreach (var page; MFDPages) {
@@ -71,6 +72,7 @@ var MFD =
       EIS : nil,
       NavigationMap: nil,
       Surround : nil,
+      _pageList : {}
     };
 
     obj.ConfigStore = fg1000.ConfigStore.new();
@@ -109,18 +111,22 @@ var MFD =
     # Controller for the header and display on the bottom left which allows selection
     # of page groups and individual pages using the FMS controller.
     obj.Surround = fg1000.Surround.new(obj, myCanvas, obj._MFDDevice, obj._svg);
-    obj.SurroundController = obj.Surround.controller;
+    obj.SurroundController = obj.Surround.getController();
 
     # Engine Information System.  A special case as it's always displayed on the MFD.
-    obj.EIS = obj.Surround.addPage("EIS", fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg));
+    obj.EIS = fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj.addPage("EIS", obj.EIS);
 
     # The NavigationMap page is a special case, as it is displayed with the Nearest... pages as an overlay
-    obj.NavigationMap = obj.Surround.addPage("NavigationMap", fg1000.NavigationMap.new(obj, myCanvas, obj._MFDDevice, obj._svg));
+    obj.NavigationMap = fg1000.NavigationMap.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj.addPage("NavigationMap", obj.NavigationMap);
     obj.NavigationMap.topMenu(obj._MFDDevice, obj.NavigationMap, nil);
 
+    # Now load the other pages normally;
     foreach (var page; MFDPages) {
       if ((page != "NavigationMap") and (page != "EIS")) {
-        var code = "obj.Surround.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
+        #var code = "obj.Surround.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
+        var code = "obj.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
         var addPageFn = compile(code);
         addPageFn();
       }
@@ -147,5 +153,14 @@ var MFD =
   setPageTitle: func(title)
   {
     me._pageTitle.setText(title);
-  }
+  },
+  addPage : func(name, page)
+  {
+    me._pageList[name] = page;
+  },
+
+  getPage : func(name)
+  {
+    return me._pageList[name];
+  },
 };

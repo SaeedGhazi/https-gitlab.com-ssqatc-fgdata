@@ -37,11 +37,27 @@ getNearestAirports : func()
   return apts;
 },
 
-# Find a specific airport by ID
+# Find a specific airport by ID.  Return an array of airport objects
 getAirportById : func(id)
 {
-  var apt = airportinfo(id);
+  var apt = findAirportsByICAO(id, "airport");
   return apt;
+},
+
+# Find an arbritrary piece of nav data by ID.  This searches based on the
+# current location and returns an array of objects that match the id.
+getNavDataById : func (id)
+{
+  # Check for airport first
+  var navdata = findAirportsByICAO(id, "airport");
+
+  # Check for Navaids.
+  if (size(navdata) == 0) navdata = findNavaidsByID(id);
+
+  # Check for fix.
+  if (size(navdata) == 0) navdata = findFixesByID(id);
+
+  return navdata;
 },
 
 RegisterWithEmesary : func()
@@ -66,6 +82,11 @@ RegisterWithEmesary : func()
           if (id == "AirportByID") {
             var apt = controller.getAirportById(notification.EventParameter.Value);
             notification.EventParameter.Value = apt;
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "NavDataByID") {
+            var navdata = controller.getNavDataById(notification.EventParameter.Value);
+            notification.EventParameter.Value = navdata;
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
         }

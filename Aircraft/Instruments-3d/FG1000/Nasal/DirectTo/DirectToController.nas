@@ -53,17 +53,21 @@ var DirectToController =
       obj.page.Activate
     ];
 
+    obj._activateIndex = size(obj._cursorElements) - 1;
+
     # -1 indicates nothing selected at present
     obj._selectedElement = -1;
+
+    # Whether the WaypointSubmenuGroup is enabled
+    obj._waypointSubmenuVisible = 0;
 
     return obj;
   },
 
   setCursorElement : func(value) {
 
-    if (me._selectedElement != -1) {
-      # Unhighlight the current element, if one is highlighted
-      me._cursorElements[me._selectedElement ].unhighlightElement();
+    for (var i = 0; i < size(me._cursorElements); i = i+1) {
+      me._cursorElements[i].unhighlightElement();
     }
 
     if (value < 0) value = 0;
@@ -98,23 +102,129 @@ var DirectToController =
     # No effect, but shouldn't be passed to underlying page?
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
-  handleFMSInner : func(value) {
-    if (me._selectedElement == -1) {
-      # TODO: handle display of waypoint submenu on anti-clockwise initial rotation!
-      # If no element is selected, then the inner FMS knob selects the ID field
-      me.nextCursorElement(1);
+  updateWaypointSubmenu : func() {
+    var type = me.page.WaypointSubmenuSelect.getValue();
+
+    var items = [];
+
+    if (type == "FPL") {
+      # Get the contents of the flightplan and display the list of waypoints.
+      var fp = me.getNavData("Flightplan");
+
+      for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
+        var wp = fp.getWP(i);
+        if (wp.wp_name != nil) append(items, wp.wp_name);
+      }
     }
 
-    me._cursorElements[me._selectedElement].incrSmall(value);
+    if (type == "NRST") {
+      # Get the nearest airports
+      var apts = me.getNavData("NearestAirports");
+
+      for (var i = 0; i < size(apts); i = i + 1) {
+        var apt = apts[i];
+        if (apt.id != nil) append(items, apt.id);
+      }
+    }
+
+    if (type == "RECENT") {
+      # Get the set of recent waypoints
+      items = me.getNavData("RecentWaypoints");
+    }
+
+    if (type == "USER") {
+      items = me.getNavData("UserWaypoints");
+    }
+
+    if (type == "AIRWAY") {
+      var fp  = me.getNavData("AirwayWaypoints");
+      if (fp != nil) {
+        for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
+          var wp = fp.getWP(i);
+          if (wp.wp_name != nil) append(items, wp.wp_name);
+        }
+      }
+    }
+
+    if ((items != nil) and (size(items) > 0)) {
+      # At this point we have a vector of waypoint names. We need to convert
+      # this into a vector of { "WaypointSubmenuScroll" : [name] } hashes for consumption by the
+      # list of waypoints
+      var groupitems = [];
+      foreach (var item; items) {
+        append(groupitems, { "WaypointSubmenuScroll" : item } );
+      }
+
+      # Now display them!
+      me.page.WaypointSubmenuScroll.setValues(groupitems);
+    } else {
+      # Nothing to display
+      me.page.WaypointSubmenuScroll.setValues([]);
+    }
+  },
+
+  getNavData : func(type, value=nil) {
+    # Use Emesary to get a piece from the NavData system, using the provided
+    # type and value;
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.NavData,
+      {Id: type, Value: value});
+
+    var response = me._transmitter.NotifyAll(notification);
+
+    if (! me._transmitter.IsFailed(response)) {
+      return notification.EventParameter.Value;
+    } else {
+      return nil;
+    }
+  },
+
+  handleFMSInner : func(value) {
+
+    if (me._waypointSubmenuVisible) {
+      # We're in the Waypoint Submenu, in which case the inner FMS knob
+      # selects between the different waypoint types.
+      me.page.WaypointSubmenuSelect.highlightElement();
+      me.page.WaypointSubmenuSelect.incrSmall(value);
+      # Now update the Scroll group with the new type of waypoints
+      me.updateWaypointSubmenu();
+    } else if (me._selectedElement == -1) {
+      if (value == -1) {
+        # The WaypointSubmenuGroup group is displayed if the small FMS knob is rotated
+        # anti-clockwise as an initial rotation.
+        me._cursorElements[0].unhighlightElement();
+
+        me.page.WaypointSubmenuGroup.setVisible(1);
+        me.page.WaypointSubmenuSelect.highlightElement();
+        me._waypointSubmenuVisible = 1;
+        me.updateWaypointSubmenu();
+      } else {
+        # If the user rotates clockwise, then they simply start editing
+        # the cursor element
+        me.nextCursorElement(1);
+        me._cursorElements[me._selectedElement].incrSmall(value);
+      }
+    } else {
+      # We've already got something selected, and we're not in the
+      # WaypointSubmenuGroup, so increment it.
+      me._cursorElements[me._selectedElement].incrSmall(value);
+    }
+
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
   handleFMSOuter : func(value) {
-    if (me._selectedElement == -1) {
+    if (me._waypointSubmenuVisible) {
+      # We're in the Waypoint Submenu, in which case the outer FMS knob
+      # selects between the different waypoints in the Waypoint Submenu.
+      me.page.WaypointSubmenuSelect.unhighlightElement();
+      me.page.WaypointSubmenuScroll.incrLarge(value);
+    } else if (me._selectedElement == -1) {
       # If no element is selected, then the Outer FMS knob has no effect
       return emesary.Transmitter.ReceiptStatus_Finished;
-    }
-
-    if (me._cursorElements[me._selectedElement].isInEdit()) {
+    } else if (me._cursorElements[me._selectedElement].isInEdit()) {
+      # If we're editing an element, then get on with it!
       me._cursorElements[me._selectedElement].incrLarge(value);
     } else {
       me.nextCursorElement(value);
@@ -123,30 +233,110 @@ var DirectToController =
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
   handleEnter : func(value) {
-    if (me._selectedElement == -1) {
+    if (me._waypointSubmenuVisible) {
+      # If we're in the Waypoint Submenu, then take whatever is highlighted
+      # in the scroll list, load it and hide the Waypoint submenu
+      var id = me.page.WaypointSubmenuScroll.getValue();
+      if (id != nil) me.loadDestination(id);
+      me.page.WaypointSubmenuGroup.setVisible(0);
+      me._waypointSubmenuVisible = 0;
+
+      # Select the activate ACTIVATE item.
+      me.setCursorElement(me._activateIndex);
+    } else if (me._selectedElement == -1) {
       # If no element is selected, then the ENT key has no effect
       return emesary.Transmitter.ReceiptStatus_Finished;
+    } else {
+
+      # If we're on the Activate button, then set up the DirectTo and hide the
+      # page.  We're finished
+      if (me._selectedElement == me._activateIndex) {
+        var mappage = me._page.getMFD().getPage("NavigationMap");
+        assert(mappage != nil, "Unable to find NavigationMap page");
+        me._page.getDevice().selectPage(mappage);
+        return emesary.Transmitter.ReceiptStatus_Finished;
+      }
+
+      # If we're editing an element, complete the data entry.
+      if (me._cursorElements[me._selectedElement].isInEdit()) {
+        me._cursorElements[me._selectedElement].enterElement();
+      }
+
+      if (me._cursorElements[me._selectedElement] == me.page.IDEntry) {
+        # We've finished entering an ID, so load it.
+        me.loadDestination(me.page.IDEntry.getValue());
+      }
+
+      # Determine where to highlight next.  In most cases, we go straight to ACTIVATE.
+      # The exception is the VNV Alt field which goes to the VNV Distance field;
+      if (me._cursorElements[me._selectedElement] == me.page.VNVAltEntry) {
+        # VNV DIS entry is the next element
+        me.nextCursorElement(1);
+      } else {
+        # ACTIVATE is the last element of the group
+        me.setCursorElement(me._activateIndex);
+      }
     }
 
-    # If we're on the Activate button, then set up the DirectTo and hide the
-    # page.  We're finished
-    if (me._cursorElements[me._selectedElement] == me.page.Activate) {
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+  handleClear : func(value) {
+    if (me._waypointSubmenuVisible) {
+      # If we're in the Waypoint Submenu, then this clears it.
+      me.page.WaypointSubmenuGroup.setVisible(0);
+      me._waypointSubmenuVisible = 0;
+    } else if ((me._selectedElement != -1) and me._cursorElements[me._selectedElement].isInEdit()) {
+      me._cursorElements[me._selectedElement].clearElement();
+    } else {
+      # Cancel the entire Direct To page, and go back to the Navigation Map.
       var mappage = me._page.getMFD().getPage("NavigationMap");
       assert(mappage != nil, "Unable to find NavigationMap page");
       me._page.getDevice().selectPage(mappage);
-      return emesary.Transmitter.ReceiptStatus_Finished;
+    }
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  # Reset controller if required when the page is displayed or hidden
+  ondisplay : func() {
+    me.RegisterWithEmesary();
+    for (var i = 0; i < size(me._cursorElements); i = i+1) {
+      me._cursorElements[i].unhighlightElement();
     }
 
-    # If we're editing an element, complete the data entry.
-    if (me._cursorElements[me._selectedElement].isInEdit()) {
-      me._cursorElements[me._selectedElement].enterElement();
-    }
+    me._selectedElement = -1;
 
-    if (me._cursorElements[me._selectedElement] == me.page.IDEntry) {
-      # We've finished entering an ID, so load it.
-      var destination = me.getDestination(me.page.IDEntry.getValue());
-      if (destination != nil) {
+    var id = me.getNavData("CurrentDTO");
 
+    me.page.IDEntry.setValue(id);
+    me.loadDestination(id);
+  },
+  offdisplay : func() {
+    me.DeRegisterWithEmesary();
+  },
+
+  loadDestination : func(id) {
+    var d = {
+      id: id,
+      name: "",
+      lat: 0,
+      lon: 0,
+      course : 0,
+      range_nm : 0,
+    };
+
+    if ((id != nil) and size(id) > 1) {
+      # Use Emesary to get the destination
+      var notification = notifications.PFDEventNotification.new(
+        "MFD",
+        1,
+        notifications.PFDEventNotification.NavData,
+        {Id: "NavDataByID", Value: id});
+
+      var response = me._transmitter.NotifyAll(notification);
+      var retval = notification.EventParameter.Value;
+
+      if ((! me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
+        var destination = retval[0];
         # set the course and distance to the destination if required
         var (course, dist) = courseAndDistance(destination);
         var d = {
@@ -157,84 +347,9 @@ var DirectToController =
           course : course,
           range_nm : dist,
         };
-        me.page.displayDestination(d);
       }
     }
 
-    # Determine where to highlight next.  In most cases, we go straight to ACTIVATE.
-    # The exception is the VNV Alt field which goes to the VNV Distance field;
-    if (me._cursorElements[me._selectedElement] == me.page.VNVAltEntry) {
-      # VNV DIS entry is the next element
-      me.nextCursorElement(1);
-    } else {
-      # ACTIVATE is the last element of the group
-      me.setCursorElement(size(me._cursorElements) - 1);
-    }
-
-    return emesary.Transmitter.ReceiptStatus_Finished;
-  },
-  handleClear : func(value) {
-    var mappage = me._page.getMFD().getPage("NavigationMap");
-    assert(mappage != nil, "Unable to find NavigationMap page");
-    me._page.getDevice().selectPage(mappage);
-    return emesary.Transmitter.ReceiptStatus_Finished;
-  },
-
-  handleSoftKey : func(key) {
-    # DirectTo has no softkeys, but if the user presses one from the underlying
-    # page we should switch outselves off.
-    me.page.setVisible(0);
-    return emesary.Transmitter.ReceiptStatus_OK;
-  },
-
-  # Reset controller if required when the page is displayed or hidden
-  ondisplay : func() {
-    me.RegisterWithEmesary();
-    for (var i = 0; i < size(me._cursorElements); i = i+1) {
-      me._cursorElements[i].unhighlightElement();
-    }
-
-    me.setCursorElement(0);
-
-    me.page.IDEntry.setValue("KHAF");
-
-    var destination = me.getDestination(me.page.IDEntry.getValue());
-    if (destination != nil) {
-
-      # set the course and distance to the destination if required
-      var (course, dist) = courseAndDistance(destination);
-      var d = {
-        id: destination.id,
-        name: destination.name,
-        lat: destination.lat,
-        lon: destination.lon,
-        course : course,
-        range_nm : dist,
-      };
-      me.page.displayDestination(d);
-    }
-
-
-  },
-  offdisplay : func() {
-    me.DeRegisterWithEmesary();
-  },
-
-  getDestination : func(id) {
-    # Use Emesary to get the destination
-    var notification = notifications.PFDEventNotification.new(
-      "MFD",
-      1,
-      notifications.PFDEventNotification.NavData,
-      {Id: "NavDataByID", Value: id});
-
-    var response = me._transmitter.NotifyAll(notification);
-    var retval = notification.EventParameter.Value;
-
-    if ((! me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
-      return retval[0];
-    } else {
-      return nil;
-    }
+    me.page.displayDestination(d);
   },
 };

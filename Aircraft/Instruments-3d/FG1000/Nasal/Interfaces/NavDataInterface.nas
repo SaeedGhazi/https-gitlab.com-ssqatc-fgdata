@@ -14,6 +14,16 @@ new : func (device)
   obj._registered = 0;
   obj._device = device;
 
+  # List of recently use waypoints
+  obj._recentWaypoints = std.Vector.new();
+
+  # Current DirectTo ID.
+  var nearest = obj.getNearestAirports();
+  if (size(nearest) > 0) {
+    nearest = nearest[0];
+    obj._currentDTO = nearest.id;
+  }
+
   return obj;
 },
 
@@ -41,6 +51,11 @@ getNearestAirports : func()
 getAirportById : func(id)
 {
   var apt = findAirportsByICAO(id, "airport");
+
+  if ((apt != nil) and (! me._recentWaypoints.contains(id))) {
+    me._recentWaypoints.insert(0, id);
+  }
+
   return apt;
 },
 
@@ -57,7 +72,63 @@ getNavDataById : func (id)
   # Check for fix.
   if (size(navdata) == 0) navdata = findFixesByID(id);
 
+  if ((size(navdata) > 0) and (! me._recentWaypoints.contains(id))) {
+    me._recentWaypoints.insert(0, id);
+  }
+
   return navdata;
+},
+
+# Retrieve the current flightplan and return it
+getFlightplan : func ()
+{
+  return flightplan();
+},
+
+# Retrieve the Airway waypoints on the current leg.
+getAirwayWaypoints : func() {
+  var fp = flightplan();
+  if (fp != nil) {
+    var current_wp = fp.currentWP();
+    if ((current_wp != nil) and (fp.indexOfWP(current_wp) > 0)) {
+      var last_wp = fp.getWP(fp.indexOfWP(current_wp) -1);
+      return airwaysRoute(last_wp, current_wp);
+    }
+  }
+  return nil;
+},
+
+# Return the recently seen waypoints, collected from previous calls to
+# other nav data functions
+getRecentWaypoints : func()
+{
+  return me._recentWaypoints.vector;
+},
+
+# Add an ID to the list of recent waypoints
+addRecentWaypoint : func(id)
+{
+  if ((id != nil) and (! me._recentWaypoints.contains(id))) {
+    me._recentWaypoints.insert(0, id);
+  }
+},
+
+# Return the array of user waypoints.  TODO
+getUserWaypoints : func()
+{
+  return [];
+},
+
+# Return the current DTO location to use
+getCurrentDTO : func()
+{
+  return me._currentDTO;
+},
+
+# Set  the current DTO location to use
+setCurrentDTO : func(id)
+{
+  me._currentDTO = id;
 },
 
 RegisterWithEmesary : func()
@@ -80,13 +151,35 @@ RegisterWithEmesary : func()
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
           if (id == "AirportByID") {
-            var apt = controller.getAirportById(notification.EventParameter.Value);
-            notification.EventParameter.Value = apt;
+            notification.EventParameter.Value = controller.getAirportById(notification.EventParameter.Value);
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
           if (id == "NavDataByID") {
-            var navdata = controller.getNavDataById(notification.EventParameter.Value);
-            notification.EventParameter.Value = navdata;
+            notification.EventParameter.Value = controller.getNavDataById(notification.EventParameter.Value);
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "Flightplan") {
+            notification.EventParameter.Value = controller.getFlightplan();
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "RecentWaypoints") {
+            notification.EventParameter.Value = controller.getRecentWaypoints();
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "AddRecentWaypoint") {
+            controller.addRecentWaypoint(notification.EventParameter.Value);
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "AirwayWaypoints") {
+            notification.EventParameter.Value = controller.getAirwayWaypoints();
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "UserWaypoints") {
+            notification.EventParameter.Value = controller.getUserWaypoints();
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "CurrentDTO") {
+            notification.EventParameter.Value = controller.getCurrentDTO();
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
         }

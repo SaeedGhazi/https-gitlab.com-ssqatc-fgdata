@@ -89,9 +89,11 @@ var ScrollElement =
     }
   },
   highlightElement : func() {
-    me._flashElement();
-    me._flashTimer = maketimer(0.5, me, me._flashElement);
-    me._flashTimer.start();
+    if (me._flashTimer == nil) {
+      me._flashElement();
+      me._flashTimer = maketimer(0.5, me, me._flashElement);
+      me._flashTimer.start();
+    }
   },
   unhighlightElement : func() {
     if (me._flashTimer != nil) me._flashTimer.stop();

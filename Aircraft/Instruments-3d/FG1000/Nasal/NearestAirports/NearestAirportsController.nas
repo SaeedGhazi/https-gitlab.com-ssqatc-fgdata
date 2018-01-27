@@ -167,7 +167,7 @@ var NearestAirportsController =
   ondisplay : func() {
     me._currentGroup = NearestAirportsController.UIGROUP.NONE;
     me.RegisterWithEmesary();
-    me.getAirports();
+    me.getNearestAirports();
     me.page.mfd.NavigationMap.getController().enableDTO(1);
   },
   offdisplay : func() {
@@ -175,7 +175,7 @@ var NearestAirportsController =
     me.DeRegisterWithEmesary();
   },
 
-  getAirports : func() {
+  getNearestAirports : func() {
 
     var notification = notifications.PFDEventNotification.new(
       "MFD",

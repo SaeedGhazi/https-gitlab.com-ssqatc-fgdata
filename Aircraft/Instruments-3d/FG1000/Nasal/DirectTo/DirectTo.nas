@@ -7,6 +7,8 @@
 
 var DirectTo =
 {
+  SHORTCUTS : [ "FPL", "NRST", "RECENT", "USER", "AIRWAY" ],
+
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
@@ -45,7 +47,15 @@ var DirectTo =
     obj.VNVAltEntry = PFD.DataEntryElement.new(obj.pageName, svg, "VNVAlt", "", 5, "0123456789");
     obj.VNVOffsetEntry = PFD.DataEntryElement.new(obj.pageName, svg, "VNVOffset", "", 2, "0123456789");
     obj.CourseEntry = PFD.DataEntryElement.new(obj.pageName, svg, "Course", "", 3, "0123456789");
-    obj.Activate = PFD.TextElement.new(obj.pageName, svg, "Activate", "ACTIVATE");
+    obj.Activate = PFD.TextElement.new(obj.pageName, svg, "Activate", "ACTIVATE?");
+
+    # The Shortcut window.  This allows the user to scroll through a set of lists
+    # of waypoints.
+    obj.WaypointSubmenuGroup = obj._SVGGroup.getElementById("DirectToWaypointSubmenuGroup");
+    assert(obj.WaypointSubmenuGroup != nil, "Unable to find DirectToWaypointSubmenuGroup");
+    obj.WaypointSubmenuGroup.setVisible(0);
+    obj.WaypointSubmenuSelect = PFD.ScrollElement.new(obj.pageName, svg, "WaypointSubmenuSelect", DirectTo.SHORTCUTS);
+    obj.WaypointSubmenuScroll = PFD.GroupElement.new(obj.pageName, svg, [ "WaypointSubmenuScroll" ] , 4, "WaypointSubmenuScroll", 0, "WaypointSubmenuScrollTrough" , "WaypointSubmenuScrollThumb", 60);
 
     # The Airport Chart
     obj.DirectToChart = obj._group.createChild("map");
@@ -88,9 +98,11 @@ var DirectTo =
   },
   displayDestination : func(destination) {
 
+    #me.IDEntry.clearElement();
+
     if (destination != nil) {
       # Display a given location
-      debug.dump(destination);
+      #debug.dump(destination);
       me.DirectToChart.setVisible(1);
       me.DirectToChart.getController().setPosition(destination.lat,destination.lon);
       me.setTextElement("Name", string.uc(destination.name));
@@ -117,16 +129,11 @@ var DirectTo =
       me.CourseEntry.setValue(0);
     }
   },
+
   setRange : func(range, label) {
     me.DirectToChart.setRange(range);
     me.DirectToChart.update();
     me.setTextElement("RangeDisplay", label);
-  },
-  # Clear any cursor, highlights.  Used when exiting from CRSR mode
-  resetCRSR : func() {
-    me.airportEntry.unhighlightElement();
-    me.runwaySelect.unhighlightElement();
-    me.freqSelect.hideCRSR();
   },
 
   offdisplay : func() {

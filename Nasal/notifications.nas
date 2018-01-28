@@ -60,9 +60,11 @@ var PFDEventNotification_Id = 20;
 #-----------
 #
 # That's all that is required to ship properties between multiplayer modules via emesary.
-# set /sim/multiplay/transmit-only-generics to turn off all of the standard properties. this will give a packet
-# size of 280 bytes; leaving lots of space for notifications. The F-14 packet size is around 53 bytes on 2017.2
-# compared to over 1100 bytes with the traditional method.
+# property /sim/multiplay/transmit-filter-property-base can be set to 1 to turn off all of the standard properties and only send generics.
+# this will give a packet size of 280 bytes; leaving lots of space for notifications. 
+# The F-14 packet size is around 53 bytes on 2017.2 compared to over 1100 bytes with the traditional method.
+# property /sim/multiplay/transmit-filter-property-base can be set to a number greater than 1 (e.g. 12000) to only transmit properties
+# where the ID is greater than the value in the property. This can further reduce packet size by only transmitting the emesary bridge data
 #
 # The other advantage with this method of transferring data is that the model is in full control of what is
 # sent, and also when it is sent. This works on a per notification basis so less important properties could be

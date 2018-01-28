@@ -167,8 +167,25 @@
             </binding>
         </checkbox>
 
-        <combo>
+        <checkbox>
             <row>2</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <visible>
+                <property>sim/multiplay/transmit-only-generics-available</property>
+            </visible>
+            <property>sim/multiplay/transmit-filter-property-base</property>
+            <live>true</live>
+            <label>Emesary only multiplayer mode</label>
+            <binding>
+                <command>property-toggle</command>
+                <property>sim/multiplay/transmit-filter-property-base</property>
+            </binding>
+        </checkbox>
+
+        <combo>
+            <row>3</row>
             <col>1</col>
             <halign>left</halign>
             <name>protocol-version</name>
@@ -196,20 +213,20 @@
             </binding>
         </combo>
         <text>
-            <row>2</row>
+            <row>3</row>
             <col>0</col>
             <halign>right</halign>
             <label>Compatibility</label>
         </text>
 
         <text>
-            <row>3</row>
+            <row>4</row>
             <col>0</col>
             <halign>right</halign>
             <label>   Callsign:</label>
         </text>
         <input>
-            <row>3</row>
+            <row>4</row>
             <col>1</col>
             <halign>left</halign>
             <property>/sim/multiplay/callsign</property>
@@ -220,14 +237,14 @@
             </enable>
         </input>
         <text>
-          <row>5</row><col>0</col>
+          <row>6</row><col>0</col>
           <halign>right</halign>
           <label>Server:</label>
         </text>
         <combo>
             <name>host</name>
             <halign>left</halign>
-            <row>5</row><col>1</col>
+            <row>6</row><col>1</col>
             <colspan>2</colspan>
             <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
@@ -237,7 +254,7 @@
         </combo>
         <group>
             <layout>hbox</layout>
-            <row>3</row>
+            <row>4</row>
             <col>1</col>
             <text>
                 <width>2</width>
@@ -260,7 +277,7 @@
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>6</row>
+            <row>7</row>
             <col>1</col>
             <halign>left</halign>
             <label>Not connected</label>
@@ -270,7 +287,7 @@
             <visible>
                 <property>/sim/multiplay/online</property>
             </visible>
-            <row>6</row>
+            <row>7</row>
             <col>1</col>
             <halign>left</halign>
             <label>MMMMMMMMMMMMMMMMM</label>

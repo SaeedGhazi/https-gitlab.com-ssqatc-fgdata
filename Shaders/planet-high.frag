@@ -24,7 +24,6 @@ float Noise2D(in vec2 coord, in float wavelength);
 vec3 filter_combined (in vec3 color) ;
 vec3 moonlight_perception (in vec3 light);
 
-
 void main()
 {
     vec3 n;
@@ -136,9 +135,9 @@ void main()
                             * pow(NdotHV, gl_FrontMaterial.shininess));
     }
 	
-    vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
-    moonLightColor = moonlight_perception (moonLightColor);	
-    color.rgb += moonLightColor;
+	vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+	moonLightColor = moonlight_perception (moonLightColor); 
+	color.rgb += moonLightColor;
 	
     color.a = diffuse_term.a;
 

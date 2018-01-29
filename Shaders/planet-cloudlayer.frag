@@ -16,6 +16,7 @@ uniform float moonlight;
 uniform float roi_x1;
 uniform float roi_y1;
 uniform float lightning;
+uniform float cloudcover_bias;
 
 uniform bool use_overlay;
 uniform bool use_cloud_normals;
@@ -26,7 +27,6 @@ uniform sampler2D structure_texture;
 float Noise2D(in vec2 coord, in float wavelength);
 vec3 filter_combined (in vec3 color) ;
 vec3 moonlight_perception (in vec3 light);
-
 
 float add_cosines (in float cos1, in float cos2, in float sign)
 {
@@ -86,10 +86,14 @@ void main()
 
     vec3 tangent = normalize(VTangent);
     vec3 binormal = cross(n, tangent);
-    float NdotL2 = 0.0;
+    float NdotL2 = 1.0;
 
 	texel = texture2D(texture, gl_TexCoord[0].st);
     ref_texel = texel;
+	
+	float sign = -1.0;
+	float ml_fact = 1.0;
+
 	
    if (use_cloud_normals)
 	{
@@ -114,7 +118,6 @@ void main()
 		// relief shading based on gradient and parallax lookup
 		
 		float slope = shade_effect * (comp_texel.a - ref_texel.a) * texel.a;
-		float sign = -1.0;
 		if (slope < 0.0) {sign = 1.0;}
 		
 		vec2 snormal = normalize(vec2 (slope, 1.0));
@@ -122,10 +125,14 @@ void main()
 		NdotL2 = dot (snormal, sun2d);
 		NdotL = add_cosines(NdotL, NdotL2, sign );
 		
-	
+		ml_fact = 0.5 + 1.0 * add_cosines(0.0, NdotL2, sign); 
 
 			
 	}
+	
+	ref_texel = texel;
+	texel.a = pow(texel.a,1.0/cloudcover_bias);
+	texel.a = clamp(texel.a, 0.0, 1.0);
 
 	
         color += diff_term * max(NdotL, 0.15) ;
@@ -141,9 +148,8 @@ void main()
 	color.rgb += lightning_color(gl_TexCoord[0].st) * (1.0 - texel.a) * lightning * darkness_fact;
 	
 	vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
-  	moonLightColor = moonlight_perception (moonLightColor);
-	
-	color.rgb += moonLightColor;
+	moonLightColor = moonlight_perception (moonLightColor);  
+	color.rgb += moonLightColor * ml_fact;
     
     color.a = 1.0;//diffuse_term.a;
     color = clamp(color, 0.0, 1.0);
@@ -158,14 +164,15 @@ void main()
     vec4 noiseTexel = vec4 (1.0,1.0,1.0, 0.5* noise * texel.a);
     structureTexel = mix(structureTexel, noiseTexel,noiseTexel.a);
 
-
+	structureTexel = mix(structureTexel, texel, clamp(1.5 * ref_texel.a * (cloudcover_bias - 1.0), 0.0, 1.0));
 
 
     if (use_overlay) 
 	{
 	texel = vec4(structureTexel.rgb, smoothstep(0.0, 0.5,texel.a) * structureTexel.a);
+	//texel.a = pow(texel.a,1.0/cloudcover_bias);
+
 	}
-	
 	
 	texel.a = clamp((1.0 + darkness_fact) * texel.a, 0.0, 1.0);
 

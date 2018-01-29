@@ -22,6 +22,7 @@
 		<use-overlay-textures><use>/earthview/overlay-texture-flag</use></use-overlay-textures>
 		<use-cloud-normals><use>/earthview/cloud-normal-flag</use></use-cloud-normals>
 		<shade-effect><use>/earthview/shade-effect</use></shade-effect>
+		<cloudcover-bias><use>/earthview/cloudcover-bias</use></cloudcover-bias>
 		<sun-angle><use>/sim/time/sun-angle-rad</use></sun-angle>
 		<moonlight><use>/environment/moonlight</use></moonlight>
     		<air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
@@ -95,10 +96,10 @@
 				<use>cull-face</use>
 			</cull-face>
 			<rendering-hint>transparent</rendering-hint>
-		<render-bin>
-					<bin-number>111</bin-number>
+			<render-bin>
+					<bin-number>110</bin-number>
 					<bin-name>DepthSortedBin</bin-name>
-				</render-bin>
+			</render-bin>
 			<texture-unit>
 				<!-- The texture unit is always active because the shaders expect
              that. -->
@@ -188,11 +189,16 @@
 					<use>shade-effect</use>
 				</value>
 			</uniform>
-      		<uniform>
-        			 <name>air_pollution</name>
-        			 <type>float</type>
-        			 <value><use>air_pollution</use></value>
-      		</uniform>
+			<uniform>
+				<name>cloudcover_bias</name>
+				<type>float</type>
+				<value><use>cloudcover-bias</use></value>
+			</uniform>
+	      		<uniform>
+				<name>air_pollution</name>
+				<type>float</type>
+				<value><use>air_pollution</use></value>
+	      		</uniform>
 			<uniform>
 				<name>sun_angle</name>
 				<type>float</type>

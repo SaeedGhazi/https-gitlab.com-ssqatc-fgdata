@@ -4744,3 +4744,13 @@ var updateMenu = func {
 _setlistener("/nasal/local_weather/enabled", updateMenu);
 
 
+var autoInit = func {
+	var isEnabled = getprop("/nasal/local_weather/enabled");
+	if (isEnabled == 1)
+		{
+		print ("Request detected to initialize Advanced Weather on startup..."); 
+            	settimer( func {local_weather.set_tile();}, 0.2);
+		}
+}
+
+autoInit();

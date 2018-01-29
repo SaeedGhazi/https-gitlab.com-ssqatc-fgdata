@@ -525,22 +525,26 @@ var parsesvg = func(group, path, options = nil)
       }
       else
         parsePath(attr['d']);
-      
-      var fillOpacity = style['fill-opacity'];
-      if( fillOpacity != nil)
-        stack[-1].set('fill', style['fill'] ~ sprintf("%02x", int(style['fill-opacity']*255)));
-      else
-        stack[-1].set('fill', style['fill']);
+
+      var fill = style['fill'];
+      if( fill != nil )
+        stack[-1].set('fill', fill);
+
+      var fill_opacity = style['fill-opacity'];
+      if( fill_opacity != nil)
+        stack[-1].setDouble('fill-opacity', fill_opacity);
+
+      var stroke = style['stroke'];
+      if( stroke != nil )
+        stack[-1].set('stroke', stroke);
+
+      var stroke_opacity = style['stroke-opacity'];
+      if( stroke_opacity != nil)
+        stack[-1].setDouble('stroke-opacity', stroke_opacity);
 
       var w = style['stroke-width'];
       stack[-1].setStrokeLineWidth( w != nil ? evalCSSNum(w) : 1 );
-      
-      var strokeOpacity = style['stroke-opacity'];
-      if(strokeOpacity != nil)
-        stack[-1].set('stroke', (style['stroke']  ~ sprintf("%02x", int(style['stroke-opacity']*255))));
-      else
-        stack[-1].set('stroke', style['stroke'] or "none");
-      
+
       var linecap = style['stroke-linecap'];
       if( linecap != nil )
         stack[-1].setStrokeLineCap(style['stroke-linecap']);
@@ -548,7 +552,6 @@ var parsesvg = func(group, path, options = nil)
       var linejoin = style['stroke-linejoin'];
       if( linejoin != nil )
         stack[-1].setStrokeLineJoin(style['stroke-linejoin']);
-
 
       # http://www.w3.org/TR/SVG/painting.html#StrokeDasharrayProperty
       var dash = style['stroke-dasharray'];

@@ -178,6 +178,8 @@
     <cloudpos19_y><use>/local-weather/cloud-shadows/cloudpos-y[18]</use></cloudpos19_y>
     <cloudpos20_x><use>/local-weather/cloud-shadows/cloudpos-x[19]</use></cloudpos20_x>
     <cloudpos20_y><use>/local-weather/cloud-shadows/cloudpos-y[19]</use></cloudpos20_y>
+    <cloudpos_n_x><use>/local-weather/cloud-shadows/nearest-cloudpos-x</use></cloudpos_n_x>
+    <cloudpos_n_y><use>/local-weather/cloud-shadows/nearest-cloudpos-y</use></cloudpos_n_y>
     <cloud_shadow_flag><use>/local-weather/cloud-shadows/cloud-shadow-flag</use></cloud_shadow_flag>
   </parameters>
   <!-- put techniques at a "high" index to allow derived effects to

@@ -119,13 +119,58 @@ getUserWaypoints : func()
   return [];
 },
 
+# Set up a DirectTo a given ID, with optional VNAV altitude offset.
+# There are multiple cases here:
+# 1) If there's no flightplan, create one to the DTO location.
+# 2) If there's a flightplan and the ID matches a waypoint on the flightplan,
+#    then skip to that waypoint on the flightplan.
+# 3) If the ID matches an airway on the current leg of the flightplan, then
+#    create an additional leg to the top of the flightplan to that airway waypoint.
+#    (TODO)
+setDirectTo : func(param)
+{
+  var id = param.id;
+  var alt_ft = param.alt_ft;
+  var offset_nm = param.offset_nm;
+
+  var fp = flightplan();
+  var wp_idx = -1;
+
+  if (fp != nil) {
+    # We've already got a flightplan, so see if this WP already exists.
+
+    for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
+      var wp = fp.getWP(i);
+      if ((wp.wp_name != nil)  and (wp.wp_name == id)) {
+        # OK, we're assuming that if the names actually match, then
+        # they refer to the same ID.  So jump to that index.
+        wp_idx = i;
+        break;
+      }
+    }
+  }
+
+  if (wp_idx != -1) {
+    # Found the waypoint in the plan, so skip to it.
+    fp.current = idx;
+  } else {
+    # No flightplan, or waypoint not found, so use the GPS DTO function.
+    # Hokey property-based interface.
+    setprop("/instrumentation/gps/scratch/ident", id);
+    setprop("/instrumentation/gps/scratch/altitude-ft", 0);
+    setprop("/instrumentation/gps/scratch/latitude-deg", 0);
+    setprop("/instrumentation/gps/scratch/longitude-deg", 0);
+    setprop("/instrumentation/gps/command", "direct");
+  }
+},
+
 # Return the current DTO location to use
 getCurrentDTO : func()
 {
   return me._currentDTO;
 },
 
-# Set  the current DTO location to use
+# Set the current DTO location to use
 setCurrentDTO : func(id)
 {
   me._currentDTO = id;
@@ -180,6 +225,10 @@ RegisterWithEmesary : func()
           }
           if (id == "CurrentDTO") {
             notification.EventParameter.Value = controller.getCurrentDTO();
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "SetDirectTo") {
+            controller.setDirectTo(notification.EventParameter.Value);
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
         }

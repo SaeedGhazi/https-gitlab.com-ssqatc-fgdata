@@ -102,7 +102,6 @@ var DirectTo =
 
     if (destination != nil) {
       # Display a given location
-      #debug.dump(destination);
       me.DirectToChart.setVisible(1);
       me.DirectToChart.getController().setPosition(destination.lat,destination.lon);
       me.setTextElement("Name", string.uc(destination.name));

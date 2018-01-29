@@ -84,7 +84,7 @@ var NavigationMapController =
   new : func (page, svg)
   {
     var obj = { parents : [ NavigationMapController, MFDPageController.new(page) ] };
-    obj.current_zoom = 8;
+    obj.current_zoom = 13;
     obj.declutter = 0;
     obj.airways = 0;
     obj.page = page;

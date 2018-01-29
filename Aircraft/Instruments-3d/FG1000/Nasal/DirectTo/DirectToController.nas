@@ -41,7 +41,7 @@ var DirectToController =
     var obj = { parents : [ DirectToController, MFDPageController.new(page)] };
     obj.id = "";
     obj.page = page;
-    obj.current_zoom = 7;
+    obj.current_zoom = 13;
 
     obj.setZoom(obj.current_zoom);
 
@@ -55,8 +55,7 @@ var DirectToController =
 
     obj._activateIndex = size(obj._cursorElements) - 1;
 
-    # -1 indicates nothing selected at present
-    obj._selectedElement = -1;
+    obj._selectedElement = 0;
 
     # Whether the WaypointSubmenuGroup is enabled
     obj._waypointSubmenuVisible = 0;
@@ -181,6 +180,23 @@ var DirectToController =
     }
   },
 
+  setNavData : func(type, value=nil) {
+    # Use Emesary to set a piece of data in the NavData system, using the provided
+    # type and value;
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.NavData,
+      {Id: type, Value: value});
+
+    var response = me._transmitter.NotifyAll(notification);
+
+    if (me._transmitter.IsFailed(response)) {
+      print("DirectToController.setNavData() : Failed to set Nav Data " ~ value);
+      debug.dump(value);
+    }
+  },
+
   handleFMSInner : func(value) {
 
     if (me._waypointSubmenuVisible) {
@@ -190,22 +206,15 @@ var DirectToController =
       me.page.WaypointSubmenuSelect.incrSmall(value);
       # Now update the Scroll group with the new type of waypoints
       me.updateWaypointSubmenu();
-    } else if (me._selectedElement == -1) {
-      if (value == -1) {
-        # The WaypointSubmenuGroup group is displayed if the small FMS knob is rotated
-        # anti-clockwise as an initial rotation.
-        me._cursorElements[0].unhighlightElement();
+    } else if ((me._selectedElement == 0) and (! me.page.IDEntry.isInEdit()) and (value == -1)) {
+      # The WaypointSubmenuGroup group is displayed if the small FMS knob is rotated
+      # anti-clockwise as an initial rotation where the ID Entry is not being editted.
+      me._cursorElements[0].unhighlightElement();
 
-        me.page.WaypointSubmenuGroup.setVisible(1);
-        me.page.WaypointSubmenuSelect.highlightElement();
-        me._waypointSubmenuVisible = 1;
-        me.updateWaypointSubmenu();
-      } else {
-        # If the user rotates clockwise, then they simply start editing
-        # the cursor element
-        me.nextCursorElement(1);
-        me._cursorElements[me._selectedElement].incrSmall(value);
-      }
+      me.page.WaypointSubmenuGroup.setVisible(1);
+      me.page.WaypointSubmenuSelect.highlightElement();
+      me._waypointSubmenuVisible = 1;
+      me.updateWaypointSubmenu();
     } else {
       # We've already got something selected, and we're not in the
       # WaypointSubmenuGroup, so increment it.
@@ -220,9 +229,6 @@ var DirectToController =
       # selects between the different waypoints in the Waypoint Submenu.
       me.page.WaypointSubmenuSelect.unhighlightElement();
       me.page.WaypointSubmenuScroll.incrLarge(value);
-    } else if (me._selectedElement == -1) {
-      # If no element is selected, then the Outer FMS knob has no effect
-      return emesary.Transmitter.ReceiptStatus_Finished;
     } else if (me._cursorElements[me._selectedElement].isInEdit()) {
       # If we're editing an element, then get on with it!
       me._cursorElements[me._selectedElement].incrLarge(value);
@@ -243,14 +249,16 @@ var DirectToController =
 
       # Select the activate ACTIVATE item.
       me.setCursorElement(me._activateIndex);
-    } else if (me._selectedElement == -1) {
-      # If no element is selected, then the ENT key has no effect
-      return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-
-      # If we're on the Activate button, then set up the DirectTo and hide the
-      # page.  We're finished
       if (me._selectedElement == me._activateIndex) {
+        # If we're on the Activate button, then set up the DirectTo and hide the
+        # page.  We're finished
+        var params = {};
+        params.id = me.page.IDEntry.getValue();
+        params.alt_ft = me.page.VNVAltEntry.getValue();
+        params.offset_nm = me.page.VNVOffsetEntry.getValue();
+        me.setNavData("SetDirectTo", params);
+
         var mappage = me._page.getMFD().getPage("NavigationMap");
         assert(mappage != nil, "Unable to find NavigationMap page");
         me._page.getDevice().selectPage(mappage);
@@ -285,7 +293,7 @@ var DirectToController =
       # If we're in the Waypoint Submenu, then this clears it.
       me.page.WaypointSubmenuGroup.setVisible(0);
       me._waypointSubmenuVisible = 0;
-    } else if ((me._selectedElement != -1) and me._cursorElements[me._selectedElement].isInEdit()) {
+    } else if (me._cursorElements[me._selectedElement].isInEdit()) {
       me._cursorElements[me._selectedElement].clearElement();
     } else {
       # Cancel the entire Direct To page, and go back to the Navigation Map.
@@ -299,16 +307,13 @@ var DirectToController =
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();
-    for (var i = 0; i < size(me._cursorElements); i = i+1) {
-      me._cursorElements[i].unhighlightElement();
-    }
 
-    me._selectedElement = -1;
-
+    # Find the current DTO target, which may have been set by the page the
+    # use was on.
     var id = me.getNavData("CurrentDTO");
-
     me.page.IDEntry.setValue(id);
     me.loadDestination(id);
+    me.setCursorElement(0);
   },
   offdisplay : func() {
     me.DeRegisterWithEmesary();

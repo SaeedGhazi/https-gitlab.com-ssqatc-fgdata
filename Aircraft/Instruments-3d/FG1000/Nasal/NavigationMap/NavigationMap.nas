@@ -10,6 +10,12 @@ var NavigationMap =
       ],
     };
 
+    # Center the map's origin, modified to take into account the surround.
+    obj._group.setTranslation(
+      fg1000.MAP_FULL.CENTER.X - (1024/2),
+      fg1000.MAP_FULL.CENTER.Y - (768/2)
+    );
+
     obj.MFDMap = obj._group.createChild("map");
 
     obj.MFDMap.setScreenRange(689/2.0);
@@ -47,15 +53,9 @@ var NavigationMap =
     # Make it move with our aircraft:
     obj.MFDMap.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
 
-    # Center the map's origin, modified to take into account the surround.
-    obj.MFDMap.setTranslation(
-      fg1000.MAP_FULL.CENTER.X,
-      fg1000.MAP_FULL.CENTER.Y
-    );
-
     var r = func(name,vis=1,zindex=nil) return caller(0)[0];
     # TODO: we'll need some z-indexing here, right now it's just random
-    foreach(var type; [r('GRID'),r('DTO',0),r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
+    foreach(var type; [r('GRID'),r('DTO',0),r('TFC',0),r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX',0),r('GPS'),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
         obj.MFDMap.addLayer(
           factory: canvas.SymbolLayer,
           type_arg: type.name,

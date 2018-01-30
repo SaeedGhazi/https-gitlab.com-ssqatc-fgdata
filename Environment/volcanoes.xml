@@ -15,4 +15,10 @@
 	<side-activity type="int" userarchive="y">0</side-activity>
 </stromboli>
 
+<etna>
+	<southeast-activity type="int" userarchive="y">0</southeast-activity>
+	<northeast-activity type="int" userarchive="y">0</northeast-activity>
+	<flank-activity type="int" userarchive="y">0</flank-activity>
+</etna>
+
 </PropertyList>

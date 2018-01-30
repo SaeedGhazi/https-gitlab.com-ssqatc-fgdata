@@ -113,6 +113,15 @@ geo.put_model("Models/Volcanoes/Stromboli/central_crater.xml", 38.7892, 15.2105)
 geo.put_model("Models/Volcanoes/Stromboli/side_crater.xml", 38.7950, 15.2139);
 }
 
+var set_etna = func {
+
+io.include("Models/Volcanoes/Etna/etna.nas");
+geo.put_model("Models/Volcanoes/Etna/southeast_crater.xml", 37.7472, 14.9984 );
+geo.put_model("Models/Volcanoes/Etna/northeast_crater.xml", 37.7552, 14.9967 );
+
+}
+
+
 # volcano definitions
 
 var kilauea = volcano.new("Kilauea", 19.39, -155.20);
@@ -122,6 +131,10 @@ append(volcano_manager.volcano_array, kilauea);
 var stromboli = volcano.new("Stromboli", 38.78, 15.21);
 stromboli.set = set_stromboli;
 append(volcano_manager.volcano_array, stromboli);
+
+var etna = volcano.new("Etna", 37.74, 14.99 );
+etna.set = set_etna;
+append(volcano_manager.volcano_array, etna);
 
 
 # start the manager when autosaved (need some delay for terrain loading to finish)

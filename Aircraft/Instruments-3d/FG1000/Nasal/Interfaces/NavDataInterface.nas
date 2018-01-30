@@ -13,7 +13,7 @@ new : func (device)
   obj._transmitter = emesary.GlobalTransmitter;
   obj._registered = 0;
   obj._device = device;
-  obj._currentDTO = "";
+  obj._defaultDTO = "";
 
   # List of recently use waypoints
   obj._recentWaypoints = std.Vector.new();
@@ -173,13 +173,13 @@ setDirectTo : func(param)
 # Return the current DTO location to use
 getCurrentDTO : func()
 {
-  return me._currentDTO;
+  return me._defaultDTO;
 },
 
 # Set the current DTO location to use
-setCurrentDTO : func(id)
+setDefaultDTO : func(id)
 {
-  me._currentDTO = id;
+  me._defaultDTO = id;
 },
 
 RegisterWithEmesary : func()
@@ -235,6 +235,10 @@ RegisterWithEmesary : func()
           }
           if (id == "SetDirectTo") {
             controller.setDirectTo(notification.EventParameter.Value);
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "SetDefaultDTO") {
+            controller.setDefaultDTO(notification.EventParameter.Value);
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
         }

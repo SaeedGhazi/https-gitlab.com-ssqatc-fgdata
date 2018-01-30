@@ -15,7 +15,6 @@ new : func (page)
   obj._transmitter = emesary.GlobalTransmitter;
   obj._registered = 0;
 
-
   return obj;
 },
 
@@ -175,6 +174,19 @@ DeRegisterWithEmesary : func()
     me._registered = 0;
 },
 
+# Set up the default waypoint to use if the DirectTo button is pressed
+setDefaultDTOWayPoint : func(id)
+{
+  # Use Emesary to set the default DTO waypoint
+  var notification = notifications.PFDEventNotification.new(
+    "MFD",
+    1,
+    notifications.PFDEventNotification.NavData,
+    {Id: "SetDefaultDTO", Value: id});
+
+  var response = me._transmitter.NotifyAll(notification);
+  if (me._transmitter.IsFailed(response)) print("Failed to set Default DTO waypoint");
+},
 
 
 };

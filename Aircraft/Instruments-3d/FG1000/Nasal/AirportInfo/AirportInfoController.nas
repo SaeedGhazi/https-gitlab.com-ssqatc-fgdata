@@ -72,6 +72,9 @@ var AirportInfoController =
 
     if (apt != nil)  {
       me.airport = id;
+
+      # Set up the default ID if the user presses DTO.
+      me.setDefaultDTOWayPoint(id);
       me.info = apt;
     }
 

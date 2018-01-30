@@ -13,16 +13,10 @@ new : func (device)
   obj._transmitter = emesary.GlobalTransmitter;
   obj._registered = 0;
   obj._device = device;
+  obj._currentDTO = "";
 
   # List of recently use waypoints
   obj._recentWaypoints = std.Vector.new();
-
-  # Current DirectTo ID.
-  var nearest = obj.getNearestAirports();
-  if (size(nearest) > 0) {
-    nearest = nearest[0];
-    obj._currentDTO = nearest.id;
-  }
 
   return obj;
 },
@@ -72,6 +66,19 @@ getNavDataById : func (id)
   # Check for fix.
   if (size(navdata) == 0) navdata = findFixesByID(id);
 
+  # Check for a pseudo-fix in the flightplan
+  if (size(navdata) == 0) {
+    var fp = flightplan();
+    if (fp != nil) {
+      for (var i = 0; i < fp.getPlanSize(); i = i +1) {
+        var wp = fp.getWP(i);
+        if (wp.wp_name == id) {
+          append(navdata, wp);
+        }
+      }
+    }
+  }
+
   if ((size(navdata) > 0) and (! me._recentWaypoints.contains(id))) {
     me._recentWaypoints.insert(0, id);
   }
@@ -120,13 +127,6 @@ getUserWaypoints : func()
 },
 
 # Set up a DirectTo a given ID, with optional VNAV altitude offset.
-# There are multiple cases here:
-# 1) If there's no flightplan, create one to the DTO location.
-# 2) If there's a flightplan and the ID matches a waypoint on the flightplan,
-#    then skip to that waypoint on the flightplan.
-# 3) If the ID matches an airway on the current leg of the flightplan, then
-#    create an additional leg to the top of the flightplan to that airway waypoint.
-#    (TODO)
 setDirectTo : func(param)
 {
   var id = param.id;
@@ -141,9 +141,9 @@ setDirectTo : func(param)
 
     for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
       var wp = fp.getWP(i);
-      if ((wp.wp_name != nil)  and (wp.wp_name == id)) {
+      if ((wp.wp_name != nil) and (wp.wp_name == id)) {
         # OK, we're assuming that if the names actually match, then
-        # they refer to the same ID.  So jump to that index.
+        # they refer to the same ID.  So direct to that index.
         wp_idx = i;
         break;
       }
@@ -151,8 +151,12 @@ setDirectTo : func(param)
   }
 
   if (wp_idx != -1) {
-    # Found the waypoint in the plan, so skip to it.
-    fp.current = idx;
+    # Found the waypoint in the plan, so use that as the DTO.
+    var wp = fp.getWP(wp_idx);
+    setprop("/instrumentation/gps/scratch/ident", wp.wp_name);
+    setprop("/instrumentation/gps/scratch/altitude-ft", 0);
+    setprop("/instrumentation/gps/scratch/latitude-deg", wp.lat);
+    setprop("/instrumentation/gps/scratch/longitude-deg", wp.lon);
   } else {
     # No flightplan, or waypoint not found, so use the GPS DTO function.
     # Hokey property-based interface.
@@ -160,8 +164,10 @@ setDirectTo : func(param)
     setprop("/instrumentation/gps/scratch/altitude-ft", 0);
     setprop("/instrumentation/gps/scratch/latitude-deg", 0);
     setprop("/instrumentation/gps/scratch/longitude-deg", 0);
-    setprop("/instrumentation/gps/command", "direct");
   }
+
+  # Switch the GPS to DTO mode.
+  setprop("/instrumentation/gps/command", "direct");
 },
 
 # Return the current DTO location to use

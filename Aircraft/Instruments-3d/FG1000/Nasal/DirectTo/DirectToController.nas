@@ -343,10 +343,17 @@ var DirectToController =
       if ((! me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
         var destination = retval[0];
         # set the course and distance to the destination if required
-        var (course, dist) = courseAndDistance(destination);
+
+        # Some elements don't have names
+        var name = destination.id;
+        if (defined("destination.name")) name = destination.name;
+
+        var point = { lat: destination.lat, lon: destination.lon };
+
+        var (course, dist) = courseAndDistance(point);
         var d = {
           id: destination.id,
-          name: destination.name,
+          name: name,
           lat: destination.lat,
           lon: destination.lon,
           course : course,

@@ -1283,7 +1283,7 @@ var TileLayer = {
 			group: group.createChild("group", me.type),
 			maps_base: "",
 			controller: controller,
-			num_tiles: [5,5],
+			num_tiles: [9,9],
 			makeURL: nil,
 			makePath: nil,
 			center_tile_offset : [],

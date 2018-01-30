@@ -36,6 +36,8 @@ var MFDGUI =
     { notification: fg1000.FASCIA.COM_VOL_TOGGLE, shift: 0, value: 1, top_left: [1290, 45], bottom_right: [1340, 90] },
     { notification: fg1000.FASCIA.COM_FREQ_TRANSFER, shift: 0, value: 1, top_left: [1250, 100], bottom_right: [1300, 140] },
     { notification: fg1000.FASCIA.COM_FREQ_TRANSFER_HOLD, shift: 1, value: 1, top_left: [1250, 100], bottom_right: [1300, 140] },
+    { notification: fg1000.FASCIA.COM_TOGGLE, shift: 0, value: 1, top_left: [1275, 170], bottom_right: [1355, 245] },
+
     { notification: fg1000.FASCIA.CRS_CENTER, shift: 0, value: 1, top_left: [1275, 331], bottom_right: [1355, 410] },
 
     { notification: fg1000.FASCIA.JOYSTICK_PRESS, shift: 0, value: 1, top_left: [1295, 500], bottom_right: [1345, 550] },

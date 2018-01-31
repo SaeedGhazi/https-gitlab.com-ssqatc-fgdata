@@ -41,6 +41,26 @@ getNearestAirports : func()
   return apts;
 },
 
+# Find the nearest nav aids of a given type within 200nm, to a maximum of 25.
+getNavDataWithinRange: func(type)
+{
+  # To make this more efficient for areas with a high density of fixes, we'll try
+  # a small radius first and expand until we have reached 200nm or have 25 nav aids.
+  var radius = 0;
+  var navdata = [];
+
+  while ((radius <= 200) and (size(navdata) < 25)) {
+    radius = radius + 50;
+    navdata = findNavaidsWithinRange(radius, type);
+  }
+
+  if (size(navdata) > 25) {
+    navdata = subvec(navdata, 0, 25);
+  }
+
+  return navdata;
+},
+
 # Find a specific airport by ID.  Return an array of airport objects
 getAirportById : func(id)
 {
@@ -207,6 +227,10 @@ RegisterWithEmesary : func()
           }
           if (id == "NavDataByID") {
             notification.EventParameter.Value = controller.getNavDataById(notification.EventParameter.Value);
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "NavDataWithinRange") {
+            notification.EventParameter.Value = controller.getNavDataWithinRange(notification.EventParameter.Value);
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
           if (id == "Flightplan") {

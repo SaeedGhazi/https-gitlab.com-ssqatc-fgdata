@@ -47,8 +47,16 @@ var NavigationMapStyles =
     me.Styles.FLT.line_width = 3;
 
     me.Styles.FIX = {};
-    me.Styles.FIX.color = [1,0,0];
+    me.Styles.FIX.color = [0,0,0];  # White outline
+    me.Styles.FIX.fill_color = [1,1,1,1]; # Black fill
     me.Styles.FIX.scale_factor = 0.4; # 40%
+
+    me.Styles.FIX.text_offset = [0, -12];
+    me.Styles.FIX.text_color = [0,0,0,1]; # Black text ...
+    me.Styles.FIX.text_bgcolor = [1,1,1,1]; # ... on a white background
+    me.Styles.FIX.text_mode = canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX;
+    me.Styles.FIX.text_padding = 2;
+    me.Styles.FIX.text_alignment = 'center-bottom';
 
     me.Styles.VOR = {};
     me.Styles.VOR.range_line_width = 2;

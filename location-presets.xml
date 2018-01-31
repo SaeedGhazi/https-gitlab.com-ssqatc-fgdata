@@ -5,8 +5,8 @@
 <PropertyList>
   <sim>
     <presets>
-      <airport-id>LKPR</airport-id>
-      <runway>24</runway>
+      <airport-id>PHNL</airport-id>
+      <runway>04L</runway>
     </presets>
   </sim>
   <instrumentation>
@@ -14,25 +14,25 @@
     <comm n="0">
       <frequencies>
         <!-- TWR -->
-        <selected-mhz type="double">118.100</selected-mhz>
+        <selected-mhz type="double">123.900</selected-mhz>
         <!-- DEP -->
-        <standby-mhz type="double">120.525</standby-mhz>
+        <standby-mhz type="double">118.300</standby-mhz>
       </frequencies>
     </comm>
     <comm n="1">
       <frequencies>
         <!-- ATIS -->
-        <selected-mhz type="double">122.150</selected-mhz>
+        <selected-mhz type="double">127.900</selected-mhz>
         <!-- GND -->
-        <standby-mhz type="double">121.900</standby-mhz>
+        <standby-mhz type="double">120.900</standby-mhz>
       </frequencies>
     </comm>
     <nav n="0">
       <frequencies>
-        <!-- PRAGUE (OKL) -->
-        <selected-mhz type="double">112.70</selected-mhz>
-        <!-- LOC 24 (PR) -->
-        <standby-mhz type="double">109.10</standby-mhz>
+        <!-- HONOLULU (HNL) -->
+        <selected-mhz type="double">114.80</selected-mhz>
+        <!-- KOKO HEAD (PR) -->
+        <standby-mhz type="double">113.90</standby-mhz>
       </frequencies>
       <radials>
         <selected-deg type="double">243</selected-deg>
@@ -40,10 +40,10 @@
     </nav>
     <nav n="1">
       <frequencies>
-        <!-- VLASIM (VLM) -->
-        <selected-mhz type="double">114.300</selected-mhz>
-        <!-- VOZICE (VOZ) -->
-        <standby-mhz type="double">116.30</standby-mhz>
+        <!-- MOLOKAI (MKK) -->
+        <selected-mhz type="double">116.100</selected-mhz>
+        <!-- LANAI (LNY) -->
+        <standby-mhz type="double">117.70</standby-mhz>
       </frequencies>
       <radials>
         <selected-deg type="double">326</selected-deg>
@@ -59,10 +59,10 @@
     </dme>
     <adf n="0">
       <frequencies>
-        <!-- RUZYNE NORTH NDB (PR) -->
-        <selected-khz type="int">356</selected-khz>
-        <!-- LIBOC NDB (L) -->
-        <standby-khz type="int">372</standby-khz>
+        <!-- WHEELER (HHI) -->
+        <selected-khz type="int">373</selected-khz>
+        <!-- EWABE (HN) -->
+        <standby-khz type="int">242</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>
@@ -73,10 +73,10 @@
     </adf>
     <adf n="1"> <!-- unset -->
       <frequencies>
-        <!-- XXXXX NDB (XX)-->
-        <selected-khz type="int">382</selected-khz>
-        <!-- XXXXX NDB (XX) -->
-        <standby-khz type="int">251</standby-khz>
+        <!-- LANAI (LLD)-->
+        <selected-khz type="int">353</selected-khz>
+        <!-- VALLEY ISLAND (VYI) -->
+        <standby-khz type="int">327</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>

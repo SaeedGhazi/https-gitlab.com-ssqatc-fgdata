@@ -12,6 +12,7 @@ SymbolLayer.get(name).df_style = {
 	font_color: [0,0,0],
 	font_size: 28,
 	color: [0, 0.6, 0.85],
+	fill_color: [0,0,0,0],
 	show_labels: 1,
 };
 
@@ -24,11 +25,12 @@ var element_type = "group"; # we want a group, becomes "me.element"
 var drawFIX = func(group) {
 	group.createChild("path")
 		.moveTo(-15,15)
-		.lineTo(0,-15)
+		.lineTo(0,0)
 		.lineTo(15,15)
 		.close()
 		.setStrokeLineWidth(line_width)
-		.setColor(color);
+		.setColor(color)
+		.setColorFill(fill_color);
 }
 var _name = name;
 
@@ -43,18 +45,26 @@ var init = func {
 		draw_func: draw_fn,
 		cache: SymbolCache32x32,
 		draw_mode: SymbolCache.DRAW_CENTERED,
-		relevant_keys: ["line_width", "color"],
+		relevant_keys: ["line_width", "color", "fill_color"],
 	);
 	cache.render(me.element, me.style).setScale(me.style.scale_factor);
 
 	var txt_offset = me.getStyle('text_offset', [3, 0]);
+	var txt_alignment = me.getStyle('text_alignment', 'left-bottom');
 	var txt_color = me.getStyle('text_color', [0,0.6,0.85]);
+	var txt_bgcolor = me.getStyle('text_bgcolor', [0,0,0,0]);
+	var txt_mode = me.getStyle('text_mode', canvas.Text.TEXT);
+	var txt_padding = me.getStyle('text_padding', 0);
 	# non-cached stuff:
 	if (me.style.show_labels){
 		me.text_fix = me.newText(me.model.id).
 		setScale(me.style.scale_factor).
 		setTranslation(txt_offset).
-		setColor(txt_color);
+		setAlignment(txt_alignment).
+		setPadding(txt_padding).
+		setDrawMode(txt_mode).
+		setColor(txt_color).
+		setColorFill(txt_bgcolor);
 	}
 }
 var draw = func {me.callback('draw');};

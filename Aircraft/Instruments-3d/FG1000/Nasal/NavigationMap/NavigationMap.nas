@@ -166,22 +166,22 @@ var NavigationMap =
     pg.clearMenu();
     pg.resetMenuColors();
     pg.addMenuItem(0, "TRAFFIC", pg,
-      func(dev, pg, mi) { pg.getController().toggleLayer("TFC"); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.mfd.NavigationMap.getController().toggleLayer("TFC"); device.updateMenus(); }, # callback
       func(svg, mi) { pg.mfd.NavigationMap.display_toggle(device, svg, mi, "TFC"); }
     );
 
     pg.addMenuItem(1, "PROFILE", pg);
     pg.addMenuItem(2, "TOPO", pg,
-      func(dev, pg, mi) { pg.getController().toggleLayer("STAMEN"); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.mfd.NavigationMap.getController().toggleLayer("STAMEN"); device.updateMenus(); }, # callback
       func(svg, mi) { pg.mfd.NavigationMap.display_toggle(device, svg, mi, "STAMEN"); }
     );
 
     pg.addMenuItem(3, "TERRAIN", pg,
-      func(dev, pg, mi) { pg.getController().toggleLayer("STAMEN_terrain"); device.updateMenus(); }, # callback
+      func(dev, pg, mi) { pg.mfd.NavigationMap.getController().toggleLayer("STAMEN_terrain"); device.updateMenus(); }, # callback
       func(svg, mi) { pg.mfd.NavigationMap.display_toggle(device, svg, mi, "STAMEN_terrain"); }
     );
 
-    pg.addMenuItem(4, "AIRWAYS", pg, func(dev, pg, mi) { pg.getController().incrAIRWAYS(dev, mi); } );
+    pg.addMenuItem(4, "AIRWAYS", pg, func(dev, pg, mi) { pg.mfd.NavigationMap.getController().incrAIRWAYS(dev, mi); } );
     #pg.addMenuItem(5, "STRMSCP", pg); Optional
     #pg.addMenuItem(6, "PRECIP", pg); Optional, or NEXRAD
     #pg.addMenuItem(7, "XM LTNG", pg); Optional, or DL LTNG

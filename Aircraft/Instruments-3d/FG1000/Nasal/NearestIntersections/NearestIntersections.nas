@@ -48,6 +48,14 @@ var NearestIntersections =
     svg.setVisible(1); # display function
   },
 
+  showCRSR : func() {
+    me.select.showCRSR();
+  },
+
+  hideCRSR : func() {
+    me.select.hideCRSR();
+  },
+
   offdisplay : func() {
     # The Nearest... pages use the underlying navigation map.
     me.mfd.NavigationMap.offdisplayPartial();
@@ -93,9 +101,7 @@ var NearestIntersections =
 
     if (size(navDataList) > 0) {
       me.updateNavDataItem(navdata[0]);
-      me.select.showCRSR();
     } else {
-      me.select.hideCRSR();
       me.setTextElement("Lat", "NONE WITHIN 200NM");
       me.setTextElement("VORID", "");
       me.setTextElement("VORFreq", "");
@@ -144,8 +150,8 @@ var NearestIntersections =
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
-    pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
-    pg.addMenuItem(2, "MAP", pg, pg.mfd.NavigationMap.mapMenu);
+    pg.addMenuItem(0, "ENGINE", pg.mfd.EIS, pg.mfd.EIS.engineMenu);
+    pg.addMenuItem(2, "MAP", pg.mfd.NavigationMap, pg.mfd.NavigationMap.mapMenu);
 
     device.updateMenus();
   },

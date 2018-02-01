@@ -38,8 +38,7 @@ var NearestAirportsController =
   },
   selectGroup : func(grp) {
     me._currentGroup = grp;
-    # The current Airport is always highlighted - we're either changing it directly,
-    # or viewing the selected airport.
+    if (grp == NearestAirportsController.UIGROUP.APT)  me.page.airportSelect.showCRSR()   else me.page.airportSelect.hideCRSR();
     if (grp == NearestAirportsController.UIGROUP.RNWY) me.page.runwaySelect.highlightElement()   else me.page.runwaySelect.unhighlightElement();
     if (grp == NearestAirportsController.UIGROUP.FREQ) me.page.freqSelect.showCRSR()     else me.page.freqSelect.hideCRSR();
     if (grp == NearestAirportsController.UIGROUP.APR)  me.page.approachSelect.showCRSR() else me.page.approachSelect.hideCRSR();
@@ -68,7 +67,7 @@ var NearestAirportsController =
         var apt_id = me.page.getSelectedAirportID();
 
         var aptdata = me.getAirport(apt_id);
-        if (aptdata != nil) me.page.updateAirportData(aptdata);
+        me.page.updateAirportData(aptdata);
       }
 
       if (me._currentGroup == NearestAirportsController.UIGROUP.RNWY) {
@@ -203,7 +202,12 @@ var NearestAirportsController =
     var response = me._transmitter.NotifyAll(notification);
 
     if (! me._transmitter.IsFailed(response)) {
-      return notification.EventParameter.Value;
+      var apt_list = notification.EventParameter.Value;
+      if ((apt_list != nil) and (size(apt_list) > 0)) {
+        return apt_list[0];
+      } else {
+        return nil;
+      }
     } else {
       return nil;
     }

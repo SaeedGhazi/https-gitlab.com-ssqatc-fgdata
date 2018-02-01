@@ -93,6 +93,7 @@ var NearestAirports =
 
   # Clear any cursor, highlights.  Used when exiting from CRSR mode
   resetCRSR : func() {
+    me.airportSelect.hideCRSR();
     me.runwaySelect.unhighlightElement();
     me.freqSelect.hideCRSR();
     me.approachSelect.hideCRSR();
@@ -144,9 +145,9 @@ var NearestAirports =
 
     if (size(airportlist) > 0) {
       me.updateAirportData(apts[0]);
-      me.airportSelect.showCRSR();
+      #me.airportSelect.showCRSR();
     } else {
-      me.airportSelect.hideCRSR();
+      #me.airportSelect.hideCRSR();
       me.setTextElement("Name", "NONE WITHIN 200NM");
       me.setTextElement("Alt", "");
     }

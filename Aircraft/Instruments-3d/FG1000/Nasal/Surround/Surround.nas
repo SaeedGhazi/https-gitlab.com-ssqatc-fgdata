@@ -138,9 +138,9 @@ var Surround =
       if (name == "Comm1StandbyFreq") me.setTextElement("Comm1StandbyFreq", sprintf("%0.03f", val));
       if (name == "Comm1Serviceable") {
         if (val == 1) {
-          me._comm1failed.unhighlightElement()
+          me._comm1failed.setVisible(0);
         } else {
-          me._comm1failed.highlightElement();
+          me._comm1failed.setVisible(1);
         }
       }
 
@@ -148,19 +148,19 @@ var Surround =
       if (name == "Comm2StandbyFreq") me.setTextElement("Comm2StandbyFreq", sprintf("%0.03f", val));
       if (name == "Comm2Serviceable") {
         if (val == 1) {
-          me._comm2failed.unhighlightElement();
+          me._comm2failed.setVisible(0);
         } else {
-          me._comm2failed.highlightElement();
+          me._comm2failed.setVisible(1);
         }
       }
 
       if (name == "CommSelected") {
         if (val == 1) {
-          me._comm1selected.highlightElement();
-          me._comm2selected.unhighlightElement();
+          me._comm1selected.setVisible(1);
+          me._comm2selected.setVisible(0);
         } else {
-          me._comm1selected.unhighlightElement();
-          me._comm2selected.highlightElement();
+          me._comm1selected.setVisible(0);
+          me._comm2selected.setVisible(1);
         }
       }
 
@@ -168,9 +168,9 @@ var Surround =
       if (name == "Nav1StandbyFreq") me.setTextElement("Nav1StandbyFreq", sprintf("%0.03f", val));
       if (name == "Nav1Serviceable") {
         if (val == 1) {
-          me._nav1failed.unhighlightElement();
+          me._nav1failed.setVisible(0);
         } else {
-          me._nav1failed.highlightElement();
+          me._nav1failed.setVisible(1);
         }
       }
 
@@ -178,19 +178,19 @@ var Surround =
       if (name == "Nav2StandbyFreq") me.setTextElement("Nav2StandbyFreq", sprintf("%0.03f", val));
       if (name == "Nav2Serviceable") {
         if (val == 1) {
-          me._nav2failed.unhighlightElement();
+          me._nav2failed.setVisible(0);
         } else {
-          me._nav2failed.highlightElement();
+          me._nav2failed.setVisible(1);
         }
       }
 
       if (name == "NavSelected") {
         if (val == 1) {
-          me._nav1selected.highlightElement();
-          me._nav2selected.unhighlightElement();
+          me._nav1selected.setVisible(1);
+          me._nav2selected.setVisible(0);
         } else {
-          me._nav1selected.unhighlightElement();
-          me._nav2selected.highlightElement();
+          me._nav1selected.setVisible(0);
+          me._nav2selected.setVisible(1);
         }
       }
 

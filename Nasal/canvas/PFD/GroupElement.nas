@@ -40,7 +40,10 @@ new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, scroll
     _elements : [],
 
     # Cursor index into the elements array
-    _crsrIndex : -1,
+    _crsrIndex : 0,
+
+    # Whether the CRSR is enabled
+    _crsrEnabled : 0,
 
     # Page index
     _pageIndex : 0,
@@ -125,8 +128,19 @@ displayPage : func () {
     var value = me._values[i + me._size * me._pageIndex];
     foreach (var k; keys(value)) {
       if (k == me._highlightElement) {
-        me._elements[i].setVisible(1);
         me._elements[i].unhighlightElement();
+
+        if (me._arrow) {
+          # If we're using a HighlightElement, then we only show the element
+          # the cursor is on.
+          if (i == me._crsrIndex) {
+            me._elements[i].setVisible(1);
+          } else {
+            me._elements[i].setVisible(0);
+          }
+        } else {
+          me._elements[i].setVisible(1);
+        }
         me._elements[i].setValue(value[k]);
       } else {
         var name = me._pageName ~ k ~ i;
@@ -146,11 +160,11 @@ displayPage : func () {
           me._elements[i].setVisible(0);
           me._elements[i].setValue("");
         } else {
-        var name = me._pageName ~ k ~ i;
-        var element  = me._svg.getElementById(name);
-        assert(element != nil, "Unable to find element " ~ name);
-        element.setVisible(0);
-        element.setText("");
+          var name = me._pageName ~ k ~ i;
+          var element  = me._svg.getElementById(name);
+          assert(element != nil, "Unable to find element " ~ name);
+          element.setVisible(0);
+          element.setText("");
         }
       }
     }
@@ -177,39 +191,42 @@ addTextElement : func(name, value) {
 
 showCRSR : func() {
   if (me._currentSize == 0) return;
-  me._crsrIndex = 0;
+  me._crsrEnabled = 1;
   me._elements[me._crsrIndex].highlightElement();
 },
 hideCRSR : func() {
-  if (me._crsrIndex == -1) return;
+  if (me._crsrEnabled == 0) return;
   me._elements[me._crsrIndex].unhighlightElement();
-  me.setCRSR(-1);
+
+  # If we're using a HighlightElement, then we need to make the cursor position visible
+  if (me._arrow) me._elements[me._crsrIndex].setVisible(1);
+  me._crsrEnabled = 0;
 },
 setCRSR : func(index) {
   me._crsrIndex = math.min(index, me._currentSize -1);
 },
 getCursorElementName : func() {
-  if (me._crsrIndex == -1) return nil;
+  if (me._crsrEnabled == -1) return nil;
   return me._elements[me._crsrIndex].name;
 },
 isCursorOnDataEntryElement : func() {
-  if (me._crsrIndex == -1) return 0;
+  if (me._crsrEnabled == -1) return 0;
   return isa(me._elements[me._crsrIndex], DataEntryElement);
 },
 enterElement : func() {
-  if (me._crsrIndex == -1) return;
+  if (me._crsrEnabled == 0) return;
   return me._elements[me._crsrIndex].enterElement();
 },
 getValue : func() {
-  if (me._crsrIndex == -1) return nil;
+  if (me._crsrEnabled == -1) return nil;
   return me._elements[me._crsrIndex].getValue();
 },
 clearElement : func() {
-  if (me._crsrIndex == -1) return;
+  if (me._crsrEnabled == 0) return;
   me._elements[me._crsrIndex].clearElement();
 },
 incrSmall : func(value) {
-  if (me._crsrIndex == -1) return;
+  if (me._crsrEnabled == 0) return;
 
   var incr_or_decr = (value > 0) ? 1 : -1;
   if (me._elements[me._crsrIndex].isInEdit()) {
@@ -229,7 +246,7 @@ incrSmall : func(value) {
   }
 },
 incrLarge : func(val) {
-  if (me._crsrIndex == -1) return;
+  if (me._crsrEnabled == 0) return;
   var incr_or_decr = (val > 0) ? 1 : -1;
   if (me._elements[me._crsrIndex].isInEdit()) {
     # We're editing, so pass to the element.
@@ -238,7 +255,6 @@ incrLarge : func(val) {
   } else {
     # Move to next selection element
     me._elements[me._crsrIndex].unhighlightElement();
-
     me._crsrIndex = me._crsrIndex + incr_or_decr;
 
     if (me._crsrIndex <  0              ) me.previousPage();

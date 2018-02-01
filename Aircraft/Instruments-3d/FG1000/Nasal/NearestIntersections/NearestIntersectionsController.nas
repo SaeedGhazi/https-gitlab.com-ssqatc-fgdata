@@ -1,53 +1,25 @@
 # NearestIntersections Controller
 var NearestIntersectionsController =
 {
-  UIGROUP : {
-    NONE : 0, # No group currently selected,
-    APT  : 1,
-    RNWY : 2,
-    FREQ : 3,
-    APR  : 4,
-  },
-
   new : func (page, svg)
   {
     var obj = { parents : [ NearestIntersectionsController, MFDPageController.new(page) ] };
 
-    # Current active UI group.
     obj.page = page;
     obj._crsrToggle = 0;
 
     return obj;
   },
 
-  selectAirports : func() {
-    me.selectGroup(NearestAirportsController.UIGROUP.APT)
-  },
-  selectRunways : func() {
-    me.selectGroup(NearestAirportsController.UIGROUP.RNWY);
-  },
-  selectFrequencies : func() {
-    me.selectGroup(NearestAirportsController.UIGROUP.FREQ);
-  },
-  selectApproaches : func() {
-    me.selectGroup(NearestAirportsController.UIGROUP.APR);
-  },
-  getSelectedGroup : func() {
-    return me._currentGroup;
-  },
-  selectGroup : func(grp) {
-    me._currentGroup = grp;
-    # The current Airport is always highlighted - we're either changing it directly,
-    # or viewing the selected airport.
-    if (grp == NearestAirportsController.UIGROUP.RNWY) me.page.runwaySelect.highlightElement()   else me.page.runwaySelect.unhighlightElement();
-    if (grp == NearestAirportsController.UIGROUP.FREQ) me.page.freqSelect.showCRSR()     else me.page.freqSelect.hideCRSR();
-    if (grp == NearestAirportsController.UIGROUP.APR)  me.page.approachSelect.showCRSR() else me.page.approachSelect.hideCRSR();
-    me._crsrToggle = 1;
-  },
-
   # Input Handling
   handleCRSR : func() {
     me._crsrToggle = (! me._crsrToggle);
+    if (me._crsrToggle) {
+      me.page.showCRSR();
+    } else {
+      me.page.hideCRSR();
+    }
+
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
   handleFMSInner : func(value) {
@@ -92,13 +64,14 @@ var NearestIntersectionsController =
     me.page.mfd.NavigationMap.getController().handleRange(val);
   },
 
-
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();
     var fixes = me.getNearestNavData("fix");
     me.page.updateNavData(fixes);
     me.page.mfd.NavigationMap.getController().enableDTO(1);
+    me._crsrToggle = 0;
+    me.page.hideCRSR();
   },
   offdisplay : func() {
     me.page.mfd.NavigationMap.getController().enableDTO(0);

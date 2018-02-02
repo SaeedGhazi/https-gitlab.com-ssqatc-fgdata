@@ -106,6 +106,21 @@ getNavDataById : func (id)
   return navdata;
 },
 
+# Find a Nav Aid by ID.  This searches based on the
+# current location and returns an array of objects that match the id.
+getNavAidById : func (params)
+{
+  var id = params.id;
+  var type = "all";
+  if (params.type != nil) type = params.type;
+  
+  var navdata = findNavaidsByID(id, type);
+  if ((size(navdata) > 0) and (! me._recentWaypoints.contains(id))) {
+    me._recentWaypoints.insert(0, id);
+  }
+  return navdata;
+},
+
 # Retrieve the current flightplan and return it
 getFlightplan : func ()
 {
@@ -227,6 +242,10 @@ RegisterWithEmesary : func()
           }
           if (id == "NavDataByID") {
             notification.EventParameter.Value = controller.getNavDataById(notification.EventParameter.Value);
+            return emesary.Transmitter.ReceiptStatus_Finished;
+          }
+          if (id == "NavAidByID") {
+            notification.EventParameter.Value = controller.getNavAidById(notification.EventParameter.Value);
             return emesary.Transmitter.ReceiptStatus_Finished;
           }
           if (id == "NavDataWithinRange") {

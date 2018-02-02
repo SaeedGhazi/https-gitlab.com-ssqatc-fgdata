@@ -95,12 +95,12 @@ var NearestIntersectionsController =
   },
 
   getNavDataItem : func(id) {
-    # Use Emesary to get the airport
+    # Use Emesary to get the Fix
     var notification = notifications.PFDEventNotification.new(
       "MFD",
       1,
       notifications.PFDEventNotification.NavData,
-      {Id: "NavDataByID", Value: id});
+      {Id: "NavAidByID", Value: { id: id, type: "fix"} });
 
     var response = me._transmitter.NotifyAll(notification);
 

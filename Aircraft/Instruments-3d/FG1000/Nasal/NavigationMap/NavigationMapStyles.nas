@@ -70,7 +70,7 @@ var NavigationMapStyles =
 
     me.Styles.VOR_FG1000 = {};
     me.Styles.VOR_FG1000.line_width = 1;
-    me.Styles.VOR_FG1000.scale_factor = 1.0; # 50%
+    me.Styles.VOR_FG1000.scale_factor = 1.0;
     me.Styles.VOR_FG1000.circle_radius = 128;
     me.Styles.VOR_FG1000.icon_color = [0.0,0.0,0.5];
     me.Styles.VOR_FG1000.circle_color = [0.2,0.8,0.8];
@@ -83,7 +83,8 @@ var NavigationMapStyles =
     me.Styles.VOR_FG1000.font_size = 14;
 
     me.Styles.APS = {};
-    me.Styles.APS.scale_factor = 0.25;
+    me.Styles.APS.scale_factor=0.3;
+    me.Styles.APS.svg_path = "Aircraft/Instruments-3d/FG1000/Models/APSmodel.svg";
   },
 
   clearStyles : func() {

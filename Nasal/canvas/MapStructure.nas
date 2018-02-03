@@ -1491,6 +1491,7 @@ OverlayLayer.Controller = {
 ###
 # set up a cache for 32x32 symbols (initialized below in load_MapStructure)
 var SymbolCache32x32 = nil;
+var SymbolCache256x256 = nil;
 
 var MapStructure = {
     # Generalized load methods used to load various symbols, layer controllers,...
@@ -1609,6 +1610,7 @@ var load_MapStructure = func {
 
 		# sets up a shared symbol cache, which will be used by all MapStructure maps and layers
 		canvas.SymbolCache32x32 = SymbolCache.new(1024,32);
+		canvas.SymbolCache256x256 = SymbolCache.new(1024,256);
 
 		# Find files and load them:
 		var contents_dir = FG_ROOT~"/Nasal/canvas/map/";

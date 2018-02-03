@@ -113,8 +113,6 @@ var NearestIntersections =
 
     if (nav == nil) return;
 
-    debug.dump(nav);
-
     if (nav.lat < 0.0) {
       me.setTextElement("Lat", sprintf("S %.4f", -nav.lat));
     } else {

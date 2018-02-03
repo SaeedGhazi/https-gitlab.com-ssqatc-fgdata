@@ -54,6 +54,14 @@ getTextElement : func(symbolName) {
   return me._symbols[symbolName];
 },
 
+highlightTextElement : func(symbolName) {
+  me._symbols[symbolName].highlightElement();
+},
+
+unhighlightTextElement : func(symbolName) {
+  me._symbols[symbolName].unhighlightElement();
+},
+
 getTextValue : func(symbolName) {
   var sym = me._symbols[symbolName];
   assert(sym != nil, "Unknown text element " ~ symbolName ~ " (check your addTextElements call?)");

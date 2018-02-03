@@ -55,7 +55,7 @@ var NavigationMap =
 
     var r = func(name,vis=1,zindex=nil) return caller(0)[0];
     # TODO: we'll need some z-indexing here, right now it's just random
-    foreach(var type; [r('GRID'),r('DTO',0),r('TFC',0),r('APT'),r('DME'),r('VOR'),r('FIX',0),r('NDB'),r('GPS'),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
+    foreach(var type; [r('GRID'),r('DTO',0),r('TFC',0),r('APT'),r('DME'),r('VOR_FG1000'),r('NDB'),r('FIX',0),r('GPS'),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
         obj.MFDMap.addLayer(
           factory: canvas.SymbolLayer,
           type_arg: type.name,

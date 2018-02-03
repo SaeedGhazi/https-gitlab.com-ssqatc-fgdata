@@ -51,7 +51,7 @@ var NavigationMapController =
 
     GRID : { enabled: 0, declutter: 1, range: 20, max_range: 2000 },
     DME  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
-    VOR  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
+    VOR_FG1000  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
     NDB  : { enabled: 1, declutter: 1, range: 15, max_range: 30 },
     FIX  : { enabled: 1, declutter: 1, range: 15, max_range: 30 },
     RTE  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },

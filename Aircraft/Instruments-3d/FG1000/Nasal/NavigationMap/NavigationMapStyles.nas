@@ -49,7 +49,7 @@ var NavigationMapStyles =
     me.Styles.FIX = {};
     me.Styles.FIX.color = [0,0,0];  # White outline
     me.Styles.FIX.fill_color = [1,1,1,1]; # Black fill
-    me.Styles.FIX.scale_factor = 0.5; # 60%
+    me.Styles.FIX.scale_factor = 0.5; # 50%
 
     me.Styles.FIX.text_offset = [0, -12];
     me.Styles.FIX.text_color = [0,0,0,1]; # Black text ...
@@ -68,11 +68,19 @@ var NavigationMapStyles =
     me.Styles.NDB.text_padding = 2;
     me.Styles.NDB.text_alignment = 'center-bottom';
 
-
-    me.Styles.VOR = {};
-    me.Styles.VOR.range_line_width = 2;
-    me.Styles.VOR.radial_line_width = 1;
-    me.Styles.VOR.scale_factor = 0.6; # 60%
+    me.Styles.VOR_FG1000 = {};
+    me.Styles.VOR_FG1000.line_width = 1;
+    me.Styles.VOR_FG1000.scale_factor = 1.0; # 50%
+    me.Styles.VOR_FG1000.circle_radius = 128;
+    me.Styles.VOR_FG1000.icon_color = [0.0,0.0,0.5];
+    me.Styles.VOR_FG1000.circle_color = [0.2,0.8,0.8];
+    me.Styles.VOR_FG1000.text_offset = [0, -12];
+    me.Styles.VOR_FG1000.text_color = [0,0,0,1]; # Black text ...
+    me.Styles.VOR_FG1000.text_bgcolor = [1,1,1,1]; # ... on a white background
+    me.Styles.VOR_FG1000.text_mode = canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX;
+    me.Styles.VOR_FG1000.text_padding = 2;
+    me.Styles.VOR_FG1000.text_alignment = 'center-bottom';
+    me.Styles.VOR_FG1000.font_size = 14;
 
     me.Styles.APS = {};
     me.Styles.APS.scale_factor = 0.25;

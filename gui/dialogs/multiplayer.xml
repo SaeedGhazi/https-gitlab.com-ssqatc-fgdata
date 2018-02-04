@@ -173,7 +173,7 @@
             <colspan>2</colspan>
             <halign>left</halign>
             <visible>
-                <property>sim/multiplay/transmit-only-generics-available</property>
+                <property>sim/multiplay/transmit-filter-property-base-available</property>
             </visible>
             <property>sim/multiplay/transmit-filter-property-base</property>
             <live>true</live>

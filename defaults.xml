@@ -895,7 +895,9 @@ Started September 2000 by David Megginson, david@megginson.com
 	  </lag>
       <visibility-range-nm type="int" userarchive="y">100</visibility-range-nm> <!-- MP2017 not supported in fgms so will do nothing-->
       <debug-level type="int" userarchive="n">0</debug-level>
-      <protocol-version type="int" userarchive="y">1</protocol-version>
+      <protocol-version type="int" userarchive="y">2</protocol-version>
+      <transmit-filter-property-base type="int">0</transmit-filter-property-base>
+      <transmit-filter-property-base-available type="bool">false</transmit-filter-property-base-available>
     </multiplay>
     <user>
       <callsign type="string" preserve="y">Golf Foxtrot Sierra</callsign>

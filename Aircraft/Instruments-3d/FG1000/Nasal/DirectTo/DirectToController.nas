@@ -228,6 +228,7 @@ var DirectToController =
       # We're in the Waypoint Submenu, in which case the outer FMS knob
       # selects between the different waypoints in the Waypoint Submenu.
       me.page.WaypointSubmenuSelect.unhighlightElement();
+      me.page.WaypointSubmenuScroll.showCRSR();
       me.page.WaypointSubmenuScroll.incrLarge(value);
     } else if (me._cursorElements[me._selectedElement].isInEdit()) {
       # If we're editing an element, then get on with it!

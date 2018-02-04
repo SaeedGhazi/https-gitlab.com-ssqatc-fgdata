@@ -17,6 +17,8 @@ var HighlightElement =
     assert(obj._symbol != nil, "Unable to find element " ~ obj._name);
 
     # State and timer for flashing highlighting of elements
+    # We need a separate Enabled flag as the timers are in a separate thread.
+    obj._highlightEnabled = 0;
     obj._highlighted = 0;
     obj._flashTimer = nil;
 
@@ -31,15 +33,22 @@ var HighlightElement =
   setVisible : func(vis) { me._symbol.setVisible(vis); },
 
   _flashElement : func() {
-    if (me._highlighted == 0) {
-      me._symbol.setVisible(1);
-      me._highlighted = 1;
-    } else {
+    if (me._highlightEnabled == 0) {
       me._symbol.setVisible(0);
       me._highlighted = 0;
+    } else {
+      if (me._highlighted == 0) {
+        me._symbol.setVisible(1);
+        me._highlighted = 1;
+      } else {
+        me._symbol.setVisible(0);
+        me._highlighted = 0;
+      }
     }
   },
   highlightElement : func() {
+    me._highlightEnabled = 1;
+    me._highlighted = 0;
     me._flashElement();
     me._flashTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashElement);
     me._flashTimer.start();
@@ -47,10 +56,9 @@ var HighlightElement =
   unhighlightElement : func() {
     if (me._flashTimer != nil) me._flashTimer.stop();
     me._flashTimer = nil;
-
-    # Reset the highlight to a non-highlighted state.
-    me._symbol.setVisible(0);
+    me._highlightEnabled = 0;
     me._highlighted = 0;
+    me._flashElement();
   },
   isEditable : func () { return 0; },
   isInEdit : func() { return 0; },

@@ -35,8 +35,11 @@ var DataEntryElement =
 
     # State and timer for flashing highlighting of elements
     obj._highlighted = 0;
-    obj._highlightedChar = 0;
+    obj._highlightEnabled = 0;
     obj._flashTimer = nil;
+
+    obj._highlightChar = 0;
+    obj._highlightCharEnabled = 0;
     obj._flashCharTimer = nil;
 
     return obj;
@@ -54,19 +57,28 @@ var DataEntryElement =
       for (var i = 0; i < me._size; i = i + 1) me._dataEntrySymbol[i].setVisible(0);
     }
   },
+
   _flashElement : func() {
-    if (me._highlighted == 0) {
-      me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
-      me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
-      me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
-      me._highlighted = 1;
-    } else {
+    if (me._highlightEnabled == 0) {
       me._symbol.setDrawMode(canvas.Text.TEXT);
       me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
       me._highlighted = 0;
+    } else {
+      if (me._highlighted == 0) {
+        me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
+        me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
+        me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
+        me._highlighted = 1;
+      } else {
+        me._symbol.setDrawMode(canvas.Text.TEXT);
+        me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
+        me._highlighted = 0;
+      }
     }
   },
   highlightElement : func() {
+    me._highlightEnabled = 1;
+    me._highlighted = 0;
     me._flashElement();
     me._flashTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashElement);
     me._flashTimer.start();
@@ -74,25 +86,32 @@ var DataEntryElement =
   unhighlightElement : func() {
     if (me._flashTimer != nil) me._flashTimer.stop();
     me._flashTimer = nil;
-
-    # Reset the highlight to a non-highlighted state.
-    me._highlighted = 1;
+    me._highlightEnabled = 0;
+    me._highlighted = 0;
     me._flashElement();
   },
 
   _flashCharElement : func() {
-    if (me._highlighted == 0) {
-      me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
-      me._dataEntrySymbol[me._dataEntryPos].setColorFill(me._style.HIGHLIGHT_COLOR);
-      me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.HIGHLIGHT_TEXT_COLOR);
-      me._highlightedChar = 1;
-    } else {
+    if (me._highlightCharEnabled == 0) {
       me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
       me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
-      me._highlightedChar = 0;
+      me._highlightChar = 0;
+    } else {
+      if (me._highlightChar == 0) {
+        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
+        me._dataEntrySymbol[me._dataEntryPos].setColorFill(me._style.HIGHLIGHT_COLOR);
+        me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.HIGHLIGHT_TEXT_COLOR);
+        me._highlightChar = 1;
+      } else {
+        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
+        me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
+        me._highlightChar = 0;
+      }
     }
   },
   highlightCharElement : func() {
+    me._highlightCharEnabled = 1;
+    me._highlightChar = 0;
     me._flashCharElement();
     me._flashCharTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashCharElement);
     me._flashCharTimer.start();
@@ -100,9 +119,8 @@ var DataEntryElement =
   unhighlightCharElement : func() {
     if (me._flashCharTimer != nil) me._flashCharTimer.stop();
     me._flashCharTimer = nil;
-
-    # Reset the highlight to a non-highlighted state.
-    me._highlightedChar = 1;
+    me._highlightCharEnabled = 0;
+    me._highlightChar = 0;
     me._flashCharElement();
   },
   isEditable : func () { return 1; },

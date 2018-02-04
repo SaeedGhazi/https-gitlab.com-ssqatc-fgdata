@@ -1,9 +1,10 @@
 
 io.include("constants.nas");
 
+
+
 var MFDGUI =
 {
-
   # List of UI hotspots and their mapping to Emesary bridge notifications
   WHEEL_HOT_SPOTS : [
     { notification: fg1000.FASCIA.NAV_VOL, shift: 0, top_left: [65, 45], bottom_right: [112, 90] },
@@ -89,6 +90,13 @@ var MFDGUI =
       scale : 1.0,
     };
 
+    # Increment the device count, so we get an uniqueish device id.
+    obj.device_id = getprop("/instrument/fg1000/device-count");
+    if (obj.device_id == nil) obj.device_id = 0;
+    setprop("/instrument/fg1000/device-count", obj.device_id + 1);
+    print("Device count: " ~ getprop("/instrument/fg1000/device-count"));
+    print("Device ID: " ~ obj.device_id);
+
     obj.scale = getprop("/sim/gui/mfd-scale") or 1.0;
 
     obj.window = canvas.Window.new([obj.scale*obj.width,obj.scale*obj.height],"dialog").set('title',"FG1000 MFD");
@@ -120,7 +128,7 @@ var MFDGUI =
     if (obj.scale > 0.999) {
       # If we're at full scale, then create it directly in this Canvas as that
       # produces sharper results and perhaps better performance
-      obj.mfd = fg1000.MFD.new(obj.myCanvas);
+      obj.mfd = fg1000.MFD.new(obj.myCanvas, obj.device_id);
       obj.mfd._svg.setTranslation(186,45);
       #obj.mfd._svg.set("z-index", 150);
     } else {
@@ -132,7 +140,7 @@ var MFDGUI =
         "view" : [1024, 768],
         "mipmapping": 0,
       });
-      obj.mfd = fg1000.MFD.new(obj.mfd_canvas);
+      obj.mfd = fg1000.MFD.new(obj.mfd_canvas, obj.device_id);
 
       var mfd_child = obj.root.createChild("image")
         .setFile(obj.mfd_canvas.getPath())
@@ -176,13 +184,11 @@ var MFDGUI =
             (e.shiftKey == hotspot.shift))
         {
           # We've found the hotspot, so send a notification to deal with it
-          var notification = notifications.PFDEventNotification.new(
-            "MFD",
-            1,
-            notifications.PFDEventNotification.HardKeyPushed,
-            { Id: hotspot.notification, Value: e.deltaY }
-          );
-          emesary.GlobalTransmitter.NotifyAll(notification);
+          var args = {'device': obj.device_id,
+                      'notification': hotspot.notification,
+                      'value' : e.deltaY};
+
+          fgcommand("FG1000HardKeyPushed", props.Node.new(args));
           break;
         }
       }
@@ -197,13 +203,11 @@ var MFDGUI =
             (e.shiftKey == hotspot.shift))
         {
           # We've found the hotspot, so send a notification to deal with it
-          var notification = notifications.PFDEventNotification.new(
-            "MFD",
-            1,
-            notifications.PFDEventNotification.HardKeyPushed,
-            { Id: hotspot.notification, Value: hotspot.value }
-          );
-          emesary.GlobalTransmitter.NotifyAll(notification);
+          var args = {'device': obj.device_id,
+                      'notification': hotspot.notification,
+                      'value' : hotspot.value};
+
+          fgcommand("FG1000HardKeyPushed", props.Node.new(args));
           break;
         }
       }
@@ -213,13 +217,9 @@ var MFDGUI =
             (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]))
         {
           # We've found the hotspot, so send a notification to deal with it
-          var notification = notifications.PFDEventNotification.new(
-            "MFD",
-            1,
-            notifications.PFDEventNotification.SoftKeyPushed,
-            hotspot.Id
-          );
-          emesary.GlobalTransmitter.NotifyAll(notification);
+          var args = {'device': obj.device_id,
+                      'value' : hotspot.Id};
+          fgcommand("FG1000SoftKeyPushed", props.Node.new(args));
           break;
         }
       }

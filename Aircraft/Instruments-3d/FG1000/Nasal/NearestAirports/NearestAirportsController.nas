@@ -137,7 +137,6 @@ var NearestAirportsController =
       }
 
       if (me._currentGroup == NearestAirportsController.UIGROUP.FREQ) {
-        # TODO Select the current COM frequency.
         var freq = me.page.getSelectedFreq();
         if (freq != nil) {
           me.page.mfd.SurroundController.setStandbyNavComFreq(freq);
@@ -178,7 +177,7 @@ var NearestAirportsController =
 
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "NearestAirports", Value: nil});
 
@@ -195,7 +194,7 @@ var NearestAirportsController =
     # Use Emesary to get the airport
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "AirportByID", Value: id});
 

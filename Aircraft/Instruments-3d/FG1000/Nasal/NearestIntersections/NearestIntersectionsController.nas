@@ -81,7 +81,7 @@ var NearestIntersectionsController =
   getNearestNavData : func(type) {
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "NavDataWithinRange", Value: type});
 
@@ -98,7 +98,7 @@ var NearestIntersectionsController =
     # Use Emesary to get the Fix
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "NavAidByID", Value: { id: id, type: "fix"} });
 

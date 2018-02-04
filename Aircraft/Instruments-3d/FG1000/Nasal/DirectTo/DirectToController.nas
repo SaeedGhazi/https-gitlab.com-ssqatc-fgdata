@@ -167,7 +167,7 @@ var DirectToController =
     # type and value;
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: type, Value: value});
 
@@ -185,7 +185,7 @@ var DirectToController =
     # type and value;
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: type, Value: value});
 
@@ -333,7 +333,7 @@ var DirectToController =
       # Use Emesary to get the destination
       var notification = notifications.PFDEventNotification.new(
         "MFD",
-        1,
+        me.getDeviceID(),
         notifications.PFDEventNotification.NavData,
         {Id: "NavDataByID", Value: id});
 

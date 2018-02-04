@@ -5,6 +5,7 @@ print("# FG1000 MFD #");
 print("##############\n");
 
 io.include("constants.nas");
+io.include("commands.nas");
 
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
 
@@ -65,14 +66,14 @@ foreach (var page; MFDPages) {
 
 var MFD =
 {
-  new : func (myCanvas)
+  new : func (myCanvas, device_id=1)
   {
     var obj = {
       parents : [ MFD ],
       EIS : nil,
       NavigationMap: nil,
       Surround : nil,
-      _pageList : {}
+      _pageList : {},
     };
 
     obj.ConfigStore = fg1000.ConfigStore.new();
@@ -103,6 +104,7 @@ var MFD =
                     {'font-mapper': fontmapper});
 
     obj._MFDDevice = canvas.PFD_Device.new(obj._svg, 12, "SoftKey", myCanvas, "MFD");
+    obj._MFDDevice.device_id = device_id;
     obj._MFDDevice.RegisterWithEmesary();
 
     # Surround dynamic elements
@@ -162,5 +164,9 @@ var MFD =
   getPage : func(name)
   {
     return me._pageList[name];
+  },
+
+  getDeviceID : func() {
+    return me._MFDDevice.device_id;
   },
 };

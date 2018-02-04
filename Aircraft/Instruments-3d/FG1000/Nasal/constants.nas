@@ -69,8 +69,6 @@ var NAV_SPACING = [
 var MIN_NAV_FREQ = 108.000;
 var MAX_NAV_FREQ = 118.000;
 
-# When the CRSR is selecting fields, this is the period for changing the
-# cursor color between normal and highlight (defined below)
 # Constants for the hard-buttons on the fascia
 var FASCIA = {
   NAV_VOL : 0,

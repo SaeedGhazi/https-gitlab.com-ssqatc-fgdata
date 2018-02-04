@@ -180,12 +180,16 @@ setDefaultDTOWayPoint : func(id)
   # Use Emesary to set the default DTO waypoint
   var notification = notifications.PFDEventNotification.new(
     "MFD",
-    1,
+    me.getDeviceID(),
     notifications.PFDEventNotification.NavData,
     {Id: "SetDefaultDTO", Value: id});
 
   var response = me._transmitter.NotifyAll(notification);
   if (me._transmitter.IsFailed(response)) print("Failed to set Default DTO waypoint");
+},
+
+getDeviceID : func() {
+    return me.page.mfd.getDeviceID();
 },
 
 

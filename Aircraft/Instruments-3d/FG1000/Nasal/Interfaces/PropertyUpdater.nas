@@ -70,15 +70,14 @@ var PropertyUpdater =
       var notificationtype = me._notificationType;
       var eventID = me._eventID;
       var controller = me;
+      # Note that we don't care about the device we receive the update from.
       me._recipient.Receive = func(notification)
       {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notificationtype) {
-          if (notification.Event_Id == eventID
-              and notification.EventParameter != nil)
-          {
+        if (notification.NotificationType == notificationtype and
+            notification.Event_Id == eventID and
+            notification.EventParameter != nil)
+        {
             return controller.handleNotificationEvent(notification.EventParameter);
-          }
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
       };

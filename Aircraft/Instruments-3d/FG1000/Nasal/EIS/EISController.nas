@@ -52,13 +52,11 @@ var EISController =
       var controller = me;
       me._recipient.Receive = func(notification)
       {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-          if (notification.Event_Id == notifications.PFDEventNotification.EngineData
-              and notification.EventParameter != nil)
-          {
-            return controller.handleEngineData(notification.EventParameter);
-          }
+        if (notification.NotificationType == notifications.PFDEventNotification.DefaultType and
+            notification.Event_Id == notifications.PFDEventNotification.EngineData and
+            notification.EventParameter != nil)
+        {
+          return controller.handleEngineData(notification.EventParameter);
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
       };

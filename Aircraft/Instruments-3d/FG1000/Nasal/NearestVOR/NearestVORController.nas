@@ -122,7 +122,7 @@ var NearestVORController =
   getNearestNavData : func(type) {
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "NavDataWithinRange", Value: type});
 
@@ -139,7 +139,7 @@ var NearestVORController =
     # Use Emesary to get the Navigation data
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "NavAidByID", Value: { id: id, type: "vor"} });
 

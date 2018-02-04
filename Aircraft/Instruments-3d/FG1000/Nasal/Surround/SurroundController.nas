@@ -31,7 +31,7 @@ var SurroundController =
   sendNavComDataNotification : func(data) {
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me._page.mfd.getDeviceID(),
       notifications.PFDEventNotification.NavComData,
       data);
 
@@ -352,8 +352,8 @@ var SurroundController =
       var controller = me;
       me._recipient.Receive = func(notification)
       {
-        if (notification.Device_Id == pfd_obj.device_id
-            and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+        # Note that we don't care about the device that the data comes from.
+        if (notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
 
           if (notification.Event_Id == notifications.PFDEventNotification.NavComData
               and notification.EventParameter != nil)

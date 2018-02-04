@@ -196,9 +196,9 @@ var AirportInfoController =
       # Use Emesary to get the airport
       var notification = notifications.PFDEventNotification.new(
         "MFD",
-        1,
+        me.getDeviceID(),
         notifications.PFDEventNotification.NavData,
-        {Id: "NearestAirports", Value: id});
+        {Id: "NearestAirports", Value: nil});
 
       var response = me._transmitter.NotifyAll(notification);
       var retval = notification.EventParameter.Value;
@@ -217,7 +217,7 @@ var AirportInfoController =
     # Use Emesary to get the airport
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      1,
+      me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
       {Id: "AirportByID", Value: id});
 

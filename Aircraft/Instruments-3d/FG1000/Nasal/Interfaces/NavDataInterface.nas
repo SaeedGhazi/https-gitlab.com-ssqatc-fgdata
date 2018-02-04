@@ -113,7 +113,7 @@ getNavAidById : func (params)
   var id = params.id;
   var type = "all";
   if (params.type != nil) type = params.type;
-  
+
   var navdata = findNavaidsByID(id, type);
   if ((size(navdata) > 0) and (! me._recentWaypoints.contains(id))) {
     me._recentWaypoints.insert(0, id);
@@ -223,67 +223,69 @@ RegisterWithEmesary : func()
     me._recipient = emesary.Recipient.new("DataInterface");
     var pfd_obj = me._device;
     var controller = me;
+
+    # Note that unlike the various keys, this data isn't specific to a particular
+    # Device - it's shared by all.  Hence we don't check for the notificaiton
+    # Device_Id.
     me._recipient.Receive = func(notification)
     {
-      if (notification.Device_Id == pfd_obj.device_id
-          and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
-        if (notification.Event_Id == notifications.PFDEventNotification.NavData
-            and notification.EventParameter != nil)
-        {
-          var id = notification.EventParameter.Id;
+      if (notification.NotificationType == notifications.PFDEventNotification.DefaultType and
+          notification.Event_Id == notifications.PFDEventNotification.NavData and
+          notification.EventParameter != nil)
+      {
+        var id = notification.EventParameter.Id;
 
-          if (id == "NearestAirports") {
-            notification.EventParameter.Value = controller.getNearestAirports();
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "AirportByID") {
-            notification.EventParameter.Value = controller.getAirportById(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "NavDataByID") {
-            notification.EventParameter.Value = controller.getNavDataById(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "NavAidByID") {
-            notification.EventParameter.Value = controller.getNavAidById(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "NavDataWithinRange") {
-            notification.EventParameter.Value = controller.getNavDataWithinRange(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "Flightplan") {
-            notification.EventParameter.Value = controller.getFlightplan();
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "RecentWaypoints") {
-            notification.EventParameter.Value = controller.getRecentWaypoints();
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "AddRecentWaypoint") {
-            controller.addRecentWaypoint(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "AirwayWaypoints") {
-            notification.EventParameter.Value = controller.getAirwayWaypoints();
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "UserWaypoints") {
-            notification.EventParameter.Value = controller.getUserWaypoints();
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "CurrentDTO") {
-            notification.EventParameter.Value = controller.getCurrentDTO();
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "SetDirectTo") {
-            controller.setDirectTo(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
-          if (id == "SetDefaultDTO") {
-            controller.setDefaultDTO(notification.EventParameter.Value);
-            return emesary.Transmitter.ReceiptStatus_Finished;
-          }
+        if (id == "NearestAirports") {
+          notification.EventParameter.Value = controller.getNearestAirports();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "AirportByID") {
+          notification.EventParameter.Value = controller.getAirportById(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "NavDataByID") {
+          notification.EventParameter.Value = controller.getNavDataById(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "NavAidByID") {
+          notification.EventParameter.Value = controller.getNavAidById(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "NavDataWithinRange") {
+          notification.EventParameter.Value = controller.getNavDataWithinRange(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "Flightplan") {
+          notification.EventParameter.Value = controller.getFlightplan();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "RecentWaypoints") {
+          notification.EventParameter.Value = controller.getRecentWaypoints();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "AddRecentWaypoint") {
+          controller.addRecentWaypoint(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "AirwayWaypoints") {
+          notification.EventParameter.Value = controller.getAirwayWaypoints();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "UserWaypoints") {
+          notification.EventParameter.Value = controller.getUserWaypoints();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "CurrentDTO") {
+          notification.EventParameter.Value = controller.getCurrentDTO();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "SetDirectTo") {
+          controller.setDirectTo(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "SetDefaultDTO") {
+          controller.setDefaultDTO(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
         }
       }
       return emesary.Transmitter.ReceiptStatus_NotProcessed;

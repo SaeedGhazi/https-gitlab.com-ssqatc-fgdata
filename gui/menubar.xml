@@ -827,7 +827,7 @@
 				<command>nasal</command>
 				<script>
 					var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
-			    io.load_nasal(nasal_dir ~ 'gui.nas', "fg1000");
+			    io.load_nasal(nasal_dir ~ 'GUI.nas', "fg1000");
 					var MFD_GUI = fg1000.MFDGUI.new();
 				</script>
 			</binding>

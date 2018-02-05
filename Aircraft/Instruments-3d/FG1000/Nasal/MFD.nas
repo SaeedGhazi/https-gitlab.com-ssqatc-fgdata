@@ -4,8 +4,8 @@ print("##############");
 print("# FG1000 MFD #");
 print("##############\n");
 
-io.include("constants.nas");
-io.include("commands.nas");
+io.include("Constants.nas");
+io.include("Commands.nas");
 
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
 
@@ -14,10 +14,13 @@ io.load_nasal(nasal_dir ~ '/ConfigStore.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFDPageController.nas', "fg1000");
 
+io.load_nasal(nasal_dir ~ '/EIS/EIS.nas', "fg1000");
+io.load_nasal(nasal_dir ~ '/EIS/EISStyles.nas', "fg1000");
+io.load_nasal(nasal_dir ~ '/EIS/EISOptions.nas', "fg1000");
+io.load_nasal(nasal_dir ~ '/EIS/EISController.nas', "fg1000");
+
 var MFDPages = [
-  "Surround",
   "NavigationMap",
-  "EIS",
   "TrafficMap",
   "Stormscope",
   "WeatherDataLink",
@@ -55,13 +58,14 @@ var MFDPages = [
   "NearestFrequencies",
   "NearestAirspaces",
   "DirectTo",   # display at the top of the stack
+  "Surround",
 ];
 
 foreach (var page; MFDPages) {
-  io.load_nasal(nasal_dir ~ page ~ '/' ~ page ~ '.nas', "fg1000");
-  io.load_nasal(nasal_dir ~ page ~ '/' ~ page ~ 'Styles.nas', "fg1000");
-  io.load_nasal(nasal_dir ~ page ~ '/' ~ page ~ 'Options.nas', "fg1000");
-  io.load_nasal(nasal_dir ~ page ~ '/' ~ page ~ 'Controller.nas', "fg1000");
+  io.load_nasal(nasal_dir ~ "MFDPages/" ~ page ~ '/' ~ page ~ '.nas', "fg1000");
+  io.load_nasal(nasal_dir ~ "MFDPages/" ~ page ~ '/' ~ page ~ 'Styles.nas', "fg1000");
+  io.load_nasal(nasal_dir ~ "MFDPages/" ~ page ~ '/' ~ page ~ 'Options.nas', "fg1000");
+  io.load_nasal(nasal_dir ~ "MFDPages/" ~ page ~ '/' ~ page ~ 'Controller.nas', "fg1000");
 }
 
 var MFD =
@@ -89,8 +93,12 @@ var MFD =
       # If we don't return anything the default font is used
     };
 
+    canvas.parsesvg(obj._svg,
+                    '/Aircraft/Instruments-3d/FG1000/MFDPages/EIS.svg',
+                    {'font-mapper': fontmapper});
+
     foreach (var page; MFDPages) {
-      var svg_file ='/Aircraft/Instruments-3d/FG1000/Models/' ~ page ~ '.svg';
+      var svg_file ='/Aircraft/Instruments-3d/FG1000/MFDPages/' ~ page ~ '.svg';
       if (resolvepath(svg_file) != "") {
         # Load an SVG file if available.
         canvas.parsesvg(obj._svg,
@@ -98,10 +106,6 @@ var MFD =
                         {'font-mapper': fontmapper});
       }
     }
-
-    canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/Models/MFD.svg',
-                    {'font-mapper': fontmapper});
 
     obj._MFDDevice = canvas.PFD_Device.new(obj._svg, 12, "SoftKey", myCanvas, "MFD");
     obj._MFDDevice.device_id = device_id;

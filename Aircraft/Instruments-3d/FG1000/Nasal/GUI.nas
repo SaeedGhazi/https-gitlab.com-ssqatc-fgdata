@@ -1,7 +1,5 @@
 
-io.include("constants.nas");
-
-
+io.include("Constants.nas");
 
 var MFDGUI =
 {
@@ -151,7 +149,7 @@ var MFDGUI =
 
     # Create the surround fascia, which is just a PNG image;
     var child = obj.root.createChild("image")
-        .setFile("Aircraft/Instruments-3d/FG1000/Models/fascia.png")
+        .setFile("Aircraft/Instruments-3d/FG1000/Dialogs/fascia.png")
         .set("z-index", 100)
         .setTranslation(0, 0)
         .setSize(obj.scale*obj.width,obj.scale*obj.height);

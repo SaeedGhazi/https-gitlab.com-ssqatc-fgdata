@@ -84,7 +84,7 @@ var NavigationMapStyles =
 
     me.Styles.APS = {};
     me.Styles.APS.scale_factor=0.3;
-    me.Styles.APS.svg_path = "Aircraft/Instruments-3d/FG1000/Models/APSmodel.svg";
+    me.Styles.APS.svg_path = "Aircraft/Instruments-3d/FG1000/Icons/APSmodel.svg";
   },
 
   clearStyles : func() {

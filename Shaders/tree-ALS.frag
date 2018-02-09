@@ -357,7 +357,7 @@ hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 // determine the right mix of transmission and haze
 
-hazeColor = clamp(hazeColor,0.0,1.0);
+//hazeColor = clamp(hazeColor,0.0,1.0);
 fragColor.rgb = mix( hazeColor  + secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
 }

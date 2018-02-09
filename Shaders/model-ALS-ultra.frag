@@ -639,7 +639,7 @@ void main (void)
 
     /// END fog color
 	fragColor = clamp(fragColor, 0.0, 1.0);
-    	hazeColor = clamp(hazeColor, 0.0, 1.0);
+    	//hazeColor = clamp(hazeColor, 0.0, 1.0);
 
     ///BEGIN Rayleigh fog ///
 

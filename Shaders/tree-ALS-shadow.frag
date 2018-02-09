@@ -377,7 +377,7 @@ hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothste
 
 // determine the right mix of transmission and haze
 
-hazeColor = clamp(hazeColor,0.0,1.0);
+//hazeColor = clamp(hazeColor,0.0,1.0);
 fragColor.rgb = mix(eqColorFactor * hazeColor * eShade + secondary_light * fog_backscatter(avisibility), fragColor.rgb,transmission);
 
 }

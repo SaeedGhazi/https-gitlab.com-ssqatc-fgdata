@@ -72,11 +72,11 @@ var GUI =
     { Id: 12, top_left: [1145, 830], bottom_right: [1200, 875] },
   ],
 
-  new : func(mfd_canvas, device_id, scale = 1.0)
+  new : func(mfd, mfd_canvas, device_id, scale = 1.0)
   {
     var obj = {
       parents : [ GUI ],
-      mfd : nil,
+      mfd : mfd,
       eisPublisher : nil,
       navcomPublisher : nil,
       navcomUpdater : nil,
@@ -171,6 +171,9 @@ var GUI =
 
   cleanup : func()
   {
+    # Clean up the MFD.  Particularly important to stop if picking up
+    # Emesary notifications.
+    me.mfd.del();
     # Clean up the window itself
     call(canvas.Window.del, [], me.window);
   },

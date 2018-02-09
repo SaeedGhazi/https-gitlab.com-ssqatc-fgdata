@@ -13,6 +13,17 @@ io.load_nasal(nasal_dir ~ 'Interfaces/GenericADCPublisher.nas', "fg1000");
 
 var GenericInterfaceController = {
 
+  _instance : nil,
+
+  # Factory method
+  getInstance : func() {
+    if (GenericInterfaceController._instance == nil) {
+      GenericInterfaceController._instance = GenericInterfaceController.new();
+    }
+
+    return GenericInterfaceController._instance;
+  },
+
   new : func() {
     var obj = {
       parents : [GenericInterfaceController],

@@ -69,7 +69,7 @@ var DirectTo =
     # We will use the screen range for zooming.
     obj.DirectToChart.setRange(8.0);
     obj.DirectToChart.setScreenRange(300/2.0);
-    obj.DirectToChart.setTranslation(1045, 485);
+    obj.DirectToChart.setTranslation(860, 440);
     obj.DirectToChart.set("clip-frame", canvas.Element.LOCAL);
     obj.DirectToChart.set("clip", "rect(-160px, 160px, 160px, -160px)");
 

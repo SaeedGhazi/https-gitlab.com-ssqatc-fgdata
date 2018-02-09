@@ -17,6 +17,17 @@ io.load_nasal(nasal_dir ~ '/GUI.nas', "fg1000");
 
 var FG1000 = {
 
+_instance : nil,
+
+# Factory method
+getInstance : func(EIS_Class = nil, EIS_SVG = nil) {
+  if (FG1000._instance == nil) {
+    FG1000._instance = FG1000.new(EIS_Class, EIS_SVG);
+  }
+
+  return FG1000._instance;
+},
+
 new : func(EIS_Class = nil, EIS_SVG = nil) {
   var obj = {
     parents : [FG1000],
@@ -51,8 +62,18 @@ setEIS : func(EIS_Class, EIS_SVG) {
   me.EIS_SVG = EIS.SVG;
 },
 
-addMFD : func(index, targetcanvas=nil, screenObject=nil) {
-  if (me.displays[index] != nil) {
+getDisplay : func(index) {
+  return me.displays[index];
+},
+
+# Add an MFD, optionally setting the index. Returns the index of the MFD.
+addMFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
+
+  if (index == nil) {
+    index = size(keys(me.displays));
+    debug.dump(keys(me.displays));
+    print("No index passed.  Defaulting to " ~ index);
+  } else if (me.displays[index] != nil) {
     print("FG1000 Index " ~ index ~ " already exists!");
     return
   }
@@ -68,6 +89,7 @@ addMFD : func(index, targetcanvas=nil, screenObject=nil) {
 
   var mfd = fg1000.MFD.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
   me.displays[index] = mfd;
+  return index;
 },
 
 display : func(index, target_object=nil) {
@@ -89,7 +111,7 @@ displayGUI : func(index, scale=1.0) {
   }
 
   var mfd_canvas = me.displays[index].getCanvas();
-  var gui = fg1000.GUI.new(mfd_canvas, index, scale);
+  var gui = fg1000.GUI.new(me.displays[index], mfd_canvas, index, scale);
 },
 
 getConfigStore : func() {

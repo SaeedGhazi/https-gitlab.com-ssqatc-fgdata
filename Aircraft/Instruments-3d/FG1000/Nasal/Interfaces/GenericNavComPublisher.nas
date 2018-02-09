@@ -1,6 +1,6 @@
 # NavCom Interface using Emesary for a simple dual Nav/Com system using standard properties
 #
-# This maps properties to Emesary Messages that will be publishes using the
+# This maps properties to Emesary Messages that will be published using the
 #
 # notifications.PFDEventNotification.NavComData
 #

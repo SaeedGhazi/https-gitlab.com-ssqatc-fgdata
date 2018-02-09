@@ -827,8 +827,18 @@
 				<command>nasal</command>
 				<script>
 					var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
-			    io.load_nasal(nasal_dir ~ 'GUI.nas', "fg1000");
-					var MFD_GUI = fg1000.MFDGUI.new();
+					io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000");
+					io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000");
+
+					var fg1000system = fg1000.FG1000.new();
+					fg1000system.addMFD(0);
+					fg1000system.displayGUI(0);
+
+					# Start the interface controller after the FG1000, as it will publish
+					# immediately and update the NAV/COM data.
+					var interfaceController = fg1000.GenericInterfaceController.new();
+					interfaceController.start();
+
 				</script>
 			</binding>
 		</item>

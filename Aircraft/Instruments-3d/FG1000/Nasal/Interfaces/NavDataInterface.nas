@@ -4,7 +4,7 @@
 
 var NavDataInterface = {
 
-new : func (device)
+new : func ()
 {
   var obj = { parents : [ NavDataInterface ] };
 
@@ -12,7 +12,6 @@ new : func (device)
   obj._recipient = nil;
   obj._transmitter = emesary.GlobalTransmitter;
   obj._registered = 0;
-  obj._device = device;
   obj._defaultDTO = "";
 
   # List of recently use waypoints
@@ -221,7 +220,6 @@ RegisterWithEmesary : func()
 {
   if (me._recipient == nil){
     me._recipient = emesary.Recipient.new("DataInterface");
-    var pfd_obj = me._device;
     var controller = me;
 
     # Note that unlike the various keys, this data isn't specific to a particular

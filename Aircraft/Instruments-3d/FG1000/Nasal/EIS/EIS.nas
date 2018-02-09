@@ -12,7 +12,6 @@ var EIS =
 
     obj.setController(fg1000.EISController.new(obj, svg));
 
-
     obj.addTextElements(["RPMDisplay", "MBusVolts", "EBusVolts", "EngineHours"]);
 
     obj._fuelFlowPointer    = PFD.PointerElement.new(obj.pageName, svg, "FuelFlowPointer", 0.0, 20.0, 135);

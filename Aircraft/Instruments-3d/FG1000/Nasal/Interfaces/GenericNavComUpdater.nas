@@ -3,12 +3,11 @@
 
 var GenericNavComUpdater =
 {
-  new : func (device) {
+  new : func () {
     var obj = {
       parents : [
         GenericNavComUpdater,
         PropertyUpdater.new(
-          device,
           notifications.PFDEventNotification.DefaultType,
           notifications.PFDEventNotification.NavComData
         )

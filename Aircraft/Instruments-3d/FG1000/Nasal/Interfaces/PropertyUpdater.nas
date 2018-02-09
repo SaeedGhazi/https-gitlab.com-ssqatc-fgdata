@@ -22,10 +22,9 @@ var PropertyUpdater =
     setValue : func(val) { me._prop.setValue(val); },
   },
 
-  new : func (device, notificationType, eventID) {
+  new : func (notificationType, eventID) {
     var obj = {
       parents : [ PropertyUpdater ],
-      _device : device,
       _notificationType : notificationType,
       _eventID : eventID,
       _recipient : nil,
@@ -66,7 +65,6 @@ var PropertyUpdater =
 
     if (me._recipient == nil){
       me._recipient = emesary.Recipient.new("PropertyUpdater");
-      var pfd_obj = me._device;
       var notificationtype = me._notificationType;
       var eventID = me._eventID;
       var controller = me;

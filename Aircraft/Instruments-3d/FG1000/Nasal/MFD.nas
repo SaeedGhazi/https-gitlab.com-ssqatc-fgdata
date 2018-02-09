@@ -1,24 +1,5 @@
 # FG1000 MFD
 
-print("##############");
-print("# FG1000 MFD #");
-print("##############\n");
-
-io.include("Constants.nas");
-io.include("Commands.nas");
-
-var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
-
-io.load_nasal(nasal_dir ~ '/ConfigStore.nas', "fg1000");
-
-io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
-io.load_nasal(nasal_dir ~ '/MFDPageController.nas', "fg1000");
-
-io.load_nasal(nasal_dir ~ '/EIS/EIS.nas', "fg1000");
-io.load_nasal(nasal_dir ~ '/EIS/EISStyles.nas', "fg1000");
-io.load_nasal(nasal_dir ~ '/EIS/EISOptions.nas', "fg1000");
-io.load_nasal(nasal_dir ~ '/EIS/EISController.nas', "fg1000");
-
 var MFDPages = [
   "NavigationMap",
   "TrafficMap",
@@ -61,6 +42,8 @@ var MFDPages = [
   "Surround",
 ];
 
+var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
+
 foreach (var page; MFDPages) {
   io.load_nasal(nasal_dir ~ "MFDPages/" ~ page ~ '/' ~ page ~ '.nas', "fg1000");
   io.load_nasal(nasal_dir ~ "MFDPages/" ~ page ~ '/' ~ page ~ 'Styles.nas', "fg1000");
@@ -70,7 +53,7 @@ foreach (var page; MFDPages) {
 
 var MFD =
 {
-  new : func (myCanvas, device_id=1)
+  new : func (fg1000instance, EIS_Class, EIS_SVG, myCanvas, device_id=1)
   {
     var obj = {
       parents : [ MFD ],
@@ -78,9 +61,11 @@ var MFD =
       NavigationMap: nil,
       Surround : nil,
       _pageList : {},
+      _fg1000 : fg1000instance,
+      _canvas : myCanvas,
     };
 
-    obj.ConfigStore = fg1000.ConfigStore.new();
+    obj.ConfigStore = obj._fg1000.getConfigStore();
 
     obj._svg = myCanvas.createGroup("softkeys");
     obj._svg.set("clip-frame", canvas.Element.LOCAL);
@@ -94,7 +79,7 @@ var MFD =
     };
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/EIS.svg',
+                    EIS_SVG,
                     {'font-mapper': fontmapper});
 
     foreach (var page; MFDPages) {
@@ -120,7 +105,8 @@ var MFD =
     obj.SurroundController = obj.Surround.getController();
 
     # Engine Information System.  A special case as it's always displayed on the MFD.
-    obj.EIS = fg1000.EIS.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    # Note that it is passed in on the constructor
+    obj.EIS = EIS_Class.new(obj, myCanvas, obj._MFDDevice, obj._svg);
     obj.addPage("EIS", obj.EIS);
 
     # The NavigationMap page is a special case, as it is displayed with the Nearest... pages as an overlay
@@ -173,4 +159,8 @@ var MFD =
   getDeviceID : func() {
     return me._MFDDevice.device_id;
   },
+
+  getCanvas : func() {
+    return me._canvas;
+  }
 };

@@ -130,7 +130,11 @@ var FASCIA = {
   NOSE_UP : 43,
   NOSE_DOWN : 44,
 
-  JOYSTICK_PRESS : 45
+  JOYSTICK_PRESS : 45,
+
+  # GDU 1045 Autopilot keys
+  YD : 46,
+
 
 };
 

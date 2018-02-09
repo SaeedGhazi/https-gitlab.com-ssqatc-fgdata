@@ -15,7 +15,7 @@
     <object-name>Lamp3</object-name>
     <object-name>Lamp4</object-name>
     <texture-prop>texture</texture-prop>
-    <texture>Textures/GDU-1045.png</texture>
+    <texture>Textures/GDU-104X.png</texture>
   </animation>
 
   <animation>

@@ -33,18 +33,6 @@
     <object-name>NavOuter</object-name>
     <object-name>NavInner</object-name>
     <object-name>HDG</object-name>
-    <object-name>AP.L0</object-name>
-    <object-name>AP.L1</object-name>
-    <object-name>AP.L2</object-name>
-    <object-name>AP.L3</object-name>
-    <object-name>AP.L4</object-name>
-    <object-name>AP.L5</object-name>
-    <object-name>AP.R0</object-name>
-    <object-name>AP.R1</object-name>
-    <object-name>AP.R2</object-name>
-    <object-name>AP.R3</object-name>
-    <object-name>AP.R4</object-name>
-    <object-name>AP.R5</object-name>
     <object-name>AltOuter</object-name>
     <object-name>AltInner</object-name>
     <object-name>VolNAV</object-name>
@@ -98,18 +86,6 @@
     <object-name>NavOuter</object-name>
     <object-name>NavInner</object-name>
     <object-name>HDG</object-name>
-    <object-name>AP.L0</object-name>
-    <object-name>AP.L1</object-name>
-    <object-name>AP.L2</object-name>
-    <object-name>AP.L3</object-name>
-    <object-name>AP.L4</object-name>
-    <object-name>AP.L5</object-name>
-    <object-name>AP.R0</object-name>
-    <object-name>AP.R1</object-name>
-    <object-name>AP.R2</object-name>
-    <object-name>AP.R3</object-name>
-    <object-name>AP.R4</object-name>
-    <object-name>AP.R5</object-name>
     <object-name>AltOuter</object-name>
     <object-name>AltInner</object-name>
     <object-name>VolNAV</object-name>
@@ -149,6 +125,18 @@
 
   <animation>
     <object-name>Cover</object-name>
+    <object-name>AP.L0</object-name>
+    <object-name>AP.L1</object-name>
+    <object-name>AP.L2</object-name>
+    <object-name>AP.L3</object-name>
+    <object-name>AP.L4</object-name>
+    <object-name>AP.L5</object-name>
+    <object-name>AP.R0</object-name>
+    <object-name>AP.R1</object-name>
+    <object-name>AP.R2</object-name>
+    <object-name>AP.R3</object-name>
+    <object-name>AP.R4</object-name>
+    <object-name>AP.R5</object-name>
     <type>select</type>
     <condition>
       <equals>
@@ -158,15 +146,10 @@
     </condition>
   </animation>
 
-  <animation>
-    <name>screen1</name>
-    <object-name>Screen</object-name>
-  </animation>
-
 <!--
   <animation>
     <type>material</type>
-    <object-name>Screen</object-name>
+    <object-name>Screen1</object-name>
     <emission>
       <red>1</red>
       <green>1</green>
@@ -297,246 +280,6 @@
         <command>set-tooltip</command>
         <tooltip-id>HDG</tooltip-id>
         <label>Change heading bug (Shift to sync)</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.L0</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>AP</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.L0</tooltip-id>
-        <label>Toggle Autopilot</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.L1</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>FD</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.L1</tooltip-id>
-        <label>Toggle Flight Director</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.L2</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>FD</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.L2</tooltip-id>
-        <label>Select AP NAV mode</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.L3</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>ALT</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.L3</tooltip-id>
-        <label>Select AP Altitude mode</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.L4</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>VS</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.L4</tooltip-id>
-        <label>Select AP Vertical Speed mode</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.L5</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>FLC</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.L5</tooltip-id>
-        <label>Select AP Flight Level mode</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.R0</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>YD</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.R0</tooltip-id>
-        <label>Select AP Yaw Damper</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.R1</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>HDG</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.R1</tooltip-id>
-        <label>Select AP Heading mode</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.R2</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>APR</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.R2</tooltip-id>
-        <label>Select AP Approach mode</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.R3</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>VNV</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.R3</tooltip-id>
-        <label>Select AP Vertical Navigation</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.R4</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>NOSE_UP</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.R4</tooltip-id>
-        <label>AP Nose Up Trim</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>AP.R5</object-name>
-    <action>
-      <button>0</button>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>NOSE_DOWN</notification>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>AP.R5</tooltip-id>
-        <label>AP Nose Down Trim</label>
       </binding>
     </hovered>
   </animation>

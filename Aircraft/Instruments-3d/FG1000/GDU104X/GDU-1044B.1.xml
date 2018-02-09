@@ -15,19 +15,19 @@
     <object-name>Lamp3</object-name>
     <object-name>Lamp4</object-name>
     <texture-prop>texture</texture-prop>
-    <texture>Textures/GDU-104X.png</texture>
+    <texture>Textures/GDU-1044B.png</texture>
   </animation>
 
   <animation>
     <inherits-from>Effects/model-combined-deferred</inherits-from>
+    <type>material</type>
     <parameters>
       <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FG1000/Lightmap</use></lightmap-factor>
       <texture n="3">
-        <image>Textures/GDU-104X.lightmap.png</image>
+        <image>Textures/GDU-1044B.lightmap.png</image>
       </texture>
     </parameters>
-    <type>material</type>
     <object-name>Panel</object-name>
     <object-name>AsSwitchNav</object-name>
     <object-name>NavOuter</object-name>
@@ -81,7 +81,7 @@
     <object-name>SoftKey.011</object-name>
     <object-name>Cover</object-name>
     <texture-prop>texture</texture-prop>
-    <texture>Textures/GDU-104X.png</texture>
+    <texture>Textures/GDU-1044B.png</texture>
   </animation>
 
   <effect>
@@ -90,7 +90,7 @@
       <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FG1000/Lightmap</use></lightmap-factor>
       <texture n="3">
-        <image>Textures/GDU-104X.lightmap.png</image>
+        <image>Textures/GDU-1044B.lightmap.png</image>
       </texture>
     </parameters>
     <object-name>Panel</object-name>
@@ -156,11 +156,6 @@
         <value type="bool">False</value>
       </equals>
     </condition>
-  </animation>
-
-  <animation>
-    <name>screen1</name>
-    <object-name>Screen</object-name>
   </animation>
 
 <!--
@@ -329,14 +324,14 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>FD</notification>
+        <notification>HDG</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
         <tooltip-id>AP.L1</tooltip-id>
-        <label>Toggle Flight Director</label>
+        <label>Select AP Heading mode</label>
       </binding>
     </hovered>
   </animation>
@@ -349,7 +344,7 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>FD</notification>
+        <notification>NAV</notification>
       </binding>
     </action>
     <hovered>
@@ -369,14 +364,14 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>ALT</notification>
+        <notification>APR</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
         <tooltip-id>AP.L3</tooltip-id>
-        <label>Select AP Altitude mode</label>
+        <label>Select AP Approach mode</label>
       </binding>
     </hovered>
   </animation>
@@ -429,14 +424,14 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>YD</notification>
+        <notification>FD</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
         <tooltip-id>AP.R0</tooltip-id>
-        <label>Select AP Yaw Damper</label>
+        <label>Toggle Flight Director</label>
       </binding>
     </hovered>
   </animation>
@@ -449,14 +444,14 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>HDG</notification>
+        <notification>ALT</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
         <tooltip-id>AP.R1</tooltip-id>
-        <label>Select AP Heading mode</label>
+        <label>Select AP Altitude mode</label>
       </binding>
     </hovered>
   </animation>
@@ -469,14 +464,14 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>APR</notification>
+        <notification>VNV</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
         <tooltip-id>AP.R2</tooltip-id>
-        <label>Select AP Approach mode</label>
+        <label>Select AP Vertical Navigation mode</label>
       </binding>
     </hovered>
   </animation>
@@ -489,14 +484,14 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
-        <notification>VNV</notification>
+        <notification>BC</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
         <tooltip-id>AP.R3</tooltip-id>
-        <label>Select AP Vertical Navigation</label>
+        <label>Select AP Backcourse mode</label>
       </binding>
     </hovered>
   </animation>

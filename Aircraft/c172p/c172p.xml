@@ -2,17 +2,17 @@
 <?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
 <!-- Source: http://forum.flightgear.org/viewtopic.php?f=25&t=21664&start=45 -->
 <fdm_config name="c172" version="2.0" release="BETA"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
 
     <fileheader>
         <author> Unknown </author>
         <filecreationdate> 2002-01-01 </filecreationdate>
-        <version> $Id: c172p.xml,v 1.40 June 2015 $ </version>
+        <version> $Id: c172p.xml,v 1.41 Jan 2018 $ </version>
         <!-- experimental stall and spin, up to flat spin March 2014, Dany93 (Daniel Dubreuil) -->
         <!-- Source: http://forum.flightgear.org/viewtopic.php?f=25&t=21664&start=45 -->
         <!-- this file with comments for stall and spin to help -->
-        <!-- further modifications for c172p-detailed 2015 - 2016 -->
+        <!-- further modifications for c172p-detailed 2015 - 2018 -->
         <description> Cessna C-172 </description>
     </fileheader>
 
@@ -41,9 +41,9 @@
         </location>
     </metrics>
 
-        <!-- 
+        <!--
             Cessna 172P Skyhawk 1982 (160hp) POH p.6-10, Weight and Moment:
-            **Basic Empty** (= with full oil) 1467 lbs, 57300 lb-ins. Gives CG at 39.1 ins.
+            **Basic Empty** (= with full oil) 1467 lbs, 57300 lb-ins. Gives CG at 39.06 ins.
         -->
     <mass_balance>
         <ixx unit="SLUG*FT2"> 948 </ixx>
@@ -54,7 +54,7 @@
         <iyz unit="SLUG*FT2"> -0 </iyz>
         <emptywt unit="LBS"> 1467 </emptywt>
         <location name="CG" unit="IN">
-            <x> 39.1 </x>
+            <x> 39.06 </x>
             <y> 0 </y>
             <z> 36.5 </z>
         </location>
@@ -188,16 +188,16 @@
         </pointmass>
 
         <!-- Extra weight for the aircraft with 180 hp engine, **Basic empty** (= with full oil), pointmass [15]; managed by Systems/bushkit.xml -->
-        <!-- for empty aircraft CG at x = 38.1 ins, cf. 172S - N552SP POH (1998) p.6-12, Weight and moment tabulation: 1642 lbs, 62600 lb-ins -->
+        <!-- for empty aircraft CG at x = 38.12 ins, from Cessna 172S - N552SP POH (1998) p.6-12, Weight and moment tabulation: 1642 lbs, 62600 lb-ins -->
         <pointmass name="extra weight 180hp">
             <weight unit="LBS"> 0 </weight>
             <location name="POINTMASS" unit="IN">
-                <x> 30.3 </x>
+                <x> 30.29 </x>
                 <y>  0 </y>
                 <z> 26.6 </z>
             </location>
         </pointmass>
-        
+
         <!-- Loss of weight due to lacking oil, pointmass [16]. engine.nas, c172p-engine.xml -->
         <pointmass name="lacking oil weight">
             <weight unit="LBS"> 0 </weight>
@@ -575,6 +575,7 @@
             </orient>
             <feed>2</feed> <!-- from intermediate tank (float chamber 2) -->
             <thruster file="prop_75in2f">
+            <!-- <thruster file="prop_75in_2f_NACA_15-30deg"> --> <!-- for settling -->
                 <location unit="IN">
                     <x> -37.7 </x>
                     <y> 0 </y>
@@ -602,8 +603,8 @@
                 <yaw> 0 </yaw>
             </orient>
             <feed>3</feed> <!-- from intermediate tank (float chamber 3) -->
-            <!-- <thruster file="prop_76in2f_NACA_15-25deg"> -->
             <thruster file="prop_76in2f_NACA_20deg">
+            <!-- <thruster file="prop_76in2f_NACA_15-25deg"> --> <!-- for settling -->
                 <location unit="IN">
                     <x> -37.7 </x>
                     <y> 0 </y>
@@ -769,8 +770,8 @@
             </aerosurface_scale>
 
             <aerosurface_scale name="Right Aileron Control">
-                <input>fcs/roll-trim-sum</input>
-                <gain>-0.01745</gain>
+                <input>-fcs/roll-trim-sum</input>
+                <gain>0.01745</gain>
                 <range>
                     <min>-20</min>
                     <max>15</max>
@@ -781,8 +782,8 @@
             <aerosurface_scale name="Right Aileron Position Normalized">
                 <input>fcs/right-aileron-pos-deg</input>
                 <domain>
-                    <min>-15</min>
-                    <max>20</max>
+                    <min>-20</min>
+                    <max>15</max>
                 </domain>
                 <range>
                     <min>1</min>
@@ -1055,7 +1056,7 @@
                           0.1500	1.0900
                           0.2000	1.0730
                           0.3000	1.0460
-                          0.4000	1.0550
+                          0.4000	1.0280
                           0.5000	1.0190
                           0.6000	1.0130
                           0.7000	1.0080
@@ -1065,6 +1066,24 @@
                           1.1000	1.0000
                       </tableData>
                 </table>
+            </product>
+        </function>
+
+        <function name="aero/function/vel-propwash-fps">
+            <description> propeller induced velocity </description>
+            <sum>
+                <property>propulsion/engine/prop-induced-velocity_fps</property>
+                <property>propulsion/engine[1]/prop-induced-velocity_fps</property>
+            </sum>
+        </function>
+
+        <function name="aero/function/qbar-propwash-psf">
+            <description> q bar due to the propeller induced velocity </description>
+            <product>
+                <property>aero/function/vel-propwash-fps</property>
+                <property>aero/function/vel-propwash-fps</property>
+                <property>atmosphere/rho-slugs_ft3</property>
+                <value>0.5</value>
             </product>
         </function>
 
@@ -1096,6 +1115,17 @@
                 </sum>
                 <value>0.5</value>
             </product>
+        </function>
+
+        <function name="fcs/aileron-pos-rad-avgd">
+            <description>Averaged aileron position</description>
+            <avg>
+                <property>fcs/left-aileron-pos-rad</property>
+                <product>
+                    <property>fcs/right-aileron-pos-rad</property>
+                    <value>-1</value>
+                </product>
+            </avg>
         </function>
 
         <axis name="DRAG">
@@ -1231,7 +1261,7 @@
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>fcs/rudder-pos-rad</property>
-                    <value>0.0374</value>
+                    <value>0.150</value>
                 </product>
             </function>
         </axis>
@@ -1349,7 +1379,7 @@
                         </tableData>
                     </table>
                     <!--
-                          stall and spin (1): 
+                          stall and spin (1):
                           via diedra effect.
                           Makes the higher (downwind) wing drop at forward slip
                           and worsens the spin in a skidding turn.
@@ -1385,9 +1415,9 @@
                           </tableData>
                     </table>
                     <!--
-                          stall and spin (2): 
+                          stall and spin (2):
                           less roll damping
-                      <table> 
+                      <table>
                         <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
                         <tableData>
                            0.279    1
@@ -1423,13 +1453,13 @@
                         <independentVar lookup="table">aero/stall-hyst-norm</independentVar>
                         <tableData breakPoint="0">
                                     -0.15  -0.1   0    0.1   0.15
-                            0.279    1      1     1    1     1    
+                            0.279    1      1     1    1     1
                             0.297    35     30    1    30    35
                             0.5      5      5     1    5     5
                         </tableData>
                         <tableData breakPoint="1">
                                     -0.15  -0.1   0    0.1   0.15
-                            0.297    35     30    1    30    35 
+                            0.297    35     30    1    30    35
                             0.5      5      5     1    5     5
                         </tableData>
                     </table>
@@ -1442,7 +1472,7 @@
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/bw-ft</property>
-                    <property>fcs/left-aileron-pos-rad</property>
+                    <property>fcs/aileron-pos-rad-avgd</property>
                     <value>0.2290</value>
                     <!--
                         stall and spin (4):
@@ -1452,7 +1482,7 @@
                         <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
                         <independentVar lookup="column">aero/stall-hyst-norm</independentVar>
                         <tableData>
-                                     0     1                                        
+                                     0     1
                             0.279    1     0.3
                             0.297    0.3   0.3
                             0.611   -0.1  -0.1
@@ -1523,14 +1553,14 @@
                         <property>aero/alpha-rad</property>
                     </sin>
                     <value>-1.8000</value>
-                    <!-- 
+                    <!--
                         stall and spin (5):
                         horizontal tail stall (for flat spin)
                     -->
                     <table>
                         <independentVar lookup="row">aero/alpha-deg</independentVar>
                         <tableData>
-                            20    1  
+                            20    1
                             25    0.6
                             35    0.4
                             45    0.5
@@ -1579,15 +1609,13 @@
                         elevator loss of efficiency when stalled
                     -->
                     <table>
-                        <independentVar lookup="row">aero/alpha-deg</independentVar>
+                        <independentVar lookup="row">fcs/elevator-pos-rad</independentVar>
+                        <independentVar lookup="column">aero/alpha-deg</independentVar>
                         <tableData>
-                            18    1   
-                            25    0.5
-                            35    0.2
-                            45    0.1
-                            55    0.1
-                            65    0.1
-                            90    0.1
+                                    18  25   35     45     55      65      90
+                            -0.49   1   0.5  0.2    0.1    0.1     0.1     0.1
+                            0       1   0.6  0.3    0.15   0.1     0.1     0.1
+                            0.40    1   0.9  0.8    0.7    0.6     0.5     0.4
                         </tableData>
                     </table>
                 </product>
@@ -1630,6 +1658,16 @@
                 </product>
             </function>
 
+            <function name="aero/coefficient/Cnspw">
+                <description>Yaw_moment_due_to_spiraling_propwash</description>
+                <product>
+                    <property>aero/function/qbar-propwash-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <property>metrics/bw-ft</property>
+                    <value>-0.05</value>
+                </product>
+            </function> 
+
             <function name="aero/coefficient/Cnr">
                 <description>Yaw_moment_due_to_yaw_rate</description>
                 <product>
@@ -1644,7 +1682,7 @@
 
             <function name="aero/coefficient/Cnrf">
                 <description>Yaw_moment_due_to_flat_spin</description>
-                <!-- 
+                <!--
                     stall and spin (7):
                     Feedback loop on yaw rate for flat spin.
                     Accelerates the yaw rate when stalled, up to a self-maintained flat spin (like a dead leaf).
@@ -1663,15 +1701,15 @@
                         <independentVar lookup="column">aero/alpha-wing-rad</independentVar>
                         <tableData>
                                  0.279 0.4
-                            -15  0     0         
-                            -5   0     0         
-                            -3   0     -0.3      
-                            -1   0     0         
-                            0    0     0         
-                            1    0     0         
-                            3    0     0.3      
-                            5    0     0        
-                            15   0     0       
+                            -15  0     0
+                            -5   0     0
+                            -3   0     -0.3
+                            -1   0     0
+                            0    0     0
+                            1    0     0
+                            3    0     0.3
+                            5    0     0
+                            15   0     0
                         </tableData>
                     </table>
                 </product>
@@ -1687,7 +1725,7 @@
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/bw-ft</property>
-                    <property>fcs/left-aileron-pos-rad</property>
+                    <property>fcs/aileron-pos-rad-avgd</property>
                     <value>-0.016</value>
                     <table>
                         <independentVar>aero/function/total-wing-damage</independentVar>
@@ -1862,15 +1900,6 @@
                 <z>1.0</z>
             </direction>
         </force>
-        <force name="ai-wake" frame="BODY">
-            <location unit="IN">
-                <!-- Center of the main wing leading edge -->
-                <x> -4.7 </x>
-                <y> 0.0 </y>
-                <z> 50.0 </z>
-            </location>
-        </force>
-        <moment name="ai-wake" frame="BODY"/>
     </external_reactions>
 
     <system file="bushkit"/>

@@ -358,6 +358,7 @@
             <function>
                 <product>
                     <property>/fdm/jsbsim/contact/unit[3]/WOW</property>
+                    <property>/fdm/jsbsim/ground/solid</property>
                     <property>/velocities/groundspeed-kt</property>
                 </product>
             </function>
@@ -367,6 +368,7 @@
             <function>
                 <product>
                     <property>/fdm/jsbsim/contact/unit[4]/WOW</property>
+                    <property>/fdm/jsbsim/ground/solid</property>
                     <property>/velocities/groundspeed-kt</property>
                     <eq>
                         <property>/fdm/jsbsim/wing-damage/left-wing</property>
@@ -380,6 +382,7 @@
             <function>
                 <product>
                     <property>/fdm/jsbsim/contact/unit[5]/WOW</property>
+                    <property>/fdm/jsbsim/ground/solid</property>
                     <property>/velocities/groundspeed-kt</property>
                     <eq>
                         <property>/fdm/jsbsim/wing-damage/right-wing</property>
@@ -393,7 +396,8 @@
             <function>
                 <product>
                     <property>/fdm/jsbsim/contact/unit[6]/WOW</property>
-                    <property>/velocities/groundspeed-kt</property>
+                    <property>/gear/gear[0]/rollspeed-ms</property>
+                    <value>1.94384449</value><!-- m/s to knots -->
                 </product>
             </function>
         </fcs_function>
@@ -402,7 +406,8 @@
             <function>
                 <product>
                     <property>/fdm/jsbsim/contact/unit[7]/WOW</property>
-                    <property>/velocities/groundspeed-kt</property>
+                    <property>/gear/gear[1]/rollspeed-ms</property>
+                    <value>1.94384449</value><!-- m/s to knots -->
                 </product>
             </function>
         </fcs_function>
@@ -411,7 +416,8 @@
             <function>
                 <product>
                     <property>/fdm/jsbsim/contact/unit[8]/WOW</property>
-                    <property>/velocities/groundspeed-kt</property>
+                    <property>/gear/gear[2]/rollspeed-ms</property>
+                    <value>1.94384449</value><!-- m/s to knots -->
                 </product>
             </function>
         </fcs_function>

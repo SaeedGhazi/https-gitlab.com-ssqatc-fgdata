@@ -133,10 +133,13 @@ var oil_consumption = maketimer(1.0, func {
     }
 
     else {
+        # if oil consumption is not allowed, the oil level is set to full and pressure and temp factors are set to 1.0
         if (getprop("/controls/engines/active-engine") == 0)
             setprop("/engines/active-engine/oil-level", 7);
         if (getprop("/controls/engines/active-engine") == 1)
             setprop("/engines/active-engine/oil-level", 8);
+        setprop("/engines/active-engine/low-oil-pressure-factor", 1.0);
+        setprop("/engines/active-engine/low-oil-temperature-factor", 1.0);
     }
 });
 
@@ -341,6 +344,11 @@ controls.stepMagnetos = func {
 # key 's' calls to this function when it is pressed DOWN even if I overwrite the binding in the -set.xml file!
 # fun fact: the key UP event can be overwriten!
 controls.startEngine = func(v = 1) {
+    # Only operate in non-walker mode ('s' is also bound to walk-backward)
+    var view_name = getprop("/sim/current-view/name");
+    if (view_name == getprop("/sim/view[110]/name") or view_name == getprop("/sim/view[111]/name")) {
+        return;
+    }
     if (getprop("/engines/active-engine/running"))
     {
         setprop("/controls/switches/starter", 0);

@@ -146,6 +146,32 @@
             <reference-dist>5.0</reference-dist>
             <max-dist>200.0</max-dist>
         </propeller>
+        
+        <gyro>
+            <name>gyro</name>
+            <type>avionics</type>
+            <mode>looped</mode>
+            <path>Sounds/gyro.wav</path>
+            <condition>
+                <and>
+                    <property>/controls/switches/master-avionics</property>
+                    <greater-than>
+                        <property>/systems/electrical/volts</property>
+                        <value>5</value>
+                    </greater-than>
+                </and>
+            </condition>
+            <volume>
+                <factor>0.13</factor>
+            </volume>
+            <position>
+                <x>-0.3660</x>
+                <y>-0.1000</y>
+                <z>-0.0396</z>
+            </position>
+            <reference-dist>0.2</reference-dist>
+            <max-dist>5.0</max-dist>
+        </gyro>
 
         <rumble>
             <name>rumble</name>
@@ -156,6 +182,20 @@
                     <property>gear/gear[0]/wow</property>
                     <property>gear/gear[1]/wow</property>
                     <property>gear/gear[2]/wow</property>
+                </or>
+                <or>
+                    <greater-than>
+                      <property>/gear/gear[0]/rollspeed-ms</property>
+                      <value>5</value>
+                    </greater-than>
+                    <greater-than>
+                      <property>/gear/gear[1]/rollspeed-ms</property>
+                      <value>5</value>
+                    </greater-than>
+                    <greater-than>
+                      <property>/gear/gear[2]/rollspeed-ms</property>
+                      <value>5</value>
+                    </greater-than>
                 </or>
             </condition>
             <position>
@@ -180,15 +220,31 @@
             <mode>looped</mode>
             <path>Sounds/scratch.wav</path>
             <condition>
-                <or>
-                    <!-- Broken gear touching the ground -->
-                    <property>/fdm/jsbsim/contact/unit[6]/WOW</property>
-                    <property>/fdm/jsbsim/contact/unit[7]/WOW</property>
-                    <property>/fdm/jsbsim/contact/unit[8]/WOW</property>
+                <and>
+                    <or>
+                        <!-- Broken gear touching the ground -->
+                        <property>/fdm/jsbsim/contact/unit[6]/WOW</property>
+                        <property>/fdm/jsbsim/contact/unit[7]/WOW</property>
+                        <property>/fdm/jsbsim/contact/unit[8]/WOW</property>
 
-                    <!-- Tail strike -->
-                    <property>/fdm/jsbsim/contact/unit[3]/WOW</property>
-                </or>
+                        <!-- Tail strike -->
+                        <property>/fdm/jsbsim/contact/unit[3]/WOW</property>
+                    </or>
+                    <or>
+                        <greater-than>
+                            <property>/gear/gear[0]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                        <greater-than>
+                            <property>/gear/gear[1]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                        <greater-than>
+                            <property>/gear/gear[2]/rollspeed-ms</property>
+                            <value>5</value>
+                        </greater-than>
+                    </or>
+                </and>
             </condition>
             <position>
                 <x>0.5</x>

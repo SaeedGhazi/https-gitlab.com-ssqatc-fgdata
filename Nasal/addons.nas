@@ -1,9 +1,10 @@
 ##
 # Initialize addons configured with --addon=foobar command line switch:
 # - get the list of registered add-ons
-# - load the main.nas file of each add-on into namespace __addon[ADDON_ID]__
-# - call function main() from every such main.nas with the add-on ghost as
-#   argument (an addons.Addon instance).
+# - load the addon-main.nas file of each add-on into namespace
+#   __addon[ADDON_ID]__
+# - call function main() from every such addon-main.nas with the add-on ghost
+#   as argument (an addons.Addon instance).
 
 # Example:
 #
@@ -11,11 +12,12 @@
 #
 # - AddonManager.cxx parses /foo/bar/baz/addon-metadata.xml
 # - AddonManager.cxx creates prop nodes under /addons containing add-on metadata
-# - AddonManager.cxx loads /foo/bar/baz/config.xml into the Property Tree
+# - AddonManager.cxx loads /foo/bar/baz/addon-config.xml into the Property Tree
 # - AddonManager.cxx adds /foo/bar/baz to the list of aircraft paths (to get
 #   permissions to read files from there)
-# - this script loads /foo/bar/baz/main.nas into namespace __addon[ADDON_ID]__
-# - this script calls main(addonGhost) from /foo/bar/baz/main.nas.
+# - this script loads /foo/bar/baz/addon-main.nas into namespace
+#   __addon[ADDON_ID]__
+# - this script calls main(addonGhost) from /foo/bar/baz/addon-main.nas.
 # - the add-on ghost can be used to retrieve most of the add-on metadata, for
 #   instance:
 #      addonGhost.id                   the add-on identifier
@@ -31,7 +33,7 @@ var id = _setlistener("/sim/signals/fdm-initialized", func {
     removelistener(id);
 
     foreach (var addon; addons.registeredAddons()) {
-      var main_nas = addon.basePath ~ "/main.nas";
+      var main_nas = addon.basePath ~ "/addon-main.nas";
       var namespace = "__addon" ~ "[" ~ addon.id ~ "]__";
       logprint(5, "Initializing addon '" ~ addon.name ~
                   "' version " ~ addon.version.str() ~ " from " ~ main_nas ~

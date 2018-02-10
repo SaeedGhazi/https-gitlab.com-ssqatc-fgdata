@@ -35,18 +35,18 @@ add-on directory. Such a directory, when used as the argument of
      details below).
 
   3) The add-on directory may contain a PropertyList file called
-     config.xml, in which case it will be loaded into the Property Tree
-     at FlightGear startup, as if it were passed to the --config fgfs
-     option.
+     addon-config.xml, in which case it will be loaded into the Property
+     Tree at FlightGear startup, as if it were passed to the --config
+     fgfs option.
 
-  4) The add-on directory must contain a Nasal file called main.nas.
-     This file will be loaded at startup too, and its main() function
-     run in the namespace __addon[ADDON_ID]__, where ADDON_ID is the
-     add-on identifier specified in the addon-metadata.xml file. The
-     main() function is passed one argument: the addons.Addon object
-     (a Nasal ghost, see below) corresponding to the add-on being
-     loaded. This operation is done by $FG_ROOT/Nasal/addons.nas at the
-     time of this writing.
+  4) The add-on directory must contain a Nasal file called
+     addon-main.nas. This file will be loaded at startup too, and its
+     main() function run in the namespace __addon[ADDON_ID]__, where
+     ADDON_ID is the add-on identifier specified in the
+     addon-metadata.xml file. The main() function is passed one
+     argument: the addons.Addon object (a Nasal ghost, see below)
+     corresponding to the add-on being loaded. This operation is done by
+     $FG_ROOT/Nasal/addons.nas at the time of this writing.
 
 Also, the Property Tree is populated (under /addons) with information
 about registered add-ons. More details will be given below.
@@ -87,7 +87,7 @@ add-on loading
 
   The following sequence of actions:
 
-    a) loading an add-on's main.nas file in the namespace
+    a) loading an add-on's addon-main.nas file in the namespace
        __addon[ADDON_ID]__
     b) calling its main() function
 
@@ -484,10 +484,11 @@ Note: if C++ code needs to use the add-on base path, better use
 AddonManager::registerAddon() fails with a specific exception if the
 running FlightGear instance doesn't match the min-FG-version and
 max-FG-version requirements declared in the addon-metadata.xml file, as
-well as in the obvious other cases (config.xml or addon-metadata.xml not
-found, invalid syntax in any of these files, etc.). The code in
-options.cxx (fgOptAddon()) catches such exceptions and displays the
-appropriate error message with SG_LOG() and fatalMessageBoxThenExit().
+well as in the obvious other cases (required files such as
+addon-metadata.xml not found, invalid syntax in such files, etc.). The
+code in options.cxx (fgOptAddon()) catches such exceptions and displays
+the appropriate error message with SG_LOG() and
+fatalMessageBoxThenExit().
 
 
 7. Nasal API

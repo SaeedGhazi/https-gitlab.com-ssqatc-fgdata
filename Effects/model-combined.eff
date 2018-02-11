@@ -194,6 +194,7 @@ please see Docs/README.model-combined.eff for documentation
 		<cloudpos20_y><use>/local-weather/cloud-shadows/cloudpos-y[19]</use></cloudpos20_y>
 		<cloud_shadow_flag><use>/local-weather/cloud-shadows/cloud-shadow-flag</use></cloud_shadow_flag>
 		<rembrandt><use>/sim/rendering/rembrandt/enabled</use></rembrandt>
+		<building-flag type="int">0</building-flag>
 		<!-- 		END fog include -->
 	</parameters>
 
@@ -1260,6 +1261,12 @@ please see Docs/README.model-combined.eff for documentation
 	 			  <type>int</type>
 				  <value><use>darkmap-enabled</use></value>
      			   </uniform>
+			   <uniform>
+				  <name>building_flag</name>
+	 			  <type>int</type>
+				  <value><use>building-flag</use></value>
+     			   </uniform>
+
 
 		  <!-- 			END fog include -->
 		  <uniform>

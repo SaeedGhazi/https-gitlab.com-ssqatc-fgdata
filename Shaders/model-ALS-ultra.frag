@@ -43,6 +43,7 @@ uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
 uniform int snow_enabled;
+uniform int building_flag;
 
 uniform float amb_correction;
 uniform float dirt_b_factor;
@@ -156,7 +157,16 @@ void main (void)
 
     /// BEGIN geometry for light
 
-    vec3 up = (osg_ViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
+    vec3 up;
+ 
+    if (building_flag == 1) // osg_ViewMatrix contains the transforms of animations, but doesn't work for random buildings
+	{
+	 up = (gl_ModelViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
+	}
+   else
+	{	
+	 up = (osg_ViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
+	}
     //vec4 worldPos3D = (osg_ViewMatrixInverse * vec4 (0.0,0.0,0.0, 1.0));
     //worldPos3D.a = 0.0;
     //vec3 up = (osg_ViewMatrix * worldPos3D).xyz;

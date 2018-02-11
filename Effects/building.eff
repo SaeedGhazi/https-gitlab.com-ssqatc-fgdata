@@ -106,6 +106,7 @@
 		<fogstructure><use>/environment/fog-structure</use></fogstructure>
     		<delta_T><use>/environment/surface/delta-T-structure</use></delta_T>
 		<!-- 	END fog include -->
+		<building-flag type="int">1</building-flag>
   </parameters>
   <!-- Atmospheric scattering technique with model shader-->
 

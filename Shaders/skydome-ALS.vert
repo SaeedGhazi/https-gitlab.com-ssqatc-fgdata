@@ -287,7 +287,10 @@ void main()
      float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator -sqrt(2.0 * EarthRadius * terrain_alt)); 
      cphi = dot(normalize(relVector), normalize(lightHorizon));
      float mie_angle = (0.5 *  dot(normalize(relVector), normalize(lightFull)) ) + 0.5;
-     hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+
+     float mie_postfactor = clamp(mie_magnitude * (0.5 - 0.5 * mie_angle),0.001,1.0);
+
+     hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_postfactor ) ); 
 
 
     // Transform

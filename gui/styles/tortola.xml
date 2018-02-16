@@ -93,14 +93,14 @@
             <red type="float">0.21</red>
             <green type="float">0.212</green>
             <blue type="float">0.221</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">0.95</alpha>
         </background>
 
         <foreground>
             <red type="float">0.9</red>
             <green type="float">0.9</green>
             <blue type="float">0.9</blue>
-            <alpha type="float">0.9</alpha>
+            <alpha type="float">1.0</alpha>
         </foreground>
 
         <highlight>
@@ -114,15 +114,15 @@
             <red type="float">0.9</red>
             <green type="float">0.9</green>
             <blue type="float">0.9</blue>
-            <alpha type="float">0.9</alpha>
+            <alpha type="float">1.0</alpha>
         </label>
 
-        <legend>
+        <!--<legend>
             <red type="float">0.0</red>
             <green type="float">0.0</green>
             <blue type="float">0.0</blue>
             <alpha type="float">1.0</alpha>
-        </legend>
+        </legend>-->
 
         <misc>
             <red type="float">0.0</red>
@@ -156,42 +156,42 @@
             <red type="float">0.31</red>
             <green type="float">0.312</green>
             <blue type="float">0.321</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">1.0</alpha>
         </combo-background>
 
         <editfield>
             <red type="float">0.31</red>
             <green type="float">0.312</green>
             <blue type="float">0.321</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">1.0</alpha>
         </editfield>
 
         <combo-editfield>
             <red type="float">0.31</red>
             <green type="float">0.312</green>
             <blue type="float">0.321</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">1.0</alpha>
         </combo-editfield>
 
         <select-editfield>
             <red type="float">0.31</red>
             <green type="float">0.312</green>
             <blue type="float">0.321</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">1.0</alpha>
         </select-editfield>
 
         <textbox-editable>
             <red type="float">0.31</red>
             <green type="float">0.312</green>
             <blue type="float">0.321</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">1.0</alpha>
         </textbox-editable>
 
         <text-background>
             <red type="float">0.31</red>
             <green type="float">0.312</green>
             <blue type="float">0.321</blue>
-            <alpha type="float">0.8</alpha>
+            <alpha type="float">1.0</alpha>
         </text-background>
 
         <checkbox-highlight>

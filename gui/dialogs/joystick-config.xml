@@ -2,7 +2,8 @@
 
 <PropertyList>
 	<nasal>
-		<open><![CDATA[
+		<open>
+    <![CDATA[
 
 		
 var dlgRoot = cmdarg();
@@ -60,8 +61,9 @@ if (size(joysticks) == 0) {
     t.getNode("halign", 1).setValue("right");
     t.getNode("live", 1).setValue(1);
 
-    # Binding
-    t = table.getChild("combo", i, 1);
+    # Axis Binding. Changed for 2018.1 to have a button rather than a dropdown as this
+    # allows us to have a nicer UI and to keep compatible with the old engine bindings 
+    t = table.getChild("button", i, 1);
     t.getNode("name", 1).setValue("axis" ~ i ~ "binding");
     t.getNode("row", 1).setValue(i + 1);
     t.getNode("col", 1).setValue("2");
@@ -69,18 +71,16 @@ if (size(joysticks) == 0) {
     t.getNode("pref-width", 1).setValue("150");
     t.getNode("live", 1).setValue(1);
     t.getNode("property", 1).setValue(DIALOG_ROOT ~ "/axis[" ~ i ~ "]/binding");
+    t.getNode("legend", 1).setValue(getprop(DIALOG_ROOT ~ "/axis[" ~ i ~ "]/binding"));
     
-    forindex (var idx; joystick.axisBindings) {
-      t.getChild("value", idx, 1).setValue(joystick.axisBindings[idx].getName());
-    }
-
     var b = t.getChild("binding", 0, 1);
-    b.getNode("command", 1).setValue("dialog-apply");
-    b.getNode("object-name", 1).setValue("axis" ~ i ~ "binding");
+    b.getNode("command", 1).setValue("property-assign");
+    b.getNode("property", 1).setValue("/sim/gui/dialogs/joystick-config/current-axis");
+    b.getNode("value", 1).setValue(i);  
    
     b = t.getChild("binding", 1, 1);
-    b.getNode("command", 1).setValue("nasal");
-    b.getNode("script", 1).setValue("updateConfig();");
+    b.getNode("command", 1).setValue("dialog-show");
+    b.getNode("dialog-name", 1).setValue("button-axis-config");
     
     # Inverted
     t = table.getChild("checkbox", i, 1);

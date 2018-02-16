@@ -65,6 +65,35 @@ var throttleMouse = func {
     }
 }
 
+setprop("/controls/engines/throttle-all",0);
+setprop("/controls/engines/mixture-all",0);
+setprop("/controls/engines/propeller-pitch-all",0);
+
+setForAllEnginesProperty= func(type){
+    var engineRoot = props.globals.getNode("/controls/engines");
+    var v = getprop("/controls/engines/"~type~"-all");
+    v = -v;
+    v = (v+1)*0.5; # scale from -1..1 to 0..1
+    foreach( var c;  engineRoot.getChildren() ){
+        if (c.getName() =="engine"){
+            var n = c.getNode(type);
+            if(n!=nil) {
+                n.setValue(v);
+            }
+        }
+    }
+}
+
+_setlistener("/controls/engines/throttle-all", func{
+    setForAllEnginesProperty("throttle");
+},0,0);
+_setlistener("/controls/engines/mixture-all", func{
+    setForAllEnginesProperty("mixture");
+},0,0);
+_setlistener("/controls/engines/propeller-pitch-all", func{
+    setForAllEnginesProperty("propeller-pitch");
+},0,0);
+
 # Joystick axis handlers (use cmdarg).  Shouldn't be called from
 # other contexts.  A non-null argument reverses the axis direction.
 var axisHandler = func(pre, post) {
@@ -232,7 +261,23 @@ var slewProp = func(prop, delta) {
 # range of a trim axis is 2.0.  Should probably read this out of a
 # property...
 var TRIM_RATE = 0.045;
-
+var setElevatorTrimToPosition_listener = nil;
+setElevatorTrimToPosition = func() {
+    if (setElevatorTrimToPosition_listener != nil) {
+        removelistener(setElevatorTrimToPosition_listener);
+        setElevatorTrimToPosition_listener = nil;
+    }
+    var nv =  getprop("/controls/flight/elevator")+getprop("/controls/flight/elevator-trim");
+    var lv = getprop("/controls/flight/elevator");
+    var setElevatorTrimToPosition_listener = setlistener("/controls/flight/elevator", func(v){
+        if (v.getValue() != lv) {
+            setprop("controls/flight/elevator",0);
+            removelistener(setElevatorTrimToPosition_listener);
+            print("set trim to ",nv);
+            setprop("/controls/flight/elevator-trim", nv);
+        }
+    } , 0, 0);
+};
 ##
 # Handlers.  These are suitable for binding to repeatable button press
 # events.  They are *not* good for binding to the keyboard, since (at
@@ -394,14 +439,26 @@ var elevatorTrimAxis = func { elevatorTrim(cmdarg().getNode("setting").getValue(
 var aileronTrimAxis = func { aileronTrim(cmdarg().getNode("setting").getValue()); }
 var rudderTrimAxis = func { rudderTrim(cmdarg().getNode("setting").getValue()); }
 
+#
+# to avoid clash with "gearToggle"; this will only toggle when
+# given a parameter of 1; as the controls button binding will pass 0 when the button is pressed and
+# 1 when the button is released.
+var gearTogglePosition = func(v) {
+    if (v){
+        if (getprop("/controls/gear/gear-down"))
+          setprop("/controls/gear/gear-down", 0);
+        else
+          setprop("/controls/gear/gear-down", 1);
+    }
+}
 ##
 # Gear handling.
-#
+# - parameter v is either 1 (down), -1 up (retracted)
 var gearDown = func(v) {
     if (v < 0) {
-      setprop("/controls/gear/gear-down", 0);
+        setprop("/controls/gear/gear-down", 0);
     } elsif (v > 0) {
-      setprop("/controls/gear/gear-down", 1);
+        setprop("/controls/gear/gear-down", 1);
     }
 }
 var gearToggle = func { gearDown(getprop("/controls/gear/gear-down") > 0 ? -1 : 1); }
@@ -420,6 +477,62 @@ var applyParkingBrake = func(v) {
     var p = "/controls/gear/brake-parking";
     setprop(p, var i = !getprop(p));
     return i;
+}
+var parkingBrakeToggle = func(v) {
+    if (v){
+        if (getprop("/controls/gear/brake-parking"))
+          setprop("/controls/gear/brake-parking", 0);
+        else
+          setprop("/controls/gear/brake-parking", 1);
+    }
+}
+var toggleNWS = func(v) {
+    if (v){
+        if (getprop("/controls/gear/nose-wheel-steering"))
+          setprop("/controls/gear/nose-wheel-steering", 0);
+        else
+          setprop("/controls/gear/nose-wheel-steering", 1);
+    }
+}
+
+var weAppliedSpeedBrake = 99;
+var weAppliedWheelBrake = 99;
+
+#
+# allows one binding to do airbrakes and wheel brakes
+var applyApplicableBrakes = func(v, which = 0)  {
+	var wow = getprop ("/gear/gear[0]/wow") 
+           or getprop ("/gear/gear[1]/wow") 
+           or getprop ("/gear/gear[2]/wow") 
+           or getprop ("/gear/gear[3]/wow") 
+           or getprop ("/gear/gear[4]/wow")
+           or getprop ("/gear/gear[5]/wow")
+           or getprop ("/gear/gear[6]/wow")
+             ;
+
+    if (wow) {
+        if (!v and weAppliedSpeedBrake != 99) {
+            setprop("controls/flight/speedbrake", 0);
+            weAppliedSpeedBrake=0;
+        }
+        if (which <= 0) { 
+            interpolate("/controls/gear/brake-left", v, controls.fullBrakeTime);
+        }
+        if (which >= 0) { 
+            interpolate("/controls/gear/brake-right", v, controls.fullBrakeTime); 
+        }
+        weAppliedWheelBrake = which;
+    } 
+    else {
+        if (!v and weAppliedWheelBrake != 99) {
+            if (weAppliedWheelBrake <= 0) { interpolate("/controls/gear/brake-left", 0, controls.fullBrakeTime); }
+            if (weAppliedWheelBrake >= 0) { interpolate("/controls/gear/brake-right", 0, controls.fullBrakeTime); }
+            weAppliedWheelBrake=0;
+        }
+        
+        weAppliedSpeedBrake=which;
+        setprop("controls/flight/speedbrake", v);
+    }
 }
 
 # 1: Deploy, -1: Release

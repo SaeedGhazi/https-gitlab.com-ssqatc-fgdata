@@ -205,9 +205,22 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
-
     <button>
       <row>5</row>
+      <col>1</col>
+      <halign>fill</halign>
+      <legend>Gear Toggle</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Gear Toggle");
+        </script>
+      </binding>
+    </button>
+
+
+    <button>
+      <row>6</row>
       <col>1</col>
       <halign>fill</halign>
       <legend>Spoilers Retract</legend>
@@ -220,7 +233,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>6</row>
+      <row>7</row>
       <col>1</col>
       <halign>fill</halign>
       <legend>Spoilers Deploy</legend>
@@ -339,6 +352,32 @@ var assignButton = func(cmd) {
       <row>2</row>
       <col>3</col>
       <halign>fill</halign>
+      <legend>Brakes (air/wheel)</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Brakes (air/wheel)");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>2</row>
+      <col>3</col>
+      <halign>fill</halign>
+      <legend>Parking brakes</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Parking brakes");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>3</row>
+      <col>3</col>
+      <halign>fill</halign>
       <legend>FGCom PTT</legend>
       <binding>
         <command>nasal</command>
@@ -349,7 +388,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>3</row>
+      <row>4</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>Trigger</legend>
@@ -362,7 +401,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>4</row>
+      <row>5</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>Custom</legend>
@@ -375,14 +414,14 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>5</row>
+      <row>6</row>
       <col>3</col>
       <halign>fill</halign>
-      <legend>None</legend>
+      <legend>NWS toggle</legend>
       <binding>
         <command>nasal</command>
         <script>
-          assignButton("None");
+          assignButton("NWS toggle");
         </script>
       </binding>
     </button>
@@ -497,6 +536,133 @@ var assignButton = func(cmd) {
       </binding>
     </button>
 
+    <text>
+      <row>0</row>
+      <col>5</col>
+      <label>Military</label>
+    </text>
+
+
+    <button>
+      <row>1</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Pickle</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Pickle");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>2</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Target next</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Target next");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>3</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Target previous</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Target previous");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>4</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Weapon next</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Weapon next");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>5</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Weapon previous</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Weapon previous");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>6</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Azimuth left</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Azimuth left");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>7</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Azimuth right</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Azimuth right");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>8</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Elevation up</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Elevation up");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>9</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Elevation down</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Elevation down");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>10</row>
+      <col>5</col>
+      <halign>fill</halign>
+      <legend>Missile Reject</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Missile Reject");
+        </script>
+      </binding>
+    </button>
   </group>
 
   <group>
@@ -504,6 +670,16 @@ var assignButton = func(cmd) {
       <stretch>true</stretch>
     </empty>
     <layout>hbox</layout>
+
+    <button>
+      <legend>Remove assignment</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("None");
+        </script>
+      </binding>
+    </button>
 
     <button>
       <legend>Close</legend>

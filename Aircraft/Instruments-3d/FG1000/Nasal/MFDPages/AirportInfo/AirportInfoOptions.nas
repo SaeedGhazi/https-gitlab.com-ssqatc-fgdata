@@ -34,7 +34,7 @@ var AirportInfoOptions =
 
   loadOptions : func() {
     me.clearOptions();
-    me.Options.APS = {};
+    me.Options.RWY = {};
   },
 
   clearOptions : func() {

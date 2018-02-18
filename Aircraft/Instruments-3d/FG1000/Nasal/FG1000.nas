@@ -36,7 +36,7 @@ var FG1000 = {
 _instance : nil,
 
 # Factory method
-getInstance : func(EIS_Class = nil, EIS_SVG = nil) {
+getOrCreateInstance : func(EIS_Class = nil, EIS_SVG = nil) {
   if (FG1000._instance == nil) {
     FG1000._instance = FG1000.new(EIS_Class, EIS_SVG);
   }
@@ -87,8 +87,6 @@ addMFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
 
   if (index == nil) {
     index = size(keys(me.displays));
-    debug.dump(keys(me.displays));
-    print("No index passed.  Defaulting to " ~ index);
   } else if (me.displays[index] != nil) {
     print("FG1000 Index " ~ index ~ " already exists!");
     return

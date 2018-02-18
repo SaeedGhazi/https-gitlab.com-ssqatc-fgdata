@@ -23,7 +23,8 @@ piston engine.
 You need to load it as follows:
 
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
-var interfaceController = fg1000.GenericInterfaceController.getInstance();
+io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000");
+var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
 interfaceController.start();
 
 You may want to create your own version depending on what properties you are
@@ -59,4 +60,4 @@ fg1000system.display(1);
 fg1000system.display(2);
 
 #  Display a GUI version of device 1 at 50% scale.
-#fg1000system.displayGUI(1, 0.5);
+#fg1000system.displayGUI(1, 0.5)

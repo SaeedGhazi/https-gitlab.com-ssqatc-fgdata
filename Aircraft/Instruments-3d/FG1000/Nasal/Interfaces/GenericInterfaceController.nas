@@ -32,7 +32,7 @@ var GenericInterfaceController = {
   _instance : nil,
 
   # Factory method
-  getInstance : func() {
+  getOrCreateInstance : func() {
     if (GenericInterfaceController._instance == nil) {
       GenericInterfaceController._instance = GenericInterfaceController.new();
     }

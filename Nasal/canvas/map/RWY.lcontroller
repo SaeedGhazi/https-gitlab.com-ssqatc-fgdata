@@ -8,12 +8,8 @@ SymbolLayer.add(name, {
 	parents: [MultiSymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
-	df_style: {
-		surface_color: canvas.SURFACECOLORS
-	},
-	df_options: { # default configuration options
-		disable_position: 1,
-	},
+	df_options: {},
+	df_style: {},
 });
 var a_instance = nil;
 var new = func(layer) {
@@ -28,13 +24,11 @@ var new = func(layer) {
 	return m;
 };
 var del = func() {
-	#print(name,".lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
 
 var searchCmd = func {
-	#print("Running query:", name);
 	var range = me.map.getRange();
 	if (range == nil) return;
 	return positioned.findAirportsWithinRange(me.map.getPosCoord(), range);

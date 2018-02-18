@@ -33,8 +33,23 @@ var AirportInfoStyles =
   },
 
   loadStyles : func() {
-    me. clearStyles();
-    me.Styles.XXX = {};
+    me.clearStyles();
+    me.Styles.RWY = {};
+    me.Styles.RWY.text_color = [0,0,0,1]; # Black text ...
+    me.Styles.RWY.text_bgcolor = [1,1,1,1]; # ... on a white background
+    me.Styles.RWY.text_mode = canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX;
+    me.Styles.RWY.text_padding = 1;
+    me.Styles.RWY.text_alignment = 'center-center';
+    me.Styles.RWY.text_size = 14;
+    me.Styles.RWY.show_labels= 1;
+
+    me.Styles.APT = {};
+    me.Styles.APT.scale_factor = 0.4; # 40% (applied to whole group)
+    me.Styles.APT.line_width = 3.0;
+    me.Styles.APT.color_default = [0,0.6,0.85];  #rgb
+    me.Styles.APT.label_font_color = me.Styles.APT.color_default;
+    me.Styles.APT.label_font_size=28;
+
   },
 
   clearStyles : func() {

@@ -16,7 +16,7 @@ var new = func(layer) {
 		layer: layer,
 		map: layer.map,
 		listeners: [],
-		query_type:'ndb',
+		query_type:'vor',
 	};
 	m.addVisibilityListener();
 

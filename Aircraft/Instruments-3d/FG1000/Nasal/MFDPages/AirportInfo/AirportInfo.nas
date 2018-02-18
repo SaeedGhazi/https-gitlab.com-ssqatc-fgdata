@@ -92,7 +92,7 @@ var AirportInfo =
     );
 
     var r = func(name,vis=1,zindex=nil) return caller(0)[0];
-    foreach(var type; [r('TAXI'),r('RWY')] ) {
+    foreach(var type; [r('TAXI'),r('RWY'),r('APT')] ) {
         obj.AirportChart.addLayer(canvas.SymbolLayer,
                                type.name,
                                4,

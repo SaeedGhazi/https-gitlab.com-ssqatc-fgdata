@@ -12,11 +12,20 @@ Contents
 --------
 
 1. Terminology
+
 2. The addon-metadata.xml file
-3. Add-on metadata in the Property Tree
+
+3. Add-ons and the Property Tree
+
+   a) Add-on metadata
+   b) Subtree reserved for add-on developers
+
 4. Resources under the add-on directory
+
 5. How to run code after an add-on is loaded
+
 6. Overview of the C++ API
+
 7. Nasal API
 
 
@@ -354,8 +363,11 @@ Other fields
 The other nodes of 'addon-metadata.xml' should be self-explanatory. :-)
 
 
-3. Add-on metadata in the Property Tree
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3. Add-ons and the Property Tree
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+a) Add-on metadata
+   ^^^^^^^^^^^^^^^
 
 The most important metadata for each registered add-on is made
 accessible in the Property Tree under /addons/by-id/ADDON_ID and the
@@ -373,6 +385,29 @@ loading phase is complete.
 
 There are also /addons/addon[i]/path nodes where i is 0 for the first
 registered add-on, 1 for the second one, etc.
+
+
+b) Subtree reserved for add-on developers
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For each add-on, the subtree of the global Property Tree starting at
+/addons/by-id/ADDON_ID/addon-devel is reserved for the specific needs of
+the add-on, where ADDON_ID stands for the add-on identifier. For
+instance, developers of the add-on whose identifier is
+user.joe.FlyingTurtle can store whatever they want under
+/addons/by-id/user.joe.FlyingTurtle/addon-devel with the assurance that
+doing this won't clash with properties used by the add-on framework.
+
+Example:
+
+  /addons/by-id/user.joe.FlyingTurtle/addon-devel/some/property and
+  /addons/by-id/user.joe.FlyingTurtle/addon-devel/other/property
+
+  could be two properties used for the specific needs of the
+  add-on whose identifier is user.joe.FlyingTurtle.
+
+Add-on developers should *not* use other places in the /addons subtree
+of the Property Tree for their custom properties.
 
 
 4. Resources under the add-on directory

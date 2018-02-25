@@ -121,7 +121,7 @@ gui.Widget = {
       me._view = nil;
     }
 
-    if( me._focused )
+    if( me._focused and me.getCanvas() )
       me.getCanvas()._focused_widget = nil;
   },
 # protected:

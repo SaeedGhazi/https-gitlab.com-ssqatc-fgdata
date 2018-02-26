@@ -63,7 +63,7 @@ var EISController =
       transmitter = emesary.GlobalTransmitter;
 
     if (me._recipient == nil){
-      me._recipient = emesary.Recipient.new("AirportInfoController_" ~ me._page.device.designation);
+      me._recipient = emesary.Recipient.new("EISController_" ~ me._page.device.designation);
       var pfd_obj = me._page.device;
       var controller = me;
       me._recipient.Receive = func(notification)

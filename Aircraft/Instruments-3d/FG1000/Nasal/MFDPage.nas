@@ -40,8 +40,9 @@ new : func (mfd, myCanvas, device, SVGGroup, pageName, title)
     _group : myCanvas.createGroup(pageName ~ "Layer"),
     _SVGGroup : SVGGroup,
     parents : [ MFDPage, device.addPage(title, pageName ~ "Group") ],
-    _symbols : {},
+    _textElements : {},
     _controller : nil,
+    _elements : {},
   };
 
   obj.device = device;
@@ -60,32 +61,64 @@ new : func (mfd, myCanvas, device, SVGGroup, pageName, title)
   return obj;
 },
 
+addElement : func(e) {
+  if (me._elements[e] == nil) {
+    var element = me._SVGGroup.getElementById(me.pageName ~ e);
+    if (element != nil) {
+      me._elements[e] = element;
+    } else {
+      die("Unable to find element " ~ me.pageName ~ e);
+    }
+  } else {
+    die("Element already exists: "~ me.pageName ~ e);
+  }
+},
+
+addElements : func(elements) {
+  foreach (var e; elements) {
+    me.addElement(e);
+  }
+},
+
+getElement : func(e) {
+  if (me._elements[e] == nil) me.addElement(e);
+  return me._elements[e];
+},
+
 addTextElements : func(symbols) {
   foreach (var s; symbols) {
-    me._symbols[s] = PFD.TextElement.new(me.pageName, me._SVGGroup, s);
+    me._textElements[s] = PFD.TextElement.new(me.pageName, me._SVGGroup, s);
+  }
+},
+
+addTextElement : func(e) {
+  if (me._textElements[e] == nil) {
+    me._textElements[e] = PFD.TextElement.new(me.pageName, me._SVGGroup, e);
+  } else {
+    die("addTextElement element already exists: "~ me.pageName ~ e);
   }
 },
 
 getTextElement : func(symbolName) {
-  return me._symbols[symbolName];
+  return me._textElements[symbolName];
 },
 
 highlightTextElement : func(symbolName) {
-  me._symbols[symbolName].highlightElement();
+  me._textElements[symbolName].highlightElement();
 },
 
 unhighlightTextElement : func(symbolName) {
-  me._symbols[symbolName].unhighlightElement();
+  me._textElements[symbolName].unhighlightElement();
 },
 
 getTextValue : func(symbolName) {
-  var sym = me._symbols[symbolName];
+  var sym = me._textElements[symbolName];
   assert(sym != nil, "Unknown text element " ~ symbolName ~ " (check your addTextElements call?)");
   return sym.getValue();
 },
 
 setTextElement : func(symbolName, value) {
-  var sym = me._symbols[symbolName];
+  var sym = me._textElements[symbolName];
   assert(sym != nil, "Unknown text element " ~ symbolName ~ " (check your addTextElements call?)");
   if (value == nil ) value = "";
   sym.setValue(value);

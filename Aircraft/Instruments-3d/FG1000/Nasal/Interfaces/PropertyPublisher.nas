@@ -35,7 +35,11 @@ var PropMap = {
 
   getName : func() { return me._name; },
   getPropPath : func() { return me._prop.getPath(); },
-  getValue : func() { return me._prop.getValue(); },
+  getValue : func() {
+    var val = me._prop.getValue();
+    if (val == nil) val = 0;
+    return val;
+  },
   getProp: func() { return me._prop; },
 };
 

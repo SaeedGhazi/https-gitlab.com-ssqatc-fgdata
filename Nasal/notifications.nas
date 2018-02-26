@@ -61,7 +61,7 @@ var PFDEventNotification_Id = 20;
 #
 # That's all that is required to ship properties between multiplayer modules via emesary.
 # property /sim/multiplay/transmit-filter-property-base can be set to 1 to turn off all of the standard properties and only send generics.
-# this will give a packet size of 280 bytes; leaving lots of space for notifications. 
+# this will give a packet size of 280 bytes; leaving lots of space for notifications.
 # The F-14 packet size is around 53 bytes on 2017.2 compared to over 1100 bytes with the traditional method.
 # property /sim/multiplay/transmit-filter-property-base can be set to a number greater than 1 (e.g. 12000) to only transmit properties
 # where the ID is greater than the value in the property. This can further reduce packet size by only transmitting the emesary bridge data
@@ -558,7 +558,7 @@ var PFDEventNotification =
     NavComData : 6,     #event parameter contains a hash of updated Nav/Com settings
     NavData : 7,        #event parameter contrains a single { Id: , Value: } tuple requesting a particular type of NavData
     FMSData : 8,        #event parameter containing a hash of updated GPS/FMS information (track, ground-speed, waypoint legs etc.)
-    ADCData : 8,        #event parameter containing a hash of updated Air Data Computer information (track, ground-speed etc.)
+    ADCData : 9,        #event parameter containing a hash of updated Air Data Computer information (track, ground-speed etc.)
 
     DefaultType : "PFDEventNotification",
 

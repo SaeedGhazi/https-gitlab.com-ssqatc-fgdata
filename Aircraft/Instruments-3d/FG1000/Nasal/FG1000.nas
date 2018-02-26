@@ -28,6 +28,7 @@ var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal
 io.load_nasal(nasal_dir ~ '/ConfigStore.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFDPage.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFDPageController.nas', "fg1000");
+io.load_nasal(nasal_dir ~ '/PFD.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFD.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/GUI.nas', "fg1000");
 
@@ -101,10 +102,35 @@ addMFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
           });
   }
 
-  var mfd = fg1000.MFD.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
+  var mfd = fg1000.MFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
   me.displays[index] = mfd;
   return index;
 },
+
+# Add a PFD, optionally setting the index. Returns the index of the PFD.
+addPFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
+
+  if (index == nil) {
+    index = size(keys(me.displays));
+  } else if (me.displays[index] != nil) {
+    print("FG1000 Index " ~ index ~ " already exists!");
+    return
+  }
+
+  if (targetcanvas == nil) {
+    targetcanvas = canvas.new({
+            "name" : "PFD Canvas",
+            "size" : [1024, 768],
+            "view" : [1024, 768],
+            "mipmapping": 0,
+          });
+  }
+
+  var pfd = fg1000.PFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
+  me.displays[index] = pfd;
+  return index;
+},
+
 
 display : func(index, target_object=nil) {
   if (me.displays[index] == nil) {

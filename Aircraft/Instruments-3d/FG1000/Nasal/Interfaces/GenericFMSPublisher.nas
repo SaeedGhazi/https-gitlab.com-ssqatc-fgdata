@@ -26,6 +26,9 @@ var GenericFMSPublisher =
       ],
     };
 
+    obj.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
+    obj.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");
+
     obj.addPropMap("FMSLegBearing", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
     obj.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
     obj.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/indicated-track-magnetic-deg");
@@ -33,6 +36,9 @@ var GenericFMSPublisher =
     obj.addPropMap("FMSLegTrack", "/instrumentation/gps/indicated-track-magnetic-deg");
     obj.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt");
     obj.addPropMap("FMSWayPointCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
+
+    obj.addPropMap("FMSNav1From", "/instrumentation/nav/from-flag");
+    obj.addPropMap("FMSNav2From", "/instrumentation/nav[1]/from-flag");
 
     return obj;
   },

@@ -1,0 +1,574 @@
+# Copyright 2018 Stuart Buchanan
+# This file is part of FlightGear.
+#
+# Foobar is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# FlightGear is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
+#
+# PFDInstruments
+var PFDInstruments =
+{
+
+  COLORS : {
+      green : [0, 1, 0],
+      white : [1, 1, 1],
+      black : [0, 0, 0],
+      lightblue : [0, 1, 1],
+      darkblue : [0, 0, 1],
+      red : [1, 0, 0],
+      magenta : [1, 0, 1],
+  },
+
+  new : func (mfd, myCanvas, device, svg)
+  {
+    var obj = {
+      parents : [
+        PFDInstruments,
+        MFDPage.new(mfd, myCanvas, device, svg, "PFDInstruments", "PFD Instruments")
+      ],
+
+      _ias_already_exceeded : 0,
+      _windDataDisplay : 0,
+      _CDISource : "OFF",
+      _BRG1 : "OFF",
+      _BRG2 : "OFF",
+      _DME : 0,
+      _OMI : "",
+      _Map : 0,
+      _Multiline : 0,
+      _annunciation : 0,
+    };
+
+    # Hide various elements for the moment. TODO - implement
+    obj.device.svg.getElementById("PFDInstrumentsFailures").setVisible(0);
+    obj.device.svg.getElementById("PFDInstrumentsGSPD").setVisible(0);
+
+    obj.addTextElements([
+      "Speed110",
+      "VSIText",
+      "TAS-text", "GSPD-text",
+      "Alt11100",
+      "AltBigC",  "AltSmallC",
+      "BARO-text", "OAT-text",
+      "HDG-text",
+      "SelectedHDG-text",
+      "SelectedALT-text",
+    ]);
+
+    # Set clipping for the various tapes
+    var clips = {
+        PitchScale   : "rect(70,664,370,256)",
+        SpeedLint1   : "rect(252,226,318,204)",
+        SpeedTape    : "rect(115,239,455,156)",
+        LintAlt      : "rect(115,808,455,704)",
+        AltLint00011 : "rect(252,804,318,771)",
+    };
+
+    foreach(var id; keys(clips)) {
+      var clip = clips[id];
+      obj.device.svg.getElementById("PFDInstruments" ~ id).set("clip", clip);
+    }
+
+
+    obj.topMenu(device, obj, nil);
+
+    obj.setController(fg1000.PFDInstrumentsController.new(obj, svg));
+    obj.setWindDisplay(0);
+    obj.setCDISource("OFF");
+    obj.setBRG1("OFF");
+    obj.setBRG2("OFF");
+    obj.setDME(0);
+    obj.setMap(0);
+    obj.setMultiline(0);
+    obj.setAnnunciation(0);
+    obj.setOMI("");
+
+    return obj;
+  },
+  offdisplay : func() {
+    me._group.setVisible(0);
+
+    # Reset the menu colours.  Shouldn't have to do this here, but
+    # there's not currently an obvious other location to do so.
+    for(var i = 0; i < 12; i +=1) {
+      var name = sprintf("SoftKey%d",i);
+      me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
+      me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
+    }
+    me.getController().offdisplay();
+  },
+  ondisplay : func() {
+    me._group.setVisible(1);
+    me.mfd.setPageTitle(me.title);
+    me.getController().ondisplay();
+  },
+  topMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    device.updateMenus();
+  },
+
+  updateAI: func(pitch, roll, slip) {
+    if (pitch > 80)
+      pitch = 80;
+    elsif (pitch < -80)
+      pitch = -80;
+    me.getElement("Horizon")
+      .setCenter(459, 282.8 - 6.849 * pitch)
+      .setRotation(-roll * D2R)
+      .setTranslation(0, pitch * 6.849);
+    me.getElement("bankPointer")
+      .setRotation(-roll * D2R);
+    me.getElement("SlipSkid")
+      .setTranslation(slip * 10, 0);
+  },
+
+  updateIAS: func (ias, ias_trend) {
+    if (ias >= 10) {
+      me.setTextElement("Speed110", sprintf("% 2u",num(math.floor(ias/10))));
+    } else {
+      me.setTextElement("Speed110", "");
+    }
+
+    me.getElement("SpeedLint1").setTranslation(0,(math.mod(ias,10) + (ias >= 10)*10) * 36);
+    me.getElement("SpeedTape").setTranslation(0,ias * 5.711);
+
+    ias_trend = math.clamp(ias_trend, -30, 30);
+    me.getElement("Airspeed-Trend-Indicator")
+      .setScale(1,ias_trend)
+      .setTranslation(0, -284.5 * (ias_trend - 1));
+
+    var vne = me.mfd.ConfigStore.get("Vne");
+
+    if (ias > vne and ! me._ias_already_exceeded) {
+      me._ias_already_exceeded = 1;
+      me.getElement("IAS-bg").setColorFill(1,0,0);
+    } elsif (ias < vne and me._ias_already_exceeded) {
+      me._ias_already_exceeded = 0;
+      me.getElement("IAS-bg").setColorFill(0,0,0);
+    }
+
+    foreach (var v; ["Vx", "Vy", "Vr", "Vglide"]) {
+      var spd = me.mfd.ConfigStore.get(v);
+      var visible = me.mfd.ConfigStore.get(v ~ "-visible");
+      if (visible and abs(spd - ias) < 30) {
+          me.getElement("IAS-" ~ v)
+              .setTranslation(0, (ias - spd) * 5.711)
+              .show();
+      } else {
+          me.getElement("IAS-" ~ v).hide();
+      }
+    }
+  },
+
+  updateVSI: func (vsi) {
+    me.getElement("VSI").setTranslation(0, math.clamp(vsi, -4500, 4500) * -0.03465);
+    me.setTextElement("VSIText", num(math.round(vsi, 10)));
+  },
+
+  updateTAS: func (tas) {
+    me.setTextElement("TAS-text", sprintf("%iKT", tas));
+    #me.getElement("GSPD-text").setText(sprintf("%iKT", tas));
+  },
+
+  updateALT: func (alt, alt_trend, selected_alt) {
+      if (alt < 0) {
+        me.setTextElement("Alt11100", sprintf("-% 3i",abs(math.ceil(alt/100))));
+      } elsif (alt < 100) {
+        me.setTextElement("Alt11100", "");
+      } else {
+        me.setTextElement("Alt11100", sprintf("% 3i",math.floor(alt/100)));
+      }
+
+      me.getElement("AltLint00011").setTranslation(0,math.fmod(alt,100) * 1.24);
+
+      if (alt> -1000 and alt< 1000000) {
+          var Offset10 = 0;
+          var Offset100 = 0;
+          var Offset1000 = 0;
+          var Ne = 0;
+          var Alt10       = math.mod(alt,100);
+          var Alt100      = int(math.mod(alt/100,10));
+          var Alt1000     = int(math.mod(alt/1000,10));
+          var Alt10000    = int(math.mod(alt/10000,10));
+          var Alt20       = math.mod(Alt10,20)/20;
+
+
+          if (alt< 0) {
+              var Ne = 1;
+              var alt= -alt;
+          }
+
+          if (Alt10 >= 80) Alt100 += Alt20;
+          if (Alt10 >= 80 and Alt100 >= 9) Alt1000 += Alt20;
+          if (Alt10 >= 80 and Alt100 >= 9 and Alt1000 >= 9) Alt10000 += Alt20;
+          if (alt> 100) Offset10 = 100;
+          if (alt> 1000) Offset100 = 10;
+          if (alt> 10000) Offset1000 = 10;
+
+          if (Ne) {
+            me.getElement("LintAlt").setTranslation(0,(math.mod(alt,100))*-0.57375);
+            var altCentral = -(int(alt/100)*100);
+          } else {
+            me.getElement("LintAlt").setTranslation(0,(math.mod(alt,100))*0.57375);
+            var altCentral = (int(alt/100)*100);
+          }
+
+          me.setTextElement("AltBigC", "");
+          me.setTextElement("AltSmallC", "");
+          for (var place = 1; place <= 6; place += 1) {
+            var altUP = altCentral + (place*100);
+            var altDOWN = altCentral - (place*100);
+            var offset = -30.078;
+            var prefix = "";
+
+            if (altUP < 0) {
+              altUP = -altUP;
+              prefix = "-";
+              offset += 15.039;
+            }
+            var AltBigUP = "";
+            var AltSmallUP = "0";
+
+            if (altUP == 0) {
+              AltBigUP    = "";
+              AltSmallUP  = "0";
+            } elsif (math.mod(altUP,500) == 0 and altUP != 0) {
+              AltBigUP    = sprintf(prefix~"%1d", altUP);
+              AltSmallUP  = "";
+            } elsif (altUP < 1000 and (math.mod(altUP,500))) {
+              AltBigUP    = "";
+              AltSmallUP  = sprintf(prefix~"%1d", int(math.mod(altUP,1000)));
+              offset = -30.078;
+            } elsif ((altUP < 10000) and (altUP >= 1000) and (math.mod(altUP,500))) {
+              AltBigUP    = sprintf(prefix~"%1d", int(altUP/1000));
+              AltSmallUP  = sprintf("%1d", int(math.mod(altUP,1000)));
+              offset += 15.039;
+            } else {
+              AltBigUP    = sprintf(prefix~"%1d", int(altUP/1000));
+              mod = int(math.mod(altUP,1000));
+              AltSmallUP  = sprintf("%1d", mod);
+              offset += 30.078;
+            }
+
+            me.getElement("AltBigU"~place).setText(AltBigUP);
+            me.getElement("AltSmallU"~place).setText(AltSmallUP);
+            me.getElement("AltSmallU"~place).setTranslation(offset,0);
+
+            offset = -30.078;
+            prefix = "";
+            if (altDOWN < 0) {
+              altDOWN = -altDOWN;
+              prefix = "-";
+              offset += 15.039;
+            }
+
+            if (altDOWN == 0) {
+              AltBigDOWN = "";
+              AltSmallDOWN = "0";
+            } elsif (math.mod(altDOWN,500) == 0 and altDOWN != 0) {
+              AltBigDOWN = sprintf(prefix~"%1d", altDOWN);
+              AltSmallDOWN = "";
+            } elsif (altDOWN < 1000 and (math.mod(altDOWN,500))) {
+              AltBigDOWN = "";
+              AltSmallDOWN = sprintf(prefix~"%1d", int(math.mod(altDOWN,1000)));
+              offset = -30.078;
+            } elsif ((altDOWN < 10000) and (altDOWN >= 1000) and (math.mod(altDOWN,500))) {
+                AltBigDOWN = sprintf(prefix~"%1d", int(altDOWN/1000));
+                AltSmallDOWN = sprintf("%1d", int(math.mod(altDOWN,1000)));
+                offset += 15.039;
+            } else {
+                AltBigDOWN  = sprintf(prefix~"%1d", int(altDOWN/1000));
+                AltSmallDOWN = sprintf("%1d", int(math.mod(altDOWN,1000)));
+                offset += 30.078;
+            }
+
+            me.getElement("AltBigD"~place).setText(AltBigDOWN);
+            me.getElement("AltSmallD"~place).setText(AltSmallDOWN);
+            me.getElement("AltSmallD"~place).setTranslation(offset,0);
+        }
+      }
+
+      alt_trend = math.clamp(alt_trend, -15, 15);
+      me.getElement("Altitude-Trend-Indicator")
+          .setScale(1,alt_trend)
+          .setTranslation(0, -284.5 * (alt_trend - 1));
+
+      var delta_alt = alt - selected_alt;
+      delta_alt = math.clamp(delta_alt, -300, 300);
+      me.getElement("SelectedALT-bug").setTranslation(0, delta_alt * 0.567); # 170/300 = 0.567
+  },
+
+  updateBARO : func (baro) {
+    # TODO: Support hPa and inhg
+    #var fmt = me._baro_unit == "inhg" ? "%.2fin" : "%i%shPa";
+    var fmt = "%.2fin";
+    me.setTextElement("BARO-text", sprintf(fmt, baro));
+  },
+
+  updateOAT : func (oat) {
+    # TODO: Support FAHRENHEIT
+    me.setTextElement("OAT-text", sprintf((abs(oat) < 10) ? "%.1f %s" : "%i %s", oat, "°C"));
+  },
+
+  updateHSI : func (hdg) {
+    me.getElement("Rose").setRotation(-hdg * D2R);
+    me.setTextElement("HDG-text", sprintf("%03u°", hdg));
+  },
+
+  updateHDG : func (hdg) {
+    if (hdg == nil)
+    me.getElement("Heading-bug").setRotation(hdg * D2R);
+    me.setTextElement("SelectedHDG-text", sprintf("%03d°%s", hdg, ""));
+  },
+
+  # Indicate the selected course, from a given source (OFF, NAV, GPS)
+  updateCRS : func (crs) {
+    me.getElement("SelectedCRS-text")
+      .setText(sprintf("%03d°%s", crs, ""))
+      .setColor(me._CDISource == "GPS" ? me.COLORS.magenta : me.COLORS.green);
+  },
+
+  updateSelectedALT : func (selected_alt) {
+    me.setTextElement("SelectedALT-text", sprintf("%i", selected_alt));
+  },
+
+  # Bearing (BRG) settings
+  # "OFF", "NAV1", "NAV2", "GPS", "ADF"
+  getBRG1 : func() { return me._BRG1; },
+  getBRG2 : func() { return me._BRG2; },
+
+  setBRG1 : func(option) {
+    me._BRG1 = option;
+    me._setBRG("BRG1",option);
+  },
+  setBRG2 : func(option) {
+    me._BRG2 = option;
+    me._setBRG("BRG2",option);
+  },
+  _setBRG : func (brg, option) {
+    if (option == "OFF") {
+      me.getElement(brg).hide();
+      me.getElement(brg ~ "-pointer").hide();
+      if ((me._BRG1 == "OFF") and (me._BRG1 == "OFF")) {
+        me.getElement("BRG-circle").hide();
+      }
+    } else {
+      me.getElement(brg).show();
+      me.getElement(brg ~ "-pointer").show();
+      me.getElement("BRG-circle").show();
+    }
+  },
+
+  # Update BRG information
+  updateBRG1 : func(id, dst) {
+    me._updateBRG("BRG1", me._BRG1, id, dst);
+  },
+  updateBRG2 : func(id, dst) {
+    me._updateBRG("BRG2", me._BRG2, id, dst);
+  },
+  _updateBRG : func (brg, source, id, dst) {
+    if (source == "OFF") return;
+
+    me.getElement(brg ~ "-SRC-text").setText(source);
+    me.getElement(brg ~ "-WP-text").setText(id);
+
+    if (source == "ADF") {
+      # Special case.  We won't have a distance and the "ID" will be the ADF
+      # frequency
+      me.getElement(brg ~ "-DST-text").setText("");
+    } else {
+      me.getElement(brg ~ "-DST-text").setText(sprintf("%.1fNM", dst));
+    }
+  },
+
+  setDME : func (enabled) {
+    me._DME = enabled;
+    me.getElement("DME1").setVisible(enabled);
+  },
+
+  updateDME : func (mode, freq, dst) {
+    if (me._DME == 0) return;
+    me.getElement("DME1-SRC-text").setText(mode);
+    me.getElement("DME1-FREQ-text").setText(sprintf("%.2f", freq));
+    me.getElement("DME1-DST-text").setText(sprintf("%.2fNM", dst));
+  },
+
+  setCDISource : func(source) {
+    if (source == "OFF") {
+      foreach (var s; ["GPS", "NAV1", "NAV2"]) {
+        foreach (var t; ["pointer", "CDI", "FROM", "TO"]) {
+          me.getElement(s ~ "-" ~ t).hide();
+        }
+      }
+      me.getElement("CDI-GPS-ANN-text").hide();
+      me.getElement("CDI-GPS-XTK-text").hide();
+      me.getElement("CDI-SRC-text").hide();
+      me.getElement("CDI").hide();
+      me.getElement("GPS-CTI-diamond").hide();
+      me.getElement("SelectedCRS").hide();
+
+    } else {
+      me.getElement("CDI").show();
+      me.getElement("SelectedCRS").show();
+
+      if (source == "GPS") {
+        me.getElement("CDI-GPS-ANN-text").show();
+        me.getElement("GPS-CTI-diamond").show();
+      } else {
+        me.getElement("CDI-GPS-ANN-text").hide();
+        me.getElement("GPS-CTI-diamond").hide();
+      }
+
+      # Localizers are mapped to the NAV1/2 elements, but have reduced deflection
+      # and a different label.
+      me.getElement("CDI-SRC-text")
+        .setText(source)
+        .setColor(source == "GPS" ? me.COLORS.magenta : me.COLORS.green)
+        .show();
+
+      if (source == "LOC1") source = "NAV1";
+      if (source == "LOC2") source = "NAV2";
+
+      foreach (var s; ["GPS", "NAV1", "NAV2"]) {
+        me.getElement(s ~ "-pointer").setVisible(source == s);
+        me.getElement(s ~ "-CDI").setVisible(source == s);
+        me.getElement(s ~ "-FROM").setVisible(source == s);
+        me.getElement(s ~ "-TO").setVisible(source == s);
+      }
+    }
+
+    me._CDISource = source;
+  },
+
+  updateCDI : func (heading, course, waypoint_valid, course_deviation_deg, deflection_dots, xtrk_nm, from) {
+    if (me._CDISource == "OFF") return;
+
+    var rot = (course - heading) * D2R;
+    me.getElement("CDI")
+      .setRotation(rot)
+      .show();
+    me.getElement("GPS-CTI-diamond")
+      .setVisible(waypoint_valid)
+      .setRotation(course_deviation_deg * D2R);
+
+    if ((me._CDISource == "GPS") and (deflection_dots > 2)) {
+      # Only display the cross-track error if the error exceeds the maximum
+      # deflection of two dots.
+      me.getElement("CDI-GPS-XTK-text")
+        .setText(sprintf("XTK %iNM", abs(xtrk_nm)))
+        .show();
+    } else {
+      me.getElement("CDI-GPS-XTK-text").hide();
+    }
+
+    var scale = math.clamp(deflection_dots, -2.4, 2.4);
+    me.getElement(me._CDISource ~ "-CDI").setTranslation(65 * scale, 0);
+
+    # Display the appropriate TO/FROM indication for the selected source,
+    # switching all others off.
+    me.getElement(me._CDISource ~ "-TO").setVisible(from == 0);
+    me.getElement(me._CDISource ~ "-FROM").setVisible(from);
+  },
+
+  # Update the wind display.  There are three options:
+  # -1 - Data invalid
+  # 0 - No wind data displayed
+  # 1 - Numeric headwind and crosswind components
+  # 2 - Direction arrow and numeric speed
+  # 3 - Direction arrow, and numeric True direction and speet
+  setWindDisplay : func(option) {
+    me.getElement("WindData").setVisible(option != 0);
+    me.getElement("WindData-NODATA").setVisible(option == -1);
+    me.getElement("WindData-OPTN1").setVisible(option == 1);
+    me.getElement("WindData-OPTN2").setVisible(option == 2);
+    me.getElement("WindData-OPTN3").setVisible(option == 3);
+
+    me._windDataDisplay = option;
+  },
+
+  updateWindData : func (hdg, wind_hdg, wind_spd) {
+    if ((me._windDataDisplay == -1) or (me._windDataDisplay == 0)) {
+      return;
+    }
+
+    if (me._windDataDisplay == 1) {
+      # Headwind/Crosswind numeric display
+      var alpha = (wind_hdg - hdg) * D2R;
+      var Vt = wind_spd * math.sin(alpha);
+      var Ve = wind_spd * math.cos(alpha);
+      if (Vt != 0) {
+        me.getElement("WindData-OPTN1-crosswind-text").setText(sprintf("%i", abs(Vt)));
+        me.getElement("WindData-OPTN1-crosswind")
+          .setScale(-abs(Vt)/Vt, 1)
+          .setTranslation(-35 * (abs(Vt)/Vt + 1), 0);
+      } else {
+        me.getElement("WindData-OPTN1-crosswind-text").setText("0");
+        me.getElement("WindData-OPTN1-crosswind")
+          .setScale(1, 1)
+          .setTranslation(0, 0);
+      }
+
+      if (Ve != 0) {
+        me.getElement("WindData-OPTN1-headwind-text").setText(sprintf("%i", abs(Ve)));
+        me.getElement("WindData-OPTN1-headwind")
+          .setScale(1, abs(Ve)/Ve)
+          .setTranslation(0, 515 * (1 - abs(Ve)/Ve));
+      } else {
+        me.getElement("WindData-OPTN1-headwind-text").setText("0");
+        me.getElement("WindData-OPTN1-headwind")
+            .setScale(1, 1)
+            .setTranslation(0, 0);
+      }
+    } elsif (me._windDataDisplay == 2) {
+      # Direction arrow and numeric speed
+      me.getElement("WindData-OPTN2-HDG").setRotation((alpha + 180) * D2R);
+      me.getElement("WindData-OPTN2-SPD-text").setText(int(wind_spd));
+    } elsif (me._windDataDisplay == 3) {
+      # Direction arrow with numeric true direction and speed
+      me.getElement("WindData-OPTN3-HDG").setRotation((alpha + 180) * D2R);
+      me.getElement("WindData-OPTN3-HDG-text").setText(sprintf("%03i°T", wind_hdg));
+      me.getElement("WindData-OPTN3-SPD-text").setText(int(wind_spd) ~ "KT");
+    } else {
+      print("Unknown wind data option " ~ me._windDataDisplay);
+    }
+  },
+
+  # Enable/disable the inset PFD Map.
+  setMap : func (enabled) {
+    me._Map = enabled;
+    me.getElement("PFD-Map").setVisible(enabled);
+  },
+
+  # Enable/disable the multiline display on the right hand side of the PFD
+  setMultiline : func(enabled) {
+    me._Multiline = enabled;
+    me.getElement("PFD-Multilines").setVisible(enabled);
+  },
+
+  # Enable/disable the warning annunication window.
+  setAnnunciation : func(enabled) {
+    me._annunciation = enabled;
+    me.getElement("Annunciation").setVisible(enabled);
+  },
+
+  # set the Outer, Middle, Inner indicator
+  setOMI : func(omi) {
+    if (omi == "") {
+      me.getElement("OMI").hide();
+    } else {
+      me.getElement("OMI").show();
+      me.getElement("MarkerText").setText(omi);
+    }
+    me._OMI = omi;
+  }
+};

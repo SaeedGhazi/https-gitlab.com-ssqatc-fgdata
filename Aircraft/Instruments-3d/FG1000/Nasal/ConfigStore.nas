@@ -70,6 +70,20 @@ var ConfigStore = {
     "MFDHeader2": ["BRG", "XTK", "DIS", "DTK", "END", "ESA", "ETA", "ETE", "FOD", "FOB", "GS", "MSA", "TAS", "TKE", "TRK", "VSR"] ,
     "MFDHeader3": ["BRG", "XTK", "DIS", "DTK", "END", "ESA", "ETA", "ETE", "FOD", "FOB", "GS", "MSA", "TAS", "TKE", "TRK", "VSR"] ,
     "MFDHeader4": ["BRG", "XTK", "DIS", "DTK", "END", "ESA", "ETA", "ETE", "FOD", "FOB", "GS", "MSA", "TAS", "TKE", "TRK", "VSR"] ,
+
+    # V-speeds (Cessna 182T)
+    "Vx" : 54, # Short field takeoff, 2600lbs
+    "Vy" : 78, # 4000ft, 3100lbs
+    "Vr" : 78,
+    "Vglide" : 70, # 2600lbs
+    "Vne": 175,
+
+    "Vx-visible" : 1,
+    "Vy-visible" : 1,
+    "Vr-visible" : 1,
+    "Vglide-visible" : 1,
+    "Vne-visible": 1,
+
   },
 
   new : func()
@@ -81,7 +95,8 @@ var ConfigStore = {
 
     foreach (var i; keys(ConfigStore.configValues)) {
       var values = ConfigStore.configValues[i];
-      obj.set(i, values[0]);
+      if (typeof(values) == "vector") obj.set(i, values[0]);
+      if (typeof(values) == "scalar") obj.set(i, values);
     }
 
     # Special case defaults
@@ -99,10 +114,7 @@ var ConfigStore = {
     # Validate name is something we know.
     assert(contains(ConfigStore.configValues, name), "ConfigStore does not contain name " ~ name);
 
-    if (size(ConfigStore.configValues[name]) == 0) {
-      # If not valid values, then anything goes.
-      me._values[name] = value;
-    } else {
+    if (typeof(ConfigStore.configValues[name]) == "vector") {
       # Validate the value is part of the set of acceptable values
       var found = 0;
       foreach(var val; ConfigStore.configValues[name]) {
@@ -117,6 +129,11 @@ var ConfigStore = {
         "(Should be one of " ~ string.join(", ", ConfigStore.configValues[name]) ~ ")");
 
       me._values[name] = value;
+    }elsif (typeof(ConfigStore.configValues[name]) == "scalar") {
+      # If not valid values, then anything goes.
+      me._values[name] = value;
+    } else {
+      die("Unknown ConfigStore type " ~ typeof(ConfigStore.configValues[name]));
     }
   },
 

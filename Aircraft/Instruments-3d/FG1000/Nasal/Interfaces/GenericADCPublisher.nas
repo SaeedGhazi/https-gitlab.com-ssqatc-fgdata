@@ -29,7 +29,7 @@
 var GenericADCPublisher =
 {
 
-  new : func (frequency=0.5) {
+  new : func (frequency=0.2) {
     var obj = {
       parents : [
         GenericADCPublisher,
@@ -38,7 +38,24 @@ var GenericADCPublisher =
     };
 
     obj.addPropMap("ADCTrueAirspeed", "/instrumentation/airspeed-indicator/true-speed-kt");
+    obj.addPropMap("ADCIndicatedAirspeed", "/instrumentation/airspeed-indicator/indicated-speed-kt");
 
+    obj.addPropMap("ADCPitchDeg", "/instrumentation/attitude-indicator/indicated-pitch-deg");
+    obj.addPropMap("ADCRollDeg", "/instrumentation/attitude-indicator/indicated-roll-deg");
+    obj.addPropMap("ADCTurnRate", "/instrumentation/turn-indicator/indicated-turn-rate");
+    obj.addPropMap("ADCSlipSkid", "/instrumentation/slip-skid-ball/indicated-slip-skid");
+
+    # Assume an accurate solid-state compass
+    obj.addPropMap("ADCHeadingDeg", "/orientation/heading-deg");
+
+    obj.addPropMap("ADCAltitudeFT", "/instrumentation/altimeter/indicated-altitude-ft");
+    obj.addPropMap("ADCPressureSettingInHG", "/instrumentation/altimeter/setting-inhg");
+
+    obj.addPropMap("ADCVerticalSpeedFPM", "/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
+
+    obj.addPropMap("ADCOutsideAirTemperatureC", "/environment/temperature-degc");
+    obj.addPropMap("ADCWindHeadingDeg", "/environment/wind-from-heading-deg");
+    obj.addPropMap("ADCWindSpeedKt", "/environment/wind-speed-kt");
     return obj;
   },
 };

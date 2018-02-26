@@ -110,7 +110,8 @@
 	<performance-monitor>Monitor System Performance</performance-monitor>
         <write-video-config>Save Video Configuration</write-video-config>
 	<property-browser>Browse Internal Properties</property-browser>
-	<fg1000>FG1000 MFD</fg1000>
+	<fg1000-pfd>FG1000 PFD</fg1000-pfd>
+	<fg1000-mfd>FG1000 MFD</fg1000-mfd>
 	<logging>Logging</logging>
 	<local_weather>Local Weather (Test)</local_weather>
 	<print-scene-info>Print Visible Scene Info</print-scene-info>

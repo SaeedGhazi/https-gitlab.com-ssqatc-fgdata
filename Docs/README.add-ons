@@ -480,6 +480,8 @@ file should look like this:
       ...
     </menu>
 
+    ...
+
     <menu>
       ...
     </menu>
@@ -503,6 +505,7 @@ entry for opening a custom dialog (see below for add-on-specific dialogs):
           <script>foobar.doBaz();</script>
         </binding>
       </item>
+
       <item>
         <label>My Foobar Dialog</label>
         <binding>

@@ -24,11 +24,11 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8593751"
-     inkscape:cx="780.73761"
-     inkscape:cy="538.22701"
+     inkscape:zoom="7.4375004"
+     inkscape:cx="279.11962"
+     inkscape:cy="261.78273"
      inkscape:document-units="px"
-     inkscape:current-layer="PFDInstrumentsPFD-Widgets"
+     inkscape:current-layer="layer6"
      showgrid="false"
      showguides="false"
      inkscape:guide-bbox="true"
@@ -75,7 +75,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -6854,6 +6854,713 @@
     </g>
   </g>
   <g
+     id="PFDInstrumentsPFD-Widgets"
+     inkscape:label="PFD-Widgets"
+     style="display:inline">
+    <g
+       id="PFDInstrumentsDME1"
+       inkscape:label="DME1">
+      <path
+         inkscape:label="DME1-bg"
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="PFDInstrumentsDME1-bg"
+         d="m 237,670 0,-78 56,0 c 0,46.09733 24,78 24,78 l -80,0"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="239.58443"
+         y="611.12927"
+         id="PFDInstrumentsDME1-title"
+         inkscape:label="DME1-title"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6098"
+           x="239.58443"
+           y="611.12927"
+           style="fill:#ffffff">DME</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="239.77455"
+         y="628.24243"
+         id="PFDInstrumentsDME1-SRC-text"
+         inkscape:label="DME1-SRC-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6111"
+           x="239.77455"
+           y="628.24243"
+           style="fill:#00ffff">NAV1</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="237.4928"
+         y="647.4472"
+         id="PFDInstrumentsDME1-FREQ-text"
+         inkscape:label="DME1-FREQ-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6115"
+           x="237.4928"
+           y="647.4472"
+           style="fill:#00ffff">123.45</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="237.68295"
+         y="666.27173"
+         id="PFDInstrumentsDME1-DST-text"
+         inkscape:label="DME1-DST-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6119"
+           x="237.68295"
+           y="666.27173"
+           style="fill:#ffffff">99.9NM</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsBRG1"
+       inkscape:label="BRG1">
+      <path
+         inkscape:label="BRG1-bg"
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="PFDInstrumentsBRG1-bg"
+         d="m 237,676 84,0 c 23.41331,39.76873 75,60 75,60 l -159,0 z"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path5378-2"
+         d="m 296.49782,722.74639 63.3915,0"
+         style="display:inline;fill:none;stroke:#00ffff;stroke-width:2.02932835;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccc"
+         inkscape:connector-curvature="0"
+         id="path5376-6"
+         d="m 320.14562,734.07451 -17.5,-11.32812 17.5,-11.32812"
+         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.70979106;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="239.5529"
+         y="695.16937"
+         id="PFDInstrumentsBRG1-DST-text"
+         inkscape:label="BRG1-DST-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5857-2-0"
+           x="239.5529"
+           y="695.16937"
+           style="fill:#ffffff">99.9NM</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="241.2616"
+         y="713.16797"
+         id="PFDInstrumentsBRG1-WPID-text"
+         inkscape:label="BRG1-WPID-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5857-9-3"
+           x="241.2616"
+           y="713.16797"
+           style="fill:#00ffff">WPID</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="240.84253"
+         y="731.08093"
+         id="PFDInstrumentsBRG1-SRC-text"
+         inkscape:label="BRG1-SRC-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5857-0"
+           x="240.84253"
+           y="731.08093"
+           style="fill:#ffffff">NAV1</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsPFD-Multilines"
+       inkscape:label="PFD-Multilines">
+      <rect
+         inkscape:label="PFD-Multilines-bg"
+         y="492"
+         x="710"
+         height="218.00002"
+         width="302"
+         id="PFD-Multilines-bg"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="PFDInstrumentsPFD-Map"
+       inkscape:label="PFD-Map">
+      <rect
+         inkscape:label="PFD-Map-bg"
+         y="492"
+         x="13"
+         height="218"
+         width="215"
+         id="PFD-Map-bg"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="PFDInstrumentsBRG2"
+       inkscape:label="BRG2">
+      <path
+         inkscape:label="BRG2-bg"
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="PFDInstrumentsBRG2-bg"
+         d="m 600,676 84,0 0,60 -157,0 c 0,0 48.17738,-22.01773 73,-60 z"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5382-6"
+         d="m 626.69102,722.59238 c -3.32886,0 -6.65772,0 -9.98658,0"
+         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.08442605;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5387-7"
+         d="m 599.26678,711.18476 c 5.81255,3.80255 11.62511,7.60508 17.43766,11.40762 -5.81255,3.80254 -11.62511,7.60508 -17.43766,11.40762"
+         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.71272147;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5390-5"
+         d="m 559.69754,722.59238 c 3.91595,0 7.83189,0 11.74785,0"
+         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.20042503;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5396-6"
+         d="m 611.07939,718.91251 c -13.21133,0 -26.42267,0 -39.634,0 0,2.45324 0,4.9065 0,7.35975 13.21133,0 26.42267,0 39.634,0"
+         style="fill:none;stroke:#00ffff;stroke-width:2.35714316;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="630.98438"
+         y="729.5387"
+         id="PFDInstrumentsBRG2-SRC-text"
+         inkscape:label="BRG2-SRC-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5857"
+           x="630.98438"
+           y="729.5387"
+           style="fill:#ffffff">NAV2</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="630.83301"
+         y="712.19623"
+         id="PFDInstrumentsBRG2-WPID-text"
+         inkscape:label="BRG2-WPID-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5857-9"
+           x="630.83301"
+           y="712.19623"
+           style="fill:#00ffff">WPID</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="608.20819"
+         y="694.95819"
+         id="PFDInstrumentsBRG2-DST-text"
+         inkscape:label="BRG2-DST-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5857-2"
+           x="608.20819"
+           y="694.95819"
+           style="fill:#ffffff">99.9NM</tspan></text>
+    </g>
+    <path
+       style="display:none;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 684.00365,668.99908 0,-78 -56,0 c 0,46.09733 -24,78 -24,78 l 80,0"
+       id="PFDInstrumentsDME2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="DME2" />
+    <g
+       id="PFDInstrumentsAnnunciation"
+       inkscape:label="Annunciation">
+      <rect
+         inkscape:label="Annunciation-bg"
+         y="384.50903"
+         x="876.50903"
+         height="103.98194"
+         width="147.98192"
+         id="Annunciation-bg"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.01803744;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="PFDInstrumentsWindData"
+       inkscape:label="WindData">
+      <rect
+         inkscape:label="WindData-bg"
+         y="460.5"
+         x="245.5"
+         height="54"
+         width="80"
+         id="PFDInstrumentsWindData-bg"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer8"
+       inkscape:label="WindDataOPTN2"
+       style="display:inline"
+       sodipodi:insensitive="true">
+      <g
+         id="PFDInstrumentsWindData-OPTN2"
+         transform="matrix(0.99992526,0.0122259,-0.0122259,0.99992526,312.30832,34.878539)"
+         inkscape:label="WindData-OPTN2"
+         style="display:inline">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66625023px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="8.9626169"
+           y="458.55432"
+           id="PFDInstrumentsWindData-OPTN2-SPD-text"
+           inkscape:label="WindData-OPTN2-SPD-text"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan10920"
+             x="8.9626179"
+             y="458.55432">99</tspan></text>
+        <g
+           id="PFDInstrumentsWindData-OPTN2-HDG"
+           transform="matrix(0,-1,1,0,-489.03882,417.06566)"
+           inkscape:label="WindData-OPTN2-HDG"
+           style="display:inline">
+          <path
+             style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.2809999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m -25.852688,453.93931 6.822355,-6.48268 -6.984123,-6.74794 0.05992,4.90059 -23.970079,0.29308 0.04723,3.86343 23.97008,-0.29308 z"
+             id="path5400"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccccccc" />
+        </g>
+      </g>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer10"
+       inkscape:label="WindDataOPTN3"
+       style="display:inline"
+       sodipodi:insensitive="true">
+      <g
+         id="PFDInstrumentsWindData-OPTN3"
+         transform="matrix(0.99992526,0.0122259,-0.0122259,0.99992526,312.22386,34.921592)"
+         inkscape:label="WindData-OPTN3"
+         style="display:inline">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="16.583868"
+           y="477.01712"
+           id="PFDInstrumentsWindData-OPTN3-SPD-text"
+           inkscape:label="WindData-OPTN3-SPD-text"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan10667-6"
+             x="16.583868"
+             y="477.01712"
+             style="text-align:end;text-anchor:end;fill:#ffffff">99KT</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:17.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-24.043869"
+           y="441.57062"
+           id="PFDInstrumentsWindData-OPTN3-HDG-text"
+           inkscape:label="WindData-OPTN3-HDG-text"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan10667"
+             x="-24.043869"
+             y="441.57062"
+             style="fill:#ffffff">000°</tspan></text>
+        <g
+           id="PFDInstrumentsWindData-OPTN3-HDG"
+           transform="matrix(0.81547997,0,0,0.81547997,-257.52765,55.699492)"
+           inkscape:label="WindData-OPTN3-HDG"
+           style="display:inline">
+          <path
+             style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.2809999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 272.59008,475.17724 -7.84789,-8.59482 -8.38019,8.59482 6.01083,0 10e-6,29.26975 4.7387,10e-6 0,-29.26976 z"
+             id="path5400-6"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccccccc" />
+        </g>
+      </g>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer7"
+       inkscape:label="WindOPTN1"
+       style="display:inline">
+      <g
+         id="PFDInstrumentsWindData-OPTN1"
+         inkscape:label="WindData-OPTN1"
+         transform="matrix(0.94507049,7.5046918e-4,7.5046918e-4,1.0064403,300.41761,-34.744936)"
+         style="display:inline">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.87465477px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-15.893252"
+           y="518.24725"
+           id="PFDInstrumentsWindData-OPTN1-crosswind-text"
+           inkscape:label="WindData-OPTN1-crosswind-text"
+           transform="matrix(0.99992526,-0.0122259,0.0122259,0.99992526,0,0)"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan11152"
+             x="-15.893252"
+             y="518.24725"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.87465477px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff">99</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.87465477px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-46.058811"
+           y="542.45251"
+           id="PFDInstrumentsWindData-OPTN1-headwind-text"
+           inkscape:label="WindData-OPTN1-headwind-text"
+           sodipodi:linespacing="125%"
+           transform="matrix(0.99992526,-0.0122259,0.0122259,0.99992526,0,0)"><tspan
+             sodipodi:role="line"
+             id="tspan11152-7"
+             x="-46.058811"
+             y="542.45251"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.87465477px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff">99</tspan></text>
+        <g
+           id="PFDInstrumentsWindData-OPTN1-symbol"
+           inkscape:label="WindData-OPTN1-symbol"
+           transform="translate(-303.57304,30.340493)">
+          <path
+             style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.2809999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 257.163,471.05247 c 2.15619,-2.44242 4.31238,-4.88483 6.46857,-7.32725 2.30244,2.44242 4.60487,4.88483 6.90731,7.32725 -1.65146,0 -3.30293,0 -4.95439,0 0,7.96078 0,15.92157 0,23.88235 -1.30195,0 -2.60389,0 -3.90584,0 0,-7.96078 0,-15.92155 0,-23.88233 -1.50522,-10e-6 -3.01043,-10e-6 -4.51565,-2e-5 z"
+             id="PFDInstrumentsWindData-OPTN1-headwind"
+             inkscape:connector-curvature="0" />
+          <path
+             style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.2809999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 272.12849,472.64208 c 2.44242,2.15619 4.88483,4.31238 7.32725,6.46857 -2.44242,2.30244 -4.88483,4.60487 -7.32725,6.90731 0,-1.65146 0,-3.30293 0,-4.95439 -7.96078,0 -15.92157,0 -23.88235,0 0,-1.30195 0,-2.60389 0,-3.90584 7.96078,0 15.92155,0 23.88233,0 1e-5,-1.50522 1e-5,-3.01043 2e-5,-4.51565 z"
+             id="PFDInstrumentsWindData-OPTN1-crosswind"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer6"
+       inkscape:label="WindNoData"
+       style="display:inline"
+       sodipodi:insensitive="true">
+      <rect
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="PFDInstrumentsWindData-NODATA-bg"
+         width="80"
+         height="54"
+         x="245.5"
+         y="460.5"
+         inkscape:label="WindData-bg" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:16px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="285.13638"
+         y="483.44598"
+         id="PFDInstrumentsWindData-NODATA"
+         inkscape:label="WindData-NODATA"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6137"
+           x="285.13638"
+           y="483.44598"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1">NO WIND</tspan><tspan
+           sodipodi:role="line"
+           x="285.13638"
+           y="503.44598"
+           id="tspan6141"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1">DATA</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsBARO"
+       inkscape:label="BARO">
+      <rect
+         inkscape:label="BARO-bg"
+         y="455.5"
+         x="703.55597"
+         height="25.944014"
+         width="104.944"
+         id="BARO-bg"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66625023px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="755.6665"
+         y="475.64999"
+         id="PFDInstrumentsBARO-text"
+         inkscape:label="BARO-text"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5399"
+           x="755.6665"
+           y="475.64999">XX.XXin</tspan></text>
+    </g>
+    <rect
+       style="display:none;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="PFDInstrumentsSelectedALT-meters"
+       width="105"
+       height="25"
+       x="703.5"
+       y="57.5"
+       inkscape:label="SelectedALT-meters" />
+    <rect
+       style="display:none;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.01030481;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="PFDInstrumentsSelectedSpeed"
+       width="85.989693"
+       height="23.989695"
+       x="153.50516"
+       y="89.50515"
+       inkscape:label="SelectedSpeed" />
+    <g
+       id="PFDInstrumentsOAT"
+       inkscape:label="OAT">
+      <rect
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="OAT-bg"
+         width="95.359917"
+         height="23.448149"
+         x="2.4282146"
+         y="720.03497"
+         inkscape:label="OAT-bg">
+        <desc
+           id="desc5833-7">OAT</desc>
+      </rect>
+      <text
+         id="text4961"
+         y="737.25531"
+         x="4.242641"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:100%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="100%"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:100%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff"
+           y="737.25531"
+           x="4.242641"
+           id="tspan4959"
+           sodipodi:role="line">OAT</tspan></text>
+      <text
+         id="PFDInstrumentsOAT-text"
+         y="738.1048"
+         x="96.332848"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="OAT-text"
+         sodipodi:linespacing="125%"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
+           y="738.1048"
+           x="96.332848"
+           id="tspan4965"
+           sodipodi:role="line">99.9°C</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsGSPD"
+       inkscape:label="GSPD">
+      <rect
+         inkscape:label="GSPD-bg"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="GSPD-bg"
+         width="86"
+         height="23.5"
+         x="67.5"
+         y="455.49994">
+        <desc
+           id="desc5829">Ground Speed</desc>
+      </rect>
+      <text
+         id="text4997"
+         y="471.6181"
+         x="70.5"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           style="fill:#ffffff"
+           y="471.6181"
+           x="70.5"
+           id="tspan4995"
+           sodipodi:role="line">GS</tspan></text>
+      <text
+         inkscape:label="GSPD-text"
+         id="PFDInstrumentsGSPD-text"
+         y="474.04486"
+         x="92.749992"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           style="text-align:start;text-anchor:start;fill:#ffffff"
+           y="474.04486"
+           x="92.749992"
+           id="tspan4999"
+           sodipodi:role="line">999KT</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsTAS"
+       inkscape:label="TAS">
+      <rect
+         inkscape:label="TAS-bg"
+         y="455.49994"
+         x="153.5"
+         height="23.5"
+         width="86"
+         id="TAS-bg"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+        <desc
+           id="desc5827">True Airspeed</desc>
+      </rect>
+      <text
+         id="text5013"
+         y="471.6181"
+         x="156.5"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           style="fill:#ffffff"
+           y="471.6181"
+           x="156.5"
+           id="tspan5011"
+           sodipodi:role="line">TAS</tspan></text>
+      <text
+         id="PFDInstrumentsTAS-text"
+         y="474.04486"
+         x="179.75"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="TAS-text"
+         sodipodi:linespacing="125%"><tspan
+           style="text-align:start;text-anchor:start;fill:#ffffff"
+           y="474.04486"
+           x="179.75"
+           id="tspan5015"
+           sodipodi:role="line">999KT</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsSelectedCRS"
+       inkscape:label="SelectedCRS">
+      <rect
+         inkscape:label="SelectedCRS-bg"
+         y="427.5"
+         x="561.5"
+         height="26"
+         width="84"
+         id="PFDInstrumentsSelectedCRS-bg"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="PFDInstrumentsSelectedCRS-bgtext"
+         inkscape:label="SelectedCRS-bgtext"
+         y="444.86816"
+         x="564.85876"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           style="fill:#ffffff"
+           y="444.86816"
+           x="564.85876"
+           id="tspan5027"
+           sodipodi:role="line">CRS</tspan></text>
+      <text
+         id="PFDInstrumentsSelectedCRS-text"
+         y="448.26562"
+         x="644.60211"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="SelectedCRS-text"
+         sodipodi:linespacing="125%"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ff00ff;fill-opacity:1"
+           y="448.26562"
+           x="644.60211"
+           id="tspan5033"
+           sodipodi:role="line">000°</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsSelectedHDG"
+       inkscape:label="SelectedHDG">
+      <rect
+         inkscape:label="SelectedHDG-bg"
+         y="427.5"
+         x="275.5"
+         height="26"
+         width="84"
+         id="SelectedHDG-bg"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="SelectedHDG-bgtext"
+         inkscape:label="SelectedHDG-bgtext"
+         y="444.86816"
+         x="277"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           style="fill:#ffffff"
+           y="444.86816"
+           x="277"
+           id="tspan5044"
+           sodipodi:role="line">HDG</tspan></text>
+      <text
+         id="PFDInstrumentsSelectedHDG-text"
+         y="448.26562"
+         x="358.6001"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="SelectedHDG-text"
+         sodipodi:linespacing="125%"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#00ffff;fill-opacity:1"
+           y="448.26562"
+           x="358.6001"
+           id="tspan5048"
+           sodipodi:role="line">000°</tspan></text>
+    </g>
+    <g
+       id="PFDInstrumentsSelectedALT"
+       inkscape:label="SelectedALT"
+       style="display:inline">
+      <path
+         inkscape:label="SelectedALT-bug"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="PFDInstrumentsSelectedALT-bug"
+         d="m 702.995,273.07678 13.50494,0.0625 10e-6,4.92322 -9.00001,6.4375 9.00001,6.5625 -10e-6,4.12239 -13.50494,-0.0625 z"
+         style="fill:#00ffff;stroke:none;stroke-width:1.00699997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         inkscape:label="SelectedALT-bg"
+         y="82.54493"
+         x="703.54492"
+         height="30.910122"
+         width="104.91015"
+         id="SelectedALT-bg"
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.08987784;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         inkscape:label="SelectedALT-text"
+         id="PFDInstrumentsSelectedALT-text"
+         y="106.73632"
+         x="725.75"
+         style="font-style:normal;font-weight:normal;font-size:24px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           style="fill:#ffffff"
+           y="106.73632"
+           x="725.75"
+           id="tspan6644"
+           sodipodi:role="line">99999</tspan></text>
+      <path
+         style="display:inline;fill:#00ffff;stroke:none;stroke-width:1.00699997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 708.11228,86.945933 13.50494,0.0625 10e-6,4.92322 -9.00001,6.4375 9.00001,6.562507 -10e-6,4.12239 -13.50494,-0.0625 z"
+         id="PFDInstrumentsSelectedALT-symbol"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:label="SelectedALT-symbol" />
+    </g>
+  </g>
+  <g
      style="display:inline"
      id="PFDInstrumentsXPDR-TIME"
      inkscape:label="XPDR-TIME">
@@ -6961,669 +7668,5 @@
          x="813.50757"
          y="737.74677"
          style="fill:#ffffff">0</tspan></text>
-  </g>
-  <g
-     id="PFDInstrumentsPFD-Widgets"
-     inkscape:label="PFD-Widgets"
-     style="display:inline">
-    <g
-       id="PFDInstrumentsDME1"
-       inkscape:label="DME1">
-      <path
-         inkscape:label="DME1-bg"
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
-         id="PFDInstrumentsDME1-bg"
-         d="m 237,670 v -78 h 56 c 0,46.09733 24,78 24,78 h -80"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="239.58443"
-         y="611.12927"
-         id="PFDInstrumentsDME1-title"
-         inkscape:label="DME1-title"><tspan
-           sodipodi:role="line"
-           id="tspan6098"
-           x="239.58443"
-           y="611.12927"
-           style="fill:#ffffff">DME</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="239.77455"
-         y="628.24243"
-         id="PFDInstrumentsDME1-SRC-text"
-         inkscape:label="DME1-SRC-text"><tspan
-           sodipodi:role="line"
-           id="tspan6111"
-           x="239.77455"
-           y="628.24243"
-           style="fill:#00ffff">NAV1</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="237.4928"
-         y="647.4472"
-         id="PFDInstrumentsDME1-FREQ-text"
-         inkscape:label="DME1-FREQ-text"><tspan
-           sodipodi:role="line"
-           id="tspan6115"
-           x="237.4928"
-           y="647.4472"
-           style="fill:#00ffff">123.45</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="237.68295"
-         y="666.27173"
-         id="PFDInstrumentsDME1-DST-text"
-         inkscape:label="DME1-DST-text"><tspan
-           sodipodi:role="line"
-           id="tspan6119"
-           x="237.68295"
-           y="666.27173"
-           style="fill:#ffffff">99.9NM</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsBRG1"
-       inkscape:label="BRG1">
-      <path
-         inkscape:label="BRG1-bg"
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
-         id="PFDInstrumentsBRG1-bg"
-         d="m 237,676 h 84 c 23.41331,39.76873 75,60 75,60 H 237 Z"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path5378-2"
-         d="m 296.49782,722.74639 h 63.3915"
-         style="display:inline;fill:none;stroke:#00ffff;stroke-width:2.02932835;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="ccc"
-         inkscape:connector-curvature="0"
-         id="path5376-6"
-         d="m 320.14562,734.07451 -17.5,-11.32812 17.5,-11.32812"
-         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.70979106;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="239.5529"
-         y="695.16937"
-         id="PFDInstrumentsBRG1-DST-text"
-         inkscape:label="BRG1-DST-text"><tspan
-           sodipodi:role="line"
-           id="tspan5857-2-0"
-           x="239.5529"
-           y="695.16937"
-           style="fill:#ffffff">99.9NM</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="241.2616"
-         y="713.16797"
-         id="PFDInstrumentsBRG1-WPID-text"
-         inkscape:label="BRG1-WPID-text"><tspan
-           sodipodi:role="line"
-           id="tspan5857-9-3"
-           x="241.2616"
-           y="713.16797"
-           style="fill:#00ffff">WPID</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="240.84253"
-         y="731.08093"
-         id="PFDInstrumentsBRG1-SRC-text"
-         inkscape:label="BRG1-SRC-text"><tspan
-           sodipodi:role="line"
-           id="tspan5857-0"
-           x="240.84253"
-           y="731.08093"
-           style="fill:#ffffff">NAV1</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsPFD-Multilines"
-       inkscape:label="PFD-Multilines">
-      <rect
-         inkscape:label="PFD-Multilines-bg"
-         y="492"
-         x="710"
-         height="218.00002"
-         width="302"
-         id="PFD-Multilines-bg"
-         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
-    <g
-       id="PFDInstrumentsPFD-Map"
-       inkscape:label="PFD-Map">
-      <rect
-         inkscape:label="PFD-Map-bg"
-         y="492"
-         x="13"
-         height="218"
-         width="215"
-         id="PFD-Map-bg"
-         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
-    <g
-       id="PFDInstrumentsBRG2"
-       inkscape:label="BRG2">
-      <path
-         inkscape:label="BRG2-bg"
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
-         id="PFDInstrumentsBRG2-bg"
-         d="m 600,676 h 84 v 60 H 527 c 0,0 48.17738,-22.01773 73,-60 z"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5382-6"
-         d="m 626.69102,722.59238 c -3.32886,0 -6.65772,0 -9.98658,0"
-         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.08442605;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5387-7"
-         d="m 599.26678,711.18476 c 5.81255,3.80255 11.62511,7.60508 17.43766,11.40762 -5.81255,3.80254 -11.62511,7.60508 -17.43766,11.40762"
-         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.71272147;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5390-5"
-         d="m 559.69754,722.59238 c 3.91595,0 7.83189,0 11.74785,0"
-         style="display:inline;fill:none;stroke:#00ffff;stroke-width:1.20042503;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5396-6"
-         d="m 611.07939,718.91251 c -13.21133,0 -26.42267,0 -39.634,0 0,2.45324 0,4.9065 0,7.35975 13.21133,0 26.42267,0 39.634,0"
-         style="fill:none;stroke:#00ffff;stroke-width:2.35714316;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="630.98438"
-         y="729.5387"
-         id="PFDInstrumentsBRG2-SRC-text"
-         inkscape:label="BRG2-SRC-text"><tspan
-           sodipodi:role="line"
-           id="tspan5857"
-           x="630.98438"
-           y="729.5387"
-           style="fill:#ffffff">NAV2</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="630.83301"
-         y="712.19623"
-         id="PFDInstrumentsBRG2-WPID-text"
-         inkscape:label="BRG2-WPID-text"><tspan
-           sodipodi:role="line"
-           id="tspan5857-9"
-           x="630.83301"
-           y="712.19623"
-           style="fill:#00ffff">WPID</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="608.20819"
-         y="694.95819"
-         id="PFDInstrumentsBRG2-DST-text"
-         inkscape:label="BRG2-DST-text"><tspan
-           sodipodi:role="line"
-           id="tspan5857-2"
-           x="608.20819"
-           y="694.95819"
-           style="fill:#ffffff">99.9NM</tspan></text>
-    </g>
-    <path
-       style="display:none;opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 684.00365,668.99908 v -78 h -56 c 0,46.09733 -24,78 -24,78 h 80"
-       id="PFDInstrumentsDME2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc"
-       inkscape:label="DME2" />
-    <g
-       id="PFDInstrumentsAnnunciation"
-       inkscape:label="Annunciation">
-      <rect
-         inkscape:label="Annunciation-bg"
-         y="384.50903"
-         x="876.50903"
-         height="103.98194"
-         width="147.98192"
-         id="Annunciation-bg"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.01803744;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
-    <g
-       id="PFDInstrumentsWindData"
-       inkscape:label="WindData">
-      <rect
-         inkscape:label="WindData-bg"
-         y="460.5"
-         x="245.5"
-         height="54"
-         width="80"
-         id="PFDInstrumentsWindData-bg"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:16px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="285.13638"
-         y="483.44598"
-         id="PFDInstrumentsWindData-NODATA"
-         inkscape:label="WindData-NODATA"><tspan
-           sodipodi:role="line"
-           id="tspan6137"
-           x="285.13638"
-           y="483.44598"
-           style="fill:#ffffff">NO WIND</tspan><tspan
-           sodipodi:role="line"
-           x="285.13638"
-           y="503.44598"
-           id="tspan6141"
-           style="fill:#ffffff">DATA</tspan></text>
-      <g
-         id="PFDInstrumentsWindData-OPTN1"
-         inkscape:label="WindData-OPTN2"
-         transform="matrix(0.94507049,7.5046918e-4,7.5046918e-4,1.0064403,300.41761,-34.744936)"
-         style="display:inline">
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:21.87422752px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="-9.5834036"
-           y="514.44525"
-           id="PFDInstrumentsWindData-OPTN1-crosswind-text"
-           transform="rotate(-0.70051)"
-           inkscape:label="WindData-OPTN2-crosswind-text"><tspan
-             sodipodi:role="line"
-             id="tspan11152"
-             x="-9.5834036"
-             y="514.44525"
-             style="fill:#ffffff">99</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:21.87422752px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="-31.885189"
-           y="543.1496"
-           id="PFDInstrumentsWindData-OPTN1-headwind-text"
-           transform="rotate(-0.70051)"
-           inkscape:label="WindData-OPTN2-headwind-text"><tspan
-             sodipodi:role="line"
-             id="tspan11152-7"
-             x="-31.885189"
-             y="543.1496"
-             style="fill:#ffffff">99</tspan></text>
-        <g
-           id="PFDInstrumentsWindData-OPTN1-symbol"
-           inkscape:label="WindData-OPTN2-symbol">
-          <g
-             style="display:inline;fill:#ffffff"
-             id="PFDInstrumentsWindData-OPTN2-headwind"
-             transform="rotate(90,-69.568086,483.6217)"
-             inkscape:label="WindData-OPTN2-headwind">
-            <path
-               inkscape:label="#g10970"
-               style="opacity:1;fill:#ffffff;fill-rule:evenodd;stroke:#fffffb;stroke-width:3.14109135;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-               d="m -56.67437,453.74383 36.626025,-0.77773 v 0 0 l -8.808277,8.21371 -0.01179,-15.81125 8.820066,7.59754"
-               id="g10970-5"
-               inkscape:connector-curvature="0" />
-          </g>
-          <g
-             style="display:inline;fill:#ffffff"
-             id="PFDInstrumentsWindData-OPTN2-crosswind"
-             transform="matrix(1.1318615,0.01307176,-0.01476273,1.1366266,15.454336,-2.9082836)"
-             inkscape:label="WindData-OPTN2-crosswind">
-            <path
-               inkscape:label="#g10970"
-               style="opacity:1;fill:#ffffff;fill-rule:evenodd;stroke:#fffffb;stroke-width:2.9849999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-               d="m -56.499992,453.75001 32.57232,-0.79343 v 0 0 l -6.195986,-5.01221 0.137881,11.25986 6.058105,-6.24765"
-               id="g10970-5-1"
-               inkscape:connector-curvature="0" />
-          </g>
-        </g>
-      </g>
-      <g
-         id="PFDInstrumentsWindData-OPTN3"
-         transform="matrix(0.99992526,0.0122259,-0.0122259,0.99992526,312.22386,34.921592)"
-         inkscape:label="WindData-OPTN1"
-         style="display:inline">
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="16.583868"
-           y="477.01712"
-           id="PFDInstrumentsWindData-OPTN3-SPD-text"
-           inkscape:label="WindData-OPTN1-SPD-text"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan10667-6"
-             x="16.583868"
-             y="477.01712"
-             style="text-align:end;text-anchor:end;fill:#ffffff">99KT</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:17.33333397px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="-24.043869"
-           y="441.57062"
-           id="PFDInstrumentsWindData-OPTN3-HDG-text"
-           inkscape:label="WindData-OPTN1-HDG-text"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan10667"
-             x="-24.043869"
-             y="441.57062"
-             style="fill:#ffffff">000°</tspan></text>
-        <g
-           id="PFDInstrumentsWindData-OPTN3-HDG"
-           transform="matrix(0,-1,1,0,-489.03882,417.06566)"
-           inkscape:label="WindData-OPTN1-HDG"
-           style="display:inline">
-          <path
-             inkscape:label="#g10970"
-             style="opacity:1;fill:#ffffff;fill-rule:evenodd;stroke:#fffffb;stroke-width:3.28068852;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="m -56.516052,453.7481 39.770571,-0.87723 0,0 0,0 -12.312915,-6.96735 0.191895,15.69465 12.12102,-8.7273"
-             id="g10970"
-             inkscape:connector-curvature="0" />
-        </g>
-      </g>
-    </g>
-    <g
-       id="PFDInstrumentsBARO"
-       inkscape:label="BARO">
-      <rect
-         inkscape:label="BARO-bg"
-         y="455.5"
-         x="703.55597"
-         height="25.944014"
-         width="104.944"
-         id="BARO-bg"
-         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66624951px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;text-anchor:middle;text-align:center;-inkscape-font-specification:'Sans, Normal';font-stretch:normal;font-variant:normal;writing-mode:lr;stroke-miterlimit:4;stroke-dasharray:none;"
-         x="755.6665"
-         y="475.64999"
-         id="PFDInstrumentsBARO-text"
-         inkscape:label="BARO-text"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan5399">XX.XXin</tspan></text>
-    </g>
-    <rect
-       style="display:none;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="PFDInstrumentsSelectedALT-meters"
-       width="105"
-       height="25"
-       x="703.5"
-       y="57.5"
-       inkscape:label="SelectedALT-meters" />
-    <rect
-       style="display:none;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.01030481;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="PFDInstrumentsSelectedSpeed"
-       width="85.989693"
-       height="23.989695"
-       x="153.50516"
-       y="89.50515"
-       inkscape:label="SelectedSpeed" />
-    <g
-       id="PFDInstrumentsOAT"
-       inkscape:label="OAT">
-      <rect
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="OAT-bg"
-         width="95.359917"
-         height="23.448149"
-         x="2.4282146"
-         y="720.03497"
-         inkscape:label="OAT-bg">
-        <desc
-           id="desc5833-7">OAT</desc>
-      </rect>
-      <text
-         id="text4961"
-         y="737.25531"
-         x="4.242641"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:100%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         sodipodi:linespacing="100%"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:100%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff"
-           y="737.25531"
-           x="4.242641"
-           id="tspan4959"
-           sodipodi:role="line">OAT</tspan></text>
-      <text
-         id="PFDInstrumentsOAT-text"
-         y="738.1048"
-         x="96.332848"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="OAT-text"
-         sodipodi:linespacing="125%"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
-           y="738.1048"
-           x="96.332848"
-           id="tspan4965"
-           sodipodi:role="line">99.9°C</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsGSPD"
-       inkscape:label="GSPD">
-      <rect
-         inkscape:label="GSPD-bg"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="GSPD-bg"
-         width="86"
-         height="23.5"
-         x="67.5"
-         y="455.49994">
-        <desc
-           id="desc5829">Ground Speed</desc>
-      </rect>
-      <text
-         id="text4997"
-         y="471.6181"
-         x="70.5"
-         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="fill:#ffffff"
-           y="471.6181"
-           x="70.5"
-           id="tspan4995"
-           sodipodi:role="line">GS</tspan></text>
-      <text
-         inkscape:label="GSPD-text"
-         id="PFDInstrumentsGSPD-text"
-         y="474.04486"
-         x="92.749992"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="text-align:start;text-anchor:start;fill:#ffffff"
-           y="474.04486"
-           x="92.749992"
-           id="tspan4999"
-           sodipodi:role="line">999KT</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsTAS"
-       inkscape:label="TAS">
-      <rect
-         inkscape:label="TAS-bg"
-         y="455.49994"
-         x="153.5"
-         height="23.5"
-         width="86"
-         id="TAS-bg"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
-        <desc
-           id="desc5827">True Airspeed</desc>
-      </rect>
-      <text
-         id="text5013"
-         y="471.6181"
-         x="156.5"
-         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="fill:#ffffff"
-           y="471.6181"
-           x="156.5"
-           id="tspan5011"
-           sodipodi:role="line">TAS</tspan></text>
-      <text
-         id="PFDInstrumentsTAS-text"
-         y="474.04486"
-         x="179.75"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="TAS-text"><tspan
-           style="text-align:start;text-anchor:start;fill:#ffffff"
-           y="474.04486"
-           x="179.75"
-           id="tspan5015"
-           sodipodi:role="line">999KT</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsSelectedCRS"
-       inkscape:label="SelectedCRS">
-      <rect
-         inkscape:label="SelectedCRS-bg"
-         y="427.5"
-         x="561.5"
-         height="26"
-         width="84"
-         id="PFDInstrumentsSelectedCRS-bg"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         id="PFDInstrumentsSelectedCRS-bgtext"
-         inkscape:label="SelectedCRS-bgtext"
-         y="444.86816"
-         x="564.85876"
-         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="fill:#ffffff"
-           y="444.86816"
-           x="564.85876"
-           id="tspan5027"
-           sodipodi:role="line">CRS</tspan></text>
-      <text
-         id="PFDInstrumentsSelectedCRS-text"
-         y="448.26562"
-         x="644.60211"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-         xml:space="preserve"
-         inkscape:label="SelectedCRS-text"
-         sodipodi:linespacing="125%"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ff00ff;fill-opacity:1;"
-           y="448.26562"
-           x="644.60211"
-           id="tspan5033"
-           sodipodi:role="line">000°</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsSelectedHDG"
-       inkscape:label="SelectedHDG">
-      <rect
-         inkscape:label="SelectedHDG-bg"
-         y="427.5"
-         x="275.5"
-         height="26"
-         width="84"
-         id="SelectedHDG-bg"
-         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         id="SelectedHDG-bgtext"
-         inkscape:label="SelectedHDG-bgtext"
-         y="444.86816"
-         x="277"
-         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="fill:#ffffff"
-           y="444.86816"
-           x="277"
-           id="tspan5044"
-           sodipodi:role="line">HDG</tspan></text>
-      <text
-         id="PFDInstrumentsSelectedHDG-text"
-         y="448.26562"
-         x="358.6001"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-         xml:space="preserve"
-         inkscape:label="SelectedHDG-text"
-         sodipodi:linespacing="125%"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#00ffff;fill-opacity:1;"
-           y="448.26562"
-           x="358.6001"
-           id="tspan5048"
-           sodipodi:role="line">000°</tspan></text>
-    </g>
-    <g
-       id="PFDInstrumentsSelectedALT"
-       inkscape:label="SelectedALT"
-       style="display:inline">
-      <path
-         inkscape:label="SelectedALT-bug"
-         sodipodi:nodetypes="cccccccc"
-         inkscape:connector-curvature="0"
-         id="PFDInstrumentsSelectedALT-bug"
-         d="m 702.995,273.07678 13.50494,0.0625 10e-6,4.92322 -9.00001,6.4375 9.00001,6.5625 -10e-6,4.12239 -13.50494,-0.0625 z"
-         style="fill:#00ffff;stroke:none;stroke-width:1.00699997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <rect
-         inkscape:label="SelectedALT-bg"
-         y="82.54493"
-         x="703.54492"
-         height="30.910122"
-         width="104.91015"
-         id="SelectedALT-bg"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.08987784;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         inkscape:label="SelectedALT-text"
-         id="PFDInstrumentsSelectedALT-text"
-         y="106.73632"
-         x="725.75"
-         style="font-style:normal;font-weight:normal;font-size:24px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="fill:#ffffff"
-           y="106.73632"
-           x="725.75"
-           id="tspan6644"
-           sodipodi:role="line">99999</tspan></text>
-      <path
-         style="display:inline;fill:#00ffff;stroke:none;stroke-width:1.00699997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 708.11228,86.945933 13.50494,0.0625 10e-6,4.92322 -9.00001,6.4375 9.00001,6.562507 -10e-6,4.12239 -13.50494,-0.0625 z"
-         id="PFDInstrumentsSelectedALT-symbol"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccccccc"
-         inkscape:label="SelectedALT-symbol" />
-    </g>
-    <g
-       id="PFDInstrumentsWindData-OPTN2"
-       transform="matrix(0.99992526,0.0122259,-0.0122259,0.99992526,312.30832,34.878539)"
-       inkscape:label="WindData-OPTN1"
-       style="display:inline">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="16.583868"
-         y="477.01712"
-         id="PFDInstrumentsWindData-OPTN2-SPD-text"
-         inkscape:label="WindData-OPTN1-SPD-text"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan10667-6-4"
-           x="16.583868"
-           y="477.01712"
-           style="text-align:end;text-anchor:end;fill:#ffffff">99KT</tspan></text>
-      <g
-         id="PFDInstrumentsWindData-OPTN2-HDG"
-         transform="matrix(0,-1,1,0,-489.03882,417.06566)"
-         inkscape:label="WindData-OPTN1-HDG"
-         style="display:inline">
-        <path
-           inkscape:label="#g10970"
-           style="opacity:1;fill:#ffffff;fill-rule:evenodd;stroke:#fffffb;stroke-width:3.28068852;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m -56.516052,453.7481 39.770571,-0.87723 0,0 0,0 -12.312915,-6.96735 0.191895,15.69465 12.12102,-8.7273"
-           id="g10970-8"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
   </g>
 </svg>

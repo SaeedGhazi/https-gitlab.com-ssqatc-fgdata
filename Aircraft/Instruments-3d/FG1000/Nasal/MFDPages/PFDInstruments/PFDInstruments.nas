@@ -79,7 +79,7 @@ var PFDInstruments =
     }
 
 
-    obj.topMenu(device, obj, nil);
+    #obj.topMenu(device, obj, nil);
 
     obj.setController(fg1000.PFDInstrumentsController.new(obj, svg));
     obj.setWindDisplay(0);
@@ -94,6 +94,79 @@ var PFDInstruments =
 
     return obj;
   },
+
+
+  topMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(1, "INSET", pg);  # TODO
+    pg.addMenuItem(3, "PFD", pg, pg.mfd.PFDInstruments.PFDMenu);
+    pg.addMenuItem(4, "OBS", pg); # TODO
+    pg.addMenuItem(5, "CDI", pg); # TODO
+    pg.addMenuItem(6, "DME", pg); # TODO
+    pg.addMenuItem(7, "XPDR", pg); # TODO
+    pg.addMenuItem(8, "IDENT", pg); # TODO
+    pg.addMenuItem(9, "TMR/REF", pg); # TODO
+    pg.addMenuItem(10, "NRST", pg); # TODO
+    pg.addMenuItem(11, "ALERTS", pg); # TODO
+    device.updateMenus();
+  },
+
+  PFDMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(0, "SYN VIS", pg);  # TODO
+    pg.addMenuItem(1, "DFLTS", pg);
+    pg.addMenuItem(2, "WIND", pg, pg.mfd.PFDInstruments.windMenu);
+    pg.addMenuItem(3, "DME", pg); # TODO
+    pg.addMenuItem(4, "BRG1", pg); # TODO
+    pg.addMenuItem(5, "HSI FRMT", pg); # TODO
+    pg.addMenuItem(6, "BRG2", pg); # TODO
+    #pg.addMenuItem(8, "IDENT", pg); # TODO
+    pg.addMenuItem(8, "ALT UNIT ", pg); # TODO
+    pg.addMenuItem(9, "STD BARO", pg); # TODO
+    pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
+    pg.addMenuItem(11, "ALERTS", pg); # TODO
+    device.updateMenus();
+  },
+
+  windMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(2, "OPTN1", pg,
+      func(dev, pg, mi) { pg.mfd.PFDInstruments.setWindDisplay(1); device.updateMenus(); }, # Action callback
+      func(svg, mi) { pg.mfd.PFDInstruments.toggleWindDisplay(device, svg, mi, 1); } # Display callback
+    );
+    pg.addMenuItem(3, "OPTN2", pg,
+      func(dev, pg, mi) { pg.mfd.PFDInstruments.setWindDisplay(2); device.updateMenus(); }, # Action callback
+      func(svg, mi) { pg.mfd.PFDInstruments.toggleWindDisplay(device, svg, mi, 2); } # Display callback
+    );
+    pg.addMenuItem(4, "OPTN3", pg,
+      func(dev, pg, mi) { pg.mfd.PFDInstruments.setWindDisplay(3); device.updateMenus(); }, # Action callback
+      func(svg, mi) { pg.mfd.PFDInstruments.toggleWindDisplay(device, svg, mi, 3); } # Display callback
+    );
+    pg.addMenuItem(5, "OFF", pg,
+      func(dev, pg, mi) { pg.mfd.PFDInstruments.setWindDisplay(0); device.updateMenus(); }, # Action callback
+      func(svg, mi) { pg.mfd.PFDInstruments.toggleWindDisplay(device, svg, mi, 0); } # Display callback
+    );
+    pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
+    pg.addMenuItem(11, "ALERTS", pg); # TODO
+    device.updateMenus();
+  },
+
+  toggleWindDisplay : func(device, svg, mi, wind_value) {
+    var bg_name = sprintf("SoftKey%d-bg",mi.menu_id);
+    if (me._windDataDisplay == wind_value) {
+      device.svg.getElementById(bg_name).setColorFill(0.5,0.5,0.5);
+      svg.setColor(0.0,0.0,0.0);
+    } else {
+      device.svg.getElementById(bg_name).setColorFill(0.0,0.0,0.0);
+      svg.setColor(1.0,1.0,1.0);
+    }
+    svg.setText(mi.title);
+    svg.setVisible(1); # display function
+  },
+
   offdisplay : func() {
     me._group.setVisible(0);
 
@@ -110,11 +183,6 @@ var PFDInstruments =
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
     me.getController().ondisplay();
-  },
-  topMenu : func(device, pg, menuitem) {
-    pg.clearMenu();
-    pg.resetMenuColors();
-    device.updateMenus();
   },
 
   updateAI: func(pitch, roll, slip) {
@@ -481,14 +549,12 @@ var PFDInstruments =
   },
 
   # Update the wind display.  There are three options:
-  # -1 - Data invalid
   # 0 - No wind data displayed
   # 1 - Numeric headwind and crosswind components
   # 2 - Direction arrow and numeric speed
   # 3 - Direction arrow, and numeric True direction and speet
   setWindDisplay : func(option) {
     me.getElement("WindData").setVisible(option != 0);
-    me.getElement("WindData-NODATA").setVisible(option == -1);
     me.getElement("WindData-OPTN1").setVisible(option == 1);
     me.getElement("WindData-OPTN2").setVisible(option == 2);
     me.getElement("WindData-OPTN3").setVisible(option == 3);
@@ -496,48 +562,43 @@ var PFDInstruments =
     me._windDataDisplay = option;
   },
 
-  updateWindData : func (hdg, wind_hdg, wind_spd) {
-    if ((me._windDataDisplay == -1) or (me._windDataDisplay == 0)) {
+  updateWindData : func (hdg, wind_hdg, wind_spd, no_data) {
+    if (no_data and (me._windDataDisplay > 0)) {
+      me.getElement("WindData-NODATA").show();
+      me.getElement("WindData-NODATA-bg").show();
       return;
+    } else {
+      me.getElement("WindData-NODATA").hide();
+      me.getElement("WindData-NODATA-bg").hide();
     }
 
-    if (me._windDataDisplay == 1) {
-      # Headwind/Crosswind numeric display
-      var alpha = (wind_hdg - hdg) * D2R;
-      var Vt = wind_spd * math.sin(alpha);
-      var Ve = wind_spd * math.cos(alpha);
-      if (Vt != 0) {
-        me.getElement("WindData-OPTN1-crosswind-text").setText(sprintf("%i", abs(Vt)));
-        me.getElement("WindData-OPTN1-crosswind")
-          .setScale(-abs(Vt)/Vt, 1)
-          .setTranslation(-35 * (abs(Vt)/Vt + 1), 0);
-      } else {
-        me.getElement("WindData-OPTN1-crosswind-text").setText("0");
-        me.getElement("WindData-OPTN1-crosswind")
-          .setScale(1, 1)
-          .setTranslation(0, 0);
-      }
+    var alpha = (wind_hdg - hdg);
 
-      if (Ve != 0) {
-        me.getElement("WindData-OPTN1-headwind-text").setText(sprintf("%i", abs(Ve)));
-        me.getElement("WindData-OPTN1-headwind")
-          .setScale(1, abs(Ve)/Ve)
-          .setTranslation(0, 515 * (1 - abs(Ve)/Ve));
-      } else {
-        me.getElement("WindData-OPTN1-headwind-text").setText("0");
-        me.getElement("WindData-OPTN1-headwind")
-            .setScale(1, 1)
-            .setTranslation(0, 0);
-      }
+    # Stop the wind arrows oscillating
+    if (wind_spd < 1) {
+      alpha = 0;
+      wind_hdg = 0;
+    }
+
+    if (me._windDataDisplay == 0) {
+      me.getElement("WindData").hide();
+    } elsif (me._windDataDisplay == 1) {
+      # Headwind/Crosswind numeric display
+      var Vt = wind_spd * math.sin(alpha * D2R);
+      var Ve = wind_spd * math.cos(alpha * D2R);
+      me.getElement("WindData-OPTN1-crosswind-text").setText(sprintf("%i", abs(Vt)));
+      me.getElement("WindData-OPTN1-crosswind").setRotation(Vt > 0.1 ? 180*D2R : 0);
+      me.getElement("WindData-OPTN1-headwind-text").setText(sprintf("%i", abs(Ve)));
+      me.getElement("WindData-OPTN1-headwind").setRotation(Ve > 0.1 ? 180*D2R : 0);
     } elsif (me._windDataDisplay == 2) {
       # Direction arrow and numeric speed
       me.getElement("WindData-OPTN2-HDG").setRotation((alpha + 180) * D2R);
-      me.getElement("WindData-OPTN2-SPD-text").setText(int(wind_spd));
+      me.getElement("WindData-OPTN2-SPD-text").setText(sprintf("%i", wind_spd));
     } elsif (me._windDataDisplay == 3) {
       # Direction arrow with numeric true direction and speed
       me.getElement("WindData-OPTN3-HDG").setRotation((alpha + 180) * D2R);
       me.getElement("WindData-OPTN3-HDG-text").setText(sprintf("%03i°T", wind_hdg));
-      me.getElement("WindData-OPTN3-SPD-text").setText(int(wind_spd) ~ "KT");
+      me.getElement("WindData-OPTN3-SPD-text").setText(sprintf("%iKT", wind_spd));
     } else {
       print("Unknown wind data option " ~ me._windDataDisplay);
     }

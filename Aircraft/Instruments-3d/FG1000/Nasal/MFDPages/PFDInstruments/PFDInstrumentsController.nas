@@ -17,6 +17,11 @@
 # PFDInstruments Controller
 var PFDInstrumentsController =
 {
+
+
+  # Declutter levels.
+  WIND : [ "DCLTR", "DCLTR-1", "DCLTR-2", "DCLTR-3"],
+
   new : func (page, svg)
   {
     var obj = {
@@ -34,7 +39,6 @@ var PFDInstrumentsController =
 
     return obj;
   },
-
 
   # Input Handling
   handleCRSR : func() {
@@ -97,10 +101,13 @@ var PFDInstrumentsController =
     me.page.updateHSI(data["ADCHeadingDeg"]);
     me._heading = data["ADCHeadingDeg"];
 
+    # If we're "flying" at < 10kts, then we won't have sufficient delta between
+    # airspeed and groundspeed to determine wind
     me.page.updateWindData(
       hdg : data["ADCHeadingDeg"],
       wind_hdg : data["ADCWindHeadingDeg"],
-      wind_spd : data ["ADCWindSpeedKt"]
+      wind_spd : data ["ADCWindSpeedKt"],
+      no_data: (data["ADCIndicatedAirspeed"] < 1.0)
     );
 
     return emesary.Transmitter.ReceiptStatus_OK;

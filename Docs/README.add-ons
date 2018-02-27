@@ -22,11 +22,16 @@ Contents
 
 4. Resources under the add-on directory
 
-5. How to run code after an add-on is loaded
+5. Add-on-specific menus and dialogs
 
-6. Overview of the C++ API
+   a) Add-on-specific menus
+   b) Add-on-specific dialogs
 
-7. Nasal API
+6. How to run code after an add-on is loaded
+
+7. Overview of the C++ API
+
+8. Nasal API
 
 
 Introduction
@@ -450,7 +455,104 @@ add-on-specific resources and, more interestingly, doesn't have to
 hardcode the add-on identifier every time you need to access a resource
 inside the add-on directory.
 
-5. How to run code after an add-on is loaded
+
+5. Add-on-specific menus and dialogs
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+a) Add-on-specific menus
+   ^^^^^^^^^^^^^^^^^^^^^
+
+Add-ons can easily provide their own menus. If an add-on is loaded that
+has a file named 'addon-menubar-items.xml' in its base directory, the
+menus described in this file are added to the FlightGear menu bar. The
+file should look like this:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+  <meta>
+    <file-type type="string">FlightGear add-on menu bar items</file-type>
+    <format-version type="int">1</format-version>
+  </meta>
+
+  <menubar-items>
+    <menu>
+      ...
+    </menu>
+
+    <menu>
+      ...
+    </menu>
+  </menubar-items>
+</PropertyList>
+
+In this file, each <menu> element must be a valid menu description for
+the FlightGear menu system (the FlightGear standard menubar in
+$FG_ROOT/gui/menubar.xml provides good examples). Here is an example
+that adds one menu with an entry for running some Nasal code and another
+entry for opening a custom dialog (see below for add-on-specific dialogs):
+
+    <menu>
+      <label>My Menu</label>
+      <enabled type="bool">true</enabled>
+
+      <item>
+        <label>Run Foobar Nasal</label>
+        <binding>
+          <command>nasal</command>
+          <script>foobar.doBaz();</script>
+        </binding>
+      </item>
+      <item>
+        <label>My Foobar Dialog</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>my-foobar-dialog</dialog-name>
+        </binding>
+      </item>
+    </menu>
+
+This feature was added in FlightGear 2018.2.
+
+  For older versions, one can add menus via addon-config.xml, but it's a
+  bit hackish because of the menu index problem.
+
+
+b) Add-on-specific dialogs
+   ^^^^^^^^^^^^^^^^^^^^^^^
+
+As is the case for aircraft, add-ons can provide their own dialogs by
+shipping the corresponding XML files in the subfolder gui/dialogs of the
+add-on base directory. In other words, with a file like
+
+  <addon-base-path>/gui/dialogs/my-foobar-dialog.xml
+
+starting with:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <PropertyList>
+    <name>my-foobar-dialog</name>
+
+  ...
+
+the following <item> element inside 'addon-menubar-items.xml' (see
+above) describes a valid menu entry for showing the custom dialog.
+
+      <item>
+        <label>My Foobar Dialog</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>my-foobar-dialog</dialog-name>
+        </binding>
+      </item>
+
+See $FG_ROOT/gui/dialogs to get inspiration from FlightGear's standard
+dialogs.
+
+This feature was added in FlightGear 2018.2.
+
+
+6. How to run code after an add-on is loaded
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You may want to set up Nasal code to be run after an add-on is loaded;
@@ -478,7 +580,7 @@ here is how to do that:
   }
 
 
-6. Overview of the C++ API
+7. Overview of the C++ API
    ~~~~~~~~~~~~~~~~~~~~~~~
 
 The add-on C++ infrastructure mainly relies on the following classes:
@@ -526,7 +628,7 @@ the appropriate error message with SG_LOG() and
 fatalMessageBoxThenExit().
 
 
-7. Nasal API
+8. Nasal API
    ~~~~~~~~~
 
 The Nasal add-on API all lives in the 'addons' namespace. It gives Nasal

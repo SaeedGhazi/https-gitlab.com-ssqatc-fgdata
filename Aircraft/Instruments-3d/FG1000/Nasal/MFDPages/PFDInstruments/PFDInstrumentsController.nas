@@ -17,11 +17,6 @@
 # PFDInstruments Controller
 var PFDInstrumentsController =
 {
-
-
-  # Declutter levels.
-  WIND : [ "DCLTR", "DCLTR-1", "DCLTR-2", "DCLTR-3"],
-
   new : func (page, svg)
   {
     var obj = {
@@ -35,6 +30,13 @@ var PFDInstrumentsController =
       _selected_alt_ft : 0,
       _heading : 0,
       _source : "GPS",
+      _from :0,
+      _leg_id : "",
+      _leg_bearing  : 0,
+      _leg_distance_nm : 0,
+      _leg_deviation_deg : 0,
+      _deflection_dots :0,
+      _leg_xtrk_nm : 0,
     };
 
     return obj;
@@ -74,6 +76,25 @@ var PFDInstrumentsController =
     }
   },
 
+  handleRange : func(val)
+  {
+    var incr_or_decr = (val > 0) ? me.page.insetMap.zoomIn() : me.page.insetMap.zoomOut();
+  },
+
+  # Set the STD BARO to 29.92 in Hg
+  setStdBaro : func() {
+    var data = {};
+    data["FMSPressureSettingInHG"] = 29.92;
+
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me._page.mfd.getDeviceID(),
+      notifications.PFDEventNotification.FMSData,
+      data);
+
+    me.transmitter.NotifyAll(notification);
+  },
+
   # Handle update of the airdata information.
   # ADC data is produced periodically as an entire set
   handleADCData : func(data) {
@@ -97,6 +118,7 @@ var PFDInstrumentsController =
     me.page.updateVSI(data["ADCVerticalSpeedFPM"]);
     me.page.updateTAS(data["ADCTrueAirspeed"]);
     me.page.updateBARO(data["ADCPressureSettingInHG"]);
+
     me.page.updateOAT(data["ADCOutsideAirTemperatureC"]);
     me.page.updateHSI(data["ADCHeadingDeg"]);
     me._heading = data["ADCHeadingDeg"];
@@ -113,31 +135,65 @@ var PFDInstrumentsController =
     return emesary.Transmitter.ReceiptStatus_OK;
   },
 
-  # Handle update to the FMS information.
+  # Handle update to the FMS information.  Note that there is no guarantee
+  # that the entire set of FMS data will be available.
   handleFMSData : func(data) {
 
-    me.page.updateHDG(data["FMSHeadingBug"]);
-    me.page.updateSelectedALT(data["FMSSelectedAlt"]);
-    me._selected_alt_ft = data["FMSSelectedAlt"];
-
-    me.page.updateCRS(data["FMSLegBearing"]);
-
-    var from = 0;
-    if (me._navSelected == 1) {
-      from = data["FMSNav1From"];
-    } else {
-      from = data["FMSNav2From"];
+    if (data["FMSHeadingBug"] != nil) me.page.updateHDG(data["FMSHeadingBug"]);
+    if (data["FMSSelectedAlt"] != nil) {
+      me.page.updateSelectedALT(data["FMSSelectedAlt"]);
+      me._selected_alt_ft = data["FMSSelectedAlt"];
     }
 
-    me.page.updateCDI(
-      heading: me._heading,
-      course: data["FMSLegBearing"],
-      waypoint_valid: 1,
-      course_deviation_deg : data["FMSLegTrackErrorAngle"],
-      deflection_dots : data["FMSLegCourseError"], # TODO: proper conversion depending on source, environment
-      xtrk_nm : data["FMSLegCourseError"],
-      from: from,
-    );
+    if (data["FMSLegValid"] == "false") {
+      # No valid leg data, likely because there's no GPS course set
+      me.page.updateCRS(0);
+      me.page.updateCDI(
+        heading: me._heading,
+        course: 0,
+        waypoint_valid: 0,
+        course_deviation_deg : 0,
+        deflection_dots : 0,
+        xtrk_nm : 0,
+        from: 0,
+      );
+
+      # Update the bearing indicators with GPS data if that's what we're displaying.
+      if (me.page.getBRG1() == "GPS") me.page.setBRG1("NONE", 0);
+      if (me.page.getBRG2() == "GPS") me.page.setBRG2("NONE", 0);
+    } else {
+
+      if (data["FMSLegBearing"] != nil) me.page.updateCRS(data["FMSLegBearing"]);
+
+      if (me._navSelected == 1) {
+        if (data["FMSNav1From"] != nil) me._from = data["FMSNav1From"];
+      } else {
+        if (data["FMSNav2From"] != nil) me._from = data["FMSNav2From"];
+      }
+
+      if (data["FMSLegID"] != nil) me._leg_id = data["FMSLegID"];
+      if (data["FMSLegBearing"] != nil) me._leg_bearing = data["FMSLegBearing"];
+      if (data["FMSLegTrackErrorAngle"] != nil) me._leg_deviation_deg = data["FMSLegTrackErrorAngle"];
+
+      # TODO:  Proper cross-track error based on source and flight phase.
+      if (data["FMSLegCourseError"] != nil) me.deflection_dots = data["FMSLegCourseError"];
+      if (data["FMSLegCourseError"] != nil) me._leg_xtrk_nm = data["FMSLegCourseError"];
+
+      me.page.updateCDI(
+        heading: me._heading,
+        course: me._leg_bearing,
+        waypoint_valid: (data["FMSLegValid"] == "true"),
+        course_deviation_deg : me._leg_deviation_deg,
+        deflection_dots : me._deflection_dots,
+        xtrk_nm : me._leg_xtrk_nm,
+        from: me._from,
+        annun: "ENR"
+      );
+
+      # Update the bearing indicators with GPS data if that's what we're displaying.
+      if (me.page.getBRG1() == "GPS") me.page.setBRG1(me._leg_id, me._leg_bearing);
+      if (me.page.getBRG2() == "GPS") me.page.setBRG2(me._leg_id, me._leg_bearing);
+    }
 
     return emesary.Transmitter.ReceiptStatus_OK;
   },

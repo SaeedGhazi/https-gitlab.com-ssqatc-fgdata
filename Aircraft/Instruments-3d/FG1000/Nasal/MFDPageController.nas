@@ -44,7 +44,7 @@ handleNavFreqTransfer : func (value) { return me.page.mfd.SurroundController.han
 handleNavOuter        : func (value) { return me.page.mfd.SurroundController.handleNavOuter(value); },
 handleNavInner        : func (value) { return me.page.mfd.SurroundController.handleNavInner(value); },
 handleNavToggle       : func (value) { return me.page.mfd.SurroundController.handleNavToggle(value); },
-handleHeading         : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleHeading         : func (value) { return me.page.mfd.SurroundController.handleHeading(value); },
 handleHeadingPress    : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
 # Joystick
@@ -53,7 +53,7 @@ handleJoystickHorizontal : func (value) { return emesary.Transmitter.ReceiptStat
 handleJoystickHorizontal : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
 #CRS/BARO
-handleBaro      : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleBaro      : func (value) { return me.page.mfd.SurroundController.handleBaro(value); },
 handleCRS       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleCRSCenter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
@@ -94,8 +94,8 @@ handleMenu  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcess
 handleProc  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleEnter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
-handleAltOuter  : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleAltInner : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleAltOuter  : func (value) { return me.page.mfd.SurroundController.handleAltOuter(value); },
+handleAltInner : func (value) { return me.page.mfd.SurroundController.handleAltInner(value); },
 
 RegisterWithEmesary : func()
 {

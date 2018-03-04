@@ -167,3 +167,43 @@ var SURFACE_TYPES = {
   9 : "DIRT",
   0 : "GRAVEL",
 };
+
+# Vertical ranges, and labels.
+# 28 ranges from 500ft to 2000nm, measuring the vertical map distance.
+# Vertical size of the map (once the nav box and softkey area is removed) is 689px.
+# 2000nm = 12,152,000ft.
+var RANGES = [{range: 500/6076.12, label: "500ft"},
+          {range: 750/6076.12, label: "750ft"},
+          {range: 1000/6076.12, label: "1000ft"},
+          {range: 1500/6076.12, label: "1500ft"},
+          {range: 2000/6076.12, label: "2000ft"},
+          {range: 0.5, label: "0.5nm"},
+          {range: 0.75, label: "0.75nm"},
+          {range: 1, label: "1nm"},
+          {range: 2, label: "2nm"},
+          {range: 3, label: "3nm"},
+          {range: 4, label: "4nm"},
+          {range: 6, label: "6nm"},
+          {range: 8, label: "8nm"},
+          {range: 10, label: "10nm"},
+          {range: 12, label: "12nm"},
+          {range: 15, label: "15nm"},
+          {range: 20, label: "20nm"},
+          {range: 25, label: "25nm"},
+          {range: 30, label: "30nm"},
+          {range: 40, label: "40nm"},
+          {range: 50, label: "50nm"},
+          {range: 75, label: "75nm"},
+          {range: 100, label: "100nm"},
+          {range: 200, label: "200nm"},
+          {range: 500, label: "500nm"},
+          {range: 1000, label: "1000nm"},
+          {range: 1500, label: "1500nm"},
+          {range: 2000, label: "2000nm"}, ];
+
+var ORIENTATIONS = [
+  { label: "NORTH UP" },
+  { label: "TRK UP" },
+  { label: "DTK UP" },
+  { label: "HDG UP" },
+];

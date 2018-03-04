@@ -22,6 +22,36 @@
 
 var ConfigStore = {
 
+  # Layer display configuration:
+  # enabled   - whether this layer has been enabled by the user
+  # declutter - the maximum declutter level (0-3) that this layer is visible in
+  # range     - the maximum range this layer is visible (configured by user)
+  # max_range - the maximum range value that a user can configure for this layer.
+  layerRanges : {
+    DTO  : { enabled: 0, declutter: 3, range: 2000, max_range: 2000 },
+
+    GRID : { enabled: 0, declutter: 1, range: 20, max_range: 2000 },
+    DME  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
+    VOR_FG1000  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
+    NDB  : { enabled: 1, declutter: 1, range: 15, max_range: 30 },
+    FIX  : { enabled: 1, declutter: 1, range: 15, max_range: 30 },
+    RTE  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
+    WPT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
+
+    APS  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
+    FLT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
+
+    WXR  : { enabled: 1, declutter: 2, range: 2000, max_range: 2000 },
+
+    APT  : { enabled: 1, declutter: 2, range: 150, max_range: 300 },
+
+    TFC  : { enabled: 0, declutter: 3, range: 150, max_range: 2000},
+
+    OpenAIP : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
+    STAMEN  : { enabled: 1, declutter: 3, range: 500, max_range: 2000 },
+    STAMEN_terrain  : { enabled: 1, declutter: 3, range: 500, max_range: 2000 },
+  },
+
   configValues : {
     "DisplayUnitsNavAngle": ["MAGNETIC", "TRUE"] ,
     "DisplayUnitsDistanceAndSpeed": ["NAUTICAL", "METRIC"] ,
@@ -91,6 +121,7 @@ var ConfigStore = {
     var obj ={
       parents : [ ConfigStore ],
       _values : {},
+      _layerRanges : {},
     };
 
     foreach (var i; keys(ConfigStore.configValues)) {
@@ -106,6 +137,10 @@ var ConfigStore = {
     # ESA should be the default, but it's not implemented right now, so use FOD
     #obj.set("MFDHeader4", "ESA");
     obj.set("MFDHeader4", "FOD");
+
+    foreach (var i; keys(ConfigStore.layerRanges)) {
+      obj._layerRanges[i] = ConfigStore.layerRanges[i];
+    }
 
     return obj;
   },
@@ -140,4 +175,28 @@ var ConfigStore = {
   get : func(name) {
     return me._values[name];
   },
+
+  getLayer : func(name) {
+    return me._layerRanges[name];
+  },
+
+  getLayerNames : func() {
+    return keys(me._layerRanges);
+  },
+
+  isLayerEnabled : func(name) {
+    return me._layerRanges[name].enabled;
+  },
+  setLayerEnabled : func(name, enabled) {
+    me._layerRanges[name].enabled = enabled;
+  },
+  toggleLayerEnabled : func(name) {
+    me._layerRanges[name].enabled = ! me._layerRanges[name].enabled;
+  },
+
+  configureLayer : func(layer, enabled, range) {
+    me._layerRanges[layer].enabled = enabled;
+    me._layerRanges[layer].range = math.min(range, me._layerRanges[layer].max_range);
+  },
+
 };

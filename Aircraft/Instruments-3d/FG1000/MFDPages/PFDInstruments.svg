@@ -24,11 +24,11 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.4375004"
-     inkscape:cx="279.11962"
-     inkscape:cy="261.78273"
+     inkscape:zoom="3.7187502"
+     inkscape:cx="99.463593"
+     inkscape:cy="150.41314"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="svg3140"
      showgrid="false"
      showguides="false"
      inkscape:guide-bbox="true"
@@ -75,7 +75,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -6998,13 +6998,67 @@
        id="PFDInstrumentsPFD-Map"
        inkscape:label="PFD-Map">
       <rect
-         inkscape:label="PFD-Map-bg"
-         y="492"
-         x="13"
-         height="218"
-         width="215"
-         id="PFD-Map-bg"
-         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="PFDInstrumentsPFD-Map-bg-1"
+         width="218.99536"
+         height="218.99538"
+         x="9.3594561"
+         y="491.24179"
+         inkscape:label="PFD-Map-bg" />
+      <g
+         id="PFDInstrumentsPFD-Map-Display"
+         inkscape:label="#g14879">
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="PFDInstrumentsPFD-Map-bg"
+           width="218.99536"
+           height="218.99538"
+           x="9.5023146"
+           y="491.50232"
+           inkscape:label="PFD-Map-bg" />
+      </g>
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.97517461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="PFDInstrumentsOrientation-bg"
+         width="79.886292"
+         height="21.989275"
+         x="146.78056"
+         y="492.74817"
+         inkscape:label="#rect14859" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="186.54517"
+         y="508.86316"
+         id="PFDInstrumentsOrientationDisplay"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text14869"><tspan
+           sodipodi:role="line"
+           id="tspan14871"
+           x="186.54517"
+           y="508.86316"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none">NORTH UP</tspan></text>
+      <rect
+         inkscape:label="#rect14859"
+         y="688.24396"
+         x="147.18393"
+         height="21.989275"
+         width="79.886292"
+         id="rect14873"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.97517461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="PFDInstrumentsRangeDisplay"
+         y="704.09003"
+         x="223.3855"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text14875"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end"
+           y="704.09003"
+           x="223.3855"
+           id="tspan14877"
+           sodipodi:role="line">15nm</tspan></text>
     </g>
     <g
        id="PFDInstrumentsBRG2"

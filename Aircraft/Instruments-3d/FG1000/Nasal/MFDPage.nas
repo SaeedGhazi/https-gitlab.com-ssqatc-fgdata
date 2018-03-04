@@ -146,5 +146,14 @@ getDevice : func() {
 getMFD : func() {
   return me.mfd;
 },
+getPageName : func () {
+  return me.pageName;
+},
+getSVG : func() {
+  return me._SVGGroup;
+},
+getGroup : func() {
+  return me._group;
+}
 
 };

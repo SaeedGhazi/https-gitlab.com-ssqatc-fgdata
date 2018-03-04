@@ -31,6 +31,7 @@ io.load_nasal(nasal_dir ~ '/MFDPageController.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/PFD.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/MFD.nas', "fg1000");
 io.load_nasal(nasal_dir ~ '/GUI.nas', "fg1000");
+io.load_nasal(nasal_dir ~ '/NavMap.nas', "fg1000");
 
 var FG1000 = {
 

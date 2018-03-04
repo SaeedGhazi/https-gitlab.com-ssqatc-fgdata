@@ -33,6 +33,9 @@ var SurroundController =
       _nav1standby : 0.0,
       _nav2active  : 0.0,
       _nav2standby : 0.0,
+      _pressure_settings_inhg : 0.0,
+      _selected_alt_ft : 0.0,
+      _heading_bug_deg : 0.0,
     };
 
     obj.RegisterWithEmesary();
@@ -49,6 +52,17 @@ var SurroundController =
       "MFD",
       me._page.mfd.getDeviceID(),
       notifications.PFDEventNotification.NavComData,
+      data);
+
+    me.transmitter.NotifyAll(notification);
+  },
+
+  # Helper function to notify the Emesary bridge of a FMSData update.
+  sendFMSDataNotification : func(data) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me._page.mfd.getDeviceID(),
+      notifications.PFDEventNotification.FMSData,
       data);
 
     me.transmitter.NotifyAll(notification);
@@ -75,6 +89,15 @@ var SurroundController =
     return emesary.Transmitter.ReceiptStatus_OK;
   },
 
+  handleFMSADCData : func(data) {
+    if (data["ADCPressureSettingInHG"] != nil) me._pressure_settings_inhg = data["ADCPressureSettingInHG"];
+    if (data["FMSSelectedAlt"] != nil) me._selected_alt_ft = data["FMSSelectedAlt"];
+    if (data["FMSHeadingBug"] != nil) me._heading_bug_deg = data["FMSHeadingBug"];
+
+    # Pass FMS and ADC data straight to the page to display in the header fields
+    me._page.updateHeaderData(data);
+    return emesary.Transmitter.ReceiptStatus_OK;
+  },
 
   #
   # Handle the various COM and NAV controls at the top left and top right of the Fascia
@@ -334,6 +357,45 @@ var SurroundController =
   handleComVolToggle : func (value) {
   },
 
+  handleBaro : func(value) {
+    var incr_or_decr = (value > 0) ? 1 : -1;
+    var press = me._pressure_settings_inhg + (incr_or_decr * 0.01);
+    var data = {};
+    data["FMSPressureSettingInHG"] = sprintf("%.2f", press);
+    me.sendFMSDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleAltInner : func(value) {
+    var incr_or_decr = (value > 0) ? 1 : -1;
+    var alt = int(me._selected_alt_ft + incr_or_decr * 100);
+    if (alt < 0) alt = 0;
+    var data = {};
+    data["FMSSelectedAlt"] = alt;
+    me.sendFMSDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleAltOuter : func(value) {
+    var incr_or_decr = (value > 0) ? 1 : -1;
+    var alt = int(me._selected_alt_ft + incr_or_decr * 1000);
+    if (alt < 0) alt = 0;
+    var data = {};
+    data["FMSSelectedAlt"] = alt;
+    me.sendFMSDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleHeading : func(value) {
+    var incr_or_decr = (value > 0) ? 1 : -1;
+    var hdg = me._heading_bug_deg + incr_or_decr;
+    hdg = math.mod(hdg, 360);
+    var data = {};
+    data["FMSHeadingBug"] = sprintf("%i", hdg);
+    me.sendFMSDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   # These methods are slightly unusual in that they are called by other
   # controllers when the CRSR is not active.  Hence they aren't referenced
   # in the RegisterWithEmesary call below.
@@ -381,10 +443,8 @@ var SurroundController =
                (notification.Event_Id == notifications.PFDEventNotification.ADCData)   )
               and notification.EventParameter != nil)
           {
-            # Pass FMS and ADC data straight to the page to display in the header fields
-            return controller._page.updateHeaderData(notification.EventParameter);
+            return controller.handleFMSADCData(notification.EventParameter);
           }
-
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
       };

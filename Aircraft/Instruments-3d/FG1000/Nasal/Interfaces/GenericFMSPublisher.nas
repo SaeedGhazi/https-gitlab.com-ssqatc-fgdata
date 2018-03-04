@@ -29,13 +29,16 @@ var GenericFMSPublisher =
     obj.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
     obj.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");
 
+    obj.addPropMap("FMSLegValid", "/instrumentation/gps/wp/wp[1]/valid");
+    obj.addPropMap("FMSLegID", "/instrumentation/gps/wp/wp[1]/ID");
     obj.addPropMap("FMSLegBearing", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
+    obj.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm");
     obj.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
-    obj.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/indicated-track-magnetic-deg");
+    obj.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/wp/wp[1]/desired-course-deg");
     obj.addPropMap("FMSLegTrackErrorAngle", "/instrumentation/gps/wp/wp[1]/course-deviation-deg");
-    obj.addPropMap("FMSLegTrack", "/instrumentation/gps/indicated-track-magnetic-deg");
-    obj.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt");
     obj.addPropMap("FMSWayPointCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
+
+    obj.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt");
 
     obj.addPropMap("FMSNav1From", "/instrumentation/nav/from-flag");
     obj.addPropMap("FMSNav2From", "/instrumentation/nav[1]/from-flag");
@@ -51,6 +54,11 @@ var GenericFMSPublisher =
       var name = propmap.getName();
       gpsdata[name] = propmap.getValue();
     }
+
+    # Some GPS properties have odd values to indicate that nothing is set, so
+    # remove them from the data set.
+    if (gpsdata["FMSLegBearing"] == -9999) gpsdata["FMSLegBearing"] = nil;
+    if (gpsdata["FMSLegDistanceNM"] == -1) gpsdata["FMSLegDistanceNM"] = nil;
 
     # A couple of calculated values used by the MFD Header display
     var total_fuel = getprop("/consumables/fuel/tank[0]/indicated-level-gal_us") or 0.0;

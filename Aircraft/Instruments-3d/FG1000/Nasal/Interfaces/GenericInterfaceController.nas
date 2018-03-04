@@ -24,6 +24,7 @@ io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSPublisher.nas', "fg1000");
+io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSUpdater.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericADCPublisher.nas', "fg1000");
 
 
@@ -51,6 +52,7 @@ var GenericInterfaceController = {
     obj.navcomUpdater = fg1000.GenericNavComUpdater.new();
     obj.navdataInterface = fg1000.NavDataInterface.new();
     obj.gpsPublisher = fg1000.GenericFMSPublisher.new();
+    obj.gpsUpdater = fg1000.GenericFMSUpdater.new();
     obj.adcPublisher = fg1000.GenericADCPublisher.new();
     return obj;
   },
@@ -62,6 +64,7 @@ var GenericInterfaceController = {
     me.navcomUpdater.start();
     me.navdataInterface.start();
     me.gpsPublisher.start();
+    me.gpsUpdater.start();
     me.adcPublisher.start();
   },
 
@@ -72,6 +75,7 @@ var GenericInterfaceController = {
     me.navcomUpdater.stop();
     me.navdataInterface.stop();
     me.gpsPublisher.stop();
+    me.gpsUpdater.stop();
     me.adcPublisher.stop();
   },
 };

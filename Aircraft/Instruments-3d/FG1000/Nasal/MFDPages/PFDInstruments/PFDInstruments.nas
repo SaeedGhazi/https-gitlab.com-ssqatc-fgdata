@@ -28,6 +28,10 @@ var PFDInstruments =
       magenta : [1, 0, 1],
   },
 
+  CDI_SOURCE : [ "GPS", "NAV1", "NAV2" ],
+
+  BRG_SOURCE : ["OFF", "NAV1", "NAV2", "GPS", "ADF"],
+
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
@@ -38,7 +42,7 @@ var PFDInstruments =
 
       _ias_already_exceeded : 0,
       _windDataDisplay : 0,
-      _CDISource : "OFF",
+      _CDISource : "GPS",
       _BRG1 : "OFF",
       _BRG2 : "OFF",
       _DME : 0,
@@ -46,6 +50,7 @@ var PFDInstruments =
       _Map : 0,
       _Multiline : 0,
       _annunciation : 0,
+
     };
 
     # Hide various elements for the moment. TODO - implement
@@ -78,12 +83,17 @@ var PFDInstruments =
       obj.device.svg.getElementById("PFDInstruments" ~ id).set("clip", clip);
     }
 
+    #obj.insetMap = fg1000.NavMap.new(obj, [130,170], "rect(-160px, 160px, 160px, -160px)", -100, 2);
+    obj._SVGGroup.setInt("z-index", 10);
+    #obj._SVGGroup.setVisible(0);
+    #obj.insetMap = fg1000.NavMap.new(obj, [119,601], "rect(-109px, 109px, 109px, -109px)", 50, 2);
+    obj.insetMap = fg1000.NavMap.new(obj, obj.getElement("PFD-Map-Display"), [119,601], "rect(-109px, 109px, 109px, -109px)", 0, 2);
 
     #obj.topMenu(device, obj, nil);
 
     obj.setController(fg1000.PFDInstrumentsController.new(obj, svg));
     obj.setWindDisplay(0);
-    obj.setCDISource("OFF");
+    obj.setCDISource("GPS");
     obj.setBRG1("OFF");
     obj.setBRG2("OFF");
     obj.setDME(0);
@@ -91,6 +101,10 @@ var PFDInstruments =
     obj.setMultiline(0);
     obj.setAnnunciation(0);
     obj.setOMI("");
+    obj.setInsetMapVisible(0);
+    obj.updateHDG(0);
+    obj.updateSelectedALT(0);
+    obj.updateCRS(0);
 
     return obj;
   },
@@ -99,11 +113,11 @@ var PFDInstruments =
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
-    pg.addMenuItem(1, "INSET", pg);  # TODO
+    pg.addMenuItem(1, "INSET", pg, pg.mfd.PFDInstruments.insetMenu);
     pg.addMenuItem(3, "PFD", pg, pg.mfd.PFDInstruments.PFDMenu);
     pg.addMenuItem(4, "OBS", pg); # TODO
-    pg.addMenuItem(5, "CDI", pg); # TODO
-    pg.addMenuItem(6, "DME", pg); # TODO
+    pg.addMenuItem(5, "CDI", pg, pg.incrCDI);
+    #pg.addMenuItem(6, "DME", pg, func(dev, pg, mi) { pg.toggleDME(); } ); # TODO
     pg.addMenuItem(7, "XPDR", pg); # TODO
     pg.addMenuItem(8, "IDENT", pg); # TODO
     pg.addMenuItem(9, "TMR/REF", pg); # TODO
@@ -112,22 +126,119 @@ var PFDInstruments =
     device.updateMenus();
   },
 
+  incrCDI : func(dev, pg, mi) {
+    var idx = -1;
+    for (var i = 0; i < size(PFDInstruments.CDI_SOURCE); i = i + 1) {
+      if (PFDInstruments.CDI_SOURCE[i] == pg._CDISource) {
+        idx = i;
+        break;
+      }
+    }
+
+    if (idx == -1) die("Unabled to increment CDI. _CDISource:" ~ me._CDISource);
+
+    idx = math.mod(idx + 1, size(PFDInstruments.CDI_SOURCE));
+    pg.setCDISource(PFDInstruments.CDI_SOURCE[idx]);
+  },
+
+  insetMenu : func(device, pg, menuitem) {
+
+    # Switch on the inset Map
+    pg.setInsetMapVisible(1);
+
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(0, "OFF", pg, func(dev, pg, mi) { pg.setInsetMapVisible(0); });  # TODO
+    pg.addMenuItem(1, "DCLTR", pg,
+      func(dev, pg, mi) { pg.insetMap.incrDCLTR(dev, mi); device.updateMenus(); },
+      func(svg, mi) { pg.displayDCLTR(svg, mi); },
+      );
+    #pg.addMenuItem(2, "WXLGND", pg); # Optional
+
+    # TODO: Support TRFC-1 to add traffic layer, TRFC-2 to just display a traffic map
+    pg.addMenuItem(3, "TRAFFIC", pg,
+      func(dev, pg, mi) { pg.insetMap.toggleLayer("TFC"); device.updateMenus(); }, # callback
+      func(svg, mi) { pg.display_toggle(device, svg, mi, "TFC"); }
+    );
+
+    pg.addMenuItem(4, "TOPO", pg,
+      func(dev, pg, mi) { pg.insetMap.toggleLayer("STAMEN"); device.updateMenus(); }, # callback
+      func(svg, mi) { pg.display_toggle(device, svg, mi, "STAMEN"); }
+    );
+
+    pg.addMenuItem(5, "TERRAIN", pg,
+      func(dev, pg, mi) { pg.insetMap.toggleLayer("STAMEN_terrain"); device.updateMenus(); }, # callback
+      func(svg, mi) { pg.display_toggle(device, svg, mi, "STAMEN_terrain"); }
+    );
+    #pg.addMenuItem(6, "STRMSCP", pg); # TODO
+    #pg.addMenuItem(7, "NEXRAD", pg); # TODO
+    #pg.addMenuItem(8, "XM LTNG", pg); # TODO
+    #pg.addMenuItem(9, "METAR", pg); # TODO
+    pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
+    pg.addMenuItem(11, "ALERTS", pg); # TODO
+    device.updateMenus();
+  },
+
+  displayDCLTR : func(svg, mi) {
+    mi.title = pg.mfd.PFDInstruments.insetMap.getDCLTRTitle();
+    svg.setText(mi.title);
+    svg.setVisible(1);
+  },
+
+  # Display map toggle softkeys which change color depending
+  # on whether a particular layer is enabled or not.
+  display_toggle : func(device, svg, mi, layer) {
+    var bg_name = sprintf("SoftKey%d-bg",mi.menu_id);
+    if (me.insetMap.isEnabled(layer)) {
+      device.svg.getElementById(bg_name).setColorFill(0.5,0.5,0.5);
+      svg.setColor(0.0,0.0,0.0);
+    } else {
+      device.svg.getElementById(bg_name).setColorFill(0.0,0.0,0.0);
+      svg.setColor(1.0,1.0,1.0);
+    }
+    svg.setText(mi.title);
+    svg.setVisible(1); # display function
+  },
+
   PFDMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
     pg.addMenuItem(0, "SYN VIS", pg);  # TODO
     pg.addMenuItem(1, "DFLTS", pg);
     pg.addMenuItem(2, "WIND", pg, pg.mfd.PFDInstruments.windMenu);
-    pg.addMenuItem(3, "DME", pg); # TODO
-    pg.addMenuItem(4, "BRG1", pg); # TODO
+    #pg.addMenuItem(3, "DME", pg); # TODO
+    pg.addMenuItem(4, "BRG1", pg, pg.mfd.PFDInstruments.incrBRG1); # TODO
     pg.addMenuItem(5, "HSI FRMT", pg); # TODO
-    pg.addMenuItem(6, "BRG2", pg); # TODO
+    pg.addMenuItem(6, "BRG2", pg, pg.mfd.PFDInstruments.incrBRG2); # TODO
     #pg.addMenuItem(8, "IDENT", pg); # TODO
     pg.addMenuItem(8, "ALT UNIT ", pg); # TODO
-    pg.addMenuItem(9, "STD BARO", pg); # TODO
+    pg.addMenuItem(9, "STD BARO", pg, func(dev, pg, mi) { pg.getController().setStdBaro(); } );
     pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
     pg.addMenuItem(11, "ALERTS", pg); # TODO
     device.updateMenus();
+  },
+
+  incrBRG1 : func(dev, pg, mi) { pg.mfd.PFDInstruments.incrBRG("BRG1"); },
+  incrBRG2 : func(dev, pg, mi) { pg.mfd.PFDInstruments.incrBRG("BRG2"); },
+
+  incrBRG : func(brg) {
+    var curr = (brg == "BRG1" ? me.getBRG1() : me.getBRG2());
+    var idx = -1;
+    for (var i = 0; i < size(PFDInstruments.BRG_SOURCE); i = i + 1) {
+      if (PFDInstruments.BRG_SOURCE[i] == curr) {
+        idx = i;
+        break;
+      }
+    }
+
+    if (idx == -1) die("Unabled to increment BRG. curr:" ~ curr);
+
+    idx = math.mod(idx + 1, size(PFDInstruments.BRG_SOURCE));
+    if (brg == "BRG1") {
+      me.setBRG1(PFDInstruments.BRG_SOURCE[idx]);
+    } else {
+      me.setBRG2(PFDInstruments.BRG_SOURCE[idx]);
+    }
   },
 
   windMenu : func(device, pg, menuitem) {
@@ -379,7 +490,7 @@ var PFDInstruments =
   updateBARO : func (baro) {
     # TODO: Support hPa and inhg
     #var fmt = me._baro_unit == "inhg" ? "%.2fin" : "%i%shPa";
-    var fmt = "%.2fin";
+    var fmt = "%.2fIN";
     me.setTextElement("BARO-text", sprintf(fmt, baro));
   },
 
@@ -394,7 +505,6 @@ var PFDInstruments =
   },
 
   updateHDG : func (hdg) {
-    if (hdg == nil)
     me.getElement("Heading-bug").setRotation(hdg * D2R);
     me.setTextElement("SelectedHDG-text", sprintf("%03d°%s", hdg, ""));
   },
@@ -459,6 +569,10 @@ var PFDInstruments =
     }
   },
 
+  toggleDME : func() {
+    me.setDME(! me._DME);
+  },
+
   setDME : func (enabled) {
     me._DME = enabled;
     me.getElement("DME1").setVisible(enabled);
@@ -518,34 +632,48 @@ var PFDInstruments =
     me._CDISource = source;
   },
 
-  updateCDI : func (heading, course, waypoint_valid, course_deviation_deg, deflection_dots, xtrk_nm, from) {
+  updateCDI : func (heading, course, waypoint_valid, course_deviation_deg, deflection_dots, xtrk_nm, from, annun) {
     if (me._CDISource == "OFF") return;
 
-    var rot = (course - heading) * D2R;
-    me.getElement("CDI")
-      .setRotation(rot)
-      .show();
-    me.getElement("GPS-CTI-diamond")
-      .setVisible(waypoint_valid)
-      .setRotation(course_deviation_deg * D2R);
-
-    if ((me._CDISource == "GPS") and (deflection_dots > 2)) {
-      # Only display the cross-track error if the error exceeds the maximum
-      # deflection of two dots.
-      me.getElement("CDI-GPS-XTK-text")
-        .setText(sprintf("XTK %iNM", abs(xtrk_nm)))
-        .show();
-    } else {
+    if (waypoint_valid == 0) {
+      me.getElement(me._CDISource ~ "-CDI").hide();
+      me.getElement(me._CDISource ~ "-FROM").hide();
+      me.getElement(me._CDISource ~ "-TO").hide();
+      me.getElement("CDI").setRotation(0);
+      me.getElement("GPS-CTI-diamond").hide();
       me.getElement("CDI-GPS-XTK-text").hide();
+      me.getElement("CDI-GPS-ANN-text").hide();
+    } else {
+      me.getElement(me._CDISource ~ "-CDI").show();
+
+      var rot = (course - heading) * D2R;
+      me.getElement("CDI")
+        .setRotation(rot)
+        .show();
+      me.getElement("GPS-CTI-diamond")
+        .setVisible(waypoint_valid)
+        .setRotation(course_deviation_deg * D2R);
+
+      if ((me._CDISource == "GPS") and (deflection_dots > 2)) {
+        # Only display the cross-track error if the error exceeds the maximum
+        # deflection of two dots.
+        me.getElement("CDI-GPS-XTK-text")
+          .setText(sprintf("XTK %iNM", abs(xtrk_nm)))
+          .show();
+      } else {
+        me.getElement("CDI-GPS-XTK-text").hide();
+      }
+
+      if (me._CDISource == "GPS") me.getElement("CDI-GPS-ANN-text").setText(annun).show();
+
+      var scale = math.clamp(deflection_dots, -2.4, 2.4);
+      me.getElement(me._CDISource ~ "-CDI").setTranslation(65 * scale, 0);
+
+      # Display the appropriate TO/FROM indication for the selected source,
+      # switching all others off.
+      me.getElement(me._CDISource ~ "-TO").setVisible(from == 0);
+      me.getElement(me._CDISource ~ "-FROM").setVisible(from);
     }
-
-    var scale = math.clamp(deflection_dots, -2.4, 2.4);
-    me.getElement(me._CDISource ~ "-CDI").setTranslation(65 * scale, 0);
-
-    # Display the appropriate TO/FROM indication for the selected source,
-    # switching all others off.
-    me.getElement(me._CDISource ~ "-TO").setVisible(from == 0);
-    me.getElement(me._CDISource ~ "-FROM").setVisible(from);
   },
 
   # Update the wind display.  There are three options:
@@ -631,5 +759,11 @@ var PFDInstruments =
       me.getElement("MarkerText").setText(omi);
     }
     me._OMI = omi;
-  }
+  },
+
+  setInsetMapVisible :func(enabled ) {
+    me.getElement("PFD-Map").setVisible(enabled);
+    me.getElement("PFD-Map-bg").setVisible(enabled);
+    me.insetMap.setVisible(enabled);
+  },
 };

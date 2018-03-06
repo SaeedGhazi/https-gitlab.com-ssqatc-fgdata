@@ -180,7 +180,7 @@ var PFDInstruments =
   },
 
   displayDCLTR : func(svg, mi) {
-    mi.title = pg.mfd.PFDInstruments.insetMap.getDCLTRTitle();
+    mi.title = me.insetMap.getDCLTRTitle();
     svg.setText(mi.title);
     svg.setVisible(1);
   },
@@ -537,35 +537,57 @@ var PFDInstruments =
     if (option == "OFF") {
       me.getElement(brg).hide();
       me.getElement(brg ~ "-pointer").hide();
-      if ((me._BRG1 == "OFF") and (me._BRG1 == "OFF")) {
+      if ((me._BRG1 == "OFF") and (me._BRG2 == "OFF")) {
         me.getElement("BRG-circle").hide();
       }
     } else {
       me.getElement(brg).show();
       me.getElement(brg ~ "-pointer").show();
       me.getElement("BRG-circle").show();
+
+      me.getElement(brg ~ "-SRC-text").setText(option);
+      me.getElement(brg ~ "-WPID-text").setText("----");
+
+      if (option == "ADF") {
+        # Special case.  We won't have a distance and the "ID" will be the ADF
+        # frequency
+        me.getElement(brg ~ "-DST-text").setText("");
+      } else {
+        me.getElement(brg ~ "-DST-text").setText("--nm");
+      }
     }
   },
 
   # Update BRG information
-  updateBRG1 : func(id, dst) {
-    me._updateBRG("BRG1", me._BRG1, id, dst);
+  updateBRG1 : func(valid, id, dst, current_heading, brg_heading) {
+    me._updateBRG("BRG1", me._BRG1, valid, id, dst, current_heading, brg_heading);
   },
-  updateBRG2 : func(id, dst) {
-    me._updateBRG("BRG2", me._BRG2, id, dst);
+  updateBRG2 : func(valid, id, dst, current_heading, brg_heading) {
+    me._updateBRG("BRG2", me._BRG2, valid, id, dst, current_heading, brg_heading);
   },
-  _updateBRG : func (brg, source, id, dst) {
+  _updateBRG : func (brg, source, valid, id, dst, current_heading, brg_heading) {
     if (source == "OFF") return;
 
-    me.getElement(brg ~ "-SRC-text").setText(source);
-    me.getElement(brg ~ "-WP-text").setText(id);
+    if (valid) {
+      me.getElement(brg ~ "-SRC-text").setText(source);
+      me.getElement(brg ~ "-WPID-text").setText(id);
 
-    if (source == "ADF") {
-      # Special case.  We won't have a distance and the "ID" will be the ADF
-      # frequency
-      me.getElement(brg ~ "-DST-text").setText("");
+      if (source == "ADF") {
+        # Special case.  We won't have a distance and the "ID" will be the ADF
+        # frequency
+        me.getElement(brg ~ "-DST-text").setText("");
+      } else {
+        me.getElement(brg ~ "-DST-text").setText(sprintf("%.1fNM", dst));
+      }
+
+      var rot = (brg_heading - current_heading) * D2R;
+      me.getElement(brg ~ "-pointer").setRotation(rot).show();
     } else {
-      me.getElement(brg ~ "-DST-text").setText(sprintf("%.1fNM", dst));
+      # Data is not valid - hide the pointer and display NO DATA
+      me.getElement(brg ~ "-SRC-text").setText(source);
+      me.getElement(brg ~ "-WPID-text").setText("NO DATA");
+      me.getElement(brg ~ "-DST-text").setText("");
+      me.getElement(brg ~ "-pointer").hide();
     }
   },
 
@@ -639,6 +661,7 @@ var PFDInstruments =
       me.getElement(me._CDISource ~ "-CDI").hide();
       me.getElement(me._CDISource ~ "-FROM").hide();
       me.getElement(me._CDISource ~ "-TO").hide();
+      me.getElement(me._CDISource ~ "-pointer").hide();
       me.getElement("CDI").setRotation(0);
       me.getElement("GPS-CTI-diamond").hide();
       me.getElement("CDI-GPS-XTK-text").hide();
@@ -647,18 +670,16 @@ var PFDInstruments =
       me.getElement(me._CDISource ~ "-CDI").show();
 
       var rot = (course - heading) * D2R;
-      me.getElement("CDI")
-        .setRotation(rot)
-        .show();
+      me.getElement("CDI").setRotation(rot).show();
       me.getElement("GPS-CTI-diamond")
         .setVisible(waypoint_valid)
         .setRotation(course_deviation_deg * D2R);
 
-      if ((me._CDISource == "GPS") and (deflection_dots > 2)) {
+      if ((me._CDISource == "GPS") and (abs(deflection_dots) > 2.0)) {
         # Only display the cross-track error if the error exceeds the maximum
         # deflection of two dots.
         me.getElement("CDI-GPS-XTK-text")
-          .setText(sprintf("XTK %iNM", abs(xtrk_nm)))
+          .setText(sprintf("XTK %.2fNM", abs(xtrk_nm)))
           .show();
       } else {
         me.getElement("CDI-GPS-XTK-text").hide();
@@ -667,7 +688,7 @@ var PFDInstruments =
       if (me._CDISource == "GPS") me.getElement("CDI-GPS-ANN-text").setText(annun).show();
 
       var scale = math.clamp(deflection_dots, -2.4, 2.4);
-      me.getElement(me._CDISource ~ "-CDI").setTranslation(65 * scale, 0);
+      me.getElement(me._CDISource ~ "-CDI").setTranslation(80 * scale / 2.4, 0);
 
       # Display the appropriate TO/FROM indication for the selected source,
       # switching all others off.

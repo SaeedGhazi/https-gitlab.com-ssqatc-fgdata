@@ -35,8 +35,27 @@ var PFDInstrumentsController =
       _leg_bearing  : 0,
       _leg_distance_nm : 0,
       _leg_deviation_deg : 0,
-      _deflection_dots :0,
+      _deflection_dots : 0.0,
       _leg_xtrk_nm : 0,
+      _leg_valid : 0,
+
+      _nav1_id : "",
+      _nav1_freq : 0.0,
+      _nav1_radial_deg : 0,
+      _nav1_heading_deg :0.0,
+      _nav1_in_range : 0,
+      _nav1_distance_m :0,
+
+      _nav2_id : "",
+      _nav2_freq : 0.0,
+      _nav2_radial_deg :0,
+      _nav2_heading_deg : 0.0,
+      _nav2_in_range : 0,
+      _nav2_distance_m :0,
+
+      _adf_freq : 0.0,
+      _adf_in_range : 0,
+      _adf_heading_deg : 0.0,
     };
 
     return obj;
@@ -145,7 +164,9 @@ var PFDInstrumentsController =
       me._selected_alt_ft = data["FMSSelectedAlt"];
     }
 
-    if (data["FMSLegValid"] == "false") {
+    if (data["FMSLegValid"] != nil) me._leg_valid = data["FMSLegValid"];
+
+    if (me._leg_valid == 0) {
       # No valid leg data, likely because there's no GPS course set
       me.page.updateCRS(0);
       me.page.updateCDI(
@@ -153,14 +174,11 @@ var PFDInstrumentsController =
         course: 0,
         waypoint_valid: 0,
         course_deviation_deg : 0,
-        deflection_dots : 0,
+        deflection_dots : 0.0,
         xtrk_nm : 0,
         from: 0,
+        annun: "NO DATA",
       );
-
-      # Update the bearing indicators with GPS data if that's what we're displaying.
-      if (me.page.getBRG1() == "GPS") me.page.setBRG1("NONE", 0);
-      if (me.page.getBRG2() == "GPS") me.page.setBRG2("NONE", 0);
     } else {
 
       if (data["FMSLegBearing"] != nil) me.page.updateCRS(data["FMSLegBearing"]);
@@ -173,27 +191,28 @@ var PFDInstrumentsController =
 
       if (data["FMSLegID"] != nil) me._leg_id = data["FMSLegID"];
       if (data["FMSLegBearing"] != nil) me._leg_bearing = data["FMSLegBearing"];
+      if (data["FMSLegDistanceNM"] != nil) me._leg_distance_nm = data["FMSLegDistanceNM"];
       if (data["FMSLegTrackErrorAngle"] != nil) me._leg_deviation_deg = data["FMSLegTrackErrorAngle"];
 
       # TODO:  Proper cross-track error based on source and flight phase.
-      if (data["FMSLegCourseError"] != nil) me.deflection_dots = data["FMSLegCourseError"];
+      if (data["FMSLegCourseError"] != nil) me._deflection_dots = data["FMSLegCourseError"] /2.0;
       if (data["FMSLegCourseError"] != nil) me._leg_xtrk_nm = data["FMSLegCourseError"];
 
       me.page.updateCDI(
         heading: me._heading,
         course: me._leg_bearing,
-        waypoint_valid: (data["FMSLegValid"] == "true"),
+        waypoint_valid: me._leg_valid,
         course_deviation_deg : me._leg_deviation_deg,
         deflection_dots : me._deflection_dots,
         xtrk_nm : me._leg_xtrk_nm,
         from: me._from,
         annun: "ENR"
       );
-
-      # Update the bearing indicators with GPS data if that's what we're displaying.
-      if (me.page.getBRG1() == "GPS") me.page.setBRG1(me._leg_id, me._leg_bearing);
-      if (me.page.getBRG2() == "GPS") me.page.setBRG2(me._leg_id, me._leg_bearing);
     }
+
+    # Update the bearing indicators with GPS data if that's what we're displaying.
+    if (me.page.getBRG1() == "GPS") me.page.updateBRG1(me._leg_valid, me._leg_id, me._leg_distance_nm, me._heading, me._leg_bearing);
+    if (me.page.getBRG2() == "GPS") me.page.updateBRG2(me._leg_valid, me._leg_id, me._leg_distance_nm, me._heading, me._leg_bearing);
 
     return emesary.Transmitter.ReceiptStatus_OK;
   },
@@ -203,9 +222,33 @@ var PFDInstrumentsController =
   # that the data we want exists in this notification, unlike the periodic
   # publishers
   handleNavComData : func(data) {
-    if (data["NavSelected"] != nil) {
-      me._navSelected = data["NavSelected"];
-    }
+    if (data["NavSelected"] != nil) me._navSelected = data["NavSelected"];
+    if (data["Nav1SelectedFreq"] != nil) me._nav1_freq = data["Nav1SelectedFreq"];
+    if (data["Nav1ID"] != nil) me._nav1_id = data["Nav1ID"];
+    if (data["Nav1HeadingDeg"] != nil) me._nav1_heading_deg = data["Nav1HeadingDeg"];
+    if (data["Nav1RadialDeg"] != nil) me._nav1_radial_deg = data["Nav1RadialDeg"];
+    if (data["Nav1InRange"] != nil) me._nav1_in_range = data["Nav1InRange"];
+    if (data["Nav1DistanceMeters"] != nil) me._nav1_distance_m = data["Nav1DistanceMeters"];
+
+
+    if (data["Nav2SelectedFreq"] != nil) me._nav2_freq = data["Nav2SelectedFreq"];
+    if (data["Nav2ID"] != nil) me._nav2_id = data["Nav2ID"];
+    if (data["Nav2HeadingDeg"] != nil) me._nav2_heading_deg = data["Nav2HeadingDeg"];
+    if (data["Nav2RadialDeg"] != nil) me._nav2_radial_deg = data["Nav2RadialDeg"];
+    if (data["Nav2InRange"] != nil) me._nav2_in_range = data["Nav2InRange"];
+    if (data["Nav2DistanceMeters"] != nil) me._nav2_distance_m = data["Nav2DistanceMeters"];
+
+    if (data["ADFSelectedFreq"] != nil) me._adf_freq = data["ADFSelectedFreq"];
+    if (data["ADFInRange"] != nil) me._adf_in_range = data["ADFInRange"];
+    if (data["ADFHeadingDeg"] !=nil) me._adf_heading_deg = data["ADFInRange"];
+
+    if (me.page.getBRG1() == "NAV1") me.page.updateBRG1(me._nav1_in_range, me._nav1_id, me._nav1_distance_m * M2NM, me._heading, me._nav1_heading_deg);
+    if (me.page.getBRG1() == "NAV2") me.page.updateBRG1(me._nav2_in_range, me._nav2_id, me._nav2_distance_m * M2NM, me._heading, me._nav2_heading_deg);
+    if (me.page.getBRG1() == "ADF") me.page.updateBRG1(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, me._heading, me._adf_heading_deg);
+
+    if (me.page.getBRG2() == "NAV1") me.page.updateBRG2(me._nav1_in_range, me._nav1_id, me._nav1_distance_m * M2NM, me._heading, me._nav1_heading_deg);
+    if (me.page.getBRG2() == "NAV2") me.page.updateBRG2(me._nav2_in_range, me._nav2_id, me._nav2_distance_m * M2NM, me._heading, me._nav2_heading_deg);
+    if (me.page.getBRG2() == "ADF") me.page.updateBRG2(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, me._heading, me._adf_heading_deg);
   },
 
   PFDRegisterWithEmesary : func(transmitter = nil){

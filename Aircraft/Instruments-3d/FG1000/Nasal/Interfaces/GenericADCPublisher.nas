@@ -46,7 +46,8 @@ var GenericADCPublisher =
     obj.addPropMap("ADCSlipSkid", "/instrumentation/slip-skid-ball/indicated-slip-skid");
 
     # Assume an accurate solid-state compass
-    obj.addPropMap("ADCHeadingDeg", "/orientation/heading-magnetic-deg");
+    obj.addPropMap("ADCHeadingMagneticDeg", "/orientation/heading-magnetic-deg");
+    obj.addPropMap("ADCMagneticVariationDeg", "/environment/magnetic-variation-deg");
 
     obj.addPropMap("ADCAltitudeFT", "/instrumentation/altimeter/indicated-altitude-ft");
     obj.addPropMap("ADCPressureSettingInHG", "/instrumentation/altimeter/setting-inhg");

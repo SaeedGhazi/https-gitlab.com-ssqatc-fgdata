@@ -45,7 +45,7 @@ handleNavOuter        : func (value) { return me.page.mfd.SurroundController.han
 handleNavInner        : func (value) { return me.page.mfd.SurroundController.handleNavInner(value); },
 handleNavToggle       : func (value) { return me.page.mfd.SurroundController.handleNavToggle(value); },
 handleHeading         : func (value) { return me.page.mfd.SurroundController.handleHeading(value); },
-handleHeadingPress    : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleHeadingPress    : func (value) { return me.page.mfd.SurroundController.handleHeadingPress(value); },
 
 # Joystick
 handleRange              : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
@@ -54,8 +54,8 @@ handleJoystickHorizontal : func (value) { return emesary.Transmitter.ReceiptStat
 
 #CRS/BARO
 handleBaro      : func (value) { return me.page.mfd.SurroundController.handleBaro(value); },
-handleCRS       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleCRSCenter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleCRS       : func (value) { return me.page.mfd.SurroundController.handleCRS(value);  },
+handleCRSCenter : func (value) { return me.page.mfd.SurroundController.handleCRSCenter(value); },
 
 handleComOuter  : func (value) { return me.page.mfd.SurroundController.handleComOuter(value); },
 handleComInner  : func (value) { return me.page.mfd.SurroundController.handleComInner(value); },

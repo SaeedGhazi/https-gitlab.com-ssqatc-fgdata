@@ -31,11 +31,16 @@ var SurroundController =
       _com2standby : 0.0,
       _nav1active  : 0.0,
       _nav1standby : 0.0,
+      _nav1radial : 0.0,
+      _nav1_heading_deg : 0.0,
       _nav2active  : 0.0,
       _nav2standby : 0.0,
+      _nav2radial : 0.0,
+      _nav2_heading_deg : 0.0,
       _pressure_settings_inhg : 0.0,
       _selected_alt_ft : 0.0,
       _heading_bug_deg : 0.0,
+      _heading_deg : 0.0,
     };
 
     obj.RegisterWithEmesary();
@@ -81,8 +86,13 @@ var SurroundController =
 
     if (data["Nav1SelectedFreq"] != nil) me._nav1active  = data["Nav1SelectedFreq"];
     if (data["Nav1StandbyFreq"] != nil)  me._nav1standby = data["Nav1StandbyFreq"];
+    if (data["Nav1RadialDeg"] != nil)  me._nav1radial = data["Nav1RadialDeg"];
+    if (data["Nav1HeadingDeg"] != nil)  me._nav1_heading_deg = data["Nav1HeadingDeg"];
+
     if (data["Nav2SelectedFreq"] != nil) me._nav2active  = data["Nav2SelectedFreq"];
     if (data["Nav2StandbyFreq"] != nil)  me._nav2standby = data["Nav2StandbyFreq"];
+    if (data["Nav2RadialDeg"] != nil)  me._nav2radial = data["Nav2RadialDeg"];
+    if (data["Nav2HeadingDeg"] != nil)  me._nav2_heading_deg = data["Nav2HeadingDeg"];
 
     # pass through to the page
     me._page.handleNavComData(data);
@@ -93,6 +103,7 @@ var SurroundController =
     if (data["ADCPressureSettingInHG"] != nil) me._pressure_settings_inhg = data["ADCPressureSettingInHG"];
     if (data["FMSSelectedAlt"] != nil) me._selected_alt_ft = data["FMSSelectedAlt"];
     if (data["FMSHeadingBug"] != nil) me._heading_bug_deg = data["FMSHeadingBug"];
+    if (data["ADCHeadingMagneticDeg"] != nil) me._heading_deg = data["ADCHeadingMagneticDeg"];
 
     # Pass FMS and ADC data straight to the page to display in the header fields
     me._page.updateHeaderData(data);
@@ -211,7 +222,7 @@ var SurroundController =
   },
 
   # Switch between Nav1 and Nav2.
-  handleNavToggle : func (value)
+  handleNavToggle : func ()
   {
     var data={};
 
@@ -221,6 +232,13 @@ var SurroundController =
       data["NavSelected"] = 1;
     }
 
+    me.sendNavComDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  setNav : func(value) {
+    var data={};
+    data["NavSelected"] = value;
     me.sendNavComDataNotification(data);
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
@@ -366,6 +384,32 @@ var SurroundController =
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
+  handleCRS : func(value) {
+    var incr_or_decr = (value > 0) ? 1 : -1;
+    var data={};
+
+    if (me._navselected == 1) {
+      data["Nav1RadialDeg"] = math.mod(me._nav1radial + incr_or_decr, 360);
+    } else {
+      data["Nav2RadialDeg"] = math.mod(me._nav2radial + incr_or_decr, 360);
+    }
+
+    me.sendNavComDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleCRSCenter : func(value) {
+    var data = {};
+    if (me._navselected == 1) {
+      data["Nav1RadialDeg"] = me._nav1_heading_deg;
+    } else {
+      data["Nav2RadialDeg"] = me._nav2_heading_deg;
+    }
+
+    me.sendNavComDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   handleAltInner : func(value) {
     var incr_or_decr = (value > 0) ? 1 : -1;
     var alt = int(me._selected_alt_ft + incr_or_decr * 100);
@@ -392,6 +436,13 @@ var SurroundController =
     hdg = math.mod(hdg, 360);
     var data = {};
     data["FMSHeadingBug"] = sprintf("%i", hdg);
+    me.sendFMSDataNotification(data);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleHeadingPress : func(value) {
+    var data = {};
+    data["FMSHeadingBug"] = me._heading_deg;
     me.sendFMSDataNotification(data);
     return emesary.Transmitter.ReceiptStatus_Finished;
   },

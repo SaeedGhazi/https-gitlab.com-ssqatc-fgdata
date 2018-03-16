@@ -55,6 +55,7 @@ var GenericNavComUpdater =
     obj.addPropMap("Nav1SelectedFreq", "/instrumentation/nav/frequencies/selected-mhz");
     obj.addPropMap("Nav1StandbyFreq", "/instrumentation/nav/frequencies/standby-mhz");
     obj.addPropMap("Nav1ID", "/instrumentation/nav/nav-id");
+    obj.addPropMap("Nav1RadialDeg", "/instrumentation/nav/radials/selected-deg");
     obj.addPropMap("Nav1Volume", "/instrumentation/nav/nav-volume");
     obj.addPropMap("Nav1AudioID", "/instrumentation/nav/audio-btn");
     obj.addPropMap("Nav1Serviceable", "/instrumentation/nav/operable");
@@ -62,6 +63,7 @@ var GenericNavComUpdater =
     obj.addPropMap("Nav2SelectedFreq", "/instrumentation/nav[1]/frequencies/selected-mhz");
     obj.addPropMap("Nav2StandbyFreq", "/instrumentation/nav[1]/frequencies/standby-mhz");
     obj.addPropMap("Nav2ID", "/instrumentation/nav[1]/nav-id");
+    obj.addPropMap("Nav2RadialDeg", "/instrumentation/nav[1]/radials/selected-deg");
     obj.addPropMap("Nav2Volume", "/instrumentation/nav[1]/nav-volume");
     obj.addPropMap("Nav2AudioID", "/instrumentation/nav[1]/audio-btn");
     obj.addPropMap("Nav2Serviceable", "/instrumentation/nav[1]/operable");

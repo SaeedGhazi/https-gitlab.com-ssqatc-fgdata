@@ -31,7 +31,7 @@ var GenericFMSPublisher =
 
     obj.addPropMap("FMSLegValid", "/instrumentation/gps/wp/wp[1]/valid");
     obj.addPropMap("FMSLegID", "/instrumentation/gps/wp/wp[1]/ID");
-    obj.addPropMap("FMSLegBearing", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
+    obj.addPropMap("FMSLegBearingMagDeg", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
     obj.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm");
     obj.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
     obj.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/wp/wp[1]/desired-course-deg");
@@ -57,7 +57,7 @@ var GenericFMSPublisher =
 
     # Some GPS properties have odd values to indicate that nothing is set, so
     # remove them from the data set.
-    if (gpsdata["FMSLegBearing"] == -9999) gpsdata["FMSLegBearing"] = nil;
+    if (gpsdata["FMSLegBearingMagDeg"] == -9999) gpsdata["FMSLegBearingMagDeg"] = nil;
     if (gpsdata["FMSLegDistanceNM"] == -1) gpsdata["FMSLegDistanceNM"] = nil;
 
     # A couple of calculated values used by the MFD Header display

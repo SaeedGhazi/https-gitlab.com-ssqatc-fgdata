@@ -57,7 +57,7 @@ var PAGE_GROUPS = [
 # Mapping for header labels to specific FMS or ADC messages, and sprintf formatting
 # to use
 var HEADER_MAPPING = {
-  "BRG" : { message : "FMSLegBearing",            format : "%d"},
+  "BRG" : { message : "FMSLegBearingMagDeg",      format : "%d"},
   "XTK" : { message : "FMSLegCourseError",        format : "%.1fnm"},
   "DIS" : { message : "FMSDistance",              format : "%.1fnm"},
   "DTK" : { message : "FMSLegDesiredTrack",       format : "%d"},

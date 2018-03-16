@@ -68,6 +68,13 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("Nav1HeadingDeg", "/instrumentation/nav/heading-deg");
     obj._periodicPublisher.addPropMap("Nav1RadialDeg", "/instrumentation/nav/radials/selected-deg");
     obj._periodicPublisher.addPropMap("Nav1DistanceMeters", "/instrumentation/nav/nav-distance");
+    obj._periodicPublisher.addPropMap("Nav1CourseDeviationDeg", "/instrumentation/nav/crosstrack-heading-error-deg");
+    obj._periodicPublisher.addPropMap("Nav1CrosstrackErrorM", "/instrumentation/nav/crosstrack-error-m");
+    obj._periodicPublisher.addPropMap("Nav1Localizer", "/instrumentation/nav/nav-loc");
+    obj._periodicPublisher.addPropMap("Nav1Deflection", "/instrumentation/nav/heading-needle-deflection-norm");
+    obj._periodicPublisher.addPropMap("Nav1From", "/instrumentation/nav/from-flag");
+
+
     obj._triggeredPublisher.addPropMap("Nav1Volume", "/instrumentation/nav/nav-volume");
     obj._triggeredPublisher.addPropMap("Nav1AudioID", "/instrumentation/nav/audio-btn");
     obj._triggeredPublisher.addPropMap("Nav1Serviceable", "/instrumentation/nav/operable");
@@ -79,6 +86,12 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("Nav2HeadingDeg", "/instrumentation/nav[1]/heading-deg");
     obj._periodicPublisher.addPropMap("Nav2RadialDeg", "/instrumentation/nav[1]/radials/selected-deg");
     obj._periodicPublisher.addPropMap("Nav2DistanceMeters", "/instrumentation/nav[1]/nav-distance");
+    obj._periodicPublisher.addPropMap("Nav2CourseDeviationDeg", "/instrumentation/nav[1]/crosstrack-heading-error-deg");
+    obj._periodicPublisher.addPropMap("Nav2CrosstrackErrorM", "/instrumentation/nav[1]/crosstrack-error-m");
+    obj._periodicPublisher.addPropMap("Nav2Localizer", "/instrumentation/nav[1]/nav-loc");
+    obj._periodicPublisher.addPropMap("Nav2Deflection", "/instrumentation/nav[1]/heading-needle-deflection-norm");
+    obj._periodicPublisher.addPropMap("Nav2From", "/instrumentation/nav/from-flag");
+
     obj._triggeredPublisher.addPropMap("Nav2Volume", "/instrumentation/nav[1]/nav-volume");
     obj._triggeredPublisher.addPropMap("Nav2AudioID", "/instrumentation/nav[1]/audio-btn");
     obj._triggeredPublisher.addPropMap("Nav2Serviceable", "/instrumentation/nav[1]/operable");

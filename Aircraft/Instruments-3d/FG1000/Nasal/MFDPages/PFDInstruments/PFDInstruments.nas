@@ -28,10 +28,6 @@ var PFDInstruments =
       magenta : [1, 0, 1],
   },
 
-  CDI_SOURCE : [ "GPS", "NAV1", "NAV2" ],
-
-  BRG_SOURCE : ["OFF", "NAV1", "NAV2", "GPS", "ADF"],
-
   new : func (mfd, myCanvas, device, svg)
   {
     var obj = {
@@ -42,7 +38,6 @@ var PFDInstruments =
 
       _ias_already_exceeded : 0,
       _windDataDisplay : 0,
-      _CDISource : "GPS",
       _BRG1 : "OFF",
       _BRG2 : "OFF",
       _DME : 0,
@@ -116,7 +111,7 @@ var PFDInstruments =
     pg.addMenuItem(1, "INSET", pg, pg.mfd.PFDInstruments.insetMenu);
     pg.addMenuItem(3, "PFD", pg, pg.mfd.PFDInstruments.PFDMenu);
     pg.addMenuItem(4, "OBS", pg); # TODO
-    pg.addMenuItem(5, "CDI", pg, pg.incrCDI);
+    pg.addMenuItem(5, "CDI", pg,  func(dev, pg, mi) { pg.getController().incrCDISource(); } );
     #pg.addMenuItem(6, "DME", pg, func(dev, pg, mi) { pg.toggleDME(); } ); # TODO
     pg.addMenuItem(7, "XPDR", pg); # TODO
     pg.addMenuItem(8, "IDENT", pg); # TODO
@@ -126,23 +121,7 @@ var PFDInstruments =
     device.updateMenus();
   },
 
-  incrCDI : func(dev, pg, mi) {
-    var idx = -1;
-    for (var i = 0; i < size(PFDInstruments.CDI_SOURCE); i = i + 1) {
-      if (PFDInstruments.CDI_SOURCE[i] == pg._CDISource) {
-        idx = i;
-        break;
-      }
-    }
-
-    if (idx == -1) die("Unabled to increment CDI. _CDISource:" ~ me._CDISource);
-
-    idx = math.mod(idx + 1, size(PFDInstruments.CDI_SOURCE));
-    pg.setCDISource(PFDInstruments.CDI_SOURCE[idx]);
-  },
-
   insetMenu : func(device, pg, menuitem) {
-
     # Switch on the inset Map
     pg.setInsetMapVisible(1);
 
@@ -207,38 +186,15 @@ var PFDInstruments =
     pg.addMenuItem(1, "DFLTS", pg);
     pg.addMenuItem(2, "WIND", pg, pg.mfd.PFDInstruments.windMenu);
     #pg.addMenuItem(3, "DME", pg); # TODO
-    pg.addMenuItem(4, "BRG1", pg, pg.mfd.PFDInstruments.incrBRG1); # TODO
+    pg.addMenuItem(4, "BRG1", pg, func(dev, pg, mi) { pg.getController().incrBRG1(); });
     pg.addMenuItem(5, "HSI FRMT", pg); # TODO
-    pg.addMenuItem(6, "BRG2", pg, pg.mfd.PFDInstruments.incrBRG2); # TODO
+    pg.addMenuItem(6, "BRG2", pg, func(dev, pg, mi) { pg.getController().incrBRG2(); });
     #pg.addMenuItem(8, "IDENT", pg); # TODO
     pg.addMenuItem(8, "ALT UNIT ", pg); # TODO
     pg.addMenuItem(9, "STD BARO", pg, func(dev, pg, mi) { pg.getController().setStdBaro(); } );
     pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
     pg.addMenuItem(11, "ALERTS", pg); # TODO
     device.updateMenus();
-  },
-
-  incrBRG1 : func(dev, pg, mi) { pg.mfd.PFDInstruments.incrBRG("BRG1"); },
-  incrBRG2 : func(dev, pg, mi) { pg.mfd.PFDInstruments.incrBRG("BRG2"); },
-
-  incrBRG : func(brg) {
-    var curr = (brg == "BRG1" ? me.getBRG1() : me.getBRG2());
-    var idx = -1;
-    for (var i = 0; i < size(PFDInstruments.BRG_SOURCE); i = i + 1) {
-      if (PFDInstruments.BRG_SOURCE[i] == curr) {
-        idx = i;
-        break;
-      }
-    }
-
-    if (idx == -1) die("Unabled to increment BRG. curr:" ~ curr);
-
-    idx = math.mod(idx + 1, size(PFDInstruments.BRG_SOURCE));
-    if (brg == "BRG1") {
-      me.setBRG1(PFDInstruments.BRG_SOURCE[idx]);
-    } else {
-      me.setBRG2(PFDInstruments.BRG_SOURCE[idx]);
-    }
   },
 
   windMenu : func(device, pg, menuitem) {
@@ -513,31 +469,22 @@ var PFDInstruments =
   updateCRS : func (crs) {
     me.getElement("SelectedCRS-text")
       .setText(sprintf("%03d°%s", crs, ""))
-      .setColor(me._CDISource == "GPS" ? me.COLORS.magenta : me.COLORS.green);
+      .setColor(me.getController().getCDISource() == "GPS" ? me.COLORS.magenta : me.COLORS.green);
   },
 
   updateSelectedALT : func (selected_alt) {
     me.setTextElement("SelectedALT-text", sprintf("%i", selected_alt));
   },
 
-  # Bearing (BRG) settings
-  # "OFF", "NAV1", "NAV2", "GPS", "ADF"
-  getBRG1 : func() { return me._BRG1; },
-  getBRG2 : func() { return me._BRG2; },
+  setBRG1 : func(option) { me._setBRG("BRG1",option); },
+  setBRG2 : func(option) { me._setBRG("BRG2",option); },
 
-  setBRG1 : func(option) {
-    me._BRG1 = option;
-    me._setBRG("BRG1",option);
-  },
-  setBRG2 : func(option) {
-    me._BRG2 = option;
-    me._setBRG("BRG2",option);
-  },
   _setBRG : func (brg, option) {
     if (option == "OFF") {
       me.getElement(brg).hide();
       me.getElement(brg ~ "-pointer").hide();
-      if ((me._BRG1 == "OFF") and (me._BRG2 == "OFF")) {
+      if ((me.getController().getBRG1() == "OFF") and (me.getController().getBRG2() == "OFF")) {
+        # Hide the circle if there are now BRGs selected
         me.getElement("BRG-circle").hide();
       }
     } else {
@@ -560,10 +507,10 @@ var PFDInstruments =
 
   # Update BRG information
   updateBRG1 : func(valid, id, dst, current_heading, brg_heading) {
-    me._updateBRG("BRG1", me._BRG1, valid, id, dst, current_heading, brg_heading);
+    me._updateBRG("BRG1", me.getController().getBRG1(), valid, id, dst, current_heading, brg_heading);
   },
   updateBRG2 : func(valid, id, dst, current_heading, brg_heading) {
-    me._updateBRG("BRG2", me._BRG2, valid, id, dst, current_heading, brg_heading);
+    me._updateBRG("BRG2", me.getController().getBRG2(), valid, id, dst, current_heading, brg_heading);
   },
   _updateBRG : func (brg, source, valid, id, dst, current_heading, brg_heading) {
     if (source == "OFF") return;
@@ -608,74 +555,45 @@ var PFDInstruments =
   },
 
   setCDISource : func(source) {
-    if (source == "OFF") {
-      foreach (var s; ["GPS", "NAV1", "NAV2"]) {
-        foreach (var t; ["pointer", "CDI", "FROM", "TO"]) {
-          me.getElement(s ~ "-" ~ t).hide();
-        }
-      }
-      me.getElement("CDI-GPS-ANN-text").hide();
-      me.getElement("CDI-GPS-XTK-text").hide();
-      me.getElement("CDI-SRC-text").hide();
-      me.getElement("CDI").hide();
-      me.getElement("GPS-CTI-diamond").hide();
-      me.getElement("SelectedCRS").hide();
-
-    } else {
-      me.getElement("CDI").show();
-      me.getElement("SelectedCRS").show();
-
-      if (source == "GPS") {
-        me.getElement("CDI-GPS-ANN-text").show();
-        me.getElement("GPS-CTI-diamond").show();
-      } else {
-        me.getElement("CDI-GPS-ANN-text").hide();
-        me.getElement("GPS-CTI-diamond").hide();
-      }
-
-      # Localizers are mapped to the NAV1/2 elements, but have reduced deflection
-      # and a different label.
-      me.getElement("CDI-SRC-text")
-        .setText(source)
-        .setColor(source == "GPS" ? me.COLORS.magenta : me.COLORS.green)
-        .show();
-
-      if (source == "LOC1") source = "NAV1";
-      if (source == "LOC2") source = "NAV2";
-
-      foreach (var s; ["GPS", "NAV1", "NAV2"]) {
-        me.getElement(s ~ "-pointer").setVisible(source == s);
-        me.getElement(s ~ "-CDI").setVisible(source == s);
-        me.getElement(s ~ "-FROM").setVisible(source == s);
-        me.getElement(s ~ "-TO").setVisible(source == s);
-      }
+    foreach (var s; ["GPS", "NAV1", "NAV2"]) {
+      me.getElement(s ~ "-pointer").setVisible(source == s);
+      me.getElement(s ~ "-CDI").setVisible(source == s);
+      me.getElement(s ~ "-FROM").setVisible(source == s);
+      me.getElement(s ~ "-TO").setVisible(source == s);
     }
 
-    me._CDISource = source;
+    me.getElement("CDI-SRC-text")
+      .setText(source)
+      .setColor(source == "GPS" ? me.COLORS.magenta : me.COLORS.green)
+      .setVisible(source != "OFF");
   },
 
-  updateCDI : func (heading, course, waypoint_valid, course_deviation_deg, deflection_dots, xtrk_nm, from, annun) {
-    if (me._CDISource == "OFF") return;
+  updateCDI : func (heading, course, waypoint_valid, course_deviation_deg, deflection_dots, xtrk_nm, from, annun, loc) {
+
+    var source = me.getController().getCDISource();
+    if (source == "OFF") return;
+
+    # While the user selects between GPS, NAV1, NAV2, we display localizers as LOC1 and LOC2
+    if ((source == "NAV1") and (loc == 1)) me.getElement("CDI-SRC-text").setText("LOC1");
+    if ((source == "NAV2") and (loc == 1)) me.getElement("CDI-SRC-text").setText("LOC2");
 
     if (waypoint_valid == 0) {
-      me.getElement(me._CDISource ~ "-CDI").hide();
-      me.getElement(me._CDISource ~ "-FROM").hide();
-      me.getElement(me._CDISource ~ "-TO").hide();
-      me.getElement(me._CDISource ~ "-pointer").hide();
+      me.getElement(source ~ "-CDI").hide();
+      me.getElement(source ~ "-FROM").hide();
+      me.getElement(source ~ "-TO").hide();
+      me.getElement(source ~ "-pointer").hide();
       me.getElement("CDI").setRotation(0);
       me.getElement("GPS-CTI-diamond").hide();
       me.getElement("CDI-GPS-XTK-text").hide();
-      me.getElement("CDI-GPS-ANN-text").hide();
+      me.getElement("CDI-GPS-ANN-text").setText("NO DATA").show();
     } else {
-      me.getElement(me._CDISource ~ "-CDI").show();
+      me.getElement(source ~ "-CDI").show();
 
       var rot = (course - heading) * D2R;
       me.getElement("CDI").setRotation(rot).show();
-      me.getElement("GPS-CTI-diamond")
-        .setVisible(waypoint_valid)
-        .setRotation(course_deviation_deg * D2R);
+      me.getElement("GPS-CTI-diamond").setRotation(course_deviation_deg * D2R).setVisible(source == "GPS");
 
-      if ((me._CDISource == "GPS") and (abs(deflection_dots) > 2.0)) {
+      if ((source == "GPS") and (abs(deflection_dots) > 2.0)) {
         # Only display the cross-track error if the error exceeds the maximum
         # deflection of two dots.
         me.getElement("CDI-GPS-XTK-text")
@@ -685,15 +603,19 @@ var PFDInstruments =
         me.getElement("CDI-GPS-XTK-text").hide();
       }
 
-      if (me._CDISource == "GPS") me.getElement("CDI-GPS-ANN-text").setText(annun).show();
+      if (source == "GPS") {
+        me.getElement("CDI-GPS-ANN-text").setText(annun).show();
+      } else {
+        me.getElement("CDI-GPS-ANN-text").hide();
+      }
 
       var scale = math.clamp(deflection_dots, -2.4, 2.4);
-      me.getElement(me._CDISource ~ "-CDI").setTranslation(80 * scale / 2.4, 0);
+      me.getElement(source ~ "-CDI").setTranslation(80 * scale / 2.4, 0);
 
       # Display the appropriate TO/FROM indication for the selected source,
       # switching all others off.
-      me.getElement(me._CDISource ~ "-TO").setVisible(from == 0);
-      me.getElement(me._CDISource ~ "-FROM").setVisible(from);
+      me.getElement(source ~ "-TO").setVisible(from == 0);
+      me.getElement(source ~ "-FROM").setVisible(from);
     }
   },
 

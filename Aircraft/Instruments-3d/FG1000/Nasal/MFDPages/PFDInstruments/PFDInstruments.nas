@@ -247,8 +247,7 @@ var PFDInstruments =
     me.getController().offdisplay();
   },
   ondisplay : func() {
-    me._group.setVisible(1);
-    me.mfd.setPageTitle(me.title);
+    me._group.setVisible(1);    
     me.getController().ondisplay();
   },
 

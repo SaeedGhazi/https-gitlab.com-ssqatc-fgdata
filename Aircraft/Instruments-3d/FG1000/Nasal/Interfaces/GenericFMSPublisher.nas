@@ -29,7 +29,9 @@ var GenericFMSPublisher =
     obj.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
     obj.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");
 
+    obj.addPropMap("FMSMode", "/instrumentation/gps/mode");
     obj.addPropMap("FMSLegValid", "/instrumentation/gps/wp/wp[1]/valid");
+    obj.addPropMap("FMSPreviousLegID", "/instrumentation/gps/wp/wp[0]/ID");
     obj.addPropMap("FMSLegID", "/instrumentation/gps/wp/wp[1]/ID");
     obj.addPropMap("FMSLegBearingMagDeg", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
     obj.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm");

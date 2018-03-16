@@ -17,12 +17,12 @@
 # Generic Interface controller.
 
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
+io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/PropertyPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/PropertyUpdater.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericEISPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSUpdater.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericADCPublisher.nas', "fg1000");

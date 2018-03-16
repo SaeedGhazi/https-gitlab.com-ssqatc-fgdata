@@ -58,7 +58,7 @@ var PFDDisplay =
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/Surround.svg',
+                    '/Aircraft/Instruments-3d/FG1000/MFDPages/SurroundPFD.svg',
                     {'font-mapper': fontmapper});
 
     obj._MFDDevice = canvas.PFD_Device.new(obj._svg, 12, "SoftKey", myCanvas, "PFD");
@@ -70,7 +70,7 @@ var PFDDisplay =
 
     # Controller for the header and display on the bottom left which allows selection
     # of page groups and individual pages using the FMS controller.
-    obj.Surround = fg1000.Surround.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj.Surround = fg1000.Surround.new(obj, myCanvas, obj._MFDDevice, obj._svg, 1);
     obj.SurroundController = obj.Surround.getController();
 
     # Engine Information System.  A special case as it's always displayed on the MFD.

@@ -77,12 +77,14 @@ var HEADER_MAPPING = {
 
 var Surround =
 {
-  new : func (mfd, myCanvas, device, svg)
+  new : func (mfd, myCanvas, device, svg, pfd=0)
   {
     var obj = { parents : [
       Surround,
       MFDPage.new(mfd, myCanvas, device, svg, "Surround", ""),
     ] };
+
+    obj.pfd = pfd;
 
     var textElements = [
       "Comm1StandbyFreq", "Comm1SelectedFreq",
@@ -90,13 +92,20 @@ var Surround =
       "Nav1StandbyFreq", "Nav1SelectedFreq",
       "Nav2StandbyFreq", "Nav2SelectedFreq",
       "Nav1ID", "Nav2ID",
-      "Header1Label", "Header1Value",
-      "Header2Label", "Header2Value",
-      "Header3Label", "Header3Value",
-      "Header4Label", "Header4Value",
     ];
 
     obj.addTextElements(textElements);
+
+    if (pfd) {
+      obj.addTextElements(["HeaderFrom", "HeaderTo", "LegDistance", "LegBRG"]);
+      obj._dto = PFD.HighlightElement.new(obj.pageName, svg, "HeaderDTO", "DTO");
+      obj._leg = PFD.HighlightElement.new(obj.pageName, svg, "HeaderActiveLeg", "Leg");
+    } else {
+      obj.addTextElements(["Header1Label", "Header1Value",
+                            "Header2Label", "Header2Value",
+                            "Header3Label", "Header3Value",
+                            "Header4Label", "Header4Value"]);
+    }
 
     obj._comm1selected = PFD.HighlightElement.new(obj.pageName, svg, "Comm1Selected", "Comm1");
     obj._comm2selected = PFD.HighlightElement.new(obj.pageName, svg, "Comm2Selected", "Comm2");
@@ -222,35 +231,63 @@ var Surround =
 
   # Update Header data with FMS or ADC data.
   updateHeaderData : func(data) {
-    var headers = ["Header1", "Header2", "Header3", "Header4"];
-    foreach (var header; headers) {
 
-      # Get the currently configured heading and set the surround to display it.
-      var label = me.mfd.ConfigStore.get("MFD" ~ header);
-      assert(label != nil, "No header configured in ConfigStore for " ~ header);
-      me.setTextElement(header ~ "Label", label);
+    if (me.pfd) {
+      # From, To, leg distance and leg bearing headers
+      if (data["FMSLegID"]) {
+        if (data["FMSLegID"] == "") {
+          # No Leg, so hide the headers
+          me.setTextElement("HeaderTo", "");
+          me.setTextElement("HeaderFrom", "");
+          me._dto.setVisible(0);
+          me._leg.setVisible(0);
+        } else {
+          me.setTextElement("HeaderTo", data["FMSLegID"]);
+          me._leg.setVisible(1);
 
-      # Determine how it maps to Emesary data notifications
-      var mapping = HEADER_MAPPING[label];
-      assert(mapping != nil, "No header mapping for " ~ label);
-
-      if (data[mapping.message] != nil) {
-        # Format and display the value
-        var value = sprintf(mapping.format, data[mapping.message]);
-
-        if (mapping.message == "FMSEstimatedTimeEnroute") {
-          # Special case to format time strings.
-          var hrs = int(data[mapping.message]);
-          var mins = int(60*(data[mapping.message] - hrs));
-          var secs = int(3600*(data[mapping.message] - hrs - mins/60));
-
-          if (hrs == 0) {
-            value = sprintf("%d:%02d", mins, secs);
+          if (data["FMSMode"] == "dto") {
+            me.setTextElement("HeaderFrom", "");
+            me._dto.setVisible(1);
           } else {
-            value = sprintf("%d:%02d", hrs, mins);
+            me._dto.setVisible(0);
           }
         }
-        me.setTextElement(header ~ "Value", value);
+      }
+
+      if (data["FMSLegDesiredTrack"]) me.setTextElement("LegBRG", sprintf("%i°", data["FMSLegDesiredTrack"]));
+      if (data["FMSLegDistanceNM"]) me.setTextElement("LegDistance", sprintf("%.1fnm", data["FMSLegDistanceNM"]));
+    } else {
+      # MFD - 4 configurable Headers
+      var headers = ["Header1", "Header2", "Header3", "Header4"];
+      foreach (var header; headers) {
+
+        # Get the currently configured heading and set the surround to display it.
+        var label = me.mfd.ConfigStore.get("MFD" ~ header);
+        assert(label != nil, "No header configured in ConfigStore for " ~ header);
+        me.setTextElement(header ~ "Label", label);
+
+        # Determine how it maps to Emesary data notifications
+        var mapping = HEADER_MAPPING[label];
+        assert(mapping != nil, "No header mapping for " ~ label);
+
+        if (data[mapping.message] != nil) {
+          # Format and display the value
+          var value = sprintf(mapping.format, data[mapping.message]);
+
+          if (mapping.message == "FMSEstimatedTimeEnroute") {
+            # Special case to format time strings.
+            var hrs = int(data[mapping.message]);
+            var mins = int(60*(data[mapping.message] - hrs));
+            var secs = int(3600*(data[mapping.message] - hrs - mins/60));
+
+            if (hrs == 0) {
+              value = sprintf("%d:%02d", mins, secs);
+            } else {
+              value = sprintf("%d:%02d", hrs, mins);
+            }
+          }
+          me.setTextElement(header ~ "Value", value);
+        }
       }
     }
   },

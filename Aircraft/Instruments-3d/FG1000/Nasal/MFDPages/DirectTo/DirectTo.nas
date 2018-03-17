@@ -44,7 +44,6 @@ var DirectTo =
          "Region",
          "LocationBRG",
          "LocationDIS",
-         "RangeDisplay"
     ];
 
     obj.addTextElements(textelements);
@@ -74,40 +73,7 @@ var DirectTo =
     obj.WaypointSubmenuScroll = PFD.GroupElement.new(obj.pageName, svg, [ "WaypointSubmenuScroll" ] , 4, "WaypointSubmenuScroll", 0, "WaypointSubmenuScrollTrough" , "WaypointSubmenuScrollThumb", 60);
 
     # The Airport Chart
-    obj.DirectToChart = obj._group.createChild("map");
-    obj.DirectToChart.setInt("z-index", 100);
-
-    obj.DirectToChart.setController("Static position", "main");
-
-
-    # Initialize a range and screen resolution.  Setting a range
-    # to 15nm means we pick up a good set of surrounding fixes
-    # We will use the screen range for zooming.
-    obj.DirectToChart.setRange(8.0);
-    obj.DirectToChart.setScreenRange(300/2.0);
-    obj.DirectToChart.setTranslation(860, 440);
-    obj.DirectToChart.set("clip-frame", canvas.Element.LOCAL);
-    obj.DirectToChart.set("clip", "rect(-160px, 160px, 160px, -160px)");
-
-    var r = func(name,vis=1,zindex=nil) return caller(0)[0];
-    foreach(var type; [r('APT'),r('DME'),r('VOR'),r('NDB'),r('FIX')] ) {
-        obj.DirectToChart.addLayer(canvas.SymbolLayer,
-                               type.name,
-                               10,
-                               obj.Styles.getStyle(type.name),
-                               obj.Options.getOption(type.name),
-                               type.vis );
-    }
-
-    foreach(var type; [ r('STAMEN')]) {
-        obj.DirectToChart.addLayer(factory: canvas.OverlayLayer, type_arg: type.name,
-                         priority: 9,
-                         style: obj.Styles.getStyle(type.name),
-                         options: obj.Options.getOption(type.name),
-                         visible: 1);
-    }
-
-
+    obj.DirectToChart = fg1000.NavMap.new(obj, obj.getElement("Map"), [860,440], "rect(-160px, 160px, 160px, -160px)", 0, 2, 1);
 
     obj.setController(fg1000.DirectToController.new(obj, svg));
     return obj;
@@ -123,13 +89,13 @@ var DirectTo =
       me.setTextElement("Name", string.uc(destination.name));
       me.setTextElement("City", "CITY");
       me.setTextElement("Region", "REGION");
-      me.setTextElement("LocationBRG", "" ~ sprintf("%03d", destination.course));
+      me.setTextElement("LocationBRG", "" ~ sprintf("%03d°", destination.course));
       me.setTextElement("LocationDIS", sprintf("%d", destination.range_nm) ~ "nm");
 
       me.IDEntry.setValue(destination.id);
       me.VNVAltEntry.setValue("00000");
       me.VNVOffsetEntry.setValue("00");
-      me.CourseEntry.setValue("" ~ sprintf("%03d", destination.course));
+      me.CourseEntry.setValue("" ~ sprintf("%03d°", destination.course));
     } else {
       me.DirectToChart.setVisible(1);
       me.setTextElement("Name", "");
@@ -145,12 +111,6 @@ var DirectTo =
     }
   },
 
-  setRange : func(range, label) {
-    me.DirectToChart.setRange(range);
-    me.DirectToChart.update();
-    me.setTextElement("RangeDisplay", label);
-  },
-
   offdisplay : func() {
     me._group.setVisible(0);
     me.getController().offdisplay();
@@ -160,6 +120,9 @@ var DirectTo =
     me._group.setVisible(1);
     # Display a false title, as underneath we're showing the navigation map.
     me.mfd.setPageTitle("MAP - NAVIGATION MAP");
+    me.getElement("Map").setVisible(1);
+    me.getElement("Map-bg").setVisible(1);
+    me.DirectToChart.setVisible(1);
     me.getController().ondisplay();
 
     # The DirectTo pages displays over the NavigationMap.  This is a hack

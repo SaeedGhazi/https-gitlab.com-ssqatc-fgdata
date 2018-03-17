@@ -144,8 +144,7 @@ var NearestAirports =
       var crsAndDst = courseAndDistance(apt);
 
       # Display the course and distance in NM .
-      # 248 is the extended ASCII code for the degree symbol
-      var crs = sprintf("%i%c", crsAndDst[0], 248);
+      var crs = sprintf("%i°", crsAndDst[0]);
       var dst = sprintf("%.1fnm", crsAndDst[1]);
 
       # Convert into something we can pass straight to the UIGroup.

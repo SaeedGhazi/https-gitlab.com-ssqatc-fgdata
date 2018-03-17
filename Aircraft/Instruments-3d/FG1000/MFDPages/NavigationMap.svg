@@ -23,9 +23,9 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="723.45322"
-     inkscape:cy="612.12112"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="851.72535"
+     inkscape:cy="412.85117"
      inkscape:document-units="px"
      inkscape:current-layer="NavigationMapGroup"
      showgrid="true"
@@ -69,103 +69,64 @@
     <g
        id="NavigationMapGroup"
        inkscape:label="#g4869">
-      <rect
-         y="718.50403"
-         x="957.50397"
-         height="24.992043"
-         width="66.992043"
-         id="rect8420"
-         style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.00795722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5127-6"
-         d="m 958.01562,743.02999 0,-24.54969 65.91218,0"
-         style="display:inline;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#b6bcbe;stroke-width:0.88936359px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="0%"
-         inkscape:label="RangeDisplay"
-         transform="scale(0.93580798,1.0685953)"
-         id="NavigationMapRangeDisplay"
-         y="689.10815"
-         x="1059.5933"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:12.03934765px;line-height:0%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow, Condensed';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#31ffff;fill-opacity:1;stroke:none"
-         xml:space="preserve"><tspan
-           style="font-size:17.55738258px;line-height:1.25;fill:#31ffff;fill-opacity:1"
-           y="689.10815"
+      <g
+         id="NavigationMapNavMap"
+         inkscape:label="#g4298"
+         transform="matrix(1,0,0,0.99855072,-3,-2.915942)">
+        <rect
+           inkscape:label="#rect4293"
+           y="58"
+           x="6"
+           height="690"
+           width="1024"
+           id="NavigationMapNavMap-bg"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      </g>
+      <g
+         id="NavigationMapLegend"
+         inkscape:label="#g4959">
+        <rect
+           style="display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.00795722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect8420"
+           width="66.992043"
+           height="24.992043"
+           x="959.50397"
+           y="718.50403" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:12.03934765px;line-height:0%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow, Condensed';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#31ffff;fill-opacity:1;stroke:none"
            x="1059.5933"
-           id="tspan5131-3-5"
-           sodipodi:role="line">Zoom nm</tspan></text>
-      <rect
-         style="display:inline;opacity:1;fill:#1a3030;fill-opacity:1;fill-rule:nonzero;stroke:#fffcfa;stroke-width:0.96484423;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="rect4216"
-         width="74.343285"
-         height="20.035156"
-         x="952.10205"
-         y="55.482422" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:#fffcfa;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="956.10889"
-         y="70.5"
-         id="NavigationMapOrientation"
-         sodipodi:linespacing="125%"
-         inkscape:label="#text4218"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
-           sodipodi:role="line"
-           id="tspan4220"
-           x="956.10889"
-           y="70.5">NORTH UP</tspan></text>
-    </g>
-    <g
-       id="NavigationMapGroupPartial"
-       inkscape:label="#g4878"
-       transform="translate(14.999977,-0.47363257)">
-      <rect
-         y="718.50403"
-         x="640.57623"
-         height="24.992043"
-         width="66.992043"
-         id="rect4809"
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.00795722;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path4811"
-         d="m 641.08786,743.02999 0,-24.54969 65.91218,0"
-         style="display:inline;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#b6bcbe;stroke-width:0.88936359px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="0%"
-         inkscape:label="RangeDisplay"
-         transform="scale(0.93580798,1.0685953)"
-         id="NavigationMapRangeDisplayPartial"
-         y="689.10815"
-         x="720.92578"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:12.03934765px;line-height:0%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow, Condensed';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#31ffff;fill-opacity:1;stroke:none"
-         xml:space="preserve"><tspan
-           style="font-size:17.55738258px;line-height:1.25;fill:#31ffff;fill-opacity:1"
            y="689.10815"
-           x="720.92578"
-           id="tspan4815"
-           sodipodi:role="line">Zoom nm</tspan></text>
-      <rect
-         style="opacity:1;fill:#1a3030;fill-opacity:1;fill-rule:nonzero;stroke:#fffcfa;stroke-width:0.96484423;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="rect4817"
-         width="74.343285"
-         height="20.035156"
-         x="635.48242"
-         y="55.956055" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#fffcfa;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="639.48926"
-         y="70.973633"
-         id="NavigationMapOrientationPartial"
-         sodipodi:linespacing="125%"
-         inkscape:label="#text4218"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
-           sodipodi:role="line"
-           id="tspan4821"
-           x="639.48926"
-           y="70.973633">NORTH UP</tspan></text>
+           id="NavigationMapRangeDisplay"
+           transform="scale(0.93580798,1.0685953)"
+           inkscape:label="RangeDisplay"
+           sodipodi:linespacing="0%"><tspan
+             sodipodi:role="line"
+             id="tspan5131-3-5"
+             x="1059.5933"
+             y="689.10815"
+             style="font-size:17.55738258px;line-height:1.25;fill:#31ffff;fill-opacity:1">Zoom nm</tspan></text>
+        <rect
+           y="55.482422"
+           x="952.10205"
+           height="20.035156"
+           width="74.343285"
+           id="rect4216"
+           style="display:inline;opacity:1;fill:#1a3030;fill-opacity:1;fill-rule:nonzero;stroke:#fffcfa;stroke-width:0.96484423;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <text
+           inkscape:label="#text4218"
+           sodipodi:linespacing="125%"
+           id="NavigationMapOrientationDisplay"
+           y="70.5"
+           x="956.10889"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:#fffcfa;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             y="70.5"
+             x="956.10889"
+             id="tspan4220"
+             sodipodi:role="line"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'">NORTH UP</tspan></text>
+      </g>
     </g>
   </g>
 </svg>

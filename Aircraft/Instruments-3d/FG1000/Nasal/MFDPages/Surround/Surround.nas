@@ -57,10 +57,10 @@ var PAGE_GROUPS = [
 # Mapping for header labels to specific FMS or ADC messages, and sprintf formatting
 # to use
 var HEADER_MAPPING = {
-  "BRG" : { message : "FMSLegBearingMagDeg",      format : "%d"},
+  "BRG" : { message : "FMSLegBearingMagDeg",      format : "%d°"},
   "XTK" : { message : "FMSLegCourseError",        format : "%.1fnm"},
   "DIS" : { message : "FMSDistance",              format : "%.1fnm"},
-  "DTK" : { message : "FMSLegDesiredTrack",       format : "%d"},
+  "DTK" : { message : "FMSLegDesiredTrack",       format : "%d°"},
   "END" : { message : "EnduranceHrs",             format : "%.1fhrs"},
   "ESA" : { message : "EnRouteSafeAltitude",      format : "%dft"},    # TODO
   "ETA" : { message : "FMSEstimatedTimeArrival",  format : ""},        # TODO
@@ -70,8 +70,8 @@ var HEADER_MAPPING = {
   "GS"  : { message : "FMSGroundspeed",              format : "%dkts"},
   "MSA" : { message : "MinimumSafeAltitude",         format : "%dft"},    # TODO
   "TAS" : { message : "ADCTrueAirspeed",             format : "%dkts"},
-  "TKE" : { message : "FMSLegTrackErrorAngle",       format : "%d"},
-  "TRK" : { message : "FMSLegTrack",                 format : "%d"},
+  "TKE" : { message : "FMSLegTrackErrorAngle",       format : "%d°"},
+  "TRK" : { message : "FMSLegTrack",                 format : "%d°"},
   "VSR" : { message : "FMSLegVerticalSpeedRequired", format : "%dfpm"},   # TODO
 };
 

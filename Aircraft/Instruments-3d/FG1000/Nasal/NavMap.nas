@@ -23,7 +23,7 @@ var NavMap = {
   # Airways levels.
   AIRWAYS : [ "AIRWAYS", "AIRWY ON", "AIRWY LO", "AIRWY HI"],
 
-  new : func(page, element, center, clip="", zindex=0, vis_shift=0 )
+  new : func(page, element, center, clip="", zindex=0, vis_shift=0, static=0 )
   {
     var obj = {
       parents : [ NavMap ],
@@ -52,26 +52,30 @@ var NavMap = {
     if (obj._orientationDisplay == nil) die("Unable to find element " ~ obj._pageName ~ "OrientationDisplay");
 
     # Initialize the controllers:
-    var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
-    var source = ctrl_ns.SOURCES["current-pos"];
-    if (source == nil) {
-        # TODO: amend
-        var source = ctrl_ns.SOURCES["current-pos"] = {
-            getPosition: func subvec(geo.aircraft_position().latlon(), 0, 2),
-            getAltitude: func getprop('/position/altitude-ft'),
-            getHeading:  func {
-                if (me.aircraft_heading)
-                    getprop('/orientation/heading-deg')
-                else 0
-            },
-            aircraft_heading: 1,
-        };
+    if (static) {
+      obj.Map.setController("Static position", "main");
+    } else {
+      var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
+      var source = ctrl_ns.SOURCES["current-pos"];
+      if (source == nil) {
+          # TODO: amend
+          var source = ctrl_ns.SOURCES["current-pos"] = {
+              getPosition: func subvec(geo.aircraft_position().latlon(), 0, 2),
+              getAltitude: func getprop('/position/altitude-ft'),
+              getHeading:  func {
+                  if (me.aircraft_heading)
+                      getprop('/orientation/heading-deg')
+                  else 0
+              },
+              aircraft_heading: 1,
+          };
+      }
+      setlistener("/sim/gui/dialogs/map-canvas/aircraft-heading-up", func(n) {
+        source.aircraft_heading = n.getBoolValue();
+      }, 1);
+      # Make it move with our aircraft:
+      obj.Map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
     }
-    setlistener("/sim/gui/dialogs/map-canvas/aircraft-heading-up", func(n) {
-      source.aircraft_heading = n.getBoolValue();
-    }, 1);
-    # Make it move with our aircraft:
-    obj.Map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
 
     if (clip != "") {
       obj.Map.set("clip-frame", canvas.Element.LOCAL);
@@ -82,32 +86,36 @@ var NavMap = {
       element.setInt("z-index", zindex);
     }
 
-    var r = func(name,vis=1,zindex=nil) return caller(0)[0];
+    var r = func(name,on_static=1, vis=1,zindex=nil) return caller(0)[0];
     # TODO: we'll need some z-indexing here, right now it's just random
-    foreach(var type; [r('GRID'),r('DTO',0),r('TFC',0),r('APT'),r('DME'),r('VOR_FG1000'),r('NDB'),r('FIX',0),r('GPS'),r('RTE'),r('WPT'),r('FLT'),r('WXR',0),r('APS')] ) {
-        obj.Map.addLayer(
-          factory: canvas.SymbolLayer,
-          type_arg: type.name,
-          priority: 4,
-          style: obj.Styles.getStyle(type.name),
-          options: obj.Options.getOption(type.name),
-          visible: type.vis);
-    }
+    foreach (var layer_name; obj._page.mfd.ConfigStore.getLayerNames()) {
+      var layer = obj._page.mfd.ConfigStore.getLayer(layer_name);
 
-    foreach(var type; [ r('STAMEN_terrain'),r('STAMEN'), r('OpenAIP') ]) {
+      if ((static == 0) or (layer.static == 1)) {
+        # Not all layers are displayed for all map types.  Specifically,
+        # some layers are not displayed on static maps - e.g. DirectTo
         obj.Map.addLayer(
-          factory: canvas.OverlayLayer,
-          type_arg: type.name,
-          priority: 1,
-          style: obj.Styles.getStyle(type.name),
-          options: obj.Options.getOption(type.name),
+          factory: layer.factory,
+          type_arg: layer_name,
+          priority: layer.priority,
+          style: obj.Styles.getStyle(layer_name),
+          options: obj.Options.getOption(layer_name),
           visible: 0);
+      }
     }
 
     obj.setZoom(obj.current_zoom);
     obj.setOrientation(0);
     obj.Map.setVisible(0);
     return obj;
+  },
+
+  setController : func(type, controller ) {
+    me.Map.setController(type, controller);
+  },
+
+  getController : func() {
+    return me.Map.getController();
   },
 
   toggleLayerVisible : func(name) {
@@ -155,6 +163,8 @@ var NavMap = {
     foreach (var layer_name; me._page.mfd.ConfigStore.getLayerNames()) {
       var layer = me._page.mfd.ConfigStore.getLayer(layer_name);
 
+      if (me.Map.getLayer(layer_name) == nil) continue;
+
       # Layers are only displayed if:
       # 1) the user has enabled them.
       # 2) The current zoom level is _less_ than the maximum range for the layer
@@ -165,7 +175,7 @@ var NavMap = {
       var effective_range = fg1000.RANGES[effective_zoom].range;
       if (layer.enabled and
           (effective_range <= layer.range) and
-          (me.declutter <= layer.declutter)   )
+          (me.declutter <= layer.declutter)    )
       {
         me.Map.getLayer(layer_name).setVisible(1);
       } else {

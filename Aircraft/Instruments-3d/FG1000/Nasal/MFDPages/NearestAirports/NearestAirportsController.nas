@@ -173,7 +173,7 @@ var NearestAirportsController =
   handleRange : func(val)
   {
     # Pass any range entries to the NavMapController
-    me.page.mfd.NavigationMap.controller.handleZoom(val);
+    me.page.mfd.NavigationMap.getController().handleRange(val);
   },
 
 

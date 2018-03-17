@@ -94,9 +94,6 @@ var MFDDisplay =
       # If we don't return anything the default font is used
     };
 
-    canvas.parsesvg(obj._svg,
-                    EIS_SVG,
-                    {'font-mapper': fontmapper});
 
     foreach (var page; MFDPages) {
       var svg_file ='/Aircraft/Instruments-3d/FG1000/MFDPages/' ~ page ~ '.svg';
@@ -107,6 +104,10 @@ var MFDDisplay =
                         {'font-mapper': fontmapper});
       }
     }
+
+    canvas.parsesvg(obj._svg,
+                    EIS_SVG,
+                    {'font-mapper': fontmapper});
 
     obj._MFDDevice = canvas.PFD_Device.new(obj._svg, 12, "SoftKey", myCanvas, "MFD");
     obj._MFDDevice.device_id = device_id;

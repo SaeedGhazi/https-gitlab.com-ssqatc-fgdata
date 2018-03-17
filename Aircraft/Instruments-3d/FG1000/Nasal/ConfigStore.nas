@@ -27,29 +27,32 @@ var ConfigStore = {
   # declutter - the maximum declutter level (0-3) that this layer is visible in
   # range     - the maximum range this layer is visible (configured by user)
   # max_range - the maximum range value that a user can configure for this layer.
+  # static - whether this layer should be displayed on static maps (as opposed to the moving maps)
+  # factory - name of the factory to use for creating the layer
+  # priority - layer priority
   layerRanges : {
-    DTO  : { enabled: 0, declutter: 3, range: 2000, max_range: 2000 },
+    DTO  : { enabled: 0, declutter: 3, range: 2000, max_range: 2000, static : 0, factory : canvas.SymbolLayer, priority : 4 },
 
-    GRID : { enabled: 0, declutter: 1, range: 20, max_range: 2000 },
-    DME  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
-    VOR_FG1000  : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
-    NDB  : { enabled: 1, declutter: 1, range: 15, max_range: 30 },
-    FIX  : { enabled: 1, declutter: 1, range: 15, max_range: 30 },
-    RTE  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
-    WPT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
+    GRID : { enabled: 0, declutter: 1, range: 20, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4  },
+    DME  : { enabled: 1, declutter: 1, range: 150, max_range: 300, static : 1, factory : canvas.SymbolLayer, priority : 4  },
+    VOR_FG1000  : { enabled: 1, declutter: 1, range: 150, max_range: 300, static : 1, factory : canvas.SymbolLayer, priority : 4  },
+    NDB  : { enabled: 1, declutter: 1, range: 15, max_range: 30, static : 1, factory : canvas.SymbolLayer, priority : 4  },
+    FIX  : { enabled: 1, declutter: 1, range: 15, max_range: 30, static : 1, factory : canvas.SymbolLayer, priority : 4  },
+    RTE  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 0, factory : canvas.SymbolLayer, priority : 4  },
+    WPT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 0, factory : canvas.SymbolLayer, priority : 4  },
 
-    APS  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
-    FLT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000 },
+    FLT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4  },
 
-    WXR  : { enabled: 1, declutter: 2, range: 2000, max_range: 2000 },
+    WXR  : { enabled: 1, declutter: 2, range: 2000, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4  },
 
-    APT  : { enabled: 1, declutter: 2, range: 150, max_range: 300 },
+    APT  : { enabled: 1, declutter: 2, range: 150, max_range: 300, static : 1, factory : canvas.SymbolLayer, priority : 4  },
 
-    TFC  : { enabled: 0, declutter: 3, range: 150, max_range: 2000},
+    TFC  : { enabled: 0, declutter: 3, range: 150, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4  },
+    APS  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 1,  factory : canvas.SymbolLayer, priority : 4  },
 
-    OpenAIP : { enabled: 1, declutter: 1, range: 150, max_range: 300 },
-    STAMEN  : { enabled: 1, declutter: 3, range: 500, max_range: 2000 },
-    STAMEN_terrain  : { enabled: 1, declutter: 3, range: 500, max_range: 2000 },
+    STAMEN_terrain  : { enabled: 1, declutter: 3, range: 500, max_range: 2000, static : 1, factory : canvas.OverlayLayer, priority : 1  },
+    OpenAIP : { enabled: 1, declutter: 1, range: 150, max_range: 300, static : 1, factory : canvas.OverlayLayer, priority : 1  },
+    STAMEN  : { enabled: 1, declutter: 3, range: 500, max_range: 2000, static : 1, factory : canvas.OverlayLayer, priority : 1  },
   },
 
   configValues : {

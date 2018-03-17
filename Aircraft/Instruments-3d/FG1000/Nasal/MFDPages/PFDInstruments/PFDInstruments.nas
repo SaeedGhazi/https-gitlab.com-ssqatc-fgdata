@@ -78,10 +78,7 @@ var PFDInstruments =
       obj.device.svg.getElementById("PFDInstruments" ~ id).set("clip", clip);
     }
 
-    #obj.insetMap = fg1000.NavMap.new(obj, [130,170], "rect(-160px, 160px, 160px, -160px)", -100, 2);
     obj._SVGGroup.setInt("z-index", 10);
-    #obj._SVGGroup.setVisible(0);
-    #obj.insetMap = fg1000.NavMap.new(obj, [119,601], "rect(-109px, 109px, 109px, -109px)", 50, 2);
     obj.insetMap = fg1000.NavMap.new(obj, obj.getElement("PFD-Map-Display"), [119,601], "rect(-109px, 109px, 109px, -109px)", 0, 2);
 
     #obj.topMenu(device, obj, nil);
@@ -247,7 +244,7 @@ var PFDInstruments =
     me.getController().offdisplay();
   },
   ondisplay : func() {
-    me._group.setVisible(1);    
+    me._group.setVisible(1);
     me.getController().ondisplay();
   },
 

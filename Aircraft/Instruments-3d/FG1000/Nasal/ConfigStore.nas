@@ -39,6 +39,7 @@ var ConfigStore = {
     NDB  : { enabled: 1, declutter: 1, range: 15, max_range: 30, static : 1, factory : canvas.SymbolLayer, priority : 4  },
     FIX  : { enabled: 1, declutter: 1, range: 15, max_range: 30, static : 1, factory : canvas.SymbolLayer, priority : 4  },
     RTE  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 0, factory : canvas.SymbolLayer, priority : 4  },
+    GPS  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 0, factory : canvas.SymbolLayer, priority : 4  },
     WPT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 0, factory : canvas.SymbolLayer, priority : 4  },
 
     FLT  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4  },
@@ -48,7 +49,7 @@ var ConfigStore = {
     APT  : { enabled: 1, declutter: 2, range: 150, max_range: 300, static : 1, factory : canvas.SymbolLayer, priority : 4  },
 
     TFC  : { enabled: 0, declutter: 3, range: 150, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4  },
-    APS  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 1,  factory : canvas.SymbolLayer, priority : 4  },
+    APS  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 0,  factory : canvas.SymbolLayer, priority : 4  },
 
     STAMEN_terrain  : { enabled: 1, declutter: 3, range: 500, max_range: 2000, static : 1, factory : canvas.OverlayLayer, priority : 1  },
     OpenAIP : { enabled: 1, declutter: 1, range: 150, max_range: 300, static : 1, factory : canvas.OverlayLayer, priority : 1  },

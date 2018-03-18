@@ -78,20 +78,43 @@ var prefix = "Chat Message:";
 var input = "";
 var kbdlistener = nil;
 
+var my_kbd_listener = func(event)
+{
+  var key = event.getNode("key");
+
+  # Only check the key when pressed.
+  if (!event.getNode("pressed").getValue())
+    return;
+
+  if (handle_key(key.getValue()))
+    key.setValue(-1);           # drop key event
+}
+
+var capture_kbd = func()
+{
+  if (kbdlistener == nil) {
+    kbdlistener = setlistener("/devices/status/keyboard/event", my_kbd_listener);
+  }
+}
+
+var release_kbd = func()
+{
+  if (kbdlistener != nil) {
+    removelistener(kbdlistener);
+    kbdlistener = nil;
+  }
+}
 var compose_message = func(msg = "")
 {
   input = prefix ~ msg;
   gui.popupTip(input, 1000000);
+  capture_kbd();
+}
 
-  kbdlistener = setlistener("/devices/status/keyboard/event", func (event) {
-    var key = event.getNode("key");
-    # Only check the key when pressed.
-    if (!event.getNode("pressed").getValue())
-      return;
-
-    if (handle_key(key.getValue()))
-      key.setValue(-1);           # drop key event
-  });
+var end_compose_message = func()
+{
+  gui.popdown();
+  release_kbd();
 }
 
 var handle_key = func(key)
@@ -104,8 +127,7 @@ var handle_key = func(key)
     input = substr(input, size(prefix));
     # Send the message and switch off the listener.
     setprop("/sim/multiplay/chat", input);
-    gui.popdown();
-    removelistener(kbdlistener);
+    end_compose_message();
     return 1;
   }
   elsif (key == 8)
@@ -124,8 +146,7 @@ var handle_key = func(key)
   elsif (key == 27)
   {
     # escape -> cancel
-    gui.popdown();
-    removelistener(kbdlistener);
+    end_compose_message();
     return 1;
   }
   elsif ((key > 31) and (key < 128))

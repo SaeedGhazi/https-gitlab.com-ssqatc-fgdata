@@ -54,7 +54,7 @@ var MFDPages = [
   "NearestUserWPT",
   "NearestFrequencies",
   "NearestAirspaces",
-  "DirectTo",   # display at the top of the stack
+  "DirectTo",
   "Surround",
 ];
 
@@ -111,6 +111,12 @@ var MFDDisplay =
 
     obj._MFDDevice = canvas.PFD_Device.new(obj._svg, 12, "SoftKey", myCanvas, "MFD");
     obj._MFDDevice.device_id = device_id;
+
+    # DirectTo "Page" loaded first so that it receives any Emesary notifications
+    # _before_ the actual page.
+    obj._DTO = fg1000.DirectTo.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj._DTO.getController().RegisterWithEmesary();
+
     obj._MFDDevice.RegisterWithEmesary();
 
     # Surround dynamic elements
@@ -133,7 +139,7 @@ var MFDDisplay =
 
     # Now load the other pages normally;
     foreach (var page; MFDPages) {
-      if ((page != "NavigationMap") and (page != "EIS")) {
+      if ((page != "NavigationMap") and (page != "EIS") and (page != "DirectTo")) {
         #var code = "obj.Surround.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
         var code = "obj.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
         var addPageFn = compile(code);

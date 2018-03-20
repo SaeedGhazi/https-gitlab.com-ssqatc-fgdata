@@ -22,6 +22,7 @@ var DirectToController =
     var obj = { parents : [ DirectToController, MFDPageController.new(page)] };
     obj.id = "";
     obj.page = page;
+    obj.dto_displayed = 0;
 
     obj._cursorElements = [
       obj.page.IDEntry,
@@ -59,6 +60,8 @@ var DirectToController =
   },
 
   handleCRSR : func() {
+    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+
     # No effect, but shouldn't be passed to underlying page?
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
@@ -158,7 +161,31 @@ var DirectToController =
     }
   },
 
+  handleDTO : func(value) {
+    if (me.dto_displayed == 0) {
+      # Display the DTO page.
+      me.page.ondisplay();
+      me.dto_displayed = 1;
+    } else {
+      # Hide the DTO page.
+      me.page.offdisplay();
+      me.dto_displayed = 0;
+    }
+
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleRange : func(val)
+  {
+    if (me.page.DirectToChart != nil) {
+      return me.page.DirectToChart.handleRange(val);
+    } else {
+      return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    }
+  },
+
   handleFMSInner : func(value) {
+    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
     if (me._waypointSubmenuVisible) {
       # We're in the Waypoint Submenu, in which case the inner FMS knob
@@ -184,7 +211,10 @@ var DirectToController =
 
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+
   handleFMSOuter : func(value) {
+    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+
     if (me._waypointSubmenuVisible) {
       # We're in the Waypoint Submenu, in which case the outer FMS knob
       # selects between the different waypoints in the Waypoint Submenu.
@@ -200,7 +230,10 @@ var DirectToController =
 
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+
   handleEnter : func(value) {
+    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+
     if (me._waypointSubmenuVisible) {
       # If we're in the Waypoint Submenu, then take whatever is highlighted
       # in the scroll list, load it and hide the Waypoint submenu
@@ -221,9 +254,9 @@ var DirectToController =
         params.offset_nm = me.page.VNVOffsetEntry.getValue();
         me.setNavData("SetDirectTo", params);
 
-        var mappage = me._page.getMFD().getPage("NavigationMap");
-        assert(mappage != nil, "Unable to find NavigationMap page");
-        me._page.getDevice().selectPage(mappage);
+        me.page.offdisplay();
+        me.dto_displayed = 0;
+
         return emesary.Transmitter.ReceiptStatus_Finished;
       }
 
@@ -250,7 +283,10 @@ var DirectToController =
 
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+
   handleClear : func(value) {
+    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+
     if (me._waypointSubmenuVisible) {
       # If we're in the Waypoint Submenu, then this clears it.
       me.page.WaypointSubmenuGroup.setVisible(0);
@@ -258,18 +294,17 @@ var DirectToController =
     } else if (me._cursorElements[me._selectedElement].isInEdit()) {
       me._cursorElements[me._selectedElement].clearElement();
     } else {
-      # Cancel the entire Direct To page, and go back to the Navigation Map.
-      var mappage = me._page.getMFD().getPage("NavigationMap");
-      assert(mappage != nil, "Unable to find NavigationMap page");
-      me._page.getDevice().selectPage(mappage);
+      # Cancel the entire Direct To page.
+      me.page.offdisplay();
+      me.dto_displayed = 0;
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
   # Reset controller if required when the page is displayed or hidden
+  # Note that we explicitly do NOT RegisterWithEmesary/DeRegisterWithEmesary!
+  # This page should RegisterWithEmesary at start of day instead.
   ondisplay : func() {
-    me.RegisterWithEmesary();
-
     # Find the current DTO target, which may have been set by the page the
     # use was on.
     var id = me.getNavData("CurrentDTO");
@@ -277,21 +312,14 @@ var DirectToController =
     me.loadDestination(id);
     me.setCursorElement(0);
   },
+
   offdisplay : func() {
-    me.DeRegisterWithEmesary();
   },
 
   loadDestination : func(id) {
-    var d = {
-      id: id,
-      name: "",
-      lat: 0,
-      lon: 0,
-      course : 0,
-      range_nm : 0,
-    };
-
-    if ((id != nil) and size(id) > 1) {
+    if ((id == nil) or (id == "")) {
+      me.page.displayDestination(nil);
+    } else {
       # Use Emesary to get the destination
       var notification = notifications.PFDEventNotification.new(
         "MFD",
@@ -308,11 +336,11 @@ var DirectToController =
 
         # Some elements don't have names
         var name = destination.id;
-        if (defined("destination.name")) name = destination.name;
+        if (!defined("destination.name")) name = destination.name;
 
         var point = { lat: destination.lat, lon: destination.lon };
-
         var (course, dist) = courseAndDistance(point);
+
         var d = {
           id: destination.id,
           name: name,
@@ -321,9 +349,9 @@ var DirectToController =
           course : course,
           range_nm : dist,
         };
+
+        me.page.displayDestination(d);
       }
     }
-
-    me.page.displayDestination(d);
   },
 };

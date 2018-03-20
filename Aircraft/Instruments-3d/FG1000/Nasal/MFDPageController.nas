@@ -31,6 +31,9 @@ new : func (page)
   obj._transmitter = emesary.GlobalTransmitter;
   obj._registered = 0;
 
+  # DirectTo controls
+  obj._directTo = 0;
+
   return obj;
 },
 
@@ -68,12 +71,7 @@ handleComVol       : func (value) { return me.page.mfd.SurroundController.handle
 handleComVolToggle : func (value) { return me.page.mfd.SurroundController.handleComVolToggle(value); },
 
 # DTO button brings up the DirectTo Page.
-handleDTO       : func (value) {
-  var dtopage = me._page.getMFD().getPage("DirectTo");
-  assert(dtopage != nil, "Unable to find the DirectTo page.");
-  me._page.getDevice().selectPage(dtopage);
-  return emesary.Transmitter.ReceiptStatus_Finished;
-},
+handleDTO       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleFPL       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 handleClear     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 

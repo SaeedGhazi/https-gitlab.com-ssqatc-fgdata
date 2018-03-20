@@ -86,7 +86,7 @@ var PFDInstrumentsController =
     me._crsrToggle = (! me._crsrToggle);
     if (me._crsrToggle) {
     } else {
-      me.page.hideCRSR();
+      #me.page.hideCRSR();
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },

@@ -74,6 +74,11 @@ addElement : func(e) {
   }
 },
 
+elementExists : func(e) {
+  var element = me._SVGGroup.getElementById(me.pageName ~ e);
+  return (element != nil);
+},
+
 addElements : func(elements) {
   foreach (var e; elements) {
     me.addElement(e);

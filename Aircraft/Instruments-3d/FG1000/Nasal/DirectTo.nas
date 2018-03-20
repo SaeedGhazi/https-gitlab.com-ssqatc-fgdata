@@ -14,9 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
-# DirectTo page.  This is an overlay, sitting on whatever page the user
-# is on already. Hence it is not called in the normal way, but instead
-# explicitly displays/hides itself when the DTO button is pressed.
+# DirectTo page
+#
+# Technically this is supposed to be an overlay page, sitting on top of
+# whatever page the user was on already.  However, to simplify implementation,
+# we will assume that the user was on the Map page, and simply display the
+# NavigationMap page underneath.
 
 var DirectTo =
 {
@@ -71,26 +74,25 @@ var DirectTo =
 
     # The Airport Chart
     if (obj.elementExists("Map")) {
-      print("DirectoTo Map exists");
       obj.DirectToChart = fg1000.NavMap.new(obj, obj.getElement("Map"), [860,440], "rect(-160px, 160px, 160px, -160px)", 0, 2, 1);
-    } else {
-      obj.DirectToChart = nil;
     }
 
     obj.setController(fg1000.DirectToController.new(obj, svg));
     return obj;
   },
-
   displayDestination : func(destination) {
+
+    #me.IDEntry.clearElement();
+
     if (destination != nil) {
       # Display a given location
-      if (me.DirectToChart != nil) {
+      if (me.DirectToChart) {
         me.DirectToChart.setVisible(1);
         me.DirectToChart.getController().setPosition(destination.lat,destination.lon);
       }
       me.setTextElement("Name", string.uc(destination.name));
-      me.setTextElement("City", "");
-      me.setTextElement("Region", "");
+      me.setTextElement("City", "CITY");
+      me.setTextElement("Region", "REGION");
       me.setTextElement("LocationBRG", "" ~ sprintf("%03d°", destination.course));
       me.setTextElement("LocationDIS", sprintf("%d", destination.range_nm) ~ "nm");
 
@@ -99,14 +101,14 @@ var DirectTo =
       me.VNVOffsetEntry.setValue("00");
       me.CourseEntry.setValue("" ~ sprintf("%03d°", destination.course));
     } else {
-      if (me.DirectToChart != nil) me.DirectToChart.setVisible(0);
+      if (me.DirectToChart) me.DirectToChart.setVisible(0);
       me.setTextElement("Name", "");
       me.setTextElement("City", "");
       me.setTextElement("Region", "");
       me.setTextElement("LocationBRG", "_");
       me.setTextElement("LocationDIS", "_");
 
-      me.IDEntry.setValue("####");
+      me.IDEntry.setValue("____");
       me.VNVAltEntry.setValue("00000");
       me.VNVOffsetEntry.setValue("00");
       me.CourseEntry.setValue(0);
@@ -115,12 +117,30 @@ var DirectTo =
 
   offdisplay : func() {
     me._group.setVisible(0);
-    me.getElement("Group").setVisible(0);
     me.getController().offdisplay();
+    me.mfd.NavigationMap.offdisplay(0);
   },
   ondisplay : func() {
     me._group.setVisible(1);
-    me.getElement("Group").setVisible(1);
+    # Display a false title, as underneath we're showing the navigation map.
+    me.mfd.setPageTitle("MAP - NAVIGATION MAP");
+    me.getElement("Map").setVisible(1);
+    me.getElement("Map-bg").setVisible(1);
+    if (me.DirectToChart) me.DirectToChart.setVisible(1);
     me.getController().ondisplay();
+
+    # The DirectTo pages displays over the NavigationMap.  This is a hack
+    # as the page should just magically sit ontop of whatever page the user was
+    # on.  However, we also need to disable the NavMap's own controller so there's
+    # no confusion.
+    me.mfd.NavigationMap.ondisplay(0);
   },
+
+  # When the Direct To display is enabled, nothing is displayed on the softkeys.
+  topMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    device.updateMenus();
+  },
+
 };

@@ -36,6 +36,9 @@ var PFDDisplay =
     io.load_nasal(nasal_dir ~ "MFDPages/PFDInstruments/PFDInstrumentsOptions.nas", "fg1000");
     io.load_nasal(nasal_dir ~ "MFDPages/PFDInstruments/PFDInstrumentsController.nas", "fg1000");
 
+    io.load_nasal(nasal_dir ~ "MFDPages/DirectTo/DirectTo.nas", "fg1000");
+    io.load_nasal(nasal_dir ~ "MFDPages/DirectTo/DirectToController.nas", "fg1000");
+
     obj.ConfigStore = obj._fg1000.getConfigStore();
 
     obj._svg = myCanvas.createGroup("softkeys");
@@ -53,16 +56,29 @@ var PFDDisplay =
                     EIS_SVG,
                     {'font-mapper': fontmapper});
 
+
     canvas.parsesvg(obj._svg,
                     '/Aircraft/Instruments-3d/FG1000/MFDPages/PFDInstruments.svg',
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
+                    '/Aircraft/Instruments-3d/FG1000/MFDPages/DirectToPFD.svg',
+                    {'font-mapper': fontmapper});
+
+
+    canvas.parsesvg(obj._svg,
                     '/Aircraft/Instruments-3d/FG1000/MFDPages/SurroundPFD.svg',
                     {'font-mapper': fontmapper});
 
+
     obj._MFDDevice = canvas.PFD_Device.new(obj._svg, 12, "SoftKey", myCanvas, "PFD");
     obj._MFDDevice.device_id = device_id;
+
+    # DirectTo "Page" loaded first so that it receives any Emesary notifications
+    # _before_ the actual page.
+    obj._DTO = fg1000.DirectTo.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj._DTO.getController().RegisterWithEmesary();
+
     obj._MFDDevice.RegisterWithEmesary();
 
     # Surround dynamic elements

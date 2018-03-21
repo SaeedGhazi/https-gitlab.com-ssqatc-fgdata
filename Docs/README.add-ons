@@ -22,16 +22,18 @@ Contents
 
 4. Resources under the add-on directory
 
-5. Add-on-specific menus and dialogs
+5. Persistent storage location for add-ons
+
+6. Add-on-specific menus and dialogs
 
    a) Add-on-specific menus
    b) Add-on-specific dialogs
 
-6. How to run code after an add-on is loaded
+7. How to run code after an add-on is loaded
 
-7. Overview of the C++ API
+8. Overview of the C++ API
 
-8. Nasal API
+9. Nasal API
 
 
 Introduction
@@ -456,7 +458,42 @@ hardcode the add-on identifier every time you need to access a resource
 inside the add-on directory.
 
 
-5. Add-on-specific menus and dialogs
+5. Persistent storage location for add-ons
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If an add-on needs to store data that persists across FlightGear
+sessions, it can use a specific directory tree whose path is obtained
+with addon.storagePath, where 'addon' is an addons.Addon instance. This
+corresponds to $FG_HOME/Export/Addons/ADDON_ID, however it is simpler
+and better to use addon.storagePath instead of hardcoding and manually
+assembling this path in each add-on. Since the directory is likely not
+to exist until the add-on creates it, the recommended usage pattern is
+the following:
+
+  1) Create the add-on-specific storage directory if it doesn't already
+     exist, and optionally get its path at the same time:
+
+       storageDir = addon.createStorageDir();
+
+     Typically, you'll run this in the add-on main() function (at least,
+     early enough) if your add-on uses the storage directory. Note that
+     there is no need to check yourself whether the directory already
+     exists: addon.createStorageDir() does that for you.
+
+  2) At any time, you can get a path to the add-on-specific storage
+     directory with:
+
+       storageDir = addon.storagePath
+
+     Accessing addon.storagePath doesn't check for the existence nor the
+     type of $FG_HOME/Export/Addons/ADDON_ID, thus it is a bit faster
+     than addon.createStorageDir(). Use addon.storagePath whenever you
+     know that the directory has already been created.
+
+The features described in this section were added in FlightGear 2018.2.
+
+
+6. Add-on-specific menus and dialogs
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 a) Add-on-specific menus
@@ -555,7 +592,7 @@ dialogs.
 This feature was added in FlightGear 2018.2.
 
 
-6. How to run code after an add-on is loaded
+7. How to run code after an add-on is loaded
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You may want to set up Nasal code to be run after an add-on is loaded;
@@ -583,7 +620,7 @@ here is how to do that:
   }
 
 
-7. Overview of the C++ API
+8. Overview of the C++ API
    ~~~~~~~~~~~~~~~~~~~~~~~
 
 The add-on C++ infrastructure mainly relies on the following classes:
@@ -631,7 +668,7 @@ the appropriate error message with SG_LOG() and
 fatalMessageBoxThenExit().
 
 
-8. Nasal API
+9. Nasal API
    ~~~~~~~~~
 
 The Nasal add-on API all lives in the 'addons' namespace. It gives Nasal
@@ -715,6 +752,9 @@ Read-only data members (attributes) of addons.Addon objects:
   licenseUrl            stable, official URL for the add-on license text
                         (string)
   basePath              path to the add-on base directory (string)
+  storagePath           path to the add-on storage directory (string)
+                        This is $FG_HOME/Export/Addons/ADDON_ID.
+                        [added in FlightGear 2018.2]
   minFGVersionRequired  minimum required FG version for the add-on (string)
   maxFGVersionRequired  max. required FG version... or "none" (string)
   homePage              add-on home page (string)
@@ -731,6 +771,12 @@ Read-only data members (attributes) of addons.Addon objects:
 
 Member functions (methods) of addons.Addon objects:
 
+  createStorageDir() -> string
+                        Create the add-on storage directory if it
+                        doesn't already exist (that is,
+                        $FG_HOME/Export/Addons/ADDON_ID). Return its
+                        path as a string.
+                        [added in FlightGear 2018.2]
   resourcePath(string relPath) -> string
                         Return a resource path suitable for use with the
                         simgear::ResourceManager. 'relPath' must be

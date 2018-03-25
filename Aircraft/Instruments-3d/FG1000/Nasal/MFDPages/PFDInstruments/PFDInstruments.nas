@@ -81,7 +81,18 @@ var PFDInstruments =
     obj._SVGGroup.setInt("z-index", 10);
     obj.insetMap = fg1000.NavMap.new(obj, obj.getElement("PFD-Map-Display"), [119,601], "rect(-109px, 109px, 109px, -109px)", 0, 2);
 
-    #obj.topMenu(device, obj, nil);
+    # Flight Plan Window group
+    obj.flightplanList = PFD.GroupElement.new(
+      obj.pageName,
+      svg,
+      [ "FlightPlanArrow", "FlightPlanID", "FlightPlanType", "FlightPlanDTK", "FlightPlanDIS"],
+      5,
+      "FlightPlanArrow",
+      1,
+      "FlightPlanScrollTrough",
+      "FlightPlanScrollThumb",
+      120
+    );
 
     obj.setController(fg1000.PFDInstrumentsController.new(obj, svg));
     obj.setWindDisplay(0);
@@ -97,6 +108,7 @@ var PFDInstruments =
     obj.updateHDG(0);
     obj.updateSelectedALT(0);
     obj.updateCRS(0);
+    obj.setFlightPlanVisible(0);
 
     return obj;
   },
@@ -704,5 +716,65 @@ var PFDInstruments =
     me.getElement("PFD-Map").setVisible(enabled);
     me.getElement("PFD-Map-bg").setVisible(enabled);
     me.insetMap.setVisible(enabled);
+  },
+
+  setFlightPlanVisible : func(enabled) {
+    me.getElement("FlightPlanGroup").setVisible(enabled);
+  },
+
+  # Update the FlightPlan display with an updated flightplan.
+  setFlightPlan : func(fp) {
+    var elements = [];
+
+    if (fp == nil) return;
+
+    for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
+      var wp = fp.getWP(i);
+
+      var element = {
+        FlightPlanArrow : 0,
+        FlightPlanID : "",
+        FlightPlanType : "",
+        FlightPlanDTK : 0,
+        FlightPlanDIS : 0
+      };
+
+      if (wp.wp_name != nil) element.FlightPlanID = substr(wp.wp_name, 0, 7);
+      if (wp.wp_role != nil) element.FlightPlanType = substr(wp.wp_role, 0, 4);
+      if (wp.leg_distance != nil) element.FlightPlanDIS = sprintf("%.1fnm", wp.leg_distance);
+      if (wp.leg_bearing != nil) element.FlightPlanDTK = sprintf("%03d°", wp.leg_bearing);
+      append(elements, element);
+    }
+
+    me.flightplanList.setValues(elements);
+
+    # Determine a suitable name to display, using the flightplan name if there is one,
+    # but falling back to the flightplan departure / destination airports, or failing
+    # that the IDs of the first and last waypoints.
+    if (fp.id == nil) {
+      var from = "????";
+      var dest = "????";
+
+      if ((fp.getWP(0) != nil) and (fp.getWP(0).wp_name != nil)) {
+        from = fp.getWP(0).wp_name;
+      }
+
+      if ((fp.getWP(fp.getPlanSize() -1) != nil) and (fp.getWP(fp.getPlanSize() -1).wp_name != nil)) {
+        dest = fp.getWP(fp.getPlanSize() -1).wp_name;
+      }
+
+      if (fp.departure   != nil) from = fp.departure.id;
+      if (fp.destination != nil) dest = fp.destination.id;
+      me.getElement("FlightPlanName").setText(from ~ " / " ~ dest);
+    } else {
+      me.getElement("FlightPlanName").setText(fp.id);
+    }
+  },
+
+  # Update the FlightPlan display to indicate the current waypoint
+  updateFlightPlan : func(current_wp) {
+    if (current_wp == -1) return;
+    me.flightplanList.setCRSR(current_wp);
+    me.flightplanList.displayGroup();
   },
 };

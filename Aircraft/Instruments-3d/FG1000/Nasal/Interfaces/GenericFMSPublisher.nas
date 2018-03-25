@@ -22,84 +22,109 @@ var GenericFMSPublisher =
     var obj = {
       parents : [
         GenericFMSPublisher,
-        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FMSData, frequency)
       ],
     };
 
-    obj.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
-    obj.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");
+    # We have two publishers here:
+    #
+    # 1) a triggered publisher for properties that will change ocassionally, but which
+    # we need to update immediately. These are typically settings.
+    #
+    # 2) a periodic publisher which triggers every 0.5s to update data values.
+    obj._triggeredPublisher = TriggeredPropertyPublisher.new(notifications.PFDEventNotification.FMSData);
+    obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FMSData, frequency);
 
-    obj.addPropMap("FMSMode", "/instrumentation/gps/mode");
-    obj.addPropMap("FMSLegValid", "/instrumentation/gps/wp/wp[1]/valid");
-    obj.addPropMap("FMSPreviousLegID", "/instrumentation/gps/wp/wp[0]/ID");
-    obj.addPropMap("FMSLegID", "/instrumentation/gps/wp/wp[1]/ID");
-    obj.addPropMap("FMSLegBearingMagDeg", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
-    obj.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm");
-    obj.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
-    obj.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/wp/wp[1]/desired-course-deg");
-    obj.addPropMap("FMSLegTrackErrorAngle", "/instrumentation/gps/wp/wp[1]/course-deviation-deg");
-    obj.addPropMap("FMSWayPointCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
+    obj._triggeredPublisher.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
+    obj._triggeredPublisher.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");
+    obj._triggeredPublisher.addPropMap("FMSFlightPlanActive", "/autopilot/route-manager/active");
+    obj._triggeredPublisher.addPropMap("FMSFlightPlanCurrentWP", "/autopilot/route-manager/current-wp");
+    obj._triggeredPublisher.addPropMap("FMSFlightPlanSequenced", "/autopilot/route-manager/signals/sequenced");
+    obj._triggeredPublisher.addPropMap("FMSFlightPlanFinished", "/autopilot/route-manager/signals/finished");
+    obj._triggeredPublisher.addPropMap("FMSFlightPlanEdited", "/autopilot/route-manager/signals/edited");
 
-    obj.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt");
+    obj._triggeredPublisher.addPropMap("FMSMode", "/instrumentation/gps/mode");
 
-    obj.addPropMap("FMSNav1From", "/instrumentation/nav/from-flag");
-    obj.addPropMap("FMSNav2From", "/instrumentation/nav[1]/from-flag");
+    obj._periodicPublisher.addPropMap("FMSLegValid", "/instrumentation/gps/wp/wp[1]/valid");
+    obj._periodicPublisher.addPropMap("FMSPreviousLegID", "/instrumentation/gps/wp/wp[0]/ID");
+    obj._periodicPublisher.addPropMap("FMSLegID", "/instrumentation/gps/wp/wp[1]/ID");
+    obj._periodicPublisher.addPropMap("FMSLegBearingMagDeg", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
+    obj._periodicPublisher.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm");
+    obj._periodicPublisher.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
+    obj._periodicPublisher.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/wp/wp[1]/desired-course-deg");
+    obj._periodicPublisher.addPropMap("FMSLegTrackErrorAngle", "/instrumentation/gps/wp/wp[1]/course-deviation-deg");
+    obj._periodicPublisher.addPropMap("FMSWayPointCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
+
+    obj._periodicPublisher.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt");
+
+    obj._periodicPublisher.addPropMap("FMSNav1From", "/instrumentation/nav/from-flag");
+    obj._periodicPublisher.addPropMap("FMSNav2From", "/instrumentation/nav[1]/from-flag");
+
+    # Custom publish method as we need to calculate some particular values manually.
+    obj._periodicPublisher.publish = func() {
+      var gpsdata = {};
+
+      foreach (var propmap; me._propmaps) {
+        var name = propmap.getName();
+        gpsdata[name] = propmap.getValue();
+      }
+
+      # Some GPS properties have odd values to indicate that nothing is set, so
+      # remove them from the data set.
+      if (gpsdata["FMSLegBearingMagDeg"] == -9999) gpsdata["FMSLegBearingMagDeg"] = nil;
+      if (gpsdata["FMSLegDistanceNM"] == -1) gpsdata["FMSLegDistanceNM"] = nil;
+
+      # A couple of calculated values used by the MFD Header display
+      var total_fuel = getprop("/consumables/fuel/tank[0]/indicated-level-gal_us") or 0.0;
+      total_fuel = total_fuel  + (getprop("/consumables/fuel/tank[1]/indicated-level-gal_us") or 0.0);
+      var fuel_flow = getprop("/engines/engine[0]/fuel-flow-gph") or 1.0;
+      gpsdata["FuelOnBoard"] = total_fuel;
+      gpsdata["EnduranceHrs"] = total_fuel /  fuel_flow;
+
+      var plan = flightplan();
+
+      var dst = 0.0;
+      if (plan.getPlanSize() > 0) {
+        # Determine the distance to travel, based on
+        # - current distance to the next WP,
+        # - length of each subsequent leg.
+        dst = getprop("/instrumentation/gps/wp/wp[1]/distance-nm") or 0.0;
+
+        if (plan.indexOfWP(plan.currentWP()) <  (plan.getPlanSize() -1)) {
+          for(var i=plan.indexOfWP(plan.currentWP()) + 1; i < plan.getPlanSize(); i = i+1) {
+            var leg = plan.getWP(i);
+            if (leg != nil ) dst = dst + leg.leg_distance;
+          }
+        }
+      }
+
+      gpsdata["FMSDistance"] = dst;
+      var spd = getprop("/instrumentation/gps/indicated-ground-speed-kt") or 1.0;
+      var time_hrs = dst / spd;
+
+      gpsdata["FMSEstimatedTimeEnroute"] = time_hrs;
+      gpsdata["FMSFuelOverDestination"] = total_fuel - time_hrs * fuel_flow;
+
+      var notification = notifications.PFDEventNotification.new(
+        "MFD",
+        1,
+        notifications.PFDEventNotification.FMSData,
+        gpsdata);
+
+      me._transmitter.NotifyAll(notification);
+    };
 
     return obj;
   },
 
-  # Custom publish method as we need to calculate some particular values manually.
-  publish : func() {
-    var gpsdata = {};
-
-    foreach (var propmap; me._propmaps) {
-      var name = propmap.getName();
-      gpsdata[name] = propmap.getValue();
-    }
-
-    # Some GPS properties have odd values to indicate that nothing is set, so
-    # remove them from the data set.
-    if (gpsdata["FMSLegBearingMagDeg"] == -9999) gpsdata["FMSLegBearingMagDeg"] = nil;
-    if (gpsdata["FMSLegDistanceNM"] == -1) gpsdata["FMSLegDistanceNM"] = nil;
-
-    # A couple of calculated values used by the MFD Header display
-    var total_fuel = getprop("/consumables/fuel/tank[0]/indicated-level-gal_us") or 0.0;
-    total_fuel = total_fuel  + (getprop("/consumables/fuel/tank[1]/indicated-level-gal_us") or 0.0);
-    var fuel_flow = getprop("/engines/engine[0]/fuel-flow-gph") or 1.0;
-    gpsdata["FuelOnBoard"] = total_fuel;
-    gpsdata["EnduranceHrs"] = total_fuel /  fuel_flow;
-
-    var plan = flightplan();
-
-    var dst = 0.0;
-    if (plan.getPlanSize() > 0) {
-      # Determine the distance to travel, based on
-      # - current distance to the next WP,
-      # - length of each subsequent leg.
-      dst = getprop("/instrumentation/gps/wp/wp[1]/distance-nm") or 0.0;
-
-      if (plan.indexOfWP(plan.currentWP()) <  (plan.getPlanSize() -1)) {
-        for(var i=plan.indexOfWP(plan.currentWP()) + 1; i < plan.getPlanSize(); i = i+1) {
-          var leg = plan.getWP(i);
-          if (leg != nil ) dst = dst + leg.leg_distance;
-        }
-      }
-    }
-
-    gpsdata["FMSDistance"] = dst;
-    var spd = getprop("/instrumentation/gps/indicated-ground-speed-kt") or 1.0;
-    var time_hrs = dst / spd;
-
-    gpsdata["FMSEstimatedTimeEnroute"] = time_hrs;
-    gpsdata["FMSFuelOverDestination"] = total_fuel - time_hrs * fuel_flow;
-
-    var notification = notifications.PFDEventNotification.new(
-      "MFD",
-      1,
-      notifications.PFDEventNotification.FMSData,
-      gpsdata);
-
-    me._transmitter.NotifyAll(notification);
+  start : func() {
+    me._triggeredPublisher.start();
+    me._periodicPublisher.start();
   },
+
+  stop : func() {
+    me._triggeredPublisher.stop();
+    me._periodicPublisher.stop();
+  },
+
 
 };

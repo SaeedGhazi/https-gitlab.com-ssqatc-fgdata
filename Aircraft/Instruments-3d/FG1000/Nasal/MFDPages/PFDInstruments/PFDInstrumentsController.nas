@@ -37,8 +37,13 @@ var PFDInstrumentsController =
       _last_alt_ft : 0,
       _last_trend : systime(),
       _selected_alt_ft : 0,
-      _heading : 0,
+      _heading_magnetic_deg : 0,
       _mag_var : 0,
+
+      _fp_active : 0,
+      _fp_current_wp : 0,
+      _current_flightplan : nil,
+      _fp_visible : 0,
 
       _leg_from :0,
       _leg_id : "",
@@ -77,6 +82,12 @@ var PFDInstrumentsController =
       _adf_in_range : 0,
       _adf_heading_deg : 0.0,
     };
+
+    obj._current_flightplan = obj.getNavData("Flightplan");
+    if (obj._current_flightplan != nil) {
+      obj._fp_current_wp = obj._current_flightplan.current;
+      obj.page.setFlightPlan(obj._current_flightplan);
+    }
 
     return obj;
   },
@@ -239,6 +250,37 @@ var PFDInstrumentsController =
     if (data["FMSLegCourseError"] != nil) me._deflection_dots = data["FMSLegCourseError"] /2.0;
     if (data["FMSLegCourseError"] != nil) me._leg_xtrk_nm = data["FMSLegCourseError"];
 
+    var update_fp = 0;
+
+    if (data["FMSFlightPlanEdited"] != nil) {
+      # The flightplan has changed in some way, so reload it.
+      update_fp = 1;
+    }
+
+    if ((data["FMSFlightPlanActive"] != nil) and (data["FMSFlightPlanActive"] != me._fp_active)) {
+      me._fp_active = data["FMSFlightPlanActive"];
+      me.page.setFlightPlanVisible(me._fp_active);
+      update_fp = 1;
+    }
+
+    if ((data["FMSFlightPlanCurrentWP"] != nil) and (data["FMSFlightPlanCurrentWP"] !=  me._fp_current_wp)) {
+      me._fp_current_wp = data["FMSFlightPlanCurrentWP"];
+      update_fp = 1;
+    }
+
+    if (update_fp and me._fp_active) {
+      # For some reason the signals to indicate a FP change aren't firing, so reload the
+      # flightplan here
+      me._current_flightplan = me.getNavData("Flightplan");
+      if (me._current_flightplan != nil) {
+        me._fp_current_wp = me._current_flightplan.current;
+        me.page.setFlightPlan(me._current_flightplan);
+        update_fp = 1;
+      }
+
+      me.page.updateFlightPlan(me._fp_current_wp);
+    }
+
     if (me.getCDISource() == "GPS") {
       if (me._leg_valid == 0) {
         # No valid leg data, likely because there's no GPS course set
@@ -355,6 +397,24 @@ var PFDInstrumentsController =
     }
 
     return emesary.Transmitter.ReceiptStatus_OK;
+  },
+
+  getNavData : func(type, value=nil) {
+    # Use Emesary to get a piece from the NavData system, using the provided
+    # type and value;
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me._page.mfd.getDeviceID(),
+      notifications.PFDEventNotification.NavData,
+      {Id: type, Value: value});
+
+    var response = me._transmitter.NotifyAll(notification);
+
+    if (! me._transmitter.IsFailed(response)) {
+      return notification.EventParameter.Value;
+    } else {
+      return nil;
+    }
   },
 
   PFDRegisterWithEmesary : func(transmitter = nil){

@@ -62,6 +62,11 @@ var PFDDisplay =
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
+                    '/Aircraft/Instruments-3d/FG1000/MFDPages/FlightPlanPFD.svg',
+                    {'font-mapper': fontmapper});
+
+
+    canvas.parsesvg(obj._svg,
                     '/Aircraft/Instruments-3d/FG1000/MFDPages/DirectToPFD.svg',
                     {'font-mapper': fontmapper});
 

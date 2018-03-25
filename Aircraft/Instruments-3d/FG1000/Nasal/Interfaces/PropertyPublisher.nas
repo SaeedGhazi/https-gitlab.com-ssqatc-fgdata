@@ -131,7 +131,7 @@ var TriggeredPropertyPublisher =
       # Set up a listener triggering on create (to ensure all values are set at
       # start of day) and only on changed values.  These are the last two
       # arguments to the setlistener call.
-      var listener = setlistener(prop, func(p) { me.publish(p); }, 1, 0);
+      var listener = setlistener(prop, func(p) { me.publish(p); }, 1, 1);
       append(me._listeners, listener);
     }
   },

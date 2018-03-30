@@ -149,12 +149,11 @@
       <alias>767</alias>
     </alias>
     <alias>
-      <!-- match 747 -->
+      <!-- match all 747 -->
       <match>744</match>
-      <match>747-4</match>
-      <match>Boeing_747-400F</match>
+      <match>747-</match>
+      <match>Boeing_747-</match>
       <match>747</match>
-      <match>74</match>
       <alias>747-400</alias>
     </alias>
     <alias>
@@ -179,6 +178,7 @@
       <match>A359</match>
       <match>A350-900</match>
       <match>359</match>
+	  <match>350</match>
       <alias>A350</alias>
     </alias>
     <alias>
@@ -188,7 +188,7 @@
       <alias>A340</alias>
     </alias>
     <alias>
-      <match>330-</match>
+      <match>330</match>
       <match>332</match>
       <match>333</match>
       <match>33X</match>

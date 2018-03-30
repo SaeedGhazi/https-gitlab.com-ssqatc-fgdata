@@ -8,9 +8,9 @@
   <model>
     <path>Models/Airport/Pushback/Goldhofert-warning-light.xml</path>
     <offsets>
-      <x-m>-2.908</x-m>
+      <x-m>-5.408</x-m>
       <y-m>0.260</y-m>
-      <z-m>1.326</z-m>
+      <z-m>2.226</z-m>
       <heading-deg>0</heading-deg>
     </offsets>
   </model>
@@ -18,9 +18,9 @@
   <model>
     <path>Models/Airport/Pushback/Goldhofert-warning-light.xml</path>
     <offsets>
-      <x-m>-1.781</x-m>
+      <x-m>-4.281</x-m>
       <y-m>0.260</y-m>
-      <z-m>1.326</z-m>
+      <z-m>2.226</z-m>
       <heading-deg>90</heading-deg>
     </offsets>
   </model>

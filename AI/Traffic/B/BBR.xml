@@ -4,7 +4,7 @@
 
 <trafficlist>
 	<aircraft>
-        <model>AI/Aircraft/767/767-SBA.xml</model>
+        <model>Aircraft/767/767-SBA.xml</model>
         <livery>SBA</livery>
         <airline>BBR</airline>
         <home-port>SVMI</home-port>

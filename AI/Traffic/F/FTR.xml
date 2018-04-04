@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/Cessna308Caravan/Models/Cessna208-ai.xml</model>
+        <model>Aircraft/Cessna208Caravan/Models/Cessna208-ai.xml</model>
         <livery>FTR</livery>
         <airline>FTR</airline>
         <home-port>LFRB</home-port>

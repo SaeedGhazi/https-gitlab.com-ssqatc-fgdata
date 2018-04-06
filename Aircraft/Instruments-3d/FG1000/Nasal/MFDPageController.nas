@@ -30,10 +30,6 @@ new : func (page)
   obj._page = page;
   obj._transmitter = emesary.GlobalTransmitter;
   obj._registered = 0;
-
-  # DirectTo controls
-  obj._directTo = 0;
-
   return obj;
 },
 
@@ -70,9 +66,19 @@ handleComFreqTransferHold : func (value) { return me.page.mfd.SurroundController
 handleComVol       : func (value) { return me.page.mfd.SurroundController.handleComVol(value); },
 handleComVolToggle : func (value) { return me.page.mfd.SurroundController.handleComVolToggle(value); },
 
-# DTO button brings up the DirectTo Page.
 handleDTO       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
-handleFPL       : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
+
+handleFPL       : func (value) {
+  var fppage = me._page.getMFD().getPage("ActiveFlightPlanNarrow");
+  if (fppage != nil) {
+    me._page.getDevice().selectPage(fppage);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  } else {
+    return emesary.Transmitter.ReceiptStatus_NotProcessed;
+  }
+},
+
 handleClear     : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
 
 # Holding the Clear button goes straight to the Navigation Map page.
@@ -203,7 +209,7 @@ setDefaultDTOWayPoint : func(id)
 },
 
 getDeviceID : func() {
-    return me.page.mfd.getDeviceID();
+    return me._page.mfd.getDeviceID();
 },
 
 

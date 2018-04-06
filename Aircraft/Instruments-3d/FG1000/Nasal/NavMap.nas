@@ -42,8 +42,8 @@ var NavMap = {
     obj.Styles = fg1000.NavigationMapStyles.new();
     obj.Options = fg1000.NavigationMapOptions.new();
 
-    obj.Map = element.createChild("map");
-    obj.Map.setScreenRange(689/2.0);
+    obj._map = element.createChild("map");
+    obj._map.setScreenRange(689/2.0);
 
     obj._rangeDisplay = obj._svg.getElementById(obj._pageName ~ "RangeDisplay");
     if (obj._rangeDisplay == nil) die("Unable to find element " ~ obj._pageName ~ "RangeDisplay");
@@ -53,7 +53,7 @@ var NavMap = {
 
     # Initialize the controllers:
     if (static) {
-      obj.Map.setController("Static position", "main");
+      obj._map.setController("Static position", "main");
     } else {
       var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
       var source = ctrl_ns.SOURCES["current-pos"];
@@ -74,12 +74,12 @@ var NavMap = {
         source.aircraft_heading = n.getBoolValue();
       }, 1);
       # Make it move with our aircraft:
-      obj.Map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
+      obj._map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
     }
 
     if (clip != "") {
-      obj.Map.set("clip-frame", canvas.Element.LOCAL);
-      obj.Map.set("clip", clip);
+      obj._map.set("clip-frame", canvas.Element.LOCAL);
+      obj._map.set("clip", clip);
     }
 
     if (zindex != 0) {
@@ -94,7 +94,7 @@ var NavMap = {
       if ((static == 0) or (layer.static == 1)) {
         # Not all layers are displayed for all map types.  Specifically,
         # some layers are not displayed on static maps - e.g. DirectTo
-        obj.Map.addLayer(
+        obj._map.addLayer(
           factory: layer.factory,
           type_arg: layer_name,
           priority: layer.priority,
@@ -106,29 +106,24 @@ var NavMap = {
 
     obj.setZoom(obj.current_zoom);
     obj.setOrientation(0);
-    obj.Map.setVisible(0);
+    obj._map.setVisible(0);
     return obj;
   },
 
   setController : func(type, controller ) {
-    me.Map.setController(type, controller);
+    me._map.setController(type, controller);
   },
 
   getController : func() {
-    return me.Map.getController();
+    return me._map.getController();
   },
 
   toggleLayerVisible : func(name) {
-      (var l = me.Map.getLayer(name)).setVisible(l.getVisible());
+      (var l = me._map.getLayer(name)).setVisible(l.getVisible());
   },
 
   setLayerVisible : func(name,n=1) {
-      me.Map.getLayer(name).setVisible(n);
-  },
-
-  setRange : func(range, label) {
-    me.Map.setRange(range);
-    me._rangeDisplay.setText(label);
+      me._map.getLayer(name).setVisible(n);
   },
 
   setOrientation : func(orientation) {
@@ -137,7 +132,7 @@ var NavMap = {
   },
 
   setScreenRange : func(range) {
-    me.Map.setScreenRange(range);
+    me._map.setScreenRange(range);
   },
 
   zoomIn : func() {
@@ -151,10 +146,8 @@ var NavMap = {
   setZoom : func(zoom) {
     if ((zoom < 0) or (zoom > (size(fg1000.RANGES) - 1))) return;
     me.current_zoom = zoom;
-    # Ranges above represent vertical ranges, but the display is a rectangle, so
-    # we need to use the diagonal range of the 1024 x 689, which is 617px.
-    # 617px is 1.8 x 689/2, so we need to increase the range values by x1.8
-    me.setRange(fg1000.RANGES[zoom].range, fg1000.RANGES[zoom].label);
+    me._rangeDisplay.setText(fg1000.RANGES[zoom].label);
+    me._map.setRange(fg1000.RANGES[zoom].range);
     me.updateVisibility();
   },
 
@@ -163,7 +156,7 @@ var NavMap = {
     foreach (var layer_name; me._page.mfd.ConfigStore.getLayerNames()) {
       var layer = me._page.mfd.ConfigStore.getLayer(layer_name);
 
-      if (me.Map.getLayer(layer_name) == nil) continue;
+      if (me._map.getLayer(layer_name) == nil) continue;
 
       # Layers are only displayed if:
       # 1) the user has enabled them.
@@ -171,15 +164,15 @@ var NavMap = {
       #    (i.e. as the range gets larger, we remove layers).  Note that for
       #     inset maps, the range that items are removed is lower.
       # 3) They haven't been removed due to the declutter level.
-      var effective_zoom = math.clamp(me.current_zoom + me.vis_shift, 0, size(fg1000.RANGES));
+      var effective_zoom = math.clamp(me.current_zoom + me.vis_shift, 0, size(fg1000.RANGES) -1);
       var effective_range = fg1000.RANGES[effective_zoom].range;
       if (layer.enabled and
           (effective_range <= layer.range) and
           (me.declutter <= layer.declutter)    )
       {
-        me.Map.getLayer(layer_name).setVisible(1);
+        me._map.getLayer(layer_name).setVisible(1);
       } else {
-        me.Map.getLayer(layer_name).setVisible(0);
+        me._map.getLayer(layer_name).setVisible(0);
       }
     }
   },
@@ -220,7 +213,7 @@ var NavMap = {
 
   # Set the DTO line target
   setDTOLineTarget : func(lat, lon) {
-    me.Map.getLayer("DTO").controller.setTarget(lat,lon);
+    me._map.getLayer("DTO").controller.setTarget(lat,lon);
   },
   enableDTO : func(enable) {
     me._page.mfd.ConfigStore.setLayerEnabled("DTO", enable);
@@ -235,16 +228,16 @@ var NavMap = {
   },
 
   getMap : func() {
-    return me.Map;
+    return me._map;
   },
   show : func() {
-    me.Map.show();
+    me._map.show();
   },
   hide : func() {
-    me.Map.hide();
+    me._map.hide();
   },
   setVisible : func(visible) {
-    me.Map.setVisible(visible);
+    me._map.setVisible(visible);
   }
 
 };

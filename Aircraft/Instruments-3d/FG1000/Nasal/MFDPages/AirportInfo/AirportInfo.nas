@@ -117,19 +117,8 @@ var AirportInfo =
     me.setTextElement("City", "CITY");
     me.setTextElement("Region", "REGION");
     me.setTextElement("Alt", sprintf("%ift", M2FT * apt_info.elevation));
-
-    if (apt_info.lat < 0.0) {
-      me.setTextElement("Lat", sprintf("S %.4f", -apt_info.lat));
-    } else {
-      me.setTextElement("Lat", sprintf("N %.4f", apt_info.lat));
-    }
-
-    if (apt_info.lon < 0.0) {
-      me.setTextElement("Lon", sprintf("W%3.4f", -apt_info.lon));
-    } else {
-      me.setTextElement("Lon", sprintf("E%3.4f", apt_info.lon));
-    }
-
+    me.setTextElementLat("Lat", apt_info.lat);
+    me.setTextElementLon("Lon", apt_info.lon);
     me.setTextElement("Fuel", "AVGAS, AVTUR");
     me.setTextElement("TZ", "UTC-6");
 

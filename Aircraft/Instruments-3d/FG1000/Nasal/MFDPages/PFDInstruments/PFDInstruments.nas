@@ -95,6 +95,7 @@ var PFDInstruments =
     );
 
     obj.setController(fg1000.PFDInstrumentsController.new(obj, svg));
+
     obj.setWindDisplay(0);
     obj.setCDISource("GPS");
     obj.setBRG1("OFF");
@@ -728,6 +729,8 @@ var PFDInstruments =
 
     if (fp == nil) return;
 
+    var current_wp = fp.current;
+
     for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
       var wp = fp.getWP(i);
 
@@ -736,22 +739,30 @@ var PFDInstruments =
         FlightPlanID : "",
         FlightPlanType : "",
         FlightPlanDTK : 0,
-        FlightPlanDIS : 0
+        FlightPlanDIS : 0,
       };
 
       if (wp.wp_name != nil) element.FlightPlanID = substr(wp.wp_name, 0, 7);
       if (wp.wp_role != nil) element.FlightPlanType = substr(wp.wp_role, 0, 4);
-      if (wp.leg_distance != nil) element.FlightPlanDIS = sprintf("%.1fnm", wp.leg_distance);
-      if (wp.leg_bearing != nil) element.FlightPlanDTK = sprintf("%03d°", wp.leg_bearing);
+
+      if (i < current_wp) {
+        # Passed waypoints are blanked out on the display
+        element.FlightPlanDIS = "___nm";
+        element.FlightPlanDTK = "___°";
+      } else {
+        if (wp.leg_distance != nil) element.FlightPlanDIS = sprintf("%.1fnm", wp.leg_distance);
+        if (wp.leg_bearing != nil) element.FlightPlanDTK = sprintf("%03d°", wp.leg_bearing);
+      }
       append(elements, element);
     }
 
     me.flightplanList.setValues(elements);
+    me.flightplanList.setCRSR(current_wp);
 
     # Determine a suitable name to display, using the flightplan name if there is one,
     # but falling back to the flightplan departure / destination airports, or failing
     # that the IDs of the first and last waypoints.
-    if (fp.id == nil) {
+    if ((fp.id == nil) or (fp.id == "default-flightplan")) {
       var from = "????";
       var dest = "????";
 

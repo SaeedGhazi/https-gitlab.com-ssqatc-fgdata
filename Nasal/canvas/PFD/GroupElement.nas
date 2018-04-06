@@ -2,7 +2,7 @@
 var GroupElement =
 {
 
-new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, scrollTroughElement=nil, scrollThumbElement=nil, scrollHeight=0, style=nil)
+new : func (pageName, svg, elementNames, displaysize, highlightElement, arrow=0, scrollTroughElement=nil, scrollThumbElement=nil, scrollHeight=0, style=nil)
 {
   var obj = {
     parents : [ GroupElement ],
@@ -18,7 +18,7 @@ new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, scroll
 
     # The size of the group.  For each of the ._elementNames hash values there
     # must be an SVG Element [pageName][elementName]{0...pageSize}
-    _size : size,
+    _size : displaysize,
 
     # ElementName to be highlighted.  Must be an hash value from ._elementNames
     _highlightElement : highlightElement,
@@ -66,7 +66,7 @@ new : func (pageName, svg, elementNames, size, highlightElement, arrow=0, scroll
 
   if (style == nil) obj._style = PFD.DefaultStyle;
 
-  for (var i = 0; i < size; i = i + 1) {
+  for (var i = 0; i < displaysize; i = i + 1) {
     if (obj._arrow == 1) {
       append(obj._elements, PFD.HighlightElement.new(pageName, svg, highlightElement ~ i, i, obj._style));
     } else {
@@ -87,12 +87,12 @@ setValues : func (values_array) {
   if (size(me._values) > me._size) {
     # Number of elements exceeds our ability to display them, so enable
     # the scroll bar.
-    me._scrollThumbElement.setVisible(1);
-    me._scrollTroughElement.setVisible(1);
+    if (me._scrollThumbElement  != nil) me._scrollThumbElement.setVisible(1);
+    if (me._scrollTroughElement != nil) me._scrollTroughElement.setVisible(1);
   } else {
     # There is no scrolling to do, so hide the scrollbar.
-    me._scrollThumbElement.setVisible(0);
-    me._scrollTroughElement.setVisible(0);
+    if (me._scrollThumbElement  != nil) me._scrollThumbElement.setVisible(0);
+    if (me._scrollTroughElement != nil) me._scrollTroughElement.setVisible(0);
   }
 
   me.displayGroup();
@@ -203,6 +203,9 @@ setCRSR : func(index) {
   me._crsrIndex = math.min(index, size(me._values) -1);
   me._crsrIndex = math.max(0, me._crsrIndex);
 },
+getCRSR : func() {
+  return me._crsrIndex;
+},
 getCursorElementName : func() {
   if (me._crsrEnabled == -1) return nil;
   return me._elements[me._crsrIndex - me._pageIndex].name;
@@ -232,7 +235,6 @@ incrSmall : func(value) {
   var incr_or_decr = (value > 0) ? 1 : -1;
   if (me._elements[me._crsrIndex - me._pageIndex].isInEdit()) {
     # We're editing, so pass to the element.
-    #print("Moving cursor to next character entry");
     me._elements[me._crsrIndex - me._pageIndex].incrSmall(val);
   } else {
     # Move to next selection element
@@ -247,7 +249,6 @@ incrLarge : func(val) {
   var incr_or_decr = (val > 0) ? 1 : -1;
   if (me._elements[me._crsrIndex - me._pageIndex].isInEdit()) {
     # We're editing, so pass to the element.
-    #print("Moving cursor to next character entry");
     me._elements[me._crsrIndex - me._pageIndex].incrLarge(val);
   } else {
     # Move to next selection element

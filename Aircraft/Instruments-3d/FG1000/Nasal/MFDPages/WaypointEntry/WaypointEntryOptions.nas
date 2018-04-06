@@ -14,34 +14,31 @@
 # You should have received a copy of the GNU General Public License
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Navigation Map Controller
-var NavigationMapController =
+# WaypointEntry Options
+var WaypointEntryOptions =
 {
-  new : func (page, svg)
-  {
-    var obj = { parents : [ NavigationMapController, MFDPageController.new(page) ] };
-    obj.page = page;
+  new : func() {
+    var obj = { parents : [WaypointEntryOptions] };
+    obj.Options= {};
+    obj.loadOptions();
     return obj;
   },
 
-  # Set the DTO line target
-  setDTOLineTarget : func(lat, lon) {
-    me.page.MFDMap.setDTOLineTarget(lat, lon);
-  },
-  enableDTO : func(enable) {
-    me.page.MFDMap.enableDTO(enable)
+  getOption : func(type) {
+    return me.Options[type];
   },
 
-  handleRange : func(val)
-  {
-    me.page.MFDMap.handleRange(val);
+  setOption : func(type, name, value) {
+    me.Options[type][name] = value;
   },
 
-  # Reset controller if required when the page is displayed or hidden
-  ondisplay : func() {
-    me.RegisterWithEmesary();
+  loadOptions : func() {
+    me.clearOptions();
+    me.Options.APS = {};
   },
-  offdisplay : func() {
-    me.DeRegisterWithEmesary();
+
+  clearOptions : func() {
+    me.Options = {};
   },
+
 };

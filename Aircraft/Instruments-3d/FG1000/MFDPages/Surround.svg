@@ -15,7 +15,7 @@
    version="1.1"
    id="SVGRoot"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="MFD.svg">
+   sodipodi:docname="Surround.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,11 +23,11 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.828427"
-     inkscape:cx="445.86013"
-     inkscape:cy="589.65442"
+     inkscape:zoom="1.9999999"
+     inkscape:cx="645.49836"
+     inkscape:cy="276.18699"
      inkscape:document-units="px"
-     inkscape:current-layer="MFD-navbox"
+     inkscape:current-layer="FPLPageGroup"
      showgrid="true"
      inkscape:window-width="2495"
      inkscape:window-height="1416"
@@ -1363,7 +1363,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="774.98926"
          y="685.68018"
-         id="ActiveFlightPlanWide"
+         id="ActiveFlightPlanNarrow"
          sodipodi:linespacing="125%"><tspan
            sodipodi:role="line"
            id="tspan5217"

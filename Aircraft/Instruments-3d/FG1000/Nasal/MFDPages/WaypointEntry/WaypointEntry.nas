@@ -14,11 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
-# DirectTo page.  This is an overlay, sitting on whatever page the user
+# WaypointEntry page.  This is an overlay, sitting on whatever page the user
 # is on already. Hence it is not called in the normal way, but instead
-# explicitly displays/hides itself when the DTO button is pressed.
+# explicitly called by Flightplan pages to insert a waypoint.
 
-var DirectTo =
+var WaypointEntry =
 {
   SHORTCUTS : [ "FPL", "NRST", "RECENT", "USER", "AIRWAY" ],
 
@@ -26,21 +26,23 @@ var DirectTo =
   {
     var obj = {
       parents : [
-        DirectTo,
-        MFDPage.new(mfd, myCanvas, device, svg, "DirectTo", "DIRECT TO")
+        WaypointEntry,
+        MFDPage.new(mfd, myCanvas, device, svg, "WaypointEntry", "")
       ],
       symbols : {},
     };
 
     obj.crsrIdx = 0;
 
-    # Dynamic text elements in the SVG file.  In the SVG these have an "DirectTo" prefix.
+    # Dynamic text elements in the SVG file.  In the SVG these have an "WaypointEntry" prefix.
     textelements = [
          "Name",
          "City",
          "Region",
          "LocationBRG",
          "LocationDIS",
+         "LocationLat",
+         "LocationLon",
     ];
 
     obj.addTextElements(textelements);
@@ -56,59 +58,51 @@ var DirectTo =
     # .chars is the set of characters, used to scroll through using the small
     # FMS knob.
     obj.IDEntry = PFD.DataEntryElement.new(obj.pageName, svg, "ID", "", 4, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
-    obj.VNVAltEntry = PFD.DataEntryElement.new(obj.pageName, svg, "VNVAlt", "", 5, "0123456789");
-    obj.VNVOffsetEntry = PFD.DataEntryElement.new(obj.pageName, svg, "VNVOffset", "", 2, "0123456789");
-    obj.CourseEntry = PFD.DataEntryElement.new(obj.pageName, svg, "Course", "", 3, "0123456789");
-    obj.Activate = PFD.TextElement.new(obj.pageName, svg, "Activate", "ACTIVATE?");
 
     # The Shortcut window.  This allows the user to scroll through a set of lists
     # of waypoints.
-    obj.WaypointSubmenuGroup = obj._SVGGroup.getElementById("DirectToWaypointSubmenuGroup");
-    assert(obj.WaypointSubmenuGroup != nil, "Unable to find DirectToWaypointSubmenuGroup");
+    obj.WaypointSubmenuGroup = obj._SVGGroup.getElementById("WaypointEntryWaypointSubmenuGroup");
+    assert(obj.WaypointSubmenuGroup != nil, "Unable to find WaypointEntryWaypointSubmenuGroup");
     obj.WaypointSubmenuGroup.setVisible(0);
-    obj.WaypointSubmenuSelect = PFD.ScrollElement.new(obj.pageName, svg, "WaypointSubmenuSelect", DirectTo.SHORTCUTS);
+    obj.WaypointSubmenuSelect = PFD.ScrollElement.new(obj.pageName, svg, "WaypointSubmenuSelect", WaypointEntry.SHORTCUTS);
     obj.WaypointSubmenuScroll = PFD.GroupElement.new(obj.pageName, svg, [ "WaypointSubmenuScroll" ] , 4, "WaypointSubmenuScroll", 0, "WaypointSubmenuScrollTrough" , "WaypointSubmenuScrollThumb", 60);
 
     # The Airport Chart - only displayed on the MFD variant (where thre's if there's a Map SVG element present)
     if (obj.elementExists("Map")) {
-      obj.DirectToChart = fg1000.NavMap.new(obj, obj.getElement("Map"), [860,440], "rect(-160px, 160px, 160px, -160px)", 0, 2, 1);
+      obj.WaypointEntryChart = fg1000.NavMap.new(obj, obj.getElement("Map"), [860,440], "rect(-160px, 160px, 160px, -160px)", 0, 2, 1);
     } else {
-      obj.DirectToChart = nil;
+      obj.WaypointEntryChart = nil;
     }
 
-    obj.setController(fg1000.DirectToController.new(obj, svg));
+    obj.setController(fg1000.WaypointEntryController.new(obj, svg));
     return obj;
   },
 
   displayDestination : func(destination) {
     if (destination != nil) {
       # Display a given location
-      if (me.DirectToChart != nil) {
-        me.DirectToChart.setVisible(1);
-        me.DirectToChart.getController().setPosition(destination.lat,destination.lon);
+      if (me.WaypointEntryChart != nil) {
+        me.WaypointEntryChart.setVisible(1);
+        me.WaypointEntryChart.getController().setPosition(destination.lat,destination.lon);
       }
       me.setTextElement("Name", string.uc(destination.name));
       me.setTextElement("City", "");
       me.setTextElement("Region", "");
       me.setTextElement("LocationBRG", "" ~ sprintf("%03d°", destination.course));
       me.setTextElement("LocationDIS", sprintf("%d", destination.range_nm) ~ "nm");
-
+      me.setTextElementLat("LocationLat", destination.lat);
+      me.setTextElementLon("LocationLon", destination.lon);
       me.IDEntry.setValue(destination.id);
-      me.VNVAltEntry.setValue("00000");
-      me.VNVOffsetEntry.setValue("00");
-      me.CourseEntry.setValue("" ~ sprintf("%03d°", destination.course));
     } else {
-      if (me.DirectToChart != nil) me.DirectToChart.setVisible(0);
-      me.setTextElement("Name", "");
-      me.setTextElement("City", "");
-      me.setTextElement("Region", "");
-      me.setTextElement("LocationBRG", "_");
-      me.setTextElement("LocationDIS", "_");
-
+      if (me.WaypointEntryChart != nil) me.WaypointEntryChart.setVisible(0);
+      me.setTextElement("Name", "___");
+      me.setTextElement("City", "____________");
+      me.setTextElement("Region", "____________");
+      me.setTextElement("LocationBRG", "___°");
+      me.setTextElement("LocationDIS", "__._nm");
+      me.setTextElement("LocationLat", "_ __°__.__'");
+      me.setTextElement("LocationLon", "____°__.__'");
       me.IDEntry.setValue("####");
-      me.VNVAltEntry.setValue("00000");
-      me.VNVOffsetEntry.setValue("00");
-      me.CourseEntry.setValue(0);
     }
   },
 

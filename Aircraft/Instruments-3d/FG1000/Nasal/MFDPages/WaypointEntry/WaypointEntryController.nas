@@ -14,22 +14,19 @@
 # You should have received a copy of the GNU General Public License
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
-# DirectTo Controller
-var DirectToController =
+# WaypointEntry Controller
+var WaypointEntryController =
 {
   new : func (page, svg)
   {
-    var obj = { parents : [ DirectToController, MFDPageController.new(page)] };
+    var obj = { parents : [ WaypointEntryController, MFDPageController.new(page)] };
     obj.id = "";
     obj.page = page;
-    obj.dto_displayed = 0;
+    obj._wpentry_displayed = 0;
+    obj._destination = nil;
 
     obj._cursorElements = [
       obj.page.IDEntry,
-      obj.page.VNVAltEntry,
-      obj.page.VNVOffsetEntry,
-      obj.page.CourseEntry,
-      obj.page.Activate
     ];
 
     obj._activateIndex = size(obj._cursorElements) - 1;
@@ -60,7 +57,7 @@ var DirectToController =
   },
 
   handleCRSR : func() {
-    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
     # No effect, but shouldn't be passed to underlying page?
     return emesary.Transmitter.ReceiptStatus_Finished;
@@ -100,10 +97,9 @@ var DirectToController =
     }
 
     if (type == "AIRWAY") {
-      var fp  = me.getNavData("AirwayWaypoints");
-      if (fp != nil) {
-        for (var i = 0; i < fp.getPlanSize(); i = i + 1) {
-          var wp = fp.getWP(i);
+      var airways  = me.getNavData("AirwayWaypoints");
+      if (airways != nil) {
+        foreach (var wp; airways) {
           if (wp.wp_name != nil) append(items, wp.wp_name);
         }
       }
@@ -144,50 +140,36 @@ var DirectToController =
     }
   },
 
-  setNavData : func(type, value=nil) {
+  setFMSData : func(type, value=nil) {
     # Use Emesary to set a piece of data in the NavData system, using the provided
     # type and value;
     var notification = notifications.PFDEventNotification.new(
       "MFD",
       me.getDeviceID(),
-      notifications.PFDEventNotification.NavData,
+      notifications.PFDEventNotification.FMSData,
       {Id: type, Value: value});
 
     var response = me._transmitter.NotifyAll(notification);
 
     if (me._transmitter.IsFailed(response)) {
-      print("DirectToController.setNavData() : Failed to set Nav Data " ~ value);
+      print("WaypointEntryController.setNavData() : Failed to set Nav Data " ~ value);
       debug.dump(value);
     }
   },
 
-  handleDTO : func(value) {
-    if (me.dto_displayed == 0) {
-      # Display the DTO page.
-      me.page.ondisplay();
-      me.dto_displayed = 1;
-    } else {
-      # Hide the DTO page.
-      me.page.offdisplay();
-      me.dto_displayed = 0;
-    }
-
-    return emesary.Transmitter.ReceiptStatus_Finished;
-  },
-
   handleRange : func(val)
   {
-    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
-    if (me.page.DirectToChart != nil) {
-      return me.page.DirectToChart.handleRange(val);
+    if (me.page.WaypointEntryChart != nil) {
+      return me.page.WaypointEntryChart.handleRange(val);
     } else {
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     }
   },
 
   handleFMSInner : func(value) {
-    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
     if (me._waypointSubmenuVisible) {
       # We're in the Waypoint Submenu, in which case the inner FMS knob
@@ -215,7 +197,7 @@ var DirectToController =
   },
 
   handleFMSOuter : func(value) {
-    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
     if (me._waypointSubmenuVisible) {
       # We're in the Waypoint Submenu, in which case the outer FMS knob
@@ -234,7 +216,7 @@ var DirectToController =
   },
 
   handleEnter : func(value) {
-    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
     if (me._waypointSubmenuVisible) {
       # If we're in the Waypoint Submenu, then take whatever is highlighted
@@ -243,51 +225,25 @@ var DirectToController =
       if (id != nil) me.loadDestination(id);
       me.page.WaypointSubmenuGroup.setVisible(0);
       me._waypointSubmenuVisible = 0;
-
-      # Select the activate ACTIVATE item.
-      me.setCursorElement(me._activateIndex);
+    } else if (me.page.IDEntry.isInEdit()) {
+      # If we're editing an element, complete the data entry, the load it.
+      me.page.IDEntry.enterElement();
+      me.loadDestination(me.page.IDEntry.getValue());
     } else {
-      if (me._selectedElement == me._activateIndex) {
-        # If we're on the Activate button, then set up the DirectTo and hide the
-        # page.  We're finished
-        var params = {};
-        params.id = me.page.IDEntry.getValue();
-        params.alt_ft = me.page.VNVAltEntry.getValue();
-        params.offset_nm = me.page.VNVOffsetEntry.getValue();
-        me.setNavData("SetDirectTo", params);
+      # Pass the entered waypoint to the surrounding page TODO
+      me.setFMSData("SetWaypointEntry", me._destination);
 
-        me.page.offdisplay();
-        me.dto_displayed = 0;
+      me._wpentry_displayed = 0;
+      me.page.offdisplay();
 
-        return emesary.Transmitter.ReceiptStatus_Finished;
-      }
-
-      # If we're editing an element, complete the data entry.
-      if (me._cursorElements[me._selectedElement].isInEdit()) {
-        me._cursorElements[me._selectedElement].enterElement();
-      }
-
-      if (me._cursorElements[me._selectedElement] == me.page.IDEntry) {
-        # We've finished entering an ID, so load it.
-        me.loadDestination(me.page.IDEntry.getValue());
-      }
-
-      # Determine where to highlight next.  In most cases, we go straight to ACTIVATE.
-      # The exception is the VNV Alt field which goes to the VNV Distance field;
-      if (me._cursorElements[me._selectedElement] == me.page.VNVAltEntry) {
-        # VNV DIS entry is the next element
-        me.nextCursorElement(1);
-      } else {
-        # ACTIVATE is the last element of the group
-        me.setCursorElement(me._activateIndex);
-      }
+      return emesary.Transmitter.ReceiptStatus_Finished;
     }
 
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
   handleClear : func(value) {
-    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
     if (me._waypointSubmenuVisible) {
       # If we're in the Waypoint Submenu, then this clears it.
@@ -296,9 +252,9 @@ var DirectToController =
     } else if (me._cursorElements[me._selectedElement].isInEdit()) {
       me._cursorElements[me._selectedElement].clearElement();
     } else {
-      # Cancel the entire Direct To page.
+      # Cancel the entire Waypoint Entry page.
+      me._wpentry_displayed = 0;
       me.page.offdisplay();
-      me.dto_displayed = 0;
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
@@ -307,20 +263,18 @@ var DirectToController =
   # Note that we explicitly do NOT RegisterWithEmesary/DeRegisterWithEmesary!
   # This page should RegisterWithEmesary at start of day instead.
   ondisplay : func() {
-    # Find the current DTO target, which may have been set by the page the
-    # use was on.
-    var id = me.getNavData("CurrentDTO");
-    me.page.IDEntry.setValue(id);
-    me.loadDestination(id);
-    me.setCursorElement(0);
+    # On initial display we simply display a blank destination
+    me._wpentry_displayed = 1;
+    me.loadDestination(nil);
   },
 
   offdisplay : func() {
+    me._wpentry_displayed = 0;
   },
 
   loadDestination : func(id) {
     if ((id == nil) or (id == "")) {
-      me.page.displayDestination(nil);
+      me._destination = nil;
     } else {
       # Use Emesary to get the destination
       var notification = notifications.PFDEventNotification.new(
@@ -343,7 +297,7 @@ var DirectToController =
         var point = { lat: destination.lat, lon: destination.lon };
         var (course, dist) = courseAndDistance(point);
 
-        var d = {
+        me._destination = {
           id: destination.id,
           name: name,
           lat: destination.lat,
@@ -351,9 +305,10 @@ var DirectToController =
           course : course,
           range_nm : dist,
         };
-
-        me.page.displayDestination(d);
       }
     }
+
+
+    me.page.displayDestination(me._destination);
   },
 };

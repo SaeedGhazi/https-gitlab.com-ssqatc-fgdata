@@ -20,6 +20,14 @@
 
 var NavDataInterface = {
 
+# Valid FMS Modes
+
+FMS_MODES : {
+  direct : 1,
+  leg : 1,
+  obs : 1,
+},
+
 new : func ()
 {
   var obj = { parents : [ NavDataInterface ] };
@@ -142,6 +150,47 @@ getFlightplan : func ()
   return flightplan();
 },
 
+insertWaypoint : func (data)
+{
+  assert(data["index"] != nil, "InsertWaypoint message with no index parameter");
+  assert(data["wp"] != nil, "InsertWaypoint message with no wp parameter");
+
+  var wp = data["wp"];
+  var idx = int(data["index"]);
+
+  # Simple data verification that we have the parameters we need
+  assert(idx != nil, "InsertWaypoint index parameter does not contain an integer index");
+  assert(wp.id != nil, "InsertWaypoint wp parameter does not contain an id");
+  assert(wp.lat != nil, "InsertWaypoint wp parameter does not contain a lat");
+  assert(wp.lon != nil, "InsertWaypoint wp parameter does not contain an lon");
+
+  var newwp = createWP(wp.lat, wp.lon, wp.id);
+
+  var fp = flightplan();
+  fp.insertWP(newwp, idx);
+
+  # Set a suitable name.
+  if ((fp.id == nil) or (fp.id == "default-flightplan")) {
+    var from = "????";
+    var dest = "????";
+
+    if ((fp.getWP(0) != nil) and (fp.getWP(0).wp_name != nil)) {
+      from = fp.getWP(0).wp_name;
+    }
+
+    if ((fp.getWP(fp.getPlanSize() -1) != nil) and (fp.getWP(fp.getPlanSize() -1).wp_name != nil)) {
+      dest = fp.getWP(fp.getPlanSize() -1).wp_name;
+    }
+
+    if (fp.departure   != nil) from = fp.departure.id;
+    if (fp.destination != nil) dest = fp.destination.id;
+    fp.id == from ~ " / " ~ dest;
+  }
+
+  # Activate flightplan
+  if (fp.getPlanSize() == 2) fgcommand("activate-flightplan", props.Node.new({"activate": 1}));
+},
+
 # Retrieve the Airway waypoints on the current leg.
 getAirwayWaypoints : func() {
   var fp = flightplan();
@@ -218,6 +267,15 @@ setDirectTo : func(param)
 
   # Switch the GPS to DTO mode.
   setprop("/instrumentation/gps/command", "direct");
+},
+
+setFMSMode : func(mode) {
+  if (NavDataInterface.FMS_MODES[mode] != nil) {
+    # mode is valid, so simply set it as the GPS command
+    setprop("/instrumentation/gps/command", mode);
+  } else {
+    die("Invalid FMS Mode " ~ mode);
+  }
 },
 
 # Return the current DTO location to use
@@ -301,6 +359,15 @@ RegisterWithEmesary : func()
           controller.setDefaultDTO(notification.EventParameter.Value);
           return emesary.Transmitter.ReceiptStatus_Finished;
         }
+        if (id == "SetFMSMode") {
+          controller.setFMSMode(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "InsertWaypoint") {
+          controller.insertWaypoint(notification.EventParameter.Value);
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+
       }
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     };

@@ -129,6 +129,37 @@ setTextElement : func(symbolName, value) {
   sym.setValue(value);
 },
 
+setTextElementLat : func(symbolName, value) {
+  var degrees_part = int(value);
+
+  if (degrees_part == nil) {
+    me.setTextElement(symbolName, "_ __°__.__'");
+  } else {
+    var minutes_part = 100.0 * (value - degrees_part);
+    if (value < 0.0) {
+      me.setTextElement(symbolName, sprintf("S %2d°%.2f'", -degrees_part, -minutes_part));
+    } else {
+      me.setTextElement(symbolName, sprintf("N %2d°%.2f'", degrees_part, minutes_part));
+    }
+  }
+},
+
+setTextElementLon : func(symbolName, value) {
+  var degrees_part = int(value);
+
+  if (degrees_part == nil) {
+    me.setTextElement(symbolName, "____°__.__'");
+  } else {
+    var minutes_part = 100.0 * (value - degrees_part);
+    if (value < 0.0) {
+      me.setTextElement(symbolName, sprintf("W%3d°%.2f'", -degrees_part, -minutes_part));
+    } else {
+      me.setTextElement(symbolName, sprintf("E%3d°%.2f'", degrees_part, minutes_part));
+    }
+  }
+},
+
+
 # Function to undo any colors set by display_toggle when loading a new menu
 resetMenuColors : func() {
   for(var i = 0; i < 12; i +=1) {
@@ -159,6 +190,6 @@ getSVG : func() {
 },
 getGroup : func() {
   return me._group;
-}
+},
 
 };

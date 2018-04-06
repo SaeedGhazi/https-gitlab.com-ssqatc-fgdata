@@ -131,6 +131,13 @@ var PFDInstrumentsController =
     var incr_or_decr = (val > 0) ? me.page.insetMap.zoomIn() : me.page.insetMap.zoomOut();
   },
 
+  handleFPL : func (value) {
+    # Display/hide the FPL display
+    me._fp_visible = (! me._fp_visible);
+    me.page.setFlightPlanVisible(me._fp_active and me._fp_visible);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   # Set the STD BARO to 29.92 in Hg
   setStdBaro : func() {
     var data = {};
@@ -254,12 +261,17 @@ var PFDInstrumentsController =
 
     if (data["FMSFlightPlanEdited"] != nil) {
       # The flightplan has changed in some way, so reload it.
-      update_fp = 1;
+      me._current_flightplan = me.getNavData("Flightplan");
+      if (me._current_flightplan != nil) {
+        me._fp_current_wp = me._current_flightplan.current;
+        me.page.setFlightPlan(me._current_flightplan);
+        update_fp = 1;
+      }
     }
 
     if ((data["FMSFlightPlanActive"] != nil) and (data["FMSFlightPlanActive"] != me._fp_active)) {
       me._fp_active = data["FMSFlightPlanActive"];
-      me.page.setFlightPlanVisible(me._fp_active);
+      me.page.setFlightPlanVisible(me._fp_active and me._fp_visible);
       update_fp = 1;
     }
 
@@ -268,16 +280,7 @@ var PFDInstrumentsController =
       update_fp = 1;
     }
 
-    if (update_fp and me._fp_active) {
-      # For some reason the signals to indicate a FP change aren't firing, so reload the
-      # flightplan here
-      me._current_flightplan = me.getNavData("Flightplan");
-      if (me._current_flightplan != nil) {
-        me._fp_current_wp = me._current_flightplan.current;
-        me.page.setFlightPlan(me._current_flightplan);
-        update_fp = 1;
-      }
-
+    if (me._fp_visible and update_fp and me._fp_active) {
       me.page.updateFlightPlan(me._fp_current_wp);
     }
 

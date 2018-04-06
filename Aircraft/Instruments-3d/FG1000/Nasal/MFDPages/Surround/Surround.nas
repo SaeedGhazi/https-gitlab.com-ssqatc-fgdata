@@ -40,7 +40,7 @@ var PAGE_GROUPS = [
 
   { label: "FPLGroupLabel",
           group: "FPLPageGroup",
-          pages: [ "ActiveFlightPlanWide", "FlightPlanCatalog", "StoredFlightPlan"],
+          pages: [ "ActiveFlightPlanNarrow", "FlightPlanCatalog", "StoredFlightPlan"],
   },
 
   { label: "LstGroupLabel",

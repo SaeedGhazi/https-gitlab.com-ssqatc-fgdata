@@ -15,6 +15,7 @@
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
 # FMS Driver using Emesary to publish data from the inbuilt FMS properties
+
 var GenericFMSPublisher =
 {
 
@@ -23,6 +24,7 @@ var GenericFMSPublisher =
       parents : [
         GenericFMSPublisher,
       ],
+      _running : 0,
     };
 
     # We have two publishers here:
@@ -119,12 +121,88 @@ var GenericFMSPublisher =
   start : func() {
     me._triggeredPublisher.start();
     me._periodicPublisher.start();
+    me._running = 1;
   },
 
   stop : func() {
     me._triggeredPublisher.stop();
     me._periodicPublisher.stop();
+    me._running = 0;
   },
 
+  isRunning : func() {
+    return me._running;
+  },
 
 };
+
+# FMS Delegate which will be triggered by the underlying route manager
+var FMSDataDelegate = {
+  new : func(fp) {
+    var obj = {
+      parents : [FMSDataDelegate],
+      flightplan : fp,
+    };
+    return obj;
+  },
+  currentWaypointChanged : func (fp) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanSequenced" : fp.current});
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  },
+  departureChanged : func (fp) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanEdited" : 1});
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  },
+  arrivalChanged : func (fp) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanEdited" : 1});
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  },
+  waypointsChanged : func (fp) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanEdited" : 1});
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  },
+  activated : func (fp) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanEdited" : 1});
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  },
+  cleared : func (fp) {
+    me.sendFMSNotification({"FMSFlightPlanEdited" : 1});
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanEdited" : 1});
+  },
+  endOfFlightPlan: func (fp) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      notifications.PFDEventNotification.FMSData,
+      {"FMSFlightPlanFinished" : 1});
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  },
+};
+
+var dd = FMSDataDelegate.new(flightplan());
+
+registerFlightPlanDelegate(FMSDataDelegate.new);

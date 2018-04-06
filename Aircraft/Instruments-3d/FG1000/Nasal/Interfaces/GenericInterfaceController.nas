@@ -27,7 +27,6 @@ io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSUpdater.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/GenericADCPublisher.nas', "fg1000");
 
-
 var GenericInterfaceController = {
 
   _instance : nil,
@@ -54,6 +53,7 @@ var GenericInterfaceController = {
     obj.gpsPublisher = fg1000.GenericFMSPublisher.new();
     obj.gpsUpdater = fg1000.GenericFMSUpdater.new();
     obj.adcPublisher = fg1000.GenericADCPublisher.new();
+
     return obj;
   },
 

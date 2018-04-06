@@ -38,8 +38,8 @@ var MFDPages = [
   "XMRadio",
   "XMInfo",
   "SystemStatus",
-  "ActiveFlightPlanWide",
   "ActiveFlightPlanNarrow",
+  "ActiveFlightPlanWide",
   "FlightPlanCatalog",
   "StoredFlightPlan",
   "Checklist1",
@@ -54,6 +54,7 @@ var MFDPages = [
   "NearestUserWPT",
   "NearestFrequencies",
   "NearestAirspaces",
+  "WaypointEntry",
   "DirectTo",
   "Surround",
 ];
@@ -117,6 +118,11 @@ var MFDDisplay =
     obj._DTO = fg1000.DirectTo.new(obj, myCanvas, obj._MFDDevice, obj._svg);
     obj._DTO.getController().RegisterWithEmesary();
 
+    # Next, the WaypointEntry "Page" so that it too receives any Emesary notifications
+    # _before_ the actual page.
+    obj._WaypointEntry = fg1000.WaypointEntry.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+    obj._WaypointEntry.getController().RegisterWithEmesary();
+
     obj._MFDDevice.RegisterWithEmesary();
 
     # Surround dynamic elements
@@ -139,7 +145,7 @@ var MFDDisplay =
 
     # Now load the other pages normally;
     foreach (var page; MFDPages) {
-      if ((page != "NavigationMap") and (page != "EIS") and (page != "DirectTo")) {
+      if ((page != "NavigationMap") and (page != "EIS") and (page != "DirectTo") and (page != "WaypointEntry")) {
         #var code = "obj.Surround.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
         var code = "obj.addPage(\"" ~ page ~ "\", fg1000." ~ page ~ ".new(obj, myCanvas, obj._MFDDevice, obj._svg));";
         var addPageFn = compile(code);

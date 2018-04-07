@@ -39,6 +39,7 @@ var EISController =
     # Sanitize data
     var elements = [
       "RPM",
+      "Man",
       "MBusVolts",
       "EngineHours",
       "FuelFlowGPH",

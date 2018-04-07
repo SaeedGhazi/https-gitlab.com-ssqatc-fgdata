@@ -55,7 +55,7 @@ new : func(EIS_Class = nil, EIS_SVG = nil) {
   if (EIS_Class == nil) {
     # Load the default EIS class.
     var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
-    io.load_nasal(nasal_dir ~ '/EIS/EIS.nas', "fg1000");
+    io.load_nasal(nasal_dir ~ '/EIS/EIS-C182T.nas', "fg1000");
     io.load_nasal(nasal_dir ~ '/EIS/EISController.nas', "fg1000");
     io.load_nasal(nasal_dir ~ '/EIS/EISStyles.nas', "fg1000");
     io.load_nasal(nasal_dir ~ '/EIS/EISOptions.nas', "fg1000");
@@ -65,7 +65,7 @@ new : func(EIS_Class = nil, EIS_SVG = nil) {
   }
 
   if (EIS_SVG == nil) {
-    obj.EIS_SVG = "/Aircraft/Instruments-3d/FG1000/MFDPages/EIS.svg";
+    obj.EIS_SVG = "/Aircraft/Instruments-3d/FG1000/MFDPages/EIS-C182T.svg";
   } else {
     obj.EIS_SVG = EIS_SVG;
   }

@@ -42,10 +42,8 @@ var PFDInstruments =
       _BRG2 : "OFF",
       _DME : 0,
       _OMI : "",
-      _Map : 0,
       _Multiline : 0,
       _annunciation : 0,
-
     };
 
     # Hide various elements for the moment. TODO - implement
@@ -101,7 +99,6 @@ var PFDInstruments =
     obj.setBRG1("OFF");
     obj.setBRG2("OFF");
     obj.setDME(0);
-    obj.setMap(0);
     obj.setMultiline(0);
     obj.setAnnunciation(0);
     obj.setOMI("");
@@ -682,12 +679,6 @@ var PFDInstruments =
     } else {
       print("Unknown wind data option " ~ me._windDataDisplay);
     }
-  },
-
-  # Enable/disable the inset PFD Map.
-  setMap : func (enabled) {
-    me._Map = enabled;
-    me.getElement("PFD-Map").setVisible(enabled);
   },
 
   # Enable/disable the multiline display on the right hand side of the PFD

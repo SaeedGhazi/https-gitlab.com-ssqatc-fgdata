@@ -109,7 +109,7 @@ var NearestVOR =
 
       # Display the course and distance in NM .
       # 248 is the extended ASCII code for the degree symbol
-      var crs = sprintf("%i%c", crsAndDst[0], 248);
+      var crs = sprintf("%i°", crsAndDst[0]);
       var dst = sprintf("%.1fnm", crsAndDst[1]);
 
       # Convert into something we can pass straight to the UIGroup.
@@ -136,18 +136,8 @@ var NearestVOR =
 
     if (nav == nil) return;
 
-    if (nav.lat < 0.0) {
-      me.setTextElement("Lat", sprintf("S %.4f", -nav.lat));
-    } else {
-      me.setTextElement("Lat", sprintf("N %.4f", nav.lat));
-    }
-
-    if (nav.lon < 0.0) {
-      me.setTextElement("Lon", sprintf("W%3.4f", -nav.lon));
-    } else {
-      me.setTextElement("Lon", sprintf("E%3.4f", nav.lon));
-    }
-
+    me.setTextElementLat("Lat", nav.lat);
+    me.setTextElementLon("Lon", nav.lon);
     me.setTextElement("Freq", sprintf("%.2f", nav.frequency / 100.0));
     me.setTextElement("Name", nav.name);
 

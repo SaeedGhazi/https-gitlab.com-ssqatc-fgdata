@@ -108,6 +108,7 @@ var WaypointEntry =
 
   offdisplay : func() {
     me._group.setVisible(0);
+    if (me.WaypointEntryChart != nil) me.WaypointEntryChart.setVisible(0);
     me.getElement("Group").setVisible(0);
     me.getController().offdisplay();
   },

@@ -150,6 +150,12 @@ getFlightplan : func ()
   return flightplan();
 },
 
+# Retrieve the checklists for this aircraft.
+getChecklists : func()
+{
+  return props.globals.getNode("/sim/checklists");
+},
+
 insertWaypoint : func (data)
 {
   assert(data["index"] != nil, "InsertWaypoint message with no index parameter");
@@ -367,7 +373,10 @@ RegisterWithEmesary : func()
           controller.insertWaypoint(notification.EventParameter.Value);
           return emesary.Transmitter.ReceiptStatus_Finished;
         }
-
+        if (id == "getChecklists") {
+          notification.EventParameter.Value = controller.getChecklists();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
       }
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     };

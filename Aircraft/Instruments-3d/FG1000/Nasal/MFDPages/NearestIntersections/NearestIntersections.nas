@@ -100,8 +100,7 @@ var NearestIntersections =
       var crsAndDst = courseAndDistance(nav);
 
       # Display the course and distance in NM .
-      # 248 is the extended ASCII code for the degree symbol
-      var crs = sprintf("%i%c", crsAndDst[0], 248);
+      var crs = sprintf("%i°", crsAndDst[0]);
       var dst = sprintf("%.1fnm", crsAndDst[1]);
 
       # Convert into something we can pass straight to the UIGroup.
@@ -126,27 +125,17 @@ var NearestIntersections =
     }
   },
   updateNavDataItem : func(nav) {
-
     if (nav == nil) return;
 
-    if (nav.lat < 0.0) {
-      me.setTextElement("Lat", sprintf("S %.4f", -nav.lat));
-    } else {
-      me.setTextElement("Lat", sprintf("N %.4f", nav.lat));
-    }
-
-    if (nav.lon < 0.0) {
-      me.setTextElement("Lon", sprintf("W%3.4f", -nav.lon));
-    } else {
-      me.setTextElement("Lon", sprintf("E%3.4f", nav.lon));
-    }
+    me.setTextElementLat("Lat", nav.lat);
+    me.setTextElementLon("Lon", nav.lon);
 
     # Determine the nearest VOR, and the bearing and distance TO the VOR,
     var vordata = me.getController().getNearestNavData("vor");
 
     if ((vordata != nil ) and (size(vordata) > 0)) {
       var crsAndDst = courseAndDistance(nav, vordata[0]);
-      var crs = sprintf("%i%c", crsAndDst[0], 248);
+      var crs = sprintf("%i°", crsAndDst[0]);
       var dst = sprintf("%.1fnm", crsAndDst[1]);
       me.setTextElement("VORID", vordata[0].id);
       me.setTextElement("VORFreq", sprintf("%.2f", vordata[0].frequency / 100.0));

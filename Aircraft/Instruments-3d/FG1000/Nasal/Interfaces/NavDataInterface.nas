@@ -153,7 +153,40 @@ getFlightplan : func ()
 # Retrieve the checklists for this aircraft.
 getChecklists : func()
 {
-  return props.globals.getNode("/sim/checklists");
+  var checklists = {};
+  checklists["Standard"] = {};
+  checklists["EMERGENCY"] = {};
+
+  var checklistprops = props.globals.getNode("/sim/checklists");
+
+  foreach (var chklist; checklistprops.getChildren("checklist")) {
+    var title = chklist.getNode("title", 1).getValue();
+    var grp = "Standard";
+    var items = [];
+    if (find("emergency", string.lc(title)) != -1) {
+      grp = "EMERGENCY";
+    }
+
+    # Checklists can optionally be broken down into individual pages.
+    foreach (var pg; chklist.getChildren("page")) {
+      foreach (var item; pg.getChildren("item")) {
+        var name = item.getNode("name", 1).getValue();
+        var value = item.getNode("value", 1).getValue();
+        append(items, { Name : name, Value: value, Checked: 0  });
+      }
+    }
+
+    foreach (var item; chklist.getChildren("item")) {
+      var name = item.getNode("name", 1).getValue();
+      var value = item.getNode("value", 1).getValue();
+      append(items, { Name : name, Value: value, Checked: 0 });
+    }
+
+    # items now contains a list of all the checklists for
+    checklists[grp][title] = items;
+  }
+
+  return checklists;
 },
 
 insertWaypoint : func (data)
@@ -373,7 +406,7 @@ RegisterWithEmesary : func()
           controller.insertWaypoint(notification.EventParameter.Value);
           return emesary.Transmitter.ReceiptStatus_Finished;
         }
-        if (id == "getChecklists") {
+        if (id == "GetChecklists") {
           notification.EventParameter.Value = controller.getChecklists();
           return emesary.Transmitter.ReceiptStatus_Finished;
         }

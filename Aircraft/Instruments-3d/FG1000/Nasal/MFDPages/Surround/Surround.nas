@@ -45,7 +45,7 @@ var PAGE_GROUPS = [
 
   { label: "LstGroupLabel",
           group: "LstPageGroup",
-          pages: [ "Checklist1", "Checklist2", "Checklist3", "Checklist4", "Checklist5"],
+          pages: [ "Checklist"],
   },
 
   { label: "NrstGroupLabel",

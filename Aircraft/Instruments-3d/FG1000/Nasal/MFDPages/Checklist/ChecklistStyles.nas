@@ -14,11 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Checklist3 Styles
-var Checklist3Styles =
+# Checklist Styles
+var ChecklistStyles =
 {
   new : func() {
-    var obj = { parents : [ Checklist3Styles ]};
+    var obj = { parents : [ ChecklistStyles ]};
     obj.Styles = {};
     obj.loadStyles();
     return obj;

@@ -23,9 +23,9 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="834.55454"
-     inkscape:cy="123.76123"
+     inkscape:zoom="2"
+     inkscape:cx="594.53585"
+     inkscape:cy="130.11243"
      inkscape:document-units="px"
      inkscape:current-layer="ChecklistMainPane"
      showgrid="true"
@@ -966,6 +966,30 @@
            id="tspan4745"
            x="946.75195"
            y="694.34045">GO TO NEXT CHECKLIST?</tspan></text>
+      <text
+         transform="scale(0.96688562,1.0342485)"
+         sodipodi:linespacing="100%"
+         id="ChecklistNotFinished"
+         y="694.34045"
+         x="206.58603"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:19.99999998px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow, Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         xml:space="preserve"
+         inkscape:label="#text4232"><tspan
+           sodipodi:role="line"
+           id="tspan4340">* CHECKLIST NOT FINISHED *</tspan></text>
+      <text
+         inkscape:label="#text4232"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:20px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow, Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         x="206.58603"
+         y="694.34045"
+         id="ChecklistFinished"
+         sodipodi:linespacing="100%"
+         transform="scale(0.96688562,1.0342485)"><tspan
+           y="694.34045"
+           x="206.58603"
+           id="tspan4334"
+           sodipodi:role="line">* CHECKLIST FINISHED *</tspan></text>
     </g>
     <rect
        style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"

@@ -108,11 +108,11 @@ displayGroup : func () {
   # In these cases, we let the cursor move to the top or bottom of the list.
 
   # Determine the middle element
-  var middle_element_index = int(me._size / 2);
+  var middle_element_index = math.ceil(me._size / 2);
   me._pageIndex = me._crsrIndex - middle_element_index;
 
-  if (me._crsrIndex < middle_element_index) {
-    # Start of list
+  if ((size(me._values) <= me._size) or (me._crsrIndex < middle_element_index)) {
+    # Start of list or the list is too short to require scrolling
     me._pageIndex = 0;
   } else if (me._crsrIndex > (size(me._values) - middle_element_index - 1)) {
     # End of list

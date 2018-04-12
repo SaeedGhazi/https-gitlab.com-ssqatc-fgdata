@@ -56,7 +56,7 @@ var Checklist =
     );
 
     obj.checklistDisplay = ChecklistGroupElement.new(
-      obj.pageName,
+      obj,
       svg,
       16,
       "ScrollTrough",
@@ -65,12 +65,14 @@ var Checklist =
     );
 
     # Other dynamic text elements
-    obj.addTextElements(["GroupName", "Name", "Next"]);
+    obj.addTextElements(["GroupName", "Name", "Next", "Finished", "NotFinished"]);
 
     # The "Next" element isn't technically dynamic, though we want it to be
     # highlighted as a text element.  We need to set a value for it explicitly,
     # as it'll be set to an empty string otherwise.
     obj.setTextElement("Next", "GO TO NEXT CHECKLIST?");
+    obj.setTextElement("Finished", "* Checklist Finished *");
+    obj.setTextElement("NotFinished", "* CHECKLIST NOT FINISHED *");
 
     # Hide the various groups
     obj.hideChecklistSelect();
@@ -173,7 +175,32 @@ var Checklist =
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
+    pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
+    pg.addMenuItem(2, "MAP", pg, pg.mfd.NavigationMap.mapMenu);
+    pg.addMenuItem(5, "CHECK", pg,
+      func(dev, pg, mi) { pg.getController().toggleCurrentItem(); dev.updateMenus(); }, # callback
+      func(svg, mi) { pg.displayCheckUncheck(svg); }  # Display function
+    );
+    pg.addMenuItem(10, "EXIT", pg,
+      # This should return to the previous page...
+      func(dev, pg, mi) { dev.selectPage(pg.getMFD().getPage("NavigationMap")); },
+    );
+
+    pg.addMenuItem(11, "EMERGENCY", pg,
+      func(dev, pg, mi) { pg.getController().selectEmergencyChecklist(); }, # callback
+    );
+
     device.updateMenus();
+  },
+
+  # Display function for the CHECK/UNCHECK softkey
+  displayCheckUncheck : func (svg) {
+    if (me.checklistDisplay.getValue()) {
+      svg.setText("UNCHECK");
+    } else {
+      svg.setText("CHECK");
+    }
+    svg.setVisible(1);
   },
 };
 
@@ -187,11 +214,12 @@ var Checklist =
 var ChecklistGroupElement =
 {
 
-new : func (pageName, svg, displaysize, scrollTroughElement=nil, scrollThumbElement=nil, scrollHeight=0, style=nil)
+new : func (page, svg, displaysize, scrollTroughElement=nil, scrollThumbElement=nil, scrollHeight=0, style=nil)
 {
   var obj = {
     parents : [ ChecklistGroupElement ],
-    _pageName : pageName,
+    _page : page,
+    _pageName : page.pageName,
     _svg : svg,
     _style : style,
     _scrollTroughElement : nil,
@@ -234,20 +262,19 @@ new : func (pageName, svg, displaysize, scrollTroughElement=nil, scrollThumbElem
          "Both the scroll trough element and the scroll thumb element must be defined, or neither");
 
   if (scrollTroughElement != nil) {
-    obj._scrollTroughElement = svg.getElementById(pageName ~ scrollTroughElement);
-    assert(obj._scrollTroughElement != nil, "Unable to find scroll element " ~ pageName ~ scrollTroughElement);
+    obj._scrollTroughElement = svg.getElementById(obj._pageName ~ scrollTroughElement);
+    assert(obj._scrollTroughElement != nil, "Unable to find scroll element " ~ obj._pageName ~ scrollTroughElement);
   }
   if (scrollThumbElement != nil) {
-    obj._scrollThumbElement = svg.getElementById(pageName ~ scrollThumbElement);
-    assert(obj._scrollThumbElement != nil, "Unable to find scroll element " ~ pageName ~ scrollThumbElement);
+    obj._scrollThumbElement = svg.getElementById(obj._pageName ~ scrollThumbElement);
+    assert(obj._scrollThumbElement != nil, "Unable to find scroll element " ~ obj._pageName ~ scrollThumbElement);
     obj._scrollBaseTransform = obj._scrollThumbElement.getTranslation();
   }
 
   if (style == nil) obj._style = PFD.DefaultStyle;
 
   for (var i = 0; i < displaysize; i = i + 1) {
-    append(obj._elements, PFD.HighlightElement.new(pageName, svg, "ItemSelect" ~ i, i, obj._style));
-    #append(obj._elements, PFD.TextElement.new(pageName, svg, highlightElement ~ i, i, obj._style));
+    append(obj._elements, PFD.HighlightElement.new(obj._pageName, svg, "ItemSelect" ~ i, i, obj._style));
   }
 
   return obj;
@@ -290,8 +317,8 @@ displayGroup : func () {
   var middle_element_index = math.ceil(me._size / 2);
   me._pageIndex = me._crsrIndex - middle_element_index;
 
-  if (me._crsrIndex < middle_element_index) {
-    # Start of list
+  if ((size(me._values) <= me._size) or (me._crsrIndex < middle_element_index)) {
+    # Start of list or the list is too short to require scrolling
     me._pageIndex = 0;
   } else if (me._crsrIndex > (size(me._values) - middle_element_index - 1)) {
     # End of list
@@ -315,7 +342,7 @@ displayGroup : func () {
         assert(element != nil, "Unable to find element " ~ name);
 
         if (k == "ItemSelect") {
-          # Display if this is the cursor eleemtn
+          # Display if this is the cursor element
           element.setVisible(crsr);
         } else if (k == "ItemTick") {
           # Check the box if appropriate
@@ -384,6 +411,27 @@ displayGroup : func () {
       me._scrollBaseTransform[1] + me._scrollHeight * (me._crsrIndex / (size(me._values) -1))
     ]);
   }
+
+  # Indicate whether we're finished with this checklist or not
+  var finished = me.isComplete();
+  me._page.getTextElement("Finished").setVisible(finished);
+  me._page.getTextElement("NotFinished").setVisible(! finished);
+
+  # Update the softkeys, which will in particular change the CHECK/UNCHECK softkeys
+  # appropriately.
+  me._page.device.updateMenus();
+},
+
+isComplete : func() {
+  var finished = 1;
+  foreach (var entry; me._values) {
+    if (entry["ItemTick"] == 0) {
+      finished = 0;
+      break;
+    }
+  }
+
+  return finished;
 },
 
 # Methods to add dynamic elements to the group.  Must be called in the
@@ -402,8 +450,8 @@ showCRSR : func() {
 },
 hideCRSR : func() {
   if (me._crsrEnabled == 0) return;
-  me.displayGroup();
   me._crsrEnabled = 0;
+  me.displayGroup();
 },
 setCRSR : func(index) {
   me._crsrIndex = math.min(index, size(me._values) -1);
@@ -423,11 +471,11 @@ isCursorOnDataEntryElement : func() {
 enterElement : func() {
   if (me._crsrEnabled == 0) return;
 
-  # ENT on an element of the checklist simply toggles the item itself,
+  # ENT on an element of the checklist checks the box,
   # indicated by whether the check mark is visible or not.
   var name = me._pageName ~ "ItemTick" ~ (me._crsrIndex - me._pageIndex);
   var element  = me._svg.getElementById(name);
-  element.setVisible(! element.getVisible());
+  element.setVisible(1);
   return element.getVisible();
 },
 getValue : func() {
@@ -444,7 +492,13 @@ setValue : func(idx, key, value) {
 },
 clearElement : func() {
   if (me._crsrEnabled == 0) return;
-  me._elements[me._crsrIndex - me._pageIndex].clearElement();
+
+  # CLR on an element of the checklist unchecks the box,
+  # indicated by whether the check mark is visible or not.
+  var name = me._pageName ~ "ItemTick" ~ (me._crsrIndex - me._pageIndex);
+  var element  = me._svg.getElementById(name);
+  element.setVisible(0);
+  return element.getVisible();
 },
 incrSmall : func(value) {
   if (me._crsrEnabled == 0) return;

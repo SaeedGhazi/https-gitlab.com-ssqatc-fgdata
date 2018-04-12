@@ -154,36 +154,67 @@ getFlightplan : func ()
 getChecklists : func()
 {
   var checklists = {};
-  checklists["Standard"] = {};
-  checklists["EMERGENCY"] = {};
-
   var checklistprops = props.globals.getNode("/sim/checklists");
 
-  foreach (var chklist; checklistprops.getChildren("checklist")) {
-    var title = chklist.getNode("title", 1).getValue();
-    var grp = "Standard";
-    var items = [];
-    if (find("emergency", string.lc(title)) != -1) {
-      grp = "EMERGENCY";
-    }
+  var groups = checklistprops.getChildren("group");
 
-    # Checklists can optionally be broken down into individual pages.
-    foreach (var pg; chklist.getChildren("page")) {
-      foreach (var item; pg.getChildren("item")) {
-        var name = item.getNode("name", 1).getValue();
-        var value = item.getNode("value", 1).getValue();
-        append(items, { Name : name, Value: value, Checked: 0  });
+  if (size(groups) > 0) {
+    foreach (var group; groups) {
+      var grp = group.getNode("name", 1).getValue();
+      checklists[grp] = {};
+      foreach (var chklist; group.getChildren("checklist")) {
+        var items = [];
+        var title = chklist.getNode("title", 1).getValue();
+
+        # Checklists can optionally be broken down into individual pages.
+        foreach (var pg; chklist.getChildren("page")) {
+          foreach (var item; pg.getChildren("item")) {
+            var name = item.getNode("name", 1).getValue();
+            var value = item.getNode("value", 1).getValue();
+            append(items, { Name : name, Value: value, Checked: 0  });
+          }
+        }
+
+        foreach (var item; chklist.getChildren("item")) {
+          var name = item.getNode("name", 1).getValue();
+          var value = item.getNode("value", 1).getValue();
+          append(items, { Name : name, Value: value, Checked: 0 });
+        }
+
+        # items now contains a list of all the checklists for
+        checklists[grp][title] = items;
       }
     }
+  } else {
+    # Checklist doesn't contain any groups, so try to split into Standard
+    # and Emergency groups by looking at the checklist titles.
 
-    foreach (var item; chklist.getChildren("item")) {
-      var name = item.getNode("name", 1).getValue();
-      var value = item.getNode("value", 1).getValue();
-      append(items, { Name : name, Value: value, Checked: 0 });
+    foreach (var chklist; checklistprops.getChildren("checklist")) {
+      var title = chklist.getNode("title", 1).getValue();
+      var grp = "Standard";
+      var items = [];
+      if (find("emergency", string.lc(title)) != -1) {
+        grp = "EMERGENCY";
+      }
+
+      # Checklists can optionally be broken down into individual pages.
+      foreach (var pg; chklist.getChildren("page")) {
+        foreach (var item; pg.getChildren("item")) {
+          var name = item.getNode("name", 1).getValue();
+          var value = item.getNode("value", 1).getValue();
+          append(items, { Name : name, Value: value, Checked: 0  });
+        }
+      }
+
+      foreach (var item; chklist.getChildren("item")) {
+        var name = item.getNode("name", 1).getValue();
+        var value = item.getNode("value", 1).getValue();
+        append(items, { Name : name, Value: value, Checked: 0 });
+      }
+
+      # items now contains a list of all the checklists for
+      checklists[grp][title] = items;
     }
-
-    # items now contains a list of all the checklists for
-    checklists[grp][title] = items;
   }
 
   return checklists;

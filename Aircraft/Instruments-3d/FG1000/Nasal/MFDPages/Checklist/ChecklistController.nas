@@ -50,6 +50,10 @@ var ChecklistController =
   selectItems : func() {
     me.selectGroup(ChecklistController.UIGROUP.ITEMS);
   },
+  selectNext : func() {
+    me.selectGroup(ChecklistController.UIGROUP.NEXT);
+  },
+
 
   getSelectedGroup : func() {
     return me._currentGroup;
@@ -82,6 +86,26 @@ var ChecklistController =
       me._page.highlightTextElement("Next");
     } else {
       me._page.unhighlightTextElement("Next");
+    }
+  },
+
+  selectEmergencyChecklist : func() {
+    # Select the EMERGENCY checklist group, if available.
+    var emergency_labels = ["EMERGENCY", "Emergency", "emergency"];
+    var group = nil;
+    foreach (var l; emergency_labels) {
+      if (me._checklists[l] != nil) {
+        group = l;
+        break;
+      }
+    }
+
+    if (group != nil) {
+      me._group_selected = group;
+      me._list_selected = keys(me._checklists[me._group_selected])[0];
+      me._page.hideGroupSelect();
+      me._page.displayChecklist(me._group_selected, me._list_selected, me._checklists);
+      me.selectChecklist();
     }
   },
 
@@ -129,6 +153,11 @@ var ChecklistController =
   },
   handleFMSOuter : func(value) {
     if (me._crsrToggle == 1) {
+      # Manual explicitly documents that _either_ FMS knob may be used to scroll through the checklist.
+      # However, that means that there is no way to navigate from the checklist itself other
+      # than to disable and then re-enable the CRSR.  Odd.
+      if (me._currentGroup == ChecklistController.UIGROUP.ITEMS) return me.handleFMSInner(value);
+
       var incr_or_decr = (value > 0) ? 1 : -1;
       var idx = me._currentGroup + incr_or_decr;
       if (idx < 0) idx = 0;
@@ -164,12 +193,22 @@ var ChecklistController =
       }
 
       if (me._currentGroup == ChecklistController.UIGROUP.ITEMS) {
-        # Toggle the status of the selected Checklist item
+        # Check the selected Checklist item
+        me.checkCurrentItem();
         var idx = me._page.checklistDisplay.getCRSR();
-        var checked = me._page.checklistDisplay.getValue();
-        me._checklists[me._group_selected][me._list_selected][idx]["Checked"] = me._page.checklistDisplay.enterElement();
-        me._page.displayChecklist(me._group_selected, me._list_selected, me._checklists);
-        me._page.checklistDisplay.incrSmall(1);
+
+        if ((idx == (size(me._checklists[me._group_selected][me._list_selected]) -1)) and
+            me._page.checklistDisplay.isComplete()) {
+          # If we're right at the end of this checklist then move onto the "Next Checklist"
+          # button.  Manual isn't clear on whether this is only if the checklist is complete,
+          # but we will assume that is the case.
+          me.selectNext();
+        } else {
+          # Automatically go to the next item.
+          me.handleFMSInner(1);
+        }
+
+        return emesary.Transmitter.ReceiptStatus_Finished;
       }
 
       if (me._currentGroup == ChecklistController.UIGROUP.NEXT) {
@@ -182,6 +221,7 @@ var ChecklistController =
 
         if (idx < size(lists)) {
           me._list_selected = lists[idx];
+          me._page.checklistDisplay.setCRSR(0);
           me._page.displayChecklist(me._group_selected, me._list_selected, me._checklists);
           me.selectItems();
         }
@@ -191,6 +231,39 @@ var ChecklistController =
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     } else {
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    }
+  },
+
+  handleClear : func() {
+    if ((me._crsrToggle == 1) and
+        (me._currentGroup == ChecklistController.UIGROUP.ITEMS)) {
+      # Uncheck the selected Checklist item
+      me.clearCurrentItem();
+      return emesary.Transmitter.ReceiptStatus_Finished;
+    }
+
+    return emesary.Transmitter.ReceiptStatus_NotProcessed;
+  },
+
+  checkCurrentItem : func() {
+    me._page.checklistDisplay.enterElement();
+    var idx = me._page.checklistDisplay.getCRSR();
+    me._checklists[me._group_selected][me._list_selected][idx]["Checked"] = 1;
+    me._page.displayChecklist(me._group_selected, me._list_selected, me._checklists);
+  },
+
+  clearCurrentItem : func() {
+    me._page.checklistDisplay.clearElement();
+    var idx = me._page.checklistDisplay.getCRSR();
+    me._checklists[me._group_selected][me._list_selected][idx]["Checked"] = 0;
+    me._page.displayChecklist(me._group_selected, me._list_selected, me._checklists);
+  },
+
+  toggleCurrentItem : func() {
+    if (me._page.checklistDisplay.getValue()) {
+      me.clearCurrentItem();
+    } else {
+      me.checkCurrentItem();
     }
   },
 

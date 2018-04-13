@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-
-<!-- Author Ian Tolosa - Timetable of OCT 2016 to MAR 2017 - Passenger, no Cargo -->
-
+<!-- Author Ian (Yves) Tolosa- Timetable Week of 09 APR 2018 - PAX Only -->
 <trafficlist>
   <aircraft>
     <model>Aircraft/A320/A320-RoyalBrunei.xml</model>
@@ -151,7 +149,7 @@
       <port>WBSB</port>
       <time>12:00:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>YMML</port>
       <time>19:00:00</time>
@@ -164,72 +162,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>02:25:00</time>
+      <time>02:15:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
-    <arrival>
-      <port>WBSB</port>
-      <time>09:20:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI097</callsign>
-    <required-aircraft>RBA-788</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WBSB</port>
-      <time>12:35:00</time>
-    </departure>
-    <cruise-alt>385</cruise-alt>
-    <arrival>
-      <port>OMDB</port>
-      <time>21:30:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI097</callsign>
-    <required-aircraft>RBA-788</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>OMDB</port>
-      <time>23:00:00</time>
-    </departure>
-    <cruise-alt>385</cruise-alt>
-    <arrival>
-      <port>EGLL</port>
-      <time>06:45:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI098</callsign>
-    <required-aircraft>RBA-788</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>EGLL</port>
-      <time>17:05:00</time>
-    </departure>
-    <cruise-alt>375</cruise-alt>
-    <arrival>
-      <port>OMDB</port>
-      <time>00:00:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI098</callsign>
-    <required-aircraft>RBA-788</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>OMDB</port>
-      <time>01:35:00</time>
-    </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>405</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>09:25:00</time>
+    </arrival>
+    <repeat>24Hr</repeat>
+  </flight>
+  <flight>
+    <callsign>BI098</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>EGLL</port>
+      <time>16:45:00</time>
+    </departure>
+    <cruise-alt>395</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>23:35:00</time>
+    </arrival>
+    <repeat>24Hr</repeat>
+  </flight>
+  <flight>
+    <callsign>BI098</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>01:15:00</time>
+    </departure>
+    <cruise-alt>395</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>09:30:00</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -239,12 +207,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>01:50:00</time>
+      <time>01:15:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WSSS</port>
-      <time>03:55:00</time>
+      <time>03:20:00</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -256,40 +224,10 @@
       <port>WSSS</port>
       <time>04:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>06:15:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI423</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WBSB</port>
-      <time>10:30:00</time>
-    </departure>
-    <cruise-alt>380</cruise-alt>
-    <arrival>
-      <port>WSSS</port>
-      <time>12:35:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI424</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WSSS</port>
-      <time>04:45:00</time>
-    </departure>
-    <cruise-alt>370</cruise-alt>
-    <arrival>
-      <port>WBSB</port>
-      <time>06:50:00</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -301,7 +239,7 @@
       <port>WBSB</port>
       <time>02:30:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VHHH</port>
       <time>05:35:00</time>
@@ -314,42 +252,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>VHHH</port>
-      <time>06:35:00</time>
+      <time>06:55:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>09:40:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI873</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WBSB</port>
-      <time>10:55:00</time>
-    </departure>
-    <cruise-alt>380</cruise-alt>
-    <arrival>
-      <port>WMKK</port>
-      <time>13:10:00</time>
-    </arrival>
-    <repeat>24Hr</repeat>
-  </flight>
-  <flight>
-    <callsign>BI874</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WMKK</port>
-      <time>13:45:00</time>
-    </departure>
-    <cruise-alt>370</cruise-alt>
-    <arrival>
-      <port>WBSB</port>
-      <time>15:59:00</time>
+      <time>10:00:00</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -361,7 +269,7 @@
       <port>WBSB</port>
       <time>01:00:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WMKK</port>
       <time>03:20:00</time>
@@ -376,12 +284,102 @@
       <port>WMKK</port>
       <time>04:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>06:30:00</time>
     </arrival>
     <repeat>24Hr</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>1/11:45:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>1/20:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>1/21:50:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>2/05:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI381</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>1/04:30:00</time>
+    </departure>
+    <cruise-alt>395</cruise-alt>
+    <arrival>
+      <port>VVTS</port>
+      <time>1/06:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI382</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>VVTS</port>
+      <time>1/07:15:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>1/09:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI423</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>1/10:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>1/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI424</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>1/13:25:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>1/15:30:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
   </flight>
   <flight>
     <callsign>BI513</callsign>
@@ -391,7 +389,7 @@
       <port>WBSB</port>
       <time>1/02:55:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VTBS</port>
       <time>1/05:40:00</time>
@@ -404,12 +402,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>VTBS</port>
-      <time>1/06:40:00</time>
+      <time>1/06:30:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>1/09:25:00</time>
+      <time>1/09:15:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -419,12 +417,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>1/02:25:00</time>
+      <time>1/02:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>ZSPD</port>
-      <time>1/06:35:00</time>
+      <time>1/06:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -436,10 +434,10 @@
       <port>ZSPD</port>
       <time>1/07:35:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>1/12:25:00</time>
+      <time>1/12:15:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -449,12 +447,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>1/10:40:00</time>
+      <time>1/10:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>RPLL</port>
-      <time>1/12:45:00</time>
+      <time>1/12:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -464,42 +462,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>RPLL</port>
-      <time>1/13:25:00</time>
+      <time>1/13:20:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>1/15:35:00</time>
+      <time>1/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI739</callsign>
+    <callsign>BI737</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>1/14:10:00</time>
-    </departure>
-    <cruise-alt>380</cruise-alt>
-    <arrival>
-      <port>WIII</port>
       <time>1/16:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>1/18:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI736</callsign>
+    <callsign>BI738</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WIII</port>
-      <time>1/23:00:00</time>
+      <time>1/23:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>2/01:20:00</time>
+      <time>2/01:35:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -509,12 +507,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>1/13:40:00</time>
+      <time>1/13:15:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WARR</port>
-      <time>1/15:50:00</time>
+      <time>1/15:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -524,12 +522,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WARR</port>
-      <time>1/23:30:00</time>
+      <time>1/23:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>2/01:45:00</time>
+      <time>2/01:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -539,12 +537,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>1/08:25:00</time>
+      <time>1/07:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
-      <time>1/09:05:00</time>
+      <time>1/08:00:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -554,12 +552,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>1/09:35:00</time>
+      <time>1/08:40:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>1/09:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI873</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>1/10:25:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WMKK</port>
+      <time>1/12:45:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI874</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WMKK</port>
+      <time>1/13:35:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>1/10:15:00</time>
+      <time>1/15:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -571,7 +599,7 @@
       <port>WBSB</port>
       <time>1/13:30:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
       <time>1/14:10:00</time>
@@ -584,12 +612,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>2/03:10:00</time>
+      <time>2/03:05:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>405</cruise-alt>
     <arrival>
       <port>OEJN</port>
-      <time>2/13:40:00</time>
+      <time>2/13:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -599,12 +627,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>OEJN</port>
-      <time>2/15:40:00</time>
+      <time>2/15:20:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>3/01:05:00</time>
+      <time>3/01:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>2/11:45:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>2/20:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>2/21:50:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>3/05:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -616,7 +674,7 @@
       <port>WBSB</port>
       <time>2/04:30:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VVTS</port>
       <time>2/06:25:00</time>
@@ -631,10 +689,40 @@
       <port>VVTS</port>
       <time>2/07:15:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>2/09:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI423</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>2/10:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>2/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI424</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>2/13:25:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>2/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -646,7 +734,7 @@
       <port>WBSB</port>
       <time>2/02:55:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VTBS</port>
       <time>2/05:40:00</time>
@@ -661,10 +749,40 @@
       <port>VTBS</port>
       <time>2/06:30:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>2/09:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI639</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>2/04:25:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>ZSHC</port>
+      <time>2/08:50:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI640</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ZSHC</port>
+      <time>2/10:10:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>2/15:00:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -674,12 +792,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>2/10:40:00</time>
+      <time>2/10:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>RPLL</port>
-      <time>2/12:45:00</time>
+      <time>2/12:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -689,12 +807,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>RPLL</port>
-      <time>2/13:25:00</time>
+      <time>2/13:20:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>2/15:35:00</time>
+      <time>2/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -704,12 +822,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>2/13:10:00</time>
+      <time>2/12:25:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WADD</port>
-      <time>2/15:30:00</time>
+      <time>2/14:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -721,7 +839,7 @@
       <port>WADD</port>
       <time>2/23:10:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>3/01:35:00</time>
@@ -734,12 +852,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>2/12:05:00</time>
+      <time>2/11:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WARR</port>
-      <time>2/14:15:00</time>
+      <time>2/13:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -749,12 +867,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WARR</port>
-      <time>2/23:30:00</time>
+      <time>2/23:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>3/01:45:00</time>
+      <time>3/01:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -764,12 +882,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>2/08:25:00</time>
+      <time>2/07:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
-      <time>2/09:05:00</time>
+      <time>2/08:00:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -779,27 +897,57 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>2/09:35:00</time>
+      <time>2/08:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>2/10:15:00</time>
+      <time>2/09:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI827</callsign>
+    <callsign>BI873</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>2/11:15:00</time>
+      <time>2/10:25:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WMKK</port>
+      <time>2/12:45:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI874</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WMKK</port>
+      <time>2/13:35:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>2/15:50:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI821</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>2/23:30:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
-      <time>2/11:55:00</time>
+      <time>3/00:10:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -809,12 +957,102 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>2/00:50:00</time>
+      <time>2/00:40:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>2/01:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>3/11:45:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>3/20:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>3/21:50:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>4/05:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI383</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>3/10:20:00</time>
+    </departure>
+    <cruise-alt>395</cruise-alt>
+    <arrival>
+      <port>VVTS</port>
+      <time>3/12:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI384</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>VVTS</port>
+      <time>3/13:00:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>3/14:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI423</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>3/10:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>3/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI424</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>3/13:25:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>2/01:30:00</time>
+      <time>3/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -826,7 +1064,7 @@
       <port>WBSB</port>
       <time>3/10:15:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VTBS</port>
       <time>3/13:00:00</time>
@@ -841,7 +1079,7 @@
       <port>VTBS</port>
       <time>3/13:45:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>3/16:30:00</time>
@@ -854,12 +1092,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>3/02:25:00</time>
+      <time>3/02:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>ZSPD</port>
-      <time>3/06:35:00</time>
+      <time>3/06:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -871,10 +1109,40 @@
       <port>ZSPD</port>
       <time>3/07:35:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>3/12:25:00</time>
+      <time>3/12:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI627</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>3/07:15:00</time>
+    </departure>
+    <cruise-alt>395</cruise-alt>
+    <arrival>
+      <port>ZGNN</port>
+      <time>3/10:50:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI628</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>ZGNN</port>
+      <time>3/11:50:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>3/15:15:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -886,10 +1154,10 @@
       <port>WBSB</port>
       <time>3/04:00:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>RPLL</port>
-      <time>3/06:05:00</time>
+      <time>3/06:10:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -901,7 +1169,7 @@
       <port>RPLL</port>
       <time>3/07:00:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>3/09:10:00</time>
@@ -914,12 +1182,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>3/04:00:00</time>
+      <time>3/03:00:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WIII</port>
-      <time>3/06:20:00</time>
+      <time>3/05:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -929,12 +1197,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WIII</port>
-      <time>3/07:10:00</time>
+      <time>3/06:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>3/09:30:00</time>
+      <time>3/08:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -946,7 +1214,7 @@
       <port>WBSB</port>
       <time>3/13:10:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WADD</port>
       <time>3/15:30:00</time>
@@ -961,7 +1229,7 @@
       <port>WADD</port>
       <time>3/23:10:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>4/01:35:00</time>
@@ -974,12 +1242,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>3/12:05:00</time>
+      <time>3/13:15:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WARR</port>
-      <time>3/14:15:00</time>
+      <time>3/15:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -989,12 +1257,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WARR</port>
-      <time>3/23:30:00</time>
+      <time>3/23:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>4/01:45:00</time>
+      <time>4/01:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1006,7 +1274,7 @@
       <port>WBSB</port>
       <time>3/13:30:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
       <time>3/14:10:00</time>
@@ -1019,12 +1287,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>3/00:50:00</time>
+      <time>3/00:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>3/01:30:00</time>
+      <time>3/01:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>4/11:10:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>4/20:05:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>4/21:35:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>5/04:55:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1036,7 +1334,7 @@
       <port>WBSB</port>
       <time>4/04:30:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VVTS</port>
       <time>4/06:25:00</time>
@@ -1051,7 +1349,7 @@
       <port>VVTS</port>
       <time>4/07:15:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>4/09:10:00</time>
@@ -1059,32 +1357,62 @@
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI519</callsign>
+    <callsign>BI423</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>4/10:15:00</time>
+      <time>4/10:30:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
-      <port>VTBS</port>
-      <time>4/13:00:00</time>
+      <port>WSSS</port>
+      <time>4/12:35:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI520</callsign>
+    <callsign>BI424</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>VTBS</port>
-      <time>4/13:45:00</time>
+      <port>WSSS</port>
+      <time>4/13:25:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>4/16:30:00</time>
+      <time>4/15:30:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI651</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>4/07:15:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>RKSI</port>
+      <time>4/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI652</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>RKSI</port>
+      <time>4/13:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>4/19:05:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1094,12 +1422,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>4/10:40:00</time>
+      <time>4/10:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>RPLL</port>
-      <time>4/12:45:00</time>
+      <time>4/12:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1109,12 +1437,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>RPLL</port>
-      <time>4/13:25:00</time>
+      <time>4/13:20:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>4/15:30:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI735</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>4/03:00:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WIII</port>
+      <time>4/05:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI736</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WIII</port>
+      <time>4/06:10:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>4/15:35:00</time>
+      <time>4/08:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1124,12 +1482,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>4/13:10:00</time>
+      <time>4/12:25:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WADD</port>
-      <time>4/15:30:00</time>
+      <time>4/14:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1141,7 +1499,7 @@
       <port>WADD</port>
       <time>4/23:10:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>5/01:35:00</time>
@@ -1149,47 +1507,77 @@
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI825</callsign>
+    <callsign>BI795</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>4/08:25:00</time>
+      <time>4/11:40:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
-      <port>WBKK</port>
-      <time>4/09:05:00</time>
+      <port>WARR</port>
+      <time>4/13:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI826</callsign>
+    <callsign>BI796</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>WBKK</port>
-      <time>4/09:35:00</time>
+      <port>WARR</port>
+      <time>4/23:10:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>4/10:15:00</time>
+      <time>5/01:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI827</callsign>
+    <callsign>BI873</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>4/11:15:00</time>
+      <time>4/10:25:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WMKK</port>
+      <time>4/12:45:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI874</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WMKK</port>
+      <time>4/13:35:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>4/15:50:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI821</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>4/23:30:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
-      <time>4/11:55:00</time>
+      <time>5/00:10:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1199,12 +1587,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>4/00:50:00</time>
+      <time>4/00:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>4/01:30:00</time>
+      <time>4/01:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>5/11:45:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>5/20:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>5/21:50:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>6/05:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1216,7 +1634,7 @@
       <port>WBSB</port>
       <time>5/10:20:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VVTS</port>
       <time>5/12:15:00</time>
@@ -1231,10 +1649,40 @@
       <port>VVTS</port>
       <time>5/13:00:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>5/14:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI423</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>5/10:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>5/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI424</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>5/13:25:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>5/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1246,7 +1694,7 @@
       <port>WBSB</port>
       <time>5/02:55:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VTBS</port>
       <time>5/05:40:00</time>
@@ -1259,12 +1707,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>VTBS</port>
-      <time>5/06:40:00</time>
+      <time>5/06:30:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>5/09:25:00</time>
+      <time>5/09:15:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1274,12 +1722,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>5/02:25:00</time>
+      <time>5/02:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>ZSPD</port>
-      <time>5/06:35:00</time>
+      <time>5/06:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1291,10 +1739,10 @@
       <port>ZSPD</port>
       <time>5/07:35:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>5/12:25:00</time>
+      <time>5/12:15:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1304,12 +1752,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>5/10:40:00</time>
+      <time>5/10:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>RPLL</port>
-      <time>5/12:45:00</time>
+      <time>5/12:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1319,42 +1767,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>RPLL</port>
-      <time>5/13:25:00</time>
+      <time>5/13:20:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>5/15:35:00</time>
-    </arrival>
-    <repeat>WEEK</repeat>
-  </flight>
-  <flight>
-    <callsign>BI735</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WBSB</port>
-      <time>5/03:40:00</time>
-    </departure>
-    <cruise-alt>380</cruise-alt>
-    <arrival>
-      <port>WIII</port>
-      <time>5/06:00:00</time>
-    </arrival>
-    <repeat>WEEK</repeat>
-  </flight>
-  <flight>
-    <callsign>BI736</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WIII</port>
-      <time>5/06:50:00</time>
-    </departure>
-    <cruise-alt>370</cruise-alt>
-    <arrival>
-      <port>WBSB</port>
-      <time>5/09:10:00</time>
+      <time>5/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1364,27 +1782,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>5/15:45:00</time>
+      <time>5/16:30:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WIII</port>
-      <time>5/18:05:00</time>
+      <time>5/18:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI736</callsign>
+    <callsign>BI738</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WIII</port>
-      <time>5/23:00:00</time>
+      <time>5/23:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>6/01:20:00</time>
+      <time>6/01:35:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1394,12 +1812,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>5/12:05:00</time>
+      <time>5/13:15:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WARR</port>
-      <time>5/14:15:00</time>
+      <time>5/15:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1409,12 +1827,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WARR</port>
-      <time>5/23:30:00</time>
+      <time>5/23:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>6/01:45:00</time>
+      <time>6/01:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1424,12 +1842,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>5/08:25:00</time>
+      <time>5/07:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
-      <time>5/09:05:00</time>
+      <time>5/08:00:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1439,12 +1857,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>5/09:35:00</time>
+      <time>5/08:40:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>5/09:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI873</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>5/10:25:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WMKK</port>
+      <time>5/12:45:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI874</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WMKK</port>
+      <time>5/13:35:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>5/10:15:00</time>
+      <time>5/15:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1456,7 +1904,7 @@
       <port>WBSB</port>
       <time>5/13:30:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
       <time>5/14:10:00</time>
@@ -1469,12 +1917,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>5/00:50:00</time>
+      <time>5/00:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>5/01:30:00</time>
+      <time>5/01:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1484,12 +1932,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>6/03:10:00</time>
+      <time>6/03:05:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>405</cruise-alt>
     <arrival>
       <port>OEJN</port>
-      <time>6/13:40:00</time>
+      <time>6/13:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1499,12 +1947,72 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>OEJN</port>
-      <time>6/15:40:00</time>
+      <time>6/15:20:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>0/01:05:00</time>
+      <time>0/01:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>6/11:45:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>6/20:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>6/21:50:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>0/05:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI423</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>6/10:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>6/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI424</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>6/13:25:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>6/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1516,7 +2024,7 @@
       <port>WBSB</port>
       <time>6/02:55:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VTBS</port>
       <time>6/05:40:00</time>
@@ -1524,32 +2032,47 @@
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI519</callsign>
+    <callsign>BI514</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>WBSB</port>
-      <time>6/10:15:00</time>
+      <port>VTBS</port>
+      <time>6/06:30:00</time>
     </departure>
     <cruise-alt>385</cruise-alt>
     <arrival>
-      <port>VTBS</port>
-      <time>6/13:00:00</time>
+      <port>WBSB</port>
+      <time>6/09:15:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI520</callsign>
+    <callsign>BI683</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>VTBS</port>
-      <time>6/13:45:00</time>
+      <port>WBSB</port>
+      <time>6/04:00:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>RPLL</port>
+      <time>6/06:10:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI684</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>RPLL</port>
+      <time>6/07:00:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>6/16:30:00</time>
+      <time>6/09:10:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1559,12 +2082,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>6/10:40:00</time>
+      <time>6/10:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>RPLL</port>
-      <time>6/12:45:00</time>
+      <time>6/12:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1574,12 +2097,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>RPLL</port>
-      <time>6/13:25:00</time>
+      <time>6/13:20:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>6/15:35:00</time>
+      <time>6/15:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1589,12 +2112,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>6/13:10:00</time>
+      <time>6/12:25:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WADD</port>
-      <time>6/15:30:00</time>
+      <time>6/14:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1606,7 +2129,7 @@
       <port>WADD</port>
       <time>6/23:10:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>0/01:35:00</time>
@@ -1619,12 +2142,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>6/08:25:00</time>
+      <time>6/07:20:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
-      <time>6/09:05:00</time>
+      <time>6/08:00:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1634,12 +2157,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>6/09:35:00</time>
+      <time>6/08:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>6/10:15:00</time>
+      <time>6/09:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1651,7 +2174,7 @@
       <port>WBSB</port>
       <time>6/11:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
       <time>6/11:55:00</time>
@@ -1664,12 +2187,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>6/00:50:00</time>
+      <time>6/00:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>6/01:30:00</time>
+      <time>6/01:20:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>0/11:45:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>OMDB</port>
+      <time>0/20:40:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI097</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>OMDB</port>
+      <time>0/21:50:00</time>
+    </departure>
+    <cruise-alt>405</cruise-alt>
+    <arrival>
+      <port>EGLL</port>
+      <time>1/05:25:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1681,7 +2234,7 @@
       <port>WBSB</port>
       <time>0/10:20:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VVTS</port>
       <time>0/12:15:00</time>
@@ -1696,10 +2249,40 @@
       <port>VVTS</port>
       <time>0/13:00:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>0/14:55:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI423</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>0/10:30:00</time>
+    </departure>
+    <cruise-alt>400</cruise-alt>
+    <arrival>
+      <port>WSSS</port>
+      <time>0/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI424</callsign>
+    <required-aircraft>RBA-788</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WSSS</port>
+      <time>0/13:35:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>0/15:40:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1711,7 +2294,7 @@
       <port>WBSB</port>
       <time>0/10:15:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>VTBS</port>
       <time>0/13:00:00</time>
@@ -1726,7 +2309,7 @@
       <port>VTBS</port>
       <time>0/13:45:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>0/16:30:00</time>
@@ -1734,32 +2317,62 @@
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI683</callsign>
+    <callsign>BI627</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>0/04:00:00</time>
+      <time>0/07:15:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
-      <port>RPLL</port>
-      <time>0/06:05:00</time>
+      <port>ZGNN</port>
+      <time>0/10:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
   <flight>
-    <callsign>BI684</callsign>
+    <callsign>BI628</callsign>
     <required-aircraft>RBA-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>RPLL</port>
-      <time>0/07:00:00</time>
+      <port>ZGNN</port>
+      <time>0/11:50:00</time>
+    </departure>
+    <cruise-alt>385</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>0/15:15:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI651</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>0/07:15:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
+      <port>RKSI</port>
+      <time>0/12:35:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI652</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>RKSI</port>
+      <time>0/13:30:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
       <port>WBSB</port>
-      <time>0/09:10:00</time>
+      <time>0/19:05:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1769,12 +2382,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>0/04:00:00</time>
+      <time>0/03:00:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WIII</port>
-      <time>0/06:20:00</time>
+      <time>0/05:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1784,42 +2397,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WIII</port>
-      <time>0/07:10:00</time>
-    </departure>
-    <cruise-alt>370</cruise-alt>
-    <arrival>
-      <port>WBSB</port>
-      <time>0/09:30:00</time>
-    </arrival>
-    <repeat>WEEK</repeat>
-  </flight>
-  <flight>
-    <callsign>BI737</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WBSB</port>
-      <time>0/15:45:00</time>
+      <time>0/06:10:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
-      <port>WIII</port>
-      <time>0/18:05:00</time>
-    </arrival>
-    <repeat>WEEK</repeat>
-  </flight>
-  <flight>
-    <callsign>BI736</callsign>
-    <required-aircraft>RBA-320</required-aircraft>
-    <fltrules>IFR</fltrules>
-    <departure>
-      <port>WIII</port>
-      <time>0/23:00:00</time>
-    </departure>
-    <cruise-alt>370</cruise-alt>
-    <arrival>
       <port>WBSB</port>
-      <time>1/01:20:00</time>
+      <time>0/08:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1831,7 +2414,7 @@
       <port>WBSB</port>
       <time>0/13:10:00</time>
     </departure>
-    <cruise-alt>375</cruise-alt>
+    <cruise-alt>385</cruise-alt>
     <arrival>
       <port>WADD</port>
       <time>0/15:30:00</time>
@@ -1846,7 +2429,7 @@
       <port>WADD</port>
       <time>0/23:10:00</time>
     </departure>
-    <cruise-alt>385</cruise-alt>
+    <cruise-alt>395</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>1/01:35:00</time>
@@ -1859,12 +2442,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBSB</port>
-      <time>0/12:05:00</time>
+      <time>0/11:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WARR</port>
-      <time>0/14:15:00</time>
+      <time>0/13:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1874,12 +2457,42 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WARR</port>
-      <time>0/23:30:00</time>
+      <time>0/23:10:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>1/01:45:00</time>
+      <time>1/01:25:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI873</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WBSB</port>
+      <time>0/10:25:00</time>
+    </departure>
+    <cruise-alt>390</cruise-alt>
+    <arrival>
+      <port>WMKK</port>
+      <time>0/12:45:00</time>
+    </arrival>
+    <repeat>WEEK</repeat>
+  </flight>
+  <flight>
+    <callsign>BI874</callsign>
+    <required-aircraft>RBA-320</required-aircraft>
+    <fltrules>IFR</fltrules>
+    <departure>
+      <port>WMKK</port>
+      <time>0/13:35:00</time>
+    </departure>
+    <cruise-alt>380</cruise-alt>
+    <arrival>
+      <port>WBSB</port>
+      <time>0/15:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1889,12 +2502,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WBKK</port>
-      <time>0/00:50:00</time>
+      <time>0/00:40:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
-      <time>0/01:30:00</time>
+      <time>0/01:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
@@ -1906,7 +2519,7 @@
       <port>WBSB</port>
       <time>0/10:25:00</time>
     </departure>
-    <cruise-alt>370</cruise-alt>
+    <cruise-alt>380</cruise-alt>
     <arrival>
       <port>WBKK</port>
       <time>0/11:05:00</time>
@@ -1921,7 +2534,7 @@
       <port>WBKK</port>
       <time>0/11:35:00</time>
     </departure>
-    <cruise-alt>380</cruise-alt>
+    <cruise-alt>390</cruise-alt>
     <arrival>
       <port>WBSB</port>
       <time>0/12:15:00</time>

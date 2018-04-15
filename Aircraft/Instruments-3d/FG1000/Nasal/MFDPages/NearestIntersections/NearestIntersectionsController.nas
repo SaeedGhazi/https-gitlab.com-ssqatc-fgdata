@@ -99,7 +99,7 @@ var NearestIntersectionsController =
       "MFD",
       me.getDeviceID(),
       notifications.PFDEventNotification.NavData,
-      {Id: "NavDataWithinRange", Value: type});
+      {Id: "NavDataWithinRange", Value: { type: type } });
 
     var response = me._transmitter.NotifyAll(notification);
 

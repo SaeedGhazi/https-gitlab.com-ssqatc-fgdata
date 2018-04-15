@@ -130,11 +130,10 @@ setTextElement : func(symbolName, value) {
 },
 
 setTextElementLat : func(symbolName, value) {
-  var degrees_part = int(value);
-
-  if (degrees_part == nil) {
+  if ((value == nil) or (int(value) == nil)) {
     me.setTextElement(symbolName, "_ __°__.__'");
   } else {
+    var degrees_part = int(value);
     var minutes_part = 100.0 * (value - degrees_part);
     if (value < 0.0) {
       me.setTextElement(symbolName, sprintf("S %2d°%.2f'", -degrees_part, -minutes_part));
@@ -145,11 +144,10 @@ setTextElementLat : func(symbolName, value) {
 },
 
 setTextElementLon : func(symbolName, value) {
-  var degrees_part = int(value);
-
-  if (degrees_part == nil) {
+  if ((value == nil) or (int(value) == nil)) {
     me.setTextElement(symbolName, "____°__.__'");
   } else {
+    var degrees_part = int(value);
     var minutes_part = 100.0 * (value - degrees_part);
     if (value < 0.0) {
       me.setTextElement(symbolName, sprintf("W%3d°%.2f'", -degrees_part, -minutes_part));
@@ -159,6 +157,21 @@ setTextElementLon : func(symbolName, value) {
   }
 },
 
+setTextElementBearing : func(symbolName, brg) {
+  if ((brg == nil) or (brg == "")) {
+    me.setTextElement(symbolName, "___°");
+  } else {
+    me.setTextElement(symbolName, sprintf("%i°", brg));
+  }
+},
+
+setTextElementDistance : func(symbolName, dst) {
+  if ((dst == nil) or (dst == "")) {
+    me.setTextElement(symbolName, "___nm");
+  } else {
+    me.setTextElement(symbolName, sprintf("%.1fnm", dst));
+  }
+},
 
 # Function to undo any colors set by display_toggle when loading a new menu
 resetMenuColors : func() {

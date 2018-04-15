@@ -29,39 +29,100 @@ var IntersectionInfoController =
     return obj;
   },
 
-
   # Input Handling
   handleCRSR : func() {
     me._crsrToggle = (! me._crsrToggle);
     if (me._crsrToggle) {
+      me._page.dataEntry.highlightElement();
     } else {
-      me._page.hideCRSR();
+      me._page.dataEntry.unhighlightElement();
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
   handleFMSInner : func(value) {
     if (me._crsrToggle == 1) {
-      # Scroll through whatever is the current list
+      me._page.dataEntry.incrSmall(value);
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-      # Pass to the page group controller to display and scroll through the page group menu
       return me._page.mfd.SurroundController.handleFMSInner(value);
     }
   },
   handleFMSOuter : func(value) {
     if (me._crsrToggle == 1) {
+      me._page.dataEntry.incrLarge(value);
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
-      # Pass to the page group controller to display and scroll through the page group menu
       return me._page.mfd.SurroundController.handleFMSOuter(value);
     }
   },
   handleEnter : func(value) {
     if (me._crsrToggle == 1) {
+      var id = me._page.dataEntry.enterElement();
+      me.getIntersection(id);
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     }
+  },
+  handleClear : func(value) {
+    if (me._crsrToggle == 1) {
+      me._page.dataEntry.clearElement();
+      return emesary.Transmitter.ReceiptStatus_Finished;
+    } else {
+      return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    }
+  },
+  handleRange : func(val)
+  {
+    # Pass any range entries to the NavMapController
+    me._page.Map.handleRange(val);
+  },
+
+  # Retrieve intersection information for the provided id and display it.
+  getIntersection : func(id) {
+    var navdata = nil;
+    var vordata = nil;
+
+    # Use Emesary to get the intersection
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me.getDeviceID(),
+      notifications.PFDEventNotification.NavData,
+      {Id: "NavAidByID", Value: { id: id, type : "fix" } } );
+
+    var response = me._transmitter.NotifyAll(notification);
+    var retval = notification.EventParameter.Value;
+
+    if ((!me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
+
+      # Simply take the first value.  Should handle duplicates.
+      navdata = retval[0];
+
+      # Get the nearest VOR to the intersection
+      var params = { lat: navdata.lat,
+                     lon: navdata.lon,
+                     type : "vor" };
+
+      notification = notifications.PFDEventNotification.new(
+        "MFD",
+        me.getDeviceID(),
+        notifications.PFDEventNotification.NavData,
+        {Id: "NavDataWithinRange", Value: params });
+
+      response = me._transmitter.NotifyAll(notification);
+      retval = notification.EventParameter.Value;
+
+      if ((!me._transmitter.IsFailed(response)) and (size(retval) > 0)) {
+        var crsAndDst = courseAndDistance(navdata, retval[0]);
+        vordata = {};
+        vordata.id = retval[0].id;
+        vordata.crs = crsAndDst[0];
+        vordata.dst = crsAndDst[1];
+      }
+    }
+
+    # Display the retrieved data.
+    me._page.update(navdata, vordata);
   },
 
   # Reset controller if required when the page is displayed or hidden
@@ -71,5 +132,7 @@ var IntersectionInfoController =
   offdisplay : func() {
     me.DeRegisterWithEmesary();
   },
+
+
 
 };

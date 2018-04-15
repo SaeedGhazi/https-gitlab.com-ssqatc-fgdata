@@ -65,7 +65,7 @@ getNearestAirports : func()
 },
 
 # Find the nearest nav aids of a given type within 200nm, to a maximum of 25.
-getNavDataWithinRange: func(type)
+getNavDataWithinRange: func(params)
 {
   # To make this more efficient for areas with a high density of fixes, we'll try
   # a small radius first and expand until we have reached 200nm or have 25 nav aids.
@@ -74,7 +74,12 @@ getNavDataWithinRange: func(type)
 
   while ((radius <= 200) and (size(navdata) < 25)) {
     radius = radius + 50;
-    navdata = findNavaidsWithinRange(radius, type);
+    if ((params["lat"] == nil) and (params["lon"] == nil)) {
+      navdata = findNavaidsWithinRange(radius, params.type);
+    } else {
+      navdata = findNavaidsWithinRange(params.lat, params.lon, radius, params.type);
+
+    }
   }
 
   if (size(navdata) > 25) {

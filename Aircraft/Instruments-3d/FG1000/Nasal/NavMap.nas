@@ -266,7 +266,7 @@ var NavMap = {
     me._map.show();
   },
   hide : func() {
-    me._map.hide();
+    if (me._map != nil) me._map.hide();
     if (NavMap.LAZY_LOADING) me._map = nil;
   },
   setVisible : func(visible) {
@@ -274,7 +274,7 @@ var NavMap = {
       if (NavMap.LAZY_LOADING) me.createMapElement();
       me._map.setVisible(visible);
     } else {
-      me._map.setVisible(visible);
+      if (me._map != nil) me._map.setVisible(visible);
       if (NavMap.LAZY_LOADING) me._map = nil;
     }
   },

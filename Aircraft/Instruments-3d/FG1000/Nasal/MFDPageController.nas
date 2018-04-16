@@ -1,4 +1,4 @@
-# Copyright 2018 Stuart Buchanan
+## Copyright 2018 Stuart Buchanan
 # This file is part of FlightGear.
 #
 # Foobar is free software: you can redistribute it and/or modify
@@ -212,5 +212,22 @@ getDeviceID : func() {
     return me._page.mfd.getDeviceID();
 },
 
+# Simply query of the NavDataInterface
+getNavData : func(queryID, value=nil) {
+  # Use Emesary to get the requested data
+  var notification = notifications.PFDEventNotification.new(
+    "MFD",
+    me.getDeviceID(),
+    notifications.PFDEventNotification.NavData,
+    {Id: queryID, Value: value});
+
+  var response = me._transmitter.NotifyAll(notification);
+
+  if (! me._transmitter.IsFailed(response)) {
+    return notification.EventParameter.Value;
+  } else {
+    return nil;
+  }
+},
 
 };

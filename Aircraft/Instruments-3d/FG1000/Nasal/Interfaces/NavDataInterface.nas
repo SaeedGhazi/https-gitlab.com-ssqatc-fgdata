@@ -366,6 +366,72 @@ setDefaultDTO : func(id)
   me._defaultDTO = id;
 },
 
+
+# Find the nearest Air Route Traffic Control Center or equivalent.
+# As we don't have that data right now, we simply return some placeholder
+getNearestATRCC : func()
+{
+  var atrcc = {};
+  atrcc.name = "NONE AVAILABLE";
+  atrcc.lat = 0;
+  atrcc.lon = 0;
+  atrcc.brg = nil;
+  atrcc.dis = nil;
+  atrcc.freqs = [];  # an array of frequencies for the ATRCC
+  return atrcc;
+},
+
+# Find the nearest Flight Service Station
+# As we don't have that data right now, we simply return some placeholder
+getNearestFSS : func()
+{
+  var fss = {};
+  fss.name = "NONE AVAILABLE";
+  fss.lat = nil;
+  fss.lon = nil;
+  fss.brg = nil;
+  fss.dis = nil;
+  fss.freqs = [];  # an array of frequencies for the ATRCC
+  return fss;
+},
+
+# Find the nearest weather information.  We do this simply by picking up
+# appropriate frequencies from the airports frequencies within 200nm.
+getNearestWX : func()
+{
+  # To make this more efficient for areas with a high density of airports, we'll try
+  # a small radius first and expand until we have reached 200nm or have 25 frequencies.
+  var radius = 0;
+  var freqs = [];
+
+  while ((radius <= 200) and (size(freqs) < 25)) {
+    freqs = [];
+    radius = radius + 50;
+    apts = findAirportsWithinRange(radius);
+    foreach (var apt; apts) {
+      var apt_comms = apt.comms();
+      if (size(apt_comms) > 0) {
+        # Airport has one or more frequencies assigned to it.
+        foreach (var c; apt_comms) {
+          if ((c.ident == "ATIS") or (c.ident == "ASOS")) {
+            var freq = {
+              id: apt.id,
+              type : c.ident,
+              freq: c.frequency,
+              lat : apt.lat,
+              lon : apt.lon,
+            };
+
+            append(freqs, freq);
+          }
+        }
+      }
+    }
+  }
+
+  return freqs;
+},
+
 RegisterWithEmesary : func()
 {
   if (me._recipient == nil){
@@ -447,6 +513,18 @@ RegisterWithEmesary : func()
           notification.EventParameter.Value = controller.getChecklists();
           return emesary.Transmitter.ReceiptStatus_Finished;
         }
+        if (id == "GetNearestATRCC") {
+          notification.EventParameter.Value = controller.getNearestATRCC();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "GetNearestFSS") {
+          notification.EventParameter.Value = controller.getNearestFSS();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
+        if (id == "GetNearestWX") {
+          notification.EventParameter.Value = controller.getNearestWX();
+          return emesary.Transmitter.ReceiptStatus_Finished;
+        }
       }
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     };
@@ -470,7 +548,5 @@ start : func() {
 stop : func() {
   me.DeRegisterWithEmesary();
 },
-
-
 
 };

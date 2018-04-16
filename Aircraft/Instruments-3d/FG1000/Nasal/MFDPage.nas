@@ -190,7 +190,7 @@ setTextElementNavFreq : func(symbolName, freq) {
   if ((freq == nil) or (freq == "")) {
     me.setTextElement(symbolName, "___.__");
   } else {
-    me.setTextElement(symbolName, sprintf("%.2f", freq));
+    me.setTextElement(symbolName, sprintf("%0.02f", freq));
   }
 },
 
@@ -199,7 +199,7 @@ setTextElementComFreq : func(symbolName, freq) {
     me.setTextElement(symbolName, "___.___");
   } else {
     # 8.33Hz spacing
-    me.setTextElement(symbolName, sprintf("%.3f", freq));
+    me.setTextElement(symbolName, sprintf("%0.03f", freq));
   }
 },
 

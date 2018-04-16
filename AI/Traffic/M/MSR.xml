@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
-
 <!-- From Timetable Week of 20JUN16 - Author Ian Tolosa -->
-
 <trafficlist>
-  <aircraft>
+ <aircraft>
     <model>Aircraft/738/738-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
@@ -31,7 +29,7 @@
     <registration>SU-GCN</registration>
     <heavy>false</heavy>
   </aircraft>
-  <aircraft>
+   <aircraft>
     <model>Aircraft/738/738-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
@@ -368,7 +366,7 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -382,7 +380,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -396,7 +394,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -410,7 +408,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -424,7 +422,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -438,7 +436,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -452,7 +450,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -466,7 +464,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -480,7 +478,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>
@@ -494,7 +492,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/A320/A320-Egyptair.xml</model>
+    <model>Aircraft/A320/A320-EgyptAir.xml</model>
     <livery>MSR</livery>
     <airline>MSR</airline>
     <home-port>HECA</home-port>

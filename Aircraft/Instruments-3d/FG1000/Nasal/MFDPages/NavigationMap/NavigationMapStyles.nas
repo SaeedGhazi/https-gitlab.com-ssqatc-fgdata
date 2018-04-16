@@ -63,8 +63,8 @@ var NavigationMapStyles =
     me.Styles.FLT.line_width = 3;
 
     me.Styles.FIX = {};
-    me.Styles.FIX.color = [0,0,0];  # White outline
-    me.Styles.FIX.fill_color = [1,1,1,1]; # Black fill
+    me.Styles.FIX.color = [0,0,0];  # Black outline
+    me.Styles.FIX.fill_color = [1,1,1,1]; # White fill
     me.Styles.FIX.scale_factor = 0.5; # 50%
 
     me.Styles.FIX.text_offset = [0, -12];

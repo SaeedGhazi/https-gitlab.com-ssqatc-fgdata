@@ -165,11 +165,41 @@ setTextElementBearing : func(symbolName, brg) {
   }
 },
 
+setTextElementMagVar : func(symbolName, brg) {
+  if ((brg == nil) or (brg == "")) {
+    me.setTextElement(symbolName, "___°");
+  } else {
+    if (brg < 0.0) {
+      me.setTextElement(symbolName, sprintf("%i°W", -brg));
+    } else {
+      me.setTextElement(symbolName, sprintf("%i°E", brg));
+    }
+  }
+},
+
+
 setTextElementDistance : func(symbolName, dst) {
   if ((dst == nil) or (dst == "")) {
     me.setTextElement(symbolName, "___nm");
   } else {
     me.setTextElement(symbolName, sprintf("%.1fnm", dst));
+  }
+},
+
+setTextElementNavFreq : func(symbolName, freq) {
+  if ((freq == nil) or (freq == "")) {
+    me.setTextElement(symbolName, "___.__");
+  } else {
+    me.setTextElement(symbolName, sprintf("%.2f", freq));
+  }
+},
+
+setTextElementComFreq : func(symbolName, freq) {
+  if ((freq == nil) or (freq == "")) {
+    me.setTextElement(symbolName, "___.___");
+  } else {
+    # 8.33Hz spacing
+    me.setTextElement(symbolName, sprintf("%.3f", freq));
   }
 },
 

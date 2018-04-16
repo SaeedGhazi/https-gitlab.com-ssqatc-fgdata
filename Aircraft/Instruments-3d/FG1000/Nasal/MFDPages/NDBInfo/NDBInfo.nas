@@ -26,12 +26,89 @@ var NDBInfo =
       ],
     };
 
+    # Dynamic text elements in the SVG file.  In the SVG these have an "NDBInfo" prefix.
+    textelements = [
+      "ID",
+      "Facility",
+      "NearestCity",
+      "Type",
+      "Region",
+      "Lat",
+      "Lon",
+      "Freq",
+      "AirportID",
+      "AirportCRS",
+      "AirportDST"
+    ];
+
+    obj.addTextElements(textelements);
+
+    # Data Entry information.  Keyed from the name of the element, which must
+    # be one of the textelements above.  Each data element maps to a set of
+    # text elements in the SVG of the form [PageName][TextElement]{0...n}, each
+    # representing a single character for data entry.
+    #
+    # .size is the number of characters of data entry
+    # .chars is the set of characters, used to scroll through using the small
+    # FMS knob.
+    obj.dataEntry = PFD.DataEntryElement.new(obj.pageName, svg, "ID", "", 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+
+    obj.Map = fg1000.NavMap.new(
+      obj,
+      obj.getElement("NavMap"),
+      [860,400],
+      "",
+      -50,
+      0,
+      1);
+
     obj.topMenu(device, obj, nil);
 
     obj.setController(fg1000.NDBInfoController.new(obj, svg));
+    obj.update(nil, nil);
 
     return obj;
   },
+
+  update : func(navdata, aptdata) {
+    if (navdata != nil) {
+      me.setTextElement("ID",  navdata.id);
+      me.setTextElement("Facility", "");
+      me.setTextElement("NearestCity", "");
+      me.setTextElement("Type", "");
+      me.setTextElement("Region", "");
+
+      me.setTextElementLat("Lat", navdata.lat);
+      me.setTextElementLon("Lon", navdata.lon);
+      me.setTextElementNavFreq("Freq", navdata.frequency / 100.0);
+
+      me.Map.getController().setPosition(navdata.lat, navdata.lon);
+      me.Map.show();
+    } else {
+      me.setTextElement("ID",  "####");
+      me.setTextElement("Facility", "_______");
+      me.setTextElement("NearestCity", "_______");
+      me.setTextElement("Type", "_______");
+      me.setTextElement("Region", "_______");
+
+      me.setTextElementLat("Lat", nil);
+      me.setTextElementLon("Lon", nil);
+      me.setTextElementNavFreq("Freq", "");
+      me.Map.hide();
+    }
+
+    if (aptdata != nil) {
+      var crsAndDst = courseAndDistance(navdata, aptdata);
+      me.setTextElement("AirportID", aptdata.id);
+      me.setTextElementBearing("AirportCRS", aptdata.crs);
+      me.setTextElementDistance("AirportDST", aptdata.dst);
+    } else {
+      me.setTextElement("AirportID", "____");
+      me.setTextElementBearing("AirportCRS", "");
+      me.setTextElementDistance("AirportDST", "");
+    }
+  },
+
   offdisplay : func() {
     me._group.setVisible(0);
 
@@ -42,16 +119,23 @@ var NDBInfo =
       me.device.svg.getElementById(name ~ "-bg").setColorFill(0.0,0.0,0.0);
       me.device.svg.getElementById(name).setColor(1.0,1.0,1.0);
     }
+    me.getElement("NavMap").setVisible(0);
+    me.Map.setVisible(0);
     me.getController().offdisplay();
   },
   ondisplay : func() {
     me._group.setVisible(1);
     me.mfd.setPageTitle(me.title);
+
+    me.getElement("NavMap").setVisible(1);
+    me.Map.setVisible(1);
     me.getController().ondisplay();
   },
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
+    pg.addMenuItem(0, "ENGINE", pg.mfd.EIS, pg.mfd.EIS.engineMenu);
+    pg.addMenuItem(2, "MAP", pg.mfd.NavigationMap, pg.mfd.NavigationMap.mapMenu);
     device.updateMenus();
   },
 

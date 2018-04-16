@@ -78,7 +78,6 @@ getNavDataWithinRange: func(params)
       navdata = findNavaidsWithinRange(radius, params.type);
     } else {
       navdata = findNavaidsWithinRange(params.lat, params.lon, radius, params.type);
-
     }
   }
 
@@ -160,6 +159,8 @@ getChecklists : func()
 {
   var checklists = {};
   var checklistprops = props.globals.getNode("/sim/checklists");
+
+  if (checklistprops == nil) return nil;
 
   var groups = checklistprops.getChildren("group");
 

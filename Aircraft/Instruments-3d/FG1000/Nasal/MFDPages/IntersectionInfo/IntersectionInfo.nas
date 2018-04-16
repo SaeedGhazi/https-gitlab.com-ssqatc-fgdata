@@ -26,8 +26,6 @@ var IntersectionInfo =
       ],
     };
 
-    obj.crsrIdx = 0;
-
     # Dynamic text elements in the SVG file.  In the SVG these have an "IntersectionInfo" prefix.
     textelements = [
       "ID",
@@ -54,10 +52,7 @@ var IntersectionInfo =
     obj.Map = fg1000.NavMap.new(
       obj,
       obj.getElement("NavMap"),
-      #[360, 275],
-      #[fg1000.MAP_PARTIAL.CENTER.X, fg1000.MAP_PARTIAL.CENTER.Y],
       [860,400],
-      #"rect(345, 233, -345, -233)",
       "",
       -50,
       0,
@@ -123,6 +118,8 @@ var IntersectionInfo =
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
+    pg.addMenuItem(0, "ENGINE", pg.mfd.EIS, pg.mfd.EIS.engineMenu);
+    pg.addMenuItem(2, "MAP", pg.mfd.NavigationMap, pg.mfd.NavigationMap.mapMenu);
     device.updateMenus();
   },
 };

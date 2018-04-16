@@ -25,19 +25,6 @@ var element_type = "group"; # we want a group, becomes "me.element"
 #
 var drawVOR = func(group) {
 
-	# Center icon
-	group.createChild("path")
-		.moveTo(-15,0)
-		.lineTo(-7.5,12.5)
-		.lineTo(7.5,12.5)
-		.lineTo(15,0)
-		.lineTo(7.5,-12.5)
-		.lineTo(-7.5,-12.5)
-		.close()
-		.setStrokeLineWidth(line_width)
-		.setColor(icon_color)
-		.set("z-index",-2);
-
 	# Circle around the edge
 	var circle = group.createChild("path")
 		.moveTo(0 -circle_radius,0)
@@ -48,21 +35,13 @@ var drawVOR = func(group) {
 		.setColor(circle_color)
 		.set("z-index",-2);
 
-	# Markings, which need to take into account the magnetic variation.
-	# We should calculate this for each VOR and rotate them, but we don't
-	# have a way to determine the magnetic variation at each VOR site.
-	var mag_var = getprop("/environment/magnetic-variation-deg");
-
-	# Magnetic North marking.
-	var theta = D2R * mag_var;
+	# Magnetic North marking.  Will be rotated later
 	circle.moveTo(0, 0);
-	circle.lineTo(circle_radius * math.sin(theta),
-	              -circle_radius * math.cos(theta));
-
+	circle.lineTo(0, -circle_radius);
 
 	# 10-degree markings
 	for (var i = 0; i < 36; i = i + 1) {
-		theta = D2R * (i * 10.0 + mag_var);
+		theta = D2R * (i * 10.0);
 		# Start at 90% of the circle radius
 		var start_x = 0.9 * circle_radius * math.sin(theta);
 		var start_y = -0.9 * circle_radius * math.cos(theta);
@@ -75,7 +54,7 @@ var drawVOR = func(group) {
 
 	# 5 - degree markings - 5% of radius
 	for (var i = 0; i < 36; i = i + 1) {
-		theta = D2R * (i * 10.0 + 5.0  + mag_var);
+		theta = D2R * (i * 10.0 + 5.0);
 		# Start at 95% of the circle radius
 		var start_x = 0.95 * circle_radius * math.sin(theta);
 		var start_y = -0.95 * circle_radius * math.cos(theta);
@@ -104,7 +83,25 @@ var init = func {
 	);
 	cache.render(me.element, me.style).setScale(me.style.scale_factor);
 
-	# non-cached stuff:
+	# Rotate the symbol to take into account the magnetic variation for the VOR.
+	me.element.setRotation(me.model.magvar * D2R);
+
+	# Center icon
+	me.element.createChild("path")
+		.setRotation(- me.model.magvar * D2R)
+		.moveTo(-15,0)
+		.lineTo(-7.5,12.5)
+		.lineTo(7.5,12.5)
+		.lineTo(15,0)
+		.lineTo(7.5,-12.5)
+		.lineTo(-7.5,-12.5)
+		.close()
+		.setStrokeLineWidth(me.getStyle('line_width', 1))
+		.setColor(me.getStyle('icon_color', [0,0.6,0.85]))
+		.set("z-index",-2);
+
+
+	# non-cached stuff: Symbol in use and labels.
 	if (me.style.show_labels){
 		var txt_offset = me.getStyle('text_offset', [3, 0]);
 		var txt_alignment = me.getStyle('text_alignment', 'center-bottom');
@@ -117,6 +114,7 @@ var init = func {
 		me.text_fix = me.newText(me.model.id).
 		setScale(me.style.scale_factor).
 		setTranslation(txt_offset).
+		setRotation(- me.model.magvar * D2R).
 		setFontSize(txt_size).
 		setAlignment(txt_alignment).
 		setPadding(txt_padding).

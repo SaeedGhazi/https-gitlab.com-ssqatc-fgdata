@@ -90,6 +90,7 @@ var ChecklistController =
   },
 
   selectEmergencyChecklist : func() {
+    if (me._checklist == nil) return;
     # Select the EMERGENCY checklist group, if available.
     var emergency_labels = ["EMERGENCY", "Emergency", "emergency"];
     var group = nil;
@@ -111,6 +112,9 @@ var ChecklistController =
 
   # Input Handling
   handleCRSR : func() {
+    # If there are no checklists then we don't allow the CRSR to be enabled as
+    # there's nothing to do.
+    if (me._checklists == nil) return emesary.Transmitter.ReceiptStatus_Finished;
     me._crsrToggle = (! me._crsrToggle);
     if (me._crsrToggle) {
       me.selectGroup(0);
@@ -171,6 +175,7 @@ var ChecklistController =
   },
   handleEnter : func(value) {
     if (me._crsrToggle == 1) {
+      if (me._checklists ==nil) return emesary.Transmitter.ReceiptStatus_Finished;
       if (me._currentGroup == ChecklistController.UIGROUP.GROUP) {
         # Load the new group, selecting the first checklist in the group
         me._group_selected = me._page.checklistGroupSelect.getValue();

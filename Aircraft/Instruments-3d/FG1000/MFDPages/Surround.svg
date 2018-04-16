@@ -23,11 +23,11 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.9999999"
-     inkscape:cx="723.87385"
-     inkscape:cy="277.88979"
+     inkscape:zoom="0.99999995"
+     inkscape:cx="870.51716"
+     inkscape:cy="353.26675"
      inkscape:document-units="px"
-     inkscape:current-layer="LstPageGroup"
+     inkscape:current-layer="NrstPageGroup"
      showgrid="true"
      inkscape:window-width="2495"
      inkscape:window-height="1416"
@@ -65,7 +65,8 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Surround"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <g
        id="NAV"
        inkscape:label="NAV"
@@ -224,7 +225,7 @@
          sodipodi:linespacing="0%"
          inkscape:label="nav1-selected-freq"
          xml:space="preserve"
-         style="display:inline;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
          x="214.1853"
          y="20.658087"
          id="SurroundNav1SelectedFreq"
@@ -238,7 +239,7 @@
          sodipodi:linespacing="0%"
          inkscape:label="nav1-standby-freq"
          xml:space="preserve"
-         style="display:inline;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
          x="112.3863"
          y="20.658087"
          id="SurroundNav1StandbyFreq"
@@ -252,7 +253,7 @@
          sodipodi:linespacing="0%"
          inkscape:label="nav2-selected-freq"
          xml:space="preserve"
-         style="display:inline;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
          x="214.76868"
          y="41.656574"
          id="SurroundNav2SelectedFreq"
@@ -266,7 +267,7 @@
          sodipodi:linespacing="0%"
          inkscape:label="nav2-standby-freq"
          xml:space="preserve"
-         style="display:inline;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
          x="112.3863"
          y="41.656574"
          id="SurroundNav2StandbyFreq"
@@ -282,7 +283,7 @@
          id="SurroundNav1ID"
          y="21.999998"
          x="219.32292"
-         style="display:inline;font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            style="fill:#ffffff"
            y="21.999998"
@@ -295,7 +296,7 @@
          id="SurroundNav2ID"
          y="47.054035"
          x="219.32292"
-         style="display:inline;font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;font-size:18.66666603px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            style="fill:#ffffff"
            y="47.054035"
@@ -907,7 +908,342 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="PageGroup"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       style="display:inline"
+       id="AuxPageGroup"
+       inkscape:label="#g5464">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.91299999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5333"
+         width="257.08704"
+         height="104.31408"
+         x="768.45648"
+         y="638.22949"
+         inkscape:label="#rect5034" />
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path5187"
+         d="m 770,723 80.56245,-0.42678 4.65533,20.15534 29.68045,0.19822 5.60355,-20.45711 L 1024.875,723"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="TripPlanning"
+         y="653.33002"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5066"><tspan
+           y="653.33002"
+           x="774.98926"
+           id="tspan5191"
+           sodipodi:role="line">TRIP PLANNING</tspan><tspan
+           y="672.08002"
+           x="774.98926"
+           sodipodi:role="line"
+           id="tspan5209" /></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="669.46088"
+         id="Utility"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text5080"><tspan
+           sodipodi:role="line"
+           id="tspan5195"
+           x="774.98926"
+           y="669.46088">UTILITY</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="GPSStatus"
+         y="685.5918"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5084"><tspan
+           y="685.5918"
+           x="774.98926"
+           id="tspan5199"
+           sodipodi:role="line">GPS STATUS</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="701.72266"
+         id="XMRadio"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text5088"><tspan
+           sodipodi:role="line"
+           id="tspan5203"
+           x="774.98926"
+           y="701.72266">XM RADIO</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="SystemStatus"
+         y="717.85352"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5092"><tspan
+           y="717.85352"
+           x="774.98926"
+           id="tspan5207"
+           sodipodi:role="line">SYSTEM STATUS</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="FPLPageGroup"
+       inkscape:label="#g5441">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.75199997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5325"
+         width="257.24811"
+         height="70.710793"
+         x="768.37598"
+         y="671.91327"
+         inkscape:label="#rect5034" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 770,723 115.03391,-0.42678 5.3624,20.15534 29.68045,0.19822 5.60355,-20.45711 L 1025.182,723"
+         id="path5213"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccc" />
+      <text
+         inkscape:label="#text5066"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="685.68018"
+         id="ActiveFlightPlanNarrow"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5217"
+           x="774.98926"
+           y="685.68018">ACTIVE FLIGHT PLAN</tspan><tspan
+           id="tspan5219"
+           sodipodi:role="line"
+           x="774.98926"
+           y="704.43018" /></text>
+      <text
+         inkscape:label="#text5080"
+         sodipodi:linespacing="125%"
+         id="FlightPlanCatalog"
+         y="701.81104"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="701.81104"
+           x="774.98926"
+           id="tspan5223"
+           sodipodi:role="line">FLIGHT PLAN CATALOG</tspan></text>
+      <text
+         inkscape:label="#text5084"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="717.94196"
+         id="StoredFlightPlan"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5227"
+           x="774.98926"
+           y="717.94196">STORED FLIGHT PLAN</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="WPTPageGroup"
+       inkscape:label="#g5660">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.912;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5293"
+         width="257.0878"
+         height="104.13807"
+         x="768.45612"
+         y="638.40588"
+         inkscape:label="#rect5034" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 770,723 39.90381,0.10355 5.18566,19.44823 L 850.25,742.75 855.5,723 l 169.4939,0"
+         id="path5113"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccc" />
+      <text
+         inkscape:label="#text5066"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="653.33002"
+         id="AirportInfo"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5117"
+           x="774.98926"
+           y="653.33002">AIRPORT INFORMATION</tspan></text>
+      <text
+         inkscape:label="#text5080"
+         sodipodi:linespacing="125%"
+         id="IntersectionInfo"
+         y="669.46088"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="669.46088"
+           x="774.98926"
+           id="tspan5121"
+           sodipodi:role="line">INTERSECTION INFORMATION</tspan></text>
+      <text
+         inkscape:label="#text5084"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="685.5918"
+         id="NDBInfo"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5125"
+           x="774.98926"
+           y="685.5918">NDB INFORMATION</tspan></text>
+      <text
+         inkscape:label="#text5088"
+         sodipodi:linespacing="125%"
+         id="VORInfo"
+         y="701.72266"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="701.72266"
+           x="774.98926"
+           id="tspan5129"
+           sodipodi:role="line">VOR INFORMATION</tspan></text>
+      <text
+         inkscape:label="#text5092"
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="717.85352"
+         id="UserWPTInfo"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5133"
+           x="774.98926"
+           y="717.85352">USER WPT INFORMATION</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="MapPageGroup"
+       inkscape:label="#g5531">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.912;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5335-1"
+         width="256.38116"
+         height="104.31533"
+         x="768.0484"
+         y="638.81311"
+         inkscape:label="#rect5034" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5064"
+         d="m 770,723 5,0 5,20 30,0 5,-20 205,0"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="NavigationMap"
+         y="653.33002"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5066"><tspan
+           y="653.33002"
+           x="774.98926"
+           id="tspan5068"
+           sodipodi:role="line">NAVIGATION MAP</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="669.46088"
+         id="TrafficMap"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text5080"><tspan
+           sodipodi:role="line"
+           id="tspan5082"
+           x="774.98926"
+           y="669.46088">TRAFFIC MAP</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="Stormscope"
+         y="685.5918"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5084"><tspan
+           y="685.5918"
+           x="774.98926"
+           id="tspan5086"
+           sodipodi:role="line">STORMSCOPE</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="774.98926"
+         y="701.72266"
+         id="WeatherDataLink"
+         sodipodi:linespacing="125%"
+         inkscape:label="#text5088"><tspan
+           sodipodi:role="line"
+           id="tspan5090"
+           x="774.98926"
+           y="701.72266">WEATHER DATA LINK</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="TAWSB"
+         y="717.85352"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5092"><tspan
+           y="717.85352"
+           x="774.98926"
+           id="tspan5094"
+           sodipodi:role="line">TAWS-B</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="LstPageGroup"
+       inkscape:label="#g5402">
+      <rect
+         inkscape:label="#rect5034"
+         y="698"
+         x="768.45648"
+         height="44.543579"
+         width="257.08698"
+         id="rect5335"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.91299999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path5239"
+         d="m 770,723 155.69255,-0.42678 4.30174,20.15534 25.08425,0.19822 5.07322,-20.45711 64.26764,0.70711"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="Checklist"
+         y="717.85352"
+         x="774.98926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"
+         inkscape:label="#text5066"><tspan
+           y="717.85352"
+           x="774.98926"
+           id="tspan5243"
+           sodipodi:role="line">CHECKLISTS</tspan><tspan
+           y="736.60352"
+           x="774.98926"
+           sodipodi:role="line"
+           id="tspan5245" /></text>
+    </g>
     <g
        style="display:inline"
        id="NrstPageGroup"
@@ -919,10 +1255,10 @@
          height="136.18277"
          width="255.95914"
          id="rect5331"
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.04084003;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 770,723.22411 189.42136,0 4.30174,19.50445 36.6087,-0.17678 5.3233,-19.32767 14.3449,0"
+         d="m 770,723.22411 189.42136,0 4.30174,19.50445 36.6087,-0.17678 5.3233,-19.32767 18.9699,0"
          id="path5265"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="cccccc" />
@@ -1014,340 +1350,6 @@
            id="tspan5347"
            x="774.98926"
            y="637.28754">NEAREST INTERSECTIONS</tspan></text>
-    </g>
-    <g
-       style="display:inline"
-       id="WPTPageGroup"
-       inkscape:label="#g5660">
-      <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.91218525;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect5293"
-         width="257.0878"
-         height="104.13807"
-         x="768.45612"
-         y="638.40588"
-         inkscape:label="#rect5034" />
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 770,723 39.90381,0.10355 5.18566,19.44823 L 850.25,742.75 855.5,723 1020,723"
-         id="path5113"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccccc" />
-      <text
-         inkscape:label="#text5066"
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="653.33002"
-         id="AirportInfo"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan5117"
-           x="774.98926"
-           y="653.33002">AIRPORT INFORMATION</tspan></text>
-      <text
-         inkscape:label="#text5080"
-         sodipodi:linespacing="125%"
-         id="IntersectionInfo"
-         y="669.46088"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           y="669.46088"
-           x="774.98926"
-           id="tspan5121"
-           sodipodi:role="line">INTERSECTION INFORMATION</tspan></text>
-      <text
-         inkscape:label="#text5084"
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="685.5918"
-         id="NDBInfo"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan5125"
-           x="774.98926"
-           y="685.5918">NDB INFORMATION</tspan></text>
-      <text
-         inkscape:label="#text5088"
-         sodipodi:linespacing="125%"
-         id="VORInfo"
-         y="701.72266"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           y="701.72266"
-           x="774.98926"
-           id="tspan5129"
-           sodipodi:role="line">VOR INFORMATION</tspan></text>
-      <text
-         inkscape:label="#text5092"
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="717.85352"
-         id="UserWPTInfo"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan5133"
-           x="774.98926"
-           y="717.85352">USER WPT INFORMATION</tspan></text>
-    </g>
-    <g
-       style="display:inline"
-       id="AuxPageGroup"
-       inkscape:label="#g5464">
-      <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.91295445;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect5333"
-         width="257.08704"
-         height="104.31408"
-         x="768.45648"
-         y="638.22949"
-         inkscape:label="#rect5034" />
-      <path
-         sodipodi:nodetypes="cccccc"
-         inkscape:connector-curvature="0"
-         id="path5187"
-         d="m 770,723 80.56245,-0.42678 4.65533,20.15534 29.68045,0.19822 5.60355,-20.45711 L 1020,723"
-         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="125%"
-         id="TripPlanning"
-         y="653.33002"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5066"><tspan
-           y="653.33002"
-           x="774.98926"
-           id="tspan5191"
-           sodipodi:role="line">TRIP PLANNING</tspan><tspan
-           y="672.08002"
-           x="774.98926"
-           sodipodi:role="line"
-           id="tspan5209" /></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="669.46088"
-         id="Utility"
-         sodipodi:linespacing="125%"
-         inkscape:label="#text5080"><tspan
-           sodipodi:role="line"
-           id="tspan5195"
-           x="774.98926"
-           y="669.46088">UTILITY</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="GPSStatus"
-         y="685.5918"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5084"><tspan
-           y="685.5918"
-           x="774.98926"
-           id="tspan5199"
-           sodipodi:role="line">GPS STATUS</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="701.72266"
-         id="XMRadio"
-         sodipodi:linespacing="125%"
-         inkscape:label="#text5088"><tspan
-           sodipodi:role="line"
-           id="tspan5203"
-           x="774.98926"
-           y="701.72266">XM RADIO</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="SystemStatus"
-         y="717.85352"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5092"><tspan
-           y="717.85352"
-           x="774.98926"
-           id="tspan5207"
-           sodipodi:role="line">SYSTEM STATUS</tspan></text>
-    </g>
-    <g
-       style="display:inline"
-       id="FPLPageGroup"
-       inkscape:label="#g5441">
-      <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.75189382;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect5325"
-         width="257.24811"
-         height="70.710793"
-         x="768.37598"
-         y="671.91327"
-         inkscape:label="#rect5034" />
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 770,723 115.03391,-0.42678 5.3624,20.15534 29.68045,0.19822 5.60355,-20.45711 L 1020,723"
-         id="path5213"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccccc" />
-      <text
-         inkscape:label="#text5066"
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="685.68018"
-         id="ActiveFlightPlanNarrow"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan5217"
-           x="774.98926"
-           y="685.68018">ACTIVE FLIGHT PLAN</tspan><tspan
-           id="tspan5219"
-           sodipodi:role="line"
-           x="774.98926"
-           y="704.43018" /></text>
-      <text
-         inkscape:label="#text5080"
-         sodipodi:linespacing="125%"
-         id="FlightPlanCatalog"
-         y="701.81104"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           y="701.81104"
-           x="774.98926"
-           id="tspan5223"
-           sodipodi:role="line">FLIGHT PLAN CATALOG</tspan></text>
-      <text
-         inkscape:label="#text5084"
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="717.94196"
-         id="StoredFlightPlan"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan5227"
-           x="774.98926"
-           y="717.94196">STORED FLIGHT PLAN</tspan></text>
-    </g>
-    <g
-       style="display:inline"
-       id="MapPageGroup"
-       inkscape:label="#g5531">
-      <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.91170573;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect5335-1"
-         width="256.38116"
-         height="104.31533"
-         x="768.0484"
-         y="638.81311"
-         inkscape:label="#rect5034" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5064"
-         d="m 770,723 5,0 5,20 30,0 5,-20 205,0"
-         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="125%"
-         id="NavigationMap"
-         y="653.33002"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5066"><tspan
-           y="653.33002"
-           x="774.98926"
-           id="tspan5068"
-           sodipodi:role="line">NAVIGATION MAP</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="669.46088"
-         id="TrafficMap"
-         sodipodi:linespacing="125%"
-         inkscape:label="#text5080"><tspan
-           sodipodi:role="line"
-           id="tspan5082"
-           x="774.98926"
-           y="669.46088">TRAFFIC MAP</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="Stormscope"
-         y="685.5918"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5084"><tspan
-           y="685.5918"
-           x="774.98926"
-           id="tspan5086"
-           sodipodi:role="line">STORMSCOPE</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="774.98926"
-         y="701.72266"
-         id="WeatherDataLink"
-         sodipodi:linespacing="125%"
-         inkscape:label="#text5088"><tspan
-           sodipodi:role="line"
-           id="tspan5090"
-           x="774.98926"
-           y="701.72266">WEATHER DATA LINK</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="TAWSB"
-         y="717.85352"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5092"><tspan
-           y="717.85352"
-           x="774.98926"
-           id="tspan5094"
-           sodipodi:role="line">TAWS-B</tspan></text>
-    </g>
-    <g
-       style="display:inline"
-       id="LstPageGroup"
-       inkscape:label="#g5402">
-      <rect
-         inkscape:label="#rect5034"
-         y="698"
-         x="768.45648"
-         height="44.543579"
-         width="257.08698"
-         id="rect5335"
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.91295445;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cccccc"
-         inkscape:connector-curvature="0"
-         id="path5239"
-         d="m 770,723 155.69255,-0.42678 4.30174,20.15534 25.08425,0.19822 5.07322,-20.45711 L 1020,723"
-         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="125%"
-         id="Checklist"
-         y="717.85352"
-         x="774.98926"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"
-         inkscape:label="#text5066"><tspan
-           y="717.85352"
-           x="774.98926"
-           id="tspan5243"
-           sodipodi:role="line">CHECKLISTS</tspan><tspan
-           y="736.60352"
-           x="774.98926"
-           sodipodi:role="line"
-           id="tspan5245" /></text>
     </g>
     <text
        xml:space="preserve"

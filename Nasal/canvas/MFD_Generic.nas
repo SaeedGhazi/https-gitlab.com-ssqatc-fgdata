@@ -432,6 +432,14 @@ var PFD_NavDisplay =
         {
             if (!me.nd_initialised)
                 me.nd_init();
+            #2018.2 - manage the timer so that the nav display is only updated when visibile
+            me.NDCpt.onDisplay();
+        };
+        obj.offdisplay = func
+        {
+            #2018.2 - manage the timer so that the nav display is only updated when visibile
+            if (me.nd_initialised)
+              me.NDCpt.offDisplay();
         };
         #
         # most updates performed by the canvas nav display directly.

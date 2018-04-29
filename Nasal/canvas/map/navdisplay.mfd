@@ -175,7 +175,8 @@ var NavDisplay = {
 	}, # of connectAI
 
 	setTimerInterval: func(update_time=0.05) me.update_timer.restart(update_time),
-
+    onDisplay: func {me.setTimerInterval();},
+    offDisplay: func {me.update_timer.stop();},
 	# TODO: the ctor should allow customization, for different aircraft
 	# especially properties and SVG files/handles (747, 757, 777 etc)
 	new : func(prop1, switches=default_switches, style='Boeing') {

@@ -336,9 +336,9 @@ setDirectTo : func(param)
     # No flightplan, or waypoint not found, so use the GPS DTO function.
     # Hokey property-based interface.
     setprop("/instrumentation/gps/scratch/ident", id);
-    setprop("/instrumentation/gps/scratch/altitude-ft", 0);
-    setprop("/instrumentation/gps/scratch/latitude-deg", 0);
-    setprop("/instrumentation/gps/scratch/longitude-deg", 0);
+    setprop("/instrumentation/gps/scratch/altitude-ft", alt_ft);
+    setprop("/instrumentation/gps/scratch/latitude-deg", getprop("/position/latitude-deg"));
+    setprop("/instrumentation/gps/scratch/longitude-deg", getprop("/position/longitude-deg"));
   }
 
   # Switch the GPS to DTO mode.

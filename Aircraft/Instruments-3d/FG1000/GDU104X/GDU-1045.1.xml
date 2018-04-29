@@ -208,7 +208,6 @@
     </action>
   </animation>
 
-
   <animation>
     <type>knob</type>
     <object-name>NavOuter</object-name>
@@ -557,6 +556,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
         <notification>ALT_INNER</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <shift-action>
@@ -564,6 +564,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>1</device>
         <notification>ALT_OUTER</notification>
+        <offset>1</offset>
       </binding>
     </shift-action>
     <hovered>
@@ -976,7 +977,7 @@
 
   <animation>
     <type>pick</type>
-    <object-name>FMSInner</object-name>
+    <object-name>FmsInner</object-name>
     <action>
       <button>0</button>
       <binding>

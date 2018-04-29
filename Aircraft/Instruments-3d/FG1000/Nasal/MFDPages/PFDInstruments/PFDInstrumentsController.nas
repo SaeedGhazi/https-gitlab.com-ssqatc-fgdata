@@ -54,6 +54,8 @@ var PFDInstrumentsController =
       _leg_xtrk_nm : 0,
       _leg_valid : 0,
 
+      _navSelected : 1,
+
       _nav1_id : "",
       _nav1_freq : 0.0,
       _nav1_radial_deg : 0,

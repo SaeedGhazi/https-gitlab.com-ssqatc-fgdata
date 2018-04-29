@@ -113,13 +113,13 @@ var DirectTo =
   },
 
   offdisplay : func() {
-    me.DirectToChart.setVisible(0);
+    if (me.DirectToChart != nil) me.DirectToChart.setVisible(0);
     me._group.setVisible(0);
     me.getElement("Group").setVisible(0);
     me.getController().offdisplay();
   },
   ondisplay : func() {
-    me.DirectToChart.setVisible(1);
+    if (me.DirectToChart != nil) me.DirectToChart.setVisible(1);
     me._group.setVisible(1);
     me.getElement("Group").setVisible(1);
     me.getController().ondisplay();

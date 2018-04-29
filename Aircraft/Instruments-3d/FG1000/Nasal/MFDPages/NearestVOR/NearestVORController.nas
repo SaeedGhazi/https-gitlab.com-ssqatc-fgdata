@@ -51,7 +51,6 @@ var NearestVORController =
     me._crsrToggle = 1;
   },
 
-
   # Input Handling
   handleCRSR : func() {
     me._crsrToggle = (! me._crsrToggle);
@@ -81,13 +80,13 @@ var NearestVORController =
   },
   handleFMSOuter : func(value) {
     if (me._crsrToggle == 1) {
-    if (me._currentGroup == NearestVORController.UIGROUP.VOR) {
-      # Scroll through whatever is the current list
-      me.page.select.incrSmall(value);
-      var id = me.page.select.getValue();
-      var data = me.getNavDataItem(id);
-      if ((data != nil) and (size(data) >0)) me.page.updateNavDataItem(data[0]);
-    }
+      if (me._currentGroup == NearestVORController.UIGROUP.VOR) {
+        # Scroll through whatever is the current list
+        me.page.select.incrSmall(value);
+        var id = me.page.select.getValue();
+        var data = me.getNavDataItem(id);
+        if ((data != nil) and (size(data) >0)) me.page.updateNavDataItem(data[0]);
+      }
       return emesary.Transmitter.ReceiptStatus_Finished;
     } else {
       return me.page.mfd.SurroundController.handleFMSOuter(value);

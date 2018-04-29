@@ -1,7 +1,7 @@
 # See: http://wiki.flightgear.org/MapStructure
 # TODO: this layer doesn't make sense to support for AI/MP traffic, because we don't currently have access to flightplan/routing info
 # that also applies to other layers like WPT or even navaid layers that handle station tuning based on local radio settings
-# 
+#
 # Class things:
 var name = 'RTE';
 var parents = [SymbolLayer.Controller];
@@ -26,9 +26,9 @@ var new = func(layer) {
 		listeners: [],
 	};
 	layer.searcher._equals = func(l,r) 0; # TODO: create model objects instead?
-	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ), 
+	append(m.listeners, setlistener(layer.options.active_node, func m.layer.update() ),
 		setlistener(layer.options.wp_num, func m.layer.update() ));
-	
+
 	m.addVisibilityListener();
 	var driver = opt_member(m.layer.options, 'route_driver');
 	if(driver == nil){
@@ -52,20 +52,19 @@ var searchCmd = func {
 	# FIXME: do we return the current route even if it isn't active?
 	printlog(_MP_dbg_lvl, "Running query: ", name);
 	var plans = []; # TODO: multiple flightplans?
-	var plans = [];
 	var driver = me.route_driver;
 	driver.update();
 	if(!driver.shouldUpdate()) return me.last_result;
 	# http://wiki.flightgear.org/Nasal_Flightplan
 	var planCount = driver.getNumberOfFlightPlans();
 	for (var idx = 0; idx < planCount; idx += 1) {
-		#var fp = driver.getFlightPlan(idx);
+		if (driver.getFlightPlan(idx) == nil) return [];
 		var fpSize = driver.getPlanSize(idx);
 		if(fpSize < 2) continue;
 		var type = driver.getFlightPlanType(idx);
 		if(type == nil) type = 'current';
-		if (!getprop(me.layer.options.active_node) and 
-			type == 'current' and 
+		if (!getprop(me.layer.options.active_node) and
+			type == 'current' and
 			!me.layer.options.display_inactive_rte) fpSize = 0;
 		var coords = [];
 		var discontinuity = 0;
@@ -91,4 +90,3 @@ var searchCmd = func {
 	me.last_result = plans;
 	return plans;
 };
-

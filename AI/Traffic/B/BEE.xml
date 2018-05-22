@@ -637,7 +637,7 @@
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
         <required-aircraft>EGBB-E75BE03</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -651,7 +651,7 @@
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
         <required-aircraft>EGBB-E75BE04</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -763,7 +763,7 @@
         <airline>BEE</airline>
         <home-port>EGJB</home-port>
         <required-aircraft>EGJB-E75BE01</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -777,7 +777,7 @@
         <airline>BEE</airline>
         <home-port>EGPE</home-port>
         <required-aircraft>EGPE-E75BE01</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -791,7 +791,7 @@
         <airline>BEE</airline>
         <home-port>EGPE</home-port>
         <required-aircraft>EGPE-E75BE02</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -805,7 +805,7 @@
         <airline>BEE</airline>
         <home-port>EGJJ</home-port>
         <required-aircraft>EGJJ-E75BE02</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -833,7 +833,7 @@
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
         <required-aircraft>EGCC-E75BE02</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>
@@ -847,7 +847,7 @@
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
         <required-aircraft>EGCC-E75BE03</required-aircraft>
-        <actype>175SR</actype>
+        <actype>195</actype>
         <offset>0</offset>
         <radius>10</radius>
         <flighttype>gate</flighttype>

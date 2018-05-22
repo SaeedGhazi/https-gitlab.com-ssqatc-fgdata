@@ -7,7 +7,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>G-WARH</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -21,7 +21,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-ACH</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>5.4</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -35,7 +35,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-BVL</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -49,7 +49,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-EDD</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -63,7 +63,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-HKM</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>9</radius>
         <flighttype>ga</flighttype>
@@ -77,7 +77,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-HLM</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>9</radius>
         <flighttype>ga</flighttype>
@@ -91,7 +91,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-ISL</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -105,7 +105,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-UGS</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -119,7 +119,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-VRW</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>
@@ -133,7 +133,7 @@
         <airline>Wooning Aviation</airline>
         <home-port>EHLE</home-port>
         <required-aircraft>PH-WCU</required-aircraft>
-        <actype>F172N</actype>
+        <actype>CN1</actype>
         <offset>0</offset>
         <radius>6</radius>
         <flighttype>ga</flighttype>

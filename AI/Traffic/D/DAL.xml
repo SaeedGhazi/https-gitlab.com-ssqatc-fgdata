@@ -7496,7 +7496,7 @@
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7510,7 +7510,7 @@
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7524,7 +7524,7 @@
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7538,7 +7538,7 @@
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7552,7 +7552,7 @@
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7566,7 +7566,7 @@
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7580,7 +7580,7 @@
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7594,7 +7594,7 @@
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7608,7 +7608,7 @@
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7622,7 +7622,7 @@
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7636,7 +7636,7 @@
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7650,7 +7650,7 @@
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7664,7 +7664,7 @@
         <airline>DAL</airline>
         <home-port>KATL</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7678,7 +7678,7 @@
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7692,7 +7692,7 @@
         <airline>DAL</airline>
         <home-port>KJFK</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7706,7 +7706,7 @@
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7720,7 +7720,7 @@
         <airline>DAL</airline>
         <home-port>KMSP</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7734,7 +7734,7 @@
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7748,7 +7748,7 @@
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7762,7 +7762,7 @@
         <airline>DAL</airline>
         <home-port>RJAA</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7776,7 +7776,7 @@
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7790,7 +7790,7 @@
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7804,7 +7804,7 @@
         <airline>DAL</airline>
         <home-port>KCVG</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7818,7 +7818,7 @@
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7832,7 +7832,7 @@
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7846,7 +7846,7 @@
         <airline>DAL</airline>
         <home-port>KDTW</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7860,7 +7860,7 @@
         <airline>DAL</airline>
         <home-port>KSLC</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7874,7 +7874,7 @@
         <airline>DAL</airline>
         <home-port>EHAM</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>
@@ -7888,7 +7888,7 @@
         <airline>DAL</airline>
         <home-port>LFPG</home-port>
         <required-aircraft>D95-DAL</required-aircraft>
-        <actype>D95</actype>
+        <actype>M88</actype>
         <offset>0</offset>
         <radius>16</radius>
         <flighttype>gate</flighttype>

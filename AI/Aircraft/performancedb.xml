@@ -171,6 +171,7 @@
     </aircraft>
     <alias>
       <match>75</match>
+      <match>Boeing_757-200</match>
       <alias>757</alias>
     </alias>
     <!-- Boeing 747 all versions -->
@@ -204,6 +205,11 @@
       <match>Boeing_737</match>
       <alias>737</alias>
     </alias>
+    <!-- Boeing 717 all versions -->
+    <aircraft>
+      <type>717</type>
+      <base>jet_transport</base>
+    </aircraft>
     <!-- Airbus 380 all versions -->
     <aircraft>
       <type>380</type>
@@ -301,6 +307,7 @@
     <alias>
       <match>A30</match>
       <match>A31</match>
+      <match>Airbus_A310</match>
       <match>ABY</match>
       <match>30</match>
       <match>31</match>
@@ -385,6 +392,16 @@
       <match>Dash 8 Q300</match>
       <alias>DH3</alias>
     </alias>
+    <!-- De Havilland Canada DHC Dash 8 100/200 -->
+    <aircraft>
+      <type>DH1</type>
+      <base>turboprop_transport</base>
+    </aircraft>
+    <alias>
+      <match>DH2</match>
+      <match>DH8</match>
+      <alias>DH1</alias>
+    </alias>
     <!-- De Havilland Canada DHC-6 Twin Otter -->
     <aircraft>
       <type>DHT</type>
@@ -427,6 +444,7 @@
       <match>ER4</match>
       <match>E75</match>
       <match>ERJ</match>
+      <match>ERD</match>
       <alias>E70</alias>
     </alias>
     <!-- Embraer ERJ 190/195 -->
@@ -441,6 +459,7 @@
       <match>ERJ190</match>
       <match>E95</match>
       <match>ERJ195</match>
+      <match>erj195</match>
       <match>195SR</match>
       <alias>E90</alias>
     </alias>
@@ -572,8 +591,9 @@
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
     </aircraft>
     <alias>
+      <match>CR1</match>
       <match>CR2</match>
-      <match>CRJ_</match>
+      <match>CRJ</match>
       <match>CRK</match>
       <match>CR7</match>
       <match>CR9</match>
@@ -706,6 +726,7 @@
     </aircraft>
     <alias>
       <match>Cessna 310</match>
+      <match>c310</match>
       <match>T310</match>
       <match>L-27</match>
       <match>U-3</match>
@@ -770,8 +791,7 @@
       <touchdown-speed-kts>115.0</touchdown-speed-kts>
     </aircraft>
     <alias>
-      <match>Citation Bravo</match>
-      <match>Citation 2</match>
+      <match>Citation</match>
       <match>Cessna 550</match>
       <match>Cessna Citation</match>
       <match>T-47</match>
@@ -933,6 +953,7 @@
     </aircraft>
     <alias>
       <match>An24</match>
+      <match>An-24</match>
       <match>AN24</match>
       <match>Y-7</match>
       <match>Xian Y-7</match>
@@ -956,6 +977,7 @@
     </aircraft>
     <alias>
       <match>An26</match>
+      <match>An-26</match>
       <match>AN26</match>
       <match>A26</match>
       <match>Y-7H</match>
@@ -985,6 +1007,24 @@
       <match>PZL MielecXian An-28</match>
       <match>Antonov An-28</match>
       <alias>A28</alias>
+    </alias>
+    <!-- Antonov An-148 -->
+    <aircraft>
+      <type>A81</type>
+      <base>jet_transport</base>
+    </aircraft>
+    <alias>
+      <match>An-148</match>
+      <alias>A81</alias>
+    </alias>
+    <!-- Antonov An-140 -->
+    <aircraft>
+      <type>A40</type>
+      <base>turboprop_transport</base>
+    </aircraft>
+    <alias>
+      <match>An-140</match>
+      <alias>A40</alias>
     </alias>
     <!-- Let Kunovice L-410 -->
     <aircraft>
@@ -1032,7 +1072,7 @@
     </alias>
     <!-- Sukhoi Superjet 100 -->
     <aircraft>
-      <type>SU95</type>
+      <type>SU9</type>
       <base>jet_transport</base>
       <climbrate-fpm>2500.0</climbrate-fpm>
       <decentrate-fpm>2800.0</decentrate-fpm>
@@ -1051,8 +1091,10 @@
       <match>SSJ95</match>
       <match>SSJ 100-95</match>
       <match>SSJ100-95</match>
+      <match>Sukhoi_SSJ95</match>
       <match>SSJ100</match>
-      <alias>SU95</alias>
+      <match>SU95</match>
+      <alias>SU9</alias>
     </alias>
     <!-- Centrair 101 Pegase -->
     <aircraft>

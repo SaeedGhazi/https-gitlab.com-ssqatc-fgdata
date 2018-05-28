@@ -238,6 +238,16 @@
 				</binding>
 			</checkbox>
 
+			<checkbox>
+				<halign>left</halign>
+				<label>Use detailed MP models</label>
+				<name>mpmodels</name>
+				<property>/sim/multiplay/use-detailed-models</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>mpmodels</object-name>
+				</binding>
+			</checkbox>
 
   		<empty>
   			<stretch>1</stretch>

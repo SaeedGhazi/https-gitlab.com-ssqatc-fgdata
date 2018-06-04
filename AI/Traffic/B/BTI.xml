@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-
 <!-- Author Marcin Kuzniar - Timetable of APR 2017 - Bombardier CS100 replaced by B733 -->
-
 <trafficlist>
   <aircraft>
     <model>Aircraft/Fokker-100/100-Carpatair.xml</model>
@@ -23,7 +21,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-CS3</required-aircraft>
-    <actype>CS300</actype>
+    <actype>CS3</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -37,7 +35,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-CS3</required-aircraft>
-    <actype>CS300</actype>
+    <actype>CS3</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -51,7 +49,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-CS3</required-aircraft>
-    <actype>CS300</actype>
+    <actype>CS3</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -219,7 +217,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -233,7 +231,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -247,7 +245,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -261,7 +259,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -275,7 +273,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -289,7 +287,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -303,7 +301,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -317,7 +315,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -331,7 +329,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -345,7 +343,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -359,7 +357,7 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -373,14 +371,14 @@
     <airline>BTI</airline>
     <home-port>EVRA</home-port>
     <required-aircraft>BTI-DHC8</required-aircraft>
-    <actype>DHC8-402</actype>
+    <actype>DH4</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>YL-BBV</registration>
     <heavy>false</heavy>
- </aircraft>
+  </aircraft>
   <flight>
     <callsign>BT444</callsign>
     <required-aircraft>BTI-DHC8</required-aircraft>
@@ -10747,18 +10745,3 @@
     <repeat>WEEK</repeat>
   </flight>
 </trafficlist>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

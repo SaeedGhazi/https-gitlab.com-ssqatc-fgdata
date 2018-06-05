@@ -165,12 +165,12 @@ Started September 2000 by David Megginson, david@megginson.com
         <!--
           ai-range-mode-pixel: true=use pixel size on screen, false=use distance from eyepoint
           With /sim/rendering/static-lod/ai-range-mode-pixel set to true
-          /sim/rendering/static-lod/ai-detailed now contains the minimum size of the
+          /sim/rendering/static-lod/ai-detailed and /sim/rendering/static-lod/ai-bare now contains the minimum size of the
           model on the screen to be displayed. Values of 10-50 seem to make some sense.
         -->
         <ai-range-mode-pixel type="bool" userarchive="y">false</ai-range-mode-pixel>
-        <ai-detailed type="double" userarchive="y">10000</ai-detailed>
-        <!-- ai-bare type="double" userarchive="y">10000</ai-bare -->
+        <ai-detailed type="double" userarchive="y">3000</ai-detailed>
+        <ai-bare type="double" userarchive="y">10000</ai-bare>
         <ai-interior type="double" userarchive="y">50</ai-interior>
       </static-lod>
       <random-objects type="bool" userarchive="y">true</random-objects>

@@ -536,7 +536,7 @@
   </animation>
 
   <animation>
-    <type>pick</type>
+    <type>knob</type>
     <object-name>AltOuter</object-name>
     <object-name>AltInner</object-name>
     <center>

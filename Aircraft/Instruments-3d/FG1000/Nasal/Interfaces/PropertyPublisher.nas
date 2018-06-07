@@ -18,10 +18,10 @@
 # Publishes property values to Emesary for consumption by the MFD
 #
 #  Two variants:
-#  - TriggeredPropertyPublisher which publishes based on listening to properties
 #  - PeriodicPropertyPublisher which publishes on a periodic basis
-#
-#
+#  - TriggeredPropertyPublisher which publishes based on listening to properties
+#    but also publishes all properties on a periodic basis to ensure new clients
+#    receive property state.
 #
 
 var PropMap = {
@@ -45,18 +45,15 @@ var PropMap = {
 
 var PeriodicPropertyPublisher =
 {
-
   new : func (notification, frequency=0.25) {
     var obj = {
       parents : [ PeriodicPropertyPublisher ],
       _notification : notification,
       _frequency : frequency,
       _propmaps : [],
-      _timer: nil,
     };
 
     obj._transmitter = emesary.GlobalTransmitter;
-    obj._publishTimer = nil;
 
     return obj;
   },
@@ -94,12 +91,14 @@ var PeriodicPropertyPublisher =
 
 var TriggeredPropertyPublisher =
 {
-  new : func (notification) {
+  new : func (notification, frequency=5) {
     var obj = {
       parents : [ TriggeredPropertyPublisher ],
       _notification : notification,
+      _frequency : frequency,
       _propmaps : {},
       _listeners : [],
+      _timer: nil,
     };
 
     obj._transmitter = emesary.GlobalTransmitter;
@@ -126,6 +125,25 @@ var TriggeredPropertyPublisher =
     me._transmitter.NotifyAll(notification);
   },
 
+  publishAll : func() {
+    var data = {};
+
+    foreach (var prop; keys(me._propmaps)) {
+      var name = me._propmaps[prop];
+      var value = props.globals.getNode(prop, 1).getValue();
+      data[name] = value;
+    }
+
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      1,
+      me._notification,
+      data);
+
+    me._transmitter.NotifyAll(notification);
+  },
+
+
   start : func() {
     foreach (var prop; keys(me._propmaps)) {
       # Set up a listener triggering on create (to ensure all values are set at
@@ -134,10 +152,17 @@ var TriggeredPropertyPublisher =
       var listener = setlistener(prop, func(p) { me.publish(p); }, 1, 1);
       append(me._listeners, listener);
     }
+
+    me._timer = maketimer(me._frequency, me, me.publishAll);
+    me._timer.start();
   },
 
   stop : func() {
-    foreach (var l; me._listeners)
+    foreach (var l; me._listeners) {
       removelistener(l);
+    }
+
+    if(me._timer != nil) me._timer.stop();
+    me._timer = nil;
   },
 };

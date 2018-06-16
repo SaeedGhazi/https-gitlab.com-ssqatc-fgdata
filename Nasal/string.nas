@@ -177,6 +177,11 @@ match = func(str, patt) {
 		s += 1;
 		p += 1;
 	}
+
+	# eat trailing * in the pattern; this is needed to fix:
+	# https://sourceforge.net/p/flightgear/codetickets/2016/
+	for (;p < size(patt) and patt[p] == `*`; p += 1) {}
+
 	return s == size(str) and p == size(patt);
 }
 

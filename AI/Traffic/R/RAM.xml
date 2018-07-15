@@ -792,7 +792,7 @@
   </flight>
   <flight>
     <callsign>AT209</callsign>
-    <required-aircraft>RAM-788</required-aircraft>
+    <required-aircraft>RAM-744</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>CYUL</port>

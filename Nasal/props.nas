@@ -363,15 +363,15 @@ var runBinding = func(node, module = nil) {
 # this is using the hashlist (which works well with an Emesary notification)
 # basically when the method is called it will call each section (in the lambda)
 # when the value changes by more than the amount specified as the second parameter.
-# It is possible to reference multiple elements from the hashlist in each newFromHashList; if either
+# It is possible to reference multiple elements from the hashlist in each FromHashList; if either
 # one changes then it will result in the lambda being called.
 #
 #        obj.update_items = [
-#            UpdateManager.newFromHashList(["VV_x","VV_y"], 0.01, func(val)
+#            UpdateManager.FromHashList(["VV_x","VV_y"], 0.01, func(val)
 #                                      {
 #                                        obj.VV.setTranslation (val.VV_x, val.VV_y + pitch_offset);
 #                                      }),
-#            UpdateManager.newFromHashList(["pitch","roll"], 0.025, func(hdp)
+#            UpdateManager.FromHashList(["pitch","roll"], 0.025, func(hdp)
 #                                      {
 #                                          obj.ladder.setTranslation (0.0, hdp.pitch * pitch_factor+pitch_offset);                                           
 #                                          obj.ladder.setCenter (118,830 - hdp.pitch * pitch_factor-pitch_offset);
@@ -543,6 +543,7 @@ var UpdateManager =
         obj.hashkey = nil;
         obj.changed = _changed_method;
         obj.needs_update = 0;
+        obj.isnum = _delta != nil;
         obj.update = func(obj)
           {
               if (me.lastval == nil)
@@ -552,7 +553,12 @@ var UpdateManager =
 
               if (obj != nil or me.lastval == nil) {
                   foreach (hashkey; me.hashkeylist) {
-                      if (me.lastval[hashkey] == nil or math.abs(me.lastval[hashkey] - obj[hashkey]) >= me.delta) {
+                      if (me.isnum) {
+                          if (me.lastval[hashkey] == nil or math.abs(me.lastval[hashkey] - obj[hashkey]) >= me.delta) {
+                              me.needs_update = 1;
+                              break;
+                          }
+                      } elsif (me.lastval[hashkey] == nil or me.lastval[hashkey] != obj[hashkey]) {
                           me.needs_update = 1;
                           break;
                       }

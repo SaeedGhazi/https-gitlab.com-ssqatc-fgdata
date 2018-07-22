@@ -13,7 +13,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYIY</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -27,7 +27,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYJE</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -41,7 +41,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYJG</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -55,7 +55,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYJH</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -69,7 +69,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYJP</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -83,7 +83,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYKW</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -97,7 +97,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYNS</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -111,7 +111,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FZUG</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -125,7 +125,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GARJ</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -139,7 +139,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GARO</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -153,7 +153,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBHO</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -167,7 +167,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBHR</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -181,7 +181,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBHY</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -195,7 +195,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBHZ</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -209,7 +209,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBIJ</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -223,7 +223,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBIM</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -237,7 +237,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GBIN</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -251,7 +251,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GITP</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -265,7 +265,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GITR</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -279,7 +279,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GJVY</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -293,7 +293,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GKOB</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanadaRouge.xml</model>
@@ -307,7 +307,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GSJB</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A321/A321-AirCanadaRouge.xml</model>
@@ -321,7 +321,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FJOK</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A321/A321-AirCanadaRouge.xml</model>
@@ -335,7 +335,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FJOU</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A321/A321-AirCanadaRouge.xml</model>
@@ -349,7 +349,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FJQD</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A321/A321-AirCanadaRouge.xml</model>
@@ -363,7 +363,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FJQH</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A321/A321-AirCanadaRouge.xml</model>
@@ -377,7 +377,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FJQL</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/A321/A321-AirCanadaRouge.xml</model>
@@ -391,7 +391,7 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYXF</registration>
-    <heavy>No</heavy>
+    <heavy>false</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -405,7 +405,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FIYA</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -419,7 +419,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FIYE</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -433,7 +433,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FJZK</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -447,7 +447,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMLV</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -461,7 +461,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMLZ</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -475,7 +475,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMWP</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -489,7 +489,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMWQ</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -503,7 +503,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMWU</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -517,7 +517,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMWV</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -531,7 +531,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMWY</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -545,7 +545,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FMXC</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -559,7 +559,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-FXCA</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -573,7 +573,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GBZR</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -587,7 +587,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GDUZ</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -601,7 +601,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GEOQ</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -615,7 +615,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GEOU</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -629,7 +629,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHLA</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -643,7 +643,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHLQ</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -657,7 +657,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHLT</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -671,7 +671,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHLU</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -685,7 +685,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHLV</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -699,7 +699,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHPE</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -713,7 +713,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GHPN</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirCanadaRouge.xml</model>
@@ -727,7 +727,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>C-GSCA</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <flight>
     <callsign>ROU1600</callsign>

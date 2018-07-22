@@ -293,7 +293,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>P4-KEA</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirAstana.xml</model>
@@ -307,7 +307,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>P4-KEB</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/767/767-AirAstana.xml</model>
@@ -321,7 +321,7 @@
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>P4-KEC</registration>
-    <heavy>Yes</heavy>
+    <heavy>true</heavy>
   </aircraft>
   <aircraft>
     <model>Aircraft/E90/E90-AirAstana.xml</model>

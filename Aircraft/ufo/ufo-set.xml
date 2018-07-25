@@ -4,6 +4,25 @@
 	<sim>
 		<description>UFO from the 'White Project' of the UNESCO</description>
 		<author>ET</author>
+		<authors>
+			<author>
+				<name>ET</name>
+			</author>
+			<author>
+				<name>Luke Skywalker</name>
+				<description>ego, whining that he can't do stuff</description>
+			</author>
+			<author>
+				<name>George Lucas</name>
+				<nick>beardy77</nick>
+				<description>director</description>
+			</author>
+		</authors>
+
+		<urls>
+			<home-page>http://wiki.flightgear.org/UFO_from_the_%27White_Project%27_of_the_UNESCO</home-page>
+			<code-repository>https://sourceforge.net/p/flightgear/fgdata/ci/next/tree/Aircraft/ufo/</code-repository>
+		</urls>
 
         <long-description>With the UFO you can place 3D objects in the FlightGear scenery,
             and inspect the scenery without worrying about crashing.</long-description>
@@ -689,4 +708,59 @@
 			<min-lock-altitude-agl-ft type="double">-10000</min-lock-altitude-agl-ft>
 		</route-manager>
 	</autopilot>
+
+	<aircraft>
+		<icao>
+			<!-- L = light, M = medium, H = heavy, J = jumbo -->
+			<wake-turbulence-category>M</wake-turbulence-category> 
+
+			<!-- eg B738, C172, BE9L
+			http://www.icao.int/publications/DOC8643/Pages/Search.aspx may help finding these
+			-->
+			<type type="string">ZZZZ</type> <!-- no ICAO code for the ufo :) -->
+
+			<!-- ICAO equipment string  -->
+			<equipment type="string">SDFGY</equipment>
+
+			<!-- ICAO surveillance string  -->
+			<surveillance type="string">S</surveillance> <!-- mode-S transponder -->
+		</icao>
+
+		<performance>
+			<minimum>
+				<takeoff-length-ft type="int">6000</takeoff-length-ft>
+				<landing-length-ft type="int">4000</landing-length-ft>
+			</minimum>
+			<climb>
+		<!-- potential for climb data in the future 
+				<airspeed-knots type="int">280</airspeed-knots>
+				<vertical-speed-fpm type="int">2000</vertical-speed-fpm>
+		-->
+			</climb>
+			<cruise>
+				<airspeed-knots type="int">400</airspeed-knots>
+				<!-- 
+				<mach type="double">0.875</mach>
+				-->
+				<altitude-ft type="int">4500</altitude-ft>
+				<!--
+				<flight-level type="int">330</flight-level>
+				-->
+			</cruise>
+			<descent>
+			<!-- potential for descent data in the future 
+				<airspeed-knots type="int">330</airspeed-knots>
+				<vertical-speed-fpm type="int">-1200</vertical-speed-fpm>
+			-->
+			</descent>
+			<approach>
+				<airspeed-knots type="int">120</airspeed-knots>
+			</approach>
+			<maximum>
+				<altitude-ft type="int">21000</altitude-ft> <!-- service ceiling -->
+				<mach type="double">0.875</mach>
+				<airspeed-knots type="int">180</airspeed-knots> <!-- VNe or similar airframe structural limit -->
+			</maximum>
+		</performance>
+	</aircraft>
 </PropertyList>

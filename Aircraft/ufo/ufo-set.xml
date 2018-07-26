@@ -22,6 +22,8 @@
 		<urls>
 			<home-page>http://wiki.flightgear.org/UFO_from_the_%27White_Project%27_of_the_UNESCO</home-page>
 			<code-repository>https://sourceforge.net/p/flightgear/fgdata/ci/next/tree/Aircraft/ufo/</code-repository>
+			<support>https://forum.flightgear.org/viewforum.php?f=17</support>
+			<wikipedia>https://en.wikipedia.org/wiki/Unidentified_flying_object</wikipedia>
 		</urls>
 
         <long-description>With the UFO you can place 3D objects in the FlightGear scenery,
@@ -712,12 +714,12 @@
 	<aircraft>
 		<icao>
 			<!-- L = light, M = medium, H = heavy, J = jumbo -->
-			<wake-turbulence-category>M</wake-turbulence-category> 
+			<wake-turbulence-category>L</wake-turbulence-category> 
 
 			<!-- eg B738, C172, BE9L
 			http://www.icao.int/publications/DOC8643/Pages/Search.aspx may help finding these
 			-->
-			<type type="string">ZZZZ</type> <!-- no ICAO code for the ufo :) -->
+			<type type="string">ZZZZ</type> <!-- no ICAO code for the ufo -->
 
 			<!-- ICAO equipment string  -->
 			<equipment type="string">SDFGY</equipment>
@@ -728,8 +730,8 @@
 
 		<performance>
 			<minimum>
-				<takeoff-length-ft type="int">6000</takeoff-length-ft>
-				<landing-length-ft type="int">4000</landing-length-ft>
+			<!--	<takeoff-length-ft type="int">6000</takeoff-length-ft>
+				<landing-length-ft type="int">4000</landing-length-ft> -->
 			</minimum>
 			<climb>
 		<!-- potential for climb data in the future 
@@ -738,14 +740,10 @@
 		-->
 			</climb>
 			<cruise>
-				<airspeed-knots type="int">400</airspeed-knots>
-				<!-- 
-				<mach type="double">0.875</mach>
-				-->
+				<airspeed-knots type="int">1000</airspeed-knots>
+				<!--  <mach type="double">0.875</mach> -->
 				<altitude-ft type="int">4500</altitude-ft>
-				<!--
-				<flight-level type="int">330</flight-level>
-				-->
+				<!-- <flight-level type="int">330</flight-level> -->
 			</cruise>
 			<descent>
 			<!-- potential for descent data in the future 
@@ -754,12 +752,14 @@
 			-->
 			</descent>
 			<approach>
-				<airspeed-knots type="int">120</airspeed-knots>
+				<airspeed-knots type="int">150</airspeed-knots>
 			</approach>
 			<maximum>
-				<altitude-ft type="int">21000</altitude-ft> <!-- service ceiling -->
+			<!-- 
+				<altitude-ft type="int">21000</altitude-ft> 
 				<mach type="double">0.875</mach>
-				<airspeed-knots type="int">180</airspeed-knots> <!-- VNe or similar airframe structural limit -->
+				<airspeed-knots type="int">180</airspeed-knots> 
+				-->
 			</maximum>
 		</performance>
 	</aircraft>

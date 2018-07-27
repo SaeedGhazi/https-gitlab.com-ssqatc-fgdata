@@ -268,16 +268,28 @@ setElevatorTrimToPosition = func() {
         setElevatorTrimToPosition_listener = nil;
     }
     var nv =  getprop("/controls/flight/elevator")+getprop("/controls/flight/elevator-trim");
+    nv = math.min(math.max(-1.0,nv),1.0);
     var lv = getprop("/controls/flight/elevator");
-    var setElevatorTrimToPosition_listener = setlistener("/controls/flight/elevator", func(v){
-        if (v.getValue() != lv) {
-            setprop("controls/flight/elevator",0);
-            removelistener(setElevatorTrimToPosition_listener);
-            print("set trim to ",nv);
-            setprop("/controls/flight/elevator-trim", nv);
-        }
-    } , 0, 0);
-};
+    if (math.abs(lv) <= 0.001){
+        print("Elevator trim: centre");
+      setprop("/controls/flight/elevator-trim", 0);
+    } else {
+print("Trim when centered stick");
+        setElevatorTrimToPosition_listener = setlistener("/controls/flight/elevator", func(v){
+            if (math.abs(v.getValue()) <= 0.001) {
+                setprop("controls/flight/elevator",0);
+                removelistener(setElevatorTrimToPosition_listener);
+                setElevatorTrimToPosition_listener = nil;
+                print("set trim to ",nv);
+                setprop("/controls/flight/elevator-trim", nv);
+            }
+            else
+              print("Not trimming yet ",v.getValue());
+
+        }, 0, 0);
+    }
+}
+
 ##
 # Handlers.  These are suitable for binding to repeatable button press
 # events.  They are *not* good for binding to the keyboard, since (at
@@ -470,6 +482,9 @@ var fullBrakeTime = 0.5;
 var applyBrakes = func(v, which = 0) {
     if (which <= 0) { interpolate("/controls/gear/brake-left", v, fullBrakeTime); }
     if (which >= 0) { interpolate("/controls/gear/brake-right", v, fullBrakeTime); }
+}
+var applyTrigger = func(v) {
+setprop("/controls/armament/pickle", v);
 }
 
 var applyParkingBrake = func(v) {

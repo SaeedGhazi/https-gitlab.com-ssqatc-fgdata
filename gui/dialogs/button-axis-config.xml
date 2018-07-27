@@ -134,6 +134,30 @@ var assignAxis = func(cmd) {
         </script>
       </binding>
     </button>
+    <button>
+      <row>6</row>
+      <col>0</col>
+      <halign>fill</halign>
+      <legend>Flaps</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignAxis("Flaps");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>5</row>
+      <col>0</col>
+      <halign>fill</halign>
+      <legend>Wings</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignAxis("Wings");
+        </script>
+      </binding>
+    </button>
 
  
     <text>
@@ -185,11 +209,11 @@ var assignAxis = func(cmd) {
       <row>4</row>
       <col>3</col>
       <halign>fill</halign>
-      <legend>Aileron Trim Incremental</legend>
+      <legend>Aileron Trim inc.</legend>
       <binding>
         <command>nasal</command>
         <script>
-          assignAxis("Aileron Trim Incremental");
+          assignAxis("Aileron Trim inc.");
         </script>
       </binding>
     </button>
@@ -197,11 +221,11 @@ var assignAxis = func(cmd) {
       <row>5</row>
       <col>3</col>
       <halign>fill</halign>
-      <legend>Elevator Trim Incremental</legend>
+      <legend>Elevator Trim inc.</legend>
       <binding>
         <command>nasal</command>
         <script>
-          assignAxis("Elevator Trim Incremental");
+          assignAxis("Elevator Trim inc.");
         </script>
       </binding>
     </button>
@@ -209,11 +233,11 @@ var assignAxis = func(cmd) {
       <row>6</row>
       <col>3</col>
       <halign>fill</halign>
-      <legend>Rudder Trim Incremental</legend>
+      <legend>Rudder Trim inc.</legend>
       <binding>
         <command>nasal</command>
         <script>
-          assignAxis("Rudder Trim Incremental");
+          assignAxis("Rudder Trim inc.");
         </script>
       </binding>
     </button>

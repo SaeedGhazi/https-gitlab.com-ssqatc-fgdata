@@ -21,8 +21,17 @@ var assignButton = func(cmd) {
 		]]></close>
 	</nasal>
 
-
-	<name>button-config</name>
+    
+    <!-- To be implemented
+    tiller axis
+    counter-measures 
+    masterarm toggle
+    radar standby toggle
+    radar slew target selector
+    radar select target.
+    -->
+    
+    <name>button-config</name>
 	<layout>vbox</layout>
 	<resizable>true</resizable>
 	<modal>true</modal>
@@ -100,6 +109,19 @@ var assignButton = func(cmd) {
       <row>3</row>
       <col>0</col>
       <halign>fill</halign>
+      <legend>Elevator Trim Pos</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Elevator Trim Pos");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>4</row>
+      <col>0</col>
+      <halign>fill</halign>
       <legend>Rudder Trim Left</legend>
       <binding>
         <command>nasal</command>
@@ -110,7 +132,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>4</row>
+      <row>5</row>
       <col>0</col>
       <halign>fill</halign>
       <legend>Rudder Trim Right</legend>
@@ -123,7 +145,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>5</row>
+      <row>6</row>
       <col>0</col>
       <halign>fill</halign>
       <legend>Aileron Trim Left</legend>
@@ -136,7 +158,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>6</row>
+      <row>7</row>
       <col>0</col>
       <halign>fill</halign>
       <legend>Aileron Trim Right</legend>
@@ -352,6 +374,19 @@ var assignButton = func(cmd) {
       <row>2</row>
       <col>3</col>
       <halign>fill</halign>
+      <legend>Auto air/ground brakes</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Brakes (air/wheel)");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>3</row>
+      <col>3</col>
+      <halign>fill</halign>
       <legend>Brakes (air/wheel)</legend>
       <binding>
         <command>nasal</command>
@@ -362,7 +397,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>2</row>
+      <row>4</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>Parking brakes</legend>
@@ -375,7 +410,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>3</row>
+      <row>5</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>FGCom PTT</legend>
@@ -388,7 +423,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>4</row>
+      <row>6</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>Trigger</legend>
@@ -401,7 +436,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>5</row>
+      <row>7</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>Custom</legend>
@@ -414,7 +449,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>6</row>
+      <row>8</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>NWS toggle</legend>
@@ -429,7 +464,7 @@ var assignButton = func(cmd) {
     <text>
       <row>0</row>
       <col>4</col>
-      <label>View</label>
+      <label>Simulator Controls</label>
     </text>
 
     <button>
@@ -535,6 +570,18 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
+    <button>
+      <row>9</row>
+      <col>4</col>
+      <halign>fill</halign>
+      <legend>Total Freeze</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Total Freeze");
+        </script>
+      </binding>
+    </button>
 
     <text>
       <row>0</row>
@@ -547,6 +594,18 @@ var assignButton = func(cmd) {
       <row>1</row>
       <col>5</col>
       <halign>fill</halign>
+      <legend>Trigger</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Trigger");
+        </script>
+      </binding>
+    </button>
+    <button>
+      <row>2</row>
+      <col>5</col>
+      <halign>fill</halign>
       <legend>Pickle</legend>
       <binding>
         <command>nasal</command>
@@ -556,7 +615,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>2</row>
+      <row>3</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Target next</legend>
@@ -568,7 +627,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>3</row>
+      <row>4</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Target previous</legend>
@@ -580,7 +639,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>4</row>
+      <row>5</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Weapon next</legend>
@@ -592,7 +651,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>5</row>
+      <row>6</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Weapon previous</legend>
@@ -604,7 +663,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>6</row>
+      <row>7</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Azimuth left</legend>
@@ -616,7 +675,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>7</row>
+      <row>8</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Azimuth right</legend>
@@ -628,7 +687,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>8</row>
+      <row>9</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Elevation up</legend>
@@ -640,7 +699,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>9</row>
+      <row>10</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Elevation down</legend>
@@ -652,7 +711,7 @@ var assignButton = func(cmd) {
       </binding>
     </button>
     <button>
-      <row>10</row>
+      <row>11</row>
       <col>5</col>
       <halign>fill</halign>
       <legend>Missile Reject</legend>

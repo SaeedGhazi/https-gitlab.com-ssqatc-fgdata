@@ -195,10 +195,11 @@ var NasalScaleAxis = {
 };
 
 var NasalLowHighAxis = {
-  new: func(name, lowscript, highscript, prop) {
+  new: func(name, lowscript, highscript, prop, repeatable) {
     var m = { parents: [NasalLowHighAxis, Axis.new(name, prop, 1) ] };
     m.lowscript = lowscript;
     m.highscript = highscript;
+    m.repeatable = repeatable;
     return m;
   },
 
@@ -209,6 +210,7 @@ var NasalLowHighAxis = {
 
     m.lowscript = me.lowscript;
     m.highscript = me.highscript;
+    m.repeatable = me.repeatable;
     return m;
   },
 
@@ -238,7 +240,9 @@ var NasalLowHighAxis = {
     p.getNode("desc", 1).setValue(me.name);
 
     p.getNode("low", 1).getNode("binding", 1).getNode("command", 1).setValue("nasal");
+    p.getNode("low", 1).getNode("repeatable", 1).setBoolValue(me.repeatable);
     p.getNode("high", 1).getNode("binding", 1).getNode("command", 1).setValue("nasal");
+    p.getNode("high", 1).getNode("repeatable", 1).setBoolValue(me.repeatable);
 
     if (me.inverted) {
       p.getNode("low", 1).getNode("binding", 1).getNode("script", 1).setValue(me.highscript);
@@ -283,21 +287,24 @@ var axisBindings = [
   PropertyScaleAxis.new("Propeller Pitch Engine 1",  "/controls/engines/engine[1]/propeller-pitch"),
 
   NasalLowHighAxis.new("View (horizontal)",
-                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") + 30);",
-                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") - 30);",
-                      "/sim/current-view/goal-heading-offset-deg"),
+                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") + 2);",
+                      "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") - 2);",
+                      "/sim/current-view/goal-heading-offset-deg",1),
   NasalLowHighAxis.new("View (vertical)",
-                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") - 20);",
-                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") + 20);",
-                       "/sim/current-view/goal-heading-offset-deg"),
+                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") - 1);",
+                       "setprop(\"/sim/current-view/goal-pitch-offset-deg\", getprop(\"/sim/current-view/goal-pitch-offset-deg\") + 1);",
+                       "/sim/current-view/goal-heading-offset-deg",1),
   PropertyScaleAxis.new("Aileron Trim",  "/controls/flight/aileron-trim"),
   PropertyScaleAxis.new("Elevator Trim", "/controls/flight/elevator-trim"),
   PropertyScaleAxis.new("Rudder Trim",  "/controls/flight/rudder-trim"),
   PropertyScaleAxis.new("Brake Left", "/controls/gear/brake-left", 0.5, 1.0),
   PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0.5, 1.0),
-  NasalLowHighAxis.new("Aileron Trim Incremental",  "controls.aileronTrim(-1);", "controls.aileronTrim(1);", "/controls/flight/aileron-trim-delta"),
-  NasalLowHighAxis.new("Elevator Trim Incremental", "controls.elevatorTrim(-1);", "controls.elevatorTrim(1);", "/controls/flight/elevator-trim-delta"),
-  NasalLowHighAxis.new("Rudder Trim Incremental",   "controls.rudderTrim(-1);", "controls.rudderTrim(1);", "/controls/flight/rudder-trim-delta"),
+  PropertyScaleAxis.new("Flaps", "/controls/flight/flaps", 0.5, 1.0),
+  PropertyScaleAxis.new("Wings", "/controls/flight/wings", 0.5, 1.0),
+  PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0.5, 1.0),
+  NasalLowHighAxis.new("Aileron Trim inc.",  "controls.aileronTrim(-1);", "controls.aileronTrim(1);", "/controls/flight/aileron-trim-delta", 1),
+  NasalLowHighAxis.new("Elevator Trim inc.", "controls.elevatorTrim(-1);", "controls.elevatorTrim(1);", "/controls/flight/elevator-trim-delta", 1),
+  NasalLowHighAxis.new("Rudder Trim inc.",   "controls.rudderTrim(-1);", "controls.rudderTrim(1);", "/controls/flight/rudder-trim-delta", 1),
 
   PropertyScaleAxis.new("View Horizontal Axis", "/sim/current-view/goal-heading-offset-deg", 180, 0),
   PropertyScaleAxis.new("View Vertical Axis", "/sim/current-view/goal-pitch-offset-deg", 180, 0),
@@ -529,6 +536,7 @@ var buttonBindings = [
 
   NasalButton.new("Elevator Trim Up", "controls.elevatorTrim(-1);", 1),
   NasalButton.new("Elevator Trim Down", "controls.elevatorTrim(1);", 1),
+  NasalButton.new("Elevator Trim Pos", "controls.setElevatorTrimToPosition();", 1),
   NasalButton.new("Rudder Trim Left", "controls.rudderTrim(-1);", 1),
   NasalButton.new("Rudder Trim Right", "controls.rudderTrim(1);", 1),
   NasalButton.new("Aileron Trim Left", "controls.aileronTrim(-1);", 1),
@@ -547,8 +555,11 @@ var buttonBindings = [
   NasalHoldButton.new("Parking brakes", "controls.parkingBrakeToggle(0);", "controls.parkingBrakeToggle(1);"),
   NasalHoldButton.new("NWS toggle", "controls.toggleNWS(0);", "controls.toggleNWS(1);"),
 
+  PropertyToggleButton.new("Total Freeze", "/sim/freeze/clock"),
+
 # with all of these it is expected the the armament system in the selected aircraft
 # will manage the wrap around and or reset to zero.
+  NasalHoldButton.new("Trigger", "controls.applyTrigger(1);","controls.applyTrigger(0);"),
   PropertyAdjustButton.new("Pickle", "/controls/armament/pickle-target", "1"),
   PropertyAdjustButton.new("Target next", "/controls/armament/target-selected", "1"),
   PropertyAdjustButton.new("Target previous", "/controls/armament/target-selected", "-1"),

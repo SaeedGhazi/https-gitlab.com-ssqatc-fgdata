@@ -53,7 +53,10 @@ var Transmitter =
     {
         append(me.Recipients, recipient);
     },
-
+    DeleteAllRecipients: func
+    {
+        me.Recipients = [];
+    },
     # Stops a recipient from receiving notifications from this transmitter.
     DeRegister: func(todelete_recipient)
     {
@@ -95,6 +98,10 @@ var Transmitter =
     #           allows for usages such as access controls.
     NotifyAll: func(message)
     {
+        if (message == nil){
+            print("Emesary: bad notification nil");
+            return Transmitter.ReceiptStatus_NotProcessed;
+        }
         var return_status = Transmitter.ReceiptStatus_NotProcessed;
         foreach (var recipient; me.Recipients)
         {

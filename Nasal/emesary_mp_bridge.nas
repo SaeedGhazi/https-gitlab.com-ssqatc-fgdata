@@ -90,7 +90,7 @@ var OutgoingMPBridge =
 
         foreach(var n ; new_class.NotificationsToBridge)
           {
-              print("  Outward bridge notifications of type --> ",n.NotificationType);
+              print("  ",_ident,"  outwards bridge[",n,"] notifications of type --> ",n.NotificationType, " Id ",n.TypeId);
               n.MessageIndex = OutgoingMPBridge.StartMessageIndex;
               new_class.NotificationsToBridge_Lookup[n.TypeId] = n;
           }

@@ -1,9 +1,3 @@
-if (globals["tanker"] != nil) {
-	# reload with io.load_nasal(getprop("/sim/fg-root") ~ "/Nasal/tanker.nas");
-	print("reloading " ~ caller(0)[2]);
-	var _setlistener = reinit;
-	reinit();
-}
 #--------------------------------------------------------------------------------------------------
 
 var oclock = func(bearing) int(0.5 + geo.normdeg(bearing) / 30) or 12;
@@ -49,8 +43,11 @@ var identity = {
 				delete(data, c.getValue() or "");
 			if ((var c = t.getNode("navaids/tacan/channel-ID")) != nil)
 				delete(data, revdata[c.getValue() or ""]);
-			if ((var c = t.getNode("id")) != nil)
-				id_used[c.getValue()] = 1;
+			if ((var c = t.getNode("id")) != nil and c.getValue() != ""){
+                var v = c.getValue();
+                if (v != nil and v != "")
+                  id_used[v] = 1;
+            }
 		}
 		for (var aiid = -2; aiid; aiid -= 1)
 			if (!id_used[aiid])
@@ -96,9 +93,15 @@ var Tanker = {
 		m.model = n.getChild("model", i, 1);
 
 		var n = props.globals.getNode("ai/models", 1);
-		for (var i = 0; 1; i += 1)
-			if (n.getChild("tanker", i, 0) == nil)
-				break;
+
+        for (var i = 0; 1; i += 1){
+            var cn = n.getChild("tanker", i, 0);
+            if (cn == nil)
+              break;
+
+            if (cn.getNode("id") == nil or cn.getNode("id").getValue() == nil)
+              break;
+        }
 		m.ai = n.getChild("tanker", i, 1);
 
 		m.ai.getNode("id", 1).setIntValue(aiid);
@@ -146,12 +149,25 @@ var Tanker = {
 	del: func {
 		tanker_msg(me.callsign ~ " returns to base");
 		me.model.remove();
-		me.ai.remove();
+        if (me.ai != nil){
+            me.ai.getChild("id").remove();
+        }
+        else
+            print(me.callsign," has no AI node");
+        me.ai = nil; # ensure that this tanker stops updating.
 		delete(Tanker.active, me.callsign);
 	},
 	update: func {
+    	if ( getprop("sim/replay/time") > 0 ) 
+          return;
+
 		var dt = getprop("sim/time/delta-sec");
 		var alt = me.coord.alt();
+
+        if (me.ai == nil){
+            print("Tamker ", me.callsign," stops updating");
+            return;
+        }
 
 		if ((me.interval += dt) >= 5) {
 			me.interval -= 5;
@@ -420,3 +436,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	setlistener("/sim/signals/reinit", reinit, 1);
 });
 
+if (globals["tanker"] != nil) {
+	# reload with io.load_nasal(getprop("/sim/fg-root") ~ "/Nasal/tanker.nas");
+	print("reloading " ~ caller(0)[2]);
+	var _setlistener = reinit;
+	reinit();
+}

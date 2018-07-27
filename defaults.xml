@@ -899,7 +899,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <protocol-version type="int" userarchive="y">2</protocol-version>
       <transmit-filter-property-base type="int">0</transmit-filter-property-base>
       <transmit-filter-property-base-available type="bool">false</transmit-filter-property-base-available>
-      <use-detailed-models type="bool" userarchive="y">true</use-detailed-models>
+      <fallback-models include="/AI/Aircraft/fallback_models.xml"/>
     </multiplay>
     <user>
       <callsign type="string" preserve="y">Golf Foxtrot Sierra</callsign>

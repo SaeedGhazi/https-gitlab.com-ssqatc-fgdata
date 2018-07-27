@@ -105,9 +105,15 @@
       <property>/sim/rendering/static-lod/ai-detailed</property>
     </input>
 
+    <input>
+      <row>3</row><col>2</col>
+      <halign>fill</halign>
+      <property>/sim/rendering/static-lod/ai-bare</property>
+    </input>
+
     <radio>
       <row>3</row>
-      <col>2</col>
+      <col>3</col>
       <halign>left</halign>
       <name>pixel</name>
       <property>sim/gui/dialogs/static-lod/mode/pixel</property>
@@ -132,7 +138,7 @@
 
     <radio>
       <row>3</row>
-      <col>3</col>
+      <col>4</col>
       <halign>left</halign>
       <name>distance</name>
       <property>sim/gui/dialogs/static-lod/mode/distance</property>

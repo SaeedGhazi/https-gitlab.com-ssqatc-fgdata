@@ -29,7 +29,7 @@
 var GenericADCPublisher =
 {
 
-  new : func (frequency=0.2) {
+  new : func (frequency=0.1) {
     var obj = {
       parents : [
         GenericADCPublisher,

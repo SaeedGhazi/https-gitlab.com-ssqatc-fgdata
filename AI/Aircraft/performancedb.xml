@@ -313,6 +313,16 @@
       <match>31</match>
       <alias>AB3</alias>
     </alias>
+    <!-- Airbus 220 (bombardier CS3) all versions -->
+    <aircraft>
+      <type>220</type>
+      <base>jet_transport</base>
+    </aircraft>
+    <alias>
+      <match>221</match>
+      <match>223</match>
+      <alias>220</alias>
+    </alias>
     <!-- McDonnell Douglas 11 all versions -->
     <aircraft>
       <type>M11</type>

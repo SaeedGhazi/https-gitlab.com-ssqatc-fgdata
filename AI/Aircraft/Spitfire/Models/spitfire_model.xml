@@ -5,8 +5,7 @@ $Id$
 
 <PropertyList>
 
-	<path>../../../../Aircraft/Spitfire/Models/spitfireIIa.ac</path>
-	<texture-path>../../../../Aircraft/Spifire/Models</texture-path>
+	<path>spitfireIIa.ac</path>
 
 	<nasal>
 		<load>
@@ -338,52 +337,9 @@ $Id$
 		</offsets>
 	</model>-->
 
-	<!-- non-panel models -->
-	<model>
-		<path>Aircraft/Spitfire/Models/throttle.xml</path>
-		<offsets>
-			<x-m>3.40</x-m>
-			<y-m>-0.39</y-m>
-			<z-m>-0.10</z-m>
-		</offsets>
-	</model>
-	<model>
-		<path>Aircraft/Spitfire/Models/control-stick.xml</path>
-		<offsets>
-			<x-m>3.45</x-m>
-			<y-m>-0.0</y-m>
-			<z-m>-0.80</z-m>
-		</offsets>
-	</model>
-	<model>
-		<path>Aircraft/Spitfire/Models/trim-wheel-elev.xml</path>
-		<offsets>
-			<x-m>3.52</x-m>
-			<y-m>-0.3725</y-m>
-			<z-m>-0.135</z-m>
-		</offsets>
-	</model>
-	<model>
-		<path>Aircraft/Spitfire/Models/trim-knob-rudder.xml</path>
-		<offsets>
-			<x-m>3.64</x-m>
-			<y-m>-0.3725</y-m>
-			<z-m>-0.16</z-m>
-		</offsets>
-	</model>
-	<model>
-		<path>Aircraft/Spitfire/Models/rgs.xml</path>
-		<name>Gunsight</name>
-		<offsets>
-			<x-m>3.38</x-m>
-			<y-m>-0.0</y-m>
-			<z-m>0.53</z-m>
-		</offsets>
-	</model>
-
 	<!-- ***** Navigation Lights ****** -->
 	<model>
-		<path>Aircraft/Spitfire/Models/light-green.xml</path>
+		<path>light-green.xml</path>
 		<name>Stbd-Light</name>
 		<offsets>
 			<x-m>2.35</x-m>
@@ -393,7 +349,7 @@ $Id$
 	</model>
 
 	<model>
-		<path>Aircraft/Spitfire/Models/light-red.xml</path>
+		<path>light-red.xml</path>
 		<name>Port-Light</name>
 		<offsets>
 			<x-m>2.35</x-m>
@@ -403,7 +359,7 @@ $Id$
 	</model>
 
 	<model>
-		<path>Aircraft/Spitfire/Models/light-white.xml</path>
+		<path>light-white.xml</path>
 		<name>Tail-Light</name>
 		<offsets>
 			<x-m>9.05</x-m>
@@ -411,133 +367,6 @@ $Id$
 			<z-m>0.837072</z-m>
 		</offsets>
 	</model>
-
-	<!-- Tutorial -->
-	<model>
-		<path>Aircraft/Generic/marker.xml</path>
-	</model>
-
-	<!-- hide all of the model not visible from the cockpit -->
-	<animation>
-		<type>select</type>
-		<object-name>Hull-Aft</object-name>
-		<object-name>Stub-Wing-R</object-name>
-		<object-name>Stub-Wing-L</object-name>
-		<object-name>Flap-Inner-R</object-name>
-		<object-name>Flap-Inner-L</object-name>
-		<object-name>Flap-Outer-R</object-name>
-		<object-name>Flap-Outer-L</object-name>
-		<object-name>Cover-Lower-M</object-name>
-		<object-name>Cover-Lower-F</object-name>
-		<object-name>Cover-Lower-A</object-name>
-		<object-name>Cover-Engine-Side-L</object-name>
-		<object-name>Cover-Engine-Side-R</object-name>
-		<object-name>UC-Main-L</object-name>
-		<object-name>UC-Main-R</object-name>
-		<condition>
-			<not>
-				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
-				</equals>
-			</not>
-		</condition>
-	</animation>
-	<animation>
-		<type>select</type>
-		<object-name>UC-Tail</object-name>
-		<object-name>Spinner</object-name>
-		<object-name>Exhausts</object-name>
-		<object-name>Wing-B-L</object-name>
-		<object-name>Wing-B-R</object-name>
-		<object-name>Wing-Tip-B-L</object-name>
-		<object-name>Wing-Tip-B-R</object-name>
-		<object-name>Oil-Cooler</object-name>
-		<object-name>Radiator</object-name>
-		<object-name>Carburettor-Air-Intake</object-name>
-		<object-name>Tail-Light</object-name>
-		<condition>
-			<not>
-				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
-				</equals>
-			</not>
-		</condition>
-	</animation>
-
-	<!-- make sure that all the rest of the aircraft is visible-->
-	<animation>
-		<!--<type>select</type>-->
-		<object-name>Hull</object-name>
-		<object-name>Port-Light</object-name>
-		<object-name>Stbd-Light</object-name>
-		<object-name>Gunsight</object-name>
-		<object-name>Altimeter</object-name>
-		<object-name>Attitude</object-name>
-		<object-name>Gear-Indicator</object-name>
-		<object-name>Turn</object-name>
-		<object-name>Pilot</object-name>
-		<object-name>Port-Nav-Lt-Cover</object-name>
-		<object-name>Stbd-Nav-Lt-Cover</object-name>
-		<object-name>Tail-Lt-Cover</object-name>
-		<object-name>Dirt-Oil</object-name>
-		<object-name>Dirt-Exhaust</object-name>
-		<object-name>Canopy</object-name>
-		<!--<object-name>Blackout</object-name>-->
-		<!--<condition> 
-        <greater-than-equals> 
-          <property>sim/current-view/view-number</property>
-          <value>0</value>
-        </greater-than-equals>
-      </condition>-->
-	</animation>
-	<animation>
-		<type>select</type>
-		<object-name>Canopy-Rear-Rain</object-name>
-		<condition>
-			<greater-than>
-				<property>sim/model/rain/raining-norm</property>
-				<value>0.01</value>
-			</greater-than>
-		</condition>
-	</animation>
-	
-	<animation>
-		<type>select</type>
-		<nopreview/>
-		<object-name>Canopy-FP-Rain</object-name>
-		<condition>
-			<greater-than>
-				<property>sim/model/rain/raining-norm</property>
-				<value>0.01</value>
-			</greater-than>
-		</condition>
-	</animation>
-
-	<animation>
-		<type>select</type>
-		<nopreview/>
-		<object-name>Canopy-F-Rain</object-name>
-		<condition>
-			<greater-than>
-				<property>sim/model/rain/raining-norm</property>
-				<value>0.01</value>
-			</greater-than>
-		</condition>
-	</animation>
-
-	<animation>
-		<type>select</type>
-		<nopreview/>
-		<object-name>Canopy-Main-Rain</object-name>
-		<condition>
-			<greater-than>
-				<property>sim/model/rain/raining-norm</property>
-				<value>0.01</value>
-			</greater-than>
-		</condition>
-	</animation>
 
 	<animation>
 		<type>select</type>
@@ -552,50 +381,6 @@ $Id$
 		</condition>
 	</animation>
 	<!-- **************************** Pilot ******************************* -->
-
-	<animation>
-		<type>select</type>
-		<object-name>Pilot</object-name>
-		<condition>
-			<or>
-				<not>
-				<property>sim/model/spitfire/show-pilot</property>
-				</not>
-				<not>
-					<equals>
-						<property>sim/current-view/view-number</property>
-						<value>0</value>
-					</equals>
-				</not>
-			</or>
-		</condition>
-	</animation>
-
-	<!--  conceal Pilot Head etc in Cockpit View-->
-	<animation>
-		<type>select</type>
-		<object-name>Pilot-Head</object-name>
-		<condition>
-			<not>
-				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
-				</equals>
-			</not>
-		</condition>
-	</animation>
-	<!-- seat height -->
-	<animation>
-		<type>translate</type>
-		<object-name>Pilot</object-name>
-		<object-name>Seat</object-name>
-		<property>controls/seat/vertical-adjust</property>
-		<axis>
-			<x>0</x>
-			<y>0</y>
-			<z>1</z>
-		</axis>
-	</animation>
 
 	<!-- ***************** Flight Surfaces ************** -->
 	<!-- ailerons -->
@@ -1051,7 +836,7 @@ $Id$
 			<z2-m>-0.80</z2-m>
 		</axis>
 	</animation>
-	<!-- 
+	<!--
 <animation>
   <type>select</type>
   <object-name>TailNavLightOn</object-name>
@@ -1076,16 +861,6 @@ $Id$
   </condition>
  </animation>
 -->
-	<animation>
-		<type>material</type>
-		<object-name>Panel</object-name>
-		<emission>
-			<factor-prop>/controls/lighting/panel-norm</factor-prop>
-			<red>0.6</red>
-			<green>0.20</green>
-			<blue>0.20</blue>
-		</emission>
-	</animation>
 
 	<!-- ========== Dirt textures ========= -->
 
@@ -1172,100 +947,12 @@ $Id$
 	</model>
 
 	<animation>
-		<type>textranslate</type>
-		<object-name>Canopy-FP-Rain</object-name>
-		<property>sim/model/rain/flow-mps</property>
-		<factor>1</factor>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>textranslate</type>
-		<object-name>Canopy-F-Rain</object-name>
-		<property>sim/model/rain/flow-mps</property>
-		<factor>1</factor>
-		<offset>0.33</offset>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>textranslate</type>
-		<object-name>Canopy-Rear-Rain</object-name>
-		<property>sim/model/rain/flow-mps</property>
-		<factor>1</factor>
-		<axis>
-			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>textranslate</type>
-		<object-name>Canopy-Main-Rain</object-name>
-		<property>sim/model/rain/flow-mps</property>
-		<factor>1</factor>
-		<axis>
-			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>material</type>
-		<object-name>Canopy-FP-Rain</object-name>
-		<object-name>Canopy-Rear-Rain</object-name>
-		<object-name>Canopy-F-Rain</object-name>
-		<object-name>Canopy-Main-Rain</object-name>
-		<transparency>
-			<alpha-prop>velocities/airspeed-kt</alpha-prop>
-			<factor>-0.00333</factor>
-			<offset>1</offset>
-			<max>0.3</max>
-			<min>0.0075</min>
-		</transparency>
-		<!--<threshold>0.001</threshold>-->
-	</animation>
-
-	<animation>
-		<type>material</type>
-		<object-name>Canopy-FP-Rain</object-name>
-		<object-name>Canopy-Rear-Rain</object-name>
-		<object-name>Canopy-F-Rain</object-name>
-		<object-name>Canopy-Main-Rain</object-name>
-		<transparency>
-			<alpha-prop>sim/model/rain/raining-norm</alpha-prop>
-			<factor>0.7</factor>
-			<offset>0</offset>
-			<max>0.3</max>
-			<min>0.0075</min>
-		</transparency>
-		<!--<threshold>0.001</threshold>-->
-	</animation>
-
-	<animation>
 		<type>shader</type>
 		<shader>chrome</shader>
 		<texture>Aircraft/Generic/Effects/glass_shader.png</texture>
 		<object-name>Canopy-Main</object-name>
 		<object-name>Canopy-Rear</object-name>
 		<object-name>Canopy-F</object-name>
-	</animation>
-
-	<!-- *** LoD for the whole model *** -->
-	<animation>
-		<type>range</type>
-		<min-m>0</min-m>
-		<max-m>10000</max-m>
 	</animation>
 
 </PropertyList>

@@ -2,18 +2,16 @@
 
 <!-- Sea Hawk (WM930) model config file -->
 <!-- Lee Elliott 2003/04/17 leee-fgfs@spatial.freeserve.co.uk -->
-<!-- additions Vivian Meazza 2004/1/15 vivian.meazza.lineone.net 
+<!-- additions Vivian Meazza 2004/1/15 vivian.meazza.lineone.net
 		 to provide a 3d cockpit
-	 
+
 	 Ver 0.1.1
 
 -->
 
 <PropertyList>
 
-	<path>/../../../../Aircraft/seahawk/Models/SeaHawk-FGA6-WV859.ac</path>
-	<texture-path>../../../../Aircraft/seahawk/Models</texture-path>
-
+	<path>SeaHawk-FGA6-WV859.ac</path>
 	<nasal>
 		<load>
 			print("Loading Seahawk Wingman", cmdarg().getPath());
@@ -32,348 +30,13 @@
 		<enable-hot type="bool">false</enable-hot>
 	</animation>
 
-	<!-- ***************** 3D Cockpit *************************** -->
-
-	<!-- Front hotspots -->
-	<panel>
-		<path>/Aircraft/seahawk/Models/seahawk-panel-hotspots.xml</path>
-		<bottom-left>
-			<x-m>-3.75</x-m>
-			<y-m>-0.50</y-m>
-			<z-m>-0.30</z-m>
-		</bottom-left>
-		<bottom-right>
-			<x-m>-3.75</x-m>
-			<y-m> 0.50</y-m>
-			<z-m>-0.30</z-m>
-		</bottom-right>
-		<top-left>
-			<x-m>-3.75</x-m>
-			<y-m>-0.50</y-m>
-			<z-m> 0.62</z-m>
-		</top-left>
-	</panel>
-
 	<!-- **************** Instruments ********************* -->
 
 	<!-- **************** Main Panel ********** -->
-
-	<model>
-		<path>Aircraft/seahawk/Models/attitude.xml</path>
-		<name>Attitude</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.00</y-m>
-			<z-m>0.38</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/hsi.xml</path>
-		<name>HSI</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.00</y-m>
-			<z-m>0.27</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/vsi.xml</path>
-		<name>VSI</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.10</y-m>
-			<z-m>0.42</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/asi.xml</path>
-		<name>ASI</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>-0.12</y-m>
-			<z-m>0.40</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/altimeter.xml</path>
-		<name>Altimeter</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>-0.11</y-m>
-			<z-m>0.31</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/turn.xml</path>
-		<name>Turn</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.10</y-m>
-			<z-m>0.31</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/mach.xml</path>
-		<name>Mach</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>-0.205</y-m>
-			<z-m>0.385</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/fuel-fwd.xml</path>
-		<name>Fuel-fwd</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.18</y-m>
-			<z-m>0.42</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/fuel-aft.xml</path>
-		<name>Fuel-aft</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.24</y-m>
-			<z-m>0.38</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/rpm.xml</path>
-		<name>RPM</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.18</y-m>
-			<z-m>0.36</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/dme.xml</path>
-		<name>DME</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>-0.29</y-m>
-			<z-m>0.31</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/adf.xml</path>
-		<name>ADF</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>-0.20</y-m>
-			<z-m>0.31</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/dimmer.xml</path>
-		<name>Dimmer</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.25</y-m>
-			<z-m>0.32</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/nav-light-switch.xml</path>
-		<name>Nav-light-switch</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.30</y-m>
-			<z-m>0.32</z-m>
-		</offsets>
-	</model>
-
-	<!-- Left Main Panel-->
-	<!---3.6254	0.340734	0.397723-->
-	<!---3.60222	0.148687	0.484147-->
-
-	<model>
-		<path>Aircraft/seahawk/Models/gear.xml</path>
-		<name>Gear-Indicator</name>
-		<offsets>
-			<x-m>-3.60222</x-m>
-			<y-m>-0.44</y-m>
-			<z-m>0.19</z-m>
-			<heading-deg>15</heading-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/flaps.xml</path>
-		<name>Flaps-Indicator</name>
-		<offsets>
-			<x-m>-3.6215</x-m>
-			<y-m>-0.35</y-m>
-			<z-m>0.20</z-m>
-			<heading-deg>15</heading-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/undercarriage-up-down.xml</path>
-		<name>Undercarriage-Control</name>
-		<offsets>
-			<x-m>-3.6215</x-m>
-			<y-m>-0.395</y-m>
-			<z-m>0.20</z-m>
-			<heading-deg>15</heading-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/switch-hook.xml</path>
-		<name>Switch-Hook</name>
-		<offsets>
-			<x-m>-3.6215</x-m>
-			<y-m>-0.35</y-m>
-			<z-m>0.265</z-m>
-			<heading-deg>15</heading-deg>
-		</offsets>
-	</model>
-	<!--<x-m>-3.715</x-m>
-	<y-m>-0.35</y-m>
-	<z-m>0.30</z-m>-->
-
-	<model>
-		<path>Aircraft/seahawk/Models/hook-green.xml</path>
-		<offsets>
-			<x-m>-3.6215</x-m>
-			<y-m>-0.35</y-m>
-			<z-m>0.30</z-m>
-			<heading-deg>15</heading-deg>
-		</offsets>
-	</model>
-
-	<!-- **************** Right Panel *********** -->
-	<model>
-		<path>Aircraft/seahawk/Models/egt.xml</path>
-		<name>EGT</name>
-		<offsets>
-			<x-m>-3.635</x-m>
-			<y-m>0.42</y-m>
-			<z-m>0.15</z-m>
-			<pitch-deg>-85</pitch-deg>
-			<heading-deg>-15</heading-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/seahawk/Models/sig.xml</path>
-		<offsets>
-			<x-m>-3.715</x-m>
-			<y-m>0.45</y-m>
-			<z-m>0.15</z-m>
-			<heading-deg>-15</heading-deg>
-		</offsets>
-	</model>
-
-	<!-- **************** Over Panel *********** -->
-	<model>
-		<path>/Aircraft/seahawk/Models/ggs.xml</path>
-		<name>Gunsight</name>
-		<offsets>
-			<x-m>-3.67</x-m>
-			<y-m>0.0</y-m>
-			<z-m>0.54</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>/Aircraft/seahawk/Models/asi-deck.xml</path>
-		<offsets>
-			<x-m>-3.63</x-m>
-			<y-m>-0.235</y-m>
-			<z-m>0.505</z-m>
-		</offsets>
-	</model>
-
-	<!-- **************************** Controls **************************** -->
-	<!---3.75598	0.0777141	0.342524-->
-
-	<!-- Flap Lever  -->
-	<model>
-		<path>Aircraft/seahawk/Models/flap.xml</path>
-		<offsets>
-			<x-m>-3.51</x-m>
-			<y-m>-0.37</y-m>
-			<z-m>0.0777141</z-m>
-		</offsets>
-	</model>
-
-	<!-- Airbrake Lever -->
-	<model>
-		<path>Aircraft/seahawk/Models/airbrake.xml</path>
-		<offsets>
-			<x-m>-3.51</x-m>
-			<y-m>-0.405</y-m>
-			<z-m>0.0777141</z-m>
-		</offsets>
-	</model>
-
-	<!-- flap emergency lowering -->
-	<model>
-		<path>Aircraft/seahawk/Models/flap-emrgy-lowering.xml</path>
-		<offsets>
-			<x-m>-3.57</x-m>
-			<y-m>-0.37</y-m>
-			<z-m>0.0777141</z-m>
-			<pitch-deg>-90</pitch-deg>
-		</offsets>
-	</model>
-
-	<!-- hook emergency lowering -->
-	<model>
-		<path>Aircraft/seahawk/Models/gear-emrgy-lowering.xml</path>
-		<offsets>
-			<x-m>-3.57</x-m>
-			<y-m>-0.41</y-m>
-			<z-m>0.0777141</z-m>
-			<pitch-deg>-90</pitch-deg>
-		</offsets>
-	</model>
-
-	<!-- gear emergency lowering -->
-	<model>
-		<path>Aircraft/seahawk/Models/flap-emrgy-lowering.xml</path>
-		<offsets>
-			<x-m>-3.57</x-m>
-			<y-m>-0.45</y-m>
-			<z-m>0.0777141</z-m>
-			<pitch-deg>-90</pitch-deg>
-		</offsets>
-	</model>
-
-	<!--<model>
-		<path>Aircraft/seahawk/Models/ejection-seat.xml</path>
-		<name>Ejection Seat</name>
-		<offsets>
-			<x-m>-3.275</x-m>
-			<y-m>0</y-m>
-			<z-m>-0.195</z-m>
-		</offsets>
-	</model>-->
-
-	<!-- ************************** End Controls *************************** -->
-
 	<!-- ***** Navigation Lights ****** -->
 
 	<model>
-		<path>AI/Aircraft/seahawk/Models/light-green.xml</path>
+		<path>Aircraft/seahawk/Models/light-green.xml</path>
 		<name>Stbd-Light</name>
 		<offsets>
 			<x-m>-1.01589</x-m>
@@ -383,7 +46,7 @@
 	</model>
 
 	<model>
-		<path>AI/Aircraft/seahawk/Models/light-red.xml</path>
+		<path>Aircraft/seahawk/Models/light-red.xml</path>
 		<name>Port-Light</name>
 		<offsets>
 			<x-m>-1.01589</x-m>
@@ -393,22 +56,12 @@
 	</model>
 
 	<model>
-		<path>AI/Aircraft/seahawk/Models/light-white.xml</path>
+		<path>Aircraft/seahawk/Models/light-white.xml</path>
 		<name>Tail-Light</name>
 		<offsets>
 			<x-m>5.86</x-m>
 			<y-m>0.0</y-m>
 			<z-m>0.707172</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>/Aircraft/seahawk/Models/strop.xml</path>
-		<name>New-Strop</name>
-		<offsets>
-			<x-m>-2.20708</x-m>
-			<y-m>0.0</y-m>
-			<z-m>-0.780228</z-m>
 		</offsets>
 	</model>
 
@@ -595,8 +248,8 @@
 		<visible>true</visible>
 
 		<drag-direction>vertical</drag-direction>
-		
-	 <!--no translation, we handle that seperately--> 
+
+	 <!--no translation, we handle that seperately-->
 
 		<action>
 			<binding>
@@ -1704,7 +1357,7 @@
 		</axis>
 	</animation>
 
-	<!-- Steering 
+	<!-- Steering
  <animation>
 	<type>rotate</type>
 	<object-name>UC-F-Upper-Leg</object-name>
@@ -2476,7 +2129,7 @@
 	</animation>
 
 	<!-- ********************** Exhaust ******************* -->
-	<!-- 
+	<!--
 	<animation>
 		<type>shader</type>
 		<shader>heat-haze</shader>
@@ -2563,7 +2216,7 @@
 			</less-than>
 		</condition>
 	</animation>
-	
+
 	-->
 
 	<!-- ********** launchbar stuff ************* -->
@@ -2906,10 +2559,4 @@
 		</offsets>
 	</model>
 
-	<!-- *** LoD for the whole model *** -->
-	<animation>
-		<type>range</type>
-		<min-m>0</min-m>
-		<max-m>10000</max-m>
-	</animation>
 </PropertyList>

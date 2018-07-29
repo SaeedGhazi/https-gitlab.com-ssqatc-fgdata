@@ -2,17 +2,15 @@
 
 <!-- Sea Hawk (WM930) model config file -->
 <!-- Lee Elliott 2003/04/17 leee-fgfs@spatial.freeserve.co.uk -->
-<!-- additions Vivian Meazza 2004/1/15 vivian.meazza.lineone.net 
+<!-- additions Vivian Meazza 2004/1/15 vivian.meazza.lineone.net
      to provide a 3d cockpit
-   
+
 $Id$
 
 -->
 
 <PropertyList>
-	
-		<path>../../../../Aircraft/seahawk/Models/SeaHawk-FGA6-WV859.ac</path>
-		<texture-path>../../../../Aircraft/seahawk/Models</texture-path>
+	<path>SeaHawk-FGA6-WV859.ac</path>
 
 	<nasal>
 		<load>
@@ -82,7 +80,7 @@ $Id$
 			a.unalias();
 		</unload>
 	</nasal>
-	
+
 		<offsets>
 			<z-m>0.0</z-m>
 			<pitch-deg>0</pitch-deg>
@@ -1377,7 +1375,7 @@ $Id$
 		</axis>
 	</animation>
 
-	<!-- Steering 
+	<!-- Steering
  <animation>
   <type>rotate</type>
   <object-name>UC-F-Upper-Leg</object-name>
@@ -2149,7 +2147,7 @@ $Id$
 	</animation>
 
 	<!-- ********************** Exhaust ******************* -->
-	<!-- 
+	<!--
 	<animation>
 		<type>shader</type>
 		<shader>heat-haze</shader>
@@ -2279,7 +2277,7 @@ $Id$
 		</condition>
 	</animation>
 
-	<!-- drop tanks 
+	<!-- drop tanks
 	<model>
 		<path>Aircraft/seahawk/Models/droptank.xml</path>
 		<name>Drop-Tank-Port</name>

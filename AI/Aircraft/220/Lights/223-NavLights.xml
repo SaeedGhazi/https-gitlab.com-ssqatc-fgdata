@@ -123,10 +123,16 @@
     <object-name>BeaconGrouped</object-name>
     <nopreview />
     <condition>
-      <greater-than>
-        <property>transponder-id</property>
-        <value type="string">0</value>
-      </greater-than>
+      <and>
+        <greater-than>
+          <property>transponder-id</property>
+          <value type="string">0</value>
+        </greater-than>
+        <equals>
+          <property>valid</property>
+          <value type="bool">true</value>
+        </equals>
+      </and>
     </condition>
   </animation>
 </PropertyList>

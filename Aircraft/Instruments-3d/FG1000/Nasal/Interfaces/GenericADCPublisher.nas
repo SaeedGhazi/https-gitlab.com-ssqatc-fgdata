@@ -28,8 +28,12 @@
 
 var GenericADCPublisher =
 {
+  new : func () {
 
-  new : func (frequency=0.1) {
+    # Update frequency can be controlled by a property.
+    var frequency = getprop("/instrumentation/FG1000/adc-update-frequency");
+    if (frequency == nil) frequency = 0.1;
+
     var obj = {
       parents : [
         GenericADCPublisher,

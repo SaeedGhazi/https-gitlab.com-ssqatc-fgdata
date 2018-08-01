@@ -3,7 +3,7 @@
   <!-- Position ALS Navigation Lights -->
   <model>
     <name>nav-right</name>
-    <path>../../../Lights/procedural_light_nav_right.xml</path>
+    <path>AI/Lights/procedural_light_nav_right.xml</path>
     <offsets>
       <x-m>2.75</x-m>
       <y-m>16.2414</y-m>
@@ -12,7 +12,7 @@
   </model>
   <model>
     <name>nav-left</name>
-    <path>../../../Lights/procedural_light_nav_left.xml</path>
+    <path>AI/Lights/procedural_light_nav_left.xml</path>
     <offsets>
       <x-m>2.75</x-m>
       <y-m>-16.2414</y-m>
@@ -21,7 +21,7 @@
   </model>
   <model>
     <name>nav-tail</name>
-    <path>../../../Lights/procedural_light_nav_tail.xml</path>
+    <path>AI/Lights/procedural_light_nav_tail.xml</path>
     <offsets>
       <x-m>20.0521</x-m>
       <y-m>0</y-m>
@@ -31,7 +31,7 @@
   <!-- Position ALS Strobes -->
   <model>
     <name>strobe-right</name>
-    <path>../../../Lights/procedural_light_strobe_right.xml</path>
+    <path>AI/Lights/procedural_light_strobe_right.xml</path>
     <offsets>
       <x-m>4.81569</x-m>
       <y-m>17.5302</y-m>
@@ -40,7 +40,7 @@
   </model>
   <model>
     <name>strobe-left</name>
-    <path>../../../Lights/procedural_light_strobe_left.xml</path>
+    <path>AI/Lights/procedural_light_strobe_left.xml</path>
     <offsets>
       <x-m>4.81569</x-m>
       <y-m>-17.5302</y-m>
@@ -49,7 +49,7 @@
   </model>
   <model>
     <name>strobe-tail</name>
-    <path>../../../Lights/procedural_light_strobe_tail.xml</path>
+    <path>AI/Lights/procedural_light_strobe_tail.xml</path>
     <offsets>
       <x-m>20.5</x-m>
       <y-m>0</y-m>
@@ -59,7 +59,7 @@
   <!-- Position Beacons -->
   <model>
     <name>beacon-top</name>
-    <path>../../../Lights/procedural_light_beacon_top.xml</path>
+    <path>AI/Lights/procedural_light_beacon_top.xml</path>
     <offsets>
       <x-m>-2.27937</x-m>
       <y-m>0</y-m>
@@ -68,7 +68,7 @@
   </model>
   <model>
     <name>beacon-bottom</name>
-    <path>../../../Lights/procedural_light_beacon_bottom.xml</path>
+    <path>AI/Lights/procedural_light_beacon_bottom.xml</path>
     <offsets>
       <x-m>-2.27937</x-m>
       <y-m>0</y-m>

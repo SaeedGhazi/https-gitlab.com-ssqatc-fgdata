@@ -1,63 +1,52 @@
 <?xml version="1.0"?>
 <PropertyList>
- <description>ATR 72-500</description>
- <author>Ian Tolosa</author>
- <path>Models/AT7.ac</path>
-  
+  <description>ATR 72-500</description>
+  <author>Ian Tolosa</author>
+  <path>Models/AT7.ac</path>
   <offsets>
-	<pitch-deg>-0.75</pitch-deg>   
+    <pitch-deg>-0.75</pitch-deg>
   </offsets>
- 
-  
- <animation>
-	<type>select</type>
-		<object-name>Gear_Open</object-name>
-		<condition>
-			<less-than>
-				<property>velocities/true-airspeed-kt</property>
-				<value>120</value>
-			</less-than>
-		</condition>
-	</animation>
-	
-	 <animation>
-	<type>select</type>
-		<object-name>Gear_Closed</object-name>
-		<condition>
-			<greater-than-equals>
-				<property>velocities/true-airspeed-kt</property>
-				<value>120</value>
-			</greater-than-equals>
-		</condition>
-	</animation>
-	
-	
-	
-	<animation>
-	<type>select</type>
-		<object-name>Prop_Blur_L</object-name>
-		<condition>
-			<greater-than-equals>
-				<property>velocities/true-airspeed-kt</property>
-				<value>15</value>
-			</greater-than-equals>
-		</condition>
-	</animation>
-	
-	<animation>
-	<type>select</type>
-		<object-name>Prop_Blur_R</object-name>
-		<condition>
-			<greater-than-equals>
-				<property>velocities/true-airspeed-kt</property>
-				<value>15</value>
-			</greater-than-equals>
-		</condition>
-	</animation>
-	
-
-	
-	<animation>
+  <animation>
+    <type>select</type>
+    <object-name>Gear_Open</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>120</value>
+      </less-than>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>Gear_Closed</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>120</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>Prop_Blur_L</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>15</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>Prop_Blur_R</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>15</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+  <animation>
     <type>spin</type>
     <object-name>Prop_L</object-name>
     <property>velocities/true-airspeed-kt</property>
@@ -72,9 +61,8 @@
       <y>0.000</y>
       <z>0.000</z>
     </axis>
-  </animation> 
-	
-<animation>
+  </animation>
+  <animation>
     <type>spin</type>
     <object-name>Prop_R</object-name>
     <property>velocities/true-airspeed-kt</property>
@@ -89,8 +77,9 @@
       <y>0.000</y>
       <z>0.000</z>
     </axis>
-  </animation> 
-	
-	
-	
+  </animation>
+    <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/AT7-NavLights.xml</path>
+  </model>
 </PropertyList>

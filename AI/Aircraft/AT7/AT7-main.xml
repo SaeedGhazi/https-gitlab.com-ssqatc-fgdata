@@ -78,7 +78,14 @@
       <z>0.000</z>
     </axis>
   </animation>
-    <!-- Add Navigation Lights Objects -->
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/AT7/Effects/AT7-LightMap</inherits-from>
+    <object-name>Body</object-name>
+    <object-name>Gear_Open</object-name>
+    <object-name>Gear_Closed</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
   <model>
     <path>Lights/AT7-NavLights.xml</path>
   </model>

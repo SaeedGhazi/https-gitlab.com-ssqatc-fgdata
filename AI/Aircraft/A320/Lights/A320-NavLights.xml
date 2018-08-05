@@ -6,27 +6,27 @@
     <name>nav-right</name>
     <path>AI/Lights/procedural_light_nav_right.xml</path>
     <offsets>
-      <x-m>10.5257</x-m>
-      <y-m>38.1556</y-m>
-      <z-m>7.67743</z-m>
+      <x-m>2.68</x-m>
+      <y-m>16.5221</y-m>
+      <z-m>4.476544</z-m>
     </offsets>
   </model>
   <model>
     <name>nav-left</name>
     <path>AI/Lights/procedural_light_nav_left.xml</path>
     <offsets>
-      <x-m>10.5257</x-m>
-      <y-m>-38.1556</y-m>
-      <z-m>7.67743</z-m>
+      <x-m>2.68</x-m>
+      <y-m>-16.5221</y-m>
+      <z-m>4.476544</z-m>
     </offsets>
   </model>
   <model>
     <name>nav-tail</name>
     <path>AI/Lights/procedural_light_nav_tail.xml</path>
     <offsets>
-      <x-m>35.5</x-m>
+      <x-m>19.85</x-m>
       <y-m>0</y-m>
-      <z-m>8.31777</z-m>
+      <z-m>4.92351</z-m>
     </offsets>
   </model>
   <!-- Position ALS Strobes -->
@@ -34,27 +34,27 @@
     <name>strobe-right</name>
     <path>AI/Lights/procedural_light_strobe_right.xml</path>
     <offsets>
-      <x-m>15.9576</x-m>
-      <y-m>39.8448</y-m>
-      <z-m>8.15137</z-m>
+      <x-m>4.40347</x-m>
+      <y-m>16.9238</y-m>
+      <z-m>4.57166</z-m>
     </offsets>
   </model>
   <model>
     <name>strobe-left</name>
     <path>AI/Lights/procedural_light_strobe_left.xml</path>
     <offsets>
-      <x-m>15.9576</x-m>
-      <y-m>-39.8448</y-m>
-      <z-m>8.15137</z-m>
+      <x-m>4.40347</x-m>
+      <y-m>-16.9238</y-m>
+      <z-m>4.57166</z-m>
     </offsets>
   </model>
   <model>
     <name>strobe-tail</name>
     <path>AI/Lights/procedural_light_strobe_tail.xml</path>
     <offsets>
-      <x-m>36.5</x-m>
+      <x-m>20</x-m>
       <y-m>0</y-m>
-      <z-m>8.31777</z-m>
+      <z-m>4.92351</z-m>
     </offsets>
   </model>
   <!-- Position Beacons -->
@@ -62,18 +62,18 @@
     <name>beacon-top</name>
     <path>AI/Lights/procedural_light_beacon_top.xml</path>
     <offsets>
-      <x-m>-10.3672</x-m>
+      <x-m>-2.78386</x-m>
       <y-m>0</y-m>
-      <z-m>11.4076</z-m>
+      <z-m>6.10126</z-m>
     </offsets>
   </model>
   <model>
     <name>beacon-bottom</name>
     <path>AI/Lights/procedural_light_beacon_bottom.xml</path>
     <offsets>
-      <x-m>-0.3725</x-m>
+      <x-m>0</x-m>
       <y-m>0</y-m>
-      <z-m>1.58512</z-m>
+      <z-m>1.47009</z-m>
     </offsets>
   </model>
   <!-- Group Lights for Shared Animations -->
@@ -94,7 +94,7 @@
     <object-name>beacon-top</object-name>
     <object-name>beacon-bottom</object-name>
   </animation>
-   <!-- Show Static Lights & Beacons when aircraft is moving -->
+  <!-- Show Static Lights & Beacons when aircraft is moving -->
   <animation>
     <type>select</type>
     <object-name>StaticGrouped</object-name>

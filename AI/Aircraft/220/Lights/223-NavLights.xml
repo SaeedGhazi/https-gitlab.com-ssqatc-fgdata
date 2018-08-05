@@ -93,10 +93,11 @@
     <object-name>beacon-top</object-name>
     <object-name>beacon-bottom</object-name>
   </animation>
-  <!-- Show Static Lights when aircraft is moving -->
+  <!-- Show Static Lights & Beacons when aircraft is moving -->
   <animation>
     <type>select</type>
     <object-name>StaticGrouped</object-name>
+    <object-name>BeaconGrouped</object-name>
     <nopreview />
     <condition>
       <greater-than>
@@ -115,24 +116,6 @@
         <property>velocities/true-airspeed-kt</property>
         <value>40</value>
       </greater-than>
-    </condition>
-  </animation>
-  <!-- Show Beacons when Transponder Active -->
-  <animation>
-    <type>select</type>
-    <object-name>BeaconGrouped</object-name>
-    <nopreview />
-    <condition>
-      <and>
-        <greater-than>
-          <property>transponder-id</property>
-          <value type="string">0</value>
-        </greater-than>
-        <equals>
-          <property>valid</property>
-          <value type="bool">true</value>
-        </equals>
-      </and>
     </condition>
   </animation>
 </PropertyList>

@@ -1,38 +1,27 @@
 <?xml version="1.0"?>
-
 <PropertyList>
- <description>A340-300</description>
- <author>3D Model Innis Cunningham, UV map liveries Brett Harrison</author> 
- <path>Models/A343.ac</path>
-<!-- Show Gear only when speed under 200 knots for parking and taxi and take off phases -->  
-     <animation>
-		<type>select</type>
-		<object-name>gear</object-name>
-		<condition>
-			<less-than>
-				<property>velocities/true-airspeed-kt</property>
-				<value>175</value>
-			</less-than>
-		</condition>
-	</animation>
-<!-- Tail and Windows Lightmap Effect -->
+  <description>A340-300</description>
+  <author>3D Model Innis Cunningham, UV map liveries Brett Harrison</author>
+  <path>Models/A343.ac</path>
+  <!-- Show Gear only when speed under 200 knots for parking and taxi and take off phases -->
+  <animation>
+    <type>select</type>
+    <object-name>gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>175</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
   <effect>
     <inherits-from>AI/Aircraft/A343/Effects/343-LightMap</inherits-from>
     <object-name>fuselage</object-name>
-	<object-name>gear</object-name>
+    <object-name>gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>
     <path>Lights/343-NavLights.xml</path>
   </model>
-  <!-- Enable Beacons and Strobes Pulse Behaviour -->
-  <nasal>
-    <load><![CDATA[
-        aircraft.light.new("/sim/model/A332/lighting/beacon", [0.7, 1.3]);
-        aircraft.light.new("/sim/model/A332/lighting/strobes", [0.02, 0.1, 0.02, 1.86]);
-        setprop("/sim/model/A332/lighting/beacon/enabled", 1);
-        setprop("/sim/model/A332/lighting/strobes/enabled", 1);
-      ]]></load>
-    <unload></unload>
-  </nasal>	 
 </PropertyList>

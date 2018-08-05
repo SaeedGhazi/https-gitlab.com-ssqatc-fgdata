@@ -3,7 +3,7 @@
   <description>Boeing 777-200 LR</description>
   <author>Ian(Yves) Tolosa. September 2016</author>
   <path>Models/77L.ac</path>
-   <!-- Pitch Forward so nosewheel on ground -->
+  <!-- Pitch Forward so nosewheel on ground -->
   <offsets>
     <pitch-deg>-0.95</pitch-deg>
   </offsets>
@@ -22,21 +22,10 @@
   <effect>
     <inherits-from>AI/Aircraft/777/Effects/77L-LightMap</inherits-from>
     <object-name>77L</object-name>
-	<object-name>Gear</object-name>
+    <object-name>Gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>
     <path>Lights/77L-NavLights.xml</path>
   </model>
-  <!-- Enable Beacons and Strobes Pulse Behaviour -->
-  <nasal>
-    <load><![CDATA[
-        aircraft.light.new("/sim/model/B777/lighting/beacon", [0.7, 1.3]);
-        aircraft.light.new("/sim/model/B777/lighting/strobes", [0.02, 1.98]);
-        setprop("/sim/model/B777/lighting/beacon/enabled", 1);
-        setprop("/sim/model/B777/lighting/strobes/enabled", 1);
-      ]]></load>
-    <unload></unload>
-  </nasal>
-  
 </PropertyList>

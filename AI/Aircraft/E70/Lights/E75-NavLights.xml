@@ -6,27 +6,27 @@
     <name>nav-right</name>
     <path>AI/Lights/procedural_light_nav_right.xml</path>
     <offsets>
-      <x-m>1.93072</x-m>
-      <y-m>12.3055</y-m>
-      <z-m>3.1682</z-m>
+      <x-m>1.90381</x-m>
+      <y-m>12.2143</y-m>
+      <z-m>3.12482</z-m>
     </offsets>
   </model>
   <model>
     <name>nav-left</name>
     <path>AI/Lights/procedural_light_nav_left.xml</path>
     <offsets>
-      <x-m>1.93072</x-m>
-      <y-m>-12.3055</y-m>
-      <z-m>3.1682</z-m>
+      <x-m>1.90381</x-m>
+      <y-m>-12.2143</y-m>
+      <z-m>3.12482</z-m>
     </offsets>
   </model>
   <model>
     <name>nav-tail</name>
     <path>AI/Lights/procedural_light_nav_tail.xml</path>
     <offsets>
-      <x-m>15.1477</x-m>
+      <x-m>16.2</x-m>
       <y-m>0</y-m>
-      <z-m>4.04033</z-m>
+      <z-m>3.88447</z-m>
     </offsets>
   </model>
   <!-- Position ALS Strobes -->
@@ -34,27 +34,27 @@
     <name>strobe-right</name>
     <path>AI/Lights/procedural_light_strobe_right.xml</path>
     <offsets>
-      <x-m>4.16188</x-m>
+      <x-m>4.1969</x-m>
       <y-m>12.9351</y-m>
-      <z-m>4.62991</z-m>
+      <z-m>4.57857</z-m>
     </offsets>
   </model>
   <model>
     <name>strobe-left</name>
     <path>AI/Lights/procedural_light_strobe_left.xml</path>
     <offsets>
-      <x-m>4.16188</x-m>
+      <x-m>4.1969</x-m>
       <y-m>-12.9351</y-m>
-      <z-m>4.62991</z-m>
+      <z-m>4.57857</z-m>
     </offsets>
   </model>
   <model>
     <name>strobe-tail</name>
     <path>AI/Lights/procedural_light_strobe_tail.xml</path>
     <offsets>
-      <x-m>15.2</x-m>
+      <x-m>17</x-m>
       <y-m>0</y-m>
-      <z-m>4.04033</z-m>
+      <z-m>3.88447</z-m>
     </offsets>
   </model>
   <!-- Position Beacons -->

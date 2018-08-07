@@ -728,8 +728,13 @@ var setWeight = func(wgt, opt) {
     # Weights can have "tank" indices which set the capacity of the
     # corresponding tank.  This code should probably be moved to
     # something like fuel.setTankCap(tank, gals)...
-    if(wgt.getNode("tank",0) == nil) { return 0; }
-    var ti = wgt.getNode("tank").getValue();
+    var ti = wgt.getNode("tank");
+
+    if(ti == nil or ti.getValue() == "") { 
+        return nil;
+    }
+    ti = ti.getValue();    
+
     var gn = opt.getNode("gals");
     var gals = gn == nil ? 0 : gn.getValue();
     var tn = props.globals.getNode("consumables/fuel/tank["~ti~"]", 1);
@@ -747,13 +752,26 @@ var setWeight = func(wgt, opt) {
 # appropriate weights therefrom.
 var setWeightOpts = func {
     var tankchange = 0;
-    foreach(var w; props.globals.getNode("sim").getChildren("weight")) {
-        var selected = w.getNode("selected");
-        if(selected != nil) {
-            foreach(var opt; w.getChildren("opt")) {
-                if(opt.getNode("name", 1).getValue() == selected.getValue()) {
-                    if(setWeight(w, opt)) { tankchange = 1; }
-                    break;
+    var root_node = nil;
+    if(fdm == "yasim") 
+      root_node = props.globals.getNode("sim");
+    elsif (fdm == "jsb") 
+      root_node = props.globals.getNode("payload");
+    if (root_node == nil) {
+        print("setWeight() - not supported for ",fdm);
+        tankchange = nil;
+    } 
+    else {
+        foreach (var w; root_node.getChildren("weight")) {
+            var selected = w.getNode("selected");
+            if (selected != nil) {
+                foreach (var opt; w.getChildren("opt")) {
+                    if (opt.getNode("name", 1).getValue() == selected.getValue()) {
+                        if (setWeight(w, opt)) {
+                            tankchange = 1;
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -773,30 +791,68 @@ var weightChangeHandler = func {
     # tanks selected and their slider bounds must change, but our GUI
     # isn't dynamic in that way.  The only way to get the changes on
     # screen is to pop it down and recreate it.
+    # 2018.3  - change to restore the current dialog as the topmost
+    #           as otherwise the open / close will put this dialog at the
+    #           front of the display. Requires the new logic in the core
+    #           that maintains /sim/gui/dialogs/current-dialog
     if(tankchanged) {
+        var current_dialog = getprop("/sim/gui/dialogs/current-dialog");
         var p = props.Node.new({"dialog-name": "WeightAndFuel"});
         fgcommand("dialog-close", p);
         showWeightDialog();
+        if (current_dialog != ""){
+            var show_node = props.Node.new({"dialog-name": current_dialog});
+            debug.dump(show_node);
+            fgcommand("dialog-show", show_node);
+        }
     }
 }
 
+# 2018.3 - certain aircraft (e.g. the F-15) have their own external stores dialog 
+#          in addition to the standard one. This listener and associated code 
+#          allow the two dialogs to remain synchronised.
+
+var weightDialogOpen = 0;
+setprop("sim/gui/dialogs/payload-reload",0);
+
+_setlistener("sim/gui/dialogs/payload-reload", func(v){
+    if (weightDialogOpen)
+      weightChangeHandler();
+});
 
 
 ##
 # Dynamically generates a weight & fuel configuration dialog specific to
 # the aircraft.
 #
+var weightAndFuel_x = nil;
+var weightAndFuel_y = nil;
+
+var dlg_nasal_close = "gui.weightAndFuel_y = cmdarg().getNode(\"lasty\").getValue();gui.weightAndFuel_x = cmdarg().getNode(\"lastx\").getValue();gui.weightDialogOpen = 0;";
+
 var showWeightDialog = func {
     var name = "WeightAndFuel";
 #   menu entry is "Fuel and Payload"
     var title = "Fuel and Payload Settings";
-
+    weightDialogOpen = 1;
     #
     # General Dialog Structure
     #
     dialog[name] = Widget.new();
     dialog[name].set("name", name);
     dialog[name].set("layout", "vbox");
+
+# 2018.3 - add a close method that will remember the coordinates and also clear the flag that
+#          indicates this dialog is visible
+    var nasal = dialog[name].addChild("nasal");
+    var nasal_close = nasal.addChild("close");
+    nasal_close.node.setValue(dlg_nasal_close);
+
+# if we have an X coordinate then set both (to the previous position as recorded on close).
+    if (weightAndFuel_x != nil){
+        dialog[name].set("x", weightAndFuel_x);
+        dialog[name].set("y", weightAndFuel_y);
+    }
 
     var header = dialog[name].addChild("group");
     header.set("layout", "hbox");

@@ -173,12 +173,6 @@
   <animation>
     <type>knob</type>
     <object-name>VolNAV</object-name>
-    <center>
-      <x-m>0.00252</x-m><y-m>-0.1223</y-m><z-m>0.07776</z-m>
-    </center>
-    <axis>
-      <x>-1</x><y>0</y><z>0</z>
-    </axis>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
@@ -206,13 +200,6 @@
   <animation>
     <type>knob</type>
     <object-name>NavOuter</object-name>
-    <center>
-      <x-m>0.00252</x-m><y-m>-0.1223</y-m><z-m>0.07776</z-m>
-    </center>
-    <axis>
-      <x>-1</x><y>0</y><z>0</z>
-    </axis>
-    <value>0</value>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
@@ -260,13 +247,6 @@
   <animation>
     <type>knob</type>
     <object-name>HDG</object-name>
-    <center>
-      <x-m>0.00252</x-m><y-m>-0.12206</y-m><z-m>0.01692</z-m>
-    </center>
-    <axis>
-      <x>-1</x><y>0</y><z>0</z>
-    </axis>
-    <property>instrumentation/fg1000/screen1/heading-bug-deg</property>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
@@ -539,13 +519,6 @@
     <type>knob</type>
     <object-name>AltOuter</object-name>
     <object-name>AltInner</object-name>
-    <center>
-      <x-m>0.00386</x-m><y-m>-0.12224</y-m><z-m>-0.07619</z-m>
-    </center>
-    <axis>
-      <x>-1</x><y>0</y><z>0</z>
-    </axis>
-    <value>0</value>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
@@ -574,12 +547,6 @@
   <animation>
     <type>knob</type>
     <object-name>VolCom</object-name>
-    <center>
-      <x-m>0.00252</x-m><y-m>0.1223</y-m><z-m>0.07776</z-m>
-    </center>
-    <axis>
-      <x>-1</x><y>0</y><z>0</z>
-    </axis>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>

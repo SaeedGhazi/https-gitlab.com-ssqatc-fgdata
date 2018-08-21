@@ -85,7 +85,7 @@ getDisplay : func(index) {
 },
 
 # Add an MFD, optionally setting the index. Returns the index of the MFD.
-addMFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
+addMFD : func(index=nil, targetcanvas=nil) {
 
   if (index == nil) {
     index = size(keys(me.displays));
@@ -103,13 +103,15 @@ addMFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
           });
   }
 
+  targetcanvas.set("visible", 0);
+
   var mfd = fg1000.MFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
   me.displays[index] = mfd;
   return index;
 },
 
 # Add a PFD, optionally setting the index. Returns the index of the PFD.
-addPFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
+addPFD : func(index=nil, targetcanvas=nil) {
 
   if (index == nil) {
     index = size(keys(me.displays));
@@ -127,12 +129,14 @@ addPFD : func(index=nil, targetcanvas=nil, screenObject=nil) {
           });
   }
 
+  targetcanvas.set("visible", 0);
+
   var pfd = fg1000.PFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
   me.displays[index] = pfd;
   return index;
 },
 
-
+# Display the PFD/MFD on a particular target_object (defaults to "Screen{index}")
 display : func(index, target_object=nil) {
   if (me.displays[index] == nil) {
     print("displayMFD: unknown display index " ~ index);
@@ -152,6 +156,7 @@ displayGUI : func(index, scale=1.0) {
   }
 
   var mfd_canvas = me.displays[index].getCanvas();
+  mfd_canvas.getCanvas().set("visible", visible);
   var gui = fg1000.GUI.new(me.displays[index], mfd_canvas, index, scale);
 },
 
@@ -159,5 +164,26 @@ getConfigStore : func() {
   return me.ConfigStore;
 },
 
+setVisible : func(index = nil, visible = 1) {
+  if (index == nil) {
+    foreach(var display; values(me.displays)) {
+      display.getCanvas().set("visible", visible);
+    }
+  } else {
+    if (me.displays[index] == nil) {
+      print("displayMFD: unknown display index " ~ index);
+    } else {
+      me.displays[index].getCanvas().set("visible", visible);
+    }
+  }
+},
+
+show : func(index = nil) {
+  me.setVisible(index, 1);
+},
+
+hide : func(index = nil) {
+  me.setVisible(index, 0);
+},
 
 };

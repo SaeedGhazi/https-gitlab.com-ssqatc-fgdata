@@ -66,7 +66,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>9M-MUA</registration>
     <heavy>true</heavy>
@@ -80,7 +80,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>9M-MUB</registration>
     <heavy>true</heavy>
@@ -94,7 +94,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>9M-MUD</registration>
     <heavy>true</heavy>

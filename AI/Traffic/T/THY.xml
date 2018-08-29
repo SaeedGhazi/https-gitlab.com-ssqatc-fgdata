@@ -1396,7 +1396,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JCI</registration>
     <heavy>Yes</heavy>
@@ -1410,7 +1410,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JDO</registration>
     <heavy>Yes</heavy>
@@ -1424,7 +1424,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JDP</registration>
     <heavy>Yes</heavy>
@@ -1438,7 +1438,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JDR</registration>
     <heavy>Yes</heavy>
@@ -1452,7 +1452,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JDS</registration>
     <heavy>Yes</heavy>
@@ -1662,7 +1662,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JOU</registration>
     <heavy>Yes</heavy>
@@ -1676,7 +1676,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JOV</registration>
     <heavy>Yes</heavy>
@@ -1690,7 +1690,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JOY</registration>
     <heavy>Yes</heavy>
@@ -1704,7 +1704,7 @@
     <actype>33X</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-JOZ</registration>
     <heavy>Yes</heavy>
@@ -2782,7 +2782,7 @@
     <actype>77F</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-LJL</registration>
     <heavy>Yes</heavy>
@@ -2796,7 +2796,7 @@
     <actype>77F</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype>gate</flighttype>
+    <flighttype>cargo</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>TC-LJM</registration>
     <heavy>Yes</heavy>

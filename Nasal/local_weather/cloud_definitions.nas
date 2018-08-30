@@ -322,7 +322,7 @@ else if (type == "Stratocumulus bottom"){
 	cloudAssembly.num_tex_y = 1;
 	
 	#characterize the cloud
-	cloudAssembly.bottom_shade = 0.7;
+	cloudAssembly.bottom_shade = 0.4;
 	cloudAssembly.n_sprites = 3;
 	cloudAssembly.min_width = 1200.0;
 	cloudAssembly.max_width = 1600.0;

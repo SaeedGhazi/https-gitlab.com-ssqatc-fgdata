@@ -1889,8 +1889,10 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 		var btype = "Congestus bottom";
 		var n_b = 6;
 		height_bias = 1.0;
-
+		var top_shade_store = local_weather.top_shade;
+		if (top_shade_store > 0.6) {local_weather.top_shade = 0.6;}
 		create_streak(btype,lat,lon, alt -offset_map["Congestus"] -900.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+		local_weather.top_shade = top_shade_store;
 
 		if (local_weather.cloud_shadow_flag == 1)
 			{
@@ -1917,7 +1919,10 @@ if (edge_bias > 0.0) {height_bias = height_bias +  15.0 *edge_bias + 20.0 * rand
 		create_streak(type,lat,lon, alt+ 0.5* (height* height_bias )-offset_map["Cumulus"], height * height_bias,n,0.0,edge,x,1,0.0,0.0,y,alpha,1.0);
 
 		height_bias = 1.0;
+		var top_shade_store = local_weather.top_shade;
+		if (top_shade_store > 0.6) {local_weather.top_shade = 0.6;}
 		create_streak(btype,lat,lon, alt -offset_map["Cumulus"] - 200.0, 100.0,n_b,0.0,edge,0.3*x,1,0.0,0.0,0.3*y,alpha,1.0);
+		local_weather.top_shade = top_shade_store;
 
 		if (local_weather.cloud_shadow_flag == 1)
 			{
@@ -2766,10 +2771,13 @@ for (var i=0; i<n_bottom; i=i+1)
 
 	var path = select_cloud_model(type,"bottom");
 
+	var top_shade_store = local_weather.top_shade;
+	if (top_shade_store > 0.6) {local_weather.top_shade = 0.6;}
 	if (thread_flag == 1)
 			{create_cloud_vec(path, lat, lon, alt, 0.0);}
 		else
 			{compat_layer.create_cloud(path, lat, lon, alt, 0.0);}
+	local_weather.top_shade = top_shade_store;
 
 	}
 

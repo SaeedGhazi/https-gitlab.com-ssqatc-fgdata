@@ -26,14 +26,7 @@
 		<lang type="string">es_AR</lang>
 		<lang type="string">es_MX</lang>
 		<lang type="string">es_ES</lang>
-
-		<strings>
-			<options>Translations/es/options.xml</options>
-			<menu>Translations/es/menu.xml</menu>
-			<sys>Translations/es/sys.xml</sys>
-			<tips>Translations/es/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
+		<xliff type="string">Translations/es/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
 	<locale>
@@ -41,14 +34,7 @@
 		<lang type="string">de_AT</lang>
 		<lang type="string">de_CH</lang>
 		<lang type="string">de_DE</lang>
-
-		<strings>
-			<options>Translations/de/options.xml</options>
-			<menu>Translations/de/menu.xml</menu>
-			<sys>Translations/de/sys.xml</sys>
-                        <tips>Translations/de/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
+		<xliff type="string">Translations/de/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
 	<locale>
@@ -57,14 +43,7 @@
 		<lang type="string">fr_CA</lang>
 		<lang type="string">fr_CH</lang>
 		<lang type="string">fr_FR</lang>
-
-		<strings>
-			<options>Translations/fr/options.xml</options>
-			<menu>Translations/fr/menu.xml</menu>
-			<sys>Translations/fr/sys.xml</sys>
-			<tips>Translations/fr/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
+		<xliff type="string">Translations/fr/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
 	<locale>
@@ -72,41 +51,20 @@
 		<lang type="string">italian</lang>
 		<lang type="string">it_CH</lang>
 		<lang type="string">it_IT</lang>
-
-		<strings>
-			<options>Translations/it/options.xml</options>
-			<menu>Translations/it/menu.xml</menu>
-			<sys>Translations/it/sys.xml</sys>
-			<tips>Translations/it/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
+		<xliff type="string">Translations/it/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
 	<locale>
 		<lang type="string">nl</lang>
 		<lang type="string">nl_BE</lang>
 		<lang type="string">nl_NL</lang>
-
-		<strings>
-			<options>Translations/nl/options.xml</options>
-			<menu>Translations/nl/menu.xml</menu>
-			<sys>Translations/nl/sys.xml</sys>
-                        <tips>Translations/nl/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
+		<xliff type="string">Translations/nl/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
 	<locale>
 		<lang type="string">pl</lang>
 		<lang type="string">pl_PL</lang>
-
-		<strings>
-			<options>Translations/pl/options.xml</options>
-			<menu>Translations/pl/menu.xml</menu>
-			<sys>Translations/pl/sys.xml</sys>
-                        <tips>Translations/pl/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
+		<xliff type="string">Translations/pl/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
         <locale>
@@ -136,91 +94,12 @@
 		</strings>
 	</locale>
 
-<!--
-	<locale>
-		<lang type="string">cs</lang>
-		<strings>
-			<options>Translations/cs/options.xml</options>
-			<menu>Translations/cs/menu.xml</menu>
-			<sys>Translations/cs/sys.xml</sys>
-                        <tips>Translations/cs/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
-	</locale>
-
-	<locale>
-		<lang type="string">da</lang>
-		<lang type="string">da_DK</lang>
-		<strings>
-			<options>Translations/da/options.xml</options>
-			<menu>Translations/da/menu.xml</menu>
-			<sys>Translations/da/sys.xml</sys>
-                        <tips>Translations/da/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
-	</locale>
-
-	<locale>
-		<lang type="string">el</lang>
-		<strings></strings>
-	</locale>
-
-	<locale>
-		<lang type="string">fi</lang>
-		<lang type="string">fi_FI</lang>
-		<strings></strings>
-	</locale>
-
-	<locale>
-		<lang type="string">hu</lang>
-		<strings></strings>
-	</locale>
-
-	<locale>
-		<lang type="string">is</lang>
-		<lang type="string">is_IS</lang>
-		<strings></strings>
-	</locale>
-
-	<locale>
-		<lang type="string">no</lang>
-		<lang type="string">no_NO</lang>
-		<strings></strings>
-	</locale>
--->
 	<locale>
 		<lang type="string">pt</lang>
 		<lang type="string">pt_BR</lang>
 		<lang type="string">pt_PT</lang>
-		<strings>
-			<options>Translations/pt/options.xml</options>
-			<menu>Translations/pt/menu.xml</menu>
-			<sys>Translations/pt/sys.xml</sys>
-                        <tips>Translations/pt/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
-		</strings>
-	</locale>
-    <!--
-	<locale>
-		<lang type="string">ru</lang>
-		<strings></strings>
+		<xliff type="string">Translations/pt/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
-	<locale>
-		<lang type="string">sk</lang>
-		<strings></strings>
-	</locale>
-
-	<locale>
-		<lang type="string">sv</lang>
-		<lang type="string">sv_SE</lang>
-		<strings></strings>
-	</locale>
-
-	<locale>
-		<lang type="string">tr</lang>
-		<strings></strings>
-	</locale>
- -->
 
 </PropertyList>

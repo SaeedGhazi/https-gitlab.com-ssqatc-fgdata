@@ -128,6 +128,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <filtering type="int">8</filtering>
       <shaders>
         <custom-settings type="bool" userarchive="y">false</custom-settings>
+        <clouds type="float" userarchive="y">0.0</clouds>
         <generic type="float" userarchive="y">1.0</generic>
         <landmass type="float" userarchive="y">1.0</landmass>
         <model type="float" userarchive="y">1.0</model>

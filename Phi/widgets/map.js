@@ -29,33 +29,45 @@ define(
 
                         this.isDragging = false;
 
-                        this.on('dragstart', function(evt) {
-                            evt.target.isDragging = true;
-                        });
-
-                        this.on('dragend', function(evt) {
-                            var pos = evt.target.getLatLng();
-
-                            var props = {
-                                name : "position",
-                                children : [
-                                        {
-                                            name : "latitude-deg",
-                                            value : pos.lat,
-                                        }, {
-                                            name : "longitude-deg",
-                                            value : pos.lng,
-                                        },
-                                ],
-                            };
-                            $.post("/json/", JSON.stringify(props));
-                            evt.target.isDragging = false;
-                        });
                     },
 
                 });
 
+                // Builds the marker for my aircraft
                 L.aircraftMarker = function(latlng, options) {
+                	var m = new L.AircraftMarker(latlng, options);
+                    m.on('dragstart', function(evt) {
+                        if( evt.target !== this)
+                        	return;
+                        evt.target.isDragging = true;
+                    });
+
+                    m.on('dragend', function(evt) {
+                        if( evt.target !== this)
+                        	return;
+                        
+                        var pos = evt.target.getLatLng();
+
+                        var props = {
+                            name : "position",
+                            children : [
+                                    {
+                                        name : "latitude-deg",
+                                        value : pos.lat,
+                                    }, {
+                                        name : "longitude-deg",
+                                        value : pos.lng,
+                                    },
+                            ],
+                        };
+                        $.post("/json/", JSON.stringify(props));
+                        evt.target.isDragging = false;
+                    });
+                    return m;
+                }
+
+                //Builds a marker for a ai or multiplayer aircraft
+                L.aiAircraftMarker = function(latlng, options) {
                     return new L.AircraftMarker(latlng, options);
                 }
             }
@@ -150,7 +162,10 @@ define(
 
                 if (params && params.selectedOverlays && params.overlays) {
                     params.selectedOverlays.forEach(function(ovl) {
-                        params.overlays[ovl].addTo(self.map);
+                    	if(params.overlays[ovl] != undefined){
+                    		params.overlays[ovl].addTo(self.map);
+                    	}
+                        
                     });
                 }
 

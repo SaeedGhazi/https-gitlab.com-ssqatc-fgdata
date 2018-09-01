@@ -13,11 +13,12 @@
     <ice_hex_col><use>/environment/scattering-phenomena/ice-hexagonal-column-factor</use></ice_hex_col>
     <ice_hex_sheet><use>/environment/scattering-phenomena/ice-hexagonal-sheet-factor</use></ice_hex_sheet>
     <parhelic><use>/environment/scattering-phenomena/parhelic-factor</use></parhelic>
+    <ring><use>/environment/scattering-phenomena/ring-factor</use></ring>
     <aurora_strength><use>/environment/aurora/strength</use></aurora_strength>
     <aurora_vsize><use>/environment/aurora/vsize</use></aurora_vsize>
     <aurora_hsize><use>/environment/aurora/hsize</use></aurora_hsize>
     <aurora_ray_factor><use>/environment/aurora/ray-factor</use></aurora_ray_factor>
-	<aurora_penetration_factor><use>/environment/aurora/penetration-factor</use></aurora_penetration_factor>
+    <aurora_penetration_factor><use>/environment/aurora/penetration-factor</use></aurora_penetration_factor>
     <lthickness><use>/environment/ground-haze-thickness-m</use></lthickness>
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
     <terrain_alt><use>/environment/mean-terrain-elevation-m</use></terrain_alt>
@@ -148,6 +149,11 @@
         <name>parhelic</name>
         <type>float</type>
         <value><use>parhelic</use></value>
+      </uniform>
+      <uniform>
+        <name>ring</name>
+        <type>float</type>
+        <value><use>ring</use></value>
       </uniform>
       <uniform>
         <name>ice_hex_sheet</name>

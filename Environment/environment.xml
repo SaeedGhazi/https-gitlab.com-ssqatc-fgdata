@@ -436,6 +436,8 @@
     <ice-hexagonal-column-factor type="double" userarchive="n">0.0</ice-hexagonal-column-factor>
     <ice-hexagonal-sheet-factor type="double" userarchive="n">0.0</ice-hexagonal-sheet-factor>
     <parhelic-factor type="double" userarchive="n">0.0</parhelic-factor>
+    <ring-factor type="double" userarchive="n">0.0</ring-factor>
+    <rainbow-factor type="double" userarchive="n">0.0</rainbow-factor>
   </scattering-phenomena>
  
  <!-- definitions for aurorae -->

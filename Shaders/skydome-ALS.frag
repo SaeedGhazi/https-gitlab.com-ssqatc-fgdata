@@ -31,6 +31,7 @@ uniform float horizon_roughness;
 uniform float ice_hex_col;
 uniform float ice_hex_sheet;
 uniform float parhelic;
+uniform float ring;
 uniform float aurora_strength;
 uniform float aurora_hsize;
 uniform float aurora_vsize;
@@ -258,7 +259,7 @@ float view_altitude = dot(nView, vec3 (0.0, 0.0, 1.0));
 //float halo_ring_enhancement =  smoothstep (0.88, 0.927, calpha) * (1.0 - smoothstep(0.927, 0.98, calpha));
 float halo_ring_enhancement =  smoothstep (0.88, 0.927, calpha) * (1.0 - smoothstep(0.927, 0.94, calpha));
 halo_ring_enhancement *= halo_ring_enhancement;
-
+halo_ring_enhancement *= ring;
 
 // parhelic circle
 

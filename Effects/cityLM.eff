@@ -23,6 +23,7 @@
                 <lightmap-factor type="float" n="3">0</lightmap-factor>
 
 		<snow-enabled type="int">1</snow-enabled>
+		<building-flag type="int">1</building-flag>
 
                 <!--
                 <lightmap-factor type="float" n="3">1</lightmap-factor>

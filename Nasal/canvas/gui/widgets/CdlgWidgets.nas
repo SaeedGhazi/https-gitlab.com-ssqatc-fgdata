@@ -1,7 +1,8 @@
-# generic widgets for aircraft-side canvas dialogs
+
+# generic widgets for canvas dialogs
 # Thorsten Renk 2018
 
-# box gauge ##############################################################
+# widget definitions ##############################################################
 
 var cdlg_widget_box = {
 	new: func (root, width, height, color, fill_color ) {
@@ -94,7 +95,7 @@ var cdlg_widget_box = {
 # tank gauge ##############################################################
 
 var cdlg_widget_tank = {
-	new: func (root, radius, color, fill_color ) {
+	new: func (root, radius, color, fill_color) {
 	 	var wtk = { parents: [cdlg_widget_tank] };
 		
 		wtk.radius = radius;
@@ -216,8 +217,13 @@ var cdlg_widget_property_label = {
  	var pl = { parents: [cdlg_widget_property_label] };
 		
 	pl.text_string = text;
+	pl.unit_string = "";
+	pl.unit_set = 0;
 	pl.size = utf8.size(text);
 	pl.limits = 0;
+	pl.limit_upper = 1e6;
+	pl.limit_lower = -1e6;
+	pl.limit_violation = 0;
 
 	if (text_color == nil) {text_color = [0.0, 0.0, 0.0];}
 	pl.text_color = text_color;
@@ -301,6 +307,64 @@ var cdlg_widget_property_label = {
 
 		me.text.setText(text);
 	},
+	
+	
+	setValue: func (value) {
+	
+		if (me.limits == 1)
+			{
+			me.check_limits(value);
+			}
+		me.text.updateText(me.formatValue(value));
+	},
+	
+	formatValue: func (value) {
+	
+		var textString = me.formatFunction(value);
+		return textString~me.unit_text;
+	},
+	
+	
+	formatFunction: func (value) {
+	
+		return sprintf("%0.0f", value);	
+	},
+	
+	
+	setUnit: func (unit) {
+		
+		me.unit_text = unit;
+		me.unit_set = 1;
+	
+	},
+	
+	setLimits: func (lLower, lUpper) {
+		me.limits = 1;
+		me.limit_upper = lUpper;
+		me.limit_lower = lLower;
+	
+	},
+	
+	check_limits: func (value) {
+	
+		if ((value < me.limit_lower) or (value > me.limit_upper))
+			{
+			if (me.limit_violation == 0)
+				{
+				me.text.setColor(1.0, 0.0, 0.0);
+				me.limit_violation = 1;
+				}
+			}
+		else	
+			{
+			if (me.limit_violation == 1)
+				{
+				me.text.setColor(me.text_color);
+				me.limit_violation = 0;
+				}
+			}
+	
+	},
 
 	setFont: func (font) {
 
@@ -324,13 +388,7 @@ var cdlg_widget_property_label = {
 		me.box.setScale(x,y);
 	},
 
-	setLimits: func (lower, upper = 1e6) {
-	
-		me.limits = 1;
-		me.limit_lower = lower;
-		me.limit_upper = upper; 
-
-	},	 
+ 
 
 	getOffset: func (string) {
 		return 0.0;
@@ -350,12 +408,380 @@ var cdlg_widget_property_label = {
 
 };
 
+# infobox  ##############################################################
 
+var cdlg_widget_infobox = {
+	new: func (root, width, title, texts, corner_radius = 0.0, frame_color = nil, title_color = nil, title_fill = nil, text_color = nil, text_fill = nil) {
+
+		var ib = { parents: [cdlg_widget_infobox] };
+		
+		ib.width = width;
+		ib.title = title;
+		ib.texts = texts;
+
+		ib.unit = "";
+
+		if (title_color == nil) {title_color = [0.0, 0.0, 0.0];}
+		if (text_color == nil) {text_color = [0.0, 0.0, 0.0];}
+		if (frame_color == nil) {frame_color = [0.0, 0.0, 0.0];}
+
+		ib.title_color = title_color;
+		ib.title_fill =  title_fill;
+		ib.text_color = text_color;
+		ib.text_fill = text_fill;
+		ib.frame_color = frame_color;
+
+		ib.font_size = 15;
+		ib.num_lines = size(texts);
+		ib.num_columns = size(texts[0]);
+		ib.font_height = 25.0;
+
+		ib.height = (ib.num_lines + 1) * ib.font_height;
+		ib.corner_radius = corner_radius;
+
+
+		ib.graph = root.createChild("group", "infobox");
+
+
+
+		var data = [];
+		var point = [0.0, -0.7* ib.font_height]; append(data, point);
+
+		point = [ib.width * 0.5 - ib.corner_radius, - 0.7* ib.font_height]; append(data, point);
+		point = [ib.width * 0.5 - ib.corner_radius * 0.617, - 0.7* ib.font_height + ib.corner_radius * 0.076]; append(data, point);
+		point = [ib.width * 0.5 - ib.corner_radius * 0.293, - 0.7* ib.font_height + ib.corner_radius * 0.293]; append(data, point);
+		point = [ib.width * 0.5 - ib.corner_radius * 0.076, - 0.7* ib.font_height + ib.corner_radius * 0.617]; append(data, point);
+		point = [ib.width * 0.5, - 0.7* ib.font_height + ib.corner_radius]; append(data, point);
+
+		point = [ib.width * 0.5, 0.3 * ib.font_height]; append(data, point);
+		point = [-ib.width * 0.5, 0.3 * ib.font_height]; append(data, point);
+
+		point = [-ib.width * 0.5, -0.7* ib.font_height + ib.corner_radius]; append(data, point);
+		point = [-ib.width * 0.5 + ib.corner_radius * 0.076, -0.7* ib.font_height + ib.corner_radius * 0.617]; append(data, point);
+		point = [-ib.width * 0.5 + ib.corner_radius * 0.293, -0.7* ib.font_height + ib.corner_radius * 0.293]; append(data, point);
+		point = [-ib.width * 0.5 + ib.corner_radius * 0.617, -0.7* ib.font_height + ib.corner_radius * 0.076]; append(data, point);
+		point = [-ib.width * 0.5 + ib.corner_radius, -0.7* ib.font_height]; append(data, point);
+		point = [0.0, - 0.7 * ib.font_height]; append(data, point);
+
+		ib.title_frame = ib.graph.createChild("path", "")
+		.setStrokeLineWidth(2)
+		.setColor(ib.frame_color)
+		.moveTo(data[0][0], data[0][1]);
+		for (var i = 0; (i< size(data)-1); i=i+1) 
+			{ib.title_frame.lineTo(data[i+1][0], data[i+1][1]);}
+
+		if (ib.title_fill != nil)
+			{
+			ib.title_frame.setColorFill(ib.title_fill);
+			}
+
+
+		data = [];
+
+
+		point = [0.0, 0.3* ib.font_height]; append(data, point);
+		point = [ib.width * 0.5, 0.3 * ib.font_height]; append(data, point);
+
+		point = [ib.width * 0.5, 10.0 + ib.num_lines *  ib.font_height - ib.corner_radius]; append(data, point);
+		point = [ib.width * 0.5 - ib.corner_radius * 0.293, 10.0 + ib.num_lines *  ib.font_height - ib.corner_radius * 0.293]; append(data, point);
+		point = [ib.width * 0.5 - ib.corner_radius, 10.0 + ib.num_lines *  ib.font_height]; append(data, point);
+
+
+		point = [-ib.width * 0.5 + ib.corner_radius, 10.0 + ib.num_lines *  ib.font_height]; append(data, point);
+		point = [-ib.width * 0.5 + ib.corner_radius * 0.293, 10.0 + ib.num_lines *  ib.font_height - ib.corner_radius * 0.293]; append(data, point);
+		point = [-ib.width * 0.5, 10.0 + ib.num_lines *  ib.font_height - ib.corner_radius]; append(data, point);
+
+		point = [-ib.width * 0.5, 0.3 * ib.font_height]; append(data, point);
+		point = [0.0, 0.3 * ib.font_height]; append(data, point);
+
+		ib.text_frame = ib.graph.createChild("path", "")
+		.setStrokeLineWidth(2)
+		.setColor(ib.frame_color)
+		.moveTo(data[0][0], data[0][1]);
+		for (var i = 0; (i< size(data)-1); i=i+1) 
+			{ib.text_frame.lineTo(data[i+1][0], data[i+1][1]);}
+
+		if (ib.text_fill != nil)
+			{
+			ib.text_frame.setColorFill(ib.text_fill);
+			}
+
+		var offset = me.getOffset(title);
+
+		ib.title_text = ib.graph.createChild("text")
+	      		.setText(title)
+			.setColor(text_color)
+			.setFontSize(15)
+			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+			.setAlignment("center-bottom")
+			.setTranslation(0, offset)
+			.setRotation(0.0);
+
+		ib.texts = [];
+		ib.values = [];
+
+		for (var i = 0; i< ib.num_lines; i=i+1)
+			{
+
+			var translation = 0.0;
+			var alignment = "center-bottom";
+
+			if (ib.num_columns == 2)
+				{
+				translation = -0.45 * ib.width;
+				alignment = "left-bottom";
+				}
+
+
+
+			var tmp_text = ib.graph.createChild("text")
+	      		.setText(texts[i][0])
+			.setColor(text_color)
+			.setFontSize(15)
+			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+			.setAlignment(alignment)
+			.setTranslation(translation, 5.0 + (i+1) * ib.font_height)
+			.setRotation(0.0);
+
+			tmp_text.enableUpdate();
+
+			if (ib.num_columns == 2)
+				{
+				append (ib.texts, tmp_text);
+				}
+			else
+				{
+				append (ib.values, tmp_text);
+				}
+
+			if (ib.num_columns == 2)
+				{
+				var tmp_value = ib.graph.createChild("text")
+		      		.setText(texts[i][1])
+				.setColor(text_color)
+				.setFontSize(15)
+				.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+				.setAlignment("left-bottom")
+				.setTranslation(0.05 * ib.width, 5.0 + (i+1) * ib.font_height)
+				.setRotation(0.0);
+
+				tmp_value.enableUpdate();
+
+				append (ib.values, tmp_value);
+
+				}
+			
+
+
+			}
+
+
+		return ib;
+
+	}, 
+
+	setTranslation: func (x,y) {
+
+		me.graph.setTranslation(x,y);
+
+	},
+
+
+	setText: func (i, text) {
+		
+		me.texts[i].updateText(text);
+
+	},
+
+	setValueText: func (i, text) {
+		
+		me.values[i].updateText(text);
+
+	},
+
+	setUnit: func (unit) {
+
+		me.unit = unit;
+
+	},
+
+	setValue: func (i, value) {
+		
+		var text = me.formatFunction(value)~me.unit;
+
+		me.values[i].updateText(text);
+	
+
+	},
+
+	formatFunction: func (value) {
+
+		return sprintf("%d", value);
+
+	},
+
+	getOffset: func (string) {
+		var flag = 0;
+		for (var i = 0; i < utf8.size(string); i=i+1)
+			{
+			var char = utf8.strc(string, i);
+			#print (char);
+
+			if ((char == 112) or (char == 121) or (char == 106) or (char == 103) or (char == 113))
+				{
+				flag = 1; break;
+				}
+			}
+		if (flag == 1) {return 4.0;}
+		else {return 0.0;}
+	},
+
+
+};
+
+# image stack ##############################################################
+
+var cdlg_widget_img_stack = {
+
+	new: func (root, stack, width, height, button_flag = 0) {
+	 	var is = { parents: [cdlg_widget_img_stack] };
+		
+		is.root = root;
+		is.width = width;
+		is.height = height;
+		is.index = 0;	
+		is.button_flag = button_flag;
+
+		is.n_elements = size(stack);
+		
+		is.stack = [];
+		is.graph = root.createChild("group", "stack");
+
+		for (var i = 0; i< is.n_elements; i = i+1)
+			{
+
+			
+			var tmp_image = is.graph.createChild("image")
+					.setFile(stack[i]);
+
+			tmp_image.setVisible(0);
+
+			append(is.stack, tmp_image);
+			}
+
+		is.stack[0].setVisible(1);
+
+
+		is.graph.addEventListener("click", func() {
+
+			if (is.button_flag == 0)
+				{is.increment();}
+			else if (is.button_flag == 1)
+			   	{is.depress();}
+
+			is.f();
+		  	});
+
+		return is;
+
+	},
+
+	setTranslation: func (x,y) {
+
+
+		me.graph.setTranslation(x,y);
+
+	},
+
+	
+	increment: func {
+
+		me.index += 1;
+
+		if (me.index == me.n_elements) {me.index = 0;}
+
+		for (var i=0; i< me.n_elements; i=i+1)
+			{
+			if (me.index == i)
+				{
+				me.stack[i].setVisible(1);
+				}
+			else
+				{
+				me.stack[i].setVisible(0);
+				}
+			
+			}
+
+	},
+
+	set_index: func (index) {
+
+		me.index = index;
+
+		if ((me.index > me.n_elements) or (me.index < 0)) {return;}
+
+		for (var i=0; i< me.n_elements; i=i+1)
+			{
+			if (me.index == i)
+				{
+				me.stack[i].setVisible(1);
+				}
+			else
+				{
+				me.stack[i].setVisible(0);
+				}
+			
+			}
+
+	},
+
+	depress: func {
+
+		me.index = 1;
+		me.stack[1].setVisible(1);
+		me.stack[0].setVisible(0);
+
+		settimer ( func {
+			me.index = 0;
+			me.stack[1].setVisible(0);
+			me.stack[0].setVisible(1);
+
+			}, 0.2);
+
+	},
+
+	setContextHelp: func (f) {
+
+			me.graph.addEventListener("mouseover", func(e) {
+			fgcommand("set-cursor", props.Node.new({'cursor':'left-right'}));
+			f("mouseover");
+		  	});
+
+			me.graph.addEventListener("mouseout", func(e) {
+			fgcommand("set-cursor", props.Node.new({'cursor':'inherit'}));
+			f("mouseout");
+		  	});
+
+
+
+	},
+
+	f: func {
+
+
+		return;
+
+	},
+
+
+
+};
 
 # analog gauge ##############################################################
 
 var cdlg_widget_analog_gauge = {
-	new: func (root, gauge_bg, gauge_needle ) {
+	new: func (root, gauge_bg, gauge_needle , width, height) {
  	var ag = { parents: [cdlg_widget_analog_gauge] };
 
 	ag.graph = root.createChild("group", "analog gauge");
@@ -412,6 +838,7 @@ var cdlg_clickspot = {
 			{
 			if ((math.abs(click_x - me.x) < me.rw) and (math.abs(click_y - me.y) < me.rh)) 					{
 				me.update_fractions (click_x, click_y);
+				me.f();
 				return 1;
 				}
 			}
@@ -422,6 +849,7 @@ var cdlg_clickspot = {
 			if (click_r < me.rw)
 				{
 				me.update_fractions (click_x, click_y);
+				me.f();
 				return 1;
 				}
 			}
@@ -449,4 +877,11 @@ var cdlg_clickspot = {
 
 	},
 
+	f: func {
+
+		return;
+
+	},
+
 };
+

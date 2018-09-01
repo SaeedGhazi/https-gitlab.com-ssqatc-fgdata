@@ -3743,6 +3743,11 @@ if (local_weather_running_flag == 1)
 
 local_weather_startup_flag = 1;
 
+# randomize high ice scattering properties
+
+setprop("/environment/scattering-phenomena/ring-factor", rand());
+setprop("/environment/scattering-phenomena/rainbow-factor", rand());
+
 
 var type = getprop("/local-weather/tmp/tile-type");
 

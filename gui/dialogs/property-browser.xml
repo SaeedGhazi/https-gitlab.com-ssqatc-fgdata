@@ -54,7 +54,7 @@
 
 	<property-list>
 		<name>property-list</name>
-		<pref-height>250</pref-height>
+		<pref-height>500</pref-height>
 		<halign>fill</halign>
 		<valign>fill</valign>
 		<stretch>true</stretch>

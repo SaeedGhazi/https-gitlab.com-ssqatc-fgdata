@@ -103,12 +103,16 @@ Mooring.presetseaplane = func {
         }
         if (!getprop("/controls/switches/master-bat")) {
             setprop("/controls/switches/master-bat", 1);
+            if (!getprop("/controls/switches/master-bat"))
+                setprop("/controls/switches/master-avionics");
             setprop("/controls/gear/gear-down", 0);
             setprop("/fdm/jsbsim/gear/gear-pos-norm", 0);
             settimer(func {
                 setprop("/controls/switches/master-bat", 0);
             }, 0.1);
         } else {
+            if (!getprop("/controls/switches/master-bat"))
+                setprop("/controls/switches/master-avionics");
             setprop("/controls/gear/gear-down", 0);
             setprop("/fdm/jsbsim/gear/gear-pos-norm", 0);
         }
@@ -128,6 +132,7 @@ Mooring.presetharbour = func {
                 print("PORT ",harbour,"    Index ",i);
                 me.setmoorage(i, airport);
                 me.prepareseaplane();
+                c172p.oil_consumption.stop();
                 fgcommand("reposition");
                 break;
             }
@@ -144,5 +149,5 @@ Mooring.prepareseaplane = func{
     setprop("/sim/model/c172p/securing/tiedownL-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownR-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownT-visible", 0);
-    setprop("/sim/model/c172p/securing/chock-visible", 0);
+    setprop("/sim/model/c172p/securing/chock", 0);
 }

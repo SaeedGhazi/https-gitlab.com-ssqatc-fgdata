@@ -46,15 +46,14 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), dg-505 (Jonathan Schellhase), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen, Horacio, D-ECHO, Jarl Arntzen (jarlarntzen)</author>
 
         <status>advanced production</status>
-        <aircraft-version>2018.2</aircraft-version>
+        <aircraft-version>2018.3</aircraft-version>
+        <minimum-fg-version>2018.2.0</minimum-fg-version>
         <rating>
             <FDM type="int">4</FDM>
             <systems type="int">5</systems>
             <model type="int">4</model>
             <cockpit type="int">5</cockpit>
         </rating>
-
-        <!--variant-of>c172p</variant-of-->
 
         <flight-model archive="y">jsb</flight-model>
 
@@ -144,9 +143,17 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
                 <lighting>
                     <taxi type="bool">false</taxi>
                     <landing type="bool">false</landing>
-                    <ra-r type="double">0.05</ra-r>
+                    <ra-r type="double">.05</ra-r>
+                    <ra-g type="double">.05</ra-g>
+                    <ra-b type="double">.03</ra-b>
+                    <dome-norm type="float">0</dome-norm>
+                    <gps-norm type="float">0</gps-norm>
+                    <!--ra-r type="double">0.05</ra-r>
                     <ra-g type="double">0.025</ra-g>
-                    <ra-b type="double">0.025</ra-b>
+                    <ra-b type="double">0.025</ra-b-->
+                    <courtesy-lights>
+                         <courtesy-on type="bool">false</courtesy-on>
+                    </courtesy-lights>
                 </lighting>
 
                 <!-- Damage type (0 = normal, 1 = broken, 2 = damaged) used by model -->
@@ -183,11 +190,11 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
                 </tiedowns>
 
                 <securing>
-                    <!-- property that decides if chockes, pitot cover and tiedowns are allowed or not -->
-                    <allow-securing-aircraft type="bool">false</allow-securing-aircraft>
-
                     <!-- RBF: pitot cover "remove before flight" -->
                     <pitot-cover-visible type="bool">false</pitot-cover-visible>
+
+                    <!-- cowl plugs -->
+                    <cowl-plugs-visible type="bool">false</cowl-plugs-visible>
 
                     <!-- chocks used to secure the front gear -->
                     <chock type="bool">false</chock>
@@ -201,8 +208,16 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
                     <brake-parking type="bool">true</brake-parking>
                 </securing>
 
+                <control-surfaces>
+                      <elevator-checked type="bool">false</elevator-checked>
+                      <left-aileron-checked type="bool">false</left-aileron-checked>
+                      <right-aileron-checked type="bool">false</right-aileron-checked>
+                      <rudder-checked type="bool">false</rudder-checked>
+                </control-surfaces>
+
                 <enable-fog-frost type="bool">true</enable-fog-frost>
                 <garmin196-visible type="bool">false</garmin196-visible>
+                <digitalclock-visible type="bool">false</digitalclock-visible>
 
                 <ladder_position_l type ="int">1</ladder_position_l>
 
@@ -256,9 +271,9 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <aircraft-data>
             <path>/sim/rendering/shadow-volume</path>
             <path>/sim/model/occupants</path>
-            <path>/sim/model/c172p/securing/allow-securing-aircraft</path>
             <path>/sim/model/c172p/cockpit/control-lock-placed</path>
             <path>/sim/model/c172p/securing/pitot-cover-visible</path>
+            <path>/sim/model/c172p/securing/cowl-plugs-visible</path>
             <path>/sim/model/c172p/securing/chock</path>
             <path>/sim/model/c172p/securing/tiedownL-visible</path>
             <path>/sim/model/c172p/securing/tiedownR-visible</path>
@@ -266,6 +281,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <path>/sim/model/c172p/brake-parking</path>
             <path>/sim/model/c172p/enable-fog-frost</path>
             <path>/sim/model/c172p/garmin196-visible</path>
+            <path>/sim/model/c172p/digitalclock-visible</path>
             <path>/engines/active-engine/carb_icing_allowed</path>
             <path>/engines/active-engine/oil_consumption_allowed</path>
             <path>/engines/active-engine/oil-service-hours</path>
@@ -273,8 +289,6 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <path>/fdm/jsbsim/engine/damage-level</path>
             <path>/fdm/jsbsim/settings/damage</path>
             <path>/fdm/jsbsim/settings/damage-flag</path>
-            <path>/fdm/jsbsim/bushkit</path>
-            <path>/controls/engines/active-engine</path>
             <path>/environment/aircraft-effects/cabin-heat-set</path>
             <path>/environment/aircraft-effects/cabin-air-set</path>
             <path>/controls/climate-control/overhead-vent-front-left</path>
@@ -291,6 +305,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <path>/engines/active-engine/complex-engine-procedures</path>
             <path>/sim/model/immat</path>
             <path>/controls/mooring/automatic</path>
+            <path>/save/valid-flag</path>
         </aircraft-data>
 
         <current-view>
@@ -306,50 +321,78 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <previews>
             <preview>
                 <type>cockpit</type>
-                <path>c172p-preview0.jpg</path>
-                <splash type="bool">false</splash>
+                <path>Previews/c172p-preview0.jpg</path>
+                <splash type="bool">true</splash>
             </preview>
             <preview>
                 <type>exterior</type>
-                <path>c172p-preview1.jpg</path>
+                <path>Previews/c172p-preview1.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview2.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview3.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview4.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview5.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview6.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview7.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview8.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview9.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview10.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c172p-preview11.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>cockpit</type>
+                <path>Previews/c172p-preview12.jpg</path>
                 <splash type="bool">true</splash>
             </preview>
             <preview>
                 <type>detail</type>
-                <path>c172p-preview2.jpg</path>
-                <splash type="bool">true</splash>
-            </preview>
-            <preview>
-                <type>exterior</type>
-                <path>c172p-preview3.jpg</path>
-                <splash type="bool">true</splash>
-            </preview>
-            <preview>
-                <type>exterior</type>
-                <path>c172p-preview4.jpg</path>
-                <splash type="bool">true</splash>
-            </preview>
-            <preview>
-                <type>exterior</type>
-                <path>c172p-preview5.jpg</path>
-                <splash type="bool">true</splash>
-            </preview>
-            <preview>
-                <type>exterior</type>
-                <path>c172p-preview6.jpg</path>
-                <splash type="bool">true</splash>
-            </preview>
-            <preview>
-                <type>exterior</type>
-                <path>c172p-preview7.jpg</path>
-                <splash type="bool">true</splash>
-            </preview>
-            <preview>
-                <type>exterior</type>
-                <path>c172p-preview8.jpg</path>
+                <path>Previews/c172p-preview13.jpg</path>
                 <splash type="bool">true</splash>
             </preview>
         </previews>
+        <startup>
+            <splash-texture>Aircraft/c172p/Previews/c172p-preview2.jpg</splash-texture>
+        </startup>
 
         <!-- Hide the 2D panel -->
         <panel>
@@ -367,6 +410,9 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             </autopilot>
             <autopilot n="2">
                 <path>Systems/control-lock.xml</path>
+            </autopilot>
+            <autopilot n="3">
+                <path>Systems/yoke-cord.xml</path>
             </autopilot>
 
             <property-rule n="100">
@@ -408,6 +454,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <property-rule n="108">
                 <path>Aircraft/c172p/Systems/electrical.xml</path>
             </property-rule>
+
         </systems>
 
         <sound>
@@ -428,9 +475,9 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <multiplay>
             <chat_display>1</chat_display>
             <generic>
-                <float n="0" alias="/sim/model/door-positions/rightDoor/position-norm"/>
-                <float n="1" alias="/sim/model/door-positions/leftDoor/position-norm"/>
-                <float n="2" alias="/sim/model/door-positions/baggageDoor/position-norm"/>
+                <float n="0" alias="/sim/model/door-positions/rightDoor/position-norm-effective"/>
+                <float n="1" alias="/sim/model/door-positions/leftDoor/position-norm-effective"/>
+                <float n="2" alias="/sim/model/door-positions/baggageDoor/position-norm-effective"/>
                 <float n="3" alias="/sim/model/door-positions/leftWindow/position-norm"/>
                 <float n="4" alias="/sim/model/door-positions/rightWindow/position-norm"/>
                 <float n="5" alias="/controls/gear/water-rudder-down-actual"/>
@@ -447,7 +494,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
                 <float n="16" alias="/fdm/jsbsim/ground/left-tyre-smoke-ground-effect-speed-kt-actual"/>
                 <float n="17" alias="/fdm/jsbsim/ground/right-tyre-smoke-ground-effect-speed-kt-actual"/>
                 <float n="18" alias="/sim/model/door-positions/oilDoor/position-norm"/>
-                <!-- 19 unused -->
+                <float n="19" alias="/sim/model/door-positions/gloveboxDoor/position-norm"/>
 
                 <!-- 0 unused -->
                 <!-- 1 unused -->
@@ -494,6 +541,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <!-- Enable the ALS shadow volume by default -->
         <rendering>
             <shadow-volume type="bool">true</shadow-volume>
+            <shadow-volume-fix type="bool">true</shadow-volume-fix>
         </rendering>
 
         <!-- Fix scrolling direction of knobs -->
@@ -501,8 +549,21 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <invert-mouse-wheel type="bool">true</invert-mouse-wheel>
         </mouse>
 
-        <state include="states/c172-approach-overlay.xml" n="0"/>
-        <state include="states/c172-cruise-overlay.xml" n="1"/>
+        <gui>
+            <dialogs>
+                <c172p>
+                    <save>
+                        <filename type="string">save1.xml</filename>
+                        <filename type="string">save2.xml</filename>
+                        <filename type="string">save3.xml</filename>
+                        <filename type="string">save4.xml</filename>
+                        <filename type="string">save5.xml</filename>
+                    </save>
+                </c172p>
+            </dialogs>
+        </gui>
+
+      <state include="states/c172p-automatic-overlay.xml" n="0"/>
 
     </sim>
 
@@ -516,7 +577,6 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <flight>
             <aileron-trim type="double">0.022</aileron-trim>
             <rudder-trim type="double">0.02</rudder-trim>
-
             <freeze-yoke type="bool">false</freeze-yoke>
             <aileron-cmd type="double">0.0</aileron-cmd>
             <elevator-cmd type="double">0.0</elevator-cmd>
@@ -558,10 +618,13 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         </climate-control>
         <switches>
             <master-avionics type="bool">false</master-avionics>
+            <master-gear type="bool">false</master-gear>
             <starter type="bool">false</starter>
             <master-alt type="bool">false</master-alt>
             <master-bat type="bool">false</master-bat>
             <magnetos type="int">0</magnetos>
+            <dome-red type="int">0</dome-red>
+            <dome-white type="bool">false</dome-white>
         </switches>
         <lighting>
             <nav-lights type="bool">false</nav-lights>
@@ -571,6 +634,9 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <landing-lights type="bool">false</landing-lights>
             <instruments-norm type="double">0.0</instruments-norm>
             <radio-norm type="double">0.0</radio-norm>
+            <dome-white-norm type="double">1.0</dome-white-norm>
+            <gps-norm type="double">0.0</gps-norm>
+            <gearled type="bool">true</gearled>
         </lighting>
         <gear>
             <water-rudder type="bool">0</water-rudder>
@@ -733,6 +799,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <carb_icing_allowed type="bool">false</carb_icing_allowed>
             <auto-start type="bool">false</auto-start>
             <complex-engine-procedures type="bool">false</complex-engine-procedures>
+            <damage_allowed>false</damage_allowed>
         </active-engine>
 
         <!-- Following properties are part of a static list of properties
@@ -850,8 +917,12 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <file>Nasal/ki266.nas</file>
             <file>Nasal/engine.nas</file>
             <file>Nasal/avionics.nas</file>
-            <file>Nasal/flashlight.nas</file>
+            <file>Nasal/interior-lighting.nas</file>
+            <file>Nasal/particle-effects-manager.nas</file>
             <file>Nasal/light-manager.nas</file>
+            <file>Nasal/save.nas</file>
+            <file>Nasal/dialogs.nas</file>
+            <file>Nasal/state-manager.nas</file>
             <!-- Damage Mod -->
             <file>Nasal/physics.nas</file>
             <file>Nasal/tiedowns.nas</file>
@@ -873,8 +944,11 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <file>Nasal/jsbsim-hydrodynamics.nas</file>
         </hydrodynamics>
         <garmin196>
-            <file>Aircraft/Instruments-3d/garmin196/garmin196.nas</file>
+            <file>Aircraft/c172p/Models/Interior/Panel/Instruments/garmin196/garmin196.nas</file>
         </garmin196>
+        <clock>
+            <file>Nasal/clock.nas</file>
+        </clock>
         <mooring>
             <file>Aircraft/c172p/Nasal/mooring.nas</file>
         </mooring>
@@ -1051,12 +1125,25 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             </settings>
             <aero>
                 <coefficient>
-                    <spiral-propwash-coeff type="double">0.5</spiral-propwash-coeff>
+                    <spiral-propwash-coeff type="double">0.25</spiral-propwash-coeff>
                 </coefficient>
             </aero>
         </jsbsim>
     </fdm>
     <!-- End Damage Mod -->
+
+    <save>
+        <valid-flag type="bool">false</valid-flag>
+        <latitude-deg type="double">0.0</latitude-deg>
+        <longitude-deg type="double">0.0</longitude-deg>
+        <altitude-ft type="double">0.0</altitude-ft>
+        <pitch-deg type="double">0.0</pitch-deg>
+        <heading-deg type="double">0.0</heading-deg>
+        <roll-deg type="double">0.0</roll-deg>
+        <uBody-fps type="double">0.0</uBody-fps>
+        <vBody-fps type="double">0.0</vBody-fps>
+        <wBody-fps type="double">0.0</wBody-fps>
+    </save>
 
     <systems>
         <electrical>

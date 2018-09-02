@@ -13,22 +13,24 @@ This tutorial will guide you through the Preflight inspection
     <audio-dir>Tutorials/preflight</audio-dir>
     <timeofday>morning</timeofday>
     <presets>
-        <airport-id>LELL</airport-id>
+        <airport-id>PHTO</airport-id>
         <on-ground>1</on-ground>
-        <runway>13</runway>
         <altitude-ft>-9999</altitude-ft>
-        <latitude-deg>41.52158426</latitude-deg>
-        <longitude-deg>2.100607724</longitude-deg>
-        <heading-deg>40</heading-deg>
+        <latitude-deg>19.71731272</latitude-deg>
+        <longitude-deg>-155.0597483</longitude-deg>
+        <heading-deg>125</heading-deg>
         <airspeed-kt>0</airspeed-kt>
         <glideslope-deg>0</glideslope-deg>
         <offset-azimuth-deg>0</offset-azimuth-deg>
         <offset-distance-nm>0</offset-distance-nm>
+        <airport-requested>true</airport-requested>
+        <runway-requested>true</runway-requested>
+        <parking-requested>true</parking-requested>
     </presets>
 
     <step>
         <set>
-            <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
+            <property>/engines/active-engine/complex-engine-procedures</property>
             <value>true</value>
         </set>
         <set>
@@ -37,7 +39,7 @@ This tutorial will guide you through the Preflight inspection
         </set>
         <set>
             <property>/instrumentation/adf/frequencies/selected-khz</property>
-            <value>367</value>
+            <value>332</value> <!-- PAHOA NDB -->
         </set>
         <set>
             <property>/environment/weather-scenario</property>
@@ -152,6 +154,10 @@ This tutorial will guide you through the Preflight inspection
             <value>true</value>
         </set>
         <set>
+            <property>/sim/model/c172p/securing/cowl-plugs-visible</property>
+            <value>true</value>
+        </set>
+        <set>
             <property>/sim/model/c172p/securing/tiedownL-visible</property>
             <value>true</value>
         </set>
@@ -215,7 +221,23 @@ This tutorial will guide you through the Preflight inspection
             <property>/sim/model/c172p/cockpit/control-lock-visible</property>
             <value>true</value>
         </set>
-        <message>Welcome to Sabadell Airport. In this lesson we'll check the condition of our aircraft.</message>
+        <set>
+            <property>/sim/model/c172p/control-surfaces/elevator-checked</property>
+            <value>false</value>
+        </set>
+        <set>
+            <property>/sim/model/c172p/control-surfaces/left-aileron-checked</property>
+            <value>false</value>
+        </set>
+        <set>
+            <property>/sim/model/c172p/control-surfaces/right-aileron-checked</property>
+            <value>false</value>
+        </set>
+        <set>
+            <property>/sim/model/c172p/control-surfaces/rudder-checked</property>
+            <value>false</value>
+        </set>
+        <message>Welcome to Hilo Airport. In this lesson we'll check the condition of our aircraft.</message>
         <view>
             <heading-offset-deg>0.0</heading-offset-deg>
             <pitch-offset-deg>-12</pitch-offset-deg>
@@ -253,7 +275,7 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
-        <message>Remove the control lock if there exists one.</message>
+        <message>Remove the control lock if it is present.</message>
         <view>
             <heading-offset-deg>36.4</heading-offset-deg>
             <pitch-offset-deg>-44.2</pitch-offset-deg>
@@ -264,10 +286,10 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>49.2</field-of-view>
         </view>
         <marker>
-            <x-m>-0.3450</x-m>
-            <y-m>-0.3133</y-m>
-            <z-m>-0.1725</z-m>
-            <scale>3.4000</scale>
+            <x-m>-0.2140</x-m>
+            <y-m>-0.2240</y-m>
+            <z-m>0.0000</z-m>
+            <scale>3.0000</scale>
         </marker>
         <error>
             <message>If there is a control lock you need to remove it so that you can move the yoke!</message>
@@ -280,15 +302,10 @@ This tutorial will guide you through the Preflight inspection
         </error>
         <exit>
             <condition>
-                <or>
-                    <not>
-                        <property>/sim/model/c172p/cockpit/control-lock-placed</property>
-                        <property>/sim/model/c172p/cockpit/control-lock-visible</property>
-                    </not>
-                    <not>
-                        <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
-                    </not>
-                </or>
+                <not>
+                    <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                    <property>/sim/model/c172p/cockpit/control-lock-visible</property>
+                </not>
             </condition>
         </exit>
     </step>
@@ -337,10 +354,10 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>48.4</field-of-view>
         </view>
         <marker>
-            <x-m>-0.3500</x-m>
-            <y-m>-0.3600</y-m>
-            <z-m>-0.2700</z-m>
-            <scale>2.0000</scale>
+            <x-m>-0.2000</x-m>
+            <y-m>-0.3471</y-m>
+            <z-m>-0.1926</z-m>
+            <scale>1.0992</scale>
         </marker>
         <error>
             <message>Switch off the ignition.</message>
@@ -373,10 +390,10 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>48.4</field-of-view>
         </view>
         <marker>
-            <x-m>-0.3600</x-m>
-            <y-m>-0.3230</y-m>
-            <z-m>-0.2660</z-m>
-            <scale>1.7000</scale>
+            <x-m>-0.3000</x-m>
+            <y-m>-0.3231</y-m>
+            <z-m>-0.2198</z-m>
+            <scale>1.0000</scale>
         </marker>
         <error>
             <message>To prevent the avionics from getting damaged during startup, switch off the avionics.</message>
@@ -399,16 +416,17 @@ This tutorial will guide you through the Preflight inspection
             <heading-offset-deg>9.2</heading-offset-deg>
             <pitch-offset-deg>-24.3</pitch-offset-deg>
             <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-0.35</x-offset-m>
-            <y-offset-m>-0.08</y-offset-m>
+            <x-offset-m>-0.4</x-offset-m>
+            <y-offset-m>-0.1</y-offset-m>
             <z-offset-m>0.2</z-offset-m>
             <field-of-view>48.4</field-of-view>
         </view>
+
         <marker>
-            <x-m>-0.3500</x-m>
-            <y-m>-0.3967</y-m>
-            <z-m>-0.2283</z-m>
-            <scale>2.0413</scale>
+            <x-m>-0.3124</x-m>
+            <y-m>-0.4083</y-m>
+            <z-m>-0.1917</z-m>
+            <scale>2.0909</scale>
         </marker>
         <error>
             <message>We now want to check the fuel level, so you have to switch the battery on.</message>
@@ -426,21 +444,22 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
-        <message>Check the fuel level, whether there is enough fuel available for your planned flight.</message>
+        <message>Check the fuel level, to see whether there is enough fuel available for your planned flight.</message>
         <view>
-            <heading-offset-deg>8.3</heading-offset-deg>
-            <pitch-offset-deg>-17.5</pitch-offset-deg>
+            <heading-offset-deg>8.8</heading-offset-deg>
+            <pitch-offset-deg>-8.3</pitch-offset-deg>
             <roll-offset-deg>0.0</roll-offset-deg>
             <x-offset-m>-0.3</x-offset-m>
             <y-offset-m>0.0</y-offset-m>
             <z-offset-m>0.2</z-offset-m>
             <field-of-view>48.4</field-of-view>
         </view>
+
         <marker>
-            <x-m>-0.3608</x-m>
-            <y-m>-0.4036</y-m>
-            <z-m>-0.0147</z-m>
-            <scale>2.8812</scale>
+            <x-m>-0.3008</x-m>
+            <y-m>-0.3934</y-m>
+            <z-m>0.0190</z-m>
+            <scale>2.7355</scale>
         </marker>
         <wait>10</wait>
     </step>
@@ -451,16 +470,17 @@ This tutorial will guide you through the Preflight inspection
             <heading-offset-deg>9.2</heading-offset-deg>
             <pitch-offset-deg>-24.3</pitch-offset-deg>
             <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-0.35</x-offset-m>
-            <y-offset-m>-0.08</y-offset-m>
+            <x-offset-m>-0.4</x-offset-m>
+            <y-offset-m>-0.1</y-offset-m>
             <z-offset-m>0.2</z-offset-m>
             <field-of-view>48.4</field-of-view>
         </view>
+
         <marker>
-            <x-m>-0.3500</x-m>
-            <y-m>-0.3967</y-m>
-            <z-m>-0.2283</z-m>
-            <scale>2.0413</scale>
+            <x-m>-0.3124</x-m>
+            <y-m>-0.4083</y-m>
+            <z-m>-0.1917</z-m>
+            <scale>2.0909</scale>
         </marker>
         <error>
             <message>To save energy, switch off the battery.</message>
@@ -577,10 +597,10 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>85.0</field-of-view>
         </view>
         <marker>
-            <x-m>0.3584</x-m>
-            <y-m>-1.2496</y-m>
-            <z-m>-0.1327</z-m>
-            <scale>4.3427</scale>
+            <x-m>0.11517</x-m>
+            <y-m>-0.82538</y-m>
+            <z-m>-0.11231</z-m>
+            <scale>5.3427</scale>
         </marker>
         <error>
             <message>Close the door!</message>
@@ -602,183 +622,6 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
-        <message>Remove the pitot tube cover.</message>
-        <view>
-            <heading-offset-deg>140.0</heading-offset-deg>
-            <pitch-offset-deg>3.9</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-0.9</x-offset-m>
-            <y-offset-m>0.4</y-offset-m>
-            <z-offset-m>-1.0</z-offset-m>
-            <field-of-view>85.0</field-of-view>
-        </view>
-        <marker>
-            <x-m>-0.2000</x-m>
-            <y-m>-1.5190</y-m>
-            <z-m>0.4471</z-m>
-            <scale>3.1983</scale>
-        </marker>
-        <error>
-            <message>To enable the Airspeed Indicator to show something, you have to remove the pitot tube cover.</message>
-            <condition>
-                <property>sim/model/c172p/securing/pitot-cover-visible</property>
-            </condition>
-        </error>
-        <exit>
-            <condition>
-                <not>
-                    <property>sim/model/c172p/securing/pitot-cover-visible</property>
-                </not>
-            </condition>
-        </exit>
-    </step>
-
-    <step>
-        <message>You have to check if the fuel is contaminated with water. Take a fuel sample.</message>
-        <view>
-            <heading-offset-deg>140.0</heading-offset-deg>
-            <pitch-offset-deg>3.9</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-0.6</x-offset-m>
-            <y-offset-m>0.4</y-offset-m>
-            <z-offset-m>-1.0</z-offset-m>
-            <field-of-view>85.0</field-of-view>
-        </view>
-        <nasal>
-            <script>fgcommand("dialog-show", props.Node.new({"dialog-name": "c172p-left-fuel-sample-dialog"}));</script>
-        </nasal>
-        <error>
-            <message>To prevent the engine from failing the fuel must not contain any water. You have to take a sample of the fuel.</message>
-            <condition>
-                <not>
-                    <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
-                </not>
-            </condition>
-        </error>
-        <exit>
-            <condition>            
-                <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
-            </condition>
-        </exit>
-    </step>
-
-    <step>
-        <message>If the sample is light blue, the fuel isn't contaminated and you can return it to the tank. If it's transparent, it's contaminated: You have to discard it.</message>
-        <wait>10</wait>
-        <error>
-            <message>There's still water in the fuel. Discard the sample and take a new one.</message>
-            <condition>
-                <greater-than>
-                    <property>/consumables/fuel/tank[0]/water-contamination</property>
-                    <value>0.0</value>
-                </greater-than>
-            </condition>
-        </error>
-        <exit>
-            <condition>
-                <equals>
-                    <property>/consumables/fuel/tank[0]/water-contamination</property>
-                    <value>0.0</value>
-                </equals>
-            </condition>
-        </exit>
-    </step>
-
-    <step>
-        <message>The fuel is light blue. You can return the sample to the tank.</message>
-        <error>
-            <message>Return the sample to the tank!</message>
-            <condition>            
-                <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
-            </condition>
-        </error>
-        <exit>
-            <condition>
-                <not>
-                    <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
-                </not>
-            </condition>
-        </exit>
-    </step>
-
-    <step>
-        <message>Remove the left tie-down.</message>
-        <view>
-            <heading-offset-deg>140.0</heading-offset-deg>
-            <pitch-offset-deg>-13.2</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-1.7</x-offset-m>
-            <y-offset-m>0.4</y-offset-m>
-            <z-offset-m>-0.8</z-offset-m>
-            <field-of-view>85.0</field-of-view>
-        </view>
-        <marker>
-            <x-m>0.0413</x-m>
-            <y-m>-2.2727</y-m>
-            <z-m>0.3959</z-m>
-            <scale>4.5041</scale>
-        </marker>
-        <nasal>
-            <script>fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-left-fuel-sample-dialog"}));</script>
-        </nasal>
-        <error>
-            <message>You have to remove the tie-down, or you can't fly away!</message>
-            <condition>
-                <property>sim/model/c172p/securing/tiedownL-visible</property>
-            </condition>
-        </error>
-        <exit>
-            <condition>
-                <not>
-                    <property>sim/model/c172p/securing/tiedownL-visible</property>
-                </not>
-            </condition>
-        </exit>
-    </step>
-
-    <step>
-        <message>Left wing: Not damaged. Landing light, strobe and red nav light ok. Wingtip ok.</message>
-        <view>
-            <heading-offset-deg>233.7</heading-offset-deg>
-            <pitch-offset-deg>-5.9</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-6.9</x-offset-m>
-            <y-offset-m>0.9</y-offset-m>
-            <z-offset-m>-1.2</z-offset-m>
-            <field-of-view>55.3</field-of-view>
-        </view>
-        <wait>7</wait>
-    </step>
-
-    <step>
-        <message>Left aileron: Check for freedom of movement.</message>
-        <view>
-            <heading-offset-deg>280.0</heading-offset-deg>
-            <pitch-offset-deg>11.4</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-5.9</x-offset-m>
-            <y-offset-m>0.2</y-offset-m>
-            <z-offset-m>1.1</z-offset-m>
-            <field-of-view>55.3</field-of-view>
-        </view>
-        <wait>10</wait>
-    </step>
-
-    <step>
-        <message>Left main wheel: Tire pressure ok. No leaking brake fluid.</message>
-        <view>
-            <heading-offset-deg>316.2</heading-offset-deg>
-            <pitch-offset-deg>-37.8</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>-2.2</x-offset-m>
-            <y-offset-m>0.2</y-offset-m>
-            <z-offset-m>1.6</z-offset-m>
-            <field-of-view>72.0</field-of-view>
-        </view>
-        <wait>7</wait>
-    </step>
-
-    <step>
         <message>Baggage door: Closed and locked.</message>
         <view>
             <heading-offset-deg>283.9</heading-offset-deg>
@@ -789,12 +632,6 @@ This tutorial will guide you through the Preflight inspection
             <z-offset-m>2.3</z-offset-m>
             <field-of-view>72.0</field-of-view>
         </view>
-        <marker>
-            <x-m>1.8083</x-m>
-            <y-m>-0.4521</y-m>
-            <z-m>-0.4000</z-m>
-            <scale>5.0000</scale>
-        </marker>
         <error>
             <message>Close the baggage door!</message>
             <condition>
@@ -815,7 +652,7 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
-        <message>Empennage: Not damaged. Beacon light ok. Also check elevator and rudder for freedom of movement.</message>
+        <message>Empennage: Not damaged. Beacon light ok. Check elevator for freedom of movement by clicking on it.</message>
         <view>
             <heading-offset-deg>325.1</heading-offset-deg>
             <pitch-offset-deg>-0.7</pitch-offset-deg>
@@ -825,7 +662,37 @@ This tutorial will guide you through the Preflight inspection
             <z-offset-m>8.4</z-offset-m>
             <field-of-view>61.0</field-of-view>
         </view>
-        <wait>10</wait>
+        <error>
+            <message>Check the elevator by clicking on it!</message>
+            <condition>
+                <not>
+                    <property>/sim/model/c172p/control-surfaces/elevator-checked</property>
+                </not>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <property>/sim/model/c172p/control-surfaces/elevator-checked</property>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>Rudder: check for freedom of movement by clicking on it.</message>
+        <view>
+            <heading-offset-deg>325.1</heading-offset-deg>
+            <pitch-offset-deg>-0.7</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-2.4</x-offset-m>
+            <y-offset-m>0.4</y-offset-m>
+            <z-offset-m>8.4</z-offset-m>
+            <field-of-view>61.0</field-of-view>
+        </view>
+        <exit>
+            <condition>
+                <property>/sim/model/c172p/control-surfaces/rudder-checked</property>
+            </condition>
+        </exit>
     </step>
 
     <step>
@@ -861,21 +728,7 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
-        <message>Right main wheel: Tire pressure ok. No leaking brake fluid.</message>
-        <view>
-            <heading-offset-deg>43.8</heading-offset-deg>
-            <pitch-offset-deg>-37.8</pitch-offset-deg>
-            <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>2.2</x-offset-m>
-            <y-offset-m>0.2</y-offset-m>
-            <z-offset-m>1.6</z-offset-m>
-            <field-of-view>72.0</field-of-view>
-        </view>
-        <wait>7</wait>
-    </step>
-
-    <step>
-        <message>Right aileron: Check for freedom of movement.</message>
+        <message>Right aileron: check for freedom of movement by clicking on it.</message>
         <view>
             <heading-offset-deg>80.0</heading-offset-deg>
             <pitch-offset-deg>11.4</pitch-offset-deg>
@@ -885,7 +738,11 @@ This tutorial will guide you through the Preflight inspection
             <z-offset-m>1.1</z-offset-m>
             <field-of-view>55.3</field-of-view>
         </view>
-        <wait>10</wait>
+        <exit>
+            <condition>
+                <property>/sim/model/c172p/control-surfaces/right-aileron-checked</property>
+            </condition>
+        </exit>
     </step>
 
     <step>
@@ -914,10 +771,10 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>85.0</field-of-view>
         </view>
         <marker>
-            <x-m>0.0041</x-m>
-            <y-m>2.2388</y-m>
-            <z-m>0.4050</z-m>
-            <scale>3.0000</scale>
+            <x-m>0.0000</x-m>
+            <y-m>2.1893</y-m>
+            <z-m>0.3661</z-m>
+            <scale>2.1405</scale>
         </marker>
         <error>
             <message>You have to remove the tie-down, or you can't fly away!</message>
@@ -935,14 +792,28 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
+        <message>Right main wheel: Tire pressure ok. No leaking brake fluid.</message>
+        <view>
+            <heading-offset-deg>43.8</heading-offset-deg>
+            <pitch-offset-deg>-37.8</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>2.2</x-offset-m>
+            <y-offset-m>0.2</y-offset-m>
+            <z-offset-m>1.6</z-offset-m>
+            <field-of-view>72.0</field-of-view>
+        </view>
+        <wait>7</wait>
+    </step>
+
+    <step>
         <message>You have to check if the fuel is contaminated with water. Take a fuel sample.</message>
         <view>
-            <heading-offset-deg>220.0</heading-offset-deg>
-            <pitch-offset-deg>3.9</pitch-offset-deg>
+            <heading-offset-deg>0.0</heading-offset-deg>
+            <pitch-offset-deg>45.0</pitch-offset-deg>
             <roll-offset-deg>0.0</roll-offset-deg>
-            <x-offset-m>0.6</x-offset-m>
-            <y-offset-m>0.4</y-offset-m>
-            <z-offset-m>-1.0</z-offset-m>
+            <x-offset-m>0.77</x-offset-m>
+            <y-offset-m>-0.09</y-offset-m>
+            <z-offset-m>0.94</z-offset-m>
             <field-of-view>85.0</field-of-view>
         </view>
         <nasal>
@@ -957,7 +828,7 @@ This tutorial will guide you through the Preflight inspection
             </condition>
         </error>
         <exit>
-            <condition>            
+            <condition>
                 <property>/consumables/fuel/tank[1]/fuel-sample-taken</property>
             </condition>
         </exit>
@@ -989,7 +860,7 @@ This tutorial will guide you through the Preflight inspection
         <message>The fuel is light blue. You can return the sample to the tank.</message>
         <error>
             <message>Return the sample to the tank!</message>
-            <condition>            
+            <condition>
                 <property>/consumables/fuel/tank[1]/fuel-sample-taken</property>
             </condition>
         </error>
@@ -1004,6 +875,12 @@ This tutorial will guide you through the Preflight inspection
 
     <step>
         <message>Check the oil level.</message>
+        <marker>
+            <x-m>-0.87</x-m>
+            <y-m>0.31</y-m>
+            <z-m>0.155</z-m>
+            <scale>4.9421</scale>
+        </marker>
         <view>
             <heading-offset-deg>110.7</heading-offset-deg>
             <pitch-offset-deg>-19.6</pitch-offset-deg>
@@ -1016,9 +893,6 @@ This tutorial will guide you through the Preflight inspection
         <nasal>
             <script>fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-right-fuel-sample-dialog"}));</script>
         </nasal>
-        <nasal>
-            <script>fgcommand("dialog-show", props.Node.new({"dialog-name": "c172p-oil-dialog-160"}));</script>
-        </nasal>
         <error>
             <message>The oil level is too low. Refill some oil, or you will risk an engine damage!</message>
             <condition>
@@ -1030,6 +904,14 @@ This tutorial will guide you through the Preflight inspection
         </error>
         <exit>
             <condition>
+                <equals>
+                    <property>sim/model/door-positions/oilDoor/position-norm</property>
+                    <value>1.0</value>
+                </equals>
+                <equals>
+                    <property>sim/model/show-dip-stick</property>
+                    <value>1.0</value>
+                </equals>
                 <greater-than>
                     <property>/engines/active-engine/oil-level</property>
                     <value>6.0</value>
@@ -1039,8 +921,57 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
-        <message>The oil level is good.</message>
-        <wait>3</wait>
+        <message>The oil level is good. Close the oil door.</message>
+        <marker>
+            <x-m>-0.87</x-m>
+            <y-m>0.31</y-m>
+            <z-m>0.155</z-m>
+            <scale>4.9421</scale>
+        </marker>
+        <exit>
+            <condition>
+                <equals>
+                    <property>sim/model/door-positions/oilDoor/position-norm</property>
+                    <value>0.0</value>
+                </equals>
+                <equals>
+                    <property>sim/model/show-dip-stick</property>
+                    <value>0.0</value>
+                </equals>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>Remove the cowl plugs.</message>
+        <view>
+            <heading-offset-deg>220.0</heading-offset-deg>
+            <pitch-offset-deg>-21.5</pitch-offset-deg>
+            <roll-offset-deg>0.1</roll-offset-deg>
+            <x-offset-m>-1.3</x-offset-m>
+            <y-offset-m>0.3</y-offset-m>
+            <z-offset-m>-3.0</z-offset-m>
+            <field-of-view>77.0</field-of-view>
+        </view>
+        <marker>
+            <x-m>-1.7</x-m>
+            <y-m>0.0</y-m>
+            <z-m>-0.0519</z-m>
+            <scale>30.0</scale>
+        </marker>
+        <error>
+            <message>You must remove the cowl plugs.</message>
+            <condition>
+                <property>sim/model/c172p/securing/cowl-plugs-visible</property>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <not>
+                    <property>sim/model/c172p/securing/cowl-plugs-visible</property>
+                </not>
+            </condition>
+        </exit>
     </step>
 
     <step>
@@ -1107,6 +1038,201 @@ This tutorial will guide you through the Preflight inspection
     </step>
 
     <step>
+        <message>You have to check if the fuel is contaminated with water. Take a fuel sample.</message>
+        <view>
+            <heading-offset-deg>0.0</heading-offset-deg>
+            <pitch-offset-deg>45.0</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-0.77</x-offset-m>
+            <y-offset-m>-0.09</y-offset-m>
+            <z-offset-m>0.94</z-offset-m>
+            <field-of-view>85.0</field-of-view>
+        </view>
+        <nasal>
+            <script>fgcommand("dialog-show", props.Node.new({"dialog-name": "c172p-left-fuel-sample-dialog"}));</script>
+        </nasal>
+        <error>
+            <message>To prevent the engine from failing the fuel must not contain any water. You have to take a sample of the fuel.</message>
+            <condition>
+                <not>
+                    <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
+                </not>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>If the sample is light blue, the fuel isn't contaminated and you can return it to the tank. If it's transparent, it's contaminated: You have to discard it.</message>
+        <wait>10</wait>
+        <error>
+            <message>There's still water in the fuel. Discard the sample and take a new one.</message>
+            <condition>
+                <greater-than>
+                    <property>/consumables/fuel/tank[0]/water-contamination</property>
+                    <value>0.0</value>
+                </greater-than>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <equals>
+                    <property>/consumables/fuel/tank[0]/water-contamination</property>
+                    <value>0.0</value>
+                </equals>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>The fuel is light blue. You can return the sample to the tank.</message>
+        <error>
+            <message>Return the sample to the tank!</message>
+            <condition>
+                <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <not>
+                    <property>/consumables/fuel/tank[0]/fuel-sample-taken</property>
+                </not>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>Left main wheel: Tire pressure ok. No leaking brake fluid.</message>
+        <view>
+            <heading-offset-deg>316.2</heading-offset-deg>
+            <pitch-offset-deg>-37.8</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-2.2</x-offset-m>
+            <y-offset-m>0.2</y-offset-m>
+            <z-offset-m>1.6</z-offset-m>
+            <field-of-view>72.0</field-of-view>
+        </view>
+        <wait>7</wait>
+    </step>
+
+    <step>
+        <message>Remove the pitot tube cover.</message>
+        <view>
+            <heading-offset-deg>140.0</heading-offset-deg>
+            <pitch-offset-deg>3.9</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-1.0</x-offset-m>
+            <y-offset-m>0.4</y-offset-m>
+            <z-offset-m>-1.0</z-offset-m>
+            <field-of-view>85.0</field-of-view>
+        </view>
+        <marker>
+            <x-m>-0.2000</x-m>
+            <y-m>-1.5190</y-m>
+            <z-m>0.3900</z-m>
+            <scale>3.1983</scale>
+        </marker>
+        <error>
+            <message>To enable the Airspeed Indicator to show something, you have to remove the pitot tube cover.</message>
+            <condition>
+                <property>sim/model/c172p/securing/pitot-cover-visible</property>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <not>
+                    <property>sim/model/c172p/securing/pitot-cover-visible</property>
+                </not>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>Remove the left tie-down.</message>
+        <view>
+            <heading-offset-deg>140.0</heading-offset-deg>
+            <pitch-offset-deg>-13.2</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-1.7</x-offset-m>
+            <y-offset-m>0.4</y-offset-m>
+            <z-offset-m>-0.8</z-offset-m>
+            <field-of-view>85.0</field-of-view>
+        </view>
+        <marker>
+            <x-m>0.0000</x-m>
+            <y-m>-2.2000</y-m>
+            <z-m>0.3504</z-m>
+            <scale>4.2066</scale>
+        </marker>
+        <nasal>
+            <script>fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-left-fuel-sample-dialog"}));</script>
+        </nasal>
+        <error>
+            <message>You have to remove the tie-down, or you can't fly away!</message>
+            <condition>
+                <property>sim/model/c172p/securing/tiedownL-visible</property>
+            </condition>
+        </error>
+        <exit>
+            <condition>
+                <not>
+                    <property>sim/model/c172p/securing/tiedownL-visible</property>
+                </not>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>Landing lights are ok.</message>
+        <view>
+            <heading-offset-deg>140.0</heading-offset-deg>
+            <pitch-offset-deg>-13.2</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-2.4</x-offset-m>
+            <y-offset-m>0.4</y-offset-m>
+            <z-offset-m>-0.8</z-offset-m>
+            <field-of-view>85.0</field-of-view>
+        </view>
+        <wait>5</wait>
+    </step>
+
+    <step>
+        <message>Left wing: Not damaged. Strobe and red nav light ok. Wingtip ok.</message>
+        <view>
+            <heading-offset-deg>233.7</heading-offset-deg>
+            <pitch-offset-deg>-5.9</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-6.9</x-offset-m>
+            <y-offset-m>0.9</y-offset-m>
+            <z-offset-m>-1.2</z-offset-m>
+            <field-of-view>55.3</field-of-view>
+        </view>
+        <wait>7</wait>
+    </step>
+
+    <step>
+        <message>Left aileron: check for freedom of movement by clicking on it.</message>
+        <view>
+            <heading-offset-deg>280.0</heading-offset-deg>
+            <pitch-offset-deg>11.4</pitch-offset-deg>
+            <roll-offset-deg>0.0</roll-offset-deg>
+            <x-offset-m>-5.9</x-offset-m>
+            <y-offset-m>0.2</y-offset-m>
+            <z-offset-m>1.1</z-offset-m>
+            <field-of-view>55.3</field-of-view>
+        </view>
+        <exit>
+            <condition>
+                <property>/sim/model/c172p/control-surfaces/left-aileron-checked</property>
+            </condition>
+        </exit>
+    </step>
+
+    <step>
         <message>We've finished our inspection round. Open the door.</message>
         <view>
             <heading-offset-deg>306.1</heading-offset-deg>
@@ -1118,9 +1244,9 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>59.1</field-of-view>
         </view>
         <marker>
-            <x-m>0.7642</x-m>
-            <y-m>-0.5199</y-m>
-            <z-m>-0.2063</z-m>
+            <x-m>0.7468</x-m>
+            <y-m>-0.5579</y-m>
+            <z-m>-0.1633</z-m>
             <scale>3.0204</scale>
         </marker>
         <error>
@@ -1154,10 +1280,10 @@ This tutorial will guide you through the Preflight inspection
             <field-of-view>75.0</field-of-view>
         </view>
         <marker>
-            <x-m>0.0678</x-m>
-            <y-m>-0.6091</y-m>
-            <z-m>-0.1025</z-m>
-            <scale>2.3223</scale>
+            <x-m>0.11517</x-m>
+            <y-m>-0.82538</y-m>
+            <z-m>-0.11231</z-m>
+            <scale>5.3427</scale>
         </marker>
         <error>
             <message>Close the door!</message>

@@ -30,6 +30,16 @@ var autostart = func (msg=1) {
     setprop("/controls/lighting/strobe", 1);
     setprop("/controls/lighting/beacon", 1);
 
+    # Setting instrument lights if needed
+    var light_level = 1-getprop("/rendering/scene/diffuse/red");
+    if (light_level > .6) {
+        if (getprop("/controls/lighting/instruments-norm") == 0) {
+            if (light_level > .8) light_level = .8;
+            setprop("/controls/lighting/instruments-norm", light_level);
+        }
+        setprop("/controls/switches/dome-red", 1);
+    }
+
     # Setting flaps to 0
     setprop("/controls/flight/flaps", 0.0);
 
@@ -45,6 +55,7 @@ var autostart = func (msg=1) {
     setprop("/sim/model/c172p/cockpit/control-lock-placed", 0);
     setprop("/sim/model/c172p/brake-parking", 0);
     setprop("/sim/model/c172p/securing/chock", 0);
+    setprop("/sim/model/c172p/securing/cowl-plugs-visible", 0);
     setprop("/sim/model/c172p/securing/pitot-cover-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownL-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownR-visible", 0);
@@ -55,17 +66,6 @@ var autostart = func (msg=1) {
     setprop("/consumables/fuel/tank[1]/water-contamination", 0.0);
     setprop("/consumables/fuel/tank[0]/sample-water-contamination", 0.0);
     setprop("/consumables/fuel/tank[1]/sample-water-contamination", 0.0);
-
-    # Close oil cap and dialog
-    #var show = getprop("sim/model/show-dip-stick");
-    #if (show) {
-    #   setprop("sim/model/show-dip-stick", 0);
-    #   var engine = getprop("controls/engines/active-engine");
-    #    if (!engine)
-    #        fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-oil-dialog-160"}));
-    #    else
-    #        fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-oil-dialog-180"}));
-    #}
 
     # Setting max oil level
     var oil_enabled = getprop("/engines/active-engine/oil_consumption_allowed");
@@ -254,9 +254,6 @@ var switches_save_state = func {
         setprop("/controls/engines/engine[0]/primer", 0);
         setprop("/controls/engines/engine[0]/primer-lever", 0);
         setprop("/controls/engines/engine[0]/use-primer", 0);
-        setprop("/controls/engines/engine[1]/primer", 0);
-        setprop("/controls/engines/engine[1]/primer-lever", 0);
-        setprop("/controls/engines/engine[1]/use-primer", 0);
         setprop("/controls/engines/current-engine/throttle", 0.0);
         setprop("/controls/engines/current-engine/mixture", 0.0);
         setprop("/controls/circuit-breakers/aircond", 1);
@@ -281,6 +278,8 @@ var switches_save_state = func {
         setprop("/controls/switches/master-alt", 0);
         setprop("/controls/switches/master-bat", 0);
         setprop("/controls/switches/magnetos", 0);
+        setprop("/controls/switches/dome-white", 0);
+        setprop("/controls/switches/dome-red", 0);
         setprop("/controls/lighting/nav-lights", 0);
         setprop("/controls/lighting/beacon", 0);
         setprop("/controls/lighting/strobe", 0);
@@ -288,6 +287,10 @@ var switches_save_state = func {
         setprop("/controls/lighting/landing-lights", 0);
         setprop("/controls/lighting/instruments-norm", 0.0);
         setprop("/controls/lighting/radio-norm", 0.0);
+        setprop("/controls/lighting/dome-white-norm", 1.0);
+        setprop("/controls/lighting/dome-norm", 0.0);
+        setprop("/controls/lighting/gps-norm", 0.0);
+        setprop("/controls/lighting/gearled", 0);
         setprop("/controls/gear/water-rudder", 0);
         setprop("/controls/gear/water-rudder-down", 0);
         setprop("/sim/model/c172p/brake-parking", 1);
@@ -643,6 +646,7 @@ setlistener("/sim/signals/fdm-initialized", func {
         setprop("sim/model/open-pfuel-sump", 0);
         setprop("sim/model/open-sfuel-sump", 0);
         setprop("sim/model/door-positions/oilDoor/position-norm", 0);
+        setprop("sim/model/c172p/securing/cowl-plugs-visible", 0);
         fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-oil-dialog-160"}));
         fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-oil-dialog-180"}));
         fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-left-fuel-dialog"}));
@@ -673,6 +677,12 @@ setlistener("/sim/signals/fdm-initialized", func {
     setlistener("/environment/lightning/lightning-pos-y", thunder);
 
     reset_system();
+
+    var onground = getprop("/sim/presets/onground") or "";
+    if (!onground) {
+        state_manager();
+    }
+
     var c172_timer = maketimer(0.25, func{global_system_loop()});
     c172_timer.start();
 });

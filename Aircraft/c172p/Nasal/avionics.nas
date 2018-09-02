@@ -110,8 +110,6 @@ aircraft.data.add(
 # Save switches
 aircraft.data.add(
     "/controls/lighting/beacon",
-    "/controls/lighting/instruments-norm",
-    "/controls/lighting/radio-norm",
     "/controls/lighting/landing-lights",
     "/controls/lighting/nav-lights",
     "/controls/lighting/strobe",
@@ -120,6 +118,12 @@ aircraft.data.add(
     "/controls/switches/master-bat",
     "/controls/switches/master-alt",
     "/controls/switches/master-avionics",
+    "/controls/switches/dome-red",
+    "/controls/switches/dome-white",
+    "/controls/lighting/gearled",
+    "/controls/lighting/instruments-norm",
+    "/controls/lighting/radio-norm",
+    "/controls/lighting/dome-white-norm",
 );
 
 # Other controls
@@ -155,4 +159,5 @@ aircraft.data.add(
     "/controls/circuit-breakers/radio5",
     "/controls/circuit-breakers/strobe",
     "/controls/circuit-breakers/turn-coordinator",
+    "/controls/circuit-breakers/cabin",
 );

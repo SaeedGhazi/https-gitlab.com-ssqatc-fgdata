@@ -11,7 +11,10 @@ var dialog = {
         me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1]]; # alternative active
 
         # "private"
-        var font = { name: "FIXED_8x13" };
+        var font = { name: getprop("/sim/gui/selected-style/fonts/mp-list/name") or "FIXED_8x13", 
+                       size: getprop("/sim/gui/selected-style/fonts/mp-list/size") or 20, 
+                       slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
+                     };
         me.header = ["  submodule", "cumulative/ms", "total/ms", "max/ms", "min/ms", "mean/ms", "stddev/ms", "iterations" ];
         me.columns = [
             { type: "text", property: "name",          format:   " %s", label: "------------------", halign: "fill", font: font },

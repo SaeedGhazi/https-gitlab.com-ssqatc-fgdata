@@ -18,6 +18,7 @@
 			<model>Models/Geometry/Clemenceau/Clemenceau.xml</model>
 			<latitude>42.800</latitude>
 			<longitude>6.325</longitude>
+            <deck-altitude>65</deck-altitude>
 			<speed>10</speed>
 			<heading>110</heading>
 			<rudder>0</rudder>

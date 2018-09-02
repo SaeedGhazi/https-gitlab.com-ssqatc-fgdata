@@ -20,6 +20,7 @@
                        <!-- <latitude>42.9834</latitude>-->
 			<longitude>6.325</longitude>
                         <!--<longitude>6.0316</longitude>-->
+            <deck-altitude>65</deck-altitude>
 			<speed>10</speed>
 			<heading>160</heading>
 			<rudder>0</rudder>

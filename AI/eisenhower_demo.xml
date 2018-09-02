@@ -30,6 +30,7 @@
 			<model>Models/Geometry/Nimitz/eisenhower.xml</model>
 			<latitude>37.0</latitude>
 			<longitude>-74.40</longitude>
+            <deck-altitude>65</deck-altitude>
 			<speed>10</speed>
 			<heading>200</heading>
 			<rudder>0</rudder>

@@ -31,6 +31,7 @@
 			<model>Models/Geometry/Nimitz/nimitz.xml</model>
 			<latitude>37.8</latitude>
 			<longitude>-122.6</longitude>
+            <deck-altitude>65</deck-altitude>
 			<speed>10</speed>
 			<heading>200</heading>
 			<rudder>0</rudder>
@@ -90,7 +91,8 @@
 			<model>Models/Geometry/Nimitz/eisenhower.xml</model>
 			<latitude>42.9</latitude>
 			<longitude>5.96</longitude>
-			<speed>10</speed>
+            <deck-altitude>65</deck-altitude>
+            <speed>10</speed>
 			<heading>200</heading>
 			<rudder>0</rudder>
 			<turn-radius-ft>12000</turn-radius-ft>

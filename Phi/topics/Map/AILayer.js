@@ -33,19 +33,53 @@
                     title : feature.properties.callsign,
                     alt : feature.properties.callsign,
                     riseOnHover : true,
+                    draggable : true,
                 };
 
+                var aiMarker = null;
                 if (feature.properties.type == "aircraft" || feature.properties.type == "multiplayer") {
                       var l1 = feature.properties.callsign,
                           l2 = feature.properties.heading + 'T ' + feature.properties.speed + 'KTAS ' + 
                                formatFL(feature.geometry.coordinates[2]);
-                      var m = L.aircraftMarker(latlng, { className: AITypeToCssClassMap[feature.properties.type] } );
-                      m.on('add', function(e) {
+                      
+                      aiMarker = L.aiAircraftMarker(latlng, { className: AITypeToCssClassMap[feature.properties.type] } );
+                      aiMarker.on('add', function(e) {
                           ko.applyBindings( new ViewModel(feature.properties.heading,l1,l2), e.target._icon);
                       });
-                      return m;
+                      aiMarker.options.draggable = true;
+                      //We can't drag multiplayer 
+                      if(feature.properties.type == "aircraft") {
+	                    	  aiMarker.on('dragstart', function(evt) {
+	                          evt.target.isDragging = true;
+	                      });
+	
+	                      aiMarker.on('dragend', function(evt) {
+	                          if( evt.target !== this)
+	                          	return;
+	                          var pos = evt.target.getLatLng();
+	
+	                          var props = {
+	                              name : "position",
+	                              children : [
+	                                      {
+	                                          name : "latitude-deg",
+	                                          value : pos.lat,
+	                                      }, {
+	                                          name : "longitude-deg",
+	                                          value : pos.lng,
+	                                      },
+	                              ],
+	                          };
+	                          $.post("json" + feature.properties.path, JSON.stringify(props));
+	                          evt.target.isDragging = false;
+	                      });
+                      }
+                      return aiMarker;
                 }
-                return new leaflet.Marker(latlng, options);
+                else if(feature.properties.type == "carrier"){
+                  aiMarker = new leaflet.Marker(latlng, options);
+                  return aiMarker;
+                }
             },
 
 //            onEachFeature : function(feature, layer) {
@@ -66,6 +100,7 @@
             this.updateId++;
         },
 
+        // Refresh method called every 10s to reload other aircraft
         updateId : 0,
         update : function(id) {
             var self = this;
@@ -92,6 +127,7 @@
             }
         },
 
+        // Builds the GeoJSON representation of AI, Multiplayer and Carriers
         aiPropsToGeoJson : function(props, types, bounds ) {
             var geoJSON = {
                 type : "FeatureCollection",
@@ -105,6 +141,7 @@
                     if (!child.getNode("valid").getValue())
                         return;
 
+                	var path = child.getPath();
                     var position = child.getNode("position");
                     var orientation = child.getNode("orientation");
                     var velocities = child.getNode("velocities");
@@ -141,6 +178,7 @@
                         },
                         "id" : id,
                         "properties" : {
+                        	"path" : path,
                             "type" : type,
                             "heading" : heading.toFixed(0),
                             "speed" : speed.toFixed(0),

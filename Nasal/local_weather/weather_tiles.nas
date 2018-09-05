@@ -2378,6 +2378,7 @@ var alt_low = layers[0].getNode("elevation-ft").getValue();
 if ((alt_low < 0.0) or (cover_low ==0)) # we have to guess a value for the convective altitude for the visibility model
 	{alt_low = 8000.0;}
 
+
 # first check a few obvious criteria
 
 if (cover_low == 8) {cumulus_flag = 0;} # overcast sky is unlikely to be Cumulus, and we can't render it anyway
@@ -2745,6 +2746,14 @@ var set_METAR_weather_station = func {
 		{ovcst_alt = layer_alt3; ovcst = ovcst + rand() * 0.1;}
 	if (layer_alt4 > 20000.0)
 		{ovcst_alt = layer_alt4; ovcst = ovcst + rand() * 0.1;}
+
+
+	# visibility model requires to separate the two
+	if (alt_shade >= ovcst_alt - 2000.0)
+		{ovcst_alt = alt_shade + 2000.0;}
+
+
+	#print ("Alt_shade: ", alt_shade, " alt ovcst: ", ovcst_alt);
 		
 		
 	# and specify the atmosphere - currently default only

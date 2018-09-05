@@ -27,8 +27,8 @@ void main(void)
 	  float halo_ring_enhancement =  smoothstep (0.88, 0.927, mie_frag) * (1.0 - smoothstep(0.927, 0.94, mie_frag)) * eShade * 1.5 * ring_factor;
 
 	  
-	  float halo_ring_enhancement_r =  smoothstep (0.88, 0.90, mie_frag) * (1.0 - smoothstep(0.90, 0.92, mie_frag)) * eShade * ring_factor;
-	  float halo_ring_enhancement_b =  smoothstep (0.91, 0.93, mie_frag) * (1.0 - smoothstep(0.93, 0.955, mie_frag)) * eShade * ring_factor;
+	  float halo_ring_enhancement_b =  smoothstep (0.88, 0.90, mie_frag) * (1.0 - smoothstep(0.90, 0.92, mie_frag)) * eShade * ring_factor;
+	  float halo_ring_enhancement_r =  smoothstep (0.91, 0.93, mie_frag) * (1.0 - smoothstep(0.93, 0.955, mie_frag)) * eShade * ring_factor;
 	  
 	  
       vec4 finalColor = base * gl_Color;

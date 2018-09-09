@@ -137,6 +137,9 @@
 <model n="506" type="string">AI/Aircraft/Lightning/Models/lightning-model.xml</model>
 <model n="507" type="string">AI/Aircraft/seahawk/Models/seahawk-3d-model.xml</model>
 
+<model n="514" type="string">AI/Aircraft/f-14b/Models/f-14b.xml</model>
+<model n="515" type="string">Models/Aircraft/F-15-lowpoly.xml</model>
+
 <!-- 551-600 Military large aircraft (tankers, transports) -->
 <model n="551" type="string">AI/Aircraft/E-2C/Models/E-2C-model.xml</model>
 <model n="552" type="string">AI/Aircraft/vulcanb2/Models/vulcanb2.xml</model>

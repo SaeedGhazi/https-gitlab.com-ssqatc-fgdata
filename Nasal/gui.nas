@@ -1462,13 +1462,15 @@ elsif (qualityLevel != nil) {
 var update_shader_settings = func() {
     if (!getprop("/sim/rendering/shaders/custom-settings")){
         var qualityLvl = getprop("/sim/rendering/shaders/quality-level-internal");
-		setprop("/sim/rendering/shaders/quality-level", qualityLvl);
+        setprop("/sim/rendering/shaders/quality-level", qualityLvl);
         setprop("/sim/rendering/shaders/landmass",qualityLvl);
         setprop("/sim/rendering/shaders/urban",qualityLvl);
         setprop("/sim/rendering/shaders/water",qualityLvl);
-        if (qualityLvl >= 1.0){
+        if (qualityLvl >= 4.0)
+            qualityLvl = 4.0;
+        setprop("/sim/rendering/shaders/lights",qualityLvl);
+        if (qualityLvl >= 1.0)
             qualityLvl = 1.0;
-        }
         setprop("/sim/rendering/shaders/model",qualityLvl);
         setprop("/sim/rendering/shaders/contrails",qualityLvl);
         setprop("/sim/rendering/shaders/crop",qualityLvl);

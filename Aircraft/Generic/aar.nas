@@ -9,9 +9,7 @@
 # + fuel-consumed-lbs - Output from the FDM, zeroed by this script
 # + out-of-fuel       - boolean, set by this code.
 
-
 var UPDATE_PERIOD = 0.3;
-
 var enabled = nil;
 var serviceable = nil;
 var fuel_freeze = nil;
@@ -176,9 +174,11 @@ var update_loop = func {
 	foreach (var e; engines)
 		e.getNode("out-of-fuel", 1).setBoolValue(out_of_fuel);
 
-	settimer(update_loop, UPDATE_PERIOD);
+    aarTimer.restart(UPDATE_PERIOD);
 }
 
+var aarTimer = maketimer(UPDATE_PERIOD, update_loop);
+aarTimer.simulatedTime = 1;
 
 
 setlistener("/sim/signals/fdm-initialized", func {
@@ -213,7 +213,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 	setlistener("sim/freeze/fuel", func(n) fuel_freeze = n.getBoolValue(), 1);
 	setlistener("sim/ai/enabled", func(n) ai_enabled = n.getBoolValue(), 1);
 	setlistener("systems/refuel/serviceable", func(n) serviceable = n.getBoolValue(), 1);
-	update_loop();
+    aarTimer.restart(UPDATE_PERIOD);
 });
 
 

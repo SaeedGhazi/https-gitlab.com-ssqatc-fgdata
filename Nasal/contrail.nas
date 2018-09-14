@@ -20,11 +20,11 @@ updateContrail = func{
     } else {
         contrail_Node.setValue(0);
     }
-
-    settimer(updateContrail,30)
 }
 
 ### Contrail
+contrailTimer = maketimer(30, updateContrail);
+contrailTimer.simulatedTime = 1;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
     printlog ("debug", "init contrail");
@@ -35,5 +35,5 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var static_contrail_node = props.globals.getNode("sim/ai/aircraft/contrail", 1);
     var time_node = props.globals.getNode("sim/time/elapsed-sec", 1);
 
-    updateContrail();
+    contrailTimer.restart(30);
 });

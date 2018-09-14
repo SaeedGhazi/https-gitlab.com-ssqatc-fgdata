@@ -182,8 +182,6 @@ if (0) {
 var loop = func {
     if (view_number == cam_view and targetN != nil)
         update();
-
-    settimer(loop, 0);
 }
 
 
@@ -301,6 +299,8 @@ setlistener("/sim/cam/lock", func(n) {
 });
 }
 
+camTimer = maketimer(0, loop);
+camTimer.simulatedTime = 1;
 
 setlistener("/sim/signals/fdm-initialized", func {
     var views = props.globals.getNode("/sim").getChildren("view");
@@ -311,7 +311,7 @@ setlistener("/sim/signals/fdm-initialized", func {
     setprop("/sim/current-view/view-number", cam_view);
     setprop("/engines/engine/speed-max-mps", 500);
     update_aircraft();
-    loop();
+    camTimer.start();
 });
 
 

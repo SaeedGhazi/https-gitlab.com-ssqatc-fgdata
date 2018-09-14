@@ -22,7 +22,7 @@ var windsock = func {
   interpolate("/environment/windsock/wind-speed-12.5kt", total, 0.1);
 
   dt += 0.08 + 0.02*(math.sin(dt)+math.cos(dt/(mag2+0.01))*0.33);
-  settimer(windsock, 0.25);
 }
-
-windsock();
+windsockTimer = maketimer(0.25, windsock);
+windsockTimer.simulatedTime = 1;
+windsockTimer.start();

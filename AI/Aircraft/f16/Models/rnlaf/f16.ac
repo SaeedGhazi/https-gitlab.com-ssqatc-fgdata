@@ -1736,7 +1736,7 @@ OBJECT poly
 name "RNLAF_Tailroot.001"
 data 8
 Mesh.072
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 30
 5.42794 0.626805 -0.143875
@@ -3333,7 +3333,7 @@ OBJECT poly
 name "USAF_Tailroot.001"
 data 8
 Mesh.073
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 18
 0.7145 0.665534 -0.000112
@@ -3728,7 +3728,7 @@ OBJECT poly
 name "LWStation1"
 data 8
 Mesh.107
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 12
 1.28469 0.065625 1.62864
@@ -3857,7 +3857,7 @@ OBJECT poly
 name "LWStation2"
 data 8
 Mesh.108
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 12
 1.5586 0.061507 2.88009
@@ -3986,7 +3986,7 @@ OBJECT poly
 name "RWStation1"
 data 8
 Mesh.106
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 12
 1.28257 0.065625 -1.63305
@@ -4115,7 +4115,7 @@ OBJECT poly
 name "RWStation2"
 data 8
 Mesh.105
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 12
 1.5588 0.061507 -2.87989
@@ -5365,7 +5365,7 @@ OBJECT poly
 name "ArresterHook"
 data 8
 Mesh.037
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 20
 2.5746 -0.743138 -0.055239
@@ -6203,7 +6203,7 @@ OBJECT poly
 name "CanopyFrame"
 data 8
 Mesh.058
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 75
 -5.44412 0.439216 0.16583
@@ -7476,7 +7476,7 @@ OBJECT poly
 name "ExternalFlame"
 data 4
 Mesh
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 44
 3.07859 0.223977 0.315987
@@ -7804,7 +7804,7 @@ OBJECT poly
 name "ExternalFrontGearDoor"
 data 8
 Mesh.044
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 7
 -3.13065 -1.39276 -0.277236
@@ -7850,7 +7850,7 @@ OBJECT poly
 name "ExternalLeftMainDoor"
 data 8
 Mesh.045
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 -0.830129 -0.742367 0.521733
@@ -7889,7 +7889,7 @@ OBJECT poly
 name "ExternalRightMainDoor"
 data 8
 Mesh.046
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 -0.830933 -0.742354 -0.523699
@@ -7928,7 +7928,7 @@ OBJECT poly
 name "Fan"
 data 8
 Mesh.078
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 17
 0.595316 0.018564 0.447795
@@ -8050,7 +8050,7 @@ OBJECT poly
 name "FanSpinning"
 data 8
 Mesh.079
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 17
 0.596828 0.018439 0.446193
@@ -8172,7 +8172,7 @@ OBJECT poly
 name "FlashLightProtector"
 data 8
 Mesh.032
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 5.07436 3.19134 -0.002287
@@ -8587,7 +8587,7 @@ OBJECT poly
 name "FrontTire"
 data 8
 Mesh.152
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 146
 -3.00134 -1.66794 -0.025078
@@ -10466,7 +10466,7 @@ OBJECT poly
 name "FuselageBottom"
 data 8
 Mesh.091
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 227
 1.34141 -0.79068 -0.225227
@@ -12796,7 +12796,7 @@ OBJECT poly
 name "FuselageTop"
 data 8
 Mesh.090
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 189
 0.637835 0.218995 -1.09892
@@ -14838,7 +14838,7 @@ OBJECT poly
 name "InternalFlame"
 data 8
 Mesh.029
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 16
 4.2077 0.009706 -0.37399
@@ -15074,7 +15074,7 @@ OBJECT poly
 name "LeftLowerAileron"
 data 8
 Mesh.093
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 8
 1.73389 0.053383 3.57827
@@ -15139,7 +15139,7 @@ OBJECT poly
 name "LeftLowerFlap"
 data 8
 Mesh.096
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 8
 1.35176 0.152707 1.0652
@@ -15204,7 +15204,7 @@ OBJECT poly
 name "LeftLowerHorizonTail"
 data 8
 Mesh.017
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 5.33846 -0.260634 2.7904
@@ -15249,7 +15249,7 @@ OBJECT poly
 name "LeftLowerLef"
 data 8
 Mesh.092
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 14
 -0.80967 0.063653 1.41683
@@ -17132,7 +17132,7 @@ OBJECT poly
 name "LeftLowerSpeedbrake"
 data 8
 Mesh.028
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 9
 4.55555 0.026664 1.0804
@@ -17174,7 +17174,7 @@ OBJECT poly
 name "LeftMainTire"
 data 8
 Mesh.004
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 98
 0.688885 -1.46095 1.28264
@@ -18433,7 +18433,7 @@ OBJECT poly
 name "LeftUpperAileron"
 data 8
 Mesh.020
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 2.12146 0.014148 4.60696
@@ -18472,7 +18472,7 @@ OBJECT poly
 name "LeftUpperFlap"
 data 8
 Mesh.056
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 1.71989 0.073899 3.5817
@@ -18511,7 +18511,7 @@ OBJECT poly
 name "LeftUpperHorizonTail"
 data 8
 Mesh.015
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 7
 5.33846 -0.260633 2.7904
@@ -18569,7 +18569,7 @@ OBJECT poly
 name "LeftUpperLef"
 data 8
 Mesh.022
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 1.29425 -0.006548 4.58845
@@ -20036,7 +20036,7 @@ OBJECT poly
 name "LeftUpperSpeedbrake"
 data 8
 Mesh.027
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 4.55555 0.091491 1.0804
@@ -20150,7 +20150,7 @@ OBJECT poly
 name "Link16Antennas"
 data 8
 Mesh.057
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 24
 -5.85416 0.367736 -0.05907
@@ -20344,7 +20344,7 @@ OBJECT poly
 name "Poly.001"
 data 8
 Mesh.075
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 32
 4.61286 0.452113 0.089106
@@ -21017,7 +21017,7 @@ OBJECT poly
 name "RadarDomeBottom"
 data 8
 Mesh.099
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 23
 -6.63713 -0.052852 0.406264
@@ -21223,7 +21223,7 @@ OBJECT poly
 name "RadarDomeTop"
 data 8
 Mesh.098
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 29
 -6.63713 -0.052852 0.40627
@@ -21564,7 +21564,7 @@ OBJECT poly
 name "RightLowerAileron"
 data 8
 Mesh.094
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 8
 1.73474 0.052416 -3.604
@@ -21629,7 +21629,7 @@ OBJECT poly
 name "RightLowerFlap"
 data 8
 Mesh.095
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 8
 1.35295 0.150957 -1.07402
@@ -21694,7 +21694,7 @@ OBJECT poly
 name "RightLowerHorizonTail"
 data 8
 Mesh.024
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 5.34627 -0.260633 -2.80247
@@ -21739,7 +21739,7 @@ OBJECT poly
 name "RightLowerLef"
 data 8
 Mesh.097
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 7
 -0.81065 0.065216 -1.42361
@@ -23579,7 +23579,7 @@ OBJECT poly
 name "RightLowerSpeedbrake"
 data 8
 Mesh.026
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 10
 4.55555 0.026665 -1.08342
@@ -23622,7 +23622,7 @@ OBJECT poly
 name "RightMainTire"
 data 8
 Mesh.085
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 98
 0.688861 -1.46097 -1.29429
@@ -24881,7 +24881,7 @@ OBJECT poly
 name "RightUpperAileron"
 data 8
 Mesh.019
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 2.12231 0.01318 -4.59861
@@ -24920,7 +24920,7 @@ OBJECT poly
 name "RightUpperFlap"
 data 8
 Mesh.018
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 1.72101 0.072768 -3.60735
@@ -24959,7 +24959,7 @@ OBJECT poly
 name "RightUpperHorizonTail"
 data 8
 Mesh.023
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 7
 5.34627 -0.260633 -2.80248
@@ -25017,7 +25017,7 @@ OBJECT poly
 name "RightUpperLef"
 data 8
 Mesh.021
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 1.29106 -0.003321 -4.59923
@@ -26484,7 +26484,7 @@ OBJECT poly
 name "RightUpperSpeedbrake"
 data 8
 Mesh.025
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 6
 4.55555 0.091492 -1.08342
@@ -26523,7 +26523,7 @@ OBJECT poly
 name "Rudder"
 data 8
 Mesh.048
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 4.31473 1.15181 0.043123
@@ -26541,7 +26541,7 @@ OBJECT poly
 name "Rudder.001"
 data 8
 Mesh.049
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 5.52053 3.02997 -0.016738
@@ -26559,7 +26559,7 @@ OBJECT poly
 name "Rudder.002"
 data 8
 Mesh.050
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 4.31416 1.15181 -0.046994
@@ -26577,7 +26577,7 @@ OBJECT poly
 name "Rudder.003"
 data 8
 Mesh.051
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 5.85243 3.02997 -0.003321
@@ -26595,7 +26595,7 @@ OBJECT poly
 name "Rudder.004"
 data 8
 Mesh.052
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 5.52053 3.02997 0.008651
@@ -26613,7 +26613,7 @@ OBJECT poly
 name "Rudder.005"
 data 8
 Mesh.053
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 5.85243 3.02997 -0.003321
@@ -26631,7 +26631,7 @@ OBJECT poly
 name "Rudder.006"
 data 8
 Mesh.054
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 3
 4.31473 1.15181 0.043123
@@ -26649,7 +26649,7 @@ OBJECT poly
 name "Tail"
 data 8
 Mesh.031
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 20
 2.81058 1.15182 -0.001775
@@ -26852,7 +26852,7 @@ OBJECT poly
 name "Turbine"
 data 8
 Mesh.076
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 17
 2.98673 -0.089174 0.438464
@@ -26974,7 +26974,7 @@ OBJECT poly
 name "VentralFins"
 data 8
 Mesh.043
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 10
 1.78656 -0.54083 -0.48426
@@ -27133,7 +27133,7 @@ OBJECT poly
 name "WingTips"
 data 8
 Mesh.100
-texture "f16.rgb"
+texture "f16.jpg"
 crease 80.000000
 numvert 59
 1.31141 -0.037656 -4.60823

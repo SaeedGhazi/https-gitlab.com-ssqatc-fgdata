@@ -122,6 +122,13 @@ geo.put_model("Models/Volcanoes/Etna/northeast_crater.xml", 37.7552, 14.9967 );
 }
 
 
+var set_beerenberg = func {
+
+io.include("Models/Volcanoes/Beerenberg/beerenberg.nas");
+geo.put_model("Models/Volcanoes/Beerenberg/main_crater.xml", 71.0805, -8.1496 );
+
+}
+
 # volcano definitions
 
 var kilauea = volcano.new("Kilauea", 19.39, -155.20);
@@ -135,6 +142,10 @@ append(volcano_manager.volcano_array, stromboli);
 var etna = volcano.new("Etna", 37.74, 14.99 );
 etna.set = set_etna;
 append(volcano_manager.volcano_array, etna);
+
+var beerenberg = volcano.new("Beerenberg", 71.08, -8.15);
+beerenberg.set = set_beerenberg;
+append(volcano_manager.volcano_array, beerenberg);
 
 
 # start the manager when autosaved (need some delay for terrain loading to finish)

@@ -20,5 +20,9 @@
 	<northeast-activity type="int" userarchive="y">0</northeast-activity>
 	<flank-activity type="int" userarchive="y">0</flank-activity>
 </etna>
+<beerenberg>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+	<flank-activity type="int" userarchive="y">0</flank-activity>
+</beerenberg> 
 
 </PropertyList>

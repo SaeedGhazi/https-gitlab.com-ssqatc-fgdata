@@ -12,6 +12,7 @@
 <region include="Materials/regions/arctic.xml"/>
 <region include="Materials/regions/greenland.xml"/>
 <region include="Materials/regions/north_atlantic_islands.xml"/>
+<region include="Materials/regions/jan_mayen.xml"/>
 
 <!-- North America -->
 <region include="Materials/regions/alaska.xml"/>

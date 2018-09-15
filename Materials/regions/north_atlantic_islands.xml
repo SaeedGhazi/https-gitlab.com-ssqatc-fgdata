@@ -17,7 +17,6 @@
   </condition>
 
   <material>
-
     <name>GrassCover</name>
     <name>HerbTundraCover</name>
     <name>HerbTundra</name>
@@ -29,6 +28,7 @@
       <texture>Terrain/tundra2-autumn.png</texture>
     <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
     <texture n="12">Terrain/rock_dark.png</texture>
+	<texture n="13">Terrain/rock_dark.png</texture>
     </texture-set>
     <parameters>
      <grain_strength>0.8</grain_strength>
@@ -73,6 +73,7 @@
      <texture>Terrain/marsh4a-autumn.png</texture>
      <texture n="12">Terrain/rock_dark.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
+     <texture n="13">Terrain/rock_dark.png</texture>	 
      <texture n="15">Terrain/grass_hires.png</texture>
     </texture-set>
     <parameters>
@@ -98,6 +99,7 @@
      <texture>Terrain/iceland_grass-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
      <texture n="12">Terrain/rock_dark.png</texture>
+	 <texture n="13">Terrain/rock_dark.png</texture>	 
     </texture-set>
     <parameters>
       <transition_model>0.8</transition_model>
@@ -125,6 +127,7 @@
     <texture-set>
      <texture>Terrain/cropgrass-hires-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
+     <texture n="13">Terrain/rock_dark.png</texture>	 
     </texture-set>
     <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
     <parameters>
@@ -160,16 +163,24 @@
     <name>ScrubCover</name>
     <name>Scrub</name>
     <name>Sclerophyllous</name>
+	<effect>Effects/terrain-overlay</effect>
     <texture-set>
      <texture>Terrain/shrub1-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
      <texture n="12">Terrain/rock_dark.png</texture>
+     <texture n="13">Terrain/rock_dark.png</texture>
+     <texture n="14">Terrain/grain_texture.png</texture>
      <texture n="15">Terrain/rock_dark.png</texture>
+	 <texture n="20">Terrain/rock_dark.png</texture>
     </texture-set>
     <parameters>
      <dot_density>0.1</dot_density>
      <transition_model>0.7</transition_model>
      <hires_overlay_bias>-0.05</hires_overlay_bias>
+     <max_overlay_height>0.5</max_overlay_height>
+     <overlay_hardness>1.0</overlay_hardness>
+     <overlay_density>0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

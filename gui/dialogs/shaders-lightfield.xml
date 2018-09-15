@@ -58,7 +58,7 @@
 			<min>0.0</min>
 			<max>1.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.5</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/clouds</property>
 			<binding>
@@ -84,7 +84,7 @@
 			<min>0.0</min>
 			<max>6.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.14</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/landmass</property>
 			<binding>
@@ -110,7 +110,7 @@
 			<min>0.0</min>
 			<max>6.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.14</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/transition</property>
 			<binding>
@@ -163,7 +163,7 @@
 			<min>0.0</min>
 			<max>1.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.5</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/crop</property>
 			<binding>
@@ -212,7 +212,7 @@
 			<min>0.0</min>
 			<max>3.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.25</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/model</property>
 			<binding>
@@ -236,7 +236,7 @@
 			<min>0.0</min>
 			<max>1.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.5</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/forest</property>
 			<binding>
@@ -260,7 +260,7 @@
 			<min>0.0</min>
 			<max>2.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.33</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/wind-effects</property>
 			<binding>
@@ -284,7 +284,7 @@
 			<min>0.0</min>
 			<max>1.0</max>
 			<step>1.0</step>
-			<fraction>0.17</fraction>
+			<fraction>0.5</fraction>
 			<live>true</live>
 			<property>/sim/rendering/shaders/vegetation-effects</property>
 			<binding>

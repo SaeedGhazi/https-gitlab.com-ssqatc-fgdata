@@ -503,6 +503,16 @@
       </binding>
     </input>
 
+    <button>
+      <row>6</row>
+      <col>4</col>
+      <colspan>3</colspan>
+      <legend>ATC Services in range</legend>
+      <binding>
+        <command>ATC-freq-search</command>
+      </binding>
+    </button>
+
 
   </group>
 
@@ -600,20 +610,23 @@
     <empty>
       <stretch>true</stretch>
     </empty>
-
-    <button>
-      <legend>ATC Services in range</legend>
+    <input>
+      <name>tacan-freq</name>
+      <width>75</width>
+      <height>25</height>
+      <label>MHz</label>
+      <live>true</live>
+      <property>/instrumentation/tacan/frequencies/selected-mhz</property>
       <binding>
-        <command>ATC-freq-search</command>
+        <command>dialog-apply</command>
+        <object-name>tacan-freq</object-name>
       </binding>
-    </button>
-
-    <text>
-      <label>  </label>
-    </text>
+    </input>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
   </group>
   <!-- of TACAN group -->
-
   <!-- transponder controls -->
 
   <hrule/>

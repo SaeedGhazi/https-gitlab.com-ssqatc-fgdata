@@ -43,7 +43,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <tag>fixed-gear</tag>
         </tags>
 
-        <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), dg-505 (Jonathan Schellhase), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen, Horacio, D-ECHO, Jarl Arntzen (jarlarntzen)</author>
+        <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), legoboyvdlp (Jonathan Redpath), dg-505 (Jonathan Schellhase), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen, Horacio, D-ECHO, Jarl Arntzen (jarlarntzen)</author>
 
         <status>advanced production</status>
         <aircraft-version>2018.3</aircraft-version>
@@ -143,17 +143,24 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
                 <lighting>
                     <taxi type="bool">false</taxi>
                     <landing type="bool">false</landing>
-                    <ra-r type="double">.05</ra-r>
-                    <ra-g type="double">.05</ra-g>
-                    <ra-b type="double">.03</ra-b>
+                    <ra-r-p type="double">.05</ra-r-p>
+                    <ra-g-p type="double">.05</ra-g-p>
+                    <ra-b-p type="double">.03</ra-b-p>
+                    <ra-r-r type="double">0.05</ra-r-r>
+                    <ra-g-r type="double">0.025</ra-g-r>
+                    <ra-b-r type="double">0.025</ra-b-r>
+                    <ra-r type="double">0.0</ra-r>
+                    <ra-g type="double">0.0</ra-g>
+                    <ra-b type="double">0.0</ra-b>
                     <dome-norm type="float">0</dome-norm>
                     <gps-norm type="float">0</gps-norm>
-                    <!--ra-r type="double">0.05</ra-r>
-                    <ra-g type="double">0.025</ra-g>
-                    <ra-b type="double">0.025</ra-b-->
                     <courtesy-lights>
                          <courtesy-on type="bool">false</courtesy-on>
                     </courtesy-lights>
+                    <!-- default renderer flood lighting-->
+                    <flood-red>  0.7</flood-red>
+                    <flood-green>0.3</flood-green>
+                    <flood-blue> 0.3</flood-blue>
                 </lighting>
 
                 <!-- Damage type (0 = normal, 1 = broken, 2 = damaged) used by model -->
@@ -305,7 +312,6 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <path>/engines/active-engine/complex-engine-procedures</path>
             <path>/sim/model/immat</path>
             <path>/controls/mooring/automatic</path>
-            <path>/save/valid-flag</path>
         </aircraft-data>
 
         <current-view>
@@ -726,6 +732,8 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <frequencies>
                 <dial-1-khz type="int">0</dial-1-khz>
                 <dial-100-khz type="int">0</dial-100-khz>
+                <standby-khz type="double">200.0</standby-khz>
+                <selected-khz type="double">200.0</selected-khz>
             </frequencies>
         </adf>
         <comm n="0">
@@ -733,6 +741,8 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <frequencies>
                 <dial-khz type="int">0</dial-khz>
                 <dial-mhz type="int">0</dial-mhz>
+                <standby-mhz type="double">118.0</standby-mhz>
+                <selected-mhz type="double">118.0</selected-mhz>
             </frequencies>
             <volume-selected type="double">0.7</volume-selected>
         </comm>
@@ -741,6 +751,8 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <frequencies>
                 <dial-khz type="int">0</dial-khz>
                 <dial-mhz type="int">0</dial-mhz>
+                <standby-mhz type="double">118.0</standby-mhz>
+                <selected-mhz type="double">118.0</selected-mhz>
             </frequencies>
             <volume-selected type="double">0.7</volume-selected>
         </comm>
@@ -749,6 +761,8 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <frequencies>
                 <dial-khz type="int">0</dial-khz>
                 <dial-mhz type="int">0</dial-mhz>
+                <standby-mhz type="double">108.0</standby-mhz>
+                <selected-mhz type="double">108.0</selected-mhz>
             </frequencies>
             <ident-audible type="bool">false</ident-audible>
         </nav>
@@ -757,6 +771,8 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <frequencies>
                 <dial-khz type="int">0</dial-khz>
                 <dial-mhz type="int">0</dial-mhz>
+                <standby-mhz type="double">108.0</standby-mhz>
+                <selected-mhz type="double">108.0</selected-mhz>
             </frequencies>
             <ident-audible type="bool">false</ident-audible>
         </nav>
@@ -1133,7 +1149,6 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
     <!-- End Damage Mod -->
 
     <save>
-        <valid-flag type="bool">false</valid-flag>
         <latitude-deg type="double">0.0</latitude-deg>
         <longitude-deg type="double">0.0</longitude-deg>
         <altitude-ft type="double">0.0</altitude-ft>

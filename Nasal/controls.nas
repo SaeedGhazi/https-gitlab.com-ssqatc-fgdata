@@ -271,21 +271,15 @@ setElevatorTrimToPosition = func() {
     nv = math.min(math.max(-1.0,nv),1.0);
     var lv = getprop("/controls/flight/elevator");
     if (math.abs(lv) <= 0.001){
-        print("Elevator trim: centre");
       setprop("/controls/flight/elevator-trim", 0);
     } else {
-#print("Trim when centered stick");
         setElevatorTrimToPosition_listener = setlistener("/controls/flight/elevator", func(v){
             if (math.abs(v.getValue()) <= 0.001) {
                 setprop("controls/flight/elevator",0);
                 removelistener(setElevatorTrimToPosition_listener);
                 setElevatorTrimToPosition_listener = nil;
-#                print("set trim to ",nv);
                 setprop("/controls/flight/elevator-trim", nv);
             }
-#            else
-#              print("Not trimming yet ",v.getValue());
-
         }, 0, 0);
     }
 }

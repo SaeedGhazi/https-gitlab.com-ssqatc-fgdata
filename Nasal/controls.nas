@@ -274,17 +274,17 @@ setElevatorTrimToPosition = func() {
         print("Elevator trim: centre");
       setprop("/controls/flight/elevator-trim", 0);
     } else {
-print("Trim when centered stick");
+#print("Trim when centered stick");
         setElevatorTrimToPosition_listener = setlistener("/controls/flight/elevator", func(v){
             if (math.abs(v.getValue()) <= 0.001) {
                 setprop("controls/flight/elevator",0);
                 removelistener(setElevatorTrimToPosition_listener);
                 setElevatorTrimToPosition_listener = nil;
-                print("set trim to ",nv);
+#                print("set trim to ",nv);
                 setprop("/controls/flight/elevator-trim", nv);
             }
-            else
-              print("Not trimming yet ",v.getValue());
+#            else
+#              print("Not trimming yet ",v.getValue());
 
         }, 0, 0);
     }
@@ -483,7 +483,7 @@ var applyBrakes = func(v, which = 0) {
     if (which <= 0) { interpolate("/controls/gear/brake-left", v, fullBrakeTime); }
     if (which >= 0) { interpolate("/controls/gear/brake-right", v, fullBrakeTime); }
 }
-var applyTrigger = func(v) {
+var applyPickle = func(v) {
 setprop("/controls/armament/pickle", v);
 }
 

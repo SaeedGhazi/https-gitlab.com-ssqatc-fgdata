@@ -543,6 +543,7 @@ var buttonBindings = [
   NasalButton.new("Aileron Trim Right", "controls.aileronTrim(1);", 1),
   NasalHoldButton.new("FGCom PTT", "controls.ptt(1);", "controls.ptt(0);"),
   NasalHoldButton.new("Trigger", "controls.trigger(1);", "controls.trigger(0);"),
+  NasalHoldButton.new("Pickle", "controls.applyPickle(1);","controls.applyPickle(0);"),
   NasalButton.new("Flaps Up", "controls.flapsDown(-1);",0),
   NasalButton.new("Flaps Down", "controls.flapsDown(1);",0),
   NasalButton.new("Gear Up", "controls.gearDown(-1);",0),
@@ -559,8 +560,6 @@ var buttonBindings = [
 
 # with all of these it is expected the the armament system in the selected aircraft
 # will manage the wrap around and or reset to zero.
-  NasalHoldButton.new("Trigger", "controls.applyTrigger(1);","controls.applyTrigger(0);"),
-  PropertyAdjustButton.new("Pickle", "/controls/armament/pickle-target", "1"),
   PropertyAdjustButton.new("Target next", "/controls/armament/target-selected", "1"),
   PropertyAdjustButton.new("Target previous", "/controls/armament/target-selected", "-1"),
   PropertyAdjustButton.new("Weapon next", "/controls/armament/weapon-selected", "1"),

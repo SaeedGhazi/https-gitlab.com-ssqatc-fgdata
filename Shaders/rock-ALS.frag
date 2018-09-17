@@ -378,8 +378,11 @@ texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor *dust_resistance + 
 float snow_mix_factor = 0.0;
 if (msl_altitude +500.0 > snowlevel)
 	{
-   	snow_alpha = max(1.0,smoothstep(0.75, 0.85, abs(steepness)) +crack_factor);
-	snow_mix_factor = snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * msl_altitude+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0);
+
+	snow_alpha = smoothstep(0.65, 0.85, abs(steepness));
+	snow_alpha += (1.0 - snow_alpha) * crack_factor;
+	
+	snow_mix_factor = snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * msl_altitude + (noise_2000m + 0.1 * noise_10m -0.55) *400.0);
 	texel = mix(texel, snow_texel, snow_mix_factor);
 	}
 	

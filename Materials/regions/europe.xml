@@ -251,13 +251,24 @@
   </material>
 
     <material>
-    <effect>Effects/forest</effect>
+    <effect>Effects/terrain-overlay</effect>
     <tree-effect>Effects/tree-european-deciduous</tree-effect>
     <name>DeciduousBroadCover</name>
     <name>DeciduousForest</name>
     <name>Bog</name>
     <name>Heath</name>
-    <texture>Terrain/deciduous-hires-autumn.png</texture>
+    <texture-set>
+      <texture>Terrain/deciduous-hires-autumn.png</texture>
+      <texture n="20">Terrain/mixedforest-hires-autumn.png</texture>
+    </texture-set>
+    <parameters>
+      <max_overlay_height>2.0</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+    </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
@@ -270,13 +281,29 @@
     <bumpiness>0.85</bumpiness>
   </material>
 
-  <material>
-    <effect>Effects/forest</effect>
+   <material>
+    <effect>Effects/terrain-overlay</effect>
     <tree-effect>Effects/tree-european-mixed</tree-effect>
     <name>MixedForestCover</name>
     <name>MixedForest</name>
     <name>RainForest</name>
-    <texture>Terrain/mixedforest-hires-autumn.png</texture>
+    <texture-set>
+     <texture>Terrain/mixedforest-hires-autumn.png</texture>
+     <texture n="12">Terrain/rock.png</texture> 
+     <texture n="15">Terrain/rock.png</texture>
+     <texture n="20">Terrain/mixedforest-hires-autumn.png</texture>
+     </texture-set>
+     <parameters>
+      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <transition_model>0.9</transition_model>
+      <dot_density>0.2</dot_density>
+      <max_overlay_height>2.0</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+    </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>5000000.0</light-coverage>
@@ -287,6 +314,86 @@
     <tree-width-m>15.0</tree-width-m>
     <rolling-friction>1</rolling-friction>
     <bumpiness>0.95</bumpiness>
-  </material>
+  </material>  
+  
+  <material>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <effect>Effects/terrain-overlay</effect>
+    <texture-set>
+     <texture>Terrain/forest1a.png</texture>
+      <texture n="11">Terrain/grass_hires.png</texture>
+      <texture n="12">Terrain/rock.png</texture>
+      <texture n="15">Terrain/rock.png</texture>
+      <texture n="20">Terrain/mixedforest-hires.png</texture>
+    </texture-set>
+    <parameters>
+      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <transition_model>0.9</transition_model>
+      <dot_density>0.2</dot_density>
+      <max_overlay_height>2.0</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/coniferous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>18.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+   </material>  
+   
+  <material>
+    <effect>Effects/terrain-overlay</effect>
+    <name>Grassland</name>
+    <texture-set>
+     <texture>Terrain/dry_pasture4.png</texture>
+     <texture n="12">Terrain/tundra-hawaii-green-autumn.png</texture>
+     <texture n="20">Terrain/tundra-hawaii-green.png</texture>	 
+    </texture-set>
+    <parameters>
+      <max_overlay_height>0.2</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>	
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>150000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>   
+
+
 
 </PropertyList>

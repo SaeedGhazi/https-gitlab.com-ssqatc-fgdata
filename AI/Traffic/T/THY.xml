@@ -6929,7 +6929,7 @@
   </flight>
   <flight>
     <callsign>TK140</callsign>
-    <required-aircraft>THY-321</required-aircraft>
+    <required-aircraft>THY-343</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LTBA</port>
@@ -6944,7 +6944,7 @@
   </flight>
   <flight>
     <callsign>TK141</callsign>
-    <required-aircraft>THY-321</required-aircraft>
+    <required-aircraft>THY-343</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>OERK</port>
@@ -19424,7 +19424,7 @@
   </flight>
   <flight>
     <callsign>TK1029</callsign>
-    <required-aircraft>THY-343</required-aircraft>
+    <required-aircraft>THY-739</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LTBA</port>
@@ -19439,7 +19439,7 @@
   </flight>
   <flight>
     <callsign>TK1030</callsign>
-    <required-aircraft>THY-343</required-aircraft>
+    <required-aircraft>THY-739</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LBSF</port>

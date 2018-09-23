@@ -82,13 +82,13 @@
 				<dialog-name>terrasync</dialog-name>
 			</binding>
 		</item>
-
+<!-- 
 		<item>
 			<name>aircraft-center</name>
 			<binding>
 				<command>open-launcher</command>
 			</binding>
-		</item>
+		</item> -->
 
 		<item>
 			<name>exit</name>

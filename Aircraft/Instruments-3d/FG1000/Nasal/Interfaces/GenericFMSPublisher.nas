@@ -186,12 +186,12 @@ var FMSDataDelegate = {
     emesary.GlobalTransmitter.NotifyAll(notification);
   },
   cleared : func (fp) {
-    me.sendFMSNotification({"FMSFlightPlanEdited" : 1});
     var notification = notifications.PFDEventNotification.new(
       "MFD",
       1,
       notifications.PFDEventNotification.FMSData,
       {"FMSFlightPlanEdited" : 1});
+      emesary.GlobalTransmitter.NotifyAll(notification);
   },
   endOfFlightPlan: func (fp) {
     var notification = notifications.PFDEventNotification.new(

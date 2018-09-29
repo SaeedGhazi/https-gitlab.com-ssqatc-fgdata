@@ -53,8 +53,15 @@ var WPT_model = {
 		if (alt != 0)
 			m.name ~= "\n"~alt;
 
+        var wp2idx = 1; # next waypoint
+
+		if (!idx) { # first point
+            if(fp.getPlanSize(idx) == 1) # if only have one wpt then it must be at element 0.
+                wp2idx = 0;
+        }
 		if (idx) var n = wp.path()[-1];
-		else var n = fp.getWP(1).path()[0];
+		else var n = fp.getWP(wp2idx).path()[0];
+
 		(m.lat,m.lon) = (n.lat,n.lon);
 		return m;
 	},

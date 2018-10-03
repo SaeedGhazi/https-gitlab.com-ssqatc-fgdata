@@ -120,7 +120,7 @@ var Tooltip = {
   _updateText: func
   {
     var msg = me._label;
-    if (me._property != nil) {
+    if (me._property != nil and me._label != nil) {
       var val = me._property.getValue() or 0;
 
       # https://code.google.com/p/flightgear-bugs/issues/detail?id=1454
@@ -308,13 +308,7 @@ tooltip.createCanvas();
 
 var innerSetTooltip = func(node)
 {
-   tooltip.setLabel(cmdarg().getNode('label').getValue());
-   var measure = cmdarg().getNode('measure-text');
-   if (measure != nil) {
-       tooltip.setWidthText(measure.getValue());
-   } else {
-       tooltip.setWidthText(nil);
-   }
+   tooltip.setLabel(nil);
 
    var propPath = cmdarg().getNode('property');
    if (propPath != nil) {
@@ -322,6 +316,15 @@ var innerSetTooltip = func(node)
      tooltip.setProperty(n);
    } else {
       tooltip.setProperty(nil);
+   }
+
+   tooltip.setLabel(cmdarg().getNode('label').getValue());
+
+   var measure = cmdarg().getNode('measure-text');
+   if (measure != nil) {
+       tooltip.setWidthText(measure.getValue());
+   } else {
+       tooltip.setWidthText(nil);
    }
 
    var mapping = cmdarg().getNode('mapping');

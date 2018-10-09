@@ -121,7 +121,7 @@ Sample addon-metadata.xml file
 ==============================
 
 Here is an example of an addon-metadata.xml file, for a hypothetical
-add-on called “Flying Turtle” distributed by Joe User:
+add-on called "Flying Turtle" distributed by Joe User:
 
   <?xml version="1.0" encoding="UTF-8"?>
 
@@ -212,7 +212,7 @@ add-on called “Flying Turtle” distributed by Joe User:
 General rules
 =============
 
-We use the terms “field” or “node” interchangeably here to refer to
+We use the terms "field" or "node" interchangeably here to refer to
 nodes of the addon-metadata.xml PropertyList file (technically, a field
 always has a value, possibly empty, therefore fields are all leaf
 nodes).
@@ -236,7 +236,7 @@ otherwise isn't constrained. On the other hand, the add-on identifier
   - must contain only ASCII letters (A-Z, a-z) and dots ('.');
   - must be in reverse DNS style (even if the domain doesn't exist),
     e.g., org.flightgear.addons.ATCChatter for an add-on distributed in
-    FGAddon, or user.joe.FlyingTurtle for Joe User's “Flying Turtle”
+    FGAddon, or user.joe.FlyingTurtle for Joe User's "Flying Turtle"
     add-on. Of course, if Joe User owns a domain name and uses it to
     distribute his add-on, he should put it here.
 
@@ -262,7 +262,7 @@ contacting the add-on maintainers.
 The data in children nodes of /addon/maintainers may refer either to
 real persons or to more abstract entities such as mailing-lists. In case
 of a real person, the corresponding URL, if specified, is expected to be
-the person's home page. On the other hand, if a declared “maintainer” is
+the person's home page. On the other hand, if a declared "maintainer" is
 a mailing-list, a good use for the 'url' field is to indicate the
 address of a web page from which people can subscribe to the
 mailing-list.
@@ -285,9 +285,13 @@ means a hard line break. Two \n in a row (i.e., a blank line) should be
 used to separate paragraphs. Example:
 
 This is a paragraph.
-This is the second line of the same paragraph. It can be very, very, very long and contain several sentences.
+This is the second line of the same paragraph. It can be very, very, very
+long and contain several sentences.
 
-This is a different paragraph. Again, don't break lines (i.e., don't press Enter) unless a particular formatting reason makes it necessary. For instance, it is okay to break lines in order to present a list of items, but not for line wrapping.
+This is a different paragraph. Again, don't break lines (i.e., don't press
+Enter) unless a particular formatting reason makes it necessary. For instance,
+it is okay to break lines in order to present a list of items, but not for
+line wrapping.
 
 Licensing terms
 ===============
@@ -298,12 +302,12 @@ Nodes: /addon/license/designation
 
 The /add-on/license/designation node should describe the add-on
 licensing terms in a short but accurate way, if possible. If this is not
-practically doable, use the value “Custom”. If the add-on is distributed
-under several licenses, use the value “Multiple”. In all cases, make
+practically doable, use the value "Custom". If the add-on is distributed
+under several licenses, use the value "Multiple". In all cases, make
 sure the licensing terms are clearly specified in other files of the
 add-on (typically, at least README.txt or COPYING). Values for
-/add-on/license/designation could be “GNU GPL version 2 or later”, “CC0
-1.0 Universal”, “3-clause BSD”, etc.
+/add-on/license/designation could be "GNU GPL version 2 or later", "CC0
+1.0 Universal", "3-clause BSD", etc.
 
 In most cases, the add-on should contain a file containing the full
 license text. Use the /add-on/license/file node to point to this file:
@@ -313,7 +317,7 @@ Windows.
 
 The /add-on/license/url node should contain a single URL if there is an
 official, stable URL for the license under which the add-on is
-distributed. The term “official” here is to be interpreted in the
+distributed. The term "official" here is to be interpreted in the
 context of the particular license. For instance, for a GNU license
 (GPL2, LGPL2.1, etc.), the URL domain must be gnu.org; for a CC license
 (CC0 1.0 Universal, CC-BY-SA 4.0...), it must be creativecommons.org,
@@ -448,7 +452,7 @@ button.png, system.xml, etc.).
 The [addon=ADDON_ID]relative/path syntax is useful where resources are
 specified inside non-Nasal files (e.g., in property-rule configuration
 files, which use the XML format). For the particular case of Nasal code,
-there is a better way that is explained below (see “Nasal API”): the
+there is a better way that is explained below (see "Nasal API"): the
 resourcePath() method of addons.Addon objects returns a string like
 "[addon=ADDON_ID]relative/path" when you pass it the string
 "relative/path". This is a good thing to use, because then your Nasal
@@ -736,7 +740,7 @@ Queries to the AddonManager:
 Read-only data members (attributes) of addons.Addon objects:
 
   id                    the add-on identifier, in reverse DNS style (string)
-  name                  the add-on “pretty name” (string)
+  name                  the add-on "pretty name" (string)
   version               the add-on version (instance of addons.AddonVersion,
                         ghost)
   authors               the add-on authors (vector of addons.Author ghosts)

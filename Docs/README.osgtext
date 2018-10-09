@@ -56,7 +56,8 @@ For the anxious reader, here is a complete example of a text node:
   -->
 
   <draw-text type="bool">true</draw-text> <!-- draw the text itself -->
-  <draw-alignment type="bool">false</draw-alignment> <!-- draw crosshair at object center -->
+  <!-- draw crosshair at object center -->
+  <draw-alignment type="bool">false</draw-alignment>
   <draw-boundingbox type="bool">false</draw-boundingbox> <!-- draw a bounding box -->
 
   <font>led.txf</font> <!-- The font file name, relative to data/Fonts -->

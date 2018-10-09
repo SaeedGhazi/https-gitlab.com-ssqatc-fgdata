@@ -79,7 +79,8 @@ The header has to be updated with respect to MINGW.
      /* XXX This is from Win32's <windef.h> */
   #  ifndef APIENTRY
   #   define GLUT_APIENTRY_DEFINED
-! #   if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) || defined(__LCC__)
+! #   if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) ||
+          defined(__LCC__)
   #    define APIENTRY    __stdcall
   #   else
   #    define APIENTRY
@@ -87,7 +88,8 @@ The header has to be updated with respect to MINGW.
      /* XXX This is from Win32's <windef.h> */
   #  ifndef APIENTRY
   #   define GLUT_APIENTRY_DEFINED
-! #   if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) || defined(__LCC__) || defined(__MINGW32__)
+! #   if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) ||
+          defined(__LCC__) || defined(__MINGW32__)
   #    define APIENTRY    __stdcall
   #   else
   #    define APIENTRY

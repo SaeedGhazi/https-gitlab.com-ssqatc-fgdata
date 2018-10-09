@@ -217,7 +217,8 @@ texture-unit - has several child properties:
     color
 
   texenv-combine
-    combine-[rgb|alpha] - replace, modulate, add, add-signed, interpolate, subtract, dot3-rgb, dot3-rgba
+    combine-[rgb|alpha] - replace, modulate, add, add-signed, interpolate, subtract, dot3-rgb,
+                          dot3-rgba
     source[0|1|2]-[rgb|alpha] - constant, primary_color, previous, texture, texture[0-7]
     operand[0|1|2]-[rgb|alpha] -src-color, one-minus-src-color, src-alpha, one-minus-src-alpha
     scale-[rgb|alpha]

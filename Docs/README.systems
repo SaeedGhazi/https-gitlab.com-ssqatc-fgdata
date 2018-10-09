@@ -110,13 +110,14 @@ on an AN5812 pitot tube.
 ** The STATIC system
 
 The static system measures the static pressure. So all influences of airspeed are eliminated.
-In real life this is however not always easy. Effects from angle of attack, side-slip, flap defection,
-gear extension, engine power setting and airspeed are present and for the aircraft
+In real life this is however not always easy. Effects from angle of attack, side-slip, flap
+defection, gear extension, engine power setting and airspeed are present and for the aircraft
 designer it is not alway easy to find a good position for the static port.
 Usually the number of static systems are equal to the number of pitot systems.
 In Flightgear there are 3 types of static systems modelled.
 Type 0 (default): the perfect sensor. No measurement failures.
-Type 1: Dual static ports on the fuselage sides. Side-slip angle influence only. this model the whole pair.
+Type 1: Dual static ports on the fuselage sides. Side-slip angle influence only. this model
+        the whole pair.
 Type 2: Static port on the pitot tube. Both angle of attack and side-slip influence.
 If you want to use type 1 or 2:
   <static>
@@ -126,8 +127,8 @@ If you want to use type 1 or 2:
     <type>1</type>
     <error-factor>0.5</error-factor>
   </static>
-The output property /systems/static[n]/pressure-inhg is filtered. Therefore, if you want to see
-the effect of the measurement failure, "tau" should be 0.1 or smaller.
+The output property /systems/static[n]/pressure-inhg is filtered. Therefore, if you want to
+see the effect of the measurement failure, "tau" should be 0.1 or smaller.
 The "error-factor" should be between 0.2 and 0.7. Setting it to 0 equals a "perfect sensor".
 A setting of 1 means the whole (projected on static port face) impact pressure is applied.
 This is not realistic as usually there are more than one static pick-up points

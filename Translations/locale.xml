@@ -67,6 +67,12 @@
 		<xliff type="string">Translations/pl/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
+	<locale>
+		<lang type="string">ru</lang>
+		<lang type="string">ru_RU</lang>
+		<xliff type="string">Translations/ru/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
         <locale>
 		<lang type="string">zh</lang>
 		<lang type="string">zh_CN</lang>

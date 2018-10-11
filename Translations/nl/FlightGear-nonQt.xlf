@@ -63,7 +63,7 @@
         <target xml:space="preserve">Ontwikkelingsextensies beheren</target>
       </trans-unit>
       <trans-unit id="menu/cycle-gui:0" approved="yes">
-        <source xml:space="preserve">Cycle GUI style</source>
+        <source xml:space="preserve">Cycle GUI Style</source>
         <target xml:space="preserve">GUI stijlen roteren</target>
       </trans-unit>
       <trans-unit id="menu/debug:0" approved="yes">
@@ -163,7 +163,7 @@
         <target xml:space="preserve">Instrument instellingen</target>
       </trans-unit>
       <trans-unit id="menu/interface-config:0" approved="yes">
-        <source xml:space="preserve">User-interface options</source>
+        <source xml:space="preserve">User-interface Options</source>
         <target xml:space="preserve">Gebruikers interface instellingen</target>
       </trans-unit>
       <trans-unit id="menu/jetway:0" approved="yes">
@@ -363,7 +363,7 @@
         <target xml:space="preserve">Verkeer- en scenarioinstellingen</target>
       </trans-unit>
       <trans-unit id="menu/select-livery:0" approved="yes">
-        <source xml:space="preserve">Select livery</source>
+        <source xml:space="preserve">Select Livery</source>
         <target xml:space="preserve">Kies uitvoering</target>
       </trans-unit>
       <trans-unit id="menu/show-hide-yokes:0" approved="yes">
@@ -680,9 +680,9 @@
         <source xml:space="preserve">Disable wireframe drawing mode</source>
         <target xml:space="preserve">Model frame opbouw niet gebruiken</target>
       </trans-unit>
-      <trans-unit id="options/dme-desc:0" approved="yes">
+      <trans-unit id="options/dme-desc:0" approved="no">
         <source xml:space="preserve">Slave the DME to one of the NAV radios, or set its internal frequency.</source>
-        <target xml:space="preserve">Maak de ADF afhankelijk van een van de NAV radio&apos;s, of stel zijn interne frequentie in.</target>
+        <target xml:space="preserve">Maak de DME afhankelijk van een van de NAV radio&apos;s, of stel zijn interne frequentie in.</target>
       </trans-unit>
       <trans-unit id="options/download-dir-desc:0" approved="yes">
         <source xml:space="preserve">Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>

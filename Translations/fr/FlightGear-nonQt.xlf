@@ -63,7 +63,7 @@
         <target xml:space="preserve">Configurer les extensions de développement</target>
       </trans-unit>
       <trans-unit id="menu/cycle-gui:0" approved="yes">
-        <source xml:space="preserve">Cycle GUI style</source>
+        <source xml:space="preserve">Cycle GUI Style</source>
         <target xml:space="preserve">Changer le style de l&apos;interface graphique</target>
       </trans-unit>
       <trans-unit id="menu/debug:0" approved="yes">
@@ -168,7 +168,7 @@
         <target xml:space="preserve">Paramètres des instruments</target>
       </trans-unit>
       <trans-unit id="menu/interface-config:0" approved="yes">
-        <source xml:space="preserve">User-interface options</source>
+        <source xml:space="preserve">User-interface Options</source>
         <target xml:space="preserve">Options de l&apos;interface utilisateur</target>
       </trans-unit>
       <trans-unit id="menu/jetway:0" approved="yes">
@@ -368,7 +368,7 @@
         <target xml:space="preserve">Paramètres de trafic et de scénarios</target>
       </trans-unit>
       <trans-unit id="menu/select-livery:0" approved="yes">
-        <source xml:space="preserve">Select livery</source>
+        <source xml:space="preserve">Select Livery</source>
         <target xml:space="preserve">Choisir une livrée</target>
       </trans-unit>
       <trans-unit id="menu/show-hide-yokes:0" approved="yes">

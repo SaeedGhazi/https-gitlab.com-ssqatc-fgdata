@@ -176,29 +176,17 @@ Example of Hud Ladder xml file.
   <screen_hole>70</screen_hole>         <!-- Hole b/w the Ladder Bars -->
   <lbl_pos>0</lbl_pos>                  <!-- Label Position to indicate pitch angle on bar -->
   <enable_frl>false</enable_frl>        <!-- To Enable Pitch Reference Symbol (used by us) -->
-  <!-- To Enable Target Spot Symbol (fgfs uses this) -->
-  <enable_target_spot>true</enable_target_spot>
-  <!-- To Enable Velocity Vector Symbol (use only with climb/dive ladder) -->
-  <enable_velocity_vector>false</enable_velocity_vector>
-  <!-- To Enable Drift Marker Symbol (used by us) -->
-  <enable_drift_marker>false</enable_drift_marker>
-  <!-- To Enable Alpha Bracket Symbol (used by us, presently hard coded bracket values,
-       alpha values will be moved to xml file) -->
-  <enable_alpha_bracket>false</enable_alpha_bracket>
-  <!-- To Enable Energy Marker Symbol (used by us) -->
-  <enable_energy_marker>false</enable_energy_marker>
-  <!-- To Enable Climb/Dive Marker (used by us) -->
-  <enable_climb_dive_marker>false</enable_climb_dive_marker>
-  <!-- To Enable Glide/Slope Marker (tied to climb/dive ladder only) -->
-  <enable_glide_slope_marker>false</enable_glide_slope_marker>
-  <!-- Glide slope angle (specify the angle for drawing the reference bar) -->
-  <glide_slope>0.0</glide_slope>
-  <!-- To Enable Energy worm (used by us) -->
-  <enable_energy_worm>false</enable_energy_worm>
-  <!-- To Enable Way point Marker (bearing marker) -->
-  <enable_waypoint_marker>false</enable_waypoint_marker>
-  <!-- use this to enable or disable whole object -->
-  <working>true</working>
+  <enable_target_spot>true</enable_target_spot>                <!-- To Enable Target Spot Symbol (fgfs uses this) -->
+  <enable_velocity_vector>false</enable_velocity_vector>       <!-- To Enable Velocity Vector Symbol (use only with climb/dive ladder) -->
+  <enable_drift_marker>false</enable_drift_marker>             <!-- To Enable Drift Marker Symbol (used by us) -->
+  <enable_alpha_bracket>false</enable_alpha_bracket>           <!-- To Enable Alpha Bracket Symbol (used by us, presently hard coded bracket values, alpha values will be moved to xml file) -->
+  <enable_energy_marker>false</enable_energy_marker>           <!-- To Enable Energy Marker Symbol (used by us) -->
+  <enable_climb_dive_marker>false</enable_climb_dive_marker>   <!-- To Enable Climb/Dive Marker (used by us) -->
+  <enable_glide_slope_marker>false</enable_glide_slope_marker> <!-- To Enable Glide/Slope Marker (tied to climb/dive ladder only) -->
+  <glide_slope>0.0</glide_slope>                               <!-- Glide slope angle (specify the angle for drawing the reference bar) -->
+  <enable_energy_worm>false</enable_energy_worm>               <!-- To Enable Energy worm (used by us) -->
+  <enable_waypoint_marker>false</enable_waypoint_marker>       <!-- To Enable Way point Marker (bearing marker) -->
+  <working>true</working>                                      <!-- use this to enable or disable whole object -->
   </l1>
 
  </ladders>
@@ -224,8 +212,7 @@ Example of Hud Card xml file.
    <y>430</y>
    <width>200</width>
    <height>28</height>
-   <loadfn>heading</loadfn>     <!-- Name of the function to be called,
-                                     here get_Heading() is called -->
+   <loadfn>heading</loadfn>     <!-- Name of the function to be called, here get_Heading() is called -->
    <options>4</options>         <!--  Read Tape Options Below or Hud.hxx file for details -->
    <maxValue>360.0</maxValue>   <!-- Maximum scale value -->
    <minValue>0.0</minValue>     <!-- Minimum Scale Value -->
@@ -245,8 +232,7 @@ Example of Hud Card xml file.
    <cap_left>false</cap_left>
    <marker_offset>0.0</marker_offset>    <!-- Read Marker offset below -->
    <enable_pointer>true</enable_pointer> <!-- To draw a pointer -->
-   <pointer_type>fixed</pointer_type>    <!-- Type of pointer, Fixed or Moving
-                                              (yet to be implemented) -->
+   <pointer_type>fixed</pointer_type>    <!-- Type of pointer, Fixed or Moving (yet to be implemented) -->
    <working>true</working>
   </c1>
 
@@ -336,21 +322,17 @@ Example of a Label xml file.
    <y>130</y>
    <width>40</width>
    <height>30</height>
-   <data_source>mach</data_source>    <!-- Name of the function to be called,
-                                           here get_Heading() is called -->
+   <data_source>mach</data_source>    <!-- Name of the function to be called, here get_Heading() is called -->
    <label_format>%4.2f</label_format> <!-- The Label Format -->
    <pre_label_string>blank</pre_label_string>  <!-- String to be written Pre Label -->
    <post_label_string>NULL</post_label_string> <!-- String to be written Post Label -->
    <scale_data>1.0</scale_data>
    <options>4</options>               <!-- Read Tape options or Hud.hxx -->
-   <justification>2</justification>   <!-- Justify the label, 0=LEFT_JUSTIFY,
-                                           1=CENTER_JUSTIFY, 2=RIGHT_JUSTIFY -->
+   <justification>2</justification>   <!-- Justify the label, 0=LEFT_JUSTIFY, 1=CENTER_JUSTIFY, 2=RIGHT_JUSTIFY -->
    <blinking>0</blinking>             <!-- Yet to be implemented -->
    <working>true</working>
-   <latitude>false</latitude>         <!-- True if the label is to display Latitude
-                                           (special label, displays deg.min.sec) -->
-   <longitude>false</longitude>       <!-- True if the label is to display Longitude
-                                           (special label, displays deg.min.sec) -->
+   <latitude>false</latitude>         <!-- True if the label is to display Latitude (special label, displays deg.min.sec) -->
+   <longitude>false</longitude>       <!-- True if the label is to display Longitude (special label, displays deg.min.sec) -->
   </i1>
 
  </labels>
@@ -370,10 +352,8 @@ Example of a Turn Bank Indicator xml file.
   <y>45</y>
   <width>60</width>
   <height>10</height>
-  <loadfn>roll</loadfn>       <!-- Name of the function to be called,
-                                   get_roll() is called here. -->
-  <loadfn1>sideslip</loadfn1> <!-- Name of the function to be called,
-                                   get_sideslip() is called here. -->
+  <loadfn>roll</loadfn>       <!-- Name of the function to be called, get_roll() is called here. -->
+  <loadfn1>sideslip</loadfn1> <!-- Name of the function to be called, get_sideslip() is called here. -->
   <maxBankAngle>45.0</maxBankAngle> <!-- Maximum Angle of Bank -->
   <maxSlipAngle>5.0</maxSlipAngle>  <!-- Maximum Angle of Slip -->
   <gap_width>5</gap_width>          <!-- Screen Hole -->
@@ -387,8 +367,8 @@ Example of a Turn Bank Indicator xml file.
 I have still got to implement dials (as in MIL-STD-1787b).
 
 REMEMBER IF YOU NEED TO INDICATE ANY OTHER PARAMETER ON THE HUD OTHER THAN WHAT IS PROVIDED AS
-CALLBACK FUNCTIONS (PROPERTY NAMES LISTED BELOW) YOU HAVE TO FIDDLE WITH THE CODE, AS YET. LET
-ME KNOW AND I SHALL INCLUDE THAT.
+CALLBACK FUNCTIONS (PROPERTY NAMES LISTED BELOW) YOU HAVE TO FIDDLE WITH THE CODE, AS YET. LET ME
+KNOW AND I SHALL INCLUDE THAT.
 
 <loadfn>anzg</loadfn>             <!-- Here get_anzg() is called -->
 <loadfn>heading</loadfn>          <!-- Here get_heading() is called -->

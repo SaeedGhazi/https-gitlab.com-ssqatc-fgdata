@@ -13,7 +13,7 @@ Contents
 --------
 
 1. The CharArrayStream and ZlibStream classes
-2. The "embedded resources" system
+2. The “embedded resources” system
 3. About the XML resource declaration files
 4. The EmbeddedResourceProxy class
 
@@ -24,7 +24,7 @@ Introduction
 The embedded resources system allows FlightGear to use data from files
 without relying on FG_ROOT to be set. This can be used, for instance, to
 grab the contents of XML files at FG build time, from any repository[1],
-and use said contents in the C++ code. The term "embedded" is used to
+and use said contents in the C++ code. The term “embedded” is used to
 avoid confusion with the ResourceProvider and ResourceManager classes
 provided by SimGear, which have nothing to do with the system described
 here.
@@ -41,7 +41,7 @@ transparently. So, there is really no reason to worry about memory
 consumption, even for several dozens of XML files.
 
 fgrcc is the resource compiler: it turns arbitrary files into C++ code
-the EmbeddedResourceManager can make use of, in order to "serve" the
+the EmbeddedResourceManager can make use of, in order to “serve” the
 files' contents at runtime. It is named this way, because it fulfills
 the same role as Qt's rcc tool. It supports a thin superset of the
 XML-based format used by rcc for declaring resources[2][3].
@@ -104,7 +104,7 @@ interesting with compressed resources, because:
 
   1) The in-memory static data is much smaller in general than the
      uncompressed contents, and it's the only one we really have to
-     "pay" for if one uses these stream-based interfaces.
+     “pay” for if one uses these stream-based interfaces.
 
   2) The data is transparently decompressed on-demand as the end-user
      code reads from the ZlibDecompressorIStream or
@@ -141,7 +141,7 @@ handle text and binary data in exactly the same way (std::string doesn't
 care, and neither do the other classes).
 
 
-2) The "embedded resources" system
+2) The “embedded resources” system
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The embedded resources system works this way:
@@ -223,28 +223,28 @@ The embedded resources system works this way:
          EmbeddedResourceManager code in SimGear is so far completely
          agnostic of the kind of data stored in keys; this could be
          changed, though, if we wanted for example to be able to query
-         at runtime all available resources in a given "virtual
-         directory");
+         at runtime all available resources in a given “virtual
+         directory”);
 
-       - a "locale" name, similar to what FlightGear's XML translation
+       - a “locale” name, similar to what FlightGear's XML translation
          files and FGLocale use. We used double quotes here, because
-         fgrcc and the EmbeddedResourceManager expect "locale" names to
+         fgrcc and the EmbeddedResourceManager expect “locale” names to
          be of one of these forms:
            * empty string: default locale, typically but not necessarily
-             English (it is "engineering English" in FlightGear, i.e.,
+             English (it is “engineering English” in FlightGear, i.e.,
              English written by programmers in the code, before
              translators possibly fix it up :)
            * en, fr, de, es, it...
            * en_GB, en_US, fr_FR, fr_CA, de_DE, de_CH, it_IT...
 
          There is no encoding part, contrary to POSIX locales, hence the
-         use of double quotes around the term "locale" in this context.
+         use of double quotes around the term “locale” in this context.
 
      The FGLocale::getPreferredLanguage() method returns the preferred
-     "locale" in the form described above, according to user choice
+     “locale” in the form described above, according to user choice
      (from fgfs' --language option) and/or settings (system locale).
      This allows FG to tell the EmbeddedResourceManager the preferred
-     "locale" for resource fetching (same syntax as in Qt's rcc tool for
+     “locale” for resource fetching (same syntax as in Qt's rcc tool for
      declaration in the XML file, using the 'lang' attribute on
      'qresource' elements).
 
@@ -266,9 +266,9 @@ The embedded resources system works this way:
      getResource(), getString(), getStreambuf() and getIStream()) has
      two overloads:
        - one taking only a virtual path (the key mentioned above);
-       - one taking a virtual path and a "locale" name.
+       - one taking a virtual path and a “locale” name.
 
-     (we'll write "locale" without enclosing double-quotes from now on,
+     (we'll write “locale” without enclosing double-quotes from now on,
      otherwise it gets too painful to read; but we're *not* talking
      about POSIX-style locales ending with an encoding part)
 
@@ -445,15 +445,13 @@ Footnotes
     this would be, compared to having the files loaded from $FG_ROOT.
     Well, maybe for large files [apt.dat.gz & Co] that we would want to
     load but not see in the FGData repository at all. But then there
-    would be the requirement, of course, that "something" puts the files
+    would be the requirement, of course, that “something” puts the files
     in a clearly-defined, platform-dependent location known to the
     EmbeddedResourceManager.
 
-[6] https://sourceforge.net/p/flightgear/fgmeta/ci/next/tree/python3-flightgear/
-    rebuild-fgdata-embedded-resources
+[6] https://sourceforge.net/p/flightgear/fgmeta/ci/next/tree/python3-flightgear/rebuild-fgdata-embedded-resources
 
-[7] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/
-    embedded_resources/
+[7] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/
 
 [8] We know that in some buggy C++ implementations, the
     std::ios_base::failure exception can't be caught, at least not under
@@ -471,8 +469,6 @@ Footnotes
     'i18n-and-init-work-v2' branch (not merged into 'next' at the time
     of this writing).
 
-[10] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/
-     embedded_resources/EmbeddedResourceProxy.hxx
+[10] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/EmbeddedResourceProxy.hxx
 
-[11] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/
-     embedded_resources/embedded_resources_test.cxx
+[11] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/embedded_resources_test.cxx

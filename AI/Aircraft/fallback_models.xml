@@ -138,7 +138,7 @@
 <model n="507" type="string">AI/Aircraft/seahawk/Models/seahawk-3d-model.xml</model>
 
 <model n="514" type="string">AI/Aircraft/f-14b/Models/f-14b.xml</model>
-<model n="515" type="string">Models/Aircraft/F-15-lowpoly.xml</model>
+<model n="515" type="string">AI/Aircraft/F-15/Models/F-15.xml</model>
 <model n="516" type="string">AI/Aircraft/f16/Models/f-16.xml</model>
 
 <!-- 551-600 Military large aircraft (tankers, transports) -->

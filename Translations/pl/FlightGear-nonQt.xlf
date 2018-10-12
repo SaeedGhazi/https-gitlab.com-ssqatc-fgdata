@@ -63,6 +63,10 @@
           <source>Configure Development Extensions</source>
           <target />
         </trans-unit>
+        <trans-unit approved="no" id="menu/cycle-gui:0" translate="yes">
+          <source>Cycle GUI style</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="no" id="menu/debug:0" translate="yes">
           <source>Debug</source>
           <target />
@@ -103,8 +107,16 @@
           <source>--- Failures ---</source>
           <target>Awarie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/fg1000:0" translate="yes">
+        <trans-unit approved="no" id="menu/fg1000:0" translate="no">
           <source>FG1000 MFD</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="menu/fg1000-mfd:0" translate="yes">
+          <source>FG1000 MFD</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="menu/fg1000-pfd:0" translate="yes">
+          <source>FG1000 PFD</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="menu/fgcom-settings:0" translate="yes">
@@ -674,7 +686,7 @@
           <target>Niedostepny tryb rysowania konturowego</target>
         </trans-unit>
         <trans-unit approved="no" id="options/dme-desc:0" translate="yes">
-          <source>Slave the ADF to one of the NAV radios, or set its internal frequency.</source>
+          <source>Slave the DME to one of the NAV radios, or set its internal frequency.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="options/download-dir-desc:0" translate="yes">

@@ -4,7 +4,6 @@
 
 <PropertyList>
 
-	<splash>
 		<init>initializing</init>
 		<loading-aircraft-list>loading aircraft list</loading-aircraft-list>
 		<loading-aircraft>loading aircraft</loading-aircraft>
@@ -25,7 +24,5 @@
         <finalize-position>finalizing position</finalize-position>
 
 				<unstable-warning>Unstable nightly build - some features may be under active development</unstable-warning>
-	</splash>
-
 
 </PropertyList>

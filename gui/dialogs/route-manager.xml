@@ -33,6 +33,11 @@ command interface /autopilot/route-manager/input:
             var dep = routem.getNode("departure", 1);
             var dest = routem.getNode("destination", 1);
 
+            var isMach = dlg.getNode("cruise-is-mach", 1);
+            isMach.setBoolValue(routem.getNode('cruise/mach').getValue() > 0.0);
+            var isFL = dlg.getNode("cruise-is-flight-level", 1);
+            isFL.setBoolValue(routem.getNode('cruise/flight-level').getValue() > 0);
+            
             var sel_index = func {
                 return int(selection.getValue());
             }
@@ -252,8 +257,6 @@ command interface /autopilot/route-manager/input:
                 return;
               }
 
-
-
               # we're on the ground, find the nearest airport to start from
               if (fp.departure == nil) {
                 var apts = findAirportsWithinRange(25.0);
@@ -412,7 +415,11 @@ command interface /autopilot/route-manager/input:
             </binding>
             <binding>
                 <command>nasal</command>
-                <script>updateRunways();</script>
+                <script>
+                    updateRunways();
+                    updateSTARs();
+                    updateApproaches();
+                </script>
             </binding>
         </input>
         <text>
@@ -498,36 +505,56 @@ command interface /autopilot/route-manager/input:
                 <object-name>star</object-name>
             </binding>
         </combo>
-    </group>
-    <!--
-    <group>
-        <layout>hbox</layout>
+
         <text>
+            <row>2</row>
+            <col>0</col>
+            <halign>right</halign>
             <label>Alternate:</label>
-            <pref-width>80</pref-width>
         </text>
         <input>
-            <name>alt-airport</name>
-            <halign>fill</halign>
-            <stretch>true</stretch>
-            <pref-width>150</pref-width>
+            <row>2</row>
+            <col>1</col>
+            <halign>left</halign>
+            <name>alternate-airport</name>
+            <pref-width>70</pref-width>
             <property>/autopilot/route-manager/alternate/airport</property>
+            <live>true</live>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>alternate-airport</object-name>
+            </binding>
         </input>
 
+        <text>
+            <row>2</row>
+            <col>2</col>
+            <format>%s</format>
+            <property>/autopilot/route-manager/alternate/name</property>
+            <live>true</live>
+            <stretch>true</stretch>
+            <halign>fill</halign>
+        </text>
     </group>
-    -->
+   
     <group>
-        <layout>hbox</layout>
+        <layout>table</layout>
         <text>
             <halign>right</halign>
-            <label>  Cruise Speed (kts):</label>
+            <label>Cruise Speed:</label>
+            <col>0</col>
         </text>
         <input>
             <name>cruise-speed</name>
             <live>true</live>
+            <label>(kts)</label>
             <halign>left</halign>
-            <stretch>true</stretch>
-            <pref-width>100</pref-width>
+            <pref-width>50</pref-width>
+            <col>1</col>
+            <visible>
+                <not><property>/sim/gui/dialogs/route-manager/cruise-is-mach</property></not>
+            </visible>
+
             <property>/autopilot/route-manager/cruise/speed-kts</property>
             <binding>
                 <command>dialog-apply</command>
@@ -535,13 +562,45 @@ command interface /autopilot/route-manager/input:
             </binding>
         </input>
 
+        <input>
+            <name>cruise-speed-mach</name>
+            <live>true</live>
+            <label>(M)</label>
+            <halign>left</halign>
+            <pref-width>50</pref-width>
+            <property>/autopilot/route-manager/cruise/mach</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>cruise-speed-mach</object-name>
+            </binding>
+            <visible>
+            <property>/sim/gui/dialogs/route-manager/cruise-is-mach</property>
+            </visible>
+            <col>1</col>
+        </input>
+
+        <checkbox>
+        <name>cruise-speed-type-check</name>
+        <halign>left</halign>
+        <label>use Mach</label>
+        <property>/sim/gui/dialogs/route-manager/cruise-is-mach</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>cruise-speed-type-check</object-name>
+        </binding>
+        <col>2</col>
+        </checkbox>
+
+
         <text>
-            <label>Cruise Altitude (ft/FL):</label>
+            <label>Cruise Altitude:</label>
             <halign>right</halign>
+            <col>3</col>
         </text>
         <input>
             <name>cruise-alt</name>
             <live>true</live>
+            <label>(ft)</label>
             <halign>left</halign>
             <stretch>true</stretch>
             <pref-width>100</pref-width>
@@ -550,7 +609,42 @@ command interface /autopilot/route-manager/input:
                 <command>dialog-apply</command>
                 <object-name>cruise-alt</object-name>
             </binding>
+             <visible>
+                <not><property>/sim/gui/dialogs/route-manager/cruise-is-flight-level</property></not>
+            </visible>
+            <col>4</col>
         </input>
+
+             <input>
+            <name>cruise-alt-fl</name>
+            <live>true</live>
+            <label>(FL)</label>
+            <halign>left</halign>
+            <stretch>true</stretch>
+            <pref-width>100</pref-width>
+            <property>/autopilot/route-manager/cruise/flight-level</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>cruise-alt-fl</object-name>
+            </binding>
+             <visible>
+                <property>/sim/gui/dialogs/route-manager/cruise-is-flight-level</property>
+            </visible>
+            <col>4</col>
+        </input>
+
+         <checkbox>
+         <name>cruise-alt-type-check</name>
+        <halign>left</halign>
+        <label>use Flight-level</label>
+        <property>/sim/gui/dialogs/route-manager/cruise-is-flight-level</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>cruise-alt-type-check</object-name>
+        </binding>
+        <col>5</col>
+        </checkbox>
+
     </group>
 
     <hrule/>

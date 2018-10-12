@@ -240,7 +240,7 @@
 	<nav2-desc>Set the NAV2 radio frequency, optionally preceded by a radial.</nav2-desc>
 	<adf1-desc>Set the ADF1 radio frequency, optionally preceded by a card rotation.</adf1-desc>
 	<adf2-desc>Set the ADF2 radio frequency, optionally preceded by a card rotation.</adf2-desc>
-	<dme-desc>Slave the ADF to one of the NAV radios, or set its internal frequency.</dme-desc>
+	<dme-desc>Slave the DME to one of the NAV radios, or set its internal frequency.</dme-desc>
 
 	<situation-options>Situation Options</situation-options>
 	<failure-desc>Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures).</failure-desc>

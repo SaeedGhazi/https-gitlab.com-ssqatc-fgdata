@@ -81,6 +81,7 @@
   <event>
     <name>rel-dial</name>
     <interpolater>
+        <mirrored type="bool">true</mirrored>
       <entry><ind>0</ind><dep>0</dep></entry>
       <entry><ind>1</ind><dep>1</dep></entry>
       <entry><ind>2</ind><dep>5</dep></entry>
@@ -105,6 +106,7 @@
     <max>359</max>
   </binding>
   <interpolater>
+      <mirrored type="bool">true</mirrored>
     <entry><ind>0</ind><dep>0</dep></entry>
     <entry><ind>1</ind><dep>1</dep></entry>
     <entry><ind>2</ind><dep>5</dep></entry>
@@ -123,6 +125,7 @@
     <max>359</max>
   </binding>
   <interpolater>
+      <mirrored type="bool">true</mirrored>
     <entry><ind>0</ind><dep>0</dep></entry>
     <entry><ind>1</ind><dep>1</dep></entry>
     <entry><ind>2</ind><dep>5</dep></entry>
@@ -138,6 +141,7 @@
     <factor type="double">10</factor>
   </binding>
   <interpolater>
+      <mirrored type="bool">true</mirrored>
     <entry><ind>0</ind><dep>0</dep></entry>
     <entry><ind>1</ind><dep>1</dep></entry>
     <entry><ind>2</ind><dep>5</dep></entry>
@@ -154,6 +158,7 @@
     <min>0</min>
   </binding>
   <interpolater>
+      <mirrored type="bool">true</mirrored>
     <entry><ind>0</ind><dep>0</dep></entry>
     <entry><ind>1</ind><dep>1</dep></entry>
     <entry><ind>2</ind><dep>5</dep></entry>
@@ -172,6 +177,7 @@
     <max>359</max>
   </binding>
   <interpolater>
+    <mirrored type="bool">true</mirrored>
     <entry><ind>0</ind><dep>0</dep></entry>
     <entry><ind>1</ind><dep>1</dep></entry>
     <entry><ind>2</ind><dep>5</dep></entry>

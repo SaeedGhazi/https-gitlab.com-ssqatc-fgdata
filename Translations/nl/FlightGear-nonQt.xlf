@@ -680,7 +680,7 @@
         <source xml:space="preserve">Disable wireframe drawing mode</source>
         <target xml:space="preserve">Model frame opbouw niet gebruiken</target>
       </trans-unit>
-      <trans-unit id="options/dme-desc:0" approved="no">
+      <trans-unit id="options/dme-desc:0" approved="yes">
         <source xml:space="preserve">Slave the DME to one of the NAV radios, or set its internal frequency.</source>
         <target xml:space="preserve">Maak de DME afhankelijk van een van de NAV radio&apos;s, of stel zijn interne frequentie in.</target>
       </trans-unit>
@@ -972,9 +972,9 @@
         <source xml:space="preserve">Specify which logging class(es) to use</source>
         <target xml:space="preserve">Kies welke log class(es) gebruikt moeten worden</target>
       </trans-unit>
-      <trans-unit id="options/log-dir-desc:0">
+      <trans-unit id="options/log-dir-desc:0" approved="yes">
         <source xml:space="preserve">Log to directory DIR. The special value &apos;desktop&apos; causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Schrijf een logboek in de map DIR. De speciale waarde &apos;desktop zorgt voor het schrijven van het logboek naar de desktop (locatie afhankelijk van het besturingssysteem). Deze optie kan meerdere keren worden opgegeven, telkens met een andere waarde. Het logbestand krijgt de naam FlightGear_YYYY-MM-DD_&lt;num&gt;.log waarbij &lt;num&gt; de waardes 0, 1, 2 etc. aanneemt.</target>
       </trans-unit>
       <trans-unit id="options/log-level-desc:0" approved="yes">
         <source xml:space="preserve">Specify which logging level to use</source>

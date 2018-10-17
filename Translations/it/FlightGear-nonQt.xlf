@@ -691,9 +691,9 @@
           <source>Disable wireframe drawing mode</source>
           <target state="signed-off">Disabilita modalità di disegno wireframe</target>
         </trans-unit>
-        <trans-unit id="options/dme-desc:0" approved="no" translate="yes">
+        <trans-unit id="options/dme-desc:0" approved="yes" translate="yes">
           <source>Slave the DME to one of the NAV radios, or set its internal frequency.</source>
-          <target state="signed-off">Fai dipendere l'DME da una delle radio NAV o imposta la sua frequenza interna.</target>
+          <target state="signed-off">Fai dipendere il DME da una delle radio NAV o imposta la sua frequenza interna.</target>
         </trans-unit>
         <trans-unit id="options/download-dir-desc:0" approved="yes" translate="yes">
           <source>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>

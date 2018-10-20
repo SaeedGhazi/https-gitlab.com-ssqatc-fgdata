@@ -117,7 +117,7 @@
           <source>FG1000 MFD</source>
           <target state="signed-off">Display multifunzione FG1000</target>
         </trans-unit>
-        <trans-unit id="menu/fg1000-mfd:0" approved="no" translate="yes">
+        <trans-unit id="menu/fg1000-mfd:0" approved="yes" translate="yes">
           <source>FG1000 MFD</source>
           <target phase-name="approval-1">Display multifunzione FG1000</target>
         </trans-unit>

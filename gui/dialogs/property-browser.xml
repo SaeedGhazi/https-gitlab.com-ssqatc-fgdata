@@ -197,6 +197,19 @@
 				});
 				fgcommand("dialog-new", self);
 				fgcommand("dialog-show", self);
+
+				var originalPath = '/sim/gui/dialogs/property-browser';
+				# reset the values, so we don't use incorrect paths
+				# when the last browser is closed and then re-opened
+				# bug: https://sourceforge.net/p/flightgear/codetickets/2044/
+				self.setValues({
+					"name": "property-browser",
+					"dialog-name": "property-browser",
+					"group[0]/text/property": originalPath ~ "/title",
+					"property-list/property": originalPath ~ "/list",
+					"group[1]/text/property": originalPath ~ "/label",
+					"group[1]/input/property": originalPath ~ "/input",
+				});
 			}
 
 			var auto_update = func {

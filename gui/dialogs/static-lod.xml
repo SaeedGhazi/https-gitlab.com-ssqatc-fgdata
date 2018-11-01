@@ -4,6 +4,29 @@
     <nasal>
         <open>
         <![CDATA[
+
+            var reload_props = [
+                "/sim/rendering/static-lod/rough-delta",
+                "/sim/rendering/static-lod/bare-delta"];
+
+            var reload_vals = {};
+            foreach (var p; reload_props) {
+                reload_vals[p] = getprop(p);
+            }
+            check_for_reload = func{
+                    var reinit = 0;
+                    foreach (var p; reload_props) {
+                      if (reload_vals[p] != getprop(p)) {
+                        reinit = 1;
+                      }
+                    }
+
+                    if (reinit) {
+                      fgcommand("reload-materials", props.Node.new());
+                      fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
+                    }
+            };
+            
             var lodDIALOG = cmdarg();
             var dlgLOD = props.Node.new({"dialog-name": "static-lod"});
 
@@ -245,7 +268,7 @@
             <property>/sim/rendering/static-lod/detailed</property>
             <live>1</live>
             <min>0</min>
-            <max>5000</max>
+            <max>100000</max>
             <binding>
                 <command>dialog-apply</command>
                 <object-name>scenery-detailed</object-name>
@@ -577,18 +600,8 @@
                 <command>nasal</command>
                 <script>
                     <![CDATA[
-            var reinit = 0;
-            foreach (var p; reload_props) {
-              if (reload_vals[p] != getprop(p)) {
-                reinit = 1;
-              }
-            }
-
-            if (reinit) {
-              fgcommand("reload-materials", props.Node.new());
-              fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
-            }
-          ]]>
+                    check_for_reload();
+                  ]]>
                 </script>
             </binding>
             <binding>
@@ -604,7 +617,14 @@
             <binding>
                 <command>dialog-apply</command>
             </binding>
-        </button>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    check_for_reload();
+                  ]]>
+                </script>
+            </binding>        </button>
         <empty>
             <stretch>true</stretch>
         </empty>

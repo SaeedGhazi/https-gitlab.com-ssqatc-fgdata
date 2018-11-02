@@ -21,12 +21,14 @@ boxHeight: 48,
 new : func() {
     var obj = {
         parents : [ISFD],
+        _mode : ''
     };
 
     ISFD.hsiLeft = ISFD.speedTapeWidth - ISFD.halfSize;
     ISFD.hsiXCenter = ISFD.hsiLeft + ISFD.hsiWidth/2;
     ISFD.hsiRight = ISFD.halfSize - ISFD.altTapeWidth;
     ISFD.hsiBottom = ISFD.hsiHeight/2;
+    ISFD.modeBoxHeight = (ISFD.baseSize - ISFD.hsiHeight)/2;
 
     obj.canvas = canvas.new({
             "name" : "ISFD Canvas",
@@ -73,9 +75,9 @@ createContents : func()
     me.createSpeedBox();
     me.createAltitudeBox();
 
-    # in / HPA readout (text) (or STD)
+    me.createAltimeterSetting();
     # mach readout - not on the B737 model?
-    # mode readout, APP for sure, what else?
+    me.createModeText();
 
     # if ILS is tuned!
     # glideslope marker
@@ -158,15 +160,28 @@ addHorizontalSymmetricLine : func(path, positiveLength, y)
     return path;
 },
 
-createDigitTape : func(parent, name)
+createDigitTape : func(parent, name, suffix = nil)
 {
+    if (suffix != nil) {
+        print('Suffix is:' ~ suffix);
+    }
+
     var t = parent.createChild('text', name);
-    var s = '';
+    # 'top' zero (above 9)
+    var s = '0' ~ chr(10);
+    if (suffix != nil) {
+        s = '0' ~ suffix ~ chr(10);
+    }
+
     for (var i=9; i>=0; i-=1) {
-        s = s ~ i ~ chr(10);
+        if (suffix != nil) {
+            s = s ~ i ~ suffix ~ chr(10);
+        } else {
+            s = s ~ i ~ chr(10);
+        }
     }
     t.setText(s);
-    t.setFont("LiberationFonts/LiberationMono-Bold.ttf");
+    t.setFont("LiberationFonts/LiberationMono-Regular.ttf");
     t.setFontSize(44);
     t.set('line-height', 0.9);
     t.setAlignment("left-bottom");
@@ -385,7 +400,7 @@ createAltitudeTape : func()
         text.setText(text);
         text.setFontSize(36);
         text.setAlignment("left-center");
-        text.setFont("LiberationFonts/LiberationMono-Bold.ttf");
+        text.setFont("LiberationFonts/LiberationMono-Regular.ttf");
         text.setTranslation(2, -y);
         
         # we will update the text very often, ensure we only do
@@ -400,14 +415,14 @@ createAltitudeTape : func()
 updateAltitudeTape : func()
 {
     var altFt = me._controller.getAltitudeFt();
-    var alt100 = int(altFt/100);
-    var altMod100 = altFt - (alt100 * 100);
+    var alt200 = int(altFt/200);
+    var altMod200 = altFt - (alt200 * 200);
 
-    var offset = 128 * (altMod100 / 100.0);
+    var offset = 128 * (altMod200 / 200.0);
     me._altTapeGroup.setTranslation(ISFD.hsiRight, offset);
 
-    # compute this as current alt - half altitdue range
-    var lowestAlt = (alt100 - 6) * 200;
+    # compute this as current alt - half altitude range
+    var lowestAlt = (alt200 - 6) * 200;
 
     for (var i=0; i<=12; i+=1)
     {
@@ -429,7 +444,7 @@ createCompassRose : func()
     clipGroup.set("clip-frame", canvas.Element.LOCAL);
     clipGroup.set("clip", "rect(179px, 142px, 256px, -164px)");
 
-    var roseBoxHeight = (ISFD.baseSize - ISFD.hsiHeight)/2;
+    var roseBoxHeight = ISFD.modeBoxHeight;
     var hh = roseBoxHeight / 2;
 
     # background of the compass
@@ -487,7 +502,31 @@ createCompassRose : func()
 
 createAltitudeBox : func()
 {
+    var halfBoxHeight = ISFD.boxHeight / 2;
+    var box = me.root.rect(ISFD.hsiRight - 10, -halfBoxHeight, 
+                           ISFD.altTapeWidth + 10, ISFD.boxHeight);
+    box.setColorFill('#000000'); 
+    box.setColor('#ffffff');
+    box.setStrokeLineWidth(2);
+    box.set('z-index', 2);
 
+    var clipGroup = me.root.createChild('group', 'altitude-box-clip');
+    clipGroup.set("clip-frame", canvas.Element.LOCAL);
+    clipGroup.set("clip", "rect(-24px," ~ (ISFD.altTapeWidth + 10) ~ "px, 24px, 0px)");
+    clipGroup.setTranslation(ISFD.hsiRight - 10, 0);
+    clipGroup.set('z-index', 3);
+
+    var text = clipGroup.createChild('text', 'altitude-box-text');
+    me._altitudeBoxText = text;
+
+    text.setText('88 ');
+    text.setFontSize(44);
+    text.setAlignment("left-center");
+    text.setFont("LiberationFonts/LiberationMono-Regular.ttf");
+
+    me._altitudeDigits00 = me.createDigitTape(clipGroup, 'altitude-digits00', '0');
+    me._altitudeDigits00.setFontSize(32);
+    me._altitudeDigits00.set('z-index', 4);
 },
 
 createSpeedBox : func()
@@ -498,20 +537,62 @@ createSpeedBox : func()
     box.setColorFill('#000000'); 
     box.setColor('#ffffff');
     box.setStrokeLineWidth(2);
-
     box.set('z-index', 2);
 
-    var text = me.root.createChild('text', 'speed-box-text');
+    var clipGroup = me.root.createChild('group', 'speed-box-clip');
+    clipGroup.set("clip-frame", canvas.Element.LOCAL);
+    clipGroup.set("clip", "rect(-24px," ~ (ISFD.speedTapeWidth + 4) ~ "px, 24px, 0px)");
+    clipGroup.setTranslation(-ISFD.halfSize, 0);
+    clipGroup.set('z-index', 3);
+
+    var text = clipGroup.createChild('text', 'speed-box-text');
+    me._speedBoxText = text;
+
     text.setText('88 ');
     text.setFontSize(44);
     text.setAlignment("left-center");
-    text.setFont("LiberationFonts/LiberationMono-Bold.ttf");
-    text.setTranslation(-ISFD.halfSize, 0);
+    text.setFont("LiberationFonts/LiberationMono-Regular.ttf");
 
-    text.set('z-index', 3);
-
-    me._speedDigit0 = me.createDigitTape(me.root, 'speed-digit0');
+    me._speedDigit0 = me.createDigitTape(clipGroup, 'speed-digit0');
     me._speedDigit0.set('z-index', 4);
+},
+
+createAltimeterSetting: func()
+{
+    me._altimeterText = me.root.createChild('text', 'altimeter-setting-text');
+    me._altimeterText.setText('1013');
+    me._altimeterText.setFontSize(44);
+    me._altimeterText.setAlignment("right-center");
+    me._altimeterText.setFont("LiberationFonts/LiberationMono-Regular.ttf");
+    me._altimeterText.setColor('#00ff00');
+
+    var midTextY = -ISFD.halfSize + (ISFD.modeBoxHeight * 0.5);
+    me._altimeterText.setTranslation(ISFD.hsiWidth * 0.5, midTextY);
+},
+
+createModeText : func()
+{
+    me._modeText = me.root.createChild('text', 'mode-text');
+    me._modeText.setFontSize(44);
+    me._modeText.setText('APP');
+    me._modeText.setAlignment("left-center");
+    me._modeText.setFont("LiberationFonts/LiberationMono-Regular.ttf");
+    me._modeText.setColor('#00ff00');
+
+    var midTextY = -ISFD.halfSize + (ISFD.modeBoxHeight * 0.5);
+    me._modeText.setTranslation(-ISFD.hsiWidth * 0.5, midTextY);
+},
+
+pressButtonAPP : func()
+{
+    if (me._mode == 'app') {
+        me._mode = '';
+        me._modeText.setVisible(0);
+    } else {
+        me._mode = 'app';
+        me._modeText.setText('APP');
+        me._modeText.setVisible(1);
+    }
 },
 
 update : func()
@@ -533,9 +614,19 @@ update : func()
     me.updateAltitudeTape();
     me.updateSpeedTape();
 
+# speed box
     var spd = me._controller.getIndicatedAirspeedKnots();
     var spdDigit0 = math.mod(spd, 10);
-    me._speedDigit0.setTranslation(50 - ISFD.halfSize, spdDigit0 * 10);
+    me._speedDigit0.setTranslation(50, spdDigit0 * 44);
+    var s = sprintf("%02i ", math.floor(spd / 10));
+    me._speedBoxText.setText(s);
+
+# altitude box
+    var alt = me._controller.getAltitudeFt();
+    var altDigits00 = math.mod(alt / 10, 10);
+    me._altitudeDigits00.setTranslation(80, altDigits00 * 32);
+    var s = sprintf("%03i ", math.floor(alt / 100));
+    me._altitudeBoxText.setText(s);
 }  
 
 };

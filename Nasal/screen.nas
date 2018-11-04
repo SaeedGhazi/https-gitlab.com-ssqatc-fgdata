@@ -502,7 +502,7 @@ var msg_mp = func (n) {
 	if (search_name_in_msg(msg, call) or (highlight != nil and search_name_in_msg(msg, string.lc(highlight))))
 		screen.log.write(n.getValue(), 1.0, 0.5, 0.5);
 	else
-		screen.log.write(n.getValue(), 0.5, 0.0, 0.8);
+		screen.log.write(n.getValue(), 0.82, 1, 0.59);
 }
 
 var msg_repeat = func {

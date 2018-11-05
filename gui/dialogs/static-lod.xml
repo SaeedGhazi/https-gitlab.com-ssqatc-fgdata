@@ -53,7 +53,7 @@
 
     <text>
       <row>0</row><col>1</col><colspan>3</colspan>
-      <label>Max. Ranges (m)</label>
+      <label>Scenery Ranges (always in meters)</label>
     </text>
 
     <text>
@@ -67,12 +67,6 @@
     <text>
       <row>1</row><col>3</col>
       <label>Bare</label>
-    </text>
-
-    <text>
-      <row>2</row><col>0</col>
-      <halign>right</halign>
-      <label>Scenery</label>
     </text>
 
     <input>
@@ -92,27 +86,44 @@
       <halign>fill</halign>
       <property>/sim/rendering/static-lod/bare</property>
     </input>
+    <text>
+      <row>2</row><col>4</col>
+      <halign>left</halign>
+      <label>meters</label>
+    </text>
+<hrule>
+      <row>3</row><col>0</col><colspan>6</colspan>
+</hrule>
 
     <text>
-      <row>3</row><col>0</col>
+      <row>4</row><col>1</col>
+      <label>Detailed</label>
+    </text>
+    <text>
+      <row>4</row><col>2</col>
+      <label>Rough</label>
+    </text>
+
+    <text>
+      <row>5</row><col>0</col>
       <halign>right</halign>
       <label>AI/MP Aircraft</label>
     </text>
 
     <input>
-      <row>3</row><col>1</col>
+      <row>5</row><col>1</col>
       <halign>fill</halign>
       <property>/sim/rendering/static-lod/ai-detailed</property>
     </input>
 
     <input>
-      <row>3</row><col>2</col>
+      <row>5</row><col>2</col>
       <halign>fill</halign>
       <property>/sim/rendering/static-lod/ai-bare</property>
     </input>
 
     <radio>
-      <row>3</row>
+      <row>5</row>
       <col>3</col>
       <halign>left</halign>
       <name>pixel</name>
@@ -137,7 +148,7 @@
     </radio>
 
     <radio>
-      <row>3</row>
+      <row>5</row>
       <col>4</col>
       <halign>left</halign>
       <name>distance</name>
@@ -162,13 +173,13 @@
     </radio>
 
     <text>
-      <row>4</row><col>0</col>
+      <row>6</row><col>0</col>
       <halign>right</halign>
       <label>AI/MP Interior</label>
     </text>
 
     <input>
-      <row>4</row><col>1</col>
+      <row>6</row><col>1</col>
       <halign>fill</halign>
       <property>/sim/rendering/static-lod/ai-interior</property>
     </input>
@@ -181,6 +192,24 @@
     </input>
 -->
 
+    <text>
+      <row>7</row><col>0</col>
+<colspan>5</colspan>
+      <halign>left</halign>
+      <label>In pixel mode sensible values are 100 and 0. Set both to 0 to disable LOD </label>
+    </text>
+    <text>
+      <row>8</row><col>0</col>
+<colspan>5</colspan>
+      <halign>left</halign>
+      <label>In distance mode sensible values are 50 and 2000. Set both to 0 to disable LOD. </label>
+    </text>
+    <text>
+      <row>9</row><col>0</col>
+<colspan>5</colspan>
+      <halign>left</halign>
+      <label>When LOD is disabled the most detailed model available will be displayed.</label>
+    </text>
   </group>
 
   <hrule/>

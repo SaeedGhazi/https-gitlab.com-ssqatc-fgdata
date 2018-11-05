@@ -50,7 +50,7 @@ var best_runway = func(apt) {
 #
 var draw_tunnel = func(rwy) {
 	var m = geo.Coord.new().set_latlon(rwy.lat, rwy.lon);
-	m.apply_course_distance(rwy.heading + 180, rwy.length / 2 - rwy.threshold - HOFFSET);
+	m.apply_course_distance(rwy.heading, rwy.threshold + HOFFSET);
 
 	var g = geodinfo(m.lat(), m.lon());
 	var elev = g != nil ? g[0] : apt.elevation;

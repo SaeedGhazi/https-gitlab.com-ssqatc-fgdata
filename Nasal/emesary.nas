@@ -107,7 +107,17 @@ var Transmitter =
         {
             if (recipient.RecipientActive)
             {
-                var rstat = recipient.Receive(message);
+                var rstat = nil;
+                call(func {rstat = recipient.Receive(message);},nil,nil,nil,var err = []);
+                
+                if (size(err)){
+                    foreach(var line; err) {
+                        print(line);
+                    }
+                    print("Recipient ",recipient.Ident, " has been removed from transmitter (", me.Ident, ") because of the above error");
+                    me.DeRegister(recipient);
+                    return Transmitter.ReceiptStatus_Abort;#need to break the foreach due to having modified what its iterating over.
+                }
 
                 if(rstat == Transmitter.ReceiptStatus_Fail)
                 {

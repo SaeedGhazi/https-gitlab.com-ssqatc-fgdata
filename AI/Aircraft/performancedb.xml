@@ -339,6 +339,7 @@
     </aircraft>
     <alias>
       <match>MD11</match>
+	  <match>MF1</match>
       <alias>M11</alias>
     </alias>
     <!-- McDonnell Douglas 80 all versions -->

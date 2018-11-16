@@ -162,10 +162,6 @@ addHorizontalSymmetricLine : func(path, positiveLength, y)
 
 createDigitTape : func(parent, name, suffix = nil)
 {
-    if (suffix != nil) {
-        print('Suffix is:' ~ suffix);
-    }
-
     var t = parent.createChild('text', name);
     # 'top' zero (above 9)
     var s = '0' ~ chr(10);
@@ -183,7 +179,7 @@ createDigitTape : func(parent, name, suffix = nil)
     t.setText(s);
     t.setFont("LiberationFonts/LiberationMono-Regular.ttf");
     t.setFontSize(44);
-    t.set('line-height', 0.9);
+   # t.set('line-height', 0.9);
     t.setAlignment("left-bottom");
     return t;
 },
@@ -215,7 +211,9 @@ createRollTicks : func()
     me.addHorizontalSymmetricPolarTick(rollScale, 20, baseR, baseR + minorTick);
     me.addHorizontalSymmetricPolarTick(rollScale, 30, baseR, baseR + majorTick);
     me.addHorizontalSymmetricPolarTick(rollScale, 45, baseR, baseR + minorTick);
-    me.addHorizontalSymmetricPolarTick(rollScale, 60, baseR, baseR + majorTick);
+
+    # we cap the length of these to avoid sticking into the speed/alt tapes
+    me.addHorizontalSymmetricPolarTick(rollScale, 60, baseR, baseR + minorTick);
     rollScale.close();
 
     # add filled path for the zero arrow
@@ -248,7 +246,7 @@ createPitchLadder : func()
      # sky rect
     var box = me.root.rect(ISFD.hsiLeft, -ISFD.hsiHeight/2, 
                            ISFD.hsiWidth, ISFD.hsiHeight);
-    box.setColorFill('#1497e2'); 
+    box.setColorFill('#69B3F4'); 
 
     me._pitchRotation = me.root.createChild("group", "pitch-rotation");
     me.pitchGroup = me._pitchRotation.createChild("group", "pitch-group");
@@ -258,7 +256,7 @@ createPitchLadder : func()
 
     # ground rect
     var box = me.pitchGroup.rect(-1000, 0, 2000, 2000);
-    box.setColorFill('#dd9f23'); 
+    box.setColorFill('#8F9552'); 
     box.set("clip-frame", canvas.Element.GLOBAL);
     box.set("clip", "rect(77px, 398px, 435px, 92px)");
     
@@ -314,7 +312,7 @@ createSpeedTape : func()
 {
     # background box
     var box = me.root.rect(0, -ISFD.halfSize, ISFD.speedTapeWidth - 1, ISFD.baseSize);
-    box.setColorFill('#b7a479'); 
+    box.setColorFill('#738A7E'); 
     box.setTranslation(-256, 0);
     box.set('z-index', -1);
 
@@ -372,7 +370,7 @@ createAltitudeTape : func()
     # background box
     var box = me.root.rect(ISFD.hsiRight + 1, -ISFD.halfSize, 
                            ISFD.altTapeWidth, ISFD.baseSize);
-    box.setColorFill('#b7a479'); 
+    box.setColorFill('#738A7E'); 
     box.set('z-index', -1);
 
     me._altTapeGroup = me.root.createChild("group", "altitude-tape-group");
@@ -437,24 +435,25 @@ updateAltitudeTape : func()
 
 createCompassRose : func()
 {
-    # background is static
-    # marker arrow is static (and transparent)
+    
+    
 
+    # clip group for numerals
     var clipGroup = me.root.createChild("group", "rose-clip-group");
     clipGroup.set("clip-frame", canvas.Element.LOCAL);
-    clipGroup.set("clip", "rect(179px, 142px, 256px, -164px)");
+    clipGroup.set("clip", "rect(176px, 142px, 256px, -164px)");
+    clipGroup.set('z-index', 2);
 
     var roseBoxHeight = ISFD.modeBoxHeight;
     var hh = roseBoxHeight / 2;
 
     # background of the compass
     var p = clipGroup.createChild('path', 'rose-background');
-
-    p.moveTo(ISFD.hsiXCenter - ISFD.roseRadius, ISFD.hsiBottom + 8 + ISFD.roseRadius);
+    p.moveTo(ISFD.hsiXCenter - ISFD.roseRadius, ISFD.hsiBottom + 12 + ISFD.roseRadius);
     p.arcSmallCW(ISFD.roseRadius, ISFD.roseRadius, 0, 
                  ISFD.roseRadius * 2, 0);
     p.close();
-    p.setColorFill('#b7a479'); 
+    p.setColorFill('#738A7E'); 
 
     # add path for the heading arrow
     var arrow = me.root.createChild("path", "rose-arrow");
@@ -470,15 +469,17 @@ createCompassRose : func()
     arrow.line(arrowHWidth, -arrowHeight);
     arrow.line(-arrowHWidth * 2, 0);
     arrow.close();
+    arrow.set('z-index', 4);
 
     me._roseGroup = clipGroup.createChild('group', 'rose-group');
-    me._roseGroup.setTranslation(ISFD.hsiXCenter, ISFD.hsiBottom + 8 + ISFD.roseRadius);
+    me._roseGroup.setTranslation(ISFD.hsiXCenter, ISFD.hsiBottom + 12 + ISFD.roseRadius);
 
     var roseTicks = me._roseGroup.createChild('path', 'rose-ticks');
     roseTicks.setStrokeLineWidth(2);
     roseTicks.setColor(1, 1, 1);
+    roseTicks.set('z-index', 2);
 
-    var textR = (ISFD.roseRadius) - 10;
+    var textR = (ISFD.roseRadius) - 16;
     for (var i=0; i<36; i+=1) {
         # create ten degree text
         # TODO: 30 degree sizes should be bigger
@@ -498,6 +499,9 @@ createCompassRose : func()
         me.addPolarTick(roseTicks, i * 10, ISFD.roseRadius, ISFD.roseRadius - 8);
         me.addPolarTick(roseTicks, (i * 10) + 5, ISFD.roseRadius, ISFD.roseRadius - 16);
     }
+
+    roseTicks.close();
+
 },
 
 createAltitudeBox : func()
@@ -567,7 +571,7 @@ createAltimeterSetting: func()
     me._altimeterText.setColor('#00ff00');
 
     var midTextY = -ISFD.halfSize + (ISFD.modeBoxHeight * 0.5);
-    me._altimeterText.setTranslation(ISFD.hsiWidth * 0.5, midTextY);
+    me._altimeterText.setTranslation(ISFD.hsiRight - 2, midTextY);
 },
 
 createModeText : func()
@@ -580,7 +584,7 @@ createModeText : func()
     me._modeText.setColor('#00ff00');
 
     var midTextY = -ISFD.halfSize + (ISFD.modeBoxHeight * 0.5);
-    me._modeText.setTranslation(-ISFD.hsiWidth * 0.5, midTextY);
+    me._modeText.setTranslation(ISFD.hsiLeft + 2, midTextY);
 },
 
 pressButtonAPP : func()
@@ -617,14 +621,14 @@ update : func()
 # speed box
     var spd = me._controller.getIndicatedAirspeedKnots();
     var spdDigit0 = math.mod(spd, 10);
-    me._speedDigit0.setTranslation(50, spdDigit0 * 44);
+    me._speedDigit0.setTranslation(53, 16 + spdDigit0 * 44);
     var s = sprintf("%02i ", math.floor(spd / 10));
     me._speedBoxText.setText(s);
 
 # altitude box
     var alt = me._controller.getAltitudeFt();
     var altDigits00 = math.mod(alt / 10, 10);
-    me._altitudeDigits00.setTranslation(80, altDigits00 * 32);
+    me._altitudeDigits00.setTranslation(80, 16 + altDigits00 * 32);
     var s = sprintf("%03i ", math.floor(alt / 100));
     me._altitudeBoxText.setText(s);
 }  

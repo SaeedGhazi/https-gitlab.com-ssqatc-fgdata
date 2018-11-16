@@ -217,11 +217,11 @@
       </entry>
       <entry>
         <ind>3</ind>
-        <dep>50</dep>
+        <dep>20</dep>
       </entry>
       <entry>
         <ind>4</ind>
-        <dep>100</dep>
+        <dep>40</dep>
       </entry>
     </interpolater>
     <binding>

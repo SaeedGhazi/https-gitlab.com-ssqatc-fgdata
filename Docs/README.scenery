@@ -12,9 +12,13 @@ Contents ----------------------------------------------------------------------
 3  stg files
    3.1  OBJECT_BASE
    3.2  OBJECT
-   3.4  OBJECT_SHARED
-   3.3  OBJECT_STATIC
-   3.5  OBJECT_SIGN
+   3.4  OBJECT_SHARED / OBJECT_SHARED_AGL
+   3.3  OBJECT_STATIC / OBJECT_STATIC_AGL
+   3.5  OBJECT_SIGN /OBJECT_SIGN_AGL
+   3.6  BUILDING_ROUGH / BUILDING_DETAILED
+   3.7  ROAD_ROUGH / ROAD_DETAILED
+   3.8  RAILWAY_ROUGH / RAILWAY_DETAILED
+   3.9  BUILDING_LIST
 
 4  model manager ("/models/model")
    4.1  static objects
@@ -194,8 +198,8 @@ so you'll find that file stored as KSFO.btg.gz.
 
 
 
-3.3  OBJECT_SHARED
-------------------
+3.3  OBJECT_SHARED / OBJECT_SHARED_AGL
+--------------------------------------
 
 add static object to the tile.
 
@@ -216,11 +220,11 @@ the /orientation/heading-deg entry in the property system, which is clockwise.
 OBJECT_SHARED models are cached and reused. They are only once in memory
 and never freed. (See also the next section.)
 
+OBJECT_SHARED_AGL places the object relative to the ground elevation.  Note that
+this is an expensive operation and is strongly discouraged.
 
-
-
-3.4  OBJECT_STATIC
-------------------
+3.4  OBJECT_STATIC / OBJECT_STATIC_AGL
+--------------------------------------
 
 add static objects to the tile, just like OBJECT_SHARED. There are three
 differences to OBJECT_SHARED (apart from the name):
@@ -241,10 +245,12 @@ Example:
   OBJECT_STATIC ggb-fb.xml -122.4760494 37.81876042 0 105 0.00 0.00
 
 
+OBJECT_STATIC_AGL places the object relative to the ground elevation.  Note that
+this is an expensive operation and is strongly discouraged.
 
 
-3.5 OBJECT_SIGN
----------------
+3.5 OBJECT_SIGN / OBJECT_SIGN_AGL
+---------------------------------
 
 defines taxiway or runway sign. The syntax is much like that of OBJECT_SHARED
 entries, except that the path is replaced with a sign contents specification
@@ -333,9 +339,82 @@ group. You can use this command line to filter out such messages:
 
   $ fgfs --log-level=debug 2>&1|grep OBJECT_SIGN
 
+OBJECT_SIGN_AGL places the sign relative to the ground elevation.  Note that
+this is an expensive operation and is strongly discouraged.
 
+3.6  BUILDING_ROUGH / BUILDING_DETAILED
+---------------------------------------
 
+defines building meshes, typically based on OSM data.
 
+Example:
+
+  BUILDING_ROUGH buildings.ac -122.501090 37.514830 15.5 0.00 0.00 0.00
+
+Syntax:
+
+  BUILDING_ROUGH <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg>
+
+Note that only bare .ac files should be referenced. The material definition for
+"OSM_Building" will be used to determine the texture and Effects.
+
+BUILDING_ROUGH uses the "rough" LOD range, while BUILDING_DETAILED uses the
+"detailed" LOD range. Some randomness is applied so that building meshes
+gradually fade in
+
+3.7  ROAD_ROUGH / ROAD_DETAILED
+-------------------------------
+
+Identical to BUILDING_ROUGH / BIULDING_DETAILED above, except used for roads.
+the material definition "OSM_Road" is applied.
+
+3.8  RAILWAY_ROUGH / RAILWAY_DETAILED
+-------------------------------
+
+Identical to BUILDING_ROUGH / BIULDING_DETAILED above, except used for roads.
+the material definition "OSM_Railway" is applied.
+
+3.9  BUILDING_LIST
+------------------
+
+Defines a file containing building coordinates that should be rendered using
+the building shader (aka Random Buildings).
+
+Example:
+
+  BUILDING_LIST buildings.txt OSM_Building -2.72943543 56.00080606 36.1
+
+Syntax
+
+  BUILDING_LIST <filename> <material name> <lon> <lat> <elev>
+
+Where:
+- <filename> is the name of a file containing building positions
+- <material name> is the name of the material that will be referenced to find
+  random building parameters.
+- <lat>, <lon>, <elev> defines the center of the set of buildings, and also
+  the point at which the material definition will be evaluated (for regional
+  materials).
+
+See README.materials for details on configuring the random building parameters.
+
+The referenced <filename> (in the example buildings.txt) contains lines of the form
+
+<x> <y> <z> <rot> <type>
+
+where :
+- (<x>,<y>,<z>) define the bottom left corner of the building in cartesian space (+X is North, +Y is East, +Z is up), with (0,0,0) being the position referenced above
+- <rot> is the clockwise rotation around the Z-axis in degrees, rotating around the bottom left (SW) corner of the building
+- <type> is {0,1,2} which map to small, medium and large buildings respectively, as per random buildings.
+
+For example, the following entries generates 3 small, 2 medium and 2 large buildings in an easterly line:
+
+0 0 0 0 0
+0 100 0 0 0
+0 200 0 0 0
+0 300 0 0 1
+0 400 0 0 1
+0 500 0 0 2
 
 4 model manager ("/models/model") --------------------------------------------
 
@@ -575,6 +654,3 @@ are:
          <load>print("my data are under ", cmdarg().getPath())</load>
          <unload>print("Currently I'm only called at fgfs exit!")</unload>
      </nasal>
-
-
-

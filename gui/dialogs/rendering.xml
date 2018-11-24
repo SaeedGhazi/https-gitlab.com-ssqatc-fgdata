@@ -227,18 +227,29 @@
 				</binding>
 			</checkbox>
 
-			<checkbox>
-				<halign>left</halign>
-				<label>Animated jetways</label>
-				<name>jetways</name>
-				<property>/nasal/jetways/enabled</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>jetways</object-name>
-				</binding>
-			</checkbox>
+            <checkbox>
+                <halign>left</halign>
+                <label>Animated jetways</label>
+                <name>jetways</name>
+                <property>/nasal/jetways/enabled</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>jetways</object-name>
+                </binding>
+            </checkbox>
 
-  		<empty>
+            <checkbox>
+                <halign>left</halign>
+                <label>Use disk space for faster loading (DDS Texture Cache)</label>
+                <name>texture-cache-enabled</name>
+                <property>/sim/rendering/texture-cache/cache-enabled</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>texture-cache-enabled</object-name>
+                </binding>
+            </checkbox>
+
+            <empty>
   			<stretch>1</stretch>
   		</empty>
 

@@ -404,7 +404,12 @@ Started September 2000 by David Megginson, david@megginson.com
         <name type="string">Terrain</name>
         <enabled type="bool" userarchive="y">true</enabled>
       </scenery-path-suffix>
-
+        <texture-cache>
+            <cache-enabled type="bool" userarchive="y">false</cache-enabled>
+            <compress-transparent type="bool" userarchive="y">true</compress-transparent>
+            <compress-solid type="bool" userarchive="y">true</compress-solid>
+            <compress type="bool" userarchive="y">true</compress>
+        </texture-cache>
     </rendering>
     <model-hz type="int">120</model-hz>
     <sound>

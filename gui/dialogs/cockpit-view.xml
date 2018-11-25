@@ -68,6 +68,7 @@
         <halign>left</halign>
         <label>Enable Blackout and Redout due to G-Force</label>
         <property>/sim/rendering/redout/enabled</property>
+        <enable><not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not></enable>
         <live>true</live>
         <binding>
           <command>dialog-apply</command>
@@ -94,7 +95,10 @@
       <col>0</col>
       <label>Onset</label>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -107,7 +111,10 @@
       <live>true</live>
       <property>/sim/rendering/redout/parameters/blackout-onset-g</property>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -121,7 +128,10 @@
         <command>dialog-apply</command>
       </binding>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </slider>
 
@@ -130,7 +140,10 @@
       <col>0</col>
       <label>Complete</label>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -143,7 +156,10 @@
       <live>true</live>
       <property>/sim/rendering/redout/parameters/blackout-complete-g</property>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -157,7 +173,10 @@
         <command>dialog-apply</command>
       </binding>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </slider>
   </group>
@@ -179,7 +198,10 @@
       <col>0</col>
       <label>Onset</label>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -192,7 +214,10 @@
       <live>true</live>
       <property>/sim/rendering/redout/parameters/redout-onset-g</property>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -206,7 +231,10 @@
         <command>dialog-apply</command>
       </binding>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </slider>
 
@@ -215,7 +243,10 @@
       <col>0</col>
       <label>Complete</label>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -227,7 +258,10 @@
       <live>true</live>
       <property>/sim/rendering/redout/parameters/redout-complete-g</property>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </text>
 
@@ -241,7 +275,10 @@
         <command>dialog-apply</command>
       </binding>
       <enable>
-        <property>/sim/rendering/redout/enabled</property>
+        <and>
+          <property>/sim/rendering/redout/enabled</property>
+          <not><property>sim/rendering/redout/parameters/locked-by-airframe</property></not>
+        </and>
       </enable>
     </slider>
   </group>

@@ -499,7 +499,7 @@ var parsesvg = func(group, path, options = nil)
       });
       return;
     }
-    else if( name == "path" or name == "rect" )
+    else if( name == "path" or name == "rect" or name == "circle" or name == "ellipse")
     {
       pushElement('path', attr['id']);
 
@@ -523,8 +523,22 @@ var parsesvg = func(group, path, options = nil)
 
         stack[-1].rect(x, y, width, height, cfg);
       }
-      else
+      if (name == "circle") {
+        var cx = evalCSSNum(attr['cx']);
+        var cy = evalCSSNum(attr['cy']);
+        var r = evalCSSNum(attr['r']);
+        stack[-1].moveTo(cx-r,cy).arcSmallCW(r,r,0,2*r,0).arcSmallCW(r,r,0,-2*r,0);
+      }
+      if (name == "ellipse") {
+        var cx = evalCSSNum(attr['cx']);
+        var cy = evalCSSNum(attr['cy']);
+        var rx = evalCSSNum(attr['rx']);
+        var ry = evalCSSNum(attr['ry']);
+        stack[-1].moveTo(cx-rx,cy).arcSmallCW(rx,ry,0,2*rx,0).arcSmallCW(rx,ry,0,-2*rx,0);
+      }
+      if (name == "path") {
         parsePath(attr['d']);
+      }
 
       var fill = style['fill'];
       if( fill != nil )
@@ -563,7 +577,7 @@ var parsesvg = func(group, path, options = nil)
     {
       var ref = attr["xlink:href"];
       if( ref == nil or size(ref) < 2 or ref[0] != `#` )
-        return printlog("warn", "Invalid or missing href: '" ~ ref ~ '"');
+        return printlog("warn", "Invalid or missing href: '" ~ ref ~ "'");
 
       var el_src = id_dict[ substr(ref, 1) ];
       if( el_src == nil )

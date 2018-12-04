@@ -109,9 +109,10 @@ var Window = {
         me._canvas.del();
       me._canvas = nil;
     }
-
-    me._node.remove();
-    me._node = nil;
+    if (me._node != nil) {
+      me._node.remove();
+      me._node = nil;
+    }
   },
   setTitle: func(title)
   {

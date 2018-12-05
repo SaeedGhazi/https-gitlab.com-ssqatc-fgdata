@@ -239,6 +239,12 @@ var Window = {
 
     return me;
   },
+  getSize: func
+  {
+    var w = me.get("content-size[0]");
+    var h = me.get("content-size[1]");
+    return [w,h];
+  },
   move: func
   {
     if( size(arg) == 1 )

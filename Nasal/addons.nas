@@ -29,22 +29,132 @@
 #
 # For more details, see $FG_ROOT/Docs/README.add-ons.
 
+# hashes to store listeners and timers per addon ID
+var _listeners = {};
+var _timers = {};
+var orig_setlistener = nil;
+var orig_maketimer = nil;
+
+var getNamespaceName = func(a) {
+    return "__addon[" ~ a.id ~ "]__";
+}
+
+var load = func(a) {
+    var main_nas = a.basePath ~ "/addon-main.nas";
+    var namespace = getNamespaceName(a);
+    var loaded = a.node.getNode("loaded", 1);
+    loaded.setBoolValue(0);
+
+    if (globals[namespace] == nil) {
+        globals[namespace] = {};
+    }
+
+    _listeners[a.id] = [];
+    _timers[a.id] = [];
+
+    # redirect setlistener() for addon
+    globals[namespace].setlistener = func(p, f, start=0, runtime=1) {
+        # listeners won't work on aliases so find real node
+        if (typeof(p) == "scalar") {
+            p = props.getNode(p, 1);
+            while (p.getAttribute("alias")) {
+                p = p.getAliasTarget();
+            }
+        }
+       append(_listeners[a.id], orig_setlistener(p, f, start, runtime));
+       print("#listeners for " ~ a.id ~ " " ~ size(_listeners[a.id]));
+    }
+
+    # redirect maketimer for addon
+    globals[namespace].maketimer = func() {
+        if (size(arg) == 2) {
+            append(_timers[a.id], orig_maketimer(arg[0], arg[1]));
+        } elsif (size(arg) == 3) {
+            append(_timers[a.id], orig_maketimer(arg[0], arg[1], arg[2]));
+        } else {
+            print("Invalid number of arguments to maketimer()");
+            return;
+        }
+        print("#timers for " ~ a.id ~ " " ~ size(_timers[a.id]));
+        return _timers[a.id][-1];
+    }
+
+    logprint(5, "+ Loading " ~ main_nas ~ " into " ~ namespace);
+
+    if (io.load_nasal(main_nas, namespace)) {
+        logprint(5, "  [OK] '" ~ a.name ~ "' (V. " ~ a.version.str() ~
+                    ") loaded.");
+        var addon_main = globals[namespace]["main"];
+        var addon_main_args = [a];
+        var errors = [];
+        call(addon_main, addon_main_args, errors);
+        if (size(errors)) {
+            debug.printerror(errors);
+        } else {
+            loaded.setBoolValue(1);
+        }
+    } else {
+        logprint(5, "  [Failed] '" ~ a.name ~ "'");
+    }
+}
+
+
+var remove = func(a) {
+    if (!a.node.getChild("loaded").getValue()) {
+        print("! ", a.id, " was not fully loaded.");
+    }
+
+    print("- Removing ", a.id);
+    var namespace = getNamespaceName(a);
+    foreach (var id; _listeners[a.id]) {
+        print("  Remove listener " ~ id);
+        removelistener(id);
+    }
+
+    print("  Stopping timers ");
+    foreach (var t; _timers[a.id]) {
+        if (typeof(t.stop) == "func") {
+            t.stop();
+            print(".");
+        }
+    }
+
+    # call clean up method if available
+    # addon shall release resources not handled by addon framework
+    if (globals[namespace]["unload"] != nil
+        and typeof(globals[namespace]["unload"]) == "func") {
+        globals[namespace].unload(a);
+    }
+    globals[namespace] = {};
+}
+
+var _reloadFlags = {};
+
+var reload = func(a) {
+    addons.remove(a);
+    addons.load(a);
+}
+
+var init = func {
+    foreach (var addon; addons.registeredAddons()) {
+        addons._reloadFlags[addon.id] = addon.node.getNode("reload", 1);
+        addons._reloadFlags[addon.id].setBoolValue(0);
+        var makeListener = func(a) {
+            return func(n) {
+                if (n.getValue()) {
+                    n.setValue(0);
+                    addons.reload(a);
+                }
+            };
+        }
+        setlistener(addons._reloadFlags[addon.id], makeListener(addon));
+        addons.load(addon);
+    }
+}
+
 var id = _setlistener("/sim/signals/fdm-initialized", func {
     removelistener(id);
-
-    foreach (var addon; addons.registeredAddons()) {
-      var main_nas = addon.basePath ~ "/addon-main.nas";
-      var namespace = "__addon" ~ "[" ~ addon.id ~ "]__";
-      logprint(5, "Initializing addon '" ~ addon.name ~
-                  "' version " ~ addon.version.str() ~ " from " ~ main_nas ~
-                  " in " ~ namespace);
-      io.load_nasal( main_nas, namespace );
-
-      var addon_main = globals[namespace]["main"];
-      var addon_main_args = [ addon ];
-      call(addon_main, addon_main_args); #, object, namespace, error_vector);
-
-      # Tell the world that the add-on is now loaded.
-      addon.node.getChild("loaded", 0, 1).setBoolValue(1);
-    }
+    orig_setlistener = setlistener;
+    orig_maketimer = maketimer;
+    addons.init();
 })

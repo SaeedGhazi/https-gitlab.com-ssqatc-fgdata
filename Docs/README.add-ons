@@ -35,6 +35,8 @@ Contents
 
 9. Nasal API
 
+10. Add-on development; in-sim reload of Nasal code
+
 
 Introduction
 ------------
@@ -826,6 +828,45 @@ Read-only data members (attributes) of addons.Maintainer objects:
                         maintainer is a mailing-list, the URL can point
                         to a web page from which people can subscribe to
                         that mailing-list (string)
+
+
+10. Add-on development; in-sim reload of Nasal code
+---------------------------------------------------
+
+!!! WARNING:
+!!! The reload feature is meant for developers only, it should not be made
+!!! visible to end users. Unexpected side effects may occur due to reload,
+!!! if not implemented correctly.
+!!! We really don't want users to send bug reports due to reload going wrong.
+
+To make development of add-ons less time consuming, you can reload the
+Nasal part of your add-on without having to restart FlightGear. The
+addons.nas module will track setlistener() and maketimer() calls for
+your add-on and remove listeners and stop timers on reload for you (the
+add-on's own namespace, has setlistener() and maketimer() wrappers that
+shadow and call themselves the standard setlistener() and maketimer()
+functions).
+
+For the time being, you have to track any other resources outside the
+namespace of your add-on by yourself and clean them up in the unload()
+function, e.g. delete canvas or close any files you opened.
+
+You can define this unload() function in the addon-main.nas file. When
+your add-on is reloaded, its unload() function, if defined, will be
+called with one argument: the addons.Addon object (a Nasal ghost)
+corresponding to your add-on. unload() is run in the add-on's own
+namespace, therefore it sees the aforementioned setlistener() and
+maketimer() wrapper functions.
+
+The reload is triggered by setting /addon/by-id/yourAddonIDhere/reload
+to true. A listener will react to that property, reset it to false and
+attempt to reload the Nasal file (doing the cleanup before). You can add
+a menu item to trigger the reload easily, but this should be removed
+before publishing your add-on to users.
+
+Please have a look at the skeleton add-on at
+https://sourceforge.net/p/flightgear/fgaddon/HEAD/tree/trunk/Addons/Skeleton/
+
 
 Footnotes
 ---------

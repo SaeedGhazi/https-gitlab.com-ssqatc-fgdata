@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- Author Ian (Yves) Tolosa - Weekly Timetable of  16 MAY 2018 - 747-8F mapped to 747-400F -->
+<!-- Author Ian (Yves) Tolosa - Weekly Timetable of  16 MAY 2018 -->
 <trafficlist>
   <aircraft>
     <model>Aircraft/747/74Y-CargoLogicAir.xml</model>
@@ -30,7 +30,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747/74Y-CargoLogicAir.xml</model>
+    <model>Aircraft/747/74N-CargoLogicAir.xml</model>
     <livery>CLU</livery>
     <airline>CLU</airline>
     <home-port>UUEE</home-port>

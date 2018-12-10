@@ -32,8 +32,8 @@
 # hashes to store listeners and timers per addon ID
 var _listeners = {};
 var _timers = {};
-var orig_setlistener = nil;
-var orig_maketimer = nil;
+var _orig_setlistener = nil;
+var _orig_maketimer = nil;
 
 var getNamespaceName = func(a) {
     return "__addon[" ~ a.id ~ "]__";
@@ -61,16 +61,16 @@ var load = func(a) {
                 p = p.getAliasTarget();
             }
         }
-       append(_listeners[a.id], orig_setlistener(p, f, start, runtime));
+       append(_listeners[a.id], _orig_setlistener(p, f, start, runtime));
        print("#listeners for " ~ a.id ~ " " ~ size(_listeners[a.id]));
     }
 
     # redirect maketimer for addon
     globals[namespace].maketimer = func() {
         if (size(arg) == 2) {
-            append(_timers[a.id], orig_maketimer(arg[0], arg[1]));
+            append(_timers[a.id], _orig_maketimer(arg[0], arg[1]));
         } elsif (size(arg) == 3) {
-            append(_timers[a.id], orig_maketimer(arg[0], arg[1], arg[2]));
+            append(_timers[a.id], _orig_maketimer(arg[0], arg[1], arg[2]));
         } else {
             print("Invalid number of arguments to maketimer()");
             return;
@@ -107,17 +107,19 @@ var remove = func(a) {
     print("- Removing ", a.id);
     var namespace = getNamespaceName(a);
     foreach (var id; _listeners[a.id]) {
-        print("  Remove listener " ~ id);
+        print("  Removing listener " ~ id);
         removelistener(id);
     }
+    _listeners[a.id] = [];
 
     print("  Stopping timers ");
     foreach (var t; _timers[a.id]) {
         if (typeof(t.stop) == "func") {
             t.stop();
-            print(".");
+            print("  .");
         }
     }
+    _timers[a.id] = [];
 
     # call clean up method if available
     # addon shall release resources not handled by addon framework
@@ -154,7 +156,7 @@ var init = func {
 
 var id = _setlistener("/sim/signals/fdm-initialized", func {
     removelistener(id);
-    orig_setlistener = setlistener;
-    orig_maketimer = maketimer;
+    _orig_setlistener = setlistener;
+    _orig_maketimer = maketimer;
     addons.init();
 })

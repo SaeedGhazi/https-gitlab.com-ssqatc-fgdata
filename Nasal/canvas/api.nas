@@ -1005,11 +1005,17 @@ var Path = {
   #
   # @param rx    radius x
   # @param ry    radius y
-  # @param cx    (optional) center x coordinate
+  # @param cx    (optional) center x coordinate or vector [cx, cy]
   # @param cy    (optional) center y coordinate
   ellipse: func(rx, ry, cx = nil, cy = nil) {
-    cx = num(cx) or 0;
-    cy = num(cy) or 0;
+    if (typeof(cx) == "vector") {
+        cy = cx[1];
+        cx = cx[0];
+    }
+    else {
+        cx = num(cx) or 0;
+        cy = num(cy) or 0;
+    }
     me.moveTo(cx - rx, cy)
       .arcSmallCW(rx, ry, 0, 2*rx, 0)
       .arcSmallCW(rx, ry, 0, -2*rx, 0);
@@ -1020,7 +1026,7 @@ var Path = {
   # Add a circle to the path
   #
   # @param r     radius 
-  # @param cx    (optional) center x coordinate
+  # @param cx    (optional) center x coordinate or vector [cx, cy]
   # @param cy    (optional) center y coordinate
   circle: func(r, cx = nil, cy = nil) {
     return me.ellipse(r, r, cx, cy);

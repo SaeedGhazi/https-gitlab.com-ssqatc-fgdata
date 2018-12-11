@@ -3,6 +3,8 @@
 # @param group    The canvas.Group instance to append the parsed elements to
 # @param path     The path of the svg file (absolute or relative to FG_ROOT)
 # @param options  Optional hash of options
+#                 font-mapper  func
+#                 parse_images bool
 var parsesvg = func(group, path, options = nil)
 {
   if( !isa(group, Group) )
@@ -572,7 +574,7 @@ var parsesvg = func(group, path, options = nil)
       if( dash and size(dash) > 3 )
         # at least 2 comma separated values...
         stack[-1].setStrokeDashArray(split(',', dash));
-    }
+    } #end path/rect/ellipse/circle
     else if( name == "use" )
     {
       var ref = attr["xlink:href"];
@@ -594,6 +596,35 @@ var parsesvg = func(group, path, options = nil)
     {
       append(defs_stack, "defs");
       return;
+    }
+    else if (name == "image" and options["parse_images"])
+    {
+      var ref = attr["xlink:href"];
+      # ref must not be missing and shall not contain Windows path separator
+      # find("\\") is correct, backslash is control character and must be escaped
+      # by adding another backslash - otherwise parse error anywhere below 
+      if (ref == nil or find("\\", ref) > -1)
+      {
+        return printlog("info", "Invalid or missing href in image tag: '" ~ ref ~ "'");
+      }
+      if (substr(ref, 0, 5) == "data:") {
+        return printlog("info", "Unsupported embedded image");
+      }
+      elsif (substr(ref, 0, 5) != "file:") {
+        # absolute paths seem to start with "file:"
+        # prepend relative paths with the path of SVG file and hope the image is there
+        # file access limitations apply
+        ref = io.dirname(path) ~ ref;
+      }
+      pushElement("image", attr["id"]);
+
+      if (attr["x"] != nil and attr["y"] != nil) {
+        stack[-1].setTranslation(attr["x"], attr["y"]);
+      }
+      if (attr["width"] != nil and attr["height"] != nil) {
+        stack[-1].setSize(attr["width"], attr["height"]);
+      }
+      stack[-1].setFile(ref);
     }
     else
     {

@@ -20,44 +20,61 @@ var refuelingN = nil;
 var contactN = nil;
 var aimodelsN = nil;
 var types = {};
+var update_model_list = 0;
+
+setlistener("/ai/models/model-added", func(v){
+    update_model_list = 1;
+});
+
+setlistener("/ai/models/model-removed", func(v){
+    update_model_list = 1;
+});
 
 
-
+var tankers = [];
 var update_loop = func {
 	# check for contact with tanker aircraft
-	var tankers = [];
 	if (ai_enabled) {
-		var ac = aimodelsN.getChildren("tanker");
-		var mp = aimodelsN.getChildren("multiplayer");
+        if (update_model_list) {
+            update_model_list=0;
+            tankers = [];
+            var ac = aimodelsN.getChildren("tanker");
+            var mp = aimodelsN.getChildren("multiplayer");
 
-		foreach (var a; ac ~ mp) {
-			if (!a.getNode("valid", 1).getValue())
-				continue;
-			if (!a.getNode("tanker", 1).getValue())
-				continue;
-			if (!a.getNode("refuel/contact", 1).getValue())
-				continue;
-			foreach (var t; a.getNode("refuel", 1).getChildren("type")) {
-				var type = t.getValue();
-				if (contains(types, type) and types[type])
-					append(tankers, a);
-			}
-		}
-	}
-
-	var refueling = serviceable and size(tankers) > 0;
+            foreach (var a; ac ~ mp) {
+                if (!a.getNode("valid", 1).getValue())
+                  continue ;
+                if (!a.getNode("tanker", 1).getValue())
+                  continue ;
+                foreach (var t; a.getNode("refuel", 1).getChildren("type")) {
+                    var type = t.getValue();
+                    if (contains(types, type) and types[type])
+                      append(tankers, a);
+                }
+            }
+        }
+    }
+	var tankerNode = nil;
+    if (serviceable) {
+        foreach (var t; tankers) {
+            if (t.getNode("refuel/contact", 1).getValue()){
+              tankerNode = t;
+          }
+        }
+    }
+            
 	
 	if (refuelingN.getNode("report-contact", 1).getValue()) {
-	  if (refueling and !contactN.getValue()) {
+	  if (tankerNode != nil and !contactN.getValue()) {
 			setprop("/sim/messages/copilot", "Engage");
 	  }
 	  
-	  if (!refueling and contactN.getValue()) {
+	  if (!tankerNode != nil and contactN.getValue()) {
 			setprop("/sim/messages/copilot", "Disengage");
 	  }
 	}
 	
-	contactN.setBoolValue(refueling);
+	contactN.setBoolValue(tankerNode != nil);
 
 	if (fuel_freeze){
         return;
@@ -74,11 +91,11 @@ var update_loop = func {
 
 
 	# calculate fuel received
-	if (refueling) {
+	if (tankerNode != nil) {
 		# Flow rate is the minimum of the tanker maxium rate
 		# and the aircraft maximum rate.  Both are expressed
 		# in lbs/min
-		var fuel_rate = math.min(tankers[0].getNode("refuel/max-fuel-transfer-lbs-min", 1).getValue() or 6000, 
+		var fuel_rate = math.min(tankerNode.getNode("refuel/max-fuel-transfer-lbs-min", 1).getValue() or 6000, 
 		                         refuelingN.getNode("max-fuel-transfer-lbs-min", 1).getValue() or 6000);
 		var received =  UPDATE_PERIOD * fuel_rate / 60;
 		consumed -= received;

@@ -174,17 +174,18 @@ var CDU = {
     },
     
     ############################################################################
-    # Action is a simple structure with no title, always an lsk, done via 
+    # Action is a simple structure with optional title, always an lsk, done via 
     # callbacks.
     ############################################################################
     Action: {
-      new : func(lbl, lsk, cb = nil, enableCb = nil)
+      new : func(lbl, lsk, cb = nil, enableCb = nil, title = nil)
       {
           m = {parents:[CDU.Action]};
-          m.label = lbl;
+          m._label = lbl;
           m.lsk = lsk;
           m._callback = cb;
           m._enabled = enableCb;
+          m._title = title;
           return m;  
       },  
         
@@ -206,13 +207,25 @@ var CDU = {
           }
       },
       
+      title: func { me._title; },
+      label: func { me._label; },
+      showArrow: func { 1 },
+
       update: func(cdu)
       {
           var rightAlign = CDU.isRightLSK(me.lsk);
-          var s = rightAlign ? (me.label ~ ">") : ("<" ~ me.label);
+          var s = me.label();
+          if (me.showArrow()) {
+              s = rightAlign ? (s ~ ">") : ("<" ~ s);
+          }
           var col = rightAlign ? CDU.NUM_COLS - 1 : 0;
           var line = CDU.lineForLSK(me.lsk);
-          cdu.setRowText(cdu.rowForLine(line), col, rightAlign, s);
+            cdu.setRowText(cdu.rowForLine(line), col, rightAlign, s);
+
+          var t = me.title();
+          if (t != nil) {
+            cdu.setRowText(cdu.rowForLineTitle(line), col, rightAlign, t);
+          }
           return line;
       }
     },
@@ -226,11 +239,16 @@ var CDU = {
         new : func()
         {
             m = { parents:[CDU.AbstractModel]};
+            m.clearModifedData();
             return m;
         },
         
         data: func(tag, offset)
         {
+            # allow easy overriding when modifcation is pending
+            if (contains(me._modData, tag)) 
+                return me._modData[tag];
+
             var method = "dataFor" ~ tag;
             return me._callTagMethod(method, [offset], nil);
         },
@@ -247,17 +265,35 @@ var CDU = {
             return me._callTagMethod(method, [offset], nil);
         },
         
+        pageStatus: func(page) nil,
+
+        setModifiedData: func(tag, data) {
+            me._modData[tag] = data;
+        },
+
+        clearModifedData: func {
+            me._modData = {};
+        },
+
+        # overrideable function to have dynamic page title
+        pageTitle: func(page) nil,
+
         lineCountFor: func(tag) { me._callTagMethod('countFor' ~ tag, [], 0); },
         firstLineFor: func(tag) { me._callTagMethod('firstLineFor' ~ tag, [], 0); },
         select: func(tag, index) { me._callTagMethod('select' ~ tag, [index], -1); },
         
+        #overrideable function to process willDisplay in the model
+        willDisplay: func(page) 0,
+        willUndisplay: func(page) 0,
+
         _callTagMethod: func(name, invokeArgs, defaultResult) {
             var f = me._findMethod(name, me);
             if (f==nil) return defaultResult;
             
             var ret = call(f, invokeArgs, me, var err = []);
             if (size(err) > 0) {
-                debug.dump('failure running tag method ' ~ name, err);
+                debug.dump('failure running tag method ' ~ name);
+                debug.printerror(err);
                 return defaultResult;
             }
             
@@ -283,7 +319,7 @@ var CDU = {
     # Better to define new field types or use a model to achieve what you need.
     ############################################################################
     Page : {
-        new : func(owner, title = 'UNNAMED', model = nil, dynamicActions = 0)
+        new : func(owner, title = 'UNNAMED', model = nil, dynamicActions = 0, tag = '')
         {
             m = { 
                 parents:[CDU.Page],
@@ -294,41 +330,65 @@ var CDU = {
                 _fields: [],
                 _model: model,
                 _dynamicActions: dynamicActions,
-                fixedSeparator: [99,99]
+                fixedSeparator: [99,99],
+                _tag: tag,
+                _cdu: owner,
+                _status: CDU.STATUS_NONE
             };
+
+            if (tag == '')
+                m._tag = '__' ~ title;
+
             return m;
         },
     
     # compute our title
         title: func
         {
+            var t = me.baseTitle;
+            var status = me.pageStatus();
+            if (me._cdu._modExec) status = CDU.STATUS_MOD;
+
+            # fixme, alignment is not quite right here
+            if (status == CDU.STATUS_MOD) t = 'MOD ' ~ t;
+            elsif (status == CDU.STATUS_ACTIVE) t = 'ACT ' ~ t;
+
             # no siblings, simple
             if ((me._previousPage == nil) and (me._nextPage == nil))
-                return me.baseTitle;
+                return t;
                 
             var pgIndex = 0;
             var pgCount = 0;
-            var pg = me;
-        # find the group leader
-            while (pg._previousPage != nil)
-                pg = pg._previousPage;
+            var pg = me.firstPage();
         
         # walk forwards to find ourselves and the list end
             while (pg != nil) {
                 if (pg == me) pgIndex = pgCount; # ourselves
-                pgCount += 1;
+                pgCount += pg.pageCount();
                 pg = pg._nextPage;
             }
         
         # position page index at far right (but one)
             var pgText = " ~"~(pgIndex + 1) ~ "/" ~ pgCount;
-            var pgTitle = me.baseTitle;
-            while(size(pgTitle) < CDU.NUM_COLS-size(pgText))
-                pgTitle ~= " ";
+            while(size(t) < CDU.NUM_COLS-size(pgText))
+                t ~= " ";
             
-            return pgTitle~pgText;
+            return t~pgText;
         },
         
+        pageStatus: func { 
+            # model can override status
+           if (me._model != nil) {
+               var s = me._model.pageStatus(me);
+               if (s != nil) return s;
+           }
+           return me._status; 
+        },
+
+        setPageStatus: func(s) {
+            me._status = s;
+        },
+
     # fields
         getFields: func
         {
@@ -345,9 +405,34 @@ var CDU = {
         },
         
     # paging
-        nextPage: func { (me._nextPage == nil) ? me._previousPage : me._nextPage;},
-        previousPage: func { (me._previousPage == nil) ? me._nextPage : me._previousPage; },
+        nextPage: func { (me._nextPage == nil) ? me.firstPage() : me._nextPage;},
+        previousPage: func { (me._previousPage == nil) ? me.lastPage() : me._previousPage; },
         
+        firstPage: func {    
+            (me._previousPage == nil) ? me : me._previousPage.firstPage(); # recursion is fun
+        },
+
+        lastPage: func {
+            (me._nextPage == nil) ? me : me._nextPage.lastPage();
+        },
+
+        pageIndex: func {
+            var pgIndex = 0;
+            var pgCount = 0;
+        
+        # walk forwards to find ourselves and the list end
+            for (var pg = me.firstPage(); pg != nil; pg = pg._nextPage) {
+                if (pg == me) return pgCount; # ourselves
+                pgCount += pg.pageCount();
+            }
+
+            # should never be hit, implies broken page logic
+            return nil;
+        },
+
+        # override for multi-page
+        pageCount: func 1,
+
     # actions
         getActions: func()
         {
@@ -413,12 +498,18 @@ var CDU = {
     
     # display
         # over-rideable hook method when a page is displayed
-        willDisplay: func(cdu) { 
-            cdu.clearScratchpad();
+        willDisplay: func(cdu, reason) { 
+            if (me._model != nil) {
+                me._model.willDisplay(me);
+            }
         },
         
         # no-op by default, called when the page is replaced / cleared
-        didUndisplay: func(cdu) { },
+        didUndisplay: func(cdu) { 
+            if (me._model != nil) {
+                me._model.willUndisplay(me);
+            }
+        },
     
         update: func(cdu)
         {
@@ -484,7 +575,8 @@ var CDU = {
     # but stacks its Fields up in the order they are added.
     ############################################################################
     MultiPage : {
-        new : func(cdu, model, title, linesPerPage = 5, dynamicActions = 0)
+        new : func(cdu, model, title, linesPerPage = 5, dynamicActions = 0,
+            basePageIndex = 0)
         {
             var base = CDU.Page.new(owner:cdu, title:title, model:model, dynamicActions:dynamicActions);
             m = { parents:[CDU.MultiPage, base]};
@@ -492,13 +584,22 @@ var CDU = {
             m._leftStack = [];
             m._rightStack = [];
             m._screen = 0;
+            m._basePageIndex = basePageIndex;
             return m;
         },
         
         title: func { 
-            # position page index at far right (but one)
-            var pgText = " "~(me._screen + 1) ~ "/" ~ me.numPages();
+            var base = (me._previousPage != nil) ? (me._previousPage.pageIndex() + 1) : 0;
+            var pgText = " ~"~(me._screen + 1 + base) ~ "/" ~ (me.numPages() + base);
+            
             var pgTitle = me.baseTitle;
+            var status = me.pageStatus();
+            if (me._cdu._modExec) status = CDU.STATUS_MOD;
+
+            # fixme, alignment is not quite right here
+            if (status == CDU.STATUS_MOD) pgTitle = 'MOD ' ~ pgTitle;
+            elsif (status == CDU.STATUS_ACTIVE) pgTitle = 'ACT ' ~ pgTitle;
+
             while(size(pgTitle) < CDU.NUM_COLS-size(pgText)-1)
                 pgTitle ~= " ";
             return pgTitle~pgText;
@@ -515,6 +616,8 @@ var CDU = {
             totalRows += (me._linesPerPage - 1); # round up
             return int(totalRows / me._linesPerPage);
         },
+
+        pageCount: func { me.numPages(); },
         
         addField: func(fld)
         {
@@ -557,16 +660,55 @@ var CDU = {
                      lastIndex:fieldEnd - fieldBase, 
                      firstLine: firstLine};
         },
+
+        reloadModel: func {
+            me._screen = 0;
+            me.update(me._cdu);
+        },
         
     # paging
+        willDisplay: func(cdu, reason) { 
+            if (cdu.currentPage() == me) {
+                # cycling within the multi-page
+                if (reason == CDU.DISPLAY_NEXT) {
+                    me._screen += 1;
+                    if (me._screen >= me.numPages()) me._screen = 0; # wrap
+                } elsif (reason == CDU.DISPLAY_PREVIOUS) {
+                    me._screen -= 1;
+                    if (me._screen < 0) me._screen = me.numPages() - 1;
+                }
+            } else {
+                # we're entering the multipage from a different page,
+                # we may need to reset to the correct point
+                if ((reason == CDU.DISPLAY_NEXT) or (reason == CDU.DISPLAY_BUTTON)) me._screen = 0;
+                if (reason == CDU.DISPLAY_PREVIOUS) {
+                    me._screen = me.numPages() - 1;
+                }
+            }
+            
+            if (me._model != nil) {
+                me._model.willDisplay(me);
+            }
+        },
+
         nextPage: func { 
-            if ((me._screen += 1) >= me.numPages()) me._screen = 0;
+            if ((me._screen + 1) >= me.numPages()) {
+                # this works because multi-pages are
+                # adfter fixed ones (legs/route)
+                return me.firstPage();
+            }
+
             return me;
         },
+
         previousPage: func {
-            if ((me._screen -= 1) < 0) me._screen = me.numPages() - 1;
+            if ((me._screen - 1) < 0) {
+                if (me._previousPage != nil)
+                    return me._previousPage;
+            }
+
             return me;
-        },
+        }
     },
 
     canvas_settings: {
@@ -580,7 +722,8 @@ var CDU = {
     NUM_ROWS: 14,      # 6 main rows, 6 title rows, page title and scratch
     MARGIN: 30,
     MARGIN_BOTTOM: 57, # needed because the screen is not a square
-    
+    SCRATCHPAD_ROW: 13,
+
     EMPTY_FIELD4: '----',
     EMPTY_FIELD5: '-----',
     EMPTY_FIELD10: '----------',
@@ -591,7 +734,23 @@ var CDU = {
     BOX3_1: '___._',
     BOX4: '____',
     BOX5: '_____',
-    
+
+    # enum of page display reasons. 
+    DISPLAY_BUTTON: 0,
+    DISPLAY_NEXT: 1,
+    DISPLAY_PREVIOUS: 2,
+    DISPLAY_PUSH: 3,
+    DISPLAY_POP: 4,
+
+    MSG_CRITICAL: 1,
+    MSG_WARN: 2,
+    INVALID_DATA_ENTRY: 3,
+    MSG_INFO: 4,
+
+    STATUS_NONE: 0,
+    STATUS_ACTIVE: 1,
+    STATUS_MOD: 2,
+
     new : func(prop1, placement)
     {
         m = { parents : [CDU]};
@@ -600,8 +759,12 @@ var CDU = {
    
         m.scratch = "";
         m.scratchNode = m.rootNode.initNode("scratch", "", "STRING");
+
+        var outputs = m.rootNode.initNode("outputs");
+        m._outputExec = outputs.initNode("exec", 0, "BOOL");
+        m._outputMessage = outputs.initNode("message", 0, "BOOL");
         m._canExecNode = m.rootNode.initNode("can-exec", 0, "BOOL");
-        
+
         m._oleoSwitchNode = props.globals.getNode('instrumentation/fmc/discretes/oleo-switch-flight', 1);
         
         m._setupCanvas(placement);
@@ -610,13 +773,18 @@ var CDU = {
         m._page = nil;
         m._model = nil;
         m._pages = {};
+        m._savedPage = nil;
         m._model = CDU.AbstractModel.new(); # empty model for fallback
         m._dynamicFields = [];
-        
+        m._messages = [];
+        m._cancelExecCallback = nil;
+        m._modExec = 0; # flag indicating if exec callbacl is a page mod
+
         m.currTimerSelf = 0; # timer for key presses
         
         m._updateId = 0;
-        
+        m._clearTimer = maketimer(1.0, func m._clearTimeout(); );
+
         return m;
     },
     
@@ -691,7 +859,7 @@ var CDU = {
         'menu':     func() { Boeing.cdu.displayPageByTag('menu'); },
         'climb':    func() { Boeing.cdu.displayPageByTag('climb'); },
         'fix':      func() { Boeing.cdu.displayPageByTag('fix'); },
-        'n1-limit': func() { print("Not implemented yet");},
+        'n1-limit': func() { Boeing.cdu.displayPageByTag('thrust-lim');},
         'route':    func() { Boeing.cdu.button_route(); },
         'next-page': func() { Boeing.cdu.next_page(); },
         'prev-page': func() { Boeing.cdu.prev_page(); },
@@ -723,6 +891,8 @@ var CDU = {
         foreach(var b; keys(me._buttonCallbackTable)) {
             addcommand('cdu-button-' ~ b , me._buttonCallbackTable[b]);
         }
+
+        addcommand('cdu-button-clear-up', func() { Boeing.cdu.clearRelease(); });
     },
     
     rowForLine: func(line)
@@ -749,7 +919,7 @@ var CDU = {
             pg =  me._pages[tag ~ '-inflight'];
         }
         
-        me.displayPage(pg);
+        me.displayPage(pg, CDU.DISPLAY_BUTTON);
     },
     
     addPage: func(pg, tag)
@@ -763,19 +933,48 @@ var CDU = {
         me._pages[tag ~ '-inflight'] = flight;
     },
     
-    displayPage: func(pg)
+    # retrive the current page being displayed
+    currentPage: func me._page,
+
+    # display a new page
+    displayPage: func(pg, reason = nil)
     {
-        if (pg != nil) pg.willDisplay(me);
+        if (reason == nil) reason = CDU.DISPLAY_BUTTON;
+
+        # note we don't do a pg == me._page check here,
+        # becuase this is used to re-display multi-pages
+        if (pg != nil) pg.willDisplay(me, reason);
         var oldPage = me._page;
         me._page = pg;
         me._refresh();
         if (oldPage != nil) oldPage.didUndisplay(me);
     },
+
+    pushTemporaryPage: func(pg)
+    {
+        me._savedPage = me.currentPage();
+        me.displayPage(pg, CDU.DISPLAY_PUSH);
+    },
+
+    popTemporaryPage: func 
+    {
+        if (me._savedPage == nil) {
+            debug.dump('CDU: No saved page');
+            return;
+        }
+
+        var saved = me._savedPage;
+        me._savedPage = nil;
+        me.displayPage(saved, CDU.DISPLAY_POP);
+    },
     
     _refresh: func()
     {
         var pg = me._page;
-        me.cleanup();
+        me._cleanup(); # blank everything except the S/P
+        # refresh the scratch/message
+        me._updateMessageDisplay();
+
         if (pg == nil) return;
         
         pg.update(me);
@@ -795,8 +994,10 @@ var CDU = {
     setRowText: func(row, col, alignRight, text)
     {
         # check for nil text or empty string
-        (typeof(text) == 'scalar') or return;
-        
+        if (typeof(text) != 'scalar') { 
+            return; 
+        }
+
         if ((row < 0) or (row >= CDU.NUM_ROWS)) {
             debug.die('invalid row index requested', row, col, text);
             return;
@@ -840,7 +1041,7 @@ var CDU = {
         if (size(charsL) > (colL + sz)) {
             rpieceL = substr(charsL, colL + sz);
         }
-        
+
         canavasTextL.setText(lpieceL ~ textL ~ rpieceL);
         
         var canavasTextS = me._texts_s[row];
@@ -853,7 +1054,6 @@ var CDU = {
             colS = col;
     
     # find left portion, pad with spaces to position
-
         var lpieceS = substr(charsS, 0, colS);
         while (size(lpieceS) < colS) {
             lpieceS = lpieceS ~ ' ';
@@ -874,9 +1074,11 @@ var CDU = {
         me._texts_s[row].setText('');
     },
     
-    cleanup: func
+    _cleanup: func
     {
-        for (r=0; r<CDU.NUM_ROWS; r=r+1)
+        # clear everything except the scratch pad, which
+        # is handled seperartely in _refresh
+        for (r=0; r<CDU.SCRATCHPAD_ROW; r=r+1)
             me.clearRowText(r);
     },
     
@@ -902,13 +1104,6 @@ var CDU = {
         
         settimer(func me._update(me._updateId), 1.0);
     },
-     
-     setExecCallback: func(execCb)
-     {
-         me._execCallback = execCb;
-         # show the lamp
-         me._canExecNode.setValue((execCb != nil));
-     },
      
 ################################################
 # data formatters
@@ -1005,6 +1200,37 @@ var CDU = {
          return [substr(s, 0, slashPos), substr(s, slashPos + 1)];
      },
      
+    parseBearingSpeed: func(input)
+    {
+        var fields = CDU.parseDualFieldInput(input);
+        if (!fields[0] or !fields[1])
+            return nil;
+    
+        var hdg = math.mod(num(fields[0]), 360);
+        return {bearing:hdg, speed:num(fields[1])};
+    },
+
+    parseSpeedAltitudeConstraint: func(input)
+    {
+        var r = {
+            alt_cstr_type: nil,
+            speed_cstr_type:nil
+        };
+
+        var fields = CDU.parseDualFieldInput(input);
+        # parse A or B suffixes
+
+        if (fields[0] != nil) {
+
+        }
+
+        if (fields[1] != nil) {
+
+        }
+        
+        return r;
+    },
+
      formatMagVar: func(magvarDeg)
      {
          var east = (magvarDeg > 0);
@@ -1013,14 +1239,18 @@ var CDU = {
      
      formatWayptSpeedAltitude: func(wp)
      {
-         if (wpt==nil) return nil;
+         if (wp==nil) return nil;
              
          var altConstraintType = wp.alt_cstr_type;
          var speedConstraintType = wp.speed_cstr_type;
         
+        if (altConstraintType == nil and speedConstraintType == nil) {
+            return '----/------';
+        }
+
          var altConstraint = '      '; # six spaces
          if (altConstraintType != nil)
-             altConstraint = formatAltRestriction(wp);
+             altConstraint = me.formatAltRestriction(wp);
         
          var speedConstraint = '';
          if (speedConstraintType != nil) {
@@ -1030,16 +1260,29 @@ var CDU = {
              if (speedConstraintType == 'mach') speedConstraint = sprintf('.%3d', wp.speed_cstr / 1000);
          }
         
-         return speed_cstr ~ '/' ~ altConstraint;
+         return speedConstraint ~ '/' ~ altConstraint;
+     },
+
+     formatSpeed: func(speed)
+     {
+         if (speed < 1.0)
+            return sprintf('.%3d', speed / 1000);
+         sprintf(' %3d', speed);
+     },
+
+     formatSpeedAltitude: func(speed, alt)
+     {
+         return me.formatSpeed(speed) ~ '/' ~ me.formatAltitude(alt);
      },
      
      formatAltRestriction: func(wp)
      {
-         if ((wp == nil) or (wp.alt_cstr_type == nil)) return nil;
+         var ty = wp.alt_cstr_type;
+         if ((wp == nil) or (ty == nil)) return nil;
          s = me.formatAltitude(wp.alt_cstr);
-         if (altConstraintType == 'at') s ~= ' '; 
-         if (altConstraintType == 'above') s ~= 'A'; 
-         if (altConstraintType == 'below') s ~= 'B';
+         if (ty == 'at') s ~= ' '; 
+         if (ty == 'above') s ~= 'A'; 
+         if (ty == 'below') s ~= 'B';
          return s;
      },
      
@@ -1047,12 +1290,10 @@ var CDU = {
     lsk: func(ident)
     {
         # check page action map for LSKs
-        foreach (var act; me._page.getActions())
-        {
-            if (!act.isEnabled()) continue;
-                
-            if (act.lsk == ident) {
+        foreach (var act; me._page.getActions()) {
+            if ((act.lsk == ident) and act.isEnabled()) {
                 act.exec();
+                me._refresh();
                 return;
             }
         }
@@ -1065,6 +1306,11 @@ var CDU = {
                 return;
             }
         }
+
+        # don't allow entry from s/p or copying to it,
+        # when messages are active
+        if (me._haveMessages())
+            return;
         
         if (size(me.scratch) > 0) {
             foreach (var fld; me._page.getFields())
@@ -1100,15 +1346,24 @@ var CDU = {
     
     button_exec: func
     {
-        if (me._execCallback == nil) {
+        if (!me.isExecActive()) {
             debug.dump('nothing to execute');
             return;
         }
         
         var cb = me._execCallback;
         me._execCallback = nil;
+        me._cancelExecCallback = nil;
         me._canExecNode.setValue(0);
-        
+        me._outputExec.setValue(0);
+
+        if (me._modExec) {
+            me._modExec = 0;
+            if (me._page.getModel() != nil) {
+                me._page.getModel().clearModifedData();
+            }
+        }
+
         cb();
         me._refresh();
     },
@@ -1147,7 +1402,7 @@ var CDU = {
     {
         var pg = me._page.previousPage();
         if (pg != nil) {
-            me.displayPage(pg, 1);
+            me.displayPage(pg, CDU.DISPLAY_PREVIOUS);
         } else {
             debug.dump('no prev page');
         }
@@ -1157,20 +1412,22 @@ var CDU = {
     {
         var pg = me._page.nextPage();
         if (pg != nil) {
-            me.displayPage(pg, 1);
+            me.displayPage(pg, CDU.DISPLAY_NEXT);
         } else {
             debug.dump('no next page');
         }
     },
     
-# scratch manipulation
     _updateScratch: func(newData)
     {
         me.scratch = newData;
         me.scratchNode.setValue(newData);
         
-        me.clearRowText(CDU.NUM_ROWS - 1);
-        me.setRowText(CDU.NUM_ROWS - 1, 0, 0, newData);
+        # message block scratch display
+        if (!me._haveMessages()) {
+            me.clearRowText(CDU.SCRATCHPAD_ROW);
+            me.setRowText(CDU.SCRATCHPAD_ROW, 0, 0, newData);
+        }
     },
 
     input: func(data)
@@ -1199,22 +1456,29 @@ var CDU = {
     
     clear : func
     {
+        if (me._haveMessages()) {
+            me.clearMessage();
+            return;
+        }
+
         # Remove last character
         me._updateScratch(substr(me.scratch, 0, size(me.scratch) - 1));
         
         # Clear entire scratchpad when press and hold for 1 sec
-        me.clearTimer = maketimer(1.0, func me._updateScratch(''));
-        me.clearTimer.start();
+        me._clearTimer.start();
     },
+
+    _clearTimeout: func { me._updateScratch(''); },
     
     clearRelease : func
     {
-        me.clearTimer.stop();
+        me._clearTimer.stop();
     },
     
     message : func(msg)
     {
-        cdu._updateScratch(msg);
+        print("FIXME using old message API");
+        cdu.postMessage(1, msg);
     },
     
     getScratchpad: func { me.scratch; },
@@ -1228,7 +1492,82 @@ var CDU = {
     {
         me._updateScratch("");
     },
-    
+
+##################################
+# messages api
+
+    postMessage: func(level, text)
+    {
+        var newMessages = me._messages;
+        append(newMessages, {text: text, level:level});
+        me._messages = sort(newMessages, func(a,b) { return a.level - b.level;} );
+        me._updateMessageDisplay();
+        me._outputMessage.setValue(1);
+    },
+
+    clearMessage: func 
+    {
+        me._messages = (size(me._messages) == 1) ? [] : me._messages[1:]; # pop the front item
+        me._updateMessageDisplay();
+        if (!me._haveMessages()) {
+            me._outputMessage.setValue(0);
+        }
+    },
+
+    _updateMessageDisplay: func
+    {
+        me.clearRowText(CDU.SCRATCHPAD_ROW);
+        if (!me._haveMessages()) {
+            # show the scratchpad
+            me.setRowText(CDU.SCRATCHPAD_ROW, 0, 0, me.scratch);
+            return;
+        }
+
+        var msg = me._messages[0];
+        # show highest priority (first) message
+        me.setRowText(CDU.SCRATCHPAD_ROW, 0, 0, msg.text);
+    },
+
+    _haveMessages: func { size(me._messages) > 0 },
+
+################################################
+## exec API
+
+    setExecCallback: func(exec)
+    {
+        debug.bt('Legacy EXEC call');
+        me.setupExec(exec);
+    },
+
+    isExecActive: func 
+    {
+        return (me._execCallback != nil);
+    },
+
+    setupExec: func(exec, cancel = nil, modPage = 0)
+    {
+        me._modExec = modPage;
+        me._execCallback = exec;
+        me._cancelExecCallback = cancel;
+
+        # show the lamp
+        me._canExecNode.setValue(1);
+        me._outputExec.setValue(1);
+    },
+
+    clearExec: func {
+        me._execCallback = nil;
+        me._cancelExecCallback = nil;
+        me._modExec = 0;
+    },
+
+    cancelExec: func {
+        var cb = me._cancelExecCallback;
+        me.clearExec();
+        if (cb != nil)
+           cb();
+    },
+
 ##################################
     StaticField : {
         new: func(pos, title = nil, data = nil)
@@ -1318,7 +1657,7 @@ reload_CDU_pages = func
 {    
     debug.dump('loading CDU pages');
     
-    cdu.displayPage(nil); # force existing page to be undisplayed cleanly
+    cdu.displayPage(nil, 0); # force existing page to be undisplayed cleanly
     
     # make the cdu instance available inside the module namespace
     # we are going to load into.
@@ -1341,6 +1680,8 @@ reload_CDU_pages = func
 
     cdu.displayPageByTag(getprop('/instrumentation/cdu/settings/boot-page'));
 };
+
+addcommand('cdu-reload', reload_CDU_pages);
 
 setlistener("/nasal/canvas/loaded", func 
 {

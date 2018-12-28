@@ -441,7 +441,7 @@
 								setprop("/sim/rendering/vegetation-density", 0.1);
 							}
 
-							if (val == "Low Density") {
+							if (val == "Very Low Density") {
 								setprop("/sim/rendering/random-vegetation", 1);
 								setprop("/sim/rendering/vegetation-density", 0.25);
 							}

@@ -61,8 +61,10 @@ var load = func(a) {
                 p = p.getAliasTarget();
             }
         }
-       append(_listeners[a.id], _orig_setlistener(p, f, start, runtime));
-       print("#listeners for " ~ a.id ~ " " ~ size(_listeners[a.id]));
+        append(_listeners[a.id], _orig_setlistener(p, f, start, runtime));
+        logprint(2, "setlistener " ~ p.getPath() ~ " (" ~
+                    size(_listeners[a.id]) ~ " listener(s) tracked for " ~
+                    a.id ~ ")");
     }
 
     # redirect maketimer for addon
@@ -72,17 +74,15 @@ var load = func(a) {
         } elsif (size(arg) == 3) {
             append(_timers[a.id], _orig_maketimer(arg[0], arg[1], arg[2]));
         } else {
-            print("Invalid number of arguments to maketimer()");
+            logprint(5, "Invalid number of arguments to maketimer()");
             return;
         }
-        print("#timers for " ~ a.id ~ " " ~ size(_timers[a.id]));
+        logprint(2, size(_timers[a.id]) ~ " timer(s) tracked for " ~ a.id);
         return _timers[a.id][-1];
     }
 
-    logprint(5, "+ Loading " ~ main_nas ~ " into " ~ namespace);
-
     if (io.load_nasal(main_nas, namespace)) {
-        logprint(5, "  [OK] '" ~ a.name ~ "' (V. " ~ a.version.str() ~
+        logprint(5, "[OK] '" ~ a.name ~ "' (V. " ~ a.version.str() ~
                     ") loaded.");
         var addon_main = globals[namespace]["main"];
         var addon_main_args = [a];
@@ -93,30 +93,36 @@ var load = func(a) {
         } else {
             loaded.setBoolValue(1);
         }
+        logprint(3, "Tracked resources after running the main() function of " ~
+                    a.id ~ ":");
+        logprint(3, "#listeners: " ~ size(_listeners[a.id]));
+        logprint(3, "#timers: " ~ size(_timers[a.id]));
+        logprint(3, "Use log level DEBUG to see all calls to the " ~
+                    "setlistener() and maketimer() wrappers.");
     } else {
-        logprint(5, "  [Failed] '" ~ a.name ~ "'");
+        logprint(5, "Failed loading addon-main.nas for " ~ a.id);
     }
 }
 
 
 var remove = func(a) {
     if (!a.node.getChild("loaded").getValue()) {
-        print("! ", a.id, " was not fully loaded.");
+        logprint(5, "! ", a.id, " was not fully loaded.");
     }
 
-    print("- Removing ", a.id);
+    logprint(5, "- Removing add-on ", a.id);
     var namespace = getNamespaceName(a);
     foreach (var id; _listeners[a.id]) {
-        print("  Removing listener " ~ id);
+        logprint(3, "Removing listener " ~ id);
         removelistener(id);
     }
     _listeners[a.id] = [];
 
-    print("  Stopping timers ");
+    logprint(3, "Stopping timers ");
     foreach (var t; _timers[a.id]) {
         if (typeof(t.stop) == "func") {
             t.stop();
-            print("  .");
+            logprint(2, "  .");
         }
     }
     _timers[a.id] = [];

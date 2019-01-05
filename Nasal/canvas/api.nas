@@ -282,6 +282,29 @@ var Element = {
 
     return center;
   },
+  
+  # convert bounding box vector into clip string (yes, different order)
+  boundingbox2clip: func(bb) {
+    return sprintf("rect(%d,%d,%d,%d)", bb[1], bb[2], bb[3], bb[0])
+  },
+  
+  # set clip by bounding box
+  # bounding_box: [xmin, ymin, xmax, ymax] 
+  setClipByBoundingBox: func(bounding_box, clip_frame = nil) {
+    if (clip_frame == nil)
+        clip_frame = Element.PARENT;
+    me.set("clip", boundingbox2clip(bounding_box));
+    me.set("clip-frame", clip_frame);
+    return me;
+  },
+  
+  # set clipping by bounding box of another element
+  setClipByElement: func(clip_elem) {
+    clip_elem.update();
+    var bounds = clip_elem.getTightBoundingBox();
+    me.setClipByBB(bounds, canvas.Element.PARENT);
+  },
+  
   # Internal Transform for convenience transform functions
   _getTf: func
   {

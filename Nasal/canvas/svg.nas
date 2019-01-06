@@ -725,7 +725,7 @@ var parsesvg = func(group, path, options = nil)
           id = tspan.attr['id'];
 
         pushElement('text', id);
-        stack[-1].set("text", tspan.text);
+        stack[-1].setText(tspan.text);
 
         if( x != 0 or y != 0 )
           stack[-1].setTranslation(x, y);

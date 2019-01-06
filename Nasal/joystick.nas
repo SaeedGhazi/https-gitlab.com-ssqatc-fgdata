@@ -301,7 +301,6 @@ var axisBindings = [
   PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0.5, 1.0),
   PropertyScaleAxis.new("Flaps", "/controls/flight/flaps", 0.5, 1.0),
   PropertyScaleAxis.new("Wings", "/controls/flight/wings", 0.5, 1.0),
-  PropertyScaleAxis.new("Brake Right", "/controls/gear/brake-right", 0.5, 1.0),
   NasalLowHighAxis.new("Aileron Trim inc.",  "controls.aileronTrim(-1);", "controls.aileronTrim(1);", "/controls/flight/aileron-trim-delta", 1),
   NasalLowHighAxis.new("Elevator Trim inc.", "controls.elevatorTrim(-1);", "controls.elevatorTrim(1);", "/controls/flight/elevator-trim-delta", 1),
   NasalLowHighAxis.new("Rudder Trim inc.",   "controls.rudderTrim(-1);", "controls.rudderTrim(1);", "/controls/flight/rudder-trim-delta", 1),

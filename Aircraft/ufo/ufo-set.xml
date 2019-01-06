@@ -223,6 +223,10 @@
 				<name>=</name>
 				<desc>open/close cursor dialog</desc>
 			</key>
+			<key>
+				<name>Ctrl + G</name>
+				<desc>Show/hide 8x8x8m box grid around ufo for screen alignment</desc>
+			</key>
 
 			<line>Pre-select initial model (path relative to $FG_ROOT):</line>
 			<line>&#32;&#32;&#45;&#45;prop:cursor=Model/path.xml</line>
@@ -255,15 +259,9 @@
 				<name>Ctrl-G</name>
 				<desc>Gear Up.</desc>
 				<binding>
-					<command>nasal</command>
-					<script>controls.gearDown(-1)</script>
+					<command>property-toggle</command>
+					<property>/sim/model/display-grid</property>
 				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.gearDown(0)</script>
-					</binding>
-				</mod-up>
 			</key>
 
 			<key n="61">
@@ -714,7 +712,7 @@
 	<aircraft>
 		<icao>
 			<!-- L = light, M = medium, H = heavy, J = jumbo -->
-			<wake-turbulence-category>L</wake-turbulence-category> 
+			<wake-turbulence-category>L</wake-turbulence-category>
 
 			<!-- eg B738, C172, BE9L
 			http://www.icao.int/publications/DOC8643/Pages/Search.aspx may help finding these
@@ -734,7 +732,7 @@
 				<landing-length-ft type="int">4000</landing-length-ft> -->
 			</minimum>
 			<climb>
-		<!-- potential for climb data in the future 
+		<!-- potential for climb data in the future
 				<airspeed-knots type="int">280</airspeed-knots>
 				<vertical-speed-fpm type="int">2000</vertical-speed-fpm>
 		-->
@@ -746,7 +744,7 @@
 				<!-- <flight-level type="int">330</flight-level> -->
 			</cruise>
 			<descent>
-			<!-- potential for descent data in the future 
+			<!-- potential for descent data in the future
 				<airspeed-knots type="int">330</airspeed-knots>
 				<vertical-speed-fpm type="int">-1200</vertical-speed-fpm>
 			-->
@@ -755,10 +753,10 @@
 				<airspeed-knots type="int">150</airspeed-knots>
 			</approach>
 			<maximum>
-			<!-- 
-				<altitude-ft type="int">21000</altitude-ft> 
+			<!--
+				<altitude-ft type="int">21000</altitude-ft>
 				<mach type="double">0.875</mach>
-				<airspeed-knots type="int">180</airspeed-knots> 
+				<airspeed-knots type="int">180</airspeed-knots>
 				-->
 			</maximum>
 		</performance>

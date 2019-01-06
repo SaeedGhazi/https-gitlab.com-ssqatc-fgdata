@@ -17,7 +17,7 @@
     <desc type="string">Throttle 1</desc>
     <binding>
       <command type="string">nasal</command>
-      <script type="string">controls.perEngineSelectedAxisHandler(0)([0]);</script>
+      <script type="string">controls.perEngineSelectedAxisHandler(0)(0);</script>
     </binding>
   </axis>
   <axis>
@@ -30,7 +30,7 @@
     <desc type="string">Throttle 2</desc>
     <binding>
       <command type="string">nasal</command>
-      <script type="string">controls.perEngineSelectedAxisHandler(0)([1]);</script>
+      <script type="string">controls.perEngineSelectedAxisHandler(0)(1);</script>
     </binding>
   </axis>
   <axis>
@@ -43,7 +43,7 @@
     <desc type="string">Mixture 1</desc>
     <binding>
       <command type="string">nasal</command>
-      <script type="string">controls.perEngineSelectedAxisHandler(2)([0]);</script>
+      <script type="string">controls.perEngineSelectedAxisHandler(2)(0);</script>
     </binding>
   </axis>
   <axis>
@@ -56,7 +56,7 @@
     <desc type="string">Mixture 2</desc>
     <binding>
       <command type="string">nasal</command>
-      <script type="string">controls.perEngineSelectedAxisHandler(2)([1]);</script>
+      <script type="string">controls.perEngineSelectedAxisHandler(2)(1);</script>
     </binding>
   </axis>
   <axis>
@@ -69,7 +69,7 @@
     <desc type="string">Propeller 1</desc>
     <binding>
       <command type="string">nasal</command>
-      <script type="string">controls.perEngineSelectedAxisHandler(1)([0]);</script>
+      <script type="string">controls.perEngineSelectedAxisHandler(1)(0);</script>
     </binding>
   </axis>
   <axis>
@@ -82,7 +82,7 @@
     <desc type="string">Propeller 2</desc>
     <binding>
       <command type="string">nasal</command>
-      <script type="string">controls.perEngineSelectedAxisHandler(1)([1]);</script>
+      <script type="string">controls.perEngineSelectedAxisHandler(1)(1);</script>
     </binding>
   </axis>
   <button>

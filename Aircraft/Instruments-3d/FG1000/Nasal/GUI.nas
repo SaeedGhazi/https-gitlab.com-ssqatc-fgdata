@@ -103,7 +103,8 @@ var GUI =
       device_id : device_id,
     };
 
-    obj.window = canvas.Window.new([obj.scale*obj.width,obj.scale*obj.height],"dialog").set('title',"FG1000 MFD" ~ device_id);
+    obj.window = canvas.Window.new([obj.scale*obj.width,obj.scale*obj.height],"dialog");
+    obj.window.set('title',"FG1000 Device " ~ device_id ~ " (" ~ int(scale * 100) ~ "%)");
 
     obj.window.del = func() {
       # Over-ride the window.del function so we clean up when the user closes the window

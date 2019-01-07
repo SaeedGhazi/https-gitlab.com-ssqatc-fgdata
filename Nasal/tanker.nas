@@ -64,6 +64,16 @@ var identity = {
 		MOBIL1: ["060X", rand()], MOBIL2: ["061X", rand()], MOBIL3: ["062X", rand()],
 	},
 };
+var replayTime = props.globals.getNode("sim/replay/time",1);
+var simTimeElapsedSec = props.globals.getNode("sim/time/elapsed-sec",1);
+var simTimeDeltaSec = props.globals.getNode("sim/time/delta-sec",1);
+var acHeading = props.globals.getNode("/orientation/heading-deg");
+var acPitch = props.globals.getNode("/orientation/pitch-deg");
+var acContactDist = props.globals.getNode("/systems/refuel/contact-radius-m");
+var refuelOffsetX = props.globals.getNode("/systems/refuel/offset-x-m");
+var refuelOffsetY = props.globals.getNode("/systems/refuel/offset-y-m");
+var refuelOffsetZ = props.globals.getNode("/systems/refuel/offset-z-m");
+var acRoll = props.globals.getNode("/orientation/roll-deg");
 
 
 var Tanker = {
@@ -158,10 +168,10 @@ var Tanker = {
 		delete(Tanker.active, me.callsign);
 	},
 	update: func {
-    	if ( getprop("sim/replay/time") > 0 ) 
+    	if ( replayTime.getValue() > 0 ) 
           return;
 
-		var dt = getprop("sim/time/delta-sec");
+		var dt = simTimeDeltaSec.getValue();
 		var alt = me.coord.alt();
 
         if (me.ai == nil){
@@ -222,9 +232,9 @@ var Tanker = {
 		me.bearing = me.ac.course_to(me.coord);
 
 		var dalt = alt - me.ac.alt();
-		var ac_hdg = getprop("/orientation/heading-deg");
-		var ac_pitch = getprop("/orientation/pitch-deg");
-		var ac_contact_dist = getprop("/systems/refuel/contact-radius-m");
+		var ac_hdg = acHeading.getValue();
+		var ac_pitch = acPitch.getValue();
+		var ac_contact_dist = acContactDist.getValue();
 		var elev = math.atan2(dalt, me.distance) * R2D;
         
 		me.latN.setDoubleValue(me.coord.lat());
@@ -240,10 +250,10 @@ var Tanker = {
 		me.elevN.setDoubleValue(elev);
 		
 		# Determine if any of the contact points are in contact
-		var offset_x = getprop("/systems/refuel/offset-x-m") or 0;
-		var offset_y = getprop("/systems/refuel/offset-y-m") or 0;
-		var offset_z = getprop("/systems/refuel/offset-z-m") or 0;
-		var roll = getprop("/orientation/roll-deg") * globals.D2R;
+		var offset_x = refuelOffsetX.getValue() or 0;
+		var offset_y = refuelOffsetY.getValue() or 0;
+		var offset_z = refuelOffsetZ.getValue() or 0;
+		var roll = acRoll.getValue() * globals.D2R;
 		
 		# Determine contact position
 		var probe_pos = geo.Coord.new(me.ac);
@@ -296,7 +306,7 @@ var Tanker = {
 			me.leg_warning = 1;
 		}
 
-		me.now = getprop("/sim/time/elapsed-sec");
+		me.now = simTimeElapsedSec.getValue();
 		if (me.distance < 90000)
 			me.out_of_range_time = me.now;
 		elsif (me.now - me.out_of_range_time > 600)

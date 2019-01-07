@@ -293,7 +293,7 @@ var Element = {
   setClipByBoundingBox: func(bounding_box, clip_frame = nil) {
     if (clip_frame == nil)
         clip_frame = Element.PARENT;
-    me.set("clip", boundingbox2clip(bounding_box));
+    me.set("clip", me.boundingbox2clip(bounding_box));
     me.set("clip-frame", clip_frame);
     return me;
   },
@@ -302,7 +302,7 @@ var Element = {
   setClipByElement: func(clip_elem) {
     clip_elem.update();
     var bounds = clip_elem.getTightBoundingBox();
-    me.setClipByBB(bounds, canvas.Element.PARENT);
+    me.setClipByBoundingBox(bounds, canvas.Element.PARENT);
   },
   
   # Internal Transform for convenience transform functions

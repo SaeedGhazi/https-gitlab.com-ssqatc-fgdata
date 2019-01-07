@@ -4,16 +4,7 @@ MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 1 1 1  shi 0  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0 0 0  shi 7  trans 0
 MATERIAL "Glass2" rgb 0.52714 0.52714 0.52714  amb 0.52714 0.52714 0.52714  emis 0 0 0  spec 1 1 1  shi 100  trans 0.686
 OBJECT world
-kids 14
-OBJECT poly
-name "Radome"
-loc -7.83795 0.0414974 0.000160484
-texture "I:/dev/flightgear-models/flightgear/aircraft/F-15/Models/Liveries/livery.AF80-0007.jpg"
-crease 45.000000
-numvert 2
--1.95428 -0.00529382 -0.000316668
--1.95428 -0.00529382 -4.29992e-006
-kids 0
+kids 13
 OBJECT poly
 name "aileron-right"
 loc -0.228301 1.61821 -0.0230434

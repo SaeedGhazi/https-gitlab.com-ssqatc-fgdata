@@ -2,109 +2,109 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
   <file original="" datatype="plaintext" source-language="en-US" target-language="zh-CN"><body>
     <group restype="x-trolltech-linguist-context" resname="menu">
-      <trans-unit id="menu/adjust-hud:0" approved="yes">
+      <trans-unit id="menu/adjust-hud:0">
         <source xml:space="preserve">Adjust HUD Properties</source>
-        <target xml:space="preserve">调整HUD属性</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/adjust-lod:0" approved="yes">
+      <trans-unit id="menu/adjust-lod:0">
         <source xml:space="preserve">Adjust LOD Ranges</source>
-        <target xml:space="preserve">调整LOD范围</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/ai:0" approved="yes">
+      <trans-unit id="menu/ai:0">
         <source xml:space="preserve">AI</source>
-        <target xml:space="preserve">AI</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/aircraft-center:0" approved="yes">
+      <trans-unit id="menu/aircraft-center:0">
         <source xml:space="preserve">Aircraft Center (Experimental)</source>
-        <target xml:space="preserve">飞机插件中心（试验中）</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/aircraft-checklists:0" approved="yes">
+      <trans-unit id="menu/aircraft-checklists:0">
         <source xml:space="preserve">Aircraft Checklists</source>
-        <target xml:space="preserve">飞机检查单</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/aircraft-keys:0" approved="yes">
+      <trans-unit id="menu/aircraft-keys:0">
         <source xml:space="preserve">Aircraft Help</source>
-        <target xml:space="preserve">飞机帮助</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/atc-in-range:0" approved="yes">
+      <trans-unit id="menu/atc-in-range:0">
         <source xml:space="preserve">ATC Services in Range</source>
-        <target xml:space="preserve">范围内的ATC服务</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/autopilot:0" approved="yes">
+      <trans-unit id="menu/autopilot:0">
         <source xml:space="preserve">Autopilot</source>
-        <target xml:space="preserve">自动驾驶</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/autopilot-settings:0" approved="yes">
+      <trans-unit id="menu/autopilot-settings:0">
         <source xml:space="preserve">Autopilot Settings</source>
-        <target xml:space="preserve">自动驾驶设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/autostart:0" approved="yes">
+      <trans-unit id="menu/autostart:0">
         <source xml:space="preserve">Autostart</source>
-        <target xml:space="preserve">自动启动</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/basic-keys:0" approved="yes">
+      <trans-unit id="menu/basic-keys:0">
         <source xml:space="preserve">Basic Simulator Keys</source>
-        <target xml:space="preserve">基础模拟器键位</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/carrier:0" approved="yes">
+      <trans-unit id="menu/carrier:0">
         <source xml:space="preserve">Carrier Controls</source>
-        <target xml:space="preserve">航母控制</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/cockpit-view-options:0" approved="yes">
+      <trans-unit id="menu/cockpit-view-options:0">
         <source xml:space="preserve">Cockpit View Options</source>
-        <target xml:space="preserve">驾驶舱视角选项</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/common-keys:0" approved="yes">
+      <trans-unit id="menu/common-keys:0">
         <source xml:space="preserve">Common Aircraft Keys</source>
-        <target xml:space="preserve">常用飞机键位</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/configure-dev-extension:0" approved="yes">
+      <trans-unit id="menu/configure-dev-extension:0">
         <source xml:space="preserve">Configure Development Extensions</source>
-        <target xml:space="preserve">配置开发扩展</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/cycle-gui:0" approved="yes">
+      <trans-unit id="menu/cycle-gui:0">
         <source xml:space="preserve">Cycle GUI Style</source>
-        <target xml:space="preserve">循环GUI样式</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/debug:0" approved="yes">
+      <trans-unit id="menu/debug:0">
         <source xml:space="preserve">Debug</source>
-        <target xml:space="preserve">调试</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/development-keys:0" approved="yes">
+      <trans-unit id="menu/development-keys:0">
         <source xml:space="preserve">Development Keys</source>
-        <target xml:space="preserve">开发键位</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/display-marker:0" approved="yes">
+      <trans-unit id="menu/display-marker:0">
         <source xml:space="preserve">Display Tutorial Marker</source>
-        <target xml:space="preserve">显示教程标记</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/doc-browser:0" approved="yes">
+      <trans-unit id="menu/doc-browser:0">
         <source xml:space="preserve">Documentation Browser</source>
-        <target xml:space="preserve">文档查看器</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/dump-scene-graph:0" approved="yes">
+      <trans-unit id="menu/dump-scene-graph:0">
         <source xml:space="preserve">Dump Scene Graph</source>
-        <target xml:space="preserve">输出场景图表</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/environment:0" approved="yes">
+      <trans-unit id="menu/environment:0">
         <source xml:space="preserve">Environment</source>
-        <target xml:space="preserve">环境</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/environment-settings:0" approved="yes">
+      <trans-unit id="menu/environment-settings:0">
         <source xml:space="preserve">Environment Settings</source>
-        <target xml:space="preserve">环境设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/equipment:0" approved="yes">
+      <trans-unit id="menu/equipment:0">
         <source xml:space="preserve">Equipment</source>
-        <target xml:space="preserve">设备</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/exit:0" approved="yes">
+      <trans-unit id="menu/exit:0">
         <source xml:space="preserve">Quit</source>
-        <target xml:space="preserve">退出</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/failure-submenu:0" approved="yes">
+      <trans-unit id="menu/failure-submenu:0">
         <source xml:space="preserve">--- Failures ---</source>
-        <target xml:space="preserve">---故障---</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
       <trans-unit id="menu/fg1000:0" translate="no" approved="yes">
         <source xml:space="preserve">FG1000 MFD</source>
@@ -1410,7 +1410,7 @@
     <group restype="x-trolltech-linguist-context" resname="tips">
       <trans-unit id="tips/tip:0" approved="yes">
         <source xml:space="preserve">Drag while holding the right mouse button to look around</source>
-        <target xml:space="preserve">在按住鼠标右键时滑动鼠标以观察四周</target>
+        <target xml:space="preserve">在按住鼠标右键时拖动鼠标以观察四周</target>
       </trans-unit>
       <trans-unit id="tips/tip:1" approved="yes">
         <source xml:space="preserve">Hold [Shift] while looking around to move the view up, down, left or right</source>
@@ -1426,15 +1426,15 @@
       </trans-unit>
       <trans-unit id="tips/tip:4" approved="yes">
         <source xml:space="preserve">Find frequencies of nearby ATC services from the Radios dialog</source>
-        <target xml:space="preserve">从“无线电偏好设置”对话框可查询附近ATC频率</target>
+        <target xml:space="preserve">从“Radios”对话框可查询附近ATC频率</target>
       </trans-unit>
       <trans-unit id="tips/tip:5" approved="yes">
         <source xml:space="preserve">Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
-        <target xml:space="preserve">按下 v 来更换视角, 按下 Ctrl-V 可回到驾驶舱视角</target>
+        <target xml:space="preserve">按下 v 来更换视角, 按下 Ctrl-V 即回到驾驶舱视角</target>
       </trans-unit>
       <trans-unit id="tips/tip:6" approved="yes">
         <source xml:space="preserve">Press F3 to take a screenshot</source>
-        <target xml:space="preserve">按下 F3 可以截图</target>
+        <target xml:space="preserve">按下 F3 来截图</target>
       </trans-unit>
       <trans-unit id="tips/tip:7" approved="yes">
         <source xml:space="preserve">Join the FlightGear community at http://forum.flightgear.org</source>
@@ -1454,27 +1454,27 @@
       </trans-unit>
       <trans-unit id="tips/tip:11" approved="yes">
         <source xml:space="preserve">Select Environment → Weather to fly in different weather</source>
-        <target xml:space="preserve">选择 环境 → 天气 在不同天气条件下飞行</target>
+        <target xml:space="preserve">选择 Environment → Weather 在不同天气条件下飞行</target>
       </trans-unit>
       <trans-unit id="tips/tip:12" approved="yes">
         <source xml:space="preserve">Press F12 to change the radio frequencies easily</source>
-        <target xml:space="preserve">按下F12可轻易更换无线频率</target>
+        <target xml:space="preserve">按下F12可轻松更换无线频率</target>
       </trans-unit>
       <trans-unit id="tips/tip:13" approved="yes">
         <source xml:space="preserve">Look around by holding down the right mouse button and moving the mouse</source>
-        <target xml:space="preserve">在按住鼠标右键时滑动鼠标以观察四周</target>
+        <target xml:space="preserve">按住鼠标右键并拖动鼠标以观察四周</target>
       </trans-unit>
       <trans-unit id="tips/tip:14" approved="yes">
         <source xml:space="preserve">Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
-        <target xml:space="preserve">选择 联机飞行 → 联机飞行偏好设置 来加入联机飞行</target>
+        <target xml:space="preserve">选择 Multiplayer → Multiplayer Settings 来加入联机飞行</target>
       </trans-unit>
       <trans-unit id="tips/tip:15" approved="yes">
         <source xml:space="preserve">Can&apos;t get the engine started? - see Help → Aircraft Checklists</source>
-        <target xml:space="preserve">不了解如何启动引擎？ - 查看 帮助 → 检查单</target>
+        <target xml:space="preserve">无法顺利启动引擎？ - 查看 Help → Aircraft Checklists</target>
       </trans-unit>
       <trans-unit id="tips/tip:16" approved="yes">
         <source xml:space="preserve">Drag while holding the middle and right mouse buttons to move the viewpoint</source>
-        <target xml:space="preserve">在按住鼠标右键与中键时滑动鼠标以移动视角</target>
+        <target xml:space="preserve">按住鼠标右键与中键并拖动鼠标以移动视角位置</target>
       </trans-unit>
       <trans-unit id="tips/tip:17" approved="yes">
         <source xml:space="preserve">Press / to explore the internals of the simulator</source>

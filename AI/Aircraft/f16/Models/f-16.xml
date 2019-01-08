@@ -4,7 +4,7 @@
     <path>f-16_lowpoly.ac</path>
     <animation>
         <type>select</type>
-        <object-name>gear</object-name>
+        <object-name>landing-gear</object-name>
         <condition>
             <greater-than>
                 <property>gear/gear[0]/position-norm</property>

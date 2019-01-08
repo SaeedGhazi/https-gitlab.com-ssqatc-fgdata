@@ -605,7 +605,8 @@ var CDU = {
         m._oleoSwitchNode = props.globals.getNode('instrumentation/fmc/discretes/oleo-switch-flight', 1);
         
         m._setupCanvas(placement);
-        
+        m._setupCommands();
+
         m._page = nil;
         m._model = nil;
         m._pages = {};
@@ -677,6 +678,50 @@ var CDU = {
             
             txt_s.setTranslation(0.0, (r + 1.2) * cellH);
             append(me._texts_s, txt_s);
+        }
+    },
+
+    _buttonCallbackTable: {
+        'exec':     func() { Boeing.cdu.button_exec(); },
+        'prog':     func() { Boeing.cdu.displayPageByTag('progress'); },
+        'hold':     func() { print("Not implemented yet");},
+        'cruise':   func() { Boeing.cdu.displayPageByTag('cruise'); },
+        'dep-arr':  func() { Boeing.cdu.button_dep_arr(); },
+        'legs':     func() { Boeing.cdu.button_legs(); },
+        'menu':     func() { Boeing.cdu.displayPageByTag('menu'); },
+        'climb':    func() { Boeing.cdu.displayPageByTag('climb'); },
+        'fix':      func() { Boeing.cdu.displayPageByTag('fix'); },
+        'n1-limit': func() { print("Not implemented yet");},
+        'route':    func() { Boeing.cdu.button_route(); },
+        'next-page': func() { Boeing.cdu.next_page(); },
+        'prev-page': func() { Boeing.cdu.prev_page(); },
+        'descent':  func() { Boeing.cdu.displayPageByTag('descent'); },
+        'init-ref': func() { Boeing.cdu.displayPageByTag('index'); },
+        'clear':    func() { Boeing.cdu.clear(); },
+        'delete':   func() { Boeing.cdu.delete(); },
+        'plus-minus': func() { Boeing.cdu.plusminus(); }
+    },
+
+    _keyCommandCallback: func(node) 
+    {
+        var k = node.getChild("key").getValue();
+        Boeing.cdu.input(chr(k));
+    },
+
+    _lskCommandCallback: func(node)
+    {
+        var keyName = node.getChild("lsk").getValue();
+        Boeing.cdu.lsk(keyName);
+    },
+
+    # register commands used for interfacing external CDU hardware
+    _setupCommands: func()
+    {
+        addcommand('cdu-key', me._keyCommandCallback);
+        addcommand('cdu-lsk', me._lskCommandCallback);
+
+        foreach(var b; keys(me._buttonCallbackTable)) {
+            addcommand('cdu-button-' ~ b , me._buttonCallbackTable[b]);
         }
     },
     

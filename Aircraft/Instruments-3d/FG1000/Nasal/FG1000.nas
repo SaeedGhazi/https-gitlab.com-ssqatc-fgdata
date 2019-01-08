@@ -156,7 +156,7 @@ displayGUI : func(index, scale=1.0) {
   }
 
   var mfd_canvas = me.displays[index].getCanvas();
-  mfd_canvas.getCanvas().set("visible", visible);
+  mfd_canvas.set("visible", 1);
   var gui = fg1000.GUI.new(me.displays[index], mfd_canvas, index, scale);
 },
 

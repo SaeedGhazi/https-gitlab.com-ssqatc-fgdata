@@ -3,7 +3,7 @@
 
   Hydrodynamics section for JSBSim.
 
-    Copyright (C) 2008 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2008 - 2018  Anders Gidenstam  (anders(at)gidenstam.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@
   - Fbz  - local up (the same as -Z in the local frame).
   - Drag - opposing the relative water flow.
   - Side - 90 degrees right from the relative water flow in the surface plane.
-  The moments are split into the hydrodynamic body frame channels
+  The moments are split into the body frame channels
   (with the same sense as the normal body frame moments):
   - Pitch
   - Yaw
@@ -78,12 +78,13 @@
     Unused properties also have to be declared (and set to zero).
 
   - Functions computing the moments in the hydrodynamic body frame.
-    FIXME: Yaw is applied in the standard body frame.
+    FIXME(?): All moments are applied in the standard body frame.
     - hydro/yaw-moment-lbsft
     - hydro/pitch-moment-lbsft
     - hydro/roll-moment-lbsft
 
-  Define the following external forces in the main FDM file of your aircraft:
+  Define the following external forces and moments in the main FDM file of
+  your aircraft:
 
     <force name="hydro-X" frame="LOCAL">
      <location unit="M">
@@ -115,6 +116,31 @@
       <z>-1.0 </z>
      </direction>
     </force>
+
+    <moment name="hydro-pitch" frame="BODY" unit="LBSFT">
+     <direction>
+      <x> 0.0 </x>
+      <y> 1.0 </y>
+      <z> 0.0 </z>
+     </direction>
+    </moment>
+    <moment name="hydro-roll" frame="BODY" unit="LBSFT">
+     <direction>
+      <x> 1.0 </x>
+      <y> 0.0 </y>
+      <z> 0.0 </z>
+     </direction>
+    </moment>
+    <moment name="hydro-yaw" frame="BODY" unit="LBSFT">
+     <direction>
+      <x> 0.0 </x>
+      <y> 0.0 </y>
+      <z> 1.0 </z>
+     </direction>
+    </moment>
+
+  The old deprecated force based external moment implementation below is still
+  supported. Beware of reference frame differences for the moments.
 
     <force name="hydro-pitch[0]" frame="LOCAL">
      <location unit="M">
@@ -919,6 +945,11 @@
 
  <channel name="Implementation Pitch Moment">
 
+  <pure_gain name="hydro/pitch-moment/moment-lbsft">
+   <input>hydro/pitch-moment-lbsft</input>
+   <gain>1.0</gain>
+   <output>external_reactions/hydro-pitch/magnitude-lbsft</output>
+  </pure_gain>
   <pure_gain name="hydro/pitch-moment/force-lbs[0]">
    <input> hydro/pitch-moment-lbsft </input>
    <gain> 0.5</gain>
@@ -934,6 +965,11 @@
 
  <channel name="Implementation Roll Moment">
 
+  <pure_gain name="hydro/roll-moment/moment-lbsft">
+   <input>hydro/roll-moment-lbsft</input>
+   <gain>1.0</gain>
+   <output>external_reactions/hydro-roll/magnitude-lbsft</output>
+  </pure_gain>
   <pure_gain name="hydro/roll-moment/force-lbs[0]">
    <input> hydro/roll-moment-lbsft </input>
    <gain> 0.5</gain>
@@ -949,6 +985,11 @@
 
  <channel name="Implementation Yaw Moment">
 
+  <pure_gain name="hydro/yaw-moment/moment-lbsft">
+   <input>hydro/yaw-moment-lbsft</input>
+   <gain>1.0</gain>
+   <output>external_reactions/hydro-yaw/magnitude-lbsft</output>
+  </pure_gain>
   <pure_gain name="hydro/yaw-moment/force-lbs[0]">
    <input> hydro/yaw-moment-lbsft </input>
    <gain> 0.5</gain>

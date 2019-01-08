@@ -117,8 +117,8 @@
 	<print-scene-info>Print Visible Scene Info</print-scene-info>
 	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
 	<rembrandt-buffers-choice>Select Rendering Buffers</rembrandt-buffers-choice>
-	<interface-config>User-interface options</interface-config>
-	<cycle-gui>Cycle GUI style</cycle-gui>
+	<interface-config>User-interface Options</interface-config>
+	<cycle-gui>Cycle GUI Style</cycle-gui>
 
 	<!-- Help menu -->
 	<help>Help</help>
@@ -133,7 +133,7 @@
 	<menu-about>About</menu-about>
 
 	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
-	<select-livery>Select livery</select-livery>
+	<select-livery>Select Livery</select-livery>
 	<show-hide-yokes>Show/hide yokes</show-hide-yokes>
 	<immatriculation>Immatriculation</immatriculation>
 	<pushback>Pushback</pushback>

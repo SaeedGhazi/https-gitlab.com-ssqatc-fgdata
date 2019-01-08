@@ -143,9 +143,9 @@
       <command>nasal</command>
       <script>
         setprop("/sim/current-view/view-number", 0);
-        setprop("/sim/current-view/goal-pitch-offset-deg", getprop("/sim/view[0]/config/pitch-offset-deg"));
+        setprop("/sim/current-view/goal-pitch-offset-deg", getprop("/sim/view[0]/config/pitch-offset-deg") or 0);
         setprop("/sim/current-view/goal-heading-offset-deg", 0.0);
-        #setprop("/sim/current-view/field-of-view", getprop("/sim/view/config/default-field-of-view-deg"));
+        #setprop("/sim/current-view/field-of-view", getprop("/sim/view/config/default-field-of-view-deg") or 60.0);
       </script>
     </binding>
   </button>

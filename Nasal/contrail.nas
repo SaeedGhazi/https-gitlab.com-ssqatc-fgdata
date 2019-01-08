@@ -35,5 +35,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var static_contrail_node = props.globals.getNode("sim/ai/aircraft/contrail", 1);
     var time_node = props.globals.getNode("sim/time/elapsed-sec", 1);
 
+    updateContrail(); # avoid 30 second delay on startup https://sourceforge.net/p/flightgear/codetickets/2077/
     contrailTimer.restart(30);
 });

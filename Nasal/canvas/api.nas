@@ -282,6 +282,29 @@ var Element = {
 
     return center;
   },
+  
+  # convert bounding box vector into clip string (yes, different order)
+  boundingbox2clip: func(bb) {
+    return sprintf("rect(%d,%d,%d,%d)", bb[1], bb[2], bb[3], bb[0])
+  },
+  
+  # set clip by bounding box
+  # bounding_box: [xmin, ymin, xmax, ymax] 
+  setClipByBoundingBox: func(bounding_box, clip_frame = nil) {
+    if (clip_frame == nil)
+        clip_frame = Element.PARENT;
+    me.set("clip", me.boundingbox2clip(bounding_box));
+    me.set("clip-frame", clip_frame);
+    return me;
+  },
+  
+  # set clipping by bounding box of another element
+  setClipByElement: func(clip_elem) {
+    clip_elem.update();
+    var bounds = clip_elem.getTightBoundingBox();
+    me.setClipByBoundingBox(bounds, canvas.Element.PARENT);
+  },
+  
   # Internal Transform for convenience transform functions
   _getTf: func
   {
@@ -990,7 +1013,48 @@ var Path = {
 
     return me.close();
   },
+  
+  # Add a (rounded) square to the path
+  #
+  # @param x    Position of left border
+  # @param y    Position of top border
+  # @param l    length
+  # @param cfg  Optional settings (eg. {"border-top-radius": 5})
+  square: func(x, y, l, cfg = nil) {
+      return me.rect(x, y, l, l, cfg);
+  },
 
+  # Add an ellipse to the path
+  #
+  # @param rx    radius x
+  # @param ry    radius y
+  # @param cx    (optional) center x coordinate or vector [cx, cy]
+  # @param cy    (optional) center y coordinate
+  ellipse: func(rx, ry, cx = nil, cy = nil) {
+    if (typeof(cx) == "vector") {
+        cy = cx[1];
+        cx = cx[0];
+    }
+    else {
+        cx = num(cx) or 0;
+        cy = num(cy) or 0;
+    }
+    me.moveTo(cx - rx, cy)
+      .arcSmallCW(rx, ry, 0, 2*rx, 0)
+      .arcSmallCW(rx, ry, 0, -2*rx, 0);
+    return me;
+  },
+  
+  
+  # Add a circle to the path
+  #
+  # @param r     radius 
+  # @param cx    (optional) center x coordinate or vector [cx, cy]
+  # @param cy    (optional) center y coordinate
+  circle: func(r, cx = nil, cy = nil) {
+    return me.ellipse(r, r, cx, cy);
+  },
+  
   setColor: func me.setStroke(_getColor(arg)),
   getColor: func me.getStroke(),
 

@@ -227,29 +227,29 @@
 				</binding>
 			</checkbox>
 
-			<checkbox>
-				<halign>left</halign>
-				<label>Animated jetways</label>
-				<name>jetways</name>
-				<property>/nasal/jetways/enabled</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>jetways</object-name>
-				</binding>
-			</checkbox>
+            <checkbox>
+                <halign>left</halign>
+                <label>Animated jetways</label>
+                <name>jetways</name>
+                <property>/nasal/jetways/enabled</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>jetways</object-name>
+                </binding>
+            </checkbox>
 
-			<checkbox>
-				<halign>left</halign>
-				<label>Use detailed MP models</label>
-				<name>mpmodels</name>
-				<property>/sim/multiplay/use-detailed-models</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>mpmodels</object-name>
-				</binding>
-			</checkbox>
+            <checkbox>
+                <halign>left</halign>
+                <label>Use disk space for faster loading (DDS Texture Cache)</label>
+                <name>texture-cache-enabled</name>
+                <property>/sim/rendering/texture-cache/cache-enabled</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>texture-cache-enabled</object-name>
+                </binding>
+            </checkbox>
 
-  		<empty>
+            <empty>
   			<stretch>1</stretch>
   		</empty>
 
@@ -441,7 +441,7 @@
 								setprop("/sim/rendering/vegetation-density", 0.1);
 							}
 
-							if (val == "Low Density") {
+							if (val == "Very Low Density") {
 								setprop("/sim/rendering/random-vegetation", 1);
 								setprop("/sim/rendering/vegetation-density", 0.25);
 							}

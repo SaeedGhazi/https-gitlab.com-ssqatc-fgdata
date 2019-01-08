@@ -64,7 +64,7 @@
           <target>Configurar Extensões de Desenvolvimento</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/cycle-gui:0" translate="yes">
-          <source>Cycle GUI style</source>
+          <source>Cycle GUI Style</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="menu/debug:0" translate="yes">
@@ -168,7 +168,7 @@
           <target>Configurações de Instrumentos</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/interface-config:0" translate="yes">
-          <source>User-interface options</source>
+          <source>User-interface Options</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="menu/jetway:0" translate="yes">
@@ -368,7 +368,7 @@
           <target>Configurações de Tráfego e Cenário</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/select-livery:0" translate="yes">
-          <source>Select livery</source>
+          <source>Select Livery</source>
           <target>Selecionar pintura</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/show-hide-yokes:0" translate="yes">
@@ -687,7 +687,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/dme-desc:0" translate="yes">
           <source>Slave the DME to one of the NAV radios, or set its internal frequency.</source>
-          <target>Define como escravo o ADF para uma das radios NAV, ou define sua frequencia interna.</target>
+          <target>Define como escravo o DME para uma das radios NAV, ou define sua frequencia interna.</target>
         </trans-unit>
         <trans-unit approved="no" id="options/download-dir-desc:0" translate="yes">
           <source>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>

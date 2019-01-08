@@ -184,6 +184,7 @@
     </aircraft>
     <alias>
       <match>74</match>
+      <match>74N</match>
       <match>Boeing_74</match>
       <alias>747</alias>
     </alias>
@@ -339,6 +340,7 @@
     </aircraft>
     <alias>
       <match>MD11</match>
+      <match>MF1</match>
       <alias>M11</alias>
     </alias>
     <!-- McDonnell Douglas 80 all versions -->

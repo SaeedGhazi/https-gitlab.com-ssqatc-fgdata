@@ -173,7 +173,7 @@ var dialog = {
         me.x = x;
         me.y = y;
         me.bg = [0.1, 0.1, 0.1, 0.8];    # background color
-        me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1], [1, 0.7, 0, 1]]; # alternative active & disabled color
+        me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1], [1, 0.7, 0, 1], [0.557,0.847,0.463, 1]]; # active, active alternate, disabled color, fallback available
         me.unit = 1;
         me.toggle_unit();          # set to imperial
         #
@@ -267,8 +267,21 @@ w.node.setValues({ "font" : me.font});
         var odd = 1;
         foreach (var mp; model.list) {
             var col = 0;
-            var color = mp.node.getNode("model-installed").getValue() ? me.fg[odd = !odd] : me.fg[2];
-            foreach (var column; me.columns) {
+            var color = me.fg[2];
+            if (mp.node.getNode("model-installed").getValue()) 
+                color = me.fg[odd = !odd];
+            else{
+                print("no model installed; check fallback");
+                var fbn = mp.node.getNode("sim/model/fallback-model-index");
+                if (fbn != nil){
+                    print(" ->> got fallback node =",fbn.getValue());
+                    if (fbn.getValue() > 0) {
+                        color = me.fg[3];
+                    }
+                } else
+                    print(" ->> no fallback node");
+            }
+              foreach (var column; me.columns) {
                 var w = nil;
         if (column.type == "button") {
             w = content.addChild("button");

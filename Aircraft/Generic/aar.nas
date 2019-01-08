@@ -59,9 +59,9 @@ var update_loop = func {
 	
 	contactN.setBoolValue(refueling);
 
-	if (fuel_freeze)
-		return settimer(update_loop, UPDATE_PERIOD);
-
+	if (fuel_freeze){
+        return;
+    }
 
 	# sum up consumed fuel
 	var consumed = 0;
@@ -174,7 +174,6 @@ var update_loop = func {
 	foreach (var e; engines)
 		e.getNode("out-of-fuel", 1).setBoolValue(out_of_fuel);
 
-    aarTimer.restart(UPDATE_PERIOD);
 }
 
 var aarTimer = maketimer(UPDATE_PERIOD, update_loop);

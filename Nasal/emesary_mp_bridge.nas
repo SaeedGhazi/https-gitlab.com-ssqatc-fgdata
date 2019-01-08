@@ -26,21 +26,31 @@
 # var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-15mp",routedNotifications);
 #------------------------------------------------------------------
 #
-# NOTES: Aircraft do not need to have both an incoming and outgoing bridge, but it is usual.
-#        Only the notifications specified will be routed via the bridge.
-#        Once routed a message will by default not be re-rerouted again by the outgoing bridge.
-#        Transmit frequency and message lifetime may need to be tuned.
-#        IsDistinct messages must be absolute and self contained as a later message will 
-#        supercede any earlier ones in the outgoing queue (possibly prior to receipt)
-#        Use the message type and ident to identify distinct messages
-#        The outgoing 'port' is a multiplay/emesary/bridge index, however any available string property
-#        can be used by specifying it in the construction of the incoming or outgoing bridge.
-#        NOTE: This should not often be changed as it different versions of FG or model will  
-#              have to use the same properties to be able to communicate
-#        multiplay/emesary/bridge-type is used to identify the bridge that is in use. This is to 
-#        protect against bridges being used for different purposes by different models.
-#        The bridge-type property should contain an ID that identifies the purpose
-#        and thereore the message set that the bridge will be using.
+# NOTES:
+#        * Aircraft do not need to have both an incoming and outgoing bridge, but it is usual.
+#
+#        * Only the notifications specified will be routed via the bridge.
+#
+#        * Once routed a message will by default not be re-rerouted again by the outgoing bridge.
+#
+#        * Transmit frequency and message lifetime may need to be tuned.
+#
+#        * IsDistinct messages must be absolute and self contained as a later message will 
+#          supercede any earlier ones in the outgoing queue (possibly prior to receipt)
+#
+#        * Use the message type and ident to identify distinct messages
+#
+#        * The outgoing 'port' is a multiplay/emesary/bridge index, however any available string property
+#          can be used by specifying it in the construction of the incoming or outgoing bridge.
+#          NOTE: This should not often be changed as it different versions of FG or model will  
+#                have to use the same properties to be able to communicate
+#
+#        * multiplay/emesary/bridge-type is used to identify the bridge that is in use. This is to 
+#          protect against bridges being used for different purposes by different models.
+#
+#        * The bridge-type property should contain an ID that identifies the purpose
+#          and thereore the message set that the bridge will be using.
+#
 #  - ! is used as a seperator between the elements that are used to send the 
 #       notification (typeid, sequence, notification)
 #  -   There is an extra ! at the start of the message that is used to indicate protocol version.
@@ -403,15 +413,22 @@ var IncomingMPBridge =
             print("IncomingBridge: ",n.NotificationType);
         }
         return new_class;
-    }
- ,
+    },
+    connectIncomingBridge : func(path, notification_list, mpidx, transmitter, _propertybase){
+        var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(path, notification_list, mpidx, transmitter, _propertybase);
+        
+        incomingBridge.Connect(path~"/");
+        me.incomingBridgeList[path] = incomingBridge;
+        return incomingBridge;
+    },
+
     #
     # Each multiplayer object will have its own incoming bridge. This is necessary to allow message ID
     # tracking (as the bridge knows which messages have been already processed)
     # Whenever a client connects over MP a new bridge is instantiated
     startMPBridge : func(notification_list, mpidx=19, transmitter=nil, _propertybase="emesary/bridge")
     {
-        var incomingBridgeList = {};
+        me.incomingBridgeList = {};
 
         #
         # Create bridge whenever a client connects
@@ -429,10 +446,7 @@ var IncomingMPBridge =
                 if (callsign == "" or callsign == nil)
                     callsign = path;
 
-                var incomingBridge = emesary_mp_bridge.IncomingMPBridge.new(path, notification_list, mpidx, transmitter, _propertybase);
-
-                incomingBridge.Connect(path~"/");
-                incomingBridgeList[path] = incomingBridge;
+                me.connectIncomingBridge(path, notification_list, mpidx, transmitter, _propertybase);
             }
         });
 
@@ -441,12 +455,12 @@ var IncomingMPBridge =
         #
         setlistener("/ai/models/model-removed", func(v){
             var path = v.getValue();
-            var bridge = incomingBridgeList[path];
+            var bridge = me.incomingBridgeList[path];
             if (bridge != nil)
             {
 #                            print("Bridge removed for ",v.getValue());
                 bridge.Remove();
-                incomingBridgeList[path]=nil;
+                me.incomingBridgeList[path]=nil;
             }
         });
     },

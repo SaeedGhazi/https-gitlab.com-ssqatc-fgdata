@@ -39,9 +39,6 @@ var GenericEISPublisher =
     obj.addPropMap("EGTNorm", "/engines/engine[0]/egt-norm");
     obj.addPropMap("VacuumSuctionInHG", "/systems/vacuum/suction-inhg");
 
-    obj.addPropMap("LeftFuelUSGal", "/consumables/fuel/tank[0]/indicated-level-gal_us");
-    obj.addPropMap("RightFuelUSGal", "/consumables/fuel/tank[1]/indicated-level-gal_us");
-
     return obj;
   },
 
@@ -62,7 +59,7 @@ var GenericEISPublisher =
       "MFD",
       1,
       notifications.PFDEventNotification.EngineData,
-      engineData);
+      { Id: "EngineData", Value: engineData } );
 
     me._transmitter.NotifyAll(notification);
   },

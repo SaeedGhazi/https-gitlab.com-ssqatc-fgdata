@@ -46,16 +46,27 @@ var EISController =
       "OilPressurePSI",
       "OilTemperatureF",
       "EGTNorm",
-      "VacuumSuctionInHG",
-      "LeftFuelUSGal",
-      "RightFuelUSGal"];
+      "VacuumSuctionInHG"];
 
     foreach (var val; elements) {
       if (data[val] == nil) data[val] = 0;
     }
 
     # Display it
-    me._page.updateData(data);
+    me._page.updateEngineData(data);
+    return emesary.Transmitter.ReceiptStatus_OK;
+  },
+
+  # Function to handle the data provided from the FuelData Emesary Notification.
+  # This implementation assumes a vector containing hashes of "FuelUSGal" entries
+  handleFuelData : func (fuelData) {
+    assert(size(fuelData) > 1, "handleEngineData expects vector of size > 1");
+    var data = {};
+    data["LeftFuelUSGal"] =  (fuelData[0]["FuelUSGal"] or 0);
+    data["RightFuelUSGal"] = (fuelData[1]["FuelUSGal"] or 0);
+
+    # Display it
+    me._page.updateFuelData(data);
     return emesary.Transmitter.ReceiptStatus_OK;
   },
 
@@ -71,10 +82,18 @@ var EISController =
       {
         if (notification.NotificationType == notifications.PFDEventNotification.DefaultType and
             notification.Event_Id == notifications.PFDEventNotification.EngineData and
-            notification.EventParameter != nil)
+            notification.EventParameter.Id == "EngineData")
         {
-          return controller.handleEngineData(notification.EventParameter);
+          return controller.handleEngineData(notification.EventParameter.Value);
         }
+
+        if (notification.NotificationType == notifications.PFDEventNotification.DefaultType and
+            notification.Event_Id == notifications.PFDEventNotification.FuelData and
+            notification.EventParameter.Id == "FuelData")
+        {
+          return controller.handleFuelData(notification.EventParameter.Value);
+        }
+
         return emesary.Transmitter.ReceiptStatus_NotProcessed;
       };
     }
@@ -94,6 +113,28 @@ var EISController =
   },
   offdisplay : func() {
     me.DeRegisterWithEmesary();
+  },
+
+  setFuelQuantity : func(val) {
+    me.sendFuelUpdateNotification("SetFuelQuantity", val);
+  },
+
+  updateFuelQuantity : func(val) {
+    me.sendFuelUpdateNotification("UpdateFuelQuantity", val);
+  },
+
+  # Send an update to fuel quantities
+  sendFuelUpdateNotification : func(type, val)
+  {
+    # Use Emesary to set the default DTO waypoint
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me._page.mfd.getDeviceID(),
+      notifications.PFDEventNotification.FuelData,
+      {Id: type, Value: val});
+
+    var response = me.transmitter.NotifyAll(notification);
+    if (me.transmitter.IsFailed(response)) print("Failed to set Fuel Data notification " ~  type ~ " " ~ val);
   },
 
 };

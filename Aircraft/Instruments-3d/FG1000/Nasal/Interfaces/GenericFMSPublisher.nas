@@ -76,8 +76,8 @@ var GenericFMSPublisher =
       if (gpsdata["FMSLegDistanceNM"] == -1) gpsdata["FMSLegDistanceNM"] = nil;
 
       # A couple of calculated values used by the MFD Header display
-      var total_fuel = getprop("/consumables/fuel/tank[0]/indicated-level-gal_us") or 0.0;
-      total_fuel = total_fuel  + (getprop("/consumables/fuel/tank[1]/indicated-level-gal_us") or 0.0);
+      var total_fuel = getprop("/consumables/fuel/tank[0]/fg1000-indicated-level-gal_us") or 0.0;
+      total_fuel = total_fuel  + (getprop("/consumables/fuel/tank[1]/fg1000-indicated-level-gal_us") or 0.0);
       var fuel_flow = getprop("/engines/engine[0]/fuel-flow-gph") or 1.0;
       gpsdata["FuelOnBoard"] = total_fuel;
       gpsdata["EnduranceHrs"] = total_fuel /  fuel_flow;

@@ -559,6 +559,7 @@ var PFDEventNotification =
     NavData : 7,        #event parameter contrains a single { Id: , Value: } tuple requesting a particular type of NavData
     FMSData : 8,        #event parameter containing a hash of updated GPS/FMS information (track, ground-speed, waypoint legs etc.)
     ADCData : 9,        #event parameter containing a hash of updated Air Data Computer information (track, ground-speed etc.)
+    FuelData: 10,       #event parameter contains a single { Id: , Value: } tuple either updating or requesting a particular type of fuel data
 
     DefaultType : "PFDEventNotification",
 

@@ -44,7 +44,7 @@ var EIS =
     return obj;
   },
 
-  updateData : func(engineData) {
+  updateEngineData : func(engineData) {
     me.setTextElement("RPMDisplay", sprintf("%i", engineData.RPM));
     me.setTextElement("ManDisplay", sprintf("%.1f", engineData.Man));
     me.setTextElement("MBusVolts", sprintf("%.01f", engineData.MBusVolts));
@@ -55,16 +55,18 @@ var EIS =
     me._oilTempPointer.setValue(engineData.OilTemperatureF);
     me._EGTPointer.setValue(engineData.EGTNorm);
     me._EGTCylinder.setValue(engineData.EGTNorm);
-    me._leftFuelPointer.setValue(engineData.LeftFuelUSGal);
-    me._rightFuelPointer.setValue(engineData.RightFuelUSGal);
 
     me._RPMPointer.setValue(engineData.RPM);
     me._ManPointer.setValue(engineData.Man);
   },
 
+  updateFuelData : func(fuelData) {
+    me._leftFuelPointer.setValue(fuelData.LeftFuelUSGal);
+    me._rightFuelPointer.setValue(fuelData.RightFuelUSGal);
+  },
+
   # Menu tree .  engineMenu is referenced from most pages as softkey 0:
   # pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EISPage.engineMenu);
-
   engineMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
@@ -93,7 +95,7 @@ var EIS =
       pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
       pg.addMenuItem(1, "LEAN", pg, pg.mfd.EIS.leanMenu);
       pg.addMenuItem(2, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
-      pg.addMenuItem(3, "RST FUEL", pg);
+      pg.addMenuItem(3, "RST FUEL", pg, func(dev, pg, mi) { pg.mfd.EIS.getController().setFuelQuantity(0); });
       pg.addMenuItem(4, "GAL REM", pg, pg.mfd.EIS.galRemMenu);
       pg.addMenuItem(5, "BACK", pg, pg.mfd.EIS.engineMenu);
       device.updateMenus();
@@ -105,11 +107,11 @@ var EIS =
     pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
     pg.addMenuItem(1, "LEAN", pg, pg.mfd.EIS.leanMenu);
     pg.addMenuItem(2, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
-    pg.addMenuItem(3, "-10 GAL", pg);
-    pg.addMenuItem(4, "-1 GAL", pg);
-    pg.addMenuItem(5, "+1 GAL", pg);
-    pg.addMenuItem(6, "+10 GAL", pg);
-    pg.addMenuItem(7, "44 GAL", pg);
+    pg.addMenuItem(3, "-10 GAL", pg, func(dev, pg, mi) { pg.mfd.EIS.getController().updateFuelQuantity(-10); } );
+    pg.addMenuItem(4, "-1 GAL",  pg, func(dev, pg, mi) { pg.mfd.EIS.getController().updateFuelQuantity(-1); });
+    pg.addMenuItem(5, "+1 GAL",  pg, func(dev, pg, mi) { pg.mfd.EIS.getController().updateFuelQuantity(1); });
+    pg.addMenuItem(6, "+10 GAL", pg, func(dev, pg, mi) { pg.mfd.EIS.getController().updateFuelQuantity(10); });
+    pg.addMenuItem(7, "44 GAL",  pg, func(dev, pg, mi) { pg.mfd.EIS.getController().setFuelQuantity(44); });
     pg.addMenuItem(8, "BACK", pg, pg.mfd.EIS.engineMenu);
     device.updateMenus();
   },

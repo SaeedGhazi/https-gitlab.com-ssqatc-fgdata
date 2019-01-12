@@ -39,6 +39,7 @@ var PFDInstrumentsController =
       _selected_alt_ft : 0,
       _heading_magnetic_deg : 0,
       _mag_var : 0,
+      _time_sec : 0,
 
       _fp_active : 0,
       _fp_current_wp : 0,
@@ -244,6 +245,11 @@ var PFDInstrumentsController =
       wind_spd : data ["ADCWindSpeedKt"],
       no_data: (data["ADCIndicatedAirspeed"] < 1.0)
     );
+
+    if ((data["ADCTimeLocalSec"] != nil) and (me._time_sec != data["ADCTimeLocalSec"])) {
+      me._time_sec = data["ADCTimeLocalSec"];
+      me.page.updateTime(me._time_sec);
+    }
 
     return emesary.Transmitter.ReceiptStatus_OK;
   },

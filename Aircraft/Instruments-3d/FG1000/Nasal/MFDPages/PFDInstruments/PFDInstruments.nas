@@ -62,6 +62,7 @@ var PFDInstruments =
       "SelectedALT-text",
       "XPDR-DIGIT-3-text", "XPDR-DIGIT-2-text", "XPDR-DIGIT-1-text", "XPDR-DIGIT-0-text",
       "XPDR-MODE-text",
+      "TIME-text",
     ]);
 
     # Set clipping for the various tapes
@@ -512,6 +513,13 @@ var PFDInstruments =
   updateOAT : func (oat) {
     # TODO: Support FAHRENHEIT
     me.setTextElement("OAT-text", sprintf((abs(oat) < 10) ? "%.1f %s" : "%i %s", oat, "°C"));
+  },
+
+  updateTime : func (time_sec) {
+    var sec = math.mod(time_sec, 60);
+    var mins = math.mod((time_sec - sec) / 60, 60);
+    var hours = math.mod((time_sec - mins - sec) / 3600, 12);
+    me.setTextElement("TIME-text", sprintf("%02d:%02d:%02d", hours, mins, sec));
   },
 
   updateHSI : func (hdg) {

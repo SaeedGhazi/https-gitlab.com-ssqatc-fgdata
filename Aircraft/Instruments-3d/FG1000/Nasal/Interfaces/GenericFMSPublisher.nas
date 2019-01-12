@@ -100,7 +100,7 @@ var GenericFMSPublisher =
       }
 
       gpsdata["FMSDistance"] = dst;
-      var spd = getprop("/instrumentation/gps/indicated-ground-speed-kt") or 1.0;
+      var spd = math.max(getprop("/instrumentation/gps/indicated-ground-speed-kt"), 20.0);
       var time_hrs = dst / spd;
 
       gpsdata["FMSEstimatedTimeEnroute"] = time_hrs;

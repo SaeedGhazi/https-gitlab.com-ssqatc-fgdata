@@ -61,6 +61,8 @@ var GenericADCPublisher =
     obj.addPropMap("ADCOutsideAirTemperatureC", "/environment/temperature-degc");
     obj.addPropMap("ADCWindHeadingDeg", "/environment/wind-from-heading-deg");
     obj.addPropMap("ADCWindSpeedKt", "/environment/wind-speed-kt");
+    obj.addPropMap("ADCTimeLocalSec", "/sim/time/local-day-seconds");
+    obj.addPropMap("ADCTimeUTCSec", "/sim/time/utc/day-seconds");
     return obj;
   },
 };

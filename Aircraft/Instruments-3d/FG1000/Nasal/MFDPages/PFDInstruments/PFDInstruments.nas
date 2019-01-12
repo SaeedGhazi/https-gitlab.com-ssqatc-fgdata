@@ -60,6 +60,8 @@ var PFDInstruments =
       "HDG-text",
       "SelectedHDG-text",
       "SelectedALT-text",
+      "XPDR-DIGIT-3-text", "XPDR-DIGIT-2-text", "XPDR-DIGIT-1-text", "XPDR-DIGIT-0-text",
+      "XPDR-MODE-text",
     ]);
 
     # Set clipping for the various tapes
@@ -111,7 +113,6 @@ var PFDInstruments =
     return obj;
   },
 
-
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
@@ -120,8 +121,8 @@ var PFDInstruments =
     pg.addMenuItem(4, "OBS", pg); # TODO
     pg.addMenuItem(5, "CDI", pg,  func(dev, pg, mi) { pg.getController().incrCDISource(); } );
     #pg.addMenuItem(6, "DME", pg, func(dev, pg, mi) { pg.toggleDME(); } ); # TODO
-    pg.addMenuItem(7, "XPDR", pg); # TODO
-    pg.addMenuItem(8, "IDENT", pg); # TODO
+    pg.addMenuItem(7, "XPDR", pg, pg.mfd.PFDInstruments.transponderMenu);
+    pg.addMenuItem(8, "IDENT", pg, pg.mfd.PFDInstruments.setIdent); # TODO
     pg.addMenuItem(9, "TMR/REF", pg); # TODO
     pg.addMenuItem(10, "NRST", pg); # TODO
     pg.addMenuItem(11, "ALERTS", pg); # TODO
@@ -196,7 +197,6 @@ var PFDInstruments =
     pg.addMenuItem(4, "BRG1", pg, func(dev, pg, mi) { pg.getController().incrBRG1(); });
     pg.addMenuItem(5, "HSI FRMT", pg); # TODO
     pg.addMenuItem(6, "BRG2", pg, func(dev, pg, mi) { pg.getController().incrBRG2(); });
-    #pg.addMenuItem(8, "IDENT", pg); # TODO
     pg.addMenuItem(8, "ALT UNIT ", pg); # TODO
     pg.addMenuItem(9, "STD BARO", pg, func(dev, pg, mi) { pg.getController().setStdBaro(); } );
     pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
@@ -239,6 +239,59 @@ var PFDInstruments =
     }
     svg.setText(mi.title);
     svg.setVisible(1); # display function
+  },
+
+  transponderMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(2, "STBY", pg, pg.mfd.PFDInstruments.setTransponderMode);
+    pg.addMenuItem(3, "ON", pg, pg.mfd.PFDInstruments.setTransponderMode);
+    pg.addMenuItem(4, "ALT", pg, pg.mfd.PFDInstruments.setTransponderMode);
+    pg.addMenuItem(5, "GND", pg, pg.mfd.PFDInstruments.setTransponderMode);
+    pg.addMenuItem(6, "VFR", pg, pg.mfd.PFDInstruments.setVFR);
+    pg.addMenuItem(7, "CODE", pg, pg.mfd.PFDInstruments.codeMenu);
+    pg.addMenuItem(8, "IDENT", pg, pg.mfd.PFDInstruments.setIdent);
+    pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.topMenu);
+    pg.addMenuItem(11, "ALERTS", pg); # TODO
+    device.updateMenus();
+  },
+
+  codeMenu : func(device, pg, menuitem) {
+    pg.clearMenu();
+    pg.resetMenuColors();
+    pg.addMenuItem(0, "0", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(1, "1", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(2, "2", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(3, "3", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(4, "4", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(5, "5", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(6, "6", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(7, "7  ", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(8, "IDENT", pg, pg.mfd.PFDInstruments.setIdent);
+    pg.addMenuItem(9, "BKSP", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.transponderMenu);
+    pg.addMenuItem(11, "ALERTS", pg); # TODO
+    device.updateMenus();
+  },
+
+  setTransponderMode : func(device, pg, menuitem) {
+    # Get the transponder mode from the menuitem itself.
+    pg.getController().setTransponderMode(menuitem.title);
+  },
+
+  setVFR : func(device, pg, menuitem) {
+    # Set VFR Mode - 1200
+    pg.getController().setTransponderCode(1200);
+  },
+
+  setIdent : func(device, pg, menuitem) {
+    # Ident the transponder
+    pg.getController().setTransponderIdent(1);
+  },
+
+  setTransponderDigit: func(device, pg, menuitem) {
+    # Set a transponder digit.  Get digit from menu item.
+    pg.getController().setTransponderDigit(menuitem.title);
   },
 
   offdisplay : func() {
@@ -778,5 +831,45 @@ var PFDInstruments =
     if (current_wp == -1) return;
     me.flightplanList.setCRSR(current_wp);
     me.flightplanList.displayGroup();
+  },
+
+  # Update the Transponder display
+  updateTransponder : func(mode, code, ident, edit=0) {
+    # Data validation on the mode
+    if (mode < 0) mode = 0;
+    if (mode > 5) mode = 5;
+
+    # Ensure the code is a 4 digit string representation of a number.
+    # Normally this means padding with 0's at the left e.g.  42 becomes 0042.
+    # In editing mode we enter values from the left, so we want " " padding on the
+    # right, so 42 becomes "42  ".  Note also that the code is a string value
+    # so we can have "004 "
+    if (edit) {
+      code = sprintf("%-4s", code);
+    } else {
+      code = sprintf("%04i", code);
+    }
+
+    # Colour of display. White in OFF, STDBY, TEST modes, green in GND, ON, ALT
+    var r = 1.0;
+    var g = 1.0;
+    var b = 1.0;
+    if (mode > 2) {
+      r = 0.2;
+      g = 1.0;
+      b = 0.2;
+    }
+
+    if (ident) {
+      me.getElement("XPDR-MODE-text").setText("IDNT").setColor(r,g,b);
+    } else {
+      me.getElement("XPDR-MODE-text").setText(TRANSPONDER_MODES[mode]).setColor(r,g,b);
+    }
+
+    var codes = split("", code);
+    me.getElement("XPDR-DIGIT-3-text").setText(chr(code[0])).setColor(r,g,b);
+    me.getElement("XPDR-DIGIT-2-text").setText(chr(code[1])).setColor(r,g,b);
+    me.getElement("XPDR-DIGIT-1-text").setText(chr(code[2])).setColor(r,g,b);
+    me.getElement("XPDR-DIGIT-0-text").setText(chr(code[3])).setColor(r,g,b);
   },
 };

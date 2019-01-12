@@ -83,6 +83,12 @@ var PFDInstrumentsController =
       _adf_freq : 0.0,
       _adf_in_range : 0,
       _adf_heading_deg : 0.0,
+
+      _transponder_mode : 0,
+      _transponder_code : "1200",  # Current code
+      _transponder_ident : 0,
+      _transponder_edit : 0,      # If we're currently editing the transponder code
+      _transponder_edit_code : 0 # Current value being edited as transponder code
     };
 
     obj._current_flightplan = obj.getNavData("Flightplan");
@@ -90,6 +96,16 @@ var PFDInstrumentsController =
       obj._fp_current_wp = obj._current_flightplan.current;
       obj.page.setFlightPlan(obj._current_flightplan);
     }
+
+    # Timer used to reset a transponder IDENT
+    obj.transponderIdentResetTimer = maketimer(18, obj, func() { me.sendNavComDataNotification({"TransponderIdent" : 0}); });
+    obj.transponderIdentResetTimer.simulatedTime = 1;
+    obj.transponderIdentResetTimer.singleShot = 1;
+
+    # Timer used to reset a transponder edit, if pilot hasn't completed entering a new code in 45s.
+    obj.transponderEditResetTimer = maketimer(45, obj, obj.transponderEditCancel);
+    obj.transponderEditResetTimer.simulatedTime = 1;
+    obj.transponderEditResetTimer.singleShot = 1;
 
     return obj;
   },
@@ -363,6 +379,10 @@ var PFDInstrumentsController =
     if (data["ADFInRange"] != nil) me._adf_in_range = data["ADFInRange"];
     if (data["ADFHeadingDeg"] !=nil) me._adf_heading_deg = data["ADFInRange"];
 
+    if (data["TransponderMode"] != nil) me._transponder_mode = data["TransponderMode"];
+    if (data["TransponderCode"] != nil) me._transponder_code = data["TransponderCode"];
+    if (data["TransponderIdent"] != nil) me._transponder_ident = data["TransponderIdent"];
+
     if (me.getBRG1() == "NAV1") me.page.updateBRG1(me._nav1_in_range, me._nav1_id, me._nav1_distance_m * M2NM, me._heading_magnetic_deg, me._nav1_heading_deg);
     if (me.getBRG1() == "NAV2") me.page.updateBRG1(me._nav2_in_range, me._nav2_id, me._nav2_distance_m * M2NM, me._heading_magnetic_deg, me._nav2_heading_deg);
     if (me.getBRG1() == "ADF")  me.page.updateBRG1(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, me._heading_magnetic_deg, me._adf_heading_deg);
@@ -399,6 +419,13 @@ var PFDInstrumentsController =
         annun: "",
         loc : me._nav2_loc,
       );
+    }
+
+    if ((me._transponder_edit == 0) and
+        ((data["TransponderMode"] != nil) or (data["TransponderCode"] != nil) or (data["TransponderIdent"] != nil))) {
+      # Transponder settings only change irregularly, so only redisplay on a change, and only if we are not currently
+      # editing the transponder code itself.
+      me.page.updateTransponder(me._transponder_mode, me._transponder_code, me._transponder_ident);
     }
 
     return emesary.Transmitter.ReceiptStatus_OK;
@@ -464,6 +491,98 @@ var PFDInstrumentsController =
       if (me.transmitter != nil)
         me.transmitter.DeRegister(me._pfdrecipient);
       me.transmitter = nil;
+  },
+
+  setTransponderMode : func(mode) {
+    var idx = -1;
+
+    # Find the matching index for the transponder mode string
+    for(var i = 0; i < size(TRANSPONDER_MODES); i +=1) {
+      if (mode == TRANSPONDER_MODES[i]) {
+        idx = i;
+        break;
+      }
+    }
+
+    if (idx == -1) {
+      print("Unable to find transponder mode " ~ mode);
+    } else {
+      me.sendNavComDataNotification({"TransponderMode" : idx});
+    }
+  },
+
+  setTransponderCode : func(code) {
+    me.sendNavComDataNotification({"TransponderCode" : code});
+  },
+
+  setTransponderIdent : func(ident) {
+    # IDNT is active for 18 seconds, so we set a timer to reset it.
+    me.sendNavComDataNotification({"TransponderIdent" : ident});
+
+    # Reset any edit of the transponder code.  Note that this also returns
+    # to the top level menu.  This is correct behaviour.
+    me.transponderEditCancel();
+
+    if (ident == 1) {
+      me.transponderIdentResetTimer.restart(18);
+    }
+  },
+
+  setTransponderDigit : func(digit) {
+    if (me._transponder_edit == 0) {
+      # If this is the first time we've pressed a digit button, then go to editing
+      # mode, and set the first digit of the display
+      me._transponder_edit = 1;
+
+      # Start the transponder edit timer so we will exit out of edit mode
+      me.transponderEditResetTimer.restart(45);
+
+
+      if (digit == "BKSP") {
+        me._transponder_edit_code = "";
+      } else {
+        me._transponder_edit_code = digit;
+      }
+
+      me.page.updateTransponder(me._transponder_mode, me._transponder_edit_code, me._transponder_ident, 1);
+    } else {
+      # Already in edit mode, so we need to append the newly entered number.
+      if (digit == "BKSP") {
+        # Trim off the last digit
+        me._transponder_edit_code = substr(me._transponder_edit_code, 0, size(me._transponder_edit_code) -1);
+      } else {
+        # append the new digit
+        me._transponder_edit_code = me._transponder_edit_code ~ digit;
+      }
+
+      if (size(me._transponder_edit_code) == 4) {
+        # We've now got 4 digits, so set it both centrally and locally
+        me.sendNavComDataNotification({"TransponderCode" : me._transponder_edit_code});
+        me._transponder_code = me._transponder_edit_code;
+        me.transponderEditCancel();
+      } else {
+        # Display the code so far entered.
+        me.page.updateTransponder(me._transponder_mode, me._transponder_edit_code, me._transponder_ident, 1);
+      }
+    }
+  },
+
+  transponderEditCancel : func() {
+    me._transponder_edit = 0;
+    me.transponderEditResetTimer.stop();
+    me.page.updateTransponder(me._transponder_mode, me._transponder_code, me._transponder_ident);
+    me.page.topMenu(me.page.device, me.page, nil);
+  },
+
+  # Helper function to notify the Emesary bridge of a NavComData update.
+  sendNavComDataNotification : func(data) {
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me._page.mfd.getDeviceID(),
+      notifications.PFDEventNotification.NavComData,
+      data);
+
+    me.transmitter.NotifyAll(notification);
   },
 
   # Reset controller if required when the page is displayed or hidden

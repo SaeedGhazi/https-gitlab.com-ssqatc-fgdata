@@ -70,6 +70,9 @@ var GenericNavComUpdater =
 
     obj.addPropMap("NavSelected", "/instrumentation/nav-selected");
 
+    obj.addPropMap("TransponderMode", "/instrumentation/transponder/inputs/knob-mode");
+    obj.addPropMap("TransponderIdent", "/instrumentation/transponder/inputs/ident-btn");
+    obj.addPropMap("TransponderCode", "/instrumentation/transponder/id-code");
 
     return obj;
   },

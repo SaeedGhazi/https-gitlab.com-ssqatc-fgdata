@@ -207,3 +207,8 @@ var ORIENTATIONS = [
   { label: "DTK UP" },
   { label: "HDG UP" },
 ];
+
+# Mapping from transponder mode integer values to transponder mode strings, as an array.
+# Index values can be found in http://wiki.flightgear.org/Transponder#Knob.2FFunctional_Modes
+# String values are menuitem labels on the PFD itself.
+var TRANSPONDER_MODES = [ "OFF", "STBY", "TEST", "GND", "ON", "ALT"];

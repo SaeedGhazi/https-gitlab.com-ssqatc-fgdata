@@ -999,7 +999,7 @@ SymbolLayer.Controller = {
 	addVisibilityListener: func() {
 		var m = me;
 		append(m.listeners, setlistener(
-			m.layer._node.getNode("visible"),
+			m.layer._node.getNode("visible",1),
 			func m.layer.update(),
 			#compile("m.layer.update()", "<layer visibility on node "~m.layer._node.getNode("visible").getPath()~" for layer "~m.layer.type~">"),
 			0,0
@@ -1461,7 +1461,7 @@ OverlayLayer.Controller = {
 	addVisibilityListener: func() {
 		var m = me;
 		append(m.listeners, setlistener(
-			m.layer._node.getNode("visible"),
+			m.layer._node.getNode("visible", 1),
 			func m.layer.update(),
 			#compile("m.layer.update()", "<layer visibility on node "~m.layer._node.getNode("visible").getPath()~" for layer "~m.layer.type~">"),
 			0,0

@@ -1,3 +1,14 @@
+#
+# FlightGear canvas gui
+# Namespace:    canvas
+#
+# Classes: 
+#   WindowButton
+#   Window
+#
+# see also api.nas
+
+
 var gui = {
   widgets: {},
   focused_window: nil,
@@ -99,15 +110,17 @@ var Window = {
     {
       var placements = me._canvas._node.getChildren("placement");
       # Do not remove canvas if other placements exist
-      if( size(placements) > 1 )
+      if( size(placements) > 1 ) {
         foreach(var p; placements)
         {
           if(     p.getValue("type") == "window"
               and p.getValue("id") == me.get("id") )
             p.remove();
         }
-      else
+      }
+      else {
         me._canvas.del();
+      }
       me._canvas = nil;
     }
     if (me._node != nil) {

@@ -49,7 +49,7 @@ DefaultStyle.widgets.button = {
   },
   setText: func(model, text)
   {
-    me._label.set("text", text);
+    me._label.setText(text);
 
     var min_width = math.max(80, me._label.maxWidth() + 16);
     model.setLayoutMinimumSize([min_width, 16]);
@@ -130,7 +130,7 @@ DefaultStyle.widgets.checkbox = {
   },
   setText: func(model, text)
   {
-    me._label.set("text", text);
+    me._label.setText(text);
 
     var min_width = me._label.maxWidth() + 24;
     model.setLayoutMinimumSize([min_width, 18]);
@@ -203,7 +203,7 @@ DefaultStyle.widgets.label = {
     }
 
     me._createElement("text", "text")
-      .set("text", text);
+      .setText(text);
 
     var hfw_func = nil;
     var min_width = me._text.maxWidth() + 4;
@@ -330,7 +330,7 @@ DefaultStyle.widgets["line-edit"] = {
   },
   setText: func(model, text)
   {
-    me._text.set("text", text);
+    me._text.setText(text);
     model._onStateChange();
   },
   update: func(model)

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- FlightGear startup tips: Simplified Chinese language resource -->
+
+<!-- Style tips: Aim to keep to a single phrase/sentence which is not
+                 terminated with a . -->
+
+<!-- ###
+### This file is automatically synchronized with the master (=English language) resource.
+### Please do not add comments, change order or restructure the file.
+###
+### To translate:
+###    * Replace "???" entries with appropriate translation.
+###    * Keep untranslated items unmodified (leave the "???"). English original is the
+###      automatic default.
+###    * Remove enclosing "<!-_ ... _->" tags for completed translations.
+###    * Keep the original English text unmodified (the '<!-_ English: "..." -_>)',
+###      so we know which version of the English original the translation is based upon
+###      (and we can identify translations which need to be updated, when the original changes).
+###    * Replace "-_" occurences with a double "-" in all translations (XML does not allow
+###      consecutive "-" characters in comments).
+###
+### Last synchronized with English master resource on 2017-December-31 for FlightGear 2017.4.0
+### -->
+
+<PropertyList>
+	<tip n="0">在按住鼠标右键时滑动鼠标以观察四周</tip>   <!-- English: "Drag while holding the right mouse button to look around" -->
+	<tip n="1">在观察四周时按住 [Shift] 来将视角向上、下、左、右移动</tip>   <!-- English: "Hold [Shift] while looking around to move the view up, down, left or right" -->
+	<tip n="2">按下 a/A 来调整模拟器速度（倍速）</tip>   <!-- English: "Press a/A to adjust the simulation speed" -->
+	<tip n="3">按下 x/X 来放大或缩小</tip>   <!-- English: "Press x/X to zoom in and out" -->
+	<tip n="4">从 Radios 对话框可查询附近ATC频率</tip>   <!-- English: "Find frequencies of nearby ATC services from the Radios dialog" -->
+	<tip n="5">按下 v 来更换视角, 按下 Ctrl-V 可回到驾驶舱视角</tip>   <!-- English: "Press v to change your viewpoint, Ctrl-V to return to the cockpit" -->
+	<tip n="6">按下 F3 可以截图</tip>   <!-- English: "Press F3 to take a screenshot" -->
+	<tip n="7">欢迎加入FlightGear社区，网址为 http://forum.flightgear.org</tip>   <!-- English: "Join the FlightGear community at http://forum.flightgear.org" -->
+	<tip n="8">按下 h 来启用抬头显示器（HUD）</tip>   <!-- English: "Press h to bring up a Heads Up Display" -->
+	<tip n="9">按下 F10 来隐藏或显示菜单栏</tip>   <!-- English: "Show or hide the menu bar by pressing F10" -->
+	<tip n="10">帧率太低？ - 试试禁用AI交通</tip>   <!-- English: "Frame-rate too low? - try disabling AI traffic" -->
+	<tip n="11">选择 Environment → Weather 在不同天气条件下飞行</tip>   <!-- English: "Select Environment → Weather to fly in different weather" -->
+	<tip n="12">按下F12可轻易更换无线频率</tip>   <!-- English: "Press F12 to change the radio frequencies easily" -->
+	<tip n="13">在按住鼠标右键时滑动鼠标以观察四周</tip>   <!-- English: "Look around by holding down the right mouse button and moving the mouse" -->
+	<tip n="14">选择 Multiplayer → Multiplayer Settings 来加入联机飞行</tip>   <!-- English: "Select Multiplayer → Multiplayer Settings to join the shared flight environment" -->
+	<tip n="15">不知如何启动引擎？ - 查看 Help → Aircraft Checklists</tip>   <!-- English: "Can't get the engine started? - see Help → Aircraft Checklists" -->
+	<tip n="16">在按住鼠标右键与中键时滑动鼠标以移动观察点</tip>   <!-- English: "Drag while holding the middle and right mouse buttons to move the viewpoint" -->
+	<tip n="17">按下 / 来浏览FlightGear的内部属性</tip>   <!-- English: "Press / to explore the internals of the simulator" -->
+	<tip n="18">按下 Tab 后使用鼠标来移动观察点，并使用滚轮放大或缩小</tip>   <!-- English: "Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom" -->
+</PropertyList>

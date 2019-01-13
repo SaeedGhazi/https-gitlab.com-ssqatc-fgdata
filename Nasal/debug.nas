@@ -7,8 +7,12 @@
 # debug.local([<frame:int>])           ... dump local variables of current
 #                                          or given frame
 #
-# debug.backtrace([<comment:string>]}  ... writes backtrace with local variables
-#                                          (similar to gdb's "bt full)
+# debug.backtrace([<comment:string>], [<dump:bool=1>], [<skip_level:int=0>]}
+#                                      ... writes backtrace (similar to gdb's "bt full)
+#                                          dump=0: only call stack 
+#                                          dump=1 (default): with local variables 
+#                                          skip_level: remove this many levels from 
+#                                           call stack
 #
 # debug.proptrace([<property [, <frames>]]) ... trace property write/add/remove
 #                                          events under the <property> subtree for
@@ -264,15 +268,16 @@ var local = func(frame = 0) {
 }
 
 
-var backtrace = func(desc = nil) {
-	var d = desc == nil ? "" : " '" ~ desc ~ "'";
-	print("\n" ~ _title("\n### backtrace" ~ d ~ " ###"));
-	for (var i = 1; 1; i += 1) {
-		if ((var v = caller(i)) == nil)
-			return;
-		print(_section(sprintf("#%-2d called from %s, line %s:", i - 1, v[2], v[3])));
-		dump(v[0]);
-	}
+var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
+    var d = (desc == nil) ? "" : " '" ~ desc ~ "'";
+    print("");
+    print(_title("### backtrace" ~ d ~ " ###"));
+    skip_level += 1;
+    for (var i = skip_level; 1; i += 1) {
+        if ((var v = caller(i)) == nil) return;
+        print(_section(sprintf("#%-2d called from %s, line %s:", i - skip_level, v[2], v[3])));
+        if (dump_vars) dump(v[0]);
+    }
 }
 var bt = backtrace;
 
@@ -433,6 +438,79 @@ var isnan = func {
 	return !!size(err);
 }
 
+# Breakpoint (BP) - do conditional backtrace (BT) controlled via property tree
+# * count how often the BP was hit
+# * do only a limited number of BT, avoid flooding the log / console
+# 
+# Data can be viewed / modified in the prop tree /_debug/nas/bp-<myLabel>/*
+# * tokens: number of backtraces to do; each hit will decrease this by 1
+# * hits:   total number of hits
+#
+# == Example == 
+# var myBP = debug.Breakpoint.new("myLabel", 0);
+# myBP.enable(4);       # allow 4 hits, then be quiet 
+# 
+# #at the place of interest (e.g. in some loop or class method) insert:
+# myBP.hit();  # do backtrace here if tokens > 0, reduce tokens by 1
+# 
+# print(myBP.getHits()); # print total number of hits
+#
+var Breakpoint = {
+    # label:       Used in property path and as text for backtrace.
+    # dump_locals: bool passed to backtrace. Dump variables in BT.
+    new: func(label, dump_locals = 1) {
+        var obj = {
+            parents: [Breakpoint],
+            _tokensN: nil,
+            tokens: 0,
+            _hitsN: nil,
+            hits: 0,
+            label: "",
+            dump_locals: num(dump_locals),
+        };
+        label = globals.string.replace(label, " ", "_");
+        obj.label = globals.string.replace(label, "/", "_");
+        var prop_path = "/_debug/nas/bp-"~obj.label~"/";
+        obj._tokensN = props.globals.getNode(prop_path~"token", 1);
+        obj._hitsN = props.globals.getNode(prop_path~"hits", 1);
+        obj._hitsN.setIntValue(0);
+        obj.disable();
+        return obj;
+    },
+    
+    # enable BP and set hit limit; 
+    # tokens: int > 0; default: 1 (single shot); 0 allowed (=disable); 
+    enable: func(tokens = 1) {
+        if (num(tokens) == nil) tokens = 1;
+        if (tokens < 0) tokens = 0;
+        me.tokens = tokens;
+        me._tokensN.setIntValue(tokens);
+        return me;
+    },
+    
+    # set tokens to zero, disables backtrace in hit()
+    disable: func {
+        me._tokensN.setIntValue(0);
+        return me;
+    },
+    
+    # get total number of hits (not #backtraces done)
+    getHits: func {
+        return me.hits;
+    },
+    
+    # hit the breakpoint, e.g. do backtrace if we have tokens available
+    hit: func() {
+        me.hits += 1;
+        me._hitsN.setIntValue(me.hits);
+        me.tokens = me._tokensN.getValue();
+        if (me.tokens > 0) {
+            debug.backtrace(me.label, me.dump_locals, 1);
+            me._tokensN.setValue(me.tokens - 1);
+        }
+        return me;
+    },
+};
 
 # --prop:debug=1 enables debug mode with additional warnings
 #

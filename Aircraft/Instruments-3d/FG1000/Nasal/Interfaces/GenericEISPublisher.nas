@@ -18,11 +18,11 @@
 var GenericEISPublisher =
 {
 
-  new : func (frequency=0.25) {
+  new : func (period=0.25) {
     var obj = {
       parents : [
         GenericEISPublisher,
-        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.EngineData, frequency)
+        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.EngineData, period)
       ],
     };
 

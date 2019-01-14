@@ -200,6 +200,15 @@ var AirportInfoController =
     }
   },
 
+  handleStringInput : func(value) {
+    me.selectAirport();
+    me.page.airportEntry.clearElement();
+    me.page.airportEntry.setValue(value);
+    me.setAirport(value);
+    me.page.resetCRSR();
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();

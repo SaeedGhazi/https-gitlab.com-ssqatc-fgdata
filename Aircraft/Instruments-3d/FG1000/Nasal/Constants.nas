@@ -151,7 +151,9 @@ var FASCIA = {
   # GDU 1045 Autopilot keys
   YD : 46,
 
-
+  # Useability helpers to avoid having to use the FMS knobs to spell airport IDs etc.
+  KEY_INPUT : 47,
+  STRING_INPUT: 48,
 };
 
 var SURFACE_TYPES = {

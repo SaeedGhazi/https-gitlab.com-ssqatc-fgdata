@@ -45,11 +45,11 @@ var PropMap = {
 
 var PeriodicPropertyPublisher =
 {
-  new : func (notification, frequency=0.25) {
+  new : func (notification, period=0.25) {
     var obj = {
       parents : [ PeriodicPropertyPublisher ],
       _notification : notification,
-      _frequency : frequency,
+      _period : period,
       _propmaps : [],
     };
 
@@ -80,7 +80,7 @@ var PeriodicPropertyPublisher =
   },
 
   start : func() {
-    me._timer = maketimer(me._frequency, me, me.publish);
+    me._timer = maketimer(me._period, me, me.publish);
     me._timer.start();
   },
   stop : func() {
@@ -91,11 +91,11 @@ var PeriodicPropertyPublisher =
 
 var TriggeredPropertyPublisher =
 {
-  new : func (notification, frequency=5) {
+  new : func (notification, period=5) {
     var obj = {
       parents : [ TriggeredPropertyPublisher ],
       _notification : notification,
-      _frequency : frequency,
+      _period : period,
       _propmaps : {},
       _listeners : [],
       _timer: nil,
@@ -153,7 +153,7 @@ var TriggeredPropertyPublisher =
       append(me._listeners, listener);
     }
 
-    me._timer = maketimer(me._frequency, me, me.publishAll);
+    me._timer = maketimer(me._period, me, me.publishAll);
     me._timer.start();
   },
 

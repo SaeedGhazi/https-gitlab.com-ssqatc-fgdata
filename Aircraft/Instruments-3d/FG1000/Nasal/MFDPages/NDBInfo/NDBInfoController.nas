@@ -127,9 +127,18 @@ var NDBInfoController =
     me._page.update(navdata, aptdata);
   },
 
+  handleStringInput : func(value) {
+    me._page.dataEntry.clearElement();
+    me._page.dataEntry.setValue(value);
+    me.getNDB(value);
+    me._page.dataEntry.unhighlightElement();
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();
+    if (me._page.dataEntry.getValue() != "") me.getNDB(me._page.dataEntry.getValue());
   },
   offdisplay : func() {
     me.DeRegisterWithEmesary();

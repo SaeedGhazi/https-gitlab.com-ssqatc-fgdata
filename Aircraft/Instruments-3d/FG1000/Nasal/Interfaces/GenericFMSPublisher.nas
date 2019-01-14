@@ -19,7 +19,7 @@
 var GenericFMSPublisher =
 {
 
-  new : func (frequency=0.5) {
+  new : func (period=0.5) {
     var obj = {
       parents : [
         GenericFMSPublisher,
@@ -34,7 +34,7 @@ var GenericFMSPublisher =
     #
     # 2) a periodic publisher which triggers every 0.5s to update data values.
     obj._triggeredPublisher = TriggeredPropertyPublisher.new(notifications.PFDEventNotification.FMSData);
-    obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FMSData, frequency);
+    obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FMSData, period);
 
     obj._triggeredPublisher.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
     obj._triggeredPublisher.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");

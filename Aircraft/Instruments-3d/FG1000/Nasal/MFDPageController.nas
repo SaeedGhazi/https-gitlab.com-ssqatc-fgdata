@@ -101,6 +101,9 @@ handleEnter : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcess
 handleAltOuter  : func (value) { return me.page.mfd.SurroundController.handleAltOuter(value); },
 handleAltInner : func (value) { return me.page.mfd.SurroundController.handleAltInner(value); },
 
+handleKeyInput : func (value) { return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+handleStringInput : func (value) { print("Not handling " ~ value); return emesary.Transmitter.ReceiptStatus_NotProcessed; },
+
 RegisterWithEmesary : func()
 {
   if (me._recipient == nil){
@@ -163,6 +166,9 @@ RegisterWithEmesary : func()
 
           if (id == fg1000.FASCIA.ALT_OUTER)   return controller.handleAltOuter(value);
           if (id == fg1000.FASCIA.ALT_INNER)   return controller.handleAltInner(value);
+
+          if (id == fg1000.FASCIA.KEY_INPUT)   return controller.handleKeyInput(value);
+          if (id == fg1000.FASCIA.STRING_INPUT)   return controller.handleStringInput(value);
 
           # Autopilot controls - ignore for now as like to be handled elsewhere
           #if (id == fg1000.FASCIA.AP )   return controller.handle(value);

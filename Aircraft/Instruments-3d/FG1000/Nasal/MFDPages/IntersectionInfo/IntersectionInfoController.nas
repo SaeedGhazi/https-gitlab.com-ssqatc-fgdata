@@ -125,9 +125,18 @@ var IntersectionInfoController =
     me._page.update(navdata, vordata);
   },
 
+  handleStringInput : func(value) {
+    me._page.dataEntry.clearElement();
+    me._page.dataEntry.setValue(value);
+    me.getIntersection(value);
+    me._page.dataEntry.unhighlightElement();
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();
+    if (me._page.dataEntry.getValue() != "") me.getIntersection(me._page.dataEntry.getValue());
   },
   offdisplay : func() {
     me.DeRegisterWithEmesary();

@@ -226,7 +226,7 @@ var WaypointEntryController =
       me.page.WaypointSubmenuGroup.setVisible(0);
       me._waypointSubmenuVisible = 0;
     } else if (me.page.IDEntry.isInEdit()) {
-      # If we're editing an element, complete the data entry, the load it.
+      # If we're editing an element, complete the data entry, then load it.
       me.page.IDEntry.enterElement();
       me.loadDestination(me.page.IDEntry.getValue());
     } else {
@@ -256,6 +256,14 @@ var WaypointEntryController =
       me._wpentry_displayed = 0;
       me.page.offdisplay();
     }
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
+  handleStringInput : func(value) {
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    me.page.IDEntry.clearElement();
+    me.page.IDEntry.setValue(value);
+    me.loadDestination(me.page.IDEntry.getValue());
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 

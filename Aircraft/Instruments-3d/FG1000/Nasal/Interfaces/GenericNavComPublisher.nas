@@ -22,7 +22,7 @@
 #
 var GenericNavComPublisher =
 {
-  new : func (frequency=0.5) {
+  new : func (period=0.5) {
     var obj = {
       parents : [
         GenericNavComPublisher,
@@ -37,7 +37,7 @@ var GenericNavComPublisher =
     # 2) a periodic publisher which triggers every 0.5s to update data values.
 
     obj._triggeredPublisher = TriggeredPropertyPublisher.new(notifications.PFDEventNotification.NavComData);
-    obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.NavComData, frequency);
+    obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.NavComData, period);
 
     # Hack to handle cases where there is no selected Com or NAV frequency
     if (getprop("/instrumentation/com-selected") == nil) setprop("/instrumentation/com-selected", 1);

@@ -501,7 +501,7 @@
 			<binding>
 				<command>property-toggle</command>
 				<property>/sim/rendering/wireframe</property>
-			
+
 			</binding>
 		</key>
 

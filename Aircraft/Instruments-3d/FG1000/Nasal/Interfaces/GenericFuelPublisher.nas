@@ -18,15 +18,15 @@
 var GenericFuelPublisher =
 {
 
-  new : func (frequency=1.0) {
+  new : func (period=1.0) {
     var obj = {
       parents : [
         GenericFuelPublisher,
-        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FuelData, frequency)
+        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FuelData, period)
       ],
     };
 
-    obj.deltaT = frequency;
+    obj.deltaT = period;
 
 
     # Hack to handle most aircraft not having proper engine hours

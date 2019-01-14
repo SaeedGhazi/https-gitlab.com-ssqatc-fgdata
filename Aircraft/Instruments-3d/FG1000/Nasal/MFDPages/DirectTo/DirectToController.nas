@@ -303,6 +303,24 @@ var DirectToController =
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
+  handleStringInput : func(value) {
+    if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (me._waypointSubmenuVisible) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+
+    if (me._cursorElements[me._selectedElement].isEditable()) {
+      # Cancel any editing
+      me._cursorElements[me._selectedElement].clearElement();
+
+      # Set the new value
+      me._cursorElements[me._selectedElement].setValue(value);
+
+      # Also cause any enter-handling
+      me.handleEnter(1);
+    }
+
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   # Reset controller if required when the page is displayed or hidden
   # Note that we explicitly do NOT RegisterWithEmesary/DeRegisterWithEmesary!
   # This page should RegisterWithEmesary at start of day instead.

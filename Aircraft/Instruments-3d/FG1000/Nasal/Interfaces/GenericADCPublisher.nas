@@ -32,12 +32,12 @@ var GenericADCPublisher =
 
     # Update frequency can be controlled by a property.
     var frequency = getprop("/instrumentation/FG1000/adc-update-frequency");
-    if (frequency == nil) frequency = 0.1;
+    if (frequency == nil) frequency = 10;
 
     var obj = {
       parents : [
         GenericADCPublisher,
-        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.ADCData, frequency)
+        PeriodicPropertyPublisher.new(notifications.PFDEventNotification.ADCData, 1.0/frequency)
       ],
     };
 

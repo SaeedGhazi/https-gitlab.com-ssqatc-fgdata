@@ -1,7 +1,7 @@
 ###########################################################################
 # simulation of a faraway orbital target (needs handover to spacecraft-specific 
 # code for close range)
-# Thorsten Renk 2016
+# Thorsten Renk 2016 - 2019
 ###########################################################################
 
 var orbitalTarget = {
@@ -17,14 +17,21 @@ var orbitalTarget = {
 		t.l_vec = [math.sin(t.inc_rad), 0.0, math.cos(t.inc_rad)];
 		t.node_longitude = node_longitude;
 		t.nl_rad = t.node_longitude * math.pi/180.0;
+		t.initial_nl_rad = t.nl_rad;
 		var l_tmp = t.l_vec[0];
 		t.l_vec[0] = -math.sin(t.nl_rad) * l_tmp;
 		t.l_vec[1] = math.cos(t.nl_rad) * l_tmp;
 		t.anomaly = anomaly;
 		t.anomaly_rad = t.anomaly * math.pi/180.0;
+		t.initial_anomaly_rad = t.anomaly_rad;
 		t.delta_lon = 0.0;
 		t.update_time = 0.1;
 		t.running_flag = 0;
+		t.elapsed_time = 0.0;
+
+		t.node_drift = -4361.26 * 1./math.pow(t.radius/1000.0 ,2.0) * math.cos(t.inc_rad); 
+			
+		print ("Drift rate: ", t.node_drift);
 		return t;
 	},
 
@@ -62,33 +69,90 @@ var orbitalTarget = {
 			}
 		me.anomaly = me.anomaly_rad * 180.0/math.pi;
 		me.delta_lon = me.delta_lon + dt * 0.00418333333333327;
+		me.node_longitude = me.node_longitude + me.node_drift * dt;
+		me.nl_rad = me.node_longitude * math.pi/180.0;
 	},
 	get_inertial_pos: func {
 
-		# movement around equatorial orbit
-		var x = me.radius * math.cos(me.anomaly_rad);
-		var y = me.radius * math.sin(me.anomaly_rad);
-		var z = 0;
-	
-		# tilt with inclination
-		z = y * math.sin(me.inc_rad);
-		y = y * math.cos(me.inc_rad);
+		return me.compute_inertial_pos(me.anomaly_rad, me.nl_rad);
 
-
-		# rotate with node longitude
-
-		var xp = x * math.cos(me.nl_rad) - y * math.sin(me.nl_rad);
-		var yp = x * math.sin(me.nl_rad) + y * math.cos(me.nl_rad); 
-
-		return [xp, yp, z];
 	},
-	get_future_inertial_pos: func (time) {
 
-		var anomaly_rad = me.anomaly_rad + time/me.period * 2.0 * math.pi;
+	get_inertial_pos_at_time: func (time) {
+
+		var anomaly_rad = me.initial_anomaly_rad + time/me.period * 2.0 * math.pi;
 		while (anomaly_rad > 2.0 * math.pi)
 			{
 			anomaly_rad = anomaly_rad - 2.0 * math.pi;
 			}
+
+		var nl_rad = me.initial_nl_rad + me.node_drift * time * math.pi/180.0;
+
+		return me.compute_inertial_pos(anomaly_rad, nl_rad);
+
+	},
+
+
+
+	get_inertial_speed: func () {
+
+		# obtain via numerical discretization from two points
+	
+		var anomaly_rad = me.anomaly_rad;
+		while (anomaly_rad > 2.0 * math.pi)
+			{
+			anomaly_rad = anomaly_rad - 2.0 * math.pi;
+			}
+
+		var pos1 = me.compute_inertial_pos(anomaly_rad, me.nl_rad);
+
+		anomaly_rad = me.anomaly_rad + 0.1/me.period * 2.0 * math.pi;
+		while (anomaly_rad > 2.0 * math.pi)
+			{
+			anomaly_rad = anomaly_rad - 2.0 * math.pi;
+			}
+
+		var pos2 = me.compute_inertial_pos(anomaly_rad, me.nl_rad);
+
+		var vx = (pos2[0] - pos1[0])/0.1;
+		var vy = (pos2[0] - pos1[0])/0.1;
+		var vz = (pos2[0] - pos1[0])/0.1;
+
+		return [vx, vy, vz];
+	},
+
+	get_inertial_speed_at_time: func (time) {
+
+		# obtain via numerical discretization from two points
+	
+		var anomaly_rad = me.initial_anomaly_rad + time/me.period * 2.0 * math.pi;
+		while (anomaly_rad > 2.0 * math.pi)
+			{
+			anomaly_rad = anomaly_rad - 2.0 * math.pi;
+			}
+
+		var nl_rad = me.initial_nl_rad + me.node_drift * time * math.pi/180.0;
+		var pos1 = me.compute_inertial_pos(anomaly_rad, nl_rad);
+
+		anomaly_rad = me.initial_anomaly_rad + (time + 0.1)/me.period * 2.0 * math.pi;
+		while (anomaly_rad > 2.0 * math.pi)
+			{
+			anomaly_rad = anomaly_rad - 2.0 * math.pi;
+			}
+
+		nl_rad = me.initial_nl_rad + me.node_drift * (time+0.1) * math.pi/180.0;
+		var pos2 = me.compute_inertial_pos(anomaly_rad, nl_rad);
+
+		var vx = (pos2[0] - pos1[0])/0.1;
+		var vy = (pos2[0] - pos1[0])/0.1;
+		var vz = (pos2[0] - pos1[0])/0.1;
+
+		return [vx, vy, vz];
+	},
+
+
+
+	compute_inertial_pos: func (anomaly_rad, nl_rad) {
 
 		# movement around equatorial orbit
 		var x = me.radius * math.cos(anomaly_rad);
@@ -99,13 +163,28 @@ var orbitalTarget = {
 		z = y * math.sin(me.inc_rad);
 		y = y * math.cos(me.inc_rad);
 
+
 		# rotate with node longitude
 
-		var xp = x * math.cos(me.nl_rad) - y * math.sin(me.nl_rad);
-		var yp = x * math.sin(me.nl_rad) + y * math.cos(me.nl_rad); 
+		var xp = x * math.cos(nl_rad) - y * math.sin(nl_rad);
+		var yp = x * math.sin(nl_rad) + y * math.cos(nl_rad); 
+
+		# this is a good bit of trickery to capture leading J3 dynamics
+
+		var corr_200 = 	-2.6e-5 * me.inclination + 1.00321;
+		
+		var corr = corr_200 * (1.0 + (me.altitude/1000.0-200.0) * 6e-7);
+		
+		corr = 1.0 + (0.64 * (corr -1.0));
+		#print ("Corr200 is now:", corr_200);
+		#print ("Corr is now:", corr);
+		#print ("Altitude: ", me.altitude);
+		z /= corr;
 
 		return [xp, yp, z];
+
 	},
+
 	get_latlonalt: func {
 
 		var coordinates = geo.Coord.new();
@@ -120,6 +199,7 @@ var orbitalTarget = {
 		if (me.running_flag == 1) {return;}
 		me.running_flag = 1;
 		me.run();
+
 	},
 	stop: func {
 		me.running_flag = 0;

@@ -70,6 +70,10 @@
         setprop("/sim/gui/dialogs/airports/display-tower", "1");
       }
 
+      if (getprop("/sim/gui/dialogs/airports/show-helipads") == "") {
+        setprop("/sim/gui/dialogs/airports/show-helipads", "1");
+      }
+
       # Start with the closest airport
       var airport_id = airportinfo().id;
 
@@ -288,10 +292,6 @@
             <command>dialog-apply</command>
             <object-name>input</object-name>
           </binding>
-          <binding>
-            <command>dialog-update</command>
-            <object-name>airport-list</object-name>
-          </binding>
         </input>
 
 <!--
@@ -331,6 +331,32 @@
             <object-name>input</object-name>
           </binding>
           <binding>
+            <command>nasal</command>
+            <script>
+              var apt_type = "airport:";
+              var heli_type = "heliport:";
+              var search_term = getprop("/sim/gui/dialogs/airports/list");
+
+              # strip off airport type prefix
+              if (string.match(search_term,heli_type)) {
+                search_term = string.substr(search_term,size(heli_type));
+              }
+              else if (string.match(search_term,apt_type)) {
+                search_term = string.substr(search_term,size(apt_type));
+              }
+              var new_value = "";
+
+              # add new airport type prefix based off helipad checkbox
+              if (getprop("/sim/gui/dialogs/airports/show-helipads")) {
+                new_value = heli_type ~ search_term;
+              }
+              else {
+                new_value = apt_type ~ search_term;
+              }
+              setprop("/sim/gui/dialogs/airports/list", new_value);
+            </script>
+          </binding>
+          <binding>
             <command>dialog-update</command>
             <object-name>airport-list</object-name>
           </binding>
@@ -346,7 +372,12 @@
           <binding>
             <command>nasal</command>
             <script>
-              var airports = findAirportsWithinRange(100);
+              # change airport type to heliport if checkbox is set
+              var apt_type = "airport";
+              if (getprop("/sim/gui/dialogs/airports/show-helipads")) {
+                 apt_type = "heliport";
+              }
+              var airports = findAirportsWithinRange(100,apt_type);
 
               var list = dlg.getNode("close-airports", 1);
 
@@ -362,6 +393,16 @@
             <object-name>close-airport-list</object-name>
           </binding>
         </button>
+
+        <checkbox>
+          <name>show-helipads</name>
+          <label>Helipads</label>
+          <property>/sim/gui/dialogs/airports/show-helipads</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>show-helipads</object-name>
+          </binding>
+        </checkbox>
 
       </group>
 

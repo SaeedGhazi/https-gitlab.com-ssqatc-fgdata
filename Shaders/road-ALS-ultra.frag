@@ -6,7 +6,7 @@
 // ported to Atmospheric Light Scattering 
 // by Thorsten Renk, 2013
 // changes for road and traffic rendering
-// by Thorsten Renk 2017
+// by Thorsten Renk 2017 -2019
 #version 120
 
 varying	vec3 	VBinormal;
@@ -22,8 +22,9 @@ varying	float	alpha;
 uniform sampler2D BaseTex;
 uniform sampler2D NormalTex;
 uniform sampler2D ReflMapTex;
+uniform sampler2D CarTex;
+uniform sampler2D CarMetaTex;
 uniform sampler2D ReflGradientsTex;
-uniform sampler3D ReflNoiseTex;
 uniform samplerCube Environment;
 uniform sampler2D GrainTex;
 
@@ -76,7 +77,6 @@ uniform float snowlevel;
 uniform float snow_thickness_factor;
 
 uniform float osg_SimulationTime;
-uniform mat4 osg_ViewMatrix;
 
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
@@ -112,7 +112,6 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 vec3 addLights(in vec3 color1, in vec3 color2);
-vec3 moonlight_perception (in vec3 light);
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -192,8 +191,8 @@ void main (void)
     vec4 texel      = texture2D(BaseTex, gl_TexCoord[0].st);
     vec4 nmap       = texture2D(NormalTex, gl_TexCoord[0].st * nmap_tile);
     vec4 reflmap    = texture2D(ReflMapTex, gl_TexCoord[0].st);
-    vec4 noisevec   = texture3D(ReflNoiseTex, rawpos.xyz);
-
+	vec4 noisevec = vec4 (1.0, 1.0, 1.0, 1.0);
+	
     vec4 grainTexel; 
 
     vec3 mixedcolor;
@@ -217,14 +216,13 @@ void main (void)
     ///some generic light scattering parameters 
     vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
-    moonLightColor = moonlight_perception (moonLightColor);	
     float alt = eye_alt; 					
     float effective_scattering = min(scattering, cloud_self_shading);
 
 
     /// BEGIN geometry for light
 
-    vec3 up = (osg_ViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
+    vec3 up = (gl_ModelViewMatrix * vec4(0.0,0.0,1.0,0.0)).xyz;
 	
 	vec3 nVertVec = normalize(vertVec);
 
@@ -347,6 +345,8 @@ void main (void)
 	float cSign = 1.0;
 	float total_traffic_density = 0.0;
 
+	vec4 carMetaTexel;
+	
 	if (road_traffic_enabled == 1)
 		{
 		float cOffset = 0.0;
@@ -377,6 +377,12 @@ void main (void)
 		float cColorRnd = (cRnd - 1.0 + cDisc)/ max(cDisc, 0.05);
 		float cColorRnd2 =  rand2D(vec2 (cDomain, 0.5));
 
+		float cColumn =  (cColorRnd2 * 16.0) - fract(cColorRnd2 * 16.0);
+		float cRow =  (rand2D(vec2 (cDomain, 1.5)) * 2.0);
+		cRow = cRow- fract(cRow);
+		//cRow = 0.0;
+
+		
 		vec3 cColor = vec3 (0.8 * (1.0 - cColorRnd), 0.8 * 2.0 * (0.5 - abs(cColorRnd - 0.5)) , 0.8 * cColorRnd);
 		cColor *= cColorRnd2;
 
@@ -384,11 +390,25 @@ void main (void)
 		if (cSign > 0.0) {cPos = 1.0 - cPos;}
 		float cShape = smoothstep(0.0, 0.05, cPos) * (1.0-smoothstep(0.35, 0.4, cPos));
 		
+		float ctPos;
+		if (roadCoords.s < 0.5)
+			{ctPos  = clamp(5.0 * (roadCoords.s - 0.25), 0.0,1.0); }
+		else	
+			{ctPos  = clamp(5.0 * (roadCoords.s - 0.65), 0.0,1.0); }
+			
+		float clPos = cPos;// + 0.45;	
+		
+		vec4 carTexel = texture2D(CarTex, vec2((ctPos + cColumn) / 16.0 , ((clPos + cRow) / 2.0) ));
+		carMetaTexel = texture2D(CarMetaTex, vec2((ctPos + cColumn) / 16.0 , ((clPos + cRow) / 2.0) ));
+		
+		
 		float laneShape =  smoothstep(0.25, 0.28, roadCoords.s) * (1.0-smoothstep(0.42, 0.45, roadCoords.s));
 		laneShape += smoothstep(0.65, 0.68, roadCoords.s) * (1.0-smoothstep(0.82, 0.85, roadCoords.s));
 		cShape *= laneShape;
 
-		texel.rgb = mix(texel.rgb, cColor, cPresent * cShape); 
+		//texel.rgb = mix(texel.rgb, cColor, cPresent * cShape); 
+		texel.rgb = mix(texel.rgb, carTexel.rgb, cPresent * carTexel.a * laneShape); 
+		//texel.rgb = mix(texel.rgb, vec3 (1.0, 0.0, 0.0) * cColorRnd2, 0.3);
 		}
 
 
@@ -419,15 +439,19 @@ void main (void)
     vec4 fresnel = texture2D(ReflGradientsTex, vec2(v, 0.75));
     vec4 rainbow = texture2D(ReflGradientsTex, vec2(v, 0.25));
 
-    float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
-    //float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz))); 
+    //float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
+    
+	
+	float nDotVP = max(0.0, dot(N, normalize(gl_LightSource[0].position.xyz)));
+	
+	//float nDotHV = max(0.0, dot(N, normalize(gl_LightSource[0].halfVector.xyz))); 
     float nDotHV = max(0.0, dot(N,HV));
     //glare on the backside of tranparent objects
-    if ((gl_FrontMaterial.diffuse.a < 1.0 || texel.a < 1.0)
-        && dot(N, normalize(gl_LightSource[0].position.xyz)) < 0.0) {
-            nDotVP = max(0.0, dot(-N, normalize(gl_LightSource[0].position.xyz)) * (1.0 -texel.a) );
-            nDotHV = max(0.0, dot(-N, HV) * (1.0 -texel.a) );
-        }
+    //if ((gl_FrontMaterial.diffuse.a < 1.0 || texel.a < 1.0)
+     //   && dot(N, normalize(gl_LightSource[0].position.xyz)) < 0.0) {
+     //       nDotVP = max(0.0, dot(-N, normalize(gl_LightSource[0].position.xyz)) * (1.0 -texel.a) );
+     //       nDotHV = max(0.0, dot(-N, HV) * (1.0 -texel.a) );
+     //   }
 
     float nDotVP1 = 0.0;
     float nDotHV1 = 0.0;
@@ -480,6 +504,7 @@ void main (void)
     vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,nVertVec)),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
+	
     //vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
     vec4 color = Diffuse;// * gl_FrontMaterial.diffuse;
 
@@ -627,38 +652,56 @@ void main (void)
 		float viewAngleFactor = smoothstep(-0.05, 0.0, cSign * dot(normalize(VBinormal), nVertVec));
 
 		vec3 pCLColor = vec3 (0.95, 1.0, 1.0);
+		vec3 pTLColor = vec3 (0.95, 0.0, 0.0);
+
 		
 		// mean illumination by car headlights
 		pLMColor = pLMColor + 0.2 * min(1.0,total_traffic_density) * pCLColor;
 		
-		float pCLIntensity = smoothstep(0.4, 0.6, cTag) * (1.0-smoothstep(0.6, 0.8, cTag));
-		float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
-		laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
-		laneFact += smoothstep(0.65, 0.7, roadCoords.s) * (1.0-smoothstep(0.7, 0.75, roadCoords.s));
-		laneFact += smoothstep(0.75, 0.8, roadCoords.s) * (1.0-smoothstep(0.8, 0.85, roadCoords.s));
-		pCLIntensity = pCLIntensity * laneFact * cPresent;
-
-		pCLColor *= pCLIntensity;
-		pCLColor *= (0.7 + 0.3 * viewAngleFactor);
-		
-		
-		vec3 pTLColor = vec3 (0.95, 0.0, 0.0);
-		float pTLIntensity;
-
-		if (cSign == 1.0) 
-			{
-			pTLIntensity = smoothstep(0.9, 0.94, cTag) * (1.0-smoothstep(0.96, 1.0, cTag));
-			}
-		else
-			{
-			pTLIntensity = smoothstep(0.0, 0.04, cTag) * (1.0-smoothstep(0.06, 0.1, cTag));			
-			}
-			
-			
-			
-		pTLIntensity = pTLIntensity * laneFact * cPresent * (1.0 - viewAngleFactor);
+		//float pCLIntensity = smoothstep(0.4, 0.6, cTag) * (1.0-smoothstep(0.6, 0.8, cTag));
+		//float laneFact = smoothstep(0.25, 0.3, roadCoords.s) * (1.0-smoothstep(0.3, 0.35, roadCoords.s));
+		//laneFact += smoothstep(0.35, 0.4, roadCoords.s) * (1.0-smoothstep(0.4, 0.45, roadCoords.s));
+		//laneFact += smoothstep(0.65, 0.7, roadCoords.s) * (1.0-smoothstep(0.7, 0.75, roadCoords.s));
+		//laneFact += smoothstep(0.75, 0.8, roadCoords.s) * (1.0-smoothstep(0.8, 0.85, roadCoords.s));
+		//pCLIntensity = pCLIntensity * laneFact * cPresent;
 	
-		pCLColor = pCLColor + pTLColor * pTLIntensity;
+			
+		float pCLIntensity, pTLIntensity;
+		if (cSign == -1.0) 
+			{
+			pCLIntensity = carMetaTexel.r * cPresent * smoothstep(0.45, 0.55, cTag) * viewAngleFactor ;
+			pCLIntensity += 0.85 * carMetaTexel.b * cPresent * smoothstep(0.45, 0.55, cTag);
+			pTLIntensity = carMetaTexel.r * cPresent * (1.0 - smoothstep(0.45, 0.55, cTag)) * (1.0 - viewAngleFactor);
+			pTLIntensity += 0.85 * carMetaTexel.b * cPresent *  (1.0 - smoothstep(0.45, 0.55, cTag));
+
+			}
+		else	
+			{
+			pCLIntensity = carMetaTexel.r * cPresent * (1.0 - smoothstep(0.45, 0.55, cTag)) *viewAngleFactor ;
+			pCLIntensity += 0.85 * carMetaTexel.b * cPresent * (1.0 - smoothstep(0.45, 0.55, cTag));
+			pTLIntensity = carMetaTexel.r * cPresent * smoothstep(0.45, 0.55, cTag) * (1.0 - viewAngleFactor);	
+			pTLIntensity += 0.85 * carMetaTexel.b * cPresent *  smoothstep(0.45, 0.55, cTag);			
+			}
+		
+		//pCLColor *= pCLIntensity;
+		
+		
+
+		//if (cSign == 1.0) 
+		//	{
+		//	pTLIntensity = smoothstep(0.9, 0.94, cTag) * (1.0-smoothstep(0.96, 1.0, cTag));
+		//	}
+		//else
+		//	{
+		//	pTLIntensity = smoothstep(0.0, 0.04, cTag) * (1.0-smoothstep(0.06, 0.1, cTag));			
+		//	}
+			
+			
+			
+		//pTLIntensity = pTLIntensity * laneFact * cPresent * (1.0 - viewAngleFactor);
+	
+	
+		pCLColor = pCLColor * pCLIntensity + pTLColor * pTLIntensity;
 		
 
 		pLMColor = clamp(pLMColor, 0.0, 1.0);
@@ -819,7 +862,7 @@ void main (void)
       fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
       fragColor.rgb = filter_combined(fragColor.rgb);
-
+	  
       gl_FragColor = fragColor;
 		
     }

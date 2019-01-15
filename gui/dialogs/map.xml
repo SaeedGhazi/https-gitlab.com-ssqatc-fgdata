@@ -85,6 +85,19 @@ command interface /autopilot/route-manager/input:
             </text>
 
             <checkbox>
+                <label>Heliports</label>
+                <halign>left</halign>
+                <property>/gui/map/draw-heliports</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
                 <label>Fixes</label>
                 <halign>left</halign>
                 <property>/gui/map/draw-fixes</property>

@@ -44,11 +44,7 @@ command interface /autopilot/route-manager/input:
 
             var insert = func {
                 var insertIndex = sel_index();
-                if (insertIndex < 0) {
-                    var msg = "Select the waypoint after which new waypoints should be added";
-                    setprop("sim/messages/copilot", msg);
-                    return;
-                }
+                var appending = (insertIndex < 0);
 
                 # Input is a list of space-separated waypoint specifications
                 var argv = split(" ", input.getValue());
@@ -56,8 +52,12 @@ command interface /autopilot/route-manager/input:
                     # When argument is not empty (caused by multiple space
                     # separators) insert *after* waypoint
                     if (size(arg) > 0) {
-                        insertIndex += 1;
-                        cmd.setValue("@insert" ~ insertIndex ~ ":" ~ arg);
+                        if (appending) {
+                            cmd.setValue(arg);
+                        } else {
+                            insertIndex += 1;
+                            cmd.setValue("@insert" ~ insertIndex ~ ":" ~ arg);
+                        }
                     }
                 }
 

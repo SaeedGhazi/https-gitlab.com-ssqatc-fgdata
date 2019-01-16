@@ -92,6 +92,7 @@ var Window = {
   # Destructor
   del: func
   {
+    me._title.del();
     me.clearFocus();
 
     if( me["_canvas"] != nil )
@@ -288,9 +289,9 @@ var Window = {
 
       var suffix = me._focused ? "" : "-unfocused";
       me._title_bar_bg.set("fill", style.getColor("title" ~ suffix));
-      me._frame.set("stroke", style.getColor("title" ~ suffix));
-      me._title.set(       "fill", style.getColor("title-text" ~ suffix));
-      me._top_line.set(  "stroke", style.getColor("title-highlight" ~ suffix));
+      me._frame.setStroke(style.getColor("title" ~ suffix));
+      me._title.setColor(style.getColor("title-text" ~ suffix));
+      me._top_line.setStroke(style.getColor("title-highlight" ~ suffix));
 
       me.getCanvasDecoration()
         .data("focused", me._focused)
@@ -457,17 +458,15 @@ var Window = {
     button_close.listen("clicked", func me.del());
 
     # title
-    me._title = title_bar.createChild("text", "title")
-                         .set("alignment", "left-center")
-                         .set("character-size", 14)
-                         .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
-                         .setTranslation( int(x + 1.5 * w + 0.5),
-                                          int(y + 0.5 * h + 0.5) );
-
     var title = me.get("title", "Canvas Dialog");
+    me._title = title_bar.createChild("text", "title")
+        .setText(title)
+        .setAlignment("left-center")
+        .set("character-size", 14)
+        .setFont("LiberationFonts/LiberationSans-Bold.ttf")
+        .setTranslation(int(x + 1.5 * w + 0.5), int(y + 0.5 * h + 0.5));
+   
     me._node.getNode("title", 1).alias(me._title._node.getPath() ~ "/text");
-    me.set("title", title);
-
     title_bar.addEventListener("drag", func(e) me.move(e.deltaX, e.deltaY));
 
     me._resizeDecoration();
@@ -495,7 +494,7 @@ var Window = {
         .moveTo(border_radius - 2, 2)
         .lineTo(me.get("size[0]") - border_radius + 2, 2);
   }
-};
+}; #Window
 
 # Clear focus on click outside any window
 getDesktop().addEventListener("mousedown", func {

@@ -659,12 +659,15 @@ command interface /autopilot/route-manager/input:
 
     <text>
         <padding>1</padding>
-        <label>Format: list of (airport|fix|nav|nav/rad/dst|lon,lat)[@alt] -- e.g. "KSFO@900", "SAHEY CIITY@6000"</label>
-        <color>
-            <red>0.7</red>
-            <green>0.7</green>
-            <blue>0.7</blue>
-        </color>
+        <label>Format: list of (airport|fix|nav|lon,lat) with optional @alt -- e.g. "KSFO@900", "SAHEY CIITY@6000"</label>
+    </text>
+      <text>
+        <padding>1</padding>
+        <label>Lon,lat can be entered signed, with NSEW, or as degrees and minutes, e.g. "-2.5,51.3", "2.5W,51.3N", "11*47.17'E,48*21.23'N"</label>
+    </text>
+    <text>
+        <padding>1</padding>
+        <label>Any location can be be offset by a radial and distance in Nm, e.g. DCS/45/10 or 18.5E,33.9S/290/4.5</label>
     </text>
 
     <!-- button field -->

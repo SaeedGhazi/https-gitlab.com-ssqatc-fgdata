@@ -1,21 +1,21 @@
 
-
-var GenericController =
+# ISFD controller drive by physical properties rather
+# than instruments. Useful for testing with the UFO
+var PhysicalController =
 {
 
   new : func (isfd)
   {
     var obj = {
-        parents : [GenericController],
+        parents : [PhysicalController],
         _isfd: isfd,
-        _altimeterProp : "/instrumentation/altimeter/",
-        _airspeedProp : "/instrumentation/airspeed-indicator/",
-        _attitudeProp : "/instrumentation/attitude-indicator/",
         _navRadio: "/instrumentation/nav[0]/",
         _isSTDBaro : 0,
+        _isHPa : 1,
         _approachMode : 0
     };
 
+    print("ISFD is using physical properties, not indicated");
     return obj;
   },
 
@@ -25,28 +25,27 @@ var GenericController =
 
   getAltitudeFt : func
   {
-    return getprop(me._altimeterProp ~ "indicated-altitude-ft");
+    return getprop("/position/altitude-ft");
   },
 
   getIndicatedAirspeedKnots : func
   {
-    return getprop(me._airspeedProp ~ "indicated-speed-kt");
+    return getprop("/velocities/airspeed-kt");
   },
 
   getHeadingDeg : func
   {
-    # compass / gyro source for this?
     return getprop("/orientation/heading-deg");
   },
 
   getPitchDeg : func
   {
-    return getprop(me._attitudeProp ~ "indicated-pitch-deg");
+    return getprop("/orientation/pitch-deg");
   },
 
   getBankAngleDeg : func
   {
-    return getprop(me._attitudeProp ~ "indicated-roll-deg");
+    return getprop("/orientation/roll-deg");
   },
 
   isSTDBarometricPressure : func
@@ -71,27 +70,29 @@ var GenericController =
   
   getBarometricPressureSettingInHg : func
   {
-    if (me._isSTDBaro) return 29.92;
-    return getprop(me._altimeterProp ~ "setting-inhg");
+    return 29.92;
   },
 
   getBarometricPressureSettingHPa : func
   {
-    if (me._isSTDBaro) return 1013;
-    return getprop(me._altimeterProp ~ "setting-hpa");
+    return 1013;
   },
 
   setBarometricPressureSettingInHg : func (inHg)
   {
-    setprop(me._altimeterProp ~ "setting-inhg", inHg);
+      print('ISFD: no-op with PhysicalController, no altimeter')
   },
 
   setBarometricPressureSettingHPa : func (hpa)
   {
-    setprop(me._altimeterProp ~ "setting-hpa", hpa);
+      print('ISFD: no-op with PhysicalController, no altimeter')
   },
 
-  isApproachMode: func { return me._approachMode; },
+  isApproachMode: func { 
+
+    return me._approachMode; 
+  },
+
   toggleApproachMode : func { me._approachMode = (me._approachMode == 0); },
 
   isLocalizerValid: func { return getprop(me._navRadio ~ "in-range"); },

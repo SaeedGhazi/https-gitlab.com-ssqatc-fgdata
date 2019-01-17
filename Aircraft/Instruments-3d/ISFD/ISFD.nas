@@ -3,6 +3,7 @@
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/ISFD/";
 io.load_nasal(nasal_dir ~ 'ISFD_gui.nas', "isfd");
 io.load_nasal(nasal_dir ~ 'ISFDGenericController.nas', "isfd");
+io.load_nasal(nasal_dir ~ 'PhysicalController.nas', "isfd");
 
 # main wrapper object
 var ISFD = {
@@ -18,7 +19,10 @@ rollBaseRadius: 160,
 roseRadius: 512,
 boxHeight: 48,
 
-new : func() {
+needleBoxSize: 220,
+needleBoxHeight: 20,
+
+new : func(controller = nil) {
     var obj = {
         parents : [ISFD],
         _mode : ''
@@ -41,10 +45,12 @@ new : func() {
     # centering transform
     obj.root.setTranslation(ISFD.halfSize, ISFD.halfSize);
 
-    obj._controller = isfd.GenericController.new();
+    var controllerClass = (controller == nil) ? isfd.GenericController : controller; 
+    obj._controller = controllerClass.new(obj);
     obj.createContents();
     obj._updateTimer = maketimer(0.05, func obj.update(); );
     obj._updateTimer.start();
+    obj._appMode = nil; # set to nil to force update on first update() trigger
 
     return obj;
 },
@@ -79,9 +85,8 @@ createContents : func()
     # mach readout - not on the B737 model?
     me.createModeText();
 
-    # if ILS is tuned!
-    # glideslope marker
-    # localizer marker
+    me.createLocalizer();
+    me.createGlideslope();
 
     me.createAirplaneMarker();
    
@@ -158,6 +163,15 @@ addHorizontalSymmetricLine : func(path, positiveLength, y)
     path.moveTo(-positiveLength, y);
     path.lineTo(positiveLength, y);
     return path;
+},
+
+addDiamond : func(path, radius)
+{
+    path.move(-radius, 0);
+    path.line(radius, -radius); # top
+    path.line(radius, radius); # right
+    path.line(-radius, radius); # bottom
+    path.close();
 },
 
 createDigitTape : func(parent, name, suffix = nil)
@@ -587,16 +601,110 @@ createModeText : func()
     me._modeText.setTranslation(ISFD.hsiLeft + 2, midTextY);
 },
 
-pressButtonAPP : func()
+updateApproachMode: func
 {
-    if (me._mode == 'app') {
-        me._mode = '';
-        me._modeText.setVisible(0);
-    } else {
-        me._mode = 'app';
-        me._modeText.setText('APP');
-        me._modeText.setVisible(1);
+    if (me._appMode != 0) {
+        me._modeText.setText('APP');  
     }
+
+    me._modeText.setVisible(me._appMode);
+    me._localizerGroup.setVisible(me._appMode);
+    me._glideslopeGroup.setVisible(me._appMode);
+},
+
+createLocalizer: func
+{
+    var hw = ISFD.needleBoxSize * 0.5;
+    var g = me.root.createChild('group', 'localizer-group');
+    g.setTranslation(ISFD.hsiXCenter, 156);
+    me._localizerGroup = g;
+    
+    var bkg = g.rect(-hw, 0, ISFD.needleBoxSize, ISFD.needleBoxHeight);
+    bkg.setColorFill('#000000'); 
+
+    # markers: white line and hollow dots
+    var m = g.createChild("path", "localizer-marker");
+    m.setStrokeLineWidth(2);
+    m.setColor(1, 1, 1);
+    m.moveTo(0, 0);
+    m.line(0, ISFD.needleBoxHeight);
+    m.close();
+
+    var r =( ISFD.needleBoxHeight - 8) * 0.5;
+    var hh = ISFD.needleBoxHeight * 0.5;
+
+    # four dots
+    for (var i = -2; i <= 2; i +=1) {
+        if (i == 0) continue;
+        var x = i * 50;
+        m.moveTo(x - r, hh);
+        m.arcSmallCW(r, r, 0, r * 2, 0);
+        m.arcSmallCW(r, r, 0, -r * 2, 0);
+        m.close();
+    }
+
+    me._localizerPointer = g.createChild("path", "localizer-pointer");
+    me._localizerPointer.moveTo(0, hh);
+    me.addDiamond(me._localizerPointer , hh);
+    me._localizerPointer.setColorFill('#ff00ff'); # magenta!
+},
+
+createGlideslope: func
+{
+    var g = me.root.createChild('group', 'glideslope-bar');
+    me._glideslopeGroup = g;
+
+    var hh = ISFD.needleBoxSize * 0.5;
+    var hw = ISFD.needleBoxHeight * 0.5;
+
+    g.setTranslation(ISFD.hsiRight - 36, 0);
+    me._localizerGroup = g;
+    
+    var bkg = g.rect(0, -hh, ISFD.needleBoxHeight, ISFD.needleBoxSize);
+    bkg.setColorFill('#000000'); 
+
+    # markers: white line and hollow dots
+    var m = g.createChild("path", "gs-marker");
+    m.setStrokeLineWidth(2);
+    m.setColor(1, 1, 1);
+    m.moveTo(0, 0);
+    m.line(ISFD.needleBoxHeight, 0);
+    m.close();
+
+    var r =( ISFD.needleBoxHeight - 8) * 0.5;
+
+    # four dots
+    for (var i = -2; i <= 2; i +=1) {
+        if (i == 0) continue;
+        var y = i * 50;
+        m.moveTo(hw, y - r);
+        m.arcSmallCW(r, r, 0, 0, r * 2);
+        m.arcSmallCW(r, r, 0, 0, -r * 2);
+        m.close();
+    }
+
+    me._gsPointer = g.createChild("path", "gs-pointer");
+    me._gsPointer.moveTo(hw, 0);
+    me.addDiamond(me._gsPointer , hw);
+    me._gsPointer.setColorFill('#ff00ff'); # magenta!
+},
+
+updateILS: func
+{
+    var hsz = ISFD.needleBoxSize * 0.5;
+
+    me._localizerPointer.setVisible(me._controller.isLocalizerValid());
+    var locDev = me._controller.getLocalizerDeviationNorm() * hsz;
+    me._localizerPointer.setTranslation(locDev, 0);
+
+    me._gsPointer.setVisible(me._controller.isGSValid());
+    var gsDev = me._controller.getGSDeviationNorm() * hsz;
+    me._gsPointer.setTranslation(0, gsDev);
+},
+
+pressButtonAPP : func
+{
+    me._controller.toggleApproachMode();
 },
 
 update : func()
@@ -631,6 +739,25 @@ update : func()
     me._altitudeDigits00.setTranslation(80, 16 + altDigits00 * 32);
     var s = sprintf("%03i ", math.floor(alt / 100));
     me._altitudeBoxText.setText(s);
+
+# barometric
+    if (me._controller.isSTDBarometricPressure()) {
+        me._altimeterText.setText('STD');
+    } elsif (me._controller.isHPaBarometer()) {
+        me._altimeterText.setText(sprintf('%4d HPA', me._controller.getBarometricPressureSettingHPa()));
+    } else {
+        me._altimeterText.setText(sprintf('%4.2f IN', me._controller.getBarometricPressureSettingInHg()));
+    }
+
+# APProach mode
+    if (me._appMode != me._controller.isApproachMode()) {
+        me._appMode = me._controller.isApproachMode;
+        me.updateApproachMode();
+    }
+
+    if (me._appMode != 0) {
+        me.updateILS();
+    }
 }  
 
 };

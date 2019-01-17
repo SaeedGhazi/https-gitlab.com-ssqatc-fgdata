@@ -13,6 +13,7 @@ var GenericController =
         _attitudeProp : "/instrumentation/attitude-indicator/",
         _navRadio: "/instrumentation/nav[0]/",
         _isSTDBaro : 0,
+        _isHPa : 1,
         _approachMode : 0
     };
 

@@ -92,17 +92,17 @@ var GenericController =
     setprop(me._altimeterProp ~ "setting-hpa", hpa);
   },
 
-  isApproachMode: func { return me._approachMode; },
+  isApproachMode: func { return (me._approachMode != 0); },
   toggleApproachMode : func { me._approachMode = (me._approachMode == 0); },
 
   isLocalizerValid: func { return getprop(me._navRadio ~ "in-range"); },
   isGSValid: func { return getprop(me._navRadio ~ "gs-in-range");},
 
   getLocalizerDeviationNorm: func {
-    return getprop(me._navRadio ~ "heading-needle-deflection-norm");
+    return getprop(me._navRadio ~ "heading-needle-deflection-norm") or 0;
   },
 
   getGSDeviationNorm: func {
-    return getprop(me._navRadio ~ "gs-needle-deflection-norm");
+    return getprop(me._navRadio ~ "gs-needle-deflection-norm") or 0;
   },
 }

@@ -579,7 +579,6 @@ createAltimeterSetting: func()
 {
     me._altimeterText = me.root.createChild('text', 'altimeter-setting-text');
     me._altimeterText.setText('1013');
-    me._altimeterText.setFontSize(44);
     me._altimeterText.setAlignment("right-center");
     me._altimeterText.setFont("LiberationFonts/LiberationMono-Regular.ttf");
     me._altimeterText.setColor('#00ff00');
@@ -742,11 +741,19 @@ update : func()
 
 # barometric
     if (me._controller.isSTDBarometricPressure()) {
+        me._altimeterText.setFontSize(44);
         me._altimeterText.setText('STD');
-    } elsif (me._controller.isHPaBarometer()) {
-        me._altimeterText.setText(sprintf('%4d HPA', me._controller.getBarometricPressureSettingHPa()));
     } else {
-        me._altimeterText.setText(sprintf('%4.2f IN', me._controller.getBarometricPressureSettingInHg()));
+        var s = '';
+        if (me._controller.isHPaBarometer()) {
+            s = sprintf('%4d HPA', me._controller.getBarometricPressureSettingHPa());
+        } else {
+            s = sprintf('%4.2f IN', me._controller.getBarometricPressureSettingInHg());            
+        }
+
+        # smaller text to fit
+        me._altimeterText.setFontSize(32);
+        me._altimeterText.setText(s);
     }
 
 # APProach mode

@@ -277,38 +277,3 @@ var mcp = {
         node.setIntValue(bits.switch(ledBits, data[1], b));
     }
 };
-
-var flapPositions = [];
-var flapsNode = nil;
-
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-    mcp.init();
-
-    # build flap axis quantisation data
-    flapsNode = props.globals.getNode("/controls/flight/flaps");
-
-    foreach (var c; props.globals.getNode("/sim/flaps").getChildren("setting")) {
-        var step = c.getValue();
-        append(flapPositions, step);
-    }
-
-});
-
-var flapsAxisQuantized = func(val) 
-{
-    var normVal = (val + 1) * 0.5;
-    var numSteps = size(flapPositions);
-    for (var i=1; i<numSteps; i+=1) {
-        var midPoint = (flapPositions[i-1] + flapPositions[i]) * 0.5;
-        if (normVal < midPoint) {
-            #print('flap Q:' ~ normVal ~ " to " ~ flapPositions[i-1]);
-            flapsNode.setDoubleValue(flapPositions[i-1]);
-            return;
-        }
-    }
-    #print('flap Q:' ~ normVal ~ " to " ~ flapPositions[numSteps-1]);
-    # if we fall off the end, we're at the final value
-    flapsNode.setDoubleValue(flapPositions[numSteps-1]);
-}
-
-print("GoFlight Nasal module load done");

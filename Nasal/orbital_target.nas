@@ -31,7 +31,7 @@ var orbitalTarget = {
 
 		t.node_drift = -4361.26 * 1./math.pow(t.radius/1000.0 ,2.0) * math.cos(t.inc_rad); 
 			
-		print ("Drift rate: ", t.node_drift);
+		#print ("Drift rate: ", t.node_drift);
 		return t;
 	},
 
@@ -115,8 +115,8 @@ var orbitalTarget = {
 		var pos2 = me.compute_inertial_pos(anomaly_rad, me.nl_rad);
 
 		var vx = (pos2[0] - pos1[0])/0.1;
-		var vy = (pos2[0] - pos1[0])/0.1;
-		var vz = (pos2[0] - pos1[0])/0.1;
+		var vy = (pos2[1] - pos1[1])/0.1;
+		var vz = (pos2[2] - pos1[2])/0.1;
 
 		return [vx, vy, vz];
 	},
@@ -144,8 +144,8 @@ var orbitalTarget = {
 		var pos2 = me.compute_inertial_pos(anomaly_rad, nl_rad);
 
 		var vx = (pos2[0] - pos1[0])/0.1;
-		var vy = (pos2[0] - pos1[0])/0.1;
-		var vz = (pos2[0] - pos1[0])/0.1;
+		var vy = (pos2[1] - pos1[1])/0.1;
+		var vz = (pos2[2] - pos1[2])/0.1;
 
 		return [vx, vy, vz];
 	},

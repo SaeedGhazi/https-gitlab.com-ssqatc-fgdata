@@ -451,8 +451,9 @@ var isnan = func {
 # myBP.enable(4);       # allow 4 hits, then be quiet 
 # 
 # #at the place of interest (e.g. in some loop or class method) insert:
-# myBP.hit();  # do backtrace here if tokens > 0, reduce tokens by 1
-# 
+# myBP.hit();           # do backtrace here if tokens > 0, reduce tokens by 1
+# myBP.hit(myFunction); # same but call myFunction instead of backtrace
+#
 # print(myBP.getHits()); # print total number of hits
 #
 var Breakpoint = {
@@ -500,13 +501,19 @@ var Breakpoint = {
     },
     
     # hit the breakpoint, e.g. do backtrace if we have tokens available
-    hit: func() {
+    hit: func(callback = nil) {
         me.hits += 1;
         me._hitsN.setIntValue(me.hits);
         me.tokens = me._tokensN.getValue();
         if (me.tokens > 0) {
-            debug.backtrace(me.label, me.dump_locals, 1);
-            me._tokensN.setValue(me.tokens - 1);
+            me.tokens -= 1;
+            if (typeof(callback) == "func") {
+                callback(me.hits, me.tokens);
+            }
+            else {
+                debug.backtrace(me.label, me.dump_locals, 1);
+            } 
+            me._tokensN.setValue(me.tokens);
         }
         return me;
     },

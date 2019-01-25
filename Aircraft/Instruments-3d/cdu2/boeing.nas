@@ -389,6 +389,8 @@ var CDU = {
             me._status = s;
         },
 
+        tag: func { me._tag; },
+        
     # fields
         getFields: func
         {
@@ -968,6 +970,10 @@ var CDU = {
         me.displayPage(saved, CDU.DISPLAY_POP);
     },
     
+    requestRefresh: func {
+        me._refresh();
+    },
+
     _refresh: func()
     {
         var pg = me._page;
@@ -1106,7 +1112,7 @@ var CDU = {
     },
      
 ################################################
-# data formatters
+# data formatters & parsers
      
      formatLatitude: func(lat)
      {
@@ -1172,15 +1178,9 @@ var CDU = {
      parseTemperatureAsCelsius: func(input)
      {
          # if default is F, need to tweak this
-         var isFarenheit = 0;
-         var s = string.trim(input);
-         var lastChar = s[size(s) - 1];
-         if (string.isalpha(lastChar)) {
-             isFarenheit = (lastChar == 'F');
-             s = substr(s, 0, size(s) - 1); # drop final char
-         }
-         
-         var t = num(s);
+        var p = CDU._parseSuffix(input);
+        var isFarenheit = (p.suffix == 'F');
+         var t = num(p.str);
          return isFarenheit ? _farenheitToCelsius(t) : t;
      },
      
@@ -1210,6 +1210,42 @@ var CDU = {
         return {bearing:hdg, speed:num(fields[1])};
     },
 
+    parseKnotsMach: func(input)
+    {
+        var fields = CDU.parseDualFieldInput(input);
+        var r = { knots: nil, mach: nil};
+        if (fields[0] != nil) {
+            r.knots = num(fields[0]);
+            if ((r.knots < 100) or (r.knots > 400)) return nil;
+        }
+
+        if (fields[1] != nil) {
+            r.mach = num(mach[0]);
+            if ((r.mach < 0.1) or (r.mach > 1.0)) return nil;
+        }
+
+        return r;
+    },
+
+    _parseSuffix: func(in)
+    {
+        if (!in) return nil;
+        var s = string.trim(in);
+        var lastChar = s[size(s) - 1];
+        if (!string.isalpha(lastChar))
+            return {str:s, suffix:''};
+
+        s = substr(s, 0, size(s) - 1); # drop final char
+        return {str:s, suffix:lastChar};
+    },
+
+    _parseRestrictionSuffix: func(s)
+    {
+        if (s == 'A') return 'above';
+        if (s == 'B') return 'below';
+        return 'at';        
+    },
+
     parseSpeedAltitudeConstraint: func(input)
     {
         var r = {
@@ -1218,14 +1254,32 @@ var CDU = {
         };
 
         var fields = CDU.parseDualFieldInput(input);
-        # parse A or B suffixes
+        var spd = CDU._parseSuffix(fields[0]);
+        var alt = CDU._parseSuffix(fields[1]);
 
+        if (spd != nil) {
+            r.speed_cstr_type = CDU._parseRestrictionSuffix(spd.suffix);
+            r.speed_cstr = num(speed.str);
+        }
+
+        if (alt != nil) {
+            r.alt_cstr_type = CDU._parseRestrictionSuffix(alt.suffix);
+            r.alt_cstr = num(alt.str);
+        }
+        
+        return r;
+    },
+
+    parseSpeedAltitude: func(input)
+    {
+        var r = {};
+        var fields = CDU.parseDualFieldInput(input);
         if (fields[0] != nil) {
-
+            r.knots = num(fields[0]);
         }
 
         if (fields[1] != nil) {
-
+            r.altitude = CDU.parseAltitude(fields[1]);
         }
         
         return r;
@@ -1253,14 +1307,29 @@ var CDU = {
              altConstraint = me.formatAltRestriction(wp);
         
          var speedConstraint = '';
-         if (speedConstraintType != nil) {
-             if (speedConstraintType == 'at') speedConstraint = wp.speed_cstr; 
-             if (speedConstraintType == 'above') speedConstraint = wp.speed_cstr ~ 'A'; 
-             if (speedConstraintType == 'below') speedConstraint = wp.speed_cstr ~ 'B'; 
-             if (speedConstraintType == 'mach') speedConstraint = sprintf('.%3d', wp.speed_cstr / 1000);
-         }
+         if (speedConstraintType != nil)
+            speedConstraint = me.formatSpeedRestriction(wp);
         
          return speedConstraint ~ '/' ~ altConstraint;
+     },
+
+    # format a speed / altitude, but show forecase values
+    # in small font if no explicit restriction is set
+     formatWayptSpeedAltitudeWithForecast: func(wp, forecast)
+     {
+        var altConstraint = '';
+        if (wp.alt_cstr_type != nil)
+            altConstraint =  me.formatAltRestriction(wp);
+        else 
+            altConstraint = '~' ~ me.formatAltRestriction(forecast);
+
+        var s = '';
+        if (wp.speed_cstr_type != nil)
+            s = me.formatSpeedRestriction(wp);
+        else 
+            s = '~' ~ me.formatSpeedRestriction(forecast);
+
+        return s ~ '/' ~ altConstraint;
      },
 
      formatSpeed: func(speed)
@@ -1278,12 +1347,21 @@ var CDU = {
      formatAltRestriction: func(wp)
      {
          var ty = wp.alt_cstr_type;
-         if ((wp == nil) or (ty == nil)) return nil;
          s = me.formatAltitude(wp.alt_cstr);
          if (ty == 'at') s ~= ' '; 
          if (ty == 'above') s ~= 'A'; 
          if (ty == 'below') s ~= 'B';
          return s;
+     },
+
+     formatSpeedRestriction: func(wp)
+     {
+        var ty = wp.speed_cstr_type;
+        s = me.formatSpeed(wp.speed_cstr);
+        if (ty == 'at') s ~= ' '; 
+        if (ty == 'above') s ~= 'A'; 
+        if (ty == 'below') s ~= 'B';
+        return s;
      },
      
 # button / LSK functions

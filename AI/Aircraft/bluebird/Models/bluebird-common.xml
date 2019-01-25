@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!--== Bluebird AI/multiplayer version 8.93 for FlightGear 1.9 with OSG ==-->
+<!--== Bluebird AI/multiplayer version 11.31 for FlightGear 1.9 with OSG ==-->
 <!--==  AI from series 8 ==  8770 vertices ==  8024 poly ==-->
 
 <PropertyList>
@@ -31,9 +31,9 @@
 		<type>material</type>
 		<object-name>Body:Fans</object-name>
 		<emission>
-			<red-prop>sim/multiplay/generic/float[4]</red-prop>
-			<green-prop>sim/multiplay/generic/float[4]</green-prop>
-			<blue-prop>sim/multiplay/generic/float[4]</blue-prop>
+			<red-prop>sim/multiplay/generic/float[8]</red-prop>
+			<green-prop>sim/multiplay/generic/float[8]</green-prop>
+			<blue-prop>sim/multiplay/generic/float[8]</blue-prop>
 			<factor>0.5</factor>
 		</emission>
 	</animation>
@@ -2146,7 +2146,7 @@
 				<property>sim/multiplay/generic/int[0]</property>
 				<or>
 					<not>
-						<property>/sim/model/bluebird/lighting/strobe1/state</property>
+						<property>sim/multiplay/generic/int[10]</property>
 					</not>
 					<not>
 						<property>sim/multiplay/generic/int[2]</property>
@@ -2161,7 +2161,7 @@
 		<object-name>strobe_halo_L</object-name>
 		<condition>
 			<and>
-				<property>/sim/model/bluebird/lighting/strobe1/state</property>
+				<property>sim/multiplay/generic/int[10]</property>
 				<property>sim/multiplay/generic/int[0]</property>
 				<property>sim/multiplay/generic/int[2]</property>
 			</and>
@@ -2228,7 +2228,7 @@
 				<property>sim/multiplay/generic/int[1]</property>
 				<or>
 					<not>
-						<property>/sim/model/bluebird/lighting/strobe1/state</property>
+						<property>sim/multiplay/generic/int[10]</property>
 					</not>
 					<not>
 						<property>sim/multiplay/generic/int[2]</property>
@@ -2243,7 +2243,7 @@
 		<object-name>strobe_halo_R</object-name>
 		<condition>
 			<and>
-				<property>/sim/model/bluebird/lighting/strobe1/state</property>
+				<property>sim/multiplay/generic/int[10]</property>
 				<property>sim/multiplay/generic/int[1]</property>
 				<property>sim/multiplay/generic/int[2]</property>
 			</and>
@@ -2308,7 +2308,7 @@
 		<condition>
 			<or>
 				<not>
-					<property>/sim/model/bluebird/lighting/beacon1/state</property>
+					<property>sim/multiplay/generic/int[9]</property>
 				</not>
 				<not>
 					<property>sim/multiplay/generic/int[2]</property>
@@ -2322,7 +2322,7 @@
 		<object-name>beacon_halo_T</object-name>
 		<condition>
 			<and>
-				<property>/sim/model/bluebird/lighting/beacon1/state</property>
+				<property>sim/multiplay/generic/int[9]</property>
 				<property>sim/multiplay/generic/int[2]</property>
 			</and>
 		</condition>
@@ -2386,7 +2386,7 @@
 		<condition>
 			<or>
 				<not>
-					<property>/sim/model/bluebird/lighting/beacon1/state</property>
+					<property>sim/multiplay/generic/int[9]</property>
 				</not>
 				<not>
 					<property>sim/multiplay/generic/int[2]</property>
@@ -2400,7 +2400,7 @@
 		<object-name>beacon_halo_B</object-name>
 		<condition>
 			<and>
-				<property>/sim/model/bluebird/lighting/beacon1/state</property>
+				<property>sim/multiplay/generic/int[9]</property>
 				<property>sim/multiplay/generic/int[2]</property>
 			</and>
 		</condition>
@@ -2465,14 +2465,14 @@
 			<not>
 				<and>
 					<property>sim/multiplay/generic/int[2]</property>
-					<property>sim/multiplay/generic/float[3]</property>
+					<property>sim/multiplay/generic/int[12]</property>
 					<or>
 						<greater-than>
 							<property>/sim/time/sun-angle-rad</property>
 							<value>1.57</value>
 						</greater-than>
 						<equals>
-							<property>sim/multiplay/generic/float[3]</property>
+							<property>sim/multiplay/generic/int[12]</property>
 							<value>2</value>
 						</equals>
 					</or>
@@ -2493,7 +2493,7 @@
 						<value>1.57</value>
 					</greater-than>
 					<equals>
-						<property>sim/multiplay/generic/float[3]</property>
+						<property>sim/multiplay/generic/int[12]</property>
 						<value>2</value>
 					</equals>
 				</or>
@@ -2507,14 +2507,14 @@
 		<condition>
 			<and>
 				<property>sim/multiplay/generic/int[2]</property>
-				<property>sim/multiplay/generic/float[3]</property>
+				<property>sim/multiplay/generic/int[12]</property>
 				<or>
 					<greater-than>
 						<property>/sim/time/sun-angle-rad</property>
 						<value>1.57</value>
 					</greater-than>
 					<equals>
-						<property>sim/multiplay/generic/float[3]</property>
+						<property>sim/multiplay/generic/int[12]</property>
 						<value>2</value>
 					</equals>
 				</or>
@@ -2551,14 +2551,14 @@
 		<condition>
 			<and>
 				<property>sim/multiplay/generic/int[2]</property>
-				<property>sim/multiplay/generic/float[3]</property>
+				<property>sim/multiplay/generic/int[12]</property>
 				<or>
 					<greater-than>
 						<property>/sim/time/sun-angle-rad</property>
 						<value>1.57</value>
 					</greater-than>
 					<equals>
-						<property>sim/multiplay/generic/float[3]</property>
+						<property>sim/multiplay/generic/int[12]</property>
 						<value>2</value>
 					</equals>
 				</or>

@@ -1,0 +1,44 @@
+<PropertyList>
+<!-- FG1000 commands -->
+<key n="71">
+  <name>G</name>
+  <desc>FG1000</desc>
+  <key n="901">
+    <name>P</name>
+    <desc>PFD String Input</desc>
+		<key n="903">
+			<name>%s</name>
+			<desc>PFD String input :  %s</desc>
+			<binding>
+				<command>nasal</command>
+        <script>
+          var args = {'device': 1,
+                      'notification': fg1000.FASCIA.STRING_INPUT,
+                      'offset' : arg[0]};
+
+          fgcommand("FG1000HardKeyPushed", props.Node.new(args));
+        </script>
+			</binding>
+		</key>
+  </key>
+  <key n="902">
+    <name>M</name>
+    <desc>MFD String Input</desc>
+    <key n="903">
+			<name>%s</name>
+			<desc>MFD String input :  %s</desc>
+			<binding>
+				<command>nasal</command>
+        <script>
+          var args = {'device': 2,
+                      'notification': fg1000.FASCIA.STRING_INPUT,
+                      'offset' : arg[0]};
+
+          fgcommand("FG1000HardKeyPushed", props.Node.new(args));
+        </script>
+			</binding>
+		</key>
+  </key>
+</key>
+
+</PropertyList>

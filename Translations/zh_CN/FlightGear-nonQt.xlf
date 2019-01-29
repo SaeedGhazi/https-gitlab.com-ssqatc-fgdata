@@ -110,349 +110,349 @@
         <source xml:space="preserve">FG1000 MFD</source>
         <target xml:space="preserve">FG1000 MFD</target>
       </trans-unit>
-      <trans-unit id="menu/fg1000-mfd:0" approved="yes">
+      <trans-unit id="menu/fg1000-mfd:0">
         <source xml:space="preserve">FG1000 MFD</source>
-        <target xml:space="preserve">FG1000 MFD</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/fg1000-pfd:0" approved="yes">
+      <trans-unit id="menu/fg1000-pfd:0">
         <source xml:space="preserve">FG1000 PFD</source>
-        <target xml:space="preserve">FG1000 PFD</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/fgcom-settings:0" approved="yes">
+      <trans-unit id="menu/fgcom-settings:0">
         <source xml:space="preserve">FGCom Settings</source>
-        <target xml:space="preserve">FGCom 设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/file:0" approved="yes">
+      <trans-unit id="menu/file:0">
         <source xml:space="preserve">File</source>
-        <target xml:space="preserve">文件</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/fuel-and-payload:0" approved="yes">
+      <trans-unit id="menu/fuel-and-payload:0">
         <source xml:space="preserve">Fuel and Payload</source>
-        <target xml:space="preserve">燃油和配载</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/global-weather:0" approved="yes">
+      <trans-unit id="menu/global-weather:0">
         <source xml:space="preserve">Weather</source>
-        <target xml:space="preserve">天气</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/goto-airport:0" approved="yes">
+      <trans-unit id="menu/goto-airport:0">
         <source xml:space="preserve">Select Airport</source>
-        <target xml:space="preserve">选择机场</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/gps:0" approved="yes">
+      <trans-unit id="menu/gps:0">
         <source xml:space="preserve">GPS Settings</source>
-        <target xml:space="preserve">GPS设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/help:0" approved="yes">
+      <trans-unit id="menu/help:0">
         <source xml:space="preserve">Help</source>
-        <target xml:space="preserve">帮助</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/help-browser:0" approved="yes">
+      <trans-unit id="menu/help-browser:0">
         <source xml:space="preserve">Help (opens in browser)</source>
-        <target xml:space="preserve">帮助（在浏览器中打开）</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/immatriculation:0" approved="yes">
+      <trans-unit id="menu/immatriculation:0">
         <source xml:space="preserve">Immatriculation</source>
-        <target xml:space="preserve">登记</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/input-config:0" approved="yes">
+      <trans-unit id="menu/input-config:0">
         <source xml:space="preserve">Mouse Configuration</source>
-        <target xml:space="preserve">鼠标配置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/instrument-failures:0" approved="yes">
+      <trans-unit id="menu/instrument-failures:0">
         <source xml:space="preserve">Instrument Failures</source>
-        <target xml:space="preserve">仪表故障</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/instrument-settings:0" approved="yes">
+      <trans-unit id="menu/instrument-settings:0">
         <source xml:space="preserve">Instrument Settings</source>
-        <target xml:space="preserve">仪表设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/interface-config:0" approved="yes">
+      <trans-unit id="menu/interface-config:0">
         <source xml:space="preserve">User-interface Options</source>
-        <target xml:space="preserve">用户界面选项</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/jetway:0" approved="yes">
+      <trans-unit id="menu/jetway:0">
         <source xml:space="preserve">Jetway Settings</source>
-        <target xml:space="preserve">廊桥设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/joystick-config:0" approved="yes">
+      <trans-unit id="menu/joystick-config:0">
         <source xml:space="preserve">Joystick Configuration</source>
-        <target xml:space="preserve">摇杆配置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/joystick-info:0" approved="yes">
+      <trans-unit id="menu/joystick-info:0">
         <source xml:space="preserve">Joystick Information</source>
-        <target xml:space="preserve">摇杆信息</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/lag-adjust:0" approved="yes">
+      <trans-unit id="menu/lag-adjust:0">
         <source xml:space="preserve">Lag Settings</source>
-        <target xml:space="preserve">延迟设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/load-tape:0" approved="yes">
+      <trans-unit id="menu/load-tape:0">
         <source xml:space="preserve">Load Flight Recorder Tape</source>
-        <target xml:space="preserve">加载飞行记录带</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/local_weather:0" approved="yes">
+      <trans-unit id="menu/local_weather:0">
         <source xml:space="preserve">Local Weather (Test)</source>
-        <target xml:space="preserve">当地天气（测试）</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/location:0" approved="yes">
+      <trans-unit id="menu/location:0">
         <source xml:space="preserve">Location</source>
-        <target xml:space="preserve">位置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/logging:0" approved="yes">
+      <trans-unit id="menu/logging:0">
         <source xml:space="preserve">Logging</source>
-        <target xml:space="preserve">记录</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/map:0" approved="yes">
+      <trans-unit id="menu/map:0">
         <source xml:space="preserve">Map</source>
-        <target xml:space="preserve">地图</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/map-browser:0" approved="yes">
+      <trans-unit id="menu/map-browser:0">
         <source xml:space="preserve">Map (opens in browser)</source>
-        <target xml:space="preserve">地图（在浏览器中打开）</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/map-canvas:0" approved="yes">
+      <trans-unit id="menu/map-canvas:0">
         <source xml:space="preserve">Map (Canvas)</source>
-        <target xml:space="preserve">地图（Canvas）</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/menu-about:0" approved="yes">
+      <trans-unit id="menu/menu-about:0">
         <source xml:space="preserve">About</source>
-        <target xml:space="preserve">关于</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/mp-carrier:0" approved="yes">
+      <trans-unit id="menu/mp-carrier:0">
         <source xml:space="preserve">MPCarrier Selection</source>
-        <target xml:space="preserve">联机航母选择</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/mp-chat:0" approved="yes">
+      <trans-unit id="menu/mp-chat:0">
         <source xml:space="preserve">Chat Dialog</source>
-        <target xml:space="preserve">聊天对话</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/mp-chat-menu:0" approved="yes">
+      <trans-unit id="menu/mp-chat-menu:0">
         <source xml:space="preserve">Chat Menu</source>
-        <target xml:space="preserve">聊天菜单</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/mp-list:0" approved="yes">
+      <trans-unit id="menu/mp-list:0">
         <source xml:space="preserve">Pilot List</source>
-        <target xml:space="preserve">飞行员列表</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/mp-settings:0" approved="yes">
+      <trans-unit id="menu/mp-settings:0">
         <source xml:space="preserve">Multiplayer Settings</source>
-        <target xml:space="preserve">联机飞行设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/multiplayer:0" approved="yes">
+      <trans-unit id="menu/multiplayer:0">
         <source xml:space="preserve">Multiplayer</source>
-        <target xml:space="preserve">联机飞行</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/nasal-console:0" approved="yes">
+      <trans-unit id="menu/nasal-console:0">
         <source xml:space="preserve">Nasal Console</source>
-        <target xml:space="preserve">Nasal 控制台</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/nasal-repl-interpreter:0" approved="yes">
+      <trans-unit id="menu/nasal-repl-interpreter:0">
         <source xml:space="preserve">Nasal REPL Interpreter</source>
-        <target xml:space="preserve">Nasal REPL解释器</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/next-waypoint:0" approved="yes">
+      <trans-unit id="menu/next-waypoint:0">
         <source xml:space="preserve">Next Waypoint</source>
-        <target xml:space="preserve">下一个航路点</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/performance-monitor:0" approved="yes">
+      <trans-unit id="menu/performance-monitor:0">
         <source xml:space="preserve">Monitor System Performance</source>
-        <target xml:space="preserve">监控系统性能</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/pilot-offset:0" approved="yes">
+      <trans-unit id="menu/pilot-offset:0">
         <source xml:space="preserve">Adjust View Position</source>
-        <target xml:space="preserve">调整视角位置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/position-in-air:0" approved="yes">
+      <trans-unit id="menu/position-in-air:0">
         <source xml:space="preserve">Position Aircraft In Air</source>
-        <target xml:space="preserve">在空中出生</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/previous-waypoint:0" approved="yes">
+      <trans-unit id="menu/previous-waypoint:0">
         <source xml:space="preserve">Previous Waypoint</source>
-        <target xml:space="preserve">前一个航路点</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/print-rendering-statistics:0" approved="yes">
+      <trans-unit id="menu/print-rendering-statistics:0">
         <source xml:space="preserve">Print Rendering Statistics</source>
-        <target xml:space="preserve">打印渲染数据</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/print-scene-info:0" approved="yes">
+      <trans-unit id="menu/print-scene-info:0">
         <source xml:space="preserve">Print Visible Scene Info</source>
-        <target xml:space="preserve">打印可视场景信息</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/property-browser:0" approved="yes">
+      <trans-unit id="menu/property-browser:0">
         <source xml:space="preserve">Browse Internal Properties</source>
-        <target xml:space="preserve">浏览内部属性</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/pushback:0" approved="yes">
+      <trans-unit id="menu/pushback:0">
         <source xml:space="preserve">Pushback</source>
-        <target xml:space="preserve">后推</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/radio:0" approved="yes">
+      <trans-unit id="menu/radio:0">
         <source xml:space="preserve">Radio Settings</source>
-        <target xml:space="preserve">无线电设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/random-attitude:0" approved="yes">
+      <trans-unit id="menu/random-attitude:0">
         <source xml:space="preserve">Random Attitude</source>
-        <target xml:space="preserve">随机高度</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/random-failures:0" approved="yes">
+      <trans-unit id="menu/random-failures:0">
         <source xml:space="preserve">Random Failures</source>
-        <target xml:space="preserve">随机故障</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-autopilot:0" approved="yes">
+      <trans-unit id="menu/reload-autopilot:0">
         <source xml:space="preserve">Reload Autopilot</source>
-        <target xml:space="preserve">重新加载自动驾驶</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-gui:0" approved="yes">
+      <trans-unit id="menu/reload-gui:0">
         <source xml:space="preserve">Reload GUI</source>
-        <target xml:space="preserve">重新加载GUI</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-hud:0" approved="yes">
+      <trans-unit id="menu/reload-hud:0">
         <source xml:space="preserve">Reload HUD</source>
-        <target xml:space="preserve">重新加载HUD</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-input:0" approved="yes">
+      <trans-unit id="menu/reload-input:0">
         <source xml:space="preserve">Reload Input</source>
-        <target xml:space="preserve">重新加载输入</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-materials:0" approved="yes">
+      <trans-unit id="menu/reload-materials:0">
         <source xml:space="preserve">Reload Materials</source>
-        <target xml:space="preserve">重新加载材质</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-model:0" approved="yes">
+      <trans-unit id="menu/reload-model:0">
         <source xml:space="preserve">Reload Aircraft Model</source>
-        <target xml:space="preserve">重新加载飞机模型</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-network:0" approved="yes">
+      <trans-unit id="menu/reload-network:0">
         <source xml:space="preserve">Reload Network</source>
-        <target xml:space="preserve">重新加载网络</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-panel:0" approved="yes">
+      <trans-unit id="menu/reload-panel:0">
         <source xml:space="preserve">Reload Panel</source>
-        <target xml:space="preserve">重新加载面板</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reload-scenery:0" approved="yes">
+      <trans-unit id="menu/reload-scenery:0">
         <source xml:space="preserve">Reload Scenery</source>
-        <target xml:space="preserve">重新加载地景</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/rembrandt-buffers-choice:0" approved="yes">
+      <trans-unit id="menu/rembrandt-buffers-choice:0">
         <source xml:space="preserve">Select Rendering Buffers</source>
-        <target xml:space="preserve">选择渲染缓冲</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/rendering-buffers:0" approved="yes">
+      <trans-unit id="menu/rendering-buffers:0">
         <source xml:space="preserve">Hide/Show Rendering Buffers</source>
-        <target xml:space="preserve">隐藏/显示渲染缓冲</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/rendering-options:0" approved="yes">
+      <trans-unit id="menu/rendering-options:0">
         <source xml:space="preserve">Rendering Options</source>
-        <target xml:space="preserve">渲染选项</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/replay:0" approved="yes">
+      <trans-unit id="menu/replay:0">
         <source xml:space="preserve">Instant Replay</source>
-        <target xml:space="preserve">现在回放</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/reset:0" approved="yes">
+      <trans-unit id="menu/reset:0">
         <source xml:space="preserve">Reset</source>
-        <target xml:space="preserve">重设模拟器</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/route-manager:0" approved="yes">
+      <trans-unit id="menu/route-manager:0">
         <source xml:space="preserve">Route Manager</source>
-        <target xml:space="preserve">航路管理器</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/save-tape:0" approved="yes">
+      <trans-unit id="menu/save-tape:0">
         <source xml:space="preserve">Save Flight Recorder Tape</source>
-        <target xml:space="preserve">保存飞行记录带</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/scenario:0" approved="yes">
+      <trans-unit id="menu/scenario:0">
         <source xml:space="preserve">Traffic and Scenario Settings</source>
-        <target xml:space="preserve">交通及预设场景设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/select-livery:0" approved="yes">
+      <trans-unit id="menu/select-livery:0">
         <source xml:space="preserve">Select Livery</source>
-        <target xml:space="preserve">选择涂装</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/show-hide-yokes:0" approved="yes">
+      <trans-unit id="menu/show-hide-yokes:0">
         <source xml:space="preserve">Show/hide yokes</source>
-        <target xml:space="preserve">显示/隐藏驾驶杆</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/snap-shot:0" approved="yes">
+      <trans-unit id="menu/snap-shot:0">
         <source xml:space="preserve">Screenshot</source>
-        <target xml:space="preserve">截图</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/snap-shot-dir:0" approved="yes">
+      <trans-unit id="menu/snap-shot-dir:0">
         <source xml:space="preserve">Screenshot Directory</source>
-        <target xml:space="preserve">截图保存路径</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/sound-config:0" approved="yes">
+      <trans-unit id="menu/sound-config:0">
         <source xml:space="preserve">Sound Configuration</source>
-        <target xml:space="preserve">声音配置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/statistics-display:0" approved="yes">
+      <trans-unit id="menu/statistics-display:0">
         <source xml:space="preserve">Cycle On-Screen Statistics</source>
-        <target xml:space="preserve">循环显示屏幕数据</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/stereoscopic-options:0" approved="yes">
+      <trans-unit id="menu/stereoscopic-options:0">
         <source xml:space="preserve">Stereoscopic View Options</source>
-        <target xml:space="preserve">立体视角选项</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/stopwatch:0" approved="yes">
+      <trans-unit id="menu/stopwatch:0">
         <source xml:space="preserve">Stopwatch</source>
-        <target xml:space="preserve">秒表</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/system-failures:0" approved="yes">
+      <trans-unit id="menu/system-failures:0">
         <source xml:space="preserve">System Failures</source>
-        <target xml:space="preserve">系统故障</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/tanker:0" approved="yes">
+      <trans-unit id="menu/tanker:0">
         <source xml:space="preserve">Tanker Controls</source>
-        <target xml:space="preserve">加油机控制</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/terrasync:0" approved="yes">
+      <trans-unit id="menu/terrasync:0">
         <source xml:space="preserve">Scenery Download</source>
-        <target xml:space="preserve">地景下载</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/tiller-steering:0" approved="yes">
+      <trans-unit id="menu/tiller-steering:0">
         <source xml:space="preserve">Tiller Steering</source>
-        <target xml:space="preserve">手轮控制</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/time-settings:0" approved="yes">
+      <trans-unit id="menu/time-settings:0">
         <source xml:space="preserve">Time Settings</source>
-        <target xml:space="preserve">时间设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/toggle-fullscreen:0" approved="yes">
+      <trans-unit id="menu/toggle-fullscreen:0">
         <source xml:space="preserve">Toggle Fullscreen</source>
-        <target xml:space="preserve">全屏</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/toggle-glide-slope:0" approved="yes">
+      <trans-unit id="menu/toggle-glide-slope:0">
         <source xml:space="preserve">Toggle Glide Slope Tunnel</source>
-        <target xml:space="preserve">显示/隐藏下滑道通道</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/tower-position:0" approved="yes">
+      <trans-unit id="menu/tower-position:0">
         <source xml:space="preserve">Tower Position</source>
-        <target xml:space="preserve">塔台位置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/tutorial-start:0" approved="yes">
+      <trans-unit id="menu/tutorial-start:0">
         <source xml:space="preserve">Tutorials</source>
-        <target xml:space="preserve">教程</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/view:0" approved="yes">
+      <trans-unit id="menu/view:0">
         <source xml:space="preserve">View</source>
-        <target xml:space="preserve">视角</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/view-options:0" approved="yes">
+      <trans-unit id="menu/view-options:0">
         <source xml:space="preserve">View Options</source>
-        <target xml:space="preserve">视角选项</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/wildfire-settings:0" approved="yes">
+      <trans-unit id="menu/wildfire-settings:0">
         <source xml:space="preserve">Wildfire Settings</source>
-        <target xml:space="preserve">野火设置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/wingman:0" approved="yes">
+      <trans-unit id="menu/wingman:0">
         <source xml:space="preserve">Wingman Controls</source>
-        <target xml:space="preserve">僚机控制</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
-      <trans-unit id="menu/write-video-config:0" approved="yes">
+      <trans-unit id="menu/write-video-config:0">
         <source xml:space="preserve">Save Video Configuration</source>
-        <target xml:space="preserve">保存视频配置</target>
+        <target xml:space="preserve"></target>
       </trans-unit>
     </group>
     <group restype="x-trolltech-linguist-context" resname="options">

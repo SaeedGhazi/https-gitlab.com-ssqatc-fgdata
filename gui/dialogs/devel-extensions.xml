@@ -145,6 +145,45 @@
           </script>
         </binding>
       </combo>
+       <combo>
+        <row>5</row>
+        <col>2</col>
+        <pref-width>300</pref-width>
+        <halign>left</halign>
+        <name>OSGLog</name>
+         <label>OSG log level</label>
+         <property>/sim/rendering/osg-notify-level</property>
+              <value>DEBUG_FP</value>
+              <value>DEBUG_INFO</value>
+              <value>INFO</value>
+              <value>NOTICE</value>
+              <value>WARN</value>
+              <value>FATAL</value>
+        <editable>false</editable>
+        <binding>
+          <command>dialog-apply</command>
+          	 	<object-name>OSGLog</object-name>
+        </binding>
+      </combo>
+       <combo>
+        <row>5</row>
+        <col>3</col>
+        <pref-width>300</pref-width>
+        <halign>left</halign>
+        <name>SGLogging</name>
+         <label>FG log</label>
+         <property>/sim/logging/priority</property>
+            <value>alert</value>
+            <value>warn</value>
+            <value>info</value>
+            <value>debug</value>
+            <value>bulk</value>
+        <editable>false</editable>
+        <binding>
+          <command>dialog-apply</command>
+          	 	<object-name>SGLogging</object-name>
+        </binding>
+      </combo>
     </group>
   <group>
     <layout>hbox</layout>

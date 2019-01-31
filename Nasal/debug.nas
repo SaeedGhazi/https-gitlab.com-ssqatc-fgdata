@@ -63,6 +63,9 @@
 #
 # debug.propify(<variable>)            ... turn about everything into a props.Node
 #
+# debug.Probe       class              ... base class to collect stats; details below
+# debug.Breakpoint  class              ... conditional backtrace; details below
+#
 # CAVE: this file makes extensive use of ANSI color codes. These are
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
 #       installed. If the color codes aren't interpreted correctly, then
@@ -438,6 +441,156 @@ var isnan = func {
 	return !!size(err);
 }
 
+# Probe class - collect statistics; controlled via property tree
+# Data can be viewed / modified in the prop tree /_debug/nas/probe-<myLabel>/*
+# ./enable    bool, 
+# ./reset     bool, reset hit counters to 0 and _start_time to now
+# ./hits[i]   number of hits, by default i=0 -> hits
+#             secondary counters can be added under the same path 
+#             with addCounter()
+# ./time      after generateStats() show how long the probe was enabled
+# ./hps       after generateStats() show avg. hits/second
+# ./hitratio  after generateStats() if two counters: hits[1]/hits[0]
+#
+# == Example == 
+# var myProbe = debug.Probe.new("myLabel").enable();
+# var cnt2 = myProbe.addCounter(); # create a 2nd counter
+#
+# #at the place of interest (e.g. in some loop or class method) insert:
+# myProbe.hit();        # count how often this place in the code is hit
+# if (condition) 
+#    myProbe.hit(cnt2); # count how often condition is true
+#
+# print(myProbe.getHits()); 
+# print(myProbe.getHits(cnt2)/myProbe.getHits()); # print hit ratio
+#
+var Probe = {
+    # label:       Used in property path 
+    # prefix:      Optional 
+    new: func(label, class = "probe") {
+        var obj = {
+            parents: [Probe],
+            label: "",
+            hits: [0],
+            node: nil,
+            _enableN: nil,
+            _resetN: nil,
+            _hitsN: [],
+            _start_time: 0,
+            _stop_time: 0,
+            _timeoutN: nil,   # > 0, disable probe after _timeout seconds
+            _L: [],
+        };
+        if (typeof(label) != "scalar" or typeof(class) != "scalar") {
+            die("Invalid argument type to Probe.new");
+        }
+        class = globals.string.replace(class, " ", "_");
+        label = globals.string.replace(label, " ", "_");
+        obj.label = globals.string.replace(label, "/", "_");
+        obj.node = props.globals.getNode("/_debug/nas/"~class~"-"~obj.label, 1);
+        obj.node.removeChildren();
+        obj._enableN = obj.node.addChild("enable");
+        obj._enableN.setBoolValue(0);
+        append(obj._L, 
+            setlistener(obj._enableN, func(n) {
+                if (n.getValue()) obj.enable();
+                else obj.disable();
+            }, 0, 0)
+        );
+        obj._resetN = obj.node.addChild("reset");
+        obj._resetN.setBoolValue(0);
+        append(obj._L, 
+            setlistener(obj._resetN, func(n) {
+                if (n.getValue()) {
+                    obj.reset();
+                    n.setValue(0);
+                }
+            }, 0, 0)
+        );
+        append(obj._hitsN, obj.node.addChild("hits"));
+        obj._hitsN[0].setIntValue(0);
+        return obj;
+    },
+    
+    reset: func {
+        forindex (var i; me.hits) {
+            me.hits[i] = 0;
+            me._hitsN[i].setValue(0);
+        }
+        me._start_time = systime();
+    },
+    
+    # set timeout, next hit() after timeout will disable()
+    setTimeout: func(seconds) {
+        if (!isa(me._timeoutN, props.Node))
+            me._timeoutN = me.node.getNode("timeout", 1);
+        me._timeoutN.setValue(num(seconds) or 0);
+        return me;
+    },
+    
+    #enable counting 
+    enable: func {
+        me._enableN.setValue(1);
+        me._start_time = systime();
+        return me;
+    },
+    
+    #disable counting, write time and hit/s to property tree
+    disable: func {
+        me._enableN.setValue(0);
+        me._stop_time = systime();
+        me.generateStats();
+        return me;
+    },
+    
+    generateStats: func {
+        if (me._start_time) {
+            if (me._enableN.getValue())
+                me._stop_time = systime();
+            var dt = me._stop_time - me._start_time;
+            me.node.getNode("time", 1).setValue(dt);
+            me.node.getNode("hps", 1).setValue(me.hits[0] / dt );
+            if (size(me.hits) == 2)
+                me.node.getNode("hitratio",1).setValue(me.hits[1] / me.hits[0] or 1);
+        }
+    },
+    
+    getHits: func(counter_id = 0) {
+        return me.hits[counter_id];
+    },
+    
+    # add secondary counter(s)
+    # returns counter id
+    addCounter: func {
+        append(me._hitsN, me.node.addChild("hits"));
+        append(me.hits, 0);
+        return size(me._hitsN) - 1;
+    },
+
+    # increase counter (if enabled)
+    # use addCounter() before using counter_id > 0
+    hit: func(counter_id = 0, callback = nil) {
+        if (me._enableN.getValue()) {
+            if (counter_id >= size(me._hitsN)) {
+                print("debug.Probe.hit(): Invalid counter_id");
+                me.disable();
+                return nil;
+            }
+            if (isa(me._timeoutN, props.Node)) {
+                var timeout = me._timeoutN.getValue();
+                if (timeout and systime() - me._start_time > timeout) {
+                    return me.disable();
+                }
+            }
+            me.hits[counter_id] += 1;
+            me._hitsN[counter_id].setIntValue(me.hits[counter_id]);
+            if (typeof(callback) == "func")
+                callback(me.hits);
+        }
+        return me;
+    },
+};
+
 # Breakpoint (BP) - do conditional backtrace (BT) controlled via property tree
 # * count how often the BP was hit
 # * do only a limited number of BT, avoid flooding the log / console
@@ -461,63 +614,45 @@ var Breakpoint = {
     # dump_locals: bool passed to backtrace. Dump variables in BT.
     new: func(label, dump_locals = 1) {
         var obj = {
-            parents: [Breakpoint],
-            _tokensN: nil,
-            tokens: 0,
-            _hitsN: nil,
-            hits: 0,
-            label: "",
+            parents: [Breakpoint, Probe.new(label, "bp")],
+            tokens: 0,            
             dump_locals: num(dump_locals),
         };
-        label = globals.string.replace(label, " ", "_");
-        obj.label = globals.string.replace(label, "/", "_");
-        var prop_path = "/_debug/nas/bp-"~obj.label~"/";
-        obj._tokensN = props.globals.getNode(prop_path~"token", 1);
-        obj._hitsN = props.globals.getNode(prop_path~"hits", 1);
-        obj._hitsN.setIntValue(0);
-        obj.disable();
+        obj._enableN.remove();
+        obj._enableN = obj.node.getNode("tokens", 1);
+        obj._enableN.setIntValue(0);
         return obj;
     },
-    
+
     # enable BP and set hit limit; 
     # tokens: int > 0; default: 1 (single shot); 0 allowed (=disable); 
     enable: func(tokens = 1) {
         if (num(tokens) == nil) tokens = 1;
         if (tokens < 0) tokens = 0;
         me.tokens = tokens;
-        me._tokensN.setIntValue(tokens);
+        me._enableN.setIntValue(tokens);
         return me;
-    },
-    
-    # set tokens to zero, disables backtrace in hit()
-    disable: func {
-        me._tokensN.setIntValue(0);
-        return me;
-    },
-    
-    # get total number of hits (not #backtraces done)
-    getHits: func {
-        return me.hits;
     },
     
     # hit the breakpoint, e.g. do backtrace if we have tokens available
     hit: func(callback = nil) {
-        me.hits += 1;
-        me._hitsN.setIntValue(me.hits);
-        me.tokens = me._tokensN.getValue();
+        me.hits[0] += 1;
+        me._hitsN[0].setIntValue(me.hits[0]);
+        me.tokens = me._enableN.getValue();
         if (me.tokens > 0) {
             me.tokens -= 1;
             if (typeof(callback) == "func") {
-                callback(me.hits, me.tokens);
+                callback(me.hits[0], me.tokens);
             }
             else {
                 debug.backtrace(me.label, me.dump_locals, 1);
             } 
-            me._tokensN.setValue(me.tokens);
+            me._enableN.setValue(me.tokens);
         }
         return me;
     },
 };
+
 
 # --prop:debug=1 enables debug mode with additional warnings
 #

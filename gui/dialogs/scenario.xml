@@ -188,38 +188,32 @@
       };
 
       var columns = [ "left-column", "right-column" ];
-      var processScenario = func(nr,file, rootN) {
-        var scenarioN = rootN.getNode("scenario");
-        if( scenarioN == nil ) return;
+
+      var processScenario = func(nr, rootN) {
         var descriptionN = rootN.getNode("description");
         var nameN = rootN.getNode("name");
-        if( (descriptionN == nil)and(nameN == nil) )
-        {
-          descriptionN = scenarioN.getNode("description");
-          nameN = scenarioN.getNode("name");
-        }
         var description = descriptionN != nil ? descriptionN.getValue() : "";
+        var scenarioId = rootN.getNode("id").getValue();
+
         var propertyRoot = props.globals.getNode("sim/gui/dialogs/scenario",1).getChild( "scenario", nr, 1 );
-        propertyRoot.getNode("selected",1).setBoolValue(isEnabledScenario(file));
-        propertyRoot.getNode("name",1).setValue(file);
+        propertyRoot.getNode("selected",1).setBoolValue(isEnabledScenario(scenarioId));
+        propertyRoot.getNode("name",1).setValue(scenarioId);
 
         var group = gui.findElementByName( dlg_root, columns[math.mod(nr,2)] ).getChild("group", nr, 1 );
         group.getNode("layout",1).setValue("hbox");
         var cb = group.getNode("checkbox",1);
         cb.getNode("property",1).setValue(propertyRoot.getNode("selected").getPath());
-        var label = string.replace(file, "_", " ");
-        if (nameN != nil)
-            label = nameN.getValue();
-        
+        var label = nameN.getValue();
+
         cb.getNode("label",1).setValue(label);
-        cb.getNode("name",1).setValue(file);
+        cb.getNode("name",1).setValue(scenarioId);
         
         var applyBind = cb.addChild("binding", 0);
         applyBind.getNode("command", 1).setValue("dialog-apply");
         
         var bind = cb.addChild("binding", 1);
         bind.getNode("command", 1).setValue("load-scenario");
-        bind.getNode("name", 1).setValue(file);
+        bind.getNode("name", 1).setValue(scenarioId);
         bind.getNode("load-property", 1).setValue(propertyRoot.getNode("selected").getPath());
         
         #cb.getNode("enable/property",1).setValue("/sim/ai/scenarios-enabled");
@@ -229,9 +223,8 @@
 
       var path = getprop("/sim/fg-root") ~ "/AI";
       var i = -1;
-      foreach(var file; sort(directory(path), cmp))
-        if(size(file) > 4 and substr(file, -4) == ".xml")
-          processScenario( i+=1, substr(file,0,size(file)-4), io.read_properties(path ~ "/" ~ file) );
+      foreach(var s; props.globals.getNode("sim/ai/scenarios",1).getChildren("scenario"))
+          processScenario( i+=1, s );
 
     ]]></open>
 

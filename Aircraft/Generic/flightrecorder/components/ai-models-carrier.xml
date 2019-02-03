@@ -126,7 +126,7 @@
   </signal>
   <signal>
     <type>string</type>
-    <property type="string">/ai/models/carrier[%i]/controls/flight/longitude-mode</property>
+    <property type="string">/ai/models/carrier[%i]/controls/flight/vertical-mode</property>
   </signal>
   <signal>
     <type>double</type>

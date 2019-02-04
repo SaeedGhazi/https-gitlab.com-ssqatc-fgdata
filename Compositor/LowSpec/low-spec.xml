@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    This Compositor imitates the classic forward pipeline used before multi-pass
+    rendering was introduced. It doesn't involve any FBOs and all the rendering
+    happens in two passes rendering directly to the screen.
+    
+    The precision of the Z-buffer deteriorates with huge near-far spreads, so
+    two passes with different depth ranges are used to avoid Z-fighting and
+    other unpleasantness.
+-->
+<PropertyList>
+  <name>low-spec</name>
+  <pass n="0">
+    <name>far-pass</name>
+    <type>scene</type>
+    <z-near>100.0</z-near>
+    <z-far>120000.0</z-far>
+  </pass>
+  <pass n="1">
+    <name>near-pass</name>
+    <type>scene</type>
+    <cull-mask>0xfff7ff</cull-mask> <!-- Cull the sky (bit 11 off) -->
+    <!-- Only clear the depth buffer so color information isn't overwritten -->
+    <clear-color-bit>false</clear-color-bit>
+    <clear-depth-bit>true</clear-depth-bit>
+    <clear-stencil-bit>false</clear-stencil-bit>
+    <z-near>0.1</z-near>
+    <z-far>100.0</z-far>
+  </pass>
+</PropertyList>

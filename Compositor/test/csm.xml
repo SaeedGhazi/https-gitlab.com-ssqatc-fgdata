@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>shadow-map</type>
+  <light-name>FGLightSource</light-name>
+  <effect-override>Effects/shadow-pass</effect-override>
+  <!-- Only render objects with the CAST_SHADOW bit flag -->
+  <cull-mask>0x000004</cull-mask>
+  <!--
+  <condition>
+	<property>/sim/rendering/shadows/enabled</property>
+  </condition>
+  -->
+  <attachment>
+    <buffer>shadow-atlas</buffer>
+    <component>depth</component>
+  </attachment>
+</PropertyList>

@@ -92,28 +92,14 @@ var parsesvg = func(group, path, options = nil)
 
     if( cur_clip != nil )
     {
-      if(     cur_clip['x'] != nil
-          and cur_clip['y'] != nil
-          and cur_clip['width'] != nil
-          and cur_clip['height'] != nil )
-      {
-        var rect = sprintf(
-          "rect(%f, %f, %f, %f)",
-          cur_clip['y'],
-          cur_clip['x'] + cur_clip['width'],
-          cur_clip['y'] + cur_clip['height'],
-          cur_clip['x']
-        );
-
-        stack[-1].set("clip", rect);
-        stack[-1].set("clip-frame", canvas.Element.LOCAL);
+      if(cur_clip['x'] != nil and cur_clip['y'] != nil
+         and cur_clip['width'] != nil and cur_clip['height'] != nil ) {
+        stack[-1].setClipByBoundingBox(cur_clip['x'], cur_clip['y'],
+           cur_clip['x'] + cur_clip['width'], cur_clip['y'] + cur_clip['height']);
       }
-      else
-        printlog(
-          "warn",
-          "Invalid or unsupported clip for element '" ~ id ~ "'"
-        );
-
+      else {
+        printlog("warn", "Invalid or unsupported clip for element '" ~ id ~ "'");
+      }
       cur_clip = nil;
     }
   }
@@ -619,7 +605,7 @@ var parsesvg = func(group, path, options = nil)
       pushElement("image", attr["id"]);
 
       if (attr["x"] != nil and attr["y"] != nil) {
-        stack[-1].setTranslation(attr["x"], attr["y"]);
+        stack[-1].createTransform().setTranslation(attr["x"], attr["y"]);
       }
       if (attr["width"] != nil and attr["height"] != nil) {
         stack[-1].setSize(attr["width"], attr["height"]);
@@ -728,7 +714,7 @@ var parsesvg = func(group, path, options = nil)
         stack[-1].setText(tspan.text);
 
         if( x != 0 or y != 0 )
-          stack[-1].setTranslation(x, y);
+          stack[-1].createTransform().setTranslation(x, y);
 
         if( size(tspans) == 1 )
         {

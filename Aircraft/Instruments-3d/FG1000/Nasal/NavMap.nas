@@ -254,7 +254,7 @@ var NavMap = {
   {
     var incr_or_decr = (val > 0) ? 1 : -1;
     me.setZoom(me._current_zoom + incr_or_decr);
-    return emesary.Transmitter.ReceiptStatus_Finished;
+    return emesary.Transmitter.ReceiptStatus_OK;
   },
 
   getMap : func() {

@@ -23,11 +23,11 @@
      borderopacity="0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.828427"
-     inkscape:cx="837.03116"
-     inkscape:cy="90.026882"
+     inkscape:zoom="1.4142135"
+     inkscape:cx="642.54405"
+     inkscape:cy="640.61088"
      inkscape:document-units="px"
-     inkscape:current-layer="NrstPageGroup"
+     inkscape:current-layer="g57958"
      showgrid="true"
      inkscape:window-width="2495"
      inkscape:window-height="1416"
@@ -65,8 +65,7 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Surround"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <g
        id="NAV"
        inkscape:label="NAV"
@@ -885,14 +884,89 @@
              x="397.90625"
              id="tspan57988"
              sodipodi:role="line">D</tspan></text>
+        <text
+           sodipodi:linespacing="125%"
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:21.33374929px;line-height:125%;font-family:FreeSans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'FreeSans, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
+           x="269.76041"
+           y="47.697918"
+           id="SurroundHeaderAPLateralArmed"
+           inkscape:label="DATA-FIELD2-VAL-text"><tspan
+             sodipodi:role="line"
+             id="tspan7801">ARM</tspan></text>
+        <text
+           sodipodi:linespacing="125%"
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:21.33374929px;line-height:125%;font-family:FreeSans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'FreeSans, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
+           x="344.76041"
+           y="47.697918"
+           id="SurroundHeaderAPLateralActive"
+           inkscape:label="DATA-FIELD2-VAL-text"><tspan
+             sodipodi:role="line"
+             id="tspan7803">ACT</tspan></text>
+        <text
+           sodipodi:linespacing="125%"
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374929px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+           x="404.32443"
+           y="48"
+           id="SurroundHeaderAPStatus"
+           inkscape:label="DATA-FIELD2-VAL-text"><tspan
+             sodipodi:role="line"
+             id="tspan7838">AP</tspan></text>
+        <text
+           sodipodi:linespacing="125%"
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374929px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+           x="497.86313"
+           y="48.000004"
+           id="SurroundHeaderAPVerticalActive"
+           inkscape:label="DATA-FIELD2-VAL-text"><tspan
+             sodipodi:role="line"
+             id="tspan7873">ACT</tspan></text>
+        <text
+           sodipodi:linespacing="125%"
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="659.67999"
+           y="48"
+           id="SurroundHeaderAPVerticalArmed"
+           inkscape:label="DATA-FIELD2-VAL-text"><tspan
+             sodipodi:role="line"
+             id="tspan7893"
+             x="659.67999"
+             y="48">ARM</tspan></text>
+        <text
+           sodipodi:linespacing="125%"
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33374977px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="595.99384"
+           y="48.000008"
+           id="SurroundHeaderAPVerticalReference"
+           inkscape:label="DATA-FIELD2-VAL-text"><tspan
+             sodipodi:role="line"
+             id="tspan7913"
+             x="595.99384"
+             y="48.000008">5000ft</tspan></text>
       </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4617-5"
+         d="m 395.71032,56 0,-28"
+         style="display:inline;fill:none;stroke:#ffffff;stroke-width:1.42064464;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4617-5-4"
+         d="m 489.28968,56 0,-28"
+         style="display:inline;fill:none;stroke:#ffffff;stroke-width:1.42064464;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="PageGroup"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <g
        style="display:inline"
        id="WPTPageGroup"
@@ -1162,7 +1236,7 @@
        id="FPLPageGroup"
        inkscape:label="#g5441">
       <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.752;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.75199997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect5325"
          width="257.24811"
          height="70.710793"

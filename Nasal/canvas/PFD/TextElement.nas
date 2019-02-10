@@ -63,6 +63,7 @@ var TextElement =
   },
   isEditable : func () { return 0; },
   isInEdit : func() { return 0; },
+  isHighlighted : func() { return me._highlightEnabled; },
   enterElement : func() { return me.getValue(); },
   clearElement : func() { },
   editElement : func()  { },

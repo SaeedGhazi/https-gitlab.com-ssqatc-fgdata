@@ -75,6 +75,16 @@ var HEADER_MAPPING = {
   "VSR" : { message : "FMSLegVerticalSpeedRequired", format : "%dfpm"},   # TODO
 };
 
+# Style element use for the AP Status indicator.  This is normally green text
+# on a black background, but is highlighted when disengaged as black text on a yellow
+# background for 5 seconds.
+var AP_STATUS_STYLE = {
+  CURSOR_BLINK_PERIOD : 0.5,
+  HIGHLIGHT_COLOR :  "#ffff00",
+  HIGHLIGHT_TEXT_COLOR : "#000000",
+  NORMAL_TEXT_COLOR : "#00ff00",
+};
+
 var Surround =
 {
   new : func (mfd, myCanvas, device, svg, pfd=0)
@@ -98,6 +108,9 @@ var Surround =
 
     if (pfd) {
       obj.addTextElements(["HeaderFrom", "HeaderTo", "LegDistance", "LegBRG"]);
+      obj.addTextElements(["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"]);
+      obj._apStatus = PFD.TextElement.new(obj.pageName, svg, "HeaderAPStatus", "", AP_STATUS_STYLE);
+      obj._apStatusTimer = nil;
       obj._dto = PFD.HighlightElement.new(obj.pageName, svg, "HeaderDTO", "DTO");
       obj._leg = PFD.HighlightElement.new(obj.pageName, svg, "HeaderActiveLeg", "Leg");
     } else {
@@ -254,6 +267,35 @@ var Surround =
         }
       }
 
+      if (data["AutopilotHeadingMode"] != nil) me.setTextElement("HeaderAPLateralActive", data["AutopilotHeadingMode"]);
+      if (data["AutopilotHeadingModeArmed"] != nil) me.setTextElement("HeaderAPLateralArmed", data["AutopilotHeadingModeArmed"]);
+      if (data["AutopilotAltitudeMode"] != nil) me.setTextElement("HeaderAPVerticalActive", data["AutopilotAltitudeMode"]);
+      if (data["AutopilotAltitudeModeArmed"] != nil) me.setTextElement("HeaderAPVerticalArmed", data["AutopilotAltitudeModeArmed"]);
+
+      if (data["AutopilotEnabled"] != nil) {
+        if (data["AutopilotEnabled"] == 1) {
+          me._apStatus.setValue("AP");
+          if (me._apStatusTimer != nil) {
+            # We were previously flashing, so stop.
+            me._apStatusTimer.stop();
+            me._apStatusTimer = nil;
+            me._apStatus.unhighlightElement();
+          }
+        } else {
+          if ((me._apStatus.getValue() != "") and (me._apStatus.isHighlighted() == 0)) {
+            # We were previously enabled, so we want to make the AP Status element
+            # flash for 5 seconds before removing it.  The highlightElement()
+            # starts it flashing, and we use a timer to stop it.
+            me._apStatus.highlightElement();
+            if (me._apStatusTimer == nil) me._apStatusTimer =
+              maketimer(5.0, me, func() { me._apStatus.unhighlightElement(); me._apStatus.setValue(""); } );
+            me._apStatusTimer.singleShot = 1;
+            me._apStatusTimer.restart(5.0);
+          }
+        }
+      }
+
+      if (data["AutopilotTargetVertical"] != nil) me.setTextElement("HeaderAPVerticalReference", data["AutopilotTargetVertical"]);
       if (data["FMSLegDesiredTrack"]) me.setTextElement("LegBRG", sprintf("%i°", data["FMSLegDesiredTrack"]));
       if (data["FMSLegDistanceNM"]) me.setTextElement("LegDistance", sprintf("%.1fnm", data["FMSLegDistanceNM"]));
     } else {

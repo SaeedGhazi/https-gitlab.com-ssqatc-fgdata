@@ -44,6 +44,7 @@ var PFDInstruments =
       _OMI : "",
       _Multiline : 0,
       _annunciation : 0,
+      _fd_enabled : 1,  # Mark the Flight Director as enabled, as it is visible in the SVG.
     };
 
     # Hide various elements for the moment. TODO - implement
@@ -136,7 +137,7 @@ var PFDInstruments =
 
     pg.clearMenu();
     pg.resetMenuColors();
-    pg.addMenuItem(0, "OFF", pg, func(dev, pg, mi) { pg.setInsetMapVisible(0); });  # TODO
+    pg.addMenuItem(0, "OFF", pg, func(dev, pg, mi) { pg.setInsetMapVisible(0); pg.mfd.PFDInstruments.topMenu(dev, pg, mi); } );
     pg.addMenuItem(1, "DCLTR", pg,
       func(dev, pg, mi) { pg.insetMap.incrDCLTR(dev, mi); device.updateMenus(); },
       func(svg, mi) { pg.displayDCLTR(svg, mi); },
@@ -325,6 +326,25 @@ var PFDInstruments =
       .setRotation(-roll * D2R);
     me.getElement("SlipSkid")
       .setTranslation(slip * 10, 0);
+  },
+
+  updateFD : func(enabled, pitch, roll, fd_pitch, fd_roll) {
+    if (enabled) {
+      me.getElement("FlightDirector")
+        .setCenter(459,282.8)
+        .setRotation(-(roll - fd_roll) * D2R)
+        .setTranslation(0, -(fd_pitch - pitch) * 6.849)
+        .setVisible(1);
+      me._fd_enabled = 1;
+    } else if (me._fd_enabled == 1) {
+      me.getElement("FlightDirector").setVisible(0);
+      me._fd_enabled = 0;
+    }
+
+    # Overrides - command bars disappear if pitch exceeeds -20/+30, roll 65
+    if ((pitch < -20.0) or (pitch > 30.0) or (roll < -65.0) or (roll > 65.0)) {
+      me.getElement("FlightDirector").setVisible(0);
+    }
   },
 
   updateIAS: func (ias, ias_trend) {

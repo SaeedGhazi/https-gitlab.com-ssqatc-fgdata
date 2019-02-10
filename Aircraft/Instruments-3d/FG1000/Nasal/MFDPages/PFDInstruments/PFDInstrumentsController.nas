@@ -1,4 +1,3 @@
-
 # Copyright 2018 Stuart Buchanan
 # This file is part of FlightGear.
 #
@@ -40,6 +39,11 @@ var PFDInstrumentsController =
       _heading_magnetic_deg : 0,
       _mag_var : 0,
       _time_sec : 0,
+
+      _fd_pitch : 0,
+      _fd_roll : 0,
+      _fd_enabled : 0,
+      _ap_enabled : 0,
 
       _fp_active : 0,
       _fp_current_wp : 0,
@@ -227,6 +231,7 @@ var PFDInstrumentsController =
     var roll = data["ADCRollDeg"];
     var slip = data["ADCSlipSkid"];
     me.page.updateAI(pitch, roll, slip);
+    me.page.updateFD((me._fd_enabled or me._ap_enabled), pitch, roll, me._fd_pitch, me._fd_roll);
 
     me.page.updateVSI(data["ADCVerticalSpeedFPM"]);
     me.page.updateTAS(data["ADCTrueAirspeed"]);
@@ -280,6 +285,12 @@ var PFDInstrumentsController =
     # TODO:  Proper cross-track error based on source and flight phase.
     if (data["FMSLegCourseError"] != nil) me._deflection_dots = data["FMSLegCourseError"] /2.0;
     if (data["FMSLegCourseError"] != nil) me._leg_xtrk_nm = data["FMSLegCourseError"];
+
+    if (data["AutopilotFDEnabled"] != nil) me._fd_enabled = data["AutopilotFDEnabled"];
+    if (data["AutopilotEnabled"] != nil) me._ap_enabled = data["AutopilotEnabled"];
+
+    if (data["AutopilotTargetPitch"] != nil) me._fd_pitch   = data["AutopilotTargetPitch"];
+    if (data["AutopilotTargetRoll"] != nil)  me._fd_roll    = data["AutopilotTargetRoll"];
 
     var update_fp = 0;
 

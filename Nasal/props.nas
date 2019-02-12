@@ -56,6 +56,22 @@ var Node = {
         if((var p = me.getParent()) == nil) return nil;
         p.removeChild(me.getName(), me.getIndex());
     },
+
+    # follow alias links to "real" node (e.g. where the data is stored)
+    # optional argument: property node or prop path to resolve
+    # if no argument is given, operate on current obj ("me")
+    resolveAlias : func(p = nil) {
+        if (p == nil)
+            p = me;
+        elsif (typeof(p) == "scalar")
+            p = globals.getNode(p);
+        if (isa(p, Node)) {
+            while (p.getAttribute("alias")) {
+                p = p.getAliasTarget();
+            }
+        }
+        return p;
+    },
 };
 
 ##

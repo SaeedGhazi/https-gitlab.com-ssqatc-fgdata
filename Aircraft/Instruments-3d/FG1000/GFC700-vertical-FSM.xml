@@ -157,17 +157,17 @@
 
 <transition>
   <name>ALTS Capture</name>
-  <!-- Altitude Capture Mode enabled when we get within 500ft of the selected altitude -->
+  <!-- Altitude Capture Mode enabled when we get within 200ft of the selected altitude -->
   <source>ALTS-ARM</source>
   <target>ALTS</target>
   <condition>
     <less-than>
-      <property>/autopilot/internal/target-altitude-delta-ft</property>
-      <value>500</value>
+      <property>/autopilot/internal/ALTS-target-altitude-delta-ft</property>
+      <value>200</value>
     </less-than>
     <greater-than>
-      <property>/autopilot/internal/target-altitude-delta-ft</property>
-      <value>-500</value>
+      <property>/autopilot/internal/ALTS-target-altitude-delta-ft</property>
+      <value>-200</value>
     </greater-than>
   </condition>
 </transition>
@@ -180,7 +180,7 @@
       <!-- Set up the 2nd target, so that it is independent of the Selected Altitude,
        then annunciator to the reference value current target value, then enable
       the altitude capture function  -->
-      setprop("/autopilot/settings/target-altitude-ft-2", getprop("/autopilot/settings/target-altitude-ft"));
+      setprop("/autopilot/settings/target-altitude-ft-2", getprop("/autopilot/settings/target-alt-ft"));
       setprop("/autopilot/annunciator/vertical-mode-target",
         sprintf("%ift", getprop("/autopilot/settings/target-altitude-ft-2"))
       );
@@ -218,10 +218,10 @@
   <target>ALTS-ARM</target>
   <!-- Transitions must have a condition element.  So set it to True -->
   <condition>
-    <not>
+    <greater-than>
       <property>/sim/time/elapsed-sec</property>
       <value>0</value>
-    </not>
+    </greater-than>
   </condition>
 </transition>
 
@@ -273,6 +273,18 @@
     <property>/autopilot/vertical-mode-button</property>
     <value></value>
   </enter>
+</state>
+
+<state>
+  <name>VNV</name>
+</state>
+
+<state>
+  <name>BC</name>
+</state>
+
+<state>
+  <name>FLC</name>
 </state>
 
 <!-- From the OFF state, pressing any of FD, AP, CWS, NAV, BC, APR, HDG changes to PIT mode -->
@@ -335,13 +347,16 @@
 
 <!-- From any state pressing VS changes to VS mode -->
 <transition>
-  <name>VS</name>
+  <name>VS-ON</name>
   <target>VS</target>
   <exclude-target>true</exclude-target>
   <condition>
     <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
   </condition>
 </transition>
+
+
+<!-- Transitions to switch off various AP modes, which return to PIT mode -->
 
 <!-- From any state, pressing GA goes to GA mode -->
 <transition>
@@ -370,5 +385,61 @@
     </script>
   </binding>
 </transition>
+
+<!-- From VS state pressing VS changes back to to PIT mode -->
+<transition>
+  <name>VS-OFF</name>
+  <source>VS</source>
+  <target>PIT</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
+  </condition>
+</transition>
+
+<!-- From ALT state pressing ALT changes back to to PIT mode -->
+<transition>
+  <name>ALT-OFF</name>
+  <source>ALT</source>
+  <target>PIT</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <equals><property>/autopilot/vertical-mode-button</property><value>ALT</value></equals>
+  </condition>
+</transition>
+
+<!-- From VNV state pressing ALT changes back to to PIT mode -->
+<transition>
+  <name>VNV-OFF</name>
+  <source>VNV</source>
+  <target>PIT</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <equals><property>/autopilot/vertical-mode-button</property><value>VNV</value></equals>
+  </condition>
+</transition>
+
+<!-- From BC state pressing BC changes back to to PIT mode -->
+<transition>
+  <name>BC-OFF</name>
+  <source>BC</source>
+  <target>PIT</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <equals><property>/autopilot/vertical-mode-button</property><value>BC</value></equals>
+  </condition>
+</transition>
+
+<!-- From BC state pressing BC changes back to to PIT mode -->
+<transition>
+  <name>FLC-OFF</name>
+  <source>FLC</source>
+  <target>PIT</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <equals><property>/autopilot/vertical-mode-button</property><value>FLC</value></equals>
+  </condition>
+</transition>
+
 
 </PropertyList>

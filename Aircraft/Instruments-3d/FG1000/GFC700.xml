@@ -174,9 +174,9 @@
     <debug>false</debug>
     <type>gain</type>
     <input>
-      <property>/autopilot/settings/target-altitude-ft</property>
+      <property>/autopilot/settings/target-alt-ft</property>
       <offset>
-        <property>/instrumentation/altimeter/indicated-altitude-ft-2</property>
+        <property>/instrumentation/altimeter/indicated-altitude-ft</property>
         <scale>-1.0</scale>
       </offset>
     </input>
@@ -467,15 +467,15 @@
        <prop>/autopilot/settings/target-pitch-deg</prop>
      </output>
      <config>
-       <Kp>-0.01</Kp>      <!-- proportional gain -->
+       <Kp>0.1</Kp>       <!-- proportional gain -->
        <beta>1.0</beta>    <!-- input value weighing factor -->
        <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
        <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                            <!-- unfiltered derivative error -->
-       <Ti>10.0</Ti>       <!-- integrator time -->
+       <Ti>1.0</Ti>        <!-- integrator time -->
        <Td>0.00001</Td>    <!-- derivator time -->
-       <u_min>-1.0</u_min> <!-- minimum output clamp -->
-       <u_max>1.0</u_max>  <!-- maximum output clamp -->
+       <u_min>-15.0</u_min><!-- minimum output clamp -->
+       <u_max>15.0</u_max> <!-- maximum output clamp -->
      </config>
    </pid-controller>
 
@@ -496,7 +496,7 @@
       </condition>
     </enable>
     <input>
-      <prop>/position/altitude-ft</prop>
+      <prop>/instrumentation/altimeter/indicated-altitude-ft</prop>
     </input>
     <reference>
       <prop>/autopilot/settings/target-altitude-ft</prop>
@@ -528,7 +528,7 @@
       </condition>
     </enable>
     <input>
-      <prop>/position/altitude-ft</prop>
+      <prop>/instrumentation/altimeter/indicated-altitude-ft</prop>
     </input>
     <reference>
       <prop>/autopilot/settings/target-altitude-ft-2</prop>

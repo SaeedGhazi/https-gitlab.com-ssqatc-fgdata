@@ -20,11 +20,16 @@ io.include("Constants.nas");
 removecommand("FG1000HardKeyPushed");
 addcommand("FG1000HardKeyPushed",
   func(node) {
-    var device = int(node.getNode("device", 1).getValue());
+    var device = node.getNode("device", 1).getValue();
     var name = node.getNode("notification",1).getValue();
 
     # The knob animation stores the value as an offset property
     var value = node.getNode("offset", 1).getValue();
+
+    if (name == nil) {
+      print("FG1000HardKeyPushed: No <name> argument passed to fgcommand");
+      return;
+    }
 
     if (value == nil) {
       print("FG1000HardKeyPushed: No <offset> argument passed to fgcommand");
@@ -32,7 +37,7 @@ addcommand("FG1000HardKeyPushed",
     }
 
     if (device == nil) {
-      print("FG1000HardKeyPushed: Unknown device" ~ node.getNode("device").getValue());
+      print("FG1000HardKeyPushed: No <device> argument passed to fgcommand for " ~ name);
       return;
     }
 
@@ -49,7 +54,7 @@ addcommand("FG1000HardKeyPushed",
 
     var notification = notifications.PFDEventNotification.new(
       "MFD",
-      device,
+      int(device),
       notifications.PFDEventNotification.HardKeyPushed,
       { Id: name, Value: value }
     );

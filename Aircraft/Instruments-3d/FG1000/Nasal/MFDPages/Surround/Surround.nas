@@ -111,6 +111,8 @@ var Surround =
       obj.addTextElements(["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"]);
       obj._apStatus = PFD.TextElement.new(obj.pageName, svg, "HeaderAPStatus", "", AP_STATUS_STYLE);
       obj._apStatusTimer = nil;
+      obj._apHeadingModeTimer = nil;
+      obj._apAltitudeModeTimer = nil;
       obj._dto = PFD.HighlightElement.new(obj.pageName, svg, "HeaderDTO", "DTO");
       obj._leg = PFD.HighlightElement.new(obj.pageName, svg, "HeaderActiveLeg", "Leg");
     } else {
@@ -263,6 +265,7 @@ var Surround =
             me._dto.setVisible(1);
           } else {
             me._dto.setVisible(0);
+            me.setTextElement("HeaderFrom", data["FMSPreviousLegID"]);
           }
         }
       }

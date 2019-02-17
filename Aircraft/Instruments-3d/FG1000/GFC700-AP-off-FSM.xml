@@ -57,4 +57,15 @@ to Flight Director mode, by simply setting the passive-mode flag.
   </condition>
 </transition>
 
+<!-- Changing to GA mode automatically disables the autopilot -->
+<transition>
+  <name>ON-OFF</name>
+  <source>ON</source>
+  <target>OFF</target>
+  <exclude-target>false</exclude-target>
+  <condition>
+    <equals><property>/autopilot/AP-mode-button</property><value>GA</value></equals>
+  </condition>
+</transition>
+
 </PropertyList>

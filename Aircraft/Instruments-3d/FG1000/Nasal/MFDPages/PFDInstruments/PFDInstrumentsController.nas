@@ -179,6 +179,17 @@ var PFDInstrumentsController =
     me._CDISource = math.mod(me._CDISource + 1, size(PFDInstrumentsController.CDI_SOURCE));
     var src = PFDInstrumentsController.CDI_SOURCE[me._CDISource];
 
+    # Indicate the change for CDI source to the autopilot
+    var data = {};
+    data["AutopilotNAVSource"] = src;
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      me._page.mfd.getDeviceID(),
+      notifications.PFDEventNotification.FMSData,
+      data);
+
+    me.transmitter.NotifyAll(notification);
+
     # If we're changing to NAV1 or NAV2, we also change the selected NAV.
     if ((src == "NAV1") or (src == "NAV2")) {
       var data = {};

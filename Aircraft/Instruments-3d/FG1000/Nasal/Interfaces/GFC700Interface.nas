@@ -69,9 +69,21 @@ handleNoseUpDown : func(value) {
   }
 
   if (vertical_mode == "FLC") {
-    me._speed_setting.setValue(me._speed_setting.getValue() + (value * 1));
+    # Note that the button is NOSE UP / NOSE DN, so pressing NOSE DN _increases_
+    # speed, while NOSE UP _decreases_ speed.  So the speed setting is reversed
+    # in comparison with setting direct pitch.
+    me._speed_setting.setValue(me._speed_setting.getValue() - (value * 1));
+    setprop("/autopilot/annunciator/vertical-mode-target",
+          sprintf("%i kt", me._speed_setting.getValue())
+    );
   }
 
+  return emesary.Transmitter.ReceiptStatus_Finished;
+},
+
+setAPNavSource : func(src) {
+  setprop("/autopilot/settings/nav-mode-source", src);
+  #  Also need to do something to trigger a NAV change if we're in NAV mode already.
   return emesary.Transmitter.ReceiptStatus_Finished;
 },
 
@@ -107,6 +119,17 @@ RegisterWithEmesary : func()
         if (id == fg1000.FASCIA.NOSE_UP)   return controller.handleNoseUpDown(1);
         if (id == fg1000.FASCIA.NOSE_DOWN)   return controller.handleNoseUpDown(-1);
       }
+
+      if (notification.NotificationType == notifications.PFDEventNotification.DefaultType and
+          notification.Event_Id == notifications.PFDEventNotification.FMSData and
+          notification.EventParameter != nil)
+      {
+        foreach(var key; keys(notification.EventParameter)) {
+          var val = notification.EventParameter[key];
+          if (key == "AutopilotNAVSource")  return controller.setAPNavSource(val);
+        }
+      }
+
       return emesary.Transmitter.ReceiptStatus_NotProcessed;
     };
   }

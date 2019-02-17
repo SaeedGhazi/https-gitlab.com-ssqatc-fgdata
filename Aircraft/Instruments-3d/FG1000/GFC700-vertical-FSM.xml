@@ -58,6 +58,11 @@
   </enter>
   <enter>
     <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value></value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
     <property>/autopilot/annunciator/vertical-mode</property>
     <value>PIT</value>
   </enter>
@@ -86,6 +91,11 @@
     <command>property-assign</command>
     <property>/autopilot/locks/altitude</property>
     <value>pitch-hold</value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value></value>
   </enter>
   <enter>
     <command>property-assign</command>
@@ -125,6 +135,11 @@
     <command>property-assign</command>
     <property>/autopilot/locks/altitude</property>
     <value>vertical-speed-hold</value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value></value>
   </enter>
   <enter>
     <command>property-assign</command>
@@ -202,6 +217,11 @@
     <value>altitude-hold2</value>
   </enter>
   <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value></value>
+  </enter>
+  <enter>
     <!-- Reset button to avoid triggering next transition immediately -->
     <command>property-assign</command>
     <property>/autopilot/vertical-mode-button</property>
@@ -215,6 +235,7 @@
   <source>PIT</source>
   <source>GA</source>
   <source>VS</source>
+  <source>FLC</source>
   <target>ALTS-ARM</target>
   <!-- Transitions must have a condition element.  So set it to True -->
   <condition>
@@ -268,6 +289,11 @@
     <value>altitude-hold2</value>
   </enter>
   <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value></value>
+  </enter>
+  <enter>
     <!-- Reset button to avoid triggering next transition immediately -->
     <command>property-assign</command>
     <property>/autopilot/vertical-mode-button</property>
@@ -285,6 +311,46 @@
 
 <state>
   <name>FLC</name>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/annunciator/vertical-mode</property>
+    <value>FLC</value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/annunciator/vertical-mode-armed</property>
+    <value></value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/settings/target-speed-kt</property>
+    <property n="1">/autopilot/internal/filtered-airspeed</property>
+  </enter>
+  <enter>
+    <command>nasal</command>
+    <script>
+      setprop("/autopilot/annunciator/vertical-mode-target",
+        sprintf("%i kt", getprop("/autopilot/settings/target-speed-kt"))
+      );
+    </script>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/altitude</property>
+    <value></value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value>speed-with-pitch-trim</value>
+  </enter>
+  <enter>
+    <!-- Reset button to avoid triggering next transition immediately -->
+    <command>property-assign</command>
+    <property>/autopilot/vertical-mode-button</property>
+    <value></value>
+  </enter>
+
 </state>
 
 <!-- From the OFF state, pressing any of FD, AP, CWS, NAV, BC, APR, HDG changes to PIT mode -->
@@ -303,25 +369,6 @@
       <equals><property>/autopilot/vertical-mode-button</property><value>APR</value></equals>
       <equals><property>/autopilot/vertical-mode-button</property><value>HDG</value></equals>
     </or>
-  </condition>
-</transition>
-
-<!-- From most vertical modes, pressing the mode key again returns to PIT mode -->
-<transition>
-  <name>VS-PIT</name>
-  <source>VS</source>
-  <target>PIT</target>
-  <condition>
-    <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
-  </condition>
-</transition>
-
-<transition>
-  <name>GA-PIT</name>
-  <source>GA</source>
-  <target>PIT</target>
-  <condition>
-    <equals><property>/autopilot/vertical-mode-button</property><value>GA</value></equals>
   </condition>
 </transition>
 
@@ -351,12 +398,12 @@
   <target>VS</target>
   <exclude-target>true</exclude-target>
   <condition>
-    <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
+    <and>
+      <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
+      <not><equals><property>/autopilot/locks/altitude</property><value>vertical-speed-hold</value></equals></not>
+    </and>
   </condition>
 </transition>
-
-
-<!-- Transitions to switch off various AP modes, which return to PIT mode -->
 
 <!-- From any state, pressing GA goes to GA mode -->
 <transition>
@@ -386,14 +433,34 @@
   </binding>
 </transition>
 
+<!-- From any state pressing FLC changes to FLC mode, if not already enabled -->
+<transition>
+  <name>FLC-ON</name>
+  <target>FLC</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <and>
+      <equals><property>/autopilot/vertical-mode-button</property><value>FLC</value></equals>
+      <not><equals><property>/autopilot/locks/speed</property><value>speed-with-pitch-trim</value></equals></not>
+    </and>
+  </condition>
+</transition>
+
+<!-- Transitions to switch off various AP modes, which return to PIT mode.  This is complicated as in many cases they may be in ALTS-ARM -->
+
+
 <!-- From VS state pressing VS changes back to to PIT mode -->
 <transition>
   <name>VS-OFF</name>
   <source>VS</source>
+  <source>ALTS-ARM</source>
   <target>PIT</target>
   <exclude-target>true</exclude-target>
   <condition>
-    <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
+    <and>
+      <equals><property>/autopilot/vertical-mode-button</property><value>VS</value></equals>
+      <equals><property>/autopilot/locks/altitude</property><value>vertical-speed-hold</value></equals>
+    </and>
   </condition>
 </transition>
 
@@ -408,7 +475,7 @@
   </condition>
 </transition>
 
-<!-- From VNV state pressing ALT changes back to to PIT mode -->
+<!-- From VNV state pressing VNV changes back to to PIT mode -->
 <transition>
   <name>VNV-OFF</name>
   <source>VNV</source>
@@ -430,14 +497,28 @@
   </condition>
 </transition>
 
-<!-- From BC state pressing BC changes back to to PIT mode -->
+<!-- From FLC state pressing FLC changes back to to PIT mode.  Note that we could be in ALTS-ARM mode as well, so check the AP setting -->
 <transition>
   <name>FLC-OFF</name>
   <source>FLC</source>
+  <source>ALTS-ARM</source>
   <target>PIT</target>
   <exclude-target>true</exclude-target>
   <condition>
-    <equals><property>/autopilot/vertical-mode-button</property><value>FLC</value></equals>
+    <and>
+      <equals><property>/autopilot/vertical-mode-button</property><value>FLC</value></equals>
+      <equals><property>/autopilot/locks/speed</property><value>speed-with-pitch-trim</value></equals>
+    </and>
+  </condition>
+</transition>
+
+<!-- From GA state, pressing GA returns to PIT mode -->
+<transition>
+  <name>GA-OFF</name>
+  <source>GA</source>
+  <target>PIT</target>
+  <condition>
+    <equals><property>/autopilot/vertical-mode-button</property><value>GA</value></equals>
   </condition>
 </transition>
 

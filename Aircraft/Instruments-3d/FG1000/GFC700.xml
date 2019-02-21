@@ -262,6 +262,58 @@
     <output>/autopilot/annunciator/flight-director-enabled</output>
   </logic>
 
+  <!-- Logic filter to indicate if we can transtion to GPS/LOC/VOR mode -->
+  <logic>
+    <input>
+      <or>
+        <and>
+          <equals>
+            <property>/autopilot/settings/nav-mode-source</property>
+            <value>NAV1</value>
+          </equals>
+          <less-than>
+            <property>/instrumentation/nav[0]/heading-needle-deflection</property>
+            <value>4.0</value>
+          </less-than>
+          <greater-than>
+            <property>/instrumentation/nav[0]/heading-needle-deflection</property>
+            <value>-4.0</value>
+          </greater-than>
+        </and>
+        <and>
+          <equals>
+            <property>/autopilot/settings/nav-mode-source</property>
+            <value>NAV2</value>
+          </equals>
+          <less-than>
+            <property>/instrumentation/nav[1]/heading-needle-deflection</property>
+            <value>4.0</value>
+          </less-than>
+          <greater-than>
+            <property>/instrumentation/nav[1]/heading-needle-deflection</property>
+            <value>-4.0</value>
+          </greater-than>
+        </and>
+        <and>
+          <equals>
+            <property>/autopilot/settings/nav-mode-source</property>
+            <value>GPS</value>
+          </equals>
+          <less-than>
+            <property>/instrumentation/gps/wp/wp[1]/course-error-nm</property>
+            <value>0.5</value>
+          </less-than>
+          <greater-than>
+            <property>/instrumentation/gps/wp/wp[1]/course-error-nm</property>
+            <value>-0.5</value>
+          </greater-than>
+        </and>
+      </or>
+    </input>
+    <output>/autopilot/internal/nav-capture</output>
+  </logic>
+
+
   <!-- =============================================================== -->
   <!-- Roll Axis Modes                                                 -->
   <!-- =============================================================== -->
@@ -655,16 +707,27 @@
 
   <!-- Glideslope hold. -->
 
-  <!-- Stage #2 drives the elevator-trim to achieve the desired climb rate. -->
   <pid-controller>
-    <name>Glideslope Hold</name>
+    <name>NAV1/GPS Glideslope Hold</name>
     <debug>false</debug>
     <enable>
       <condition>
-        <equals>
-          <property>/autopilot/locks/altitude</property>
-          <value>gs1-hold</value>
-        </equals>
+        <and>
+          <equals>
+            <property>/autopilot/locks/altitude</property>
+            <value>gs-hold</value>
+          </equals>
+          <or>
+            <equals>
+              <property>/autopilot/settings/nav-mode-source</property>
+              <value>GPS</value>
+            </equals>
+            <equals>
+              <property>/autopilot/settings/nav-mode-source</property>
+              <value>NAV1</value>
+            </equals>
+          </or>
+        </and>
       </condition>
     </enable>
     <input>
@@ -677,15 +740,54 @@
       <prop>/autopilot/settings/target-pitch-deg</prop>
     </output>
     <config>
-      <Kp>-0.01</Kp>      <!-- proportional gain -->
+      <Kp>0.1</Kp>       <!-- proportional gain -->
       <beta>1.0</beta>    <!-- input value weighing factor -->
       <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
       <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                           <!-- unfiltered derivative error -->
-      <Ti>10.0</Ti>       <!-- integrator time -->
+      <Ti>1.0</Ti>        <!-- integrator time -->
       <Td>0.00001</Td>    <!-- derivator time -->
-      <u_min>-1.0</u_min> <!-- minimum output clamp -->
-      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+      <u_min>-15.0</u_min><!-- minimum output clamp -->
+      <u_max>15.0</u_max> <!-- maximum output clamp -->
+    </config>
+  </pid-controller>
+
+  <pid-controller>
+    <name>NAV1/GPS Glideslope Hold</name>
+    <debug>false</debug>
+    <enable>
+      <condition>
+        <and>
+          <equals>
+            <property>/autopilot/locks/altitude</property>
+            <value>gs-hold</value>
+          </equals>
+          <equals>
+            <property>/autopilot/settings/nav-mode-source</property>
+            <value>NAV2</value>
+          </equals>
+        </and>
+      </condition>
+    </enable>
+    <input>
+      <prop>/velocities/vertical-speed-fps</prop>
+    </input>
+    <reference>
+      <prop>/instrumentation/nav[1]/gs-rate-of-climb</prop>
+    </reference>
+     <output>
+      <prop>/autopilot/settings/target-pitch-deg</prop>
+    </output>
+    <config>
+      <Kp>0.1</Kp>       <!-- proportional gain -->
+      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>  <!-- input value weighing factor for -->
+                          <!-- unfiltered derivative error -->
+      <Ti>1.0</Ti>        <!-- integrator time -->
+      <Td>0.00001</Td>    <!-- derivator time -->
+      <u_min>-15.0</u_min><!-- minimum output clamp -->
+      <u_max>15.0</u_max> <!-- maximum output clamp -->
     </config>
   </pid-controller>
 

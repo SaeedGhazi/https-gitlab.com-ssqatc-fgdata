@@ -306,6 +306,100 @@
 </state>
 
 <state>
+  <name>GS-ARM</name>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/annunciator/vertical-mode-armed</property>
+    <value>GS</value>
+  </enter>
+  <enter>
+    <!-- Reset button to avoid triggering next transition immediately -->
+    <command>property-assign</command>
+    <property>/autopilot/vertical-mode-button</property>
+    <value></value>
+  </enter>
+</state>
+
+<transition>
+  <name>GS Enabled</name>
+  <source>GS-ARM</source>
+  <target>GS</target>
+  <condition>
+    <or>
+      <and>
+        <not-equals>
+          <property>/autopilot/settings/nav-mode-source</property>
+          <value>NAV2</value>
+        </not-equals>
+        <equals>
+          <property>/instrumentation/nav[0]/gs-in-range</property>
+          <value>true</value>
+        </equals>
+        <less-than>
+          <!-- Must intercept the glideslope from below -->
+          <property>/instrumentation/nav[0]/gs-needle-deflection-norm</property>
+          <value>0.2</value>
+        </less-than>
+        <greater-than>
+          <!-- Must intercept the glideslope from below -->
+          <property>/instrumentation/nav[0]/gs-needle-deflection-norm</property>
+          <value>0.0</value>
+        </greater-than>
+      </and>
+      <and>
+        <equals>
+          <property>/autopilot/settings/nav-mode-source</property>
+          <value>NAV2</value>
+        </equals>
+        <equals>
+          <property>/instrumentation/nav[1]/gs-in-range</property>
+          <value>true</value>
+        </equals>
+        <less-than>
+          <!-- Must intercept the glideslope from below -->
+          <property>/instrumentation/nav[1]/gs-needle-deflection-norm</property>
+          <value>0.2</value>
+        </less-than>
+        <greater-than>
+          <!-- Must intercept the glideslope from below -->
+          <property>/instrumentation/nav[1]/gs-needle-deflection-norm</property>
+          <value>0.0</value>
+        </greater-than>
+      </and>
+    </or>
+  </condition>
+</transition>
+
+<state>
+  <name>GS</name>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/annunciator/vertical-mode</property>
+    <value>GS</value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/annunciator/vertical-mode-armed</property>
+    <value></value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/annunciator/vertical-mode-target</property>
+    <value></value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/altitude</property>
+    <value>gs-hold</value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/speed</property>
+    <value></value>
+  </enter>
+</state>
+
+<state>
   <name>BC</name>
 </state>
 
@@ -442,6 +536,19 @@
     <and>
       <equals><property>/autopilot/vertical-mode-button</property><value>FLC</value></equals>
       <not><equals><property>/autopilot/locks/speed</property><value>speed-with-pitch-trim</value></equals></not>
+    </and>
+  </condition>
+</transition>
+
+<!-- From any state pressing APR changes to GS mode, if not already enabled -->
+<transition>
+  <name>GS-ON</name>
+  <target>GS-ARM</target>
+  <exclude-target>true</exclude-target>
+  <condition>
+    <and>
+      <equals><property>/autopilot/vertical-mode-button</property><value>APR</value></equals>
+      <not><equals><property>/autopilot/locks/altitude</property><value>gs-hold</value></equals></not>
     </and>
   </condition>
 </transition>

@@ -72,6 +72,9 @@ var PFDInstrumentsController =
       _nav1_distance_m : 0,
       _nav1_deviation_deg : 0,
       _nav1_loc : 0,
+      _nav1_deflection : 0,
+      _nav1_gs_deflection : 0,
+      _nav1_gs_in_range : 0,
 
       _nav2_id : "",
       _nav2_freq : 0.0,
@@ -84,6 +87,9 @@ var PFDInstrumentsController =
       _nav2_distance_m : 0,
       _nav2_deviation_deg : 0,
       _nav2_loc : 0,
+      _nav2_deflection : 0,
+      _nav2_gs_deflection : 0,
+      _nav2_gs_in_range : 0,
 
       _adf_freq : 0.0,
       _adf_in_range : 0,
@@ -93,7 +99,11 @@ var PFDInstrumentsController =
       _transponder_code : "1200",  # Current code
       _transponder_ident : 0,
       _transponder_edit : 0,      # If we're currently editing the transponder code
-      _transponder_edit_code : 0 # Current value being edited as transponder code
+      _transponder_edit_code : 0, # Current value being edited as transponder code
+
+      _marker_beacon_outer : 0,
+      _marker_beacon_middle : 0,
+      _marker_beacon_inner : 0,
     };
 
     obj._current_flightplan = obj.getNavData("Flightplan");
@@ -303,6 +313,13 @@ var PFDInstrumentsController =
     if (data["AutopilotTargetPitch"] != nil) me._fd_pitch   = data["AutopilotTargetPitch"];
     if (data["AutopilotTargetRoll"] != nil)  me._fd_roll    = data["AutopilotTargetRoll"];
 
+    if (data["AutopilotTargetSpeed"] != nil) {
+      me._fd_spd = data["AutopilotTargetSpeed"];
+      me.page.updateSelectedSPD(me._fd_spd);
+    }
+
+    if (data["AutopilotAltitudeMode"] != nil) me.page.setSelectedSPDVisible(data["AutopilotAltitudeMode"] == "FLC");
+
     var update_fp = 0;
 
     if (data["FMSFlightPlanEdited"] != nil) {
@@ -383,8 +400,10 @@ var PFDInstrumentsController =
     if (data["Nav1DistanceMeters"] != nil) me._nav1_distance_m = data["Nav1DistanceMeters"];
     if (data["Nav1CourseDeviationDeg"] != nil) me._nav1_deviation_deg = data["Nav1CourseDeviationDeg"];
 
-    # Deflection range is [-10,10], while deflection_dots is [-2.4, 2.4];
+    # Deflection range is [-1,1], while deflection_dots is [-2.4, 2.4];
     if (data["Nav1Deflection"] != nil) me._nav1_deflection = data["Nav1Deflection"] * 2.4;
+    if (data["Nav1GSDeflection"] != nil) me._nav1_gs_deflection = data["Nav1GSDeflection"];
+    if (data["Nav1GSInRange"] != nil) me._nav1_gs_in_range = data["Nav1GSInRange"];
     if (data["Nav1CrosstrackErrorM"] != nil) me._nav1_crosstrack_m = data["Nav1CrosstrackErrorM"];
     if (data["Nav1From"] != nil) me._nav1_from = data["Nav1From"];
     if (data["Nav1Localizer"] != nil) me._nav1_loc = data["Nav1Localizer"];
@@ -399,6 +418,8 @@ var PFDInstrumentsController =
 
     # Deflection range is [-1,1], while deflection_dots is [-2.4, 2.4];
     if (data["Nav2Deflection"] != nil) me._nav2_deflection = data["Nav2Deflection"] * 2.4;
+    if (data["Nav2GSDeflection"] != nil) me._nav2_gs_deflection = data["Nav2GSDeflection"];
+    if (data["Nav2GSInRange"] != nil) me._nav2_gs_in_range = data["Nav2GSInRange"];
     if (data["Nav2CrosstrackErrorM"] != nil) me._nav2_crosstrack_m = data["Nav2CrosstrackErrorM"];
     if (data["Nav2From"] != nil) me._nav2_from = data["Nav2From"];
     if (data["Nav2Localizer"] != nil) me._nav2_loc = data["Nav2Localizer"];
@@ -410,6 +431,10 @@ var PFDInstrumentsController =
     if (data["TransponderMode"] != nil) me._transponder_mode = data["TransponderMode"];
     if (data["TransponderCode"] != nil) me._transponder_code = data["TransponderCode"];
     if (data["TransponderIdent"] != nil) me._transponder_ident = data["TransponderIdent"];
+
+    if (data["MarkerBeaconInner"] != nil) me._marker_beacon_inner = data["MarkerBeaconInner"];
+    if (data["MarkerBeaconMiddle"] != nil) me._marker_beacon_middle = data["MarkerBeaconMiddle"];
+    if (data["MarkerBeaconOuter"] != nil) me._marker_beacon_outer = data["MarkerBeaconOuter"];
 
     if (me.getBRG1() == "NAV1") me.page.updateBRG1(me._nav1_in_range, me._nav1_id, me._nav1_distance_m * M2NM, me._heading_magnetic_deg, me._nav1_heading_deg);
     if (me.getBRG1() == "NAV2") me.page.updateBRG1(me._nav2_in_range, me._nav2_id, me._nav2_distance_m * M2NM, me._heading_magnetic_deg, me._nav2_heading_deg);
@@ -432,6 +457,12 @@ var PFDInstrumentsController =
         annun: "",
         loc : me._nav1_loc,
       );
+
+      if (me._nav1_gs_in_range) {
+        me.page.updateGS(me._nav1_gs_deflection, "G");
+      } else {
+        me.page.updateGS(0, "");
+      }
     }
 
     if (me.getCDISource() == "NAV2") {
@@ -447,6 +478,22 @@ var PFDInstrumentsController =
         annun: "",
         loc : me._nav2_loc,
       );
+
+      if (me._nav2_gs_in_range) {
+        me.page.updateGS(me._nav2_gs_deflection, "G");
+      } else {
+        me.page.updateGS(0, "");
+      }
+    }
+
+    # Special case - if the GPS is being used as the CDI source, then it'll be slaved to Nav1
+    # and we should used the Nav1 Glideslope to show GPS-controlled glideslope.
+    if (me.getCDISource() == "GPS") {
+      if (me._nav1_gs_in_range) {
+        me.page.updateGS(me._nav1_gs_deflection, "G");
+      } else {
+        me.page.updateGS(0, "");
+      }
     }
 
     if ((me._transponder_edit == 0) and
@@ -454,6 +501,16 @@ var PFDInstrumentsController =
       # Transponder settings only change irregularly, so only redisplay on a change, and only if we are not currently
       # editing the transponder code itself.
       me.page.updateTransponder(me._transponder_mode, me._transponder_code, me._transponder_ident);
+    }
+
+    if (me._marker_beacon_outer == 1) {
+      me.page.setOMI("O");
+    } else if (me._marker_beacon_middle == 1) {
+      me.page.setOMI("M");
+    } else if (me._marker_beacon_inner == 1) {
+      me.page.setOMI("I");
+    } else {
+      me.page.setOMI("");
     }
 
     return emesary.Transmitter.ReceiptStatus_OK;

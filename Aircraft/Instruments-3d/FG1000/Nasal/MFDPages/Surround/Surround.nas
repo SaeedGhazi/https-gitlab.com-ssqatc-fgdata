@@ -85,6 +85,16 @@ var AP_STATUS_STYLE = {
   NORMAL_TEXT_COLOR : "#00ff00",
 };
 
+# Style element for use by the flight director modes and armed indicators.
+# This is normally green text on a black background, but when highlighted is
+# black text on a green background
+var FD_STATUS_STYLE = {
+  CURSOR_BLINK_PERIOD : 0.5,
+  HIGHLIGHT_COLOR :  "#00ff00",
+  HIGHLIGHT_TEXT_COLOR : "#000000",
+  NORMAL_TEXT_COLOR : "#00ff00",
+};
+
 var Surround =
 {
   new : func (mfd, myCanvas, device, svg, pfd=0)
@@ -108,11 +118,11 @@ var Surround =
 
     if (pfd) {
       obj.addTextElements(["HeaderFrom", "HeaderTo", "LegDistance", "LegBRG"]);
-      obj.addTextElements(["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"]);
+      obj.addTextElements(["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"], FD_STATUS_STYLE);
       obj._apStatus = PFD.TextElement.new(obj.pageName, svg, "HeaderAPStatus", "", AP_STATUS_STYLE);
       obj._apStatusTimer = nil;
-      obj._apHeadingModeTimer = nil;
-      obj._apAltitudeModeTimer = nil;
+      obj._apLateralStatusTimer = nil;
+      obj._apVerticalStatusTimer = nil;
       obj._dto = PFD.HighlightElement.new(obj.pageName, svg, "HeaderDTO", "DTO");
       obj._leg = PFD.HighlightElement.new(obj.pageName, svg, "HeaderActiveLeg", "Leg");
     } else {
@@ -270,11 +280,32 @@ var Surround =
         }
       }
 
-      if (data["AutopilotHeadingMode"] != nil) me.setTextElement("HeaderAPLateralActive", data["AutopilotHeadingMode"]);
+      # When the Autopilot Heading or Altitude modes change we flash the appropriate annunicator for 10 seconds.
+      if ((data["AutopilotHeadingMode"] != nil) and
+          (data["AutopilotHeadingMode"] != me.getTextValue("HeaderAPLateralActive"))) {
+        me.setTextElement("HeaderAPLateralActive", data["AutopilotHeadingMode"]);
+        # This code crashes FG at present.  No idea why - perhaps reference to "me" in maketimer?
+        #me.highlightTextElement("HeaderAPLateralActive");
+        #if (me._apLateralStatusTimer == nil) me._apLateralStatusTimer = maketimer(10.0, me, me._stopLateralStatusFlashing);
+        #me._apLateralStatusTimer.singleShot = 1;
+        #me._apLateralStatusTimer.restart(10.0);
+      }
+
+      # When the Autopilot Heading or Altitude modes change we flash the appropriate annunicator for 10 seconds.
+      if ((data["AutopilotAltitudeMode"] != nil) and
+          (data["AutopilotAltitudeMode"] != me.getTextValue("HeaderAPVerticalActive"))) {
+        me.setTextElement("HeaderAPVerticalActive", data["AutopilotAltitudeMode"]);
+        # This code crashes FG at present.  No idea why - perhaps reference to "me" in maketimer?
+        #me.highlightTextElement("HeaderAPVerticalActive");
+        #if (me._apVerticalStatusTimer == nil) me._apVerticalStatusTimer = maketimer(10.0, me, me._stopVerticalStatusFlashing);
+        #me._apVerticalStatusTimer.singleShot = 1;
+        #me._apVerticalStatusTimer.restart(10.0);
+      }
+
       if (data["AutopilotHeadingModeArmed"] != nil) me.setTextElement("HeaderAPLateralArmed", data["AutopilotHeadingModeArmed"]);
-      if (data["AutopilotAltitudeMode"] != nil) me.setTextElement("HeaderAPVerticalActive", data["AutopilotAltitudeMode"]);
       if (data["AutopilotAltitudeModeArmed"] != nil) me.setTextElement("HeaderAPVerticalArmed", data["AutopilotAltitudeModeArmed"]);
 
+      # When the Autopilot is disengaged, the AP status element flashes for 5 seconds before disappearing
       if (data["AutopilotEnabled"] != nil) {
         if (data["AutopilotEnabled"] == 1) {
           me._apStatus.setValue("AP");
@@ -289,11 +320,13 @@ var Surround =
             # We were previously enabled, so we want to make the AP Status element
             # flash for 5 seconds before removing it.  The highlightElement()
             # starts it flashing, and we use a timer to stop it.
-            me._apStatus.highlightElement();
-            if (me._apStatusTimer == nil) me._apStatusTimer =
-              maketimer(5.0, me, func() { me._apStatus.unhighlightElement(); me._apStatus.setValue(""); } );
-            me._apStatusTimer.singleShot = 1;
-            me._apStatusTimer.restart(5.0);
+
+            # This code crashes FG at present.  No idea why - perhaps reference to "me" in maketimer?
+            #me._apStatus.highlightElement();
+            #if (me._apStatusTimer == nil) me._apStatusTimer = maketimer(5.0, me, me._stopAPStatusFlashing);
+            #me._apStatusTimer.singleShot = 1;
+            #me._apStatusTimer.restart(5.0);
+            me._apStatus.setValue("");
           }
         }
       }
@@ -335,6 +368,22 @@ var Surround =
         }
       }
     }
+  },
+
+  _stopLateralStatusFlashing : func()
+  {
+    me.unhighlightTextElement("HeaderAPLateralActive");
+  },
+
+  _stopVerticalStatusFlashing : func()
+  {
+    me.unhighlightTextElement("HeaderAPVerticalActive");
+  },
+
+  _stopAPStatusFlashing : func()
+  {
+    me._apStatus.unhighlightElement();
+    me._apStatus.setValue("");
   },
 
   getCurrentPage : func()

@@ -33,6 +33,7 @@ new : func ()
   obj.addPropMap("AutopilotAltitudeModeArmed", "/autopilot/annunciator/vertical-mode-armed");
   obj.addPropMap("AutopilotTargetPitch", "/autopilot/settings/target-pitch-deg");
   obj.addPropMap("AutopilotTargetRoll", "/autopilot/settings/target-roll-deg");
+  obj.addPropMap("AutopilotTargetSpeed", "/autopilot/settings/target-speed-kt");
   obj.addPropMap("AutopilotTargetVertical", "/autopilot/annunciator/vertical-mode-target");
 
   return obj;

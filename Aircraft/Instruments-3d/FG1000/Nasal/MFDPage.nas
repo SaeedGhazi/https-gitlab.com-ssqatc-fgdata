@@ -90,15 +90,15 @@ getElement : func(e) {
   return me._elements[e];
 },
 
-addTextElements : func(symbols) {
+addTextElements : func(symbols, style=nil) {
   foreach (var s; symbols) {
-    me._textElements[s] = PFD.TextElement.new(me.pageName, me._SVGGroup, s);
+    me._textElements[s] = PFD.TextElement.new(me.pageName, me._SVGGroup, s, style);
   }
 },
 
-addTextElement : func(e) {
+addTextElement : func(e, style=nil) {
   if (me._textElements[e] == nil) {
-    me._textElements[e] = PFD.TextElement.new(me.pageName, me._SVGGroup, e);
+    me._textElements[e] = PFD.TextElement.new(me.pageName, me._SVGGroup, e, style);
   } else {
     die("addTextElement element already exists: "~ me.pageName ~ e);
   }

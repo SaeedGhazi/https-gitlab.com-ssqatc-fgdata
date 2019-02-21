@@ -45,6 +45,8 @@ var PFDInstruments =
       _Multiline : 0,
       _annunciation : 0,
       _fd_enabled : 1,  # Mark the Flight Director as enabled, as it is visible in the SVG.
+      _selected_spd : 0,
+      _selected_spd_visible : 0,
     };
 
     # Hide various elements for the moment. TODO - implement
@@ -61,9 +63,12 @@ var PFDInstruments =
       "HDG-text",
       "SelectedHDG-text",
       "SelectedALT-text",
+      "SelectedSPD-text",
       "XPDR-DIGIT-3-text", "XPDR-DIGIT-2-text", "XPDR-DIGIT-1-text", "XPDR-DIGIT-0-text",
       "XPDR-MODE-text",
       "TIME-text",
+      "GS-type",
+      "MarkerText",
     ]);
 
     # Set clipping for the various tapes
@@ -383,6 +388,14 @@ var PFDInstruments =
           me.getElement("IAS-" ~ v).hide();
       }
     }
+
+    if ((me._selected_spd_visible) and ((me._selected_spd - ias) < 30)) {
+      me.getElement("SelectedSPD-bug")
+          .setTranslation(0, (ias - me._selected_spd) * 5.711)
+          .show();
+    } else {
+      me.getElement("SelectedSPD-bug").hide();
+    }
   },
 
   updateVSI: func (vsi) {
@@ -393,6 +406,11 @@ var PFDInstruments =
   updateTAS: func (tas) {
     me.setTextElement("TAS-text", sprintf("%iKT", tas));
     #me.getElement("GSPD-text").setText(sprintf("%iKT", tas));
+  },
+
+  updateGS : func (deflection_norm, type) {
+    me.getElement("GS-ILS").setTranslation(0, - deflection_norm * 100);
+    me.setTextElement("GS-type", type);
   },
 
   updateALT: func (alt, alt_trend, selected_alt) {
@@ -561,6 +579,26 @@ var PFDInstruments =
 
   updateSelectedALT : func (selected_alt) {
     me.setTextElement("SelectedALT-text", sprintf("%i", selected_alt));
+  },
+
+  setSelectedSPDVisible : func(visible) {
+    me._selected_spd_visible = visible;
+    if (visible) {
+      me.getElement("SelectedSPD-text").show();
+      me.getElement("SelectedSPD-bg").show();
+      me.getElement("SelectedSPD-bug").show();
+      me.getElement("SelectedSPD-symbol").show();
+    } else {
+      me.getElement("SelectedSPD-text").hide();
+      me.getElement("SelectedSPD-bg").hide();
+      me.getElement("SelectedSPD-bug").hide();
+      me.getElement("SelectedSPD-symbol").hide();
+    }
+  },
+
+  updateSelectedSPD : func (selected_spd) {
+    me._selected_spd = selected_spd;
+    me.setTextElement("SelectedSPD-text", sprintf("%ikt", me._selected_spd));
   },
 
   setBRG1 : func(option) { me._setBRG("BRG1",option); },
@@ -780,7 +818,7 @@ var PFDInstruments =
       me.getElement("OMI").hide();
     } else {
       me.getElement("OMI").show();
-      me.getElement("MarkerText").setText(omi);
+      me.setTextElement("MarkerText", omi);
     }
     me._OMI = omi;
   },

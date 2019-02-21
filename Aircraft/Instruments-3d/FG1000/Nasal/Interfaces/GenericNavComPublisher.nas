@@ -72,8 +72,9 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("Nav1CrosstrackErrorM", "/instrumentation/nav/crosstrack-error-m");
     obj._periodicPublisher.addPropMap("Nav1Localizer", "/instrumentation/nav/nav-loc");
     obj._periodicPublisher.addPropMap("Nav1Deflection", "/instrumentation/nav/heading-needle-deflection-norm");
+    obj._periodicPublisher.addPropMap("Nav1GSDeflection", "/instrumentation/nav/gs-needle-deflection-norm");
+    obj._periodicPublisher.addPropMap("Nav1GSInRange", "/instrumentation/nav/gs-in-range");
     obj._periodicPublisher.addPropMap("Nav1From", "/instrumentation/nav/from-flag");
-
 
     obj._triggeredPublisher.addPropMap("Nav1Volume", "/instrumentation/nav/nav-volume");
     obj._triggeredPublisher.addPropMap("Nav1AudioID", "/instrumentation/nav/audio-btn");
@@ -90,6 +91,8 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("Nav2CrosstrackErrorM", "/instrumentation/nav[1]/crosstrack-error-m");
     obj._periodicPublisher.addPropMap("Nav2Localizer", "/instrumentation/nav[1]/nav-loc");
     obj._periodicPublisher.addPropMap("Nav2Deflection", "/instrumentation/nav[1]/heading-needle-deflection-norm");
+    obj._periodicPublisher.addPropMap("Nav2GSDeflection", "/instrumentation/nav[1]/gs-needle-deflection-norm");
+    obj._periodicPublisher.addPropMap("Nav2GSInRange", "/instrumentation/nav[1]/gs-in-range");
     obj._periodicPublisher.addPropMap("Nav2From", "/instrumentation/nav/from-flag");
 
     obj._triggeredPublisher.addPropMap("Nav2Volume", "/instrumentation/nav[1]/nav-volume");
@@ -102,6 +105,10 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("ADFHeadingDeg", "/instrumentation/adf/indicated-bearing-deg");
     obj._triggeredPublisher.addPropMap("ADFVolume", "/instrumentation/adf/volume-norm");
     obj._triggeredPublisher.addPropMap("ADFServiceable", "/instrumentation/adf/operable");
+
+    obj._triggeredPublisher.addPropMap("MarkerBeaconInner", "/instrumentation/marker-beacon/inner");
+    obj._triggeredPublisher.addPropMap("MarkerBeaconMiddle", "/instrumentation/marker-beacon/middle");
+    obj._triggeredPublisher.addPropMap("MarkerBeaconOuter", "/instrumentation/marker-beacon/outer");
 
     obj._triggeredPublisher.addPropMap("NavSelected", "/instrumentation/nav-selected");
 

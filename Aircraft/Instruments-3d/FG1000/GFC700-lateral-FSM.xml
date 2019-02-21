@@ -185,14 +185,56 @@
   <target>LOC-ARM</target>
   <condition>
     <or>
-      <equals>
-        <property>/autopilot/settings/nav-mode-source</property>
-        <value>NAV1</value>
-      </equals>
-      <equals>
-        <property>/autopilot/settings/nav-mode-source</property>
-        <value>NAV2</value>
-      </equals>
+      <and>
+        <equals>
+          <property>/autopilot/settings/nav-mode-source</property>
+          <value>NAV1</value>
+        </equals>
+        <equals>
+          <property>/instrumentation/nav[0]/nav-loc</property>
+          <value>true</value>
+        </equals>
+      </and>
+      <and>
+        <equals>
+          <property>/autopilot/settings/nav-mode-source</property>
+          <value>NAV2</value>
+        </equals>
+        <equals>
+          <property>/instrumentation/nav[1]/nav-loc</property>
+          <value>true</value>
+        </equals>
+      </and>
+    </or>
+  </condition>
+</transition>
+
+<transition>
+  <name>NAV-VOR</name>
+  <source>NAV-SRC</source>
+  <target>VOR-ARM</target>
+  <condition>
+    <or>
+      <and>
+        <equals>
+          <property>/autopilot/settings/nav-mode-source</property>
+          <value>NAV1</value>
+        </equals>
+        <equals>
+          <property>/instrumentation/nav[0]/nav-loc</property>
+          <value>false</value>
+        </equals>
+      </and>
+      <and>
+        <equals>
+          <property>/autopilot/settings/nav-mode-source</property>
+          <value>NAV1</value>
+        </equals>
+        <equals>
+          <property>/instrumentation/nav[1]/nav-loc</property>
+          <value>false</value>
+        </equals>
+      </and>
     </or>
   </condition>
 </transition>
@@ -212,16 +254,10 @@
   <source>GPS-ARM</source>
   <target>GPS</target>
   <condition>
-    <and>
-      <less-than>
-        <property>/instrumentation/gps/wp/wp[1]/course-error-nm</property>
-        <value>0.5</value>
-      </less-than>
-      <greater-than>
-        <property>/instrumentation/gps/wp/wp[1]/course-error-nm</property>
-        <value>-0.5</value>
-      </greater-than>
-    </and>
+    <equals>
+      <property>/autopilot/internal/nav-capture</property>
+      <value>1</value>
+    </equals>
   </condition>
 </transition>
 
@@ -239,6 +275,18 @@
   </enter>
 </state>
 
+<transition>
+  <name>LOC-ARM - LOC</name>
+  <source>LOC-ARM</source>
+  <target>LOC</target>
+  <condition>
+    <equals>
+      <property>/autopilot/internal/nav-capture</property>
+      <value>1</value>
+    </equals>
+  </condition>
+</transition>
+
 <state>
   <name>VOR-ARM</name>
   <enter>
@@ -252,6 +300,18 @@
     <value>VOR</value>
   </enter>
 </state>
+
+<transition>
+  <name>VOR-ARM - VOR</name>
+  <source>VOR-ARM</source>
+  <target>VOR</target>
+  <condition>
+    <equals>
+      <property>/autopilot/internal/nav-capture</property>
+      <value>1</value>
+    </equals>
+  </condition>
+</transition>
 
 <state>
   <name>GPS</name>
@@ -289,6 +349,11 @@
     <property>/autopilot/annunciator/lateral-mode-armed</property>
     <value></value>
   </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/heading</property>
+    <value>nav-hold</value>
+  </enter>
 </state>
 
 <state>
@@ -302,6 +367,11 @@
     <command>property-assign</command>
     <property>/autopilot/annunciator/lateral-mode-armed</property>
     <value></value>
+  </enter>
+  <enter>
+    <command>property-assign</command>
+    <property>/autopilot/locks/heading</property>
+    <value>nav-hold</value>
   </enter>
 </state>
 
@@ -322,7 +392,6 @@
     </or>
   </condition>
 </transition>
-
 
 <transition>
   <name>OFF-HDG</name>
@@ -414,19 +483,26 @@
   </condition>
 </transition>
 
-<!-- From (just about) any state, pressing NAV goes to NAV mode-->
+<!-- From (just about) any state, pressing NAV or APR goes to NAV mode.  APR mode should
+     have a slightly different VOR version (VAPP), but is otherwise identical in lateral,
+     if not vertical modes.  So we will just overload the states for simplicity. -->
 <transition>
   <name>To NAV</name>
   <target>NAV-SRC</target>
   <exclude-target>true</exclude-target>
   <condition>
     <and>
-      <equals><property>/autopilot/lateral-mode-button</property><value>NAV</value></equals>
+      <or>
+        <equals><property>/autopilot/lateral-mode-button</property><value>NAV</value></equals>
+        <equals><property>/autopilot/lateral-mode-button</property><value>APR</value></equals>
+      </or>
       <not><equals><property>/autopilot/locks/heading</property><value>nav-hold</value></equals></not>
     </and>
   </condition>
 </transition>
 
+<!-- Only switch off NAV/APR when NAV is pressed, as user may press APR to enable glideslope while already
+     in NAV mode -->
 <transition>
   <name>From NAV</name>
   <source>GPS-ARM</source>

@@ -94,3 +94,37 @@ addcommand("FG1000SoftKeyPushed",
     emesary.GlobalTransmitter.NotifyAll(notification);
   }
 );
+
+# This command is a convenience for multi-key/menu support to make it easier to
+# navigate to particular pages without having to use the FMS knobs.
+removecommand("FG1000SelectPage");
+addcommand("FG1000SelectPage",
+  func(node) {
+    var device = node.getNode("device", 1).getValue();
+    var group = node.getNode("group",1).getValue();
+    var page = node.getNode("page",1).getValue();
+
+    if (group == nil) {
+      print("FG1000SelectPage: No <group> argument passed to fgcommand");
+      return;
+    }
+
+    if (page == nil) {
+      print("FG1000SelectPage: No <page> argument passed to fgcommand");
+      return;
+    }
+
+    if (device == nil) {
+      print("FG1000SelectPage: No <device> argument passed to fgcommand for " ~ name);
+      return;
+    }
+
+    var notification = notifications.PFDEventNotification.new(
+      "MFD",
+      int(device),
+      notifications.PFDEventNotification.SelectPageById,
+      { Group: group, Page: page }
+    );
+    emesary.GlobalTransmitter.NotifyAll(notification);
+  }
+);

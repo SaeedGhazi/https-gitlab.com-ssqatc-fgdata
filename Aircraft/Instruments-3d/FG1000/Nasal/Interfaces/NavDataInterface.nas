@@ -41,6 +41,11 @@ new : func ()
   # List of recently use waypoints
   obj._recentWaypoints = std.Vector.new();
 
+  # Some methods are really slow the first time they are called, typically
+  # because they are populating some cached database.  Call them now to reduce
+  # freezes in flight.
+  var apts = obj.getNearestAirports();
+  var navdata = obj.getNavDataWithinRange({type : "VOR"});
   return obj;
 },
 

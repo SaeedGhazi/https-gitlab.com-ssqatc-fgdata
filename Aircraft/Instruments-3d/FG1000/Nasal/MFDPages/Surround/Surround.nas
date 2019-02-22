@@ -392,6 +392,40 @@ var Surround =
     return me.getMFD().getPage(currentpage);
   },
 
+  # Go to a define page in the MFD.  Only valid for MFDs, and mainly used as
+  # a useability shortcut to avoid having to use the FMS knobs.
+  goToPage : func(group, page)
+  {
+    # Not valid for the PFD.
+    if (me.pfd) return;
+
+    # Values may be passed as names or indices.
+    if (int(group) == nil) {
+      for (var i = 0; i < size(PAGE_GROUPS); i = i + 1) {
+        if (group == PAGE_GROUPS[i].group) {
+          me._selectedPageGroup = i;
+        }
+      }
+    } else {
+      assert(group < size(PAGE_GROUPS), "Page Group index " ~ group ~ " out of bounds");
+      me._selectedPageGroup = group;
+    }
+
+    if (int(page) == nil) {
+      for (var j = 0; j < size(PAGE_GROUPS[me._selectedPageGroup].pages); j = j + 1) {
+        if (page == PAGE_GROUPS[me._selectedPageGroup].pages[j]) {
+          me._selectedPage = j;
+        }
+      }
+    } else {
+      assert(page < size(PAGE_GROUPS[me._selectedPageGroup].pages), "Page Group index " ~ group ~ " out of bounds");
+      me._selectedPage = page;
+    }
+
+    # Now we've updated the selected pages, then load it
+    me.loadPage();
+  },
+
   # Function to change a page based on the selection
   loadPage : func()
   {

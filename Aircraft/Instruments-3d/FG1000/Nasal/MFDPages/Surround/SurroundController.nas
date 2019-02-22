@@ -110,6 +110,11 @@ var SurroundController =
     return emesary.Transmitter.ReceiptStatus_OK;
   },
 
+  handleSelectPageByID : func(notification) {
+    me._page.goToPage(notification.Group, notification.Page);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
+
   #
   # Handle the various COM and NAV controls at the top left and top right of the Fascia
   #
@@ -481,7 +486,7 @@ var SurroundController =
       var controller = me;
       me._recipient.Receive = func(notification)
       {
-        # Note that we don't care about the device that the data comes from.
+        # Note that in general we don't care about the device that the data comes from.
         if (notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
 
           if (notification.Event_Id == notifications.PFDEventNotification.NavComData
@@ -495,6 +500,12 @@ var SurroundController =
               and notification.EventParameter != nil)
           {
             return controller.handleFMSADCData(notification.EventParameter);
+          }
+
+          if (notification.Device_Id == pfd_obj.device_id and
+              notification.Event_Id == notifications.PFDEventNotification.SelectPageById)
+          {
+            return controller.handleSelectPageByID(notification.EventParameter);
           }
         }
         return emesary.Transmitter.ReceiptStatus_NotProcessed;

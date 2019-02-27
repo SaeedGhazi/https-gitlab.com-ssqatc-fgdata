@@ -50,10 +50,28 @@
     </checkbox>
 
     <text>
+      <visible>
+        <property>/sim/tower/auto-position</property>
+      </visible>
+      <row>0</row>
+      <col>2</col>
+      <halign>right</halign>
+      <label>xxxxxxxx</label>
+      <live>true</live>
+      <format>(%s)</format>
+      <property>/sim/tower/airport-id</property>
+    </text>
+
+    <text>
       <row>1</row>
       <col>0</col>
       <halign>right</halign>
       <label>Airport ID:</label>
+      <visible>
+        <not>
+          <property>/sim/tower/auto-position</property>
+        </not>
+      </visible>
     </text>
     <input>
       <name>airport-id</name>
@@ -65,6 +83,11 @@
           <property>/sim/tower/auto-position</property>
         </not>
       </enable>
+      <visible>
+        <not>
+          <property>/sim/tower/auto-position</property>
+        </not>
+      </visible>
     </input>
     <empty>
       <row>0</row>
@@ -73,9 +96,21 @@
     </empty>
 
     <!-- Commented out because the /instrumentation/comm[%d]/airport-id
-      are not filled in on the COM radio retuning...
-      I'm working on that part now.
+      are not filled in on the COM radio retuning... -->
+    
     <button>
+      <enable>
+        <and>
+          <not>
+            <property>sim/tower/auto-position</property>
+          </not>
+          <property>/instrumentation/comm[0]/serviceable</property>
+          <greater-than>
+            <property>/instrumentation/comm[0]/signal-quality-norm</property>
+            <property>/instrumentation/comm[0]/cutoff-signal-quality</property>
+          </greater-than>
+        </and>
+      </enable>
       <row>2</row><col>0</col>
       <legend>COM1</legend>
       <binding>
@@ -89,12 +124,32 @@
       </binding>
     </button>
     <text>
+      <live>true</live>
+      <visible>
+        <and>
+          <property>/instrumentation/comm[0]/serviceable</property>
+          <greater-than>
+            <property>/instrumentation/comm[0]/signal-quality-norm</property>
+            <property>/instrumentation/comm[0]/cutoff-signal-quality</property>
+          </greater-than>
+        </and>
+      </visible>
       <row>2</row><col>2</col>
       <property>/instrumentation/comm[0]/frequencies/selected-mhz</property>
       <label>MHz</label>
       <format>%-0.2f</format>
     </text>
     <text>
+      <live>true</live>
+      <visible>
+        <and>
+          <property>/instrumentation/comm[0]/serviceable</property>
+          <greater-than>
+            <property>/instrumentation/comm[0]/signal-quality-norm</property>
+            <property>/instrumentation/comm[0]/cutoff-signal-quality</property>
+          </greater-than>
+        </and>
+      </visible>
       <row>2</row><col>1</col>
       <property>/instrumentation/comm[0]/airport-id</property>
     </text>
@@ -104,6 +159,18 @@
     </empty>
 
     <button>
+      <enable>
+        <and>
+          <not>
+            <property>sim/tower/auto-position</property>
+          </not>
+          <property>/instrumentation/comm[1]/serviceable</property>
+          <greater-than>
+            <property>/instrumentation/comm[1]/signal-quality-norm</property>
+            <property>/instrumentation/comm[1]/cutoff-signal-quality</property>
+          </greater-than>
+        </and>
+      </enable>
       <row>3</row><col>0</col>
       <legend>COM2</legend>
       <binding>
@@ -117,12 +184,37 @@
       </binding>
     </button>
     <text>
+      <live>true</live>
+      <visible>
+        <and>
+          <property>/instrumentation/comm[1]/serviceable</property>
+          <greater-than>
+            <property>/instrumentation/comm[1]/signal-quality-norm</property>
+            <property>/instrumentation/comm[1]/cutoff-signal-quality</property>
+          </greater-than>
+        </and>
+      </visible>
       <row>3</row><col>2</col>
       <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
       <label>MHz</label>
       <format>%-0.2f</format>
     </text>
     <text>
+      <live>true</live>
+      <visible>
+        <and>
+          <property>/instrumentation/comm[1]/serviceable</property>
+          <greater-than>
+            <property>/instrumentation/comm[1]/signal-quality-norm</property>
+            <property>/instrumentation/comm[1]/cutoff-signal-quality</property>
+          </greater-than>
+          <property>/instrumentation/comm[1]/power-btn</property>
+          <greater-than>
+            <property>/instrumentation/comm[1]/power-good</property>
+            <value>0</value>
+          </greater-than>
+        </and>
+      </visible>
       <row>3</row><col>1</col>
       <property>/instrumentation/comm[1]/airport-id</property>
     </text>
@@ -130,7 +222,6 @@
       <row>3</row><col>3</col>
       <stretch>true</stretch>
     </empty>
-    -->
 
     <button>
       <legend>Preset</legend>

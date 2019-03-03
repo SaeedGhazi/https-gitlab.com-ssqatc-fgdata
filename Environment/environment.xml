@@ -507,5 +507,5 @@
 <!-- definitions for vocanic activity -->
   <volcanoes include="volcanoes.xml"/>
 
-
+  <star-magnitude-cutoff type="float">4.5</star-magnitude-cutoff>
 </PropertyList>

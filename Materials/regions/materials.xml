@@ -67,6 +67,7 @@
 <region include="Materials/regions/europe-winter.xml"/>
 <region include="Materials/regions/scandinavia.xml"/>
 <region include="Materials/regions/united_kingdom.xml"/>
+<region include="Materials/regions/united_kingdom_barra.xml"/>
 <region include="Materials/regions/ireland.xml"/>
 <region include="Materials/regions/iceland.xml"/>
 <region include="Materials/regions/norway.xml"/>

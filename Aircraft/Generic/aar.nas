@@ -17,10 +17,14 @@ var ai_enabled = nil;
 var engines = nil;
 var tanks = [];
 var refuelingN = nil;
+var reportContactNode = nil;
+var reportContact = 0;
 var contactN = nil;
 var aimodelsN = nil;
 var types = {};
 var update_model_list = 0;
+var tankerNode = nil;
+var tankerContactNode = nil;
 
 setlistener("/ai/models/model-added", func(v){
     update_model_list = 1;
@@ -54,27 +58,40 @@ var update_loop = func {
             }
         }
     }
-	var tankerNode = nil;
+	var foundTankerNode = nil;
     if (serviceable) {
         foreach (var t; tankers) {
             if (t.getNode("refuel/contact", 1).getValue()){
-              tankerNode = t;
+              foundTankerNode = t;
           }
         }
     }
-            
-	
-	if (refuelingN.getNode("report-contact", 1).getValue()) {
-	  if (tankerNode != nil and !contactN.getValue()) {
-			setprop("/sim/messages/copilot", "Engage");
-	  }
-	  
-	  if (!tankerNode != nil and contactN.getValue()) {
-			setprop("/sim/messages/copilot", "Disengage");
-	  }
-	}
-	
-	contactN.setBoolValue(tankerNode != nil);
+
+    if (foundTankerNode != tankerNode){
+      tankerNode = foundTankerNode;
+      if (tankerNode != nil){
+          tankerContactNode = tankerNode.getNode("refuel/contact", 1);
+      }
+      else
+        tankerContactNode = nil;
+    }
+    reportContact = reportContactNode.getValue();
+	if (tankerNode != nil and tankerContactNode != nil) {
+        var tankerContact = tankerContactNode.getValue();
+        if (tankerContact != contactN.getValue()) {
+            if (reportContactNode.getValue()) {
+                if (tankerContact)
+                  setprop("/sim/messages/copilot", "Engage");
+                else
+                  setprop("/sim/messages/copilot", "Disengage");
+            }
+            contactN.setBoolValue(tankerContact);
+        }
+    } else {
+        if (reportContact and contactN.getValue())
+          setprop("/sim/messages/copilot", "Disengage");
+        contactN.setBoolValue(0);
+    }
 
 	if (fuel_freeze){
         return;
@@ -205,6 +222,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 	refuelingN = props.globals.getNode("/systems/refuel", 1);
 	aimodelsN = props.globals.getNode("ai/models", 1);
 	engines = props.globals.getNode("engines", 1).getChildren("engine");
+    reportContactNode = refuelingN.getNode("report-contact", 1);
 
 	foreach (var e; engines) {
 		e.getNode("fuel-consumed-lbs", 1).setDoubleValue(0);

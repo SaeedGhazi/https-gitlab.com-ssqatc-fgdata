@@ -1,7 +1,7 @@
 ###########################################################################
 # simulation of a faraway orbital target (needs handover to spacecraft-specific 
 # code for close range)
-# Thorsten Renk 2016 - 2019
+# Thorsten Renk 2016-2019
 ###########################################################################
 
 var orbitalTarget = {
@@ -19,8 +19,8 @@ var orbitalTarget = {
 		t.nl_rad = t.node_longitude * math.pi/180.0;
 		t.initial_nl_rad = t.nl_rad;
 		var l_tmp = t.l_vec[0];
-		t.l_vec[0] = -math.sin(t.nl_rad) * l_tmp;
-		t.l_vec[1] = math.cos(t.nl_rad) * l_tmp;
+		t.l_vec[0] = math.sin(t.nl_rad) * l_tmp;
+		t.l_vec[1] = -math.cos(t.nl_rad) * l_tmp;
 		t.anomaly = anomaly;
 		t.anomaly_rad = t.anomaly * math.pi/180.0;
 		t.initial_anomaly_rad = t.anomaly_rad;
@@ -28,6 +28,7 @@ var orbitalTarget = {
 		t.update_time = 0.1;
 		t.running_flag = 0;
 		t.elapsed_time = 0.0;
+		t.delta_time = 0.0;
 
 		t.node_drift = -4361.26 * 1./math.pow(t.radius/1000.0 ,2.0) * math.cos(t.inc_rad); 
 			
@@ -71,6 +72,13 @@ var orbitalTarget = {
 		me.delta_lon = me.delta_lon + dt * 0.00418333333333327;
 		me.node_longitude = me.node_longitude + me.node_drift * dt;
 		me.nl_rad = me.node_longitude * math.pi/180.0;
+
+		me.l_vec = [math.sin(me.inc_rad), 0.0, math.cos(me.inc_rad)];
+		var l_tmp = me.l_vec[0];
+		me.l_vec[0] = math.sin(me.nl_rad) * l_tmp;
+		me.l_vec[1] = -math.cos(me.nl_rad) * l_tmp;
+	
+
 	},
 	get_inertial_pos: func {
 
@@ -80,13 +88,14 @@ var orbitalTarget = {
 
 	get_inertial_pos_at_time: func (time) {
 
-		var anomaly_rad = me.initial_anomaly_rad + time/me.period * 2.0 * math.pi;
+
+		var anomaly_rad = me.initial_anomaly_rad + (time - me.delta_time)/me.period * 2.0 * math.pi;
 		while (anomaly_rad > 2.0 * math.pi)
 			{
 			anomaly_rad = anomaly_rad - 2.0 * math.pi;
 			}
 
-		var nl_rad = me.initial_nl_rad + me.node_drift * time * math.pi/180.0;
+		var nl_rad = me.initial_nl_rad + me.node_drift * (time - me.delta_time) * math.pi/180.0;
 
 		return me.compute_inertial_pos(anomaly_rad, nl_rad);
 
@@ -125,22 +134,22 @@ var orbitalTarget = {
 
 		# obtain via numerical discretization from two points
 	
-		var anomaly_rad = me.initial_anomaly_rad + time/me.period * 2.0 * math.pi;
+		var anomaly_rad = me.initial_anomaly_rad + (time- me.delta_time)/me.period * 2.0 * math.pi;
 		while (anomaly_rad > 2.0 * math.pi)
 			{
 			anomaly_rad = anomaly_rad - 2.0 * math.pi;
 			}
 
-		var nl_rad = me.initial_nl_rad + me.node_drift * time * math.pi/180.0;
+		var nl_rad = me.initial_nl_rad + me.node_drift * (time - me.delta_time) * math.pi/180.0;
 		var pos1 = me.compute_inertial_pos(anomaly_rad, nl_rad);
 
-		anomaly_rad = me.initial_anomaly_rad + (time + 0.1)/me.period * 2.0 * math.pi;
+		anomaly_rad = me.initial_anomaly_rad + ((time - me.delta_time) + 0.1)/me.period * 2.0 * math.pi;
 		while (anomaly_rad > 2.0 * math.pi)
 			{
 			anomaly_rad = anomaly_rad - 2.0 * math.pi;
 			}
 
-		nl_rad = me.initial_nl_rad + me.node_drift * (time+0.1) * math.pi/180.0;
+		nl_rad = me.initial_nl_rad + me.node_drift * ((time - me.delta_time) +0.1) * math.pi/180.0;
 		var pos2 = me.compute_inertial_pos(anomaly_rad, nl_rad);
 
 		var vx = (pos2[0] - pos1[0])/0.1;

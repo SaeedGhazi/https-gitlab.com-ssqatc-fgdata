@@ -17,53 +17,52 @@ var TextElement =
     obj.setValue(value);
 
     # State and timer for flashing highlighting of elements
-    # We need a separate Enabled flag as the timers are in a separate thread.
-    obj._highlightEnabled = 0;
     obj._highlighted = 0;
-    obj._flashTimer = nil;
+    obj._flash = 0;
+
+    # Text to assign at the end of the highlight period.
+    # Used for annunicators that should flash and then change value.
+    obj._endText = nil;
 
     return obj;
   },
 
   getName : func() { return me._name; },
-  getValue : func() { return me._symbol.getText(); },
+  getValue : func() {
+    if (me._symbol.getText() == nil) return "";  # Special case - canvas text elements return nil instead of empty string
+    return me._symbol.getText();
+  },
   setValue : func(value) { me._symbol.setText(value); },
   setVisible : func(vis) { me._symbol.setVisible(vis); },
   _flashElement : func() {
-    if (me._highlightEnabled == 0) {
+    if (me._flash == 0) {
+      me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
+      me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
+      me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
+      me._flash = 1;
+    } else {
       me._symbol.setDrawMode(canvas.Text.TEXT);
       me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
-      me._highlighted = 0;
-    } else {
-      if (me._highlighted == 0) {
-        me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
-        me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
-        me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
-        me._highlighted = 1;
-      } else {
-        me._symbol.setDrawMode(canvas.Text.TEXT);
-        me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
-        me._highlighted = 0;
-      }
+      me._flash = 0;
     }
   },
-  highlightElement : func() {
-    me._highlightEnabled = 1;
-    me._highlighted = 0;
-    me._flashElement();
-    me._flashTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashElement);
-    me._flashTimer.start();
+  highlightElement : func(highlighttime=-1, endText=nil) {
+    me._endText = endText;
+    me._highlighted = 1;
+    me._flash == 0;
+    PFD.HighlightTimer.startHighlight(me, highlighttime);
   },
   unhighlightElement : func() {
-    if (me._flashTimer != nil) me._flashTimer.stop();
-    me._flashTimer = nil;
-    me._highlightEnabled = 0;
+    if (me._endText != nil) me.setValue(me._endText);
+    me._endText = nil;
     me._highlighted = 0;
-    me._flashElement();
+    me._symbol.setDrawMode(canvas.Text.TEXT);
+    me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
+    PFD.HighlightTimer.stopHighlight(me);
   },
   isEditable : func () { return 0; },
   isInEdit : func() { return 0; },
-  isHighlighted : func() { return me._highlightEnabled; },
+  isHighlighted : func() { return me._highlighted; },
   enterElement : func() { return me.getValue(); },
   clearElement : func() { },
   editElement : func()  { },

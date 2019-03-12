@@ -114,17 +114,20 @@ var Surround =
       "Nav1ID", "Nav2ID",
     ];
 
+    var fdTextElements = ["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"];
+
     obj.addTextElements(textElements);
 
     if (pfd) {
       obj.addTextElements(["HeaderFrom", "HeaderTo", "LegDistance", "LegBRG"]);
-      obj.addTextElements(["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"], FD_STATUS_STYLE);
+      obj.addTextElements(fdTextElements, FD_STATUS_STYLE);
+      obj.setTextElements(fdTextElements, "");
       obj._apStatus = PFD.TextElement.new(obj.pageName, svg, "HeaderAPStatus", "", AP_STATUS_STYLE);
-      obj._apStatusTimer = nil;
-      obj._apLateralStatusTimer = nil;
-      obj._apVerticalStatusTimer = nil;
       obj._dto = PFD.HighlightElement.new(obj.pageName, svg, "HeaderDTO", "DTO");
       obj._leg = PFD.HighlightElement.new(obj.pageName, svg, "HeaderActiveLeg", "Leg");
+      obj._old_lateral_armed = nil;  # We store the previous armed values so we can detect a transtion from armed to active.
+      obj._old_vertical_armed = nil;
+      obj._ap_on = 0;
     } else {
       obj.addTextElements(["Header1Label", "Header1Value",
                             "Header2Label", "Header2Value",
@@ -280,54 +283,63 @@ var Surround =
         }
       }
 
-      # When the Autopilot Heading or Altitude modes change we flash the appropriate annunicator for 10 seconds.
+      # When the Autopilot Heading or Altitude modes moves from armed to active we flash the appropriate annunicator for 10 seconds.
+      # Unfortunately as we use a TriggeredPropertyPublisher, we won't have both the HeaderAP[Vertical|Lateral]Active and HeaderAP[Vertical|Lateral]Armed
+      # values at the same time so have to save off any change in the armed values to check against.
+
       if ((data["AutopilotHeadingMode"] != nil) and
           (data["AutopilotHeadingMode"] != me.getTextValue("HeaderAPLateralActive"))) {
+
         me.setTextElement("HeaderAPLateralActive", data["AutopilotHeadingMode"]);
-        # This code crashes FG at present.  No idea why - perhaps reference to "me" in maketimer?
-        #me.highlightTextElement("HeaderAPLateralActive");
-        #if (me._apLateralStatusTimer == nil) me._apLateralStatusTimer = maketimer(10.0, me, me._stopLateralStatusFlashing);
-        #me._apLateralStatusTimer.singleShot = 1;
-        #me._apLateralStatusTimer.restart(10.0);
+
+        if ((data["AutopilotHeadingMode"] != "") and
+            ((data["AutopilotHeadingMode"] == me._old_lateral_armed) or
+             (data["AutopilotHeadingMode"] == me.getTextValue("HeaderAPLateralArmed"))))
+        {
+          # Transition from an armed mode to a new mode, so flash
+          me.highlightTextElement("HeaderAPLateralActive", 10);
+        }
       }
 
-      # When the Autopilot Heading or Altitude modes change we flash the appropriate annunicator for 10 seconds.
       if ((data["AutopilotAltitudeMode"] != nil) and
           (data["AutopilotAltitudeMode"] != me.getTextValue("HeaderAPVerticalActive"))) {
+
         me.setTextElement("HeaderAPVerticalActive", data["AutopilotAltitudeMode"]);
-        # This code crashes FG at present.  No idea why - perhaps reference to "me" in maketimer?
-        #me.highlightTextElement("HeaderAPVerticalActive");
-        #if (me._apVerticalStatusTimer == nil) me._apVerticalStatusTimer = maketimer(10.0, me, me._stopVerticalStatusFlashing);
-        #me._apVerticalStatusTimer.singleShot = 1;
-        #me._apVerticalStatusTimer.restart(10.0);
+
+        if ((data["AutopilotAltitudeMode"] != "") and
+            ((data["AutopilotAltitudeMode"] == me._old_vertical_armed) or
+             (data["AutopilotAltitudeMode"] == me.getTextValue("HeaderAPVerticalArmed"))))
+        {
+          # Transition from an armed mode to a new mode, so flash
+          me.highlightTextElement("HeaderAPVerticalActive", 10);
+        }
       }
 
-      if (data["AutopilotHeadingModeArmed"] != nil) me.setTextElement("HeaderAPLateralArmed", data["AutopilotHeadingModeArmed"]);
-      if (data["AutopilotAltitudeModeArmed"] != nil) me.setTextElement("HeaderAPVerticalArmed", data["AutopilotAltitudeModeArmed"]);
+      if (data["AutopilotHeadingModeArmed"] != nil) {
+        if (data["AutopilotHeadingModeArmed"] != me.getTextValue("HeaderAPLateralArmed")) me._old_lateral_armed = me.getTextValue("HeaderAPLateralArmed");
+        me.setTextElement("HeaderAPLateralArmed", data["AutopilotHeadingModeArmed"]);
+      }
+
+      if (data["AutopilotAltitudeModeArmed"] != nil) {
+        if (data["AutopilotAltitudeModeArmed"] != me.getTextValue("HeaderAPVerticalArmed")) me._old_lateral_armed = me.getTextValue("HeaderAPVerticalArmed");
+        me.setTextElement("HeaderAPVerticalArmed", data["AutopilotAltitudeModeArmed"]);
+      }
 
       # When the Autopilot is disengaged, the AP status element flashes for 5 seconds before disappearing
       if (data["AutopilotEnabled"] != nil) {
-        if (data["AutopilotEnabled"] == 1) {
-          me._apStatus.setValue("AP");
-          if (me._apStatusTimer != nil) {
-            # We were previously flashing, so stop.
-            me._apStatusTimer.stop();
-            me._apStatusTimer = nil;
-            me._apStatus.unhighlightElement();
-          }
-        } else {
-          if ((me._apStatus.getValue() != "") and (me._apStatus.isHighlighted() == 0)) {
-            # We were previously enabled, so we want to make the AP Status element
-            # flash for 5 seconds before removing it.  The highlightElement()
-            # starts it flashing, and we use a timer to stop it.
 
-            # This code crashes FG at present.  No idea why - perhaps reference to "me" in maketimer?
-            #me._apStatus.highlightElement();
-            #if (me._apStatusTimer == nil) me._apStatusTimer = maketimer(5.0, me, me._stopAPStatusFlashing);
-            #me._apStatusTimer.singleShot = 1;
-            #me._apStatusTimer.restart(5.0);
-            me._apStatus.setValue("");
-          }
+        if ((data["AutopilotEnabled"] == 1) and (me._ap_on == 0)) {
+          # Toggle the AP on, stopping any flashing that might be occurring.
+          me._apStatus.unhighlightElement();
+          me._apStatus.setValue("AP");
+          me._ap_on = 1;
+        }
+
+        if ((data["AutopilotEnabled"] == 0) and me._ap_on) {
+          # Toggle the AP off, by flashing the AP Status element for 5 seconds before removing it.
+          # Only do this if we're not already flashing.
+          me._ap_on = 0;
+          me._apStatus.highlightElement(5.0, "");
         }
       }
 
@@ -368,22 +380,6 @@ var Surround =
         }
       }
     }
-  },
-
-  _stopLateralStatusFlashing : func()
-  {
-    me.unhighlightTextElement("HeaderAPLateralActive");
-  },
-
-  _stopVerticalStatusFlashing : func()
-  {
-    me.unhighlightTextElement("HeaderAPVerticalActive");
-  },
-
-  _stopAPStatusFlashing : func()
-  {
-    me._apStatus.unhighlightElement();
-    me._apStatus.setValue("");
   },
 
   getCurrentPage : func()

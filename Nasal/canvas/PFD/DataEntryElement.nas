@@ -34,13 +34,10 @@ var DataEntryElement =
     }
 
     # State and timer for flashing highlighting of elements
-    obj._highlighted = 0;
     obj._highlightEnabled = 0;
-    obj._flashTimer = nil;
-
-    obj._highlightChar = 0;
+    obj._flash = 0;
     obj._highlightCharEnabled = 0;
-    obj._flashCharTimer = nil;
+    obj._flashChar = 0;
 
     return obj;
   },
@@ -59,72 +56,57 @@ var DataEntryElement =
   },
 
   _flashElement : func() {
-    if (me._highlightEnabled == 0) {
-      me._symbol.setDrawMode(canvas.Text.TEXT);
-      me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
-      me._highlighted = 0;
-    } else {
-      if (me._highlighted == 0) {
+    if ((me._highlightEnabled == 1) and (me._highlightCharEnabled == 0)) {
+      if (me._flash == 0) {
         me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
         me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
         me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
-        me._highlighted = 1;
+        me._flash = 1;
       } else {
         me._symbol.setDrawMode(canvas.Text.TEXT);
         me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
-        me._highlighted = 0;
+        me._flash = 0;
+      }
+    }
+
+    if (me._highlightCharEnabled == 1) {
+      if (me._flashChar == 0) {
+        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
+        me._dataEntrySymbol[me._dataEntryPos].setColorFill(me._style.HIGHLIGHT_COLOR);
+        me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.HIGHLIGHT_TEXT_COLOR);
+        me._flashChar = 1;
+      } else {
+        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
+        me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
+        me._flashChar = 0;
       }
     }
   },
   highlightElement : func() {
     me._highlightEnabled = 1;
-    me._highlighted = 0;
-    me._flashElement();
-    me._flashTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashElement);
-    me._flashTimer.start();
+    me._flash = 0;
+    PFD.HighlightTimer.startHighlight(me, -1);
   },
   unhighlightElement : func() {
-    if (me._flashTimer != nil) me._flashTimer.stop();
-    me._flashTimer = nil;
     me._highlightEnabled = 0;
-    me._highlighted = 0;
-    me._flashElement();
+    me._symbol.setDrawMode(canvas.Text.TEXT);
+    me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
+    PFD.HighlightTimer.stopHighlight(me);
   },
 
-  _flashCharElement : func() {
-    if (me._highlightCharEnabled == 0) {
-      me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
-      me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
-      me._highlightChar = 0;
-    } else {
-      if (me._highlightChar == 0) {
-        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
-        me._dataEntrySymbol[me._dataEntryPos].setColorFill(me._style.HIGHLIGHT_COLOR);
-        me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.HIGHLIGHT_TEXT_COLOR);
-        me._highlightChar = 1;
-      } else {
-        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
-        me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
-        me._highlightChar = 0;
-      }
-    }
-  },
-  highlightCharElement : func() {
+  _highlightCharElement : func() {
     me._highlightCharEnabled = 1;
-    me._highlightChar = 0;
-    me._flashCharElement();
-    me._flashCharTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashCharElement);
-    me._flashCharTimer.start();
+    me._flashChar = 0;
   },
-  unhighlightCharElement : func() {
-    if (me._flashCharTimer != nil) me._flashCharTimer.stop();
-    me._flashCharTimer = nil;
+  _unhighlightCharElement : func() {
     me._highlightCharEnabled = 0;
-    me._highlightChar = 0;
-    me._flashCharElement();
+    me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
+    me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
   },
+
   isEditable : func () { return 1; },
   isInEdit : func() { return (me._dataEntryPos != -1); },
+  isHighlighted : func() { return me._highlightEnabled; },
 
   enterElement : func() {
     # Handle pressing enter to confirm this element.
@@ -179,7 +161,7 @@ var DataEntryElement =
       }
 
       # Highlight the first character element to indicate we're editing it
-      me.highlightCharElement();
+      me._highlightCharElement();
     } else {
       var charSym = me._dataEntrySymbol[me._dataEntryPos];
       var incr_or_decr = (value > 0) ? 1 : -1;
@@ -211,8 +193,8 @@ var DataEntryElement =
     if ((me._dataEntryPos == 0)           and (incr_or_decr == -1)) return; # Don't scroll off the start
     if ((me._dataEntryPos == me._size -1) and (incr_or_decr ==  1)) return; # Don't scroll off the end
 
-    me.unhighlightCharElement();
+    me._unhighlightCharElement();
     me._dataEntryPos = me._dataEntryPos + incr_or_decr;
-    me.highlightCharElement();
+    me._highlightCharElement();
   },
 };

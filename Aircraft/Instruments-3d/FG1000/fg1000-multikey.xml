@@ -291,25 +291,6 @@
     </binding>
   </key>
 
-  <key n="115">
-		<name>s</name>
-    <desc>MFD String input</desc>
-    <key n="903">
-			<name>%s</name>
-			<desc>MFD String input :  %s</desc>
-			<binding>
-				<command>nasal</command>
-        <script>
-          var args = {'device': 2,
-                      'notification': fg1000.FASCIA.STRING_INPUT,
-                      'offset' : arg[0]};
-
-          fgcommand("FG1000HardKeyPushed", props.Node.new(args));
-        </script>
-			</binding>
-		</key>
-  </key>
-
   <key n="97">
     <name>a</name>
     <desc>Airport Information</desc>
@@ -352,22 +333,6 @@
         var args = {'device': 2,
                     'group': 'FPLPageGroup',
                     'page' : 'ActiveFlightPlanNarrow'};
-
-        fgcommand("FG1000SelectPage", props.Node.new(args));
-      </script>
-    </binding>
-  </key>
-
-  <key n="110">
-    <name>n</name>
-    <desc>Nearest Airport</desc>
-    <exit/>
-    <binding>
-      <command>nasal</command>
-      <script>
-        var args = {'device': 2,
-                    'group': 'NrstPageGroup',
-                    'page' : 'NearestAirports'};
 
         fgcommand("FG1000SelectPage", props.Node.new(args));
       </script>

@@ -22,6 +22,7 @@ var loadPFDFile = func(file) io.load_nasal(mfd_dir ~ file, "PFD");
 
 loadPFDFile("DefaultStyle.nas");
 loadPFDFile("UIElement.nas");
+loadPFDFile("HighlightTimer.nas");
 loadPFDFile("TextElement.nas");
 loadPFDFile("HighlightElement.nas");
 loadPFDFile("GroupElement.nas");
@@ -92,13 +93,13 @@ getElement : func(e) {
 
 addTextElements : func(symbols, style=nil) {
   foreach (var s; symbols) {
-    me._textElements[s] = PFD.TextElement.new(me.pageName, me._SVGGroup, s, style);
+    me._textElements[s] = PFD.TextElement.new(me.pageName, me._SVGGroup, s, "", style);
   }
 },
 
 addTextElement : func(e, style=nil) {
   if (me._textElements[e] == nil) {
-    me._textElements[e] = PFD.TextElement.new(me.pageName, me._SVGGroup, e, style);
+    me._textElements[e] = PFD.TextElement.new(me.pageName, me._SVGGroup, e, "", style);
   } else {
     die("addTextElement element already exists: "~ me.pageName ~ e);
   }
@@ -108,8 +109,8 @@ getTextElement : func(symbolName) {
   return me._textElements[symbolName];
 },
 
-highlightTextElement : func(symbolName) {
-  me._textElements[symbolName].highlightElement();
+highlightTextElement : func(symbolName, highlightime=nil) {
+  me._textElements[symbolName].highlightElement(highlightime);
 },
 
 unhighlightTextElement : func(symbolName) {
@@ -127,6 +128,12 @@ setTextElement : func(symbolName, value) {
   assert(sym != nil, "Unknown text element " ~ symbolName ~ " (check your addTextElements call?)");
   if (value == nil ) value = "";
   sym.setValue(value);
+},
+
+setTextElements : func(symbols, value) {
+  foreach (var s; symbols) {
+    me.setTextElement(s, value);
+  }
 },
 
 setTextElementLat : func(symbolName, value) {

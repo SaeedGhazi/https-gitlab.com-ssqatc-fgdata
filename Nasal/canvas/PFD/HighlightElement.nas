@@ -33,36 +33,31 @@ var HighlightElement =
   setVisible : func(vis) { me._symbol.setVisible(vis); },
 
   _flashElement : func() {
-    if (me._highlightEnabled == 0) {
+    if (me._highlighted == 0) {
+      me._symbol.setVisible(1);
+      me._highlighted = 1;
+    } else {
       me._symbol.setVisible(0);
       me._highlighted = 0;
-    } else {
-      if (me._highlighted == 0) {
-        me._symbol.setVisible(1);
-        me._highlighted = 1;
-      } else {
-        me._symbol.setVisible(0);
-        me._highlighted = 0;
-      }
     }
   },
   highlightElement : func() {
     me._highlightEnabled = 1;
     me._highlighted = 0;
-    me._flashElement();
-    me._flashTimer = maketimer(me._style.CURSOR_BLINK_PERIOD, me, me._flashElement);
-    me._flashTimer.start();
+    # Force it to immediately display, rather than waiting for the timer
+    me._symbol.setVisible(1);
+    PFD.HighlightTimer.startHighlight(me, -1);
   },
   unhighlightElement : func() {
-    if (me._flashTimer != nil) me._flashTimer.stop();
-    me._flashTimer = nil;
-    me._highlightEnabled = 0;
+    me._symbol.setVisible(0);
     me._highlighted = 0;
-    me._flashElement();
+    me._highlightEnabled = 0;
+    PFD.HighlightTimer.stopHighlight(me);
   },
   isEditable : func () { return 0; },
   isInEdit : func() { return 0; },
   enterElement : func() { return me.getValue(); },
+  isHighlighted : func() { return me._highlighted; },
   clearElement : func() { },
   editElement : func()  { },
   incrSmall : func(value) { },

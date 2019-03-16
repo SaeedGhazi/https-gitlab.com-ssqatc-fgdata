@@ -301,6 +301,7 @@
   <cloudlayers include="cloudlayers.xml"/>
 
   <realwx>
+    <metar-url>https://tgftp.nws.noaa.gov/data/observations/metar/stations/[station].TXT</metar-url>
     <!-- Spawn a metar loader for each metar node 
          index 0..9 are reserved for internal (hardcoded) loaders
          and will be set from FlightGear's subsystems.

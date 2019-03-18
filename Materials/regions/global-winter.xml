@@ -315,7 +315,8 @@
     </specular>
     <shininess>1.2</shininess>
     <solid>1</solid>
-    <rolling-friction>0.5</rolling-friction>
+    <friction-factor>0.15</friction-factor>
+    <rolling-friction>0.005</rolling-friction>
     <bumpiness>0.1</bumpiness>
   </material>
 

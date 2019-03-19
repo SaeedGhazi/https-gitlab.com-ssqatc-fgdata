@@ -259,7 +259,6 @@ to look all around in different directions.
             mod2 = getprop("/input/joysticks/js[0]/t-flight-hotas-x-modifier2");           
             if(mod1==0 and mod2==0) {
                controls.flapsDown(-1);
-               gui.popupTip(sprintf("Flaps: %d deg", 30*getprop("/controls/flight/flaps")+0.1));
             }
             elsif(mod1==1 and mod2==0) {
                controls.adjMixture(10);
@@ -288,7 +287,6 @@ to look all around in different directions.
                mod2 = getprop("/input/joysticks/js[0]/t-flight-hotas-x-modifier2");           
                if(mod1==0 and mod2==0) {
                   controls.flapsDown(0);
-                  gui.popupTip(sprintf("Flaps: %d deg", 30*getprop("/controls/flight/flaps")+0.1));
                }
                elsif(mod1==1 and mod2==0) {
                   # mixture
@@ -315,7 +313,6 @@ to look all around in different directions.
             mod2 = getprop("/input/joysticks/js[0]/t-flight-hotas-x-modifier2");             
             if(mod1==0 and mod2==0) {
                controls.flapsDown(1);
-               gui.popupTip(sprintf("Flaps: %d deg", 30*getprop("/controls/flight/flaps")+0.1));
             }
             elsif(mod1==1 and mod2==0) {
                controls.adjMixture(-10);
@@ -344,7 +341,6 @@ to look all around in different directions.
                mod2 = getprop("/input/joysticks/js[0]/t-flight-hotas-x-modifier2");             
                if(mod1==0 and mod2==0) {
                   controls.flapsDown(0);
-                  gui.popupTip(sprintf("Flaps: %d deg", 30*getprop("/controls/flight/flaps")+0.1));
                }
                elsif(mod1==1 and mod2==0) {
                   # mixture

@@ -917,6 +917,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <performance-monitor>
       <enabled type="bool" userarchive="n" preserve="y">false</enabled>
       <interval-s type="double" userarchive="n" preserve="y">1.0</interval-s>
+      <max-time-per-frame-ms type="int" userarchive="n" preserve="y">7</max-time-per-frame-ms>
     </performance-monitor>
     <!-- animated jetway options -->
     <jetways>
@@ -1090,6 +1091,16 @@ Started September 2000 by David Megginson, david@megginson.com
       <beacon type="bool">true</beacon>
       <strobe type="bool">false</strobe>
     </lighting>
+    <radios>
+      <!--New for 2019.1 - the ability to select the comm radio frequency used by fgcom.
+      The active (transmitting frequency) will also be sent over MP to allow RDF by other MP models.
+      Both comm-ptt and comm-radio-selected should be set to the same value as fgcom only currently permits
+      single channel operation.
+      0 = off, otherwise comm radio selected (/instrumentation/comm[0] it will be 1)
+      -->
+      <comm-ptt type="int">0</comm-ptt>
+      <comm-radio-selected type="int">1</comm-radio-selected>
+    </radios>
     <anti-ice>
       <pitot-heat type="bool">false</pitot-heat>
       <engine n="0">

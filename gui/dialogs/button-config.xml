@@ -413,7 +413,7 @@ var assignButton = func(cmd) {
       <row>5</row>
       <col>3</col>
       <halign>fill</halign>
-      <legend>FGCom PTT</legend>
+      <legend>FGCom PTT(1)</legend>
       <binding>
         <command>nasal</command>
         <script>
@@ -426,6 +426,19 @@ var assignButton = func(cmd) {
       <row>6</row>
       <col>3</col>
       <halign>fill</halign>
+      <legend>FGCom PTT(2)</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("FGCom PTT(2)");
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <row>7</row>
+      <col>3</col>
+      <halign>fill</halign>
       <legend>Trigger</legend>
       <binding>
         <command>nasal</command>
@@ -436,7 +449,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>7</row>
+      <row>8</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>Custom</legend>
@@ -449,7 +462,7 @@ var assignButton = func(cmd) {
     </button>
 
     <button>
-      <row>8</row>
+      <row>9</row>
       <col>3</col>
       <halign>fill</halign>
       <legend>NWS toggle</legend>

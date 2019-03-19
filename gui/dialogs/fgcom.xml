@@ -249,7 +249,7 @@
         </equals>
       </enable>
       <live>1</live>
-      <property>/instrumentation/comm[0]/ptt</property>
+      <property>/controls/radios/comm-ptt</property>
       <binding>
         <command>dialog-apply</command>
         <object-name>ptt-test</object-name>
@@ -258,7 +258,16 @@
     <text>
       <row>4</row>
       <col>1</col>
-      <label>      (/instrumentation/comm/ptt) </label>
+      <label> 1</label>
+      <format>   %.0f</format>
+      <live>true</live>
+      <halign>left</halign>
+      <property>/controls/radios/comm-ptt</property>
+    </text>
+    <text>
+      <row>4</row>
+      <col>1</col>
+      <label>      (/controls/radios/comm-ptt) </label>
       <halign>left</halign>
     </text>
 

@@ -541,6 +541,7 @@ var buttonBindings = [
   NasalButton.new("Aileron Trim Left", "controls.aileronTrim(-1);", 1),
   NasalButton.new("Aileron Trim Right", "controls.aileronTrim(1);", 1),
   NasalHoldButton.new("FGCom PTT", "controls.ptt(1);", "controls.ptt(0);"),
+  NasalHoldButton.new("FGCom PTT(2)", "controls.ptt(2);", "controls.ptt(0);"),
   NasalHoldButton.new("Trigger", "controls.trigger(1);", "controls.trigger(0);"),
   NasalHoldButton.new("Pickle", "controls.applyPickle(1);","controls.applyPickle(0);"),
   NasalButton.new("Flaps Up", "controls.flapsDown(-1);",0),

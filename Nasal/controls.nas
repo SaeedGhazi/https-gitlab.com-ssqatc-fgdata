@@ -561,7 +561,11 @@ var weaponSelect = func(d) {
 ##
 # Communication.
 #
-var ptt = func(b) setprop("/controls/radios/comm-ptt", b);
+var ptt = func(b){
+    if (b and b != getprop("/controls/radios/comm-radio-selected"))
+      setprop("/controls/radios/comm-radio-selected", b);
+    setprop("/controls/radios/comm-ptt", b);
+}
 
 _setlistener("/instrumentation/comm[0]/ptt", func {
     var v=getprop("/instrumentation/comm[0]/ptt");

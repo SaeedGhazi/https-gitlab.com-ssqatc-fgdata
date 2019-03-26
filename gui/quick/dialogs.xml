@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PropertyList>
+	<dialog>
+        <id>settings</id>
+        <title>Settings</title>
+        <file>org/flightgear/Dialogs/SettingsDialog.qml</file>
+    </dialog>
+    <dialog>
+        <id>location</id>
+        <title>Change flight</title>
+        <file>LocationAircraftDialog.qml</file>
+    </dialog>
+    <dialog>
+        <id>environment</id>
+        <title>Time, date &amp; weather</title>
+        <file>EnvironmentDialog.qml</file>
+    </dialog>
+    <dialog>
+        <id>help</id>
+        <title>Help</title>
+        <file>HelpDialog.qml</file>
+    </dialog>
+</PropertyList>

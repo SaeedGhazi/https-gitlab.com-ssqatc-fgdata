@@ -1,0 +1,28 @@
+module org.flightgear.UI
+
+singleton Style 1.0 Style.qml
+singleton SettingsSearchController 1.0 SettingsSearchController.qml
+singleton OverlayShared 1.0 OverlayShared.qml
+
+SearchButton 1.0 SearchButton.qml
+ToggleSwitch 1.0 ToggleSwitch.qml
+SettingControl 1.0 SettingControl.qml
+Section 1.0 Section.qml
+StyledText 1.0 StyledText.qml
+ClickableText 1.0 ClickableText.qml
+AdvancedSettingsToggle 1.0 AdvancedSettingsToggle.qml
+SettingDescription 1.0 SettingDescription.qml
+SettingCheckbox 1.0 SettingCheckbox.qml
+SettingPathChooser 1.0 SettingPathChooser.qml
+SettingDrillDown 1.0 SettingDrillDown.qml
+SettingSlider 1.0 SettingSlider.qml
+
+Scrollbar 1.0 Scrollbar.qml
+Slider 1.0 Slider.qml
+SettingsComboBox 1.0 SettingsComboBox.qml
+PopupChoice 1.0 PopupChoice.qml
+PopupChoiceItem 1.0 PopupChoiceItem.qml
+OverlayMenu 1.0 OverlayMenu.qml
+Overlay 1.0 Overlay.qml
+Button 1.0 Button.qml
+Stack 1.0 Stack.qml

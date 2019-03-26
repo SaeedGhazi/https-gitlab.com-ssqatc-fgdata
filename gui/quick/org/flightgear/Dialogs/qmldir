@@ -1,0 +1,6 @@
+module org.flightgear.Dialogs
+
+RootSettingsPage 1.0 RootSettingsPage.qml
+SettingsDialog 1.0 SettingsDialog.qml
+SoundVolumeSetting 1.0 SoundVolumeSetting.qml
+ShaderDetailSetting 1.0 ShaderDetailSetting.qml

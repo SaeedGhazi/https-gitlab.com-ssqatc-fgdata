@@ -7,6 +7,7 @@
 <PropertyList>
     <name>Saitek Saitek Pro Flight Yoke</name>
     <name>Saitek Pro Flight Yoke</name>
+    <name>Flight Yoke System</name>
     
     <axis n="0">
         <desc>Aileron</desc>

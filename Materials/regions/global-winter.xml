@@ -210,20 +210,20 @@
 	</material>
 
 	<material>
-		<name>Railroad</name>		
+		<name>Railroad</name>
 		<texture>Terrain/dark_gravel.png</texture>
 		<xsize>200</xsize>
 		<ysize>200</ysize>
 	</material>
-	
+
 	<material>
 		<name>Transport</name>
-		<name>Port</name>		
+		<name>Port</name>
 		<effect>Effects/urban</effect>
 		<texture-set>
 		  <texture>Terrain.winter/transport-winter.png</texture>
 		  <texture n="2">Terrain.winter/transport-winter-relief-light.png</texture>
-		</texture-set>    
+		</texture-set>
 		<xsize>500</xsize>
 		<ysize>500</ysize>
 		<light-coverage>1000000.0</light-coverage>
@@ -262,7 +262,7 @@
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>15.0</tree-width-m>
   </material>
-  
+
 	<material>
 		<name>Gravel</name>
 		<texture>Terrain/snow2.png</texture>
@@ -460,8 +460,9 @@
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
-    <rolling-friction>1</rolling-friction>
-    <bumpiness>0.85</bumpiness>
+     <friction-factor>0.7</friction-factor>
+     <rolling-friction>0.1</rolling-friction>
+     <bumpiness>0.1</bumpiness>
   </material>
 
   <material>
@@ -479,7 +480,7 @@
       <uvstretch>8.0</uvstretch>
     </parameters>
   </material>
-  
+
   <material>
     <name>pc_shoulder</name>
     <texture>Runway/pc_shoulder_winter.png</texture>
@@ -503,7 +504,7 @@
     <effect>Effects/airfield</effect>
     <texture-set>
       <texture>Terrain/snow2.png</texture>
-      <texture n="13">Terrain/snow2.png</texture>    
+      <texture n="13">Terrain/snow2.png</texture>
       <texture n="14">Terrain.winter/airport_overlay.png</texture>
     </texture-set>
     <parameters>

@@ -113,7 +113,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/CRJ-200/CRJ-200-Adria.xml</model>
+<model>Aircraft/CR9/CR9-Adria.xml</model>
 <livery>ADR</livery>
 <airline>ADR</airline>
 <home-port>LJLJ</home-port>
@@ -127,7 +127,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/CRJ-200/CRJ-200-Adria.xml</model>
+<model>Aircraft/CR9/CR9-Adria.xml</model>
 <livery>ADR</livery>
 <airline>ADR</airline>
 <home-port>LJLJ</home-port>
@@ -141,7 +141,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/CRJ-200/CRJ-200-Adria.xml</model>
+<model>Aircraft/CR9/CR9-Adria.xml</model>
 <livery>ADR</livery>
 <airline>ADR</airline>
 <home-port>LJLJ</home-port>
@@ -155,7 +155,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/CRJ-200/CRJ-200-Adria.xml</model>
+<model>Aircraft/CR9/CR9-Adria.xml</model>
 <livery>ADR</livery>
 <airline>ADR</airline>
 <home-port>LJLJ</home-port>

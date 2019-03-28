@@ -1128,5 +1128,23 @@
       <match>centrair101</match>
       <alias>glid</alias>
     </alias>
+    <!-- Islander BN2 -->
+    <aircraft>
+      <type>BN2</type>
+      <base>turboprop_transport</base>
+      <climbrate-fpm>860.0</climbrate-fpm>
+      <decentrate-fpm>860.0</decentrate-fpm>
+      <rotate-speed-kts>100.0</rotate-speed-kts>
+      <takeoff-speed-kts>110.0</takeoff-speed-kts>
+      <climbspeed-kts>126.0</climbspeed-kts>
+      <cruise-speed-kts>126.0</cruise-speed-kts>
+      <decent-speed-kts>126.0</decent-speed-kts>
+      <approach-speed-kts>100.0</approach-speed-kts>
+      <touchdown-speed-kts>60.0</touchdown-speed-kts>
+    </aircraft>
+    <alias>
+      <match>BN-2</match>
+      <match>Islander</match>
+    </alias>
   </performancedb>
 </PropertyList>

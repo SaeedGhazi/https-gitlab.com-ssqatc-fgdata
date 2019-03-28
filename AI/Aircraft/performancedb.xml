@@ -1145,6 +1145,7 @@
     <alias>
       <match>BN-2</match>
       <match>Islander</match>
+      <alias>BN2</alias>
     </alias>
   </performancedb>
 </PropertyList>

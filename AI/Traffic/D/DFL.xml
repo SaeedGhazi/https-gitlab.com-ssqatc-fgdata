@@ -13,7 +13,7 @@
     <airline>DFL</airline>
     <home-port>EGET</home-port>
     <required-aircraft>DFL_BN_2</required-aircraft>
-    <actype></actype>
+    <actype>BN2</actype>
     <offset>0</offset>
     <radius>8</radius>
     <flighttype>gate</flighttype>
@@ -27,7 +27,7 @@
     <airline>DFL</airline>
     <home-port>EGET</home-port>
     <required-aircraft>DFL_BN_2</required-aircraft>
-    <actype></actype>
+    <actype>BN2</actype>
     <offset>0</offset>
     <radius>8</radius>
     <flighttype>gate</flighttype>

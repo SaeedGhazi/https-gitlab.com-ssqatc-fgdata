@@ -999,7 +999,7 @@ var teleport = func(airport = "", runway = "", lat = -9999, lon = -9999, alt = 0
 	setprop("/sim/presets/altitude-ft", alt);
 	setprop("/sim/presets/airspeed-kt", speed);
 	setprop("/sim/presets/offset-distance-nm", distance);
-	setprop("/sim/presets/offset-azimuth-nm", azimuth);
+	setprop("/sim/presets/offset-azimuth-deg", azimuth);
 	setprop("/sim/presets/glideslope-deg", glideslope);
 	setprop("/sim/presets/heading-deg", heading);
 	fgcommand("reposition");

@@ -19,11 +19,11 @@
       return "F" + ("000" + (num/100).toFixed(0)).substr(-3,3);
     }
 
-    function ViewModel(h,l1,l2) {
+    function ViewModel(h,l) {
         var self = this;
 
         self.heading = h;
-        self.labelLines = [ l1,l2 ];
+        self.labelLines = l;
     }
 
     leaflet.AILayer = leaflet.GeoJSON.extend({
@@ -40,12 +40,18 @@
                 if (feature.properties.type == "aircraft" || feature.properties.type == "multiplayer") {
                       var l1 = feature.properties.callsign,
                           l2 = feature.properties.heading + 'T ' + feature.properties.speed + 'KTAS ' + 
-                               formatFL(feature.geometry.coordinates[2]);
+                               formatFL(feature.geometry.coordinates[2]),
+                          l3 = feature.properties.departureAirportId + ' -> ' + feature.properties.arrivalAirportId,
+                          l4 = ;
+                          
                       
                       aiMarker = L.aiAircraftMarker(latlng, { className: AITypeToCssClassMap[feature.properties.type] } );
                       aiMarker.on('add', function(e) {
-                          ko.applyBindings( new ViewModel(feature.properties.heading,l1,l2), e.target._icon);
-                      });
+                          if(feature.properties.type == "aircraft")
+                            ko.applyBindings( new ViewModel(feature.properties.heading,[ l1,l2, l3 ]), e.target._icon);
+                          else
+                            ko.applyBindings( new ViewModel(feature.properties.heading,[ l1,l2 ]), e.target._icon);
+                        });
                       aiMarker.options.draggable = true;
                       //We can't drag multiplayer 
                       if(feature.properties.type == "aircraft") {
@@ -156,6 +162,8 @@
                     var callsign = "";
                     var name = "";
                     var speed = 0;
+                    var departureAirportId = "";
+                    var arrivalAirportId = "";
                     if (type == "multiplayer") {
                         name = child.getNode("sim").getNode("model").getNode("path").getValue();
                     }
@@ -166,6 +174,8 @@
                     } else {
                         callsign = child.getNode("callsign").getValue();
                         speed = velocities.getNode("true-airspeed-kt").getValue();
+                        departureAirportId = child.getNode("departure-airport-id").getValue();
+                        arrivalAirportId = child.getNode("arrival-airport-id").getValue();
                     }
 
                     geoJSON.features.push({
@@ -184,6 +194,8 @@
                             "speed" : speed.toFixed(0),
                             "callsign" : callsign,
                             "name" : name,
+                            "departureAirportId" : departureAirportId,
+                            "arrivalAirportId" : arrivalAirportId,
                         },
                     });
 

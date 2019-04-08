@@ -5,47 +5,63 @@
     
   <nasal>
       <open>
-          
-          var computeStatusText = func {
-              # first, check if the system is actually enabled
-              if (!getprop('/sim/terrasync/enabled'))
-                  return "Downloading disabled";
-            
-              # only happens if terrasync failed to activate, so
-             # indicates a problem
-              if (!getprop('/sim/terrasync/active'))
-                  return "unable to start downloading";
-                  
-              var errCount = getprop('/sim/terrasync/error-count');
-              if (errCount > 0)
-                  return "errors occurred during download";
-                  
-              # we need to suggest some remedial action here!
-              if (getprop('/sim/terrasync/stalled'))
-                  return "Downloading has stalled. Check yuor network connection and settings";
-                  
-              if (getprop('/sim/terrasync/busy')) {
-                  var kbytesSec = getprop('/sim/terrasync/transfer-rate-bytes-sec') / 1024;
-                  return sprintf('Downloading: %dKB/sec', int(kbytesSec));
-              }
-                  
-              # we are enabled but not busy, so idle
-              return "Idle";
-          }
-          
-          # timer function, update summary status string
-          var updateStatusText = func {
-          
-              var s = computeStatusText();
-              setprop("/sim/gui/dialogs/terrasync/status", s);
-          }
-          
-          # the TerraSync properties of interest are tied, so we can't use a
-          # listener. Let's poll while the dialog is open; not ideal but not
-          # a major problem.
-          var statusTimer = maketimer(0.4, updateStatusText);     
-          statusTimer.start();     
-          updateStatusText();
+          <![CDATA[
+
+var computeStatusText = func {
+# first, check if the system is actually enabled
+    if (!getprop('/sim/terrasync/enabled'))
+        return "Downloading disabled";
+
+# only happens if terrasync failed to activate, so
+# indicates a problem
+    if (!getprop('/sim/terrasync/active'))
+        return "Automatic download inactive";
+
+    var errCount = getprop('/sim/terrasync/error-count');
+    if (errCount > 0)
+        return "Errors occurred during download";
+
+# we need to suggest some remedial action here!
+    if (getprop('/sim/terrasync/stalled'))
+        return "Downloading has stalled. Check your network connection and settings";
+
+    if (getprop('/sim/terrasync/busy')) {
+        var kbytesSec = getprop('/sim/terrasync/transfer-rate-bytes-sec') / 1024;
+        return sprintf('Downloading: %dKB/sec', int(kbytesSec));
+    }
+
+# we are enabled but not busy, so idle
+    return "Ready";
+}
+
+# timer function, update summary status string
+var updateStatusText = func {
+    var s = computeStatusText();
+    setprop("/sim/gui/dialogs/terrasync/status", s);
+
+    var msg = "";
+    if (getprop("/sim/terrasync/available")) {
+        if (getprop("/sim/terrasync/enabled"))
+            msg = "Automatic download active; monitor your bandwidth on metered connection.";
+    } else {
+        if (getprop("/sim/terrasync/intialized"))
+            msg = "Automatic download not active.";
+        else
+            msg = "Automatic download not supported.";
+    }
+    setprop("/sim/terrasync/ui-message-node", msg);
+}
+
+# the TerraSync properties of interest are tied, so we can't use a
+# listener. Let's poll while the dialog is open; not ideal but not
+# a major problem.
+var statusTimer = maketimer(0.4, updateStatusText);     
+statusTimer.start();     
+updateStatusText();
+
+setprop("/sim/gui/dialogs/terrasync/display-mode", "0");
+
+    ]]>
       </open>
       
       <close>
@@ -64,7 +80,7 @@
     <empty><stretch>1</stretch></empty>
 
     <text>
-      <label>Automatic Download of Scenery and Data</label>
+      <label>Automatic Download of Scenery and Data (TerraSync)</label>
     </text>
 
     <empty><stretch>1</stretch></empty>
@@ -90,8 +106,9 @@
       <green>0.4</green>
       <blue>0.4</blue>
     </color>
-    <halign>center</halign>
-    <label></label>
+    <halign>left</halign>
+            <property>/sim/terrasync/ui-message-node</property>
+            <live>true</live>
   </text>
 
   <group>
@@ -117,7 +134,7 @@
         <col>1</col>
         <colspan>3</colspan>
         <property>/sim/terrasync/enabled</property>
-        <label>Enable automatic download/update</label>
+        <label>Enable automatic scenery download</label>
         <live>true</live>
         <binding>
           <command>dialog-apply</command>
@@ -148,18 +165,42 @@
         <colspan>2</colspan>
 -->
         <property>/sim/terrasync/ai-data-enabled</property>
-        <label>Download traffic and multi-player aircraft</label>
+        <label>Update AI Traffic during FG start</label>
         <live>true</live>
         <binding>
           <command>dialog-apply</command>
           <object-name>ai-data-enabled</object-name>
         </binding>
         <enable>
-          <property>/sim/terrasync/enabled</property>
+            <property>/sim/terrasync/enabled</property>
+            <property>/sim/traffic-manager/enabled</property>
         </enable>
       </checkbox>
 
-      <checkbox>
+      <button>
+        <row>1</row>
+        <col>3</col>
+        <legend>Update Now</legend>
+        <border>2</border>
+        <equal>true</equal>
+        <enable>
+            <property>/sim/terrasync/enabled</property>
+            <property>/sim/traffic-manager/enabled</property>
+            <property>/sim/terrasync/ai-data-enabled</property>
+        </enable>
+        <binding>
+          <command>property-assign</command>
+          <property>/sim/terrasync/ai-data-enabled</property>
+          <value>1</value>
+        </binding>
+        <binding>
+          <command>property-assign</command>
+          <property>/sim/terrasync/ai-data-update-now</property>
+          <value>1</value>
+        </binding>
+      </button>
+
+<!--      <checkbox>
         <name>other-data-enabled</name>
         <halign>left</halign>
         <row>2</row>
@@ -176,7 +217,7 @@
           <property>/sim/terrasync/enabled</property>
         </enable>
       </checkbox>
-
+-->
       <text>
         <name>warning_text</name>
         <row>3</row>
@@ -403,36 +444,7 @@
       <empty><stretch>true</stretch></empty>
 
       <button>
-        <legend>OK</legend>
-        <border>2</border>
-        <equal>true</equal>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-        <binding>
-          <command>reinit</command>
-          <subsystem>terrasync</subsystem>
-        </binding>
-        <binding>
-          <command>dialog-close</command>
-        </binding>
-      </button>
-
-      <button>
-        <legend>  Apply  </legend>
-        <equal>true</equal>
-        <border>2</border>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-        <binding>
-          <command>reinit</command>
-          <subsystem>terrasync</subsystem>
-        </binding>
-      </button>
-
-      <button>
-        <legend>Cancel</legend>
+        <legend>Close</legend>
         <border>2</border>
         <equal>true</equal>
         <key>Esc</key>
@@ -443,52 +455,6 @@
       <empty><stretch>true</stretch></empty>
     </group>
 
-    <visible>
-      <property>/sim/terrasync/built-in-svn-available</property>
-    </visible>
-
   </group>
-
-  <nasal>
-    <open><![CDATA[
-    
-      setprop("/sim/gui/dialogs/terrasync/display-mode", "0");
-    
-      var msg = "";
-      if (getprop("/sim/terrasync/built-in-svn-available"))
-      {
-          msg = "Monitor your bandwidth or use a flat-rate when using automatic download.";
-      }
-      else
-      {
-          msg = "Sorry, this binary was built without support to download scenery.";
-          setprop("/sim/terrasync/enabled", 0);
-      }
-      var msgLabel = gui.findElementByName(cmdarg(),"message");
-      msgLabel.getNode("label",1).setValue(msg);
-
-      var fg_scenery = props.globals.getNode("sim").getChildren("fg-scenery");
-      var fg_data = props.globals.getNode("sim").getChild("fg-root").getValue();
-      var combo = gui.findElementByName(cmdarg(),"scenery-dir");
-      var valid = 0;
-
-      for (var i = 0; i < size(fg_scenery); i = i + 1) {
-        var s = fg_scenery[i].getValue();
-        if ((s != fg_data ~ "/Scenery") and (s != fg_data ~ "\\Scenery")) {
-          # Do not allow Terrasync to run in the default directory.
-          combo.getNode("value[" ~ i ~ "]", 1).setValue(fg_scenery[i].getValue());
-          valid = 1;
-        }
-      }
-
-      # Add error text if the user only has fg-data/Scenery available and disable controls.
-      if (!valid) {
-        var warning = cmdarg().getChildren("group")[1].getChildren("text")[1];
-        var txt = "You must configure a separate FG_SCENERY directory for automatic scenery download";
-        warning.getNode("label").setValue(txt);
-      }
-    ]]></open>
-
-  </nasal>
 
 </PropertyList>

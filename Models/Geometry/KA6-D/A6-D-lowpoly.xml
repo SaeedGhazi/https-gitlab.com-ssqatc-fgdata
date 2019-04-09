@@ -1,17 +1,26 @@
 <PropertyList>
   <path>KA6-D.ac</path>
-  <multiplay>
-    <refuel>
-      <type>probe</type>
-    </refuel>
-  </multiplay>
+<multiplay>
+  <refuel>
+   <type>probe</type>
+  </refuel>
+ </multiplay>
 
   <animation>
+    <type>select</type>
     <object-name>Hose</object-name>
     <object-name>Drogue</object-name>
-    <enable-hot>false</enable-hot>
+    <object-name>Droptank1</object-name>
+    <object-name>Droptank2</object-name>
+    <object-name>Droptank3</object-name>
+    <object-name>Droptank4</object-name>
+    <object-name>DrougeHousing</object-name>
   </animation>
-
+  <animation>
+  <object-name>Hose</object-name>
+  <object-name>Drogue</object-name>
+  <enable-hot>false</enable-hot>
+ </animation>  
   <animation>
     <type>scale</type>
     <object-name>Beacon</object-name>

@@ -2171,7 +2171,6 @@ kids 0
 OBJECT poly
 name "Canopy_1"
 crease 45.000000
-hidden
 numvert 198
 2.89363 1.27055 -0.007029
 2.74005 1.20102 -0.007029
@@ -43190,7 +43189,6 @@ kids 0
 OBJECT poly
 name "FixedCanopyGlass"
 crease 45.000000
-hidden
 numvert 153
 2.15225 0.759062 -0.195479
 2.58334 1.10898 -0.139491

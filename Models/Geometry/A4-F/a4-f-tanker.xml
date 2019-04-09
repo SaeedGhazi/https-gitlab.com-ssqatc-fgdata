@@ -21,16 +21,6 @@
     <enable-hot>false</enable-hot>
   </animation>
 
-  <model>
-    <path>Pilot/pilot.xml</path>
-    <name>Pilot</name>
-    <offsets>
-	  <x-m>3.39</x-m>
-	  <y-m>0.0</y-m>
-	  <z-m>0.66</z-m>
-	</offsets>
-  </model>
-
 </PropertyList>
 
 

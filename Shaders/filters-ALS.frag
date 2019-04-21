@@ -20,6 +20,7 @@ uniform bool use_IR_vision;
 uniform int display_xsize;
 uniform int display_ysize;
 
+float rand2D(in vec2 co);
 float Noise2D(in vec2 coord, in float wavelength);
 
 vec3 gamma_correction (in vec3 color) {
@@ -107,6 +108,11 @@ return color;
 }
 
 vec3 filter_combined (in vec3 color) {
+
+    // Apply some dithering to eliminate banding caused by rendering to a
+    // 32 bpp framebuffer
+    float dither_noise = rand2D(gl_FragCoord.xy);
+    color += mix(-0.5/255.0, 0.5/255.0, dither_noise);
 
 if (use_filtering == false)
 	{

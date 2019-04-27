@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- Author Marcin Luzniar - Timetable Jan 2017 - CRJ700 replaced with ERJ145, CRJ1000 replaced with ERJ195 -->
+<!-- Author Marcin Luzniar - Timetable Jan 2017 - CRJ700 replaced with ERJ145, CRJ1000 replaced with ERJ190 -->
 <trafficlist>
   <aircraft>
     <model>Aircraft/ATR42/ATR42-Hop.xml</model>
@@ -1220,7 +1220,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1234,7 +1234,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1248,7 +1248,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1262,7 +1262,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1276,7 +1276,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1290,7 +1290,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1304,7 +1304,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1318,7 +1318,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1542,7 +1542,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1556,7 +1556,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1570,7 +1570,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1584,7 +1584,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1598,7 +1598,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1612,7 +1612,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1626,7 +1626,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1640,7 +1640,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1654,7 +1654,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1668,7 +1668,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1682,7 +1682,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1696,7 +1696,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1710,7 +1710,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1724,7 +1724,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>

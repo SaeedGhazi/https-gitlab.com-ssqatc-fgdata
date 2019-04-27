@@ -32,7 +32,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Montenegro.xml</model>
+    <model>Aircraft/E95/E95-Montenegro.xml</model>
     <livery>MGX</livery>
     <airline>MGX</airline>
     <home-port>LYPG</home-port>
@@ -46,7 +46,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Montenegro.xml</model>
+    <model>Aircraft/E95/E95-Montenegro.xml</model>
     <livery>MGX</livery>
     <airline>MGX</airline>
     <home-port>LYPG</home-port>
@@ -60,7 +60,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-Montenegro.xml</model>
+    <model>Aircraft/E95/E95-Montenegro.xml</model>
     <livery>MGX</livery>
     <airline>MGX</airline>
     <home-port>LYPG</home-port>

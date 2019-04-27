@@ -58,7 +58,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-ArkiaIsraeliAirlines.xml</model>
+    <model>Aircraft/E95/E95-ArkiaIsraeliAirlines.xml</model>
     <livery>AIZ</livery>
     <airline>AIZ</airline>
     <home-port>LLET</home-port>
@@ -72,7 +72,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-ArkiaIsraeliAirlines.xml</model>
+    <model>Aircraft/E95/E95-ArkiaIsraeliAirlines.xml</model>
     <livery>AIZ</livery>
     <airline>AIZ</airline>
     <home-port>LLBG</home-port>
@@ -86,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-ArkiaIsraeliAirlines.xml</model>
+    <model>Aircraft/E95/E95-ArkiaIsraeliAirlines.xml</model>
     <livery>AIZ</livery>
     <airline>AIZ</airline>
     <home-port>LLBG</home-port>

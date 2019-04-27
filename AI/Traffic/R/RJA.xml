@@ -4,7 +4,7 @@
 
 <trafficlist>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-RoyalJordanian.xml</model>
+    <model>Aircraft/E95/E95-RoyalJordanian.xml</model>
     <livery>RJA</livery>
     <airline>RJA</airline>
     <home-port>OJAI</home-port>
@@ -18,7 +18,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-RoyalJordanian.xml</model>
+    <model>Aircraft/E95/E95-RoyalJordanian.xml</model>
     <livery>RJA</livery>
     <airline>RJA</airline>
     <home-port>OJAI</home-port>

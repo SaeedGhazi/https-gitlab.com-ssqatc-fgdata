@@ -4,7 +4,7 @@
 
  <trafficlist>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -18,7 +18,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -32,7 +32,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -46,7 +46,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -60,7 +60,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -74,7 +74,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -88,7 +88,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -102,7 +102,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -116,7 +116,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -130,7 +130,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -144,7 +144,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -158,7 +158,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -172,7 +172,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -186,7 +186,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -200,7 +200,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -214,7 +214,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-Austrian.xml</model>
+        <model>Aircraft/E95/E95-Austrian.xml</model>
         <livery>AUA</livery>
         <airline>AUA</airline>
         <home-port>LOWW</home-port>
@@ -12004,7 +12004,7 @@
             </arrival>
             <repeat>WEEK</repeat>
         </flight>
-        <flight> 
+        <flight>
             <callsign>OS735</callsign>
             <required-aircraft>DHC8-AUA</required-aircraft>
             <fltrules>IFR</fltrules>
@@ -17148,7 +17148,7 @@
                 <time>0/16:45:00</time>
             </arrival>
             <repeat>WEEK</repeat>
-        </flight> 
+        </flight>
         <flight>
             <callsign>OS25</callsign>
             <required-aircraft>77L-AUA</required-aircraft>

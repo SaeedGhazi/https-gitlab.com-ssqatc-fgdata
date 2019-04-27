@@ -535,7 +535,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -549,7 +549,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -563,7 +563,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -577,7 +577,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -591,7 +591,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -605,7 +605,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -619,7 +619,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -633,7 +633,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -647,7 +647,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -661,7 +661,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -675,7 +675,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -690,7 +690,7 @@
   </aircraft>
   <!--        
    <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+        <model>Aircraft/E95/E95-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -704,7 +704,7 @@
         <heavy>false</heavy>
     </aircraft> 
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+        <model>Aircraft/E95/E95-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -719,7 +719,7 @@
     </aircraft>
      
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+        <model>Aircraft/E95/E95-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -734,7 +734,7 @@
     </aircraft>
               
    <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+        <model>Aircraft/E95/E95-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -748,7 +748,7 @@
         <heavy>false</heavy>
     </aircraft> 
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+        <model>Aircraft/E95/E95-default.xml</model>
         <livery>VOZ</livery>
         <airline>VOZ</airline>
         <home-port>YSSY</home-port>
@@ -763,7 +763,7 @@
     </aircraft>
      -->
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>
@@ -777,7 +777,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ195/ERJ195-default.xml</model>
+    <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
     <airline>VOZ</airline>
     <home-port>YSSY</home-port>

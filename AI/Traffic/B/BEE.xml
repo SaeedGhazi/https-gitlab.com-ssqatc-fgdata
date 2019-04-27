@@ -590,7 +590,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -604,7 +604,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGAC</home-port>
@@ -618,7 +618,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -632,7 +632,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -646,7 +646,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -660,7 +660,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -674,7 +674,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGBB</home-port>
@@ -688,7 +688,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPH</home-port>
@@ -702,7 +702,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPH</home-port>
@@ -716,7 +716,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGTE</home-port>
@@ -730,7 +730,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPF</home-port>
@@ -744,7 +744,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPF</home-port>
@@ -758,7 +758,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGJB</home-port>
@@ -772,7 +772,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPE</home-port>
@@ -786,7 +786,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGPE</home-port>
@@ -800,7 +800,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGJJ</home-port>
@@ -814,7 +814,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -828,7 +828,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -842,7 +842,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGCC</home-port>
@@ -856,7 +856,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>
@@ -870,7 +870,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>
@@ -884,7 +884,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ERJ195/ERJ195-FlyBe.xml</model>
+        <model>Aircraft/E95/E95-FlyBe.xml</model>
         <livery>BEE</livery>
         <airline>BEE</airline>
         <home-port>EGHI</home-port>

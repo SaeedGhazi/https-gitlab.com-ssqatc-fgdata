@@ -871,6 +871,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </atis>
     <traffic-manager>
       <enabled type="bool" userarchive="y">true</enabled>
+      <active type="bool">false</active>
       <heuristics type="bool">true</heuristics>
       <datafile type="string"/>
       <instantaneous-action type="bool">false</instantaneous-action>
@@ -886,7 +887,6 @@ Started September 2000 by David Megginson, david@megginson.com
     </ai>
     <multiplay preserve="y">
       <chat type="string" preserve="y">Hello</chat>
-      <transmission-freq-hz type="string" preserve="y">118500000</transmission-freq-hz>
       <chat-display type="bool" userarchive="y">true</chat-display>
       <chat-menu include="ATC/chat-menu-entries.xml"/>
       <write-message-log type="bool" preserve="y">false</write-message-log>
@@ -934,6 +934,9 @@ Started September 2000 by David Megginson, david@megginson.com
                 property browser to configure actual directory. -->
       <scenery-dir userarchive="n"/>
       <max-errors type="int">10</max-errors>
+      <ai-data-update-now type="bool">0</ai-data-update-now>
+      <ai-data-update userarchive="y" type="int">1</ai-data-update>
+      <ai-data-enabled userarchive="y" type="int">1</ai-data-enabled>
       <!-- abort when too many errors occurred, or -1=don't abort -->
     </terrasync>
     <flight-recorder>
@@ -1093,10 +1096,13 @@ Started September 2000 by David Megginson, david@megginson.com
     </lighting>
     <radios>
       <!--New for 2019.1 - the ability to select the comm radio frequency used by fgcom.
-      The active (transmitting frequency) will also be sent over MP to allow RDF by other MP models.
-      Both comm-ptt and comm-radio-selected should be set to the same value as fgcom only currently permits
-      single channel operation.
-      0 = off, otherwise comm radio selected (/instrumentation/comm[0] it will be 1)
+      comm-radio-selected should be set to appropriate comm radio (idx + 1) 
+          0 : off (no FGcom call)
+          1 : /instrumentation/comm[0]
+          2 : /instrumentation/comm[2]
+
+      comm-ptt should be set to non zero request PTT - which will transmit via FGCom when FGCom is enabled
+      The active (transmitting frequency) and normalised power will also be sent over MP to allow RDF by other MP models.
       -->
       <comm-ptt type="int">0</comm-ptt>
       <comm-radio-selected type="int">1</comm-radio-selected>

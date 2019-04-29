@@ -88,7 +88,7 @@
 <model n="212" type="string">AI/Aircraft/A320/A320-default.xml</model>
 <model n="213" type="string">AI/Aircraft/A321/A321-default.xml</model>
 <model n="214" type="string">AI/Aircraft/ERJ145/ERJ145-default.xml</model>
-<model n="215" type="string">AI/Aircraft/ERJ195/ERJ195-Lufthansa.xml</model>
+<model n="215" type="string">AI/Aircraft/E95/E95-Default.xml</model>
 <model n="216" type="string">AI/Aircraft/Fokker-100/Fokker-100-KLM.xml</model>
 <model n="217" type="string">AI/Aircraft/Fokker-50/fokker50-KLM.xml</model>
 <model n="218" type="string">AI/Aircraft/Fokker-70/fokker70-KLM.xml</model>

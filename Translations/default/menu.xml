@@ -85,6 +85,7 @@
 	<mp-list>Pilot List</mp-list>
 	<mp-carrier>MPCarrier Selection</mp-carrier>
 	<lag-adjust>Lag Settings</lag-adjust>
+	<swift_connection>swift Connection</swift_connection>
 
 	<!-- Debug menu -->
 	<debug>Debug</debug>

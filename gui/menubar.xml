@@ -649,6 +649,14 @@
 				<dialog-name>lag-adjust</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<name>swift_connection</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>swift_connection</dialog-name>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

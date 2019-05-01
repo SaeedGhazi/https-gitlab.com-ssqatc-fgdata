@@ -93,6 +93,16 @@ _setlistener("/controls/engines/mixture-all", func{
 _setlistener("/controls/engines/propeller-pitch-all", func{
     setForAllEnginesProperty("propeller-pitch");
 },0,0);
+_setlistener("/controls/engines/reverser-all", func{
+    setForAllEnginesProperty("reverser");
+},0,0);
+
+var reverserTogglePosition = func {
+    if (getprop("/controls/engines/reverser-all"))
+      setprop("/controls/engines/reverser-all", 0);
+    else
+      setprop("/controls/engines/reverser-all", 1);
+}
 
 # Joystick axis handlers (use cmdarg).  Shouldn't be called from
 # other contexts.  A non-null argument reverses the axis direction.

@@ -285,6 +285,7 @@ var axisBindings = [
   PropertyScaleAxis.new("Throttle Engine 1",  "/controls/engines/engine[1]/throttle") ,
   PropertyScaleAxis.new("Mixture Engine 1",  "/controls/engines/engine[1]/mixture") ,
   PropertyScaleAxis.new("Propeller Pitch Engine 1",  "/controls/engines/engine[1]/propeller-pitch"),
+  PropertyScaleAxis.new("Reverser All Engines",  "/controls/engines/reverser-all") ,
 
   NasalLowHighAxis.new("View (horizontal)",
                       "setprop(\"/sim/current-view/goal-heading-offset-deg\", getprop(\"/sim/current-view/goal-heading-offset-deg\") + 2);",
@@ -549,6 +550,7 @@ var buttonBindings = [
   NasalButton.new("Gear Up", "controls.gearDown(-1);",0),
   NasalButton.new("Gear Down", "controls.gearDown(1);",0),
   NasalButton.new("Gear Toggle", "controls.gearTogglePosition(1);",0),
+  NasalButton.new("Reverser Toggle", "controls.reverserTogglePosition();",0),
   NasalHoldButton.new("Spoilers Retract", "controls.stepSpoilers(-1);", "controls.stepSpoilers(0);"),
   NasalHoldButton.new("Spoilers Deploy", "controls.stepSpoilers(1);", "controls.stepSpoilers(0);"),
   NasalHoldButton.new("Brakes", "controls.applyBrakes(1);", "controls.applyBrakes(0);"),

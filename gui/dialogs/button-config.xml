@@ -350,6 +350,18 @@ var assignButton = func(cmd) {
         </script>
       </binding>
     </button>
+    <button>
+      <row>6</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>All Reverser Toggle</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Reverser Toggle");
+        </script>
+      </binding>
+    </button>
 
     <text>
       <row>0</row>

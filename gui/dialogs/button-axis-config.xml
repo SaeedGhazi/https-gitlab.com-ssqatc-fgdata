@@ -365,6 +365,19 @@ var assignAxis = func(cmd) {
       </binding>
     </button>
 
+    <button>
+      <row>10</row>
+      <col>1</col>
+      <halign>fill</halign>
+      <legend>Reverser All Engines</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignAxis("Reverser All Engines");
+        </script>
+      </binding>
+    </button>
+
     <text>
       <row>0</row>
       <col>2</col>

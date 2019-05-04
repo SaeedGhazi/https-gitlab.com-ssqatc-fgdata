@@ -41,8 +41,7 @@
                       var l1 = feature.properties.callsign,
                           l2 = feature.properties.heading + 'T ' + feature.properties.speed + 'KTAS ' + 
                                formatFL(feature.geometry.coordinates[2]),
-                          l3 = feature.properties.departureAirportId + ' -> ' + feature.properties.arrivalAirportId,
-                          l4 = ;
+                          l3 = feature.properties.departureAirportId + ' -> ' + feature.properties.arrivalAirportId;
                           
                       
                       aiMarker = L.aiAircraftMarker(latlng, { className: AITypeToCssClassMap[feature.properties.type] } );
@@ -144,7 +143,7 @@
             types.forEach(function(type) {
                 root.getChildren(type).forEach(function(child) {
 
-                    if (!child.getNode("valid").getValue())
+                    if (!child.getNode("valid") || !child.getNode("valid").getValue())
                         return;
 
                 	var path = child.getPath();

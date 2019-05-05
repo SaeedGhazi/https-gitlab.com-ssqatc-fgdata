@@ -236,6 +236,31 @@ var setAll = func(base, child, value) {
             c.getNode(child, 1).setValue(value);
 }
 
+# createNodeObjectsFromHash - create nasal node objects from hash
+# property_list: hash; where keys are variable names and values are 
+#                property paths
+#                { foo: "/some/prop/foo", bar: "/some/other/prop", }
+# namespace:     optional; variables (objects) are created in this namespace
+#                defaults to namespace of caller, e.g. after calling this 
+#                you can use foo.getValue() or bar.addChild()
+#
+var createNodeObjectsFromHash = func (property_list, namespace = nil) {
+    if (namespace == nil) {
+        namespace = caller(1)[0];
+    }
+    if (typeof(namespace) != "hash") {
+        printlog("warning", "createNodeObjectsFromHash: Error, namespace argument is not a hash.");
+        return nil;
+    }
+    if (typeof(property_list) != "hash") {
+        printlog("warning", "createNodeObjectsFromHash: Error, property_list argument is not a hash.");
+        return nil;
+    }
+    foreach (key; keys(property_list)) {
+        namespace[key] = props.getNode(property_list[key],1);
+    }
+}
+
 ##
 # Turns about anything into a list of props.Nodes, including ghosts,
 # path strings, vectors or hashes containing, as well as functions

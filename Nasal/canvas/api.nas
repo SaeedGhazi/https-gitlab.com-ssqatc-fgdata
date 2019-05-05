@@ -283,6 +283,11 @@ var Element = {
     return center;
   },
   
+  getSize: func {
+      var bb = me.getTightBoundingBox();
+      return [bb[2] - bb[0], bb[3] - bb[1]];
+  },
+  
   # convert bounding box vector into clip string (yes, different order)
   boundingbox2clip: func(bb) {
     return sprintf("rect(%d,%d,%d,%d)", bb[1], bb[2], bb[3], bb[0])

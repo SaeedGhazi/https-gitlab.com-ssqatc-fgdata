@@ -58,7 +58,7 @@
     <cruise-alt>50</cruise-alt>
     <arrival>
       <port>EGEY</port>
-      <time>4/15:20:00</time>
+      <time>2/15:20:00</time>
     </arrival>
     <repeat>WEEK</repeat>
   </flight>

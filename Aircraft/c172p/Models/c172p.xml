@@ -298,6 +298,15 @@
 
     <animation>
         <type>select</type>
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
+        <condition>
+            <property>sim/model/c172p/ruddertrim-visible</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
         <object-name>gloveboxfull</object-name>
         <object-name>gpsmodel</object-name>
         <condition>
@@ -876,6 +885,8 @@
         <object-name>gloveboxdoor</object-name>
         <object-name>glovebox</object-name>
         <object-name>gloveboxfull</object-name>
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
     </effect>
     <effect>
         <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-interior-fuel-selector</inherits-from>
@@ -917,22 +928,36 @@
         <object-name>SeatMounts.0</object-name>
         <object-name>SeatMounts.1</object-name>
         <object-name>SeatMounts.2</object-name>
-        <object-name>SeatMounts.3</object-name>
+
     </effect>
+
+    <effect>
+        <inherits-from>Effects/interior/interior-glass-reflection-panel-front</inherits-from>
+        <object-name>glass_panel</object-name>
+    </effect>
+
     <effect>
         <inherits-from>Effects/interior/c172p-interior-glass-reflection-front</inherits-from>
         <object-name>glas_interior</object-name>
     </effect>
     <effect>
-        <inherits-from>Effects/interior/interior-glass-reflection-panel-front</inherits-from>
-        <object-name>glass_panel</object-name>
+        <inherits-from>Effects/interior/c172p-interior-glass-front-sides</inherits-from>
+        <object-name>glas_front_interior_sides</object-name>
     </effect>
     <effect>
-        <inherits-from>Effects/interior/c172p-interior-glass-reflection-side</inherits-from>
-        <object-name>glas_front_interior_sides</object-name>
+        <inherits-from>Effects/interior/c172p-interior-glass-window-left</inherits-from>
         <object-name>leftwindow_interior</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/interior/c172p-interior-glass-window-right</inherits-from>
         <object-name>rightwindow_interior</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/interior/c172p-interior-glass-back-sides</inherits-from>
         <object-name>glas_interior_sides</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/interior/c172p-interior-glass-back</inherits-from>
         <object-name>glas_interior_back</object-name>
     </effect>
 
@@ -1040,6 +1065,9 @@
         <object-name>FuelSelectorRight</object-name>
         <object-name>FuelSelectorBoth</object-name>
         <object-name>FuelSelectorOff</object-name>
+
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
         <condition>
             <not>
                 <property>/sim/rendering/shaders/skydome</property>
@@ -1920,6 +1948,7 @@
         <name>digital-clock</name>
         <path>Interior/Panel/Instruments/digital-clock/digital-clock.xml</path>
     </model>
+
     <model>
         <name>vac</name>
         <path>Interior/Panel/Instruments/vac/vac.xml</path>
@@ -2126,6 +2155,16 @@
         </offsets>
     </model>
     <!-- MODEND: Floats Wake-->
+
+    <model>
+        <path>Effects/pontoon/eng-spray.xml</path>
+        <name>eng-spray</name>
+        <offsets>
+            <x-m>-1.0 </x-m>
+            <y-m> 1.15</y-m>
+            <z-m>-5.0 </z-m>
+        </offsets>
+    </model>
 
     <!-- Labels activated by hotspots -->
     <text>
@@ -3183,7 +3222,7 @@
     <animation>
         <type>knob</type>
         <object-name>visorleft</object-name>
-        <property>controls/visorleft/position-deg</property>
+        <property>controls/visors/left/visor-position-deg</property>
         <factor>1</factor>
         <drag-direction>vertical</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3200,10 +3239,10 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorleft/position-deg</property>
+                <property>controls/visors/left/visor-position-deg</property>
                 <factor>5</factor>
-                <min>0</min>
-                <max>140</max>
+                <min>10</min>
+                <max>90</max>
                 <wrap>false</wrap>
             </binding>
         </action>
@@ -3211,7 +3250,7 @@
     <animation>
         <type>knob</type>
         <object-name>visorright</object-name>
-        <property>controls/visorright/position-deg</property>
+        <property>controls/visors/right/visor-position-deg</property>
         <factor>1</factor>
         <drag-direction>vertical</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3228,10 +3267,10 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorright/position-deg</property>
+                <property>controls/visors/right/visor-position-deg</property>
                 <factor>5</factor>
-                <min>0</min>
-                <max>140</max>
+                <min>10</min>
+                <max>90</max>
                 <wrap>false</wrap>
             </binding>
         </action>
@@ -3239,8 +3278,8 @@
     <animation>
         <type>knob</type>
         <object-name>visorrodleft</object-name>
-        <!--object-name>visorbaseleft</object-name-->
-        <property>controls/visorrodleft/position-deg</property>
+        <object-name>visorleft</object-name>
+        <property>controls/visors/left/rod-position-deg</property>
         <factor>1</factor>
         <drag-direction>horizontal</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3257,36 +3296,19 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorrodleft/position-deg</property>
+                <property>controls/visors/left/rod-position-deg</property>
                 <factor>5</factor>
                 <min>-30</min>
-                <max>15</max>
+                <max>12</max>
                 <wrap>false</wrap>
             </binding>
         </action>
-    </animation>
-    <animation>
-        <type>rotate</type>
-        <object-name>visorleft</object-name>
-        <property>controls/visorrodleft/position-deg</property>
-        <factor>1</factor>
-        <offset-deg>0</offset-deg>
-        <center>
-            <x-m> 0.10647</x-m>
-            <y-m>-0.40846</y-m>
-            <z-m> 0.47832</z-m>
-        </center>
-        <axis>
-            <x>.3</x>
-            <y>.03</y>
-            <z>1</z>
-        </axis>
     </animation>
     <animation>
         <type>knob</type>
         <object-name>visorrodright</object-name>
-        <!--object-name>visorbaseright</object-name-->
-        <property>controls/visorrodright/position-deg</property>
+        <object-name>visorright</object-name>
+        <property>controls/visors/right/rod-position-deg</property>
         <factor>1</factor>
         <drag-direction>horizontal</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3303,30 +3325,13 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorrodright/position-deg</property>
+                <property>controls/visors/right/rod-position-deg</property>
                 <factor>5</factor>
                 <min>-30</min>
-                <max>15</max>
+                <max>12</max>
                 <wrap>false</wrap>
             </binding>
         </action>
-    </animation>
-    <animation>
-        <type>rotate</type>
-        <object-name>visorright</object-name>
-        <property>controls/visorrodright/position-deg</property>
-        <factor>1</factor>
-        <offset-deg>0</offset-deg>
-        <center>
-            <x-m>0.1063 </x-m>
-            <y-m>0.40887</y-m>
-            <z-m>0.48035</z-m>
-        </center>
-        <axis>
-            <x>-.3</x>
-            <y>-.03</y>
-            <z>-1</z>
-        </axis>
     </animation>
 
     <!-- MOD: animation for the checklists -->
@@ -3553,6 +3558,45 @@
             <y>1.0</y>
         </axis>
     </animation>
+
+    <!-- Animate the pilot seat (optional) -->
+    <!--
+    <animation>
+        <type>translate</type>
+        <object-name>pilotseat_left</object-name>
+        <property>sim/current-view/user/y-offset-m</property>
+        <factor>1</factor>
+        <offset-m>-0.208</offset-m>
+        <axis>
+            <z>1.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>pilotseat_left</object-name>
+        <property>sim/current-view/user/z-offset-m</property>
+        <factor>1</factor>
+        <offset-m>-0.36</offset-m>
+        <axis>
+            <x>1.0</x>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>pilotseat_left</object-name>
+        <property>sim/current-view/user/pitch-offset-deg</property>
+        <factor>1</factor>
+        <offset-deg>0.12</offset-deg>
+        <axis>
+            <x1-m> 0.17429</x1-m>
+            <y1-m>-0.37445</y1-m>
+            <z1-m>-0.61057</z1-m>
+            <x2-m> 0.17429</x2-m>
+            <y2-m>-0.10364</y2-m>
+            <z2-m>-0.61055</z2-m>
+        </axis>
+    </animation>
+    -->
 
     <!-- Pick animation for the doors -->
     <animation>
@@ -5245,6 +5289,43 @@
         </center>
     </animation>
 
+    <animation>
+        <type>knob</type>
+        <object-name>RudderTrimKnob</object-name>
+        <property>controls/flight/rudder-trim-knob</property>
+        <factor>40</factor>
+        <drag-direction>horizontal</drag-direction>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-0.521  </x-m>
+            <y-m> 0.00061</y-m>
+            <z-m>-0.56081</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/flight/rudder-trim-knob</property>
+                <factor>0.01</factor>
+                <min>-.18</min>
+                <max>.18</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <label>Rudder trim: %3.2f</label>
+                <tooltip-id>rudder-trim</tooltip-id>
+                <property>controls/flight/rudder-trim-knob</property>
+            </binding>
+        </hovered>
+    </animation>
+
     <!-- Panel light knob -->
     <animation>
         <type>knob</type>
@@ -6888,8 +6969,7 @@
         <object-name>NoseSkiWheel</object-name>
         <object-name>NoseSkiWheelAxleL</object-name>
         <object-name>NoseSkiWheelAxleR</object-name>
-        <property>surface-positions/rudder-pos-norm</property>
-        <factor>30</factor>
+        <property>fdm/jsbsim/fcs/steer-pos-deg</property>
         <axis>
             <x1-m>-0.975</x1-m>
             <y1-m>0</y1-m>
@@ -7506,7 +7586,7 @@
         <type>spin</type>
         <object-name>NoseSkiWheel</object-name>
         <property alias="/params/gear-ski/ski-nose-rollspeed-ms"/>
-        <factor>20</factor>
+        <factor>125</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -7522,7 +7602,7 @@
         <type>spin</type>
         <object-name>LeftSkiWheel</object-name>
         <property alias="/params/gear-ski/ski-left-rollspeed-ms"/>
-        <factor>18</factor>
+        <factor>100</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -7538,7 +7618,7 @@
         <type>spin</type>
         <object-name>RightSkiWheel</object-name>
         <property alias="/params/gear-ski/ski-right-rollspeed-ms"/>
-        <factor>18</factor>
+        <factor>100</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -7593,7 +7673,7 @@
                     <value>400</value>
                 </greater-than>
                 <not>
-                    property alias="/params/securing/cowl-plugs"/>
+                    <property alias="/params/securing/cowl-plugs"/>
                 </not>
                 <not>
                     <property alias="/params/engine/crashed"/>
@@ -9723,6 +9803,8 @@
         <object-name>GROUP_FrontPanels</object-name>
         <!-- MODEND: resume all to Panel_Rack_Base -->
         <property-base>sim/model/liverypanel/</property-base>
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
         <texture-prop>texture</texture-prop>
         <texture>panel.png</texture>
     </animation>
@@ -10032,12 +10114,11 @@
             <z>0.940</z>
         </axis>
     </animation>
-    <!-- MOD: Spin to amphibious gears -->
     <animation>
         <type>spin</type>
         <object-name>LFrontWheel</object-name>
         <property alias="/params/gear-amphibious/front-left-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>75</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -10053,7 +10134,7 @@
         <type>spin</type>
         <object-name>RFrontWheel</object-name>
         <property alias="/params/gear-amphibious/front-right-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>75</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -10064,10 +10145,8 @@
             <y-m>1.16615</y-m>
             <z-m>-2.06557</z-m>
         </center>
--2.10993
     </animation>
 
-    <!-- MODEND: Spin to amphibious gears -->
     <animation>
         <type>rotate</type>
         <object-name>LRtarm</object-name>
@@ -10152,7 +10231,7 @@
         <type>spin</type>
         <object-name>LRwheel</object-name>
         <property alias="/params/gear-amphibious/rear-left-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>52</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -10168,7 +10247,7 @@
         <type>spin</type>
         <object-name>RRwheel</object-name>
         <property alias="/params/gear-amphibious/rear-right-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>52</factor>
         <axis>
             <x>0</x>
             <y>-1</y>

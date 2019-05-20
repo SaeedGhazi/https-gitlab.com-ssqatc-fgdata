@@ -129,6 +129,20 @@ geo.put_model("Models/Volcanoes/Beerenberg/main_crater.xml", 71.0805, -8.1496 );
 
 }
 
+var set_eyjafjallajokull = func {
+
+io.include("Models/Volcanoes/Eyjafjallajokull/eyjafjallajokull.nas");
+geo.put_model("Models/Volcanoes/Eyjafjallajokull/main_crater.xml", 63.628335, -19.62823 );
+
+}
+
+var set_katla = func {
+
+io.include("Models/Volcanoes/Katla/katla.nas");
+geo.put_model("Models/Volcanoes/Katla/main_crater.xml", 63.65750,  -19.182871 );
+
+}
+
 # volcano definitions
 
 var kilauea = volcano.new("Kilauea", 19.39, -155.20);
@@ -147,6 +161,13 @@ var beerenberg = volcano.new("Beerenberg", 71.08, -8.15);
 beerenberg.set = set_beerenberg;
 append(volcano_manager.volcano_array, beerenberg);
 
+var eyjafjallajokull = volcano.new("Eyjafjallajokull", 63.62, -19.62);
+eyjafjallajokull.set = set_eyjafjallajokull;
+append(volcano_manager.volcano_array, eyjafjallajokull);
+
+var katla = volcano.new("Katla", 63.65750, -19.182871);
+katla.set = set_katla;
+append(volcano_manager.volcano_array, katla);
 
 # start the manager when autosaved (need some delay for terrain loading to finish)
 

@@ -24,5 +24,13 @@
   	<main-activity type="int" userarchive="y">0</main-activity>
 	<flank-activity type="int" userarchive="y">0</flank-activity>
 </beerenberg> 
+<eyjafjallajokull>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+</eyjafjallajokull>
+
+<katla>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+</katla>
+
 
 </PropertyList>

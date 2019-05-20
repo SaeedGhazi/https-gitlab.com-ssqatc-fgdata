@@ -22,13 +22,23 @@
     <name>Default</name>
     <name>BarrenCover</name>
     <name>Rock</name>
+    <effect>Effects/terrain-overlay</effect>
     <texture-set>
      <texture>Terrain/lava1.png</texture>
      <texture n="11">Terrain/grass_hires.png</texture>
      <texture n="12">Terrain/rocks-lava.png</texture>
      <texture n="13">Terrain/rocks-lava.png</texture>
      <texture n="15">Terrain/rocks-lava.png</texture>
+     <texture n="20">Terrain/rocks-lava.png</texture>	 
     </texture-set>
+    <parameters>
+     <max_overlay_height>1.0</max_overlay_height>
+     <overlay_hardness>1.0</overlay_hardness>
+     <overlay_density>0.05</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>	
+    </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
@@ -44,15 +54,27 @@
     <name>DeciduousForest</name>
     <name>CropGrass</name>
     <name>Grassland</name>
+    <effect>Effects/terrain-overlay</effect>
     <texture-set>
      <texture>Terrain/iceland_grass-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
      <texture n="12">Terrain/dry_pasture4.png</texture>
      <texture n="13">Terrain/rocks-lava.png</texture>
-     <texture n="15">Terrain/rock.png</texture>
+     <texture n="15">Terrain/herbtundra_iceland.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>
+     <texture n="21">Terrain/rocks-lava.png</texture>	 
     </texture-set>
     <parameters>
      <dot_density>0.1</dot_density>
+     <max_overlay_height>1.0</max_overlay_height>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.2</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+     <overlay_secondary_flag>1</overlay_secondary_flag>
+     <overlay_secondary_hardness>1.0</overlay_secondary_hardness>
+     <overlay_secondary_density>0.0</overlay_secondary_density>	 
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -68,13 +90,23 @@
 
   <material>
     <name>Sand</name>
+    <effect>Effects/terrain-overlay</effect>
     <texture-set>
      <texture>Terrain/lava1.png</texture>
      <texture n="11">Terrain/lava_hires.png</texture>
      <texture n="12">Terrain/rocks-desert.png</texture>
      <texture n="13">Terrain/rocks-desert.png</texture>
      <texture n="15">Terrain/rocks-lava.png</texture>
+     <texture n="20">Terrain/rocks-lava.png</texture>	 
     </texture-set>
+    <parameters>
+     <max_overlay_height>1.0</max_overlay_height>
+     <overlay_hardness>1.0</overlay_hardness>
+     <overlay_density>-0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>	
+    </parameters>	
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
@@ -92,17 +124,28 @@
     <name>Scrub</name>
     <name>Heath</name>
     <name>Sclerophyllous</name>
+    <effect>Effects/terrain-overlay</effect>
     <texture-set>
      <texture>Terrain/shrub1-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
      <texture n="12">Terrain/herbtundra_iceland.png</texture>
      <texture n="13">Terrain/rocks-lava.png</texture>
      <texture n="15">Terrain/rock.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>		 
+     <texture n="21">Terrain/rocks-lava.png</texture>
     </texture-set>
     <parameters>
      <dot_density>0.1</dot_density>
      <transition_model>0.7</transition_model>
-     <hires_overlay_bias>-0.05</hires_overlay_bias>
+     <hires_overlay_bias>-0.4</hires_overlay_bias>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.2</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+     <overlay_secondary_flag>1</overlay_secondary_flag>
+     <overlay_secondary_hardness>1.0</overlay_secondary_hardness>
+     <overlay_secondary_density>0.0</overlay_secondary_density>	 	 
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -134,7 +177,7 @@
     <name>IntermittentReservoir</name>
     <name>IntermittentLake</name>
     <texture-set>
-      <texture>Terrain/lava_drylake.png</texture>
+     <texture>Terrain/lava_drylake.png</texture>
     <texture n="11">Terrain/lava_drylake.png</texture>
     </texture-set>
     <xsize>2000</xsize>
@@ -153,14 +196,21 @@
     <name>HerbWetlandCover</name>
     <name>WoodedWetlandCover</name>
     <name>Bog</name>
+    <effect>Effects/terrain-overlay</effect>
     <texture-set>
      <texture>Terrain/marsh4a-autumn.png</texture>
      <texture n="12">Terrain/marsh4a-autumn.png</texture>
      <texture n="11">Terrain/grass_hires.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>		 
     </texture-set>
     <parameters>
      <grain_strength>0.9</grain_strength>
      <intrinsic_wetness>0.3</intrinsic_wetness>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>	 
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -175,17 +225,23 @@
   <material>
     <name>HerbTundraCover</name>
     <name>HerbTundra</name>
-    <effect>Effects/herbtundra</effect>
+    <effect>Effects/terrain-overlay</effect>	
     <texture-set>
      <texture>Terrain/herbtundra_iceland.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
      <texture n="12">Terrain/rocks-lava.png</texture>
      <texture n="15">Terrain/grass_hires.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>		 	 
     </texture-set>
     <parameters>
      <dot_size>5.0</dot_size>
      <grain_strength>0.9</grain_strength>
      <hires_overlay_bias>-0.15</hires_overlay_bias>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>	 
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

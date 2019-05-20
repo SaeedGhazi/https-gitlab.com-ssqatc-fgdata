@@ -1036,8 +1036,13 @@ flag = getprop("local-weather/effect-volumes/number-active-turb");
 var wind_enhancement_factor = windspeed_current/15.0;
 if (wind_enhancement_factor > 1.5) {wind_enhancement_factor = 1.5;}
 
+var volcanic_turbulence = getprop("/environment/volcanoes/turbulence");
+
+var total_turbulence = base_turbulence * wind_enhancement_factor + volcanic_turbulence;
+if (total_turbulence > 1.0) {total_turbulence = 1.0;}
+
 if ((flag ==0))
-	{compat_layer.setTurbulence(base_turbulence * wind_enhancement_factor);}
+	{compat_layer.setTurbulence(total_turbulence);}
 
 # set scattering on the ground - this doesn't affect fog but is diffuse and specular light reduction
 # so it is stronger than normal scattering

@@ -4,6 +4,7 @@
 
 
 <enable-volcanoes type="int" userarchive="y">0</enable-volcanoes>
+<turbulence type="double" userarchive="n">0.0</turbulence>
 
 <kilauea>
 	<halemaumau-activity type="int" userarchive="y">0</halemaumau-activity>

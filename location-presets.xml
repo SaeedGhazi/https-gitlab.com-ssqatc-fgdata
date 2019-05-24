@@ -5,8 +5,8 @@
 <PropertyList>
   <sim>
     <presets>
-      <airport-id>PHNL</airport-id>
-      <runway>04L</runway>
+      <airport-id>BIKF</airport-id>
+      <runway>29</runway>
     </presets>
   </sim>
   <instrumentation>
@@ -14,36 +14,36 @@
     <comm n="0">
       <frequencies>
         <!-- TWR -->
-        <selected-mhz type="double">123.900</selected-mhz>
+        <selected-mhz type="double">118.300</selected-mhz>
         <!-- DEP -->
-        <standby-mhz type="double">118.300</standby-mhz>
+        <standby-mhz type="double">119.300</standby-mhz>
       </frequencies>
     </comm>
     <comm n="1">
       <frequencies>
         <!-- ATIS -->
-        <selected-mhz type="double">127.900</selected-mhz>
+        <selected-mhz type="double">128.300</selected-mhz>
         <!-- GND -->
-        <standby-mhz type="double">120.900</standby-mhz>
+        <standby-mhz type="double">121.900</standby-mhz>
       </frequencies>
     </comm>
     <nav n="0">
       <frequencies>
-        <!-- HONOLULU (HNL) -->
-        <selected-mhz type="double">114.80</selected-mhz>
-        <!-- KOKO HEAD (PR) -->
-        <standby-mhz type="double">113.90</standby-mhz>
+        <!-- KEFLAVIK (KEF) -->
+        <selected-mhz type="double">112.00</selected-mhz>
+        <!-- BIKF ILS-29 (IKW) -->
+        <standby-mhz type="double">108.50</standby-mhz>
       </frequencies>
       <radials>
-        <selected-deg type="double">243</selected-deg>
+        <selected-deg type="double">284</selected-deg>
       </radials>
     </nav>
     <nav n="1">
       <frequencies>
-        <!-- MOLOKAI (MKK) -->
-        <selected-mhz type="double">116.100</selected-mhz>
-        <!-- LANAI (LNY) -->
-        <standby-mhz type="double">117.70</standby-mhz>
+        <!-- INGO (ING) -->
+        <selected-mhz type="double">112.40</selected-mhz>
+        <!-- AKURERYI -->
+        <standby-mhz type="double">113.600</standby-mhz>
       </frequencies>
       <radials>
         <selected-deg type="double">326</selected-deg>
@@ -53,19 +53,19 @@
       <serviceable type="bool" archive="y">true</serviceable>
       <switch-position type="int" archive="y">2</switch-position>
       <frequencies>
-        <selected-mhz type="double">109.10</selected-mhz>
+        <selected-mhz type="double">118.300</selected-mhz>
         <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
       </frequencies>
     </dme>
     <adf n="0">
       <frequencies>
-        <!-- WHEELER (HHI) -->
-        <selected-khz type="int">373</selected-khz>
-        <!-- EWABE (HN) -->
-        <standby-khz type="int">242</standby-khz>
+        <!-- KEFLAVIK (KF) -->
+        <selected-khz type="int">392</selected-khz>
+        <!-- ELLIDAVATAN (EL)-->
+        <standby-khz type="int">335</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
-      <indicated-bearing-deg type="double">90</indicated-bearing-deg>
+      <indicated-bearing-deg type="double">270</indicated-bearing-deg>
       <error-deg type="double">2</error-deg>
       <mode>adf</mode>
       <rotation-deg type="double">0</rotation-deg>
@@ -73,10 +73,10 @@
     </adf>
     <adf n="1"> <!-- unset -->
       <frequencies>
-        <!-- LANAI (LLD)-->
-        <selected-khz type="int">353</selected-khz>
-        <!-- VALLEY ISLAND (VYI) -->
-        <standby-khz type="int">327</standby-khz>
+        <!-- SELFOSS (SE)-->
+        <selected-khz type="int">397</selected-khz>
+        <!-- REYKJAVIK (RK) -->
+        <standby-khz type="int">355</standby-khz>
       </frequencies>
       <serviceable type="bool" archive="y">true</serviceable>
       <indicated-bearing-deg type="double">90</indicated-bearing-deg>

@@ -29,10 +29,22 @@ var orbitalTarget = {
 		t.running_flag = 0;
 		t.elapsed_time = 0.0;
 		t.delta_time = 0.0;
+		t.label = "";
 
-		t.node_drift = -4361.26 * 1./math.pow(t.radius/1000.0 ,2.0) * math.cos(t.inc_rad); 
-			
-		#print ("Drift rate: ", t.node_drift);
+		# Coefficients  for the J3 altitude variation
+
+		var inc_var = t.inclination/60.0;
+		#print ("inc_var:", inc_var);
+
+		t.coeff1 =  (10268. - 0.99579 * (t.altitude / 1000.0)) * inc_var;
+		t.coeff2 = 0.212 * 2.0 * math.pi;		
+
+
+		#t.node_drift = -4361.26 * 1./math.pow(t.radius/1000.0 ,2.0) * math.cos(t.inc_rad); 
+		
+		t.node_drift = -2.16732e+9 /math.pow(t.radius/1000.0, 3.48908) * math.cos(t.inc_rad); 	
+	
+		print ("Drift rate: ", t.node_drift);
 		return t;
 	},
 
@@ -163,9 +175,28 @@ var orbitalTarget = {
 
 	compute_inertial_pos: func (anomaly_rad, nl_rad) {
 
+		# J3 variation around radius
+
+		while (anomaly_rad > 2.0 * math.pi)
+			{
+			anomaly_rad = anomaly_rad - 2.0 * math.pi;
+			}
+
+		while (anomaly_rad < 0.0)
+			{
+			anomaly_rad = anomaly_rad + 2.0 * math.pi;
+			}
+
+
+
+		var r_corr = me.coeff1 * math.exp(- math.pow(((anomaly_rad - math.pi)/ me.coeff2),2.0));
+
+		#print (r_corr);
+
+
 		# movement around equatorial orbit
-		var x = me.radius * math.cos(anomaly_rad);
-		var y = me.radius * math.sin(anomaly_rad);
+		var x = (me.radius + r_corr) * math.cos(anomaly_rad);
+		var y = (me.radius + r_corr) * math.sin(anomaly_rad);
 		var z = 0;
 	
 		# tilt with inclination

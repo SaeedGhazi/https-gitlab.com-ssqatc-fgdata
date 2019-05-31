@@ -3,6 +3,27 @@
 ##
 ##  Nasal code for implementing view-specific functionality.
 
+# For debugging. Returns string containing description of <x>.
+#
+var str = func(x, prefix='') {
+    prefix = '';
+    var ret = '';
+    ret = ret ~ prefix ~ typeof(x) ~ ':';
+    if (typeof(x) == "hash") {
+        ret = ret ~ '{';
+        #prefix = prefix ~ '    ';
+        foreach(var key; keys(x)){
+            ret = ret ~ prefix ~ " '" ~ key ~ "'" ~ ':';
+            ret = ret ~ str(x[key], prefix ~ '    ');
+        }
+        ret = ret ~ '}'
+    }
+    else {
+        ret = ret ~ sprintf('%s', x);
+    }
+    return ret;
+}
+
 var index = nil;    # current view index
 var views = nil;    # list of all view branches (/sim/view[n]) as props.Node
 var current = nil;  # current view branch (e.g. /sim/view[1]) as props.Node
@@ -74,9 +95,9 @@ var resetFOV = func {
 
 var resetViewPos = func {
     var v = current.getNode("config");
-    setprop("/sim/current-view/x-offset-m", v.getNode("x-offset-m", 1).getValue() or 0);
-    setprop("/sim/current-view/y-offset-m", v.getNode("y-offset-m", 1).getValue() or 0);
-    setprop("/sim/current-view/z-offset-m", v.getNode("z-offset-m", 1).getValue() or 0);
+    setprop("/sim/current-view/x-offset-m", 0);
+    setprop("/sim/current-view/y-offset-m", 0);
+    setprop("/sim/current-view/z-offset-m", 0);
 }
 
 var resetViewDir = func {
@@ -171,6 +192,18 @@ var default_handler = {
 };
 
 
+# If <from>/<path> exists and <to>/<path> doesn't, copy the former to the
+# latter.
+#
+var set_default = func(from, path, to) {
+    from_ = from.getNode(path);
+    if (from_ != nil) {
+        if (to.getNode(path) == nil) {
+            to.setValue(path, from_.getValue());
+        }
+    }
+}
+
 ##
 # View manager. Administrates optional Nasal view handlers.
 # Usage:  view.manager.register(<view-id>, <view-handler>);
@@ -198,23 +231,54 @@ var default_handler = {
 var manager = {
 	current : { node: nil, handler: default_handler },
 	init : func {
+                me.current = nil;
 		me.views = {};
 		me.loopid = 0;
 		var viewnodes = props.globals.getNode("sim").getChildren("view");
-		forindex (var i; viewnodes)
-			me.views[i] = { node: viewnodes[i], handler: default_handler };
+                var helicopter_view = viewnodes[1];
+                forindex (var i; viewnodes) {
+                    # Install this view, marking as multiplayer if appropriate.
+                    var multiplayer = 1;
+                    if (i==4 or i==6) {
+                        # Fly-by and Tower Look From views do not currently
+                        # support multiplayer aircraft.
+                        multiplayer = 0;
+                    }
+                    var viewnode = viewnodes[i];
+                    me.views[i] = {
+                        node: viewnode,
+                        handler: default_handler,
+                        multiplayer: multiplayer
+                        };
+                    # If this view is similar to helicopter view, copy across
+                    # Helicopter View target offsets if not specified. E.g.
+                    # this allows Tower View AGL to work on aircraft that don't
+                    # know about it but need non-zero target-*-offset-m values
+                    # to centre the view on the middle of the aircraft.
+                    if (i==2 or i==3 or i==5 or i==7 or i==8) {
+                        set_default(helicopter_view, "config/target-x-offset-m", viewnode);
+                        set_default(helicopter_view, "config/target-y-offset-m", viewnode);
+                        set_default(helicopter_view, "config/target-z-offset-m", viewnode);
+                    }
+                }
 		setlistener("/sim/current-view/view-number", func(n) {
 			manager.set_view(n.getValue());
 		}, 1);
 	},
 	register : func(which, handler = nil) {
-		if (num(which) == nil)
-			which = indexof(which);
+                var n = num(which);
+                if (n == nil)   n = indexof(which);
+                if (n == nil) {
+                    printf('Unable to register view handler: which=%s', which);
+                    return;
+                }
 		if (handler == nil)
 			handler = default_handler;
-		me.views[which]["handler"] = handler;
+		me.views[n]["handler"] = handler;
+		var viewnodes = props.globals.getNode("sim").getChildren("view");
+                me.views[n]["node"] = viewnodes[n];
 		if (hasmember(handler, "init"))
-			handler.init(me.views[which].node);
+			handler.init(me.views[n].node);
 		me.set_view();
 	},
 	set_view : func(which = nil) {
@@ -224,8 +288,13 @@ var manager = {
 			which = indexof(which);
 
 		me.loopid += 1;
-		if (hasmember(me.current.handler, "stop"))
+                if (me.current != nil) {
+                    if (me.current.multiplayer) {
+                        model_view_handler.stop();
+                    }
+		    if (hasmember(me.current.handler, "stop"))
 			me.current.handler.stop();
+                }
 
 		me.current = me.views[which];
 
@@ -233,6 +302,9 @@ var manager = {
 			me.current.handler.start();
 		if (hasmember(me.current.handler, "update"))
 			me._loop_(me.loopid += 1);
+                if (me.current != nil and me.current.multiplayer) {
+                    model_view_handler.start();
+                }
 		screenWidthCompens.update();
 	},
 	reset : func {
@@ -245,6 +317,19 @@ var manager = {
 		id == me.loopid or return;
 		settimer(func { me._loop_(id) }, me.current.handler.update() or 0);
 	},
+        multiplayer_callback: func(data) {
+                # We are called by model_view_handler when the user wants to
+                # look at a different aircraft.
+                #
+                # We can be called very early due to model_view_handler_class's use
+                # of a listener, so we need to protect against me.current.node not
+                # being set up yet.
+                #
+                if (me.current.node != nil) {
+                    me.current.node.getNode("config").setValues({
+                        "root": data.root,});
+                }
+        },
 };
 
 
@@ -346,82 +431,82 @@ var fly_by_view_handler = {
 };
 
 
-var model_view_handler = {
-	init: func(node) {
-		me.viewN = node;
-		me.current = nil;
-		me.legendN = props.globals.initNode("/sim/current-view/model-view", "");
-		me.dialog = props.Node.new({ "dialog-name": "model-view" });
-		me.listener = nil;
-	},
-	start: func {
-		me.listener = setlistener("/sim/signals/multiplayer-updated", func me._update_(), 1);
-		me.reset();
-		fgcommand("dialog-show", me.dialog);
-	},
-	stop: func {
-		fgcommand("dialog-close", me.dialog);
-		if (me.listener!=nil)
-		{
-			removelistener(me.listener);
-			me.listener=nil;
-		}
-	},
-	reset: func {
-		me.select(0);
-	},
-	find: func(callsign) {
-		forindex (var i; me.list)
-			if (me.list[i].callsign == callsign)
-				return i;
-		return nil;
-	},
-	select: func(which, by_callsign=0) {
-		if (by_callsign or num(which) == nil)
-			which = me.find(which) or 0;  # turn callsign into index
+# Helper for views that can show multiplayer aircaft as well as the user's
+# aircraft. Used by <manager> above.
+#
+var model_view_handler_class = {
+    new: func() {
+        var m = { parents:[model_view_handler_class]};
+        m.current = nil;
+        m.legendN = props.globals.initNode("/sim/current-view/model-view", "");
+        m.dialog = props.Node.new({ "dialog-name": "model-view" });
+        m.listener = setlistener("/sim/signals/multiplayer-updated", func m._update_(), 1);
+        m.reset();
+        return m;
+    },
+    start: func() {
+        fgcommand("dialog-show", me.dialog);
+        me.next(0);
+    },
+    stop: func() {
+        fgcommand("dialog-close", me.dialog);
+    },
+    reset: func {
+        me.select(0);
+    },
+    find: func(callsign) {
+        forindex (var i; me.list) {
+            if (me.list[i].callsign == callsign)
+                return i;
+        }
+        return nil;
+    },
+    select: func(which, by_callsign=0) {
+        if (by_callsign or num(which) == nil) {
+            which = me.find(which) or 0;  # turn callsign into index
+        }
+        me.setup(me.list[which]);
+    },
+    next: func(step) {
+        var i = me.find(me.current);
+        i = i == nil ? 0 : math.mod(i + step, size(me.list));
+        me.setup(me.list[i]);
+    },
+    _update_: func {
+        var self = {
+                callsign: getprop("/sim/multiplay/callsign"),
+                model:,
+                node: props.globals,
+                root: '/',
+                };
+        # It looks like we can get called (from me.new()) before
+        # multiplayer.model.list is created, so need to check whether it
+        # exists.
+        if (hasmember(multiplayer.model, 'list')) {
+            me.list = [self] ~ multiplayer.model.list;
+        }
+        else {
+            me.list = [self];
+        }
+        if (!me.find(me.current))
+            me.select(0);
+    },
+    setup: func(data) {
+        if (data.root == '/') {
+            var ident = '[' ~ data.callsign ~ ']';
+        } else {
+            var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
+        }
 
-		me.setup(me.list[which]);
-	},
-	next: func(step) {
-		var i = me.find(me.current);
-		i = i == nil ? 0 : math.mod(i + step, size(me.list));
-		me.setup(me.list[i]);
-	},
-	_update_: func {
-		var self = { callsign: getprop("/sim/multiplay/callsign"), model:,
-				node: props.globals, root: '/' };
-		me.list = [self] ~ multiplayer.model.list;
-		if (!me.find(me.current))
-			me.select(0);
-	},
-	setup: func(data) {
-		if (data.root == '/') {
-			var zoffset = getprop("/sim/chase-distance-m");
-			var ident = '[' ~ data.callsign ~ ']';
-		} else {
-			var zoffset = 70;
-			var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
-		}
-
-		me.current = data.callsign;
-		me.legendN.setValue(ident);
-		setprop("/sim/current-view/z-offset-m", zoffset);
-
-		me.viewN.getNode("config").setValues({
-			"eye-lat-deg-path": data.root ~ "/position/latitude-deg",
-			"eye-lon-deg-path": data.root ~ "/position/longitude-deg",
-			"eye-alt-ft-path": data.root ~ "/position/altitude-ft",
-			"eye-heading-deg-path": data.root ~ "/orientation/heading-deg",
-			"target-lat-deg-path": data.root ~ "/position/latitude-deg",
-			"target-lon-deg-path": data.root ~ "/position/longitude-deg",
-			"target-alt-ft-path": data.root ~ "/position/altitude-ft",
-			"target-heading-deg-path": data.root ~ "/orientation/heading-deg",
-			"target-pitch-deg-path": data.root ~ "/orientation/pitch-deg",
-			"target-roll-deg-path": data.root ~ "/orientation/roll-deg",
-		});
-	},
+        me.current = data.callsign;
+        me.legendN.setValue(ident);
+        manager.multiplayer_callback(data);
+    },
 };
 
+var model_view_handler = model_view_handler_class.new();
+# Note that gui/dialogs/model-view.xml expects to be able to call
+# view.model_view_handler.next() etc.
 
 var pilot_view_limiter = {
 	new : func {
@@ -736,7 +821,6 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	screenWidthCompens.init();
 	manager.init();
 	manager.register("Fly-By View", fly_by_view_handler);
-	manager.register("Model View", model_view_handler);
 });
 _setlistener("/sim/signals/reinit", func {
 	screenWidthCompens.update(opt:nil,force:1);
@@ -754,7 +838,7 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 	var zoffset = nil;
 	foreach (var v; views) {
 		var index = v.getIndex();
-		if (index > 7 and index < 100) {
+		if (index > 8 and index < 100) {
 			globals["view"] = nil;
 			die("\n***\n*\n*  Illegal use of reserved view index "
 					~ index ~ ". Use indices >= 100!\n*\n***");

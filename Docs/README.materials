@@ -3,12 +3,19 @@ README.materials
 This README describes the materials.xml file format. It is targeted at those
 wanting to change the appearance of the scenery in FlightGear.
 
-As is the norm in FG, the materials.xml file is a properties file. However,
-it is only read on startup, is not part of the main property tree and cannot
-be changed at runtime.
+The materials file used by FlightGear is set in the /sim/rendering/materials-files
+property.  It is read on startup, and can be reloaded in-sim from the
+"Reload Materials" item in the Debug menu.
 
-The properties file consists of a number of <material> entries, each of which
-describes a single visually distinct terrain material in the FG world.
+The materials file consists of one or more <region> elements.  Each <region>
+contains one or more geographical <area> elements, defining a rectangle
+(lat1/lon1, lat2/lon2), and a set of <material> elements which describes a
+single visually distinct terrain material in the FG world which will be used to
+render one of more scenery landclasses (for example Grass or Town).  When determining
+the material to use for a given landclass at a given lat/lon, the <region> elements
+are checked in order and the <condition> element of the materials evaluated.  The
+_last_ matching material definition is used.  So more specific regions and materials
+definitions should be put towards the bottom of the materials file.
 
 The rest of this document describes the children tags of the <material> entry.
 

@@ -163,7 +163,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <!--
         2018.3 changes to the way the LOD work
                - reworked UI
-               - use the detailed with deltas to prevent silly values; 
+               - use the detailed with deltas to prevent silly values;
                - removed the pixel range mode and added distance (the previous
                  code and UI had both pixel mode and range mode, need only one)
                - For the AI/MP meters is the distance from the view point, wherease
@@ -400,7 +400,7 @@ Started September 2000 by David Megginson, david@megginson.com
       </scenery-path-suffix>
 
       <!-- Terrain must be last, as the suffixes are searched in order -->
-      <scenery-path-suffix>
+      <scenery-path-suffix n="99">
         <name type="string">Terrain</name>
         <enabled type="bool" userarchive="y">true</enabled>
       </scenery-path-suffix>
@@ -1096,7 +1096,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </lighting>
     <radios>
       <!--New for 2019.1 - the ability to select the comm radio frequency used by fgcom.
-      comm-radio-selected should be set to appropriate comm radio (idx + 1) 
+      comm-radio-selected should be set to appropriate comm radio (idx + 1)
           0 : off (no FGcom call)
           1 : /instrumentation/comm[0]
           2 : /instrumentation/comm[2]

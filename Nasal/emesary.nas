@@ -43,10 +43,25 @@ var Transmitter =
         var new_class = { parents: [Transmitter]};
         new_class.Recipients = [];
         new_class.Ident = _ident;
+        new_class.Timestamp = nil;
+        new_class.MaxMilliseconds = 1;
         __emesaryUniqueId += 1;
         new_class.UniqueId = __emesaryUniqueId;
         return new_class;
     },
+    OverrunDetection: func(max_ms=0){
+          if (max_ms){
+              if (me.Timestamp == nil)
+                me.Timestamp = maketimestamp();
+              me.MaxMilliseconds = max_ms;
+#print("Set overrun detection ",me.Ident, " to ", me.MaxMilliseconds);
+          } else {
+              #              me.Timestamp = nil;
+              me.MaxMilliseconds = 0;
+#print("Disable  overrun detection ",me.Ident);
+          }
+      }
+ ,
 
     # Add a recipient to receive notifications from this transmitter
     Register: func (recipient)
@@ -102,13 +117,18 @@ var Transmitter =
             print("Emesary: bad notification nil");
             return Transmitter.ReceiptStatus_NotProcessed;
         }
-        var return_status = Transmitter.ReceiptStatus_NotProcessed;
+        me._return_status = Transmitter.ReceiptStatus_NotProcessed;
+        me.TimeTaken = 0;
         foreach (var recipient; me.Recipients)
         {
             if (recipient.RecipientActive)
             {
-                var rstat = nil;
-                call(func {rstat = recipient.Receive(message);},nil,nil,nil,var err = []);
+                me._rstat = nil;
+                if (me.MaxMilliseconds > 0 and me.Timestamp != nil)
+                  me.Timestamp.stamp();
+
+                message.Timestamp = me.Timestamp;
+                call(func {me._rstat = recipient.Receive(message);},nil,nil,nil,var err = []);
                 
                 if (size(err)){
                     foreach(var line; err) {
@@ -118,39 +138,51 @@ var Transmitter =
                     me.DeRegister(recipient);
                     return Transmitter.ReceiptStatus_Abort;#need to break the foreach due to having modified what its iterating over.
                 }
+                if (me.Timestamp != nil) {
+                    recipient.TimeTaken = me.Timestamp.elapsedUSec()/1000.0;
+                    me.TimeTaken += recipient.TimeTaken;
+                }
 
-                if(rstat == Transmitter.ReceiptStatus_Fail)
+                if(me._rstat == Transmitter.ReceiptStatus_Fail)
                 {
-                    return_status = Transmitter.ReceiptStatus_Fail;
+                    me._return_status = Transmitter.ReceiptStatus_Fail;
                 }
-                elsif(rstat == Transmitter.ReceiptStatus_Pending)
+                elsif(me._rstat == Transmitter.ReceiptStatus_Pending)
                 {
-                    return_status = Transmitter.ReceiptStatus_Pending;
+                    me._return_status = Transmitter.ReceiptStatus_Pending;
                 }
-                elsif(rstat == Transmitter.ReceiptStatus_PendingFinished)
+                elsif(me._rstat == Transmitter.ReceiptStatus_PendingFinished)
                 {
-                    return rstat;
+                    return me._rstat;
                 }
 #               elsif(rstat == Transmitter.ReceiptStatus_NotProcessed)
 #               {
 #                   ;
 #               }
-                elsif(rstat == Transmitter.ReceiptStatus_OK)
+                elsif(me._rstat == Transmitter.ReceiptStatus_OK)
                 {
-                    if (return_status == Transmitter.ReceiptStatus_NotProcessed)
-                        return_status = rstat;
+                    if (me._return_status == Transmitter.ReceiptStatus_NotProcessed)
+                        me._return_status = me._rstat;
                 }
-                elsif(rstat == Transmitter.ReceiptStatus_Abort)
+                elsif(me._rstat == Transmitter.ReceiptStatus_Abort)
                 {
                     return Transmitter.ReceiptStatus_Abort;
                 }
-                elsif(rstat == Transmitter.ReceiptStatus_Finished)
+                elsif(me._rstat == Transmitter.ReceiptStatus_Finished)
                 {
                     return Transmitter.ReceiptStatus_OK;
                 }
             }
         }
-        return return_status;
+        if (me.MaxMilliseconds and me.TimeTaken > me.MaxMilliseconds ){
+            printf("Overrun: %s ['%s'] %1.2fms max (%d)",me.Ident,message.NotificationType, me.TimeTaken,me.MaxMilliseconds);
+#            print("Overrun: ",me.Ident, "['",message.NotificationType,"']", " ", me.TimeTaken,"ms  (max ",me.MaxMilliseconds," ms)");
+            foreach (var recipient; me.Recipients) {
+                if (recipient.TimeTaken)
+                  printf(" -- Recipient %25s %7.2f ms",recipient.Ident, recipient.TimeTaken);
+            }
+        }
+        return me._return_status;
     },
 
     # Returns true if a return value from NotifyAll is to be considered a failure.

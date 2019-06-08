@@ -70,9 +70,9 @@ var simTimeDeltaSec = props.globals.getNode("sim/time/delta-sec",1);
 var acHeading = props.globals.getNode("/orientation/heading-deg");
 var acPitch = props.globals.getNode("/orientation/pitch-deg");
 var acContactDist = props.globals.getNode("/systems/refuel/contact-radius-m");
-var refuelOffsetX = props.globals.getNode("/systems/refuel/offset-x-m");
-var refuelOffsetY = props.globals.getNode("/systems/refuel/offset-y-m");
-var refuelOffsetZ = props.globals.getNode("/systems/refuel/offset-z-m");
+var refuelOffsetX = props.globals.getNode("/systems/refuel/offset-x-m",1);
+var refuelOffsetY = props.globals.getNode("/systems/refuel/offset-y-m",1);
+var refuelOffsetZ = props.globals.getNode("/systems/refuel/offset-z-m",1);
 var acRoll = props.globals.getNode("/orientation/roll-deg");
 
 

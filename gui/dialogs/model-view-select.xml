@@ -3,7 +3,7 @@
 <PropertyList>
 	<name>model-view-select</name>
 	<dialog-name>model-view-select</dialog-name>
-	<x>46</x>
+	<x>5</x>
 	<y>33</y>
 	<layout>hbox</layout>
 	<default-padding>0</default-padding>

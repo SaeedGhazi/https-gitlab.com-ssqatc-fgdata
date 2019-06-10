@@ -183,12 +183,13 @@ var dialog = {
                        slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
                      };
 
-        me.header = ["chat", " callsign"," code"," model", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ver", "ignore" ~ " "];
+        me.header = ["chat", " callsign"," code"," model", " set", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ver", "ignore" ~ " "];
         me.columns = [
             { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" , font: me.font },
             { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
             { type: "text", property: "model-short", format: " %s",     label: "--------------", halign: "fill" , font: me.font },
+            { type: "text", property: "set-loaded", format: "%s",     label: "----", halign: "fill" , font: me.font },
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: me.font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: me.font },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: me.font },
@@ -341,8 +342,19 @@ w.node.setValues({ "font" : me.font});
             else
             {
                 # Node with valid position data (and "distance!=nil").
+                
+                # For 'set-loaded' column, we find whether the 'set' has more
+                # than just the 'sim' child (which we always create even if
+                # we couldn't load the -set.xml, in order to provide default
+                # values for views' config/z-offset-m values).
+                var set = n.getNode("set");
+                var set_numchildren = 0;
+                if (set != nil) set_numchildren = size(set.getChildren());
+                var set_loaded = (set_numchildren >= 2);
+                
                 n.setValues({
                     "model-short": n.getNode("model-installed").getValue() ? mp.model : "[" ~ mp.model ~ "]",
+                    "set-loaded": set_loaded ? "   *" : "    ",
                     "bearing-to": self.course_to(ac),
                     "distance-to-km": distance / 1000.0,
                     "distance-to-nm": distance * M2NM,

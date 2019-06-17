@@ -43,6 +43,15 @@
     <property>/sim/current-view/x-offset-m</property>
     <binding><command>dialog-apply</command></binding>
    </dial>
+   
+   <button>
+   <legend>Zero</legend>
+   <binding>
+        <command>property-assign</command>
+        <property>/sim/current-view/x-offset-m</property>
+        <value>0</value>
+   </binding>
+   </button>
 
    <text>
     <label>-100.00</label>
@@ -64,6 +73,15 @@
     <property>/sim/current-view/y-offset-m</property>
     <binding><command>dialog-apply</command></binding>
    </dial>
+   
+   <button>
+   <legend>Zero</legend>
+   <binding>
+        <command>property-assign</command>
+        <property>/sim/current-view/y-offset-m</property>
+        <value>0</value>
+   </binding>
+   </button>
 
    <text>
     <label>-100.00</label>
@@ -85,6 +103,15 @@
     <property>/sim/current-view/z-offset-m</property>
     <binding><command>dialog-apply</command></binding>
    </dial>
+   
+   <button>
+   <legend>Zero</legend>
+   <binding>
+        <command>property-assign</command>
+        <property>/sim/current-view/z-offset-m</property>
+        <value>0</value>
+   </binding>
+   </button>
 
    <text>
     <label>-100.00</label>

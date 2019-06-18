@@ -499,7 +499,7 @@ var model_view_handler_class = {
         }
 
         me.current = data.callsign;
-        me.legendN.setValue(ident);
+        me.legendN.setValue(data.callsign);
         manager.multiplayer_callback(data);
     },
 };

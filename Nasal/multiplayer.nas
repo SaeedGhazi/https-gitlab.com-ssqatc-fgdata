@@ -117,6 +117,11 @@ var end_compose_message = func()
   release_kbd();
 }
 
+var view_select = func(callsign)
+{
+    view.model_view_handler.select(callsign, 1);
+}
+
 var handle_key = func(key)
 {
   if (key == `\n` or key == `\r` or key == `~`)
@@ -183,8 +188,9 @@ var dialog = {
                        slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
                      };
 
-        me.header = ["chat", " callsign"," code"," model", " set", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ver", "ignore" ~ " "];
+        me.header = ["view", "chat", " callsign"," code"," model", " set", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ver", "ignore" ~ " "];
         me.columns = [
+            { type: "checkbox", legend: "", property: "view", halign: "right", "pref-height": 14, "pref-width": 14, callback: "multiplayer.view_select", argprop: "callsign", },
             { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" , font: me.font },
             { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
@@ -207,6 +213,7 @@ var dialog = {
         append(me.listeners, setlistener("/sim/startup/ysize", func me._redraw_()));
         append(me.listeners, setlistener("/sim/signals/reinit-gui", func me._redraw_()));
         append(me.listeners, setlistener("/sim/signals/multiplayer-updated", func me._redraw_()));
+        append(me.listeners, setlistener("/sim/current-view/model-view", func me.update_view()));
     },
     create: func {
         if (me.dialog != nil)
@@ -229,6 +236,12 @@ var dialog = {
         var titlebar = me.dialog.addChild("group");
         titlebar.set("layout", "hbox");
 
+        var view_self = titlebar.addChild("button");
+        view_self.node.setValues({ "pref-height": 16, legend: "view self", default: 0 });
+        view_self.setBinding("nasal", "view.model_view_handler.select(getprop('/sim/multiplayer/callsign'), 1);");
+
+        titlebar.addChild("empty").set("stretch", 1);
+        
         var w = titlebar.addChild("button");
         w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: me.unit_button, default: 0 });
         w.setBinding("nasal", "multiplayer.dialog.toggle_unit(); multiplayer.dialog._redraw_()");
@@ -256,7 +269,7 @@ var dialog = {
         var col = 0;
         foreach (var h; me.header) {
             var w = content.addChild("text");
-w.node.setValues({ "font" : me.font});
+            w.node.setValues({ "font" : me.font});
 
             var l = typeof(h) == "func" ? h() : h;
             w.node.setValues({ "label": l, "row": row, "col": col, halign: me.columns[col].halign });
@@ -282,24 +295,24 @@ w.node.setValues({ "font" : me.font});
                 } else
                     print(" ->> no fallback node");
             }
-              foreach (var column; me.columns) {
+            foreach (var column; me.columns) {
                 var w = nil;
-        if (column.type == "button") {
-            w = content.addChild("button");
-            w.node.setValues(column);
-            w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ ", \");");
-                    w.node.setValues({ row: row, col: col});
-        } else {
-            var p = typeof(column.property) == "func" ? column.property() : column.property;
-            if (column.type == "text") {
-                w = content.addChild("text");
-                w.node.setValues(column);
-            } elsif (column.type == "checkbox") {
-                w = content.addChild("checkbox");
-                w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
-            }
+                if (column.type == "button") {
+                    w = content.addChild("button");
+                    w.node.setValues(column);
+                    w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ "\",);");
+                            w.node.setValues({ row: row, col: col});
+                } else {
+                    var p = typeof(column.property) == "func" ? column.property() : column.property;
+                    if (column.type == "text") {
+                        w = content.addChild("text");
+                        w.node.setValues(column);
+                    } elsif (column.type == "checkbox") {
+                        w = content.addChild("checkbox");
+                        w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
+                    }
                     w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
-        }
+                }
                 w.setColor(color[0], color[1], color[2], color[3]);
                 col += 1;
             }
@@ -312,6 +325,17 @@ w.node.setValues({ "font" : me.font});
         me.update(me.loopid += 1);
         fgcommand("dialog-new", me.dialog.prop());
         fgcommand("dialog-show", me.dialog.prop());
+        me.update_view();
+    },
+    update_view: func() {
+        # We are called when the aircraft being viewed has changed. We update
+        # the boxes in the 'view' column so that only the one for the aircraft
+        # being viewed is checked. If the user's aircraft is being viewed, none
+        # of these boxes will be checked.
+        callsign = getprop("/sim/current-view/model-view");
+        foreach (var mp; model.list) {
+            mp.node.setValues({'view': mp.callsign == callsign});
+        }
     },
     update: func(id) {
         id == me.loopid or return;

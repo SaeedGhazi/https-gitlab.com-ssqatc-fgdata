@@ -188,20 +188,20 @@ var dialog = {
                        slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
                      };
 
-        me.header = ["view", "chat", " callsign"," code"," model", " set", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ver", "ignore" ~ " "];
+        me.header = ["view", " callsign", " model", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", " brg", "chat", "ignore" ~ " ", " code", "ver", " set"];
         me.columns = [
             { type: "checkbox", legend: "", property: "view", halign: "right", "pref-height": 14, "pref-width": 14, callback: "multiplayer.view_select", argprop: "callsign", },
-            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" , font: me.font },
-            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
             { type: "text", property: "model-short", format: " %s",     label: "--------------", halign: "fill" , font: me.font },
-            { type: "text", property: "set-loaded", format: "%s",     label: "----", halign: "fill" , font: me.font },
-            { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: me.font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: me.font },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: me.font },
-            { type: "text", property: "sim/multiplay/protocol-version", format: " %s",     label: "--", halign: "fill" , font: me.font },
+            { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: me.font },
+            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
             { type: "checkbox", property: "controls/invisible", callback: "multiplayer.dialog.toggle_ignore",
               argprop: "callsign", label: "---------", halign: "right", font: me.font },
+            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
+            { type: "text", property: "sim/multiplay/protocol-version", format: " %s",     label: "--", halign: "fill" , font: me.font },
+            { type: "text", property: "set-loaded", format: "%s",     label: "----", halign: "fill" , font: me.font },
         ];
         me.cs_warnings = {};
         me.name = "who-is-online";

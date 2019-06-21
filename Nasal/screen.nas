@@ -422,8 +422,9 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name");
 	}, 1);
 
-	log = window.new(nil, -30, 10, 10);
+	log = window.new(5, -30, 10, 10);
 	log.sticky = 0;  # don't turn on; makes scrolling up messages jump left and right
+        log.align = 'left';
 
 	var b = "/sim/screen/";
 	setlistener(b ~ "black",   func(n) log.write(n.getValue(), 0,   0,   0));

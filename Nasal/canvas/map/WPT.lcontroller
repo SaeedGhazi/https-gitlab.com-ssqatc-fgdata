@@ -48,19 +48,26 @@ var WPT_model = {
 		var m = { parents:[WPT_model], idx:(idx+offset) };
 		var wp = fp.getWP(idx);
 		m.name = wp.wp_name;
-		
+
 		var alt = wp.alt_cstr;
 		if (alt != 0)
 			m.name ~= "\n"~alt;
 
-        var wp2idx = 1; # next waypoint
-
-		if (!idx) { # first point
-            if(fp.getPlanSize(idx) == 1) # if only have one wpt then it must be at element 0.
+		if (idx > 0) {
+			var path = wp.path();
+			# check for empty path
+			if (size(path) == 0)
+				return nil;
+			var n = wp.path()[-1];
+		} else {
+			var wp2idx = 1; # next waypoint
+ 			if (fp.getPlanSize() == 1) # if only have one wpt then it must be at element 0.
                 wp2idx = 0;
-        }
-		if (idx) var n = wp.path()[-1];
-		else var n = fp.getWP(wp2idx).path()[0];
+			var path = fp.getWP(wp2idx).path();
+			if (size(path) == 0)
+				return nil;
+			var n = fp.getWP(wp2idx).path()[0];
+		}
 
 		(m.lat,m.lon) = (n.lat,n.lon);
 		return m;
@@ -82,8 +89,12 @@ var searchCmd = func {
 	for(var idx = 0; idx < planCount; idx += 1){
 		var fp = driver.getFlightPlan(idx);
 		var fpSize = fp.getPlanSize(idx);
-		for (var i = 0; i < fpSize; i+=1)
-			append(result, WPT_model.new(fp, i));
+
+		for (var i = 0; i < fpSize; i+=1) {
+			var wm = WPT_model.new(fp, i);
+			if (wm != nil)
+				append(result, wm);
+		}
 	}
 	return result;
 };

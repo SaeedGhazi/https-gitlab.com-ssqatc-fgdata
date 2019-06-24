@@ -42,7 +42,6 @@ var RouteManagerDelegate = {
 
     arrivalChanged: func
     {
-        printlog('info', 'saw arrival changed');
         me.flightplan.clearWPType('star');
         me.flightplan.clearWPType('approach');
         if (me.flightplan.destination == nil)
@@ -60,9 +59,10 @@ var RouteManagerDelegate = {
         if (me.flightplan.star != nil) {
             printlog('info', 'routing via STAR ' ~ me.flightplan.star.id);
             var wps = me.flightplan.star.route(me.flightplan.destination_runway);
-            me.flightplan.insertWaypoints(wps, -1);
-
-            initialApproachFix = wps[-1]; # final waypoint of STAR
+            if (wps != nil) {
+                me.flightplan.insertWaypoints(wps, -1);
+                initialApproachFix = wps[-1]; # final waypoint of STAR
+            }
         }
 
         if (me.flightplan.approach != nil) {

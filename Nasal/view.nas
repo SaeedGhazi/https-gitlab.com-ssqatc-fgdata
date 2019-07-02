@@ -328,6 +328,7 @@ var manager = {
                 if (me.current.node != nil) {
                     me.current.node.getNode("config").setValues({
                         "root": data.root,});
+                    me.current.node.getNode("config/root").setValue(data.root)
                 }
         },
 };

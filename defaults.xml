@@ -751,18 +751,6 @@ Started September 2000 by David Megginson, david@megginson.com
       </config>
     </view>
     <view>
-      <name>Model View</name>
-      <enabled type="bool" userarchive="y">true</enabled>
-      <type>lookat</type>
-      <config>
-        <from-model type="bool">false</from-model>
-        <from-model-idx type="int">0</from-model-idx>
-        <eye-heading-deg-path>/orientation/true-heading-deg</eye-heading-deg-path>
-        <at-model type="bool">true</at-model>
-        <z-offset-m alias="/sim/chase-distance-m"/>
-      </config>
-    </view>
-    <view>
       <name>Tower View AGL</name>
       <enabled type="bool" userarchive="y">true</enabled>
       <type>lookat</type>

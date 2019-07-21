@@ -3,6 +3,10 @@
 ##
 ##  Nasal code for implementing view-specific functionality.
 
+# ATTENTION: 
+# /sim/current-view/view-number is in the range 0..viewCount, it is NOT
+# the index used in aircraft XML files (e.g. <view n="100">)
+
 # For debugging. Returns string containing description of <x>.
 #
 var str = func(x, prefix='') {
@@ -25,9 +29,16 @@ var str = func(x, prefix='') {
 }
 
 var index = nil;    # current view index
+var indices = {};   # view_index -> number
 var views = nil;    # list of all view branches (/sim/view[n]) as props.Node
 var current = nil;  # current view branch (e.g. /sim/view[1]) as props.Node
 var fovProp = nil;
+
+# activate view by index number used in XML definition (e.g. >100)
+var setViewByIndex = func(i) {
+    if (indices[i] != nil)
+        setprop("/sim/current-view/view-number", indices[i]);
+}
 
 var hasmember = func(class, member) {
 	if (contains(class, member))
@@ -261,6 +272,7 @@ var manager = {
                         set_default(helicopter_view, "config/target-z-offset-m", viewnode);
                     }
                 }
+        # see comment at begin of file
 		setlistener("/sim/current-view/view-number", func(n) {
 			manager.set_view(n.getValue());
 		}, 1);
@@ -835,7 +847,7 @@ _setlistener("/sim/startup/ysize", func {
 
 
 var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
-	removelistener(fdm_init_listener); # uninstall, so we're only called once
+	removelistener(fdm_init_listener); # uninstall, so we are only called once
 	var zoffset = nil;
 	foreach (var v; views) {
 		var index = v.getIndex();
@@ -855,6 +867,7 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 	}
 
 	forindex (var i; views) {
+        indices[views[i].getIndex()] = i;
 		var limits = views[i].getNode("config/limits/enabled");
 		if (limits != nil) {
 			func (i) {

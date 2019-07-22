@@ -581,7 +581,7 @@ var pilot_view_limiter = {
 				offset = (me.right.threshold - hdg) * me.right.scale;
 
 			var new_offset = me.xoffset_lowpass.filter(offset);
-			me.xoffsetN.setDoubleValue(me.xoffsetN.getValue() - me.last_offset + new_offset);
+			me.xoffsetN.setDoubleValue((me.xoffsetN.getValue() or 0) - me.last_offset + new_offset);
 			me.last_offset = new_offset;
 		}
 		return 0;

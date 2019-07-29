@@ -145,6 +145,80 @@
   <texture>Runway/lf_broken_white.png</texture>
 </material>
 
+
+<material n="1022">
+  <name>lf_sng_solid_red</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_solid_red.png</texture>
+</material>
+
+<material n="1023">
+  <name>lf_sng_broken_red</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_broken_red.png</texture>
+</material>
+
+<material n="1025">
+  <name>lf_sng_solid_green</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_solid_green.png</texture>
+</material>
+
+<material n="1026">
+  <name>lf_sng_solid_blue</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_solid_blue.png</texture>
+</material>
+
+<material n="1027">
+  <name>lf_sng_solid_orange</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_solid_orange.png</texture>
+</material>
+
+<material n="1028">
+  <name>lf_broken_white_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_broken_white_border.png</texture>
+</material>
+
+<material n="1029">
+  <name>lf_solid_white_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_sng_solid_white_border.png</texture>
+</material>
+
+<material n="1030">
+  <name>lf_solid_red_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_solid_red_border.png</texture>
+</material>
+
+<material n="1031">
+  <name>lf_solid_red_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_broken_red_border.png</texture>
+</material>
+
+
+<material n="1032">
+  <name>lf_solid_orange_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_solid_orange_border.png</texture>
+</material>
+
+<material n="1033">
+  <name>lf_solid_blue_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_solid_blue_border.png</texture>
+</material>
+
+<material n="1034">
+  <name>lf_solid_green_border</name>
+  <effect>Effects/lfeat</effect>
+  <texture>Runway/lf_solid_green_border.png</texture>
+</material>
+
 <!-- Lights -->
 
 <material n="1101">

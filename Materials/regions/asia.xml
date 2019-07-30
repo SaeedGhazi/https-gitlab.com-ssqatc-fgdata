@@ -69,7 +69,7 @@
    <transition_model>0.8</transition_model>
    <hires_overlay_bias>0</hires_overlay_bias>
     </parameters>
-    <object-mask>Terrain/deciduous-hires_mask.png</object-mask>
+    <object-mask>Terrain/rice1.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>2000000.0</light-coverage>

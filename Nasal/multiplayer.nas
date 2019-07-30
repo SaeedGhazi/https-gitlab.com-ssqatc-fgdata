@@ -117,6 +117,11 @@ var end_compose_message = func()
   release_kbd();
 }
 
+var view_select = func(callsign)
+{
+    view.model_view_handler.select(callsign, 1);
+}
+
 var handle_key = func(key)
 {
   if (key == `\n` or key == `\r` or key == `~`)
@@ -183,18 +188,20 @@ var dialog = {
                        slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
                      };
 
-        me.header = ["chat", " callsign"," code"," model", " brg", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "ver", "ignore" ~ " "];
+        me.header = ["view", " callsign", " model", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", " brg", "chat", "ignore" ~ " ", " code", "ver", " set"];
         me.columns = [
-            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
+            { type: "checkbox", legend: "", property: "view", halign: "right", "pref-height": 14, "pref-width": 14, callback: "multiplayer.view_select", argprop: "callsign", },
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" , font: me.font },
-            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
             { type: "text", property: "model-short", format: " %s",     label: "--------------", halign: "fill" , font: me.font },
-            { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: me.font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: me.font },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: me.font },
-            { type: "text", property: "sim/multiplay/protocol-version", format: " %s",     label: "--", halign: "fill" , font: me.font },
+            { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: me.font },
+            { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
             { type: "checkbox", property: "controls/invisible", callback: "multiplayer.dialog.toggle_ignore",
               argprop: "callsign", label: "---------", halign: "right", font: me.font },
+            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
+            { type: "text", property: "sim/multiplay/protocol-version", format: " %s",     label: "--", halign: "fill" , font: me.font },
+            { type: "text", property: "set-loaded", format: "%s",     label: "----", halign: "fill" , font: me.font },
         ];
         me.cs_warnings = {};
         me.name = "who-is-online";
@@ -206,6 +213,7 @@ var dialog = {
         append(me.listeners, setlistener("/sim/startup/ysize", func me._redraw_()));
         append(me.listeners, setlistener("/sim/signals/reinit-gui", func me._redraw_()));
         append(me.listeners, setlistener("/sim/signals/multiplayer-updated", func me._redraw_()));
+        append(me.listeners, setlistener("/sim/current-view/model-view", func me.update_view()));
     },
     create: func {
         if (me.dialog != nil)
@@ -228,6 +236,12 @@ var dialog = {
         var titlebar = me.dialog.addChild("group");
         titlebar.set("layout", "hbox");
 
+        var view_self = titlebar.addChild("button");
+        view_self.node.setValues({ "pref-height": 16, legend: "view self", default: 0 });
+        view_self.setBinding("nasal", "view.model_view_handler.select(getprop('/sim/multiplayer/callsign'), 1);");
+
+        titlebar.addChild("empty").set("stretch", 1);
+        
         var w = titlebar.addChild("button");
         w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: me.unit_button, default: 0 });
         w.setBinding("nasal", "multiplayer.dialog.toggle_unit(); multiplayer.dialog._redraw_()");
@@ -255,7 +269,7 @@ var dialog = {
         var col = 0;
         foreach (var h; me.header) {
             var w = content.addChild("text");
-w.node.setValues({ "font" : me.font});
+            w.node.setValues({ "font" : me.font});
 
             var l = typeof(h) == "func" ? h() : h;
             w.node.setValues({ "label": l, "row": row, "col": col, halign: me.columns[col].halign });
@@ -268,8 +282,10 @@ w.node.setValues({ "font" : me.font});
         foreach (var mp; model.list) {
             var col = 0;
             var color = me.fg[2];
-            if (mp.node.getNode("model-installed").getValue()) 
+            if (mp.node.getNode("model-installed").getValue()) {
                 color = me.fg[odd = !odd];
+                color = me.fg[1];
+            }
             else{
                 print("no model installed; check fallback");
                 var fbn = mp.node.getNode("sim/model/fallback-model-index");
@@ -281,24 +297,24 @@ w.node.setValues({ "font" : me.font});
                 } else
                     print(" ->> no fallback node");
             }
-              foreach (var column; me.columns) {
+            foreach (var column; me.columns) {
                 var w = nil;
-        if (column.type == "button") {
-            w = content.addChild("button");
-            w.node.setValues(column);
-            w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ ", \");");
-                    w.node.setValues({ row: row, col: col});
-        } else {
-            var p = typeof(column.property) == "func" ? column.property() : column.property;
-            if (column.type == "text") {
-                w = content.addChild("text");
-                w.node.setValues(column);
-            } elsif (column.type == "checkbox") {
-                w = content.addChild("checkbox");
-                w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
-            }
+                if (column.type == "button") {
+                    w = content.addChild("button");
+                    w.node.setValues(column);
+                    w.setBinding("nasal", column.callback ~ "(\"" ~ mp.callsign ~ "\",);");
+                            w.node.setValues({ row: row, col: col});
+                } else {
+                    var p = typeof(column.property) == "func" ? column.property() : column.property;
+                    if (column.type == "text") {
+                        w = content.addChild("text");
+                        w.node.setValues(column);
+                    } elsif (column.type == "checkbox") {
+                        w = content.addChild("checkbox");
+                        w.setBinding("nasal", column.callback ~ "(getprop(\"" ~ mp.root ~ "/" ~ column.argprop ~ "\"))");
+                    }
                     w.node.setValues({ row: row, col: col, live: 1, property: mp.root ~ "/" ~ p });
-        }
+                }
                 w.setColor(color[0], color[1], color[2], color[3]);
                 col += 1;
             }
@@ -311,6 +327,17 @@ w.node.setValues({ "font" : me.font});
         me.update(me.loopid += 1);
         fgcommand("dialog-new", me.dialog.prop());
         fgcommand("dialog-show", me.dialog.prop());
+        me.update_view();
+    },
+    update_view: func() {
+        # We are called when the aircraft being viewed has changed. We update
+        # the boxes in the 'view' column so that only the one for the aircraft
+        # being viewed is checked. If the user's aircraft is being viewed, none
+        # of these boxes will be checked.
+        callsign = getprop("/sim/current-view/model-view");
+        foreach (var mp; model.list) {
+            mp.node.setValues({'view': mp.callsign == callsign});
+        }
     },
     update: func(id) {
         id == me.loopid or return;
@@ -341,8 +368,19 @@ w.node.setValues({ "font" : me.font});
             else
             {
                 # Node with valid position data (and "distance!=nil").
+                
+                # For 'set-loaded' column, we find whether the 'set' has more
+                # than just the 'sim' child (which we always create even if
+                # we couldn't load the -set.xml, in order to provide default
+                # values for views' config/z-offset-m values).
+                var set = n.getNode("set");
+                var set_numchildren = 0;
+                if (set != nil) set_numchildren = size(set.getChildren());
+                var set_loaded = (set_numchildren >= 2);
+                
                 n.setValues({
                     "model-short": n.getNode("model-installed").getValue() ? mp.model : "[" ~ mp.model ~ "]",
+                    "set-loaded": set_loaded ? "   *" : "    ",
                     "bearing-to": self.course_to(ac),
                     "distance-to-km": distance / 1000.0,
                     "distance-to-nm": distance * M2NM,

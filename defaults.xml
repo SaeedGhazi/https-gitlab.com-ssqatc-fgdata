@@ -656,19 +656,8 @@ Started September 2000 by David Megginson, david@megginson.com
       <type>lookat</type>
       <config>
         <from-model type="bool">false</from-model>
-        <from-model-idx type="int">0</from-model-idx>
-        <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
-        <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
-        <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
-        <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
         <at-model type="bool">true</at-model>
-        <at-model-idx type="int">0</at-model-idx>
-        <at-model-heading-damping type="double">0.0</at-model-heading-damping>
-        <target-z-offset-m type="double">0</target-z-offset-m>
-        <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-        <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
-        <x-offset-m type="double">0</x-offset-m>
-        <y-offset-m type="double">0</y-offset-m>
+        <eye-heading-deg-path>/orientation/true-heading-deg</eye-heading-deg-path>
         <z-offset-m alias="/sim/chase-distance-m"/>
       </config>
     </view>
@@ -678,20 +667,13 @@ Started September 2000 by David Megginson, david@megginson.com
       <type>lookat</type>
       <config>
         <from-model type="bool">false</from-model>
-        <from-model-idx type="int">0</from-model-idx>
-        <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
-        <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
-        <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+        <at-model type="bool">true</at-model>
         <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
         <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
-        <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
-        <at-model type="bool">true</at-model>
-        <at-model-idx type="int">0</at-model-idx>
+        <eye-heading-deg-path>/orientation/true-heading-deg</eye-heading-deg-path>
         <at-model-roll-damping type="double">1.8</at-model-roll-damping>
         <at-model-pitch-damping type="double">1.8</at-model-pitch-damping>
         <at-model-heading-damping type="double">1.8</at-model-heading-damping>
-        <target-z-offset-m type="double">0</target-z-offset-m>
-        <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
         <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
         <x-offset-m type="double">0</x-offset-m>
         <y-offset-m type="double">5</y-offset-m>
@@ -742,16 +724,15 @@ Started September 2000 by David Megginson, david@megginson.com
       <type>lookat</type>
       <config>
         <from-model type="bool">false</from-model>
-        <from-model-idx type="int">0</from-model-idx>
-        <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
-        <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
-        <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
         <at-model type="bool">true</at-model>
-        <at-model-idx type="int">0</at-model-idx>
-        <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+        <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+        <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+        <at-model-roll-damping type="double">1.8</at-model-roll-damping>
+        <at-model-pitch-damping type="double">1.8</at-model-pitch-damping>
+        <at-model-heading-damping type="double">1.8</at-model-heading-damping>
         <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
-        <x-offset-m type="double">25</x-offset-m>
-        <y-offset-m type="double">2</y-offset-m>
+        <x-offset-m type="double">0</x-offset-m>
+        <y-offset-m type="double">5</y-offset-m>
         <z-offset-m alias="/sim/chase-distance-m"/>
       </config>
     </view>
@@ -770,19 +751,17 @@ Started September 2000 by David Megginson, david@megginson.com
       </config>
     </view>
     <view>
-      <name>Model View</name>
+      <name>Tower View AGL</name>
       <enabled type="bool" userarchive="y">true</enabled>
       <type>lookat</type>
       <config>
-        <from-model type="bool">false</from-model>
-        <from-model-idx type="int">0</from-model-idx>
-        <eye-lat-deg-path>/sim/viewer/eye/latitude-deg</eye-lat-deg-path>
-        <eye-lon-deg-path>/sim/viewer/eye/longitude-deg</eye-lon-deg-path>
-        <eye-alt-ft-path>/sim/viewer/eye/altitude-ft</eye-alt-ft-path>
-        <eye-heading-deg-path>/sim/viewer/eye/heading-deg</eye-heading-deg-path>
-        <eye-pitch-deg-path>/sim/viewer/eye/pitch-deg</eye-pitch-deg-path>
-        <eye-roll-deg-path>/sim/viewer/eye/roll-deg</eye-roll-deg-path>
-        <at-model type="bool">false</at-model>
+        <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
+        <eye-lon-deg-path>/sim/tower/longitude-deg</eye-lon-deg-path>
+        <eye-alt-ft-path>/sim/tower/altitude-ft</eye-alt-ft-path>
+        <eye-roll-deg-path>/sim/tower/roll-deg</eye-roll-deg-path>
+        <eye-pitch-deg-path>/sim/tower/pitch-deg</eye-pitch-deg-path>
+        <eye-heading-deg-path>/sim/tower/heading-deg</eye-heading-deg-path>
+        <at-model type="bool">true</at-model>
         <at-model-idx type="int">0</at-model-idx>
         <target-lat-deg-path>/sim/viewer/target/latitude-deg</target-lat-deg-path>
         <target-lon-deg-path>/sim/viewer/target/longitude-deg</target-lon-deg-path>
@@ -790,17 +769,13 @@ Started September 2000 by David Megginson, david@megginson.com
         <target-heading-deg-path>/sim/viewer/target/heading-deg</target-heading-deg-path>
         <target-pitch-deg-path>/sim/viewer/target/pitch-deg</target-pitch-deg-path>
         <target-roll-deg-path>/sim/viewer/target/roll-deg</target-roll-deg-path>
-        <target-x-offset-m type="double">0</target-x-offset-m>
-        <target-y-offset-m type="double">0</target-y-offset-m>
-        <target-z-offset-m type="double">0</target-z-offset-m>
-        <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+        <ground-level-nearplane-m type="double">10.0f</ground-level-nearplane-m>
         <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
         <x-offset-m type="double">0</x-offset-m>
         <y-offset-m type="double">0</y-offset-m>
-        <z-offset-m type="double">100</z-offset-m>
-        <heading-offset-deg type="double">0</heading-offset-deg>
-        <pitch-offset-deg type="double">0</pitch-offset-deg>
-        <roll-offset-deg type="double">0</roll-offset-deg>
+        <z-offset-m type="double">0</z-offset-m>
+        <lookat-agl type="bool">true</lookat-agl>
+        <lookat-agl-damping type="double">2.2</lookat-agl-damping>
       </config>
     </view>
     <menubar>

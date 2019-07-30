@@ -164,31 +164,48 @@
             <z-m> 0.08948</z-m>
             <heading-deg>-19.0</heading-deg>
         </offsets>
-        <condition>
-            <not>
-                <equals>
-                   <property alias="/params/bushkit"/>
-                   <value>4</value>
-                </equals>
-            </not>
-        </condition>
+    </model>
+    <animation>
+        <type>translate</type>
+        <object-name>Garmin196-GPS-non-Canvas</object-name>
+        <property>/Interior/Panel/Instruments/garmin196/move</property>
+        <factor>0.1</factor>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <!-- Canvas local Garmin 196 GPS -->
+    <!--<model>
+        <name>Garmin196-GPS</name>
+        <path>Interior/Panel/garmin196/garmin196.xml</path>
+        <offsets>
+            <x-m>-0.4</x-m>
+            <y-m>0.36</y-m>
+            <z-m>0.205</z-m>
+            <heading-deg>-12.0</heading-deg>
+        </offsets>
     </model>
     <model>
-        <name>Garmin196-GPS-non-Canvas</name>
-        <path>Interior/Panel/Instruments/garmin196/garmin196.xml</path>
+        <name>Garmin196-GPS-support</name>
+        <path>Interior/Panel/garmin196/garmin196_support.xml</path>
         <offsets>
-            <x-m>-0.305</x-m>
-            <y-m> 0.36584</y-m>
-            <z-m> 0.08948</z-m>
-            <heading-deg>-19.0</heading-deg>
+            <x-m>-0.4</x-m>
+            <y-m>0.36</y-m>
+            <z-m>0.205</z-m>
+            <heading-deg>-12.0</heading-deg>
         </offsets>
-        <condition>
-            <equals>
-               <property alias="/params/bushkit"/>
-               <value>4</value>
-            </equals>
-        </condition>
     </model>
+    <animation>
+        <type>select</type>
+        <object-name>Garmin196-GPS</object-name>
+        <object-name>Garmin196-GPS-support</object-name>
+        <condition>
+            <property>/sim/model/c172p/garmin196-visible</property>
+        </condition>
+    </animation>-->
 
     <model>
         <name>GPS-Model</name>
@@ -277,7 +294,7 @@
             <property>/sim/model/c172p/garmin196-visible</property>
         </condition>
     </animation>
-    
+
     <animation>
         <type>select</type>
         <object-name>clock</object-name>
@@ -287,7 +304,7 @@
             </not>
         </condition>
     </animation>
-    
+
     <animation>
         <type>select</type>
         <object-name>digital-clock</object-name>
@@ -315,36 +332,6 @@
             </not>
         </condition>
     </animation>
-
-    <!-- Canvas local Garmin 196 GPS -->
-    <!--<model>
-        <name>Garmin196-GPS</name>
-        <path>Interior/Panel/garmin196/garmin196.xml</path>
-        <offsets>
-            <x-m>-0.4</x-m>
-            <y-m>0.36</y-m>
-            <z-m>0.205</z-m>
-            <heading-deg>-12.0</heading-deg>
-        </offsets>
-    </model>
-    <model>
-        <name>Garmin196-GPS-support</name>
-        <path>Interior/Panel/garmin196/garmin196_support.xml</path>
-        <offsets>
-            <x-m>-0.4</x-m>
-            <y-m>0.36</y-m>
-            <z-m>0.205</z-m>
-            <heading-deg>-12.0</heading-deg>
-        </offsets>
-    </model>
-    <animation>
-        <type>select</type>
-        <object-name>Garmin196-GPS</object-name>
-        <object-name>Garmin196-GPS-support</object-name>
-        <condition>
-            <property>/sim/model/c172p/garmin196-visible</property>
-        </condition>
-    </animation>-->
 
     <nasal>
         <load>
@@ -1079,7 +1066,7 @@
             <blue-prop>/sim/model/c172p/lighting/rgb-ra-b-factor</blue-prop>
         </emission>
     </animation>
-        
+
     <!-- Courtesy Light -->
     <animation>
         <type>material</type>
@@ -3033,7 +3020,7 @@
         <font>Helvetica.txf</font>
         <character-size type="double">0.005</character-size>
         <character-aspect-ratio type="double">-1.0</character-aspect-ratio>
-        <axis-alignment>yx-plane</axis-alignment>
+        <axis-alignment>xy-plane</axis-alignment>
         <max-height>0.2</max-height>
         <max-width>0.07</max-width>
         <font-resolution>
@@ -3056,7 +3043,7 @@
         <font>Helvetica.txf</font>
         <character-size type="double">0.005</character-size>
         <character-aspect-ratio type="double">-1.0</character-aspect-ratio>
-        <axis-alignment>yx-plane</axis-alignment>
+        <axis-alignment>xy-plane</axis-alignment>
         <max-height>0.2</max-height>
         <max-width>0.07</max-width>
         <font-resolution>
@@ -3079,7 +3066,7 @@
         <font>Helvetica.txf</font>
         <character-size type="double">0.005</character-size>
         <character-aspect-ratio type="double">-1.0</character-aspect-ratio>
-        <axis-alignment>yx-plane</axis-alignment>
+        <axis-alignment>xy-plane</axis-alignment>
         <max-height>0.2</max-height>
         <max-width>0.07</max-width>
         <font-resolution>

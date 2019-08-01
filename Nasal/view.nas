@@ -34,10 +34,18 @@ var views = nil;    # list of all view branches (/sim/view[n]) as props.Node
 var current = nil;  # current view branch (e.g. /sim/view[1]) as props.Node
 var fovProp = nil;
 
+var setView = func(n) {
+    setprop("/sim/current-view/view-number", n);
+    
+    # We install a listener for /sim/current-view/view-number which also sets
+    # /sim/current-view/view-number-raw, but set it here anyway, just in case.
+    setprop("/sim/current-view/view-number-raw", views[n].getIndex());
+}
+
 # activate view by index number used in XML definition (e.g. >100)
 var setViewByIndex = func(i) {
     if (indices[i] != nil)
-        setprop("/sim/current-view/view-number", indices[i]);
+        setView(indices[i]);
 }
 
 var hasmember = func(class, member) {
@@ -135,7 +143,7 @@ var stepView = func(step, force = 0) {
             (views[n].getNode("name")!=nil))
             break;
     }
-    setprop("/sim/current-view/view-number", n);
+    setView(n);
 
     # And pop up a nice reminder
     var popup=getprop("/sim/view-name-popup");
@@ -318,6 +326,10 @@ var manager = {
                     model_view_handler.start();
                 }
 		screenWidthCompens.update();
+                
+                # Make sure /sim/current-view/view-number-raw is kept up to
+                # date.
+                setprop("/sim/current-view/view-number-raw", views[which].getIndex());
 	},
 	reset : func {
 		if (hasmember(me.current.handler, "reset"))
@@ -712,7 +724,7 @@ var point = {
 		prop != nil or return;
 		var n = prop.getNode("view-number");
 		if (n != nil)
-			setprop("/sim/current-view/view-number",n.getValue());
+			setView(n.getValue());
 		foreach (var a; keys(me.axes)) {
 			var n = prop.getNode(a);
 			me.axes[a].reset();

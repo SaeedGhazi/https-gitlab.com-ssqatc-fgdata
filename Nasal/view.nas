@@ -467,10 +467,21 @@ var model_view_handler_class = {
         m.dialog = props.Node.new({ "dialog-name": "model-view" });
         m.listener = setlistener("/sim/signals/multiplayer-updated", func m._update_(), 1);
         m.reset();
+        _setlistener("/sim/menubar/legacy-multiplayer-view-selector/enabled", func {
+                var enabled = getprop("/sim/menubar/legacy-multiplayer-view-selector/enabled");
+                if (enabled) {
+                    m.start();
+                }
+                else {
+                    m.stop();
+                }
+                });
         return m;
     },
     start: func() {
-        fgcommand("dialog-show", me.dialog);
+        if (getprop('/sim/menubar/legacy-multiplayer-view-selector/enabled')) {
+            fgcommand("dialog-show", me.dialog);
+        }
         me.next(0);
     },
     stop: func() {

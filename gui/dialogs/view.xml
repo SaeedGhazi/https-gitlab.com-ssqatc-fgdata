@@ -257,6 +257,15 @@
           <label>sec.</label>
         </text>
       </group>
+     
+      <checkbox>
+        <halign>left</halign>
+        <label>Legacy multiplayer view selector</label>
+        <property>/sim/menubar/legacy-multiplayer-view-selector/enabled</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
       
     </group>
 

@@ -114,9 +114,9 @@ var resetFOV = func {
 
 var resetViewPos = func {
     var v = current.getNode("config");
-    setprop("/sim/current-view/x-offset-m", 0);
-    setprop("/sim/current-view/y-offset-m", 0);
-    setprop("/sim/current-view/z-offset-m", 0);
+    setprop("/sim/current-view/x-offset-m", v.getNode("x-offset-m", 1).getValue() or 0);
+    setprop("/sim/current-view/y-offset-m", v.getNode("y-offset-m", 1).getValue() or 0);
+    setprop("/sim/current-view/z-offset-m", v.getNode("z-offset-m", 1).getValue() or 0);
 }
 
 var resetViewDir = func {

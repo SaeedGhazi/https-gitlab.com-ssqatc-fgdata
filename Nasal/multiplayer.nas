@@ -188,19 +188,21 @@ var dialog = {
                        slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
                      };
 
-        me.header = ["view", " callsign", " model", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", " brg", "chat", "ignore" ~ " ", " code", "ver", " set"];
+        me.header = ["view", " callsign", " model", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "", " brg", "chat", "ignore" ~ " ", " code", "ver", "airport", " set"];
         me.columns = [
             { type: "checkbox", legend: "", property: "view", halign: "right", "pref-height": 14, "pref-width": 14, callback: "multiplayer.view_select", argprop: "callsign", },
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" , font: me.font },
             { type: "text", property: "model-short", format: " %s",     label: "--------------", halign: "fill" , font: me.font },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right", font: me.font },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right", font: me.font },
+            { type: "text", property: "ascent_descent",          format: "%s", label: "-", halign: "right", font: me.font },
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right", font: me.font },
             { type: "button", legend: "", halign: "right", callback: "multiplayer.compose_message", "pref-height": 14, "pref-width": 14 },
             { type: "checkbox", property: "controls/invisible", callback: "multiplayer.dialog.toggle_ignore",
               argprop: "callsign", label: "---------", halign: "right", font: me.font },
-            { type: "text", property: "id-code",    format: " %s",    label: "-----",    halign: "fill" , font: me.font },
+            { type: "text", property: "id-code",    format: " %s",    label: "-",    halign: "fill" , font: me.font },
             { type: "text", property: "sim/multiplay/protocol-version", format: " %s",     label: "--", halign: "fill" , font: me.font },
+            { type: "text", property: "airport-id", format: "%s",     label: "----", halign: "fill" , font: me.font },
             { type: "text", property: "set-loaded", format: "%s",     label: "----", halign: "fill" , font: me.font },
         ];
         me.cs_warnings = {};
@@ -378,6 +380,22 @@ var dialog = {
                 if (set != nil) set_numchildren = size(set.getChildren());
                 var set_loaded = (set_numchildren >= 2);
                 
+                var airport_id = n.getNode("sim/tower/airport-id");
+                if (airport_id != nil) {
+                    airport_id = airport_id.getValue();
+                }
+                
+                var ascent_descent = n.getNode("velocities/vertical-speed-fps");
+                if (ascent_descent == nil) {
+                    ascent_descent = '';
+                }
+                else {
+                    ascent_descent = ascent_descent.getValue();
+                    if (ascent_descent > 1)         ascent_descent = '+';
+                    else if (ascent_descent < -1)   ascent_descent = '-';
+                    else ascent_descent = '';
+                }
+                
                 n.setValues({
                     "model-short": n.getNode("model-installed").getValue() ? mp.model : "[" ~ mp.model ~ "]",
                     "set-loaded": set_loaded ? "   *" : "    ",
@@ -385,8 +403,10 @@ var dialog = {
                     "distance-to-km": distance / 1000.0,
                     "distance-to-nm": distance * M2NM,
                     "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
+                    "ascent_descent": ascent_descent,
                     "controls/invisible": contains(ignore, mp.callsign),
-                    "id-code": idcode
+                    "id-code": idcode,
+                    "airport-id": airport_id,
                 });
             }
         }

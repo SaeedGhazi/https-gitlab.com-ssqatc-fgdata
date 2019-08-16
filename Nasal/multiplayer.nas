@@ -183,11 +183,17 @@ var dialog = {
         me.toggle_unit();          # set to imperial
         #
         # "private"
-         me.font = { name: getprop("/sim/gui/selected-style/fonts/mp-list/name") or "FIXED_8x13", 
-                       size: getprop("/sim/gui/selected-style/fonts/mp-list/size") or 20, 
-                       slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant") or 0, 
+         me.font = { name: getprop("/sim/gui/selected-style/fonts/mp-list/name"),
+                       size: getprop("/sim/gui/selected-style/fonts/mp-list/size"),
+                       slant: getprop("/sim/gui/selected-style/fonts/mp-list/slant"),
                      };
-
+        #printf('me.font is: %s', view.str(me.font));
+        if (me.font.name == nil) {
+            # We try to cope if no font is specified, so that we inherit
+            # whatever default there is.
+            me.font = nil;
+        }
+        
         me.header = ["view", " callsign", " model", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "", " brg", "chat", "ignore" ~ " ", " code", "ver", "airport", " set"];
         me.columns = [
             { type: "checkbox", legend: "", property: "view", halign: "right", "pref-height": 14, "pref-width": 14, callback: "multiplayer.view_select", argprop: "callsign", },
@@ -224,7 +230,9 @@ var dialog = {
         me.dialog = gui.dialog[me.name] = gui.Widget.new();
         me.dialog.set("name", me.name);
         me.dialog.set("dialog-name", me.name);
-        me.dialog.set("font", me.font.name);
+        if (typeof(me.font) == 'hash' and contains(me.font, "name") and me.font.name != nil) {
+            me.dialog.set("font", me.font.name);
+        }
         if (me.x != nil)
             me.dialog.set("x", me.x);
         if (me.y != nil)
@@ -271,7 +279,7 @@ var dialog = {
         var col = 0;
         foreach (var h; me.header) {
             var w = content.addChild("text");
-            w.node.setValues({ "font" : me.font});
+            if (me.font != nil) w.node.setValues({ "font" : me.font});
 
             var l = typeof(h) == "func" ? h() : h;
             w.node.setValues({ "label": l, "row": row, "col": col, halign: me.columns[col].halign });

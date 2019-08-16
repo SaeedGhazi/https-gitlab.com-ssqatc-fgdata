@@ -8,7 +8,7 @@
 		"helvetica_bold.txf". "size" and "slant" take only effect on
 		texture fonts.
 	-->
-    <style-name>Anthrax</style-name>
+    <name>Anthrax</name>
     <fonts>
         <gui>
             <name type="string">HELVETICA_12</name>

@@ -297,15 +297,15 @@ var dialog = {
                 color = me.fg[1];
             }
             else{
-                print("no model installed; check fallback");
+                #print("no model installed; check fallback");
                 var fbn = mp.node.getNode("sim/model/fallback-model-index");
                 if (fbn != nil){
-                    print(" ->> got fallback node =",fbn.getValue());
+                    #print(" ->> got fallback node =",fbn.getValue());
                     if (fbn.getValue() > 0) {
                         color = me.fg[3];
                     }
                 } else
-                    print(" ->> no fallback node");
+                    #print(" ->> no fallback node");
             }
             foreach (var column; me.columns) {
                 var w = nil;

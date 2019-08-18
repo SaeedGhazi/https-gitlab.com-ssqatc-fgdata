@@ -530,8 +530,10 @@ var model_view_handler_class = {
     setup: func(data) {
         if (data.root == '/') {
             var ident = '[' ~ data.callsign ~ ']';
+            setprop('/sim/current-view/multiplayer', 0);
         } else {
             var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
+            setprop('/sim/current-view/multiplayer', 1);
         }
 
         me.current = data.callsign;

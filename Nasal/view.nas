@@ -5,7 +5,9 @@
 
 # ATTENTION: 
 # /sim/current-view/view-number is in the range 0..viewCount, it is NOT
-# the index used in aircraft XML files (e.g. <view n="100">)
+# the index used in aircraft XML files (e.g. <view n="100">).
+#
+# For the latter, use /sim/current-view/view-number-raw.
 
 # For debugging. Returns string containing description of <x>.
 #
@@ -258,9 +260,9 @@ var manager = {
                 forindex (var i; viewnodes) {
                     # Install this view, marking as multiplayer if appropriate.
                     var multiplayer = 1;
-                    if (i==4) {
-                        # Tower Look From views does not currently support
-                        # multiplayer aircraft.
+                    if (0) {
+                        # Use this for views that do not work with multiplayer
+                        # aircraft.
                         multiplayer = 0;
                     }
                     var viewnode = viewnodes[i];

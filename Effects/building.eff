@@ -7,7 +7,7 @@
       <type>2d</type>
       <image>Textures/buildings.png</image>
       <filter>linear-mipmap-linear</filter>
-      <wrap-s>clamp</wrap-s>
+      <wrap-s>repeat</wrap-s>
       <wrap-t>clamp</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
@@ -19,7 +19,7 @@
 		<image>Textures/buildings-normalmap_orig.png</image>
 		<type>2d</type>
 		<filter>linear-mipmap-linear</filter>
-		<wrap-s>clamp</wrap-s>
+		<wrap-s>repeat</wrap-s>
 		<wrap-t>clamp</wrap-t>
 		<internal-format>normalized</internal-format>
 	</texture>
@@ -63,6 +63,12 @@
 			<negative-z>Aircraft/Generic/Effects/CubeMaps/buildings/D.png</negative-z>
 		</images>
 	</texture>
+  <texture n="6">
+    <!-- instance information from shader -->
+    <type>2d</type>
+    <wrap-s>clamp</wrap-s>
+    <wrap-t>clamp</wrap-t>
+  </texture>
     <!--Ambient correction -->
     <ambient-correction type="float"> 0.0 </ambient-correction>
     <dirt-enabled type="int"> 0 </dirt-enabled>
@@ -169,27 +175,27 @@
       <color-mask type="vec4d">0 0 0 0</color-mask>
     </pass>-->
     <pass>
-	  <texture-unit n="4">
-		  <unit>4</unit>
-		  <image>
-			  <use>texture[3]/image</use>
-		  </image>
-          <type>
-              <use>texture[3]/type</use>
-          </type>
-		  <filter>
-			  <use>texture[3]/filter</use>
-		  </filter>
-		  <wrap-s>
-			  <use>texture[3]/wrap-s</use>
-		  </wrap-s>
-		  <wrap-t>
-			  <use>texture[3]/wrap-t</use>
-		  </wrap-t>
-		  <internal-format>
-			  <use>texture[3]/internal-format</use>
-		  </internal-format>
-	  </texture-unit>
+      <texture-unit n="4">
+    	  <unit>4</unit>
+    	  <image>
+    		  <use>texture[3]/image</use>
+    	  </image>
+            <type>
+                <use>texture[3]/type</use>
+            </type>
+    	  <filter>
+    		  <use>texture[3]/filter</use>
+    	  </filter>
+    	  <wrap-s>
+    		  <use>texture[3]/wrap-s</use>
+    	  </wrap-s>
+    	  <wrap-t>
+    		  <use>texture[3]/wrap-t</use>
+    	  </wrap-t>
+    	  <internal-format>
+    		  <use>texture[3]/internal-format</use>
+    	  </internal-format>
+      </texture-unit>
       <program>
         <vertex-shader n="0">Shaders/building-model-ALS-ultra.vert</vertex-shader>
         <!--<fragment-shader n="0">Shaders/model-ALS-ultra.frag</fragment-shader>
@@ -197,6 +203,22 @@
 		<fragment-shader n="2">Shaders/hazes.frag</fragment-shader>
 		<fragment-shader n="3">Shaders/secondary_lights.frag</fragment-shader>
 		<fragment-shader n="4">Shaders/filters-ALS.frag</fragment-shader>-->
+        <attribute>
+          <name>instancePosition</name>
+          <index>10</index>
+        </attribute>
+        <attribute>
+          <name>instanceScaleRotate</name>
+          <index>11</index>
+        </attribute>
+        <attribute>
+          <name>rotPitchTex0x</name>
+          <index>12</index>
+        </attribute>
+        <attribute>
+          <name>tex0yTex1xTex1y</name>
+          <index>13</index>
+        </attribute>
       </program>
 	</pass>
   </technique>
@@ -249,6 +271,17 @@
             <use>texture[0]/internal-format</use>
           </internal-format>
       </texture-unit>
+      <texture-unit>
+        <unit>1</unit>
+          <image><use>texture[6]/image</use></image>
+		  <type><use>texture[6]/type</use></type>
+          <filter><use>texture[6]/filter</use></filter>
+          <wrap-s><use>texture[6]/wrap-s</use></wrap-s>
+          <wrap-t><use>texture[6]/wrap-t</use></wrap-t>
+          <internal-format>
+            <use>texture[6]/internal-format</use>
+          </internal-format>
+      </texture-unit>
       <program>
           <!--<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader>-->
           <!--<vertex-shader n="1">Shaders/building-default.vert</vertex-shader>-->
@@ -256,11 +289,32 @@
 	  <fragment-shader>Shaders/trivial.frag</fragment-shader>
           <!--<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 	  <fragment-shader n="1">Shaders/terrain-nocolor.frag</fragment-shader>-->
+        <attribute>
+          <name>instancePosition</name>
+          <index>10</index>
+        </attribute>
+        <attribute>
+          <name>instanceScaleRotate</name>
+          <index>11</index>
+        </attribute>
+        <attribute>
+          <name>rotPitchTex0x</name>
+          <index>12</index>
+        </attribute>
+        <attribute>
+          <name>tex0yTex1xTex1y</name>
+          <index>13</index>
+        </attribute>
       </program>
       <uniform>
         <name>texture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>dataBuffer</name>
+        <type>sampler-1d</type>
+        <value type="int">1</value>
       </uniform>
       <color-mask type="vec4d">0 0 0 0</color-mask>
     </pass>
@@ -293,12 +347,39 @@
             <use>texture[0]/internal-format</use>
           </internal-format>
       </texture-unit>
+      <texture-unit>
+        <unit>1</unit>
+          <image><use>texture[6]/image</use></image>
+		      <type><use>texture[6]/type</use></type>
+          <filter><use>texture[6]/filter</use></filter>
+          <wrap-s><use>texture[6]/wrap-s</use></wrap-s>
+          <wrap-t><use>texture[6]/wrap-t</use></wrap-t>
+          <internal-format>
+            <use>texture[6]/internal-format</use>
+          </internal-format>
+      </texture-unit>
       <program>
         <vertex-shader>Shaders/building-ALS.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <attribute>
+					<name>instancePosition</name>
+					<index>10</index>
+				</attribute>
+        <attribute>
+					<name>instanceScaleRotate</name>
+					<index>11</index>
+				</attribute>
+        <attribute>
+					<name>rotPitchTex0x</name>
+					<index>12</index>
+				</attribute>
+        <attribute>
+					<name>tex0yTex1xTex1y</name>
+					<index>13</index>
+				</attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -361,6 +442,11 @@
         <value type="int">0</value>
       </uniform>
       <uniform>
+        <name>dataBuffer</name>
+        <type>sampler-1d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
         <name>colorMode</name>
         <type>int</type>
         <value>2</value> <!-- AMBIENT_AND_DIFFUSE -->
@@ -387,7 +473,7 @@
 		</material>
 	  <texture-unit n="4">
 		<unit>4</unit>
-		<image> 
+		<image>
 		  <use>texture[3]/image</use>
 		</image>
         <type>
@@ -408,10 +494,26 @@
 	  </texture-unit>
 	  <program n="0">
   		<vertex-shader n="0">Shaders/building-ubershader.vert</vertex-shader>
+      <attribute>
+        <name>instancePosition</name>
+        <index>10</index>
+      </attribute>
+      <attribute>
+        <name>instanceScaleRotate</name>
+        <index>11</index>
+      </attribute>
+      <attribute>
+        <name>rotPitchTex0x</name>
+        <index>12</index>
+      </attribute>
+      <attribute>
+        <name>tex0yTex1xTex1y</name>
+        <index>13</index>
+      </attribute>
 	  </program>
 	</pass>
   </technique>
-  
+
   <technique n="9">
 	<pass>
 		<material>
@@ -427,7 +529,7 @@
 		</material>
 	  <texture-unit n="4">
 		<unit>4</unit>
-		<image> 
+		<image>
 		  <use>texture[3]/image</use>
 		</image>
         <type>
@@ -448,25 +550,25 @@
 	  </texture-unit>
 	  <program n="0">
   		<vertex-shader n="0">Shaders/building-ubershader.vert</vertex-shader>
+      <attribute>
+        <name>instancePosition</name>
+        <index>10</index>
+      </attribute>
+      <attribute>
+        <name>instanceScaleRotate</name>
+        <index>11</index>
+      </attribute>
+      <attribute>
+        <name>rotPitchTex0x</name>
+        <index>12</index>
+      </attribute>
+      <attribute>
+        <name>tex0yTex1xTex1y</name>
+        <index>13</index>
+      </attribute>
 	  </program>
 	</pass>
-  </technique>  
-  
-  <technique n="10">
-    <pass>
-      <program n="0">
-        <vertex-shader n="0">Shaders/building-deferred-gbuffer.vert</vertex-shader>
-      </program>
-    </pass>
-  </technique>  
-  
-  <technique n="11">
-    <pass>
-      <program n="0">
-        <vertex-shader n="0">Shaders/building-default.vert</vertex-shader>
-      </program>
-    </pass>
-  </technique>  
+  </technique>
 
 	<technique n="12">
 		<pass>
@@ -543,6 +645,17 @@
         </internal-format>
         -->
 			</texture-unit>
+      <texture-unit>
+        <unit>1</unit>
+          <image><use>texture[6]/image</use></image>
+		      <type><use>texture[6]/type</use></type>
+          <filter><use>texture[6]/filter</use></filter>
+          <wrap-s><use>texture[6]/wrap-s</use></wrap-s>
+          <wrap-t><use>texture[6]/wrap-t</use></wrap-t>
+          <internal-format>
+            <use>texture[6]/internal-format</use>
+          </internal-format>
+      </texture-unit>
 			<vertex-program-two-side>
 				<use>vertex-program-two-side</use>
 			</vertex-program-two-side>
@@ -551,6 +664,22 @@
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<!--fog include-->
 				<fragment-shader n="1">Shaders/default.frag</fragment-shader>
+        <attribute>
+					<name>instancePosition</name>
+					<index>10</index>
+				</attribute>
+        <attribute>
+					<name>instanceScaleRotate</name>
+					<index>11</index>
+				</attribute>
+        <attribute>
+					<name>rotPitchTex0x</name>
+					<index>12</index>
+				</attribute>
+        <attribute>
+					<name>tex0yTex1xTex1y</name>
+					<index>13</index>
+				</attribute>
 			</program>
 			<!-- 			BEGIN fog include -->
 			<!--<uniform>
@@ -601,6 +730,11 @@
 				<type>sampler-2d</type>
 				<value type="int">0</value>
 			</uniform>
+      <uniform>
+        <name>dataBuffer</name>
+        <type>sampler-1d</type>
+        <value type="int">1</value>
+      </uniform>
 			<uniform>
 				<name>colorMode</name>
 				<type>int</type>
@@ -609,6 +743,6 @@
 				</value>
 			</uniform>
 		</pass>
-	</technique>  
+	</technique>
 
 </PropertyList>

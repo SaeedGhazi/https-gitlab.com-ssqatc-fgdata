@@ -15,6 +15,7 @@
 #   <property>!            -> add property to display list  (reset list with  /!)
 #   <property>:            -> open property browser in this property's directory
 #   <string>?              -> print all properties whose path or value contains this string
+#   <string>#              -> add listener for property and all child properties (cancel all listeners with /#)
 #
 #
 # Keys:
@@ -44,6 +45,8 @@ var listener = nil;
 var input = nil;   # what the user typed (doesn't contain unconfirmed autocompleted parts)
 var text = nil;    # what is shown in the popup
 var state = nil;
+var listeners = [];
+var listeners_children = {};
 
 var completion = [];
 var completion_pos = -1;
@@ -149,6 +152,62 @@ var handle_key = func(key, shift) {
 
 	} elsif (key == `*` and state.node != nil and state.value == nil) {
 		debug.tree(state.node);
+		stop(1);
+		return 1;
+
+	} elsif (key == `#`) {
+                # Add a listener.
+                #printf("received '#'. state.path=%s", view.str(state.path));
+		if (state.path == '/') {
+                    foreach( var l; listeners) {
+                        removelistener(l);
+                    }
+                    listeners = [];
+                    listeners_children = {};
+                    var text = sprintf("number of listeners=%s", size(listeners));
+                    print(text);
+                    screen.log.write(text, 1, 1, 1);
+                }
+                else {
+                    var path = state.path;
+                    node = props.globals.getNode(path);
+                    if (node == nil) {
+                        var text = "cannot find node for path=" ~ path;
+                        print(text);
+                        screen.log.write(text, 1, 1, 1);
+                    }
+                    else {
+                        var listener = func(n) {
+                            path = n.getPath();
+		            value = n.getValue();
+                            value_prev = listeners_children[path];
+                            
+                            # We store old values in listeners_children[], so
+                            # that we avoid printing lots of diagnostics for
+                            # writes that don't change the value.
+                            #
+                            # setlistener() only stores the main node's value,
+                            # so we have to do this by hand for child nodes.
+                            #
+                            # [In any case, the setlistener() API isn't able to
+                            # support both listening to child nodes and avoid
+                            # reporting non-changing write accesses.]
+                            #
+                            listeners_children[path] = value;
+                            if (value != value_prev) {
+                                if (value == nil)   value = "<nil>";
+                                var text = path ~ "=" ~ value;
+                                print(text);
+		                screen.log.write(text, 1, 1, 1);
+                            }
+                        }
+                        var l = setlistener(node, listener, 0, 2);
+                        append(listeners, l);
+                        var text = sprintf("number of listeners=%s", size(listeners));
+                        print(text);
+                        screen.log.write(text, 1, 1, 1);
+                    }
+                }
 		stop(1);
 		return 1;
 

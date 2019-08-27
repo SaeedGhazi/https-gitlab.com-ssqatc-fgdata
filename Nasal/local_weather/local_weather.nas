@@ -357,8 +357,7 @@ for (var i = 0; i < wsize; i=i+1) {
 	# gradually fade in the interpolation weight of newly added points to
 	# avoid sudden jumps
 
-	if (w.weight < 1.0) {w.weight = w.weight + 0.02;}
-
+	if (w.weight < 1.0) {w.weight = w.weight + 0.002;}
 	}
 
 sum_wind[1] = sum_wind[1] /sum_norm;

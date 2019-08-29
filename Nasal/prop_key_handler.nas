@@ -134,7 +134,8 @@ var handle_key = func(key, shift) {
 		return 0;                  # pass other funny events
 
 	} elsif (key == `?` and state.value == nil) {
-		print("\n-- property search: '", text, "' ----------------------------------");
+		text = substr(text, 1);
+                print("\n-- property search: '", text, "' ----------------------------------");
 		search(props.globals, text);
 		print("-- done --\n");
 		stop(0);
@@ -344,8 +345,16 @@ var print_prop = func(n) {
 var search = func(n, s) {
 	if (find(s, n.getPath()) >= 0)
 		print_prop(n);
-	elsif (n.getType() != "NONE" and find(s, "" ~ n.getValue()) >= 0)
-		print_prop(n);
+	elsif (n.getType() != "NONE") {
+            var f = call(func { return find(s, "" ~ n.getValue());}, nil, var err=[]);
+            if (size(err)) {
+                # This can happen if value is '-nan'.
+                printf("got error from n.getValue() for n.getPath()=%s", n.getPath());
+            }
+            else if (f >= 0) {
+                print_prop(n);
+            }
+        }
 	foreach (var c; n.getChildren())
 		search(c, s);
 }

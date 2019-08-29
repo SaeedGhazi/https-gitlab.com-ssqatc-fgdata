@@ -8,8 +8,8 @@ var Tooltip = {
   {
     var m = {
       parents: [Tooltip, PropertyElement.new(["/sim/gui/canvas", "window"], id)],
-      _listener: nil,
-      _property: nil,
+      _listeners: [],
+      _properties: [],
       _mapping: "",
       _mappingFunc: nil,
       _width: 0,
@@ -96,15 +96,19 @@ var Tooltip = {
     me._updateText();
   },
 
-  setProperty: func(prop)
+  setProperties: func(properties)
   {
-    if (me._property != nil)
-      removelistener(me._listener);
-
-    me._property = prop;
-    if (me._property != nil)
-      me._listener = setlistener(me._property, func { me._updateText(); });
-
+    foreach(var l; me._listeners) {
+      removelistener(l);
+    }
+    me._listeners = [];
+    me._properties = properties;
+    foreach(var p; me._properties) {
+      if (p != nil) {
+        var l = setlistener(p, func { me._updateText(); });
+        append(me._listeners, l);
+      }
+    }
     me._updateText();
   },
 
@@ -119,21 +123,28 @@ var Tooltip = {
 
   _updateText: func
   {
-    var msg = me._label;
-    if (me._property != nil and me._label != nil) {
-      var val = me._property.getValue() or 0;
+    var msg = '';
+    if (me._label != nil) {
+      var args = [me._label];
+      foreach(var p; me._properties) {
+        var val = '';
+        if (p != nil) val = p.getValue() or 0;
+        
+        # https://code.google.com/p/flightgear-bugs/issues/detail?id=1454
+        # wrap mapping in 'call' to catch conversion errors
+        var val_mapped = call(me._remapValue, [val], me, nil, var err = []);
+        if( size(err) ) {
+          printlog(
+            "warn",
+            "Tooltip: failed to remap " ~ debug.string(p, 0) ~ ":\n"
+            ~ debug.string(err, 0)
+          );
+          val_mapped = '';
+        }
+        append(args, val_mapped);
+      }
 
-      # https://code.google.com/p/flightgear-bugs/issues/detail?id=1454
-      # wrap mapping in 'call' to catch conversion errors
-      var val_mapped = call(me._remapValue, [val], me, nil, var err = []);
-      if( size(err) )
-        printlog(
-          "warn",
-          "Tooltip: failed to remap " ~ debug.string(me._property, 0) ~ ":\n"
-          ~ debug.string(err, 0)
-        );
-
-      msg = sprintf(me._label, val_mapped or val);
+      msg = call( sprintf, args);
     }
 
     me._text.setText(msg);
@@ -309,14 +320,14 @@ tooltip.createCanvas();
 var innerSetTooltip = func(node)
 {
    tooltip.setLabel(nil);
-
-   var propPath = cmdarg().getNode('property');
-   if (propPath != nil) {
-     var n = props.globals.getNode(propPath.getValue());
-     tooltip.setProperty(n);
-   } else {
-      tooltip.setProperty(nil);
+   var propPaths0 = cmdarg().getChildren('property');
+   var propPaths = [];
+   foreach(var p; propPaths0) {
+     var v = p.getValue();
+     if (v != nil)  v = props.globals.getNode(v);
+     append(propPaths, v);
    }
+   tooltip.setProperties(propPaths);
 
    tooltip.setLabel(cmdarg().getNode('label').getValue());
 

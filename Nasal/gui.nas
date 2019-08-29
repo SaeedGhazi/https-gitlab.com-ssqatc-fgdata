@@ -703,16 +703,24 @@ var enable_widgets = func(node, name, enable = 1) {
 # GUI theming
 ########################################################################
 
-var nextStyle = func {
+var nextStyle = func(delta=1) {
     var curr = getprop("/sim/gui/current-style");
     var styles = props.globals.getNode("/sim/gui").getChildren("style");
     forindex (var i; styles)
         if (styles[i].getIndex() == curr)
             break;
-    if ((i += 1) >= size(styles))
+    i += delta;
+    if (i >= size(styles))
         i = 0;
+    if (i < 0) {
+        i = size(styles) - 1;
+    }
     setprop("/sim/gui/current-style", styles[i].getIndex());
     fgcommand("gui-redraw");
+    popupTip(sprintf("GUI style %s: %s",
+            styles[i].getIndex(),
+            styles[i].getValue("name"),
+            ));
 }
 
 

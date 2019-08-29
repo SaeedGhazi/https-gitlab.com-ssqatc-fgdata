@@ -400,6 +400,25 @@ See README.materials for details on configuring the random building parameters.
 
 The referenced <filename> (in the example buildings.txt) contains lines of the form
 
+X Y Z R B W D H P S O F T
+
+Where:
+- X,Y,Z are the cartesian coordinates of the center of the front face. +X is East, +Y is North
+- R is the building rotation in degrees centered on the middle of the front face.
+- B is the building type [0, 1, 2] for SMALL, MEDIUM, LARGE
+- W is the building width in meters
+- D is the building depth in meters
+- H is the building height in meters, excluding any pitched roof
+- P is the pitch height in meters. 0 for a flat roof
+- S is the roof shape (currently unused - all roofs are flat or gabled depending on pitch height) :
+    0=flat 1=skillion 2=gabled 3=half-hipped 4=hipped 5=pyramidal 6=gambled
+    7=mansard 8=dome 9=onion 10=round 11=saltbox
+- O is the roof ridge orientation (currently unused, all roofs are assumed orthogonal) :
+    0 = parallel to the front face of the building
+    1 = orthogonal to the front face of the building
+- F is the number of floors (integer)
+- T is the texture index to use (integer). Buildings with the same T value will have the same texture assigned.  There are 6 small, 6 medium and 4 large textures.
+
 <x> <y> <z> <rot> <type>
 
 where :

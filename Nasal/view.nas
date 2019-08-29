@@ -5,7 +5,9 @@
 
 # ATTENTION: 
 # /sim/current-view/view-number is in the range 0..viewCount, it is NOT
-# the index used in aircraft XML files (e.g. <view n="100">)
+# the index used in aircraft XML files (e.g. <view n="100">).
+#
+# For the latter, use /sim/current-view/view-number-raw.
 
 # For debugging. Returns string containing description of <x>.
 #
@@ -258,9 +260,9 @@ var manager = {
                 forindex (var i; viewnodes) {
                     # Install this view, marking as multiplayer if appropriate.
                     var multiplayer = 1;
-                    if (i==4 or i==6) {
-                        # Fly-by and Tower Look From views do not currently
-                        # support multiplayer aircraft.
+                    if (0) {
+                        # Use this for views that do not work with multiplayer
+                        # aircraft.
                         multiplayer = 0;
                     }
                     var viewnode = viewnodes[i];
@@ -359,40 +361,106 @@ var manager = {
 
 
 var fly_by_view_handler = {
-	init : func {
-		me.latN = props.globals.getNode("/sim/viewer/latitude-deg", 1);
-		me.lonN = props.globals.getNode("/sim/viewer/longitude-deg", 1);
-		me.altN = props.globals.getNode("/sim/viewer/altitude-ft", 1);
-		me.vnN = props.globals.getNode("/velocities/speed-north-fps", 1);
-		me.veN = props.globals.getNode("/velocities/speed-east-fps", 1);
-		me.hdgN = props.globals.getNode("/orientation/heading-deg", 1);
-
+	
+        init : func {
 		setlistener("/sim/signals/reinit", func(n) { n.getValue() or me.reset() });
 		setlistener("/sim/crashed", func(n) { n.getValue() and me.reset() });
 		setlistener("/sim/freeze/replay-state", func {
 			settimer(func { me.reset() }, 1); # time for replay to catch up
 		});
-		me.reset();
+                setlistener("/sim/current-view/multiplayer", func(n) { me.reset(); } );
+		
+                me.reset();
 	},
+        
 	start : func {
 		me.reset();
 	},
-	reset: func {
-		me.chase = -getprop("/sim/chase-distance-m");
-		# me.course = me.hdgN.getValue();
-		var vn = me.vnN.getValue();
-		var ve = me.veN.getValue();
-		me.course = (0.5*math.pi - math.atan2(vn, ve))*R2D;
-		
-		me.last = geo.aircraft_position();
-		me.setpos(1);
-		# me.dist = 20;
-	},
-	setpos : func(force = 0) {
-		var pos = geo.aircraft_position();
-		var vn = me.vnN.getValue();
-		var ve = me.veN.getValue();
+        
+        # Sets me.root to node with path given by the value of property
+        # /sim/view[6]/config/root (which will be /ai/models/multiplayer[N]
+        # where N is the index of the multiplayer aircraft].  Note that this
+        # node sometimes doesn't yet exist, in which case we return with
+        # me.root = nil.
+        #
+        _set_multiplayer_root: func() {
+            # Set me.root to /ai/models/multiplayer[.]
+            var root = getprop("/sim/view[6]/config/root"); # /ai/models/multiplayer[]
+            me.root = props.globals.getNode(root);
+            if (me.root == nil) {
+                #printf("root does not exist: %s", str(root));
+            }
+        },
+        
+        aircraft_position: func() {
+            if (me.multiplayer) {
+                me._set_multiplayer_root();
+                if (me.root == nil) {
+                    return geo.Coord.new();
+                }
+                var lat = me.root.getValue("position/latitude-deg");
+                var lon = me.root.getValue("position/longitude-deg");
+                var alt = me.root.getValue("position/altitude-ft") * FT2M;
 
+	        return geo.Coord.new().set_latlon(lat, lon, alt);
+            }
+            else {
+                return geo.aircraft_position();
+            }
+        },
+        
+	reset: func {
+                me.multiplayer = getprop("/sim/current-view/multiplayer") or 0;
+                
+                if (me.multiplayer) {
+                    me._set_multiplayer_root();
+                    if (me.root == nil) {
+                        return;
+                    }
+                    
+                    me.chase = me.root.getValue("set/sim/chase-distance-m");
+                }
+                else {
+                    me.chase = getprop("/sim/chase-distance-m");
+                }
+                if (me.chase == nil or me.chase == 0)   me.chase = -25;
+                me.chase = -me.chase;
+                
+		me.last = me.aircraft_position();
+		me.setpos(1);
+	},
+        
+	setpos : func(force = 0) {
+                if (me.multiplayer) {
+                    me._set_multiplayer_root();
+                    if (me.root == nil) {
+                        return 1;   # Ensure we get called back soon to try again.
+                    }
+                    # We would like to find the aircraft's actual velocity
+                    # vector rather than heading, but it's not easily available
+                    # as a property, so we use the aircraft heading and its
+                    # forwards speed (uBody-fps).
+                    #
+                    # E.g. i think this may give biased viewpoint positions if
+                    # aircraft is moving sideways due to wind.
+                    #
+                    var u = me.root.getValue("velocities/uBody-fps");   # forwards
+                    #var v = me.root.getValue("velocities/vBody-fps");   # vertical
+                    #var w = me.root.getValue("velocities/wBody-fps");   # lateral
+                    
+                    var course = me.root.getValue("orientation/true-heading-deg");
+                    var course_rad = course * math.pi / 180;
+                    var vn = u * math.cos(course_rad);
+                    var ve = u * -math.sin(course_rad);
+                }
+                else {
+		    var vn = getprop("/velocities/speed-north-fps");
+		    var ve = getprop("/velocities/speed-east-fps");
+                    var course = (0.5*math.pi - math.atan2(vn, ve))*R2D;
+                }
+                
+		var pos = me.aircraft_position();
+                
 		var dist = 0.0;
 		if ( force ) {
 		    # predict distance based on speed
@@ -409,17 +477,25 @@ var fly_by_view_handler = {
 		if (dist < 1.7 * me.chase and !force)
 			return 1.13;
 
-		# "predict" and remember next aircraft position
-		# var course = me.hdgN.getValue();
-		var course = (0.5*math.pi - math.atan2(vn, ve))*R2D;
-		var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
+                # "predict" and remember next aircraft position
+                var delta_alt = (pos.alt() - me.last.alt()) * 0.5;
 		pos.apply_course_distance(course, dist * 0.8);
 		pos.set_alt(pos.alt() + delta_alt);
 		me.last.set(pos);
 
 		# apply random deviation
 		var radius = me.chase * (0.5 * rand() + 0.7);
-		var agl = getprop("/position/altitude-agl-ft") * FT2M;
+                
+                if (me.multiplayer) {
+                    # AGL not available for multiplayer aircraft as a property,
+                    # so we calculate it explicitly.
+                    var gl = geo.elevation(pos.lat(), pos.lon());
+                    if (gl == nil)  gl = 0;
+                    var agl = pos.alt() - gl;
+                }
+                else {
+		    var agl = getprop("/position/altitude-agl-ft") * FT2M;
+                }
 		if (agl > me.chase)
 			var angle = rand() * 2 * math.pi;
 		else
@@ -429,7 +505,7 @@ var fly_by_view_handler = {
 		var dev_side = math.sin(angle) * radius;
 		pos.apply_course_distance(course + 90, dev_side);
 
-		# and make sure it's not under ground
+                # and make sure it's not under ground
 		var lat = pos.lat();
 		var lon = pos.lon();
 		var alt = pos.alt();
@@ -445,11 +521,23 @@ var fly_by_view_handler = {
 		}
 
 		# set new view point
-		me.latN.setValue(lat);
-		me.lonN.setValue(lon);
-		me.altN.setValue(alt * M2FT);
+                if (me.multiplayer) {
+                    # flightgear:src/Viewer/view.cxx will
+                    # expect to find viewing position in
+                    # /ai/models/multiplayer[]/sim/viewer/latitude-deg etc.
+                    #
+                    me.root.setValue("sim/viewer/latitude-deg", lat);
+                    me.root.setValue("sim/viewer/longitude-deg", lon);
+                    me.root.setValue("sim/viewer/altitude-ft", alt * M2FT);
+                }
+                else {
+                    setprop("/sim/viewer/latitude-deg", lat);
+                    setprop("/sim/viewer/longitude-deg", lon);
+                    setprop("/sim/viewer/altitude-ft", alt * M2FT);
+                }
 		return 7.3;
 	},
+        
 	update : func {
 		return me.setpos();
 	},
@@ -530,8 +618,10 @@ var model_view_handler_class = {
     setup: func(data) {
         if (data.root == '/') {
             var ident = '[' ~ data.callsign ~ ']';
+            setprop('/sim/current-view/multiplayer', 0);
         } else {
             var ident = '"' ~ data.callsign ~ '" (' ~ data.model ~ ')';
+            setprop('/sim/current-view/multiplayer', 1);
         }
 
         me.current = data.callsign;

@@ -195,7 +195,7 @@
 </material>
 
 <material n="1031">
-  <name>lf_solid_red_border</name>
+  <name>lf_broken_red_border</name>
   <effect>Effects/lfeat</effect>
   <texture>Runway/lf_broken_red_border.png</texture>
 </material>

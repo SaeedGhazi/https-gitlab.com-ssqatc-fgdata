@@ -74,6 +74,30 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+ <key n="99">
+  <name>Alt-C</name>
+  <desc>Toggle tooltips for animated objects</desc>
+  <mod-alt>
+   <binding>
+    <command>property-toggle</command>
+    <property>/sim/animation-tooltips</property>
+   </binding>
+   <binding>
+    <command>nasal</command>
+    <script>if (getprop("/sim/animation-tooltips")) gui.popupTip("Auto animation tooltips ON"); else gui.popupTip("Auto animation tooltips OFF");</script>
+   </binding>
+  </mod-alt>
+ </key>
+
+ <key n="3">
+  <name>Alt-C</name>
+  <desc>Toggle clickable panel hotspots</desc>
+  <binding>
+   <command>property-toggle</command>
+   <property>/sim/panel-hotspots</property>
+  </binding>
+ </key>
+
  <key n="7">
   <name>Ctrl-G</name>
   <desc>Toggle autopilot glide slope lock</desc>

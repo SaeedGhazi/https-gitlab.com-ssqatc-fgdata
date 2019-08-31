@@ -599,10 +599,11 @@ var findBestAIObject = func (){
     if ( (var node = aimember.getName() ) != nil ) {
       nodeIsAiAircraft = 0;
       nodeIsMpAircraft = 0;
-      if ( sprintf("%8s",node)  == "aircraft" )	nodeIsAiAircraft = 1;
+      if ( sprintf("%8s",node)  == "aircraft" or sprintf("%7s",node) == "dragger" )	nodeIsAiAircraft = 1;
       if ( sprintf("%11s",node) == "multiplayer" ) nodeIsMpAircraft = 1;
-      #print("found NodeName=",node,"  nodeIsAiAircraft=",nodeIsAiAircraft,"  nodeIsMpAircraft=",nodeIsMpAircraft  );
-      if ( !nodeIsAiAircraft and !nodeIsMpAircraft ) continue;
+      #print("found NodeName=",node,"  nodeIsAiAircraft=",nodeIsAiAircraft,"  nodeIsMpAircraft=",nodeIsMpAircraft);
+      if ( aimember.getNode("valid") == nil ) continue;
+      if ( !nodeIsAiAircraft and !nodeIsMpAircraft) continue;
       if ( !aimember.getNode("valid").getValue() )   continue;   # node is invalid
 
       if( running_as_autoconnect ) {

@@ -12,6 +12,11 @@ Item {
     x: -20
     width: 200
 
+    Rectangle {
+        anchors.fill: parent
+        color: "#6d6d6d"
+    }
+
     ColumnLayout {
         width: parent.width
 

@@ -9,6 +9,11 @@ import org.flightgear.Dialogs 1.0
 Item {
     id: ai_carrier
 
+    Rectangle {
+        anchors.fill: parent
+        color: "#6d6d6d"
+    }
+
     // modal*: false
     ColumnLayout {
         width: parent.width

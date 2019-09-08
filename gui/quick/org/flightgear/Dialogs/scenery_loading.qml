@@ -9,6 +9,11 @@ import org.flightgear.Dialogs 1.0
 Item {
     id: scenery_loading
 
+    Rectangle {
+        anchors.fill: parent
+        color: "#6d6d6d"
+    }
+
     ColumnLayout {
         // modal*: true
         Label {

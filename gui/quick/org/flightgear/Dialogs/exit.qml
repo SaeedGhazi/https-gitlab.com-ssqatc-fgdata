@@ -9,6 +9,11 @@ import org.flightgear.Dialogs 1.0
 Item {
     id: exit
 
+    Rectangle {
+        anchors.fill: parent
+        color: "#6d6d6d"
+    }
+
     //modal*: false
     ColumnLayout {
 

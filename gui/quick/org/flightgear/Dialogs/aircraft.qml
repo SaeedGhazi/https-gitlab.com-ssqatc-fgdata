@@ -11,6 +11,11 @@ Item {
     width: 250
     height: 95
 
+    Rectangle {
+        anchors.fill: parent
+        color: "#6d6d6d"
+    }
+
     // modal*: true
     Label {
         x: 10

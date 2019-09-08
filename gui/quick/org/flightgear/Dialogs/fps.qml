@@ -11,6 +11,11 @@ Item {
     x: -2
     y: 2
 
+    Rectangle {
+        anchors.fill: parent
+        color: "#6d6d6d"
+    }
+
     RowLayout {
         // padding*: 2
         // font*: sim/gui/selected-style/fonts/gui-small

@@ -10,14 +10,22 @@ Item
 
     property StackController controller : StackController { }
 
+
     property var __activeLoader: pageLoaderA
     readonly property var __inactiveLoader: (__activeLoader == pageLoaderA) ? pageLoaderB
         : pageLoaderA
 
+    StackHeader
+    {
+        id: stackHeader
+        width: parent.width
+        controller: root.controller
+    }
+
     Loader {
         id: pageLoaderA
         width: root.width
-        anchors { top: parent.top; bottom: parent.bottom; }
+        anchors { top: stackHeader.bottom; bottom: parent.bottom; }
 
         // make the controller available to pages
         property StackController stack: root.controller
@@ -26,7 +34,7 @@ Item
     Loader {
         id: pageLoaderB
         width: root.width
-        anchors { top: parent.top; bottom: parent.bottom; }
+        anchors { top: stackHeader.bottom; bottom: parent.bottom; }
 
         // make the controller available to pages
         property StackController stack: root.controller

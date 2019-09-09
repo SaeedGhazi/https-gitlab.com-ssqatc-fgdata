@@ -9,7 +9,7 @@ Rectangle {
     height: 40
 
     Component.onCompleted: {
-        stack.controller.push(Qt.resolvedUrl("RootSettingsPage.qml"));
+        stack.controller.push(Qt.resolvedUrl("RootSettingsPage.qml"), qsTr("Settings"));
     }
 
     Stack {

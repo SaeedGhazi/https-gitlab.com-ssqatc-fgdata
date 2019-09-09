@@ -12,7 +12,7 @@ SettingControl
     property alias label: slider.label
     property alias max: slider.max
 
-    implicitHeight: controlsRow.height + Style.margin + description.height
+    implicitHeight: slider.height + Style.margin + description.height
 
     Slider {
         id: slider

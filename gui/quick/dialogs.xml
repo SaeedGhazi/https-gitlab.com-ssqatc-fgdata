@@ -20,4 +20,9 @@
         <title>Help</title>
         <file>HelpDialog.qml</file>
     </dialog>
+     <dialog>
+        <id>autopilot</id>
+        <title>Autopilot</title>
+        <file>org/flightgear/Dialogs/GenericAutopilotDialog.qml</file>
+    </dialog>
 </PropertyList>

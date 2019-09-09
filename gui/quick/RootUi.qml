@@ -47,21 +47,39 @@ Item
         }
     }
 
-    Rectangle {
-        x: 40
-        y: 200
-        width: 200
-        height: 80
-        color: mouse.containsMouse ? "red" : "yellow"
+    ListModel {
+        id: menuBarModel
 
-        MouseArea {
-            id: mouse
-            anchors.fill: parent
-            hoverEnabled: true
+        ListElement { label: "Settings"; dialogId: "settings" }
+        ListElement { label: "Autopilot"; dialogId: "autopilot" }
+        ListElement { label: "Help"; dialogId: "help" }
 
-            onClicked: {
-                console.warn("HI");
-                WindowManager.show("settings");
+    }
+
+    ListView {
+        x: 10
+        y: 100
+        model: menuBarModel
+        height: 1000
+
+        delegate: Rectangle {
+            border.width: 1
+            border.color: Style.frameColor
+            color: mouse.containsMouse ? Style.themeColor : Style.windowColor
+            height: 30
+            width: 200
+
+            Text {
+                anchors.centerIn: parent
+                text: model.label
+                color: Style.themeColor
+            }
+
+            MouseArea {
+                id: mouse
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: WindowManager.show(model.dialogId);
             }
         }
     }

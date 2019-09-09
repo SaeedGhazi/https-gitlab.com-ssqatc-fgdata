@@ -3,16 +3,16 @@ import org.flightgear.UI 1.0
 
 Item {
     id: root
-    property alias title: headerTitle.text
+    property alias title: header.text
     property alias contents: contentBox.children
-    property alias showAdvanced: advancedToggle.open
+    property alias showAdvanced: header.showAdvanced
     property string settingGroup: ""
     property string summary: ""
     readonly property bool haveAdvancedSettings: anyAdvancedSettings(contents)
 
 
     implicitWidth: parent.width
-    implicitHeight: headerRect.height + contentBox.height + (Style.margin * 2)
+    implicitHeight: header.height + contentBox.height + (Style.margin * 2)
 
     signal apply();
 
@@ -62,35 +62,11 @@ Item {
         }
     }
 
-    Rectangle {
-        id: headerRect
+    SettingsHeader {
+        id: header
         width: parent.width
-        height: headerTitle.height + (Style.margin * 2)
-
-        color: Style.themeColor
-        border.width: 1
-        border.color: Style.frameColor
-
-        Text {
-            id: headerTitle
-            color: "white"
-            anchors.verticalCenter: parent.verticalCenter
-            font.bold: true
-            font.pixelSize: Style.subHeadingFontPixelSize
-            anchors.left: parent.left
-            anchors.leftMargin: Style.inset
-        }
-
-        AdvancedSettingsToggle
-        {
-            id: advancedToggle
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            height: parent.height
-            visible: root.haveAdvancedSettings
-        }
+        haveAdvancedSettings: root.haveAdvancedSettings
     }
-
 
     MouseArea {
         anchors.fill: contentBox
@@ -102,14 +78,14 @@ Item {
 
     Column {
         id: contentBox
-        anchors.top: headerRect.bottom
+        anchors.top: header.bottom
         anchors.topMargin: Style.margin
         width: parent.width
         spacing: Style.margin * 2
 
         // this is here so SettingControl 's parent (which is us)
         // can be used to find the advanced toggle state
-        property alias showAdvanced: advancedToggle.open
+        property alias showAdvanced: header.showAdvanced
     }
 
     // bottom spacing item

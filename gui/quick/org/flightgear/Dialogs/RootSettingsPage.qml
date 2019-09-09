@@ -22,47 +22,6 @@ Item
             id: sectionColumn
             width: parent.width
 
-            Item {
-                // top margin
-                width: parent.width
-                height: Style.margin
-            }
-
-            Item {
-                id: header
-                width: parent.width
-                height: headerText.height
-
-                // Back button when drilled-down
-
-                // make this breadcrumbs when we have multiple pages
-                Text {
-                    id: headerText
-                    text: qsTr("Settings")
-                    font.pixelSize: Style.headingFontPixelSize
-                    anchors.left: parent.left
-                    anchors.leftMargin: Style.inset
-                }
-
-                SearchButton {
-                    id: search
-                    width: Style.strutSize * 4
-                    anchors.right: parent.right
-                    anchors.rightMargin: Style.margin
-                    anchors.verticalCenter: parent.verticalCenter
-                    autoSubmitTimeout: 250
-                    onSearch: {
-                    //    _launcher.settingsSearchTerm = term
-                    }
-                }
-            }
-
-            Item {
-                // below header margin
-                width: parent.width
-                height: Style.margin
-            }
-
             Section {
                 id: generalSettings
                 title: qsTr("General")
@@ -133,7 +92,7 @@ Item
 
                     SettingDrillDown {
                         label: qsTr("Configure joysticks, pedals and similar devices")
-                        drillDownTarget: Qt.resolvedUrl("SettingsJoysticksPage.qml");
+                        drillDownTarget: Qt.resolvedUrl("SettingsInputDevicesPage.qml");
                     }
                 ]
             }

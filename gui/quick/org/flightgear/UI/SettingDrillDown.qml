@@ -7,7 +7,9 @@ SettingControl {
     id: root
     implicitHeight: drillButton.height
 
-    property alias label: label.text
+    property alias label: labelText.text
+// default target label is our label, but can be overridden
+    property string targetLabel: label
 
     property url drillDownTarget
 
@@ -19,7 +21,7 @@ SettingControl {
     }
 
     StyledText {
-        id: label
+        id: labelText
         text: root.label
         anchors.verticalCenter: drillButton.verticalCenter
         enabled: root.enabled
@@ -33,7 +35,7 @@ SettingControl {
         enabled: root.enabled
 
         onClicked: {
-            stack.push(root.drillDownTarget);
+            stack.push(root.drillDownTarget, root.targetLabel);
         }
     }
 

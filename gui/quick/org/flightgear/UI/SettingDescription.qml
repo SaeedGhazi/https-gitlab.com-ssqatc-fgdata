@@ -9,4 +9,6 @@ Text {
     font.pixelSize: Style.baseFontPixelSize
 
     wrapMode: Text.WordWrap
+
+    width: parent.width
 }

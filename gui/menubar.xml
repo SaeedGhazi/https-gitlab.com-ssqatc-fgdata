@@ -671,6 +671,13 @@
 		</item>
 
 		<item>
+			<name>reload-gui-qt</name>
+			<binding>
+				<command>reload-quick-gui</command>
+			</binding>
+		</item>
+
+		<item>
 			<name>reload-input</name>
 			<binding>
 				<command>reinit</command>

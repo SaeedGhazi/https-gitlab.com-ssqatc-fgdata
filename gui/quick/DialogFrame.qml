@@ -138,6 +138,9 @@ FocusScope
 
     Loader {
         id: contentLoader
+
+        readonly property string windowId: root.windowId
+
         anchors {
             top: divider.bottom
             bottom: parent.bottom

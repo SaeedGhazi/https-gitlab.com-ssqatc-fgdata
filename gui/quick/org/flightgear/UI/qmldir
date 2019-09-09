@@ -26,3 +26,6 @@ OverlayMenu 1.0 OverlayMenu.qml
 Overlay 1.0 Overlay.qml
 Button 1.0 Button.qml
 Stack 1.0 Stack.qml
+
+HRule 1.0 HRule.qml
+

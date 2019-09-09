@@ -8,17 +8,16 @@ import org.flightgear.Dialogs 1.0
 
 Item {
     id: scenery_loading
-
-    Rectangle {
-        anchors.fill: parent
-        color: "#6d6d6d"
-    }
+    width: 200
+    height: 100
 
     ColumnLayout {
         // modal*: true
         Label {
             text: qsTr("Scenery Loading...")
             padding: 30
+            font.pointSize: Style.headingFontPixelSize
+            font.bold: true
         }
     }
 }

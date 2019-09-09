@@ -8,10 +8,15 @@ import org.flightgear.Dialogs 1.0
 
 Item {
     id: ai_carrier
+    width: 640
+    height: 455
 
     Rectangle {
         anchors.fill: parent
-        color: "#6d6d6d"
+        border.width: 1
+        border.color: Style.frameColor
+        color: Style.windowColor
+        opacity: Style.panelOpacity
     }
 
     // modal*: false
@@ -25,20 +30,16 @@ Item {
                 width: parent.width
 
                 Label {
-                    Layout.fillWidth: true
-                }
-
-                Label {
                     text: qsTr("AI Carrier Controls")
-                }
-
-                Label {
+                    font.pointSize: Style.headingFontPixelSize
+                    font.bold: true
                     Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
                 }
 
                 Button {
-                    width: 16
-                    height: 16
+                    width: 20
+                    height: 20
                     text: qsTr("")
                     // keynum*: 27
                     // border*: 2
@@ -47,11 +48,7 @@ Item {
             } // RowLayout
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -146,11 +143,7 @@ Item {
             } // RowLayout
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -197,8 +190,3 @@ Item {
         }
     } // ColumnLayout
 }
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

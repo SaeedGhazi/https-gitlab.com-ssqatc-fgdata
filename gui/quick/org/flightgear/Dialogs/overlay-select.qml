@@ -8,13 +8,15 @@ import org.flightgear.Dialogs 1.0
 
 Item {
     id: overlay_select
-    // resizable*: true
-    x: -20
-    width: 200
+    width: 300
+    height: 280
 
     Rectangle {
         anchors.fill: parent
-        color: "#6d6d6d"
+        border.width: 1
+        border.color: Style.frameColor
+        color: Style.windowColor
+        opacity: Style.panelOpacity
     }
 
     ColumnLayout {
@@ -27,34 +29,25 @@ Item {
                 width: parent.width
 
                 Label {
-                    Layout.fillWidth: true
-                }
-
-                Label {
                     text: qsTr("$name")
-                }
-
-                Label {
+                    font.pointSize: Style.headingFontPixelSize
+                    font.bold: true
                     Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
                 }
 
                 Button {
-                    width: 16
-                    height: 16
                     text: qsTr("")
-                    // default*: 1
-                    // keynum*: 27
+                    // key*: qsTr("Esc")
+                    width: 20
+                    height: 20
                     // border*: 2
-                    // binding*: " nasal $close "
+                    // binding*: " dialog-close "
                 }
-            }
+            } // RowLayout
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         ListView {
             Layout.fillWidth: true
@@ -63,5 +56,7 @@ Item {
             // binding*: " dialog-apply "
             currentIndex: $value
         }
+
+        HRule {}
     }
 }

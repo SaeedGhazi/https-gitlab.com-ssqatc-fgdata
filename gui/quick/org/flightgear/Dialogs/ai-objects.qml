@@ -10,39 +10,53 @@ Item {
     id: ai_objects
     // padding*: 1
     // modal*: false
-    width: 400
+    width: 450
+    height: 235
 
     Rectangle {
         anchors.fill: parent
-        color: "#6d6d6d"
+        border.width: 1
+        border.color: Style.frameColor
+        color: Style.windowColor
+        opacity: Style.panelOpacity
     }
 
     ColumnLayout {
         width: parent.width
 
-        Label {
-            height: 6
+        GroupBox {
+            Layout.fillWidth: true
+
+            RowLayout {
+                width: parent.width
+
+                Label {
+                    text: qsTr("Control nearby AI objects")
+                    font.pointSize: Style.headingFontPixelSize
+                    font.bold: true
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                Button {
+                    width: 20
+                    height: 20
+                    text: qsTr("")
+                    // keynum*: 27
+                    // border*: 2
+                    // binding*: " dialog-close "
+                }
+            } // RowLayout
         }
 
-        Label {
-            text: qsTr("Control nearby AI objects")
-        }
-
-        Label {
-            height: 4
-        }
-
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         GroupBox {
             Layout.fillWidth: true
 
             GridLayout {
                 width: parent.width
+                columns: 1
 
                 Label {
                     text: qsTr("Select an AI object to bring up its own control dialog")
@@ -66,24 +80,19 @@ Item {
             height: 12
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
-
-        Label {
-            height: 20
-        }
+        HRule {}
 
         GroupBox {
             Layout.fillWidth: true
 
-            GridLayout {
+            RowLayout {
                 width: parent.width
 
-                Button {
+                Label {
+                    Layout.fillWidth: true
+                }
 
+                Button {
                     text: qsTr("OK")
                     // default*: true
                     // equal*: true
@@ -93,13 +102,16 @@ Item {
                 }
 
                 Button {
-
                     text: qsTr("Close")
                     // default*: true
                     // key*: qsTr("Esc")
                     // binding*: " dialog-close "
                 }
-            } // GridLayout
+
+                Label {
+                    Layout.fillWidth: true
+                }
+            } // RowLayout
         }
     } // ColumnLayout
 }

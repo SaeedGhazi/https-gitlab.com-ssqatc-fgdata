@@ -8,20 +8,50 @@ import org.flightgear.Dialogs 1.0
 
 Item {
     id: exit
+    width: 300
+    height: 115
 
     Rectangle {
         anchors.fill: parent
-        color: "#6d6d6d"
+        border.width: 1
+        border.color: Style.frameColor
+        color: Style.windowColor
+        opacity: Style.panelOpacity
     }
 
-    //modal*: false
     ColumnLayout {
-
-        Label {
-            text: qsTr("Exit FlightGear?")
-        }
+        width: parent.width
 
         GroupBox {
+            id: groupBox
+            Layout.fillWidth: true
+
+            RowLayout {
+                width: parent.width
+
+                Label {
+                    text: qsTr("Exit FlightGear?")
+                    font.pointSize: Style.headingFontPixelSize
+                    font.bold: true
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                Button {
+                    text: qsTr("")
+                    // key*: qsTr("Esc")
+                    width: 20
+                    height: 20
+                    // border*: 2
+                    // binding*: " dialog-close "
+                }
+            } // RowLayout
+        }
+
+        HRule {}
+
+        GroupBox {
+            Layout.fillWidth: true
 
             RowLayout {
                 Layout.fillWidth: true
@@ -33,6 +63,8 @@ Item {
 
                 Button {
                     text: qsTr("Exit")
+                    destructiveAction: true
+                    focus: true
                     //default*: true
                     //equal*: true
                     //binding*: " exit "

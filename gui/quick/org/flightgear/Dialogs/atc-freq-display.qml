@@ -8,26 +8,47 @@ import org.flightgear.Dialogs 1.0
 
 Item {
     id: atc_freq_display
-    width: 300
-    height: 100
+    width: 400
+    height: 155
 
     Rectangle {
         anchors.fill: parent
-        color: "#6d6d6d"
+        border.width: 1
+        border.color: Style.frameColor
+        color: Style.windowColor
+        opacity: Style.panelOpacity
     }
 
     ColumnLayout {
         width: parent.width
 
-        Label {
-            text: qsTr('TITLE ("ICAO Frequencies")')
+        GroupBox {
+            id: groupBox
+            Layout.fillWidth: true
+
+            RowLayout {
+                width: parent.width
+
+                Label {
+                    text: qsTr("ICAO Frequencies")
+                    font.pointSize: Style.headingFontPixelSize
+                    font.bold: true
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                Button {
+                    text: qsTr("")
+                    // key*: qsTr("Esc")
+                    width: 20
+                    height: 20
+                    // border*: 2
+                    // binding*: " dialog-close "
+                }
+            } // RowLayout
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         GroupBox {
             id: frequency_list
@@ -44,8 +65,8 @@ Item {
                         width: parent.width
 
                         Label {
+                            text: qsTr("Label")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("LABEL")
                         }
 
                         Label {
@@ -53,19 +74,37 @@ Item {
                         }
 
                         Label {
+                            text: qsTr("Frequency")
                             horizontalAlignment: Text.AlignRight
-                            text: qsTr("FREQUENCY")
                         }
                     }
                 }
             }
         }
 
-        Button {
-            text: qsTr("Close")
-            // default*: true
-            // key*: qsTr("Esc")
-            // binding*: " dialog-close "
+        HRule {}
+
+        GroupBox {
+            Layout.fillWidth: true
+
+            RowLayout {
+                width: parent.width
+
+                Label {
+                    Layout.fillWidth: true
+                }
+
+                Button {
+                    text: qsTr("Close")
+                    // default*: true
+                    // key*: qsTr("Esc")
+                    // binding*: " dialog-close "
+                }
+
+                Label {
+                    Layout.fillWidth: true
+                }
+            }
         }
     }
 }

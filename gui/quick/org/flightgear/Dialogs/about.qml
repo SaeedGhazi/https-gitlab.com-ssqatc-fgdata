@@ -8,53 +8,47 @@ import org.flightgear.Dialogs 1.0
 
 Item {
     id: about
+    width: 640
+    height: 665
 
     Rectangle {
         anchors.fill: parent
-        color: "#6d6d6d"
+        border.width: 1
+        border.color: Style.frameColor
+        color: Style.windowColor
+        opacity: Style.panelOpacity
     }
 
-    // modal*: false
     ColumnLayout {
         width: parent.width
 
-        // resizable*: false
-        // padding*: 3
         GroupBox {
+            id: groupBox
             Layout.fillWidth: true
 
             RowLayout {
                 width: parent.width
 
-                // padding*: 1
-                Label {
-                    Layout.fillWidth: true
-                }
-
                 Label {
                     text: qsTr("About FlightGear")
-                }
-
-                Label {
+                    font.pointSize: Style.headingFontPixelSize
+                    font.bold: true
                     Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
                 }
 
                 Button {
                     text: qsTr("")
                     // key*: qsTr("Esc")
-                    width: 16
-                    height: 16
+                    width: 20
+                    height: 20
                     // border*: 2
                     // binding*: " dialog-close "
                 }
             } // RowLayout
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -70,24 +64,26 @@ Item {
                         width: parent.width
 
                         Label {
-                            Layout.fillWidth: true
-                        }
-
-                        Label {
                             text: qsTr("FlightGear Flight Simulator VX.X.X")
-                        }
-
-                        Label {
+                            font.pointSize: Style.subHeadingFontPixelSize
                             Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
                         }
                     } // RowLayout
                 }
 
                 Label {
                     text: qsTr("(c) 1996-2019, the FlightGear Contributors")
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.fillWidth: true
                 }
 
                 GroupBox {
+                    id: groupBox1
+                    rightPadding: 48
+                    leftPadding: 48
+                    enabled: true
+                    visible: true
                     Layout.fillWidth: true
 
                     ColumnLayout {
@@ -97,48 +93,26 @@ Item {
 
                         // padding*: 2
                         Label {
-                            horizontalAlignment: Text.AlignLeft
-                            text: qsTr("FlightGear is free and open source software, licensed")
-                        }
-
-                        Label {
-                            horizontalAlignment: Text.AlignLeft
-                            text: qsTr("under the GNU General Public License Version 2.")
-                        }
-
-                        Label {
-                            horizontalAlignment: Text.AlignLeft
-                            text: qsTr("Get new versions, add-ons, forum, wiki and more")
-                        }
-
-                        Label {
-                            horizontalAlignment: Text.AlignLeft
-                            text: qsTr("from the web-site at http://www.flightgear.org/ for free.")
-                        }
-
-                        Label {
-                            horizontalAlignment: Text.AlignLeft
-                            text: qsTr("Have a nice flight!")
+                            text: qsTr("FlightGear is free and open source software, licensed under the GNU General Public License Version 2. Get new versions, add-ons, forum, wiki and more from the web-site at http://www.flightgear.org/ for free. Have a nice flight!")
+                            Layout.maximumWidth: 600
+                            wrapMode: Text.WordWrap
+                            horizontalAlignment: Text.AlignHCenter
+                            Layout.fillWidth: true
                         }
                     } // ColumnLayout
                 }
 
-                Label {
-                    Layout.fillWidth: true
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: 2
-                    color: "#DFAC01"
-                }
+                HRule {}
 
                 Label {
-
                     text: qsTr("Version Information")
+                    font.pointSize: Style.subHeadingFontPixelSize
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
                 }
 
                 GroupBox {
+                    leftPadding: 48
                     Layout.fillWidth: true
 
                     ColumnLayout {
@@ -148,65 +122,60 @@ Item {
 
                         // padding*: 2
                         Label {
+                            text: qsTr("FlightGear Version: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMM")
                             // format*: FlightGear Version: %s
                             // property*: /sim/version/flightgear
                         }
 
                         Label {
+                            text: qsTr("SimGear Version: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMM")
                             // format*: SimGear Version: %s
                             // property*: /sim/version/simgear
                         }
 
                         Label {
+                            text: qsTr("OpenSceneGraph Version: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMM")
                             // format*: OpenSceneGraph Version: %s
                             // property*: /sim/version/openscenegraph
                         }
 
                         Label {
+                            text: qsTr("Build Id: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMM")
                             // format*: Build Id: %s
                             // property*: /sim/version/build-id
                         }
 
                         Label {
+                            text: qsTr("Build Number: %d")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMM")
                             // format*: Build Number: %d
                             // property*: /sim/version/build-number
                         }
 
                         Label {
+                            text: qsTr("Revision: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: Revision: %s
                             // property*: /sim/version/revision
                         }
                     } // ColumnLayout
                 }
 
+                HRule {}
+
                 Label {
+                    text: qsTr("Graphics / OpenGL Information")
+                    font.pointSize: Style.subHeadingFontPixelSize
+                    horizontalAlignment: Text.AlignHCenter
                     Layout.fillWidth: true
                 }
 
-                Rectangle {
-                    width: parent.width
-                    height: 2
-                    color: "#DFAC01"
-                }
-
-                Label {
-
-                    text: qsTr("Graphics/OpenGL Information")
-                }
-
                 GroupBox {
+                    leftPadding: 48
                     Layout.fillWidth: true
 
                     ColumnLayout {
@@ -216,43 +185,43 @@ Item {
 
                         // padding*: 2
                         Label {
+                            text: qsTr("OpenGL Vendor: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: OpenGL Vendor: %s
                             // property*: /sim/rendering/gl-vendor
                         }
 
                         Label {
+                            text: qsTr("OpenGL Renderer: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: OpenGL Renderer: %s
                             // property*: /sim/rendering/gl-renderer
                         }
 
                         Label {
+                            text: qsTr("OpenGL Version: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: OpenGL Version: %s
                             // property*: /sim/rendering/gl-version
                         }
 
                         Label {
+                            text: qsTr("GLSL Version: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: GLSL Version: %s
                             // property*: /sim/rendering/gl-shading-language-version
                         }
 
                         Label {
+                            text: qsTr("Max Texture Size: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: Max Texture Size: %s
                             // property*: /sim/rendering/max-texture-size
                         }
 
                         Label {
+                            text: qsTr("Depth Buffer Bits: %s")
                             horizontalAlignment: Text.AlignLeft
-                            text: qsTr("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                             // format*: Depth Buffer Bits: %s
                             // property*: /sim/rendering/depth-buffer-bits
                         }
@@ -261,11 +230,7 @@ Item {
             } // ColumnLayout
         }
 
-        Rectangle {
-            width: parent.width
-            height: 2
-            color: "#DFAC01"
-        }
+        HRule {}
 
         GroupBox {
             Layout.fillWidth: true

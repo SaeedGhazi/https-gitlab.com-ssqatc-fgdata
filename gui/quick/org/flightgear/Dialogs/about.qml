@@ -9,7 +9,7 @@ import org.flightgear.Dialogs 1.0
 Item {
     id: about
     width: 640
-    height: 665
+    height: 685
 
     Rectangle {
         anchors.fill: parent
@@ -48,7 +48,7 @@ Item {
             } // RowLayout
         }
 
-        HRule {}
+        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -102,7 +102,7 @@ Item {
                     } // ColumnLayout
                 }
 
-                HRule {}
+                HorizontalLine {}
 
                 Label {
                     text: qsTr("Version Information")
@@ -165,7 +165,7 @@ Item {
                     } // ColumnLayout
                 }
 
-                HRule {}
+                HorizontalLine {}
 
                 Label {
                     text: qsTr("Graphics / OpenGL Information")
@@ -230,7 +230,7 @@ Item {
             } // ColumnLayout
         }
 
-        HRule {}
+        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true

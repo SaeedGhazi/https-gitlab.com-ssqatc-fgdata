@@ -48,7 +48,7 @@ Item {
             } // RowLayout
         }
 
-        HRule {}
+        HorizontalLine {}
 
         ListView {
             width: 230
@@ -57,7 +57,7 @@ Item {
             model: "/sim/aircraft-types"
         }
 
-        HRule {}
+        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true

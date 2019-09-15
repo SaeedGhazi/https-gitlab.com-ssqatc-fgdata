@@ -18,7 +18,6 @@ QtObject
 
     readonly property string activeColor: Qt.darker(themeColor)
     readonly property string taggedColor: "#dfac01"
-    readonly property string ruleColor: "#dfac01"
 
     readonly property string inactiveThemeColor: "#9f9f9f"
     readonly property string disabledThemeColor: disabledTextColor

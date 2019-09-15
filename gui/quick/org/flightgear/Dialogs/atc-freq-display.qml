@@ -48,7 +48,7 @@ Item {
             } // RowLayout
         }
 
-        HRule {}
+        HorizontalLine {}
 
         GroupBox {
             id: frequency_list
@@ -82,7 +82,7 @@ Item {
             }
         }
 
-        HRule {}
+        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true

@@ -48,7 +48,7 @@ Item {
             } // RowLayout
         }
 
-        HRule {}
+        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true

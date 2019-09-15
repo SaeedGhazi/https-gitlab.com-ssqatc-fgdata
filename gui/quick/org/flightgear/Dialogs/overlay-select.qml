@@ -47,7 +47,7 @@ Item {
             } // RowLayout
         }
 
-        HRule {}
+        HorizontalLine {}
 
         ListView {
             Layout.fillWidth: true
@@ -57,6 +57,6 @@ Item {
             currentIndex: $value
         }
 
-        HRule {}
+        HorizontalLine {}
     }
 }

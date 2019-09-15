@@ -7,10 +7,9 @@ Rectangle {
     property string text
     property string hoverText: ""
     property bool enabled: true
-    property bool tagged: false
     property bool destructiveAction: false
 
-    readonly property string __baseColor: (destructiveAction ? Style.destructiveActionColor : (tagged ? Style.taggedColor : Style.themeColor))
+    readonly property string __baseColor: (destructiveAction ? Style.destructiveActionColor : Style.themeColor)
     signal clicked
 
     width: Math.max(Style.strutSize * 2, buttonText.implicitWidth + radius * 2)

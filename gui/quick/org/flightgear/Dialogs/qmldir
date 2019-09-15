@@ -8,7 +8,9 @@ ShaderDetailSetting 1.0 ShaderDetailSetting.qml
 AboutDialog 1.0 about.qml
 AiCarrier 1.0 AIcarrier.qml
 AiObjects 1.0 ai-objects.qml
+AirDialog 1.0 air.qml
 Aircraft 1.0 aircraft.qml
+Airports 1.0 airports.qml
 AtcFreqDisplay 1.0 atc-freq-display.qml
 ExitDialog 1.0 exit.qml
 FramesPerSecond 1.0 fps.qml

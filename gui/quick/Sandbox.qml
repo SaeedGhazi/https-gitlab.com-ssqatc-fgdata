@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
-//import FlightGear 1.0
+import FlightGear 1.0
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
@@ -35,8 +35,22 @@ Item {
         y: 40
     }
 
+    AirDialog {
+        id: air_dialog
+        visible: false
+        x: 200
+        y: 40
+    }
+
     Aircraft {
         id: aircraft_dialog
+        visible: false
+        x: 200
+        y: 40
+    }
+
+    Airports {
+        id: airports_dialog
         visible: false
         x: 200
         y: 40

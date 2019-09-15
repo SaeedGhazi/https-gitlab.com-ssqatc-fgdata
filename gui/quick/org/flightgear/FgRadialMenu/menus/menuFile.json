@@ -1,0 +1,65 @@
+{
+    "controlItems": {
+        "menuItems": [
+            {
+                "id": "menuFile_ctrl_screenshot",
+                "title": "Capture Screenshot",
+                "action": null
+            },
+            {
+                "id": "menuFile_ctrl_reset",
+                "title": "Reset",
+                "action": null
+            },
+            {
+                "id": "menuFile_ctrl_exit",
+                "title": "Exit",
+                "action": null
+            }
+        ]
+    },
+    "configureItems": {
+        "menuItems": [
+            {
+                "id": "menuFile_conf_screenshot",
+                "title": "Screenshot Folder",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_loadTape",
+                "title": "Load Flight Recorder Tape",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_saveTape",
+                "title": "Save Flight Recorder Tape",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_sound",
+                "title": "Sound Configuration",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_mouse",
+                "title": "Mouse Configuration",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_joystick",
+                "title": "Joystick Configuration",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_scenery",
+                "title": "Scenery Download",
+                "action": null
+            },
+            {
+                "id": "menuFile_conf_aircraft",
+                "title": "Aircraft Center (Experimental)",
+                "action": null
+            }
+       ]
+    }
+}

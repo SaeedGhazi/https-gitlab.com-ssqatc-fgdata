@@ -1,0 +1,85 @@
+{
+    "controlItems": {
+        "menuItems": [
+            {
+                "id": "menuView_ctrl_lookLeft",
+                "title": "Look Left",
+                "action": null
+            },
+            {
+                "id": "menuView_ctrl_lookRight",
+                "title": "Look Right",
+                "action": null
+            },
+            {
+                "id": "menuView_ctrl_lookForward",
+                "title": "Look Forward",
+                "action": null
+            },
+            {
+                "id": "menuView_ctrl_hud",
+                "title": "Toggle HUD",
+                "action": null
+            },
+            {
+                "id": "menuView_ctrl_glideslope",
+                "title": "Toggle Glideslope Tunnel",
+                "action": null
+            },
+            {
+                "id": "menuView_ctrl_fullscreen",
+                "title": "Toggle Fullscren",
+                "action": null
+            },
+            {
+                "id": "menuView_ctrl_replay",
+                "title": "Instant Replay",
+                "action": null
+            }
+        ]
+    },
+    "configureItems": {
+        "menuItems": [
+            {
+                "id": "menuView_conf_view",
+                "title": "View Options",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_rendering",
+                "title": "Rendering Options",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_cockpitView",
+                "title": "Cockpit View Options",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_Hud",
+                "title": "HUD Properties",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_LodRange",
+                "title": "LOD Ranges",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_viewPosition",
+                "title": "View Position",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_earthView",
+                "title": "Earthview Orbital Rendering",
+                "action": null
+            },
+            {
+                "id": "menuView_conf_stereoscopic",
+                "title": "Stereoscopic View Options",
+                "action": null
+            }
+       ]
+    }
+}

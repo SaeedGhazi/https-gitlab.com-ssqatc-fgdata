@@ -1,0 +1,61 @@
+{
+    "default": "menuView",
+
+    "menuItems": [
+        {
+            "id": "menuFile",
+            "title": "File",
+            "definition": "menuFile.json"
+        },
+        {
+            "id": "menuView",
+            "title": "View",
+            "definition": "menuView.json"
+        },
+        {
+            "id": "menuLocation",
+            "title": "Location",
+            "definition": "menuLocation.json"
+        },
+        {
+            "id": "menuAutopilot",
+            "title": "Autopilot",
+            "definition": "menuAutopilot.json"
+        },
+        {
+            "id": "menuEnvironment",
+            "title": "Environment",
+            "definition": "menuEnvironment.json"
+        },
+        {
+            "id": "menuEquipment",
+            "title": "Equipment",
+            "definition": "menuEquipment.json"
+        },
+        {
+            "id": "menuAI",
+            "title": "AI",
+            "definition": "menuAI.json"
+        },
+        {
+            "id": "menuMultiplayer",
+            "title": "Multiplayer",
+            "definition": "menuMultiplayer.json"
+        },
+        {
+            "id": "menuDeveloper",
+            "title": "Developer",
+            "definition": "menuDeveloper.json"
+        },
+        {
+            "id": "menuHelp",
+            "title": "Help",
+            "definition": "menuHelp.json"
+        },
+        {
+            "id": "menuHelpAircraft",
+            "title": "Aircraft Help",
+            "definition": "menuHelpAircraft.json"
+        }
+    ]
+}

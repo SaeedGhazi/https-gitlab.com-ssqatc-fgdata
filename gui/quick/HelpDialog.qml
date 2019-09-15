@@ -8,3 +8,4 @@ Rectangle {
     Text {
         text: "Help UI";
     }
+}

@@ -935,8 +935,8 @@ var screenWidthCompens = {
 
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	views = props.globals.getNode("/sim").getChildren("view");
-	fovProp = props.globals.getNode("/sim/current-view/field-of-view");
+	views = props.globals.getNode("/sim", 1).getChildren("view");
+	fovProp = props.globals.getNode("/sim/current-view/field-of-view", 1);
 	point.init();
 
 	setlistener("/sim/current-view/view-number", func(n) {

@@ -22,7 +22,11 @@ var showDialog = func(name) {
 # Enable/disable named menu entry
 #
 var menuEnable = func(searchname, state) {
-    foreach (var menu; props.globals.getNode("/sim/menubar/default").getChildren("menu")) {
+    var menubar = props.globals.getNode("/sim/menubar/default");
+    if (menubar == nil)
+        return;
+
+    foreach (var menu; menubar.getChildren("menu")) {
         foreach (var name; menu.getChildren("name")) {
             if (name.getValue() == searchname) {
                 menu.getNode("enabled").setBoolValue(state);
@@ -142,7 +146,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
       return 1;
     }
     menuEnable("autopilot", isAutopilotMenuEnabled() );
-    menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks").getChildren("js")));
+    menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks", 1).getChildren("js")));
     menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt/enabled"));
     menuEnable("rembrandt-buffers-choice", getprop("/sim/rendering/rembrandt/enabled"));
     menuEnable("stereoscopic-options", !getprop("/sim/rendering/rembrandt/enabled"));
@@ -173,7 +177,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
     var p = "/sim/rendering/precipitation-";
     var precip_gui = getprop(p ~ "gui-enable");
     var precip_ac = getprop(p ~ "aircraft-enable");
-    props.globals.getNode(p ~ "enable").setAttribute("userarchive", 0); # TODO remove later
+    props.globals.getNode(p ~ "enable", 1).setAttribute("userarchive", 0); # TODO remove later
     var set_precip = func setprop(p ~ "enable", precip_gui and precip_ac);
     setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()),1);
     setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()),1);
@@ -1470,7 +1474,7 @@ elsif (qualityLevel != nil) {
 # in the Rendering Options dialog
 var update_shader_settings = func() {
     if (!getprop("/sim/rendering/shaders/custom-settings")){
-        var qualityLvl = getprop("/sim/rendering/shaders/quality-level-internal");
+        var qualityLvl = getprop("/sim/rendering/shaders/quality-level-internal") or 0;
         setprop("/sim/rendering/shaders/quality-level", qualityLvl);
         setprop("/sim/rendering/shaders/landmass",qualityLvl);
         setprop("/sim/rendering/shaders/urban",qualityLvl);

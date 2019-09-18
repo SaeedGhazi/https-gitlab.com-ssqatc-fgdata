@@ -110,21 +110,40 @@ var RouteManagerDelegate = {
     }
 };
 
+var GPSPath = "/instrumentation/gps";
 
-var FMSDelegate = {
+# this delegate corresponds to the default behaviour of the built-in GPS.
+# depending on the real GPS/FMS you are modelling, you probably need to
+# replace this with your own.
+#
+# To do that, just set /autopilot/route-manager/disable-fms to true, which
+# will block creation of this delegate.
+#
+# Of course you are then responsible for many basic FMS functions, such as
+# route sequencing and activation
+#
+
+var DefaultGPSDeleagte = {
     new: func(fp) {
-    # if this property is set, don't build a delegate at all
-    if (getprop('/autopilot/route-manager/disable-fms'))
-        return nil;
+        # if this property is set, don't build a delegate at all
+        if (getprop('/autopilot/route-manager/disable-fms'))
+            return nil;
 
-        var m = { parents: [FMSDelegate], flightplan:fp, landingCheck:nil };
+        var m = { parents: [DefaultGPSDeleagte], flightplan:fp, landingCheck:nil };
+
+        printlog('info', 'creating default GPS FPDelegate');
+
+        # tell the GPS C++ code we will do sequencing ourselves, so it can disable
+        # its legacy logic for this
+        setprop(GPSPath ~ '/config/delegate-sequencing', 1);
 
         # make FlightPlan behaviour match GPS config state
-        fp.followLegTrackToFix = getprop('/instrumentation/gps/config/follow-leg-track-to-fix');
+        fp.followLegTrackToFix = getprop(GPSPath ~ '/config/follow-leg-track-to-fix') or 0;
 
         # similarly, make FlightPlan follow the performance category settings
-        fp.aircraftCategory = getprop('/autopilot/settings/icao-aircraft-category');
+        fp.aircraftCategory = getprop('/autopilot/settings/icao-aircraft-category') or 'A';
 
+        m._modeProp = props.globals.getNode(GPSPath ~ '/mode');
         return m;
     },
 
@@ -133,24 +152,102 @@ var FMSDelegate = {
         var wow = getprop('gear/gear[0]/wow');
         var gs = getprop('velocities/groundspeed-kt');
         if (wow and (gs < 25))  {
-          printlog('info', 'touchdown on destination runway, end of route.');
+          printlog('info', 'GPS saw speed < 25kts on destination runway, end of route.');
           me.landingCheck.stop();
           # record touch-down time?
           me.flightplan.finish();
         }
     },
 
+    _selectOBSMode: func
+    {
+        setprop(GPSPath ~ "/command", "obs");
+    },
+
     waypointsChanged: func
     {
     },
 
+    activated: func
+    {
+        if (!me.flightplan.active)
+            return;
+
+        printlog('info', 'flightplan activated, default GPS to LEG mode');
+        setprop(GPSPath ~ "/command", "leg");
+
+        if (getprop(GPSPath ~ '/wp/wp[1]/from-flag')) {
+            printlog('info', 'at GPS activation, already passed active WP, sequencing');
+            me.sequence();
+        }
+    },
+
+    deactivated: func
+    {
+        if (me._modeProp.getValue() == 'leg') {
+            printlog('info', 'flightplan deactivated, default GPS to OBS mode');
+            me._selectOBSMode();
+        }
+    },
+
     endOfFlightPlan: func
     {
-      printlog('info', 'end of flight-plan');
+        if (me._modeProp.getValue() == 'leg') {
+            printlog('info', 'end of flight-plan, switching GPS to OBS mode');
+            me._selectOBSMode();
+        }
+    },
+
+    cleared: func
+    {
+        if (!me.flightplan.active)
+            return;
+
+        if (me._modeProp.getValue() == 'leg') {
+            printlog('info', 'flight-plan cleared, switching GPS to OBS mode');
+            me._selectOBSMode();
+        }
+    },
+
+    sequence: func
+    {
+        if (!me.flightplan.active)
+            return;
+
+        var mode = me._modeProp.getValue();
+        if (mode == 'dto') {
+            # direct-to is done, check if we should resume the following leg
+            var index = me.flightplan.indexOfWP(getprop(GPSPath ~ '/wp/wp[1]/latitude-deg'),
+                                                getprop(GPSPath ~ '/wp/wp[1]/longitude-deg'));
+            if (index >= 0) {
+                printlog("info", "default GPS reached Direct-To, resuming FP leg at " ~ index);
+                me.flightplan.current = index + 1;
+                setprop(GPSPath ~ "/command", "leg");
+            } else {
+                # revert to OBS mode
+                printlog("info", "default GPS reached Direct-To, resuming to OSB");
+                me._selectOBSMode();
+            }
+        } else if (mode == 'leg') {
+            # standard leq sequencing
+            var nextIndex = me.flightplan.current + 1;
+            if (nextIndex >= me.flightplan.numWaypoints()) {
+                printlog("info", "default GPS sequencing, finishing flightplan");
+                me.flightplan.finish();
+            } else {
+                printlog("info", "default GPS sequencing to next WP");
+                me.flightplan.current = nextIndex;
+            }
+        } else {
+            # OBS, do nothing
+        }
     },
 
     currentWaypointChanged: func
     {
+        if (!me.flightplan.active)
+            return;
+
         if (me.landingCheck != nil) {
             me.landingCheck.stop();
             me.landingCheck = nil; # delete timer
@@ -175,12 +272,12 @@ var FMSDelegate = {
             (activeRunway != nil) and
             (activeRunway.id == me.flightplan.destination_runway.id))
         {
-            me.landingCheck = maketimer(2.0, me, FMSDelegate._landingCheckTimeout);
+            me.landingCheck = maketimer(2.0, me, DefaultGPSDeleagte._landingCheckTimeout);
             me.landingCheck.start();
         }
     }
 };
 
-registerFlightPlanDelegate(FMSDelegate.new);
+registerFlightPlanDelegate(DefaultGPSDeleagte.new);
 registerFlightPlanDelegate(RouteManagerDelegate.new);
 

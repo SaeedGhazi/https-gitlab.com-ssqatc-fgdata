@@ -1,8 +1,65 @@
 {
     "controlItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuEquipment_ctrl_map",
+                "title": "Map",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_ctrl_mapCanvas",
+                "title": "Map - Canvas",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_ctrl_mapBrowser",
+                "title": "Map - Browser",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_ctrl_stopwatch",
+                "title": "Stopwatch",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_ctrl_radio",
+                "title": "Radio",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_ctrl_gps",
+                "title": "GPS",
+                "action": null
+            }
+        ]
     },
     "configureItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuEquipment_conf_fuelAndPayload",
+                "title": "Fuel and Payload",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_conf_instrumentSettings",
+                "title": "Instruments",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_conf_failuresRandom",
+                "title": "Random Failures",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_conf_failuresSystem",
+                "title": "System Failures",
+                "action": null
+            },
+            {
+                "id": "menuEquipment_conf_failuresInstrument",
+                "title": "Instrument Failures",
+                "action": null
+            }
+        ]
     }
 }

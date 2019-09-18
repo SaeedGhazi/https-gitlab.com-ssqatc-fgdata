@@ -4,6 +4,7 @@ Rectangle {
     id: control
     width: 190
     height: 30
+    radius: 8
     border.width: 1
     color: index < 8 ? "lightsteelblue" : "#d9d9d9"
 

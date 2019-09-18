@@ -1,8 +1,30 @@
 {
     "controlItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuLocation_ctrl_randomAttitude",
+                "title": "Random Attitude",
+                "action": null
+            }
+        ]
     },
     "configureItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuLocation_conf_positionInAir",
+                "title": "Position in Air",
+                "action": null
+            },
+            {
+                "id": "menuLocation_conf_gotoAirport",
+                "title": "Goto Airport",
+                "action": null
+            },
+            {
+                "id": "menuLocation_conf_towerPosition",
+                "title": "Tower Position",
+                "action": null
+            }
+        ]
     }
 }

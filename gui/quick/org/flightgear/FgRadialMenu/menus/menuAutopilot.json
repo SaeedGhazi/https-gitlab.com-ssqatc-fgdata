@@ -1,8 +1,30 @@
 {
     "controlItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuAutopilot_ctrl_waypointPrev",
+                "title": "Previous",
+                "action": null
+            },
+            {
+                "id": "menuAutopilot_ctrl_waypointNext",
+                "title": "Next",
+                "action": null
+            }
+        ]
     },
     "configureItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuAutopilot_conf_settings",
+                "title": "Settings",
+                "action": null
+            },
+            {
+                "id": "menuAutopilot_conf_routeManager",
+                "title": "Route Manager",
+                "action": null
+            }
+        ]
     }
 }

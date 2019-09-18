@@ -3,6 +3,32 @@
         "menuItems": []
     },
     "configureItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuEnvironment_conf_weather",
+                "title": "Weather",
+                "action": null
+            },
+            {
+                "id": "menuEnvironment_conf_environmentSettings",
+                "title": "Environment Settings",
+                "action": null
+            },
+            {
+                "id": "menuEnvironment_conf_timeSettings",
+                "title": "Time Settings",
+                "action": null
+            },
+            {
+                "id": "menuEnvironment_conf_wildfire",
+                "title": "Wildfire",
+                "action": null
+            },
+            {
+                "id": "menuEnvironment_conf_volcano",
+                "title": "Volcanoes",
+                "action": null
+            }
+        ]
     }
 }

@@ -1,6 +1,47 @@
 {
     "controlItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuHelp_ctrl_help",
+                "title": "Help",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_documents",
+                "title": "Documents",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_about",
+                "title": "About",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_checklistAircraft",
+                "title": "Checklist - Aircraft",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_keymapBasic",
+                "title": "Hot-Key - Basic",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_keymapCommon",
+                "title": "Hot-Key - Common",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_keymapAircraft",
+                "title": "Hot-Key - Aircraft",
+                "action": null
+            },
+            {
+                "id": "menuHelp_ctrl_tutorial",
+                "title": "Start Tutorial",
+                "action": null
+            }
+        ]
     },
     "configureItems": {
         "menuItems": []

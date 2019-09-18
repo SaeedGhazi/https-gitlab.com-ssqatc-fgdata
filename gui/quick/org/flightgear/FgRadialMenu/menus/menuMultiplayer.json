@@ -1,8 +1,50 @@
 {
     "controlItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuMultiplay_ctrl_chat",
+                "title": "Chat",
+                "action": null
+            },
+            {
+                "id": "menuMultiplay_ctrl_chatMenu",
+                "title": "Chat Menu",
+                "action": null
+            },
+            {
+                "id": "menuMultiplay_ctrl_online",
+                "title": "Player List",
+                "action": null
+            }
+        ]
     },
     "configureItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuMultiplayer_conf_settings",
+                "title": "Settings",
+                "action": null
+            },
+            {
+                "id": "menuMultiplayer_conf_fgcom",
+                "title": "FGCOM Settings",
+                "action": null
+            },
+            {
+                "id": "menuMultiplayer_conf_carrier",
+                "title": "Carrier Settings",
+                "action": null
+            },
+            {
+                "id": "menuMultiplayer_conf_lag",
+                "title": "Lag Adjust",
+                "action": null
+            },
+            {
+                "id": "menuMultiplayer_conf_swift",
+                "title": "Swift Settings",
+                "action": null
+            }
+        ]
     }
 }

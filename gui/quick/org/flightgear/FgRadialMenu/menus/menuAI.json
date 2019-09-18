@@ -3,6 +3,37 @@
         "menuItems": []
     },
     "configureItems": {
-        "menuItems": []
+        "menuItems": [
+            {
+                "id": "menuAI_conf_scenario",
+                "title": "Scenarios",
+                "action": null
+            },
+            {
+                "id": "menuAI_conf_AtcSearch",
+                "title": "ATC Search",
+                "action": null
+            },
+            {
+                "id": "menuAI_conf_wingman",
+                "title": "Wingman",
+                "action": null
+            },
+            {
+                "id": "menuAI_conf_tanker",
+                "title": "Tanker",
+                "action": null
+            },
+            {
+                "id": "menuAI_conf_jetway",
+                "title": "Jetway",
+                "action": null
+            },
+            {
+                "id": "menuAI_conf_objects",
+                "title": "AI Objects",
+                "action": null
+            }
+        ]
     }
 }

@@ -6,59 +6,27 @@ import FlightGear 1.0
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
-Rectangle {
-    id: root
+
+DialogBase {
+    id: aboutDialog
 
     width: 640
-    height: 700
-    anchors.centerIn: parent
-    border.width: 1
-    border.color: Style.frameColor
-    color: Style.windowColor
-    opacity: Style.panelOpacity
+    height: 660
+    position: Qt.point(80, 80)
 
-    signal closed(string windowId)
+    windowId: root.id
+    title: "About FlightGear"
+
+    onClosed: {
+        dialogTest.visible = false
+    }
+    onPopout: {
+    }
+
+    // ======= content
 
     ColumnLayout {
         width: parent.width
-
-        GroupBox {
-            id: groupBox
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                Label {
-                    text: qsTr("About FlightGear")
-                    font.pointSize: Style.headingFontPixelSize
-                    font.bold: true
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                Rectangle {
-                    id: closeBox
-                    width: 20
-                    height: 20
-                    color: mouseClose.containsMouse ? Style.activeColor : Style.themeColor
-                    anchors.right: parent.right
-                    anchors.rightMargin: Style.margin
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    MouseArea {
-                        id: mouseClose
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
-                            root.closed(root.id);
-                        }
-                    }
-                }
-            } // RowLayout
-        }
-
-        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -239,50 +207,38 @@ Rectangle {
                 }
             } // ColumnLayout
         }
-
-        HorizontalLine {}
-
-        GroupBox {
-            id: buttonTray
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                Label {
-                    Layout.fillWidth: true
-                }
-
-                Button {
-                    text: qsTr("Close")
-                    // equal*: true
-                    // default*: true
-                    // key*: qsTr("Esc")
-                    // binding*: " dialog-close "
-
-                    onClicked: {
-                        root.closed(root.id);
-                    }
-                }
-
-                Button {
-                    text: qsTr("Take Screenshot")
-                    // equal*: true
-                    // default*: false
-                    // binding*: " nasal fgcommand("screen-capture"); "
-                }
-
-                Button {
-                    text: qsTr("Copy to Clipboard")
-                    // equal*: true
-                    // default*: false
-                    // binding*: " nasal var properties = ["gl-vendor","gl-version","gl-renderer", "gl-shading-language-version"]; var data = ""; var path = "/sim/rendering/"; foreach(var p; properties) data ~= p ~":"~getprop(path~p) ~"\n"; clipboard.setText(data); gui.popupTip("Copied version information to clipboard!"); "
-                }
-
-                Label {
-                    Layout.fillWidth: true
-                }
-            } // RowLayout
-        }
     } // ColumnLayout
+
+    // ======= content end
+
+    buttons: Row {
+        anchors.centerIn: parent
+        spacing: 20
+        height: childrenRect.implicitHeight
+
+        Button {
+            text: qsTr("Close")
+
+            onClicked: {
+                root.closed(root.id);
+            }
+        }
+
+        Button {
+            text: qsTr("Take Screenshot")
+
+            onClicked: {
+                // binding*: " nasal fgcommand("screen-capture"); "
+            }
+        }
+
+        Button {
+            text: qsTr("Copy to Clipboard")
+
+            onClicked: {
+                // binding*: " nasal var properties = ["gl-vendor","gl-version","gl-renderer", "gl-shading-language-version"]; var data = ""; var path = "/sim/rendering/"; foreach(var p; properties) data ~= p ~":"~getprop(path~p) ~"\n"; clipboard.setText(data); gui.popupTip("Copied version information to clipboard!"); "
+            }
+            
+        }
+    } // buttons
 }

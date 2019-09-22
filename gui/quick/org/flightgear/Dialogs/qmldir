@@ -13,7 +13,7 @@ SettingsDialog 1.0 SettingsDialog.qml
 SoundVolumeSetting 1.0 SoundVolumeSetting.qml
 ShaderDetailSetting 1.0 ShaderDetailSetting.qml
 
-AboutDialog 1.0 about.qml
+AboutDialog 1.0 AboutDialog.qml
 AiCarrier 1.0 AIcarrier.qml
 AiObjects 1.0 ai-objects.qml
 AirDialog 1.0 air.qml

@@ -16,7 +16,7 @@ Rectangle
     border.width: 1
     border.color: Style.frameColor
     color: Style.windowColor
-    opacity: Style.panelOpacity
+    opacity: Style.windowOpacity
 
     property string windowId: ""
     property alias title: titleBar.title

@@ -26,9 +26,11 @@ Item {
     AirportsDialog { id: airports_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     AtcFrequenciesDialog { id: atc_freq_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     ExitDialog { id: exit_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
+    HelpDialog_BasicKeys { id: help_basic_keys_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
+    OverlaySelectDialog { id: overlay_select_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
+
+    // Overlays
     FramesPerSecond { id: fps_dialog; visible: false; x: 200; y: 40 }
     FrameLatency { id: frame_latency_dialog; visible: false; x: 200; y: 40 }
-    HelpBasicKeys { id: help_basic_keys_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
-    OverlaySelect { id: overlay_select_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     SceneryLoading { id: scenery_loading_dialog; visible: false; x: 200; y: 40 }
 }

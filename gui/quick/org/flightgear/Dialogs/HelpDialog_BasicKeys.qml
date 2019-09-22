@@ -5,59 +5,26 @@ import QtQuick.Controls 2.12
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
-Rectangle {
-    id: root
+DialogBase {
+    id: helpDialog_BasicKeys
 
     width: 640
     height: 400
-    anchors.centerIn: parent
-    border.width: 1
-    border.color: Style.frameColor
-    color: Style.windowColor
-    opacity: Style.panelOpacity
+    position: Qt.point(80, 80)
 
-    signal closed(string windowId)
+    windowId: helpDialog_BasicKeys.id
+    title: "Basic Keys"
+
+    onClosed: {
+        root.visible = false
+    }
+    onPopout: {
+    }
+
+    // ======= content
 
     ColumnLayout {
         width: parent.width
-
-        GroupBox {
-            id: groupBox
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                Label {
-                    text: qsTr("Basic Keys")
-                    font.pointSize: Style.headingFontPixelSize
-                    font.bold: true
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                Rectangle {
-                    id: closeBox
-                    width: 20
-                    height: 20
-                    color: mouseClose.containsMouse ? Style.activeColor : Style.themeColor
-                    anchors.right: parent.right
-                    anchors.rightMargin: Style.margin
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    MouseArea {
-                        id: mouseClose
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
-                            root.closed(root.id);
-                        }
-                    }
-                }
-            } // RowLayout
-        }
-
-        HorizontalLine {}
 
         ListModel {
             id: shortcutKeysModel
@@ -110,36 +77,21 @@ Rectangle {
                 }
             }
         }
-
-        HorizontalLine {}
-
-        GroupBox {
-            id: buttonTray
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                Label {
-                    Layout.fillWidth: true
-                }
-
-                Button {
-                    text: qsTr("Close")
-                    // equal*: true
-                    // default*: true
-                    // key*: qsTr("Esc")
-                    // binding*: " dialog-close "
-
-                    onClicked: {
-                        root.closed(root.id);
-                    }
-                }
-
-                Label {
-                    Layout.fillWidth: true
-                }
-            } // RowLayout
-        }
     } // ColumnLayout
+
+    // ======= content end
+
+    buttons: Row {
+        anchors.centerIn: parent
+        spacing: 20
+        height: childrenRect.implicitHeight
+
+        Button {
+            text: qsTr("Close")
+
+            onClicked: {
+                helpDialog_BasicKeys.closed(helpDialog_BasicKeys.id);
+            }
+        }
+    } // buttons
 }

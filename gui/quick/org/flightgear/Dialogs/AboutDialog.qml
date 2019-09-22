@@ -14,11 +14,11 @@ DialogBase {
     height: 660
     position: Qt.point(80, 80)
 
-    windowId: root.id
+    windowId: aboutDialog.id
     title: "About FlightGear"
 
     onClosed: {
-        dialogTest.visible = false
+        root.visible = false
     }
     onPopout: {
     }
@@ -220,7 +220,7 @@ DialogBase {
             text: qsTr("Close")
 
             onClicked: {
-                root.closed(root.id);
+                aboutDialog.closed(aboutDialog.id);
             }
         }
 

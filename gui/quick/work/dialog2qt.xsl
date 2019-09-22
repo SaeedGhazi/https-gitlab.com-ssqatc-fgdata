@@ -163,7 +163,7 @@ Item<br/>
 </xsl:template>
 
 <xsl:template match="group">
-    <br/>&#160;&#160;GroupBox {<br/>
+    <br/>&#160;&#160;Item {<br/>
     &#160;&#160;&#160;&#160;Layout.fillWidth: true<br/>
         <xsl:apply-templates select="child::*"/>
     &#160;&#160;}<br/>
@@ -184,7 +184,7 @@ Item<br/>
 </xsl:template>
 
 <xsl:template match="input">
-    <br/>&#160;&#160;Text {<br/>
+    <br/>&#160;&#160;TextInput {<br/>
         <xsl:apply-templates select="child::*"/>
     &#160;&#160;}<br/>
 </xsl:template>

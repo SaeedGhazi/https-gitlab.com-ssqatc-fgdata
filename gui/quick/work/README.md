@@ -29,7 +29,11 @@ Copy a PUI xml dialog file into the **work** folder
 Within the **work** folder, edit the xml file to add the XSLT reference on the second line...
 
     <?xml version="1.0"?>
-    <?xml-stylesheet type="application/xslt+xml" href="transform2qt.xsl"?>
+    <?xml-stylesheet type="application/xslt+xml" href="dialog2qt.xsl"?>
+	...
+
+    <?xml version="1.0"?>
+    <?xml-stylesheet type="application/xslt+xml" href="menu2qt.xsl"?>
 	...
 
 Remain within the **work** folder and start up a HTTP server (either Python or Node should work)

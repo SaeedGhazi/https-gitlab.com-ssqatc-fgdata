@@ -19,7 +19,7 @@ AiObjectsDialog 1.0 AiObjectsDialog.qml
 AirDialog 1.0 AirDialog.qml
 AircraftDialog 1.0 AircraftDialog.qml
 AirportsDialog 1.0 AirportsDialog.qml
-AtcFreqDisplay 1.0 atc-freq-display.qml
+AtcFrequenciesDialog 1.0 AtcFrequenciesDialog.qml
 ExitDialog 1.0 exit.qml
 FramesPerSecond 1.0 fps.qml
 FrameLatency 1.0 frame-latency.qml

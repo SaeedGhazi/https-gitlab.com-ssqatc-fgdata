@@ -6,18 +6,18 @@ import FlightGear 1.0
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
-Item {
-    id: overlay_select
+Rectangle {
+    id: root
+
     width: 300
     height: 280
+    anchors.centerIn: parent
+    border.width: 1
+    border.color: Style.frameColor
+    color: Style.windowColor
+    opacity: Style.panelOpacity
 
-    Rectangle {
-        anchors.fill: parent
-        border.width: 1
-        border.color: Style.frameColor
-        color: Style.windowColor
-        opacity: Style.panelOpacity
-    }
+    signal closed(string windowId)
 
     ColumnLayout {
         width: parent.width
@@ -36,13 +36,23 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                 }
 
-                Button {
-                    text: qsTr("")
-                    // key*: qsTr("Esc")
+                Rectangle {
+                    id: closeBox
                     width: 20
                     height: 20
-                    // border*: 2
-                    // binding*: " dialog-close "
+                    color: mouseClose.containsMouse ? Style.activeColor : Style.themeColor
+                    anchors.right: parent.right
+                    anchors.rightMargin: Style.margin
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    MouseArea {
+                        id: mouseClose
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: {
+                            root.closed(root.id);
+                        }
+                    }
                 }
             } // RowLayout
         }

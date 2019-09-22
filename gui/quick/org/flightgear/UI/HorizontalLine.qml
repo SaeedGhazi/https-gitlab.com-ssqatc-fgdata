@@ -7,7 +7,11 @@ Item {
 
     Rectangle {
         x: Style.margin
+
         width: parent.width - (Style.margin * 2)
+        height: 1
         anchors.top: parent.verticalCenter
+
+        color: Style.themeColor
     }
 }

@@ -1,6 +1,14 @@
 module org.flightgear.Dialogs
 
+
+# Bases
+
+DialogBase 1.0 DialogBase.qml
 RootSettingsPage 1.0 RootSettingsPage.qml
+
+
+# Dialogs
+
 SettingsDialog 1.0 SettingsDialog.qml
 SoundVolumeSetting 1.0 SoundVolumeSetting.qml
 ShaderDetailSetting 1.0 ShaderDetailSetting.qml
@@ -15,6 +23,7 @@ AtcFreqDisplay 1.0 atc-freq-display.qml
 ExitDialog 1.0 exit.qml
 FramesPerSecond 1.0 fps.qml
 FrameLatency 1.0 frame-latency.qml
+HelpBasicKeys 1.0 HelpBasicKeys.qml
 OverlaySelect 1.0 overlay-select.qml
 SceneryLoading 1.0 scenery_loading.qml
 

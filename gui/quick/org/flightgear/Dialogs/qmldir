@@ -17,7 +17,7 @@ AboutDialog 1.0 AboutDialog.qml
 AiCarrierDialog 1.0 AiCarrierDialog.qml
 AiObjectsDialog 1.0 AiObjectsDialog.qml
 AirDialog 1.0 AirDialog.qml
-Aircraft 1.0 aircraft.qml
+AircraftDialog 1.0 AircraftDialog.qml
 Airports 1.0 airports.qml
 AtcFreqDisplay 1.0 atc-freq-display.qml
 ExitDialog 1.0 exit.qml

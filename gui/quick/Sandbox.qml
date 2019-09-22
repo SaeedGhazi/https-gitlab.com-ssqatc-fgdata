@@ -22,7 +22,7 @@ Item {
     AiCarrierDialog { id: ai_carrier_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     AiObjectsDialog { id: ai_objects_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     AirDialog { id: air_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
-    Aircraft { id: aircraft_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
+    AircraftDialog { id: aircraft_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     Airports { id: airports_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     AtcFreqDisplay { id: atc_freq_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     ExitDialog { id: exit_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }

@@ -52,6 +52,14 @@ var Node = {
         return !!val;
     },
 
+    getIntValue : func {
+        return math.round(me.getValue());
+    },
+
+    getDoubleValue : func {
+        return num(me.getValue());
+    },
+
     remove : func {
         if((var p = me.getParent()) == nil) return nil;
         p.removeChild(me.getName(), me.getIndex());
@@ -237,11 +245,11 @@ var setAll = func(base, child, value) {
 }
 
 # createNodeObjectsFromHash - create nasal node objects from hash
-# property_list: hash; where keys are variable names and values are 
+# property_list: hash; where keys are variable names and values are
 #                property paths
 #                { foo: "/some/prop/foo", bar: "/some/other/prop", }
 # namespace:     optional; variables (objects) are created in this namespace
-#                defaults to namespace of caller, e.g. after calling this 
+#                defaults to namespace of caller, e.g. after calling this
 #                you can use foo.getValue() or bar.addChild()
 #
 var createNodeObjectsFromHash = func (property_list, namespace = nil) {
@@ -414,7 +422,7 @@ var runBinding = func(node, module = nil) {
 #                                      }),
 #            UpdateManager.FromHashList(["pitch","roll"], 0.025, func(hdp)
 #                                      {
-#                                          obj.ladder.setTranslation (0.0, hdp.pitch * pitch_factor+pitch_offset);                                           
+#                                          obj.ladder.setTranslation (0.0, hdp.pitch * pitch_factor+pitch_offset);
 #                                          obj.ladder.setCenter (118,830 - hdp.pitch * pitch_factor-pitch_offset);
 #                                          obj.ladder.setRotation (-hdp.roll_rad);
 #                                          obj.roll_pointer.setRotation (hdp.roll_rad);
@@ -432,7 +440,7 @@ var runBinding = func(node, module = nil) {
 #           ]
 #
 #==== the update loop then becomes ======
-# 
+#
 #        foreach(var update_item; me.update_items)
 #        {
 #            # hdp is a data provider that can be used as the hashlist for the property

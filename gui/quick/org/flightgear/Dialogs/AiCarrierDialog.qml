@@ -6,58 +6,26 @@ import FlightGear 1.0
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
-Rectangle {
-    id: root
+DialogBase {
+    id: aiCarrierDialog
 
     width: 640
     height: 455
-    anchors.centerIn: parent
-    border.width: 1
-    border.color: Style.frameColor
-    color: Style.windowColor
-    opacity: Style.panelOpacity
+    position: Qt.point(80, 80)
 
-    signal closed(string windowId)
+    windowId: aiCarrierDialog.id
+    title: "AI Carrier Controls"
+
+    onClosed: {
+        root.visible = false
+    }
+    onPopout: {
+    }
+
+    // ======= content
 
     ColumnLayout {
         width: parent.width
-
-        GroupBox {
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                Label {
-                    text: qsTr("AI Carrier Controls")
-                    font.pointSize: Style.headingFontPixelSize
-                    font.bold: true
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                Rectangle {
-                    id: closeBox
-                    width: 20
-                    height: 20
-                    color: mouseClose.containsMouse ? Style.activeColor : Style.themeColor
-                    anchors.right: parent.right
-                    anchors.rightMargin: Style.margin
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    MouseArea {
-                        id: mouseClose
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
-                            root.closed(root.id);
-                        }
-                    }
-                }
-            } // RowLayout
-        }
-
-        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -151,51 +119,45 @@ Rectangle {
                 }
             } // RowLayout
         }
-
-        HorizontalLine {}
-
-        GroupBox {
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                // padding*: 6
-                Label {
-                    Layout.fillWidth: true
-                }
-
-                Button {
-                    text: qsTr("OK")
-                    // default*: true
-                    // equal*: true
-                    // binding*: " dialog-apply "
-                    // binding*: " dialog-close "
-                }
-
-                Button {
-                    text: qsTr("Apply")
-                    // equal*: true
-                    // binding*: " dialog-apply "
-                }
-
-                Button {
-                    text: qsTr("Reset")
-                    // equal*: true
-                    // binding*: " dialog-update "
-                }
-
-                Button {
-                    text: qsTr("Cancel")
-                    // equal*: true
-                    // key*: qsTr("Esc")
-                    // binding*: " dialog-close "
-                }
-
-                Label {
-                    Layout.fillWidth: true
-                }
-            } // RowLayout
-        }
     } // ColumnLayout
+
+    // ======= content end
+
+    buttons: Row {
+        anchors.centerIn: parent
+        spacing: 20
+        height: childrenRect.implicitHeight
+
+        Button {
+            text: qsTr("OK")
+
+            onClicked: {
+                aiCarrierDialog.closed(aiCarrierDialog.id);
+            }
+        }
+
+        Button {
+            text: qsTr("Apply")
+
+            onClicked: {
+                // binding*: " dialog-apply "
+            }
+        }
+
+        Button {
+            text: qsTr("Reset")
+
+            onClicked: {
+                // binding*: " dialog-update "
+            }
+        }
+
+        Button {
+            text: qsTr("Cancel")
+
+            onClicked: {
+                aiCarrierDialog.closed(aiCarrierDialog.id);
+            }
+        }
+    } // buttons
 }

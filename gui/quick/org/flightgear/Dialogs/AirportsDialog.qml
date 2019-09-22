@@ -6,61 +6,26 @@ import QtQuick.Controls 2.12
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
-Rectangle {
-    id: root
+DialogBase {
+    id: airportsDialog
 
     width: 1024
     height: 800
-    // resizable*: true
-    // padding*: 3
-    anchors.centerIn: parent
-    border.width: 1
-    border.color: Style.frameColor
-    color: Style.windowColor
-    opacity: Style.panelOpacity
+    position: Qt.point(80, 80)
 
-    signal closed(string windowId)
+    windowId: airportsDialog.id
+    title: "Select an Airport"
+
+    onClosed: {
+        root.visible = false
+    }
+    onPopout: {
+    }
+
+    // ======= content
 
     ColumnLayout {
         width: parent.width
-
-        GroupBox {
-            id: groupBox
-            Layout.fillWidth: true
-
-            RowLayout {
-                width: parent.width
-
-                Label {
-                    text: qsTr("Select an Airport")
-                    font.pointSize: Style.headingFontPixelSize
-                    font.bold: true
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                Rectangle {
-                    id: closeBox
-                    width: 20
-                    height: 20
-                    color: mouseClose.containsMouse ? Style.activeColor : Style.themeColor
-                    anchors.right: parent.right
-                    anchors.rightMargin: Style.margin
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    MouseArea {
-                        id: mouseClose
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
-                            root.closed(root.id);
-                        }
-                    }
-                }
-            } // RowLayout
-        }
-
-        HorizontalLine {}
 
         GroupBox {
             Layout.fillWidth: true
@@ -812,46 +777,33 @@ Rectangle {
 //                } // ColumnLayout
 //            }
         }
-
-        HorizontalLine {}
-
-//        GroupBox {
-//            Layout.fillWidth: true
-
-//            RowLayout {
-//                width: parent.width
-
-//                // padding*: 5
-//                Label {
-//                    Layout.fillWidth: true
-//                }
-
-//                Button {
-//                    text: qsTr("Go To Airport")
-//                    // equal*: true
-//                    // binding*: " dialog-apply airport-list "
-//                    // binding*: " nasal apply() "
-//                    // binding*: " reposition "
-//                    // binding*: " dialog-close "
-//                }
-
-//                Label {
-//                    Layout.fillWidth: true
-//                }
-
-//                Button {
-//                    text: qsTr("Close")
-//                    // equal*: true
-//                    // key*: qsTr("Esc")
-//                    // binding*: " dialog-apply input "
-//                    // binding*: " dialog-close "
-//                }
-
-//                Label {
-//                    Layout.fillWidth: true
-//                }
-//            } // RowLayout
-//        }
-
     } // ColumnLayout
+
+    // ======= content end
+
+    buttons: Row {
+        anchors.centerIn: parent
+        spacing: 20
+        height: childrenRect.implicitHeight
+
+        Button {
+            text: qsTr("Go To Airport")
+
+            onClicked: {
+                // binding*: " dialog-apply airport-list "
+                // binding*: " nasal apply() "
+                // binding*: " reposition "
+                airportsDialog.closed(airportsDialog.id);
+            }
+        }
+
+        Button {
+            text: qsTr("Close")
+
+            onClicked: {
+                // binding*: " dialog-apply input "
+                airportsDialog.closed(airportsDialog.id);
+            } 
+        }
+    } // buttons
 }

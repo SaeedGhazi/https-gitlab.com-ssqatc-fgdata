@@ -15,7 +15,7 @@ ShaderDetailSetting 1.0 ShaderDetailSetting.qml
 
 AboutDialog 1.0 AboutDialog.qml
 AiCarrierDialog 1.0 AiCarrierDialog.qml
-AiObjects 1.0 ai-objects.qml
+AiObjectsDialog 1.0 AiObjectsDialog.qml
 AirDialog 1.0 air.qml
 Aircraft 1.0 aircraft.qml
 Airports 1.0 airports.qml

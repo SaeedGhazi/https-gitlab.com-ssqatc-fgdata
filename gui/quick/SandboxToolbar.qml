@@ -28,13 +28,6 @@ Item {
         Layout.fillWidth: true
 
         Button {
-            text: qsTr("About")
-            onClicked: {
-                about_dialog.visible = !about_dialog.visible
-            }
-        }
-
-        Button {
             text: qsTr("AI Carrier")
             onClicked: {
                 ai_carrier_dialog.visible = !ai_carrier_dialog.visible;

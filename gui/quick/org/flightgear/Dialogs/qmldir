@@ -21,6 +21,8 @@ AircraftDialog 1.0 AircraftDialog.qml
 AirportsDialog 1.0 AirportsDialog.qml
 AtcFrequenciesDialog 1.0 AtcFrequenciesDialog.qml
 ExitDialog 1.0 ExitDialog.qml
+FlightRecorderDialog_Load 1.0 FlightRecorderDialog_Load.qml
+FlightRecorderDialog_Save 1.0 FlightRecorderDialog_Save.qml
 HelpDialog_BasicKeys 1.0 HelpDialog_BasicKeys.qml
 OverlaySelectDialog 1.0 OverlaySelectDialog.qml
 
@@ -30,3 +32,4 @@ OverlaySelectDialog 1.0 OverlaySelectDialog.qml
 FramesPerSecond 1.0 fps.qml
 FrameLatency 1.0 frame-latency.qml
 SceneryLoading 1.0 scenery_loading.qml
+

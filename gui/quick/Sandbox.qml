@@ -26,6 +26,8 @@ Item {
     AirportsDialog { id: airports_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     AtcFrequenciesDialog { id: atc_freq_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     ExitDialog { id: exit_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
+    FlightRecorderDialog_Load { id: recorder_load_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
+    FlightRecorderDialog_Save { id: recorder_save_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     HelpDialog_BasicKeys { id: help_basic_keys_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
     OverlaySelectDialog { id: overlay_select_dialog; visible: false; x: 200; y: 40; onClosed: visible = false }
 

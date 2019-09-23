@@ -24,9 +24,7 @@ MenuBar {
             text: "Load Flight Recorder Tape"
             // shortcut: "Shift-F1"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> flight-recorder-load
+                recorder_load_dialog.visible = true
             }
         }
         MenuItem {
@@ -34,9 +32,7 @@ MenuBar {
             text: "Save Flight Recorder Tape"
             // shortcut: "Shift-F2"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> flight-recorder-save
+                recorder_save_dialog.visible = true
             }
         }
 

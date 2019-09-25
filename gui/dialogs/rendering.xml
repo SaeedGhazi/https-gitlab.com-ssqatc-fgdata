@@ -1092,7 +1092,7 @@
 			if (getScenerySuffix("Buildings")) {
 			  setprop("/sim/gui/dialogs/rendering/buildings", "OpenStreetMap Data");
       } else if (getprop("/sim/rendering/random-buildings")) {
-			  setprop("/sim/gui/dialogs/rendering/buildings", "Random");
+			  setprop("/sim/gui/dialogs/rendering/buildings", "Randomly Generated");
       } else {
 			  setprop("/sim/gui/dialogs/rendering/buildings", "Disabled");
       }

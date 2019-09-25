@@ -212,12 +212,16 @@
           <index>11</index>
         </attribute>
         <attribute>
-          <name>rotPitchTex0x</name>
+          <name>rotPitchWtex0x</name>
           <index>12</index>
         </attribute>
         <attribute>
-          <name>tex0yTex1xTex1y</name>
+          <name>wtex0yTex1xTex1y</name>
           <index>13</index>
+        </attribute>
+        <attribute>
+          <name>rtex0xRtex0y</name>
+          <index>14</index>
         </attribute>
       </program>
 	</pass>
@@ -298,12 +302,16 @@
           <index>11</index>
         </attribute>
         <attribute>
-          <name>rotPitchTex0x</name>
+          <name>rotPitchWtex0x</name>
           <index>12</index>
         </attribute>
         <attribute>
-          <name>tex0yTex1xTex1y</name>
+          <name>wtex0yTex1xTex1y</name>
           <index>13</index>
+        </attribute>
+        <attribute>
+          <name>rtex0xRtex0y</name>
+          <index>14</index>
         </attribute>
       </program>
       <uniform>
@@ -373,13 +381,17 @@
 					<index>11</index>
 				</attribute>
         <attribute>
-					<name>rotPitchTex0x</name>
+					<name>rotPitchWtex0x</name>
 					<index>12</index>
 				</attribute>
         <attribute>
-					<name>tex0yTex1xTex1y</name>
+					<name>wtex0yTex1xTex1y</name>
 					<index>13</index>
 				</attribute>
+        <attribute>
+          <name>rtex0xRtex0y</name>
+          <index>14</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -503,12 +515,16 @@
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchTex0x</name>
+        <name>rotPitchWtex0x</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>tex0yTex1xTex1y</name>
+        <name>wtex0yTex1xTex1y</name>
         <index>13</index>
+      </attribute>
+      <attribute>
+        <name>rtex0xRtex0y</name>
+        <index>14</index>
       </attribute>
 	  </program>
 	</pass>
@@ -559,12 +575,16 @@
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchTex0x</name>
+        <name>rotPitchWtex0x</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>tex0yTex1xTex1y</name>
+        <name>wtex0yTex1xTex1y</name>
         <index>13</index>
+      </attribute>
+      <attribute>
+        <name>rtex0xRtex0y</name>
+        <index>14</index>
       </attribute>
 	  </program>
 	</pass>
@@ -673,13 +693,17 @@
 					<index>11</index>
 				</attribute>
         <attribute>
-					<name>rotPitchTex0x</name>
+					<name>rotPitchWtex0x</name>
 					<index>12</index>
 				</attribute>
         <attribute>
-					<name>tex0yTex1xTex1y</name>
+					<name>wtex0yTex1xTex1y</name>
 					<index>13</index>
 				</attribute>
+        <attribute>
+          <name>rtex0xRtex0y</name>
+          <index>14</index>
+        </attribute>
 			</program>
 			<!-- 			BEGIN fog include -->
 			<!--<uniform>

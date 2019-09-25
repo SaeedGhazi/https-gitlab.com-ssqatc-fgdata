@@ -400,7 +400,7 @@ See README.materials for details on configuring the random building parameters.
 
 The referenced <filename> (in the example buildings.txt) contains lines of the form
 
-X Y Z R B W D H P S O F T
+X Y Z R B W D H P S O F WT RT
 
 Where:
 - X,Y,Z are the cartesian coordinates of the center of the front face. +X is East, +Y is North
@@ -417,7 +417,8 @@ Where:
     0 = parallel to the front face of the building
     1 = orthogonal to the front face of the building
 - F is the number of floors (integer)
-- T is the texture index to use (integer). Buildings with the same T value will have the same texture assigned.  There are 6 small, 6 medium and 4 large textures.
+- WT is the texture index to use for walls (integer). Buildings with the same WT value will have the same wall texture assigned.  There are 6 small, 6 medium and 4 large textures.
+- RT is the texture index to use for roofs (integer). Buildings with the same RT value will have the same roof texture assigned.  There are 6 small, 6 medium and 4 large textures.
 
 <x> <y> <z> <rot> <type>
 

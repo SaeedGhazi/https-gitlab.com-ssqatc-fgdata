@@ -90,7 +90,7 @@ var GenericInterfaceController = {
 
   stop : func() {
     if (me.running == 0) return;
-    
+
     foreach (var interface; GenericInterfaceController.INTERFACE_LIST) {
       io.load_nasal(nasal_dir ~ 'Interfaces/' ~ interface ~ '.nas', "fg1000");
       var code = 'me.' ~ interface ~ 'Instance.stop();';

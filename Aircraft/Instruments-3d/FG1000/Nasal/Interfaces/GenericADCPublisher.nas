@@ -41,15 +41,19 @@ var GenericADCPublisher =
       ],
     };
 
+    # Air data comes from the airspeed indicator as for a non-glass panel aircraft.
     obj.addPropMap("ADCTrueAirspeed", "/instrumentation/airspeed-indicator/true-speed-kt");
     obj.addPropMap("ADCIndicatedAirspeed", "/instrumentation/airspeed-indicator/indicated-speed-kt");
 
-    obj.addPropMap("ADCPitchDeg", "/instrumentation/attitude-indicator/indicated-pitch-deg");
-    obj.addPropMap("ADCRollDeg", "/instrumentation/attitude-indicator/indicated-roll-deg");
+    # Assume an accurate solid-state magnetometer
+    obj.addPropMap("ADCPitchDeg", "/orientation/pitch-deg");
+    obj.addPropMap("ADCRollDeg",  "/orientation/roll-deg");
+
+    # TODO: Replace these with real values - shouldn't rely on steam-powered gauges.
     obj.addPropMap("ADCTurnRate", "/instrumentation/turn-indicator/indicated-turn-rate");
     obj.addPropMap("ADCSlipSkid", "/instrumentation/slip-skid-ball/indicated-slip-skid");
 
-    # Assume an accurate solid-state compass
+    # Assume an accurate solid-state magnetometer
     obj.addPropMap("ADCHeadingMagneticDeg", "/orientation/heading-magnetic-deg");
     obj.addPropMap("ADCMagneticVariationDeg", "/environment/magnetic-variation-deg");
 

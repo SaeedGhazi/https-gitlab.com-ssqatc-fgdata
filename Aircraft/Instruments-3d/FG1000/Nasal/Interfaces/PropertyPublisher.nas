@@ -159,7 +159,11 @@ var TriggeredPropertyPublisher =
 
   stop : func() {
     foreach (var l; me._listeners) {
-      removelistener(l);
+      # In some circumstances we may not have a valid listener ID, so we
+      # just ignore the problem.
+      var err = [];
+      call( func removelistener(l), nil, err);
+      if (size(err)) print("Ignoring error : " ~ err[0]);
     }
 
     if(me._timer != nil) me._timer.stop();

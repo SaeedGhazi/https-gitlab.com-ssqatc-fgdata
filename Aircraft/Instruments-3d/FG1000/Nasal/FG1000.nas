@@ -91,7 +91,7 @@ addMFD : func(index=nil, targetcanvas=nil) {
     index = size(keys(me.displays));
   } else if (me.displays[index] != nil) {
     print("FG1000 Index " ~ index ~ " already exists!");
-    return
+    return index;
   }
 
   if (targetcanvas == nil) {
@@ -117,7 +117,7 @@ addPFD : func(index=nil, targetcanvas=nil) {
     index = size(keys(me.displays));
   } else if (me.displays[index] != nil) {
     print("FG1000 Index " ~ index ~ " already exists!");
-    return
+    return index;
   }
 
   if (targetcanvas == nil) {

@@ -840,15 +840,12 @@
 						io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000");
 					}
 
-					var fg1000system = fg1000.FG1000.getOrCreateInstance();
-					var pfdindex = fg1000system.addPFD();
-					fg1000system.displayGUI(pfdindex);
-
-					# Start the interface controller after the FG1000, as it will publish
-					# immediately and update the NAV/COM data.
 					var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
-					interfaceController.stop();
 					interfaceController.start();
+
+					var fg1000system = fg1000.FG1000.getOrCreateInstance();
+					var pfdindex = fg1000system.addPFD(1);
+					fg1000system.displayGUI(pfdindex);
 
 				</script>
 			</binding>
@@ -865,15 +862,12 @@
 						io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000");
 					}
 
-					var fg1000system = fg1000.FG1000.getOrCreateInstance();
-					var mfdindex = fg1000system.addMFD();
-					fg1000system.displayGUI(mfdindex);
-
-					# Start the interface controller after the FG1000, as it will publish
-					# immediately and update the NAV/COM data.
 					var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
-					interfaceController.stop();
 					interfaceController.start();
+
+					var fg1000system = fg1000.FG1000.getOrCreateInstance();
+					var mfdindex = fg1000system.addMFD(2);
+					fg1000system.displayGUI(mfdindex);
 
 				</script>
 			</binding>

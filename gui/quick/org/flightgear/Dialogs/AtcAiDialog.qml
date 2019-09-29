@@ -1,0 +1,189 @@
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
+
+import FlightGear 1.0
+import org.flightgear.UI 1.0
+import org.flightgear.Dialogs 1.0
+
+DialogBase {
+    id: atcAiDialog
+
+    width: 640
+    height: 560
+    position: Qt.point(80, 80)
+
+    windowId: atcAiDialog.id
+    title: "ATC/AI Options"
+
+    onClosed: {
+        root.visible = false
+    }
+    onPopout: {
+    }
+
+    // ======= content
+
+    ColumnLayout {
+        width: parent.width
+
+        RowLayout {
+            width: parent.width
+
+            Label {
+                width: 10
+            }
+
+            ColumnLayout {
+                width: parent.width
+
+                CheckBox {
+                    //horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Enable ATC")
+                    // property*: /sim/atc/enabled
+                }
+
+                CheckBox {
+                    //horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Enable AI traffic")
+                    // property*: /sim/traffic-manager/enabled
+                }
+            } // ColumnLayout
+
+            Label {
+                Layout.fillWidth: true
+            }
+        } // RowLayout
+
+        HorizontalLine {}
+
+        Label {
+            horizontalAlignment: Text.AlignLeft
+            text: qsTr("AI Carrier")
+            color: "#0777FF"
+        }
+
+        RowLayout {
+            width: parent.width
+
+            Label {
+                width: 10
+            }
+
+            ColumnLayout {
+                width: parent.width
+
+                Label {
+                    horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Turn to launch course")
+                    // property*: /ai/models/carrier/controls/turn-to-launch-hdg
+                    // live*: true
+                    // binding*: " dialog-apply "
+                    // binding*: " nasal var v = getprop("/ai/models/carrier/controls/turn-to-launch-hdg"); foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){ c.getNode("controls/turn-to-launch-hdg").setBoolValue(v); c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0); c.getNode("controls/turn-to-base-course").setBoolValue(0); } "
+                }
+
+                Label {
+                    horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Turn to recovery course")
+                    // property*: /ai/models/carrier/controls/turn-to-recovery-hdg
+                    // live*: true
+                    // binding*: " dialog-apply "
+                    // binding*: " nasal var v = getprop("/ai/models/carrier/controls/turn-to-recovery-hdg"); foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){ c.getNode("controls/turn-to-recovery-hdg").setBoolValue(v); c.getNode("controls/turn-to-launch-hdg").setBoolValue(0); c.getNode("controls/turn-to-base-course").setBoolValue(0); } "
+                }
+
+                Label {
+
+                    horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Turn to base course")
+                    // property*: /ai/models/carrier/controls/turn-to-base-course
+                    // live*: true
+                    // binding*: " dialog-apply "
+                    // binding*: " nasal var v = getprop("/ai/models/carrier/controls/turn-to-base-course"); foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){ c.getNode("controls/turn-to-base-course").setBoolValue(v); c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0); c.getNode("controls/turn-to-launch-hdg").setBoolValue(0); } "
+                }
+
+                CheckBox {
+                    //horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Operate Deck Elevators")
+                    // property*: /ai/models/carrier/controls/elevators
+                    // binding*: " dialog-apply "
+                    // binding*: " nasal var v = getprop("/ai/models/carrier/controls/elevators"); foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")) c.getNode("controls/elevators").setBoolValue(v); "
+                }
+
+                CheckBox {
+                    //horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Enable LSO Communications")
+                    // property*: /sim/current-view/lso-commentary
+                    // binding*: " dialog-apply "
+                }
+
+                CheckBox {
+                    //horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Enable Deck Park")
+                    // property*: /sim/current-view/deck-park
+                    // binding*: " dialog-apply "
+                }
+
+                CheckBox {
+                    //horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Deck Lights")
+                    // property*: /ai/models/carrier/controls/lighting/deck-lights
+                    // binding*: " dialog-apply "
+                    // binding*: " nasal var v = getprop("/ai/models/carrier/controls/lighting/deck-lights"); foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")) c.getNode("controls/lighting/deck-lights",1).setBoolValue(v); "
+                }
+
+                Label {
+                    horizontalAlignment: Text.AlignLeft
+                    text: qsTr("Discrete Flightdeck Floodlights (Red)")
+                }
+
+                Slider {
+                    //horizontalAlignment: Text.AlignLeft
+                    width: 75
+                    height: 25
+                    // property*: /ai/models/carrier/controls/lighting/flood-lights-red-norm
+                    // binding*: " nasal var v = getprop("/ai/models/carrier/controls/lighting/flood-lights-red-norm"); foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")) c.getNode("controls/lighting/flood-lights-red-norm",1).setDoubleValue(v); "
+                }
+            } // ColumnLayout
+
+            Label {
+                Layout.fillWidth: true
+            }
+        } // RowLayout
+    } // ColumnLayout
+
+    // ======= content end
+
+    buttons: Row {
+        anchors.centerIn: parent
+        spacing: 20
+        height: childrenRect.implicitHeight
+
+        Button {
+            text: qsTr("OK")
+            // binding*: " dialog-apply "
+            onClicked: {
+                atcAiDialog.closed(atcAiDialog.id);
+            }
+        }
+
+        Button {
+            text: qsTr("Apply")
+            // equal*: true
+            // binding*: " dialog-apply "
+        }
+
+        Button {
+            text: qsTr("Reset")
+            // equal*: true
+            // binding*: " dialog-update "
+        }
+
+        Button {
+            text: qsTr("Cancel")
+
+            onClicked: {
+                atcAiDialog.closed(atcAiDialog.id);
+            }
+        }
+    } // buttons
+}

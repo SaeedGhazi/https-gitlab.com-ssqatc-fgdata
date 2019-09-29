@@ -22,6 +22,80 @@ DialogBase {
     onPopout: {
     }
 
+    Component.onCompleted: {
+        // <nasal>
+        //     <open><![CDATA[
+        //         var DialogController = {
+        //             new : func( dlgRoot ) {
+        //                 var obj = { parents: [DialogController] };
+        //                 obj.dlgRoot = dlgRoot;
+        //                 obj.updateCombo();
+        //                 return obj;
+        //             },
+        //             updateCombo : func {
+        //                 fgcommand("load-tape", props.Node.new({"tape": "",
+        //                         "same-aircraft": getprop("/sim/gui/dialogs/flightrecorder/show-matching-aircraft-only")}));
+
+        //                 var combo = gui.findElementByName( me.dlgRoot, "selected-tape" );
+        //                 combo.removeChildren("value");
+
+        //                 var i = 0;
+        //                 var name = 1;
+        //                 while (name != nil)
+        //                 {
+        //                     var name = getprop("/sim/replay/tape-list/tape[" ~ i ~ "]");
+        //                     if (name != nil)
+        //                     {
+        //                         combo.getNode("value[" ~ i ~ "]", 1).setValue(name);
+        //                         if (i==0)
+        //                         {
+        //                             setprop("/sim/gui/dialogs/flightrecorder/selected-tape", name);
+        //                         }
+        //                     }
+        //                     i += 1;
+        //                 }
+        //                 if (i == 1)
+        //                 {
+        //                     setprop("/sim/gui/dialogs/flightrecorder/selected-tape", "No tapes in selected directory!");
+        //                     me.haveData = 0;
+        //                 }
+        //                 else
+        //                 {
+        //                     me.haveData = 1;
+        //                 }
+        //                 me.preview();
+        //             },
+        //             preview: func {
+        //                 var tape = getprop("/sim/gui/dialogs/flightrecorder/selected-tape");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/aircraft-description", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/version/flightgear", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/user-data/description", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/tape-duration-str", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/aircraft-version", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/aircraft-type", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/closest-airport-id", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/preview/author-name", "");
+        //                 setprop("/sim/gui/dialogs/flightrecorder/warning", "");
+        //                 if (!me.haveData)
+        //                     tape = "";
+        //                 fgcommand("load-tape", props.Node.new({"tape": tape, "preview": 1} ) );
+        //                 var actype = getprop("/sim/gui/dialogs/flightrecorder/preview/aircraft-type");
+        //                 if ((actype != "")and(actype != getprop("/sim/aircraft")))
+        //                 {
+        //                     setprop("/sim/gui/dialogs/flightrecorder/warning",
+        //                             "Tape was recorded for another aircraft (" ~ actype ~ "). It may not work (properly). Good luck! :)");
+        //                 }
+        //             },
+        //             close: func {},
+        //             redraw: func{gui.dialog_update("flight-recorder-load", "selected-tape");},
+        //         };
+        //         var setdefault = func (prop, value) { if (getprop(prop) == nil) setprop(prop, value);}
+        //         setdefault("/sim/gui/dialogs/flightrecorder/show-matching-aircraft-only", 1);
+        //         var controller = DialogController.new( cmdarg() );
+        //     ]]></open>
+        // </nasal>
+    }
+
     // ======= content
 
     ColumnLayout {

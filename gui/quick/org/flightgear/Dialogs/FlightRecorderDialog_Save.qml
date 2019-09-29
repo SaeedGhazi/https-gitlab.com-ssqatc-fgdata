@@ -22,6 +22,19 @@ DialogBase {
     onPopout: {
     }
 
+    Component.onCompleted: {
+        // <nasal>
+        //     <open><![CDATA[
+        //         var setdefault = func (prop, value) { if (getprop(prop) == nil) setprop(prop, value);}
+        //         setdefault("/sim/gui/dialogs/flightrecorder/start-time", "00:00:00");
+        //         setdefault("/sim/gui/dialogs/flightrecorder/stop-time", "99:00:00");
+        //         setdefault("/sim/gui/dialogs/flightrecorder/save-all", 1);
+        //         setdefault("/sim/gui/dialogs/flightrecorder/author-name", "");
+        //         props.globals.getNode("/sim/gui/dialogs/flightrecorder/author-name", 1).setAttribute("userarchive", 1);
+        //     ]]></open>
+        // </nasal>
+    }
+
     // ======= content
 
     ColumnLayout {
@@ -64,10 +77,8 @@ DialogBase {
         Row {
             id: row1
             spacing: 15
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Label {
                 text: qsTr("Author/Pilot:")
-                anchors.verticalCenter: parent.verticalCenter
                 horizontalAlignment: Text.AlignLeft
             }
 
@@ -88,11 +99,9 @@ DialogBase {
             width: parent.width
             Layout.fillWidth: true
 
-            Label {
+            TextEdit {
                 // live*: false
                 id: description_string
-
-                width: 550
                 height: 200
                 Layout.fillWidth: true
 

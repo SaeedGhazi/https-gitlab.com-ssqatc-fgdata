@@ -23,6 +23,18 @@ DialogBase {
     onPopout: {
     }
 
+    Component.onCompleted: {
+        // <nasal>
+        //     <open><![CDATA[
+        //     # Replace version in Nasal, as using the <format> code upsets layout
+        //     var ver = cmdarg().getNode("group[1]/group/text/label");
+        //     ver.setValue("FlightGear Flight Simulator V" ~ getprop("/sim/version/flightgear"));
+        //     ]]></open>
+
+        //     <close><![CDATA[ ]]></close>
+        // </nasal>
+    }
+
     // ======= content
 
     ColumnLayout {
@@ -238,7 +250,6 @@ DialogBase {
             onClicked: {
                 // binding*: " nasal var properties = ["gl-vendor","gl-version","gl-renderer", "gl-shading-language-version"]; var data = ""; var path = "/sim/rendering/"; foreach(var p; properties) data ~= p ~":"~getprop(path~p) ~"\n"; clipboard.setText(data); gui.popupTip("Copied version information to clipboard!"); "
             }
-            
         }
     } // buttons
 }

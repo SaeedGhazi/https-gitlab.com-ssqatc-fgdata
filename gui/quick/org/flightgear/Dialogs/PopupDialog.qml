@@ -6,16 +6,15 @@ import FlightGear 1.0
 import org.flightgear.UI 1.0
 import org.flightgear.Dialogs 1.0
 
-
 DialogBase {
-    id: templateDialog
+    id: popupDialog
 
-    width: 640
-    height: 660
+    width: 500
+    height: 100
     position: Qt.point(80, 80)
 
-    windowId: templateDialog.id
-    title: "Dialog Template"
+    windowId: popupDialog.id
+    title: "Hello, world"
 
     onClosed: {
         root.visible = false
@@ -44,7 +43,7 @@ DialogBase {
             text: qsTr("Close")
 
             onClicked: {
-                templateDialog.closed(templateDialog.id);
+                popupDialog.closed(popupDialog.id);
             }
         }
     } // buttons

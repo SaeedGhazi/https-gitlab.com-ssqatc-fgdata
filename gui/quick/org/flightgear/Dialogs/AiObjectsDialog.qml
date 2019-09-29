@@ -40,13 +40,11 @@ DialogBase {
                 }
 
                 ComboBox {
-
                     id: object_selection
                     //horizontalAlignment: Text.AlignLeft
                     Layout.fillWidth: true
                     width: 300
                     // property*: /ai/control/object-selected
-
                     // binding*: " dialog-apply object-selection "
                 }
             } // GridLayout

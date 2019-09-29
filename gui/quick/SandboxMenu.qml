@@ -12,7 +12,6 @@ MenuBar {
             text: "Reset"
             // shortcut: "Shift-Esc"
             onTriggered: {
-
                 // command -> reset
             }
         }
@@ -43,7 +42,6 @@ MenuBar {
             text: "Screenshot"
             // shortcut: "F3"
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.popdown(); fgcommand("screen-capture");
             }
@@ -52,7 +50,6 @@ MenuBar {
             id: snap_shot_dir
             text: "Screenshot Directory"
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.set_screenshotdir()
             }
@@ -64,28 +61,21 @@ MenuBar {
             id: sound_config
             text: "Sound Configuration"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> sound-dialog
+                sound_config_dialog.visible = true
             }
-            enabled: false
         }
         MenuItem {
             id: input_config
             text: "Mouse Configuration"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> input-config
+                mouse_config_dialog.visible = true
             }
         }
         MenuItem {
             id: joystick_config
             text: "Joystick Configuration"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> joystick-config
+                joystick_config_dialog.visible = true
             }
         }
 
@@ -95,16 +85,13 @@ MenuBar {
             id: terrasync
             text: "Scenery Download"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> terrasync
+                terrasync_dialog.visible = true
             }
         }
         MenuItem {
             id: aircraft_center
             text: "Aircraft Center (Experimental)"
             onTriggered: {
-
                 // command -> open-launcher
             }
         }
@@ -116,9 +103,7 @@ MenuBar {
             text: "Quit"
             // shortcut: "Esc"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> exit
+                exit_dialog.visible = true
             }
         }
     }
@@ -131,7 +116,6 @@ MenuBar {
             text: "Toggle Fullscreen"
             // shortcut: "Shift-F10"
             onTriggered: {
-
                 // command -> toggle-fullscreen
             }
         }
@@ -139,61 +123,48 @@ MenuBar {
             id: rendering_options
             text: "Rendering Options"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> rendering
+                rendering_dialog.visible = true
             }
         }
         MenuItem {
             id: view_options
             text: "View Options"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> view
+                view_options_dialog.visible = true
             }
         }
         MenuItem {
             id: cockpit_view_options
             text: "Cockpit View Options"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> cockpit-view
+                cockpit_view_dialog.visible = true
             }
         }
         MenuItem {
             id: adjust_lod
             text: "Adjust LOD Ranges"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> static-lod
+                static_lod_dialog.visible = true
             }
         }
         MenuItem {
             id: pilot_offset
             text: "Adjust View Position"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> pilot_offset
+                pilot_offset_dialog.visible = true
             }
         }
         MenuItem {
             id: adjust_hud
             text: "Adjust HUD Properties"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> hud
+                hud_dialog.visible = true
             }
         }
         MenuItem {
             id: toggle_glide_slope
             text: "Toggle Glide Slope Tunnel"
             onTriggered: {
-
                 // command -> nasal
                 // script -> var p = "/sim/rendering/glide-slope-tunnel"; setprop(p, var i = !getprop(p)); gui.popupTip("Glide slope tunnel " ~ (i ? "enabled" : "disabled"));
             }
@@ -203,22 +174,15 @@ MenuBar {
             text: "Instant Replay"
             // shortcut: "Ctrl-R"
             onTriggered: {
-
+                replay_dialog.visible = true
                 // command -> replay
-            //}
-            //onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> replay
             }
         }
         MenuItem {
             id: earthview
             text: "Earthview orbital rendering"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> earthview
+                earthview_dialog.visible = true
             }
             enabled: true
         }
@@ -226,9 +190,7 @@ MenuBar {
             id: stereoscopic_options
             text: "Stereoscopic View Options"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> stereoscopic-view-options
+                stereoscopic_view_options_dialog.visible = true
             }
             enabled: false
         }
@@ -241,44 +203,33 @@ MenuBar {
             id: position_in_air
             text: "Position Aircraft In Air"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> location-in-air
+                location_inair_dialog.visible = true
             }
         }
         MenuItem {
             id: goto_airport
             text: "Select Airport"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> airports
+                airports_dialog.visible = true
             }
         }
         MenuItem {
             id: random_attitude
             text: "Random Attitude"
             onTriggered: {
-
                 // command -> property-assign
                 // property -> /sim/presets/trim
                 // value -> false
-            //}
-            //onTriggered: {
 
                 // command -> property-randomize
                 // property -> /orientation/pitch-deg
                 // min -> 0
                 // max -> 360
-            //}
-            //onTriggered: {
 
                 // command -> property-randomize
                 // property -> /orientation/roll-deg
                 // min -> 0
                 // max -> 360
-            //}
-            //onTriggered: {
 
                 // command -> property-randomize
                 // property -> /orientation/heading-deg
@@ -290,9 +241,7 @@ MenuBar {
             id: tower_position
             text: "Tower Position"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> location-of-tower
+                location_oftower_dialog.visible = true
             }
         }
     }
@@ -314,16 +263,13 @@ MenuBar {
             id: route_manager
             text: "Route Manager"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> route-manager
+                route_manager_dialog.visible = true
             }
         }
         MenuItem {
             id: previous_waypoint
             text: "Previous Waypoint"
             onTriggered: {
-
                 // command -> nasal
                 // script -> setprop("/autopilot/route-manager/input", "@previous")
             }
@@ -332,7 +278,6 @@ MenuBar {
             id: next_waypoint
             text: "Next Waypoint"
             onTriggered: {
-
                 // command -> nasal
                 // script -> setprop("/autopilot/route-manager/input", "@next")
             }
@@ -346,34 +291,27 @@ MenuBar {
             id: global_weather
             text: "Weather"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> weather
+                weather_dialog.visible = true
             }
         }
         MenuItem {
             id: environment_settings
             text: "Environment Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> environment-settings
+                env_settings_dialog.visible = true
             }
         }
         MenuItem {
             id: time_settings
             text: "Time Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> timeofday
+                time_ofday_dialog.visible = true
             }
         }
         MenuItem {
             id: wildfire_settings
             text: "Wildfire Settings"
             onTriggered: {
-
                 // command -> nasal
                 // script -> wildfire.dialog.show()
             }
@@ -382,14 +320,9 @@ MenuBar {
             id: volcanoes
             text: "Volcanoes"
             onTriggered: {
-
+                volcanoes_dialog.visible = true
                 // command -> nasal
                 // script -> var varray = volcano.volcano_manager.volcano_array; var n = size(varray); var aircraft_pos = geo.aircraft_position(); var j = 0; for (var i = 0; i< n; i=i+1) { #print(i, " ", varray[i].name); var distance = aircraft_pos.distance_to(varray[i].pos); if (distance < 150000.0) # only add nearby objects { var name = varray[i].name; setprop("/environment/volcanoes/volcanoes-nearby/value["~j~"]", name); if (j==0) {setprop("/environment/volcanoes/volcano-selected", name);} j=j+1; } }
-            //}
-            //onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> volcanoes
             }
         }
     }
@@ -402,25 +335,20 @@ MenuBar {
             text: "Map"
             // shortcut: "Ctrl-M"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> map
+                map_dialog.visible = true
             }
         }
         MenuItem {
             id: map_canvas
             text: "Map (Canvas)"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> map-canvas
+                map_canvas_dialog.visible = true
             }
         }
         MenuItem {
             id: map_browser
             text: "Map (opens in browser)"
             onTriggered: {
-
                 // command -> nasal
                 // script -> var n = props.globals.getNode("/sim/http/running"); if( props.globals.getNode("/").getValue("sim/http/running",0) != 1 ) { gui.popupTip("Internal webserver not running. Restart FlightGear with -httpd=8080", 5.0); } else { var _url = "http://localhost:" ~ getprop("/sim/http/options/listening-port") ~ "#Map"; fgcommand("open-browser", props.Node.new({ "url": _url })); }
             }
@@ -429,16 +357,13 @@ MenuBar {
             id: stopwatch
             text: "Stopwatch"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> stopwatch-dialog
+                stopwatch_dialog.visible = true
             }
         }
         MenuItem {
             id: fuel_and_payload
             text: "Fuel and Payload"
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.showWeightDialog()
             }
@@ -448,27 +373,21 @@ MenuBar {
             id: radio
             text: "Radio Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> radios
+                radios_dialog.visible = true
             }
         }
         MenuItem {
             id: gps
             text: "GPS Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> gps
+                gps_dialog.visible = true
             }
         }
         MenuItem {
             id: instrument_settings
             text: "Instrument Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> instruments
+                instruments_dialog.visible = true
             }
         }
         MenuItem {
@@ -480,27 +399,21 @@ MenuBar {
             id: random_failures
             text: "Random Failures"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> random-failures
+                random_failures_dialog.visible = true
             }
         }
         MenuItem {
             id: system_failures
             text: "System Failures"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> system-failures
+                system_failures_dialog.visible = true
             }
         }
         MenuItem {
             id: instrument_failures
             text: "Instrument Failures"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> instrument-failures
+                instrument_failures_dialog.visible = true
             }
         }
     }
@@ -512,59 +425,44 @@ MenuBar {
             id: scenario
             text: "Traffic and Scenario Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> scenario
+                scenario_dialog.visible = true
             }
         }
         MenuItem {
             id: atc_in_range
             text: "ATC Services in Range"
             onTriggered: {
-
-                // command -> ATC-freq-search
+                atc_freq_search_dialog.visible = true
             }
         }
         MenuItem {
             id: wingman
             text: "Wingman Controls"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> formation
+                formation_dialog.visible = true
             }
         }
         MenuItem {
             id: tanker
             text: "Tanker Controls"
-            enabled: false
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> tanker
+                tanker_dialog.visible = true
             }
         }
         MenuItem {
             id: jetway
             text: "Jetway Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> jetways
+                jetways_dialog.visible = true
             }
         }
         MenuItem {
             id: ai_objects
             text: "AI Objects"
             onTriggered: {
-
+                ai_objects_dialog.visible = true
                 // command -> nasal
                 // script -> var carriers = props.globals.getNode("/ai/models").getChildren("carrier"); var i = 0; foreach(c; carriers) { var name = c.getNode("dlg-name",1).getValue(); if (name != nil) # check whether a dialog is defined at all { var aircraft_pos = geo.aircraft_position(); var carrier_lat = c.getNode("position").getNode("latitude-deg").getValue(); var carrier_lon = c.getNode("position").getNode("longitude-deg").getValue(); var carrier_pos = geo.Coord.new(); carrier_pos.set_latlon(carrier_lat, carrier_lon); var distance = aircraft_pos.distance_to(carrier_pos); if (distance < 50000.0) # only add nearby objects { setprop("/ai/control/objects-nearby/value["~i~"]", name); if (i==0) {setprop("/ai/control/object-selected", name);} i=i+1; } } }
-            //}
-            //onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> ai-objects
             }
         }
     }
@@ -576,27 +474,21 @@ MenuBar {
             id: mp_settings
             text: "Multiplayer Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> multiplayer
+                multiplayer_dialog.visible = true
             }
         }
         MenuItem {
             id: fgcom_settings
             text: "FGCom Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> fgcom
+                fgcom_dialog.visible = true
             }
         }
         MenuItem {
             id: mp_chat
             text: "Chat Dialog"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> chat-full
+                chat_full_dialog.visible = true
             }
         }
         MenuItem {
@@ -604,16 +496,13 @@ MenuBar {
             id: mp_chat_menu
             text: "Chat Menu"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> chat-menu
+                chat_menu_dialog.visible = true
             }
         }
         MenuItem {
             id: mp_list
             text: "Pilot List"
             onTriggered: {
-
                 // command -> nasal
                 // script -> multiplayer.dialog.show()
             }
@@ -622,7 +511,7 @@ MenuBar {
             id: mp_carrier
             text: "MPCarrier Selection"
             onTriggered: {
-
+                ai_carrier_dialog.visible = true
                 // command -> nasal
                 // script -> if (contains(globals, "MPCarriers")) { MPCarriers.carrier_dialog.show(); } else { gui.popupTip("Found no MPCarriers for activated carrier AI scenarios within range.", 5.0); }
             }
@@ -631,18 +520,14 @@ MenuBar {
             id: lag_adjust
             text: "Lag Settings"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> lag-adjust
+                lag_adjust_dialog.visible = true
             }
         }
         MenuItem {
             id: swift_connection
             text: "SWIFT Connection"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> swift_connection
+                swift_connection_dialog.visible = true
             }
         }
     }
@@ -658,7 +543,6 @@ MenuBar {
                 id: reload_gui
                 text: "Reload GUI"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> gui
                 }
@@ -667,7 +551,6 @@ MenuBar {
                 id: reload_gui_qt
                 text: "Reload GUI (Qt)"
                 onTriggered: {
-
                     // command -> reload-quick-gui
                 }
             }
@@ -675,7 +558,6 @@ MenuBar {
                 id: reload_input
                 text: "Reload Input"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> input
                 }
@@ -684,7 +566,6 @@ MenuBar {
                 id: reload_hud
                 text: "Reload HUD"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> hud
                 }
@@ -693,7 +574,6 @@ MenuBar {
                 id: reload_panel
                 text: "Reload Panel"
                 onTriggered: {
-
                     // command -> panel-load
                 }
             }
@@ -701,7 +581,6 @@ MenuBar {
                 id: reload_autopilot
                 text: "Reload Autopilot"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> xml-autopilot
                 }
@@ -710,7 +589,6 @@ MenuBar {
                 id: reload_network
                 text: "Reload Network"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> io
                 }
@@ -719,7 +597,6 @@ MenuBar {
                 id: reload_model
                 text: "Reload Aircraft Model"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> aircraft-model
                 }
@@ -728,7 +605,6 @@ MenuBar {
                 id: reload_materials
                 text: "Reload Materials"
                 onTriggered: {
-
                     // command -> reload-materials
                 }
             }
@@ -736,7 +612,6 @@ MenuBar {
                 id: reload_scenery
                 text: "Reload Scenery"
                 onTriggered: {
-
                     // command -> reinit
                     // subsystem -> scenery
                 }
@@ -750,16 +625,13 @@ MenuBar {
                 id: nasal_console
                 text: "Nasal Console"
                 onTriggered: {
-
-                    // command -> dialog-show
-                    // dialog -> nasal-console
+                    nasal_console_dialog.visible = true
                 }
             }
             MenuItem {
                 id: nasal_repl_interpreter
                 text: "Nasal REPL Interpreter"
                 onTriggered: {
-
                     // command -> nasal
                     // script -> console.CanvasPlacement.new()
                 }
@@ -773,7 +645,6 @@ MenuBar {
                 id: dump_scene_graph
                 text: "Dump Scene Graph"
                 onTriggered: {
-
                     // command -> dump-scenegraph
                 }
             }
@@ -781,7 +652,6 @@ MenuBar {
                 id: print_rendering_statistics
                 text: "Print Rendering Statistics"
                 onTriggered: {
-
                     // command -> property-assign
                     // property -> /sim/rendering/print-statistics
                     // value -> true
@@ -791,7 +661,6 @@ MenuBar {
                 id: statistics_display
                 text: "Cycle On-Screen Statistics"
                 onTriggered: {
-
                     // command -> property-adjust
                     // property -> /sim/rendering/on-screen-statistics
                     // step -> 1
@@ -801,12 +670,9 @@ MenuBar {
                 id: performance_monitor
                 text: "Monitor System Performance"
                 onTriggered: {
-
                     // command -> property-assign
                     // property -> /nasal/performance_monitor/enabled
                     // value -> true
-                //}
-                //onTriggered: {
 
                     // command -> nasal
                     // script -> performance_monitor.dialog.show()
@@ -818,7 +684,6 @@ MenuBar {
             id: development_keys
             text: "Development Keys"
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.showHelpDialog("/sim/help/debug")
             }
@@ -827,16 +692,14 @@ MenuBar {
             id: configure_dev_extension
             text: "Configure Development Extensions"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> devel-extensions
+                dev_extensions_dialog.visible = true
             }
         }
         MenuItem {
             id: display_marker
             text: "Display Tutorial Marker"
             onTriggered: {
-
+                marker_adjust_dialog.visible = true
                 // command -> nasal
                 // script -> setprop("/nasal/tutorial/enabled",1); # load module on demand tutorial.dialog();
             }
@@ -845,7 +708,6 @@ MenuBar {
             id: write_video_config
             text: "Save Video Configuration"
             onTriggered: {
-
                 // command -> nasal
                 // script -> video.save()
             }
@@ -854,7 +716,6 @@ MenuBar {
             id: property_browser
             text: "Browse Internal Properties"
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.property_browser()
             }
@@ -863,7 +724,6 @@ MenuBar {
             id: fg1000_pfd
             text: "FG1000 PFD"
             onTriggered: {
-
                 // command -> nasal
                 // script -> var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/"; if (! defined("fg1000")) { io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000"); io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000"); } var fg1000system = fg1000.FG1000.getOrCreateInstance(); var pfdindex = fg1000system.addPFD(); fg1000system.displayGUI(pfdindex); # Start the interface controller after the FG1000, as it will publish # immediately and update the NAV/COM data. var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance(); interfaceController.stop(); interfaceController.start();
             }
@@ -872,7 +732,6 @@ MenuBar {
             id: fg1000_mfd
             text: "FG1000 MFD"
             onTriggered: {
-
                 // command -> nasal
                 // script -> var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/"; if (! defined("fg1000")) { io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000"); io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000"); } var fg1000system = fg1000.FG1000.getOrCreateInstance(); var mfdindex = fg1000system.addMFD(); fg1000system.displayGUI(mfdindex); # Start the interface controller after the FG1000, as it will publish # immediately and update the NAV/COM data. var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance(); interfaceController.stop(); interfaceController.start();
             }
@@ -881,9 +740,7 @@ MenuBar {
             id: logging
             text: "Logging"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> logging
+                logging_dialog.visible = true
             }
         }
         MenuItem {
@@ -891,16 +748,13 @@ MenuBar {
             text: "Local Weather (Test)"
             enabled: false
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> local_weather
+                local_weather_dialog.visible = true
             }
         }
         MenuItem {
             id: print_scene_info
             text: "Print Visible Scene Info"
             onTriggered: {
-
                 // command -> print-visible-scene
             }
         }
@@ -908,7 +762,6 @@ MenuBar {
             id: rendering_buffers
             text: "Hide/Show Rendering Buffers"
             onTriggered: {
-
                 // command -> property-toggle
                 // property -> /sim/rendering/rembrandt/show-buffers
             }
@@ -918,9 +771,7 @@ MenuBar {
             id: rembrandt_buffers_choice
             text: "Select Rendering Buffers"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> rembrandt-buffers
+                rembrandt_buffers_dialog.visible = true
             }
             enabled: false
         }
@@ -928,7 +779,6 @@ MenuBar {
             id: cycle_gui
             text: "Cycle GUI Style"
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.nextStyle()
             }
@@ -942,7 +792,6 @@ MenuBar {
             id: help_browser
             text: "Help (opens in browser)"
             onTriggered: {
-
                 // command -> open-browser
                 // path -> Docs/index.html
             }
@@ -951,9 +800,7 @@ MenuBar {
             id: doc_browser
             text: "Documentation Browser"
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> doc-browser
+                doc_browser_dialog.visible = true
             }
         }
         MenuItem {
@@ -961,7 +808,6 @@ MenuBar {
             id: aircraft_keys
             text: "Aircraft Help..."
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.showHelpDialog("/sim/help")
             }
@@ -970,16 +816,13 @@ MenuBar {
             id: aircraft_checklists
             text: "Aircraft Checklists..."
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> checklist
+                checklist_dialog.visible = true
             }
         }
         MenuItem {
             id: common_keys
             text: "Common Aircraft Keys..."
             onTriggered: {
-
                 // command -> nasal
                 // script -> gui.showHelpDialog("/sim/help/common")
             }
@@ -998,9 +841,7 @@ MenuBar {
             id: tutorial_start
             text: "Tutorials..."
             onTriggered: {
-
-                // command -> dialog-show
-                // dialog -> tutorial
+                tutorial_dialog.visible = true
             }
         }
         MenuItem {

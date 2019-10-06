@@ -31,6 +31,8 @@ var orbitalTarget = {
 		t.delta_time = 0.0;
 		t.label = "";
 
+		print ("Orbital Period: ", t.period);
+
 		# Coefficients  for the J3 altitude variation
 
 		var inc_var = t.inclination/60.0;
@@ -90,6 +92,8 @@ var orbitalTarget = {
 		me.l_vec[0] = math.sin(me.nl_rad) * l_tmp;
 		me.l_vec[1] = -math.cos(me.nl_rad) * l_tmp;
 	
+		#print (me.label);
+
 
 	},
 	get_inertial_pos: func {
@@ -191,6 +195,7 @@ var orbitalTarget = {
 
 		var r_corr = me.coeff1 * math.exp(- math.pow(((anomaly_rad - math.pi)/ me.coeff2),2.0));
 
+		#r_corr = 0.0;
 		#print (r_corr);
 
 
@@ -219,7 +224,17 @@ var orbitalTarget = {
 		#print ("Corr200 is now:", corr_200);
 		#print ("Corr is now:", corr);
 		#print ("Altitude: ", me.altitude);
+		
+		var radius_orig = math.sqrt(xp * xp + yp * yp + z* z);
+
+
 		z /= corr;
+
+		var radius_corr = math.sqrt(xp * xp + yp * yp + z* z);
+
+		xp *= radius_orig/radius_corr;		
+		yp *= radius_orig/radius_corr;		
+		z *= radius_orig/radius_corr;		
 
 		return [xp, yp, z];
 
@@ -251,4 +266,25 @@ var orbitalTarget = {
 			{settimer(func me.run(), 0);}
 	},
 	
+
+	test_suite: func {
+
+		var time = 0;
+		var radius = 0;
+		var pos = [];
+
+		for (var i = 0; i< 300; i=i+1)
+			{
+			time = i * 60;
+			pos = me.get_inertial_pos_at_time(time);
+			
+			radius = math.sqrt(pos[0] * pos[0] + pos[1] * pos[1] + pos[2] * pos[2]);		
+
+			print (time, " ", radius);
+			
+
+			}
+
+	},
+
 };

@@ -25,13 +25,17 @@ void main()
     rawPos = gl_Vertex.xy;
     float dist = length(relPos);
     float angular_fade = 1.0;
-    //if (length(gl_Normal)> 0.0)
+
     if (is_directional)
 	{
 	angular_fade = 2.0 * max(0.0,-dot(normalize(gl_Normal), normalize(relPos)));
 	}
-    float lightScale = size * size * size * size * size/ 500.0 *angular_fade;
-    pixelSize = min(size * size/25.0,lightScale/dist) ;
+
+    float size_use = size;
+    if (size_use < 10.0) {size_use = 20.0;}
+
+    float lightScale = size_use * size_use * size_use * size_use * size_use/ 500.0 *angular_fade;
+    pixelSize = min(size_use * size_use/25.0,lightScale/dist) ;
     pixelSize = min(pixelSize, max_size);
     gl_PointSize = 2.0 * pixelSize;
 }

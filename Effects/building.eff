@@ -223,6 +223,10 @@
           <name>rtex0xRtex0y</name>
           <index>14</index>
         </attribute>
+        <attribute>
+          <name>rooftopscale</name>
+          <index>15</index>
+        </attribute>
       </program>
 	</pass>
   </technique>
@@ -313,6 +317,10 @@
           <name>rtex0xRtex0y</name>
           <index>14</index>
         </attribute>
+        <attribute>
+          <name>rooftopscale</name>
+          <index>15</index>
+        </attribute>
       </program>
       <uniform>
         <name>texture</name>
@@ -391,6 +399,10 @@
         <attribute>
           <name>rtex0xRtex0y</name>
           <index>14</index>
+        </attribute>
+        <attribute>
+          <name>rooftopscale</name>
+          <index>15</index>
         </attribute>
       </program>
       <uniform>
@@ -526,6 +538,10 @@
         <name>rtex0xRtex0y</name>
         <index>14</index>
       </attribute>
+      <attribute>
+        <name>rooftopscale</name>
+        <index>15</index>
+      </attribute>
 	  </program>
 	</pass>
   </technique>
@@ -585,6 +601,10 @@
       <attribute>
         <name>rtex0xRtex0y</name>
         <index>14</index>
+      </attribute>
+      <attribute>
+        <name>rooftopscale</name>
+        <index>15</index>
       </attribute>
 	  </program>
 	</pass>
@@ -703,6 +723,10 @@
         <attribute>
           <name>rtex0xRtex0y</name>
           <index>14</index>
+        </attribute>
+        <attribute>
+          <name>rooftopscale</name>
+          <index>15</index>
         </attribute>
 			</program>
 			<!-- 			BEGIN fog include -->

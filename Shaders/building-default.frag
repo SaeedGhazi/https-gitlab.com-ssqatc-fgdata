@@ -54,7 +54,7 @@ void main()
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
     emissive = texture2D(lightmap, gl_TexCoord[0].st);
-    
+
     // The lights are only switched on when the sun is below the horizon
     fragColor = color * texel + specular + smoothstep(1.6, 1.8, sunangle) * emissive;
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);

@@ -149,8 +149,9 @@
 <model n="524" type="string">Models/Geometry/A4-F/A4-F.xml</model>
 <model n="525" type="string">AI/Aircraft/T-38/Models/F-5.xml</model>
 <model n="526" type="string">Models/Geometry/KA6-D/A6-D-lowpoly.xml</model>
+<model n="527" type="string">AI/Aircraft/Mirage2000/m2000-5_lowpoly.xml</model>
 
-  <!-- 551-600 Military large aircraft (tankers, transports) -->
+<!-- 551-600 Military large aircraft (tankers, transports) -->
 <model n="551" type="string">AI/Aircraft/E-2C/Models/E-2C-model.xml</model>
 <model n="552" type="string">AI/Aircraft/vulcanb2/Models/vulcanb2.xml</model>
 

@@ -633,11 +633,11 @@
 			<binding>
 				<command>nasal</command>
 				<script>
-					if (contains(globals, "MPCarriers")) {
-						MPCarriers.carrier_dialog.show();
-					} else {
-						gui.popupTip("Found no MPCarriers for activated carrier AI scenarios within range.", 5.0);
-					}
+                                    if (!contains(globals, "MPCarriers")) {
+                                      var base = "Aircraft/MPCarrier/Systems/MPCarriers.nas";
+                                      io.load_nasal(resolvepath(base), "MPCarriers");
+                                    }
+				    MPCarriers.carrier_dialog.show();
 				</script>
 			</binding>
 		</item>

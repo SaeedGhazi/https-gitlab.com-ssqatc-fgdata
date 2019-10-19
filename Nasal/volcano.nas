@@ -143,6 +143,13 @@ geo.put_model("Models/Volcanoes/Katla/main_crater.xml", 63.65750,  -19.182871 );
 
 }
 
+var set_surtsey = func {
+
+io.include("Models/Volcanoes/Surtsey/surtsey.nas");
+geo.put_model("Models/Volcanoes/Surtsey/main_crater.xml", 63.30510848,  -20.6054166 );
+
+}
+
 # volcano definitions
 
 var kilauea = volcano.new("Kilauea", 19.39, -155.20);
@@ -168,6 +175,11 @@ append(volcano_manager.volcano_array, eyjafjallajokull);
 var katla = volcano.new("Katla", 63.65750, -19.182871);
 katla.set = set_katla;
 append(volcano_manager.volcano_array, katla);
+
+var surtsey = volcano.new("Surtsey", 63.305,  -20.605);
+surtsey.set = set_surtsey;
+append(volcano_manager.volcano_array, surtsey);
+
 
 # start the manager when autosaved (need some delay for terrain loading to finish)
 

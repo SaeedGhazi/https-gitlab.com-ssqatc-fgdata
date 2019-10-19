@@ -33,5 +33,10 @@
   	<main-activity type="int" userarchive="y">0</main-activity>
 </katla>
 
+<surtsey>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+	<side-activity type="int" userarchive="y">0</side-activity>
+</surtsey>
+
 
 </PropertyList>

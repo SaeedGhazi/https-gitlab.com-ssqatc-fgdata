@@ -359,10 +359,15 @@ var dialog = {
         # the boxes in the 'view' column so that only the one for the aircraft
         # being viewed is checked. If the user's aircraft is being viewed, none
         # of these boxes will be checked.
-        callsign = getprop("/sim/current-view/model-view");
+        var callsign = getprop("/sim/current-view/model-view");
+        
+        # Update Pilot View checkboxes.
         foreach (var mp; model.list) {
             mp.node.setValues({'view': mp.callsign == callsign});
         }
+        
+        # Update actual view.
+        view.model_view_handler.select(callsign, 1);
     },
     update: func(id) {
         id == me.loopid or return;

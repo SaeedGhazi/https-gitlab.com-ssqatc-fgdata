@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PropertyList>
-  <name>test</name>
-  
-  <buffer>
-    <name>refl</name>
-    <type>cubemap</type>
-    <width>128</width>
-    <height>128</height>
-    <format>rgba8</format>
-  </buffer>
+  <name>ALS</name>
 
   <buffer>
     <name>color</name>
@@ -18,7 +10,6 @@
     <height>screen</height>
     <format>rgba8</format>
   </buffer>
-  
   <buffer>
     <name>depth</name>
     <type>2d</type>
@@ -26,122 +17,130 @@
     <height>screen</height>
     <format>depth32f</format>
   </buffer>
-  
   <buffer>
-    <name>shadow-atlas</name>
+    <name>sun-shadowmap-atlas</name>
     <type>2d</type>
-    <width>8192</width>
-    <height>8192</height>
+    <width><property>/sim/rendering/als/shadows/sun-atlas-size</property></width>
+    <height><property>/sim/rendering/als/shadows/sun-atlas-size</property></height>
     <format>depth32f</format>
     <wrap-s>clamp-to-border</wrap-s>
     <wrap-t>clamp-to-border</wrap-t>
     <wrap-r>clamp-to-border</wrap-r>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
     <border-color type="vec4d">1.0 1.0 1.0 1.0</border-color>
     <shadow-comparison>true</shadow-comparison>
   </buffer>
-  
+
+
+
+
+  <!-- Shadow mapping pre-passes -->
   <pass include="csm.xml">
     <name>csm0</name>
     <near-m>0.1</near-m>
     <far-m>3.0</far-m>
-  </pass>
-  
-  <!-- Shadow cascades -->
-<!--
-  <pass include="csm.xml">
-    <name>csm0</name>
-    <near-m>0.1</near-m>
-    <far-m>5.0</far-m>
     <viewport>
       <x>0.0</x>
       <y>0.0</y>
-      <width>0.25</width>
-      <height>1.0</height>
+      <width>0.5</width>
+      <height>0.5</height>
     </viewport>
   </pass>
   <pass include="csm.xml">
     <name>csm1</name>
-    <near-m>5.0</near-m>
-    <far-m>50.0</far-m>
+    <near-m>3.0</near-m>
+    <far-m>30.0</far-m>
     <viewport>
-      <x>0.25</x>
+      <x>0.5</x>
       <y>0.0</y>
-      <width>0.25</width>
-      <height>1.0</height>
+      <width>0.5</width>
+      <height>0.5</height>
     </viewport>
   </pass>
   <pass include="csm.xml">
     <name>csm2</name>
-    <near-m>50.0</near-m>
-    <far-m>500.0</far-m>
+    <near-m>30.0</near-m>
+    <far-m>300.0</far-m>
     <viewport>
-      <x>0.5</x>
-      <y>0.0</y>
-      <width>0.25</width>
-      <height>1.0</height>
+      <x>0.0</x>
+      <y>0.5</y>
+      <width>0.5</width>
+      <height>0.5</height>
     </viewport>
   </pass>
   <pass include="csm.xml">
     <name>csm3</name>
-    <near-m>500.0</near-m>
-    <far-m>5000.0</far-m>
+    <near-m>300.0</near-m>
+    <far-m>3000.0</far-m>
     <viewport>
-      <x>0.75</x>
-      <y>0.0</y>
-      <width>0.25</width>
-      <height>1.0</height>
+      <x>0.5</x>
+      <y>0.5</y>
+      <width>0.5</width>
+      <height>0.5</height>
     </viewport>
   </pass>
--->
-
+  
   <pass>
     <name>forward</name>
     <type>scene</type>
-
+    <effect-scheme>als-lighting</effect-scheme>
+<!--
+    <clustered-shading>
+      <tile-size>128</tile-size>
+      <num-threads>4</num-threads>
+      <depth-slices>16</depth-slices>
+    </clustered-shading>
+-->
     <use-shadow-pass>csm0</use-shadow-pass>
-
+    <use-shadow-pass>csm1</use-shadow-pass>
+    <use-shadow-pass>csm2</use-shadow-pass>
+    <use-shadow-pass>csm3</use-shadow-pass>
+    
     <binding>
-      <buffer>shadow-atlas</buffer>
+      <buffer>sun-shadowmap-atlas</buffer>
       <unit>10</unit>
     </binding>
     
     <attachment>
       <buffer>color</buffer>
       <component>color0</component>
+      <!--
       <multisample-samples>4</multisample-samples>
       <multisample-color-samples>4</multisample-color-samples>
+      -->
     </attachment>
     <attachment>
-	  <buffer>depth</buffer>
-	  <component>depth</component>
-	</attachment>
+      <buffer>depth</buffer>
+      <component>depth</component>
+    </attachment>
   </pass>
   
   <pass>
 	<name>display</name>
 	<type>quad</type>
-    <clear-color-bit>false</clear-color-bit>
 	<binding>
 	  <buffer>color</buffer>
 	  <unit>0</unit>
 	</binding>
   </pass>
-<!--
+
+  
   <pass>
-	<name>shadow-debug</name>
+	<name>depth-debug</name>
 	<type>quad</type>
-    <clear-color-bit>false</clear-color-bit>
+    <clear-mask>depth</clear-mask>
 	<geometry>
-	  <left>0.7</left>
+	  <left>0.8</left>
 	  <bottom>0.0</bottom>
-	  <width>0.3</width>
+	  <width>0.2</width>
 	  <height>0.2</height>
 	  <scale>1.0</scale>
 	</geometry>
 	<binding>
-	  <buffer>shadow-atlas</buffer>
+	  <buffer>depth</buffer>
 	  <unit>0</unit>
 	</binding>
   </pass>
--->
+
 </PropertyList>

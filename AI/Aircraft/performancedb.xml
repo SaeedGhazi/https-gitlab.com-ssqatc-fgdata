@@ -108,6 +108,21 @@
       <taxi-speed-kts>15.0</taxi-speed-kts>
     </aircraft>
     <aircraft>
+      <type>shuttle</type>
+      <acceleration-kts-hour>5.0</acceleration-kts-hour>
+      <deceleration-kts-hour>5.0</deceleration-kts-hour>
+      <climbrate-fpm>1000.0</climbrate-fpm>
+      <decentrate-fpm>18000.0</decentrate-fpm>
+      <rotate-speed-kts>206.0</rotate-speed-kts>
+      <takeoff-speed-kts>320.0</takeoff-speed-kts>
+      <climbspeed-kts>350.0</climbspeed-kts>
+      <cruise-speed-kts>1200.0</cruise-speed-kts>
+      <decent-speed-kts>150.0</decent-speed-kts>
+      <approach-speed-kts>150.0</approach-speed-kts>
+      <touchdown-speed-kts>150.0</touchdown-speed-kts>
+      <taxi-speed-kts>15.0</taxi-speed-kts>
+    </aircraft>
+    <aircraft>
       <type>ufo</type>
       <acceleration-kts-hour>30.0</acceleration-kts-hour>
       <deceleration-kts-hour>30.0</deceleration-kts-hour>

@@ -3,16 +3,14 @@
 <PropertyList>
   <type>shadow-map</type>
   <light-name>FGLightSource</light-name>
-  <effect-override>Effects/shadow-pass</effect-override>
+  <effect-scheme>als-shadow</effect-scheme>
   <!-- Only render objects with the CAST_SHADOW bit flag -->
   <cull-mask>0x000004</cull-mask>
-  <!--
   <condition>
-	<property>/sim/rendering/shadows/enabled</property>
+	<property>/sim/rendering/als/shadows/enabled</property>
   </condition>
-  -->
   <attachment>
-    <buffer>shadow-atlas</buffer>
+    <buffer>sun-shadowmap-atlas</buffer>
     <component>depth</component>
   </attachment>
 </PropertyList>

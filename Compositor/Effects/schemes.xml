@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <scheme>
+    <name>als-shadow</name>
+    <fallback>Effects/shadow-pass</fallback>
+  </scheme>
+</PropertyList>

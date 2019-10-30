@@ -1019,7 +1019,7 @@
         </internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/ALS/glass.vert</vertex-shader>
+        <vertex-shader>Shaders/ALS/grass.vert</vertex-shader>
         <geometry-shader>Shaders/ALS/terrain-overlay.geom</geometry-shader>
         <fragment-shader>Shaders/ALS/terrain-overlay.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/noise.frag</fragment-shader>

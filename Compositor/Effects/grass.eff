@@ -933,9 +933,9 @@
         </internal-format>
       </texture-unit>
       <program>
-        <vertex-shader n="0">Shaders/ALS/glass.vert</vertex-shader>
-        <geometry-shader>Shaders/ALS/glass.geom</geometry-shader>
-        <fragment-shader n="0">Shaders/ALS/glass.frag</fragment-shader>
+        <vertex-shader n="0">Shaders/ALS/grass.vert</vertex-shader>
+        <geometry-shader>Shaders/ALS/grass.geom</geometry-shader>
+        <fragment-shader n="0">Shaders/ALS/grass.frag</fragment-shader>
         <fragment-shader n="1">Shaders/ALS/noise.frag</fragment-shader>
         <fragment-shader n="2">Shaders/ALS/filters.frag</fragment-shader>
         <geometry-vertices-out type="int">96</geometry-vertices-out>

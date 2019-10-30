@@ -46,7 +46,7 @@
     </fogtype>
     <!-- 	END fog include -->
   </parameters>
-  <technique n="9">
+  <technique n="7">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/quality-level</property>
@@ -262,7 +262,7 @@
       <!-- 			END fog include -->
     </pass>
   </technique>
-  <technique n="19">
+  <technique n="18">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

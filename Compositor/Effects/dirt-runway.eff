@@ -42,7 +42,7 @@
     <size_grain>30.0</size_grain>
     <grain_strength>1.0</grain_strength>
   </parameters>
-  <technique n="19">
+  <technique n="15">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

@@ -89,7 +89,7 @@
   </parameters>
   <!-- fall back to a fixed pipeline technique equivalent to model-transparent otherwise -->
   <!-- Rembrandt technique of model-default comes at 10, so we insert before that -->
-  <technique n="9">
+  <technique n="7">
     <pass>
       <lighting>true</lighting>
       <depth>
@@ -165,7 +165,7 @@
       </texture-unit>
     </pass>
   </technique>
-  <technique n="19">
+  <technique n="18">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

@@ -33,7 +33,7 @@
     <overlay_autumn_flag>0</overlay_autumn_flag>
     <overlay_secondary_flag>0</overlay_secondary_flag>
   </parameters>
-  <technique n="19">
+  <technique n="16">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

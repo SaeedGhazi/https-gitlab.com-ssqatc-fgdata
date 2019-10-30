@@ -334,7 +334,7 @@
     <tangent type="int">6</tangent>
     <binormal type="int">7</binormal>
   </generate>
-  <technique n="8">
+  <technique n="6">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/quality-level</property>
@@ -772,7 +772,7 @@
       </uniform>
     </pass>
   </technique>
-  <technique n="9">
+  <technique n="7">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/quality-level</property>
@@ -1167,7 +1167,7 @@
       </uniform>
     </pass>
   </technique>
-  <technique n="18">
+  <technique n="15">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>
@@ -2040,7 +2040,7 @@
       <!-- END fog include -->
     </pass>
   </technique>
-  <technique n="19">
+  <technique n="16">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

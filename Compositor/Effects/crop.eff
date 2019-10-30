@@ -22,7 +22,7 @@
       <use>/environment/snow-level-m</use>
     </snow-level>
   </parameters>
-  <technique n="9">
+  <technique n="7">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/quality-level</property>

@@ -21,7 +21,7 @@
     <transparent>true</transparent>
     <raise_vertex type="bool">true</raise_vertex>
   </parameters>
-  <technique n="19">
+  <technique n="15">
     <scheme>als-lighting</scheme>
     <predicate>
       <equal>

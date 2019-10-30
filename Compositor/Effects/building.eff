@@ -146,7 +146,7 @@
   </parameters>
   <!-- Atmospheric scattering technique with model shader-->
   <!-- Atmospheric scattering technique -->
-  <technique n="7">
+  <technique n="4">
     <pass>
       <lighting>true</lighting>
       <material>
@@ -338,7 +338,7 @@
       </uniform>
     </pass>
   </technique>
-  <technique n="8">
+  <technique n="5">
     <pass>
       <material>
         <active>true</active>
@@ -401,7 +401,7 @@
       </program>
     </pass>
   </technique>
-  <technique n="9">
+  <technique n="6">
     <pass>
       <material>
         <active>true</active>
@@ -464,7 +464,7 @@
       </program>
     </pass>
   </technique>
-  <technique n="18">
+  <technique n="16">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>
@@ -578,7 +578,7 @@
       </program>
     </pass>
   </technique>
-  <technique n="19">
+  <technique n="17">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

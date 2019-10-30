@@ -33,7 +33,7 @@
       <use>/environment/aircraft-effects/wash-strength</use>
     </wash-strength>
   </parameters>
-  <technique n="19">
+  <technique n="15">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

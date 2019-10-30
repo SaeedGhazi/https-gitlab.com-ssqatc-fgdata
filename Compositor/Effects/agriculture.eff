@@ -278,7 +278,7 @@
   </parameters>
   <!-- put techniques at a "high" index to allow derived effects to
        insert their own techniques first. -->
-  <technique n="19">
+  <technique n="16">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

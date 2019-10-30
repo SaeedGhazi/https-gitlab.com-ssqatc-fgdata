@@ -9,7 +9,7 @@
     <chute_bend>0.0</chute_bend>
     <!-- 		END fog include -->
   </parameters>
-  <technique n="19">
+  <technique n="18">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

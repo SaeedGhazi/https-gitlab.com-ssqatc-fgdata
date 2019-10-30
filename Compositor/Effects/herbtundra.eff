@@ -72,7 +72,7 @@
     <tangent type="int">6</tangent>
     <binormal type="int">7</binormal>
   </generate>
-  <technique n="9">
+  <technique n="7">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/quality-level</property>

@@ -59,7 +59,7 @@
     <tangent type="int">6</tangent>
     <binormal type="int">7</binormal>
   </generate>
-  <technique n="19">
+  <technique n="17">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

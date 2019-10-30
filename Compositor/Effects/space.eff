@@ -3,7 +3,7 @@
 <PropertyList>
   <name>Effects/space</name>
   <inherits-from>Effects/model-default</inherits-from>
-  <technique n="9">
+  <technique n="7">
     <pass>
       <program>
         <vertex-shader n="0">Shaders/ALS/space-base.vert</vertex-shader>

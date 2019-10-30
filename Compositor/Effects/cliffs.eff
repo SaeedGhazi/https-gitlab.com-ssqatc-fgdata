@@ -35,7 +35,7 @@
 		<grain-fade-power type="float">1.3</grain-fade-power>
     		<rock_strata>0</rock_strata>-->
   </parameters>
-  <technique n="19">
+  <technique n="16">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

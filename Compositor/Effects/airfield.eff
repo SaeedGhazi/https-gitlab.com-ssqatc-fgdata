@@ -37,7 +37,7 @@
     <overlay_bias>0.0</overlay_bias>
     <overlay_alpha>1.0</overlay_alpha>
   </parameters>
-  <technique n="19">
+  <technique n="16">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

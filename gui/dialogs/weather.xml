@@ -689,6 +689,31 @@
           </binding>
         </textbox>
       </group>
+      
+      <group>
+        <layout>hbox</layout>
+        <text>
+          <label>METAR Description</label>
+        </text>
+        <empty>
+          <stretch>true</stretch>
+        </empty>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <textbox>
+          <name>metar-string-human</name>
+          <halign>fill</halign>
+          <stretch>true</stretch>
+          <pref-height>200</pref-height>
+          <slider>15</slider>
+          <editable>false</editable>
+          <wrap>true</wrap>
+          <top-line>0</top-line>
+          <property>/environment/metar/description</property>
+        </textbox>
+      </group>
 
       <group>
         <layout>hbox</layout>

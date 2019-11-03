@@ -12,4 +12,7 @@
 		<enable-hot type="bool">false</enable-hot>
 	</animation>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

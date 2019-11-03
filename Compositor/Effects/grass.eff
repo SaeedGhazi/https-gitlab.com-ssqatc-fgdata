@@ -201,12 +201,14 @@
       <program>
         <vertex-shader>Shaders/ALS/terrain-ultra.vert</vertex-shader>
         <vertex-shader>Shaders/ALS/filters.vert</vertex-shader>
+        <vertex-shader>Shaders/ALS/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/ALS/airfield.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/cloud-shadowfunc.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/noise.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/filters.frag</fragment-shader>
+        <fragment-shader>Shaders/ALS/shadows-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -862,6 +864,27 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
       <depth>
         <function>lequal</function>
         <write-mask type="bool">false</write-mask>
@@ -938,6 +961,7 @@
         <fragment-shader n="0">Shaders/ALS/grass.frag</fragment-shader>
         <fragment-shader n="1">Shaders/ALS/noise.frag</fragment-shader>
         <fragment-shader n="2">Shaders/ALS/filters.frag</fragment-shader>
+        <fragment-shader n="3">Shaders/ALS/shadows-include.frag</fragment-shader>
         <geometry-vertices-out type="int">96</geometry-vertices-out>
         <geometry-input-type>triangles</geometry-input-type>
         <geometry-output-type>triangle-strip</geometry-output-type>
@@ -1123,6 +1147,27 @@
           <use>wind_effects</use>
         </value>
       </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
       <blend>
         <active>true</active>
         <source>src-alpha</source>

@@ -51,6 +51,8 @@ uniform mat4 osg_ViewMatrixInverse;
 float earthShade;
 float yprime_alt;
 
+void setupShadows(vec4 eyeSpacePos);
+
 vec3 moonlight_perception (in vec3 light);
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
@@ -88,7 +90,8 @@ void main()
   float scattering;
 
    rawPos = gl_Vertex.xy;
-   worldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
+   vec4 eyePos = gl_ModelViewMatrix * gl_Vertex;
+   worldPos = (osg_ViewMatrixInverse * eyePos).xyz;
 	
 	
    steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
@@ -290,7 +293,7 @@ if (use_IR_vision)
     gl_FrontColor.a = mie_angle;
     gl_BackColor.a = mie_angle;
 
-	
+	setupShadows(eyePos);
 }
 
 

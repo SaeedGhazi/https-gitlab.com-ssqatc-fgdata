@@ -80,4 +80,7 @@
   </transform>
  </animation>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

@@ -37,4 +37,7 @@
   <object-name>rain</object-name>
 </effect>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

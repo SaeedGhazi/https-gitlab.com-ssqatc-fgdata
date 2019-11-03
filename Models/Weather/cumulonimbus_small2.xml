@@ -17,4 +17,7 @@
 		<inherits-from>Effects/clouds-thick</inherits-from>
 	</effect>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

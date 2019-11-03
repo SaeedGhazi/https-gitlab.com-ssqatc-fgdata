@@ -92,6 +92,8 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
+float getShadowing();
+
 
 // a fade function for procedural scales which are smaller than a pixel
 
@@ -417,13 +419,15 @@ if ((dist < 5000.0)&& (quality_level > 3) && (combined_wetness>0.0))
 	NdotL = NdotL + 0.05 * noisegrad_1m * detail_fade(1.0, view_angle,dist);
 	
     if (NdotL > 0.0) {
+        float shadowmap = getShadowing();
 	if (cloud_shadow_flag == 1) {NdotL = NdotL * shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);}
-        color += diffuse_term * NdotL;
+        color += diffuse_term * NdotL * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = ((gl_FrontMaterial.specular.rgb * 0.1 + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
+                            * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor))
+                            * shadowmap);
     }
     color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very

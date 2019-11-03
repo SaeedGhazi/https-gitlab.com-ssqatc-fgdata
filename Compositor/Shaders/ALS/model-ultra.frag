@@ -119,6 +119,8 @@ vec3 filter_combined (in vec3 color) ;
 vec3 moonlight_perception (in vec3 light) ;
 vec3 addLights(in vec3 color1, in vec3 color2);
 
+float getShadowing();
+
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
     {
@@ -340,6 +342,8 @@ void main (void)
         {pf1 = pow(nDotHV1, 0.5*gl_FrontMaterial.shininess);}
   
 
+   float shadowmap = getShadowing();
+   light_diffuse *= shadowmap;
 
     if (cloud_shadow_flag == 1) 
 	{
@@ -387,6 +391,7 @@ void main (void)
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,normalize(vertVec))),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
     Specular *= refl_d;
+    Specular *= shadowmap;
 
     vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
     color = clamp( color, 0.0, 1.0 );

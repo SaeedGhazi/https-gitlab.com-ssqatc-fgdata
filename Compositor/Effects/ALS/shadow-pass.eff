@@ -7,12 +7,10 @@
       <lighting>false</lighting>
       <color-mask type="vec4d">0 0 0 0</color-mask>
       <cull-face>back</cull-face>
-      <!--
       <program>
-		<vertex-shader>Compositor/Shaders/shadow-pass.vert</vertex-shader>
-		<fragment-shader>Compositor/Shaders/shadow-pass.frag</fragment-shader>
-	  </program>
-      -->
+        <vertex-shader>Shaders/Default/trivial.vert</vertex-shader>
+        <fragment-shader>Shaders/Default/trivial.frag</fragment-shader>
+      </program>
     </pass>
   </technique>
 </PropertyList>

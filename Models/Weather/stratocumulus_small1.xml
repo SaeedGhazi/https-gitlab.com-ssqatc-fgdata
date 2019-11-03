@@ -20,4 +20,7 @@
 		<object-name>rect3</object-name>
 		<object-name>rect4</object-name>
 	</effect>
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

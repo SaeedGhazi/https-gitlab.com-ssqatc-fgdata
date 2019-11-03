@@ -12,4 +12,7 @@
 		<object-name>rect</object-name>
 	</effect>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

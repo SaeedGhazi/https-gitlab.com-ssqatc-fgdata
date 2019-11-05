@@ -11,13 +11,6 @@
     <format>rgba8</format>
   </buffer>
   <buffer>
-    <name>depth</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
-    <format>depth32f</format>
-  </buffer>
-  <buffer>
     <name>sun-shadowmap-atlas</name>
     <type>2d</type>
     <width><property>/sim/rendering/als/shadows/sun-atlas-size</property></width>
@@ -31,8 +24,6 @@
     <border-color type="vec4d">1.0 1.0 1.0 1.0</border-color>
     <shadow-comparison>true</shadow-comparison>
   </buffer>
-
-
 
 
   <!-- Shadow mapping pre-passes -->
@@ -50,7 +41,7 @@
   <pass include="csm.xml">
     <name>csm1</name>
     <near-m>3.0</near-m>
-    <far-m>30.0</far-m>
+    <far-m>50.0</far-m>
     <viewport>
       <x>0.5</x>
       <y>0.0</y>
@@ -60,8 +51,8 @@
   </pass>
   <pass include="csm.xml">
     <name>csm2</name>
-    <near-m>30.0</near-m>
-    <far-m>300.0</far-m>
+    <near-m>50.0</near-m>
+    <far-m>150.0</far-m>
     <viewport>
       <x>0.0</x>
       <y>0.5</y>
@@ -71,8 +62,8 @@
   </pass>
   <pass include="csm.xml">
     <name>csm3</name>
-    <near-m>300.0</near-m>
-    <far-m>3000.0</far-m>
+    <near-m>150.0</near-m>
+    <far-m>1500.0</far-m>
     <viewport>
       <x>0.5</x>
       <y>0.5</y>
@@ -80,67 +71,42 @@
       <height>0.5</height>
     </viewport>
   </pass>
-  
+
   <pass>
     <name>forward</name>
     <type>scene</type>
     <effect-scheme>als-lighting</effect-scheme>
-<!--
-    <clustered-shading>
-      <tile-size>128</tile-size>
-      <num-threads>4</num-threads>
-      <depth-slices>16</depth-slices>
-    </clustered-shading>
--->
+    <!--
+        <clustered-shading>
+        <tile-size>128</tile-size>
+        <num-threads>4</num-threads>
+        <depth-slices>16</depth-slices>
+        </clustered-shading>
+    -->
     <use-shadow-pass>csm0</use-shadow-pass>
     <use-shadow-pass>csm1</use-shadow-pass>
     <use-shadow-pass>csm2</use-shadow-pass>
     <use-shadow-pass>csm3</use-shadow-pass>
-    
+
     <binding>
       <buffer>sun-shadowmap-atlas</buffer>
       <unit>10</unit>
     </binding>
-    
+
     <attachment>
       <buffer>color</buffer>
       <component>color0</component>
-      <!--
       <multisample-samples>4</multisample-samples>
       <multisample-color-samples>4</multisample-color-samples>
-      -->
-    </attachment>
-    <attachment>
-      <buffer>depth</buffer>
-      <component>depth</component>
     </attachment>
   </pass>
-  
-  <pass>
-	<name>display</name>
-	<type>quad</type>
-	<binding>
-	  <buffer>color</buffer>
-	  <unit>0</unit>
-	</binding>
-  </pass>
 
-  
   <pass>
-	<name>depth-debug</name>
-	<type>quad</type>
-    <clear-mask>depth</clear-mask>
-	<geometry>
-	  <left>0.8</left>
-	  <bottom>0.0</bottom>
-	  <width>0.2</width>
-	  <height>0.2</height>
-	  <scale>1.0</scale>
-	</geometry>
-	<binding>
-	  <buffer>depth</buffer>
-	  <unit>0</unit>
-	</binding>
+    <name>display</name>
+    <type>quad</type>
+    <binding>
+      <buffer>color</buffer>
+      <unit>0</unit>
+    </binding>
   </pass>
-
 </PropertyList>

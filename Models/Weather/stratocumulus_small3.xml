@@ -23,4 +23,7 @@
 
 
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

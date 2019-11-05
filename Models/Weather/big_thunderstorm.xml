@@ -383,4 +383,7 @@ print("Done.");
  </animation>-->
 
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

@@ -48,4 +48,7 @@
 		<object-name>rect2</object-name>
 	</effect>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

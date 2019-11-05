@@ -29,4 +29,7 @@
   <max-m>50000</max-m>
  </animation>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

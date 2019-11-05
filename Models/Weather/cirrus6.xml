@@ -14,4 +14,7 @@
   <object-name>mesh</object-name>
 </effect>
 
+	<animation>
+		<type>noshadow</type>
+	</animation>
 </PropertyList>

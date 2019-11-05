@@ -28,6 +28,8 @@ uniform int  		shader_qual;
 // void	fog_Func(int type);
 ////////////////////////////
 
+void setupShadows(vec4 eyeSpacePos);
+
 void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
 {
 	rotmat = mat4(	cosRy ,	sinRx * sinRy ,	cosRx * sinRy,	0.0,
@@ -112,4 +114,6 @@ void	main(void)
 		
 		gl_Position = ftransform();
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+
+        setupShadows(ecPosition);
 }

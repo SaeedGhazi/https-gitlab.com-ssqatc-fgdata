@@ -76,13 +76,13 @@
     <name>forward</name>
     <type>scene</type>
     <effect-scheme>als-lighting</effect-scheme>
-    <!--
-        <clustered-shading>
-        <tile-size>128</tile-size>
-        <num-threads>4</num-threads>
-        <depth-slices>16</depth-slices>
-        </clustered-shading>
-    -->
+
+    <clustered-shading>
+      <tile-size>128</tile-size>
+      <num-threads>1</num-threads>
+      <depth-slices>1</depth-slices>
+    </clustered-shading>
+
     <use-shadow-pass>csm0</use-shadow-pass>
     <use-shadow-pass>csm1</use-shadow-pass>
     <use-shadow-pass>csm2</use-shadow-pass>

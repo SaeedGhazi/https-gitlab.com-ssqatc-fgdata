@@ -481,6 +481,15 @@
         <fragment-shader>Shaders/ALS/noise.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/filters.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/shadows-include.frag</fragment-shader>
+        <fragment-shader>Shaders/ALS/clustered-include.frag</fragment-shader>
+        <uniform-block-binding>
+          <name>PointLightBlock</name>
+          <index>5</index>
+        </uniform-block-binding>
+        <uniform-block-binding>
+          <name>SpotLightBlock</name>
+          <index>6</index>
+        </uniform-block-binding>
       </program>
       <uniform>
         <name>visibility</name>

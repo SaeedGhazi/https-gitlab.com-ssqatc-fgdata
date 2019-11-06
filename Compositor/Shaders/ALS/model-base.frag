@@ -6,7 +6,7 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
-
+varying vec4 ecPosition;
 
 uniform sampler2D texture;
 
@@ -57,6 +57,7 @@ vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
+vec3 addClusteredLightsContribution(vec3 inputColor, vec3 v, vec3 N);
 
 float luminance(vec3 color)
 {
@@ -318,6 +319,7 @@ fragColor.rgb = mix(hazeColor  + secondary_light * fog_backscatter(mvisibility),
 
 }
 
+fragColor.rgb = addClusteredLightsContribution(fragColor.rgb, ecPosition.xyz, normal);
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;

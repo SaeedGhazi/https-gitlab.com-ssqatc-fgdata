@@ -631,6 +631,41 @@
         </group>
       </group>
 
+      <!--
+      <group>
+        <layout>hbox</layout>
+        <text>
+          <label>Description</label>
+        </text>
+        <empty>
+          <stretch>true</stretch>
+        </empty>
+      </group>
+      -->
+
+      <textbox>
+        <name>description</name>
+        <halign>fill</halign>
+        <stretch>true</stretch>
+        <pref-width>450</pref-width>
+        <pref-height>100</pref-height>
+        <slider>15</slider>
+        <editable>false</editable>
+        <wrap>true</wrap>
+        <live>true</live>
+        <top-line>0</top-line>
+        <property>sim/gui/dialogs/metar/description[0]</property>
+      </textbox>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
       <group>
         <layout>hbox</layout>
         <text>
@@ -689,55 +724,20 @@
           </binding>
         </textbox>
       </group>
-      
+
       <group>
         <layout>hbox</layout>
-        <text>
-          <label>METAR Description</label>
-        </text>
+        <button>
+            <legend>METAR Description...</legend>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>weather-metar-description</dialog-name>
+            </binding>
+        </button>
         <empty>
           <stretch>true</stretch>
         </empty>
       </group>
-
-      <group>
-        <layout>hbox</layout>
-        <textbox>
-          <name>metar-string-human</name>
-          <halign>fill</halign>
-          <stretch>true</stretch>
-          <pref-height>200</pref-height>
-          <slider>15</slider>
-          <editable>false</editable>
-          <wrap>true</wrap>
-          <top-line>0</top-line>
-          <property>/environment/metar/description</property>
-        </textbox>
-      </group>
-
-      <group>
-        <layout>hbox</layout>
-        <text>
-          <label>Description</label>
-        </text>
-        <empty>
-          <stretch>true</stretch>
-        </empty>
-      </group>
-
-      <textbox>
-        <name>description</name>
-        <halign>fill</halign>
-        <stretch>true</stretch>
-        <pref-width>450</pref-width>
-        <pref-height>100</pref-height>
-        <slider>15</slider>
-        <editable>false</editable>
-        <wrap>true</wrap>
-        <live>true</live>
-        <top-line>0</top-line>
-        <property>sim/gui/dialogs/metar/description[0]</property>
-      </textbox>
 
     </group>
 

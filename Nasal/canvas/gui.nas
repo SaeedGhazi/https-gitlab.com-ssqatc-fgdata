@@ -88,7 +88,9 @@ var Window = {
 
     m.setInt("content-size[0]", size[0]);
     m.setInt("content-size[1]", size[1]);
-
+    m.setDouble("aspect-ratio", size[0]/size[1]);
+    m.setBool("lock-aspect-ratio", 0);
+    
     # TODO better default position
     m.move(0,0);
     m.setFocus();
@@ -289,6 +291,9 @@ var Window = {
       me._canvas.set("view[" ~ i ~ "]", size);
     }
   },
+  lockAspectRatio: func (lock=1) {
+    me.setBool("lock-aspect-ratio", lock);
+  },
 # protected:
   _onStateChange: func
   {
@@ -317,6 +322,7 @@ var Window = {
         .dispatchEvent(event);
   },
 # private:
+  #mode 0 = value changed, +-1 add/remove node
   _propCallback: func(child, mode)
   {
     if( !me._node.equals(child.getParent()) )
@@ -394,12 +400,28 @@ var Window = {
     var x = me.get("tf/t[0]");
     var y = me.get("tf/t[1]");
     var old_size = [me.get("size[0]"), me.get("size[1]")];
+    if (me.get("lock-aspect-ratio")) 
+    {
+      var old_csize = [me.get("content-size[0]"), me.get("content-size[1]")];
+      var dx = old_size[0] - old_csize[0];
+      var dy = old_size[1] - old_csize[1];
+      var ar = me.get("aspect-ratio");
+
+      if (name == "resize-right") 
+        me.set("resize-bottom", (me.get("resize-right") - dx) / ar + dy);
+      if (name == "resize-bottom") 
+        me.set("resize-right", (me.get("resize-bottom") - dy)* ar + dx);
+
+      if (name == "resize-left") 
+        me.set("resize-top", (me.get("resize-left"))/ ar );
+      if (name == "resize-top") 
+        me.set("resize-left", (me.get("resize-top"))* ar );
+    }
 
     var l = x + math.min(me.get("resize-left"), old_size[0] - min_size[0]);
     var t = y + math.min(me.get("resize-top"), old_size[1] - min_size[1]);
     var r = x + math.max(me.get("resize-right"), min_size[0]);
     var b = y + math.max(me.get("resize-bottom"), min_size[1]);
-
     if( is_status )
     {
       me._resize = child.getValue();

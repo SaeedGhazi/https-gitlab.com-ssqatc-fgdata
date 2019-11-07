@@ -631,18 +631,6 @@
         </group>
       </group>
 
-      <!--
-      <group>
-        <layout>hbox</layout>
-        <text>
-          <label>Description</label>
-        </text>
-        <empty>
-          <stretch>true</stretch>
-        </empty>
-      </group>
-      -->
-
       <textbox>
         <name>description</name>
         <halign>fill</halign>

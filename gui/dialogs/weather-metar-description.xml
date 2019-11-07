@@ -5,8 +5,6 @@
     <modal>false</modal>
     <resizable>true</resizable>
     <layout>vbox</layout>
-    <width>300</width>
-    <height>150</height>
     <default-padding>3</default-padding>
     
     <group>
@@ -40,7 +38,8 @@
         <wrap>true</wrap>
         <top-line>0</top-line>
         <property>/environment/metar/description</property>
-        </textbox>
+    </textbox>
+    
     <button>
         <legend>Close</legend>
         <equal>true</equal>

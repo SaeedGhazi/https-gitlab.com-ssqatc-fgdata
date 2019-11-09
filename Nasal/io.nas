@@ -22,6 +22,27 @@ var dirname =  func(path) {
     substr(path, 0, size(path) - size(basename(path)));
 };
 
+var is_directory = func(path) {
+    var tmp = stat(path);
+    if (tmp != nil and tmp[11] == "dir") return 1;
+    else return 0;
+};
+
+# <path> the path that should be searched for subdirectories
+# returns a vector of subdirectory names
+var subdirectories = func(path) {
+    if (!is_directory(path))
+        return;
+    var list = subvec(directory(path), 2);
+    var subdirs = [];
+    foreach (var entry; list) {
+        if (is_directory(path~"/"~entry)) {
+            append(subdirs, entry);
+        }
+    }
+    return subdirs;
+}
+
 # include(<filename>)
 #
 # Loads and executes a Nasal file in place. The file is searched for in the

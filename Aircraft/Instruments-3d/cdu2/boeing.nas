@@ -1335,9 +1335,19 @@ var CDU = {
      formatSpeed: func(speed)
      {
          if (speed < 1.0)
-            return sprintf('.%3d', speed / 1000);
+            return sprintf('.%3d', speed * 1000);
          sprintf(' %3d', speed);
      },
+
+    formatSpeedMachKnots: func(mach, knots)
+    {
+        # tolerate either component being nil
+        var machStr = '----';
+        var knotsStr = '---';
+        if (mach) machStr = sprintf('.%03d', mach * 1000);
+        if (knots) knotsStr = sprintf('%3d', knots);
+        return machStr ~ '/' ~ knotsStr;
+    },
 
      formatSpeedAltitude: func(speed, alt)
      {
@@ -1364,6 +1374,33 @@ var CDU = {
         return s;
      },
      
+    formatTimeDistace: func(time, distance)
+    {
+        # the seperator slash is small, hence the markup
+        return me.formatTime(time) ~ '~/!' ~ me.formatDistanceNm(distance);
+    },
+
+    formatTime: func(time)
+    {
+        var hours = int(time / 3600.0);
+        var minutes = time - (hours * 3600.0);
+
+        # we want a single digit of minutes, so divide by 60 * 10
+        minutes = int(minutes / 600.0); 
+        return sprintf('%04d.%d~Z', hours, minutes);
+    },
+
+    # this assumes a 6-char field, 4 digits for the value and 2 for 'NM'
+    formatDistance: func(d)
+    {
+        if (d < 10) {
+            # when distance is below 10nm, show decimal
+            return sprintf('%4.1f~NM', d);
+        }
+
+        return sprintf('%4d~NM', d);
+    },
+
 # button / LSK functions
     lsk: func(ident)
     {

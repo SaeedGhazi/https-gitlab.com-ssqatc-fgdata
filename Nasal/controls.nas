@@ -341,7 +341,7 @@ var incThrottle = func {
     var passive = getprop("/autopilot/locks/passive-mode");
     var locked = getprop("/autopilot/locks/speed");
     # Note: passive/locked may be nil on aircraft without A/P
-    if ((passive == 0) and (locked))
+    if (!passive and (locked))
     {
         var node = props.globals.getNode("/autopilot/settings/target-speed-kt", 1);
         if (node.getValue() == nil) {
@@ -373,7 +373,7 @@ var incAileron = func {
     var passive = getprop("/autopilot/locks/passive-mode");
     var locked = getprop("/autopilot/locks/heading");
     # Note: passive/locked may be nil on aircraft without A/P
-    if ((passive == 0) and (locked == "dg-heading-hold"))
+    if (!passive and (locked == "dg-heading-hold"))
     {
         var node = props.globals.getNode("/autopilot/settings/heading-bug-deg", 1);
         if (node.getValue() == nil) {
@@ -387,7 +387,7 @@ var incAileron = func {
             node.setValue(node.getValue() - 360.0);
         }
     }
-    else if ((passive == 0) and (locked == "true-heading-hold"))
+    else if (!passive and (locked == "true-heading-hold"))
     {
         var node = props.globals.getNode("/autopilot/settings/true-heading-deg", 1);
         if (node.getValue() == nil) {
@@ -424,7 +424,7 @@ var incElevator = func {
     var passive = getprop("/autopilot/locks/passive-mode");
     var locked = getprop("/autopilot/locks/altitude");
     # Note: passive/locked may be nil on aircraft without A/P
-    if ((passive == 0) and (locked =="altitude-hold"))
+    if (!passive and (locked =="altitude-hold"))
     {
         var node = props.globals.getNode("/autopilot/settings/target-altitude-ft", 1);
         if (node.getValue() == nil) {

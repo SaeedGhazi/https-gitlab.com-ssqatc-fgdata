@@ -411,7 +411,7 @@ Where:
 - H is the building height in meters, excluding any pitched roof
 - P is the pitch height in meters. 0 for a flat roof
 - S is the roof shape (only 0, 2, 4, 6 are implemented, others are approximated to those) :
-    0=flat 1=skillion 2=gabled 3=half-hipped 4=hipped 5=pyramidal 6=gambled
+    0=flat 1=skillion 2=gabled 3=half-hipped 4=hipped 5=pyramidal 6=gambrel
     7=mansard 8=dome 9=onion 10=round 11=saltbox
 - O is the roof ridge orientation :
     0 = parallel to the front face of the building

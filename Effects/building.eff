@@ -208,19 +208,19 @@
           <index>10</index>
         </attribute>
         <attribute>
-          <name>instanceScaleRotate</name>
+          <name>instanceScale</name>
           <index>11</index>
         </attribute>
         <attribute>
-          <name>rotPitchWtex0x</name>
+          <name>rotPitchWtexX0</name>
           <index>12</index>
         </attribute>
         <attribute>
-          <name>wtex0yTex1xTex1y</name>
+          <name>wtexY0FRtexx1FSRtexY1</name>
           <index>13</index>
         </attribute>
         <attribute>
-          <name>rtex0xRtex0y</name>
+          <name>rtexX0RtexY0StexX1</name>
           <index>14</index>
         </attribute>
         <attribute>
@@ -302,19 +302,19 @@
           <index>10</index>
         </attribute>
         <attribute>
-          <name>instanceScaleRotate</name>
+          <name>instanceScale</name>
           <index>11</index>
         </attribute>
         <attribute>
-          <name>rotPitchWtex0x</name>
+          <name>rotPitchWtexX0</name>
           <index>12</index>
         </attribute>
         <attribute>
-          <name>wtex0yTex1xTex1y</name>
+          <name>wtexY0FRtexx1FSRtexY1</name>
           <index>13</index>
         </attribute>
         <attribute>
-          <name>rtex0xRtex0y</name>
+          <name>rtexX0RtexY0StexX1</name>
           <index>14</index>
         </attribute>
         <attribute>
@@ -385,19 +385,19 @@
 					<index>10</index>
 				</attribute>
         <attribute>
-					<name>instanceScaleRotate</name>
+					<name>instanceScale</name>
 					<index>11</index>
 				</attribute>
         <attribute>
-					<name>rotPitchWtex0x</name>
+					<name>rotPitchWtexX0</name>
 					<index>12</index>
 				</attribute>
         <attribute>
-					<name>wtex0yTex1xTex1y</name>
+					<name>wtexY0FRtexx1FSRtexY1</name>
 					<index>13</index>
 				</attribute>
         <attribute>
-          <name>rtex0xRtex0y</name>
+          <name>rtexX0RtexY0StexX1</name>
           <index>14</index>
         </attribute>
         <attribute>
@@ -523,19 +523,19 @@
         <index>10</index>
       </attribute>
       <attribute>
-        <name>instanceScaleRotate</name>
+        <name>instanceScale</name>
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchWtex0x</name>
+        <name>rotPitchWtexX0</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>wtex0yTex1xTex1y</name>
+        <name>wtexY0FRtexx1FSRtexY1</name>
         <index>13</index>
       </attribute>
       <attribute>
-        <name>rtex0xRtex0y</name>
+        <name>rtexX0RtexY0StexX1</name>
         <index>14</index>
       </attribute>
       <attribute>
@@ -587,19 +587,19 @@
         <index>10</index>
       </attribute>
       <attribute>
-        <name>instanceScaleRotate</name>
+        <name>instanceScale</name>
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchWtex0x</name>
+        <name>rotPitchWtexX0</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>wtex0yTex1xTex1y</name>
+        <name>wtexY0FRtexx1FSRtexY1</name>
         <index>13</index>
       </attribute>
       <attribute>
-        <name>rtex0xRtex0y</name>
+        <name>rtexX0RtexY0StexX1</name>
         <index>14</index>
       </attribute>
       <attribute>
@@ -709,19 +709,19 @@
 					<index>10</index>
 				</attribute>
         <attribute>
-					<name>instanceScaleRotate</name>
+					<name>instanceScale</name>
 					<index>11</index>
 				</attribute>
         <attribute>
-					<name>rotPitchWtex0x</name>
+					<name>rotPitchWtexX0</name>
 					<index>12</index>
 				</attribute>
         <attribute>
-					<name>wtex0yTex1xTex1y</name>
+					<name>wtexY0FRtexx1FSRtexY1</name>
 					<index>13</index>
 				</attribute>
         <attribute>
-          <name>rtex0xRtex0y</name>
+          <name>rtexX0RtexY0StexX1</name>
           <index>14</index>
         </attribute>
         <attribute>

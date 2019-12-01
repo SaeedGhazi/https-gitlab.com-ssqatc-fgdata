@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- Author Marcin Luzniar - Timetable Jan 2017 - CRJ700 replaced with ERJ145, CRJ1000 replaced with ERJ190 -->
+<!-- Author Marcin Kuzniar - Timetable Jan 2017 - CRK replaced with CR7 -->
 <trafficlist>
   <aircraft>
     <model>Aircraft/ATR42/ATR42-Hop.xml</model>
@@ -1230,7 +1230,7 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>F-HBLB</registration>
+    <registration>F-HBLA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -1244,7 +1244,7 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>F-HBLE</registration>
+    <registration>F-HBLB</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -1286,7 +1286,35 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
+    <registration>F-HBLE</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E90/E90-Hop.xml</model>
+    <livery>HOP</livery>
+    <airline>HOP</airline>
+    <home-port>LFPG</home-port>
+    <required-aircraft>HOP-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
     <registration>F-HBLF</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E90/E90-Hop.xml</model>
+    <livery>HOP</livery>
+    <airline>HOP</airline>
+    <home-port>LFPG</home-port>
+    <required-aircraft>HOP-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>F-HBLG</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -1332,7 +1360,35 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/E90/E90-Hop.xml</model>
+    <livery>HOP</livery>
+    <airline>HOP</airline>
+    <home-port>LFPG</home-port>
+    <required-aircraft>HOP-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>F-HBLK</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E90/E90-Hop.xml</model>
+    <livery>HOP</livery>
+    <airline>HOP</airline>
+    <home-port>LFPG</home-port>
+    <required-aircraft>HOP-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>F-HBLL</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1346,7 +1402,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1360,7 +1416,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1374,7 +1430,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1388,7 +1444,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1402,7 +1458,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1416,7 +1472,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1430,7 +1486,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1444,7 +1500,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1458,7 +1514,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1472,7 +1528,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1486,7 +1542,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1500,7 +1556,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1514,7 +1570,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1528,7 +1584,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ERJ145/ERJ145-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -1542,7 +1598,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1556,7 +1612,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1570,7 +1626,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1584,7 +1640,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1598,7 +1654,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1612,7 +1668,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1626,7 +1682,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1640,7 +1696,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1654,7 +1710,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1668,7 +1724,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1682,7 +1738,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1696,7 +1752,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1710,7 +1766,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>AircraftCR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>
@@ -1724,7 +1780,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/E90/E90-Hop.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>

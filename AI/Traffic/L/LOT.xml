@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<!-- Author Marcin Kuzniar - Timetable of JUN 2018 - CR7 Nordica aircrafts replaced by CR9 models -->
+<!-- Author Marcin Kuzniar - Timetable of JUN 2018 -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/CR9/CR9-LOT-Nordica.xml</model>
+    <model>Aircraft/CR7/CR7-Nordica.xml</model>
     <livery>EST</livery>
     <airline>EST</airline>
     <home-port>EETN</home-port>
@@ -16,7 +16,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CR9/CR9-LOT-Nordica.xml</model>
+    <model>Aircraft/CR7/CR7-Nordica.xml</model>
     <livery>EST</livery>
     <airline>EST</airline>
     <home-port>EETN</home-port>

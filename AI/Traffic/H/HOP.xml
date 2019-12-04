@@ -1766,7 +1766,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>AircraftCR7/CR7-Hop!.xml</model>
+    <model>Aircraft/CR7/CR7-Hop!.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPG</home-port>

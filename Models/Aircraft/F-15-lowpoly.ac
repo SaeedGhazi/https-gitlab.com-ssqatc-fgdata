@@ -8,7 +8,7 @@ kids 14
 OBJECT poly
 name "Radome"
 loc -7.83795 0.0414974 0.000160484
-texture "I:/dev/flightgear-models/flightgear/aircraft/F-15/Models/Liveries/livery.AF80-0007.jpg"
+texture "livery.AF80-0007.jpg"
 crease 45.000000
 numvert 2
 -1.95428 -0.00529382 -0.000316668

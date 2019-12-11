@@ -127,7 +127,7 @@ var _failmgr = {
 
 	add_failure_mode: func(mode) {
 		contains(me.failure_modes, mode.id) and
-			die("add_failure_mode: failure mode already exists: " ~ id);
+			die("add_failure_mode: failure mode already exists: " ~ mode.id);
 
 		me.failure_modes[mode.id] = { mode: mode, trigger: nil };
 		mode.bind(proproot);

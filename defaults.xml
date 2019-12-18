@@ -1349,6 +1349,24 @@ Started September 2000 by David Megginson, david@megginson.com
     <performance_monitor>
       <enabled type="bool" userarchive="n">false</enabled>
     </performance_monitor>
+    <FailureMgr>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </FailureMgr>
+    <canvas>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </canvas>
+    <console>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </console>
+    <input_helpers>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </input_helpers>
+    <std>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </std>
+    <towing>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </towing>
   </nasal>
   <scenery>
     <share-events type="bool" userarchive="y">false</share-events>

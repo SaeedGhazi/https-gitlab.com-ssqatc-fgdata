@@ -184,7 +184,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Belavia.xml</model>
+    <model>Aircraft/CR2/CR2-Belavia.xml</model>
     <livery>BRU</livery>
     <airline>BRU</airline>
     <home-port>UMMS</home-port>
@@ -198,7 +198,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Belavia.xml</model>
+    <model>Aircraft/CR2/CR2-Belavia.xml</model>
     <livery>BRU</livery>
     <airline>BRU</airline>
     <home-port>UMMS</home-port>
@@ -212,7 +212,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Belavia.xml</model>
+    <model>Aircraft/CR2/CR2-Belavia.xml</model>
     <livery>BRU</livery>
     <airline>BRU</airline>
     <home-port>UMMS</home-port>
@@ -226,7 +226,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Belavia.xml</model>
+    <model>Aircraft/CR2/CR2-Belavia.xml</model>
     <livery>BRU</livery>
     <airline>BRU</airline>
     <home-port>UMMS</home-port>
@@ -240,7 +240,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-Belavia.xml</model>
+    <model>Aircraft/CR2/CR2-Belavia.xml</model>
     <livery>BRU</livery>
     <airline>BRU</airline>
     <home-port>UMMS</home-port>

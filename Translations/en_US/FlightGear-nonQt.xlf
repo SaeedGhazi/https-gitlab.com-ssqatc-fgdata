@@ -399,6 +399,10 @@
           <source>Stopwatch</source>
           <target />
         </trans-unit>
+        <trans-unit approved="no" id="menu/swift_connection:0" translate="yes">
+          <source>swift Connection</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="no" id="menu/system-failures:0" translate="yes">
           <source>System Failures</source>
           <target />

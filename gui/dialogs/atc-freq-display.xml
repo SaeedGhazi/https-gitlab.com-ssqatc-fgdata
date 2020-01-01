@@ -27,6 +27,32 @@
 				<halign>right</halign>
 				<label>FREQUENCY</label>
 			</text>
+
+            <button>
+                <pref-width>50</pref-width>
+                <pref-height>22</pref-height>
+                <legend>COM1</legend>
+                <border>2</border>
+
+                <binding>
+                    <command>property-assign</command>
+                    <property>/instrumentation/comm/frequencies/selected-mhz</property>
+                    <value type="float">FREQUENCY</value>
+                </binding>
+            </button>
+
+            <button>
+                <pref-width>50</pref-width>
+                <pref-height>22</pref-height>
+                <legend>COM2</legend>
+                <border>2</border>
+
+                <binding>
+                    <command>property-assign</command>
+                    <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
+                    <value type="float">FREQUENCY</value>
+                </binding>
+            </button>
 		</group-template>
 	</group>
 

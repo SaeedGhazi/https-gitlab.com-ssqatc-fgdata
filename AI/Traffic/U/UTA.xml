@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- 737-400-UTair.xml - temporarily replaced with 737-300-UTair.xml
-737-500-UTair.xml - temporarily replaced with 737-300-UTair.xml -->
+<!-- 737-400-UTair.xml - temporarily replaced with 737-300-UTair.xml  -->
 
 
 <!-- Author Marcin Kuzniar - Fleet & Timetable of NOV 2017 -->
@@ -303,7 +302,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -317,7 +316,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -331,7 +330,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -345,7 +344,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -359,7 +358,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -373,7 +372,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -387,7 +386,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -401,7 +400,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -415,7 +414,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -429,7 +428,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -443,7 +442,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -457,7 +456,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -471,7 +470,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -485,7 +484,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -499,7 +498,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -513,7 +512,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -527,7 +526,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -541,7 +540,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -555,7 +554,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -569,7 +568,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -583,7 +582,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -597,7 +596,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -611,7 +610,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -625,7 +624,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -639,7 +638,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -653,7 +652,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -667,7 +666,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -681,7 +680,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -695,7 +694,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -709,7 +708,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -723,7 +722,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/733/733-UTair.xml</model>
+    <model>Aircraft/735/735-UTair.xml</model>
     <livery>UTA</livery>
     <airline>UTA</airline>
     <home-port>USTR</home-port>
@@ -860,6 +859,34 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>VQ-BQS</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/738/738-UTair.xml</model>
+    <livery>UTA</livery>
+    <airline>UTA</airline>
+    <home-port>UUWW</home-port>
+    <required-aircraft>UTA-738</required-aircraft>
+    <actype>738</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VQ-BIN</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/738/738-UTair.xml</model>
+    <livery>UTA</livery>
+    <airline>UTA</airline>
+    <home-port>UUWW</home-port>
+    <required-aircraft>UTA-738</required-aircraft>
+    <actype>738</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VQ-BIK</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>

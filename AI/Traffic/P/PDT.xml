@@ -4,7 +4,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>CYYZ</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -18,7 +18,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KCLT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -32,7 +32,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -46,7 +46,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSBY</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -60,7 +60,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -74,7 +74,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KROC</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -88,7 +88,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMDT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -102,7 +102,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -116,7 +116,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KALB</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -130,7 +130,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KLEX</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -144,7 +144,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KCAE</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -158,7 +158,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMOB</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -172,7 +172,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSWF</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -186,7 +186,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -200,7 +200,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSBY</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -214,7 +214,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KRIC</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -228,7 +228,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>CYOW</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -242,7 +242,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -256,7 +256,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KTRI</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -270,7 +270,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -284,7 +284,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPGV</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -298,7 +298,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KALB</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -312,7 +312,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMHT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -326,7 +326,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KFWA</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -340,7 +340,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMKE</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -354,7 +354,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KFLO</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -368,7 +368,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KROA</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -382,7 +382,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KEVV</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -396,7 +396,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMDT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -410,7 +410,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KISP</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -424,7 +424,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -438,7 +438,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KERI</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -452,7 +452,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KIPT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -466,7 +466,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>CYYZ</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -480,7 +480,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSYR</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -494,7 +494,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSYR</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -508,7 +508,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KART</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -522,7 +522,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KCHO</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -536,7 +536,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSCE</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -550,7 +550,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KALB</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -564,7 +564,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KROA</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -578,7 +578,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KBOS</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -592,7 +592,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KSBY</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -606,7 +606,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KILM</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -620,7 +620,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KRIC</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -634,7 +634,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KROA</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -648,7 +648,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KABE</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -662,7 +662,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMDT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -676,7 +676,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -690,7 +690,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KHTS</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -704,7 +704,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>CYUL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -718,7 +718,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -732,7 +732,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KCLT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -746,7 +746,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KAVP</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -760,7 +760,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMDT</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -774,7 +774,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KMOB</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -788,7 +788,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPHL</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -802,7 +802,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KBGR</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -816,7 +816,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KITH</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>
@@ -830,7 +830,7 @@
 <aircraft>
 <model>Aircraft/ERJ145/ERJ145-AmericanEagle.xml</model>
 <livery>AAL</livery>
-<airline>PDT</airline>
+<airline>AAL</airline>
 <home-port>KPGV</home-port>
 <required-aircraft>AAL-ER4</required-aircraft>
 <actype>ER4</actype>

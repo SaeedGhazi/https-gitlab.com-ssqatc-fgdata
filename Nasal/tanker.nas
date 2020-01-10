@@ -250,9 +250,19 @@ var Tanker = {
 		me.elevN.setDoubleValue(elev);
 		
 		# Determine if any of the contact points are in contact
-		var offset_x = refuelOffsetX.getValue() or 0;
-		var offset_y = refuelOffsetY.getValue() or 0;
-		var offset_z = refuelOffsetZ.getValue() or 0;
+		var offset_x = 0;
+		var offset_y = 0;
+		var offset_z = 0;
+
+		if (refuelOffsetX != nil)
+			offset_x = refuelOffsetX.getValue() or 0;
+
+		if (refuelOffsetY != nil)
+			offset_y = refuelOffsetY.getValue() or 0;
+
+		if (refuelOffsetZ != nil)
+			offset_z = refuelOffsetZ.getValue() or 0;
+
 		var roll = acRoll.getValue() * globals.D2R;
 		
 		# Determine contact position

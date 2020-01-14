@@ -175,6 +175,50 @@
           <property>/sim/multiplay/lag/spectator-offset</property>
           <live>true</live>
         </text>
+
+        <text>
+            <row>4</row>
+            <col>0</col>
+            <label>Clock offset</label>
+            <halign>right</halign>
+        </text>
+
+        <input>
+          <name>clock-offset</name>
+          <row>4</row>
+          <col>1</col>
+          <width>75</width>
+          <height>25</height>
+          <label>Seconds</label>
+          <live>true</live>
+          <property>/sim/time/mp-clock-offset-sec</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>clock-offset</object-name>
+          </binding>
+        </input>
+
+        <text>
+            <row>5</row>
+            <col>0</col>
+            <label>Max sim time /frame</label>
+            <halign>right</halign>
+        </text>
+
+        <input>
+          <name>max-simtime</name>
+          <row>5</row>
+          <col>1</col>
+          <width>45</width>
+          <height>25</height>
+          <label>Seconds</label>
+          <live>true</live>
+          <property>/sim/max-simtime-per-frame</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>max-simtime</object-name>
+          </binding>
+        </input>
     </group>
 
 </PropertyList>

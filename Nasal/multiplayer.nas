@@ -179,7 +179,7 @@ var dialog = {
         me.y = y;
         me.bg = [0.1, 0.1, 0.1, 0.8];    # background color
         me.fg = [[0.9, 0.9, 0.2, 1], [1, 1, 1, 1], [1, 0.7, 0, 1], [0.557,0.847,0.463, 1]]; # active, active alternate, disabled color, fallback available
-        me.unit = 1;
+        me.unit = 0;
         me.toggle_unit();          # set to imperial
         #
         # "private"
@@ -263,7 +263,7 @@ var dialog = {
         titlebar.addChild("empty").set("stretch", 1);
         
         var w = titlebar.addChild("button");
-        w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: me.unit_button, default: 0 });
+        w.node.setValues({ "pref-width": 24, "pref-height": 16, legend: me.unit_button, default: 0 });
         w.setBinding("nasal", "multiplayer.dialog.toggle_unit(); multiplayer.dialog._redraw_()");
 
         titlebar.addChild("empty").set("stretch", 1);
@@ -435,6 +435,7 @@ var dialog = {
                     "controls/invisible": contains(ignore, mp.callsign),
                     "id-code": idcode,
                     "airport-id": airport_id,
+                    "lag/lag-mod-averaged-ms": n.getNode("lag/lag-mod-averaged").getValue() * 1000,
                 });
             }
         }
@@ -448,19 +449,26 @@ var dialog = {
         }
     },
     toggle_unit: func {
-        me.unit = !me.unit;
-        if (me.unit) {
+        me.unit += 1;
+        if (me.unit > 2) me.unit = 0;
+        if (me.unit == 0) {
             me.alt_node = "position/altitude-m";
             me.alt_hdr = "alt-m";
             me.dist_hdr = "dist-km";
             me.dist_node = "distance-to-km";
-            me.unit_button = "IM";
-        } else {
+            me.unit_button = "SI";
+        } elsif (me.unit == 1) {
             me.alt_node = "position/altitude-ft";
             me.dist_node = "distance-to-nm";
             me.alt_hdr = "alt-ft";
             me.dist_hdr = "dist-nm";
-            me.unit_button = "SI";
+            me.unit_button = "IM";
+        } else {
+            me.alt_node = "lag/lag-mod-averaged-ms";
+            me.dist_node = "lag/pps-averaged";
+            me.alt_hdr = "lag-ms";
+            me.dist_hdr = "lag-pps";
+            me.unit_button = "Lag";
         }
     },
     toggle_ignore: func (callsign) {

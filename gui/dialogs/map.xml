@@ -239,6 +239,19 @@ command interface /autopilot/route-manager/input:
                 </binding>
             </checkbox>
 
+            <checkbox>
+                <label>Pan with keys</label>
+                <halign>left</halign>
+                <property>/gui/map/key-pan</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
             <empty><stretch>true</stretch></empty>
 
             <button>

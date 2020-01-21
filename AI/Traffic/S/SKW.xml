@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <!-- Author Ian (Yves) Tolosa -->
 <!-- Flights operated by Skywest nn Behalf of United Express, American Eagle, Delta Connection and Air Alaska - Observed Traffic for the week of 16/22 DEC 2019 -->
 <!-- All CR1 flights reassigned to unused CR2 Aircrafts -->
@@ -1055,7 +1054,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSFO</home-port>
@@ -1069,7 +1068,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KTUS</home-port>
@@ -1083,7 +1082,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KMRY</home-port>
@@ -1097,7 +1096,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KFAT</home-port>
@@ -1111,7 +1110,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSFO</home-port>
@@ -1125,7 +1124,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSJC</home-port>
@@ -1139,7 +1138,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSJC</home-port>
@@ -1153,7 +1152,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KDAL</home-port>
@@ -1167,7 +1166,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KFAT</home-port>
@@ -1181,7 +1180,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSAN</home-port>
@@ -1195,7 +1194,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KPDX</home-port>
@@ -1209,7 +1208,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KLAX</home-port>
@@ -1223,7 +1222,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSJC</home-port>
@@ -1237,7 +1236,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSEA</home-port>
@@ -1251,7 +1250,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSAN</home-port>
@@ -1265,7 +1264,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSNA</home-port>
@@ -1279,7 +1278,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KDAL</home-port>
@@ -1293,7 +1292,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSJC</home-port>
@@ -1307,7 +1306,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KPDX</home-port>
@@ -1321,7 +1320,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSFO</home-port>
@@ -1335,7 +1334,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSEA</home-port>
@@ -1349,7 +1348,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSEA</home-port>
@@ -1363,7 +1362,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KDAL</home-port>
@@ -1377,7 +1376,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KLAX</home-port>
@@ -1391,7 +1390,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KPDX</home-port>
@@ -1405,7 +1404,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KFAT</home-port>
@@ -1419,7 +1418,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KDAL</home-port>
@@ -1433,7 +1432,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KPDX</home-port>
@@ -1447,7 +1446,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSLC</home-port>
@@ -1461,7 +1460,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSJC</home-port>
@@ -1475,7 +1474,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KSEA</home-port>
@@ -1489,7 +1488,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/e70/ERJ175-AlaskaAirlines.xml</model>
+<model>Aircraft/E70/ERJ175-AlaskaAirlines.xml</model>
 <livery>ASA</livery>
 <airline>ASA</airline>
 <home-port>KPDX</home-port>

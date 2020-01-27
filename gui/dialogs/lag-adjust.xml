@@ -55,6 +55,18 @@
             </binding>
         </checkbox>
 
+        <button>
+            <row>0</row>
+            <col>3</col>
+            <legend>help (in browser)</legend>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    fgcommand("open-browser", props.Node.new({ "url": "http://wiki.flightgear.org/Real_Time_manual" }))
+                </script>
+            </binding>
+        </button>
+
 		<text>
           <row>1</row>
           <col>0</col>

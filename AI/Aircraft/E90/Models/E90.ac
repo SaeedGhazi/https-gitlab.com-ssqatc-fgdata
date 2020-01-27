@@ -7,7 +7,7 @@ name "E90"
 loc 0.192389 5.38498 0
 data 9
 Plane.003
-texture "E90-Tex.png"
+texture "E90-tex.png"
 crease 30.000000
 numvert 1413
 16.2918 -0.673651 -1.20809e-007
@@ -10980,7 +10980,7 @@ kids 0
 OBJECT poly
 name "Gear"
 loc -6.88483 1.17732 0
-texture "E90-Tex.png"
+texture "E90-tex.png"
 crease 45.000000
 numvert 933
 -7.04946 0.137749 0

@@ -379,3 +379,19 @@ application:
 
 in order to maintain backward compatibility.
 
+Model Hierarchy
+---------------
+
+There are a large number of techniques used by the models, with complex
+inheritance.  Here is a handy list of the techniques, what they are for, and
+where the based technique is defined
+
+# Where Defined                Summary
+
+4 model-combined.xml           ALS, quality>0, model>0
+5 model-defaults.xml           Base ALS
+7 model-combined-deferred.xml  Rembrandt, model>0
+9  model-combined.xml          quality>0, model>0
+10 model-defaults.xml          Base Rembrandt
+11 model-defaults.xml          Generic shaders, quality>0
+13 model-defaults.xml          Fallback - no predicate

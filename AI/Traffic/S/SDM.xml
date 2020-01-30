@@ -443,7 +443,7 @@
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
     <required-aircraft>B763SDM</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>-3</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -457,7 +457,7 @@
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
     <required-aircraft>B763SDM</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>-3</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -471,7 +471,7 @@
     <airline>SDM</airline>
     <home-port>ULLI</home-port>
     <required-aircraft>B763SDM</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>-3</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>

@@ -94,7 +94,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -108,7 +108,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -122,7 +122,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -136,7 +136,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -150,7 +150,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -164,7 +164,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>
@@ -178,7 +178,7 @@
     <airline>NWS</airline>
     <home-port>UUEE</home-port>
     <required-aircraft>B763NWS</required-aircraft>
-    <actype>Boeing_767-300</actype>
+    <actype>763</actype>
     <offset>0</offset>
     <radius>24</radius>
     <flighttype>gate</flighttype>

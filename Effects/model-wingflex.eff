@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-	<name>Effects/model-wingflex-organic</name>
+	<name>Effects/model-wingflex</name>
 	<inherits-from>Effects/model-default</inherits-from>
 
 	<parameters>
@@ -142,9 +142,15 @@
 		<fogtype><use>/sim/rendering/shaders/skydome</use></fogtype>
 		<wetness><use>/environment/surface/wetness</use></wetness>
 		<rnorm><use>/environment/rain-norm</use></rnorm>
+		<!-- Wingflex -->
+		<organic type="bool">0</organic>
+		<body-width type="float">0.7</body-width>
 		<wingflex-alpha>0.0</wingflex-alpha>
 		<wingflex-trailing-alpha>0.0</wingflex-trailing-alpha>
 		<wingsweep-factor>0.0</wingsweep-factor>
+		<wingflex-z>0.0</wingflex-z>
+		<wing-span>15.0</wing-span>
+		<!-- END Wingflex -->
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
 		<cloudpos2_x><use>/local-weather/cloud-shadows/cloudpos-x[1]</use></cloudpos2_x>
@@ -435,7 +441,7 @@
 			   </vertex-program-two-side>
 			   
 			   <program>
-				<vertex-shader n="0">Shaders/model-ALS-wingflex-organic.vert</vertex-shader>
+				<vertex-shader n="0">Shaders/model-ALS-wingflex.vert</vertex-shader>
 			 	<fragment-shader n="1">Shaders/model-ALS-ultra.frag</fragment-shader>
 				<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
@@ -493,6 +499,12 @@
 		 	   </uniform>
 
 		   	   <uniform>
+				   <name>organic</name>
+				   <type>bool</type>
+				   <value><use>organic</use></value>
+			   </uniform>
+
+		   	   <uniform>
 				   <name>wingflex_alpha</name>
 				   <type>float</type>
 				   <value><use>wingflex-alpha</use></value>
@@ -508,6 +520,24 @@
 				   <name>wingsweep_factor</name>
 				   <type>float</type>
 				   <value><use>wingsweep-factor</use></value>
+			   </uniform>
+			   
+		   	   <uniform>
+				   <name>wingflex_z</name>
+				   <type>float</type>
+				   <value><use>wingflex-z</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>body_width</name>
+				   <type>float</type>
+				   <value><use>body-width</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>wing_span</name>
+				   <type>float</type>
+				   <value><use>wing-span</use></value>
 			   </uniform>
 			   
 			   <!-- 			NORMAL MAP -->

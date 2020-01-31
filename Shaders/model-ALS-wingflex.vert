@@ -22,9 +22,13 @@ attribute	vec3	binormal;
 uniform	float		pitch;
 uniform	float		roll;
 uniform	float		hdg;
+uniform bool		organic;
+uniform float		body_width;
 uniform float 		wingflex_alpha;
 uniform float 		wingflex_trailing_alpha;
 uniform float 		wingsweep_factor;
+uniform float 		wingflex_z;
+uniform float		wing_span;
 uniform	int  		refl_dynamic;
 uniform int  		nmap_enabled;
 uniform int  		shader_qual;
@@ -54,47 +58,64 @@ void	rotationMatrixH(in float sinRz, in float cosRz, out mat4 rotmat)
 void	main(void)
 {
 		vec4 vertex = gl_Vertex;
+		
+		if ( organic ) {
+			float arm_reach = 4.8;
+
+			float x_factor = max((abs(vertex.x) - body_width),0);
+			float y_factor = max(vertex.y,0.0);
+			float flex_factor1 = wingflex_alpha * (1.0 - wingsweep_factor);
+			float flex_factor2 = wingflex_trailing_alpha * (1.0 -wingsweep_factor);
 
 
-		float body_width = 0.7;
-		float arm_reach = 4.8;
+			if (flex_factor1<0.0) {flex_factor1 *=0.7;}
+			if (flex_factor2<0.0) {flex_factor1 *=0.7;}
 
-		float x_factor = max((abs(vertex.x) - body_width),0);
-		float y_factor = max(vertex.y,0.0);
-		float flex_factor1 = wingflex_alpha * (1.0 - wingsweep_factor);
-		float flex_factor2 = wingflex_trailing_alpha * (1.0 -wingsweep_factor);
+			// basic flapping motion is linear to arm_reach, then parabolic
+
+			float intercept_point = 0.1 * arm_reach * arm_reach * flex_factor1;
+		
+			if (x_factor < arm_reach)
+				{
+				vertex.z += x_factor/arm_reach * intercept_point;
+				}
+
+			else	
+				{		
+				vertex.z += 0.1 * x_factor * x_factor * flex_factor1;
+				}
+
+			// upward stroke is slightly forward-swept, downward stroke a bit backward
+			vertex.y += -0.25 * abs(x_factor) * flex_factor1;
+
+			//trailing edge lags the motion
+			vertex.z += 0.2 * y_factor * x_factor * flex_factor2;
 
 
-		if (flex_factor1<0.0) {flex_factor1 *=0.7;}
-		if (flex_factor2<0.0) {flex_factor1 *=0.7;}
+			// if the wings are folded, we sweep them back
+			vertex.y += 0.5 * x_factor * wingsweep_factor;
+			float sweep_x = 0.5;
+			if (vertex.x > 0.0) {sweep_x = - 0.5;}
 
-		// basic flapping motion is linear to arm_reach, then parabolic
-
-		float intercept_point = 0.1 * arm_reach * arm_reach * flex_factor1;
-	
-		if (x_factor < arm_reach)
-			{
-			vertex.z += x_factor/arm_reach * intercept_point;
+			vertex.x+= sweep_x * (1.0 + 0.5 *x_factor) *   wingsweep_factor;
+		} else {
+			float x_factor = max((abs(vertex.x) - body_width),0);
+			float y_factor = max(vertex.y,0.0);
+			
+			float distance;
+			if(vertex.y < body_width && vertex.y > -body_width){
+				//this part does not move
+				distance = 0;
+			}else if(vertex.y > body_width){
+				distance = vertex.y - (body_width/2);
+			}else if(vertex.y < -body_width){
+				distance = vertex.y - ((-1*body_width)/2);
 			}
-
-		else	
-			{		
-			vertex.z += 0.1 * x_factor * x_factor * flex_factor1;
-			}
-
-		// upward stroke is slightly forward-swept, downward stroke a bit backward
-		vertex.y += -0.25 * abs(x_factor) * flex_factor1;
-
-		//trailing edge lags the motion
-		vertex.z += 0.2 * y_factor * x_factor * flex_factor2;
-
-
-		// if the wings are folded, we sweep them back
-		vertex.y += 0.5 * x_factor * wingsweep_factor;
-		float sweep_x = 0.5;
-		if (vertex.x > 0.0) {sweep_x = - 0.5;}
-
-		vertex.x+= sweep_x * (1.0 + 0.5 *x_factor) *   wingsweep_factor;
+			float deflection = wingflex_z * (distance*distance)/(wing_span*wing_span);
+			
+			vertex.z += deflection;
+			vertex.y -= deflection/wing_span;
+		}
 
 
 		rawpos = vertex.xyz;

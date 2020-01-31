@@ -26,6 +26,20 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
+    <registration>EW-336PA</registration>
+    <heavy>false</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/733/733-Belavia.xml</model>
+    <livery>BRU</livery>
+    <airline>BRU</airline>
+    <home-port>UMMS</home-port>
+    <required-aircraft>733-BRU</required-aircraft>
+    <actype>733</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>737</performance-class>
     <registration>EW-308PA</registration>
     <heavy>false</heavy>
   </aircraft>
@@ -68,7 +82,7 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
-    <registration>EW-404PA</registration>
+    <registration>EW-283PA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -83,20 +97,6 @@
     <flighttype>gate</flighttype>
     <performance-class>737</performance-class>
     <registration>EW-407PA</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/733/733-Belavia.xml</model>
-    <livery>BRU</livery>
-    <airline>BRU</airline>
-    <home-port>UMMS</home-port>
-    <required-aircraft>733-BRU</required-aircraft>
-    <actype>733</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>737</performance-class>
-    <registration>EW-366PA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -237,20 +237,6 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>EW-277PJ</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/CR2/CR2-Belavia.xml</model>
-    <livery>BRU</livery>
-    <airline>BRU</airline>
-    <home-port>UMMS</home-port>
-    <required-aircraft>CR2-BRU</required-aircraft>
-    <actype>CR2</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>EW-301PJ</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>

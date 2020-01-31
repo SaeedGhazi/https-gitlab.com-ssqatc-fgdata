@@ -68,7 +68,7 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>4X-EKF</registration>
+    <registration>4X-EKH</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -82,7 +82,7 @@
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>4X-EKH</registration>
+    <registration>4X-EKI</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -544,7 +544,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>4X-ECA</registration>
+    <registration>4X-EDA</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
@@ -558,7 +558,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>4X-ECB</registration>
+    <registration>4X-EDB</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
@@ -572,7 +572,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>4X-ECC</registration>
+    <registration>4X-EDC</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
@@ -586,7 +586,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>4X-ECD</registration>
+    <registration>4X-EDD</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
@@ -600,7 +600,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>4X-ECE</registration>
+    <registration>4X-EDE</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
@@ -614,7 +614,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>4X-ECE</registration>
+    <registration>4X-EDF</registration>
     <heavy>true</heavy>
   </aircraft>
   <flight>

@@ -642,6 +642,20 @@
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
+    <registration>C-GHLK</registration>
+    <heavy>true</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/767/767-AirCanadaRouge.xml</model>
+    <livery>ROU</livery>
+    <airline>ROU</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ROU-763</required-aircraft>
+    <actype>763</actype>
+    <offset>0</offset>
+    <radius>24</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
     <registration>C-GHLQ</registration>
     <heavy>true</heavy>
   </aircraft>

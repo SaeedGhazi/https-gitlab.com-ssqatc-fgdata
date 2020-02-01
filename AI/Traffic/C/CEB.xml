@@ -6,7 +6,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -20,7 +20,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -34,7 +34,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -48,7 +48,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -62,7 +62,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -76,7 +76,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -90,7 +90,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -104,7 +104,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -118,7 +118,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -132,7 +132,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -146,7 +146,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -160,7 +160,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -174,7 +174,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -188,7 +188,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -202,7 +202,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -216,7 +216,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -230,7 +230,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -244,7 +244,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -258,7 +258,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -272,7 +272,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -286,7 +286,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -300,7 +300,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -314,7 +314,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -328,7 +328,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -342,7 +342,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -356,7 +356,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -370,7 +370,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -384,7 +384,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -398,7 +398,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>
@@ -412,7 +412,7 @@
     <airline>CEB</airline>
     <home-port>RPLL</home-port>
     <required-aircraft>A322CEB</required-aircraft>
-    <actype>320-200</actype>
+    <actype>320</actype>
     <offset>0</offset>
     <radius>17</radius>
     <flighttype>gate</flighttype>

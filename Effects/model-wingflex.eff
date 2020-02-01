@@ -143,7 +143,7 @@
 		<wetness><use>/environment/surface/wetness</use></wetness>
 		<rnorm><use>/environment/rain-norm</use></rnorm>
 		<!-- Wingflex -->
-		<organic type="bool">0</organic>
+		<wingflex-type type="int">0</wingflex-type>
 		<body-width type="float">0.7</body-width>
 		<wingflex-alpha>0.0</wingflex-alpha>
 		<wingflex-trailing-alpha>0.0</wingflex-trailing-alpha>
@@ -499,9 +499,9 @@
 		 	   </uniform>
 
 		   	   <uniform>
-				   <name>organic</name>
-				   <type>bool</type>
-				   <value><use>organic</use></value>
+				   <name>wingflex_type</name>
+				   <type>int</type>
+				   <value><use>wingflex-type</use></value>
 			   </uniform>
 
 		   	   <uniform>

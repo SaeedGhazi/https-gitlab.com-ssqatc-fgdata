@@ -338,20 +338,6 @@
     <heavy>true</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/747/74Y-Cargolux.xml</model>
-    <livery>CLX</livery>
-    <airline>CLX</airline>
-    <home-port>LIMC</home-port>
-    <required-aircraft>CLX-74Y</required-aircraft>
-    <actype>74Y</actype>
-    <offset>0</offset>
-    <radius>32</radius>
-    <flighttype>cargo</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>LX-YCV</registration>
-    <heavy>true</heavy>
-  </aircraft>
-  <aircraft>
     <model>Aircraft/747/74Y-CargoluxItalia.xml</model>
     <livery>ICV</livery>
     <airline>ICV</airline>
@@ -383,7 +369,7 @@
     <model>Aircraft/747/74Y-CargoluxItalia.xml</model>
     <livery>ICV</livery>
     <airline>ICV</airline>
-    <home-port>ELLX</home-port>
+    <home-port>LIMC</home-port>
     <required-aircraft>ICV-74Y</required-aircraft>
     <actype>74Y</actype>
     <offset>0</offset>

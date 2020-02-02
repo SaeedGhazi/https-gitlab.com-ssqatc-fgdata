@@ -68,12 +68,15 @@ var Module = {
         obj.tcountN = obj.node.initNode("timers", 0, "INT");
         obj.lhitN = obj.node.initNode("listener-hits", 0, "INT");
         
-        setlistener(obj.reloadN, func(n) {
+        obj.reloadL = setlistener(obj.reloadN, func(n) {
             if (n.getValue()) {
                 n.setValue(0);
+                logprint(3, "Reload listener for ", obj.id, " triggered (",
+                    obj.reloadL, ")");                
                 obj.reload();
             }
         });
+        _instances[id] = obj;
         return obj;
     },
     
@@ -130,6 +133,9 @@ var Module = {
             globals[me.namespace] = {};
         }
         logprint(5, "Module.load() ", me.id);
+        me.lcountN.setIntValue(0);
+        me.tcountN.setIntValue(0);
+        me.lhitN.setIntValue(0);
         me._redirect_setlistener();
         me._redirect_maketimer();
         me._redirect_settimer();
@@ -169,7 +175,9 @@ var Module = {
                 globals[me.namespace]["setlistener"] = func {};
             foreach (var id; me._listeners) {
                 logprint(3, "Removing listener "~id);
-                removelistener(id);
+                if (removelistener(id)) {
+                    me.lcountN.setValue(me.lcountN.getValue() - 1);
+                }
             }
             me._listeners = [];
 
@@ -179,6 +187,7 @@ var Module = {
             foreach (var t; me._timers) {
                 if (typeof(t.stop) == "func") {
                     t.stop();
+                    me.tcountN.setValue(me.tcountN.getValue() - 1);
                     logprint(2, "  .");
                 }
             }
@@ -224,7 +233,9 @@ var Module = {
             if (me._debug) {
                 var f_debug = func {
                     me.lhitN.setValue(me.lhitN.getValue() + 1);
-                    print("Listener hit for: ", p.getPath());
+                    if (int(me._debug) > 1) {
+                        print("Listener hit for: ", p.getPath());
+                    }
                     call(f, arg);
                 };
                 append(me._listeners, Module._orig_setlistener(p, f_debug, start, runtime));
@@ -285,7 +296,6 @@ var _getInstance = func(name) {
     if (isAvailable(name) and _instances[name] == nil) {
         var m = Module.new(name);
         m.setFilePath(MODULES_DIR~name);
-        _instances[name] = m;
     }
     return _instances[name];
 }
@@ -316,6 +326,7 @@ var _findModules = func() {
     }
 }
 
+#props.getNode is available only after nasal dir has been initialized
 _setlistener("sim/signals/nasal-dir-initialized", func {
     MODULES_NODE = props.getNode("/nasal/modules", 1);
     _findModules();

@@ -2,7 +2,7 @@
 <!-- Ian (Yves) Tolosa - Timetable of FEB 2018 -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -16,7 +16,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -30,7 +30,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -44,7 +44,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -58,7 +58,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -72,7 +72,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -86,7 +86,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -100,7 +100,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -114,7 +114,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -128,7 +128,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -142,7 +142,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -156,7 +156,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -170,7 +170,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -184,7 +184,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -198,7 +198,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -212,7 +212,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -226,7 +226,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -240,7 +240,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -254,7 +254,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -268,7 +268,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -282,7 +282,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -296,7 +296,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -310,7 +310,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -324,7 +324,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBCS</home-port>
@@ -338,7 +338,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -352,7 +352,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -366,7 +366,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPPH</home-port>
@@ -380,7 +380,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPPH</home-port>
@@ -394,7 +394,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -408,7 +408,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -422,7 +422,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBCS</home-port>
@@ -436,7 +436,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -450,7 +450,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -464,7 +464,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPPH</home-port>
@@ -478,7 +478,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPPH</home-port>
@@ -492,7 +492,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -506,7 +506,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -520,7 +520,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -534,7 +534,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBBN</home-port>
@@ -548,7 +548,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBCS</home-port>
@@ -562,7 +562,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBTL</home-port>
@@ -576,7 +576,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBTL</home-port>
@@ -590,7 +590,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -604,7 +604,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -618,7 +618,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBCS</home-port>
@@ -632,7 +632,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -646,7 +646,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -660,7 +660,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YBBN</home-port>
@@ -674,7 +674,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YMML</home-port>
@@ -688,7 +688,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -702,7 +702,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YPAD</home-port>
@@ -716,7 +716,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>
@@ -730,7 +730,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/saab-340/REX-Saab-340.xml</model>
+    <model>Aircraft/SF3/SF3-RegionalExpress.xml</model>
     <livery>RXA</livery>
     <airline>RXA</airline>
     <home-port>YSSY</home-port>

@@ -150,6 +150,14 @@
 		<wingsweep-factor>0.0</wingsweep-factor>
 		<wingflex-z>0.0</wingflex-z>
 		<wing-span>15.0</wing-span>
+		<!-- Sub: rotation -->
+		<rotation-rad type="float">0.0</rotation-rad>
+		<rotation-x1 type="float">0.0</rotation-x1>
+		<rotation-y1 type="float">0.0</rotation-y1>
+		<rotation-z1 type="float">0.0</rotation-z1>
+		<rotation-x2 type="float">0.0</rotation-x2>
+		<rotation-y2 type="float">0.0</rotation-y2>
+		<rotation-z2 type="float">0.0</rotation-z2>
 		<!-- END Wingflex -->
 		<cloudpos1_x><use>/local-weather/cloud-shadows/cloudpos-x[0]</use></cloudpos1_x>
 		<cloudpos1_y><use>/local-weather/cloud-shadows/cloudpos-y[0]</use></cloudpos1_y>
@@ -538,6 +546,48 @@
 				   <name>wing_span</name>
 				   <type>float</type>
 				   <value><use>wing-span</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>rotation_rad</name>
+				   <type>float</type>
+				   <value><use>rotation-rad</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>rotation_x1</name>
+				   <type>float</type>
+				   <value><use>rotation-x1</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>rotation_y1</name>
+				   <type>float</type>
+				   <value><use>rotation-y1</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>rotation_z1</name>
+				   <type>float</type>
+				   <value><use>rotation-z1</use></value>
+			   </uniform>
+			   
+		   	   <uniform>
+				   <name>rotation_x2</name>
+				   <type>float</type>
+				   <value><use>rotation-x2</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>rotation_y2</name>
+				   <type>float</type>
+				   <value><use>rotation-y2</use></value>
+			   </uniform>
+
+		   	   <uniform>
+				   <name>rotation_z2</name>
+				   <type>float</type>
+				   <value><use>rotation-z2</use></value>
 			   </uniform>
 			   
 			   <!-- 			NORMAL MAP -->

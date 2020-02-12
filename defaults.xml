@@ -1361,6 +1361,9 @@ Started September 2000 by David Megginson, david@megginson.com
     <input_helpers>
       <enabled type="bool" userarchive="n">true</enabled>
     </input_helpers>
+    <modules>
+      <enabled type="bool" userarchive="n">true</enabled>
+    </modules>
     <std>
       <enabled type="bool" userarchive="n">true</enabled>
     </std>

@@ -111,7 +111,7 @@
     </signal>
 
     <signal>
-        <type>float</type><property type="string">/engines/engine[%i]/thrust-lbs</property>
+        <type>float</type><property type="string">/engines/engine[%i]/thrust_lb</property>
     </signal>
 
     <signal>

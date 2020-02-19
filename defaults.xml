@@ -190,6 +190,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <building-density type="double" userarchive="y">1.0</building-density>
       <horizon-effect type="bool" userarchive="y">false</horizon-effect>
       <point-sprites type="bool" userarchive="y">true</point-sprites>
+      <triangle-directional-lights type="bool" userarchive="y">true</triangle-directional-lights>
       <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
       <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
       <particles type="bool" userarchive="y">true</particles>

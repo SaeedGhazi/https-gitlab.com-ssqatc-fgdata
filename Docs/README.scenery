@@ -56,11 +56,30 @@ searched in the order from left to right:
   FG_SCENERY=/first/dir:/second/dir:/third/dir
                                      (likewise with --fg-scenery option)
 
+Each of the scenery paths normally contains a set of directories, each containing
+a particular scenery type :
 
-Each of the scenery paths can follow one of two possible layouts: with or
-without Terrain/ and Objects/ subdirectories. As soon as either or both
-of these subdirectories are found, scenery is only searched *in* these two,
-but not in any other directory on the same hierarchy level!
+ Terrain/ containing the terrain mesh and airport data
+ Objects/ containing placed scenery objects such as large landmarks, bridges
+ Pylons/  containing electricity pylon Models
+ Roads/   containing detailed road and railways
+ Buildings/ containing osm2city-generated buildings
+
+The user can control at runtime which of these directories is actually loaded
+via the property tree:
+/sim/rendering/scenery-path-suffix[n]/name      defines the name of the sub-directory
+/sim/rendering/scenery-path-suffix[n]/enabled   indicates whether it is loaded.
+
+hese properties are typically set in the Rendering Options menu.
+
+In turn each of these contains a tree of directories breaking down the world into
+10x10 degree and then 1x1 degree chunks.  E.g. Terrain/w130n30/w123n37/
+
+For backwards compatibility reasons, the top level can alternatively just
+contain 10x10 degree directories.  E.g. w130n30/w123n37/
+
+Note that as soon as any of the scenery-path-suffix directories is found, any
+10x10 directory on the same hierarchy level will be ignored!
 
 This example shows which directories are used to search for scenery:
 
@@ -77,40 +96,35 @@ This example shows which directories are used to search for scenery:
   w130n30/                   *not* searched
 
 
-If FlightGear searches for a particular "tile" file, let's say for
+Within the 1x1 degree chunks, the ground is further broken up into "tiles" of
+approx 20x20km. If FlightGear searches for a particular "tile" file, let's say for
 "w130n30/w123n37/942050.stg", then (using the above examples) it looks
 into
 
   /first/dir/w130n30/w123n37/942050.stg             (A)
 
-  /second/dir/Terrain/w130n30/w123n37/942050.stg    (B)\__ same path element
-  /second/dir/Objects/w130n30/w123n37/942050.stg    (C)/      /second/dir
+  /second/dir/Terrain/w130n30/w123n37/942050.stg      (B)\__ same path element
+  /second/dir/Objects/w130n30/w123n37/942050.stg      (C)/      /second/dir
+  /second/dir/Pylons/w130n30/w123n37/942050.stg       (D)/
+  /second/dir/Roads/w130n30/w123n37/942050.stg        (E)/
+  /second/dir/Buildings/w130n30/w123n37/942050.stg    (F)/
 
-  /third/dir/Terrain/w130n30/w123n37/942050.stg     (D)
+  /third/dir/Terrain/w130n30/w123n37/942050.stg       (G)
 
-but as soon as it finds an OBJECT_BASE entry it only finishes this
+As soon as it finds an OBJECT_BASE entry it only finishes this
 path element and then stops scanning. So, if (B) contains an entry
-"OBJECT_BASE 942050.btg, then the twin Objects/ directory (C) will
-be read, too. But (D) will *not*! Objects/ and Terrain/ directories
-are laid out equally. Airport and elevation data, as well as airport
-inventory objects are usually put into Terrain/, while other objects
-are put into Objects/.
+"OBJECT_BASE 942050.btg, then the other directories in /second/dir (C, D, E, F)
+will be read.  But (G) will *not*!
 
-This searching behavior is usually used to collect user-added
-custom objects first, then to read in standard scenery and objects
-that came with the distribution (San Francisco Bay area), and to
-use locally added scenery everywhere else. So a typical scenery
-path specification could look like this:
+This searching behavior is usually used to collect user-downloaded scenery first,
+then to read automatically downloaded scenery (see terrasync
+below), then standard scenery and objects that came with the distribution.
+So a typical scenery path specification could look like this:
 
-  FG_SCENERY=$HOME/.fgfs/Scenery:$FG_ROOT/Scenery:$FG_ROOT/WorldScenery
+  FG_SCENERY=$HOME/.fgfs/Scenery:$HOME/.fgfs/TerraSync:$FG_ROOT/Scenery
 
-The third path would then be populated by the user with unpacked scenery
-archives downloaded from http://www.flightgear.org/Downloads/scenery.html,
-or by using terrasync (see next section).
-Additional objects can be downloaded from the FlightGear Objects
-Database (http://scenemodels.flightgear.org/download/). (Note that
-those objects are occasionally merged into the flightgear.org/terrasync
-packages, so you may end up with doubled entries!)
+The first path would then be populated by the user with unpacked scenery
+archives downloaded various sources.
 
 Using a private directory for downloaded add-on scenery and adding
 that path to FG_SCENERY is the preferred way. This separates default
@@ -120,37 +134,49 @@ easier.
 HINT: if you want to see where FlightGear is searching and finding
 terrain/objects, start it with the --log-level=info option.
 
-
-
-
-
 2 terrasync -------------------------------------------------------------------
 
-FlightGear comes with a utility "terrasync" that allows downloading
-scenery (literally) "on-the-fly. Given the scenery path setup from
-section 1 you could use terrasync with a script like this:
-
-  #!/bin/bash
-  PORT=5503
-  nice terrasync -p $PORT -d $FG_ROOT/WorldScenery&
-  fgfs --atlas=socket,out,1,localhost,$PORT,udp $*
-  killall terrasync
-
-If you name it "fgfsterra", then you can use it just like you would use
-"fgfs", but behind the scenes it would update your scenery everywhere in
-sight and save the files to $FG_ROOT/WorldScenery. Example:
-
-  $ ./fgfsterra --aircraft=ufo --airport=LOXZ
+FlightGear can download scenery on-the-fly.  Simply select "Download scenery
+automatically" from the launcher, or use --enable-terrasync from the commandline.
+By default this will add $HOME/.fgfs/TerraSync to the scenery path.
 
 Note, however, that if it downloads scenery for the area around your
 starting location, then you'll only see that after the next start, or
 after you flew or teleported to a distant location and then back.
-terrasync depends on the rsync application and an open port 873,
-so it may not be available/usable on MS Windows.
 
+2.1 .dirindex -----------------------------------------------------------------
 
+To save having to download scenery every time, while allowing updates to
+propagate, terrasync checks for a .dirindex file each time it downloads a
+directory from the server.  This lists files, directories and tarballs that
+should be present in the local directory, along with their size and a sha1sum
+of their contents.  This sha1sum is checked against the local files to
+determine which files are to be downloaded.
 
+The format of the .dirindex is as follows:
 
+version:<version>
+path:<scenery_path>
+<type>:<filename>:<sha1sum>:<size>
+<type>:<filename>:<sha1sum>:<size>
+<type>:<filename>:<sha1sum>:<size>
+.
+.
+.
+
+Where:
+
+<version> is the .dirindex version number
+<scenery_path>  is the path of the current file, e.g. Objects/w010n50/w009n57
+<type>  is the file type - "f" for file, "d" for directory, "t" for tarball
+<filename> is the file name  (e.g. 2811121.stg)
+<sha1sum>  is the sha1sum of the file named (e.g. 9da6ebc1695ed1c3b151cd34263e9c931ee309ea)
+<size>     is the size of the file
+
+Tarballs (labelled with a "t" in the .dirindex) must be <name>.tgz files which
+unpack into a <name>/ sub-directory.  This enables terrasync to clean up
+out of date files by simply deleting the <name>/ subdirectory before unpacking
+the updated file.
 
 3 stg files -------------------------------------------------------------------
 
@@ -160,9 +186,6 @@ static objects placed on this tile. (See section 5 for how to find out which
 geo coordinates belong to which tile.) Four of the available key words
 are followed by a string and four numbers. The meaning of these numbers
 is always the same and described in section 3.3.
-
-
-
 
 3.1  OBJECT_BASE
 ----------------
@@ -177,9 +200,6 @@ Example:
   OBJECT_BASE 942050.btg
 
 The entry may be anywhere in the 942050.stg file, on a separate line.
-
-
-
 
 3.2  OBJECT
 -----------

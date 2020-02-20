@@ -45,6 +45,9 @@
 #                                     useful for map distance
 #     .direct_distance_to(<coord>)      ...   distance in m direct, considers altitude,
 #                                             but cuts through Earth surface
+#     .greatcircle_distance_to(<coord>, <coord>)  ... returns distance to a great circle (in m along Earth curvature)
+#                                                     defined by two points  
+#     .horizon()                  ... returns distance to the horizon in m along Earth curvature, ignoring altitudes
 #
 #
 # MANIPULATION METHODS:
@@ -221,6 +224,65 @@ var Coord = {
 		var dz = dest._z - me._z;
 		return math.sqrt(dx * dx + dy * dy + dz * dz);
 	},
+	# arc distance on an earth sphere to the great circle passing by A and B; doesn't consider altitude
+	greatcircle_distance_to: func(destA, destB) {
+		me._pupdate();
+		destA._pupdate();
+		destB._pupdate();
+
+		# AB is not a circle but a point
+		if (destA._lat == destB._lat and destA._lon == destB._lon) {
+		    return me.distance_to(destA);
+		}
+
+		var ca1 = math.cos(destA._lon);
+		var cd1 = math.cos(destA._lat);   
+		var sa1 = math.sin(destA._lon);
+		var sd1 = math.sin(destA._lat);    
+
+		var ca2 = math.cos(destB._lon);
+		var cd2 = math.cos(destB._lat);    
+		var sa2 = math.sin(destB._lon);
+		var sd2 = math.sin(destB._lat);    
+
+		var sa12 = math.sin(destA._lon - destB._lon);
+		
+    		var ca3 = math.cos(me._lon);
+		var cd3 = math.cos(me._lat);    
+		var sa3 = math.sin(me._lon);
+		var sd3 = math.sin(me._lat);    
+
+		# this is sin(greatcircle_dist) * sin(arcAB)
+                var sDsAB = cd3 * sa3 * (ca2 * cd2 * sd1 - ca1 * cd1 * sd2 )
+		    + ca3 * cd3 * ( cd1 * sa1 * sd2 - cd2 * sa2 * sd1 )
+		    - cd1 * cd2 * sd3 * sa12;
+		
+		# direct calculation of sin(arcAB) to not call sin(arcsin(distance_to))    
+		var a = math.sin((destA._lat - destB._lat) * 0.5);
+		var o = math.sin((destA._lon - destB._lon) * 0.5);
+
+		var hs12 = a * a + cd1 * cd2 * o * o;
+		var hc12 = 1.0 - hs12;		
+
+
+		# AB is undertermined; a great circle should be defined with non-colinear vectors
+		if (hs12*hc12 == 0.0) {
+		    die("Great circles are defined with non-colinear vectors");
+		}
+
+		
+		return ERAD * math.abs( math.asin( 0.5 * sDsAB / math.sqrt( hs12 * hc12 ) ) );
+	},
+	# arc distance on an earth sphere to the horizon    
+        horizon: func() {
+	        me._pupdate();
+		if (me._alt < 0.0) {
+		    return 0.0;
+		}
+		else {
+		    return ERAD*math.acos(ERAD/(ERAD+me._alt));
+		}
+	},		
 	is_defined: func {
 		return !(me._cdirty and me._pdirty);
 	},

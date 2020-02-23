@@ -23,12 +23,16 @@
 # my_foo_sys.load();
 #-------------------------------------------------------------------------------
 
-var MODULES_DIR = getprop("/sim/fg-root")~"/Nasal/Modules/";
+var MODULES_DIR = getprop("/sim/fg-root")~"/Nasal/modules/";
 var MODULES_NODE = nil;
 var _modules_available = {};
-var _instances = {};
 
-# Class to handle a nasal module at runtime
+# Hash storing Module objects; keep this outside Module to avoid stack overflow
+# when using debug.dump
+var _instances = {};    
+
+# Class Module
+# to handle a re-loadable Nasal module at runtime
 var Module = {
     _orig_setlistener: setlistener,
     _orig_maketimer: maketimer,
@@ -38,8 +42,9 @@ var Module = {
     # ns: optional namespace name
     # node: optional property node for module management
     new: func(id, ns = "", node = nil) {
-        if (!id) {
-            id = "_module_manager";
+        if (!id or typeof(id) != "scalar") {
+            logprint(5, "Module.new(): id: must be a string without special characters or spaces");
+            return;
         }
         if (_instances[id] != nil) {
             return _instances[id];
@@ -128,7 +133,6 @@ var Module = {
     # if no arguments are given, the Module object will be passed to main()
     load: func(myargs...) {
         me.loadedN.setBoolValue(0);
-        
         if (globals[me.namespace] == nil) {
             globals[me.namespace] = {};
         }
@@ -162,7 +166,7 @@ var Module = {
         else { return nil; }
     },
     
-    #-- unload a module and its tracked resources --
+    # unload a module and remove its tracked resources 
     unload: func() {
         if (!me.loadedN.getValue()) {
             logprint(5, "! ", me.id, " was not fully loaded.");
@@ -286,7 +290,7 @@ var Module = {
                 io.basename(c[2]), c[3]));
         }
     },
-};
+}; # end class Module
 
 var isAvailable = func(name) {
     return contains(_modules_available, name);

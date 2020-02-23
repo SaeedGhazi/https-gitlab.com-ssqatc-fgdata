@@ -22,7 +22,6 @@ var SAVEDIR = getprop("/sim/fg-home") ~ "/Wildfire/";
 
 # Maximum number of ignite events a single user can send per second.
 var MAX_IGNITE_RATE = 0.25;
-var wildfireScoreReportTimer = nil;
 
 ###############################################################################
 ## External API
@@ -166,6 +165,7 @@ var score_report_loop = func {
     old_score.waste        = score.waste;
   }
 }
+
 
 ###############################################################################
 # MP messages
@@ -469,13 +469,13 @@ CAFireModels.reset = func (enabled) {
 ############################################################
 # Start the CA model grid.
 CAFireModels.start = func {
-    me.timer.restart(0.033); # 30hz should be fast enough.
+    wildfire_score_CAFireModels_loop_timer.restart(0.033);
 }
 ############################################################
 # Stop the CA model grid.
 # Note that it will catch up lost time when started again.
 CAFireModels.stop = func {
-    me.timer.stop();
+    wildfire_score_CAFireModels_loop_timer.stop();
 }
 ############################################################
 # Add a new cell model.
@@ -514,6 +514,9 @@ CAFireModels.update = func {
     }
   }
 }
+# 30hz
+wildfire_score_CAFireModels_loop_timer = maketimer(0.033, CAFireModels, CAFireModels.update);
+
 ###############################################################################
 
 ###############################################################################
@@ -571,8 +574,6 @@ CAFire.NEIGHBOURS =      # Neighbour index offsets. First row and column
 ############################################################
 CAFire.init = func {
   # Initialization.
-  CAFireModels.timer = maketimer(0.03, me, me.loop);
-  CAFireModels.timer.simulatedTime = 1;
   me.reset(1, SimTime.current_time());
 }
 ############################################################
@@ -605,12 +606,14 @@ CAFire.reset = func (enabled, sim_time) {
 CAFire.start = func {
   CAFireModels.start();
   broadcast.start();
+  wildfire_score_CAFire_loop_timer.start();
 }
 ############################################################
 # Stop the CA. Note that it will catch up lost time when started again.
 CAFire.stop = func {
   CAFireModels.stop();
   broadcast.stop();
+  wildfire_score_CAFire_loop_timer.stop();
 }
 ############################################################
 # Start a fire in the cell at pos.
@@ -921,14 +924,16 @@ CAFire.update = func {
   }
 }
 ############################################################
-CAFire.loop = func {
+CAFire._loop_ = func {
   me.update();
-  CAFireModels.timer.restart(me.GENERATION_DURATION 
-                   * (me.generation + 1/me.PASSES) 
-                   - SimTime.current_time()
-                  );
+  wildfire_score_CAFire_loop_timer.restart(me.GENERATION_DURATION * (me.generation + 1/me.PASSES) -
+                                           SimTime.current_time());
 }
 ###############################################################################
+wildfire_score_report_loop_timer = maketimer(CAFire.GENERATION_DURATION, score_report_loop);
+wildfire_score_report_loop_timer.simulatedTime = 1;
+wildfire_score_CAFire_loop_timer = maketimer(CAFire.GENERATION_DURATION, CAFire, CAFire._loop_ );
+wildfire_score_CAFire_loop_timer.simulatedTime = 1;
 
 ###############################################################################
 # Main initialization.
@@ -963,11 +968,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   CAFire.init();
 
   # Start the score reporting.
-  if (wildfireScoreReportTimer == nil){
-      wildfireScoreReportTimer = maketimer(CAFire.GENERATION_DURATION, score_report_loop);
-      wildfireScoreReportTimer.simulatedTime = 1;
-      wildfireScoreReportTimer.start();
-  }
+  wildfire_score_report_loop_timer.restart(CAFire.GENERATION_DURATION);
 
   setlistener("/sim/signals/exit", func {
     if (getprop(report_score_pp) and (CAFire.cells_created > 0))

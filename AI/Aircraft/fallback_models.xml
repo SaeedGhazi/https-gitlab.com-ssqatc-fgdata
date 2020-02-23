@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <!--
   Fallback models for use when an MP client does not have a particular model
   downloaded.
@@ -131,7 +131,7 @@
 
 <!-- 501-550 Jet combat aircraft -->
 <model n="501" type="string">AI/Aircraft/A-10/Models/A-10.xml</model>
-<model n="502" type="string">AI/Aircraft/Buccaneer/Models/buccaneer-wingman.xml</model>
+<model n="502" type="string">AI/Aircraft/Buccaneer/Models/buccaneer-lowpoly.xml</model>
 <model n="503" type="string">AI/Aircraft/eurofighter/Models/Typhoon.xml</model>
 <model n="504" type="string">AI/Aircraft/f16/Models/f16-Wingman.xml</model>
 <model n="505" type="string">AI/Aircraft/Hunter/Models/hunter-model.xml</model>

@@ -375,7 +375,7 @@
     <required-aircraft>737-TSC</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTQP</registration>
@@ -389,7 +389,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTQC</registration>
@@ -403,7 +403,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTQF</registration>
@@ -417,7 +417,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYQN</registration>
@@ -431,7 +431,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYQO</registration>
@@ -445,7 +445,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTQJ</registration>
@@ -459,7 +459,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTQB</registration>
@@ -473,7 +473,7 @@
     <required-aircraft>738-TSC</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTQG</registration>

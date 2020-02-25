@@ -9,6 +9,7 @@ setprop("/instrumentation/ilec-sc7/lcd-digits-abs", 0);
 setprop("/instrumentation/ilec-sc7/lcd-digits-sgn", 0);
 setprop("/instrumentation/ilec-sc7/te-reading-mps", 0);
 setprop("/instrumentation/variometer/te-reading-mps", 0);
+setprop("/instrumentation/ilec-sc7/sound-pitch", 1);
 
 # Helper function for updating lcd display
 var update_lcd_props = func(value) {
@@ -33,6 +34,11 @@ var sc7_needle = Dampener.new(
 	input: probe,
 	dampening: 3,
 	on_update: update_prop("/instrumentation/ilec-sc7/te-reading-mps"));
+
+var sc7_sound = SoundPitchController.new(
+    input: sc7_needle,
+    max_input: 5,
+	on_update: update_prop("/instrumentation/ilec-sc7/sound-pitch"));
 
 var extra_needle = Dampener.new(
 	input: probe,
@@ -66,7 +72,7 @@ setlistener("instrumentation/ilec-sc7/sensitivity",
 # Wrap everything together into an instrument
 var fast_instruments = UpdateLoop.new(
 	update_period: 0,
-	components: [probe, sc7_needle, extra_needle],
+	components: [probe, sc7_needle, sc7_sound, extra_needle],
 	enable: 1);
 
 var slow_instruments = UpdateLoop.new(

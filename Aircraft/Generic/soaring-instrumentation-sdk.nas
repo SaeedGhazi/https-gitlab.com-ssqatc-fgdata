@@ -409,3 +409,34 @@ var SpeedCmdVario = {
 		if (me.on_update != nil) me.on_update(me.output);
 	}
 };
+
+# Vario sound pitch controller
+# Computes the frequency factor for a variometer sound.
+#
+# var vario_sound = SoundPitchController.new(
+#   input: Object connected to the pitch controller input, e.g. a variometer reading.
+#   max_pitch: (optional) Maximum sound frequency factor, the output will be
+#              in the range [1/max_pitch, max_pitch], default 2.
+#   max_input: Value of input for which max_pitch is reached.
+#	on_update: (optional) function to call whenever a new output is available
+
+var SoundPitchController = {
+    parents: [InstrumentComponent],
+
+    new: func(input, max_input, max_pitch = 2, on_update = nil) {
+        return {
+            parents: [me],
+            input: input,
+            max_pitch: max_pitch,
+            max_input: max_input,
+            on_update: on_update,
+        };
+    },
+
+    update: func {
+        var input = math.clamp(me.input.output, -me.max_input, me.max_input);
+        me.output = math.pow(me.max_pitch, input / me.max_input);
+
+        if (me.on_update != nil) me.on_update(me.output);
+    },
+};

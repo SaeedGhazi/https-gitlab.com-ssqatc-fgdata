@@ -43,7 +43,9 @@ var averager = Averager.new(
 	input: probe,
 	buffer_size: 25);
 
-var battery_level = { output: 9.9 };
+var battery_level = PropertyReader.new(
+	property: "systems/electrical/volts",
+	scale: 0.1);
 
 var temperature = PropertyReader.new(
 	property: "environment/temperature-degc",
@@ -69,5 +71,5 @@ var fast_instruments = UpdateLoop.new(
 
 var slow_instruments = UpdateLoop.new(
 	update_period: 1,
-	components: [averager, temperature, lcd_controller],
+	components: [battery_level, averager, temperature, lcd_controller],
 	enable: 1);

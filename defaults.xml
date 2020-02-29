@@ -686,6 +686,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <enabled type="bool" userarchive="y">true</enabled>
       <type>lookat</type>
       <config>
+        <eye-fixed type="bool">true</eye-fixed>
         <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
         <eye-lon-deg-path>/sim/tower/longitude-deg</eye-lon-deg-path>
         <eye-alt-ft-path>/sim/tower/altitude-ft</eye-alt-ft-path>
@@ -706,6 +707,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <enabled type="bool" userarchive="y">true</enabled>
       <type>lookfrom</type>
       <config>
+        <eye-fixed type="bool">true</eye-fixed>
         <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
         <eye-lon-deg-path>/sim/tower/longitude-deg</eye-lon-deg-path>
         <eye-alt-ft-path>/sim/tower/altitude-ft</eye-alt-ft-path>
@@ -742,6 +744,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <enabled type="bool" userarchive="y">true</enabled>
       <type>lookat</type>
       <config>
+        <eye-fixed type="bool">true</eye-fixed>
         <eye-lon-deg-path>/sim/viewer/longitude-deg</eye-lon-deg-path>
         <eye-lat-deg-path>/sim/viewer/latitude-deg</eye-lat-deg-path>
         <eye-alt-ft-path>/sim/viewer/altitude-ft</eye-alt-ft-path>
@@ -756,6 +759,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <enabled type="bool" userarchive="y">true</enabled>
       <type>lookat</type>
       <config>
+        <eye-fixed type="bool">true</eye-fixed>
         <eye-lat-deg-path>/sim/tower/latitude-deg</eye-lat-deg-path>
         <eye-lon-deg-path>/sim/tower/longitude-deg</eye-lon-deg-path>
         <eye-alt-ft-path>/sim/tower/altitude-ft</eye-alt-ft-path>

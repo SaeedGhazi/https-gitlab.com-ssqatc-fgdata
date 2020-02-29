@@ -64,13 +64,14 @@ void	rotationMatrixH(in float sinRz, in float cosRz, out mat4 rotmat)
 
 vec2 calc_deflection(float y){
 	float distance;
-	if(y < body_width && y > -body_width){
+	float bwh = body_width/2;
+	if(y < bwh && y > -bwh){
 		//this part does not move
 		distance = 0;
-	}else if(y > body_width){
-		distance = y - (body_width/2);
-	}else if(y < -body_width){
-		distance = y - ((-1*body_width)/2);
+	}else if(y > bwh){
+		distance = y - bwh;
+	}else if(y < -bwh){
+		distance = y + bwh;
 	}
 	float max_dist = (wing_span-body_width)/2;
 	float deflection = wingflex_z * (distance*distance)/(max_dist*max_dist);

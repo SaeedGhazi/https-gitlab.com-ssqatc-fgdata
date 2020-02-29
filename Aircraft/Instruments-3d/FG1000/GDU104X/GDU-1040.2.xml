@@ -243,7 +243,7 @@
       </binding>
       <binding>
         <command>property-adjust</command>
-        <property>instrumentation/fg1000/screen1/heading-bug-deg</property>
+        <property>instrumentation/fg1000/screen2/heading-bug-deg</property>
         <factor>15</factor>
       </binding>
     </action>
@@ -261,6 +261,22 @@
         <label>Change heading bug (Shift to sync)</label>
       </binding>
     </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>HDG</object-name>
+    <property>instrumentation/fg1000/screen2/heading-bug-deg</property>
+    <center>
+      <x-m>0.03255</x-m>
+      <y-m>-0.12940</y-m>
+      <z-m>0.01934</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
   </animation>
 
   <animation>
@@ -368,51 +384,71 @@
 
   <animation>
     <type>knob</type>
-    <object-name>BARO</object-name>
+    <object-name>CRS</object-name>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>2</device>
         <notification>CRS</notification>
       </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/fg1000/screen2/course-deg</property>
+        <factor>15</factor>
+      </binding>
     </action>
     <shift-action>
-      <binding>
-        <command>FG1000HardKeyPushed</command>
-        <device>2</device>
-        <notification>BARO</notification>
-      </binding>
-    </shift-action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>BARO</tooltip-id>
-        <label>Change Nav Course (Shift to change Barometric pressure setting)</label>
-      </binding>
-    </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <object-name>CRS</object-name>
-    <action>
-      <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>2</device>
         <notification>CRS_CENTER</notification>
         <offset>1</offset>
       </binding>
-    </action>
+    </shift-action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <tooltip-id>ComInner</tooltip-id>
-        <label>Center CDI on current VOR</label>
+        <tooltip-id>CRS</tooltip-id>
+        <label>Change Nav Course (Shift to center)</label>
       </binding>
     </hovered>
   </animation>
 
+  <animation>
+    <type>rotate</type>
+    <object-name>CRS</object-name>
+    <property>instrumentation/fg1000/screen2/course-deg</property>
+    <center>
+      <x-m>0.00397</x-m>
+      <y-m>0.13004</y-m>
+      <z-m>0.01956</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>BARO</object-name>
+    <action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>2</device>
+        <notification>BARO</notification>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>BARO</tooltip-id>
+        <label>Change barometric pressure setting</label>
+      </binding>
+    </hovered>
+  </animation>
+  
   <animation>
     <type>knob</type>
     <object-name>PAN</object-name>

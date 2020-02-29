@@ -252,8 +252,11 @@ var NavMap = {
 
   handleRange : func(val)
   {
-    var incr_or_decr = (val > 0) ? 1 : -1;
-    me.setZoom(me._current_zoom + incr_or_decr);
+    if (val >0) {
+      me.zoomOut();
+    } else {
+      me.zoomIn();
+    }
     return emesary.Transmitter.ReceiptStatus_OK;
   },
 

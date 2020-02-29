@@ -161,7 +161,12 @@ var PFDInstrumentsController =
 
   handleRange : func(val)
   {
-    var incr_or_decr = (val > 0) ? me.page.insetMap.zoomIn() : me.page.insetMap.zoomOut();
+    if (val >0) {
+      me.page.insetMap.zoomOut();
+    } else {
+      me.page.insetMap.zoomIn();
+    }
+    return emesary.Transmitter.ReceiptStatus_Finished;
   },
 
   handleFPL : func (value) {

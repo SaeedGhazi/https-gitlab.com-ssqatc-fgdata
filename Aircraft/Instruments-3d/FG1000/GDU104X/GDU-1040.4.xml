@@ -164,7 +164,7 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>NAV_VOL</notification>
         <offset>1</offset>
       </binding>
@@ -178,7 +178,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>NAV_FREQ_TRANSFER</notification>
         <offset>1</offset>
       </binding>
@@ -191,14 +191,14 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>NAV_INNER</notification>
       </binding>
     </action>
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>NAV_OUTER</notification>
       </binding>
     </shift-action>
@@ -218,7 +218,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>NAV_TOGGLE</notification>
         <offset>1</offset>
       </binding>
@@ -238,19 +238,19 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>HEADING</notification>
       </binding>
       <binding>
         <command>property-adjust</command>
-        <property>instrumentation/fg1000/screen1/heading-bug-deg</property>
+        <property>instrumentation/fg1000/screen4/heading-bug-deg</property>
         <factor>15</factor>
       </binding>
     </action>
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>HEADING_PRESS</notification>
       </binding>
     </shift-action>
@@ -264,13 +264,29 @@
   </animation>
 
   <animation>
+    <type>rotate</type>
+    <object-name>HDG</object-name>
+    <property>instrumentation/fg1000/screen4/heading-bug-deg</property>
+    <center>
+      <x-m>0.03255</x-m>
+      <y-m>-0.12940</y-m>
+      <z-m>0.01934</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
     <type>knob</type>
     <object-name>AltOuter</object-name>
     <object-name>AltInner</object-name>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>ALT_INNER</notification>
         <offset>1</offset>
       </binding>
@@ -278,7 +294,7 @@
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>ALT_OUTER</notification>
         <offset>1</offset>
       </binding>
@@ -304,7 +320,7 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>COM_VOL</notification>
         <offset>1</offset>
       </binding>
@@ -318,7 +334,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>COM_FREQ_TRANSFER</notification>
         <offset>1</offset>
       </binding>
@@ -331,14 +347,14 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>COM_INNER</notification>
       </binding>
     </action>
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>COM_OUTER</notification>
       </binding>
     </shift-action>
@@ -358,7 +374,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>COM_TOGGLE</notification>
         <offset>1</offset>
       </binding>
@@ -374,47 +390,67 @@
 
   <animation>
     <type>knob</type>
-    <object-name>BARO</object-name>
+    <object-name>CRS</object-name>
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>CRS</notification>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/fg1000/screen4/course-deg</property>
+        <factor>15</factor>
       </binding>
     </action>
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>BARO</notification>
+        <device>4</device>
+        <notification>CRS_CENTER</notification>
+        <offset>1</offset>
       </binding>
     </shift-action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <tooltip-id>BARO</tooltip-id>
-        <label>Change Nav Course (Shift to change Barometric pressure setting)</label>
+        <tooltip-id>CRS</tooltip-id>
+        <label>Change Nav Course (Shift to center)</label>
       </binding>
     </hovered>
   </animation>
 
   <animation>
-    <type>pick</type>
+    <type>rotate</type>
     <object-name>CRS</object-name>
+    <property>instrumentation/fg1000/screen4/course-deg</property>
+    <center>
+      <x-m>0.00397</x-m>
+      <y-m>0.13004</y-m>
+      <z-m>0.01956</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>BARO</object-name>
     <action>
-      <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
-        <notification>CRS_CENTER</notification>
-        <offset>1</offset>
+        <device>4</device>
+        <notification>BARO</notification>
       </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <tooltip-id>ComInner</tooltip-id>
-        <label>Center CDI on current VOR</label>
+        <tooltip-id>BARO</tooltip-id>
+        <label>Change barometric pressure setting</label>
       </binding>
     </hovered>
   </animation>
@@ -425,14 +461,14 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>RANGE</notification>
       </binding>
     </action>
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>JOYSTICK_PRESS</notification>
       </binding>
     </shift-action>
@@ -452,7 +488,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>JOYSTICK_VERTICAL</notification>
         <offset>-1</offset>
       </binding>
@@ -473,7 +509,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>JOYSTICK_VERTICAL</notification>
         <offset>1</offset>
       </binding>
@@ -494,7 +530,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>JOYSTICK_HORIZONTAL</notification>
         <offset>-1</offset>
       </binding>
@@ -515,7 +551,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>JOYSTICK_HORIZONTAL</notification>
         <offset>1</offset>
       </binding>
@@ -537,7 +573,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>DTO</notification>
         <offset>1</offset>
       </binding>
@@ -558,7 +594,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>MENU</notification>
         <offset>1</offset>
       </binding>
@@ -579,7 +615,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>FPL</notification>
         <offset>1</offset>
       </binding>
@@ -600,7 +636,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>PROC</notification>
         <offset>1</offset>
       </binding>
@@ -621,7 +657,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>CLR</notification>
         <offset>1</offset>
       </binding>
@@ -630,7 +666,7 @@
       <button>1</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>CLR_HOLD</notification>
         <offset>1</offset>
       </binding>
@@ -651,7 +687,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>ENT</notification>
         <offset>1</offset>
       </binding>
@@ -671,14 +707,14 @@
     <action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>FMS_INNER</notification>
       </binding>
     </action>
     <shift-action>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>FMS_OUTER</notification>
       </binding>
     </shift-action>
@@ -698,7 +734,7 @@
       <button>0</button>
       <binding>
         <command>FG1000HardKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <notification>FMS_CRSR</notification>
         <offset>1</offset>
       </binding>
@@ -719,7 +755,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>1</offset>
       </binding>
     </action>
@@ -732,7 +768,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>2</offset>
       </binding>
     </action>
@@ -745,7 +781,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>3</offset>
       </binding>
     </action>
@@ -758,7 +794,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>4</offset>
       </binding>
     </action>
@@ -771,7 +807,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>5</offset>
       </binding>
     </action>
@@ -784,7 +820,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>6</offset>
       </binding>
     </action>
@@ -797,7 +833,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>7</offset>
       </binding>
     </action>
@@ -810,7 +846,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>8</offset>
       </binding>
     </action>
@@ -823,7 +859,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>9</offset>
       </binding>
     </action>
@@ -836,7 +872,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>10</offset>
       </binding>
     </action>
@@ -849,7 +885,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>11</offset>
       </binding>
     </action>
@@ -862,7 +898,7 @@
       <button>0</button>
       <binding>
         <command>FG1000SoftKeyPushed</command>
-        <device>1</device>
+        <device>4</device>
         <offset>12</offset>
       </binding>
     </action>

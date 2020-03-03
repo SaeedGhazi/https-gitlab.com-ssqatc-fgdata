@@ -70,7 +70,7 @@
 <model n="157" type="string">AI/Aircraft/DHT/DHT-AirVanuatu.xml</model>
 <model n="158" type="string">AI/Aircraft/JS41/JS41-default.xml</model>
 <model n="159" type="string">AI/Aircraft/Saab-2000/Saab-2000-default.xml</model>
-<model n="160" type="string">AI/Aircraft/saab-340/Loganair-Saab-340.xml</model>
+<model n="160" type="string">AI/Aircraft/SF3/SF3-WestJet.xml</model>
 
 
 <!-- 201-250 Twin engined narrow body jet airliners -->
@@ -78,7 +78,7 @@
 <model n="202" type="string">AI/Aircraft/733/733-Norwegian.xml</model>
 <model n="203" type="string">AI/Aircraft/735/735-Default.xml</model>
 <model n="204" type="string">AI/Aircraft/736/736-Default.xml</model>
-<model n="205" type="string">AI/Aircraft/737/737-BritishAirways.xml</model>
+<model n="205" type="string">AI/Aircraft/738/738-Aeroflot.xml</model>
 <model n="206" type="string">AI/Aircraft/738/738-ANA.xml</model>
 <model n="207" type="string">AI/Aircraft/739/73J-Default.xml</model>
 <model n="208" type="string">AI/Aircraft/757/757-American.xml</model>
@@ -113,7 +113,7 @@
 
 <!-- 351-400 Four engined jet wide body airliners -->
 <model n="351" type="string">AI/Aircraft/747/744-Lufthansa.xml</model>
-<model n="352" type="string">AI/Aircraft/747-400/747-400-JAL.xml</model>
+<model n="352" type="string">AI/Aircraft/747/74F-Saudia.xml</model>
 <model n="353" type="string">AI/Aircraft/A342/A342-RoyalJordanian.xml</model>
 <model n="354" type="string">AI/Aircraft/A343/A343-CathayPacific.xml</model>
 <model n="355" type="string">AI/Aircraft/A345/A345-SingaporeAirlines.xml</model>

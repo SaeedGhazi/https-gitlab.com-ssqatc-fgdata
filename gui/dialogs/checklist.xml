@@ -400,10 +400,10 @@
     <layout>hbox</layout>
 
     <!-- gap to left border -->
-    <text>
+    <!--text>
       <halign>right</halign>
       <label> </label>
-    </text>
+    </text-->
 
     <text>
       <halign>right</halign>
@@ -414,7 +414,7 @@
       <name>checklist-group-combo</name>
       <property>/sim/gui/dialogs/checklist/selected-checklist-group</property>
       <editable>false</editable>
-      <pref-width>230</pref-width>
+      <pref-width>130</pref-width>
       <halign>fill</halign>
       <binding>
         <command>dialog-apply</command>
@@ -438,7 +438,7 @@
       <name>checklist-combo</name>
       <property>/sim/gui/dialogs/checklist/selected-checklist</property>
       <editable>false</editable>
-      <pref-width>230</pref-width>
+      <pref-width>180</pref-width>
       <halign>fill</halign>
       <binding>
         <command>dialog-apply</command>
@@ -459,16 +459,25 @@
 
     </combo>
 
-    <empty><stretch>true</stretch></empty>
+    <!--empty><stretch>true</stretch></empty-->
 
     <!-- gap to next element -->
-    <text>
+    <!--text>
       <halign>right</halign>
       <label> </label>
-    </text>
+    </text-->
+
+    <button>
+      <pref-width>90</pref-width>
+      <legend>Toggle marker</legend>
+      <binding>
+        <command>property-toggle</command>
+        <property>/sim/model/marker/arrow-enabled</property>
+      </binding>
+    </button>
 
     <checkbox>
-        <label> Transparent</label>
+        <label>Transparent</label>
         <property>/sim/gui/dialogs/checklist/transparent</property>
         <live>true</live>
         <halign>right</halign>

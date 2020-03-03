@@ -339,6 +339,26 @@
 
   <hrule/>
 
+  <group>
+    <layout>hbox</layout>
+
+    <text>
+      <halign>right</halign>
+      <label>Local magnetic variation:</label>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <label>12345678</label>
+      <format>%.1f deg</format>
+      <live>true</live>
+      <property>/environment/magnetic-variation-deg</property>
+    </text>
+
+  </group>
+
+  <hrule/>
+
   <button>
     <legend>Close</legend>
     <default>true</default>

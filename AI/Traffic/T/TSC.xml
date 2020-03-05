@@ -249,7 +249,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTSY</registration>
@@ -263,7 +263,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTSF</registration>
@@ -277,7 +277,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTSW</registration>
@@ -291,7 +291,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GFAT</registration>
@@ -305,7 +305,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GDAT</registration>
@@ -319,7 +319,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GLAT</registration>
@@ -333,7 +333,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GTSH</registration>
@@ -347,7 +347,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GSAT</registration>
@@ -361,7 +361,7 @@
     <required-aircraft>310-TSC</required-aircraft>
     <actype>310</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>22</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-GPAT</registration>

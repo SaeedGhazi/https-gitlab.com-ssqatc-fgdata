@@ -27,11 +27,11 @@ var loadDefaultsNasal = func {
     if (defaults != nil) {
         defaults = defaults.getNode("PropertyList/nasal");
         foreach (var mod; defaults.getChildren()) {
-            var enabled = mod.getNode("enabled");
+            var enabled = mod.getNode("enabled",1);
             if (string.lc(enabled.getValue()) == "true") enabled.setIntValue(1);
             else enabled.setIntValue(0);
             enabled.setAttribute("userarchive",
-                (mod.getNode("enabled/___userarchive").getValue() == "y")
+                (mod.getNode("enabled/___userarchive",1).getValue() == "y")
             );
         }
     }

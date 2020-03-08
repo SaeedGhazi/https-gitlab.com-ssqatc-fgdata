@@ -1336,7 +1336,7 @@ Started September 2000 by David Megginson, david@megginson.com
   </logging>
   <nasal>
     <tutorial>
-      <enabled type="bool" userarchive="n">false</enabled>
+      <enabled type="bool">false</enabled>
     </tutorial>
     <local_weather>
       <enabled type="bool" userarchive="y">false</enabled>
@@ -1345,31 +1345,31 @@ Started September 2000 by David Megginson, david@megginson.com
       <enabled type="bool" userarchive="y">false</enabled>
     </jetways>
     <jetways_edit>
-      <enabled type="bool" userarchive="n">false</enabled>
+      <enabled type="bool">false</enabled>
     </jetways_edit>
     <performance_monitor>
-      <enabled type="bool" userarchive="n">false</enabled>
+      <enabled type="bool">false</enabled>
     </performance_monitor>
     <FailureMgr>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </FailureMgr>
     <canvas>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </canvas>
     <console>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </console>
     <input_helpers>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </input_helpers>
     <modules>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </modules>
     <std>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </std>
     <towing>
-      <enabled type="bool" userarchive="n">true</enabled>
+      <enabled type="bool">true</enabled>
     </towing>
   </nasal>
   <scenery>

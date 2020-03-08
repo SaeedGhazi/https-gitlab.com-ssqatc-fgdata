@@ -87,7 +87,5 @@ var init = func {
 
 var id = _setlistener("/sim/signals/fdm-initialized", func {
     removelistener(id);
-    _orig_setlistener = setlistener;
-    _orig_maketimer = maketimer;
     addons.init();
 })

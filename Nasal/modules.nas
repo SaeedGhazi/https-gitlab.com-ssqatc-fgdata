@@ -327,6 +327,7 @@ var _findModules = func() {
     _modules_available = {};
     foreach (var name; module_dirs) {
         _modules_available[name] = 1;
+        MODULES_NODE.getNode(name~"/available",1).setBoolValue(1);
     }
 }
 

@@ -2,7 +2,7 @@
 <!-- Author Ian Tolosa - Timetable of Jun18 -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AT5/AT5-YukonAirNorth.xml</model>
+    <model>Aircraft/AT4/AT4-YukonAirNorth.xml</model>
     <livery>ANT</livery>
     <airline>ANT</airline>
     <home-port>CYXY</home-port>
@@ -16,7 +16,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AT5/AT5-YukonAirNorth.xml</model>
+    <model>Aircraft/AT4/AT4-YukonAirNorth.xml</model>
     <livery>ANT</livery>
     <airline>ANT</airline>
     <home-port>CYXY</home-port>

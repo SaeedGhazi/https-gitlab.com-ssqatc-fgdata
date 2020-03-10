@@ -2,7 +2,7 @@
 <!-- Author Ian Tolosa - Weekly timetable of 01 JAN 2018 -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AT5/AT5-AirTahiti.xml</model>
+    <model>Aircraft/AT4/AT4-AirTahiti.xml</model>
     <livery>VTA</livery>
     <airline>VTA</airline>
     <home-port>NTAA</home-port>
@@ -16,7 +16,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AT5/AT5-AirTahiti.xml</model>
+    <model>Aircraft/AT4/AT4-AirTahiti.xml</model>
     <livery>VTA</livery>
     <airline>VTA</airline>
     <home-port>NTAA</home-port>

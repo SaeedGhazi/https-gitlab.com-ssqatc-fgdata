@@ -2,7 +2,7 @@
 <!-- Author Ian (Yves) Tolosa - Weekly Timetble of 09APR18 --> 
 <trafficlist>
   <aircraft>
-    <model>Aircraft/AT5/AT5-NordStar.xml</model>
+    <model>Aircraft/AT4/AT4-NordStar.xml</model>
     <livery>TYA</livery>
     <airline>TYA</airline>
     <home-port>UNKL</home-port>
@@ -16,7 +16,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AT5/AT5-NordStar.xml</model>
+    <model>Aircraft/AT4/AT4-NordStar.xml</model>
     <livery>TYA</livery>
     <airline>TYA</airline>
     <home-port>UNKL</home-port>
@@ -30,7 +30,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AT5/AT5-NordStar.xml</model>
+    <model>Aircraft/AT4/AT4-NordStar.xml</model>
     <livery>TYA</livery>
     <airline>TYA</airline>
     <home-port>UNKL</home-port>
@@ -44,7 +44,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AT5/AT5-NordStar.xml</model>
+    <model>Aircraft/AT4/AT4-NordStar.xml</model>
     <livery>TYA</livery>
     <airline>TYA</airline>
     <home-port>UNKL</home-port>
@@ -58,7 +58,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/AT5/AT5-NordStar.xml</model>
+    <model>Aircraft/AT4/AT4-NordStar.xml</model>
     <livery>TYA</livery>
     <airline>TYA</airline>
     <home-port>UNKL</home-port>

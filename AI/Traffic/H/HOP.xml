@@ -2,7 +2,7 @@
 <!-- Author Marcin Kuzniar - Timetable Jan 2017 - CRK replaced with CR7 -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFRH</home-port>
@@ -16,7 +16,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFRN</home-port>
@@ -30,7 +30,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFRQ</home-port>
@@ -44,7 +44,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFLL</home-port>
@@ -58,7 +58,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -72,7 +72,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -86,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFLL</home-port>
@@ -100,7 +100,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFLL</home-port>
@@ -114,7 +114,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFLL</home-port>
@@ -128,7 +128,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFBO</home-port>
@@ -142,7 +142,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFLL</home-port>
@@ -156,7 +156,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFPO</home-port>
@@ -170,7 +170,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Hop.xml</model>
+    <model>Aircraft/AT4/AT4-Hop.xml</model>
     <livery>HOP</livery>
     <airline>HOP</airline>
     <home-port>LFLL</home-port>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <trafficlist>
     <aircraft>
-        <model>Aircraft/ATR42/ATR42-BlueIslands.xml</model>
+        <model>Aircraft/AT4/AT4-BlueIslands.xml</model>
         <livery>BCI</livery>
         <airline>BCI</airline>
         <home-port>EGJJ</home-port>
@@ -15,7 +15,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ATR42/ATR42-BlueIslands.xml</model>
+        <model>Aircraft/AT4/AT4-BlueIslands.xml</model>
         <livery>BCI</livery>
         <airline>BCI</airline>
         <home-port>EGJJ</home-port>
@@ -29,7 +29,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ATR42/ATR42-BlueIslands.xml</model>
+        <model>Aircraft/AT4/AT4-BlueIslands.xml</model>
         <livery>BCI</livery>
         <airline>BCI</airline>
         <home-port>EGJB</home-port>
@@ -43,7 +43,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/beech-200/beech-200-d-ikob.xml</model>
+        <model>Aircraft/AT7/AT7-BlueIslands.xml</model>
         <livery>BCI</livery>
         <airline>BCI</airline>
         <home-port>EGJB</home-port>
@@ -57,7 +57,7 @@
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/beech-200/beech-200-d-ikob.xml</model>
+        <model>Aircraft/AT7/AT7-BlueIslands.xml</model>
         <livery>BCI</livery>
         <airline>BCI</airline>
         <home-port>	EGJJ</home-port>

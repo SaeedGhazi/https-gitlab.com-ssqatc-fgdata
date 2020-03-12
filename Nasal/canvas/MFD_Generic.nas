@@ -219,8 +219,8 @@ var PFD_Device =
             var pfd_obj = me;
             me.Recipient.Receive = func(notification)
               {
-                  if (notification.Device_Id == pfd_obj.device_id
-                      and notification.NotificationType == notifications.PFDEventNotification.DefaultType) {
+                  if (notification.NotificationType == notifications.PFDEventNotification.DefaultType and
+                      notification.Device_Id == pfd_obj.device_id) {
                       if (notification.Event_Id == notifications.PFDEventNotification.SoftKeyPushed
                           and notification.EventParameter != nil)
                         {

@@ -17,7 +17,7 @@ new : func (pageName, svg, elementNames, displaysize, highlightElement, arrow=0,
     _elementNames : elementNames,
 
     # The size of the group.  For each of the ._elementNames hash values there
-    # must be an SVG Element [pageName][elementName]{0...pageSize}
+    # must be an SVG Element [pageName][elementName]{0...(displaysize-1)}
     _size : displaysize,
 
     # ElementName to be highlighted.  Must be an hash value from ._elementNames
@@ -53,6 +53,14 @@ new : func (pageName, svg, elementNames, displaysize, highlightElement, arrow=0,
   assert(((scrollTroughElement == nil) and (scrollThumbElement == nil)) or
          ((scrollTroughElement != nil) and (scrollThumbElement != nil)),
          "Both the scroll trough element and the scroll thumb element must be defined, or neither");
+
+  # Verify that all values exist.
+  for (var i = 0; i < displaysize; i = i + 1) {
+    foreach (var element; elementNames) {
+      var elementName = obj._pageName ~ element ~ i;
+      assert(obj._svg.getElementById(elementName) != nil, "Unable to find element " ~ elementName);
+    }
+  }
 
   if (scrollTroughElement != nil) {
     obj._scrollTroughElement = svg.getElementById(pageName ~ scrollTroughElement);

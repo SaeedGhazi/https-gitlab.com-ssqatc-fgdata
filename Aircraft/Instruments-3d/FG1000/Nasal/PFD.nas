@@ -25,6 +25,7 @@ var PFDDisplay =
       EIS : nil,
       PFDInstruments : nil,
       Surround : nil,
+      NearestAirports : nil,
       _pageList : {},
       _fg1000 : fg1000instance,
       _canvas : myCanvas,
@@ -38,6 +39,11 @@ var PFDDisplay =
 
     io.load_nasal(nasal_dir ~ "MFDPages/DirectTo/DirectTo.nas", "fg1000");
     io.load_nasal(nasal_dir ~ "MFDPages/DirectTo/DirectToController.nas", "fg1000");
+
+    io.load_nasal(nasal_dir ~ "MFDPages/NearestAirportsPFD/NearestAirportsPFD.nas", "fg1000");
+    io.load_nasal(nasal_dir ~ "MFDPages/NearestAirportsPFD/NearestAirportsPFDStyles.nas", "fg1000");
+    io.load_nasal(nasal_dir ~ "MFDPages/NearestAirportsPFD/NearestAirportsPFDOptions.nas", "fg1000");
+    io.load_nasal(nasal_dir ~ "MFDPages/NearestAirportsPFD/NearestAirportsPFDController.nas", "fg1000");
 
     obj.ConfigStore = obj._fg1000.getConfigStore();
 
@@ -70,6 +76,13 @@ var PFDDisplay =
                     '/Aircraft/Instruments-3d/FG1000/MFDPages/DirectToPFD.svg',
                     {'font-mapper': fontmapper});
 
+    canvas.parsesvg(obj._svg,
+                    '/Aircraft/Instruments-3d/FG1000/MFDPages/NearestAirportsPFD.svg',
+                    {'font-mapper': fontmapper});
+
+    canvas.parsesvg(obj._svg,
+                    '/Aircraft/Instruments-3d/FG1000/MFDPages/NearestAirportsInfoPFD.svg',
+                    {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
                     '/Aircraft/Instruments-3d/FG1000/MFDPages/SurroundPFD.svg',
@@ -84,6 +97,8 @@ var PFDDisplay =
     obj._DTO = fg1000.DirectTo.new(obj, myCanvas, obj._MFDDevice, obj._svg);
     obj._DTO.getController().RegisterWithEmesary();
 
+    obj.NearestAirports = fg1000.NearestAirportsPFD.new(obj, myCanvas, obj._MFDDevice, obj._svg);
+
     obj._MFDDevice.RegisterWithEmesary();
 
     # Surround dynamic elements
@@ -93,11 +108,6 @@ var PFDDisplay =
     # of page groups and individual pages using the FMS controller.
     obj.Surround = fg1000.Surround.new(obj, myCanvas, obj._MFDDevice, obj._svg, 1);
     obj.SurroundController = obj.Surround.getController();
-
-    # Engine Information System.  A special case as it's always displayed on the MFD.
-    # Note that it is passed in on the constructor
-    obj.EIS = EIS_Class.new(obj, myCanvas, obj._MFDDevice, obj._svg);
-    obj.addPage("EIS", obj.EIS);
 
     obj.PFDInstruments = fg1000.PFDInstruments.new(obj, myCanvas, obj._MFDDevice, obj._svg);
     obj.addPage("PFDInstruments", obj.PFDInstruments);

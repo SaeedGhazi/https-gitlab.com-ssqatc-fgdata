@@ -17,12 +17,13 @@
 # Surround Controller
 var SurroundController =
 {
-  new : func (page, svg)
+  new : func (page, svg, pfd)
   {
     var obj = {
       parents : [ SurroundController ],
       _recipient : nil,
       _page : page,
+      _pfd : pfd,
       _comselected : 1,
       _navselected : 1,
       _com1active  : 0.0,
@@ -458,6 +459,7 @@ var SurroundController =
   #
   handleFMSOuter : func(val)
   {
+    if (me._pfd) return emesary.Transmitter.ReceiptStatus_NotProcessed;
     if (me._page.isMenuVisible()) {
       # Change page group
       me._page.incrPageGroup(val);
@@ -468,6 +470,7 @@ var SurroundController =
 
   handleFMSInner : func(val)
   {
+    if (me._pfd) return emesary.Transmitter.ReceiptStatus_NotProcessed;
     if (me._page.isMenuVisible()) {
       # Change page group
       me._page.incrPage(val);

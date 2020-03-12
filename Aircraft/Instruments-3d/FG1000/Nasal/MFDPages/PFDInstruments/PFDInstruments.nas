@@ -131,9 +131,27 @@ var PFDInstruments =
     pg.addMenuItem(7, "XPDR", pg, pg.mfd.PFDInstruments.transponderMenu);
     pg.addMenuItem(8, "IDENT", pg, pg.mfd.PFDInstruments.setIdent); # TODO
     pg.addMenuItem(9, "TMR/REF", pg); # TODO
-    pg.addMenuItem(10, "NRST", pg); # TODO
+    pg.addMenuItem(10, "NRST", pg, pg.mfd.PFDInstruments.toggleNRST, func(svg, mi) { pg.mfd.PFDInstruments.toggleNRSTDisplay(device, pg, svg, mi); }  );
     pg.addMenuItem(11, "ALERTS", pg); # TODO
     device.updateMenus();
+  },
+
+  toggleNRST : func (device, pg, mi) {
+    pg.mfd.NearestAirports.toggleDisplay();
+    device.updateMenus();
+  },
+
+  toggleNRSTDisplay : func(device, pg, svg, mi) {
+    var bg_name = sprintf("SoftKey%d-bg",mi.menu_id);
+    if (pg.mfd.NearestAirports.visible()) {
+      device.svg.getElementById(bg_name).setColorFill(0.5,0.5,0.5);
+      svg.setColor(0.0,0.0,0.0);
+    } else {
+      device.svg.getElementById(bg_name).setColorFill(0.0,0.0,0.0);
+      svg.setColor(1.0,1.0,1.0);
+    }
+    svg.setText(mi.title);
+    svg.setVisible(1); # display function
   },
 
   insetMenu : func(device, pg, menuitem) {

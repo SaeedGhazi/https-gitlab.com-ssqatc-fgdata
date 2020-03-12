@@ -179,7 +179,7 @@ var Surround =
 
     obj.hideMenu();
 
-    obj.setController(fg1000.SurroundController.new(obj, svg));
+    obj.setController(fg1000.SurroundController.new(obj, svg, pfd));
     return obj;
   },
 
@@ -425,6 +425,9 @@ var Surround =
   # Function to change a page based on the selection
   loadPage : func()
   {
+    # Not valid for the PFD.
+    if (me.pfd) return;
+
     var pageToLoad = PAGE_GROUPS[me._selectedPageGroup].pages[me._selectedPage];
     var page = me.getMFD().getPage(pageToLoad);
 
@@ -442,6 +445,9 @@ var Surround =
   },
   showMenu : func()
   {
+    # Not valid for the PFD.
+    if (me.pfd) return;
+    
     foreach(var pageGroup; PAGE_GROUPS)
     {
       if (PAGE_GROUPS[me._selectedPageGroup].label == pageGroup.label)

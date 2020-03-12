@@ -109,7 +109,7 @@ getTextElement : func(symbolName) {
   return me._textElements[symbolName];
 },
 
-highlightTextElement : func(symbolName, highlightime=nil) {
+highlightTextElement : func(symbolName, highlightime=-1) {
   me._textElements[symbolName].highlightElement(highlightime);
 },
 

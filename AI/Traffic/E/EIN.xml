@@ -914,7 +914,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-AerLingus.xml</model>
+    <model>Aircraft/AT4/AT4-AerLingus.xml</model>
     <livery>EIN</livery>
     <airline>EIN</airline>
     <home-port>EIDW</home-port>
@@ -928,7 +928,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-AerLingus.xml</model>
+    <model>Aircraft/AT4/AT4-AerLingus.xml</model>
     <livery>EIN</livery>
     <airline>EIN</airline>
     <home-port>EIDW</home-port>
@@ -942,7 +942,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-AerLingus.xml</model>
+    <model>Aircraft/AT4/AT4-AerLingus.xml</model>
     <livery>EIN</livery>
     <airline>EIN</airline>
     <home-port>EIDW</home-port>

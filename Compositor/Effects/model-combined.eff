@@ -843,7 +843,7 @@ please see Docs/README.model-combined.eff for documentation
       </uniform>
     </pass>
   </technique>
-  <technique n="18">
+  <technique n="4">
     <scheme>als-lighting</scheme>
     <predicate>
       <and>

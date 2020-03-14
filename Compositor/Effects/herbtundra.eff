@@ -216,7 +216,7 @@
       <program>
         <vertex-shader n="1">Shaders/Default/forest.vert</vertex-shader>
         <fragment-shader n="0">Shaders/Default/include_fog.frag</fragment-shader>
-        <fragment-shader n="1">Shaders/forest.frag.frag</fragment-shader>
+        <fragment-shader n="1">Shaders/Default/forest.frag</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>

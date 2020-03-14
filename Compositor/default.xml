@@ -4,4 +4,4 @@
     This Compositor is used by default when none has been specified in the
     CameraGroup settings.
 -->
-<PropertyList include="LowSpec/low-spec.xml"/>
+<PropertyList include="low-spec.xml"/>

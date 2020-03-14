@@ -6,7 +6,6 @@ and fallback to plain transparency when the model shader is disabled.
 <PropertyList>
   <name>Effects/model-combined-transparent</name>
   <inherits-from>Effects/model-combined</inherits-from>
-  <!-- 	Rembrandt rendering -->
   <technique n="6">
     <predicate>
       <and>

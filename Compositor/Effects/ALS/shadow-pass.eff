@@ -7,10 +7,13 @@
       <lighting>false</lighting>
       <color-mask type="vec4d">0 0 0 0</color-mask>
       <cull-face>back</cull-face>
-      <program>
-        <vertex-shader>Shaders/Default/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/Default/trivial.frag</fragment-shader>
-      </program>
+      <blend>
+        <active>false</active>
+      </blend>
+      <alpha-test>
+        <comparison>greater</comparison>
+        <reference type="float">0.5</reference>
+      </alpha-test>
     </pass>
   </technique>
 </PropertyList>

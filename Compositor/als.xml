@@ -11,6 +11,13 @@
     <format>rgba8</format>
   </buffer>
   <buffer>
+    <name>depth</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>depth32f</format>
+  </buffer>
+  <buffer>
     <name>sun-shadowmap-atlas</name>
     <type>2d</type>
     <width><property>/sim/rendering/als/shadows/sun-atlas-size</property></width>
@@ -27,7 +34,7 @@
 
 
   <!-- Shadow mapping pre-passes -->
-  <pass include="csm.xml">
+  <pass include="ALS/csm.xml">
     <name>csm0</name>
     <near-m>0.1</near-m>
     <far-m>3.0</far-m>
@@ -38,7 +45,7 @@
       <height>0.5</height>
     </viewport>
   </pass>
-  <pass include="csm.xml">
+  <pass include="ALS/csm.xml">
     <name>csm1</name>
     <near-m>3.0</near-m>
     <far-m>50.0</far-m>
@@ -49,7 +56,7 @@
       <height>0.5</height>
     </viewport>
   </pass>
-  <pass include="csm.xml">
+  <pass include="ALS/csm.xml">
     <name>csm2</name>
     <near-m>50.0</near-m>
     <far-m>150.0</far-m>
@@ -60,7 +67,7 @@
       <height>0.5</height>
     </viewport>
   </pass>
-  <pass include="csm.xml">
+  <pass include="ALS/csm.xml">
     <name>csm3</name>
     <near-m>150.0</near-m>
     <far-m>1500.0</far-m>
@@ -96,6 +103,12 @@
     <attachment>
       <buffer>color</buffer>
       <component>color0</component>
+      <multisample-samples>4</multisample-samples>
+      <multisample-color-samples>4</multisample-color-samples>
+    </attachment>
+	<attachment>
+      <buffer>depth</buffer>
+      <component>depth</component>
       <multisample-samples>4</multisample-samples>
       <multisample-color-samples>4</multisample-color-samples>
     </attachment>

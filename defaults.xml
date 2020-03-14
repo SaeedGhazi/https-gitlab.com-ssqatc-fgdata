@@ -53,6 +53,12 @@ Started September 2000 by David Megginson, david@megginson.com
     <rendering>
       <initialized type="bool">false</initialized>
       <materials-file>Materials/regions/materials.xml</materials-file>
+      <als>
+          <shadows>
+              <enabled type="bool" userarchive="y">false</enabled>
+              <sun-atlas-size type="int" userarchive="y">1024</sun-atlas-size>
+          </shadows>
+      </als>
       <rembrandt>
         <enabled type="bool">false</enabled>
         <renderer>default-pipeline</renderer>

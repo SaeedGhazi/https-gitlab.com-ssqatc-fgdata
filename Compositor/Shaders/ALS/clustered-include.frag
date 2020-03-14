@@ -38,7 +38,7 @@ layout (std140) uniform SpotLightBlock {
 
 vec3 addColors(vec3 a, vec3 b)
 {
-    return 0.14 * log(exp(a/0.14) + exp(b/0.14));
+    return 0.14 * log(exp(a/0.14) + exp(b/0.14) - vec3(1.0));
 }
 
 // @param p Fragment position in view space.

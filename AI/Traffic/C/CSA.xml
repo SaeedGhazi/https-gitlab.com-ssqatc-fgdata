@@ -116,42 +116,42 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ATR42/ATR42-CSA.xml</model>
+        <model>Aircraft/AT7/AT7-CSA.xml</model>
         <livery>CSA</livery>
         <airline>CSA</airline>
         <home-port>LKPR</home-port>
         <required-aircraft>AT4-CSA</required-aircraft>
         <actype>AT4</actype>
         <offset>0</offset>
-        <radius>12</radius>
+        <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
         <registration>OK-KFO</registration>
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ATR42/ATR42-CSA.xml</model>
+        <model>Aircraft/AT7/AT7-CSA.xml</model>
         <livery>CSA</livery>
         <airline>CSA</airline>
         <home-port>LKPR</home-port>
         <required-aircraft>AT4-CSA</required-aircraft>
         <actype>AT4</actype>
         <offset>0</offset>
-        <radius>12</radius>
+        <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
         <registration>OK-KFP</registration>
         <heavy>false</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/ATR42/ATR42-CSA.xml</model>
+        <model>Aircraft/AT7/AT7-CSA.xml</model>
         <livery>CSA</livery>
         <airline>CSA</airline>
         <home-port>LKPR</home-port>
         <required-aircraft>AT4-CSA</required-aircraft>
         <actype>ATR</actype>
         <offset>0</offset>
-        <radius>12</radius>
+        <radius>14</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
         <registration>OK-KFN</registration>

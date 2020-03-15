@@ -86,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>
@@ -100,7 +100,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>
@@ -114,7 +114,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>
@@ -128,7 +128,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>
@@ -142,7 +142,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>
@@ -156,7 +156,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>
@@ -170,7 +170,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/ATR42/ATR42-Tarom.xml</model>
+    <model>Aircraft/AT4/AT4-Tarom.xml</model>
     <livery>ROT</livery>
     <airline>ROT</airline>
     <home-port>LROP</home-port>

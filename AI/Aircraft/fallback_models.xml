@@ -61,9 +61,9 @@
 <model n="106" type="string">AI/Aircraft/Embraer-Legacy/Embraer-Legacy-AirFrance.xml</model>
 
 <!-- 151-200 Turboprop airliners -->
-<model n="151" type="string">AI/Aircraft/AT5/AT5-Default.xml</model>
+<model n="151" type="string">AI/Aircraft/AT4/AT4-Default.xml</model>
 <model n="152" type="string">AI/Aircraft/AT7/AT7-default.xml</model>
-<model n="153" type="string">AI/Aircraft/ATR42/ATR42-default.xml</model>
+<model n="153" type="string">AI/Aircraft/AT4/AT4-BlueIslands.xml</model>
 <model n="154" type="string">AI/Aircraft/b1900d/Models/B1900D.xml</model>
 <model n="155" type="string">AI/Aircraft/Dash8/Dash8-400-Brussels.xml</model>
 <model n="156" type="string">AI/Aircraft/DH7/DH7-ScandinavianAirlines.xml</model>

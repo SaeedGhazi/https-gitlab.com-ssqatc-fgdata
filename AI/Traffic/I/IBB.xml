@@ -268,12 +268,12 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-BinterCanarias.xml</model>
+    <model>Aircraft/AT7/AT7-BinterCanarias.xml</model>
     <livery>IBB</livery>
     <airline>IBB</airline>
     <home-port>GCLP</home-port>
-    <required-aircraft>CRK-IBB</required-aircraft>
-    <actype>CRK</actype>
+    <required-aircraft>AT7-IBB</required-aircraft>
+    <actype>AT7</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -282,12 +282,12 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-BinterCanarias.xml</model>
+    <model>Aircraft/AT7/AT7-BinterCanarias.xml</model>
     <livery>IBB</livery>
     <airline>IBB</airline>
     <home-port>GCLP</home-port>
-    <required-aircraft>CRK-IBB</required-aircraft>
-    <actype>CRK</actype>
+    <required-aircraft>AT7-IBB</required-aircraft>
+    <actype>AT7</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -296,12 +296,12 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/CRJ-200/CRJ-200-BinterCanarias.xml</model>
+    <model>Aircraft/AT7/AT7-BinterCanarias.xml</model>
     <livery>IBB</livery>
     <airline>IBB</airline>
     <home-port>GCXO</home-port>
-    <required-aircraft>CRK-IBB</required-aircraft>
-    <actype>CRK</actype>
+    <required-aircraft>AT7-IBB</required-aircraft>
+    <actype>AT7</actype>
     <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
@@ -356,7 +356,7 @@
   </flight>
   <flight>
     <callsign>NT102</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -371,7 +371,7 @@
   </flight>
   <flight>
     <callsign>NT102</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -386,7 +386,7 @@
   </flight>
   <flight>
     <callsign>NT102</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -401,7 +401,7 @@
   </flight>
   <flight>
     <callsign>NT102</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -416,7 +416,7 @@
   </flight>
   <flight>
     <callsign>NT102</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -431,7 +431,7 @@
   </flight>
   <flight>
     <callsign>NT102</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -641,7 +641,7 @@
   </flight>
   <flight>
     <callsign>NT106</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -656,7 +656,7 @@
   </flight>
   <flight>
     <callsign>NT107</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -671,7 +671,7 @@
   </flight>
   <flight>
     <callsign>NT106</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -686,7 +686,7 @@
   </flight>
   <flight>
     <callsign>NT107</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -701,7 +701,7 @@
   </flight>
   <flight>
     <callsign>NT106</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -716,7 +716,7 @@
   </flight>
   <flight>
     <callsign>NT107</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -731,7 +731,7 @@
   </flight>
   <flight>
     <callsign>NT106</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -746,7 +746,7 @@
   </flight>
   <flight>
     <callsign>NT107</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -761,7 +761,7 @@
   </flight>
   <flight>
     <callsign>NT106</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -776,7 +776,7 @@
   </flight>
   <flight>
     <callsign>NT107</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -791,7 +791,7 @@
   </flight>
   <flight>
     <callsign>NT107</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -821,7 +821,7 @@
   </flight>
   <flight>
     <callsign>NT108</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -836,7 +836,7 @@
   </flight>
   <flight>
     <callsign>NT109</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -866,7 +866,7 @@
   </flight>
   <flight>
     <callsign>NT109</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -881,7 +881,7 @@
   </flight>
   <flight>
     <callsign>NT108</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -896,7 +896,7 @@
   </flight>
   <flight>
     <callsign>NT109</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -911,7 +911,7 @@
   </flight>
   <flight>
     <callsign>NT108</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -941,7 +941,7 @@
   </flight>
   <flight>
     <callsign>NT108</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -956,7 +956,7 @@
   </flight>
   <flight>
     <callsign>NT109</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -971,7 +971,7 @@
   </flight>
   <flight>
     <callsign>NT108</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -1181,7 +1181,7 @@
   </flight>
   <flight>
     <callsign>NT119</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -1196,7 +1196,7 @@
   </flight>
   <flight>
     <callsign>NT120</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -1211,7 +1211,7 @@
   </flight>
   <flight>
     <callsign>NT119</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -1226,7 +1226,7 @@
   </flight>
   <flight>
     <callsign>NT120</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -1241,7 +1241,7 @@
   </flight>
   <flight>
     <callsign>NT119</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -1256,7 +1256,7 @@
   </flight>
   <flight>
     <callsign>NT120</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -1271,7 +1271,7 @@
   </flight>
   <flight>
     <callsign>NT119</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -1286,7 +1286,7 @@
   </flight>
   <flight>
     <callsign>NT120</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -1301,7 +1301,7 @@
   </flight>
   <flight>
     <callsign>NT119</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -1316,7 +1316,7 @@
   </flight>
   <flight>
     <callsign>NT120</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -1331,7 +1331,7 @@
   </flight>
   <flight>
     <callsign>NT119</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -1871,7 +1871,7 @@
   </flight>
   <flight>
     <callsign>NT134</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -2066,7 +2066,7 @@
   </flight>
   <flight>
     <callsign>NT147</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -2441,7 +2441,7 @@
   </flight>
   <flight>
     <callsign>NT153</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -2456,7 +2456,7 @@
   </flight>
   <flight>
     <callsign>NT153</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -2471,7 +2471,7 @@
   </flight>
   <flight>
     <callsign>NT153</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -2486,7 +2486,7 @@
   </flight>
   <flight>
     <callsign>NT153</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -3296,7 +3296,7 @@
   </flight>
   <flight>
     <callsign>NT206</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -3311,7 +3311,7 @@
   </flight>
   <flight>
     <callsign>NT207</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCFV</port>
@@ -3356,7 +3356,7 @@
   </flight>
   <flight>
     <callsign>NT208</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -3371,7 +3371,7 @@
   </flight>
   <flight>
     <callsign>NT209</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCFV</port>
@@ -4316,7 +4316,7 @@
   </flight>
   <flight>
     <callsign>NT224</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -4331,7 +4331,7 @@
   </flight>
   <flight>
     <callsign>NT227</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCFV</port>
@@ -4496,7 +4496,7 @@
   </flight>
   <flight>
     <callsign>NT228</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -4511,7 +4511,7 @@
   </flight>
   <flight>
     <callsign>NT231</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCFV</port>
@@ -4616,7 +4616,7 @@
   </flight>
   <flight>
     <callsign>NT234</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -4631,7 +4631,7 @@
   </flight>
   <flight>
     <callsign>NT235</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCFV</port>
@@ -5036,7 +5036,7 @@
   </flight>
   <flight>
     <callsign>NT311</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -5051,7 +5051,7 @@
   </flight>
   <flight>
     <callsign>NT312</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLA</port>
@@ -5321,7 +5321,7 @@
   </flight>
   <flight>
     <callsign>NT317</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -5336,7 +5336,7 @@
   </flight>
   <flight>
     <callsign>NT318</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLA</port>
@@ -5381,7 +5381,7 @@
   </flight>
   <flight>
     <callsign>NT317</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -5396,7 +5396,7 @@
   </flight>
   <flight>
     <callsign>NT318</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLA</port>
@@ -5441,7 +5441,7 @@
   </flight>
   <flight>
     <callsign>NT317</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -5456,7 +5456,7 @@
   </flight>
   <flight>
     <callsign>NT318</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLA</port>
@@ -7601,7 +7601,7 @@
   </flight>
   <flight>
     <callsign>NT500</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -7616,7 +7616,7 @@
   </flight>
   <flight>
     <callsign>NT501</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -7631,7 +7631,7 @@
   </flight>
   <flight>
     <callsign>NT500</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -7646,7 +7646,7 @@
   </flight>
   <flight>
     <callsign>NT501</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -7661,7 +7661,7 @@
   </flight>
   <flight>
     <callsign>NT500</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -7676,7 +7676,7 @@
   </flight>
   <flight>
     <callsign>NT501</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -7721,7 +7721,7 @@
   </flight>
   <flight>
     <callsign>NT500</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -7736,7 +7736,7 @@
   </flight>
   <flight>
     <callsign>NT501</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -8996,7 +8996,7 @@
   </flight>
   <flight>
     <callsign>NT524</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9011,7 +9011,7 @@
   </flight>
   <flight>
     <callsign>NT525</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -9176,7 +9176,7 @@
   </flight>
   <flight>
     <callsign>NT526</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9191,7 +9191,7 @@
   </flight>
   <flight>
     <callsign>NT527</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -9206,7 +9206,7 @@
   </flight>
   <flight>
     <callsign>NT528</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9236,7 +9236,7 @@
   </flight>
   <flight>
     <callsign>NT529</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -9461,7 +9461,7 @@
   </flight>
   <flight>
     <callsign>NT535</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -9536,7 +9536,7 @@
   </flight>
   <flight>
     <callsign>NT536</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9551,7 +9551,7 @@
   </flight>
   <flight>
     <callsign>NT537</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCRR</port>
@@ -9761,7 +9761,7 @@
   </flight>
   <flight>
     <callsign>NT538</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9926,7 +9926,7 @@
   </flight>
   <flight>
     <callsign>NT5100</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9941,7 +9941,7 @@
   </flight>
   <flight>
     <callsign>NT5101</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEPA</port>
@@ -9956,7 +9956,7 @@
   </flight>
   <flight>
     <callsign>NT5100</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -9971,7 +9971,7 @@
   </flight>
   <flight>
     <callsign>NT5101</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEPA</port>
@@ -9986,7 +9986,7 @@
   </flight>
   <flight>
     <callsign>NT5150</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -10001,7 +10001,7 @@
   </flight>
   <flight>
     <callsign>NT5151</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEPA</port>
@@ -10016,7 +10016,7 @@
   </flight>
   <flight>
     <callsign>NT5150</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -10031,7 +10031,7 @@
   </flight>
   <flight>
     <callsign>NT5151</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEPA</port>
@@ -10046,7 +10046,7 @@
   </flight>
   <flight>
     <callsign>NT5230</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -10061,7 +10061,7 @@
   </flight>
   <flight>
     <callsign>NT5231</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEVX</port>
@@ -10076,7 +10076,7 @@
   </flight>
   <flight>
     <callsign>NT5230</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -10091,7 +10091,7 @@
   </flight>
   <flight>
     <callsign>NT5231</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEVX</port>
@@ -10106,7 +10106,7 @@
   </flight>
   <flight>
     <callsign>NT5250</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -10121,7 +10121,7 @@
   </flight>
   <flight>
     <callsign>NT5251</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEVX</port>
@@ -10136,7 +10136,7 @@
   </flight>
   <flight>
     <callsign>NT5250</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -10151,7 +10151,7 @@
   </flight>
   <flight>
     <callsign>NT5251</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LEVX</port>
@@ -11726,7 +11726,7 @@
   </flight>
   <flight>
     <callsign>NT6504</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11741,7 +11741,7 @@
   </flight>
   <flight>
     <callsign>NT6505</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GQNO</port>
@@ -11756,7 +11756,7 @@
   </flight>
   <flight>
     <callsign>NT6504</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11771,7 +11771,7 @@
   </flight>
   <flight>
     <callsign>NT6505</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GQNO</port>
@@ -11786,7 +11786,7 @@
   </flight>
   <flight>
     <callsign>NT6504</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11801,7 +11801,7 @@
   </flight>
   <flight>
     <callsign>NT6505</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GQNO</port>
@@ -11846,7 +11846,7 @@
   </flight>
   <flight>
     <callsign>NT6604</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11861,7 +11861,7 @@
   </flight>
   <flight>
     <callsign>NT6605</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GOBD</port>
@@ -11876,7 +11876,7 @@
   </flight>
   <flight>
     <callsign>NT6604</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11891,7 +11891,7 @@
   </flight>
   <flight>
     <callsign>NT6605</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GOBD</port>
@@ -11906,7 +11906,7 @@
   </flight>
   <flight>
     <callsign>NT6800</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11921,7 +11921,7 @@
   </flight>
   <flight>
     <callsign>NT6801</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GVAC</port>
@@ -11936,7 +11936,7 @@
   </flight>
   <flight>
     <callsign>NT6800</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11951,7 +11951,7 @@
   </flight>
   <flight>
     <callsign>NT6801</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GVAC</port>
@@ -11966,7 +11966,7 @@
   </flight>
   <flight>
     <callsign>NT6800</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -11981,7 +11981,7 @@
   </flight>
   <flight>
     <callsign>NT6801</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GVAC</port>
@@ -12026,7 +12026,7 @@
   </flight>
   <flight>
     <callsign>NT6810</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -12041,7 +12041,7 @@
   </flight>
   <flight>
     <callsign>NT6811</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LPPT</port>
@@ -12056,7 +12056,7 @@
   </flight>
   <flight>
     <callsign>NT6810</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCXO</port>
@@ -12071,7 +12071,7 @@
   </flight>
   <flight>
     <callsign>NT6811</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>LPPT</port>
@@ -12086,7 +12086,7 @@
   </flight>
   <flight>
     <callsign>NT6902</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GCLP</port>
@@ -12101,7 +12101,7 @@
   </flight>
   <flight>
     <callsign>NT6903</callsign>
-    <required-aircraft>CRK-IBB</required-aircraft>
+    <required-aircraft>AT7-IBB</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>GBYD</port>

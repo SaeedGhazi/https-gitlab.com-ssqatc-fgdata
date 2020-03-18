@@ -57,7 +57,7 @@
 <model n="101" type="string">AI/Aircraft/BAe-125/Models/bae125-ai.xml</model>
 <model n="102" type="string">AI/Aircraft/Bombardier-Challenger/Bombardier-Challenger-AirDolomiti.xml</model>
 <model n="104" type="string">AI/Aircraft/Citation-Bravo/Models/Bravo-ai.xml</model>
-<model n="105" type="string">AI/Aircraft/CRJ-200/CRJ-200-default.xml</model>
+<model n="105" type="string">AI/Aircraft/CR2/CR2-Default.xml</model>
 <model n="106" type="string">AI/Aircraft/Embraer-Legacy/Embraer-Legacy-AirFrance.xml</model>
 
 <!-- 151-200 Turboprop airliners -->

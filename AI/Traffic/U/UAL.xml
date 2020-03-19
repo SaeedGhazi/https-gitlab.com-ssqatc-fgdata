@@ -6847,7 +6847,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -6861,7 +6861,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -6875,7 +6875,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -6889,7 +6889,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -6903,7 +6903,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -6917,7 +6917,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
@@ -6931,7 +6931,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -6945,7 +6945,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -6959,7 +6959,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -6973,7 +6973,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -6987,7 +6987,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -7001,7 +7001,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7015,7 +7015,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
@@ -7029,7 +7029,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7043,7 +7043,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
@@ -7057,7 +7057,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7071,7 +7071,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7085,7 +7085,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -7099,7 +7099,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7113,7 +7113,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7127,7 +7127,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7141,7 +7141,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7155,7 +7155,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7169,7 +7169,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7183,7 +7183,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7197,7 +7197,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -7211,7 +7211,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7225,7 +7225,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7239,7 +7239,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7253,7 +7253,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7267,7 +7267,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -7281,7 +7281,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7295,7 +7295,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7309,7 +7309,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
@@ -7323,7 +7323,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7337,7 +7337,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7351,7 +7351,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7365,7 +7365,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7379,7 +7379,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7393,7 +7393,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7407,7 +7407,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7421,7 +7421,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
@@ -7435,7 +7435,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7449,7 +7449,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7463,7 +7463,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7477,7 +7477,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7491,7 +7491,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7505,7 +7505,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7519,7 +7519,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7533,7 +7533,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -7547,7 +7547,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7561,7 +7561,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7575,7 +7575,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7589,7 +7589,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
@@ -7603,7 +7603,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
@@ -7617,7 +7617,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7631,7 +7631,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
@@ -7645,7 +7645,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
@@ -7659,7 +7659,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7673,7 +7673,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
@@ -7687,7 +7687,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
@@ -7701,1414 +7701,1414 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N613UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N715UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N437UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N778UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N297UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N396UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N103UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N734UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N817UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N564UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N485UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N002UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N764UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N388UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N751UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N923UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N351UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N494UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N996UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N149UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N844UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N133UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N151UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N314UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N655UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N869UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N774UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N123UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N765UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N100UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N684UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N229UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N754UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N192UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N241UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N352UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N028UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N745UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>EM2-UAL</required-aircraft>
     <actype>EM2</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N988UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N453UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N227UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N617UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N218UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N016UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N606UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N040UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N909UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N681UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N746UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N560UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N586UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N403UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N322UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N927UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N081UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N838UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N654UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N288UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N579UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N997UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N697UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N029UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N670UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N053UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N426UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N049UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N236UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N398UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N514UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N037UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N410UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N542UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N952UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N888UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N405UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N001UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N099UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N559UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N266UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N283UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N928UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KDEN</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N709UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N214UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N044UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N678UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N418UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N062UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N291UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N726UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N541UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N549UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N368UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N752UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KORD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N451UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N922UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N736UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KIAD</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N238UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KLAX</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N023UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>RJAA</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N750UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N306UA</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Embraer-Legacy/Embraer-Legacy-UnitedAirlines.xml</model>
+    <model>Aircraft/ERJ145/ERJ145-United.xml</model>
     <livery>UAL</livery>
     <airline>UAL</airline>
     <home-port>KSFO</home-port>
     <required-aircraft>ER4-UAL</required-aircraft>
     <actype>ER4</actype>
     <offset>0</offset>
-    <radius>11</radius>
+    <radius>10</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>N196UA</registration>

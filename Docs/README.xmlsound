@@ -199,6 +199,9 @@ Configuration description:
      <offset>
         The initial value for this sound. This value is also used as an
         offset value for calculating the end result.
+
+     <random>
+        Add a bit of randomness to the offset. Only used for pitch.
  
      <min>
         Minimum allowed value.

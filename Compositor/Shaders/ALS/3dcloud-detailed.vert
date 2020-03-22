@@ -1,6 +1,8 @@
 // -*-C++-*-
 #version 120
 
+uniform float fg_Fcoef;
+
 varying float fogFactor;
 varying vec3 hazeColor;
 varying float mie_frag;
@@ -151,7 +153,8 @@ void main(void)
     // Final position of the sprite
     vec3 relVector = gl_Position.xyz - ep.xyz;
     gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
-
+    // logarithmic depth
+    gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
 
    // Light at the final position
 

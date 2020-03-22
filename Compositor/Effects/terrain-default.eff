@@ -2108,7 +2108,7 @@
         </internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/ALS/generic-base.vert</vertex-shader>
+        <vertex-shader>Shaders/ALS/terrain-base.vert</vertex-shader>
         <vertex-shader>Shaders/ALS/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/ALS/terrain-base.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/hazes.frag</fragment-shader>

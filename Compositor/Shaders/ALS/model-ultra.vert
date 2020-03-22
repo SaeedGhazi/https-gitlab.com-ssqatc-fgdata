@@ -16,6 +16,8 @@ varying	float	alpha;
 attribute	vec3	tangent;
 attribute	vec3	binormal;
 
+uniform float fg_Fcoef;
+
 uniform	float		pitch;
 uniform	float		roll;
 uniform	float		hdg;
@@ -113,6 +115,8 @@ void	main(void)
 					  * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 		
 		gl_Position = ftransform();
+        // logarithmic depth
+        gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
         setupShadows(ecPosition);

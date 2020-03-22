@@ -7,6 +7,8 @@
 
 #version 120
 
+varying float flogz;
+
 varying vec4 waterTex1;
 varying vec4 waterTex2;
 varying vec4 waterTex4;
@@ -119,7 +121,8 @@ void main(void)
 
 //     fog_Func(fogType);
     gl_Position = ftransform();
-
+    // logarithmic depth
+    flogz = 1.0 + gl_Position.w;
 
 
 // here start computations for the haze layer

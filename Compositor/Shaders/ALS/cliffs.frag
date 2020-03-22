@@ -16,6 +16,10 @@ varying vec3 ecViewdir;
 varying float steepness;
 varying vec2 grad_dir;
 
+varying float flogz;
+
+
+uniform float fg_Fcoef;
 
 uniform float visibility;
 uniform float avisibility;
@@ -614,7 +618,7 @@ fragColor.rgb = mix(hazeColor + secondary_light * fog_backscatter(mvisibility), 
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
-
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }
 

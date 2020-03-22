@@ -10,6 +10,7 @@ varying vec2 rawPos;
 varying vec3 worldPos;
 
 
+uniform float fg_Fcoef;
 
 uniform sampler2D texture;
 uniform sampler2D detail_texture;
@@ -18,6 +19,8 @@ uniform sampler2D mix_texture;
 //varying float yprime_alt;
 //varying float mie_angle;
 varying float steepness;
+
+varying float flogz;
 
 
 uniform float visibility;
@@ -501,7 +504,7 @@ fragColor.rgb = mix(clamp(hazeColor,0.0,1.0) , clamp(fragColor.rgb,0.0,1.0),tran
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
-
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }
 

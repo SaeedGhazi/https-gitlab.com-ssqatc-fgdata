@@ -15,6 +15,8 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
+uniform float fg_Fcoef;
+
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
@@ -130,6 +132,8 @@ void main()
   // Move to correct location (stored in gl_Color)
   position = position + gl_Color.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
+  // logarithmic depth
+  gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
 
   vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
   //normal = normalize(-ecPosition);

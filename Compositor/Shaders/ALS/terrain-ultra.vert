@@ -30,6 +30,8 @@ varying vec2 grad_dir;
 varying float mie_angle;
 varying float steepness;
 
+varying float flogz;
+
 uniform int colorMode;
 
 uniform bool raise_vertex;
@@ -104,6 +106,8 @@ void main()
    	gl_Position =  gl_ModelViewProjectionMatrix * pos;
 	}
    else gl_Position = ftransform();
+   // logarithmic depth
+   flogz = 1.0 + gl_Position.w;
 
 
 // this code is copied from default.vert

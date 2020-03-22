@@ -12,6 +12,8 @@ varying vec3 ecViewdir;
 varying vec2 grad_dir;
 
 
+uniform float fg_Fcoef;
+
 uniform sampler2D texture;
 uniform sampler2D detail_texture;
 uniform sampler2D mix_texture;
@@ -22,7 +24,7 @@ uniform sampler2D gradient_texture;
 
 varying float steepness;
 
-
+varying float flogz;
 
 uniform float visibility;
 uniform float avisibility;
@@ -664,6 +666,6 @@ fragColor.rgb = mix(hazeColor+secondary_light * fog_backscatter(mvisibility) , f
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
-
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }
 

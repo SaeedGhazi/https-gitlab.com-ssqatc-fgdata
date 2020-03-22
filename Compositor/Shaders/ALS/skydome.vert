@@ -5,7 +5,8 @@
 // Atmospheric scattering shader for flightgear
 // Written by Lauri Peltonen (Zan)
 // Implementation of O'Neil's algorithm
- 
+
+uniform float fg_Fcoef;
  
 uniform mat4 osg_ViewMatrix;
 uniform mat4 osg_ViewMatrixInverse;
@@ -295,4 +296,6 @@ void main()
 
     // Transform
     gl_Position = gl_ModelViewProjectionMatrix * finalVertex;
+    // logarithmic depth
+    gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
 }

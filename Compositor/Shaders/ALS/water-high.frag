@@ -8,6 +8,8 @@
 
 #version 120
 
+uniform float fg_Fcoef;
+
 uniform sampler2D water_normalmap;
 uniform sampler2D water_dudvmap;
 uniform sampler2D sea_foam;
@@ -33,6 +35,8 @@ varying float earthShade;
 varying float yprime_alt;
 varying float mie_angle;
 varying float steepness;
+
+varying float flogz;
 
 uniform    float WaveFreq ;
 uniform    float WaveAmp ;
@@ -738,6 +742,6 @@ finalColor.rgb = filter_combined(finalColor.rgb);
 
 
 gl_FragColor = finalColor;
-
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }

@@ -150,6 +150,7 @@
 <model n="525" type="string">AI/Aircraft/T-38/Models/F-5.xml</model>
 <model n="526" type="string">Models/Geometry/KA6-D/A6-D-lowpoly.xml</model>
 <model n="527" type="string">AI/Aircraft/Mirage2000/m2000-5_lowpoly.xml</model>
+<model n="528" type="string">AI/Aircraft/Jaguar-GR1/jaguar-gr1-low.xml</model>
 
 <!-- 551-600 Military large aircraft (tankers, transports) -->
 <model n="551" type="string">AI/Aircraft/E-2C/Models/E-2C-model.xml</model>

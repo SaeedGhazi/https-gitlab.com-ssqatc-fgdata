@@ -38,7 +38,13 @@
    <object-name>earth_N3</object-name>
 </effect>
 
-
+ <animation>
+  <type>select</type>
+  <object-name>dummy_N3</object-name>
+  <condition>
+   <property>/earthview/show-dummy</property>
+  </condition>
+ </animation>
 
 
 </PropertyList>

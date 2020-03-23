@@ -969,6 +969,15 @@ var CDU = {
         me._savedPage = nil;
         me.displayPage(saved, CDU.DISPLAY_POP);
     },
+
+    getPage: func(tag) {
+        if (!contains(me._pages, tag)) {
+            debug.dump("no page with tag:" ~ tag);
+            return nil;
+        }
+
+        return me._pages[tag];
+    },
     
     requestRefresh: func {
         me._refresh();

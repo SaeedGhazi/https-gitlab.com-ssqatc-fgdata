@@ -1402,6 +1402,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <show-s3 type="bool" userarchive="n">true</show-s3>
     <show-s4 type="bool" userarchive="n">true</show-s4>
     <show-dummy type="bool" userarchive="n">false</show-dummy>
+    <show-force-all type="bool" userarchive="n">false</show-force-all>
     <normal-flag type="bool" userarchive="y">false</normal-flag>
     <cloud-normal-flag type="bool" userarchive="y">false</cloud-normal-flag>
     <roi-x1 type="float" userarchive="n">0.0</roi-x1>

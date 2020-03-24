@@ -46,42 +46,51 @@ var lon = getprop("/position/longitude-deg");
 
 
 
-# define the tile centers
+
+# the coordinates of the 7 tiles' junction points, from North to South
+# and West to East on the geo sphere.
+geojunctions[0] = geo.Coord.new();
+geojunctions[0].set_latlon(90.0, 0.0);
+geojunctions[1] = geo.Coord.new();
+geojunctions[1].set_latlon(0.0, -180.0);
+geojunctions[2] = geo.Coord.new();
+geojunctions[2].set_latlon(0.0, -90.0);
+geojunctions[3] = geo.Coord.new();
+geojunctions[3].set_latlon(0.0, 0.0);
+geojunctions[4] = geo.Coord.new();
+geojunctions[4].set_latlon(0.0, 90.0);
+geojunctions[5] = geo.Coord.new();
+geojunctions[5].set_latlon(0.0, 180.0);
+geojunctions[6] = geo.Coord.new();
+geojunctions[6].set_latlon(-90.0, 0.0);
 
 
-center_N1 = geo.Coord.new();
-center_N2 = geo.Coord.new();
-center_N3 = geo.Coord.new();
-center_N4 = geo.Coord.new();
-center_S1 = geo.Coord.new();
-center_S2 = geo.Coord.new();
-center_S3 = geo.Coord.new();
-center_S4 = geo.Coord.new();
+# tiles are uniquely defined by 3 junction points and we store their
+# index. We also store the 3 corresponding indices of junction arcs as
+# well as the name of the associated neighbouring tiles
+################################ <--- 0 identified
+##      #      #      #       ##
+##  N1  #  N2  #  N3  #  N4   ##
+##      #      #      #       ##
+# 1 ### 2 #### 3 #### 4 #### 5 #
+##      #      #      #       ##
+##  S1  #  S2  #  S3  #  S4   ##
+##      #      #      #       ##
+################################ <--- 6 identified
 
-center_N1.set_latlon(45.0, -135.0);
-center_N2.set_latlon(45.0,  -45.0);
-center_N3.set_latlon(45.0,   45.0);
-center_N4.set_latlon(45.0,  135.0);
 
-center_S1.set_latlon(-45.0, -135.0);
-center_S2.set_latlon(-45.0,  -45.0);
-center_S3.set_latlon(-45.0,   45.0);
-center_S4.set_latlon(-45.0,  135.0);
+tiling[0] = atile.new("N1",[0,1,2],["N3","S4","S2"],[[0,1],[1,2],[2,0]],["N4","S1","N2"]);
+tiling[1] = atile.new("N2",[0,2,3],["N4","S1","S3"],[[0,2],[2,3],[3,0]],["N1","S2","N3"]);
+tiling[2] = atile.new("N3",[0,3,4],["N1","S2","S4"],[[0,3],[3,4],[4,0]],["N2","S3","N4"]);
+tiling[3] = atile.new("N4",[0,4,5],["N2","S3","S1"],[[0,4],[4,5],[5,0]],["N3","S4","N1"]);
+tiling[4] = atile.new("S1",[1,2,6],["N4","N2","S3"],[[1,2],[2,6],[6,1]],["N1","S2","S4"]);
+tiling[5] = atile.new("S2",[2,3,6],["N1","N3","S4"],[[2,3],[3,6],[6,2]],["N2","S3","S1"]);
+tiling[6] = atile.new("S3",[3,4,6],["N2","N4","S1"],[[3,4],[4,6],[6,3]],["N3","S4","S2"]);
+tiling[7] = atile.new("S4",[4,5,6],["N3","N1","S2"],[[4,5],[5,6],[6,4]],["N4","S1","S3"]);
+
+tiling_visibility = {"N1":0,"N2":0,"N3":0,"N4":0,"S1":0,"S2":0,"S3":0,"S4":0};
 
 # determine which tiles to show
-
-var shuttle_pos = geo.aircraft_position();
-
-if (0==1){
-print(shuttle_pos.distance_to(center_N1)/1000.0);
-print(shuttle_pos.distance_to(center_N2)/1000.0);
-print(shuttle_pos.distance_to(center_N3)/1000.0);
-print(shuttle_pos.distance_to(center_N4)/1000.0);
-print(shuttle_pos.distance_to(center_S1)/1000.0);
-print(shuttle_pos.distance_to(center_S2)/1000.0);
-print(shuttle_pos.distance_to(center_S3)/1000.0);
-print(shuttle_pos.distance_to(center_S4)/1000.0);
-}
 
 setprop("/earthview/show-n1", 0);
 setprop("/earthview/show-n2", 0);
@@ -180,7 +189,7 @@ var model = m.getChild("model", i, 1);
 
 var R1 = 5800000.0;
 var R2 = 58000.0;
-
+			    
 var altitude1 = getprop("/position/altitude-ft");
 var altitude2 = R2/R1 * altitude1;
 var model_alt = altitude1 - altitude2 - R2 * m_to_ft;
@@ -227,15 +236,22 @@ if (earthview_running_flag == 0) {return;}
 
 var R1 = 5800000.0;
 var R2 = 58000.0;
-var range_base = 7000000;
 
 var altitude1 = getprop("/position/altitude-ft");
 var altitude2 = R2/R1 * altitude1;
 var model_alt = altitude1 - altitude2 - R2 * m_to_ft;
 
-var horizon = math.sqrt(2.0 * R1 * altitude1 * ft_to_m );
-if (horizon > 5000000.0) {horizon = 5000000.0;}
+#var horizon = math.sqrt(2.0 * R1 * altitude1 * ft_to_m );
+#if (horizon > 5000000.0) {horizon = 5000000.0;}
 
+#horizon on the R1-ball for an altitude given by the real one
+var horizon = 0.0;
+if (altitude1 >= 0.0)
+{
+    horizon = R1*math.acos(1.0/(1.0+altitude1*ft_to_m/R1));
+}
+
+    
 setprop("/earthview/horizon-km", horizon/1000.0);
 
 setprop("/earthview/elevation-ft", model_alt);
@@ -249,40 +265,103 @@ setprop("/earthview/longitude-deg", lon);
 setprop("/earthview/roll-deg", -(90-lat));
 setprop("/earthview/yaw-deg", -lon);
 
-var shuttle_pos = geo.aircraft_position();
+
+if (getprop("/earthview/show-force-all") == 1)
+{
+
+    tiling_visibility = {"N1":1,"N2":1,"N3":1,"N4":1,"S1":1,"S2":1,"S3":1,"S4":1};
+
+}
+else
+{
+    
+    var shuttle_pos = geo.aircraft_position();
 
 
-if (shuttle_pos.distance_to(center_N1) > range_base + horizon) 
-	{setprop("/earthview/show-n1", 0);}
-else {setprop("/earthview/show-n1", 1);}
+    #horizon (in m) over the geo earth (for tests)
+    var geohorizon = shuttle_pos.horizon();
 
-if (shuttle_pos.distance_to(center_N2) > range_base + horizon) 
-	{setprop("/earthview/show-n2", 0);}
-else {setprop("/earthview/show-n2", 1);}
+    #fold back the distorsion induced by R2/ERAD != altitude2/altitude1 on
+    #the geo sphere.
+    var distorted_geohorizon = geo.ERAD*horizon/R1;
 
-if (shuttle_pos.distance_to(center_N3) > range_base + horizon) 
-	{setprop("/earthview/show-n3", 0);}
-else {setprop("/earthview/show-n3", 1);}
+    # over which tile are we?
+    var tile_index = math.floor((180.0+geo.normdeg180(shuttle_pos.lon()))/90.0);
+    if (shuttle_pos.lat() < 0.0)
+    {
+	tile_index += 4;
+    }
 
-if (shuttle_pos.distance_to(center_N4) > range_base + horizon) 
-	{setprop("/earthview/show-n4", 0);}
-else {setprop("/earthview/show-n4", 1);}
 
-if (shuttle_pos.distance_to(center_S1) > range_base + horizon) 
-	{setprop("/earthview/show-s1", 0);}
-else {setprop("/earthview/show-s1", 1);}
+    #print("lon= lat= ",shuttle_pos.lon()," ",shuttle_pos.lat());
+    #print("horizon= geohorizon= distorted_geohorizon= ",horizon/1000.0," ",geohorizon/1000.0," "
+    #      ,distorted_geohorizon/1000.0);
+    #print("current tile_index= ",tile_index);
+    #print("tile name is ",tiling[tile_index].name);
 
-if (shuttle_pos.distance_to(center_S2) > range_base + horizon) 
-	{setprop("/earthview/show-s2", 0);}
-else {setprop("/earthview/show-s2", 1);}
+    tiling_visibility[tiling[tile_index].name] = 1;
 
-if (shuttle_pos.distance_to(center_S3) > range_base + horizon) 
-	{setprop("/earthview/show-s3", 0);}
-else {setprop("/earthview/show-s3", 1);}
+    # which neighbouring tiles are visible
+    # loops over junctions, i.e. arcs and points
+    for (var i=0; i < 3; i = i+1) {
 
-if (shuttle_pos.distance_to(center_S4) > range_base + horizon) 
-	{setprop("/earthview/show-s4", 0);}
-else {setprop("/earthview/show-s4", 1);}
+	var ia = tiling[tile_index].arcs.index[i][0];
+	var ib = tiling[tile_index].arcs.index[i][1];
+
+	#    print("ti i= ",tile_index," ",i);
+	#    print("ia= ib= ",ia," ",ib);
+	#    print("line names= ",tiling[tile_index].arcs.names[i]);
+	#    print("dist to arc= ",shuttle_pos.greatcircle_distance_to(geojunctions[ia],geojunctions[ib])/1000.0);
+
+	if (shuttle_pos.greatcircle_distance_to(geojunctions[ia],geojunctions[ib]) > distorted_geohorizon)
+	{
+	    tiling_visibility[tiling[tile_index].arcs.names[i]] = 0;
+	}
+	else
+	{
+	    tiling_visibility[tiling[tile_index].arcs.names[i]] = 1;
+	}
+	
+	
+	var ic = tiling[tile_index].points.index[i];
+
+	#    print("ic= ",ic);
+	#    print("point names= ",tiling[tile_index].points.names[i]);
+	#    print("distance to point= ",shuttle_pos.distance_to(geojunctions[ic])/1000.0);
+	#    print(" ");
+
+	if (shuttle_pos.distance_to(geojunctions[ic]) > distorted_geohorizon)
+	{
+	    tiling_visibility[tiling[tile_index].points.names[i]] = 0;
+	}
+	else
+	{
+	    tiling_visibility[tiling[tile_index].points.names[i]] = 1;
+	}
+    }
+
+}
+
+
+#print("N1 ",tiling_visibility["N1"]);
+#print("N2 ",tiling_visibility["N2"]);
+#print("N3 ",tiling_visibility["N3"]);
+#print("N4 ",tiling_visibility["N4"]);
+#print("S1 ",tiling_visibility["S1"]);
+#print("S2 ",tiling_visibility["S2"]);
+#print("S3 ",tiling_visibility["S3"]);
+#print("S4 ",tiling_visibility["S4"]);
+
+
+setprop("/earthview/show-n1",tiling_visibility["N1"]);
+setprop("/earthview/show-n2",tiling_visibility["N2"]);
+setprop("/earthview/show-n3",tiling_visibility["N3"]);
+setprop("/earthview/show-n4",tiling_visibility["N4"]);
+setprop("/earthview/show-s1",tiling_visibility["S1"]);
+setprop("/earthview/show-s2",tiling_visibility["S2"]);
+setprop("/earthview/show-s3",tiling_visibility["S3"]);
+setprop("/earthview/show-s4",tiling_visibility["S4"]);
+
 
 # now set scattering paramaters
 
@@ -486,7 +565,8 @@ if (action)
 	else if (i==3)
 		{
 		earth_model.node3 = place_earth_model("Models/Astro/earth_N3.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
-		cloudsphere_model.node3 = place_earth_model("Models/Astro/clouds_N3.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);
+		if (cloudsphere_rotated_flag == 0)
+			{cloudsphere_model.node3 = place_earth_model("Models/Astro/clouds_N3.xml",lat, lon, 0.0, 0.0, 0.0, 0.0);}
 		}
 	else if (i==4)
 		{
@@ -588,13 +668,33 @@ var aurora_model = {};
 var earthview_running_flag = 0;
 var cloudsphere_rotated_flag = 0;
 
-var center_N1 = {}; 
-var center_N2 = {};
-var center_N3 = {};
-var center_N4 = {};
-var center_S1 = {};
-var center_S2 = {};
-var center_S3 = {};
-var center_S4 = {};
+var geojunctions = [];
+setsize(geojunctions, 7);
+
+
+var boundary = {
+  new: func(bindex, bname) {
+      var m = { parents: [ boundary ] };
+      m.index = bindex;
+      m.names = bname;
+      return m;
+      },
+};
+
+var atile = {
+  new: func(tname, ptind, ptname, arcind, arcname) {
+      var m = { parents: [ atile ] };
+      m.name = tname;
+      m.points = boundary.new(ptind, ptname);
+      m.arcs = boundary.new(arcind, arcname);      
+      return m;
+      },
+};
+  
+    
+var tiling = [];
+setsize(tiling, 8);
+
+var tiling_visibility = {};
 
 

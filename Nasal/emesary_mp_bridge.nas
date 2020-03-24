@@ -301,6 +301,7 @@ var IncomingMPBridge =
         foreach(var n ; new_class.NotificationsToBridge)
           {
               print("  Incoming bridge notification type --> ",n.NotificationType);
+              n.IncomingMessageIndex = OutgoingMPBridge.StartMessageIndex;
               new_class.NotificationsToBridge_Lookup[n.TypeId] = n;
           }
         new_class.MPout = "";
@@ -316,7 +317,6 @@ var IncomingMPBridge =
             me.MpVariable = _root~"sim/multiplay/"~new_class.MPpropertyBase~"["~new_class.MPidx~"]";
             me.CallsignPath = _root~"callsign";
             me.PropertyRoot = _root;
-            me.IncomingMessageIndex = OutgoingMPBridge.StartMessageIndex;
 
             setlistener(me.MpVariable, func(v)
                         {
@@ -367,9 +367,11 @@ var IncomingMPBridge =
                     } else {
                             bridged_notification.FromIncomingBridge = 1;
                             bridged_notification.Callsign = me.GetCallsign();
-                            if(IncomingMPBridge.trace)
-                              print("ProcessIncoming ",bridged_notification.Callsign," ",me.PropertyRoot, "idx=",msg_idx, " bridge_idx=",me.IncomingMessageIndex);
-                        if (msg_idx > me.IncomingMessageIndex) {
+                            if(IncomingMPBridge.trace>1)
+                              print("ProcessIncoming callsign=",bridged_notification.Callsign," ",me.PropertyRoot, " msg_type=",msg_type_id," idx=",msg_idx, " bridge_idx=",bridged_notification.IncomingMessageIndex);
+                        if (msg_idx > bridged_notification.IncomingMessageIndex) {
+                            if(IncomingMPBridge.trace==1)
+                              print("ProcessIncoming callsign=",bridged_notification.Callsign," ",me.PropertyRoot, " msg_type=",msg_type_id," idx=",msg_idx, " bridge_idx=",bridged_notification.IncomingMessageIndex);
                             var msg_body = encoded_notification[3];
                             if (IncomingMPBridge.trace > 2)
                               print("received idx=",msg_idx," ",msg_type_id,":",bridged_notification.NotificationType);
@@ -380,16 +382,22 @@ var IncomingMPBridge =
                             if (IncomingMPBridge.trace > 2)
                               print("Process ",msg_body," len=",msglen, " BPsize = ",size(bridgedProperties));
                             var pos = 0;
+
                             for (var bpi = 0; bpi < size(bridgedProperties); bpi += 1) {
                                 if (pos < msglen) {
-                            if (IncomingMPBridge.trace > 2)
+
+                                    if (IncomingMPBridge.trace > 2)
                                       print("dec: pos ",pos);
+
                                     var bp = bridgedProperties[bpi];
                                     dv = bp.setValue(msg_body, me, pos);
-                            if (IncomingMPBridge.trace > 2)
+
+                                    if (IncomingMPBridge.trace > 2)
                                       print(" --> next pos ",pos);
+
                                     if (dv.pos == pos or dv.pos > msglen)
                                       break;
+
                                     pos = dv.pos;
                                 } else {
                                     print("Error: emesary.IncomingBridge.ProcessIncoming: [",bridged_notification.NotificationType,"] supplementary encoded value at position ",bpi);
@@ -403,7 +411,7 @@ var IncomingMPBridge =
                             if (bridged_notification.Ident == "none")
                               bridged_notification.Ident = "mp-bridge";
                             me.Transmitter.NotifyAll(bridged_notification);
-                            me.IncomingMessageIndex = msg_idx;
+                            bridged_notification.IncomingMessageIndex = msg_idx;
                         }
                     }
                 }

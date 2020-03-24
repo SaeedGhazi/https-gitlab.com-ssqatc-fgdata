@@ -10,17 +10,19 @@
 
   <PropertyList>
 	  <scenario>
+	  	<name>Clemenceau Carrier (LFMN)</name>
+	  	<description>This scenario spawns the Clemenceau aircraft carrier in the Mediterranean off Marseille.</description>
 		<entry>
 			<type>carrier</type>
 			<name>Clemenceau</name>
 			<pennant-number>R98</pennant-number>
 			<TACAN-channel-ID>026Y</TACAN-channel-ID>
 			<model>Models/Geometry/Clemenceau/Clemenceau.xml</model>
-			<latitude>42.800</latitude>
-			<longitude>6.325</longitude>
+			<latitude>43.2</latitude>
+			<longitude>5.11</longitude>
             <deck-altitude>65</deck-altitude>
 			<speed>10</speed>
-			<heading>110</heading>
+			<heading>150</heading>
 			<rudder>0</rudder>
 			<turn-radius-ft>5000</turn-radius-ft>
 

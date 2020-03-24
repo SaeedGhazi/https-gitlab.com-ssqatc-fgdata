@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <PropertyList>
-	<name>Steamtrain (North Yorkshire Moors, UK)</name>
-	<description>
-		This scenario runs a steam Steamtrain comprising the A4 Class,
-		Mallard and 8 coaches along the track of the
-		North Yorkshire Moors Railway, UK.
-
-		To find it start at EGXZ - TOPCLIFFE and fly 084 degrees
-		magnetic
-
-		Note:
-
-		1.	Units are ft, lbs, deg.
-		2.	Lead Angle Gain is a dimensionless multiplication factor.
-		3.	Lead Angle Limit Deg is the max excursion either side of
-		the target heading
-		4.	Rudder Constant is rudder increase/decrease in degrees/sec.
-		5.	Speed Constant is increase/decrease in kts/sec.
-		6.	contact_x(1/2)_offset define the points at which ground elevation
-		is measured for pitch calulations in ft from the origin. Negative
-		is forward. z and y components are not (yet) available. When x = 0 no pitch
-		calculations are performed
-		7.	Pitch Coefficient is a dimensionless damping factor for pitch (0.5)
-		8.	Elevation Coefficient is a dimensionless damping factor for
-		elevation (0.5)
-
-
-		Vivian Meazza
-	</description>
 	<scenario>
+		<name>Steamtrain (North Yorkshire Moors, UK)</name>
+		<description>
+			This scenario runs a steam Steamtrain comprising the A4 Class,
+			Mallard and 8 coaches along the track of the
+			North Yorkshire Moors Railway, UK.
+
+			To find it start at EGXZ - TOPCLIFFE and fly 084 degrees
+			magnetic
+
+			Note:
+
+			1.	Units are ft, lbs, deg.
+			2.	Lead Angle Gain is a dimensionless multiplication factor.
+			3.	Lead Angle Limit Deg is the max excursion either side of
+			the target heading
+			4.	Rudder Constant is rudder increase/decrease in degrees/sec.
+			5.	Speed Constant is increase/decrease in kts/sec.
+			6.	contact_x(1/2)_offset define the points at which ground elevation
+			is measured for pitch calulations in ft from the origin. Negative
+			is forward. z and y components are not (yet) available. When x = 0 no pitch
+			calculations are performed
+			7.	Pitch Coefficient is a dimensionless damping factor for pitch (0.5)
+			8.	Elevation Coefficient is a dimensionless damping factor for
+			elevation (0.5)
+
+
+			Vivian Meazza
+		</description>
 
 		<parameters>
 			<flightplan>NYMR.xml</flightplan>

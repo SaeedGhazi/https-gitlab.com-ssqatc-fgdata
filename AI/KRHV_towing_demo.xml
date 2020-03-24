@@ -3,7 +3,7 @@
 <PropertyList>
 
  <scenario>
-
+  <name>KRHV aerotow demo</name>
   <description>
      This scenario has a J3 takeoff from runway 31L at
      KRHV for aerotowing You can

@@ -3,7 +3,7 @@
 <PropertyList>
 
 	<scenario>
-
+		<name>Load demo</name>
 		<description>
 			This scenario places an underslung load ready to be picked up at the
 			designated position. It assumes a cubic shape whose centre is specified
@@ -12,7 +12,7 @@
 			Note: Units are ft, lbs, deg. Mass is in slugs
 
 			Vivian Meazza
-</description>
+		</description>
 
 		<entry>
 			<name>Load</name>

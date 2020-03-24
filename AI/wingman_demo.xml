@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<name>Buccaneer Wingman</name>
 
 	<scenario>
 
+		<name>Buccaneer Wingman</name>
 		<description>
 
 			Pair - non-tactical

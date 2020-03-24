@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <PropertyList>
-	<name>ICE3 train demo (Frankfurt to Essen)</name>
-	<description>
-		This scenario runs an ICE3 train from Frankfurt Hbf to
-		Essen Hbf.
-
-		Notes:
-
-		1.	Units are ft, lbs, deg.
-		2.	Lead/Tow Angle Gain are dimensionless multiplication factors.
-		3.	Lead/TowAngle Limit Deg are the max excursion either side of
-		the target/hitch heading
-		4.	Rudder Constant is rudder increase/decrease in degrees/sec.
-		5.	Speed Constant is increase/decrease in kts/sec.
-		6.	contact_x(1/2)_offset define the points at which ground elevation
-		is measured for pitch and elevation calulations in ft from the origin.
-		Negative is forward. z and y components are not (yet) available.
-		When x = 0 no pitch calculations are performed
-		7.	Pitch Coefficient is a dimensionless damping factor for pitch (0.1)
-		8.	Elevation Coefficient is a dimensionless damping factor for
-		elevation (0.25)
-
-
-		Vivian Meazza
-	</description>
 	<scenario>
+		<name>ICE3 train demo (Frankfurt to Essen)</name>
+		<description>
+			This scenario runs an ICE3 train from Frankfurt Hbf to
+			Essen Hbf.
+
+			Notes:
+
+			1.	Units are ft, lbs, deg.
+			2.	Lead/Tow Angle Gain are dimensionless multiplication factors.
+			3.	Lead/TowAngle Limit Deg are the max excursion either side of
+			the target/hitch heading
+			4.	Rudder Constant is rudder increase/decrease in degrees/sec.
+			5.	Speed Constant is increase/decrease in kts/sec.
+			6.	contact_x(1/2)_offset define the points at which ground elevation
+			is measured for pitch and elevation calulations in ft from the origin.
+			Negative is forward. z and y components are not (yet) available.
+			When x = 0 no pitch calculations are performed
+			7.	Pitch Coefficient is a dimensionless damping factor for pitch (0.1)
+			8.	Elevation Coefficient is a dimensionless damping factor for
+			elevation (0.25)
+
+
+			Vivian Meazza
+		</description>
 
 		<parameters>
 			<flightplan>ice-out.xml</flightplan>

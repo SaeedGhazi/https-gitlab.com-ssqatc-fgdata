@@ -3,7 +3,7 @@
 <PropertyList>
 
  <scenario>
-
+  <name>Aerial refueling demo (KSFO)</name>
   <description>
      The following scenario puts an aerial tanker in orbit over
      KSFO at 3000 ft AGL. The tanker uses the 737 model,

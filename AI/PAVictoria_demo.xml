@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <PropertyList>
 	<scenario>
+		<name>Ferries Victora - Port Angles demo</name>
+		<description>
+			This scenario spawns two ferries that run from Victoria to Port Angles and vice versa.
+		</description>
 		<entry>
 			<type>ship</type>
 			<model>Models/Geometry/Ferry/FerryBoat1.xml</model>

@@ -3,6 +3,9 @@
 
 	<scenario>
 		<name>KSFO AirTrain (San Francisco)</name>
+		<description>
+			This scenario runs the AirTrain at San Francisco International Airport.
+		</description>
 		<entry>
 			<type>groundvehicle</type>
 			<model>Models/Transport/KSFO_AirTrain.xml</model>

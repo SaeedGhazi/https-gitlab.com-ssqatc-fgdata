@@ -816,7 +816,8 @@ Started September 2000 by David Megginson, david@megginson.com
       <skip-flight-controls-mode type="bool" userarchive="y">false</skip-flight-controls-mode>
     </mouse>
     <replay>
-      <duration type="double">90</duration>
+      <duration type="double" userarchive="y">90</duration>
+      <duration-act type="bool" userarchive="y">false</duration-act>
       <view type="int">1</view>
       <looped type="bool" userarchive="y">true</looped>
       <buffer>

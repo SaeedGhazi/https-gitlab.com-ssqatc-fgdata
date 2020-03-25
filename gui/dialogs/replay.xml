@@ -124,6 +124,8 @@
 			</color>
 		</text>
 
+		<empty><pref-width>1</pref-width></empty>
+
 		<checkbox>
 			<name>replay-looped</name>
 			<halign>left</halign>
@@ -139,6 +141,35 @@
 				<object-name>replay-looped</object-name>
 			</binding>
 		</checkbox>
+
+		<text>
+			<label>Show only last:</label>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+		</text>
+
+		<empty><pref-width>10</pref-width></empty>
+
+		<checkbox>
+			<name>replay-duration-act</name>
+			<halign>center</halign>
+			<color-highlight>
+				<red type="float">0.6</red>
+				<green type="float">0.6</green>
+				<blue type="float">0.6</blue>
+				<alpha type="float">0.8</alpha>
+			</color-highlight>
+			<property>/sim/replay/duration-act</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>replay-duration-act</object-name>
+			</binding>
+		</checkbox>
+
 		<input>
 			<name>replay-duration</name>
 			<pref-width>40</pref-width>
@@ -154,6 +185,16 @@
 				<object-name>replay-duration</object-name>
 			</binding>
 		</input>
+
+				<text>
+			<label>seconds</label>
+			<color>
+				<red>0.7</red>
+				<green>0.7</green>
+				<blue>0.7</blue>
+				<alpha>1</alpha>
+			</color>
+		</text>
 
 		<empty><pref-width>40</pref-width></empty>
 

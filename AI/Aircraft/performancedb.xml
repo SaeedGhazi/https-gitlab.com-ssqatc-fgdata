@@ -848,6 +848,7 @@
       <match>AR1</match>
       <match>AR7</match>
       <match>AR8</match>
+	  <match>142</match>
       <match>146</match>
       <match>146-100</match>
       <match>146-200</match>
@@ -1159,6 +1160,7 @@
     </aircraft>
     <alias>
       <match>BN-2</match>
+	  <match>BNI</match>
       <match>Islander</match>
       <alias>BN2</alias>
     </alias>

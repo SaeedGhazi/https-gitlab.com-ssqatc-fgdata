@@ -170,20 +170,12 @@
           <index>11</index>
         </attribute>
         <attribute>
-          <name>rotPitchWtexX0</name>
+          <name>attrib1</name>
           <index>12</index>
         </attribute>
         <attribute>
-          <name>wtexY0FRtexx1FSRtexY1</name>
+          <name>attrib2</name>
           <index>13</index>
-        </attribute>
-        <attribute>
-          <name>rtexX0RtexY0StexX1</name>
-          <index>14</index>
-        </attribute>
-        <attribute>
-          <name>rooftopscale</name>
-          <index>15</index>
         </attribute>
       </program>
 	</pass>
@@ -224,21 +216,13 @@
 					<index>11</index>
 				</attribute>
         <attribute>
-					<name>rotPitchWtexX0</name>
+					<name>attrib1</name>
 					<index>12</index>
 				</attribute>
         <attribute>
-					<name>wtexY0FRtexx1FSRtexY1</name>
+					<name>attrib2</name>
 					<index>13</index>
 				</attribute>
-        <attribute>
-          <name>rtexX0RtexY0StexX1</name>
-          <index>14</index>
-        </attribute>
-        <attribute>
-          <name>rooftopscale</name>
-          <index>15</index>
-        </attribute>
       </program>
     </pass>
   </technique>
@@ -289,20 +273,12 @@
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchWtexX0</name>
+        <name>attrib1</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>wtexY0FRtexx1FSRtexY1</name>
+        <name>attrib2</name>
         <index>13</index>
-      </attribute>
-      <attribute>
-        <name>rtexX0RtexY0StexX1</name>
-        <index>14</index>
-      </attribute>
-      <attribute>
-        <name>rooftopscale</name>
-        <index>15</index>
       </attribute>
 	  </program>
 	</pass>
@@ -354,20 +330,12 @@
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchWtexX0</name>
+        <name>attrib1</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>wtexY0FRtexx1FSRtexY1</name>
+        <name>attrib2</name>
         <index>13</index>
-      </attribute>
-      <attribute>
-        <name>rtexX0RtexY0StexX1</name>
-        <index>14</index>
-      </attribute>
-      <attribute>
-        <name>rooftopscale</name>
-        <index>15</index>
       </attribute>
 	  </program>
 	</pass>
@@ -419,20 +387,12 @@
         <index>11</index>
       </attribute>
       <attribute>
-        <name>rotPitchWtexX0</name>
+        <name>attrib1</name>
         <index>12</index>
       </attribute>
       <attribute>
-        <name>wtexY0FRtexx1FSRtexY1</name>
+        <name>attrib2</name>
         <index>13</index>
-      </attribute>
-      <attribute>
-        <name>rtexX0RtexY0StexX1</name>
-        <index>14</index>
-      </attribute>
-      <attribute>
-        <name>rooftopscale</name>
-        <index>15</index>
       </attribute>
 	  </program>
 	</pass>
@@ -457,20 +417,12 @@
           <index>11</index>
         </attribute>
         <attribute>
-          <name>rotPitchWtexX0</name>
+          <name>attrib1</name>
           <index>12</index>
         </attribute>
         <attribute>
-          <name>wtexY0FRtexx1FSRtexY1</name>
+          <name>attrib2</name>
           <index>13</index>
-        </attribute>
-        <attribute>
-          <name>rtexX0RtexY0StexX1</name>
-          <index>14</index>
-        </attribute>
-        <attribute>
-          <name>rooftopscale</name>
-          <index>15</index>
         </attribute>
 			</program>
 		</pass>
@@ -568,21 +520,13 @@
 					<index>11</index>
 				</attribute>
         <attribute>
-					<name>rotPitchWtexX0</name>
+					<name>attrib1</name>
 					<index>12</index>
 				</attribute>
         <attribute>
-					<name>wtexY0FRtexx1FSRtexY1</name>
+					<name>attrib2</name>
 					<index>13</index>
 				</attribute>
-        <attribute>
-          <name>rtexX0RtexY0StexX1</name>
-          <index>14</index>
-        </attribute>
-        <attribute>
-          <name>rooftopscale</name>
-          <index>15</index>
-        </attribute>
 			</program>
 			<uniform>
 				<name>fogType</name>

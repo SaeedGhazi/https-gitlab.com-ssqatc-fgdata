@@ -25,6 +25,8 @@ var Node = {
     getName        : func _getName(me._g, arg),
     getIndex       : func _getIndex(me._g, arg),
     getType        : func _getType(me._g, arg),
+    isNumeric      : func _isNumeric(me._g, arg),
+    isInt          : func _isInt(me._g, arg),
     getAttribute   : func _getAttribute(me._g, arg),
     setAttribute   : func _setAttribute(me._g, arg),
     getValue       : func _getValue(me._g, arg),
@@ -80,6 +82,31 @@ var Node = {
         }
         return p;
     },
+    
+    # add n to int property, do nothing, if prop type is not int
+    # n will be integer and defaults to 1
+    increment: func(n = 1) {
+        if (me.isInt()) {
+            var v = me.getValue() + int(n);
+            if (me.setIntValue(v)) return v;
+        }
+        else  {
+            logprint(DEV_ALERT, "props.increment() can be used only on integer props");
+            return nil;
+        }
+    },
+    
+    # sub n from int property, do nothing, if prop type is not int
+    # n will be integer and defaults to 1
+    decrement: func(n = 1) {
+        if (me.isInt())
+            var v = me.getValue() - int(n);
+            if (me.setIntValue(v)) return v;
+        else {
+            logprint(DEV_ALERT, "props.decrement() can be used only on integer props");
+            return 0;
+        }
+    }
 };
 
 ##

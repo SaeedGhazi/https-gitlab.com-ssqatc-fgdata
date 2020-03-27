@@ -18,7 +18,7 @@
   </animation>
    <animation>
     <type>spin</type>
-    <object-name>Prop_L</object-name>
+    <object-name>SF3_Prop_L</object-name>
     <property>velocities/true-airspeed-kt</property>
     <factor>11</factor>
     <center>
@@ -34,7 +34,7 @@
   </animation>
   <animation>
     <type>spin</type>
-    <object-name>Prop_R</object-name>
+    <object-name>SF3_Prop_R</object-name>
     <property>velocities/true-airspeed-kt</property>
     <factor>10</factor>
     <center>
@@ -51,8 +51,8 @@
   <!-- Tail and Windows Lightmap Effect -->
   <effect>
     <inherits-from>AI/Aircraft/SF3/Effects/SF3-LightMap</inherits-from>
-    <object-name>SF3</object-name>
-    <object-name>Gear</object-name>
+    <object-name>SF3_Body</object-name>
+    <object-name>SF3_Gear</object-name>
   </effect>
   <!-- Add Navigation Lights Objects -->
   <model>

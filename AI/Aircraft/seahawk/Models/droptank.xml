@@ -3,11 +3,6 @@
 <PropertyList>
 	<path>droptank.ac</path>
 
-	<effect>
-		<inherits-from>Effects/seahawkreflect-uber</inherits-from>
-		<object-name>droptank</object-name>
-	</effect>
-
 	<animation>
 		<enable-hot type="bool">false</enable-hot>
 	</animation>

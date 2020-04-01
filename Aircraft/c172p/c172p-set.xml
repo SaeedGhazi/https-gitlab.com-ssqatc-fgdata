@@ -46,7 +46,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), legoboyvdlp (Jonathan Redpath), dg-505 (Jonathan Schellhase), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen, Horacio, D-ECHO, Jarl Arntzen (jarlarntzen)</author>
 
         <status>advanced production</status>
-        <aircraft-version>2019.1</aircraft-version>
+        <aircraft-version>2020.1</aircraft-version>
         <minimum-fg-version>2018.2.0</minimum-fg-version>
         <rating>
             <FDM type="int">5</FDM>
@@ -658,6 +658,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <water-rudder type="bool">0</water-rudder>
             <water-rudder-down type="double">0</water-rudder-down>
             <brake-parking type="bool">true</brake-parking>
+            <gear-down-command type="bool">0</gear-down-command>
         </gear>
         <mooring>
             <automatic type="bool">false</automatic>
@@ -1125,6 +1126,18 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
                 <unit n="2">
                     <broken type="bool">0</broken>
                 </unit>
+                <unit n="19">
+                    <broken type="bool">0</broken>
+                </unit>
+                <unit n="20">
+                    <broken type="bool">0</broken>
+                </unit>
+                <unit n="21">
+                    <broken type="bool">0</broken>
+                </unit>
+                <unit n="22">
+                    <broken type="bool">0</broken>
+                </unit>
             </gear>
             <contact>
                 <unit n="4">
@@ -1150,6 +1163,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             </pontoon-damage>
             <damage>
                 <repairing type="bool">false</repairing>
+                <traversing type="bool">false</traversing>
             </damage>
             <settings>
                 <damage type="bool">true</damage>
@@ -1181,13 +1195,13 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 
     <systems>
         <electrical>
-
             <outputs>
                 <flaps type="double">0.0</flaps>
+                <hydraulic-pump type="float">0.0</hydraulic-pump>
+                <gear-select type="float">0.0</gear-select>
+                <gear-advisory type="float">0.0</gear-advisory>
             </outputs>
-
             <save-battery-charge type="bool">false</save-battery-charge>
-
         </electrical>
         <mooring>
             <boat-id></boat-id>

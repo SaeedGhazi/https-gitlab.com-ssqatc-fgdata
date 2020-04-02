@@ -28,6 +28,12 @@
 			<rudder>0</rudder>
 			<turn-radius-ft>3000</turn-radius-ft>
 
+      <flols-pos>
+				<x-offset-m>25.9</x-offset-m>
+				<y-offset-m>-29.5</y-offset-m>
+				<z-offset-m>14.7</z-offset-m>
+				<heading-offset-deg>-8.5</heading-offset-deg>
+			</flols-pos>
 
 			<parking-pos>
 				<name>cat-1</name>

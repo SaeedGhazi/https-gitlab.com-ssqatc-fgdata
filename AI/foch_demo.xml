@@ -11,11 +11,12 @@
   <PropertyList>
 	  <scenario>
 	  	<name>Foch Carrier (LFTH)</name>
-	  	<description>This scenario spawns the Foch aircraft carrier (Clemenceau-class) in the Mediterranean off Toulon.</description>
+      <description>This scenario spawns the Foch aircraft carrier (Clemenceau-class) in the Mediterranean off Toulon.</description>
 		<entry>
 			<type>carrier</type>
 			<name>Foch</name>
 			<pennant-number>R99</pennant-number>
+      <description>Aircraft carrier Foch (R99) in the Mediterranean off Toulon (42.8N, 6.3E).</description>
 			<TACAN-channel-ID>026X</TACAN-channel-ID>
 			<model>Models/Geometry/Clemenceau/Clemenceau.xml</model>
 			<latitude>42.830</latitude>

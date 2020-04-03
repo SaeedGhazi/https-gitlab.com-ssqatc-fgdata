@@ -42,6 +42,7 @@
 			<name>Truman</name>
 			<callsign>Truman</callsign>
 			<pennant-number>CVN-75</pennant-number>
+			<description>USS Harry S. Truman (CVN-75), 35nm off Honolulu (21.3N, 157.3W).</description>
 			<TACAN-channel-ID>031X</TACAN-channel-ID>
 			<model>Models/Geometry/Nimitz/truman.xml</model>
 			<latitude>21.3</latitude>

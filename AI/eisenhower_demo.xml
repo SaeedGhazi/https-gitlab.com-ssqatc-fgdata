@@ -26,6 +26,7 @@
 			<type>carrier</type>
 			<name>Eisenhower</name>
 			<pennant-number>CVN-69</pennant-number>
+			<description>Eisenhower (CVN-69) off Norfolk, VA (37N, 74.4W).</description>
 			<TACAN-channel-ID>030Y</TACAN-channel-ID>
 			<model>Models/Geometry/Nimitz/eisenhower.xml</model>
 			<latitude>37.0</latitude>

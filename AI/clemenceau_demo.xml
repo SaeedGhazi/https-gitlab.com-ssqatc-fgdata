@@ -17,6 +17,7 @@
 			<name>Clemenceau</name>
 			<pennant-number>R98</pennant-number>
 			<TACAN-channel-ID>026Y</TACAN-channel-ID>
+      <description>French aircraft carrier Clemenceau (R98) in the Mediterranean off Marseille (43.2N, 5.1E).</description>
 			<model>Models/Geometry/Clemenceau/Clemenceau.xml</model>
 			<latitude>43.2</latitude>
 			<longitude>5.11</longitude>

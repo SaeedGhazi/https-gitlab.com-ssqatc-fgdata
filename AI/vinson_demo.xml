@@ -26,6 +26,7 @@
 			<name>Vinson</name>
 			<callsign>Vinson</callsign>
 			<pennant-number>CVN-70</pennant-number>
+			<description>USS Vinson (CVN-70), 60nm west of San Francisco (37.8N, 123.6W).</description>
 			<TACAN-channel-ID>029X</TACAN-channel-ID>
 			<model>Models/Geometry/Nimitz/vinson.xml</model>
 			<latitude>37.8</latitude>

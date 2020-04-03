@@ -23,6 +23,7 @@
       <name>San Antonio</name>
       <pennant-number>LPD-17</pennant-number>
       <TACAN-channel-ID>028X</TACAN-channel-ID>
+      <description>Landing Platform Dock USS San Antonio (LPD-17) off San Diego (32.8N, 117W).  Helicopters only.</description>
       <model>Models/Geometry/SanAntonio/sanantonio.xml</model>
       <latitude>32.75</latitude>
       <longitude>-117.34</longitude>

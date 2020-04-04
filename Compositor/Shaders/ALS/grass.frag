@@ -2,8 +2,9 @@
 #version 120
 
 #define BLADE_FRACTION 0.1
-#define MAX_LAYERS 30
 #define MAX_DISTANCE 1000.0
+
+uniform float fg_Fcoef;
 
 uniform float visibility;
 uniform float scattering;
@@ -32,6 +33,8 @@ uniform float osg_SimulationTime;
 varying vec2 g_rawpos;                  // Horizontal position in model space
 varying float g_distance_to_eye;        // Distance to the camera. Layers were disregarded
 varying float g_layer;				       // The layer where the fragment lives (0-1 range)
+
+varying float flogz;
 
 float rand2D(in vec2 co);
 float Noise2D(in vec2 co, in float wavelength);
@@ -172,4 +175,6 @@ void main()
 	fragColor.rgb = filter_combined(fragColor.rgb);
 
     gl_FragColor = fragColor;
+    // logarithmic depth
+    gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }

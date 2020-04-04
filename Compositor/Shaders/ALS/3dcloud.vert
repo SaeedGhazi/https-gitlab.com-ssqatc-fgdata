@@ -1,10 +1,10 @@
 // -*-C++-*-
 #version 120
 
-uniform float fg_Fcoef;
-
 varying float fogFactor;
 varying vec3 hazeColor;
+
+varying float flogz;
 
 uniform float range; // From /sim/rendering/clouds3d-vis-range
 uniform float detail_range; // From /sim/rendering/clouds3d_detail-range
@@ -137,7 +137,7 @@ void main(void)
     vec3 relVector = gl_Position.xyz - ep.xyz;
     gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
     // logarithmic depth
-    gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
+    flogz = 1.0 + gl_Position.w;
 
    // Light at the final position
 

@@ -2,9 +2,9 @@
 #version 120
 #extension GL_EXT_geometry_shader4 : enable
 
-#define MAX_LAYERS 30
+#define MAX_LAYERS 20
 #define MIN_LAYERS 8
-#define MAX_MINUS_MIN_LAYERS 22
+#define MAX_MINUS_MIN_LAYERS 12
 
 uniform float max_height;
 
@@ -13,6 +13,8 @@ varying in vec3 v_normal[3];
 varying out vec2 g_rawpos;
 varying out float g_distance_to_eye;
 varying out float g_layer;
+
+varying out float flogz;
 
 
 uniform mat4 fg_LightMatrix_csm0;
@@ -60,6 +62,8 @@ void main()
             setupShadows(gl_ModelViewMatrix * pos);
 
             gl_Position = gl_ModelViewProjectionMatrix * pos;
+            // logarithmic depth
+            flogz = 1.0 + gl_Position.w;
             gl_TexCoord[0] = gl_TexCoordIn[i][0];
             EmitVertex();
         }

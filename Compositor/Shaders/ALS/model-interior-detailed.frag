@@ -9,6 +9,8 @@ varying vec3 relPos;
 varying vec3 rawpos;
 
 
+uniform float fg_Fcoef;
+
 uniform sampler2D texture;
 uniform sampler2D lightmap_texture;
 uniform sampler2D grain_texture;
@@ -17,6 +19,8 @@ uniform samplerCube cube_texture;
 
 varying float yprime_alt;
 varying float mie_angle;
+
+varying float flogz;
 
 
 uniform float visibility;
@@ -237,7 +241,8 @@ void main()
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
-
+// logarithmic depth
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }
 

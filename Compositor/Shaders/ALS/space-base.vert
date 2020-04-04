@@ -27,6 +27,8 @@ varying float yprime_alt;
 varying float mie_angle;
 varying float alt_factor;
 
+varying float flogz;
+
 uniform int colorMode;
 uniform float hazeLayerAltitude;
 uniform float terminator;
@@ -77,6 +79,8 @@ void main()
 
     //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
+    // logarithmic depth
+    flogz = 1.0 + gl_Position.w;
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
     vec4 ambient_color, diffuse_color;

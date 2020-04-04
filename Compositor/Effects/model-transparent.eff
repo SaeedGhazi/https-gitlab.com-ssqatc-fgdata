@@ -11,26 +11,6 @@
       <color-mode-uniform>1</color-mode-uniform>
       <!-- DIFFUSE -->
     </material>
-    <!-- 		BEGIN fog include -->
-    <visibility>
-      <use>/environment/ground-visibility-m</use>
-    </visibility>
-    <avisibility>
-      <use>/environment/visibility-m</use>
-    </avisibility>
-    <lthickness>
-      <use>/environment/ground-haze-thickness-m</use>
-    </lthickness>
-    <scattering>
-      <use>/rendering/scene/scattering</use>
-    </scattering>
-    <terminator>
-      <use>/environment/terminator-relative-position-m</use>
-    </terminator>
-    <fogtype>
-      <use>/sim/rendering/shaders/skydome</use>
-    </fogtype>
-    <!-- 		END fog include -->
   </parameters>
   <technique n="9">
     <pass>
@@ -192,6 +172,25 @@
           <mode>modulate</mode>
         </environment>
       </texture-unit>
+      <vertex-program-two-side>
+        <use>vertex-program-two-side</use>
+      </vertex-program-two-side>
+      <program>
+        <vertex-shader>Shaders/ALS/model-transparent.vert</vertex-shader>
+        <fragment-shader>Shaders/ALS/model-transparent.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>texture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>
+          <use>material/color-mode-uniform</use>
+        </value>
+      </uniform>
     </pass>
   </technique>
 </PropertyList>

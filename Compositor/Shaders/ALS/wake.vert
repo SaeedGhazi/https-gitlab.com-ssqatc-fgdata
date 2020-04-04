@@ -25,6 +25,8 @@ varying float earthShade;
 varying float yprime_alt;
 varying float mie_angle;
 
+varying float flogz;
+
 uniform float osg_SimulationTime;
 uniform float WindE, WindN, spd, hdg;
 uniform float hazeLayerAltitude;
@@ -105,6 +107,8 @@ void main(void)
 
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     gl_Position = ftransform();
+    // logarithmic depth
+    flogz = 1.0 + gl_Position.w;
 
 	// here start computations for the haze layer
 

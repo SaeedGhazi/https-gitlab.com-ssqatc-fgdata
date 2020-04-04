@@ -13,10 +13,10 @@ varying vec3 	vertVec;
 
 varying	float	alpha;
 
+varying float flogz;
+
 attribute	vec3	tangent;
 attribute	vec3	binormal;
-
-uniform float fg_Fcoef;
 
 uniform	float		pitch;
 uniform	float		roll;
@@ -116,7 +116,7 @@ void	main(void)
 		
 		gl_Position = ftransform();
         // logarithmic depth
-        gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
+        flogz = 1.0 + gl_Position.w;
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
         setupShadows(ecPosition);

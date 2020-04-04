@@ -12,6 +12,8 @@
 #version 120
 #define fps2kts 0.5925
 
+uniform float fg_Fcoef;
+
 uniform sampler2D water_normalmap;
 uniform sampler2D water_reflection;
 uniform sampler2D water_dudvmap;
@@ -53,6 +55,8 @@ varying float earthShade;
 varying float yprime_alt;
 varying float mie_angle;
 varying float steepness;
+
+varying float flogz;
 
 vec3 specular_light;
 
@@ -439,6 +443,7 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	
     finalColor.rgb = filter_combined(finalColor.rgb);
     gl_FragColor = vec4(finalColor.rgb, alpha0.a * 1.35);
-
+    // logarithmic depth
+    gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
     }

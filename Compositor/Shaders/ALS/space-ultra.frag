@@ -17,6 +17,10 @@ varying vec3	vertVec;
 
 varying	float	alpha;
 
+varying float flogz;
+
+uniform float fg_Fcoef;
+
 uniform sampler2D BaseTex;
 uniform sampler2D LightMapTex;
 uniform sampler2D NormalTex;
@@ -673,6 +677,7 @@ void main (void)
 
 
     gl_FragColor = fragColor;
-
+    // logarithmic depth
+    gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
     }

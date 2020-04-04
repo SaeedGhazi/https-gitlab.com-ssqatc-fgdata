@@ -1,6 +1,8 @@
 // -*-C++-*-
 #version 120
 
+uniform float fg_Fcoef;
+
 uniform sampler2D texture;
 
 uniform float visibility;
@@ -16,6 +18,8 @@ uniform bool use_night_vision;
 varying vec3 relPos;
 varying vec2 rawPos;
 varying float pixelSize;
+
+varying float flogz;
 
 float alt;
 
@@ -173,6 +177,7 @@ void main()
     light_color = mix(light_color, vec3 (1.0, 1.0, 1.0), 0.5 * intensity * intensity);
 
     gl_FragColor =   vec4 (clamp(light_color.rgb,0.0,1.0), intensity * transmission * dist_att);
-
+    // logarithmic depth
+    gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }

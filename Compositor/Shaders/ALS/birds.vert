@@ -9,6 +9,8 @@ varying vec3 vertex;
 varying vec3 relPos;
 varying vec3 normal;
 
+varying float flogz;
+
 uniform float osg_SimulationTime;
 
 void main()
@@ -33,6 +35,8 @@ normal = gl_NormalMatrix * gl_Normal;
   gl_Position.xyz += gl_Vertex.z * w;
 
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
+  // logarithmic depth
+  flogz = 1.0 + gl_Position.w;
 
 //vec4 offset =  gl_ModelViewProjectionMatrix * vec4 (0.05* osg_SimulationTime, 0.0, 0.0, 1.0);
 

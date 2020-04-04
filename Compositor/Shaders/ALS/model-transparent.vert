@@ -18,30 +18,25 @@
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec4 diffuse_term;
 varying vec3 normal;
-varying vec3 ecViewDir;
-varying vec3 VTangent;
 
-uniform float fg_Fcoef;
+varying float flogz;
 
 uniform int colorMode;
 
-attribute vec3 tangent;//, binormal;
-
-
+////fog "include"////////
+//uniform int fogType;
+//
+//void fog_Func(int type);
+/////////////////////////
 
 void main()
 {
-
-    vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
-    ecViewDir = (gl_ModelViewMatrix * (ep - gl_Vertex)).xyz;
-	
     gl_Position = ftransform();
     // logarithmic depth
-    gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
+    flogz = 1.0 + gl_Position.w;
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
-    VTangent  = gl_NormalMatrix * tangent;
-	vec4 ambient_color, diffuse_color;
+    vec4 ambient_color, diffuse_color;
     if (colorMode == MODE_DIFFUSE) {
         diffuse_color = gl_Color;
         ambient_color = gl_FrontMaterial.ambient;
@@ -52,12 +47,9 @@ void main()
         diffuse_color = gl_FrontMaterial.diffuse;
         ambient_color = gl_FrontMaterial.ambient;
     }
-    vec4 light_diffuse = vec4 (1.0,1.0,1.0,1.0);
-    vec4 light_ambient = vec4 (0.03, 0.03, 0.03, 1.0);
-   
-    diffuse_term = diffuse_color *  light_diffuse;//gl_LightSource[0].diffuse;
+    diffuse_term = diffuse_color * gl_LightSource[0].diffuse;
     vec4 constant_term = gl_FrontMaterial.emission + ambient_color *
-        (gl_LightModel.ambient +  light_ambient);
+        (gl_LightModel.ambient +  gl_LightSource[0].ambient);
     // Super hack: if diffuse material alpha is less than 1, assume a
     // transparency animation is at work
     if (gl_FrontMaterial.diffuse.a < 1.0)

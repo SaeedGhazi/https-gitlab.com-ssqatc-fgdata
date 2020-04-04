@@ -5,6 +5,8 @@ varying float fogFactor;
 varying vec3 hazeColor;
 varying vec3 relVector;
 
+varying float flogz;
+
 uniform float range; // From /sim/rendering/clouds3d-vis-range
 uniform float scattering;
 uniform float terminator;
@@ -57,7 +59,8 @@ void main(void)
 
   relVector = gl_Position.xyz - ep.xyz;
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
-
+  // logarithmic depth
+  flogz = 1.0 + gl_Position.w;
 
 // Light at the final position
 

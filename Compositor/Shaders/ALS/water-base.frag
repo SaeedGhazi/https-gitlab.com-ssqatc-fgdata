@@ -560,5 +560,6 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	finalColor.rgb = filter_combined(finalColor.rgb);
 
 	gl_FragColor = finalColor;
+    // logarithmic depth
     gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }

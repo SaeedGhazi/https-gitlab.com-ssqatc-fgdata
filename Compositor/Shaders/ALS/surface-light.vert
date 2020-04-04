@@ -13,12 +13,16 @@ varying vec3 relPos;
 varying vec2 rawPos;
 varying float pixelSize;
 
+varying float flogz;
+
 bool light_directional = true;
 
 void main()
 {
     gl_FrontColor= gl_Color;
     gl_Position = ftransform();
+    // logarithmic depth
+    flogz = 1.0 + gl_Position.w;
 
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
     relPos = gl_Vertex.xyz - ep.xyz;

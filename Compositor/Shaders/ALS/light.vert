@@ -16,6 +16,7 @@ varying vec3 vertex;
 varying vec3 relPos;
 varying vec3 normal;
 
+varying float flogz;
 
 
 void main()
@@ -39,6 +40,8 @@ normal = gl_NormalMatrix * gl_Normal;
   gl_Position.xyz += gl_Vertex.y * r;
   gl_Position.xyz += gl_Vertex.z * w;
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
+  // logarithmic depth
+  flogz = 1.0 + gl_Position.w;
 
 //gl_Position = ftransform();
 gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

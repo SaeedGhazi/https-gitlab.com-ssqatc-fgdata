@@ -1,6 +1,8 @@
 // -*-C++-*-
 #version 120
 
+uniform float fg_Fcoef;
+
 uniform sampler2D texture;
 
 uniform float color_base_r;
@@ -24,6 +26,8 @@ uniform float osg_SimulationTime;
 varying vec3 vertex;
 varying vec3 relPos;
 varying vec3 normal;
+
+varying float flogz;
 
 const float terminator_width = 200000.0;
 
@@ -202,6 +206,7 @@ birdTexel.a = domainTexel.a * shapeTexel.a * transmission;
 
 
 gl_FragColor =  birdTexel;
-
+// logarithmic depth
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }

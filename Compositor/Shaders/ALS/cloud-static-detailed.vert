@@ -6,6 +6,8 @@ varying float mie_frag;
 varying float eShade;
 varying vec3 hazeColor;
 
+varying float flogz;
+
 uniform float terminator;
 uniform float altitude;
 uniform float cloud_self_shading;
@@ -61,6 +63,8 @@ void main(void)
 
   vec3 relVector = gl_Position.xyz - ep.xyz;
   gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
+  // logarithmic depth
+  flogz = 1.0 + gl_Position.w;
 
  // Light at the final position
 

@@ -249,6 +249,7 @@ fragColor.rgb = mix(hazeColor, fragColor.rgb,transmission);
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
+// logarithmic depth
 gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }
 

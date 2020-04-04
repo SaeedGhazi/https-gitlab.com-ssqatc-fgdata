@@ -13,6 +13,8 @@ varying vec3 	vertVec;
 
 varying	float	alpha;
 
+varying float flogz;
+
 attribute	vec3	tangent;
 attribute	vec3	binormal;
 
@@ -110,5 +112,7 @@ void	main(void)
 		gl_FrontColor = gl_Color;
 
 		gl_Position = ftransform();
+        // logarithmic depth
+        flogz = 1.0 + gl_Position.w;
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 }

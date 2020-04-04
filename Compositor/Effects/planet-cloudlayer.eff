@@ -86,7 +86,86 @@
     <normal type="int">15</normal>
     <tangent type="int">6</tangent>
   </generate>
-  <technique n="8">
+  <technique n="9">
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <active>
+          <use>material/active</use>
+        </active>
+        <ambient>
+          <use>material/ambient</use>
+        </ambient>
+        <diffuse>
+          <use>material/diffuse</use>
+        </diffuse>
+        <specular>
+          <use>material/specular</use>
+        </specular>
+        <emissive>
+          <use>material/emissive</use>
+        </emissive>
+        <shininess>
+          <use>material/shininess</use>
+        </shininess>
+        <color-mode>
+          <use>material/color-mode</use>
+        </color-mode>
+      </material>
+      <blend>
+        <active>
+          <use>blend/active</use>
+        </active>
+        <source>
+          <use>blend/source</use>
+        </source>
+        <destination>
+          <use>blend/destination</use>
+        </destination>
+      </blend>
+      <shade-model>
+        <use>shade-model</use>
+      </shade-model>
+      <cull-face>
+        <use>cull-face</use>
+      </cull-face>
+      <rendering-hint>
+        <use>rendering-hint</use>
+      </rendering-hint>
+      <texture-unit>
+        <active>
+          <use>texture[0]/active</use>
+        </active>
+        <unit>0</unit>
+        <image>
+          <use>texture[0]/image</use>
+        </image>
+        <filter>
+          <use>texture[0]/filter</use>
+        </filter>
+        <wrap-s>
+          <use>texture[0]/wrap-s</use>
+        </wrap-s>
+        <wrap-t>
+          <use>texture[0]/wrap-t</use>
+        </wrap-t>
+        <!--
+          <internal-format>
+            <use>texture[0]/internal-format</use>
+          </internal-format>
+          -->
+        <environment>
+          <mode>modulate</mode>
+        </environment>
+      </texture-unit>
+      <!-- A two-sided lighting model is set by default near the root
+           of the scene graph. Perhaps that ought to be set in this
+           effect?
+        -->
+    </pass>
+  </technique>
+  <technique n="19">
+    <scheme>als-lighting</scheme>
     <predicate>
       <or>
         <less-equal>
@@ -358,84 +437,6 @@
           <use>display_ysize</use>
         </value>
       </uniform>
-    </pass>
-  </technique>
-  <technique n="9">
-    <pass>
-      <lighting>true</lighting>
-      <material>
-        <active>
-          <use>material/active</use>
-        </active>
-        <ambient>
-          <use>material/ambient</use>
-        </ambient>
-        <diffuse>
-          <use>material/diffuse</use>
-        </diffuse>
-        <specular>
-          <use>material/specular</use>
-        </specular>
-        <emissive>
-          <use>material/emissive</use>
-        </emissive>
-        <shininess>
-          <use>material/shininess</use>
-        </shininess>
-        <color-mode>
-          <use>material/color-mode</use>
-        </color-mode>
-      </material>
-      <blend>
-        <active>
-          <use>blend/active</use>
-        </active>
-        <source>
-          <use>blend/source</use>
-        </source>
-        <destination>
-          <use>blend/destination</use>
-        </destination>
-      </blend>
-      <shade-model>
-        <use>shade-model</use>
-      </shade-model>
-      <cull-face>
-        <use>cull-face</use>
-      </cull-face>
-      <rendering-hint>
-        <use>rendering-hint</use>
-      </rendering-hint>
-      <texture-unit>
-        <active>
-          <use>texture[0]/active</use>
-        </active>
-        <unit>0</unit>
-        <image>
-          <use>texture[0]/image</use>
-        </image>
-        <filter>
-          <use>texture[0]/filter</use>
-        </filter>
-        <wrap-s>
-          <use>texture[0]/wrap-s</use>
-        </wrap-s>
-        <wrap-t>
-          <use>texture[0]/wrap-t</use>
-        </wrap-t>
-        <!--
-          <internal-format>
-            <use>texture[0]/internal-format</use>
-          </internal-format>
-          -->
-        <environment>
-          <mode>modulate</mode>
-        </environment>
-      </texture-unit>
-      <!-- A two-sided lighting model is set by default near the root
-           of the scene graph. Perhaps that ought to be set in this
-           effect?
-        -->
     </pass>
   </technique>
 </PropertyList>

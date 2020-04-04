@@ -41,7 +41,7 @@
 				<x-offset-m>69.84</x-offset-m>
 				<y-offset-m>-39.67</y-offset-m>
 				<z-offset-m>21.47</z-offset-m>
-				<heading-offset-deg>-10</heading-offset-deg>
+				<heading-offset-deg>-9.5</heading-offset-deg>
 			</flols-pos>
 			<parking-pos>
 				<name>cat-1</name>
@@ -103,6 +103,7 @@
 				<x-offset-m>69.84</x-offset-m>
 				<y-offset-m>-39.67</y-offset-m>
 				<z-offset-m>21.47</z-offset-m>
+				<heading-offset-deg>-9.5</heading-offset-deg>
 			</flols-pos>
 			<parking-pos>
 				<name>cat-1</name>

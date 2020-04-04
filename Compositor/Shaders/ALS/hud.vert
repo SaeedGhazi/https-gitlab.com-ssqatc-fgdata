@@ -11,6 +11,8 @@ varying float splash_angle;
 varying float Mie;
 varying float ambient_fraction;
 
+varying float flogz;
+
 uniform float ground_scattering;
 uniform float hazeLayerAltitude;
 uniform float moonlight;
@@ -126,6 +128,8 @@ ambient_fraction = length(light_ambient.rgb)/(length(light_diffuse.rgb +light_am
 
 
 gl_Position = ftransform();
+// logarithmic depth
+flogz = 1.0 + gl_Position.w;
 gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
 vec4 diffuse_color = gl_FrontMaterial.diffuse;

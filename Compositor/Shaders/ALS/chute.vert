@@ -26,6 +26,8 @@ varying vec3 relPos;
 varying float yprime_alt;
 varying float mie_angle;
 
+varying float flogz;
+
 uniform int colorMode;
 uniform float hazeLayerAltitude;
 uniform float terminator;
@@ -285,7 +287,8 @@ else // the faster, full-day version without lightfields
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
     gl_Position = gl_ModelViewProjectionMatrix * vertex;
-
+    // logarithmic depth
+    flogz = 1.0 + gl_Position.w;
 }
 
 

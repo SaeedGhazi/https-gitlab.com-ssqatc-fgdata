@@ -15,6 +15,7 @@
     <use_geo_light type="int">0</use_geo_light>
   </parameters>
   <technique n="5">
+    <scheme>als-lighting</scheme>
     <pass>
       <program>
         <vertex-shader n="0">Shaders/ALS/space-ultra.vert</vertex-shader>
@@ -951,6 +952,7 @@
     </pass>
   </technique>
   <technique n="6">
+    <scheme>als-lighting</scheme>
     <pass>
       <program>
         <vertex-shader n="0">Shaders/ALS/space-base.vert</vertex-shader>

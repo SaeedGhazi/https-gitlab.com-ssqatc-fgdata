@@ -1,8 +1,9 @@
 // -*-C++-*-
 #version 120
 
-#define MAX_LAYERS 8
 #define MAX_DISTANCE 3000.0
+
+uniform float fg_Fcoef;
 
 uniform float visibility;
 uniform float avisibility;
@@ -38,6 +39,8 @@ varying float g_distance_to_eye;        // Distance to the camera. Layers were d
 varying vec3 g_normal;
 varying float g_altitude;
 varying float g_layer;				       // The layer where the fragment lives (0-1 range)
+
+varying float flogz;
 
 
 float rand2D(in vec2 co);
@@ -168,4 +171,6 @@ void main()
 	fragColor = clamp(fragColor, 0.0, 1.0);
 	
     gl_FragColor = fragColor;
+    // logarithmic depth
+    gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }

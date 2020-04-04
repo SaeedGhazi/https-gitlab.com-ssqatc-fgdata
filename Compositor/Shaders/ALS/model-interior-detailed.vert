@@ -15,8 +15,6 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
-uniform float fg_Fcoef;
-
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
@@ -28,6 +26,8 @@ varying vec3 rawpos;
 
 varying float yprime_alt;
 varying float mie_angle;
+
+varying float flogz;
 
 uniform int colorMode;
 uniform int irradiance_map_type;
@@ -88,7 +88,7 @@ void main()
     //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     // logarithmic depth
-    gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
+    flogz = 1.0 + gl_Position.w;
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
     vec4 ambient_color, diffuse_color;

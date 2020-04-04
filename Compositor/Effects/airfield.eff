@@ -91,8 +91,8 @@
         <bin-name>RenderBin</bin-name>
       </render-bin>
       <program>
-        <vertex-shader>Shaders/Default/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/Default/trivial.frag</fragment-shader>
+        <vertex-shader>Shaders/ALS/terrain-writedepth.vert</vertex-shader>
+        <fragment-shader>Shaders/ALS/terrain-writedepth.frag</fragment-shader>
       </program>
       <color-mask type="vec4d">0 0 0 0</color-mask>
     </pass>

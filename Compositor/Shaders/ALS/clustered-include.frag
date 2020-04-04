@@ -1,4 +1,4 @@
-#version 150
+#version 140
 
 uniform usampler3D fg_ClusteredLightGrid;
 uniform usamplerBuffer fg_ClusteredLightIndices;

@@ -1,6 +1,8 @@
 // -*-C++-*-
 #version 120
 
+uniform float fg_Fcoef;
+
 uniform sampler2D baseTexture;
 
 uniform float ring_factor;
@@ -11,6 +13,8 @@ varying float mie_frag;
 varying float eShade;
 
 varying vec3 hazeColor;
+
+varying float flogz;
 
 vec3 filter_combined (in vec3 color) ;
 
@@ -56,4 +60,6 @@ void main(void)
       fragColor.rgb = filter_combined(fragColor.rgb);
 	  //fragColor.rgb = vec3 (1.0, 0.0, 0.0);
       gl_FragColor = fragColor;
+      // logarithmic depth
+      gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }

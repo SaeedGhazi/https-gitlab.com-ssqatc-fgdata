@@ -11,6 +11,10 @@ varying float splash_angle;
 varying float Mie;
 varying float ambient_fraction;
 
+varying float flogz;
+
+uniform float fg_Fcoef;
+
 uniform sampler2D texture;
 uniform sampler2D frost_texture;
 uniform sampler2D func_texture;
@@ -284,6 +288,7 @@ fragColor.rgb = filter_combined(fragColor.rgb);
 
 
 gl_FragColor = clamp(fragColor,0.0,1.0);
-
+// logarithmic depth
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }

@@ -5,6 +5,10 @@
 varying vec3 vertex;
 varying vec3 viewDir;
 
+varying float flogz;
+
+uniform float fg_Fcoef;
+
 uniform float osg_SimulationTime;
 uniform float thrust_collimation;
 uniform float flame_radius_fraction;
@@ -139,4 +143,6 @@ color = mix(color, vec3(base_flame_r, base_flame_g, base_flame_b), density1);
 vec4 finalColor = vec4 (color.rgb, density);
 
 gl_FragColor = finalColor;
+// logarithmic depth
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }

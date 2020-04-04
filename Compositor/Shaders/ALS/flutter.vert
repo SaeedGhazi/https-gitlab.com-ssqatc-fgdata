@@ -28,6 +28,7 @@ varying vec3 relPos;
 varying float yprime_alt;
 varying float mie_angle;
 
+varying float flogz;
 
 uniform int colorMode;
 uniform float osg_SimulationTime;
@@ -138,6 +139,8 @@ void main()
     rotationmatrix(-relWinddir, RotationMatrix);
     pos *= RotationMatrix;
     gl_Position = gl_ModelViewProjectionMatrix * pos;
+    // logarithmic depth
+    flogz = 1.0 + gl_Position.w;
 
     //do the colour and fog
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;

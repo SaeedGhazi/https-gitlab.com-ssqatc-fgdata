@@ -16,6 +16,8 @@ varying out vec3 g_normal;
 varying out float g_altitude;
 varying out float g_layer;
 
+varying out float flogz;
+
 
 
 float min3(in float a, in float b, in float c)
@@ -50,6 +52,8 @@ void main()
 			g_altitude = gl_PositionIn[i].z;
 
             gl_Position = gl_ModelViewProjectionMatrix * pos;
+            // logarithmic depth
+            flogz = 1.0 + gl_Position.w;
             gl_TexCoord[0] = gl_TexCoordIn[i][0];
             EmitVertex();
         }

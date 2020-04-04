@@ -5,6 +5,8 @@
 varying vec3 vertex;
 varying vec3 viewDir;
 
+varying float flogz;
+
 void main()
 {
 
@@ -14,6 +16,8 @@ vertex = gl_Vertex.xyz;
 viewDir = normalize(vertex - ep.xyz);
 
 gl_Position = ftransform();
+// logarithmic depth
+flogz = 1.0 + gl_Position.w;
 gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
 gl_FrontColor = vec4 (1.0,1.0,1.0,1.0);

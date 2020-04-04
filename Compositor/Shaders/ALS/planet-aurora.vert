@@ -4,6 +4,8 @@ varying vec3 vertex;
 varying vec3 normal;
 varying vec3 relVec;
 
+uniform float fg_Fcoef;
+
 uniform float osg_SimulationTime;
 uniform float arc_id;
 
@@ -25,4 +27,6 @@ void main()
 
 	
 	gl_Position = gl_ModelViewProjectionMatrix * vert_out;
+    // logarithmic depth
+    gl_Position.z = (log2(max(1e-6, 1.0 + gl_Position.w)) * fg_Fcoef - 1.0) * gl_Position.w;
 }

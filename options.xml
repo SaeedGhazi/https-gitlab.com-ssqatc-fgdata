@@ -4,17 +4,17 @@
 
  <copyright>
   Copyright (C) 2002 Cameron Moore
-   
+
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
   as published by the Free Software Foundation; either version 2
   of the License, or (at your option) any later version.
-   
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-   
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -31,7 +31,7 @@
   development and pursuit of other interesting flight simulation ideas, and as
   an end-user application. We are developing a sophisticated, open simulation
   framework that can be expanded and improved upon by anyone interested in
-  contributing. 
+  contributing.
 
   There are many exciting possibilities for an open, free flight sim. We hope
   that this project will be interesting and useful to many people in many areas.
@@ -108,7 +108,7 @@
     <name>disable-save-on-exit</name>
     <description>disable-save-on-exit</description>
    </option>
- 
+
    <option>
     <name>enable-save-on-exit</name>
     <description>enable-save-on-exit</description>
@@ -416,12 +416,12 @@
      <name>disable-horizon-effect</name>
      <description>disable-horizon-effect</description>
    </option>
-   
+
    <option>
      <name>enable-horizon-effect</name>
      <description>enable-horizon-effect</description>
    </option>
-   
+
    <option>
     <name>disable-specular-highlight</name>
     <description>disable-specular-highlight</description>
@@ -588,7 +588,7 @@
      <arg>name</arg>
      <description>livery-desc</description>
    </option>
-   
+
    <option>
      <name>vehicle</name>
      <arg>name</arg>
@@ -677,6 +677,13 @@
     <name>carrier</name>
     <arg>[name|ID]</arg>
     <description>carrier-desc</description>
+    <brief/>
+   </option>
+
+   <option>
+    <name>carrier-abeam</name>
+    <arg>[true|false]</arg>
+    <description>carrier-abeam-desc</description>
     <brief/>
    </option>
 
@@ -799,7 +806,7 @@
      <description>vEast-desc</description>
      <description>units-feet</description>
    </option>
-   
+
    <option>
      <name>vDown</name>
      <arg>units_per_sec</arg>
@@ -859,13 +866,13 @@
      <arg>frequency</arg>
      <description>com1-desc</description>
    </option>
-   
+
    <option>
      <name>com2</name>
      <arg>frequency</arg>
      <description>com2-desc</description>
    </option>
-   
+
    <option>
     <name>nav1</name>
     <arg>[radial:]frequency</arg>
@@ -1108,7 +1115,7 @@
      <arg>params</arg>
      <description>native-gui-desc</description>
    </option>
-   
+
    <option>
     <name>native-fdm</name>
     <arg>params</arg>
@@ -1161,12 +1168,12 @@
 
   <section>
    <name>debugging-options</name>
-   
+
    <option>
      <name>enable-fpe</name>
      <description>fpe-desc</description>
    </option>
-   
+
    <option>
      <name>fgviewer</name>
      <description>fgviewer-desc</description>

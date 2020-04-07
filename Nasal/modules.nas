@@ -336,3 +336,17 @@ _setlistener("sim/signals/nasal-dir-initialized", func {
     MODULES_NODE = props.getNode("/nasal/modules", 1);
     _findModules();
 });
+
+var commandModuleReload = func(node)
+{
+    var module = node.getChild("module").getValue();
+    var m = _getInstance(module);
+    if (m == nil) {
+        logprint(5, "Unknown module to reload: %s", module);
+        return;
+    }
+
+    m.reload();
+};
+
+addcommand("nasal-module-reload", commandModuleReload);

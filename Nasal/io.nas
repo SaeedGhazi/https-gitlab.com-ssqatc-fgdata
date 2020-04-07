@@ -28,6 +28,12 @@ var is_directory = func(path) {
     else return 0;
 };
 
+var is_regular_file = func(path) {
+    var tmp = stat(path);
+    if (tmp != nil and tmp[11] == "reg") return 1;
+    else return 0;
+};
+
 # <path> the path that should be searched for subdirectories
 # returns a vector of subdirectory names
 var subdirectories = func(path) {

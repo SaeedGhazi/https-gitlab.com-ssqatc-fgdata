@@ -43,3 +43,7 @@ var mod = func(n, m) {
 
 var _iln10 = 1/ln(10);
 var log10 = func(x) { ln(x) * _iln10 }
+
+var approx_eq = func (a,b, d = 0.000001) {
+    return (abs(a-b) < d);
+}

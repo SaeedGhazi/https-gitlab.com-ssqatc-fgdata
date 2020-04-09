@@ -4,11 +4,16 @@
 	<nasal>
 		<open><![CDATA[
 
+var curpower = getprop("/sim/gui/dialogs/joystick-config/axis[" ~ getprop("/sim/gui/dialogs/joystick-config/current-axis") ~ "]/power");
+if (curpower == nil)
+  curpower = 1.0;
+setprop("/sim/gui/dialogs/joystick-config/gui-factor",curpower);
+
 var assignAxis = func(cmd) {
-
   var i = getprop("/sim/gui/dialogs/joystick-config/current-axis");
-  setprop("/sim/gui/dialogs/joystick-config/axis[" ~ i ~ "]/binding", cmd);
-
+  if (cmd != nil)
+    setprop("/sim/gui/dialogs/joystick-config/axis[" ~ i ~ "]/binding", cmd);
+  setprop("/sim/gui/dialogs/joystick-config/axis[" ~ i ~ "]/power", getprop("/sim/gui/dialogs/joystick-config/gui-factor"));
   joystick.writeConfig();
   fgcommand("reinit", props.Node.new({"subsystem": "input"}));
   fgcommand("dialog-close", props.Node.new({"dialog-name": "button-axis-config"}));
@@ -437,8 +442,47 @@ var assignAxis = func(cmd) {
     </button>
 
 
+    <slider>
+      <row>11</row>
+      <col>0</col>
+      <colspan>1</colspan>
+      <name>sensitivity</name>
+      <min>0</min>
+      <max>5</max>
+      <step>0.1</step>
+      <live>true</live>
+      <property>/sim/gui/dialogs/joystick-config/gui-factor</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>sensitivity</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <row>11</row>
+      <col>1</col>
+      <halign>left</halign>
+      <format>Sensitivity Reduction %2.1f</format>
+      <label>0</label>
+      <property>/sim/gui/dialogs/joystick-config/gui-factor</property>
+      <live>true</live>
+    </text>
+
+    <button>
+      <row>11</row>
+      <col>2</col>
+      <halign>fill</halign>
+      <legend>Apply sensitivity</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignAxis(nil);
+        </script>
+      </binding>
+    </button>
 
   </group>
+
 
   <group>
     <empty>

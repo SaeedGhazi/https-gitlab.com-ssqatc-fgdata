@@ -15,6 +15,7 @@ var Axis = {
     m.prop = prop;
     m.invertable = invertable;
     m.inverted = 0;
+    m.power = 1.0;
     return m;
   },
 
@@ -24,6 +25,7 @@ var Axis = {
     m.prop = me.prop;
     m.invertable = me.invertable;
     m.inverted = me.inverted;
+    m.power = me.power;
     return m;
   },
 
@@ -37,12 +39,13 @@ var Axis = {
 
   getName: func() { return me.name; },
   getBinding: func(axis) { return props.Node.new(); },
+
   isInvertable: func() { return me.invertable; },
   isInverted: func() { return me.inverted; },
+  getPower: func() { return me.power; },
 
-  setInverted: func(b) {
-    if (me.invertable) me.inverted = b;
-  },
+  setPower: func(v) { me.power = v; },
+  setInverted: func(b) { if (me.invertable) me.inverted = b; },
 };
 
 var CustomAxis = {
@@ -100,11 +103,13 @@ var UnboundAxis = {
 
 
 var PropertyScaleAxis = {
-  new: func(name, prop, factor=1, offset=0) {
+  new: func(name, prop, factor=1, offset=0, power=1) {
     var m = { parents: [PropertyScaleAxis, Axis.new(name, prop, 1) ] };
     m.prop=prop;
     m.factor = factor;
     m.offset = offset;
+    m.power = power;
+
     return m;
   },
 
@@ -116,6 +121,7 @@ var PropertyScaleAxis = {
     m.prop= me.prop;
     m.factor = me.factor;
     m.offset = me.offset;
+    m.power = me.power;
     return m;
   },
 
@@ -134,9 +140,11 @@ var PropertyScaleAxis = {
     # (value 0 wouldn't be appropriate for a default factor)
     factorNode = bindingNode.getNode("factor", 0);
     me.factor = (factorNode != nil) ? factorNode.getValue() : 1.0;
-
     me.inverted = (me.factor < 0);
     me.offset = bindingNode.getNode("offset", 1).getValue();
+
+    powerNode = bindingNode.getNode("power", 0);
+    me.power = (powerNode != nil) ? powerNode.getValue() : 1.0;
   },
 
   getBinding: func(axis) {
@@ -151,6 +159,7 @@ var PropertyScaleAxis = {
       p.getNode("binding", 1).getNode("factor", 1).setValue(me.factor);
     }
     p.getNode("binding", 1).getNode("offset", 1).setValue(me.offset);
+    p.getNode("binding", 1).getNode("power",1 ).setValue(me.power);
     return p;
   },
 
@@ -642,6 +651,7 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
           p.getNode("binding", 1).setValue(binding.getName());
           p.getNode("invertable", 1).setValue(binding.isInvertable());
           p.getNode("inverted", 1).setValue(binding.isInverted());
+          p.getNode("power", 1).setValue(binding.getPower());
         }
       }
 
@@ -650,12 +660,14 @@ var readConfig = func(dialog_root="/sim/gui/dialogs/joystick-config") {
         p.getNode("binding", 1).setValue("None");
         p.getNode("invertable", 1).setValue(0);
         p.getNode("inverted", 1).setValue(0);
+        p.getNode("power", 1).setValue(1.0);
         p.removeChild("original_binding");
       }
     } else {
       p.getNode("binding", 1).setValue("None");
       p.getNode("invertable", 1).setValue(0);
       p.getNode("inverted", 1).setValue(0);
+      p.getNode("power", 1).setValue(1.0);
       p.removeChild("original_binding");
     }
   }
@@ -743,6 +755,7 @@ var writeConfig = func(dialog_root="/sim/gui/dialogs/joystick-config", reset=0) 
         if (binding.getName() == name) {
           var b = binding.clone();
           b.setInverted(getprop(dialog_root ~ "/axis[" ~ axis ~ "]/inverted"));
+          b.setPower(getprop(dialog_root ~ "/axis[" ~ axis ~ "]/power"));
 
           # Generate the axis and binding
           var axisnode = config.getNode("axis[" ~ axis ~ "]", 1);

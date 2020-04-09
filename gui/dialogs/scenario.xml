@@ -50,17 +50,8 @@
   <hrule/>
 
   <group>
-    <layout>hbox</layout>
+    <layout>vbox</layout>
     <halign>left</halign>
-
-    <!-- only for a gap -->
-    <group>
-      <layout>vbox</layout>
-      <default-padding>1</default-padding>
-      <text>
-        <label> </label>
-      </text>
-    </group>
 
     <checkbox>
       <halign>left</halign>
@@ -69,71 +60,57 @@
       <property>/sim/traffic-manager/enabled</property>
       <live>true</live>
       <binding>
-          <command>dialog-apply</command>
-          <object-name>enable-ai-traffic</object-name>
-      </binding>
-    </checkbox>
-
-  </group>
-
-  <text><label/></text>
-
-  <text>
-    <label>Aerodynamic interaction</label>
-  </text>
-
-  <hrule/>
-
-  <group>
-    <layout>table</layout>
-    <halign>left</halign>
-
-    <text>
-      <row>0</row>
-      <col>0</col>
-      <halign>left</halign>
-      <label>Enable AI aerodynamic wake</label>
-    </text>
-
-    <checkbox>
-      <row>0</row>
-      <col>1</col>
-      <name>enable-ai-wake</name>
-      <halign>left</halign>
-      <property>/fdm/ai-wake/enabled</property>
-      <binding>
         <command>dialog-apply</command>
-        <object-name>enable-ai-wake</object-name>
+        <object-name>enable-ai-traffic</object-name>
       </binding>
     </checkbox>
 
-    <text>
-      <row>1</row>
-      <col>0</col>
-      <halign>left</halign>
-      <label>Max. radius of interaction (nm)</label>
-    </text>
-
-    <input>
-      <row>1</row>
-      <col>1</col>
-      <property>/fdm/ai-wake/max-radius-nm</property>
-      <enable>
+    <group>
+      <layout>vbox</layout>
+      <visible>
+        <not-equals>
+          <property>/sim/traffic-manager/enabled</property>
+          <value>0</value>
+        </not-equals>
+      </visible>
+      <checkbox>
+        <name>enable-ai-wake</name>
+        <halign>left</halign>
+        <label>Enable AI aerodynamic wake</label>
         <property>/fdm/ai-wake/enabled</property>
-      </enable>
-      <binding>
-        <command>dialog-apply</command>
-      </binding>
-    </input>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>enable-ai-wake</object-name>
+        </binding>
+      </checkbox>
+
+      <group>
+        <layout>hbox</layout>
+        <visible>
+          <not-equals>
+            <property>/fdm/ai-wake/enabled</property>
+            <value>0</value>
+          </not-equals>
+        </visible>
+        <text>
+          <halign>left</halign>
+          <label>Max. radius of interaction (nm)</label>
+        </text>
+
+        <input>
+          <property>/fdm/ai-wake/max-radius-nm</property>
+          <enable>
+            <property>/fdm/ai-wake/enabled</property>
+          </enable>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </input>
+      </group>
+    </group>
   </group>
 
-  <text><label/></text>
-
-  <text>
-    <label>Choose active scenario(s) </label>
-  </text>
-
-  <hrule/>
+  <hrule />
 
   <group>
     <layout>hbox</layout>
@@ -143,18 +120,23 @@
       <layout>vbox</layout>
       <default-padding>1</default-padding>
       <text>
-        <label> </label>
+        <label></label>
       </text>
     </group>
 
     <group>
-      <name>left-column</name>
+      <name>column0</name>
       <layout>vbox</layout>
     </group>
 
     <group>
       <layout>vbox</layout>
-      <name>right-column</name>
+      <name>column1</name>
+    </group>
+
+    <group>
+      <layout>vbox</layout>
+      <name>column2</name>
     </group>
 
   </group>
@@ -187,9 +169,7 @@
         return 0;
       };
 
-      var columns = [ "left-column", "right-column" ];
-
-      var processScenario = func(nr, rootN) {
+      var processScenario = func(nr, col, rootN) {
         var descriptionN = rootN.getNode("description");
         var nameN = rootN.getNode("name");
         var description = descriptionN != nil ? descriptionN.getValue() : "";
@@ -199,7 +179,7 @@
         propertyRoot.getNode("selected",1).setBoolValue(isEnabledScenario(scenarioId));
         propertyRoot.getNode("name",1).setValue(scenarioId);
 
-        var group = gui.findElementByName( dlg_root, columns[math.mod(nr,2)] ).getChild("group", nr, 1 );
+        var group = gui.findElementByName( dlg_root, "column"~math.mod(col,3) ).getChild("group", nr, 1 );
         group.getNode("layout",1).setValue("hbox");
         var cb = group.getNode("checkbox",1);
         cb.getNode("property",1).setValue(propertyRoot.getNode("selected").getPath());
@@ -222,10 +202,31 @@
       }
 
       var path = getprop("/sim/fg-root") ~ "/AI";
-      var i = -1;
-      foreach(var s; props.globals.getNode("sim/ai/scenarios",1).getChildren("scenario"))
-          processScenario( i+=1, s );
+      scenarios = [];
+i=0;
+      foreach(var s; props.globals.getNode("sim/ai/scenarios",1).getChildren("scenario")){
+        append(scenarios, s);
+print(s.getNode("name").getValue()); i+=1;
 
+      }
+      # sort the scenarios into alpha order.
+      scenarios = sort (scenarios, func (a,b) {cmp(a.getNode("name").getValue(), b.getNode("name").getValue());});
+      
+      # display in three columns top-to-bottom
+      ssz = size(scenarios);
+      colsz = math.round(ssz/3);
+      coli = 0;
+      col = 0;
+
+      for(i=0;i<size(scenarios);i += 1) {
+print(i," -- ",scenarios[i].getNode("name").getValue());
+        processScenario( i, col, scenarios[i]);
+        coli += 1;
+        if (coli > colsz){
+          coli = 0;
+          col += 1;
+        }
+      }
     ]]></open>
 
     <close><![CDATA[

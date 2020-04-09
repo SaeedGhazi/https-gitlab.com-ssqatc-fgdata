@@ -13,6 +13,7 @@
         vor:     p.getNode("vor", 1),
         ndb:     p.getNode("ndb", 1),
         fix:     p.getNode("fix", 1),
+        carrier: p.getNode("carrier-active", 1),
       };
 
       var set_radio = func(m) {
@@ -239,6 +240,48 @@
         <script>set_radio("fix")</script>
       </binding>
     </input>
+
+
+    <radio>
+      <row>5</row><col>0</col>
+      <live>true</live>
+      <property>/sim/gui/dialogs/location-in-air/carrier-active</property>
+      <halign>left</halign>
+
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("carrier")</script>
+      </binding>
+    </radio>
+    <text>
+      <row>5</row><col>1</col>
+      <halign>right</halign>
+      <label>Carrier:</label>
+    </text>
+    <input>
+      <row>5</row><col>2</col>
+      <property>/sim/presets/carrier</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("carrier")</script>
+      </binding>
+    </input>
+    <text>
+      <row>5</row><col>3</col>
+      <halign>right</halign>
+      <label>  Parking:</label>
+    </text>
+    <input>
+      <row>5</row><col>4</col>
+      <property>/sim/presets/parkpos</property>
+      <binding>
+        <command>nasal</command>
+        <script>set_radio("carrier")</script>
+      </binding>
+    </input>
   </group>
 
   <hrule/>
@@ -346,13 +389,20 @@
       <binding>
         <command>nasal</command>
         <script>
-          setprop("/sim/presets/parkpos", "");
 
-          if (!mode.airport.getBoolValue()) {
+          if (mode.carrier.getBoolValue()) { 
+            setprop("/sim/presets/airport-id", "");
+            setprop("/sim/presets/runway", "");
+            setprop("/sim/presets/runway-requested", 0);
+          }
+          else if (!mode.airport.getBoolValue()) {
+            setprop("/sim/presets/carrier", "");
+            setprop("/sim/presets/parkpos", "");
             setprop("/sim/presets/airport-id", "");
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/runway-requested", 0);
           } else {
+            setprop("/sim/presets/carrier", "");
             var runway = getprop("/sim/presets/runway");
             if (runway != "") {
               setprop("/sim/presets/runway-requested", 1);

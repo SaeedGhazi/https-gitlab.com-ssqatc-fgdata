@@ -10,7 +10,7 @@
 
   <PropertyList>
 	  <scenario>
-	  	<name>Foch Carrier (LFTH)</name>
+	  	<name>Carrier: R99 - Foch (LFTH)</name>
       <description>This scenario spawns the Foch aircraft carrier (Clemenceau-class) in the Mediterranean off Toulon.</description>
 		<entry>
 			<type>carrier</type>

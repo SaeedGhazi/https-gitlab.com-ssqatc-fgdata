@@ -10,7 +10,7 @@
 
   <PropertyList>
 	  <scenario>
-	  	<name>Clemenceau Carrier (LFMN)</name>
+	  	<name>Carrier: R98 - Clemenceau (LFMN)</name>
 	  	<description>This scenario spawns the Clemenceau aircraft carrier in the Mediterranean off Marseille.</description>
 		<entry>
 			<type>carrier</type>

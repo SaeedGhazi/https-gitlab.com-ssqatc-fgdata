@@ -2,9 +2,9 @@
 <PropertyList>
   <scenario>
 
-    <name>LPD17 - USS San Antonio</name>
+    <name>Carrier: LPD-17 - USS San Antonio (KNZY)</name>
     <description>
-      SanAntonio-class (LPD17)
+      SanAntonio-class (LPD-17)
       x, y, z-offset-m   The distance in meters of the Fresnel Lens
       Optical Landing System (FLOLS) from the
       carrier model origin.

@@ -223,7 +223,7 @@ var _dump_key = func(s, color=nil) {
 var string = func(o, color=nil) {
 	var t = typeof(o);
 	if (t == "nil") {
-		return _nil("nil", color);
+		return _nil("null", color);
 
 	} elsif (t == "scalar") {
 		return num(o) == nil ? _dump_string(o, color) : _num(o~"", color);
@@ -237,7 +237,7 @@ var string = func(o, color=nil) {
 	} elsif (t == "hash") {
 		if (contains(o, "parents") and typeof(o.parents) == "vector"
 				and size(o.parents) == 1 and o.parents[0] == props.Node)
-			return _angle("<", color) ~ _dump_prop(o, color) ~ _angle(">", color);
+			return _angle("'<", color) ~ _dump_prop(o, color) ~ _angle(">'", color);
 
 		var k = keys(o);
 		var s = "";
@@ -246,10 +246,10 @@ var string = func(o, color=nil) {
 		return _brace("{", color) ~ " " ~ s ~ " " ~ _brace("}", color);
 
 	} elsif (t == "ghost") {
-		return _angle("<", color) ~ _nil(ghosttype(o), color) ~ _angle(">", color);
+		return _angle("'<", color) ~ _nil(ghosttype(o), color) ~ _angle(">'", color);
 
 	} else {
-		return _angle("<", color) ~ _vartype(t, color) ~ _angle(">", color);
+		return _angle("'<", color) ~ _vartype(t, color) ~ _angle(">'", color);
 	}
 }
 

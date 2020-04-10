@@ -46,18 +46,18 @@ var load = func(a) {
     module.setMainFile("addon-main.nas");
     
     if (module.load(a) != nil) {
-        logprint(5, "[OK] '" ~ a.name ~ "' (V. " ~ a.version.str() ~
+        logprint(LOG_INFO, "[OK] '" ~ a.name ~ "' (V. " ~ a.version.str() ~
                     ") loaded.");
         module.printTrackedResources();
     } else {
-        logprint(5, "Failed loading addon-main.nas for " ~ a.id);
+        logprint(DEV_ALERT, "Failed loading addon-main.nas for " ~ a.id);
     }
     _modules[a.id] = module;
 }
 
 
 var remove = func(a) {
-    logprint(5, "- Removing add-on ", a.id);
+    logprint(LOG_INFO, "- Removing add-on ", a.id);
     _modules[a.id].unload();
 }
 
@@ -68,7 +68,18 @@ var reload = func(a) {
     addons.load(a);
 }
 
+var commandAddonReload = func(node)
+{
+    var a = addons.getAddon(node.getChild("id").getValue());
+    if (_modules[a.id] == nil) {
+        logprint(DEV_ALERT, "Unknown add-on to reload: "~id);
+        return;
+    }
+    addons.reload(a)
+};
+
 var init = func {
+    addcommand("addon-reload", commandAddonReload);
     foreach (var addon; addons.registeredAddons()) {
         addons._reloadFlags[addon.id] = addon.node.getNode("reload", 1);
         addons._reloadFlags[addon.id].setBoolValue(0);

@@ -1299,7 +1299,7 @@ if (ev.vis_flag ==1)
 	# then set the new value in current and execute change
 	cNode.getNode("visibility-m").setValue(vis);
 	#compat_layer.setVisibility(vis);
-	print(vis);
+	#print(vis);
 	compat_layer.setVisibilitySmoothly(vis);
 
 	# then count the number of active volumes on entry (we need that to determine

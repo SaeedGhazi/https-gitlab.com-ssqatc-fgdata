@@ -81,7 +81,7 @@
 <model n="205" type="string">AI/Aircraft/738/738-Aeroflot.xml</model>
 <model n="206" type="string">AI/Aircraft/738/738-ANA.xml</model>
 <model n="207" type="string">AI/Aircraft/739/73J-Default.xml</model>
-<model n="208" type="string">AI/Aircraft/757/757-American.xml</model>
+<model n="208" type="string">AI/Aircraft/757/757-200-American.xml</model>
 <model n="209" type="string">AI/Aircraft/A300/A300-default.xml</model>
 <model n="210" type="string">AI/Aircraft/A310/A310-default.xml</model>
 <model n="211" type="string">AI/Aircraft/A319/A319-default.xml</model>

@@ -92,7 +92,7 @@
 <model n="216" type="string">AI/Aircraft/Fokker-100/Fokker-100-KLM.xml</model>
 <model n="217" type="string">AI/Aircraft/Fokker-50/fokker50-KLM.xml</model>
 <model n="218" type="string">AI/Aircraft/Fokker-70/fokker70-KLM.xml</model>
-<model n="219" type="string">AI/Aircraft/MD80/MD80-Iberia.xml</model>
+<model n="219" type="string">AI/Aircraft/MD80/MD80-American.xml</model>
 <model n="220" type="string">AI/Aircraft/MD90/MD90-JAL.xml</model>
 <model n="221" type="string">AI/Aircraft/tu154b/Model/tu154b-model.xml</model>
 <model n="222" type="string">AI/Aircraft/727/Models/727-200.xml</model>
@@ -118,7 +118,7 @@
 <model n="354" type="string">AI/Aircraft/A343/A343-CathayPacific.xml</model>
 <model n="355" type="string">AI/Aircraft/A345/A345-SingaporeAirlines.xml</model>
 <model n="356" type="string">AI/Aircraft/A346/A346-Iberia.xml</model>
-<model n="357" type="string">AI/Aircraft/A380/A380-AirFrance.xml</model>
+<model n="357" type="string">AI/Aircraft/A380/388-AirFrance.xml</model>
 
 <!-- 401-450 Single engine prop military aircraft -->
 <model n="401" type="string">AI/Aircraft/A6M2/Models/a6m2-anim.xml</model>

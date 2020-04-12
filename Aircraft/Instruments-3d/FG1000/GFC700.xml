@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" ?>
 <!-- GFC 700 Autopilot Configuration -->
 <!-- Each component is evaluated in the order specified.  You can make up -->
 <!-- property names to pass the result of one component on to a subsequent -->

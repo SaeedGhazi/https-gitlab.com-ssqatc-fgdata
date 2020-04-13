@@ -16,6 +16,8 @@ varying	vec3	vViewVec;
 varying vec3	vertVec;
 varying	vec3	reflVec;
 
+varying float flogz;
+
 varying	float	alpha;
 
 attribute	vec3	tangent;
@@ -184,4 +186,5 @@ void	main(void)
 	  gl_FrontColor = vec4(1.0,1.0,1.0,1.0);
 	}
 	gl_Position  = gl_ModelViewProjectionMatrix * vec4(rawpos,1.0);
+	flogz = 1.0 + gl_Position.w;
 }

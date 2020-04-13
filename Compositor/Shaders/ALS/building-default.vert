@@ -35,6 +35,8 @@ varying vec3 relPos;
 varying float yprime_alt;
 varying float mie_angle;
 
+varying float flogz;
+
 uniform int colorMode;
 uniform float hazeLayerAltitude;
 uniform float terminator;
@@ -116,6 +118,7 @@ void main()
   position = position + instancePosition.xyz;
 
   gl_Position = gl_ModelViewProjectionMatrix * vec4(position,1.0);
+	flogz = 1.0 + gl_Position.w;
 
   // Texture coordinates are stored as:
   // - a separate offset (x0, y0) for the wall (wtex0x, wtex0y), and roof (rtex0x, rtex0y)

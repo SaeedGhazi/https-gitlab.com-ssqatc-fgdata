@@ -401,8 +401,8 @@ Non-Compositor
 Compositor
 
 # Where Defined                Summary
-4 model-combined.xml           ALS, quality>0, model>0
-19 model-defaults.xml          Base ALS
-7 model-combined.xml          quality>0, model>0
-8 model-defaults.xml          Generic shaders, quality>0
-9 model-defaults.xml          Fallback - no predicate
+4 model-combined.xml          quality>0, model>0
+7 model-combined.xml          ALS, quality>0, model>0
+8 model-default.xml          generic>0, quality>0
+9 model-default.xml          Fallback - no predicate
+19 model-default.xml         ALS, basic

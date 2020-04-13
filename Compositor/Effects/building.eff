@@ -115,28 +115,11 @@
 		<building-flag type="int">1</building-flag>
   </parameters>
 
-<technique n="4">
-  <!-- Atmospheric scattering technique with model shader-->
-  <scheme>als-lighting</scheme>
- 	<predicate>
-		<and>
-		  <property>/sim/rendering/shaders/quality-level</property>
-		  <property>/sim/rendering/shaders/model</property>
-		  <or>
-  			<less-equal>
-  			  <value type="float">2.0</value>
-  			  <glversion/>
-  			</less-equal>
-  			<and>
-  			  <extension-supported>GL_ARB_shader_objects</extension-supported>
-  			  <extension-supported>GL_ARB_shading_language_100</extension-supported>
-  			  <extension-supported>GL_ARB_vertex_shader</extension-supported>
-  			  <extension-supported>GL_ARB_fragment_shader</extension-supported>
-  			</and>
-		  </or>
-		</and>
-  </predicate>
-
+<technique n="7">
+  <!-- Atmospheric scattering technique with
+    /sim/rendering/shaders/quality-level > 0
+    /sim/rendering/shaders/model> 0
+  -->
     <pass>
       <texture-unit n="4">
     	  <unit>4</unit>
@@ -183,21 +166,6 @@
 
   <technique n="19">
     <!-- Base Atmospheric scattering technique -->
-    <scheme>als-lighting</scheme>
-    <predicate>
-      <or>
-        <less-equal>
-          <value type="float">2.0</value>
-          <glversion/>
-        </less-equal>
-        <and>
-          <extension-supported>GL_ARB_shader_objects</extension-supported>
-          <extension-supported>GL_ARB_shading_language_100</extension-supported>
-          <extension-supported>GL_ARB_vertex_shader</extension-supported>
-          <extension-supported>GL_ARB_fragment_shader</extension-supported>
-        </and>
-      </or>
-    </predicate>
     <pass>
       <program>
         <vertex-shader>Shaders/ALS/building-default.vert</vertex-shader>
@@ -226,8 +194,8 @@
   </technique>
 
 
-  <technique n="7">
-  <!-- Model shader, quality > 0 -->
+  <technique n="4">
+  <!-- Non-ALS.  Model shader > 0 , quality > 0 -->
 	<pass>
 		<material>
 			<active>true</active>
@@ -284,6 +252,7 @@
   </technique>
 
   <technique n="8">
+  <!-- Generic shaders, quality > 0 -->
 		<pass>
 			<vertex-program-two-side>
 				<use>vertex-program-two-side</use>
@@ -314,6 +283,7 @@
 	</technique>
 
   <technique n="9">
+  <!-- Fallback - no predicate -->
 		<pass>
 			<lighting>true</lighting>
 			<material>

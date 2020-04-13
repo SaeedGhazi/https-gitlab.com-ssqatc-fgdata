@@ -2,7 +2,7 @@
 
 <PropertyList>
 
- <shaders>
+ <shaders archive="true">
    <custom-settings type="bool">true</custom-settings>
    <generic type="float">1</generic>
    <landmass type="float">6</landmass>
@@ -18,20 +18,8 @@
    <lights type="float">1</lights>
    <quality-level-internal type="float">1</quality-level-internal>
  </shaders>
- <random-objects type="bool">true</random-objects>
- <random-vegetation type="bool">true</random-vegetation>
- <random-vegetation-shadows type="bool">false</random-vegetation-shadows>
- <random-vegetation-normals type="bool">false</random-vegetation-normals>
- <vegetation-density type="double">1.3</vegetation-density>
- <random-buildings type="bool">true</random-buildings>
- <building-density type="double">0.7</building-density>
- <point-sprites type="bool">true</point-sprites>
- <particles type="bool">true</particles>
- <clouds3d-enable type="bool">true</clouds3d-enable>
- <clouds3d-vis-range type="float">10000</clouds3d-vis-range>
- <clouds3d-detail-range type="float">10000</clouds3d-detail-range>
- <clouds3d-density type="double">0.25</clouds3d-density>
- <shadows>
+ <clouds3d-enable archive="true" type="bool">true</clouds3d-enable>
+ <shadows archive="true">
    <enabled type="bool">true</enabled>
  </shadows>
 

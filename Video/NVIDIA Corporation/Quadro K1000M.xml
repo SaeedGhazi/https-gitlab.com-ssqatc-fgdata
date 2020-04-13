@@ -8,7 +8,7 @@
 <PropertyList>
 
  <shaders>
-  <quality-level type="float">0</quality-level>
+  <quality-level archive="true" type="float">0</quality-level>
  <shaders>
 
 </PropertyList>

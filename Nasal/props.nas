@@ -35,6 +35,9 @@ var Node = {
     setIntValue    : func _setIntValue(me._g, arg),
     setBoolValue   : func _setBoolValue(me._g, arg),
     setDoubleValue : func _setDoubleValue(me._g, arg),
+    # adjustValue works like setDoubleValue but adds the argument to the 
+    # current value of the node
+    adjustValue    : func _adjustValue(me._g, arg),
     unalias        : func _unalias(me._g, arg),
     alias          : func(n) _alias(me._g, [isa(n, Node) ? n._g : n]),
     equals         : func(n) _equals(me._g, [isa(n, Node) ? n._g : n]),

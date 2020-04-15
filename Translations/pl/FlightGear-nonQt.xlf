@@ -541,6 +541,10 @@
           <source>assign a unique name to a player</source>
           <target>Przypisz unikalną nazwę dla użytkownika</target>
         </trans-unit>
+        <trans-unit approved="no" id="options/carrier-abeam-desc:0" translate="yes">
+          <source>Start on downwind abeam the selected carrier (must also specify a carrier)</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="yes" id="options/carrier-desc:0" translate="yes">
           <source>Specify starting position on an AI carrier</source>
           <target>Określ pozycję startową na lotniskowcu AI</target>

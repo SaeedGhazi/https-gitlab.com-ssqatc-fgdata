@@ -220,8 +220,10 @@ var _dump_key = func(s, color=nil) {
 }
 
 
-var string = func(o, color=nil) {
-	var t = typeof(o);
+var string = func(o, color=nil, ttl=5) {
+    if (o == globals and ttl < 5) return "<globals>"; # do not loop int globals
+    if (!ttl) return "<...>";
+    var t = typeof(o);
 	if (t == "nil") {
 		return _nil("null", color);
 
@@ -231,7 +233,7 @@ var string = func(o, color=nil) {
 	} elsif (t == "vector") {
 		var s = "";
 		forindex (var i; o)
-			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i], color);
+			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i], color, ttl - 1);
 		return _bracket("[", color) ~ s ~ _bracket("]", color);
 
 	} elsif (t == "hash") {
@@ -242,7 +244,7 @@ var string = func(o, color=nil) {
 		var k = keys(o);
 		var s = "";
 		forindex (var i; k)
-			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i], color) ~ ": " ~ debug.string(o[k[i]], color);
+			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i], color) ~ ": " ~ debug.string(o[k[i]], color, ttl - 1);
 		return _brace("{", color) ~ " " ~ s ~ " " ~ _brace("}", color);
 
 	} elsif (t == "ghost") {
@@ -270,6 +272,18 @@ var local = func(frame = 0) {
 	return v;
 }
 
+var funcname = func(f) {
+    if (typeof(f) != "func") return "";
+    var namespace = closure(f);
+    
+    foreach (var k; keys(namespace)) {
+        if (typeof(namespace[k]) == "func") {
+            if (namespace[k] == f)
+                return k;
+        }
+    }
+    return "- unknown -";
+}
 
 var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
     var d = (desc == nil) ? "" : " '" ~ desc ~ "'";
@@ -279,10 +293,11 @@ var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
     for (var i = skip_level; 1; i += 1) {
         if ((var v = caller(i)) == nil) return;
         var filename = v[2];
+        var line = v[3];
         if (size(filename) > 50) 
             filename = substr(filename, 0, 5)~"[...]"~substr(filename, -40);
-        print(_section(sprintf("#%-2d called from %s, line %s  (locals %s):", 
-            i - skip_level, filename, v[3], id(v[0]))));
+        print(_section(sprintf("#%-2d called from %s:%d (%s) (locals %s):", 
+            i - skip_level, filename, line, funcname(v[1]), id(v[0]))));
         if (dump_vars) dump(v[0]);
     }
 }

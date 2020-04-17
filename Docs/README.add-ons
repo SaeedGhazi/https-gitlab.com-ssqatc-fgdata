@@ -859,13 +859,15 @@ called with one argument: the addons.Addon object (a Nasal ghost)
 corresponding to your add-on. unload() is run in the add-on's own
 namespace.
 
-The reload is triggered by setting the property
-/addon/by-id/ADDON_ID/reload to true (replace ADDON_ID with your
-particular add-on identifier). A listener will react to that property,
-reset it to false and attempt to reload the addon-main.nas file for your
-add-on (doing the aforementioned cleanup before). You can add a menu
-item to trigger the reload easily, but it should be removed before
-publishing your add-on to users (see the above warning).
+In FlightGear Versions before 2020.1 the reload is triggered by setting the 
+property /addon/by-id/ADDON_ID/reload to true (replace ADDON_ID with your
+particular add-on identifier). 
+
+!!! Since version 2020.1 reload should be done like this: 
+!!! fgcommand("addon-reload", props.Node.new({'id': 'ADDON_ID'}));
+
+You can add a menu item to trigger the reload easily, but it should be removed 
+before publishing your add-on to endusers (see the above warning).
 
 Please have a look at the skeleton add-on at
 https://sourceforge.net/p/flightgear/fgaddon/HEAD/tree/trunk/Addons/Skeleton/

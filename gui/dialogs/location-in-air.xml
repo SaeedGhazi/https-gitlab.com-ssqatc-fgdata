@@ -7,6 +7,7 @@
   <nasal>
     <open>
       var p = props.globals.getNode("/sim/gui/dialogs/location-in-air/", 1);
+      var dlg_root = cmdarg();
       var mode = {
         airport: p.getNode("airport", 1),
         lonlat:  p.getNode("lonlat", 1),
@@ -20,7 +21,7 @@
         foreach (var k; keys(mode)) {
           mode[k].setBoolValue(m == k);
         }
-      }
+      };
 
       var initialized = 0;
       foreach (var k; keys(mode)) {
@@ -45,6 +46,42 @@
         setprop(freqpropname, found[0].frequency / 100.0);
 
       }
+
+      var populateCarrierCombo = func() {
+        # Fill the carrier-selection combo box with a list of available carriers
+        var combo = gui.findElementByName( dlg_root, "carrier-selection" );
+        var carriers = props.globals.getNode( "/ai/models" );
+
+        combo.removeChildren("value");
+        foreach (var carrier; carriers.getChildren("carrier")) {
+          combo.addChild("value").setValue(carrier.getNode("name", 1).getValue());
+        }
+      };
+
+      var populateCarrierPositionCombo = func() {
+        # Fill the carrier-position-select combo box with the special values for
+        # final approach and abeam in-air positions, plus any catapults or parking
+        # positions available.
+        var combo = gui.findElementByName( dlg_root, "carrier-position-selection" );
+        var carriers = props.globals.getNode( "/ai/models" );
+
+        # Clear the box, as we may have selected a new carrier from the carrier selection
+        combo.removeChildren("value");
+        combo.addChild("value").setValue("FLOLS");
+        combo.addChild("value").setValue("Abeam");
+
+        foreach (var carrier; carriers.getChildren("carrier")) {
+          if (carrier.getNode("name", 1).getValue() == getprop("/sim/presets/carrier")) {
+            foreach (var parkpos; carrier.getChildren("parking-pos")) {
+              combo.addChild("value").setValue(parkpos.getNode("name", 1).getValue());
+            }
+          }
+        }
+      };
+
+      populateCarrierCombo();
+      populateCarrierPositionCombo();
+
     </open>
 
     <close># just kept for educational purposes :-)</close>
@@ -338,30 +375,36 @@
         <halign>right</halign>
         <label>Carrier:</label>
       </text>
-      <input>
+      <combo>
+        <name>carrier-selection</name>
         <row>0</row>
         <col>1</col>
         <property>/sim/presets/carrier</property>
         <binding>
-          <command>nasal</command>
-          <script>set_radio("carrier")</script>
+          <command>dialog-apply</command>
+          <object-name>carrier-selection</object-name>
         </binding>
-      </input>
+        <binding>
+          <command>nasal</command>
+          <script>populateCarrierPositionCombo();</script>
+        </binding>
+      </combo>
       <text>
         <row>1</row>
         <col>0</col>
         <halign>right</halign>
-        <label>  Parking:</label>
+        <label>Position:</label>
       </text>
-      <input>
+      <combo>
+        <name>carrier-position-selection</name>
         <row>1</row>
         <col>1</col>
-        <property>/sim/presets/parkpos</property>
+        <property>/sim/presets/carrier-position</property>
         <binding>
-          <command>nasal</command>
-          <script>set_radio("carrier")</script>
+          <command>dialog-apply</command>
+          <object-name>carrier-position-selection</object-name>
         </binding>
-      </input>
+      </combo>
     </group>
   </group>
 
@@ -471,7 +514,7 @@
         <command>nasal</command>
         <script>
 
-          if (mode.carrier.getBoolValue()) { 
+          if (mode.carrier.getBoolValue()) {
             setprop("/sim/presets/airport-id", "");
             setprop("/sim/presets/runway", "");
             setprop("/sim/presets/runway-requested", 0);

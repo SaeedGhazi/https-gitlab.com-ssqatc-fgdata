@@ -631,10 +631,12 @@ var Probe = {
 var Breakpoint = {
     # label:       Used in property path and as text for backtrace.
     # dump_locals: bool passed to backtrace. Dump variables in BT.
-    new: func(label, dump_locals = 1) {
+    # skip_level:  int passed to backtrace. 
+    new: func(label, dump_locals = 1, skip_level=0) {
         var obj = {
             parents: [Breakpoint, Probe.new(label, "bp")],
-            tokens: 0,            
+            tokens: 0,
+            skip_level: num(skip_level+1), # +1 for Breakpoint.hit()
             dump_locals: num(dump_locals),
         };
         obj._enableN.remove();
@@ -664,7 +666,7 @@ var Breakpoint = {
                 callback(me.hits[0], me.tokens);
             }
             else {
-                debug.backtrace(me.label, me.dump_locals, 1);
+                debug.backtrace(me.label, me.dump_locals, me.skip_level);
             } 
             me._enableN.setValue(me.tokens);
         }

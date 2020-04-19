@@ -291,7 +291,7 @@ var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
     print(_title("### backtrace" ~ d ~ " ###"));
     skip_level += 1;
     for (var i = skip_level; 1; i += 1) {
-        if ((var v = caller(i)) == nil) return;
+        if ((var v = caller(i)) == nil) return caller(i - 1);
         var filename = v[2];
         var line = v[3];
         if (size(filename) > 50) 
@@ -495,12 +495,14 @@ var Probe = {
             _enableN: nil,
             _resetN: nil,
             _hitsN: [],
+            _tracingN: nil,
+            origins: {},
             _start_time: 0,
             _stop_time: 0,
             _timeoutN: nil,   # > 0, disable probe after _timeout seconds
             _L: [],
         };
-        if (typeof(label) != "scalar" or typeof(class) != "scalar") {
+        if (!isscalar(label) or !isscalar(class)) {
             die("Invalid argument type to Probe.new");
         }
         class = globals.string.replace(class, " ", "_");
@@ -516,6 +518,16 @@ var Probe = {
                 else obj.disable();
             }, 0, 0)
         );
+
+        obj._tracingN = obj.node.addChild("tracing");
+        obj._tracingN.setBoolValue(0);
+        append(obj._L, 
+            setlistener(obj._tracingN, func(n) {
+                if (n.getValue()) obj.enableTracing();
+                else obj.disableTracing();
+            }, 0, 0)
+        );
+        
         obj._resetN = obj.node.addChild("reset");
         obj._resetN.setBoolValue(0);
         append(obj._L, 
@@ -526,6 +538,7 @@ var Probe = {
                 }
             }, 0, 0)
         );
+        
         append(obj._hitsN, obj.node.addChild("hits"));
         obj._hitsN[0].setIntValue(0);
         return obj;
@@ -562,6 +575,19 @@ var Probe = {
         return me;
     },
     
+    enableTracing: func() {
+        if (me._tracingN.getValue()) return;
+        
+        me._tracingN.setBoolValue(1);
+        me.origins = {};
+        return me;
+    },
+
+    disableTracing: func() {
+        me._tracingN.setBoolValue(0);
+        return me;
+    },
+
     generateStats: func {
         if (me._start_time) {
             if (me._enableN.getValue())
@@ -585,8 +611,8 @@ var Probe = {
         append(me.hits, 0);
         return size(me._hitsN) - 1;
     },
-
-    # increase counter (if enabled)
+    
+    # increment counter (if enabled)
     # use addCounter() before using counter_id > 0
     hit: func(counter_id = 0, callback = nil) {
         if (me._enableN.getValue()) {
@@ -602,11 +628,32 @@ var Probe = {
                 }
             }
             me.hits[counter_id] += 1;
-            me._hitsN[counter_id].setIntValue(me.hits[counter_id]);
-            if (typeof(callback) == "func")
+            me._hitsN[counter_id].increment();
+            me._trace();
+            if (isfunc(callback))
                 callback(me.hits);
         }
         return me;
+    },
+    
+    #write backtrace to prop tree with counters
+    _trace: func(skip=2) {
+        if (!me._tracingN.getValue()) return;
+        var tn = me.node.getNode("trace",1);
+        for (var i = skip; 1; i += 1) {
+            var c  = caller(i);
+            if (c == nil) break;
+            var fn = io.basename(c[2]);
+            var line = num(c[3]);
+            var sid = fn~":"~line;
+            print(sid);
+            if (me.origins[sid] == nil) {
+                me.origins[sid] = 1;
+                var n = tn.getChild(fn,line,1);
+                n.setIntValue(0);
+            }
+            tn.getChild(fn,line).increment();    
+        }
     },
 };
 
@@ -615,7 +662,7 @@ var Probe = {
 # * do only a limited number of BT, avoid flooding the log / console
 # 
 # Data can be viewed / modified in the prop tree /_debug/nas/bp-<myLabel>/*
-# * tokens: number of backtraces to do; each hit will decrease this by 1
+# * tokens: number of backtraces to do; each hit will decrement this by 1
 # * hits:   total number of hits
 #
 # == Example == 
@@ -655,20 +702,22 @@ var Breakpoint = {
         return me;
     },
     
+    
     # hit the breakpoint, e.g. do backtrace if we have tokens available
     hit: func(callback = nil) {
         me.hits[0] += 1;
-        me._hitsN[0].setIntValue(me.hits[0]);
+        me._hitsN[0].increment();
         me.tokens = me._enableN.getValue();
         if (me.tokens > 0) {
             me.tokens -= 1;
-            if (typeof(callback) == "func") {
+            if (isfunc(callback)) {
                 callback(me.hits[0], me.tokens);
             }
             else {
                 debug.backtrace(me.label, me.dump_locals, me.skip_level);
             } 
             me._enableN.setValue(me.tokens);
+            me._trace();
         }
         return me;
     },

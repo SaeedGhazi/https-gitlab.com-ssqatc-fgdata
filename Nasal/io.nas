@@ -101,7 +101,7 @@ var load_nasal = func(file, module = nil) {
     if (module == nil)
         module = split(".", split("/", file)[-1])[0];
 
-    printlog("info", "loading ", file, " into namespace ", module);
+    logprint(LOG_DEBUG, "loading ", file, " into namespace ", module);
 
     if (!contains(globals, module))
         globals[module] = {};

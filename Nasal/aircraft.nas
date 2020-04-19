@@ -356,7 +356,7 @@ var data = {
 	},
 	load: func {
 		if (io.stat(me.path) != nil) {
-			printlog("info", "loading aircraft data from ", me.path);
+			logprint(LOG_INFO, "loading aircraft data from ", me.path);
 			io.read_properties(me.path, props.globals);
 		}
 	},
@@ -376,7 +376,7 @@ var data = {
 	},
 	_save_: func {
 		size(me.catalog) or return;
-		printlog("debug", "saving aircraft data to ", me.path);
+		logprint(LOG_INFO, "saving aircraft data to ", me.path);
 		me.signalN.setBoolValue(1);
 		var data = props.Node.new();
 		foreach (var c; me.catalog) {

@@ -15,7 +15,7 @@ var RouteManagerDelegate = {
 
     departureChanged: func
     {
-        printlog('info', 'saw departure changed');
+        logprint(LOG_INFO, 'saw departure changed');
         me.flightplan.clearWPType('sid');
         if (me.flightplan.departure == nil)
             return;
@@ -36,7 +36,7 @@ var RouteManagerDelegate = {
 
     # and we have a SID
         var sid = me.flightplan.sid;
-        printlog('info', 'routing via SID ' ~ sid.id);
+        logprint(LOG_INFO, 'routing via SID ' ~ sid.id);
         me.flightplan.insertWaypoints(sid.route(me.flightplan.departure_runway), 1);
     },
 
@@ -57,7 +57,7 @@ var RouteManagerDelegate = {
 
         var initialApproachFix = nil;
         if (me.flightplan.star != nil) {
-            printlog('info', 'routing via STAR ' ~ me.flightplan.star.id);
+            logprint(LOG_INFO, 'routing via STAR ' ~ me.flightplan.star.id);
             var wps = me.flightplan.star.route(me.flightplan.destination_runway);
             if (wps != nil) {
                 me.flightplan.insertWaypoints(wps, -1);
@@ -75,20 +75,20 @@ var RouteManagerDelegate = {
              # IAF. This will likely cause an ugly direct leg, but that's
              # what the user asked for.
 
-                 printlog('info', "couldn't route approach based on specified IAF "
+                logprint(LOG_INFO, "couldn't route approach based on specified IAF "
                   ~ initialApproachFix.wp_name);
                  wps = me.flightplan.approach.route(nil);
              }
 
             if (wps == nil) {
-                printlog('warn', 'routing via approach ' ~ me.flightplan.approach.id
+                logprint(LOG_WARN, 'routing via approach ' ~ me.flightplan.approach.id
                     ~ ' failed entirely.');
             } else {
-                printlog('info', 'routing via approach ' ~ me.flightplan.approach.id);
+                logprint(LOG_INFO, 'routing via approach ' ~ me.flightplan.approach.id);
                 me.flightplan.insertWaypoints(wps, -1);
             }
         } else {
-            printlog('info', 'routing direct to runway ' ~ me.flightplan.destination_runway.id);
+            logprint(LOG_INFO, 'routing direct to runway ' ~ me.flightplan.destination_runway.id);
             # no approach, just use the runway waypoint
             var wp = createWPFrom(me.flightplan.destination_runway);
             wp.wp_role = 'approach';
@@ -98,14 +98,14 @@ var RouteManagerDelegate = {
 
     cleared: func
     {
-        printlog('info', "saw active flightplan cleared, deactivating");
+        logprint(LOG_INFO, "saw active flightplan cleared, deactivating");
         # see http://https://code.google.com/p/flightgear-bugs/issues/detail?id=885
         fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
     },
 
     endOfFlightPlan: func
     {
-        printlog('info', "end of flight-plan, deactivating");
+        logprint(LOG_INFO, "end of flight-plan, deactivating");
         fgcommand("activate-flightplan", props.Node.new({"activate": 0}));
     }
 };
@@ -131,7 +131,7 @@ var DefaultGPSDeleagte = {
 
         var m = { parents: [DefaultGPSDeleagte], flightplan:fp, landingCheck:nil };
 
-        printlog('info', 'creating default GPS FPDelegate');
+        logprint(LOG_INFO, 'creating default GPS FPDelegate');
 
         # tell the GPS C++ code we will do sequencing ourselves, so it can disable
         # its legacy logic for this
@@ -152,7 +152,7 @@ var DefaultGPSDeleagte = {
         var wow = getprop('gear/gear[0]/wow');
         var gs = getprop('velocities/groundspeed-kt');
         if (wow and (gs < 25))  {
-          printlog('info', 'GPS saw speed < 25kts on destination runway, end of route.');
+          logprint(LOG_INFO, 'GPS saw speed < 25kts on destination runway, end of route.');
           me.landingCheck.stop();
           # record touch-down time?
           me.flightplan.finish();
@@ -173,11 +173,11 @@ var DefaultGPSDeleagte = {
         if (!me.flightplan.active)
             return;
 
-        printlog('info', 'flightplan activated, default GPS to LEG mode');
+        logprint(LOG_INFO,'flightplan activated, default GPS to LEG mode');
         setprop(GPSPath ~ "/command", "leg");
 
         if (getprop(GPSPath ~ '/wp/wp[1]/from-flag')) {
-            printlog('info', 'at GPS activation, already passed active WP, sequencing');
+            logprint(LOG_INFO, '\tat GPS activation, already passed active WP, sequencing');
             me.sequence();
         }
     },
@@ -185,7 +185,7 @@ var DefaultGPSDeleagte = {
     deactivated: func
     {
         if (me._modeProp.getValue() == 'leg') {
-            printlog('info', 'flightplan deactivated, default GPS to OBS mode');
+            logprint(LOG_INFO, 'flightplan deactivated, default GPS to OBS mode');
             me._selectOBSMode();
         }
     },
@@ -193,7 +193,7 @@ var DefaultGPSDeleagte = {
     endOfFlightPlan: func
     {
         if (me._modeProp.getValue() == 'leg') {
-            printlog('info', 'end of flight-plan, switching GPS to OBS mode');
+            logprint(LOG_INFO, 'end of flight-plan, switching GPS to OBS mode');
             me._selectOBSMode();
         }
     },
@@ -204,7 +204,7 @@ var DefaultGPSDeleagte = {
             return;
 
         if (me._modeProp.getValue() == 'leg') {
-            printlog('info', 'flight-plan cleared, switching GPS to OBS mode');
+            logprint(LOG_INFO, 'flight-plan cleared, switching GPS to OBS mode');
             me._selectOBSMode();
         }
     },
@@ -220,22 +220,23 @@ var DefaultGPSDeleagte = {
             var index = me.flightplan.indexOfWP(getprop(GPSPath ~ '/wp/wp[1]/latitude-deg'),
                                                 getprop(GPSPath ~ '/wp/wp[1]/longitude-deg'));
             if (index >= 0) {
-                printlog("info", "default GPS reached Direct-To, resuming FP leg at " ~ index);
+                logprint(LOG_INFO, "default GPS reached Direct-To, resuming FP leg at " ~ index);
                 me.flightplan.current = index + 1;
                 setprop(GPSPath ~ "/command", "leg");
             } else {
                 # revert to OBS mode
-                printlog("info", "default GPS reached Direct-To, resuming to OSB");
+                logprint(LOG_INFO, "default GPS reached Direct-To, resuming to OBS");
+
                 me._selectOBSMode();
             }
         } else if (mode == 'leg') {
             # standard leq sequencing
             var nextIndex = me.flightplan.current + 1;
             if (nextIndex >= me.flightplan.numWaypoints()) {
-                printlog("info", "default GPS sequencing, finishing flightplan");
+                logprint(LOG_INFO, "default GPS sequencing, finishing flightplan");
                 me.flightplan.finish();
             } else {
-                printlog("info", "default GPS sequencing to next WP");
+                logprint(LOG_INFO, "default GPS sequencing to next WP");
                 me.flightplan.current = nextIndex;
             }
         } else {
@@ -258,7 +259,7 @@ var DefaultGPSDeleagte = {
         if (active == nil) return;
 
         if (active.alt_cstr_type == "at") {
-            printlog('info', 'new WP has valid altitude restriction, setting on AP');
+            logprint(LOG_INFO, 'Default GPS: new WP has valid altitude restriction, setting on AP');
             setprop('/autopilot/settings/target-altitude-ft', active.alt_cstr);
         }
 

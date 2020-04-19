@@ -34,6 +34,7 @@ var Node = {
     setValues      : func _setValues(me._g, arg),
     setIntValue    : func _setIntValue(me._g, arg),
     setBoolValue   : func _setBoolValue(me._g, arg),
+    toggleBoolValue: func _toggleBoolValue(me._g, arg),
     setDoubleValue : func _setDoubleValue(me._g, arg),
     # adjustValue works like setDoubleValue but adds the argument to the 
     # current value of the node

@@ -159,6 +159,12 @@ var DefaultGPSDeleagte = {
         }
     },
 
+    _captureCurrentCourse: func
+    {
+        var crs = getprop(GPSPath ~ "/desired-course-deg");
+        setprop(GPSPath ~ "/selected-course-deg", crs);
+    },
+
     _selectOBSMode: func
     {
         setprop(GPSPath ~ "/command", "obs");
@@ -186,6 +192,7 @@ var DefaultGPSDeleagte = {
     {
         if (me._modeProp.getValue() == 'leg') {
             logprint(LOG_INFO, 'flightplan deactivated, default GPS to OBS mode');
+            me._captureCurrentCourse();
             me._selectOBSMode();
         }
     },
@@ -194,6 +201,7 @@ var DefaultGPSDeleagte = {
     {
         if (me._modeProp.getValue() == 'leg') {
             logprint(LOG_INFO, 'end of flight-plan, switching GPS to OBS mode');
+            me._captureCurrentCourse();
             me._selectOBSMode();
         }
     },
@@ -205,6 +213,7 @@ var DefaultGPSDeleagte = {
 
         if (me._modeProp.getValue() == 'leg') {
             logprint(LOG_INFO, 'flight-plan cleared, switching GPS to OBS mode');
+            me._captureCurrentCourse();
             me._selectOBSMode();
         }
     },
@@ -227,6 +236,7 @@ var DefaultGPSDeleagte = {
                 # revert to OBS mode
                 logprint(LOG_INFO, "default GPS reached Direct-To, resuming to OBS");
 
+                me._captureCurrentCourse();
                 me._selectOBSMode();
             }
         } else if (mode == 'leg') {
@@ -235,6 +245,11 @@ var DefaultGPSDeleagte = {
             if (nextIndex >= me.flightplan.numWaypoints()) {
                 logprint(LOG_INFO, "default GPS sequencing, finishing flightplan");
                 me.flightplan.finish();
+            } elsif (me.flightplan.nextWP().wp_type == 'discontinuity') {
+                logprint(LOG_INFO, "default GPS sequencing DISCONTINUITY in flightplan, switching to OBS mode");
+
+                me._captureCurrentCourse();
+                me._selectOBSMode();
             } else {
                 logprint(LOG_INFO, "default GPS sequencing to next WP");
                 me.flightplan.current = nextIndex;

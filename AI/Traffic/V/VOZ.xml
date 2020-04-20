@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<!-- erj195/erj195-VirginBlue.xml - temporarily replaced with ERJ195/ERJ195-default.xml -->
 <trafficlist>
-  <!--Virgin Blue 73Gfleet-->
   <aircraft>
     <model>Aircraft/738/738-VirginAustralia.xml</model>
     <livery>VOZ</livery>
@@ -541,7 +539,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -555,7 +553,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -569,7 +567,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -583,7 +581,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -597,7 +595,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -611,7 +609,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -625,7 +623,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -639,7 +637,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -653,7 +651,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -667,7 +665,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -681,87 +679,13 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>VH-ZPK</registration>
     <heavy>false</heavy>
   </aircraft>
-  <!--        
-   <aircraft>
-        <model>Aircraft/E95/E95-default.xml</model>
-        <livery>VOZ</livery>
-        <airline>VOZ</airline>
-        <home-port>YSSY</home-port>
-        <required-aircraft>erj195</required-aircraft>
-        <actype>erj195</actype>
-        <offset>9</offset>
-        <radius>14</radius>
-        <flighttype>gate</flighttype>
-        <performance-class>jet_transport</performance-class>
-        <registration>VH-ZPL</registration>
-        <heavy>false</heavy>
-    </aircraft> 
-    <aircraft>
-        <model>Aircraft/E95/E95-default.xml</model>
-        <livery>VOZ</livery>
-        <airline>VOZ</airline>
-        <home-port>YSSY</home-port>
-        <required-aircraft>erj195</required-aircraft>
-        <actype>erj195</actype>
-        <offset>9</offset>
-        <radius>14</radius>
-        <flighttype>gate</flighttype>
-        <performance-class>jet_transport</performance-class>
-        <registration>VH-ZPM</registration>
-        <heavy>false</heavy>
-    </aircraft>
-     
-    <aircraft>
-        <model>Aircraft/E95/E95-default.xml</model>
-        <livery>VOZ</livery>
-        <airline>VOZ</airline>
-        <home-port>YSSY</home-port>
-        <required-aircraft>erj195</required-aircraft>
-        <actype>erj195</actype>
-        <offset>9</offset>
-        <radius>14</radius>
-        <flighttype>gate</flighttype>
-        <performance-class>jet_transport</performance-class>
-        <registration>VH-ZPN</registration>
-        <heavy>false</heavy>
-    </aircraft>
-              
-   <aircraft>
-        <model>Aircraft/E95/E95-default.xml</model>
-        <livery>VOZ</livery>
-        <airline>VOZ</airline>
-        <home-port>YSSY</home-port>
-        <required-aircraft>erj195</required-aircraft>
-        <actype>erj195</actype>
-        <offset>9</offset>
-        <radius>14</radius>
-        <flighttype>gate</flighttype>
-        <performance-class>jet_transport</performance-class>
-        <registration>VH-ZPO</registration>
-        <heavy>false</heavy>
-    </aircraft> 
-    <aircraft>
-        <model>Aircraft/E95/E95-default.xml</model>
-        <livery>VOZ</livery>
-        <airline>VOZ</airline>
-        <home-port>YSSY</home-port>
-        <required-aircraft>erj195</required-aircraft>
-        <actype>erj195</actype>
-        <offset>9</offset>
-        <radius>14</radius>
-        <flighttype>gate</flighttype>
-        <performance-class>jet_transport</performance-class>
-        <registration>VH-ZPQ</registration>
-        <heavy>false</heavy>
-    </aircraft>
-     -->
   <aircraft>
     <model>Aircraft/E95/E95-default.xml</model>
     <livery>VOZ</livery>
@@ -769,7 +693,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -783,7 +707,7 @@
     <home-port>YSSY</home-port>
     <required-aircraft>erj195</required-aircraft>
     <actype>erj195</actype>
-    <offset>9</offset>
+    <offset>0</offset>
     <radius>14</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
@@ -874,20 +798,18 @@
     <registration>VH-XFG</registration>
     <heavy>true</heavy>
   </aircraft>
-  <!--End of Aircraft Section-->
-  <!--Start of YSSY-YMML flights-->
   <flight>
     <callsign>VELOCITY808</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -897,12 +819,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>21:15:00</time>
+      <time>21:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -912,12 +834,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>21:45:00</time>
+      <time>21:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -927,12 +849,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>22:15:00</time>
+      <time>22:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>23:45:00</time>
+      <time>23:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -942,12 +864,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>00:45:00</time>
+      <time>00:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -957,12 +879,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>00:15:00</time>
+      <time>00:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>01:45:00</time>
+      <time>01:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -972,12 +894,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:15:00</time>
+      <time>01:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>02:45:00</time>
+      <time>02:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -987,12 +909,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1002,12 +924,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>03:15:00</time>
+      <time>03:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>04:45:00</time>
+      <time>04:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1017,12 +939,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>05:45:00</time>
+      <time>05:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1032,12 +954,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>05:15:00</time>
+      <time>05:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:45:00</time>
+      <time>06:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1047,12 +969,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>05:45:00</time>
+      <time>05:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1062,12 +984,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>06:15:00</time>
+      <time>06:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>07:45:00</time>
+      <time>07:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1077,12 +999,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>08:30:00</time>
+      <time>08:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1092,12 +1014,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1107,12 +1029,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:45:00</time>
+      <time>07:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1122,12 +1044,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:30:00</time>
+      <time>09:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1137,12 +1059,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:15:00</time>
+      <time>08:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1152,12 +1074,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>10:15:00</time>
+      <time>10:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1167,12 +1089,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>10:45:00</time>
+      <time>10:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1182,12 +1104,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>11:15:00</time>
+      <time>11:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1197,12 +1119,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>10:15:00</time>
+      <time>10:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>11:45:00</time>
+      <time>11:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1212,28 +1134,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>11:15:00</time>
+      <time>11:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>12:45:00</time>
+      <time>12:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--End YSSY-YMML flights start of YMML-YSSY-->
   <flight>
     <callsign>VELOCITY803</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>19:55:00</time>
+      <time>19:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>21:25:00</time>
+      <time>21:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1243,12 +1164,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>20:10:00</time>
+      <time>20:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>21:40:00</time>
+      <time>21:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1258,12 +1179,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>20:40:00</time>
+      <time>20:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1273,12 +1194,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>20:55:00</time>
+      <time>20:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>22:25:00</time>
+      <time>22:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1288,12 +1209,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>21:10:00</time>
+      <time>21:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1303,12 +1224,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>21:40:00</time>
+      <time>21:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1318,12 +1239,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>23:40:00</time>
+      <time>23:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1333,12 +1254,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1348,12 +1269,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>00:40:00</time>
+      <time>00:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1363,12 +1284,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>01:40:00</time>
+      <time>01:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1378,12 +1299,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>01:10:00</time>
+      <time>01:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>02:40:00</time>
+      <time>02:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1393,12 +1314,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>03:40:00</time>
+      <time>03:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1408,12 +1329,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1423,12 +1344,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>04:10:00</time>
+      <time>04:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:40:00</time>
+      <time>05:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1438,12 +1359,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>05:10:00</time>
+      <time>05:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1453,12 +1374,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>06:10:00</time>
+      <time>06:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1468,12 +1389,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>07:10:00</time>
+      <time>07:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1483,12 +1404,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:10:00</time>
+      <time>09:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1498,12 +1419,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:40:00</time>
+      <time>09:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1513,12 +1434,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>10:10:00</time>
+      <time>10:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1528,12 +1449,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>09:10:00</time>
+      <time>09:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>10:40:00</time>
+      <time>10:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1543,12 +1464,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>09:40:00</time>
+      <time>09:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>11:10:00</time>
+      <time>11:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1558,12 +1479,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>10:10:00</time>
+      <time>10:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>11:40:00</time>
+      <time>11:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1573,28 +1494,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>11:10:00</time>
+      <time>11:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>12:40:00</time>
+      <time>12:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--End YMML-YSSY flights start of YSSY-YBBN-->
   <flight>
     <callsign>VELOCITY901</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>21:30:00</time>
+      <time>21:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1604,12 +1524,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1619,12 +1539,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1634,12 +1554,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>00:30:00</time>
+      <time>00:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1649,12 +1569,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>00:00:00</time>
+      <time>00:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1664,12 +1584,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:00:00</time>
+      <time>01:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1679,12 +1599,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1694,12 +1614,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>04:30:00</time>
+      <time>04:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1709,12 +1629,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1724,12 +1644,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1739,12 +1659,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1754,12 +1674,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1769,12 +1689,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:30:00</time>
+      <time>08:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1784,12 +1704,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>09:30:00</time>
+      <time>09:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1799,12 +1719,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:30:00</time>
+      <time>08:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>10:00:00</time>
+      <time>10:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1814,12 +1734,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>10:30:00</time>
+      <time>10:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1829,12 +1749,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>10:00:00</time>
+      <time>10:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>11:30:00</time>
+      <time>11:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1844,12 +1764,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>10:30:00</time>
+      <time>10:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>12:00:00</time>
+      <time>12:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1859,28 +1779,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>11:00:00</time>
+      <time>11:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>12:30:00</time>
+      <time>12:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--End of YSSY-YBBN start of YBBN-YSSY-->
   <flight>
     <callsign>VELOCITY908</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>21:30:00</time>
+      <time>21:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1890,12 +1809,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1905,12 +1824,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1920,12 +1839,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1935,12 +1854,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>00:30:00</time>
+      <time>00:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1950,12 +1869,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>00:00:00</time>
+      <time>00:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1965,12 +1884,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>01:00:00</time>
+      <time>01:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1980,12 +1899,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -1995,12 +1914,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>04:30:00</time>
+      <time>04:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2010,12 +1929,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2025,12 +1944,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2040,12 +1959,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2055,12 +1974,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2070,12 +1989,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2085,12 +2004,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2100,12 +2019,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:30:00</time>
+      <time>09:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2115,13 +2034,13 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
+      <time>09:00:00.000</time>
       <callsign>VELOCITY562</callsign>
-      <time>09:00:00</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>10:30:00</time>
+      <time>10:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2131,12 +2050,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>10:00:00</time>
+      <time>10:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>11:30:00</time>
+      <time>11:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2146,28 +2065,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>11:00:00</time>
+      <time>11:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>12:30:00</time>
+      <time>12:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--End YBBN-YSSY start of YBBN-YPPH-->
   <flight>
     <callsign>VELOCITY464</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2177,28 +2095,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>00:05:00</time>
+      <time>00:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YPAD-->
   <flight>
     <callsign>VELOCITY1384</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:25:00</time>
+      <time>20:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>23:20:00</time>
+      <time>23:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2208,12 +2125,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>04:55:00</time>
+      <time>04:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2223,12 +2140,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>07:55:00</time>
+      <time>07:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2238,12 +2155,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>10:15:00</time>
+      <time>10:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>13:10:00</time>
+      <time>13:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2253,12 +2170,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>20:35:00</time>
+      <time>20:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:55:00</time>
+      <time>22:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2268,12 +2185,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>23:50:00</time>
+      <time>23:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2283,12 +2200,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>08:30:00</time>
+      <time>08:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>10:50:00</time>
+      <time>10:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2298,28 +2215,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>10:55:00</time>
+      <time>10:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>13:15:00</time>
+      <time>13:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBMK-->
   <flight>
     <callsign>VELOCITY601</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:25:00</time>
+      <time>20:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2329,12 +2245,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>00:20:00</time>
+      <time>00:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2344,12 +2260,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>01:05:00</time>
+      <time>01:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>02:40:00</time>
+      <time>02:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2359,12 +2275,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>04:50:00</time>
+      <time>04:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>06:25:00</time>
+      <time>06:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2374,12 +2290,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>08:35:00</time>
+      <time>08:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2389,12 +2305,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>11:20:00</time>
+      <time>11:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2404,12 +2320,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>21:50:00</time>
+      <time>21:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2419,12 +2335,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>23:50:00</time>
+      <time>23:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2434,12 +2350,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>00:50:00</time>
+      <time>00:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2449,12 +2365,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>04:30:00</time>
+      <time>04:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2464,12 +2380,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:20:00</time>
+      <time>08:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2479,28 +2395,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>09:05:00</time>
+      <time>09:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>10:25:00</time>
+      <time>10:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBTL-->
   <flight>
     <callsign>VELOCITY361</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>22:05:00</time>
+      <time>22:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2510,12 +2425,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:50:00</time>
+      <time>22:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>00:55:00</time>
+      <time>00:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2525,12 +2440,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>04:05:00</time>
+      <time>04:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2540,12 +2455,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>06:20:00</time>
+      <time>06:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2555,12 +2470,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>09:05:00</time>
+      <time>09:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2570,12 +2485,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>11:50:00</time>
+      <time>11:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2585,12 +2500,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>21:45:00</time>
+      <time>21:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2600,12 +2515,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>22:35:00</time>
+      <time>22:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>00:20:00</time>
+      <time>00:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2615,12 +2530,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>03:15:00</time>
+      <time>03:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2630,12 +2545,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>06:25:00</time>
+      <time>06:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2645,12 +2560,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2660,28 +2575,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>09:40:00</time>
+      <time>09:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>11:25:00</time>
+      <time>11:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBCS-->
   <flight>
     <callsign>VELOCITY771</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:40:00</time>
+      <time>20:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2691,12 +2605,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>23:45:00</time>
+      <time>23:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2706,12 +2620,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>01:10:00</time>
+      <time>01:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>03:40:00</time>
+      <time>03:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2721,12 +2635,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>03:40:00</time>
+      <time>03:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>06:10:00</time>
+      <time>06:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2736,12 +2650,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>06:45:00</time>
+      <time>06:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2751,12 +2665,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>12:15:00</time>
+      <time>12:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2766,12 +2680,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:05:00</time>
+      <time>22:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2781,12 +2695,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>23:45:00</time>
+      <time>23:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>01:50:00</time>
+      <time>01:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2796,12 +2710,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>02:45:00</time>
+      <time>02:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>04:50:00</time>
+      <time>04:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2811,12 +2725,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>04:10:00</time>
+      <time>04:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>06:15:00</time>
+      <time>06:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2826,12 +2740,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2841,28 +2755,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>11:50:00</time>
+      <time>11:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBRK-->
   <flight>
     <callsign>VELOCITY1235</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRK</port>
-      <time>23:55:00</time>
+      <time>23:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2872,12 +2785,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRK</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2887,12 +2800,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRK</port>
-      <time>06:45:00</time>
+      <time>06:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2902,12 +2815,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>07:45:00</time>
+      <time>07:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRK</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2917,12 +2830,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRK</port>
-      <time>00:25:00</time>
+      <time>00:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2932,12 +2845,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRK</port>
-      <time>04:45:00</time>
+      <time>04:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>05:50:00</time>
+      <time>05:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2947,12 +2860,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRK</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:20:00</time>
+      <time>08:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2962,28 +2875,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRK</port>
-      <time>10:25:00</time>
+      <time>10:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>11:30:00</time>
+      <time>11:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBPN-->
   <flight>
     <callsign>VELOCITY1113</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBPN</port>
-      <time>22:15:00</time>
+      <time>22:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -2993,12 +2905,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>03:40:00</time>
+      <time>03:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBPN</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3008,12 +2920,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBPN</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3023,28 +2935,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBPN</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>07:25:00</time>
+      <time>07:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YWLM-->
   <flight>
     <callsign>VELOCITY1100</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YWLM</port>
-      <time>21:20:00</time>
+      <time>21:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3054,12 +2965,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YWLM</port>
-      <time>00:50:00</time>
+      <time>00:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3069,12 +2980,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>06:20:00</time>
+      <time>06:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YWLM</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3084,12 +2995,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YWLM</port>
-      <time>21:50:00</time>
+      <time>21:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3099,12 +3010,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YWLM</port>
-      <time>01:20:00</time>
+      <time>01:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3114,28 +3025,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YWLM</port>
-      <time>06:50:00</time>
+      <time>06:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YSCB-->
   <flight>
     <callsign>VELOCITY1206</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>22:20:00</time>
+      <time>22:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3145,12 +3055,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>00:30:00</time>
+      <time>00:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3160,12 +3070,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>06:50:00</time>
+      <time>06:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3175,12 +3085,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>11:05:00</time>
+      <time>11:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3190,12 +3100,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>20:25:00</time>
+      <time>20:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3205,12 +3115,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>22:50:00</time>
+      <time>22:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>00:35:00</time>
+      <time>00:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3220,12 +3130,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>02:25:00</time>
+      <time>02:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>04:10:00</time>
+      <time>04:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3235,28 +3145,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>07:25:00</time>
+      <time>07:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>09:10:00</time>
+      <time>09:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBMA-->
   <flight>
     <callsign>VELOCITY1267</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMA</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3266,28 +3175,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMA</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>01:15:00</time>
+      <time>01:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-NFFN-->
   <flight>
     <callsign>VELOCITY175</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NFFN</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3297,28 +3205,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NFFN</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-AYPY-->
   <flight>
     <callsign>VELOCITY4191</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>00:00:00</time>
+      <time>00:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>AYPY</port>
-      <time>03:15:00</time>
+      <time>03:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3328,28 +3235,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>AYPY</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>07:05:00</time>
+      <time>07:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-NVVV-->
   <flight>
     <callsign>VELOCITY181</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>00:30:00</time>
+      <time>00:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NVVV</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3359,28 +3265,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NVVV</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>07:10:00</time>
+      <time>07:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YBHM-->
   <flight>
     <callsign>VELOCITY1497</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>01:40:00</time>
+      <time>01:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBHM</port>
-      <time>03:25:00</time>
+      <time>03:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3390,28 +3295,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBHM</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-KLAX-->
   <flight>
     <callsign>VELOCITY7</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>01:25:00</time>
+      <time>01:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>KLAX</port>
-      <time>14:10:00</time>
+      <time>14:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3421,28 +3325,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>KLAX</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>20:35:00</time>
+      <time>20:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-YPDN-->
   <flight>
     <callsign>VELOCITY446</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPDN</port>
-      <time>15:45:00</time>
+      <time>15:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>19:25:00</time>
+      <time>19:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3452,28 +3355,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>10:45:00</time>
+      <time>10:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPDN</port>
-      <time>15:00:00</time>
+      <time>15:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSCB-YSSY-->
   <flight>
     <callsign>VELOCITY629</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>21:15:00</time>
+      <time>21:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>22:05:00</time>
+      <time>22:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3483,12 +3385,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>23:50:00</time>
+      <time>23:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3498,12 +3400,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>03:20:00</time>
+      <time>03:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3513,12 +3415,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>04:50:00</time>
+      <time>04:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3528,12 +3430,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>06:50:00</time>
+      <time>06:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3543,12 +3445,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:50:00</time>
+      <time>07:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3558,28 +3460,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:50:00</time>
+      <time>09:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YSCB-->
   <flight>
     <callsign>VELOCITY634</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>22:35:00</time>
+      <time>22:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>23:25:00</time>
+      <time>23:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3589,12 +3490,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:05:00</time>
+      <time>23:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>23:55:00</time>
+      <time>23:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3604,12 +3505,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>06:35:00</time>
+      <time>06:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>07:25:00</time>
+      <time>07:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3619,12 +3520,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>09:50:00</time>
+      <time>09:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3634,28 +3535,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>10:30:00</time>
+      <time>10:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>11:20:00</time>
+      <time>11:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBCG-YSSY-->
   <flight>
     <callsign>VELOCITY512</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>23:05:00</time>
+      <time>23:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>00:35:00</time>
+      <time>00:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3665,12 +3565,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>00:05:00</time>
+      <time>00:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>01:35:00</time>
+      <time>01:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3680,12 +3580,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>01:05:00</time>
+      <time>01:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>02:35:00</time>
+      <time>02:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3695,12 +3595,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>03:05:00</time>
+      <time>03:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>04:35:00</time>
+      <time>04:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3710,12 +3610,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>04:05:00</time>
+      <time>04:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:35:00</time>
+      <time>05:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3725,12 +3625,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>05:05:00</time>
+      <time>05:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>06:35:00</time>
+      <time>06:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3740,12 +3640,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3755,12 +3655,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>08:05:00</time>
+      <time>08:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:35:00</time>
+      <time>09:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3770,12 +3670,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>09:05:00</time>
+      <time>09:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>10:35:00</time>
+      <time>10:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3785,28 +3685,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>10:05:00</time>
+      <time>10:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>11:35:00</time>
+      <time>11:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBCG-->
   <flight>
     <callsign>VELOCITY505</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>21:10:00</time>
+      <time>21:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3816,12 +3715,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>23:40:00</time>
+      <time>23:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3831,12 +3730,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>00:40:00</time>
+      <time>00:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3846,12 +3745,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:10:00</time>
+      <time>01:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>02:40:00</time>
+      <time>02:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3861,12 +3760,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>03:40:00</time>
+      <time>03:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3876,12 +3775,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3891,12 +3790,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>04:10:00</time>
+      <time>04:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>05:40:00</time>
+      <time>05:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3906,12 +3805,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>05:10:00</time>
+      <time>05:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3921,12 +3820,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>06:10:00</time>
+      <time>06:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3936,12 +3835,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:10:00</time>
+      <time>07:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3951,12 +3850,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>09:40:00</time>
+      <time>09:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3966,28 +3865,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>10:45:00</time>
+      <time>10:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPAD-YSSY-->
   <flight>
     <callsign>VELOCITY401</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>21:45:00</time>
+      <time>21:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -3997,12 +3895,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>00:45:00</time>
+      <time>00:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4012,12 +3910,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4027,28 +3925,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>07:45:00</time>
+      <time>07:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YPAD-->
   <flight>
     <callsign>VELOCITY402</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>20:45:00</time>
+      <time>20:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4058,12 +3955,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:40:00</time>
+      <time>23:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>00:55:00</time>
+      <time>00:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4073,12 +3970,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4088,28 +3985,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>08:30:00</time>
+      <time>08:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YSSY-->
   <flight>
     <callsign>VELOCITY552</callsign>
     <required-aircraft>A332</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>03:05:00</time>
+      <time>03:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4119,12 +4015,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4134,12 +4030,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>04:45:00</time>
+      <time>04:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:50:00</time>
+      <time>09:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4149,28 +4045,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>08:05:00</time>
+      <time>08:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>13:10:00</time>
+      <time>13:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YPPH-->
   <flight>
     <callsign>VELOCITY549</callsign>
     <required-aircraft>A332</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>01:00:00</time>
+      <time>01:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4180,12 +4075,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>04:20:00</time>
+      <time>04:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4195,12 +4090,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>07:20:00</time>
+      <time>07:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4210,12 +4105,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>12:35:00</time>
+      <time>12:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4225,28 +4120,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>09:55:00</time>
+      <time>09:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>15:00:00</time>
+      <time>15:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YBBN-->
   <flight>
     <callsign>VELOCITY463</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>23:35:00</time>
+      <time>23:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>03:55:00</time>
+      <time>03:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4256,12 +4150,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>04:30:00</time>
+      <time>04:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:50:00</time>
+      <time>08:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4270,12 +4164,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>14:45:00</time>
+      <time>14:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>19:15:00</time>
+      <time>19:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4285,12 +4179,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>04:05:00</time>
+      <time>04:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4300,28 +4194,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>12:50:00</time>
+      <time>12:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMHB-YSSY-->
   <flight>
     <callsign>VELOCITY1531</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>22:50:00</time>
+      <time>22:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>00:35:00</time>
+      <time>00:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4331,28 +4224,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YMHB-->
   <flight>
     <callsign>VELOCITY1528</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>20:25:00</time>
+      <time>20:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>22:20:00</time>
+      <time>22:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4362,28 +4254,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>05:40:00</time>
+      <time>05:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>07:25:00</time>
+      <time>07:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-KLAX-->
   <flight>
     <callsign>VELOCITY1</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>03:50:00</time>
+      <time>03:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>KLAX</port>
-      <time>17:10:00</time>
+      <time>17:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4393,28 +4284,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>KLAX</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>19:30:00</time>
+      <time>19:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBNA-->
   <flight>
     <callsign>VELOCITY1141</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>04:10:00</time>
+      <time>04:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBNA</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4424,28 +4314,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBNA</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:25:00</time>
+      <time>07:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YSCH-->
   <flight>
     <callsign>VELOCITY1165</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:35:00</time>
+      <time>01:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCH</port>
-      <time>02:40:00</time>
+      <time>02:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4455,12 +4344,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>04:45:00</time>
+      <time>04:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCH</port>
-      <time>05:50:00</time>
+      <time>05:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4470,12 +4359,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCH</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>04:20:00</time>
+      <time>04:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4485,28 +4374,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCH</port>
-      <time>06:20:00</time>
+      <time>06:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBCS-->
   <flight>
     <callsign>VELOCITY1413</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>22:55:00</time>
+      <time>22:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4516,12 +4404,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>04:25:00</time>
+      <time>04:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4531,12 +4419,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:30:00</time>
+      <time>08:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>11:45:00</time>
+      <time>11:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4546,12 +4434,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>20:10:00</time>
+      <time>20:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4561,12 +4449,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>03:25:00</time>
+      <time>03:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>06:25:00</time>
+      <time>06:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4576,28 +4464,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>11:10:00</time>
+      <time>11:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-NFTF-->
   <flight>
     <callsign>VELOCITY183</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>11:45:00</time>
+      <time>11:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NFTF</port>
-      <time>16:10:00</time>
+      <time>16:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4607,28 +4494,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NFTF</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:30:00</time>
+      <time>09:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-NFFN-->
   <flight>
     <callsign>VELOCITY155</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NFFN</port>
-      <time>04:35:00</time>
+      <time>04:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4638,28 +4524,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NFFN</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>08:35:00</time>
+      <time>08:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YMLT-->
   <flight>
     <callsign>VELOCITY1150</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMLT</port>
-      <time>01:00:00</time>
+      <time>01:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4669,28 +4554,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMLT</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>03:05:00</time>
+      <time>03:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBTL-->
   <flight>
     <callsign>VELOCITY1519</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBTL</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4700,28 +4584,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBTL</port>
-      <time>02:45:00</time>
+      <time>02:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:20:00</time>
+      <time>05:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YPDN-->
   <flight>
     <callsign>VELOCITY1351</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:40:00</time>
+      <time>23:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPDN</port>
-      <time>04:25:00</time>
+      <time>04:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4731,28 +4614,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPDN</port>
-      <time>05:10:00</time>
+      <time>05:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>09:30:00</time>
+      <time>09:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBHM-->
   <flight>
     <callsign>VELOCITY1281</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:45:00</time>
+      <time>23:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBHM</port>
-      <time>02:20:00</time>
+      <time>02:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4762,28 +4644,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBHM</port>
-      <time>02:55:00</time>
+      <time>02:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:15:00</time>
+      <time>05:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YAYE-->
   <flight>
     <callsign>VELOCITY1627</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>23:50:00</time>
+      <time>23:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YAYE</port>
-      <time>03:35:00</time>
+      <time>03:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4793,28 +4674,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YAYE</port>
-      <time>04:05:00</time>
+      <time>04:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>07:10:00</time>
+      <time>07:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YHBA-->
   <flight>
     <callsign>VELOCITY1555</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>00:05:00</time>
+      <time>00:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YHBA</port>
-      <time>01:55:00</time>
+      <time>01:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4824,28 +4704,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YHBA</port>
-      <time>02:25:00</time>
+      <time>02:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBRK-->
   <flight>
     <callsign>VELOCITY1567</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>00:25:00</time>
+      <time>00:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRK</port>
-      <time>02:35:00</time>
+      <time>02:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4855,28 +4734,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRK</port>
-      <time>03:05:00</time>
+      <time>03:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:05:00</time>
+      <time>05:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBSU-->
   <flight>
     <callsign>VELOCITY481</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:10:00</time>
+      <time>01:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBSU</port>
-      <time>02:45:00</time>
+      <time>02:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4886,28 +4764,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBSU</port>
-      <time>03:20:00</time>
+      <time>03:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-YBMK-->
   <flight>
     <callsign>VELOCITY1473</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:20:00</time>
+      <time>01:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBMK</port>
-      <time>03:50:00</time>
+      <time>03:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4917,28 +4794,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBMK</port>
-      <time>04:25:00</time>
+      <time>04:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-VTSP-->
   <flight>
     <callsign>VELOCITY4149</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>23:50:00</time>
+      <time>23:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>VTSP</port>
-      <time>06:20:00</time>
+      <time>06:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4948,12 +4824,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>VTSP</port>
-      <time>09:20:00</time>
+      <time>09:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>15:45:00</time>
+      <time>15:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4963,12 +4839,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>02:25:00</time>
+      <time>02:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPXM</port>
-      <time>06:25:00</time>
+      <time>06:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4978,12 +4854,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPXM</port>
-      <time>12:00:00</time>
+      <time>12:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>15:40:00</time>
+      <time>15:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -4993,12 +4869,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>19:55:00</time>
+      <time>19:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:15:00</time>
+      <time>22:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5008,12 +4884,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:55:00</time>
+      <time>20:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5023,12 +4899,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>21:55:00</time>
+      <time>21:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>00:15:00</time>
+      <time>00:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5038,12 +4914,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>23:55:00</time>
+      <time>23:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5053,12 +4929,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>00:55:00</time>
+      <time>00:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>03:15:00</time>
+      <time>03:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5068,12 +4944,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>01:55:00</time>
+      <time>01:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5083,12 +4959,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>03:55:00</time>
+      <time>03:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:15:00</time>
+      <time>06:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5098,12 +4974,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>04:55:00</time>
+      <time>04:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5113,12 +4989,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>06:55:00</time>
+      <time>06:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5128,12 +5004,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>08:55:00</time>
+      <time>08:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>11:15:00</time>
+      <time>11:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5143,12 +5019,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5158,12 +5034,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5173,12 +5049,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5188,12 +5064,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>01:10:00</time>
+      <time>01:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5203,12 +5079,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>00:00:00</time>
+      <time>00:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5218,12 +5094,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>01:00:00</time>
+      <time>01:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5233,12 +5109,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>06:10:00</time>
+      <time>06:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5248,12 +5124,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5263,28 +5139,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>10:10:00</time>
+      <time>10:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YMML-->
   <flight>
     <callsign>VELOCITY678</callsign>
     <required-aircraft>A332</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>01:45:00</time>
+      <time>01:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5294,12 +5169,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:05:00</time>
+      <time>06:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5309,12 +5184,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:05:00</time>
+      <time>09:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5324,12 +5199,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>12:35:00</time>
+      <time>12:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5339,12 +5214,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>16:00:00</time>
+      <time>16:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>19:35:00</time>
+      <time>19:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5354,12 +5229,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>01:15:00</time>
+      <time>01:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5369,12 +5244,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:00:00</time>
+      <time>23:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>03:15:00</time>
+      <time>03:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5384,12 +5259,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5399,12 +5274,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>07:30:00</time>
+      <time>07:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>11:45:00</time>
+      <time>11:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5414,28 +5289,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>10:15:00</time>
+      <time>10:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>14:30:00</time>
+      <time>14:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YPAD-->
   <flight>
     <callsign>VELOCITY714</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>01:15:00</time>
+      <time>01:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>04:10:00</time>
+      <time>04:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5445,12 +5319,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>09:55:00</time>
+      <time>09:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>12:50:00</time>
+      <time>12:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5460,12 +5334,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>00:35:00</time>
+      <time>00:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5475,28 +5349,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>07:50:00</time>
+      <time>07:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YPPD-->
   <flight>
     <callsign>VELOCITY1837</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPD</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5506,12 +5379,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>03:15:00</time>
+      <time>03:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPD</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5521,12 +5394,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>07:15:00</time>
+      <time>07:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPD</port>
-      <time>09:25:00</time>
+      <time>09:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5536,12 +5409,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPD</port>
-      <time>00:45:00</time>
+      <time>00:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>02:55:00</time>
+      <time>02:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5551,12 +5424,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPD</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5566,28 +5439,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPD</port>
-      <time>10:00:00</time>
+      <time>10:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>12:10:00</time>
+      <time>12:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YNWM-->
   <flight>
     <callsign>VELOCITY1875</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>22:20:00</time>
+      <time>22:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YNWM</port>
-      <time>00:05:00</time>
+      <time>00:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5597,12 +5469,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YNWM</port>
-      <time>10:30:00</time>
+      <time>10:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5612,12 +5484,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YNWM</port>
-      <time>00:45:00</time>
+      <time>00:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>02:35:00</time>
+      <time>02:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5627,28 +5499,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YNWM</port>
-      <time>11:10:00</time>
+      <time>11:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>13:00:00</time>
+      <time>13:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YPKA-->
   <flight>
     <callsign>VELOCITY1723</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPKA</port>
-      <time>00:50:00</time>
+      <time>00:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5658,12 +5529,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>05:45:00</time>
+      <time>05:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPKA</port>
-      <time>07:50:00</time>
+      <time>07:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5673,12 +5544,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPKA</port>
-      <time>01:25:00</time>
+      <time>01:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5688,28 +5559,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPKA</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>10:30:00</time>
+      <time>10:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YPDN-->
   <flight>
     <callsign>VELOCITY1433</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>00:15:00</time>
+      <time>00:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPDN</port>
-      <time>03:50:00</time>
+      <time>03:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5719,28 +5589,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPDN</port>
-      <time>21:30:00</time>
+      <time>21:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>01:35:00</time>
+      <time>01:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-YBRM-->
   <flight>
     <callsign>VELOCITY1485</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRM</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5750,12 +5619,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBRM</port>
-      <time>11:15:00</time>
+      <time>11:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5765,12 +5634,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRM</port>
-      <time>06:35:00</time>
+      <time>06:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>09:10:00</time>
+      <time>09:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5780,28 +5649,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBRM</port>
-      <time>11:45:00</time>
+      <time>11:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>14:20:00</time>
+      <time>14:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YPAD-->
   <flight>
     <callsign>VELOCITY211</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>21:10:00</time>
+      <time>21:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>22:35:00</time>
+      <time>22:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5811,12 +5679,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:10:00</time>
+      <time>22:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>23:35:00</time>
+      <time>23:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5826,12 +5694,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>01:35:00</time>
+      <time>01:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5841,12 +5709,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>03:35:00</time>
+      <time>03:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5856,12 +5724,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>06:05:00</time>
+      <time>06:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5871,12 +5739,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>05:40:00</time>
+      <time>05:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>07:05:00</time>
+      <time>07:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5886,12 +5754,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>08:05:00</time>
+      <time>08:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5901,12 +5769,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>09:05:00</time>
+      <time>09:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5916,12 +5784,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>09:40:00</time>
+      <time>09:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>11:05:00</time>
+      <time>11:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5931,12 +5799,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>10:10:00</time>
+      <time>10:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>11:35:00</time>
+      <time>11:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5946,12 +5814,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>20:40:00</time>
+      <time>20:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:00:00</time>
+      <time>22:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5961,12 +5829,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>21:05:00</time>
+      <time>21:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:25:00</time>
+      <time>22:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5976,12 +5844,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>00:10:00</time>
+      <time>00:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -5991,12 +5859,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6006,12 +5874,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:00:00</time>
+      <time>06:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6021,12 +5889,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>05:40:00</time>
+      <time>05:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6036,12 +5904,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6051,12 +5919,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6066,12 +5934,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>10:00:00</time>
+      <time>10:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6081,28 +5949,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>09:40:00</time>
+      <time>09:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>11:00:00</time>
+      <time>11:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YBCG-->
   <flight>
     <callsign>VELOCITY725</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>22:05:00</time>
+      <time>22:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6112,12 +5979,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:15:00</time>
+      <time>23:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>01:20:00</time>
+      <time>01:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6127,12 +5994,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>00:15:00</time>
+      <time>00:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>02:20:00</time>
+      <time>02:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6142,12 +6009,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>04:20:00</time>
+      <time>04:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6157,12 +6024,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>05:00:00</time>
+      <time>05:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>07:05:00</time>
+      <time>07:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6172,12 +6039,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>10:45:00</time>
+      <time>10:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6187,12 +6054,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>10:35:00</time>
+      <time>10:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>12:40:00</time>
+      <time>12:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6202,12 +6069,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>20:05:00</time>
+      <time>20:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6217,12 +6084,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>01:05:00</time>
+      <time>01:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6232,12 +6099,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>02:05:00</time>
+      <time>02:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>04:30:00</time>
+      <time>04:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6247,12 +6114,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6262,12 +6129,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>04:55:00</time>
+      <time>04:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>07:20:00</time>
+      <time>07:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6277,12 +6144,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>07:40:00</time>
+      <time>07:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>10:05:00</time>
+      <time>10:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6292,28 +6159,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>11:20:00</time>
+      <time>11:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>13:45:00</time>
+      <time>13:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YWLM-->
   <flight>
     <callsign>VELOCITY1593</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YWLM</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6323,28 +6189,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YWLM</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YWLM</port>
-      <time>05:35:00</time>
+      <time>05:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YMLT-->
   <flight>
     <callsign>VELOCITY1362</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:15:00</time>
+      <time>22:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMLT</port>
-      <time>23:25:00</time>
+      <time>23:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6354,12 +6219,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>03:10:00</time>
+      <time>03:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMLT</port>
-      <time>04:20:00</time>
+      <time>04:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6369,12 +6234,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMLT</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6384,12 +6249,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>10:40:00</time>
+      <time>10:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMLT</port>
-      <time>11:50:00</time>
+      <time>11:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6399,12 +6264,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMLT</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>21:00:00</time>
+      <time>21:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6414,12 +6279,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMLT</port>
-      <time>23:55:00</time>
+      <time>23:55:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>00:55:00</time>
+      <time>00:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6429,12 +6294,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMLT</port>
-      <time>04:50:00</time>
+      <time>04:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>05:50:00</time>
+      <time>05:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6444,28 +6309,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMLT</port>
-      <time>07:10:00</time>
+      <time>07:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YMHB-->
   <flight>
     <callsign>VELOCITY1316</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:40:00</time>
+      <time>22:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>23:55:00</time>
+      <time>23:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6475,12 +6339,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>01:15:00</time>
+      <time>01:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>02:30:00</time>
+      <time>02:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6490,12 +6354,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>03:25:00</time>
+      <time>03:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>04:40:00</time>
+      <time>04:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6505,12 +6369,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>07:45:00</time>
+      <time>07:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6520,12 +6384,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>09:45:00</time>
+      <time>09:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMHB</port>
-      <time>11:00:00</time>
+      <time>11:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6535,12 +6399,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>21:15:00</time>
+      <time>21:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6550,12 +6414,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>00:25:00</time>
+      <time>00:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>01:40:00</time>
+      <time>01:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6565,12 +6429,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6580,12 +6444,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>05:10:00</time>
+      <time>05:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:25:00</time>
+      <time>06:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6595,28 +6459,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMHB</port>
-      <time>08:15:00</time>
+      <time>08:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:30:00</time>
+      <time>09:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YSCB-->
   <flight>
     <callsign>VELOCITY257</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>21:15:00</time>
+      <time>21:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>22:20:00</time>
+      <time>22:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6626,12 +6489,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>22:30:00</time>
+      <time>22:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>23:35:00</time>
+      <time>23:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6641,12 +6504,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>02:35:00</time>
+      <time>02:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6656,12 +6519,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>04:35:00</time>
+      <time>04:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6671,12 +6534,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>05:25:00</time>
+      <time>05:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6686,12 +6549,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>08:05:00</time>
+      <time>08:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6701,12 +6564,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>09:15:00</time>
+      <time>09:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6716,12 +6579,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>21:40:00</time>
+      <time>21:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6731,12 +6594,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>22:35:00</time>
+      <time>22:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>23:45:00</time>
+      <time>23:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6746,12 +6609,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>00:05:00</time>
+      <time>00:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>01:15:00</time>
+      <time>01:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6761,12 +6624,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>03:05:00</time>
+      <time>03:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6776,12 +6639,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>05:05:00</time>
+      <time>05:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:15:00</time>
+      <time>06:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6791,12 +6654,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>07:00:00</time>
+      <time>07:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>08:10:00</time>
+      <time>08:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6806,28 +6669,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>09:50:00</time>
+      <time>09:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YPDN-->
   <flight>
     <callsign>VELOCITY1457</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>15:45:00</time>
+      <time>15:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPDN</port>
-      <time>20:15:00</time>
+      <time>20:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6837,28 +6699,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPDN</port>
-      <time>08:45:00</time>
+      <time>08:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>13:00:00</time>
+      <time>13:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YBCS-->
   <flight>
     <callsign>VELOCITY1293</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCS</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6868,28 +6729,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCS</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>06:55:00</time>
+      <time>06:55:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-NFFN-->
   <flight>
     <callsign>VELOCITY195</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NFFN</port>
-      <time>04:15:00</time>
+      <time>04:15:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6899,28 +6759,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NFFN</port>
-      <time>05:15:00</time>
+      <time>05:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>11:10:00</time>
+      <time>11:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YBSU-->
   <flight>
     <callsign>VELOCITY1507</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:35:00</time>
+      <time>23:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBSU</port>
-      <time>01:50:00</time>
+      <time>01:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6930,28 +6789,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBSU</port>
-      <time>02:20:00</time>
+      <time>02:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>04:50:00</time>
+      <time>04:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-NZAA-->
   <flight>
     <callsign>VELOCITY164</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>00:00:00</time>
+      <time>00:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZAA</port>
-      <time>03:40:00</time>
+      <time>03:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6961,28 +6819,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZAA</port>
-      <time>18:30:00</time>
+      <time>18:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YMIA-->
   <flight>
     <callsign>VELOCITY1615</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>00:25:00</time>
+      <time>00:25:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMIA</port>
-      <time>01:30:00</time>
+      <time>01:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -6992,28 +6849,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMIA</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-YWLM-->
   <flight>
     <callsign>VELOCITY1593</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>02:00:00</time>
+      <time>02:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YWLM</port>
-      <time>03:30:00</time>
+      <time>03:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7023,28 +6879,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YWLM</port>
-      <time>04:00:00</time>
+      <time>04:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>05:35:00</time>
+      <time>05:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPAD-YBCG-->
   <flight>
     <callsign>VELOCITY1447</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>23:20:00</time>
+      <time>23:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBCG</port>
-      <time>01:40:00</time>
+      <time>01:40:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7054,28 +6909,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBCG</port>
-      <time>02:15:00</time>
+      <time>02:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>05:05:00</time>
+      <time>05:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPAD-YSCB-->
   <flight>
     <callsign>VELOCITY580</callsign>
     <required-aircraft>erj195</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPAD</port>
-      <time>06:30:00</time>
+      <time>06:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSCB</port>
-      <time>08:05:00</time>
+      <time>08:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7085,29 +6939,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSCB</port>
-      <time>08:35:00</time>
+      <time>08:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPAD</port>
-      <time>10:25:00</time>
+      <time>10:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--NewZealand Flights-->
-  <!--YSSY-NZAA-->
   <flight>
     <callsign>VELOCITY52</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>00:35:00</time>
+      <time>00:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZAA</port>
-      <time>03:45:00</time>
+      <time>03:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7117,28 +6969,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZAA</port>
-      <time>20:00:00</time>
+      <time>20:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>23:50:00</time>
+      <time>23:50:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-NZCH-->
   <flight>
     <callsign>VELOCITY71</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZCH</port>
-      <time>17:00:00</time>
+      <time>17:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>21:25:00</time>
+      <time>21:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7148,28 +6999,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>08:20:00</time>
+      <time>08:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZCH</port>
-      <time>11:30:00</time>
+      <time>11:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-NZAA-->
   <flight>
     <callsign>VELOCITY184</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:30:00</time>
+      <time>20:30:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZAA</port>
-      <time>23:35:00</time>
+      <time>23:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7179,12 +7029,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZAA</port>
-      <time>11:05:00</time>
+      <time>11:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7194,12 +7044,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZAA</port>
-      <time>18:45:00</time>
+      <time>18:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7209,28 +7059,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZAA</port>
-      <time>08:35:00</time>
+      <time>08:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>12:35:00</time>
+      <time>12:35:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-NZCH-->
   <flight>
     <callsign>VELOCITY84</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>08:15:00</time>
+      <time>08:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZCH</port>
-      <time>11:45:00</time>
+      <time>11:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7240,28 +7089,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZCH</port>
-      <time>18:45:00</time>
+      <time>18:45:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:45:00</time>
+      <time>22:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-NZWN-->
   <flight>
     <callsign>VELOCITY64</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>20:05:00</time>
+      <time>20:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZWN</port>
-      <time>23:30:00</time>
+      <time>23:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7271,12 +7119,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>22:50:00</time>
+      <time>22:50:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZWN</port>
-      <time>02:10:00</time>
+      <time>02:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7286,12 +7134,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>09:00:00</time>
+      <time>09:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>NZWN</port>
-      <time>12:25:00</time>
+      <time>12:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7301,12 +7149,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZWN</port>
-      <time>18:00:00</time>
+      <time>18:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:05:00</time>
+      <time>22:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7316,12 +7164,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZWN</port>
-      <time>00:15:00</time>
+      <time>00:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>04:20:00</time>
+      <time>04:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7331,28 +7179,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>NZWN</port>
-      <time>03:00:00</time>
+      <time>03:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>07:05:00</time>
+      <time>07:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YSSY-WRRR-->
   <flight>
     <callsign>VELOCITY4145</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YSSY</port>
-      <time>01:05:00</time>
+      <time>01:05:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>WRRR</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7362,28 +7209,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WRRR</port>
-      <time>14:10:00</time>
+      <time>14:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YSSY</port>
-      <time>20:10:00</time>
+      <time>20:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YMML-WRRR-->
   <flight>
     <callsign>VELOCITY4153</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YMML</port>
-      <time>23:10:00</time>
+      <time>23:10:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>WRRR</port>
-      <time>05:30:00</time>
+      <time>05:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7393,28 +7239,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WRRR</port>
-      <time>08:40:00</time>
+      <time>08:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YMML</port>
-      <time>16:10:00</time>
+      <time>16:10:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YBBN-WRRR-->
   <flight>
     <callsign>VELOCITY4197</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>00:15:00</time>
+      <time>00:15:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>WRRR</port>
-      <time>06:45:00</time>
+      <time>06:45:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7424,12 +7269,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>YBBN</port>
-      <time>08:00:00</time>
+      <time>08:00:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>WRRR</port>
-      <time>14:30:00</time>
+      <time>14:30:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7439,28 +7284,27 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WRRR</port>
-      <time>16:20:00</time>
+      <time>16:20:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YBBN</port>
-      <time>22:05:00</time>
+      <time>22:05:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
-  <!--YPPH-WRRR-->
   <flight>
     <callsign>VELOCITY4138</callsign>
     <required-aircraft>73G</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
       <port>YPPH</port>
-      <time>11:35:00</time>
+      <time>11:35:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>WRRR</port>
-      <time>15:20:00</time>
+      <time>15:20:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>
@@ -7470,12 +7314,12 @@
     <fltrules>IFR</fltrules>
     <departure>
       <port>WRRR</port>
-      <time>06:40:00</time>
+      <time>06:40:00.000</time>
     </departure>
     <cruise-alt>330</cruise-alt>
     <arrival>
       <port>YPPH</port>
-      <time>10:25:00</time>
+      <time>10:25:00.000</time>
     </arrival>
     <repeat>24Hr</repeat>
   </flight>

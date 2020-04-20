@@ -1,6 +1,6 @@
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-	_setlistener("/sim/presets/latitude-deg", func {
-		printlog("info", "*** NEW LOCATION ***");
+	setlistener("/sim/presets/latitude-deg", func {
+		logprint(LOG_INFO, "*** NEW LOCATION ***");
 		settimer(func {
 			var typ = getprop("/sim/type");
 			var lat = getprop("/position/latitude-deg");

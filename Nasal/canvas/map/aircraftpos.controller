@@ -87,7 +87,7 @@ var update_layers = func {
 				l.update();
 		return;
 	} else
-	printlog(_MP_dbg_lvl, "update aircraft position");
+	logprint(_MP_dbg_lvl, "update aircraft position");
 	var (x,y,z) = pos.xyz();
 	me._pos.set_xyz(x,y,z);
 	me._time = time;

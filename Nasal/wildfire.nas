@@ -205,7 +205,7 @@ var parse_msg = func (source, msg) {
       var pos = Binary.decodeCoord(substr(msg, 6));
       ignite(pos, 0);
     } else {
-      printlog("alert", "wildfire.nas: Ignored ignite event flood from " ~
+      logprint(LOG_ALERT, "wildfire.nas: Ignored ignite event flood from " ~
                source.getNode("callsign").getValue());
     }
     mp_last_limited_event[i] = cur_time;
@@ -790,7 +790,7 @@ CAFire.load_event_log = func (filename, skip_ahead_until) {
   if (!fgcommand("loadxml",
                  props.Node.new({ filename   : filename,
                                   targetnode : logbase }))) {
-    printlog("alert", "Wildfire ... failed loading '" ~ filename ~ "'");
+    logprint(LOG_ALERT, "Wildfire ... failed loading '" ~ filename ~ "'");
     return;
   }
 
@@ -888,7 +888,7 @@ CAFire.update = func {
       me.next = 0;
     }
     if (me.cells_burning > 0) {
-      printlog("info",
+      logprint(LOG_INFO,
                "Wildfire: generation " ~ me.generation ~ " updating " ~
                size(me.remaining_work) ~" / " ~ me.cells_created ~
                " created cells. " ~ me.cells_burning ~ " burning cells.");
@@ -943,7 +943,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
   Binary = mp_broadcast.Binary;
 
-  # Create configuration properties if they don't exist already.
+  # Create configuration properties if they do not exist already.
   props.globals.initNode(CA_enabled_pp, 1, "BOOL");
   setlistener(CA_enabled_pp, func (n) {
     if (getprop("/sim/signals/reinit")) return; # Ignore resets.
@@ -980,14 +980,14 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
   # Determine the skip-ahead-to time, if any.
   var time_hack = time_string_to_epoch(getprop(time_hack_pp));
   if (time_hack > SimTime.current_time()) {
-    printlog("alert",
+    logprint(LOG_ALERT,
              "wildfire.nas: Ignored time hack " ~
              (SimTime.current_time() - time_hack) ~
              " seconds into the future.");
     # Skip ahead to current time instead.
     time_hack = -1;
   } elsif (time_hack > 0) {
-    printlog("alert",
+    logprint(LOG_ALERT,
              "wildfire.nas: Time hack " ~
              (SimTime.current_time() - time_hack) ~
              " seconds ago.");
@@ -1030,7 +1030,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
   });
 
-  printlog("info", "Wildfire ... initialized.");
+  logprint(LOG_INFO, "Wildfire ... initialized.");
 });
 ###############################################################################
 

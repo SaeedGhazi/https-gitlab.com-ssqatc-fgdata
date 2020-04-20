@@ -27,7 +27,7 @@ contrailTimer = maketimer(30, updateContrail);
 contrailTimer.simulatedTime = 1;
 
 _setlistener("/sim/signals/nasal-dir-initialized", func {
-    printlog ("debug", "init contrail");
+    logprint(LOG_INFO, "Init contrail");
     props.globals.initNode("environment/pressure-inhg", 1, "DOUBLE");
     props.globals.initNode("environment/temperature-degc", 1, "DOUBLE");
     props.globals.initNode("environment/contrail", 1, "BOOL");

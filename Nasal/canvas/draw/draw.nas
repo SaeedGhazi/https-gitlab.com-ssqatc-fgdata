@@ -276,7 +276,7 @@ draw.marksStyle = {
 draw.marksLinear = func(cgroup, orientation, num_marks, interval, style)
 {
     if (!isa(style, draw.marksStyle)) {
-        printlog("alert", "draw.marks: invalid style argument.");
+        logprint(DEV_WARN, "draw.marks: invalid style argument.");
         return nil;
     }
     orientation = chr(string.tolower(orientation[0]));
@@ -347,7 +347,7 @@ draw.marksCircular = func(cgroup, radius, interval, phi_start = 0, phi_stop = 36
         style = draw.marksStyle.new();
     }
     if (!isa(style, draw.marksStyle)) {
-        printlog("info", "draw.marksCircular: invalid style argument");
+        logprint(DEV_WARN, "draw.marksCircular: invalid style argument");
         return nil;
     }
     # normalize

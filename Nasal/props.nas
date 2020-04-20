@@ -288,11 +288,11 @@ var createNodeObjectsFromHash = func (property_list, namespace = nil) {
         namespace = caller(1)[0];
     }
     if (typeof(namespace) != "hash") {
-        printlog("warning", "createNodeObjectsFromHash: Error, namespace argument is not a hash.");
+        logprint(LOG_WARN, "createNodeObjectsFromHash: Error, namespace argument is not a hash.");
         return nil;
     }
     if (typeof(property_list) != "hash") {
-        printlog("warning", "createNodeObjectsFromHash: Error, property_list argument is not a hash.");
+        logprint(LOG_WARN, "createNodeObjectsFromHash: Error, property_list argument is not a hash.");
         return nil;
     }
     foreach (key; keys(property_list)) {
@@ -380,7 +380,7 @@ var _cond = func(p) {
     if(n == "less-than-equals") return !_cond_cmp(p, 1);
     if(n == "greater-than-equals") return !_cond_cmp(p, -1);
     if(n == "property") return !!getprop(p.getValue());
-    printlog("alert", "condition: invalid operator ", n);
+    logprint(LOG_ALERT, "condition: invalid operator ", n);
     dump(p);
     return nil;
 }
@@ -389,7 +389,7 @@ var _cond_cmp = func(p, op) {
     var left = p.getChild("property", 0, 0);
     if(left != nil) { left = getprop(left.getValue()); }
     else {
-        printlog("alert", "condition: no left value");
+        logprint(LOG_ALERT, "condition: no left value");
         dump(p);
         return nil;
     }
@@ -399,13 +399,13 @@ var _cond_cmp = func(p, op) {
         right = p.getChild("value", 0, 0);
         if(right != nil) { right = right.getValue(); }
         else {
-            printlog("alert", "condition: no right value");
+            logprint(LOG_ALERT, "condition: no right value");
             dump(p);
             return nil;
         }
     }
     if(left == nil or right == nil) {
-        printlog("alert", "condition: comparing with nil");
+        logprint(LOG_ALERT, "condition: comparing with nil");
         dump(p);
         return nil;
     }

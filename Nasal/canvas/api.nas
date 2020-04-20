@@ -537,7 +537,7 @@ var Map = {
   addLayer: func(factory, type_arg=nil, priority=nil, style=nil, opts=nil, visible=1)
   {
     if(contains(me.layers, type_arg))
-      printlog("warn", "addLayer() warning: overwriting existing layer:", type_arg);
+      logprint(DEV_ALERT, "addLayer() warning: overwriting existing layer:", type_arg);
 
     var options = opts;
     # Argument handling
@@ -625,7 +625,7 @@ var Map = {
       if (predicate == nil or predicate(layer))
         layer.update();
     }
-    printlog(_MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update map()");
+    logprint(_MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update map()");
     me.setBool("update", 1); # update any coordinates that changed, to avoid floating labels etc.
     return me;
   },

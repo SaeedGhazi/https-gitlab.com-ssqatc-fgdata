@@ -179,7 +179,7 @@ var AircraftCenter = {
           var acft_id = variant;
           b.listen("clicked", func
           {
-            printlog("warn", "Switching to aircraft '" ~ acft_id ~ "'");
+            logprint(LOG_WARN, "Switching to aircraft '" ~ acft_id ~ "'");
             fgcommand("switch-aircraft", props.Node.new({"aircraft": acft_id}));
           });
           launch_bar.addItem(b);

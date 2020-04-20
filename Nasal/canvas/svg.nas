@@ -22,10 +22,10 @@ var parsesvg = func(group, path, options = nil)
     die("File not found: "~path);
   path = file_path;
 
-  var _printlog = printlog;
-  var printlog = func(level, msg)
+  
+  var logpr = func(level, msg)
   {
-    _printlog(level, "parsesvg: " ~ msg ~ " [path='" ~ path ~ "']");
+    logprint(level, "parsesvg: "~msg~" [path='"~ path~"']");
   };
 
   var custom_font_mapper = options['font-mapper'];
@@ -98,7 +98,7 @@ var parsesvg = func(group, path, options = nil)
            cur_clip['x'] + cur_clip['width'], cur_clip['y'] + cur_clip['height']);
       }
       else {
-        printlog("warn", "Invalid or unsupported clip for element '" ~ id ~ "'");
+        logpr(LOG_WARN, "Invalid or unsupported clip for element '" ~ id ~ "'");
       }
       cur_clip = nil;
     }
@@ -192,13 +192,12 @@ var parsesvg = func(group, path, options = nil)
         if( size(values) == 6 )
           stack[-1].createTransform(values);
         else
-          printlog(
-            "warn",
+          logpr(LOG_WARN,
             "Invalid arguments to matrix transform: " ~ debug.string(values, 0)
           );
       }
       else
-        printlog("warn", "Unknown transform type: '" ~ type ~ "'");
+        logpr(LOG_WARN, "Unknown transform type: '" ~ type ~ "'");
     }
   };
 
@@ -278,19 +277,17 @@ var parsesvg = func(group, path, options = nil)
                          args[i + 6] );
         }
 
-        if( math.mod(size(args), 7) > 0 )
-          printlog(
-            "warn",
-            "Invalid number of coords for cmd 'a' "
-            ~ "(" ~ size(args) ~ " mod 7 != 0)"
-          );
+        if( math.mod(size(args), 7) > 0 ) {
+          logpr(LOG_WARN, "Invalid number of coords for cmd 'a' ("~
+            size(args)~" mod 7 != 0)");
+        }
       }
       else
       {
         var cmd_vg = cmd_map[cmd];
         if( cmd_vg == nil )
         {
-          printlog("warn", "command not found: '" ~ cmd ~ "'");
+          logpr(LOG_WARN, "command not found: '" ~ cmd ~ "'");
           continue;
         }
 
@@ -312,10 +309,8 @@ var parsesvg = func(group, path, options = nil)
           }
 
           if( math.mod(size(args), num_coords) > 0 )
-            printlog(
-              "warn",
-              "Invalid number of coords for cmd '" ~ cmd ~ "' "
-              ~ "(" ~ size(args) ~ " mod " ~ num_coords ~ " != 0)"
+            logpr(LOG_WARN,"Invalid number of coords for cmd '" ~ cmd ~ "' ("
+              ~size(args)~" mod "~num_coords~" != 0)"
             );
         }
       }
@@ -439,7 +434,7 @@ var parsesvg = func(group, path, options = nil)
       }
       else
       {
-        printlog("info", "Skipping unknown element in <defs>: <" ~ name ~ ">");
+        logpr(LOG_INFO, "Skipping unknown element in <defs>: <" ~ name ~ ">");
         skip = level;
       }
       return;
@@ -456,7 +451,7 @@ var parsesvg = func(group, path, options = nil)
 
       cur_clip = clip_dict[clip_id];
       if( cur_clip == nil )
-        printlog("warn", "Clip not found: '" ~ clip_id ~ "'");
+        logpr(LOG_WARN, "Clip not found: '" ~ clip_id ~ "'");
     }
 
     if( style['display'] == 'none' )
@@ -565,11 +560,11 @@ var parsesvg = func(group, path, options = nil)
     {
       var ref = attr["xlink:href"];
       if( ref == nil or size(ref) < 2 or ref[0] != `#` )
-        return printlog("warn", "Invalid or missing href: '" ~ ref ~ "'");
+        return logpr(LOG_WARN, "Invalid or missing href: '" ~ ref ~ "'");
 
       var el_src = id_dict[ substr(ref, 1) ];
       if( el_src == nil )
-        return printlog("warn", "Reference to unknown element '" ~ ref ~ "'");
+        return logpr(LOG_WARN, "Reference to unknown element '" ~ ref ~ "'");
 
       # Create new element and copy sub branch from source node
       pushElement(el_src._node.getName(), attr['id']);
@@ -591,10 +586,10 @@ var parsesvg = func(group, path, options = nil)
       # by adding another backslash - otherwise parse error anywhere below 
       if (ref == nil or find("\\", ref) > -1)
       {
-        return printlog("info", "Invalid or missing href in image tag: '" ~ ref ~ "'");
+        return logpr(LOG_INFO, "Invalid or missing href in image tag: '" ~ ref ~ "'");
       }
       if (substr(ref, 0, 5) == "data:") {
-        return printlog("info", "Unsupported embedded image");
+        return logpr(LOG_INFO, "Unsupported embedded image");
       }
       elsif (substr(ref, 0, 5) != "file:") {
         # absolute paths seem to start with "file:"
@@ -614,7 +609,7 @@ var parsesvg = func(group, path, options = nil)
     }
     else
     {
-      printlog("info", "Skipping unknown element '" ~ name ~ "'");
+      logpr(LOG_INFO, "Skipping unknown element '" ~ name ~ "'");
       skip = level;
       return;
     }
@@ -764,7 +759,7 @@ var parsesvg = func(group, path, options = nil)
       msg ~= (i == 1 ? "\n  at " : "\n  called from: ")
            ~ err[i] ~ ", line " ~ err[i + 1]
     }
-    printlog("alert", msg ~ "\n ");
+    logpr(LOG_ALERT, msg ~ "\n ");
 
     return 0;
   }

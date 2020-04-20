@@ -269,7 +269,7 @@ var DefaultGPSDeleagte = {
             me.landingCheck = nil; # delete timer
         }
 
-        #printlog('info', 'saw current WP changed, now ' ~ me.flightplan.current);
+        #logprint(LOG_INFO, 'saw current WP changed, now ' ~ me.flightplan.current);
         var active = me.flightplan.currentWP();
         if (active == nil) return;
 

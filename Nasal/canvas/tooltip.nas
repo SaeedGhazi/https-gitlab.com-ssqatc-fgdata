@@ -134,8 +134,7 @@ var Tooltip = {
         # wrap mapping in 'call' to catch conversion errors
         var val_mapped = call(me._remapValue, [val], me, nil, var err = []);
         if( size(err) ) {
-          printlog(
-            "warn",
+          logprint(LOG_WARN,
             "Tooltip: failed to remap " ~ debug.string(p, 0) ~ ":\n"
             ~ debug.string(err, 0)
           );

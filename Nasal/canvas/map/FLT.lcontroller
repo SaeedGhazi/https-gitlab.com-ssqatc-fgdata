@@ -43,10 +43,10 @@ var del = func() {
 };
 
 var searchCmd = func() {
-	printlog(_MP_dbg_lvl, "Running query: FLT");
+	logprint(_MP_dbg_lvl, "Running query: FLT");
 	var hist = aircraft.history();
 	var path = hist.pathForHistory(1000);
-	printlog(_MP_dbg_lvl, "FLT size: "~size(path));
+	logprint(_MP_dbg_lvl, "FLT size: "~size(path));
 	while (size(me.models) <= me.active_path) append(me.models, []);
 	for (var i=size(me.models[me.active_path]); i<size(path); i+=1)
 		me.layer.append(me.active_path, path[i], me.models[me.active_path]);

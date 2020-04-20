@@ -48,8 +48,8 @@ var EFIS = {
     # object_names: vector of same size and order as display_names, containing 
     #   3D object names for canvas placement of the DisplayUnits
     new: func(display_names, object_names, canvas_settings=nil) {
-        if (typeof(display_names) != "vector") {
-            printlog("error", "EFIS.new: 'display_names' not a vector!");
+        if (!isvec(display_names)) {
+            logprint(DEV_ALERT, "EFIS.new: 'display_names' not a vector!");
             return;
         }
         var obj = {
@@ -63,14 +63,14 @@ var EFIS = {
             active_sources: [],
             powerN: nil,
         };
-        if (object_names != nil and typeof(object_names) == "vector"
+        if (object_names != nil and isvec(object_names)
             and size(display_names) == size(object_names))
         {
             foreach (var i; display_names) {
                 append(obj.active_sources, EFIS.NO_SRC);
             }
             var settings = obj.defaultcanvas_settings;
-            if (canvas_settings != nil and typeof(canvas_settings) == "hash") {
+            if (canvas_settings != nil and ishash(canvas_settings)) {
                 foreach (var key; keys(canvas_settings)) {
                     settings[key] = canvas_settings[key];
                 }
@@ -96,7 +96,7 @@ var EFIS = {
         #print("setDisplaySource unit "~du_id~" src "~source_id~" prev "~prev_source);
         if (prev_source >= 0) {
             if (me.source_records[prev_source] == nil)
-                printlog("error", "_setDisplaySource error: prev: "~prev_source~" #"~size(me.source_records));
+                logprint(LOG_ALERT, "_setDisplaySource error: prev: "~prev_source~" #"~size(me.source_records));
             var n = me.source_records[prev_source].visibleN;
             n.setValue(n.getValue() - 1);
         }

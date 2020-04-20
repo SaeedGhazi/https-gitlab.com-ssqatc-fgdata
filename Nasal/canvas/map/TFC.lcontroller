@@ -83,7 +83,7 @@ var searchCmd  = func;
 
 var searchCmd_default = func {
 	# TODO: this would be a good candidate for splitting across frames
-	printlog(_MP_dbg_lvl, "Doing query: "~name);
+	logprint(_MP_dbg_lvl, "Doing query: "~name);
 
 	if (me.map.getRange() == nil) return;
 
@@ -105,7 +105,7 @@ var searchCmd_default = func {
 		var (lat,lon) = (t.getValue("position/latitude-deg"),
 		                 t.getValue("position/longitude-deg"));
 		if (lat == nil or lon == nil) {
-			printlog("alert", "lat/lon was nil for AI node "~t.getPath());
+			logprint(LOG_ALERT, "lat/lon was nil for AI node "~t.getPath());
 			continue;
 		}
 

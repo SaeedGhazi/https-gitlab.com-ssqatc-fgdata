@@ -561,7 +561,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 	# map ATC messages to the screen log and to the voice subsystem
 	var map = func(type, msg, r, g, b, cond = nil) {
-		printlog("info", "{", type, "} ", msg);
+		logprint(LOG_INFO, "{", type, "} ", msg);
 		setprop("/sim/sound/voices/" ~ type, msg);
 
 		if (cond == nil or cond())
@@ -584,7 +584,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 				}
 				m ~= "I say again: " ~ msg;
 				atclast.setValue(m);
-				printlog("debug", "ATC_LAST_MESSAGE: ", m);
+				logprint(LOG_DEBUG, "ATC_LAST_MESSAGE: ", m);
 			}
 		}
 	}

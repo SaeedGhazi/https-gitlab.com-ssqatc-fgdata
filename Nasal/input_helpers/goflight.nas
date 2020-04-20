@@ -261,7 +261,7 @@ var mcp = {
     watchPropertyForLED: func(prop, ledName)
     {
         if (!contains(me._ledNames, ledName)) {
-            printlog('warn', 'Unknown GoFlight MCP LED:' ~ ledName);
+            logprint(LOG_WARN, 'Unknown GoFlight MCP LED:' ~ ledName);
             return;
         }
 

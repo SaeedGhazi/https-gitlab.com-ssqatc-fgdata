@@ -187,7 +187,7 @@ var MessageBox = {
 
     if( io.stat(me._save_path) != nil )
     {
-      printlog("info", "Load dialog selection from '" ~ me._save_path ~ "'");
+      logprint(LOG_INFO, "Load dialog selection from '" ~ me._save_path ~ "'");
       return int(io.readfile(me._save_path));
     }
 
@@ -195,7 +195,7 @@ var MessageBox = {
   },
   _saveSelection: func(sel)
   {
-    printlog("info", "Saving dialog selection to '" ~ me._save_path ~ "'");
+    logprint(LOG_INFO, "Saving dialog selection to '" ~ me._save_path ~ "'");
 
     # ensure directory exists
     os.path.new(me._save_path).create_dir();

@@ -118,10 +118,8 @@ var setlistener = func(node, fn, init = 0, runtime = 1) {
     var id = _setlistener(node, func(chg, lst, mode, is_child) {
         fn(props.wrapNode(chg), props.wrapNode(lst), mode, is_child);
     }, init, runtime);
-    if(__.log_level <= 2) {
-        var c = caller(1);
-        printf("setting listener #%d in %s, line %s", id, c[2], c[3]);
-    }
+    var c = caller();
+    logprint(LOG_DEBUG, "setting listener #",id," in ",c[2],":",c[3]);  
     return id;
 }
 
@@ -164,17 +162,14 @@ var values = func(hash) {
     return vec;
 }
 
+# printlog is depricated, use logprint instead
 
-##
-# Print log messages in appropriate --log-level.
-# Usage: printlog("warn", "...");
-# The underscore hash prevents helper functions/variables from
-# needlessly polluting the global namespace.
-#
 __.dbg_types = { none:0, bulk:1, debug:2, info:3, warn:4, alert:5 };
-__.log_level = __.dbg_types[getprop("/sim/logging/priority")];
-var printlog = func(level) {
-    if(__.dbg_types[level] >= __.log_level) call(print, arg);
+var printlog = func(level, msg...) {
+    var c = caller();
+    logprint(LOG_ALERT, "Deprecated printlog() call from ",c[2]~":"~c[3]~
+        ", please use logprint instead.");
+    logprint([__.dbg_types[level]]~msg);
 }
 
 

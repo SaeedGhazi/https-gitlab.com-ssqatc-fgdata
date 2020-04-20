@@ -19,10 +19,10 @@
 ## 	- searchCmd -> filtering
 ##
 ##  APIs to be wrapped for each layer:
-##  printlog(), die(), debug.bt(), benchmark()
+##  logprint(), die(), debug.bt(), benchmark()
 
-var _MP_dbg_lvl = "debug";
-#var _MP_dbg_lvl = "alert";
+var _MP_dbg_lvl = LOG_DEBUG;
+#var _MP_dbg_lvl = DEV_ALERT;
 
 var makedie = func(prefix) func(msg) globals.die(prefix~" "~msg);
 
@@ -475,7 +475,7 @@ var Symbol = {
 				var tp = typeof(val);
 				if(tp != 'scalar'){
 					val = '';
-					#printlog("warn", "formattedString: invalid type for "~prop~" (" ~ tp ~ ")");
+					#logprint(LOG_WARN, "formattedString: invalid type for "~prop~" (" ~ tp ~ ")");
 				} else {
 					append(args, val);
 				}
@@ -722,7 +722,7 @@ var DotSym = {
 		return m;
 	},
 	del: func() {
-		printlog(_MP_dbg_lvl, "DotSym.del()");
+		logprint(_MP_dbg_lvl, "DotSym.del()");
 		me.deinit();
 		call(Symbol.del, nil, me);
 		me.element.del();
@@ -852,7 +852,7 @@ var LineSymbol = {
 	draw: func() {
 		if (!me.needs_update) return;
 		me.callback('draw_before');
-		printlog(_MP_dbg_lvl, "redrawing a LineSymbol "~me.layer.type);
+		logprint(_MP_dbg_lvl, "redrawing a LineSymbol "~me.layer.type);
 		me.element.reset();
 		var cmds = [];
 		var coords = [];
@@ -879,7 +879,7 @@ var LineSymbol = {
 		me.callback('draw_after');
 	},
 	del: func() {
-		printlog(_MP_dbg_lvl, "LineSymbol.del()");
+		logprint(_MP_dbg_lvl, "LineSymbol.del()");
 		me.deinit();
 		call(Symbol.del, nil, me);
 		me.element.del();
@@ -1060,7 +1060,7 @@ var MultiSymbolLayer = {
 		}
 	},
 	del: func() {
-		printlog(_MP_dbg_lvl, "MultiSymbolLayer.del()");
+		logprint(_MP_dbg_lvl, "MultiSymbolLayer.del()");
 		foreach (var e; me.list)
 			e.del();
 		call(SymbolLayer.del, nil, me);
@@ -1094,13 +1094,13 @@ var MultiSymbolLayer = {
 	},
 	# Adds a symbol.
 	onAdded: func(model) {
-		printlog(_MP_dbg_lvl, "Adding symbol of type "~me.type);
+		logprint(_MP_dbg_lvl, "Adding symbol of type "~me.type);
 		if (model == nil) __die("MultiSymbolLayer: Model was nil for layer:"~debug.string(me.type)~ " Hint:check your equality check method!");
 		append(me.list, Symbol.new(me.type, me.group, me, model));
 	},
 	# Removes a symbol.
 	onRemoved: func(model) {
-		printlog(_MP_dbg_lvl, "Deleting symbol of type "~me.type);
+		logprint(_MP_dbg_lvl, "Deleting symbol of type "~me.type);
 		if (!me.delsym(model)) __die("model not found");
 		try_aux_method(model, "del");
 		#call(func model.del(), nil, var err = []); # try...
@@ -1121,7 +1121,7 @@ var NavaidSymbolLayer = {
 	make: func(query) {
 		#print("Creating searchCmd() for NavaidSymbolLayer:", query);
 		return func {
-			printlog(_MP_dbg_lvl, "Running query:", query);
+			logprint(_MP_dbg_lvl, "Running query:", query);
 			var range = me.map.getRange();
 			if (range == nil) return;
 			return positioned.findWithinRange(me.map.getPosCoord(), range, query);
@@ -1177,7 +1177,7 @@ var SingleSymbolLayer = {
 		}
 	},
 	del: func() {
-		printlog(_MP_dbg_lvl, "SymbolLayer.del()");
+		logprint(_MP_dbg_lvl, "SymbolLayer.del()");
 		me.symbol.del();
 		call(SymbolLayer.del, nil, me);
 	},
@@ -1433,7 +1433,7 @@ var TileLayer = {
 		}
 	},
 	del: func() {
-		printlog(_MP_dbg_lvl, "SymbolLayer.del()");
+		logprint(_MP_dbg_lvl, "SymbolLayer.del()");
 		call(OverlayLayer.del, nil, me);
 	},
 }; # of TileLayer

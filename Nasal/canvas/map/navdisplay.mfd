@@ -376,7 +376,7 @@ var NavDisplay = {
 			if(!layer['isMapStructure']) # set up an old INEFFICIENT and SLOW layer
 				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( me.map, layer.name, controller );
 			else {
-				printlog(canvas._MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
+				logprint(canvas._MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
 				var opt = me.options != nil and me.options[layer.name] != nil ? me.options[layer.name] : nil;
 				if (opt == nil and contains(layer, 'options'))
 					opt = layer.options;
@@ -410,7 +410,7 @@ var NavDisplay = {
 					l.predicate = func {
 						var t = systime();
 						call(_predicate, arg, me);
-						printlog(canvas._MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update layer "~l.name);
+						logprint(canvas._MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update layer "~l.name);
 					}
 				})();
 			}
@@ -795,7 +795,7 @@ var NavDisplay = {
 		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports') and me.in_mode('toggle_display_mode', ['MAP']));
 		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') and  me.in_mode('toggle_display_mode', ['MAP']));
 		# Okay, _how_ do we hook this up with FGPlot?
-		printlog(canvas._MP_dbg_lvl, "Total ND update took "~((systime()-_time)*100)~"ms");
+		logprint(canvas._MP_dbg_lvl, "Total ND update took "~((systime()-_time)*100)~"ms");
 		setprop("/instrumentation/navdisplay["~ NavDisplay.id ~"]/update-ms", systime() - _time);
 	} # of update() method (50% of our file ...seriously?)
 };

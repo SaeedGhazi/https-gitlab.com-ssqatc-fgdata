@@ -1,5 +1,5 @@
-var _REPL_dbg_level = "debug";
-#var _REPL_dbg_level = "alert";
+var _REPL_dbg_level = LOG_DEBUG;
+#var _REPL_dbg_level = LOG_ALERT;
 
 var REPL = {
 	df_status: 0,
@@ -42,7 +42,7 @@ var REPL = {
 
 		me.current = nil;
 
-		printlog(_REPL_dbg_level, "compiling code..."~debug.string(code));
+		logprint(_REPL_dbg_level, "compiling code..."~debug.string(code));
 
 		var fn = call(func compile(code, me.name), nil, var err=[]);
 		if (size(err)) {
@@ -73,7 +73,7 @@ var REPL = {
 			var str = substr(str, 0, 1);
 		if (contains(me.brackets, str)) {
 			append(level, str);
-			printlog(_REPL_dbg_level, "> level add "~str);
+			logprint(_REPL_dbg_level, "> level add "~str);
 			return 1;
 		} elsif (contains(me.brackets_rev, str)) {
 			var l = pop(level);
@@ -84,7 +84,7 @@ var REPL = {
 				me.placement.handle_parse_error("bracket mismatch: "~me.brackets[l]~" vs "~str, me.name, line_number);
 				return nil;
 			} else {
-				printlog(_REPL_dbg_level, "< level pop "~str);
+				logprint(_REPL_dbg_level, "< level pop "~str);
 				return 1;
 			}
 		}
@@ -112,9 +112,9 @@ var REPL = {
 					me.current.last_operator = nil;
 					if (line[i] == `\\`) {
 						i += 1; # skip the next character
-						printlog(_REPL_dbg_level, "  skip backslash");
+						logprint(_REPL_dbg_level, "  skip backslash");
 					} elsif (line[i] == me.current.level[-1][0]) {
-						printlog(_REPL_dbg_level, "< out of string with "~me.current.level[-1]);
+						logprint(_REPL_dbg_level, "< out of string with "~me.current.level[-1]);
 						pop(me.current.level);
 					}
 					continue;
@@ -127,7 +127,7 @@ var REPL = {
 					me.current.last_operator = nil;
 					if (me.current.statement_level == size(me.current.level) and
 						     (line[i] == `;` or line[i] == `,`)) {
-						printlog(_REPL_dbg_level, "statement ended by ;/,");
+						logprint(_REPL_dbg_level, "statement ended by ;/,");
 						me.current.statement = nil;
 						me.current.statement_level = nil;
 					} else {
@@ -136,13 +136,13 @@ var REPL = {
 							me.current = nil;
 							return 0;
 						} elsif (me.current.statement_level > size(me.current.level)) {
-							printlog(_REPL_dbg_level, "statement ended by level below");
+							logprint(_REPL_dbg_level, "statement ended by level below");
 							# cancel out of statement
 							me.current.statement = nil;
 							me.current.statement_level = nil;
 						} elsif (line[i] == `{`) {
 							# cancel out of looking for `;`, because we have a real block here
-							printlog(_REPL_dbg_level, "statement ended by braces");
+							logprint(_REPL_dbg_level, "statement ended by braces");
 							me.current.statement = nil;
 							me.current.statement_level = nil;
 						}
@@ -155,7 +155,7 @@ var REPL = {
 							(i+size(stmt) >= len
 							 or !string.isalnum(line[i+size(stmt)])
 							 and line[i+size(stmt)] != `_`)) {
-							printlog(_REPL_dbg_level, "found: "~stmt);
+							logprint(_REPL_dbg_level, "found: "~stmt);
 							me.current.statement = stmt;
 							me.current.statement_level = size(me.current.level);
 							i += size(stmt)-1;
@@ -165,7 +165,7 @@ var REPL = {
 				} elsif (me._is_str_char(line[i])) {
 					me.current.last_operator = nil;
 					append(me.current.level, chr(line[i]));
-					printlog(_REPL_dbg_level, "> into string with "~me.current.level[-1]);
+					logprint(_REPL_dbg_level, "> into string with "~me.current.level[-1]);
 				} else {
 					var ret = me._handle_level(me.current.level, chr(line[i]), size(me.current.line)+1);
 					me.current.last_operator = nil;
@@ -174,7 +174,7 @@ var REPL = {
 					elsif (ret == 0) {
 						foreach (var o; me.operators_binary_unary)
 							if (line[i] == o[0])
-							{ me.current.last_operator = o; printlog(_REPL_dbg_level, "found operator "~o); break }
+							{ me.current.last_operator = o; logprint(_REPL_dbg_level, "found operator "~o); break }
 					}
 				}
 			}
@@ -564,18 +564,18 @@ var CanvasPlacement = {
 
 		} elsif (modifiers.ctrl) {
 			if (keyCode == `c`) {
-				printlog(_REPL_dbg_level, "ctrl+c: "~debug.string(me.input));
+				logprint(_REPL_dbg_level, "ctrl+c: "~debug.string(me.input));
 				me.reset_input_from_history();
 				if( size(me.input) and !clipboard.setText(me.input) )
 					print("Failed to write to clipboard");
 			} elsif (keyCode == `x`) {
-				printlog(_REPL_dbg_level, "ctrl+x");
+				logprint(_REPL_dbg_level, "ctrl+x");
 				me.reset_input_from_history();
 				if( size(me.input) and !clipboard.setText(me.clear_input()) )
 					print("Failed to write to clipboard");
 			} elsif (keyCode == `v`) {
 				var input = clipboard.getText();
-				printlog(_REPL_dbg_level, "ctrl+v: "~debug.string(input));
+				logprint(_REPL_dbg_level, "ctrl+v: "~debug.string(input));
 				me.reset_input_from_history();
 				var abnormal = func string.iscntrl(input[j]) or (string.isxspace(input[j]) and input[j] != ` `) or !string.isascii(input[j]);
 				var i=0;
@@ -599,13 +599,13 @@ var CanvasPlacement = {
 					i=j;
 				}
 			} elsif (keyCode == `d`) { # ctrl-D/EOF
-				printlog(_REPL_dbg_level, "EOF");
+				logprint(_REPL_dbg_level, "EOF");
 				me.del();
 				return 1;
 			} else return 0;
 
 		} elsif (key == "Enter") {
-			printlog(_REPL_dbg_level, "return (key: "~key~", shift: "~modifiers.shift~")");
+			logprint(_REPL_dbg_level, "return (key: "~key~", shift: "~modifiers.shift~")");
 			me.reset_input_from_history();
 			var reset_text = 1;
 			if (modifiers.shift) {
@@ -621,21 +621,21 @@ var CanvasPlacement = {
 				CanvasPlacement.current_instance = me;
 				var res = me.repl.get_input();
 				CanvasPlacement.current_instance = nil;
-				printlog(_REPL_dbg_level, "return code: "~debug.string(res));
+				logprint(_REPL_dbg_level, "return code: "~debug.string(res));
 			}
 			if (res == -1)
 				me.continue_line(reset_text:reset_text);
 			else me.new_prompt();
 
 		} elsif (key == "Backspace") {               # backspace
-			printlog(_REPL_dbg_level, "back");
+			logprint(_REPL_dbg_level, "back");
 			me.reset_input_from_history();
 			if (me.remove_char() == nil) return 1; # nothing happened, since the input
 			                                       # field was blank, but capture the event
 			me.completion_pos = -1;
 
 		} elsif (key == "Up") {             # up
-			printlog(_REPL_dbg_level, "up");
+			logprint(_REPL_dbg_level, "up");
 			if (me.curr == 0) return 1;
 			me.curr -= 1;
 			if (me.curr == size(me.history))
@@ -645,7 +645,7 @@ var CanvasPlacement = {
 			me.completion_pos = -1;
 
 		} elsif (key == "Down") {             # down
-			printlog(_REPL_dbg_level, "down");
+			logprint(_REPL_dbg_level, "down");
 			if (me.curr == size(me.history)) return 1;
 			me.curr += 1;
 			if (me.curr == size(me.history))
@@ -655,12 +655,12 @@ var CanvasPlacement = {
 			me.completion_pos = -1;
 
 		} elsif (key == "Escape") {  # escape -> cancel
-			printlog(_REPL_dbg_level, "esc");
+			logprint(_REPL_dbg_level, "esc");
 			me.del();
 			return 1;
 
 		} elsif (key == "Tab") {            # tab
-			printlog(_REPL_dbg_level, "tab");
+			logprint(_REPL_dbg_level, "tab");
 			return 0;
 			me.reset_input_from_history();
 			if (size(text) and text[0] == `/`) {
@@ -668,16 +668,16 @@ var CanvasPlacement = {
 			}
 
 		} elsif (size(key) > 1 or !string.isprint(key[0])) {
-			printlog(_REPL_dbg_level, "other key: "~key);
+			logprint(_REPL_dbg_level, "other key: "~key);
 			return 0;                  # pass other funny events
 
 		} else {
-			printlog(_REPL_dbg_level, "key: "~key[0]~" (`"~key~"`)");
+			logprint(_REPL_dbg_level, "key: "~key[0]~" (`"~key~"`)");
 			me.add_char(key[0]);
 			me.completion_pos = -1;
 		}
 
-		#printlog(_REPL_dbg_level, "  -> "~me.input);
+		#logprint(_REPL_dbg_level, "  -> "~me.input);
 
 		me.update();
 		me.reset_view();

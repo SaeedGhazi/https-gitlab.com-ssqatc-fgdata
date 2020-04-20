@@ -125,8 +125,7 @@ BroadcastChannel.new = func (mpp_path, process,
               last_send    : 0.0   # For the send queue 
             };
   if (enable_send and (obj.send_node == nil)) {
-    printlog("warn",
-             "BroadcastChannel invalid send node.");
+    logprint(LOG_WARN, "BroadcastChannel invalid send node.");
     return nil;
   }
   setlistener(obj.ONLINE_pp, func {

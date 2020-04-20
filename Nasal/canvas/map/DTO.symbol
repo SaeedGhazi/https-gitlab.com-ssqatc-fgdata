@@ -22,7 +22,7 @@ var init = func {
 
 var draw = func() {
 	me.callback('draw_before');
-	printlog(_MP_dbg_lvl, "redrawing a LineSymbol "~me.layer.type);
+	logprint(_MP_dbg_lvl, "redrawing a LineSymbol "~me.layer.type);
 	me.element.reset();
 	var cmds = [];
 	var coords = [];

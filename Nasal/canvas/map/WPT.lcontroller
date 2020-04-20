@@ -79,7 +79,7 @@ var WPT_model = {
 };
 
 var searchCmd = func {
-	printlog(_MP_dbg_lvl, "Running query: "~name);
+	logprint(_MP_dbg_lvl, "Running query: "~name);
 
 	if (!getprop(me.options.active_node)) return [];
 	var driver = me.route_driver;

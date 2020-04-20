@@ -271,7 +271,7 @@ var MessageSystem = {
 
     addAuralAlert: func(id, filename, volume=1.0, path=nil) {
         if (typeof(id) == "hash") {
-            printlog(5, "First argument to addAuralAlert() must be a string but is a hash. Use addAuralAlerts() to pass all alerts in one hash.");
+            logprint(DEV_ALERT, "First argument to addAuralAlert() must be a string but is a hash. Use addAuralAlerts() to pass all alerts in one hash.");
         }
         me.sounds[id] = {
             path: (path == nil) ? me.sound_path : path,
@@ -284,7 +284,7 @@ var MessageSystem = {
 
     addAuralAlerts: func(alert_hash) {
         if (typeof(alert_hash) != "hash") {
-            print("MessageSystem.addAuralAlerts: parameter must be a hash!");
+            logprint(DEV_ALERT, "MessageSystem.addAuralAlerts: parameter must be a hash!");
             return;
         }
         me.sounds = alert_hash;

@@ -3892,20 +3892,6 @@
     <radius>17</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>B-8848</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A321/A321-ChinaSouthern.xml</model>
-    <livery>CSN</livery>
-    <airline>CSN</airline>
-    <home-port>RJBB</home-port>
-    <required-aircraft>CSN-321</required-aircraft>
-    <actype>321</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
     <registration>B-8849</registration>
     <heavy>false</heavy>
   </aircraft>
@@ -8030,20 +8016,6 @@
     <livery>CSN</livery>
     <airline>CSN</airline>
     <home-port>ZSPD</home-port>
-    <required-aircraft>CSN-77F</required-aircraft>
-    <actype>77F</actype>
-    <offset>0</offset>
-    <radius>30</radius>
-    <flighttype>cargo</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>B-2041</registration>
-    <heavy>true</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/777/77F-ChinaSouthern.xml</model>
-    <livery>CSN</livery>
-    <airline>CSN</airline>
-    <home-port>ZGGG</home-port>
     <required-aircraft>CSN-77F</required-aircraft>
     <actype>77F</actype>
     <offset>0</offset>

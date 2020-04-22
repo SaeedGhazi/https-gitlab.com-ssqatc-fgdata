@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!-- Flight Schedule Date Unknown - Fleet Updated APR 2020 by Ian (Yves) Tolosa -->
 <trafficlist>
-<trafficlist>
   <aircraft>
     <model>Aircraft/738/738-Ryanair.xml</model>
     <livery>RYR</livery>

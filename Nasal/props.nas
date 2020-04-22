@@ -209,9 +209,27 @@ var dump = func {
 # if optional third argument is set and non-zero.
 #
 var copy = func(src, dest, attr = 0) {
+    var sp = src.getPath() or "";
+    var dp = dest.getPath() or "";
+    
+    # sp and dp may be equal but on different trees! 
+    # check if dest is sub node of source
+    sp = split("/", sp);
+    dp = split("/", dp);
+    while (size(sp) and size(dp) and (sp[0] == dp[0])) {
+        sp = subvec(sp, 1);
+        dp = subvec(dp, 1);
+    }
+    
     foreach(var c; src.getChildren()) {
-        var name = c.getName() ~ "[" ~ c.getIndex() ~ "]";
-        copy(src.getNode(name), dest.getNode(name, 1), attr);
+        var name = c.getName();
+        var i = c.getIndex();
+        if (i) name ~= "["~i~"]";
+        if (!(!size(sp) and size(dp) and name == dp[0]))
+            copy(src.getNode(name), dest.getNode(name, 1), attr);
+        else {
+            logprint(DEV_WARN, "props.copy() skipping "~name~" (recursion!)");
+        }
     }
     var type = src.getType();
     var val = src.getValue();

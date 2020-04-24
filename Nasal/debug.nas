@@ -282,7 +282,7 @@ var funcname = func(f) {
                 return k;
         }
     }
-    return "- unknown -";
+    return "-unknown-";
 }
 
 var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
@@ -484,12 +484,28 @@ var isnan = func {
 # print(myProbe.getHits(cnt2)/myProbe.getHits()); # print hit ratio
 #
 var Probe = {
+    _instances: {},
+    
+    _uid: func(label, class) {
+        class = globals.string.replace(class, " ", "_");
+        label = globals.string.replace(label, " ", "_");
+        label = globals.string.replace(label, "/", "_");
+        return class~"-"~label;
+    },
+    
     # label:       Used in property path 
     # prefix:      Optional 
     new: func(label, class = "probe") {
+        if (!isscalar(label) or !isscalar(class)) {
+            die("Invalid argument type to Probe.new");
+        }
+        var uid = me._uid(label,class);
+        if (Probe._instances[uid] != nil) return Probe._instances[uid];
+        
         var obj = {
             parents: [Probe],
-            label: "",
+            uid: uid,
+            label: label,
             hits: [0],
             node: nil,
             _enableN: nil,
@@ -502,13 +518,8 @@ var Probe = {
             _timeoutN: nil,   # > 0, disable probe after _timeout seconds
             _L: [],
         };
-        if (!isscalar(label) or !isscalar(class)) {
-            die("Invalid argument type to Probe.new");
-        }
-        class = globals.string.replace(class, " ", "_");
-        label = globals.string.replace(label, " ", "_");
-        obj.label = globals.string.replace(label, "/", "_");
-        obj.node = props.globals.getNode("/_debug/nas/"~class~"-"~obj.label, 1);
+
+        obj.node = props.globals.getNode("/_debug/nas/"~obj.uid, 1);
         obj.node.removeChildren();
         obj._enableN = obj.node.addChild("enable");
         obj._enableN.setBoolValue(0);
@@ -541,7 +552,16 @@ var Probe = {
         
         append(obj._hitsN, obj.node.addChild("hits"));
         obj._hitsN[0].setIntValue(0);
+        Probe._instances[obj.uid] = obj;
         return obj;
+    },
+    
+    del: func () {
+        foreach (var l; me._L) {
+            removelistener(l);
+        }
+        me.node.remove();
+        Probe._instances[me.uid] = nil;
     },
     
     reset: func {
@@ -644,9 +664,11 @@ var Probe = {
             var c  = caller(i);
             if (c == nil) break;
             var fn = io.basename(c[2]);
+            #invalid chars are : [ ] < > =
+            fn = globals.string.replace(fn,":","_");
+            if (!fn) fn = "_unknown_";
             var line = num(c[3]);
             var sid = fn~":"~line;
-            print(sid);
             if (me.origins[sid] == nil) {
                 me.origins[sid] = 1;
                 var n = tn.getChild(fn,line,1);
@@ -676,6 +698,7 @@ var Probe = {
 # print(myBP.getHits()); # print total number of hits
 #
 var Breakpoint = {
+    
     # label:       Used in property path and as text for backtrace.
     # dump_locals: bool passed to backtrace. Dump variables in BT.
     # skip_level:  int passed to backtrace. 
@@ -689,6 +712,7 @@ var Breakpoint = {
         obj._enableN.remove();
         obj._enableN = obj.node.getNode("tokens", 1);
         obj._enableN.setIntValue(0);
+        
         return obj;
     },
 
@@ -707,7 +731,7 @@ var Breakpoint = {
     hit: func(callback = nil) {
         me.hits[0] += 1;
         me._hitsN[0].increment();
-        me.tokens = me._enableN.getValue();
+        me.tokens = me._enableN.getValue() or 0;
         if (me.tokens > 0) {
             me.tokens -= 1;
             if (isfunc(callback)) {
@@ -727,7 +751,9 @@ var Breakpoint = {
 # --prop:debug=1 enables debug mode with additional warnings
 #
 _setlistener("sim/signals/nasal-dir-initialized", func {
-	if (!getprop("debug"))
+    # General purpose breakpoint for the lazy ones.
+    debug.bp = debug.Breakpoint.new("default");
+    if (!getprop("debug"))
 		return;
 	var writewarn = func(f, p, r) {
 		if (!r) {

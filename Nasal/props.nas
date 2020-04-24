@@ -95,7 +95,8 @@ var Node = {
             if (me.setIntValue(v)) return v;
         }
         else  {
-            logprint(DEV_ALERT, "props.increment() can be used only on integer props");
+            logprint(DEV_ALERT, "props.increment() can be used only on integer props "~
+                me.getPath()~" "~me.getType());
             return nil;
         }
     },
@@ -107,7 +108,8 @@ var Node = {
             var v = me.getValue() - int(n);
             if (me.setIntValue(v)) return v;
         else {
-            logprint(DEV_ALERT, "props.decrement() can be used only on integer props");
+            logprint(DEV_ALERT, "props.decrement() can be used only on integer props"~
+                me.getPath()~" "~me.getType());
             return 0;
         }
     }

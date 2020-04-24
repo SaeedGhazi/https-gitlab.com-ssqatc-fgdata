@@ -140,7 +140,7 @@ var DisplayUnit =
         setlistener(me.powerN, func(n) {
             if ((n.getValue() or 0) >= min) me.root.show();
             else me.root.hide();
-        }, 1,0);
+        }, 1, 0);
     },
     
     asWindow: func(window_size) {

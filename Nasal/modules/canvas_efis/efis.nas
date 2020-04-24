@@ -242,7 +242,7 @@ var EFIS = {
             var destination = target.getValue();
             if (src >= 0 and src < size(sources))
                 me._setDisplaySource(destination, sources[src]);
-        });
+        }, 0, 0);
     },
 
     setDefaultMapping: func(mapping) {

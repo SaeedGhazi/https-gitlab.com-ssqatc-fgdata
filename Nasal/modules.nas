@@ -54,7 +54,7 @@ var Module = {
             _listeners: [],
             _timers: [],
             _debug: 0,
-
+            _setlistener_runtime_default: 1,
             id: id,
             version: 1,
             file_path: MODULES_DIR,
@@ -120,6 +120,12 @@ var Module = {
         }
     },
 
+    # to change the default setlistener behaviour regarding 'runtime' argument
+    # i: int 0..2 passed to setlistener as 4th parameter if not specified explicitly
+    setlistenerRuntimeDefault: func (i) {
+        me._setlistener_runtime_default = int(i);
+    },
+    
     # load module
     # if no arguments are given, the Module object will be passed to main()
     load: func(myargs...) {
@@ -222,11 +228,11 @@ var Module = {
 
     # redirect setlistener() for module
     _redirect_setlistener: func() {
-        globals[me.namespace].setlistener = func(p, f, start=0, runtime=0) {
+        globals[me.namespace].setlistener = func(p, f, start=0, runtime=nil) {
             if (!isa(p, props.Node)) {
                 p = props.getNode(p, 1).resolveAlias();
             }
-
+            if (runtime == nil) runtime = me._setlistener_runtime_default;
             if (me._debug) {
                 var f_debug = func {
                     me.lhitN.setValue(me.lhitN.getValue() + 1);

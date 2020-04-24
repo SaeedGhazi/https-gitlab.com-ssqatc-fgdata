@@ -23,11 +23,11 @@ var Pager = {
         setlistener(obj.pageN.getPath(), func(n) {
             obj.current_page = n.getValue();
             obj.pg_changed = 1;
-        });
+        }, 0, 0);
         setlistener(obj.lengthN.getPath(), func(n) {
             obj.page_length = n.getValue();
             obj.pg_changed = 1;
-        });
+        }, 0, 0);
         return obj;
     },
 

@@ -118,8 +118,11 @@ var setlistener = func(node, fn, init = 0, runtime = 1) {
     var id = _setlistener(node, func(chg, lst, mode, is_child) {
         fn(props.wrapNode(chg), props.wrapNode(lst), mode, is_child);
     }, init, runtime);
+
     var c = caller();
-    logprint(LOG_DEBUG, "setting listener #",id," in ",c[2],":",c[3]);  
+    if (c != nil) {
+        logprint(LOG_DEBUG, "setting listener #",id," in ",c[2],":",c[3]); 
+    }
     return id;
 }
 

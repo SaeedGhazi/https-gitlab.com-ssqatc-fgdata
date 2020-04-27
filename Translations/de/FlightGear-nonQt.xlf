@@ -333,7 +333,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="menu/reload-scenery:0" translate="yes">
           <source>Reload Scenery</source>
-          <target>Autopilot neu laden</target>
+          <target>Szenerie neu laden</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/rembrandt-buffers-choice:0" translate="yes">
           <source>Select Rendering Buffers</source>

@@ -9,6 +9,7 @@
 #  0 0 1
 #
 # See http://www.w3.org/TR/SVG/coords.html#TransformMatrixDefined for details.
+#     https://www.w3.org/TR/css-transforms-1/#mathematical-description
 #
 var Transform = {
     new: func(node, vals = nil) {
@@ -44,7 +45,11 @@ var Transform = {
 
         return me;
     },
-
+    
+    getTranslation: func() {
+        return [me.e.getValue(), me.f.getValue()];
+    },
+    
     # Set rotation (Optionally around a specified point instead of (0,0))
     #
     #    setRotation(rot)
@@ -58,6 +63,7 @@ var Transform = {
         var s = math.sin(angle);
         var c = math.cos(angle);
 
+        # rotation goes to the top-left 2x2 part of the matrix
         me.a.setDoubleValue(c);     me.c.setDoubleValue(-s);
         me.b.setDoubleValue(s);     me.d.setDoubleValue(c);
 
@@ -76,15 +82,24 @@ var Transform = {
     #    setScale([x, y])
     setScale: func {
         var scale = _arg2valarray(arg);
-
+        # the scale factors go to the diagonal elements of the matrix
         me.a.setDoubleValue(scale[0]);
         me.d.setDoubleValue(size(scale) >= 2 ? scale[1] : scale[0]);
-
         return me;
     },
 
     getScale: func() {
         # TODO handle rotation
         return [me.a.getValue(), me.d.getValue()];
-    }
+    },
+    
+    # this function is called very often, if a canvas map is active and
+    # the aircraft symbol is shown.
+    setGeoPosition: func(lat, lon) {
+        if (me["_gn"] == nil) { me._gn = me._node.getNode("m-geo[4]", 1); }
+        if (me["_ge"] == nil) { me._ge = me._node.getNode("m-geo[5]", 1); }
+        me._gn.setValue("N" ~ lat);
+        me._ge.setValue("E" ~ lon);
+        return me;
+    },
 };

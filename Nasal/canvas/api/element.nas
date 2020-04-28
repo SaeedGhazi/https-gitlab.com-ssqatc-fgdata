@@ -13,10 +13,11 @@ var Element = {
     #
     # @param ghost    Element ghost as retrieved from core methods
     new: func(ghost) {
-        return {
-            parents: [PropertyElement, Element, ghost],
-            _node: props.wrapNode(ghost._node_ghost)
+        var obj = {
+            parents: [Element, PropertyElement, ghost],
+            _node: props.wrapNode(ghost._node_ghost),
         };
+        return obj;
     },
 
     # Get parent group/element
@@ -26,7 +27,7 @@ var Element = {
             return nil;
 
         var type = props.wrapNode(parent_ghost._node_ghost).getName();
-        var factory = me._getFactory(type);
+        var factory = Group._getFactory(type);
         if (factory == nil)
             return parent_ghost;
 
@@ -72,8 +73,7 @@ var Element = {
     },
 
     setGeoPosition: func(lat, lon) {
-        me._getTf()._node.getNode("m-geo[4]", 1).setValue("N"~lat);
-        me._getTf()._node.getNode("m-geo[5]", 1).setValue("E"~lon);
+        me._getTf().setGeoPosition(lat, lon);
         return me;
     },
 
@@ -94,10 +94,10 @@ var Element = {
 
     # Get translation set with #setTranslation
     getTranslation: func() {
-        if (me["_tf"] == nil)
+        if (me["_tf"] == nil) {
             return [0, 0];
-
-        return [me._tf.e.getValue(), me._tf.f.getValue()];
+        }
+        return me._tf.getTranslation();
     },
 
     # Set rotation around transformation center (see #setCenter).
@@ -182,6 +182,7 @@ var Element = {
         return center;
     },
 
+    #return vector [sx, sy] with dimensions of bounding box
     getSize: func {
         var bb = me.getTightBoundingBox();
         return [bb[2] - bb[0], bb[3] - bb[1]];
@@ -189,7 +190,7 @@ var Element = {
 
     # convert bounding box vector into clip string (yes, different order)
     boundingbox2clip: func(bb) {
-        return sprintf("rect(%d,%d,%d,%d)", bb[1], bb[2], bb[3], bb[0])
+        return sprintf("rect(%d,%d,%d,%d)", bb[1], bb[2], bb[3], bb[0]);
     },
 
     # set clip by bounding box

@@ -63,13 +63,14 @@ var Path = {
     #
     new: func(ghost)
     {
-        return {
+        var obj = {
             parents: [Path, Element.new(ghost)],
             _first_cmd: 0,
             _first_coord: 0,
             _last_cmd: -1,
             _last_coord: -1
         };
+        return obj;
     },
 
     # Remove all existing path data

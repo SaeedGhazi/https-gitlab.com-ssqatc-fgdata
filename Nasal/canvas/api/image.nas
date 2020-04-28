@@ -5,7 +5,10 @@
 #
 var Image = {
     new: func(ghost) {
-        return {parents: [Image, Element.new(ghost)]};
+        var obj = {
+            parents: [Image, Element.new(ghost)],
+        };
+        return obj;
     },
 
     # Set image file to be used

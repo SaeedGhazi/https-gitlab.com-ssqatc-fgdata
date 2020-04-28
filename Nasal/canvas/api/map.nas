@@ -8,13 +8,16 @@
 var Map = {
     df_controller: nil,
     new: func(ghost) {
-        return { parents: [Map, Group.new(ghost)], layers:{},
-                controller:nil }
-                .setController();
+        var obj = { 
+            parents: [Map, Group.new(ghost)],
+            layers: {},
+            controller: nil,
+        };
+        return obj.setController();
     },
 
     del: func() {
-        #print("canvas.Map.del()");
+        logprint(_API_dbg_level, "canvas.Map.del()");
         if (me.controller != nil)
             me.controller.del(me);
         foreach (var k; keys(me.layers)) {

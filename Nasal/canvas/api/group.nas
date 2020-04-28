@@ -5,7 +5,10 @@
 #
 var Group = {
     new: func(ghost) {
-        return { parents: [Group, Element.new(ghost)] };
+        var obj = {
+            parents: [Group, Element.new(ghost)],
+        };
+        return obj;
     },
 
     # Create a child of given type with specified id.
@@ -94,8 +97,9 @@ var Group = {
             if (typeof(first) == "vector")
                 color = first;
         }
-        foreach(var c; children)
-        c.setColor(color);
+        foreach(var c; children) {
+            c.setColor(color);
+        }
     },
 
     # Get first child with given id (breadth-first search)
@@ -129,13 +133,15 @@ var Group = {
 
     # Create element from existing node
     _wrapElement: func(node) {
-        return me._element_factories[node.getName()](me._getChild(node._g));
+        var factory = me._getFactory(node.getName());
+        return factory(me._getChild(node._g));
     },
 
     _getFactory: func(type) {
         var factory = me._element_factories[type];
-        if (factory == nil)
-            debug.dump("canvas.Group.createChild(): unknown type ("~type~")");
+        if (factory == nil) {
+            logprint(DEV_ALERT, "canvas.Group.createChild(): unknown type ("~type~")");
+        }
         return factory;
     }
 };

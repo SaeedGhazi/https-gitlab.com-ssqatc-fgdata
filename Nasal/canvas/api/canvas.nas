@@ -5,6 +5,15 @@
 # not to be confused with the namespace canvas (case sensitive!)
 #
 var Canvas = {
+    # private helper for wrapCanvas;
+    _new: func(canvas_ghost) {
+        var obj = {
+            parents: [Canvas, PropertyElement],
+            _node: props.wrapNode(canvas_ghost._node_ghost),
+        };
+        return obj;
+    },
+
     # Place this canvas somewhere onto the object. Pass criterions for placement
     # as a hash, eg:
     #

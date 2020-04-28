@@ -39,14 +39,11 @@ Group._element_factories = {
 io.include(include_path~"canvas.nas");
 
 # @param g Canvas ghost
-var wrapCanvas = func(g)
-{
-  if( g != nil and g._impl == nil )
-    g._impl = {
-      parents: [PropertyElement, Canvas],
-      _node: props.wrapNode(g._node_ghost)
-    };
-  return g;
+var wrapCanvas = func(g) {
+    if (g != nil and g._impl == nil) {
+        g._impl = Canvas._new(g);
+    }
+    return g;
 }
 
 # Create a new canvas. Pass parameters as hash, eg:

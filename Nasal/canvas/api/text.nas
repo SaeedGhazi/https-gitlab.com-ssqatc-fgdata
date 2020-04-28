@@ -3,9 +3,32 @@
 #-------------------------------------------------------------------------------
 # Class for a text element on a canvas
 #
+var font_mapper = func(family = "LiberationSans", weight = "", style = "", custom_mapper=nil)
+{
+    if (isfunc(custom_mapper)) {
+        var font = custom_mapper(family, weight, style);
+        if (font != nil)
+        return font;
+    }
+
+    if (string.match(family, "Liberation*")) {
+        style = style == "italic" ? "Italic" : "";
+        weight = weight == "bold" ? "Bold" : "";
+
+        var s = weight~style;
+        if (s == "") s = "Regular";
+
+        return "LiberationFonts/"~string.replace(family, " ", "")~"-"~s~".ttf";
+    }
+    return "LiberationFonts/LiberationMono-Bold.ttf";
+};
+
 var Text = {
     new: func(ghost) {
-        return { parents: [Text, Element.new(ghost)] };
+        var obj = {
+            parents: [Text, Element.new(ghost)],
+        };
+        return obj;
     },
 
     # Set the text

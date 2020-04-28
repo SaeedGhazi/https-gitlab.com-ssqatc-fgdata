@@ -93,6 +93,7 @@ CompassRose.draw = func(cgroup, radius, style=nil) {
             labels[i]
                 .setText(txt)
                 .setFontSize(fontsize)
+                .setFont(font_mapper("LiberationSans","bold"))
                 .setColor(style.label_color)
                 .setAlignment("center-"~(style.mark_offset < 0 ? "top" : "bottom"))
                 .setTranslation(0,-radius-offset)

@@ -22,11 +22,10 @@
                     }
 
                     if (reinit) {
-                      fgcommand("reload-materials", props.Node.new());
                       fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
                     }
             };
-            
+
             var lodDIALOG = cmdarg();
             var dlgLOD = props.Node.new({"dialog-name": "static-lod"});
 
@@ -152,7 +151,7 @@
             }
 
             update_ai_mp = func(can_reload) {
-                var mode = update_enabling ();  
+                var mode = update_enabling ();
                 var distance_mode = getprop("sim/rendering/static-lod/aimp-range-mode-distance");
                 update_description(mode);
                 if (mode == "Low Detail only") {
@@ -178,11 +177,11 @@
             update_aimp_mode = func{
                 var new_mode = getprop("/sim/gui/dialogs/static-lod/aimp-mp-mode");
                 if (new_mode != current_ai_mp_mode) {
-                    
+
                     if (current_ai_mp_mode == "Specify Ranges") {
                         current_detailed = getprop("/sim/rendering/static-lod/aimp-detailed");
                         current_bare =getprop("/sim/rendering/static-lod/aimp-bare");
-                    } 
+                    }
                     if (current_ai_mp_mode == "Low Detail only" or current_ai_mp_mode == "High Detail only") {
                         if (current_detailed != nil)
                             setprop("/sim/rendering/static-lod/aimp-detailed", current_detailed );
@@ -410,7 +409,7 @@
         <checkbox>
             <row>6</row>
             <col>2</col>
-            
+
             <halign>left</halign>
             <name>distance</name>
             <property>sim/rendering/static-lod/aimp-range-mode-distance</property>

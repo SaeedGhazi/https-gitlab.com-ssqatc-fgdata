@@ -1,400 +1,6 @@
 <?xml version="1.0"?>
-
 <!-- Author Ian Tolosa - Timetable of SEP 2016 - ERJ190 replaced by ERJ175  -->
-
 <trafficlist>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHNP</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHNV</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHOY</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FLWE</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FLWH</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FMYV</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FMZB</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FMZD</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FNAI</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FNAJ</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FNAP</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FNAW</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FMZW</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FGLX</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHJU</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHKA</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHKE</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHKI</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHKP</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHNL</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHNW</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FHOS</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FLWK</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FMZR</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FMZU</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/E90/E90-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-E90</required-aircraft>
-    <actype>E90</actype>
-    <offset>0</offset>
-    <radius>14</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FNAN</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A319/A319-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-319</required-aircraft>
-    <actype>319</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-GITP</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A319/A319-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-319</required-aircraft>
-    <actype>319</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-GITR</registration>
-    <heavy>No</heavy>
-  </aircraft>
   <aircraft>
     <model>Aircraft/A319/A319-AirCanada.xml</model>
     <livery>ACA</livery>
@@ -407,6 +13,34 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FYJI</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/A319/A319-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-319</required-aircraft>
+    <actype>319</actype>
+    <offset>0</offset>
+    <radius>17</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FYKC</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/A319/A319-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-319</required-aircraft>
+    <actype>319</actype>
+    <offset>0</offset>
+    <radius>17</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FYKR</registration>
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
@@ -532,49 +166,21 @@
     <radius>17</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>C-GBIA</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A319/A319-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-319</required-aircraft>
-    <actype>319</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FYKC</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A319/A319-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-319</required-aircraft>
-    <actype>319</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FYKR</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A319/A319-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-319</required-aircraft>
-    <actype>319</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
     <registration>C-GBHM</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/A319/A319-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-319</required-aircraft>
+    <actype>319</actype>
+    <offset>0</offset>
+    <radius>17</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-GBIA</registration>
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
@@ -771,6 +377,34 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FFWN</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/A320/A320-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-320</required-aircraft>
+    <actype>320</actype>
+    <offset>0</offset>
+    <radius>17</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FGJI</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/A320/A320-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-320</required-aircraft>
+    <actype>320</actype>
+    <offset>0</offset>
+    <radius>17</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FGKH</registration>
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
@@ -1037,34 +671,6 @@
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>C-FTJS</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A320/A320-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-320</required-aircraft>
-    <actype>320</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FGJI</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
-    <model>Aircraft/A320/A320-AirCanada.xml</model>
-    <livery>ACA</livery>
-    <airline>ACA</airline>
-    <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-320</required-aircraft>
-    <actype>320</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>C-FGKH</registration>
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
@@ -1596,6 +1202,34 @@
     <radius>24</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
+    <registration>C-GBZR</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/767/767-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-763</required-aircraft>
+    <actype>763</actype>
+    <offset>0</offset>
+    <radius>24</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GDUZ</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/767/767-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-763</required-aircraft>
+    <actype>763</actype>
+    <offset>0</offset>
+    <radius>24</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
     <registration>C-GEOQ</registration>
     <heavy>Yes</heavy>
   </aircraft>
@@ -1656,31 +1290,297 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-AirCanada.xml</model>
+    <model>Aircraft/787/788-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-763</required-aircraft>
-    <actype>763</actype>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>C-GBZR</registration>
+    <registration>C-GHPQ</registration>
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/767/767-AirCanada.xml</model>
+    <model>Aircraft/787/788-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-763</required-aircraft>
-    <actype>763</actype>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
     <offset>0</offset>
-    <radius>24</radius>
+    <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>C-GDUZ</registration>
+    <registration>C-GHPT</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GHPU</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GHPV</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GHPX</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GHPY</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GHQQ</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/788-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-788</required-aircraft>
+    <actype>788</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-GHQY</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGDT</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGDX</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGDZ</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGEI</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGEO</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGFZ</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FGHZ</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FKSV</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FNOE</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FNOG</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FNOH</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FNOI</registration>
+    <heavy>Yes</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/787/789-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-789</required-aircraft>
+    <actype>789</actype>
+    <offset>0</offset>
+    <radius>30</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>heavy_jet</performance-class>
+    <registration>C-FPQB</registration>
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
@@ -2034,298 +1934,368 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHPQ</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FGLX</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHPT</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHJU</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHPU</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHKA</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHPV</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHKE</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHPX</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHKI</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHPY</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHKP</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHQQ</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHNL</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/788-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-788</required-aircraft>
-    <actype>788</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-GHQY</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHNP</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGDT</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHNV</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGDX</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHNW</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGDZ</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHOS</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGEI</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FHOY</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGEO</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FLWE</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGFZ</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FLWH</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FGHZ</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FLWK</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FKSV</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FMYV</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FNOE</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FMZB</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FNOG</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FMZD</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FNOH</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FMZR</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FNOI</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FMZU</registration>
+    <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/787/789-AirCanada.xml</model>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
     <livery>ACA</livery>
     <airline>ACA</airline>
     <home-port>CYYZ</home-port>
-    <required-aircraft>ACA-789</required-aircraft>
-    <actype>789</actype>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
     <offset>0</offset>
-    <radius>30</radius>
+    <radius>14</radius>
     <flighttype>gate</flighttype>
-    <performance-class>heavy_jet</performance-class>
-    <registration>C-FPQB</registration>
-    <heavy>Yes</heavy>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FMZW</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FNAI</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FNAJ</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FNAN</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FNAP</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/E70/ERJ175-AirCanada.xml</model>
+    <livery>ACA</livery>
+    <airline>ACA</airline>
+    <home-port>CYYZ</home-port>
+    <required-aircraft>ACA-E90</required-aircraft>
+    <actype>E90</actype>
+    <offset>0</offset>
+    <radius>14</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>C-FNAW</registration>
+    <heavy>No</heavy>
   </aircraft>
   <flight>1
 <callsign>AC0001</callsign><required-aircraft>ACA-789</required-aircraft><fltrules>IFR</fltrules><departure>1

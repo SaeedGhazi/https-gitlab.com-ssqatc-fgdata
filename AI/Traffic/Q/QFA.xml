@@ -2160,7 +2160,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBMK</home-port>
@@ -2174,7 +2174,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YMAY</home-port>
@@ -2188,7 +2188,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2202,7 +2202,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBBN</home-port>
@@ -2216,7 +2216,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBTL</home-port>
@@ -2230,7 +2230,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2244,7 +2244,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YWLM</home-port>
@@ -2258,7 +2258,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBRK</home-port>
@@ -2272,7 +2272,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBRK</home-port>
@@ -2286,7 +2286,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBBN</home-port>
@@ -2300,7 +2300,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBWW</home-port>
@@ -2314,7 +2314,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2328,7 +2328,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBBN</home-port>
@@ -2342,7 +2342,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YHID</home-port>
@@ -2356,7 +2356,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBTL</home-port>
@@ -2370,7 +2370,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSCB</home-port>
@@ -2384,7 +2384,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YMIA</home-port>
@@ -2398,7 +2398,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBCS</home-port>
@@ -2412,7 +2412,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2426,7 +2426,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2440,7 +2440,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBBN</home-port>
@@ -2454,7 +2454,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YMIA</home-port>
@@ -2468,7 +2468,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YLRE</home-port>
@@ -2482,7 +2482,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YROM</home-port>
@@ -2496,7 +2496,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBTL</home-port>
@@ -2510,7 +2510,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSCH</home-port>
@@ -2524,7 +2524,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YMML</home-port>
@@ -2538,7 +2538,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2552,7 +2552,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBCS</home-port>
@@ -2566,7 +2566,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSCB</home-port>
@@ -2580,7 +2580,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2594,7 +2594,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YARM</home-port>
@@ -2608,7 +2608,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2622,7 +2622,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBBN</home-port>
@@ -2636,7 +2636,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YBBN</home-port>
@@ -2650,7 +2650,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YPAD</home-port>
@@ -2664,7 +2664,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2678,7 +2678,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YMRB</home-port>
@@ -2692,7 +2692,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2706,7 +2706,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YPAD</home-port>
@@ -2720,7 +2720,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2734,7 +2734,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2748,7 +2748,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2762,7 +2762,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>
@@ -2776,7 +2776,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Qantas.xml</model>
+    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
     <livery>QFA</livery>
     <airline>QFA</airline>
     <home-port>YSSY</home-port>

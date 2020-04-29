@@ -20,6 +20,10 @@ var Element = {
         return obj;
     },
 
+    getType: func () {
+        return me._node.getName();
+    },    
+
     # Get parent group/element
     getParent: func() {
         var parent_ghost = me._getParent();

@@ -51,6 +51,12 @@
     <description>help-desc</description>
     <brief/>
    </option>
+   
+   <option>
+    <name>launcher</name>
+    <description>launcher-desc</description>
+    <brief/>
+   </option>
 
    <option>
     <name>verbose</name>

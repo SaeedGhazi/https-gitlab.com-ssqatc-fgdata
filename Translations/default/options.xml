@@ -11,6 +11,7 @@
 	<general-options>General Options</general-options>
 	<help-desc>Show the most relevant command line options</help-desc>
 	<verbose-desc>Show all command line options when combined with --help or -h</verbose-desc>
+        <launcher-desc>Use GUI launcher</launcher-desc>
 	<version-desc>Display the current FlightGear version</version-desc>
 	<fg-root-desc>Specify the root data path</fg-root-desc>
 	<fg-scenery-desc n="0">Specify the scenery path(s);</fg-scenery-desc>

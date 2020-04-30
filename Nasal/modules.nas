@@ -67,11 +67,20 @@ var Module = {
         } else {
             obj.node = MODULES_NODE.getNode(id, 1);
         }
-
+        obj.reloadN = obj.node.initNode("reload", 0, "BOOL");
         obj.loadedN = obj.node.initNode("loaded", 0, "BOOL");
         obj.lcountN = obj.node.initNode("listeners", 0, "INT");
         obj.tcountN = obj.node.initNode("timers", 0, "INT");
         obj.lhitN = obj.node.initNode("listener-hits", 0, "INT");
+        
+        obj.reloadL = setlistener(obj.reloadN, func(n) {
+            if (n.getValue()) {
+                n.setValue(0);
+                logprint(DEV_ALERT, "Reload triggered for ", obj.id, " (",
+                    obj.reloadL, ")");                
+                obj.reload();
+            }
+        });
 
         _instances[id] = obj;
         return obj;

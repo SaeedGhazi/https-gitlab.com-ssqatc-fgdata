@@ -243,7 +243,9 @@ setlistener("/sim/signals/fdm-initialized", func {
 
 	foreach (var t; props.globals.getNode("systems/refuel", 1).getChildren("type"))
 		types[t.getValue()] = 1;
-
+        if (size(types) == 0) {
+            gui.popupTip('No items in systems/refuel/type[], air-to-air refueling will not work', 10);
+        }
 	setlistener("sim/freeze/fuel", func(n) fuel_freeze = n.getBoolValue(), 1);
 	setlistener("sim/ai/enabled", func(n) ai_enabled = n.getBoolValue(), 1);
 	setlistener("systems/refuel/serviceable", func(n) serviceable = n.getBoolValue(), 1);

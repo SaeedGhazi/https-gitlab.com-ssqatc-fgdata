@@ -30,5 +30,5 @@
 		<settings-migration-text>Saved settings were migrated from a previous version of FlightGear.
         If you encounter any problems when using the system, try restoring 
         the default settings, before reporting a problem.
-		Saved settings can affect the appearance, performance and features of the simulator.<settings-migration-text>
+		Saved settings can affect the appearance, performance and features of the simulator.</settings-migration-text>
 </PropertyList>

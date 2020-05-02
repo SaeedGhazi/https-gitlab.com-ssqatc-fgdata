@@ -42,7 +42,6 @@
 
 	</parameters>
 	<generate>
-		<normal type="int">15</normal>
 		<tangent type="int">6</tangent>
 	</generate>
 
@@ -137,10 +136,6 @@
 			<attribute>
 				<name>tangent</name>
 				<index>6</index>
-			</attribute>
-			<attribute>
-				<name>normal</name>
-				<index>15</index>
 			</attribute>
 			</program>
 			

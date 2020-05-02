@@ -44,7 +44,6 @@
 		<!-- 	END fog include -->
 	</parameters>
 	<generate>
-		<normal type="int">15</normal>
 		<tangent type="int">6</tangent>
 		<binormal type="int">7</binormal>
 	</generate>
@@ -228,10 +227,6 @@
 				<attribute>
 					<name>tangent</name>
 					<index>6</index>
-				</attribute>
-				<attribute>
-					<name>normal</name>
-					<index>15</index>
 				</attribute>
 			</program>
 			<uniform>
@@ -912,10 +907,6 @@
 					<name>binormal</name>
 					<index>7</index>
 				</attribute>-->
-				<attribute>
-					<name>normal</name>
-					<index>15</index>
-				</attribute>
 			</program>
 			<!-- 	    BEGIN fog include -->
 			<uniform>
@@ -1554,10 +1545,6 @@
 					<name>binormal</name>
 					<index>7</index>
 				</attribute>
-				<attribute>
-					<name>normal</name>
-					<index>15</index>
-				</attribute>
 			</program>
 			<uniform>
 				<name>BaseTex</name>
@@ -1734,10 +1721,6 @@
 				<attribute>
 					<name>binormal</name>
 					<index>7</index>
-				</attribute>
-				<attribute>
-					<name>normal</name>
-					<index>15</index>
 				</attribute>
 			</program>
 			<uniform>
@@ -1947,10 +1930,6 @@
 				<attribute>
 					<name>binormal</name>
 					<index>7</index>
-				</attribute>
-				<attribute>
-					<name>normal</name>
-					<index>15</index>
 				</attribute>
 			</program>
 			<uniform>
@@ -2187,10 +2166,6 @@
 				<attribute>
 					<name>binormal</name>
 					<index>7</index>
-				</attribute>
-				<attribute>
-					<name>normal</name>
-					<index>15</index>
 				</attribute>
 			</program>
 			<!-- 	    BEGIN fog include -->

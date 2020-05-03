@@ -66,6 +66,12 @@
 # debug.Probe       class              ... base class to collect stats; details below
 # debug.Breakpoint  class              ... conditional backtrace; details below
 #
+# debug.addProbeToFunc(label, func)    ... wraps a function with a probe 
+# debug.findFunctions(ns, recursive=0) ... find all functions in a hash (namespace)
+#
+# debug.addProbesToNamespace(ns, label="", recursive=0) 
+#                                      ... combines findFunctions and addProbeToFunc
+#
 # CAVE: this file makes extensive use of ANSI color codes. These are
 #       interpreted by UNIX shells and MS Windows with ANSI.SYS extension
 #       installed. If the color codes aren't interpreted correctly, then
@@ -272,12 +278,15 @@ var local = func(frame = 0) {
 	return v;
 }
 
+# According to the Nasal design doc funtions do not have unique internal names.
+# Nevertheless you can sometimes find a matching symbol, so funcname may help to
+# make debug output more helpful, but unfortunately you cannot rely on it.
 var funcname = func(f) {
-    if (typeof(f) != "func") return "";
+    if (!isfunc(f)) return "";
     var namespace = closure(f);
     
     foreach (var k; keys(namespace)) {
-        if (typeof(namespace[k]) == "func") {
+        if (isfunc(namespace[k])) {
             if (namespace[k] == f)
                 return k;
         }
@@ -331,7 +340,7 @@ var proptrace = func(root = "/", frames = 2) {
 # Executes function fn "repeat" times and prints execution time in seconds. If repeat
 # is an integer and an optional "output" argument is specified, each test's result
 # is appended to that vector, then the vector is returned. If repeat is nil, then
-# the funciton is run once and the result returned. Otherwise, the result is discarded.
+# the function is run once and the result returned. Otherwise, the result is discarded.
 # Examples:
 #
 #     var test = func { getprop("/sim/aircraft"); }
@@ -552,6 +561,9 @@ var Probe = {
         
         append(obj._hitsN, obj.node.addChild("hits"));
         obj._hitsN[0].setIntValue(0);
+        # for live monitoring via prop browser, alias all hit counters in one place
+        props.globals.getNode("/_debug/nas/_stats/"~obj.uid, 1)
+            .alias(obj._hitsN[0]);
         Probe._instances[obj.uid] = obj;
         return obj;
     },
@@ -747,12 +759,70 @@ var Breakpoint = {
     },
 };
 
+# addProbeToFunc - wrap a function with a debug probe
+# label:    description, passed to probe
+# f:        function to wrap with a debug probe (hit counter)
+#
+# WARNING: call() currently breaks the call stack which affects backtrace and 
+# the use of caller(i>0). Do not use addProbeToFunc on functions which rely on
+# caller (which is probably bad coding style, but allowed).
+#
+var addProbeToFunc = func (label, f) {
+    if (!isfunc(f)) {
+        logprint(DEV_ALERT, "wrapFunc() error: argument is not a function.");
+        return nil;
+    }
+    if (!isstr(label)) {
+        logprint(DEV_ALERT, "wrapFunc() error: argument is not a string.");
+        return nil;
+    }
+    var __probe = Probe.new(label).enable();
+    var wrapped = func() {
+        __probe.hit();
+        return call(f, arg, me, );
+    }
+    #return bind(wrapped, caller(0)[0], caller(1)[1]);
+    return wrapped;
+}
+
+# scan a hash for function references
+# ns:           the hash to be searched
+# recursive:    if you want to search sub hashes (e.g. classes), set this to 1
+var findFunctions = func (ns, recursive=0) {
+    var functions = {};
+    foreach (var key; keys(ns)) {
+        if (recursive and ishash(ns[key]) and id(ns) != id(ns[key])) {
+            print(key);
+            var f = findFunctions(ns[key]);
+            foreach (var k; keys(f)) {
+                functions[key~"."~k] = f[k];
+            }
+        }
+        if (isfunc(ns[key])) {
+            functions[key] = ns[key];
+        }
+    }    
+    return functions;
+}
+
+# add probes to all functions in a namespace for finding hotspots
+# use property browser at runtime to check /_debug/nas/_stats/
+# ns:           hash 
+# label:        description, passed to probe
+# recursive:    passed to findFunctions, see above
+var addProbesToNamespace = func (ns, label="", recursive=0) {
+    var funcs = findFunctions(ns);
+    foreach (var key; keys(funcs)) {
+        ns[key] = addProbeToFunc(label~"-"~key, funcs[key]);
+    }
+}
 
 # --prop:debug=1 enables debug mode with additional warnings
 #
 _setlistener("sim/signals/nasal-dir-initialized", func {
     # General purpose breakpoint for the lazy ones.
     debug.bp = debug.Breakpoint.new("default");
+    
     if (!getprop("debug"))
 		return;
 	var writewarn = func(f, p, r) {

@@ -520,8 +520,6 @@ var Probe = {
             _enableN: nil,
             _resetN: nil,
             _hitsN: [],
-            _tracingN: nil,
-            origins: {},
             _start_time: 0,
             _stop_time: 0,
             _timeoutN: nil,   # > 0, disable probe after _timeout seconds
@@ -538,16 +536,7 @@ var Probe = {
                 else obj.disable();
             }, 0, 0)
         );
-
-        obj._tracingN = obj.node.addChild("tracing");
-        obj._tracingN.setBoolValue(0);
-        append(obj._L, 
-            setlistener(obj._tracingN, func(n) {
-                if (n.getValue()) obj.enableTracing();
-                else obj.disableTracing();
-            }, 0, 0)
-        );
-        
+       
         obj._resetN = obj.node.addChild("reset");
         obj._resetN.setBoolValue(0);
         append(obj._L, 
@@ -606,19 +595,6 @@ var Probe = {
         me.generateStats();
         return me;
     },
-    
-    enableTracing: func() {
-        if (me._tracingN.getValue()) return;
-        
-        me._tracingN.setBoolValue(1);
-        me.origins = {};
-        return me;
-    },
-
-    disableTracing: func() {
-        me._tracingN.setBoolValue(0);
-        return me;
-    },
 
     generateStats: func {
         if (me._start_time) {
@@ -661,33 +637,11 @@ var Probe = {
             }
             me.hits[counter_id] += 1;
             me._hitsN[counter_id].increment();
-            me._trace();
-            if (isfunc(callback))
+            if (isfunc(callback)) {
                 callback(me.hits);
+            }
         }
         return me;
-    },
-    
-    #write backtrace to prop tree with counters
-    _trace: func(skip=2) {
-        if (!me._tracingN.getValue()) return;
-        var tn = me.node.getNode("trace",1);
-        for (var i = skip; 1; i += 1) {
-            var c  = caller(i);
-            if (c == nil) break;
-            var fn = io.basename(c[2]);
-            #invalid chars are : [ ] < > =
-            fn = globals.string.replace(fn,":","_");
-            if (!fn) fn = "_unknown_";
-            var line = num(c[3]);
-            var sid = fn~":"~line;
-            if (me.origins[sid] == nil) {
-                me.origins[sid] = 1;
-                var n = tn.getChild(fn,line,1);
-                n.setIntValue(0);
-            }
-            tn.getChild(fn,line).increment();    
-        }
     },
 };
 
@@ -720,11 +674,23 @@ var Breakpoint = {
             tokens: 0,
             skip_level: num(skip_level+1), # +1 for Breakpoint.hit()
             dump_locals: num(dump_locals),
+            _tracingN: nil,
         };
         obj._enableN.remove();
         obj._enableN = obj.node.getNode("tokens", 1);
         obj._enableN.setIntValue(0);
-        
+
+        obj._tracingN = obj.node.addChild("tracing");
+        obj._tracingN.setIntValue(0);
+
+        obj._dumpN = obj.node.addChild("dump-trace");
+        obj._dumpN.setBoolValue(0);
+        append(obj._L, 
+            setlistener(obj._dumpN, func(n) {
+                if (n.getValue() == 1) obj.dumpTrace();
+                n.setBoolValue(0);
+            }, 0, 0)
+        );        
         return obj;
     },
 
@@ -738,7 +704,16 @@ var Breakpoint = {
         return me;
     },
     
-    
+    enableTracing: func(tokens = 1) {
+        me._tracingN.setIntValue(tokens);
+        return me;
+    },
+
+    disableTracing: func() {
+        me._tracingN.setIntValue(0);
+        return me;
+    },
+   
     # hit the breakpoint, e.g. do backtrace if we have tokens available
     hit: func(callback = nil) {
         me.hits[0] += 1;
@@ -753,9 +728,48 @@ var Breakpoint = {
                 debug.backtrace(me.label, me.dump_locals, me.skip_level);
             } 
             me._enableN.setValue(me.tokens);
-            me._trace();
+            me.trace(1);
         }
         return me;
+    },
+
+    #write backtrace to prop tree with counters
+    trace: func(skip=0) {
+        var flat_mode = 0;
+        if (!me._tracingN.getValue()) return;
+        me._tracingN.decrement();
+        var tn = me.node.getNode("trace",1);
+        for (var i = skip + 1; 1; i += 1) {
+            var c  = caller(i);
+            if (c == nil) break;
+            var fn = io.basename(c[2]);
+            #invalid chars are : [ ] < > =
+            fn = globals.string.replace(fn,":","_");
+            if (!fn) fn = "_unknown_";
+            var line = num(c[3]);
+            var sid = fn~":"~line;
+            if (flat_mode) {
+                if (tn.getChild(fn,line) == nil) {
+                    tn.getChild(fn,line,1).setIntValue(1);
+                }
+                else {
+                    tn.getChild(fn,line).increment();
+                }
+            }
+            else {
+                tn = tn.getChild(fn,line,1);
+                if (tn.getNode("hits") == nil) {
+                    tn.getNode("hits",1).setIntValue(1);
+                }
+                else { 
+                    tn.getNode("hits").increment(); 
+                }
+            }
+        }
+    },
+    
+    dumpTrace: func () {
+        props.dump(me.node.getNode("trace",1));
     },
 };
 
@@ -817,11 +831,35 @@ var addProbesToNamespace = func (ns, label="", recursive=0) {
     }
 }
 
+# dump a sorted list of hit counters to console
+var dumpProbeStats = func () {
+    var nodes = props.getNode("/_debug/nas/_stats/", 1).getChildren();
+    var data = [];
+    foreach (var n; nodes) {
+        append(data, {name: n.getName(), value: n.getValue()});
+    }
+    var mysort = func(a,b) {
+        if (a.value > b.value) return -1;
+        elsif (a.value == b.value) return 0;
+        else return 1;
+    }
+    
+    foreach (var probe; sort(data, mysort)) {
+        print(probe.name," ",probe.value);
+    }    
+    return;
+}
 # --prop:debug=1 enables debug mode with additional warnings
 #
 _setlistener("sim/signals/nasal-dir-initialized", func {
     # General purpose breakpoint for the lazy ones.
     debug.bp = debug.Breakpoint.new("default");
+    var dumpN = props.getNode("/_debug/nas/_dumpstats", 1);
+    dumpN.setBoolValue(0);
+    setlistener(dumpN, func(n) {
+        n.setBoolValue(0);
+        debug.dumpProbeStats();
+    }, 0, 0);
     
     if (!getprop("debug"))
 		return;

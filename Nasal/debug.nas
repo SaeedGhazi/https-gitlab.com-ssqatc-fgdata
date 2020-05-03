@@ -499,6 +499,7 @@ var Probe = {
         class = globals.string.replace(class, " ", "_");
         label = globals.string.replace(label, " ", "_");
         label = globals.string.replace(label, "/", "_");
+        label = globals.string.replace(label, "\\", "_");
         return class~"-"~label;
     },
     
@@ -668,29 +669,17 @@ var Breakpoint = {
     # label:       Used in property path and as text for backtrace.
     # dump_locals: bool passed to backtrace. Dump variables in BT.
     # skip_level:  int passed to backtrace. 
-    new: func(label, dump_locals = 1, skip_level=0) {
+    new: func(label, dump_locals = 0, skip_level=0) {
         var obj = {
             parents: [Breakpoint, Probe.new(label, "bp")],
             tokens: 0,
             skip_level: num(skip_level+1), # +1 for Breakpoint.hit()
             dump_locals: num(dump_locals),
-            _tracingN: nil,
         };
         obj._enableN.remove();
         obj._enableN = obj.node.getNode("tokens", 1);
         obj._enableN.setIntValue(0);
 
-        obj._tracingN = obj.node.addChild("tracing");
-        obj._tracingN.setIntValue(0);
-
-        obj._dumpN = obj.node.addChild("dump-trace");
-        obj._dumpN.setBoolValue(0);
-        append(obj._L, 
-            setlistener(obj._dumpN, func(n) {
-                if (n.getValue() == 1) obj.dumpTrace();
-                n.setBoolValue(0);
-            }, 0, 0)
-        );        
         return obj;
     },
 
@@ -704,16 +693,6 @@ var Breakpoint = {
         return me;
     },
     
-    enableTracing: func(tokens = 1) {
-        me._tracingN.setIntValue(tokens);
-        return me;
-    },
-
-    disableTracing: func() {
-        me._tracingN.setIntValue(0);
-        return me;
-    },
-   
     # hit the breakpoint, e.g. do backtrace if we have tokens available
     hit: func(callback = nil) {
         me.hits[0] += 1;
@@ -728,16 +707,107 @@ var Breakpoint = {
                 debug.backtrace(me.label, me.dump_locals, me.skip_level);
             } 
             me._enableN.setValue(me.tokens);
-            me.trace(1);
+        }
+        return me;
+    },
+
+};
+
+# Tracer - perform conditional backtraces / statistics controlled via property tree
+# * backtraces are written to property tree
+# * do only a limited number of BT, avoid flooding the log / console
+# * trace statistics can be dumped to XML file
+# 
+# Data can be viewed / modified in the prop tree /_debug/nas/trc-<myLabel>/*
+# * tokens: number of backtraces to do; each hit will decrement this by 1
+# * hits:   total number of hits
+#
+# == Example == 
+# var myBP = debug.Tracer.new("myLabel", 0);
+# myBP.enable(4);       # allow 4 hits, then be quiet 
+# 
+# #at the place of interest (e.g. in some loop or class method) insert:
+# myBP.hit();           # do backtrace here if tokens > 0, reduce tokens by 1
+# myBP.hit(myFunction); # same but call myFunction instead of backtrace
+#
+# print(myBP.getHits()); # print total number of hits
+#
+var Tracer = {
+    
+    # label:       Used in property path and as text for backtrace.
+    # dump_locals: bool passed to backtrace. Dump variables in BT.
+    # skip_level:  int passed to backtrace. 
+    new: func(label, dump_locals = 0, skip_level=0) {
+        var obj = {
+            parents: [Tracer, Probe.new(label, "trc")],
+            tokens: 0,
+            skip_level: num(skip_level+1), # +1 for Tracer.hit()
+            dump_locals: num(dump_locals),
+        };
+        obj._enableN.remove();
+        obj._enableN = obj.node.getNode("tokens", 1);
+        obj._enableN.setIntValue(0);
+
+        obj._dumpN = obj.node.addChild("dump-trace");
+        obj._dumpN.setBoolValue(0);
+        append(obj._L, 
+            setlistener(obj._dumpN, func(n) {
+                if (n.getValue() == 1) obj.dumpTrace();
+                n.setBoolValue(0);
+            }, 0, 0)
+        );
+        
+        obj._resetTraceN = obj.node.addChild("reset-trace");
+        obj._resetTraceN.setBoolValue(0);
+        append(obj._L, 
+            setlistener(obj._resetTraceN, func(n) {
+                if (n.getValue() == 1) obj.resetTrace();
+                n.setBoolValue(0);
+            }, 0, 0)
+        );
+        return obj;
+    },
+
+    # enable BP and set hit limit; 
+    # tokens: int > 0; default: 1 (single shot); 0 allowed (=disable); 
+    enable: func(tokens = 1) {
+        if (num(tokens) == nil) tokens = 1;
+        if (tokens < 0) tokens = 0;
+        me.tokens = tokens;
+        me._enableN.setIntValue(tokens);
+        return me;
+    },
+
+    disableTracing: func() {
+        me._enableN.setIntValue(0);
+        return me;
+    },
+    
+    resetTrace: func () {
+        me.node.getNode("trace",1).remove();
+    },
+
+   
+    hit: func(callback = nil) {
+        me.hits[0] += 1;
+        me._hitsN[0].increment();
+        me.tokens = me._enableN.getValue() or 0;
+        if (me.tokens > 0) {
+            me.tokens -= 1;
+            if (isfunc(callback)) {
+                callback(me.hits[0], me.tokens);
+            }
+            me._enableN.setValue(me.tokens);
+            me._trace(1);
         }
         return me;
     },
 
     #write backtrace to prop tree with counters
-    trace: func(skip=0) {
+    _trace: func(skip=0) {
         var flat_mode = 0;
-        if (!me._tracingN.getValue()) return;
-        me._tracingN.decrement();
+        if (!me._enableN.getValue()) return;
+        me._enableN.decrement();
         var tn = me.node.getNode("trace",1);
         for (var i = skip + 1; 1; i += 1) {
             var c  = caller(i);
@@ -745,6 +815,9 @@ var Breakpoint = {
             var fn = io.basename(c[2]);
             #invalid chars are : [ ] < > =
             fn = globals.string.replace(fn,":","_");
+            fn = globals.string.replace(fn,"#","_");
+            fn = globals.string.replace(fn,"<","_");
+            fn = globals.string.replace(fn,">","_");
             if (!fn) fn = "_unknown_";
             var line = num(c[3]);
             var sid = fn~":"~line;
@@ -768,20 +841,27 @@ var Breakpoint = {
         }
     },
     
-    dumpTrace: func () {
-        props.dump(me.node.getNode("trace",1));
+    dumpTrace: func (path = nil) {
+        #props.dump(me.node.getNode("trace",1));
+        if (path == nil) {
+            path = getprop("/sim/fg-home")~"/Export/dumpTrace-"~me.uid~".xml";
+        }
+        me.node.getNode("dump-result", 1).setValue(
+            io.write_properties(path, me.node.getNode("trace",1))
+        );
     },
-};
+}; #Tracer
+
 
 # addProbeToFunc - wrap a function with a debug probe
-# label:    description, passed to probe
 # f:        function to wrap with a debug probe (hit counter)
+# label:    description, passed to probe
 #
 # WARNING: call() currently breaks the call stack which affects backtrace and 
 # the use of caller(i>0). Do not use addProbeToFunc on functions which rely on
 # caller (which is probably bad coding style, but allowed).
 #
-var addProbeToFunc = func (label, f) {
+var addProbeToFunc = func (f, label) {
     if (!isfunc(f)) {
         logprint(DEV_ALERT, "wrapFunc() error: argument is not a function.");
         return nil;
@@ -795,14 +875,38 @@ var addProbeToFunc = func (label, f) {
         __probe.hit();
         return call(f, arg, me, );
     }
-    #return bind(wrapped, caller(0)[0], caller(1)[1]);
+    return wrapped;
+}
+
+# addTracerToFunc - wrap a function with a debug breakpoint for tracing
+# f:        function to wrap with a tracer
+# label:    description, passed to breakpoint
+#
+# WARNING: call() currently breaks the call stack which affects backtrace and 
+# the use of caller(i>0). Do not use addTracerToFunc on functions which rely on
+# caller (which is probably bad coding style, but allowed).
+#
+var addTracerToFunc = func (f, label) {
+    if (!isfunc(f)) {
+        logprint(DEV_ALERT, "wrapFunc() error: argument is not a function.");
+        return nil;
+    }
+    if (!isstr(label)) {
+        logprint(DEV_ALERT, "wrapFunc() error: argument is not a string.");
+        return nil;
+    }
+    var __trc = Tracer.new(label).enable();
+    var wrapped = func() {
+        __trc.hit();
+        return call(f, arg, me, );
+    }
     return wrapped;
 }
 
 # scan a hash for function references
 # ns:           the hash to be searched
 # recursive:    if you want to search sub hashes (e.g. classes), set this to 1
-var findFunctions = func (ns, recursive=0) {
+var findFunctions = func (ns, recursive = 0) {
     var functions = {};
     foreach (var key; keys(ns)) {
         if (recursive and ishash(ns[key]) and id(ns) != id(ns[key])) {
@@ -823,12 +927,31 @@ var findFunctions = func (ns, recursive=0) {
 # use property browser at runtime to check /_debug/nas/_stats/
 # ns:           hash 
 # label:        description, passed to probe
-# recursive:    passed to findFunctions, see above
-var addProbesToNamespace = func (ns, label="", recursive=0) {
-    var funcs = findFunctions(ns);
+
+var _probed_ns = {};
+var addProbesToNamespace = func (ns, label = "") {
+    var nsid = id(ns);
+    if (_probed_ns[nsid] != nil) return;
+    else _probed_ns[nsid] = {};
+       
+    var funcs = findFunctions(ns, 0);
     foreach (var key; keys(funcs)) {
-        ns[key] = addProbeToFunc(label~"-"~key, funcs[key]);
+        _probed_ns[nsid][key] = funcs[key];
+        ns[key] = addProbeToFunc(funcs[key], label~"-"~key);
     }
+}
+
+var removeProbesFromNamespace = func (ns) {
+    var nsid = id(ns);
+    if (_probed_ns[nsid] == nil) {
+        logprint(DEV_ALERT, "removeProbesFromNamespace: namespace not found");
+        return;
+    }
+        
+    foreach (var key; keys(_probed_ns[nsid])) {
+        ns[key] = _probed_ns[nsid][key];
+    }
+    _probed_ns[nsid] = nil;
 }
 
 # dump a sorted list of hit counters to console
@@ -849,11 +972,13 @@ var dumpProbeStats = func () {
     }    
     return;
 }
+
+
 # --prop:debug=1 enables debug mode with additional warnings
 #
 _setlistener("sim/signals/nasal-dir-initialized", func {
     # General purpose breakpoint for the lazy ones.
-    debug.bp = debug.Breakpoint.new("default");
+    debug.bp = debug.Breakpoint.new("default", 0);
     var dumpN = props.getNode("/_debug/nas/_dumpstats", 1);
     dumpN.setBoolValue(0);
     setlistener(dumpN, func(n) {

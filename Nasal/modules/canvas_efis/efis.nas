@@ -116,14 +116,14 @@ var EFIS = {
     #  - hash {<unit_name>: source_id}
     _activateRouting: func(mapping)
     {
-        if (typeof(mapping) == "vector") {
+        if (isvec(mapping)) {
             forindex (var unit_id; me.display_units)
             {
                 if (mapping[unit_id] != nil)
                     me._setDisplaySource(unit_id, mapping[unit_id]);
             }
         }
-        elsif (typeof(mapping) == "hash") {
+        elsif (ishash(mapping)) {
             foreach (var unit_name; keys(mapping))
             {
                 forindex (var unit_id; me.display_names) {
@@ -137,16 +137,18 @@ var EFIS = {
 
     # Start/stop updates on all sources 
     _powerOnOff: func(power) {
-            if (power) {
-                logprint(3, "EFIS power on");
-                foreach (var src; me.sources) 
-                    src.startUpdates();
+        if (power) {
+            logprint(LOG_INFO, "EFIS power on");
+            foreach (var src; me.sources) {
+                src.startUpdates();
             }
-            else {
-                logprint(3, "EFIS power off.");
-                foreach (var src; me.sources) 
-                    src.stopUpdates();
+        }
+        else {
+            logprint(LOG_INFO, "EFIS power off.");
+            foreach (var src; me.sources) {
+                src.stopUpdates();
             }
+        }
     },
 
     #-- public methods -----------------------
@@ -161,11 +163,11 @@ var EFIS = {
     },
     
     setWindowSize: func(window_size) {
-        if (window_size != nil and typeof(window_size) == "vector") {
+        if (window_size != nil and isvec(window_size)) {
             me.window_size = window_size;
         }
         else {
-            logprint(5, "EFIS.setWindowSize(): Error, argument is not a vector.");
+            logprint(DEV_ALERT, "EFIS.setWindowSize(): Error, argument is not a vector.");
         }
     },
 
@@ -174,12 +176,12 @@ var EFIS = {
     },
     
     setDUPowerProps: func(power_props, minimum_power=0) {
-        if (power_props != nil and typeof(power_props) == "vector") {
+        if (power_props != nil and isvec(power_props)) {
             forindex (var i; me.display_names) {
                 me.display_units[i].setPowerSource(power_props[i], minimum_power);
             }
         }
-        else logprint(5, "EFIS.setDUPowerProps(): Error, argument is not a vector.");
+        else logprint(DEV_ALERT, "EFIS.setDUPowerProps(): Error, argument is not a vector.");
     },
 
     # add a EFISCanvas instance as display source
@@ -202,8 +204,8 @@ var EFIS = {
     {
         if (me.controls[ctrl] != nil) return;
         ctrlN = props.getNode(ctrl,1);
-        if (typeof(mappings) != "vector") {
-            logprint(5, "EFIS addDisplayControl: mappings must be a vector.");
+        if (!isvec(mappings)) {
+            logprint(DEV_ALERT, "EFIS addDisplayControl: mappings must be a vector.");
             return;
         }
         var listener = func(p) {
@@ -225,10 +227,10 @@ var EFIS = {
     # sources:  optional vector,  selected -> source ID (as returned by addSource)
     #           defaults to all registered sources
     addSourceSelector: func(selected, target, sources=nil){
-        if (typeof(selected) == "scalar") {
+        if (isscalar(selected)) {
             selected = props.getNode(selected,1);            
         }
-        if (typeof(target) == "scalar") {
+        if (isscalar(target)) {
             target = props.getNode(target,1);
         }
         if (selected.getValue() == nil)
@@ -246,7 +248,7 @@ var EFIS = {
     },
 
     setDefaultMapping: func(mapping) {
-        if (mapping != nil and (typeof(mapping) == "vector" or typeof(mapping) == "hash")) {
+        if (mapping != nil and (isvec(mapping) or ishash(mapping))) {
             me.default_mapping = mapping;
             me._activateRouting(me.default_mapping);
         }

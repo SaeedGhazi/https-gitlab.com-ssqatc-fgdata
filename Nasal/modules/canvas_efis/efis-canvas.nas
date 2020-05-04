@@ -82,11 +82,13 @@ var EFISCanvas = {
     },
 
     loadsvg: func(file) {
-        var font_mapper = func(family, weight) {
-            return "LiberationFonts/LiberationSans-Regular.ttf";
+        logprint(LOG_INFO, "EFIS loading "~file);
+        var options = {
+            "default-font-family": "LiberationSans",
+            "default-font-weight": "",
+            "default-font-style": "",
         };
-        print("EFIS loading "~file);
-        canvas.parsesvg(me._root, file, {'font-mapper': font_mapper});
+        canvas.parsesvg(me._root, file, options);
 
         # create nasal variables for SVG elements;
         # in a class derived from EFISCanvas, add IDs to the svg_keys member in the constructor (new)
@@ -107,21 +109,21 @@ var EFISCanvas = {
     #       defaults to EFISCanvas instance calling this method, useful if "f" 
     #       is a member of the EFISCanvas instance
     addUpdateFunction: func(f, interval, f_me = nil) {
-        if (typeof(f) != "func") {
-            print("EFISCanvas.addUpdateFunction: Error, argument is not a function.");
+        if (!isfunc(f)) {
+            logprint(DEV_ALERT, "EFISCanvas.addUpdateFunction: argument is not a function.");
             return;
         }
         interval = num(interval);
         f_me = (f_me == nil) ? me : f_me;
         if (interval != nil and interval >= 0) {
-            #the updateCountN is meant for debug/performance monitoring
             var timer = maketimer(interval, me, func {
                 if (me.updateN != nil and me.updateN.getValue()) {
                     var err = [];
                     call(f, [], f_me, nil, err);
                     if (size(err))
                         debug.printerror(err);
-                    me.updateCountN.setValue(me.updateCountN.getValue() + 1);
+                    # debug/performance monitoring
+                    me.updateCountN.increment();
                 }
             });
             append(me._timers, timer);
@@ -137,8 +139,9 @@ var EFISCanvas = {
 
     # stop all registered update functions
     stopUpdates: func() {
-        foreach (var t; me._timers)
+        foreach (var t; me._timers) {
             t.stop();
+        }
     },
 
     # getInstr - get props from /instrumentation/<sys>[i]/<prop>
@@ -165,7 +168,7 @@ var EFISCanvas = {
         }
         me[svgkey].setText(text);
         if (color != nil and me[svgkey].setColor != nil) {
-            if (typeof(color) == "vector") me[svgkey].setColor(color);
+            if (isvec(color)) me[svgkey].setColor(color);
             else me[svgkey].setColor(me.colors[color]);
         }
     },
@@ -186,32 +189,36 @@ var EFISCanvas = {
     # value: optional value to trigger show(); otherwise node.value will be implicitly treated as bool
     _makeListener_showHide: func(svgkeys, value=nil) {
         if (value == nil) {
-            if (typeof(svgkeys) == "vector")
+            if (isvec(svgkeys)) {
                 return func(n) {
                     if (n.getValue())
                         foreach (var key; svgkeys) me[key].show();
                     else
                         foreach (var key; svgkeys) me[key].hide();
                 }
-            else
+            }
+            else {
                 return func(n) {
                     if (n.getValue()) me[svgkeys].show();
                     else me[svgkeys].hide();
                 }
+            }
         }
         else {
-            if (typeof(svgkeys) == "vector")
+            if (isvec(svgkeys)) {
                 return func(n) {
                     if (n.getValue() == value)
                         foreach (var key; svgkeys) me[key].show();
                     else
                         foreach (var key; svgkeys) me[key].hide();
                 };
-            else
+            }
+            else {
                 return func(n) {
                     if (n.getValue() == value) me[svgkeys].show();
                     else me[svgkeys].hide();
                 };
+            }
         }
     },
 
@@ -222,21 +229,23 @@ var EFISCanvas = {
     #          {"svgkey" : factor}, missing keys will be treated as 1
     _makeListener_rotate: func(svgkeys, factors=nil) {
         if (factors == nil) {
-            if (typeof(svgkeys) == "vector")
+            if (isvec(svgkeys)) {
                 return func(n) {
                     var value = n.getValue() or 0;
                     foreach (var key; svgkeys) {
                         me[key].setRotation(value);
                     }
                 }
-            else
+            }
+            else {
                 return func(n) {
                     var value = n.getValue() or 0;
                     me[svgkeys].setRotation(value);
                 }
+            }
         }
         else {
-            if (typeof(svgkeys) == "vector")
+            if (isvec(svgkeys)) {
                 return func(n) {
                     var value = n.getValue() or 0;
                     foreach (var key; svgkeys) {
@@ -244,12 +253,14 @@ var EFISCanvas = {
                         me[key].setRotation(value * factor);
                     }
                 };
-            else
+            }
+            else {
                 return func(n) {
                     var value = n.getValue() or 0;
                     var factor = num(factors) or 1;
                     me[svgkeys].setRotation(value * factor);
                 };
+            }
         }
     },
 
@@ -259,15 +270,15 @@ var EFISCanvas = {
     # factors: number (if svgkeys is a single key) or hash of numbers
     #          {"svgkey" : factor}, missing keys will be treated as 0 (=no op)
     _makeListener_translate: func(svgkeys, fx, fy) {
-        if (typeof(svgkeys) == "vector") {
+        if (isvec(svgkeys)) {
             var x = num(fx) or 0;
             var y = num(fy) or 0;
-            if (typeof(fx) == "hash" or typeof(fy) == "hash") {
+            if (ishash(fx) or ishash(fy)) {
                 return func(n) {
                     foreach (var key; svgkeys) {
                         var value = n.getValue() or 0;
-                        if (typeof(fx) == "hash") x = fx[key] or 0;
-                        if (typeof(fy) == "hash") y = fy[key] or 0;
+                        if (ishash(fx)) x = fx[key] or 0;
+                        if (ishash(fy)) y = fy[key] or 0;
                         me[key].setTranslation(value * x, value * y);
                     }
                 };
@@ -300,9 +311,9 @@ var EFISCanvas = {
     #         (hint: putting elements in a SVG group (if possible) might be easier)
     # colors can be either a vector e.g. [r,g,b] or "name" from me.colors
     _makeListener_setColor: func(svgkeys, color_true, color_false) {
-        var col_0 = (typeof(color_false) == "vector") ? color_false : me.colors[color_false];
-        var col_1 = (typeof(color_true) == "vector") ? color_true : me.colors[color_true];
-        if (typeof(svgkeys) == "vector")  {
+        var col_0 = isvec(color_false) ? color_false : me.colors[color_false];
+        var col_1 = isvec(color_true) ? color_true : me.colors[color_true];
+        if (isvec(svgkeys) )  {
             return func(n) {
                 if (n.getValue())
                     foreach (var key; svgkeys) me[key].setColor(col_1);
@@ -319,10 +330,11 @@ var EFISCanvas = {
     },
 
     _makeListener_updateText: func(svgkeys, format="%s", default="") {
-        if (typeof(svgkeys) == "vector")  {
+        if (isvec(svgkeys)) {
             return func(n) {
-                foreach (var key; svgkeys)
+                foreach (var key; svgkeys) {
                     me.updateTextElement(key, sprintf(format, n.getValue() or default));
+                }
             };
         }
         else {

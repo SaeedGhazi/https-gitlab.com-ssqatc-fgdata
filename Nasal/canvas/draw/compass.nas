@@ -10,15 +10,17 @@ var CompassRose = {
         new: func() {
             var obj = {
                 parents: [CompassRose.Style, canvas.draw.marksStyle.new()],
-                mark_count: 36,     # number of marks, count = 360 / interval
-                label_count: 12,    # number of text labels (degrees), e.g. 12
-                label_div: 10,      # >0 divide degrees by this number for text label, e.g. 10
+                mark_count: 36,       # number of marks, count = 360 / interval
+                label_count: 12,      # number of text labels (degrees)
+                label_div: 10,        # >0 div. degr. by this for text labels
                 circle_color: [255,255,255,1],
                 mark_color:   [255,255,255,1],
                 label_color:  [255,255,255,1],
-                center_mark: 0,     # draw a mark in the center of the rose
-                fontsize: 0,        # fontsize for labels
-                nesw: 1,            # replace labels 0,90,180,270 by N,E,S,W
+                center_mark: 0,       # draw a mark in the center of the rose
+                font: "sans",         # fontsize for labels
+                font_weight: "bold",  # fontsize for labels
+                fontsize: 0,          # fontsize for labels
+                nesw: 1,              # replace labels 0,90,180,270 by N,E,S,W
             };
             obj.setMarkLength(0.1);
             obj.setSubdivisionLength(0.5);
@@ -80,6 +82,7 @@ CompassRose.draw = func(cgroup, radius, style=nil) {
             .createChildren("text", style.label_count);
         var offset = (style.mark_offset < 0 ? -1 : 1) * style.mark_length * radius;
         var rot = 2*math.pi/style.label_count;
+        var font = canvas.font_mapper(style.font, style.font_weight);
         forindex (i; labels) {
             var t = n = int(i*360 / style.label_count);
             if (style.label_div > 0) t = int(n / style.label_div);
@@ -93,7 +96,7 @@ CompassRose.draw = func(cgroup, radius, style=nil) {
             labels[i]
                 .setText(txt)
                 .setFontSize(fontsize)
-                .setFont(font_mapper("LiberationSans","bold"))
+                .setFont(font)
                 .setColor(style.label_color)
                 .setAlignment("center-"~(style.mark_offset < 0 ? "top" : "bottom"))
                 .setTranslation(0,-radius-offset)

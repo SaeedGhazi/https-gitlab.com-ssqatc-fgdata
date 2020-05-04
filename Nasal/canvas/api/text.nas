@@ -3,15 +3,49 @@
 #-------------------------------------------------------------------------------
 # Class for a text element on a canvas
 #
-var font_mapper = func(family = "LiberationSans", weight = "", style = "", custom_mapper=nil)
+var font_mapper = func(family = nil, weight = nil, style = nil, options = nil)
 {
-    if (isfunc(custom_mapper)) {
-        var font = custom_mapper(family, weight, style);
-        if (font != nil)
-        return font;
+    var defaults = {
+        "default-font-family": "LiberationSans",
+        "default-font-weight": "",
+        "default-font-style": "",
+    };
+
+    # setup defaults if no options are given
+    if (options == nil) {
+        options = defaults;
+    }
+    if (!ishash(options)) {
+        logprint(LOG_ALERT, "font_mapper: options must be a hash!")
     }
 
-    if (string.match(family, "Liberation*")) {
+    # use defaults for missing arguments
+    if (family == nil) {
+        family = options["default-font-family"] or defaults["default-font-family"];
+    }
+    if (weight == nil) {
+        weight = options["default-font-weight"] or defaults["default-font-weight"];
+    }
+    if (style == nil) {
+        style = options["default-font-style"] or defaults["default-font-style"];
+    }
+
+    if (isfunc(options["font-mapper"])) {
+        var font = options["font-mapper"](family, weight, style);
+        if (font != nil) {
+            return font;
+        }
+    }
+
+    # Remove '' that Inkscape puts around font names containing spaces
+    if (left(family, 1) == "'") family = substr(family, 1);
+    if (right(family, 1) == "'") family = substr(family, 0, size(family) - 1);
+
+    # map generic Inkscape sans serif to our default font
+    if (string.lc(family) == "sans" or string.lc(family) == "sans-serif") {
+        family = "LiberationSans";
+    }
+    if (left(family, 10) == "Liberation") {
         style = style == "italic" ? "Italic" : "";
         weight = weight == "bold" ? "Bold" : "";
 
@@ -20,6 +54,7 @@ var font_mapper = func(family = "LiberationSans", weight = "", style = "", custo
 
         return "LiberationFonts/"~string.replace(family, " ", "")~"-"~s~".ttf";
     }
+
     return "LiberationFonts/LiberationMono-Bold.ttf";
 };
 

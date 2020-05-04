@@ -13,8 +13,9 @@ var parsesvg = func(group, path, options = nil)
   if( options == nil )
     options = {};
 
-  if( typeof(options) != "hash" )
+  if (!ishash(options)) {
     die("Options need to be of type hash!");
+  }
 
   # resolve paths using standard SimGear logic
   var file_path = resolvepath(path);
@@ -27,8 +28,6 @@ var parsesvg = func(group, path, options = nil)
   {
     logprint(level, "parsesvg: "~msg~" [path='"~ path~"']");
   };
-
-  var custom_font_mapper = options['font-mapper'];
 
   # Helper to get number without unit (eg. px)
   var evalCSSNum = func(css_num)
@@ -323,7 +322,7 @@ var parsesvg = func(group, path, options = nil)
     var font_weight = style["font-weight"];
     var font_style = style["font-style"];
     if( font_family != nil or font_weight != nil or font_style != nil )
-      stack[-1].set("font", font_mapper(font_family, font_weight, font_style, custom_font_mapper));
+      stack[-1].set("font", font_mapper(font_family, font_weight, font_style, options));
 
     var font_size = style["font-size"];
     if( font_size != nil )
@@ -564,10 +563,10 @@ var parsesvg = func(group, path, options = nil)
       # by adding another backslash - otherwise parse error anywhere below 
       if (ref == nil or find("\\", ref) > -1)
       {
-        return logpr(LOG_INFO, "Invalid or missing href in image tag: '" ~ ref ~ "'");
+        return logpr(LOG_WARN, "Invalid or missing href in image tag: '" ~ ref ~ "'");
       }
       if (substr(ref, 0, 5) == "data:") {
-        return logpr(LOG_INFO, "Unsupported embedded image");
+        return logpr(LOG_WARN, "Unsupported embedded image");
       }
       elsif (substr(ref, 0, 5) != "file:") {
         # absolute paths seem to start with "file:"
@@ -707,7 +706,7 @@ var parsesvg = func(group, path, options = nil)
       text = nil;
       tspans = nil;
     }
-  };
+  }; #end()
 
   # XML parsers element data callback
   var data = func(data)
@@ -730,15 +729,8 @@ var parsesvg = func(group, path, options = nil)
   call(func parsexml(path, start, end, data), nil, var err = []);
   if( size(err) )
   {
-    var msg = err[0];
-    for(var i = 1; i + 1 < size(err); i += 2)
-    {
-      # err = ['error message', 'file', line]
-      msg ~= (i == 1 ? "\n  at " : "\n  called from: ")
-           ~ err[i] ~ ", line " ~ err[i + 1]
-    }
-    logpr(LOG_ALERT, msg ~ "\n ");
-
+    logpr(LOG_ALERT, "parse XML failed");
+    debug.printerror(err);
     return 0;
   }
 

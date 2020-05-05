@@ -33,7 +33,7 @@ var Image = {
         if (size(arg) == 1) {
             arg = arg[0];
         }
-        elsif (size(arg) and size(arg) < 4 and typeof(arg[0]) == "vector") {
+        elsif (size(arg) and size(arg) < 4 and isvec(arg[0])) {
             arg = arg[0]~arg[1:];
         }
         if (!contains(caller(0)[0], "normalized")) {

@@ -64,7 +64,7 @@ var Group = {
             children = [];
         }
         var my_children = me.getChildren();
-        if (typeof(type) != "vector") {
+        if (!isvec(type)) {
             type = [type];
         }
         foreach(var c; my_children) {
@@ -87,15 +87,16 @@ var Group = {
         var color = arg;
         var types = [Path, Text];
         var arg_c = size(color);
-        if (arg_c > 1 and typeof(color[-1]) == "vector") {
+        if (arg_c > 1 and isvec(color[-1])) {
             types = color[-1];
             color = subvec(color, 0, arg_c - 1);
         }
         var children = me.getChildrenOfType(types);
-        if (typeof(color) == "vector") {
+        if (isvec(color)) {
             var first = color[0];
-            if (typeof(first) == "vector")
+            if (isvec(first)) {
                 color = first;
+            }
         }
         foreach(var c; children) {
             c.setColor(color);

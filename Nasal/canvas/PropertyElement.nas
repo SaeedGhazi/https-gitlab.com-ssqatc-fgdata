@@ -10,10 +10,12 @@ var PropertyElement = {
   # @param id       ID/Name (Should be unique)
   new: func(node, id)
   {
-    if( typeof(node) == 'vector' )
+    if (isvec(node)) {
       var node = aircraft.makeNode(node[0]).addChild(node[1], 0, 0);
-    else
+    }
+    else {
       var node = aircraft.makeNode(node);
+    }
 
     if( !isa(node, props.Node) )
       return debug.warn("Not a props.Node!");

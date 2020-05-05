@@ -203,7 +203,7 @@ var Path = {
 
         # resolve border-[top-,bottom-][left-,right-]radius
         var br = opts["border-radius"];
-        if (typeof(br) == "scalar") {
+        if (isscalar(br)) {
             br = [br, br];
         }
 
@@ -220,7 +220,7 @@ var Path = {
             }
 
             if (r == nil) { return br; }
-            else if (typeof(r) == "scalar") { return [r, r]; }
+            else if (isscalar(r)) { return [r, r]; }
             else { return r; }
         };
 
@@ -267,7 +267,7 @@ var Path = {
     # @param cx        (optional) center x coordinate or vector [cx, cy]
     # @param cy        (optional) center y coordinate
     ellipse: func(rx, ry, cx = nil, cy = nil) {
-        if (typeof(cx) == "vector") {
+        if (isvec(cx)) {
             cy = cx[1];
             cx = cx[0];
         }
@@ -345,13 +345,12 @@ var Path = {
     # @param pattern Vector, Vector of alternating dash and gap lengths
     #    [on1, off1, on2, ...]
     setStrokeDashArray: func(pattern) {
-        if (typeof(pattern) == "vector") {
+        if (isvec(pattern)) {
             me.set("stroke-dasharray", string.join(",", pattern));
         }
         else {
             debug.warn("setStrokeDashArray: vector expected!");
         }
-
         return me;
     },
 

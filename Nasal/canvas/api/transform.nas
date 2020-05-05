@@ -24,7 +24,7 @@ var Transform = {
             f: node.getNode("m[5]", 1), #ty
         };
 
-        var use_vals = typeof(vals) == "vector" and size(vals) == 6;
+        var use_vals = isvec(vals) and size(vals) == 6;
 
         # initialize to identity matrix
         m.a.setDoubleValue(use_vals ? vals[0] : 1);

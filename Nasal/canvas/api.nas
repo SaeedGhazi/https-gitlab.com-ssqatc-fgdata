@@ -70,10 +70,11 @@ var get = func(arg)
 {
   if( isa(arg, props.Node) )
     var node = arg;
-  else if( typeof(arg) == "hash" )
+  else if (ishash(arg))
     var node = props.Node.new(arg);
-  else
-    die("canvas.new: Invalid argument.");
+  else {
+    die("canvas.get: Invalid argument.");
+  }
 
   return wrapCanvas(_getCanvasGhost(node._g));
 };

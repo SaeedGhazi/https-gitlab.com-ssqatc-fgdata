@@ -64,8 +64,9 @@ var parsesvg = func(group, path, options = nil)
     append(stack, stack[-1].createChild(type, id));
     append(close_stack, level);
 
-    if( typeof(id) == 'scalar' and size(id) )
+    if (isscalar(id) and size(id)) {
       id_dict[ id ] = stack[-1];
+    }
 
     if( cur_clip != nil )
     {

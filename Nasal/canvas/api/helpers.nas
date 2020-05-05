@@ -6,9 +6,9 @@ var _getColor = func(color) {
     if (size(color) == 1)
         var color = color[0];
 
-    if (typeof(color) == "scalar")
+    if (isscalar(color))
         return color;
-    if (typeof(color) != "vector")
+    if (!isvec(color))
         return debug.warn("Wrong type for color");
     if (size(color) < 3 or size(color) > 4)
         return debug.warn("Color needs 3 or 4 values (RGB or RGBA)");
@@ -25,10 +25,10 @@ var _getColor = func(color) {
     return str ~ ')';
 };
 
-var _arg2valarray = func
-{
+var _arg2valarray = func {
     var ret = arg;
-    while (typeof(ret) == "vector" and size(ret) == 1 and typeof(ret[0]) == "vector")
+    while (isvec(ret) and size(ret) == 1 and isvec(ret[0])) {
         ret = ret[0];
+    }
     return ret;
 }

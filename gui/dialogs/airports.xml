@@ -235,7 +235,7 @@
           setprop("/sim/presets/offset-distance-nm", 0);
           setprop("/sim/presets/offset-azimuth-deg", 0);
           setprop("/sim/presets/glideslope-deg", 0);
-          setprop("/sim/presets/heading-deg", 0);
+          setprop("/sim/presets/heading-deg", 9999.0);
 
           if (mode["bestrunway"].getBoolValue()) {
             setprop("/sim/presets/runway", "");

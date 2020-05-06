@@ -197,174 +197,6 @@
 		<heavy>false</heavy>
 	</aircraft>
 	<aircraft>
-		<model>Aircraft/A320/A320-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-320</required-aircraft>
-		<actype>320</actype>
-		<offset>0</offset>
-		<radius>17</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>jet_transport</performance-class>
-		<registration>OO-SNA</registration>
-		<heavy>false</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A320/A320-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-320</required-aircraft>
-		<actype>320</actype>
-		<offset>0</offset>
-		<radius>17</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>jet_transport</performance-class>
-		<registration>OO-SNB</registration>
-		<heavy>false</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A320/A320-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-320</required-aircraft>
-		<actype>320</actype>
-		<offset>0</offset>
-		<radius>17</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>jet_transport</performance-class>
-		<registration>OO-SNC</registration>
-		<heavy>false</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A320/A320-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-320</required-aircraft>
-		<actype>320</actype>
-		<offset>0</offset>
-		<radius>17</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>jet_transport</performance-class>
-		<registration>OO-SND</registration>
-		<heavy>false</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A320/A320-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-320</required-aircraft>
-		<actype>320</actype>
-		<offset>0</offset>
-		<radius>17</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>jet_transport</performance-class>
-		<registration>OO-SNE</registration>
-		<heavy>false</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A332/A332-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-332</required-aircraft>
-		<actype>332</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFT</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A332/A332-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-332</required-aircraft>
-		<actype>332</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFZ</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A333/A333-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-333</required-aircraft>
-		<actype>333</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFC</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A333/A333-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-333</required-aircraft>
-		<actype>333</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFD</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A333/A333-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-333</required-aircraft>
-		<actype>333</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFE</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A333/A333-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-333</required-aircraft>
-		<actype>333</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFF</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/A333/A333-Brussels.xml</model>
-		<livery>BEL</livery>
-		<airline>BEL</airline>
-		<home-port>EBBR</home-port>
-		<required-aircraft>BEL-333</required-aircraft>
-		<actype>333</actype>
-		<offset>0</offset>
-		<radius>30</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>heavy_jet</performance-class>
-		<registration>OO-SFG</registration>
-		<heavy>true</heavy>
-	</aircraft>
-	<aircraft>
 		<model>Aircraft/A319/A319-Brussels.xml</model>
 		<livery>BEL</livery>
 		<airline>BEL</airline>
@@ -375,7 +207,7 @@
 		<radius>17</radius>
 		<flighttype>gate</flighttype>
 		<performance-class>jet_transport</performance-class>
-		<registration>OO-SFH</registration>
+		<registration>OO-SSO</registration>
 		<heavy>false</heavy>
 	</aircraft>
 	<aircraft>
@@ -389,7 +221,7 @@
 		<radius>17</radius>
 		<flighttype>gate</flighttype>
 		<performance-class>jet_transport</performance-class>
-		<registration>OO-SFX</registration>
+		<registration>OO-SSQ</registration>
 		<heavy>false</heavy>
 	</aircraft>
 	<aircraft>
@@ -477,6 +309,76 @@
 		<heavy>false</heavy>
 	</aircraft>
 	<aircraft>
+		<model>Aircraft/A320/A320-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-320</required-aircraft>
+		<actype>320</actype>
+		<offset>0</offset>
+		<radius>17</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>jet_transport</performance-class>
+		<registration>OO-SNA</registration>
+		<heavy>false</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A320/A320-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-320</required-aircraft>
+		<actype>320</actype>
+		<offset>0</offset>
+		<radius>17</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>jet_transport</performance-class>
+		<registration>OO-SNB</registration>
+		<heavy>false</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A320/A320-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-320</required-aircraft>
+		<actype>320</actype>
+		<offset>0</offset>
+		<radius>17</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>jet_transport</performance-class>
+		<registration>OO-SNC</registration>
+		<heavy>false</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A320/A320-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-320</required-aircraft>
+		<actype>320</actype>
+		<offset>0</offset>
+		<radius>17</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>jet_transport</performance-class>
+		<registration>OO-SND</registration>
+		<heavy>false</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A320/A320-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-320</required-aircraft>
+		<actype>320</actype>
+		<offset>0</offset>
+		<radius>17</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>jet_transport</performance-class>
+		<registration>OO-SNE</registration>
+		<heavy>false</heavy>
+	</aircraft>
+     <aircraft>
 		<model>Aircraft/A320/A320-Brussels.xml</model>
 		<livery>BEL</livery>
 		<airline>BEL</airline>
@@ -629,6 +531,104 @@
 		<performance-class>jet_transport</performance-class>
 		<registration>OO-TCV</registration>
 		<heavy>false</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A332/A332-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-332</required-aircraft>
+		<actype>332</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFT</registration>
+		<heavy>true</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A332/A332-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-332</required-aircraft>
+		<actype>332</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFZ</registration>
+		<heavy>true</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A333/A333-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-333</required-aircraft>
+		<actype>333</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFC</registration>
+		<heavy>true</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A333/A333-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-333</required-aircraft>
+		<actype>333</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFD</registration>
+		<heavy>true</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A333/A333-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-333</required-aircraft>
+		<actype>333</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFE</registration>
+		<heavy>true</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A333/A333-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-333</required-aircraft>
+		<actype>333</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFF</registration>
+		<heavy>true</heavy>
+	</aircraft>
+	<aircraft>
+		<model>Aircraft/A333/A333-Brussels.xml</model>
+		<livery>BEL</livery>
+		<airline>BEL</airline>
+		<home-port>EBBR</home-port>
+		<required-aircraft>BEL-333</required-aircraft>
+		<actype>333</actype>
+		<offset>0</offset>
+		<radius>30</radius>
+		<flighttype>gate</flighttype>
+		<performance-class>heavy_jet</performance-class>
+		<registration>OO-SFG</registration>
+		<heavy>true</heavy>
 	</aircraft>
 	<aircraft>
 		<model>Aircraft/A333/A333-Brussels.xml</model>
@@ -15974,3 +15974,4 @@
 		<repeat>WEEK</repeat>
 	</flight>
 </trafficlist>
+

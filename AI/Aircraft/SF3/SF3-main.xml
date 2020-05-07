@@ -8,7 +8,7 @@
   </offsets>
   <animation>
     <type>select</type>
-    <object-name>Gear</object-name>
+    <object-name>SF3_Gear</object-name>
     <condition>
       <less-than>
         <property>velocities/true-airspeed-kt</property>

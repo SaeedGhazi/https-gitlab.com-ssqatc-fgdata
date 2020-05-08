@@ -86,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Croatia.xml</model>
+    <model>Aircraft/DH4/DH4-Croatia.xml</model>
     <livery>CTN</livery>
     <airline>CTN</airline>
     <home-port>LDZA</home-port>
@@ -100,7 +100,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Croatia.xml</model>
+    <model>Aircraft/DH4/DH4-Croatia.xml</model>
     <livery>CTN</livery>
     <airline>CTN</airline>
     <home-port>LDZA</home-port>
@@ -114,7 +114,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Croatia.xml</model>
+    <model>Aircraft/DH4/DH4-Croatia.xml</model>
     <livery>CTN</livery>
     <airline>CTN</airline>
     <home-port>LDZA</home-port>
@@ -128,7 +128,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Croatia.xml</model>
+    <model>Aircraft/DH4/DH4-Croatia.xml</model>
     <livery>CTN</livery>
     <airline>CTN</airline>
     <home-port>LDZA</home-port>
@@ -142,7 +142,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Croatia.xml</model>
+    <model>Aircraft/DH4/DH4-Croatia.xml</model>
     <livery>CTN</livery>
     <airline>CTN</airline>
     <home-port>LDZA</home-port>
@@ -156,7 +156,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Croatia.xml</model>
+    <model>Aircraft/DH4/DH4-Croatia.xml</model>
     <livery>CTN</livery>
     <airline>CTN</airline>
     <home-port>LDZA</home-port>

@@ -102,7 +102,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -116,7 +116,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -130,7 +130,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -144,7 +144,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -158,7 +158,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -172,7 +172,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -186,7 +186,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -200,7 +200,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -214,7 +214,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -228,7 +228,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>
@@ -242,7 +242,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Luxair.xml</model>
+    <model>Aircraft/DH4/DH4-Luxair.xml</model>
     <livery>LGL</livery>
     <airline>LGL</airline>
     <home-port>ELLX</home-port>

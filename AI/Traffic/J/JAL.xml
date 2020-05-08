@@ -2042,7 +2042,7 @@
     <actype>788</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA826J</registration>
     <heavy>Yes</heavy>
@@ -2056,7 +2056,7 @@
     <actype>788</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA827J</registration>
     <heavy>Yes</heavy>
@@ -2070,7 +2070,7 @@
     <actype>788</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA828J</registration>
     <heavy>Yes</heavy>
@@ -2084,7 +2084,7 @@
     <actype>788</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA829J</registration>
     <heavy>Yes</heavy>
@@ -2098,7 +2098,7 @@
     <actype>788</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA830J</registration>
     <heavy>Yes</heavy>
@@ -2112,7 +2112,7 @@
     <actype>788</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA834J</registration>
     <heavy>Yes</heavy>
@@ -2126,7 +2126,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA862J</registration>
     <heavy>Yes</heavy>
@@ -2140,7 +2140,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA867J</registration>
     <heavy>Yes</heavy>
@@ -2154,7 +2154,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA868J</registration>
     <heavy>Yes</heavy>
@@ -2168,7 +2168,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA864J</registration>
     <heavy>Yes</heavy>
@@ -2182,7 +2182,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA861J</registration>
     <heavy>Yes</heavy>
@@ -2196,7 +2196,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA866J</registration>
     <heavy>Yes</heavy>
@@ -2210,7 +2210,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA869J</registration>
     <heavy>Yes</heavy>
@@ -2224,7 +2224,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA863J</registration>
     <heavy>Yes</heavy>
@@ -2238,7 +2238,7 @@
     <actype>789</actype>
     <offset>0</offset>
     <radius>30</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
     <registration>JA865J</registration>
     <heavy>Yes</heavy>

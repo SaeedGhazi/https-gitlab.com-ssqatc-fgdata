@@ -10,7 +10,7 @@
     <actype>738</actype>
     <offset>0</offset>
     <radius>18</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>YJ-AV8</registration>
     <heavy>No</heavy>
@@ -24,7 +24,7 @@
     <actype>AT7</actype>
     <offset>0</offset>
     <radius>14</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>turboprop_transport</performance-class>
     <registration>YJ-AV71</registration>
     <heavy>No</heavy>
@@ -38,7 +38,7 @@
     <actype>AT7</actype>
     <offset>0</offset>
     <radius>14</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>turboprop_transport</performance-class>
     <registration>YJ-AV73</registration>
     <heavy>No</heavy>
@@ -52,7 +52,7 @@
     <actype>BNI</actype>
     <offset>0</offset>
     <radius>8</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>turboprop_transport</performance-class>
     <registration>YJ-OO8</registration>
     <heavy>No</heavy>
@@ -66,7 +66,7 @@
     <actype>DHT</actype>
     <offset>0</offset>
     <radius>10</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>turboprop_transport</performance-class>
     <registration>YJ-AV12</registration>
     <heavy>No</heavy>
@@ -80,7 +80,7 @@
     <actype>DHT</actype>
     <offset>0</offset>
     <radius>10</radius>
-    <flighttype></flighttype>
+    <flighttype>gate</flighttype>
     <performance-class>turboprop_transport</performance-class>
     <registration>YJ-RV10</registration>
     <heavy>No</heavy>

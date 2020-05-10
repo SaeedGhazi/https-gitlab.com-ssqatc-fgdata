@@ -2,7 +2,7 @@
 <!-- Author Marcin Kuzniar - From Timetable of Nov 2019 - Includes Passenger flights -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -16,7 +16,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -30,7 +30,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -44,7 +44,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -58,7 +58,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -72,7 +72,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -86,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -100,7 +100,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -114,7 +114,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -128,7 +128,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -142,7 +142,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYVR</home-port>
@@ -156,7 +156,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -170,7 +170,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -184,7 +184,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -198,7 +198,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -212,7 +212,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -226,7 +226,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -240,7 +240,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYHZ</home-port>
@@ -254,7 +254,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -268,7 +268,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -282,7 +282,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYT</home-port>
@@ -296,7 +296,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -310,7 +310,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYVR</home-port>
@@ -324,7 +324,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYVR</home-port>
@@ -338,7 +338,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -352,7 +352,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -366,7 +366,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -380,7 +380,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -394,7 +394,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYEG</home-port>
@@ -408,7 +408,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYEG</home-port>
@@ -422,7 +422,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -436,7 +436,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -450,7 +450,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -464,7 +464,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYVR</home-port>
@@ -478,7 +478,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -492,7 +492,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -506,7 +506,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -520,7 +520,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -534,7 +534,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -548,7 +548,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -562,7 +562,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -576,7 +576,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -590,7 +590,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYZ</home-port>
@@ -604,7 +604,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -618,7 +618,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>
@@ -632,7 +632,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Westjet.xml</model>
+    <model>Aircraft/DH4/DH4-Westjet.xml</model>
     <livery>WEN</livery>
     <airline>WEN</airline>
     <home-port>CYYC</home-port>

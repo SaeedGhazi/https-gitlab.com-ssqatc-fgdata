@@ -137,7 +137,7 @@ var light = {
 		m.node = makeNode(arg[0]);
 		var stretch = 1.0;
 		var c = 1;
-		if (typeof(arg[c]) == "scalar") {
+		if (isscalar(arg[c])) {
 			stretch = arg[c];
 			c += 1;
 		}
@@ -348,48 +348,54 @@ var data = {
 		me.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
 		me.signalN = props.globals.getNode("/sim/signals/save", 1);
 		me.catalog = [];
-		me.loopid = 0;
-		me.interval = 0;
+        me._timer = maketimer(60, me, me._save_);
 
-		setlistener("/sim/signals/reinit", func(n) { n.getBoolValue() and me._save_() });
-		setlistener("/sim/signals/exit", func me._save_());
+		setlistener("/sim/signals/reinit", func(n) {
+            if (n.getBoolValue() and getprop("/sim/startup/save-on-exit")) {
+                me._save_();
+            }
+        });
+		setlistener("/sim/signals/exit", func {
+            if (getprop("/sim/startup/save-on-exit")) {
+                me._save_();
+            }
+        });
 	},
+    
 	load: func {
 		if (io.stat(me.path) != nil) {
 			logprint(LOG_INFO, "loading aircraft data from ", me.path);
 			io.read_properties(me.path, props.globals);
 		}
 	},
+    
 	save: func(v = nil) {
-		me.loopid += 1;
 		if (v == nil) {
 			me._save_();
+            me._timer.stop();
 		} else {
-			me.interval = 60 * v;
-			me._loop_(me.loopid);
+			me._timer.restart(60 * v);
 		}
 	},
-	_loop_: func(id) {
-		id == me.loopid or return;
-		me._save_();
-		settimer(func me._loop_(id), me.interval);
-	},
+    
 	_save_: func {
 		size(me.catalog) or return;
 		logprint(LOG_INFO, "saving aircraft data to ", me.path);
 		me.signalN.setBoolValue(1);
 		var data = props.Node.new();
 		foreach (var c; me.catalog) {
-			if (c[0] == `/`)
+			if (c[0] == `/`) {
 				c = substr(c, 1);
-
+            }
 			props.copy(props.globals.getNode(c, 1), data.getNode(c, 1));
 		}
 		io.write_properties(me.path, data);
 	},
+    
 	add: func(p...) {
-		foreach (var n; props.nodeList(p))
+		foreach (var n; props.nodeList(p)) {
 			append(me.catalog, n.getPath());
+        }
 	},
 };
 
@@ -608,7 +614,7 @@ var overlay_update = {
 	add: func(path, prop, callback = nil) {
 		var path = path ~ '/';
 		me.data[path] = [me.root.initNode(prop, ""), "",
-				typeof(callback) == "func" ? callback : func nil];
+				isfunc(callback) ? callback : func nil];
 		return me;
 	},
 	stop: func {
@@ -1197,15 +1203,11 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 		# load user-specific aircraft settings
 		data.load();
 		var n = props.globals.getNode("/sim/aircraft-data");
-		if (n != nil)
-			foreach (var c; n.getChildren("path"))
+		if (n != nil) {
+			foreach (var c; n.getChildren("path")) {
 				if (c.getType() != "NONE")
-					data.add(c.getValue());
-	}
-	if (!getprop("/sim/startup/save-on-exit"))
-	{
-		# prevent saving
-		data._save_ = func nil;
-		data._loop_ = func nil;
+                data.add(c.getValue());
+            }
+        }
 	}
 });

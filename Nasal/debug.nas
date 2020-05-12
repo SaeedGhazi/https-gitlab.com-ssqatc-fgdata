@@ -470,7 +470,7 @@ var isnan = func {
 }
 
 # Probe class - collect statistics; controlled via property tree
-# Data can be viewed / modified in the prop tree /_debug/nas/probe-<myLabel>/*
+# Data can be viewed / modified in the prop tree /_debug/nas/probe/<myLabel>/*
 # ./enable    bool, 
 # ./reset     bool, reset hit counters to 0 and _start_time to now
 # ./hits[i]   number of hits, by default i=0 -> hits
@@ -527,7 +527,7 @@ var Probe = {
             _L: [],
         };
 
-        obj.node = props.globals.getNode("/_debug/nas/"~obj.uid, 1);
+        obj.node = props.globals.getNode("/_debug/nas/"~class~"/"~label, 1);
         obj.node.removeChildren();
         obj._enableN = obj.node.addChild("enable");
         obj._enableN.setBoolValue(0);
@@ -650,7 +650,7 @@ var Probe = {
 # * count how often the BP was hit
 # * do only a limited number of BT, avoid flooding the log / console
 # 
-# Data can be viewed / modified in the prop tree /_debug/nas/bp-<myLabel>/*
+# Data can be viewed / modified in the prop tree /_debug/nas/bp/<myLabel>/*
 # * tokens: number of backtraces to do; each hit will decrement this by 1
 # * hits:   total number of hits
 #
@@ -718,7 +718,7 @@ var Breakpoint = {
 # * do only a limited number of BT, avoid flooding the log / console
 # * trace statistics can be dumped to XML file
 # 
-# Data can be viewed / modified in the prop tree /_debug/nas/trc-<myLabel>/*
+# Data can be viewed / modified in the prop tree /_debug/nas/trc/<myLabel>/*
 # * tokens: number of backtraces to do; each hit will decrement this by 1
 # * hits:   total number of hits
 #

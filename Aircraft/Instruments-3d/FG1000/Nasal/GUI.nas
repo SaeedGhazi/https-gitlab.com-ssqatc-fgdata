@@ -104,7 +104,33 @@ var GUI =
     };
 
     obj.window = canvas.Window.new([obj.scale*obj.width,obj.scale*obj.height],"dialog");
-    obj.window.set('title',"FG1000 Device " ~ device_id ~ " (" ~ int(scale * 100) ~ "%)");
+    obj.window.set('title',"FG1000 Device " ~ device_id);
+    obj.window.set('resize',1);
+    obj.window.lockAspectRatio(1);
+
+    var inset = canvas.new({
+            "name" : "Inset",
+            "size" : [1407, 918],
+            "view" : [obj.width, obj.height],
+            "mipmapping": 0,
+          });
+
+    var insetgroup = inset.createGroup();
+
+    # Project the canvas onto the dialog
+    var mfd_child = insetgroup.createChild("image")
+        .setFile(mfd_canvas.getPath())
+        .set("z-index", 150)
+        .setTranslation(186,45)
+        .setSize(1024, 768);
+
+    # Create the surround fascia, which is just a PNG image;
+    var child = insetgroup.createChild("image")
+        .setFile("Aircraft/Instruments-3d/FG1000/Dialogs/fascia.png")
+        .set("z-index", 100)
+        .setSize(obj.width, obj.height);
+
+    obj.window.setCanvas(inset);
 
     obj.window.del = func() {
       # Over-ride the window.del function so we clean up when the user closes the window
@@ -112,33 +138,13 @@ var GUI =
       call(obj.cleanup, [], obj);
     };
 
-    # creating the top-level/root group which will contain all other elements/group
-    obj.myCanvas = obj.window.createCanvas();
-    obj.myCanvas.set("name", "MFD");
-    obj.root = obj.myCanvas.createGroup();
-
-    # Project the canvas onto the dialog
-    var mfd_child = obj.root.createChild("image")
-      .setFile(mfd_canvas.getPath())
-      .set("z-index", 150)
-      .setTranslation(obj.scale*186,obj.scale*45)
-      .setSize(obj.scale*1024, obj.scale*768);
-
-
-    # Create the surround fascia, which is just a PNG image;
-    var child = obj.root.createChild("image")
-        .setFile("Aircraft/Instruments-3d/FG1000/Dialogs/fascia.png")
-        .set("z-index", 100)
-        .setTranslation(0, 0)
-        .setSize(obj.scale*obj.width,obj.scale*obj.height);
-
     # Add a event listener for the mouse wheel, which is used for turning the
     # knobs.
-    obj.myCanvas.addEventListener("wheel", func(e)
+    inset.addEventListener("wheel", func(e)
     {
       foreach(var hotspot; GUI.WHEEL_HOT_SPOTS) {
-        if ((e.localX > obj.scale*hotspot.top_left[0]) and (e.localX < obj.scale*hotspot.bottom_right[0]) and
-            (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]) and
+        if ((e.localX > hotspot.top_left[0]) and (e.localX < hotspot.bottom_right[0]) and
+            (e.localY > hotspot.top_left[1]) and (e.localY < hotspot.bottom_right[1]) and
             (e.shiftKey == hotspot.shift))
         {
           # We've found the hotspot, so send a notification to deal with it
@@ -153,11 +159,11 @@ var GUI =
     });
 
     # Add a event listener for the mouse click, which is used for buttons
-    obj.myCanvas.addEventListener("click", func(e)
+    inset.addEventListener("click", func(e)
     {
       foreach(var hotspot; GUI.CLICK_HOT_SPOTS) {
-        if ((e.localX > obj.scale*hotspot.top_left[0]) and (e.localX < obj.scale*hotspot.bottom_right[0]) and
-            (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]) and
+        if ((e.localX > hotspot.top_left[0]) and (e.localX < hotspot.bottom_right[0]) and
+            (e.localY > hotspot.top_left[1]) and (e.localY < hotspot.bottom_right[1]) and
             (e.shiftKey == hotspot.shift))
         {
           # We've found the hotspot, so send a notification to deal with it
@@ -171,12 +177,13 @@ var GUI =
       }
 
       foreach(var hotspot; GUI.SOFTKEY_HOTSPOTS) {
-        if ((e.localX > obj.scale*hotspot.top_left[0]) and (e.localX < obj.scale*hotspot.bottom_right[0]) and
-            (e.localY > obj.scale*hotspot.top_left[1]) and (e.localY < obj.scale*hotspot.bottom_right[1]))
+        if ((e.localX > hotspot.top_left[0]) and (e.localX < hotspot.bottom_right[0]) and
+            (e.localY > hotspot.top_left[1]) and (e.localY < hotspot.bottom_right[1]))
         {
           # We've found the hotspot, so send a notification to deal with it
           var args = {'device': obj.device_id,
                       'offset' : hotspot.Id};
+
           fgcommand("FG1000SoftKeyPushed", props.Node.new(args));
           break;
         }
@@ -188,7 +195,7 @@ var GUI =
 
   cleanup : func()
   {
-    # Clean up the MFD.  Particularly important to stop if picking up
+    # Clean up the MFD.  Particularly important to stop it picking up
     # Emesary notifications.
     me.mfd.del();
     # Clean up the window itself

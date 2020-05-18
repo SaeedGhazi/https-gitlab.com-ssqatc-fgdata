@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
-
 <!-- Author Marcin Kuzniar - Timetable of OCT 2017 - -->
-
 <trafficlist>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -18,7 +16,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -32,7 +30,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -46,7 +44,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -60,7 +58,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -74,7 +72,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -88,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -102,7 +100,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -116,7 +114,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -130,7 +128,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -144,7 +142,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -158,7 +156,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -172,7 +170,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -186,7 +184,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -200,7 +198,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -214,7 +212,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -228,7 +226,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -242,7 +240,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -256,7 +254,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -270,7 +268,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -284,7 +282,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -298,7 +296,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -312,7 +310,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -326,7 +324,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -340,7 +338,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -354,7 +352,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -368,7 +366,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -382,7 +380,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -396,7 +394,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -410,7 +408,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -424,7 +422,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Wideroe.xml</model>
+    <model>Aircraft/DH3/DH3-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -438,7 +436,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -452,7 +450,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -466,7 +464,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -480,7 +478,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -494,7 +492,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -508,7 +506,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -522,7 +520,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -536,7 +534,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -550,7 +548,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -564,7 +562,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -578,7 +576,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Wideroe.xml</model>
+    <model>Aircraft/DH4/DH4-Wideroe.xml</model>
     <livery>WIF</livery>
     <airline>WIF</airline>
     <home-port>ENBO</home-port>
@@ -33052,19 +33050,3 @@
     <repeat>WEEK</repeat>
   </flight>
 </trafficlist>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

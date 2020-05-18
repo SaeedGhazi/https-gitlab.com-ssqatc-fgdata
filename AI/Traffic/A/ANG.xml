@@ -72,7 +72,7 @@
     <heavy>Yes</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>
@@ -86,7 +86,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>
@@ -100,7 +100,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>
@@ -114,7 +114,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>
@@ -128,7 +128,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>
@@ -142,7 +142,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>
@@ -156,7 +156,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-300-AirNiugini.xml</model>
+    <model>Aircraft/DH3/DH3-AirNiugini.xml</model>
     <livery>ANG</livery>
     <airline>ANG</airline>
     <home-port>AYPY</home-port>

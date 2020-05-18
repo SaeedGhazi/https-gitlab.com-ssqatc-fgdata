@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- Author Ian (Yves) Tolosa - Observed Traffic week of 02AMR2020 - Includes Network Aviation - DH2 & DH3 mapped to DH4 -->
+<!-- Author Ian (Yves) Tolosa - Observed Traffic week of 02AMR2020 - Includes Network Aviation - DH2 mapped to DH3 -->
 <trafficlist>
   <aircraft>
     <model>Aircraft/A320/A320-QantasLink.xml</model>
@@ -324,7 +324,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -338,7 +338,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -352,7 +352,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -366,7 +366,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -380,7 +380,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YPAD</home-port>
@@ -394,7 +394,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YBBN</home-port>
@@ -408,7 +408,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -422,7 +422,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YBBN</home-port>
@@ -436,7 +436,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YBBN</home-port>
@@ -450,7 +450,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -464,7 +464,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YPAD</home-port>
@@ -478,7 +478,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -492,7 +492,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -506,7 +506,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YBBN</home-port>
@@ -520,7 +520,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -534,7 +534,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>
@@ -548,7 +548,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/DH4/DH4-QantasLink.xml</model>
+    <model>Aircraft/DH3/DH3-QantasLink.xml</model>
     <livery>QLK</livery>
     <airline>QLK</airline>
     <home-port>YSSY</home-port>

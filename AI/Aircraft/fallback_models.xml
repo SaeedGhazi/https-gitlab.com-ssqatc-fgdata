@@ -63,9 +63,9 @@
 <!-- 151-200 Turboprop airliners -->
 <model n="151" type="string">AI/Aircraft/AT4/AT4-Default.xml</model>
 <model n="152" type="string">AI/Aircraft/AT7/AT7-default.xml</model>
-<model n="153" type="string">AI/Aircraft/AT4/AT4-BlueIslands.xml</model>
+<model n="153" type="string">AI/Aircraft/DH3/DH3-AirNewZealand.xml</model>
 <model n="154" type="string">AI/Aircraft/b1900d/Models/B1900D.xml</model>
-<model n="155" type="string">AI/Aircraft/Dash8/Dash8-400-Brussels.xml</model>
+<model n="155" type="string">AI/Aircraft/DH4/DH4-Wideroe.xml</model>
 <model n="156" type="string">AI/Aircraft/DH7/DH7-ScandinavianAirlines.xml</model>
 <model n="157" type="string">AI/Aircraft/DHT/DHT-AirVanuatu.xml</model>
 <model n="158" type="string">AI/Aircraft/JS41/JS41-default.xml</model>

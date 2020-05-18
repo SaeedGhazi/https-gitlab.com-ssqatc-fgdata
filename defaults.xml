@@ -1382,6 +1382,9 @@ Started September 2000 by David Megginson, david@megginson.com
     <towing>
       <enabled type="bool">true</enabled>
     </towing>
+    <autopush>
+      <enabled type="bool">false</enabled>
+    </autopush>
   </nasal>
   <scenery>
     <share-events type="bool" userarchive="y">false</share-events>

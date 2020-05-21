@@ -12,7 +12,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FMA</registration>
@@ -26,7 +26,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FMB</registration>
@@ -40,7 +40,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FMC</registration>
@@ -54,7 +54,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FMD</registration>
@@ -68,7 +68,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-MAX</registration>
@@ -82,7 +82,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDF</registration>
@@ -96,7 +96,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDG</registration>
@@ -110,7 +110,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDH</registration>
@@ -124,7 +124,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDI</registration>
@@ -138,7 +138,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDJ</registration>
@@ -152,7 +152,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDK</registration>
@@ -166,7 +166,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDL</registration>
@@ -180,7 +180,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDM</registration>
@@ -194,7 +194,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDO</registration>
@@ -208,7 +208,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDP</registration>
@@ -222,7 +222,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDQ</registration>
@@ -236,7 +236,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDR</registration>
@@ -250,7 +250,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDS</registration>
@@ -264,7 +264,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDT</registration>
@@ -278,7 +278,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDU</registration>
@@ -292,7 +292,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDW</registration>
@@ -306,7 +306,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDX</registration>
@@ -320,7 +320,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDY</registration>
@@ -334,7 +334,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FDZ</registration>
@@ -348,7 +348,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEA</registration>
@@ -362,7 +362,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEB</registration>
@@ -376,7 +376,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEC</registration>
@@ -390,7 +390,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FED</registration>
@@ -404,7 +404,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEE</registration>
@@ -418,7 +418,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEF</registration>
@@ -432,7 +432,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEG</registration>
@@ -446,7 +446,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEH</registration>
@@ -460,7 +460,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEI</registration>
@@ -474,7 +474,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEJ</registration>
@@ -488,7 +488,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEK</registration>
@@ -502,7 +502,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEL</registration>
@@ -516,7 +516,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEM</registration>
@@ -530,7 +530,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEN</registration>
@@ -544,7 +544,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEO</registration>
@@ -558,7 +558,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEP</registration>
@@ -572,7 +572,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEQ</registration>
@@ -586,7 +586,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FER</registration>
@@ -600,7 +600,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FES</registration>
@@ -614,7 +614,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FET</registration>
@@ -628,7 +628,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEU</registration>
@@ -642,7 +642,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEV</registration>
@@ -656,7 +656,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEW</registration>
@@ -670,7 +670,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEX</registration>
@@ -684,7 +684,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEY</registration>
@@ -698,7 +698,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FEZ</registration>
@@ -712,7 +712,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGA</registration>
@@ -726,7 +726,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGB</registration>
@@ -740,7 +740,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGC</registration>
@@ -754,7 +754,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGD</registration>
@@ -768,7 +768,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGE</registration>
@@ -782,7 +782,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGF</registration>
@@ -796,7 +796,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGG</registration>
@@ -810,7 +810,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGH</registration>
@@ -824,7 +824,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGI</registration>
@@ -838,7 +838,7 @@
     <required-aircraft>FDB-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A6-FGJ</registration>

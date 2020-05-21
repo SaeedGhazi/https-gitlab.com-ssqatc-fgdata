@@ -151,7 +151,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BAA</registration>
@@ -165,7 +165,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BAB</registration>
@@ -179,7 +179,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BAC</registration>
@@ -193,7 +193,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BB</registration>
@@ -207,7 +207,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BC</registration>
@@ -221,7 +221,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BD</registration>
@@ -235,7 +235,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BE</registration>
@@ -249,7 +249,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BF</registration>
@@ -263,7 +263,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BG</registration>
@@ -277,7 +277,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BH</registration>
@@ -291,7 +291,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BI</registration>
@@ -305,7 +305,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BJ</registration>
@@ -319,7 +319,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BK</registration>
@@ -333,7 +333,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BL</registration>
@@ -347,7 +347,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BM</registration>
@@ -361,7 +361,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BO</registration>
@@ -375,7 +375,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BP</registration>
@@ -389,7 +389,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BQ</registration>
@@ -403,7 +403,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BR</registration>
@@ -417,7 +417,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BT</registration>
@@ -431,7 +431,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BU</registration>
@@ -445,7 +445,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BV</registration>
@@ -459,7 +459,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BW</registration>
@@ -473,7 +473,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BX</registration>
@@ -487,7 +487,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BY</registration>
@@ -501,7 +501,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>A4O-BZ</registration>
@@ -515,7 +515,7 @@
     <required-aircraft>OMA-738</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>OK-TVH</registration>

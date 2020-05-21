@@ -37,7 +37,7 @@ var RouteManagerDelegate = {
     # and we have a SID
         var sid = me.flightplan.sid;
         logprint(LOG_INFO, 'routing via SID ' ~ sid.id);
-        me.flightplan.insertWaypoints(sid.route(me.flightplan.departure_runway), 1);
+        me.flightplan.insertWaypoints(sid.route(me.flightplan.departure_runway, me.flightplan.sid_trans), 1);
     },
 
     arrivalChanged: func
@@ -58,7 +58,7 @@ var RouteManagerDelegate = {
         var initialApproachFix = nil;
         if (me.flightplan.star != nil) {
             logprint(LOG_INFO, 'routing via STAR ' ~ me.flightplan.star.id);
-            var wps = me.flightplan.star.route(me.flightplan.destination_runway);
+            var wps = me.flightplan.star.route(me.flightplan.destination_runway, me.flightplan.star_trans);
             if (wps != nil) {
                 me.flightplan.insertWaypoints(wps, -1);
                 initialApproachFix = wps[-1]; # final waypoint of STAR

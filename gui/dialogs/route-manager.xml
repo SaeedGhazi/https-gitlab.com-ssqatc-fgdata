@@ -76,7 +76,7 @@ command interface /autopilot/route-manager/input:
                 var to = fp.getWP(sel_index());
 
                 if ((from  == nil ) or (to == nil)) {
-                    printlog('info', 'unable to route, invalid start ad end points');
+                    logprint(LOG_INFO, 'unable to route, invalid start ad end points');
                     return;
                 }
 
@@ -247,7 +247,7 @@ command interface /autopilot/route-manager/input:
 
               var airborne = getprop('/gear/gear[0]/wow') == 0;
               if (airborne) {
-                printlog('info', 'route-manager dialog, init in-air, clearing departure settings');
+                logprint(LOG_INFO, 'route-manager dialog, init in-air, clearing departure settings');
                 fp.departure = nil;
                 return;
               }
@@ -262,7 +262,6 @@ command interface /autopilot/route-manager/input:
               }
 
               if (fp.departure_runway == nil) {
-                printlog('info', 'selecting departure runway');
                 var rwy = fp.departure.findBestRunwayForPos( geo.aircraft_position() );
                 fp.departure_runway = rwy;
               }

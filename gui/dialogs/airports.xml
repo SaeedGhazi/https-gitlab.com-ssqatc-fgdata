@@ -200,7 +200,7 @@
           fgcommand("dialog-update", props.Node.new({"object-name": "runways-info", "dialog-name": "airports"}));
 
           # Update the list of available parking positions
-          avail_parking = {};
+          avail_parking = {"AVAILABLE":1};
           foreach (var park; info.parking()) {
               avail_parking[park.name] = 1;
           }

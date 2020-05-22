@@ -959,6 +959,10 @@ Started September 2000 by David Megginson, david@megginson.com
       <warp-easing-method type="string">swing</warp-easing-method>
       <warp-easing-duration-secs type="double">10</warp-easing-duration-secs>
     </time>
+    <swift>
+      <adress type="string" userarchive="y">127.0.0.1</adress>
+      <port type="int" userarchive="y">45003</port>
+    </swift>
   </sim>
   <!-- accelerations -->
   <accelerations>

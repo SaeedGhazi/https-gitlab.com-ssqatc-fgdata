@@ -406,3 +406,16 @@ Compositor
 8 model-default.xml          generic>0, quality>0
 9 model-default.xml          Fallback - no predicate
 19 model-default.xml         ALS, basic
+
+
+Scenery Hierarchy
+-----------------
+
+Compositor
+
+# Where defined          Summary
+8 terrain-default.xml    quality>0, generic>0
+9 terrain-default.xml    Fallback - no predicate
+17 terrain-default.xml   ALS, landmass=6, transition=6
+18 terrain-default.xml   ALS, landmass>3, transition>2
+19 terrain-default.xml   ALS, basic

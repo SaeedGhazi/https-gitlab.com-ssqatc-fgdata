@@ -231,12 +231,14 @@
       <program>
         <vertex-shader>Shaders/ALS/terrain-ultra.vert</vertex-shader>
         <vertex-shader>Shaders/ALS/filters.vert</vertex-shader>
+        <vertex-shader>Shaders/ALS/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/ALS/terrain-ultra.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/noise.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/cloud-shadowfunc.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/filters.frag</fragment-shader>
+        <fragment-shader>Shaders/ALS/shadows-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>grain_strength</name>

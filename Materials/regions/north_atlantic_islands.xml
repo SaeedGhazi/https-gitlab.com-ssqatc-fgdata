@@ -5,7 +5,7 @@
   <area>
     <lon1>-60.0</lon1>
     <lon2>0.0</lon2>
-    <lat1>55.0</lat1>
+    <lat1>60.0</lat1>
     <lat2>85.0</lat2>
   </area>
 
@@ -73,7 +73,7 @@
      <texture>Terrain/marsh4a-autumn.png</texture>
      <texture n="12">Terrain/rock_dark.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
-     <texture n="13">Terrain/rock_dark.png</texture>	 
+     <texture n="13">Terrain/rock_dark.png</texture>
      <texture n="15">Terrain/grass_hires.png</texture>
     </texture-set>
     <parameters>
@@ -99,7 +99,7 @@
      <texture>Terrain/iceland_grass-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
      <texture n="12">Terrain/rock_dark.png</texture>
-	 <texture n="13">Terrain/rock_dark.png</texture>	 
+	 <texture n="13">Terrain/rock_dark.png</texture>
     </texture-set>
     <parameters>
       <transition_model>0.8</transition_model>
@@ -127,7 +127,7 @@
     <texture-set>
      <texture>Terrain/cropgrass-hires-autumn.png</texture>
      <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
-     <texture n="13">Terrain/rock_dark.png</texture>	 
+     <texture n="13">Terrain/rock_dark.png</texture>
     </texture-set>
     <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
     <parameters>

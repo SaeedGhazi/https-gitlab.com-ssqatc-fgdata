@@ -977,6 +977,10 @@
           <source>Starting latitude (south = -)</source>
           <target>Latitud de comienzo (sur = -)</target>
         </trans-unit>
+        <trans-unit approved="yes" id="options/launcher-desc:0" translate="yes">
+          <source>Use GUI launcher</source>
+          <target>Abrir la interfaz gráfica de inicio</target>
+        </trans-unit>
         <trans-unit approved="yes" id="options/livery-desc:0" translate="yes">
           <source>Select aircraft livery</source>
           <target>Selecciona la librea (insignia, emblema) de la aeronave</target>

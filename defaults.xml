@@ -419,6 +419,13 @@ Started September 2000 by David Megginson, david@megginson.com
             <compress-solid type="bool" userarchive="y">true</compress-solid>
             <compress type="bool" userarchive="y">true</compress>
         </texture-cache>
+
+      <pilot-model>
+        <!-- Controls for the availability (set by aircraft) and visibility
+             (set by the user) of pilot model(s) in the aircraft.-->
+        <available type="bool" userarchive="n">false</available>
+        <enabled type="bool" userarchive="y">true</enabled>
+      </pilot-model>
     </rendering>
     <model-hz type="int">120</model-hz>
     <sound>

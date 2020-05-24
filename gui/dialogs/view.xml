@@ -2,21 +2,21 @@
 
 <PropertyList>
   <name>view</name>
-    
+
   <nasal>
     <open>
-    
-      var group = gui.findElementByName(cmdarg(), "active-views");    
+
+      var group = gui.findElementByName(cmdarg(), "active-views");
       var ac = getprop("/sim/aircraft");
       group.removeChildren("checkbox");
       group.removeChildren("hrule");
       group.removeChildren("text");
-      
+
       var t = group.getChild("text", 0, 1);
       t.getNode("label", 1).setValue("Standard Views");
       t.getNode("halign", 1).setValue("left");
-      
-      
+
+
       var mode = 0;
       foreach (var v; view.views) {
         var index = v.getIndex();
@@ -34,7 +34,7 @@
           } elsif (index >= 100) {
             aircraft.data.add(enabled);
             if (mode != 1) {
-              mode = 1;              
+              mode = 1;
               group.getChild("empty", 0, 1).getChild("stretch", 0, 1).setValue(1);
               var t = group.getChild("text", 1, 1);
               t.getNode("label", 1).setValue("\"" ~ ac ~ "\" Specific Views");
@@ -50,9 +50,9 @@
       }
     </open>
   </nasal>
-    
+
   <modal>false</modal>
-  <layout>vbox</layout>  
+  <layout>vbox</layout>
 
   <group>
     <layout>hbox</layout>
@@ -77,13 +77,13 @@
   </group>
 
   <hrule/>
-  
+
   <group>
     <layout>hbox</layout>
-    
+
     <group>
       <layout>vbox</layout>
-      
+
       <text>
         <label>Select Active Views</label>
       </text>
@@ -97,7 +97,7 @@
           <halign>left</halign>
           <label>Standard Views</label>
         </text>
-        
+
         <checkbox-template>
           <halign>left</halign>
           <label><!----></label>
@@ -108,14 +108,14 @@
         </checkbox-template>
       </group>
     </group>
-      
+
     <vrule/>
-    
+
     <group>
-      <layout>vbox</layout>      
+      <layout>vbox</layout>
       <halign>center</halign>
       <valign>top</valign>
-      
+
       <text>
         <label>Display Options</label>
       </text>
@@ -166,7 +166,7 @@
         </binding>
         <enable>/sim/view-name-popup</enable>
       </checkbox>
-      
+
       <checkbox>
         <halign>left</halign>
         <label>Show tooltips</label>
@@ -175,7 +175,7 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-      
+
       <checkbox>
           <halign>left</halign>
           <label>Show tooltip on mouse press</label>
@@ -184,7 +184,7 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-      
+
       <checkbox>
         <halign>left</halign>
         <label>Show 2D panel</label>
@@ -193,7 +193,7 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-      
+
       <checkbox>
         <halign>left</halign>
         <label>Hide 2D panel in non-centered view</label>
@@ -205,7 +205,7 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-      
+
       <checkbox>
         <halign>left</halign>
         <label>Hide 2D panel in non-cockpit view</label>
@@ -217,7 +217,7 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-     
+
       <checkbox>
         <halign>left</halign>
         <label>Autohide menubar</label>
@@ -257,7 +257,7 @@
           <label>sec.</label>
         </text>
       </group>
-     
+
       <checkbox>
         <halign>left</halign>
         <label>Legacy multiplayer view selector</label>
@@ -266,7 +266,23 @@
           <command>dialog-apply</command>
         </binding>
       </checkbox>
-      
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Show Pilot Model</label>
+        <property>/sim/rendering/pilot-model/enabled</property>
+        <visible>
+          <equals>
+            <property>/sim/rendering/pilot-model/available</property>
+            <value>1</value>
+          </equals>
+        </visible>
+
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
     </group>
 
   </group>

@@ -64,6 +64,18 @@
 	</params>
 
 	<animation>
+		<type>select</type>
+		<condition>
+			<and>
+				<not>
+					 <property>/sim/current-view/internal</property>
+				</not>
+				<property>/sim/rendering/pilot-model/enabled</property>
+			</and>
+		</condition>
+	</animation>
+
+	<animation>
 		<type>range</type>
 		<min-m>1</min-m>
 		<max-m>500</max-m>
@@ -92,7 +104,7 @@
 			<y>0</y>
 			<z>0</z>
 		</axis>
-	</animation> 
+	</animation>
 	<animation>
 		<type>rotate</type>
 		<object-name>Head</object-name>

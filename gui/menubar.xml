@@ -747,6 +747,14 @@
 				<script>console.CanvasPlacement.new()</script>
 			</binding>
 		</item>
+        
+        <item>
+			<name>nasal-test</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>nasal-test</dialog-name>
+			</binding>
+        </item>
 
 		<item>
 			<name>development-keys</name>

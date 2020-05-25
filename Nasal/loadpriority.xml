@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+ Core Nasal module load priority list.
+ The files listed below will be loaded in order before any other files in the
+ Nasal directory.  This is to avoid dependency problems that would otherwise
+ occur if aaaa.nas relied on props.nas
+-->
+<PropertyList>
+  <file n="0">props.nas</file>
+  <file n="1">globals.nas</file>
+  <file n="2">math.nas</file>
+  <file n="3">string.nas</file>
+  <file n="3">io.nas</file>
+</PropertyList>

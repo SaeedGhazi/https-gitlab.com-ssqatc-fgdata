@@ -132,12 +132,6 @@ var GUI =
 
     obj.window.setCanvas(inset);
 
-    obj.window.del = func() {
-      # Over-ride the window.del function so we clean up when the user closes the window
-      # Use call method to ensure we have the correct closure.
-      call(obj.cleanup, [], obj);
-    };
-
     # Add a event listener for the mouse wheel, which is used for turning the
     # knobs.
     inset.addEventListener("wheel", func(e)
@@ -191,14 +185,5 @@ var GUI =
     });
 
     return obj;
-  },
-
-  cleanup : func()
-  {
-    # Clean up the MFD.  Particularly important to stop it picking up
-    # Emesary notifications.
-    me.mfd.del();
-    # Clean up the window itself
-    call(canvas.Window.del, [], me.window);
   },
 };

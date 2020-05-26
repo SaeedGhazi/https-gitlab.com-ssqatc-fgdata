@@ -838,13 +838,17 @@
 					if (! defined("fg1000")) {
 						io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000");
 						io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000");
+						var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
+						interfaceController.start();
 					}
 
-					var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
-					interfaceController.start();
-
 					var fg1000system = fg1000.FG1000.getOrCreateInstance();
-					var pfdindex = fg1000system.addPFD();
+					var pfdindex = getprop("/sim/gui/fg1000/pfd-index");
+					if (pfdindex == nil) {
+						pfdindex = fg1000system.addPFD();
+						setprop("/sim/gui/fg1000/pfd-index", pfdindex);
+					}
+
 					fg1000system.displayGUI(pfdindex);
 
 				</script>
@@ -860,13 +864,17 @@
 					if (! defined("fg1000")) {
 						io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000");
 						io.load_nasal(nasal_dir ~ 'Interfaces/GenericInterfaceController.nas', "fg1000");
+						var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
+						interfaceController.start();
 					}
 
-					var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
-					interfaceController.start();
-
 					var fg1000system = fg1000.FG1000.getOrCreateInstance();
-					var mfdindex = fg1000system.addMFD();
+					var mfdindex = getprop("/sim/gui/fg1000/mfd-index");
+					if (mfdindex == nil) {
+						mfdindex = fg1000system.addPFD();
+						setprop("/sim/gui/fg1000/mfd-index", mfdindex);
+					}
+
 					fg1000system.displayGUI(mfdindex);
 
 				</script>

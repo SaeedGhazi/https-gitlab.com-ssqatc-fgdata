@@ -742,6 +742,7 @@
         <use>vertex-program-two-side</use>
       </vertex-program-two-side>
       <program>
+        <vertex-shader>Shaders/ALS/shadows-include.vert</vertex-shader>
         <vertex-shader>Shaders/ALS/generic-base.vert</vertex-shader>
         <fragment-shader>Shaders/ALS/model-interior-base.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/hazes.frag</fragment-shader>

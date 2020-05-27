@@ -2,6 +2,16 @@
 # in route-manager dialog and GPS. Intended to provide a sensible default behaviour,
 # but can be disabled by an aircraft-specific FMS / GPS system.
 
+# This delegate corresponds to functionality of the built-in route-manager dialog.
+# if you disable it, the built-in route-manager dialog may not work as expected.
+# Especially, this dialog is responsible for building departure, approach and
+# arrival waypoints corresponding to the requested SID/STAR/approach,
+# and replacing them when the inputs change (eg, user seelcted a different 
+# destination or STAR while enroute)
+#
+# You can disable the default GPS behaviour *without* touching this delegate : they are
+# kept seperate since this first one is less likely to need changes
+
 var RouteManagerDelegate = {
     new: func(fp) {
     # if this property is set, don't build a delegate at all
@@ -66,29 +76,36 @@ var RouteManagerDelegate = {
         }
 
         if (me.flightplan.approach != nil) {
-            var wps = me.flightplan.approach.route(initialApproachFix);
+            var wps = nil;
+            var approachIdent = me.flightplan.approach.id;
 
-             if ((initialApproachFix != nil) and (wps == nil)) {
-             # current GUI allows selected approach then STAR; but STAR
-             # might not be possible for the approach (no transition).
-             # since fixing the GUI flow is hard, let's route assuming no
-             # IAF. This will likely cause an ugly direct leg, but that's
-             # what the user asked for.
+            if (me.flightplan.approach_trans != nil) {
+                # if an approach transition was specified, let's use it explicitly
+                wps = me.flightplan.approach.route(me.flightplan.destination_runway, me.flightplan.approach_trans);
+                if (wps == nil) {
+                    logprint(LOG_WARN, "couldn't route approach " ~ approachIdent ~ " based on specified transition:" ~ me.flightplan.approach_trans);
+                }
+            } else if (initialApproachFix != nil) {
+                # no explicit approach transition, let's use the IAF to guess one
+                wps = me.flightplan.approach.route(me.flightplan.destination_runway, initialApproachFix);
+                if (wps == nil) {
+                    logprint(LOG_INFO, "couldn't route approach " ~ approachIdent ~ " based on IAF:" ~ initialApproachFix.wp_name);
+                }
+            }
 
-                logprint(LOG_INFO, "couldn't route approach based on specified IAF "
-                  ~ initialApproachFix.wp_name);
-                 wps = me.flightplan.approach.route(nil);
-             }
+            # depending on the order the user selects the approach or STAR, we might get into
+            # a mess here. If we failed to route so far, just try a direct to the approach
+            if (wps == nil) {
+                # route direct
+                 wps = me.flightplan.approach.route(me.flightplan.destination_runway);
+            }
 
             if (wps == nil) {
-                logprint(LOG_WARN, 'routing via approach ' ~ me.flightplan.approach.id
-                    ~ ' failed entirely.');
+                logprint(LOG_WARN, 'routing via approach ' ~ approachIdent ~ ' failed entirely.');
             } else {
-                logprint(LOG_INFO, 'routing via approach ' ~ me.flightplan.approach.id);
                 me.flightplan.insertWaypoints(wps, -1);
             }
         } else {
-            logprint(LOG_INFO, 'routing direct to runway ' ~ me.flightplan.destination_runway.id);
             # no approach, just use the runway waypoint
             var wp = createWPFrom(me.flightplan.destination_runway);
             wp.wp_role = 'approach';

@@ -77,7 +77,7 @@ var Node = {
     resolveAlias : func(p = nil) {
         if (p == nil)
             p = me;
-        elsif (typeof(p) == "scalar")
+        elsif (isscalar(p))
             p = globals.getNode(p);
         if (isa(p, Node)) {
             while (p.getAttribute("alias")) {
@@ -121,7 +121,7 @@ var Node = {
 #
 Node.new = func(values = nil) {
     var result = wrapNode(_new());
-    if(typeof(values) == "hash")
+    if(ishash(values))
         result.setValues(values);
     return result;
 }
@@ -246,10 +246,9 @@ var copy = func(src, dest, attr = 0) {
 # array) into Node objects.
 #
 var wrap = func(node) {
-    var argtype = typeof(node);
-    if(argtype == "ghost") {
+    if(isghost(node)) {
         return wrapNode(node);
-    } elsif(argtype == "vector") {
+    } elsif(isvec(node)) {
         var v = node;
         var n = size(v);
         for(var i=0; i<n; i+=1) { v[i] = wrapNode(v[i]); }
@@ -307,11 +306,11 @@ var createNodeObjectsFromHash = func (property_list, namespace = nil) {
     if (namespace == nil) {
         namespace = caller(1)[0];
     }
-    if (typeof(namespace) != "hash") {
+    if (!ishash(namespace)) {
         logprint(LOG_WARN, "createNodeObjectsFromHash: Error, namespace argument is not a hash.");
         return nil;
     }
-    if (typeof(property_list) != "hash") {
+    if (!ishash(property_list)) {
         logprint(LOG_WARN, "createNodeObjectsFromHash: Error, property_list argument is not a hash.");
         return nil;
     }
@@ -330,20 +329,19 @@ var createNodeObjectsFromHash = func (property_list, namespace = nil) {
 var nodeList = func {
     var list = [];
     foreach(var a; arg) {
-        var t = typeof(a);
         if(isa(a, Node))
             append(list, a);
-        elsif(t == "scalar")
+        elsif(isscalar(a))
             append(list, props.globals.getNode(a, 1));
-        elsif(t == "vector")
+        elsif(isvec(a))
             foreach(var i; a)
                 list ~= nodeList(i);
-        elsif(t == "hash")
+        elsif(ishash(a))
             foreach(var i; keys(a))
                 list ~= nodeList(a[i]);
-        elsif(t == "func")
+        elsif(isfunc(a))
             list ~= nodeList(a());
-        elsif(t == "ghost" and ghosttype(a) == "prop")
+        elsif(isghost(a) and ghosttype(a) == "prop")
             append(list, wrapNode(a));
         else
             die("nodeList: invalid nil property");
@@ -501,9 +499,9 @@ var runBinding = func(node, module = nil) {
 #
 var UpdateManager =
 {
- _updateProperty : func(_property)
- {
- },
+    _updateProperty : func(_property)
+    {
+    },
     FromProperty : func(_propname, _delta, _changed_method)
     {
         var obj = {parents : [UpdateManager] };

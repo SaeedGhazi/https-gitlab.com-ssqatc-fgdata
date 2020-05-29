@@ -105,7 +105,7 @@ var load_nasal = func(file, module = nil) {
 
     if (!contains(globals, module))
         globals[module] = {};
-    elsif (typeof(globals[module]) != "hash")
+    elsif (!ishash(globals[module]))
         die("io.load_nasal(): namespace '" ~ module ~ "' already in use, but not a hash");
 
     var code = call(func compile(readfile(file), file), nil, var err = []);
@@ -303,4 +303,3 @@ var writexml = func(path, node, indent = "\t", prefix = "___") {
     if (size(root) != 1)
         die("writexml(): tree has more than one root node");
 }
-

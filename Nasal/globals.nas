@@ -41,10 +41,12 @@ var assert = func (condition, message=nil) {
 # (class) object.  Example: isa(someObject, props.Node)
 #
 var isa = func(obj, class) {
-    if(typeof(obj) == "hash" and obj["parents"] != nil)
-        foreach(var c; obj.parents)
+    if(ishash(obj) and obj["parents"] != nil) {
+        foreach(var c; obj.parents) {
             if(c == class or isa(c, class))
                 return 1;
+        }
+    }
     return 0;
 }
 
@@ -57,7 +59,7 @@ var isa = func(obj, class) {
 #
 var fgcommand = func(cmd, node=nil) {
     if(isa(node, props.Node)) node = node._g;
-    elsif(typeof(node) == 'hash')
+    elsif(ishash(node))
         node = props.Node.new(node)._g;
     _fgcommand(cmd, node);
 }
@@ -95,8 +97,8 @@ var abs = func(v) { return v < 0 ? -v : v }
 # 0 to wrap the interpolated value properly.
 #
 var interpolate = func(node, val...) {
-    if(isa(node, props.Node)) node = node._g;
-    elsif(typeof(node) != "scalar" and typeof(node) != "ghost")
+    if (isa(node, props.Node)) node = node._g;
+    elsif (!isscalar(node) and !isghost(node))
         die("bad argument to interpolate()");
     _interpolate(node, val);
 }
@@ -112,8 +114,8 @@ var interpolate = func(node, val...) {
 # written to" (2).
 #
 var setlistener = func(node, fn, init = 0, runtime = 1) {
-    if(isa(node, props.Node)) node = node._g;
-    elsif(typeof(node) != "scalar" and typeof(node) != "ghost")
+    if (isa(node, props.Node)) node = node._g;
+    elsif (!isscalar(node) and !isghost(node))
         die("bad argument to setlistener()");
     var id = _setlistener(node, func(chg, lst, mode, is_child) {
         fn(props.wrapNode(chg), props.wrapNode(lst), mode, is_child);

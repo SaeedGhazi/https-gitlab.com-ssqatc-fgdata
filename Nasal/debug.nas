@@ -102,10 +102,9 @@ var _varname     = func(s, color=nil) s;                                        
 # Turn p into props.Node (if it isn't yet), or return nil.
 #
 var propify = func(p, create = 0) {
-	var type = typeof(p);
-	if (type == "ghost" and ghosttype(p) == "prop")
+	if (isghost(p) and ghosttype(p) == "prop")
 		return props.wrapNode(p);
-	if (type == "scalar" and num(p) == nil)
+	if (isscalar(p) and num(p) == nil)
 		return props.globals.getNode(p, create);
 	if (isa(p, props.Node))
 		return p;
@@ -233,17 +232,17 @@ var string = func(o, color=nil, ttl=5) {
 	if (t == "nil") {
 		return _nil("null", color);
 
-	} elsif (t == "scalar") {
+	} elsif (isscalar(o)) {
 		return num(o) == nil ? _dump_string(o, color) : _num(o~"", color);
 
-	} elsif (t == "vector") {
+	} elsif (isvec(o)) {
 		var s = "";
 		forindex (var i; o)
 			s ~= (i == 0 ? "" : ", ") ~ debug.string(o[i], color, ttl - 1);
 		return _bracket("[", color) ~ s ~ _bracket("]", color);
 
-	} elsif (t == "hash") {
-		if (contains(o, "parents") and typeof(o.parents) == "vector"
+	} elsif (ishash(o)) {
+		if (contains(o, "parents") and isvec(o.parents)
 				and size(o.parents) == 1 and o.parents[0] == props.Node)
 			return _angle("'<", color) ~ _dump_prop(o, color) ~ _angle(">'", color);
 
@@ -253,7 +252,7 @@ var string = func(o, color=nil, ttl=5) {
 			s ~= (i == 0 ? "" : ", ") ~ _dump_key(k[i], color) ~ ": " ~ debug.string(o[k[i]], color, ttl - 1);
 		return _brace("{", color) ~ " " ~ s ~ " " ~ _brace("}", color);
 
-	} elsif (t == "ghost") {
+	} elsif (isghost(o)) {
 		return _angle("'<", color) ~ _nil(ghosttype(o), color) ~ _angle(">'", color);
 
 	} else {
@@ -356,7 +355,7 @@ var benchmark = func(label, fn, repeat = nil, output=nil) {
 	if (repeat == nil) {
 		start = systime();
 		output = fn();
-	} elsif (typeof(output) == 'vector') {
+	} elsif (isvec(output)) {
 		start = systime();
 		for (var i = 0; i < repeat; i += 1)
 			append(output, fn());
@@ -375,7 +374,7 @@ var benchmark_time = func(fn, repeat = 1, output = nil) {
 	if (repeat == nil) {
 		start = systime();
 		output = fn();
-	} elsif (typeof(output) == 'vector') {
+	} elsif (isvec(output)) {
 		start = systime();
 		for (var i = 0; i < repeat; i += 1)
 			append(output, fn());
@@ -402,14 +401,13 @@ var rank = func(list, repeat = nil) {
 }
 
 var print_rank = func(label, list, names) {
-	var _vec = (typeof(names) == 'vector');
 	print("Test results for "~label);
 	var first = 1;
 	var longest = list[-1][1];
 	foreach (var item; list) {
 		var (fn, time) = item;
 		var name = nil;
-		if (_vec) {
+		if (isvec(names)) {
 			foreach (var l; names) {
 				if (l[1] == fn) {
 					name = l[0]; break;

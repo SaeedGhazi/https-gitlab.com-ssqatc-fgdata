@@ -96,7 +96,7 @@ var init = func {
     }
 }
 
-var id = _setlistener("/sim/signals/fdm-initialized", func {
+var id = setlistener("/sim/signals/fdm-initialized", func {
     removelistener(id);
     addons.init();
-})
+}, 0, 0);

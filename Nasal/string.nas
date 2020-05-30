@@ -495,8 +495,4 @@ var color = func(color, s, enabled=nil) {
 #   print(string.color("31;1", "this is red"));
 #
 var color_enabled = 0;
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()), 1, 0);
-});
-
-
+setlistener("/sim/startup/terminal-ansi-colors", func(n) setcolors(n.getBoolValue()), 1, 0);

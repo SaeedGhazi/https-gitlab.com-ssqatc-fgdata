@@ -374,67 +374,64 @@ var enabled = nil;
 var loop_id = 0;
 
 
-# Initialization.
-#
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
-	var fdms = {
-		acms:0, ada:0, balloon:0, external:0,
-		jsb:1, larcsim:1, magic:0, network:0,
-		null:0, pipe:0, ufo:0, yasim:1,
-	};
-	var fdm = getprop("/sim/flight-model");
-	if (!contains(fdms, fdm) or !fdms[fdm])
-		return;
+# disable menu entry and return for inappropriate FDMs  (see Main/fg_init.cxx)
+var fdms = {
+    acms:0, ada:0, balloon:0, external:0,
+    jsb:1, larcsim:1, magic:0, network:0,
+    null:0, pipe:0, ufo:0, yasim:1,
+};
+var fdm = getprop("/sim/flight-model");
+if (!contains(fdms, fdm) or !fdms[fdm])
+    return;
 
-	enabled = props.globals.getNode("/sim").getChildren("view");
-	forindex (var i; enabled)
-		enabled[i] = ((var n = enabled[i].getNode("config/dynamic-view")) != nil) and n.getBoolValue();
+enabled = props.globals.getNode("/sim").getChildren("view");
+forindex (var i; enabled)
+    enabled[i] = ((var n = enabled[i].getNode("config/dynamic-view")) != nil) and n.getBoolValue();
 
-	# some properties may still be unavailable or nil
-	props.globals.initNode("/accelerations/pilot/x-accel-fps_sec", 0);
-	props.globals.initNode("/accelerations/pilot/y-accel-fps_sec", 0);
-	props.globals.initNode("/accelerations/pilot/z-accel-fps_sec", -32);
-	props.globals.initNode("/orientation/side-slip-deg", 0);
-	props.globals.initNode("/gear/gear/wow", 1, "BOOL");
-	elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+# some properties may still be unavailable or nil
+props.globals.initNode("/accelerations/pilot/x-accel-fps_sec", 0);
+props.globals.initNode("/accelerations/pilot/y-accel-fps_sec", 0);
+props.globals.initNode("/accelerations/pilot/z-accel-fps_sec", -32);
+props.globals.initNode("/orientation/side-slip-deg", 0);
+props.globals.initNode("/gear/gear/wow", 1, "BOOL");
+elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
 
-	# let listeners keep some variables up-to-date, so that they don't have
-	# to be queried in the loop
-	setlistener("/sim/panel/visibility", func(n) { panel_visible = n.getValue() }, 1);
-	setlistener("/sim/current-view/view-number", func(n) { cockpit_view = enabled[n.getValue()] }, 1);
-	setlistener("/devices/status/mice/mouse/button", func(n) { mouse_button = n.getValue() }, 1);
-	setlistener("/devices/status/mice/mouse/x", freeze);
-	setlistener("/devices/status/mice/mouse/y", freeze);
-	setlistener("/devices/status/mice/mouse/mode", func(n) {
-		if (mouse_mode = n.getValue())
-			view_manager.unfreeze();
-	}, 1);
+# let listeners keep some variables up-to-date, so that they do not have
+# to be queried in the loop
+setlistener("/sim/panel/visibility", func(n) { panel_visible = n.getValue() }, 1);
+setlistener("/sim/current-view/view-number", func(n) { cockpit_view = enabled[n.getValue()] }, 1);
+setlistener("/devices/status/mice/mouse/button", func(n) { mouse_button = n.getValue() }, 1);
+setlistener("/devices/status/mice/mouse/x", freeze);
+setlistener("/devices/status/mice/mouse/y", freeze);
+setlistener("/devices/status/mice/mouse/mode", func(n) {
+    if (mouse_mode = n.getValue())
+        view_manager.unfreeze();
+}, 1);
 
-	setlistener("/sim/signals/reinit", func(n) {
-		n.getValue() and return;
-		cockpit_view = enabled[getprop("/sim/current-view/view-number")];
-		view_manager.reset();
-	}, 0);
+setlistener("/sim/signals/reinit", func(n) {
+    n.getValue() and return;
+    cockpit_view = enabled[getprop("/sim/current-view/view-number")];
+    view_manager.reset();
+}, 0);
 
-	view_manager.init();
+view_manager.init();
 
-	original_resetView = view.resetView;
-	view.resetView = func {
-		original_resetView();
-		if (cockpit_view and dynamic_view)
-			view_manager.add_offset();
-	}
+original_resetView = view.resetView;
+view.resetView = func {
+    original_resetView();
+    if (cockpit_view and dynamic_view)
+        view_manager.add_offset();
+}
 
-	settimer(func {
-		setlistener("/sim/current-view/dynamic-view", func(n) {
-			dynamic_view = n.getBoolValue();
-			loop_id += 1;
-			view.resetView();
-			if (dynamic_view)
-				main_loop(loop_id);
-		}, 1);
-	}, 0);
-});
+settimer(func {
+    setlistener("/sim/current-view/dynamic-view", func(n) {
+        dynamic_view = n.getBoolValue();
+        loop_id += 1;
+        view.resetView();
+        if (dynamic_view)
+            main_loop(loop_id);
+    }, 1);
+}, 0);
+
 
 

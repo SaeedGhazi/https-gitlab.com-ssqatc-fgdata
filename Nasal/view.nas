@@ -934,32 +934,31 @@ var screenWidthCompens = {
 };
 
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	views = props.globals.getNode("/sim", 1).getChildren("view");
-	fovProp = props.globals.getNode("/sim/current-view/field-of-view", 1);
-	point.init();
+views = props.globals.getNode("/sim", 1).getChildren("view");
+fovProp = props.globals.getNode("/sim/current-view/field-of-view", 1);
+point.init();
 
-	setlistener("/sim/current-view/view-number", func(n) {
-		current = views[index = n.getValue()];
-	}, 1);
+setlistener("/sim/current-view/view-number", func(n) {
+    current = views[index = n.getValue()];
+}, 1);
 
-	props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
-	screenWidthCompens.init();
-	manager.init();
-	manager.register("Fly-By View", fly_by_view_handler);
-});
-_setlistener("/sim/signals/reinit", func {
+props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
+screenWidthCompens.init();
+manager.init();
+manager.register("Fly-By View", fly_by_view_handler);
+
+setlistener("/sim/signals/reinit", func {
 	screenWidthCompens.update(opt:nil,force:1);
 });
-_setlistener("/sim/startup/xsize", func {
+setlistener("/sim/startup/xsize", func {
 	screenWidthCompens.update();
 });
-_setlistener("/sim/startup/ysize", func {
+setlistener("/sim/startup/ysize", func {
 	screenWidthCompens.update();
 });
 
 
-var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
+var fdm_init_listener = setlistener("/sim/signals/fdm-initialized", func {
 	removelistener(fdm_init_listener); # uninstall, so we are only called once
 	var zoffset = nil;
 	foreach (var v; views) {

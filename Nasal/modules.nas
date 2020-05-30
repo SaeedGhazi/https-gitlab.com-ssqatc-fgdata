@@ -23,7 +23,7 @@
 # my_foo_sys.load();
 #-------------------------------------------------------------------------------
 var MODULES_DIR = getprop("/sim/fg-root")~"/Nasal/modules/";
-var MODULES_NODE = nil;
+var MODULES_NODE = props.getNode("/nasal/modules", 1);
 var MODULES_DEFAULT_FILENAME = "main.nas";
 var _modules_available = {};
 
@@ -330,22 +330,16 @@ var load = func(name, ns="") {
 
 # scan MODULES_DIR for subdirectories; it is assumed, that only well-formed
 # modules are stored in that directories, so no further checks right here
-var _findModules = func() {
-    var module_dirs = io.subdirectories(MODULES_DIR);
+#var _findModules = func() {
     _modules_available = {};
-    foreach (var name; module_dirs) {
+    foreach (var name; io.subdirectories(MODULES_DIR)) {
         if (!io.is_regular_file(MODULES_DIR~"/"~name~"/"~MODULES_DEFAULT_FILENAME))
             break;
         _modules_available[name] = 1;
         MODULES_NODE.getNode(name~"/available",1).setBoolValue(1);
     }
-}
-
-#props.getNode is available only after nasal dir has been initialized
-_setlistener("sim/signals/nasal-dir-initialized", func {
-    MODULES_NODE = props.getNode("/nasal/modules", 1);
-    _findModules();
-});
+#}
+#_findModules();
 
 var commandModuleReload = func(node)
 {
@@ -360,3 +354,4 @@ var commandModuleReload = func(node)
 };
 
 addcommand("nasal-module-reload", commandModuleReload);
+

@@ -663,19 +663,13 @@ var mp_mode_changed = func(n) {
     }
 }
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
+model.init();
+setlistener("/sim/multiplay/online", mp_mode_changed, 1, 1);
+# Call-back to ensure we see our own messages.
+setlistener("/sim/multiplay/chat", chat_listener);
 
-  model.init();
-
-  setlistener("/sim/multiplay/online", mp_mode_changed, 1, 1);
-
-  # Call-back to ensure we see our own messages.
-  setlistener("/sim/multiplay/chat", chat_listener);
-
-
-  if (getprop("/sim/presets/avoided-mp-runway")) {
-    _setlistener("/sim/sceneryloaded", func {
+if (getprop("/sim/presets/avoided-mp-runway")) {
+    setlistener("/sim/sceneryloaded", func {
       gui.popupTip("Multi-player enabled, start moved to runway hold short position.");
     });
-  }
-});
+}

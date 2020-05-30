@@ -266,8 +266,4 @@ var init = func {
 
 	data = { format: "", node: tree, children: scan(tree) };
 }
-
-
-_setlistener("/sim/signals/nasal-dir-initialized", init);
-
-
+init();

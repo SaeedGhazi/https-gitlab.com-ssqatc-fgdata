@@ -403,63 +403,6 @@ var controls = nil;
 # Shift-Alt-click   adds all children of the selected property to the property display
 # Shift-Ctrl-click  removes all properties from the display
 #
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	property_display = display.new(5, -25);
-	listener.display = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
-		var n = n.getValue();
-		if (n != "" and getprop("/devices/status/keyboard/shift")) {
-			if (getprop("/devices/status/keyboard/ctrl"))
-				return property_display.reset();
-			n = props.globals.getNode(n);
-			if (!n.getAttribute("children"))
-				property_display.add(n);
-			elsif (getprop("/devices/status/keyboard/alt"))
-				property_display.add(n.getChildren());
-		}
-	});
-
-	setlistener("/sim/gui/current-style", func {
-		theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name");
-	}, 1);
-
-	log = window.new(nil, -30, 10, 10);
-	log.sticky = 0;  # don't turn on; makes scrolling up messages jump left and right
-
-	var b = "/sim/screen/";
-	setlistener(b ~ "black",   func(n) log.write(n.getValue(), 0,   0,   0));
-	setlistener(b ~ "white",   func(n) log.write(n.getValue(), 1,   1,   1));
-	setlistener(b ~ "red",     func(n) log.write(n.getValue(), 0.8, 0,   0));
-	setlistener(b ~ "green",   func(n) log.write(n.getValue(), 0,   0.6, 0));
-	setlistener(b ~ "blue",    func(n) log.write(n.getValue(), 0,   0,   0.8));
-	setlistener(b ~ "yellow",  func(n) log.write(n.getValue(), 0.8, 0.8, 0));
-	setlistener(b ~ "magenta", func(n) log.write(n.getValue(), 0.7, 0,   0.7));
-	setlistener(b ~ "cyan",    func(n) log.write(n.getValue(), 0,   0.6, 0.6));
-});
-
-
-
-# --prop:display=sim/frame-rate         ... adds this property to the property display
-# --prop:display=position/              ... adds all properties under /position/  (ends with slash!)
-# --prop:display=position/,orientation/ ... separate multiple properties with comma
-#
-var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
-	removelistener(fdm_init_listener); # uninstall, so we're only called once
-	foreach (var n; props.globals.getChildren("display")) {
-		foreach (var p; split(",", n.getValue())) {
-			if (!size(p))
-				continue;
-			if (find('%', p) >= 0)
-				property_display.format = p;
-			elsif (p[-1] == `/`)
-				property_display.add(props.globals.getNode(p, 1).getChildren());
-			else
-				property_display.add(p);
-		}
-	}
-	props.globals.removeChildren("display");
-});
-
-
 
 var search_name_in_msg = func(msg, call) {
 	var matching = 0;
@@ -607,3 +550,55 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 });
 
 
+#-- Init -----------------------------------------------------------------------
+property_display = display.new(5, -25);
+listener.display = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
+    var n = n.getValue();
+    if (n != "" and getprop("/devices/status/keyboard/shift")) {
+        if (getprop("/devices/status/keyboard/ctrl"))
+            return property_display.reset();
+        n = props.globals.getNode(n);
+        if (!n.getAttribute("children"))
+            property_display.add(n);
+        elsif (getprop("/devices/status/keyboard/alt"))
+            property_display.add(n.getChildren());
+    }
+});
+
+setlistener("/sim/gui/current-style", func {
+    theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name");
+}, 1);
+
+log = window.new(nil, -30, 10, 10);
+log.sticky = 0;  # do not turn on; makes scrolling up messages jump left and right
+
+var b = "/sim/screen/";
+setlistener(b ~ "black",   func(n) log.write(n.getValue(), 0,   0,   0));
+setlistener(b ~ "white",   func(n) log.write(n.getValue(), 1,   1,   1));
+setlistener(b ~ "red",     func(n) log.write(n.getValue(), 0.8, 0,   0));
+setlistener(b ~ "green",   func(n) log.write(n.getValue(), 0,   0.6, 0));
+setlistener(b ~ "blue",    func(n) log.write(n.getValue(), 0,   0,   0.8));
+setlistener(b ~ "yellow",  func(n) log.write(n.getValue(), 0.8, 0.8, 0));
+setlistener(b ~ "magenta", func(n) log.write(n.getValue(), 0.7, 0,   0.7));
+setlistener(b ~ "cyan",    func(n) log.write(n.getValue(), 0,   0.6, 0.6));
+
+# --prop:display=sim/frame-rate         ... adds this property to the property display
+# --prop:display=position/              ... adds all properties under /position/  (ends with slash!)
+# --prop:display=position/,orientation/ ... separate multiple properties with comma
+#
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
+	removelistener(fdm_init_listener); # uninstall, so we are only called once
+	foreach (var n; props.globals.getChildren("display")) {
+		foreach (var p; split(",", n.getValue())) {
+			if (!size(p))
+				continue;
+			if (find('%', p) >= 0)
+				property_display.format = p;
+			elsif (p[-1] == `/`)
+				property_display.add(props.globals.getNode(p, 1).getChildren());
+			else
+				property_display.add(p);
+		}
+	}
+	props.globals.removeChildren("display");
+});

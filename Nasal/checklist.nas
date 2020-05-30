@@ -80,6 +80,4 @@ var convert_checklists = func {
   }
 }
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-  convert_checklists();
-});
+convert_checklists();

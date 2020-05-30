@@ -447,14 +447,12 @@ var reinit = func {
 }
 
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	var aar_capable = size(props.globals.getNode("systems/refuel", 1).getChildren("type"));
-	gui.menuEnable("tanker", aar_capable);
-	if (!aar_capable)
-		request = func { atc_msg("no tanker in range") }; # braces mandatory
+var aar_capable = size(props.globals.getNode("systems/refuel", 1).getChildren("type"));
+gui.menuEnable("tanker", aar_capable);
+if (!aar_capable)
+    request = func { atc_msg("no tanker in range") }; # braces mandatory
 
-	setlistener("/sim/signals/reinit", reinit, 1);
-});
+setlistener("/sim/signals/reinit", reinit, 1);
 
 if (globals["tanker"] != nil) {
 	# reload with io.load_nasal(getprop("/sim/fg-root") ~ "/Nasal/tanker.nas");

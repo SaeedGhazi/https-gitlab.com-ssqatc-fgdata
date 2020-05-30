@@ -935,104 +935,6 @@ wildfire_score_report_loop_timer.simulatedTime = 1;
 wildfire_score_CAFire_loop_timer = maketimer(CAFire.GENERATION_DURATION, CAFire, CAFire._loop_ );
 wildfire_score_CAFire_loop_timer.simulatedTime = 1;
 
-###############################################################################
-# Main initialization.
-var Binary = nil;
-
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-
-  Binary = mp_broadcast.Binary;
-
-  # Create configuration properties if they do not exist already.
-  props.globals.initNode(CA_enabled_pp, 1, "BOOL");
-  setlistener(CA_enabled_pp, func (n) {
-    if (getprop("/sim/signals/reinit")) return; # Ignore resets.
-    CAFire.reset(n.getValue(), SimTime.current_time());
-  });
-  props.globals.initNode(MP_share_pp, 1, "BOOL");
-  props.globals.initNode(crash_fire_pp, 1, "BOOL");
-  props.globals.initNode(impact_fire_pp, 1, "BOOL");
-  props.globals.initNode(save_on_exit_pp, 0, "BOOL");
-  props.globals.initNode(restore_on_startup_pp, 0, "BOOL");
-  props.globals.initNode(models_enabled_pp, 1, "BOOL");
-  props.globals.initNode(report_score_pp, 1, "BOOL");
-  props.globals.initNode(event_file_pp, "", "STRING");
-  props.globals.initNode(time_hack_pp, "", "STRING");
-
-  props.globals.initNode(fire_LOD_pp, 10, "INT");
-  props.globals.initNode(smoke_LOD_pp, 10, "INT");
-
-  SimTime.init();
-  broadcast =
-    mp_broadcast.BroadcastChannel.new(msg_channel_mpp, parse_msg);
-  CAFire.init();
-
-  # Start the score reporting.
-  wildfire_score_report_loop_timer.restart(CAFire.GENERATION_DURATION);
-
-  setlistener("/sim/signals/exit", func {
-    if (getprop(report_score_pp) and (CAFire.cells_created > 0))
-      print_score();
-    if (getprop(save_on_exit_pp))
-      CAFire.save_event_log(SAVEDIR ~ "fire_log.xml");
-  });
-
-  # Determine the skip-ahead-to time, if any.
-  var time_hack = time_string_to_epoch(getprop(time_hack_pp));
-  if (time_hack > SimTime.current_time()) {
-    logprint(LOG_ALERT,
-             "wildfire.nas: Ignored time hack " ~
-             (SimTime.current_time() - time_hack) ~
-             " seconds into the future.");
-    # Skip ahead to current time instead.
-    time_hack = -1;
-  } elsif (time_hack > 0) {
-    logprint(LOG_ALERT,
-             "wildfire.nas: Time hack " ~
-             (SimTime.current_time() - time_hack) ~
-             " seconds ago.");
-  } else {
-    # Skip ahead to current time instead.
-    time_hack = -1;
-  }
-
-  if (getprop(event_file_pp) != "") {
-    settimer(func {
-      # Delay loading the log until the terrain is there. Note: hack.
-      CAFire.load_event_log(getprop(event_file_pp), time_hack);
-    }, 3);      
-  } elsif (getprop(restore_on_startup_pp)) {
-    settimer(func {
-      # Delay loading the log until the terrain is there. Note: hack.
-      # Restore skips ahead to current time.
-      CAFire.load_event_log(SAVEDIR ~ "fire_log.xml", -1);
-    }, 3);
-  }
-
-  # Detect aircraft crash.
-  setlistener("sim/crashed", func(n) {
-    if (getprop(crash_fire_pp) and n.getBoolValue())
-      wildfire.ignite(geo.aircraft_position());
-  });
-
-  # Detect impact.
-  var impact_node = props.globals.getNode("sim/ai/aircraft/impact/bomb", 1);
-  setlistener("sim/ai/aircraft/impact/bomb", func(n) {
-
-    if (getprop(impact_fire_pp) and n.getBoolValue()){
-       var node = props.globals.getNode(n.getValue(), 1);
-       var impactpos = geo.Coord.new();
-       impactpos.set_latlon
-         (node.getNode("impact/latitude-deg").getValue(),
-          node.getNode("impact/longitude-deg").getValue());
-       wildfire.ignite(impactpos);
-    }
-
-  });
-
-  logprint(LOG_INFO, "Wildfire ... initialized.");
-});
-###############################################################################
 
 ###############################################################################
 # Utility functions
@@ -1192,5 +1094,97 @@ var dialog = {
              "fire_log.xml");                        # default file name
         selector.open();
     }
-}
+};
+
 ###############################################################################
+###############################################################################
+# Main initialization.
+var Binary = mp_broadcast.Binary;
+
+# Create configuration properties if they do not exist already.
+props.globals.initNode(CA_enabled_pp, 1, "BOOL");
+setlistener(CA_enabled_pp, func (n) {
+if (getprop("/sim/signals/reinit")) return; # Ignore resets.
+CAFire.reset(n.getValue(), SimTime.current_time());
+});
+props.globals.initNode(MP_share_pp, 1, "BOOL");
+props.globals.initNode(crash_fire_pp, 1, "BOOL");
+props.globals.initNode(impact_fire_pp, 1, "BOOL");
+props.globals.initNode(save_on_exit_pp, 0, "BOOL");
+props.globals.initNode(restore_on_startup_pp, 0, "BOOL");
+props.globals.initNode(models_enabled_pp, 1, "BOOL");
+props.globals.initNode(report_score_pp, 1, "BOOL");
+props.globals.initNode(event_file_pp, "", "STRING");
+props.globals.initNode(time_hack_pp, "", "STRING");
+
+props.globals.initNode(fire_LOD_pp, 10, "INT");
+props.globals.initNode(smoke_LOD_pp, 10, "INT");
+
+SimTime.init();
+broadcast = mp_broadcast.BroadcastChannel.new(msg_channel_mpp, parse_msg);
+CAFire.init();
+
+# Start the score reporting.
+wildfire_score_report_loop_timer.restart(CAFire.GENERATION_DURATION);
+
+setlistener("/sim/signals/exit", func {
+if (getprop(report_score_pp) and (CAFire.cells_created > 0))
+  print_score();
+if (getprop(save_on_exit_pp))
+  CAFire.save_event_log(SAVEDIR ~ "fire_log.xml");
+});
+
+# Determine the skip-ahead-to time, if any.
+var time_hack = time_string_to_epoch(getprop(time_hack_pp));
+if (time_hack > SimTime.current_time()) {
+logprint(LOG_ALERT,
+         "wildfire.nas: Ignored time hack " ~
+         (SimTime.current_time() - time_hack) ~
+         " seconds into the future.");
+# Skip ahead to current time instead.
+time_hack = -1;
+} elsif (time_hack > 0) {
+logprint(LOG_ALERT,
+         "wildfire.nas: Time hack " ~
+         (SimTime.current_time() - time_hack) ~
+         " seconds ago.");
+} else {
+# Skip ahead to current time instead.
+time_hack = -1;
+}
+
+if (getprop(event_file_pp) != "") {
+settimer(func {
+  # Delay loading the log until the terrain is there. Note: hack.
+  CAFire.load_event_log(getprop(event_file_pp), time_hack);
+}, 3);      
+} elsif (getprop(restore_on_startup_pp)) {
+settimer(func {
+  # Delay loading the log until the terrain is there. Note: hack.
+  # Restore skips ahead to current time.
+  CAFire.load_event_log(SAVEDIR ~ "fire_log.xml", -1);
+}, 3);
+}
+
+# Detect aircraft crash.
+setlistener("sim/crashed", func(n) {
+if (getprop(crash_fire_pp) and n.getBoolValue())
+  wildfire.ignite(geo.aircraft_position());
+});
+
+# Detect impact.
+var impact_node = props.globals.getNode("sim/ai/aircraft/impact/bomb", 1);
+setlistener("sim/ai/aircraft/impact/bomb", func(n) {
+
+if (getprop(impact_fire_pp) and n.getBoolValue()){
+   var node = props.globals.getNode(n.getValue(), 1);
+   var impactpos = geo.Coord.new();
+   impactpos.set_latlon
+     (node.getNode("impact/latitude-deg").getValue(),
+      node.getNode("impact/longitude-deg").getValue());
+   wildfire.ignite(impactpos);
+}
+
+});
+
+logprint(LOG_INFO, "Wildfire ... initialized.");

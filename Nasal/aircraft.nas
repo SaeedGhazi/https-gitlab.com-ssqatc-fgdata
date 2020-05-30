@@ -1174,40 +1174,32 @@ var crossfeed_valve = {
 	}
 };
 
+props.globals.initNode("/sim/time/elapsed-sec", 0);
+props.globals.initNode("/sim/time/delta-sec", 0);
+props.globals.initNode("/sim/time/delta-realtime-sec", 0.00000001);
 
-
-
-# module initialization
-# ==============================================================================
-#
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-	props.globals.initNode("/sim/time/elapsed-sec", 0);
-	props.globals.initNode("/sim/time/delta-sec", 0);
-	props.globals.initNode("/sim/time/delta-realtime-sec", 0.00000001);
-
-	HUD.init();
-	data.init();
-	autotrim.init();
+HUD.init();
+data.init();
+autotrim.init();
 
 ##### temporary hack to provide backward compatibility for /sim/auto-coordination
 ##### remove this code when all references to /sim/auto-coordination are gone
-	var ac = props.globals.getNode("/sim/auto-coordination");
-	if (ac != nil) {
-		logprint(LOG_ALERT, "WARNING: using deprecated property "~
-        "/sim/auto-coordination. Please change to /controls/flight/auto-coordination");
-		ac.alias(props.globals.getNode("/controls/flight/auto-coordination", 1));
-	}
+var ac = props.globals.getNode("/sim/auto-coordination");
+if (ac != nil) {
+    logprint(LOG_ALERT, "WARNING: using deprecated property "~
+    "/sim/auto-coordination. Please change to /controls/flight/auto-coordination");
+    ac.alias(props.globals.getNode("/controls/flight/auto-coordination", 1));
+}
 #### end of temporary hack for /sim/auto-coordination
 
-	if (!getprop("/sim/startup/restore-defaults")) {
-		# load user-specific aircraft settings
-		data.load();
-		var n = props.globals.getNode("/sim/aircraft-data");
-		if (n != nil) {
-			foreach (var c; n.getChildren("path")) {
-				if (c.getType() != "NONE")
-                data.add(c.getValue());
-            }
+if (!getprop("/sim/startup/restore-defaults")) {
+    # load user-specific aircraft settings
+    data.load();
+    var n = props.globals.getNode("/sim/aircraft-data");
+    if (n != nil) {
+        foreach (var c; n.getChildren("path")) {
+            if (c.getType() != "NONE")
+            data.add(c.getValue());
         }
-	}
-});
+    }
+}

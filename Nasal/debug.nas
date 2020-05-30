@@ -973,44 +973,43 @@ var dumpProbeStats = func () {
     return;
 }
 
+#-- Init -----------------------------------------------------------------------
+# General purpose breakpoint for the lazy ones.
+var bp = Breakpoint.new("default", 0);
+
+var dumpN = props.getNode("/_debug/nas/_dumpstats", 1);
+dumpN.setBoolValue(0);
+setlistener(dumpN, func(n) {
+    n.setBoolValue(0);
+    debug.dumpProbeStats();
+}, 0, 0);
 
 # --prop:debug=1 enables debug mode with additional warnings
 #
-_setlistener("sim/signals/nasal-dir-initialized", func {
-    # General purpose breakpoint for the lazy ones.
-    debug.bp = debug.Breakpoint.new("default", 0);
-    var dumpN = props.getNode("/_debug/nas/_dumpstats", 1);
-    dumpN.setBoolValue(0);
-    setlistener(dumpN, func(n) {
-        n.setBoolValue(0);
-        debug.dumpProbeStats();
-    }, 0, 0);
-    
-    if (!getprop("debug"))
-		return;
-	var writewarn = func(f, p, r) {
-		if (!r) {
-			var hint = "";
-			if ((var n = props.globals.getNode(p)) != nil) {
-				if (!n.getAttribute("writable"))
-					hint = " (write protected)";
-				elsif (n.getAttribute("tied"))
-					hint = " (tied)";
-			}
-			warn("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed" ~ hint, 2);
-		}
-		return r;
-	}
-	setprop = (func { var _ = setprop; func writewarn("setprop",
-			globals.string.join("", arg[:-2]), call(_, arg)) })();
-	props.Node.setDoubleValue = func writewarn("setDoubleValue", me.getPath(),
-			props._setDoubleValue(me._g, arg));
-	props.Node.setBoolValue = func writewarn("setBoolValue", me.getPath(),
-			props._setBoolValue(me._g, arg));
-	props.Node.setIntValue = func writewarn("setIntValue", me.getPath(),
-			props._setIntValue(me._g, arg));
-	props.Node.setValue = func writewarn("setValue", me.getPath(),
-			props._setValue(me._g, arg));
-});
 
+if (getprop("debug")) {
+    var writewarn = func(f, p, r) {
+        if (!r) {
+            var hint = "";
+            if ((var n = props.globals.getNode(p)) != nil) {
+                if (!n.getAttribute("writable"))
+                    hint = " (write protected)";
+                elsif (n.getAttribute("tied"))
+                    hint = " (tied)";
+            }
+            warn("Warning: " ~ f ~ " -> writing to " ~ p ~ " failed" ~ hint, 2);
+        }
+        return r;
+    }
 
+    setprop = (func { var _ = setprop; func writewarn("setprop",
+            globals.string.join("", arg[:-2]), call(_, arg)) })();
+    props.Node.setDoubleValue = func writewarn("setDoubleValue", me.getPath(),
+            props._setDoubleValue(me._g, arg));
+    props.Node.setBoolValue = func writewarn("setBoolValue", me.getPath(),
+            props._setBoolValue(me._g, arg));
+    props.Node.setIntValue = func writewarn("setIntValue", me.getPath(),
+            props._setIntValue(me._g, arg));
+    props.Node.setValue = func writewarn("setValue", me.getPath(),
+            props._setValue(me._g, arg));
+}

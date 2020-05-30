@@ -128,94 +128,6 @@ var autopilotDisableProps = [
   "/autopilot/CENTURYIII/locks"
 ];
 
-_setlistener("/sim/signals/nasal-dir-initialized", func {
-    screenHProp = props.globals.getNode("/sim/startup/ysize");
-
-    props.globals.getNode("/sim/help/debug", 1).setValues(debug_keys);
-    props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
-    props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
-
-    # enable/disable menu entries
-    menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
-    menuEnable("aircraft-checklists", props.globals.getNode("/sim/checklists") != nil);
-    var isAutopilotMenuEnabled = func {
-      foreach( var apdp; autopilotDisableProps ) {
-        if( props.globals.getNode( apdp ) != nil )
-          return 0;
-      }
-      return 1;
-    }
-    menuEnable("autopilot", isAutopilotMenuEnabled() );
-    menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks", 1).getChildren("js")));
-    menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt/enabled"));
-    menuEnable("rembrandt-buffers-choice", getprop("/sim/rendering/rembrandt/enabled"));
-    menuEnable("stereoscopic-options", !getprop("/sim/rendering/rembrandt/enabled"));
-    menuEnable("sound-config", getprop("/sim/sound/working"));
-    menuEnable("swift_connection", getprop("/sim/swift/available"));
-
-    # frame-per-second display
-    var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
-    setlistener(fps, fpsDisplay, 1);
-    setlistener("/sim/startup/xsize", func {
-        if (fps.getValue()) {
-            fpsDisplay(0);
-            fpsDisplay(1);
-        }
-    });
-
-    # frame-latency display
-    var latency = props.globals.getNode("/sim/rendering/frame-latency-display", 1);
-    setlistener(latency, latencyDisplay, 1);
-    setlistener("/sim/startup/xsize", func {
-        if (latency.getValue()) {
-            latencyDisplay(0);
-            latencyDisplay(1);
-        }
-    });
-
-    # only enable precipitation if gui *and* aircraft want it
-    var p = "/sim/rendering/precipitation-";
-    var precip_gui = getprop(p ~ "gui-enable");
-    var precip_ac = getprop(p ~ "aircraft-enable");
-    props.globals.getNode(p ~ "enable", 1).setAttribute("userarchive", 0); # TODO remove later
-    var set_precip = func setprop(p ~ "enable", precip_gui and precip_ac);
-    setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()),1);
-    setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()),1);
-
-    # the autovisibility feature of the menubar
-    # automatically show the menubar if the mouse is at the upper edge of the window
-    # the menubar is hidden by a binding to a LMB click in mode 0 in mice.xml
-    var menubarAutoVisibilityListener = nil;
-    var menubarAutoVisibilityEdge = props.globals.initNode( "/sim/menubar/autovisibility/edge-size", 5, "INT" );
-    var menubarVisibility = props.globals.initNode( "/sim/menubar/visibility", 0, "BOOL" );
-    var currentMenubarVisibility = menubarVisibility.getValue();
-    var mouseMode = props.globals.initNode( "/devices/status/mice/mouse/mode", 0, "INT" );
-
-    setlistener( "/sim/menubar/autovisibility/enabled", func(n) {
-      if( n.getValue() and menubarAutoVisibilityListener == nil ) {
-        currentMenubarVisibility = menubarVisibility.getValue();
-        menubarVisibility.setBoolValue( 0 );
-        menubarAutoVisibilityListener = setlistener( "/devices/status/mice/mouse/y", func(n) {
-          if( n.getValue() == nil ) return;
-          if( mouseMode.getValue() != 0 ) return;
-
-          if(  n.getValue() <= menubarAutoVisibilityEdge.getValue() )
-            menubarVisibility.setBoolValue( 1 );
-
-        }, 1, 0 );
-      }
-
-      # don't listen to the mouse position if this feature is enabled
-      if( n.getValue() == 0 and menubarAutoVisibilityListener != nil ) {
-        removelistener( menubarAutoVisibilityListener );
-        menubarAutoVisibilityListener = nil;
-        menubarVisibility.setBoolValue(currentMenubarVisibility);
-      }
-  }, 1, 0);
-
-});
-
-
 ##
 # Show/hide the fps display dialog.
 #
@@ -303,6 +215,7 @@ var Widget = {
 #     livery_dialog.toggle();
 #
 var Dialog = {
+    instance: {},
     new: func(prop, path = nil, name = nil) {
         var m = { parents: [Dialog] };
         m.state = 0;
@@ -321,8 +234,7 @@ var Dialog = {
         }
         return Dialog.instance[m.name] = m;
     },
-    del: func
-    {
+    del: func {
         if (me.listener != nil)
             removelistener(me.listener);
     },
@@ -368,7 +280,6 @@ var Dialog = {
     is_open: func {
         me.state;
     },
-    instance: {},
 };
 
 
@@ -1424,7 +1335,7 @@ var common_aircraft_keys = {
     ],
 };
 
-_setlistener("/sim/signals/screenshot", func {
+setlistener("/sim/signals/screenshot", func {
      var path = getprop("/sim/paths/screenshot-last");
      var button = { button: { legend: "Ok", default: 1, binding: { command: "dialog-close" }}};
      var success= getprop("/sim/signals/screenshot");
@@ -1436,7 +1347,7 @@ _setlistener("/sim/signals/screenshot", func {
 });
 
 var terrasync_stalled = 0;
-_setlistener("/sim/terrasync/stalled", func {
+setlistener("/sim/terrasync/stalled", func {
      var stalled = getprop("/sim/terrasync/stalled");
      if (stalled and !terrasync_stalled)
      {
@@ -1447,7 +1358,7 @@ _setlistener("/sim/terrasync/stalled", func {
 });
 
 var do_welcome = 1;
-_setlistener("/sim/signals/fdm-initialized", func {
+setlistener("/sim/signals/fdm-initialized", func {
     var haveTutorials = size(props.globals.getNode("/sim/tutorials", 1).getChildren("tutorial"));
     gui.menuEnable("tutorial-start", haveTutorials);
     if (do_welcome and haveTutorials)
@@ -1497,6 +1408,91 @@ var update_shader_settings = func() {
 		setprop("/sim/rendering/shaders/skydome",0);
 	}
 };
-_setlistener("/sim/rendering/shaders/custom-settings", func { update_shader_settings() } );
-_setlistener("/sim/rendering/shaders/quality-level-internal",   func { update_shader_settings() } );
+
+setlistener("/sim/rendering/shaders/custom-settings", func { update_shader_settings() } );
+setlistener("/sim/rendering/shaders/quality-level-internal",   func { update_shader_settings() } );
 update_shader_settings();
+
+screenHProp = props.globals.getNode("/sim/startup/ysize");
+
+props.globals.getNode("/sim/help/debug", 1).setValues(debug_keys);
+props.globals.getNode("/sim/help/basic", 1).setValues(basic_keys);
+props.globals.getNode("/sim/help/common", 1).setValues(common_aircraft_keys);
+
+# enable/disable menu entries
+menuEnable("fuel-and-payload", fdm == "yasim" or fdm == "jsb");
+menuEnable("aircraft-checklists", props.globals.getNode("/sim/checklists") != nil);
+var isAutopilotMenuEnabled = func {
+  foreach( var apdp; autopilotDisableProps ) {
+    if( props.globals.getNode( apdp ) != nil )
+      return 0;
+  }
+  return 1;
+}
+menuEnable("autopilot", isAutopilotMenuEnabled() );
+menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks", 1).getChildren("js")));
+menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt/enabled"));
+menuEnable("rembrandt-buffers-choice", getprop("/sim/rendering/rembrandt/enabled"));
+menuEnable("stereoscopic-options", !getprop("/sim/rendering/rembrandt/enabled"));
+menuEnable("sound-config", getprop("/sim/sound/working"));
+menuEnable("swift_connection", getprop("/sim/swift/available"));
+
+# frame-per-second display
+var fps = props.globals.getNode("/sim/rendering/fps-display", 1);
+setlistener(fps, fpsDisplay, 1);
+setlistener("/sim/startup/xsize", func {
+    if (fps.getValue()) {
+        fpsDisplay(0);
+        fpsDisplay(1);
+    }
+});
+
+# frame-latency display
+var latency = props.globals.getNode("/sim/rendering/frame-latency-display", 1);
+setlistener(latency, latencyDisplay, 1);
+setlistener("/sim/startup/xsize", func {
+    if (latency.getValue()) {
+        latencyDisplay(0);
+        latencyDisplay(1);
+    }
+});
+
+# only enable precipitation if gui *and* aircraft want it
+var p = "/sim/rendering/precipitation-";
+var precip_gui = getprop(p ~ "gui-enable");
+var precip_ac = getprop(p ~ "aircraft-enable");
+props.globals.getNode(p ~ "enable", 1).setAttribute("userarchive", 0); # TODO remove later
+var set_precip = func setprop(p ~ "enable", precip_gui and precip_ac);
+setlistener(p ~ "gui-enable", func(n) set_precip(precip_gui = n.getValue()),1);
+setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()),1);
+
+# the autovisibility feature of the menubar
+# automatically show the menubar if the mouse is at the upper edge of the window
+# the menubar is hidden by a binding to a LMB click in mode 0 in mice.xml
+var menubarAutoVisibilityListener = nil;
+var menubarAutoVisibilityEdge = props.globals.initNode( "/sim/menubar/autovisibility/edge-size", 5, "INT" );
+var menubarVisibility = props.globals.initNode( "/sim/menubar/visibility", 0, "BOOL" );
+var currentMenubarVisibility = menubarVisibility.getValue();
+var mouseMode = props.globals.initNode( "/devices/status/mice/mouse/mode", 0, "INT" );
+
+setlistener( "/sim/menubar/autovisibility/enabled", func(n) {
+  if( n.getValue() and menubarAutoVisibilityListener == nil ) {
+    currentMenubarVisibility = menubarVisibility.getValue();
+    menubarVisibility.setBoolValue( 0 );
+    menubarAutoVisibilityListener = setlistener( "/devices/status/mice/mouse/y", func(n) {
+      if( n.getValue() == nil ) return;
+      if( mouseMode.getValue() != 0 ) return;
+
+      if(  n.getValue() <= menubarAutoVisibilityEdge.getValue() )
+        menubarVisibility.setBoolValue( 1 );
+
+    }, 1, 0 );
+  }
+
+  # do not listen to the mouse position if this feature is enabled
+  if( n.getValue() == 0 and menubarAutoVisibilityListener != nil ) {
+    removelistener( menubarAutoVisibilityListener );
+    menubarAutoVisibilityListener = nil;
+    menubarVisibility.setBoolValue(currentMenubarVisibility);
+  }
+}, 1, 0);

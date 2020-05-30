@@ -76,15 +76,13 @@ var _set_state = func {
     }
 
 }
-
-_setlistener("sim/signals/nasal-dir-initialized", func {
-    events = mp_broadcast.EventChannel.new("scenery/events");
-    if (getprop(shared_pp)) {
-        #print("scenery.nas: starting event sharing.");
-        events.start();
-    } else {
-        #print("scenery.nas: stopping event sharing.");
-        events.stop();
-    }
-    setlistener(shared_pp, _set_state);
-});
+#-- Init -----------------------------------------------------------------------
+events = mp_broadcast.EventChannel.new("scenery/events");
+if (getprop(shared_pp)) {
+    #print("scenery.nas: starting event sharing.");
+    events.start();
+} else {
+    #print("scenery.nas: stopping event sharing.");
+    events.stop();
+}
+setlistener(shared_pp, _set_state);

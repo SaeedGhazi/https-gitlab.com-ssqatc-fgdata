@@ -98,8 +98,7 @@ var OutgoingMPBridge =
 
         new_class.NotificationsToBridge_Lookup = {};
 
-        foreach(var n ; new_class.NotificationsToBridge)
-          {
+        foreach(var n ; new_class.NotificationsToBridge) {
               print("  ",_ident,"  outwards bridge[",n,"] notifications of type --> ",n.NotificationType, " Id ",n.TypeId);
               n.MessageIndex = OutgoingMPBridge.StartMessageIndex;
               new_class.NotificationsToBridge_Lookup[n.TypeId] = n;
@@ -146,10 +145,8 @@ var OutgoingMPBridge =
                 return emesary.Transmitter.ReceiptStatus_NotProcessed;
 
 #print("Receive ",notification.NotificationType," ",notification.Ident);
-            for (var idx = 0; idx < size(me.NotificationsToBridge); idx += 1)
-            {
-                if(me.NotificationsToBridge[idx].NotificationType == notification.NotificationType)
-                {
+            for (var idx = 0; idx < size(me.NotificationsToBridge); idx += 1) {
+                if(me.NotificationsToBridge[idx].NotificationType == notification.NotificationType) {
                     me.NotificationsToBridge[idx].MessageIndex += 1;
                     notification.MessageExpiryTime = systime()+me.MessageLifeTime;
                     notification.Expired = 0;
@@ -167,14 +164,12 @@ var OutgoingMPBridge =
         };
         new_class.AddToOutgoing = func(notification)
         {
-            if (notification.IsDistinct)
-            {
-                for (var idx = 0; idx < size(me.OutgoingList); idx += 1)
-                {
+            if (notification.IsDistinct) {
+                for (var idx = 0; idx < size(me.OutgoingList); idx += 1) {
                     if (me.trace)
                       print("Compare [",idx,"] qId=",me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() ," noti --> ",notification.GetBridgeMessageNotificationTypeKey());
-                    if(me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() == notification.GetBridgeMessageNotificationTypeKey())
-                    {
+
+                    if(me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() == notification.GetBridgeMessageNotificationTypeKey()) {
                         if (me.trace)
                           print("  --> Update ",me.OutgoingList[idx].GetBridgeMessageNotificationTypeKey() ," noti --> ",notification.GetBridgeMessageNotificationTypeKey());
                         me.OutgoingList[idx]= notification;
@@ -196,18 +191,17 @@ var OutgoingMPBridge =
         {
             var outgoing = "";
             var cur_time=systime();
-            for (var idx = 0; idx < size(me.OutgoingList); idx += 1)
-            {
+            for (var idx = 0; idx < size(me.OutgoingList); idx += 1) {
                 var sect = "";
                 var notification = me.OutgoingList[idx];
-                if (!notification.Expired and notification.MessageExpiryTime > cur_time)
-                {
+
+                if (!notification.Expired and notification.MessageExpiryTime > cur_time) {
                     var encval="";
                     var first_time = 1;
                     var eidx = 0;
                     notification.Expired = 0;
-                    foreach(var p ; notification.bridgeProperties())
-                    {
+
+                    foreach(var p ; notification.bridgeProperties()) {
                         var nv = p.getValue();
                         encval = encval ~ nv;
                         eidx += 1;
@@ -218,19 +212,14 @@ var OutgoingMPBridge =
                                    OutgoingMPBridge.SeperatorChar, emesary.BinaryAsciiTransfer.encodeInt(notification.BridgeMessageNotificationTypeId,1),
                                    OutgoingMPBridge.SeperatorChar, encval, OutgoingMPBridge.MessageEndChar);
 
-                    if (size(outgoing) + size(sect) < me.MPStringMaxLen)
-                    {
+                    if (size(outgoing) + size(sect) < me.MPStringMaxLen) {
                         outgoing = outgoing~sect;
-                    }
-                    else
-                    {
+                    } else {
                         print("Emesary: ERROR [",me.Ident,"] out of space for ",notification.NotificationType, " transmitted count=",idx, " queue size ",size(me.OutgoingList));
                         notification.MessageExpiryTime = systime()+me.MessageLifeTime;
                         break;
                     }
-                }
-                else
-                {
+                } else {
                     notification.Expired = 1;
                 }
             }
@@ -249,11 +238,9 @@ var OutgoingMPBridge =
 # (pop removes the last element from a vector)
             var outSize = size(me.OutgoingList)-1;
             var out_idx = 0;
-            for (var idx = 0; idx <= outSize; idx += 1)
-            {
+            for (var idx = 0; idx <= outSize; idx += 1) {
 #print("Q1 [",idx,"] ",me.OutgoingList[idx].MessageExpiryTime-cur_time," Expired=",me.OutgoingList[idx].Expired);
-                if(!me.OutgoingList[idx].Expired)
-                {
+                if(!me.OutgoingList[idx].Expired) {
 #print("move  ",idx, " => ",out_idx);
                     var mmove = me.OutgoingList[idx];
                     me.OutgoingList[out_idx] = me.OutgoingList[idx];
@@ -262,8 +249,7 @@ var OutgoingMPBridge =
             }
             var to_del = (outSize+1) - out_idx;       
 #print("--> out idx",out_idx, " to delete ",to_del);
-            while(to_del > 0)
-            {
+            while(to_del > 0) {
 #print("--> pop ");
                 pop(me.OutgoingList);
                 to_del = to_del - 1;
@@ -298,12 +284,13 @@ var IncomingMPBridge =
 
         new_class.NotificationsToBridge_Lookup = {};
 
-        foreach(var n ; new_class.NotificationsToBridge)
-          {
-              print("  Incoming bridge notification type --> ",n.NotificationType);
-              n.IncomingMessageIndex = OutgoingMPBridge.StartMessageIndex;
-              new_class.NotificationsToBridge_Lookup[n.TypeId] = n;
-          }
+        foreach(var n ; new_class.NotificationsToBridge) {
+            print("  Incoming bridge notification type --> ",n.NotificationType);
+            var new_n = {parents: [n]};
+            new_n.IncomingMessageIndex = OutgoingMPBridge.StartMessageIndex;
+            new_class.NotificationsToBridge_Lookup[n.TypeId] = new_n;
+        }
+
         new_class.MPout = "";
         new_class.MPidx = _mpidx;
         new_class.MPpropertyBase = _propertybase;
@@ -322,7 +309,7 @@ var IncomingMPBridge =
                         {
 #print("incoming ",getprop(me.CallsignPath)," -->",me.PropertyRoot," v=",v.getValue());
                             me.ProcessIncoming(v.getValue());
-                        });
+                        },0,0);
         };
         new_class.setprop = func(property, value){
             if (IncomingMPBridge.trace == 2)
@@ -350,6 +337,10 @@ var IncomingMPBridge =
         {
             if (encoded_val == "")
               return;
+
+            if(right(encoded_val,1) != OutgoingMPBridge.MessageEndChar) 
+              printf("Error: emesary.IncomingBridge.ProcessIncoming Missing endChar. From %s. Message=%s",me.GetCallsign(),encoded_val);
+
             var encoded_notifications = split(OutgoingMPBridge.MessageEndChar, encoded_val);
             for (var idx = 0; idx < size(encoded_notifications); idx += 1) {
                 if (encoded_notifications[idx] == "")
@@ -393,7 +384,7 @@ var IncomingMPBridge =
                                     dv = bp.setValue(msg_body, me, pos);
 
                                     if (IncomingMPBridge.trace > 2)
-                                      print(" --> next pos ",pos);
+                                      print(" --> next pos ", dv.pos);
 
                                     if (dv.pos == pos or dv.pos > msglen)
                                       break;
@@ -447,8 +438,7 @@ var IncomingMPBridge =
             var path = v.getValue();
 
             # Ensure we only handle multiplayer elements
-            if (find("/multiplayer",path) > 0)
-            {
+            if (find("/multiplayer",path) > 0) {
                 var callsign = getprop(path~"/callsign");
                 print("Creating Emesary MPBridge for ",path);
                 if (callsign == "" or callsign == nil)
@@ -464,8 +454,7 @@ var IncomingMPBridge =
         setlistener("/ai/models/model-removed", func(v){
             var path = v.getValue();
             var bridge = me.incomingBridgeList[path];
-            if (bridge != nil)
-            {
+            if (bridge != nil) {
 #                            print("Bridge removed for ",v.getValue());
                 bridge.Remove();
                 me.incomingBridgeList[path]=nil;

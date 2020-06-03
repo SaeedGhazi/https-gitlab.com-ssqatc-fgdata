@@ -82,10 +82,6 @@
 var EPSILON = 1e-15;
 var ERAD = 6378138.12;		# Earth radius (m)
 
-
-var floor = func(v) v < 0.0 ? -int(-v) - 1 : int(v);
-
-
 # class that maintains one set of geographical coordinates
 #
 var Coord = {

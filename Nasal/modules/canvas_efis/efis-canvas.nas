@@ -51,8 +51,11 @@ var EFISCanvas = {
             _instr_props: {},
         };
         append(EFISCanvas._instances, obj);
-        obj.updateCountN = EFIS_root_node.getNode("update/count-"~name, 1);
+        var n = props.Node.makeValidPropName(name);
+        obj.updateCountN = EFIS_root_node.getNode("update/count-"~n, 1);
         obj.updateCountN.setIntValue(0);
+        obj.debugN = EFIS_root_node.getNode("debug/"~n, 1);
+        obj.debugN.setBoolValue(0);
         var settings = obj.defaultcanvas_settings;
         settings["name"] = name;
         obj._canvas = canvas.new(settings);

@@ -112,7 +112,37 @@ var Node = {
                 me.getPath()~" "~me.getType());
             return 0;
         }
-    }
+    },
+    
+    # checks if a string can be used as a prop name
+    # returns 0 (invalid) or 1 (valid)
+    # as string operations are expensive, use this only when necessary, 
+    # especially do not use in update loops
+    isValidPropName: func(s) {
+        if (!size(s)) return 0;
+        var _ispropspecial =  func(c) { c == `_` or c == `.` or c == `-`; }
+        var _ispropname =  func(c) string.isalnum(c) or _ispropspecial(c);
+        if (!string.isalpha(s[0]) and s[0] != `_`) return 0;
+        for (var i=1; i < size(s); i += 1) {
+            if (!_ispropname(s[i])) return 0;
+        }
+        return 1;
+    },
+
+    # replaces any invalid char by "_"
+    # as string operations are expensive, use this only when necessary, 
+    # especially do not use in update loops
+    makeValidPropName: func(s) {
+        if (!size(s)) return nil;
+        var _ispropspecial =  func(c) { c == `_` or c == `.` or c == `-`; }
+        var _ispropname =  func(c) string.isalnum(c) or _ispropspecial(c);
+        var rv = "";
+        rv ~= (!string.isalpha(s[0])) ?  "_" : chr(s[0]);
+        for (var i=1; i < size(s); i += 1) {
+            rv ~= (_ispropname(s[i])) ? chr(s[i]) : "_";
+        }
+        return rv;
+    },    
 };
 
 ##

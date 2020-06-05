@@ -7,6 +7,15 @@
   <nasal>
     <open>
       var p = props.globals.getNode("/sim/gui/dialogs/location-in-air/", 1);
+
+      if (getprop("/sim/presets/carrier") != nil and getprop("/sim/presets/carrier") != ""){
+        setprop("/sim/gui/dialogs/location-in-air/carrier-active",1);
+        setprop("/sim/gui/dialogs/location-in-air/airport",0);
+      } else {
+        setprop("/sim/gui/dialogs/location-in-air/carrier-active",0);
+        setprop("/sim/gui/dialogs/location-in-air/airport",1);
+      }
+      
       var dlg_root = cmdarg();
       var mode = {
         airport: p.getNode("airport", 1),
@@ -54,7 +63,9 @@
 
         combo.removeChildren("value");
         foreach (var carrier; carriers.getChildren("carrier")) {
-          combo.addChild("value").setValue(carrier.getNode("name", 1).getValue());
+          nameNode = carrier.getNode("name");
+          if(nameNode != nil and nameNode.getValue() != nil)
+          combo.addChild("value").setValue(nameNode.getValue());
         }
       };
 

@@ -20,7 +20,7 @@
  #
  #	Version              : 4.8
  #
- #  Copyright © 2016 Richard Harrison           Released under GPL V2
+ #  Copyright Â© 2016 Richard Harrison           Released under GPL V2
  #
  #---------------------------------------------------------------------------*/
 
@@ -296,13 +296,12 @@ var Recipient =
 # use this transmitters, however other transmitters can be created and merely use the global transmitter to discover each other
 var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
 
-
 #
-#
-# This is basically a base64 like encode except we just use alphanumerics which gives us a base62 encode.
+# Base method of transferring all numeric based values.
+# Using the same techinque as base64 - except this is base248 because we can use a much wider range of characters.
+# 
 var BinaryAsciiTransfer = 
 {
-# alphabet : "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
     alphabet : chr(1)~chr(2)~chr(3)~chr(4)~chr(5)~chr(6)~chr(7)~chr(8)~chr(9)~chr(10)~chr(11)~chr(12)~chr(13)
                ~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)
                ~chr(26)~chr(27)~chr(28)~chr(29)~chr(30)~chr(31)~chr(34)
@@ -319,45 +318,47 @@ var BinaryAsciiTransfer =
                ~chr(227)~chr(228)~chr(229)~chr(230)~chr(231)~chr(232)~chr(233)~chr(234)~chr(235)~chr(236)~chr(237)
                ~chr(238)~chr(239)~chr(240)~chr(241)~chr(242)~chr(243)~chr(244)~chr(245)~chr(246)~chr(247)~chr(248)
                ~chr(249)~chr(250)~chr(251)~chr(252)~chr(253)~chr(254)~chr(255),
+    # base248: powers of 2 (i.e. po2(x) = f(248 ^ x); 
+    # 0 based list so the first item is really[1]; i.e. 124 which is 248/2 as po2 is the magnitude excluding sign
+    po2: [1, 124, 30752, 7626496, 1891371008, 469060009984, 116326882476032, 28849066854055936], 
+
     _base: 248,
     spaces: "                                  ",
     empty_encoding: chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1),
-    encodeInt : func(num,length)
+    encodeNumeric : func(_num,length,factor)
     {
+#print(BinaryAsciiTransfer.po2[1]);
+		var irange = int(BinaryAsciiTransfer.po2[length] / factor);
+		var scale = int(irange / factor);
+#print("EC ",irange, " sc=",scale);
+		var num = int(_num / factor);
+		if (num < -scale) num = -scale;
+		else if (num > scale) num = scale;
+
+		num = int(num + irange);
+
         if (num == 0)
             return substr(BinaryAsciiTransfer.empty_encoding,0,length);
         var arr="";
 
-        var negate=0;
-        if (num < 0) {
-            negate = 1;
-            num = -num;
-        }
         while (num > 0 and length > 0) {
             var num0 = num;
-            num = (int)(num / BinaryAsciiTransfer._base);
+            num = int(num / BinaryAsciiTransfer._base);
             rem = num0-(num*BinaryAsciiTransfer._base);
             arr =substr(BinaryAsciiTransfer.alphabet, rem,1) ~ arr;
             length -= 1;
         }
         if (length>0)
             arr = substr(BinaryAsciiTransfer.spaces,0,length)~arr;
-        if(negate) 
-          arr = "-"~arr;
         return arr;
     },
     retval : {value:0, pos:0},
-    decodeInt : func(str, length, pos)
+    decodeNumeric : func(str, length, factor, pos)
     {
-        var power = length-1;
-        var negate = 0;
+		var irange = int(BinaryAsciiTransfer.po2[length]/factor);
+		var power = length - 1;
         BinaryAsciiTransfer.retval.value = 0;
         BinaryAsciiTransfer.retval.pos = pos;
-
-        if (substr(str,BinaryAsciiTransfer.retval.pos,1)=="-") {
-            negate=1;
-            BinaryAsciiTransfer.retval.pos = BinaryAsciiTransfer.retval.pos+1;
-        }
 
         while (length > 0 and power > 0) {
             var c = substr(str,BinaryAsciiTransfer.retval.pos,1);
@@ -373,7 +374,7 @@ var BinaryAsciiTransfer =
                 var cc = find(c,BinaryAsciiTransfer.alphabet);
                 if (cc < 0)
                   {
-                      print("Emesary: BinaryAsciiTransfer.decodeInt: Bad encoding ");
+                      print("Emesary: BinaryAsciiTransfer.decodeNumeric: Bad encoding ");
                       return BinaryAsciiTransfer.retval;
                   }
                BinaryAsciiTransfer.retval.value += int(cc * math.exp(math.ln(BinaryAsciiTransfer._base) * power));
@@ -382,9 +383,15 @@ var BinaryAsciiTransfer =
             length = length-1;
             BinaryAsciiTransfer.retval.pos = BinaryAsciiTransfer.retval.pos + 1;
         }
-        if (negate)
-              BinaryAsciiTransfer.retval.value = -BinaryAsciiTransfer.retval.value;
+		BinaryAsciiTransfer.retval.value -= irange;
+		BinaryAsciiTransfer.retval.value = BinaryAsciiTransfer.retval.value * factor;
         return BinaryAsciiTransfer.retval;
+    },
+    encodeInt : func(num,length){
+        return me.encodeNumeric(num, length, 1.0);
+    },
+    decodeInt : func(str, length, pos){
+        return me.decodeNumeric(str, length, 1.0, pos);
     }
 };
 
@@ -417,15 +424,18 @@ var TransferString =
                 actual_len = actual_len + 1;
             }
         }
-        rv = BinaryAsciiTransfer.encodeInt(l,1) ~ rv;
+    
+        rv = BinaryAsciiTransfer.encodeNumeric(l,1,1.0) ~ rv;
         return rv;
     },
     decode : func(v,pos)
     {
-        var dv = BinaryAsciiTransfer.decodeInt(v,1,pos);
+        var dv = BinaryAsciiTransfer.decodeNumeric(v,1,1.0,pos);
         var length = dv.value;
-        if (length == 0)
+        if (length == 0){
+            dv.value = "";
           return dv;
+        }
         var rv = substr(v,dv.pos,length);
         dv.pos = dv.pos + length;
         dv.value = rv;
@@ -439,53 +449,38 @@ var TransferInt =
 {
     encode : func(v, length)
     {
-        return BinaryAsciiTransfer.encodeInt(v,length);
+        return BinaryAsciiTransfer.encodeNumeric(v,length, 1.0);
     },
     decode : func(v, length, pos)
     {
-        return BinaryAsciiTransfer.decodeInt(v,length,pos);
+        return BinaryAsciiTransfer.decodeNumeric(v,length, 1.0, pos);
     }
 };
 
 var TransferFixedDouble = 
 {
-    po2: [1.0,124.0,30752.0,7626496.0,1891371008.0,469060009984.0,116326882476032.0,28849066854055936.0], # needs to match powers of BinaryAsciiTransfer._base
-
     encode : func(v, length, factor)
     {
-        var scale = int(me.po2[length] / factor);
-        var v = int(v * factor); 
-        if (v < -scale) v = -scale;
-        else if (v > scale) v = scale;
-        return BinaryAsciiTransfer.encodeInt(int(v), length);
+        return BinaryAsciiTransfer.encodeNumeric(int(v), length, factor);
     },
     decode : func(v, length, factor, pos)
     {
-       var scale = int(me.po2[length] / factor);
-        var dv = BinaryAsciiTransfer.decodeInt(v, length, pos);
-        dv.value = (int(dv.value)/factor);
-        return dv;
+        return BinaryAsciiTransfer.decodeNumeric(v, length, pos, factor);
     }
 };
 
 var TransferNorm = 
 {
     powers: [1,10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, 10000000.0, 100000000.0, 1000000000.0, 10000000000.0, 100000000000.0],
-    po2: [1.0,123.0,30751.0,7626495.0,1891371007,469060009983,116326882476031,28849066854055935], # needs to match powers of BinaryAsciiTransfer._base
 
     encode : func(v, length)
     {
-        v = v + 1;
-        if(v>2)
-            v=2;
-        else if (v < 0) 
-            v=0;
-        return BinaryAsciiTransfer.encodeInt(int(v * me.po2[length]),length);
+        return BinaryAsciiTransfer.encodeNumeric(int(v * BinaryAsciiTransfer.po2[length]),length, 1.0);
     },
     decode : func(v, length, pos)
     {
-        dv = BinaryAsciiTransfer.decodeInt(v, length,pos);
-        dv.value = (dv.value/me.po2[length]) - 1;
+        dv = BinaryAsciiTransfer.decodeNumeric(v, length, 1.0, pos);
+        dv.value = (dv.value/BinaryAsciiTransfer.po2[length]);
         return dv;
     }
 };
@@ -494,11 +489,11 @@ var TransferByte =
 {
     encode : func(v)
     {
-        return BinaryAsciiTransfer.encodeInt(v,1);
+        return BinaryAsciiTransfer.encodeNumeric(v,1, 1.0);
     },
     decode : func(v, pos)
     {
-        return BinaryAsciiTransfer.decodeInt(v, 1,pos);
+        return BinaryAsciiTransfer.decodeNumeric(v, 1, 1.0, pos);
     }
 };
 
@@ -511,17 +506,17 @@ var TransferCoord =
 # 1 degree = 110574 meters;
     encode : func(v)
     {
-        return  BinaryAsciiTransfer.encodeInt((v.lat()+90)*745654,5)
-        ~ BinaryAsciiTransfer.encodeInt((v.lon()+180)*745654,5) 
-        ~ TransferInt.encode(v.alt(), 3);
+        return  BinaryAsciiTransfer.encodeNumeric((v.lat()+90)*745654,5, 1.0)
+        ~ BinaryAsciiTransfer.encodeNumeric((v.lon()+180)*745654,5, 1.0) 
+        ~ TransferNumeric.encode(v.alt(), 3, 1.0);
     },
     decode : func(v,pos)
     {
-        var dv = BinaryAsciiTransfer.decodeInt(v,5,pos); 
+        var dv = BinaryAsciiTransfer.decodeNumeric(v,5, 1.0  ,pos); 
         var lat = (dv.value / 745654)-90;
-        dv = BinaryAsciiTransfer.decodeInt(v,5,dv.pos);
+        dv = BinaryAsciiTransfer.decodeNumeric(v,5, 1.0  ,dv.pos);
         var lon = (dv.value / 745654)-180;
-        dv = TransferInt.decode(v, 3, dv.pos); 
+        dv = TransferNumeric.decode(v, 3, 1.0  ,dv.pos); 
         var alt =dv.value;
 
         dv.value = geo.Coord.new().set_latlon(lat, lon).set_alt(alt);

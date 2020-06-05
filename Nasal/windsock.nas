@@ -4,6 +4,14 @@
 ##
 ###############################################################################
 
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
+# Copyright (C) 2017-2020 by Erik Hofman
+
 var dt = 0.0;
 var windsock = func {
   var wind = getprop("/environment/wind-speed-kt") or 0;

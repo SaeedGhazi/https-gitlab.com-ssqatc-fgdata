@@ -1,3 +1,13 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal
+# use of the code, and does *not* fall under the heading of "derived
+# work."
+#
+# Copyright (C) 2006-2008 by mfranz
+
+
 # Dynamic Cockpit View manager. Tries to simulate the pilot's most likely
 # deliberate view direction. Doesn't consider forced view changes due to
 # acceleration.

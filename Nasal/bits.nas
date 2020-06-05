@@ -1,3 +1,12 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal
+# use of the code, and does *not* fall under the heading of "derived
+# work."
+#
+# Copyright (C) 2008 by mfranz
+
 var bit = [var _ = 1];
 for (var i = 1; i < 32; i += 1)
 	append(bit, _ += _);

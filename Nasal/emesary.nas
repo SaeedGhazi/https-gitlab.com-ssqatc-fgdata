@@ -196,6 +196,32 @@ var Transmitter =
     }
 };
 
+var QueuedTransmitter =
+{
+ new: func(_ident){
+     var new_class = { parents:[QueuedTransmitter], base:emesary.Transmitter};
+     new_class = emesary.Transmitter.new(_ident);
+     new_class.baseNotifyAll = new_class.NotifyAll;
+     new_class.Q = [];
+
+     new_class.NotifyAll = func(message){
+         append(me.Q, message);
+         return emesary.Transmitter.ReceiptStatus_Pending;
+     };
+
+     new_class.Process = func {
+         foreach (var m ; me.Q)
+               me.baseNotifyAll(m);
+                  me.Q = [];
+                  return emesary.Transmitter.ReceiptStatus_PendingFinished;
+              };
+         new_class.size = func {
+             return size(me.Q);
+         }
+           return new_class;
+     }
+};
+
 #
 #
 # Base class for Notifications. By convention a Notification has a type and a value.
@@ -269,6 +295,7 @@ var Recipient =
 # Instantiate a Global Transmitter, this is a convenience and a known starting point. Generally most classes will
 # use this transmitters, however other transmitters can be created and merely use the global transmitter to discover each other
 var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
+
 
 #
 #

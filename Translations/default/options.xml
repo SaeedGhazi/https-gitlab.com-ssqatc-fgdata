@@ -19,6 +19,7 @@
 	<fg-aircraft-desc>Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</fg-aircraft-desc>
         <download-dir-desc>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</download-dir-desc>
 	<language-desc>Select the language for this session</language-desc>
+	<load-tape-desc>Load recording of earlier flightgear session</load-tape-desc>
 	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
 	<enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
 	<restore-defaults-desc>Reset all user settings to their defaults (rendering options etc)</restore-defaults-desc>

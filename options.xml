@@ -106,6 +106,13 @@
    </option>
 
    <option>
+    <name>load-tape</name>
+    <arg>path</arg>
+    <description>load-tape-desc</description>
+    <brief/>
+   </option>
+
+   <option>
     <name>restore-defaults</name>
     <description>restore-defaults-desc</description>
    </option>

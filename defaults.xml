@@ -844,6 +844,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <!-- 1 h -->
       </buffer>
       <tape-directory type="string" userarchive="y"/>
+      <multiplayer type="bool" userarchive="y"/>
     </replay>
     <airport>
       <runways>

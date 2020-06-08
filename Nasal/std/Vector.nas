@@ -12,6 +12,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+
 
 var min = func(a, b) { a < b ? a : b }
 var max = func(a, b) { a > b ? a : b }

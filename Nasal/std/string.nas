@@ -1,6 +1,14 @@
 # ------------------------------------------------------------------------------
 # A C++ like string class (http://en.cppreference.com/w/cpp/string/basic_string)
 # ------------------------------------------------------------------------------
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
+# Copyright (C) 2012-2013 by Thomas Geymayer
+
 
 # capture global string
 var _string = string;

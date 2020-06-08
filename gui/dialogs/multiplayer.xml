@@ -186,6 +186,20 @@
             <col>1</col>
             <colspan>2</colspan>
             <halign>left</halign>
+            <name>record-continuous</name>
+            <label>Continuous record to file</label>
+            <property>sim/replay/record-continuous</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>record-continuous</object-name>
+            </binding>
+        </checkbox>
+
+        <checkbox>
+            <row>4</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
             <visible>
                 <property>sim/multiplay/transmit-filter-property-base-available</property>
             </visible>
@@ -198,8 +212,14 @@
             </binding>
         </checkbox>
 
+        <text>
+            <row>5</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>Compatibility</label>
+        </text>
         <combo>
-            <row>4</row>
+            <row>5</row>
             <col>1</col>
             <halign>left</halign>
             <name>protocol-version</name>
@@ -226,21 +246,15 @@
                 </script>
             </binding>
         </combo>
-        <text>
-            <row>4</row>
-            <col>0</col>
-            <halign>right</halign>
-            <label>Compatibility</label>
-        </text>
 
         <text>
-            <row>5</row>
+            <row>6</row>
             <col>0</col>
             <halign>right</halign>
             <label>   Callsign:</label>
         </text>
         <input>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <halign>left</halign>
             <property>/sim/multiplay/callsign</property>
@@ -250,25 +264,9 @@
                 </not>
             </enable>
         </input>
-        <text>
-          <row>7</row><col>0</col>
-          <halign>right</halign>
-          <label>Server:</label>
-        </text>
-        <combo>
-            <name>host</name>
-            <halign>left</halign>
-            <row>6</row><col>1</col>
-            <colspan>2</colspan>
-            <pref-width>350</pref-width>
-            <property>/sim/multiplay/selected-server</property>
-            <editable>true</editable>
-            
-            <properties>/sim/gui/dialogs/multiplay/servers</properties>
-        </combo>
         <group>
             <layout>hbox</layout>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <text>
                 <width>2</width>
@@ -287,22 +285,41 @@
             </input>
         </group>
         <!-- status area -->
+
+        <combo>
+            <name>host</name>
+            <halign>left</halign>
+            <row>7</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <pref-width>350</pref-width>
+            <property>/sim/multiplay/selected-server</property>
+            <editable>true</editable>
+            
+            <properties>/sim/gui/dialogs/multiplay/servers</properties>
+        </combo>
+
+        <text>
+          <row>8</row>
+          <col>0</col>
+          <halign>right</halign>
+          <label>Server:</label>
+        </text>
         <text>
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>7</row>
+            <row>8</row>
             <col>1</col>
             <halign>left</halign>
             <label>Not connected</label>
         </text>
-
         <text>
+            <row>8</row>
+            <col>1</col>
             <visible>
                 <property>/sim/multiplay/online</property>
             </visible>
-            <row>7</row>
-            <col>1</col>
             <halign>left</halign>
             <label>MMMMMMMMMMMMMMMMM</label>
             <format>Connected to %s</format>

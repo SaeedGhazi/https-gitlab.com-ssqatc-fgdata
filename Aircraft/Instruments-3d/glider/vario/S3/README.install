@@ -48,7 +48,7 @@ To install this instrument into your aircraft, you need to do the following:
 				<value>0.01</value>
 			</greater-than>
 			<greater-than-equals>
-				<property>/systems/electrical/outputs/s3</property>
+				<property>/systems/electrical/outputs/S3</property>
 				<value>9</value>
 			</greater-than-equals>
 			<equals>

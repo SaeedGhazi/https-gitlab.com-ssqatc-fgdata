@@ -172,6 +172,20 @@
             <col>1</col>
             <colspan>2</colspan>
             <halign>left</halign>
+            <name>multiplayer-record</name>
+            <label>Include multiplayer aircraft in recordings</label>
+            <property>/sim/replay/multiplayer</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>multiplayer-record</object-name>
+            </binding>
+        </checkbox>
+
+        <checkbox>
+            <row>3</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
             <visible>
                 <property>sim/multiplay/transmit-filter-property-base-available</property>
             </visible>
@@ -185,7 +199,7 @@
         </checkbox>
 
         <combo>
-            <row>3</row>
+            <row>4</row>
             <col>1</col>
             <halign>left</halign>
             <name>protocol-version</name>
@@ -213,20 +227,20 @@
             </binding>
         </combo>
         <text>
-            <row>3</row>
+            <row>4</row>
             <col>0</col>
             <halign>right</halign>
             <label>Compatibility</label>
         </text>
 
         <text>
-            <row>4</row>
+            <row>5</row>
             <col>0</col>
             <halign>right</halign>
             <label>   Callsign:</label>
         </text>
         <input>
-            <row>4</row>
+            <row>5</row>
             <col>1</col>
             <halign>left</halign>
             <property>/sim/multiplay/callsign</property>
@@ -237,7 +251,7 @@
             </enable>
         </input>
         <text>
-          <row>6</row><col>0</col>
+          <row>7</row><col>0</col>
           <halign>right</halign>
           <label>Server:</label>
         </text>
@@ -254,7 +268,7 @@
         </combo>
         <group>
             <layout>hbox</layout>
-            <row>4</row>
+            <row>5</row>
             <col>1</col>
             <text>
                 <width>2</width>

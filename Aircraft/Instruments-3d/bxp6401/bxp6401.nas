@@ -35,17 +35,17 @@ var mode_prop	=	inputs.initNode("knob-mode", 0, "INT");
 var start_prop	=	transponder.initNode("start", 0.0, "DOUBLE");
 var volt_prop	=	props.globals.initNode("/systems/electrical/outputs/transponder", 15.0, "DOUBLE");
 var active_prop	=	inputs.initNode("current-change", 0, "INT");
-var ident_prop	=	inputs.getNode("ident-btn");
+var ident_prop	=	inputs.initNode("ident-btn", 0, "BOOL");
 var idcode_prop	=	transponder.initNode("id-code", 7000, "INT");
 var alt		=	transponder.getNode("altitude");
 var alt_val	=	transponder.getNode("altitude-valid");
 var brightness	=	transponder.initNode("brightness", 0.5, "DOUBLE");
 
 var ident_arr		=	[0, 0, 0, 0];
-var ident_prop_arr	=	[	inputs.getNode("digit[0]"), 
-					inputs.getNode("digit[1]"), 
-					inputs.getNode("digit[2]"), 
-					inputs.getNode("digit[3]")	];
+var ident_prop_arr	=	[	inputs.initNode("digit[0]", 7, "INT"), 
+					inputs.initNode("digit[1]", 0, "INT"), 
+					inputs.initNode("digit[2]", 0, "INT"), 
+					inputs.initNode("digit[3]", 0, "INT"),	];
 
 var instrument_dir	=	"Aircraft/Instruments-3d/bxp6401/";
 

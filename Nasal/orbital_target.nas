@@ -1,8 +1,16 @@
 ###########################################################################
 # simulation of a faraway orbital target (needs handover to spacecraft-specific 
 # code for close range)
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
 # Thorsten Renk 2016-2019
 ###########################################################################
+
 
 var orbitalTarget = {
 	new: func(altitude, inclination, node_longitude, anomaly) {

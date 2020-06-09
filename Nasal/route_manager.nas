@@ -1,3 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
+# Copyright (C) 2012-202 by James Turner
+
 # route_manager.nas -  FlightPlan delegate(s) corresponding to the built-
 # in route-manager dialog and GPS. Intended to provide a sensible default behaviour,
 # but can be disabled by an aircraft-specific FMS / GPS system.

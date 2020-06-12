@@ -101,7 +101,7 @@ var EFISCanvas = {
             if (me[key] != nil) {
                 me._updateClip(key);
             }
-            #else print("    loadsvg: invalid key ",key);
+            #else logprint(DEV_ALERT, "    loadsvg: invalid key ",key);
         }
         return me;
     },
@@ -165,7 +165,7 @@ var EFISCanvas = {
     },
 
     updateTextElement: func(svgkey, text, color = nil) {
-        if (me[svgkey] == nil or me[svgkey].setText == nil){
+        if (me[svgkey] == nil or !isa(me[svgkey], canvas.Text)) {
             print("updateTextElement(): Invalid argument ", svgkey);
             return;
         }

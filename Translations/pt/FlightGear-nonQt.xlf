@@ -977,9 +977,17 @@
           <source>Starting latitude (south = -)</source>
           <target>Latitude inicial (sul = -)</target>
         </trans-unit>
+        <trans-unit approved="no" id="options/launcher-desc:0" translate="yes">
+          <source>Use GUI launcher</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="no" id="options/livery-desc:0" translate="yes">
           <source>Select aircraft livery</source>
           <target>Seleciona a pintura da aeronave</target>
+        </trans-unit>
+        <trans-unit approved="no" id="options/load-tape-desc:0" translate="yes">
+          <source>Load recording of earlier flightgear session</source>
+          <target />
         </trans-unit>
         <trans-unit approved="no" id="options/log-class-desc:0" translate="yes">
           <source>Specify which logging class(es) to use</source>
@@ -1395,6 +1403,10 @@
           <source>loading fixes</source>
           <target />
         </trans-unit>
+        <trans-unit approved="no" id="sys/navdata-load-percent:0" translate="yes">
+          <source>[VALUE]% complete</source>
+          <target />
+        </trans-unit>
         <trans-unit approved="no" id="sys/navdata-loading-airports:0" translate="yes">
           <source>loading airport data</source>
           <target />
@@ -1409,6 +1421,17 @@
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-reading-apt-dat-files:0" translate="yes">
           <source>reading airport data</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="sys/settings-migration-text:0" translate="yes">
+          <source>Saved settings were migrated from a previous version of FlightGear.
+        If you encounter any problems when using the system, try restoring 
+        the default settings, before reporting a problem.
+		Saved settings can affect the appearance, performance and features of the simulator.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="sys/settings-migration-title:0" translate="yes">
+          <source>Settings migrated</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="sys/unstable-warning:0" translate="yes">

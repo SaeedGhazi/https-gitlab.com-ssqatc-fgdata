@@ -23,8 +23,10 @@
         <downloading-scenery>downloading scenery</downloading-scenery>
         <finalize-position>finalizing position</finalize-position>
 
-				<unstable-warning>Unstable nightly build - some features may be under active development</unstable-warning>
+		<unstable-warning>Unstable nightly build - some features may be under active development</unstable-warning>
 
+		<!-- the value is replaced into the [VALUE] section of this -->
+		<navdata-load-percent>[VALUE]% complete</navdata-load-percent>
 
 		<settings-migration-title>Settings migrated</settings-migration-title>
 		<settings-migration-text>Saved settings were migrated from a previous version of FlightGear.

@@ -1424,10 +1424,7 @@
           <target>lettura dati aeroporto in corso</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/settings-migration-text:0" translate="yes">
-          <source>Saved settings were migrated from a previous version of FlightGear.
-        If you encounter any problems when using the system, try restoring 
-        the default settings, before reporting a problem.
-		Saved settings can affect the appearance, performance and features of the simulator.</source>
+          <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="sys/settings-migration-title:0" translate="yes">
@@ -1515,6 +1512,167 @@
         <trans-unit approved="yes" id="tips/tip:18" translate="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
           <target>Premi TAB per muovere il punto di vista con il mouse e utilizza la rotella per modificare lo zoom</target>
+        </trans-unit>
+      </group>
+      <group resname="weather-scenarios" restype="x-trolltech-linguist-context">
+        <trans-unit approved="no" id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes">
+          <source>The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/border-high-pressure-region-name:0" translate="yes">
+          <source>Border of a high pressure region</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/border-low-pressure-region-desc:0" translate="yes">
+          <source>The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/border-low-pressure-region-name:0" translate="yes">
+          <source>Border of a low pressure region</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/cat-one-minimum-desc:0" translate="yes">
+          <source>If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/cat-one-minimum-name:0" translate="yes">
+          <source>CAT I minimum</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes">
+          <source>
+        This is expert level. You will barely see the taxiway from the cockpit, even if you are
+        on ground. Fog and light drizzle, freezing level at 1000ft.
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes">
+          <source>CAT IIIb minimum</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-desc:0" translate="yes">
+          <source>
+        With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until
+        seconds before touchdown. Trust your instruments to stay alive.
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-name:0" translate="yes">
+          <source>CAT II minimum</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/core-high-pressure-region-desc:0" translate="yes">
+          <source>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/core-high-pressure-region-name:0" translate="yes">
+          <source>Core high pressure region</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-desc:0" translate="yes">
+          <source>The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-name:0" translate="yes">
+          <source>Core low pressure region</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
+          <source>
+        Fog developed this autumn's morning. Expect good visibility above the layer.
+        However - getting through it can be a challenge. Stay alive for a 500' climb
+        and you'll see the sun!
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/early-morning-fog-name:0" translate="yes">
+          <source>Early morning fog</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/fair-weather-desc:0" translate="yes">
+          <source>A lovely day for trip to your favorite 100$ hamburger airfield</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/fair-weather-name:0" translate="yes">
+          <source>Fair weather</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/high-pressure-region-desc:0" translate="yes">
+          <source>A high pressure region, characterized my moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/high-pressure-region-name:0" translate="yes">
+          <source>High pressure region</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/live-data-desc:0" translate="yes">
+          <source>
+        Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
+        Weather is generated automatically, once a valid METAR is received.
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/live-data-name:0" translate="yes">
+          <source>Live data</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/low-pressure-region-desc:0" translate="yes">
+          <source>A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/low-pressure-region-name:0" translate="yes">
+          <source>Low pressure region</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/manual-input-desc:0" translate="yes">
+          <source>Enter your favorite METAR weather. A valid METAR syntax is required.</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/manual-input-name:0" translate="yes">
+          <source>Manual input</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/marginal-vfr-desc:0" translate="yes">
+          <source>
+        After the storm - limited visibility and some showers.
+        Go or No-Go?
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/marginal-vfr-name:0" translate="yes">
+          <source>Marginal VFR</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/stormy-monday-desc:0" translate="yes">
+          <source>
+        You're out for an adventure? Gusty winds blowing from the west
+        and isolated thunderstorms should be avoided. Fasten your seatbelt!
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/stormy-monday-name:0" translate="yes">
+          <source>Stormy Monday</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/thunderstorm-desc:0" translate="yes">
+          <source>
+        A hot and damp summer day with thunderstorms developing in the afternoon.
+        Be prepared for reduction of visibility in showers and strong gusts
+        near thunderstorms
+      </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/thunderstorm-name:0" translate="yes">
+          <source>Thunderstorm</source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/warm-sector-desc:0" translate="yes">
+          <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development. </source>
+          <target />
+        </trans-unit>
+        <trans-unit approved="no" id="weather-scenarios/warm-sector-name:0" translate="yes">
+          <source>Warm sector</source>
+          <target />
         </trans-unit>
       </group>
     </body>

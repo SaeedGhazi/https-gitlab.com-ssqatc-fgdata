@@ -52,7 +52,7 @@
         <id type="string">high-pressure-region</id>
       <name type="string">High pressure region</name>
       <metar type="string">XXXX 012345Z 15003KT 12SM SCT048 FEW300 20/08 Q1022 NOSIG</metar>
-      <description type="string">A high pressure region, characterized my moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</description>
+      <description type="string">A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</description>
       <local-weather>
         <tile-type>High-pressure</tile-type>
         <tile-management>realistic weather</tile-management>        
@@ -102,7 +102,7 @@
       <id type="string">warm-sector</id>
       <name type="string">Warm sector</name>
       <metar type="string">XXXX 012345Z 15003KT 8SM SCT028 SCT088 20/14 Q1010 NOSIG</metar>
-      <description type="string">A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development. </description>
+      <description type="string">A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</description>
       <local-weather>
         <tile-type>Warm-sector</tile-type>
         <tile-management>realistic weather</tile-management>        

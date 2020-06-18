@@ -268,7 +268,7 @@ Often shader effects need tangent vectors to work properly. These
 tangent vectors, usually called tangent and binormal, are computed
 on the CPU and given to the shader as vertex attributes. These
 vectors are computed on demand on the geometry using the effect if
-the 'generate' clause is present in the effect file. Exemple :
+the 'generate' clause is present in the effect file. Example :
 
   <generate>
     <tangent type="int">6</tangent>
@@ -277,8 +277,10 @@ the 'generate' clause is present in the effect file. Exemple :
   </generate>
 
 Valid subnodes of 'generate' are 'tangent', 'binormal' or 'normal'.
-The integer value of these subnode is the index of the attribute
-that will hold the value of the vec3 vector.
+The integer value of these subnodes is the index of the attribute
+that will hold the value of the vec3 vector.  If 'normal' generation
+is requested, the generated normals will replace those supplied by
+the model or terrain, which is usually undesirable.
 
 The generate clause is located under PropertyList in the xml file.
 
@@ -297,7 +299,7 @@ be bound to an attribute in the program clause, like this :
     </attribute>
   </program>
 
-attribute names are whatever the shader use. The index is the one
+attribute names are whatever the shader uses. The index is the one
 declared in the 'generate' clause. So because generate/tangent has
 value 6 and my_tangent_attribute has index 6, my_tangent_attribute
 holds the tangent value for the vertex.

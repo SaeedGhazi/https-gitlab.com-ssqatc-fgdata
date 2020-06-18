@@ -1543,10 +1543,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes">
-          <source>
-        This is expert level. You will barely see the taxiway from the cockpit, even if you are
-        on ground. Fog and light drizzle, freezing level at 1000ft.
-      </source>
+          <source>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes">
@@ -1554,10 +1551,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-desc:0" translate="yes">
-          <source>
-        With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until
-        seconds before touchdown. Trust your instruments to stay alive.
-      </source>
+          <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-name:0" translate="yes">
@@ -1581,11 +1575,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
-          <source>
-        Fog developed this autumn's morning. Expect good visibility above the layer.
-        However - getting through it can be a challenge. Stay alive for a 500' climb
-        and you'll see the sun!
-      </source>
+          <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/early-morning-fog-name:0" translate="yes">
@@ -1601,7 +1591,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/high-pressure-region-desc:0" translate="yes">
-          <source>A high pressure region, characterized my moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
+          <source>A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/high-pressure-region-name:0" translate="yes">
@@ -1609,10 +1599,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/live-data-desc:0" translate="yes">
-          <source>
-        Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection.
-        Weather is generated automatically, once a valid METAR is received.
-      </source>
+          <source>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/live-data-name:0" translate="yes">
@@ -1636,10 +1623,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/marginal-vfr-desc:0" translate="yes">
-          <source>
-        After the storm - limited visibility and some showers.
-        Go or No-Go?
-      </source>
+          <source>After the storm - limited visibility and some showers. Go or No-Go?</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/marginal-vfr-name:0" translate="yes">
@@ -1647,10 +1631,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/stormy-monday-desc:0" translate="yes">
-          <source>
-        You're out for an adventure? Gusty winds blowing from the west
-        and isolated thunderstorms should be avoided. Fasten your seatbelt!
-      </source>
+          <source>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/stormy-monday-name:0" translate="yes">
@@ -1658,11 +1639,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/thunderstorm-desc:0" translate="yes">
-          <source>
-        A hot and damp summer day with thunderstorms developing in the afternoon.
-        Be prepared for reduction of visibility in showers and strong gusts
-        near thunderstorms
-      </source>
+          <source>A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/thunderstorm-name:0" translate="yes">
@@ -1670,7 +1647,7 @@
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/warm-sector-desc:0" translate="yes">
-          <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development. </source>
+          <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/warm-sector-name:0" translate="yes">

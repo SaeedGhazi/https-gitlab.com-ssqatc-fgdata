@@ -1,4 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- !!! Don't modify this file manually. !!!
+This file was automatically generated from $FG_ROOT/Environment/environment.xml
+using the fg-copy-weather-scenarios-to-default-locale script from FGMeta.
+Modifications should be done either in $FG_ROOT/Environment/environment.xml or
+in that script. -->
 <PropertyList>
   <live-data-name>Live data</live-data-name>
   <live-data-desc>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</live-data-desc>

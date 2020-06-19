@@ -238,11 +238,11 @@
 					{
 						starttime="";stoptime="";
 					}
-					var Config = props.Node.new({
+					var Extra = props.Node.new({
 						"user-data":{ "description": descr, "author-name": author },
 						"tape-data": { "quality": quality, "start": starttime, "stop": stoptime }
 						});
-					fgcommand("save-tape", Config);
+					fgcommand("save-tape", Extra);
 				</script>
 			</binding>
 			<binding>

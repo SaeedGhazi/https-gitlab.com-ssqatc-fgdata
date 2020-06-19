@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    
+    <name>flight-recorder-control</name>
+    <layout>vbox</layout>
+    
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+
+        <text>
+            <label>Flight Recorder Control</label>
+        </text>
+
+        <empty><stretch>1</stretch></empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+    
+    <group>
+
+        <layout>table</layout>
+        
+        <checkbox>
+            <row>0</row>
+            <col>0</col>
+            <property>sim/replay/multiplayer</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+        <text>
+            <row>0</row>
+            <col>1</col>
+            <label>Include multiplayer aircraft in recordings</label>
+            <halign>left</halign>
+        </text>
+    
+        <checkbox>
+            <row>1</row>
+            <col>0</col>
+            <property>sim/replay/record-continuous</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+        <text>
+            <row>1</row>
+            <col>1</col>
+            <label>Continuous record to file</label>
+            <halign>left</halign>
+        </text>
+    
+        <checkbox>
+            <row>2</row>
+            <col>0</col>
+            <property>sim/replay/recovery-period</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+        <text>
+            <row>2</row>
+            <col>1</col>
+            <label>Maintain recovery snapshot</label>
+            <halign>left</halign>
+        </text>
+        
+        <button>
+            <row>4</row>
+            <col>0</col>
+            <legend>Load ...</legend>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-load</dialog-name>
+            </binding>
+        </button>
+        <text>
+            <row>4</row>
+            <col>1</col>
+            <label>Load Flight Recorder Tape</label>
+            <halign>left</halign>
+        </text>
+        
+        <button>
+            <row>5</row>
+            <col>0</col>
+            <legend>Save ...</legend>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-save</dialog-name>
+            </binding>
+        </button>
+        <text>
+            <row>5</row>
+            <col>1</col>
+            <label>Save Flight Recorder Tape</label>
+            <halign>left</halign>
+        </text>
+    </group>
+
+</PropertyList>

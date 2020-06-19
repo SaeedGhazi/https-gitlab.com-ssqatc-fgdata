@@ -168,34 +168,6 @@
         </checkbox>
 
         <checkbox>
-            <row>2</row>
-            <col>1</col>
-            <colspan>2</colspan>
-            <halign>left</halign>
-            <name>multiplayer-record</name>
-            <label>Include multiplayer aircraft in recordings</label>
-            <property>/sim/replay/multiplayer</property>
-            <binding>
-                <command>dialog-apply</command>
-                <object-name>multiplayer-record</object-name>
-            </binding>
-        </checkbox>
-
-        <checkbox>
-            <row>3</row>
-            <col>1</col>
-            <colspan>2</colspan>
-            <halign>left</halign>
-            <name>record-continuous</name>
-            <label>Continuous record to file</label>
-            <property>sim/replay/record-continuous</property>
-            <binding>
-                <command>dialog-apply</command>
-                <object-name>record-continuous</object-name>
-            </binding>
-        </checkbox>
-
-        <checkbox>
             <row>4</row>
             <col>1</col>
             <colspan>2</colspan>

@@ -13,20 +13,10 @@
 		</item>
 
 		<item>
-			<name>load-tape</name>
-			<key>Shift-F1</key>
+			<name>flight-recorder-control</name>
 			<binding>
 				<command>dialog-show</command>
-				<dialog-name>flight-recorder-load</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<name>save-tape</name>
-			<key>Shift-F2</key>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>flight-recorder-save</dialog-name>
+				<dialog-name>flight-recorder-control</dialog-name>
 			</binding>
 		</item>
 

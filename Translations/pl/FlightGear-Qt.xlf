@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="_msg34" approved="yes">
         <source xml:space="preserve">The choosen location (%1) contains files for version %2, but this is FlightGear %3. Please update or try another location</source>
-        <target xml:space="preserve">Wybrana lokalizacja (%1) zawiera pliki dla wersji %2, ale to jest FlightGear %3. Proszę zaktualizować lub wybrać inną lokalizację.</target>
+        <target xml:space="preserve">Wybrana lokalizacja (%1) zawiera pliki dla wersji %2, ale to jest FlightGear %3. Proszę zaktualizować lub wybrać inną lokalizację</target>
         <context-group purpose="location"><context context-type="linenumber">273</context></context-group>
       </trans-unit>
     </group>

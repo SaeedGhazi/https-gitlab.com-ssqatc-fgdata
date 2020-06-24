@@ -163,9 +163,6 @@
                     var speed = 0;
                     var departureAirportId = "";
                     var arrivalAirportId = "";
-                    if (type == "multiplayer") {
-                        name = child.getNode("sim").getNode("model").getNode("path").getValue();
-                    }
                     if (type == "carrier") {
                         callsign = child.getNode("sign").getValue();
                         name = child.getNode("name").getValue();
@@ -173,8 +170,13 @@
                     } else {
                         callsign = child.getNode("callsign").getValue();
                         speed = velocities.getNode("true-airspeed-kt").getValue();
-                        departureAirportId = child.getNode("departure-airport-id").getValue();
-                        arrivalAirportId = child.getNode("arrival-airport-id").getValue();
+
+                        if (type == "multiplayer") {
+                            name = child.getNode("sim").getNode("model").getNode("path").getValue();
+                        } else {
+                            departureAirportId = child.getNode("departure-airport-id").getValue();
+                            arrivalAirportId = child.getNode("arrival-airport-id").getValue();
+                        }
                     }
 
                     geoJSON.features.push({

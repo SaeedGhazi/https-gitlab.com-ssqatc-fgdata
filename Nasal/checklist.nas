@@ -4,6 +4,8 @@
 var convert_checklists = func {
 
   if (props.globals.getNode("/sim/checklists") == nil) return;
+  var autoTutorials = props.globals.getNode("/sim/checklists/auto-tutorials");
+  if (autoTutorials != nil and !autoTutorials.getBoolValue()) return;
 
   var tutorials = props.globals.getNode("/sim/tutorials", 1);
   var groups = props.globals.getNode("/sim/checklists").getChildren("group");
@@ -11,6 +13,9 @@ var convert_checklists = func {
 
   if (size(groups) > 0) {
     foreach (var grp; groups) {
+      var allowed = grp.getNode("auto-tutorial");
+      if (allowed != nil and !allowed.getBoolValue()) continue;
+
       var checks = grp.getChildren("checklist");
       foreach (var chk; checks) {
         append(checklists, chk);
@@ -21,10 +26,13 @@ var convert_checklists = func {
   }
 
   if (size(checklists) == 0) return;
-
   foreach (var ch; checklists) {
     var name = ch.getNode("title", 1).getValue();
-    var tutorial = tutorials.getNode("tutorial[" ~ size(tutorials.getChildren("tutorial")) ~ "]", 1);
+
+    var allowed = ch.getNode("auto-tutorial");
+    if (allowed != nil and !allowed.getBoolValue()) continue;
+
+    var tutorial = tutorials.addChild("tutorial");
 
     # Initial high level config
     tutorial.getNode("name", 1).setValue("Checklist: " ~ name);

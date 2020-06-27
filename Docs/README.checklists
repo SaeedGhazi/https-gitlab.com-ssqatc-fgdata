@@ -12,10 +12,12 @@ or /sim/checklists/group[n]/checklist[m]
 with the following tags
 
 <title>       - Name of the checklist
+<auto-tutorial> - Whether a tutorial should be automatically generated (true, default)
+                  or not (false).
 <page>        - Zero or more pages for the checklist containing:
  <item>       - One or more checklist items containing:
   <name>      - name of the checklist item (e.g. Carb Heat), to appear on the left
-  <value>     - One or more values for the checklist item, to appear on the right 
+  <value>     - One or more values for the checklist item, to appear on the right
                 hand side
   <marker>    - A tutorial marker (displayed when the user presses the ? button)
                 This can be easily placed using the Help->Display Tutorial Marker.
@@ -29,16 +31,21 @@ with the following tags
 The <page> tag may be omitted for single-page checklists, with the <item> tags
 immediately under the <checklist[n]> node.
 
+Tutorial auto-generation of all checklists can be disabled by setting
+/sim/checklists/auto-tutorials=false.
+
 Checklists may be grouped under <group> nodes with a <name> tag decribing the
 group.  For example
 
 <group>
  <name>Emergency</name>
+ <auto-tutorial>false</auto-tutorial>
  <checklist>...
  <checklist>...
 </group>
 <group>
  <name>Normal</name>
+ <auto-tutorial>true</auto-tutorial>
  <checklist>...
  <checklist>...
 </group>

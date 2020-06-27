@@ -18,6 +18,7 @@ var include_path = "Nasal/canvas/api/";
 # log level for debug output
 var _API_dbg_level = DEV_WARN;
 
+io.include(include_path~"colors.nas");
 io.include(include_path~"helpers.nas");
 io.include(include_path~"transform.nas");
 io.include(include_path~"element.nas");

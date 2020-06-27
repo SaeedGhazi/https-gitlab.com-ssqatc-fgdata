@@ -27,17 +27,7 @@ var EFIS = {
     
     window_size: [450,450],
     
-    colors: { 
-        transparent: [1,0,0,0],
-        white: [1,1,1],
-        red: [1,0,0],
-        green : [0,1,0],
-        blue : [0,0,1],
-        yellow: [1,1,0],
-        cyan: [0,1,1],
-        magenta: [1,0,1],
-        amber: [1,0.682,0],
-    },
+    colors: canvas.colors, 
     
     del: func() {
     },

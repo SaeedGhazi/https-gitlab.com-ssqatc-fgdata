@@ -33,7 +33,7 @@ var EFISCanvas = {
         me._timers = [];
     },
 
-    colors: EFIS.colors,
+    colors: canvas.colors,
     defaultcanvas_settings: EFIS.defaultcanvas_settings,
 
     new: func(name, svgfile=nil) {

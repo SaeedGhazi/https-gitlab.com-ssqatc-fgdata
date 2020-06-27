@@ -319,7 +319,7 @@ Started September 2000 by David Megginson, david@megginson.com
       </terrain>
       <!-- OSG default is 300, but this means we burn lots of memory on no-longer
              visible trees / random buildings -->
-      <max-paged-lod type="int">200</max-paged-lod>
+      <max-paged-lod type="int" userarchive="y">200</max-paged-lod>
       <als-secondary-lights>
         <use-searchlight type="bool">false</use-searchlight>
         <use-landing-light type="bool">false</use-landing-light>

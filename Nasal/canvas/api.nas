@@ -27,6 +27,7 @@ io.include(include_path~"map.nas");
 io.include(include_path~"text.nas");
 io.include(include_path~"path.nas");
 io.include(include_path~"image.nas");
+io.include(include_path~"svgcanvas.nas");
 
 # Element factories used by #Group elements to create children
 Group._element_factories = {

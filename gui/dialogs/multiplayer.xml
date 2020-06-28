@@ -215,7 +215,6 @@
                 <command>nasal</command>
                 <script>
                     var val = getprop("/sim/gui/dialogs/multiplay/protocol-version");
-                    print("MP Version :",val,":");
                     if (val == "Visible to all") {
                     setprop("/sim/multiplay/protocol-version", 1);
                     }

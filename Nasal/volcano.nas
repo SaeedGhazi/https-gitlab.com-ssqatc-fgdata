@@ -44,8 +44,8 @@ var volcano_manager = {
 		var state = getprop("/environment/volcanoes/enable-volcanoes");
 		me.active = state;
 		if (state == 1) 
-			{print("Volcanic activity on.");}
-		else {print ("Volcanic activity off.");}
+			{logprint(LOG_INFO, "Volcanic activity on.");}
+		else {logprint(LOG_DEBUG, "Volcanic activity off.");}
 	},
 	
 	set_state: func {
@@ -53,10 +53,10 @@ var volcano_manager = {
 		me.active = state;
 		if (state == 1) 
 			{
-			print("Volcanic activity on.");
+			logprint(LOG_INFO, "Volcanic activity on.");
 			me.run(0);
 			}
-		else {print ("Volcanic activity off.");}
+		else {logprint(LOG_INFO, "Volcanic activity off.");}
 	
 	},
 	
@@ -80,7 +80,7 @@ var volcano_manager = {
 			
 			if ((dist < me.dist_to_load) and (dist < visibility))
 				{
-				print("Loading ", me.volcano_array[index].name, ".");
+				logprint(LOG_INFO, "Loading ", me.volcano_array[index].name, ".");
 				me.volcano_array[index].set();
 				me.volcano_array[index].loaded = 1;
 				}

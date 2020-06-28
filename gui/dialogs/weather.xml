@@ -276,7 +276,7 @@
           var metar = getprop("environment/metar/data");
           if( metar == nil or metar == "" ) metar = "NIL";
           metar = normalize_string(metar);
-          printlog( "info", "new METAR: " ~ metar );
+          logprint(LOG_DEBUG, "new METAR: " ~ metar );
           setprop( me.base ~ "/metar-string", metar );
           gui.dialog_update( "weather-conditions", "metar-string" );
         },

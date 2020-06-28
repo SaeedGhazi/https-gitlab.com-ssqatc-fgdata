@@ -1402,6 +1402,7 @@ Started September 2000 by David Megginson, david@megginson.com
   <scenery>
     <share-events type="bool" userarchive="y">false</share-events>
     <events type="string"/>
+    <use-vpb type="bool">false</use-vpb>
   </scenery>
   <earthview>
     <cloudsphere-flag type="bool" userarchive="y">true</cloudsphere-flag>

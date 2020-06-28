@@ -46,7 +46,7 @@
 
         var found = navinfo(type,getprop(propname));
         if( found == nil or size(found) == 0 ) {
-          print(type, " ", getprop(propname), " NOT found");
+          logrint(LOG_WARN, type, " ", getprop(propname), " NOT found");
           setprop(propname, "");
           setprop(freqpropname, "");
           return;

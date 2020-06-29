@@ -41,10 +41,9 @@ var assert = func (condition, message=nil) {
 # (class) object.  Example: isa(someObject, props.Node)
 #
 var isa = func(obj, class) {
-    if(ishash(obj) and obj["parents"] != nil) {
+    if (ishash(obj) and obj["parents"] != nil) {
         foreach(var c; obj.parents) {
-            if(c == class or isa(c, class))
-                return 1;
+            if (c == class or isa(c, class)) return 1;
         }
     }
     return 0;
@@ -58,9 +57,8 @@ var isa = func(obj, class) {
 # tree.
 #
 var fgcommand = func(cmd, node=nil) {
-    if(isa(node, props.Node)) node = node._g;
-    elsif(ishash(node))
-        node = props.Node.new(node)._g;
+    if (isa(node, props.Node)) node = node._g;
+    elsif (ishash(node)) node = props.Node.new(node)._g;
     _fgcommand(cmd, node);
 }
 
@@ -97,8 +95,9 @@ var abs = func(v) { return v < 0 ? -v : v }
 # 0 to wrap the interpolated value properly.
 #
 var interpolate = func(node, val...) {
-    if (isa(node, props.Node)) node = node._g;
-    elsif (!isscalar(node) and !isghost(node))
+    if (isa(node, props.Node)) 
+        node = node._g;
+    elsif (!isscalar(node) and !isghost(node)) 
         die("bad argument to interpolate()");
     _interpolate(node, val);
 }
@@ -189,3 +188,55 @@ settimer(func {
         if(size(file) > 4 and substr(file, -4) == ".nas")
             io.load_nasal(path ~ "/" ~ file, substr(file, 0, size(file) - 4));
 }, 0);
+
+# simple hash class for developers, allows to add callback on write
+Hash = {
+    class_name: "Hash",
+    
+    new: func(name) {
+        var obj = {
+             parents: [me],
+             name: name,
+             _h: {},
+             _callback: func,
+        };    
+        return obj;
+    },
+   
+    set: func (key, value) {
+        me._h[key] = value;
+        me._callback(key, value);
+        return me;
+    },
+    
+    get: func (key) {
+        return me._h[key];
+    },
+   
+    getName: func (key) {
+        return me.name;
+    },
+    
+    getKeys: func () {
+        return keys(me._h);
+    },
+    
+    keys2props: func (p) {
+        if (!isa(p, props.Node)) {
+            p = props.getNode(p,1);
+        }
+        p = p.getNode(me.name,1);
+        foreach (var key; keys(me._h)) {
+            p.getNode(key,1);
+        }
+        return;
+    },
+    
+    # callback for set()
+    addCallback: func (f) {
+        if (isfunc(f)) {
+            me._callback = f;
+        }
+        return me;
+    },
+};

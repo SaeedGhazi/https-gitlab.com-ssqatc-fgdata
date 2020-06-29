@@ -22,56 +22,101 @@
  #
  #  Copyright © 2016 Richard Harrison           Released under GPL V2
  #
+ #---------------------------------------------------------------------------
+ # Classes in this file:
+ # Transmitter
+ # Notification
+ # Recipient
  #---------------------------------------------------------------------------*/
 
 var __emesaryUniqueId = 14; # 0-15 are reserved, this way the global transmitter will be 15.
+
+# add registry so we can find a transmitter by name in genericEmesaryGlobalTransmitterTransmit 
+var _transmitters = Hash.new("transmitters");
+
+var _registerTransmitter = func (key, t) {
+    _transmitters.set(key, t);
+}
+var getTransmitter = func (key) {
+    return _transmitters.get(key);
+}
 
 # Transmitters send notifications to all recipients that are registered.
 var Transmitter =
 {
     ReceiptStatus_OK : 0,          # Processing completed successfully
     ReceiptStatus_Fail : 1,        # Processing resulted in at least one failure
-    ReceiptStatus_Abort : 2,       # Fatal error, stop processing any further recipieints of this message. Implicitly failed.
-    ReceiptStatus_Finished : 3,    # Definitive completion - do not send message to any further recipieints
+    ReceiptStatus_Abort : 2,       # Fatal error, stop processing any further recipients of this message. Implicitly failed.
+    ReceiptStatus_Finished : 3,    # Definitive completion - do not send message to any further recipients
     ReceiptStatus_NotProcessed : 4,# Return value when method doesn't process a message.
     ReceiptStatus_Pending : 5,     # Message sent with indeterminate return status as processing underway
     ReceiptStatus_PendingFinished : 6,# Message definitively handled, status indeterminate. The message will not be sent any further
 
     # create a new transmitter. shouldn't need many of these
+    # _ident:   string; name of the transmitter, used in debug messages
     new: func(_ident)
     {
-        var new_class = { parents: [Transmitter]};
-        new_class.Recipients = [];
-        new_class.Ident = _ident;
-        new_class.Timestamp = nil;
-        new_class.MaxMilliseconds = 1;
+        if (!isscalar(_ident)) {
+            logprint(LOG_ALERT, "Transmitter.new: argument must be a scalar!")
+        }
         __emesaryUniqueId += 1;
-        new_class.UniqueId = __emesaryUniqueId;
+        var new_class = { 
+            parents : [Transmitter],
+            Recipients : [],
+            Ident : _ident,
+            Timestamp : nil,
+            MaxMilliseconds : 1,
+            UniqueId: __emesaryUniqueId,
+        };
+        _registerTransmitter(_ident, new_class);
         return new_class;
     },
+    
     OverrunDetection: func(max_ms=0){
-          if (max_ms){
-              if (me.Timestamp == nil)
+        if (isnum(max_ms) and max_ms) {
+            if (me.Timestamp == nil)
                 me.Timestamp = maketimestamp();
-              me.MaxMilliseconds = max_ms;
-#print("Set overrun detection ",me.Ident, " to ", me.MaxMilliseconds);
-          } else {
-              #              me.Timestamp = nil;
-              me.MaxMilliseconds = 0;
-#print("Disable  overrun detection ",me.Ident);
-          }
-      }
- ,
+            me.MaxMilliseconds = max_ms;
+            logprint(LOG_INFO, "Set overrun detection ",me.Ident, " to ", me.MaxMilliseconds);
+            return 1;
+        } else {
+            # me.Timestamp = nil;
+            me.MaxMilliseconds = 0;
+            logprint(LOG_INFO, "Disable  overrun detection ",me.Ident);
+            return 0;
+        }
+    },
 
     # Add a recipient to receive notifications from this transmitter
     Register: func (recipient)
     {
+        # not inheriting from Recipient is maybe strange but will not crash
+        if (!isa(recipient, Recipient))
+        {
+            logprint(LOG_INFO, "Transmitter.Register: argument is not a Recipient object");
+        }
+        #not having a Receive function is an error
+        if (!isfunc(recipient["Receive"]))
+        {
+            logprint(DEV_ALERT, "Transmitter.Register: Error, argument has no Receive method!");
+            return 0;
+        }
+        foreach (var r; me.Recipients)
+        {
+            if (r == recipient) {
+                logprint(DEV_ALERT, "Transmitter.Register: Recipient already registered!");
+                return 1;
+            }
+        }        
         append(me.Recipients, recipient);
+        return 1;
     },
+    
     DeleteAllRecipients: func
     {
         me.Recipients = [];
     },
+    
     # Stops a recipient from receiving notifications from this transmitter.
     DeRegister: func(todelete_recipient)
     {
@@ -111,10 +156,12 @@ var Transmitter =
     #  - Fail > message not handled. A status of Abort from a recipient will result in our status
     #           being fail as Abort means that the message was not and cannot be handled, and
     #           allows for usages such as access controls.
+    # message:  hash; Notification passed to the Receive() method of registered recipients
     NotifyAll: func(message)
     {
-        if (message == nil){
-            print("Emesary: bad notification nil");
+        if (!isa(message, Notification))
+        {
+            logprint(DEV_ALERT, "Transmitter.NotifyAll: argument must be a Notification!");
             return Transmitter.ReceiptStatus_NotProcessed;
         }
         me._return_status = Transmitter.ReceiptStatus_NotProcessed;
@@ -134,9 +181,12 @@ var Transmitter =
                     foreach(var line; err) {
                         print(line);
                     }
-                    print("Recipient ",recipient.Ident, " has been removed from transmitter (", me.Ident, ") because of the above error");
+                    logprint(LOG_ALERT, "Recipient ",recipient.Ident, 
+                        " has been removed from transmitter (", me.Ident,
+                        ") because of the above error");
                     me.DeRegister(recipient);
-                    return Transmitter.ReceiptStatus_Abort;#need to break the foreach due to having modified what its iterating over.
+                    #need to break the foreach due to having modified what its iterating over.
+                    return Transmitter.ReceiptStatus_Abort; 
                 }
                 if (me.Timestamp != nil) {
                     recipient.TimeTaken = me.Timestamp.elapsedUSec()/1000.0;
@@ -166,20 +216,26 @@ var Transmitter =
                 }
                 elsif(me._rstat == Transmitter.ReceiptStatus_Abort)
                 {
+                    # this is a final results, e.g. no more recipients will be
+                    # notified but the result is returned as NotifyAll result.
                     return Transmitter.ReceiptStatus_Abort;
                 }
                 elsif(me._rstat == Transmitter.ReceiptStatus_Finished)
                 {
+                    # this is a final results, e.g. no more recipients will be
+                    # notified but the result is returned as NotifyAll result.
                     return Transmitter.ReceiptStatus_OK;
                 }
             }
         }
-        if (me.MaxMilliseconds and me.TimeTaken > me.MaxMilliseconds ){
-            printf("Overrun: %s ['%s'] %1.2fms max (%d)",me.Ident,message.NotificationType, me.TimeTaken,me.MaxMilliseconds);
-#            print("Overrun: ",me.Ident, "['",message.NotificationType,"']", " ", me.TimeTaken,"ms  (max ",me.MaxMilliseconds," ms)");
+        if (me.MaxMilliseconds and me.TimeTaken > me.MaxMilliseconds) {
+            logprint(LOG_WARN, sprintf("Overrun: %s ['%s'] %1.2fms max (%d)",
+                me.Ident, message.NotificationType, me.TimeTaken, me.MaxMilliseconds));
             foreach (var recipient; me.Recipients) {
-                if (recipient.TimeTaken)
-                  printf(" -- Recipient %25s %7.2f ms",recipient.Ident, recipient.TimeTaken);
+                if (recipient.TimeTaken) {
+                  logprint(LOG_WARN, sprintf(" -- Recipient %25s %7.2f ms",
+                    recipient.Ident, recipient.TimeTaken));
+                }
             }
         }
         return me._return_status;
@@ -222,79 +278,130 @@ var QueuedTransmitter =
      }
 };
 
-#
-#
-# Base class for Notifications. By convention a Notification has a type and a value.
-#   SubClasses can add extra properties or methods.
-# Properties:
-# Ident : Generic message identity. Can be an ident, or for simple messages a value that needs transmitting.
-# NotificationType  : Notification Type
-# IsDistinct : non zero if this message supercedes previous messages of this type.
-#              Distinct messages are usually sent often and self contained
-#              (i.e. no relative state changes such as toggle value)
-#              Messages that indicate an event (such as after a pilot action)
-#              will usually be non-distinct. So an example would be gear/up down
-#              or ATC acknowledgements that all need to be transmitted
+
+#---------------------------------------------------------------------------
+# Notification - base class 
+# By convention a Notification has a type and a value. Derived classes can add 
+# extra properties or methods.
+# 
+# NotificationType: Notification Type
+# Ident:      Can be an ident, or for simple messages a value that needs transmitting.
+# IsDistinct: non zero if this message supercedes previous messages of this type.
+#             Distinct messages are usually sent often and self contained
+#             (i.e. no relative state changes such as toggle value)
+#             Messages that indicate an event (such as after a pilot action)
+#             will usually be non-distinct. So an example would be gear/up down
+#             or ATC acknowledgements that all need to be transmitted
 # The IsDistinct is important for any messages that are bridged over MP as
-# only the most recently sent distinct message will be transmitted over MP
+# only the most recently sent distinct message will be transmitted over MP.
+# Example: 
+# position update, where only current position is relevant -> IsDistinct=1; 
+# 0 = queue all messages for MP bridging 
+# 1 = queue only latest message (replace any old message of same type+ident)
+#        
+var TypeIdUnspecified = 1;
 var NotificationAutoTypeId = 1;
 var Notification =
 {
     new: func(_type, _ident, _typeid=0)
     {
-        var new_class = { parents: [Notification]};
-        new_class.Ident = _ident;
-        new_class.NotificationType = _type;
-        new_class.IsDistinct = 1;
-        new_class.FromIncomingBridge = 0;
-        new_class.Callsign = nil;
-
-        new_class.GetBridgeMessageNotificationTypeKey = func {
-            return me.NotificationType~"."~me.Ident;
-        };
-        if (_typeid == 0)
-        {
-            _typeid = NotificationAutoTypeId;
-            NotificationAutoTypeId = NotificationAutoTypeId + 1;
+        if (!isscalar(_type)) {
+            logprint(DEV_ALERT, "Notification.new: _type must be a scalar!");
+            return nil;
         }
-        new_class.TypeId = _typeid;
+        if (!isscalar(_ident)) {
+            logprint(DEV_ALERT, "Notification.new: _ident is not scalar but ", typeof(_ident));
+            return nil;
+        }
+        
+        if (_typeid == 0) {
+            NotificationAutoTypeId += 1;
+            # IDs >= 16 are reserved; see http://wiki.flightgear.org/Emesary_Notifications
+            if (NotificationAutoTypeId == 16) {
+                logprint(LOG_ALERT, "Notification: AutoTypeID limit exceeded: "~NotificationAutoTypeId);
+                return nil;
+            }
+            _typeid = NotificationAutoTypeId;
+        }
+
+        var new_class = { 
+            parents: [Notification],
+            NotificationType: _type,
+            Ident: _ident,
+            IsDistinct: 1,          #1: MP bridge only latest notification 
+            FromIncomingBridge: 0,
+            Callsign: nil,
+            TypeId: _typeid,        # used in MP bridged
+        };
         return new_class;
+    },
+    
+    setType: func(_type) {
+        if (!isscalar(_type)) {
+            logprint(DEV_ALERT, "Notification.new: _type must be a scalar!");
+            return nil;
+        }
+        me.NotificationType = _type;
+        return me;
+    },
+    
+    setIdent: func(_ident) {
+        if (!isscalar(_ident)) {
+            logprint(DEV_ALERT, "Notification.new: _ident is not scalar but ", typeof(_ident));
+            return nil;
+        }
+        me.Ident = _ident;
+        return me;
+    },
+    
+    GetBridgeMessageNotificationTypeKey: func {
+        return me.NotificationType~"."~me.Ident;
     },
 };
 
-# Inherit or implement class with the same signatures to receive messages.
+#---------------------------------------------------------------------------
+# Recipient - base class for receiving notifications.
+#
+# You have to implement the Receive method
+# The Receive method must return a sensible ReceiptStatus_* code
 var Recipient =
 {
     new: func(_ident)
     {
-        var new_class = { parents: [Recipient]};
         if (_ident == nil or _ident == "")
         {
             _ident = id(new_class);
-            print("Emesary Error: Ident required when creating a recipient, defaulting to ",_ident);
+            logprint(LOG_WARN, "Emesary Error: Ident required when creating a recipient, defaulting to ", _ident);
         }
-        Recipient.construct(_ident, new_class);
-    },
-    construct: func(_ident, new_class)
-    {
-        new_class.Ident = _ident;
-        new_class.RecipientActive = 1;
         __emesaryUniqueId += 1;
-        new_class.UniqueId = __emesaryUniqueId;
-        new_class.Receive = func(notification)
-        {
-            # warning if required function not 
-            print("Emesary Error: Receive function not implemented in recipient ",me.Ident);
-            return Transmitter.ReceiptStatus_NotProcessed;
+        var new_class = {
+            parents: [Recipient],
+            Ident: _ident,
+            RecipientActive: 1,
+            UniqueId: __emesaryUniqueId,
         };
         return new_class;
+    },
+    
+    Receive: func(notification)
+    {
+        logprint(DEV_ALERT, "Emesary Error: Receive function not implemented in recipient ", me.Ident);
+        return Transmitter.ReceiptStatus_NotProcessed;
+    },
+    
+    setReceive: func(f)
+    {
+        if (isfunc(f)) { me.Receive = f; }
+        else { logprint(DEV_ALERT, "Recipient.addReceive: argument must be a function!"); }
+        return me;
     },
 };
 
 
 #
-# Instantiate a Global Transmitter, this is a convenience and a known starting point. Generally most classes will
-# use this transmitters, however other transmitters can be created and merely use the global transmitter to discover each other
+# Instantiate a Global Transmitter, this is a convenience and a known starting point. 
+# Generally most classes will use this transmitters, however other transmitters 
+# can be created and merely use the global transmitter to discover each other.
 var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
 
 #
@@ -309,7 +416,7 @@ var BinaryAsciiTransfer =
         ~chr(10)~chr(11)~chr(12)~chr(13)~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)
         ~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)~chr(26)~chr(27)~chr(28)~chr(29)
         ~chr(30)~chr(31)                ~chr(34)
-               ~"%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
+        ~"%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
             ~chr(128)~chr(129)
         ~chr(130)~chr(131)~chr(132)~chr(133)~chr(134)~chr(135)~chr(136)~chr(137)~chr(138)~chr(139)
         ~chr(140)~chr(141)~chr(142)~chr(143)~chr(144)~chr(145)~chr(146)~chr(147)~chr(148)~chr(149)

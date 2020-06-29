@@ -4,7 +4,7 @@
  #
  #	File Type            : Implementation File
  #
- #	Description          : Messages that are applicable across all models and do not specifically relate to a single sysmte
+ #	Description          : Messages that are applicable across all models and do not specifically relate to a single system
  #	                     : - mostly needed when using the mutiplayer bridge
  #
  #	Author               : Richard Harrison (richard@zaretto.com)
@@ -27,6 +27,7 @@ var AircraftControlNotification_Id = 17;
 var GeoEventNotification_Id = 18;
 # event ID 19 reserved for armaments and stores (model defined).
 var PFDEventNotification_Id = 20;
+var ArmamentInFlightNotification = 21;
 
 #
 # PropertySyncNotificationBase is a wrapper class for allow properties to be synchronized between

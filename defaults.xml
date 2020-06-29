@@ -1383,6 +1383,9 @@ Started September 2000 by David Megginson, david@megginson.com
     <console>
       <enabled type="bool">true</enabled>
     </console>
+    <debug>
+      <enabled type="bool">false</enabled>
+    </debug>
     <input_helpers>
       <enabled type="bool">true</enabled>
     </input_helpers>

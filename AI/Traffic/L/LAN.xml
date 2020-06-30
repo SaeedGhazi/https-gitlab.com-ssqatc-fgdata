@@ -830,7 +830,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SCEL</home-port>
@@ -844,7 +844,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -858,7 +858,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -872,7 +872,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -886,7 +886,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -900,7 +900,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -914,7 +914,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -928,7 +928,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -942,7 +942,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SCEL</home-port>
@@ -956,7 +956,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -970,7 +970,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -984,7 +984,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -998,7 +998,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SCEL</home-port>
@@ -1012,7 +1012,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -1026,7 +1026,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -1040,7 +1040,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -1054,7 +1054,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -1068,7 +1068,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -1082,7 +1082,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -1096,7 +1096,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -1110,7 +1110,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SAEZ</home-port>
@@ -1124,7 +1124,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SPIM</home-port>
@@ -1138,7 +1138,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SCEL</home-port>
@@ -1152,7 +1152,7 @@
         <heavy>true</heavy>
     </aircraft>
     <aircraft>
-        <model>Aircraft/767/767-LanChile.xml</model>
+        <model>Aircraft/767/767-LAN.xml</model>
         <livery>LAN</livery>
         <airline>LAN</airline>
         <home-port>SCEL</home-port>

@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-
 <!-- Author Ian Tolosa - Passenger Schedule Winter NOV16/MAR17 -->
-
 <trafficlist>
   <aircraft>
     <model>Aircraft/A320/A320-Philippines.xml</model>
@@ -1012,7 +1010,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1026,7 +1024,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1040,7 +1038,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1054,7 +1052,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1068,7 +1066,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1082,7 +1080,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1096,7 +1094,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1110,7 +1108,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>
@@ -1124,7 +1122,7 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-Philippines.xml</model>
+    <model>Aircraft/DH4/DH4-Philippines.xml</model>
     <livery>PAL</livery>
     <airline>PAL</airline>
     <home-port>RPLL</home-port>

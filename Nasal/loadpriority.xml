@@ -34,6 +34,8 @@ string.nas <- gui.nas
     io.nas  <- gui.nas 
     gui.nas <- multiplayer.nas 
         multiplayer.nas <- view.nas 
+    io.nas <- std.nas
+
 geo.nas <- view.nas
         view.nas <- dynamic_view.nas
 -->
@@ -45,6 +47,7 @@ geo.nas <- view.nas
     <file>math.nas</file>
     <file>string.nas</file>
     <file>io.nas</file>
+    <file>std.nas</file>
     <file>debug.nas</file>
 <!-- stage 1 -->
     <file>modules.nas</file>

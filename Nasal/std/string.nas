@@ -9,15 +9,15 @@
 #
 # Copyright (C) 2012-2013 by Thomas Geymayer
 
+#load only once (via /Nasal/std.nas) not via C++ module loader
+if (ishash(globals["std"]) and ishash(std["String"]))
+    return;
 
-# capture global string
-var _string = string;
-
-var string = {
+var String = {
 # public:
   new: func(str)
   {
-    return { parents: [string], _str: str };
+    return { parents: [String], _str: str };
   },
   # compare(s)
   # compare(pos, n, s)
@@ -56,6 +56,9 @@ var string = {
         return 0;
     return 1;
   },
+  
+  # returns index (zero based) of first occurrence of s
+  # searching from pos
   find_first_of: func(s, pos = 0)
   {
     return me._find(pos, size(me._str), s, 1);
@@ -101,6 +104,13 @@ var string = {
   }
 };
 
+# for backward compatibility
+var string = {parents: [String]};
+string.new = func {
+    logprint(LOG_ALERT, "Deprecated use of std.string, please use std.String instead.");
+    return String.new(arg[0]);
+}
+
 # converts a string to an unsigned integer
 var stoul = func(str, base = 10)
 {
@@ -109,10 +119,10 @@ var stoul = func(str, base = 10)
   {
     var c = str[pos];
 
-    if( _string.isdigit(c) )
+    if( globals.string.isdigit(c) )
       var digval = c - `0`;
-    else if( _string.isalpha(c) )
-      var digval = _string.toupper(c) - `A` + 10;
+    else if( globals.string.isalpha(c) )
+      var digval = globals.string.toupper(c) - `A` + 10;
     else
       break;
 

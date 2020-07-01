@@ -1,5 +1,12 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
 #-------------------------------------------------------------------------------
 # emesary.deb.nas - emesary debug helpers
+# author:   Henning Stahlke
+# created:  06/2020
 #-------------------------------------------------------------------------------
 var _emesaryDebugN = props.getNode("/_debug/emesary/",1);
 var _emesaryDebugEnableN = _emesaryDebugN.getNode("enabled",1);
@@ -41,10 +48,11 @@ var __setup = func {
     emesary.GlobalTransmitter.NotifyAll(debugNotification);
 
     #add monitoring
+    var name = emesary._transmitters.getName();
     emesary._transmitters.addCallback(func (k, v) {
-        emesary._transmitters.keys2props(_emesaryDebugN);
+        emesary._transmitters.keys2props(_emesaryDebugN.getNode(name, 1));
     });
-    emesary._transmitters.keys2props(_emesaryDebugN);
+    emesary._transmitters.keys2props(_emesaryDebugN.getNode(name, 1));
 }
 
 settimer(__setup,0);

@@ -147,6 +147,7 @@ var perIndexAxisHandler = func(pre, post) {
 #   0  - throttle
 #   1  - mixture
 #   2  - propeller-pitch
+#   3  - condition
 # The argument engine to the returned function can be either an
 # engine number or a list of engine numbers.
 # Usage example (controlling the mixture of engines 0 and 1):
@@ -159,7 +160,9 @@ var _axisMode = {
   1: perIndexAxisHandler("/controls/engines/engine[",
                          "]/mixture"),
   2: perIndexAxisHandler("/controls/engines/engine[",
-                         "]/propeller-pitch")
+                         "]/propeller-pitch"),
+  3: perIndexAxisHandler("/controls/engines/engine[",
+                         "]/condition")
 };
 var perEngineSelectedAxisHandler = func(mode) {
     return _axisMode[mode];

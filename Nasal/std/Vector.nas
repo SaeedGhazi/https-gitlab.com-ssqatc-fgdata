@@ -17,39 +17,50 @@
 # services by normal function calls - this is merely considered normal use
 # of the code, and does *not* fall under the heading of "derived work."
 
-
-var min = func(a, b) { a < b ? a : b }
-var max = func(a, b) { a > b ? a : b }
+#load only once (via /Nasal/std.nas) not via C++ module loader
+if (ishash(globals["std"]) and ishash(std["Vector"]))
+    return;
 
 var Vector = {
 
-    new: func (vector=nil) {
+    new: func (vector=nil, name="") {
         var m = {
-            parents: [Vector]
+            parents: [Vector],
+            name: name,
+            vector: [],
+            _callback: func,
         };
-        if (vector == nil) {
-            vector = [];
+        if (isvec(vector)) {
+            m.vector = vector;
         }
-        m.vector = vector;
         return m;
+    },
+    
+    # add callback for writes (insert() and append())
+    # will be called as f(index, item), compare insert() below
+    addCallback: func (f) {
+        if (isfunc(f)) {
+            me._callback = f;
+            return me;
+        }
+        return nil;
+    },
+    
+    getName: func () {
+        return me.name;
     },
 
     size: func {
-        # Return the number of items in the vector
-
         return size(me.vector);
     },
 
     clear: func {
-        # Remove all items from the vector, resulting in an empty vector
-
         me.vector = [];
     },
 
     append: func (item) {
-        # Append the given item at the end of the vector
-
         append(me.vector, item);
+        me._callback(me.size() - 1, item);
     },
 
     extend: func (other_vector) {
@@ -73,11 +84,13 @@ var Vector = {
         # insert(3, "f")  => ["a", "b", "c", "f"]
         # insert(-3, "g") => ["f", "a", "b", "c"]
 
-        index = min(index, me.size());
+        index = math.min(index, me.size());
         if (index < 0) {
-            index = max(0, me.size() + index);
+            index = math.max(0, me.size() + index);
         }
         me.vector = subvec(me.vector, 0, index) ~ [item] ~ subvec(me.vector, index);
+        me._callback(index, item);
+        return me.vector;
     },
 
     pop: func (index=nil) {
@@ -116,22 +129,14 @@ var Vector = {
     index: func (item) {
         # Return first index of the given item. Raises a ValueError
         # if the item is not in the vector.
-
-        forindex (var index; me.vector) {
-            if (me.vector[index] == item) {
-                return index;
-            }
-        };
-        die("ValueError: item not in the vector");
+        var i = vecindex(me.vector, item);
+        if (i == nil) die("ValueError: item not in the vector");
+        return i;
     },
 
     contains: func (item) {
         # Return true if the vector contains the item, false otherwise
-
-        var err = [];
-        call(Vector.index, [item], me, err);
-
-        return size(err) == 0;
+        return vecindex(me.vector, item) != nil;
     },
 
     remove: func (item) {

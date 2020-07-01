@@ -32,7 +32,7 @@
 var __emesaryUniqueId = 14; # 0-15 are reserved, this way the global transmitter will be 15.
 
 # add registry so we can find a transmitter by name in genericEmesaryGlobalTransmitterTransmit 
-var _transmitters = Hash.new("transmitters");
+var _transmitters = std.Hash.new({}, "transmitters");
 
 var _registerTransmitter = func (key, t) {
     _transmitters.set(key, t);

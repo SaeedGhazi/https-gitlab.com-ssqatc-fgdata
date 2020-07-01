@@ -8,7 +8,9 @@ SymbolLayer.add(name, {
 	parents: [MultiSymbolLayer],
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
-	df_options: {},
+	df_options: { # default configuration options
+		disable_position: 1,
+	},
 	df_style: {},
 });
 var a_instance = nil;

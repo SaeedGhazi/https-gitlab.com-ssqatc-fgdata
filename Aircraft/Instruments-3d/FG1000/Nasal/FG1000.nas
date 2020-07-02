@@ -38,15 +38,15 @@ var FG1000 = {
 _instance : nil,
 
 # Factory method
-getOrCreateInstance : func(EIS_Class = nil, EIS_SVG = nil) {
+getOrCreateInstance : func(EIS_Class = nil, EIS_SVG = nil, SVG_Path = nil) {
   if (FG1000._instance == nil) {
-    FG1000._instance = FG1000.new(EIS_Class, EIS_SVG);
+    FG1000._instance = FG1000.new(EIS_Class, EIS_SVG, SVG_Path);
   }
 
   return FG1000._instance;
 },
 
-new : func(EIS_Class = nil, EIS_SVG = nil) {
+new : func(EIS_Class = nil, EIS_SVG = nil, SVG_Path = nil) {
   var obj = {
     parents : [FG1000],
     displays : {}
@@ -70,9 +70,19 @@ new : func(EIS_Class = nil, EIS_SVG = nil) {
     obj.EIS_SVG = EIS_SVG;
   }
 
+  if (SVG_Path == nil) {
+    obj.SVG_Path = "/Aircraft/Instruments-3d/FG1000/MFDPages/";
+  } else {    
+    obj.SVG_Path = SVG_Path;
+  }
+
   obj.ConfigStore = fg1000.ConfigStore.new();
 
   return obj;
+},
+
+setSVGPath : func(SVG_Path) {
+  me.SVG_Path = SVG_Path;
 },
 
 setEIS : func(EIS_Class, EIS_SVG) {
@@ -105,7 +115,7 @@ addMFD : func(index=nil, targetcanvas=nil) {
 
   targetcanvas.set("visible", 0);
 
-  var mfd = fg1000.MFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
+  var mfd = fg1000.MFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, me.SVG_Path, targetcanvas, index);
   me.displays[index] = mfd;
   return index;
 },
@@ -131,7 +141,7 @@ addPFD : func(index=nil, targetcanvas=nil) {
 
   targetcanvas.set("visible", 0);
 
-  var pfd = fg1000.PFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, targetcanvas, index);
+  var pfd = fg1000.PFDDisplay.new(me, me.EIS_Class, me.EIS_SVG, me.SVG_Path, targetcanvas, index);
   me.displays[index] = pfd;
   return index;
 },

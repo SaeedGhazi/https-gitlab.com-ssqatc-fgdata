@@ -18,7 +18,7 @@
 
 var PFDDisplay =
 {
-  new : func (fg1000instance, EIS_Class, EIS_SVG, myCanvas, device_id=1)
+  new : func (fg1000instance, EIS_Class, EIS_SVG, SVG_Path, myCanvas, device_id=1)
   {
     var obj = {
       parents : [ PFDDisplay ],
@@ -64,28 +64,28 @@ var PFDDisplay =
 
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/PFDInstruments.svg',
+                    SVG_Path ~ '/PFDInstruments.svg',
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/FlightPlanPFD.svg',
+                    SVG_Path ~ '/FlightPlanPFD.svg',
                     {'font-mapper': fontmapper});
 
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/DirectToPFD.svg',
+                    SVG_Path ~ '/DirectToPFD.svg',
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/NearestAirportsPFD.svg',
+                    SVG_Path ~ '/NearestAirportsPFD.svg',
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/NearestAirportsInfoPFD.svg',
+                    SVG_Path ~ '/NearestAirportsInfoPFD.svg',
                     {'font-mapper': fontmapper});
 
     canvas.parsesvg(obj._svg,
-                    '/Aircraft/Instruments-3d/FG1000/MFDPages/SurroundPFD.svg',
+                    SVG_Path ~ '/SurroundPFD.svg',
                     {'font-mapper': fontmapper});
 
 

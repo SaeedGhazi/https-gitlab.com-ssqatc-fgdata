@@ -181,6 +181,7 @@ var Window = {
 
     # prevent resizing if canvas is placed from somewhere else
     me.onResize = nil;
+    return me;
   },
   # Get the displayed canvas
   getCanvas: func(create = 0)
@@ -240,6 +241,7 @@ var Window = {
 
     me.setInt("tf/t[0]", x);
     me.setInt("tf/t[1]", y);
+    return me;
   },
   setSize: func
   {
@@ -269,6 +271,7 @@ var Window = {
 
     me.setInt("tf/t[0]", me.get("tf/t[0]", 10) + x);
     me.setInt("tf/t[1]", me.get("tf/t[1]", 30) + y);
+    return me;
   },
   # Raise to top of window stack
   raise: func()

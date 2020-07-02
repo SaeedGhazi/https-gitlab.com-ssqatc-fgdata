@@ -66,7 +66,7 @@ foreach (var page; MFDPages) {
 
 var MFDDisplay =
 {
-  new : func (fg1000instance, EIS_Class, EIS_SVG, myCanvas, device_id=1)
+  new : func (fg1000instance, EIS_Class, EIS_SVG, SVG_Path, myCanvas, device_id=1)
   {
     var obj = {
       parents : [ MFDDisplay ],
@@ -93,9 +93,9 @@ var MFDDisplay =
 
 
     foreach (var page; MFDPages) {
-      var svg_file ='/Aircraft/Instruments-3d/FG1000/MFDPages/' ~ page ~ '.svg';
-      if (resolvepath(svg_file) != "") {
+      var svg_file = SVG_Path ~ page ~ '.svg';
         # Load an SVG file if available.
+        if (resolvepath(svg_file) != "") {
         canvas.parsesvg(obj._svg,
                         svg_file,
                         {'font-mapper': fontmapper});

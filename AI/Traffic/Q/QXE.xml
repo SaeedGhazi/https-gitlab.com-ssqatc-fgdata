@@ -2,7 +2,7 @@
 <!-- Author Marcin Kuzniar - From Timetable of Dec 2019 -->
 <trafficlist>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -16,7 +16,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -30,7 +30,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -44,7 +44,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -58,7 +58,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -72,7 +72,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -86,7 +86,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -100,7 +100,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -114,7 +114,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -128,7 +128,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -142,7 +142,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -156,7 +156,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -170,7 +170,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -184,7 +184,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -198,7 +198,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -212,7 +212,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -226,7 +226,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -240,7 +240,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -254,7 +254,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -268,7 +268,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -282,7 +282,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -296,7 +296,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KEUG</home-port>
@@ -310,7 +310,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -324,7 +324,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -338,7 +338,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -352,7 +352,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -366,7 +366,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -380,7 +380,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KBOI</home-port>
@@ -394,7 +394,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -408,7 +408,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -422,7 +422,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>
@@ -436,7 +436,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -450,7 +450,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -464,7 +464,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -478,7 +478,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -492,7 +492,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -506,7 +506,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KSEA</home-port>
@@ -520,7 +520,7 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/Dash8/Dash8-400-AlaskaAirlines.xml</model>
+    <model>Aircraft/DH4/DH4-AlaskaAirlines.xml</model>
     <livery>QXE</livery>
     <airline>QXE</airline>
     <home-port>KPDX</home-port>

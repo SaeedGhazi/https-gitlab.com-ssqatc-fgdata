@@ -8927,7 +8927,7 @@
     <required-aircraft>CSN-77W</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>KFJK</port>
+      <port>KJFK</port>
       <time>15:15:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>
@@ -13022,7 +13022,7 @@
     <required-aircraft>CSN-77W</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>KFJK</port>
+      <port>KJFK</port>
       <time>05:45:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>

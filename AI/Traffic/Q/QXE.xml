@@ -7083,7 +7083,7 @@
     </departure>
     <cruise-alt>370</cruise-alt>
     <arrival>
-      <port>KAOK</port>
+      <port>KOAK</port>
       <time>17:38:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -7098,7 +7098,7 @@
     </departure>
     <cruise-alt>370</cruise-alt>
     <arrival>
-      <port>KAOK</port>
+      <port>KOAK</port>
       <time>01:50:00</time>
     </arrival>
     <repeat>24Hr</repeat>

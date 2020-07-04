@@ -2418,7 +2418,7 @@
     <required-aircraft>AEA-332</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>KFJK</port>
+      <port>KJFK</port>
       <time>03:05:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>

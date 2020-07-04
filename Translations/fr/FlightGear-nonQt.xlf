@@ -96,7 +96,7 @@
       </trans-unit>
       <trans-unit id="menu/equipment:0" approved="yes">
         <source xml:space="preserve">Equipment</source>
-        <target xml:space="preserve">Equipement</target>
+        <target xml:space="preserve">Équipement</target>
       </trans-unit>
       <trans-unit id="menu/exit:0" approved="yes">
         <source xml:space="preserve">Quit</source>
@@ -860,7 +860,7 @@
       </trans-unit>
       <trans-unit id="options/fg-scenery-desc:0" approved="yes">
         <source xml:space="preserve">Specify the scenery path(s);</source>
-        <target xml:space="preserve">Spécifie l&apos;emplacement des répertoires des scènes ;</target>
+        <target xml:space="preserve">Spécifie l&apos;emplacement des répertoires des scènes ;</target>
       </trans-unit>
       <trans-unit id="options/fg-scenery-desc:1" approved="yes">
         <source xml:space="preserve">Defaults to $FG_ROOT/Scenery</source>
@@ -868,7 +868,7 @@
       </trans-unit>
       <trans-unit id="options/fgviewer-desc:0" approved="yes">
         <source xml:space="preserve">Use a model viewer rather than load the entire simulator;</source>
-        <target xml:space="preserve">Utilise un visualisateur de modèle plutôt que de charger le simulateur entier ;</target>
+        <target xml:space="preserve">Utilise un visualisateur de modèle plutôt que de charger le simulateur entier ;</target>
       </trans-unit>
       <trans-unit id="options/fix-desc:0" approved="yes">
         <source xml:space="preserve">Specify starting position relative to a fix</source>
@@ -1012,7 +1012,7 @@
       </trans-unit>
       <trans-unit id="options/materials-file-desc:0" approved="yes">
         <source xml:space="preserve">Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</source>
-        <target xml:space="preserve">Précise le fichier de matériaux utilisé pour le rendu des scènes (par défaut : Materials/regions/materials.xml)</target>
+        <target xml:space="preserve">Précise le fichier de matériaux utilisé pour le rendu des scènes (par défaut : Materials/regions/materials.xml)</target>
       </trans-unit>
       <trans-unit id="options/max-fps-desc:0" approved="yes">
         <source xml:space="preserve">Maximum frame rate in Hz.</source>
@@ -1221,7 +1221,7 @@
       </trans-unit>
       <trans-unit id="options/texture-filtering-desc:0" approved="yes">
         <source xml:space="preserve">Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16</source>
-        <target xml:space="preserve">Filtre de texture anisotrope : les valeurs doivent être 1 (défault), 2, 4, 8 ou 16</target>
+        <target xml:space="preserve">Filtre de texture anisotrope : les valeurs doivent être 1 (défault), 2, 4, 8 ou 16</target>
       </trans-unit>
       <trans-unit id="options/time-match-local-desc:0" approved="yes">
         <source xml:space="preserve">Synchronize time with local real-world time</source>
@@ -1278,7 +1278,7 @@
       </trans-unit>
       <trans-unit id="options/usage:0" approved="yes">
         <source xml:space="preserve">Usage: fgfs [ option ... ]</source>
-        <target xml:space="preserve">Utilisation : fgfs [ option ... ]</target>
+        <target xml:space="preserve">Utilisation : fgfs [ option ... ]</target>
       </trans-unit>
       <trans-unit id="options/vBody-desc:0" approved="yes">
         <source xml:space="preserve">Specify velocity along the body Y axis</source>
@@ -1529,7 +1529,7 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/border-low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
-        <target xml:space="preserve">La frontière d&apos;une dépression, dans laquelle la masse d&apos;air est instable et où des nuages convectifs constituent des couches et fusionnent en stratiformes.</target>
+        <target xml:space="preserve">La frontière d&apos;une dépression, dans laquelle la masse d&apos;air est instable et où des nuages convectifs se constituent en couches et fusionnent en stratiformes.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/border-low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Border of a low pressure region</source>
@@ -1541,119 +1541,124 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/cat-one-minimum-name:0" approved="yes">
         <source xml:space="preserve">CAT I minimum</source>
-        <target xml:space="preserve">CAT I minimum</target>
+        <target xml:space="preserve">Minimums de CAT I</target>
+        <note from="translator">Ce sont les minimums opérationnels par les avions en aviation générale (voir Arrêté du 24 juin 2011)</note>
       </trans-unit>
-      <trans-unit id="weather-scenarios/cat-three-b-minimum-desc:0">
+      <trans-unit id="weather-scenarios/cat-three-b-minimum-desc:0" approved="yes">
         <source xml:space="preserve">This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">C&apos;est le niveau expert. Vous verrez à peine le taxiway du cockpit, même si vous êtes au sol. Brouillard, légère bruine, givrage au dessus de 1000 pieds.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/cat-three-b-minimum-name:0">
+      <trans-unit id="weather-scenarios/cat-three-b-minimum-name:0" approved="yes">
         <source xml:space="preserve">CAT IIIb minimum</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Minimums de CAT IIIb</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/cat-two-minimum-desc:0">
+      <trans-unit id="weather-scenarios/cat-two-minimum-desc:0" approved="yes">
         <source xml:space="preserve">With just a 1/4 mile visibility and clouds at 100ft, you don&apos;t see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Avec juste 400 mètres de visibilité et des nuages à 100 pieds, vous ne verrez pas grand chose de la piste avant les quelques secondes pécédant le toucher. Faites confiance à vos instruments pour rester en vie.</target>
+        <note from="translator">En France, les unités de visibilité des METAR/TAF sont en mètres.</note>
       </trans-unit>
-      <trans-unit id="weather-scenarios/cat-two-minimum-name:0">
+      <trans-unit id="weather-scenarios/cat-two-minimum-name:0" approved="yes">
         <source xml:space="preserve">CAT II minimum</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Minimums de CAT II</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/core-high-pressure-region-desc:0">
+      <trans-unit id="weather-scenarios/core-high-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Anticyclone, caractérisé par de l&apos;air descendant, et par conséquent seulement un faible développement nuageux avec une grande visibilité.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/core-high-pressure-region-name:0">
+      <trans-unit id="weather-scenarios/core-high-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Core high pressure region</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Anticyclone</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/core-low-pressure-region-desc:0">
+      <trans-unit id="weather-scenarios/core-low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Dépression, cacactérisée par une couverture nuageuse, une mauvaise visibilité au sol et des précipitations importantes.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/core-low-pressure-region-name:0">
+      <trans-unit id="weather-scenarios/core-low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Core low pressure region</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Dépression</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/early-morning-fog-desc:0">
+      <trans-unit id="weather-scenarios/early-morning-fog-desc:0" approved="yes">
         <source xml:space="preserve">Fog developed this autumn&apos;s morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500&apos; climb and you&apos;ll see the sun!</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Le brouillard s&apos;est développé ce matin d&apos;automne. Attendez-vous à une bonne visibilité au-dessus de la couche. Cependant, la traverser peut être un défi. Restez en vie pour une ascension de 500 pieds et vous verrez le soleil !</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/early-morning-fog-name:0">
+      <trans-unit id="weather-scenarios/early-morning-fog-name:0" approved="yes">
         <source xml:space="preserve">Early morning fog</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Brouillard matinal</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/fair-weather-desc:0">
+      <trans-unit id="weather-scenarios/fair-weather-desc:0" approved="yes">
         <source xml:space="preserve">A lovely day for trip to your favorite 100$ hamburger airfield</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Une belle journée pour vous rendre à votre aérodrome préféré mais hors de prix</target>
+        <note from="translator">Cette phrase (dont le sens m’échappe) mériterai un point.</note>
       </trans-unit>
-      <trans-unit id="weather-scenarios/fair-weather-name:0">
+      <trans-unit id="weather-scenarios/fair-weather-name:0" approved="yes">
         <source xml:space="preserve">Fair weather</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Beau temps</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/high-pressure-region-desc:0">
+      <trans-unit id="weather-scenarios/high-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Une zone de hautes pressions, caractérisée par un développement modéré à fort de cumulus dans l&apos;après-midi et d&apos;assez bonnes conditions de visibilité.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/high-pressure-region-name:0">
+      <trans-unit id="weather-scenarios/high-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">High pressure region</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Zone de hautes pressions</target>
+        <note from="translator">J’ai un doute sur le pluriel mais c&apos;est ce qui me semble le plus utilisé</note>
       </trans-unit>
-      <trans-unit id="weather-scenarios/live-data-desc:0">
+      <trans-unit id="weather-scenarios/live-data-desc:0" approved="yes">
         <source xml:space="preserve">Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Obtenez des données météorologiques en direct de noaa.gov pour l&apos;aéroport le plus proche. Vous devez disposer d&apos;une connexion Internet en fonctionnelle. La météo est générée automatiquement, une fois un METAR valide reçu.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/live-data-name:0">
+      <trans-unit id="weather-scenarios/live-data-name:0" approved="yes">
         <source xml:space="preserve">Live data</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Données en direct</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/low-pressure-region-desc:0">
+      <trans-unit id="weather-scenarios/low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Une zone de basses pressions, caractérisée un air ascendent, une formation généralisée de nuages stratiformes et un début de précipitations.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/low-pressure-region-name:0">
+      <trans-unit id="weather-scenarios/low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Low pressure region</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Zone de basses pressions</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/manual-input-desc:0">
+      <trans-unit id="weather-scenarios/manual-input-desc:0" approved="yes">
         <source xml:space="preserve">Enter your favorite METAR weather. A valid METAR syntax is required.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Saisissez votre message d&apos;observation météo favori. Une systaxe METAR valide est requise.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/manual-input-name:0">
+      <trans-unit id="weather-scenarios/manual-input-name:0" approved="yes">
         <source xml:space="preserve">Manual input</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Saisie manuelle</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/marginal-vfr-desc:0">
+      <trans-unit id="weather-scenarios/marginal-vfr-desc:0" approved="yes">
         <source xml:space="preserve">After the storm - limited visibility and some showers. Go or No-Go?</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Après la tempête - visibilité limitée et quelques averses. Décoller ou ne pas décoller ?</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/marginal-vfr-name:0">
+      <trans-unit id="weather-scenarios/marginal-vfr-name:0" approved="yes">
         <source xml:space="preserve">Marginal VFR</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">VFR marginal</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/stormy-monday-desc:0">
+      <trans-unit id="weather-scenarios/stormy-monday-desc:0" approved="yes">
         <source xml:space="preserve">You&apos;re out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Vous partez à l&apos;aventure ? Les vents en rafales soufflant de l&apos;ouest et les orages isolés sont à éviter. Attachez votre ceinture !</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/stormy-monday-name:0">
+      <trans-unit id="weather-scenarios/stormy-monday-name:0" approved="yes">
         <source xml:space="preserve">Stormy Monday</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Lundi orageux</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/thunderstorm-desc:0">
+      <trans-unit id="weather-scenarios/thunderstorm-desc:0" approved="yes">
         <source xml:space="preserve">A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Une journée d&apos;été chaude et humide avec des orages se développant dans l&apos;après-midi. Préparez-vous à une baisse de la visibilité sous les averses et à de fortes rafales à proximité des orages</target>
+        <note from="translator">Là aussi il mériterait un point en fin de phrase ?</note>
       </trans-unit>
-      <trans-unit id="weather-scenarios/thunderstorm-name:0">
+      <trans-unit id="weather-scenarios/thunderstorm-name:0" approved="yes">
         <source xml:space="preserve">Thunderstorm</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Orages</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/warm-sector-desc:0">
+      <trans-unit id="weather-scenarios/warm-sector-desc:0" approved="yes">
         <source xml:space="preserve">A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Un secteur chaud, caractérisé par une forte humidité de l&apos;air et une brume s&apos;étendant jusqu&apos;à de hautes altitudes, mais sinon, le développement des nuages est largement convectif.</target>
       </trans-unit>
-      <trans-unit id="weather-scenarios/warm-sector-name:0">
+      <trans-unit id="weather-scenarios/warm-sector-name:0" approved="yes">
         <source xml:space="preserve">Warm sector</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Secteur chaud</target>
       </trans-unit>
     </group>
   </body></file>

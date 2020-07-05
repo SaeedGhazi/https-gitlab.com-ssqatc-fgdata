@@ -84,6 +84,7 @@ var Window = {
       _widgets: [],
       _frame_width: 4,
       _title_bar_height: 25,
+      _title: nil,
     };
 
     m.setInt("content-size[0]", size[0]);
@@ -105,7 +106,8 @@ var Window = {
   # Destructor
   del: func
   {
-    me._title.del();
+    if (me["_title"] != nil)
+        me._title.del();
     me.clearFocus();
 
     if( me["_canvas"] != nil )
@@ -335,25 +337,13 @@ var Window = {
     # support for CSS like position: absolute; with right and/or bottom margin
     if( name == "right" )
       me._handlePositionAbsolute(child, mode, name, 0);
-    else if( name == "bottom" )
+    elsif( name == "bottom" )
       me._handlePositionAbsolute(child, mode, name, 1);
 
-    # update decoration on type change
-    else if( name == "type" )
-    {
-      if( mode == 0 )
-        settimer(func me._updateDecoration(), 0, 1);
-    }
-
-    else if( name.starts_with("resize-") )
-    {
-      if( mode == 0 )
-        me._handleResize(child, name);
-    }
-    else if( name == "size" )
-    {
-      if( mode == 0 )
-        me._resizeDecoration();
+    if (mode == 0) {
+        if (name == "type") me._updateDecoration();
+        elsif (name.starts_with("resize-")) me._handleResize(child, name);
+        elsif (name == "size") me._resizeDecoration();
     }
   },
   _handlePositionAbsolute: func(child, mode, name, index)

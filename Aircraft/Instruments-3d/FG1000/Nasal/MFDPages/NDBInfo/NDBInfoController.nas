@@ -134,7 +134,11 @@ var NDBInfoController =
     me._page.dataEntry.unhighlightElement();
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
-
+  handleKeyInput : func (value) { 
+    me._page.dataEntry.keyPress(value);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },  
+	  
   # Reset controller if required when the page is displayed or hidden
   ondisplay : func() {
     me.RegisterWithEmesary();

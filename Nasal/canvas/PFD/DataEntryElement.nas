@@ -144,11 +144,7 @@ var DataEntryElement =
     me.highlightElement();
     me._dataEntryPos = -1;
   },
-  incrSmall : func(value) {
-    # Change the value of this element, or start editing it if we're not already
-    # doing so.
-
-    if (me._dataEntryPos == -1) {
+  _startEdit: func() {
       # Start editing by hiding the top level element, and displaying and
       # resetting the character entry fields.
       me._dataEntryPos = 0;
@@ -162,6 +158,26 @@ var DataEntryElement =
 
       # Highlight the first character element to indicate we're editing it
       me._highlightCharElement();
+  },
+  keyPress: func(value) {
+    if (me._dataEntryPos == -1) {
+      me._startEdit();
+    } 
+    var charSym = me._dataEntrySymbol[me._dataEntryPos];
+    charSym.setText(value);
+
+    if ( me._dataEntryPos == me._size -1 ) return;
+
+    me._unhighlightCharElement();
+    me._dataEntryPos = me._dataEntryPos + 1;
+    me._highlightCharElement();
+  },
+  incrSmall : func(value) {
+    # Change the value of this element, or start editing it if we're not already
+    # doing so.
+
+    if (me._dataEntryPos == -1) {
+      me._startEdit();
     } else {
       var charSym = me._dataEntrySymbol[me._dataEntryPos];
       var incr_or_decr = (value > 0) ? 1 : -1;

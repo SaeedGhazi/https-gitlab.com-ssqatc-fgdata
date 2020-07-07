@@ -39,6 +39,10 @@ var VORInfoController =
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+  handleKeyInput : func (value) { 
+	me._page.dataEntry.keyPress(value);
+	return emesary.Transmitter.ReceiptStatus_Finished;
+  },
   handleFMSInner : func(value) {
     if (me._crsrToggle == 1) {
       me._page.dataEntry.incrSmall(value);

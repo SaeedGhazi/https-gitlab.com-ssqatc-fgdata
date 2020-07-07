@@ -320,6 +320,17 @@ var DirectToController =
 
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+  handleKeyInput : func (value) { 
+	  if (! me.dto_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+	  if (me._waypointSubmenuVisible) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+      
+	  if (me._cursorElements[me._selectedElement].isEditable()) {
+	      me._cursorElements[me._selectedElement].keyPress(value);
+	  }
+
+	  return emesary.Transmitter.ReceiptStatus_Finished; 
+  },
+
 
   # Reset controller if required when the page is displayed or hidden
   # Note that we explicitly do NOT RegisterWithEmesary/DeRegisterWithEmesary!

@@ -266,6 +266,12 @@ var WaypointEntryController =
     me.loadDestination(me.page.IDEntry.getValue());
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+  handleKeyInput : func (value) {
+    if (! me._wpentry_displayed) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    if (me._selectedElement == 0) return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    me._cursorElements[me._selectedElement].keyPress(value);
+    return emesary.Transmitter.ReceiptStatus_Finished;
+  },
 
   # Reset controller if required when the page is displayed or hidden
   # Note that we explicitly do NOT RegisterWithEmesary/DeRegisterWithEmesary!

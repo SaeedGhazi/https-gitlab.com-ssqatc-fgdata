@@ -129,6 +129,13 @@ var AirportInfoController =
     }
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
+  handleKeyInput : func (value) { 
+	if (me._currentGroup == AirportInfoController.UIGROUP.APT) {
+	  me.page.airportEntry.keyPress(value);
+	  return emesary.Transmitter.ReceiptStatus_Finished;
+	} 
+	return emesary.Transmitter.ReceiptStatus_NotProcessed;
+  },
   handleFMSInner : func(value) {
     if (me.crsrToggle == 1) {
       if (me._currentGroup == AirportInfoController.UIGROUP.APT) {

@@ -1381,32 +1381,70 @@ elsif (qualityLevel != nil) {
         setprop("/sim/rendering/shaders/skydome",0);
     }
 }
+
 # overwrite custom shader settings when quality-level is set through the slider
 # in the Rendering Options dialog
 var update_shader_settings = func() {
-    if (!getprop("/sim/rendering/shaders/custom-settings")){
-        var qualityLvl = getprop("/sim/rendering/shaders/quality-level-internal") or 0;
-        setprop("/sim/rendering/shaders/quality-level", qualityLvl);
-        setprop("/sim/rendering/shaders/landmass",qualityLvl);
-        setprop("/sim/rendering/shaders/urban",qualityLvl);
-        setprop("/sim/rendering/shaders/water",qualityLvl);
-        if (qualityLvl >= 4.0)
-            qualityLvl = 4.0;
-        setprop("/sim/rendering/shaders/lights",qualityLvl);
-        if (qualityLvl >= 1.0)
-            qualityLvl = 1.0;
-        setprop("/sim/rendering/shaders/model",qualityLvl);
-        setprop("/sim/rendering/shaders/contrails",qualityLvl);
-        setprop("/sim/rendering/shaders/crop",qualityLvl);
-        setprop("/sim/rendering/shaders/generic",qualityLvl);
-        setprop("/sim/rendering/shaders/transition",qualityLvl);
+    var shaderPath = "/sim/rendering/shaders/";
+    if (getprop(shaderPath ~ "custom-settings")) {
+        setprop(shaderPath ~ "quality-level", -1);
     } else {
-		setprop("/sim/rendering/shaders/quality-level",-1);
-	}
+        if (getprop(shaderPath ~ "skydome")) {
+            var qualityLvl = getprop(shaderPath ~ "quality-level-internal") or 0;
+            setprop(shaderPath ~ "quality-level", qualityLvl);
+            
+            if (qualityLvl != 0.0) {
+                setprop(shaderPath ~ "landmass", qualityLvl + 1); # these go to 6 rather than 5
+                setprop(shaderPath ~ "transition", qualityLvl + 1);
+            } else {
+                setprop(shaderPath ~ "landmass", 0);
+                setprop(shaderPath ~ "transition", 0);
+            }
+            setprop(shaderPath ~ "water", qualityLvl);
+            setprop(shaderPath ~ "urban", qualityLvl);
+            
+            if (qualityLvl >= 5.0) {
+                setprop(shaderPath ~ "vegetation-effects", qualityLvl);
+            } else {
+                setprop(shaderPath ~ "vegetation-effects", 0);
+            }
+            
+            qualityLvl = math.min(qualityLvl, 4.0);
+            setprop(shaderPath ~ "lights", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 3.0);
+            setprop(shaderPath ~ "model", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 2.0);
+            setprop(shaderPath ~ "wind-effects", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 1.0);
+            setprop(shaderPath ~ "crop", qualityLvl);
+            setprop(shaderPath ~ "clouds", qualityLvl);
+            setprop(shaderPath ~ "forest", qualityLvl);
+            
+        } else {
+            var qualityLvl = getprop(shaderPath ~ "quality-level-internal") or 0;
+            setprop(shaderPath ~ "quality-level", qualityLvl);
+            setprop(shaderPath ~ "landmass", qualityLvl);
+            setprop(shaderPath ~ "urban", qualityLvl);
+            setprop(shaderPath ~ "water", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 4.0);
+            setprop(shaderPath ~ "lights", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 1.0);
+            setprop(shaderPath ~ "model", qualityLvl);
+            setprop(shaderPath ~ "contrails", qualityLvl);
+            setprop(shaderPath ~ "crop", qualityLvl);
+            setprop(shaderPath ~ "generic", qualityLvl);
+            setprop(shaderPath ~ "transition", qualityLvl);
+        }
+    }
 
     if (rembrandtOn) {
-		setprop("/sim/rendering/shaders/skydome",0);
-	}
+        setprop(shaderPath ~ "skydome", 0);
+    }
 };
 
 setlistener("/sim/rendering/shaders/custom-settings", func { update_shader_settings() } );

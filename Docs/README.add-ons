@@ -168,6 +168,22 @@ add-on called “Flying Turtle” distributed by Joe User:
         This add-on enables something really great involving turtles...
       </long-description>
 
+      <localized>
+        <fr>
+          <short-description type="string">
+            Permet de voler avec de nouveaux pouvoirs foobar.
+          </short-description>
+          <name>
+          Tortue volante
+          </name>
+        </fr>
+        <de>
+        <short-description type="string">
+         Erlaube das Fliegen mit neuen Foobar-Kräften.
+          </short-description>
+        </de>
+      </localized>
+
       <license>
         <designation type="string">
           GNU GPL version 2 or later
@@ -366,6 +382,14 @@ just as with the 1.2.10a1.dev2 example given above for an alpha release.
 Note that a development release always sorts before the corresponding
 non-development release (e.g., 2017.2.1b5.dev4 comes before 2017.2.1b5).
 
+Translations
+============
+
+Certain nodes can be translated based on the active languages within FlightGear.
+Especially, the name and descriptions can be translated, by adding them to
+a language node beneath 'localized', as show in the example above. Where there is
+no translation for a particular value, the default one is used.
+
 Other fields
 ============
 
@@ -458,6 +482,22 @@ code doesn't need to know about the particular syntax for
 add-on-specific resources and, more interestingly, doesn't have to
 hardcode the add-on identifier every time you need to access a resource
 inside the add-on directory.
+
+4.1 Resources extending $FG_ROOT
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add-ons can options supply a special sub-directory which is searched when
+FlightGear looks for files normally residing in $FG_ROOT. For example input
+configurations, network protocols and other non-aircraft resources. Since
+these files cannot use the scheme above, a different approach is used. If
+an add-on defines a subdirectory called 'FGData', this is becomes an
+additional data directory to be searched for any such standard files. For
+security reasons, add-on FGData extensions are searched after the main
+$FG_ROOT location, so that an addon cannot maliciously replace a core resource.
+
+Only some files currently support being added via this mechanism, so if you
+find a non-working case which would be useful, please request it via the
+developer mailing list.
 
 
 5. Persistent storage location for add-ons

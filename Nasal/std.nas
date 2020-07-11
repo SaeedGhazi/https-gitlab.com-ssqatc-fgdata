@@ -13,7 +13,7 @@ var include_path = "Nasal/std/";
 var files = [
     "hash",
     "string",
-    "vector",
+    "Vector",
 ];
 
 foreach (var file; files) {

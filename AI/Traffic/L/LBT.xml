@@ -1859,7 +1859,7 @@
     <required-aircraft>LBT-320</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>EDDSP</port>
+      <port>EDDP</port>
       <time>5/11:00:00</time>
     </departure>
     <cruise-alt>380</cruise-alt>

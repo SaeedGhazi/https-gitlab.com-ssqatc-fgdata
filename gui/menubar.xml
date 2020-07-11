@@ -737,7 +737,7 @@
 				<script>console.CanvasPlacement.new()</script>
 			</binding>
 		</item>
-        
+
         <item>
 			<name>nasal-test</name>
 			<binding>
@@ -869,7 +869,7 @@
 					var fg1000system = fg1000.FG1000.getOrCreateInstance();
 					var mfdindex = getprop("/sim/gui/fg1000/mfd-index");
 					if (mfdindex == nil) {
-						mfdindex = fg1000system.addPFD();
+						mfdindex = fg1000system.addMFD();
 						setprop("/sim/gui/fg1000/mfd-index", mfdindex);
 					}
 

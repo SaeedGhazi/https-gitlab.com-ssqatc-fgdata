@@ -29,6 +29,7 @@
     <name>OpenMining</name>
     <name>Rock</name>
     <name>Dump</name>
+    <name>Cliffs</name>
     <effect>Effects/rock</effect>
     <texture-set>
       <texture>Terrain/rock.png</texture>

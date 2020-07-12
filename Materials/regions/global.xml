@@ -789,6 +789,7 @@
     <name>OpenMining</name>
     <name>Rock</name>
     <name>Dump</name>
+    <name>Cliffs</name>
     <texture>Terrain/rock.png</texture>
   </material>
 

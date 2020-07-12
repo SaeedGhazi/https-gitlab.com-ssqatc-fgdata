@@ -39,10 +39,12 @@ var GenericNavComPublisher =
     obj._triggeredPublisher = TriggeredPropertyPublisher.new(notifications.PFDEventNotification.NavComData);
     obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.NavComData, period);
 
-    # Hack to handle cases where there is no selected Com or NAV frequency
+    # Hack to handle cases where there is no selected Com or NAV frequency or volume
     if (getprop("/instrumentation/com-selected") == nil) setprop("/instrumentation/com-selected", 1);
     if (getprop("/instrumentation/nav-selected") == nil) setprop("/instrumentation/nav-selected", 1);
-
+    if (getprop("/instrumentation/nav/volume") == nil) setprop("/instrumentation/nav/volume", 0.5);
+    if (getprop("/instrumentation/comm/volume") == nil) setprop("/instrumentation/comm/volume", 0.5);
+    
     obj._triggeredPublisher.addPropMap("Comm1SelectedFreq", "/instrumentation/comm/frequencies/selected-mhz");
     obj._triggeredPublisher.addPropMap("Comm1StandbyFreq", "/instrumentation/comm/frequencies/standby-mhz");
     obj._triggeredPublisher.addPropMap("Comm1AirportID", "/instrumentation/comm/airport-id");
@@ -56,14 +58,13 @@ var GenericNavComPublisher =
     obj._triggeredPublisher.addPropMap("Comm2AirportID", "/instrumentation/comm[1]/airport-id");
     obj._triggeredPublisher.addPropMap("Comm2StationName", "/instrumentation/comm[1]/station-name");
     obj._triggeredPublisher.addPropMap("Comm2StationType", "/instrumentation/comm[1]/station-type");
-    obj._triggeredPublisher.addPropMap("Comm2Volume", "/instrumentation/comm[1]/volume");
     obj._triggeredPublisher.addPropMap("Comm2Serviceable", "/instrumentation/comm[1]/serviceable");
 
     obj._triggeredPublisher.addPropMap("CommSelected", "/instrumentation/com-selected");
 
     obj._triggeredPublisher.addPropMap("Nav1SelectedFreq", "/instrumentation/nav/frequencies/selected-mhz");
     obj._triggeredPublisher.addPropMap("Nav1StandbyFreq", "/instrumentation/nav/frequencies/standby-mhz");
-    obj._periodicPublisher.addPropMap("Nav1ID", "/instrumentation/nav/nav-id");
+    obj._triggeredPublisher.addPropMap("Nav1ID", "/instrumentation/nav/nav-id");
     obj._periodicPublisher.addPropMap("Nav1InRange", "/instrumentation/nav/in-range");
     obj._periodicPublisher.addPropMap("Nav1HeadingDeg", "/instrumentation/nav/heading-deg");
     obj._periodicPublisher.addPropMap("Nav1RadialDeg", "/instrumentation/nav/radials/selected-deg");
@@ -76,7 +77,7 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("Nav1GSInRange", "/instrumentation/nav/gs-in-range");
     obj._periodicPublisher.addPropMap("Nav1From", "/instrumentation/nav/from-flag");
 
-    obj._triggeredPublisher.addPropMap("Nav1Volume", "/instrumentation/nav/nav-volume");
+    obj._triggeredPublisher.addPropMap("Nav1Volume", "/instrumentation/nav/volume");
     obj._triggeredPublisher.addPropMap("Nav1AudioID", "/instrumentation/nav/audio-btn");
     obj._triggeredPublisher.addPropMap("Nav1Serviceable", "/instrumentation/nav/operable");
 
@@ -94,8 +95,6 @@ var GenericNavComPublisher =
     obj._periodicPublisher.addPropMap("Nav2GSDeflection", "/instrumentation/nav[1]/gs-needle-deflection-norm");
     obj._periodicPublisher.addPropMap("Nav2GSInRange", "/instrumentation/nav[1]/gs-in-range");
     obj._periodicPublisher.addPropMap("Nav2From", "/instrumentation/nav/from-flag");
-
-    obj._triggeredPublisher.addPropMap("Nav2Volume", "/instrumentation/nav[1]/nav-volume");
     obj._triggeredPublisher.addPropMap("Nav2AudioID", "/instrumentation/nav[1]/audio-btn");
     obj._triggeredPublisher.addPropMap("Nav2Serviceable", "/instrumentation/nav[1]/operable");
 

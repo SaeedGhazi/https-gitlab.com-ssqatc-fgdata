@@ -30,6 +30,7 @@ var SurroundController =
       _com1standby : 0.0,
       _com2active  : 0.0,
       _com2standby : 0.0,
+      _commvolume   : 0.0,
       _nav1active  : 0.0,
       _nav1standby : 0.0,
       _nav1radial : 0.0,
@@ -38,6 +39,7 @@ var SurroundController =
       _nav2standby : 0.0,
       _nav2radial : 0.0,
       _nav2_heading_deg : 0.0,
+      _navvolume  : 0.0,
       _pressure_settings_inhg : 0.0,
       _selected_alt_ft : 0.0,
       _heading_bug_deg : 0.0,
@@ -82,19 +84,24 @@ var SurroundController =
 
     if (data["Comm1SelectedFreq"] != nil) me._com1active  = data["Comm1SelectedFreq"];
     if (data["Comm1StandbyFreq"] != nil)  me._com1standby = data["Comm1StandbyFreq"];
+    if (data["Comm1Volume"] != nil and me._commvolume != data["Comm1Volume"]) me._commvolume = data["Comm1Volume"];
     if (data["Comm2SelectedFreq"] != nil) me._com2active  = data["Comm2SelectedFreq"];
     if (data["Comm2StandbyFreq"] != nil)  me._com2standby = data["Comm2StandbyFreq"];
-
+    if (data["Comm2Volume"] != nil and me._commvolume != data["Comm2Volume"]) me._commvolume = data["Comm2Volume"];
+    
     if (data["Nav1SelectedFreq"] != nil) me._nav1active  = data["Nav1SelectedFreq"];
     if (data["Nav1StandbyFreq"] != nil)  me._nav1standby = data["Nav1StandbyFreq"];
     if (data["Nav1RadialDeg"] != nil)  me._nav1radial = data["Nav1RadialDeg"];
     if (data["Nav1HeadingDeg"] != nil)  me._nav1_heading_deg = data["Nav1HeadingDeg"];
-
+    if (data["Nav1Volume"] != nil and me._navvolume != data["Nav1Volume"]) me._navvolume = data["Nav1Volume"];
+    
     if (data["Nav2SelectedFreq"] != nil) me._nav2active  = data["Nav2SelectedFreq"];
     if (data["Nav2StandbyFreq"] != nil)  me._nav2standby = data["Nav2StandbyFreq"];
     if (data["Nav2RadialDeg"] != nil)  me._nav2radial = data["Nav2RadialDeg"];
     if (data["Nav2HeadingDeg"] != nil)  me._nav2_heading_deg = data["Nav2HeadingDeg"];
-
+    if (data["Nav2Volume"] != nil and me._navvolume != data["Nav2Volume"]) me._navvolume = data["Nav2Volume"];	
+    	
+    
     # pass through to the page
     me._page.handleNavComData(data);
     return emesary.Transmitter.ReceiptStatus_OK;
@@ -120,14 +127,11 @@ var SurroundController =
   # Handle the various COM and NAV controls at the top left and top right of the Fascia
   #
   handleNavVol : func (value) {
-    var data={};
-
-    if (me._navselected == 1) {
-      data["Nav1Volume"] = value;
-    } else {
-      data["Nav2Volume"] = value;
-    }
-
+	var data={};
+    var incr_or_decr = (value > 0) ? 0.01 : -0.01;
+    var vol = math.max(0,math.min(1,me._navvolume + incr_or_decr));
+    data["Nav1Volume"] = vol;
+    data["Nav2Volume"] = vol;
     me.sendNavComDataNotification(data);
     return emesary.Transmitter.ReceiptStatus_Finished;
   },
@@ -367,13 +371,10 @@ var SurroundController =
 
   handleComVol : func (value) {
     var data={};
-
-    if (me._comselected == 1) {
-      data["Comm1Volume"] = value;
-    } else {
-      data["Comm2Volume"] = value;
-    }
-
+    var incr_or_decr = (value > 0) ? 0.01 : -0.01;
+    var vol = math.max(0,math.min(1,me._commvolume + incr_or_decr));
+    data["Comm1Volume"] = vol;
+    data["Comm2Volume"] = vol;
     me.sendNavComDataNotification(data);
     return emesary.Transmitter.ReceiptStatus_Finished;
   },

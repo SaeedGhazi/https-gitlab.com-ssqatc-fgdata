@@ -109,15 +109,22 @@ var Surround =
     var textElements = [
       "Comm1StandbyFreq", "Comm1SelectedFreq",
       "Comm2StandbyFreq", "Comm2SelectedFreq",
+      "CommVolume",
       "Nav1StandbyFreq", "Nav1SelectedFreq",
       "Nav2StandbyFreq", "Nav2SelectedFreq",
       "Nav1ID", "Nav2ID",
+      "NavVolume",
     ];
-
+    
     var fdTextElements = ["HeaderAPLateralArmed", "HeaderAPLateralActive", "HeaderAPVerticalArmed", "HeaderAPVerticalActive", "HeaderAPVerticalReference"];
 
+    # Labels that show and hide for volume notification
+    var volumeLabelElements = ["Comm2Label","CommVolumeLabel","Nav2Label","NavVolumeLabel"];
+    
     obj.addTextElements(textElements);
-
+    
+    obj.addElements(volumeLabelElements);
+    
     if (pfd) {
       obj.addTextElements(["HeaderFrom", "HeaderTo", "LegDistance", "LegBRG"]);
       obj.addTextElements(fdTextElements, FD_STATUS_STYLE);
@@ -151,6 +158,8 @@ var Surround =
     obj._menuVisible = 0;
     obj._selectedPageGroup = 0;
     obj._selectedPage = 0;
+    obj._selected_comm = 1;
+    obj._selected_nav = 1;
 
     obj._elements = {};
 
@@ -174,15 +183,24 @@ var Surround =
     obj._hideMenuTimer = maketimer(3, obj, obj.hideMenu);
     obj._hideMenuTimer.singleShot = 1;
 
+    obj._hideCommVolumeTimer = maketimer(2, obj, obj.hideCommVolume);
+    obj._hideCommVolumeTimer.singleShot = 1;
+
+    obj._hideNavVolumeTimer = maketimer(2, obj, obj.hideNavVolume);
+    obj._hideNavVolumeTimer.singleShot = 1;
+    
     obj._loadPageTimer = maketimer(0.5, obj, obj.loadPage);
     obj._loadPageTimer.singleShot = 1;
 
     obj.hideMenu();
-
+    
     obj.setController(fg1000.SurroundController.new(obj, svg, pfd));
+    obj.hideCommVolume();
+    obj.hideNavVolume();
+
     return obj;
   },
-
+  
   handleNavComData : func(data) {
     foreach(var name; keys(data)) {
       var val = data[name];
@@ -209,9 +227,11 @@ var Surround =
 
       if (name == "CommSelected") {
         if (val == 1) {
+          me._selected_comm=1;
           me._comm1selected.setVisible(1);
           me._comm2selected.setVisible(0);
         } else {
+          me._selected_comm=2;
           me._comm1selected.setVisible(0);
           me._comm2selected.setVisible(1);
         }
@@ -239,24 +259,95 @@ var Surround =
 
       if (name == "NavSelected") {
         if (val == 1) {
+          me._selected_nav=1;
           me._nav1selected.setVisible(1);
           me._nav2selected.setVisible(0);
         } else {
+          me._selected_nav=2;
           me._nav1selected.setVisible(0);
           me._nav2selected.setVisible(1);
         }
       }
 
-      if (name == "Nav1ID") me.setTextElement("Nav1ID", val);
-      if (name == "Nav2ID") me.setTextElement("Nav2ID", val);
-
-      # TODO - COM Volume - display the current volume for 2 seconds in place of the
+      if (name == "Nav1ID") {
+        if (val==0) {
+          me.setTextElement("Nav1ID", "");
+        } else {
+          me.setTextElement("Nav1ID", val);
+        }
+      }
+      if (name == "Nav2ID") {
+          if (val==0) {
+            me.setTextElement("Nav2ID", "");
+          } else {
+            me.setTextElement("Nav2ID", val);
+          }
+        }
+      
+      # NAV/COM Volume - display the current volume for 2 seconds in place of the
       # standby frequency.
-
-
+      
+      if (name == "Nav1Volume" or name == "Nav2Volume") {
+        me.showNavVolume(val);
+      }
+      if (name == "Comm1Volume" or name == "Comm2Volume") {
+        me.showCommVolume(val);
+      }
     }
   },
-
+  showCommVolume: func(val) {
+    var commvol = sprintf("%d%%",int(val*100));
+    if (me.getTextValue("CommVolume") == commvol) return;
+    
+    # Hide com2 standby and label
+    me.getTextElement("Comm2StandbyFreq").setVisible(0);
+    me.getElement("Comm2Label").setVisible(0);
+    if (me._selected_comm == 2) me._comm2selected.setVisible(0);
+    
+    # Set and show COM volume
+    me.setTextElement("CommVolume",commvol);
+    me.getTextElement("CommVolume").setVisible(1);
+    me.getElement("CommVolumeLabel").setVisible(1);
+    
+    # Start hide timer (2 secs according to the manual)
+    me._hideCommVolumeTimer.stop();
+    me._hideCommVolumeTimer.restart(2);
+  },
+  
+  hideCommVolume: func() {
+    # Hide comm vol and restore standby and label
+	me.getTextElement("CommVolume").setVisible(0);
+    me.getElement("CommVolumeLabel").setVisible(0);
+    me.getTextElement("Comm2StandbyFreq").setVisible(1);
+    me.getElement("Comm2Label").setVisible(1);
+    if (me._selected_comm == 2) me._comm2selected.setVisible(1);
+  },
+  showNavVolume: func(val) {
+    var navvol = sprintf("%d%%",int(val*100));
+    if (me.getTextValue("NavVolume") == navvol) return;
+    
+    # Hide NAV2 standdby
+    me.getTextElement("Nav2StandbyFreq").setVisible(0);
+    me.getElement("Nav2Label").setVisible(0);
+    if (me._selected_nav == 2) me._nav2selected.setVisible(0);
+    
+    # Set and show NAV volume
+    me.setTextElement("NavVolume",navvol);
+    me.getTextElement("NavVolume").setVisible(1);
+    me.getElement("NavVolumeLabel").setVisible(1);
+    
+    # Start hide timer (2 secs according to the manual)
+    me._hideNavVolumeTimer.stop();
+    me._hideNavVolumeTimer.restart(2);
+  },
+  hideNavVolume: func() {
+    # Hide Nav volume and show NAV2 standby again
+    me.getTextElement("NavVolume").setVisible(0);
+    me.getElement("NavVolumeLabel").setVisible(0);
+    me.getTextElement("Nav2StandbyFreq").setVisible(1);
+    me.getElement("Nav2Label").setVisible(1);
+    if (me._selected_nav == 2) me._nav2selected.setVisible(1);
+  },
   # Update Header data with FMS or ADC data.
   updateHeaderData : func(data) {
 
@@ -495,6 +586,5 @@ var Surround =
   {
     return me._menuVisible;
   },
-
 
 };

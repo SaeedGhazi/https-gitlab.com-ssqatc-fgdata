@@ -6,8 +6,8 @@
     <name>nav-right</name>
     <path>AI/Lights/procedural_light_nav_right.xml</path>
     <offsets>
-      <x-m>-0.370226</x-m>
-      <y-m>10.4619</y-m>
+      <x-m>-0.481635</x-m>
+      <y-m>10.5262</y-m>
       <z-m>2.61237</z-m>
     </offsets>
   </model>
@@ -15,8 +15,8 @@
     <name>nav-left</name>
     <path>AI/Lights/procedural_light_nav_left.xml</path>
     <offsets>
-      <x-m>-0.370226</x-m>
-      <y-m>-10.4619</y-m>
+      <x-m>-0.481635</x-m>
+      <y-m>-10.5262</y-m>
       <z-m>2.61237</z-m>
     </offsets>
   </model>
@@ -24,7 +24,7 @@
     <name>nav-tail</name>
     <path>AI/Lights/procedural_light_nav_tail.xml</path>
     <offsets>
-      <x-m>10.3985</x-m>
+      <x-m>10.5272</x-m>
       <y-m>0</y-m>
       <z-m>2.71975</z-m>
     </offsets>
@@ -34,8 +34,8 @@
     <name>strobe-right</name>
     <path>AI/Lights/procedural_light_strobe_right.xml</path>
     <offsets>
-      <x-m>0.113682</x-m>
-      <y-m>10.6681</y-m>
+      <x-m>0.864794</x-m>
+      <y-m>10.7931</y-m>
       <z-m>2.63951</z-m>
     </offsets>
   </model>
@@ -43,8 +43,8 @@
     <name>strobe-left</name>
     <path>AI/Lights/procedural_light_strobe_left.xml</path>
     <offsets>
-      <x-m>0.113682</x-m>
-      <y-m>-10.6681</y-m>
+      <x-m>0.864794</x-m>
+      <y-m>-10.7931</y-m>
       <z-m>2.63951</z-m>
     </offsets>
   </model>
@@ -55,7 +55,7 @@
     <offsets>
       <x-m>9.53666</x-m>
       <y-m>0</y-m>
-      <z-m>6.92229</z-m>
+      <z-m>7.17229</z-m>
     </offsets>
   </model>
    <model>
@@ -64,7 +64,7 @@
     <offsets>
       <x-m>1.525</x-m>
       <y-m>0</y-m>
-      <z-m>0.99864</z-m>
+      <z-m>0.74864</z-m>
     </offsets>
   </model>
   <!-- Group Lights for Shared Animations -->

@@ -538,6 +538,7 @@
             setprop("/sim/presets/runway-requested", 0);
           } else {
             setprop("/sim/presets/carrier", "");
+            setprop("/sim/presets/heading-deg", 9999);
             var runway = getprop("/sim/presets/runway");
             if (runway != "") {
               setprop("/sim/presets/runway-requested", 1);

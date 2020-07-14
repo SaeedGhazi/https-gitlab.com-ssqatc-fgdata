@@ -6,13 +6,13 @@
       <type>heavy_jet</type>
       <acceleration-kts-hour>4.0</acceleration-kts-hour>
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
-      <climbrate-fpm>1500.0</climbrate-fpm>
-      <decentrate-fpm>800.0</decentrate-fpm>
+      <climb-rate-fpm>1500.0</climb-rate-fpm>
+      <descent-rate-fpm>800.0</descent-rate-fpm>
       <rotate-speed-kts>150.0</rotate-speed-kts>
       <takeoff-speed-kts>160.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>430.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -21,13 +21,13 @@
       <type>jet_transport</type>
       <acceleration-kts-hour>5.0</acceleration-kts-hour>
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
-      <climbrate-fpm>3000.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>3000.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>140.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>430.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -36,13 +36,13 @@
       <type>turboprop_transport</type>
       <acceleration-kts-hour>6.0</acceleration-kts-hour>
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
-      <climbrate-fpm>3000.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>3000.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>130.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>300.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -51,13 +51,13 @@
       <type>light</type>
       <acceleration-kts-hour>2.0</acceleration-kts-hour>
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
-      <climbrate-fpm>450.0</climbrate-fpm>
-      <decentrate-fpm>1000.0</decentrate-fpm>
+      <climb-rate-fpm>450.0</climb-rate-fpm>
+      <descent-rate-fpm>1000.0</descent-rate-fpm>
       <rotate-speed-kts>70.0</rotate-speed-kts>
       <takeoff-speed-kts>70.0</takeoff-speed-kts>
-      <climbspeed-kts>80.0</climbspeed-kts>
+      <climb-speed-kts>80.0</climb-speed-kts>
       <cruise-speed-kts>100.0</cruise-speed-kts>
-      <decent-speed-kts>80.0</decent-speed-kts>
+      <descent-speed-kts>80.0</descent-speed-kts>
       <approach-speed-kts>70.0</approach-speed-kts>
       <touchdown-speed-kts>60.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -66,13 +66,13 @@
       <type>jet_fighter</type>
       <acceleration-kts-hour>7.0</acceleration-kts-hour>
       <deceleration-kts-hour>3.0</deceleration-kts-hour>
-      <climbrate-fpm>4000.0</climbrate-fpm>
-      <decentrate-fpm>2000.0</decentrate-fpm>
+      <climb-rate-fpm>4000.0</climb-rate-fpm>
+      <descent-rate-fpm>2000.0</descent-rate-fpm>
       <rotate-speed-kts>120.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
-      <climbspeed-kts>350.0</climbspeed-kts>
+      <climb-speed-kts>350.0</climb-speed-kts>
       <cruise-speed-kts>500.0</cruise-speed-kts>
-      <decent-speed-kts>350.0</decent-speed-kts>
+      <descent-speed-kts>350.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -81,13 +81,13 @@
       <type>ww2_fighter</type>
       <acceleration-kts-hour>4.0</acceleration-kts-hour>
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
-      <climbrate-fpm>3000.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>3000.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>180.0</climbspeed-kts>
+      <climb-speed-kts>180.0</climb-speed-kts>
       <cruise-speed-kts>250.0</cruise-speed-kts>
-      <decent-speed-kts>200.0</decent-speed-kts>
+      <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>100.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -96,13 +96,13 @@
       <type>tanker</type>
       <acceleration-kts-hour>5.0</acceleration-kts-hour>
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
-      <climbrate-fpm>3000.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>3000.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>140.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>430.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -111,13 +111,13 @@
       <type>shuttle</type>
       <acceleration-kts-hour>5.0</acceleration-kts-hour>
       <deceleration-kts-hour>5.0</deceleration-kts-hour>
-      <climbrate-fpm>1000.0</climbrate-fpm>
-      <decentrate-fpm>18000.0</decentrate-fpm>
+      <climb-rate-fpm>1000.0</climb-rate-fpm>
+      <descent-rate-fpm>18000.0</descent-rate-fpm>
       <rotate-speed-kts>206.0</rotate-speed-kts>
       <takeoff-speed-kts>320.0</takeoff-speed-kts>
-      <climbspeed-kts>350.0</climbspeed-kts>
+      <climb-speed-kts>350.0</climb-speed-kts>
       <cruise-speed-kts>1200.0</cruise-speed-kts>
-      <decent-speed-kts>150.0</decent-speed-kts>
+      <descent-speed-kts>150.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -126,13 +126,13 @@
       <type>ufo</type>
       <acceleration-kts-hour>30.0</acceleration-kts-hour>
       <deceleration-kts-hour>30.0</deceleration-kts-hour>
-      <climbrate-fpm>6000.0</climbrate-fpm>
-      <decentrate-fpm>6000.0</decentrate-fpm>
+      <climb-rate-fpm>6000.0</climb-rate-fpm>
+      <descent-rate-fpm>6000.0</descent-rate-fpm>
       <rotate-speed-kts>150.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>430.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -212,7 +212,7 @@
       <rotate-speed-kts>140.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
       <cruise-speed-kts>440.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -246,7 +246,7 @@
       <rotate-speed-kts>140.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
       <cruise-speed-kts>487.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>140.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -264,7 +264,7 @@
       <rotate-speed-kts>160.0</rotate-speed-kts>
       <takeoff-speed-kts>170.0</takeoff-speed-kts>
       <cruise-speed-kts>490.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
     </aircraft>
     <alias>
       <match>34</match>
@@ -280,7 +280,7 @@
       <rotate-speed-kts>140.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
       <cruise-speed-kts>470.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -298,9 +298,9 @@
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
       <rotate-speed-kts>140.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>440.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -347,9 +347,9 @@
       <deceleration-kts-hour>2.0</deceleration-kts-hour>
       <rotate-speed-kts>150.0</rotate-speed-kts>
       <takeoff-speed-kts>160.0</takeoff-speed-kts>
-      <climbspeed-kts>300.0</climbspeed-kts>
+      <climb-speed-kts>300.0</climb-speed-kts>
       <cruise-speed-kts>470.0</cruise-speed-kts>
-      <decent-speed-kts>300.0</decent-speed-kts>
+      <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>160.0</approach-speed-kts>
       <touchdown-speed-kts>145.0</touchdown-speed-kts>
     </aircraft>
@@ -382,13 +382,13 @@
     <aircraft>
       <type>DH4</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1500.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>1500.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
-      <climbspeed-kts>210.0</climbspeed-kts>
+      <climb-speed-kts>210.0</climb-speed-kts>
       <cruise-speed-kts>360.0</cruise-speed-kts>
-      <decent-speed-kts>270.0</decent-speed-kts>
+      <descent-speed-kts>270.0</descent-speed-kts>
       <approach-speed-kts>245.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
     </aircraft>
@@ -403,13 +403,13 @@
     <aircraft>
       <type>DH3</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1200.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>1200.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>105.0</rotate-speed-kts>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>210.0</climbspeed-kts>
+      <climb-speed-kts>210.0</climb-speed-kts>
       <cruise-speed-kts>250.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>110.0</touchdown-speed-kts>
     </aircraft>
@@ -435,9 +435,9 @@
       <base>turboprop_transport</base>
       <rotate-speed-kts>80.0</rotate-speed-kts>
       <takeoff-speed-kts>90.0</takeoff-speed-kts>
-      <climbspeed-kts>92.0</climbspeed-kts>
+      <climb-speed-kts>92.0</climb-speed-kts>
       <cruise-speed-kts>145.0</cruise-speed-kts>
-      <decent-speed-kts>80.0</decent-speed-kts>
+      <descent-speed-kts>80.0</descent-speed-kts>
       <approach-speed-kts>70.0</approach-speed-kts>
       <touchdown-speed-kts>64.0</touchdown-speed-kts>
       <taxi-speed-kts>25.0</taxi-speed-kts>
@@ -494,13 +494,13 @@
     <aircraft>
       <type>EM2</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1500.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>1500.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>120.0</takeoff-speed-kts>
-      <climbspeed-kts>220.0</climbspeed-kts>
+      <climb-speed-kts>220.0</climb-speed-kts>
       <cruise-speed-kts>290.0</cruise-speed-kts>
-      <decent-speed-kts>290.0</decent-speed-kts>
+      <descent-speed-kts>290.0</descent-speed-kts>
       <approach-speed-kts>250.0</approach-speed-kts>
       <touchdown-speed-kts>126.0</touchdown-speed-kts>
     </aircraft>
@@ -533,9 +533,9 @@
       <base>turboprop_transport</base>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>120.0</takeoff-speed-kts>
-      <climbspeed-kts>200.0</climbspeed-kts>
+      <climb-speed-kts>200.0</climb-speed-kts>
       <cruise-speed-kts>248.0</cruise-speed-kts>
-      <decent-speed-kts>200.0</decent-speed-kts>
+      <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
@@ -551,9 +551,9 @@
       <base>turboprop_transport</base>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
-      <climbspeed-kts>170.0</climbspeed-kts>
+      <climb-speed-kts>170.0</climb-speed-kts>
       <cruise-speed-kts>275.0</cruise-speed-kts>
-      <decent-speed-kts>200.0</decent-speed-kts>
+      <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>145.0</approach-speed-kts>
       <touchdown-speed-kts>115.0</touchdown-speed-kts>
       <taxi-speed-kts>20.0</taxi-speed-kts>
@@ -571,13 +571,13 @@
     <aircraft>
       <type>CS1</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2500.0</climbrate-fpm>
-      <decentrate-fpm>2500.0</decentrate-fpm>
+      <climb-rate-fpm>2500.0</climb-rate-fpm>
+      <descent-rate-fpm>2500.0</descent-rate-fpm>
       <rotate-speed-kts>130.0</rotate-speed-kts>
       <takeoff-speed-kts>140.0</takeoff-speed-kts>
-      <climbspeed-kts>280.0</climbspeed-kts>
+      <climb-speed-kts>280.0</climb-speed-kts>
       <cruise-speed-kts>445.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>135.0</touchdown-speed-kts>
     </aircraft>
@@ -591,13 +591,13 @@
     <aircraft>
       <type>CS3</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2600.0</climbrate-fpm>
-      <decentrate-fpm>2200.0</decentrate-fpm>
+      <climb-rate-fpm>2600.0</climb-rate-fpm>
+      <descent-rate-fpm>2200.0</descent-rate-fpm>
       <rotate-speed-kts>155.0</rotate-speed-kts>
       <takeoff-speed-kts>165.0</takeoff-speed-kts>
-      <climbspeed-kts>280.0</climbspeed-kts>
+      <climb-speed-kts>280.0</climb-speed-kts>
       <cruise-speed-kts>445.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>140.0</touchdown-speed-kts>
     </aircraft>
@@ -631,9 +631,9 @@
     <aircraft>
       <type>S20</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>2250.0</climbrate-fpm>
+      <climb-rate-fpm>2250.0</climb-rate-fpm>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>155.0</climbspeed-kts>
+      <climb-speed-kts>155.0</climb-speed-kts>
       <cruise-speed-kts>321.0</cruise-speed-kts>
       <approach-speed-kts>120.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
@@ -648,11 +648,11 @@
     <aircraft>
       <type>SF3</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>2300.0</climbrate-fpm>
+      <climb-rate-fpm>2300.0</climb-rate-fpm>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
-      <climbspeed-kts>160.0</climbspeed-kts>
+      <climb-speed-kts>160.0</climb-speed-kts>
       <cruise-speed-kts>252.0</cruise-speed-kts>
-      <decent-speed-kts>240.0</decent-speed-kts>
+      <descent-speed-kts>240.0</descent-speed-kts>
       <approach-speed-kts>105.0</approach-speed-kts>
       <touchdown-speed-kts>95.0</touchdown-speed-kts>
     </aircraft>
@@ -666,9 +666,9 @@
     <aircraft>
       <type>J41</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>2200.0</climbrate-fpm>
+      <climb-rate-fpm>2200.0</climb-rate-fpm>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
-      <climbspeed-kts>145.0</climbspeed-kts>
+      <climb-speed-kts>145.0</climb-speed-kts>
       <cruise-speed-kts>260.0</cruise-speed-kts>
       <approach-speed-kts>100.0</approach-speed-kts>
       <touchdown-speed-kts>80.0</touchdown-speed-kts>
@@ -682,7 +682,7 @@
     <aircraft>
       <type>J31</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>2080.0</climbrate-fpm>
+      <climb-rate-fpm>2080.0</climb-rate-fpm>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
       <cruise-speed-kts>230.0</cruise-speed-kts>
       <approach-speed-kts>125.0</approach-speed-kts>
@@ -700,13 +700,13 @@
     <aircraft>
       <type>BEH</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>2625.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>2625.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
-      <climbspeed-kts>160.0</climbspeed-kts>
+      <climb-speed-kts>160.0</climb-speed-kts>
       <cruise-speed-kts>260.0</cruise-speed-kts>
-      <decent-speed-kts>180.0</decent-speed-kts>
+      <descent-speed-kts>180.0</descent-speed-kts>
       <approach-speed-kts>118.0</approach-speed-kts>
       <touchdown-speed-kts>110.0</touchdown-speed-kts>
     </aircraft>
@@ -724,7 +724,7 @@
     <aircraft>
       <type>B200</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>2450.0</climbrate-fpm>
+      <climb-rate-fpm>2450.0</climb-rate-fpm>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
       <cruise-speed-kts>260.0</cruise-speed-kts>
       <approach-speed-kts>110.0</approach-speed-kts>
@@ -741,13 +741,13 @@
     <aircraft>
       <type>C310</type>
       <base>light</base>
-      <climbrate-fpm>1000.0</climbrate-fpm>
-      <decentrate-fpm>800.0</decentrate-fpm>
+      <climb-rate-fpm>1000.0</climb-rate-fpm>
+      <descent-rate-fpm>800.0</descent-rate-fpm>
       <rotate-speed-kts>90.0</rotate-speed-kts>
       <takeoff-speed-kts>95.0</takeoff-speed-kts>
-      <climbspeed-kts>125.0</climbspeed-kts>
+      <climb-speed-kts>125.0</climb-speed-kts>
       <cruise-speed-kts>175.0</cruise-speed-kts>
-      <decent-speed-kts>150.0</decent-speed-kts>
+      <descent-speed-kts>150.0</descent-speed-kts>
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>94.0</touchdown-speed-kts>
     </aircraft>
@@ -763,7 +763,7 @@
     <aircraft>
       <type>CN1</type>
       <base>light</base>
-      <climbrate-fpm>840.0</climbrate-fpm>
+      <climb-rate-fpm>840.0</climb-rate-fpm>
       <takeoff-speed-kts>65.0</takeoff-speed-kts>
       <cruise-speed-kts>115.0</cruise-speed-kts>
       <approach-speed-kts>70.0</approach-speed-kts>
@@ -784,13 +784,13 @@
     <aircraft>
       <type>C208</type>
       <base>light</base>
-      <climbrate-fpm>500.0</climbrate-fpm>
-      <decentrate-fpm>500.0</decentrate-fpm>
+      <climb-rate-fpm>500.0</climb-rate-fpm>
+      <descent-rate-fpm>500.0</descent-rate-fpm>
       <rotate-speed-kts>80.0</rotate-speed-kts>
       <takeoff-speed-kts>85.0</takeoff-speed-kts>
-      <climbspeed-kts>130.0</climbspeed-kts>
+      <climb-speed-kts>130.0</climb-speed-kts>
       <cruise-speed-kts>160.0</cruise-speed-kts>
-      <decent-speed-kts>150.0</decent-speed-kts>
+      <descent-speed-kts>150.0</descent-speed-kts>
       <approach-speed-kts>120.0</approach-speed-kts>
       <touchdown-speed-kts>75.0</touchdown-speed-kts>
     </aircraft>
@@ -807,13 +807,13 @@
     <aircraft>
       <type>CNJ</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2000.0</climbrate-fpm>
-      <decentrate-fpm>3000.0</decentrate-fpm>
+      <climb-rate-fpm>2000.0</climb-rate-fpm>
+      <descent-rate-fpm>3000.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>115.0</takeoff-speed-kts>
-      <climbspeed-kts>240.0</climbspeed-kts>
+      <climb-speed-kts>240.0</climb-speed-kts>
       <cruise-speed-kts>360.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>220.0</approach-speed-kts>
       <touchdown-speed-kts>115.0</touchdown-speed-kts>
     </aircraft>
@@ -831,13 +831,13 @@
     <aircraft>
       <type>ARJ</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2000.0</climbrate-fpm>
-      <decentrate-fpm>3000.0</decentrate-fpm>
+      <climb-rate-fpm>2000.0</climb-rate-fpm>
+      <descent-rate-fpm>3000.0</descent-rate-fpm>
       <rotate-speed-kts>120.0</rotate-speed-kts>
       <takeoff-speed-kts>125.0</takeoff-speed-kts>
-      <climbspeed-kts>220.0</climbspeed-kts>
+      <climb-speed-kts>220.0</climb-speed-kts>
       <cruise-speed-kts>400.0</cruise-speed-kts>
-      <decent-speed-kts>250.0</decent-speed-kts>
+      <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>200.0</approach-speed-kts>
       <touchdown-speed-kts>125.0</touchdown-speed-kts>
     </aircraft>
@@ -863,13 +863,13 @@
     <aircraft>
       <type>YK4</type>
       <base>jet_transport</base>
-      <climbrate-fpm>1300.0</climbrate-fpm>
-      <decentrate-fpm>2500.0</decentrate-fpm>
+      <climb-rate-fpm>1300.0</climb-rate-fpm>
+      <descent-rate-fpm>2500.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>200.0</climbspeed-kts>
+      <climb-speed-kts>200.0</climb-speed-kts>
       <cruise-speed-kts>245.0</cruise-speed-kts>
-      <decent-speed-kts>200.0</decent-speed-kts>
+      <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
     </aircraft>
@@ -883,13 +883,13 @@
     <aircraft>
       <type>YK2</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2500.0</climbrate-fpm>
-      <decentrate-fpm>3500.0</decentrate-fpm>
+      <climb-rate-fpm>2500.0</climb-rate-fpm>
+      <descent-rate-fpm>3500.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>120.0</takeoff-speed-kts>
-      <climbspeed-kts>270.0</climbspeed-kts>
+      <climb-speed-kts>270.0</climb-speed-kts>
       <cruise-speed-kts>400.0</cruise-speed-kts>
-      <decent-speed-kts>270.0</decent-speed-kts>
+      <descent-speed-kts>270.0</descent-speed-kts>
       <approach-speed-kts>180.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -905,13 +905,13 @@
     <aircraft>
       <type>TU3</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2000.0</climbrate-fpm>
-      <decentrate-fpm>3500.0</decentrate-fpm>
+      <climb-rate-fpm>2000.0</climb-rate-fpm>
+      <descent-rate-fpm>3500.0</descent-rate-fpm>
       <rotate-speed-kts>140.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
-      <climbspeed-kts>270.0</climbspeed-kts>
+      <climb-speed-kts>270.0</climb-speed-kts>
       <cruise-speed-kts>400.0</cruise-speed-kts>
-      <decent-speed-kts>270.0</decent-speed-kts>
+      <descent-speed-kts>270.0</descent-speed-kts>
       <approach-speed-kts>180.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
     </aircraft>
@@ -925,13 +925,13 @@
     <aircraft>
       <type>TU5</type>
       <base>jet_transport</base>
-      <climbrate-fpm>3000.0</climbrate-fpm>
-      <decentrate-fpm>3500.0</decentrate-fpm>
+      <climb-rate-fpm>3000.0</climb-rate-fpm>
+      <descent-rate-fpm>3500.0</descent-rate-fpm>
       <rotate-speed-kts>140.0</rotate-speed-kts>
       <takeoff-speed-kts>150.0</takeoff-speed-kts>
-      <climbspeed-kts>290.0</climbspeed-kts>
+      <climb-speed-kts>290.0</climb-speed-kts>
       <cruise-speed-kts>475.0</cruise-speed-kts>
-      <decent-speed-kts>290.0</decent-speed-kts>
+      <descent-speed-kts>290.0</descent-speed-kts>
       <approach-speed-kts>250.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -945,13 +945,13 @@
     <aircraft>
       <type>T20</type>
       <base>jet_transport</base>
-      <climbrate-fpm>3500.0</climbrate-fpm>
-      <decentrate-fpm>3500.0</decentrate-fpm>
+      <climb-rate-fpm>3500.0</climb-rate-fpm>
+      <descent-rate-fpm>3500.0</descent-rate-fpm>
       <rotate-speed-kts>150.0</rotate-speed-kts>
       <takeoff-speed-kts>160.0</takeoff-speed-kts>
-      <climbspeed-kts>290.0</climbspeed-kts>
+      <climb-speed-kts>290.0</climb-speed-kts>
       <cruise-speed-kts>450.0</cruise-speed-kts>
-      <decent-speed-kts>290.0</decent-speed-kts>
+      <descent-speed-kts>290.0</descent-speed-kts>
       <approach-speed-kts>250.0</approach-speed-kts>
       <touchdown-speed-kts>140.0</touchdown-speed-kts>
     </aircraft>
@@ -969,13 +969,13 @@
     <aircraft>
       <type>AN4</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1500.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>1500.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>200.0</climbspeed-kts>
+      <climb-speed-kts>200.0</climb-speed-kts>
       <cruise-speed-kts>240.0</cruise-speed-kts>
-      <decent-speed-kts>240.0</decent-speed-kts>
+      <descent-speed-kts>240.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
     </aircraft>
@@ -993,13 +993,13 @@
     <aircraft>
       <type>AN6</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1500.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>1500.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>110.0</rotate-speed-kts>
       <takeoff-speed-kts>120.0</takeoff-speed-kts>
-      <climbspeed-kts>200.0</climbspeed-kts>
+      <climb-speed-kts>200.0</climb-speed-kts>
       <cruise-speed-kts>235.0</cruise-speed-kts>
-      <decent-speed-kts>230.0</decent-speed-kts>
+      <descent-speed-kts>230.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
     </aircraft>
@@ -1017,13 +1017,13 @@
     <aircraft>
       <type>A28</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>900.0</climbrate-fpm>
-      <decentrate-fpm>800.0</decentrate-fpm>
+      <climb-rate-fpm>900.0</climb-rate-fpm>
+      <descent-rate-fpm>800.0</descent-rate-fpm>
       <rotate-speed-kts>75.0</rotate-speed-kts>
       <takeoff-speed-kts>80.0</takeoff-speed-kts>
-      <climbspeed-kts>140.0</climbspeed-kts>
+      <climb-speed-kts>140.0</climb-speed-kts>
       <cruise-speed-kts>180.0</cruise-speed-kts>
-      <decent-speed-kts>170.0</decent-speed-kts>
+      <descent-speed-kts>170.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>90.0</touchdown-speed-kts>
     </aircraft>
@@ -1058,13 +1058,13 @@
     <aircraft>
       <type>L4T</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1000.0</climbrate-fpm>
-      <decentrate-fpm>800.0</decentrate-fpm>
+      <climb-rate-fpm>1000.0</climb-rate-fpm>
+      <descent-rate-fpm>800.0</descent-rate-fpm>
       <rotate-speed-kts>80.0</rotate-speed-kts>
       <takeoff-speed-kts>85.0</takeoff-speed-kts>
-      <climbspeed-kts>160.0</climbspeed-kts>
+      <climb-speed-kts>160.0</climb-speed-kts>
       <cruise-speed-kts>200.0</cruise-speed-kts>
-      <decent-speed-kts>200.0</decent-speed-kts>
+      <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>200.0</approach-speed-kts>
       <touchdown-speed-kts>85.0</touchdown-speed-kts>
     </aircraft>
@@ -1081,13 +1081,13 @@
     <aircraft>
       <type>PL2</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>1000.0</climbrate-fpm>
-      <decentrate-fpm>1500.0</decentrate-fpm>
+      <climb-rate-fpm>1000.0</climb-rate-fpm>
+      <descent-rate-fpm>1500.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>130.0</climbspeed-kts>
+      <climb-speed-kts>130.0</climb-speed-kts>
       <cruise-speed-kts>270.0</cruise-speed-kts>
-      <decent-speed-kts>210.0</decent-speed-kts>
+      <descent-speed-kts>210.0</descent-speed-kts>
       <approach-speed-kts>180.0</approach-speed-kts>
       <touchdown-speed-kts>85.0</touchdown-speed-kts>
     </aircraft>
@@ -1102,13 +1102,13 @@
     <aircraft>
       <type>SU9</type>
       <base>jet_transport</base>
-      <climbrate-fpm>2500.0</climbrate-fpm>
-      <decentrate-fpm>2800.0</decentrate-fpm>
+      <climb-rate-fpm>2500.0</climb-rate-fpm>
+      <descent-rate-fpm>2800.0</descent-rate-fpm>
       <rotate-speed-kts>150.0</rotate-speed-kts>
       <takeoff-speed-kts>160.0</takeoff-speed-kts>
-      <climbspeed-kts>280.0</climbspeed-kts>
+      <climb-speed-kts>280.0</climb-speed-kts>
       <cruise-speed-kts>450.0</cruise-speed-kts>
-      <decent-speed-kts>280.0</decent-speed-kts>
+      <descent-speed-kts>280.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
     </aircraft>
@@ -1128,13 +1128,13 @@
     <aircraft>
       <type>glid</type>
       <base>light</base>
-      <climbrate-fpm>450.0</climbrate-fpm>
-      <decentrate-fpm>450.0</decentrate-fpm>
+      <climb-rate-fpm>450.0</climb-rate-fpm>
+      <descent-rate-fpm>450.0</descent-rate-fpm>
       <rotate-speed-kts>34.0</rotate-speed-kts>
       <takeoff-speed-kts>40.0</takeoff-speed-kts>
-      <climbspeed-kts>65.0</climbspeed-kts>
+      <climb-speed-kts>65.0</climb-speed-kts>
       <cruise-speed-kts>75.0</cruise-speed-kts>
-      <decent-speed-kts>70.0</decent-speed-kts>
+      <descent-speed-kts>70.0</descent-speed-kts>
       <approach-speed-kts>60.0</approach-speed-kts>
       <touchdown-speed-kts>50.0</touchdown-speed-kts>
     </aircraft>
@@ -1148,13 +1148,13 @@
     <aircraft>
       <type>BN2</type>
       <base>turboprop_transport</base>
-      <climbrate-fpm>860.0</climbrate-fpm>
-      <decentrate-fpm>860.0</decentrate-fpm>
+      <climb-rate-fpm>860.0</climb-rate-fpm>
+      <descent-rate-fpm>860.0</descent-rate-fpm>
       <rotate-speed-kts>100.0</rotate-speed-kts>
       <takeoff-speed-kts>110.0</takeoff-speed-kts>
-      <climbspeed-kts>126.0</climbspeed-kts>
+      <climb-speed-kts>126.0</climb-speed-kts>
       <cruise-speed-kts>126.0</cruise-speed-kts>
-      <decent-speed-kts>126.0</decent-speed-kts>
+      <descent-speed-kts>126.0</descent-speed-kts>
       <approach-speed-kts>100.0</approach-speed-kts>
       <touchdown-speed-kts>60.0</touchdown-speed-kts>
     </aircraft>

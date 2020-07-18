@@ -61,8 +61,9 @@ void main()
 	float hmap = 1.0 - nmap.a;
 	nmap  = texture2D(normal_texture, gl_TexCoord[0].st -  0.0005 * grad_dir * hmap * 2.0 * parallaxFactor);
 
-	// sanity processing for normal map when alpha is close to zero
-	nmap.rgb = normalize(nmap.rgb);
+	
+	// nmap.rgb should not be normalized, it adversely modifies  N = 2 nmap - 1
+	// nmap.rgb = normalize(nmap.rgb);
 	//if (nmap.b < 0.0) {nmap.b = -nmap.b;}
 		
 	vec3 N = nmap.rgb * 2.0 - 1.0;
@@ -125,8 +126,8 @@ void main()
 
 
 
-
-    if (NdotL > 0.0) {
+    // strictly positive produces visible hard cut
+    if (NdotL >= 0.0) {
         color += diff_term * NdotL * (1.0-shadowTexel.a);
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)

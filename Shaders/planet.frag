@@ -95,8 +95,8 @@ void main()
 
 
 
-
-    if (NdotL > 0.0) {
+    // strictly positive produces visible hard cut
+    if (NdotL >= 0.0) {
         color += diff_term * NdotL * (1.0-shadowTexel.a);
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)

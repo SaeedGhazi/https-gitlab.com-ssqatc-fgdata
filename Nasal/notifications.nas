@@ -4,7 +4,7 @@
  #
  #	File Type            : Implementation File
  #
- #	Description          : Messages that are applicable across all models and do not specifically relate to a single sysmte
+ #	Description          : Messages that are applicable across all models and do not specifically relate to a single system
  #	                     : - mostly needed when using the mutiplayer bridge
  #
  #	Author               : Richard Harrison (richard@zaretto.com)
@@ -27,6 +27,7 @@ var AircraftControlNotification_Id = 17;
 var GeoEventNotification_Id = 18;
 # event ID 19 reserved for armaments and stores (model defined).
 var PFDEventNotification_Id = 20;
+var ArmamentInFlightNotification = 21;
 
 #
 # PropertySyncNotificationBase is a wrapper class for allow properties to be synchronized between
@@ -559,6 +560,7 @@ var PFDEventNotification =
     NavData : 7,        #event parameter contrains a single { Id: , Value: } tuple requesting a particular type of NavData
     FMSData : 8,        #event parameter containing a hash of updated GPS/FMS information (track, ground-speed, waypoint legs etc.)
     ADCData : 9,        #event parameter containing a hash of updated Air Data Computer information (track, ground-speed etc.)
+    FuelData: 10,       #event parameter contains a single { Id: , Value: } tuple either updating or requesting a particular type of fuel data
 
     DefaultType : "PFDEventNotification",
 

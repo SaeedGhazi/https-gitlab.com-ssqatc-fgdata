@@ -20,7 +20,7 @@
  #
  #	Version              : 4.8
  #
- #  Copyright Â© 2016 Richard Harrison           Released under GPL V2
+ #  Copyright © 2016 Richard Harrison           Released under GPL V2
  #
  #---------------------------------------------------------------------------*/
 
@@ -291,6 +291,7 @@ var Recipient =
     },
 };
 
+
 #
 # Instantiate a Global Transmitter, this is a convenience and a known starting point. Generally most classes will
 # use this transmitters, however other transmitters can be created and merely use the global transmitter to discover each other
@@ -299,25 +300,30 @@ var GlobalTransmitter =  Transmitter.new("GlobalTransmitter");
 #
 # Base method of transferring all numeric based values.
 # Using the same techinque as base64 - except this is base248 because we can use a much wider range of characters.
-# 
+#
 var BinaryAsciiTransfer = 
 {
-    alphabet : chr(1)~chr(2)~chr(3)~chr(4)~chr(5)~chr(6)~chr(7)~chr(8)~chr(9)~chr(10)~chr(11)~chr(12)~chr(13)
-               ~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)
-               ~chr(26)~chr(27)~chr(28)~chr(29)~chr(30)~chr(31)~chr(34)
+    #excluded chars 32 (<space>), 33 (!), 35 (#), 36($), 126 (~), 127 (<del>)
+    alphabet : 
+                 chr(1) ~chr(2) ~chr(3) ~chr(4) ~chr(5) ~chr(6) ~chr(7) ~chr(8) ~chr(9)
+        ~chr(10)~chr(11)~chr(12)~chr(13)~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)
+        ~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)~chr(26)~chr(27)~chr(28)~chr(29)
+        ~chr(30)~chr(31)                ~chr(34)
                ~"%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
-               ~chr(128)~chr(129)~chr(130)~chr(131)~chr(132)~chr(133)~chr(134)~chr(135)~chr(136)~chr(137)~chr(138)
-               ~chr(139)~chr(140)~chr(141)~chr(142)~chr(143)~chr(144)~chr(145)~chr(146)~chr(147)~chr(148)~chr(149)
-               ~chr(150)~chr(151)~chr(152)~chr(153)~chr(154)~chr(155)~chr(156)~chr(157)~chr(158)~chr(159)~chr(160)
-               ~chr(161)~chr(162)~chr(163)~chr(164)~chr(165)~chr(166)~chr(167)~chr(168)~chr(169)~chr(170)~chr(171)
-               ~chr(172)~chr(173)~chr(174)~chr(175)~chr(176)~chr(177)~chr(178)~chr(179)~chr(180)~chr(181)~chr(182)
-               ~chr(183)~chr(184)~chr(185)~chr(186)~chr(187)~chr(188)~chr(189)~chr(190)~chr(191)~chr(192)~chr(193)
-               ~chr(194)~chr(195)~chr(196)~chr(197)~chr(198)~chr(199)~chr(200)~chr(201)~chr(202)~chr(203)~chr(204)
-               ~chr(205)~chr(206)~chr(207)~chr(208)~chr(209)~chr(210)~chr(211)~chr(212)~chr(213)~chr(214)~chr(215)
-               ~chr(216)~chr(217)~chr(218)~chr(219)~chr(220)~chr(221)~chr(222)~chr(223)~chr(224)~chr(225)~chr(226)
-               ~chr(227)~chr(228)~chr(229)~chr(230)~chr(231)~chr(232)~chr(233)~chr(234)~chr(235)~chr(236)~chr(237)
-               ~chr(238)~chr(239)~chr(240)~chr(241)~chr(242)~chr(243)~chr(244)~chr(245)~chr(246)~chr(247)~chr(248)
-               ~chr(249)~chr(250)~chr(251)~chr(252)~chr(253)~chr(254)~chr(255),
+            ~chr(128)~chr(129)
+        ~chr(130)~chr(131)~chr(132)~chr(133)~chr(134)~chr(135)~chr(136)~chr(137)~chr(138)~chr(139)
+        ~chr(140)~chr(141)~chr(142)~chr(143)~chr(144)~chr(145)~chr(146)~chr(147)~chr(148)~chr(149)
+        ~chr(150)~chr(151)~chr(152)~chr(153)~chr(154)~chr(155)~chr(156)~chr(157)~chr(158)~chr(159)
+        ~chr(160)~chr(161)~chr(162)~chr(163)~chr(164)~chr(165)~chr(166)~chr(167)~chr(168)~chr(169)
+        ~chr(170)~chr(171)~chr(172)~chr(173)~chr(174)~chr(175)~chr(176)~chr(177)~chr(178)~chr(179)
+        ~chr(180)~chr(181)~chr(182)~chr(183)~chr(184)~chr(185)~chr(186)~chr(187)~chr(188)~chr(189)
+        ~chr(190)~chr(191)~chr(192)~chr(193)~chr(194)~chr(195)~chr(196)~chr(197)~chr(198)~chr(199)
+        ~chr(200)~chr(201)~chr(202)~chr(203)~chr(204)~chr(205)~chr(206)~chr(207)~chr(208)~chr(209)
+        ~chr(210)~chr(211)~chr(212)~chr(213)~chr(214)~chr(215)~chr(216)~chr(217)~chr(218)~chr(219)
+        ~chr(220)~chr(221)~chr(222)~chr(223)~chr(224)~chr(225)~chr(226)~chr(227)~chr(228)~chr(229)
+        ~chr(230)~chr(231)~chr(232)~chr(233)~chr(234)~chr(235)~chr(236)~chr(237)~chr(238)~chr(239)
+        ~chr(240)~chr(241)~chr(242)~chr(243)~chr(244)~chr(245)~chr(246)~chr(247)~chr(248)~chr(249)
+        ~chr(250)~chr(251)~chr(252)~chr(253)~chr(254)~chr(255),
     # base248: powers of 2 (i.e. po2(x) = f(248 ^ x); 
     # 0 based list so the first item is really[1]; i.e. 124 which is 248/2 as po2 is the magnitude excluding sign
     po2: [1, 124, 30752, 7626496, 1891371008, 469060009984, 116326882476032, 28849066854055936], 
@@ -327,13 +333,12 @@ var BinaryAsciiTransfer =
     empty_encoding: chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1),
     encodeNumeric : func(_num,length,factor)
     {
-#print(BinaryAsciiTransfer.po2[1]);
-		var irange = int(BinaryAsciiTransfer.po2[length] / factor);
-		var scale = int(irange / factor);
-#print("EC ",irange, " sc=",scale);
 		var num = int(_num / factor);
-		if (num < -scale) num = -scale;
-		else if (num > scale) num = scale;
+
+		var irange = int(BinaryAsciiTransfer.po2[length]);
+
+		if (num < -irange) num = -irange;
+		else if (num > irange) num = irange;
 
 		num = int(num + irange);
 
@@ -355,8 +360,8 @@ var BinaryAsciiTransfer =
     retval : {value:0, pos:0},
     decodeNumeric : func(str, length, factor, pos)
     {
-		var irange = int(BinaryAsciiTransfer.po2[length]/factor);
-		var power = length - 1;
+		var irange = int(BinaryAsciiTransfer.po2[length]);
+        var power = length-1;
         BinaryAsciiTransfer.retval.value = 0;
         BinaryAsciiTransfer.retval.pos = pos;
 
@@ -461,11 +466,11 @@ var TransferFixedDouble =
 {
     encode : func(v, length, factor)
     {
-        return BinaryAsciiTransfer.encodeNumeric(int(v), length, factor);
+        return BinaryAsciiTransfer.encodeNumeric(v, length, factor);
     },
     decode : func(v, length, factor, pos)
     {
-        return BinaryAsciiTransfer.decodeNumeric(v, length, pos, factor);
+        return BinaryAsciiTransfer.decodeNumeric(v, length, factor,  pos);
     }
 };
 
@@ -499,30 +504,89 @@ var TransferByte =
 
 var TransferCoord = 
 {
-# 28 bits = 268435456 (268 435 456)
-# to transfer lat lon (360 degree range) 268435456/360=745654
-# we could use different factors for lat lon due to the differing range, however
-# this will be fine.
-# 1 degree = 110574 meters;
+# LatLon scaling; 
+# 1 degree = 110574 meters; 
+# requires 4 bytes for 1 meter resolution.
+# permits 0.1 meter resolution.
+    LatLonLength: 4,
+    LatLonFactor: 0.000001, 
+    AltLength: 3,
+
     encode : func(v)
     {
-        return  BinaryAsciiTransfer.encodeNumeric((v.lat()+90)*745654,5, 1.0)
-        ~ BinaryAsciiTransfer.encodeNumeric((v.lon()+180)*745654,5, 1.0) 
-        ~ TransferNumeric.encode(v.alt(), 3, 1.0);
+        return  BinaryAsciiTransfer.encodeNumeric(v.lat(), TransferCoord.LatLonLength, TransferCoord.LatLonFactor)
+        ~ BinaryAsciiTransfer.encodeNumeric(v.lon(), TransferCoord.LatLonLength, TransferCoord.LatLonFactor) 
+        ~ emesary.TransferInt.encode(v.alt(), TransferCoord.AltLength);
     },
     decode : func(v,pos)
     {
-        var dv = BinaryAsciiTransfer.decodeNumeric(v,5, 1.0  ,pos); 
-        var lat = (dv.value / 745654)-90;
-        dv = BinaryAsciiTransfer.decodeNumeric(v,5, 1.0  ,dv.pos);
-        var lon = (dv.value / 745654)-180;
-        dv = TransferNumeric.decode(v, 3, 1.0  ,dv.pos); 
+        var dv = BinaryAsciiTransfer.decodeNumeric(v, TransferCoord.LatLonLength, TransferCoord.LatLonFactor,   pos); 
+        var lat = (dv.value);
+        dv = BinaryAsciiTransfer.decodeNumeric(v, TransferCoord.LatLonLength, TransferCoord.LatLonFactor,   dv.pos);
+        var lon = (dv.value);
+        dv = emesary.TransferInt.decode(v, TransferCoord.AltLength, dv.pos); 
         var alt =dv.value;
 
         dv.value = geo.Coord.new().set_latlon(lat, lon).set_alt(alt);
         return dv;
     }
 };
+
+
+# genericEmesaryGlobalTransmitterTransmit  allowes to use the emesary.GlobalTransmitter via fgcommand
+# which in turn allows using it in XML bindings, e.g.
+#   <binding>
+#       <command>emesary-transmit</command>
+#       <type>cockpit-switch</type>
+#       <ident>eicas-page-select</ident>
+#       <page>hydraulic</page>
+#   </binding>
+#
+var genericEmesaryGlobalTransmitterTransmit  = func(node)
+{
+    var transmitter = emesary.GlobalTransmitter;
+    var t = node.getNode("transmitter",1).getValue();
+    if (t != nil) {
+        transmitter = emesary.getTransmitter(t);
+        if (transmitter == nil) {
+            logprint(LOG_WARN, "Invalid transmitter "~t);
+            return;
+        }
+    }
+    var type = node.getNode("type").getValue();
+    if (type == nil) {
+        logprint(LOG_WARN, "emesary-transmit requires a type");
+        return;
+    }
+    var ident = node.getNode("ident").getValue();
+    if (ident == nil) {
+        logprint(LOG_WARN, "emesary-transmit requires an ident");
+        return;
+    }    
+    var typeid = node.getNode("typeid",1).getValue() or 0;
+    if (typeid == 0) { 
+        typeid = TypeIdUnspecified;
+        logprint(LOG_WARN, "emesary-transmit using generic typeid ", typeid);
+    }
+    
+    var message = emesary.Notification.new(type, ident, typeid);
+    node.removeChild("type");
+    node.removeChild("id");
+    node.removeChild("typeid");
+
+    # add remaining nodes to the message hash
+    var children = node.getValues();
+    if (children != nil) {
+        foreach (var key; keys(children)) {
+            message[key] = children[key];
+        }
+    }
+    transmitter.NotifyAll(message);
+};
+
+removecommand("emesary-transmit"); #in case of reload
+addcommand("emesary-transmit", genericEmesaryGlobalTransmitterTransmit);
+
 #setprop("/sim/startup/terminal-ansi-colors",0);
 #for(i=-1;i<=1;i+=0.1)
 #print ("i ",i, " --> ", (TransferNorm.decode(TransferNorm.encode(i,2), 2,0)).value);

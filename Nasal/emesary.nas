@@ -20,7 +20,7 @@
  #
  #	Version              : 4.8
  #
- #  Copyright Â© 2016 Richard Harrison           Released under GPL V2
+ #  Copyright © 2016 Richard Harrison           Released under GPL V2
  #
  #---------------------------------------------------------------------------
  # Classes in this file:
@@ -95,11 +95,12 @@ var Transmitter =
         {
             logprint(LOG_INFO, "Transmitter.Register: argument is not a Recipient object");
         }
-        #not having a Receive function is an error
+        # Warn if recipient doesn't have a Receive function - this is not an error because
+        #a receive function could be added after the recipient has been registered - so it is
+        # deprecated to do this.
         if (!isfunc(recipient["Receive"]))
         {
             logprint(DEV_ALERT, "Transmitter.Register: Error, argument has no Receive method!");
-            return 0;
         }
         foreach (var r; me.Recipients)
         {
@@ -309,18 +310,30 @@ var Notification =
             logprint(DEV_ALERT, "Notification.new: _type must be a scalar!");
             return nil;
         }
-        if (!isscalar(_ident)) {
+        if (!isscalar(_ident) and _ident != nil) {
             logprint(DEV_ALERT, "Notification.new: _ident is not scalar but ", typeof(_ident));
             return nil;
         }
         
-        if (_typeid == 0) {
-            NotificationAutoTypeId += 1;
+# typeID of 0 means that the notification does not have an assigned type ID
+#           <0 means an automatic ID is required
+#           >= 16 is a reserved ID
+# normally the typeID should be unique across all of FlightGear.
+# use of automatic ID's is really only for notifications that will never be bridged,
+# or more accurate when bridged the type isn't going to be known fully.
+
+        if (_typeid < 0) {
+            if (_ident != nil){
+                logprint(DEV_ALERT, "_typeid can only be omitted when registering class");
+                return nil;
+            }
+
             # IDs >= 16 are reserved; see http://wiki.flightgear.org/Emesary_Notifications
-            if (NotificationAutoTypeId == 16) {
+            if (NotificationAutoTypeId >= 16) {
                 logprint(LOG_ALERT, "Notification: AutoTypeID limit exceeded: "~NotificationAutoTypeId);
                 return nil;
             }
+            NotificationAutoTypeId += 1;
             _typeid = NotificationAutoTypeId;
         }
 
@@ -411,12 +424,12 @@ var BinaryAsciiTransfer =
 {
     #excluded chars 32 (<space>), 33 (!), 35 (#), 36($), 126 (~), 127 (<del>)
     alphabet : 
-                 chr(1) ~chr(2) ~chr(3) ~chr(4) ~chr(5) ~chr(6) ~chr(7) ~chr(8) ~chr(9)
-        ~chr(10)~chr(11)~chr(12)~chr(13)~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)
+         chr(1)~chr(2)~chr(3)~chr(4)~chr(5)~chr(6)~chr(7)~chr(8)
+        ~chr(9)~chr(10)~chr(11)~chr(12)~chr(13)~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)
         ~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)~chr(26)~chr(27)~chr(28)~chr(29)
-        ~chr(30)~chr(31)                ~chr(34)
+        ~chr(30)~chr(31)~chr(34)
         ~"%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
-            ~chr(128)~chr(129)
+        ~chr(128)~chr(129)
         ~chr(130)~chr(131)~chr(132)~chr(133)~chr(134)~chr(135)~chr(136)~chr(137)~chr(138)~chr(139)
         ~chr(140)~chr(141)~chr(142)~chr(143)~chr(144)~chr(145)~chr(146)~chr(147)~chr(148)~chr(149)
         ~chr(150)~chr(151)~chr(152)~chr(153)~chr(154)~chr(155)~chr(156)~chr(157)~chr(158)~chr(159)
@@ -439,13 +452,12 @@ var BinaryAsciiTransfer =
     empty_encoding: chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1)~chr(1),
     encodeNumeric : func(_num,length,factor)
     {
-#print(BinaryAsciiTransfer.po2[1]);
-		var irange = int(BinaryAsciiTransfer.po2[length] / factor);
-		var scale = int(irange / factor);
-#print("EC ",irange, " sc=",scale);
 		var num = int(_num / factor);
-		if (num < -scale) num = -scale;
-		else if (num > scale) num = scale;
+
+		var irange = int(BinaryAsciiTransfer.po2[length]);
+
+		if (num < -irange) num = -irange;
+		else if (num > irange) num = irange;
 
 		num = int(num + irange);
 
@@ -467,7 +479,7 @@ var BinaryAsciiTransfer =
     retval : {value:0, pos:0},
     decodeNumeric : func(str, length, factor, pos)
     {
-		var irange = int(BinaryAsciiTransfer.po2[length]/factor);
+		var irange = int(BinaryAsciiTransfer.po2[length]);
         var power = length-1;
         BinaryAsciiTransfer.retval.value = 0;
         BinaryAsciiTransfer.retval.pos = pos;
@@ -573,11 +585,11 @@ var TransferFixedDouble =
 {
     encode : func(v, length, factor)
     {
-        return BinaryAsciiTransfer.encodeNumeric(int(v), length, factor);
+        return BinaryAsciiTransfer.encodeNumeric(v, length, factor);
     },
     decode : func(v, length, factor, pos)
     {
-        return BinaryAsciiTransfer.decodeNumeric(v, length, pos, factor);
+        return BinaryAsciiTransfer.decodeNumeric(v, length, factor,  pos);
     }
 };
 
@@ -611,24 +623,27 @@ var TransferByte =
 
 var TransferCoord = 
 {
-# 28 bits = 268435456 (268 435 456)
-# to transfer lat lon (360 degree range) 268435456/360=745654
-# we could use different factors for lat lon due to the differing range, however
-# this will be fine.
-# 1 degree = 110574 meters;
+# LatLon scaling; 
+# 1 degree = 110574 meters; 
+# requires 4 bytes for 1 meter resolution.
+# permits 0.1 meter resolution.
+    LatLonLength: 4,
+    LatLonFactor: 0.000001, 
+    AltLength: 3,
+
     encode : func(v)
     {
-        return  BinaryAsciiTransfer.encodeNumeric((v.lat()+90)*745654,5, 1.0)
-        ~ BinaryAsciiTransfer.encodeNumeric((v.lon()+180)*745654,5, 1.0) 
-        ~ TransferNumeric.encode(v.alt(), 3, 1.0);
+        return  BinaryAsciiTransfer.encodeNumeric(v.lat(), TransferCoord.LatLonLength, TransferCoord.LatLonFactor)
+        ~ BinaryAsciiTransfer.encodeNumeric(v.lon(), TransferCoord.LatLonLength, TransferCoord.LatLonFactor) 
+        ~ emesary.TransferInt.encode(v.alt(), TransferCoord.AltLength);
     },
     decode : func(v,pos)
     {
-        var dv = BinaryAsciiTransfer.decodeNumeric(v,5, 1.0  ,pos); 
-        var lat = (dv.value / 745654)-90;
-        dv = BinaryAsciiTransfer.decodeNumeric(v,5, 1.0  ,dv.pos);
-        var lon = (dv.value / 745654)-180;
-        dv = TransferNumeric.decode(v, 3, 1.0  ,dv.pos); 
+        var dv = BinaryAsciiTransfer.decodeNumeric(v, TransferCoord.LatLonLength, TransferCoord.LatLonFactor,   pos); 
+        var lat = (dv.value);
+        dv = BinaryAsciiTransfer.decodeNumeric(v, TransferCoord.LatLonLength, TransferCoord.LatLonFactor,   dv.pos);
+        var lon = (dv.value);
+        dv = emesary.TransferInt.decode(v, TransferCoord.AltLength, dv.pos); 
         var alt =dv.value;
 
         dv.value = geo.Coord.new().set_latlon(lat, lon).set_alt(alt);

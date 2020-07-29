@@ -1507,7 +1507,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="tips/tip:17" translate="yes">
           <source>Press / to explore the internals of the simulator</source>
-          <target>Drücke "/", um Internas des Simulators zu erkunden!</target>
+          <target>Drücke "/", um Interna des Simulators zu erkunden!</target>
         </trans-unit>
         <trans-unit approved="yes" id="tips/tip:18" translate="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>

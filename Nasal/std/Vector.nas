@@ -21,8 +21,6 @@
 if (ishash(globals["std"]) and ishash(std["Vector"]))
     return;
 
-var min = func(a, b) { a < b ? a : b }
-var max = func(a, b) { a > b ? a : b }
 var Vector = {
 
     new: func (vector=nil, name="") {

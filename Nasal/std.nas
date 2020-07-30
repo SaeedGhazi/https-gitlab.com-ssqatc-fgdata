@@ -19,3 +19,6 @@ var files = [
 foreach (var file; files) {
     io.include(include_path~file~".nas");
 }
+
+var min = func(a, b) { a < b ? a : b }
+var max = func(a, b) { a > b ? a : b }

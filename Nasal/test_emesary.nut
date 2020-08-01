@@ -274,3 +274,141 @@ test_transfer = func {
     teststring("qqqqqqqqqq-");
 }
 
+
+test_mp_bridge = func {
+     logprint(LOG_INFO,"Emesary MP bridge tests start");
+
+     var testMpPropertyPath = "/ai[0]/models[0]/multiplayer[11]";
+     var mp_listener = nil;
+     var testRoutedNotifications = [notifications.GeoEventNotification.new(nil)];
+     var testBridgedTransmitter = emesary.Transmitter.new("geoOutgoingBridge");
+     var testOutgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-14mp.geo",testRoutedNotifications, 18, "", testBridgedTransmitter);
+     testOutgoingBridge.MPStringMaxLen = 150;
+
+     var msgList = [];
+     var testRecipient = emesary.Recipient.new("Test");
+
+     valuesWithinRange = func(value1, value2, range){
+         return math.abs(value1 - value2) <= range;
+     }
+     testRecipient.FailCount = 0;
+     testRecipient.Receive = func(notification) {
+         if (notification.NotificationType == "GeoEventNotification") {
+             #        print ("recv(0): type=",notification.NotificationType, " fromIncoming=",notification.FromIncomingBridge);
+             if (notification.Name=="DONE") {
+                 printf("Emesary MP Bridge tests completed; %d failure",me.FailCount);
+
+                 # now clean up;
+                 emesary.GlobalTransmitter.DeRegister(testRecipient);
+
+                 setprop("/ai/models/model-removed",testMpPropertyPath);
+
+                 if (mp_listener != nil)
+                     removelistener(mp_listener);
+
+                 return emesary.Transmitter.ReceiptStatus_NotProcessed; # we're not processing it, just looking
+             }
+
+             foreach (var msg; msgList) {
+                 if (msg.SecondaryKind == notification.SecondaryKind) {
+                     #print("Check msg ",msg.Kind);
+                     var failed = 0;
+
+                     if (math.abs(msg.Position.lat() - notification.Position.lat()) > 0.00001 or 
+                         math.abs(msg.Position.lon() - notification.Position.lon()) > 0.00001 or 
+                         math.abs(msg.Position.alt() - notification.Position.alt()) > 1) {
+                         failed = 1;
+                         printf("Fail Position:(%d) %s != %s",msg.Kind, msg.Position, notification.Position);
+                     }
+
+                     if (msg.Name != notification.Name) {
+                         failed = 1;
+                         printf("Fail Name:(%d) %s != %s",msg.Kind, msg.Name, notification.Name);
+                     }
+
+                     if (msg.Kind != notification.Kind) {
+                         failed = 1;
+                         printf("Fail Kind:(%d) %s != %s",msg.Kind, msg.Kind, notification.Kind);
+                     }
+
+                     if (msg.SecondaryKind != notification.SecondaryKind) {
+                         failed = 1;
+                         printf("Fail SecondaryKind:(%d) %s != %s",msg.Kind, msg.SecondaryKind, notification.SecondaryKind);
+                     }
+
+                     if (!valuesWithinRange(msg.u_fps, notification.u_fps,1)) {
+                         failed = 1;
+                         printf("Fail u_fps:(%d) %s != %s",msg.Kind, msg.u_fps, notification.u_fps);
+                     }
+
+                     if (!valuesWithinRange(msg.v_fps, notification.v_fps,1)) {
+                         failed = 1;
+                         printf("Fail v_fps:(%d) %s != %s",msg.Kind, msg.v_fps, notification.v_fps);
+                     }
+
+                     if (!valuesWithinRange(msg.w_fps, notification.w_fps,1)) {
+                         failed = 1;
+                         printf("Fail w_fps:(%d) %s != %s",msg.Kind, msg.w_fps, notification.w_fps);
+                     }
+
+                     if (msg.RemoteCallsign != notification.RemoteCallsign) {
+                         failed = 1;
+                         printf("Fail RemoteCallsign:(%d) %s != %s",msg.Kind, msg.RemoteCallsign, notification.RemoteCallsign);
+                     }
+
+                     if (msg.Flags != notification.Flags) {
+                         failed = 1;
+                         printf("Fail Flags:(%d) %s != %s",msg.Kind, msg.Flags, notification.Flags);
+                     }
+                     if (!failed)
+                         printf("%s (%d) received correctly",notification.NotificationType, notification.Kind);
+                     else
+                         me.FailCount = me.FailCount + 1;
+                     return emesary.Transmitter.ReceiptStatus_NotProcessed; # we're not processing it, just looking
+                 }
+             }
+             print("Failed to locate notification Key=",msg.SecondaryKind);
+             #    debug.dump(notification);
+         }
+         return emesary.Transmitter.ReceiptStatus_NotProcessed; # we're not processing it, just looking
+     }
+
+     # register the test recipient on the global transmitter as that is where messages will be bridged to
+     emesary.GlobalTransmitter.Register(testRecipient);
+
+     # start the incoming bridge - which will connect from the remote bridge (testBridgedTransmitter)
+     # and route the notifications so that they come out of the global transmitter.
+     emesary_mp_bridge.IncomingMPBridge.startMPBridge(testRoutedNotifications, 18, emesary.GlobalTransmitter);
+
+     #
+     # Create the incoming bridge by faking a model appearing
+     #
+     var node = props.getNode(testMpPropertyPath,1);
+     node.getNode("callsign",1).setValue("test-mp");
+     var mpNode = node.getNode("sim/multiplay",1);
+     bridgeNode = mpNode.getNode("emesary/bridge[18]",1);
+
+     #
+     # lastly we need to manually copy the properties from where the outgoing bridge puts them
+     # to where the incoming bridge expects them.
+     # This is normally performed by the multiplayer code - but for test purposes this
+     # allows testing on a single instance.
+     mp_listener = setlistener("/sim/multiplay/emesary/bridge[18]", func(v){
+             bridgeNode.setValue(v.getValue());
+         },0,0);
+
+     # This is what causes the incoming bridge to create a connection between the multiplayer node
+     # and will result in an active incoming bridge 
+     setprop("/ai/models/model-added", testMpPropertyPath);
+
+     #
+     # send out test messages
+     for (var idx=0; idx < 20; idx += 1) {
+         var msg = notifications.GeoEventNotification.new("mhit", "AIM"~idx, 19, idx);
+         testBridgedTransmitter.NotifyAll(msg);
+         append(msgList, msg);
+     }
+     msg = notifications.GeoEventNotification.new("mhit", "DONE", 19, 100);
+     testBridgedTransmitter.NotifyAll(msg);
+}
+

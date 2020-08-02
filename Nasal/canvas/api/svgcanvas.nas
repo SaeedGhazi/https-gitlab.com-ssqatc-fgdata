@@ -20,7 +20,6 @@
 #-------------------------------------------------------------------------------
 
 var SVGCanvas = {
-
     colors: canvas.colors,
     
     # constructor
@@ -52,6 +51,11 @@ var SVGCanvas = {
         return obj;
     },
 
+    del: func() {
+        if (me.window != nil) me.window.del();
+        me._canvas.del();
+        return nil;
+    },
     # loadSVG - loads SVG file and create canvas.element objects for given IDs
     # file:     filename to load
     # svg_keys: vector of id strings

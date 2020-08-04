@@ -61,7 +61,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="menu/configure-dev-extension:0" translate="yes">
           <source>Configure Development Extensions</source>
-          <target>Erweiterungen für Entwickler </target>
+          <target>Erweiterungen für Entwickler</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/cycle-gui:0" translate="yes">
           <source>Cycle GUI Style</source>
@@ -193,7 +193,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/local_weather:0" translate="yes">
           <source>Local Weather (Test)</source>
-          <target />
+          <target>Lokales Wetter (Test)</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/location:0" translate="yes">
           <source>Location</source>
@@ -261,7 +261,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="menu/pilot-offset:0" translate="yes">
           <source>Adjust View Position</source>
-          <target>Betrachtungspunkt einstellen</target>
+          <target>Blickpunkt einstellen</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/position-in-air:0" translate="yes">
           <source>Position Aircraft In Air</source>
@@ -445,7 +445,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="menu/view-options:0" translate="yes">
           <source>View Options</source>
-          <target>Ansichtoptionen</target>
+          <target>Ansichtsoptionen</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/wildfire-settings:0" translate="yes">
           <source>Wildfire Settings</source>
@@ -487,7 +487,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/aircraft-desc:0" translate="yes">
           <source>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</source>
-          <target>Auswahl eines Flugzeugsprofils (wählt ein &lt;name&gt;-set.xml Profil aus)</target>
+          <target>Auswahl eines Flugzeugprofils (wählt ein &lt;name&gt;-set.xml Profil aus)</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/aircraft-dir-desc:0" translate="yes">
           <source>Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
@@ -499,7 +499,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/aircraft-options:0" translate="yes">
           <source>Aircraft</source>
-          <target>Flugzeug Optionen</target>
+          <target>Flugzeug-Optionen</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/airport-desc:0" translate="yes">
           <source>Specify starting position relative to an airport</source>
@@ -591,7 +591,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-clock-freeze-desc:0" translate="yes">
           <source>Clock advances normally</source>
-          <target>Uhrzeit vergeht normal</target>
+          <target>Zeit vergeht normal</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-clouds-desc:0" translate="yes">
           <source>Disable 2D (flat) cloud layers</source>
@@ -603,7 +603,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-distance-attenuation:0" translate="yes">
           <source>Disable runway light distance attenuation</source>
-          <target>Deaktiviere Dämpfung der Startbahnbeleuchtung durch größere Entfernungen</target>
+          <target>Deaktiviere Dämpfung der Startbahnbeleuchtung bei größerer Entfernung</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-enhanced-lighting:0" translate="yes">
           <source>Disable enhanced runway lighting</source>
@@ -627,7 +627,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-horizon-effect:0" translate="yes">
           <source>Disable celestial body growth illusion near the horizon</source>
-          <target>Deaktiviere vergrößerten Erscheinung von Himmelskörpern nahe dem Horizont</target>
+          <target>Scheinbare Vergrößerung von Himmelskörpern nahe dem Horizont deaktivieren</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-hud-3d-desc:0" translate="yes">
           <source>Disable 3D HUD</source>
@@ -639,7 +639,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-mouse-pointer-desc:0" translate="yes">
           <source>Disable extra mouse pointer</source>
-          <target>Deaktiviere Zusätzlichen Mauszeiger</target>
+          <target>Deaktiviere zusätzlichen Mauszeiger</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-panel-desc:0" translate="yes">
           <source>Disable instrument panel</source>
@@ -655,7 +655,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-random-vegetation-desc:0" translate="yes">
           <source>Exclude random vegetation objects</source>
-          <target>Zufällige Vegeation ausblenden</target>
+          <target>Zufällige Vegetation ausblenden</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-real-weather-fetch-desc:0" translate="yes">
           <source>Disable METAR based real weather fetching</source>
@@ -731,11 +731,11 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-distance-attenuation:0" translate="yes">
           <source>Enable runway light distance attenuation</source>
-          <target>Dämpfung der Startbahnbeleuchtung durch größere Entfernungen aktivieren</target>
+          <target>Dämpfung der Startbahnbeleuchtung bei größerer Entfernung aktivieren</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-enhanced-lighting:0" translate="yes">
           <source>Enable enhanced runway lighting</source>
-          <target>Detailliete Startbahnbeleuchtung aktivieren</target>
+          <target>Detaillierte Startbahnbeleuchtung aktivieren</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-fgcom-desc:0" translate="yes">
           <source>Enable FGCom built-in</source>
@@ -755,7 +755,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-horizon-effect:0" translate="yes">
           <source>Enable celestial body growth illusion near the horizon</source>
-          <target>Vergrößerten Erscheinung von Himmelskörpern nahe dem Horizont aktivieren</target>
+          <target>Scheinbare Vergrößerung von Himmelskörpern nahe dem Horizont aktivieren</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-hud-3d-desc:0" translate="yes">
           <source>Enable 3D HUD</source>
@@ -867,7 +867,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/fgviewer-desc:0" translate="yes">
           <source>Use a model viewer rather than load the entire simulator;</source>
-          <target>Den Model-Viewer verwenden, anstatt den gesamten Simulator zu laden</target>
+          <target>Den Modell-Betrachter verwenden, anstatt den gesamten Simulator zu laden</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/fix-desc:0" translate="yes">
           <source>Specify starting position relative to a fix</source>
@@ -935,7 +935,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/hud-culled-desc:0" translate="yes">
           <source>Hud displays percentage of triangles culled</source>
-          <target />
+          <target>HUD zeigt Prozent der unterdrückten Grundobjekte</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/hud-options:0" translate="yes">
           <source>Hud Options</source>
@@ -943,7 +943,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/hud-tris-desc:0" translate="yes">
           <source>Hud displays number of triangles rendered</source>
-          <target />
+          <target>HUD zeigt Anzahl der gerenderten Grundobjekte</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/in-air-desc:0" translate="yes">
           <source>Start in air (implied when using --altitude)</source>
@@ -1027,7 +1027,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/model-hz-desc:0" translate="yes">
           <source>Run the FDM this rate (iterations per second)</source>
-          <target>Lasse das FDM mit dieser Frequenz laufen (Wiederholungen pro Sekunde)</target>
+          <target>FDM mit dieser Frequenz betreiben (Wiederholungen pro Sekunde)</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/multiplay-desc:0" translate="yes">
           <source>Specify multipilot communication settings</source>
@@ -1147,7 +1147,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/rendering-options:0" translate="yes">
           <source>Rendering Options</source>
-          <target>Grafikoptionen</target>
+          <target>Grafik-Optionen</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/restore-defaults-desc:0" translate="yes">
           <source>Reset all user settings to their defaults (rendering options etc)</source>
@@ -1155,7 +1155,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/roc-desc:0" translate="yes">
           <source>Specify initial climb rate (can be negative)</source>
-          <target>Die Anfängliche Steig-/Sinkrate angeben</target>
+          <target>Die anfängliche Steig-/Sinkrate angeben</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/roll-desc:0" translate="yes">
           <source>Specify roll angle (Phi)</source>
@@ -1207,7 +1207,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/start-date-desc:0" translate="yes">
           <source>Specify a starting date/time with respect to</source>
-          <target>Eine Startzeitangeben relativ zu</target>
+          <target>Eine Startzeit angeben relativ zu</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/telnet-desc:0" translate="yes">
           <source>Enable telnet server on the specified port</source>
@@ -1303,7 +1303,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/verbose-desc:0" translate="yes">
           <source>Show all command line options when combined with --help or -h</source>
-          <target>Zeigt die vollständige Lister aller Kommandozeilenoptionen (mit --help oder -h kombinieren)</target>
+          <target>Zeigt die vollständige Liste aller Kommandozeilenoptionen (mit --help oder -h kombinieren)</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/verbose-help:0" translate="yes">
           <source>For a complete list of options use --help --verbose</source>
@@ -1315,7 +1315,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/view-offset-desc:0" translate="yes">
           <source>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</source>
-          <target>Die stadardmäßige Nach-Vorne-Blickrichtung angeben als Abweichung von geradeaus. Erlaubte Werte sind LEFT, RIGHT, CENTER, oder eine Winkelangabe in Grad</target>
+          <target>Die standardmäßige Nach-Vorne-Blickrichtung angeben als Abweichung von geradeaus. Erlaubte Werte sind LEFT, RIGHT, CENTER, oder eine Winkelangabe in Grad</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/visibility-desc:0" translate="yes">
           <source>Specify initial visibility</source>
@@ -1433,7 +1433,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="sys/unstable-warning:0" translate="yes">
           <source>Unstable nightly build - some features may be under active development</source>
-          <target>Entwicklerversion: kann instabile/unfertige Features enthalten!</target>
+          <target>Entwicklerversion: Kann instabile/unfertige Features enthalten!</target>
         </trans-unit>
       </group>
       <group resname="tips" restype="x-trolltech-linguist-context">
@@ -1471,7 +1471,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="tips/tip:8" translate="yes">
           <source>Press h to bring up a Heads Up Display</source>
-          <target>Drücke h, um das Heads-Up-Display zu aktivieren.</target>
+          <target>Drücke h, um das Head-Up-Display zu aktivieren.</target>
         </trans-unit>
         <trans-unit approved="yes" id="tips/tip:9" translate="yes">
           <source>Show or hide the menu bar by pressing F10</source>

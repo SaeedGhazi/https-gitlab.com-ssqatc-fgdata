@@ -47,7 +47,7 @@
               &lt;/p&gt;&lt;p&gt;Die Dateien werden in ein Verzeichnis &apos;Scenery&apos; 
               unterhalb des gewählten Download-Verzeichnisses (momentan %1) entpackt.
               Anschließend können die Archive gelöscht werden.&lt;/p&gt;&lt;p&gt;
-              Zum fortfahren bitte auf &apos;Next&apos; klicken und ein oder mehrere heruntergeladene Szenerie-Archive auswählen.
+              Zum Fortfahren bitte auf &apos;Next&apos; klicken und ein oder mehrere heruntergeladene Szenerie-Archive auswählen.
               Diese haben Namen wie z.B. 
               &apos;w010n40.tar.gz&apos;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
           <target xml:space="preserve"></target>
@@ -149,7 +149,7 @@
       </trans-unit>
       <trans-unit id="_msg23">
         <source xml:space="preserve">Aircraft hangars are managed collections of aircraft, which can be downloaded, installed and updated inside FlightGear.</source>
-        <target xml:space="preserve" state="needs-review-translation">Flugzeughangar sind Sammlungen von Flugzeugen, die in FlightGear heruntergeladen, installiert und aktualisiert werden können.</target>
+        <target xml:space="preserve" state="needs-review-translation">Flugzeughangars sind Sammlungen von Flugzeugen, die in FlightGear heruntergeladen, installiert und aktualisiert werden können.</target>
         <context-group purpose="location"><context context-type="linenumber">56</context></context-group>
       </trans-unit>
       <trans-unit id="_msg24">
@@ -392,7 +392,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg66">
         <source xml:space="preserve">Aircraft are rated by the community based on four critiera, on a scale from one to five. The ratings are designed to help make an informed guess how complete and functional an aircraft is.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Flugzeuge werden von der Community in vier Kategorien auf einer Skala von Eins bis Fünf bewertet. Anhand der Bewertung ist eine Auswahl nach Vollständigkeit und Funktionalität möglich.</target>
         <context-group purpose="location"><context context-type="linenumber">78</context></context-group>
       </trans-unit>
       <trans-unit id="_msg67">
@@ -581,7 +581,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg100">
         <source xml:space="preserve">Weather scenario</source>
-        <target xml:space="preserve" state="needs-review-translation">Wetter Szenario</target>
+        <target xml:space="preserve" state="needs-review-translation">Wettersituation</target>
         <context-group purpose="location"><context context-type="linenumber">141</context></context-group>
       </trans-unit>
       <trans-unit id="_msg101">
@@ -591,12 +591,12 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg102">
         <source xml:space="preserve">Enter a custom METAR string, e.g: &apos;%1&apos;</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Einen eigenen METAR eingeben, z.B. &apos;%1&apos;</target>
         <context-group purpose="location"><context context-type="linenumber">165</context></context-group>
       </trans-unit>
       <trans-unit id="_msg103">
         <source xml:space="preserve">The entered METAR string doesn&apos;t seem to be valid.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Der eingegebene METAR scheint nicht korrekt zu sein.</target>
         <context-group purpose="location"><context context-type="linenumber">166</context></context-group>
       </trans-unit>
       <trans-unit id="_msg104">
@@ -1711,7 +1711,7 @@ Local path: %2</source>
     <group restype="x-trolltech-linguist-context" resname="LauncherController">
       <trans-unit id="_msg305">
         <source xml:space="preserve">Create download folder?</source>
-        <target xml:space="preserve" state="needs-review-translation">Download Verzeichnis anlegen?</target>
+        <target xml:space="preserve" state="needs-review-translation">Download-Verzeichnis anlegen?</target>
         <context-group purpose="location"><context context-type="linenumber">325</context></context-group>
       </trans-unit>
       <trans-unit id="_msg306">
@@ -1721,7 +1721,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg307">
         <source xml:space="preserve">Aircraft installation failed</source>
-        <target xml:space="preserve" state="needs-review-translation">Flugzeug Installation fehlgeschlagen</target>
+        <target xml:space="preserve" state="needs-review-translation">Installation des Flugzeuges fehlgeschlagen</target>
         <context-group purpose="location"><context context-type="linenumber">738</context></context-group>
       </trans-unit>
       <trans-unit id="_msg308">
@@ -2017,7 +2017,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg359">
         <source xml:space="preserve">This copy of FlightGear does not include the base data files. Please select a suitable folder containing a previously download set of files.</source>
-        <target xml:space="preserve" state="needs-review-translation">Diese Kopie von FlightGear enthält nicht das Basisdatenpaket. Bitte wähle ein Verzeichnis, dass diese Daten bereits heruntergeladen wurden.</target>
+        <target xml:space="preserve" state="needs-review-translation">Diese Kopie von FlightGear enthält nicht das Basisdatenpaket. Bitte wähle ein Verzeichnis, in das diese Daten bereits heruntergeladen wurden.</target>
         <context-group purpose="location"><context context-type="linenumber">245</context></context-group>
       </trans-unit>
       <trans-unit id="_msg360">

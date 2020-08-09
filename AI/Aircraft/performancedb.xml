@@ -440,7 +440,6 @@
       <descent-speed-kts>80.0</descent-speed-kts>
       <approach-speed-kts>70.0</approach-speed-kts>
       <touchdown-speed-kts>64.0</touchdown-speed-kts>
-      <taxi-speed-kts>25.0</taxi-speed-kts>
     </aircraft>
     <alias>
       <match>DHC6</match>
@@ -538,7 +537,6 @@
       <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
-      <taxi-speed-kts>15.0</taxi-speed-kts>
     </aircraft>
     <alias>
       <match>F27-</match>
@@ -556,7 +554,6 @@
       <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>145.0</approach-speed-kts>
       <touchdown-speed-kts>115.0</touchdown-speed-kts>
-      <taxi-speed-kts>20.0</taxi-speed-kts>
     </aircraft>
     <alias>
       <match>AT4</match>

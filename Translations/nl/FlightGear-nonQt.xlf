@@ -107,9 +107,9 @@
           <source>--- Failures ---</source>
           <target>--- Storingen ---</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/fg1000:0" translate="no">
+        <trans-unit approved="yes" id="menu/fg1000:0" translate="no">
           <source>FG1000 MFD</source>
-          <target />
+          <target>FG1000 MFD</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/fg1000-mfd:0" translate="yes">
           <source>FG1000 MFD</source>
@@ -399,9 +399,9 @@
           <source>Stopwatch</source>
           <target>Stopwatch</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/swift_connection:0" translate="yes">
+        <trans-unit approved="yes" id="menu/swift_connection:0" translate="yes">
           <source>swift Connection</source>
-          <target />
+          <target>Swift verbinding</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/system-failures:0" translate="yes">
           <source>System Failures</source>
@@ -541,9 +541,9 @@
           <source>assign a unique name to a player</source>
           <target>Geef een speler een unieke naam</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/carrier-abeam-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/carrier-abeam-desc:0" translate="yes">
           <source>Start on downwind abeam the selected carrier (must also specify a carrier)</source>
-          <target />
+          <target>Start naast het geselecteerde vliegdekschip (vereist de selectie van een vliegdekschip)</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/carrier-desc:0" translate="yes">
           <source>Specify starting position on an AI carrier</source>
@@ -977,17 +977,17 @@
           <source>Starting latitude (south = -)</source>
           <target>Geografische breedtegraad aan de start (zuid = -)</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/launcher-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/launcher-desc:0" translate="yes">
           <source>Use GUI launcher</source>
-          <target />
+          <target>Grafische startinterface gebruiken</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/livery-desc:0" translate="yes">
           <source>Select aircraft livery</source>
           <target>Kies een verfuitvoering</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/load-tape-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/load-tape-desc:0" translate="yes">
           <source>Load recording of earlier flightgear session</source>
-          <target />
+          <target>Laad een opname van een eerdere FlightGear-sessie</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/log-class-desc:0" translate="yes">
           <source>Specify which logging class(es) to use</source>
@@ -1403,9 +1403,9 @@
           <source>loading fixes</source>
           <target>fixes laden</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/navdata-load-percent:0" translate="yes">
+        <trans-unit approved="yes" id="sys/navdata-load-percent:0" translate="yes">
           <source>[VALUE]% complete</source>
-          <target />
+          <target>[VALUE]% voltooid</target>
         </trans-unit>
         <trans-unit approved="yes" id="sys/navdata-loading-airports:0" translate="yes">
           <source>loading airport data</source>
@@ -1423,13 +1423,13 @@
           <source>reading airport data</source>
           <target>vliegvelddata inlezen</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/settings-migration-text:0" translate="yes">
+        <trans-unit approved="yes" id="sys/settings-migration-text:0" translate="yes">
           <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
-          <target />
+          <target>Opgeslagen instellingen van een vorige FlightGearversie zijn meegenomen. Als u een probleem ervaart kunt u eerst de standaardinstellingen herstellen voordat u het probleem meldt. Opgeslagen instellingen kunnen de weergave, prestaties en functies van de simulator beïnvloeden.</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/settings-migration-title:0" translate="yes">
+        <trans-unit approved="yes" id="sys/settings-migration-title:0" translate="yes">
           <source>Settings migrated</source>
-          <target />
+          <target>Instellingen meegenomen</target>
         </trans-unit>
         <trans-unit approved="yes" id="sys/unstable-warning:0" translate="yes">
           <source>Unstable nightly build - some features may be under active development</source>
@@ -1515,141 +1515,141 @@
         </trans-unit>
       </group>
       <group resname="weather-scenarios" restype="x-trolltech-linguist-context">
-        <trans-unit approved="no" id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes">
           <source>The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</source>
-          <target />
+          <target>De grens van een hogedrukgebied, waar de lucht onstabiel wordt en convectieve en stratiforme bewolking kan onstaan.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/border-high-pressure-region-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/border-high-pressure-region-name:0" translate="yes">
           <source>Border of a high pressure region</source>
-          <target />
+          <target>Grens van een hogedrukgebied</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/border-low-pressure-region-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/border-low-pressure-region-desc:0" translate="yes">
           <source>The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
-          <target />
+          <target>De grens van een lagedrukgebied, waar de lucht onstabiel is en convectieve wolken lagen beginnen te vormen die overgaan in stratiforme bewolking.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/border-low-pressure-region-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/border-low-pressure-region-name:0" translate="yes">
           <source>Border of a low pressure region</source>
-          <target />
+          <target>Grens van een lagedrukgebied</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/cat-one-minimum-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/cat-one-minimum-desc:0" translate="yes">
           <source>If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
-          <target />
+          <target>Als u onlangs uw IFR licentie heeft gekregen is dit wat u legaal mag doen. Maar lukt dat ook?</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/cat-one-minimum-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/cat-one-minimum-name:0" translate="yes">
           <source>CAT I minimum</source>
-          <target />
+          <target>CAT I minimum</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes">
           <source>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
-          <target />
+          <target>Dit is op het niveau van professionals. U kunt amper de taxibaan zien, zelfs vanaf de grond. Mist en lichte regen, 0 graden op 1000ft.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes">
           <source>CAT IIIb minimum</source>
-          <target />
+          <target>CAT IIIb minimum</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/cat-two-minimum-desc:0" translate="yes">
           <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
-          <target />
+          <target>Met slechts een kwart mijl zicht en wolken op 100ft is de landingsbaan pas kort voor de landing zichtbaar. Vertrouw op uw instrumenten om te overleven.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/cat-two-minimum-name:0" translate="yes">
           <source>CAT II minimum</source>
-          <target />
+          <target>CAT II minimum</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/core-high-pressure-region-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/core-high-pressure-region-desc:0" translate="yes">
           <source>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
-          <target />
+          <target>Het centrum van een hogedrukgebied, gekarakteriseerd door dalende lucht en dus slechts enkele wolken met goed zicht.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/core-high-pressure-region-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/core-high-pressure-region-name:0" translate="yes">
           <source>Core high pressure region</source>
-          <target />
+          <target>Centrum van een hogedrukgebied</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/core-low-pressure-region-desc:0" translate="yes">
           <source>The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
-          <target />
+          <target>Het centrum van een lagedrukgebied, gekarakteriseerd door zware bewolking, slecht zicht op de grond en felle regen.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/core-low-pressure-region-name:0" translate="yes">
           <source>Core low pressure region</source>
-          <target />
+          <target>Centrum van een lagedrukgebied</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
           <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
-          <target />
+          <target>Mist kwam deze herfstochtend opzetten. Verwacht good zicht boven de mist, maar er doorheen komen kan een uitdaging zijn. Als u 500ft bereikt zult u de zon zien!</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/early-morning-fog-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/early-morning-fog-name:0" translate="yes">
           <source>Early morning fog</source>
-          <target />
+          <target>Ochtendmist</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/fair-weather-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/fair-weather-desc:0" translate="yes">
           <source>A lovely day for trip to your favorite 100$ hamburger airfield</source>
-          <target />
+          <target>Een perfecte dag voor een vlucht naar uw favoriete vliegveld</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/fair-weather-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/fair-weather-name:0" translate="yes">
           <source>Fair weather</source>
-          <target />
+          <target>Mooi weer</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/high-pressure-region-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/high-pressure-region-desc:0" translate="yes">
           <source>A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
-          <target />
+          <target>Een hogedrukgebied, gekarakteriseerd door matige tot stevige cumuluswolken in de avond en redelijk zicht.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/high-pressure-region-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/high-pressure-region-name:0" translate="yes">
           <source>High pressure region</source>
-          <target />
+          <target>Hogedrukgebied</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/live-data-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/live-data-desc:0" translate="yes">
           <source>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
-          <target />
+          <target>Download live weergegevens van noaa.gov voor het dichtstbijzijnde vliegveld. Vereist een internetverbinding. Weer wordt automatisch gegenereerd als er een geldige METAR is ontvangen.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/live-data-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/live-data-name:0" translate="yes">
           <source>Live data</source>
-          <target />
+          <target>Live gegevens</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/low-pressure-region-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/low-pressure-region-desc:0" translate="yes">
           <source>A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
-          <target />
+          <target>Een lagedrukgebied, gekarakteriseerd door stijgende lucht, verspreide stratiforme wolken en lichte regen.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/low-pressure-region-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/low-pressure-region-name:0" translate="yes">
           <source>Low pressure region</source>
-          <target />
+          <target>Lagedrukgebied</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/manual-input-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/manual-input-desc:0" translate="yes">
           <source>Enter your favorite METAR weather. A valid METAR syntax is required.</source>
-          <target />
+          <target>Voeg uw favoriete METAR gegevens toe. Dit dient een geldige METAR code te zijn.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/manual-input-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/manual-input-name:0" translate="yes">
           <source>Manual input</source>
-          <target />
+          <target>Handmatig invoeren</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/marginal-vfr-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/marginal-vfr-desc:0" translate="yes">
           <source>After the storm - limited visibility and some showers. Go or No-Go?</source>
-          <target />
+          <target>Na de storm - gelimiteerd zicht en regenbuien. Gaan of niet gaan?</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/marginal-vfr-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/marginal-vfr-name:0" translate="yes">
           <source>Marginal VFR</source>
-          <target />
+          <target>Marginale VFR</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/stormy-monday-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/stormy-monday-desc:0" translate="yes">
           <source>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
-          <target />
+          <target>In voor een avontuur? Vlagerige wind vanuit het westen en onweersbuien moeten ontweken worden. Riemen vast!</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/stormy-monday-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/stormy-monday-name:0" translate="yes">
           <source>Stormy Monday</source>
-          <target />
+          <target>Stormachtige maandag</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/thunderstorm-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/thunderstorm-desc:0" translate="yes">
           <source>A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</source>
-          <target />
+          <target>Een hete en klamme zomerdag met onweersbuien in de namiddag. Wees voorbereid op verslechterd zicht in buien en sterke windvlagen nabij onweer.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/thunderstorm-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/thunderstorm-name:0" translate="yes">
           <source>Thunderstorm</source>
-          <target />
+          <target>Onweersbui</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/warm-sector-desc:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/warm-sector-desc:0" translate="yes">
           <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
-          <target />
+          <target>Een warmtegebied, gekarakteriseerd door een hoge luchtvochtigheid en mistflarden tot grote hoogtes, maar afgezien daarvan convectieve wolken.</target>
         </trans-unit>
-        <trans-unit approved="no" id="weather-scenarios/warm-sector-name:0" translate="yes">
+        <trans-unit approved="yes" id="weather-scenarios/warm-sector-name:0" translate="yes">
           <source>Warm sector</source>
-          <target />
+          <target>Warmtegebied</target>
         </trans-unit>
       </group>
     </body>

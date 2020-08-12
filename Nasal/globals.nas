@@ -1,3 +1,14 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
+# Copyright (C) 2003-2008 by andy
+# Copyright (C) 2008-2009 by mfranz
+# Copyright (C) 2013 by janodesbois
+# Copyright (C) 2014 by Anton Gomez Alvedro
+
 ##
 # Constants.
 #

@@ -1,3 +1,15 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
+# Copyright (C) 2003-2007 by andy
+# Copyright (C) 2005-2008 by mfranz
+# Copyright (C) 2012-2014 by Thomas Geymayer
+# Copyright (C) 2017-2019 by Stuart Buchanan
+# Copyright (C) 2019-2020 by Henning Stahlke
+
 # debug.nas -- debugging helpers
 #------------------------------------------------------------------------------
 #

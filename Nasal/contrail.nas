@@ -1,3 +1,13 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# NOTE! This copyright does *not* cover user models that use these Nasal
+# services by normal function calls - this is merely considered normal use
+# of the code, and does *not* fall under the heading of "derived work."
+#
+# Copyright (C) 2010 by Vivian Meazza
+# Copyright (C) 2013 by Philosopher
+# Copyright (C) 2020 by Henning Stahlke
+
 #########
 # contrail calculator. Based on an approxmation to the "Appleman Chart"
 # y = -0.077x2 + 2.7188x - 64.36

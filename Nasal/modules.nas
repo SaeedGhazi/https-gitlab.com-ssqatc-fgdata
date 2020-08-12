@@ -340,7 +340,7 @@ var load = func(name, ns="") {
     _modules_available = {};
     foreach (var name; io.subdirectories(MODULES_DIR)) {
         if (!io.is_regular_file(MODULES_DIR~"/"~name~"/"~MODULES_DEFAULT_FILENAME))
-            break;
+            continue;
         _modules_available[name] = 1;
         MODULES_NODE.getNode(name~"/available",1).setBoolValue(1);
     }

@@ -4,15 +4,14 @@
  <description>A340-200</description>
  <author>3D Model Innis Cunningham, UV map liveries Brett Harrison</author> 
  <path>Models/A342.ac</path>
-<!-- Show Gear only when speed under 175 knots for parking and taxi and take off phases -->  
      <animation>
 		<type>select</type>
 		<object-name>gear</object-name>
 		<condition>
-			<less-than>
-				<property>velocities/true-airspeed-kt</property>
-				<value>175</value>
-			</less-than>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.25</value>
+			</greater-than>
 		</condition>
 	</animation>
 <!-- Tail and Windows Lightmap Effect -->

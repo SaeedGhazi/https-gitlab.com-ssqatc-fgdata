@@ -78,7 +78,7 @@
   </model>
   <!-- Group Lights for Shared Animations -->
   <animation>
-    <name>StaticGrouped</name>
+    <name>NavGrouped</name>
     <object-name>nav-right</object-name>
     <object-name>nav-left</object-name>
     <object-name>nav-tail</object-name>
@@ -94,29 +94,29 @@
     <object-name>beacon-top</object-name>
     <object-name>beacon-bottom</object-name>
   </animation>
-   <!-- Show Static Lights & Beacons when aircraft is moving -->
   <animation>
     <type>select</type>
-    <object-name>StaticGrouped</object-name>
-    <object-name>BeaconGrouped</object-name>
+    <object-name>NavGrouped</object-name>
     <nopreview />
     <condition>
-      <greater-than>
-        <property>transponder-id</property>
-        <value type="string">0</value>
-      </greater-than>
+      <property>controls/lighting/nav-lights</property>
     </condition>
   </animation>
-  <!-- Show Strobes when Aircraft on runway or airborne -->
   <animation>
     <type>select</type>
     <object-name>StrobeGrouped</object-name>
     <nopreview />
     <condition>
-      <greater-than>
-        <property>velocities/true-airspeed-kt</property>
-        <value>40</value>
-      </greater-than>
+      <property>controls/lighting/strobe</property>
     </condition>
   </animation>
+  <animation>
+    <type>select</type>
+    <object-name>BeaconGrouped</object-name>
+    <nopreview />
+    <condition>
+      <property>controls/lighting/beacon</property>
+    </condition>
+  </animation>
+
 </PropertyList>

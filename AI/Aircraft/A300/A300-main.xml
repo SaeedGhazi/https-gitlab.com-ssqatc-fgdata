@@ -42,10 +42,10 @@
     <type>select</type>
     <object-name>gear</object-name>
     <condition>
-      <less-than>
-        <property>velocities/true-airspeed-kt</property>
-        <value>190</value>
-      </less-than>
+      <greater-than>
+        <property>gear/gear[0]/position-norm</property>
+        <value>0.25</value>
+      </greater-than>
     </condition>
   </animation>
   <!-- Add Navigation Lights Objects -->

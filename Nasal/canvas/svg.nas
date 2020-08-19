@@ -207,27 +207,45 @@ var parsesvg = func(group, path, options = nil)
 
     while(1)
     {
-      # skip trailing spaces
+      # skip leading spaces
       pos = path_data.find_first_not_of("\t\n ", pos);
       if( pos < 0 )
         break;
 
-      # get command
+      # get command (single character);
       var cmd = substr(path_data, pos, 1);
       pos += 1;
 
       # and get all following arguments
+      # the '-' is kind of hard, it belongs to a number, might appear twice in 
+      # one arg (e.g. -2e-3) and some SVG do not separate args starting with '-'
+      # so the '-' is the separator as well in this case.
+      # SVG samples (cut)
+      # 1: m 547.56916,962.17731 c 10e-6,25.66886 -20.80872,46.47759 -46.47758,46.47759 -25.66886,0 ...
+      # 2: M831,144.861c-0.236,0.087-0.423,0.255-0.629,0.39c-1.169,0.765-2.333,1.536-3.499,2.305   c-0.019,0.013-0.041, ...
       var args = [];
+      #skip non-argument spaces and separator
+      pos = path_data.find_first_not_of(",\t\n ", pos);
+      var start_num = pos;
       while(1)
       {
         pos = path_data.find_first_not_of(",\t\n ", pos);
-        if( pos < 0 )
-          break;
-
-        var start_num = pos;
-        pos = path_data.find_first_not_of("e-.0123456789", start_num);
-        if( start_num == pos )
-          break;
+        if (pos < 0) break;
+        start_num = pos;        
+        while (1) {
+          var chr1 = substr(path_data, pos, 1);
+          if (chr1 == "-")
+            pos = path_data.find_first_not_of("e.0123456789", pos + 1);
+          else 
+            pos = path_data.find_first_not_of("e.0123456789", pos);
+          #check for e- (e.g. 42e-6)
+          if (pos > 0 and substr(path_data, pos - 1, 1) == "e" 
+                      and substr(path_data, pos, 1) == "-")
+            continue;
+          else 
+            break;
+        }
+        if (start_num == pos) break;
 
         append(args, substr( path_data,
                              start_num,

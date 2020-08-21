@@ -96,7 +96,6 @@ var PFDInstrumentsController =
       _adf_heading_deg : 0.0,
 
       _transponder_mode : 0,
-      _transponder_code : "1200",  # Current code
       _transponder_ident : 0,
       _transponder_edit : 0,      # If we're currently editing the transponder code
       _transponder_edit_code : 0, # Current value being edited as transponder code
@@ -105,6 +104,8 @@ var PFDInstrumentsController =
       _marker_beacon_middle : 0,
       _marker_beacon_inner : 0,
     };
+
+    obj._transponder_code = page.mfd.ConfigStore.get("TransponderVFRCode");
 
     obj._current_flightplan = obj.getNavData("Flightplan");
     if (obj._current_flightplan != nil) {
@@ -566,6 +567,10 @@ var PFDInstrumentsController =
     } else {
       me.sendNavComDataNotification({"TransponderMode" : idx});
     }
+  },
+
+  setVFRTransponderCode : func() {
+    me.sendNavComDataNotification({"TransponderCode" : me.page.mfd.ConfigStore.get("TransponderVFRCode")});
   },
 
   setTransponderCode : func(code) {

@@ -291,7 +291,7 @@ var PFDInstruments =
     pg.addMenuItem(4, "4", pg, pg.mfd.PFDInstruments.setTransponderDigit);
     pg.addMenuItem(5, "5", pg, pg.mfd.PFDInstruments.setTransponderDigit);
     pg.addMenuItem(6, "6", pg, pg.mfd.PFDInstruments.setTransponderDigit);
-    pg.addMenuItem(7, "7  ", pg, pg.mfd.PFDInstruments.setTransponderDigit);
+    pg.addMenuItem(7, "7", pg, pg.mfd.PFDInstruments.setTransponderDigit);
     pg.addMenuItem(8, "IDENT", pg, pg.mfd.PFDInstruments.setIdent);
     pg.addMenuItem(9, "BKSP", pg, pg.mfd.PFDInstruments.setTransponderDigit);
     pg.addMenuItem(10, "BACK", pg, pg.mfd.PFDInstruments.transponderMenu);

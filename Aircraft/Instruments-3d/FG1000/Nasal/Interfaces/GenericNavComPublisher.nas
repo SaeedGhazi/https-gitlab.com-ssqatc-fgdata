@@ -114,6 +114,7 @@ var GenericNavComPublisher =
     obj._triggeredPublisher.addPropMap("TransponderMode", "/instrumentation/transponder/inputs/knob-mode");
     obj._triggeredPublisher.addPropMap("TransponderIdent", "/instrumentation/transponder/inputs/ident-btn");
     obj._triggeredPublisher.addPropMap("TransponderCode", "/instrumentation/transponder/id-code");
+    obj._triggeredPublisher.addPropMap("TransponderVFRCode", "/instrumentation/transponder/factory-vfr-code");
 
     return obj;
   },

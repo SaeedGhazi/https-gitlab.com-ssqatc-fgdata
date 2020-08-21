@@ -97,8 +97,9 @@ var PFDInstrumentsController =
 
       _transponder_mode : 0,
       _transponder_ident : 0,
-      _transponder_edit : 0,      # If we're currently editing the transponder code
-      _transponder_edit_code : 0, # Current value being edited as transponder code
+      _transponder_edit : 0,        # If we're currently editing the transponder code
+      _transponder_edit_code : 0,   # Current value being edited as transponder code
+      _transponder_vfr_code : 1200, # Standard VFR code
 
       _marker_beacon_outer : 0,
       _marker_beacon_middle : 0,
@@ -404,6 +405,7 @@ var PFDInstrumentsController =
     if (data["TransponderMode"] != nil) me._transponder_mode = data["TransponderMode"];
     if (data["TransponderCode"] != nil) me._transponder_code = data["TransponderCode"];
     if (data["TransponderIdent"] != nil) me._transponder_ident = data["TransponderIdent"];
+    if (data["TransponderVFRCode"] != nil) me._transponder_vfr_code = data["TransponderVFRCode"];
 
     if (data["MarkerBeaconInner"] != nil) me._marker_beacon_inner = data["MarkerBeaconInner"];
     if (data["MarkerBeaconMiddle"] != nil) me._marker_beacon_middle = data["MarkerBeaconMiddle"];
@@ -570,7 +572,7 @@ var PFDInstrumentsController =
   },
 
   setVFRTransponderCode : func() {
-    me.sendNavComDataNotification({"TransponderCode" : me.page.mfd.ConfigStore.get("TransponderVFRCode")});
+    me.sendNavComDataNotification({"TransponderCode" : me._transponder_vfr_code});
   },
 
   setTransponderCode : func(code) {

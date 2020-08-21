@@ -118,6 +118,7 @@ var ConfigStore = {
     "Vglide-visible" : 1,
     "Vne-visible": 1,
 
+    "TransponderVFRCode" : 1200,
   },
 
   new : func()
@@ -145,6 +146,8 @@ var ConfigStore = {
     foreach (var i; keys(ConfigStore.layerRanges)) {
       obj._layerRanges[i] = ConfigStore.layerRanges[i];
     }
+
+    obj.updateVFRTransponderCode();
 
     return obj;
   },
@@ -201,6 +204,12 @@ var ConfigStore = {
   configureLayer : func(layer, enabled, range) {
     me._layerRanges[layer].enabled = enabled;
     me._layerRanges[layer].range = math.min(range, me._layerRanges[layer].max_range);
+  },
+
+  updateVFRTransponderCode : func() {
+    # Special case VFR transponder code
+    var vfr_default	= props.globals.getNode("/instrumentation/transponder/factory-vfr-code", 1);
+    if (vfr_default.getValue()) me.set("TransponderVFRCode", vfr_default.getValue());
   },
 
 };

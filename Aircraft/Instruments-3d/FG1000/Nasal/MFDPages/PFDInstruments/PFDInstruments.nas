@@ -305,8 +305,7 @@ var PFDInstruments =
   },
 
   setVFR : func(device, pg, menuitem) {
-    # Set VFR Mode - 1200
-    pg.getController().setTransponderCode(1200);
+    pg.getController().setVFRTransponderCode();
   },
 
   setIdent : func(device, pg, menuitem) {

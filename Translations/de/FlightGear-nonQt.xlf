@@ -109,7 +109,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/fg1000:0" translate="no">
           <source>FG1000 MFD</source>
-          <target />
+          <target>FG1000 MFD</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/fg1000-mfd:0" translate="yes">
           <source>FG1000 MFD</source>
@@ -273,11 +273,11 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/print-rendering-statistics:0" translate="yes">
           <source>Print Rendering Statistics</source>
-          <target />
+          <target>Zeige Rendering-Statistik</target>
         </trans-unit>
         <trans-unit approved="no" id="menu/print-scene-info:0" translate="yes">
           <source>Print Visible Scene Info</source>
-          <target />
+          <target>Zeige Infos zur sichtbaren Szene</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/property-browser:0" translate="yes">
           <source>Browse Internal Properties</source>
@@ -595,7 +595,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-clouds-desc:0" translate="yes">
           <source>Disable 2D (flat) cloud layers</source>
-          <target>Platte 2D-Wolken deaktivieren</target>
+          <target>Flache 2D-Wolken deaktivieren</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/disable-clouds3d-desc:0" translate="yes">
           <source>Disable 3D (volumetric) cloud layers</source>
@@ -723,7 +723,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-clouds-desc:0" translate="yes">
           <source>Enable 2D (flat) cloud layers</source>
-          <target>Platte 2D-Wolken aktivieren</target>
+          <target>Flache 2D-Wolken aktivieren</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/enable-clouds3d-desc:0" translate="yes">
           <source>Enable 3D (volumetric) cloud layers</source>
@@ -911,7 +911,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/generic-desc:0" translate="yes">
           <source>Open connection using a predefined communication interface and a preselected communication protocol</source>
-          <target>Eine Verbindung öffnen unter Verwendung eines vorgegebenen Kommunukationsinterfaces und eines vorausgewählten Kommunikationsprotokolls</target>
+          <target>Eine Verbindung öffnen unter Verwendung eines vorgegebenen Kommunikationsinterfaces und eines vorausgewählten Kommunikationsprotokolls</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/geometry-desc:0" translate="yes">
           <source>Specify window geometry (640x480, etc)</source>
@@ -979,7 +979,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/launcher-desc:0" translate="yes">
           <source>Use GUI launcher</source>
-          <target />
+          <target>Benutze das grafische Startprogramm</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/livery-desc:0" translate="yes">
           <source>Select aircraft livery</source>
@@ -987,7 +987,7 @@
         </trans-unit>
         <trans-unit approved="no" id="options/load-tape-desc:0" translate="yes">
           <source>Load recording of earlier flightgear session</source>
-          <target />
+          <target>Eine frühere FlighGear-Session laden</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/log-class-desc:0" translate="yes">
           <source>Specify which logging class(es) to use</source>
@@ -1067,7 +1067,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/ndb-freq-desc:0" translate="yes">
           <source>Specify the frequency of the NDB. Use with --ndb=ID</source>
-          <target>Frequenz des NDB angeben. Verwendung zusamen mit --ndb=ID</target>
+          <target>Frequenz des NDB angeben. Verwendung zusammen mit --ndb=ID</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/network-options:0" translate="yes">
           <source>Network Options</source>
@@ -1203,7 +1203,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="options/speed-desc:0" translate="yes">
           <source>Run the FDM 'n' times faster than real time</source>
-          <target>Lasse das FDM mit dem n-fachen der realen Zeit laufen</target>
+          <target>Das FDM mit dem n-fachen der realen Zeit betreiben</target>
         </trans-unit>
         <trans-unit approved="yes" id="options/start-date-desc:0" translate="yes">
           <source>Specify a starting date/time with respect to</source>
@@ -1405,7 +1405,7 @@
         </trans-unit>
         <trans-unit approved="no" id="sys/navdata-load-percent:0" translate="yes">
           <source>[VALUE]% complete</source>
-          <target />
+          <target>[VALUE]% abgeschlossen</target>
         </trans-unit>
         <trans-unit approved="yes" id="sys/navdata-loading-airports:0" translate="yes">
           <source>loading airport data</source>
@@ -1425,11 +1425,11 @@
         </trans-unit>
         <trans-unit approved="no" id="sys/settings-migration-text:0" translate="yes">
           <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
-          <target />
+          <target>Es wurden gespeicherte Einstellungen von der vorherigen FlightGear-Version übernommen. Bei Problemen zunächst die Standard-Einstellungen wiederherstellen. Gespeicherte Einstellungen können Leistung und Funktion des Simulators negativ beeinflussen.</target>
         </trans-unit>
         <trans-unit approved="no" id="sys/settings-migration-title:0" translate="yes">
           <source>Settings migrated</source>
-          <target />
+          <target>Einstellungen wurden übernommen</target>
         </trans-unit>
         <trans-unit approved="yes" id="sys/unstable-warning:0" translate="yes">
           <source>Unstable nightly build - some features may be under active development</source>
@@ -1517,139 +1517,140 @@
       <group resname="weather-scenarios" restype="x-trolltech-linguist-context">
         <trans-unit approved="no" id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes">
           <source>The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</source>
-          <target />
+          <target>Grenze eines Hochdruckgebietes, in dem Luftmassen instabil werden und sich vielfältige konvektive und stratiforme Bewölkung bilden kann.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/border-high-pressure-region-name:0" translate="yes">
           <source>Border of a high pressure region</source>
-          <target />
+          <target>Grenze eines Hochdruckgebietes</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/border-low-pressure-region-desc:0" translate="yes">
           <source>The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
-          <target />
+          <target>Grenze eines Tiefdruckgebietes, in dem Luftmassen instabil sind und sich konvektive Wolkenschichten bilden, die in stratiforme Bewölkung übergehen.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/border-low-pressure-region-name:0" translate="yes">
           <source>Border of a low pressure region</source>
-          <target />
+          <target>Grenze eines Tiefdruckgebietes</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-one-minimum-desc:0" translate="yes">
           <source>If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
-          <target />
+          <target>Wenn Du gerade Dein IFR-Rating bekommen hast, ist dies das maximal Erlaubte.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-one-minimum-name:0" translate="yes">
           <source>CAT I minimum</source>
-          <target />
+          <target>CAT I Minimum</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes">
           <source>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
-          <target />
+          <target>Dies ist für Experten. Du wirst vom Cockpit aus gerade noch die Bahnmarkierungen sehen. Nebel und leichter Regen, einsetzende Vereisung ab 1000ft.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes">
           <source>CAT IIIb minimum</source>
-          <target />
+          <target>CAT IIIb Minimum</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-desc:0" translate="yes">
           <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
-          <target />
+          <target>Mit einer 1/4 Meile Sicht und Wolken bis 100ft wirst Du bis kurz vor dem Aufsetzen nicht viel sehen. Vertraue den Instrumenten, um zu überleben.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/cat-two-minimum-name:0" translate="yes">
           <source>CAT II minimum</source>
-          <target />
+          <target>CAT II Minimum</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/core-high-pressure-region-desc:0" translate="yes">
           <source>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
-          <target />
+          <target>Zentrum eines Hochdruckgebietes, charakterisiert durch fallende Luftmassen und nur schwache Wolkenentwicklung mit sehr guter Sicht.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/core-high-pressure-region-name:0" translate="yes">
           <source>Core high pressure region</source>
-          <target />
+          <target>Zentrum eines Hochdruckgebietes</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-desc:0" translate="yes">
           <source>The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
-          <target />
+          <target>Zentrum eines Tiefdruckgebietes, charakterisiert durch bedeckende Wolkenschichten, schlechte Sicht am Boden und erheblichen Regen.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-name:0" translate="yes">
           <source>Core low pressure region</source>
+          <target>Zentrum eines Tiefdruckgebietes</target>
           <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
           <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
-          <target />
+          <target>Ein nebeliger Herbstmorgen. Über dem Nebel ist gute Sicht zu erwarten, den Nebel zu durchfliegen ist eine Herausforderung. Bleib am Leben und Du siehst die Sonne!</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/early-morning-fog-name:0" translate="yes">
           <source>Early morning fog</source>
-          <target />
+          <target>Nebel am frühen Morgen</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/fair-weather-desc:0" translate="yes">
           <source>A lovely day for trip to your favorite 100$ hamburger airfield</source>
-          <target />
+          <target>Ein herrlicher Tag für einen Ausflug zu Deinem bevorzugten 100€ Hamburger Flugplatz</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/fair-weather-name:0" translate="yes">
           <source>Fair weather</source>
-          <target />
+          <target>Schönes Wetter</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/high-pressure-region-desc:0" translate="yes">
           <source>A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
-          <target />
+          <target>Ein Hochdruckgebiet, charakterisiert durch moderate bis starke Cumulus-Entwicklung am Nachmittag und recht gute Sichtbedingungen.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/high-pressure-region-name:0" translate="yes">
           <source>High pressure region</source>
-          <target />
+          <target>Ein Hochdruckgebiet</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/live-data-desc:0" translate="yes">
           <source>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
-          <target />
+          <target>Hole Wetter-Echtdaten für den nächstgelegenen Flughafen von noaa.gov. Es ist eine Internet-Verbindung nötig. Wetter wird automatisch erzeugt, sobald ein gültiger METAR vorliegt.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/live-data-name:0" translate="yes">
           <source>Live data</source>
-          <target />
+          <target>Wetter-Echtdaten</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/low-pressure-region-desc:0" translate="yes">
           <source>A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
-          <target />
+          <target>Ein Tiefdruckgebiet, charakterisiert durch steigende Luftmassen, verbreitete Formation von stratiformer Bewölkung und beginnenden Regen.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/low-pressure-region-name:0" translate="yes">
           <source>Low pressure region</source>
-          <target />
+          <target>Ein Tiefdruckgebiet</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/manual-input-desc:0" translate="yes">
           <source>Enter your favorite METAR weather. A valid METAR syntax is required.</source>
-          <target />
+          <target>Gib Dein bevorzugtes Wetter als METAR ein. Es muss ein gültiger Ausdruck sein.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/manual-input-name:0" translate="yes">
           <source>Manual input</source>
-          <target />
+          <target>Manuelle Eingabe</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/marginal-vfr-desc:0" translate="yes">
           <source>After the storm - limited visibility and some showers. Go or No-Go?</source>
-          <target />
+          <target>Nach dem Sturm - Eingeschränkte Sicht, Regenschauer. Go or No-Go?</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/marginal-vfr-name:0" translate="yes">
           <source>Marginal VFR</source>
-          <target />
+          <target>Grenzwertige VFR-Bedingungen</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/stormy-monday-desc:0" translate="yes">
           <source>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
-          <target />
+          <target>Du bist auf ein Abenteuer aus? Böige Winde aus West und einzelne Gewitterzellen sollten vermieden werden. Bitte anschnallen!</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/stormy-monday-name:0" translate="yes">
           <source>Stormy Monday</source>
-          <target />
+          <target>Stürmischer Montag</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/thunderstorm-desc:0" translate="yes">
           <source>A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</source>
-          <target />
+          <target>Ein heißer und feuchter Tag mit sich entwicklenden Gewittern am Nachmittag. Sei vorbereitet auf reduzierte Sicht in Schauern und starke Böen in Gewitternähe</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/thunderstorm-name:0" translate="yes">
           <source>Thunderstorm</source>
-          <target />
+          <target>Gewitter</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/warm-sector-desc:0" translate="yes">
           <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
-          <target />
+          <target>Ein warmer Abschnitt, charakterisiert durch hohe Luftfeuchtigkeit und Dunst bis in große Höhen, dazu größtenteils konvektive Wolkenentwicklung.</target>
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/warm-sector-name:0" translate="yes">
           <source>Warm sector</source>
-          <target />
+          <target>Warmer Abschnitt</target>
         </trans-unit>
       </group>
     </body>

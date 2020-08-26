@@ -140,10 +140,10 @@
     
     # restore state from previous time the dialog was open
     # default to 0 if no prior value
-        var curIndex = dlg.getNode("scratch-index", 1).getValue() or 0;
-        updateSearchResults(0, curIndex);
-    
-		var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
+    var curIndex = dlg.getNode("scratch-index", 1).getValue() or 0;
+    updateSearchResults(0, curIndex);
+
+    var slaved = props.globals.getNode("/instrumentation/nav[0]/slaved-to-gps", 1);
 	]]></open>
   
     </nasal>
@@ -794,7 +794,7 @@
         </empty>
         <checkbox>
             <halign>left</halign>
-            <label>NAV1 Slave</label>
+            <label>Link NAV1 to GPS</label>
             <property>/instrumentation/nav[0]/slaved-to-gps</property>
             <binding>
                 <command>dialog-apply</command>

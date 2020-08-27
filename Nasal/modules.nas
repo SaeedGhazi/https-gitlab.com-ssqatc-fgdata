@@ -105,6 +105,7 @@ var Module = {
     setDebug: func (debug = 1) {
         me._debug = debug;
         logprint(DEV_WARN, "Module "~me.id~" debug = "~debug);
+        return me;
     },
 
     setFilePath: func(path) {
@@ -124,6 +125,7 @@ var Module = {
         else {
             logprint(LOG_WARN, "setMainFile() needs a string parameter");
         }
+        return me;
     },
 
     setNamespace: func(ns) {
@@ -133,12 +135,14 @@ var Module = {
         else {
             logprint(LOG_WARN, "setNamespace() needs a string parameter");
         }
+        return me;
     },
 
     # to change the default setlistener behaviour regarding 'runtime' argument
     # i: int 0..2 passed to setlistener as 4th parameter if not specified explicitly
     setlistenerRuntimeDefault: func (i) {
         me._setlistener_runtime_default = int(i);
+        return me;
     },
     
     # load module

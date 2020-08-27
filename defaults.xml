@@ -17,7 +17,7 @@ Started September 2000 by David Megginson, david@megginson.com
     <!-- Limit the time we need to spend in simulation loops to 1 second -->
     <max-simtime-per-frame type="double">1.0</max-simtime-per-frame>
     <session type="int" userarchive="y">0</session>
-    <nasal-gc-threaded type="bool">true</nasal-gc-threaded>
+    <nasal-gc-threaded type="bool">false</nasal-gc-threaded>
     <nasal-gc-threaded-wait type="bool">false</nasal-gc-threaded-wait>
     <nasal-load-priority include="Nasal/loadpriority.xml" />
     <paths>

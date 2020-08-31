@@ -702,7 +702,8 @@ var genericEmesaryGlobalTransmitterTransmit  = func(node)
     transmitter.NotifyAll(message);
 };
 
-removecommand("emesary-transmit"); #in case of reload
+# Temporary bugfix -- FIXME
+# removecommand("emesary-transmit"); #in case of reload
 addcommand("emesary-transmit", genericEmesaryGlobalTransmitterTransmit);
 
 #setprop("/sim/startup/terminal-ansi-colors",0);

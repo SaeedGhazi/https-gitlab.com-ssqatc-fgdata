@@ -303,7 +303,7 @@ var TypeIdUnspecified = 1;
 var NotificationAutoTypeId = 1;
 var Notification =
 {
-    new: func(_type, _ident, _typeid=0)
+    new: func(_type, _ident, _typeid=-1)
     {
         if (!isscalar(_type)) {
             logprint(DEV_ALERT, "Notification.new: _type must be a scalar!");
@@ -691,7 +691,7 @@ var genericEmesaryGlobalTransmitterTransmit  = func(node)
     transmitter.NotifyAll(message);
 };
 
-removecommand("emesary-transmit"); #in case of reload
+#removecommand("emesary-transmit"); #in case of reload
 addcommand("emesary-transmit", genericEmesaryGlobalTransmitterTransmit);
 
 #setprop("/sim/startup/terminal-ansi-colors",0);

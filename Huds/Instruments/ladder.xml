@@ -17,7 +17,7 @@
 			<property>/orientation/pitch-deg</property>
 		</pitch-input>
 
-		<compression-factor>11.6</compression-factor>
+		<compression-factor>11.0</compression-factor>
 		<display-span>45.0</display-span>
 		<divisions>10.0</divisions>
 		<screen-hole>50</screen-hole>

@@ -107,7 +107,7 @@
 
    <option>
     <name>load-tape</name>
-    <arg>path</arg>
+    <arg>name</arg>
     <description>load-tape-desc</description>
     <brief/>
    </option>

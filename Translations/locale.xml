@@ -108,5 +108,9 @@
 		<xliff type="string">Translations/pt/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
-
+	<locale>
+		<lang type="string">sk</lang>
+		<lang type="string">sk_SK</lang>
+		<xliff type="string">Translations/sk/FlightGear-nonQt.xlf</xliff>
+	</locale>
 </PropertyList>

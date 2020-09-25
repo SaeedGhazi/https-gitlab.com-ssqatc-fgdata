@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+  <sim>
+    <flight-model>aisim</flight-model>
+    <aero>c172p</aero>
+  </sim>
+</PropertyList>

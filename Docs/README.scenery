@@ -178,6 +178,8 @@ unpack into a <name>/ sub-directory.  This enables terrasync to clean up
 out of date files by simply deleting the <name>/ subdirectory before unpacking
 the updated file.
 
+See also https://sourceforge.net/p/flightgear/flightgear/ci/next/tree/scripts/python/TerraSync/tests/data/dirindex/
+
 3 stg files -------------------------------------------------------------------
 
 stg files ("static terragear") define the static elements of a scenery

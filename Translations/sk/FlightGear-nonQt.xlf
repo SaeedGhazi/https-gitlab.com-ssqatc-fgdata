@@ -15,15 +15,15 @@
           <source>AI</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/aircraft-center:0" translate="yes">
+        <trans-unit approved="yes" id="menu/aircraft-center:0" translate="yes">
           <source>Aircraft Center (Experimental)</source>
           <target>Centrum lietadiel (Experimentálne)</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/aircraft-checklists:0" translate="yes">
+        <trans-unit approved="yes" id="menu/aircraft-checklists:0" translate="yes">
           <source>Aircraft Checklists</source>
           <target>Kontrolné zoznamy lietadla</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/aircraft-keys:0" translate="yes">
+        <trans-unit approved="yes" id="menu/aircraft-keys:0" translate="yes">
           <source>Aircraft Help</source>
           <target>Pomocník pre lietadlo</target>
         </trans-unit>
@@ -31,151 +31,151 @@
           <source>ATC Services in Range</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/autopilot:0" translate="yes">
+        <trans-unit approved="yes" id="menu/autopilot:0" translate="yes">
           <source>Autopilot</source>
           <target>Autopilot</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/autopilot-settings:0" translate="yes">
+        <trans-unit approved="yes" id="menu/autopilot-settings:0" translate="yes">
           <source>Autopilot Settings</source>
           <target>Nastavenia autopilota</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/autostart:0" translate="yes">
+        <trans-unit approved="yes" id="menu/autostart:0" translate="yes">
           <source>Autostart</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/basic-keys:0" translate="yes">
+        <trans-unit approved="yes" id="menu/basic-keys:0" translate="yes">
           <source>Basic Simulator Keys</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/carrier:0" translate="yes">
+        <trans-unit approved="yes" id="menu/carrier:0" translate="yes">
           <source>Carrier Controls</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/cockpit-view-options:0" translate="yes">
+        <trans-unit approved="yes" id="menu/cockpit-view-options:0" translate="yes">
           <source>Cockpit View Options</source>
           <target>Voľby zobrazenia kabíny</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/common-keys:0" translate="yes">
+        <trans-unit approved="yes" id="menu/common-keys:0" translate="yes">
           <source>Common Aircraft Keys</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/configure-dev-extension:0" translate="yes">
+        <trans-unit approved="yes" id="menu/configure-dev-extension:0" translate="yes">
           <source>Configure Development Extensions</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/cycle-gui:0" translate="yes">
+        <trans-unit approved="yes" id="menu/cycle-gui:0" translate="yes">
           <source>Cycle GUI Style</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/debug:0" translate="yes">
+        <trans-unit approved="yes" id="menu/debug:0" translate="yes">
           <source>Debug</source>
           <target>Ladenie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/development-keys:0" translate="yes">
+        <trans-unit approved="yes" id="menu/development-keys:0" translate="yes">
           <source>Development Keys</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/display-marker:0" translate="yes">
+        <trans-unit approved="yes" id="menu/display-marker:0" translate="yes">
           <source>Display Tutorial Marker</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/doc-browser:0" translate="yes">
+        <trans-unit approved="yes" id="menu/doc-browser:0" translate="yes">
           <source>Documentation Browser</source>
           <target>Prehliadač dokumentácie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/dump-scene-graph:0" translate="yes">
+        <trans-unit approved="yes" id="menu/dump-scene-graph:0" translate="yes">
           <source>Dump Scene Graph</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/environment:0" translate="yes">
+        <trans-unit approved="yes" id="menu/environment:0" translate="yes">
           <source>Environment</source>
           <target>Prostredie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/environment-settings:0" translate="yes">
+        <trans-unit approved="yes" id="menu/environment-settings:0" translate="yes">
           <source>Environment Settings</source>
           <target>Nastavenia prostredia</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/equipment:0" translate="yes">
+        <trans-unit approved="yes" id="menu/equipment:0" translate="yes">
           <source>Equipment</source>
           <target>Vybavenie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/exit:0" translate="yes">
+        <trans-unit approved="yes" id="menu/exit:0" translate="yes">
           <source>Quit</source>
           <target>Ukončiť</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/failure-submenu:0" translate="yes">
+        <trans-unit approved="yes" id="menu/failure-submenu:0" translate="yes">
           <source>--- Failures ---</source>
           <target>--- Zlyhania ---</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/fg1000-mfd:0" translate="yes">
+        <trans-unit approved="yes" id="menu/fg1000-mfd:0" translate="yes">
           <source>FG1000 MFD</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/fg1000-pfd:0" translate="yes">
+        <trans-unit approved="yes" id="menu/fg1000-pfd:0" translate="yes">
           <source>FG1000 PFD</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/fgcom-settings:0" translate="yes">
+        <trans-unit approved="yes" id="menu/fgcom-settings:0" translate="yes">
           <source>FGCom Settings</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/file:0" translate="yes">
+        <trans-unit approved="yes" id="menu/file:0" translate="yes">
           <source>File</source>
           <target>Súbor</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/fuel-and-payload:0" translate="yes">
+        <trans-unit approved="yes" id="menu/fuel-and-payload:0" translate="yes">
           <source>Fuel and Payload</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/global-weather:0" translate="yes">
+        <trans-unit approved="yes" id="menu/global-weather:0" translate="yes">
           <source>Weather</source>
           <target>Počasie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/goto-airport:0" translate="yes">
+        <trans-unit approved="yes" id="menu/goto-airport:0" translate="yes">
           <source>Select Airport</source>
           <target>Vybrať letisko</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/gps:0" translate="yes">
+        <trans-unit approved="yes" id="menu/gps:0" translate="yes">
           <source>GPS Settings</source>
           <target>Nastavenia GPS</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/help:0" translate="yes">
+        <trans-unit approved="yes" id="menu/help:0" translate="yes">
           <source>Help</source>
           <target>Pomocník</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/help-browser:0" translate="yes">
+        <trans-unit approved="yes" id="menu/help-browser:0" translate="yes">
           <source>Help (opens in browser)</source>
           <target>Pomocník (otvoriť v prehliadači)</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/immatriculation:0" translate="yes">
+        <trans-unit approved="yes" id="menu/immatriculation:0" translate="yes">
           <source>Immatriculation</source>
           <target>Technický stav</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/input-config:0" translate="yes">
+        <trans-unit approved="yes" id="menu/input-config:0" translate="yes">
           <source>Mouse Configuration</source>
           <target>Nastavenie myši</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/instrument-failures:0" translate="yes">
+        <trans-unit approved="yes" id="menu/instrument-failures:0" translate="yes">
           <source>Instrument Failures</source>
           <target>Zlyhania prístrojov</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/instrument-settings:0" translate="yes">
+        <trans-unit approved="yes" id="menu/instrument-settings:0" translate="yes">
           <source>Instrument Settings</source>
           <target>Nastavenia prístrojov</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/interface-config:0" translate="yes">
+        <trans-unit approved="yes" id="menu/interface-config:0" translate="yes">
           <source>User-interface Options</source>
           <target>Voľby používateľského rozhrania</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/jetway:0" translate="yes">
+        <trans-unit approved="yes" id="menu/jetway:0" translate="yes">
           <source>Jetway Settings</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/joystick-config:0" translate="yes">
+        <trans-unit approved="yes" id="menu/joystick-config:0" translate="yes">
           <source>Joystick Configuration</source>
           <target>Nastavenie pákového ovládača</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/joystick-info:0" translate="yes">
+        <trans-unit approved="yes" id="menu/joystick-info:0" translate="yes">
           <source>Joystick Information</source>
           <target>Informácie o pákovom ovládači</target>
         </trans-unit>
@@ -183,35 +183,35 @@
           <source>Lag Settings</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/load-tape:0" translate="yes">
+        <trans-unit approved="yes" id="menu/load-tape:0" translate="yes">
           <source>Load Flight Recorder Tape</source>
           <target>Načítať pásku z čiernej skrinky</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/local_weather:0" translate="yes">
+        <trans-unit approved="yes" id="menu/local_weather:0" translate="yes">
           <source>Local Weather (Test)</source>
           <target>Miestne počasie (skúšobné)</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/location:0" translate="yes">
+        <trans-unit approved="yes" id="menu/location:0" translate="yes">
           <source>Location</source>
           <target>Umiestnenie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/logging:0" translate="yes">
+        <trans-unit approved="yes" id="menu/logging:0" translate="yes">
           <source>Logging</source>
           <target>Zaznamenávanie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/map:0" translate="yes">
+        <trans-unit approved="yes" id="menu/map:0" translate="yes">
           <source>Map</source>
           <target>Mapa</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/map-browser:0" translate="yes">
+        <trans-unit approved="yes" id="menu/map-browser:0" translate="yes">
           <source>Map (opens in browser)</source>
           <target>Mapa (otvoriť v prehliadači)</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/map-canvas:0" translate="yes">
+        <trans-unit approved="yes" id="menu/map-canvas:0" translate="yes">
           <source>Map (Canvas)</source>
           <target>Mapa (plátno)</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/menu-about:0" translate="yes">
+        <trans-unit approved="yes" id="menu/menu-about:0" translate="yes">
           <source>About</source>
           <target>O programe</target>
         </trans-unit>
@@ -219,23 +219,23 @@
           <source>MPCarrier Selection</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/mp-chat:0" translate="yes">
+        <trans-unit approved="yes" id="menu/mp-chat:0" translate="yes">
           <source>Chat Dialog</source>
           <target>Dialógové okno rozhovoru</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/mp-chat-menu:0" translate="yes">
+        <trans-unit approved="yes" id="menu/mp-chat-menu:0" translate="yes">
           <source>Chat Menu</source>
           <target>Ponuka rozhovoru</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/mp-list:0" translate="yes">
+        <trans-unit approved="yes" id="menu/mp-list:0" translate="yes">
           <source>Pilot List</source>
           <target>Zoznam pilotov</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/mp-settings:0" translate="yes">
+        <trans-unit approved="yes" id="menu/mp-settings:0" translate="yes">
           <source>Multiplayer Settings</source>
           <target state="translated">Nastavenia viacerých hráčov</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/multiplayer:0" translate="yes">
+        <trans-unit approved="yes" id="menu/multiplayer:0" translate="yes">
           <source>Multiplayer</source>
           <target state="translated">Viacero hráčov</target>
         </trans-unit>
@@ -247,199 +247,199 @@
           <source>Nasal REPL Interpreter</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/next-waypoint:0" translate="yes">
+        <trans-unit approved="yes" id="menu/next-waypoint:0" translate="yes">
           <source>Next Waypoint</source>
           <target state="translated">Nasledovný cestovný bod</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/performance-monitor:0" translate="yes">
+        <trans-unit approved="yes" id="menu/performance-monitor:0" translate="yes">
           <source>Monitor System Performance</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/pilot-offset:0" translate="yes">
+        <trans-unit approved="yes" id="menu/pilot-offset:0" translate="yes">
           <source>Adjust View Position</source>
           <target state="translated">Upraviť pozíciu zobrazenia</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/position-in-air:0" translate="yes">
+        <trans-unit approved="yes" id="menu/position-in-air:0" translate="yes">
           <source>Position Aircraft In Air</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/previous-waypoint:0" translate="yes">
+        <trans-unit approved="yes" id="menu/previous-waypoint:0" translate="yes">
           <source>Previous Waypoint</source>
           <target state="translated">Predošlý cestovný bod</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/print-rendering-statistics:0" translate="yes">
+        <trans-unit approved="yes" id="menu/print-rendering-statistics:0" translate="yes">
           <source>Print Rendering Statistics</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/print-scene-info:0" translate="yes">
+        <trans-unit approved="yes" id="menu/print-scene-info:0" translate="yes">
           <source>Print Visible Scene Info</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/property-browser:0" translate="yes">
+        <trans-unit approved="yes" id="menu/property-browser:0" translate="yes">
           <source>Browse Internal Properties</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/pushback:0" translate="yes">
+        <trans-unit approved="yes" id="menu/pushback:0" translate="yes">
           <source>Pushback</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/radio:0" translate="yes">
+        <trans-unit approved="yes" id="menu/radio:0" translate="yes">
           <source>Radio Settings</source>
           <target state="translated">Nastavenia rádia</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/random-attitude:0" translate="yes">
+        <trans-unit approved="yes" id="menu/random-attitude:0" translate="yes">
           <source>Random Attitude</source>
           <target state="translated">Náhodná výška</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/random-failures:0" translate="yes">
+        <trans-unit approved="yes" id="menu/random-failures:0" translate="yes">
           <source>Random Failures</source>
           <target state="translated">Náhodné zlyhania</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-autopilot:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-autopilot:0" translate="yes">
           <source>Reload Autopilot</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-gui:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-gui:0" translate="yes">
           <source>Reload GUI</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-hud:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-hud:0" translate="yes">
           <source>Reload HUD</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-input:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-input:0" translate="yes">
           <source>Reload Input</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-materials:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-materials:0" translate="yes">
           <source>Reload Materials</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-model:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-model:0" translate="yes">
           <source>Reload Aircraft Model</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-network:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-network:0" translate="yes">
           <source>Reload Network</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-panel:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-panel:0" translate="yes">
           <source>Reload Panel</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reload-scenery:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reload-scenery:0" translate="yes">
           <source>Reload Scenery</source>
           <target>Znovu načítať scenériu</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/rembrandt-buffers-choice:0" translate="yes">
+        <trans-unit approved="yes" id="menu/rembrandt-buffers-choice:0" translate="yes">
           <source>Select Rendering Buffers</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/rendering-buffers:0" translate="yes">
+        <trans-unit approved="yes" id="menu/rendering-buffers:0" translate="yes">
           <source>Hide/Show Rendering Buffers</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/rendering-options:0" translate="yes">
+        <trans-unit approved="yes" id="menu/rendering-options:0" translate="yes">
           <source>Rendering Options</source>
           <target>Voľby vykresľovania</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/replay:0" translate="yes">
+        <trans-unit approved="yes" id="menu/replay:0" translate="yes">
           <source>Instant Replay</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/reset:0" translate="yes">
+        <trans-unit approved="yes" id="menu/reset:0" translate="yes">
           <source>Reset</source>
           <target state="translated">Obnoviť</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/route-manager:0" translate="yes">
+        <trans-unit approved="yes" id="menu/route-manager:0" translate="yes">
           <source>Route Manager</source>
           <target state="translated">Správca trás</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/save-tape:0" translate="yes">
+        <trans-unit approved="yes" id="menu/save-tape:0" translate="yes">
           <source>Save Flight Recorder Tape</source>
           <target>Uložiť pásku z čiernej skrinky</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/scenario:0" translate="yes">
+        <trans-unit approved="yes" id="menu/scenario:0" translate="yes">
           <source>Traffic and Scenario Settings</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/select-livery:0" translate="yes">
+        <trans-unit approved="yes" id="menu/select-livery:0" translate="yes">
           <source>Select Livery</source>
           <target state="translated">Vybrať zovňajšok</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/show-hide-yokes:0" translate="yes">
+        <trans-unit approved="yes" id="menu/show-hide-yokes:0" translate="yes">
           <source>Show/hide yokes</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/snap-shot:0" translate="yes">
+        <trans-unit approved="yes" id="menu/snap-shot:0" translate="yes">
           <source>Screenshot</source>
           <target state="translated">Snímka obrazovky</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/snap-shot-dir:0" translate="yes">
+        <trans-unit approved="yes" id="menu/snap-shot-dir:0" translate="yes">
           <source>Screenshot Directory</source>
           <target state="translated">Adresár snímok obrazovky</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/sound-config:0" translate="yes">
+        <trans-unit approved="yes" id="menu/sound-config:0" translate="yes">
           <source>Sound Configuration</source>
           <target state="translated">Nastavenie zvuku</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/statistics-display:0" translate="yes">
+        <trans-unit approved="yes" id="menu/statistics-display:0" translate="yes">
           <source>Cycle On-Screen Statistics</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/stereoscopic-options:0" translate="yes">
+        <trans-unit approved="yes" id="menu/stereoscopic-options:0" translate="yes">
           <source>Stereoscopic View Options</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/stopwatch:0" translate="yes">
+        <trans-unit approved="yes" id="menu/stopwatch:0" translate="yes">
           <source>Stopwatch</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/swift_connection:0" translate="yes">
+        <trans-unit approved="yes" id="menu/swift_connection:0" translate="yes">
           <source>swift Connection</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/system-failures:0" translate="yes">
+        <trans-unit approved="yes" id="menu/system-failures:0" translate="yes">
           <source>System Failures</source>
           <target state="translated">Systémové zlyhania</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/tanker:0" translate="yes">
+        <trans-unit approved="yes" id="menu/tanker:0" translate="yes">
           <source>Tanker Controls</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/terrasync:0" translate="yes">
+        <trans-unit approved="yes" id="menu/terrasync:0" translate="yes">
           <source>Scenery Download</source>
           <target state="translated">Prevzatie scenérie</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/tiller-steering:0" translate="yes">
+        <trans-unit approved="yes" id="menu/tiller-steering:0" translate="yes">
           <source>Tiller Steering</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/time-settings:0" translate="yes">
+        <trans-unit approved="yes" id="menu/time-settings:0" translate="yes">
           <source>Time Settings</source>
           <target state="translated">Nastavenia času</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/toggle-fullscreen:0" translate="yes">
+        <trans-unit approved="yes" id="menu/toggle-fullscreen:0" translate="yes">
           <source>Toggle Fullscreen</source>
           <target>Prepnúť na celú obrazovku</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/toggle-glide-slope:0" translate="yes">
+        <trans-unit approved="yes" id="menu/toggle-glide-slope:0" translate="yes">
           <source>Toggle Glide Slope Tunnel</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/tower-position:0" translate="yes">
+        <trans-unit approved="yes" id="menu/tower-position:0" translate="yes">
           <source>Tower Position</source>
           <target state="translated">Pozícia veže</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/tutorial-start:0" translate="yes">
+        <trans-unit approved="yes" id="menu/tutorial-start:0" translate="yes">
           <source>Tutorials</source>
           <target>Návody</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/view:0" translate="yes">
+        <trans-unit approved="yes" id="menu/view:0" translate="yes">
           <source>View</source>
           <target>Zobraziť</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/view-options:0" translate="yes">
+        <trans-unit approved="yes" id="menu/view-options:0" translate="yes">
           <source>View Options</source>
           <target>Voľby zobrazenia</target>
         </trans-unit>
@@ -451,7 +451,7 @@
           <source>Wingman Controls</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="menu/write-video-config:0" translate="yes">
+        <trans-unit approved="yes" id="menu/write-video-config:0" translate="yes">
           <source>Save Video Configuration</source>
           <target>Uložiť nastavenie videa</target>
         </trans-unit>
@@ -481,7 +481,7 @@
           <source>Add and enable a new scenario. Multiple options are allowed.</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/aircraft-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/aircraft-desc:0" translate="yes">
           <source>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</source>
           <target/>
         </trans-unit>
@@ -493,7 +493,7 @@
           <source>Aircraft model directory (UIUC FDM ONLY)</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/aircraft-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/aircraft-options:0" translate="yes">
           <source>Aircraft</source>
           <target>Lietadlo</target>
         </trans-unit>
@@ -501,7 +501,7 @@
           <source>Specify starting position relative to an airport</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/altitude-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/altitude-desc:0" translate="yes">
           <source>Starting altitude</source>
           <target>Počiatočná nadmorská výška</target>
         </trans-unit>
@@ -517,11 +517,11 @@
           <source>Open connection using the Atlas protocol</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/audio-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/audio-options:0" translate="yes">
           <source>Audio Options</source>
           <target>Voľby zvuku</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/avionics-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/avionics-options:0" translate="yes">
           <source>Avionics Options</source>
           <target>Voľby palubných prístrojov</target>
         </trans-unit>
@@ -565,7 +565,7 @@
           <source>Display console (Windows specific)</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/debugging-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/debugging-options:0" translate="yes">
           <source>Debugging Options</source>
           <target>Voľby ladenia</target>
         </trans-unit>
@@ -701,7 +701,7 @@
           <source>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-ai-traffic-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-ai-traffic-desc:0" translate="yes">
           <source>Enable artificial traffic.</source>
           <target state="translated">Povoliť umelú premávku.</target>
         </trans-unit>
@@ -713,7 +713,7 @@
           <source>Enable auto coordination</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-clock-freeze-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-clock-freeze-desc:0" translate="yes">
           <source>Do not advance clock</source>
           <target state="translated">Zastaviť čas</target>
         </trans-unit>
@@ -741,11 +741,11 @@
           <source>Start in a frozen state</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-fuel-freeze-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-fuel-freeze-desc:0" translate="yes">
           <source>Fuel tank quantity forced to remain constant</source>
           <target state="translated">Vynútiť stále množstvo paliva v nádržiach</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-fullscreen-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-fullscreen-desc:0" translate="yes">
           <source>Enable fullscreen mode</source>
           <target state="translated">Povoliť režim na celú obrazovku</target>
         </trans-unit>
@@ -769,7 +769,7 @@
           <source>(i.e. for full screen Voodoo based cards)</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-panel-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-panel-desc:0" translate="yes">
           <source>Enable instrument panel</source>
           <target state="translated">Povoliť prístrojovú dosku</target>
         </trans-unit>
@@ -777,11 +777,11 @@
           <source>Include random buildings objects</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-random-objects-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-random-objects-desc:0" translate="yes">
           <source>Include random scenery objects</source>
           <target state="translated">Zahrnúť náhodné objekty scenérie</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-random-vegetation-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-random-vegetation-desc:0" translate="yes">
           <source>Include random vegetation objects</source>
           <target state="translated">Zahrnúť náhodné objekty vegetácie</target>
         </trans-unit>
@@ -789,15 +789,15 @@
           <source>Enable METAR based real weather fetching (this requires an open internet connection)</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-rembrandt-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-rembrandt-desc:0" translate="yes">
           <source>Enable Rembrandt rendering</source>
           <target state="translated">Povoliť vykresľovanie Rembrandt</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-save-on-exit:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-save-on-exit:0" translate="yes">
           <source>Allow saving preferences at program exit</source>
           <target state="translated">Umožniť ukladanie predvolieb pri ukončení programu</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-sound-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-sound-desc:0" translate="yes">
           <source>Enable sound effects</source>
           <target state="translated">Povoliť zvukové efekty</target>
         </trans-unit>
@@ -805,19 +805,19 @@
           <source>Enable specular reflections on textured objects</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-splash-screen-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-splash-screen-desc:0" translate="yes">
           <source>Enable splash screen</source>
           <target state="translated">Povoliť úvodnú obrazovku</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-terrasync-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-terrasync-desc:0" translate="yes">
           <source>Enable automatic scenery downloads/updates</source>
           <target state="translated">Povoliť automatické preberanie/aktualizovanie scenérie</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-textures-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-textures-desc:0" translate="yes">
           <source>Enable textures</source>
           <target state="translated">Povoliť textúry</target>
         </trans-unit>
-        <trans-unit approved="no" id="options/enable-wireframe-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/enable-wireframe-desc:0" translate="yes">
           <source>Enable wireframe drawing mode</source>
           <target state="translated">Povoliť režim vykresľovania drôtového modelu</target>
         </trans-unit>
@@ -841,7 +841,7 @@
           <source>Flight Model</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/features-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/features-options:0" translate="yes">
           <source>Features</source>
           <target>Funkcie</target>
         </trans-unit>
@@ -901,7 +901,7 @@
           <source>Open connection using the Garmin GPS protocol</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/general-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/general-options:0" translate="yes">
           <source>General Options</source>
           <target>Všeobecné voľby</target>
         </trans-unit>
@@ -1109,7 +1109,7 @@
           <source>Specify pitch angle (Theta)</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/position-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/position-options:0" translate="yes">
           <source>Initial Position and Orientation</source>
           <target>Počiatočná pozícia a orientácia</target>
         </trans-unit>
@@ -1129,7 +1129,7 @@
           <source>Open connection using the PVE protocol</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/random-objects-desc:0" translate="yes">
+        <trans-unit approved="yes" id="options/random-objects-desc:0" translate="yes">
           <source>(buildings, etc.)</source>
           <target>(budovy, atď.)</target>
         </trans-unit>
@@ -1141,7 +1141,7 @@
           <source>Open connection using the Ray Woodworth motion chair protocol</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/rendering-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/rendering-options:0" translate="yes">
           <source>Rendering Options</source>
           <target>Voľby vykresľovania</target>
         </trans-unit>
@@ -1189,7 +1189,7 @@
           <source>Show a list of available audio device</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/situation-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/situation-options:0" translate="yes">
           <source>Situation Options</source>
           <target>Voľby situácie</target>
         </trans-unit>
@@ -1229,7 +1229,7 @@
           <source>Add this time offset</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="options/time-options:0" translate="yes">
+        <trans-unit approved="yes" id="options/time-options:0" translate="yes">
           <source>Time Options</source>
           <target>Voľby času</target>
         </trans-unit>
@@ -1343,59 +1343,59 @@
         </trans-unit>
       </group>
       <group resname="sys" restype="x-trolltech-linguist-context">
-        <trans-unit approved="no" id="sys/binding-subsystems:0" translate="yes">
+        <trans-unit approved="yes" id="sys/binding-subsystems:0" translate="yes">
           <source>binding subsystems</source>
           <target>Spájanie podsystémov</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/creating-subsystems:0" translate="yes">
+        <trans-unit approved="yes" id="sys/creating-subsystems:0" translate="yes">
           <source>creating subsystems</source>
           <target>Vytváranie podsystémov</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/downloading-scenery:0" translate="yes">
+        <trans-unit approved="yes" id="sys/downloading-scenery:0" translate="yes">
           <source>downloading scenery</source>
           <target>Preberanie scenérie</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/finalize-position:0" translate="yes">
+        <trans-unit approved="yes" id="sys/finalize-position:0" translate="yes">
           <source>finalizing position</source>
           <target>Dokončovanie pozície</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/finishing-subsystems:0" translate="yes">
+        <trans-unit approved="yes" id="sys/finishing-subsystems:0" translate="yes">
           <source>finalizing subsystems</source>
           <target>Dokončovanie podsystémov</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/init:0" translate="yes">
+        <trans-unit approved="yes" id="sys/init:0" translate="yes">
           <source>initializing</source>
           <target>Inicializácia</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/init-graphics:0" translate="yes">
+        <trans-unit approved="yes" id="sys/init-graphics:0" translate="yes">
           <source>initializing graphics engine</source>
           <target>Inicializácia grafického výkonného programu</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/init-scenery:0" translate="yes">
+        <trans-unit approved="yes" id="sys/init-scenery:0" translate="yes">
           <source>initializing scenery</source>
           <target>Inicializácia scenérie</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/init-subsystems:0" translate="yes">
+        <trans-unit approved="yes" id="sys/init-subsystems:0" translate="yes">
           <source>initializing subsystems</source>
           <target>Inicializácia podsystémov</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/loading-aircraft:0" translate="yes">
+        <trans-unit approved="yes" id="sys/loading-aircraft:0" translate="yes">
           <source>loading aircraft</source>
           <target>Načítavanie lietadla</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/loading-aircraft-list:0" translate="yes">
+        <trans-unit approved="yes" id="sys/loading-aircraft-list:0" translate="yes">
           <source>loading aircraft list</source>
           <target>Načítavanie zoznamu lietadiel</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/loading-nav-dat:0" translate="yes">
+        <trans-unit approved="yes" id="sys/loading-nav-dat:0" translate="yes">
           <source>loading navigation data</source>
           <target>Načítavanie navigačných údajov</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/loading-scenery:0" translate="yes">
+        <trans-unit approved="yes" id="sys/loading-scenery:0" translate="yes">
           <source>loading scenery</source>
           <target>Načítavanie scenérie</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/navdata-fixes:0" translate="yes">
+        <trans-unit approved="yes" id="sys/navdata-fixes:0" translate="yes">
           <source>loading fixes</source>
           <target>Načítavanie opráv</target>
         </trans-unit>
@@ -1403,19 +1403,19 @@
           <source>[VALUE]% complete</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="sys/navdata-loading-airports:0" translate="yes">
+        <trans-unit approved="yes" id="sys/navdata-loading-airports:0" translate="yes">
           <source>loading airport data</source>
           <target>Načítavanie údajov letiska</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/navdata-navaids:0" translate="yes">
+        <trans-unit approved="yes" id="sys/navdata-navaids:0" translate="yes">
           <source>loading navigation aid data</source>
           <target>Načítavanie údajov navigačnej pomoci</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/navdata-pois:0" translate="yes">
+        <trans-unit approved="yes" id="sys/navdata-pois:0" translate="yes">
           <source>loading points of interest</source>
           <target>Načítavanie bodov záujmu</target>
         </trans-unit>
-        <trans-unit approved="no" id="sys/navdata-reading-apt-dat-files:0" translate="yes">
+        <trans-unit approved="yes" id="sys/navdata-reading-apt-dat-files:0" translate="yes">
           <source>reading airport data</source>
           <target>Čítanie údajov letiska</target>
         </trans-unit>
@@ -1433,19 +1433,19 @@
         </trans-unit>
       </group>
       <group resname="tips" restype="x-trolltech-linguist-context">
-        <trans-unit approved="no" id="tips/tip:0" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:0" translate="yes">
           <source>Drag while holding the right mouse button to look around</source>
           <target>Ťahaním spolu so stlačeným pravým tlačidlom myši sa obzriete okolo seba</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:1" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:1" translate="yes">
           <source>Hold [Shift] while looking around to move the view up, down, left or right</source>
           <target>Podržaním klávesu Shift počas obzerania sa, presuniete zobrazenie nahor, nadol, doľava alebo doprava</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:2" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:2" translate="yes">
           <source>Press a/A to adjust the simulation speed</source>
           <target>Stlačením klávesov a/A upravíte rýchlosť simulácie</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:3" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:3" translate="yes">
           <source>Press x/X to zoom in and out</source>
           <target>Stlačením klávesov x/X priblížite alebo oddialite pohľad</target>
         </trans-unit>
@@ -1453,15 +1453,15 @@
           <source>Find frequencies of nearby ATC services from the Radios dialog</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:5" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:5" translate="yes">
           <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
           <target>Stlačením klávesu v zmeníte pohľad, pomocou Ctrl-V sa vrátite späť do kabíny</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:6" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:6" translate="yes">
           <source>Press F3 to take a screenshot</source>
           <target>Stlačením klávesu F3 zachytíte snímku obrazovky</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:7" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:7" translate="yes">
           <source>Join the FlightGear community at http://forum.flightgear.org</source>
           <target>Pridajte sa ku komunite simulátora FlightGear na adrese http://forum.flightgear.org</target>
         </trans-unit>
@@ -1469,7 +1469,7 @@
           <source>Press h to bring up a Heads Up Display</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:9" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:9" translate="yes">
           <source>Show or hide the menu bar by pressing F10</source>
           <target>Stlačením klávesu F10 zobrazíte alebo skryjete lištu s ponukou</target>
         </trans-unit>
@@ -1477,11 +1477,11 @@
           <source>Frame-rate too low? - try disabling AI traffic</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:11" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:11" translate="yes">
           <source>Select Environment → Weather to fly in different weather</source>
           <target>Pomocou ponuky Prostredie → Počasie môžete vybrať počasie, v akom budete letieť</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:12" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:12" translate="yes">
           <source>Press F12 to change the radio frequencies easily</source>
           <target>Stlačením klávesu F12 jednoducho zmeníte rádiové frekvencie</target>
         </trans-unit>
@@ -1493,19 +1493,19 @@
           <source>Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
           <target/>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:15" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:15" translate="yes">
           <source>Can't get the engine started? - see Help → Aircraft Checklists</source>
           <target>Máte problém s naštartovaním motora? - prezrite si ponuku Pomocník → Kontrolné zoznamy lietadla</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:16" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:16" translate="yes">
           <source>Drag while holding the middle and right mouse buttons to move the viewpoint</source>
           <target>Ťahaním spolu so stlačeným stredným a pravým tlačidlom myši presuniete pohľad</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:17" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:17" translate="yes">
           <source>Press / to explore the internals of the simulator</source>
           <target>Stlačením klávesu / preskúmate vnútro simulátora</target>
         </trans-unit>
-        <trans-unit approved="no" id="tips/tip:18" translate="yes">
+        <trans-unit approved="yes" id="tips/tip:18" translate="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
           <target>Stlačením Tabulátora a pohybom myši presuniete pohľad, kolieskom myši zmeníte priblíženie</target>
         </trans-unit>

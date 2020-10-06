@@ -48872,7 +48872,7 @@ refs 4
 86 0.698556 0.475521
 kids 0
 OBJECT poly
-name "PanDown"
+name "PANDown"
 loc 0.0025526 -0.0225207 -0.1297603
 crease 61.0
 texture "FG1000.png"

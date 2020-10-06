@@ -46,7 +46,7 @@
     <object-name>PANUp</object-name>
     <object-name>PANLeft</object-name>
     <object-name>PANRight</object-name>
-    <object-name>PanDown</object-name>
+    <object-name>PANDOWN</object-name>
     <object-name>DidectTo</object-name>
     <object-name>MENU</object-name>
     <object-name>FPL</object-name>
@@ -99,7 +99,7 @@
     <object-name>PANUp</object-name>
     <object-name>PANLeft</object-name>
     <object-name>PANRight</object-name>
-    <object-name>PanDown</object-name>
+    <object-name>PANDOWN</object-name>
     <object-name>DidectTo</object-name>
     <object-name>MENU</object-name>
     <object-name>FPL</object-name>

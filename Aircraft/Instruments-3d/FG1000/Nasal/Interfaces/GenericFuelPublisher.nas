@@ -37,6 +37,7 @@ var GenericFuelPublisher =
 
     foreach(var tank; tanks) {
       var actual = tank.getNode("level-gal_us", 1).getValue();
+      if ((actual == nil) or (! isnum(actual))) actual = 0;
       var indicatedNode = tank.getNode("fg1000-indicated-level-gal_us", 1);
       if (indicatedNode.getValue() == nil) indicatedNode.setValue(actual);
     }
@@ -53,9 +54,9 @@ var GenericFuelPublisher =
     foreach(var tank; tanks) {
       var indicatedNode = tank.getNode("fg1000-indicated-level-gal_us", 1);
       var fuel = indicatedNode.getValue();
-      if (fuel == nil) fuel = 0;
+      if ((fuel == nil) or (! isnum(fuel))) fuel = 0;
       var fuel_flow = getprop("/engines/engine[0]/fuel-flow-gph");
-      if (fuel_flow == nil)  fuel_flow = 0;
+      if ((fuel_flow == nil) or (! isnum(fuel_flow))) fuel_flow = 0;
       fuel = fuel - fuel_flow*me.deltaT/3600.0/2;
       indicatedNode.setValue(fuel);
       append(tank_data, {"FuelUSGal": fuel});

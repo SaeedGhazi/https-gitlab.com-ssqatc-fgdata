@@ -17,8 +17,9 @@
     <effect>Effects/grass</effect>
     <texture-set>
       <texture>Terrain/airport-grass-autumn.png</texture>
-      <texture n="13">Terrain/airport-grass-autumn.png</texture>
+      <texture n="13">Terrain/airport-grass.png</texture>
       <texture n="14">Terrain/airport_grass_overlay.png</texture>
+      <texture n="20">Terrain/airport-grass.png</texture>
     </texture-set>
     <parameters>
       <grit_alpha>0.4</grit_alpha>
@@ -27,6 +28,7 @@
       <use_color_overlay>0</use_color_overlay>
       <base_layer_magnification>1.0</base_layer_magnification>
       <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <overlay_alpha>0.85</overlay_alpha>
     </parameters>
     <xsize>256</xsize>
     <ysize>256</ysize>

@@ -1082,7 +1082,7 @@ Chemin local : %2</target>
       </trans-unit>
       <trans-unit id="_msg198" approved="yes">
         <source xml:space="preserve">Airport: </source>
-        <target xml:space="preserve">Airport : </target>
+        <target xml:space="preserve">Aérodrome : </target>
         <context-group purpose="location"><context context-type="linenumber">106</context></context-group>
       </trans-unit>
       <trans-unit id="_msg199" approved="yes">
@@ -1385,7 +1385,7 @@ Chemin local : %2</target>
       </trans-unit>
       <trans-unit id="_msg252" approved="yes">
         <source xml:space="preserve">FlightGear can automatically download scenery as needed, and check for updates to the scenery. If you disable this option, you will need to download &amp; install scenery using an alternative method.</source>
-        <target xml:space="preserve">FlightGear peut si nécessaire, télécharger automatiquement des scènes et vérifier leur mises à jour. Si vous désactivez cette option, vous devrez télécharger et installer les scènes en utilisant une autre méthode.</target>
+        <target xml:space="preserve">FlightGear peut, si nécessaire, télécharger automatiquement des scènes et vérifier si celles que vous avez en local sont à jour. Si vous désactivez cette option, vous devrez télécharger et installer les scènes en utilisant une autre méthode.</target>
         <context-group purpose="location"><context context-type="linenumber">305</context></context-group>
       </trans-unit>
       <trans-unit id="_msg253" approved="yes">

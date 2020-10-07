@@ -1613,7 +1613,7 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
-        <target xml:space="preserve">Une zone de basses pressions, caractérisée un air ascendent, une formation généralisée de nuages stratiformes et un début de précipitations.</target>
+        <target xml:space="preserve">Une zone de basses pressions, caractérisée par un air ascendant, une formation généralisée de nuages stratiformes et un début de précipitations.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Low pressure region</source>

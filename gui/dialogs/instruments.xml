@@ -359,6 +359,81 @@
 
   <hrule/>
 
+  <group>
+    <layout>hbox</layout>
+    <default-padding>5</default-padding>
+
+    <empty><stretch>1</stretch></empty>
+    
+    <text>
+      <halign>right</halign>
+      <label>Instrument lighting:</label>
+    </text>
+
+    <input>
+      <width>50</width>
+      <height>25</height>
+      <live>true</live>
+      <property>/controls/lighting/instruments-norm</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </input>
+    
+    <empty><stretch>0</stretch></empty>
+    
+    <!-- +/- buttons, one above the other. -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>0</default-padding>
+      <button>
+        <pref-width>20</pref-width>
+        <pref-height>20</pref-height>
+        <legend>+</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/controls/lighting/instruments-norm</property>
+          <step>+0.1</step>
+          <max>1</max>
+        </binding>
+        <binding>
+          <command>property-adjust</command>
+          <property>/controls/lighting/panel-norm</property>
+          <step>+0.1</step>
+          <max>1</max>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
+      </button>
+      <button>
+        <pref-width>20</pref-width>
+        <pref-height>20</pref-height>
+        <legend>-</legend>
+        <binding>
+          <command>property-adjust</command>
+          <property>/controls/lighting/instruments-norm</property>
+          <step>-0.1</step>
+          <min>0</min>
+        </binding>
+        <binding>
+          <command>property-adjust</command>
+          <property>/controls/lighting/panel-norm</property>
+          <step>-0.1</step>
+          <min>0</min>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+        </binding>
+      </button>
+    </group>
+    
+    <empty><stretch>1</stretch></empty>
+
+  </group>
+
+  <hrule/>
+
   <button>
     <legend>Close</legend>
     <default>true</default>

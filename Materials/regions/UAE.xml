@@ -76,7 +76,7 @@
     <name>Default</name>
       <texture-set>
       <texture>Terrain/california-sand.png</texture> 
-      <texture n="12">Terrain/california-airport2.png</texture>
+      <texture n="12">Terrain/desert-airport2.png</texture>
       <texture n="15">Terrain/sand_hires_ochre.png</texture>
     </texture-set> 
     <parameters>

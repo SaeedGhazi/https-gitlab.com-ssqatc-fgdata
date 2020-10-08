@@ -171,7 +171,7 @@ var values = func(hash) {
 __.dbg_types = { none:0, bulk:1, debug:2, info:3, warn:4, alert:5 };
 var printlog = func(level, msg...) {
     var c = caller();
-    logprint(LOG_ALERT, "Deprecated printlog() call from ",c[2]~":"~c[3]~
+    logprint(DEV_WARN, "Deprecated printlog() call from ",c[2]~":"~c[3]~
         ", please use logprint instead.");
     logprint([__.dbg_types[level]]~msg);
 }

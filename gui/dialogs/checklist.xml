@@ -93,6 +93,7 @@
           foreach (chklist; checklist_group[grp]) {
             if (chklist == current_checklist) {
               setChecklistGroup(grp);
+              setprop("sim/gui/dialogs/checklist/selected-checklist", current_checklist);
             }
           }
         }

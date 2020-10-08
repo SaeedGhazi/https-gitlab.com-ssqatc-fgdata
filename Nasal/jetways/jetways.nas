@@ -712,12 +712,17 @@ var toggle_jetway_from_model = func(model)
 var load_airport_jetways = func(airport)
  {
  if (isin(loaded_airports, airport)) return;
- var tree = io.read_airport_properties(airport, "jetways");
+ var tree = io.read_airport_properties(airport, "jetways", nil, 1);
  if (tree == nil)
   {
-  tree = io.read_properties(root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml");
-  if (tree == nil) return;
+    var aiPath = root ~ "/AI/Airports/" ~ airport ~ "/jetways.xml";
+    if (io.exists(aiPath)) {
+      tree = io.read_properties(aiPath, nil, 1);
+    }
+  
+    if (tree == nil) return;
   }
+
  append(loaded_airports, airport);
  print_debug("Loading jetways for airport " ~ airport);
  var nodes = tree.getChildren("jetway");

@@ -34,6 +34,11 @@ var is_regular_file = func(path) {
     else return 0;
 };
 
+var exists = func(path) {
+    var tmp = stat(path);
+    return tmp != nil;
+};
+
 # <path> the path that should be searched for subdirectories
 # returns a vector of subdirectory names
 var subdirectories = func(path) {
@@ -132,7 +137,7 @@ var load_nasal = func(file, module = nil) {
 # are returned as a separate props.Node tree. Returns the data as a
 # props.Node on success or nil on error.
 #
-# Usage:   io.read_properties(<filename> [, <props.Node or property-path>]);
+# Usage:   io.read_properties(<filename> [, <props.Node or property-path>, <quiet>]);
 #
 # Examples:
 #
@@ -142,7 +147,7 @@ var load_nasal = func(file, module = nil) {
 #     var data = io.read_properties("/tmp/foo.xml", "/sim/model");
 #     var data = io.read_properties("/tmp/foo.xml");
 #
-var read_properties = func(path, target = nil) {
+var read_properties = func(path, target = nil, quiet = 0) {
     var args = props.Node.new({ filename: path });
     if (target == nil) {
         var ret = args.getNode("data", 1);
@@ -153,6 +158,11 @@ var read_properties = func(path, target = nil) {
         args.getNode("targetnode", 1).setValue(target);
         var ret = props.globals.getNode(target, 1);
     }
+
+    # set the quiet flag if requested
+    if (quiet) 
+        args.getNode("quiet", 1).setValue(1);
+
     return fgcommand("loadxml", args) ? ret : nil;
 }
 
@@ -170,7 +180,7 @@ var read_properties = func(path, target = nil) {
 #
 #     var data = io.read_properties("KSFO", "rwyuse");
 #
-var read_airport_properties = func(icao, fname, target = nil) {
+var read_airport_properties = func(icao, fname, target = nil, quiet = 0) {
     var args = props.Node.new({ filename: fname, icao:icao });
     if (target == nil) {
         var ret = args.getNode("data", 1);
@@ -181,6 +191,11 @@ var read_airport_properties = func(icao, fname, target = nil) {
         args.getNode("targetnode", 1).setValue(target);
         var ret = props.globals.getNode(target, 1);
     }
+
+    # set the quiet flag if requested
+    if (quiet) 
+        args.getNode("quiet", 1).setValue(1);
+        
     return fgcommand("loadxml", args) ? ret : nil;
 }
 

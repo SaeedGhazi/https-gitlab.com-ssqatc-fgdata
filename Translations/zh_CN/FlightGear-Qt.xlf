@@ -1496,57 +1496,57 @@ Local path: %2</source>
       <trans-unit id="_msg274">
         <source xml:space="preserve">A new release of FlightGear is available (%1): click for more information</source>
         <target xml:space="preserve"></target>
-        <context-group purpose="location"><context context-type="linenumber">95</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">96</context></context-group>
       </trans-unit>
       <trans-unit id="_msg275">
         <source xml:space="preserve">Updated version %1 is available: click here to download</source>
         <target xml:space="preserve"></target>
-        <context-group purpose="location"><context context-type="linenumber">96</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">97</context></context-group>
       </trans-unit>
       <trans-unit id="_msg276">
         <source xml:space="preserve">(or click to ignore this)</source>
         <target xml:space="preserve"></target>
-        <context-group purpose="location"><context context-type="linenumber">112</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">113</context></context-group>
       </trans-unit>
       <trans-unit id="_msg277" approved="yes">
         <source xml:space="preserve">Licenced under the GNU Public License (GPL) - click for more info</source>
         <target xml:space="preserve">使用GNU Public License (GPL)授权 - 点击查看更多信息</target>
-        <context-group purpose="location"><context context-type="linenumber">136</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">137</context></context-group>
       </trans-unit>
       <trans-unit id="_msg278" approved="yes">
         <source xml:space="preserve">Aircraft:</source>
         <target xml:space="preserve">机型：</target>
-        <context-group purpose="location"><context context-type="linenumber">192</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">193</context></context-group>
       </trans-unit>
       <trans-unit id="_msg279" approved="yes">
         <source xml:space="preserve">No aircraft selected</source>
         <target xml:space="preserve">没有选中任何机型</target>
-        <context-group purpose="location"><context context-type="linenumber">201</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">202</context></context-group>
       </trans-unit>
       <trans-unit id="_msg280" approved="yes">
         <source xml:space="preserve">State:</source>
         <target xml:space="preserve">状态：</target>
-        <context-group purpose="location"><context context-type="linenumber">277</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">278</context></context-group>
       </trans-unit>
       <trans-unit id="_msg281" approved="yes">
         <source xml:space="preserve">Default state</source>
         <target xml:space="preserve">默认状态</target>
-        <context-group purpose="location"><context context-type="linenumber">279</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">280</context></context-group>
       </trans-unit>
       <trans-unit id="_msg282" approved="yes">
         <source xml:space="preserve">Location:</source>
         <target xml:space="preserve">位置：</target>
-        <context-group purpose="location"><context context-type="linenumber">319</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">320</context></context-group>
       </trans-unit>
       <trans-unit id="_msg283" approved="yes">
         <source xml:space="preserve">&lt;i&gt;set from user arguments (in Settings)&lt;/i&gt;</source>
         <target xml:space="preserve">&lt;i&gt;用户参数的设置 (在“设置”选项卡中)&lt;/i&gt;</target>
-        <context-group purpose="location"><context context-type="linenumber">326</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">327</context></context-group>
       </trans-unit>
       <trans-unit id="_msg284" approved="yes">
         <source xml:space="preserve">Settings:</source>
         <target xml:space="preserve">设置：</target>
-        <context-group purpose="location"><context context-type="linenumber">344</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">345</context></context-group>
       </trans-unit>
     </group>
   </body></file>
@@ -1574,37 +1574,37 @@ Local path: %2</source>
       <trans-unit id="_msg288" approved="yes">
         <source xml:space="preserve">Choose FlightGear data folder</source>
         <target xml:space="preserve">选择FlightGear数据文件夹</target>
-        <context-group purpose="location"><context context-type="linenumber">197</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">198</context></context-group>
       </trans-unit>
       <trans-unit id="_msg289" approved="yes">
         <source xml:space="preserve">This copy of FlightGear does not include the base data files. Please select a suitable folder containing a previously download set of files.</source>
         <target xml:space="preserve">这个FlightGear副本不包含基本数据文件。请选择一个文件夹，包含之前下载的文件。</target>
-        <context-group purpose="location"><context context-type="linenumber">245</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">246</context></context-group>
       </trans-unit>
       <trans-unit id="_msg290" approved="yes">
         <source xml:space="preserve">The requested location &apos;%1&apos; does not appear to be a valid set of data files for FlightGear</source>
         <target xml:space="preserve">请求的位置“%1”似乎不是有效的FlightGear数据文件</target>
-        <context-group purpose="location"><context context-type="linenumber">250</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">251</context></context-group>
       </trans-unit>
       <trans-unit id="_msg291" approved="yes">
         <source xml:space="preserve">Detected incompatible version of the data files: version %1 found, but this is FlightGear %2. (At location: &apos;%3&apos;) Please install or select a matching set of data files.</source>
         <target xml:space="preserve">检测到版本不兼容的数据文件：它们的版本为%1，但是目前FlightGear为版本%2。（在位置：“%3”）请安装或选择一个版本匹配的数据文件。</target>
-        <context-group purpose="location"><context context-type="linenumber">256</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">257</context></context-group>
       </trans-unit>
       <trans-unit id="_msg292" approved="yes">
         <source xml:space="preserve">Please select or download a copy of the FlightGear data files.</source>
         <target xml:space="preserve">请选择或下载一个FlightGear数据文件的副本。</target>
-        <context-group purpose="location"><context context-type="linenumber">263</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">264</context></context-group>
       </trans-unit>
       <trans-unit id="_msg293" approved="yes">
         <source xml:space="preserve">The choosen location (%1) does not appear to contain FlightGear data files. Please try another location.</source>
         <target xml:space="preserve">选择的位置（“%1”）看起来不包含FlightGear数据文件。请尝试另一个位置。</target>
-        <context-group purpose="location"><context context-type="linenumber">267</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">268</context></context-group>
       </trans-unit>
       <trans-unit id="_msg294" approved="yes">
         <source xml:space="preserve">The choosen location (%1) contains files for version %2, but this is FlightGear %3. Please update or try another location</source>
         <target xml:space="preserve">选择的位置（“%1”）包含用于版本%2的文件，但是目前FlightGear为版本%3。请更新或尝试另外一个位置</target>
-        <context-group purpose="location"><context context-type="linenumber">273</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">274</context></context-group>
       </trans-unit>
     </group>
   </body></file>
@@ -1657,49 +1657,49 @@ Local path: %2</source>
       <trans-unit id="_msg303" approved="yes">
         <source xml:space="preserve">On approach</source>
         <target xml:space="preserve">进近中</target>
-        <context-group purpose="location"><context context-type="linenumber">145</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">128</context></context-group>
       </trans-unit>
       <trans-unit id="_msg304" approved="yes">
         <source xml:space="preserve">Ready for take-off</source>
         <target xml:space="preserve">准备起飞</target>
-        <context-group purpose="location"><context context-type="linenumber">147</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">130</context></context-group>
       </trans-unit>
       <trans-unit id="_msg305" approved="yes">
         <source xml:space="preserve">Parked, cold &amp; dark</source>
         <target xml:space="preserve">停机，冷舱</target>
-        <context-group purpose="location"><context context-type="linenumber">149</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">132</context></context-group>
       </trans-unit>
       <trans-unit id="_msg306" approved="yes">
         <source xml:space="preserve">Automatic</source>
         <target xml:space="preserve">自动</target>
-        <context-group purpose="location"><context context-type="linenumber">151</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">134</context></context-group>
       </trans-unit>
       <trans-unit id="_msg307" approved="yes">
         <source xml:space="preserve">Cruise</source>
         <target xml:space="preserve">巡航</target>
-        <context-group purpose="location"><context context-type="linenumber">153</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">136</context></context-group>
       </trans-unit>
       <trans-unit id="_msg308" approved="yes">
         <source xml:space="preserve">Ready to taxi</source>
         <target xml:space="preserve">准备滑行</target>
-        <context-group purpose="location"><context context-type="linenumber">155</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">138</context></context-group>
       </trans-unit>
       <trans-unit id="_msg309" approved="yes">
         <source xml:space="preserve">On approach to a carrier</source>
         <target xml:space="preserve">航空母舰进近</target>
-        <context-group purpose="location"><context context-type="linenumber">157</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">140</context></context-group>
       </trans-unit>
       <trans-unit id="_msg310" approved="yes">
         <source xml:space="preserve">Ready for catapult launch</source>
         <target xml:space="preserve">航空母舰弹射位</target>
-        <context-group purpose="location"><context context-type="linenumber">159</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
       </trans-unit>
     </group>
     <group restype="x-trolltech-linguist-context" resname="StatesModel">
       <trans-unit id="_msg311" approved="yes">
         <source xml:space="preserve">Select state based on startup position.</source>
         <target xml:space="preserve">根据出生位置选择飞机状态。</target>
-        <context-group purpose="location"><context context-type="linenumber">195</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">190</context></context-group>
       </trans-unit>
     </group>
   </body></file>
@@ -2176,12 +2176,12 @@ Local path: %2</source>
       <trans-unit id="_msg392" approved="yes">
         <source xml:space="preserve">Remove</source>
         <target xml:space="preserve">移除</target>
-        <context-group purpose="location"><context context-type="linenumber">116</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">118</context></context-group>
       </trans-unit>
       <trans-unit id="_msg393" approved="yes">
         <source xml:space="preserve">Cancel</source>
         <target xml:space="preserve">取消</target>
-        <context-group purpose="location"><context context-type="linenumber">117</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">119</context></context-group>
       </trans-unit>
     </group>
   </body></file>
@@ -2346,20 +2346,23 @@ Local path: %2</source>
         <context-group purpose="location"><context context-type="linenumber">96</context></context-group>
       </trans-unit>
       <trans-unit id="_msg421">
-        <source xml:space="preserve">FlightGear is Free software, licensed under the &lt;a %1&gt;GNU General Public License&lt;/a&gt;. This means you are are free to use the software, customise it, or make fixes to it, so long as you share your changes with the community.</source>
-        <target xml:space="preserve"></target>
+        <source xml:space="preserve">FlightGear is Free software, licensed under the &lt;a %1&gt;GNU General Public License&lt;/a&gt;. You are free to use, customize and fix the software; and share your changes with the community.</source>
+        <alt-trans>
+          <source xml:space="preserve">FlightGear is Free software, licensed under the &lt;a %1&gt;GNU General Public License&lt;/a&gt;. This means you are are free to use the software, customise it, or make fixes to it, so long as you share your changes with the community.</source>
+          <target xml:space="preserve"></target>
+        </alt-trans>
         <context-group purpose="location"><context context-type="linenumber">114</context></context-group>
       </trans-unit>
       <trans-unit id="_msg422">
         <source xml:space="preserve">FlightGear can automatically report crashes and errors to the development team, which helps to improve the software for everyone. This reporting is anonymous but contains information such as the aircraft in use, your operating system and graphics driver. You can enable or disable this reporting in the &apos;Settings&apos; page.</source>
         <target xml:space="preserve"></target>
-        <context-group purpose="location"><context context-type="linenumber">130</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">129</context></context-group>
       </trans-unit>
     </group>
     <trans-unit id="Okay">
       <source xml:space="preserve"></source>
       <target xml:space="preserve"></target>
-      <context-group purpose="location"><context context-type="linenumber">143</context></context-group>
+      <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
     </trans-unit>
   </body></file>
   <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/HelpSupport.qml" datatype="plaintext" source-language="en" target-language="zh-CN"><body>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
-  <file original="" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/InstallSceneryDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="InstallSceneryDialog">
       <trans-unit id="_msg1" approved="yes">
         <source xml:space="preserve">Install scenery</source>
@@ -23,6 +23,8 @@
         <target xml:space="preserve">Местность установлена в &quot;%1&quot;. Этот путь будет добавлен в список.</target>
       </trans-unit>
     </group>
+  </body></file>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/SetupRootDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="SetupRootDialog">
       <trans-unit id="_msg6" approved="yes">
         <source xml:space="preserve">Setup required data files</source>
@@ -65,6 +67,8 @@
         <target xml:space="preserve">Нажмите эту кнопку, чтобы указать путь к уже загруженной копии файлов</target>
       </trans-unit>
     </group>
+  </body></file>
+  <file original="" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOnsController">
       <trans-unit id="_msg16" translate="no" approved="yes">
         <source xml:space="preserve">Added scenery should contain at least one of the following folders: Objects, Terrain, Buildings, Roads, Pylons, NavData.</source>
@@ -84,7 +88,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/InstallSceneryDialog.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/InstallSceneryDialog.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="InstallSceneryDialog">
       <trans-unit id="_msg19" approved="yes">
         <source xml:space="preserve">Next</source>
@@ -136,7 +140,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/SetupRootDialog.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/SetupRootDialog.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="SetupRootDialog">
       <trans-unit id="_msg28" approved="yes">
         <source xml:space="preserve">FlightGear version %1</source>
@@ -180,7 +184,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/AddOnsController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/AddOnsController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOnsController">
       <trans-unit id="_msg36" approved="yes">
         <source xml:space="preserve">Choose aircraft folder</source>
@@ -224,7 +228,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/QmlAircraftInfo.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/QmlAircraftInfo.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="QObject">
       <trans-unit id="_msg44" approved="yes">
         <source xml:space="preserve">On approach</source>
@@ -275,7 +279,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/FirstRun.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/FirstRun.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="FirstRun">
       <trans-unit id="_msg53" approved="yes">
         <source xml:space="preserve">Welcome to FlightGear, the open source flight simulator. This software is the work of volunteers. we hope you enjoy it. If you find problems, or would like to contribute, please &lt;a %1&gt;visit our forum&lt;/a&gt;.</source>
@@ -299,7 +303,7 @@
       <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
     </trans-unit>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AddButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AddButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddButton">
       <trans-unit id="_msg56" approved="yes">
         <source xml:space="preserve">Add</source>
@@ -308,7 +312,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AddCatalogPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AddCatalogPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddCatalogPanel">
       <trans-unit id="_msg57" approved="yes">
         <source xml:space="preserve">Hangar URL:</source>
@@ -372,7 +376,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AddOns.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AddOns.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOns">
       <trans-unit id="_msg69" approved="yes">
         <source xml:space="preserve">Aircraft hangars</source>
@@ -461,7 +465,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AdvancedSettingsToggle.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AdvancedSettingsToggle.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AdvancedSettingsToggle">
       <trans-unit id="_msg86" approved="yes">
         <source xml:space="preserve">Show more</source>
@@ -475,7 +479,7 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AircraftCompactDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AircraftCompactDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftCompactDelegate">
       <trans-unit id="_msg88" approved="yes">
         <source xml:space="preserve">URI: %1
@@ -486,7 +490,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AircraftDetailsView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AircraftDetailsView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftDetailsView">
       <trans-unit id="_msg89" approved="yes">
         <source xml:space="preserve">by %1</source>
@@ -540,7 +544,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AircraftDownloadPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AircraftDownloadPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftDownloadPanel">
       <trans-unit id="_msg99" approved="yes">
         <source xml:space="preserve">Install</source>
@@ -582,7 +586,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AircraftList.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AircraftList.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftList">
       <trans-unit id="_msg106" approved="yes">
         <source xml:space="preserve">Installed Aircraft</source>
@@ -626,7 +630,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AircraftRatingsPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AircraftRatingsPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftRatingsPanel">
       <trans-unit id="_msg114" approved="yes">
         <source xml:space="preserve">Filter using ratings</source>
@@ -668,7 +672,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/CatalogDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/CatalogDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="CatalogDelegate">
       <trans-unit id="_msg121" approved="yes">
         <source xml:space="preserve">This hangar is currently disabled due to a problem. Click here to try updating the hangar information from the server. (An Internet connection is required for this)</source>
@@ -692,7 +696,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/DragToReorderButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/DragToReorderButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="DragToReorderButton">
       <trans-unit id="_msg125" approved="yes">
         <source xml:space="preserve">Move up</source>
@@ -706,7 +710,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/Environment.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/Environment.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="Environment">
       <trans-unit id="_msg127" approved="yes">
         <source xml:space="preserve">Time &amp; Date</source>
@@ -856,7 +860,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/FlightPlan.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/FlightPlan.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="FlightPlan">
       <trans-unit id="_msg156" approved="yes">
         <source xml:space="preserve">Fly with a flight-plan</source>
@@ -1052,7 +1056,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/Launcher.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/Launcher.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="Launcher">
       <trans-unit id="_msg194" approved="yes">
         <source xml:space="preserve">Summary</source>
@@ -1139,7 +1143,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/Location.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/Location.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="Location">
       <trans-unit id="_msg210" approved="yes">
         <source xml:space="preserve">Location</source>
@@ -1173,7 +1177,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/LocationAirportView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/LocationAirportView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationAirportView">
       <trans-unit id="_msg216" approved="yes">
         <source xml:space="preserve">Heliport: </source>
@@ -1237,7 +1241,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/LocationAltitudeRow.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/LocationAltitudeRow.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationAltitudeRow">
       <trans-unit id="_msg228" approved="yes">
         <source xml:space="preserve">Altitude:</source>
@@ -1246,7 +1250,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/LocationNavaidView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/LocationNavaidView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationNavaidView">
       <trans-unit id="_msg229" approved="yes">
         <source xml:space="preserve">Position: %1</source>
@@ -1280,7 +1284,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/NoDefaultCatalogPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/NoDefaultCatalogPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="NoDefaultCatalogPanel">
       <trans-unit id="_msg235" approved="yes">
         <source xml:space="preserve">The official FlightGear aircraft hangar is not added, so many standard aircraft will not be available. You can add the  hangar now, or hide this message. The offical hangar can always be restored from the &apos;Add-Ons&apos; page.</source>
@@ -1304,7 +1308,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/PathListDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/PathListDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="PathListDelegate">
       <trans-unit id="_msg239" approved="yes">
         <source xml:space="preserve">Remove</source>
@@ -1318,7 +1322,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/PlanRouteDetails.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/PlanRouteDetails.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="PlanRouteDetails">
       <trans-unit id="_msg241" approved="yes">
         <source xml:space="preserve">Previous Leg</source>
@@ -1332,7 +1336,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/RouteLegsView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/RouteLegsView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="RouteLegsView">
       <trans-unit id="_msg243" approved="yes">
         <source xml:space="preserve">at %1&apos;</source>
@@ -1351,7 +1355,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/SearchButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/SearchButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="SearchButton">
       <trans-unit id="_msg246" approved="yes">
         <source xml:space="preserve">Search</source>
@@ -1360,7 +1364,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/SettingExtraArguments.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/SettingExtraArguments.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="SettingExtraArguments">
       <trans-unit id="_msg247" approved="yes">
         <source xml:space="preserve">Enter additional command-line arguments if any are required. See &lt;a href=&quot;http://flightgear.sourceforge.net/getstart-en/getstart-enpa2.html#x5-450004.5&quot;&gt;here&lt;/a&gt; for documentation on possible arguments. &lt;br&gt;&lt;b&gt;Warning:&lt;/b&gt; values entered here always override other settings; &lt;a href=&quot;#view-command-line&quot;&gt;click here&lt;/a&gt; to view the final set of arguments that will be used</source>
@@ -1379,7 +1383,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/SettingPathChooser.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/SettingPathChooser.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="SettingPathChooser">
       <trans-unit id="_msg250" approved="yes">
         <source xml:space="preserve">%1 (default)</source>
@@ -1398,7 +1402,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/Settings.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/Settings.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="Settings">
       <trans-unit id="_msg253" approved="yes">
         <source xml:space="preserve">Settings</source>
@@ -1671,7 +1675,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/Sidebar.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/Sidebar.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="Sidebar">
       <trans-unit id="_msg306" approved="yes">
         <source xml:space="preserve">Fly!</source>
@@ -1685,7 +1689,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/Summary.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/Summary.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="Summary">
       <trans-unit id="_msg308" approved="yes">
         <source xml:space="preserve">A new release of FlightGear is available (%1): click for more information</source>
@@ -1744,7 +1748,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/UpdateAllPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/UpdateAllPanel.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="UpdateAllPanel">
       <trans-unit id="_msg319" approved="yes">
         <source xml:space="preserve">%1 aircraft have updates available - download and install them now?</source>
@@ -1758,7 +1762,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/ViewCommandLine.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/ViewCommandLine.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="ViewCommandLine">
       <trans-unit id="_msg321" approved="yes">
         <source xml:space="preserve">Copy to clipboard</source>
@@ -1767,7 +1771,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/AircraftModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/AircraftModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftItemModel">
       <trans-unit id="_msg322" approved="yes">
         <source xml:space="preserve">Missing description for: %1</source>
@@ -1808,7 +1812,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/AircraftSearchFilterModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/AircraftSearchFilterModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftProxyModel">
       <trans-unit id="_msg329" approved="yes">
         <source xml:space="preserve">(%1 of %2 aircraft)</source>
@@ -1822,7 +1826,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/CatalogListModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/CatalogListModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="CatalogListModel">
       <trans-unit id="_msg331" approved="yes">
         <source xml:space="preserve">The catalog data was not found on the server at the expected location (URL)</source>
@@ -1854,7 +1858,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/FlightPlanController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/FlightPlanController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="FlightPlanController">
       <trans-unit id="_msg336" approved="yes">
         <source xml:space="preserve">Load a flight-plan</source>
@@ -1868,7 +1872,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/LaunchConfig.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/LaunchConfig.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LaunchConfig">
       <trans-unit id="_msg338" approved="yes">
         <source xml:space="preserve">&lt;p&gt;Options passed on the command line:&lt;/p&gt;
@@ -1898,7 +1902,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/LauncherController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/LauncherController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LauncherController">
       <trans-unit id="_msg342" approved="yes">
         <source xml:space="preserve">Create download folder?</source>
@@ -1972,7 +1976,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/LauncherMainWindow.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/LauncherMainWindow.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LauncherMainWindow">
       <trans-unit id="_msg356" approved="yes">
         <source xml:space="preserve">File</source>
@@ -2018,7 +2022,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/LocationController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/LocationController.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationController">
       <trans-unit id="_msg364" approved="yes">
         <source xml:space="preserve">at position %1</source>
@@ -2113,7 +2117,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/MPServersModel.cpp" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/MPServersModel.cpp" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="MPServersModel">
       <trans-unit id="_msg382" approved="yes">
         <source xml:space="preserve">No servers available</source>
@@ -2132,7 +2136,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/QtLauncher.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/QtLauncher.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="initNavCache">
       <trans-unit id="_msg385" approved="yes">
         <source xml:space="preserve">Initialising navigation data, this may take several minutes</source>
@@ -2183,7 +2187,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AddOnsDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AddOnsDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOnsDelegate">
       <trans-unit id="_msg394" approved="yes">
         <source xml:space="preserve">%1 %2</source>
@@ -2207,7 +2211,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AddonsDetailsView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AddonsDetailsView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddonsDetailsView">
       <trans-unit id="_msg398" approved="yes">
         <source xml:space="preserve">%1: %2</source>
@@ -2276,7 +2280,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/AircraftGridDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/AircraftGridDelegate.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftGridDelegate">
       <trans-unit id="_msg411" approved="yes">
         <source xml:space="preserve">Install</source>
@@ -2285,7 +2289,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/GridToggleButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/GridToggleButton.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="GridToggleButton">
       <trans-unit id="_msg412" approved="yes">
         <source xml:space="preserve">Switch to grid view</source>
@@ -2299,7 +2303,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/AddonsModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/AddonsModel.cxx" datatype="cpp" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddonsModel">
       <trans-unit id="_msg414" approved="yes">
         <source xml:space="preserve">%1 - %2</source>
@@ -2308,7 +2312,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/LocationCarrierView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/LocationCarrierView.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationCarrierView">
       <trans-unit id="_msg415" approved="yes">
         <source xml:space="preserve">Carrier: %1</source>
@@ -2352,7 +2356,7 @@ Local path: %2</source>
       </trans-unit>
     </group>
   </body></file>
-  <file original="/home/mike/src/git/flightgear/flightgear/src/GUI/qml/HelpSupport.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
+  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/qml/HelpSupport.qml" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="HelpSupport">
       <trans-unit id="_msg423" approved="yes">
         <source xml:space="preserve">&lt;p&gt;FlightGear is open source software, developed entirely by volunteers. Support is provided by our excellent user community. The easiest place to ask questions and get support is on &lt;a %1&gt;our forums&lt;/a&gt;.&lt;/p&gt;

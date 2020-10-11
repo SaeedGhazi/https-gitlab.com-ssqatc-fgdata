@@ -101,7 +101,7 @@
         var combo = gui.findElementByName(dlgRoot, "checklist-group-combo");
         var idx = 0;
 
-        foreach (var grp_name; keys(checklist_group)) {
+        foreach (var grp_name; sort(keys(checklist_group), func(a,b){string.icmp(a,b)})) {
           combo.getChild("value", idx, 1).setValue(grp_name);
           idx = idx + 1;
         }

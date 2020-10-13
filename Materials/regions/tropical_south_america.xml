@@ -52,17 +52,18 @@
       <texture>Terrain/california-grass.png</texture>
       <texture n="13">Terrain/california-grass.png</texture>
       <texture n="14">Terrain/california-grass-hires.png</texture>
-      <texture n="15">Terrain/airport_grass_overlay.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay2.png</texture>
     </texture-set>
     <parameters>
       <grit_alpha>0.4</grit_alpha>
       <use_overlay>1</use_overlay>
+      <overlay_alpha>1.0</overlay_alpha>
       <use_grain>1</use_grain>
       <overlay_bias>0.0</overlay_bias>
       <use_color_overlay>0</use_color_overlay>
       <base_layer_magnification>1.0</base_layer_magnification>
       <overlay_layer_magnification>4.0</overlay_layer_magnification>
-      <grain_layer_magnification>4.0</grain_layer_magnification>
+      <grain_layer_magnification>60.0</grain_layer_magnification>
     </parameters>
     <xsize>128</xsize>
     <ysize>128</ysize>

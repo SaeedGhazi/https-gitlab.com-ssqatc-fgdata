@@ -23,6 +23,63 @@
     </equals>
   </condition>
 
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <name>Greenspace</name>
+    <effect>Effects/grass</effect>
+    <texture-set>
+      <texture>Terrain/airport-grass-summer.png</texture>
+      <texture n="13">Terrain/airport-grass-summer.png</texture>
+      <texture n="14">Terrain/airport_grass_structure_overlay2.png</texture>
+      <texture n="20">Terrain/airport-grass-summer.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <!-- overlay_alpha is greater than one here. 
+           Reason: structure texture alpha was multiplied by 0.7 to 
+                   work for lowest cases when that texture is used in
+                   the grain slot which doesn't have alpha as of Oct 2020.
+                   Target alpha multiplier is ~0.85. 0.85/0.7 = 1.21
+      -->
+      <overlay_alpha>1.21</overlay_alpha>
+      <use_grain>0</use_grain>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+      <max_grass_height>0.3</max_grass_height>
+      <grass_density>1.0</grass_density>
+      <grass_groups>2</grass_groups>
+      <grass_modulate_by_overlay>0</grass_modulate_by_overlay>
+      <grass_modulate_height_min>0.0</grass_modulate_height_min>
+    </parameters>
+    <xsize>256</xsize>
+    <ysize>256</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>    
+  </material>
+
    <material>
     <name>BarrenCover</name>
     <name>Dirt</name>

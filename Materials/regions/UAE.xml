@@ -257,7 +257,7 @@
     <name>Greenspace</name>
     <name>Grassland</name>
     <texture-set>
-  		<texture>Terrain/california-grass.png</texture> 
+  		<texture>Terrain/california-grass2.png</texture> 
       <texture n="13">Terrain/california-rock.png</texture>  		  
     </texture-set>
     <xsize>500</xsize>

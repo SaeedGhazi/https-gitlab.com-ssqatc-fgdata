@@ -69,10 +69,11 @@
     <parameters>
       <grit_alpha>0.4</grit_alpha>
       <use_overlay>1</use_overlay>
-			<overlay_bias>0.5</overlay_bias>
+      <overlay_bias>0.5</overlay_bias>
       <use_color_overlay>0</use_color_overlay>
       <base_layer_magnification>1.5</base_layer_magnification>
       <overlay_layer_magnification>32.0</overlay_layer_magnification>
+      <overlay_alpha>1.0</overlay_alpha>
     </parameters>
     <xsize>256</xsize>
     <ysize>256</ysize>

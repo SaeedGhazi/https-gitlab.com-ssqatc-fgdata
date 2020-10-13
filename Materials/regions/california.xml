@@ -47,26 +47,35 @@
   </material>
 
   <material>
-    <name>Greenspace</name>
-    <name>Grassland</name>
-    <name>NaturalCrop</name>
-    <name>Marsh</name>
-    <name>FloodLand</name>
-    <name>SaltMarsh</name>
-    <name>HerbWetlandCover</name>
-    <name>WoodedWetlandCover</name>
-    <effect>Effects/agriculture</effect>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <effect>Effects/airfield</effect>
     <texture-set>
-      <texture>Terrain/california-grass2.png</texture>   
-      <!--<texture n="16">Terrain/california-rock.png</texture>--> 
+      <texture>Terrain/california-airport.png</texture>
+      <texture n="13">Terrain/california-airport.png</texture>
+      <texture n="14">Terrain/grass_dry2.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay2.png</texture>
+      <texture n="20">Terrain/grass_dry2.png</texture>
     </texture-set>
     <parameters>
-        <rotation_flag>1</rotation_flag>
-        <rotation_scale>1000.0</rotation_scale>
-        <distortion_factor>1.0</distortion_factor>
+      <grit_alpha>0.2</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <overlay_alpha>1.0</overlay_alpha>
+      <overlay_bias>-0.2</overlay_bias>
+      <use_grain>1</use_grain>
+      <grain_layer_magnification>50.0</grain_layer_magnification>
+      <use_color_overlay>0</use_color_overlay>
+      <max_grass_height>0.35</max_grass_height>
+      <grass_density>1.5</grass_density>
+      <grass_groups>2</grass_groups>
+      <grass_modulate_by_overlay>1</grass_modulate_by_overlay>
+      <grass_modulate_height_min>0.0</grass_modulate_height_min>
     </parameters>
-    <xsize>2000</xsize>
-    <ysize>2000</ysize>
+    <xsize>256</xsize>
+    <ysize>256</ysize>
     <light-coverage>4000000.0</light-coverage>
     <diffuse>
       <r>0.93</r>
@@ -87,24 +96,28 @@
     <bumpiness>0.1</bumpiness>
     <load-resistance>1e30</load-resistance>
   </material>
-  
+
   <material>
-    <name>Grass</name>
-    <name>Airport</name>
-    <name>AirportKeep</name>
-    <effect>Effects/airfield</effect>
+    <name>Greenspace</name>
+    <name>Grassland</name>
+    <name>NaturalCrop</name>
+    <name>Marsh</name>
+    <name>FloodLand</name>
+    <name>SaltMarsh</name>
+    <name>HerbWetlandCover</name>
+    <name>WoodedWetlandCover</name>
+    <effect>Effects/agriculture</effect>
     <texture-set>
-      <texture>Terrain/california-airport.png</texture>
-      <texture n="13">Terrain/california-airport.png</texture>
-      <texture n="14">Terrain/grass_dry2.png</texture>
+      <texture>Terrain/california-grass2.png</texture>   
+      <!--<texture n="16">Terrain/california-rock.png</texture>--> 
     </texture-set>
     <parameters>
-      <grit_alpha>0.2</grit_alpha>
-      <use_overlay>1</use_overlay>
-      <overlay_bias>-0.2</overlay_bias>
+      <rotation_flag>1</rotation_flag>
+      <rotation_scale>1000.0</rotation_scale>
+      <distortion_factor>1.0</distortion_factor>
     </parameters>
-    <xsize>250</xsize>
-    <ysize>250</ysize>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <diffuse>
       <r>0.93</r>

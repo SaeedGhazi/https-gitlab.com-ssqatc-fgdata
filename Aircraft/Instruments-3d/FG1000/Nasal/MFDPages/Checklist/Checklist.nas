@@ -175,8 +175,8 @@ var Checklist =
   topMenu : func(device, pg, menuitem) {
     pg.clearMenu();
     pg.resetMenuColors();
-    pg.addMenuItem(0, "ENGINE", pg, pg.mfd.EIS.engineMenu);
-    pg.addMenuItem(2, "MAP", pg, pg.mfd.NavigationMap.mapMenu);
+    # Manual is inconsistent.  Checklist page has SYSTEM, menu structure shows ENGINE
+    pg.addMenuItem(0, "SYSTEM", pg, pg.mfd.EIS.systemMenu);
     pg.addMenuItem(5, "CHECK", pg,
       func(dev, pg, mi) { pg.getController().toggleCurrentItem(); dev.updateMenus(); }, # callback
       func(svg, mi) { pg.displayCheckUncheck(svg); }  # Display function
@@ -186,7 +186,7 @@ var Checklist =
       func(dev, pg, mi) { dev.selectPage(pg.getMFD().getPage("NavigationMap")); },
     );
 
-    pg.addMenuItem(11, "EMERGENCY", pg,
+    pg.addMenuItem(11, "EMERGCY", pg,
       func(dev, pg, mi) { pg.getController().selectEmergencyChecklist(); }, # callback
     );
 

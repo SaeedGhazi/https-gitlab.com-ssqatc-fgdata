@@ -90,7 +90,7 @@ var ChecklistController =
   },
 
   selectEmergencyChecklist : func() {
-    if (me._checklist == nil) return;
+    if (me._checklists == nil) return;
     # Select the EMERGENCY checklist group, if available.
     var emergency_labels = ["EMERGENCY", "Emergency", "emergency"];
     var group = nil;

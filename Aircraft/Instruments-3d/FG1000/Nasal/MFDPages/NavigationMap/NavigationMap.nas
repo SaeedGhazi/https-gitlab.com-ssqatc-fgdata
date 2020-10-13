@@ -112,7 +112,7 @@ var NavigationMap =
     pg.addMenuItem(2, "MAP", pg, pg.mfd.NavigationMap.mapMenu);
     pg.addMenuItem(8, "DCLTR", pg, func(dev, pg, mi) { pg.mfd.NavigationMap.MFDMap.incrDCLTR(dev, mi); } );
     #pg.addMenuItem(9, "SHW CHRT", pg);  # Optional
-    #pg.addMenuItem(10, "CHKLIST", pg);  # Optional
+    pg.addMenuItem(10, "CHKLIST", pg, func(dev, pg, mi) { pg.mfd.Surround.goToPage("LstPageGroup", "Checklist"); });  # Optional
     device.updateMenus();
   },
 

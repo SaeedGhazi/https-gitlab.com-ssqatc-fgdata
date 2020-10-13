@@ -25,16 +25,19 @@
       <texture>Terrain/grass_green_hires-autumn.png</texture>
       <texture n="13">Terrain/grass_green_hires-autumn.png</texture>
       <texture n="14">Terrain/gravel_gray.png</texture>
-      <texture n="15">Terrain/airport_grass_overlay.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay1.png</texture>
       <texture n="20">Terrain/grass_green_hires-autumn.png</texture>
     </texture-set>
     <parameters>
       <grit_alpha>0.4</grit_alpha>
       <use_overlay>1</use_overlay>
       <overlay_bias>0.1</overlay_bias>
+      <overlay_alpha>1.0</overlay_alpha>
       <use_grain>1</use_grain>
       <use_color_overlay>0</use_color_overlay>
       <base_layer_magnification>0.6</base_layer_magnification>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
       <max_grass_height>0.35</max_grass_height>
       <grass_density>0.5</grass_density>
       <grass_groups>2</grass_groups>

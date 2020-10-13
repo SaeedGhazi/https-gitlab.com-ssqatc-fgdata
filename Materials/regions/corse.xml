@@ -27,18 +27,19 @@
       <texture>Terrain/grass_dry2.png</texture>
       <texture n="13">Terrain/grass_dry2a.png</texture>
       <texture n="14">Terrain/grass_dry2.png</texture>
-      <texture n="15">Terrain/airport_grass_overlay.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay2.png</texture>
 	  <texture n="20">Terrain/grass_dry2a.png</texture>
     </texture-set>
     <parameters>
       <grit_alpha>0.4</grit_alpha>
       <use_overlay>1</use_overlay>
-      <use_grain>1</use_grain>
+      <overlay_layer_magnification>1.3</overlay_layer_magnification>
+      <overlay_alpha>1.0</overlay_alpha>
       <overlay_bias>0.0</overlay_bias>
+      <use_grain>1</use_grain>
       <use_color_overlay>0</use_color_overlay>
       <base_layer_magnification>1.0</base_layer_magnification>
-      <overlay_layer_magnification>1.3</overlay_layer_magnification>
-      <grain_layer_magnification>4.0</grain_layer_magnification>
+      <grain_layer_magnification>60.0</grain_layer_magnification>
       <grass_modulate_by_overlay>1</grass_modulate_by_overlay>
       <grass_modulate_height_min>0.25</grass_modulate_height_min>
       <max_grass_height>0.22</max_grass_height>

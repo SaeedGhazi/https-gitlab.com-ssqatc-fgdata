@@ -534,6 +534,17 @@
     </input>
     <output>/sim/environment/windsock-light</output>
   </filter>
+  <!--
+   Tides
+  -->
+  <filter>
+    <name>MetarController:layer:tide-level</name>
+    <type>gain</type>
+    <scale>0.5</scale>
+    <offset>0.5</offset>
+    <input>/sim/time/tide-level-norm</input>
+    <output>/environment/sea/surface/delta-T-tide</output>
+  </filter>
   <min>0.0</min>
   <max>1.0</max>
 </PropertyList> 

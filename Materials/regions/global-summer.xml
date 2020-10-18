@@ -489,8 +489,8 @@
   <material>
     <name>Littoral</name>
     <texture>Terrain/tidal.png</texture>
-    <xsize>2000</xsize>
-    <ysize>2000</ysize>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
     <solid>1</solid>
     <light-coverage>40000000.0</light-coverage>
     <friction-factor>0.8</friction-factor>

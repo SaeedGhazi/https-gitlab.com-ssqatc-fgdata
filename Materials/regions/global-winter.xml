@@ -365,13 +365,32 @@
 
   <material>
     <name>Littoral</name>
-    <texture>Terrain/tidal.png</texture>
-    <xsize>2000</xsize>
-    <ysize>2000</ysize>
-    <solid>1</solid>
+    <effect>Effects/water</effect>
+    <texture-set>
+      <texture>Terrain/tidal.png</texture>
+      <texture n="10">Terrain/mud.png</texture>
+      <texture n="14">Terrain/sand_overlay.png</texture>
+      <texture n="20">Terrain/sand6_hires.png</texture>
+    </texture-set>
+    <parameters>
+      <ice_cover><use>/environment/sea/surface/delta-T-tide</use></ice_cover>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <overlay_alpha>1.21</overlay_alpha>
+      <use_grain>0</use_grain>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
     <light-coverage>40000000.0</light-coverage>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
     <friction-factor>0.8</friction-factor>
-    <rolling-friction>0.3</rolling-friction>
+    <rolling-friction>0.4</rolling-friction>
     <bumpiness>0.2</bumpiness>
     <load-resistance>1e30</load-resistance>
   </material>

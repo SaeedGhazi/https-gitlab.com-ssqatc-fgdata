@@ -21,7 +21,7 @@
 
  # Example of connecting an incoming and outgoing bridge (should reside inside an aircraft nasal file)
  # 
- # var routedNotifications = [notifications.TacticalNotification.new(nil)];
+ # var routedNotifications = [notifications.TacticalNotification.new()];
  # var incomingBridge = emesary_mp_bridge.IncomingMPBridge.startMPBridge(routedNotifications);
  # var outgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("F-15mp",routedNotifications);
  #------------------------------------------------------------------
@@ -109,7 +109,6 @@
         new_class.OutgoingList = [];
         new_class.Transmitter = _transmitter;
         new_class.TransmitRequired=0;
-        new_class.Transmitter.Register(new_class);
         new_class.MpVariable = _root~"sim/multiplay/"~_propertybase~"["~new_class.MPidx~"]";
         new_class.TransmitterActive = 0;
         new_class.TransmitFrequencySeconds = 1;
@@ -121,6 +120,8 @@
                     {
                         if (new_class.TransmitterActive)
                           new_class.Transmit();
+                        else
+                          new_class.TransmitEnd();
 
                         new_class.TransmitTimer.restart(new_class.TransmitFrequencySeconds);
                     });
@@ -238,6 +239,13 @@
             me.TransmitterActive = size(me.OutgoingList);
             setprop(me.MpVariable,outgoing);
         };
+        new_class.TransmitEnd = func
+        {
+            if (getprop(me.MpVariable) != "") {
+                setprop(me.MpVariable,"");
+            }
+        };
+        new_class.Transmitter.Register(new_class);
         new_class.TransmitTimer.restart(new_class.TransmitFrequencySeconds);
         return new_class;
     },

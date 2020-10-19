@@ -95,11 +95,12 @@ var Transmitter =
         {
             logprint(LOG_INFO, "Transmitter.Register: argument is not a Recipient object");
         }
-        #not having a Receive function is an error
+        # Warn if recipient doesn't have a Receive function - this is not an error because
+        #a receive function could be added after the recipient has been registered - so it is
+        # deprecated to do this.
         if (!isfunc(recipient["Receive"]))
         {
             logprint(DEV_ALERT, "Transmitter.Register: Error, argument has no Receive method!");
-            return 0;
         }
         foreach (var r; me.Recipients)
         {
@@ -303,24 +304,36 @@ var TypeIdUnspecified = 1;
 var NotificationAutoTypeId = 1;
 var Notification =
 {
-    new: func(_type, _ident, _typeid=-1)
+    new: func(_type, _ident, _typeid=0)
     {
         if (!isscalar(_type)) {
             logprint(DEV_ALERT, "Notification.new: _type must be a scalar!");
             return nil;
         }
-        if (!isscalar(_ident)) {
+        if (!isscalar(_ident) and _ident != nil) {
             logprint(DEV_ALERT, "Notification.new: _ident is not scalar but ", typeof(_ident));
             return nil;
         }
         
-        if (_typeid == 0) {
-            NotificationAutoTypeId += 1;
+# typeID of 0 means that the notification does not have an assigned type ID
+#           <0 means an automatic ID is required
+#           >= 16 is a reserved ID
+# normally the typeID should be unique across all of FlightGear.
+# use of automatic ID's is really only for notifications that will never be bridged,
+# or more accurate when bridged the type isn't going to be known fully.
+
+        if (_typeid < 0) {
+            if (_ident != nil){
+                logprint(DEV_ALERT, "_typeid can only be omitted when registering class");
+                return nil;
+            }
+
             # IDs >= 16 are reserved; see http://wiki.flightgear.org/Emesary_Notifications
-            if (NotificationAutoTypeId == 16) {
+            if (NotificationAutoTypeId >= 16) {
                 logprint(LOG_ALERT, "Notification: AutoTypeID limit exceeded: "~NotificationAutoTypeId);
                 return nil;
             }
+            NotificationAutoTypeId += 1;
             _typeid = NotificationAutoTypeId;
         }
 
@@ -412,8 +425,8 @@ var BinaryAsciiTransfer =
 {
     #excluded chars 32 (<space>), 33 (!), 35 (#), 36($), 126 (~), 127 (<del>)
     alphabet : 
-                 chr(1) ~chr(2) ~chr(3) ~chr(4) ~chr(5) ~chr(6) ~chr(7) ~chr(8) ~chr(9)
-        ~chr(10)~chr(11)~chr(12)~chr(13)~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)
+         chr(1)~chr(2)~chr(3)~chr(4)~chr(5)~chr(6)~chr(7)~chr(8)
+        ~chr(9)~chr(10)~chr(11)~chr(12)~chr(13)~chr(14)~chr(15)~chr(16)~chr(17)~chr(18)~chr(19)
         ~chr(20)~chr(21)~chr(22)~chr(23)~chr(24)~chr(25)~chr(26)~chr(27)~chr(28)~chr(29)
         ~chr(30)~chr(31)                ~chr(34)
         ~"%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
@@ -691,6 +704,7 @@ var genericEmesaryGlobalTransmitterTransmit  = func(node)
     transmitter.NotifyAll(message);
 };
 
+# Temporary bugfix -- FIXME
 #removecommand("emesary-transmit"); #in case of reload
 addcommand("emesary-transmit", genericEmesaryGlobalTransmitterTransmit);
 

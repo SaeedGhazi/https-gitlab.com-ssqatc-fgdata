@@ -27,7 +27,11 @@ var AircraftControlNotification_Id = 17;
 var GeoEventNotification_Id = 18;
 # event ID 19 reserved for armaments and stores (model defined).
 var PFDEventNotification_Id = 20;
-var ArmamentInFlightNotification = 21;
+#
+# Combat notifications; e.g. OPRF Emesary MP communications
+var ArmamentInFlightNotification_Id = 21;
+var ArmamentNotification_Id = 22;
+var StaticNotification_Id = 25;  # static object created.
 
 #
 # PropertySyncNotificationBase is a wrapper class for allow properties to be synchronized between

@@ -50,11 +50,11 @@
     <name>Grass</name>
     <name>Airport</name>
     <name>AirportKeep</name>
-    <effect>Effects/airfield</effect>
+    <effect>Effects/grass</effect>
     <texture-set>
       <texture>Terrain/california-airport.png</texture>
-      <texture n="13">Terrain/california-airport.png</texture>
-      <texture n="14">Terrain/grass_dry2.png</texture>
+      <texture n="13">Terrain/grass_dry2.png</texture>
+      <texture n="14">Terrain/california-airport.png</texture>
       <texture n="15">Terrain/airport_grass_structure_overlay2.png</texture>
       <texture n="20">Terrain/grass_dry2.png</texture>
     </texture-set>
@@ -62,14 +62,14 @@
       <grit_alpha>0.2</grit_alpha>
       <base_layer_magnification>1.0</base_layer_magnification>
       <use_overlay>1</use_overlay>
-      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <overlay_layer_magnification>1.0</overlay_layer_magnification>
       <overlay_alpha>1.0</overlay_alpha>
-      <overlay_bias>-0.2</overlay_bias>
+      <overlay_bias>0.125</overlay_bias>
       <use_grain>1</use_grain>
       <grain_layer_magnification>50.0</grain_layer_magnification>
       <use_color_overlay>0</use_color_overlay>
       <max_grass_height>0.35</max_grass_height>
-      <grass_density>1.5</grass_density>
+      <grass_density>1.0</grass_density>
       <grass_groups>2</grass_groups>
       <grass_modulate_by_overlay>1</grass_modulate_by_overlay>
       <grass_modulate_height_min>0.0</grass_modulate_height_min>

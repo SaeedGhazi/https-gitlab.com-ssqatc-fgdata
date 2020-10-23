@@ -4,13 +4,6 @@
 
  <path>c182.ac</path>
 
- <!-- LOD for the model as a whole -->
-
- <animation>
-  <type>range</type>
-  <min-m>0</min-m>
-  <max-m>10000</max-m>
- </animation>
 
   <!-- Object movements -->
   <animation>

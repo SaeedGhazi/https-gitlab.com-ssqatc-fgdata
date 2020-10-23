@@ -33,7 +33,7 @@
 <!-- 1-50   Single engine GA aircraft -->
 <model n="1" type="string">AI/Aircraft/c172/c-fgfs.xml</model>
 <model n="2" type="string">AI/Aircraft/c177/c177-g-brdo.xml</model>
-<model n="3" type="string">AI/Aircraft/c182/Models/c182-ai.xml</model>
+<model n="3" type="string">AI/Aircraft/c182/Models/c182-dpm.xml</model>
 <model n="4" type="string">AI/Aircraft/c182rg/Models/c182rg-ai.xml</model>
 <model n="5" type="string">AI/Aircraft/Cessna208Caravan/Models/Cessna208-ai.xml</model>
 <model n="6" type="string">AI/Aircraft/Cub/Models/Cub-ai.xml</model>

@@ -17,9 +17,9 @@
     <name>DeciduousNeedleCover</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/rainforest-hawaii.png</texture>
-      <texture n="11">Terrain/rainforest-hawaii.png</texture>
-	    <texture n="12">Terrain/cerrado-generic.png</texture>
+      <texture>Terrain/rainforest-patch.png</texture>
+      <texture n="11">Terrain/cerrado-shrub-green.png</texture>
+      <texture n="12">Terrain/cerrado-generic.png</texture>
     </texture-set>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -36,11 +36,32 @@
   <material>
     <name>EvergreenBroadCover</name>
     <name>EvergreenForest</name>
-		<name>Grassland</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/cerrado-generic.png</texture>
+      <texture n="11">Terrain/rainforest-patch.png</texture>
+    </texture-set>
+    <xsize>4000</xsize>
+    <ysize>4000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/cerrado-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>10.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+
+  <material>
+    <name>Grassland</name>
     <name>GrassCover</name>
     <effect>Effects/forest</effect>
-    <texture>Terrain/cerrado-generic.png</texture>
-		<object-mask>Terrain/cerrado-generic-mask.png</object-mask>    
+    <texture-set>
+      <texture>Terrain/cerrado-generic.png</texture>
+      <texture n="11">Terrain/rainforest-patch.png</texture>
+      <texture n="12">Terrain/cropgrass-hires-autumn.png</texture>
+    </texture-set>
     <xsize>4000</xsize>
     <ysize>4000</ysize>
     <light-coverage>900000000.0</light-coverage>
@@ -105,7 +126,20 @@
     <name>ComplexCrop</name>
     <name>MixedCrop</name>
     <name>MixedCropPastureCover</name>
-    <texture>Terrain/cerrado-crop.png</texture>
+    <texture-set>
+      <texture>Terrain/cerrado-crop.png</texture>
+      <texture n="11">Terrain/cerrado-shrub-green.png</texture>
+      <texture n="12">Terrain/cropgrass-hires-autumn.png</texture>
+    </texture-set>
+    <texture-set>
+      <texture>Terrain/cerrado-crop.png</texture>
+      <texture n="11">Terrain/cerrado-shrub-green.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.8</grit_alpha>
+      <use_grain>1</use_grain>
+      <grain_layer_magnification>0.2</grain_layer_magnification>
+    </parameters>
     <object-mask>Terrain/cerrado-crop-mask.png</object-mask>    
     <xsize>4000</xsize>
     <ysize>4000</ysize>

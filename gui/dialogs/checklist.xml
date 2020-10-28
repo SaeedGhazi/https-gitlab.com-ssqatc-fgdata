@@ -299,9 +299,9 @@
 
         var s = getprop("/sim/gui/dialogs/checklist/selected-checklist");
         setprop("/sim/gui/dialogs/checklist/selected-checklist-max-pages", checklist_size[s]);
-        setprop("/sim/gui/dialogs/checklist/selected-page", 0);
+        var currentPage = getprop("/sim/gui/dialogs/checklist/selected-page");
         setprop("/sim/gui/dialogs/checklist/next-available", 1);
-        setprop("/sim/gui/dialogs/checklist/selected-page-text", "1 / " ~ checklist_size[s]);
+        setprop("/sim/gui/dialogs/checklist/selected-page-text", (currentPage + 1) ~ " / " ~ checklist_size[s]);
 
       } else {
 				var group = gui.findElementByName(dlgRoot, "checklist-table-group");

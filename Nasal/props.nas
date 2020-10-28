@@ -532,6 +532,11 @@ var UpdateManager =
     _updateProperty : func(_property)
     {
     },
+
+    #
+    # Monitor a property for a change more than the delta.
+    # - type of the property is used to determine if a delta change
+    #   can be detected or whether to fire on every value change (strings)
     FromProperty : func(_propname, _delta, _changed_method)
     {
         var obj = {parents : [UpdateManager] };
@@ -566,6 +571,8 @@ var UpdateManager =
         return obj;
     },
 
+    #
+    # Determine if specifc property is a numeric (false usually means a string)
     IsNumeric : func(hashkey)
     {
         me.localType = me.property[hashkey].getType();
@@ -579,6 +586,10 @@ var UpdateManager =
           return 0;
     },
 
+    #
+    # Monitor list of properties for a change more than the delta.
+    # - type of the property is used to determine if a delta change
+    #   can be detected or whether to fire on every value change (strings)
     FromPropertyHashList : func(_keylist, _delta, _changed_method)
     {
         var obj = {parents : [UpdateManager] };
@@ -632,6 +643,11 @@ var UpdateManager =
         ;
         return obj;
     },
+
+    # Monitor an individual hash value for a change more than the delta.
+    # - when the hash value is a string use nil as the delta to indicate that
+    #   a simple value changed comparison is required.
+    # - can also use nil to detect any change; e.g. in
     FromHashValue : func(_key, _delta, _changed_method)
     {
         var obj = {parents : [UpdateManager] };
@@ -662,6 +678,12 @@ var UpdateManager =
         ;
         return obj;
     },
+
+    #
+    # Monitor a list of hash values for a change more than the delta.
+    # - when the hash value is a string use nil as the delta to indicate that
+    #   a simple value changed comparison is required.
+    # - can also use nil to detect any change; e.g. in
     FromHashList : func(_keylist, _delta, _changed_method)
     {
         var obj = {parents : [UpdateManager] };

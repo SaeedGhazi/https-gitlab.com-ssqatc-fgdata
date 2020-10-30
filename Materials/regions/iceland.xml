@@ -124,7 +124,7 @@
   <material>
     <name>BarrenCover</name>
     <name>Rock</name>
-    <effect>Effects/landmass-scrub</effect>
+    <effect>Effects/terrain-overlay</effect>
     <texture-set>
       <texture>Terrain/rocks-lava.png</texture>
       <texture n="11">Terrain/lava_hires.png</texture>
@@ -163,11 +163,6 @@
     <ysize>12000</ysize>
     <light-coverage>10000000.0</light-coverage>
     <shininess>2.5</shininess>
-    <wood-coverage>40000.0</wood-coverage>
-    <tree-texture>Trees/mixed-shrub.png</tree-texture>
-    <tree-varieties>8</tree-varieties>
-    <tree-height-m>2.0</tree-height-m>
-    <tree-width-m>2.0</tree-width-m>
     <rolling-friction>0.1</rolling-friction>
     <friction-factor>0.7</friction-factor>
     <bumpiness>0.1</bumpiness>
@@ -193,7 +188,7 @@
     </texture-set>
     <parameters>
      <rock_strata>1</rock_strata>
-     <rotation_flag>1</rotation_flag>
+     <rotation_flag>random</rotation_flag>
      <dot_density>0.1</dot_density>
      <max_overlay_height>1.0</max_overlay_height>
      <overlay_hardness>0.0</overlay_hardness>
@@ -263,7 +258,7 @@
     </texture-set>
     <parameters>
      <rock_strata>1</rock_strata>
-     <rotation_flag>1</rotation_flag>
+     <rotation_flag>random</rotation_flag>
      <rotation_scale>1000.0</rotation_scale>
      <grit_alpha>0.2</grit_alpha>
      <dot_density>0.1</dot_density>
@@ -315,7 +310,7 @@
     </texture-set>
     <parameters>
      <rock_strata>1</rock_strata>
-     <rotation_flag>1</rotation_flag>
+     <rotation_flag>random</rotation_flag>
      <rotation_scale>1000.0</rotation_scale>
      <grit_alpha>0.2</grit_alpha>
      <dot_density>0.1</dot_density>

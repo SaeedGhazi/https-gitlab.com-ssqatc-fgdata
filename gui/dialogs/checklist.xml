@@ -325,7 +325,35 @@
 					"scale/value": scale,
 					"arrow-enabled": 1,
 				});
+
+        # Determine offset to the marker.
+        var vx = getprop("/sim/current-view/x-offset-m");  # Left/right (+ve right)
+        var vy = getprop("/sim/current-view/y-offset-m");  # Up/Down (+ve up)
+        var vz = getprop("/sim/current-view/z-offset-m");  # Forward/backwards (+ve aft)
+
+        # BUT the marker has a different coordinate system!
+        # x = fore/aft (+ve aft)
+        # y = left/right (+ve right)
+        # z = up/down  (+ve up)
+
+        # So we need to do a coordinate transformation as we calculate the angles
+        var hdg = math.atan2(y-vx, x-vz) * R2D + 180;
+        var pitch = math.atan2((z-vy), math.sqrt((x-vz)*(x-vz) + (y-vx)*(y-vx))) * R2D;
+
+        if (! ((hdg > 160) and (hdg < 200))) {
+          # Making the assumption we're in the cockpit, there are limits to where we can look
+          # that are enforced by the view system.  So we can't look into the region of heading
+          # 160-200.
+          var v = props.Node.new();
+          v.setValues({
+            "heading-offset-deg" : hdg,
+            "pitch-offset-deg": pitch,
+          });
+          view.point.move(v);
+        }
+        
       };
+
 
       var nextPage = func() {
         var currentPage = getprop("/sim/gui/dialogs/checklist/selected-page");

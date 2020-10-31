@@ -21,7 +21,8 @@ with the following tags
                 hand side
   <marker>    - A tutorial marker (displayed when the user presses the ? button)
                 This can be easily placed using the Help->Display Tutorial Marker.
-                Contains x-m, y-m, z-m and scale tag.
+                Contains x-m, y-m, z-m and scale tag.  The view will automatically
+                change so the marker is in the center of the screen.
   <condition> - Optional standard FlightGear condition node that evaluates when the
                 checklist item has been completed.
   <binding>   - Zero or more bindings to execute the checklist item.  Allows the user

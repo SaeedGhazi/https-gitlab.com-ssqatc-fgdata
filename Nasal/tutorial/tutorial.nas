@@ -347,12 +347,43 @@ var remove_models = func {
 var set_view = func(node = nil) {
 	node != nil or return;
 	var v = node.getChild("view");
+	var m = node.getChild("marker");
 	if (v != nil) {
 		# when changing view direction, switch to view 0 (captain's view),
 		# unless another view is explicitly specified
 		v.initNode("view-number", 0, "INT", 0);
 		view.point.move(v);
 		return 1;
+	} elsif (m != nil) {
+		# We don't have a specific view, but there is a marker we should
+		# direct the viewpoint towards.
+
+        # Determine offset to the marker.
+        var vx = getprop("/sim/current-view/x-offset-m");  # Port/Starboard (+ve starboard)
+        var vy = getprop("/sim/current-view/y-offset-m");  # Up/Down (+ve up)
+        var vz = getprop("/sim/current-view/z-offset-m");  # Fore/Aft (+ve aft)
+
+        # BUT the marker has a different coordinate system!
+		var x = m.getNode("x-m", 1).getValue(); # Fore/Aft (+ve aft)
+		var y = m.getNode("y-m", 1).getValue(); # Port/Starboard (+ve starboard)
+		var z = m.getNode("z-m", 1).getValue(); # Up/Down  (+ve up)
+
+        # So we need to do a coordinate transformation as we calculate the angles
+        var hdg = math.atan2(y-vx, x-vz) * R2D + 180;
+        var pitch = math.atan2((z-vy), math.sqrt((x-vz)*(x-vz) + (y-vx)*(y-vx))) * R2D;
+
+        if (! ((hdg > 160) and (hdg < 200))) {
+          # Making the assumption we're in the cockpit, there are limits to where we can look
+          # that are enforced by the view system.  So we can't look into the region of heading
+          # 160-200.
+          var v = props.Node.new();
+          v.setValues({
+            "heading-offset-deg" : hdg,
+            "pitch-offset-deg": pitch,
+          });
+          view.point.move(v);
+		  return 1;
+        }
 	}
 	return 0;
 }

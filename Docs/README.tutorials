@@ -356,8 +356,8 @@ copilot view etc. Default view-number is 0 (captain's view).
       <field-of-view>55</field-of-view>            default: 55; smaller zooms in
   </view>                                                       bigger zooms out
 
-
-
+If a <marker> is set by no <view>, the tutorial will automatically change the view
+direction so the marker is in the center of the screen.  
 
 
 -- <marker> -------------------------------------------------------------------
@@ -387,9 +387,8 @@ model in its animation xml file:
       ...
   </PropertyList>
 
-
-
-
+If a <marker> is set by no <view>, the tutorial will automatically change the view
+direction so the marker is in the center of the screen.  
 
 -- <message>/<audio> ----------------------------------------------------------
 

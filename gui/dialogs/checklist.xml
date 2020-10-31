@@ -167,7 +167,7 @@
 
 							var values = item.getChildren("value");
 
-							if (size(values) == 0) {
+							if ((size(values) == 0) or (values[0].getValue() == "")) {
 								# Single name element with no values. Used as title
 								t.getNode("halign", 1).setValue("center");
 								t.getNode("row", 1).setValue(row);
@@ -196,7 +196,11 @@
 										t.getNode("col", 1).setValue(1);
 									}
 
-									t.getNode("label", 1).setValue(values[v].getValue());
+                  if (isscalar(values[v].getValue())) {
+									  t.getNode("label", 1).setValue(values[v].getValue());
+                  } else {
+                    t.getNode("label", 1).setValue("");
+                  }
 
 									# If there's a complete node, it contains a condition
 									# that can be checked to ensure the checklist item is

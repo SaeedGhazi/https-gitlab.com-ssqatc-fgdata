@@ -108,6 +108,7 @@
 			}
 
 			var dump = func {
+				var s = "marker(";
 				var v = props.globals.getNode("/sim/current-view", 1);
 				print("&lt;view>");
 				foreach (var n; ["heading-offset-deg", "pitch-offset-deg", "roll-offset-deg",
@@ -120,8 +121,12 @@
 				foreach (var v; values) {
 					var tag = v.name == "scale" ? "scale" : v.name ~ "-m";
 					print(sprintf("    &lt;%s>%.4f&lt;/%s>", tag, v.valueN.getValue(), tag));
+					s = s ~ sprintf("%.4f, ", v.valueN.getValue());
 				}
-				print("&lt;/marker>\n");
+				print("&lt;/marker>");
+				s = substr(s, 0, size(s)-2); # Trim off last ", "
+				s = s ~ ");\n";
+				print(s);
 			}
 
 			var update = func(w) {

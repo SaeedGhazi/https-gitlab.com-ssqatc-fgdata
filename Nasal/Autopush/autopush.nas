@@ -85,12 +85,13 @@ var _loop = func() {
 }
 
 var _timer = maketimer(0.0167, func{_loop()});
+_timer.simulatedTime = 1;
 
 var _start = func() {
 	# Else overwritten by dialog.
 	settimer(func() {
 		setprop("/sim/model/autopush/target-speed-km_h", 0.0)
-	}, 0.1);
+	}, 0.1, 1);
 	_K_p = getprop("/sim/model/autopush/K_p");
 	_F_p = getprop("/sim/model/autopush/F_p");
 	_K_i = getprop("/sim/model/autopush/K_i");

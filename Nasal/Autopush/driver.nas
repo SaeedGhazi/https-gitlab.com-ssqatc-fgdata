@@ -88,6 +88,7 @@ var _loop = func() {
 }
 
 var _timer = maketimer(0.051, func{_loop()});
+_timer.simulatedTime = 1;
 
 var _done = func() {
 	stop();

@@ -89,7 +89,7 @@ var _stop = func(fail = 0) {
 			settimer(func() {
 				_finalize_top_view();
 				gui.popupTip("Done");
-			}, 1.0);
+			}, 1.0, 1);
 		} else {
 			_finalize_top_view();
 		}

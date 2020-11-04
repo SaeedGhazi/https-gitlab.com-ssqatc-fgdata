@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
-  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/InstallSceneryDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="ru"><body>
+  <file original="" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="InstallSceneryDialog">
       <trans-unit id="_msg1" approved="yes">
         <source xml:space="preserve">Install scenery</source>
@@ -23,8 +23,6 @@
         <target xml:space="preserve">Местность установлена в &quot;%1&quot;. Этот путь будет добавлен в список.</target>
       </trans-unit>
     </group>
-  </body></file>
-  <file original="/Users/jmt/FGFS/meta_release_2/flightgear/src/GUI/SetupRootDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="SetupRootDialog">
       <trans-unit id="_msg6" approved="yes">
         <source xml:space="preserve">Setup required data files</source>
@@ -67,8 +65,6 @@
         <target xml:space="preserve">Нажмите эту кнопку, чтобы указать путь к уже загруженной копии файлов</target>
       </trans-unit>
     </group>
-  </body></file>
-  <file original="" datatype="plaintext" source-language="en" target-language="ru"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOnsController">
       <trans-unit id="_msg16" translate="no" approved="yes">
         <source xml:space="preserve">Added scenery should contain at least one of the following folders: Objects, Terrain, Buildings, Roads, Pylons, NavData.</source>
@@ -1061,14 +1057,14 @@ Local path: %2</source>
         <target xml:space="preserve">Правила:</target>
         <context-group purpose="location"><context context-type="linenumber">138</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg192">
+      <trans-unit id="_msg192" approved="yes">
         <source xml:space="preserve">VFR</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">ПВП</target>
         <context-group purpose="location"><context context-type="linenumber">139</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg193">
+      <trans-unit id="_msg193" approved="yes">
         <source xml:space="preserve">IFR</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">ППП</target>
         <context-group purpose="location"><context context-type="linenumber">139</context></context-group>
       </trans-unit>
       <trans-unit id="_msg194" approved="yes">
@@ -2673,11 +2669,11 @@ Local path: %2</source>
         <target xml:space="preserve"> МГц</target>
         <context-group purpose="location"><context context-type="linenumber">88</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg479">
+      <trans-unit id="_msg479" approved="yes">
         <source xml:space="preserve">kHz</source>
         <alt-trans>
           <source xml:space="preserve">KHz</source>
-          <target xml:space="preserve" state="needs-review-translation"> кГц</target>
+          <target xml:space="preserve"> кГц</target>
         </alt-trans>
         <context-group purpose="location"><context context-type="linenumber">89</context></context-group>
       </trans-unit>

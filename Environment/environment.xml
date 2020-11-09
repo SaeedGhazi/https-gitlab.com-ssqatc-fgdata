@@ -283,6 +283,11 @@
 
   </config>
 
+  <climate>
+    <weather-update type="bool" userarchive="y">false</weather-update>
+    <environment-update type="bool" userarchive="y">false</environment-update>
+  </climate>
+
   <clouds>
     <layer n="0">
       <coverage type="string">clear</coverage>

@@ -88,15 +88,45 @@
     </text>
     
     <group>
-      <layout>hbox</layout>
+      <layout>vbox</layout>
       <halign>left</halign>
       <text>
         <label> </label>
         <halign>left</halign>
       </text>
 
+      <group>
+        <layout>hbox</layout>
+
+        <checkbox>
+          <label> Climate updates weather</label>
+          <name>climate-update</name>
+          <property>/environment/climate/weather-update</property>
+          <live>true</live>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+          </binding>
+        </checkbox>
+
+        <checkbox>
+          <label> Climate updates environment</label>
+          <name>climate-update</name>
+          <property>/environment/climate/environment-update</property>
+          <live>true</live>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+          </binding>
+        </checkbox>
+      </group>
+
       <checkbox>
-        <label> Set maximum snow level from METAR</label>
+        <label> Set maximum snow level from weather</label>
         <name>metar-snow</name>
         <property>/environment/params/metar-updates-snow-level</property>
         <binding>

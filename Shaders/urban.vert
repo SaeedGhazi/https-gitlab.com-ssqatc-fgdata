@@ -19,6 +19,8 @@ attribute vec3 tangent, binormal;
 // void fog_Func(int type);
 /////////////////////////
 
+void setupShadows(vec4 eyeSpacePos);
+
 void main(void)
 {
     rawpos     = gl_Vertex;
@@ -33,4 +35,5 @@ void main(void)
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 //     fog_Func(fogType);
+    setupShadows(ecPosition);
 }

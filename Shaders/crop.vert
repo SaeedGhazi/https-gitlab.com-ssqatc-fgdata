@@ -6,6 +6,8 @@ varying vec3 VNormal;
 varying vec3 Normal;
 varying vec4 constantColor;
 
+void setupShadows(vec4 eyeSpacePos);
+
 void main(void)
 {
 	gl_TexCoord[0]  = gl_MultiTexCoord0;
@@ -21,4 +23,6 @@ void main(void)
 		+ gl_Color * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 	
 	gl_Position = ftransform();
+
+    setupShadows(ecPosition);
 }

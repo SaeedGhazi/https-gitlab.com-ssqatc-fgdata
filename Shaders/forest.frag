@@ -28,6 +28,8 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
+float getShadowing();
+
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {
 
@@ -183,7 +185,7 @@ void main (void)
 	diffuse = gl_Color.rgb * max(0.8, dot(N, l)) * max(0.9, dot(VNormal, gl_LightSource[0].position.xyz));
 	}
 
-    vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 0.0);
+    vec4 ambient_light = gl_LightSource[0].diffuse * vec4(diffuse, 0.0) * getShadowing();
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;

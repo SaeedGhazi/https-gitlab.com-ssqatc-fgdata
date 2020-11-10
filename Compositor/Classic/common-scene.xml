@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>scene</type>
+  <use-shadow-pass>csm0</use-shadow-pass>
+  <use-shadow-pass>csm1</use-shadow-pass>
+  <use-shadow-pass>csm2</use-shadow-pass>
+  <use-shadow-pass>csm3</use-shadow-pass>
+  <binding>
+    <buffer>sun-shadowmap-atlas</buffer>
+    <unit>10</unit>
+    <condition>
+      <property>/sim/rendering/shadows/enabled</property>
+    </condition>
+  </binding>
+</PropertyList>

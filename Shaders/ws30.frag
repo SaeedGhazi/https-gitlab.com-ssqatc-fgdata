@@ -1,3 +1,5 @@
+// WS30 FRAGMENT SHADER
+
 // -*-C++-*-
 #version 120
 
@@ -8,7 +10,11 @@ varying vec3 normal;
 varying vec3 relPos;
 
 
-uniform sampler2D texture;
+uniform sampler2D landclass;
+uniform sampler2D grass;
+uniform sampler2D city;
+uniform sampler2D forest;
+uniform sampler2D water;
 
 
 varying float yprime_alt;
@@ -25,6 +31,11 @@ uniform float overcast;
 uniform float eye_alt;
 uniform float cloud_self_shading;
 
+// Passed from VPBTechnique, not the Effect
+uniform int tile_level;
+uniform float tile_width;
+uniform float tile_height;
+
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
@@ -33,7 +44,7 @@ float eShade;
 
 float fog_func (in float targ, in float alt);
 vec3 get_hazeColor(in float light_arg);
-vec3 filter_combined (in vec3 color);
+vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
 
@@ -85,10 +96,24 @@ void main()
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
-    texel = texture2D(texture, gl_TexCoord[0].st);
+
+	int lc = int(texture2D(landclass, gl_TexCoord[0].st).r * 256.0 + 0.5);
+
+	if ((lc == 1) || (lc == 2) || (lc == 4) || (lc == 5))
+	{
+		texel = texture2D(city, gl_TexCoord[0].st);
+	} else if ((lc > 21) && (lc < 25))
+	{
+		texel = texture2D(forest, gl_TexCoord[0].st);
+	} else if (lc > 38)
+	{
+		texel = texture2D(water, gl_TexCoord[0].st);
+	} else {
+		texel = texture2D(grass, gl_TexCoord[0].st);
+	}
+
+    //texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-
-
 
 // here comes the terrain haze model
 
@@ -245,6 +270,4 @@ fragColor.rgb = mix(hazeColor, fragColor.rgb,transmission);
 fragColor.rgb = filter_combined(fragColor.rgb);
 
 gl_FragColor = fragColor;
-
 }
-

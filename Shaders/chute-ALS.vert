@@ -41,6 +41,7 @@ uniform float chute_bend;
 uniform float chute_projection_z;
 uniform float osg_SimulationTime;
 
+void setupShadows(vec4 eyeSpacePos);
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -286,6 +287,7 @@ else // the faster, full-day version without lightfields
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
     gl_Position = gl_ModelViewProjectionMatrix * vertex;
 
+    setupShadows(gl_ModelViewMatrix * vertex);
 }
 
 

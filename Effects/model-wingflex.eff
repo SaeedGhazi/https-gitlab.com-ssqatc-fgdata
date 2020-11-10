@@ -200,7 +200,6 @@
 		<cloudpos20_x><use>/local-weather/cloud-shadows/cloudpos-x[19]</use></cloudpos20_x>
 		<cloudpos20_y><use>/local-weather/cloud-shadows/cloudpos-y[19]</use></cloudpos20_y>
 		<cloud_shadow_flag><use>/local-weather/cloud-shadows/cloud-shadow-flag</use></cloud_shadow_flag>
-		<rembrandt><use>/sim/rendering/rembrandt/enabled</use></rembrandt>
 		<building-flag type="int">0</building-flag>
 		<!-- 		END fog include -->
 	</parameters>
@@ -450,12 +449,14 @@
 			   
 			   <program>
 				<vertex-shader n="0">Shaders/model-ALS-wingflex.vert</vertex-shader>
-			 	<fragment-shader n="1">Shaders/model-ALS-ultra.frag</fragment-shader>
+                <vertex-shader n="1">Shaders/shadows-include.vert</vertex-shader>
+                <fragment-shader n="1">Shaders/model-ALS-ultra.frag</fragment-shader>
 				<fragment-shader n="2">Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
 				<fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
 				<fragment-shader n="5">Shaders/noise.frag</fragment-shader>
         			<fragment-shader n="6">Shaders/filters-ALS.frag</fragment-shader>
+                <fragment-shader n="7">Shaders/shadows-include.frag</fragment-shader>
 			   </program>
 			   
 			   <uniform>
@@ -1303,14 +1304,28 @@
      			   </uniform>
 
 		  <!-- 			END fog include -->
-		  <uniform>
-			<name>rembrandt_enabled</name>
-			<type>int</type>
-			<value>
-			  <use>rembrandt</use>
-			</value>
-		  </uniform>
-		  </pass>
+          <!-- BEGIN shadows include -->
+          <uniform>
+            <name>shadow_tex</name>
+            <type>sampler-2d</type>
+            <value type="int">10</value>
+          </uniform>
+          <uniform>
+            <name>shadows_enabled</name>
+            <type>bool</type>
+            <value>
+              <use>shadows_enabled</use>
+            </value>
+          </uniform>
+          <uniform>
+            <name>sun_atlas_size</name>
+            <type>int</type>
+            <value>
+              <use>sun_atlas_size</use>
+            </value>
+          </uniform>
+          <!-- END shadows include -->
+         </pass>
 		</technique>
 
 <!-- Default rendering -->
@@ -1531,9 +1546,11 @@
 
 		  <program n="0">
 			  <vertex-shader n="0">Shaders/ubershader.vert</vertex-shader>
-			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
+              <vertex-shader n="1">Shaders/shadows-include.vert</vertex-shader>
+              <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 			  <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
-		  </program>
+              <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
+          </program>
 
 		  <uniform>
 			<name>BaseTex</name>
@@ -1882,13 +1899,27 @@
 			</value>
 		  </uniform>
 		  <!-- 			END fog include -->
-		  <uniform>
-			<name>rembrandt_enabled</name>
-			<type>int</type>
-			<value>
-			  <use>rembrandt</use>
-			</value>
-		  </uniform>
+          <!-- BEGIN shadows include -->
+          <uniform>
+            <name>shadow_tex</name>
+            <type>sampler-2d</type>
+            <value type="int">10</value>
+          </uniform>
+          <uniform>
+            <name>shadows_enabled</name>
+            <type>bool</type>
+            <value>
+              <use>shadows_enabled</use>
+            </value>
+          </uniform>
+          <uniform>
+            <name>sun_atlas_size</name>
+            <type>int</type>
+            <value>
+              <use>sun_atlas_size</use>
+            </value>
+          </uniform>
+          <!-- END shadows include -->
 		  </pass>
 		</technique>
 </PropertyList>

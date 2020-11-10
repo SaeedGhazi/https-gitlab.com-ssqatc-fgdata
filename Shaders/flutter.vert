@@ -35,6 +35,8 @@ uniform sampler3D Noise;
 //void fog_Func(int type);
 /////////////////////////
 
+void setupShadows(vec4 eyeSpacePos);
+
 /////// functions /////////
 
 float normalize_range(float _val)
@@ -139,5 +141,5 @@ void main()
 //        fogCoord = abs(ecPosition.z / ecPosition.w);
 
         //fog_Func(fogType);
-
+        setupShadows(ecPosition);
     }

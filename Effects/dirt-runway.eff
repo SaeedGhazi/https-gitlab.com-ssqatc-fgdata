@@ -140,12 +140,14 @@
       <program>
         <vertex-shader n="0">Shaders/terrain-ALS-ultra.vert</vertex-shader>
         <vertex-shader n="1">Shaders/filters-ALS.vert</vertex-shader>
+        <vertex-shader n="2">Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader n="0">Shaders/drunway-ALS.frag</fragment-shader>        
-	<fragment-shader n="1">Shaders/cloud-shadowfunc.frag</fragment-shader>
-	<fragment-shader n="2">Shaders/noise.frag</fragment-shader>
-	<fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
-	<fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
-	<fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader n="1">Shaders/cloud-shadowfunc.frag</fragment-shader>
+        <fragment-shader n="2">Shaders/noise.frag</fragment-shader>
+        <fragment-shader n="3">Shaders/hazes.frag</fragment-shader>
+        <fragment-shader n="4">Shaders/secondary_lights.frag</fragment-shader>
+        <fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader n="6">Shaders/shadows-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -655,6 +657,27 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
       <depth>
         <function>lequal</function>
     <!--    <write-mask type="bool">false</write-mask> -->

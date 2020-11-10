@@ -2,7 +2,7 @@
 #version 120
 
 #define BLADE_FRACTION 0.1
-#define MAX_LAYERS 30
+#define MAX_LAYERS 20
 #define MAX_DISTANCE 1000.0
 
 uniform float visibility;
@@ -36,6 +36,8 @@ varying float g_layer;				       // The layer where the fragment lives (0-1 rang
 float rand2D(in vec2 co);
 float Noise2D(in vec2 co, in float wavelength);
 vec3 filter_combined (in vec3 color) ;
+
+float getShadowing();
 
 
 float map(float s, float a1, float a2, float b1, float b2)
@@ -153,7 +155,7 @@ void main()
 	texel.r = min(1.0, (1.0 + 2.5  * 0.1 * season) * texel.r);
 	texel.g = texel.g;
 	texel.b = max(0.0, (1.0 - 4.0  * 0.1 * season) *  texel.b);
-	float intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season));
+	float intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season)) * mix(0.3, 1.0, getShadowing());
 	texel.rgb = intensity * normalize(mix(texel.rgb, vec3(0.23,0.17,0.08), smoothstep(1.1,2.0, season)));
 		
 	float base_alpha = clamp(0.4 * max_height/0.3, 0.4, 1.0);

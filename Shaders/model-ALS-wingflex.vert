@@ -39,12 +39,13 @@ uniform float		rotation_rad;
 uniform	int  		refl_dynamic;
 uniform int  		nmap_enabled;
 uniform int  		shader_qual;
-uniform int			rembrandt_enabled;
 
 //////Fog Include///////////
 // uniform	int 	fogType;
 // void	fog_Func(int type);
 ////////////////////////////
+
+void setupShadows(vec4 eyeSpacePos);
 
 void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
 {
@@ -239,13 +240,12 @@ void	main(void)
 			reflVec = reflVec_stat;
 		}
 
-		if(rembrandt_enabled < 1){
 		gl_FrontColor = gl_FrontMaterial.emission + gl_Color
 					  * (gl_LightModel.ambient + gl_LightSource[0].ambient);
-		} else {
-		  gl_FrontColor = gl_Color;
-		}
+
 		gl_Position = gl_ModelViewProjectionMatrix * vertex;
 		//gl_Position = ftransform();
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+
+        setupShadows(gl_ModelViewMatrix * vertex);
 }

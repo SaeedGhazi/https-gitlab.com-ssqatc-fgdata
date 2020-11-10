@@ -15,7 +15,6 @@ varying vec3  normal;
 uniform	int  		refl_dynamic;
 uniform int  		nmap_enabled;
 uniform int  		shader_qual;
-uniform int			rembrandt_enabled;
 
 attribute vec3 instancePosition; // (x,y,z)
 attribute vec3 instanceScale; // (width, depth, height)
@@ -89,12 +88,9 @@ void	main(void)
 // 	Force no alpha on random buildings
 	diffuseColor = vec4(gl_FrontMaterial.diffuse.rgb,1.0);
 
-	if(rembrandt_enabled < 1){
 	gl_FrontColor = gl_FrontMaterial.emission + vec4(1.0)
 					* (gl_LightModel.ambient + gl_LightSource[0].ambient);
-	} else {
-		gl_FrontColor = vec4(1.0);
-	}
+
 	gl_ClipVertex = ecPosition;
 
   // Texture coordinates are stored as:

@@ -45,6 +45,8 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
+float getShadowing();
+
 void QDM(inout vec3 p, inout vec3 v)
 {
     const int MAX_LEVEL = TEXTURE_MIP_LEVELS;
@@ -197,6 +199,7 @@ void main (void)
 
     vec3 l = gl_LightSource[0].position.xyz;
     vec3 diffuse = gl_Color.rgb * max(0.0, dot(N, l));
+    diffuse *= getShadowing();
     float shadow_factor = 1.0;
 
     // Shadow

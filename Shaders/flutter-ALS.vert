@@ -48,6 +48,8 @@ const float terminator_width = 200000.0;
 
 float earthShade;
 
+void setupShadows(vec4 eyeSpacePos);
+
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
 //x = x - 0.5;
@@ -308,5 +310,5 @@ else // the faster, full-day version without lightfields
 //        fogCoord = abs(ecPosition.z / ecPosition.w);
 
         //fog_Func(fogType);
-
+        setupShadows(ecPosition);
     }

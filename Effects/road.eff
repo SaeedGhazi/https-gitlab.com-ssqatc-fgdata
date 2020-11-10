@@ -307,12 +307,14 @@
 			   
 			   <program>
 				<vertex-shader>Shaders/model-ALS-ultra.vert</vertex-shader>
+                <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
 			 	<fragment-shader>Shaders/road-ALS-ultra.frag</fragment-shader>
 				<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+                <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
 				<attribute>
 					    <name>tangent</name>
 					    <index>6</index>
@@ -1070,7 +1072,27 @@
       				  <value><use>display_ysize</use></value>
     			   </uniform>  
 
-
+                   <!-- BEGIN shadows include -->
+                   <uniform>
+                     <name>shadow_tex</name>
+                     <type>sampler-2d</type>
+                     <value type="int">10</value>
+                   </uniform>
+                   <uniform>
+                     <name>shadows_enabled</name>
+                     <type>bool</type>
+                     <value>
+                       <use>shadows_enabled</use>
+                     </value>
+                   </uniform>
+                   <uniform>
+                     <name>sun_atlas_size</name>
+                     <type>int</type>
+                     <value>
+                       <use>sun_atlas_size</use>
+                     </value>
+                   </uniform>
+                   <!-- END shadows include -->
 		 
 		  </pass>
 		</technique>

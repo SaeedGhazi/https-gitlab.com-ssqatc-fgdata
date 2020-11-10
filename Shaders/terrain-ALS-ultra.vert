@@ -53,6 +53,8 @@ float yprime_alt;
 
 vec3 moonlight_perception (in vec3 light);
 
+void setupShadows(vec4 eyeSpacePos);
+
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -290,7 +292,7 @@ if (use_IR_vision)
     gl_FrontColor.a = mie_angle;
     gl_BackColor.a = mie_angle;
 
-	
+    setupShadows(gl_ModelViewMatrix * gl_Vertex);
 }
 
 

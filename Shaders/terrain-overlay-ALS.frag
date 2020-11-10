@@ -46,6 +46,8 @@ vec3 filter_combined (in vec3 color) ;
 
 float shadow_func_nearest (in float x, in float y, in float noise, in float dist);
 
+float getShadowing();
+
 
 void main()
 {
@@ -157,7 +159,7 @@ void main()
 	// lighting is very simple, the ground underneath should do most of it
 	
 	vec3 N = normalize (gl_NormalMatrix * g_normal);
-	float NdotL = 0.5 + 1.0 * clamp(dot (N, gl_LightSource[0].position.xyz), 0.0, 1.0) * cloud_shade;
+	float NdotL = 0.5 + 1.0 * clamp(dot (N, gl_LightSource[0].position.xyz), 0.0, 1.0) * cloud_shade * getShadowing();
 	
 	texel *= length(gl_LightSource[0].diffuse.rgb)/1.73 * scattering * NdotL;
 	texel = clamp(texel, 0.0, 1.0);

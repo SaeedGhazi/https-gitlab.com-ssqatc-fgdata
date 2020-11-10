@@ -89,12 +89,14 @@
       <program>
         <vertex-shader>Shaders/terrain-ALS-ultra.vert</vertex-shader>
         <vertex-shader>Shaders/filters-ALS.vert</vertex-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/rock-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 	<fragment-shader>Shaders/noise.frag</fragment-shader>
 	<fragment-shader>Shaders/hazes.frag</fragment-shader>
 	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 	<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+    <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
       </program>
 	  <uniform>
         <name>intrinsic_wetness</name>
@@ -579,6 +581,27 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
       <depth>
         <function>lequal</function>
    <!--     <write-mask type="bool">false</write-mask> -->

@@ -24,6 +24,8 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
+float getShadowing();
+
 void main (void)
 {
 
@@ -64,7 +66,7 @@ void main (void)
 	//"snow"
 	c1 = mix(c1, clamp(n+nvL[2]*4.1+vec4(0.1, 0.1, nvL[2]*2.2, 1.0), 0.7, 1.0), smoothstep(snowlevel+300.0, snowlevel+360.0, (rawpos.z)+nvL[1]*3000.0));
 
-    vec3 diffuse = gl_Color.rgb * max(0.0, dot(VNormal, gl_LightSource[0].position.xyz));
+    vec3 diffuse = gl_Color.rgb * max(0.0, dot(VNormal, gl_LightSource[0].position.xyz)) * getShadowing();
     vec4 ambient_light = constantColor + gl_LightSource[0].diffuse * vec4(diffuse, 1.0);
 
 	c1 *= ambient_light;

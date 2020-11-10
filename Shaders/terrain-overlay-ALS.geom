@@ -16,7 +16,18 @@ varying out vec3 g_normal;
 varying out float g_altitude;
 varying out float g_layer;
 
-
+uniform mat4 fg_LightMatrix_csm0;
+uniform mat4 fg_LightMatrix_csm1;
+uniform mat4 fg_LightMatrix_csm2;
+uniform mat4 fg_LightMatrix_csm3;
+varying out vec4 lightSpacePos[4];
+void setupShadows(vec4 eyeSpacePos)
+{
+    lightSpacePos[0] = fg_LightMatrix_csm0 * eyeSpacePos;
+    lightSpacePos[1] = fg_LightMatrix_csm1 * eyeSpacePos;
+    lightSpacePos[2] = fg_LightMatrix_csm2 * eyeSpacePos;
+    lightSpacePos[3] = fg_LightMatrix_csm3 * eyeSpacePos;
+}
 
 float min3(in float a, in float b, in float c)
 {
@@ -48,6 +59,8 @@ void main()
             g_layer = currDeltaLayer;
 			g_normal = v_normal[i];
 			g_altitude = gl_PositionIn[i].z;
+
+            setupShadows(gl_ModelViewMatrix * pos);
 
             gl_Position = gl_ModelViewProjectionMatrix * pos;
             gl_TexCoord[0] = gl_TexCoordIn[i][0];

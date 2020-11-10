@@ -51,6 +51,8 @@ uniform mat4 osg_ViewMatrixInverse;
 
 attribute vec3 tangent;//, binormal;
 
+void setupShadows(vec4 eyeSpacePos);
+
 float earthShade;
 
 
@@ -282,6 +284,6 @@ if (use_IR_vision)
     constantColor = gl_FrontMaterial.emission
         + gl_Color * (gl_LightModel.ambient + light_ambient);
 
-	
+setupShadows(ecPosition);
 }
 

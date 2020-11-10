@@ -56,7 +56,7 @@ float fog_func (in float targ, in float alt);
 vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
 
-
+float getShadowing();
 
 
 void main()
@@ -305,12 +305,14 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 	NdotL = NdotL + 1.0 * (noisegrad_10m + 0.5* noisegrad_5m) * mix_factor/0.8 *  (1.0 - smoothstep(1000.0, 2000.0, dist));
 	}
     if (NdotL > 0.0) {
-        color += diffuse_term * NdotL;
+        float shadowmap = getShadowing();
+        color += diffuse_term * NdotL * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = ((gl_FrontMaterial.specular.rgb * 0.1 + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor)));
+                            * pow(NdotHV, gl_FrontMaterial.shininess + (20.0 * water_factor))
+                            * shadowmap);
     }
     color.a = 1.0;//diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very

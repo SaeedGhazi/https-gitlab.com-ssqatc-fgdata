@@ -14,12 +14,16 @@ varying vec3	Vnormal;
 
 uniform mat4 osg_ViewMatrixInverse;
 
+void setupShadows(vec4 eyeSpacePos);
+
 void main()
     {
     RawPosZ = gl_Vertex.z;
-	WorldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
+    vec4 eyePos = gl_ModelViewMatrix * gl_Vertex;
+	WorldPos = (osg_ViewMatrixInverse * eyePos).xyz;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = normalize(gl_Normal);
     Vnormal = normalize(gl_NormalMatrix * gl_Normal);
+    setupShadows(eyePos);
     }

@@ -193,7 +193,6 @@ please see Docs/README.model-combined.eff for documentation
 		<cloudpos20_x><use>/local-weather/cloud-shadows/cloudpos-x[19]</use></cloudpos20_x>
 		<cloudpos20_y><use>/local-weather/cloud-shadows/cloudpos-y[19]</use></cloudpos20_y>
 		<cloud_shadow_flag><use>/local-weather/cloud-shadows/cloud-shadow-flag</use></cloud_shadow_flag>
-		<rembrandt><use>/sim/rendering/rembrandt/enabled</use></rembrandt>
 		<building-flag type="int">0</building-flag>
 		<!-- 		END fog include -->
 	</parameters>
@@ -443,12 +442,14 @@ please see Docs/README.model-combined.eff for documentation
 			   
 			   <program>
 				<vertex-shader n="0">Shaders/model-ALS-ultra.vert</vertex-shader>
+                <vertex-shader n="1">Shaders/shadows-include.vert</vertex-shader>
 			 	<fragment-shader n="0">Shaders/model-ALS-ultra.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader n="2">Shaders/hazes.frag</fragment-shader>
 				<fragment-shader n="3">Shaders/secondary_lights.frag</fragment-shader>
 				<fragment-shader n="4">Shaders/noise.frag</fragment-shader>
 				<fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
+                <fragment-shader n="6">Shaders/shadows-include.frag</fragment-shader>
 			   </program>
 			   
 			   <uniform>
@@ -1268,14 +1269,28 @@ please see Docs/README.model-combined.eff for documentation
      			   </uniform>
 
 
-		  <!-- 			END fog include -->
-		  <uniform>
-			<name>rembrandt_enabled</name>
-			<type>int</type>
-			<value>
-			  <use>rembrandt</use>
-			</value>
-		  </uniform>
+		           <!-- 			END fog include -->
+                   <!-- BEGIN shadows include -->
+                   <uniform>
+                     <name>shadow_tex</name>
+                     <type>sampler-2d</type>
+                     <value type="int">10</value>
+                   </uniform>
+                   <uniform>
+                     <name>shadows_enabled</name>
+                     <type>bool</type>
+                     <value>
+                       <use>shadows_enabled</use>
+                     </value>
+                   </uniform>
+                   <uniform>
+                     <name>sun_atlas_size</name>
+                     <type>int</type>
+                     <value>
+                       <use>sun_atlas_size</use>
+                     </value>
+                   </uniform>
+                   <!-- END shadows include -->
 		  </pass>
 		</technique>
 
@@ -1497,8 +1512,10 @@ please see Docs/README.model-combined.eff for documentation
 
 		  <program n="0">
 			  <vertex-shader n="0">Shaders/ubershader.vert</vertex-shader>
+              <vertex-shader n="1">Shaders/shadows-include.vert</vertex-shader>
 			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 			  <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
+              <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
 		  </program>
 
 		  <uniform>
@@ -1848,13 +1865,27 @@ please see Docs/README.model-combined.eff for documentation
 			</value>
 		  </uniform>
 		  <!-- 			END fog include -->
-		  <uniform>
-			<name>rembrandt_enabled</name>
-			<type>int</type>
-			<value>
-			  <use>rembrandt</use>
-			</value>
-		  </uniform>
+          <!-- BEGIN shadows include -->
+          <uniform>
+            <name>shadow_tex</name>
+            <type>sampler-2d</type>
+            <value type="int">10</value>
+          </uniform>
+          <uniform>
+            <name>shadows_enabled</name>
+            <type>bool</type>
+            <value>
+              <use>shadows_enabled</use>
+            </value>
+          </uniform>
+          <uniform>
+            <name>sun_atlas_size</name>
+            <type>int</type>
+            <value>
+              <use>sun_atlas_size</use>
+            </value>
+          </uniform>
+          <!-- END shadows include -->
 		  </pass>
 		</technique>
 </PropertyList>

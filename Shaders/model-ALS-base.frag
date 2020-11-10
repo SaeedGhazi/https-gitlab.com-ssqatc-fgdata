@@ -56,6 +56,8 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
+float getShadowing();
+
 float luminance(vec3 color)
 {
     return dot(vec3(0.212671, 0.715160, 0.072169), color);
@@ -107,12 +109,14 @@ void main()
 
     NdotL = dot(n, lightDir);
     if (NdotL > 0.0) {
-        color += diffuse_term * NdotL;
+        float shadowmap = getShadowing();
+        color += diffuse_term * NdotL * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess));
+                            * pow(NdotHV, gl_FrontMaterial.shininess)
+                            * shadowmap);
     }
     color.a = diffuse_term.a;
     // This shouldn't be necessary, but our lighting becomes very

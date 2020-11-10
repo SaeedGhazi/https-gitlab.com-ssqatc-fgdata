@@ -1591,52 +1591,6 @@
      </uniform>
     </pass>
   </technique>
-  	
-	<technique n="8">
-		<predicate>
-			<and>
-        <property>/sim/rendering/rembrandt/enabled</property>
-				<property>/sim/rendering/random-vegetation</property>
-			</and>
-		</predicate>
-		<pass n="0">
-			<lighting>true</lighting>
-			<material>
-				<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
-				<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
-				<color-mode>off</color-mode>
-			</material>
-			<alpha-test>
-				<comparison>gequal</comparison>
-				<reference type="float">0.1</reference>
-			</alpha-test>
-			<texture-unit>
-				<unit>0</unit>
-				<type>2d</type>
-				<image>
-					<use>texture[0]/image</use>
-				</image>
-				<wrap-s>clamp</wrap-s>
-				<wrap-t>clamp</wrap-t>
-			</texture-unit>
-			<program>
-				<vertex-shader>Shaders/deferred-tree.vert</vertex-shader>
-				<fragment-shader>Shaders/deferred-tree.frag</fragment-shader>
-				<fragment-shader>Shaders/gbuffer-functions.frag</fragment-shader>
-				<fragment-shader>Shaders/gbuffer-encode.frag</fragment-shader>
-			</program>
-      <uniform>
-        <name>season</name>
-        <type>float</type>
-        <value><use>season</use></value>
-      </uniform>
-			<uniform>
-				<name>texture</name>
-				<type>sampler-2d</type>
-				<value type="int">0</value>
-			</uniform>
-		</pass>
-	</technique>
 	
 	<technique n="9">
 		<predicate>

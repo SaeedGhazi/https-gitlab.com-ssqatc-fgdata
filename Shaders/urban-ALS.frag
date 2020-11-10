@@ -99,6 +99,8 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
+float getShadowing();
+
 void QDM(inout vec3 p, inout vec3 v)
 {
     const int MAX_LEVEL = TEXTURE_MIP_LEVELS;
@@ -279,7 +281,7 @@ void main (void)
     if (cloud_shadow_flag == 1) 
 	{diffuse = diffuse * shadow_func(relPos.x, relPos.y, 1.0, dist);}
 
-
+    diffuse *= getShadowing();
 
 
     float shadow_factor = 1.0;

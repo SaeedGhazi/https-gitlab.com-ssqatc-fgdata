@@ -113,6 +113,8 @@ vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 vec3 addLights(in vec3 color1, in vec3 color2);
 
+float getShadowing();
+
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
     {
@@ -494,14 +496,14 @@ void main (void)
 	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
 	}
 
-
-    vec4 Diffuse  = light_diffuse * nDotVP;
+    float shadowmap = getShadowing();
+    vec4 Diffuse  = light_diffuse * nDotVP * shadowmap;
     Diffuse.rgb += secondary_light * light_distance_fading(dist);	
     if (use_IR_vision)
 	{
 	Diffuse.rgb = max(Diffuse.rgb, vec3 (0.5, 0.5, 0.5));
 	}
-    vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1;
+    vec4 Specular = gl_FrontMaterial.specular * light_diffuse * pf + gl_FrontMaterial.specular * light_ambient * pf1 * shadowmap;
     Specular+=  gl_FrontMaterial.specular * pow(max(0.0,-dot(N,nVertVec)),gl_FrontMaterial.shininess) * vec4(secondary_light,1.0);
 
 	

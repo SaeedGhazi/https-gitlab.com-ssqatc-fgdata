@@ -27,7 +27,6 @@ uniform	float		hdg;
 uniform	int  		refl_dynamic;
 uniform int  		nmap_enabled;
 uniform int  		shader_qual;
-uniform int			rembrandt_enabled;
 uniform int     color_is_position;
 
 //////Fog Include///////////
@@ -177,11 +176,8 @@ void	main(void)
 		reflVec = reflVec_stat;
 	}
 
-	if(rembrandt_enabled < 1){
 	gl_FrontColor = gl_FrontMaterial.emission + vec4(1.0,1.0,1.0,1.0)
 				  * (gl_LightModel.ambient + gl_LightSource[0].ambient);
-	} else {
-	  gl_FrontColor = vec4(1.0,1.0,1.0,1.0);
-	}
+
 	gl_Position  = gl_ModelViewProjectionMatrix * vec4(rawpos,1.0);
 }

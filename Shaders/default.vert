@@ -21,6 +21,8 @@ varying vec3 normal;
 
 uniform int colorMode;
 
+void setupShadows(vec4 eyeSpacePos);
+
 ////fog "include"////////
 //uniform int fogType;
 //
@@ -58,4 +60,5 @@ void main()
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
     //fogCoord = abs(ecPosition.z / ecPosition.w);
 		//fog_Func(fogType);
+    setupShadows(gl_ModelViewMatrix * gl_Vertex);
 }

@@ -34,6 +34,8 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
+float getShadowing();
+
 void main()
     {
 	float pf = 0.0;
@@ -64,7 +66,7 @@ void main()
 
 	float	nDotVP = max(0.0, dot(n, normalize(gl_LightSource[0].position.xyz)));
 	float	nDotHV = max(0.0, dot(n, normalize(gl_LightSource[0].halfVector.xyz)));
-	vec4	Diffuse  = gl_LightSource[0].diffuse * nDotVP;
+	vec4	Diffuse  = gl_LightSource[0].diffuse * nDotVP * getShadowing();
 
 	if (nDotVP > 0.0)
 		pf = pow(nDotHV, gl_FrontMaterial.shininess);

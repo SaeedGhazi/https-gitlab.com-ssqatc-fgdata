@@ -38,6 +38,8 @@ uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
+float getShadowing();
+
 void main (void)
 {
     //vec3 halfV;
@@ -71,9 +73,10 @@ void main (void)
     else
         pf = pow(nDotHV, /*gl_FrontMaterial.*/shininess);
 
-    vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP;
+    float shadowmap = getShadowing();
+    vec4 Diffuse  = gl_LightSource[0].diffuse * nDotVP * shadowmap;
     //vec4 Specular = vec4(vec3(0.5*shininess), 1.0)* gl_LightSource[0].specular * pf;
-	vec4 Specular = vec4(1.0)* lightness * gl_LightSource[0].specular * pf;
+	vec4 Specular = vec4(1.0)* lightness * gl_LightSource[0].specular * pf * shadowmap;
 
     vec4 color = gl_Color + Diffuse * gl_FrontMaterial.diffuse;
     //color += Specular * vec4(vec3(0.5*shininess), 1.0) * nmap.a;

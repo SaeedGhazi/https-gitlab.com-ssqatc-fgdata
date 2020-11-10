@@ -73,6 +73,8 @@ vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
 vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
 
+float getShadowing();
+
 
 void main()
 {
@@ -286,14 +288,16 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 		}
     if (NdotL > 0.0) 
 	{
+        float shadowmap = getShadowing();
 	if (cloud_shadow_flag == 1) 
 		{NdotL = NdotL * shadow_func(relPos.x, relPos.y, 1.0, dist);}
-        color += diffuse_term * NdotL;
+        color += diffuse_term * NdotL * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
 	fresnel = 1.0 + 5.0 * (1.0-smoothstep(0.0,0.2, dot(E,n)));
         specular.rgb = ((vec3 (0.2,0.2,0.2) * fresnel + (water_factor * vec3 (1.0, 1.0, 1.0)))
                             * light_specular.rgb
-                            * pow(NdotHV, max(4.0, (20.0 * water_factor))));
+                            * pow(NdotHV, max(4.0, (20.0 * water_factor)))
+                            * shadowmap);
     	}
 
     // raindrops

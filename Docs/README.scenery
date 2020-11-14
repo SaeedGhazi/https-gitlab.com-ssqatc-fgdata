@@ -194,9 +194,9 @@ is always the same and described in section 3.3.
 ----------------
 
 specifies the terrain elevation data file. These files are generated with
-the TerraGear tools (http://www.terragear.org/) and have file extension
-".btg" ("binary terragear"; there used to be an "*.atg" file, too, where
-the 'a' stood for ASCII).
+the TerraGear tools (http://wiki.flightgear.org/TerraGear) and have file
+extension ".btg" ("binary terragear"; there used to be an "*.atg" file, too,
+where the 'a' stood for ASCII).
 
 Example:
 

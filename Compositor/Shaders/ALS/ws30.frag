@@ -35,6 +35,11 @@ uniform float overcast;
 uniform float eye_alt;
 uniform float cloud_self_shading;
 
+// Passed from VPBTechnique, not the Effect
+uniform int tile_level;
+uniform float tile_width;
+uniform float tile_height;
+
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 

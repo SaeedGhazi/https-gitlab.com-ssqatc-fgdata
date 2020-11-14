@@ -47,7 +47,7 @@ Group._element_factories = {
   "text": Text.new,
   "path": Path.new,
   "image": Image.new,
-  "view": View.new
+  "canvasview": View.new
 };
 
 io.include(include_path~"canvas.nas");

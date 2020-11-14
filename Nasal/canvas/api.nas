@@ -29,13 +29,25 @@ io.include(include_path~"path.nas");
 io.include(include_path~"image.nas");
 io.include(include_path~"svgcanvas.nas");
 
+# myElement
+# ==============================================================================
+# Class for a group element on a canvas
+#
+var View = {
+  new: func(ghost)
+  {
+    return { parents: [View, Element.new(ghost)] };
+  },
+};
+
 # Element factories used by #Group elements to create children
 Group._element_factories = {
   "group": Group.new,
   "map": Map.new,
   "text": Text.new,
   "path": Path.new,
-  "image": Image.new
+  "image": Image.new,
+  "view": View.new
 };
 
 io.include(include_path~"canvas.nas");

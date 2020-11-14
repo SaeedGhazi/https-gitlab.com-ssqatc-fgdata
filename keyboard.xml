@@ -280,6 +280,21 @@ top down before the key bindings are parsed.
   </binding>
  </key>
 
+ <key n="118">
+  <mod-super>
+   <name>Super-v</name>
+   <desc>Clone current view</desc>
+   <binding>
+    <command>view-clone</command>
+   </binding>
+   <mod-shift>
+    <binding>
+     <command>view-last-pair</command>
+    </binding>
+   </mod-shift>
+  </mod-super>
+ </key>
+
  <key n="23">
   <name>Ctrl-W</name>
   <desc>Toggle autopilot wing leveler</desc>

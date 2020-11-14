@@ -12,16 +12,7 @@
 <PropertyList>
   <name>low-spec</name>
   <pass n="0">
-    <name>far</name>
+    <name>single</name>
     <type>scene</type>
-    <z-near>100.0</z-near>
-  </pass>
-  <pass n="1">
-    <name>near</name>
-    <type>scene</type>
-    <cull-mask>0xfff7ff</cull-mask> <!-- Cull the sky (bit 11 off) -->
-    <!-- Only clear the depth buffer so color information isn't overwritten -->
-    <clear-mask>depth</clear-mask>
-    <z-far>100.0</z-far>
   </pass>
 </PropertyList>

@@ -13,9 +13,10 @@ varying vec3 relPos;
 uniform float fg_Fcoef;
 
 uniform sampler2D landclass;
-uniform sampler2D texture1;
-uniform sampler2D texture2;
-uniform sampler2D texture3;
+uniform sampler2D grass;
+uniform sampler2D city;
+uniform sampler2D forest;
+uniform sampler2D water;
 
 
 varying float yprime_alt;
@@ -33,6 +34,11 @@ uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
 uniform float cloud_self_shading;
+
+// Passed from VPBTechnique, not the Effect
+uniform int tile_level;
+uniform float tile_width;
+uniform float tile_height;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -64,7 +70,6 @@ void main()
     vec3 lightDir = gl_LightSource[0].position.xyz;
     vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
-	vec4 lc;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     float intensity;
@@ -96,26 +101,23 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
 
-/*
-	landclass = texture2D(texture, gl_TexCoord[0].st);
-	texel =  (landclass.r > 0.148) * texture2D(texture, gl_TexCoord[3].st) + 
-	        (landclass.g < 0.02) * texture2D(texture, gl_TexCoord[2].st) +
-			(1 - ((landclass.r > 0.148) || (landclass.g < 0.02))) * texture2D(texture, gl_TexCoord[1].st);
-*/
-	lc = texture2D(landclass, gl_TexCoord[0].st);
-	if (lc.r > 0.148) {
-		// Water
-		texel = texture2D(texture3, gl_TexCoord[0].st);
-	} else if (lc.g > 0.02) {
-		texel = texture2D(texture1, gl_TexCoord[0].st);
+	int lc = int(texture2D(landclass, gl_TexCoord[0].st).r * 256.0 + 0.5);
+
+	if ((lc == 1) || (lc == 2) || (lc == 4) || (lc == 5))
+	{
+		texel = texture2D(city, gl_TexCoord[0].st);
+	} else if ((lc > 21) && (lc < 25))
+	{
+		texel = texture2D(forest, gl_TexCoord[0].st);
+	} else if (lc > 38)
+	{
+		texel = texture2D(water, gl_TexCoord[0].st);
 	} else {
-		texel = texture2D(texture2, gl_TexCoord[0].st);
+		texel = texture2D(grass, gl_TexCoord[0].st);
 	}
 
     //texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;
-
-
 
 // here comes the terrain haze model
 

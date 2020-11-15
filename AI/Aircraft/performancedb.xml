@@ -16,6 +16,13 @@
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>212.0</span-ft>
+          <chord-ft>28.7</chord-ft>
+        </wing>
+        <weight-lbs>261950</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>jet_transport</type>
@@ -31,6 +38,13 @@
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>170.0</span-ft>
+          <chord-ft>25.4</chord-ft>
+        </wing>
+        <weight-lbs>430750</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>turboprop_transport</type>
@@ -46,6 +60,13 @@
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>130.0</span-ft>
+          <chord-ft>13.2</chord-ft>
+        </wing>
+        <weight-lbs>115280</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>light</type>
@@ -61,6 +82,13 @@
       <approach-speed-kts>70.0</approach-speed-kts>
       <touchdown-speed-kts>60.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>36.0</span-ft>
+          <chord-ft>4.8</chord-ft>
+        </wing>
+        <weight-lbs>1852</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>jet_fighter</type>
@@ -76,6 +104,13 @@
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>43.0</span-ft>
+          <chord-ft>16.0</chord-ft>
+        </wing>
+        <weight-lbs>48000</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>ww2_fighter</type>
@@ -91,6 +126,13 @@
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>100.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>37.0</span-ft>
+          <chord-ft>6.5</chord-ft>
+        </wing>
+        <weight-lbs>5883</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>tanker</type>
@@ -106,6 +148,13 @@
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>130.0</span-ft>
+          <chord-ft>18.6</chord-ft>
+        </wing>
+        <weight-lbs>210446</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>shuttle</type>
@@ -121,6 +170,13 @@
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>78.0</span-ft>
+          <chord-ft>34.5</chord-ft>
+        </wing>
+        <weight-lbs>200000</weight-lbs>
+      </geometry>
     </aircraft>
     <aircraft>
       <type>ufo</type>
@@ -136,6 +192,13 @@
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
       <taxi-speed-kts>15.0</taxi-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>60.0</span-ft>
+          <chord-ft>60.0</chord-ft>
+        </wing>
+        <weight-lbs>200000</weight-lbs>
+      </geometry>
     </aircraft>
     <!-- Boeing 787 all versions -->
     <aircraft>
@@ -146,6 +209,13 @@
       <cruise-speed-kts>470.0</cruise-speed-kts>
       <approach-speed-kts>160.0</approach-speed-kts>
       <touchdown-speed-kts>145.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>197.0</span-ft>
+          <chord-ft>20.6</chord-ft>
+        </wing>
+        <weight-lbs>422000</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>78</match>
@@ -160,6 +230,13 @@
       <cruise-speed-kts>470.0</cruise-speed-kts>
       <approach-speed-kts>160.0</approach-speed-kts>
       <touchdown-speed-kts>145.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>213.0</span-ft>
+          <chord-ft>28.7</chord-ft>
+        </wing>
+        <weight-lbs>261950</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>77</match>
@@ -174,6 +251,13 @@
       <cruise-speed-kts>470.0</cruise-speed-kts>
       <approach-speed-kts>160.0</approach-speed-kts>
       <touchdown-speed-kts>145.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>160.0</span-ft>
+          <chord-ft>22.9</chord-ft>
+        </wing>
+        <weight-lbs>269875</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>76</match>
@@ -183,6 +267,13 @@
     <aircraft>
       <type>757</type>
       <base>jet_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>160.0</span-ft>
+          <chord-ft>18.5</chord-ft>
+        </wing>
+        <weight-lbs>207430</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>75</match>
@@ -196,6 +287,13 @@
       <rotate-speed-kts>160.0</rotate-speed-kts>
       <takeoff-speed-kts>170.0</takeoff-speed-kts>
       <cruise-speed-kts>490.0</cruise-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>212.0</span-ft>
+          <chord-ft>31.8</chord-ft>
+        </wing>
+        <weight-lbs>661150</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>74</match>
@@ -215,6 +313,13 @@
       <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>117.0</span-ft>
+          <chord-ft>13.7</chord-ft>
+        </wing>
+        <weight-lbs>143530</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>73</match>
@@ -225,6 +330,13 @@
     <aircraft>
       <type>717</type>
       <base>jet_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>93.0</span-ft>
+          <chord-ft>12.7</chord-ft>
+        </wing>
+        <weight-lbs>94750</weight-lbs>
+      </geometry>
     </aircraft>
     <!-- Airbus 380 all versions -->
     <aircraft>
@@ -233,6 +345,13 @@
       <rotate-speed-kts>160.0</rotate-speed-kts>
       <takeoff-speed-kts>170.0</takeoff-speed-kts>
       <cruise-speed-kts>490.0</cruise-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>260.0</span-ft>
+          <chord-ft>39.4</chord-ft>
+        </wing>
+        <weight-lbs>939329</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>38</match>
@@ -249,6 +368,13 @@
       <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>140.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>212.0</span-ft>
+          <chord-ft>23.5</chord-ft>
+        </wing>
+        <weight-lbs>519330</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>A35</match>
@@ -265,6 +391,13 @@
       <takeoff-speed-kts>170.0</takeoff-speed-kts>
       <cruise-speed-kts>490.0</cruise-speed-kts>
       <descent-speed-kts>300.0</descent-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>208.0</span-ft>
+          <chord-ft>27.4</chord-ft>
+        </wing>
+        <weight-lbs>605000</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>34</match>
@@ -283,6 +416,13 @@
       <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>200.0</span-ft>
+          <chord-ft>23.8</chord-ft>
+        </wing>
+        <weight-lbs>409409</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>33</match>
@@ -303,6 +443,13 @@
       <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>110.0</span-ft>
+          <chord-ft>14.1</chord-ft>
+        </wing>
+        <weight-lbs>132950</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>319</match>
@@ -319,6 +466,13 @@
     <aircraft>
       <type>AB3</type>
       <base>heavy_jet</base>
+      <geometry>
+        <wing>
+          <span-ft>153.0</span-ft>
+          <chord-ft>19.3</chord-ft>
+        </wing>
+        <weight-lbs>268280</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>A30</match>
@@ -333,6 +487,13 @@
     <aircraft>
       <type>220</type>
       <base>jet_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>115.0</span-ft>
+          <chord-ft>10.5</chord-ft>
+        </wing>
+        <weight-lbs>117875</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>221</match>
@@ -352,6 +513,13 @@
       <descent-speed-kts>300.0</descent-speed-kts>
       <approach-speed-kts>160.0</approach-speed-kts>
       <touchdown-speed-kts>145.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>170.0</span-ft>
+          <chord-ft>25.2</chord-ft>
+        </wing>
+        <weight-lbs>443240</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>MD11</match>
@@ -367,6 +535,13 @@
       <cruise-speed-kts>470.0</cruise-speed-kts>
       <approach-speed-kts>140.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>110.0</span-ft>
+          <chord-ft>13.4</chord-ft>
+        </wing>
+        <weight-lbs>122150</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>M80</match>
@@ -391,6 +566,13 @@
       <descent-speed-kts>270.0</descent-speed-kts>
       <approach-speed-kts>245.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>93.0</span-ft>
+          <chord-ft>7.4</chord-ft>
+        </wing>
+        <weight-lbs>53200</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>DH8D</match>
@@ -412,6 +594,13 @@
       <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>110.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>90.0</span-ft>
+          <chord-ft>6.7</chord-ft>
+        </wing>
+        <weight-lbs>34500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>DH8C</match>
@@ -423,6 +612,13 @@
     <aircraft>
       <type>DH1</type>
       <base>turboprop_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>85.0</span-ft>
+          <chord-ft>6.9</chord-ft>
+        </wing>
+        <weight-lbs>29700</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>DH2</match>
@@ -440,6 +636,13 @@
       <descent-speed-kts>80.0</descent-speed-kts>
       <approach-speed-kts>70.0</approach-speed-kts>
       <touchdown-speed-kts>64.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>65.0</span-ft>
+          <chord-ft>6.5</chord-ft>
+        </wing>
+        <weight-lbs>9800</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>DHC6</match>
@@ -449,6 +652,13 @@
     <aircraft>
       <type>DHC</type>
       <base>turboprop_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>96.0</span-ft>
+          <chord-ft>9.8</chord-ft>
+        </wing>
+        <weight-lbs>37200</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>DHC4</match>
@@ -464,6 +674,13 @@
       <cruise-speed-kts>450</cruise-speed-kts>
       <approach-speed-kts>140.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>65.0</span-ft>
+          <chord-ft>8.5</chord-ft>
+        </wing>
+        <weight-lbs>40400</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>ER3</match>
@@ -480,6 +697,13 @@
       <rotate-speed-kts>120.0</rotate-speed-kts>
       <takeoff-speed-kts>140.0</takeoff-speed-kts>
       <cruise-speed-kts>480</cruise-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>94.0</span-ft>
+          <chord-ft>10.5</chord-ft>
+        </wing>
+        <weight-lbs>87750</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>ERJ190</match>
@@ -502,6 +726,13 @@
       <descent-speed-kts>290.0</descent-speed-kts>
       <approach-speed-kts>250.0</approach-speed-kts>
       <touchdown-speed-kts>126.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>65.0</span-ft>
+          <chord-ft>6.5</chord-ft>
+        </wing>
+        <weight-lbs>20500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>E120</match>
@@ -520,6 +751,13 @@
       <cruise-speed-kts>390.0</cruise-speed-kts>
       <approach-speed-kts>140.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>92.0</span-ft>
+          <chord-ft>10.9</chord-ft>
+        </wing>
+        <weight-lbs>63200</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>F70</match>
@@ -537,6 +775,13 @@
       <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>95.0</span-ft>
+          <chord-ft>7.9</chord-ft>
+        </wing>
+        <weight-lbs>34200</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>F27-</match>
@@ -554,6 +799,13 @@
       <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>145.0</approach-speed-kts>
       <touchdown-speed-kts>115.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>88.0</span-ft>
+          <chord-ft>7.5</chord-ft>
+        </wing>
+        <weight-lbs>40200</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>AT4</match>
@@ -577,6 +829,13 @@
       <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>135.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>115.0</span-ft>
+          <chord-ft>10.5</chord-ft>
+        </wing>
+        <weight-lbs>108400</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>BCS1</match>
@@ -597,6 +856,13 @@
       <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>140.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>115.0</span-ft>
+          <chord-ft>10.5</chord-ft>
+        </wing>
+        <weight-lbs>117900</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>BCS3</match>
@@ -613,6 +879,13 @@
       <cruise-speed-kts>450.0</cruise-speed-kts>
       <approach-speed-kts>140.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>86.0</span-ft>
+          <chord-ft>9.7</chord-ft>
+        </wing>
+        <weight-lbs>71500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>CR1</match>
@@ -634,6 +907,13 @@
       <cruise-speed-kts>321.0</cruise-speed-kts>
       <approach-speed-kts>120.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>81.0</span-ft>
+          <chord-ft>7.4</chord-ft>
+        </wing>
+        <weight-lbs>40400</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>SAAB 2000</match>
@@ -652,6 +932,13 @@
       <descent-speed-kts>240.0</descent-speed-kts>
       <approach-speed-kts>105.0</approach-speed-kts>
       <touchdown-speed-kts>95.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>70.0</span-ft>
+          <chord-ft>6.4</chord-ft>
+        </wing>
+        <weight-lbs>23500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>SAAB 340</match>
@@ -669,6 +956,13 @@
       <cruise-speed-kts>260.0</cruise-speed-kts>
       <approach-speed-kts>100.0</approach-speed-kts>
       <touchdown-speed-kts>80.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>60.0</span-ft>
+          <chord-ft>5.8</chord-ft>
+        </wing>
+        <weight-lbs>19100</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>JS41</match>
@@ -684,6 +978,13 @@
       <cruise-speed-kts>230.0</cruise-speed-kts>
       <approach-speed-kts>125.0</approach-speed-kts>
       <touchdown-speed-kts>110.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>52.0</span-ft>
+          <chord-ft>5.2</chord-ft>
+        </wing>
+        <weight-lbs>12500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>JS31</match>
@@ -706,6 +1007,13 @@
       <descent-speed-kts>180.0</descent-speed-kts>
       <approach-speed-kts>118.0</approach-speed-kts>
       <touchdown-speed-kts>110.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>58.0</span-ft>
+          <chord-ft>5.3</chord-ft>
+        </wing>
+        <weight-lbs>13750</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>b1900d</match>
@@ -726,6 +1034,13 @@
       <cruise-speed-kts>260.0</cruise-speed-kts>
       <approach-speed-kts>110.0</approach-speed-kts>
       <touchdown-speed-kts>98.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>57.0</span-ft>
+          <chord-ft>5.3</chord-ft>
+        </wing>
+        <weight-lbs>12450</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>beech200</match>
@@ -747,6 +1062,13 @@
       <descent-speed-kts>150.0</descent-speed-kts>
       <approach-speed-kts>130.0</approach-speed-kts>
       <touchdown-speed-kts>94.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>35.0</span-ft>
+          <chord-ft>5.0</chord-ft>
+        </wing>
+        <weight-lbs>3725</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Cessna 310</match>
@@ -765,6 +1087,13 @@
       <cruise-speed-kts>115.0</cruise-speed-kts>
       <approach-speed-kts>70.0</approach-speed-kts>
       <touchdown-speed-kts>60.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>36.0</span-ft>
+          <chord-ft>4.8</chord-ft>
+        </wing>
+        <weight-lbs>2100</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>c177</match>
@@ -790,6 +1119,13 @@
       <descent-speed-kts>150.0</descent-speed-kts>
       <approach-speed-kts>120.0</approach-speed-kts>
       <touchdown-speed-kts>75.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>52.0</span-ft>
+          <chord-ft>5.4</chord-ft>
+        </wing>
+        <weight-lbs>6350</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>CESSNA 208 Caravan</match>
@@ -813,6 +1149,13 @@
       <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>220.0</approach-speed-kts>
       <touchdown-speed-kts>115.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>52.0</span-ft>
+          <chord-ft>6.6</chord-ft>
+        </wing>
+        <weight-lbs>11550</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Citation</match>
@@ -837,6 +1180,13 @@
       <descent-speed-kts>250.0</descent-speed-kts>
       <approach-speed-kts>200.0</approach-speed-kts>
       <touchdown-speed-kts>125.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>86.0</span-ft>
+          <chord-ft>9.7</chord-ft>
+        </wing>
+        <weight-lbs>73500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>RJ70</match>
@@ -845,7 +1195,7 @@
       <match>AR1</match>
       <match>AR7</match>
       <match>AR8</match>
-	  <match>142</match>
+      <match>142</match>
       <match>146</match>
       <match>146-100</match>
       <match>146-200</match>
@@ -869,6 +1219,13 @@
       <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>82.0</span-ft>
+          <chord-ft>9.2</chord-ft>
+        </wing>
+        <weight-lbs>27400</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Yak-40</match>
@@ -889,6 +1246,13 @@
       <descent-speed-kts>270.0</descent-speed-kts>
       <approach-speed-kts>180.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>114.0</span-ft>
+          <chord-ft>14.0</chord-ft>
+        </wing>
+        <weight-lbs>99700</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Yak-42</match>
@@ -911,6 +1275,13 @@
       <descent-speed-kts>270.0</descent-speed-kts>
       <approach-speed-kts>180.0</approach-speed-kts>
       <touchdown-speed-kts>150.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>95.0</span-ft>
+          <chord-ft>14.4</chord-ft>
+        </wing>
+        <weight-lbs>83250</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Tu-134</match>
@@ -931,6 +1302,13 @@
       <descent-speed-kts>290.0</descent-speed-kts>
       <approach-speed-kts>250.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>123.0</span-ft>
+          <chord-ft>17.6</chord-ft>
+        </wing>
+        <weight-lbs>175500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Tu-154</match>
@@ -951,6 +1329,13 @@
       <descent-speed-kts>290.0</descent-speed-kts>
       <approach-speed-kts>250.0</approach-speed-kts>
       <touchdown-speed-kts>140.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>137.0</span-ft>
+          <chord-ft>14.5</chord-ft>
+        </wing>
+        <weight-lbs>199500</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Tu-204</match>
@@ -975,6 +1360,13 @@
       <descent-speed-kts>240.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>120.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>96.0</span-ft>
+          <chord-ft>8.4</chord-ft>
+        </wing>
+        <weight-lbs>37800</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>An24</match>
@@ -999,6 +1391,13 @@
       <descent-speed-kts>230.0</descent-speed-kts>
       <approach-speed-kts>170.0</approach-speed-kts>
       <touchdown-speed-kts>105.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>96.0</span-ft>
+          <chord-ft>8.4</chord-ft>
+        </wing>
+        <weight-lbs>43000</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>An26</match>
@@ -1023,6 +1422,13 @@
       <descent-speed-kts>170.0</descent-speed-kts>
       <approach-speed-kts>150.0</approach-speed-kts>
       <touchdown-speed-kts>90.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>72.0</span-ft>
+          <chord-ft>5.9</chord-ft>
+        </wing>
+        <weight-lbs>11450</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>An28</match>
@@ -1037,6 +1443,13 @@
     <aircraft>
       <type>A81</type>
       <base>jet_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>95.0</span-ft>
+          <chord-ft>9.9</chord-ft>
+        </wing>
+        <weight-lbs>72650</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>An-148</match>
@@ -1046,6 +1459,13 @@
     <aircraft>
       <type>A40</type>
       <base>turboprop_transport</base>
+      <geometry>
+        <wing>
+          <span-ft>80.0</span-ft>
+          <chord-ft>6.9</chord-ft>
+        </wing>
+        <weight-lbs>35250</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>An-140</match>
@@ -1064,6 +1484,13 @@
       <descent-speed-kts>200.0</descent-speed-kts>
       <approach-speed-kts>200.0</approach-speed-kts>
       <touchdown-speed-kts>85.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>65.0</span-ft>
+          <chord-ft>5.8</chord-ft>
+        </wing>
+        <weight-lbs>11800</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>L410</match>
@@ -1087,6 +1514,13 @@
       <descent-speed-kts>210.0</descent-speed-kts>
       <approach-speed-kts>180.0</approach-speed-kts>
       <touchdown-speed-kts>85.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>53.0</span-ft>
+          <chord-ft>5.2</chord-ft>
+        </wing>
+        <weight-lbs>8200</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>PC12</match>
@@ -1108,6 +1542,13 @@
       <descent-speed-kts>280.0</descent-speed-kts>
       <approach-speed-kts>210.0</approach-speed-kts>
       <touchdown-speed-kts>130.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>91.0</span-ft>
+          <chord-ft>9.9</chord-ft>
+        </wing>
+        <weight-lbs>82150</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Superjet 100</match>
@@ -1134,6 +1575,13 @@
       <descent-speed-kts>70.0</descent-speed-kts>
       <approach-speed-kts>60.0</approach-speed-kts>
       <touchdown-speed-kts>50.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>49.0</span-ft>
+          <chord-ft>2.7</chord-ft>
+        </wing>
+        <weight-lbs>830</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>Centrair 101</match>
@@ -1154,10 +1602,17 @@
       <descent-speed-kts>126.0</descent-speed-kts>
       <approach-speed-kts>100.0</approach-speed-kts>
       <touchdown-speed-kts>60.0</touchdown-speed-kts>
+      <geometry>
+        <wing>
+          <span-ft>49.0</span-ft>
+          <chord-ft>6.6</chord-ft>
+        </wing>
+        <weight-lbs>5350</weight-lbs>
+      </geometry>
     </aircraft>
     <alias>
       <match>BN-2</match>
-	  <match>BNI</match>
+      <match>BNI</match>
       <match>Islander</match>
       <alias>BN2</alias>
     </alias>

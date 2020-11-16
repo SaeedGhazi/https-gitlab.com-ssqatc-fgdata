@@ -12,7 +12,7 @@ controls.gearDown = func(x) gear_key_down = x != 0;
 # maximum speed -----------------------------------------------------------------------------------
 
 var maxspeed = props.globals.getNode("engines/engine/speed-max-mps");
-var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
+var speed = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 500000, 1000000];
 var current = 7;
 
 
@@ -26,7 +26,10 @@ controls.flapsDown = func(x) {
 
 	var s = speed[current];
 	maxspeed.setDoubleValue(s);
-	gui.popupTip("Max. Speed " ~ s ~ " m/s");
+	if (s >= 1000)
+	    gui.popupTip("Max. Speed " ~ s/1000.0 ~ " km/s");
+	else
+	    gui.popupTip("Max. Speed " ~ s ~ " m/s");
 }
 
 

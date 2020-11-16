@@ -1041,7 +1041,7 @@
 
 			<program>
 <!-- 				<vertex-shader n="0">Shaders/include_fog.vert</vertex-shader> -->
-				<vertex-shader n="1">Shaders/reflect-bump-spec.vert</vertex-shader>
+				<vertex-shader n="1">Shaders/runway.vert</vertex-shader>
                 <vertex-shader n="2">Shaders/shadows-include.vert</vertex-shader>
                 <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/runway.frag</fragment-shader>
@@ -1205,6 +1205,27 @@
 					<use>fogtype</use>
 				</value>
 			</uniform>
+			<!-- BEGIN shadows include -->
+			<uniform>
+			  <name>shadow_tex</name>
+			  <type>sampler-2d</type>
+			  <value type="int">10</value>
+			</uniform>
+			<uniform>
+			  <name>shadows_enabled</name>
+			  <type>bool</type>
+			  <value>
+			    <use>shadows_enabled</use>
+			  </value>
+			</uniform>
+			<uniform>
+			  <name>sun_atlas_size</name>
+			  <type>int</type>
+			  <value>
+			    <use>sun_atlas_size</use>
+			  </value>
+			</uniform>
+			<!-- END shadows include -->
 		</pass>
 	</technique>
 </PropertyList>

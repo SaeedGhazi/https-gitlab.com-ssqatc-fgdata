@@ -526,7 +526,7 @@
         <use>vertex-program-two-side</use>
       </vertex-program-two-side>
       <program>
-        <vertex-shader>Shaders/generic-ALS-base.vert</vertex-shader>
+        <vertex-shader>Shaders/model-interior-ALS-base.vert</vertex-shader>
         <fragment-shader>Shaders/model-interior-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>

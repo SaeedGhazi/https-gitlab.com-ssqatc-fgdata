@@ -36,6 +36,10 @@ uniform float overcast;
 uniform float ground_scattering;
 uniform float moonlight;
 
+uniform bool shadow_mapping_enabled;
+
+void setupShadows(vec4 eyeSpacePos);
+
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -237,4 +241,8 @@ else // the faster, full-day version without lightfields
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+
+    if (shadow_mapping_enabled) {
+        setupShadows(gl_ModelViewMatrix * gl_Vertex);
+    }
 }

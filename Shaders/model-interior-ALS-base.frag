@@ -43,6 +43,8 @@ uniform int use_searchlight;
 uniform int implicit_lightmap_enabled;
 uniform int use_flashlight;
 
+uniform bool shadow_mapping_enabled;
+
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -59,6 +61,8 @@ float fog_backscatter(in float avisibility);
 vec3 get_hazeColor(in float light_arg);
 vec3 flashlight(in vec3 color, in float radius);
 vec3 filter_combined (in vec3 color) ;
+
+float getShadowing();
 
 float luminance(vec3 color)
 {
@@ -135,14 +139,18 @@ void main()
     NdotL = dot(n, lightDir);
     //NdotL = dot(n, (gl_ModelViewMatrix * vec4 (light_vec,0.0)).xyz);
     if (NdotL > 0.0) {
-
+        float shadowmap = 1.0;
+        if (shadow_mapping_enabled) {
+            shadowmap = getShadowing();
+        }
 	diffuse.rgb += 2.0 * diffuse.rgb * (1.0 - opacity.a);
-        color += diffuse * NdotL * opacity;
+        color += diffuse * NdotL * opacity * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * light_specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess));
+                            * pow(NdotHV, gl_FrontMaterial.shininess)
+                            * shadowmap);
     }
     color.a = diffuse.a;
     // This shouldn't be necessary, but our lighting becomes very

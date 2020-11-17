@@ -46,6 +46,9 @@ uniform float residual_ambience_r;
 uniform float residual_ambience_g;
 uniform float residual_ambience_b;
 
+uniform bool shadow_mapping_enabled;
+
+void setupShadows(vec4 eyeSpacePos);
 
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
@@ -297,6 +300,9 @@ else // the faster, full-day version without lightfields
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
 
+    if (shadow_mapping_enabled) {
+        setupShadows(gl_ModelViewMatrix * gl_Vertex);
+    }
 }
 
 

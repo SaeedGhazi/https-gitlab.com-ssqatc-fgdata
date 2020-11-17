@@ -64,6 +64,7 @@
 	<residual-ambience-b type="float">0.0</residual-ambience-b>
 	<ra-irradiance-map-type type="int">0</ra-irradiance-map-type>
 	<ra-irradiance-map-strength type="float">0.0</ra-irradiance-map-strength>
+    <shadow-mapping-enabled type="bool">false</shadow-mapping-enabled>
   </parameters>
 
   <technique n="3">
@@ -141,10 +142,12 @@
       </vertex-program-two-side>
       <program>
         <vertex-shader>Shaders/model-interior-ALS-detailed.vert</vertex-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/model-interior-ALS-detailed.frag</fragment-shader>
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -467,6 +470,34 @@
 	<type>int</type>
 	<value><use>grain-texture-enabled</use></value>
       </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
+      <uniform>
+        <name>shadow_mapping_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadow-mapping-enabled</use>
+        </value>
+      </uniform>
     </pass>
   </technique>
 
@@ -527,11 +558,13 @@
       </vertex-program-two-side>
       <program>
         <vertex-shader>Shaders/model-interior-ALS-base.vert</vertex-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/model-interior-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -748,6 +781,34 @@
  	<name>use_flashlight</name>
  	<type>int</type>
  	<value><use>use-flashlight</use></value>
+      </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
+      <uniform>
+        <name>shadow_mapping_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadow-mapping-enabled</use>
+        </value>
       </uniform>
     </pass>
   </technique>

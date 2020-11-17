@@ -416,7 +416,7 @@ Syntax
   BUILDING_LIST <filename> <material name> <lon> <lat> <elev>
 
 Where:
-- <filename> is the name of a file containing building positions
+- <filename> is the name of a file containing building positions.  May be a .gz file
 - <material name> is the name of the material that will be referenced to find
   random building parameters.
 - <lat>, <lon>, <elev> defines the center of the set of buildings, and also
@@ -462,6 +462,38 @@ For example, the following entries generates 3 small, 2 medium and 2 large build
 0 300 0 0 1
 0 400 0 0 1
 0 500 0 0 2
+
+3.9  TREE_LIST
+------------------
+
+Defines a file containing tree coordinates that should be rendered using
+the tree shader (aka Random vegetation).
+
+Example:
+
+  TREE_LIST trees.txt.gz DeciduousBroadCover -3.36074090 55.95297494 30.3822
+
+Syntax
+
+  TREE_LIST <filename> <material name> <lon> <lat> <elev>
+
+Where:
+- <filename> is the name of a file containing tree positions, may be a .gz file
+- <material name> is the name of the material that will be referenced to find
+  random vegetation parameters such as size, texture.
+- <lat>, <lon>, <elev> defines the center of the set of trees, and also
+  the point at which the material definition will be evaluated (for regional
+  materials).
+
+See README.materials for details on configuring the random building parameters.
+
+The referenced <filename> (in the example trees.txt.gz) contains lines of the form
+
+X Y Z A B C
+
+Where:
+- X,Y,Z are the cartesian coordinates of the tree. +X is East, +Y is North
+- A,B,C is optional and represents the normal of the underlying terrain.  Used for shadows.  Defaults to (0,0,1)
 
 4 model manager ("/models/model") --------------------------------------------
 

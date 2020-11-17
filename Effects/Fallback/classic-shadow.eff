@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
   <name>Effects/Fallback/classic-shadow</name>
-  <technique n="1000">
+  <technique n="-10">
     <scheme>classic-shadow</scheme>
     <pass>
       <lighting>false</lighting>

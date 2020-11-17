@@ -227,11 +227,11 @@ add static object to the tile.
 
 Example:
 
-  OBJECT_SHARED Models/Airport/tower.xml -122.501090 37.514830 15.5 0.00 0.00 0.00
+  OBJECT_SHARED Models/Airport/tower.xml -122.501090 37.514830 15.5 0.00 0.00 0.00 0.00
 
 Syntax:
 
-  OBJECT_SHARED <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg>
+  OBJECT_SHARED <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg> <radius>
 
 The <object-path> is relative to the data directory (FG_ROOT).
 <elev-m> is in meter and relative to mean sea-level (in the fgfs world).
@@ -239,6 +239,11 @@ The <object-path> is relative to the data directory (FG_ROOT).
 that this differs from about every other place in FlightGear, most notably
 the /orientation/heading-deg entry in the property system, which is clockwise.
 <pitch-deg> and <roll-deg> are in degree and optional.
+<radius> is the (optional) radius of the model.  This is added to the LOD range
+to help ensure that very large meshes (typical from osm2city) are drawn at the
+correct distance from the model edge.  I can safely be ignored for any model 
+<1km in size.
+
 OBJECT_SHARED models are cached and reused. They are only once in memory
 and never freed. (See also the next section.)
 

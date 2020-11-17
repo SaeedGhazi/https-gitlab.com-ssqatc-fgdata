@@ -92,6 +92,17 @@
 				</binding>
 			</checkbox>
 
+			<checkbox>
+				<halign>left</halign>
+				<label>Shadows (may need restart to take affect)</label>
+				<name>shadows-enable</name>
+				<property>/sim/rendering/shadows/enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>shadows-enable</object-name>
+				</binding>
+			</checkbox>
+
 			<group>
 				<layout>hbox</layout>
 				<halign>left</halign>

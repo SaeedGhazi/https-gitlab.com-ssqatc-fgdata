@@ -15,6 +15,10 @@
           <source>AI</source>
           <target>IA</target>
         </trans-unit>
+        <trans-unit approved="yes" id="menu/ai-objects:0" translate="yes">
+          <source>AI Objects</source>
+          <target>Objetos IA</target>
+        </trans-unit>
         <trans-unit approved="yes" id="menu/aircraft-center:0" translate="yes">
           <source>Aircraft Center (Experimental)</source>
           <target>Centro de Aviones (Experimental)</target>
@@ -87,6 +91,10 @@
           <source>Dump Scene Graph</source>
           <target>Mostrar datos escena gráfica</target>
         </trans-unit>
+        <trans-unit approved="yes" id="menu/earthview:0" translate="yes">
+          <source>Earthview orbital rendering</source>
+          <target>Renderizado de órbita terrestre</target>
+        </trans-unit>
         <trans-unit approved="yes" id="menu/environment:0" translate="yes">
           <source>Environment</source>
           <target>Ambiente</target>
@@ -126,6 +134,10 @@
         <trans-unit approved="yes" id="menu/file:0" translate="yes">
           <source>File</source>
           <target>Archivo</target>
+        </trans-unit>
+        <trans-unit approved="yes" id="menu/flight-recorder-control:0" translate="yes">
+          <source>Flight Recorder Control</source>
+          <target>Grabaciones de vuelo</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/fuel-and-payload:0" translate="yes">
           <source>Fuel and Payload</source>
@@ -249,7 +261,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="menu/nasal-repl-interpreter:0" translate="yes">
           <source>Nasal REPL Interpreter</source>
-          <target>Interpretador Nasal</target>
+          <target>Intérprete de Nasal</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/next-waypoint:0" translate="yes">
           <source>Next Waypoint</source>
@@ -257,7 +269,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="menu/performance-monitor:0" translate="yes">
           <source>Monitor System Performance</source>
-          <target>Monitor de performance del sistema</target>
+          <target>Monitor de rendimiento del sistema</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/pilot-offset:0" translate="yes">
           <source>Adjust View Position</source>
@@ -401,7 +413,7 @@
         </trans-unit>
         <trans-unit approved="no" id="menu/swift_connection:0" translate="yes">
           <source>swift Connection</source>
-          <target />
+          <target>Conexión Swift</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/system-failures:0" translate="yes">
           <source>System Failures</source>
@@ -446,6 +458,10 @@
         <trans-unit approved="yes" id="menu/view-options:0" translate="yes">
           <source>View Options</source>
           <target>Opciones de vistas</target>
+        </trans-unit>
+        <trans-unit approved="yes" id="menu/volcanoes:0" translate="yes">
+          <source>Volcanoes</source>
+          <target>Volcanes</target>
         </trans-unit>
         <trans-unit approved="yes" id="menu/wildfire-settings:0" translate="yes">
           <source>Wildfire Settings</source>

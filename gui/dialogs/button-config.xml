@@ -486,6 +486,19 @@ var assignButton = func(cmd) {
       </binding>
     </button>
 
+    <button>
+      <row>10</row>
+      <col>3</col>
+      <halign>fill</halign>
+      <legend>Autopilot disconnect</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          assignButton("Autopilot disconnect");
+        </script>
+      </binding>
+    </button>
+
     <text>
       <row>0</row>
       <col>4</col>

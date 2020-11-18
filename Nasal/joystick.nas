@@ -418,7 +418,7 @@ var PropertyToggleButton = {
 
     var c = prop.getNode("binding", 1).getNode("command", 1).getValue();
     var p = prop.getNode("binding", 1).getNode("property", 1).getValue();
-    return ((c == "property-toggle") and (p == me.prop));
+    return ((c == "property-toggle") and (p == me.binding));
   },
 
   getBinding: func(button) {
@@ -566,6 +566,7 @@ var buttonBindings = [
   NasalHoldButton.new("Brakes (air/wheel)", "controls.applyApplicableBrakes(1);", "controls.applyApplicableBrakes(0);"),
   NasalHoldButton.new("Parking brakes", "controls.parkingBrakeToggle(0);", "controls.parkingBrakeToggle(1);"),
   NasalHoldButton.new("NWS toggle", "controls.toggleNWS(0);", "controls.toggleNWS(1);"),
+  NasalButton.new("Autopilot disconnect", "controls.autopilotDisconnect();",0),
 
   PropertyToggleButton.new("Total Freeze", "/sim/freeze/clock"),
 

@@ -558,6 +558,13 @@ var applyApplicableBrakes = func(v, which = 0)  {
     }
 }
 
+var autopilotDisconnect = func() {
+    var aps = props.getNode("/controls/autoflight").getChildren("autopilot");
+    foreach (var ap; aps) {
+        ap.getChild("engage").setBoolValue(0);
+    }
+}
+
 # 1: Deploy, -1: Release
 var deployChute = func(v) setprop("/controls/flight/drag-chute", v);
 

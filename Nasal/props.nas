@@ -452,11 +452,10 @@ var _cond_cmp = func(p, op) {
             return nil;
         }
     }
-    if(left == nil or right == nil) {
-        logprint(LOG_ALERT, "condition: comparing with nil");
-        dump(p);
-        return nil;
-    }
+
+    if (left == nil) left = 0.0;
+    if (right == nil) right = 0.0;
+
     if(op < 0) return left < right;
     if(op > 0) return left > right;
     return left == right;

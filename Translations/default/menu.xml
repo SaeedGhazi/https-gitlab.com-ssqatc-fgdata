@@ -21,6 +21,10 @@
 
 	<!-- View menu -->
 	<view>View</view>
+	<view-clone>Add Clone View</view-clone>
+	<view-push>Push Pair View</view-push>
+	<view-last-pair>Add Pair View</view-last-pair>
+	<view-last-pair-double>Add Pair Foreground View</view-last-pair-double>
 	<toggle-fullscreen>Toggle Fullscreen</toggle-fullscreen>
 	<rendering-options>Rendering Options</rendering-options>
 	<view-options>View Options</view-options>

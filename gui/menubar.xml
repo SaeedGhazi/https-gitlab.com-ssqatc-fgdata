@@ -94,6 +94,49 @@
 		<name>view</name>
 
 		<item>
+            <enable>
+                <property>/sim/rendering/composite-viewer-enabled</property>
+            </enable>
+			<name>view-clone</name>
+			<key>Sup-v</key>
+			<binding>
+				<command>view-clone</command>
+			</binding>
+		</item>
+
+		<item>
+            <enable>
+                <property>/sim/rendering/composite-viewer-enabled</property>
+            </enable>
+			<name>view-push</name>
+			<binding>
+				<command>view-push</command>
+			</binding>
+		</item>
+
+		<item>
+            <enable>
+                <property>/sim/rendering/composite-viewer-enabled</property>
+            </enable>
+			<name>view-last-pair</name>
+			<key>Sup-V</key>
+			<binding>
+				<command>view-last-pair</command>
+			</binding>
+		</item>
+
+		<item>
+            <enable>
+                <property>/sim/rendering/composite-viewer-enabled</property>
+            </enable>
+			<name>view-last-pair-double</name>
+			<key></key>
+			<binding>
+				<command>view-last-pair-double</command>
+			</binding>
+		</item>
+
+		<item>
 			<name>toggle-fullscreen</name>
 			<key>Shift-F10</key>
 			<binding>

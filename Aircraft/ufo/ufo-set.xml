@@ -78,7 +78,7 @@
                 <position-z-m type="float">0</position-z-m>
                 <jetway-hood-deg type="float">3</jetway-hood-deg>
             </door>
-
+			<fallback-model-index>712</fallback-model-index>
 		</model>
 
 		<instrumentation>

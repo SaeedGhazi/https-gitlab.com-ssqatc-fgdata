@@ -68,7 +68,10 @@
 		<condition>
 			<and>
 				<not>
-					 <property>/sim/current-view/internal</property>
+					<or>
+					 	<property>/sim/current-view/internal</property>
+					 	<property>/sim/walker/outside</property>
+					</or>
 				</not>
 				<property>/sim/rendering/pilot-model/enabled</property>
 			</and>

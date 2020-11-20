@@ -151,19 +151,17 @@ current mode for each mouse is held in the
     <!-- No buttons pressed: control elevator -->
     <binding>
      <condition>
-      <!--
       <and>
-       <not>
-        <property>/devices/status/mice/mouse[0]/button[0]</property>
-       </not>
+       <or>
+        <not>
+         <property>/devices/status/mice/mouse[0]/button[0]</property>
+        </not>
+        <property>/sim/mouse/mouse-rudder-elevator</property>
+       </or>
        <not>
         <property>/devices/status/mice/mouse[0]/button[1]</property>
        </not>
       </and>
-      -->
-      <not>
-        <property>/devices/status/mice/mouse[0]/button[1]</property>
-      </not>
      </condition>
      <command>property-adjust</command>
      <property>/controls/flight/elevator</property>

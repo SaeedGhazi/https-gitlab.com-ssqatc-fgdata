@@ -411,7 +411,7 @@
           <source>Stopwatch</source>
           <target>Cronómetro</target>
         </trans-unit>
-        <trans-unit approved="no" id="menu/swift_connection:0" translate="yes">
+        <trans-unit approved="yes" id="menu/swift_connection:0" translate="yes">
           <source>swift Connection</source>
           <target>Conexión Swift</target>
         </trans-unit>

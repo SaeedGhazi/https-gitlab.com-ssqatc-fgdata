@@ -1484,23 +1484,23 @@ foreach(s; cloudShadowArray)
 	}
 	
 	# now write out the closest cloud for the detail effects
+	if (index_min != -1) {
+	    var s = cloudShadowArray[index_min];
+	    
+	    diffx = (s.lat - eyeLat) * local_weather.lat_to_m + offset_x;
+	    diffy = -(s.lon - eyeLon) * local_weather.lon_to_m + offset_y;
+	    
+	    setprop("/local-weather/cloud-shadows/nearest-cloudpos-x",int(diffx) + s.size);
+	    setprop("/local-weather/cloud-shadows/nearest-cloudpos-y",int(diffy) + s.strength );
+	    
+	    
+	    #print("Dist_max:", dist_max, " index_max: ", index_max);
+	    cloudShadowMinIndex = index_max;
+	    if (dist_max > 0.0) {cloudShadowMaxDist = dist_max;}	
+	}
 	
-	var s = cloudShadowArray[index_min];
-	
-	diffx = (s.lat - eyeLat) * local_weather.lat_to_m + offset_x;
-	diffy = -(s.lon - eyeLon) * local_weather.lon_to_m + offset_y;
-	
-	setprop("/local-weather/cloud-shadows/nearest-cloudpos-x",int(diffx) + s.size);
-	setprop("/local-weather/cloud-shadows/nearest-cloudpos-y",int(diffy) + s.strength );
-	
-	
-	#print("Dist_max:", dist_max, " index_max: ", index_max);
-	cloudShadowMinIndex = index_max;
-	if (dist_max > 0.0) {cloudShadowMaxDist = dist_max;}	
-	
-	
-settimer( func {shadow_management_loop(i)}, 0);	
-}	
+    settimer( func {shadow_management_loop(i)}, 0);	
+}
 
 
 

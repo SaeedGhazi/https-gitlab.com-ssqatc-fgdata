@@ -2779,15 +2779,15 @@ var set_METAR_weather_station = func {
 	# also compute and set gust wind info
 
 	var gust_angvar = 0.5 * weather_tile_management.relangle(wind_range_from, wind_range_to);
-	
+
+    var gust_relative_strength = 0.0;
 	if ((gust_strength > 0.0) or (gust_angvar > 0.0))
 		{
-		var gust_relative_strength = (gust_strength - windspeed)/windspeed;
+		gust_relative_strength = (gust_strength - windspeed)/windspeed;
 		setprop(lw~"tmp/gust-frequency-hz", 0.2 + rand()*0.8);
 		}
 	else
 		{
-		var gust_relative_strength = 0.0;
 		setprop(lw~"tmp/gust-frequency-hz", 0.0);
 		}
 

@@ -409,7 +409,6 @@
   <technique n="5">
     <predicate>
       <and>
-        <property>/sim/rendering/shaders/skydome</property>
         <or>
           <less-equal>
             <value type="float">2.0</value>

@@ -11,13 +11,14 @@
 	<general-options>General Options</general-options>
 	<help-desc>Show the most relevant command line options</help-desc>
 	<verbose-desc>Show all command line options when combined with --help or -h</verbose-desc>
-        <launcher-desc>Use GUI launcher</launcher-desc>
+	<launcher-desc>Use GUI launcher</launcher-desc>
+	<composite-viewer-desc>Enable CompositeViewer (extra view windows)</composite-viewer-desc>
 	<version-desc>Display the current FlightGear version</version-desc>
 	<fg-root-desc>Specify the root data path</fg-root-desc>
 	<fg-scenery-desc n="0">Specify the scenery path(s);</fg-scenery-desc>
 	<fg-scenery-desc n="1">Defaults to $FG_ROOT/Scenery</fg-scenery-desc>
 	<fg-aircraft-desc>Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</fg-aircraft-desc>
-        <download-dir-desc>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</download-dir-desc>
+	<download-dir-desc>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</download-dir-desc>
 	<language-desc>Select the language for this session</language-desc>
 	<load-tape-desc>Load recording of earlier flightgear session. If &lt;name&gt; ends with .fgtape it is interpreted as the recording's pathname; otherwise the recording's pathname is formed by prepending &lt;name&gt; with the tape directory and appending ".fgtape".</load-tape-desc>
 	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>

@@ -59,6 +59,13 @@
    </option>
 
    <option>
+    <name>composite-viewer</name>
+    <description>composite-viewer-desc</description>
+    <arg>1</arg>
+    <brief/>
+   </option>
+
+   <option>
     <name>verbose</name>
     <short>v</short>
     <description>verbose-desc</description>

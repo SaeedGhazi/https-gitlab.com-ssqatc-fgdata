@@ -58,6 +58,11 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y">false</enabled>
         <sun-atlas-size type="int" userarchive="y">2048</sun-atlas-size>
       </shadows>
+      <photoscenery>
+        <enabled type="bool" userarchive="y">true</enabled>
+        <pixels-per-meter type="float" userarchive="y">0.25</pixels-per-meter>
+        <auto-download type="bool" userarchive="y">true</auto-download>
+      </photoscenery>
       <debug type="bool">false</debug>
       <realism type="int">5</realism>
       <filtering type="int">8</filtering>

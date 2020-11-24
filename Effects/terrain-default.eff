@@ -330,6 +330,10 @@
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <attribute>
+          <name>orthophotoTexCoord</name>
+          <index>14</index>
+        </attribute>
       </program>
 	  <uniform>
         <name>grain_strength</name>
@@ -835,6 +839,11 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
+      <uniform>
+        <name>orthophotoTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">15</value>
+      </uniform>
       <!-- BEGIN shadows include -->
       <uniform>
         <name>shadow_tex</name>
@@ -973,6 +982,10 @@
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <attribute>
+          <name>orthophotoTexCoord</name>
+          <index>14</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1161,6 +1174,11 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
+      <uniform>
+        <name>orthophotoTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">15</value>
+      </uniform>
       <!-- BEGIN shadows include -->
       <uniform>
         <name>shadow_tex</name>
@@ -1279,9 +1297,13 @@
         <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/terrain-ALS-base.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
-	<fragment-shader>Shaders/noise.frag</fragment-shader>
-	<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
-    <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <attribute>
+          <name>orthophotoTexCoord</name>
+          <index>14</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1405,6 +1427,11 @@
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
+      <uniform>
+        <name>orthophotoTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">15</value>
+      </uniform>
       <!-- BEGIN shadows include -->
       <uniform>
         <name>shadow_tex</name>
@@ -1436,8 +1463,13 @@
   <technique n="11">
     <predicate>
       <and>
-		<property>/sim/rendering/shaders/quality-level</property>
-        <property>/sim/rendering/shaders/generic</property>
+        <or>
+          <property>/sim/rendering/photoscenery/enabled</property>
+          <and>
+            <property>/sim/rendering/shaders/quality-level</property>
+            <property>/sim/rendering/shaders/generic</property>
+          </and>
+        </or>
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -1529,6 +1561,10 @@
         <fragment-shader>Shaders/default.frag</fragment-shader>
         <fragment-shader>Shaders/include_fog.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <attribute>
+          <name>orthophotoTexCoord</name>
+          <index>14</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1570,6 +1606,11 @@
         <type>int</type>
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
+      </uniform>
+      <uniform>
+        <name>orthophotoTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">15</value>
       </uniform>
       <!-- BEGIN shadows include -->
       <uniform>

@@ -34,33 +34,33 @@
 
 	<hrule/>
 
-  <text>
-    <visible>
-      <equals>
-        <property>/sim/gui/dialogs/rendering/shader-warning</property>
-        <value>1</value>
-      </equals>
-    </visible>
-    <color>
-      <red>1.0</red>
-      <green>0.6</green>
-      <blue>0.6</blue>
-    </color>
-    <label>Warning: Intel integrated graphics detected.  Your graphics card may not support shaders or complex graphics.</label>
-  </text>
+	<text>
+		<visible>
+			<equals>
+				<property>/sim/gui/dialogs/rendering/shader-warning</property>
+				<value>1</value>
+			</equals>
+		</visible>
+		<color>
+			<red>1.0</red>
+			<green>0.6</green>
+			<blue>0.6</blue>
+		</color>
+		<label>Warning: Intel integrated graphics detected.  Your graphics card may not support shaders or complex graphics.</label>
+	</text>
 
 	<group>
 		<halign>center</halign>
 		<layout>hbox</layout>
 
-    <!-- only for a gap -->
-    <group>
-      <layout>vbox</layout>
-      <default-padding>1</default-padding>
-      <text>
-        <label> </label>
-      </text>
-    </group>
+		<!-- only for a gap -->
+		<group>
+			<layout>vbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label> </label>
+			</text>
+		</group>
 
 		<group>
 			<layout>vbox</layout>
@@ -172,15 +172,15 @@
 			</checkbox>
 
 			<checkbox>
-          <halign>left</halign>
-          <label>Use disk space for faster loading (DDS Texture Cache)</label>
-          <name>texture-cache-enabled</name>
-          <property>/sim/rendering/texture-cache/cache-enabled</property>
-          <binding>
-              <command>dialog-apply</command>
-              <object-name>texture-cache-enabled</object-name>
-          </binding>
-      </checkbox>
+				<halign>left</halign>
+				<label>Use disk space for faster loading (DDS Texture Cache)</label>
+				<name>texture-cache-enabled</name>
+				<property>/sim/rendering/texture-cache/cache-enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>texture-cache-enabled</object-name>
+				</binding>
+			</checkbox>
 
 			<checkbox>
 				<halign>left</halign>
@@ -234,9 +234,9 @@
 				</visible>
 			</text>
 
-      <empty>
-  			<stretch>1</stretch>
-  		</empty>
+			<empty>
+				<stretch>1</stretch>
+			</empty>
 
 			<group>
 				<layout>hbox</layout>
@@ -486,23 +486,23 @@
 				<layout>table</layout>
 
 				<button>
-          <row>0</row>
-          <col>0</col>
-          <enable>
-              <property>/sim/rendering/shaders/skydome</property>
-          </enable>
-          <legend>Filter effects</legend>
-          <halign>center</halign>
-          <binding>
-              <command>dialog-show</command>
-              <dialog-name>als-filters</dialog-name>
-          </binding>
-          <binding>
-              <command>dialog-close</command>
-              <dialog-name>rendering</dialog-name>
-          </binding>
-          <pref-width>200</pref-width>
-	    	</button>
+					<row>0</row>
+					<col>0</col>
+					<enable>
+						<property>/sim/rendering/shaders/skydome</property>
+					</enable>
+					<legend>Filter effects</legend>
+					<halign>center</halign>
+					<binding>
+						<command>dialog-show</command>
+						<dialog-name>als-filters</dialog-name>
+					</binding>
+					<binding>
+						<command>dialog-close</command>
+						<dialog-name>rendering</dialog-name>
+					</binding>
+					<pref-width>200</pref-width>
+				</button>
 
 				<button>
 					<row>0</row>
@@ -533,25 +533,25 @@
 
 		</group>
 
-    <!-- only for a gap -->
-    <group>
-      <layout>vbox</layout>
-      <default-padding>1</default-padding>
-      <text>
-        <label> </label>
-      </text>
-    </group>
+		<!-- only for a gap -->
+		<group>
+			<layout>vbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label> </label>
+			</text>
+		</group>
 
 		<vrule/>
 
-    <!-- only for a gap -->
-    <group>
-      <layout>vbox</layout>
-      <default-padding>1</default-padding>
-      <text>
-        <label> </label>
-      </text>
-    </group>
+		<!-- only for a gap -->
+		<group>
+			<layout>vbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label> </label>
+			</text>
+		</group>
 
 		<group>
 			<layout>vbox</layout>
@@ -846,45 +846,49 @@
 					<col>0</col>
 					<halign>left</halign>
 					<label>Terrain Textures</label>
-        </text>
+				</text>
 
-        <combo>
-          <row>7</row>
-          <col>1</col>
-          <name>texture-set</name>
+				<combo>
+					<row>7</row>
+					<col>1</col>
+					<name>texture-set</name>
 					<pref-width>200</pref-width>
-          <property>sim/gui/dialogs/rendering/texture-set</property>
-          <value>Region-specific</value>
-          <value>Global</value>
-          <value>Global alternative (DDS format)</value>
-          <binding>
-            <command>dialog-apply</command>
-            <object-name>texture-set</object-name>
-          </binding>
-          <binding>
-            <command>nasal</command>
-            <script>
+					<property>sim/gui/dialogs/rendering/texture-set</property>
+					<value>Region-specific</value>
+					<value>Global</value>
+					<value>Global alternative (DDS format)</value>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>texture-set</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
               var file = materials[getprop("/sim/gui/dialogs/rendering/texture-set")];
               setprop("/sim/rendering/materials-file", file);
-            </script>
-          </binding>
-          <binding>
-            <command>reload-materials</command>
-          </binding>
-        </combo>
+						</script>
+					</binding>
+					<binding>
+						<command>reload-materials</command>
+					</binding>
+				</combo>
 
-				<text>
+				<checkbox>
 					<row>8</row>
 					<col>0</col>
-					<colspan>2</colspan>
-					<halign>left</halign>
-					<color>
-			      <red>1.0</red>
-			      <green>0.6</green>
-			      <blue>0.6</blue>
-			    </color>
-					<label>Warning: Pylons, Detailed Roads, Buildings use a lot of memory</label>
-        </text>
+					<label>Satellite Photoscenery</label>
+					<name>satellite-photoscenery</name>
+					<enable>
+						<not>
+							<property>/sim/rendering/rembrandt/enabled</property>
+						</not>
+					</enable>
+					<property>/sim/rendering/photoscenery/enabled</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>satellite-photoscenery</object-name>
+					</binding>
+				</checkbox>
 
 				<text>
 					<row>9</row>
@@ -892,13 +896,25 @@
 					<colspan>2</colspan>
 					<halign>left</halign>
 					<color>
-			      <red>1.0</red>
-			      <green>0.6</green>
-			      <blue>0.6</blue>
-			    </color>
-					<label>and disk space, and are only available in limited areas.</label>
-        </text>
+						<red>1.0</red>
+						<green>0.6</green>
+						<blue>0.6</blue>
+					</color>
+					<label>Warning: Pylons, Detailed Roads, Buildings use a lot of memory</label>
+				</text>
 
+				<text>
+					<row>10</row>
+					<col>0</col>
+					<colspan>2</colspan>
+					<halign>left</halign>
+					<color>
+						<red>1.0</red>
+						<green>0.6</green>
+						<blue>0.6</blue>
+					</color>
+					<label>and disk space, and are only available in limited areas.</label>
+				</text>
 			</group>
 
 			<group>
@@ -933,16 +949,16 @@
 				</enable>
 			</checkbox>
 
-      <checkbox>
-          <halign>left</halign>
-          <label>Animated jetways</label>
-          <name>jetways</name>
-          <property>/nasal/jetways/enabled</property>
-          <binding>
-              <command>dialog-apply</command>
-              <object-name>jetways</object-name>
-          </binding>
-      </checkbox>
+			<checkbox>
+				<halign>left</halign>
+				<label>Animated jetways</label>
+				<name>jetways</name>
+				<property>/nasal/jetways/enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>jetways</object-name>
+				</binding>
+			</checkbox>
 
 			<empty>
 				<stretch>1</stretch>
@@ -950,14 +966,14 @@
 
 		</group>
 
-    <!-- only for a gap -->
-    <group>
-      <layout>vbox</layout>
-      <default-padding>1</default-padding>
-      <text>
-        <label> </label>
-      </text>
-    </group>
+		<!-- only for a gap -->
+		<group>
+			<layout>vbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label> </label>
+			</text>
+		</group>
 
 	</group>
 
@@ -965,10 +981,10 @@
 
 	<button>
 		<legend>  OK  </legend>
-        <default>true</default>
-        <binding>
-            <command>nasal</command>
-            <script>
+		<default>true</default>
+		<binding>
+			<command>nasal</command>
+			<script>
               var reinit = 0;
               foreach (var p; reload_props) {
                 if (reload_vals[p] != getprop(p)) {
@@ -979,8 +995,8 @@
               if (reinit) {
                 fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
               }
-            </script>
-        </binding>
+			</script>
+		</binding>
 		<binding>
 			<command>dialog-close</command>
 		</binding>
@@ -1113,15 +1129,16 @@
 
 
       var reload_props = [
-        "/sim/rendering/materials-file",
-        "/sim/rendering/osm-buildings",
-        "/sim/rendering/random-buildings",
-        "/sim/rendering/random-objects",
-        "/sim/rendering/random-vegetation",
-        "/sim/rendering/random-vegetation-shadows",
-        "/sim/rendering/vegetation-density",
-        "/sim/rendering/clouds3d-enable",
-        "/sim/rendering/clouds3d-density",
+				"/sim/rendering/photoscenery/enabled",
+				"/sim/rendering/materials-file",
+				"/sim/rendering/osm-buildings",
+				"/sim/rendering/random-buildings",
+				"/sim/rendering/random-objects",
+				"/sim/rendering/random-vegetation",
+				"/sim/rendering/random-vegetation-shadows",
+				"/sim/rendering/vegetation-density",
+				"/sim/rendering/clouds3d-enable",
+				"/sim/rendering/clouds3d-density",
 				"/sim/rendering/scenery-path-suffix[0]/enabled",
 				"/sim/rendering/scenery-path-suffix[1]/enabled",
 				"/sim/rendering/scenery-path-suffix[2]/enabled",

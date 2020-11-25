@@ -182,7 +182,7 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>
+  <!-- <flight>
     <callsign>Hebridean_1010</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>
     <fltrules>VFR</fltrules>
@@ -226,8 +226,8 @@
       <time>4/09:10:00</time>
     </arrival>
     <repeat>WEEK</repeat>
-  </flight>
-  <flight>
+  </flight> -->
+  <!-- <flight>
     <callsign>Hebridean_1013</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>
     <fltrules>VFR</fltrules>
@@ -271,7 +271,7 @@
       <time>0/14:10:00</time>
     </arrival>
     <repeat>WEEK</repeat>
-  </flight>
+  </flight> -->
   <flight>
     <callsign>Hebridean_1016</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>
@@ -452,7 +452,7 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>
+  <!-- <flight>
     <callsign>Hebridean_1028</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>
     <fltrules>VFR</fltrules>
@@ -571,7 +571,7 @@
       <time>0/14:50:00</time>
     </arrival>
     <repeat>WEEK</repeat>
-  </flight>
+  </flight> -->
   <flight>
     <callsign>Hebridean_1036</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>
@@ -662,7 +662,7 @@
     </arrival>
     <repeat>WEEK</repeat>
   </flight>
-  <flight>
+  <!-- <flight>
     <callsign>Hebridean_1042</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>
     <fltrules>VFR</fltrules>
@@ -691,7 +691,7 @@
       <time>4/15:05:00</time>
     </arrival>
     <repeat>WEEK</repeat>
-  </flight>
+  </flight> -->
   <flight>
     <callsign>Hebridean_1044</callsign>
     <required-aircraft>HBR_BN_2</required-aircraft>

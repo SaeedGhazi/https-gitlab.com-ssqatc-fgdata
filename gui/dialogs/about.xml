@@ -268,11 +268,28 @@
       <binding>
         <command>nasal</command>
         <script><![CDATA[
-   var properties = ["gl-vendor","gl-version","gl-renderer", "gl-shading-language-version"];
+   var properties = [
+        "/sim/version/flightgear",
+        "/sim/version/simgear",
+        "/sim/version/openscenegraph",
+        "/sim/version/build-id",
+        "/sim/version/build-number",
+        "/sim/version/build-type",
+        "/sim/version/revision",
+        "/sim/rendering/gl-vendor",
+        "/sim/rendering/gl-renderer",
+        "/sim/rendering/gl-version",
+        "/sim/rendering/gl-shading-language-version",
+        "/sim/rendering/max-texture-size",
+        "/sim/rendering/depth-buffer-bits",
+        ];
    var data = "";
-   var path = "/sim/rendering/";
-   foreach(var p; properties)
-      data ~= p ~":"~getprop(path~p) ~"\n";
+   clipboard.setText(data);
+   foreach(var p; properties) {
+      var value = getprop(p);
+      if (value == nil) value = "";
+      data ~= sprintf("%s: %s\n", p, value);
+    }
    clipboard.setText(data);
    gui.popupTip("Copied version information to clipboard!");
    ]]></script>

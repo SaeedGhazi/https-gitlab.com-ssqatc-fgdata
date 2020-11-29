@@ -210,7 +210,7 @@
 									var condition = item.getNode("condition");
 
 									if (condition != nil) {
-										var vis = t.getNode("visible", 1);
+										var vis = t.getNode("visible", 1).getNode("and", 1);
 										props.copy(condition, vis);
 										var c = t.getNode("color", 1);
 										c.getNode("red", 1).setValue(0.2);
@@ -242,7 +242,7 @@
 										c.getNode("green", 1).setValue(0.7);
 										c.getNode("blue", 1).setValue(0.2);
 
-										vis = t.getNode("visible", 1).getNode("not", 1);
+										vis = t.getNode("visible", 1).getNode("not", 1).getNode("and", 1);
 										props.copy(condition, vis);
 									}
 

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+Declare behaviour of various graphics properties. This captures
+information common to all the different graphics presets, and
+avoids hard-coding these lists in C++.
+
+Various lists need to be defined:
+
+ - the 'scenery reload required' list : properties which do not take effect until
+ the scenery is reloaded
+ - the 'restart required' list : properties which only take ffect upon restarting
+  the simulator.
+
+In each case, the property paths are treated as prefixes; i.e any concrete property
+whose full path matches one of these prefixes, will be considered as within that
+particular list.
+-->
+
+<PropertyList>
+    <scenery-reload-required>
+        <property></property>
+    </scenery-reload-required>
+
+    <restart-required>
+        <property></property>
+    </restart-required>
+
+    <save-to-file>
+        <property>/sim/rendering/shadows/enabled</property>
+        <property>/sim/rendering/shaders/*</property>
+        <property>/sim/rendering/clouds3d-enable</property>
+        <property>/sim/rendering/shaders/skydome</property>
+        <property>/sim/rendering/particles</property>
+    </save-to-file>
+</PropertyList>

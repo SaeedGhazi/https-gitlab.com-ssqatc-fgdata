@@ -1,7 +1,8 @@
 // WS30 FRAGMENT SHADER
 
 // -*-C++-*-
-#version 120
+#version 130
+#extension GL_EXT_texture_array : enable
 
 // written by Thorsten Renk, Oct 2011, based on default.frag
 // Ambient term comes in gl_Color.rgb.
@@ -11,10 +12,10 @@ varying vec3 relPos;
 
 
 uniform sampler2D landclass;
-uniform sampler2D grass;
-uniform sampler2D city;
-uniform sampler2D forest;
-uniform sampler2D water;
+uniform sampler2DArray atlas;
+//uniform sampler2D city;
+//uniform sampler2D forest;
+//uniform sampler2D water;
 
 
 varying float yprime_alt;
@@ -97,20 +98,11 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
 
-	int lc = int(texture2D(landclass, gl_TexCoord[0].st).r * 256.0 + 0.5);
-
-	if ((lc == 1) || (lc == 2) || (lc == 4) || (lc == 5))
-	{
-		texel = texture2D(city, gl_TexCoord[0].st);
-	} else if ((lc > 21) && (lc < 25))
-	{
-		texel = texture2D(forest, gl_TexCoord[0].st);
-	} else if (lc > 38)
-	{
-		texel = texture2D(water, gl_TexCoord[0].st);
-	} else {
-		texel = texture2D(grass, gl_TexCoord[0].st);
-	}
+	int lc = int(texture2D(landclass, gl_TexCoord[0].st).b * 255.0 + 0.5);
+	//vec2 st = mod(gl_TexCoord[0].st, 0.125); // mod to 1/8 of the space
+	//st.s = st.s + 0.125 * mod(lc, 8);
+	//st.y = st.y + 0.125 * int(lc/8);
+	texel = texture(atlas, vec3(gl_TexCoord[0].st, lc));
 
     //texel = texture2D(texture, gl_TexCoord[0].st);
     fragColor = color * texel + specular;

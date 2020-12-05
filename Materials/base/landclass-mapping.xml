@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <PropertyList>
 
-<map>
-  <description>111 - Continuous urban fabric</description>
-  <landclass>1</landclass>
-  <material-name>Urban</material-name>
-</map>
+  <map>
+    <description>111 - Continuous urban fabric</description>
+    <landclass>1</landclass>
+    <material-name>Urban</material-name>
+  </map>
 
 <map>
   <description>112 - Discontinuous urban fabric</description>
@@ -268,7 +268,7 @@
 <map>
   <description>999 - NODATA</description>
   <landclass>48</landclass>
-  <material-name>Default</material-name>
+  <material-name>Ocean</material-name>
 </map>
 
 </PropertyList>

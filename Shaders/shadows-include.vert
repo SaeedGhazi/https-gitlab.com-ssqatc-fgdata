@@ -1,6 +1,7 @@
 #version 120
 
 uniform bool shadows_enabled;
+uniform int sun_atlas_size;
 
 uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
@@ -9,7 +10,7 @@ uniform mat4 fg_LightMatrix_csm3;
 
 varying vec4 lightSpacePos[4];
 
-const float normal_offset_scale = 0.1;
+const float NORMAL_OFFSET_SCALE = 200.0;
 
 
 void setupShadows(vec4 eyeSpacePos)
@@ -22,7 +23,8 @@ void setupShadows(vec4 eyeSpacePos)
     vec3 toLight = normalize(gl_LightSource[0].position.xyz);
     float costheta = dot(normal, toLight);
     float slopeScale = clamp(1.0 - costheta, 0.0, 1.0);
-    float normalOffset = normal_offset_scale * slopeScale;
+    float texelSize = 1.0 / sun_atlas_size;
+    float normalOffset = NORMAL_OFFSET_SCALE * slopeScale * texelSize;
 
     vec4 offsetPos = eyeSpacePos + vec4(normal * normalOffset, 0.0);
 

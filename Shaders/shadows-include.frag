@@ -9,7 +9,7 @@ varying vec4 lightSpacePos[4];
 
 const bool DEBUG_CASCADES = false;
 
-const float depth_bias = 2.0;
+const float DEPTH_BIAS = 1.5;
 
 // Ideally these should be passed as an uniform, but we don't support uniform
 // arrays yet
@@ -22,10 +22,10 @@ const vec2 uv_factor = vec2(0.5, 0.5);
 float debugCascade(int cascade)
 {
     const mat2 bayer_matrix = mat2(0, 3, 2, 1);
-    const float scale = 1.0;
+    const float scale = 0.2;
     vec2 coords = mod(gl_FragCoord.xy * scale, 2.0);
-    int threshold = int(bayer_matrix[int(coords.y)][int(coords.x)]);
-    if (threshold <= cascade)
+    int threshold = int(bayer_matrix[int(coords.x)][int(coords.y)]);
+    if (threshold < cascade)
         return 0.0;
     return 1.0;
 }
@@ -41,7 +41,7 @@ float sampleOffset(vec4 pos, vec2 offset, vec2 invTexelSize)
     return shadow2DProj(
         shadow_tex, vec4(
             pos.xy + offset * invTexelSize * pos.w,
-            pos.z - depth_bias * invTexelSize.x,
+            pos.z - DEPTH_BIAS * invTexelSize.x,
             pos.w)).r;
 }
 
@@ -118,17 +118,18 @@ float getShadowing()
     for (int i = 0; i < 4; ++i) {
         if (checkWithinBounds(lightSpacePos[i].xy, vec2(0.0), vec2(1.0)) > 0.0 &&
             (lightSpacePos[i].z / lightSpacePos[i].w) <= 1.0) {
+            float debug_value = 0.0;
             if (DEBUG_CASCADES)
-                return debugCascade(i);
+                debug_value = debugCascade(i);
 
             if (checkWithinBounds(lightSpacePos[i].xy, bandBottomLeft, bandTopRight) < 1.0) {
                 vec2 s =
                     smoothstep(vec2(0.0), bandBottomLeft, lightSpacePos[i].xy) -
                     smoothstep(bandTopRight, vec2(1.0), lightSpacePos[i].xy);
                 float blend = 1.0 - s.x * s.y;
-                return mix(sampleShadowMap(i), sampleShadowMap(i+1), blend);
+                return clamp(mix(sampleShadowMap(i), sampleShadowMap(i+1), blend) - debug_value, 0.0, 1.0);
             }
-            return sampleShadowMap(i);
+            return clamp(sampleShadowMap(i) - debug_value, 0.0, 1.0);
         }
     }
 

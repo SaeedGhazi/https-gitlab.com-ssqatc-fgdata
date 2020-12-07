@@ -735,6 +735,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <drag-sensitivity type="double" userarchive="y">1.0</drag-sensitivity>
       <invert-mouse-wheel type="bool" userarchive="y">false</invert-mouse-wheel>
       <skip-flight-controls-mode type="bool" userarchive="y">false</skip-flight-controls-mode>
+      <flight-controls-sensitivity type="double" userarchive="y">4.0</flight-controls-sensitivity>
       <mouse-rudder-elevator type="bool" userarchive="y">false</mouse-rudder-elevator>
     </mouse>
     <replay>

@@ -172,9 +172,36 @@
       <col>1</col>
     </checkbox>
 
+    <text>
+      <halign>left</halign>
+      <label>Flight controls sensitivity</label>
+      <row>1</row>
+      <col>1</col>
+    </text>
+    <slider>
+      <halign>left</halign>
+      <min>0.1</min>
+      <max>4.0</max>
+      <step>0.1</step>
+      <property>/sim/mouse/flight-controls-sensitivity</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <row>1</row>
+      <col>2</col>
+    </slider>
+    <text>
+      <halign>left</halign>
+      <format>%1.1f</format>
+      <property>/sim/mouse/flight-controls-sensitivity</property>
+      <live>true</live>
+      <row>1</row>
+      <col>3</col>
+    </text>
+
     <!-- empty line before next -->
     <text>
-      <row>1</row>
+      <row>2</row>
       <col>0</col>
       <label> </label>
       <halign>left</halign>

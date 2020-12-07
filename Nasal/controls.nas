@@ -740,3 +740,14 @@ var cycleMouseMode = func(node)
 }
 
 addcommand("cycle-mouse-mode", cycleMouseMode);
+
+var setMouseFlightControlsSensitivity = func(sensitivity)
+{
+ setprop("/input/mice/mouse/mode[1]/y-axis/binding[0]/factor", -sensitivity);
+ setprop("/input/mice/mouse/mode[1]/x-axis/binding[0]/factor", sensitivity);
+ setprop("/input/mice/mouse/mode[1]/x-axis/binding[1]/factor", sensitivity);
+}
+
+setlistener("/sim/mouse/flight-controls-sensitivity", func(prop){
+ setMouseFlightControlsSensitivity(prop.getValue())
+}, 1, 0);

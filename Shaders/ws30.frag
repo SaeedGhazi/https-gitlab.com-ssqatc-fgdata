@@ -10,13 +10,11 @@ varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
 
-
 uniform sampler2D landclass;
 uniform sampler2DArray atlas;
-//uniform sampler2D city;
-//uniform sampler2D forest;
-//uniform sampler2D water;
-
+uniform sampler1D dimensionsArray;
+uniform sampler1D diffuseArray;
+uniform sampler1D specularArray;
 
 varying float yprime_alt;
 varying float mie_angle;
@@ -59,17 +57,26 @@ float luminance(vec3 color)
 void main()
 {
 
+    // The Landclass for this particular fragment.  This can be used to
+	// index into the atlas textures.
+    int lc = int(texture2D(landclass, gl_TexCoord[0].st).g * 255.0 + 0.5);
+
+
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV, fogFactor;
-    vec4 color = gl_Color;
     vec3 lightDir = gl_LightSource[0].position.xyz;
     vec3 halfVector = gl_LightSource[0].halfVector.xyz;
     vec4 texel;
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     float intensity;
+	float mat_index = float(lc)/512.0;
+	float mat_shininess = texture(dimensionsArray, mat_index).z;
+	vec4 mat_diffuse = texture(diffuseArray, mat_index);
+	vec4 mat_specular = texture(specularArray, mat_index);
+    vec4 color = mat_diffuse;
 
     float effective_scattering = min(scattering, cloud_self_shading);
 
@@ -81,13 +88,14 @@ void main()
     n = (2.0 * gl_Color.a - 1.0) * normal;
     n = normalize(n);
 
+
     NdotL = dot(n, lightDir);
     if (NdotL > 0.0) {
         float shadowmap = getShadowing();
         color += diffuse_term * NdotL * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
-        if (gl_FrontMaterial.shininess > 0.0)
-            specular.rgb = (gl_FrontMaterial.specular.rgb
+        if (mat_shininess > 0.0)
+            specular.rgb = (mat_specular.rgb
                             * light_specular.rgb
                             * pow(NdotHV, gl_FrontMaterial.shininess)
                             * shadowmap);
@@ -98,13 +106,13 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
 
-	int lc = int(texture2D(landclass, gl_TexCoord[0].st).b * 255.0 + 0.5);
-	//vec2 st = mod(gl_TexCoord[0].st, 0.125); // mod to 1/8 of the space
-	//st.s = st.s + 0.125 * mod(lc, 8);
-	//st.y = st.y + 0.125 * int(lc/8);
-	texel = texture(atlas, vec3(gl_TexCoord[0].st, lc));
 
-    //texel = texture2D(texture, gl_TexCoord[0].st);
+	// Different textures have different have different dimensions.
+	// Dimensions array is scaled to fit in [0...1.0] in the texture1D, so has to be scaled back up here.
+	vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
+	vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
+	texel = texture(atlas, vec3(atlas_scale * gl_TexCoord[0].st, lc));
+
     fragColor = color * texel + specular;
 
 // here comes the terrain haze model

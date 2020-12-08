@@ -19,45 +19,7 @@
 			</emissive>
       <shininess>1.2</shininess>
     </material>
-    <texture n="2">
-      <image>Textures/Terrain/city1.png</image>
-      <type>2d</type>
-      <filter>linear-mipmap-linear</filter>
-      <!-- also repeat -->
-      <wrap-s>repeat</wrap-s>
-      <wrap-t>repeat</wrap-t>
-      <!--
-           <wrap-r>clamp-to-border</wrap-r>
-           -->
-      <!-- float, signed-integer, integer -->
-      <internal-format>normalized</internal-format>
-    </texture>
-    <texture n="3">
-      <image>Textures/Terrain/forest.png</image>
-      <type>2d</type>
-      <filter>linear-mipmap-linear</filter>
-      <!-- also repeat -->
-      <wrap-s>repeat</wrap-s>
-      <wrap-t>repeat</wrap-t>
-      <!--
-           <wrap-r>clamp-to-border</wrap-r>
-           -->
-      <!-- float, signed-integer, integer -->
-      <internal-format>normalized</internal-format>
-    </texture>
-    <texture n="4">
-      <image>Textures/Terrain/water.png</image>
-      <type>2d</type>
-      <filter>linear-mipmap-linear</filter>
-      <!-- also repeat -->
-      <wrap-s>repeat</wrap-s>
-      <wrap-t>repeat</wrap-t>
-      <!--
-           <wrap-r>clamp-to-border</wrap-r>
-           -->
-      <!-- float, signed-integer, integer -->
-      <internal-format>normalized</internal-format>
-    </texture>
+
     <texture n="10">
       <image>Textures/Terrain/snow3.png</image>
       <type>2d</type>
@@ -199,6 +161,11 @@
     <display_ysize>
       <use>/sim/startup/ysize</use>
     </display_ysize>
+    <!--
+    <tile_width>
+      <use>/sim/rendering/texture-factor</use>
+    </tile_width>
+    -->
     <view_pitch_offset>
       <use>/sim/current-view/pitch-offset-deg</use>
     </view_pitch_offset>
@@ -584,7 +551,7 @@
       </texture-unit>
 
       <program>
-        <vertex-shader>Shaders/generic-ALS-base.vert</vertex-shader>
+        <vertex-shader>Shaders/ws30.vert</vertex-shader>
         <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/ws30.frag</fragment-shader>
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
@@ -758,18 +725,18 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>city</name>
-        <type>sampler-2d</type>
+        <name>dimensionsArray</name>
+        <type>sampler-1d</type>
         <value type="int">2</value>
       </uniform>
       <uniform>
-        <name>forest</name>
-        <type>sampler-2d</type>
+        <name>diffuseArray</name>
+        <type>sampler-1d</type>
         <value type="int">3</value>
       </uniform>
       <uniform>
-        <name>water</name>
-        <type>sampler-2d</type>
+        <name>specularArray</name>
+        <type>sampler-1d</type>
         <value type="int">4</value>
       </uniform>
       <uniform>

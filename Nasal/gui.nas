@@ -1506,8 +1506,10 @@ setlistener(p ~ "aircraft-enable", func(n) set_precip(precip_ac = n.getValue()),
 
 # the autovisibility feature of the menubar
 # automatically show the menubar if the mouse is at the upper edge of the window
-# the menubar is hidden by a binding to a LMB click in mode 0 in mice.xml
+# the menubar is hidden by mouse mode != 0 and a binding to a LMB click in mode
+# 0 in mice.xml
 var menubarAutoVisibilityListener = nil;
+var menubarAutoVisibilityMouseModeListener = nil;
 var menubarAutoVisibilityEdge = props.globals.initNode( "/sim/menubar/autovisibility/edge-size", 5, "INT" );
 var menubarVisibility = props.globals.initNode( "/sim/menubar/visibility", 0, "BOOL" );
 var currentMenubarVisibility = menubarVisibility.getValue();
@@ -1525,12 +1527,19 @@ setlistener( "/sim/menubar/autovisibility/enabled", func(n) {
         menubarVisibility.setBoolValue( 1 );
 
     }, 1, 0 );
+    menubarAutoVisibilityListener = setlistener( mouseMode.getPath(), func(n) {
+      if( n.getValue() != 0 ) {
+        menubarVisibility.setBoolValue( 0 );
+      }
+    }, 1, 0 );
   }
 
   # do not listen to the mouse position if this feature is enabled
   if( n.getValue() == 0 and menubarAutoVisibilityListener != nil ) {
     removelistener( menubarAutoVisibilityListener );
+    removelistener( menubarAutoVisibilityMouseModeListener );
     menubarAutoVisibilityListener = nil;
+    menubarAutoVisibilityMouseModeListener = nil;
     menubarVisibility.setBoolValue(currentMenubarVisibility);
   }
 }, 1, 0);

@@ -292,6 +292,14 @@
       </binding>
     </button>
 
+    <button>
+      <name>reload-compositor</name>
+      <legend>Reload Compositor</legend>
+      <binding>
+        <command>reload-compositor</command>
+      </binding>
+    </button>
+
   </group>
   <button>
 		<legend>Close</legend>

@@ -94,6 +94,8 @@ var propFlightControls = props.globals.getNode(flightControls, 0);
 var elevatorControl         = propFlightControls.getNode("elevator", 0);
 var elevatorTrimControl     = propFlightControls.getNode("elevator-trim", 0);
 
+var navHeadingValid = "/instrumentation/nav/in-range";
+var navGSValid = "/instrumentation/nav/gs-in-range";
 var headingNeedleDeflection = "/instrumentation/nav/heading-needle-deflection";
 var gsNeedleDeflection = "/instrumentation/nav/gs-needle-deflection-norm";
 var staticPressure = "systems/static/pressure-inhg";
@@ -652,10 +654,11 @@ var navArmFromHdg = func
   ##
   lockNavHold.setBoolValue(1);
   deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(navArmFromHdg, 5);
@@ -704,10 +707,11 @@ var navArmFromRol = func
   lockRollAxis.setBoolValue(1);
   settingTargetTurnRate.setDoubleValue(0.0);
   var deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(navArmFromRol, 5);
@@ -806,10 +810,11 @@ var aprArmFromHdg = func
   ##
   lockAprHold.setBoolValue(1);
   var deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(aprArmFromHdg, 5);
@@ -862,10 +867,11 @@ var aprArmFromRol = func
   lockRollAxis.setBoolValue(1);
   settingTargetTurnRate.setDoubleValue(0.0);
   var deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(aprArmFromRol, 5);
@@ -911,10 +917,11 @@ var gsArm = func {
   annunciatorGsArm.setBoolValue(1);
 
   var deviation = getprop(gsNeedleDeflection);
+  var deviationValid = getprop(navGSValid);
   ##
   # If the deflection is more than 50% (manual says '2 to 3 dots')
   ##
-  if (abs(deviation) > 0.5)
+  if (!deviationValid or abs(deviation) > 0.5)
   {
     #print("deviation");
     settimer(gsArm, 5);
@@ -1012,10 +1019,11 @@ var revArmFromHdg = func
   ##
   lockRevHold.setBoolValue(1);
   var deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(revArmFromHdg, 5);
@@ -1078,10 +1086,11 @@ var revArmFromRol = func
   lockRollAxis.setBoolValue(1);
   settingTargetTurnRate.setDoubleValue(0.0);
   var deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(revArmFromRol, 5);

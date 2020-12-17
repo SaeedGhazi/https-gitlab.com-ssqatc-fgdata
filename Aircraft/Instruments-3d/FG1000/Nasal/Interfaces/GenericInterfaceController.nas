@@ -19,33 +19,23 @@
 var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
 io.load_nasal(nasal_dir ~ 'Interfaces/PropertyPublisher.nas', "fg1000");
 io.load_nasal(nasal_dir ~ 'Interfaces/PropertyUpdater.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/NavDataInterface.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericEISPublisher.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSPublisher.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericFMSUpdater.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericADCPublisher.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericFuelInterface.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GenericFuelPublisher.nas', "fg1000");
-io.load_nasal(nasal_dir ~ 'Interfaces/GFC700Interface.nas', "fg1000");
 
 var GenericInterfaceController = {
 
   _instance : nil,
 
   INTERFACE_LIST : [
-    "NavDataInterface",
-    "GenericEISPublisher",
-    "GenericNavComPublisher",
-    "GenericNavComUpdater",
-    "GenericFMSPublisher",
-    "GenericFMSUpdater",
-    "GenericADCPublisher",
-    "GenericFuelInterface",
-    "GenericFuelPublisher",
-    "GFC700Publisher",
-    "GFC700Interface",
+    { id:"NavDataInterface", path: nasal_dir ~ 'Interfaces/NavDataInterface.nas' },
+    { id:"GenericEISPublisher", path: nasal_dir ~ 'Interfaces/GenericEISPublisher.nas' },
+    { id:"GenericNavComPublisher", path: nasal_dir ~ 'Interfaces/GenericNavComPublisher.nas' },
+    { id:"GenericNavComUpdater", path: nasal_dir ~ 'Interfaces/GenericNavComUpdater.nas' },
+    { id:"GenericFMSPublisher", path: nasal_dir ~ 'Interfaces/GenericFMSPublisher.nas' },
+    { id:"GenericFMSUpdater", path: nasal_dir ~ 'Interfaces/GenericFMSUpdater.nas' },
+    { id:"GenericADCPublisher", path: nasal_dir ~ 'Interfaces/GenericADCPublisher.nas' },
+    { id:"GenericFuelInterface", path: nasal_dir ~ 'Interfaces/GenericFuelInterface.nas' },
+    { id:"GenericFuelPublisher", path: nasal_dir ~ 'Interfaces/GenericFuelPublisher.nas' },
+    { id:"GFC700Interface", path: nasal_dir ~ 'Interfaces/GFC700Interface.nas' },
+    { id:"GFC700Publisher", path: nasal_dir ~ 'Interfaces/GFC700Publisher.nas' }
   ],
 
   # Factory method
@@ -69,18 +59,15 @@ var GenericInterfaceController = {
   start : func() {
     if (me.running) return;
 
-    # Reload the interfaces afresh to make development easier.  In normal
-    # usage this interface will only be started once anyway.
     foreach (var interface; GenericInterfaceController.INTERFACE_LIST) {
-      io.load_nasal(nasal_dir ~ 'Interfaces/' ~ interface ~ '.nas', "fg1000");
-      var code = sprintf("me.%sInstance = fg1000.%s.new();", interface, interface);
+      io.load_nasal(interface.path, "fg1000");
+      var code = sprintf("me.%sInstance = fg1000.%s.new();", interface.id, interface.id);
       var instantiate = compile(code);
       instantiate();
     }
 
     foreach (var interface; GenericInterfaceController.INTERFACE_LIST) {
-      io.load_nasal(nasal_dir ~ 'Interfaces/' ~ interface ~ '.nas', "fg1000");
-      var code = 'me.' ~ interface ~ 'Instance.start();';
+      var code = 'me.' ~ interface.id ~ 'Instance.start();';
       var start_interface = compile(code);
       start_interface();
     }
@@ -92,11 +79,13 @@ var GenericInterfaceController = {
     if (me.running == 0) return;
 
     foreach (var interface; GenericInterfaceController.INTERFACE_LIST) {
-      io.load_nasal(nasal_dir ~ 'Interfaces/' ~ interface ~ '.nas', "fg1000");
-      var code = 'me.' ~ interface ~ 'Instance.stop();';
+      io.load_nasal(interface.path, "fg1000");
+      var code = 'me.' ~ interface.id ~ 'Instance.stop();';
       var stop_interface = compile(code);
       stop_interface();
     }
+
+    me.running = 0;
   },
 
   restart : func() {

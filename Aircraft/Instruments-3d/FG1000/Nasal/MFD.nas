@@ -152,7 +152,6 @@ var MFDDisplay =
     # Display the Surround, EIS and NavMap and the appropriate top level on startup.
     obj.Surround.setVisible(1);
     obj.EIS.setVisible(1);
-    obj.EIS.ondisplay();
     obj._MFDDevice.selectPage(obj.NavigationMap);
 
     return obj;

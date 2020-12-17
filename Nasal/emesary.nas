@@ -20,7 +20,7 @@
  #
  #	Version              : 4.8
  #
- #  Copyright © 2016 Richard Harrison           Released under GPL V2
+ #  Copyright 2016 Richard Harrison           Released under GPL V2
  #
  #---------------------------------------------------------------------------
  # Classes in this file:
@@ -105,7 +105,7 @@ var Transmitter =
         foreach (var r; me.Recipients)
         {
             if (r == recipient) {
-                logprint(DEV_ALERT, "Transmitter.Register: Recipient already registered!");
+                logprint(DEV_ALERT, "Transmitter.Register: Recipient already registered: " ~ r.Ident ~ " (" ~ r.UniqueId ~")");
                 return 1;
             }
         }        

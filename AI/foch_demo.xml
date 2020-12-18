@@ -11,7 +11,7 @@
   <PropertyList>
 	  <scenario>
 	  	<name>Carrier: R99 - Foch (LFTH)</name>
-      <description>This scenario spawns the Foch aircraft carrier (Clemenceau-class) in the Mediterranean off Toulon.</description>
+      <description>This scenario spawns the Foch aircraft carrier (Clemenceau-class) in the Mediterranean off Toulon (near LFTH).</description>
 		<entry>
 			<type>carrier</type>
 			<name>Foch</name>

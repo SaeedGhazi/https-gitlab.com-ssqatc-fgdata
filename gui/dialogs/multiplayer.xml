@@ -168,6 +168,20 @@
         </checkbox>
 
         <checkbox>
+            <row>2</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>mpcarrier-auto-attach</name>
+            <label>Automatically enable AI scenarios and attach to multiplayer carriers</label>
+            <property>/sim/mp-carriers/auto-attach</property>
+            <binding>
+                <command>property-toggle</command>
+                <property>/sim/mp-carriers/auto-attach</property>
+            </binding>
+        </checkbox>
+
+        <checkbox>
             <row>4</row>
             <col>1</col>
             <colspan>2</colspan>

@@ -539,7 +539,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <roll-deg type="double">0</roll-deg>
       <pitch-deg type="double">0</pitch-deg>
       <heading-deg type="double">0</heading-deg>
-      <auto-position type="bool" userarchive="y">true</auto-position>
+      <auto-position type="bool">true</auto-position>
     </tower>
     <view-name-popup type="bool" userarchive="y">true</view-name-popup>
     <view>

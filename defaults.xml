@@ -888,7 +888,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <port type="int" userarchive="y">45003</port>
     </swift>
     <mp-carriers>
-      <auto-attach type="bool" userarchive="y"></auto-attach>
+      <auto-attach type="bool" userarchive="y">true</auto-attach>
     </mp-carriers>
   </sim>
   <!-- accelerations -->

@@ -115,6 +115,17 @@ current mode for each mouse is held in the
        <not>
         <property>/devices/status/mice/mouse[0]/button[1]</property>
        </not>
+       
+       <not>
+        <and>
+         <property>/sim/freeze-mouse-flight-controls-on-pause</property>
+         <or>
+          <property>/sim/replay/replay-state</property>
+          <property>/sim/freeze/master</property>
+         </or>
+        </and>
+       </not>
+      
       </and>
      </condition>
      <command>property-adjust</command>
@@ -133,6 +144,17 @@ current mode for each mouse is held in the
        <not>
         <property>/devices/status/mice/mouse[0]/button[1]</property>
        </not>
+       
+       <not>
+        <and>
+         <property>/sim/freeze-mouse-flight-controls-on-pause</property>
+         <or>
+          <property>/sim/replay/replay-state</property>
+          <property>/sim/freeze/master</property>
+         </or>
+        </and>
+       </not>
+      
       </and>
      </condition>
      <command>property-adjust</command>
@@ -161,6 +183,17 @@ current mode for each mouse is held in the
        <not>
         <property>/devices/status/mice/mouse[0]/button[1]</property>
        </not>
+       
+       <not>
+        <and>
+         <property>/sim/freeze-mouse-flight-controls-on-pause</property>
+         <or>
+          <property>/sim/replay/replay-state</property>
+          <property>/sim/freeze/master</property>
+         </or>
+        </and>
+       </not>
+      
       </and>
      </condition>
      <command>property-adjust</command>

@@ -29,6 +29,7 @@ varying vec3 worldPos;
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
 varying vec2 orthoTexCoord;
+varying vec4 ecPosition;
 
 varying float mie_angle;
 varying float steepness;
@@ -110,7 +111,7 @@ void main()
 
 // this code is copied from default.vert
 
-    //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    ecPosition = gl_ModelViewMatrix * gl_Vertex;
     //gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     orthoTexCoord = orthophotoTexCoord;
@@ -296,7 +297,7 @@ if (use_IR_vision)
     gl_FrontColor.a = mie_angle;
     gl_BackColor.a = mie_angle;
 
-    setupShadows(gl_ModelViewMatrix * gl_Vertex);
+    setupShadows(ecPosition);
 }
 
 

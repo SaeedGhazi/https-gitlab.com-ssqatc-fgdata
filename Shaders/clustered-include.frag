@@ -5,7 +5,6 @@ uniform sampler2D fg_ClusteredIndices;
 uniform sampler2D fg_ClusteredPointLights;
 uniform sampler2D fg_ClusteredSpotLights;
 
-uniform bool fg_ClusteredEnabled;
 uniform int fg_ClusteredMaxPointLights;
 uniform int fg_ClusteredMaxSpotLights;
 uniform int fg_ClusteredMaxLightIndices;
@@ -84,9 +83,6 @@ int getIndex(int counter)
 //         any haze, fog or post-processing.
 vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel)
 {
-    if (!fg_ClusteredEnabled)
-        return vec3(0.0);
-
     int slice = int(max(log2(-p.z) * fg_ClusteredSliceScale
                         + fg_ClusteredSliceBias, 0.0));
     vec3 clusterCoords = vec3(floor(gl_FragCoord.xy / fg_ClusteredTileSize),

@@ -6,6 +6,7 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec2 orthoTexCoord;
+varying vec4 ecPosition;
 
 uniform sampler2D texture;
 uniform sampler2D orthophotoTexture;
@@ -19,6 +20,7 @@ vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
 float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 float luminance(vec3 color)
 {
@@ -67,6 +69,7 @@ void main()
     }
 
     fragColor = color * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = fragColor;

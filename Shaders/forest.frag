@@ -189,7 +189,6 @@ void main (void)
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;
-    finalColor.rgb += getClusteredLightsContribution(ecPosition.xyz, VNormal, basecolor.rgb);
 
 	finalColor.rgb = fog_Func(finalColor.rgb, fogType);
 	gl_FragColor = finalColor;

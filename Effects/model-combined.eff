@@ -450,8 +450,7 @@ please see Docs/README.model-combined.eff for documentation
 				<fragment-shader n="4">Shaders/noise.frag</fragment-shader>
 				<fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
                 <fragment-shader n="6">Shaders/shadows-include.frag</fragment-shader>
-                <fragment-shader n="7">Shaders/clustered-include.frag</fragment-shader>
-	           </program>
+			   </program>
 			   
 			   <uniform>
 				   <name>BaseTex</name>
@@ -1520,8 +1519,7 @@ please see Docs/README.model-combined.eff for documentation
 			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 			  <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
               <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
-              <fragment-shader n="3">Shaders/clustered-include.frag</fragment-shader>
-          </program>
+		  </program>
 
 		  <uniform>
 			<name>BaseTex</name>
@@ -2116,8 +2114,7 @@ please see Docs/README.model-combined.eff for documentation
 			  <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 			  <fragment-shader n="1">Shaders/ubershader.frag</fragment-shader>
               <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
-              <fragment-shader n="3">Shaders/clustered-include.frag</fragment-shader>
-          </program>
+		  </program>
 
 		  <uniform>
 			<name>BaseTex</name>

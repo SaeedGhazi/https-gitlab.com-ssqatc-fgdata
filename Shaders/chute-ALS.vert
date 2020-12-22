@@ -22,7 +22,6 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec4 ecPosition;
 
 varying float yprime_alt;
 varying float mie_angle;
@@ -121,7 +120,7 @@ void main()
 
 // this code is copied from default.vert
 
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    //vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
     //gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
@@ -288,7 +287,7 @@ else // the faster, full-day version without lightfields
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
     gl_Position = gl_ModelViewProjectionMatrix * vertex;
 
-    setupShadows(ecPosition);
+    setupShadows(gl_ModelViewMatrix * vertex);
 }
 
 

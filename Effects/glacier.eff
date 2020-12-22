@@ -162,7 +162,6 @@
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/forest.frag</fragment-shader>
                 <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
-                <fragment-shader n="3">Shaders/clustered-include.frag</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>

@@ -330,7 +330,6 @@
         <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
         <attribute>
           <name>orthophotoTexCoord</name>
           <index>14</index>
@@ -983,7 +982,6 @@
         <fragment-shader>Shaders/hazes.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
         <attribute>
           <name>orthophotoTexCoord</name>
           <index>14</index>
@@ -1302,7 +1300,6 @@
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
         <attribute>
           <name>orthophotoTexCoord</name>
           <index>14</index>
@@ -1564,7 +1561,6 @@
         <fragment-shader>Shaders/default.frag</fragment-shader>
         <fragment-shader>Shaders/include_fog.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
         <attribute>
           <name>orthophotoTexCoord</name>
           <index>14</index>

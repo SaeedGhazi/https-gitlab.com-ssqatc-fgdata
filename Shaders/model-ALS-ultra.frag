@@ -120,7 +120,6 @@ vec3 moonlight_perception (in vec3 light) ;
 vec3 addLights(in vec3 color1, in vec3 color2);
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -505,8 +504,6 @@ void main (void)
     vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
 
     fragColor += Specular * nmap.a;
-
-    fragColor.rgb += getClusteredLightsContribution(vertVec, N, texel.rgb);
 
     //////////////////////////////////////////////////////////////////////
     // BEGIN lightmap

@@ -25,7 +25,6 @@ vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 void main (void)
 {
@@ -72,7 +71,6 @@ void main (void)
 
 	c1 *= ambient_light;
 	vec4 finalColor = c1;
-    finalColor.rgb += getClusteredLightsContribution(ecPosition.xyz, VNormal, basecolor.rgb);
 
 // 	if(gl_Fog.density == 1.0)
 // 		fogFactor=1.0;

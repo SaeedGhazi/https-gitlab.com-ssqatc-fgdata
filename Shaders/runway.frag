@@ -10,7 +10,6 @@ varying vec3  VTangent;
 varying vec3  VBinormal;
 varying vec3  vViewVec;
 varying vec3  reflVec;
-varying vec3  vertVec;
 
 varying vec4 Diffuse;
 varying float alpha;
@@ -40,7 +39,6 @@ vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 void main (void)
 {
@@ -131,8 +129,6 @@ void main (void)
     // the final reflection
     vec4 fragColor = vec4(color.rgb * mixedcolor.rgb  + ambient_Correction.rgb * (1.0 - refl_correction * (1.0 - 0.8 * lightness)) * nFactor, color.a);
 	fragColor += Specular * nmap.a * nFactor;
-
-    fragColor.rgb += getClusteredLightsContribution(vertVec, N, texel.rgb);
 
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);
     gl_FragColor = fragColor;

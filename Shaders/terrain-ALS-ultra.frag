@@ -11,7 +11,6 @@ varying vec3 worldPos;
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
 varying vec2 orthoTexCoord;
-varying vec4 ecPosition;
 
 
 uniform sampler2D texture;
@@ -94,7 +93,6 @@ vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 
 // a fade function for procedural scales which are smaller than a pixel
@@ -499,8 +497,6 @@ if ((dist < 5000.0) && (combined_wetness>0.0))
 
 
     fragColor = color * texel + specular;
-    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
-
 
    float lightArg = (terminator-yprime_alt)/100000.0;
    vec3 hazeColor = get_hazeColor(lightArg);

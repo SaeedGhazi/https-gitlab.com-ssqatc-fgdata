@@ -21,7 +21,6 @@ attribute vec2 orthophotoTexCoord;
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec2 orthoTexCoord;
-varying vec4 ecPosition;
 
 uniform int colorMode;
 
@@ -36,7 +35,6 @@ void setupShadows(vec4 eyeSpacePos);
 void main()
 {
     gl_Position = ftransform();
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     orthoTexCoord = orthophotoTexCoord;
     normal = gl_NormalMatrix * gl_Normal;
@@ -66,5 +64,5 @@ void main()
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
     //fogCoord = abs(ecPosition.z / ecPosition.w);
 		//fog_Func(fogType);
-    setupShadows(ecPosition);
+    setupShadows(gl_ModelViewMatrix * gl_Vertex);
 }

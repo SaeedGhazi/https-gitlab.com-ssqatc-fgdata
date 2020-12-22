@@ -114,7 +114,6 @@ vec3 filter_combined (in vec3 color) ;
 vec3 addLights(in vec3 color1, in vec3 color2);
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
@@ -626,7 +625,7 @@ void main (void)
 
     fragColor += Specular * nmap.a;
 
-    fragColor.rgb += getClusteredLightsContribution(vertVec, N, texel.rgb);
+
 
     //////////////////////////////////////////////////////////////////////
     // BEGIN procedural lightmap

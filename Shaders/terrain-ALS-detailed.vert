@@ -27,7 +27,6 @@ varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec2 orthoTexCoord;
-varying vec4 eyePos;
 
 
 varying float mie_angle;
@@ -89,7 +88,7 @@ void main()
   float scattering;
 
     rawPos = gl_Vertex.xy;
-    eyePos = gl_ModelViewMatrix * gl_Vertex;
+    vec4 eyePos = gl_ModelViewMatrix * gl_Vertex;
     worldPos = (osg_ViewMatrixInverse * eyePos).xyz;
     steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
 

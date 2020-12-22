@@ -151,7 +151,6 @@
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
                 <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-                <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
 			</program>
 			<uniform>
 				<name>colorMode</name>
@@ -434,8 +433,7 @@
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/default.frag</fragment-shader>
                 <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
-                <fragment-shader n="3">Shaders/clustered-include.frag</fragment-shader>
-            </program>
+			</program>
 			<!--<uniform>
 				<name>texture</name>
 				<type>sampler-2d</type>

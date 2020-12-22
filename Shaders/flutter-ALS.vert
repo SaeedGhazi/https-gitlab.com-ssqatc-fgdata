@@ -24,7 +24,6 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec4 ecPosition;
 
 varying float yprime_alt;
 varying float mie_angle;
@@ -143,7 +142,7 @@ void main()
     gl_Position = gl_ModelViewProjectionMatrix * pos;
 
     //do the colour and fog
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
 
 
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

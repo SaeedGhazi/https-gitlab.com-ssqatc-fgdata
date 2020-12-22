@@ -148,7 +148,6 @@
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -566,7 +565,6 @@
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>

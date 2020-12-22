@@ -66,7 +66,6 @@ vec3 fog_Func(vec3 color, int type);
 ////////////////////////////////////
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 
 //////rotation matrices/////////////////////////////////////////////////////////
@@ -262,8 +261,6 @@ void main (void)
 	vec4 fragColor = vec4(color.rgb * mixedcolor + ambient_Correction.rgb, color.a);
 
 	fragColor += Specular * nmap.a;
-
-    fragColor.rgb += getClusteredLightsContribution(eyeVec, N, texel.rgb);
 
 	//////////////////////////////////////////////////////////////////////
 	// BEGIN lightmap

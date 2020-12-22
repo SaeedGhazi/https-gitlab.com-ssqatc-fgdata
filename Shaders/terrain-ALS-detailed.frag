@@ -9,7 +9,7 @@ varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec2 orthoTexCoord;
-varying vec4 eyePos;
+
 
 
 uniform sampler2D texture;
@@ -61,7 +61,6 @@ vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 
 void main()
@@ -339,7 +338,6 @@ if ((dist < 5000.0)&& (quality_level > 3) && (wetness>0.0))
 
 
     fragColor = color * texel + specular;
-    fragColor.rgb += getClusteredLightsContribution(eyePos.xyz, n, texel.rgb);
 
 // here comes the terrain haze model
 

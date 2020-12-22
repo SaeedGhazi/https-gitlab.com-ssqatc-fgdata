@@ -9,7 +9,7 @@ varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec3 ecViewdir;
-varying vec4 ecPosition;
+
 
 
 varying float steepness;
@@ -85,7 +85,6 @@ vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -487,7 +486,6 @@ if ((dist < 5000.0) && (combined_wetness>0.0))
 
 
     fragColor = color * texel + specular;
-    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
 float lightArg = (terminator-yprime_alt)/100000.0;	
 vec3 hazeColor = get_hazeColor(lightArg);

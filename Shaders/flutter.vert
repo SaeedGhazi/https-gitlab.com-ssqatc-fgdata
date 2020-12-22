@@ -23,7 +23,6 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 //varying float fogCoord;
-varying vec4 ecPosition;
 
 uniform int colorMode;
 uniform float osg_SimulationTime;
@@ -108,7 +107,7 @@ void main()
     gl_Position = gl_ModelViewProjectionMatrix * pos;
 
     //do the colour and fog
-    ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
 
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;

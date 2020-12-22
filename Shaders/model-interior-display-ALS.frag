@@ -6,7 +6,6 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec4 ecPosition;
 
 
 uniform sampler2D texture;
@@ -86,7 +85,6 @@ vec3 flashlight(in vec3 color, in float radius);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
-vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 float luminance(vec3 color)
 {
@@ -310,7 +308,6 @@ void main()
 
 
     fragColor = color * texel + specular;
-    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
    // explicit lightmap
 

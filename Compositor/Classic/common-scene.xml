@@ -6,6 +6,14 @@
   <use-shadow-pass>csm1</use-shadow-pass>
   <use-shadow-pass>csm2</use-shadow-pass>
   <use-shadow-pass>csm3</use-shadow-pass>
+  <clustered-shading>
+    <tile-size>128</tile-size>
+    <depth-slices>1</depth-slices>
+    <num-threads>1</num-threads>
+    <condition>
+      <property>/sim/rendering/clustered-shading/enabled</property>
+    </condition>
+  </clustered-shading>
   <binding>
     <buffer>sun-shadowmap-atlas</buffer>
     <unit>10</unit>

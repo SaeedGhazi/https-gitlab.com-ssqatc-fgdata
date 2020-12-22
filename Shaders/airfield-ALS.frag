@@ -9,6 +9,7 @@ varying vec3 relPos;
 varying vec3 worldPos;
 varying vec2 rawPos;
 varying vec3 ecViewdir;
+varying vec4 ecPosition;
 varying vec2 orthoTexCoord;
 
 
@@ -83,6 +84,7 @@ vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 
 float detail_fade (in float scale, in float angle, in float dist)
@@ -336,6 +338,7 @@ if (quality_level > 3)
     color.rgb +=secondary_light * light_distance_fading(dist);
 
     fragColor = color * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
 
     float lightArg = (terminator-yprime_alt)/100000.0;

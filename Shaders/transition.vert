@@ -9,6 +9,7 @@
 
 varying float	RawPosZ;
 varying vec3	WorldPos;
+varying vec4    eyePos;
 varying vec3	normal;
 varying vec3	Vnormal;
 
@@ -19,7 +20,7 @@ void setupShadows(vec4 eyeSpacePos);
 void main()
     {
     RawPosZ = gl_Vertex.z;
-    vec4 eyePos = gl_ModelViewMatrix * gl_Vertex;
+    eyePos = gl_ModelViewMatrix * gl_Vertex;
 	WorldPos = (osg_ViewMatrixInverse * eyePos).xyz;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

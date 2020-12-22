@@ -9,6 +9,7 @@ varying float   RawPosZ;
 varying vec3	WorldPos;
 varying vec3	normal;
 varying vec3    Vnormal;
+varying vec4    eyePos;
 
 uniform float	SnowLevel;
 uniform float   Transitions;
@@ -35,6 +36,7 @@ vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
 float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 void main()
     {
@@ -159,6 +161,7 @@ void main()
         }
 
     vec4	fragColor = diffuseColor * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(eyePos.xyz, n, texel.rgb);
 
     if(cover >= 2.5){
         fragColor.rgb = fragColor.rgb * 1.2;

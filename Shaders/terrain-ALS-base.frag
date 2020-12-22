@@ -15,6 +15,7 @@ uniform sampler2D orthophotoTexture;
 varying float yprime_alt;
 varying float mie_angle;
 varying vec2 orthoTexCoord;
+varying vec4 ecPosition;
 
 
 uniform float visibility;
@@ -40,6 +41,7 @@ vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color);
 
 float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 float luminance(vec3 color)
 {
@@ -99,6 +101,7 @@ void main()
     }
 
     fragColor = color * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
 
 

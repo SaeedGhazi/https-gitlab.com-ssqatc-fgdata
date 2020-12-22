@@ -213,6 +213,7 @@
         <fragment-shader n="5">Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader n="6">Shaders/lightspot-ALS.frag</fragment-shader>
         <fragment-shader n="7">Shaders/shadows-include.frag</fragment-shader>
+        <fragment-shader n="8">Shaders/clustered-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1046,7 +1047,8 @@
                 <fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/runway.frag</fragment-shader>
                 <fragment-shader n="2">Shaders/shadows-include.frag</fragment-shader>
-				<attribute>
+                <fragment-shader n="3">Shaders/clustered-include.frag</fragment-shader>
+                <attribute>
 					<name>tangent</name>
 					<index>6</index>
 				</attribute>

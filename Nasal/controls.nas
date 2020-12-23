@@ -721,10 +721,20 @@ var cycleMouseMode = func(node)
     }
 
     var msg = "";
-    if (mode == 1)
-        msg = "Mouse is controlling flight controls. Press TAB to change.";
-    else
-        msg = "Mouse is controlling view direction. Press TAB to change.";
+
+    # give correct feedback for the UI action which prompted this
+    var suffix = "Press TAB to change.";
+    if (reason == "right-click") {
+        suffix = "Right-click to change.";
+    }
+
+    if (mode == 1) {
+        msg = "Mouse is controlling flight controls.";
+    } else {
+        msg = "Mouse is controlling view direction.";
+    }
+    
+    msg = msg ~ " " ~ suffix;
 
   	fgcommand("show-message", props.Node.new({ "label": msg, "id":"mouse-mode" }));
 }

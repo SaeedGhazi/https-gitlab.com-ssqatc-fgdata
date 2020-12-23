@@ -784,6 +784,16 @@ Started September 2000 by David Megginson, david@megginson.com
       </buffer>
       <tape-directory type="string" userarchive="y"/>
       <multiplayer type="bool" userarchive="y"/>
+      <record-properties type="bool" userarchive="y">true</record-properties>
+      <record-properties-paths>
+      </record-properties-paths>
+      <recovery-period type="int" userarchive="y">1</recovery-period>
+      
+      <record-main-window type="bool" userarchive="y">false</record-main-window>
+      <record-main-view type="bool" userarchive="y">false</record-main-view>
+      <replay-main-window-position type="bool" userarchive="y">false</replay-main-window-position>
+      <replay-main-window-size type="bool" userarchive="y">false</replay-main-window-size>
+      <replay-main-view type="bool" userarchive="y">false</replay-main-view>
     </replay>
     <airport>
       <runways>

@@ -1327,6 +1327,12 @@ var armButton = func {
   #print("arm button");
 #  Disable button if too little power
   if (getprop(power) < minVoltageLimit) { return; }
+  
+  # Do nothing if the AP is not turned on
+  if (lockPitchMode.getValue() == pitchModes["OFF"]) {
+      lockPitchMode.setIntValue(pitchArmModes["OFF"]);
+      return;
+  }
 
   var pitchArm = lockPitchArm.getValue();
 

@@ -654,10 +654,11 @@ var navArmFromHdg = func
   ##
   lockNavHold.setBoolValue(1);
   deviation = getprop(headingNeedleDeflection);
+  var deviationValid = getprop(navHeadingValid);
   ##
   # If the deflection is more than 3 degrees wait 5 seconds and check again.
   ##
-  if (abs(deviation) > 3.0)
+  if (!deviationValid or abs(deviation) > 3.0)
   {
     #print("deviation");
     settimer(navArmFromHdg, 5);

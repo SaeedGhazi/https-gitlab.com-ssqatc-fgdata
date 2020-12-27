@@ -580,6 +580,10 @@ var navButton = func {
 #  Disable button if too little power
   if (getprop(power) < minVoltageLimit) { return; }
 
+  if (lockPitchArm.getValue() == pitchArmModes["GS"]) {
+      lockPitchArm.setIntValue(pitchArmModes["OFF"]);
+  }
+
   ##
   # If we are in HDG mode we switch to the 45 degree angle intercept NAV mode
   ##
@@ -617,6 +621,14 @@ var navButton = func {
     lockRollMode.setIntValue(rollModes["NAV"]);
 
     annunciatorNavArm.setBoolValue(1);
+    annunciatorAprArm.setBoolValue(0);
+    annunciatorRevArm.setBoolValue(0);
+    annunciatorGsArm.setBoolValue(0);
+    annunciatorNav.setBoolValue(0);
+    annunciatorRol.setBoolValue(0);
+    annunciatorRev.setBoolValue(0);
+    annunciatorApr.setBoolValue(0);
+    annunciatorGs.setBoolValue(0);
 
     navArmFromRol();
   }
@@ -743,6 +755,10 @@ var aprButton = func {
   ##print("aprButton");
 #  Disable button if too little power
   if (getprop(power) < minVoltageLimit) { return; }
+  
+  if (lockPitchArm.getValue() == pitchArmModes["GS"]) {
+      lockPitchArm.setIntValue(pitchArmModes["OFF"]);
+  }
 
   ##
   # If we are in HDG mode we switch to the 45 degree intercept angle APR mode
@@ -777,7 +793,15 @@ var aprButton = func {
     lockRollArm.setIntValue(rollArmModes["APR"]);
     lockRollMode.setIntValue(rollModes["APR"]);
 
+    annunciatorNavArm.setBoolValue(0);
     annunciatorAprArm.setBoolValue(1);
+    annunciatorRevArm.setBoolValue(0);
+    annunciatorGsArm.setBoolValue(0);
+    annunciatorNav.setBoolValue(0);
+    annunciatorRol.setBoolValue(0);
+    annunciatorRev.setBoolValue(0);
+    annunciatorApr.setBoolValue(0);
+    annunciatorGs.setBoolValue(0);
 
     aprArmFromRol();
   }
@@ -954,6 +978,10 @@ var revButton = func {
 #  Disable button if too little power
   if (getprop(power) < minVoltageLimit) { return; }
 
+  if (lockPitchArm.getValue() == pitchArmModes["GS"]) {
+      lockPitchArm.setIntValue(pitchArmModes["OFF"]);
+  }
+
   ##
   # If we are in HDG mode we switch to the 45 degree intercept angle REV mode
   ##
@@ -985,7 +1013,15 @@ var revButton = func {
     lockRollAxis.setBoolValue(1);
     lockRollArm.setIntValue(rollArmModes["REV"]);
 
+    annunciatorNavArm.setBoolValue(0);
+    annunciatorAprArm.setBoolValue(0);
     annunciatorRevArm.setBoolValue(1);
+    annunciatorGsArm.setBoolValue(0);
+    annunciatorNav.setBoolValue(0);
+    annunciatorRol.setBoolValue(0);
+    annunciatorRev.setBoolValue(0);
+    annunciatorApr.setBoolValue(0);
+    annunciatorGs.setBoolValue(0);
 
     revArmFromRol();
   }

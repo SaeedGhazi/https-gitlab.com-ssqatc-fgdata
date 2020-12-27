@@ -459,6 +459,9 @@ var hdgButton = func {
     annunciatorNav.setBoolValue(0);
     annunciatorRol.setBoolValue(0);
     annunciatorRev.setBoolValue(0);
+    annunciatorNavArm.setBoolValue(0);
+    annunciatorAprArm.setBoolValue(0);
+    annunciatorRevArm.setBoolValue(0);
 
     settingTargetInterceptAngle.setDoubleValue(0.0);
   }
@@ -487,6 +490,8 @@ var hdgButton = func {
     annunciatorRol.setBoolValue(0);
     annunciatorRev.setBoolValue(0);
     annunciatorNavArm.setBoolValue(0);
+    annunciatorAprArm.setBoolValue(0);
+    annunciatorRevArm.setBoolValue(0);
 
     settingTargetInterceptAngle.setDoubleValue(0.0);
   }
@@ -585,9 +590,11 @@ var navButton = func {
   }
 
   ##
-  # If we are in HDG mode we switch to the 45 degree angle intercept NAV mode
+  # If we are in HDG (or radial) mode we switch to the 45 degree angle intercept NAV mode
   ##
-  if (lockRollMode.getValue() == rollModes["HDG"])
+  if (lockRollMode.getValue() == rollModes["HDG"]
+   or lockRollMode.getValue() == rollModes["APR"]
+   or lockRollMode.getValue() == rollModes["REV"])
   {
     hdgFlasher.blink(8, 1).switch(0).switch(1);
 
@@ -601,6 +608,11 @@ var navButton = func {
     lockRollMode.setIntValue(rollModes["NAV"]);
 
     annunciatorNavArm.setBoolValue(1);
+    annunciatorAprArm.setBoolValue(0);
+    annunciatorRevArm.setBoolValue(0);
+    annunciatorNav.setBoolValue(0);
+    annunciatorRol.setBoolValue(0);
+    annunciatorRev.setBoolValue(0);
 
     navArmFromHdg();
   }
@@ -761,9 +773,11 @@ var aprButton = func {
   }
 
   ##
-  # If we are in HDG mode we switch to the 45 degree intercept angle APR mode
+  # If we are in HDG (or radial) mode we switch to the 45 degree intercept angle APR mode
   ##
-  if (lockRollMode.getValue() == rollModes["HDG"])
+  if (lockRollMode.getValue() == rollModes["HDG"]
+   or lockRollMode.getValue() == rollModes["NAV"]
+   or lockRollMode.getValue() == rollModes["REV"])
   {
     hdgFlasher.blink(8, 1).switch(0).switch(1);
 
@@ -776,7 +790,12 @@ var aprButton = func {
     lockRollArm.setIntValue(rollArmModes["APR"]);
     lockRollMode.setIntValue(rollModes["APR"]);
 
+    annunciatorNavArm.setBoolValue(0);
     annunciatorAprArm.setBoolValue(1);
+    annunciatorRevArm.setBoolValue(0);
+    annunciatorNav.setBoolValue(0);
+    annunciatorRol.setBoolValue(0);
+    annunciatorRev.setBoolValue(0);
 
     aprArmFromHdg();
   }
@@ -983,9 +1002,11 @@ var revButton = func {
   }
 
   ##
-  # If we are in HDG mode we switch to the 45 degree intercept angle REV mode
+  # If we are in HDG (or radial) mode we switch to the 45 degree intercept angle REV mode
   ##
-  if (lockRollMode.getValue() == rollModes["HDG"])
+  if (lockRollMode.getValue() == rollModes["HDG"]
+   or lockRollMode.getValue() == rollModes["NAV"]
+   or lockRollMode.getValue() == rollModes["APR"])
   {
     hdgFlasher.blink(8, 1).switch(0).switch(1);
 
@@ -997,7 +1018,12 @@ var revButton = func {
     lockRollAxis.setBoolValue(1);
     lockRollArm.setIntValue(rollArmModes["REV"]);
 
+    annunciatorNavArm.setBoolValue(0);
+    annunciatorAprArm.setBoolValue(0);
     annunciatorRevArm.setBoolValue(1);
+    annunciatorNav.setBoolValue(0);
+    annunciatorRol.setBoolValue(0);
+    annunciatorRev.setBoolValue(0);
 
     revArmFromHdg();
   }

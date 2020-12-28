@@ -37,7 +37,7 @@
         <checkbox>
             <row>0</row>
             <col>0</col>
-            <property>sim/replay/multiplayer</property>
+            <property>sim/replay/record-continuous</property>
             <binding>
                 <command>dialog-apply</command>
             </binding>
@@ -45,27 +45,12 @@
         <text>
             <row>0</row>
             <col>1</col>
-            <label>Include multiplayer aircraft in recordings</label>
-            <halign>left</halign>
-        </text>
-    
-        <checkbox>
-            <row>1</row>
-            <col>0</col>
-            <property>sim/replay/record-continuous</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>1</row>
-            <col>1</col>
             <label>Continuous record to file</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>2</row>
+            <row>1</row>
             <col>0</col>
             <property>sim/replay/recovery-period</property>
             <binding>
@@ -73,12 +58,27 @@
             </binding>
         </checkbox>
         <text>
-            <row>2</row>
+            <row>1</row>
             <col>1</col>
             <label>Maintain recovery snapshot</label>
             <halign>left</halign>
         </text>
         
+        <checkbox>
+            <row>2</row>
+            <col>0</col>
+            <property>sim/replay/record-multiplayer</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+        <text>
+            <row>2</row>
+            <col>1</col>
+            <label>Include multiplayer aircraft in recordings</label>
+            <halign>left</halign>
+        </text>
+    
         <checkbox>
             <row>3</row>
             <col>0</col>

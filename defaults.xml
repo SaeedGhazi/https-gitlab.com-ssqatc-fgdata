@@ -889,6 +889,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <chat-menu include="ATC/chat-menu-entries.xml"/>
       <write-message-log type="bool" preserve="y">false</write-message-log>
       <freeze-on-replay type="bool" preserve="y">true</freeze-on-replay>
+      <hot type="bool" userarchive="y">false</hot>
       <default-model type="string" preserve="y">Models/Geometry/glider.ac</default-model>
       <callsign type="string" userarchive="y">callsign</callsign>
       <selected-server type="string" userarchive="y"/>

@@ -186,6 +186,21 @@
             <col>1</col>
             <colspan>2</colspan>
             <halign>left</halign>
+            <name>hot</name>
+            <label>Enable collisions with other players</label>
+            <property>/sim/multiplay/hot</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>hot</object-name>
+            </binding>
+            <live>true</live>
+        </checkbox>
+
+        <checkbox>
+            <row>4</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
             <visible>
                 <property>sim/multiplay/transmit-filter-property-base-available</property>
             </visible>
@@ -199,7 +214,7 @@
         </checkbox>
 
         <combo>
-            <row>4</row>
+            <row>5</row>
             <col>1</col>
             <halign>left</halign>
             <name>protocol-version</name>
@@ -226,20 +241,20 @@
             </binding>
         </combo>
         <text>
-            <row>4</row>
+            <row>5</row>
             <col>0</col>
             <halign>right</halign>
             <label>Compatibility</label>
         </text>
 
         <text>
-            <row>5</row>
+            <row>6</row>
             <col>0</col>
             <halign>right</halign>
             <label>   Callsign:</label>
         </text>
         <input>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <halign>left</halign>
             <property>/sim/multiplay/callsign</property>
@@ -250,14 +265,14 @@
             </enable>
         </input>
         <text>
-          <row>7</row><col>0</col>
+          <row>8</row><col>0</col>
           <halign>right</halign>
           <label>Server:</label>
         </text>
         <combo>
             <name>host</name>
             <halign>left</halign>
-            <row>6</row><col>1</col>
+            <row>7</row><col>1</col>
             <colspan>2</colspan>
             <pref-width>350</pref-width>
             <property>/sim/multiplay/selected-server</property>
@@ -267,7 +282,7 @@
         </combo>
         <group>
             <layout>hbox</layout>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <text>
                 <width>2</width>
@@ -290,7 +305,7 @@
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>7</row>
+            <row>8</row>
             <col>1</col>
             <halign>left</halign>
             <label>Not connected</label>

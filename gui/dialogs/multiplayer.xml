@@ -182,6 +182,21 @@
         </checkbox>
 
         <checkbox>
+            <row>3</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>hot</name>
+            <label>Enable collisions with other players</label>
+            <property>/sim/multiplay/hot</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>hot</object-name>
+            </binding>
+            <live>true</live>
+        </checkbox>
+
+        <checkbox>
             <row>4</row>
             <col>1</col>
             <colspan>2</colspan>

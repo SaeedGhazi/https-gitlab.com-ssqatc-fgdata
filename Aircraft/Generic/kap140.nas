@@ -610,9 +610,12 @@ var navButton = func {
     annunciatorNavArm.setBoolValue(1);
     annunciatorAprArm.setBoolValue(0);
     annunciatorRevArm.setBoolValue(0);
+    annunciatorGsArm.setBoolValue(0);
     annunciatorNav.setBoolValue(0);
     annunciatorRol.setBoolValue(0);
     annunciatorRev.setBoolValue(0);
+    annunciatorApr.setBoolValue(0);
+    annunciatorGs.setBoolValue(0);
 
     navArmFromHdg();
   }
@@ -793,9 +796,12 @@ var aprButton = func {
     annunciatorNavArm.setBoolValue(0);
     annunciatorAprArm.setBoolValue(1);
     annunciatorRevArm.setBoolValue(0);
+    annunciatorGsArm.setBoolValue(0);
     annunciatorNav.setBoolValue(0);
     annunciatorRol.setBoolValue(0);
     annunciatorRev.setBoolValue(0);
+    annunciatorApr.setBoolValue(0);
+    annunciatorGs.setBoolValue(0);
 
     aprArmFromHdg();
   }
@@ -1021,9 +1027,12 @@ var revButton = func {
     annunciatorNavArm.setBoolValue(0);
     annunciatorAprArm.setBoolValue(0);
     annunciatorRevArm.setBoolValue(1);
+    annunciatorGsArm.setBoolValue(0);
     annunciatorNav.setBoolValue(0);
     annunciatorRol.setBoolValue(0);
     annunciatorRev.setBoolValue(0);
+    annunciatorApr.setBoolValue(0);
+    annunciatorGs.setBoolValue(0);
 
     revArmFromHdg();
   }

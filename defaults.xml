@@ -211,7 +211,14 @@ Started September 2000 by David Megginson, david@megginson.com
       </redout>
       <headshake>
         <enabled type="bool" userarchive="y">false</enabled>
-        <rate-m-g type="double">0.005</rate-m-g>
+        <rate-m-g type="double">0.015</rate-m-g>
+        <groundshake>
+            <effect-factor type="double" userarchive="y">1.0</effect-factor>
+            <default-aircraft-scaler-factor>5.0</default-aircraft-scaler-factor>
+            <default-aircraft-scaler-min-knots>1.0</default-aircraft-scaler-min-knots>
+            <default-aircraft-scaler-max-knots>50.0</default-aircraft-scaler-max-knots>
+            <custom-aircraft-scaler>0.0</custom-aircraft-scaler> <!-- optionally supplied by aircrafts -->
+        </groundshake>
       </headshake>
       <osg-displaysettings>
         <eye-separation type="double" userarchive="y">0.05</eye-separation>

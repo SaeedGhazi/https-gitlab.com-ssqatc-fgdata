@@ -4,12 +4,13 @@
 ##                                                                               ##
 ## Improved redout/blackout system for Flightgear                                ##
 ##                                                                               ##
-## Author: Nikolai V. Chr. (property rules), Thorsten Renk (shaders)             ##
+## Author: Nikolai V. Chr. (property rules), Thorsten Renk (shaders),            ##
+##         Benedikt Hallinger (groundshake effect)                               ##
 ##                                                                               ##
 ##                                                                               ##
 ##                                                                               ##
 ##                                                                               ##
-## Version 2.05            License: GPL 2.0                                      ##
+## Version 2.10            License: GPL 2.0                                      ##
 ##                                                                               ##
 ###################################################################################
 -->
@@ -49,6 +50,24 @@
         <tunnel>sim/rendering/als-filters/black-factor</tunnel>
         <als>sim/rendering/shaders/skydome</als>
         <filters>sim/rendering/als-filters/use-filtering</filters>
+        <groundshake>
+            <!-- inputs -->
+            <effect-factor>sim/rendering/headshake/groundshake/effect-factor</effect-factor>
+            <aircraft-scale-prop>sim/rendering/headshake/groundshake/custom-aircraft-scaler</aircraft-scale-prop>
+            <default-aircraft-scaler-minkts>sim/rendering/headshake/groundshake/default-aircraft-scaler-min-knots</default-aircraft-scaler-minkts>
+            <default-aircraft-scaler-maxkts>sim/rendering/headshake/groundshake/default-aircraft-scaler-max-knots</default-aircraft-scaler-maxkts>
+            <default-aircraft-scaler-factor>sim/rendering/headshake/groundshake/default-aircraft-scaler-factor</default-aircraft-scaler-factor>
+            
+            <!-- internal -->
+            <rng-source>sim/rendering/headshake/groundshake/internal/groundbump</rng-source>
+            <terrain-bumpiness>/fdm/jsbsim/ground/bumpiness</terrain-bumpiness>
+            <has-ground-contact>sim/rendering/headshake/groundshake/internal/ground-contact</has-ground-contact>
+            <is-moving>sim/rendering/headshake/groundshake/internal/is-moving</is-moving>
+            <default-aircraft-scaler>sim/rendering/headshake/groundshake/internal/default-aircraft-scaler</default-aircraft-scaler>
+            
+            <!-- outputs -->
+            <result>sim/rendering/headshake/groundshake/result-g</result>
+        </groundshake>
     </params>
 
     <filter><!-- check for NaN -->
@@ -227,10 +246,13 @@
         </enable>
         <input>
             <expression>
-                <div>
-                    <property>accelerations/pilot/z-accel-fps_sec</property>
-                    <value>32.174</value>
-                </div>
+                <sum>
+                    <div>
+                        <property>accelerations/pilot/z-accel-fps_sec</property>
+                        <value>32.174</value>
+                    </div>
+                    <property alias="/params/groundshake/result" />
+                </sum>
             </expression>
         </input>
         <output alias="/params/g-force"/>
@@ -1010,4 +1032,164 @@
         <output alias="/params/greyout"/>
     </filter>
 
+
+    <!-- Ground shake effect
+         The ground shake effect simulates the roughness of the terrain and the
+         resulting forces onto the pilot when moving over it.
+         This is achieved by generating random g-forces depending on the current terrain bumpyness.
+         The force is then applied to the pilot depending on movement speed of the aircraft.
+
+         Adjustments reside in sim/rendering/headshake/groundshake and can be done with this properties:
+          - effect-factor:    Overall effect scaling/enabling, so users can disable/adjust in cockpit-gui
+          - default-aircraft-scaler-factor: allows to adjust the default aircraft effect output.
+                              To be overwritten from aircraft for which the default table is OK but the effect to small/big.
+                              Set to zero in case a separate scaler is provided
+          - default-aircraft-scaler-min-knots: at this speed the effect starts
+          - default-aircraft-scaler-max-knots: at this speed the effect reaches its maximum
+          - custom-aircraft-scaler: aircraft devs calculate their own scaling algorythm result here.
+                              Most probably this is based on speed etc.
+                              Set default-aircraft-scaler-factor to zero, because otherwise the
+                              default still applies (default+custom effects are added)!
+    -->
+    <filter>
+        <name>groundshake-terrain-g</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <gain><property alias="/params/groundshake/effect-factor"/></gain>
+        <input>
+            <condition>
+                <!-- only act when having ground contact -->
+                <property alias="/params/groundshake/has-ground-contact"/>
+                <property alias="/params/groundshake/is-moving"/>
+            </condition>
+            <expression>
+                <product>
+                    <!-- defines bumps of surface -->
+                    <property alias="/params/groundshake/rng-source"/>
+
+                    <!-- apply bumpiness of terrain -->
+                    <product>
+                        <value>1</value>
+                        <sum>
+                            <value>0.1</value> <!-- so we have a effect even on taxiway/runway -->
+                            <property alias="/params/groundshake/terrain-bumpiness"/>
+                        </sum>
+                    </product>
+                    
+                    <sum>
+                        <!-- apply the default aircraft scaling -->
+                        <!-- note: in case the aircraft dev wants his own model, he should deactivate the internal one -->
+                        <!-- this can be done by setting the deafualt-aircraft-factor to zero -->
+                        <property alias="/params/groundshake/default-aircraft-scaler" />
+                        
+                        <!-- apply aircraft specific scaling -->
+                        <!-- (this is intended to model gear damping based on speed etc) -->
+                        <property alias="/params/groundshake/aircraft-scale-prop"/>
+                    </sum>
+
+                </product>
+            </expression>
+        </input>
+        <input><value>0.0</value></input> <!-- in-air: no ground forces -->
+        <output alias="/params/groundshake/result" />
+    </filter>
+        
+    <filter>
+        <name>Ground bumps</name>
+        <!-- calculate the ground bump number: The rate and ammount of change simulates bumps in the surface -->
+        <type>coherent-noise</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property alias="/params/groundshake/has-ground-contact"/>
+                <property alias="/params/groundshake/is-moving"/>
+            </condition>
+        </enable>
+        <input>
+            <!-- depending on position: the faster we go, the faster the prop changes, the faster the bumps come in -->
+            <expression>
+                <product>
+                    <sum>
+                        <property>/position/latitude-deg</property>
+                        <property>/position/longitude-deg</property>
+                    </sum>
+                    <value>50</value>
+                </product>
+            </expression>
+        </input>
+        <output><property alias="/params/groundshake/rng-source"/></output>
+        <amplitude>0.5</amplitude>
+        <absolute type="bool">false</absolute>
+        <discrete-resolution>1024</discrete-resolution> <!-- frequency of the changes/bumps: the smaller, the more wide the bumps are -->
+    </filter>
+    
+    <logic>
+        <name>Aircraft has ground contact</name>
+        <input>
+            <or>
+                <property>/gear/gear[0]/wow</property>
+                <property>/gear/gear[1]/wow</property>
+                <property>/gear/gear[2]/wow</property>
+                <property>/gear/gear[3]/wow</property>
+            </or>
+        </input>
+        <output>
+            <property alias="/params/groundshake/has-ground-contact"/>
+        </output>
+    </logic>
+    
+    <logic>
+        <name>Aircraft is moving</name>
+        <input>
+            <greater-than>
+                <property>/velocities/groundspeed-kt</property>
+                <value>1</value>
+            </greater-than>
+        </input>
+        <output>
+            <property alias="/params/groundshake/is-moving"/>
+        </output>
+    </logic>
+    
+    <filter>
+        <name>Default aircraft scaling by speed</name>
+        <!-- This filter defines a table for applying the scaled effect by airspeed to
+             simulate basic damping of the gear. It allows for defining dynamic min/max knots
+             ranges and scales linearly bin between -->
+        <debug>false</debug>
+        <type>gain</type>
+        <gain> <property alias="/params/groundshake/default-aircraft-scaler-factor"/> </gain>
+        <input>
+            <!-- Formula: (1/(max-min))*speed-(min/(max-min)) lets us scale linearly with given min/max values -->
+            <expression>
+                <difference>
+                    <prod>
+                        <div>
+                            <value>1</value>
+                            <difference>
+                                <property alias="/params/groundshake/default-aircraft-scaler-maxkts"/>
+                                <property alias="/params/groundshake/default-aircraft-scaler-minkts"/>
+                            </difference>
+                        </div>
+                        <property>/velocities/groundspeed-kt</property>
+                    </prod>
+                    
+                    <div>
+                        <property alias="/params/groundshake/default-aircraft-scaler-minkts"/>
+                        <difference>
+                            <property alias="/params/groundshake/default-aircraft-scaler-maxkts"/>
+                            <property alias="/params/groundshake/default-aircraft-scaler-minkts"/>
+                        </difference>
+                    </div>
+                </difference>
+            </expression>
+            
+            <min>0.0</min>
+            <max>1.0</max>
+        </input>
+        <output>
+            <property alias="/params/groundshake/default-aircraft-scaler" />
+        </output>
+    </filter>
+    
 </PropertyList>

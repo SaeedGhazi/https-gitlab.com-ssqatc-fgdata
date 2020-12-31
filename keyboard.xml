@@ -302,7 +302,7 @@ top down before the key bindings are parsed.
   <binding>
    <command>property-assign</command>
    <property>/sim/current-view/field-of-view</property>
-   <property>/sim/view/config/default-field-of-view-deg</property>
+   <property>/sim/current-view/config/default-field-of-view-deg</property>
   </binding>
  </key>
 

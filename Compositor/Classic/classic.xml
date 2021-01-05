@@ -16,7 +16,7 @@
     <type>2d</type>
     <width><property>/sim/rendering/shadows/sun-atlas-size</property></width>
     <height><property>/sim/rendering/shadows/sun-atlas-size</property></height>
-    <format>depth24</format>
+    <format>depth16</format>
     <wrap-s>clamp-to-border</wrap-s>
     <wrap-t>clamp-to-border</wrap-t>
     <wrap-r>clamp-to-border</wrap-r>

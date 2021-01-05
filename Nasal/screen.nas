@@ -487,9 +487,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 	settimer(func {
 		setlistener("/sim/atc/runway", func(n) { # set in src/Main/fg_init.cxx
 			var rwy = n.getValue();
-			if (rwy == nil)
-				return;
-			if (getprop("/sim/presets/airport-id") == "KSFO" and rwy == "28R")
+			if ((rwy == nil) or (rwy == ""))
 				return;
 			if ((var agl = getprop("/position/altitude-agl-ft")) != nil and agl > 100)
 				return;

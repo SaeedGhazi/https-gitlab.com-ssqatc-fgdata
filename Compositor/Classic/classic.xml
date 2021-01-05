@@ -43,7 +43,7 @@
   <pass n="1" include="csm-pass.xml">
     <name>csm1</name>
     <near-m>3.0</near-m>
-    <far-m>50.0</far-m>
+    <far-m>70.0</far-m>
     <viewport>
       <x>0.5</x>
       <y>0.0</y>
@@ -53,8 +53,8 @@
   </pass>
   <pass n="2" include="csm-pass.xml">
     <name>csm2</name>
-    <near-m>50.0</near-m>
-    <far-m>400.0</far-m>
+    <near-m>70.0</near-m>
+    <far-m>300.0</far-m>
     <viewport>
       <x>0.0</x>
       <y>0.5</y>
@@ -64,8 +64,8 @@
   </pass>
   <pass n="3" include="csm-pass.xml">
     <name>csm3</name>
-    <near-m>400.0</near-m>
-    <far-m>1500.0</far-m>
+    <near-m>300.0</near-m>
+    <far-m>1000.0</far-m>
     <viewport>
       <x>0.5</x>
       <y>0.5</y>

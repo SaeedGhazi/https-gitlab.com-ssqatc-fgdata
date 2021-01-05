@@ -1,7 +1,6 @@
 #version 120
 
 uniform bool shadows_enabled;
-uniform int sun_atlas_size;
 
 uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
@@ -10,8 +9,7 @@ uniform mat4 fg_LightMatrix_csm3;
 
 varying vec4 lightSpacePos[4];
 
-const float NORMAL_OFFSET_SCALE = 200.0;
-
+const float NORMAL_OFFSET_SCALES[4] = float[4](0.0, 0.1, 0.3, 1.0);
 
 void setupShadows(vec4 eyeSpacePos)
 {
@@ -23,16 +21,18 @@ void setupShadows(vec4 eyeSpacePos)
     vec3 toLight = normalize(gl_LightSource[0].position.xyz);
     float costheta = dot(normal, toLight);
     float slopeScale = clamp(1.0 - costheta, 0.0, 1.0);
-    float texelSize = 1.0 / sun_atlas_size;
-    float normalOffset = NORMAL_OFFSET_SCALE * slopeScale * texelSize;
 
-    vec4 offsetPos = eyeSpacePos + vec4(normal * normalOffset, 0.0);
+    vec4 offsetPos[4];
+    for (int i = 0; i < 4; i++) {
+        float normalOffset = NORMAL_OFFSET_SCALES[i] * slopeScale;
+        offsetPos[i] = eyeSpacePos + vec4(normal * normalOffset, 0.0);
+    }
 
-    vec4 offsets[4];
-    offsets[0] = fg_LightMatrix_csm0 * offsetPos;
-    offsets[1] = fg_LightMatrix_csm1 * offsetPos;
-    offsets[2] = fg_LightMatrix_csm2 * offsetPos;
-    offsets[3] = fg_LightMatrix_csm3 * offsetPos;
+    vec4 offsetPosLightSpace[4];
+    offsetPosLightSpace[0] = fg_LightMatrix_csm0 * offsetPos[0];
+    offsetPosLightSpace[1] = fg_LightMatrix_csm1 * offsetPos[1];
+    offsetPosLightSpace[2] = fg_LightMatrix_csm2 * offsetPos[2];
+    offsetPosLightSpace[3] = fg_LightMatrix_csm3 * offsetPos[3];
 
     lightSpacePos[0] = fg_LightMatrix_csm0 * eyeSpacePos;
     lightSpacePos[1] = fg_LightMatrix_csm1 * eyeSpacePos;
@@ -40,8 +40,6 @@ void setupShadows(vec4 eyeSpacePos)
     lightSpacePos[3] = fg_LightMatrix_csm3 * eyeSpacePos;
 
     // Offset only in UV space
-    lightSpacePos[0].xy = offsets[0].xy;
-    lightSpacePos[1].xy = offsets[1].xy;
-    lightSpacePos[2].xy = offsets[2].xy;
-    lightSpacePos[3].xy = offsets[3].xy;
+    for (int i = 0; i < 4; i++)
+        lightSpacePos[i].xy = offsetPosLightSpace[i].xy;
 }

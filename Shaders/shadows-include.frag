@@ -9,7 +9,7 @@ varying vec4 lightSpacePos[4];
 
 const bool DEBUG_CASCADES = false;
 
-const float DEPTH_BIAS = 1.5;
+const float DEPTH_BIAS = 2.0;
 
 // Ideally these should be passed as an uniform, but we don't support uniform
 // arrays yet

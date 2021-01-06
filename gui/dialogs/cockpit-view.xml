@@ -82,6 +82,7 @@
             <min>0.0</min>
             <max>0.1</max>
             <property>/sim/rendering/headshake/rate-m-g</property>
+            <step>0.01</step>
             <live>true</live>
             <binding>
                 <command>dialog-apply</command>
@@ -107,6 +108,7 @@
         <slider>
             <min>0.0</min>
             <max>2.0</max>
+            <step>0.1</step>
             <property>/sim/rendering/headshake/groundshake/effect-factor</property>
             <live>true</live>
             <binding>

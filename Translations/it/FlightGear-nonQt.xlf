@@ -400,7 +400,7 @@
       </trans-unit>
       <trans-unit id="menu/swift_connection:0" approved="yes">
         <source xml:space="preserve">swift Connection</source>
-        <target xml:space="preserve">Connessione rapida</target>
+        <target xml:space="preserve">Connessione swift</target>
       </trans-unit>
       <trans-unit id="menu/system-failures:0" approved="yes">
         <source xml:space="preserve">System Failures</source>

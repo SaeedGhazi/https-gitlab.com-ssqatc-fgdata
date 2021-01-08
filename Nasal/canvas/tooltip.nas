@@ -422,3 +422,8 @@ addcommand("set-tooltip", setTooltip);
 addcommand("tooltip-timeout", showTooltip);
 addcommand("show-message", showMessage);
 addcommand("clear-message", clearMessage);
+
+# confirm the commands are registered: we use this to
+# avoid sending commands before Nasal is inited, and hence
+# producing errors
+setprop("/sim/mouse/tooltip-commands-registered", 1);

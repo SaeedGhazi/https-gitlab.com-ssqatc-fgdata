@@ -78,7 +78,7 @@
     <text><label>  Screen Distance</label></text>
     <empty><stretch>true</stretch></empty>
     <slider>
-      <min>0</min>
+      <min>0.1</min>
       <max>10.0</max>
       <property>/sim/rendering/osg-displaysettings/screen-distance</property>
       <binding>

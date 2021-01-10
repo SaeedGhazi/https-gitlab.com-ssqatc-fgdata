@@ -29,6 +29,7 @@ vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
 float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 float ray_intersect(sampler2D reliefMap, vec2 dp, vec2 ds)
 {

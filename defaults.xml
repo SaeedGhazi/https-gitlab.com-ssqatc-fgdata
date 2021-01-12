@@ -810,6 +810,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <style n="0" include="gui/styles/tortola.xml"/>
       <style n="1" include="gui/styles/anthrax.xml"/>
       <devel-widgets type="bool" userarchive="y">false</devel-widgets>
+      <chat-box-location type="string" userarchive="y">default</chat-box-location>
     </gui>
     <mouse>
       <hide-cursor type="bool" userarchive="y">true</hide-cursor>

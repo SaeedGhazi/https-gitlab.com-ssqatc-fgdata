@@ -147,6 +147,26 @@
         </binding>
       </checkbox>
 
+      <group>
+        <layout>hbox</layout>
+
+        <text>
+          <label>Chat and event log position (requires restart):</label>
+        </text>
+
+        <combo>
+          <name>chatlocation</name>
+          <property>/sim/gui/chat-box-location</property>
+          <value>default</value>
+          <value>left</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>chatlocation</object-name>
+          </binding>
+        </combo>
+
+      </group>
+
       <checkbox>
         <halign>left</halign>
         <label>Show popup messages</label>

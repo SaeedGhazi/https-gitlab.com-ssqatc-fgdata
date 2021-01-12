@@ -549,7 +549,11 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 
 #-- Init -----------------------------------------------------------------------
-property_display = display.new(5, -25);
+if (getprop("/sim/gui/chat-box-location") == "left") {
+    property_display = display.new(5, -250);
+} else {
+    property_display = display.new(5, -25);
+}
 listener.display = setlistener("/sim/gui/dialogs/property-browser/selected", func(n) {
     var n = n.getValue();
     if (n != "" and getprop("/devices/status/keyboard/shift")) {
@@ -567,7 +571,12 @@ setlistener("/sim/gui/current-style", func {
     theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name");
 }, 1);
 
-log = window.new(nil, -30, 10, 10);
+if (getprop("/sim/gui/chat-box-location") == "left") {
+    log = window.new(5, -30, 10, 10);
+    log.align = "left";
+} else {
+    log = window.new(nil, -30, 10, 10);
+}
 log.sticky = 0;  # do not turn on; makes scrolling up messages jump left and right
 
 var b = "/sim/screen/";

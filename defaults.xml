@@ -899,6 +899,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <auto-attach type="bool" userarchive="y">true</auto-attach>
     </mp-carriers>
     <freeze-mouse-flight-controls-on-pause type="bool" userarchive="n">true</freeze-mouse-flight-controls-on-pause>
+    <chat-on-the-left type="bool" userarchive="y">false</chat-on-the-left>
   </sim>
   <!-- accelerations -->
   <accelerations>

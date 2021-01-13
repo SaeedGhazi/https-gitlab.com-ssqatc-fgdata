@@ -549,7 +549,7 @@ _setlistener("/sim/signals/nasal-dir-initialized", func {
 
 
 #-- Init -----------------------------------------------------------------------
-if (getprop("/sim/chat-on-the-left")) {
+if (getprop("/sim/gui/chat-box-location") == "left") {
     property_display = display.new(5, -250);
 } else {
     property_display = display.new(5, -25);
@@ -571,7 +571,7 @@ setlistener("/sim/gui/current-style", func {
     theme_font = getprop("/sim/gui/selected-style/fonts/message-display/name");
 }, 1);
 
-if (getprop("/sim/chat-on-the-left")) {
+if (getprop("/sim/gui/chat-box-location") == "left") {
     log = window.new(5, -30, 10, 10);
     log.align = "left";
 } else {

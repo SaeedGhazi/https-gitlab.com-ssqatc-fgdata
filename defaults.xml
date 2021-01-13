@@ -730,6 +730,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <style n="0" include="gui/styles/tortola.xml"/>
       <style n="1" include="gui/styles/anthrax.xml"/>
       <devel-widgets type="bool" userarchive="y">false</devel-widgets>
+      <chat-box-location type="string" userarchive="y">default</chat-box-location>
     </gui>
     <mouse>
       <hide-cursor type="bool" userarchive="y">true</hide-cursor>
@@ -899,7 +900,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <auto-attach type="bool" userarchive="y">true</auto-attach>
     </mp-carriers>
     <freeze-mouse-flight-controls-on-pause type="bool" userarchive="n">true</freeze-mouse-flight-controls-on-pause>
-    <chat-on-the-left type="bool" userarchive="y">false</chat-on-the-left>
   </sim>
   <!-- accelerations -->
   <accelerations>

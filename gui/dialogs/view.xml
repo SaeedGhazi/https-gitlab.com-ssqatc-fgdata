@@ -48,6 +48,12 @@
           target.getNode("property").setValue(enabled.getPath());
         }
       }
+
+      if (getprop("/sim/gui/chat-box-location") == "left") {
+        setprop("/sim/gui/dialogs/view/chat-box-left-checked", 1);
+      } else {
+        setprop("/sim/gui/dialogs/view/chat-box-left-checked", 0);
+      }
     </open>
   </nasal>
 
@@ -148,11 +154,22 @@
       </checkbox>
 
       <checkbox>
+        <live>true</live>
         <halign>left</halign>
         <label>Chat and event log on the left (requires restart)</label>
-        <property>/sim/chat-on-the-left</property>
+        <property>/sim/gui/dialogs/view/chat-box-left-checked</property>
         <binding>
           <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>
+           if (getprop("/sim/gui/dialogs/view/chat-box-left-checked")) {
+             setprop("/sim/gui/chat-box-location", "left");
+           } else {
+             setprop("/sim/gui/chat-box-location", "default");
+           }
+          </script>
         </binding>
       </checkbox>
 

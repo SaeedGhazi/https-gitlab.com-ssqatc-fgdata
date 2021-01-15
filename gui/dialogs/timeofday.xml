@@ -215,9 +215,9 @@
                     <col>1</col>
                     <halign>left</halign>
                     <default-padding>0</default-padding>
-                    <label>00:00</label>
+                    <label>00:00:00</label>
                     <live>true</live>
-                    <property>/instrumentation/clock/local-short-string</property>
+                    <property>/sim/time/local-time-string</property>
                 </text>
             </group>
             <!--<slider>

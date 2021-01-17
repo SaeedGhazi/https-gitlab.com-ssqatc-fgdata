@@ -12,7 +12,7 @@
 	
 
 <effect>
- <inherits-from>Aircraft/SpaceShuttle/Models/Effects/shuttle-main</inherits-from>
+ <inherits-from>Effects/shuttle-main</inherits-from>
  <object-name>spaceshutt_spstob_3</object-name>
  <object-name>spaceshutt_spstob_eal</object-name>
  <object-name>SpeedBrakeL</object-name>

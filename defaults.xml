@@ -228,15 +228,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <osg-notify-level type="string" userarchive="y">warn</osg-notify-level>
       <cache type="bool">true</cache>
       <use-vbos type="bool">false</use-vbos>
-      <terrain>
-        <simplifier>
-          <enabled-near type="bool">false</enabled-near>
-          <enabled-far type="bool">false</enabled-far>
-          <ratio type="double">0.01</ratio>
-          <max-error type="double">3000.0</max-error>
-          <max-length type="double">1000.0</max-length>
-        </simplifier>
-      </terrain>
       <!-- OSG default is 300, but this means we burn lots of memory on no-longer
              visible trees / random buildings -->
       <max-paged-lod type="int" userarchive="y">200</max-paged-lod>

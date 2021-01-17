@@ -356,16 +356,6 @@
    <name>rendering-options</name>
 
    <option>
-    <name>enable-rembrandt</name>
-    <description>enable-rembrandt-desc</description>
-   </option>
-
-   <option>
-    <name>disable-rembrandt</name>
-    <description>disable-rembrandt-desc</description>
-   </option>
-
-   <option>
     <name>disable-splash-screen</name>
     <description>disable-splash-screen-desc</description>
    </option>

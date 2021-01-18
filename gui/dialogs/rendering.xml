@@ -78,22 +78,6 @@
 
 			<checkbox>
 				<halign>left</halign>
-				<label>Atmospheric Light Scattering (ALS)</label>
-				<name>skydome-scattering</name>
-				<enable>
-					<not>
-						<property>/sim/rendering/rembrandt/enabled</property>
-					</not>
-				</enable>
-				<property>/sim/rendering/shaders/skydome</property>
-				<binding>
-					<command>dialog-apply</command>
-					<object-name>skydome-scattering</object-name>
-				</binding>
-			</checkbox>
-
-			<checkbox>
-				<halign>left</halign>
 				<label>Shadows (may need restart to take affect)</label>
 				<name>shadows-enable</name>
 				<property>/sim/rendering/shadows/enabled</property>
@@ -838,38 +822,6 @@
 								setScenerySuffix("Objects", 0);
 							}
 						</script>
-					</binding>
-				</combo>
-
-				<text>
-					<row>7</row>
-					<col>0</col>
-					<halign>left</halign>
-					<label>Terrain Textures</label>
-				</text>
-
-				<combo>
-					<row>7</row>
-					<col>1</col>
-					<name>texture-set</name>
-					<pref-width>200</pref-width>
-					<property>sim/gui/dialogs/rendering/texture-set</property>
-					<value>Region-specific</value>
-					<value>Global</value>
-					<value>Global alternative (DDS format)</value>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>texture-set</object-name>
-					</binding>
-					<binding>
-						<command>nasal</command>
-						<script>
-              var file = materials[getprop("/sim/gui/dialogs/rendering/texture-set")];
-              setprop("/sim/rendering/materials-file", file);
-						</script>
-					</binding>
-					<binding>
-						<command>reload-materials</command>
 					</binding>
 				</combo>
 

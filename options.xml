@@ -616,12 +616,6 @@
    </option>
 
    <option>
-    <name>season</name>
-    <arg>{summer,winter}</arg>
-    <description>season-desc</description>
-   </option>
-
-   <option>
     <name>time-offset</name>
     <arg>[+-]hh:mm:ss</arg>
     <description>time-offset-desc</description>

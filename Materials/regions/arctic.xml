@@ -123,7 +123,7 @@
   	<texture-set>
       <texture>Runway/dirt_rwy.png</texture>
       <texture n="16">Terrain/gravel_gray.png</texture>
-      <texture n="17">Terrain.winter/wash.png</texture>
+      <texture n="17">Terrain/wash.png</texture>
     </texture-set>
     <parameters>
      	<strength_05m>0.0</strength_05m>

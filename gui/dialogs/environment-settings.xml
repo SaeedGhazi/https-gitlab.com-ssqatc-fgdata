@@ -39,47 +39,6 @@
   <hrule/>
 
   <group>
-    <layout>table</layout>
-    <default-padding>5</default-padding>
-
-    <text>
-      <row>0</row>
-      <col>0</col>
-      <label>  Ground Textures:</label>
-      <halign>left</halign>
-    </text>
-    <combo>
-      <row>0</row>
-      <col>1</col>
-      <pref-width>90</pref-width>
-      <name>season</name>
-      <halign>left</halign>
-      <live>true</live>
-      <property>/sim/startup/season</property>
-      <value>summer</value>
-      <value>winter</value>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>season</object-name>
-      </binding>
-    </combo>
-
-    <button>
-      <row>0</row>
-      <col>2</col>
-      <legend>Reload Scenery</legend>
-      <binding>
-        <command>reinit</command>
-        <subsystem>scenery</subsystem>
-      </binding>
-    </button>
-    
-  </group>
-    
-  <hrule/>
-  
-    
-  <group>
     <layout>vbox</layout>
     <halign>left</halign>
 
@@ -88,42 +47,25 @@
     </text>
     
     <group>
-      <layout>vbox</layout>
+      <layout>hbox</layout>
       <halign>left</halign>
       <text>
         <label> </label>
         <halign>left</halign>
       </text>
 
-      <group>
-        <layout>hbox</layout>
-
-        <checkbox>
-          <label> Climate updates weather</label>
-          <name>climate-update</name>
-          <property>/environment/climate/weather-update</property>
-          <live>true</live>
-          <binding>
-            <command>dialog-apply</command>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-          </binding>
-        </checkbox>
-
-        <checkbox>
-          <label> Climate updates environment</label>
-          <name>climate-update</name>
-          <property>/environment/climate/environment-update</property>
-          <live>true</live>
-          <binding>
-            <command>dialog-apply</command>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-          </binding>
-        </checkbox>
-      </group>
+      <checkbox>
+        <label> Climate updates environment</label>
+        <name>climate-update</name>
+        <property>/environment/climate/environment-update</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+      </binding>
+      </checkbox>
 
       <checkbox>
         <label> Set maximum snow level from weather</label>

@@ -248,6 +248,12 @@ if (quality_level > 3)
 		texel.rgb = mix(texel.rgb, snow_texel.rgb, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 		}
 	}
+else if (relPos.z + eye_alt +500.0 > snowlevel)
+        {
+            float snow_alpha = 0.1+0.4* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
+//          texel = vec4(dot(vec3(0.2989, 0.5870, 0.1140), texel.rgb));
+            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (relPos.z + eye_alt)));
+        }
 
 
 

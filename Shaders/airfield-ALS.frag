@@ -193,6 +193,12 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 	if (dist < 1000.0){ noise_term = noise_term + 0.3 * (noise_1m -0.5) * (1.0 - smoothstep(500.0 , 1000.0 , dist)  );}
 	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
 	}
+    else if (relPos.z + eye_alt +500.0 > snowlevel && tquality_level > 2)
+        {
+            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
+//          texel = vec4(dot(vec3(0.2989, 0.5870, 0.1140), texel.rgb));
+            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (relPos.z + eye_alt)));
+        }
 
 if (use_overlay == 1)
 	{

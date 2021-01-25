@@ -1389,9 +1389,29 @@ var update_shader_settings = func() {
     if (getprop(shaderPath ~ "custom-settings")) {
         setprop(shaderPath ~ "quality-level", -1);
     } else {
-        if (getprop(shaderPath ~ "skydome")) {
-            var qualityLvl = getprop(shaderPath ~ "quality-level-internal") or 0;
+        var qualityLvl = getprop(shaderPath ~ "quality-level-internal") or 0;
+        setprop(shaderPath ~ "quality-level", qualityLvl);
+
+        if (qualityLvl < 2) {
+            # Non-ALS fallback
+            setprop(shaderPath ~ "skydome", 0.0);
             setprop(shaderPath ~ "quality-level", qualityLvl);
+            setprop(shaderPath ~ "landmass", qualityLvl);
+            setprop(shaderPath ~ "urban", qualityLvl);
+            setprop(shaderPath ~ "water", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 4.0);
+            setprop(shaderPath ~ "lights", qualityLvl);
+            
+            qualityLvl = math.min(qualityLvl, 1.0);
+            setprop(shaderPath ~ "model", qualityLvl);
+            setprop(shaderPath ~ "contrails", qualityLvl);
+            setprop(shaderPath ~ "crop", qualityLvl);
+            setprop(shaderPath ~ "generic", qualityLvl);
+            setprop(shaderPath ~ "transition", qualityLvl);
+        } else {
+            # ALS from quality 2 upwards
+            setprop(shaderPath ~ "skydome", 1.0);
             
             if (qualityLvl != 0.0) {
                 setprop(shaderPath ~ "landmass", qualityLvl + 1); # these go to 6 rather than 5
@@ -1422,28 +1442,7 @@ var update_shader_settings = func() {
             setprop(shaderPath ~ "crop", qualityLvl);
             setprop(shaderPath ~ "clouds", qualityLvl);
             setprop(shaderPath ~ "forest", qualityLvl);
-            
-        } else {
-            var qualityLvl = getprop(shaderPath ~ "quality-level-internal") or 0;
-            setprop(shaderPath ~ "quality-level", qualityLvl);
-            setprop(shaderPath ~ "landmass", qualityLvl);
-            setprop(shaderPath ~ "urban", qualityLvl);
-            setprop(shaderPath ~ "water", qualityLvl);
-            
-            qualityLvl = math.min(qualityLvl, 4.0);
-            setprop(shaderPath ~ "lights", qualityLvl);
-            
-            qualityLvl = math.min(qualityLvl, 1.0);
-            setprop(shaderPath ~ "model", qualityLvl);
-            setprop(shaderPath ~ "contrails", qualityLvl);
-            setprop(shaderPath ~ "crop", qualityLvl);
-            setprop(shaderPath ~ "generic", qualityLvl);
-            setprop(shaderPath ~ "transition", qualityLvl);
         }
-    }
-
-    if (rembrandtOn) {
-        setprop(shaderPath ~ "skydome", 0);
     }
 };
 

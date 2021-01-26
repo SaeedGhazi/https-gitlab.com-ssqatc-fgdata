@@ -11,6 +11,7 @@ uniform sampler2DArray atlas;
 uniform sampler1D dimensionsArray;
 uniform sampler1D diffuseArray;
 uniform sampler1D specularArray;
+uniform sampler2D perlin;
 
 // Passed from VPBTechnique, not the Effect
 uniform float tile_width;
@@ -44,8 +45,18 @@ void main()
 	vec4 specular = texture(specularArray, float(lc)/512.0);
 	vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
 	vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
+	vec2 st = atlas_scale * gl_TexCoord[0].st;
 
-	texel = texture(atlas, vec3(atlas_scale * gl_TexCoord[0].st, lc));
+	// Rotate texture using the perlin texture as a mask to reduce tiling
+	if (step(0.5, texture(perlin, atlas_scale * gl_TexCoord[0].st / 8.0).r) == 1.0) {
+		st = vec2(atlas_scale.s * gl_TexCoord[0].t, atlas_scale.t * gl_TexCoord[0].s);
+	}
+
+	if (step(0.5, texture(perlin, - atlas_scale * gl_TexCoord[0].st / 16.0).r) == 1.0) {
+		st = -st;
+	}
+
+	texel = texture(atlas, vec3(st, lc));
 
     fragColor = texel + pow(NdotHV, gl_FrontMaterial.shininess) * gl_LightSource[0].specular * specular;
 

@@ -276,7 +276,7 @@ var manager = {
                     # this allows Tower View AGL to work on aircraft that don't
                     # know about it but need non-zero target-*-offset-m values
                     # to centre the view on the middle of the aircraft.
-                    if (i==2 or i==3 or i==5 or i==7) {
+                    if (i==2 or i==3 or i==5 or i==7 or i==8) {
                         set_default(helicopter_view, "config/target-x-offset-m", viewnode);
                         set_default(helicopter_view, "config/target-y-offset-m", viewnode);
                         set_default(helicopter_view, "config/target-z-offset-m", viewnode);
@@ -963,7 +963,7 @@ var fdm_init_listener = setlistener("/sim/signals/fdm-initialized", func {
 	var zoffset = nil;
 	foreach (var v; views) {
 		var index = v.getIndex();
-		if (index > 7 and index < 100) {
+		if (index > 8 and index < 100) {
 			globals["view"] = nil;
 			die("\n***\n*\n*  Illegal use of reserved view index "
 					~ index ~ ". Use indices >= 100!\n*\n***");

@@ -708,6 +708,19 @@ Started September 2000 by David Megginson, david@megginson.com
         <lookat-agl-damping type="double">2.2</lookat-agl-damping>
       </config>
     </view>
+    <view>
+      <!-- Similar to Helicopter View but does not change heading with
+      aircraft, which avoide poor behaviour with vertical climbs, e.g. with
+      Shuttle. -->
+      <name>Still View</name>
+      <enabled type="bool" userarchive="y">false</enabled>
+      <type>lookat</type>
+      <config>
+        <from-model type="bool">false</from-model>
+        <at-model type="bool">true</at-model>
+        <z-offset-m alias="/sim/chase-distance-m"/>
+      </config>
+    </view>    
     <menubar>
       <visibility type="bool" userarchive="y">true</visibility>
       <default include="gui/menubar.xml"/>

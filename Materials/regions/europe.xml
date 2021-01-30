@@ -117,12 +117,32 @@
   </material>
 
   <material>
+  <name>NaturalCrop</name>
+  <effect>Effects/transition-base-rock</effect>
+  <texture>Terrain/drycrop.png</texture>
+  <object-mask>Terrain/drycrop.mask.png</object-mask>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.6</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <light-coverage>2000000.0</light-coverage>
+  <wood-coverage>500000.0</wood-coverage>
+  <tree-texture>Trees/deciduous.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+  <material>
     <effect>Effects/cropgrass</effect>
     <tree-effect>Effects/tree-european-mixed</tree-effect>
     <name>CropGrassCover</name>
     <name>CropGrass</name>
-    <texture>Terrain/cropgrass-hires-autumn.png</texture>
-    <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
+    <texture>Terrain/irrcrop.png</texture>
+    <object-mask>Terrain/irrcrop.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>2000000.0</light-coverage>

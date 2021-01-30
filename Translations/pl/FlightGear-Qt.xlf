@@ -1723,7 +1723,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg309" approved="yes">
         <source xml:space="preserve">When flying with the mouse, or a joystick lacking a rudder axis, it&apos;s difficult to manually coordinate aileron and rudder movements during turn. This option automatically commands the rudder to maintain zero slip angle when banking</source>
-        <target xml:space="preserve">Jeśli latasz za pomocą myszki, lub joystick&apos;a z brakującą kontrolą lotek, jest trudno ręczcnie koordynować ruchy samolotu podczas zakrętów. Ta opcja automatycznie steruje lotkami aby zapewnić zerowy kąt nacisku przy przechyle</target>
+        <target xml:space="preserve">Jeśli latasz za pomocą myszki, lub joystick&apos;a z brakującą kontrolą lotek, jest trudno ręcznie koordynować ruchy samolotu podczas zakrętów. Ta opcja automatycznie steruje lotkami aby zapewnić zerowy kąt nacisku przy przechyleniu</target>
         <context-group purpose="location"><context context-type="linenumber">117</context></context-group>
       </trans-unit>
       <trans-unit id="_msg310" approved="yes">

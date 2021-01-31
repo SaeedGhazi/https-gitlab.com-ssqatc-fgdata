@@ -485,6 +485,13 @@
 				<command>dialog-show</command>
 				<dialog-name>instruments</dialog-name>
 			</binding>
+		</item>	
+		<item>
+			<name>light-switches</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>light-switches</dialog-name>
+			</binding>
 		</item>
 
 		<item>

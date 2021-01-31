@@ -249,7 +249,13 @@
 			<line>makes slider effects coarser/finer.</line>
 		</help>
 	</sim>
-
+	<controls>
+		<lighting>
+			<landing-lights>0</landing-lights>
+			<taxi-light>0</taxi-light>
+			<nav-lights>0</nav-lights>
+		</lighting>
+	</controls>
 	<input>
 		<keyboard>
 			<key n="8">

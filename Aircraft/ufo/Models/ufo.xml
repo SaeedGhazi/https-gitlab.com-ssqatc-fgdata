@@ -57,6 +57,115 @@
    <y>0</y>
    <z>1</z>
   </axis>
- </animation>
-
+  </animation>
+  <model>
+    <name>Port nav</name>
+    <path>ufo-pointlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo port nav light</name>
+        <power-source>/controls/lighting/nav-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <heading-deg>0</heading-deg>
+        <r>0.95</r>
+        <g>0.5</g>
+        <b>0.5</b>
+        <a>1.0</a>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>0.0</x-m>
+      <y-m>-3.3</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Starboard nav</name>
+    <path>ufo-pointlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo starboard nav light</name>
+        <power-source>/controls/lighting/nav-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <r>0.5</r>
+        <g>0.95</g>
+        <b>0.5</b>
+        <a>1.0</a>
+        <heading-deg>0</heading-deg>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>3.3</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Port light</name>
+    <path>ufo-spotlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo port light</name>
+        <power-source>/controls/lighting/landing-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <heading-deg>22</heading-deg>
+        <r>0.95</r>
+        <g>0.5</g>
+        <b>0.5</b>
+        <a>1.0</a>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>-0.50</x-m>
+      <y-m>-2.5</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Starboard light</name>
+    <path>ufo-spotlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo starboard light</name>
+        <power-source>/controls/lighting/landing-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <r>0.5</r>
+        <g>0.95</g>
+        <b>0.5</b>
+        <a>1.0</a>
+        <heading-deg>-22</heading-deg>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>-0.50</x-m>
+      <y-m>2.5</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Nose light</name>
+    <path>ufo-spotlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo nose light</name>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <heading-deg>0</heading-deg>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>-2.8</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
 </PropertyList>

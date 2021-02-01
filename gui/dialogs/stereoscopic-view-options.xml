@@ -114,6 +114,20 @@
       </text>
   </group>
 
+  <group>
+    <layout>vbox</layout>
+    <padding>6</padding>
+    <checkbox>
+      <halign>left</halign>
+      <label>Adjust aspect ratio if split</label>
+      <property>/sim/rendering/osg-displaysettings/split-stereo-autoadjust-aspect-ratio</property>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+  </group>
+
   <empty>
     <stretch>true</stretch>
   </empty>

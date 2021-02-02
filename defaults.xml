@@ -1339,9 +1339,10 @@ Started September 2000 by David Megginson, david@megginson.com
     <events type="string"/>
     <use-vpb type="bool">false</use-vpb>
     <elevation-mesh>
+      <constraint-gap-m type="float" userarchive="y">1.0</constraint-gap-m>
+      <lod-range-factor type="float" userarchive="y">1.0</lod-range-factor>
       <sample-ratio type="float" userarchive="y">1.0</sample-ratio>
       <vertical-scale type="float" userarchive="y">1.0</vertical-scale>
-      <constraint-gap-m type="float" userarchive="y">1.0</constraint-gap-m>
     </elevation-mesh>
   </scenery>
   <earthview>

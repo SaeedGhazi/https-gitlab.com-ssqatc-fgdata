@@ -220,6 +220,22 @@
 
 			<group>
 				<layout>hbox</layout>
+				<checkbox>
+					<halign>left</halign>
+					<label>WS3.0 (Experimental)</label>
+					<name>ws30</name>
+					<property>/scenery/use-vpb</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>ws30</object-name>
+					</binding>
+				</checkbox>
+				<hrule>
+					<stretch>true</stretch>
+				</hrule>
+			</group>
+			<group>
+				<layout>hbox</layout>
 				<halign>right</halign>
 				<visible>
 					<equals>
@@ -229,25 +245,25 @@
 				</visible>
 
 				<text>
-					<label>Elevation mesh sampling ratio</label>
+					<label>Elevation mesh LOD detail range</label>
 				</text>
 				<slider>
-					<name>elev-sample</name>
-					<min>0.05</min>
-					<max>1.0</max>
-					<step>0.05</step>
+					<name>elev-lod</name>
+					<min>1.0</min>
+					<max>10.0</max>
+					<step>1.0</step>
 					<fraction>0.17</fraction>
-					<property>/scenery/elevation-mesh/sample-ratio</property>
+					<property>/scenery/elevation-mesh/lod-range-factor</property>
 					<binding>
 						<command>dialog-apply</command>
-						<object-name>elev-sample</object-name>
+						<object-name>elev-lod</object-name>
 					</binding>
 				</slider>
 				<text>
-					<label>1234</label>
-					<format>%.2f</format>
+					<label>1234567890</label>
+					<format>%.1f</format>
 					<live>true</live>
-					<property>/scenery/elevation-mesh/sample-ratio</property>
+					<property>/scenery/elevation-mesh/lod-range-factor</property>
 				</text>
 			</group>
 
@@ -277,7 +293,7 @@
 					</binding>
 				</slider>
 				<text>
-					<label>1234</label>
+					<label>1234567890</label>
 					<format>%2dm</format>
 					<live>true</live>
 					<property>/scenery/elevation-mesh/constraint-gap-m</property>
@@ -1157,7 +1173,8 @@
 				"/sim/rendering/vegetation-density",
 				"/sim/rendering/clouds3d-enable",
 				"/sim/rendering/clouds3d-density",
-				"/scenery/elevation-mesh/sample-ratio",
+				"/scenery/use-vpb",
+				"/scenery/elevation-mesh/lod-range-factor",
 				"/scenery/elevation-mesh/constraint-gap-m",
 				"/sim/rendering/scenery-path-suffix[0]/enabled",
 				"/sim/rendering/scenery-path-suffix[1]/enabled",

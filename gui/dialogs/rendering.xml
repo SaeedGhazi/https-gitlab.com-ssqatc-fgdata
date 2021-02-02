@@ -222,9 +222,13 @@
 				<layout>hbox</layout>
 				<checkbox>
 					<halign>left</halign>
-					<label>WS3.0 (Experimental)</label>
+					<label>WS3.0 (Experimental - requires OSG 3.6)</label>
 					<name>ws30</name>
 					<property>/scenery/use-vpb</property>
+					<enable>
+						<property>/sim/gui/dialogs/rendering/vpb-available</property>
+					</enable>
+					
 					<binding>
 						<command>dialog-apply</command>
 						<object-name>ws30</object-name>
@@ -237,18 +241,23 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
-				<visible>
-					<equals>
-						<property>/scenery/use-vpb</property>
-						<value>true</value>
-					</equals>
-				</visible>
-
 				<text>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
 					<label>Elevation mesh LOD detail range</label>
 				</text>
 				<slider>
 					<name>elev-lod</name>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
 					<min>1.0</min>
 					<max>10.0</max>
 					<step>1.0</step>
@@ -261,6 +270,12 @@
 				</slider>
 				<text>
 					<label>1234567890</label>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
 					<format>%.1f</format>
 					<live>true</live>
 					<property>/scenery/elevation-mesh/lod-range-factor</property>
@@ -270,18 +285,24 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
-				<visible>
-					<equals>
-						<property>/scenery/use-vpb</property>
-						<value>true</value>
-					</equals>
-				</visible>
 
 				<text>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
 					<label>Elevation delta below airports</label>
 				</text>
 				<slider>
 					<name>elev-delta</name>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
 					<min>0.0</min>
 					<max>20.0</max>
 					<step>1.0</step>
@@ -294,6 +315,12 @@
 				</slider>
 				<text>
 					<label>1234567890</label>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
 					<format>%2dm</format>
 					<live>true</live>
 					<property>/scenery/elevation-mesh/constraint-gap-m</property>
@@ -1118,19 +1145,29 @@
 			var matfile = getprop("/sim/rendering/materials-file");
 			foreach (var name; keys(materials)) {
 			  if (matfile == materials[name]) {
-          setprop("/sim/gui/dialogs/rendering/texture-set", name);
+          		setprop("/sim/gui/dialogs/rendering/texture-set", name);
 			  }
 			}
 
-      var vendor = getprop("/sim/rendering/gl-vendor");
-      if (vendor != nil) {
-        vendor = string.lc(vendor);
-        if (find("intel", vendor) != -1) {
-          setprop("/sim/gui/dialogs/rendering/shader-warning", 1);
-        } else {
-          setprop("/sim/gui/dialogs/rendering/shader-warning", 0);
-        }
-      }
+			var vendor = getprop("/sim/rendering/gl-vendor");
+			if (vendor != nil) {
+				vendor = string.lc(vendor);
+				if (find("intel", vendor) != -1) {
+				setprop("/sim/gui/dialogs/rendering/shader-warning", 1);
+				} else {
+				setprop("/sim/gui/dialogs/rendering/shader-warning", 0);
+				}
+			}
+
+			var osg_version = getprop("/sim/version/openscenegraph");
+
+
+			if ((osg_version != nil) and (find("3.6", osg_version) == 0)) {
+				# Currently vpb requires OSG 3.6 specifically.
+				setprop("/sim/gui/dialogs/rendering/vpb-available", 1);
+			} else {
+				setprop("/sim/gui/dialogs/rendering/vpb-available", 0);
+			}
 
 			# Mapping from underlying properties to those used by the GUI.
 

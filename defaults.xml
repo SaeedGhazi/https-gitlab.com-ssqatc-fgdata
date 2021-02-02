@@ -300,24 +300,34 @@ Started September 2000 by David Megginson, david@megginson.com
 	<road-traffic-direction type="int">1</road-traffic-direction>
       </osm>
 
-      <scenery-path-suffix>
+      <scenery-path-suffix n="0">
         <name type="string">Pylons</name>
         <enabled type="bool" userarchive="y">false</enabled>
       </scenery-path-suffix>
 
-      <scenery-path-suffix>
+      <scenery-path-suffix n="1">
         <name type="string">Roads</name>
         <enabled type="bool" userarchive="y">false</enabled>
       </scenery-path-suffix>
 
-      <scenery-path-suffix>
+      <scenery-path-suffix n="2">
         <name type="string">Buildings</name>
         <enabled type="bool" userarchive="y">false</enabled>
       </scenery-path-suffix>
 
-      <scenery-path-suffix>
+      <scenery-path-suffix n="3">
         <name type="string">Objects</name>
         <enabled type="bool" userarchive="y">true</enabled>
+      </scenery-path-suffix>
+
+      <scenery-path-suffix n="4">
+        <name type="string">Details</name>
+        <enabled type="bool" userarchive="y">false</enabled>
+      </scenery-path-suffix>
+
+      <scenery-path-suffix n="5">
+        <name type="string">Trees</name>
+        <enabled type="bool" userarchive="y">false</enabled>
       </scenery-path-suffix>
 
       <!-- Terrain must be last, as the suffixes are searched in order -->

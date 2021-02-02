@@ -15,6 +15,7 @@ uniform sampler2DArray atlas;
 uniform sampler1D dimensionsArray;
 uniform sampler1D diffuseArray;
 uniform sampler1D specularArray;
+uniform sampler2D perlin;
 
 varying float yprime_alt;
 varying float mie_angle;
@@ -56,13 +57,7 @@ float luminance(vec3 color)
 
 void main()
 {
-
-    // The Landclass for this particular fragment.  This can be used to
-	// index into the atlas textures.
-    int lc = int(texture2D(landclass, gl_TexCoord[0].st).g * 255.0 + 0.5);
-
-
-  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
+    vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
 // this is taken from default.frag
     vec3 n;
     float NdotL, NdotHV, fogFactor;
@@ -72,10 +67,13 @@ void main()
     vec4 fragColor;
     vec4 specular = vec4(0.0);
     float intensity;
+
+    int lc = int(texture2D(landclass, gl_TexCoord[0].st).g * 255.0 + 0.5);
 	float mat_index = float(lc)/512.0;
 	float mat_shininess = texture(dimensionsArray, mat_index).z;
 	vec4 mat_diffuse = texture(diffuseArray, mat_index);
 	vec4 mat_specular = texture(specularArray, mat_index);
+
     vec4 color = mat_diffuse;
 
     float effective_scattering = min(scattering, cloud_self_shading);
@@ -85,8 +83,8 @@ void main()
 
     // If gl_Color.a == 0, this is a back-facing polygon and the
     // normal should be reversed.
-    n = (2.0 * gl_Color.a - 1.0) * normal;
-    n = normalize(n);
+    //n = (2.0 * gl_Color.a - 1.0) * normal;
+    n = normalize(normal);
 
 
     NdotL = dot(n, lightDir);
@@ -109,46 +107,56 @@ void main()
 
 	// Different textures have different have different dimensions.
 	// Dimensions array is scaled to fit in [0...1.0] in the texture1D, so has to be scaled back up here.
+
+    // The Landclass for this particular fragment.  This can be used to
+	// index into the atlas textures.
 	vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
 	vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
-	texel = texture(atlas, vec3(atlas_scale * gl_TexCoord[0].st, lc));
+	vec2 st = atlas_scale * gl_TexCoord[0].st;
+
+	// Rotate texture using the perlin texture as a mask to reduce tiling
+	if (step(0.5, texture(perlin, atlas_scale * gl_TexCoord[0].st / 8.0).r) == 1.0) {
+		st = vec2(atlas_scale.s * gl_TexCoord[0].t, atlas_scale.t * gl_TexCoord[0].s);
+	}
+
+	if (step(0.5, texture(perlin, - atlas_scale * gl_TexCoord[0].st / 16.0).r) == 1.0) {
+		st = -st;
+	}
+
+	texel = texture(atlas, vec3(st, lc));
 
     fragColor = color * texel + specular;
 
-// here comes the terrain haze model
+	// here comes the terrain haze model
+	float delta_z = hazeLayerAltitude - eye_alt;
+	float dist = length(relPos);
+
+	float mvisibility = min(visibility,avisibility);
+
+	if (dist > 0.04 * mvisibility) 
+	{
+
+	alt = eye_alt;
+
+	float transmission;
+	float vAltitude;
+	float delta_zv;
+	float H;
+	float distance_in_layer;
+	float transmission_arg;
+
+	// angle with horizon
+	float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 
-float delta_z = hazeLayerAltitude - eye_alt;
-float dist = length(relPos);
-
-float mvisibility = min(visibility,avisibility);
-
-if (dist > 0.04 * mvisibility) 
-{
-
-alt = eye_alt;
-
-
-float transmission;
-float vAltitude;
-float delta_zv;
-float H;
-float distance_in_layer;
-float transmission_arg;
-
-// angle with horizon
-float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
-
-
-// we solve the geometry what part of the light path is attenuated normally and what is through the haze layer
-
-if (delta_z > 0.0) // we're inside the layer
+	// we solve the geometry what part of the light path is attenuated normally and what is through the haze layer
+	if (delta_z > 0.0) // we're inside the layer
 	{
 	if (ct < 0.0) // we look down 
 		{
 		distance_in_layer = dist;
 		vAltitude = min(distance_in_layer,mvisibility) * ct;
-  		delta_zv = delta_z - vAltitude;
+		delta_zv = delta_z - vAltitude;
 		}
 	else 	// we may look through upper layer edge
 		{
@@ -156,10 +164,10 @@ if (delta_z > 0.0) // we're inside the layer
 		if (H > delta_z) {distance_in_layer = dist/H * delta_z;}
 		else {distance_in_layer = dist;}
 		vAltitude = min(distance_in_layer,visibility) * ct;
-  		delta_zv = delta_z - vAltitude;	
+		delta_zv = delta_z - vAltitude;	
 		}
 	}
-  else // we see the layer from above, delta_z < 0.0
+	else // we see the layer from above, delta_z < 0.0
 	{	
 	H = dist * -ct;
 	if (H  < (-delta_z)) // we don't see into the layer at all, aloft visibility is the only fading
@@ -175,99 +183,87 @@ if (delta_z > 0.0) // we're inside the layer
 		delta_zv = vAltitude;
 		} 
 	}
-	
+		
 
-// ground haze cannot be thinner than aloft visibility in the model,
-// so we need to use aloft visibility otherwise
+	// ground haze cannot be thinner than aloft visibility in the model,
+	// so we need to use aloft visibility otherwise
+	transmission_arg = (dist-distance_in_layer)/avisibility;
 
-
-transmission_arg = (dist-distance_in_layer)/avisibility;
-
-
-float eqColorFactor;
+	float eqColorFactor;
 
 
 
-if (visibility < avisibility)
+	if (visibility < avisibility)
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/visibility);
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
 
 	}
-else 
+	else 
 	{
 	transmission_arg = transmission_arg + (distance_in_layer/avisibility);
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
 	}
 
+	transmission =  fog_func(transmission_arg, alt);
+
+	// there's always residual intensity, we should never be driven to zero
+	if (eqColorFactor < 0.2) {eqColorFactor = 0.2;}
+
+	float lightArg = (terminator-yprime_alt)/100000.0;
+	vec3 hazeColor = get_hazeColor(lightArg);
+
+	// now dim the light for haze
+	eShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
+
+	// Mie-like factor
+	if (lightArg < 10.0)
+		{intensity = length(hazeColor);
+		float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
+		hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+		}
+
+	// high altitude desaturation of the haze color
+
+	intensity = length(hazeColor);
+	hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, alt)));
+
+	// blue hue of haze
+
+	hazeColor.x = hazeColor.x * 0.83;
+	hazeColor.y = hazeColor.y * 0.9; 
 
 
-transmission =  fog_func(transmission_arg, alt);
+	// additional blue in indirect light
+	float fade_out = max(0.65 - 0.3 *overcast, 0.45);
+	intensity = length(hazeColor);
+	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
 
-// there's always residual intensity, we should never be driven to zero
-if (eqColorFactor < 0.2) {eqColorFactor = 0.2;}
+	// change haze color to blue hue for strong fogging
+	//intensity = length(hazeColor);
+	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
 
 
-float lightArg = (terminator-yprime_alt)/100000.0;
-vec3 hazeColor = get_hazeColor(lightArg);
+	// reduce haze intensity when looking at shaded surfaces, only in terminator region
 
+	float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
+	hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
 
+	// don't let the light fade out too rapidly
+	lightArg = (terminator + 200000.0)/100000.0;
+	float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+	vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
+	hazeColor *= eqColorFactor * eShade;
+	hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
-// now dim the light for haze
-eShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt);
+	// determine the right mix of transmission and haze
 
-// Mie-like factor
-
-if (lightArg < 10.0)
-	{intensity = length(hazeColor);
-	float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
-	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+	fragColor.rgb = mix(hazeColor, fragColor.rgb,transmission);
 	}
 
-// high altitude desaturation of the haze color
+	fragColor.rgb = filter_combined(fragColor.rgb);
 
-intensity = length(hazeColor);
-hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, alt)));
-
-// blue hue of haze
-
-hazeColor.x = hazeColor.x * 0.83;
-hazeColor.y = hazeColor.y * 0.9; 
-
-
-// additional blue in indirect light
-float fade_out = max(0.65 - 0.3 *overcast, 0.45);
-intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
-
-// change haze color to blue hue for strong fogging
-//intensity = length(hazeColor);
-hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
-
-
-// reduce haze intensity when looking at shaded surfaces, only in terminator region
-
-float shadow = mix( min(1.0 + dot(normal,lightDir),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
-hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
-
-
-
-
-// don't let the light fade out too rapidly
-lightArg = (terminator + 200000.0)/100000.0;
-float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
-vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
-hazeColor *= eqColorFactor * eShade;
-hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
-
-// determine the right mix of transmission and haze
-
-fragColor.rgb = mix(hazeColor, fragColor.rgb,transmission);
-}
-
-fragColor.rgb = filter_combined(fragColor.rgb);
-
-gl_FragColor = fragColor;
+	gl_FragColor = fragColor;
 }

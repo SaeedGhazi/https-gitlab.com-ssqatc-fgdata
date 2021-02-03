@@ -119,7 +119,7 @@
     <padding>6</padding>
     <checkbox>
       <halign>left</halign>
-      <label>Adjust aspect ratio if split</label>
+      <label>Preserve original aspect ratio</label>
       <property>/sim/rendering/osg-displaysettings/split-stereo-autoadjust-aspect-ratio</property>
       <live>true</live>
       <binding>

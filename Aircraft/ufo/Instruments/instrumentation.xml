@@ -58,6 +58,7 @@
 	<marker-beacon>
 		<name>marker-beacon</name>
 		<number>0</number>
+		<blink-mode>standard</blink-mode>
 	</marker-beacon>
 
 	<heading-indicator-fg>

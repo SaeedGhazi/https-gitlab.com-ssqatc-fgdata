@@ -126,8 +126,8 @@
       <rotation_flag>1</rotation_flag>
       <rotation_scale>8000.0</rotation_scale>
     </parameters>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
+  <xsize>3000</xsize>
+  <ysize>3000</ysize>
   <solid>1</solid>
   <friction-factor>0.9</friction-factor>
   <rolling-friction>0.1</rolling-friction>

@@ -192,13 +192,13 @@ foreach (var t; tNode) {
 		{
 
 		var gen_flag = tNode[i_min].getNode("generated-flag").getValue();
-		if (gen_flag != 2){	
-			print("Tile direction ",i_min, " not generated!");
-			print("Flag: ",gen_flag);
-			}
+		if (gen_flag != 2)  {	
+			logprint(DEV_WARN, "Tile direction ",i_min, " not generated!");
+			logprint(DEV_WARN, "Flag: ",gen_flag);
+		}
 
 		if (local_weather.debug_output_flag == 1) 
-			{print("Changing active tile to direction ", i_min);}
+			{logprint(LOG_DEBUG, "Changing active tile to direction ", i_min);}
 		change_active_tile(i_min);
 			
 		}    

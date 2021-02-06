@@ -461,10 +461,6 @@
         <value><use>sun_atlas_size</use></value>
       </uniform>
       <!-- END shadows include -->
-      <depth>
-        <function>lequal</function>
-    <!--    <write-mask type="bool">false</write-mask> -->
-      </depth>
     </pass>
   </technique>
 

@@ -123,7 +123,7 @@
   <texture>Terrain/irrcrop.png</texture>
   <object-mask>Terrain/irrcrop.mask.png</object-mask>
   <parameters>
-      <rotation_flag>1</rotation_flag>
+      <rotation_flag>0</rotation_flag>
       <rotation_scale>8000.0</rotation_scale>
     </parameters>
   <xsize>3000</xsize>
@@ -135,7 +135,7 @@
   <load-resistance>1e30</load-resistance>
   <object-group include="Materials/base/farm-buildings.xml"/>
   <light-coverage>2000000.0</light-coverage>
-  <wood-coverage>500000.0</wood-coverage>
+  <wood-coverage>10000.0</wood-coverage>
   <tree-texture>Trees/deciduous.png</tree-texture>
   <tree-varieties>8</tree-varieties>
   <tree-height-m>20.0</tree-height-m>

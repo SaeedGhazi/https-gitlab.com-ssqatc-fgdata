@@ -1,9 +1,9 @@
 AC3Db
-MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
+MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.8 0.8 0.8  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
 MATERIAL "ac3dmat12" rgb 0.266667 0.266667 0.266667  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.102 0.102 0.102  shi 4  trans 0
-MATERIAL "ac3dmat7" rgb 0.271 0.525 0.455  amb 0.271 0.525 0.455  emis 0 0 0  spec 0.173 0.173 0.173  shi 6  trans 0
-MATERIAL "ac3dmat12" rgb 0.267 0.267 0.267  amb 0.267 0.267 0.267  emis 0 0 0  spec 0.071 0.071 0.071  shi 3  trans 0
+MATERIAL "ac3dmat7" rgb 0.271 0.525 0.455  amb 0.271 0.525 0.455  emis 0 0 0  spec 0.73 0.73 0.73  shi 6  trans 0
+MATERIAL "ac3dmat12" rgb 0.267 0.267 0.267  amb 0.267 0.267 0.267  emis 0 0 0  spec 0.71 0.71 0.71  shi 3  trans 0
 MATERIAL "AutoWhite" rgb 1 1 1  amb 1 1 1  emis 0.2 0.2 0.2  spec 0 0 0  shi 64  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.5 0.5 0.5  shi 10  trans 0
 MATERIAL "ac3dmat12" rgb 0.266667 0.266667 0.266667  amb 0.266667 0.266667 0.266667  emis 0 0 0  spec 0.5 0.5 0.5  shi 10  trans 0
@@ -422,8 +422,8 @@ kids 0
 OBJECT poly
 name "Mesh"
 loc -9.31981 0 -6.79121
-texture "/export/fgfs/fgdata/Models/Buildings/silo.rgb"
-crease 45.000000
+texture "silo.rgb"
+crease 15.000000
 numvert 13
 -3 0 -3
 1.09808 0 -4.09808
@@ -521,8 +521,8 @@ kids 0
 OBJECT poly
 name "Mesh"
 loc -9.43724 0 3.30804
-texture "/export/fgfs/fgdata/Models/Buildings/silo.rgb"
-crease 45.000000
+texture "silo.rgb"
+crease 15.000000
 numvert 13
 -3 0 -3
 1.09808 0 -4.09808

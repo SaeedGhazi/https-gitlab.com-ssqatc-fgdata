@@ -11,7 +11,7 @@ kids 14
 OBJECT poly
 name "object"
 loc -5.54213 4.59657 10.99
-texture "/export/fgfs/fgdata/Models/Buildings/roof-windows.rgb"
+texture "roof-windows.rgb"
 texrep 2 3
 texoff -0.01 0
 crease 45.000000

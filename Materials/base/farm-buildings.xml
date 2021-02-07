@@ -3,10 +3,10 @@
 <PropertyList>
   <object>
 <!--
-    <path>Models/Buildings/silo.ac</path>
-    <path>Models/Buildings/red-barn.ac</path>
-    <path>Models/Buildings/horse-stable.ac</path>
-    <path>Models/Buildings/cow-stable.ac</path>
+    <path>Models/Agriculture/silo.ac</path>
+    <path>Models/Agriculture/red-barn.ac</path>
+    <path>Models/Agriculture/horse-stable.ac</path>
+    <path>Models/Agriculture/cow-stable.ac</path>
     <path>Models/Agriculture/large-shed.ac</path>
     <path>Models/Agriculture/farmhouse1.ac</path>
     <path>Models/Agriculture/farmhouse2.ac</path>
@@ -15,7 +15,8 @@
     <path>Models/Agriculture/horse-farm.ac</path>
     <path>Models/Agriculture/cattle-farm.ac</path>
     <path>Models/Agriculture/crop-farm.ac</path>
-    <coverage-m2>20000</coverage-m2>
+    <path>Models/Agriculture/livestock-farm.ac</path>
+    <coverage-m2>10000</coverage-m2>
     <heading-type>mask</heading-type>
   </object>
 </PropertyList>

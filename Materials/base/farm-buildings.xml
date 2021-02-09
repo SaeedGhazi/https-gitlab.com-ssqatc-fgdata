@@ -16,6 +16,7 @@
     <path>Models/Agriculture/cattle-farm.ac</path>
     <path>Models/Agriculture/crop-farm.ac</path>
     <path>Models/Agriculture/livestock-farm.ac</path>
+    <path>Models/Agriculture/brick-farm.ac</path>
     <coverage-m2>10000</coverage-m2>
     <heading-type>mask</heading-type>
   </object>

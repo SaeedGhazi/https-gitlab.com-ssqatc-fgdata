@@ -285,6 +285,51 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
+				<text>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
+					<label>Vegetation LoD level</label>
+				</text>
+				<slider>
+					<name>vegetation-lod</name>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
+					<min>1</min>
+					<max>6</max>
+					<step>1</step>
+					<fraction>0.15</fraction>
+					<property>/sim/rendering/vegetation-lod</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>vegetation-lod</object-name>
+					</binding>
+				</slider>
+				<text>
+					<label>1234567890</label>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
+					<format>%d</format>
+					<live>true</live>
+					<property>/sim/rendering/vegetation-lod</property>
+				</text>
+			</group>
+
+
+			<group>
+				<layout>hbox</layout>
+				<halign>right</halign>
 
 				<text>
 					<enable>
@@ -1255,6 +1300,7 @@
 				"/sim/rendering/random-vegetation",
 				"/sim/rendering/random-vegetation-shadows",
 				"/sim/rendering/vegetation-density",
+				"/sim/rendering/vegetation-lod",
 				"/sim/rendering/clouds3d-enable",
 				"/sim/rendering/clouds3d-density",
 				"/scenery/use-vpb",

@@ -121,6 +121,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <random-vegetation-normals type="bool" userarchive="y">false</random-vegetation-normals>
       <random-vegetation-optimize type="bool" userarchive="y">false</random-vegetation-optimize>
       <vegetation-density type="double" userarchive="y">1.0</vegetation-density>
+      <vegetation-lod type="int" userarchive="y">6</vegetation-lod>
       <random-buildings type="bool" userarchive="y">false</random-buildings>
       <osm-buildings type="bool" userarchive="y">false</osm-buildings>
       <building-density type="double" userarchive="y">1.0</building-density>

@@ -373,6 +373,7 @@ OBJECT poly
 name "poly"
 loc 3.39155 4.08203 6.70128
 texture "container.rgb"
+texrep 10 1
 crease 45.000000
 numvert 10
 13.4614 -1.33267 -11.6771

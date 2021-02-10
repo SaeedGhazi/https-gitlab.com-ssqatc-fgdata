@@ -1425,7 +1425,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="sys/settings-migration-text:0" translate="yes">
           <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
-          <target>Opgeslagen instellingen van een vorige FlightGearversie zijn meegenomen. Als u een probleem ervaart kunt u eerst de standaardinstellingen herstellen voordat u het probleem meldt. Opgeslagen instellingen kunnen de weergave, prestaties en functies van de simulator beïnvloeden.</target>
+          <target>Opgeslagen instellingen van een vorige FlightGearversie zijn meegenomen. Als je een probleem ervaart kun je eerst de standaardinstellingen herstellen voordat je het probleem meldt. Opgeslagen instellingen kunnen de weergave, prestaties en functies van de simulator beïnvloeden.</target>
         </trans-unit>
         <trans-unit approved="yes" id="sys/settings-migration-title:0" translate="yes">
           <source>Settings migrated</source>
@@ -1459,7 +1459,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="tips/tip:5" translate="yes">
           <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
-          <target>Druk op v om uw zicht te wijzigen en Ctrl-V om terug te keren naar de cockpit</target>
+          <target>Druk op v om je zicht te wijzigen en Ctrl-V om terug te keren naar de cockpit</target>
         </trans-unit>
         <trans-unit approved="yes" id="tips/tip:6" translate="yes">
           <source>Press F3 to take a screenshot</source>
@@ -1533,7 +1533,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/cat-one-minimum-desc:0" translate="yes">
           <source>If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
-          <target>Als u onlangs uw IFR licentie heeft gekregen is dit wat u legaal mag doen. Maar lukt dat ook?</target>
+          <target>Als je onlangs je IFR licentie hebt gekregen is dit wat je legaal mag doen. Maar lukt dat ook?</target>
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/cat-one-minimum-name:0" translate="yes">
           <source>CAT I minimum</source>
@@ -1541,7 +1541,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes">
           <source>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
-          <target>Dit is op het niveau van professionals. U kunt amper de taxibaan zien, zelfs vanaf de grond. Mist en lichte regen, 0 graden op 1000ft.</target>
+          <target>Dit is op het niveau van professionals. Je kunt amper de taxibaan zien, zelfs vanaf de grond. Mist en lichte regen, 0 graden op 1000ft.</target>
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes">
           <source>CAT IIIb minimum</source>
@@ -1549,7 +1549,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/cat-two-minimum-desc:0" translate="yes">
           <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
-          <target>Met slechts een kwart mijl zicht en wolken op 100ft is de landingsbaan pas kort voor de landing zichtbaar. Vertrouw op uw instrumenten om te overleven.</target>
+          <target>Met slechts een kwart mijl zicht en wolken op 100ft is de landingsbaan pas kort voor de landing zichtbaar. Vertrouw op je instrumenten om te overleven.</target>
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/cat-two-minimum-name:0" translate="yes">
           <source>CAT II minimum</source>
@@ -1573,7 +1573,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
           <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
-          <target>Mist kwam deze herfstochtend opzetten. Verwacht good zicht boven de mist, maar er doorheen komen kan een uitdaging zijn. Als u 500ft bereikt zult u de zon zien!</target>
+          <target>Mist kwam deze herfstochtend opzetten. Verwacht good zicht boven de mist, maar er doorheen komen kan een uitdaging zijn. Als je 500 voet bereikt zul je de zon zien!</target>
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/early-morning-fog-name:0" translate="yes">
           <source>Early morning fog</source>
@@ -1581,7 +1581,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/fair-weather-desc:0" translate="yes">
           <source>A lovely day for trip to your favorite 100$ hamburger airfield</source>
-          <target>Een perfecte dag voor een vlucht naar uw favoriete vliegveld</target>
+          <target>Een perfecte dag voor een vlucht naar je favoriete vliegveld</target>
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/fair-weather-name:0" translate="yes">
           <source>Fair weather</source>
@@ -1613,7 +1613,7 @@
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/manual-input-desc:0" translate="yes">
           <source>Enter your favorite METAR weather. A valid METAR syntax is required.</source>
-          <target>Voeg uw favoriete METAR gegevens toe. Dit dient een geldige METAR code te zijn.</target>
+          <target>Voeg je favoriete METAR gegevens toe. Dit dient een geldige METAR code te zijn.</target>
         </trans-unit>
         <trans-unit approved="yes" id="weather-scenarios/manual-input-name:0" translate="yes">
           <source>Manual input</source>

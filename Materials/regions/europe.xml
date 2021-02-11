@@ -27,7 +27,6 @@
     <name>Grass</name>
     <name>Airport</name>
     <name>AirportKeep</name>
-    <name>Greenspace</name>
     <effect>Effects/grass</effect>
     <texture-set>
       <texture>Terrain/airport-grass-summer.png</texture>
@@ -78,6 +77,38 @@
     <rolling-friction>0.1</rolling-friction>
     <bumpiness>0.1</bumpiness>
     <load-resistance>1e30</load-resistance>    
+  </material>
+
+  <material>
+    <name>Greenspace</name>
+    <texture>Terrain/golfcourse1-autumn.png</texture>
+    <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+    <xsize>800</xsize>
+    <ysize>800</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>500.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
   </material>
 
    <material>

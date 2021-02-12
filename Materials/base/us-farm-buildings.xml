@@ -7,6 +7,7 @@
     <path>Models/Agriculture/us-crop-farm.ac</path>
     <path>Models/Agriculture/livestock-farm.ac</path>
     <path>Models/Agriculture/brick-farm.ac</path>
+    <path>Models/Agriculture/foursquare-farm.ac</path>
     <coverage-m2>10000</coverage-m2>
     <heading-type>mask</heading-type>
   </object>

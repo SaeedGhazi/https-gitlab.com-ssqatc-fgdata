@@ -1,5 +1,4 @@
 AC3Db
-MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
 MATERIAL "ac3dmat12" rgb 0.266667 0.266667 0.266667  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.102 0.102 0.102  shi 4  trans 0
 MATERIAL "AutoWhite" rgb 1 1 1  amb 1 1 1  emis 0.2 0.2 0.2  spec 0 0 0  shi 64  trans 0
@@ -9,62 +8,7 @@ MATERIAL "ac3dmat12" rgb 0.267 0.267 0.267  amb 0.267 0.267 0.267  emis 0 0 0  s
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.5 0.5 0.5  shi 10  trans 0
 MATERIAL "ac3dmat12" rgb 0.266667 0.266667 0.266667  amb 0.266667 0.266667 0.266667  emis 0 0 0  spec 0.5 0.5 0.5  shi 10  trans 0
 OBJECT world
-kids 13
-OBJECT poly
-name "box"
-loc -0.0293448 2.41256 -1.95895
-texture "groundtile.png"
-crease 45.000000
-numvert 10
--0.246197 -4.45917 -20.9725
--2.25314 -4.45917 26.9197
--21.2351 -4.45917 -15.05
-25.0139 -4.45917 -17.367
-19.9384 -4.45917 20.6772
--25.7589 -4.45917 20.6772
--13.9965 0.359691 15.0872
-13.135 0.359691 15.0872
-13.135 0.359691 -10.263
--13.9965 0.359691 -10.263
-numsurf 5
-SURF 0x10
-mat 0
-refs 4
-7 0.735607 0.15458
-4 0.969568 0.00764421
-3 0.969568 1.00764
-8 0.735607 0.820914
-SURF 0x10
-mat 0
-refs 4
-9 0.201236 0.820914
-2 -0.0304317 1.00764
-5 -0.0304317 0.00764421
-6 0.201236 0.15458
-SURF 0x10
-mat 0
-refs 5
-8 0.735607 0.820914
-3 0.969568 1.00764
-0 0.469568 1.00764
-2 -0.0304317 1.00764
-9 0.201236 0.820914
-SURF 0x10
-mat 0
-refs 5
-6 0.201236 0.15458
-5 -0.0304317 0.00764421
-1 0.469568 0.00764421
-4 0.969568 0.00764421
-7 0.735607 0.15458
-SURF 0x10
-mat 0
-refs 4
-9 0.201236 0.820914
-6 0.201236 0.15458
-7 0.735607 0.15458
-8 0.735607 0.820914
-kids 0
+kids 12
 OBJECT poly
 name "object"
 loc 9.38724 9.71552 1.46221
@@ -80,25 +24,25 @@ numvert 6
 -11.7236 -1.67408 6.83678
 numsurf 4
 SURF 0x20
-mat 2
+mat 1
 refs 3
 5 0 0.999999
 0 1 1.70357e-06
 1 0 1.70357e-06
 SURF 0x20
-mat 2
+mat 1
 refs 3
 0 1 1.70357e-06
 5 0 0.999999
 4 1 0.999999
 SURF 0x20
-mat 2
+mat 1
 refs 3
 4 1 0.999999
 3 0 2.55535e-06
 2 1 1.70357e-06
 SURF 0x20
-mat 2
+mat 1
 refs 3
 4 1 0.999999
 5 0 0.999999
@@ -122,49 +66,49 @@ numvert 10
 -11.7236 -4.91231 10.8951
 numsurf 8
 SURF 0x20
-mat 5
+mat 4
 refs 3
 1 0 1
 0 1 1
 2 0.5 1
 SURF 0x20
-mat 5
+mat 4
 refs 3
 3 0 1
 4 1 1
 5 0.5 1
 SURF 0x20
-mat 5
+mat 4
 refs 3
 0 1 1
 8 0 0
 7 1 0
 SURF 0x20
-mat 5
+mat 4
 refs 3
 8 0 0
 0 1 1
 1 0 1
 SURF 0x20
-mat 5
+mat 4
 refs 3
 8 1 0
 4 0 1
 9 0 0
 SURF 0x20
-mat 5
+mat 4
 refs 3
 4 0 1
 8 1 0
 1 1 1
 SURF 0x20
-mat 5
+mat 4
 refs 3
 4 1 1
 6 0 0
 9 1 0
 SURF 0x20
-mat 5
+mat 4
 refs 3
 6 0 0
 4 1 1
@@ -227,154 +171,154 @@ numvert 48
 -2.42283 -4.10164 0.631025
 numsurf 22
 SURF 0x10
-mat 4
+mat 3
 refs 4
 0 0 0
 3 1 0
 2 1 1
 1 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 1 0 0
 6 1 0
 7 1 1
 0 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 0 0 0
 7 1 0
 4 1 1
 3 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 2 0 0
 5 1 0
 6 1 1
 1 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 10 0 0
 13 1 0
 14 1 1
 9 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 8 0 0
 15 1 0
 12 1 1
 11 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 9 0 0
 14 1 0
 15 1 1
 8 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 16 0 0
 19 1 0
 18 1 1
 17 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 17 0 0
 22 1 0
 23 1 1
 16 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 16 0 0
 23 1 0
 20 1 1
 19 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 18 0 0
 21 1 0
 22 1 1
 17 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 26 0 0
 29 1 0
 30 1 1
 25 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 24 0 0
 31 1 0
 28 1 1
 27 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 25 0 0
 30 1 0
 31 1 1
 24 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 34 0 0
 37 1 0
 38 1 1
 33 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 32 0 0
 39 1 0
 36 1 1
 35 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 33 0 0
 38 1 0
 39 1 1
 32 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 32 0 0
 35 1 0
 34 1 1
 33 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 40 0 0
 43 1 0
 42 1 1
 41 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 41 0 0
 46 1 0
 47 1 1
 40 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 40 0 0
 47 1 0
 44 1 1
 43 0 1
 SURF 0x10
-mat 4
+mat 3
 refs 4
 42 0 0
 45 1 0
@@ -412,63 +356,63 @@ numvert 24
 -4.37723 -3.91349 1.50629
 numsurf 9
 SURF 0x10
-mat 1
+mat 0
 refs 4
 1 0 0
 6 1 0
 7 1 1
 0 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 0 0 0
 7 1 0
 4 1 1
 3 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 2 0 0
 5 1 0
 6 1 1
 1 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 10 0 0
 13 1 0
 14 1 1
 9 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 8 0 0
 15 1 0
 12 1 1
 11 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 9 0 0
 14 1 0
 15 1 1
 8 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 17 0 0
 22 1 0
 23 1 1
 16 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 16 0 0
 23 1 0
 20 1 1
 19 0 1
 SURF 0x10
-mat 1
+mat 0
 refs 4
 18 0 0
 21 1 0
@@ -477,7 +421,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Mesh"
-loc -9.56785 5.05098 -6.79121
+loc -9.07968 4.90276 -6.79121
 texture "silo.rgb"
 crease 15.000000
 numvert 13
@@ -496,78 +440,78 @@ numvert 13
 -0.372507 15.9503 1.65506
 numsurf 12
 SURF 0x10
-mat 3
+mat 2
 refs 3
 11 0 1
 6 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 6 0 1
 7 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 7 0 1
 8 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 8 0 1
 9 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 9 0 1
 10 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 10 0 1
 11 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 4
 1 0 0
 0 1 0
 11 1 0.875
 10 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 2 0 0
 1 1 0
 10 1 0.875
 9 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 3 0 0
 2 1 0
 9 1 0.875
 8 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 4 0 0
 3 1 0
 8 1 0.875
 7 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 5 0 0
 4 1 0
 7 1 0.875
 6 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 0 0 0
 5 1 0
@@ -576,7 +520,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Mesh"
-loc -9.68528 5.05098 3.30804
+loc -9.19711 4.90276 3.30804
 texture "silo.rgb"
 crease 15.000000
 numvert 13
@@ -595,79 +539,79 @@ numvert 13
 -0.372507 15.9503 1.65505
 numsurf 12
 SURF 0x10
-mat 3
+mat 2
 refs 4
 0 0 0
 5 1 0
 6 1 0.875
 11 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 5 0 0
 4 1 0
 7 1 0.875
 6 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 4 0 0
 3 1 0
 8 1 0.875
 7 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 3 0 0
 2 1 0
 9 1 0.875
 8 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 2 0 0
 1 1 0
 10 1 0.875
 9 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 4
 1 0 0
 0 1 0
 11 1 0.875
 10 0 0.875
 SURF 0x10
-mat 3
+mat 2
 refs 3
 10 0 1
 11 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 9 0 1
 10 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 8 0 1
 9 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 7 0 1
 8 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 6 0 1
 7 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 3
+mat 2
 refs 3
 11 0 1
 6 0 0.90625
@@ -687,13 +631,13 @@ numvert 4
 -3.59845 2.19327 0.931993
 numsurf 2
 SURF 0x0
-mat 6
+mat 5
 refs 3
 1 1 0
 0 0 1
 3 1 0.778165
 SURF 0x0
-mat 6
+mat 5
 refs 3
 3 1 0.778165
 0 0 1
@@ -715,25 +659,25 @@ numvert 6
 6.60243 -3.87209 -2.12199
 numsurf 4
 SURF 0x0
-mat 8
+mat 7
 refs 3
 3 1.98256e-06 1
 0 1 0.543025
 1 1.09383e-06 0.543025
 SURF 0x0
-mat 8
+mat 7
 refs 3
 0 1 0.543025
 3 1.98256e-06 1
 2 1 1
 SURF 0x0
-mat 8
+mat 7
 refs 3
 2 1 1
 5 5.12732e-07 0
 4 0.999999 0
 SURF 0x0
-mat 8
+mat 7
 refs 3
 2 1 1
 3 1.98256e-06 1
@@ -760,31 +704,31 @@ numvert 11
 -7.34746 -4.1775 5.43211
 numsurf 5
 SURF 0x0
-mat 7
+mat 6
 refs 3
 4 0.654499 1
 3 0.424831 0.333531
 2 0.856218 0.333531
 SURF 0x0
-mat 7
+mat 6
 refs 3
 1 0 0.333531
 5 0.999999 0
 0 0.999999 0.333531
 SURF 0x0
-mat 7
+mat 6
 refs 3
 5 0.999999 0
 1 0 0.333531
 6 0 0
 SURF 0x0
-mat 7
+mat 6
 refs 3
 7 0.999999 0.79861
 9 1.16219e-06 0
 8 1.16219e-06 0.79861
 SURF 0x0
-mat 7
+mat 6
 refs 3
 9 1.16219e-06 0
 7 0.999999 0.79861
@@ -813,19 +757,19 @@ numvert 13
 5.53173 -2.0646 8.4861
 numsurf 3
 SURF 0x0
-mat 8
+mat 7
 refs 3
 0 0 0.671105
 1 1 0.333532
 2 0.447184 1
 SURF 0x0
-mat 8
+mat 7
 refs 3
 3 0 0
 1 1 0.333532
 0 0 0.671105
 SURF 0x0
-mat 8
+mat 7
 refs 3
 1 1 0.333532
 3 0 0
@@ -844,7 +788,7 @@ numvert 4
 -0.313795 -2.65042 1.65506
 numsurf 1
 SURF 0x20
-mat 7
+mat 6
 refs 4
 3 0 0
 2 1 0
@@ -881,13 +825,13 @@ numvert 21
 -8.41815 -2.0646 8.4861
 numsurf 2
 SURF 0x0
-mat 8
+mat 7
 refs 3
 10 7.57474e-07 0.00217071
 7 1.26246e-07 0.671105
 9 0.447184 1
 SURF 0x0
-mat 8
+mat 7
 refs 4
 9 0.447184 1
 8 1 0.333532

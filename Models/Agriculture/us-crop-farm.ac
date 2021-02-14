@@ -3,61 +3,9 @@ MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  sh
 MATERIAL "ac3dmat14" rgb 0.8 0.8 0.8  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.102 0.102 0.102  shi 4  trans 0
 MATERIAL "AutoWhite" rgb 1 1 1  amb 1 1 1  emis 0.2 0.2 0.2  spec 0 0 0  shi 64  trans 0
-MATERIAL "ac3dmat13" rgb 0.675 0.675 0.675  amb 0.675 0.675 0.675  emis 0 0 0  spec 0.082 0.082 0.082  shi 5  trans 0
 MATERIAL "ac3dmat5" rgb 0.826316 0.726316 0.505263  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.0947368 0.0842105  shi 22.9053  trans 0
 OBJECT world
-kids 8
-OBJECT poly
-name "box"
-loc -0.0236599 2.44021 -0.441417
-texture "groundtile.png"
-crease 45.000000
-numvert 8
--26.6678 -3.63278 -30.1854
-21.6354 -3.63278 -30.866
-30.8237 -3.63278 31.5466
--30.9216 -3.63278 25.7614
--16.3413 1.18608 17.1409
-20.3528 1.18608 17.1409
-11.5048 1.18608 -18.3793
--16.3413 1.18608 -21.9525
-numsurf 5
-SURF 0x10
-mat 4
-refs 4
-5 0.82263 0.241603
-2 0.969566 0.00764221
-1 -0.0304298 0.00764227
-6 0.156296 0.241603
-SURF 0x10
-mat 4
-refs 4
-7 0.156296 0.775974
-0 -0.0304297 1.00764
-3 0.969566 1.00764
-4 0.82263 0.775974
-SURF 0x10
-mat 4
-refs 4
-6 0.156296 0.241603
-1 -0.0304298 0.00764227
-0 -0.0304297 1.00764
-7 0.156296 0.775974
-SURF 0x10
-mat 4
-refs 4
-4 0.82263 0.775974
-3 0.969566 1.00764
-2 0.969566 0.00764221
-5 0.82263 0.241603
-SURF 0x10
-mat 4
-refs 4
-7 0.156296 0.775974
-4 0.82263 0.775974
-5 0.82263 0.241603
-6 0.156296 0.241603
-kids 0
+kids 7
 OBJECT poly
 name "Plane"
 loc -2.86173 5.15308 -15.3014
@@ -462,7 +410,7 @@ refs 3
 kids 0
 OBJECT poly
 name "Mesh"
-loc -8.61386 5.15308 1.89672
+loc -8.39368 5.07762 1.89672
 texture "silo.rgb"
 crease 45.000000
 numvert 13
@@ -481,109 +429,109 @@ numvert 13
 0.546568 16.7767 -3.57324
 numsurf 18
 SURF 0x10
-mat 5
+mat 4
 refs 3
 11 1 0.875
 1 0 0
 0 1 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 1 0 0
 11 1 0.875
 10 0 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 1 1 0
 9 0 0.875
 2 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 9 0 0.875
 1 1 0
 10 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 2 1 0
 8 0 0.875
 3 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 8 0 0.875
 2 1 0
 9 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 8 1 0.875
 4 0 0
 3 1 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 4 0 0
 8 1 0.875
 7 0 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 6 0 0.875
 4 1 0
 7 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 4 1 0
 6 0 0.875
 5 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 11 0 0.875
 5 1 0
 6 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 5 1 0
 11 0 0.875
 0 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 11 0 1
 6 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 6 0 1
 7 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 7 0 1
 8 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 8 0 1
 9 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 9 0 1
 10 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 10 0 1
 11 0 0.90625
@@ -591,7 +539,7 @@ refs 3
 kids 0
 OBJECT poly
 name "Mesh"
-loc -8.61386 5.15308 -8.34406
+loc -8.39368 5.07762 -8.34406
 texture "silo.rgb"
 crease 45.000000
 numvert 13
@@ -610,109 +558,109 @@ numvert 13
 0.546568 16.7767 -3.57324
 numsurf 18
 SURF 0x10
-mat 5
+mat 4
 refs 3
 11 0 0.875
 5 1 0
 6 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 5 1 0
 11 0 0.875
 0 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 6 0 0.875
 4 1 0
 7 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 4 1 0
 6 0 0.875
 5 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 8 1 0.875
 4 0 0
 3 1 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 4 0 0
 8 1 0.875
 7 0 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 2 1 0
 8 0 0.875
 3 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 8 0 0.875
 2 1 0
 9 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 1 1 0
 9 0 0.875
 2 0 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 9 0 0.875
 1 1 0
 10 1 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 11 1 0.875
 1 0 0
 0 1 0
 SURF 0x10
-mat 5
+mat 4
 refs 3
 1 0 0
 11 1 0.875
 10 0 0.875
 SURF 0x10
-mat 5
+mat 4
 refs 3
 10 0 1
 11 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 9 0 1
 10 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 8 0 1
 9 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 7 0 1
 8 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 6 0 1
 7 0 0.90625
 12 1 0.90625
 SURF 0x10
-mat 5
+mat 4
 refs 3
 11 0 1
 6 0 0.90625

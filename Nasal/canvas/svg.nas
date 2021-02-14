@@ -422,7 +422,7 @@ var parsesvg = func(group, path, options = nil)
       {
         append(defs_stack, {'type': name, 'id': attr['id']});
       }
-      else if( name == "rect" )
+      else if( ishash(defs_stack[-1]) and name == "rect" )
       {
         foreach(var p; ["x", "y", "width", "height"])
           defs_stack[-1][p] = evalCSSNum(attr[p]);

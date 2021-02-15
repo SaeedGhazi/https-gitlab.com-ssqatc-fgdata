@@ -42,7 +42,7 @@
     <bumpiness>0.3</bumpiness>
     <load-resistance>1e30</load-resistance>
     <wood-coverage>150000.0</wood-coverage>
-    <tree-texture>Trees/tropical.png</tree-texture>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
@@ -75,7 +75,7 @@
     <load-resistance>1e30</load-resistance>
     <object-group include="Materials/base/us-farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
-    <tree-texture>Trees/tropical.png</tree-texture>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
@@ -94,7 +94,7 @@
     <ysize>2000</ysize>
     <light-coverage>10000000.0</light-coverage>
     <wood-coverage>4000.0</wood-coverage>
-    <tree-texture>Trees/tropical.png</tree-texture>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>25.0</tree-height-m>
     <tree-width-m>18.0</tree-width-m>

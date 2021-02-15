@@ -1,14 +1,16 @@
 AC3Db
+MATERIAL "Brick" rgb 0.215789 0.305263 0.305263  amb 0.152632 0.236842 0.368421  emis 0 0 0  spec 0.215789 0.189474 0.357895  shi 10.7789  trans 0
+MATERIAL "MetalPanel" rgb 0.715789 0.6 0.331579  amb 0.331579 0.342105 0.347368  emis 0 0 0  spec 0.266667 0.110526 0.1  shi 10.7789  trans 0
 MATERIAL "MetalPanel.001" rgb 0.733333 0.733333 0.733333  amb 0.289474 0.289474 0.294737  emis 0 0 0  spec 0.266667 0.266667 0.266667  shi 10.7789  trans 0
 MATERIAL "Roof" rgb 1 1 1  amb 0.152632 0.152632 0.173684  emis 0 0 0  spec 0.668421 0.657895 0.7  shi 10.1053  trans 0
 OBJECT world
-kids 3
+kids 5
 OBJECT poly
 name "Cube"
 data 4
 Cube
 crease 30.000000
-numvert 20
+numvert 16
 -37.5 10 34
 -37.5 -5 34
 37.5 10 34
@@ -25,88 +27,56 @@ numvert 20
 37.5 -5 -19
 42.5 -5 -19
 42.5 5 -19
-38.1 10 34.6
-38.1 10 -34.6
--38.1 10 -34.6
--38.1 10 34.6
-numsurf 11
+numsurf 7
 SURF 0x0
-mat 0
+mat 1
 refs 4
 0 0 0
 7 0 0
 6 0 0
 1 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 0 0 0
 1 0 0
 3 0 0
 2 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 2 0 0
 3 0 0
 5 0 0
 4 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 4 0 0
 5 0 0
 6 0 0
 7 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 10 0 0
 11 0 0
 8 0 0
 9 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 15 0 0
 14 0 0
 11 0 0
 10 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 13 0 0
 14 0 0
 15 0 0
 12 0 0
-SURF 0x0
-mat 0
-refs 4
-2 0 0
-4 0 0
-17 0 0
-16 0 0
-SURF 0x0
-mat 0
-refs 4
-4 0 0
-7 0 0
-18 0 0
-17 0 0
-SURF 0x0
-mat 0
-refs 4
-0 0 0
-2 0 0
-16 0 0
-19 0 0
-SURF 0x0
-mat 0
-refs 4
-7 0 0
-0 0 0
-19 0 0
-18 0 0
 kids 0
 OBJECT poly
 name "Cube.001"
@@ -395,95 +365,147 @@ name "Plane.001"
 data 9
 Plane.003
 crease 30.000000
-numvert 18
-38.1 10 -34.5
--38.1 10 -34.5
--38.1 10 -1.5e-05
-38.1 10 2.6e-05
-27.5 15 -17.5
--27.5 15 -17.5
+numvert 6
 37.5 8 -28.5
 43 5 -34
 43 5 -19
 37.5 8 -24.5
 37.5 5 -34
 37.5 5 -19
+numsurf 3
+SURF 0x0
+mat 3
+refs 4
+2 0 0
+1 0 0
+0 0 0
+3 0 0
+SURF 0x0
+mat 3
+refs 3
+0 0 0
+1 0 0
+4 0 0
+SURF 0x0
+mat 3
+refs 3
+2 0 0
+3 0 0
+5 0 0
+kids 0
+OBJECT poly
+name "Plane.001"
+data 9
+Plane.003
+crease 30.000000
+numvert 12
+38.1 10 -34.5
+-38.1 10 -34.5
+-38.1 10 -1.5e-05
+38.1 10 2.6e-05
+27.5 15 -17.5
+-27.5 15 -17.5
 -27.5 15 17.5
 27.5 15 17.5
 38.1 10 34.6
 -38.1 10 34.6
 -38.1 10 -1.5e-05
 38.1 10 2.6e-05
-numsurf 11
+numsurf 8
 SURF 0x0
-mat 1
+mat 2
 refs 4
-0 0 0
-1 0 0
-5 0 0
-4 0 0
-SURF 0x0
-mat 1
-refs 4
-2 0 0
-3 0 0
-4 0 0
-5 0 0
-SURF 0x0
-mat 1
-refs 3
-0 0 0
-4 0 0
-3 0 0
-SURF 0x0
-mat 1
-refs 3
-1 0 0
-2 0 0
-5 0 0
-SURF 0x0
-mat 1
-refs 4
-8 0 0
-7 0 0
-6 0 0
-9 0 0
-SURF 0x0
-mat 1
-refs 3
-6 0 0
-7 0 0
-10 0 0
-SURF 0x0
-mat 1
-refs 3
-8 0 0
-9 0 0
 11 0 0
+10 0 0
+6 0 0
+7 0 0
 SURF 0x0
-mat 1
-refs 3
-16 0 0
-15 0 0
-12 0 0
-SURF 0x0
-mat 1
-refs 3
-17 0 0
-13 0 0
-14 0 0
-SURF 0x0
-mat 1
+mat 2
 refs 4
-15 0 0
-14 0 0
-13 0 0
-12 0 0
+9 0 0
+8 0 0
+7 0 0
+6 0 0
 SURF 0x0
-mat 1
+mat 2
+refs 3
+11 0 0
+7 0 0
+8 0 0
+SURF 0x0
+mat 2
+refs 3
+10 0 0
+9 0 0
+6 0 0
+SURF 0x0
+mat 2
+refs 3
+1 0 0
+2 0 0
+5 0 0
+SURF 0x0
+mat 2
+refs 3
+0 0 0
+4 0 0
+3 0 0
+SURF 0x0
+mat 2
 refs 4
-17 0 0
-16 0 0
-12 0 0
-13 0 0
+2 0 0
+3 0 0
+4 0 0
+5 0 0
+SURF 0x0
+mat 2
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+kids 0
+OBJECT poly
+name "Cube"
+data 4
+Cube
+crease 30.000000
+numvert 8
+-37.5 10 34
+37.5 10 34
+37.5 10 -34
+-37.5 10 -34
+38.1 10 34.6
+38.1 10 -34.6
+-38.1 10 -34.6
+-38.1 10 34.6
+numsurf 4
+SURF 0x0
+mat 2
+refs 4
+3 0 0
+0 0 0
+7 0 0
+6 0 0
+SURF 0x0
+mat 2
+refs 4
+0 0 0
+1 0 0
+4 0 0
+7 0 0
+SURF 0x0
+mat 2
+refs 4
+2 0 0
+3 0 0
+6 0 0
+5 0 0
+SURF 0x0
+mat 2
+refs 4
+1 0 0
+2 0 0
+5 0 0
+4 0 0
 kids 0

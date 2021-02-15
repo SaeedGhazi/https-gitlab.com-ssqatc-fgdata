@@ -1,6 +1,7 @@
 AC3Db
+MATERIAL "Brick" rgb 0.215789 0.305263 0.305263  amb 0.152632 0.236842 0.368421  emis 0 0 0  spec 0.215789 0.189474 0.357895  shi 10.7789  trans 0
+MATERIAL "Roof" rgb 0.5536 0.5536 0.5536  amb 0.5536 0.5536 0.5536  emis 0 0 0  spec 0.587935 0.587935 0.587935  shi 32  trans 0
 MATERIAL "MetalPanel" rgb 0.733333 0.733333 0.733333  amb 0.252632 0.257895 0.252632  emis 0 0 0  spec 0.266667 0.266667 0.266667  shi 10.1053  trans 0
-MATERIAL "Roof" rgb 1 1 1  amb 0.168421 0.173684 0.173684  emis 0 0 0  spec 0.663158 0.652632 0.642105  shi 11.4526  trans 0
 OBJECT world
 kids 3
 OBJECT poly
@@ -8,7 +9,7 @@ name "Cube"
 data 4
 Cube
 crease 30.000000
-numvert 16
+numvert 8
 -25 15 30
 -25 -5 30
 25 15 30
@@ -17,99 +18,35 @@ numvert 16
 25 -5 -30
 -25 -5 -30
 -25 15 -30
--24.7 15 29.7
-24.7 15 29.7
-24.7 15 -29.7
--24.7 15 -29.7
-24.7 10 29.7
-24.7 10 -29.7
--24.7 10 -29.7
--24.7 10 29.7
-numsurf 12
+numsurf 4
 SURF 0x0
-mat 0
+mat 1
 refs 4
 0 0 0
 7 0 0
 6 0 0
 1 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 0 0 0
 1 0 0
 3 0 0
 2 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 2 0 0
 3 0 0
 5 0 0
 4 0 0
 SURF 0x0
-mat 0
+mat 1
 refs 4
 4 0 0
 5 0 0
 6 0 0
 7 0 0
-SURF 0x0
-mat 0
-refs 4
-7 0 0
-0 0 0
-8 0 0
-11 0 0
-SURF 0x0
-mat 0
-refs 4
-0 0 0
-2 0 0
-9 0 0
-8 0 0
-SURF 0x0
-mat 0
-refs 4
-2 0 0
-4 0 0
-10 0 0
-9 0 0
-SURF 0x0
-mat 0
-refs 4
-4 0 0
-7 0 0
-11 0 0
-10 0 0
-SURF 0x0
-mat 0
-refs 4
-9 0 0
-10 0 0
-13 0 0
-12 0 0
-SURF 0x0
-mat 0
-refs 4
-10 0 0
-11 0 0
-14 0 0
-13 0 0
-SURF 0x0
-mat 0
-refs 4
-8 0 0
-9 0 0
-12 0 0
-15 0 0
-SURF 0x0
-mat 0
-refs 4
-11 0 0
-8 0 0
-15 0 0
-14 0 0
 kids 0
 OBJECT poly
 name "Cube.001"
@@ -394,48 +331,118 @@ refs 4
 77 0 0
 kids 0
 OBJECT poly
-name "Plane.001"
-data 9
-Plane.003
+name "Cube"
+loc 0 12.5 0
+data 4
+Cube
+texture "container.rgb"
 crease 30.000000
-numvert 10
-25 10 -30
--25 10 -30
--25 10 -1.3e-05
-25 10 2.5e-05
-25 15 -15
--25 15 -15
--25 15 15
-25 15 15
-25 10 30
--25 10 30
-numsurf 4
+numvert 22
+-24.7 -2.5 29.7
+-24.7 -2.5 -29.7
+24.7 -2.5 -29.7
+24.7 -2.5 29.7
+-24.7 2.5 -29.7
+24.7 2.5 -29.7
+24.7 2.5 29.7
+-24.7 2.5 29.7
+25 2.5 15
+-25 2.5 15
+-25 2.5 -15
+25 2.5 -15
+25 -2.5 2.5e-05
+-25 -2.5 -1.3e-05
+-25 -2.5 30
+25 -2.5 30
+-25 -2.5 -30
+25 -2.5 -30
+-25 2.5 -30
+25 2.5 -30
+25 2.5 30
+-25 2.5 30
+numsurf 12
 SURF 0x0
-mat 1
+mat 2
 refs 4
+4 0 0
+7 0 0
 0 0 0
 1 0 0
+SURF 0x0
+mat 2
+refs 4
+7 0 0
+6 0 0
+3 0 0
+0 0 0
+SURF 0x0
+mat 2
+refs 4
 5 0 0
 4 0 0
+1 0 0
+2 0 0
 SURF 0x0
-mat 1
+mat 2
 refs 4
+6 0 0
+5 0 0
 2 0 0
 3 0 0
-4 0 0
-5 0 0
 SURF 0x0
-mat 1
+mat 2
 refs 4
+12 0 0
+13 0 0
 9 0 0
 8 0 0
+SURF 0x0
+mat 2
+refs 4
+13 0 0
+12 0 0
+11 0 0
+10 0 0
+SURF 0x0
+mat 2
+refs 4
+17 0 0
+16 0 0
+10 0 0
+11 0 0
+SURF 0x0
+mat 2
+refs 4
+14 0 0
+15 0 0
+8 0 0
+9 0 0
+SURF 0x0
+mat 2
+refs 4
+18 0 0
+21 0 0
 7 0 0
+4 0 0
+SURF 0x0
+mat 2
+refs 4
+21 0 0
+20 0 0
+6 0 0
+7 0 0
+SURF 0x0
+mat 2
+refs 4
+20 0 0
+19 0 0
+5 0 0
 6 0 0
 SURF 0x0
-mat 1
+mat 2
 refs 4
-3 0 0
-2 0 0
-6 0 0
-7 0 0
+19 0 0
+18 0 0
+4 0 0
+5 0 0
 kids 0

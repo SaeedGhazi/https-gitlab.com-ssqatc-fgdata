@@ -250,6 +250,37 @@
   </material>
 
   <material>
+    <name>Construction</name>
+    <name>Industrial</name>
+    <effect>Effects/urban</effect>
+    <texture-set>
+      <texture>Terrain/industrial-alt.png</texture>
+      <texture n="2">Terrain/industrial-alt-relief-light.png</texture>
+    </texture-set>
+    <parameters>
+      <urban_blend>1</urban_blend>
+      <blend_bias>0.2</blend_bias>
+      <hires_overlay_bias>-1.0</hires_overlay_bias>
+    </parameters>
+    <object-mask>Terrain/industrial.alt.mask.png</object-mask>
+    <xsize>1024</xsize>
+    <ysize>1024</ysize>
+    <light-coverage>100000.0</light-coverage>
+    <emissive>
+      <r>0.05</r>
+      <g>0.05</g>
+      <b>0.02</b>
+      <a>1.0</a>
+    </emissive>
+    <object-group include="Materials/base/industrial-buildings.xml"/>
+    <wood-coverage>1000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>15.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+  </material>
+
+  <material>
     <name>Town</name>
     <name>SubUrban</name>
     <effect>Effects/urban</effect>

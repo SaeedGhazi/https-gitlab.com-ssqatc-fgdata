@@ -257,12 +257,17 @@
       <texture>Terrain/industrial-alt.png</texture>
       <texture n="2">Terrain/industrial-alt-relief-light.png</texture>
     </texture-set>
+    <texture-set>
+      <texture>Terrain/industrial-alt2.png</texture>
+      <texture n="2">Terrain/industrial-alt2-relief-light.png</texture>
+    </texture-set>
+    <object-mask>Terrain/industrial.alt.mask.png</object-mask>
+    <object-mask>Terrain/industrial.alt2.mask.png</object-mask>
     <parameters>
       <urban_blend>1</urban_blend>
       <blend_bias>0.2</blend_bias>
       <hires_overlay_bias>-1.0</hires_overlay_bias>
     </parameters>
-    <object-mask>Terrain/industrial.alt.mask.png</object-mask>
     <xsize>1024</xsize>
     <ysize>1024</ysize>
     <light-coverage>100000.0</light-coverage>

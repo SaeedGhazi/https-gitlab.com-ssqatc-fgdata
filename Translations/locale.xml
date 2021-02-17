@@ -115,7 +115,7 @@
 	</locale>
 
 	<locale>
-		<lang type="string">tk</lang>
-		<xliff type="string">Translations/tk/FlightGear-nonQt.xlf</xliff>
+		<lang type="string">tr</lang>
+		<xliff type="string">Translations/tr/FlightGear-nonQt.xlf</xliff>
 	</locale>
 </PropertyList>

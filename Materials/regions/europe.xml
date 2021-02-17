@@ -277,7 +277,17 @@
       <b>0.02</b>
       <a>1.0</a>
     </emissive>
-    <object-group include="Materials/base/industrial-buildings.xml"/>
+    <object-group include="Materials/base/industrial-buildings.xml">
+      <object>
+        <path>Models/Industrial/Industrial110x185.xml</path>
+        <path>Models/Industrial/Industrial150x115.xml</path>
+        <path>Models/Industrial/Industrial85x160.xml</path>
+        <coverage-m2>5000</coverage-m2>
+        <heading-type>mask</heading-type>
+        <spacing-m>80</spacing-m>
+      </object>
+    </object-group>
+    <building-medium-max-floors>4</building-medium-max-floors>
     <wood-coverage>1000.0</wood-coverage>
     <tree-texture>Trees/deciduous-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>

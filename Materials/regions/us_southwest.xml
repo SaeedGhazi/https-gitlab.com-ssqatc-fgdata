@@ -280,7 +280,7 @@
     <rolling-friction>0.3</rolling-friction>
     <bumpiness>0.6</bumpiness>
     <load-resistance>1e30</load-resistance>
-    <object-group include="Materials/base/farm-buildings.xml"/>
+    <object-group include="Materials/base/us-farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>

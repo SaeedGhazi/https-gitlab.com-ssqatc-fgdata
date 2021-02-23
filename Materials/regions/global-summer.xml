@@ -393,11 +393,40 @@
 
   <material>
     <effect>Effects/water-inland</effect>
+    <name>Stream</name>
+    <name>Canal</name>
+    <texture>Terrain/water-lake.png</texture>
+    <xsize>400</xsize>
+    <ysize>400</ysize>
+    <ambient>
+      <r>0.0</r>
+      <g>0.0</g>
+      <b>0.0</b>
+      <a>1.0</a>
+    </ambient>
+    <diffuse>
+      <r>0.5</r>
+      <g>0.5</g>
+      <b>0.5</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.3</r>
+      <g>0.3</g>
+      <b>0.3</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>0</solid>
+    <rolling-friction>1.5</rolling-friction>
+    <bumpiness>0.6</bumpiness>
+  </material>
+
+  <material>
+    <effect>Effects/water-inland</effect>
     <name>Lake</name>
     <name>Pond</name>
     <name>Reservoir</name>
-    <name>Stream</name>
-    <name>Canal</name>
     <name>Lagoon</name>
     <name>Estuary</name>
     <name>Watercourse</name>
@@ -635,7 +664,7 @@
     <rolling-friction>0.1</rolling-friction>
     <bumpiness>0.7</bumpiness>
     <load-resistance>1e30</load-resistance>
-    <object-group include="Materials/base/farm-buildings.xml"/>
+    <object-group include="Materials/base/us-farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
@@ -666,7 +695,7 @@
     <rolling-friction>0.3</rolling-friction>
     <bumpiness>0.6</bumpiness>
     <load-resistance>1e30</load-resistance>
-    <object-group include="Materials/base/farm-buildings.xml"/>
+    <object-group include="Materials/base/us-farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
@@ -695,7 +724,7 @@
     <bumpiness>0.6</bumpiness>
     <load-resistance>1e30</load-resistance>
     <light-coverage>2000000.0</light-coverage>
-    <object-group include="Materials/base/farm-buildings.xml"/>
+    <object-group include="Materials/base/us-farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
@@ -715,7 +744,7 @@
     <bumpiness>0.6</bumpiness>
     <load-resistance>1e30</load-resistance>
     <light-coverage>2000000.0</light-coverage>
-    <object-group include="Materials/base/farm-buildings.xml"/>
+    <object-group include="Materials/base/us-farm-buildings.xml"/>
     <wood-coverage>10000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>

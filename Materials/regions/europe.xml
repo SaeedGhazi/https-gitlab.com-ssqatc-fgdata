@@ -27,7 +27,6 @@
     <name>Grass</name>
     <name>Airport</name>
     <name>AirportKeep</name>
-    <name>Greenspace</name>
     <effect>Effects/grass</effect>
     <texture-set>
       <texture>Terrain/airport-grass-summer.png</texture>
@@ -80,6 +79,38 @@
     <load-resistance>1e30</load-resistance>    
   </material>
 
+  <material>
+    <name>Greenspace</name>
+    <texture>Terrain/golfcourse1-autumn.png</texture>
+    <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+    <xsize>800</xsize>
+    <ysize>800</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>500.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>
+
    <material>
     <name>BarrenCover</name>
     <name>Dirt</name>
@@ -117,12 +148,41 @@
   </material>
 
   <material>
-    <effect>Effects/cropgrass</effect>
+  <name>CropGrassCover</name>
+  <name>CropGrass</name>
+  <effect>Effects/agriculture</effect>
+  <texture>Terrain/irrcrop.png</texture>
+  <object-mask>Terrain/irrcrop.mask.png</object-mask>
+  <parameters>
+      <rotation_flag>0</rotation_flag>
+      <rotation_scale>8000.0</rotation_scale>
+    </parameters>
+  <xsize>3000</xsize>
+  <ysize>3000</ysize>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.6</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <light-coverage>2000000.0</light-coverage>
+  <wood-coverage>10000.0</wood-coverage>
+  <tree-texture>Trees/deciduous-alt.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+  <material>
+    <effect>Effects/agriculture</effect>
     <tree-effect>Effects/tree-european-mixed</tree-effect>
-    <name>CropGrassCover</name>
-    <name>CropGrass</name>
-    <texture>Terrain/cropgrass-hires-autumn.png</texture>
-    <object-mask>Terrain/cropgrass-hires.mask.png</object-mask>
+    <name>NaturalCrop</name>
+    <texture>Terrain/drycrop.png</texture>
+    <object-mask>Terrain/drycrop.mask.png</object-mask>
+    <parameters>
+      <rotation_flag>0</rotation_flag>
+      <rotation_scale>8000.0</rotation_scale>
+    </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>2000000.0</light-coverage>
@@ -183,6 +243,52 @@
     <building-texture>Textures/buildings.png</building-texture>
     <building-lightmap>Textures/buildings-lightmap.png</building-lightmap>
     <wood-coverage>250000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>15.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+  </material>
+
+  <material>
+    <name>Construction</name>
+    <name>Industrial</name>
+    <effect>Effects/urban</effect>
+    <texture-set>
+      <texture>Terrain/industrial-alt.png</texture>
+      <texture n="2">Terrain/industrial-alt-relief-light.png</texture>
+    </texture-set>
+    <texture-set>
+      <texture>Terrain/industrial-alt2.png</texture>
+      <texture n="2">Terrain/industrial-alt2-relief-light.png</texture>
+    </texture-set>
+    <object-mask>Terrain/industrial.alt.mask.png</object-mask>
+    <object-mask>Terrain/industrial.alt2.mask.png</object-mask>
+    <parameters>
+      <urban_blend>1</urban_blend>
+      <blend_bias>0.2</blend_bias>
+      <hires_overlay_bias>-1.0</hires_overlay_bias>
+    </parameters>
+    <xsize>1024</xsize>
+    <ysize>1024</ysize>
+    <light-coverage>100000.0</light-coverage>
+    <emissive>
+      <r>0.05</r>
+      <g>0.05</g>
+      <b>0.02</b>
+      <a>1.0</a>
+    </emissive>
+    <object-group include="Materials/base/industrial-buildings.xml">
+      <object>
+        <path>Models/Industrial/Industrial110x185.xml</path>
+        <path>Models/Industrial/Industrial150x115.xml</path>
+        <path>Models/Industrial/Industrial85x160.xml</path>
+        <coverage-m2>5000</coverage-m2>
+        <heading-type>mask</heading-type>
+        <spacing-m>80</spacing-m>
+      </object>
+    </object-group>
+    <building-medium-max-floors>4</building-medium-max-floors>
+    <wood-coverage>1000.0</wood-coverage>
     <tree-texture>Trees/deciduous-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>15.0</tree-height-m>
@@ -278,12 +384,10 @@
     <name>MixedCropPastureCover</name>
     <name>MixedCrop</name>
     <name>ComplexCrop</name>
-    <texture>Terrain/irrcrop-europe-autumn.png</texture>
-    <parameters>
-      <rotation_flag>1</rotation_flag>
-      <rotation_scale>2000.0</rotation_scale>
-    </parameters>
-    <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
+    <texture>Terrain/countryside1.green.png</texture>
+    <texture>Terrain/countryside3.green.png</texture>
+    <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside3.green.mask.png</object-mask>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
     <light-coverage>2000000.0</light-coverage>
@@ -293,7 +397,32 @@
     <bumpiness>0.7</bumpiness>
     <load-resistance>1e30</load-resistance>
     <object-group include="Materials/base/farm-buildings.xml"/>
-    <wood-coverage>5000.0</wood-coverage>
+    <wood-coverage>2000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>
+
+  <material>
+    <effect>Effects/agriculture</effect>
+    <name>DryCrop</name>
+    <name>DryCropPastureCover</name>
+    <name>GreenSpace</name>
+    <texture>Terrain/countryside2.green.png</texture>
+    <texture>Terrain/countryside4.green.png</texture>
+    <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside4.green.mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.7</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <object-group include="Materials/base/farm-buildings.xml"/>
+    <wood-coverage>2000.0</wood-coverage>
     <tree-texture>Trees/mixed-alt.png</tree-texture>
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
@@ -469,7 +598,5 @@
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
   </material>   
-
-
 
 </PropertyList>

@@ -6,6 +6,8 @@
         <![CDATA[
 
             var reload_props = [
+                "/sim/rendering/static-lod/vegetation-lod-level",
+                "/sim/rendering/static-lod/line-features-lod-level",
                 "/sim/rendering/static-lod/rough-delta",
                 "/sim/rendering/static-lod/bare-delta"];
 
@@ -576,8 +578,104 @@
             <live>true</live>
             <property>/sim/rendering/static-lod/aimp-interior</property>
         </text>
+    </group>
 
+    <hrule/>
 
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+        <text>
+            <label>WS3.0</label>
+        </text>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+        <text>
+            <enable>
+                <equals>
+                    <property>/scenery/use-vpb</property>
+                    <value>true</value>
+                </equals>
+            </enable>
+            <label>Line Feature LOD Range</label>
+        </text>
+        <slider>
+            <name>line-lod</name>
+            <enable>
+                <equals>
+                    <property>/scenery/use-vpb</property>
+                    <value>true</value>
+                </equals>
+            </enable>
+            <min>1.0</min>
+            <max>8.0</max>
+            <step>1.0</step>
+            <fraction>0.17</fraction>
+            <property>/sim/rendering/static-lod/line-features-lod-level</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>line-lod</object-name>
+            </binding>
+        </slider>
+        <text>
+            <label>1234567890</label>
+            <enable>
+                <equals>
+                    <property>/scenery/use-vpb</property>
+                    <value>true</value>
+                </equals>
+            </enable>
+            <format>%d</format>
+            <live>true</live>
+            <property>/sim/rendering/static-lod/line-features-lod-level</property>
+        </text>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+        <text>
+            <enable>
+                <equals>
+                    <property>/scenery/use-vpb</property>
+                    <value>true</value>
+                </equals>
+            </enable>
+            <label>Vegetation LOD Range</label>
+        </text>
+        <slider>
+            <name>veg-lod</name>
+            <enable>
+                <equals>
+                    <property>/scenery/use-vpb</property>
+                    <value>true</value>
+                </equals>
+            </enable>
+            <min>1.0</min>
+            <max>8.0</max>
+            <step>1.0</step>
+            <fraction>0.17</fraction>
+            <property>/sim/rendering/static-lod/vegetation-lod-level</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>veg-lod</object-name>
+            </binding>
+        </slider>
+        <text>
+            <label>1234567890</label>
+            <enable>
+                <equals>
+                    <property>/scenery/use-vpb</property>
+                    <value>true</value>
+                </equals>
+            </enable>
+            <format>%d</format>
+            <live>true</live>
+            <property>/sim/rendering/static-lod/vegetation-lod-level</property>
+        </text>
     </group>
 
     <hrule/>

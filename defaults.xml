@@ -114,6 +114,8 @@ Started September 2000 by David Megginson, david@megginson.com
         <aimp-detailed type="double" userarchive="y">400</aimp-detailed>
         <aimp-bare type="double" userarchive="y">0</aimp-bare>
         <aimp-interior type="double" userarchive="y">200</aimp-interior>
+        <line-features-lod-level type="int" userarchive="y">5</line-features-lod-level>
+        <vegetation-lod-level type="int" userarchive="y">6</vegetation-lod-level>
       </static-lod>
       <random-objects type="bool" userarchive="y">true</random-objects>
       <random-vegetation type="bool" userarchive="y">true</random-vegetation>
@@ -121,7 +123,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <random-vegetation-normals type="bool" userarchive="y">false</random-vegetation-normals>
       <random-vegetation-optimize type="bool" userarchive="y">false</random-vegetation-optimize>
       <vegetation-density type="double" userarchive="y">1.0</vegetation-density>
-      <vegetation-lod type="int" userarchive="y">6</vegetation-lod>
       <random-buildings type="bool" userarchive="y">false</random-buildings>
       <osm-buildings type="bool" userarchive="y">false</osm-buildings>
       <building-density type="double" userarchive="y">1.0</building-density>

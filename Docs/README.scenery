@@ -20,6 +20,7 @@ Contents ----------------------------------------------------------------------
    3.8  RAILWAY_ROUGH / RAILWAY_DETAILED
    3.9  BUILDING_LIST
    3.10 TREE_LIST
+   3.11 LINEAR_FEATURE_LIST
 
 4  model manager ("/models/model")
    4.1  static objects
@@ -495,6 +496,37 @@ X Y Z A B C
 Where:
 - X,Y,Z are the cartesian coordinates of the tree. +X is East, +Y is North
 - A,B,C is optional and represents the normal of the underlying terrain.  Used for shadows.  Defaults to (0,0,1)
+
+3.11  LINEAR_FEATURE_LIST
+-------------------------
+
+Defines a file containing a set of linear feature that should be rendered using a
+particular Material.  E.g. Road, Waterways
+
+Example:
+
+  LINEAR_FEATURE_LIST roads.txt.gz Road
+
+Syntax
+
+  LINEAR_FEATURE_LIST <filename> <material name>
+
+Where:
+- <filename> is the name of a file containing linear feature positions, may be a .gz file
+- <material name> is the name of the material that will be used to render.
+
+See README.materials for details on configuring the random vegetation parameters.
+
+The referenced <filename> (in the example road.txt.gz) contains lines of the form
+
+W ATTR A B C D lon0 lat0 lon1 lat1 lon2 lat2 lon3 lat4
+
+Where:
+
+- W is the feature width in meters.
+- ATTR is an integer value used to store packed attributes (e.g. lighting, currenty unused)
+- A,B,C,D are float values used to store attributes (currently unused)
+- lonN, latN are lon/lat pairs on the center of the line feature.  There must be at least two pairs
 
 4 model manager ("/models/model") --------------------------------------------
 

@@ -285,7 +285,6 @@
 			<group>
 				<layout>hbox</layout>
 				<halign>right</halign>
-
 				<text>
 					<enable>
 						<equals>
@@ -1161,8 +1160,7 @@
 
 			var osg_version = getprop("/sim/version/openscenegraph");
 
-
-			if ((osg_version != nil) and (find("3.6", osg_version) == 0)) {
+			if ((osg_version != nil) and (find("3.6", osg_version) == 0 or find("3.7", osg_version) == 0)) {
 				# Currently vpb requires OSG 3.6 specifically.
 				setprop("/sim/gui/dialogs/rendering/vpb-available", 1);
 			} else {

@@ -785,15 +785,16 @@ Started September 2000 by David Megginson, david@megginson.com
       </buffer>
       <tape-directory type="string" userarchive="y"/>
       <recovery-period type="int" userarchive="y">0</recovery-period>
+      <record-signals type="bool" userarchive="y">true</record-signals>
       <record-multiplayer type="bool" userarchive="y"/>
       <record-main-window type="bool" userarchive="y">false</record-main-window>
       <record-main-view type="bool" userarchive="y">false</record-main-view>
       <replay-main-window-position type="bool" userarchive="y">false</replay-main-window-position>
       <replay-main-window-size type="bool" userarchive="y">false</replay-main-window-size>
       <replay-main-view type="bool" userarchive="y">false</replay-main-view>
-      <record-properties type="bool" userarchive="y">true</record-properties>
-      <record-properties-paths>
-      </record-properties-paths>
+      <record-extra-properties type="bool" userarchive="y">true</record-extra-properties>
+      <record-extra-properties-paths>
+      </record-extra-properties-paths>
     </replay>
     <airport>
       <runways>

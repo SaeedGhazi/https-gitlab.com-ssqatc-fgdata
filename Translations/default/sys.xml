@@ -33,16 +33,19 @@
 		<settings-migration-title>Settings migrated</settings-migration-title>
 		<settings-migration-text>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</settings-migration-text>
 
+		<error-next-steps>FlightGear is developed and tested by volunteers around the world. The information below contains details on the problem: you can use it to start investigating the problem yourself, or ask for help via our forum or bug tracker.</error-next-steps>
+
 		<!-- error groupings : top-level messages shown to the user-->
-		<error-category-aircraft>The selected aircraft contains errors. This may cause visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers, or use the information below to investigate further.</error-category-aircraft>
+		<error-category-aircraft>The selected aircraft contains errors. This may cause visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</error-category-aircraft>
 		<error-category-aircraft-from-hangar>The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar's maintainers.</error-category-aircraft-from-hangar>
-		<error-category-custom-scenery>The custom scenery at '%VALUE%' contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery, or use the information below to investigate further.</error-category-custom-scenery>
-		<error-category-terrasync>Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk. The information below may help investigating further.</error-category-terrasync>
-		<error-category-addon>The add-on '%VALUE%' contains errors. Please report this to the add-on developers, or use the information below to investigate further.</error-category-addon>
-		<error-category-scenario>The scenario '%VALUE%' contains errors, and may not work correctly. Check the information below to help investigate fruther.</error-category-scenario>
-		<error-category-input-device>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect: see the information below for more information.</error-category-input-device>
+		<error-category-custom-scenery>The custom scenery at '%VALUE%' contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</error-category-custom-scenery>
+		<error-category-terrasync>Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</error-category-terrasync>
+		<error-category-addon>The add-on '%VALUE%' contains errors. Please report this to the add-on developers.</error-category-addon>
+		<error-category-scenario>The scenario '%VALUE%' contains errors, and may not work correctly.</error-category-scenario>
+		<error-category-input-device>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</error-category-input-device>
 		<error-category-fgdata>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</error-category-fgdata>
-		<error-category-unknown>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team, providing the information below.</error-category-unknown>
+		<error-category-unknown>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</error-category-unknown>
+		<error-category-ai-traffic-schedule>The traffic schedule '%VALUE%' contains errors, and can't be loaded.</error-category-ai-traffic-schedule>
 
 		<error-type-unknown>Unknown error</error-type-unknown>
 		<error-type-not-found>The file or resource was not found</error-type-not-found>
@@ -51,7 +54,7 @@
 		<error-type-bad-data>File or resource is invalid or corrupted</error-type-bad-data>
 		<error-type-misconfigured>The resource contains a configuration problem</error-type-misconfigured>
 
-		<error-missing-shader>Shader file not found</error-missing-shader>
+		<error-missing-shader>Shader / Effect problems</error-missing-shader>
 		<error-loading-texture>Texture failed to load</error-loading-texture>
 		<error-xml-model-load>Errors loading model XML</error-xml-model-load>
 		<error-btg-load>Errors loading terrain (BTG)</error-btg-load>
@@ -59,6 +62,6 @@
 		<error-dialog-load>Errors loading user-interface</error-dialog-load>
 		<error-audio-fx-load>Audio FX description contains errors</error-audio-fx-load>
 		<error-xml-load-command>Scripted loading of XML failed</error-xml-load-command>
-		<error-aircraft-systems>Errors occured loading ircraft systems (fuel, electrical, hydrualics)</error-aircraft-systems>
+		<error-aircraft-systems>Errors occured loading aircraft systems (fuel, electrical, hydrualics)</error-aircraft-systems>
 		<error-input-device-config>Errors loading input device configuration</error-input-device-config>
 </PropertyList>

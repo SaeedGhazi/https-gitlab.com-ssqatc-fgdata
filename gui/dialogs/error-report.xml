@@ -26,8 +26,6 @@
 
     <textbox>
 		<halign>fill</halign>
-		<valign>fill</valign>
-		<stretch>true</stretch>
 		<!-- <pref-width>450</pref-width> -->
 		<pref-height>100</pref-height>
 		<padding>6</padding>
@@ -37,6 +35,16 @@
         <property>/sim/error-report/display/category</property>
     </textbox>
     
+	<textbox>
+		<halign>fill</halign>
+
+		<pref-height>100</pref-height>
+		<padding>6</padding>
+		<wrap>true</wrap>
+		<editable>false</editable>
+
+		<property>/sim/error-report/display/next-steps</property>
+    </textbox>
     <hrule/>
 
     <textbox>

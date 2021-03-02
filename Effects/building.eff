@@ -69,6 +69,8 @@
     <wrap-s>clamp</wrap-s>
     <wrap-t>clamp</wrap-t>
   </texture>
+    <!-- Add the following line to enable snow: -->
+    <snow-enabled>1</snow-enabled>
     <!--Ambient correction -->
     <ambient-correction type="float"> 0.0 </ambient-correction>
     <dirt-enabled type="int"> 0 </dirt-enabled>

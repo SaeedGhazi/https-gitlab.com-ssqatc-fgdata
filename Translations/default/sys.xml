@@ -46,6 +46,7 @@
 		<error-category-fgdata>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</error-category-fgdata>
 		<error-category-unknown>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</error-category-unknown>
 		<error-category-ai-traffic-schedule>The traffic schedule '%VALUE%' contains errors, and can't be loaded.</error-category-ai-traffic-schedule>
+		<error-category-out-of-memory>Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</error-category-out-of-memory>
 
 		<error-type-unknown>Unknown error</error-type-unknown>
 		<error-type-not-found>The file or resource was not found</error-type-not-found>
@@ -53,6 +54,8 @@
 		<error-type-bad-header>File or resource header is incorrect</error-type-bad-header>
 		<error-type-bad-data>File or resource is invalid or corrupted</error-type-bad-data>
 		<error-type-misconfigured>The resource contains a configuration problem</error-type-misconfigured>
+		<error-type-io>Unable to read/write files correctly (check permissions and disk space)</error-type-io>
+		<error-type-network>Network connection failure</error-type-network>
 
 		<error-missing-shader>Shader / Effect problems</error-missing-shader>
 		<error-loading-texture>Texture failed to load</error-loading-texture>
@@ -64,4 +67,5 @@
 		<error-xml-load-command>Scripted loading of XML failed</error-xml-load-command>
 		<error-aircraft-systems>Errors occured loading aircraft systems (fuel, electrical, hydrualics)</error-aircraft-systems>
 		<error-input-device-config>Errors loading input device configuration</error-input-device-config>
+		<error-terraysnc>Errors downloading scenery from TerraSync</error-terraysnc>
 </PropertyList>

@@ -49,6 +49,16 @@
     <label>Warning: Intel integrated graphics detected.  Your graphics card may not support shaders or complex graphics.</label>
   </text>
 
+  <text>
+    <visible>
+      <equals>
+        <property>/sim/gui/dialogs/rendering/osmcity-warning</property>
+        <value>1</value>
+      </equals>
+    </visible>
+    <label>Real-world buildings, roads and/or pylons are enabled. This will download extra files and may reduce frame-rates.</label>
+  </text>
+
 	<group>
 		<halign>center</halign>
 		<layout>hbox</layout>
@@ -586,6 +596,7 @@
 							} else {
 							  setScenerySuffix("Pylons", 0);
 							}
+							checkOSMWarning();
 						</script>
 					</binding>
 				</combo>
@@ -617,6 +628,7 @@
 							} else {
 							  setScenerySuffix("Roads", 0);
 							}
+							checkOSMWarning();
 						</script>
 					</binding>
 				</combo>
@@ -661,6 +673,8 @@
 								setprop("/sim/rendering/osm-buildings", 1);
 								setScenerySuffix("Buildings", 1);
 							}
+
+							checkOSMWarning();
 						</script>
 					</binding>
 				</combo>
@@ -862,32 +876,6 @@
           </binding>
         </combo>
 
-				<text>
-					<row>8</row>
-					<col>0</col>
-					<colspan>2</colspan>
-					<halign>left</halign>
-					<color>
-			      <red>1.0</red>
-			      <green>0.6</green>
-			      <blue>0.6</blue>
-			    </color>
-					<label>Warning: Pylons, Detailed Roads, Buildings use a lot of memory</label>
-        </text>
-
-				<text>
-					<row>9</row>
-					<col>0</col>
-					<colspan>2</colspan>
-					<halign>left</halign>
-					<color>
-			      <red>1.0</red>
-			      <green>0.6</green>
-			      <blue>0.6</blue>
-			    </color>
-					<label>and disk space, and are only available in limited areas.</label>
-        </text>
-
 			</group>
 
 			<group>
@@ -1006,6 +994,11 @@
 				}
 			}
 
+			var checkOSMWarning = func() {
+				var on = getScenerySuffix("Pylons") or getScenerySuffix("Roads") or getScenerySuffix("Buildings");
+				setprop('/sim/gui/dialogs/rendering/osmcity-warning', on);
+			}
+
       var materials = { "Region-specific" : "Materials/regions/materials.xml",
                         "Global" : "Materials/default/materials.xml",
                         "Global alternative (DDS format)" : "Materials/dds/materials.xml" };
@@ -1100,6 +1093,7 @@
 				setprop("/sim/gui/dialogs/rendering/placed-objects", "Disabled");
 			}
 
+			checkOSMWarning();
 
       var reload_props = [
         "/sim/rendering/materials-file",

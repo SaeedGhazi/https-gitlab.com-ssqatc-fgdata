@@ -116,6 +116,28 @@ Started September 2000 by David Megginson, david@megginson.com
         <aimp-interior type="double" userarchive="y">200</aimp-interior>
         <line-features-lod-level type="int" userarchive="y">5</line-features-lod-level>
         <vegetation-lod-level type="int" userarchive="y">6</vegetation-lod-level>
+        <lod-level n="0">
+          <line-features-min-width>9999.9</line-features-min-width>
+        </lod-level>
+        <lod-level n="1">
+          <line-features-min-width>9999.9</line-features-min-width>
+        </lod-level>
+        <lod-level n="2">
+          <line-features-min-width>9999.9</line-features-min-width>
+        </lod-level>
+        <lod-level n="3">
+          <line-features-min-width>20.0</line-features-min-width>
+        </lod-level>
+        <lod-level n="4">
+          <line-features-min-width>10.0</line-features-min-width>
+        </lod-level>
+        <lod-level n="5">
+          <line-features-min-width>7.0</line-features-min-width>
+        </lod-level>
+        <lod-level n="6">
+          <line-features-min-width>3.0</line-features-min-width>
+        </lod-level>
+        
       </static-lod>
       <random-objects type="bool" userarchive="y">true</random-objects>
       <random-vegetation type="bool" userarchive="y">true</random-vegetation>

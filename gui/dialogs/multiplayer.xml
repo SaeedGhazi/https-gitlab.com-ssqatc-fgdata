@@ -213,14 +213,29 @@
             </binding>
         </checkbox>
 
-        <text>
+
+        <checkbox>
             <row>5</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <property>sim/error-report/mp-report-enabled</property>
+            <live>true</live>
+            <label>Report problems with other pilots' models</label>
+            <binding>
+                <command>property-toggle</command>
+                <property>sim/error-report/mp-report-enabled</property>
+            </binding>
+        </checkbox>
+
+        <text>
+            <row>6</row>
             <col>0</col>
             <halign>right</halign>
             <label>Compatibility</label>
         </text>
         <combo>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <halign>left</halign>
             <name>protocol-version</name>
@@ -248,13 +263,13 @@
         </combo>
 
         <text>
-            <row>6</row>
+            <row>7</row>
             <col>0</col>
             <halign>right</halign>
             <label>   Callsign:</label>
         </text>
         <input>
-            <row>6</row>
+            <row>7</row>
             <col>1</col>
             <halign>left</halign>
             <property>/sim/multiplay/callsign</property>
@@ -266,7 +281,7 @@
         </input>
         <group>
             <layout>hbox</layout>
-            <row>6</row>
+            <row>7</row>
             <col>1</col>
             <text>
                 <width>2</width>
@@ -289,7 +304,7 @@
         <combo>
             <name>host</name>
             <halign>left</halign>
-            <row>7</row>
+            <row>8</row>
             <col>1</col>
             <colspan>2</colspan>
             <pref-width>350</pref-width>
@@ -300,7 +315,7 @@
         </combo>
 
         <text>
-          <row>8</row>
+          <row>9</row>
           <col>0</col>
           <halign>right</halign>
           <label>Server:</label>
@@ -309,13 +324,13 @@
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>8</row>
+            <row>9</row>
             <col>1</col>
             <halign>left</halign>
             <label>Not connected</label>
         </text>
         <text>
-            <row>8</row>
+            <row>9</row>
             <col>1</col>
             <visible>
                 <property>/sim/multiplay/online</property>

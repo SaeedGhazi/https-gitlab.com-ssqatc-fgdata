@@ -6,8 +6,16 @@
         <![CDATA[
 
             var reload_props = [
+                "/scenery/elevation-mesh/lod-range-factor",
                 "/sim/rendering/static-lod/vegetation-lod-level",
                 "/sim/rendering/static-lod/line-features-lod-level",
+                "/sim/rendering/static-lod/lod-level[0]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[1]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[2]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[3]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[4]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[5]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[6]/line-features-min-width",
                 "/sim/rendering/static-lod/rough-delta",
                 "/sim/rendering/static-lod/bare-delta"];
 
@@ -45,6 +53,12 @@
                 setprop("/sim/gui/dialogs/static-lod/aimp-mp-mode", "Low Detail only");
             else
                 setprop("/sim/gui/dialogs/static-lod/aimp-mp-mode", "Specify Ranges");
+
+            # /scenery/elevation-mesh/lod-range-factor is a multiplier on the width of the 
+            # LOD mesh.  So an lod-range-factor=2 means that a given LoD mesh will be active
+            # at 2x the mesh width. L6 mesh is typically 2km.  So we present to the user a
+            # km value and convert to a factor
+            setprop("/sim/gui/dialogs/static-lod/lod-range-km", getprop("/scenery/elevation-mesh/lod-range-factor") * 2);
 
             update_enabling = func{
                 var mode = getprop("/sim/gui/dialogs/static-lod/aimp-mp-mode");
@@ -584,100 +598,494 @@
 
     <group>
         <layout>hbox</layout>
-        <halign>center</halign>
+        <halign>left</halign>
         <text>
-            <label>WS3.0</label>
+            <label>World Scenery 3.0 (Experimental)</label>
+        </text>
+        <hrule>
+            <stretch>true</stretch>
+        </hrule>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+        <text>
+            <label>WS3.0 uses 7 levels of detail, from 0 (least detailed) to 6 (most detailed).</label>
+        </text>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+        <text>
+            <label>You can control at which level features are rendered and at what range level 6 is used.</label>
         </text>
     </group>
 
     <group>
         <layout>hbox</layout>
         <halign>center</halign>
-        <text>
-            <enable>
-                <equals>
-                    <property>/scenery/use-vpb</property>
-                    <value>true</value>
-                </equals>
-            </enable>
-            <label>Line Feature LOD Range</label>
-        </text>
-        <slider>
-            <name>line-lod</name>
-            <enable>
-                <equals>
-                    <property>/scenery/use-vpb</property>
-                    <value>true</value>
-                </equals>
-            </enable>
-            <min>1.0</min>
-            <max>8.0</max>
-            <step>1.0</step>
-            <fraction>0.17</fraction>
-            <property>/sim/rendering/static-lod/line-features-lod-level</property>
-            <binding>
-                <command>dialog-apply</command>
-                <object-name>line-lod</object-name>
-            </binding>
-        </slider>
-        <text>
-            <label>1234567890</label>
-            <enable>
-                <equals>
-                    <property>/scenery/use-vpb</property>
-                    <value>true</value>
-                </equals>
-            </enable>
-            <format>%d</format>
-            <live>true</live>
-            <property>/sim/rendering/static-lod/line-features-lod-level</property>
-        </text>
+
+        <group>
+            <layout>table</layout>
+            <default-padding>4</default-padding>
+            <valign>center</valign>
+            <text>
+                <row>0</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Detail range</label>
+            </text>
+
+            <slider>
+                <name>elev-lod</name>
+                <row>0</row>
+                <col>1</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/scenery/elevation-mesh/lod-range-factor</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>elev-lod</object-name>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                      # /scenery/elevation-mesh/lod-range-factor is a multiplier on the width of the 
+                      # LOD mesh.  So an lod-range-factor=2 means that a given LoD mesh will be active
+                      # at 2x the mesh width. L6 mesh is typically 2km.  So we present to the user a
+                      # km value and convert to a factor
+                      setprop("/sim/gui/dialogs/static-lod/lod-range-km", getprop("/scenery/elevation-mesh/lod-range-factor") * 2);
+                    </script>
+                </binding>
+            </slider>
+            <text>
+                <label>1234</label>
+                <row>0</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%dkm</format>
+                <live>true</live>
+                <property>/sim/gui/dialogs/static-lod/lod-range-km</property>
+            </text>
+
+            <text>
+                <row>1</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Line Feature minimum LOD</label>
+            </text>
+            <slider>
+                <row>1</row>
+                <col>1</col>
+                <name>line-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/line-features-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>1</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/line-features-lod-level</property>
+            </text>
+
+            <text>
+                <row>2</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Vegetation minimum LOD</label>
+            </text>
+            <slider>
+                <row>2</row>
+                <col>1</col>
+                <name>veg-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/vegetation-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>veg-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>2</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/vegetation-lod-level</property>
+            </text>
+        </group>
     </group>
+
+    <hrule/>
 
     <group>
         <layout>hbox</layout>
         <halign>center</halign>
-        <text>
-            <enable>
-                <equals>
-                    <property>/scenery/use-vpb</property>
-                    <value>true</value>
-                </equals>
-            </enable>
-            <label>Vegetation LOD Range</label>
-        </text>
-        <slider>
-            <name>veg-lod</name>
-            <enable>
-                <equals>
-                    <property>/scenery/use-vpb</property>
-                    <value>true</value>
-                </equals>
-            </enable>
-            <min>1.0</min>
-            <max>8.0</max>
-            <step>1.0</step>
-            <fraction>0.17</fraction>
-            <property>/sim/rendering/static-lod/vegetation-lod-level</property>
-            <binding>
-                <command>dialog-apply</command>
-                <object-name>veg-lod</object-name>
-            </binding>
-        </slider>
-        <text>
-            <label>1234567890</label>
-            <enable>
-                <equals>
-                    <property>/scenery/use-vpb</property>
-                    <value>true</value>
-                </equals>
-            </enable>
-            <format>%d</format>
-            <live>true</live>
-            <property>/sim/rendering/static-lod/vegetation-lod-level</property>
-        </text>
-    </group>
 
+        <group>
+            <layout>table</layout>
+            <default-padding>4</default-padding>
+            <valign>center</valign>
+            <text>
+                <row>0</row>
+                <col>0</col>
+                <label>LOD Level</label>
+            </text>
+            <text>
+                <row>0</row>
+                <col>1</col>
+                <colspan>2</colspan>
+                <label>Minimum Line Feature Width (m)</label>
+            </text>
+            <text>
+                <row>1</row>
+                <col>0</col>
+                <label>0</label>
+            </text>
+            <slider>
+                <row>1</row>
+                <col>1</col>
+                <name>line-width-lod0</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[0]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod0</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>1</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[0]/line-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>2</row>
+                <col>0</col>
+                <label>1</label>
+            </text>
+            <slider>
+                <row>2</row>
+                <col>1</col>
+                <name>line-width-lod1</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[1]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod1</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>2</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[1]/line-features-min-width</property>
+            </text>        
+            
+            <text>
+                <row>3</row>
+                <col>0</col>
+                <label>2</label>
+            </text>
+            <slider>
+                <row>3</row>
+                <col>1</col>
+                <name>line-width-lod2</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[2]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod2</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>3</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[2]/line-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>4</row>
+                <col>0</col>
+                <label>3</label>
+            </text>
+            <slider>
+                <row>4</row>
+                <col>1</col>
+                <name>line-width-lod3</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[3]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod3</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>4</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[3]/line-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>5</row>
+                <col>0</col>
+                <label>4</label>
+            </text>
+            <slider>
+                <row>5</row>
+                <col>1</col>
+                <name>line-width-lod4</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[4]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod4</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>5</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[4]/line-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>6</row>
+                <col>0</col>
+                <label>5</label>
+            </text>
+            <slider>
+                <row>6</row>
+                <col>1</col>
+                <name>line-width-lod5</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[5]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod5</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>6</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[5]/line-features-min-width</property>
+            </text>                
+
+            <text>
+                <row>7</row>
+                <col>0</col>
+                <label>6</label>
+            </text>
+            <slider>
+                <row>7</row>
+                <col>1</col>
+                <name>line-width-lod6</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[6]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod6</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>7</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[6]/line-features-min-width</property>
+            </text>        
+        </group>
+
+    </group>
+    
     <hrule/>
 
     <group>

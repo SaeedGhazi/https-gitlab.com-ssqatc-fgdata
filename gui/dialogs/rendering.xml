@@ -238,49 +238,6 @@
 					<stretch>true</stretch>
 				</hrule>
 			</group>
-			<group>
-				<layout>hbox</layout>
-				<halign>right</halign>
-				<text>
-					<enable>
-						<equals>
-							<property>/scenery/use-vpb</property>
-							<value>true</value>
-						</equals>
-					</enable>
-					<label>Elevation mesh LOD detail range</label>
-				</text>
-				<slider>
-					<name>elev-lod</name>
-					<enable>
-						<equals>
-							<property>/scenery/use-vpb</property>
-							<value>true</value>
-						</equals>
-					</enable>
-					<min>1.0</min>
-					<max>10.0</max>
-					<step>1.0</step>
-					<fraction>0.17</fraction>
-					<property>/scenery/elevation-mesh/lod-range-factor</property>
-					<binding>
-						<command>dialog-apply</command>
-						<object-name>elev-lod</object-name>
-					</binding>
-				</slider>
-				<text>
-					<label>1234567890</label>
-					<enable>
-						<equals>
-							<property>/scenery/use-vpb</property>
-							<value>true</value>
-						</equals>
-					</enable>
-					<format>%.1f</format>
-					<live>true</live>
-					<property>/scenery/elevation-mesh/lod-range-factor</property>
-				</text>
-			</group>
 
 			<group>
 				<layout>hbox</layout>

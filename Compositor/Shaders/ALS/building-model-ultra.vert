@@ -75,7 +75,7 @@ void	main(void)
 	float sr = sin(6.28 * attr1.x);
 	float cr = cos(6.28 * attr1.x);
 
-	vec3 rawpos = gl_Vertex.xyz;
+	rawpos = gl_Vertex.xyz;
 	// Adjust the very top of the roof to match the rooftop scaling.  This shapes
 	// the rooftop - gambled, gabled etc.  These vertices are identified by gl_Color.z
 	rawpos.x = (1.0 - gl_Color.z) * rawpos.x + gl_Color.z * ((rawpos.x + 0.5) * attr3.z - 0.5);

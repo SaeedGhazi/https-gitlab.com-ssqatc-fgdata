@@ -35,8 +35,6 @@ uniform int     color_is_position;
 // void	fog_Func(int type);
 ////////////////////////////
 
-void setupShadows(vec4 eyeSpacePos);
-
 void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
 {
 	rotmat = mat4(	cosRy ,	sinRx * sinRy ,	cosRx * sinRy,	0.0,
@@ -186,6 +184,4 @@ void	main(void)
 	  gl_FrontColor = vec4(1.0,1.0,1.0,1.0);
 	}
 	gl_Position  = gl_ModelViewProjectionMatrix * vec4(rawpos,1.0);
-
-	setupShadows(ecPosition);
 }

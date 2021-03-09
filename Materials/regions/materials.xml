@@ -9,6 +9,7 @@
 <!-- Base materials -->
 <region include="Materials/regions/global.xml"/>
 <region include="Materials/regions/global-summer.xml"/>
+<region include="Materials/regions/global-winter.xml"/>
 
 <!-- Arctic and Antarctic Regions -->
 <region include="Materials/regions/arctic.xml"/>
@@ -66,6 +67,7 @@
 
 <!-- Europe -->
 <region include="Materials/regions/europe.xml"/>
+<region include="Materials/regions/europe-winter.xml"/>
 <region include="Materials/regions/scandinavia.xml"/>
 <region include="Materials/regions/united_kingdom.xml"/>
 <region include="Materials/regions/united_kingdom_barra.xml"/>

@@ -9,5 +9,6 @@
 <!-- Base materials -->
 <region include="Materials/default/global.xml"/>
 <region include="Materials/default/global-summer.xml"/>
+<region include="Materials/default/global-winter.xml"/>
 
 </PropertyList>

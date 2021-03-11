@@ -82,12 +82,12 @@
         <text>
             <width>2</width>
             <halign>right</halign>
-            <label>Adress</label>
+            <label>Address</label>
         </text>
         <input>
             <pref-width>150</pref-width>
             <halign>left</halign>
-            <property>/sim/swift/adress</property>
+            <property>/sim/swift/address</property>
             <enable>
                 <not>
                     <property>/sim/swift/serverRunning</property>

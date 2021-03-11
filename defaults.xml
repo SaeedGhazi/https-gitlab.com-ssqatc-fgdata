@@ -942,7 +942,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <warp-easing-duration-secs type="double">10</warp-easing-duration-secs>
     </time>
     <swift>
-      <adress type="string" userarchive="y">127.0.0.1</adress>
+      <address type="string" userarchive="y">127.0.0.1</address>
       <port type="int" userarchive="y">45003</port>
     </swift>
     <mp-carriers>

@@ -45,10 +45,10 @@
 		<error-category-input-device>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</error-category-input-device>
 		<error-category-fgdata>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</error-category-fgdata>
 		<error-category-unknown>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</error-category-unknown>
-		<error-category-ai-traffic-schedule>The traffic schedule '%VALUE%' contains errors, and can't be loaded.</error-category-ai-traffic-schedule>
+		<error-category-traffic>Problems occured loading simulated aircaft traffic: some traffic may not appear.</error-category-traffic>
 		<error-category-out-of-memory>Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</error-category-out-of-memory>
 		<error-category-multiplayer>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</error-category-multiplayer>
-
+		
 		<error-type-unknown>Unknown error</error-type-unknown>
 		<error-type-not-found>The file or resource was not found</error-type-not-found>
 		<error-type-out-of-memory>Unable to allocate sufficient memory</error-type-out-of-memory>

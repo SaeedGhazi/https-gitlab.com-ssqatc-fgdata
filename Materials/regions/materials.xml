@@ -19,7 +19,7 @@
 <!-- North America -->
 <region include="Materials/regions/alaska.xml"/>
 <region include="Materials/regions/us_southwest.xml"/> 
-<!--<region include="Materials/regions/california.xml"/>-->
+<region include="Materials/regions/california.xml"/>
 <region include="Materials/regions/sierras.xml"/>
 <region include="Materials/regions/florida.xml"/>
 <region include="Materials/regions/bermuda.xml"/>

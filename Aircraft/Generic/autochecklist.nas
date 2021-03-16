@@ -62,6 +62,9 @@
 #       <index n="0">9</index> <!-- Parking -->
 #     </startup>
 #   </checklists>
+#     
+#    If you are using <group>-tags in your checklist definition, you need
+#    to add one  <group-index> per sequence.
 #
 # 3. Define a menu item that calls the complete_checklists function with
 #    the name of the checklist sequence you would like to run.
@@ -216,9 +219,15 @@ var complete = func(node, wait, from = nil)
 {
     var previous_condition = nil;
     var skipping = from != nil;
-
+    
+    if( node.getChild("group-index") != nil ){
+	    var checklists_node = checklists.getChild("group", node.getChild("group-index").getIntValue());
+    } else {
+	    var checklists_node = checklists;
+    }
+	
     foreach (var index; node.getChildren("index")) {
-        var checklist = checklists.getChild("checklist", index.getValue());
+        var checklist = checklists_node.getChild("checklist", index.getValue());
         foreach (var item; checklist.getChildren("item")) {
             var condition = item.getNode("condition");
             if (skipping) {

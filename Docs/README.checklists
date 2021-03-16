@@ -52,3 +52,6 @@ group.  For example
 </group>
 
 See the c172p for an example of this in action (Aircraft/c172p/c172-checklists.xml).
+
+Checklists can be automatically executed, for example to implement autostart. For 
+more information, have a look at Aircraft/Generic/autochecklist.nas.

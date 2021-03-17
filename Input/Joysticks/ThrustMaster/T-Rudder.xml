@@ -24,6 +24,7 @@ $Id$
 <PropertyList>
 
  <name>T-Rudder</name>
+ <name>Thrustmaster T-Rudder</name>
 
  <axis n="1">
   <desc>Brake left</desc>

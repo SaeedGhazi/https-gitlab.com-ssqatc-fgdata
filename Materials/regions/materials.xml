@@ -3,9 +3,6 @@
 
 <PropertyList>
 
-<!-- Landclass Mapping for WS3.0 -->
-<landclass-mapping include="Materials/base/landclass-mapping.xml" />
-
 <!-- Base materials -->
 <region include="Materials/regions/global.xml"/>
 <region include="Materials/regions/global-summer.xml"/>

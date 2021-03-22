@@ -12,7 +12,7 @@
 <PropertyList>
 
 <material n="3000">
-  <name>ws30</name>
+  <name>ws30land</name>
   <effect>Effects/ws30</effect>
   <xsize>2000</xsize>
   <ysize>2000</ysize>
@@ -35,6 +35,11 @@
   <rolling-friction>0.1</rolling-friction>
   <bumpiness>0.15</bumpiness>
   <load-resistance>1e30</load-resistance>
+</material>
+
+<material n="3001">
+  <name>ws30water</name>
+  <effect>Effects/ws30water</effect>
 </material>
 
 

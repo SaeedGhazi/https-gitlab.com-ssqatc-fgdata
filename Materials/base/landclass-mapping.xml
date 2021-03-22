@@ -227,48 +227,56 @@
   <description>422 - Salines</description>
   <landclass>38</landclass>
   <material-name>Saline</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>423 - Intertidal flats</description>
   <landclass>39</landclass>
   <material-name>Littoral</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>511 - Water courses</description>
   <landclass>40</landclass>
   <material-name>Watercourse</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>512 - Water bodies</description>
   <landclass>41</landclass>
   <material-name>Lake</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>521 - Coastal lagoons</description>
   <landclass>42</landclass>
   <material-name>Lagoon</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>522 - Estuaries</description>
   <landclass>43</landclass>
   <material-name>Estuary</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>523 - Sea and ocean</description>
   <landclass>44</landclass>
   <material-name>Ocean</material-name>
+  <water>true</water>
 </map>
 
 <map>
   <description>999 - NODATA</description>
   <landclass>48</landclass>
   <material-name>Ocean</material-name>
+  <water>true</water>
 </map>
 
 </PropertyList>

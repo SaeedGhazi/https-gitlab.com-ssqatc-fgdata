@@ -81,8 +81,10 @@
 
   <material>
     <name>Greenspace</name>
+    <effect>Effects/agriculture</effect>
     <texture>Terrain/golfcourse1-autumn.png</texture>
     <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
     <xsize>800</xsize>
     <ysize>800</ysize>
     <light-coverage>2000000.0</light-coverage>
@@ -150,7 +152,8 @@
   <material>
   <name>CropGrassCover</name>
   <name>CropGrass</name>
-  <effect>Effects/agriculture</effect>
+  <effect>Effects/cropgrass</effect>
+  <tree-effect>Effects/tree-european-deciduous</tree-effect>
   <texture>Terrain/irrcrop.png</texture>
   <object-mask>Terrain/irrcrop.mask.png</object-mask>
   <parameters>
@@ -253,6 +256,7 @@
     <name>Construction</name>
     <name>Industrial</name>
     <effect>Effects/urban</effect>
+    <tree-effect>Effects/tree-european-deciduous</tree-effect>
     <texture-set>
       <texture>Terrain/industrial-alt.png</texture>
       <texture n="2">Terrain/industrial-alt-relief-light.png</texture>
@@ -299,6 +303,7 @@
     <name>Town</name>
     <name>SubUrban</name>
     <effect>Effects/urban</effect>
+    <tree-effect>Effects/tree-european-deciduous</tree-effect>
     <texture-set>
       <texture>Terrain/town-europe-autumn.png</texture>
       <texture n="2">Terrain/town-europe-relief-light.png</texture>
@@ -381,6 +386,7 @@
 
   <material>
     <effect>Effects/agriculture</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
     <name>MixedCropPastureCover</name>
     <name>MixedCrop</name>
     <name>ComplexCrop</name>
@@ -406,6 +412,7 @@
 
   <material>
     <effect>Effects/agriculture</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
     <name>DryCrop</name>
     <name>DryCropPastureCover</name>
     <name>GreenSpace</name>
@@ -431,6 +438,7 @@
 
   <material>
     <effect>Effects/crop</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
     <name>IrrCropPastureCover</name>
     <name>IrrCrop</name>
     <name>Orchard</name>
@@ -557,6 +565,7 @@
    
   <material>
     <effect>Effects/terrain-overlay</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
     <name>Grassland</name>
     <texture-set>
      <texture>Terrain/dry_pasture4.png</texture>

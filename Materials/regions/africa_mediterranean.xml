@@ -146,13 +146,13 @@
     <name>DeciduousNeedleCover</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/grass-caribbean.png</texture>
+      <texture>Terrain/airport_grass2.png</texture>
       <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="15">Terrain/airport_grass2.png</texture>
+      <texture n="12">Terrain/grass-caribbean.png</texture>
     </texture-set>
     <parameters>
       <grain_strength>0.5</grain_strength>
-      <hires_overlay_bias>0.1</hires_overlay_bias>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -171,18 +171,17 @@
     <name>EvergreenForest</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/airport_grass2.png</texture>
-      <texture n="11">Terrain/grass-caribbean.png</texture>
-      <texture n="12">Terrain/gravel_gray.png</texture>
-      <texture n="15">Terrain/forest1a.png</texture>
+      <texture>Terrain/california-forest.png</texture>
+      <texture n="11">Terrain/gravel_gray.png</texture>
+      <texture n="12">Terrain/grass-caribbean.png</texture>
     </texture-set>
     <object-mask>Terrain/pantanal-mask.png</object-mask>
     <parameters>
       <grain_strength>0.5</grain_strength>
-      <hires_overlay_bias>0.9</hires_overlay_bias>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
     </parameters>
-    <xsize>10000</xsize>
-    <ysize>10000</ysize>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>8000.0</wood-coverage>
     <tree-texture>Trees/savanna-trees.png</tree-texture>
@@ -203,9 +202,8 @@
       <texture n="12">Terrain/grass_dry2a_darker.png</texture>
     </texture-set>
     <parameters>
-      <rock_strata>0.5</rock_strata>
       <grain_strength>0.5</grain_strength>
-      <hires_overlay_bias>-0.08</hires_overlay_bias>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
       <transition_model>0.5</transition_model>
       <use_grain>1</use_grain>
       <grain_layer_magnification>0.2</grain_layer_magnification>
@@ -214,11 +212,11 @@
     <xsize>1000</xsize>
     <ysize>1000</ysize>
     <light-coverage>4000000.0</light-coverage>
-    <wood-coverage>12000.0</wood-coverage>
-    <tree-texture>Trees/savanna-trees.png</tree-texture>
-    <tree-varieties>4</tree-varieties>
-    <tree-height-m>8.0</tree-height-m>
-    <tree-width-m>6.0</tree-width-m>
+    <wood-coverage>65000.0</wood-coverage>
+    <tree-texture>Trees/mojave-shrub.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>4.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
     <rolling-friction>0.4</rolling-friction>
     <bumpiness>0.65</bumpiness>
   </material>
@@ -232,25 +230,38 @@
     <name>Marsh</name>
     <effect>Effects/forest</effect>
     <texture-set>
-      <texture>Terrain/pampas-grass.png</texture>
+      <texture>Terrain/pampas-shrub.png</texture>
       <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="12">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="12">Terrain/pampas-grass.png</texture>
+      <texture n="14">Terrain/grass_dry2a_darker.png</texture>
     </texture-set>
     <object-mask>Terrain/pantanal-mask.png</object-mask>
     <parameters>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
+      <rotation_flag>random</rotation_flag>
+      <rotation_scale>1000.0</rotation_scale>
       <grain_strength>0.5</grain_strength>
-      <hires_overlay_bias>-0.08</hires_overlay_bias>
-      <overlay_hardness>0.2</overlay_hardness>
       <transition_model>0.5</transition_model>
+      <use_overlay>1</use_overlay>
+      <overlay_scale>10.0</overlay_scale>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <overlay_bias>-0.05</overlay_bias>
+      <overlay_alpha>0.75</overlay_alpha>
+      <overlay_hardness>0.2</overlay_hardness>
+      <overlay_density>2.2</overlay_density>
+      <use_color_overlay>0</use_color_overlay>
+      <use_grain>1</use_grain>
+      <grain_layer_magnification>8.0</grain_layer_magnification>
     </parameters>
     <xsize>1000</xsize>
     <ysize>1000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>12000.0</wood-coverage>
+    <tree-texture>Trees/mediterranean-shrub.png</tree-texture>
     <tree-texture>Trees/savanna-trees.png</tree-texture>
     <tree-varieties>4</tree-varieties>
-    <tree-height-m>8.0</tree-height-m>
-    <tree-width-m>6.0</tree-width-m>
+    <tree-height-m>4.0</tree-height-m>
+    <tree-width-m>4.0</tree-width-m>
     <rolling-friction>0.4</rolling-friction>
     <bumpiness>0.65</bumpiness>
   </material>

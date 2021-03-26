@@ -147,15 +147,15 @@
     <effect>Effects/forest</effect>
     <texture-set>
       <texture>Terrain/airport_grass2.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="12">Terrain/grass-caribbean.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
     </texture-set>
     <parameters>
       <grain_strength>0.5</grain_strength>
       <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
     </parameters>
-    <xsize>2000</xsize>
-    <ysize>2000</ysize>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>14000.0</wood-coverage>
     <tree-texture>Trees/tropical-alt.png</tree-texture>
@@ -172,16 +172,27 @@
     <effect>Effects/forest</effect>
     <texture-set>
       <texture>Terrain/california-forest.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="12">Terrain/grass-caribbean.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
+      <texture n="15">Terrain/gravel_brown.png</texture>
     </texture-set>
     <object-mask>Terrain/pantanal-mask.png</object-mask>
     <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <use_grain>0</use_grain>
       <grain_strength>0.5</grain_strength>
       <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
     </parameters>
-    <xsize>1000</xsize>
-    <ysize>1000</ysize>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>8000.0</wood-coverage>
     <tree-texture>Trees/savanna-trees.png</tree-texture>
@@ -198,10 +209,13 @@
     <effect>Effects/forest</effect>
     <texture-set>
       <texture>Terrain/pampas-grass.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="12">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
     </texture-set>
     <parameters>
+      <transition_model>0.5</transition_model>
       <grain_strength>0.5</grain_strength>
       <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
       <transition_model>0.5</transition_model>
@@ -209,8 +223,8 @@
       <grain_layer_magnification>0.2</grain_layer_magnification>
       <grit_alpha>0.8</grit_alpha>
     </parameters>
-    <xsize>1000</xsize>
-    <ysize>1000</ysize>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>65000.0</wood-coverage>
     <tree-texture>Trees/mojave-shrub.png</tree-texture>
@@ -231,30 +245,32 @@
     <effect>Effects/forest</effect>
     <texture-set>
       <texture>Terrain/pampas-shrub.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="12">Terrain/pampas-grass.png</texture>
-      <texture n="14">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
     </texture-set>
     <object-mask>Terrain/pantanal-mask.png</object-mask>
     <parameters>
       <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
       <rotation_flag>random</rotation_flag>
       <rotation_scale>1000.0</rotation_scale>
-      <grain_strength>0.5</grain_strength>
+      <rock_strata>1</rock_strata>
+      <use_grain>1</use_grain>
+      <grain_strength>0.8</grain_strength>
+      <grain_layer_magnification>8.0</grain_layer_magnification>
       <transition_model>0.5</transition_model>
       <use_overlay>1</use_overlay>
       <overlay_scale>10.0</overlay_scale>
-      <overlay_layer_magnification>8.0</overlay_layer_magnification>
       <overlay_bias>-0.05</overlay_bias>
       <overlay_alpha>0.75</overlay_alpha>
       <overlay_hardness>0.2</overlay_hardness>
       <overlay_density>2.2</overlay_density>
       <use_color_overlay>0</use_color_overlay>
-      <use_grain>1</use_grain>
-      <grain_layer_magnification>8.0</grain_layer_magnification>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
     </parameters>
-    <xsize>1000</xsize>
-    <ysize>1000</ysize>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
     <light-coverage>4000000.0</light-coverage>
     <wood-coverage>12000.0</wood-coverage>
     <tree-texture>Trees/mediterranean-shrub.png</tree-texture>
@@ -301,9 +317,9 @@
     <name>NaturalCrop</name>
     <texture-set>
       <texture>Terrain/california-drycrop.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
-      <texture n="12">Terrain/drycrop2.png</texture>
-      <texture n="13">Terrain/gravel_gray.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/desert-airport2.png</texture>
     </texture-set>
     <parameters>
       <rotation_flag>random</rotation_flag>
@@ -329,7 +345,7 @@
     <name>Rice</name>
     <texture-set>
       <texture>Terrain/cerrado-crop.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
       <texture n="15">Terrain/sand_hires_ochre.png</texture>
     </texture-set>
     <parameters>
@@ -367,7 +383,7 @@
     <name>ComplexCrop</name>
     <texture-set>
       <texture>Terrain/cerrado-crop.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
       <texture n="15">Terrain/sand_hires_ochre.png</texture>
     </texture-set>
     <parameters>
@@ -415,7 +431,7 @@
     <name>IntermittentLake</name>
     <texture-set>
       <texture>Terrain/sand1.png</texture>
-      <texture n="12">Terrain/grass_dry3.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
       <texture n="15">Terrain/sand_hires_ochre.png</texture>
     </texture-set>
     <parameters>
@@ -438,7 +454,7 @@
     <name>Dump</name>
     <texture-set>
       <texture>Terrain/california-rock.png</texture>
-      <texture n="11">Terrain/gravel_gray.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
       <texture n="14">Terrain/grain_texture.png</texture>
     </texture-set>
     <parameters>

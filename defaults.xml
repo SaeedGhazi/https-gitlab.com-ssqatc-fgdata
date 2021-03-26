@@ -770,6 +770,22 @@ Started September 2000 by David Megginson, david@megginson.com
       <style n="1" include="gui/styles/anthrax.xml"/>
       <devel-widgets type="bool" userarchive="y">false</devel-widgets>
       <chat-box-location type="string" userarchive="y">default</chat-box-location>
+      <map userarchive="y">  <!-- ensure map options are saved -->
+        <draw-fixes type="bool" userarchive="y">false</draw-fixes>
+        <draw-navaids type="bool" userarchive="y">true</draw-navaids>
+        <draw-data type="bool" userarchive="y">false</draw-data>
+        <draw-heliports type="bool" userarchive="y">false</draw-heliports>
+        <draw-traffic type="bool" userarchive="y">false</draw-traffic>
+        <draw-flight-history type="bool" userarchive="y">false</draw-flight-history>
+
+        <magnetic-headings type="bool" userarchive="y">true</magnetic-headings>
+        <centre-on-aircraft type="bool" userarchive="y">true</centre-on-aircraft>
+        <aircraft-heading-up type="bool" userarchive="y">false</aircraft-heading-up>
+        <transparent type="bool" userarchive="y">false</transparent>
+        <key-pan type="bool" userarchive="y">false</key-pan>
+
+        <zoom userarchive="n" type="int">6</zoom> <!-- but not zoom, that could be confusing -->
+      </map>
     </gui>
     <mouse>
       <hide-cursor type="bool" userarchive="y">true</hide-cursor>

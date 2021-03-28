@@ -226,20 +226,7 @@
         <bin-name><use>render-bin/bin-name</use></bin-name>
       </render-bin>
 
-      <texture-unit>
-        <unit>0</unit>
-        <image><use>texture[0]/image</use></image>
-        <filter>nearest</filter>
-        <mag-filter>nearest</mag-filter>
-        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
-        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        <internal-format><use>texture[0]/internal-format</use></internal-format>
-        <mipmap-control>
-          <r>max</r>
-          <g>max</g>
-          <b>max</b>
-        </mipmap-control>
-      </texture-unit>
+      <!-- texture unit 0 direct from VPBBuilder.cxx -->
 
       <texture-unit>
         <unit>1</unit>
@@ -503,20 +490,7 @@
         <bin-name><use>render-bin/bin-name</use></bin-name>
       </render-bin>
 
-      <texture-unit>
-        <unit>0</unit>
-        <image><use>texture[0]/image</use></image>
-        <filter>nearest</filter>
-        <mag-filter>nearest</mag-filter>
-        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
-        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        <internal-format><use>texture[0]/internal-format</use></internal-format>
-        <mipmap-control>
-          <r>max</r>
-          <g>max</g>
-          <b>max</b>
-        </mipmap-control>
-      </texture-unit>
+      <!-- texture unit 0 direct from VPBBuilder.cxx -->
 
       <texture-unit>
         <unit>1</unit>
@@ -624,20 +598,7 @@
         <bin-name><use>render-bin/bin-name</use></bin-name>
       </render-bin>
 
-      <texture-unit>
-        <unit>0</unit>
-        <image><use>texture[0]/image</use></image>
-        <filter>nearest</filter>
-        <mag-filter>nearest</mag-filter>
-        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
-        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        <internal-format><use>texture[0]/internal-format</use></internal-format>
-        <mipmap-control>
-          <r>max</r>
-          <g>max</g>
-          <b>max</b>
-        </mipmap-control>
-      </texture-unit>
+      <!-- texture unit 0 direct from VPBBuilder.cxx -->
 
       <texture-unit>
         <unit>1</unit>

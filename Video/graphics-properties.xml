@@ -17,19 +17,71 @@ particular list.
 -->
 
 <PropertyList>
-    <scenery-reload-required>
-        <property></property>
-    </scenery-reload-required>
-
-    <restart-required>
-        <property></property>
-    </restart-required>
 
     <save-to-file>
-        <property>/sim/rendering/shadows/enabled</property>
-        <property>/sim/rendering/shaders/*</property>
-        <property>/sim/rendering/clouds3d-enable</property>
+        <!-- Rendering modes -->
         <property>/sim/rendering/shaders/skydome</property>
+        <property>/sim/rendering/shaders/use-shaders</property>
+        <!-- ALS shaders -->
+        <property>/sim/rendering/shaders/landmass</property>
+        <property>/sim/rendering/shaders/transition</property>
+        <property>/sim/rendering/shaders/model</property>
+        <property>/sim/rendering/shaders/water</property>
+        <property>/sim/rendering/shaders/clouds</property>
+        <property>/sim/rendering/shaders/wind-effects</property>
+        <property>/sim/rendering/shaders/vegetation-effects</property>
+        <!-- Shadows -->
+        <property>/sim/rendering/shadows/enabled</property>
+        <property>/sim/rendering/shadows/sun-atlas-size</property>
+        <!-- Lights -->
+        <property>/sim/rendering/dynamic-lighting/enabled</property>
+        <property>/sim/rendering/dynamic-lighting/limit-lights</property>
+        <property>/sim/rendering/dynamic-lighting/max-lights</property>
+        <!-- Scenery -->
+        <property>/sim/rendering/scenery-path-suffix[0]/enabled</property> <!-- Pylons -->
+        <property>/sim/rendering/scenery-path-suffix[1]/enabled</property> <!-- Roads -->
+        <property>/sim/rendering/scenery-path-suffix[2]/enabled</property> <!-- Buildings -->
+        <property>/sim/rendering/scenery-path-suffix[3]/enabled</property> <!-- Objects -->
+        <property>/sim/rendering/scenery-path-suffix[4]/enabled</property> <!-- Details -->
+        <property>/sim/rendering/scenery-path-suffix[5]/enabled</property> <!-- Trees -->
+        <property>/sim/rendering/osm-buildings</property>
+        <property>/sim/rendering/random-objects</property>
+        <property>/sim/rendering/random-buildings</property>
+        <property>/sim/rendering/random-vegetation</property>
+        <property>/sim/rendering/random-vegetation-shadows</property>
+        <property>/sim/rendering/vegetation-density</property>
+        <!-- Atmospheric Effects -->
         <property>/sim/rendering/particles</property>
+        <property>/sim/rendering/precipitation-enable</property>
+        <property>/sim/rendering/clouds3d-enable</property>
     </save-to-file>
+
+    <scenery-reload-required>
+        <property>/scenery/use-vpb</property>
+        <property>/scenery/elevation-mesh/lod-range-factor</property>
+        <property>/scenery/elevation-mesh/constraint-gap-m</property>
+        <property>/sim/rendering/photoscenery/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[0]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[1]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[2]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[3]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[4]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[5]/enabled</property>
+        <property>/sim/rendering/osm-buildings</property>
+        <property>/sim/rendering/random-objects</property>
+        <property>/sim/rendering/random-buildings</property>
+        <property>/sim/rendering/random-vegetation</property>
+        <property>/sim/rendering/random-vegetation-shadows</property>
+        <property>/sim/rendering/vegetation-density</property>
+    </scenery-reload-required>
+
+    <compositor-reload-required>
+        <property>/sim/rendering/shadows/enabled</property>
+        <property>/sim/rendering/shadows/sun-atlas-size</property>
+        <property>/sim/rendering/dynamic-lighting/enabled</property>
+    </compositor-reload-required>
+
+    <restart-required>
+    </restart-required>
+
 </PropertyList>

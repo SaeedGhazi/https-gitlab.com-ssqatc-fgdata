@@ -35,6 +35,7 @@
 	<toggle-glide-slope>Toggle Glide Slope Tunnel</toggle-glide-slope>
 	<replay>Instant Replay</replay>
 	<stereoscopic-options>Stereoscopic View Options</stereoscopic-options>
+    <als-filter-effects>ALS Filter Effects</als-filter-effects>
 
 	<!-- Location menu -->
 	<location>Location</location>

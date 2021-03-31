@@ -391,8 +391,7 @@
 	<technique n="11">
 		<predicate>
 			<and>
-				<property>/sim/rendering/shaders/quality-level</property>
-				<property>/sim/rendering/shaders/generic</property>
+				<property>/sim/rendering/shaders/use-shaders</property>
 				<or>
 					<less-equal>
 						<value type="float">2.0</value>

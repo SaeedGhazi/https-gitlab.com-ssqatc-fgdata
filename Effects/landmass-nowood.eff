@@ -2,7 +2,4 @@
 <PropertyList>
   <name>Effects/landmass-nowood</name>
   <inherits-from>Effects/landmass</inherits-from>
-  <parameters>
-    <canopy-height type="float">0.0</canopy-height>
-  </parameters>
 </PropertyList>

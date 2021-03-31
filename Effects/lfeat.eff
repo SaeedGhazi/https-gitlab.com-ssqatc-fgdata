@@ -93,12 +93,4 @@
 	  </polygon-offset>
 	</pass>
   </technique>
-  <technique n="5">
-    <pass n="0">
-	  <polygon-offset>
-	    <factor>-2.0</factor>
-	    <units>-5.0</units>
-	  </polygon-offset>
-    </pass>
-  </technique>
 </PropertyList>

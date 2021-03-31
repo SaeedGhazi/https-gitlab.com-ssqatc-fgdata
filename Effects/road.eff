@@ -53,7 +53,6 @@
 	   <predicate>
 		   <and>
 			   <property>/sim/rendering/shaders/skydome</property>
-			   <property>/sim/rendering/shaders/quality-level</property>
 			   <property>/sim/rendering/shaders/model</property>
 			   <or>
 				   <less-equal>

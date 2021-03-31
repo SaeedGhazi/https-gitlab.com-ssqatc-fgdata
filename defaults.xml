@@ -65,22 +65,14 @@ Started September 2000 by David Megginson, david@megginson.com
       <realism type="int">5</realism>
       <filtering type="int">8</filtering>
       <shaders>
-        <custom-settings type="bool" userarchive="y">false</custom-settings>
         <clouds type="float" userarchive="y">0.0</clouds>
-        <generic type="float" userarchive="y">1.0</generic>
         <landmass type="float" userarchive="y">1.0</landmass>
         <model type="float" userarchive="y">1.0</model>
-        <contrails type="float" userarchive="y">1.0</contrails>
-        <crop type="float" userarchive="y">1.0</crop>
         <skydome type="bool" userarchive="y">true</skydome>
         <transition type="float" userarchive="y">1.0</transition>
-        <urban type="float" userarchive="y">1.0</urban>
         <water type="float" userarchive="y">1.0</water>
         <wind-effects type="float" userarchive="y">0.0</wind-effects>
         <vegetation-effects type="float" userarchive="y">0.0</vegetation-effects>
-        <forest type="float" userarchive="y">0.0</forest>
-        <lights type="float" userarchive="y">1.0</lights>
-        <quality-level-internal type="float" userarchive="y">1.0</quality-level-internal>
       </shaders>
       <mie type="float" userarchive="y">0.003</mie>
       <rayleigh type="float" userarchive="y">0.0003</rayleigh>

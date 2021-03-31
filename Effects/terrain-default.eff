@@ -1468,10 +1468,7 @@
       <and>
         <or>
           <property>/sim/rendering/photoscenery/enabled</property>
-          <and>
-            <property>/sim/rendering/shaders/quality-level</property>
-            <property>/sim/rendering/shaders/generic</property>
-          </and>
+          <property>/sim/rendering/shaders/use-shaders</property>
         </or>
         <or>
           <less-equal>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-  <id>high-quality</id>
-  <name>High</name>
-  <description>High quality settings with the most demanding features disabled.</description>
+  <id>ultra-quality</id>
+  <name>Ultra</name>
+  <description>Maximum settings for very powerful systems.</description>
 
   <settings>
     <sim>
@@ -17,11 +17,11 @@
           <water type="float">5</water>
           <clouds type="float">1</clouds>
           <wind-effects type="float">2</wind-effects>
-          <vegetation-effects type="float">0</vegetation-effects>
+          <vegetation-effects type="float">1</vegetation-effects>
         </shaders>
         <shadows>
           <enabled type="bool">true</enabled>
-          <sun-atlas-size type="int">4096</sun-atlas-size>
+          <sun-atlas-size type="int">8192</sun-atlas-size>
         </shadows>
         <dynamic-lighting>
           <enabled type="bool">true</enabled>
@@ -39,7 +39,7 @@
         <random-buildings type="bool">false</random-buildings>
         <random-vegetation type="bool">true</random-vegetation>
         <random-vegetation-shadows type="bool">true</random-vegetation-shadows>
-        <vegetation-density type="float">2.0</vegetation-density>
+        <vegetation-density type="float">4.0</vegetation-density>
         <particles type="bool">true</particles>
         <precipitation-enable type="bool">true</precipitation-enable>
         <clouds3d-enable type="bool">true</clouds3d-enable>

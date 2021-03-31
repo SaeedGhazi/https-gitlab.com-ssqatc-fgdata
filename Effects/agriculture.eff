@@ -166,10 +166,6 @@
             <value type="float">6.0</value>
             <float-property>/sim/rendering/shaders/transition</float-property>
           </less-equal>
-          <less-equal>
-            <value type="float">1.0</value>
-            <float-property>/sim/rendering/shaders/crop</float-property>
-          </less-equal>
         </and>
         <or>
           <less-equal>

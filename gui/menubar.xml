@@ -193,6 +193,17 @@
 		</item>
 
 		<item>
+            <enabled>
+                <property>/sim/rendering/shaders/skydome</property>
+            </enabled>
+			<name>als-filter-effects</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>als-filters</dialog-name>
+			</binding>
+		</item>
+
+		<item>
             <enable>
                 <property>/sim/rendering/composite-viewer-enabled</property>
             </enable>

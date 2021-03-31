@@ -407,17 +407,6 @@
 		</button>
 
 		<button>
-			<legend>Back</legend>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>rendering</dialog-name>
-			</binding>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-
-		<button>
 			<legend>Close</legend>
 			<default>true</default>
 			<key>Esc</key>

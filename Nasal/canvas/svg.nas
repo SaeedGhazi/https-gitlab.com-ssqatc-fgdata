@@ -262,9 +262,9 @@ var parsesvg = func(group, path, options = nil)
           # SVG: (rx ry x-axis-rotation large-arc-flag sweep-flag x y)+
           # OpenVG: rh,rv,rot,x0,y0
           if( args[i + 3] )
-            var cmd_vg = args[i + 4] ? Path.VG_LCCWARC_TO : Path.VG_LCWARC_TO;
+            var cmd_vg = args[i + 4] ? Path.VG_LCWARC_TO : Path.VG_LCCWARC_TO;
           else
-            var cmd_vg = args[i + 4] ? Path.VG_SCCWARC_TO : Path.VG_SCWARC_TO;
+            var cmd_vg = args[i + 4] ? Path.VG_SCWARC_TO : Path.VG_SCCWARC_TO;
           append(cmds, rel ? cmd_vg + 1: cmd_vg);
           append(coords, args[i],
                          args[i + 1],

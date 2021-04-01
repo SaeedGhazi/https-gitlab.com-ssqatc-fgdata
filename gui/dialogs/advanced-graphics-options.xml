@@ -3,7 +3,6 @@
 <PropertyList>
   <name>advanced-graphics-options</name>
   <modal>false</modal>
-  <resizable>true</resizable>
   <layout>vbox</layout>
   <default-padding>3</default-padding>
 

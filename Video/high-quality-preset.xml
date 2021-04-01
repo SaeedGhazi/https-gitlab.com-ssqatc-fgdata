@@ -32,7 +32,7 @@
         <scenery-path-suffix n="1"><enabled type="bool">true</enabled></scenery-path-suffix>
         <scenery-path-suffix n="2"><enabled type="bool">true</enabled></scenery-path-suffix>
         <scenery-path-suffix n="3"><enabled type="bool">true</enabled></scenery-path-suffix>
-        <scenery-path-suffix n="4"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="4"><enabled type="bool">false</enabled></scenery-path-suffix>
         <scenery-path-suffix n="5"><enabled type="bool">true</enabled></scenery-path-suffix>
         <osm-buildings type="bool">true</osm-buildings>
         <random-objects type="bool">true</random-objects>

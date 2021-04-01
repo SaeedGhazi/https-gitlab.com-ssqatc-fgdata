@@ -33,7 +33,16 @@
 		<settings-migration-title>Settings migrated</settings-migration-title>
 		<settings-migration-text>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</settings-migration-text>
 
+
+<!--
+	Temporary feebdack text for initial error-reporting
+-->
+		<error-next-steps>This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</error-next-steps>
+
+<!--
+		Use this version once the code is better tested
 		<error-next-steps>FlightGear is developed and tested by volunteers around the world. The information below contains details on the problem: you can use it to start investigating the problem yourself, or ask for help via our forum or bug tracker. Please include all the information below in any error report.</error-next-steps>
+-->
 
 		<!-- error groupings : top-level messages shown to the user-->
 		<error-category-aircraft>This aircraft (%VALUE%) contains errors. This may include visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</error-category-aircraft>

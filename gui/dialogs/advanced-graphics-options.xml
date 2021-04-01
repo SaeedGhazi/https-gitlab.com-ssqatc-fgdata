@@ -92,13 +92,13 @@
               <value>0</value>
             </binding>
           </radio>
-          
+
           <empty>
             <row>0</row>
             <col>1</col>
             <stretch>true</stretch>
           </empty>
-          
+
           <checkbox>
             <row>0</row>
             <col>2</col>
@@ -118,7 +118,7 @@
             </binding>
           </checkbox>
         </group>
-        
+
       </group>
 
       <textbox>
@@ -162,7 +162,7 @@
             <value>1</value>
           </binding>
         </radio>
-        
+
       </group>
 
       <textbox>
@@ -178,7 +178,7 @@
         <top-line>0</top-line>
         <property>/sim/gui/dialogs/advanced/als-description</property>
       </textbox>
-      
+
       <group>
         <layout>hbox</layout>
         <text>
@@ -356,7 +356,7 @@
             </script>
           </binding>
         </combo>
-        
+
         <text>
           <enable>
             <property>/sim/rendering/shaders/skydome</property>
@@ -447,12 +447,12 @@
         </color>
         <label>These settings can only be changed when using ALS.</label>
       </text>
-      
+
       <group>
         <layout>vbox</layout>
         <stretch>1</stretch>
       </group>
-      
+
     </group>
 
     <!-- only for a gap -->
@@ -465,7 +465,7 @@
     </group>
 
     <vrule/>
-    
+
     <!-- only for a gap -->
     <group>
       <layout>vbox</layout>
@@ -556,10 +556,23 @@
         <halign>left</halign>
         <label>Limit the number of lights being displayed</label>
         <name>limit-lights</name>
-        <property>/sim/rendering/dynamic-lighting/limit-lights</property>
+        <property>/sim/gui/dialogs/advanced/limit-lights</property>
         <binding>
           <command>dialog-apply</command>
           <object-name>limit-lights</object-name>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>
+            var limit_lights = getprop("/sim/gui/dialogs/advanced/limit-lights");
+            if (limit_lights) {
+              setprop("/sim/rendering/dynamic-lighting/max-pointlights", 8);
+              setprop("/sim/rendering/dynamic-lighting/max-spotlights", 8);
+            } else {
+              setprop("/sim/rendering/dynamic-lighting/max-pointlights", 1024);
+              setprop("/sim/rendering/dynamic-lighting/max-spotlights", 1024);
+            }
+          </script>
         </binding>
         <enable>
           <property>/sim/rendering/dynamic-lighting/enabled</property>
@@ -570,11 +583,11 @@
         <layout>hbox</layout>
         <halign>right</halign>
         <text>
-          <label>Maximum number of lights</label>
+          <label>Maximum number of point lights</label>
           <enable>
             <and>
               <property>/sim/rendering/dynamic-lighting/enabled</property>
-              <property>/sim/rendering/dynamic-lighting/limit-lights</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
             </and>
           </enable>
         </text>
@@ -582,13 +595,14 @@
           <enable>
             <and>
               <property>/sim/rendering/dynamic-lighting/enabled</property>
-              <property>/sim/rendering/dynamic-lighting/limit-lights</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
             </and>
           </enable>
           <name>max-lights</name>
           <min>1</min>
           <max>16</max>
-          <property>/sim/rendering/dynamic-lighting/max-lights</property>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
           <binding>
             <command>dialog-apply</command>
             <object-name>max-lights</object-name>
@@ -598,13 +612,56 @@
           <enable>
             <and>
               <property>/sim/rendering/dynamic-lighting/enabled</property>
-              <property>/sim/rendering/dynamic-lighting/limit-lights</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
             </and>
           </enable>
           <label>12345678</label>
           <format>%.0f</format>
           <live>true</live>
-          <property>/sim/rendering/dynamic-lighting/max-lights</property>
+          <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+        </text>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>right</halign>
+        <text>
+          <label>Maximum number of spot lights</label>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+        </text>
+        <slider>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+          <name>max-lights</name>
+          <min>1</min>
+          <max>16</max>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>max-lights</object-name>
+          </binding>
+        </slider>
+        <text>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
         </text>
       </group>
 
@@ -963,7 +1020,7 @@
         <layout>vbox</layout>
         <stretch>1</stretch>
       </group>
-      
+
       <group>
         <layout>hbox</layout>
         <text>
@@ -1075,13 +1132,13 @@
           <property>/sim/rendering/clouds3d-vis-range</property>
         </text>
       </group>
-      
+
       <empty>
         <stretch>1</stretch>
       </empty>
 
     </group>
-    
+
     <!-- only for a gap -->
     <group>
       <layout>vbox</layout>
@@ -1094,7 +1151,7 @@
   </group>
 
   <hrule/>
-  
+
   <group>
     <empty>
       <stretch>true</stretch>
@@ -1115,6 +1172,17 @@
       <legend>Close</legend>
       <default>true</default>
       <key>Esc</key>
+      <binding>
+        <command>nasal</command>
+        <script>
+          if (getprop("/sim/rendering/scenery-reload-required")) {
+            fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
+          }
+          if (getprop("/sim/rendering/compositor-reload-required")) {
+            fgcommand("reload-compositor");
+          }
+        </script>
+      </binding>
       <binding>
         <command>dialog-close</command>
       </binding>
@@ -1213,6 +1281,10 @@
       } else {
           setprop("/sim/gui/dialogs/advanced/shadows", "Disabled");
       }
+
+      # Lights
+      setprop("/sim/gui/dialogs/advanced/limit-lights",
+        (getprop("/sim/rendering/dynamic-lighting/max-pointlights") < 1024) or (getprop("/sim/rendering/dynamic-lighting/max-spotlights") < 1024));
 
 
       var getScenerySuffix = func(layer) {
@@ -1319,7 +1391,7 @@
           setprop("/sim/gui/dialogs/rendering/placed-objects", "Disabled");
       }
       ]]>
-</open>
-</nasal>
+    </open>
+  </nasal>
 
 </PropertyList>

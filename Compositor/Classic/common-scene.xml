@@ -10,6 +10,12 @@
     <tile-size>128</tile-size>
     <depth-slices>1</depth-slices>
     <num-threads>1</num-threads>
+    <max-pointlights>
+      <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+    </max-pointlights>
+    <max-spotlights>
+      <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+    </max-spotlights>
   </clustered-shading>
   <binding>
     <buffer>sun-shadowmap-atlas</buffer>

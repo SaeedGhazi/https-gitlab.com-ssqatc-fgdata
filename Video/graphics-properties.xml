@@ -35,8 +35,8 @@ particular list.
         <property>/sim/rendering/shadows/sun-atlas-size</property>
         <!-- Lights -->
         <property>/sim/rendering/dynamic-lighting/enabled</property>
-        <property>/sim/rendering/dynamic-lighting/limit-lights</property>
-        <property>/sim/rendering/dynamic-lighting/max-lights</property>
+        <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+        <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
         <!-- Scenery -->
         <property>/sim/rendering/scenery-path-suffix[0]/enabled</property> <!-- Pylons -->
         <property>/sim/rendering/scenery-path-suffix[1]/enabled</property> <!-- Roads -->
@@ -79,6 +79,8 @@ particular list.
         <property>/sim/rendering/shadows/enabled</property>
         <property>/sim/rendering/shadows/sun-atlas-size</property>
         <property>/sim/rendering/dynamic-lighting/enabled</property>
+        <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+        <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
     </compositor-reload-required>
 
     <restart-required>

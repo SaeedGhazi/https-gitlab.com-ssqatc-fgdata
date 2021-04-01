@@ -58,6 +58,11 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y">false</enabled>
         <sun-atlas-size type="int" userarchive="y">2048</sun-atlas-size>
       </shadows>
+      <dynamic-lighting>
+        <enabled type="bool" userarchive="y">false</enabled>
+        <max-pointlights type="int" userarchive="y">1024</max-pointlights>
+        <max-spotlights type="int" userarchive="y">1024</max-spotlights>
+      </dynamic-lighting>
       <photoscenery>
         <enabled type="bool" userarchive="y">false</enabled>
       </photoscenery>

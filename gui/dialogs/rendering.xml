@@ -498,6 +498,10 @@
 			    'clear-destination':1,
 			    }));
 
+			if (getprop('/sim/rendering/preset-active')) {
+				setprop('/sim/gui/dialogs/rendering/preset', getprop('/sim/rendering/preset-name'));
+			}
+
 			# WS 3.0
 			var osg_version = getprop("/sim/version/openscenegraph");
 			if ((osg_version != nil) and (find("3.6", osg_version) == 0 or find("3.7", osg_version) == 0)) {

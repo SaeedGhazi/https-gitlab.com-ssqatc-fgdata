@@ -68,8 +68,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <photoscenery>
         <enabled type="bool" userarchive="y">false</enabled>
       </photoscenery>
-      <debug type="bool">false</debug>
-      <realism type="int">5</realism>
       <filtering type="int">8</filtering>
       <shaders>
         <clouds type="float" userarchive="y">0.0</clouds>
@@ -85,16 +83,17 @@ Started September 2000 by David Megginson, david@megginson.com
       <rayleigh type="float" userarchive="y">0.0003</rayleigh>
       <dome-density type="float" userarchive="y">0.5</dome-density>
       <!--
-			<multithreading-mode>AutomaticSelection</multithreading-mode>
-     Uncomment the above element to select OSG multi-threading mode.
-     This may improve performance on multi-core, multi-CPU
-     and/or multi-GPU systems. The recommended setting is AutomaticSelection.
-     The alternatives are
-       AutomaticSelection
-       DrawThreadPerContext
-       CullDrawThreadPerContext
-       CullThreadPerCameraDrawThreadPerContext
-   -->
+          <multithreading-mode>AutomaticSelection</multithreading-mode>
+
+          Uncomment the above element to select OSG multi-threading mode.
+          This may improve performance on multi-core, multi-CPU
+          and/or multi-GPU systems. The recommended setting is AutomaticSelection.
+          The alternatives are
+               AutomaticSelection
+               DrawThreadPerContext
+               CullDrawThreadPerContext
+               CullThreadPerCameraDrawThreadPerContext
+      -->
       <plod-minimum-expiry-time-secs type="double" userarchive="y">180.0</plod-minimum-expiry-time-secs>
       <static-lod>
         <!--
@@ -150,7 +149,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <horizon-effect type="bool" userarchive="y">false</horizon-effect>
       <point-sprites type="bool" userarchive="y">true</point-sprites>
       <triangle-directional-lights type="bool" userarchive="y">true</triangle-directional-lights>
-      <enhanced-lighting type="bool" userarchive="y">false</enhanced-lighting>
       <distance-attenuation type="bool" userarchive="y">false</distance-attenuation>
       <particles type="bool" userarchive="y">true</particles>
       <precipitation-gui-enable type="bool" userarchive="y">false</precipitation-gui-enable>
@@ -180,9 +178,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <cone-base-radius type="float">15.0</cone-base-radius>
         <cone-height type="float">30.0</cone-height>
       </precipitation>
-      <lightning-enable type="bool" userarchive="y">false</lightning-enable>
       <specular-highlight type="bool" userarchive="y">false</specular-highlight>
-      <bump-mapping type="bool" userarchive="y">false</bump-mapping>
       <clouds3d-enable type="bool" userarchive="y">true</clouds3d-enable>
       <clouds3d-vis-range type="float" userarchive="y">10000.0</clouds3d-vis-range>
       <clouds3d-detail-range type="float" userarchive="y">10000.0</clouds3d-detail-range>
@@ -196,8 +192,6 @@ Started September 2000 by David Megginson, david@megginson.com
         <aircraft type="bool">true</aircraft>
         <clouds type="bool">true</clouds>
       </draw-mask>
-      <shader-experimental type="bool" userarchive="y">false</shader-experimental>
-      <shader-effects type="bool" userarchive="y">true</shader-effects>
       <fps-display type="bool" userarchive="y">false</fps-display>
       <frame-latency-display type="bool" userarchive="y">false</frame-latency-display>
       <on-screen-statistics type="int">0</on-screen-statistics>

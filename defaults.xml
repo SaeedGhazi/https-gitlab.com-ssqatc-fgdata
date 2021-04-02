@@ -54,6 +54,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <rendering>
       <initialized type="bool">false</initialized>
       <materials-file>Materials/regions/materials.xml</materials-file>
+      <multi-sample-buffers type="bool" userarchive="y">false</multi-sample-buffers>
+      <multi-samples type="int" userarchive="y">0</multi-samples>
       <shadows>
         <enabled type="bool" userarchive="y">false</enabled>
         <sun-atlas-size type="int" userarchive="y">2048</sun-atlas-size>

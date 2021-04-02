@@ -54,12 +54,26 @@
       <group>
         <layout>hbox</layout>
         <text>
-          <label>Rendering Mode</label>
+          <label>General</label>
           <halign>left</halign>
         </text>
         <hrule>
           <stretch>true</stretch>
         </hrule>
+      </group>
+
+      <text>
+        <halign>left</halign>
+        <label>Select Rendering Mode</label>
+      </text>
+
+      <!-- only for a gap -->
+      <group>
+        <layout>vbox</layout>
+        <default-padding>1</default-padding>
+        <text>
+          <label> </label>
+        </text>
       </group>
 
       <group>
@@ -125,7 +139,7 @@
         <halign>fill</halign>
         <stretch>true</stretch>
         <pref-width>400</pref-width>
-        <pref-height>80</pref-height>
+        <pref-height>90</pref-height>
         <slider>15</slider>
         <editable>false</editable>
         <wrap>true</wrap>
@@ -169,7 +183,7 @@
         <halign>fill</halign>
         <stretch>true</stretch>
         <pref-width>400</pref-width>
-        <pref-height>100</pref-height>
+        <pref-height>110</pref-height>
         <slider>15</slider>
         <editable>false</editable>
         <wrap>true</wrap>
@@ -178,19 +192,22 @@
         <property>/sim/gui/dialogs/advanced/als-description</property>
       </textbox>
 
-      <group>
-        <layout>hbox</layout>
-        <text>
-          <enable>
+      <hrule/>
+
+      <text>
+        <visible>
+          <not>
             <property>/sim/rendering/shaders/skydome</property>
-          </enable>
-          <label>ALS Shader Settings</label>
-          <halign>left</halign>
-        </text>
-        <hrule>
-          <stretch>true</stretch>
-        </hrule>
-      </group>
+          </not>
+        </visible>
+        <halign>left</halign>
+        <color>
+          <red>1.0</red>
+          <green>0.6</green>
+          <blue>0.6</blue>
+        </color>
+        <label>Some of these settings can only be changed when using ALS.</label>
+      </text>
 
       <group>
         <layout>table</layout>
@@ -430,22 +447,48 @@
           </binding>
         </combo>
 
-      </group>
+        <text>
+          <row>7</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Anti-aliasing</label>
+        </text>
+        <combo>
+          <row>7</row>
+          <col>1</col>
+          <name>anti-aliasing</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/anti-aliasing</property>
+          <value>Disabled</value>
+          <value>MSAA 2x</value>
+          <value>MSAA 4x</value>
+          <value>MSAA 8x</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>anti-aliasing</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/anti-aliasing");
+              if (val == "MSAA 2x") {
+                setprop("/sim/rendering/multi-sample-buffers", 1);
+                setprop("/sim/rendering/multi-samples", 2);
+              } else if (val == "MSAA 4x") {
+                setprop("/sim/rendering/multi-sample-buffers", 1);
+                setprop("/sim/rendering/multi-samples", 4);
+              } else if (val == "MSAA 8x") {
+                setprop("/sim/rendering/multi-sample-buffers", 1);
+                setprop("/sim/rendering/multi-samples", 8);
+              } else {
+                setprop("/sim/rendering/multi-sample-buffers", 0);
+                setprop("/sim/rendering/multi-samples", 0);
+              }
+            </script>
+          </binding>
+        </combo>
 
-      <text>
-        <visible>
-          <not>
-            <property>/sim/rendering/shaders/skydome</property>
-          </not>
-        </visible>
-        <halign>left</halign>
-        <color>
-          <red>1.0</red>
-          <green>0.6</green>
-          <blue>0.6</blue>
-        </color>
-        <label>These settings can only be changed when using ALS.</label>
-      </text>
+      </group>
 
       <group>
         <layout>vbox</layout>
@@ -1206,7 +1249,7 @@
               "rendering of large distances. It is recommended to run this " ~
               "configuration on relatively powerful hardware.");
 
-      # Render Mode
+      # General
       if (getprop("/sim/rendering/shaders/skydome")) {
           setprop("/sim/gui/dialogs/advanced/mode/low-spec-mode", 0);
           setprop("/sim/gui/dialogs/advanced/mode/als-mode", 1);
@@ -1214,8 +1257,6 @@
           setprop("/sim/gui/dialogs/advanced/mode/low-spec-mode", 1);
           setprop("/sim/gui/dialogs/advanced/mode/als-mode", 0);
       }
-
-      # ALS Shader Settings
 
       var landmass_val = getprop("/sim/rendering/shaders/landmass");
       if (landmass_val <= 3) {
@@ -1263,6 +1304,17 @@
           setprop("/sim/gui/dialogs/advanced/overlay", "Disabled");
       } else {
           setprop("/sim/gui/dialogs/advanced/overlay", "Enabled");
+      }
+
+      var anti_aliasing_val = getprop("/sim/rendering/multi-samples");
+      if (anti_aliasing_val == 2) {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "MSAA 2x");
+      } else if (anti_aliasing_val == 4) {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "MSAA 4x");
+      } else if (anti_aliasing_val == 8) {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "MSAA 8x");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "Disabled");
       }
 
       # Shadows

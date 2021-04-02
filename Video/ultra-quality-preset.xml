@@ -20,6 +20,8 @@
           <wind-effects type="float">2</wind-effects>
           <vegetation-effects type="float">1</vegetation-effects>
         </shaders>
+        <multi-sample-buffers type="bool">true</multi-sample-buffers>
+        <multi-samples type="int">8</multi-samples>
         <shadows>
           <enabled type="bool">true</enabled>
           <sun-atlas-size type="int">8192</sun-atlas-size>

@@ -4,6 +4,7 @@
   <id>minimal-quality</id>
   <name>Minimal</name>
   <description>Minimal settings for low-power laptops or very old systems.</description>
+  <order-num>0</order-num>
 
   <settings>
     <sim>

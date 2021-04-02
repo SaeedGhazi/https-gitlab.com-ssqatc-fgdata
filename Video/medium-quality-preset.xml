@@ -4,6 +4,7 @@
   <id>medium-quality</id>
   <name>Medium</name>
   <description>A nice tradeoff between performance and eye candy.</description>
+  <order-num>2</order-num>
 
   <settings>
     <sim>

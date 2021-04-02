@@ -4,6 +4,7 @@
   <id>high-quality</id>
   <name>High</name>
   <description>High quality settings with the most demanding features disabled.</description>
+  <order-num>3</order-num>
 
   <settings>
     <sim>

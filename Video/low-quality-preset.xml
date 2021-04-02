@@ -4,6 +4,7 @@
   <id>low-quality</id>
   <name>Low</name>
   <description>Prioritize performance over eye candy.</description>
+  <order-num>1</order-num>
 
   <settings>
     <sim>

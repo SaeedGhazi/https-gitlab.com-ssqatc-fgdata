@@ -779,6 +779,52 @@
                 <live>true</live>
                 <property>/sim/rendering/static-lod/vegetation-lod-level</property>
             </text>
+        
+            <text>
+                <row>3</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Area features minimum LOD</label>
+            </text>
+            <slider>
+                <row>3</row>
+                <col>1</col>
+                <name>area-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/area-features-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>3</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/area-features-lod-level</property>
+            </text>        
         </group>
     </group>
 
@@ -802,6 +848,12 @@
                 <col>1</col>
                 <colspan>2</colspan>
                 <label>Minimum Line Feature Width (m)</label>
+            </text>
+            <text>
+                <row>0</row>
+                <col>3</col>
+                <colspan>2</colspan>
+                <label>Minimum Area Feature Area (m^2)</label>
             </text>
             <text>
                 <row>1</row>
@@ -841,6 +893,40 @@
                 <format>%d</format>
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[0]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>1</row>
+                <col>3</col>
+                <name>area-lod0</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[0]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod0</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>1</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[0]/area-features-min-width</property>
             </text>        
 
             <text>
@@ -882,7 +968,41 @@
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[1]/line-features-min-width</property>
             </text>        
-            
+            <slider>
+                <row>2</row>
+                <col>3</col>
+                <name>area-lod1</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[1]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod1</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>2</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[1]/area-features-min-width</property>
+            </text>        
+
             <text>
                 <row>3</row>
                 <col>0</col>
@@ -922,6 +1042,41 @@
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[2]/line-features-min-width</property>
             </text>        
+            <slider>
+                <row>3</row>
+                <col>3</col>
+                <name>area-lod2</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[2]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod2</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>3</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[2]/area-features-min-width</property>
+            </text>        
+
 
             <text>
                 <row>4</row>
@@ -961,6 +1116,40 @@
                 <format>%d</format>
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[3]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>4</row>
+                <col>3</col>
+                <name>area-lod3</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[3]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod2</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>4</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[3]/area-features-min-width</property>
             </text>        
 
             <text>
@@ -1002,6 +1191,40 @@
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[4]/line-features-min-width</property>
             </text>        
+            <slider>
+                <row>5</row>
+                <col>3</col>
+                <name>area-lod4</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[4]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod4</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>5</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[4]/area-features-min-width</property>
+            </text>        
 
             <text>
                 <row>6</row>
@@ -1042,6 +1265,40 @@
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[5]/line-features-min-width</property>
             </text>                
+            <slider>
+                <row>6</row>
+                <col>3</col>
+                <name>area-lod5</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[5]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod5</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>6</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[5]/area-features-min-width</property>
+            </text>        
 
             <text>
                 <row>7</row>
@@ -1081,6 +1338,40 @@
                 <format>%d</format>
                 <live>true</live>
                 <property>/sim/rendering/static-lod/lod-level[6]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>7</row>
+                <col>3</col>
+                <name>area-lod6</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[6]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod6</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>7</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[6]/area-features-min-width</property>
             </text>        
         </group>
 

@@ -78,6 +78,9 @@ Started September 2000 by David Megginson, david@megginson.com
         <water type="float" userarchive="y">1.0</water>
         <wind-effects type="float" userarchive="y">0.0</wind-effects>
         <vegetation-effects type="float" userarchive="y">0.0</vegetation-effects>
+        <!-- Legacy property. Kept for backwards compatibility with aircraft
+             with custom shaders -->
+        <quality-level type="float" userarchive="y">5.0</quality-level>
       </shaders>
       <mie type="float" userarchive="y">0.003</mie>
       <rayleigh type="float" userarchive="y">0.0003</rayleigh>

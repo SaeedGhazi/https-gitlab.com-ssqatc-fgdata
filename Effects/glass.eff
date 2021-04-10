@@ -514,7 +514,15 @@
 		</pass>
 	</technique>
 
-
+    <!-- Don't use the usual scheme because model-combined requires technique
+         number 7. We need to place this technique before it. -->
+    <technique n="1">
+      <scheme>hdr-geometry</scheme>
+    </technique>
+    <!-- TODO: Actually implement a glass shader instead of just hiding it -->
+    <technique n="2">
+      <scheme>hdr-forward</scheme>
+    </technique>
 </PropertyList>
 
 

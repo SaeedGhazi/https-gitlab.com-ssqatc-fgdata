@@ -297,4 +297,35 @@
     </pass>
   </technique>
 
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+  </technique>
+  <technique n="139">
+    <scheme>hdr-envmap</scheme>
+    <pass>
+      <cull-face>back</cull-face>
+      <depth>
+        <function>lequal</function>
+        <near>0.0</near>
+        <far>1.0</far>
+        <write-mask>true</write-mask>
+      </depth>
+      <program>
+        <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmosphere-include.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>sun_disk</name>
+        <type>bool</type>
+        <value type="bool">false</value>
+      </uniform>
+      <uniform>
+        <name>num_samples</name>
+        <type>int</type>
+        <value type="int">16</value>
+      </uniform>
+    </pass>
+  </technique>
+
 </PropertyList>

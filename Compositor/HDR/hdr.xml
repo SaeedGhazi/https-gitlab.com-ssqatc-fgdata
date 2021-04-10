@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <name>HDR</name>
+  <!-- XXX: These won't be necessary once we go core profile only -->
+  <use-osg-uniforms>true</use-osg-uniforms>
+  <use-vertex-attribute-aliasing>true</use-vertex-attribute-aliasing>
+
+  <!--
+      G-Buffer
+      .........................................................
+      : Buffer :    Red    :   Green   :   Blue   :   Alpha   :
+      :........:...........:...........:..........:...........:
+      : RT0    : albedo.r  : albedo.g  : albedo.b : AO/Cavity :
+      : RT1    :       normal.x        :      normal.y        :
+      : RT2    : Metalness : Roughness :      Clearcoat       :
+      : RT3    :                     Depth                    :
+      :........:...........:...........:..........:...........:
+  -->
+  <buffer>
+    <name>gbuffer0</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgba8</format>
+  </buffer>
+  <buffer>
+    <name>gbuffer1</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rg16f</format>
+  </buffer>
+  <buffer>
+    <name>gbuffer2</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgba8</format>
+  </buffer>
+  <buffer>
+    <name>depth</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>depth32f</format>
+  </buffer>
+
+  <!-- HDR lighting result -->
+  <buffer>
+    <name>hdr-result</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgb16f</format>
+  </buffer>
+
+  <!-- HDR with rendered atmosphere -->
+  <buffer>
+    <name>hdr-with-atmosphere</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgb16f</format>
+  </buffer>
+
+  <!-- Final LDR buffer -->
+  <buffer>
+    <name>final</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgb8</format>
+  </buffer>
+
+  <!-- Environment cubemap -->
+  <buffer>
+    <name>envmap</name>
+    <type>cubemap</type>
+    <width>128</width>
+    <height>128</height>
+    <format>r11g11b10f</format>
+    <min-filter>linear-mipmap-linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+    <mipmap-levels>5</mipmap-levels>
+  </buffer>
+
+  <!-- Shadow map atlas -->
+  <buffer>
+    <name>sun-shadowmap-atlas</name>
+    <type>2d</type>
+    <width>8192</width>
+    <height>8192</height>
+    <format>depth16</format>
+    <wrap-s>clamp-to-border</wrap-s>
+    <wrap-t>clamp-to-border</wrap-t>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <border-color type="vec4d">1.0 1.0 1.0 1.0</border-color>
+    <shadow-comparison>true</shadow-comparison>
+  </buffer>
+
+  <!-- Average luminance -->
+  <buffer>
+    <name>luminance</name>
+    <type>2d</type>
+    <width>1024</width>
+    <height>1024</height>
+    <format>r16f</format>
+    <min-filter>linear-mipmap-nearest</min-filter>
+    <mag-filter>nearest</mag-filter>
+    <mipmap-levels>10</mipmap-levels>
+  </buffer>
+  <buffer>
+    <name>prev-luminance</name>
+    <type>2d</type>
+    <width>1</width>
+    <height>1</height>
+    <format>r16f</format>
+    <min-filter>nearest</min-filter>
+    <mag-filter>nearest</mag-filter>
+  </buffer>
+  <buffer>
+    <name>adapted-luminance</name>
+    <type>2d</type>
+    <width>1</width>
+    <height>1</height>
+    <format>r16f</format>
+    <min-filter>nearest</min-filter>
+    <mag-filter>nearest</mag-filter>
+  </buffer>
+
+  <!-- SSAO -->
+  <buffer>
+    <name>ao0</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <screen-width-scale>0.5</screen-width-scale>
+    <screen-height-scale>0.5</screen-height-scale>
+    <format>r8</format>
+  </buffer>
+
+  <!-- Bloom buffers -->
+  <buffer include="bloom-buffer.xml">
+    <name>bloom0</name>
+    <screen-width-scale>0.5</screen-width-scale>
+    <screen-height-scale>0.5</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom1</name>
+    <screen-width-scale>0.25</screen-width-scale>
+    <screen-height-scale>0.25</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom2</name>
+    <screen-width-scale>0.125</screen-width-scale>
+    <screen-height-scale>0.125</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom3</name>
+    <screen-width-scale>0.0625</screen-width-scale>
+    <screen-height-scale>0.0625</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom0-tmp</name>
+    <screen-width-scale>0.5</screen-width-scale>
+    <screen-height-scale>0.5</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom1-tmp</name>
+    <screen-width-scale>0.25</screen-width-scale>
+    <screen-height-scale>0.25</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom2-tmp</name>
+    <screen-width-scale>0.125</screen-width-scale>
+    <screen-height-scale>0.125</screen-height-scale>
+  </buffer>
+  <buffer include="bloom-buffer.xml">
+    <name>bloom3-tmp</name>
+    <screen-width-scale>0.0625</screen-width-scale>
+    <screen-height-scale>0.0625</screen-height-scale>
+  </buffer>
+
+  <!--=======================================================================-->
+
+  <!--
+      Environment capture passes
+      Render to a cubemap using forward rendering. Only render the skydome and
+      very bare terrain since we want to make as little draw calls as possible.
+      We also want to avoid doing an OSG cull traversal on many nodes as our
+      scene graph structure isn't too well optimized.
+  -->
+  <pass include="env-capture-pass.xml">
+    <name>env-capture0</name>
+    <cubemap-face>0</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>0</face>
+      <level>0</level>
+    </attachment>
+  </pass>
+  <pass include="env-capture-pass.xml">
+    <name>env-capture1</name>
+    <cubemap-face>1</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>1</face>
+      <level>0</level>
+    </attachment>
+  </pass>
+  <pass include="env-capture-pass.xml">
+    <name>env-capture2</name>
+    <cubemap-face>2</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>2</face>
+      <level>0</level>
+    </attachment>
+  </pass>
+  <pass include="env-capture-pass.xml">
+    <name>env-capture3</name>
+    <cubemap-face>3</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>3</face>
+      <level>0</level>
+    </attachment>
+  </pass>
+  <pass include="env-capture-pass.xml">
+    <name>env-capture4</name>
+    <cubemap-face>4</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>4</face>
+      <level>0</level>
+    </attachment>
+  </pass>
+  <pass include="env-capture-pass.xml">
+    <name>env-capture5</name>
+    <cubemap-face>5</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>5</face>
+      <level>0</level>
+    </attachment>
+  </pass>
+
+  <!--
+      Pre-filter the environment map
+      We convolve the cubemap for five roughness values and store the results
+      on the mipmap levels of the cubemap. Later passes will choose which mipmap
+      level to use for reflections based on the roughness of the surface that's
+      being lighted/rendered.
+      Diffuse lighting is approximated by using the highest mipmap level
+      (roughness=1).
+  -->
+  <pass include="env-prefilter1-pass.xml">
+    <name>env-prefilter1-0</name>
+    <cubemap-face>0</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>0</face>
+      <level>1</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter1-pass.xml">
+    <name>env-prefilter1-1</name>
+    <cubemap-face>1</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>1</face>
+      <level>1</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter1-pass.xml">
+    <name>env-prefilter1-2</name>
+    <cubemap-face>2</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>2</face>
+      <level>1</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter1-pass.xml">
+    <name>env-prefilter1-3</name>
+    <cubemap-face>3</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>3</face>
+      <level>1</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter1-pass.xml">
+    <name>env-prefilter1-4</name>
+    <cubemap-face>4</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>4</face>
+      <level>1</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter1-pass.xml">
+    <name>env-prefilter1-5</name>
+    <cubemap-face>5</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>5</face>
+      <level>1</level>
+    </attachment>
+  </pass>
+
+  <pass include="env-prefilter2-pass.xml">
+    <name>env-prefilter2-0</name>
+    <cubemap-face>0</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>0</face>
+      <level>2</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter2-pass.xml">
+    <name>env-prefilter2-1</name>
+    <cubemap-face>1</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>1</face>
+      <level>2</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter2-pass.xml">
+    <name>env-prefilter2-2</name>
+    <cubemap-face>2</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>2</face>
+      <level>2</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter2-pass.xml">
+    <name>env-prefilter2-3</name>
+    <cubemap-face>3</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>3</face>
+      <level>2</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter2-pass.xml">
+    <name>env-prefilter2-4</name>
+    <cubemap-face>4</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>4</face>
+      <level>2</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter2-pass.xml">
+    <name>env-prefilter2-5</name>
+    <cubemap-face>5</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>5</face>
+      <level>2</level>
+    </attachment>
+  </pass>
+
+  <pass include="env-prefilter3-pass.xml">
+    <name>env-prefilter3-0</name>
+    <cubemap-face>0</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>0</face>
+      <level>3</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter3-pass.xml">
+    <name>env-prefilter3-1</name>
+    <cubemap-face>1</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>1</face>
+      <level>3</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter3-pass.xml">
+    <name>env-prefilter3-2</name>
+    <cubemap-face>2</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>2</face>
+      <level>3</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter3-pass.xml">
+    <name>env-prefilter3-3</name>
+    <cubemap-face>3</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>3</face>
+      <level>3</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter3-pass.xml">
+    <name>env-prefilter3-4</name>
+    <cubemap-face>4</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>4</face>
+      <level>3</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter3-pass.xml">
+    <name>env-prefilter3-5</name>
+    <cubemap-face>5</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>5</face>
+      <level>3</level>
+    </attachment>
+  </pass>
+
+  <pass include="env-prefilter4-pass.xml">
+    <name>env-prefilter4-0</name>
+    <cubemap-face>0</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>0</face>
+      <level>4</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter4-pass.xml">
+    <name>env-prefilter4-1</name>
+    <cubemap-face>1</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>1</face>
+      <level>4</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter4-pass.xml">
+    <name>env-prefilter4-2</name>
+    <cubemap-face>2</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>2</face>
+      <level>4</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter4-pass.xml">
+    <name>env-prefilter4-3</name>
+    <cubemap-face>3</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>3</face>
+      <level>4</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter4-pass.xml">
+    <name>env-prefilter4-4</name>
+    <cubemap-face>4</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>4</face>
+      <level>4</level>
+    </attachment>
+  </pass>
+  <pass include="env-prefilter4-pass.xml">
+    <name>env-prefilter4-5</name>
+    <cubemap-face>5</cubemap-face>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap</buffer>
+      <face>5</face>
+      <level>4</level>
+    </attachment>
+  </pass>
+
+  <!--
+      G-Buffer pass
+      This is the main forward pass. Here we skip the rendering of transparent
+      objects and other geometry that should be forward rendered later (like the
+      skydome, clouds, etc.)
+  -->
+  <pass>
+    <name>geometry</name>
+    <type>scene</type>
+    <effect-scheme>hdr-geometry</effect-scheme>
+    <cull-mask>0xfffff7ff</cull-mask>
+    <attachment>
+      <component>color0</component>
+      <buffer>gbuffer0</buffer>
+    </attachment>
+    <attachment>
+      <component>color1</component>
+      <buffer>gbuffer1</buffer>
+    </attachment>
+    <attachment>
+      <component>color2</component>
+      <buffer>gbuffer2</buffer>
+    </attachment>
+    <attachment>
+      <component>depth</component>
+      <buffer>depth</buffer>
+    </attachment>
+  </pass>
+
+  <!-- Shadow mapping pre-passes -->
+  <pass include="csm-pass.xml">
+    <name>csm0</name>
+    <near-m>0.1</near-m>
+    <far-m>3.0</far-m>
+    <viewport>
+      <x>0.0</x>
+      <y>0.0</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+  <pass include="csm-pass.xml">
+    <name>csm1</name>
+    <near-m>3.0</near-m>
+    <far-m>70.0</far-m>
+    <viewport>
+      <x>0.5</x>
+      <y>0.0</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+  <pass include="csm-pass.xml">
+    <name>csm2</name>
+    <near-m>70.0</near-m>
+    <far-m>300.0</far-m>
+    <viewport>
+      <x>0.0</x>
+      <y>0.5</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+  <pass include="csm-pass.xml">
+    <name>csm3</name>
+    <near-m>300.0</near-m>
+    <far-m>1000.0</far-m>
+    <viewport>
+      <x>0.5</x>
+      <y>0.5</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+
+  <!-- SSAO (Screen Space Ambient Occlusion) -->
+  <pass>
+    <name>ao</name>
+    <type>quad</type>
+    <effect>Effects/HDR/ao</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>depth</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>gbuffer1</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>ao0</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      Main lighting pass
+      Combine the G-Buffer and other buffers to compute the final shading value
+      of the pixel in HDR.
+  -->
+  <pass>
+    <name>lighting</name>
+    <type>quad</type>
+    <effect>Effects/HDR/lighting</effect>
+    <use-shadow-pass>csm0</use-shadow-pass>
+    <use-shadow-pass>csm1</use-shadow-pass>
+    <use-shadow-pass>csm2</use-shadow-pass>
+    <use-shadow-pass>csm3</use-shadow-pass>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer0</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>gbuffer1</buffer>
+    </binding>
+    <binding>
+      <unit>2</unit>
+      <buffer>gbuffer2</buffer>
+    </binding>
+    <binding>
+      <unit>3</unit>
+      <buffer>depth</buffer>
+    </binding>
+    <binding>
+      <unit>8</unit>
+      <buffer>ao0</buffer>
+    </binding>
+    <binding>
+      <unit>9</unit>
+      <buffer>envmap</buffer>
+    </binding>
+    <binding>
+      <unit>10</unit>
+      <buffer>sun-shadowmap-atlas</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>hdr-result</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      Forward pass
+      Render all objects that couldn't be rendered on the G-Buffer, mainly
+      transparent objects. This is also done in HDR.
+      We reuse the depth buffer from the G-Buffer stage so we can take advantage
+      of early depth testing.
+  -->
+  <pass>
+    <name>forward</name>
+    <type>scene</type>
+    <effect-scheme>hdr-forward</effect-scheme>
+    <clear-mask></clear-mask>
+    <binding>
+      <unit>9</unit>
+      <buffer>envmap</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>hdr-result</buffer>
+    </attachment>
+    <attachment>
+      <component>depth</component>
+      <buffer>depth</buffer>
+    </attachment>
+  </pass>
+
+  <pass>
+    <name>atmosphere</name>
+    <type>quad</type>
+    <effect>Effects/HDR/atmosphere</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>hdr-result</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>depth</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>hdr-with-atmosphere</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      Average luminance calculation
+      1. Convert the RGB values to luminance values and store them on a fixed
+      size texture.
+      2. Generate mipmaps for this texture until we are left with a 1x1 texture
+      at the highest mipmap level. This downsampling process effectively
+      calculates the geometric mean of luminance.
+      3. Simulate eye adaptation by smoothing out the transition between
+      different exposures.
+      4. Update the previous frame average luminance value for next frame.
+  -->
+  <pass>
+    <name>luminance</name>
+    <type>quad</type>
+    <effect>Effects/HDR/luminance</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>hdr-with-atmosphere</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>luminance</buffer>
+      <mipmap-generation>true</mipmap-generation>
+    </attachment>
+  </pass>
+  <pass>
+    <name>adapt-luminance</name>
+    <type>quad</type>
+    <effect>Effects/HDR/adapt-luminance</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>prev-luminance</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>luminance</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>adapted-luminance</buffer>
+    </attachment>
+  </pass>
+  <pass>
+    <name>copy-prev-luminance</name>
+    <type>quad</type>
+    <effect>Effects/HDR/copy-prev-luminance</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>adapted-luminance</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>prev-luminance</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      Generate a threshold texture for bloom
+      The HDR lighting buffer is filtered so we are left with an image that only
+      contains the brightest spots. This image is then progressively
+      downscaled, blurred and upscaled until we are left with the final bloom
+      to be applied.
+  -->
+  <pass>
+    <name>bloom-threshold</name>
+    <type>quad</type>
+    <effect>Effects/HDR/bloom-threshold</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>hdr-with-atmosphere</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>adapted-luminance</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom0</buffer>
+    </attachment>
+  </pass>
+
+  <pass include="bloom-copy-pass.xml">
+    <name>bloom-copy1</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom0</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom1</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-copy-pass.xml">
+    <name>bloom-copy2</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom1</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom2</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-copy-pass.xml">
+    <name>bloom-copy3</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom2</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom3</buffer>
+    </attachment>
+  </pass>
+
+  <pass include="bloom-horizontal-blur-pass.xml">
+    <name>bloom-hblur3</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom3</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom3-tmp</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-vertical-blur-pass.xml">
+    <name>bloom-vblur3</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom3-tmp</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom3</buffer>
+    </attachment>
+  </pass>
+
+  <pass include="bloom-horizontal-blur-pass.xml">
+    <name>bloom-hblur2</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom2</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>bloom3</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom2-tmp</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-vertical-blur-pass.xml">
+    <name>bloom-vblur2</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom2-tmp</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom2</buffer>
+    </attachment>
+  </pass>
+
+  <pass include="bloom-horizontal-blur-pass.xml">
+    <name>bloom-hblur1</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom1</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>bloom2</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom1-tmp</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-vertical-blur-pass.xml">
+    <name>bloom-vblur1</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom1-tmp</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom1</buffer>
+    </attachment>
+  </pass>
+
+  <pass include="bloom-horizontal-blur-pass.xml">
+    <name>bloom-hblur0</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom0</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>bloom1</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom0-tmp</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-vertical-blur-pass.xml">
+    <name>bloom-vblur0</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloom0-tmp</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>bloom0</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      Post-processing
+      Perform miscellaneous post-processing operations, namely tonemapping
+      and exposure compensation. This process converts the HDR buffer into an
+      LDR texture ready to be displayed on a screen.
+  -->
+  <pass>
+    <name>post</name>
+    <type>quad</type>
+    <effect>Effects/HDR/postprocess</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>hdr-with-atmosphere</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>adapted-luminance</buffer>
+    </binding>
+    <binding>
+      <unit>4</unit>
+      <buffer>bloom0</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>final</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      Final display pass
+      Perform any post-processing that has to be done in LDR space.
+  -->
+  <pass>
+    <name>display</name>
+    <type>quad</type>
+    <effect>Effects/HDR/display</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>final</buffer>
+    </binding>
+  </pass>
+
+  <!-- DEBUG PASSES -->
+  <!--
+  <pass>
+    <name>debug-albedo</name>
+    <type>quad</type>
+    <effect>Effects/HDR/trivial</effect>
+    <clear-mask>depth</clear-mask>
+    <geometry>
+      <left>0.0</left>
+      <bottom>0.0</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer0</buffer>
+    </binding>
+  </pass>
+  <pass>
+    <name>debug-normals</name>
+    <type>quad</type>
+    <effect>Effects/HDR/trivial</effect>
+    <clear-mask>depth</clear-mask>
+    <geometry>
+      <left>0.8</left>
+      <bottom>0.0</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer1</buffer>
+    </binding>
+  </pass>
+  <pass>
+    <name>debug-materials</name>
+    <type>quad</type>
+    <effect>Effects/HDR/trivial</effect>
+    <clear-mask>depth</clear-mask>
+    <geometry>
+      <left>0.0</left>
+      <bottom>0.8</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer2</buffer>
+    </binding>
+  </pass>
+  <pass>
+    <name>debug-depth</name>
+    <type>quad</type>
+    <effect>Effects/HDR/trivial</effect>
+    <clear-mask>depth</clear-mask>
+    <geometry>
+      <left>0.8</left>
+      <bottom>0.8</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>0</unit>
+      <buffer>depth</buffer>
+    </binding>
+  </pass>
+  -->
+</PropertyList>

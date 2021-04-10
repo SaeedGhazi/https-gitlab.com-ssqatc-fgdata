@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+  <!-- Classic -->
   <scheme>
     <name>classic-shadow</name>
     <fallback>Effects/Fallback/classic-shadow</fallback>
+  </scheme>
+
+  <!-- HDR -->
+  <scheme>
+    <name>hdr-geometry</name>
+    <fallback>Effects/Fallback/hdr-geometry</fallback>
+  </scheme>
+  <scheme>
+    <name>hdr-shadow</name>
+    <fallback>Effects/Fallback/hdr-shadow</fallback>
   </scheme>
 </PropertyList>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/envmap-prefilter</name>
+  <parameters>
+    <roughness type="float">0.0</roughness>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/trivial-cubemap.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/envmap-prefilter.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>envmap</name>
+        <type>sampler-cube</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>roughness</name>
+        <type>float</type>
+        <value><use>roughness</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

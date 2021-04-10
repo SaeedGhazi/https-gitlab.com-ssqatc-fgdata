@@ -6,4 +6,11 @@ and fallback to plain transparency when the model shader is disabled.
 <PropertyList>
   <name>Effects/model-combined-transparent</name>
   <inherits-from>Effects/model-combined</inherits-from>
+
+  <technique n="1">
+    <scheme>hdr-geometry</scheme>
+  </technique>
+  <technique n="2">
+    <scheme>hdr-forward</scheme>
+  </technique>
 </PropertyList>

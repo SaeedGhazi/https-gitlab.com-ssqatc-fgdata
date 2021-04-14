@@ -44,7 +44,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A332/33X-AirHongKong.xml</model>
+<model>Aircraft/A332/A33X-AirHongKong.xml</model>
 <livery>AHK</livery>
 <airline>AHK</airline>
 <home-port>WSSS</home-port>

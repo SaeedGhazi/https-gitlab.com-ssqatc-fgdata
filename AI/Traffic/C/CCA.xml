@@ -2018,7 +2018,7 @@
 <heavy>false</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2032,7 +2032,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2046,7 +2046,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2060,7 +2060,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2074,7 +2074,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2088,7 +2088,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2102,7 +2102,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2116,7 +2116,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2130,7 +2130,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-200-AirChina.xml</model>
+<model>Aircraft/777/77L-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2144,7 +2144,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2158,7 +2158,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2172,7 +2172,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2186,7 +2186,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2200,7 +2200,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2214,7 +2214,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2228,7 +2228,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2242,7 +2242,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2256,7 +2256,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2270,7 +2270,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2284,7 +2284,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2298,7 +2298,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2312,7 +2312,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>
@@ -2326,7 +2326,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/777/777-300-AirChina.xml</model>
+<model>Aircraft/777/77W-AirChina.xml</model>
 <livery>CCA</livery>
 <airline>CCA</airline>
 <home-port>ZBAA</home-port>

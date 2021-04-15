@@ -124,9 +124,10 @@ vec3 lightmapcolor = vec3(0.0, 0.0, 0.0);
 if (use_reflection_lightmap == 1)
 	{
 	vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor, lightmap_b_factor, lightmap_a_factor);
-        lightmapFactor = lightmapFactor * reflection_lighting;
+
         if (lightmap_multi > 0 )
 		{
+            lightmapFactor = lightmapFactor * reflection_lighting;
 	        lightmapcolor = lightmap_r_color * lightmapFactor.r +
                 lightmap_g_color * lightmapFactor.g +
                 lightmap_b_color * lightmapFactor.b +

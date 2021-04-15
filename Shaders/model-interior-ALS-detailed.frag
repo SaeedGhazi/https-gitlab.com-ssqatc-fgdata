@@ -227,9 +227,10 @@ void main()
 	{
         vec4 lightmapTexel = texture2D(lightmap_texture, gl_TexCoord[0].st);
 	vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor, lightmap_b_factor, lightmap_a_factor);
-        lightmapFactor = lightmapFactor * lightmapTexel;
+
         if (lightmap_multi > 0 )
 		{
+            lightmapFactor = lightmapFactor * lightmapTexel;
 	        //lightmapcolor = lightmap_r_color * lightmapFactor.r +
                 //lightmap_g_color * lightmapFactor.g +
                 // lightmap_b_color * lightmapFactor.b +

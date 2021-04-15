@@ -326,6 +326,7 @@
       <match>Airbus_A310</match>
       <match>ABY</match>
 	  <match>ABF</match>
+	  <match>AB6</match>	  
       <match>30</match>
       <match>31</match>
       <alias>AB3</alias>

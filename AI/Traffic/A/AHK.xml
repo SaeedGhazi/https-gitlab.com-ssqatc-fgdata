@@ -2,7 +2,7 @@
 <!-- Author Ian Tolosa - Observed Traffic week of 07-13 DEC 2020 - A330-300 Freighter mapped to A 330-200 Freighter -->
 <trafficlist>
 <aircraft>
-<model>Aircraft/A332/33X-AirHongKong.xml</model>
+<model>Aircraft/A332/A33X-AirHongKong.xml</model>
 <livery>AHK</livery>
 <airline>AHK</airline>
 <home-port>VTBS</home-port>
@@ -16,7 +16,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A332/33X-AirHongKong.xml</model>
+<model>Aircraft/A332/A33X-AirHongKong.xml</model>
 <livery>AHK</livery>
 <airline>AHK</airline>
 <home-port>WMKP</home-port>
@@ -30,7 +30,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/A332/33X-AirHongKong.xml</model>
+<model>Aircraft/A332/A33X-AirHongKong.xml</model>
 <livery>AHK</livery>
 <airline>AHK</airline>
 <home-port>ZSPD</home-port>

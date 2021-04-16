@@ -28,6 +28,7 @@ attribute vec3 attrib2;
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec4 ecPosition;
 
 //varying float earthShade;
 //varying float yprime;
@@ -55,6 +56,7 @@ const float terminator_width = 200000.0;
 float earthShade;
 //float mie_angle;
 
+void setupShadows(vec4 eyeSpacePos);
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -308,4 +310,7 @@ if (use_IR_vision)
     gl_FrontColor.rgb = constant_term.rgb;
     gl_BackColor.rgb = constant_term.rgb;
     //gl_FrontColor.a = mie_angle; gl_BackColor.a = mie_angle;
+
+    ecPosition = gl_ModelViewMatrix * vec4(position, 1.0);
+    setupShadows(ecPosition);
 }

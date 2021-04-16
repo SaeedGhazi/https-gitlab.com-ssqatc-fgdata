@@ -24,6 +24,7 @@ attribute vec3 attrib2;
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec4 diffuse_term;
 varying vec3 normal;
+varying vec4 ecPosition;
 
 uniform int colorMode;
 
@@ -32,6 +33,8 @@ uniform int colorMode;
 //
 //void fog_Func(int type);
 /////////////////////////
+
+void setupShadows(vec4 eyeSpacePos);
 
 const float c_precision = 128.0;
 const float c_precisionp1 = c_precision + 1.0;
@@ -132,4 +135,6 @@ void main()
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
     //fogCoord = abs(ecPosition.z / ecPosition.w);
 		//fog_Func(fogType);
+    ecPosition = gl_ModelViewMatrix * vec4(position, 1.0);
+    setupShadows(ecPosition);
 }

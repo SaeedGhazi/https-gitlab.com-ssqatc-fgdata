@@ -3,60 +3,7 @@
 <PropertyList>
     <path>JA-37-lowpoly.ac</path>
 
-    <!-- strobe light -->
-
-    <animation>
-        <type>material</type>
-        <object-name>ja37strobe</object-name>
-        <condition>
-            <or>
-                <!-- flash: bit 1 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[9]</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[9]</property>
-                    <value>3</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[9]</property>
-                    <value>5</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[9]</property>
-                    <value>7</value>
-                </equals>
-            </or>
-        </condition>
-        <emission>
-            <red>1.0</red>
-            <green>1.0</green>
-            <blue>1.0</blue>
-            <factor-prop>sim/multiplay/generic/int[5]</factor-prop>
-            <!-- sim/model/lighting/strobe/state -->
-        </emission>
-    </animation>
-
-
-
     <!-- Fuselage animations -->
-
-    <animation>
-        <type>translate</type>
-        <object-name>outletCover</object-name>
-        <property>ja37/systems/tertiary-opening</property>
-        <factor>-0.35</factor>
-        <axis>
-            <x>1</x>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>
-
 
     <animation>
         <type>rotate</type>
@@ -81,7 +28,7 @@
         <type>scale</type>
         <object-name>glassOuter</object-name>
         <object-name>canopy</object-name>
-        <property>sim/multiplay/generic/int[1]</property>
+        <property>sim/multiplay/generic/bool[13]</property>
         <!-- fdm/jsbsim/fcs/canopy/hinges/serviceable -->
         <interpolation>
             <entry>
@@ -302,38 +249,6 @@
 
     <animation>
         <type>scale</type>
-        <object-name>gearFrontDoorsClosed</object-name>
-        <property>gear/gear[0]/position-norm</property>
-        <interpolation>
-            <entry>
-                <ind> 0.00 </ind>
-                <dep> 1.00 </dep>
-            </entry>
-            <entry>
-                <ind> 0.001 </ind>
-                <dep> 0.00 </dep>
-            </entry>
-        </interpolation>
-        <center>
-            <x-m>  0 </x-m>
-            <y-m>  0 </y-m>
-            <z-m>  0 </z-m>
-        </center>
-        <x-min>0.0</x-min>
-        <y-min>0.0</y-min>
-        <z-min>0.0</z-min>
-        <x-max>1.0</x-max>
-        <y-max>1.0</y-max>
-        <z-max>1.0</z-max>
-        <axis>
-            <x>1.0</x>
-            <y>1.0</y>
-            <z>1.0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>scale</type>
         <object-name>gearFrontDoorsOpenLeft</object-name>
         <object-name>gearFrontDoorsOpenRight</object-name>
         <object-name>frontLandingLightGlare</object-name>
@@ -468,27 +383,6 @@
 
     <animation>
         <type>rotate</type>
-        <condition>
-            <or>
-                <!-- wow0: bit 1 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>3</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>5</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>7</value>
-                </equals>
-            </or>
-        </condition>
         <object-name>gearFrontBottom</object-name>
         <object-name>gearFrontHub</object-name>
         <object-name>gearFrontScissorTop</object-name>
@@ -584,25 +478,7 @@
         <type>spin</type>
         <object-name>gearFrontWheel</object-name>
         <condition>
-            <or>
-                <!-- wow0: bit 1 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>3</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>5</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>7</value>
-                </equals>
-            </or>
+            <property>gear/gear[0]/compression-norm</property>
         </condition>
         <property>rotors/main/blade[0]/position-deg</property>
         <!-- gear/gear[0]/rollspeed-ms -->
@@ -893,25 +769,7 @@
         <type>spin</type>
         <object-name>gearLeftWheel1</object-name>
         <condition>
-            <or>
-                <!-- wow1: bit 2 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>2</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>3</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>6</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>7</value>
-                </equals>
-            </or>
+            <property>gear/gear[1]/compression-norm</property>
         </condition>
         <property>rotors/main/blade[1]/position-deg</property>
         <!-- gear/gear[1]/rollspeed-ms -->
@@ -932,25 +790,7 @@
         <type>spin</type>
         <object-name>gearLeftWheel2</object-name>
         <condition>
-            <or>
-                <!-- wow1: bit 2 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>2</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>3</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>6</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>7</value>
-                </equals>
-            </or>
+            <property>gear/gear[1]/compression-norm</property>
         </condition>
         <property>rotors/main/blade[1]/position-deg</property>
         <!-- gear/gear[1]/rollspeed-ms -->
@@ -1242,25 +1082,7 @@
         <type>spin</type>
         <object-name>gearRightWheel1</object-name>
         <condition>
-            <or>
-                <!-- wow2: bit 3 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>4</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>5</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>6</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>7</value>
-                </equals>
-            </or>
+            <property>gear/gear[2]/compression-norm</property>
         </condition>
         <property>rotors/main/blade[2]/position-deg</property>
         <!-- gear/gear[2]/rollspeed-ms -->
@@ -1281,25 +1103,7 @@
         <type>spin</type>
         <object-name>gearRightWheel2</object-name>
         <condition>
-            <or>
-                <!-- wow2: bit 3 -->
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>4</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>5</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>6</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/int[17]</property>
-                    <value>7</value>
-                </equals>
-            </or>
+            <property>gear/gear[2]/compression-norm</property>
         </condition>
         <property>rotors/main/blade[2]/position-deg</property>
         <!-- gear/gear[2]/rollspeed-ms -->

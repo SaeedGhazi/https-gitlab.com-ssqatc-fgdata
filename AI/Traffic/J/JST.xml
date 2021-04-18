@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <!-- Cleaned Up 21APR2020 by Ian (Yves) Tolosa - Partial Traffic Observed week of 13MAR20 -->
 <trafficlist>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YMML</home-port>
@@ -16,7 +16,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YBCS</home-port>
@@ -30,7 +30,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YSSY</home-port>
@@ -44,7 +44,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YMML</home-port>
@@ -58,7 +58,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YBVS</home-port>
@@ -72,7 +72,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YSSY</home-port>
@@ -86,7 +86,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>WADD</home-port>
@@ -100,7 +100,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>WADD</home-port>
@@ -114,7 +114,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YBCG</home-port>
@@ -128,7 +128,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YBCS</home-port>
@@ -142,7 +142,7 @@
 <heavy>true</heavy>
 </aircraft>
 <aircraft>
-<model>Aircraft/787/788-Jetstar.xml</model>
+<model>Aircraft/787/788-JetStar.xml</model>
 <livery>JST</livery>
 <airline>JST</airline>
 <home-port>YMML</home-port>

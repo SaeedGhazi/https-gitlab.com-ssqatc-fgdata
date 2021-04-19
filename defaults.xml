@@ -839,6 +839,9 @@ Started September 2000 by David Megginson, david@megginson.com
       </record-extra-properties-paths>
     </replay>
     <airport>
+      <min-tower-height-ft type="double">6</min-tower-height-ft>   <!-- a.k.a chap on the ground with a radio waving frantically --> 
+      <max-tower-height-ft type="double">70</max-tower-height-ft>  <!-- the average tower height is 10.51m; so this is a reasonable limit-->
+      <default-tower-height-ft type="double">30</default-tower-height-ft>  <!-- based on the average tower height of ~10.5m-->
       <runways>
         <start-offset-m type="double">5.0</start-offset-m>
         <search>

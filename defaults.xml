@@ -974,7 +974,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </mp-carriers>
     <freeze-mouse-flight-controls-on-pause type="bool" userarchive="n">true</freeze-mouse-flight-controls-on-pause>
     <error-report  userarchive="y">
-      <enabled type="bool">true</enabled>
+      <enabled type="bool">false</enabled>
       <mp-report-enabled type="bool">true</mp-report-enabled>
     </error-report>
   </sim>

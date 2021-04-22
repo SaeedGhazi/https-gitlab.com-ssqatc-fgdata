@@ -5,5 +5,5 @@ It's kept for backwards compatibility and should not be used on new projects.
 -->
 <PropertyList>
   <name>Effects/lightmap</name>
-  <inherits-from>model-default</inherits-from>
+  <inherits-from>Effects/model-default</inherits-from>
 </PropertyList>

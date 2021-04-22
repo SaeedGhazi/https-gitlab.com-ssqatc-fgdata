@@ -18,6 +18,7 @@
 	<terrasync>Scenery Download</terrasync>
 	<aircraft-center>Aircraft Center (Experimental)</aircraft-center>
 	<exit>Quit</exit>
+	<error-reports>View Errors</error-reports>
 
 	<!-- View menu -->
 	<view>View</view>

@@ -81,6 +81,13 @@
 		</item>
 
 		<item>
+			<name>error-reports</name>
+			<binding>
+				<command>show-error-report</command>
+			</binding>
+		</item>
+
+		<item>
 			<name>exit</name>
 			<key>Esc</key>
 			<binding>

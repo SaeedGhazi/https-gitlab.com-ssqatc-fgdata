@@ -86,6 +86,21 @@
 
         <empty><stretch>1</stretch></empty>
 
+		<button>
+            <legend>Next error</legend>
+            <binding>
+				<command>show-error-report</command>
+                <next type="bool">true</next>
+			</binding>
+			 <binding>
+				<command>dialog-update</command>
+			</binding>
+
+			<visible>
+                <property>/sim/error-report/display/have-next</property>
+            </visible>
+        </button>
+
         <button>
             <legend>Close</legend>
             <binding>

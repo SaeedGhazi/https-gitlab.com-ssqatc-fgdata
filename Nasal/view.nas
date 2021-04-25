@@ -942,6 +942,20 @@ setlistener("/sim/current-view/view-number", func(n) {
     current = views[index = n.getValue()];
 }, 1);
 
+# Allow view changes by setting view-number-raw - avoids problems when/if we
+# add new default views (between 0 and 99).
+#
+setlistener("/sim/current-view/view-number-raw", func(n) {
+    var index = n.getValue();
+    forindex (var i; views) {
+        if (views[i].getIndex() == index) {
+            props.globals.getNode("/sim/current-view/view-number", 1).setValue(i);
+            return;
+        }
+    }
+    printf("Failed to find view-number-raw=%s", index);
+}, 1);
+
 props.globals.initNode("/position/altitude-agl-ft"); # needed by Fly-By View
 screenWidthCompens.init();
 manager.init();

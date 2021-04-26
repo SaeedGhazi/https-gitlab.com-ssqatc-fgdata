@@ -792,7 +792,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg140" approved="yes">
         <source xml:space="preserve">Uninstall</source>
-        <target xml:space="preserve">Desinstallieren</target>
+        <target xml:space="preserve">Deinstallieren</target>
         <context-group purpose="location"><context context-type="linenumber">60</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">195</context></context-group>
       </trans-unit>
@@ -820,7 +820,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg145" approved="yes">
         <source xml:space="preserve">Are you sure you want to uninstall this aircraft?</source>
-        <target xml:space="preserve">Möchtest Du dieses Flugzeug wirklich desinstallieren?</target>
+        <target xml:space="preserve">Möchtest Du dieses Flugzeug wirklich deinstallieren?</target>
         <context-group purpose="location"><context context-type="linenumber">193</context></context-group>
       </trans-unit>
     </group>

@@ -1293,4 +1293,12 @@ please see Docs/README.model-combined.eff for documentation
                    <!-- END shadows include -->
 		  </pass>
 		</technique>
+
+        <technique n="7">
+          <predicate><value type="bool">false</value></predicate>
+        </technique>
+
+        <technique n="9">
+          <predicate><value type="bool">false</value></predicate>
+        </technique>
 </PropertyList>

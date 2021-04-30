@@ -18,7 +18,9 @@ var ErrorNotification =
 
     m._hideTimer = maketimer(m.SHOW_TIME, m, ErrorNotification._hideTimeout);
     m._hideTimer.singleShot = 1;
-        return m;
+    m._reportIndex = 0;
+
+    return m;
   },
 
   # Destructor
@@ -86,7 +88,7 @@ var ErrorNotification =
   clicked: func()
   {
     me.hideNow();
-    fgcommand("show-error-report"); # should we show the current one?
+    fgcommand("show-error-report", props.Node.new({ "index": me._reportIndex})); # should we show the current one?
   },
 
   updateText: func()
@@ -131,8 +133,9 @@ var ErrorNotification =
     me.setInt("y", y);
   },
 
-  show: func()
+  show: func(index)
   {
+    me._reportIndex = index;
     me._hideTimer.stop();
     me.setBool("visible", 1);
     me._hideTimer.start();
@@ -152,7 +155,7 @@ var ErrorNotification =
 
 var errorNotificationCanvas = nil;
 
-var showErrorNotification = func()
+var showErrorNotification = func(node)
 {
     if (errorNotificationCanvas == nil) {
         # create instance
@@ -161,7 +164,8 @@ var showErrorNotification = func()
     }
 
     errorNotificationCanvas.updateText();
-    errorNotificationCanvas.show();
+    var reportIndex = node.getNode("index").getValue();
+    errorNotificationCanvas.show(reportIndex);
 }
 
 addcommand("show-error-notification-popup", showErrorNotification);

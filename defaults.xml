@@ -974,8 +974,9 @@ Started September 2000 by David Megginson, david@megginson.com
     </mp-carriers>
     <freeze-mouse-flight-controls-on-pause type="bool" userarchive="n">true</freeze-mouse-flight-controls-on-pause>
     <error-report  userarchive="y">
-      <enabled type="bool">false</enabled>
+      <enabled type="bool">true</enabled>
       <mp-report-enabled type="bool">true</mp-report-enabled>
+      <enable-in-developer-mode type="bool">false</enable-in-developer-mode>
     </error-report>
   </sim>
   <!-- accelerations -->

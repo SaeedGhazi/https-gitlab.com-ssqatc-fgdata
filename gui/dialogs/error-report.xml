@@ -87,6 +87,21 @@
         <empty><stretch>1</stretch></empty>
 
 		<button>
+            <legend>Previous error</legend>
+            <binding>
+				<command>show-error-report</command>
+                <previous type="bool">true</previous>
+			</binding>
+			 <binding>
+				<command>dialog-update</command>
+			</binding>
+
+			<visible>
+                <property>/sim/error-report/display/have-previous</property>
+            </visible>
+        </button>
+
+		<button>
             <legend>Next error</legend>
             <binding>
 				<command>show-error-report</command>

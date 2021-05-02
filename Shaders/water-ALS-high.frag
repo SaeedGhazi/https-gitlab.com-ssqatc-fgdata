@@ -45,7 +45,7 @@ uniform    float normalmap_dds;
 
 uniform float hazeLayerAltitude;
 uniform float terminator;
-uniform float terrain_alt; 
+uniform float terrain_alt;
 uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
@@ -220,7 +220,9 @@ void main(void)
 
 	// get depth map
 	vec4 topoTexel = texture2D(topo_map, TopoUV);
-    	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
+	float topoTexel_a = (topoTexel.r+topoTexel.g+topoTexel.b);
+        topoTexel_a = topoTexel_a*topoTexel_a;
+	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel_a);
 	vec3 floorColour = topoTexel.rgb;
 	
 	mat4 RotationMatrix;
@@ -256,7 +258,7 @@ void main(void)
 	// we only need detail in the near zone or where the sun reflection is
 
 	int detail_flag;
-	if ((dist > 15000.0) && (dot(normalize(vec3 (lightdir.x, lightdir.y, 0.0) ), normalize(relPos)) < 0.7 ))  {detail_flag = 0;} 
+	if ((dist > 15000.0) && (dot(normalize(vec3 (lightdir.x, lightdir.y, 0.0) ), normalize(relPos)) < 0.7 ))  {detail_flag = 0;}
 	else {detail_flag = 1;}
 	
 	//detail_flag = 1;
@@ -365,19 +367,19 @@ void main(void)
 	refl.r = sea_r;
 	refl.g = sea_g;
 	refl.b = sea_b;
-	refl.a = 1.0; 
+	refl.a = 1.0;
 	
 	refl.g = refl.g * (0.9 + 0.2* noise_2500m);
 	
 	
-	// the depth map works perfectly fine for both ocean and inland water texels 
+	// the depth map works perfectly fine for both ocean and inland water texels
 	refl.rgb = mix(refl.rgb, 0.65* floorColour, floorMixFactor);
-	refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,topoTexel.a));
+	refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,topoTexel_a));
 		
 	
 	float intensity;
 	// de-saturate for reduced light
-	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.1, 0.8, ground_scattering)); 
+	refl.rgb = mix(refl.rgb,  vec3 (0.248, 0.248, 0.248), 1.0 - smoothstep(0.1, 0.8, ground_scattering));
 
   	// de-saturate light for overcast haze
 	intensity = length(refl.rgb);
@@ -457,7 +459,7 @@ void main(void)
 	// compute cloud shadow effect
 
 	float shadowValue;
-	if (cloud_shadow_flag == 1) 
+	if (cloud_shadow_flag == 1)
 		{
 		shadowValue = shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);
 		specular = specular * shadowValue;
@@ -518,12 +520,12 @@ void main(void)
 	surfFact += washStrength;
 	
 	
-	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel.a > 0.98) || (washStrength > 0.5)) 
-		{ 
-		if ((waveSlope > 0.0) && (ocean_flag ==1)) 
+	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel_a > 0.98) || (washStrength > 0.5))
+		{
+		if ((waveSlope > 0.0) && (ocean_flag ==1))
 			{
 			surfFact = surfFact +(1.0 -smoothstep(0.97,1.0,steepness));
-			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel.a);
+			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel_a);
 
 			}
 			waveSlope = waveSlope + 2.0 * surfFact;
@@ -545,7 +547,7 @@ void main(void)
         finalColor  = mix(finalColor, ice_texel, mix_factor * ice_texel.a);
 	finalColor.a = 1.0;
 
- 
+
 	
 
 
@@ -563,7 +565,7 @@ void main(void)
 	float outscatter;
 
     if ((quality_level > 5) && (tquality_level > 5))
-	{    
+	{
 	rayleigh_length = 0.4 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
     	outscatter = 1.0-exp(-dist/rayleigh_length);
     	finalColor.rgb = rayleigh_out_shift(finalColor.rgb,outscatter);
@@ -588,7 +590,7 @@ void main(void)
 float delta_z = hazeLayerAltitude - eye_alt;
 float mvisibility = min(visibility,avisibility);
 
-if (dist > 0.04 * mvisibility) 
+if (dist > 0.04 * mvisibility)
 {
 
 
@@ -608,7 +610,7 @@ float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
 if (delta_z > 0.0) // we're inside the layer
 	{
-	if (ct < 0.0) // we look down 
+	if (ct < 0.0) // we look down
 		{
 		distance_in_layer = dist;
 		vAltitude = min(distance_in_layer,mvisibility) * ct;
@@ -634,10 +636,10 @@ if (delta_z > 0.0) // we're inside the layer
 	else
 		{
 		vAltitude = H + delta_z;
-		distance_in_layer = vAltitude/H * dist; 
+		distance_in_layer = vAltitude/H * dist;
 		vAltitude = min(distance_in_layer,visibility) * (-ct);
 		delta_zv = vAltitude;
-		} 
+		}
 	}
 	
 
@@ -663,7 +665,7 @@ if (visibility < avisibility)
 	// this combines the Weber-Fechner intensity
 	eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
 	}
-else 
+else
 	{
 	if (quality_level > 3)
 		{
@@ -694,7 +696,7 @@ float eShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_
 if (lightArg < 10.0)
 	{intensity = length(hazeColor);
 	float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
-	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+	hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) );
 	}
 
 // high altitude desaturation of the haze color
@@ -709,16 +711,16 @@ if (intensity > 0.0) // this needs to be a condition, because otherwise hazeColo
 	// blue hue of haze
 	
 	hazeColor.x = hazeColor.x * 0.83;
-	hazeColor.y = hazeColor.y * 0.9; 
+	hazeColor.y = hazeColor.y * 0.9;
 
 
 	// additional blue in indirect light
 	float fade_out = max(0.65 - 0.3 *overcast, 0.45);
 	intensity = length(hazeColor);
-	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) )); 
+	hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,eShade) ));
 
 	// change haze color to blue hue for strong fogging
-	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
+	hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor))));
 	}
 
 

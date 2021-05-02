@@ -53,7 +53,7 @@ particular list.
         <property>/sim/rendering/vegetation-density</property>
         <!-- Atmospheric Effects -->
         <property>/sim/rendering/particles</property>
-        <property>/sim/rendering/precipitation-enable</property>
+        <property>/sim/rendering/precipitation-gui-enable</property>
         <property>/sim/rendering/clouds3d-enable</property>
     </save-to-file>
 

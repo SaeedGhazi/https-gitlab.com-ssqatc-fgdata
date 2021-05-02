@@ -44,7 +44,7 @@
         <random-vegetation-shadows type="bool">true</random-vegetation-shadows>
         <vegetation-density type="float">2.0</vegetation-density>
         <particles type="bool">true</particles>
-        <precipitation-enable type="bool">true</precipitation-enable>
+        <precipitation-gui-enable type="bool">true</precipitation-gui-enable>
         <clouds3d-enable type="bool">true</clouds3d-enable>
       </rendering>
     </sim>

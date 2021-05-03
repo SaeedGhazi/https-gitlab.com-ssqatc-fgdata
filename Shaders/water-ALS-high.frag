@@ -220,9 +220,10 @@ void main(void)
 
 	// get depth map
 	vec4 topoTexel = texture2D(topo_map, TopoUV);
-	float topoTexel_a = (topoTexel.r+topoTexel.g+topoTexel.b);
-        topoTexel_a = topoTexel_a*topoTexel_a;
-	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel_a);
+	topoTexel.a = 0.8*topoTexel.r+0.2*topoTexel.g;
+        topoTexel.a = -topoTexel.a*topoTexel.a + 2*topoTexel.a;
+
+	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
 	vec3 floorColour = topoTexel.rgb;
 	
 	mat4 RotationMatrix;
@@ -374,7 +375,7 @@ void main(void)
 	
 	// the depth map works perfectly fine for both ocean and inland water texels
 	refl.rgb = mix(refl.rgb, 0.65* floorColour, floorMixFactor);
-	refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,topoTexel_a));
+	refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,topoTexel.a));
 		
 	
 	float intensity;
@@ -519,13 +520,12 @@ void main(void)
 	float surfFact = 0.0;
 	surfFact += washStrength;
 	
-	
-	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel_a > 0.98) || (washStrength > 0.5))
+	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel.a > 0.9) || (washStrength > 0.5))
 		{
 		if ((waveSlope > 0.0) && (ocean_flag ==1))
 			{
 			surfFact = surfFact +(1.0 -smoothstep(0.97,1.0,steepness));
-			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel_a);
+			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel.a);
 
 			}
 			waveSlope = waveSlope + 2.0 * surfFact;

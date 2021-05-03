@@ -119,6 +119,8 @@ Started September 2000 by David Megginson, david@megginson.com
         <line-features-lod-level type="int" userarchive="y">5</line-features-lod-level>
         <area-features-lod-level type="int" userarchive="y">5</area-features-lod-level>
         <vegetation-lod-level type="int" userarchive="y">6</vegetation-lod-level>
+        <coastline-lod-level type="int" userarchive="y">3</coastline-lod-level>
+        <coastline-width type="float" userarchive="y">80.0</coastline-width>
         <lod-level n="0">
           <area-features-min-width>10000</area-features-min-width>
           <line-features-min-width>9999.9</line-features-min-width>

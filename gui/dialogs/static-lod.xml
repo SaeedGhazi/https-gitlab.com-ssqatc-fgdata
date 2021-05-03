@@ -825,6 +825,52 @@
                 <live>true</live>
                 <property>/sim/rendering/static-lod/area-features-lod-level</property>
             </text>        
+
+            <text>
+                <row>4</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Detailed coastline minimum LOD</label>
+            </text>
+            <slider>
+                <row>4</row>
+                <col>1</col>
+                <name>coast-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/coastline-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>coast-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>4</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/coastline-lod-level</property>
+            </text>            
         </group>
     </group>
 

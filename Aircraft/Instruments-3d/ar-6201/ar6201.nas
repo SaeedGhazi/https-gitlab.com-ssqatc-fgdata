@@ -86,12 +86,9 @@ var canvas_AR6201_base = {
 		
 		canvas.parsesvg(canvas_group, file, {'font-mapper': font_mapper});
 
-		 var svg_keys = me.getKeys();
+		var svg_keys = me.getKeys();
 		 
 		foreach(var key; svg_keys) {
-			me[key] = canvas_group.getElementById(key);
-			var svg_keys = me.getKeys();
-			foreach (var key; svg_keys) {
 			me[key] = canvas_group.getElementById(key);
 			var clip_el = canvas_group.getElementById(key ~ "_clip");
 			if (clip_el != nil) {
@@ -105,7 +102,6 @@ var canvas_AR6201_base = {
 				#   coordinates are top,right,bottom,left (ys, xe, ye, xs) ref: l621 of simgear/canvas/CanvasElement.cxx
 				me[key].set("clip", clip_rect);
 				me[key].set("clip-frame", canvas.Element.PARENT);
-			}
 			}
 		}
 

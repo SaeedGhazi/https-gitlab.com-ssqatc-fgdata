@@ -53,7 +53,7 @@ var canvas_S3_base = {
 		
 		canvas.parsesvg(canvas_group, file, {'font-mapper': font_mapper});
 
-		 var svg_keys = me.getKeys();
+		var svg_keys = me.getKeys();
 		 
 		foreach(var key; svg_keys) {
 			me[key] = canvas_group.getElementById(key);

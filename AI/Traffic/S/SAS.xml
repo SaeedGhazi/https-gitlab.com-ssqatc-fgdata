@@ -712,7 +712,7 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>heavy_jet</performance-class>
-    <registration>LN-RKF</registration>
+    <registration>LN-RKP</registration>
     <heavy>true</heavy>
   </aircraft>
   <aircraft>

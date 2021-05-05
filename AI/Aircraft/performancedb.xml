@@ -307,6 +307,9 @@
     <alias>
       <match>319</match>
       <match>320</match>
+      <match>31N</match>
+      <match>32N</match>
+      <match>32Q</match>
       <match>321</match>
       <match>A319</match>
       <match>A320</match>
@@ -325,8 +328,8 @@
       <match>A31</match>
       <match>Airbus_A310</match>
       <match>ABY</match>
-	  <match>ABF</match>
-	  <match>AB6</match>	  
+      <match>ABF</match>
+      <match>AB6</match>
       <match>30</match>
       <match>31</match>
       <alias>AB3</alias>
@@ -847,7 +850,7 @@
       <match>AR1</match>
       <match>AR7</match>
       <match>AR8</match>
-	  <match>142</match>
+      <match>142</match>
       <match>146</match>
       <match>146-100</match>
       <match>146-200</match>
@@ -1159,7 +1162,7 @@
     </aircraft>
     <alias>
       <match>BN-2</match>
-	  <match>BNI</match>
+      <match>BNI</match>
       <match>Islander</match>
       <alias>BN2</alias>
     </alias>

@@ -207,7 +207,7 @@
         <radius>17</radius>
         <flighttype>gate</flighttype>
         <performance-class>jet_transport</performance-class>
-        <registration>9V-JSQ</registration>
+        <registration>9V-JSU</registration>
         <heavy>false</heavy>
     </aircraft>
     <aircraft>

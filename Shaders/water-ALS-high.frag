@@ -9,6 +9,7 @@
 #version 120
 
 uniform sampler2D water_normalmap;
+uniform sampler2D water_colormap;
 uniform sampler2D water_dudvmap;
 uniform sampler2D sea_foam;
 uniform sampler2D perlin_normalmap;
@@ -219,12 +220,12 @@ void main(void)
 	float noise_2500m = Noise3D(rawPos.xyz, 2500.0);
 
 	// get depth map
+        vec4 colorTexel = texture2D(water_colormap, TopoUV);
 	vec4 topoTexel = texture2D(topo_map, TopoUV);
-	topoTexel.a = 0.8*topoTexel.r+0.2*topoTexel.g;
-        topoTexel.a = -topoTexel.a*topoTexel.a + 2*topoTexel.a;
+        topoTexel.a = topoTexel.r;
 
 	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
-	vec3 floorColour = topoTexel.rgb;
+	vec3 floorColour = colorTexel.rgb;
 	
 	mat4 RotationMatrix;
 

@@ -53,7 +53,6 @@ Started September 2000 by David Megginson, david@megginson.com
     </startup>
     <rendering>
       <initialized type="bool">false</initialized>
-      <preset type="string" preserve="y" userarchive="y">minimal-quality</preset>
       <materials-file>Materials/regions/materials.xml</materials-file>
       <multi-sample-buffers type="bool" userarchive="y">false</multi-sample-buffers>
       <multi-samples type="int" userarchive="y">0</multi-samples>

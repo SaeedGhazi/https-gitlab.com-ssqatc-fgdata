@@ -12,7 +12,7 @@
     <radius>17</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>TS-INA</registration>
+    <registration>TS-INC</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -26,7 +26,7 @@
     <radius>17</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>TS-INB</registration>
+    <registration>TS-IND</registration>
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
@@ -96,7 +96,7 @@
     <radius>17</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>TS-INA</registration>
+    <registration>TS-INR</registration>
     <heavy>false</heavy>
   </aircraft>
   <flight>

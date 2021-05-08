@@ -124,7 +124,7 @@
     <radius>17</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>LZ-FBC</registration>
+    <registration>LZ-FBE</registration>
     <heavy>false</heavy>
   </aircraft>
   <flight>

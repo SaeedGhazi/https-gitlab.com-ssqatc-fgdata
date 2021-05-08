@@ -82,24 +82,10 @@
     <radius>30</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
-    <registration>YI-AGR</registration>
+    <registration>YI-AQY</registration>
     <heavy>false</heavy>
   </aircraft>
-  <aircraft>
-    <model>Aircraft/738/738-IraqiAirways.xml</model>
-    <livery>IAW</livery>
-    <airline>IAW</airline>
-    <home-port>ORBI</home-port>
-    <required-aircraft>IAW-737</required-aircraft>
-    <actype>737</actype>
-    <offset>0</offset>
-    <radius>17</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>YI-AQA</registration>
-    <heavy>false</heavy>
-  </aircraft>
-  <aircraft>
+   <aircraft>
     <model>Aircraft/738/738-IraqiAirways.xml</model>
     <livery>IAW</livery>
     <airline>IAW</airline>

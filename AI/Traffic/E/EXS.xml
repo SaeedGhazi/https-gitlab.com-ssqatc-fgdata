@@ -319,20 +319,6 @@
 		<radius>14</radius>
 		<flighttype>gate</flighttype>
 		<performance-class>jet_transport</performance-class>
-		<registration>G-JZHA</registration>
-		<heavy>false</heavy>
-	</aircraft>
-	<aircraft>
-		<model>Aircraft/738/738-Jet2.xml</model>
-		<livery>EXS</livery>
-		<airline>EXS</airline>
-		<home-port>EGNM</home-port>
-		<required-aircraft>EXS-738</required-aircraft>
-		<actype>738</actype>
-		<offset>0</offset>
-		<radius>14</radius>
-		<flighttype>gate</flighttype>
-		<performance-class>jet_transport</performance-class>
 		<registration>G-JZHE</registration>
 		<heavy>false</heavy>
 	</aircraft>

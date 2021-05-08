@@ -508,20 +508,6 @@
     <heavy>No</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/738/738-OmanAir.xml</model>
-    <livery>OMA</livery>
-    <airline>OMA</airline>
-    <home-port>OOMS</home-port>
-    <required-aircraft>OMA-738</required-aircraft>
-    <actype>738</actype>
-    <offset>0</offset>
-    <radius>18</radius>
-    <flighttype>gate</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>OK-TVH</registration>
-    <heavy>No</heavy>
-  </aircraft>
-  <aircraft>
     <model>Aircraft/787/788-OmanAir.xml</model>
     <livery>OMA</livery>
     <airline>OMA</airline>

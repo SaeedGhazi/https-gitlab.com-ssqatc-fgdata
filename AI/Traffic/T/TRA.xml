@@ -11,7 +11,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRA</registration>
@@ -25,7 +25,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRB</registration>
@@ -39,7 +39,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRC</registration>
@@ -53,7 +53,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRD</registration>
@@ -67,7 +67,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRV</registration>
@@ -81,7 +81,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRX</registration>
@@ -95,7 +95,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRY</registration>
@@ -109,7 +109,7 @@
     <required-aircraft>737-TRA</required-aircraft>
     <actype>737</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-XRZ</registration>
@@ -123,7 +123,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHA</registration>
@@ -137,7 +137,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHB</registration>
@@ -151,7 +151,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHC</registration>
@@ -165,7 +165,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHD</registration>
@@ -179,7 +179,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHE</registration>
@@ -193,7 +193,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHF</registration>
@@ -207,7 +207,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHI</registration>
@@ -221,7 +221,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHJ</registration>
@@ -235,7 +235,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHK</registration>
@@ -249,7 +249,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHL</registration>
@@ -263,7 +263,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHM</registration>
@@ -277,7 +277,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHN</registration>
@@ -291,7 +291,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHO</registration>
@@ -305,7 +305,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHP</registration>
@@ -319,7 +319,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHQ</registration>
@@ -333,7 +333,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHR</registration>
@@ -347,7 +347,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHS</registration>
@@ -361,7 +361,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHT</registration>
@@ -375,7 +375,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHU</registration>
@@ -389,7 +389,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHV</registration>
@@ -403,7 +403,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHX</registration>
@@ -417,7 +417,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-GZHY</registration>
@@ -431,7 +431,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVA</registration>
@@ -445,7 +445,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVB</registration>
@@ -459,7 +459,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVC</registration>
@@ -473,7 +473,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVD</registration>
@@ -487,7 +487,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVE</registration>
@@ -501,7 +501,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVF</registration>
@@ -515,7 +515,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>F-HTVG</registration>
@@ -529,7 +529,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSB</registration>
@@ -543,7 +543,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSC</registration>
@@ -557,7 +557,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSF</registration>
@@ -571,7 +571,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSG</registration>
@@ -585,7 +585,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSI</registration>
@@ -599,7 +599,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSJ</registration>
@@ -613,7 +613,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSM</registration>
@@ -627,7 +627,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HSW</registration>
@@ -641,7 +641,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXA</registration>
@@ -655,7 +655,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXB</registration>
@@ -669,7 +669,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXC</registration>
@@ -683,7 +683,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXD</registration>
@@ -697,7 +697,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXE</registration>
@@ -711,7 +711,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXF</registration>
@@ -725,7 +725,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXG</registration>
@@ -739,7 +739,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXI</registration>
@@ -753,7 +753,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXJ</registration>
@@ -767,7 +767,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HXK</registration>
@@ -781,7 +781,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZD</registration>
@@ -795,7 +795,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZE</registration>
@@ -809,7 +809,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZG</registration>
@@ -823,7 +823,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZI</registration>
@@ -837,7 +837,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZJ</registration>
@@ -851,7 +851,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZL</registration>
@@ -865,7 +865,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZN</registration>
@@ -879,7 +879,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZO</registration>
@@ -893,7 +893,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZV</registration>
@@ -907,7 +907,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZW</registration>
@@ -921,7 +921,7 @@
     <required-aircraft>738-TRA</required-aircraft>
     <actype>738</actype>
     <offset>0</offset>
-    <radius>14</radius>
+    <radius>18</radius>
     <flighttype>gate</flighttype>
     <performance-class>jet_transport</performance-class>
     <registration>PH-HZX</registration>

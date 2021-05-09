@@ -281,14 +281,14 @@
           <value>Enabled</value>
           <binding>
             <command>dialog-apply</command>
-            <object-name>model-quality</object-name>
+            <object-name>model-effects</object-name>
           </binding>
           <binding>
             <command>nasal</command>
             <script>
               var val = getprop("/sim/gui/dialogs/advanced/model-effects");
               if (val == "Enabled") {
-                setprop("/sim/rendering/shaders/model", 1);
+                setprop("/sim/rendering/shaders/model", 3);
               } else {
                 setprop("/sim/rendering/shaders/model", 0);
               }

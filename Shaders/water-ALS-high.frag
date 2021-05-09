@@ -222,7 +222,6 @@ void main(void)
 	// get depth map
         vec4 colorTexel = texture2D(water_colormap, TopoUV);
 	vec4 topoTexel = texture2D(topo_map, TopoUV);
-        topoTexel.a = topoTexel.r;
 
 	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
 	vec3 floorColour = colorTexel.rgb;

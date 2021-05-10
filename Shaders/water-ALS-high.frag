@@ -28,7 +28,7 @@ varying vec3 lightdir;
 varying vec3 relPos;
 varying vec3 rawPos;
 varying vec2 TopoUV;
-
+uniform vec3 floor_color;
 
 varying float earthShade;
 varying float yprime_alt;
@@ -59,6 +59,7 @@ uniform float ice_cover;
 uniform float sea_r;
 uniform float sea_g;
 uniform float sea_b;
+uniform float water_shallowness;
 uniform float air_pollution;
 uniform float landing_light1_offset;
 uniform float landing_light2_offset;
@@ -71,6 +72,8 @@ uniform float wash_strength;
 uniform int quality_level;
 uniform int tquality_level;
 uniform int ocean_flag;
+uniform int use_specified_water_shallowness;
+uniform int use_specified_floor_color;
 uniform int cloud_shadow_flag;
 uniform int use_searchlight;
 uniform int use_landing_light;
@@ -219,12 +222,25 @@ void main(void)
 	float noise_2000m = Noise3D(rawPos.xyz,2000.0);
 	float noise_2500m = Noise3D(rawPos.xyz, 2500.0);
 
-	// get depth map
-        vec4 colorTexel = texture2D(water_colormap, TopoUV);
-	vec4 topoTexel = texture2D(topo_map, TopoUV);
+	// get water shallowness and floor colour
+        float shallowness;
+	if (use_specified_water_shallowness == 0)
+	{
+		vec4 depthTexel = texture2D(topo_map, TopoUV);
+		shallowness = depthTexel.r;
+	} else {
+		shallowness = water_shallowness;
+	}
+	float floorMixFactor = smoothstep(0.3, 0.985, shallowness);
 
-	float floorMixFactor = smoothstep(0.3, 0.985, topoTexel.a);
-	vec3 floorColour = colorTexel.rgb;
+	vec3 floorColour;
+	if (use_specified_floor_color == 0)
+	{
+        	vec4 colorTexel = texture2D(water_colormap, TopoUV);
+		floorColour = colorTexel.rgb;
+	} else {
+		floorColour = floor_color;
+	}
 	
 	mat4 RotationMatrix;
 
@@ -375,7 +391,7 @@ void main(void)
 	
 	// the depth map works perfectly fine for both ocean and inland water texels
 	refl.rgb = mix(refl.rgb, 0.65* floorColour, floorMixFactor);
-	refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,topoTexel.a));
+	refl.rgb = refl.rgb * (0.5 + 0.5 * smoothstep(0.0,0.3,shallowness));
 		
 	
 	float intensity;
@@ -520,12 +536,12 @@ void main(void)
 	float surfFact = 0.0;
 	surfFact += washStrength;
 	
-	if ((windEffect >= 8.0)  || (steepness < 0.999) || (topoTexel.a > 0.9) || (washStrength > 0.5))
+	if ((windEffect >= 8.0)  || (steepness < 0.999) || (shallowness > 0.9) || (washStrength > 0.5))
 		{
 		if ((waveSlope > 0.0) && (ocean_flag ==1))
 			{
 			surfFact = surfFact +(1.0 -smoothstep(0.97,1.0,steepness));
-			surfFact += 0.5 * smoothstep(0.98,1.0,topoTexel.a);
+			surfFact += 0.5 * smoothstep(0.98,1.0,shallowness);
 
 			}
 			waveSlope = waveSlope + 2.0 * surfFact;

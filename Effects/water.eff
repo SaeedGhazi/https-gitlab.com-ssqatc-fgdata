@@ -75,6 +75,11 @@
 			<wrap-t>repeat</wrap-t>
 			<internal-format>normalized</internal-format>
 		</texture>
+		<use_specified_water_shallowness type="int">0</use_specified_water_shallowness>
+                <water_shallowness type="float">0.7</water_shallowness>
+		<use_specified_floor_color type="int">0</use_specified_floor_color>
+		<floor_color type="vec3d">0.054 0.149 0.384</floor_color>
+		<ocean_flag>1</ocean_flag>
         <normalmap_dds type="float">0.0</normalmap_dds>
 		<saturation>
 			<use>/rendering/scene/saturation</use>
@@ -459,6 +464,26 @@
                                 <type>sampler-2d</type>
                                 <value type="int">8</value>
                         </uniform>
+                        <uniform>
+                                <name>use_specified_water_shallowness</name>
+                                <type>int</type>
+                                <value><use>use_specified_water_shallowness</use></value>
+                        </uniform>
+                        <uniform>
+                                <name>water_shallowness</name>
+                                <type>float</type>
+                                <value><use>water_shallowness</use></value>
+                        </uniform>	
+                        <uniform>
+                                <name>use_specified_floor_color</name>
+                                <type>int</type>
+                                <value><use>use_specified_floor_color</use></value>
+                        </uniform>	
+                        <uniform>
+                                <name>floor_color</name>
+                                <type>float-vec3</type>
+                                <value><use>floor_color</use></value>
+                        </uniform>	
             <!-- normalmap is .dds-->
             <uniform>
                 <name>normalmap_dds</name>
@@ -976,7 +1001,7 @@
 			<uniform>
 				<name>ocean_flag</name>
 				<type>int</type>
-				<value>1</value>
+				<value><use>ocean_flag</use></value>
 			</uniform>
 			<!-- END fog include -->
 		</pass>
@@ -1409,7 +1434,7 @@
 			<uniform>
 				<name>ocean_flag</name>
 				<type>int</type>
-				<value>1</value>
+				<value><use>ocean_flag</use></value>
 			</uniform>
       			<uniform>
         			<name>display_xsize</name>

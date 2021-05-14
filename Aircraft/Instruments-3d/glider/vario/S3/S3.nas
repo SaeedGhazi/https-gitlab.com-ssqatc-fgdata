@@ -42,6 +42,8 @@ var volt_prop	=	props.globals.initNode("/systems/electrical/outputs/S3", 0.0, "D
 
 var mc		=	s3.initNode("mc", 1.5, "DOUBLE");
 
+var needle	=	s3.initNode( "needle-deg", 0.0, "DOUBLE" );
+
 var instrument_dir	=	"Aircraft/Instruments-3d/glider/vario/S3/";
 
 var canvas_S3_base = {
@@ -135,6 +137,18 @@ var canvas_S3_start = {
 };
 
 var s3_update = maketimer(0.2, func() { canvas_S3_base.update() } );
+s3_update.simulatedTime = 1;
+
+var vario_needle_ctrl = func {
+	if( start_prop.getDoubleValue() == 1.0 ){
+		needle.setDoubleValue( math.clamp( te_rdg.getDoubleValue() * 24, -132, 132 ) );	# max deflection: 132 deg at +- 5.5 m/s
+	} else {
+		needle.setDoubleValue( 0.0 );
+	}
+}
+
+var needle_update = maketimer( 0.0, vario_needle_ctrl );
+needle_update.simulatedTime = 1;
 
 var ls = setlistener("sim/signals/fdm-initialized", func {
 	S3_display = canvas.new({
@@ -152,6 +166,7 @@ var ls = setlistener("sim/signals/fdm-initialized", func {
 	S3_start = canvas_S3_start.new(groupStart, instrument_dir~"S3_start.svg");
 	
 	s3_update.start();
+	needle_update.start();
 	
 	removelistener(ls);
 });
@@ -259,5 +274,4 @@ var slow_instruments = UpdateLoop.new(
 	update_period: 1,
 	components: [averager],
 	enable: 1);
-
 	

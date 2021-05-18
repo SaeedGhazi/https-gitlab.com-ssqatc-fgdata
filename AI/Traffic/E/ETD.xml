@@ -1263,21 +1263,7 @@
     <registration>N476MC</registration>
     <heavy>true</heavy>
   </aircraft>
-  <aircraft>
-    <model>Aircraft/747/74Y-Etihad.xml</model>
-    <livery>ETD</livery>
-    <airline>ETD</airline>
-    <home-port>OMAA</home-port>
-    <required-aircraft>ETD-74F</required-aircraft>
-    <actype>74F</actype>
-    <offset>0</offset>
-    <radius>32</radius>
-    <flighttype>cargo</flighttype>
-    <performance-class>jet_transport</performance-class>
-    <registration>N855GT</registration>
-    <heavy>true</heavy>
-  </aircraft>
-  <aircraft>
+   <aircraft>
     <model>Aircraft/777/77F-Etihad.xml</model>
     <livery>ETD</livery>
     <airline>ETD</airline>

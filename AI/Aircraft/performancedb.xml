@@ -219,6 +219,8 @@
     <alias>
       <match>73</match>
       <match>Boeing_737</match>
+	  <match>7M8</match>
+	  <match>7M9</match>
       <alias>737</alias>
     </alias>
     <!-- Boeing 717 all versions -->

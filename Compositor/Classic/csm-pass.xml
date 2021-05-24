@@ -2,6 +2,7 @@
 
 <PropertyList>
   <type>csm</type>
+  <implicit-attachment-mask></implicit-attachment-mask>
   <effect-scheme>classic-shadow</effect-scheme>
   <!-- Only render objects with the CAST_SHADOW bit flag -->
   <cull-mask>0x000004</cull-mask>

@@ -35,6 +35,9 @@ Started September 2000 by David Megginson, david@megginson.com
     <presets preserve="y">
       <trim type="bool">true</trim>
     </presets>
+    <controls>
+      <brake-cancels-parking-brake>true</brake-cancels-parking-brake>
+    </controls>
     <startup>
       <xsize type="int" preserve="y" userarchive="y">1024</xsize>
       <ysize type="int" preserve="y" userarchive="y">768</ysize>

@@ -232,44 +232,10 @@
             <row>6</row>
             <col>0</col>
             <halign>right</halign>
-            <label>Compatibility</label>
-        </text>
-        <combo>
-            <row>6</row>
-            <col>1</col>
-            <halign>left</halign>
-            <name>protocol-version</name>
-            <pref-width>300</pref-width>
-            <property>/sim/gui/dialogs/multiplay/protocol-version</property>
-            <value>Visible to all</value>
-            <value>Visible to only 2017+</value>
-            <binding>
-                <command>dialog-apply</command>
-                <object-name>protocol-version</object-name>
-            </binding>
-            <binding>
-                <command>nasal</command>
-                <script>
-                    var val = getprop("/sim/gui/dialogs/multiplay/protocol-version");
-                    if (val == "Visible to all") {
-                    setprop("/sim/multiplay/protocol-version", 1);
-                    }
-
-                    if (val == "Visible to only 2017+") {
-                    setprop("/sim/multiplay/protocol-version", 2);
-                    }
-                </script>
-            </binding>
-        </combo>
-
-        <text>
-            <row>7</row>
-            <col>0</col>
-            <halign>right</halign>
             <label>   Callsign:</label>
         </text>
         <input>
-            <row>7</row>
+            <row>6</row>
             <col>1</col>
             <halign>left</halign>
             <property>/sim/multiplay/callsign</property>
@@ -281,7 +247,7 @@
         </input>
         <group>
             <layout>hbox</layout>
-            <row>7</row>
+            <row>6</row>
             <col>1</col>
             <text>
                 <width>2</width>
@@ -304,7 +270,7 @@
         <combo>
             <name>host</name>
             <halign>left</halign>
-            <row>8</row>
+            <row>7</row>
             <col>1</col>
             <colspan>2</colspan>
             <pref-width>350</pref-width>
@@ -315,7 +281,7 @@
         </combo>
 
         <text>
-          <row>9</row>
+          <row>8</row>
           <col>0</col>
           <halign>right</halign>
           <label>Server:</label>
@@ -324,13 +290,13 @@
             <visible>
                 <not><property>/sim/multiplay/online</property></not>
             </visible>
-            <row>9</row>
+            <row>8</row>
             <col>1</col>
             <halign>left</halign>
             <label>Not connected</label>
         </text>
         <text>
-            <row>9</row>
+            <row>8</row>
             <col>1</col>
             <visible>
                 <property>/sim/multiplay/online</property>

@@ -56,12 +56,39 @@
 				me.maxProp = replaySlider.getChild("max");
 				me.minProp = replaySlider.getChild("min");
 				me.speedUpListenerId = setlistener( "/sim/speed-up", func(n) { me.updateListener(n); }, 1, 1 );
+				me.timeOffsetListenerId = setlistener( "/sim/replay/time-offset",
+						func(n)
+						{
+							var offset = n.getValue();
+							if (offset < 0) offset = 0;
+							var t = getprop("/sim/replay/start-time") + offset;
+							setprop("/sim/replay/time", t);
+						},
+						0, # init.
+						);
+				me.timeListenerId = setlistener( "/sim/replay/time",
+						func(n)
+						{
+							var offset = n.getValue() - getprop("/sim/replay/start-time");
+							setprop("/sim/replay/time-offset", offset);
+						},
+						0, # init.
+						);
+				me.endTimeListenerId = setlistener( "/sim/replay/end-time",
+						func(n)
+						{
+							var offset = n.getValue() - getprop("/sim/replay/start-time");
+							setprop("/sim/replay/begin-end-duration", offset);
+						},
+						1, # init.
+						);
 				me.viewListenerId = setlistener( "/sim/current-view/view-number", func(n) { me.updateListener(n); }, 1, 1 );
 				if (getprop("/sim/replay/end-time")!=nil)
 				{
 					# update max/min range of replay-time slider
-					me.maxProp.setValue(getprop("/sim/replay/end-time"));
-					me.minProp.setValue(getprop("/sim/replay/start-time"));
+					me.minProp.setValue(0);
+					me.maxProp.setValue(getprop("/sim/replay/end-time") - getprop("/sim/replay/start-time"));
+					#printf("Have set replay time range %s-%s", me.minProp.getValue(), me.maxProp.getValue());
 				}
 				me.updateListener(1);
 			},
@@ -80,6 +107,9 @@
 			close : func {
 				removelistener( me.speedUpListenerId );
 				removelistener( me.viewListenerId );
+				removelistener( me.timeOffsetListenerId );
+				removelistener( me.timeListenerId );
+				removelistener( me.endTimeListenerId );
 			},
 
 		};
@@ -341,7 +371,7 @@
 		</button>
 
 		<text>
-			<label>9:99:99</label>
+			<label>0</label>
 			<color>
 				<red>0.7</red>
 				<green>0.7</green>
@@ -351,7 +381,6 @@
 			<format>%8s</format>
 			<halign>right</halign>
 			<live>true</live>
-			<property>/sim/replay/start-time-str</property>
 		</text>
 
 		<slider>
@@ -367,7 +396,7 @@
 			<pref-width>350</pref-width>
 			<min>0</min><!-- property is updated on "dialog open" -->
 			<max>1.0</max><!-- property is updated on "dialog open" -->
-			<property>/sim/replay/time</property>
+			<property>/sim/replay/time-offset</property>
 			<live>true</live>
 			<binding>
 				<command>dialog-apply</command>
@@ -383,10 +412,10 @@
 				<blue>0.7</blue>
 				<alpha>1</alpha>
 			</color>
-			<format>%s</format>
+			<format>%.1f</format>
 			<halign>left</halign>
 			<live>true</live>
-			<property>/sim/replay/end-time-str</property>
+			<property>/sim/replay/begin-end-duration</property>
 		</text>
 
 		<button>

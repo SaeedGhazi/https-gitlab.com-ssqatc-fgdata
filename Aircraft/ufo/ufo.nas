@@ -442,7 +442,8 @@ var modelmgr = {
 		if (KbdAlt.getValue() and KbdCtrl.getValue()) { # Provide information on the selected point
       var geod = geodinfo(me.mouse_coord.lat(), me.mouse_coord.lon());
       var landclass = string.join(" ", geod[1].names);
-      var str = sprintf("lat:%.4f lon:%.4f alt:%.0fm class(es): %s",
+      var str = sprintf("%s: lat:%.4f lon:%.4f alt:%.0fm class(es): %s",
+                         geod[1].region,
                          me.mouse_coord.lat(), me.mouse_coord.lon(),
                          me.mouse_coord.alt(), landclass);
       gui.popupTip(str, 3);

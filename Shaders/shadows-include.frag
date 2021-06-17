@@ -7,9 +7,10 @@ uniform int sun_atlas_size;
 
 varying vec4 lightSpacePos[4];
 
-const bool DEBUG_CASCADES = false;
-
 const float DEPTH_BIAS = 2.0;
+const float BAND_SIZE = 0.1;
+const vec2 BAND_BOTTOM_LEFT = vec2(BAND_SIZE);
+const vec2 BAND_TOP_RIGHT   = vec2(1.0 - BAND_SIZE);
 
 // Ideally these should be passed as an uniform, but we don't support uniform
 // arrays yet
@@ -18,23 +19,6 @@ const vec2 uv_shifts[4] = vec2[4](
     vec2(0.0, 0.5), vec2(0.5, 0.5));
 const vec2 uv_factor = vec2(0.5, 0.5);
 
-
-float debugCascade(int cascade)
-{
-    const mat2 bayer_matrix = mat2(0, 3, 2, 1);
-    const float scale = 0.2;
-    vec2 coords = mod(gl_FragCoord.xy * scale, 2.0);
-    int threshold = int(bayer_matrix[int(coords.x)][int(coords.y)]);
-    if (threshold < cascade)
-        return 0.0;
-    return 1.0;
-}
-
-float checkWithinBounds(vec2 coords, vec2 bottomLeft, vec2 topRight)
-{
-    vec2 r = step(bottomLeft, coords) - step(topRight, coords);
-    return r.x * r.y;
-}
 
 float sampleOffset(vec4 pos, vec2 offset, vec2 invTexelSize)
 {
@@ -93,45 +77,62 @@ float sampleOptimizedPCF(vec4 pos)
     return sum / 144.0;
 }
 
-float sampleShadowMap(int n)
+float sampleCascade(int n)
 {
-    float s = 1.0;
-    if (n < 4) {
-        vec4 pos = lightSpacePos[n];
-        pos.xy *= uv_factor;
-        pos.xy += uv_shifts[n];
-        s = sampleOptimizedPCF(pos);
-    }
-    return s;
+    vec4 pos = lightSpacePos[n];
+    pos.xy *= uv_factor;
+    pos.xy += uv_shifts[n];
+    return sampleOptimizedPCF(pos);
+}
+
+float sampleAndBlendBand(int n1, int n2)
+{
+    vec2 s = smoothstep(vec2(0.0), BAND_BOTTOM_LEFT, lightSpacePos[n1].xy)
+        - smoothstep(BAND_TOP_RIGHT, vec2(1.0), lightSpacePos[n1].xy);
+    float blend = 1.0 - s.x * s.y;
+    return mix(sampleCascade(n1), sampleCascade(n2), blend);
+}
+
+bool checkWithinBounds(vec2 coords, vec2 bottomLeft, vec2 topRight)
+{
+    vec2 r = step(bottomLeft, coords) - step(topRight, coords);
+    return bool(r.x * r.y);
+}
+
+bool isInsideCascade(int n)
+{
+    return checkWithinBounds(lightSpacePos[n].xy, vec2(0.0), vec2(1.0)) &&
+        ((lightSpacePos[n].z / lightSpacePos[n].w) <= 1.0);
+}
+
+bool isInsideBand(int n)
+{
+    return !checkWithinBounds(lightSpacePos[n].xy, BAND_BOTTOM_LEFT, BAND_TOP_RIGHT);
 }
 
 // Get a value between 0.0 and 1.0 where 0.0 means shadowed and 1.0 means lit
 float getShadowing()
 {
-    if (!shadows_enabled)
-        return 1.0;
-
-    const float band_size = 0.2;
-    const vec2 bandBottomLeft = vec2(band_size);
-    const vec2 bandTopRight   = vec2(1.0 - band_size);
-
-    for (int i = 0; i < 4; ++i) {
-        if (checkWithinBounds(lightSpacePos[i].xy, vec2(0.0), vec2(1.0)) > 0.0 &&
-            (lightSpacePos[i].z / lightSpacePos[i].w) <= 1.0) {
-            float debug_value = 0.0;
-            if (DEBUG_CASCADES)
-                debug_value = debugCascade(i);
-
-            if (checkWithinBounds(lightSpacePos[i].xy, bandBottomLeft, bandTopRight) < 1.0) {
-                vec2 s =
-                    smoothstep(vec2(0.0), bandBottomLeft, lightSpacePos[i].xy) -
-                    smoothstep(bandTopRight, vec2(1.0), lightSpacePos[i].xy);
-                float blend = 1.0 - s.x * s.y;
-                return clamp(mix(sampleShadowMap(i), sampleShadowMap(i+1), blend) - debug_value, 0.0, 1.0);
+    float shadow = 1.0;
+    if (shadows_enabled) {
+        for (int i = 0; i < 4; ++i) {
+            // Map-based cascade selection
+            // We test if we are inside the cascade bounds to find the tightest
+            // map that contains the fragment.
+            if (isInsideCascade(i)) {
+                if (isInsideBand(i) && ((i+1) < 4)) {
+                    // Blend between cascades if the fragment is near the
+                    // next cascade to avoid abrupt transitions.
+                    shadow = clamp(sampleAndBlendBand(i, i+1), 0.0, 1.0);
+                } else {
+                    // We are far away from the borders of the cascade, so
+                    // we skip the blending to avoid the performance cost
+                    // of sampling the shadow map twice.
+                    shadow = clamp(sampleCascade(i), 0.0, 1.0);
+                }
+                break;
             }
-            return clamp(sampleShadowMap(i) - debug_value, 0.0, 1.0);
         }
     }
-
-    return 1.0;
+    return shadow;
 }

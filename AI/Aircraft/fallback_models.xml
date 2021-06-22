@@ -28,6 +28,7 @@
   551-600 Military large aircraft (tankers, transports)
   601-700 Helicopters
   701-800 Other
+  801-900 Maritime
 -->
 <PropertyList>
 
@@ -180,5 +181,15 @@
 AI model.  We also want to load it in preference to the default glider because it will
 then be invisible to other MP players who are not in a UFO themselves. -->
 <model n="712" type="string">Aircraft/ufo/Models/ufo.xml</model>
+
+<model n="801" type="string">AI/Maritime/MP-Carriers/mp-nimitz-0.xml</model>
+<model n="802" type="string">AI/Maritime/MP-Carriers/mp-vinson-0.xml</model>
+<model n="803" type="string">AI/Maritime/MP-Carriers/mp-eisenhower-0.xml</model>
+<model n="804" type="string">AI/Maritime/MP-Carriers/mp-truman-0.xml</model>
+<model n="805" type="string">AI/Maritime/MP-Carriers/mp-clemenceau-0.xml</model>
+<model n="806" type="string">AI/Maritime/MP-Carriers/mp-foch-0.xml</model>
+<model n="807" type="string">AI/Maritime/MP-Carriers/mp-kuznetsov-0.xml</model>
+<model n="808" type="string">AI/Maritime/MP-Carriers/mp-liaoning-0.xml</model>
+<model n="809" type="string">AI/Maritime/MP-Carriers/mp-sanantonio-0.xml</model>
 
 </PropertyList>

@@ -48,9 +48,24 @@
             <label>Continuous record to file</label>
             <halign>left</halign>
         </text>
-    
+        
         <checkbox>
             <row>1</row>
+            <col>0</col>
+            <property>sim/replay/record-continuous-compression</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+        <text>
+            <row>1</row>
+            <col>1</col>
+            <label>Continuous record with compression</label>
+            <halign>left</halign>
+        </text>
+    
+        <checkbox>
+            <row>2</row>
             <col>0</col>
             <property>sim/replay/recovery-period</property>
             <binding>
@@ -58,14 +73,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>1</row>
+            <row>2</row>
             <col>1</col>
             <label>Maintain recovery snapshot</label>
             <halign>left</halign>
         </text>
         
         <checkbox>
-            <row>2</row>
+            <row>3</row>
             <col>0</col>
             <property>sim/replay/record-signals</property>
             <binding>
@@ -73,14 +88,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>2</row>
+            <row>3</row>
             <col>1</col>
             <label>Include user aircraft in Continuous recordings</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>3</row>
+            <row>4</row>
             <col>0</col>
             <property>sim/replay/record-multiplayer</property>
             <binding>
@@ -88,14 +103,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>3</row>
+            <row>4</row>
             <col>1</col>
             <label>Include multiplayer aircraft in recordings</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>4</row>
+            <row>5</row>
             <col>0</col>
             <property>sim/replay/record-main-window</property>
             <binding>
@@ -103,14 +118,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>4</row>
+            <row>5</row>
             <col>1</col>
             <label>Record main window position and size</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>5</row>
+            <row>6</row>
             <col>0</col>
             <property>sim/replay/record-main-view</property>
             <binding>
@@ -118,14 +133,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>5</row>
+            <row>6</row>
             <col>1</col>
             <label>Record main window view</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>6</row>
+            <row>7</row>
             <col>0</col>
             <property>sim/replay/replay-main-window-position</property>
             <binding>
@@ -133,14 +148,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>6</row>
+            <row>7</row>
             <col>1</col>
             <label>Replay main window position</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>7</row>
+            <row>8</row>
             <col>0</col>
             <property>sim/replay/replay-main-window-size</property>
             <binding>
@@ -148,14 +163,14 @@
             </binding>
         </checkbox>
         <text>
-            <row>7</row>
+            <row>8</row>
             <col>1</col>
             <label>Replay main window size</label>
             <halign>left</halign>
         </text>
     
         <checkbox>
-            <row>8</row>
+            <row>9</row>
             <col>0</col>
             <property>sim/replay/replay-main-view</property>
             <binding>
@@ -163,7 +178,7 @@
             </binding>
         </checkbox>
         <text>
-            <row>8</row>
+            <row>9</row>
             <col>1</col>
             <label>Replay main window view</label>
             <halign>left</halign>

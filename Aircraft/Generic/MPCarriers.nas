@@ -19,7 +19,11 @@
 # mp carriers.
 #
 var g_auto_attach = props.globals.getNode("/sim/mp-carriers/auto-attach", 1);
-printf("g_auto_attach.getValue()=%s", g_auto_attach.getValue());
+var g_latch_always = props.globals.getNode("/sim/mp-carriers/latch-always", 1);
+printf("fgdata/Aircraft/Generic/MPCarriers.nas: g_auto_attach.getValue()=%s g_latch_always=%s",
+        g_auto_attach.getValue(),
+        g_latch_always.getValue(),
+        );
 
 # Constants
 var lat     = "position/latitude-deg";
@@ -202,6 +206,8 @@ Manager.update = func {
     me.message = message;
   }
 
+  if (!g_latch_always.getValue())
+  {
   #  carrier_pos.set_latlon(me.carrier.getNode(lat).getValue(),
   #                         me.carrier.getNode(lon).getValue(),
   #                         me.carrier.getNode(alt).getValue());
@@ -219,7 +225,8 @@ Manager.update = func {
   rplayer_pos.set_xyz(me.rplayer.getNode(x).getValue(),
                       me.rplayer.getNode(y).getValue(),
                       me.rplayer.getNode(z).getValue());
-
+  }
+  
   var master_course      = normalize_course(me.rplayer.getNode(mp_heading).getValue());
   var master_speed       = me.rplayer.getNode(mp_speed).getValue();
   var bearing_to_master  = normalize_course(carrier_pos.course_to(rplayer_pos));
@@ -332,7 +339,17 @@ Manager.update = func {
   me.carrier.getNode("mp-control/aircraft-ai-distance", 1).setValue(distance_aircraft_carrier);
   me.carrier.getNode("mp-control/ai-mp-latched", do_latch);
   
-  if (do_latch) {
+  if (g_latch_always.getValue()) {
+    # Tell C++ to copy MP position/orientation directly on to AI
+    # position/orientation, every frame.
+    #
+    # Set /ai/models/multiplayer[]/ai-latch to "/ai/models/carrier[]".
+    #
+    # Set /ai/models/carrier[]/ai-latch to "/ai/models/multiplayer[]".
+    me.rplayer.getNode("ai-latch", 1).setValue(me.carrier.getPath());
+    me.carrier.getNode("ai-latch", 1).setValue(me.rplayer.getPath());
+  }
+  elsif (do_latch) {
     # Latch the local AI carrier to the remote player's
     # location only when the local player is far enough away not
     # to suffer side effects.
@@ -372,6 +389,8 @@ Manager.stop = func {
   # Reenable AI control.
   if (me.carrier.getNode(c_control_mp_ctrl) != nil)
     me.carrier.getNode(c_control_mp_ctrl).setBoolValue(0);
+  me.rplayer.getNode("ai-latch").setValue("");
+  me.carrier.getNode("ai-latch").setValue("");
 }
 ##################################################
 Manager.die = func {

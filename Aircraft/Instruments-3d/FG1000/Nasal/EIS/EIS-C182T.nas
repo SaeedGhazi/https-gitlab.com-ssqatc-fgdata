@@ -28,7 +28,7 @@ var EIS =
 
     obj.setController(fg1000.EISController.new(obj, svg));
 
-    obj.addTextElements(["ManDisplay", "RPMDisplay", "MBusVolts", "EBusVolts"]);
+    obj.addTextElements(["ManDisplay", "RPMDisplay", "MBusVolts", "EBusVolts", "MBattAmps", "SBattAmps"]);
 
     obj._fuelFlowPointer    = PFD.PointerElement.new(obj.pageName, svg, "FuelFlowPointer", 0.0, 22.0, 135);
     obj._oilPressurePointer = PFD.PointerElement.new(obj.pageName, svg, "OilPressurePointer", 0.0, 115.0, 135);
@@ -51,6 +51,8 @@ var EIS =
     me.setTextElement("ManDisplay", sprintf("%.1f", engineData.Man));
     me.setTextElement("MBusVolts", sprintf("%.01f", engineData.MBusVolts));
     me.setTextElement("EBusVolts", sprintf("%.01f", engineData.MBusVolts)); # TODO: Include Emergency Bus
+    me.setTextElement("MBattAmps", sprintf("%+.01f", engineData.MBattAmps));
+    me.setTextElement("SBattAmps", sprintf("%+.01f", engineData.MBattAmps)); # TODO: Include Emergency Bus
 
     me._fuelFlowPointer.setValue(engineData.FuelFlowGPH);
     me._oilPressurePointer.setValue(engineData.OilPressurePSI);

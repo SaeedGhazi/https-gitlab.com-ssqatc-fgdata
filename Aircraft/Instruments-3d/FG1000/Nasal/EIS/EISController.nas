@@ -41,6 +41,7 @@ var EISController =
       "RPM",
       "Man",
       "MBusVolts",
+      "MBattAmps",
       "EngineHours",
       "FuelFlowGPH",
       "OilPressurePSI",

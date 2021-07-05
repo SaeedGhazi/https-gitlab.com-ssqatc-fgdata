@@ -39,11 +39,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3699065"
-     inkscape:cx="-66.126623"
-     inkscape:cy="450.5588"
+     inkscape:zoom="3.3515539"
+     inkscape:cx="24.554255"
+     inkscape:cy="351.5442"
      inkscape:document-units="px"
-     inkscape:current-layer="EISGroup"
+     inkscape:current-layer="g5014"
      showgrid="false"
      inkscape:window-width="2488"
      inkscape:window-height="1376"
@@ -621,13 +621,15 @@
         <path
            inkscape:connector-curvature="0"
            id="path5108"
-           d="m 120.34531,335.65557 16.45634,0.21098"
-           style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           d="m 120.34531,335.76106 h 16.45634"
+           style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           sodipodi:nodetypes="cc" />
         <path
            style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 7.8936094,335.65557 24.34995,335.86655"
+           d="M 7.8936094,335.83098 H 24.34995"
            id="path5110"
-           inkscape:connector-curvature="0" />
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cc" />
         <text
            id="text5112"
            y="359.64337"

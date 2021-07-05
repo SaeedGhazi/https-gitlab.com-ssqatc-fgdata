@@ -46,6 +46,7 @@ var EISController =
       "OilPressurePSI",
       "OilTemperatureF",
       "EGTNorm",
+      "CHTDegF",
       "VacuumSuctionInHG"];
 
     foreach (var val; elements) {

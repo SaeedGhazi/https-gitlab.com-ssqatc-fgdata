@@ -35,6 +35,8 @@ var EIS =
     obj._oilTempPointer     = PFD.PointerElement.new(obj.pageName, svg, "OilTempPointer", 0.0, 245.0, 135);
     obj._EGTPointer         = PFD.PointerElement.new(obj.pageName, svg, "EGTPointer", 0.0, 1.0, 135);
     obj._EGTCylinder        = PFD.PointerElement.new(obj.pageName, svg, "EGTCylinder", 0.0, 1.0, 135);
+    obj._CHTPointer         = PFD.PointerElement.new(obj.pageName, svg, "CHTPointer", 0.0, 400, 135);
+    obj._CHTCylinder        = PFD.PointerElement.new(obj.pageName, svg, "CHTCylinder", 0.0, 400, 135);
     obj._leftFuelPointer    = PFD.PointerElement.new(obj.pageName, svg, "LeftFuelPointer", 0.0, 40.0, 135);
     obj._rightFuelPointer   = PFD.PointerElement.new(obj.pageName, svg, "RightFuelPointer", 0.0, 40.0, 135);
 
@@ -55,6 +57,8 @@ var EIS =
     me._oilTempPointer.setValue(engineData.OilTemperatureF);
     me._EGTPointer.setValue(engineData.EGTNorm);
     me._EGTCylinder.setValue(engineData.EGTNorm);
+    me._CHTPointer.setValue(engineData.CHTDegF);
+    me._CHTCylinder.setValue(engineData.CHTDegF);
 
     me._RPMPointer.setValue(engineData.RPM);
     me._ManPointer.setValue(engineData.Man);

@@ -64,6 +64,7 @@ uniform int rock_strata;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+uniform int swatch_size;  //in metres, typically 1000 or 2000
 
 uniform bool orthophotoAvailable;
 
@@ -176,7 +177,8 @@ else
 	}
 
 
-// get noise at different wavelengths
+// get noise at different wavelengths in units of swatch_size
+// original assumed 4km texture.
 
 // used:	5m, 5m gradient, 10m, 10m gradient: heightmap of the closeup terrain, 10m also snow
 //		50m: detail texel
@@ -198,16 +200,17 @@ float noisegrad_5m;
 float noisegrad_2m;
 float noisegrad_1m;
 
+// Noise relative to swatch size
+
+float noise_25m = Noise2D(rawPos.xy, swatch_size*0.000625);
+float noise_50m = Noise2D(rawPos.xy, swatch_size*0.00125);
 
 
-float noise_25m = Noise2D(rawPos.xy, 25.0);
-float noise_50m = Noise2D(rawPos.xy, 50.0);
-
-
-float noise_250m = Noise3D(worldPos.xyz,250.0);
-float noise_500m = Noise3D(worldPos.xyz, 500.0);
-float noise_1500m = Noise3D(worldPos.xyz, 1500.0);
-float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
+float noise_250m = Noise3D(worldPos.xyz,swatch_size*0.0625);
+float noise_500m = Noise3D(worldPos.xyz, swatch_size*0.125);
+float noise_1500m = Noise3D(worldPos.xyz, swatch_size*0.3750);
+float noise_2000m = Noise3D(worldPos.xyz, swatch_size*0.5);
+float noise_4000m = Noise3D(worldPos.xyz, swatch_size);
 
 // dot noise
 
@@ -296,9 +299,6 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 		detail_texel = texture2D(detail_texture, stprime);
 		if (detail_texel.a <0.1) {flag = 0;}
 	}
-	
-	
-
 
 // texture preparation according to detail level
 
@@ -315,7 +315,7 @@ float mix_factor;
    
    if (mix_flag == 1)
 	{
-	nSum =  0.18 * (2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
+	nSum =  0.167 * (noise_4000m + 2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
 	nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
 	nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
 	mix_factor = smoothstep(0.5, 0.54, nSum);

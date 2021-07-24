@@ -2,7 +2,6 @@
 
 <PropertyList>
   <type>scene</type>
-  <implicit-attachment-mask>depth</implicit-attachment-mask>
   <effect-scheme>hdr-envmap</effect-scheme>
   <!-- Only render the skydome and terrain -->
   <!-- TODO: Explicitly select the LOD level -->

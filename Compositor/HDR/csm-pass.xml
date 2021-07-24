@@ -2,6 +2,7 @@
 
 <PropertyList>
   <type>csm</type>
+  <implicit-attachment-mask/>
   <effect-scheme>hdr-shadow</effect-scheme>
   <!-- Only render objects with the CAST_SHADOW bit flag -->
   <cull-mask>0x000004</cull-mask>

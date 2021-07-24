@@ -79,7 +79,7 @@
     <type>cubemap</type>
     <width>128</width>
     <height>128</height>
-    <format>r11g11b10f</format>
+    <format>rgb16f</format>
     <min-filter>linear-mipmap-linear</min-filter>
     <mag-filter>linear</mag-filter>
     <wrap-s>clamp-to-edge</wrap-s>

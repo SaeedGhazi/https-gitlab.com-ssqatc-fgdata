@@ -114,4 +114,39 @@
       </texture-unit>
     </pass>
   </technique>
+
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+    <pass>
+      <blend><use>transparent</use></blend>
+      <alpha-test><use>transparent</use></alpha-test>
+      <shade-model>smooth</shade-model>
+      <cull-face>back</cull-face>
+      <render-bin>
+        <bin-number><use>render-bin/bin-number</use></bin-number>
+        <bin-name><use>render-bin/bin-name</use></bin-name>
+      </render-bin>
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image>Textures/Terrain/water.png</image>
+        <filter>linear-mipmap-linear</filter>
+        <wrap-s>repeat</wrap-s>
+        <wrap-t>repeat</wrap-t>
+        <environment>
+          <mode>modulate</mode>
+        </environment>
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/HDR/geometry.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>color_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
 </PropertyList>

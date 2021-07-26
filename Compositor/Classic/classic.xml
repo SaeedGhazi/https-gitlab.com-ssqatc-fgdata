@@ -76,6 +76,7 @@
 
   <pass n="10" include="common-scene.xml">
     <name>far</name>
+    <clear-mask>color depth</clear-mask>
     <z-near>100.0</z-near>
   </pass>
   <pass n="11" include="common-scene.xml">

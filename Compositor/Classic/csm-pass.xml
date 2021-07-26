@@ -4,6 +4,7 @@
   <type>csm</type>
   <implicit-attachment-mask/>
   <effect-scheme>classic-shadow</effect-scheme>
+  <clear-mask>depth</clear-mask>
   <!-- Only render objects with the CAST_SHADOW bit flag -->
   <cull-mask>0x000004</cull-mask>
   <render-at-night>false</render-at-night>

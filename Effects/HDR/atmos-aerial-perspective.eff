@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/atmosphere</name>
+  <name>Effects/HDR/atmos-aerial-perspective</name>
   <technique n="1">
     <pass>
       <program>
         <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/atmosphere.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos-aerial-perspective.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/atmosphere-include.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
       </program>
-      <uniform>
-        <name>hdr_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">0</value>
-      </uniform>
-      <uniform>
-        <name>depth_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">1</value>
-      </uniform>
     </pass>
   </technique>
 </PropertyList>

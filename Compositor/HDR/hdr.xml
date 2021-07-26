@@ -55,15 +55,6 @@
     <format>rgb16f</format>
   </buffer>
 
-  <!-- HDR with rendered atmosphere -->
-  <buffer>
-    <name>hdr-with-atmosphere</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
-    <format>rgb16f</format>
-  </buffer>
-
   <!-- Final LDR buffer -->
   <buffer>
     <name>final</name>
@@ -71,6 +62,41 @@
     <width>screen</width>
     <height>screen</height>
     <format>rgb8</format>
+  </buffer>
+
+  <!-- Atmosphere LUTs -->
+  <buffer>
+    <name>sky-view</name>
+    <type>2d</type>
+    <width>256</width>
+    <height>128</height>
+    <format>rgb16f</format>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>repeat</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+  </buffer>
+  <buffer>
+    <name>aerial-inscatter</name>
+    <type>2d</type>
+    <width>512</width>
+    <height>32</height>
+    <format>rgba16f</format>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+  </buffer>
+  <buffer>
+    <name>aerial-transmittance</name>
+    <type>2d</type>
+    <width>512</width>
+    <height>32</height>
+    <format>rgba16f</format>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
   </buffer>
 
   <!-- Environment cubemap -->
@@ -186,6 +212,31 @@
   </buffer>
 
   <!--=======================================================================-->
+
+  <!-- Sky-View -->
+  <pass>
+    <name>atmos-sky-view</name>
+    <type>quad</type>
+    <effect>Effects/HDR/atmos-sky-view</effect>
+    <attachment>
+      <component>color</component>
+      <buffer>sky-view</buffer>
+    </attachment>
+  </pass>
+  <!-- Aerial Perspective -->
+  <pass>
+    <name>atmos-aerial-perspective</name>
+    <type>quad</type>
+    <effect>Effects/HDR/atmos-aerial-perspective</effect>
+    <attachment>
+      <component>color0</component>
+      <buffer>aerial-inscatter</buffer>
+    </attachment>
+    <attachment>
+      <component>color1</component>
+      <buffer>aerial-transmittance</buffer>
+    </attachment>
+  </pass>
 
   <!--
       Environment capture passes
@@ -643,6 +694,14 @@
       <unit>10</unit>
       <buffer>sun-shadowmap-atlas</buffer>
     </binding>
+    <binding>
+      <unit>11</unit>
+      <buffer>aerial-inscatter</buffer>
+    </binding>
+    <binding>
+      <unit>12</unit>
+      <buffer>aerial-transmittance</buffer>
+    </binding>
     <attachment>
       <component>color0</component>
       <buffer>hdr-result</buffer>
@@ -665,6 +724,10 @@
       <unit>9</unit>
       <buffer>envmap</buffer>
     </binding>
+    <binding>
+      <unit>11</unit>
+      <buffer>sky-view</buffer>
+    </binding>
     <attachment>
       <component>color</component>
       <buffer>hdr-result</buffer>
@@ -672,24 +735,6 @@
     <attachment>
       <component>depth</component>
       <buffer>depth</buffer>
-    </attachment>
-  </pass>
-
-  <pass>
-    <name>atmosphere</name>
-    <type>quad</type>
-    <effect>Effects/HDR/atmosphere</effect>
-    <binding>
-      <unit>0</unit>
-      <buffer>hdr-result</buffer>
-    </binding>
-    <binding>
-      <unit>1</unit>
-      <buffer>depth</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>hdr-with-atmosphere</buffer>
     </attachment>
   </pass>
 
@@ -710,7 +755,7 @@
     <effect>Effects/HDR/luminance</effect>
     <binding>
       <unit>0</unit>
-      <buffer>hdr-with-atmosphere</buffer>
+      <buffer>hdr-result</buffer>
     </binding>
     <attachment>
       <component>color</component>
@@ -762,7 +807,7 @@
     <effect>Effects/HDR/bloom-threshold</effect>
     <binding>
       <unit>0</unit>
-      <buffer>hdr-with-atmosphere</buffer>
+      <buffer>hdr-result</buffer>
     </binding>
     <binding>
       <unit>1</unit>
@@ -924,7 +969,7 @@
     <effect>Effects/HDR/postprocess</effect>
     <binding>
       <unit>0</unit>
-      <buffer>hdr-with-atmosphere</buffer>
+      <buffer>hdr-result</buffer>
     </binding>
     <binding>
       <unit>1</unit>

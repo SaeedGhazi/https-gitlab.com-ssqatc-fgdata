@@ -6,4 +6,8 @@
   <!-- Only render the skydome and terrain -->
   <!-- TODO: Explicitly select the LOD level -->
   <cull-mask>0x801</cull-mask>
+  <binding>
+    <unit>11</unit>
+    <buffer>sky-view</buffer>
+  </binding>
 </PropertyList>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/atmos-sky-view</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/atmos-sky-view.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmosphere-include.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+</PropertyList>

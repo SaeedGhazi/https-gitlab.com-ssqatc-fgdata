@@ -12,11 +12,14 @@ uniform sampler2D ao_tex;
 uniform samplerCube prefiltered_envmap;
 uniform sampler2DShadow shadow_tex;
 uniform sampler2D dfg_lut;
+uniform sampler2D aerial_inscatter_lut;
+uniform sampler2D aerial_transmittance_lut;
 
 uniform mat4 fg_ViewMatrix;
 uniform mat4 fg_ViewMatrixInverse;
 uniform vec3 fg_SunDirection;
 uniform vec3 fg_CameraPositionCart;
+uniform vec2 fg_NearFar;
 
 uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
@@ -39,6 +42,11 @@ const vec2 uv_shifts[4] = vec2[4](
     vec2(0.0, 0.0), vec2(0.5, 0.0),
     vec2(0.0, 0.5), vec2(0.5, 0.5));
 const vec2 uv_factor = vec2(0.5, 0.5);
+
+const float AERIAL_SLICES = 16.0;
+const float AERIAL_LUT_TILE_SIZE = 1.0 / AERIAL_SLICES;
+const float AERIAL_LUT_TEXEL_SIZE = 1.0 / 512.0;
+const float AERIAL_MAX_DEPTH = 32000.0;
 
 const float MAX_PREFILTERED_LOD = 4.0;
 
@@ -163,10 +171,10 @@ float getShadowing(vec3 p, vec3 n, float NdotL)
     float shadow = 1.0;
 
     vec4 lightSpacePos[4];
-    lightSpacePos[0] = getLightSpacePosition(p, n, NdotL, 0.01, fg_LightMatrix_csm0);
-    lightSpacePos[1] = getLightSpacePosition(p, n, NdotL, 0.01, fg_LightMatrix_csm1);
-    lightSpacePos[2] = getLightSpacePosition(p, n, NdotL, 0.01, fg_LightMatrix_csm2);
-    lightSpacePos[3] = getLightSpacePosition(p, n, NdotL, 0.01, fg_LightMatrix_csm3);
+    lightSpacePos[0] = getLightSpacePosition(p, n, NdotL, 0.05, fg_LightMatrix_csm0);
+    lightSpacePos[1] = getLightSpacePosition(p, n, NdotL, 0.2, fg_LightMatrix_csm1);
+    lightSpacePos[2] = getLightSpacePosition(p, n, NdotL, 1.0, fg_LightMatrix_csm2);
+    lightSpacePos[3] = getLightSpacePosition(p, n, NdotL, 5.0, fg_LightMatrix_csm3);
 
     for (int i = 0; i < 4; ++i) {
         // Map-based cascade selection
@@ -322,15 +330,44 @@ vec3 BRDF(in vec3 albedo, in float metalness, in float roughness,
 
 //------------------------------------------------------------------------------
 
+float map(float value, float min1, float max1, float min2, float max2) {
+    return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+
+vec3 sampleAerialPerspectiveSlice(sampler2D tex, int slice)
+{
+    float offset = slice * AERIAL_LUT_TILE_SIZE + AERIAL_LUT_TEXEL_SIZE * 0.5;
+    float x = texCoord.x * (AERIAL_LUT_TILE_SIZE - AERIAL_LUT_TEXEL_SIZE) + offset;
+    return texture(tex, vec2(x, texCoord.y)).rgb;
+}
+
+vec3 sampleAerialPerspective(sampler2D tex, vec3 zero, float depth)
+{
+    vec3 color;
+    depth = min(abs(depth), AERIAL_MAX_DEPTH);
+    float d = map(depth, fg_NearFar.x, AERIAL_MAX_DEPTH, 0.0, AERIAL_SLICES);
+    if (d <= 1.0) {
+        color = mix(zero, sampleAerialPerspectiveSlice(tex, 0), d);
+    } else {
+        d -= 1.0;
+        color = mix(sampleAerialPerspectiveSlice(tex, int(floor(d))),
+                    sampleAerialPerspectiveSlice(tex, int(ceil(d))),
+                    fract(d));
+    }
+    return color;
+}
+
+//------------------------------------------------------------------------------
+
 void main()
 {
+    float depth = texture(depth_tex, texCoord).r;
     vec4 gbuffer0 = texture(gbuffer0_tex, texCoord);
     vec2 gbuffer1 = texture(gbuffer1_tex, texCoord).rg;
     vec4 gbuffer2 = texture(gbuffer2_tex, texCoord);
-    float depth = texture(depth_tex, texCoord).r * 2.0 - 1.0; // Clip space
     float ao = texture(ao_tex, texCoord).r;
 
-    vec3 pos = positionFromDepth(texCoord * 2.0 - 1.0, depth);
+    vec3 pos = positionFromDepth(texCoord * 2.0 - 1.0, depth * 2.0 - 1.0);
     vec3 v = normalize(-pos);
     vec3 n = decodeNormal(gbuffer1);
 
@@ -341,7 +378,7 @@ void main()
     float clearcoat = gbuffer2.b;
     float clearcoatRoughness = gbuffer2.a;
 
-    vec3 l = normalize(vec4(fg_ViewMatrix * vec4(fg_SunDirection, 0.0)).xyz);
+    vec3 l = fg_SunDirection;
     vec3 h = normalize(v + l);
 
     float NdotL = clamp(dot(n, l), 0.001, 1.0);
@@ -366,5 +403,10 @@ void main()
     float shadowFactor = getShadowing(pos, n, NdotL);
     vec3 color = ambient + brdf * sunIlluminance * shadowFactor;
 
-    fragHdrColor = color;
+    vec3 inscatter = sampleAerialPerspective(
+        aerial_inscatter_lut, vec3(0.0), length(pos));
+    vec3 transmittance = sampleAerialPerspective(
+        aerial_transmittance_lut, vec3(1.0), length(pos));
+
+    fragHdrColor = color * transmittance + inscatter;
 }

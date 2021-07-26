@@ -67,6 +67,16 @@
         <type>sampler-2d-shadow</type>
         <value type="int">10</value>
       </uniform>
+      <uniform>
+        <name>aerial_inscatter_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <uniform>
+        <name>aerial_transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
     </pass>
   </technique>
 </PropertyList>

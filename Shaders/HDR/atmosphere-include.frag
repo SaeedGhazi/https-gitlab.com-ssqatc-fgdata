@@ -1,6 +1,5 @@
 #version 330 core
 
-uniform bool  sun_disk               = true;
 uniform vec3  beta_rayleigh          = vec3(5.5e-6, 13.0e-6, 22.4e-6);
 uniform float beta_mie               = 21e-6;
 uniform vec3  beta_absortion         = vec3(2.04e-5, 4.97e-5, 1.95e-6);
@@ -9,54 +8,42 @@ uniform float rayleigh_scale_height  = 8e3;
 uniform float mie_scale_height       = 1.2e3;
 uniform float absortion_scale_height = 30e3;
 uniform float absortion_falloff      = 3e3;
-uniform int   num_samples            = 64;
+uniform int   num_samples            = 32;
 uniform int   num_light_samples      = 4;
 
 const float PI                       = 3.141592653;
 const float ATMOSPHERE_RADIUS        = 6471e3;
 const vec3  SUN_INTENSITY            = vec3(20.0);
-const float COS_SUN_ANGULAR_DIAMETER = 0.999956676946448443553574619906976478926848692873900859324;
 
-vec2 raySphereIntersection(vec3 r0, vec3 rd, float radius)
+vec2 raySphereIntersection(vec3 ro, vec3 rd, float radius)
 {
-    float a = dot(rd, rd);
-    float b = 2.0 * dot(rd, r0);
-    float c = dot(r0, r0) - (radius * radius);
-    float d = (b*b) - 4.0*a*c;
-    if (d < 0.0) return vec2(1e5, -1e5);
-    return vec2((-b - sqrt(d))/(2.0*a), (-b + sqrt(d))/(2.0*a));
+    vec3 tc = -ro;
+    float b = dot(tc, rd);
+    float d = b*b - dot(tc, tc) + radius*radius;
+    if (d < 0.0) return vec2(-1.0);
+    float s = sqrt(d);
+    return vec2(b-s, b+s);
 }
 
-vec3 calculateScattering(vec3 rayOrigin,
-                         vec3 rayDir,
-                         vec3 sceneColor,
-                         float depth,
-                         float maxDist,
-                         float earthRadius,
-                         vec3 lightDir)
+void calculateScattering(in vec3 rayOrigin,
+                         in vec3 rayDir,
+                         in float tmax,
+                         in vec3 lightDir,
+                         in float earthRadius,
+                         out vec3 inscatter,
+                         out vec3 transmittance)
 {
     vec2 hit = raySphereIntersection(rayOrigin, rayDir, ATMOSPHERE_RADIUS);
-    if (hit.x > hit.y) {
-        // The ray did not hit the atmosphere, we are in outer space
-        return sceneColor;
-    }
-    hit.x = max(hit.x, 0.0); // Do not sample behind the camera
-    // Avoid clamping the ray to the far plane when there is no geometry in
-    // front of the sky
-    if (depth < 1.0) {
-        // Stop the ray at the geometry
-        hit.y = min(hit.y, maxDist);
-    } else {
-        // If there is no geometry, simulate a collision with the Earth at sea
-        // level. This only happens when FG hasn't loaded any terrain
-        vec2 hitEarth = raySphereIntersection(
-            rayOrigin, rayDir, earthRadius - 1.0);
-        if (hitEarth.x < hitEarth.y && hitEarth.x > 0.0) {
-            hit.y = min(hit.y, hitEarth.x);
-        }
-    }
+    vec2 hitEarth = raySphereIntersection(rayOrigin, rayDir, earthRadius - 1.0);
+    if (hitEarth.y > 0.0)
+        tmax = max(0.0, hitEarth.x);
 
-    float stepSize = (hit.y - hit.x) / float(num_samples);
+    float tmin = max(hit.x, 0.0);
+    tmax = min(hit.y, tmax);
+    if (tmax < 0.0)
+        discard;
+
+    float stepSize = (tmax - tmin) / float(num_samples);
 
     const float g = 0.758; // Mie scattering direction
     const float gg = g*g;
@@ -70,7 +57,7 @@ vec3 calculateScattering(vec3 rayOrigin,
     float opticalDepthMie = 0.0;
     float opticalDepthAbsortion = 0.0;
 
-    float primaryTime = hit.x;
+    float primaryTime = tmin;
 
     vec3 extinctionFactor = vec3(0.0);
     vec3 totalRayleigh = vec3(0.0);
@@ -100,11 +87,14 @@ vec3 calculateScattering(vec3 rayOrigin,
 
         float secondaryTime = 0.0;
 
-        for (int j = 0; j < num_light_samples; ++j) {
+        int j;
+        for (j = 0; j < num_light_samples; ++j) {
             vec3 samplePointLight = samplePoint + lightDir *
                 (secondaryTime + stepSizeLight * 0.5);
 
             float altitudeLight = length(samplePointLight) - earthRadius;
+            if (altitudeLight < 0.0)
+                break;
 
             float densityLightRayleigh  = exp(-altitudeLight / rayleigh_scale_height);
             float densityLightMie       = exp(-altitudeLight / mie_scale_height);
@@ -116,37 +106,28 @@ vec3 calculateScattering(vec3 rayOrigin,
             secondaryTime += stepSizeLight;
         }
 
-        vec3 tau =
-            beta_rayleigh * (opticalDepthRayleigh + opticalDepthLightRayleigh) +
-            beta_mie * (opticalDepthMie + opticalDepthLightMie) +
-            beta_absortion * (opticalDepthAbsortion + opticalDepthLightAbsortion);
-        vec3 attenuation = exp(-tau);
+        if (j == num_light_samples) {
+            vec3 tau =
+                beta_rayleigh * (opticalDepthRayleigh + opticalDepthLightRayleigh) +
+                beta_mie * (opticalDepthMie + opticalDepthLightMie) +
+                beta_absortion * (opticalDepthAbsortion + opticalDepthLightAbsortion);
+            vec3 attenuation = exp(-tau);
 
-        extinctionFactor += attenuation;
+            extinctionFactor += attenuation;
 
-        totalRayleigh += stepOpticalDepthRayleigh * attenuation;
-        totalMie      += stepOpticalDepthMie      * attenuation;
+            totalRayleigh += stepOpticalDepthRayleigh * attenuation;
+            totalMie      += stepOpticalDepthMie      * attenuation;
+        }
 
         primaryTime += stepSize;
     }
 
-    vec3 opacity = exp(-(beta_rayleigh  * opticalDepthRayleigh +
-                         beta_mie       * opticalDepthMie +
-                         beta_absortion * opticalDepthAbsortion));
+    transmittance = exp(-(beta_rayleigh  * opticalDepthRayleigh +
+                          beta_mie       * opticalDepthMie +
+                          beta_absortion * opticalDepthAbsortion));
 
-    vec3 color = SUN_INTENSITY *
+    inscatter = SUN_INTENSITY *
         (totalRayleigh * beta_rayleigh * phaseRayleigh +
          totalMie * beta_mie * phaseMie +
-         opticalDepthRayleigh * beta_ambient)
-        + sceneColor * opacity;
-
-    if (sun_disk && (depth >= 1.0)) {
-        float costheta = dot(rayDir, lightDir);
-        float sundisk = smoothstep(COS_SUN_ANGULAR_DIAMETER,
-                                   COS_SUN_ANGULAR_DIAMETER + 0.00002,
-                                   costheta);
-        color += SUN_INTENSITY * extinctionFactor * sundisk;
-    }
-
-    return color;
+         opticalDepthRayleigh * beta_ambient);
 }

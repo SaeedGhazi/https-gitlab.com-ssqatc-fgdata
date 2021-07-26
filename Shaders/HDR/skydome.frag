@@ -2,39 +2,19 @@
 
 out vec4 fragColor;
 
-in vec3 rayDirVertex;
+in vec3 rayDir;
 
-uniform mat4 osg_ModelViewMatrix;
-uniform mat4 osg_ViewMatrix;
-uniform vec3 fg_SunDirection;
+uniform sampler2D sky_view_lut;
 
-vec3 calculateScattering(vec3 rayOrigin,
-                         vec3 rayDir,
-                         vec3 sceneColor,
-                         float depth,
-                         float maxDist,
-                         float earthRadius,
-                         vec3 lightDir);
+const float PI = 3.141592653;
 
 void main()
 {
-    // Ground point (skydome center) in eye coordinates
-    vec4 groundPoint = inverse(osg_ViewMatrix) * osg_ModelViewMatrix
-        * vec4(0.0, 0.0, 0.0, 1.0);
+    float azimuth = atan(rayDir.y, rayDir.x) / PI * 0.5 + 0.5;
+    // Undo the non-linear transformation from the sky-view LUT
+    float l = asin(rayDir.z);
+    float elev = sqrt(abs(l) / (PI * 0.5)) * sign(l) * 0.5 + 0.5;
 
-    // HACK: WGS84 models the Earth as an oblate spheroid, so we can't use
-    // a constant Earth radius. This should be precomputed!
-    float earthRadius = length(groundPoint);
-
-    vec3 cameraPos = vec4(inverse(osg_ViewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
-    vec3 rayDir = normalize(rayDirVertex);
-
-    vec3 color = calculateScattering(cameraPos,
-                                     rayDir,
-                                     vec3(0.0),
-                                     1.0,
-                                     3.0 * earthRadius,
-                                     earthRadius,
-                                     fg_SunDirection);
+    vec3 color = texture(sky_view_lut, vec2(azimuth, elev)).rgb;
     fragColor = vec4(color, 1.0);
 }

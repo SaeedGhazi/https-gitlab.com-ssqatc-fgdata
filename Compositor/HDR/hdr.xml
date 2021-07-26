@@ -315,244 +315,164 @@
       Diffuse lighting is approximated by using the highest mipmap level
       (roughness=1).
   -->
-  <pass include="env-prefilter1-pass.xml">
-    <name>env-prefilter1-0</name>
-    <cubemap-face>0</cubemap-face>
+  <pass include="env-prefilter-pass.xml">
+    <name>env-prefilter1</name>
+    <effect>Effects/HDR/envmap-prefilter1</effect>
     <attachment>
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>0</face>
       <level>1</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter1-pass.xml">
-    <name>env-prefilter1-1</name>
-    <cubemap-face>1</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color1</component>
       <buffer>envmap</buffer>
       <face>1</face>
       <level>1</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter1-pass.xml">
-    <name>env-prefilter1-2</name>
-    <cubemap-face>2</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color2</component>
       <buffer>envmap</buffer>
       <face>2</face>
       <level>1</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter1-pass.xml">
-    <name>env-prefilter1-3</name>
-    <cubemap-face>3</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color3</component>
       <buffer>envmap</buffer>
       <face>3</face>
       <level>1</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter1-pass.xml">
-    <name>env-prefilter1-4</name>
-    <cubemap-face>4</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color4</component>
       <buffer>envmap</buffer>
       <face>4</face>
       <level>1</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter1-pass.xml">
-    <name>env-prefilter1-5</name>
-    <cubemap-face>5</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color5</component>
       <buffer>envmap</buffer>
       <face>5</face>
       <level>1</level>
     </attachment>
   </pass>
 
-  <pass include="env-prefilter2-pass.xml">
-    <name>env-prefilter2-0</name>
-    <cubemap-face>0</cubemap-face>
+  <pass include="env-prefilter-pass.xml">
+    <name>env-prefilter2</name>
+    <effect>Effects/HDR/envmap-prefilter2</effect>
     <attachment>
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>0</face>
       <level>2</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter2-pass.xml">
-    <name>env-prefilter2-1</name>
-    <cubemap-face>1</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color1</component>
       <buffer>envmap</buffer>
       <face>1</face>
       <level>2</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter2-pass.xml">
-    <name>env-prefilter2-2</name>
-    <cubemap-face>2</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color2</component>
       <buffer>envmap</buffer>
       <face>2</face>
       <level>2</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter2-pass.xml">
-    <name>env-prefilter2-3</name>
-    <cubemap-face>3</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color3</component>
       <buffer>envmap</buffer>
       <face>3</face>
       <level>2</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter2-pass.xml">
-    <name>env-prefilter2-4</name>
-    <cubemap-face>4</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color4</component>
       <buffer>envmap</buffer>
       <face>4</face>
       <level>2</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter2-pass.xml">
-    <name>env-prefilter2-5</name>
-    <cubemap-face>5</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color5</component>
       <buffer>envmap</buffer>
       <face>5</face>
       <level>2</level>
     </attachment>
   </pass>
 
-  <pass include="env-prefilter3-pass.xml">
-    <name>env-prefilter3-0</name>
-    <cubemap-face>0</cubemap-face>
+  <pass include="env-prefilter-pass.xml">
+    <name>env-prefilter3</name>
+    <effect>Effects/HDR/envmap-prefilter3</effect>
     <attachment>
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>0</face>
       <level>3</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter3-pass.xml">
-    <name>env-prefilter3-1</name>
-    <cubemap-face>1</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color1</component>
       <buffer>envmap</buffer>
       <face>1</face>
       <level>3</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter3-pass.xml">
-    <name>env-prefilter3-2</name>
-    <cubemap-face>2</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color2</component>
       <buffer>envmap</buffer>
       <face>2</face>
       <level>3</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter3-pass.xml">
-    <name>env-prefilter3-3</name>
-    <cubemap-face>3</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color3</component>
       <buffer>envmap</buffer>
       <face>3</face>
       <level>3</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter3-pass.xml">
-    <name>env-prefilter3-4</name>
-    <cubemap-face>4</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color4</component>
       <buffer>envmap</buffer>
       <face>4</face>
       <level>3</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter3-pass.xml">
-    <name>env-prefilter3-5</name>
-    <cubemap-face>5</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color5</component>
       <buffer>envmap</buffer>
       <face>5</face>
       <level>3</level>
     </attachment>
   </pass>
 
-  <pass include="env-prefilter4-pass.xml">
-    <name>env-prefilter4-0</name>
-    <cubemap-face>0</cubemap-face>
+  <pass include="env-prefilter-pass.xml">
+    <name>env-prefilter4</name>
+    <effect>Effects/HDR/envmap-prefilter4</effect>
     <attachment>
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>0</face>
       <level>4</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter4-pass.xml">
-    <name>env-prefilter4-1</name>
-    <cubemap-face>1</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color1</component>
       <buffer>envmap</buffer>
       <face>1</face>
       <level>4</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter4-pass.xml">
-    <name>env-prefilter4-2</name>
-    <cubemap-face>2</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color2</component>
       <buffer>envmap</buffer>
       <face>2</face>
       <level>4</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter4-pass.xml">
-    <name>env-prefilter4-3</name>
-    <cubemap-face>3</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color3</component>
       <buffer>envmap</buffer>
       <face>3</face>
       <level>4</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter4-pass.xml">
-    <name>env-prefilter4-4</name>
-    <cubemap-face>4</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color4</component>
       <buffer>envmap</buffer>
       <face>4</face>
       <level>4</level>
     </attachment>
-  </pass>
-  <pass include="env-prefilter4-pass.xml">
-    <name>env-prefilter4-5</name>
-    <cubemap-face>5</cubemap-face>
     <attachment>
-      <component>color0</component>
+      <component>color5</component>
       <buffer>envmap</buffer>
       <face>5</face>
       <level>4</level>

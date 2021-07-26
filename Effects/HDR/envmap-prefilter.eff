@@ -7,7 +7,7 @@
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial-cubemap.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/envmap-prefilter.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/envmap-prefilter.frag</fragment-shader>
       </program>
       <uniform>

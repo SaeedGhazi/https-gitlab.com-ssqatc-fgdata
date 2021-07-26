@@ -1,8 +1,18 @@
 #version 330 core
 
-out vec3 fragColor;
+layout(location = 0) out vec3 fragColor0;
+layout(location = 1) out vec3 fragColor1;
+layout(location = 2) out vec3 fragColor2;
+layout(location = 3) out vec3 fragColor3;
+layout(location = 4) out vec3 fragColor4;
+layout(location = 5) out vec3 fragColor5;
 
-in vec3 cubemapCoord;
+in vec3 cubemapCoord0;
+in vec3 cubemapCoord1;
+in vec3 cubemapCoord2;
+in vec3 cubemapCoord3;
+in vec3 cubemapCoord4;
+in vec3 cubemapCoord5;
 
 uniform samplerCube envmap;
 uniform float roughness;
@@ -10,6 +20,7 @@ uniform float roughness;
 uniform int fg_CubemapFace;
 
 const float PI = 3.14159265359;
+const uint NUM_SAMPLES = 64u;
 
 float RadicalInverse_VdC(uint bits)
 {
@@ -47,14 +58,13 @@ vec3 ImportanceSampleGGX(vec2 Xi, vec3 n, float r)
     return normalize(sampleVec);
 }
 
-void main()
+vec3 prefilter(vec3 n)
 {
-    vec3 n = normalize(cubemapCoord);
+    n = normalize(n);
     vec3 v = n; // n = v simplification
 
     vec3 prefilteredColor = vec3(0.0);
     float totalWeight = 0.0;
-    const uint NUM_SAMPLES = 1024u;
 
     for (uint i = 0u; i < NUM_SAMPLES; ++i) {
         vec2 Xi = Hammersley(i, NUM_SAMPLES);
@@ -69,6 +79,15 @@ void main()
     }
 
     prefilteredColor /= totalWeight;
+    return prefilteredColor;
+}
 
-    fragColor = prefilteredColor;
+void main()
+{
+    fragColor0 = prefilter(cubemapCoord0);
+    fragColor1 = prefilter(cubemapCoord1);
+    fragColor2 = prefilter(cubemapCoord2);
+    fragColor3 = prefilter(cubemapCoord3);
+    fragColor4 = prefilter(cubemapCoord4);
+    fragColor5 = prefilter(cubemapCoord5);
 }

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<PropertyList include="env-prefilter-pass.xml">
-  <effect>Effects/HDR/envmap-prefilter1</effect>
-</PropertyList>

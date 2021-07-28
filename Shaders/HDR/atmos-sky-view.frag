@@ -49,7 +49,7 @@ void main()
     vec3 rayDir = vec3(cos(elev) * cos(azimuth), cos(elev) * sin(azimuth), sin(elev));
 
     float cameraHeight = length(fg_CameraPositionCart);
-    float earthRadius = cameraHeight - fg_CameraPositionGeod.z;
+    float earthRadius = cameraHeight - max(fg_CameraPositionGeod.z, 0.0);
 
     vec3 rayOrigin = vec3(0.0, 0.0, cameraHeight);
 

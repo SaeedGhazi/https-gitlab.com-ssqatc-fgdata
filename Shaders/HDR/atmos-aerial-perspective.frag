@@ -60,7 +60,7 @@ void main()
     vec3 rayDir = vec4(fg_ViewMatrixInverse * vec4(normalize(fragPos), 0.0)).xyz;
 
     float cameraHeight = length(fg_CameraPositionCart);
-    float earthRadius = cameraHeight - fg_CameraPositionGeod.z;
+    float earthRadius = cameraHeight - max(fg_CameraPositionGeod.z, 0.0);
 
     vec3 rayOrigin = fg_CameraPositionCart;
 

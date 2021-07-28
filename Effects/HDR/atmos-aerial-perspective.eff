@@ -6,9 +6,19 @@
       <program>
         <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/atmos-aerial-perspective.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/atmosphere-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos-include.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
       </program>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>multiscattering_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
     </pass>
   </technique>
 </PropertyList>

@@ -319,6 +319,11 @@
         <type>sampler-2d</type>
         <value type="int">11</value>
       </uniform>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">13</value>
+      </uniform>
     </pass>
   </technique>
   <technique n="139">
@@ -339,6 +344,11 @@
         <name>sky_view_lut</name>
         <type>sampler-2d</type>
         <value type="int">11</value>
+      </uniform>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">13</value>
       </uniform>
     </pass>
   </technique>

@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/atmos-sky-view</name>
+  <name>Effects/HDR/atmos-multiple-scattering</name>
   <technique n="1">
     <pass>
       <program>
         <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/atmos-sky-view.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos-multiple-scattering.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/atmos-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>transmittance_lut</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
-      </uniform>
-      <uniform>
-        <name>multiscattering_lut</name>
-        <type>sampler-2d</type>
-        <value type="int">1</value>
       </uniform>
     </pass>
   </technique>

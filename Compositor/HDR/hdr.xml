@@ -66,6 +66,28 @@
 
   <!-- Atmosphere LUTs -->
   <buffer>
+    <name>transmittance</name>
+    <type>2d</type>
+    <width>256</width>
+    <height>64</height>
+    <format>rgb16f</format>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+  </buffer>
+  <buffer>
+    <name>multiple-scattering</name>
+    <type>2d</type>
+    <width>32</width>
+    <height>32</height>
+    <format>rgb16f</format>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+  </buffer>
+  <buffer>
     <name>sky-view</name>
     <type>2d</type>
     <width>256</width>
@@ -77,18 +99,7 @@
     <wrap-t>clamp-to-edge</wrap-t>
   </buffer>
   <buffer>
-    <name>aerial-inscatter</name>
-    <type>2d</type>
-    <width>512</width>
-    <height>32</height>
-    <format>rgba16f</format>
-    <min-filter>linear</min-filter>
-    <mag-filter>linear</mag-filter>
-    <wrap-s>clamp-to-edge</wrap-s>
-    <wrap-t>clamp-to-edge</wrap-t>
-  </buffer>
-  <buffer>
-    <name>aerial-transmittance</name>
+    <name>aerial-perspective</name>
     <type>2d</type>
     <width>512</width>
     <height>32</height>
@@ -213,28 +224,70 @@
 
   <!--=======================================================================-->
 
-  <!-- Sky-View -->
+  <!--
+      Generate the atmospheric scattering related LUTs
+      This is an implementation of Sébastien Hillaire's "A Scalable and
+      Production Ready Sky and Atmosphere Rendering Technique".
+      As a small summary, the sky-view and aerial perspective LUTs are used by
+      later passes to apply atmospheric scattering to the skydome and
+      opaque/transparent objects respectively. These two LUTs also rely on
+      another pair of LUTs (transmittance and multiple scattering) to speed up
+      the computations.
+  -->
+  <pass>
+    <name>atmos-transmittance</name>
+    <type>quad</type>
+    <effect>Effects/HDR/atmos-transmittance</effect>
+    <attachment>
+      <component>color</component>
+      <buffer>transmittance</buffer>
+    </attachment>
+  </pass>
+  <pass>
+    <name>atmos-multiple-scattering</name>
+    <type>quad</type>
+    <effect>Effects/HDR/atmos-multiple-scattering</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>transmittance</buffer>
+    </binding>
+    <attachment>
+      <component>color</component>
+      <buffer>multiple-scattering</buffer>
+    </attachment>
+  </pass>
   <pass>
     <name>atmos-sky-view</name>
     <type>quad</type>
     <effect>Effects/HDR/atmos-sky-view</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>transmittance</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>multiple-scattering</buffer>
+    </binding>
     <attachment>
       <component>color</component>
       <buffer>sky-view</buffer>
     </attachment>
   </pass>
-  <!-- Aerial Perspective -->
   <pass>
     <name>atmos-aerial-perspective</name>
     <type>quad</type>
     <effect>Effects/HDR/atmos-aerial-perspective</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>transmittance</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>multiple-scattering</buffer>
+    </binding>
     <attachment>
-      <component>color0</component>
-      <buffer>aerial-inscatter</buffer>
-    </attachment>
-    <attachment>
-      <component>color1</component>
-      <buffer>aerial-transmittance</buffer>
+      <component>color</component>
+      <buffer>aerial-perspective</buffer>
     </attachment>
   </pass>
 
@@ -617,11 +670,7 @@
     </binding>
     <binding>
       <unit>11</unit>
-      <buffer>aerial-inscatter</buffer>
-    </binding>
-    <binding>
-      <unit>12</unit>
-      <buffer>aerial-transmittance</buffer>
+      <buffer>aerial-perspective</buffer>
     </binding>
     <attachment>
       <component>color0</component>
@@ -647,6 +696,10 @@
     <binding>
       <unit>11</unit>
       <buffer>sky-view</buffer>
+    </binding>
+    <binding>
+      <unit>13</unit>
+      <buffer>transmittance</buffer>
     </binding>
     <attachment>
       <component>color</component>

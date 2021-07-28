@@ -12,14 +12,12 @@ uniform sampler2D ao_tex;
 uniform samplerCube prefiltered_envmap;
 uniform sampler2DShadow shadow_tex;
 uniform sampler2D dfg_lut;
-uniform sampler2D aerial_inscatter_lut;
-uniform sampler2D aerial_transmittance_lut;
+uniform sampler2D aerial_perspective_lut;
 
 uniform mat4 fg_ViewMatrix;
 uniform mat4 fg_ViewMatrixInverse;
 uniform vec3 fg_SunDirection;
 uniform vec3 fg_CameraPositionCart;
-uniform vec2 fg_NearFar;
 
 uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
@@ -329,30 +327,34 @@ vec3 BRDF(in vec3 albedo, in float metalness, in float roughness,
 }
 
 //------------------------------------------------------------------------------
+// Atmospheric scattering
 
-float map(float value, float min1, float max1, float min2, float max2) {
-    return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
-}
-
-vec3 sampleAerialPerspectiveSlice(sampler2D tex, int slice)
+vec4 sampleAerialPerspectiveSlice(int slice)
 {
+    // Sample at the pixel center
     float offset = slice * AERIAL_LUT_TILE_SIZE + AERIAL_LUT_TEXEL_SIZE * 0.5;
     float x = texCoord.x * (AERIAL_LUT_TILE_SIZE - AERIAL_LUT_TEXEL_SIZE) + offset;
-    return texture(tex, vec2(x, texCoord.y)).rgb;
+    return texture(aerial_perspective_lut, vec2(x, texCoord.y));
 }
 
-vec3 sampleAerialPerspective(sampler2D tex, vec3 zero, float depth)
+vec4 sampleAerialPerspective(float depth)
 {
-    vec3 color;
-    depth = min(abs(depth), AERIAL_MAX_DEPTH);
-    float d = map(depth, fg_NearFar.x, AERIAL_MAX_DEPTH, 0.0, AERIAL_SLICES);
-    if (d <= 1.0) {
-        color = mix(zero, sampleAerialPerspectiveSlice(tex, 0), d);
+    vec4 color;
+    // Map to [0,1]
+    float w = depth / AERIAL_MAX_DEPTH;
+    // Squared distribution
+    w = sqrt(clamp(w, 0.0, 1.0));
+    // Remap to [0,16] to sample the right tile
+    w *= AERIAL_SLICES;
+    if (w <= 1.0) {
+        // Handle special case of fragments behind the first slice
+        color = mix(vec4(0.0, 0.0, 0.0, 1.0), sampleAerialPerspectiveSlice(0), w);
     } else {
-        d -= 1.0;
-        color = mix(sampleAerialPerspectiveSlice(tex, int(floor(d))),
-                    sampleAerialPerspectiveSlice(tex, int(ceil(d))),
-                    fract(d));
+        w -= 1.0; // [0,15]
+        // Manually linearly interpolate between slices
+        color = mix(sampleAerialPerspectiveSlice(int(floor(w))),
+                    sampleAerialPerspectiveSlice(int(ceil(w))),
+                    fract(w));
     }
     return color;
 }
@@ -403,10 +405,8 @@ void main()
     float shadowFactor = getShadowing(pos, n, NdotL);
     vec3 color = ambient + brdf * sunIlluminance * shadowFactor;
 
-    vec3 inscatter = sampleAerialPerspective(
-        aerial_inscatter_lut, vec3(0.0), length(pos));
-    vec3 transmittance = sampleAerialPerspective(
-        aerial_transmittance_lut, vec3(1.0), length(pos));
+    vec4 aerialPerspective = sampleAerialPerspective(length(pos));
+    color = color * aerialPerspective.a + aerialPerspective.rgb * SUN_INTENSITY;
 
-    fragHdrColor = color * transmittance + inscatter;
+    fragHdrColor = color;
 }

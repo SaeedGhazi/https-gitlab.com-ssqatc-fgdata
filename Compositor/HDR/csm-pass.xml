@@ -2,7 +2,6 @@
 
 <PropertyList>
   <type>csm</type>
-  <implicit-attachment-mask/>
   <effect-scheme>hdr-shadow</effect-scheme>
   <clear-mask>depth</clear-mask>
   <!-- Only render objects with the CAST_SHADOW bit flag -->

@@ -1,6 +1,7 @@
 #version 330 core
 
 uniform mat4 fg_ProjectionMatrixInverse;
+uniform vec2 fg_NearFar;
 
 // https://aras-p.info/texts/CompactNormalStorage.html
 // Method #4: Spheremap Transform
@@ -29,4 +30,11 @@ vec3 positionFromDepth(vec2 pos, float depth)
     vec4 p = fg_ProjectionMatrixInverse * vec4(pos, depth, 1.0);
     p.xyz /= p.w;
     return p.xyz;
+}
+
+// http://www.geeks3d.com/20091216/geexlab-how-to-visualize-the-depth-buffer-in-glsl/
+float linearizeDepth(float depth)
+{
+    return (2.0 * fg_NearFar.x) / (
+        fg_NearFar.y + fg_NearFar.x - depth * (fg_NearFar.y - fg_NearFar.x));
 }

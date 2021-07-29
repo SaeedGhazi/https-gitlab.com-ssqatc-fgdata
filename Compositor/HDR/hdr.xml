@@ -239,7 +239,7 @@
     <type>quad</type>
     <effect>Effects/HDR/atmos-transmittance</effect>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>transmittance</buffer>
     </attachment>
   </pass>
@@ -252,7 +252,7 @@
       <buffer>transmittance</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>multiple-scattering</buffer>
     </attachment>
   </pass>
@@ -269,7 +269,7 @@
       <buffer>multiple-scattering</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>sky-view</buffer>
     </attachment>
   </pass>
@@ -286,7 +286,7 @@
       <buffer>multiple-scattering</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>aerial-perspective</buffer>
     </attachment>
   </pass>
@@ -702,7 +702,7 @@
       <buffer>transmittance</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>hdr-result</buffer>
     </attachment>
     <attachment>
@@ -731,7 +731,7 @@
       <buffer>hdr-result</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>luminance</buffer>
       <mipmap-generation>true</mipmap-generation>
     </attachment>
@@ -749,7 +749,7 @@
       <buffer>luminance</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>adapted-luminance</buffer>
     </attachment>
   </pass>
@@ -762,7 +762,7 @@
       <buffer>adapted-luminance</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>prev-luminance</buffer>
     </attachment>
   </pass>
@@ -787,7 +787,7 @@
       <buffer>adapted-luminance</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom0</buffer>
     </attachment>
   </pass>
@@ -799,7 +799,7 @@
       <buffer>bloom0</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom1</buffer>
     </attachment>
   </pass>
@@ -810,7 +810,7 @@
       <buffer>bloom1</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom2</buffer>
     </attachment>
   </pass>
@@ -821,7 +821,7 @@
       <buffer>bloom2</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom3</buffer>
     </attachment>
   </pass>
@@ -833,7 +833,7 @@
       <buffer>bloom3</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom3-tmp</buffer>
     </attachment>
   </pass>
@@ -844,7 +844,7 @@
       <buffer>bloom3-tmp</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom3</buffer>
     </attachment>
   </pass>
@@ -860,7 +860,7 @@
       <buffer>bloom3</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom2-tmp</buffer>
     </attachment>
   </pass>
@@ -871,7 +871,7 @@
       <buffer>bloom2-tmp</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom2</buffer>
     </attachment>
   </pass>
@@ -887,7 +887,7 @@
       <buffer>bloom2</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom1-tmp</buffer>
     </attachment>
   </pass>
@@ -898,7 +898,7 @@
       <buffer>bloom1-tmp</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom1</buffer>
     </attachment>
   </pass>
@@ -914,7 +914,7 @@
       <buffer>bloom1</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom0-tmp</buffer>
     </attachment>
   </pass>
@@ -925,7 +925,7 @@
       <buffer>bloom0-tmp</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>bloom0</buffer>
     </attachment>
   </pass>
@@ -953,7 +953,7 @@
       <buffer>bloom0</buffer>
     </binding>
     <attachment>
-      <component>color</component>
+      <component>color0</component>
       <buffer>final</buffer>
     </attachment>
   </pass>

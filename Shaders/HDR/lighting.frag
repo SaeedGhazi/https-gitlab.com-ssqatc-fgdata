@@ -364,6 +364,11 @@ vec4 sampleAerialPerspective(float depth)
 void main()
 {
     float depth = texture(depth_tex, texCoord).r;
+    if (depth == 1.0) {
+        fragHdrColor = vec3(0.0);
+        return;
+    }
+
     vec4 gbuffer0 = texture(gbuffer0_tex, texCoord);
     vec2 gbuffer1 = texture(gbuffer1_tex, texCoord).rg;
     vec4 gbuffer2 = texture(gbuffer2_tex, texCoord);

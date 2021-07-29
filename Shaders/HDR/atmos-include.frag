@@ -7,7 +7,7 @@ const float PI = 3.141592653;
 
 // Atmosphere parameters
 // Section 2.1 of [Bruneton08], units are inverse meters
-const float mie_density_height_scale = 8.33333e-4;    // Hm=1.2km
+const float mie_density_height_scale = 8.33333e-4;   // Hm=1.2km
 const float rayleigh_density_height_scale = 1.25e-4; // Hr=8km
 const float mie_scattering = 3.996e-6;
 const float mie_absorption = 4.4e-6;

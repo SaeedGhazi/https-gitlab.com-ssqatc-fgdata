@@ -5,14 +5,17 @@ out vec4 fragColor;
 in vec3 vRayDir;
 in vec3 vRayDirView;
 
+uniform bool sun_disk;
 uniform sampler2D sky_view_lut;
 uniform sampler2D transmittance_lut;
 uniform vec3 fg_SunDirection;
 
-const float PI = 3.141592653;
-const vec3 SUN_INTENSITY = vec3(20.0);
+uniform mat4 osg_ModelViewMatrix;
 
-const float sun_solid_angle = 0.53*PI/180.0; // ~half a degree
+const float PI = 3.141592653;
+const vec3 EXTRATERRESTRIAL_SOLAR_ILLUMINANCE = vec3(128.0);
+
+const float sun_solid_angle = 0.545*PI/180.0; // ~half a degree
 const float sun_cos_solid_angle = cos(sun_solid_angle);
 
 void main()
@@ -24,13 +27,37 @@ void main()
     float elev = sqrt(abs(l) / (PI * 0.5)) * sign(l) * 0.5 + 0.5;
 
     vec3 color = texture(sky_view_lut, vec2(azimuth, elev)).rgb;
-    color *= SUN_INTENSITY;
+    color *= EXTRATERRESTRIAL_SOLAR_ILLUMINANCE;
 
-    // Render the Sun disk
-    // XXX: Apply transmittance
-    float cosTheta = dot(normalize(vRayDirView), fg_SunDirection);
-    if (cosTheta >= sun_cos_solid_angle)
-        color += SUN_INTENSITY;
+    if (sun_disk) {
+        // Render the Sun disk
+        vec3 rayDirView = normalize(vRayDirView);
+        float cosTheta = dot(rayDirView, fg_SunDirection);
+
+        if (cosTheta >= sun_cos_solid_angle) {
+            vec4 groundPoint = osg_ModelViewMatrix * vec4(0.0, 0.0, 0.0, 1.0);
+            float altitude = length(groundPoint);
+            float scaledAltitude = altitude / 100000.0;
+
+            vec3 up = normalize(vec4(0.0, 0.0, 0.0, 1.0) - groundPoint).xyz;
+            float sunZenithCosTheta = dot(rayDirView, up);
+
+            vec2 coords = vec2(sunZenithCosTheta * 0.5 + 0.5,
+                               clamp(scaledAltitude, 0.0, 1.0));
+            vec3 transmittance = texture(transmittance_lut, coords).rgb;
+
+            // Limb darkening
+            // http://www.physics.hmc.edu/faculty/esin/a101/limbdarkening.pdf
+            vec3 u = vec3(1.0);
+            vec3 a = vec3(0.397, 0.503, 0.652);
+            float centerToEdge = 1.0 - (cosTheta - sun_cos_solid_angle)
+                / (1.0 - sun_cos_solid_angle);
+            float mu = sqrt(max(1.0 - centerToEdge * centerToEdge, 0.0));
+            vec3 factor = vec3(1.0) - u * (vec3(1.0) - pow(vec3(mu), a));
+
+            color += EXTRATERRESTRIAL_SOLAR_ILLUMINANCE * transmittance * factor;
+        }
+    }
 
     fragColor = vec4(color, 1.0);
 }

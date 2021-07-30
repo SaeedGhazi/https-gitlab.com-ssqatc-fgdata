@@ -315,6 +315,11 @@
         <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
       </program>
       <uniform>
+        <name>sun_disk</name>
+        <type>bool</type>
+        <value type="bool">true</value>
+      </uniform>
+      <uniform>
         <name>sky_view_lut</name>
         <type>sampler-2d</type>
         <value type="int">11</value>
@@ -340,6 +345,11 @@
         <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
       </program>
+      <uniform>
+        <name>sun_disk</name>
+        <type>bool</type>
+        <value type="bool">false</value>
+      </uniform>
       <uniform>
         <name>sky_view_lut</name>
         <type>sampler-2d</type>

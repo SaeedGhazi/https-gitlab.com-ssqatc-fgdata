@@ -72,6 +72,11 @@
         <type>sampler-2d</type>
         <value type="int">11</value>
       </uniform>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
     </pass>
   </technique>
 </PropertyList>

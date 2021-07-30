@@ -13,11 +13,14 @@ uniform samplerCube prefiltered_envmap;
 uniform sampler2DShadow shadow_tex;
 uniform sampler2D dfg_lut;
 uniform sampler2D aerial_perspective_lut;
+uniform sampler2D transmittance_lut;
 
 uniform mat4 fg_ViewMatrix;
 uniform mat4 fg_ViewMatrixInverse;
 uniform vec3 fg_SunDirection;
+uniform vec3 fg_SunDirectionWorld;
 uniform vec3 fg_CameraPositionCart;
+uniform vec3 fg_CameraPositionGeod;
 
 uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
@@ -48,7 +51,8 @@ const float AERIAL_MAX_DEPTH = 32000.0;
 
 const float MAX_PREFILTERED_LOD = 4.0;
 
-const vec3 SUN_INTENSITY = vec3(20.0);
+const float ATMOSPHERE_RADIUS = 6471e3;
+const vec3 EXTRATERRESTRIAL_SOLAR_ILLUMINANCE = vec3(128.0);
 
 vec3 decodeNormal(vec2 enc);
 vec3 positionFromDepth(vec2 pos, float depth);
@@ -359,6 +363,22 @@ vec4 sampleAerialPerspective(float depth)
     return color;
 }
 
+vec3 getSunIlluminance()
+{
+    float cameraHeight = length(fg_CameraPositionCart);
+    vec3 up = fg_CameraPositionCart / cameraHeight;
+    float cosTheta = dot(fg_SunDirectionWorld, up);
+
+    float earthRadius = cameraHeight - max(fg_CameraPositionGeod.z, 0.0);
+    float normalizedHeight = (cameraHeight - earthRadius)
+        / (ATMOSPHERE_RADIUS - earthRadius);
+
+    vec2 coords = vec2(cosTheta * 0.5 + 0.5, clamp(normalizedHeight, 0.0, 1.0));
+    vec3 transmittance = texture(transmittance_lut, coords).rgb;
+
+    return EXTRATERRESTRIAL_SOLAR_ILLUMINANCE * transmittance;
+}
+
 //------------------------------------------------------------------------------
 
 void main()
@@ -399,7 +419,7 @@ void main()
                      NdotL, NdotV, NdotH, VdotH,
                      f0);
 
-    vec3 sunIlluminance = SUN_INTENSITY * NdotL;
+    vec3 sunIlluminance = getSunIlluminance() * NdotL;
 
     vec3 f = F_SchlickRoughness(NdotV, f0, roughness);
     vec3 indirectSpecular = IBL_Specular(n, v, NdotV, roughness, f);
@@ -411,7 +431,8 @@ void main()
     vec3 color = ambient + brdf * sunIlluminance * shadowFactor;
 
     vec4 aerialPerspective = sampleAerialPerspective(length(pos));
-    color = color * aerialPerspective.a + aerialPerspective.rgb * SUN_INTENSITY;
+    color = color * aerialPerspective.a + aerialPerspective.rgb
+        * EXTRATERRESTRIAL_SOLAR_ILLUMINANCE;
 
     fragHdrColor = color;
 }

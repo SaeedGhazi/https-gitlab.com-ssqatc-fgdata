@@ -44,10 +44,10 @@ const vec2 uv_shifts[4] = vec2[4](
     vec2(0.0, 0.5), vec2(0.5, 0.5));
 const vec2 uv_factor = vec2(0.5, 0.5);
 
-const float AERIAL_SLICES = 16.0;
+const float AERIAL_SLICES = 32.0;
 const float AERIAL_LUT_TILE_SIZE = 1.0 / AERIAL_SLICES;
-const float AERIAL_LUT_TEXEL_SIZE = 1.0 / 512.0;
-const float AERIAL_MAX_DEPTH = 32000.0;
+const float AERIAL_LUT_TEXEL_SIZE = 1.0 / 1024.0;
+const float AERIAL_MAX_DEPTH = 128000.0;
 
 const float MAX_PREFILTERED_LOD = 4.0;
 
@@ -348,17 +348,16 @@ vec4 sampleAerialPerspective(float depth)
     float w = depth / AERIAL_MAX_DEPTH;
     // Squared distribution
     w = sqrt(clamp(w, 0.0, 1.0));
-    // Remap to [0,16] to sample the right tile
     w *= AERIAL_SLICES;
     if (w <= 1.0) {
         // Handle special case of fragments behind the first slice
         color = mix(vec4(0.0, 0.0, 0.0, 1.0), sampleAerialPerspectiveSlice(0), w);
     } else {
-        w -= 1.0; // [0,15]
-        // Manually linearly interpolate between slices
+        w -= 1.0;
+        // Manually interpolate between slices
         color = mix(sampleAerialPerspectiveSlice(int(floor(w))),
                     sampleAerialPerspectiveSlice(int(ceil(w))),
-                    fract(w));
+                    sqrt(fract(w)));
     }
     return color;
 }

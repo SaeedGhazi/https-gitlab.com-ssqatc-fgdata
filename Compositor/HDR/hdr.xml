@@ -101,7 +101,7 @@
   <buffer>
     <name>aerial-perspective</name>
     <type>2d</type>
-    <width>512</width>
+    <width>1024</width>
     <height>32</height>
     <format>rgba16f</format>
     <min-filter>linear</min-filter>

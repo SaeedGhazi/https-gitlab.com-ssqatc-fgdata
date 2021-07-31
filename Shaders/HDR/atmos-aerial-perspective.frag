@@ -26,8 +26,8 @@ uniform sampler2D multiscattering_lut;
 
 const float PI = 3.141592653;
 const float ATMOSPHERE_RADIUS = 6471e3;
-const float TOTAL_SLICES = 16.0;
-const float DEPTH_RANGE = 32000.0;
+const float TOTAL_SLICES = 32.0;
+const float DEPTH_RANGE = 128000.0;
 const int AERIAL_PERSPECTIVE_SAMPLES = 20;
 const vec3 ONE_OVER_THREE = vec3(1.0 / 3.0);
 

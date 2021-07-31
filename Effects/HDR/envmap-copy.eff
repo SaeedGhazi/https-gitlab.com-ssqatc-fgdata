@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/envmap-copy</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/envmap-prefilter.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/envmap-copy.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>envmap</name>
+        <type>sampler-cube</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

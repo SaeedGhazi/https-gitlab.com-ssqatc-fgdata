@@ -3,6 +3,7 @@
   <name>Effects/HDR/envmap-prefilter</name>
   <parameters>
     <roughness type="float">0.0</roughness>
+    <num-samples type="int">1</num-samples>
   </parameters>
   <technique n="1">
     <pass>
@@ -19,6 +20,11 @@
         <name>roughness</name>
         <type>float</type>
         <value><use>roughness</use></value>
+      </uniform>
+      <uniform>
+        <name>num_samples</name>
+        <type>int</type>
+        <value><use>num-samples</use></value>
       </uniform>
     </pass>
   </technique>

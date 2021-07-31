@@ -4,5 +4,6 @@
   <inherits-from>Effects/HDR/envmap-prefilter</inherits-from>
   <parameters>
     <roughness type="float">1.0</roughness>
+    <num-samples type="int">128</num-samples>
   </parameters>
 </PropertyList>

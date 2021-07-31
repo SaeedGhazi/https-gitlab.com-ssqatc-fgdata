@@ -123,6 +123,18 @@
     <wrap-t>clamp-to-edge</wrap-t>
     <mipmap-levels>5</mipmap-levels>
   </buffer>
+  <buffer>
+    <name>prefiltered-envmap</name>
+    <type>cubemap</type>
+    <width>128</width>
+    <height>128</height>
+    <format>rgb16f</format>
+    <min-filter>linear-mipmap-linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+    <mipmap-levels>5</mipmap-levels>
+  </buffer>
 
   <!-- Shadow map atlas -->
   <buffer>
@@ -305,7 +317,6 @@
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>0</face>
-      <level>0</level>
     </attachment>
   </pass>
   <pass include="env-capture-pass.xml">
@@ -315,7 +326,6 @@
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>1</face>
-      <level>0</level>
     </attachment>
   </pass>
   <pass include="env-capture-pass.xml">
@@ -325,7 +335,6 @@
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>2</face>
-      <level>0</level>
     </attachment>
   </pass>
   <pass include="env-capture-pass.xml">
@@ -335,7 +344,6 @@
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>3</face>
-      <level>0</level>
     </attachment>
   </pass>
   <pass include="env-capture-pass.xml">
@@ -345,7 +353,6 @@
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>4</face>
-      <level>0</level>
     </attachment>
   </pass>
   <pass include="env-capture-pass.xml">
@@ -355,7 +362,8 @@
       <component>color0</component>
       <buffer>envmap</buffer>
       <face>5</face>
-      <level>0</level>
+      <!-- Generate the mips after writing to the last face -->
+      <mipmap-generation>true</mipmap-generation>
     </attachment>
   </pass>
 
@@ -364,169 +372,207 @@
       We convolve the cubemap for five roughness values and store the results
       on the mipmap levels of the cubemap. Later passes will choose which mipmap
       level to use for reflections based on the roughness of the surface that's
-      being lighted/rendered.
+      being lighted/rendered. The first mipmap level can just be copied from the
+      original envmap as we'd like it to contain perfect mirror reflections.
       Diffuse lighting is approximated by using the highest mipmap level
       (roughness=1).
   -->
+  <pass include="env-prefilter-pass.xml">
+    <name>env-prefilter0</name>
+    <effect>Effects/HDR/envmap-copy</effect>
+    <attachment>
+      <component>color0</component>
+      <buffer>prefiltered-envmap</buffer>
+      <face>0</face>
+      <level>0</level>
+    </attachment>
+    <attachment>
+      <component>color1</component>
+      <buffer>prefiltered-envmap</buffer>
+      <face>1</face>
+      <level>0</level>
+    </attachment>
+    <attachment>
+      <component>color2</component>
+      <buffer>prefiltered-envmap</buffer>
+      <face>2</face>
+      <level>0</level>
+    </attachment>
+    <attachment>
+      <component>color3</component>
+      <buffer>prefiltered-envmap</buffer>
+      <face>3</face>
+      <level>0</level>
+    </attachment>
+    <attachment>
+      <component>color4</component>
+      <buffer>prefiltered-envmap</buffer>
+      <face>4</face>
+      <level>0</level>
+    </attachment>
+    <attachment>
+      <component>color5</component>
+      <buffer>prefiltered-envmap</buffer>
+      <face>5</face>
+      <level>0</level>
+    </attachment>
+  </pass>
   <pass include="env-prefilter-pass.xml">
     <name>env-prefilter1</name>
     <effect>Effects/HDR/envmap-prefilter1</effect>
     <attachment>
       <component>color0</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>0</face>
       <level>1</level>
     </attachment>
     <attachment>
       <component>color1</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>1</face>
       <level>1</level>
     </attachment>
     <attachment>
       <component>color2</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>2</face>
       <level>1</level>
     </attachment>
     <attachment>
       <component>color3</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>3</face>
       <level>1</level>
     </attachment>
     <attachment>
       <component>color4</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>4</face>
       <level>1</level>
     </attachment>
     <attachment>
       <component>color5</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>5</face>
       <level>1</level>
     </attachment>
   </pass>
-
   <pass include="env-prefilter-pass.xml">
     <name>env-prefilter2</name>
     <effect>Effects/HDR/envmap-prefilter2</effect>
     <attachment>
       <component>color0</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>0</face>
       <level>2</level>
     </attachment>
     <attachment>
       <component>color1</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>1</face>
       <level>2</level>
     </attachment>
     <attachment>
       <component>color2</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>2</face>
       <level>2</level>
     </attachment>
     <attachment>
       <component>color3</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>3</face>
       <level>2</level>
     </attachment>
     <attachment>
       <component>color4</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>4</face>
       <level>2</level>
     </attachment>
     <attachment>
       <component>color5</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>5</face>
       <level>2</level>
     </attachment>
   </pass>
-
   <pass include="env-prefilter-pass.xml">
     <name>env-prefilter3</name>
     <effect>Effects/HDR/envmap-prefilter3</effect>
     <attachment>
       <component>color0</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>0</face>
       <level>3</level>
     </attachment>
     <attachment>
       <component>color1</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>1</face>
       <level>3</level>
     </attachment>
     <attachment>
       <component>color2</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>2</face>
       <level>3</level>
     </attachment>
     <attachment>
       <component>color3</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>3</face>
       <level>3</level>
     </attachment>
     <attachment>
       <component>color4</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>4</face>
       <level>3</level>
     </attachment>
     <attachment>
       <component>color5</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>5</face>
       <level>3</level>
     </attachment>
   </pass>
-
   <pass include="env-prefilter-pass.xml">
     <name>env-prefilter4</name>
     <effect>Effects/HDR/envmap-prefilter4</effect>
     <attachment>
       <component>color0</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>0</face>
       <level>4</level>
     </attachment>
     <attachment>
       <component>color1</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>1</face>
       <level>4</level>
     </attachment>
     <attachment>
       <component>color2</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>2</face>
       <level>4</level>
     </attachment>
     <attachment>
       <component>color3</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>3</face>
       <level>4</level>
     </attachment>
     <attachment>
       <component>color4</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>4</face>
       <level>4</level>
     </attachment>
     <attachment>
       <component>color5</component>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
       <face>5</face>
       <level>4</level>
     </attachment>
@@ -662,7 +708,7 @@
     </binding>
     <binding>
       <unit>9</unit>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
     </binding>
     <binding>
       <unit>10</unit>
@@ -695,7 +741,7 @@
     <effect-scheme>hdr-forward</effect-scheme>
     <binding>
       <unit>9</unit>
-      <buffer>envmap</buffer>
+      <buffer>prefiltered-envmap</buffer>
     </binding>
     <binding>
       <unit>11</unit>

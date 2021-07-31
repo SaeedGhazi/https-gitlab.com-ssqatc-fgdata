@@ -3,11 +3,11 @@
   <name>Effects/HDR/lighting</name>
   <parameters>
     <texture n="7">
-      <image>Textures/PBR/dfg_lut.png</image>
+      <image>Textures/PBR/dfg_lut.dds</image>
 	  <type>2d</type>
       <filter>linear</filter>
-      <wrap-s>clamp-to-border</wrap-s>
-      <wrap-t>clamp-to-border</wrap-t>
+      <wrap-s>clamp-to-edge</wrap-s>
+      <wrap-t>clamp-to-edge</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
   </parameters>

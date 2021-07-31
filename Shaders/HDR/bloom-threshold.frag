@@ -7,17 +7,18 @@ in vec2 texCoord;
 uniform sampler2D hdr_tex;
 uniform sampler2D lum_tex;
 
+uniform float bloom_threshold;
+
+vec3 applyExposure(vec3 color, float avgLuminance, float threshold);
+
 void main()
 {
     vec3 hdrColor = texture(hdr_tex, texCoord).rgb;
-    float avgLuminance = texture(lum_tex, texCoord).r;
-    // XXX: Maybe we should actually control the EV compensation value itself
-    // instead of hardcoding a factor?
-    float exposure = 1.0 / (200.0 * avgLuminance);
-    hdrColor *= exposure;
+    float avgLuminance = texelFetch(lum_tex, ivec2(0), 0).r;
 
-    if (dot(hdrColor, vec3(0.333)) <= 0.001)
+    vec3 exposedHdrColor = applyExposure(hdrColor, avgLuminance, bloom_threshold);
+    if (dot(exposedHdrColor, vec3(0.333)) <= 0.001)
 		fragColor = vec3(0.0);
     else
-        fragColor = hdrColor;
+        fragColor = exposedHdrColor;
 }

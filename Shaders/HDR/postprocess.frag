@@ -10,51 +10,74 @@ uniform sampler2D bloom_tex;
 
 uniform vec2 fg_BufferSize;
 
-const float BLOOM_INTENSITY = 1.0;
-const float EXPOSURE_THRESHOLD = 0.0;
+uniform float bloom_magnitude;
+uniform bool debug_ev100;
 
+vec3 applyExposure(vec3 color, float avgLuminance, float threshold);
+
+vec3 getDebugColor(float value)
+{
+    float level = value*3.14159265/2.0;
+    vec3 col;
+    col.r = sin(level);
+    col.g = sin(level*2.0);
+    col.b = cos(level);
+    return col;
+}
+
+vec3 debugEV100(vec3 hdr, float avgLuminance)
+{
+    float level;
+    if (texCoord.y < 0.05) {
+        const float w = 0.001;
+        if (texCoord.x >= (0.5 - w) && texCoord.x <= (0.5 + w))
+            return vec3(1.0);
+        return getDebugColor(texCoord.x);
+    }
+    float luminance = max(dot(hdr, vec3(0.299, 0.587, 0.114)), 0.0001);
+    float ev100 = log2(luminance * 8.0);
+    float norm = ev100 / 12.0 + 0.5;
+    return getDebugColor(norm);
+}
+
+const float a = 2.51;
+const float b = 0.03;
+const float c = 2.43;
+const float d = 0.59;
+const float e = 0.14;
 vec3 ACESFilm(vec3 x)
 {
-    const float a = 2.51;
-    const float b = 0.03;
-    const float c = 2.43;
-    const float d = 0.59;
-    const float e = 0.14;
     return clamp((x*(a*x+b))/(x*(c*x+d)+e), 0.0, 1.0);
 }
 
-float log10(float x)
+vec3 encodeSRGB(vec3 linearRGB)
 {
-    return (1.0 / log(10.0)) * log(x);
-}
-
-float autokey(float lum)
-{
-    return 1.03 - 2.0 / (2.0 + log10(lum + 1.0));
+    vec3 a = 12.92 * linearRGB;
+    vec3 b = 1.055 * pow(linearRGB, vec3(1.0 / 2.4)) - 0.055;
+    vec3 c = step(vec3(0.0031308), linearRGB);
+    return mix(a, b, c);
 }
 
 void main()
 {
     vec3 hdrColor = texture(hdr_tex, texCoord).rgb;
-
     float avgLuminance = texelFetch(lum_tex, ivec2(0), 0).r;
-    avgLuminance = max(avgLuminance, 0.001);
 
-    // Auto-expose
-    float linearExposure = autokey(avgLuminance) / avgLuminance;
-    float exposure = log2(max(linearExposure, 0.0001));
-    exposure -= EXPOSURE_THRESHOLD;
-    hdrColor *= exp2(exposure);
+    // Exposure
+    vec3 exposedHdrColor = applyExposure(hdrColor, avgLuminance, 0.0);
+    if (debug_ev100) {
+        fragColor = vec4(debugEV100(exposedHdrColor, avgLuminance), 1.0);
+        return;
+    }
 
     // Tonemap
-    vec3 color = ACESFilm(hdrColor);
+    vec3 color = ACESFilm(exposedHdrColor);
     // Gamma correction
-    color = pow(color, vec3(1.0/2.2));
+    color = encodeSRGB(color);
 
-    // Apply bloom
+    // Bloom
     vec3 bloom = texture(bloom_tex, texCoord).rgb;
-    bloom *= BLOOM_INTENSITY;
-    color += bloom;
+    color += bloom.rgb * bloom_magnitude;
 
     fragColor = vec4(color, 1.0);
 }

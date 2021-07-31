@@ -382,6 +382,14 @@ Started September 2000 by David Megginson, david@megginson.com
         <available type="bool" userarchive="n">false</available>
         <enabled type="bool" userarchive="y">true</enabled>
       </pilot-model>
+      <hdr>
+        <debug>
+          <display-ev100 type="bool">false</display-ev100>
+        </debug>
+        <exposure-compensation type="float">0.0</exposure-compensation>
+        <bloom-magnitude type="float">1.0</bloom-magnitude>
+        <bloom-threshold type="float">6.0</bloom-threshold>
+      </hdr>
     </rendering>
     <model-hz type="int">120</model-hz>
     <sound>

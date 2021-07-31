@@ -13,7 +13,7 @@ const float TAU = 4.0;
 void main()
 {
     float prevLum = texelFetch(prev_lum_tex, ivec2(0), 0).r;
-    float currentLum = exp2(textureLod(current_lum_tex, vec2(0.5), 10.0).r);
+    float currentLum = exp(textureLod(current_lum_tex, vec2(0.5), 10.0).r);
     adaptedLum = prevLum + (currentLum - prevLum) *
         (1.0 - exp(-osg_DeltaFrameTime * TAU));
 }

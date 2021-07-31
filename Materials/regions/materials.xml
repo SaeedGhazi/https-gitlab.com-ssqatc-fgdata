@@ -43,10 +43,21 @@
 
 <!-- Asia -->
 <region include="Materials/regions/asia.xml"/>
-
-<!-- Pacific-->
 <region include="Materials/regions/indonesia.xml"/>
 <region include="Materials/regions/southeast_asia.xml"/>
+
+<!-- Australia -->
+<region include="Materials/regions/australia.xml"/>
+<region include="Materials/regions/australia_mediterranean_summer.xml"/>
+<region include="Materials/regions/australia_mediterranean_winter.xml"/>
+<region include="Materials/regions/australia_monsoonal.xml"/>
+<region include="Materials/regions/australia_temperate_coastal.xml"/>
+<region include="Materials/regions/australia_temperate_coastal_winter.xml"/>
+<region include="Materials/regions/australia_temperate_inland.xml"/>
+<region include="Materials/regions/australia_temperate_inland_winter.xml"/>
+<region include="Materials/regions/australia_new_england.xml"/>
+
+<!-- Pacific-->
 <region include="Materials/regions/hawaii.xml"/>
 <region include="Materials/regions/oahu.xml"/>
 <region include="Materials/regions/hawaii_big_island.xml"/>

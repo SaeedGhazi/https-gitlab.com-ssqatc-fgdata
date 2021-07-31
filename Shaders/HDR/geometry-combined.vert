@@ -3,15 +3,14 @@
 layout(location = 0) in vec4 pos;
 layout(location = 1) in vec3 normal;
 layout(location = 3) in vec4 multiTexCoord0;
+layout(location = 6) in vec3 tangent;
+layout(location = 7) in vec3 binormal;
 
 out vec2 texCoord;
 out mat3 TBN;
 
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat3 osg_NormalMatrix;
-
-attribute vec3 tangent;
-attribute vec3 binormal;
 
 void main()
 {

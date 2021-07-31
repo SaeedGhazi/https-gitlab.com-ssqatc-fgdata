@@ -16,10 +16,10 @@ vec3 decodeNormal(vec2 enc)
 {
     vec2 fenc = enc * 4.0 - 2.0;
     float f = dot(fenc, fenc);
-    float g = sqrt(1.0 - f / 4.0);
+    float g = sqrt(1.0 - f * 0.25);
     vec3 n;
     n.xy = fenc * g;
-    n.z = 1.0 - f / 2.0;
+    n.z = 1.0 - f * 0.5;
     return n;
 }
 
@@ -37,4 +37,12 @@ float linearizeDepth(float depth)
 {
     return (2.0 * fg_NearFar.x) / (
         fg_NearFar.y + fg_NearFar.x - depth * (fg_NearFar.y - fg_NearFar.x));
+}
+
+vec3 decodeSRGB(vec3 screenRGB)
+{
+    vec3 a = screenRGB / 12.92;
+    vec3 b = pow((screenRGB + 0.055) / 1.055, vec3(2.4));
+    vec3 c = step(vec3(0.04045), screenRGB);
+    return mix(a, b, c);
 }

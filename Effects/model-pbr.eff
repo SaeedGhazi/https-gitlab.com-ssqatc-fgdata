@@ -3,41 +3,39 @@
 <PropertyList>
   <name>Effects/model-pbr</name>
   <parameters>
-    <!-- Albedo -->
+    <!-- Base Color -->
     <texture n="0">
       <type>white</type>
     </texture>
+    <base-color-factor type="vec4d">1.0 1.0 1.0 1.0</base-color-factor>
     <!-- Normalmap -->
     <texture n="1">
       <image>Aircraft/Generic/Effects/null_bumpspec.png</image>
       <type>2d</type>
       <filter>linear-mipmap-linear</filter>
-      <wrap-s>clamp</wrap-s>
-      <wrap-t>clamp</wrap-t>
+      <wrap-s>repeat</wrap-s>
+      <wrap-t>repeat</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
-    <!-- Metalness -->
+    <!-- Metallic -->
     <texture n="2">
-      <image>Aircraft/Generic/Effects/ReflectMaps/null_reflectdirt.png</image>
-      <type>2d</type>
-      <filter>linear-mipmap-linear</filter>
-      <wrap-s>clamp</wrap-s>
-      <wrap-t>clamp</wrap-t>
-      <internal-format>normalized</internal-format>
+      <type>white</type>
     </texture>
+    <metallic-factor type="float">1.0</metallic-factor>
     <!-- Roughness -->
     <texture n="3">
-      <image>Aircraft/Generic/Effects/greymap.png</image>
-      <type>2d</type>
-      <filter>linear-mipmap-linear</filter>
-      <wrap-s>clamp</wrap-s>
-      <wrap-t>clamp</wrap-t>
-      <internal-format>normalized</internal-format>
+      <type>white</type>
     </texture>
-    <!-- Cavity -->
+    <roughness-factor type="float">1.0</roughness-factor>
+    <!-- Occlusion -->
     <texture n="4">
       <type>white</type>
     </texture>
+    <!-- Emissive -->
+    <texture n="5">
+      <type>white</type>
+    </texture>
+    <emissive-factor type="vec3d">0.0 0.0 0.0</emissive-factor>
   </parameters>
 
   <generate>
@@ -93,6 +91,15 @@
         <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
         <internal-format><use>texture[4]/internal-format</use></internal-format>
       </texture-unit>
+      <texture-unit>
+        <unit>5</unit>
+        <type><use>texture[5]/type</use></type>
+        <image><use>texture[5]/image</use></image>
+        <filter><use>texture[5]/filter</use></filter>
+        <wrap-s><use>texture[5]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[5]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[5]/internal-format</use></internal-format>
+      </texture-unit>
       <cull-face>back</cull-face>
       <program>
         <vertex-shader>Shaders/HDR/geometry-pbr.vert</vertex-shader>
@@ -108,7 +115,7 @@
         </attribute>
       </program>
       <uniform>
-        <name>albedo_tex</name>
+        <name>base_color_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
@@ -118,7 +125,7 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>metalness_tex</name>
+        <name>metallic_tex</name>
         <type>sampler-2d</type>
         <value type="int">2</value>
       </uniform>
@@ -128,9 +135,34 @@
         <value type="int">3</value>
       </uniform>
       <uniform>
-        <name>cavity_tex</name>
+        <name>occlusion_tex</name>
         <type>sampler-2d</type>
         <value type="int">4</value>
+      </uniform>
+      <uniform>
+        <name>emissive_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">5</value>
+      </uniform>
+      <uniform>
+        <name>base_color_factor</name>
+        <type>float-vec4</type>
+        <value><use>base-color-factor</use></value>
+      </uniform>
+      <uniform>
+        <name>metallic_factor</name>
+        <type>float</type>
+        <value><use>metallic-factor</use></value>
+      </uniform>
+      <uniform>
+        <name>roughness_factor</name>
+        <type>float</type>
+        <value><use>roughness-factor</use></value>
+      </uniform>
+      <uniform>
+        <name>emissive_factor</name>
+        <type>float-vec3</type>
+        <value><use>emissive-factor</use></value>
       </uniform>
     </pass>
   </technique>

@@ -200,6 +200,15 @@
 		</item>
 
 		<item>
+			<name>vr-options</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>vr-options</dialog-name>
+			</binding>
+			<enabled>false</enabled>
+		</item>
+
+		<item>
             <enabled>
                 <property>/sim/rendering/shaders/skydome</property>
             </enabled>

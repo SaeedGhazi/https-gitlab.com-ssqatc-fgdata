@@ -483,6 +483,10 @@
           <source>View Options</source>
           <target />
         </trans-unit>
+        <trans-unit id="menu/vr-options:0" translate="yes" approved="no">
+          <source>VR Options</source>
+          <target />
+        </trans-unit>
         <trans-unit id="menu/view-push:0" translate="yes" approved="no">
           <source>Push Pair View</source>
           <target />

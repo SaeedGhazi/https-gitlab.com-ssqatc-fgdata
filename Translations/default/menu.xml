@@ -35,6 +35,7 @@
 	<adjust-hud>Adjust HUD Properties</adjust-hud>
 	<toggle-glide-slope>Toggle Glide Slope Tunnel</toggle-glide-slope>
 	<replay>Instant Replay</replay>
+	<earthview>Earthview orbital rendering</earthview>
 	<stereoscopic-options>Stereoscopic View Options</stereoscopic-options>
     <als-filter-effects>ALS Filter Effects</als-filter-effects>
 
@@ -58,6 +59,7 @@
 	<environment-settings>Environment Settings</environment-settings>
 	<time-settings>Time Settings</time-settings>
 	<wildfire-settings>Wildfire Settings</wildfire-settings>
+	<volcanoes>Volcanoes</volcanoes>
 
 	<!-- Equipment menu -->
 	<equipment>Equipment</equipment>
@@ -83,6 +85,7 @@
 	<tanker>Tanker Controls</tanker>
 	<carrier>Carrier Controls</carrier>
 	<jetway>Jetway Settings</jetway>
+	<ai-objects>AI Objects</ai-objects>
 
 	<!-- Multiplayer menu -->
 	<multiplayer>Multiplayer</multiplayer>

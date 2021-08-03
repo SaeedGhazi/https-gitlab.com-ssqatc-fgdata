@@ -757,6 +757,10 @@
           <source>Disable textures</source>
           <target />
         </trans-unit>
+        <trans-unit id="options/disable-vr-desc:" translate="yes" approved="no">
+          <source>Disable VR</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/disable-wireframe-desc:0" translate="yes" approved="no">
           <source>Disable wireframe drawing mode</source>
           <target />
@@ -887,6 +891,10 @@
         </trans-unit>
         <trans-unit id="options/enable-textures-desc:0" translate="yes" approved="no">
           <source>Enable textures</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/enable-vr-desc:" translate="yes" approved="no">
+          <source>Enable VR</source>
           <target />
         </trans-unit>
         <trans-unit id="options/enable-wireframe-desc:0" translate="yes" approved="no">

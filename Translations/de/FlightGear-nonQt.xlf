@@ -1570,7 +1570,6 @@
         <trans-unit approved="no" id="weather-scenarios/core-low-pressure-region-name:0" translate="yes">
           <source>Core low pressure region</source>
           <target>Zentrum eines Tiefdruckgebietes</target>
-          <target />
         </trans-unit>
         <trans-unit approved="no" id="weather-scenarios/early-morning-fog-desc:0" translate="yes">
           <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>

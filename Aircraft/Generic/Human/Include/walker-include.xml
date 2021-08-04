@@ -84,7 +84,7 @@
 				<name type="string"></name>
 				<loop-enabled type="bool">false</loop-enabled>
 				<loop-to type="int">0</loop-to>
-				<rest-sec type="double">0</rest-sec>	
+				<rest-sec type="double">0</rest-sec>
 				<transit-sec type="double">1.0</transit-sec>
 				<trigger-upon type="string"></trigger-upon>
 				<limb n="0">
@@ -258,9 +258,11 @@
 			<default n="0">
 				<menu n="11">
 					<label>Walker</label>
-						<enabled type="bool">true</enabled>
+					<name>walker</name>
+					<enabled type="bool">true</enabled>
 					<item>
-						<label>Walker animation dialog  [Tab]</label>
+						<label>Walker animation dialog</label>
+						<name>walker-animation-dialog</name>
 						<binding>
 							<command>nasal</command>
 							<script>walker.sequence.showDialog()</script>
@@ -269,20 +271,23 @@
 
 					<item>
 						<label>Select Theme</label>
+						<name>walker-theme</name>
 						<binding>
-                <command>nasal</command>
-                <script>walk.theme_dialog.toggle()</script>
-              </binding>
+						<command>nasal</command>
+						<script>walk.theme_dialog.toggle()</script>
+						</binding>
 					</item>
 					<item>
 						<label>Select Equipment</label>
+						<name>walker-equipment</name>
 						<binding>
-                <command>nasal</command>
-                <script>walk.equip_dialog.toggle()</script>
-              </binding>
+						<command>nasal</command>
+						<script>walk.equip_dialog.toggle()</script>
+						</binding>
 					</item>
 					<item>
 						<label>Toggle Walker outside</label>
+						<name>walker-toggle-outside</name>
 						<binding>
 							<command>property-toggle</command>
 							<property>sim/walker/key-triggers/outside-toggle</property>

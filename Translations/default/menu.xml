@@ -152,4 +152,11 @@
 	<autostart>Autostart</autostart>
 	<tiller-steering>Tiller Steering</tiller-steering>
 
+	<!-- Walker menu -->
+	<walker>Walker</walker>
+	<walker-animation-dialog>Walker animation dialog</walker-animation-dialog>
+	<walker-theme>Select Theme</walker-theme>
+	<walker-equipment>Select Equipment</walker-equipment>
+	<walker-toggle-outside>Toggle Walker outside</walker-toggle-outside>
+
 </PropertyList>

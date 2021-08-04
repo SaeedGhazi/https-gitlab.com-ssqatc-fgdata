@@ -493,6 +493,26 @@
           <source>Volcanoes</source>
           <target />
         </trans-unit>
+        <trans-unit id="menu/walker:0" translate="yes" approved="no">
+          <source>Walker</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-animation-dialog:0" translate="yes" approved="no">
+          <source>Walker animation dialog</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-equipment:0" translate="yes" approved="no">
+          <source>Select Equipment</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-theme:0" translate="yes" approved="no">
+          <source>Select Theme</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-toggle-outside:0" translate="yes" approved="no">
+          <source>Toggle Walker outside</source>
+          <target />
+        </trans-unit>
         <trans-unit id="menu/wildfire-settings:0" translate="yes" approved="yes">
           <source>Wildfire Settings</source>
           <target>Paramètres de feu de forêt</target>

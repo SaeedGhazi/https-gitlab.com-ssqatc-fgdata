@@ -1,5 +1,5 @@
 ##		FLARM
-##	Version 05/2020
+##	Version 08/2021
 ##	by Benedikt Wolf (D-ECHO)
 
 ##	References:
@@ -145,6 +145,7 @@ setlistener("/sim/signals/fdm-initialized", func{
 	phase1_timer = maketimer( 0.2, flarm_start_phase2 );
 	phase2_timer = maketimer( 5, flarm_start_phase3 );
 	phase3_timer = maketimer( 2, flarm_start_phase4 );
+	startup_loop_timer = maketimer( 0, startup_loop );
 	
 	phase1_timer.singleShot = 1;
 	phase2_timer.singleShot = 1;
@@ -296,47 +297,92 @@ var flarm_update	=	maketimer( 1, func() { update_FLARM(); } );
 var phase1_timer = nil;
 var phase2_timer = nil;
 var phase3_timer = nil;
+var startup_loop_timer = nil;
 
+var starting = 0;
+
+var leds_startup = {
+	green: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	red: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+};
+
+var startup_loop = func {
+	if( !starting ){
+		startup_loop_timer.stop();
+	}
+	if( volts.getDoubleValue() > 9 ){
+		forindex( var key; leds_startup.green ){
+			leds_green[key].setBoolValue( leds_startup.green[ key ] );
+			leds_red[key].setBoolValue( leds_startup.red[ key ] );
+		}
+	} else {
+		foreach( var el; leds_startup.green ){
+			el = 0;
+		}
+		foreach( var el; leds_startup.red ){
+			el = 0;
+		}
+		forindex(var key; leds_green){
+			leds_green[key].setBoolValue(0);
+			leds_red[key].setBoolValue(0);
+		}
+		starting = 0;
+	}
+}
 
 flarm_start_phase1 = func () {
+	if( volts.getDoubleValue() <= 9 ){
+		return;
+	}
 	# 1. Short beep, all LEDs light up
-	forindex(var key; leds_green){
-		leds_green[key].setBoolValue(1);
-		leds_red[key].setBoolValue(1);
-			
+	forindex(var key; leds_startup.green ){
+		leds_startup.green[ key ] = 1;
+		leds_startup.red[ key ] = 1;
 	}
 	play_warn.setIntValue(1);
 	phase1_timer.restart(0.2);
 }
 flarm_start_phase2 = func () {
+	if( volts.getDoubleValue() <= 9 ){
+		return;
+	}
 	# beep and LEDs off except to show hardware version (here: show green LEDs 0 and 1)
 	play_warn.setIntValue(0);
-	forindex(var key; leds_green){
+	forindex(var key; leds_startup.green){
 		if( key > 1 ){
-			leds_green[key].setBoolValue(0);
+			leds_startup.green[key] = 0;
 		}
-		leds_red[key].setBoolValue(0);
+		leds_startup.red[key] = 0;
 	}
 	phase2_timer.restart(5);
 }
 flarm_start_phase3 = func () {
+	if( volts.getDoubleValue() <= 9 ){
+		return;
+	}
 	# Show firmware version ( emit green LEDs 7 and 8 as well as 2 and 3 )
-	leds_green[0].setBoolValue(0);
-	leds_green[1].setBoolValue(0);
-	leds_green[2].setBoolValue(1);
-	leds_green[3].setBoolValue(1);
-	leds_green[7].setBoolValue(1);
-	leds_green[8].setBoolValue(1);
+	leds_startup.green[0]= 0;
+	leds_startup.green[1]= 0;
+	leds_startup.green[2]= 1;
+	leds_startup.green[3]= 1;
+	leds_startup.green[7]= 1;
+	leds_startup.green[8]= 1;
 	phase3_timer.restart(2);
 }
 flarm_start_phase4 = func () {
+	if( volts.getDoubleValue() <= 9 ){
+		return;
+	}
 	# Go to normal operation
+	starting = 0;
+	running = 1;
 	flarm_update.restart(1);
 }
 
 setlistener(volts, func{
-	if( running == 0 and volts.getDoubleValue() > 9) {
-		running = 1;
+	if( running == 0 and starting == 0 and volts.getDoubleValue() > 9) {
+		starting = 1;
 		flarm_start_phase1();
+		startup_loop_timer.restart( 0 );
 	}
 });

@@ -21,6 +21,8 @@ Contents ----------------------------------------------------------------------
    3.9  BUILDING_LIST
    3.10 TREE_LIST
    3.11 LINEAR_FEATURE_LIST
+   3.12 OBJECT_LIGHT
+   3.13 LIGHT_LIST
 
 4  model manager ("/models/model")
    4.1  static objects
@@ -527,6 +529,85 @@ Where:
 - ATTR is an integer value used to store packed attributes (e.g. lighting, currenty unused)
 - A,B,C,D are float values used to store attributes (currently unused)
 - lonN, latN are lon/lat pairs on the center of the line feature.  There must be at least two pairs
+
+3.12  OBJECT_LIGHT
+------------------
+
+Add a light to the tile.
+
+Example:
+
+  OBJECT_LIGHT sample-light -129.00074514 -9.00490134 5 10.0 100.0 0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 360.0 360.0 -1 1.0 1.0 0.0
+
+Syntax:
+
+  OBJECT_LIGHT <light-name> <lon> <lat> <elev-m> <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <normal-x> <normal-y> <normal-z> <horizontal-angle> <vertical-angle> <animation-param-1> <animation-param-2> <animation-param-3> <animation-param-4>
+
+Where:
+- <light-name> is a name for the light. Multiple lights may have the same name.
+- <lon> and <lat> are positions in longitude and latitude of the light.
+- <elev-m> is in meter and relative to mean sea-level (in the fgfs world).
+- <size-cm> is the size in centimeters of the light.
+- <intensity-cd> is the intensity of the light in candelas.
+- <on-period> defines what part of the day the light is turned on at:
+   0 means the light will be on all the time
+   1 means the light will turn on at sunset (sun angle ~89 degrees)
+   2 means the light will turn on around sunset with some variability
+   3 means the light will turn on at sunset or when visibility is less than 5000nm
+- <color-r>, <color-g>, <color-b> and <color-a> define the color of the light.
+- <normal-x>, <normal-y>, <normal-z>, <horizontal-angle> and <vertical-angle> define the directionality of the light:
+   If both <horizonal/vertical-angle> are 360, the light is considered omnidirectional and the normals have no effect.
+   If not, <normal-x> points to north, <normal-y> points to east and <normal-z> points up.
+- <animation-param-1>, <animation-param-2>, <animation-param-3> and <animation-param-4> define animations:
+   If <animation-param-1> is less than 0, light is not animated.
+   If <animation-param-1> is greater than 0, then its value is used as the total time interval of a single loop of the animation
+   <animation-param-2> defines the portion of the loop the light is working (its switched off completely for the remaining portion)
+   <animation-param-3> defines the strobe rate of the light w.r.t. to the full loop interval (i.e. <animation-param-1>).
+      A value less than equal to zero turns off strobing completely.
+   <animation-param-4> defines the offset (so two lights with the same animation can start at different real-world times)
+
+   Examples:
+   - On for half a second, off for half a second
+        1.0 0.5 0.0 0.0
+   - Alternatively,
+        1.0 1.0 1.0 0.0
+   - On for half a second, off for half a second, offset by 0.2 seconds
+        1.0 0.5 0.0 0.2
+   - Blink twice for half a second, and then remain off for half a second
+        1.0 0.5 4.0 0.0
+
+3.13  LIGHT_LIST
+----------------
+Defines a file containing multiple light coordinates and properties.
+
+Example:
+
+  LIGHT_LIST light_list.txt -129.00074514 -9.00490134 5
+
+Syntax
+
+  LIGHT_LIST <filename> <lon> <lat> <elev>
+
+Where:
+- <filename> is the name of a file containing light positions and properties
+- <lat>, <lon>, <elev> defines the center of the set of lights
+
+The referenced <filename> (in the example light_list.txt) contains lines defining lights of various types
+
+- "omnidirectional":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a>
+- "omnidirectional-animated":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <animation-param-1> <animation-param-2> <animation-param-3> <animation-param-4>
+- "directional":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <normal-x> <normal-y> <normal-z> <horizontal-angle> <vertical-angle>
+- "directional-animated":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <normal-x> <normal-y> <normal-z> <horizontal-angle> <vertical-angle> <animation-param-1> <animation-param-2> <animation-param-3> <animation-param-4>
+
+The type of the light is automatically detected based on the number of parameters specified for each light.
+
+Where:
+- X,Y,Z are the cartesian coordinates of the tree. +X is South and +Y is East.
+- The rest of the parameters are the same as OBJECT_LIGHT (Section 3.12)
 
 4 model manager ("/models/model") --------------------------------------------
 

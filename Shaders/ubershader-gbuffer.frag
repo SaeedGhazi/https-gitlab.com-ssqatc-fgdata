@@ -221,8 +221,8 @@ void main (void)
 	if ( lightmap_enabled >= 1 ) {
 		vec3 lightmapcolor;
 		vec4 lightmapFactor = vec4(lightmap_r_factor, lightmap_g_factor, lightmap_b_factor, lightmap_a_factor);
-		lightmapFactor = lightmapFactor * lightmapTexel;
 		if (lightmap_multi > 0 ){
+			lightmapFactor = lightmapFactor * lightmapTexel;
 			lightmapcolor = lightmap_r_color * lightmapFactor.r +
 			                lightmap_g_color * lightmapFactor.g +
 			                lightmap_b_color * lightmapFactor.b +

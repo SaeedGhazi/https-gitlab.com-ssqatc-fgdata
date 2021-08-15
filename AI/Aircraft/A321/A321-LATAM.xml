@@ -2,7 +2,7 @@
 
 <PropertyList include="A321-main.xml">
 
-<texture-path>Textures/TAM</texture-path>
+<texture-path>Textures/LATAM</texture-path>
 
 </PropertyList>
 

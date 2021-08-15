@@ -312,6 +312,7 @@
       <match>31N</match>
       <match>32N</match>
       <match>32Q</match>
+	  <match>20N</match> 
       <match>321</match>
       <match>A319</match>
       <match>A320</match>

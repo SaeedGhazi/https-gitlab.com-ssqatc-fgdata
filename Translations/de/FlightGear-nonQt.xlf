@@ -1356,7 +1356,7 @@
       </trans-unit>
       <trans-unit id="sys/finalize-position:0" approved="yes">
         <source xml:space="preserve">finalizing position</source>
-        <target xml:space="preserve">Vorbereiten der Ausgansposition</target>
+        <target xml:space="preserve">Vorbereiten der Ausgangsposition</target>
       </trans-unit>
       <trans-unit id="sys/finishing-subsystems:0" approved="yes">
         <source xml:space="preserve">finalizing subsystems</source>

@@ -12,10 +12,14 @@ out mat3 TBN;
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat3 osg_NormalMatrix;
 
+uniform bool flip_vertically;
+
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
     texCoord = multiTexCoord0.st;
+    if (flip_vertically)
+        texCoord.y = 1.0 - texCoord.y;
 
     vec3 T = normalize(osg_NormalMatrix * tangent);
     vec3 B = normalize(osg_NormalMatrix * binormal);

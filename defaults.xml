@@ -384,6 +384,7 @@ Started September 2000 by David Megginson, david@megginson.com
       </pilot-model>
       <hdr>
         <debug>
+          <show-gbuffer type="bool">false</show-gbuffer>
           <display-ev100 type="bool">false</display-ev100>
         </debug>
         <exposure-compensation type="float">0.0</exposure-compensation>

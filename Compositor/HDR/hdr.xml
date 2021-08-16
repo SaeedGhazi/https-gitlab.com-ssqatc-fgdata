@@ -1022,13 +1022,10 @@
     </binding>
   </pass>
 
-  <!-- DEBUG PASSES -->
-  <!--
-  <pass>
+  <!-- Debug passes -->
+  <pass include="debug-pass.xml">
     <name>debug-albedo</name>
-    <type>quad</type>
     <effect>Effects/HDR/trivial</effect>
-    <clear-mask>depth</clear-mask>
     <geometry>
       <left>0.0</left>
       <bottom>0.0</bottom>
@@ -1040,11 +1037,9 @@
       <buffer>gbuffer0</buffer>
     </binding>
   </pass>
-  <pass>
+  <pass include="debug-pass.xml">
     <name>debug-normals</name>
-    <type>quad</type>
     <effect>Effects/HDR/trivial</effect>
-    <clear-mask>depth</clear-mask>
     <geometry>
       <left>0.8</left>
       <bottom>0.0</bottom>
@@ -1056,11 +1051,9 @@
       <buffer>gbuffer1</buffer>
     </binding>
   </pass>
-  <pass>
+  <pass include="debug-pass.xml">
     <name>debug-materials</name>
-    <type>quad</type>
     <effect>Effects/HDR/trivial</effect>
-    <clear-mask>depth</clear-mask>
     <geometry>
       <left>0.0</left>
       <bottom>0.8</bottom>
@@ -1072,11 +1065,9 @@
       <buffer>gbuffer2</buffer>
     </binding>
   </pass>
-  <pass>
+  <pass include="debug-pass.xml">
     <name>debug-depth</name>
-    <type>quad</type>
-    <effect>Effects/HDR/trivial</effect>
-    <clear-mask>depth</clear-mask>
+    <effect>Effects/HDR/visualize-depth</effect>
     <geometry>
       <left>0.8</left>
       <bottom>0.8</bottom>
@@ -1088,5 +1079,4 @@
       <buffer>depth</buffer>
     </binding>
   </pass>
-  -->
 </PropertyList>

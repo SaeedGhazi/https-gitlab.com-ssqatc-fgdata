@@ -16,12 +16,7 @@ please see Docs/README.model-combined.eff for documentation
 		<normalmap-dds type="int">0</normalmap-dds>
 		<normalmap-tiling type="float">1.0</normalmap-tiling>
 		<texture n="2">
-			<image>Aircraft/Generic/Effects/null_bumpspec.png</image>
-			<type>2d</type>
-			<filter>linear-mipmap-linear</filter>
-			<wrap-s>clamp</wrap-s>
-			<wrap-t>clamp</wrap-t>
-			<internal-format>normalized</internal-format>
+		  <type>null-normalmap</type>
 		</texture>
 		<!-- Light Map -->
 		<lightmap-enabled type="int">0</lightmap-enabled>
@@ -1297,6 +1292,12 @@ please see Docs/README.model-combined.eff for documentation
         <technique n="7">
           <scheme>hdr-geometry</scheme>
           <pass>
+            <!-- Reverse floating point depth buffer -->
+            <depth>
+              <function>gequal</function>
+              <near>1.0</near>
+              <far>0.0</far>
+            </depth>
             <texture-unit>
               <unit>0</unit>
               <type><use>texture[0]/type</use></type>

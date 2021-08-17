@@ -589,6 +589,7 @@
     <type>scene</type>
     <effect-scheme>hdr-geometry</effect-scheme>
     <clear-mask>depth</clear-mask>
+    <clear-depth>0.0</clear-depth>
     <cull-mask>0xfffff7ff</cull-mask>
     <attachment>
       <component>color0</component>

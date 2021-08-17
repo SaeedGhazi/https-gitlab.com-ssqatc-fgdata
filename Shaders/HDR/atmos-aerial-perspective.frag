@@ -56,7 +56,7 @@ void main()
     w *= w;
     float depth = w * DEPTH_RANGE;
 
-    vec3 fragPos = positionFromDepth(coord * 2.0 - 1.0, 0.0);
+    vec3 fragPos = positionFromDepth(coord, 1.0);
     vec3 rayDir = vec4(fg_ViewMatrixInverse * vec4(normalize(fragPos), 0.0)).xyz;
 
     float cameraHeight = length(fg_CameraPositionCart);

@@ -31,8 +31,8 @@ float rand(vec2 co) {
 
 float sampleAO(vec3 fragPos, vec3 normal, vec2 coords)
 {
-    float sampleDepth = texture(depth_tex, coords).r * 2.0 - 1.0;
-    vec3 samplePoint = positionFromDepth(coords * 2.0 - 1.0, sampleDepth);
+    float sampleDepth = texture(depth_tex, coords).r;
+    vec3 samplePoint = positionFromDepth(coords, sampleDepth);
 
     vec3 diff = samplePoint - fragPos;
     float l = length(diff);
@@ -47,7 +47,7 @@ float sampleAO(vec3 fragPos, vec3 normal, vec2 coords)
 void main()
 {
     float fragDepth = texture(depth_tex, texCoord).r;
-    vec3 fragPos = positionFromDepth(texCoord * 2.0 - 1.0, fragDepth * 2.0 - 1.0);
+    vec3 fragPos = positionFromDepth(texCoord, fragDepth);
 
     vec3 normal = normalize(decodeNormal(texture(normal_tex, texCoord).rg));
 

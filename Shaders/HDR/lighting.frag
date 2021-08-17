@@ -383,17 +383,15 @@ vec3 getSunIlluminance()
 void main()
 {
     float depth = texture(depth_tex, texCoord).r;
-    if (depth == 1.0) {
-        fragHdrColor = vec3(0.0);
-        return;
+    if (depth == 0.0) {
+        discard;
     }
-
     vec4 gbuffer0 = texture(gbuffer0_tex, texCoord);
     vec2 gbuffer1 = texture(gbuffer1_tex, texCoord).rg;
     vec4 gbuffer2 = texture(gbuffer2_tex, texCoord);
     float ao = texture(ao_tex, texCoord).r;
 
-    vec3 pos = positionFromDepth(texCoord * 2.0 - 1.0, depth * 2.0 - 1.0);
+    vec3 pos = positionFromDepth(texCoord, depth);
     vec3 v = normalize(-pos);
     vec3 n = decodeNormal(gbuffer1);
 

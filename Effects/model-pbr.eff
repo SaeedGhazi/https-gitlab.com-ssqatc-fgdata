@@ -47,6 +47,12 @@
   <technique n="20">
     <scheme>hdr-geometry</scheme>
     <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+      </depth>
       <texture-unit>
         <unit>0</unit>
         <type><use>texture[0]/type</use></type>

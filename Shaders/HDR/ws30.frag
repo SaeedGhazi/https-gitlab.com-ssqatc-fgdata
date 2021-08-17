@@ -46,11 +46,9 @@ void main()
 
     vec3 texel = texture(atlas, vec3(st, lc)).rgb;
 
-    gbuffer0.rgb = decodeSRGB(texel) * color.rgb;
+    gbuffer0.rgb = decodeSRGB(texel);
     gbuffer0.a = 1.0;
     gbuffer1 = encodeNormal(normalVS);
     float specularity = clamp(dot(specular.rgb, vec3(0.333)), 0.0, 1.0);
     gbuffer2 = vec4(0.0, 1.0-specularity, 0.0, 0.0);
 }
-
-

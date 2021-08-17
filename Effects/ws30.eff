@@ -674,6 +674,13 @@
   <technique n="109">
     <scheme>hdr-geometry</scheme>
     <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+      </depth>
+
       <blend><use>transparent</use></blend>
       <alpha-test><use>transparent</use></alpha-test>
       <shade-model>smooth</shade-model>

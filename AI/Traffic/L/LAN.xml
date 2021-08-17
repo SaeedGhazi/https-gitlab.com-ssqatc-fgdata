@@ -13,7 +13,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BCD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -27,7 +27,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BCE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -41,7 +41,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BCF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -55,7 +55,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-COU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -69,7 +69,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-COY</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -83,7 +83,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-COZ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -97,7 +97,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -111,7 +111,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -125,7 +125,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPI</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -139,7 +139,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -153,7 +153,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -167,7 +167,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -181,7 +181,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CPQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -195,7 +195,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CQK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -209,7 +209,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CQL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -223,7 +223,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CYI</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -237,7 +237,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CYJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -251,7 +251,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>HC-CPJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -265,7 +265,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>HC-CPR</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -279,7 +279,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>HC-CPY</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -293,7 +293,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>HC-CPZ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -307,7 +307,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -321,7 +321,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -335,7 +335,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBV</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -349,7 +349,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBW</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -363,7 +363,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -377,7 +377,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -391,7 +391,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -405,7 +405,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TMA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -419,7 +419,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TMB</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -433,7 +433,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TMC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -447,7 +447,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TMD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -461,7 +461,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TME</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -475,7 +475,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TMG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -489,7 +489,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TMI</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A319/A319-LATAM.xml</model>
@@ -503,7 +503,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-TML</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -517,7 +517,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -531,7 +531,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAB</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -545,7 +545,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -559,7 +559,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -573,7 +573,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -587,7 +587,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -601,7 +601,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -615,7 +615,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAH</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -629,7 +629,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -643,7 +643,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -657,7 +657,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -671,7 +671,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -685,7 +685,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -699,7 +699,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAR</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -713,7 +713,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAS</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -727,7 +727,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -741,7 +741,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAV</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -755,7 +755,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAX</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -769,7 +769,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAY</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -783,7 +783,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BAZ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -797,7 +797,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -811,7 +811,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -825,7 +825,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -839,7 +839,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -853,7 +853,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -867,7 +867,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFH</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -881,7 +881,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFI</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -895,7 +895,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -909,7 +909,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -923,7 +923,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -937,7 +937,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -951,7 +951,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -965,7 +965,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFP</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -979,7 +979,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -993,7 +993,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFR</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1007,7 +1007,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFS</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1021,7 +1021,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFT</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1035,7 +1035,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1049,7 +1049,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFV</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1063,7 +1063,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BFW</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1077,7 +1077,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BJD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1091,7 +1091,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BJE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1105,7 +1105,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BJF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1119,7 +1119,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BLE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1133,7 +1133,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-COK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1147,7 +1147,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-COO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1161,7 +1161,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-CQO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1175,7 +1175,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MAG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1189,7 +1189,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MAK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1203,7 +1203,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1217,7 +1217,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1231,7 +1231,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1245,7 +1245,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MBH</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1259,7 +1259,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1273,7 +1273,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1287,7 +1287,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1301,7 +1301,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1315,7 +1315,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1329,7 +1329,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1343,7 +1343,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1357,7 +1357,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHP</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1371,7 +1371,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1385,7 +1385,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHR</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1399,7 +1399,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1413,7 +1413,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHW</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1427,7 +1427,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHX</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1441,7 +1441,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MHZ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1455,7 +1455,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1469,7 +1469,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYH</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1483,7 +1483,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1497,7 +1497,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1511,7 +1511,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1525,7 +1525,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1539,7 +1539,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYP</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1553,7 +1553,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1567,7 +1567,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYR</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1581,7 +1581,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYT</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1595,7 +1595,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYV</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1609,7 +1609,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYW</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1623,7 +1623,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYX</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1637,7 +1637,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYY</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1651,7 +1651,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-MYZ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1665,7 +1665,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1679,7 +1679,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1693,7 +1693,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1707,7 +1707,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1721,7 +1721,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1735,7 +1735,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1749,7 +1749,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYP</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1763,7 +1763,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1777,7 +1777,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYR</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1791,7 +1791,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYT</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1805,7 +1805,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1819,7 +1819,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-TYV</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1833,7 +1833,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MZT</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1847,7 +1847,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MZU</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1861,7 +1861,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MZW</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1875,7 +1875,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MZY</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -1889,7 +1889,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MZZ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1903,7 +1903,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEB</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1917,7 +1917,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1931,7 +1931,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BED</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1945,7 +1945,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1959,7 +1959,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEK</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1973,7 +1973,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -1987,7 +1987,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2001,7 +2001,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2015,7 +2015,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEP</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2029,7 +2029,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BEQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2043,7 +2043,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BER</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2057,7 +2057,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2071,7 +2071,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXB</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2085,7 +2085,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2099,7 +2099,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2113,7 +2113,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2127,7 +2127,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2141,7 +2141,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2155,7 +2155,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXH</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2169,7 +2169,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXI</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2183,7 +2183,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXJ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2197,7 +2197,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXL</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2211,7 +2211,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2225,7 +2225,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2239,7 +2239,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2253,7 +2253,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXP</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2267,7 +2267,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-MXQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2281,7 +2281,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2295,7 +2295,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPB</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2309,7 +2309,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2323,7 +2323,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2337,7 +2337,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2351,7 +2351,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2365,7 +2365,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPH</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2379,7 +2379,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPI</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2393,7 +2393,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPM</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2407,7 +2407,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPN</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2421,7 +2421,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPO</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A321/A321-LATAM.xml</model>
@@ -2435,7 +2435,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PT-XPQ</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2449,7 +2449,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BDC</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2463,7 +2463,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CWF</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2477,7 +2477,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CWV</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2491,7 +2491,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CWY</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2505,7 +2505,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CXE</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2519,7 +2519,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CXF</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2533,7 +2533,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CXH</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2547,7 +2547,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CXI</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2561,7 +2561,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-CXK</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2575,7 +2575,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MOF</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2589,7 +2589,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MSS</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2603,7 +2603,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MSV</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2617,7 +2617,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MSW</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2631,7 +2631,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MSX</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/767/767-LATAM.xml</model>
@@ -2645,7 +2645,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MSZ</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2659,7 +2659,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBB</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2673,7 +2673,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBD</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2687,7 +2687,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBE</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2701,7 +2701,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBF</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2715,7 +2715,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBG</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2729,7 +2729,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBH</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2743,7 +2743,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBI</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/788-LATAM.xml</model>
@@ -2757,7 +2757,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BBJ</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2771,7 +2771,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGB</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2785,7 +2785,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGC</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2799,7 +2799,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGD</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2813,7 +2813,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGI</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2827,7 +2827,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGJ</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2841,7 +2841,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGK</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2855,7 +2855,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGL</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2869,7 +2869,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGM</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2883,7 +2883,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGN</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/787/789-LATAM.xml</model>
@@ -2897,7 +2897,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>CC-BGP</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2911,7 +2911,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BHA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2925,7 +2925,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BHB</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2939,7 +2939,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BHC</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2953,7 +2953,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>CC-BHG</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2967,7 +2967,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-XBA</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2981,7 +2981,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-XBD</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -2995,7 +2995,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-XBE</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/A320/A320-LATAM.xml</model>
@@ -3009,7 +3009,7 @@
 <flighttype>gate</flighttype>
 <performance-class>jet_transport</performance-class>
 <registration>PR-XBF</registration>
-<heavy></heavy>
+<heavy>false</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/777/77W-LATAM.xml</model>
@@ -3023,7 +3023,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MUA</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/777/77W-LATAM.xml</model>
@@ -3037,7 +3037,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MUD</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/777/77W-LATAM.xml</model>
@@ -3051,7 +3051,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MUH</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/777/77W-LATAM.xml</model>
@@ -3065,7 +3065,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MUI</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <aircraft>
 <model>Aircraft/777/77W-LATAM.xml</model>
@@ -3079,7 +3079,7 @@
 <flighttype>gate</flighttype>
 <performance-class>heavy_jet</performance-class>
 <registration>PT-MUJ</registration>
-<heavy></heavy>
+<heavy>true</heavy>
 </aircraft>
 <flight>
 <callsign>LATAM 3396</callsign>

@@ -13,10 +13,11 @@ const float DEFAULT_METALNESS = 0.0;
 const float DEFAULT_ROUGHNESS = 0.8;
 
 vec2 encodeNormal(vec3 n);
+vec3 decodeSRGB(vec3 screenRGB);
 
 void main()
 {
-    gbuffer0.rgb = pow(texture(color_tex, texCoord).rgb, vec3(2.2)); // Gamma correction
+    gbuffer0.rgb = decodeSRGB(texture(color_tex, texCoord).rgb);
     gbuffer0.a = 1.0;
     gbuffer1 = encodeNormal(normalVS);
     gbuffer2 = vec4(DEFAULT_METALNESS,

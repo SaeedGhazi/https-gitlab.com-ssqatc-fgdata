@@ -16,7 +16,12 @@ please see Docs/README.model-combined.eff for documentation
 		<normalmap-dds type="int">0</normalmap-dds>
 		<normalmap-tiling type="float">1.0</normalmap-tiling>
 		<texture n="2">
-		  <type>null-normalmap</type>
+			<image>Aircraft/Generic/Effects/null_bumpspec.png</image>
+			<type>2d</type>
+			<filter>linear-mipmap-linear</filter>
+			<wrap-s>clamp</wrap-s>
+			<wrap-t>clamp</wrap-t>
+			<internal-format>normalized</internal-format>
 		</texture>
 		<!-- Light Map -->
 		<lightmap-enabled type="int">0</lightmap-enabled>
@@ -1329,6 +1334,16 @@ please see Docs/README.model-combined.eff for documentation
               <name>normal_tex</name>
               <type>sampler-2d</type>
               <value type="int">1</value>
+            </uniform>
+            <uniform>
+              <name>normalmap_enabled</name>
+              <type>int</type>
+              <value><use>normalmap-enabled</use></value>
+            </uniform>
+            <uniform>
+              <name>normalmap_tiling</name>
+              <type>float</type>
+              <value><use>normalmap-tiling</use></value>
             </uniform>
           </pass>
         </technique>

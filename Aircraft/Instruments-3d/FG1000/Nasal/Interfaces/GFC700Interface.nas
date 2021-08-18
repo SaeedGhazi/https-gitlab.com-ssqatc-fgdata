@@ -84,7 +84,7 @@ handleNoseUpDown : func(value) {
 setAPNavSource : func(src) {
   setprop("/autopilot/settings/nav-mode-source", src);
   #  Also need to do something to trigger a NAV change if we're in NAV mode already.
-  return emesary.Transmitter.ReceiptStatus_Finished;
+  return emesary.Transmitter.ReceiptStatus_OK;
 },
 
 RegisterWithEmesary : func()

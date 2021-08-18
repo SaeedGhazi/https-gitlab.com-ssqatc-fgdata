@@ -95,6 +95,16 @@ var FD_STATUS_STYLE = {
   NORMAL_TEXT_COLOR : "#00ff00",
 };
 
+# Style element for use by the NAV and COM frequencies.  This is normally white text
+# on a black background, but when the COM is enabled by the GMA1347, or the NAV is being
+# used by the CDI, then it is green on a black background.
+var NAVCOM_FREQ_STYLE = {
+  CURSOR_BLINK_PERIOD : 0.5,
+  HIGHLIGHT_COLOR :  "#000000",
+  HIGHLIGHT_TEXT_COLOR : "#00ff00",
+  NORMAL_TEXT_COLOR : "#ffffff",
+};
+
 var Surround =
 {
   new : func (mfd, myCanvas, device, svg, pfd=0)
@@ -235,6 +245,11 @@ var Surround =
           me._comm1selected.setVisible(0);
           me._comm2selected.setVisible(1);
         }
+      }
+
+      if (name == "CommAudioSelected") {
+          me.getTextElement("Comm1SelectedFreq").setColor(val == 1 ? NAVCOM_FREQ_STYLE.HIGHLIGHT_TEXT_COLOR : NAVCOM_FREQ_STYLE.NORMAL_TEXT_COLOR);
+          me.getTextElement("Comm2SelectedFreq").setColor(val == 2 ? NAVCOM_FREQ_STYLE.HIGHLIGHT_TEXT_COLOR : NAVCOM_FREQ_STYLE.NORMAL_TEXT_COLOR);
       }
 
       if (name == "Nav1SelectedFreq") me.setTextElement("Nav1SelectedFreq", sprintf("%0.03f", val));
@@ -470,6 +485,13 @@ var Surround =
           me.setTextElement(header ~ "Value", value);
         }
       }
+    }
+    
+    if (data["AutopilotNAVSource"] != nil) {
+      # Set highlighting of the NAV radios based on the NAV Source.
+      var src = data["AutopilotNAVSource"];
+      me.getTextElement("Nav1SelectedFreq").setColor(src == "NAV1" ? NAVCOM_FREQ_STYLE.HIGHLIGHT_TEXT_COLOR : NAVCOM_FREQ_STYLE.NORMAL_TEXT_COLOR);
+      me.getTextElement("Nav2SelectedFreq").setColor(src == "NAV2" ? NAVCOM_FREQ_STYLE.HIGHLIGHT_TEXT_COLOR : NAVCOM_FREQ_STYLE.NORMAL_TEXT_COLOR);
     }
   },
 

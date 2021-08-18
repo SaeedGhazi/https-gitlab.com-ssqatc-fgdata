@@ -35,7 +35,9 @@ var GenericInterfaceController = {
     { id:"GenericFuelInterface", path: nasal_dir ~ 'Interfaces/GenericFuelInterface.nas' },
     { id:"GenericFuelPublisher", path: nasal_dir ~ 'Interfaces/GenericFuelPublisher.nas' },
     { id:"GFC700Interface", path: nasal_dir ~ 'Interfaces/GFC700Interface.nas' },
-    { id:"GFC700Publisher", path: nasal_dir ~ 'Interfaces/GFC700Publisher.nas' }
+    { id:"GFC700Publisher", path: nasal_dir ~ 'Interfaces/GFC700Publisher.nas' },
+    { id:"GMA1347Interface", path: nasal_dir ~ 'Interfaces/GMA1347Interface.nas' },
+
   ],
 
   # Factory method

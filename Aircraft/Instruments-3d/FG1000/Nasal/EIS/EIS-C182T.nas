@@ -50,9 +50,9 @@ var EIS =
     me.setTextElement("RPMDisplay", sprintf("%i", engineData.RPM));
     me.setTextElement("ManDisplay", sprintf("%.1f", engineData.Man));
     me.setTextElement("MBusVolts", sprintf("%.01f", engineData.MBusVolts));
-    me.setTextElement("EBusVolts", sprintf("%.01f", engineData.MBusVolts)); # TODO: Include Emergency Bus
+    me.setTextElement("EBusVolts", sprintf("%.01f", engineData.EBusVolts));
     me.setTextElement("MBattAmps", sprintf("%+.01f", engineData.MBattAmps));
-    me.setTextElement("SBattAmps", sprintf("%+.01f", engineData.MBattAmps)); # TODO: Include Emergency Bus
+    me.setTextElement("SBattAmps", sprintf("%+.01f", engineData.SBattAmps));
 
     me._fuelFlowPointer.setValue(engineData.FuelFlowGPH);
     me._oilPressurePointer.setValue(engineData.OilPressurePSI);

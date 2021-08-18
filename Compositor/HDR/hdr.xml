@@ -704,7 +704,7 @@
       <buffer>depth</buffer>
     </binding>
     <binding>
-      <unit>8</unit>
+      <unit>7</unit>
       <buffer>ao0</buffer>
     </binding>
     <binding>
@@ -730,7 +730,7 @@
   </pass>
 
   <!--
-      Forward pass
+      Main forward pass
       Render all objects that couldn't be rendered on the G-Buffer, mainly
       transparent objects. This is also done in HDR.
       We reuse the depth buffer from the G-Buffer stage so we can take advantage
@@ -740,17 +740,29 @@
     <name>forward</name>
     <type>scene</type>
     <effect-scheme>hdr-forward</effect-scheme>
+    <use-shadow-pass>csm0</use-shadow-pass>
+    <use-shadow-pass>csm1</use-shadow-pass>
+    <use-shadow-pass>csm2</use-shadow-pass>
+    <use-shadow-pass>csm3</use-shadow-pass>
     <binding>
       <unit>9</unit>
       <buffer>prefiltered-envmap</buffer>
     </binding>
     <binding>
+      <unit>10</unit>
+      <buffer>sun-shadowmap-atlas</buffer>
+    </binding>
+    <binding>
       <unit>11</unit>
-      <buffer>sky-view</buffer>
+      <buffer>aerial-perspective</buffer>
+    </binding>
+    <binding>
+      <unit>12</unit>
+      <buffer>transmittance</buffer>
     </binding>
     <binding>
       <unit>13</unit>
-      <buffer>transmittance</buffer>
+      <buffer>sky-view</buffer>
     </binding>
     <attachment>
       <component>color0</component>

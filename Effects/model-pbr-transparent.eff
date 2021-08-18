@@ -1,45 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PropertyList>
-  <name>Effects/model-pbr</name>
+  <name>Effects/model-pbr-transparent</name>
+  <inherits-from>Effects/model-pbr</inherits-from>
   <parameters>
-    <!-- Base Color -->
-    <texture n="0">
-      <type>white</type>
+    <texture n="8">
+      <image>Textures/PBR/dfg_lut.dds</image>
+	  <type>2d</type>
+      <filter>linear</filter>
+      <mag-filter>linear</mag-filter>
+      <wrap-s>clamp-to-edge</wrap-s>
+      <wrap-t>clamp-to-edge</wrap-t>
+      <internal-format>normalized</internal-format>
     </texture>
-    <base-color-factor type="vec4d">1.0 1.0 1.0 1.0</base-color-factor>
-    <!-- Normalmap -->
-    <texture n="1">
-      <type>null-normalmap</type>
-    </texture>
-    <!-- Metallic and Roughness -->
-    <texture n="2">
-      <type>white</type>
-    </texture>
-    <metallic-factor type="float">1.0</metallic-factor>
-    <roughness-factor type="float">1.0</roughness-factor>
-    <!-- Occlusion -->
-    <texture n="3">
-      <type>white</type>
-    </texture>
-    <!-- Emissive -->
-    <texture n="4">
-      <type>white</type>
-    </texture>
-    <emissive-factor type="vec3d">0.0 0.0 0.0</emissive-factor>
-    <!-- Double Sided -->
-    <cull-face>back</cull-face>
-    <!-- Whether to flip the texture vertically -->
-    <flip-vertically>false</flip-vertically>
+    <!-- Alpha Coverage -->
+    <blend>1</blend>
+    <alpha-cutoff>-1.0</alpha-cutoff>
   </parameters>
 
-  <generate>
-    <tangent type="int">6</tangent>
-    <binormal type="int">7</binormal>
-  </generate>
-
-  <technique n="20">
+  <technique n="19">
     <scheme>hdr-geometry</scheme>
+  </technique>
+
+  <technique n="40">
+    <scheme>hdr-forward</scheme>
     <pass>
       <!-- Reverse floating point depth buffer -->
       <depth>
@@ -88,17 +72,29 @@
         <type><use>texture[4]/type</use></type>
         <image><use>texture[4]/image</use></image>
         <filter><use>texture[4]/filter</use></filter>
-        <mag-filter><use>texture[0]/mag-filter</use></mag-filter>
+        <mag-filter><use>texture[4]/mag-filter</use></mag-filter>
         <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
       </texture-unit>
-      <blend>0</blend>
-      <rendering-hint>opaque</rendering-hint>
+      <texture-unit>
+        <unit>8</unit>
+        <image><use>texture[8]/image</use></image>
+		<type><use>texture[8]/type</use></type>
+        <filter><use>texture[8]/filter</use></filter>
+        <mag-filter><use>texture[8]/mag-filter</use></mag-filter>
+        <wrap-s><use>texture[8]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[8]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[8]/internal-format</use></internal-format>
+      </texture-unit>
+      <blend><use>blend</use></blend>
+      <rendering-hint>transparent</rendering-hint>
       <cull-face><use>cull-face</use></cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-pbr.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-pbr.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/geometry-pbr-transparent.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry-pbr-transparent.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/lighting-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial-perspective-include.frag</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>
@@ -157,6 +153,38 @@
         <name>flip_vertically</name>
         <type>bool</type>
         <value><use>flip-vertically</use></value>
+      </uniform>
+      <uniform>
+        <name>alpha_cutoff</name>
+        <type>float</type>
+        <value><use>alpha-cutoff</use></value>
+      </uniform>
+      <!-- Lighting include -->
+      <uniform>
+        <name>dfg_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">8</value>
+      </uniform>
+      <uniform>
+        <name>prefiltered_envmap</name>
+        <type>sampler-cube</type>
+        <value type="int">9</value>
+      </uniform>
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d-shadow</type>
+        <value type="int">10</value>
+      </uniform>
+      <!-- Aerial perspective include -->
+      <uniform>
+        <name>aerial_perspective_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
       </uniform>
     </pass>
   </technique>

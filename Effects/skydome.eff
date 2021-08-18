@@ -320,12 +320,12 @@
         <value type="bool">true</value>
       </uniform>
       <uniform>
-        <name>sky_view_lut</name>
+        <name>transmittance_lut</name>
         <type>sampler-2d</type>
-        <value type="int">11</value>
+        <value type="int">12</value>
       </uniform>
       <uniform>
-        <name>transmittance_lut</name>
+        <name>sky_view_lut</name>
         <type>sampler-2d</type>
         <value type="int">13</value>
       </uniform>
@@ -345,12 +345,12 @@
         <value type="bool">false</value>
       </uniform>
       <uniform>
-        <name>sky_view_lut</name>
+        <name>transmittance_lut</name>
         <type>sampler-2d</type>
-        <value type="int">11</value>
+        <value type="int">12</value>
       </uniform>
       <uniform>
-        <name>transmittance_lut</name>
+        <name>sky_view_lut</name>
         <type>sampler-2d</type>
         <value type="int">13</value>
       </uniform>

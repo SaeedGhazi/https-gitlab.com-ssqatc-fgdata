@@ -9,7 +9,7 @@
   <!-- TODO: Explicitly select the LOD level -->
   <cull-mask>0x800</cull-mask>
   <binding>
-    <unit>11</unit>
+    <unit>13</unit>
     <buffer>sky-view</buffer>
   </binding>
 </PropertyList>

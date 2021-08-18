@@ -16,7 +16,6 @@ uniform vec4 base_color_factor;
 uniform float metallic_factor;
 uniform float roughness_factor;
 uniform vec3 emissive_factor;
-uniform float alpha_cutoff;
 
 vec2 encodeNormal(vec3 n);
 vec3 decodeSRGB(vec3 screenRGB);
@@ -26,8 +25,6 @@ void main()
     vec4 baseColorTexel = texture(base_color_tex, texCoord);
     vec4 baseColor = vec4(decodeSRGB(baseColorTexel.rgb), baseColorTexel.a)
         * base_color_factor;
-    if (baseColor.a < alpha_cutoff)
-        discard;
     gbuffer0.rgb = baseColor.rgb;
 
     float occlusion = texture(occlusion_tex, texCoord).r;

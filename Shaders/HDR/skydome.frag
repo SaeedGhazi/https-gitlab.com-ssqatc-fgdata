@@ -39,7 +39,7 @@ void main()
             float altitude = length(groundPoint);
             float scaledAltitude = altitude / 100000.0;
 
-            vec3 up = normalize(vec4(0.0, 0.0, 0.0, 1.0) - groundPoint).xyz;
+            vec3 up = normalize(vec3(0.0, 0.0, 0.0) - groundPoint.xyz);
             float sunZenithCosTheta = dot(rayDirView, up);
 
             vec2 coords = vec2(sunZenithCosTheta * 0.5 + 0.5,

@@ -656,8 +656,8 @@ var replaySkip = func(skip_time)
         t+=skip_time;
         if (t>getprop("/sim/replay/end-time"))
             t = getprop("/sim/replay/end-time");
-        if (t<0)
-            t=0;
+        if (t<getprop("/sim/replay/start-time"))
+            t = getprop("/sim/replay/start-time");
         setprop("/sim/replay/time", t);
     }
 }

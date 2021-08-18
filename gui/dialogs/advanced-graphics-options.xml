@@ -1098,7 +1098,12 @@
 
       <checkbox>
         <halign>left</halign>
-        <label>3D clouds</label>
+        <enable>
+          <not>
+            <property>/nasal/local_weather/enabled</property>
+          </not>
+        </enable>
+        <label>3D clouds (required by Detailed Weather)</label>
         <name>3d-clouds</name>
         <property>/sim/rendering/clouds3d-enable</property>
         <binding>

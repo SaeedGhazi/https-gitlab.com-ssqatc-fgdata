@@ -8,12 +8,15 @@ in vec3 vRayDirView;
 uniform bool sun_disk;
 uniform sampler2D sky_view_lut;
 uniform sampler2D transmittance_lut;
-uniform vec3 fg_SunDirection;
 
-uniform mat4 osg_ModelViewMatrix;
+uniform vec3 fg_SunDirection;
+uniform float fg_CameraDistanceToEarthCenter;
+uniform float fg_EarthRadius;
+uniform vec3 fg_CameraViewUp;
 
 const float PI = 3.141592653;
 const vec3 EXTRATERRESTRIAL_SOLAR_ILLUMINANCE = vec3(128.0);
+const float ATMOSPHERE_RADIUS = 6471e3;
 
 const float sun_solid_angle = 0.545*PI/180.0; // ~half a degree
 const float sun_cos_solid_angle = cos(sun_solid_angle);
@@ -35,15 +38,13 @@ void main()
         float cosTheta = dot(rayDirView, fg_SunDirection);
 
         if (cosTheta >= sun_cos_solid_angle) {
-            vec4 groundPoint = osg_ModelViewMatrix * vec4(0.0, 0.0, 0.0, 1.0);
-            float altitude = length(groundPoint);
-            float scaledAltitude = altitude / 100000.0;
+            float normalizedHeight = (fg_CameraDistanceToEarthCenter - fg_EarthRadius)
+                / (ATMOSPHERE_RADIUS - fg_EarthRadius);
 
-            vec3 up = normalize(vec3(0.0, 0.0, 0.0) - groundPoint.xyz);
-            float sunZenithCosTheta = dot(rayDirView, up);
+            float sunZenithCosTheta = dot(-rayDirView, fg_CameraViewUp);
 
             vec2 coords = vec2(sunZenithCosTheta * 0.5 + 0.5,
-                               clamp(scaledAltitude, 0.0, 1.0));
+                               clamp(normalizedHeight, 0.0, 1.0));
             vec3 transmittance = texture(transmittance_lut, coords).rgb;
 
             // Limb darkening

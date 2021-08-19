@@ -60,6 +60,7 @@ var TextElement =
     me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
     PFD.HighlightTimer.stopHighlight(me);
   },
+  setColor : func(color) { me._symbol.setColor(color); },
   isEditable : func () { return 0; },
   isInEdit : func() { return 0; },
   isHighlighted : func() { return me._highlighted; },

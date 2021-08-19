@@ -167,7 +167,7 @@
           }
 
           # Clear any local weather that might be running
-          if (getprop("/nasal/local_weather/loaded")) local_weather.clear_all();
+          if (getprop("/nasal/local_weather/enabled")) local_weather.clear_all();
           setprop("/nasal/local_weather/enabled", "false");
 
           if (local_weather_enabled) {

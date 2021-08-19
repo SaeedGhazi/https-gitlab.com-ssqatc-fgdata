@@ -11,8 +11,7 @@ out vec3 fragColor;
 
 in vec2 texCoord;
 
-uniform vec3 fg_CameraPositionCart;
-uniform vec3 fg_CameraPositionGeod;
+uniform float fg_EarthRadius;
 
 const float ATMOSPHERE_RADIUS = 6471e3;
 const int TRANSMITTANCE_STEPS = 40;
@@ -27,8 +26,7 @@ void main()
     float sunCosTheta = texCoord.x * 2.0 - 1.0;
     vec3 sunDir = vec3(-sqrt(1.0 - sunCosTheta*sunCosTheta), 0.0, sunCosTheta);
 
-    float earthRadius = length(fg_CameraPositionCart) - fg_CameraPositionGeod.z;
-    float altitude = mix(earthRadius, ATMOSPHERE_RADIUS, texCoord.y);
+    float altitude = mix(fg_EarthRadius, ATMOSPHERE_RADIUS, texCoord.y);
     vec3 rayOrigin = vec3(0.0, 0.0, altitude);
 
     float dist = raySphereIntersection(rayOrigin, sunDir, ATMOSPHERE_RADIUS);
@@ -41,7 +39,7 @@ void main()
         t = newT;
 
         vec3 samplePos = rayOrigin + sunDir * t;
-        float height = length(samplePos) - earthRadius;
+        float height = length(samplePos) - fg_EarthRadius;
 
         float mieScattering, mieAbsorption;
         vec3 rayleighScattering, ozoneAbsorption;

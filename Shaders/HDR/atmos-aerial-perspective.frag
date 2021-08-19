@@ -16,13 +16,15 @@ out vec4 fragColor;
 
 in vec2 texCoord;
 
-uniform mat4 fg_ViewMatrixInverse;
-uniform vec3 fg_CameraPositionCart;
-uniform vec3 fg_CameraPositionGeod;
-uniform vec3 fg_SunDirectionWorld;
-
 uniform sampler2D transmittance_lut;
 uniform sampler2D multiscattering_lut;
+
+uniform mat4 fg_ViewMatrixInverse;
+uniform vec3 fg_CameraPositionCart;
+uniform vec3 fg_SunDirectionWorld;
+uniform float fg_SunZenithCosTheta;
+uniform float fg_CameraDistanceToEarthCenter;
+uniform float fg_EarthRadius;
 
 const float PI = 3.141592653;
 const float ATMOSPHERE_RADIUS = 6471e3;
@@ -43,11 +45,7 @@ vec3 getValueFromLUT(sampler2D lut, float sunCosTheta, float normalizedHeight);
 
 void main()
 {
-    vec3 up = normalize(fg_CameraPositionCart);
-    float sunCosTheta = dot(fg_SunDirectionWorld, up);
-
     // Account for the depth layer we are currently in
-    // FIXME: We should probably be writing the pixel center
     float x = texCoord.x * TOTAL_SLICES;
     vec2 coord = vec2(fract(x), texCoord.y);
     // Depth goes from the 0 to DEPTH_RANGE in a squared distribution.
@@ -59,16 +57,16 @@ void main()
     vec3 fragPos = positionFromDepth(coord, 1.0);
     vec3 rayDir = vec4(fg_ViewMatrixInverse * vec4(normalize(fragPos), 0.0)).xyz;
 
-    float cameraHeight = length(fg_CameraPositionCart);
-    float earthRadius = cameraHeight - max(fg_CameraPositionGeod.z, 0.0);
-
     vec3 rayOrigin = fg_CameraPositionCart;
+
+    // Handle the camera being underground
+    float earthRadius = min(fg_EarthRadius, fg_CameraDistanceToEarthCenter);
 
     float atmosDist = raySphereIntersection(rayOrigin, rayDir, ATMOSPHERE_RADIUS);
     float groundDist = raySphereIntersection(rayOrigin, rayDir, earthRadius);
 
     float tmax;
-    if (cameraHeight < ATMOSPHERE_RADIUS) {
+    if (fg_CameraDistanceToEarthCenter < ATMOSPHERE_RADIUS) {
         // We are inside the atmosphere
         if (groundDist < 0.0) {
             // No ground collision, use the distance to the outer atmosphere
@@ -99,8 +97,8 @@ void main()
         t = newT;
 
         vec3 samplePos = rayOrigin + rayDir * t;
-        float height = length(samplePos) - earthRadius;
-        float normalizedHeight = height / (ATMOSPHERE_RADIUS - earthRadius);
+        float height = length(samplePos) - fg_EarthRadius;
+        float normalizedHeight = height / (ATMOSPHERE_RADIUS - fg_EarthRadius);
 
         float mieScattering, mieAbsorption;
         vec3 rayleighScattering, ozoneAbsorption;
@@ -110,9 +108,9 @@ void main()
         vec3 sampleTransmittance = exp(-dt*extinction);
 
         vec3 sunTransmittance = getValueFromLUT(
-            transmittance_lut, sunCosTheta, normalizedHeight);
+            transmittance_lut, fg_SunZenithCosTheta, normalizedHeight);
         vec3 multiscattering = getValueFromLUT(
-            multiscattering_lut, sunCosTheta, normalizedHeight);
+            multiscattering_lut, fg_SunZenithCosTheta, normalizedHeight);
 
         vec3 S =
             rayleighScattering * (rayleighPhase * sunTransmittance + multiscattering) +

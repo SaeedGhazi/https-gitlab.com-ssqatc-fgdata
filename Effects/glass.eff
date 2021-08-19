@@ -582,11 +582,6 @@
           <type>float-vec4</type>
           <value><use>material/diffuse</use></value>
         </uniform>
-        <uniform>
-          <name>minimum_alpha</name>
-          <type>float</type>
-          <value>0.1</value>
-        </uniform>
         <!-- Lighting include -->
         <uniform>
           <name>dfg_lut</name>

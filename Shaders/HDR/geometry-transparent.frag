@@ -8,7 +8,6 @@ in vec4 materialColor;
 in vec3 ecPos;
 
 uniform sampler2D color_tex;
-uniform float minimum_alpha = 0.0;
 
 uniform mat4 osg_ViewMatrixInverse;
 uniform vec4 fg_Viewport;
@@ -49,8 +48,7 @@ void main()
 {
     vec4 baseColorTexel = texture(color_tex, texCoord);
     vec3 baseColor = decodeSRGB(baseColorTexel.rgb) * materialColor.rgb;
-    // HACK: Force a minimum value to stay compatible with glass.eff
-    float alpha = max(materialColor.a * baseColorTexel.a, minimum_alpha);
+    float alpha = materialColor.a * baseColorTexel.a;
 
     vec3 n = normalize(normalVS);
     vec3 v = normalize(-ecPos);

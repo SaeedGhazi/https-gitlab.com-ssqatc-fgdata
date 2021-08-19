@@ -6,6 +6,7 @@ layout(location = 2) out vec4 gbuffer2;
 
 in vec3 normalVS;
 in vec2 texCoord;
+in vec4 materialColor;
 
 uniform sampler2D color_tex;
 
@@ -17,7 +18,9 @@ vec3 decodeSRGB(vec3 screenRGB);
 
 void main()
 {
-    gbuffer0.rgb = decodeSRGB(texture(color_tex, texCoord).rgb);
+    vec3 texel = texture(color_tex, texCoord).rgb;
+    vec3 color = decodeSRGB(texel) * materialColor.rgb; // Ignore transparency
+    gbuffer0.rgb = color;
     gbuffer0.a = 1.0;
     gbuffer1 = encodeNormal(normalVS);
     gbuffer2 = vec4(DEFAULT_METALNESS,

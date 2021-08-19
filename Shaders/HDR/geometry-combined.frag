@@ -10,6 +10,7 @@ in mat3 TBN;
 uniform sampler2D color_tex;
 uniform sampler2D normal_tex;
 uniform int normalmap_enabled;
+uniform int normalmap_dds;
 uniform float normalmap_tiling;
 
 const float DEFAULT_COMBINED_METALNESS = 0.0;
@@ -26,6 +27,9 @@ void main()
     vec3 normal = vec3(0.5, 0.5, 1.0);
     if (normalmap_enabled > 0) {
         normal = texture(normal_tex, texCoord * normalmap_tiling).rgb * 2.0 - 1.0;
+        // DDS has flipped normals
+        if (normalmap_dds > 0)
+            normal = -normal;
     }
     normal = normalize(TBN * normal);
     gbuffer1 = encodeNormal(normal);

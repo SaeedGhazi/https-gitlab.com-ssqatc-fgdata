@@ -1341,13 +1341,18 @@ please see Docs/README.model-combined.eff for documentation
               <value><use>normalmap-enabled</use></value>
             </uniform>
             <uniform>
+              <name>normalmap_dds</name>
+              <type>int</type>
+              <value><use>normalmap-dds</use></value>
+            </uniform>
+            <uniform>
               <name>normalmap_tiling</name>
               <type>float</type>
               <value><use>normalmap-tiling</use></value>
             </uniform>
           </pass>
         </technique>
-        
+
         <technique n="9">
           <predicate><value type="bool">false</value></predicate>
         </technique>

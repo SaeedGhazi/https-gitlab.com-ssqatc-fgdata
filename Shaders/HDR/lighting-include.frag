@@ -149,9 +149,9 @@ float getShadowing(vec3 p, vec3 n, float NdotL)
 
     vec4 lightSpacePos[4];
     lightSpacePos[0] = getLightSpacePosition(p, n, NdotL, 0.05, fg_LightMatrix_csm0);
-    lightSpacePos[1] = getLightSpacePosition(p, n, NdotL, 0.2, fg_LightMatrix_csm1);
-    lightSpacePos[2] = getLightSpacePosition(p, n, NdotL, 1.0, fg_LightMatrix_csm2);
-    lightSpacePos[3] = getLightSpacePosition(p, n, NdotL, 5.0, fg_LightMatrix_csm3);
+    lightSpacePos[1] = getLightSpacePosition(p, n, NdotL, 0.1, fg_LightMatrix_csm1);
+    lightSpacePos[2] = getLightSpacePosition(p, n, NdotL, 0.5, fg_LightMatrix_csm2);
+    lightSpacePos[3] = getLightSpacePosition(p, n, NdotL, 1.0, fg_LightMatrix_csm3);
 
     for (int i = 0; i < 4; ++i) {
         // Map-based cascade selection

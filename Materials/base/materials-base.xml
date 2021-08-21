@@ -538,6 +538,17 @@
   <rolling-friction>0.02</rolling-friction>
   <bumpiness>0.01</bumpiness>
   <load-resistance>1e10</load-resistance>
+  <light-edge-spacing-m>20</light-edge-spacing-m>
+  <light-edge-height-m>5.0</light-edge-height-m>
+  <light-edge-intensity-cd>50</light-edge-intensity-cd>
+  <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
+  <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
+  <light-edge-color>
+    <r>1.0</r>
+    <g>0.82</g>
+    <b>0.7</b>
+    <a>1.0</a>
+  </light-edge-color>
 </material>
 
 <material n="2010">

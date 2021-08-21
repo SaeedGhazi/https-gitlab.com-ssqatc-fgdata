@@ -380,11 +380,11 @@ defines building meshes, typically based on OSM data.
 
 Example:
 
-  BUILDING_ROUGH buildings.ac -122.501090 37.514830 15.5 0.00 0.00 0.00
+  BUILDING_ROUGH buildings.ac -122.501090 37.514830 15.5 0.00 0.00 0.00 4000.0
 
 Syntax:
 
-  BUILDING_ROUGH <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg>
+  BUILDING_ROUGH <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg> <radius-m>
 
 Note that only bare .ac files should be referenced. The material definition for
 "OSM_Building" will be used to determine the texture and Effects.
@@ -526,7 +526,7 @@ W ATTR A B C D lon0 lat0 lon1 lat1 lon2 lat2 lon3 lat4
 Where:
 
 - W is the feature width in meters.
-- ATTR is an integer value used to store packed attributes (e.g. lighting, currenty unused)
+- ATTR is an integer value used to store packed attributes (e.g. bitwise.  Bit 1 is for lit)
 - A,B,C,D are float values used to store attributes (currently unused)
 - lonN, latN are lon/lat pairs on the center of the line feature.  There must be at least two pairs
 

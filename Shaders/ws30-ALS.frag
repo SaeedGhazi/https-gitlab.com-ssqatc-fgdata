@@ -19,7 +19,7 @@ uniform sampler2D perlin;
 
 varying float yprime_alt;
 varying float mie_angle;
-
+varying vec4 ecPosition;
 
 uniform float visibility;
 uniform float avisibility;
@@ -47,6 +47,7 @@ vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 float luminance(vec3 color)
 {
@@ -74,7 +75,7 @@ void main()
 	vec4 mat_diffuse = texture(diffuseArray, mat_index);
 	vec4 mat_specular = texture(specularArray, mat_index);
 
-    vec4 color = mat_diffuse;
+    vec4 color = mat_diffuse * NdotL *  gl_LightSource[0].diffuse;
 
     float effective_scattering = min(scattering, cloud_self_shading);
 
@@ -126,6 +127,7 @@ void main()
 	texel = texture(atlas, vec3(st, lc));
 
     fragColor = color * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
 	// here comes the terrain haze model
 	float delta_z = hazeLayerAltitude - eye_alt;

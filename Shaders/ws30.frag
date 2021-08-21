@@ -40,14 +40,14 @@ void main()
 
 	// Different textures have different have different dimensions.
 	// Dimensions array is scaled to fit in [0...1.0] in the texture1D, so has to be scaled back up here.
-	vec4 color = texture(diffuseArray, float(lc)/512.0) * NdotL;	
+	vec4 color = texture(diffuseArray, float(lc)/512.0) * NdotL * gl_LightSource[0].diffuse;	
 	vec4 specular = texture(specularArray, float(lc)/512.0);
 	vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
 	vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
 
 	texel = texture(atlas, vec3(atlas_scale * gl_TexCoord[0].st, lc));
 
-    fragColor = texel + pow(NdotHV, gl_FrontMaterial.shininess) * gl_LightSource[0].specular * specular;
+    fragColor = color * texel + pow(NdotHV, gl_FrontMaterial.shininess) * gl_LightSource[0].specular * specular;
 
 	fragColor.rgb = fog_Func(fragColor.rgb, fogType);
 	gl_FragColor = fragColor;

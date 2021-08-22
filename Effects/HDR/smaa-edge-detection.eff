@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/display</name>
+  <name>Effects/HDR/smaa-edge-detection</name>
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/display.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/display.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/smaa-edge-detection.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/smaa-edge-detection.frag</fragment-shader>
       </program>
       <uniform>
-        <name>tex</name>
+        <name>color_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>

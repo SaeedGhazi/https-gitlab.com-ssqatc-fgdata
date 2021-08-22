@@ -234,6 +234,30 @@
     <screen-height-scale>0.0625</screen-height-scale>
   </buffer>
 
+  <!-- SMAA buffers -->
+  <buffer>
+    <name>smaa-edges</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgba8</format>
+    <wrap-s>clamp</wrap-s>
+    <wrap-t>clamp</wrap-t>
+    <min-filter>linear-mipmap-linear</min-filter>
+    <mag-filter>linear</mag-filter>
+  </buffer>
+  <buffer>
+    <name>smaa-blend</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>rgba8</format>
+    <wrap-s>clamp</wrap-s>
+    <wrap-t>clamp</wrap-t>
+    <min-filter>linear-mipmap-linear</min-filter>
+    <mag-filter>linear</mag-filter>
+  </buffer>
+
   <!--=======================================================================-->
 
   <!--
@@ -1022,16 +1046,85 @@
   </pass>
 
   <!--
-      Final display pass
-      Perform any post-processing that has to be done in LDR space.
+      Final LDR post-processing passes that render to the screen
+      For now they just do antialiasing.
   -->
+  <!-- No AA -->
   <pass>
-    <name>display</name>
+    <name>no-aa-display</name>
     <type>quad</type>
-    <effect>Effects/HDR/display</effect>
+    <effect>Effects/HDR/trivial</effect>
+    <condition>
+      <equals>
+        <property>/sim/rendering/hdr/antialiasing-technique</property>
+        <value type="int">0</value>
+      </equals>
+    </condition>
     <binding>
       <unit>0</unit>
       <buffer>final</buffer>
+    </binding>
+  </pass>
+
+  <!-- FXAA -->
+  <pass>
+    <name>fxaa</name>
+    <type>quad</type>
+    <effect>Effects/HDR/fxaa</effect>
+    <condition>
+      <equals>
+        <property>/sim/rendering/hdr/antialiasing-technique</property>
+        <value type="int">1</value>
+      </equals>
+    </condition>
+    <binding>
+      <unit>0</unit>
+      <buffer>final</buffer>
+    </binding>
+  </pass>
+
+  <!--
+      SMAA (Enhanced Subpixel Morphological Antialiasing)
+      http://www.iryoku.com/smaa/
+  -->
+  <pass include="smaa-pass.xml">
+    <name>smaa-edge-detection</name>
+    <effect>Effects/HDR/smaa-edge-detection</effect>
+    <clear-mask>color</clear-mask>
+    <clear-color type="vec4d">0.0 0.0 0.0 0.0</clear-color>
+    <binding>
+      <unit>0</unit>
+      <buffer>final</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>smaa-edges</buffer>
+    </attachment>
+  </pass>
+  <pass include="smaa-pass.xml">
+    <name>smaa-blending-weight-calculation</name>
+    <effect>Effects/HDR/smaa-blending-weight-calculation</effect>
+    <clear-mask>color</clear-mask>
+    <clear-color type="vec4d">0.0 0.0 0.0 0.0</clear-color>
+    <binding>
+      <unit>0</unit>
+      <buffer>smaa-edges</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>smaa-blend</buffer>
+    </attachment>
+  </pass>
+  <pass include="smaa-pass.xml">
+    <name>smaa-neighborhood-blending</name>
+    <effect>Effects/HDR/smaa-neighborhood-blending</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>final</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>smaa-blend</buffer>
     </binding>
   </pass>
 

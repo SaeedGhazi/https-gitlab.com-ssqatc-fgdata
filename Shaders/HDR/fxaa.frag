@@ -5,23 +5,21 @@ out vec4 fragColor;
 in vec2 texCoord;
 in vec4 posPos;
 
-uniform vec2 fg_BufferSize;
-
-uniform sampler2D tex;
+uniform sampler2D color_tex;
 
 const float FXAA_SPAN_MAX = 8.0;
 const float FXAA_REDUCE_MUL = 1.0/8.0;
 const float FXAA_REDUCE_MIN = 1.0/128.0;
 
-vec3 fxaa()
+void main()
 {
-    vec2 rcpFrame = 1.0 / textureSize(tex, 0);
+    vec2 rcpFrame = 1.0 / textureSize(color_tex, 0);
 
-    vec3 rgbNW = textureLod(tex, posPos.zw, 0.0).xyz;
-    vec3 rgbNE = textureLodOffset(tex, posPos.zw, 0.0, ivec2(1,0)).xyz;
-    vec3 rgbSW = textureLodOffset(tex, posPos.zw, 0.0, ivec2(0,1)).xyz;
-    vec3 rgbSE = textureLodOffset(tex, posPos.zw, 0.0, ivec2(1,1)).xyz;
-    vec3 rgbM  = textureLod(tex, posPos.xy, 0.0).xyz;
+    vec3 rgbNW = textureLod(color_tex, posPos.zw, 0.0).xyz;
+    vec3 rgbNE = textureLodOffset(color_tex, posPos.zw, 0.0, ivec2(1,0)).xyz;
+    vec3 rgbSW = textureLodOffset(color_tex, posPos.zw, 0.0, ivec2(0,1)).xyz;
+    vec3 rgbSE = textureLodOffset(color_tex, posPos.zw, 0.0, ivec2(1,1)).xyz;
+    vec3 rgbM  = textureLod(color_tex, posPos.xy, 0.0).xyz;
 
     const vec3 luma = vec3(0.299, 0.587, 0.114);
     float lumaNW = dot(rgbNW, luma);
@@ -45,19 +43,15 @@ vec3 fxaa()
                   dir * rcpDirMin)) * rcpFrame.xy;
 
     vec3 rgbA = 0.5 * (
-        textureLod(tex, posPos.xy + dir * (1.0/3.0 - 0.5), 0.0).xyz +
-        textureLod(tex, posPos.xy + dir * (2.0/3.0 - 0.5), 0.0).xyz);
+        textureLod(color_tex, posPos.xy + dir * (1.0/3.0 - 0.5), 0.0).xyz +
+        textureLod(color_tex, posPos.xy + dir * (2.0/3.0 - 0.5), 0.0).xyz);
     vec3 rgbB = rgbA * 0.5 + 0.25 * (
-        textureLod(tex, posPos.xy + dir * (0.0/3.0 - 0.5), 0.0).xyz +
-        textureLod(tex, posPos.xy + dir * (3.0/3.0 - 0.5), 0.0).xyz);
+        textureLod(color_tex, posPos.xy + dir * (0.0/3.0 - 0.5), 0.0).xyz +
+        textureLod(color_tex, posPos.xy + dir * (3.0/3.0 - 0.5), 0.0).xyz);
 
     float lumaB = dot(rgbB, luma);
     if((lumaB < lumaMin) || (lumaB > lumaMax))
-        return rgbA;
-    return rgbB;
-}
-
-void main()
-{
-    fragColor = vec4(fxaa(), 1.0);
+        fragColor = vec4(rgbA, 1.0);
+    else
+        fragColor = vec4(rgbB, 1.0);
 }

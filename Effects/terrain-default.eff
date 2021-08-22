@@ -1680,10 +1680,16 @@
     </pass>
   </technique>
 
-  <technique n="139">
-    <scheme>hdr-envmap</scheme>
+  <!-- Just for ocean tiles. For actual terrain we use ws30.eff. -->
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
     <pass>
-      <cull-face>back</cull-face>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+      </depth>
       <texture-unit>
         <unit>0</unit>
         <type><use>texture[0]/type</use></type>
@@ -1691,16 +1697,30 @@
         <filter><use>texture[0]/filter</use></filter>
         <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        <internal-format><use>texture[0]/internal-format</use></internal-format>
       </texture-unit>
+      <blend>0</blend>
+      <rendering-hint>opaque</rendering-hint>
+      <cull-face>back</cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/forward.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/forward.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/geometry.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>color_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>color_mode</name>
+        <type>int</type>
+        <value>2</value>
+        <!-- AMBIENT_AND_DIFFUSE -->
+      </uniform>
+      <uniform>
+        <name>material_diffuse</name>
+        <type>float-vec4</type>
+        <value><use>material/diffuse</use></value>
       </uniform>
     </pass>
   </technique>

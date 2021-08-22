@@ -333,7 +333,8 @@ vec3 evaluateLight(
 
     vec3 c_diff = mix(baseColor * (1.0 - DIELECTRIC_SPECULAR), vec3(0.0), metallic);
 
-    float a = roughness * roughness;
+    // Avoid blown out lighting by capping the roughness to a non-zero value
+    float a = max(roughness * roughness, 0.001);
     float a2 = a * a;
 
     vec3 F = F_Schlick(VdotH, f0);
@@ -345,7 +346,7 @@ vec3 evaluateLight(
     vec3 diffuse = (vec3(1.0) - F) * Fd_Lambert(c_diff);
     // Specular term
     // Cook-Torrance specular microfacet model
-    vec3 specular = (F * D * G) / (4.0 * NdotV * NdotL);
+    vec3 specular = ((D * G) * F) / (4.0 * NdotV * NdotL);
 
     vec3 material = diffuse + specular;
 

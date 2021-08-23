@@ -81,6 +81,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <water type="float" userarchive="y">1.0</water>
         <wind-effects type="float" userarchive="y">0.0</wind-effects>
         <vegetation-effects type="float" userarchive="y">0.0</vegetation-effects>
+        <use-shaders type="bool" userarchive="y">false</use-shaders>
         <!-- Legacy property. Kept for backwards compatibility with aircraft
              with custom shaders -->
         <quality-level type="float" userarchive="y">5.0</quality-level>

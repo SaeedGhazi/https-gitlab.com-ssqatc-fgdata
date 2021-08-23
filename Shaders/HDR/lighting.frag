@@ -46,9 +46,6 @@ vec3 getSunIntensity();
 void main()
 {
     float depth = texture(depth_tex, texCoord).r;
-    if (depth == 0.0) {
-        discard;
-    }
     vec4 gbuffer0 = texture(gbuffer0_tex, texCoord);
     vec2 gbuffer1 = texture(gbuffer1_tex, texCoord).rg;
     vec4 gbuffer2 = texture(gbuffer2_tex, texCoord);

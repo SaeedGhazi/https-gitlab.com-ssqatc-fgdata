@@ -1690,6 +1690,11 @@
         <near>1.0</near>
         <far>0.0</far>
       </depth>
+      <stencil>
+        <function>always</function>
+        <value>9</value>
+        <pass>replace</pass>
+      </stencil>
       <texture-unit>
         <unit>0</unit>
         <type><use>texture[0]/type</use></type>

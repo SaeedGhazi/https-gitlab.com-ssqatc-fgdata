@@ -3,6 +3,11 @@
   <name>Effects/HDR/smaa-edge-detection</name>
   <technique n="1">
     <pass>
+      <stencil>
+        <function>always</function>
+        <value>1</value>
+        <pass>replace</pass>
+      </stencil>
       <program>
         <vertex-shader>Shaders/HDR/smaa-edge-detection.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/smaa-edge-detection.frag</fragment-shader>

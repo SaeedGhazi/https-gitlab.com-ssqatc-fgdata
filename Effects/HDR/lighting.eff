@@ -14,6 +14,10 @@
   </parameters>
   <technique n="1">
     <pass>
+      <stencil>
+        <function>less-or-equal</function>
+        <value>8</value>
+      </stencil>
       <texture-unit>
         <unit>8</unit>
         <image><use>texture[8]/image</use></image>

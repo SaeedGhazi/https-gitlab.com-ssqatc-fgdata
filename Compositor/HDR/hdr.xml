@@ -39,11 +39,11 @@
     <format>rgba8</format>
   </buffer>
   <buffer>
-    <name>depth</name>
+    <name>depth-stencil</name>
     <type>2d</type>
     <width>screen</width>
     <height>screen</height>
-    <format>depth32f</format>
+    <format>depth32f-stencil</format>
   </buffer>
 
   <!-- HDR lighting result -->
@@ -612,7 +612,7 @@
     <name>geometry</name>
     <type>scene</type>
     <effect-scheme>hdr-geometry</effect-scheme>
-    <clear-mask>depth</clear-mask>
+    <clear-mask>depth stencil</clear-mask>
     <clear-depth>0.0</clear-depth>
     <cull-mask>0xfffff7ff</cull-mask>
     <attachment>
@@ -629,7 +629,11 @@
     </attachment>
     <attachment>
       <component>depth</component>
-      <buffer>depth</buffer>
+      <buffer>depth-stencil</buffer>
+    </attachment>
+    <attachment>
+      <component>stencil</component>
+      <buffer>depth-stencil</buffer>
     </attachment>
   </pass>
 
@@ -686,7 +690,7 @@
     <effect>Effects/HDR/ao</effect>
     <binding>
       <unit>0</unit>
-      <buffer>depth</buffer>
+      <buffer>depth-stencil</buffer>
     </binding>
     <binding>
       <unit>1</unit>
@@ -725,7 +729,7 @@
     </binding>
     <binding>
       <unit>3</unit>
-      <buffer>depth</buffer>
+      <buffer>depth-stencil</buffer>
     </binding>
     <binding>
       <unit>7</unit>
@@ -750,6 +754,10 @@
     <attachment>
       <component>color0</component>
       <buffer>hdr-result</buffer>
+    </attachment>
+    <attachment>
+      <component>stencil</component>
+      <buffer>depth-stencil</buffer>
     </attachment>
   </pass>
 
@@ -794,7 +802,11 @@
     </attachment>
     <attachment>
       <component>depth</component>
-      <buffer>depth</buffer>
+      <buffer>depth-stencil</buffer>
+    </attachment>
+    <attachment>
+      <component>stencil</component>
+      <buffer>depth-stencil</buffer>
     </attachment>
   </pass>
 
@@ -1090,7 +1102,7 @@
   <pass include="smaa-pass.xml">
     <name>smaa-edge-detection</name>
     <effect>Effects/HDR/smaa-edge-detection</effect>
-    <clear-mask>color</clear-mask>
+    <clear-mask>color stencil</clear-mask>
     <clear-color type="vec4d">0.0 0.0 0.0 0.0</clear-color>
     <binding>
       <unit>0</unit>
@@ -1099,6 +1111,10 @@
     <attachment>
       <component>color0</component>
       <buffer>smaa-edges</buffer>
+    </attachment>
+    <attachment>
+      <component>stencil</component>
+      <buffer>depth-stencil</buffer>
     </attachment>
   </pass>
   <pass include="smaa-pass.xml">
@@ -1113,6 +1129,10 @@
     <attachment>
       <component>color0</component>
       <buffer>smaa-blend</buffer>
+    </attachment>
+    <attachment>
+      <component>stencil</component>
+      <buffer>depth-stencil</buffer>
     </attachment>
   </pass>
   <pass include="smaa-pass.xml">
@@ -1182,7 +1202,7 @@
     </geometry>
     <binding>
       <unit>0</unit>
-      <buffer>depth</buffer>
+      <buffer>depth-stencil</buffer>
     </binding>
   </pass>
 </PropertyList>

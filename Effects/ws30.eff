@@ -681,6 +681,11 @@
         <near>1.0</near>
         <far>0.0</far>
       </depth>
+      <stencil>
+        <function>always</function>
+        <value>9</value>
+        <pass>replace</pass>
+      </stencil>
 
       <blend><use>transparent</use></blend>
       <alpha-test><use>transparent</use></alpha-test>

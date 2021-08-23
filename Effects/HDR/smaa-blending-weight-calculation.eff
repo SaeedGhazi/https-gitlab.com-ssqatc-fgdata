@@ -23,6 +23,10 @@
   </parameters>
   <technique n="1">
     <pass>
+      <stencil>
+        <function>equal</function>
+        <value>1</value>
+      </stencil>
       <texture-unit>
         <unit>1</unit>
         <image><use>texture[1]/image</use></image>

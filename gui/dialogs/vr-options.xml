@@ -97,6 +97,58 @@
     </text>
   </group>
 
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+    <text>
+      <label>  </label>
+    </text>
+    <checkbox>
+      <halign>left</halign>
+      <label>Desktop Mirror</label>
+      <property>/sim/vr/mirror-enabled</property>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          if (getprop("/sim/rendering/compositor-reload-required")) {
+            fgcommand("reload-compositor");
+          }
+        </script>
+      </binding>
+    </checkbox>
+    <empty><stretch>true</stretch></empty>
+    <combo>
+      <pref-width>250</pref-width>
+      <live>true</live>
+      <property>/sim/vr/mirror-mode</property>
+      <value>AUTOMATIC</value>
+      <value>NONE</value>
+      <value>LEFT</value>
+      <value>RIGHT</value>
+      <value>LEFT_RIGHT</value>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          if (getprop("/sim/rendering/compositor-reload-required")) {
+            fgcommand("reload-compositor");
+          }
+        </script>
+      </binding>
+    </combo>
+    <!-- gap -->
+    <text>
+      <label> </label>
+    </text>
+
+  </group>
+
   <empty>
     <stretch>true</stretch>
   </empty>

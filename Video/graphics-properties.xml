@@ -82,6 +82,8 @@ particular list.
         <property>/sim/rendering/dynamic-lighting/enabled</property>
         <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
         <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+        <property>/sim/vr/mirror-enabled</property>
+        <property>/sim/vr/mirror-mode</property>
     </compositor-reload-required>
 
     <restart-required>

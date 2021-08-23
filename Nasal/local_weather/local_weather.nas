@@ -4756,6 +4756,7 @@ setprop(lwi~"ipoint-number",0);
 var updateMenu = func {
 	var isEnabled = getprop("/nasal/local_weather/enabled");
 	gui.menuEnable("local_weather", isEnabled);
+	if (isEnabled) {setprop("/sim/rendering/clouds3d-enable", "true");}
 }
 
 _setlistener("/nasal/local_weather/enabled", updateMenu);

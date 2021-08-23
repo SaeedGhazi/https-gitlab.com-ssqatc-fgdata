@@ -403,6 +403,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <vr>
       <depth-info type="bool" userarchive="y">true</depth-info>
       <enabled type="bool" userarchive="y">false</enabled>
+      <mirror-enabled type="bool" userarchive="y">true</mirror-enabled>
+      <mirror-mode type="string" userarchive="y">AUTOMATIC</mirror-mode>
       <mode type="string" userarchive="y">AUTOMATIC</mode>
       <swapchain-mode type="string" userarchive="y">AUTOMATIC</swapchain-mode>
       <validation-layer type="bool" userarchive="y">false</validation-layer>

@@ -776,6 +776,16 @@
     <use-shadow-pass>csm1</use-shadow-pass>
     <use-shadow-pass>csm2</use-shadow-pass>
     <use-shadow-pass>csm3</use-shadow-pass>
+    <!--
+        We should not be binding and attaching the depth buffer as that usually
+        implies reading and writing to it at the same time, which will result in
+        undefined behaviour. However, in the forward pass we don't write to the
+        depth buffer (all Effects that use hdr-forward have write-mask=false).
+    -->
+    <binding>
+      <unit>7</unit>
+      <buffer>depth-stencil</buffer>
+    </binding>
     <binding>
       <unit>9</unit>
       <buffer>prefiltered-envmap</buffer>

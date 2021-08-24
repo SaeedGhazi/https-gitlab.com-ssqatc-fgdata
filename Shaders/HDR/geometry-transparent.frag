@@ -10,14 +10,15 @@ in vec3 ecPos;
 uniform sampler2D color_tex;
 
 uniform mat4 osg_ViewMatrixInverse;
+uniform mat4 osg_ProjectionMatrix;
 uniform vec4 fg_Viewport;
 uniform vec3 fg_SunDirection;
 
 const float DEFAULT_TRANSPARENT_ROUGHNESS = 0.1;
 
 vec3 decodeSRGB(vec3 screenRGB);
+float getShadowing(vec3 p, vec3 n, vec3 l, mat4 viewToClip);
 vec3 getF0Reflectance(vec3 baseColor, float metallic);
-float getShadowing(vec3 p, vec3 n, float NdotL);
 vec3 evaluateLight(
     vec3 baseColor,
     float metallic,
@@ -60,7 +61,7 @@ void main()
     vec3 f0 = getF0Reflectance(baseColor.rgb, 0.0);
 
     vec3 sunIlluminance = getSunIntensity() * clamp(NdotL, 0.0, 1.0);
-    float shadowFactor = getShadowing(ecPos, n, NdotL);
+    float shadowFactor = getShadowing(ecPos, n, l, osg_ProjectionMatrix);
 
     vec3 color = evaluateLight(baseColor,
                                0.0,

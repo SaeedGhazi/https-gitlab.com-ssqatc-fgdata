@@ -17,6 +17,10 @@
       <blend>
         <active>false</active>
       </blend>
+      <polygon-offset>
+        <factor>1.1</factor>
+        <units>4.0</units>
+      </polygon-offset>
       <program>
         <vertex-shader>Shaders/HDR/geometry-shadow.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/geometry-shadow.frag</fragment-shader>

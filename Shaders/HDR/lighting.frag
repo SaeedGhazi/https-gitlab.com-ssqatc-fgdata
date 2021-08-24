@@ -11,12 +11,13 @@ uniform sampler2D depth_tex;
 uniform sampler2D ao_tex;
 
 uniform mat4 fg_ViewMatrixInverse;
+uniform mat4 fg_ProjectionMatrix;
 uniform vec3 fg_SunDirection;
 
 vec3 decodeNormal(vec2 enc);
 vec3 positionFromDepth(vec2 pos, float depth);
+float getShadowing(vec3 p, vec3 n, vec3 l, mat4 viewToClip);
 vec3 getF0Reflectance(vec3 baseColor, float metallic);
-float getShadowing(vec3 p, vec3 n, float NdotL);
 vec3 evaluateLight(
     vec3 baseColor,
     float metallic,
@@ -69,7 +70,7 @@ void main()
     vec3 f0 = getF0Reflectance(baseColor, metallic);
 
     vec3 sunIlluminance = getSunIntensity() * clamp(NdotL, 0.0, 1.0);
-    float shadowFactor = getShadowing(pos, n, NdotL);
+    float shadowFactor = getShadowing(pos, n, l, fg_ProjectionMatrix);
 
     vec3 color = evaluateLight(baseColor,
                                metallic,

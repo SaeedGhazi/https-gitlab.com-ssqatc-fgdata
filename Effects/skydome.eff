@@ -308,6 +308,7 @@
         <function>greater</function>
         <near>1.0</near>
         <far>0.0</far>
+        <write-mask>false</write-mask>
       </depth>
       <cull-face>back</cull-face>
       <program>
@@ -334,6 +335,9 @@
   <technique n="139">
     <scheme>hdr-envmap</scheme>
     <pass>
+      <depth>
+        <write-mask>false</write-mask>
+      </depth>
       <cull-face>back</cull-face>
       <program>
         <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>

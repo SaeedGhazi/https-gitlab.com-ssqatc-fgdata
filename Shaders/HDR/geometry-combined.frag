@@ -14,7 +14,7 @@ uniform int normalmap_dds;
 uniform float normalmap_tiling;
 
 const float DEFAULT_COMBINED_METALNESS = 0.0;
-const float DEFAULT_COMBINED_ROUGHNESS = 0.1;
+const float DEFAULT_COMBINED_ROUGHNESS = 0.2;
 
 vec2 encodeNormal(vec3 n);
 vec3 decodeSRGB(vec3 screenRGB);

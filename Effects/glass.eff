@@ -537,6 +537,7 @@
           <function>gequal</function>
           <near>1.0</near>
           <far>0.0</far>
+          <write-mask>false</write-mask>
         </depth>
         <texture-unit>
           <unit>0</unit>
@@ -564,6 +565,7 @@
           <vertex-shader>Shaders/HDR/geometry-transparent.vert</vertex-shader>
           <fragment-shader>Shaders/HDR/geometry-transparent.frag</fragment-shader>
           <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+          <fragment-shader>Shaders/HDR/shadows-include.frag</fragment-shader>
           <fragment-shader>Shaders/HDR/lighting-include.frag</fragment-shader>
           <fragment-shader>Shaders/HDR/aerial-perspective-include.frag</fragment-shader>
         </program>
@@ -582,6 +584,17 @@
           <type>float-vec4</type>
           <value><use>material/diffuse</use></value>
         </uniform>
+        <!-- Shadows include -->
+        <uniform>
+          <name>depth_tex</name>
+          <type>sampler-2d</type>
+          <value type="int">7</value>
+        </uniform>
+        <uniform>
+          <name>shadow_tex</name>
+          <type>sampler-2d-shadow</type>
+          <value type="int">10</value>
+        </uniform>
         <!-- Lighting include -->
         <uniform>
           <name>dfg_lut</name>
@@ -592,11 +605,6 @@
           <name>prefiltered_envmap</name>
           <type>sampler-cube</type>
           <value type="int">9</value>
-        </uniform>
-        <uniform>
-          <name>shadow_tex</name>
-          <type>sampler-2d-shadow</type>
-          <value type="int">10</value>
         </uniform>
         <!-- Aerial perspective include -->
         <uniform>

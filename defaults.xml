@@ -384,14 +384,14 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y">true</enabled>
       </pilot-model>
       <hdr>
+        <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
+        <exposure-compensation type="float">0.0</exposure-compensation>
+        <bloom-magnitude type="float">1.0</bloom-magnitude>
+        <bloom-threshold type="float">6.0</bloom-threshold>
         <debug>
           <show-gbuffer type="bool">false</show-gbuffer>
           <display-ev100 type="bool">false</display-ev100>
         </debug>
-        <exposure-compensation type="float">0.0</exposure-compensation>
-        <bloom-magnitude type="float">1.0</bloom-magnitude>
-        <bloom-threshold type="float">6.0</bloom-threshold>
-        <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
       </hdr>
       <composite-viewer-enabled type="bool">true</composite-viewer-enabled>
     </rendering>

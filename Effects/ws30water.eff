@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
   <name>Effects/ws30water</name>
-	<inherits-from>Effects/water</inherits-from>
+  <inherits-from>Effects/water</inherits-from>
   <technique n="1">
     <pass n="0">
       <!-- Hardcoded texture unit as we don't do a material lookup -->
@@ -112,53 +112,6 @@
           <mode>modulate</mode>
         </environment>
       </texture-unit>
-    </pass>
-  </technique>
-
-  <technique n="109">
-    <scheme>hdr-geometry</scheme>
-    <pass>
-      <!-- Reverse floating point depth buffer -->
-      <depth>
-        <function>gequal</function>
-        <near>1.0</near>
-        <far>0.0</far>
-      </depth>
-      <stencil>
-        <function>always</function>
-        <value>3</value>
-        <pass>replace</pass>
-      </stencil>
-
-      <blend><use>transparent</use></blend>
-      <alpha-test><use>transparent</use></alpha-test>
-      <shade-model>smooth</shade-model>
-      <cull-face>back</cull-face>
-      <render-bin>
-        <bin-number><use>render-bin/bin-number</use></bin-number>
-        <bin-name><use>render-bin/bin-name</use></bin-name>
-      </render-bin>
-      <texture-unit>
-        <unit>0</unit>
-        <type>2d</type>
-        <image>Textures/Terrain/water.png</image>
-        <filter>linear-mipmap-linear</filter>
-        <wrap-s>repeat</wrap-s>
-        <wrap-t>repeat</wrap-t>
-        <environment>
-          <mode>modulate</mode>
-        </environment>
-      </texture-unit>
-      <program>
-        <vertex-shader>Shaders/HDR/geometry.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
-      </program>
-      <uniform>
-        <name>color_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">0</value>
-      </uniform>
     </pass>
   </technique>
 </PropertyList>

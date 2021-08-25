@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/water-lighting</name>
+  <technique n="1">
+    <pass>
+      <stencil>
+        <function>equal</function>
+        <value>3</value>
+      </stencil>
+      <program>
+        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/water-lighting.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial-perspective-include.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>gbuffer0_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>gbuffer1_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>depth_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">3</value>
+      </uniform>
+      <uniform>
+        <name>prefiltered_envmap</name>
+        <type>sampler-cube</type>
+        <value type="int">9</value>
+      </uniform>
+      <!-- Aerial perspective include -->
+      <uniform>
+        <name>aerial_perspective_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

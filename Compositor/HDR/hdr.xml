@@ -761,6 +761,44 @@
     </attachment>
   </pass>
 
+  <pass>
+    <name>water</name>
+    <type>quad</type>
+    <effect>Effects/HDR/water-lighting</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer0</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>gbuffer1</buffer>
+    </binding>
+    <binding>
+      <unit>3</unit>
+      <buffer>depth-stencil</buffer>
+    </binding>
+    <binding>
+      <unit>9</unit>
+      <buffer>prefiltered-envmap</buffer>
+    </binding>
+    <binding>
+      <unit>11</unit>
+      <buffer>aerial-perspective</buffer>
+    </binding>
+    <binding>
+      <unit>12</unit>
+      <buffer>transmittance</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>hdr-result</buffer>
+    </attachment>
+    <attachment>
+      <component>stencil</component>
+      <buffer>depth-stencil</buffer>
+    </attachment>
+  </pass>
+
   <!--
       Main forward pass
       Render all objects that couldn't be rendered on the G-Buffer, mainly

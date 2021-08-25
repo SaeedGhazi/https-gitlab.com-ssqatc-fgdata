@@ -40,10 +40,10 @@ void rotationmatrix(float angle, out mat4 rotmat)
 // wave functions ///////////////////////
 
 struct Wave {
-	float freq;  // 2*PI / wavelength
-	float amp;   // amplitude
-	float phase; // speed * 2*PI / wavelength
-	vec2 dir;
+    float freq;  // 2*PI / wavelength
+    float amp;   // amplitude
+    float phase; // speed * 2*PI / wavelength
+    vec2 dir;
 };
 
 Wave wave0 = Wave(1.0, 1.0, 0.5, vec2(0.97, 0.25));
@@ -53,54 +53,54 @@ Wave wave3 = Wave(2.0, 0.5, 1.4, vec2(0.99, 0.1));
 
 float evaluateWave(in Wave w, vec2 pos, float t)
 {
-	return w.amp * sin( dot(w.dir, pos) * w.freq + t * w.phase);
+    return w.amp * sin( dot(w.dir, pos) * w.freq + t * w.phase);
 }
 
 // derivative of wave function
 float evaluateWaveDeriv(Wave w, vec2 pos, float t)
 {
-	return w.freq * w.amp * cos( dot(w.dir, pos)*w.freq + t*w.phase);
+    return w.freq * w.amp * cos( dot(w.dir, pos)*w.freq + t*w.phase);
 }
 
 // sharp wave functions
 float evaluateWaveSharp(Wave w, vec2 pos, float t, float k)
 {
-	return w.amp * pow(sin( dot(w.dir, pos)*w.freq + t*w.phase)* 0.5 + 0.5 , k);
+    return w.amp * pow(sin( dot(w.dir, pos)*w.freq + t*w.phase)* 0.5 + 0.5 , k);
 }
 
 float evaluateWaveDerivSharp(Wave w, vec2 pos, float t, float k)
 {
-	return k*w.freq*w.amp * pow(sin( dot(w.dir, pos)*w.freq + t*w.phase)* 0.5 + 0.5 , k - 1) * cos( dot(w.dir, pos)*w.freq + t*w.phase);
+    return k*w.freq*w.amp * pow(sin( dot(w.dir, pos)*w.freq + t*w.phase)* 0.5 + 0.5 , k - 1) * cos( dot(w.dir, pos)*w.freq + t*w.phase);
 }
 
 void sumWaves(float angle, float dangle, float windScale, float factor, out float ddx, float ddy)
 {
-	mat4 RotationMatrix;
-	float deriv;
-	vec4 P = waterTex1 * 1024;
+    mat4 RotationMatrix;
+    float deriv;
+    vec4 P = waterTex1 * 1024;
 
-	rotationmatrix(radians(angle + dangle * windScale + 0.6 * sin(P.x * factor)), RotationMatrix);
-	P *= RotationMatrix;
+    rotationmatrix(radians(angle + dangle * windScale + 0.6 * sin(P.x * factor)), RotationMatrix);
+    P *= RotationMatrix;
 
-	P.y += evaluateWave(wave0, P.xz, osg_SimulationTime);
-	deriv = evaluateWaveDeriv(wave0, P.xz, osg_SimulationTime );
-	ddx = deriv * wave0.dir.x;
-	ddy = deriv * wave0.dir.y;
+    P.y += evaluateWave(wave0, P.xz, osg_SimulationTime);
+    deriv = evaluateWaveDeriv(wave0, P.xz, osg_SimulationTime );
+    ddx = deriv * wave0.dir.x;
+    ddy = deriv * wave0.dir.y;
 
-	P.y += evaluateWave(wave1, P.xz, osg_SimulationTime);
-	deriv = evaluateWaveDeriv(wave1, P.xz, osg_SimulationTime);
-	ddx += deriv * wave1.dir.x;
-	ddy += deriv * wave1.dir.y;
+    P.y += evaluateWave(wave1, P.xz, osg_SimulationTime);
+    deriv = evaluateWaveDeriv(wave1, P.xz, osg_SimulationTime);
+    ddx += deriv * wave1.dir.x;
+    ddy += deriv * wave1.dir.y;
 
-	P.y += evaluateWaveSharp(wave2, P.xz, osg_SimulationTime, WaveSharp);
-	deriv = evaluateWaveDerivSharp(wave2, P.xz, osg_SimulationTime, WaveSharp);
-	ddx += deriv * wave2.dir.x;
-	ddy += deriv * wave2.dir.y;
+    P.y += evaluateWaveSharp(wave2, P.xz, osg_SimulationTime, WaveSharp);
+    deriv = evaluateWaveDerivSharp(wave2, P.xz, osg_SimulationTime, WaveSharp);
+    ddx += deriv * wave2.dir.x;
+    ddy += deriv * wave2.dir.y;
 
-	P.y += evaluateWaveSharp(wave3, P.xz, osg_SimulationTime, WaveSharp);
-	deriv = evaluateWaveDerivSharp(wave3, P.xz, osg_SimulationTime, WaveSharp);
-	ddx += deriv * wave3.dir.x;
-	ddy += deriv * wave3.dir.y;
+    P.y += evaluateWaveSharp(wave3, P.xz, osg_SimulationTime, WaveSharp);
+    deriv = evaluateWaveDerivSharp(wave3, P.xz, osg_SimulationTime, WaveSharp);
+    ddx += deriv * wave3.dir.x;
+    ddy += deriv * wave3.dir.y;
 }
 
 void main()
@@ -119,17 +119,17 @@ void main()
     float mixFactor = 0.2 + 0.02 * smoothstep(0.0, 50.0, windEffect);
     mixFactor = clamp(mixFactor, 0.3, 0.8);
 
-	// sine waves
-	float ddx, ddx1, ddx2, ddx3, ddy, ddy1, ddy2, ddy3;
-	float angle;
-	ddx = 0.0, ddy = 0.0;
-	ddx1 = 0.0, ddy1 = 0.0;
-	ddx2 = 0.0, ddy2 = 0.0;
-	ddx3 = 0.0, ddy3 = 0.0;
+    // sine waves
+    float ddx, ddx1, ddx2, ddx3, ddy, ddy1, ddy2, ddy3;
+    float angle;
+    ddx = 0.0, ddy = 0.0;
+    ddx1 = 0.0, ddy1 = 0.0;
+    ddx2 = 0.0, ddy2 = 0.0;
+    ddx3 = 0.0, ddy3 = 0.0;
 
-	// there's no need to do wave patterns or foam for pixels which are so
+    // there's no need to do wave patterns or foam for pixels which are so
     // far away that we can't actually see them
-	// we only need detail in the near zone or where the sun reflection is
+    // we only need detail in the near zone or where the sun reflection is
     float dist = length(ecPosition);
     bool detailed = (dist < 15000.0)
         || (dot(fg_SunDirection, normalize(ecPosition)) >= 0.7);
@@ -182,29 +182,29 @@ void main()
 
         sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
         sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
-	}
+    }
 
     vec4 disdis = texture(water_dudvmap, vec2(waterTex2 * tscale)* windScale) * 2.0 - 1.0;
 
-  	vec3 N0 = vec3(texture(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0);
-	vec3 N1 = vec3(texture(perlin_normalmap, vec2(waterTex1 + disdis * sca) * windScale) * 2.0 - 1.0);
+    vec3 N0 = vec3(texture(water_normalmap, vec2(waterTex1 + disdis * sca2) * windScale) * 2.0 - 1.0);
+    vec3 N1 = vec3(texture(perlin_normalmap, vec2(waterTex1 + disdis * sca) * windScale) * 2.0 - 1.0);
 
-	N0 += vec3(texture(water_normalmap, vec2(waterTex1 * tscale) * windScale) * 2.0 - 1.0);
-	N1 += vec3(texture(perlin_normalmap, vec2(waterTex2 * tscale) * windScale) * 2.0 - 1.0);
+    N0 += vec3(texture(water_normalmap, vec2(waterTex1 * tscale) * windScale) * 2.0 - 1.0);
+    N1 += vec3(texture(perlin_normalmap, vec2(waterTex2 * tscale) * windScale) * 2.0 - 1.0);
 
-	rotationmatrix(radians(2.0 * sin(osg_SimulationTime * 0.005)), RotationMatrix);
-	N0 += vec3(texture(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
-	N1 += vec3(texture(perlin_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
+    rotationmatrix(radians(2.0 * sin(osg_SimulationTime * 0.005)), RotationMatrix);
+    N0 += vec3(texture(water_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
+    N1 += vec3(texture(perlin_normalmap, vec2(waterTex2 * RotationMatrix * (tscale + sca2)) * windScale) * 2.0 - 1.0);
 
-	rotationmatrix(radians(-4.0 * sin(osg_SimulationTime * 0.003)), RotationMatrix);
-	N0 += vec3(texture(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0);
-	N1 += vec3(texture(perlin_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca) * windScale) * 2.0 - 1.0);
+    rotationmatrix(radians(-4.0 * sin(osg_SimulationTime * 0.003)), RotationMatrix);
+    N0 += vec3(texture(water_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca2) * windScale) * 2.0 - 1.0);
+    N1 += vec3(texture(perlin_normalmap, vec2(waterTex1 * RotationMatrix + disdis * sca) * windScale) * 2.0 - 1.0);
 
     N0 *= windEffect_low;
     N1 *= windEffect_low;
 
     N0.r += (ddx + ddx1 + ddx2 + ddx3);
-	N0.g += (ddy + ddy1 + ddy2 + ddy3);
+    N0.g += (ddy + ddy1 + ddy2 + ddy3);
 
     vec3 N = normalize(mix(N0, N1, mixFactor) * waveRoughness);
     gbuffer1 = encodeNormal(TBN * N);

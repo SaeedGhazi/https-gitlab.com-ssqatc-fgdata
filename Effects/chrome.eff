@@ -64,4 +64,29 @@
       </texture-unit>
     </pass>
   </technique>
+
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+    <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+      </depth>
+      <stencil>
+        <function>always</function>
+        <value>8</value>
+        <pass>replace</pass>
+      </stencil>
+      <blend>0</blend>
+      <rendering-hint>opaque</rendering-hint>
+      <cull-face><use>cull-face</use></cull-face>
+      <program>
+        <vertex-shader>Shaders/HDR/geometry-chrome.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry-chrome.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
 </PropertyList>

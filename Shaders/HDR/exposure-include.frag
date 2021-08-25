@@ -9,12 +9,11 @@ float log10(float x)
     return one_over_log10 * log(x);
 }
 
-// Custom exposure curve based on the one proposed on
-// 'Perceptual Effects in Real-time Tone Mapping'.
+// Exposure curve from 'Perceptual Effects in Real-time Tone Mapping'.
 // http://resources.mpi-inf.mpg.de/hdr/peffects/krawczyk05sccg.pdf
 float keyValue(float L)
 {
-    return 0.82 - 2.0 / (log10(L + 0.84) + 2.6);
+    return 1.03 - 2.0 / (log10(L + 1.0) + 2.0);
 }
 
 vec3 applyExposure(vec3 color, float avgLuminance, float threshold)

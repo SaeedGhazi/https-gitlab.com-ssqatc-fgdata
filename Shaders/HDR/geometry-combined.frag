@@ -14,7 +14,7 @@ uniform int normalmap_dds;
 uniform float normalmap_tiling;
 
 const float DEFAULT_COMBINED_METALNESS = 0.0;
-const float DEFAULT_COMBINED_ROUGHNESS = 0.2;
+const float DEFAULT_COMBINED_ROUGHNESS = 0.1;
 
 vec2 encodeNormal(vec3 n);
 vec3 decodeSRGB(vec3 screenRGB);
@@ -24,7 +24,7 @@ void main()
     gbuffer0.rgb = decodeSRGB(texture(color_tex, texCoord).rgb);
     gbuffer0.a = 1.0;
 
-    vec3 normal = vec3(0.5, 0.5, 1.0);
+    vec3 normal = vec3(0.0, 0.0, 1.0);
     if (normalmap_enabled > 0) {
         normal = texture(normal_tex, texCoord * normalmap_tiling).rgb * 2.0 - 1.0;
         // DDS has flipped normals

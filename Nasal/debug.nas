@@ -314,8 +314,6 @@ var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
         if ((var v = caller(i)) == nil) return caller(i - 1);
         var filename = v[2];
         var line = v[3];
-        if (size(filename) > 50) 
-            filename = substr(filename, 0, 5)~"[...]"~substr(filename, -40);
         print(_section(sprintf("#%-2d called from %s:%d (%s) (locals %s):", 
             i - skip_level, filename, line, funcname(v[1]), id(v[0]))));
         if (dump_vars) dump(v[0]);

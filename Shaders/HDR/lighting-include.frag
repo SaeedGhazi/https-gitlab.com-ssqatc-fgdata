@@ -29,6 +29,11 @@ vec3 F_Schlick(float VdotH, vec3 F0)
     return F0 + (vec3(1.0) - F0) * pow(clamp(1.0 - VdotH, 0.0, 1.0), 5.0);
 }
 
+float F_Schlick(float VdotH, float F0)
+{
+    return F0 + (1.0 - F0) * pow(clamp(1.0 - VdotH, 0.0, 1.0), 5.0);
+}
+
 /**
  * Normal distribution function (NDF) (specular D)
  * Trowbridge-Reitz/GGX microfacet distribution. Includes Disney's
@@ -137,8 +142,6 @@ vec3 evaluateLight(
     vec3 baseColor,
     float metallic,
     float roughness,
-    float clearcoat,
-    float clearcoatRoughness,
     vec3 f0,                  // Use getF0Reflectance() to obtain this
     vec3 intensity,
     float occlusion,
@@ -169,14 +172,13 @@ vec3 evaluateLight(
     float D = D_GGX(NdotH, a2);
     float G = G_SmithGGX(NdotV, NdotL, a2);
 
-    // Diffuse term
-    // Lambertian diffuse model
-    vec3 diffuse = (vec3(1.0) - F) * Fd_Lambert(c_diff);
-    // Specular term
-    // Cook-Torrance specular microfacet model
-    vec3 specular = ((D * G) * F) / (4.0 * NdotV * NdotL);
+    // Diffuse term: Lambertian diffuse model
+    vec3 f_diffuse = (vec3(1.0) - F) * Fd_Lambert(c_diff);
 
-    vec3 material = diffuse + specular;
+    // Specular term: Cook-Torrance specular microfacet model
+    vec3 f_specular = ((D * G) * F) / (4.0 * NdotV * NdotL);
+
+    vec3 material = f_diffuse + f_specular;
 
     vec3 color = material * intensity * occlusion;
     return color;

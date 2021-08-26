@@ -3,24 +3,30 @@
 uniform mat4 fg_ProjectionMatrixInverse;
 uniform vec2 fg_NearFar;
 
-// https://aras-p.info/texts/CompactNormalStorage.html
-// Method #4: Spheremap Transform
-// Lambert Azimuthal Equal-Area projection
-vec2 encodeNormal(vec3 n)
+// Octahedron normal encoding
+// https://knarkowicz.wordpress.com/2014/04/16/octahedron-normal-vector-encoding/
+vec2 msign(vec2 v)
 {
-    float p = sqrt(n.z * 8.0 + 8.0);
-    return vec2(n.xy / p + 0.5);
+    return vec2((v.x >= 0.0) ? 1.0 : -1.0,
+                (v.y >= 0.0) ? 1.0 : -1.0);
 }
 
-vec3 decodeNormal(vec2 enc)
+vec2 encodeNormal(vec3 n)
 {
-    vec2 fenc = enc * 4.0 - 2.0;
-    float f = dot(fenc, fenc);
-    float g = sqrt(1.0 - f * 0.25);
-    vec3 n;
-    n.xy = fenc * g;
-    n.z = 1.0 - f * 0.5;
-    return n;
+    n /= (abs(n.x) + abs(n.y) + abs(n.z));
+    n.xy = (n.z >= 0) ? n.xy : (1.0 - abs(n.yx)) * msign(n.xy);
+    n.xy = n.xy * 0.5 + 0.5;
+    return n.xy;
+}
+
+vec3 decodeNormal(vec2 f)
+{
+    f = f * 2.0 - 1.0;
+    vec3 n = vec3(f, 1.0 - abs(f.x) - abs(f.y));
+    float t = max(-n.z, 0.0);
+    n.x += (n.x > 0.0) ? -t : t;
+    n.y += (n.y > 0.0) ? -t : t;
+    return normalize(n);
 }
 
 // Given a 2D coordinate in the range [0,1] and a depth value from a depth

@@ -1,8 +1,8 @@
 #version 330 core
 
-layout(location = 0) out vec4 gbuffer0;
-layout(location = 1) out vec2 gbuffer1;
-layout(location = 2) out vec4 gbuffer2;
+layout(location = 0) out vec4 outGBuffer0;
+layout(location = 1) out vec4 outGBuffer1;
+layout(location = 2) out vec4 outGBuffer2;
 
 in vec3 normalVS;
 in vec2 texCoord;
@@ -44,11 +44,14 @@ void main()
 		st = -st;
 	}
 
-    vec3 texel = texture(atlas, vec3(st, lc)).rgb;
-
-    gbuffer0.rgb = decodeSRGB(texel);
-    gbuffer0.a = 1.0;
-    gbuffer1 = encodeNormal(normalVS);
+    vec3 texel = decodeSRGB(texture(atlas, vec3(st, lc)).rgb);
     float specularity = clamp(dot(specular.rgb, vec3(0.333)), 0.0, 1.0);
-    gbuffer2 = vec4(0.0, 1.0-specularity, 0.0, 0.0);
+
+    outGBuffer0.rg  = encodeNormal(normalVS);
+    outGBuffer0.b   = 1.0 - specularity;
+    outGBuffer0.a   = 1.0;
+    outGBuffer1.rgb = texel;
+    outGBuffer1.a   = 0.0;
+    outGBuffer2.rgb = vec3(0.0);
+    outGBuffer2.a   = 1.0;
 }

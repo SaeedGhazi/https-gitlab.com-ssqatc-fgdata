@@ -19,7 +19,7 @@ const float RECIPROCAL_PI = 0.31830988618;
 const float MAX_PREFILTERED_LOD = 4.0;
 const vec3 EXTRATERRESTRIAL_SOLAR_ILLUMINANCE = vec3(128.0);
 
-vec3 decodeNormal(vec2 enc);
+vec3 decodeNormal(vec2 f);
 vec3 positionFromDepth(vec2 pos, float depth);
 vec3 addAerialPerspective(vec3 color, vec2 coord, float depth);
 
@@ -36,11 +36,17 @@ float D_GGX(float NdotH, float a2)
 
 void main()
 {
+    vec4 gbuffer0 = texture(gbuffer0_tex, texCoord);
+    vec4 gbuffer1 = texture(gbuffer1_tex, texCoord);
     float depth = texture(depth_tex, texCoord).r;
+
+    // Unpack G-Buffer
+    vec3 n = decodeNormal(gbuffer0.rg);
+    vec3 seaColor = gbuffer1.rgb;
+
     vec3 pos = positionFromDepth(texCoord, depth);
 
     vec3 v = normalize(-pos);
-    vec3 n = decodeNormal(texture(gbuffer1_tex, texCoord).rg);
     vec3 l = fg_SunDirection;
 
     vec3 reflected = reflect(-v, n);
@@ -62,7 +68,6 @@ void main()
     float fresnel = F_Schlick(NdotV, f0);
 
     // Refracted light
-    vec3 seaColor = texture(gbuffer0_tex, texCoord).rgb;
     vec3 Esky = textureLod(prefiltered_envmap, worldNormal, MAX_PREFILTERED_LOD).rgb;
     vec3 refracted = seaColor * Esky * RECIPROCAL_PI;
 

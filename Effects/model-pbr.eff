@@ -12,18 +12,14 @@
     <texture n="1">
       <type>null-normalmap</type>
     </texture>
-    <!-- Metallic and Roughness -->
+    <!-- ORM Texture (Occlusion R, Roughness G and Metallic B) -->
     <texture n="2">
       <type>white</type>
     </texture>
     <metallic-factor type="float">1.0</metallic-factor>
     <roughness-factor type="float">1.0</roughness-factor>
-    <!-- Occlusion -->
-    <texture n="3">
-      <type>white</type>
-    </texture>
     <!-- Emissive -->
-    <texture n="4">
+    <texture n="3">
       <type>white</type>
     </texture>
     <emissive-factor type="vec3d">0.0 0.0 0.0</emissive-factor>
@@ -88,15 +84,6 @@
         <wrap-s><use>texture[3]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[3]/wrap-t</use></wrap-t>
       </texture-unit>
-      <texture-unit>
-        <unit>4</unit>
-        <type><use>texture[4]/type</use></type>
-        <image><use>texture[4]/image</use></image>
-        <filter><use>texture[4]/filter</use></filter>
-        <mag-filter><use>texture[0]/mag-filter</use></mag-filter>
-        <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
-        <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
-      </texture-unit>
       <blend>0</blend>
       <rendering-hint>opaque</rendering-hint>
       <cull-face><use>cull-face</use></cull-face>
@@ -124,19 +111,14 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>metallic_roughness_tex</name>
+        <name>orm_tex</name>
         <type>sampler-2d</type>
         <value type="int">2</value>
       </uniform>
       <uniform>
-        <name>occlusion_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
         <name>emissive_tex</name>
         <type>sampler-2d</type>
-        <value type="int">4</value>
+        <value type="int">3</value>
       </uniform>
       <uniform>
         <name>base_color_factor</name>
@@ -163,6 +145,23 @@
         <type>bool</type>
         <value><use>flip-vertically</use></value>
       </uniform>
+    </pass>
+  </technique>
+
+  <technique n="119">
+    <scheme>hdr-shadow</scheme>
+    <pass>
+      <color-mask type="vec4d">0 0 0 0</color-mask>
+      <cull-face>back</cull-face>
+      <blend>0</blend>
+      <polygon-offset>
+        <factor>1.1</factor>
+        <units>4.0</units>
+      </polygon-offset>
+      <program>
+        <vertex-shader>Shaders/HDR/geometry-shadow.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry-shadow.frag</fragment-shader>
+      </program>
     </pass>
   </technique>
 </PropertyList>

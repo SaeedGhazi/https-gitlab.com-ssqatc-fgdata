@@ -5,8 +5,8 @@ out float fragColor;
 
 in vec2 texCoord;
 
+uniform sampler2D gbuffer0_tex;
 uniform sampler2D depth_tex;
-uniform sampler2D normal_tex;
 
 uniform mat4 fg_ProjectionMatrix;
 
@@ -22,11 +22,11 @@ const vec2 kernel[4] = vec2[](
     vec2( 0.0, -1.0),  // bottom
     vec2(-1.0,  0.0)); // left
 
+vec3 decodeNormal(vec2 f);
 vec3 positionFromDepth(vec2 pos, float depth);
-vec3 decodeNormal(vec2 enc);
 
 float rand(vec2 co) {
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+    return fract(sin(dot(co.xy, vec2(12.9898,78.233))) * 43758.5453);
 }
 
 float sampleAO(vec3 fragPos, vec3 normal, vec2 coords)
@@ -46,10 +46,12 @@ float sampleAO(vec3 fragPos, vec3 normal, vec2 coords)
 
 void main()
 {
-    float fragDepth = texture(depth_tex, texCoord).r;
-    vec3 fragPos = positionFromDepth(texCoord, fragDepth);
+    vec4 gbuffer0 = texture(gbuffer0_tex, texCoord);
+    float depth = texture(depth_tex, texCoord).r;
 
-    vec3 normal = normalize(decodeNormal(texture(normal_tex, texCoord).rg));
+    vec3 normal = decodeNormal(gbuffer0.rg);
+
+    vec3 fragPos = positionFromDepth(texCoord, depth);
 
     vec2 randomVec = normalize(vec2(rand(texCoord) * 2.0 - 1.0,
                                     rand(texCoord+1.0) * 2.0 - 1.0));

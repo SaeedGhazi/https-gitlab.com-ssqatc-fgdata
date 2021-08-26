@@ -1,8 +1,8 @@
 #version 330 core
 
-layout(location = 0) out vec4 gbuffer0;
-layout(location = 1) out vec2 gbuffer1;
-layout(location = 2) out vec4 gbuffer2;
+layout(location = 0) out vec4 outGBuffer0;
+layout(location = 1) out vec4 outGBuffer1;
+layout(location = 2) out vec4 outGBuffer2;
 
 in vec2 texCoord;
 in mat3 TBN;
@@ -21,8 +21,7 @@ vec3 decodeSRGB(vec3 screenRGB);
 
 void main()
 {
-    gbuffer0.rgb = decodeSRGB(texture(color_tex, texCoord).rgb);
-    gbuffer0.a = 1.0;
+    vec3 color = decodeSRGB(texture(color_tex, texCoord).rgb);
 
     vec3 normal = vec3(0.0, 0.0, 1.0);
     if (normalmap_enabled > 0) {
@@ -32,10 +31,12 @@ void main()
             normal = -normal;
     }
     normal = normalize(TBN * normal);
-    gbuffer1 = encodeNormal(normal);
 
-    gbuffer2 = vec4(DEFAULT_COMBINED_METALNESS,
-                    DEFAULT_COMBINED_ROUGHNESS,
-                    0.0,
-                    0.0);
+    outGBuffer0.rg  = encodeNormal(normal);
+    outGBuffer0.b   = DEFAULT_COMBINED_ROUGHNESS;
+    outGBuffer0.a   = 1.0;
+    outGBuffer1.rgb = color;
+    outGBuffer1.a   = DEFAULT_COMBINED_METALNESS;
+    outGBuffer2.rgb = vec3(0.0);
+    outGBuffer2.a   = 1.0;
 }

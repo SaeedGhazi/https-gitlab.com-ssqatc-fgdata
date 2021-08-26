@@ -389,8 +389,9 @@ Started September 2000 by David Megginson, david@megginson.com
         <bloom-magnitude type="float">0.5</bloom-magnitude>
         <bloom-threshold type="float">8.0</bloom-threshold>
         <debug>
-          <show-gbuffer type="bool">false</show-gbuffer>
           <display-ev100 type="bool">false</display-ev100>
+          <show-gbuffer type="bool">false</show-gbuffer>
+          <show-shadow-cascades type="bool">false</show-shadow-cascades>
         </debug>
       </hdr>
       <composite-viewer-enabled type="bool">true</composite-viewer-enabled>

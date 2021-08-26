@@ -1,7 +1,7 @@
 #version 330 core
 
-layout(location = 0) out vec4 gbuffer0;
-layout(location = 1) out vec2 gbuffer1;
+layout(location = 0) out vec4 outGBuffer0;
+layout(location = 1) out vec4 outGBuffer1;
 
 in vec4 waterTex1;
 in vec4 waterTex2;
@@ -207,8 +207,9 @@ void main()
     N0.g += (ddy + ddy1 + ddy2 + ddy3);
 
     vec3 N = normalize(mix(N0, N1, mixFactor) * waveRoughness);
-    gbuffer1 = encodeNormal(TBN * N);
 
     vec3 floorColor = decodeSRGB(texture(water_colormap, TopoUV).rgb);
-    gbuffer0.rgb = floorColor;
+
+    outGBuffer0.rg  = encodeNormal(TBN * N);
+    outGBuffer1.rgb = floorColor;
 }

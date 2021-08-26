@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/ao</name>
+  <name>Effects/HDR/gbuffer-debug-orm</name>
   <technique n="1">
     <pass>
       <program>
         <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/ao.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-debug-orm.frag</fragment-shader>
       </program>
       <uniform>
         <name>gbuffer0_tex</name>
@@ -14,9 +13,14 @@
         <value type="int">0</value>
       </uniform>
       <uniform>
-        <name>depth_tex</name>
+        <name>gbuffer1_tex</name>
         <type>sampler-2d</type>
         <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>gbuffer2_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">2</value>
       </uniform>
     </pass>
   </technique>

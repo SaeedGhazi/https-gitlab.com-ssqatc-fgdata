@@ -7,29 +7,42 @@
   <use-vertex-attribute-aliasing>true</use-vertex-attribute-aliasing>
 
   <!--
-      G-Buffer
-      .........................................................
-      : Buffer :    Red    :   Green   :   Blue   :   Alpha   :
-      :........:...........:...........:..........:...........:
-      : RT0    : albedo.r  : albedo.g  : albedo.b : AO/Cavity :
-      : RT1    :       normal.x        :      normal.y        :
-      : RT2    : Metalness : Roughness :      Clearcoat       :
-      : RT3    :                     Depth                    :
-      :........:...........:...........:..........:...........:
+      G-Buffer layout
+      ..........................................................................
+      :                       :    Red    :  Green  :    Blue    :    Alpha    :
+      :.......................:...........:.........:............:.............:
+      : G-Buffer 0 (RGB10_A2) :        Normal       : Roughness  : Material ID :
+      : G-Buffer 1 (RGBA8)    :             Base Color           : Metallic    :
+      : G-Buffer 2 (RGBA8)    :     Material specific params     : Occlusion   :
+      : Depth/Stencil         :       DEPTH32F_STENCIL8 (Reversed depth)       :
+      :.......................:............:.........:...........:.............:
+
+      Notes:
+      - Two 10-bit channels is enough for normals, as long as we are using
+      octahedron normal encoding.
+      - Since the Material ID is stored in 2 bits, we can only have 4 different
+      material types. The maximum value (3 or 1.0) is reserved for the standard
+      PBR metallic-roughness material.
+      - In 'Material specific params' fancier materials can use up to 24 bits
+      to encode any information they might need (e.g. a clearcoat layer needs
+      to store the clearcoat amount and roughness).
+      - Materials that are very different from the standard should write
+      whatever they need in the G-Buffer without adhering to this layout and use
+      the stencil buffer and a separate render pass.
   -->
   <buffer>
     <name>gbuffer0</name>
     <type>2d</type>
     <width>screen</width>
     <height>screen</height>
-    <format>rgba8</format>
+    <format>rgb10-a2</format>
   </buffer>
   <buffer>
     <name>gbuffer1</name>
     <type>2d</type>
     <width>screen</width>
     <height>screen</height>
-    <format>rg16f</format>
+    <format>rgba8</format>
   </buffer>
   <buffer>
     <name>gbuffer2</name>
@@ -116,7 +129,7 @@
     <type>cubemap</type>
     <width>128</width>
     <height>128</height>
-    <format>rgb16f</format>
+    <format>r11f-g11f-b10f</format>
     <min-filter>linear-mipmap-linear</min-filter>
     <mag-filter>linear</mag-filter>
     <wrap-s>clamp-to-edge</wrap-s>
@@ -128,7 +141,7 @@
     <type>cubemap</type>
     <width>128</width>
     <height>128</height>
-    <format>rgb16f</format>
+    <format>r11f-g11f-b10f</format>
     <min-filter>linear-mipmap-linear</min-filter>
     <mag-filter>linear</mag-filter>
     <wrap-s>clamp-to-edge</wrap-s>
@@ -157,7 +170,7 @@
     <type>2d</type>
     <width>1024</width>
     <height>1024</height>
-    <format>r16f</format>
+    <format>r32f</format>
     <min-filter>linear-mipmap-nearest</min-filter>
     <mag-filter>nearest</mag-filter>
     <mipmap-levels>10</mipmap-levels>
@@ -167,7 +180,7 @@
     <type>2d</type>
     <width>1</width>
     <height>1</height>
-    <format>r16f</format>
+    <format>r32f</format>
     <min-filter>nearest</min-filter>
     <mag-filter>nearest</mag-filter>
   </buffer>
@@ -176,7 +189,7 @@
     <type>2d</type>
     <width>1</width>
     <height>1</height>
-    <format>r16f</format>
+    <format>r32f</format>
     <min-filter>nearest</min-filter>
     <mag-filter>nearest</mag-filter>
   </buffer>
@@ -259,6 +272,31 @@
   </buffer>
 
   <!--=======================================================================-->
+
+  <!--
+      Clear the G-Buffer if we are debugging it to avoid the dreaded
+      'Solitaire Effect' :)
+  -->
+  <pass>
+    <name>debug-clear-gbuffer</name>
+    <type>quad</type>
+    <effect>Effects/HDR/gbuffer-debug-clear</effect>
+    <condition>
+      <property>/sim/rendering/hdr/debug/show-gbuffer</property>
+    </condition>
+    <attachment>
+      <component>color0</component>
+      <buffer>gbuffer0</buffer>
+    </attachment>
+    <attachment>
+      <component>color1</component>
+      <buffer>gbuffer1</buffer>
+    </attachment>
+    <attachment>
+      <component>color2</component>
+      <buffer>gbuffer2</buffer>
+    </attachment>
+  </pass>
 
   <!--
       Generate the atmospheric scattering related LUTs
@@ -641,7 +679,7 @@
   <pass include="csm-pass.xml">
     <name>csm0</name>
     <near-m>0.1</near-m>
-    <far-m>3.0</far-m>
+    <far-m>2.0</far-m>
     <viewport>
       <x>0.0</x>
       <y>0.0</y>
@@ -651,8 +689,8 @@
   </pass>
   <pass include="csm-pass.xml">
     <name>csm1</name>
-    <near-m>3.0</near-m>
-    <far-m>70.0</far-m>
+    <near-m>2.0</near-m>
+    <far-m>40.0</far-m>
     <viewport>
       <x>0.5</x>
       <y>0.0</y>
@@ -662,8 +700,8 @@
   </pass>
   <pass include="csm-pass.xml">
     <name>csm2</name>
-    <near-m>70.0</near-m>
-    <far-m>300.0</far-m>
+    <near-m>40.0</near-m>
+    <far-m>150.0</far-m>
     <viewport>
       <x>0.0</x>
       <y>0.5</y>
@@ -673,8 +711,8 @@
   </pass>
   <pass include="csm-pass.xml">
     <name>csm3</name>
-    <near-m>300.0</near-m>
-    <far-m>1000.0</far-m>
+    <near-m>150.0</near-m>
+    <far-m>500.0</far-m>
     <viewport>
       <x>0.5</x>
       <y>0.5</y>
@@ -690,11 +728,11 @@
     <effect>Effects/HDR/ao</effect>
     <binding>
       <unit>0</unit>
-      <buffer>depth-stencil</buffer>
+      <buffer>gbuffer0</buffer>
     </binding>
     <binding>
       <unit>1</unit>
-      <buffer>gbuffer1</buffer>
+      <buffer>depth-stencil</buffer>
     </binding>
     <attachment>
       <component>color0</component>
@@ -1198,24 +1236,10 @@
 
   <!-- Debug passes -->
   <pass include="debug-pass.xml">
-    <name>debug-albedo</name>
-    <effect>Effects/HDR/trivial</effect>
+    <name>debug-color</name>
+    <effect>Effects/HDR/gbuffer-debug-color</effect>
     <geometry>
       <left>0.0</left>
-      <bottom>0.0</bottom>
-      <width>0.2</width>
-      <height>0.2</height>
-    </geometry>
-    <binding>
-      <unit>0</unit>
-      <buffer>gbuffer0</buffer>
-    </binding>
-  </pass>
-  <pass include="debug-pass.xml">
-    <name>debug-normals</name>
-    <effect>Effects/HDR/trivial</effect>
-    <geometry>
-      <left>0.8</left>
       <bottom>0.0</bottom>
       <width>0.2</width>
       <height>0.2</height>
@@ -1226,8 +1250,22 @@
     </binding>
   </pass>
   <pass include="debug-pass.xml">
-    <name>debug-materials</name>
-    <effect>Effects/HDR/trivial</effect>
+    <name>debug-normals</name>
+    <effect>Effects/HDR/gbuffer-debug-normal</effect>
+    <geometry>
+      <left>0.8</left>
+      <bottom>0.0</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer0</buffer>
+    </binding>
+  </pass>
+  <pass include="debug-pass.xml">
+    <name>debug-orm</name>
+    <effect>Effects/HDR/gbuffer-debug-orm</effect>
     <geometry>
       <left>0.0</left>
       <bottom>0.8</bottom>
@@ -1236,7 +1274,29 @@
     </geometry>
     <binding>
       <unit>0</unit>
+      <buffer>gbuffer0</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>gbuffer1</buffer>
+    </binding>
+    <binding>
+      <unit>2</unit>
       <buffer>gbuffer2</buffer>
+    </binding>
+  </pass>
+  <pass include="debug-pass.xml">
+    <name>debug-matid</name>
+    <effect>Effects/HDR/gbuffer-debug-matid</effect>
+    <geometry>
+      <left>0.0</left>
+      <bottom>0.57</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer0</buffer>
     </binding>
   </pass>
   <pass include="debug-pass.xml">

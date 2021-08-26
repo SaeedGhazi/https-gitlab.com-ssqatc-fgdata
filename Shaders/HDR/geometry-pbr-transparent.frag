@@ -8,8 +8,7 @@ in vec3 ecPos;
 
 uniform sampler2D base_color_tex;
 uniform sampler2D normal_tex;
-uniform sampler2D metallic_roughness_tex;
-uniform sampler2D occlusion_tex;
+uniform sampler2D orm_tex;
 uniform sampler2D emissive_tex;
 uniform vec4 base_color_factor;
 uniform float metallic_factor;
@@ -29,8 +28,6 @@ vec3 evaluateLight(
     vec3 baseColor,
     float metallic,
     float roughness,
-    float clearcoat,
-    float clearcoatRoughness,
     vec3 f0,
     vec3 intensity,
     float occlusion,
@@ -59,13 +56,13 @@ void main()
     if (baseColor.a < alpha_cutoff)
         discard;
 
-    float occlusion = texture(occlusion_tex, texCoord).r;
     vec3 n = texture(normal_tex, texCoord).rgb * 2.0 - 1.0;
     n = normalize(TBN * n);
 
-    vec4 metallicRoughness = texture(metallic_roughness_tex, texCoord);
-    float metallic = metallicRoughness.r * metallic_factor;
-    float roughness = metallicRoughness.g * roughness_factor;
+    vec3 orm = texture(orm_tex, texCoord).rgb;
+    float occlusion = orm.r;
+    float roughness = orm.g * roughness_factor;
+    float metallic = orm.b * metallic_factor;
 
     vec3 emissive = texture(emissive_tex, texCoord).rgb * emissive_factor;
 
@@ -83,8 +80,6 @@ void main()
     vec3 color = evaluateLight(baseColor.rgb,
                                metallic,
                                roughness,
-                               0.0,
-                               0.0,
                                f0,
                                sunIlluminance,
                                shadowFactor,

@@ -14,6 +14,7 @@ uniform mat4 osg_ProjectionMatrix;
 uniform vec4 fg_Viewport;
 uniform vec3 fg_SunDirection;
 
+const float DEFAULT_TRANSPARENT_METALNESS = 0.0;
 const float DEFAULT_TRANSPARENT_ROUGHNESS = 0.1;
 
 vec3 decodeSRGB(vec3 screenRGB);
@@ -23,8 +24,6 @@ vec3 evaluateLight(
     vec3 baseColor,
     float metallic,
     float roughness,
-    float clearcoat,
-    float clearcoatRoughness,
     vec3 f0,
     vec3 intensity,
     float occlusion,
@@ -64,10 +63,8 @@ void main()
     float shadowFactor = getShadowing(ecPos, n, l, osg_ProjectionMatrix);
 
     vec3 color = evaluateLight(baseColor,
-                               0.0,
+                               DEFAULT_TRANSPARENT_METALNESS,
                                DEFAULT_TRANSPARENT_ROUGHNESS,
-                               0.0,
-                               0.0,
                                f0,
                                sunIlluminance,
                                shadowFactor,
@@ -78,7 +75,7 @@ void main()
     vec3 worldReflected = (osg_ViewMatrixInverse * vec4(reflect(-v, n), 0.0)).xyz;
 
     color += evaluateIBL(baseColor,
-                         0.0,
+                         DEFAULT_TRANSPARENT_METALNESS,
                          DEFAULT_TRANSPARENT_ROUGHNESS,
                          f0,
                          1.0,

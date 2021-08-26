@@ -69,15 +69,6 @@
         <wrap-t><use>texture[3]/wrap-t</use></wrap-t>
       </texture-unit>
       <texture-unit>
-        <unit>4</unit>
-        <type><use>texture[4]/type</use></type>
-        <image><use>texture[4]/image</use></image>
-        <filter><use>texture[4]/filter</use></filter>
-        <mag-filter><use>texture[4]/mag-filter</use></mag-filter>
-        <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
-        <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
-      </texture-unit>
-      <texture-unit>
         <unit>8</unit>
         <image><use>texture[8]/image</use></image>
 		<type><use>texture[8]/type</use></type>
@@ -117,19 +108,14 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>metallic_roughness_tex</name>
+        <name>orm_tex</name>
         <type>sampler-2d</type>
         <value type="int">2</value>
       </uniform>
       <uniform>
-        <name>occlusion_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
         <name>emissive_tex</name>
         <type>sampler-2d</type>
-        <value type="int">4</value>
+        <value type="int">3</value>
       </uniform>
       <uniform>
         <name>base_color_factor</name>

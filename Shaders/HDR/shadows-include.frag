@@ -20,7 +20,7 @@ const vec2 uv_shifts[4] = vec2[4](
 const vec2 uv_factor = vec2(0.5, 0.5);
 
 const float SSS_THICKNESS = 0.1;
-const uint SSS_NUM_STEPS = 32u;
+const uint SSS_NUM_STEPS = 16u;
 const float SSS_MAX_DISTANCE = 0.05;
 const vec3 DITHER_MAGIC = vec3(0.06711056, 0.00583715, 52.9829189);
 
@@ -76,14 +76,11 @@ float sampleCascade(vec4 p, vec2 shift, vec2 mapSize)
     return sampleOptimizedPCF(pos, mapSize);
 }
 
-float sampleAndBlendBand(vec4 p1, vec4 p2, vec2 s1, vec2 s2, vec2 mapSize)
+float getBlendFactor(vec2 uv, vec2 bottomLeft, vec2 topRight)
 {
-    vec2 s = smoothstep(vec2(0.0), BAND_BOTTOM_LEFT, p1.xy)
-        - smoothstep(BAND_TOP_RIGHT, vec2(1.0), p1.xy);
-    float blend = 1.0 - s.x * s.y;
-    return mix(sampleCascade(p1, s1, mapSize),
-               sampleCascade(p2, s2, mapSize),
-               blend);
+    vec2 s = smoothstep(vec2(0.0), bottomLeft, uv)
+        - smoothstep(topRight, vec2(1.0), uv);
+    return 1.0 - s.x * s.y;
 }
 
 bool checkWithinBounds(vec2 coords, vec2 bottomLeft, vec2 topRight)
@@ -151,7 +148,9 @@ float getContactShadow(vec3 p, vec3 l, mat4 viewToClip)
         float dz = samplePos.z - sampleDepth;
         if (dz > 0.00001 && dz < SSS_THICKNESS) {
             shadow = 1.0;
-            // TODO: Add screen fading
+            vec2 screenFade = smoothstep(vec2(0.0), vec2(0.07), samplePos.xy)
+                - smoothstep(vec2(0.93), vec2(1.0), samplePos.xy);
+            shadow *= screenFade.x * screenFade.y;
             break;
         }
         t += dt;
@@ -184,30 +183,62 @@ float getShadowing(vec3 p, vec3 n, vec3 l, mat4 viewToClip)
         // We test if we are inside the cascade bounds to find the tightest
         // map that contains the fragment.
         if (isInsideCascade(lightSpacePos[i])) {
-            if (isInsideBand(lightSpacePos[i]) && ((i+1) < 4)) {
+            if (isInsideBand(lightSpacePos[i])) {
                 // Blend between cascades if the fragment is near the
                 // next cascade to avoid abrupt transitions.
-                visibility = clamp(sampleAndBlendBand(lightSpacePos[i],
-                                                      lightSpacePos[i+1],
-                                                      uv_shifts[i],
-                                                      uv_shifts[i+1],
-                                                      mapSize),
-                                   0.0, 1.0);
+                float blend = getBlendFactor(lightSpacePos[i].xy,
+                                             BAND_BOTTOM_LEFT,
+                                             BAND_TOP_RIGHT);
+                float cascade0 = sampleCascade(lightSpacePos[i],
+                                               uv_shifts[i],
+                                               mapSize);
+                float cascade1;
+                if (i == 3) {
+                    // Handle special case of the last cascade
+                    cascade1 = 1.0;
+                } else {
+                    cascade1 = sampleCascade(lightSpacePos[i+1],
+                                             uv_shifts[i+1],
+                                             mapSize);
+                }
+                visibility = mix(cascade0, cascade1, blend);
             } else {
                 // We are far away from the borders of the cascade, so
                 // we skip the blending to avoid the performance cost
                 // of sampling the shadow map twice.
-                visibility = clamp(sampleCascade(lightSpacePos[i],
-                                                 uv_shifts[i],
-                                                 mapSize),
-                                   0.0, 1.0);
+                visibility = sampleCascade(lightSpacePos[i],
+                                           uv_shifts[i],
+                                           mapSize);
             }
             break;
         }
     }
+    visibility = clamp(visibility, 0.0, 1.0);
 
     if (visibility > 0.0)
         visibility *= getContactShadow(p, l, viewToClip);
 
     return visibility;
+}
+
+vec3 debugShadowColor(vec3 p, vec3 n, vec3 l)
+{
+    float NdotL = clamp(dot(n, l), 0.0, 1.0);
+
+    vec4 lightSpacePos[4];
+    lightSpacePos[0] = getLightSpacePosition(p, n, NdotL, fg_LightMatrix_csm0);
+    lightSpacePos[1] = getLightSpacePosition(p, n, NdotL, fg_LightMatrix_csm1);
+    lightSpacePos[2] = getLightSpacePosition(p, n, NdotL, fg_LightMatrix_csm2);
+    lightSpacePos[3] = getLightSpacePosition(p, n, NdotL, fg_LightMatrix_csm3);
+
+    if (isInsideCascade(lightSpacePos[0]))
+        return vec3(1.0, 0.0, 0.0);
+    else if (isInsideCascade(lightSpacePos[1]))
+        return vec3(0.0, 1.0, 0.0);
+    else if (isInsideCascade(lightSpacePos[2]))
+        return vec3(0.0, 0.0, 1.0);
+    else if (isInsideCascade(lightSpacePos[3]))
+        return vec3(1.0, 0.0, 1.0);
+
+    return vec3(0.0);
 }

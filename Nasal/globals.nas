@@ -124,6 +124,12 @@ var interpolate = func(node, val...) {
 # written to" (2).
 #
 var setlistener = func(node, fn, init = 0, runtime = 1) {
+    if (typeof(fn) != "func") {
+        # This avoids unhelpful failures later on when we try to call <fn> - we
+        # get an error without a useful backtrace, because property callbacks
+        # use a new Nasal context.
+        die(sprintf("setlistener() called with non-function; typeof(fn)=%s", typeof(fn)));
+    }
     if (isa(node, props.Node)) node = node._g;
     elsif (!isscalar(node) and !isghost(node))
         die("bad argument to setlistener()");

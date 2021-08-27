@@ -373,15 +373,6 @@
 		</item>
 
 		<item>
-			<name>wildfire-settings</name>
-			<binding>
-				<command>nasal</command>
-				<script>wildfire.dialog.show()</script>
-			</binding>
-		</item>
-
-
-		<item>
 			<label>Volcanoes</label>
 			<name>volcanoes</name>
 			<binding>

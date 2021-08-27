@@ -313,13 +313,6 @@
 		</item>
 
 		<item>
-			<label>Wildfire Settings</label>
-			<binding>
-				<command>nasal</command>
-				<script>wildfire.dialog.show()</script>
-			</binding>
-		</item>
-		<item>
 			<label>Local Weather</label>
 			<binding>
 				<command>dialog-show</command>

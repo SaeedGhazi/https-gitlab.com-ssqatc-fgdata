@@ -305,7 +305,18 @@ var funcname = func(f) {
     return "-unknown-";
 }
 
-var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
+# Write backtrace information.
+#
+# desc:
+#   Text to write in first line.
+# dump_vars:
+#   If true, show info about variables.
+# skip_level:
+#   How many top-level stack frames to skip.
+# shorten:
+#   If greater than 10, max filename length before being trimmed.
+#
+var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0, shorten = 50) {
     var d = (desc == nil) ? "" : " '" ~ desc ~ "'";
     print("");
     print(_title("### backtrace" ~ d ~ " ###"));
@@ -314,6 +325,8 @@ var backtrace = func(desc = nil, dump_vars = 1, skip_level = 0) {
         if ((var v = caller(i)) == nil) return caller(i - 1);
         var filename = v[2];
         var line = v[3];
+        if (shorten >= 10 and size(filename) > shorten)
+            filename = substr(filename, 0, 5)~"[...]"~substr(filename, -(shorten-10));
         print(_section(sprintf("#%-2d called from %s:%d (%s) (locals %s):", 
             i - skip_level, filename, line, funcname(v[1]), id(v[0]))));
         if (dump_vars) dump(v[0]);

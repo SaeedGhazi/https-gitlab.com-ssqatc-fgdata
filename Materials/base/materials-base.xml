@@ -527,7 +527,6 @@
 </material>
 
 <material n="2009">
-  <name>Freeway</name>
   <name>Road</name>
   <texture>Terrain/asphalt.png</texture>
   <xsize>400</xsize>
@@ -544,6 +543,7 @@
   <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
   <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
   <light-edge-color>
+    <!-- Sodium Vapour -->
     <r>1.0</r>
     <g>0.82</g>
     <b>0.7</b>
@@ -565,6 +565,33 @@
   <bumpiness>0.5</bumpiness>
   <load-resistance>1e10</load-resistance>
 </material>
+
+<material n="2011">
+  <name>Freeway</name>
+  <texture>Terrain/asphalt.png</texture>
+  <xsize>400</xsize>
+  <ysize>400</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+  <light-edge-spacing-m>20</light-edge-spacing-m>
+  <light-edge-height-m>10.0</light-edge-height-m>
+  <light-edge-intensity-cd>50</light-edge-intensity-cd>
+  <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
+  <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
+  <light-edge-offset>false</light-edge-offset>
+  <light-edge-color>
+    <!-- Mercury Vapour -->
+    <r>0.84</r>
+    <g>0.97</g>
+    <b>1.0</b>
+    <a>1.0</a>
+  </light-edge-color>
+</material>
+
 
 <!-- Taxiway signs -->
     <material n="2100">

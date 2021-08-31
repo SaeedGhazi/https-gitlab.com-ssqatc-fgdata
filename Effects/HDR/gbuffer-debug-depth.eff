@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/visualize-depth</name>
+  <name>Effects/HDR/gbuffer-debug-depth</name>
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/visualize-depth.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/trivial-quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-debug-depth.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
       </program>
       <uniform>
-        <name>tex</name>
+        <name>depth_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>

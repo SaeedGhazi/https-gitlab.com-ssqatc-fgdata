@@ -4,7 +4,7 @@
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/adapt-luminance.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/trivial-notexcoord.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/adapt-luminance.frag</fragment-shader>
       </program>
       <uniform>

@@ -1301,7 +1301,7 @@
   </pass>
   <pass include="debug-pass.xml">
     <name>debug-depth</name>
-    <effect>Effects/HDR/visualize-depth</effect>
+    <effect>Effects/HDR/gbuffer-debug-depth</effect>
     <geometry>
       <left>0.8</left>
       <bottom>0.8</bottom>

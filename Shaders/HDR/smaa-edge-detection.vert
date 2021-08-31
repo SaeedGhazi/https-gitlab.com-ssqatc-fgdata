@@ -37,21 +37,18 @@
 
 #define mad(a, b, c) (a * b + c)
 
-layout(location = 0) in vec4 pos;
-layout(location = 3) in vec4 multiTexCoord0;
-
 out vec2 texCoord;
 out vec4 vOffset[3];
 
-uniform mat4 osg_ModelViewProjectionMatrix;
 uniform vec4 fg_Viewport;
 
 #define SMAA_RT_METRICS vec4(1.0 / fg_Viewport.z, 1.0 / fg_Viewport.w, fg_Viewport.z, fg_Viewport.w)
 
 void main()
 {
-    gl_Position = osg_ModelViewProjectionMatrix * pos;
-    texCoord = multiTexCoord0.st;
+    vec2 pos = vec2(gl_VertexID % 2, gl_VertexID / 2) * 4.0 - 1.0;
+    texCoord = pos * 0.5 + 0.5;
+    gl_Position = vec4(pos, 0.0, 1.0);
 
     vOffset[0] = mad(SMAA_RT_METRICS.xyxy, vec4(-1.0, 0.0, 0.0, -1.0), texCoord.xyxy);
     vOffset[1] = mad(SMAA_RT_METRICS.xyxy, vec4( 1.0, 0.0, 0.0,  1.0), texCoord.xyxy);

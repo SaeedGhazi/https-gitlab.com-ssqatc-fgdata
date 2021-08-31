@@ -13,11 +13,7 @@
     </pass>
   </technique>
 
-  <technique n="20">
+  <technique n="109">
     <scheme>hdr-geometry</scheme>
-  </technique>
-
-  <technique n="21">
-    <scheme>hdr-forward</scheme>
   </technique>
 </PropertyList>

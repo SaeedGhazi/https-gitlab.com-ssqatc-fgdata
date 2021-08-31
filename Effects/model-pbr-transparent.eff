@@ -19,11 +19,15 @@
     <alpha-cutoff>-1.0</alpha-cutoff>
   </parameters>
 
-  <technique n="19">
+  <technique n="108">
     <scheme>hdr-geometry</scheme>
   </technique>
 
-  <technique n="40">
+  <technique n="118">
+    <scheme>hdr-shadow</scheme>
+  </technique>
+
+  <technique n="128">
     <scheme>hdr-forward</scheme>
     <pass>
       <!-- Reverse floating point depth buffer -->

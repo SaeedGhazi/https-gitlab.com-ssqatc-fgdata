@@ -15,10 +15,13 @@
     </texture>
   </parameters>
 
-  <technique n="109">
+  <technique n="108">
     <scheme>hdr-geometry</scheme>
   </technique>
-  <technique n="129">
+  <technique n="118">
+    <scheme>hdr-shadow</scheme>
+  </technique>
+  <technique n="128">
     <scheme>hdr-forward</scheme>
     <pass>
       <!-- Reverse floating point depth buffer -->

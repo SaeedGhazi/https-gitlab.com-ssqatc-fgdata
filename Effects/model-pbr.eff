@@ -2,6 +2,7 @@
 
 <PropertyList>
   <name>Effects/model-pbr</name>
+
   <parameters>
     <!-- Base Color -->
     <texture n="0">
@@ -34,7 +35,7 @@
     <binormal type="int">7</binormal>
   </generate>
 
-  <technique n="20">
+  <technique n="109">
     <scheme>hdr-geometry</scheme>
     <pass>
       <!-- Reverse floating point depth buffer -->

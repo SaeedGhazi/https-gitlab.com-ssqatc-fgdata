@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PropertyList>
-	<name>Effects/glass</name>
-	<inherits-from>Effects/model-default</inherits-from>
+  <name>Effects/glass</name>
+  <inherits-from>Effects/model-transparent</inherits-from>
 
-<parameters>
-	<texture n="1">
-		<image>Aircraft/Generic/Effects/window_frost.png</image>
-		<type>2d</type>
-		<filter>linear-mipmap-linear</filter>
-		<wrap-s>repeat</wrap-s>
-		<wrap-t>repeat</wrap-t>
-		<internal-format>normalized</internal-format>
-	</texture>
-	<!-- placeholder for the function texture used for fogging, wiper area,...-->
-	<texture n="2">
-		<type>white</type>
-	</texture>	
-	<!-- texture for reflections in the glass -->
-	<texture n="3">
-		<type>cubemap</type>
-		<images>
-			<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
-			<negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
-			<positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
-			<negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
-			<positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
-			<negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
-		</images>
-		</texture>
-	<!-- placeholder lightmap texture for reflections in the glass -->
-	<texture n="4">
-		<type>cubemap</type>
-		<images>
-			<positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
-			<negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
-			<positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
-			<negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
-			<positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
-			<negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
-		</images>
-		</texture>
-	<glass-tint type="vec4d" n="0"> 1.0 1.0 1.0 1.0</glass-tint>
-	<overlay-color type="vec3d" n="0"> 1.0 1.0 1.0</overlay-color>
-	<splash-x><use>/environment/aircraft-effects/splash-vector-x</use></splash-x>
-	<splash-y><use>/environment/aircraft-effects/splash-vector-y</use></splash-y>
-	<splash-z><use>/environment/aircraft-effects/splash-vector-z</use></splash-z>
-	<rnorm><use>/environment/rain-norm</use></rnorm>
-	<gsnorm><use>/environment/aircraft-effects/ground-splash-norm</use></gsnorm>
-	<frost-level><use>/environment/aircraft-effects/frost-level</use></frost-level>
-	<surface-mapping-scheme type="int">0</surface-mapping-scheme>
-	<fog-level><use>/environment/aircraft-effects/fog-level</use></fog-level>
-	<use-wipers><use>/environment/aircraft-effects/use-wipers</use></use-wipers>
-	<use-overlay><use>/environment/aircraft-effects/use-overlay</use></use-overlay>
-	<overlay-alpha><use>/environment/aircraft-effects/overlay-alpha</use></overlay-alpha>
-	<overlay-glare type="float">0.5</overlay-glare>
-	<use-reflection type="int">0</use-reflection>
-	<reflection-strength type="float">1.0</reflection-strength>
-	<use-mask type="int">0</use-mask>
-	<use-reflection-lightmap type="int">0</use-reflection-lightmap>
-	<lightmap-multi type="int">0</lightmap-multi>
-	<lightmap-factor type="float" n="0">1.0</lightmap-factor>
-	<lightmap-color type="vec3d" n="0"> 1.0 1.0 1.0 </lightmap-color>
-	<lightmap-factor type="float" n="1">1.0</lightmap-factor>
-	<lightmap-color type="vec3d" n="1"> 1.0 1.0 1.0 </lightmap-color>
-	<lightmap-factor type="float" n="2">1.0</lightmap-factor>
-	<lightmap-color type="vec3d" n="2"> 1.0 1.0 1.0 </lightmap-color>
-	<lightmap-factor type="float" n="3">1.0</lightmap-factor>
-	<lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
+  <parameters>
+    <texture n="1">
+      <image>Aircraft/Generic/Effects/window_frost.png</image>
+      <type>2d</type>
+      <filter>linear-mipmap-linear</filter>
+      <wrap-s>repeat</wrap-s>
+      <wrap-t>repeat</wrap-t>
+      <internal-format>normalized</internal-format>
+    </texture>
+    <!-- placeholder for the function texture used for fogging, wiper area,...-->
+    <texture n="2">
+      <type>white</type>
+    </texture>  
+    <!-- texture for reflections in the glass -->
+    <texture n="3">
+      <type>cubemap</type>
+      <images>
+        <positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
+        <negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
+        <positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
+        <negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
+        <positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
+        <negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
+      </images>
+    </texture>
+    <!-- placeholder lightmap texture for reflections in the glass -->
+    <texture n="4">
+      <type>cubemap</type>
+      <images>
+        <positive-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_px.png</positive-x>
+        <negative-x>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nx.png</negative-x>
+        <positive-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_py.png</positive-y>
+        <negative-y>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_ny.png</negative-y>
+        <positive-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_pz.png</positive-z>
+        <negative-z>Aircraft/Generic/Effects/CubeMaps/fair-sky/fair-sky_nz.png</negative-z>
+      </images>
+    </texture>
+    <glass-tint type="vec4d" n="0"> 1.0 1.0 1.0 1.0</glass-tint>
+    <overlay-color type="vec3d" n="0"> 1.0 1.0 1.0</overlay-color>
+    <splash-x><use>/environment/aircraft-effects/splash-vector-x</use></splash-x>
+    <splash-y><use>/environment/aircraft-effects/splash-vector-y</use></splash-y>
+    <splash-z><use>/environment/aircraft-effects/splash-vector-z</use></splash-z>
+    <rnorm><use>/environment/rain-norm</use></rnorm>
+    <gsnorm><use>/environment/aircraft-effects/ground-splash-norm</use></gsnorm>
+    <frost-level><use>/environment/aircraft-effects/frost-level</use></frost-level>
+    <surface-mapping-scheme type="int">0</surface-mapping-scheme>
+    <fog-level><use>/environment/aircraft-effects/fog-level</use></fog-level>
+    <use-wipers><use>/environment/aircraft-effects/use-wipers</use></use-wipers>
+    <use-overlay><use>/environment/aircraft-effects/use-overlay</use></use-overlay>
+    <overlay-alpha><use>/environment/aircraft-effects/overlay-alpha</use></overlay-alpha>
+    <overlay-glare type="float">0.5</overlay-glare>
+    <use-reflection type="int">0</use-reflection>
+    <reflection-strength type="float">1.0</reflection-strength>
+    <use-mask type="int">0</use-mask>
+    <use-reflection-lightmap type="int">0</use-reflection-lightmap>
+    <lightmap-multi type="int">0</lightmap-multi>
+    <lightmap-factor type="float" n="0">1.0</lightmap-factor>
+    <lightmap-color type="vec3d" n="0"> 1.0 1.0 1.0 </lightmap-color>
+    <lightmap-factor type="float" n="1">1.0</lightmap-factor>
+    <lightmap-color type="vec3d" n="1"> 1.0 1.0 1.0 </lightmap-color>
+    <lightmap-factor type="float" n="2">1.0</lightmap-factor>
+    <lightmap-color type="vec3d" n="2"> 1.0 1.0 1.0 </lightmap-color>
+    <lightmap-factor type="float" n="3">1.0</lightmap-factor>
+    <lightmap-color type="vec3d" n="3"> 1.0 1.0 1.0 </lightmap-color>
     <texture n="8">
       <image>Textures/PBR/dfg_lut.dds</image>
       <type>2d</type>
@@ -77,9 +77,9 @@
       <wrap-t>clamp-to-edge</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
-</parameters>
+  </parameters>
 
-<technique n="4">
+  <technique n="4">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>
@@ -100,7 +100,7 @@
     <pass>
       <lighting>true</lighting>
       <depth>
-	<write-mask type="bool">false</write-mask>
+        <write-mask type="bool">false</write-mask>
       </depth>
       <material>
         <active><use>material/active</use></active>
@@ -153,14 +153,14 @@
         <internal-format><use>texture[2]/internal-format</use></internal-format>
       </texture-unit>
       <texture-unit>
-	<unit>3</unit>
-	<type><use>texture[3]/type</use></type>
-	<images><use>texture[3]/images</use></images>
+        <unit>3</unit>
+        <type><use>texture[3]/type</use></type>
+        <images><use>texture[3]/images</use></images>
       </texture-unit>
       <texture-unit>
-	<unit>4</unit>
-	<type><use>texture[4]/type</use></type>
-	<images><use>texture[4]/images</use></images>
+        <unit>4</unit>
+        <type><use>texture[4]/type</use></type>
+        <images><use>texture[4]/images</use></images>
       </texture-unit>
       <vertex-program-two-side>
         <use>vertex-program-two-side</use>
@@ -172,67 +172,67 @@
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
       </program>
 
-     <uniform>
+      <uniform>
         <name>tint</name>
         <type>float-vec4</type>
         <value><use>glass-tint</use></value>
-     </uniform>
-     <uniform>
+      </uniform>
+      <uniform>
         <name>overlay_color</name>
         <type>float-vec3</type>
         <value><use>overlay-color</use></value>
-     </uniform>
-     <uniform>
-	<name>lightmap_r_factor</name>
-	<type>float</type>
-	<value><use>lightmap-factor[0]</use></value>
-     </uniform>	   
-     <uniform>
-	<name>lightmap_r_color</name>
-	<type>float-vec3</type>
-	<value><use>lightmap-color[0]</use></value>
-     </uniform>
-    <uniform>
-	<name>lightmap_g_factor</name>
-	<type>float</type>
-	<value><use>lightmap-factor[1]</use></value>
-     </uniform>	   
-     <uniform>
-	<name>lightmap_g_color</name>
-	<type>float-vec3</type>
-	<value><use>lightmap-color[1]</use></value>
-     </uniform>
-    <uniform>
-	<name>lightmap_b_factor</name>
-	<type>float</type>
-	<value><use>lightmap-factor[2]</use></value>
-     </uniform>	   
-     <uniform>
-	<name>lightmap_b_color</name>
-	<type>float-vec3</type>
-	<value><use>lightmap-color[2]</use></value>
-     </uniform>
-    <uniform>
-	<name>lightmap_a_factor</name>
-	<type>float</type>
-	<value><use>lightmap-factor[3]</use></value>
-     </uniform>	   
-     <uniform>
-	<name>lightmap_a_color</name>
-	<type>float-vec3</type>
-	<value><use>lightmap-color[3]</use></value>
-     </uniform>
-     <uniform>
+      </uniform>
+      <uniform>
+        <name>lightmap_r_factor</name>
+        <type>float</type>
+        <value><use>lightmap-factor[0]</use></value>
+      </uniform>       
+      <uniform>
+        <name>lightmap_r_color</name>
+        <type>float-vec3</type>
+        <value><use>lightmap-color[0]</use></value>
+      </uniform>
+      <uniform>
+        <name>lightmap_g_factor</name>
+        <type>float</type>
+        <value><use>lightmap-factor[1]</use></value>
+      </uniform>       
+      <uniform>
+        <name>lightmap_g_color</name>
+        <type>float-vec3</type>
+        <value><use>lightmap-color[1]</use></value>
+      </uniform>
+      <uniform>
+        <name>lightmap_b_factor</name>
+        <type>float</type>
+        <value><use>lightmap-factor[2]</use></value>
+      </uniform>       
+      <uniform>
+        <name>lightmap_b_color</name>
+        <type>float-vec3</type>
+        <value><use>lightmap-color[2]</use></value>
+      </uniform>
+      <uniform>
+        <name>lightmap_a_factor</name>
+        <type>float</type>
+        <value><use>lightmap-factor[3]</use></value>
+      </uniform>       
+      <uniform>
+        <name>lightmap_a_color</name>
+        <type>float-vec3</type>
+        <value><use>lightmap-color[3]</use></value>
+      </uniform>
+      <uniform>
         <name>splash_x</name>
         <type>float</type>
         <value><use>splash-x</use></value>
-     </uniform>
-     <uniform>
+      </uniform>
+      <uniform>
         <name>splash_y</name>
         <type>float</type>
         <value><use>splash-y</use></value>
-     </uniform>
-     <uniform>
+      </uniform>
+      <uniform>
         <name>splash_z</name>
         <type>float</type>
         <value><use>splash-z</use></value>
@@ -263,9 +263,9 @@
         <value><use>scattering</use></value>
       </uniform>
       <uniform>
-	<name>terminator</name>
-	<type>float</type>
-	<value><use>terminator</use></value>
+        <name>terminator</name>
+        <type>float</type>
+        <value><use>terminator</use></value>
       </uniform>
       <uniform>
         <name>ground_scattering</name>
@@ -273,21 +273,21 @@
         <value><use>ground_scattering</use></value>
       </uniform>
       <uniform>
-	<name>terminator</name>
-	<type>float</type>
-	<value><use>terminator</use></value>
+        <name>terminator</name>
+        <type>float</type>
+        <value><use>terminator</use></value>
       </uniform>
       <uniform>
         <name>overcast</name>
         <type>float</type>
         <value><use>overcast</use></value>
       </uniform>
-       <uniform>
+      <uniform>
         <name>hazeLayerAltitude</name>
         <type>float</type>
         <value><use>lthickness</use></value>
       </uniform>
-     <uniform>
+      <uniform>
         <name>eye_alt</name>
         <type>float</type>
         <value><use>eye_alt</use></value>
@@ -322,7 +322,7 @@
         <type>float</type>
         <value><use>overlay-glare</use></value>
       </uniform>
-	<!-- filtering -->
+      <!-- filtering -->
       <uniform>
         <name>gamma</name>
         <type>float</type>
@@ -390,49 +390,49 @@
         <value type="int">2</value>
       </uniform>
       <uniform>
-	<name>cube_texture</name>
+        <name>cube_texture</name>
         <type>sampler-cube</type>
-	<value type="int">3</value>
+        <value type="int">3</value>
       </uniform>
       <uniform>
-	<name>cube_light_texture</name>
+        <name>cube_light_texture</name>
         <type>sampler-cube</type>
-	<value type="int">4</value>
+        <value type="int">4</value>
       </uniform>
       <uniform>
-	<name>use_reflection</name>
-	<type>int</type>
-	<value><use>use-reflection</use></value>
+        <name>use_reflection</name>
+        <type>int</type>
+        <value><use>use-reflection</use></value>
       </uniform>
       <uniform>
-	<name>use_mask</name>
-	<type>int</type>
-	<value><use>use-mask</use></value>
+        <name>use_mask</name>
+        <type>int</type>
+        <value><use>use-mask</use></value>
       </uniform>
       <uniform>
-	<name>use_wipers</name>
-	<type>int</type>
-	<value><use>use-wipers</use></value>
+        <name>use_wipers</name>
+        <type>int</type>
+        <value><use>use-wipers</use></value>
       </uniform>
       <uniform>
-	<name>use_overlay</name>
-	<type>int</type>
-	<value><use>use-overlay</use></value>
+        <name>use_overlay</name>
+        <type>int</type>
+        <value><use>use-overlay</use></value>
       </uniform>
       <uniform>
-	<name>use_reflection_lightmap</name>
-	<type>int</type>
-	<value><use>use-reflection-lightmap</use></value>
+        <name>use_reflection_lightmap</name>
+        <type>int</type>
+        <value><use>use-reflection-lightmap</use></value>
       </uniform>
       <uniform>
-	<name>lightmap_multi</name>
-	<type>int</type>
-	<value><use>lightmap-multi</use></value>
+        <name>lightmap_multi</name>
+        <type>int</type>
+        <value><use>lightmap-multi</use></value>
       </uniform>
       <uniform>
-	<name>adaptive_mapping</name>
-	<type>int</type>
-	<value><use>surface-mapping-scheme</use></value>
+        <name>adaptive_mapping</name>
+        <type>int</type>
+        <value><use>surface-mapping-scheme</use></value>
       </uniform>
       <uniform>
         <name>colorMode</name>
@@ -441,184 +441,6 @@
       </uniform>
     </pass>
   </technique>
-
-  <!-- fall back to a fixed pipeline technique equivalent to model-transparent otherwise -->
-  <!-- Rembrandt technique of model-default comes at 10, so we insert before that -->
-
-  <technique n="9">
-		<pass>
-			<lighting>true</lighting>
-			<depth>
-				<write-mask type="bool">false</write-mask>
-			</depth>
-			<material>
-				<active>
-					<use>material/active</use>
-				</active>
-				<ambient>
-					<use>material/ambient</use>
-				</ambient>
-				<diffuse>
-					<use>material/diffuse</use>
-				</diffuse>
-				<specular>
-					<use>material/specular</use>
-				</specular>
-				<emissive>
-					<use>material/emissive</use>
-				</emissive>
-				<shininess>
-					<use>material/shininess</use>
-				</shininess>
-				<color-mode>
-					<use>material/color-mode</use>
-				</color-mode>
-			</material>
-			<blend>
-				<active>
-					<use>blend/active</use>
-				</active>
-				<source>
-					<use>blend/source</use>
-				</source>
-				<destination>
-					<use>blend/destination</use>
-				</destination>
-			</blend>
-			<shade-model>
-				<use>shade-model</use>
-			</shade-model>
-			<cull-face>
-				<use>cull-face</use>
-			</cull-face>
-				<render-bin>
-					<bin-number>111</bin-number>
-					<bin-name>DepthSortedBin</bin-name>
-				</render-bin>
-			<texture-unit>
-				<unit>0</unit>
-				<active>
-					<use>texture[0]/active</use>
-				</active>
-                <type>
-                    <use>texture[0]/type</use>
-                </type>
-				<image>
-					<use>texture[0]/image</use>
-				</image>
-				<filter>
-					<use>texture[0]/filter</use>
-				</filter>
-				<wrap-s>
-					<use>texture[0]/wrap-s</use>
-				</wrap-s>
-				<wrap-t>
-					<use>texture[0]/wrap-t</use>
-				</wrap-t>
-      
-				<environment>
-					<mode>modulate</mode>
-				</environment>
-			</texture-unit>
-		</pass>
-	</technique>
-
-    <!-- Don't use the usual scheme because model-combined requires technique
-         number 7. We need to place this technique before it. -->
-    <technique n="1">
-      <scheme>hdr-geometry</scheme>
-    </technique>
-
-    <technique n="2">
-      <scheme>hdr-forward</scheme>
-      <pass>
-        <!-- Reverse floating point depth buffer -->
-        <depth>
-          <function>gequal</function>
-          <near>1.0</near>
-          <far>0.0</far>
-          <write-mask>false</write-mask>
-        </depth>
-        <texture-unit>
-          <unit>0</unit>
-          <type><use>texture[0]/type</use></type>
-          <image><use>texture[0]/image</use></image>
-          <filter><use>texture[0]/filter</use></filter>
-          <mag-filter><use>texture[0]/mag-filter</use></mag-filter>
-          <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
-          <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-        </texture-unit>
-        <texture-unit>
-          <unit>8</unit>
-          <image><use>texture[8]/image</use></image>
-          <type><use>texture[8]/type</use></type>
-          <filter><use>texture[8]/filter</use></filter>
-          <mag-filter><use>texture[8]/mag-filter</use></mag-filter>
-          <wrap-s><use>texture[8]/wrap-s</use></wrap-s>
-          <wrap-t><use>texture[8]/wrap-t</use></wrap-t>
-          <internal-format><use>texture[8]/internal-format</use></internal-format>
-        </texture-unit>
-        <blend>1</blend>
-        <rendering-hint>transparent</rendering-hint>
-        <cull-face><use>cull-face</use></cull-face>
-        <program>
-          <vertex-shader>Shaders/HDR/geometry-transparent.vert</vertex-shader>
-          <fragment-shader>Shaders/HDR/geometry-transparent.frag</fragment-shader>
-          <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
-          <fragment-shader>Shaders/HDR/shadows-include.frag</fragment-shader>
-          <fragment-shader>Shaders/HDR/lighting-include.frag</fragment-shader>
-          <fragment-shader>Shaders/HDR/aerial-perspective-include.frag</fragment-shader>
-        </program>
-        <uniform>
-          <name>color_tex</name>
-          <type>sampler-2d</type>
-          <value type="int">0</value>
-        </uniform>
-        <uniform>
-          <name>color_mode</name>
-          <type>int</type>
-          <value><use>material/color-mode</use></value>
-        </uniform>
-        <uniform>
-          <name>material_diffuse</name>
-          <type>float-vec4</type>
-          <value><use>material/diffuse</use></value>
-        </uniform>
-        <!-- Shadows include -->
-        <uniform>
-          <name>depth_tex</name>
-          <type>sampler-2d</type>
-          <value type="int">7</value>
-        </uniform>
-        <uniform>
-          <name>shadow_tex</name>
-          <type>sampler-2d-shadow</type>
-          <value type="int">10</value>
-        </uniform>
-        <!-- Lighting include -->
-        <uniform>
-          <name>dfg_lut</name>
-          <type>sampler-2d</type>
-          <value type="int">8</value>
-        </uniform>
-        <uniform>
-          <name>prefiltered_envmap</name>
-          <type>sampler-cube</type>
-          <value type="int">9</value>
-        </uniform>
-        <!-- Aerial perspective include -->
-        <uniform>
-          <name>aerial_perspective_lut</name>
-          <type>sampler-2d</type>
-          <value type="int">11</value>
-        </uniform>
-        <uniform>
-          <name>transmittance_lut</name>
-          <type>sampler-2d</type>
-          <value type="int">12</value>
-        </uniform>
-      </pass>
-    </technique>
 </PropertyList>
 
 

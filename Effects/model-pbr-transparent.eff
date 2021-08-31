@@ -3,6 +3,7 @@
 <PropertyList>
   <name>Effects/model-pbr-transparent</name>
   <inherits-from>Effects/model-pbr</inherits-from>
+
   <parameters>
     <texture n="8">
       <image>Textures/PBR/dfg_lut.dds</image>

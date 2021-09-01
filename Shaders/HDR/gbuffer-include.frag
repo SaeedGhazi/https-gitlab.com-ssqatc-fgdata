@@ -31,16 +31,21 @@ vec3 decodeNormal(vec2 f)
 
 // Given a 2D coordinate in the range [0,1] and a depth value from a depth
 // buffer, also in the [0,1] range, return the view space position.
-vec3 positionFromDepth(vec2 pos, float depth)
+vec3 positionFromDepth(vec2 pos, float depth, mat4 projMatrixInverse)
 {
     // We are using a reversed depth buffer. 1.0 corresponds to the near plane
     // and 0.0 to the far plane. We convert this back to clip space by doing
     //     1.0 - depth          to undo the depth reversal
     //     2.0 * depth - 1.0    to transform it to clip space [-1,1]
     vec4 clipSpacePos = vec4(pos * 2.0 - 1.0, 1.0 - depth * 2.0, 1.0);
-    vec4 viewSpacePos = fg_ProjectionMatrixInverse * clipSpacePos;
+    vec4 viewSpacePos = projMatrixInverse * clipSpacePos;
     viewSpacePos.xyz /= viewSpacePos.w;
     return viewSpacePos.xyz;
+}
+
+vec3 positionFromDepth(vec2 pos, float depth)
+{
+    return positionFromDepth(pos, depth, fg_ProjectionMatrixInverse);
 }
 
 // http://www.geeks3d.com/20091216/geexlab-how-to-visualize-the-depth-buffer-in-glsl/

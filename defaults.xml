@@ -388,6 +388,10 @@ Started September 2000 by David Megginson, david@megginson.com
         <exposure-compensation type="float">0.0</exposure-compensation>
         <bloom-magnitude type="float">0.5</bloom-magnitude>
         <bloom-threshold type="float">8.0</bloom-threshold>
+        <ambient-occlusion>
+          <enabled type="bool" userarchive="y">true</enabled>
+          <world-radius type="float">0.2</world-radius>
+        </ambient-occlusion>
         <debug>
           <display-ev100 type="bool">false</display-ev100>
           <show-gbuffer type="bool">false</show-gbuffer>

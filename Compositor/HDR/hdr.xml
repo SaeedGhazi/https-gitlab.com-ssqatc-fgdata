@@ -194,15 +194,12 @@
     <mag-filter>nearest</mag-filter>
   </buffer>
 
-  <!-- SSAO -->
-  <buffer>
-    <name>ao0</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
-    <screen-width-scale>0.5</screen-width-scale>
-    <screen-height-scale>0.5</screen-height-scale>
-    <format>r8</format>
+  <!-- Ambient Occlusion buffers -->
+  <buffer include="ao-buffer.xml">
+    <name>ao-noisy</name>
+  </buffer>
+  <buffer include="ao-buffer.xml">
+    <name>ao-filtered</name>
   </buffer>
 
   <!-- Bloom buffers -->
@@ -675,6 +672,46 @@
     </attachment>
   </pass>
 
+  <!-- GTAO (Ground Truth Ambient Occlusion) -->
+  <pass>
+    <name>gtao</name>
+    <type>quad</type>
+    <effect>Effects/HDR/gtao</effect>
+    <clear-mask>color</clear-mask>
+    <clear-color type="vec4d">1.0 1.0 1.0 1.0</clear-color>
+    <condition>
+      <property>/sim/rendering/hdr/ambient-occlusion/enabled</property>
+    </condition>
+    <binding>
+      <unit>0</unit>
+      <buffer>gbuffer0</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>depth-stencil</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>ao-noisy</buffer>
+    </attachment>
+  </pass>
+  <pass>
+    <name>gtao-denoiser</name>
+    <type>quad</type>
+    <effect>Effects/HDR/gtao-denoiser</effect>
+    <condition>
+      <property>/sim/rendering/hdr/ambient-occlusion/enabled</property>
+    </condition>
+    <binding>
+      <unit>0</unit>
+      <buffer>ao-noisy</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>ao-filtered</buffer>
+    </attachment>
+  </pass>
+
   <!-- Shadow mapping pre-passes -->
   <pass include="csm-pass.xml">
     <name>csm0</name>
@@ -721,25 +758,6 @@
     </viewport>
   </pass>
 
-  <!-- SSAO (Screen Space Ambient Occlusion) -->
-  <pass>
-    <name>ao</name>
-    <type>quad</type>
-    <effect>Effects/HDR/ao</effect>
-    <binding>
-      <unit>0</unit>
-      <buffer>gbuffer0</buffer>
-    </binding>
-    <binding>
-      <unit>1</unit>
-      <buffer>depth-stencil</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>ao0</buffer>
-    </attachment>
-  </pass>
-
   <!--
       Main lighting pass
       Combine the G-Buffer and other buffers to compute the final shading value
@@ -771,7 +789,10 @@
     </binding>
     <binding>
       <unit>7</unit>
-      <buffer>ao0</buffer>
+      <buffer>ao-filtered</buffer>
+      <condition>
+        <property>/sim/rendering/hdr/ambient-occlusion/enabled</property>
+      </condition>
     </binding>
     <binding>
       <unit>9</unit>

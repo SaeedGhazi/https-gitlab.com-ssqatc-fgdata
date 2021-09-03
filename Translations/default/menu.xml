@@ -37,6 +37,7 @@
 	<replay>Instant Replay</replay>
 	<earthview>Earthview orbital rendering</earthview>
 	<stereoscopic-options>Stereoscopic View Options</stereoscopic-options>
+	<vr-options>VR Options</vr-options>
     <als-filter-effects>ALS Filter Effects</als-filter-effects>
 
 	<!-- Location menu -->

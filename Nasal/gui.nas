@@ -1387,6 +1387,7 @@ menuEnable("joystick-info", size(props.globals.getNode("/input/joysticks", 1).ge
 menuEnable("rendering-buffers", getprop("/sim/rendering/rembrandt/enabled"));
 menuEnable("rembrandt-buffers-choice", getprop("/sim/rendering/rembrandt/enabled"));
 menuEnable("stereoscopic-options", !getprop("/sim/rendering/rembrandt/enabled"));
+menuEnable("vr-options", !getprop("/sim/rendering/rembrandt/enabled") and getprop("/sim/vr/built"));
 menuEnable("sound-config", getprop("/sim/sound/working"));
 menuEnable("swift_connection", getprop("/sim/swift/available"));
 

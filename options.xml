@@ -320,6 +320,16 @@
    </option>
 
    <option>
+    <name>disable-vr</name>
+    <description>disable-vr-desc</description>
+   </option>
+
+   <option>
+    <name>enable-vr</name>
+    <description>enable-vr-desc</description>
+   </option>
+
+   <option>
     <name>failure</name>
     <arg>{pitot|static|vacuum|electrical}</arg>
     <description>failure-desc</description>

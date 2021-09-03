@@ -400,6 +400,13 @@ Started September 2000 by David Megginson, david@megginson.com
       </hdr>
       <composite-viewer-enabled type="bool">true</composite-viewer-enabled>
     </rendering>
+    <vr>
+      <depth-info type="bool" userarchive="y">true</depth-info>
+      <enabled type="bool" userarchive="y">false</enabled>
+      <mode type="string" userarchive="y">AUTOMATIC</mode>
+      <swapchain-mode type="string" userarchive="y">AUTOMATIC</swapchain-mode>
+      <validation-layer type="bool" userarchive="y">false</validation-layer>
+    </vr>
     <model-hz type="int">120</model-hz>
     <sound>
       <volume type="float" userarchive="y">0.8</volume>

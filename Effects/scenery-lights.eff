@@ -15,6 +15,7 @@
     <use_night_vision><use>/sim/rendering/als-filters/use-night-vision</use></use_night_vision>
     <use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
     <sun_angle><use>/sim/time/sun-angle-rad</use></sun_angle>
+    <fov><use>/sim/current-view/field-of-view</use></fov>
   </parameters>
 
   <technique n="10">
@@ -122,6 +123,11 @@
         <name>sun_angle</name>
         <type>float</type>
         <value><use>sun_angle</use></value>
+      </uniform>
+      <uniform>
+        <name>fov</name>
+        <type>float</type>
+        <value><use>fov</use></value>
       </uniform>
       <uniform>
         <name>texture</name>

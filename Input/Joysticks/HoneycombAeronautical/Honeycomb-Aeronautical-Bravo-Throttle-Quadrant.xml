@@ -32,45 +32,61 @@ FlightGear 2020.3.6
 * Bindings for Honeycomb Aeronautical Bravo Trottle Quadrant
 *
 *
-* Axis 0: ailerons
-* Axis 1: elevator
-* Axes 2 and 3 (hat): view direction
+* Axis 0: Engine 1
+* Axis 1: Speed brake
+* Axis 2: Flaps
+* Axis 3: Engine 4
+* Axis 4: Engine 3
+* Axis 5: Engine 2
 * 
-* Button  0: YOKE white-Trigger left-handle  >>>>>>>>  View, Cycle Forwards
-* Button  1: YOKE white-top-Button left-handle  >>>>>  View, Reset
-* Button  2: YOKE white-top-Button right-handle
-* Button  3: YOKE red-top-Button right-handle
-* Button  4: YOKE outer-Rocker down left-handle  >>>>  Elevator Trim, Up
-* Button  5: YOKE outer-Rocker up left-handle  >>>>>>  Elevator Trim, Down
-* Button  6: YOKE inner-Rocker down left-handle  >>>>  Flaps, Down
-* Button  7: YOKE inner-Rocker up left-handle  >>>>>>  Flaps, Up
-* Button  8: YOKE top-Rocker inward right-handle  >>>  Rudder Trim, Left
-* Button  9: YOKE top-Rocker outward right-handle  >>  Rudder Trim, Right
-* Button 10: YOKE bottom-Rocker inward right-handle
-* Button 11: YOKE bottom-Rocker outward right-handle
-* Button 12: BASE Master Alternator up  >>>>>>>>>>>>>  Master Alternator, ON OFF
-* Button 13: BASE Master Alternator down
-* Button 14: BASE Master Battery up  >>>>>>>>>>>>>>>>  Battery, ON OFF
-* Button 15: BASE Master Battery down
-* Button 16: BASE Avionics Bus1 up  >>>>>>>>>>>>>>>>>  Master Avionics, ON OFF
-* Button 17: BASE Avionics Bus1 down
-* Button 18: BASE Avionics Bus2 up
-* Button 19: BASE Avionics Bus2 down
-* Button 20: BASE Beacon up  >>>>>>>>>>>>>>>>>>>>>>>>  Beacon, ON OFF
-* Button 21: BASE Beacon down
-* Button 22: BASE Land up  >>>>>>>>>>>>>>>>>>>>>>>>>>  Landing Lights, ON OFF
-* Button 23: BASE Land down
-* Button 24: BASE Taxi up  >>>>>>>>>>>>>>>>>>>>>>>>>>  Taxi Lights, ON OFF
-* Button 25: BASE Taxi down
-* Button 26: BASE Nav up  >>>>>>>>>>>>>>>>>>>>>>>>>>>  Navigation Lights, ON OFF
-* Button 27: BASE Nav down
-* Button 28: BASE Strobe up  >>>>>>>>>>>>>>>>>>>>>>>>  Strobe Light, ON OFF
-* Button 29: BASE Strobe down
-* Button 30: BASE Off  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Magneto, OFF
-* Button 31: BASE Right Mag  >>>>>>>>>>>>>>>>>>>>>>>>  Magneto, Right
-* Button 32: BASE Left Mag  >>>>>>>>>>>>>>>>>>>>>>>>>  See note below
-* Button 33: BASE Both Mag  >>>>>>>>>>>>>>>>>>>>>>>>>  See note below
-* Button 34: BASE Start  >>>>>>>>>>>>>>>>>>>>>>>>>>>>  See note below
+* Button  0:  Autopilot - Heading Hold 
+* Button  1:  Autopilot - Nav Hold
+* Button  2:  Autopilot - APR
+* Button  3:  Autopilot - REV 
+* Button  4:  Autopilot - ALT Hold
+* Button  5:  Autopilot - Vertical Speed hold
+* Button  6:  Autopilot - IAS Hold
+* Button  7:  Autopilot - Toggle AP engage
+* Button  8:  Reverse Thrust - Engine 1
+* Button  9:  Reverse Thrust - Engine 2
+* Button 10:  Reverse Thrust - Engine 3
+* Button 11:  Reverse Thrust - Engine 4
+* Button 12:  Increase  - IAS / CRS / HDG / VS / ALT
+* Button 13:  Decrease  - IAS / CRS / HDG / VS / ALT
+* Button 14:  Flaps Down
+* Button 15:  Flaps UP
+* Button 16:  Select IAS
+* Button 17:  Select CRS
+* Button 18:  Select HDG
+* Button 19:  Select VS
+* Button 20:  Select ALT
+* Button 21: Trim Down
+* Button 22: Trim Up
+* Button 23: Handle 1 (left) - Fully down
+* Button 24: Handle 2 (eng1) - Fully down
+* Button 25: Handle 3 (eng2) - Fully down
+* Button 26: Handle 4 (eng3) - Fully down
+* Button 27: Handle 5 (eng4) - Fully down
+* Button 28: - Switch on Handle 1
+* Button 29: - 
+* Button 30: Gear Up
+* Button 31: Gear Down
+* Button 32: Handle 6 (right) - Fully down
+* Button 33: Switch 1 - up
+* Button 34: Switch 1 - down
+* Button 35: Switch 2 - up
+* Button 36: Switch 2 - down
+* Button 37: Switch 3 - up
+* Button 38: Switch 3 - down
+* Button 39: Switch 4 - up
+* Button 40: Switch 4 - down
+* Button 41: Switch 5 - up
+* Button 42: switch 5 - down
+* Button 43: Switch 6 - up
+* Button 44: Switch 6 - down
+* Button 45: Switch 7 - up
+* Button 46: Switch 7 - down
+* Button 47: 
 
 ********************************************************************
 -->
@@ -79,319 +95,101 @@ FlightGear 2020.3.6
   <name type="string">Honeycomb Aeronautical Bravo Throttle Quadrant</name>
 
   <axis>
-      <desc>Aileron</desc>
-      <binding>
-          <command>property-scale</command>
-          <property>/controls/flight/aileron</property>
-          <factor type="double">1</factor>
-          <offset type="double">0</offset>
-      </binding>
+    <desc type="string">Throttle Engine 1</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/engine[1]/throttle</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">1</offset>
+      <power type="double">1</power>
+    </binding>
   </axis>
-
   <axis n="1">
-      <desc>Elevator</desc>
-      <binding>
-          <command>property-scale</command>
-          <property>/controls/flight/elevator</property>
-          <factor type="double">-1</factor>
-          <offset type="double">0</offset>
-      </binding>
+    <desc type="string">Throttle Engine 0</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/engine[0]/throttle</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">1</offset>
+      <power type="double">1</power>
+    </binding>
   </axis>
-
   <axis n="2">
-      <desc>View, Direction</desc>
-      <direction>left</direction>
-      <low>
-          <repeatable>true</repeatable>
-          <binding>
-              <command>nasal</command>
-              <script>view.panViewDir(1)</script>
-              <module>__js1</module>
-              <offset type="double">1</offset>
-          </binding>
-      </low>
-      <high>
-          <repeatable>true</repeatable>
-          <binding>
-              <command>nasal</command>
-              <script>view.panViewDir(-1)</script>
-              <module>__js1</module>
-              <offset type="double">1</offset>
-          </binding>
-      </high>
-  </axis>
-
-  <axis n="3">
-      <desc>View, Elevation</desc>
-      <direction>upward</direction>
-      <low>
-          <repeatable>true</repeatable>
-          <binding>
-              <command>nasal</command>
-              <script>view.panViewPitch(1)</script>
-              <module>__js1</module>
-              <offset type="double">1</offset>
-          </binding>
-     </low>
-     <high>
-          <repeatable>true</repeatable>
-          <binding>
-              <command>nasal</command>
-              <script>view.panViewPitch(-1)</script>
-              <module>__js1</module>
-              <offset type="double">1</offset>
-          </binding>
-      </high>
+    <desc type="string">Mixture Engine 1</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/engine[1]/mixture</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">1</offset>
+      <power type="double">1</power>
+    </binding>
   </axis>
   
-  <button n="0">
-      <desc>View, Cycle Forwards</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>view.stepView(1)</script>
-      </binding>
-  </button>
-
-  <button n="1">
-      <desc>View, Reset</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>
-              setprop("/sim/current-view/view-number", 0);
-              view.resetView()
-          </script>
-      </binding>
-  </button>
-
-  <button n="4">
-      <desc>Elevator Trim, Up</desc>
-      <repeatable>true</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>controls.elevatorTrim(-1)</script>
-      </binding>
-  </button>
-
-  <button n="5">
-      <desc>Elevator Trim, Down</desc>
-      <repeatable>true</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>controls.elevatorTrim(1)</script>
-      </binding>
-  </button>
-
-  <button n="6">
-      <desc>Flaps, Down</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>controls.flapsDown(1)</script>
-      </binding>
-  </button>
-
-  <button n="7">
-      <desc>Flaps, Up</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>controls.flapsDown(-1)</script>
-      </binding>
-  </button>
-
-  <button n="8">
-      <desc>Rudder Trim, Left</desc>
-      <repeatable>true</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>controls.rudderTrim(-1)</script>
-      </binding>
-  </button>
-
-  <button n="9">
-      <desc>Rudder Trim, Right</desc>
-      <repeatable>true</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>controls.rudderTrim(1)</script>
-      </binding>
-  </button>
-
-  <button n="12">
-      <desc>Master Alternator, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/master-alt", 1);</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/switches/master-alt", 0)</script>
-          </binding>
-      </mod-up>
-  </button>
+  <axis n="3">
+    <desc type="string">Mixture Engine 0</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/engine[0]/mixture</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">1</offset>
+      <power type="double">1</power>
+    </binding>
+  </axis>
+  
+  1<axis n="4">
+    <desc type="string">Propeller Pitch Engine 1</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/engine[1]/propeller-pitch</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">1</offset>
+      <power type="double">1</power>
+    </binding>
+  </axis>
+  <axis n="5">
+    <desc type="string">Propeller Pitch Engine 0</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/engine[0]/propeller-pitch</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">1</offset>
+      <power type="double">1</power>
+    </binding>
+  </axis>
 
   <button n="14">
-      <desc>Battery, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/master-bat", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/switches/master-bat", 0)</script>
-          </binding>
-      </mod-up>
-      </button>
-
-  <button n="16">
-      <desc>Master Avionics, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/master-avionics", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/switches/master-avionics", 0)</script>
-          </binding>
-      </mod-up>
+    <desc type="string">Flaps Down</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.flapsDown(1);</script>
+    </binding>
+    <repeatable type="double">0</repeatable>
   </button>
-
-  <button n="20">
-      <desc>Beacon, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/lighting/beacon", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/lighting/beacon", 0)</script>
-          </binding>
-      </mod-up>
+  <button n="15">
+    <desc type="string">Flaps Up</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.flapsDown(-1);</script>
+    </binding>
+    <repeatable type="double">0</repeatable>
   </button>
-
+  <button n="21">
+    <desc type="string">Elevator Trim Down</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.elevatorTrim(1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
   <button n="22">
-      <desc>Landing Lights, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/lighting/landing-lights", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/lighting/landing-lights", 0)</script>
-          </binding>
-      </mod-up>
+    <desc type="string">Elevator Trim Up</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.elevatorTrim(-1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
   </button>
 
-  <button n="24">
-      <desc>Taxi Lights, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/lighting/taxi-light", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/lighting/taxi-light", 0)</script>
-          </binding>
-      </mod-up>
-  </button>
-
-  <button n="26">
-      <desc>Navigation Lights, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/lighting/nav-lights", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/lighting/nav-lights", 0)</script>
-          </binding>
-      </mod-up>
-  </button>
-
-  <button n="28">
-      <desc>Strobe Light, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/lighting/strobe", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/lighting/strobe", 0)</script>
-          </binding>
-      </mod-up>
-  </button>
-
-  <button n="30">
-      <desc>Magneto, OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/magnetos", 0)</script>
-      </binding>
-  </button>
-
-  <button n="31">
-      <desc>Magneto, Right</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/magnetos", 1)</script>
-      </binding>
-  </button>
-
-<!-- Linux and FlightGear does not handle more than 32 USB buttons.
-     See FlightGear Ticket 2212.
-
-  <button n="32">
-      <desc>Magneto, Left</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/magnetos", 2)</script>
-      </binding>
-  </button>
-
-  <button n="33">
-      <desc>Magneto, Both</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/switches/magnetos", 3)</script>
-      </binding>
-  </button>
-
-  <button n="34">
-      <desc>Starter, ON OFF</desc>
-      <repeatable>false</repeatable>
-      <binding>
-          <command>nasal</command>
-          <script>setprop("/controls/lighting/strobe", 1)</script>
-      </binding>
-      <mod-up>
-          <binding>
-              <command>nasal</command>
-              <script>setprop("/controls/lighting/strobe", 0)</script>
-          </binding>
-      </mod-up>
-  </button>
--->
+ 
 
 </PropertyList>

@@ -200,6 +200,15 @@
 		</item>
 
 		<item>
+			<name>vr-options</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>vr-options</dialog-name>
+			</binding>
+			<enabled>false</enabled>
+		</item>
+
+		<item>
             <enabled>
                 <property>/sim/rendering/shaders/skydome</property>
             </enabled>
@@ -371,15 +380,6 @@
 				<dialog-name>timeofday</dialog-name>
 			</binding>
 		</item>
-
-		<item>
-			<name>wildfire-settings</name>
-			<binding>
-				<command>nasal</command>
-				<script>wildfire.dialog.show()</script>
-			</binding>
-		</item>
-
 
 		<item>
 			<label>Volcanoes</label>

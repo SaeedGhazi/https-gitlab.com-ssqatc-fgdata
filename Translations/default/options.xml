@@ -71,6 +71,8 @@
 	<enable-anti-alias-hud-desc>Enable anti-aliased HUD</enable-anti-alias-hud-desc>
 	<disable-hud-3d-desc>Disable 3D HUD</disable-hud-3d-desc>
 	<enable-hud-3d-desc>Enable 3D HUD</enable-hud-3d-desc>
+	<disable-vr-desc>Disable VR</disable-vr-desc>
+	<enable-vr-desc>Enable VR</enable-vr-desc>
 
 	<!-- Aircraft options -->
 	<aircraft-options>Aircraft</aircraft-options>

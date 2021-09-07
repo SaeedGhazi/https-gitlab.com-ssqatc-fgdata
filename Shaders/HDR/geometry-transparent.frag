@@ -26,7 +26,7 @@ vec3 evaluateLight(
     float roughness,
     vec3 f0,
     vec3 intensity,
-    float occlusion,
+    float visibility,
     vec3 n,
     vec3 l,
     vec3 v,
@@ -37,7 +37,7 @@ vec3 evaluateIBL(
     float metallic,
     float roughness,
     vec3 f0,
-    float occlusion,
+    float visibility,
     vec3 nWorldSpace,
     float NdotV,
     vec3 reflected);

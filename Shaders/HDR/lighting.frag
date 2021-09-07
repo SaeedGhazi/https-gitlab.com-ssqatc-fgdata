@@ -10,6 +10,7 @@ uniform sampler2D gbuffer2_tex;
 uniform sampler2D depth_tex;
 uniform sampler2D ao_tex;
 
+uniform bool ambient_occlusion_enabled;
 uniform bool debug_shadow_cascades;
 
 uniform mat4 fg_ViewMatrixInverse;
@@ -27,7 +28,7 @@ vec3 evaluateLight(
     float roughness,
     vec3 f0,
     vec3 intensity,
-    float occlusion,
+    float visibility,
     vec3 n,
     vec3 l,
     vec3 v,
@@ -38,12 +39,23 @@ vec3 evaluateIBL(
     float metallic,
     float roughness,
     vec3 f0,
-    float occlusion,
+    float visibility,
     vec3 nWorldSpace,
     float NdotV,
     vec3 reflected);
 vec3 addAerialPerspective(vec3 color, vec2 coord, float depth);
 vec3 getSunIntensity();
+
+float GTAOMultiBounce(float x, vec3 albedo)
+{
+    // Use luminance instead of albedo because colored multibounce looks bad
+    // Idea borrowed from Blender Eevee
+    float lum = dot(albedo, vec3(0.333));
+    float a =  2.0404 * lum - 0.3324;
+    float b = -4.7951 * lum + 0.6417;
+    float c =  2.7552 * lum + 0.6903;
+    return max(x, ((x * a + b) * x + c) * x);
+}
 
 void main()
 {
@@ -67,8 +79,6 @@ void main()
     float NdotL = dot(n, l);
     float NdotV = clamp(abs(dot(n, v)), 0.001, 1.0);
 
-    float ao = texture(ao_tex, texCoord).r;
-
     vec3 f0 = getF0Reflectance(baseColor, metallic);
 
     vec3 sunIlluminance = getSunIntensity() * clamp(NdotL, 0.0, 1.0);
@@ -83,7 +93,11 @@ void main()
                                n, l, v,
                                NdotL, NdotV);
 
-    float ambientOcclusion = ao * occlusion;
+    float ao = occlusion;
+    if (ambient_occlusion_enabled) {
+        ao *= GTAOMultiBounce(texture(ao_tex, texCoord).r, baseColor);
+    }
+
     vec3 worldNormal = (fg_ViewMatrixInverse * vec4(n, 0.0)).xyz;
     vec3 worldReflected = (fg_ViewMatrixInverse * vec4(reflect(-v, n), 0.0)).xyz;
 
@@ -91,7 +105,7 @@ void main()
                          metallic,
                          roughness,
                          f0,
-                         ambientOcclusion,
+                         ao,
                          worldNormal,
                          NdotV,
                          worldNormal);

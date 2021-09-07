@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <name>vr-options</name>
+  <modal>false</modal>
+  <resizable>false</resizable>
+  <layout>vbox</layout>
+  <default-padding>3</default-padding>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <text>
+      <label>VR Options</label>
+    </text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend></legend>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <empty>
+    <stretch>true</stretch>
+  </empty>
+
+  <group>
+    <layout>vbox</layout>
+    <padding>6</padding>
+    <checkbox>
+      <halign>left</halign>
+      <label>Enable VR</label>
+      <property>/sim/vr/enabled</property>
+      <live>false</live>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+  </group>
+
+  <text>
+    <halign>center</halign>
+    <label>OpenXR Information</label>
+    <enable><property>/sim/vr/present</property></enable>
+  </text>
+
+  <group>
+    <layout>vbox</layout>
+    <border>10</border>
+    <halign>center</halign>
+    <default-padding>2</default-padding>
+
+
+    <text>
+      <halign>left</halign>
+      <label>OpenXR Runtime: MMMMMMMMMMMMMMMMMMMMMMMM</label>
+      <format>OpenXR Runtime: %s</format>
+      <property>/sim/vr/openxr/runtime/name</property>
+      <live>true</live>
+      <enable><property>/sim/vr/present</property></enable>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <label>OpenXR System: MMMMMMMMMMMMMMMMMMMMMMMM</label>
+      <format>OpenXR System: %s</format>
+      <property>/sim/vr/openxr/system/name</property>
+      <live>true</live>
+      <enable><property>/sim/vr/present</property></enable>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <label>VR State: MMMMMMMMMMMMMMMMMMMMMMMM</label>
+      <format>VR State: %s</format>
+      <property>/sim/vr/state-string</property>
+      <live>true</live>
+      <enable><property>/sim/vr/present</property></enable>
+    </text>
+  </group>
+
+  <empty>
+    <stretch>true</stretch>
+  </empty>
+
+  <hrule/>
+
+  <button>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
+
+
+</PropertyList>

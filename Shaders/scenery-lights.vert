@@ -24,6 +24,7 @@ uniform float osg_SimulationTime;
 
 uniform float avisibility;
 uniform float sun_angle;
+uniform float fov;
 
 varying vec3 relativePosition;
 varying vec2 rawPosition;
@@ -184,19 +185,14 @@ void main()
     lightSize = lightParams.x;
     lightIntensity = lightParams.y;
 
-    /*******
-     * TODOs:
-     * Might need to take into account FOV
-     */
-
     /********
      * Each light is made up of a base circle, a circular-ish halo around the base and a bunch of
      *  star-like rays
      *  baseLightSize is tuned using reference objects of sizes 10cm, 50cm, 100cm, 500cm and 1000cm
-     *   under the assumption that the "bright center" part of the light will be the same size as
-     *   the light itself
+     *   under the assumption that the "bright center" part of the light will be the approximately the
+     *   same size as the light itself
      */
-    float baseLightSize = lightSize / (dist/80);
+    float baseLightSize = lightSize / (dist/80) * 60/fov;
 
 
     /********

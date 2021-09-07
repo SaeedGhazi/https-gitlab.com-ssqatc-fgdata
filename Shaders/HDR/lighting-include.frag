@@ -120,7 +120,7 @@ vec3 evaluateIBL(
     float metallic,
     float roughness,
     vec3 f0,                  // Use getF0Reflectance() to obtain this
-    float occlusion,
+    float visibility,
     vec3 nWorldSpace,         // Normal in world space
     float NdotV,              // Must be positive and non-zero
     vec3 reflected            // Reflected vector in world space: reflect(-v, n)
@@ -132,7 +132,7 @@ vec3 evaluateIBL(
     vec3 diffuse = evaluateDiffuseIrradianceIBL(nWorldSpace) * baseColor
         * (vec3(1.0) - f) * (1.0 - metallic);
 
-    return (diffuse + specular) * occlusion;
+    return (diffuse + specular) * visibility;
 }
 
 //------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ vec3 evaluateLight(
     float roughness,
     vec3 f0,                  // Use getF0Reflectance() to obtain this
     vec3 intensity,
-    float occlusion,
+    float visibility,
     vec3 n,
     vec3 l,
     vec3 v,
@@ -153,7 +153,7 @@ vec3 evaluateLight(
     )
 {
     // Skip fragments that are completely occluded or that are not facing the light
-    if (occlusion <= 0.0 || NdotL <= 0.0)
+    if (visibility <= 0.0 || NdotL <= 0.0)
         return vec3(0.0);
 
     NdotL = clamp(NdotL, 0.001, 1.0);
@@ -180,6 +180,6 @@ vec3 evaluateLight(
 
     vec3 material = f_diffuse + f_specular;
 
-    vec3 color = material * intensity * occlusion;
+    vec3 color = material * intensity * visibility;
     return color;
 }

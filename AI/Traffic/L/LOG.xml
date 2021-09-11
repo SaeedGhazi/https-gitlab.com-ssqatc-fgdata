@@ -520,12 +520,12 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/BN-2/BN-2-Loganair.xml</model>
+    <model>Aircraft/BNI/BNI-LoganAir.xml</model>
     <livery>LOG</livery>
     <airline>LOG</airline>
     <home-port>EGPA</home-port>
     <required-aircraft>LOG-BN2</required-aircraft>
-    <actype>BN2</actype>
+    <actype>BNI</actype>
     <offset>0</offset>
     <radius>7</radius>
     <flighttype>gate</flighttype>
@@ -534,12 +534,12 @@
     <heavy>false</heavy>
   </aircraft>
   <aircraft>
-    <model>Aircraft/BN-2/BN-2-Loganair.xml</model>
+    <model>Aircraft/BNI/BNI-LoganAir.xml</model>
     <livery>LOG</livery>
     <airline>LOG</airline>
     <home-port>EGPA</home-port>
     <required-aircraft>LOG-BN2</required-aircraft>
-    <actype>BN2</actype>
+    <actype>BNI</actype>
     <offset>0</offset>
     <radius>7</radius>
     <flighttype>gate</flighttype>

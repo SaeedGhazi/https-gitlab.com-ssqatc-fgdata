@@ -434,7 +434,7 @@ The referenced <filename> (in the example buildings.txt) contains lines of the f
 X Y Z R B W D H P S O F WT RT
 
 Where:
-- X,Y,Z are the cartesian coordinates of the center of the front face. +X is East, +Y is North
+- X,Y,Z are the cartesian coordinates of the center of the front face. +X is South, +Y is East
 - R is the building rotation in degrees centered on the middle of the front face.
 - B is the building type [0, 1, 2] for SMALL, MEDIUM, LARGE
 - W is the building width in meters
@@ -454,7 +454,7 @@ Where:
 <x> <y> <z> <rot> <type>
 
 where :
-- (<x>,<y>,<z>) define the bottom left corner of the building in cartesian space (+X is North, +Y is East, +Z is up), with (0,0,0) being the position referenced above
+- (<x>,<y>,<z>) define the bottom left corner of the building in cartesian space (+X is South, +Y is East, +Z is up), with (0,0,0) being the position referenced above
 - <rot> is the clockwise rotation around the Z-axis in degrees, rotating around the bottom left (SW) corner of the building
 - <type> is {0,1,2} which map to small, medium and large buildings respectively, as per random buildings.
 
@@ -496,7 +496,7 @@ The referenced <filename> (in the example trees.txt.gz) contains lines of the fo
 X Y Z A B C
 
 Where:
-- X,Y,Z are the cartesian coordinates of the tree. +X is East, +Y is North
+- X,Y,Z are the cartesian coordinates of the tree. +X is South, +Y is East
 - A,B,C is optional and represents the normal of the underlying terrain.  Used for shadows.  Defaults to (0,0,1)
 
 3.11  LINEAR_FEATURE_LIST
@@ -553,11 +553,11 @@ Where:
    0 means the light will be on all the time
    1 means the light will turn on at sunset (sun angle ~89 degrees)
    2 means the light will turn on around sunset with some variability
-   3 means the light will turn on at sunset or when visibility is less than 5000nm
-- <color-r>, <color-g>, <color-b> and <color-a> define the color of the light.
+   3 means the light will turn on at sunset or when visibility is less than 5000 nautical miles
+- <color-r>, <color-g>, <color-b> and <color-a> define the color of the light. Values range from 0.0 to 1.0.
 - <normal-x>, <normal-y>, <normal-z>, <horizontal-angle> and <vertical-angle> define the directionality of the light:
    If both <horizonal/vertical-angle> are 360, the light is considered omnidirectional and the normals have no effect.
-   If not, <normal-x> points to north, <normal-y> points to east and <normal-z> points up.
+   If not, <normal-x> points to south, <normal-y> points to east and <normal-z> points up.
 - <animation-param-1>, <animation-param-2>, <animation-param-3> and <animation-param-4> define animations:
    If <animation-param-1> is less than 0, light is not animated.
    If <animation-param-1> is greater than 0, then its value is used as the total time interval of a single loop of the animation
@@ -575,6 +575,38 @@ Where:
         1.0 0.5 0.0 0.2
    - Blink twice for half a second, and then remain off for half a second
         1.0 0.5 4.0 0.0
+
+*Notes for Normal vector computation:*
+A good way to think about the normal vector comptuation is to use spherical coordinates: http://motionscript.com/mastering-expressions/img/spherical-coords.gif.
+
+In this case, the -X is north (i.e. 0 degrees on the compass rose), +Y is east (90 degrees), and Z is the vertical axis. And the compass rose sits flush on the XY plane. What you want to do is get the vector that is at the center of your light. In the case of the following light:
+
+- visible 30 degree below horizon up to 45 degrees over the horizon
+- visible from 70 degrees to 110 degrees on a compas
+
+the normal would be the line from the light to 7.5 degrees from the horizon vertically (center of 45 and -30) and 90 degrees on the compass rose (center of 70 and 110). Using the equations, we get:
+
+normal-x = 0.0
+normal-y = 0.99144
+normal-z = 0.13053
+horizontal-angle = 40 degrees (110-70)
+vertical-angle = 75 degrees (45 - (-30))
+
+To make things easier, here is a python snippet that does all that computation and prints out the 5 numbers relating to the normal and angles:
+
+###################################################################
+import math
+def get_definition(min_h, max_h, min_v, max_v):
+  h = min_h + (max_h - min_h)/2
+  v = -90 + min_v + (max_v - min_v)/2
+
+  r = 1 # Unit length vector
+
+  x = -1 * round(r * math.sin(math.radians(v)) * math.cos(math.radians(h)), 5)
+  y = -1 * round(r * math.sin(math.radians(v)) * math.sin(math.radians(h)), 5)
+  z = round(r * math.cos(math.radians(v)), 5)
+  print(x, y, z, max_h - min_h, max_v - min_v)
+###################################################################
 
 3.13  LIGHT_LIST
 ----------------
@@ -606,7 +638,7 @@ The referenced <filename> (in the example light_list.txt) contains lines definin
 The type of the light is automatically detected based on the number of parameters specified for each light.
 
 Where:
-- X,Y,Z are the cartesian coordinates of the tree. +X is South and +Y is East.
+- X,Y,Z are the cartesian coordinates of the light. +X is South and +Y is East.
 - The rest of the parameters are the same as OBJECT_LIGHT (Section 3.12)
 
 4 model manager ("/models/model") --------------------------------------------

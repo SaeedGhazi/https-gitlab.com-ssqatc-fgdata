@@ -396,12 +396,15 @@ var Model = {
 			type = "OBJECT_SHARED";
 			spec = path;
 		}
+        var geod = geodinfo(lat, lon);
 
 		var elev_m = elev * FT2M;
+		var offset = elev_m - geod[0];
 		var stg_hdg = normdeg(360 - hdg);
 		var stg_path = geo.tile_path(lat, lon);
 		var abs_path = getprop("/sim/fg-root") ~ "/" ~ path;
-		var obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f %.1f -%.1f", type, spec, lon, lat, elev_m, stg_hdg, pitch, roll);
+		var obj_line =      sprintf("%s %s %.8f %.8f %.4f %.1f %.1f -%.1f", type, spec, lon, lat, elev_m, stg_hdg, pitch, roll);
+		var mass_obj_line = sprintf("%s %s %.8f %.8f %.4f %.1f %.1f %.1f -%.1f", type, spec, lon, lat, elev_m, stg_hdg, offset, pitch,  roll);
 
 		node.getNode("absolute-path", 1).setValue(abs_path);
 		node.getNode("legend", 1).setValue(legend);
@@ -409,6 +412,7 @@ var Model = {
 		node.getNode("stg-heading-deg", 1).setDoubleValue(stg_hdg);
 		node.getNode("elevation-m", 1).setDoubleValue(elev_m);
 		node.getNode("object-line", 1).setValue(obj_line);
+		node.getNode("mass-object-line", 1).setValue(mass_obj_line);
 		return node;
 	},
 };
@@ -799,7 +803,7 @@ var print_data = func {
 	if (selected != nil) {
 	    s ~= collect_model_data(selected);
 	    s ~= rule;
-  }
+    }
 
 	# group all objects of a bucket
 	var bucket = {};
@@ -812,8 +816,24 @@ var print_data = func {
 			bucket[stg] = [obj];
 	}
 	foreach (var key; keys(bucket)) {
-		s ~= sprintf("\n# \n", key);
+		s ~= sprintf("\n# Lines for stg\n", key);
 		foreach (var obj; bucket[key])
+			s ~= obj ~ "\n";
+	}
+
+	# group all objects of a mass_bucket
+	var mass_bucket = {};
+	foreach (var m; data.getChildren("model")) {
+		var stg = m.getNode("stg-path").getValue();
+		var obj = m.getNode("mass-object-line").getValue();
+		if (contains(mass_bucket, stg))
+			append(mass_bucket[stg], obj);
+		else
+			mass_bucket[stg] = [obj];
+	}
+	foreach (var key; keys(mass_bucket)) {
+		s ~= sprintf("\n# Lines for upload form\n", key);
+		foreach (var obj; mass_bucket[key])
 			s ~= obj ~ "\n";
 	}
 

@@ -156,7 +156,128 @@ FlightGear 2020.3.6
       <power type="double">1</power>
     </binding>
   </axis>
-
+  
+  <button n="0">
+      <desc type="string">AP: Select Heading Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
+              if ( node.getValue() == "dg-heading-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-heading-hold" );
+              }
+          </script>
+      </binding>
+  </button>
+  
+  <button n="1">
+      <desc type="string">AP: Select NAV1 Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
+              if ( node.getValue() == "dg-nav1-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-nav1-hold" );
+              }
+          </script>
+      </binding>
+  </button>
+  
+  <button n="2">
+      <desc type="string">AP: Select Approach Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
+              if ( node.getValue() == "dg-apr-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-apr-hold" );
+              }
+              node = props.globals.getNode("/controls/autopilot/inputs/vertical", 1);
+              if ( node.getValue() == "dg-apr-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-apr-hold" );
+              }
+          </script>
+      </binding>
+  </button>
+  <button n="3">
+      <desc type="string">AP: Select REV Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
+              if ( node.getValue() == "dg-rev-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-rev-hold" );
+              }
+          </script>
+      </binding>
+  </button>
+  <button n="4">
+      <desc type="string">AP: Select ALT Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/vertical", 1);
+              if ( node.getValue() == "dg-alt-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-alt-hold" );
+              }
+          </script>
+      </binding>
+  </button>
+  <button n="5">
+      <desc type="string">AP: Select VS Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/vertical", 1);
+              if ( node.getValue() == "dg-vs-hold" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "dg-vs-hold" );
+              }
+          </script>
+      </binding>
+  </button>
+   <button n="6">
+      <desc type="string">AP: Select VS Hold</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/speed", 1);
+              if ( node.getValue() == "ias" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "ias" );
+              }
+          </script>
+      </binding>
+  </button>
+  
+    <button n="7">
+      <desc type="string">AP: Master Switch</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/master", 1);
+              if ( node.getValue() == "active" ) {
+                node.setValue( "" );
+              } else {
+                node.setValue( "active" );
+              }
+          </script>
+      </binding>
+  </button>
   <button n="14">
     <desc type="string">Flaps Down</desc>
     <binding>
@@ -173,6 +294,63 @@ FlightGear 2020.3.6
     </binding>
     <repeatable type="double">0</repeatable>
   </button>
+  
+  <button n="16">
+      <desc type="string">AP: Change IAS</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+                node.setValue( "ias" );
+          </script>
+      </binding>
+  </button>
+
+  <button n="17">
+      <desc type="string">AP: Change CRS</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+              node.setValue( "crs" );
+          </script>
+      </binding>
+  </button>
+
+  <button n="18">
+      <desc type="string">AP: Change HDG</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+              node.setValue( "hdg" );
+          </script>
+      </binding>
+  </button>
+  
+   <button n="19">
+      <desc type="string">AP: Change VS</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+              node.setValue( "vs" );
+          </script>
+      </binding>
+  </button>
+  
+     <button n="20">
+      <desc type="string">AP: Change ALT</desc>
+      <binding>
+          <command type="string">nasal</command>
+          <script>
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+              node.setValue( "alt" );
+          </script>
+      </binding>
+  </button>
+
+  
   <button n="21">
     <desc type="string">Elevator Trim Down</desc>
     <binding>

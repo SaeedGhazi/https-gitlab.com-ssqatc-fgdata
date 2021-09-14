@@ -22,14 +22,10 @@
     <path>EGT.ac</path>
 
     <effect>
-        <inherits-from>../../../../Effects/interior/lm-egtr</inherits-from>
+        <inherits-from>../../../../Effects/interior/lm-egt</inherits-from>
         <object-name>Needle</object-name>
         <object-name>Bug</object-name>
         <object-name>Knob</object-name>
-    </effect>
-
-    <effect>
-        <inherits-from>../../../../Effects/interior/lm-egt</inherits-from>
         <object-name>Face</object-name>
         <object-name>Front</object-name>
         <object-name>Case</object-name>
@@ -48,9 +44,15 @@
         <object-name>Face</object-name>
         <object-name>Case</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/material/instruments/default-red-combined-factor</red-prop>
@@ -63,9 +65,15 @@
         <type>material</type>
         <object-name>Front</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/c172p/lighting/rgb-ra-r-factor</red-prop>

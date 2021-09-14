@@ -96,7 +96,7 @@ var oil_level = 0;
 var oil_full = 0;
 var oil_lacking = 0;
 var oil_level_limited = 0;
-var service_hours_increase = 0;
+var service_hours_increase_qph = 0;
 var service_hours_new = 0;
 var low_oil_pressure_factor = 0.0;
 var low_oil_temperature_factor = 0.0;
@@ -140,7 +140,7 @@ var oil_consumption = maketimer(1.0, func {
         # Add Qts/hr:   0 |  0.02 | 0.125 | 0.5   | 1.125
         service_hours = getprop("/engines/active-engine/oil-service-hours");
         service_hours_increase_qph = 0.00020 * math.pow(service_hours, 2);
-        service_hours_increase_qph = std.min(1.5, service_hours_increase); # limit increase to 1.5 (at which point you really should think of changing it)
+        service_hours_increase_qph = std.min(1.5, service_hours_increase_qph); # limit increase to 1.5 (at which point you really should think of changing it)
         service_hours_increase_qps = service_hours_increase_qph / 3600;
         consumption_qps = consumption_qps + service_hours_increase_qps;
 
@@ -323,15 +323,60 @@ var engine_coughing = func(){
 
 var coughing_timer = maketimer(1, engine_coughing);
 
+# ====== Engine starting actions ======
+var engine_starting = props.globals.initNode("/engines/engine/starting", 0, "BOOL");
+setlistener("/engines/engine/running", func(ngn){
+    if (ngn.getValue() and !getprop("/engines/engine[0]/coughing")) {
+        engine_starting.setValue(1);
+        var timer = maketimer(1, func(){
+            engine_starting.setValue(0);
+        });
+        timer.singleShot = 1; # timer will only be run once
+        timer.start();
+    } else {
+        engine_starting.setValue(0);
+    }
+},0,0);
+
+setlistener("/engines/engine/starting", func(ngn){
+    # Eye-candy: when engine starts, let the view shake a bit
+    if (ngn.getValue() and getprop("/sim/current-view/internal")) {
+        var curX = getprop("/sim/current-view/x-offset-m");
+        var xtimer = maketimer(0.05, func(){
+            interpolate("/sim/current-view/x-offset-m", curX-0.0015+rand()*0.003, 0.05);
+        });
+        xtimer.start();
+        var curY = getprop("/sim/current-view/y-offset-m");
+        var ytimer = maketimer(0.05, func(){
+            interpolate("/sim/current-view/y-offset-m", curY-0.0015+rand()*0.003, 0.05);
+        });
+        ytimer.start();
+        var stoptimer = maketimer(0.8, func(){
+           xtimer.stop();
+           ytimer.stop();
+           interpolate("/sim/current-view/x-offset-m", curX, 0.1);
+           interpolate("/sim/current-view/y-offset-m", curY, 0.1);
+        });
+        stoptimer.singleShot = 1;
+        stoptimer.start();
+    }
+}, 0, 0);
+
 # ========== Main loop ======================
 
 var update = func {
-    var leftTankUsable  = getprop("/consumables/fuel/tank[0]/selected") and getprop("/consumables/fuel/tank[0]/level-gal_us") > 0;
-    var rightTankUsable = getprop("/consumables/fuel/tank[1]/selected") and getprop("/consumables/fuel/tank[1]/level-gal_us") > 0;
+    #this block should be moved out of nasal and into jsbsim or autopilot logic
+    var leftTankUsable  = 0;
+    var rightTankUsable = 0;
+    if (getprop("/consumables/fuel/tank[0]/selected") and getprop("/consumables/fuel/tank[0]/level-gal_us") > 0) leftTankUsable  = 1;
+    if (getprop("/consumables/fuel/tank[1]/selected") and getprop("/consumables/fuel/tank[1]/level-gal_us") > 0) rightTankUsable = 1;
+    if (getprop("/consumables/fuel/tank[2]/selected") and getprop("/consumables/fuel/tank[2]/level-gal_us") > 0) leftTankUsable  = 1;
+    if (getprop("/consumables/fuel/tank[3]/selected") and getprop("/consumables/fuel/tank[3]/level-gal_us") > 0) rightTankUsable = 1;
     var outOfFuel = !(leftTankUsable or rightTankUsable);
 
     # We use the mixture to control the engines, so set the mixture
     var usePrimer = getprop("/controls/engines/engine/use-primer") or 0;
+    if(getprop("/controls/panel/glass")) usePrimer = 0;
 
     var engine_running = getprop("/engines/active-engine/running");
 
@@ -380,7 +425,10 @@ setlistener("/controls/switches/starter", func {
     }
     else {
         print("Starter on");
-        setprop("/controls/engines/engine/use-primer", 1);
+        if(getprop("/controls/panel/glass"))
+            setprop("/controls/engines/engine/use-primer", 0); 
+        else
+            setprop("/controls/engines/engine/use-primer", 1);
         if (primerTimer.isRunning) {
             primerTimer.stop();
         }

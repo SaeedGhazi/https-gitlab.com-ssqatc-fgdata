@@ -11,22 +11,16 @@
     </params>
 
     <effect>
-        <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-yoke-lr</inherits-from>
+        <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-yoke-l</inherits-from>
         <object-name>LeftYokeMain</object-name>
         <object-name>YokeCordLeft</object-name>
-    </effect>
-    <effect>
-        <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-yoke-rr</inherits-from>
-        <object-name>RightYokeMain</object-name>
-        <object-name>YokeCordRight</object-name>
-    </effect>
-    <effect>
-        <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-yoke-l</inherits-from>
         <object-name>LeftYoke</object-name>
         <object-name>LeftYokeMount</object-name>
     </effect>
     <effect>
         <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-yoke-r</inherits-from>
+        <object-name>RightYokeMain</object-name>
+        <object-name>YokeCordRight</object-name>
         <object-name>RightYoke</object-name>
         <object-name>RightYokeMount</object-name>
     </effect>
@@ -42,9 +36,15 @@
         <object-name>RightYoke</object-name>
         <object-name>RightYokeMount</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/c172p/lighting/rgb-ra-r-factor</red-prop>

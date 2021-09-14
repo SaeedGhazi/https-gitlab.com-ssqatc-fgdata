@@ -5,13 +5,10 @@
     <path>AI.ac</path>
 
     <effect>
-        <inherits-from>../../../../Effects/interior/lm-air</inherits-from>
+        <inherits-from>../../../../Effects/interior/lm-ai</inherits-from>
         <object-name>AdjustKnob</object-name>
         <object-name>Roll</object-name>
         <object-name>Pitch</object-name>
-    </effect>
-    <effect>
-        <inherits-from>../../../../Effects/interior/lm-ai</inherits-from>
         <object-name>Aircraft</object-name>
         <object-name>RollReference</object-name>
         <object-name>Bracket</object-name>
@@ -27,9 +24,15 @@
         <object-name>RollReference</object-name>
         <object-name>Case</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
        <emission>
             <red-prop>/sim/model/material/instruments/default-red-combined-factor</red-prop>
@@ -44,9 +47,15 @@
         <object-name>Bezel</object-name>
         <object-name>Bracket</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/c172p/lighting/rgb-ra-r-factor</red-prop>
@@ -139,7 +148,9 @@
             <binding>
                 <command>property-adjust</command>
                 <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
-                <factor type="double">0.5</factor>
+                <factor type="double">0.2</factor>
+                <min>-7.0</min>
+                <max>2.0</max>
             </binding>
         </action>
         <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
@@ -158,7 +169,7 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>ai-horizon-offset</tooltip-id>
-                <label>Horizon Offset: %2d</label>
+                <label>Horizon Offset: %.1f</label>
                 <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
             </binding>
         </hovered>

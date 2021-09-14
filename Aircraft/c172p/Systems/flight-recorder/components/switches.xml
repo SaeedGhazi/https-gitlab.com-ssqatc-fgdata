@@ -6,12 +6,6 @@
     <!-- Switches                                                       -->
     <!-- ============================================================== -->
 
-    <!-- Parking brake -->
-    <signal>
-        <type>float</type>
-        <property type="string">/sim/model/c172p/brake-parking</property>
-    </signal>
-
     <signal>
         <type>bool</type>
         <property type="string">/controls/engines/engine/primer-lever</property>
@@ -56,6 +50,11 @@
         <property type="string">/environment/aircraft-effects/cabin-air-set</property>
     </signal>
 
+    <!-- Fuel tank type -->
+    <signal>
+        <type>int</type>
+        <property type="string">/fdm/jsbsim/fuel/tank</property>
+    </signal>
     <!-- Fuel selector -->
     <signal>
         <type>bool</type>
@@ -64,6 +63,14 @@
     <signal>
         <type>bool</type>
         <property type="string">/consumables/fuel/tank[1]/selected</property>
+    </signal>
+    <signal>
+        <type>bool</type>
+        <property type="string">/consumables/fuel/tank[2]/selected</property>
+    </signal>
+    <signal>
+        <type>bool</type>
+        <property type="string">/consumables/fuel/tank[3]/selected</property>
     </signal>
 
     <!-- Passengers and baggage -->
@@ -123,11 +130,46 @@
     </signal>
     <signal>
         <type>float</type>
-        <property type="string">/controls/lighting/dome-norm</property>
+        <property type="string">/controls/lighting/gps-norm</property>
+    </signal>
+
+
+    <!-- FG1000 lighting                                                -->
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/switches/stby-batt</property>
     </signal>
     <signal>
         <type>float</type>
-        <property type="string">/controls/lighting/gps-norm</property>
+        <property type="string">/controls/lighting/batt-test-lamp-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/lighting/avionics-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/lighting/pedestal-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/lighting/swcb-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/lighting/stby-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/lighting/domeL-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/controls/lighting/domeR-norm</property>
+    </signal>
+    <signal>
+        <type>float</type>
+        <property type="string">/instrumentation/FG1000/Lightmap</property>
     </signal>
 
     <!-- ============================================================== -->

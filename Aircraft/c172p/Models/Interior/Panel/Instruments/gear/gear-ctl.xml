@@ -22,12 +22,8 @@
     <path>gear-ctl.ac</path>
 
     <effect>
-        <inherits-from>../../../../Effects/interior/lm-gearr</inherits-from>
-        <object-name>Gearswitch</object-name>
-    </effect>
-
-    <effect>
         <inherits-from>../../../../Effects/interior/lm-gear</inherits-from>
+        <object-name>Gearswitch</object-name>
         <object-name>nosedn1</object-name>
         <object-name>nosedn2</object-name>
         <object-name>maindn1</object-name>
@@ -70,9 +66,15 @@
         <object-name>GearScrews</object-name>
         <object-name>Gearswitch</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/c172p/lighting/rgb-ra-r-factor</red-prop>

@@ -12,10 +12,6 @@ var autostart = func (msg=1) {
     # Reset battery charge and circuit breakers
     electrical.reset_battery_and_circuit_breakers();
 
-    # Filling fuel tanks
-    setprop("/consumables/fuel/tank[0]/selected", 1);
-    setprop("/consumables/fuel/tank[1]/selected", 1);
-
     # Setting levers and switches for startup
     setprop("/controls/switches/magnetos", 3);
     setprop("/controls/engines/current-engine/throttle", 0.2);
@@ -27,6 +23,9 @@ var autostart = func (msg=1) {
     setprop("/controls/switches/master-bat", 1);
     setprop("/controls/switches/master-alt", 1);
     setprop("/controls/switches/master-avionics", 1);
+    if (getprop("controls/panel/glass")) {
+        setprop("/controls/switches/master-avionics2", 1);
+    }
 
     # Setting lights
     setprop("/controls/lighting/nav-lights", 1);
@@ -36,13 +35,40 @@ var autostart = func (msg=1) {
     # Setting instrument lights if needed
     var light_level = 1-getprop("/rendering/scene/diffuse/red");
     if (light_level > .6) {
-        if (getprop("/controls/lighting/instruments-norm") == 0) {
-            if (light_level > .8) light_level = .8;
-            setprop("/controls/lighting/instruments-norm", light_level);
+        if (!getprop("/controls/panel/glass")){
+            if (getprop("/controls/lighting/instruments-norm") == 0) {
+                if (light_level > .8) light_level = .8;
+                setprop("/controls/lighting/instruments-norm", light_level);
+            }
+            setprop("/controls/switches/dome-red", 1);
         }
-        setprop("/controls/switches/dome-red", 1);
+        if (getprop("/controls/panel/glass")) {
+            if (getprop("/controls/lighting/swcb-norm") == 0) {
+                setprop("/controls/lighting/swcb-norm", .55);
+            }
+            if (getprop("/controls/lighting/avionics-norm") == 0) {
+                setprop("/controls/lighting/avionics-norm", .6);
+            }
+            if (getprop("/controls/lighting/stby-norm") == 0) {
+                setprop("/controls/lighting/stby-norm", .8);
+            }
+        }
+    } else {
+        if (getprop("/controls/panel/glass")) {
+            if (getprop("/controls/lighting/swcb-norm") == 0) {
+                setprop("/controls/lighting/swcb-norm", .35);
+            }
+            if (getprop("/controls/lighting/avionics-norm") == 0) {
+                setprop("/controls/lighting/avionics-norm", .35);
+            }
+            if (getprop("/controls/lighting/stby-norm") == 0) {
+                setprop("/controls/lighting/stby-norm", .75);
+            }
+        }
     }
-
+    if (getprop("/controls/panel/glass")) {
+        setprop("/controls/switches/stby-batt", 2);
+    }
     # Setting amphibious landing gear if needed
     if (getprop("/fdm/jsbsim/bushkit")==4){
         if (getprop("/fdm/jsbsim/hydro/active-norm")) {
@@ -67,19 +93,13 @@ var autostart = func (msg=1) {
 
     # Pre-flight inspection
     setprop("/sim/model/c172p/cockpit/control-lock-placed", 0);
-    setprop("/sim/model/c172p/brake-parking", 0);
+    setprop("/controls/gear/brake-parking", 0);
     setprop("/sim/model/c172p/securing/chock", 0);
     setprop("/sim/model/c172p/securing/cowl-plugs-visible", 0);
     setprop("/sim/model/c172p/securing/pitot-cover-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownL-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownR-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownT-visible", 0);
-
-    # Removing any contamination from water
-    setprop("/consumables/fuel/tank[0]/water-contamination", 0.0);
-    setprop("/consumables/fuel/tank[1]/water-contamination", 0.0);
-    setprop("/consumables/fuel/tank[0]/sample-water-contamination", 0.0);
-    setprop("/consumables/fuel/tank[1]/sample-water-contamination", 0.0);
 
     # Setting max oil level
     var oil_enabled = getprop("/engines/active-engine/oil_consumption_allowed");
@@ -99,14 +119,14 @@ var autostart = func (msg=1) {
     setprop("/engines/active-engine/carb_icing_rate", 0.0);
     setprop("/engines/active-engine/volumetric-efficiency-factor", 0.85);
 
-    # Checking for minimal fuel level
-    var fuel_level_left  = getprop("/consumables/fuel/tank[0]/level-norm");
-    var fuel_level_right = getprop("/consumables/fuel/tank[1]/level-norm");
+    # Removing any contamination from water
+    setprop("/consumables/fuel/tank[0]/water-contamination", 0.0);
+    setprop("/consumables/fuel/tank[1]/water-contamination", 0.0);
+    setprop("/consumables/fuel/tank[0]/sample-water-contamination", 0.0);
+    setprop("/consumables/fuel/tank[1]/sample-water-contamination", 0.0);
 
-    if (fuel_level_left < 0.25)
-        setprop("/consumables/fuel/tank[0]/level-norm", 0.25);
-    if (fuel_level_right < 0.25)
-        setprop("/consumables/fuel/tank[1]/level-norm", 0.25);
+    # set fuel configuration
+    set_fuel();
 
     setprop("/controls/engines/engine[0]/primer-lever", 0);
     setprop("/controls/engines/engine/primer", 3);
@@ -139,24 +159,45 @@ controls.applyBrakes = func (v, which = 0) {
     }
 };
 
-controls.applyParkingBrake = func (v) {
-    if (!v) {
-        return;
+##########################################
+# Set Fuel Configuration
+##########################################
+var set_fuel = func {
+    # Checking for minimal fuel level
+    var fuel_level_left_default  = getprop("/consumables/fuel/tank[0]/level-norm");
+    var fuel_level_right_default = getprop("/consumables/fuel/tank[1]/level-norm");
+    var fuel_level_left_integral  = getprop("/consumables/fuel/tank[2]/level-norm");
+    var fuel_level_right_integral = getprop("/consumables/fuel/tank[3]/level-norm");
+    # Check which tanks are being used
+    var integral_tanks = getprop("/fdm/jsbsim/fuel/tank");
+    if (integral_tanks) {
+        if (fuel_level_left_integral < 0.25)
+            setprop("/consumables/fuel/tank[2]/level-norm", 0.25);
+        if (fuel_level_right_integral < 0.25)
+            setprop("/consumables/fuel/tank[3]/level-norm", 0.25);
+        setprop("/consumables/fuel/tank[2]/selected", 1);
+        setprop("/consumables/fuel/tank[3]/selected", 1);
+        setprop("/consumables/fuel/tank[0]/selected", 0);
+        setprop("/consumables/fuel/tank[1]/selected", 0);
+    } else {
+        if (fuel_level_left_default < 0.25)
+            setprop("/consumables/fuel/tank[0]/level-norm", 0.25);
+        if (fuel_level_right_default < 0.25)
+            setprop("/consumables/fuel/tank[1]/level-norm", 0.25);
+        setprop("/consumables/fuel/tank[0]/selected", 1);
+        setprop("/consumables/fuel/tank[1]/selected", 1);
+        setprop("/consumables/fuel/tank[2]/selected", 0);
+        setprop("/consumables/fuel/tank[3]/selected", 0);
     }
-
-    var p = "/sim/model/c172p/brake-parking";
-    setprop(p, var i = !getprop(p));
-    return i;
-};
-
-##########################################
-# Fuel Save State
-##########################################
-var fuel_save_state = func {
-    if (!getprop("/consumables/fuel/save-fuel-state")) {
-        setprop("/consumables/fuel/tank[0]/level-gal_us", 20);
-        setprop("/consumables/fuel/tank[1]/level-gal_us", 20);
-    };
+    setprop("sim/model/open-pfuel-cap", 0);
+    setprop("sim/model/open-sfuel-cap", 0);
+    setprop("sim/model/open-pfuel-sump", 0);
+    setprop("sim/model/open-sfuel-sump", 0);
+    fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-left-fuel-dialog"}));
+    fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-right-fuel-dialog"}));
+    fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-fuel-both-tanks-dialog"}));
+    fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-left-fuel-sample-dialog"}));
+    fgcommand("dialog-close", props.Node.new({"dialog-name": "c172p-right-fuel-sample-dialog"}));
 };
 
 ##########################################
@@ -270,7 +311,7 @@ var switches_save_state = func {
         setprop("/controls/engines/engine[0]/use-primer", 0);
         setprop("/controls/engines/current-engine/throttle", 0.0);
         setprop("/controls/engines/current-engine/mixture", 0.0);
-        setprop("/controls/circuit-breakers/aircond", 1);
+        #setprop("/controls/circuit-breakers/aircond", 1);
         setprop("/controls/circuit-breakers/autopilot", 1);
         setprop("/controls/circuit-breakers/bcnlt", 1);
         setprop("/controls/circuit-breakers/flaps", 1);
@@ -302,12 +343,11 @@ var switches_save_state = func {
         setprop("/controls/lighting/instruments-norm", 0.0);
         setprop("/controls/lighting/radio-norm", 0.0);
         setprop("/controls/lighting/dome-white-norm", 1.0);
-        setprop("/controls/lighting/dome-norm", 0.0);
         setprop("/controls/lighting/gps-norm", 0.0);
         setprop("/controls/lighting/gearled", 0);
         setprop("/controls/gear/water-rudder", 0);
         setprop("/controls/gear/water-rudder-down", 0);
-        setprop("/sim/model/c172p/brake-parking", 1);
+        setprop("/controls/gear/brake-parking", 1);
         setprop("/controls/flight/flaps", 0.0);
         setprop("/surface-positions/flap-pos-norm", 0.0);
         setprop("/controls/flight/elevator-trim", 0.0);
@@ -316,9 +356,20 @@ var switches_save_state = func {
         setprop("/controls/anti-ice/pitot-heat", 0);
         setprop("/environment/aircraft-effects/cabin-heat-set", 0.0);
         setprop("/environment/aircraft-effects/cabin-air-set", 0.0);
-        setprop("/consumables/fuel/tank[0]/selected", 1);
-        setprop("/consumables/fuel/tank[1]/selected", 1);
-        setprop("/controls/flight/rudder-trim-knob", 0.0);
+        setprop("/consumables/fuel/tank[0]/level-norm", 0.0);
+        setprop("/consumables/fuel/tank[1]/level-norm", 0.0);
+        setprop("/consumables/fuel/tank[2]/level-norm", 0.0);
+        setprop("/consumables/fuel/tank[3]/level-norm", 0.0);
+
+        if (getprop("/sim/model/c172p/ruddertrim-visible"))
+          setprop("/controls/flight/rudder-trim", 0);
+
+        if (getprop("controls/panel/glass")) {
+            electrical.reset_battery_and_circuit_breakers();
+            setprop("/controls/switches/master-avionics", 0);
+            setprop("/controls/switches/master-avionics2", 0);
+        }
+
     };
 };
 
@@ -422,6 +473,8 @@ var reset_system = func {
     props.globals.getNode("/fdm/jsbsim/pontoon-damage/right-pontoon", 0).setIntValue(0);
 
     setprop("/engines/active-engine/kill-engine", 0);
+
+    set_fuel();
 }
 
 ############################################
@@ -444,7 +497,7 @@ var StaticModel = {
             parents: [StaticModel],
             model: nil,
             model_file: file,
-	    object_name: name
+        object_name: name
         };
 
         setlistener("/sim/" ~ name ~ "/enable", func (node) {
@@ -652,9 +705,6 @@ setlistener("/sim/signals/fdm-initialized", func {
         }
     }, 0, 0);
 
-    # Checking if fuel tanks should be refilled (in case save state is off)
-    fuel_save_state();
-
     # Checking if switches should be moved back to default position (in case save state is off)
     switches_save_state();
 
@@ -672,43 +722,37 @@ setlistener("/sim/signals/fdm-initialized", func {
     }
 
     # set user defined pilot view or initialize it
-    settimer(func {
-        if (getprop("sim/current-view/user/x-offset-m") != nil){
-            setprop("sim/current-view/x-offset-m", getprop("sim/current-view/user/x-offset-m"));
-        } else {
-            setprop("sim/current-view/user/x-offset-m", getprop("sim/view/config/x-offset-m"));
-        }
-        if (getprop("sim/current-view/user/y-offset-m") != nil){
-            setprop("sim/current-view/y-offset-m", getprop("sim/current-view/user/y-offset-m"));
-        } else {
-            setprop("sim/current-view/user/y-offset-m", getprop("sim/view/config/y-offset-m"));
-        }
-        if (getprop("sim/current-view/user/z-offset-m") != nil){
-            setprop("sim/current-view/z-offset-m", getprop("sim/current-view/user/z-offset-m"));
-        } else {
-            setprop("sim/current-view/user/z-offset-m", getprop("sim/view/config/z-offset-m"));
-        }
-        if (getprop("sim/current-view/user/default-field-of-view-deg") != nil){
-            setprop("sim/current-view/field-of-view", getprop("sim/current-view/user/default-field-of-view-deg"));
-        } else {
-            setprop("sim/current-view/user/default-field-of-view-deg", getprop("sim/view/config/default-field-of-view-deg"));
-        }
-        if (getprop("sim/current-view/user/pitch-offset-deg") != nil){
-            setprop("sim/current-view/pitch-offset-deg", getprop("sim/current-view/user/pitch-offset-deg"));
-        } else {
-            setprop("sim/current-view/user/pitch-offset-deg", getprop("sim/view/config/pitch-offset-deg"));
-        }
-    }, 1);
+    if (getprop("sim/current-view/view-number") == 0){
+        settimer(func {
+            if (getprop("sim/current-view/user/x-offset-m") != nil){
+                setprop("sim/current-view/x-offset-m", getprop("sim/current-view/user/x-offset-m"));
+            } else {
+                setprop("sim/current-view/user/x-offset-m", getprop("sim/view/config/x-offset-m"));
+            }
+            if (getprop("sim/current-view/user/y-offset-m") != nil){
+                setprop("sim/current-view/y-offset-m", getprop("sim/current-view/user/y-offset-m"));
+            } else {
+                setprop("sim/current-view/user/y-offset-m", getprop("sim/view/config/y-offset-m"));
+            }
+            if (getprop("sim/current-view/user/z-offset-m") != nil){
+                setprop("sim/current-view/z-offset-m", getprop("sim/current-view/user/z-offset-m"));
+            } else {
+                setprop("sim/current-view/user/z-offset-m", getprop("sim/view/config/z-offset-m"));
+            }
+            if (getprop("sim/current-view/user/default-field-of-view-deg") != nil){
+                setprop("sim/current-view/field-of-view", getprop("sim/current-view/user/default-field-of-view-deg"));
+            } else {
+                setprop("sim/current-view/user/default-field-of-view-deg", getprop("sim/view/config/default-field-of-view-deg"));
+            }
+            if (getprop("sim/current-view/user/pitch-offset-deg") != nil){
+                setprop("sim/current-view/pitch-offset-deg", getprop("sim/current-view/user/pitch-offset-deg"));
+            } else {
+                setprop("sim/current-view/user/pitch-offset-deg", getprop("sim/view/config/pitch-offset-deg"));
+            }
+        }, 1);
+    }
 
     c172_timer.start();
-});
-
-# Set alt alert of KAP 140 autopilot to 20_000 ft to get rid of annoying beep
-setlistener("/autopilot/KAP140/settings/target-alt-ft", func (n) {
-    if (n.getValue() == 0) {
-        kap140.altPreselect = 20000;
-        setprop("/autopilot/KAP140/settings/target-alt-ft", kap140.altPreselect);
-    }
 });
 
 setlistener("/sim/model/c172p/cabin-air-temp-in-range", func (node) {
@@ -737,3 +781,17 @@ setprop("/sim/startup/season-winter", getprop("/sim/startup/season") == "winter"
 setlistener("/sim/startup/season", func (node) {
     setprop("/sim/startup/season-winter", node.getValue() == "winter");
 }, 0, 0);
+
+# rudder trim setting changes, manual or automatic
+setlistener("/sim/model/c172p/ruddertrim-visible", func (node) {
+    if (node.getValue()) {
+        setprop("/controls/flight/rudder-trim", 0);
+    } else
+        setprop("/controls/flight/rudder-trim", 0.02);
+}, 0, 0);
+
+    #fuel tank configuration switch
+    setlistener("/fdm/jsbsim/fuel/tank", func (node) {
+        # Set fuel configuration
+        set_fuel();
+    }, 0, 0);

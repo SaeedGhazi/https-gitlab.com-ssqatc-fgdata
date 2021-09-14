@@ -26,13 +26,13 @@
                 </marker>
                 <condition>
                      <equals>
-                        <property>/sim/model/c172p/brake-parking</property>
+                        <property>/controls/gear/brake-parking</property>
                         <value>1</value>
                     </equals>
                 </condition>
                 <binding>
                     <command>property-assign</command>
-                    <property>/sim/model/c172p/brake-parking</property>
+                    <property>/controls/gear/brake-parking</property>
                     <value>1</value>
                 </binding>
             </item>
@@ -153,16 +153,28 @@
                     <scale>7.4667</scale>
                 </marker>
                 <condition>
-                    <and>
-                        <equals>
-                            <property>/consumables/fuel/tank/selected</property>
-                            <value>1</value>
-                        </equals>
-                        <equals>
-                            <property>/consumables/fuel/tank[1]/selected</property>
-                            <value>1</value>
-                        </equals>
-                    </and>
+                    <or>
+                        <and>
+                            <equals>
+                                <property>/consumables/fuel/tank/selected</property>
+                                <value>1</value>
+                            </equals>
+                            <equals>
+                                <property>/consumables/fuel/tank[1]/selected</property>
+                                <value>1</value>
+                            </equals>
+                        </and>
+                        <and>
+                            <equals>
+                                <property>/consumables/fuel/tank[2]/selected</property>
+                                <value>1</value>
+                            </equals>
+                            <equals>
+                                <property>/consumables/fuel/tank[3]/selected</property>
+                                <value>1</value>
+                            </equals>
+                        </and>
+                    </or>
                 </condition>
                 <binding>
                     <command>property-assign</command>
@@ -172,6 +184,16 @@
                 <binding>
                     <command>property-assign</command>
                     <property>/consumables/fuel/tank[1]/selected</property>
+                    <value>1</value>
+                </binding>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/consumables/fuel/tank[2]/selected</property>
+                    <value>1</value>
+                </binding>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/consumables/fuel/tank[3]/selected</property>
                     <value>1</value>
                 </binding>
             </item>
@@ -534,13 +556,13 @@
             </marker>
             <condition>
                 <equals>
-                    <property>/sim/model/c172p/brake-parking</property>
+                    <property>/controls/gear/brake-parking</property>
                     <value>1</value>
                 </equals>
             </condition>
             <binding>
                 <command>property-assign</command>
-                <property>/sim/model/c172p/brake-parking</property>
+                <property>/controls/gear/brake-parking</property>
                 <value>1</value>
             </binding>
         </item>
@@ -864,13 +886,13 @@
                 </marker>
                 <condition>
                     <equals>
-                        <property>/sim/model/c172p/brake-parking</property>
+                        <property>/controls/gear/brake-parking</property>
                         <value>1</value>
                     </equals>
                 </condition>
                 <binding>
                     <command>property-assign</command>
-                    <property>/sim/model/c172p/brake-parking</property>
+                    <property>/controls/gear/brake-parking</property>
                     <value>1</value>
                 </binding>
             </item>
@@ -1214,7 +1236,7 @@
                 </marker>
                 <condition>
                     <not-equals>
-                        <property>/sim/model/c172p/brake-parking</property>
+                        <property>/controls/gear/brake-parking</property>
                         <value>1</value>
                     </not-equals>
                 </condition>
@@ -2562,7 +2584,7 @@
             </marker>
             <condition>
                 <equals>
-                    <property>/sim/model/c172p/brake-parking</property>
+                    <property>/controls/gear/brake-parking</property>
                     <value>1</value>
                 </equals>
             </condition>

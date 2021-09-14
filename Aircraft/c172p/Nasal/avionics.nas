@@ -91,8 +91,6 @@ aircraft.data.add(
     "instrumentation/adf[0]/rotation-deg",
     "instrumentation/adf[0]/frequencies/dial-1-khz",
     "instrumentation/adf[0]/frequencies/dial-100-khz",
-    "autopilot/KAP140/settings/dial-10-ft",
-    "autopilot/KAP140/settings/dial-100-ft",
 );
 
 # DME saves power-btn in ki266.nas
@@ -134,7 +132,9 @@ aircraft.data.add(
     "/controls/anti-ice/pitot-heat",
     "/consumables/fuel/tank/selected",
     "/consumables/fuel/tank[1]/selected",
-    "/sim/model/c172p/brake-parking",
+    "/consumables/fuel/tank[2]/selected",
+    "/consumables/fuel/tank[3]/selected",
+    "/controls/gear/brake-parking",
     "/controls/flight/flaps",
     "/controls/flight/elevator-trim",
     "/controls/engines/current-engine/throttle",
@@ -144,7 +144,7 @@ aircraft.data.add(
 
 # Circuit breakers
 aircraft.data.add(
-    "/controls/circuit-breakers/aircond",
+    #"/controls/circuit-breakers/aircond",
     "/controls/circuit-breakers/autopilot",
     "/controls/circuit-breakers/bcnlt",
     "/controls/circuit-breakers/flaps",

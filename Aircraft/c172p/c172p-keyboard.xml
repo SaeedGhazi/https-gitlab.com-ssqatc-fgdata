@@ -49,12 +49,12 @@
 
     <key n="79">
         <name>O</name>
-        <desc>Toggle Dome Lighting</desc>
+        <desc>Open aerotow-hook</desc>
         <binding>
-            <command>nasal</command>
-            <script>c172p.toggle_domelight()</script>
+          <command>nasal</command>
+          <script>towing.releaseHitch("aerotow")</script>
         </binding>
-    </key>
+      </key>
 
     <key n="70">
         <name>F</name>
@@ -75,6 +75,39 @@
             <script>c172p.toggle_flashlight()</script>
         </binding>
     </key>
+    
+    <key n="100">
+        <name>d</name>
+        <desc>CWS Button KAP 140</desc>
+        <binding n="20">
+            <command>property-assign</command>
+            <property>autopilot/kap140/settings/cws</property>
+            <value>1</value>
+        </binding>
+        <mod-up>
+            <binding n="20">
+                <command>property-assign</command>
+                <property>autopilot/kap140/settings/cws</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+      </key>
+      <key n="68">
+        <name>D</name>
+        <desc>AP-DISC Button KAP 140</desc>
+        <binding n="20">
+            <command>property-assign</command>
+            <property>autopilot/kap140/settings/ap-disc</property>
+            <value>1</value>
+        </binding>
+        <mod-up>
+            <binding n="20">
+                <command>property-assign</command>
+                <property>autopilot/kap140/settings/ap-disc</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+      </key>
 
     <key n="108">
         <name>l</name>
@@ -87,6 +120,15 @@
             <min>0</min>
             <max>1.0</max>
             <wrap>0</wrap>
+        </binding>
+    </key>
+
+    <key n="111">
+        <name>o</name>
+        <desc>Toggle Dome Lighting</desc>
+        <binding>
+            <command>nasal</command>
+            <script>c172p.toggle_domelight()</script>
         </binding>
     </key>
 
@@ -147,7 +189,7 @@
         <desc>Parking Brakes</desc>
         <binding>
             <command>property-toggle</command>
-            <property>/sim/model/c172p/brake-parking</property>
+            <property>/controls/gear/brake-parking</property>
         </binding>
     </key>
 

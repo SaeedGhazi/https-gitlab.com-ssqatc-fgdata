@@ -5,12 +5,8 @@
     <path>magneto-switch.ac</path>
 
     <effect>
-        <inherits-from>../../../../Effects/interior/lm-magswr</inherits-from>
-        <object-name>key</object-name>
-    </effect>
-
-    <effect>
         <inherits-from>../../../../Effects/interior/lm-magsw</inherits-from>
+        <object-name>key</object-name>
         <object-name>start</object-name>
         <object-name>magsw</object-name>
     </effect>
@@ -21,9 +17,15 @@
         <object-name>start</object-name>
         <object-name>magsw</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/c172p/lighting/rgb-ra-r-factor</red-prop>
@@ -97,6 +99,11 @@
                 <command>property-assign</command>
                 <property>/controls/switches/starter</property>
                 <value>1</value>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/switches/magnetos</property>
+                <value>3</value>
             </binding>
             <binding>
                 <command>nasal</command>

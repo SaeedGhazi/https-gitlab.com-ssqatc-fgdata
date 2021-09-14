@@ -5,12 +5,8 @@
     <path>vac.ac</path>
 
     <effect>
-        <inherits-from>../../../../Effects/interior/lm-vacr</inherits-from>
-        <object-name>VacNeedle</object-name>
-    </effect>
-
-    <effect>
         <inherits-from>../../../../Effects/interior/lm-vac</inherits-from>
+        <object-name>VacNeedle</object-name>
         <object-name>VacFace</object-name>
         <object-name>Case</object-name>
     </effect>
@@ -21,9 +17,15 @@
         <object-name>VacNeedle</object-name>
         <object-name>Case</object-name>
         <condition>
-            <not>
-                <property>/sim/rendering/shaders/skydome</property>
-            </not>
+            <or>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
+				<equals>
+					<property>/sim/rendering/shaders/model</property>
+					<value>0</value>
+				</equals>
+			</or>
         </condition>
         <emission>
             <red-prop>/sim/model/material/instruments/default-red-combined-factor</red-prop>

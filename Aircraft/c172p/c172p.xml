@@ -57,7 +57,7 @@
         <location name="CG" unit="IN">
             <x> 39.06 </x>
             <y> 0 </y>
-            <z> 36.5 </z>
+            <z> 34 </z>
         </location>
 
         <pointmass name="Pilot">
@@ -574,7 +574,7 @@
                 <pitch> 0 </pitch>
                 <yaw> 0 </yaw>
             </orient>
-            <feed>2</feed> <!-- from intermediate tank (float chamber 2) -->
+            <feed>4</feed> <!-- from intermediate tank (float chamber 4) -->
             <thruster file="prop_75in2f">
             <!-- <thruster file="prop_75in_2f_NACA_15-30deg"> --> <!-- for settling -->
                 <location unit="IN">
@@ -603,7 +603,7 @@
                 <pitch> 0 </pitch>
                 <yaw> 0 </yaw>
             </orient>
-            <feed>3</feed> <!-- from intermediate tank (float chamber 3) -->
+            <feed>4</feed> <!-- from intermediate tank (float chamber 4) -->
             <thruster file="prop_76in2f_NACA_20deg">
             <!-- <thruster file="prop_76in2f_NACA_15-25deg"> --> <!-- for settling -->
                 <location unit="IN">
@@ -624,33 +624,57 @@
         <!-- Tank number 0 -->
         <tank type="FUEL">
             <location unit="IN">
-                <x> 56 </x>
-                <y> -112 </y>
-                <z> 59.4 </z>
+                <x> 48 </x>
+                <y>-44 </y>
+                <z> 55 </z>
             </location>
             <capacity unit="LBS">129.43</capacity>
-            <contents unit="LBS">100.0 </contents>
+            <contents unit="LBS">0.0 </contents>
             <type>AVGAS</type>
         </tank>
 
         <!-- Tank number 1 -->
         <tank type="FUEL">
             <location unit="IN">
-                <x> 56 </x>
-                <y> 112 </y>
-                <z> 59.4 </z>
+                <x> 48 </x>
+                <y> 44 </y>
+                <z> 55 </z>
             </location>
             <capacity unit="LBS">129.43</capacity>
-            <contents unit="LBS">100.0 </contents>
+            <contents unit="LBS">0.0 </contents>
             <type>AVGAS</type>
         </tank>
 
-        <!-- Tank number 2, Float chamber  -->
+        <!-- Tank number 2 -->
         <tank type="FUEL">
             <location unit="IN">
-                <x> 56 </x>
-                <y> 0 </y>
-                <z> 59.4 </z>
+                <x> 48 </x>
+                <y>-44 </y>
+                <z> 55 </z>
+            </location>
+            <capacity unit="LBS">204</capacity>
+            <contents unit="LBS">0.0 </contents>
+            <type>AVGAS</type>
+        </tank>
+
+        <!-- Tank number 3 -->
+        <tank type="FUEL">
+            <location unit="IN">
+                <x> 48 </x>
+                <y> 44 </y>
+                <z> 55 </z>
+            </location>
+            <capacity unit="LBS">204</capacity>
+            <contents unit="LBS">0.0 </contents>
+            <type>AVGAS</type>
+        </tank>
+
+        <!-- Tank number 4, Float chamber  -->
+        <tank type="FUEL">
+            <location unit="IN">
+                <x>-10 </x>
+                <y>  0 </y>
+                <z> 26 </z>
             </location>
             <capacity unit="LBS">0.1</capacity>
             <contents unit="LBS">0.0</contents>
@@ -658,18 +682,6 @@
             <type>AVGAS</type>
         </tank>
 
-        <!-- Tank number 3, Float chamber  -->
-        <tank type="FUEL">
-            <location unit="IN">
-                <x> 56 </x>
-                <y> 0 </y>
-                <z> 59.4 </z>
-            </location>
-            <capacity unit="LBS">0.1</capacity>
-            <contents unit="LBS">0.0</contents>
-            <priority>1</priority>
-            <type>AVGAS</type>
-        </tank>
     </propulsion>
 
     <flight_control name="FCS: c172">
@@ -810,19 +822,6 @@
                 <output>/sim/model/c172p/cockpit/pedals-rudder</output>
             </kinematic>
 
-            <fcs_function name="fcs/yaw-trim-cockpit">
-                <function>
-                    <table>
-                        <independentVar lookup="row">/controls/flight/rudder-trim-knob</independentVar>
-                        <tableData>
-                            -.18    0.20
-                            0.00    0.00
-                             .18   -0.20
-                        </tableData>
-                    </table>
-                </function>
-            </fcs_function>
-
             <summer name="Yaw Trim Sum">
                 <input>fcs/rudder-cmd-norm-filtered</input>
                 <input>fcs/yaw-trim-cmd-norm</input>
@@ -856,6 +855,34 @@
                 <output>fcs/rudder-pos-norm</output>
             </aerosurface_scale>
 
+        </channel>
+
+        <channel name="Braking">      
+            <summer name="fcs/parking-brake-sum">
+                <input>/sim/model/c172p/securing/chock-visible</input>
+                <input>/fdm/jsbsim/damage/repairing</input>
+                <input>/controls/gear/brake-parking</input>
+            </summer>
+            
+            <fcs_function name="fcs/left-brake-sum">
+                <function>
+                    <max>
+                        <property>fcs/parking-brake-sum</property>
+                        <property>/controls/gear/brake-left</property>
+                    </max>
+                </function>
+                <output>fcs/left-brake-cmd-norm</output>
+            </fcs_function>
+            
+            <fcs_function name="fcs/right-brake-sum">
+                <function>
+                    <max>
+                        <property>fcs/parking-brake-sum</property>
+                        <property>/controls/gear/brake-right</property>
+                    </max>
+                </function>
+                <output>fcs/right-brake-cmd-norm</output>
+            </fcs_function>
         </channel>
 
         <channel name="NWS">
@@ -2119,6 +2146,18 @@
             </direction>
         </force>
 
+        <force name="hitch" frame="BODY" unit="LBS" >
+            <location unit="M">
+                <x> 4.7116</x>
+                <y> 0.0000</y>
+                <z>-0.6663</z>
+            </location>
+            <direction>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </direction>
+        </force>
     </external_reactions>
 
     <system file="bushkit"/>

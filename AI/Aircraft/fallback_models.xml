@@ -50,7 +50,7 @@
 <!-- 51-100 Multi-engine GA aircraft -->
 <model n="51" type="string">AI/Aircraft/beech-200/beech-200-234.xml</model>
 <model n="52" type="string">AI/Aircraft/beech99/Models/beech99-ai.xml</model>
-<model n="53" type="string">AI/Aircraft/BN-2/BN-2-Loganair.xml</model>
+<model n="53" type="string">AI/Aircraft/BNI/BNI-LoganAir.xml</model>
 <model n="54" type="string">AI/Aircraft/c310/Models/c310-ai.xml</model>
 <model n="55" type="string">AI/Aircraft/c310u3a/Models/c310u3a-ai.xml</model>
 <model n="56" type="string">AI/Aircraft/Cessna337/Models/Cessna337-N53472ai.xml</model>

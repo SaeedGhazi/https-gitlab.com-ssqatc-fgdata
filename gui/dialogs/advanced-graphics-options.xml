@@ -1125,6 +1125,7 @@
           <name>cloud-density</name>
           <min>0</min>
           <max>1.0</max>
+          <step>0.05</step>
           <property>/sim/rendering/clouds3d-density</property>
           <binding>
             <command>dialog-apply</command>

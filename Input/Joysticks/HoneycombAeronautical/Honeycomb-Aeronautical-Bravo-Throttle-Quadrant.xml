@@ -93,7 +93,8 @@ FlightGear 2020.3.6
 
 <PropertyList>
   <name type="string">Honeycomb Aeronautical Bravo Throttle Quadrant</name>
-
+  
+  <!--
   <axis>
     <desc type="string">Throttle Engine 1</desc>
     <binding>
@@ -367,7 +368,7 @@ FlightGear 2020.3.6
     </binding>
     <repeatable type="double">1</repeatable>
   </button>
-
+  -->
  
 
 </PropertyList>

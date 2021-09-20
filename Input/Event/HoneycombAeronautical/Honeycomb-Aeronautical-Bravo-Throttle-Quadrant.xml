@@ -421,6 +421,7 @@ FlightGear 2020.3.6
           node = props.globals.getNode("/gear/gear/wow", 1);
             if ( !node.getValue() ) {
                 controls.gearDown(-1);
+            }
       </script>
     </binding>
   </event>

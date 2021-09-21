@@ -408,6 +408,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <mode type="string" userarchive="y">AUTOMATIC</mode>
       <swapchain-mode type="string" userarchive="y">AUTOMATIC</swapchain-mode>
       <validation-layer type="bool" userarchive="y">false</validation-layer>
+      <visibility-mask type="bool" userarchive="y">true</visibility-mask>
     </vr>
     <model-hz type="int">120</model-hz>
     <sound>

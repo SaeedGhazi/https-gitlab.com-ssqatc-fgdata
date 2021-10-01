@@ -11,39 +11,6 @@
 
 <PropertyList>
 
-<material n="3000">
-  <name>ws30land</name>
-  <effect>Effects/ws30</effect>
-  <xsize>2000</xsize>
-  <ysize>2000</ysize>
-  <light-coverage>4000000.0</light-coverage>
-  <diffuse>
-   <r>0.93</r>
-   <g>0.95</g>
-   <b>0.93</b>
-   <a>1.0</a>
-  </diffuse>
-  <specular>
-   <r>0.1</r>
-   <g>0.12</g>
-   <b>0.1</b>
-   <a>1.0</a>
-  </specular>
-  <shininess>1.2</shininess>
-  <solid>1</solid>
-  <friction-factor>0.7</friction-factor>
-  <rolling-friction>0.1</rolling-friction>
-  <bumpiness>0.15</bumpiness>
-  <load-resistance>1e30</load-resistance>
-</material>
-
-<material n="3001" include="Materials/base/water.xml">
-  <name>ws30water</name>
-  <name>ws30coastline</name>
-  <effect>Effects/ws30water</effect>
-  <texture>Terrain/water.png</texture>
-</material>
-
 <!-- Signage -->
 
 <material n="1000">
@@ -628,6 +595,145 @@
 <material n="2103">
   <name>OSM_Railway</name>
   <effect>Effects/road-high</effect>
+</material>
+
+<!--  WS3.0 Definitions-->
+
+<material n="3000">
+  <name>ws30land</name>
+  <effect>Effects/ws30</effect>
+  <xsize>2000</xsize>
+  <ysize>2000</ysize>
+  <light-coverage>4000000.0</light-coverage>
+  <diffuse>
+   <r>0.93</r>
+   <g>0.95</g>
+   <b>0.93</b>
+   <a>1.0</a>
+  </diffuse>
+  <specular>
+   <r>0.1</r>
+   <g>0.12</g>
+   <b>0.1</b>
+   <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>1</solid>
+  <friction-factor>0.7</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.15</bumpiness>
+  <load-resistance>1e30</load-resistance>
+</material>
+
+<material n="3001" include="Materials/base/water.xml">
+  <name>ws30water</name>
+  <name>ws30coastline</name>
+  <effect>Effects/ws30water</effect>
+  <texture>Terrain/water.png</texture>
+</material>
+
+<material n="3002">
+  <name>ws30Road</name>
+  <texture>osm2city/roads.png</texture>
+  <!--<effect>Effects/road-high</effect>-->
+  <line-feature-tex-x0>0.25</line-feature-tex-x0>
+  <line-feature-tex-x1>0.375</line-feature-tex-x1>
+  <line-feature-offset-m>0.75</line-feature-offset-m>
+  <ysize>32</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+  <light-edge-spacing-m>20</light-edge-spacing-m>
+  <light-edge-height-m>5.0</light-edge-height-m>
+  <light-edge-intensity-cd>50</light-edge-intensity-cd>
+  <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
+  <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
+  <light-edge-color>
+    <!-- Sodium Vapour -->
+    <r>1.0</r>
+    <g>0.82</g>
+    <b>0.7</b>
+    <a>1.0</a>
+  </light-edge-color>
+</material>
+
+<material n="3003">
+  <name>ws30Freeway</name>
+  <texture>osm2city/roads.png</texture>
+  <line-feature-tex-x0>0.625</line-feature-tex-x0>
+  <line-feature-tex-x1>0.75</line-feature-tex-x1>
+  <line-feature-offset-m>1.0</line-feature-offset-m>
+  <ysize>32</ysize>
+  <light-coverage>10000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>1.0</friction-factor>
+  <rolling-friction>0.02</rolling-friction>
+  <bumpiness>0.01</bumpiness>
+  <load-resistance>1e10</load-resistance>
+  <light-edge-spacing-m>20</light-edge-spacing-m>
+  <light-edge-height-m>10.0</light-edge-height-m>
+  <light-edge-intensity-cd>50</light-edge-intensity-cd>
+  <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
+  <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
+  <light-edge-offset>false</light-edge-offset>
+  <light-edge-color>
+    <!-- Mercury Vapour -->
+    <r>0.84</r>
+    <g>0.97</g>
+    <b>1.0</b>
+    <a>1.0</a>
+  </light-edge-color>
+</material>
+
+<material n="3004">
+  <effect>Effects/water-inland</effect>
+  <name>ws30River</name>
+  <texture>Terrain/water-lake.png</texture>
+  <line-feature-tex-x0>0.0</line-feature-tex-x0>
+  <line-feature-tex-x1>0.1</line-feature-tex-x1>
+  <line-feature-offset-m>0.25</line-feature-offset-m>
+  <xsize>400</xsize>
+  <ysize>400</ysize>
+  <ambient>
+    <r>0.0</r>
+    <g>0.0</g>
+    <b>0.0</b>
+    <a>1.0</a>
+  </ambient>
+  <diffuse>
+    <r>0.5</r>
+    <g>0.5</g>
+    <b>0.5</b>
+    <a>1.0</a>
+  </diffuse>
+  <specular>
+    <r>0.3</r>
+    <g>0.3</g>
+    <b>0.3</b>
+    <a>1.0</a>
+  </specular>
+  <shininess>1.2</shininess>
+  <solid>0</solid>
+  <rolling-friction>1.5</rolling-friction>
+  <bumpiness>0.6</bumpiness>
+</material>
+
+<material n="3005">
+  <name>ws30Railway</name>
+  <texture>osm2city/roads.png</texture>
+  <line-feature-tex-x0>0</line-feature-tex-x0>
+  <line-feature-tex-x1>0.125</line-feature-tex-x1>
+  <line-feature-offset-m>0.5</line-feature-offset-m>
+  <ysize>32</ysize>
+  <light-coverage>1000000.0</light-coverage>
+  <solid>1</solid>
+  <friction-factor>0.5</friction-factor>
+  <rolling-friction>0.04</rolling-friction>
+  <bumpiness>0.5</bumpiness>
+  <load-resistance>1e10</load-resistance>
 </material>
 
 </PropertyList>

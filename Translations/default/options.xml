@@ -193,6 +193,9 @@
 	<time-match-real-desc>Synchronize time with real-world time</time-match-real-desc>
 	<time-match-local-desc>Synchronize time with local real-world time</time-match-local-desc>
 	<start-date-desc>Specify a starting date/time with respect to</start-date-desc>
+	<system-time>system time</system-time>
+	<gmt>GMT</gmt>
+	<local-aircraft-time>local aircraft time</local-aircraft-time>
 
 	<!-- Network options -->
 	<network-options>Network Options</network-options>

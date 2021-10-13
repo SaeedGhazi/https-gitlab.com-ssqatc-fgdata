@@ -5,7 +5,7 @@
 <!-- Style tips:  Aim to keep to a single phrase/sentence which is not terminated with a . -->
 <PropertyList>
 	<tip n="0">Drag while holding the right mouse button to look around</tip>
-	<tip n="1">Hold [Shift] while looking around to move the view up, down, left or right</tip>
+	<tip n="1">Hold Ctrl while looking around to move the view up, down, left or right</tip>
 	<tip n="2">Press a/A to adjust the simulation speed</tip>
 	<tip n="3">Press x/X to zoom in and out</tip>
 	<tip n="4">Find frequencies of nearby ATC services from the Radios dialog</tip>

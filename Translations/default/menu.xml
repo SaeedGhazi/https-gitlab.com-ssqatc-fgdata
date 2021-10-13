@@ -130,7 +130,6 @@
 	<print-scene-info>Print Visible Scene Info</print-scene-info>
 	<rendering-buffers>Hide/Show Rendering Buffers</rendering-buffers>
 	<rembrandt-buffers-choice>Select Rendering Buffers</rembrandt-buffers-choice>
-	<interface-config>User-interface Options</interface-config>
 	<cycle-gui>Cycle GUI Style</cycle-gui>
 
 	<!-- Help menu -->
@@ -141,6 +140,7 @@
 	<aircraft-checklists>Aircraft Checklists</aircraft-checklists>
 	<common-keys>Common Aircraft Keys</common-keys>
 	<basic-keys>Basic Simulator Keys</basic-keys>
+	<highlighting>Highlighting</highlighting>
 	<joystick-info>Joystick Information</joystick-info>
 	<tutorial-start>Tutorials</tutorial-start>
 	<menu-about>About</menu-about>

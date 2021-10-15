@@ -636,7 +636,7 @@ top down before the key bindings are parsed.
              <command>property-assign</command>
              <command>property-adjust</command>
              <property>/controls/flight/aileron-trim</property>
-             <step type="double">-0.01</step>
+             <step type="double">0.01</step>
          </binding>
      </mod-ctrl>
  </key>

@@ -20,7 +20,7 @@
 	<fg-aircraft-desc>Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</fg-aircraft-desc>
 	<download-dir-desc>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</download-dir-desc>
 	<language-desc>Select the language for this session</language-desc>
-	<load-tape-desc>Load recording of earlier flightgear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</load-tape-desc>
+	<load-tape-desc>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</load-tape-desc>
 	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
 	<enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
 	<restore-defaults-desc>Reset all user settings to their defaults (rendering options etc)</restore-defaults-desc>
@@ -55,10 +55,17 @@
 	<browser-app-desc>Specify path to your web browser</browser-app-desc>
 	<prop-desc>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool.</prop-desc>
 	<config-desc>Load additional properties from path</config-desc>
+	<no-default-config-desc>Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</no-default-config-desc>
+	<allow-nasal-read-desc>Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</allow-nasal-read-desc>
+	<read-only-desc>Make $FG_HOME read-only</read-only-desc>
+	<ignore-autosave-desc>Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</ignore-autosave-desc>
 	<units-feet-desc>Use feet for distances</units-feet-desc>
 	<units-meters-desc>Use meters for distances</units-meters-desc>
-	<console-desc>Display console (Windows specific)</console-desc>
 	<json-report-desc>Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</json-report-desc>
+	<disable-gui-desc>Enable headless mode</disable-gui-desc>
+	<jsbsim-output-directive-file-desc>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type="CSV"&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</jsbsim-output-directive-file-desc>
+	<data-desc>Specify an additional base data directory (FGData), before the $FG_ROOT directory</data-desc>
+	<addon-desc>Specify a path to addon;</addon-desc>
 
 	<!-- Features options -->
 	<environment-options>Environment Options</environment-options>
@@ -73,14 +80,16 @@
 	<enable-hud-3d-desc>Enable 3D HUD</enable-hud-3d-desc>
 	<disable-vr-desc>Disable VR</disable-vr-desc>
 	<enable-vr-desc>Enable VR</enable-vr-desc>
+	<restart-launcher-desc>Open Launcher automatically when exiting FlightGear</restart-launcher-desc>
 
 	<!-- Aircraft options -->
 	<aircraft-options>Aircraft</aircraft-options>
 	<aircraft-desc>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</aircraft-desc>
+	<vehicle-desc>Same as the --aircraft option</vehicle-desc>
 	<show-aircraft-desc>Print a list of the currently available aircraft types</show-aircraft-desc>
 	<min-aircraft-status>Allows you to define a minimum status level (=development status) for all listed aircraft</min-aircraft-status>
-	<vehicle-desc>Select an vehicle profile as defined by a top level &lt;name&gt;-set.xml</vehicle-desc>
 	<livery-desc>Select aircraft livery</livery-desc>
+	<state-desc>Specify the initial state of the aircraft to the given value</state-desc>
 
 	<!-- Flight Dynamics Model options -->
 	<fdm-options>Flight Model</fdm-options>
@@ -101,22 +110,20 @@
 	<ceiling-desc>Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</ceiling-desc>
 	<aircraft-dir-desc>Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</aircraft-dir-desc>
 
-	<aircraft-model-options>Aircraft model directory (UIUC FDM ONLY)</aircraft-model-options>
-
 	<!-- Position and Orientation options -->
 	<position-options>Initial Position and Orientation</position-options>
 	<airport-desc>Specify starting position relative to an airport</airport-desc>
 	<parking-id-desc>Specify parking position at an airport (must also specify an airport)</parking-id-desc>
+	<parkpos-desc>Same as the --parking-id option</parkpos-desc>
 	<carrier-desc>Specify starting position on an AI carrier</carrier-desc>
-	<carrier-abeam-desc>Start on downwind abeam the selected carrier (must also specify a carrier)</carrier-abeam-desc>
-	<parkpos-desc>Specify which starting position on an AI carrier (must also specify a carrier)</parkpos-desc>
+	<carrier-position-desc>Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier's parking position. Must also specify a carrier.</carrier-position-desc>
 	<vor-desc>Specify starting position relative to a VOR</vor-desc>
 	<vor-freq-desc>Specify the frequency of the VOR. Use with --vor=ID</vor-freq-desc>
 	<ndb-desc>Specify starting position relative to an NDB</ndb-desc>
 	<ndb-freq-desc>Specify the frequency of the NDB. Use with --ndb=ID</ndb-freq-desc>
 	<fix-desc>Specify starting position relative to a fix</fix-desc>
 	<runway-no-desc>Specify starting runway (must also specify an airport)</runway-no-desc>
-	<offset-distance-desc>Specify distance to reference point (statute miles)</offset-distance-desc>
+	<offset-distance-desc>Specify distance to reference point (nautical miles)</offset-distance-desc>
 	<offset-azimuth-desc>Specify heading to reference point</offset-azimuth-desc>
 	<lon-desc>Starting longitude (west = -)</lon-desc>
 	<lat-desc>Starting latitude (south = -)</lat-desc>
@@ -134,8 +141,9 @@
 	<mach-desc>Specify initial mach number</mach-desc>
 	<glideslope-desc>Specify flight path angle (can be positive)</glideslope-desc>
 	<roc-desc>Specify initial climb rate (can be negative)</roc-desc>
+	<disable-hold-short-desc>Disable the move to hold short position for multiplayer</disable-hold-short-desc>
 
-	<!-- sound options -->
+	<!-- Audio options -->
 	<audio-options>Audio Options</audio-options>
 	<disable-sound-desc>Disable sound effects</disable-sound-desc>
 	<enable-sound-desc>Enable sound effects</enable-sound-desc>
@@ -144,8 +152,8 @@
 
 	<!-- Rendering options -->
 	<rendering-options>Rendering Options</rendering-options>
-	<enable-rembrandt-desc>Enable Rembrandt rendering</enable-rembrandt-desc>
-	<disable-rembrandt-desc>Disable Rembrandt rendering</disable-rembrandt-desc>
+	<graphics-preset-desc>Set graphic options from one of the presets</graphics-preset-desc>
+	<compositor-desc>Specify the path to XML file for multi-pass rendering. The path is relative to $FG_ROOT (defaults to Compositor/default.xml).</compositor-desc>
 	<bpp-desc>Specify the bits per pixel</bpp-desc>
 	<fog-disable-desc>Disable fog/haze</fog-disable-desc>
 	<fog-fastest-desc>Enable fastest fog/haze</fog-fastest-desc>
@@ -171,14 +179,23 @@
 	<disable-textures-desc>Disable textures</disable-textures-desc>
 	<enable-textures-desc>Enable textures</enable-textures-desc>
 	<materials-file-desc>Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</materials-file-desc>
-	<texture-filtering-desc>Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16</texture-filtering-desc>
+	<texture-filtering-desc>Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</texture-filtering-desc>
 	<disable-wireframe-desc>Disable wireframe drawing mode</disable-wireframe-desc>
 	<enable-wireframe-desc>Enable wireframe drawing mode</enable-wireframe-desc>
 	<geometry-desc>Specify window geometry (640x480, etc)</geometry-desc>
 	<view-offset-desc>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</view-offset-desc>
-	<visibility-desc>Specify initial visibility</visibility-desc>
-	<visibility-miles-desc>Specify initial visibility in miles</visibility-miles-desc>
+	<visibility-desc>Specify initial visibility in meters</visibility-desc>
+	<visibility-miles-desc>Specify initial visibility in statute miles</visibility-miles-desc>
 	<max-fps-desc>Maximum frame rate in Hz.</max-fps-desc>
+	<disable-texture-cache-desc>Disable texture cache (DDS)</disable-texture-cache-desc>
+	<enable-texture-cache-desc>Enable texture cache (DDS)</enable-texture-cache-desc>
+	<texture-cache-dir-desc>Specify the DDS texture cache directory to be different than the default location</texture-cache-dir-desc>
+	<terrain-engine-desc>Specify the terrain engine you want to use: tilecache or pagedLOD</terrain-engine-desc>
+	<lod-levels-desc>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is "1 3 5 7 9".</lod-levels-desc>
+	<lod-res-desc>Specify the resolution of the terrain grid. Defaults is 1.</lod-res-desc>
+	<lod-texturing-desc>Specify the method of texturing the terrain. The default is bluemarble.</lod-texturing-desc>
+	<lod-range-mult-desc>Specify the range multiplier (point from low to fine detail). Defaults is 2.</lod-range-mult-desc>
+	<use-with-terrain-engine-pagedlod>Use with --terrain-engine=pagedLOD</use-with-terrain-engine-pagedlod>
 
 	<!-- Hud options -->
 	<hud-options>Hud Options</hud-options>
@@ -188,7 +205,6 @@
 	<!-- Time options -->
 	<time-options>Time Options</time-options>
 	<timeofday-desc>Specify a time of day</timeofday-desc>
-	<season-desc>Specify the startup season</season-desc>
 	<time-offset-desc>Add this time offset</time-offset-desc>
 	<time-match-real-desc>Synchronize time with real-world time</time-match-real-desc>
 	<time-match-local-desc>Synchronize time with local real-world time</time-match-local-desc>
@@ -208,11 +224,14 @@
 	<terrasync-dir-desc>Set target directory for scenery downloads</terrasync-dir-desc>
 	<enable-fgcom-desc>Enable FGCom built-in</enable-fgcom-desc>
 	<disable-fgcom-desc>Disable FGCom built-in</disable-fgcom-desc>
+	<allow-nasal-from-sockets-desc>Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</allow-nasal-from-sockets-desc>
+	<disable-sentry-desc>Disable crash and error reports from being sent to the development team for analysis</disable-sentry-desc>
+	<enable-sentry-desc>Enable crash and error reports to be sent to the development team for analysis</enable-sentry-desc>
 
 	<!-- MultiPlayer options -->
 	<multiplayer-options>MultiPlayer Options</multiplayer-options>
-	<multiplay-desc>Specify multipilot communication settings</multiplay-desc>
-	<callsign-desc>assign a unique name to a player</callsign-desc>
+	<multiplay-desc>Specify multipilot communication settings;</multiplay-desc>
+	<callsign-desc>Assign a unique name to a player</callsign-desc>
 
 	<!-- Route/Way Point Options -->
 	<route-options>Route/Way Point Options</route-options>
@@ -223,6 +242,8 @@
 	<io-options>IO Options</io-options>
 	<AV400-desc>Emit the Garmin AV400 protocol required to drive a Garmin 196/296 series GPS</AV400-desc>
 	<AV400Sim-desc>Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear</AV400Sim-desc>
+	<AV400WSimA-desc>Open connection for "A" channel using Garmin WAAS GPS protocol</AV400WSimA-desc>
+	<AV400WSimB-desc>Open connection for "B" channel using Garmin WAAS GPS protocol</AV400WSimB-desc>
 	<atlas-desc>Open connection using the Atlas protocol</atlas-desc>
 	<atcsim-desc>Open connection using the ATC sim protocol (atc610x)</atcsim-desc>
 	<flarm-desc>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</flarm-desc>
@@ -251,11 +272,14 @@
 	<adf2-desc>Set the ADF2 radio frequency, optionally preceded by a card rotation.</adf2-desc>
 	<dme-desc>Slave the DME to one of the NAV radios, or set its internal frequency.</dme-desc>
 
+	<!-- Situation Options -->
 	<situation-options>Situation Options</situation-options>
 	<failure-desc>Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures).</failure-desc>
 
 	<!-- Debugging Options -->
 	<debugging-options>Debugging Options</debugging-options>
+	<console-desc>Display console (Windows specific)</console-desc>
+	<developer-desc>Enable developer mode</developer-desc>
 	<fpe-desc>Abort on encountering a floating point exception;</fpe-desc>
 	<fgviewer-desc>Use a model viewer rather than load the entire simulator;</fgviewer-desc>
 	<trace-read-desc>Trace the reads for a property;</trace-read-desc>
@@ -263,5 +287,8 @@
 	<log-level-desc>Specify which logging level to use</log-level-desc>
 	<log-class-desc>Specify which logging class(es) to use</log-class-desc>
 	<log-dir-desc>Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc.</log-dir-desc>
+	<uninstall-desc>Remove $FG_HOME directory. For Windows, it additionally removes TerraSync, Aircraft and TextureCache directories from download directory.</uninstall-desc>
+
+	<multiple-instance>multiple instances can be used</multiple-instance>
 
 </PropertyList>

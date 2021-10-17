@@ -51,17 +51,10 @@
     <description>help-desc</description>
     <brief/>
    </option>
-   
+
    <option>
     <name>launcher</name>
     <description>launcher-desc</description>
-    <brief/>
-   </option>
-
-   <option>
-    <name>composite-viewer</name>
-    <description>composite-viewer-desc</description>
-    <arg>1</arg>
     <brief/>
    </option>
 
@@ -99,6 +92,19 @@
    </option>
 
    <option>
+    <name>data</name>
+    <arg>path</arg>
+    <description>data-desc</description>
+   </option>
+
+   <option>
+    <name>addon</name>
+    <arg>path</arg>
+    <description>addon-desc</description>
+    <description>multiple-instance</description>
+   </option>
+
+   <option>
     <name>download-dir</name>
     <arg>path</arg>
     <description>download-dir-desc</description>
@@ -114,7 +120,7 @@
 
    <option>
     <name>load-tape</name>
-    <arg>&lt;name&gt; | &lt;url&gt;</arg>
+    <arg>{name|url}</arg>
     <description>load-tape-desc</description>
     <brief/>
    </option>
@@ -153,6 +159,27 @@
    </option>
 
    <option>
+    <name>no-default-config</name>
+    <description>no-default-config-desc</description>
+   </option>
+
+   <option>
+    <name>allow-nasal-read</name>
+    <arg>path</arg>
+    <description>allow-nasal-read-desc</description>
+   </option>
+
+   <option>
+    <name>read-only</name>
+    <description>read-only-desc</description>
+   </option>
+
+   <option>
+    <name>ignore-autosave</name>
+    <description>ignore-autosave-desc</description>
+   </option>
+
+   <option>
     <name>units-feet</name>
     <description>units-feet-desc</description>
    </option>
@@ -163,19 +190,32 @@
    </option>
 
    <option>
-    <name>console</name>
-    <description>console-desc</description>
+    <name>json-report</name>
+    <description>json-report-desc</description>
    </option>
 
    <option>
-    <name>json-report</name>
-    <description>json-report-desc</description>
+    <name>disable-gui</name>
+    <description>disable-gui-desc</description>
+   </option>
+
+   <option>
+    <name>jsbsim-output-directive-file</name>
+    <arg>file</arg>
+    <description>jsbsim-output-directive-file-desc</description>
    </option>
 
   </section>
 
   <section>
    <name>features-options</name>
+
+   <option>
+    <name>composite-viewer</name>
+    <description>composite-viewer-desc</description>
+    <arg>{1|0}</arg>
+    <brief/>
+   </option>
 
    <option>
     <name>disable-panel</name>
@@ -330,9 +370,8 @@
    </option>
 
    <option>
-    <name>failure</name>
-    <arg>{pitot|static|vacuum|electrical}</arg>
-    <description>failure-desc</description>
+    <name>restart-launcher</name>
+    <description>restart-launcher-desc</description>
    </option>
 
   </section>
@@ -364,6 +403,19 @@
 
   <section>
    <name>rendering-options</name>
+
+   <option>
+    <name>graphics-preset</name>
+    <arg>{minimal-quality|low-quality|medium-quality|high-quality|
+        ultra-quality}</arg>
+    <description>graphics-preset-desc</description>
+   </option>
+
+   <option>
+    <name>compositor</name>
+    <arg>path</arg>
+    <description>compositor-desc</description>
+   </option>
 
    <option>
     <name>disable-splash-screen</name>
@@ -518,6 +570,55 @@
     <description>view-offset-desc</description>
    </option>
 
+   <option>
+    <name>disable-texture-cache</name>
+    <description>disable-texture-cache-desc</description>
+   </option>
+
+   <option>
+    <name>enable-texture-cache</name>
+    <description>enable-texture-cache-desc</description>
+   </option>
+
+   <option>
+    <name>texture-cache-dir</name>
+    <description>texture-cache-dir-desc</description>
+   </option>
+
+   <option>
+    <name>terrain-engine</name>
+    <arg>{tilecache|pagedLOD}</arg>
+    <description>terrain-engine-desc</description>
+   </option>
+
+   <option>
+    <name>lod-levels</name>
+    <arg>levels</arg>
+    <description>lod-levels-desc</description>
+    <description>use-with-terrain-engine-pagedlod</description>
+   </option>
+
+   <option>
+    <name>lod-res</name>
+    <arg>resolution</arg>
+    <description>lod-res-desc</description>
+    <description>use-with-terrain-engine-pagedlod</description>
+   </option>
+
+   <option>
+    <name>lod-texturing</name>
+    <arg>{bluemarble|raster|debug}</arg>
+    <description>lod-texturing-desc</description>
+    <description>use-with-terrain-engine-pagedlod</description>
+   </option>
+
+   <option>
+    <name>lod-range-mult</name>
+    <arg>multiplier</arg>
+    <description>lod-range-mult-desc</description>
+    <description>use-with-terrain-engine-pagedlod</description>
+   </option>
+
   </section>
 
   <section>
@@ -528,6 +629,12 @@
     <arg>name</arg>
     <description>aircraft-desc</description>
     <brief/>
+   </option>
+
+   <option>
+     <name>vehicle</name>
+     <arg>name</arg>
+     <description>vehicle-desc</description>
    </option>
 
    <option>
@@ -544,7 +651,7 @@
 
    <option>
     <name>min-status</name>
-    <arg>{alpha,beta,early-production,production}</arg>
+    <arg>{alpha|beta|early-production|production}</arg>
     <description>min-aircraft-status</description>
     <brief/>
    </option>
@@ -610,9 +717,9 @@
    </option>
 
    <option>
-     <name>vehicle</name>
-     <arg>name</arg>
-     <description>vehicle-desc</description>
+     <name>state</name>
+     <arg>value</arg>
+     <description>state-desc</description>
    </option>
   </section>
 
@@ -621,7 +728,7 @@
 
    <option>
     <name>timeofday</name>
-    <arg>{real,dawn,morning,noon,afternoon,dusk,evening,midnight}</arg>
+    <arg>{real|dawn|morning|noon|afternoon|dusk|evening|midnight}</arg>
     <description>timeofday-desc</description>
    </option>
 
@@ -681,6 +788,12 @@
    </option>
 
    <option>
+    <name>parkpos</name>
+    <arg>name</arg>
+    <description>parkpos-desc</description>
+   </option>
+
+   <option>
     <name>runway</name>
     <arg>rwy_no</arg>
     <description>runway-no-desc</description>
@@ -689,22 +802,16 @@
 
    <option>
     <name>carrier</name>
-    <arg>[name|ID]</arg>
+    <arg>{name|ID}</arg>
     <description>carrier-desc</description>
     <brief/>
    </option>
 
    <option>
-    <name>carrier-abeam</name>
-    <arg>[true|false]</arg>
-    <description>carrier-abeam-desc</description>
+    <name>carrier-position</name>
+    <arg>{abeam|FLOLS|name}</arg>
+    <description>carrier-position-desc</description>
     <brief/>
-   </option>
-
-   <option>
-    <name>parkpos</name>
-    <arg>name</arg>
-    <description>parkpos-desc</description>
    </option>
 
    <option>
@@ -850,6 +957,11 @@
     <name>roc</name>
     <arg>fpm</arg>
     <description>roc-desc</description>
+   </option>
+
+   <option>
+    <name>disable-hold-short</name>
+    <description>disable-hold-short-desc</description>
    </option>
 
   </section>
@@ -1059,6 +1171,20 @@
     <description>disable-fgcom-desc</description>
    </option>
 
+   <option>
+    <name>allow-nasal-from-sockets</name>
+    <description>allow-nasal-from-sockets-desc</description>
+   </option>
+
+   <option>
+    <name>disable-sentry</name>
+    <description>disable-sentry-desc</description>
+   </option>
+
+   <option>
+    <name>enable-sentry</name>
+    <description>enable-sentry-desc</description>
+   </option>
   </section>
 
   <section>
@@ -1092,6 +1218,18 @@
     <name>AV400Sim</name>
     <arg>params</arg>
     <description>AV400Sim-desc</description>
+   </option>
+
+   <option>
+    <name>AV400WSimA</name>
+    <arg>params</arg>
+    <description>AV400WSimA-desc</description>
+   </option>
+
+   <option>
+    <name>AV400WSimB</name>
+    <arg>params</arg>
+    <description>AV400WSimB-desc</description>
    </option>
 
    <option>
@@ -1181,7 +1319,28 @@
   </section>
 
   <section>
+   <name>situation-options</name>
+
+   <option>
+    <name>failure</name>
+    <arg>{electrical|pitot|static|vacuum}</arg>
+    <description>failure-desc</description>
+   </option>
+
+  </section>
+
+  <section>
    <name>debugging-options</name>
+
+   <option>
+    <name>console</name>
+    <description>console-desc</description>
+   </option>
+
+   <option>
+     <name>developer</name>
+     <description>developer-desc</description>
+   </option>
 
    <option>
      <name>enable-fpe</name>
@@ -1195,13 +1354,16 @@
 
    <option>
     <name>log-level</name>
-    <arg>{bulk,debug,info,warn,alert}</arg>
+    <arg>{bulk|debug|info|warn|alert}</arg>
     <description>log-level-desc</description>
    </option>
 
    <option>
     <name>log-class</name>
-    <arg>[ai,environment,flight,general,io,network,sound,terrain,...]</arg>
+    <arg>{none|ai|aircraft|astro|atc|autopilot|clipper|cockpit|
+        environment|event|flight|general|gl|gui|headless|input|instrumentation|
+        io|math|nasal|navaid|network|osg|particles|sound|systems|terrain|
+        terrasync|undefined|view|all}</arg>
     <description>log-class-desc</description>
    </option>
 
@@ -1223,6 +1385,11 @@
     <arg>property</arg>
     <description>trace-write-desc</description>
     <description>multiple-instance</description>
+   </option>
+
+   <option>
+    <name>uninstall</name>
+    <description>uninstall-desc</description>
    </option>
   </section>
 

@@ -2169,7 +2169,7 @@ while (i < nc) {
 	if (info[1] != nil){
          var landcover = info[1].names[0];
 	 if (contains(landcover_map,landcover)) {p = p + landcover_map[landcover];}
-	 else {print(p, " ", info[1].names[0]);}
+	 else {logprint(LOG_INFO,"local_weather: Unknown landcover ",p, " ", info[1].names[0]);}
 	}}
 	else {
 		# to avoid gaps, we create default clouds

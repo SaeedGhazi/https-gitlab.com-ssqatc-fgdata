@@ -152,26 +152,64 @@ Configuration description:
 
           for each <volume> element:
 
-            (a) Use either <property> or <internal> as the base value
-            (b) apply any <type> function to the value
-            (c) value = value * factor
-            (d) value = max(value, <max>)
-            (e) value = min(value, <min>)
-            (f) if <factor> was originally negative then use
-                offset-mode otherwise use normal mode
+            (a) if an <expression> is defined:
+                and the value/result is >= 0
+                    total_volume = total_volume * expression_value
+                    process next <volume> element
+            (b) Use either <property> or <internal> as the base value
+            (c) apply any <type> function to the value
+            (d) value = value * abs(factor)
+            (e) value = max(value, <max>)
+            (f) value = min(value, <min>)
+            (g) if <factor> was originally negative then use
+                subtract-mode otherwise use normal mode
 
                 (normal-mode) 
+                  if (value >= 0)
                   total_offset = total_offset + offset
                   total_volume = total_volume * value
 
-                (offset-mode) 
+                (subtract-mode) 
                   value = value + offset
+                  if (value >= 0)
                   total_volume = total_volume * value
 
         Then after processing all of the <volume> blocks the total
         volume will be determined by
 
            volume  = total_offset + total_volume;
+ 
+	If volume exceeds 1 it will be clipped to 1.
+
+        The pitch elements are processed as follows
+
+          total_offset = 0
+          total_pitch = 1.0
+
+          for each <pitch> element:
+
+            (a) if an <expression> is defined:
+                total_pitch = total_pitch * expression_value
+                process next <pitch> element
+            (b) Use either <property> or <internal> as the base value
+            (c) apply any <type> function to the value
+            (d) value = value * abs(factor)
+            (e) value = max(value, <max>)
+            (f) value = min(value, <min>)
+            (g) if <factor> was originally negative then use
+                subtract-mode otherwise use normal mode
+
+                (normal-mode) 
+                  total_offset = total_offset + offset
+                  total_pitch = total_pitch * value
+
+                (subtract-mode) 
+                  total_pitch = offset - value
+
+        Then after processing all of the <pitch> blocks the total
+        pitch will be determined by
+
+           pitch  = total_offset + total_pitch;
 
      <expression>
         Defines the AN SGExpression to be used to calculate the volume 
@@ -187,13 +225,13 @@ Configuration description:
         Defines the multiplication factor for the property value.
 
         If factor is negative then it will cause the calculation for
-        this element to use the offset-mode as defined above. The
+        this element to use the subtract-mode as defined above. The
         negative value for the factor will be converted to positive
  
      <offset>
         The offset elements will be summed and added to the to the
         calculated volume from all of the volume blocks, except when
-        using offset-mode in which case the offset is directly added
+        using subtract-mode in which case the offset is directly added
         to the calculated volume within each volume block
 
      <internal>

@@ -811,35 +811,40 @@ var autotrim = {
 #      Note: in reality, tyre smoke doesn't depend on vspeed, but only on acceleration
 #      and friction.
 #
-
+#    rain_norm_trigger: threshold for deciding that there is enough standing water to 
+#                       calculate spray. This is compared against rain-norm.
+#
 var tyresmoke = {
-	new: func(number, auto = 0, diff_norm = 0.05, check_vspeed=1) {
+	new: func(number, auto = 0, diff_norm = 0.05, check_vspeed=1, rain_norm_trigger=0.2) {
 		var m = { parents: [tyresmoke] };
 		m.vertical_speed = (!check_vspeed) ? nil : props.globals.initNode("velocities/vertical-speed-fps");
 		m.diff_norm = diff_norm;
 		m.speed = props.globals.initNode("velocities/groundspeed-kt");
-		m.rain = props.globals.initNode("environment/metar/rain-norm");
-
+		m.rain_node = props.globals.initNode("environment/metar/rain-norm");
+		m.rain_norm_trigger = rain_norm_trigger;
 		var gear = props.globals.getNode("gear/gear[" ~ number ~ "]/");
-		m.wow = gear.initNode("wow");
+		m.wow_node = gear.initNode("wow");
+		m.last_wow = m.wow_node.getValue();
 		m.tyresmoke = gear.initNode("tyre-smoke", 0, "BOOL");
-		m.friction_factor = gear.initNode("ground-friction-factor", 1);
+		m.friction_factor_node = gear.initNode("ground-friction-factor", 1);
 		m.sprayspeed = gear.initNode("sprayspeed-ms");
 		m.spray = gear.initNode("spray", 0, "BOOL");
 		m.spraydensity = gear.initNode("spray-density", 0, "DOUBLE");
 		m.auto = auto;
 		m.listener = nil;
+		me.lastwow=0;
 
 		if (getprop("sim/flight-model") == "jsb") {
 			var wheel_speed = "fdm/jsbsim/gear/unit[" ~ number ~ "]/wheel-speed-fps";
-			m.rollspeed = props.globals.initNode(wheel_speed);
-			m.get_rollspeed = func m.rollspeed.getValue() * 0.3043;
+			m.rollspeed_node = props.globals.initNode(wheel_speed);
+			m.get_rollspeed = func m.rollspeed_node.getValue() * 0.3043;
 		} else {
-			m.rollspeed = gear.initNode("rollspeed-ms");
-			m.get_rollspeed = func m.rollspeed.getValue();
+			m.rollspeed_node = gear.initNode("rollspeed-ms");
+			m.get_rollspeed = func m.rollspeed_node.getValue();
 		}
 
 		m.lp = lowpass.new(2);
+		m.lpf_touchdown = lowpass.new(0.15);
 		auto and m.update();
 		return m;
 	},
@@ -850,30 +855,93 @@ var tyresmoke = {
 		}
 		me.auto = 0;
 	},
-	update: func {
-		var rollspeed = me.get_rollspeed();
-		var vert_speed = (me.vertical_speed) != nil ? me.vertical_speed.getValue() : -999;
-		var groundspeed = me.speed.getValue();
-		var friction_factor = me.friction_factor.getValue();
-		var wow = me.wow.getValue();
-		var rain = me.rain.getValue();
+	calc_spray_factor: func(groundspeed_kts)
+	{
+		# based on Figure 31(a)[1]; Variation of drag parameter with ground speed in water
+		# for dual tandem wheels without spray-drag alleviator curve fitted and normalized.
+		#
+		# My The logic here is that the spray will be a factor of the drag and using the
+		# curve from Figure 31(a) is at least based in reality, whereas previously
+		# a simple factor was used which tended to give spray at much too low groundspeeds.
+		#
+		#   |
+		#   |
+		# 1 |                  +-------------------------------------------------
+		#   |               __/
+		#   |              /
+		#   |             /
+		#   |            /
+		#   |            /
+		#   |           /
+		#   |           /
+		#   |          /
+		#   |          /
+		#   |         /
+		#   |         /
+		#   |        /
+		#   |        /
+		#   |       /
+		#   |     _/
+		#  0| __--
+		#   +--------------------------------------------------------------------
+		#    0    20    40   60    80   100  120   140  160   180  200   220  240
+		#
+		#_______________________________________________________________________________
+		# ref: https://ntrs.nasa.gov/api/citations/19660021919/downloads/19660021919.pdf
+		#-------------------
+		# Curve fit: MMF Model: y = (a * b + c * x ^ d) / (b + x ^ d)
+		#        Coefficient Data: a=0.03048   b=59175231  c=2.38119  d=5.08271
+		# Normalized by using max value 2.38105217250475
 
-		var filtered_rollspeed = me.lp.filter(rollspeed);
-		var diff = math.abs(rollspeed - filtered_rollspeed);
-		var diff_norm = diff > 0 ? diff / rollspeed : 0;
+		return ((0.03048 * 59175231 +  2.38119 * math.pow(groundspeed_kts, 5.08271))
+		       / (59175231 + math.pow(groundspeed_kts, 5.08271)) / 2.38105217250475)
+                       ;
+        },
+        update: func {
+		me.rollspeed = me.get_rollspeed();
+		me.vert_speed = (me.vertical_speed) != nil ? me.vertical_speed.getValue() : -999;
+		me.groundspeed_kts = me.speed.getValue();
+		me.friction_factor = me.friction_factor_node.getValue();
+		me.wow = me.wow_node.getValue();
+		me.rain = me.rain_node.getValue();
 
-		if (wow and vert_speed < -1.2
-				and diff_norm > me.diff_norm
-				and friction_factor > 0.7 and groundspeed > 50
-				and rain < 0.20) {
+		me.filtered_rollspeed = me.lp.filter(me.rollspeed);
+		me.rollspeed_diff = math.abs(me.rollspeed - me.filtered_rollspeed);
+		me.rollspeed_diff_norm = me.rollspeed_diff > 0 ? me.rollspeed_diff / me.rollspeed : 0;
+		me.spray_factor = me.calc_spray_factor(me.groundspeed_kts);
+
+		# touchdown
+		# - wow changed (previously false)
+		# - use a filter on touchdown and use this to determine if the smoke is active.
+		me.touchdown = 0;
+		if (me.wow != me.lastwow){
+			if (me.wow){
+				me.lpf_touchdown.set(math.abs(me.vert_speed));
+			}
+		}
+		else me.filtered_touchdown = me.lpf_touchdown.filter(0);
+
+		# touchdown smoke when
+		# * recently touched down
+		# * rollspeed must be over the limit
+		# * friction must be over a limit (no idea why this is 0.7)
+		# * moving at ground speed > 50kts (not sure about this)
+		# * not raining
+		# possibly using ground speed is somewhat irrelevant - but I'm leaving that here
+		# as it may filter out unwanted smoke.
+		if (me.filtered_touchdown > 1.0
+			and me.rollspeed_diff_norm > me.diff_norm
+			and me.friction_factor > 0.7
+			and me.groundspeed_kts > 50
+			and me.rain <me.rain_norm_trigger) {
 			me.tyresmoke.setValue(1);
 			me.spray.setValue(0);
 			me.spraydensity.setValue(0);
-		} elsif (wow and groundspeed > 5 and rain >= 0.20) {
+		} elsif (me.wow and me.rain >= me.rain_norm_trigger) {
 			me.tyresmoke.setValue(0);
 			me.spray.setValue(1);
-			me.sprayspeed.setValue(rollspeed * 6);
-			me.spraydensity.setValue(rain * groundspeed);
+			me.sprayspeed.setValue(me.rollspeed * 6);
+			me.spraydensity.setValue(me.rain * me.spray_factor * me.groundspeed_kts);
 		} else {
 			me.tyresmoke.setValue(0);
 			me.spray.setValue(0);
@@ -881,19 +949,20 @@ var tyresmoke = {
 			me.spraydensity.setValue(0);
 		}
 		if (me.auto) {
-			if (wow) {
+			if (me.wow) {
 				settimer(func me.update(), 0);
 				if (me.listener != nil) {
 					removelistener(me.listener);
 					me.listener = nil;
 				}
 			} elsif (me.listener == nil) {
-				me.listener = setlistener(me.wow, func me._wowchanged_(), 0, 0);
+				me.listener = setlistener(me.wow_node, func me._wowchanged_(), 0, 0);
 			}
 		}
+		me.lastwow = me.wow;
 	},
 	_wowchanged_: func() {
-		if (me.wow.getValue()) {
+		if (me.wow_node.getValue()) {
 			me.lp.set(0);
 			me.update();
 		}

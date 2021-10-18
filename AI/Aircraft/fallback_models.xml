@@ -103,7 +103,7 @@
 
     <!-- 251-300 Twin engined wide body jet airliners -->
 <model n="251" type="string">AI/Aircraft/767/767-JAL.xml</model>
-<model n="252" type="string">AI/Aircraft/777/77L-AirFrance.xml</model>
+<model n="252" type="string">AI/Aircraft/777/777-fallback.xml</model>
 <model n="253" type="string">AI/Aircraft/787/788-Qatar.xml</model>
 <model n="254" type="string">AI/Aircraft/A332/A332-Emirates.xml</model>
 <model n="255" type="string">AI/Aircraft/A333/A333-KLM.xml</model>

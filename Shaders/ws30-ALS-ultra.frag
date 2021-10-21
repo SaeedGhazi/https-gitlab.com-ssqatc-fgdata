@@ -46,15 +46,35 @@ float fog_func (in float targ, in float alt);
 vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
 
+float shadow_func (in float x, in float y, in float noise, in float dist);
+float DotNoise2D(in vec2 coord, in float wavelength, in float fractionalMaxDotSize, in float dot_density);
+float Noise2D(in vec2 coord, in float wavelength);
+float Noise3D(in vec3 coord, in float wavelength);
+float SlopeLines2D(in vec2 coord, in vec2 gradDir, in float wavelength, in float steepness);
+float Strata3D(in vec3 coord, in float wavelength, in float variation);
+float fog_func (in float targ, in float alt);
+float rayleigh_in_func(in float dist, in float air_pollution, in float avisibility, in float eye_alt, in float vertex_alt);
+float alt_factor(in float eye_alt, in float vertex_alt);
+float light_distance_fading(in float dist);
+float fog_backscatter(in float avisibility);
+
+vec3 rayleigh_out_shift(in vec3 color, in float outscatter);
+vec3 get_hazeColor(in float light_arg);
+vec3 searchlight();
+vec3 landing_light(in float offset, in float offsetv);
+vec3 filter_combined (in vec3 color) ;
+
 float getShadowing();
 vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
+// Not used
 float luminance(vec3 color)
 {
     return dot(vec3(0.212671, 0.715160, 0.072169), color);
 }
 
 
+//////////////////////////
 // Test-phase code:
 
 float rand2D(in vec2 co);
@@ -70,12 +90,13 @@ int get_random_landclass(in vec2 co)
     return lc;
 }
 
-float Noise2D(in vec2 coord, in float wavelength);
 // End Test-phase code
-
+////////////////////////
 
 void main()
 {
+
+
     vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     // this is taken from default.frag
     vec3 n;
@@ -321,4 +342,5 @@ void main()
 	fragColor.rgb = filter_combined(fragColor.rgb);
 
 	gl_FragColor = fragColor;
+        
 }

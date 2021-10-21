@@ -188,7 +188,289 @@
   </parameters>
   <!-- put techniques at a "high" index to allow derived effects to
        insert their own techniques first. -->
+
+
+  <!-- ALS ultra shaders -->
   <technique n="5">
+    <predicate>
+      <and>
+        <property>/sim/rendering/shaders/skydome</property>
+        <and>
+          <less-equal>
+            <value type="float">6.0</value>
+            <float-property>/sim/rendering/shaders/landmass</float-property>
+          </less-equal>
+          <less-equal>
+            <value type="float">6.0</value>
+            <float-property>/sim/rendering/shaders/transition</float-property>
+          </less-equal>
+        </and>
+        <or>
+          <less-equal>
+            <value type="float">2.0</value>
+            <glversion/>
+          </less-equal>
+          <and>
+            <extension-supported>GL_ARB_shader_objects</extension-supported>
+            <extension-supported>GL_ARB_shading_language_100</extension-supported>
+            <extension-supported>GL_ARB_vertex_shader</extension-supported>
+            <extension-supported>GL_ARB_fragment_shader</extension-supported>
+          </and>
+        </or>
+      </and>
+    </predicate>
+
+    <pass>
+      <lighting>true</lighting>
+      <material>
+        <ambient><use>material/ambient</use></ambient>
+        <diffuse><use>material/diffuse</use></diffuse>
+        <specular><use>material/specular</use></specular>
+        <emissive><use>material/emissive</use></emissive>
+        <shininess><use>material/shininess</use></shininess>
+        <color-mode>ambient-and-diffuse</color-mode>
+      </material>
+      <blend><use>transparent</use></blend>
+      <alpha-test><use>transparent</use></alpha-test>
+      <shade-model>smooth</shade-model>
+      <cull-face>back</cull-face>
+      <render-bin>
+        <bin-number><use>render-bin/bin-number</use></bin-number>
+        <bin-name><use>render-bin/bin-name</use></bin-name>
+      </render-bin>
+
+      <!-- texture unit 0 direct from VPBBuilder.cxx -->
+
+      <texture-unit>
+        <unit>1</unit>
+        <image><use>texture[1]/image</use></image>
+        <filter>nearest-mipmap-nearest</filter>
+        <mag-filter>nearest-mipmap-nearest</mag-filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[0]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>2</unit>
+        <image><use>texture[2]/image</use></image>
+        <filter><use>texture[2]/filter</use></filter>
+        <wrap-s><use>texture[2]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[2]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[2]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>3</unit>
+        <image><use>texture[3]/image</use></image>
+        <filter><use>texture[3]/filter</use></filter>
+        <wrap-s><use>texture[3]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[3]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[3]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>4</unit>
+        <image><use>texture[4]/image</use></image>
+        <filter><use>texture[4]/filter</use></filter>
+        <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[4]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>6</unit>
+        <image><use>texture[6]/image</use></image>
+        <filter><use>texture[6]/filter</use></filter>
+        <wrap-s><use>texture[6]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[6]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[6]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <program>
+        <vertex-shader>Shaders/ws30-ALS-ultra.vert</vertex-shader>
+        <vertex-shader>Shaders/filters-ALS.vert</vertex-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
+        <fragment-shader>Shaders/ws30-ALS-ultra.frag</fragment-shader>
+        <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
+        <fragment-shader>Shaders/hazes.frag</fragment-shader>
+        <fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
+        <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>visibility</name>
+        <type>float</type>
+        <value><use>visibility</use></value>
+      </uniform>
+      <uniform>
+        <name>avisibility</name>
+        <type>float</type>
+        <value><use>avisibility</use></value>
+      </uniform>
+      <uniform>
+        <name>hazeLayerAltitude</name>
+        <type>float</type>
+        <value><use>lthickness</use></value>
+      </uniform>
+      <uniform>
+        <name>scattering</name>
+        <type>float</type>
+        <value><use>scattering</use></value>
+      </uniform>
+      <uniform>
+        <name>ground_scattering</name>
+        <type>float</type>
+        <value><use>ground_scattering</use></value>
+      </uniform>
+      <uniform>
+        <name>terminator</name>
+        <type>float</type>
+        <value><use>terminator</use></value>
+      </uniform>
+      <uniform>
+        <name>terrain_alt</name>
+        <type>float</type>
+        <value><use>terrain_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>overcast</name>
+        <type>float</type>
+        <value><use>overcast</use></value>
+      </uniform>
+      <uniform>
+        <name>eye_alt</name>
+        <type>float</type>
+        <value><use>eye_alt</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>moonlight</name>
+        <type>float</type>
+        <value><use>moonlight</use></value>
+      </uniform>
+      <uniform>
+        <name>air_pollution</name>
+        <type>float</type>
+        <value><use>air_pollution</use></value>
+      </uniform>
+      <!-- filtering -->
+      <uniform>
+        <name>gamma</name>
+        <type>float</type>
+        <value><use>gamma</use></value>
+      </uniform>
+      <uniform>
+        <name>brightness</name>
+        <type>float</type>
+        <value><use>brightness</use></value>
+      </uniform>
+      <uniform>
+        <name>use_night_vision</name>
+        <type>bool</type>
+        <value><use>use_night_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_IR_vision</name>
+        <type>bool</type>
+        <value><use>use_IR_vision</use></value>
+      </uniform>
+      <uniform>
+        <name>use_filtering</name>
+        <type>bool</type>
+        <value><use>use_filtering</use></value>
+      </uniform>
+      <uniform>
+        <name>delta_T</name>
+        <type>float</type>
+        <value><use>delta_T</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_grey</name>
+        <type>float</type>
+        <value><use>fact_grey</use></value>
+      </uniform>
+      <uniform>
+        <name>fact_black</name>
+        <type>float</type>
+        <value><use>fact_black</use></value>
+      </uniform>
+      <uniform>
+        <name>display_xsize</name>
+        <type>int</type>
+        <value><use>display_xsize</use></value>
+      </uniform>
+      <uniform>
+        <name>display_ysize</name>
+        <type>int</type>
+        <value><use>display_ysize</use></value>
+      </uniform>
+      <uniform>
+        <name>landclass</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>textureArray</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>dimensionsArray</name>
+        <type>sampler-1d</type>
+        <value type="int">2</value>
+      </uniform>
+      <uniform>
+        <name>diffuseArray</name>
+        <type>sampler-1d</type>
+        <value type="int">3</value>
+      </uniform>
+      <uniform>
+        <name>specularArray</name>
+        <type>sampler-1d</type>
+        <value type="int">4</value>
+      </uniform>
+      <uniform>
+        <name>perlin</name>
+        <type>sampler-2d</type>
+        <value type="int">6</value>
+      </uniform>
+
+      <uniform>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>2</value>
+        <!-- AMBIENT_AND_DIFFUSE -->
+      </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value><use>shadows_enabled</use></value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value><use>sun_atlas_size</use></value>
+      </uniform>
+      <!-- END shadows include -->
+    </pass>
+  </technique>
+
+
+
+  <technique n="6">
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>
@@ -401,7 +683,7 @@
         <value type="int">0</value>
       </uniform>
       <uniform>
-        <name>atlas</name>
+        <name>textureArray</name>
         <type>sampler-2d</type>
         <value type="int">1</value>
       </uniform>
@@ -451,6 +733,13 @@
       <!-- END shadows include -->
     </pass>
   </technique>
+
+
+
+
+
+
+
 
   <!-- Non-ALS technique with texture rotation -->
   <technique n="11">

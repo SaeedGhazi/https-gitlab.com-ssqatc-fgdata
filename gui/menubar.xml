@@ -21,6 +21,14 @@
 		</item>
 
 		<item>
+			<name>time-mode</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>time-mode</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<name>snap-shot</name>
 			<key>F3</key>
 			<binding>

@@ -7,7 +7,8 @@
 	<!-- File menu -->
 	<file>File</file>
 	<reset>Reset</reset>
-        <flight-recorder-control>Flight Recorder Control</flight-recorder-control>
+	<flight-recorder-control>Flight Recorder Control</flight-recorder-control>
+	<time-mode>Time Mode</time-mode>
 	<load-tape>Load Flight Recorder Tape</load-tape>
 	<save-tape>Save Flight Recorder Tape</save-tape>
 	<snap-shot>Screenshot</snap-shot>

@@ -49,6 +49,7 @@
             <halign>left</halign>
             <name>master</name>
             <property>/sim/multiplay/lag/master</property>
+            <live>true</live>
             <binding>
                 <command>dialog-apply</command>
                 <object-name>master</object-name>

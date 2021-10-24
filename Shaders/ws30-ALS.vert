@@ -79,7 +79,7 @@ void main()
 
 // this code is copied from default.vert
 
-    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     orthoTexCoord = orthophotoTexCoord;
@@ -226,7 +226,7 @@ else // the faster, full-day version without lightfields
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
     gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
 
-    setupShadows(gl_ModelViewMatrix * gl_Vertex);
+    setupShadows(ecPosition);
 }
 
 

@@ -30,196 +30,143 @@
 
     <hrule/>
     
+    <!-- Dialogue contents -->
+    
     <group>
-
-        <layout>table</layout>
+        
+        <layout>vbox</layout>
         
         <checkbox>
-            <row>0</row>
-            <col>0</col>
             <property>sim/replay/record-continuous</property>
+            <halign>left</halign>
+            <label>Do continuous record to file</label>
             <binding>
                 <command>dialog-apply</command>
             </binding>
         </checkbox>
+
+        <hrule/>
+    
         <text>
-            <row>0</row>
-            <col>1</col>
-            <label>Continuous record to file</label>
-            <halign>left</halign>
+            <label>Continuous recording settings</label>
         </text>
         
         <checkbox>
-            <row>1</row>
-            <col>0</col>
             <property>sim/replay/record-continuous-compression</property>
+            <halign>left</halign>
+            <label>Use compression</label>
             <binding>
                 <command>dialog-apply</command>
             </binding>
         </checkbox>
-        <text>
-            <row>1</row>
-            <col>1</col>
-            <label>Continuous record with compression</label>
-            <halign>left</halign>
-        </text>
-    
+
         <checkbox>
-            <row>2</row>
-            <col>0</col>
-            <property>sim/replay/recovery-period</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>2</row>
-            <col>1</col>
-            <label>Maintain recovery snapshot</label>
-            <halign>left</halign>
-        </text>
-        
-        <checkbox>
-            <row>3</row>
-            <col>0</col>
             <property>sim/replay/record-signals</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>3</row>
-            <col>1</col>
+            <halign>left</halign>
             <label>Include user aircraft in Continuous recordings</label>
-            <halign>left</halign>
-        </text>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
     
         <checkbox>
-            <row>4</row>
-            <col>0</col>
             <property>sim/replay/record-multiplayer</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>4</row>
-            <col>1</col>
+            <halign>left</halign>
             <label>Include multiplayer aircraft in recordings</label>
-            <halign>left</halign>
-        </text>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
     
         <checkbox>
-            <row>5</row>
-            <col>0</col>
             <property>sim/replay/record-main-window</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>5</row>
-            <col>1</col>
+            <halign>left</halign>
             <label>Record main window position and size</label>
-            <halign>left</halign>
-        </text>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
     
         <checkbox>
-            <row>6</row>
-            <col>0</col>
             <property>sim/replay/record-main-view</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>6</row>
-            <col>1</col>
+            <halign>left</halign>
             <label>Record main window view</label>
-            <halign>left</halign>
-        </text>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
     
+        <hrule/>
+    
+        <text>
+            <label>Continuous replay settings</label>
+        </text>
+        
         <checkbox>
-            <row>7</row>
-            <col>0</col>
             <property>sim/replay/replay-main-window-position</property>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
-        <text>
-            <row>7</row>
-            <col>1</col>
+            <halign>left</halign>
             <label>Replay main window position</label>
-            <halign>left</halign>
-        </text>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
     
         <checkbox>
-            <row>8</row>
-            <col>0</col>
             <property>sim/replay/replay-main-window-size</property>
+            <halign>left</halign>
+            <label>Replay main window size</label>
             <binding>
                 <command>dialog-apply</command>
             </binding>
         </checkbox>
-        <text>
-            <row>8</row>
-            <col>1</col>
-            <label>Replay main window size</label>
-            <halign>left</halign>
-        </text>
     
         <checkbox>
-            <row>9</row>
-            <col>0</col>
             <property>sim/replay/replay-main-view</property>
+            <halign>left</halign>
+            <label>Replay main window view</label>
             <binding>
                 <command>dialog-apply</command>
             </binding>
         </checkbox>
+    
+        <hrule/>
+    
         <text>
-            <row>9</row>
-            <col>1</col>
-            <label>Replay main window view</label>
-            <halign>left</halign>
+            <label>Recovery snapshot</label>
         </text>
-    
-    </group>
-    
-    <group>
-        <layout>table</layout>
-        
-        <button>
-            <row>0</row>
-            <col>0</col>
-            <legend>Load ...</legend>
+                
+        <checkbox>
+            <property>sim/replay/recovery-period</property>
+            <halign>left</halign>
+            <label>Maintain recovery snapshot</label>
             <binding>
-                <command>dialog-show</command>
-                <dialog-name>flight-recorder-load</dialog-name>
+                <command>dialog-apply</command>
             </binding>
-        </button>
+        </checkbox>
+    
+        <hrule/>
+    
         <text>
-            <row>0</row>
-            <col>1</col>
-            <label>Load Flight Recorder Tape</label>
-            <halign>left</halign>
+            <label>Normal recording</label>
         </text>
         
         <button>
-            <row>1</row>
-            <col>0</col>
-            <legend>Save ...</legend>
+            <legend>Save normal recording to file ...</legend>
             <binding>
                 <command>dialog-show</command>
                 <dialog-name>flight-recorder-save</dialog-name>
             </binding>
         </button>
-        <text>
-            <row>1</row>
-            <col>1</col>
-            <label>Save Flight Recorder Tape</label>
-            <halign>left</halign>
-        </text>
+    
+        <hrule/>
+        
+        <button>
+            <legend>Load recording from file ...</legend>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-load</dialog-name>
+            </binding>
+        </button>
     </group>
 
 </PropertyList>

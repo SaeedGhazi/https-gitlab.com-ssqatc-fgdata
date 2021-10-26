@@ -49,6 +49,34 @@
 		</item>
 
 		<item>
+			<name>video-start</name>
+			<binding>
+				<command>nasal</command>
+				<script>
+					fgcommand("video-start");
+				</script>
+			</binding>
+		</item>
+
+		<item>
+			<name>video-stop</name>
+			<binding>
+				<command>nasal</command>
+				<script>
+					fgcommand("video-stop");
+				</script>
+			</binding>
+		</item>
+
+		<item>
+			<name>video-control</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>video-control</dialog-name>
+			</binding>
+		</item>
+
+		<item>
 			<name>sound-config</name>
 			<binding>
 				<command>dialog-show</command>

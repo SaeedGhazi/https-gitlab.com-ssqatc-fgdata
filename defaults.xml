@@ -1010,6 +1010,13 @@ Started September 2000 by David Megginson, david@megginson.com
       <mp-report-enabled type="bool">true</mp-report-enabled>
       <enable-in-developer-mode type="bool">false</enable-in-developer-mode>
     </error-report>
+    <video>
+      <bitrate type="int">0</bitrate>
+      <container >mp4</container>
+      <quality type="double">0.75</quality>
+      <speed type="double">1.0</speed>
+      <codec>libx265</codec>
+    </video>
   </sim>
   <!-- accelerations -->
   <accelerations>

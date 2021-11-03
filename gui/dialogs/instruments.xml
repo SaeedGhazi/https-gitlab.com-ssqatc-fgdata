@@ -7,8 +7,8 @@
   <nasal>
     <open><![CDATA[
       var update = func(){
-        setprop("/instrumentation/altimeter/setting-hpa-formatted", int(getprop("/instrumentation/altimeter/setting-hpa")));
-        setprop("/instrumentation/altimeter/setting-inhg-formatted", int(getprop("/instrumentation/altimeter/setting-inhg")*100.0)/100.0);
+        setprop("/instrumentation/altimeter/setting-hpa-formatted", sprintf("%6.1f", math.round(getprop("/instrumentation/altimeter/setting-hpa"),.1)));
+        setprop("/instrumentation/altimeter/setting-inhg-formatted", sprintf("%5.2f", math.round(getprop("/instrumentation/altimeter/setting-inhg"),0.01)));
       }
       var hpaListener = setlistener("/instrumentation/altimeter/setting-hpa", update);
       var inhgListener = setlistener("/instrumentation/altimeter/setting-inhg", update);

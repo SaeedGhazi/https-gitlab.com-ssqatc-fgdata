@@ -442,6 +442,10 @@
         <source xml:space="preserve">Tiller Steering</source>
         <target xml:space="preserve">Sterownica kola przedniego</target>
       </trans-unit>
+      <trans-unit id="menu/time-mode:0" approved="yes">
+        <source xml:space="preserve">Time Mode</source>
+        <target xml:space="preserve">Tryb czasu</target>
+      </trans-unit>
       <trans-unit id="menu/time-settings:0" approved="yes">
         <source xml:space="preserve">Time Settings</source>
         <target xml:space="preserve">Czas</target>
@@ -536,6 +540,18 @@
         <source xml:space="preserve">Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear</source>
         <target xml:space="preserve">Emituje z FlightGear zestaw znaków AV400 wymaganych do sterowania odbiornikami GPS Garmin serii 400.</target>
       </trans-unit>
+      <trans-unit id="options/AV400WSimA-desc:0" approved="yes">
+        <source xml:space="preserve">Open connection for &quot;A&quot; channel using Garmin WAAS GPS protocol</source>
+        <target xml:space="preserve">Otwórz połączenie dla kanału &quot;A&quot; przy użyciu protokołu Garmin WAAS GPS.</target>
+      </trans-unit>
+      <trans-unit id="options/AV400WSimB-desc:0" approved="yes">
+        <source xml:space="preserve">Open connection for &quot;B&quot; channel using Garmin WAAS GPS protocol</source>
+        <target xml:space="preserve">Otwórz połączenie dla kanału &quot;B&quot; przy użyciu protokołu Garmin WAAS GPS.</target>
+      </trans-unit>
+      <trans-unit id="options/addon-desc:0" approved="yes">
+        <source xml:space="preserve">Specify a path to addon;</source>
+        <target xml:space="preserve">Określ ścieżkę do dodatku;</target>
+      </trans-unit>
       <trans-unit id="options/adf1-desc:0" approved="yes">
         <source xml:space="preserve">Set the ADF1 radio frequency, optionally preceded by a card rotation.</source>
         <target xml:space="preserve">Ustaw częstotliwość radia ADF1, opcjonalnie poprzedzoną obrotem tarczy.</target>
@@ -560,10 +576,6 @@
         <source xml:space="preserve">Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
         <target xml:space="preserve">Określ dokładny katalog, który ma być używany dla samolotu (normalnie nie wymagane, ale może być przydatne). Podana ścieżka musi być względna do bieżącego katalogu. Powoduje ominięcie opcji &lt;path-cache&gt; z pliku autosave_x_y.xml, linii komend --fg-aircraft oraz zmiennej środowiskowej $FG_AIRCRAFT.</target>
       </trans-unit>
-      <trans-unit id="options/aircraft-model-options:0" approved="yes">
-        <source xml:space="preserve">Aircraft model directory (UIUC FDM ONLY)</source>
-        <target xml:space="preserve">Katalog z modelem samolotu (tylko dla dynamiki lotu UIUC).</target>
-      </trans-unit>
       <trans-unit id="options/aircraft-options:0" approved="yes">
         <source xml:space="preserve">Aircraft</source>
         <target xml:space="preserve">Samolot</target>
@@ -571,6 +583,14 @@
       <trans-unit id="options/airport-desc:0" approved="yes">
         <source xml:space="preserve">Specify starting position relative to an airport</source>
         <target xml:space="preserve">Określ lotnisko startowe.</target>
+      </trans-unit>
+      <trans-unit id="options/allow-nasal-from-sockets-desc:0" approved="yes">
+        <source xml:space="preserve">Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</source>
+        <target xml:space="preserve">Usuń flagę bezpieczeństwa, co oznacza, że połączenia sieciowe będą miały pełny dostęp do symulatora, w tym do uruchamiania dowolnych skryptów. Upewnij się, że masz odpowiednie zabezpieczenia (takie jak zapora, która blokuje połączenia zewnętrzne).</target>
+      </trans-unit>
+      <trans-unit id="options/allow-nasal-read-desc:0" approved="yes">
+        <source xml:space="preserve">Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</source>
+        <target xml:space="preserve">Zezwalaj skryptom Nasal na odczytywanie plików z katalogów wymienionych jako path (oddziel wiele ścieżek średnikiem (Windows) lub dwukropkiem (UNIX)). Domyślnie, ze względów bezpieczeństwa, skrypty Nasal mogą odczytywać dane tylko z określonych katalogów, takich jak $FG_ROOT, $FG_HOME, itp.</target>
       </trans-unit>
       <trans-unit id="options/altitude-desc:0" approved="yes">
         <source xml:space="preserve">Starting altitude</source>
@@ -605,16 +625,16 @@
         <target xml:space="preserve">Określ ścieżkę do Twojej przeglądarki internetowej.</target>
       </trans-unit>
       <trans-unit id="options/callsign-desc:0" approved="yes">
-        <source xml:space="preserve">assign a unique name to a player</source>
+        <source xml:space="preserve">Assign a unique name to a player</source>
         <target xml:space="preserve">Przypisz użytkownikowi unikalną nazwę (znak wywoławczy).</target>
-      </trans-unit>
-      <trans-unit id="options/carrier-abeam-desc:0" approved="yes">
-        <source xml:space="preserve">Start on downwind abeam the selected carrier (must also specify a carrier)</source>
-        <target xml:space="preserve">Rozpocznij na trawersie z wiatrem względem wybranego lotniskowca (należy również określić lotniskowiec).</target>
       </trans-unit>
       <trans-unit id="options/carrier-desc:0" approved="yes">
         <source xml:space="preserve">Specify starting position on an AI carrier</source>
         <target xml:space="preserve">Określ pozycję startową na lotniskowcu SI.</target>
+      </trans-unit>
+      <trans-unit id="options/carrier-position-desc:0" approved="yes">
+        <source xml:space="preserve">Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier&apos;s parking position. Must also specify a carrier.</source>
+        <target xml:space="preserve">Określ pozycję początkową względem lotniskowca, gdzie możesz użyć wartości abeam (rozpoczęcie na trawersie z wiatrem) lub FLOLS (rozpoczęcie na podejściu końcowym) lub podać nazwę pozycji parkingowej na lotniskowcu. Należy również wskazać lotniskowiec.</target>
       </trans-unit>
       <trans-unit id="options/ceiling-desc:0" approved="yes">
         <source xml:space="preserve">Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</source>
@@ -632,6 +652,10 @@
         <source xml:space="preserve">Enable CompositeViewer (extra view windows)</source>
         <target xml:space="preserve">Włącz CompositeViewer (dodatkowe widoki w osobnych oknach). Podanie wartości 0 wyłączy CompositeViewer.</target>
       </trans-unit>
+      <trans-unit id="options/compositor-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the path to XML file for multi-pass rendering. The path is relative to $FG_ROOT (defaults to Compositor/default.xml).</source>
+        <target xml:space="preserve">Określ ścieżkę do pliku XML do renderowania wieloprzebiegowego. Ścieżka jest względna do $FG_ROOT (domyślnie Compositor/default.xml).</target>
+      </trans-unit>
       <trans-unit id="options/config-desc:0" approved="yes">
         <source xml:space="preserve">Load additional properties from path</source>
         <target xml:space="preserve">Załaduj dodatkowe właściwości z podanego pliku.</target>
@@ -640,9 +664,17 @@
         <source xml:space="preserve">Display console (Windows specific)</source>
         <target xml:space="preserve">Wyświetl konsolę (dla systemów Windows).</target>
       </trans-unit>
+      <trans-unit id="options/data-desc:0" approved="yes">
+        <source xml:space="preserve">Specify an additional base data directory (FGData), before the $FG_ROOT directory</source>
+        <target xml:space="preserve">Określ dodatkowy katalog danych bazowych (FGData), przed katalogiem $FG_ROOT.</target>
+      </trans-unit>
       <trans-unit id="options/debugging-options:0" approved="yes">
         <source xml:space="preserve">Debugging Options</source>
         <target xml:space="preserve">Opcje debugowania</target>
+      </trans-unit>
+      <trans-unit id="options/developer-desc:0" approved="yes">
+        <source xml:space="preserve">Enable developer mode</source>
+        <target xml:space="preserve">Włącz tryb programisty.</target>
       </trans-unit>
       <trans-unit id="options/disable-ai-models-desc:0" approved="yes">
         <source xml:space="preserve">Deprecated option (disable internal AI subsystem)</source>
@@ -696,6 +728,14 @@
         <source xml:space="preserve">Disable fullscreen mode</source>
         <target xml:space="preserve">Wyłącz tryb pelnoekranowy.</target>
       </trans-unit>
+      <trans-unit id="options/disable-gui-desc:0" approved="yes">
+        <source xml:space="preserve">Enable headless mode</source>
+        <target xml:space="preserve">Włącz tryb headless.</target>
+      </trans-unit>
+      <trans-unit id="options/disable-hold-short-desc:0" approved="yes">
+        <source xml:space="preserve">Disable the move to hold short position for multiplayer</source>
+        <target xml:space="preserve">Wyłącz przesunięcie pozycji samolotu na pozycję hold short w trybie wieloosobowym.</target>
+      </trans-unit>
       <trans-unit id="options/disable-horizon-effect:0" approved="yes">
         <source xml:space="preserve">Disable celestial body growth illusion near the horizon</source>
         <target xml:space="preserve">Wyłącz iluzję powiększania ciał niebieskich w pobliżu horyzontu.</target>
@@ -732,13 +772,13 @@
         <source xml:space="preserve">Disable METAR based real weather fetching</source>
         <target xml:space="preserve">Wyłącz pobieranie rzeczywistej pogody bazując na danych METAR.</target>
       </trans-unit>
-      <trans-unit id="options/disable-rembrandt-desc:0" approved="yes">
-        <source xml:space="preserve">Disable Rembrandt rendering</source>
-        <target xml:space="preserve">Wyłącz rendering przez Rembrandt&apos;a</target>
-      </trans-unit>
       <trans-unit id="options/disable-save-on-exit:0" approved="yes">
         <source xml:space="preserve">Don&apos;t save preferences upon program exit</source>
         <target xml:space="preserve">Nie zapisuj ustawień przy wyjściu z programu.</target>
+      </trans-unit>
+      <trans-unit id="options/disable-sentry-desc:0" approved="yes">
+        <source xml:space="preserve">Disable crash and error reports from being sent to the development team for analysis</source>
+        <target xml:space="preserve">Wyłącz wysyłanie raportów o awariach i błędach do zespołu programistów w celu analizy.</target>
       </trans-unit>
       <trans-unit id="options/disable-sound-desc:0" approved="yes">
         <source xml:space="preserve">Disable sound effects</source>
@@ -756,13 +796,17 @@
         <source xml:space="preserve">Disable automatic scenery downloads/updates</source>
         <target xml:space="preserve">Wyłącz automatyczne pobieranie/aktualizacje scenerii.</target>
       </trans-unit>
+      <trans-unit id="options/disable-texture-cache-desc:0" approved="yes">
+        <source xml:space="preserve">Disable texture cache (DDS)</source>
+        <target xml:space="preserve">Wyłącz pamięć podręczną tekstur (DDS).</target>
+      </trans-unit>
       <trans-unit id="options/disable-textures-desc:0" approved="yes">
         <source xml:space="preserve">Disable textures</source>
         <target xml:space="preserve">Wyłącz tekstury.</target>
       </trans-unit>
       <trans-unit id="options/disable-vr-desc:0" approved="yes">
         <source xml:space="preserve">Disable VR</source>
-        <target xml:space="preserve">Wyłącz VR</target>
+        <target xml:space="preserve">Wyłącz VR.</target>
       </trans-unit>
       <trans-unit id="options/disable-wireframe-desc:0" approved="yes">
         <source xml:space="preserve">Disable wireframe drawing mode</source>
@@ -868,13 +912,13 @@
         <source xml:space="preserve">Enable METAR based real weather fetching (this requires an open internet connection)</source>
         <target xml:space="preserve">Włącz pobieranie rzeczywistej pogody na podstawie METAR-u (wymaga połączenia z Internetem).</target>
       </trans-unit>
-      <trans-unit id="options/enable-rembrandt-desc:0" approved="yes">
-        <source xml:space="preserve">Enable Rembrandt rendering</source>
-        <target xml:space="preserve">Włącz renderowanie Rembrand</target>
-      </trans-unit>
       <trans-unit id="options/enable-save-on-exit:0" approved="yes">
         <source xml:space="preserve">Allow saving preferences at program exit</source>
         <target xml:space="preserve">Zapisuj ustawienia przy wyjściu z programu.</target>
+      </trans-unit>
+      <trans-unit id="options/enable-sentry-desc:0" approved="yes">
+        <source xml:space="preserve">Enable crash and error reports to be sent to the development team for analysis</source>
+        <target xml:space="preserve">Włącz wysyłanie raportów o awariach i błędach do zespołu programistów w celu analizy.</target>
       </trans-unit>
       <trans-unit id="options/enable-sound-desc:0" approved="yes">
         <source xml:space="preserve">Enable sound effects</source>
@@ -891,6 +935,10 @@
       <trans-unit id="options/enable-terrasync-desc:0" approved="yes">
         <source xml:space="preserve">Enable automatic scenery downloads/updates</source>
         <target xml:space="preserve">Włącz automatyczne pobieranie/aktualizację scenerii.</target>
+      </trans-unit>
+      <trans-unit id="options/enable-texture-cache-desc:0" approved="yes">
+        <source xml:space="preserve">Enable texture cache (DDS)</source>
+        <target xml:space="preserve">Włącz pamięć podręczną tekstur (DDS).</target>
       </trans-unit>
       <trans-unit id="options/enable-textures-desc:0" approved="yes">
         <source xml:space="preserve">Enable textures</source>
@@ -1004,6 +1052,10 @@
         <source xml:space="preserve">GMT</source>
         <target xml:space="preserve">czas GMT.</target>
       </trans-unit>
+      <trans-unit id="options/graphics-preset-desc:0" approved="yes">
+        <source xml:space="preserve">Set graphic options from one of the presets</source>
+        <target xml:space="preserve">Ustaw opcje graficzne na jedno z gotowych ustawień.</target>
+      </trans-unit>
       <trans-unit id="options/heading-desc:0" approved="yes">
         <source xml:space="preserve">Specify heading (yaw) angle (Psi)</source>
         <target xml:space="preserve">Określ kąt kierunku/odchylenia (Psi).</target>
@@ -1028,6 +1080,10 @@
         <source xml:space="preserve">Hud displays number of triangles rendered</source>
         <target xml:space="preserve">HUD pokazuje liczbę renderowanych trójkątów.</target>
       </trans-unit>
+      <trans-unit id="options/ignore-autosave-desc:0" approved="yes">
+        <source xml:space="preserve">Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
+        <target xml:space="preserve">Zignoruj plik autozapisu, tzn. ustawienia zapisane w tym pliku nie zostaną wczytane podczas uruchamiania, ani nie zostaną zapisane do tego pliku podczas zamykania symulatora.</target>
+      </trans-unit>
       <trans-unit id="options/in-air-desc:0" approved="yes">
         <source xml:space="preserve">Start in air (implied when using --altitude)</source>
         <target xml:space="preserve">Rozpocznij w powietrzu (domyślnie jeśli używamy parametru --altitude).</target>
@@ -1043,6 +1099,10 @@
       <trans-unit id="options/jpg-httpd-desc:0" approved="yes">
         <source xml:space="preserve">Enable screen shot http server on the specified port (replaced by --httpd)</source>
         <target xml:space="preserve">Utwórz serwer HTTP zrzutów ekranu na podanym porcie (zastąpione przez --httpd).</target>
+      </trans-unit>
+      <trans-unit id="options/jsbsim-output-directive-file-desc:0" approved="yes">
+        <source xml:space="preserve">Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type=&quot;CSV&quot;&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</source>
+        <target xml:space="preserve">Rejestruj właściwości JSBSim w pliku CSV. Plik dyrektyw wyjściowych zawiera element &lt;output type=&quot;CSV&quot;&gt;&lt;/output&gt;, w którym należy określić parametry lub grupy parametrów, które mają być rejestrowane.</target>
       </trans-unit>
       <trans-unit id="options/jsclient-desc:0" approved="yes">
         <source xml:space="preserve">Open connection to a remote joystick</source>
@@ -1069,12 +1129,28 @@
         <target xml:space="preserve">Wybierz malowanie samolotu.</target>
       </trans-unit>
       <trans-unit id="options/load-tape-desc:0" approved="yes">
-        <source xml:space="preserve">Load recording of earlier flightgear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending &quot;.fgtape&quot;. For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
-        <target xml:space="preserve">Wczytaj nagranie wcześniejszej sesji FlightGear. Dla &lt;name&gt;, jeśli ścieżka &lt;name&gt; kończy się rozszerzeniem &quot;.fgdata&quot;, wówczas jest traktowana jako lokalna ścieżka do pliku nagrania; w przeciwnym razie zostanie stworzona ścieżka lokalna, w taki sposób, że na początku &lt;name&gt; zostanie doklejony katalog dla nagrań, a na końcu zostanie doklejone rozszerzenie &quot;.fgtape&quot;. Dla &lt;url&gt; (czyli zaczynając od http:// lub https://) nagranie będzie pobierane z Internetu (musi być nagraniem ciągłym) i podczas odtwarzania będzie zapisywane do nazwy pliku zależnej od adresu URL; jeśli nazwa pliku zależna od adresu URL już istnieje, wówczas zakłada się, że jest to niekompletny plik i pobierane będą tylko pozostałe dane.</target>
+        <source xml:space="preserve">Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending &quot;.fgtape&quot;. For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
+        <target xml:space="preserve">Wczytaj nagranie wcześniejszej sesji FlightGear. Dla &lt;name&gt;, jeśli ścieżka &lt;name&gt; kończy się rozszerzeniem &quot;.fgdata&quot;, wówczas jest traktowana jako lokalna ścieżka do pliku nagrania; w przeciwnym razie zostanie stworzona ścieżka lokalna, w taki sposób, że na początku &lt;name&gt; zostanie doklejony katalog dla nagrań, a na końcu zostanie doklejone rozszerzenie &quot;.fgtape&quot;. Dla &lt;url&gt; (czyli zaczynając od http:// lub https://) nagranie będzie pobierane z Internetu (musi być nagraniem typu Continuous) i podczas odtwarzania będzie zapisywane do nazwy pliku zależnej od adresu URL; jeśli nazwa pliku zależna od adresu URL już istnieje, wówczas zakłada się, że jest to niekompletny plik i pobierane będą tylko pozostałe dane.</target>
       </trans-unit>
       <trans-unit id="options/local-aircraft-time:0" approved="yes">
         <source xml:space="preserve">local aircraft time</source>
         <target xml:space="preserve">czas lokalny.</target>
+      </trans-unit>
+      <trans-unit id="options/lod-levels-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the detail levels, where levels are a space-separated numeric list of levels. The default is &quot;1 3 5 7 9&quot;.</source>
+        <target xml:space="preserve">Określ poziomy szczegółowości, gdzie poziomy są liczbami oddzielonymi spacją. Wartość domyślna to &quot;1 3 5 7 9&quot;.</target>
+      </trans-unit>
+      <trans-unit id="options/lod-range-mult-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the range multiplier (point from low to fine detail). Defaults is 2.</source>
+        <target xml:space="preserve">Ustaw mnożnik zakresu (punkt od niskiego do wysokiego poziomu szczegółowości). Domyślnie 2.</target>
+      </trans-unit>
+      <trans-unit id="options/lod-res-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the resolution of the terrain grid. Defaults is 1.</source>
+        <target xml:space="preserve">Określ rozdzielczość siatki terenu. Domyślnie 1.</target>
+      </trans-unit>
+      <trans-unit id="options/lod-texturing-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the method of texturing the terrain. The default is bluemarble.</source>
+        <target xml:space="preserve">Określ metodę teksturowania terenu. Wartość domyślna to bluemarble.</target>
       </trans-unit>
       <trans-unit id="options/log-class-desc:0" approved="yes">
         <source xml:space="preserve">Specify which logging class(es) to use</source>
@@ -1117,12 +1193,16 @@
         <target xml:space="preserve">Uruchom model dynamiki lotu z częstotliwością &apos;n&apos; Hz (kroki na sekundę).</target>
       </trans-unit>
       <trans-unit id="options/multiplay-desc:0" approved="yes">
-        <source xml:space="preserve">Specify multipilot communication settings</source>
-        <target xml:space="preserve">Określ ustawienia połączenia w tybie wieloosobowym.</target>
+        <source xml:space="preserve">Specify multipilot communication settings;</source>
+        <target xml:space="preserve">Określ ustawienia połączenia w tybie wieloosobowym;</target>
       </trans-unit>
       <trans-unit id="options/multiplayer-options:0" approved="yes">
         <source xml:space="preserve">MultiPlayer Options</source>
         <target xml:space="preserve">Opcje trybu wieloosobowego</target>
+      </trans-unit>
+      <trans-unit id="options/multiple-instance:0" approved="yes">
+        <source xml:space="preserve">multiple instances can be used</source>
+        <target xml:space="preserve">można użyć tej opcji wielokrotnie.</target>
       </trans-unit>
       <trans-unit id="options/native-ctrls-desc:0" approved="yes">
         <source xml:space="preserve">Open connection using the FG Native Controls protocol</source>
@@ -1164,6 +1244,10 @@
         <source xml:space="preserve">Open connection using the NMEA protocol</source>
         <target xml:space="preserve">Otwórz połączenie używając protokołu NMEA.</target>
       </trans-unit>
+      <trans-unit id="options/no-default-config-desc:0" approved="yes">
+        <source xml:space="preserve">Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</source>
+        <target xml:space="preserve">Nie wczytuj żadnych domyślnych plików konfiguracyjnych (takich jak .fgfsrc), chyba że zostało to wyraźnie określone w opcji --config.</target>
+      </trans-unit>
       <trans-unit id="options/notrim-desc:0" approved="yes">
         <source xml:space="preserve">Do NOT attempt to trim the model</source>
         <target xml:space="preserve">NIE próbuj ustabilizować modelu dynamiki lotu</target>
@@ -1177,7 +1261,7 @@
         <target xml:space="preserve">Określ kurs do punktu odniesienia.</target>
       </trans-unit>
       <trans-unit id="options/offset-distance-desc:0" approved="yes">
-        <source xml:space="preserve">Specify distance to reference point (statute miles)</source>
+        <source xml:space="preserve">Specify distance to reference point (nautical miles)</source>
         <target xml:space="preserve">Określ odległość do punktu odniesienia (w milach morskich).</target>
       </trans-unit>
       <trans-unit id="options/on-ground-desc:0" approved="yes">
@@ -1193,8 +1277,8 @@
         <target xml:space="preserve">Określ miejsce postojowe na lotnisku (wymaga podania --airport).</target>
       </trans-unit>
       <trans-unit id="options/parkpos-desc:0" approved="yes">
-        <source xml:space="preserve">Specify which starting position on an AI carrier (must also specify a carrier)</source>
-        <target xml:space="preserve">Określ miejsce postojowe na lotniskowcu (wymaga podania opcji --carrier).</target>
+        <source xml:space="preserve">Same as the --parking-id option</source>
+        <target xml:space="preserve">To samo co opcja --parking-id.</target>
       </trans-unit>
       <trans-unit id="options/pitch-desc:0" approved="yes">
         <source xml:space="preserve">Specify pitch angle (Theta)</source>
@@ -1232,9 +1316,17 @@
         <source xml:space="preserve">Open connection using the Ray Woodworth motion chair protocol</source>
         <target xml:space="preserve">Otwórz połączenie przy użyciu protokołu ruchomego krzesła Raya Woodwortha.</target>
       </trans-unit>
+      <trans-unit id="options/read-only-desc:0" approved="yes">
+        <source xml:space="preserve">Make $FG_HOME read-only</source>
+        <target xml:space="preserve">Ustaw $FG_HOME tylko do odczytu.</target>
+      </trans-unit>
       <trans-unit id="options/rendering-options:0" approved="yes">
         <source xml:space="preserve">Rendering Options</source>
         <target xml:space="preserve">Opcje renderowania</target>
+      </trans-unit>
+      <trans-unit id="options/restart-launcher-desc:0" approved="yes">
+        <source xml:space="preserve">Open Launcher automatically when exiting FlightGear</source>
+        <target xml:space="preserve">Otwórz Launcher automatycznie po wyjściu z FlightGear.</target>
       </trans-unit>
       <trans-unit id="options/restore-defaults-desc:0" approved="yes">
         <source xml:space="preserve">Reset all user settings to their defaults (rendering options etc)</source>
@@ -1260,10 +1352,6 @@
         <source xml:space="preserve">Specify starting runway (must also specify an airport)</source>
         <target xml:space="preserve">Określ pas startowy (musisz podać również lotnisko).</target>
       </trans-unit>
-      <trans-unit id="options/season-desc:0" approved="yes">
-        <source xml:space="preserve">Specify the startup season</source>
-        <target xml:space="preserve">Określ poczatkową porę roku.</target>
-      </trans-unit>
       <trans-unit id="options/shading-flat-desc:0" approved="yes">
         <source xml:space="preserve">Enable flat shading</source>
         <target xml:space="preserve">Włącz płaskie cieniowanie.</target>
@@ -1282,7 +1370,7 @@
       </trans-unit>
       <trans-unit id="options/situation-options:0" approved="yes">
         <source xml:space="preserve">Situation Options</source>
-        <target xml:space="preserve">Opcje położenia</target>
+        <target xml:space="preserve">Opcje sytuacyjne</target>
       </trans-unit>
       <trans-unit id="options/sound-device-desc:0" approved="yes">
         <source xml:space="preserve">Explicitly specify the audio device to use</source>
@@ -1296,6 +1384,10 @@
         <source xml:space="preserve">Specify a starting date/time with respect to</source>
         <target xml:space="preserve">Określ datę/czas startu ze wzgędu na</target>
       </trans-unit>
+      <trans-unit id="options/state-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the initial state of the aircraft to the given value</source>
+        <target xml:space="preserve">Określ stan początkowy samolotu wg podanej wartości.</target>
+      </trans-unit>
       <trans-unit id="options/system-time:0" approved="yes">
         <source xml:space="preserve">system time</source>
         <target xml:space="preserve">czas systemowy.</target>
@@ -1304,13 +1396,21 @@
         <source xml:space="preserve">Enable telnet server on the specified port</source>
         <target xml:space="preserve">Włącz serwer telnet na podanym porcie.</target>
       </trans-unit>
+      <trans-unit id="options/terrain-engine-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the terrain engine you want to use: tilecache or pagedLOD</source>
+        <target xml:space="preserve">Określ silnik terenu, którego chcesz użyć: tilecache lub pagedLOD.</target>
+      </trans-unit>
       <trans-unit id="options/terrasync-dir-desc:0" approved="yes">
         <source xml:space="preserve">Set target directory for scenery downloads</source>
         <target xml:space="preserve">Określ katalog, gdzie TerraSync będzie przechowywał pobieraną scenerię (domyślnie jest to katalog TerraSync w lokalizacji określonej przez --download-dir).</target>
       </trans-unit>
+      <trans-unit id="options/texture-cache-dir-desc:0" approved="yes">
+        <source xml:space="preserve">Specify the DDS texture cache directory to be different than the default location</source>
+        <target xml:space="preserve">Określ katalog pamięci podręcznej dla tekstur DDS, gdy chcesz aby był inny niż domyślna lokalizacja.</target>
+      </trans-unit>
       <trans-unit id="options/texture-filtering-desc:0" approved="yes">
-        <source xml:space="preserve">Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16</source>
-        <target xml:space="preserve">Określ filtrowanie anizotropowe tekstur. Prawidłowe wartości to 1 (domyślnie), 2, 4, 8, 16. </target>
+        <source xml:space="preserve">Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</source>
+        <target xml:space="preserve">Określ filtrowanie anizotropowe tekstur. Prawidłowe wartości to 1 (domyślnie), 2, 4, 8 lub 16.</target>
       </trans-unit>
       <trans-unit id="options/time-match-local-desc:0" approved="yes">
         <source xml:space="preserve">Synchronize time with local real-world time</source>
@@ -1334,11 +1434,11 @@
       </trans-unit>
       <trans-unit id="options/trace-read-desc:0" approved="yes">
         <source xml:space="preserve">Trace the reads for a property;</source>
-        <target xml:space="preserve">Śledź odczyty dla podanej właściwości. Można użyć tej opcji wielokrotnie.</target>
+        <target xml:space="preserve">Śledź odczyty dla podanej właściwości;</target>
       </trans-unit>
       <trans-unit id="options/trace-write-desc:0" approved="yes">
         <source xml:space="preserve">Trace the writes for a property;</source>
-        <target xml:space="preserve">Śledź zapisy dla podanej właściwości. Można użyć tej opcji wielokrotnie.</target>
+        <target xml:space="preserve">Śledź zapisy dla podanej właściwości;</target>
       </trans-unit>
       <trans-unit id="options/trim-desc:0" approved="yes">
         <source xml:space="preserve">Trim the model</source>
@@ -1356,6 +1456,10 @@
         <source xml:space="preserve">Specify velocity along the body X axis</source>
         <target xml:space="preserve">Określ prędkość wzdłuż osi X.</target>
       </trans-unit>
+      <trans-unit id="options/uninstall-desc:0" approved="yes">
+        <source xml:space="preserve">Remove $FG_HOME directory. For Windows, it additionally removes TerraSync, Aircraft and TextureCache directories from download directory.</source>
+        <target xml:space="preserve">Usuń katalog $FG_HOME. W systemie Windows dodatkowo usuwa katalogi TerraSync, Aircraft i TextureCache z katalogu pobierania.</target>
+      </trans-unit>
       <trans-unit id="options/units-feet-desc:0" approved="yes">
         <source xml:space="preserve">Use feet for distances</source>
         <target xml:space="preserve">Użyj miary w stopach dla odległości.</target>
@@ -1367,6 +1471,10 @@
       <trans-unit id="options/usage:0" approved="yes">
         <source xml:space="preserve">Usage: fgfs [ option ... ]</source>
         <target xml:space="preserve">Użycie: fgfs [ opcje ... ]</target>
+      </trans-unit>
+      <trans-unit id="options/use-with-terrain-engine-pagedlod:0" approved="yes">
+        <source xml:space="preserve">Use with --terrain-engine=pagedLOD</source>
+        <target xml:space="preserve">Użyj z --terrain-engine=pagedLOD.</target>
       </trans-unit>
       <trans-unit id="options/vBody-desc:0" approved="yes">
         <source xml:space="preserve">Specify velocity along the body Y axis</source>
@@ -1389,8 +1497,8 @@
         <target xml:space="preserve">Określ prędkość początkową w węzłach.</target>
       </trans-unit>
       <trans-unit id="options/vehicle-desc:0" approved="yes">
-        <source xml:space="preserve">Select an vehicle profile as defined by a top level &lt;name&gt;-set.xml</source>
-        <target xml:space="preserve">To samo co --aircraft.</target>
+        <source xml:space="preserve">Same as the --aircraft option</source>
+        <target xml:space="preserve">To samo co opcja --aircraft.</target>
       </trans-unit>
       <trans-unit id="options/verbose-desc:0" approved="yes">
         <source xml:space="preserve">Show all command line options when combined with --help or -h</source>
@@ -1409,11 +1517,11 @@
         <target xml:space="preserve">Określ domyślny kierunek patrzenia. Dopuszczalne wartości: LEFT (patrz 45 stopni na lewo), RIGHT (patrz 45 stopni na prawo), CENTER (patrz na wprost), lub podaj własną wartość w stopniach.</target>
       </trans-unit>
       <trans-unit id="options/visibility-desc:0" approved="yes">
-        <source xml:space="preserve">Specify initial visibility</source>
+        <source xml:space="preserve">Specify initial visibility in meters</source>
         <target xml:space="preserve">Określ początkową widoczność w metrach.</target>
       </trans-unit>
       <trans-unit id="options/visibility-miles-desc:0" approved="yes">
-        <source xml:space="preserve">Specify initial visibility in miles</source>
+        <source xml:space="preserve">Specify initial visibility in statute miles</source>
         <target xml:space="preserve">Określ początkową widoczność w milach lądowych.</target>
       </trans-unit>
       <trans-unit id="options/vor-desc:0" approved="yes">
@@ -1434,7 +1542,7 @@
       </trans-unit>
       <trans-unit id="options/wp-desc:0" approved="yes">
         <source xml:space="preserve">Specify a waypoint for the GC autopilot;</source>
-        <target xml:space="preserve">Wprowadź identyfikator punktu trasy (VOR, NDB, fix) do autopilota. Opcjonalna część @alt może służyć do określenia wysokości, na której należy przekroczyć dany punkt, np. OKE@3000. Można użyć tej opcji wielokrotnie.</target>
+        <target xml:space="preserve">Wprowadź identyfikator punktu trasy (VOR, NDB, fix) do autopilota. Opcjonalna część @alt może służyć do określenia wysokości, na której należy przekroczyć dany punkt, np. OKE@3000;</target>
       </trans-unit>
     </group>
     <group restype="x-trolltech-linguist-context" resname="sys">

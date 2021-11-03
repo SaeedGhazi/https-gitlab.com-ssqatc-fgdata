@@ -123,10 +123,6 @@
           <source>--- Failures ---</source>
           <target>--- Panes ---</target>
         </trans-unit>
-        <trans-unit id="menu/fg1000:0" translate="no" approved="no">
-          <source>FG1000 MFD</source>
-          <target />
-        </trans-unit>
         <trans-unit id="menu/fg1000-mfd:0" translate="yes" approved="no">
           <source>FG1000 MFD</source>
           <target />
@@ -443,6 +439,10 @@
           <source>Tiller Steering</source>
           <target>Direção do Leme</target>
         </trans-unit>
+        <trans-unit id="menu/time-mode:0" translate="yes" approved="no">
+          <source>Time Mode</source>
+          <target />
+        </trans-unit>
         <trans-unit id="menu/time-settings:0" translate="yes" approved="no">
           <source>Time Settings</source>
           <target>Configurações de Hora</target>
@@ -537,6 +537,18 @@
           <source>Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear</source>
           <target>Emite um conjunto de caracteres de texto AV400 requeridos para usar um GPS Garmin 400-series no FlightGear</target>
         </trans-unit>
+        <trans-unit id="options/AV400WSimA-desc:0" translate="yes" approved="no">
+          <source>Open connection for "A" channel using Garmin WAAS GPS protocol</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/AV400WSimB-desc:0" translate="yes" approved="no">
+          <source>Open connection for "B" channel using Garmin WAAS GPS protocol</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/addon-desc:0" translate="yes" approved="no">
+          <source>Specify a path to addon;</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/adf1-desc:0" translate="yes" approved="no">
           <source>Set the ADF1 radio frequency, optionally preceded by a card rotation.</source>
           <target>Define a frequencia de radio ADF1, opcionalmente precedido por uma rotacao de carta.</target>
@@ -561,10 +573,6 @@
           <source>Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
           <target>Diretorio das aeronaves relativo ao caminho do executavel</target>
         </trans-unit>
-        <trans-unit id="options/aircraft-model-options:0" translate="yes" approved="no">
-          <source>Aircraft model directory (UIUC FDM ONLY)</source>
-          <target>Diretorio dos modelos de aeronaves (APENAS UIUC MDV)</target>
-        </trans-unit>
         <trans-unit id="options/aircraft-options:0" translate="yes" approved="no">
           <source>Aircraft</source>
           <target>Aeronave</target>
@@ -572,6 +580,14 @@
         <trans-unit id="options/airport-desc:0" translate="yes" approved="no">
           <source>Specify starting position relative to an airport</source>
           <target>Especifica a posicao inicial relativa ao aeroporto</target>
+        </trans-unit>
+        <trans-unit id="options/allow-nasal-from-sockets-desc:0" translate="yes" approved="no">
+          <source>Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/allow-nasal-read-desc:0" translate="yes" approved="no">
+          <source>Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/altitude-desc:0" translate="yes" approved="no">
           <source>Starting altitude</source>
@@ -606,16 +622,16 @@
           <target>Especifica o caminho do navegador web</target>
         </trans-unit>
         <trans-unit id="options/callsign-desc:0" translate="yes" approved="no">
-          <source>assign a unique name to a player</source>
+          <source>Assign a unique name to a player</source>
           <target>Atribui um nome unico para um jogador</target>
-        </trans-unit>
-        <trans-unit id="options/carrier-abeam-desc:0" translate="yes" approved="no">
-          <source>Start on downwind abeam the selected carrier (must also specify a carrier)</source>
-          <target />
         </trans-unit>
         <trans-unit id="options/carrier-desc:0" translate="yes" approved="no">
           <source>Specify starting position on an AI carrier</source>
           <target>Especifica a posicao inicial em um porta-avioes IA</target>
+        </trans-unit>
+        <trans-unit id="options/carrier-position-desc:0" translate="yes" approved="no">
+          <source>Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier's parking position. Must also specify a carrier.</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/ceiling-desc:0" translate="yes" approved="no">
           <source>Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</source>
@@ -633,6 +649,10 @@
           <source>Enable CompositeViewer (extra view windows)</source>
           <target />
         </trans-unit>
+        <trans-unit id="options/compositor-desc:0" translate="yes" approved="no">
+          <source>Specify the path to XML file for multi-pass rendering. The path is relative to $FG_ROOT (defaults to Compositor/default.xml).</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/config-desc:0" translate="yes" approved="no">
           <source>Load additional properties from path</source>
           <target>Carrega propriedades adicionais do caminho</target>
@@ -641,9 +661,17 @@
           <source>Display console (Windows specific)</source>
           <target />
         </trans-unit>
+        <trans-unit id="options/data-desc:0" translate="yes" approved="no">
+          <source>Specify an additional base data directory (FGData), before the $FG_ROOT directory</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/debugging-options:0" translate="yes" approved="no">
           <source>Debugging Options</source>
           <target>Opcoes de Depuracao</target>
+        </trans-unit>
+        <trans-unit id="options/developer-desc:0" translate="yes" approved="no">
+          <source>Enable developer mode</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/disable-ai-models-desc:0" translate="yes" approved="no">
           <source>Deprecated option (disable internal AI subsystem)</source>
@@ -697,6 +725,14 @@
           <source>Disable fullscreen mode</source>
           <target>Desativa o modo tela cheia</target>
         </trans-unit>
+        <trans-unit id="options/disable-gui-desc:0" translate="yes" approved="no">
+          <source>Enable headless mode</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-hold-short-desc:0" translate="yes" approved="no">
+          <source>Disable the move to hold short position for multiplayer</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/disable-horizon-effect:0" translate="yes" approved="no">
           <source>Disable celestial body growth illusion near the horizon</source>
           <target>Desativa a ilusao do crescimento de corpos celestes perto do horizonte</target>
@@ -733,13 +769,13 @@
           <source>Disable METAR based real weather fetching</source>
           <target>Desativar a busca de clima real baseada em METAR</target>
         </trans-unit>
-        <trans-unit id="options/disable-rembrandt-desc:0" translate="yes" approved="no">
-          <source>Disable Rembrandt rendering</source>
-          <target />
-        </trans-unit>
         <trans-unit id="options/disable-save-on-exit:0" translate="yes" approved="no">
           <source>Don't save preferences upon program exit</source>
           <target>Nao salvar preferencias ao sair do programa</target>
+        </trans-unit>
+        <trans-unit id="options/disable-sentry-desc:0" translate="yes" approved="no">
+          <source>Disable crash and error reports from being sent to the development team for analysis</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/disable-sound-desc:0" translate="yes" approved="no">
           <source>Disable sound effects</source>
@@ -756,6 +792,10 @@
         <trans-unit id="options/disable-terrasync-desc:0" translate="yes" approved="no">
           <source>Disable automatic scenery downloads/updates</source>
           <target>Desativa o download/atualizacao automatica de cenarios</target>
+        </trans-unit>
+        <trans-unit id="options/disable-texture-cache-desc:0" translate="yes" approved="no">
+          <source>Disable texture cache (DDS)</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/disable-textures-desc:0" translate="yes" approved="no">
           <source>Disable textures</source>
@@ -869,13 +909,13 @@
           <source>Enable METAR based real weather fetching (this requires an open internet connection)</source>
           <target>Ativar a busca de clima real baseada em METAR (isto requer uma conexao a Internet)</target>
         </trans-unit>
-        <trans-unit id="options/enable-rembrandt-desc:0" translate="yes" approved="no">
-          <source>Enable Rembrandt rendering</source>
-          <target />
-        </trans-unit>
         <trans-unit id="options/enable-save-on-exit:0" translate="yes" approved="no">
           <source>Allow saving preferences at program exit</source>
           <target>Permitir salvar preferencias ao sair do programa</target>
+        </trans-unit>
+        <trans-unit id="options/enable-sentry-desc:0" translate="yes" approved="no">
+          <source>Enable crash and error reports to be sent to the development team for analysis</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/enable-sound-desc:0" translate="yes" approved="no">
           <source>Enable sound effects</source>
@@ -892,6 +932,10 @@
         <trans-unit id="options/enable-terrasync-desc:0" translate="yes" approved="no">
           <source>Enable automatic scenery downloads/updates</source>
           <target>Ativa o download/atualizacao automatica de cenarios</target>
+        </trans-unit>
+        <trans-unit id="options/enable-texture-cache-desc:0" translate="yes" approved="no">
+          <source>Enable texture cache (DDS)</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/enable-textures-desc:0" translate="yes" approved="no">
           <source>Enable textures</source>
@@ -1005,6 +1049,10 @@
           <source>GMT</source>
           <target />
         </trans-unit>
+        <trans-unit id="options/graphics-preset-desc:0" translate="yes" approved="no">
+          <source>Set graphic options from one of the presets</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/heading-desc:0" translate="yes" approved="no">
           <source>Specify heading (yaw) angle (Psi)</source>
           <target>Especifica o angulo da direcao (rota) (Psi)</target>
@@ -1029,6 +1077,10 @@
           <source>Hud displays number of triangles rendered</source>
           <target>HUD exibe o numero de triangulos renderizados</target>
         </trans-unit>
+        <trans-unit id="options/ignore-autosave-desc:0" translate="yes" approved="no">
+          <source>Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/in-air-desc:0" translate="yes" approved="no">
           <source>Start in air (implied when using --altitude)</source>
           <target>iniciar no ar (implicado a usar --altitude)</target>
@@ -1044,6 +1096,10 @@
         <trans-unit id="options/jpg-httpd-desc:0" translate="yes" approved="no">
           <source>Enable screen shot http server on the specified port (replaced by --httpd)</source>
           <target>Ativa captura de tela no servidor http na porta especificada (replaced by --httpd)</target>
+        </trans-unit>
+        <trans-unit id="options/jsbsim-output-directive-file-desc:0" translate="yes" approved="no">
+          <source>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type="CSV"&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/jsclient-desc:0" translate="yes" approved="no">
           <source>Open connection to a remote joystick</source>
@@ -1070,11 +1126,27 @@
           <target>Seleciona a pintura da aeronave</target>
         </trans-unit>
         <trans-unit id="options/load-tape-desc:0" translate="yes" approved="no">
-          <source>Load recording of earlier flightgear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
+          <source>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
           <target />
         </trans-unit>
         <trans-unit id="options/local-aircraft-time:0" translate="yes" approved="no">
           <source>local aircraft time</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-levels-desc:0" translate="yes" approved="no">
+          <source>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is "1 3 5 7 9".</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-range-mult-desc:0" translate="yes" approved="no">
+          <source>Specify the range multiplier (point from low to fine detail). Defaults is 2.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-res-desc:0" translate="yes" approved="no">
+          <source>Specify the resolution of the terrain grid. Defaults is 1.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-texturing-desc:0" translate="yes" approved="no">
+          <source>Specify the method of texturing the terrain. The default is bluemarble.</source>
           <target />
         </trans-unit>
         <trans-unit id="options/log-class-desc:0" translate="yes" approved="no">
@@ -1118,12 +1190,16 @@
           <target>Executar o MDV com esta taxa (interacoes por segundo)</target>
         </trans-unit>
         <trans-unit id="options/multiplay-desc:0" translate="yes" approved="no">
-          <source>Specify multipilot communication settings</source>
+          <source>Specify multipilot communication settings;</source>
           <target>Especifica a configuracao das comunicacoes multipiloto</target>
         </trans-unit>
         <trans-unit id="options/multiplayer-options:0" translate="yes" approved="no">
           <source>MultiPlayer Options</source>
           <target>Opcoes de Multijugador</target>
+        </trans-unit>
+        <trans-unit id="options/multiple-instance:0" translate="yes" approved="no">
+          <source>multiple instances can be used</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/native-ctrls-desc:0" translate="yes" approved="no">
           <source>Open connection using the FG Native Controls protocol</source>
@@ -1165,6 +1241,10 @@
           <source>Open connection using the NMEA protocol</source>
           <target>Abrir conexao usando o protocolo NMEA</target>
         </trans-unit>
+        <trans-unit id="options/no-default-config-desc:0" translate="yes" approved="no">
+          <source>Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/notrim-desc:0" translate="yes" approved="no">
           <source>Do NOT attempt to trim the model</source>
           <target>NAO tentar compensar o modelo</target>
@@ -1178,7 +1258,7 @@
           <target>Especifica aa direcao para o pontode referencia</target>
         </trans-unit>
         <trans-unit id="options/offset-distance-desc:0" translate="yes" approved="no">
-          <source>Specify distance to reference point (statute miles)</source>
+          <source>Specify distance to reference point (nautical miles)</source>
           <target>Especifica a distancia para um ponto de referencia (em milhas estatutarias)</target>
         </trans-unit>
         <trans-unit id="options/on-ground-desc:0" translate="yes" approved="no">
@@ -1194,7 +1274,7 @@
           <target>Especifica a posicao de estacionamento de um aeroporto (tambem deve especificar um aeroporto)</target>
         </trans-unit>
         <trans-unit id="options/parkpos-desc:0" translate="yes" approved="no">
-          <source>Specify which starting position on an AI carrier (must also specify a carrier)</source>
+          <source>Same as the --parking-id option</source>
           <target>Especifica em que posicao inicia em um porta-avioes IA (precisa especificar o porta-avioes)</target>
         </trans-unit>
         <trans-unit id="options/pitch-desc:0" translate="yes" approved="no">
@@ -1233,9 +1313,17 @@
           <source>Open connection using the Ray Woodworth motion chair protocol</source>
           <target>Abrir conexao usando o protocolo Ray Woodworth motion chair</target>
         </trans-unit>
+        <trans-unit id="options/read-only-desc:0" translate="yes" approved="no">
+          <source>Make $FG_HOME read-only</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/rendering-options:0" translate="yes" approved="no">
           <source>Rendering Options</source>
           <target>Opcoes de Renderizacao</target>
+        </trans-unit>
+        <trans-unit id="options/restart-launcher-desc:0" translate="yes" approved="no">
+          <source>Open Launcher automatically when exiting FlightGear</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/restore-defaults-desc:0" translate="yes" approved="no">
           <source>Reset all user settings to their defaults (rendering options etc)</source>
@@ -1260,10 +1348,6 @@
         <trans-unit id="options/runway-no-desc:0" translate="yes" approved="no">
           <source>Specify starting runway (must also specify an airport)</source>
           <target>Especifica o inicio na pista (e necessario escolher um aeroporto)</target>
-        </trans-unit>
-        <trans-unit id="options/season-desc:0" translate="yes" approved="no">
-          <source>Specify the startup season</source>
-          <target>Especifica a estacao inicial</target>
         </trans-unit>
         <trans-unit id="options/shading-flat-desc:0" translate="yes" approved="no">
           <source>Enable flat shading</source>
@@ -1297,6 +1381,10 @@
           <source>Specify a starting date/time with respect to</source>
           <target>Especifica uma data/tempo inicial com respeito a</target>
         </trans-unit>
+        <trans-unit id="options/state-desc:0" translate="yes" approved="no">
+          <source>Specify the initial state of the aircraft to the given value</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/system-time:0" translate="yes" approved="no">
           <source>system time</source>
           <target />
@@ -1305,12 +1393,20 @@
           <source>Enable telnet server on the specified port</source>
           <target>Ativa o servidor telnet na porta especificada</target>
         </trans-unit>
+        <trans-unit id="options/terrain-engine-desc:0" translate="yes" approved="no">
+          <source>Specify the terrain engine you want to use: tilecache or pagedLOD</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/terrasync-dir-desc:0" translate="yes" approved="no">
           <source>Set target directory for scenery downloads</source>
           <target>Especifica o diretorio para download de cenarios</target>
         </trans-unit>
+        <trans-unit id="options/texture-cache-dir-desc:0" translate="yes" approved="no">
+          <source>Specify the DDS texture cache directory to be different than the default location</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/texture-filtering-desc:0" translate="yes" approved="no">
-          <source>Anisotropic Texture Filtering: values should be 1 (default),2,4,8 or 16</source>
+          <source>Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</source>
           <target>Filtragem de textura anisotropica: os valores devem ser 1 (padrao),2,4,8 ou 16</target>
         </trans-unit>
         <trans-unit id="options/time-match-local-desc:0" translate="yes" approved="no">
@@ -1357,6 +1453,10 @@
           <source>Specify velocity along the body X axis</source>
           <target>Especifica a velocidade ao longo do eixo X do corpo</target>
         </trans-unit>
+        <trans-unit id="options/uninstall-desc:0" translate="yes" approved="no">
+          <source>Remove $FG_HOME directory. For Windows, it additionally removes TerraSync, Aircraft and TextureCache directories from download directory.</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/units-feet-desc:0" translate="yes" approved="no">
           <source>Use feet for distances</source>
           <target>Usar pes para distancias</target>
@@ -1368,6 +1468,10 @@
         <trans-unit id="options/usage:0" translate="yes" approved="no">
           <source>Usage: fgfs [ option ... ]</source>
           <target>Uso: fgfs [ opcao ... ]</target>
+        </trans-unit>
+        <trans-unit id="options/use-with-terrain-engine-pagedlod:0" translate="yes" approved="no">
+          <source>Use with --terrain-engine=pagedLOD</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/vBody-desc:0" translate="yes" approved="no">
           <source>Specify velocity along the body Y axis</source>
@@ -1390,7 +1494,7 @@
           <target>Especifica a velocidade inicial do vento</target>
         </trans-unit>
         <trans-unit id="options/vehicle-desc:0" translate="yes" approved="no">
-          <source>Select an vehicle profile as defined by a top level &lt;name&gt;-set.xml</source>
+          <source>Same as the --aircraft option</source>
           <target>Selecionar um perfil de veiculo definido por um &lt;nome&gt;-set.xml de nivel superior</target>
         </trans-unit>
         <trans-unit id="options/verbose-desc:0" translate="yes" approved="no">
@@ -1410,11 +1514,11 @@
           <target>Especifica a direcao padrao da visao a frente, com um incremento adiante. Os valores validos sao LEFT (esq.), RIGHT (dir.), CENTER (centro), ou um numero especifico em graus</target>
         </trans-unit>
         <trans-unit id="options/visibility-desc:0" translate="yes" approved="no">
-          <source>Specify initial visibility</source>
+          <source>Specify initial visibility in meters</source>
           <target>Especifica a visibilidade inicial</target>
         </trans-unit>
         <trans-unit id="options/visibility-miles-desc:0" translate="yes" approved="no">
-          <source>Specify initial visibility in miles</source>
+          <source>Specify initial visibility in statute miles</source>
           <target>Especifica a visibilidade inicial em milhas</target>
         </trans-unit>
         <trans-unit id="options/vor-desc:0" translate="yes" approved="no">

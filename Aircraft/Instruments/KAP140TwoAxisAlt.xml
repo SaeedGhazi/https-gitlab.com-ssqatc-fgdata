@@ -757,7 +757,7 @@ properties' values.
      <type>number-value</type>
      <property>/autopilot/KAP140/settings/baro-setting-hpa</property>
      <scale>1</scale>
-     <format>%01.3f</format>
+     <format>%04.0f</format>
     </chunk>
    </chunks>
    <transformations>

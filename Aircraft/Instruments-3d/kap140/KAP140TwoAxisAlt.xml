@@ -520,7 +520,7 @@ properties' values.
   </animation>
   <animation>
     <type>textranslate</type>
-    <object-name>hpa-digit3</object-name>
+    <object-name>hpa-digit4</object-name>
     <property>/autopilot/KAP140/settings/baro-setting-hpa</property>
     <factor>10</factor>
     <step>0.01</step>
@@ -533,7 +533,7 @@ properties' values.
   </animation>
   <animation>
     <type>textranslate</type>
-    <object-name>hpa-digit4</object-name>
+    <object-name>hpa-digit5</object-name>
     <property>/autopilot/KAP140/settings/baro-setting-hpa</property>
     <factor>100</factor>
     <step>0.001</step>

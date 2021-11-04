@@ -103,7 +103,7 @@ var staticPressure = "systems/static/pressure-inhg";
 var pressureUnits = { "inHg" : 0, "hPa" : 1 };
 var baroSettingUnit = pressureUnits["inHg"];
 var baroSettingInhg = 29.92;
-var baroSettingHpa = baroSettingInhg * 0.03386389;
+var baroSettingHpa = baroSettingInhg * 33.86389;
 var baroSettingAdjusting = 0;
 var baroButtonDown = 0;
 var baroTimerRunning = 0;
@@ -1542,7 +1542,7 @@ var adjustBaroSettingInhg = func(amount) {
   # Adjust baro setting inHg by amount,
   # and sync baro setting hPa.
   baroSettingInhg = baroSettingInhg + amount;
-  baroSettingHpa = baroSettingInhg * 0.03386389;
+  baroSettingHpa = baroSettingInhg * 33.86389;
 
   settingBaroSettingHpa.setDoubleValue(baroSettingHpa);
   settingBaroSettingInhg.setDoubleValue(baroSettingInhg);
@@ -1553,7 +1553,7 @@ var adjustbaroSettingHpa = func(amount) {
   # Adjust baro setting hPa by amount,
   # and sync baro setting inHg.
   baroSettingHpa = baroSettingHpa + amount;
-  baroSettingInhg = baroSettingHpa / 0.03386389;
+  baroSettingInhg = baroSettingHpa / 33.86389;
 
   settingBaroSettingHpa.setDoubleValue(baroSettingHpa);
   settingBaroSettingInhg.setDoubleValue(baroSettingInhg);
@@ -1574,7 +1574,7 @@ var knobSmallUp = func {
     }
     elsif (baroSettingUnit == pressureUnits["hPa"])
     {
-      adjustbaroSettingHpa(0.001);
+      adjustbaroSettingHpa(1);
     }
   }
   elsif (baroTimerRunning == 0 and
@@ -1616,7 +1616,7 @@ var knobLargeUp = func {
     }
     elsif (baroSettingUnit == pressureUnits["hPa"])
     {
-      adjustbaroSettingHpa(0.1);
+      adjustbaroSettingHpa(100);
     }
   }
   elsif (baroTimerRunning == 0 and
@@ -1658,7 +1658,7 @@ var knobSmallDown = func {
     }
     elsif (baroSettingUnit == pressureUnits["hPa"])
     {
-      adjustbaroSettingHpa(-0.001);
+      adjustbaroSettingHpa(-1);
     }
   }
   elsif (baroTimerRunning == 0 and
@@ -1700,7 +1700,7 @@ var knobLargeDown = func {
     }
     elsif (baroSettingUnit == pressureUnits["hPa"])
     {
-      adjustbaroSettingHpa(-0.1);
+      adjustbaroSettingHpa(-100);
     }
   }
   elsif (baroTimerRunning == 0 and

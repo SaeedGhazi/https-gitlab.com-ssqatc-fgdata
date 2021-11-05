@@ -6,7 +6,7 @@
 
 // written by Thorsten Renk, Oct 2011, based on default.frag
 // Ambient term comes in gl_Color.rgb.
-varying vec4 diffuse_term;
+varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
 
@@ -119,7 +119,11 @@ void main()
     vec4 mat_diffuse = texture(diffuseArray, index);
     vec4 mat_specular = texture(specularArray, index);
 
+<<<<<<< HEAD
     vec4 color = mat_diffuse * (gl_Color + NdotL *  gl_LightSource[0].diffuse);
+=======
+    vec4 color = gl_Color;
+>>>>>>> e7c89ffb600d1bf5cee2936b7dbff31089452745
 
     // Testing code:
     // Use rlc even when looking up textures to recreate the extra performance hit
@@ -139,7 +143,7 @@ void main()
     NdotL = dot(n, lightDir);
     if (NdotL > 0.0) {
         float shadowmap = getShadowing();
-        color += diffuse_term * NdotL * shadowmap;
+        color += (light_diffuse_comp * mat_diffuse) * NdotL * shadowmap;
         NdotHV = max(dot(n, halfVector), 0.0);
         if (mat_shininess > 0.0)
             specular.rgb = (mat_specular.rgb
@@ -147,7 +151,7 @@ void main()
                             * pow(NdotHV, gl_FrontMaterial.shininess)
                             * shadowmap);
     }
-    color.a = diffuse_term.a;
+    color.a = light_diffuse_comp.a;
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
     // is closer to what the OpenGL fixed function pipeline does.

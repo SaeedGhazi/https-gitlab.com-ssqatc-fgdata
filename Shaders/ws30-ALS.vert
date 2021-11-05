@@ -22,7 +22,7 @@ attribute vec2 orthophotoTexCoord;
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
 // bugs with gl_FrontFacing in the fragment shader.
-varying vec4 diffuse_term;
+varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
 varying vec2 orthoTexCoord;
@@ -219,7 +219,7 @@ else // the faster, full-day version without lightfields
 
 // default lighting based on texture and material using the light we have just computed
 
-    diffuse_term = light_diffuse;
+    light_diffuse_comp = light_diffuse;
     vec4 constant_term = (gl_LightModel.ambient +  light_ambient);
     // Another hack for supporting two-sided lighting without using
     // gl_FrontFacing in the fragment shader.

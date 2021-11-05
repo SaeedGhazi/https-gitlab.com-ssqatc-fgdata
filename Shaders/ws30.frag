@@ -40,7 +40,7 @@ void main()
 
 	// Different textures have different have different dimensions.
 	// Dimensions array is scaled to fit in [0...1.0] in the texture1D, so has to be scaled back up here.
-	vec4 color = texture(diffuseArray, float(lc)/512.0) * NdotL * gl_LightSource[0].diffuse;	
+	vec4 color = texture(diffuseArray, float(lc)/512.0) * (gl_LightSource[0].ambient + NdotL * gl_LightSource[0].diffuse);
 	vec4 specular = texture(specularArray, float(lc)/512.0);
 	vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
 	vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );

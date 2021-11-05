@@ -119,11 +119,7 @@ void main()
     vec4 mat_diffuse = texture(diffuseArray, index);
     vec4 mat_specular = texture(specularArray, index);
 
-<<<<<<< HEAD
-    vec4 color = mat_diffuse * (gl_Color + NdotL *  gl_LightSource[0].diffuse);
-=======
     vec4 color = gl_Color;
->>>>>>> e7c89ffb600d1bf5cee2936b7dbff31089452745
 
     // Testing code:
     // Use rlc even when looking up textures to recreate the extra performance hit

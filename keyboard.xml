@@ -508,7 +508,6 @@ top down before the key bindings are parsed.
   <mod-ctrl>
     <desc>Elevator trim down fast</desc>
     <binding>
-     <command>property-assign</command>
         <command>property-adjust</command>
         <property>/controls/flight/elevator-trim</property>
         <step type="double">-0.05</step>
@@ -577,7 +576,6 @@ top down before the key bindings are parsed.
   <mod-ctrl>
     <desc>Aileron left trim</desc>
     <binding>
-     <command>property-assign</command>
         <command>property-adjust</command>
         <property>/controls/flight/aileron-trim</property>
         <step type="double">-0.01</step>
@@ -633,7 +631,6 @@ top down before the key bindings are parsed.
      <mod-ctrl>
          <desc>Aileron right trim</desc>
          <binding>
-             <command>property-assign</command>
              <command>property-adjust</command>
              <property>/controls/flight/aileron-trim</property>
              <step type="double">0.01</step>
@@ -661,7 +658,6 @@ top down before the key bindings are parsed.
   <mod-ctrl>
       <desc>Elevator trim up fast</desc>
       <binding>
-          <command>property-assign</command>
           <command>property-adjust</command>
           <property>/controls/flight/elevator-trim</property>
           <step type="double">0.05</step>

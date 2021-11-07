@@ -260,7 +260,7 @@ int get_random_landclass(in vec2 co, in vec2 tile_size)
 
 // Look up texture coordinates and stretching scale of ground textures
 void get_ground_texture_data(in float textureIndex, in vec2 tile_coord, 
-  out vec2 st, out vec2 g_texture_scale, in out vec2 dx, in out vec2 dy)
+  out vec2 st, out vec2 g_texture_scale, inout vec2 dx, inout vec2 dy)
 {
   // Look up stretching dimensions of ground textures in m - scaled to 
   // fit in [0..1], so rescale 
@@ -281,7 +281,7 @@ void get_ground_texture_data(in float textureIndex, in vec2 tile_coord,
 // (vectorising Noise2D versus just many texture calls)
 
 vec2 detile_texcoords_with_perlin_noise(in vec2 st, in vec2 ground_texture_scale, 
-  in vec2 tile_coord, in out vec2 dx, in out vec2 dy)
+  in vec2 tile_coord, inout vec2 dx, inout vec2 dy)
 {
   vec2 pnoise;
 
@@ -736,7 +736,7 @@ void get_landclass_id(in vec2 tile_coord,
 
   // Landclass source type: 0=texture, 1=random squares
   // Controls are defined at global scope. const int landclass_source
-  const float ts = landclass_texel_size_m;
+  float ts = landclass_texel_size_m;
   vec2 sz = tile_size;
 
   // Number of unique neighbors found

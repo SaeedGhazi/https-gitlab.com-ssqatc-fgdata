@@ -107,7 +107,8 @@ uniform int use_alt_landing_light;
 // Testing code: Currently hardcoded to 2000, to allow noise functions to run while waiting for landclass lookup(s)
 uniform int swatch_size;  //in metres, typically 1000 or 2000
 
-//uniform bool orthophotoAvailable;
+// Passed from VPBTechnique, not the Effect
+uniform bool photoScenery;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -402,33 +403,31 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   // Look up texture coordinates and scale of ground textures
 
   // Landclass for this fragment
+  if (photoScenery) {
+		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
+  } else {
+    texel = lookup_ground_texture_array(index, tile_coord, lc, dx, dy);
 
-  texel = lookup_ground_texture_array(index, tile_coord, lc, dx, dy);
+    // Mix texels - to work consistently it needs a more preceptual interpolation than mix()
+    if (num_unique_neighbors != 0)
+    {
+      // Closest neighbor landclass
+      vec4 texel_closest = lookup_ground_texture_array(index_n[0], tile_coord, lc_n[0], dx, dy);
 
-
-  // Mix texels - to work consistently it needs a more preceptual interpolation than mix()
-  if (num_unique_neighbors != 0)
-  {
-     // Closest neighbor landclass
-     vec4 texel_closest = lookup_ground_texture_array(index_n[0], tile_coord, lc_n[0], dx, dy);
-
-
-     // Neighbor contributions
-     vec4 texel_nc=texel_closest;
+      // Neighbor contributions
+      vec4 texel_nc=texel_closest;
 
       if (num_unique_neighbors > 1)
       {
-         // 2nd Closest neighbor landclass
-         vec4 texel_2nd_closest = lookup_ground_texture_array(index_n[1], tile_coord, lc_n[1],
+        // 2nd Closest neighbor landclass
+        vec4 texel_2nd_closest = lookup_ground_texture_array(index_n[1], tile_coord, lc_n[1],
                                     dx, dy);
 
-
-         texel_nc = mix(texel_closest, texel_2nd_closest, mfact[1]);
+        texel_nc = mix(texel_closest, texel_2nd_closest, mfact[1]);
       }
 
-     texel = mix(texel, texel_nc, mfact[0]);
-
-
+      texel = mix(texel, texel_nc, mfact[0]);
+    }
   }
 
   // Testing code: mix with green to show values of variables at each point

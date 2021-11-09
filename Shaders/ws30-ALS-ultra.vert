@@ -16,7 +16,7 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
-attribute vec2 orthophotoTexCoord;
+//attribute vec2 orthophotoTexCoord;
 
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
@@ -25,13 +25,23 @@ attribute vec2 orthophotoTexCoord;
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec2 orthoTexCoord;
+varying vec2 rawPos;
+varying vec3 worldPos;
+varying vec3 ecViewdir;
+varying vec2 grad_dir;
+//varying vec2 orthoTexCoord;
 varying vec4 ecPosition;
 
-varying float yprime_alt;
+// Sent packed into alpha channels
+//varying float yprime_alt;
 varying float mie_angle;
 
+varying float steepness;
+
 uniform int colorMode;
+
+uniform bool raise_vertex;
+
 uniform float hazeLayerAltitude;
 uniform float terminator;
 uniform float terrain_alt; 
@@ -39,7 +49,17 @@ uniform float avisibility;
 uniform float visibility;
 uniform float overcast;
 uniform float ground_scattering;
+uniform float eye_alt;
 uniform float moonlight;
+
+uniform bool use_IR_vision;
+
+uniform mat4 osg_ViewMatrixInverse;
+
+float earthShade;
+float yprime_alt;
+
+vec3 moonlight_perception (in vec3 light);
 
 void setupShadows(vec4 eyeSpacePos);
 
@@ -48,7 +68,7 @@ const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
 
-float earthShade;
+
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -67,7 +87,9 @@ void main()
   vec4 light_diffuse;
   vec4 light_ambient;
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
-  vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight;
+  vec3 moonLightColor = vec3 (0.095, 0.095, 0.15) * moonlight + vec3 (0.005, 0.005, 0.005);
+
+  moonLightColor = moonlight_perception (moonLightColor);
 
 
   //float yprime_alt;
@@ -77,12 +99,28 @@ void main()
   float vertex_alt;
   float scattering;
 
+   rawPos = gl_Vertex.xy;
+   worldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
+	
+	
+   steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
+   grad_dir = normalize(gl_Normal.xy);
+
+   vec4 pos = gl_Vertex;
+   if (raise_vertex) 
+	{
+	pos.z+=0.1;
+   	gl_Position =  gl_ModelViewProjectionMatrix * pos;
+	}
+   else gl_Position = ftransform();
+
+
 // this code is copied from default.vert
 
     ecPosition = gl_ModelViewMatrix * gl_Vertex;
-    gl_Position = ftransform();
+    //gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-    orthoTexCoord = orthophotoTexCoord;
+    //orthoTexCoord = orthophotoTexCoord;
     normal = gl_NormalMatrix * gl_Normal;
 
     // here start computations for the haze layer
@@ -93,7 +131,8 @@ void main()
     
     // and relative position to vector
     relPos = gl_Vertex.xyz - ep.xyz;
-
+    
+    ecViewdir = (gl_ModelViewMatrix * (ep - gl_Vertex)).xyz;	
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
     // is later computed in the fragment shader again
     float dist = length(relPos);
@@ -144,10 +183,11 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
    light_diffuse.a = 1.0;
    light_diffuse = light_diffuse * scattering;
 
-
+   //light_ambient.b = light_func(lightArg, 0.000506, 0.131, -3.315, 0.000457, 0.5);
+   //light_ambient.g = light_func(lightArg, 2.264e-05, 0.134, 0.967, 3.66e-05, 0.4);
    light_ambient.r = light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.33);
-   light_ambient.g = light_ambient.r * 0.4/0.33; 
-   light_ambient.b = light_ambient.r * 0.5/0.33; 
+   light_ambient.g = light_ambient.r * 0.4/0.33; //light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.4);
+   light_ambient.b = light_ambient.r * 0.5/0.33; //light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.5);
    light_ambient.a = 1.0;
 
 
@@ -156,13 +196,11 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
 // correct ambient light intensity and hue before sunrise
 if (earthShade < 0.5)
 	{
-	//light_ambient = light_ambient * (0.7 + 0.3 * smoothstep(0.2, 0.5, earthShade));
-	intensity = length(light_ambient.xyz); 
-
+	intensity = length(light_ambient.rgb); 
 	light_ambient.rgb = intensity * normalize(mix(light_ambient.rgb,  shadedFogColor, 1.0 -smoothstep(0.4, 0.8,earthShade) ));
 	light_ambient.rgb = light_ambient.rgb +   moonLightColor *  (1.0 - smoothstep(0.4, 0.5, earthShade));
 
-	intensity = length(light_diffuse.xyz); 
+	intensity = length(light_diffuse.rgb); 
 	light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.4, 0.7,earthShade) ));
 	}
 
@@ -195,8 +233,8 @@ else // the faster, full-day version without lightfields
     mie_angle = 1.0;
     
     if (terminator > 3000000.0)
-    	{light_diffuse = vec4 (1.0, 1.0, 1.0, 0.0);
-	light_ambient = vec4 (0.33, 0.4, 0.5, 0.0); }
+    	{light_diffuse = vec4 (1.0, 1.0, 1.0, 1.0);
+	light_ambient = vec4 (0.33, 0.4, 0.5, 1.0); }
     else
 	{
 
@@ -206,6 +244,8 @@ else // the faster, full-day version without lightfields
 	light_diffuse.r = 0.904 + lightArg * 0.092;
 	light_diffuse.a = 1.0;
 
+	//light_ambient.b = 0.41 + lightArg * 0.08;
+	//light_ambient.g = 0.333 + lightArg * 0.06;
 	light_ambient.r = 0.316 + lightArg * 0.016;
 	light_ambient.g = light_ambient.r * 0.4/0.33; 
    	light_ambient.b = light_ambient.r * 0.5/0.33;
@@ -217,14 +257,40 @@ else // the faster, full-day version without lightfields
 }
  
 
+// a sky/earth irradiation map model - the sky creates much more diffuse radiation than the ground, so
+// steep faces end up shaded more
+
+light_ambient = light_ambient * ((1.0+steepness)/2.0 * 1.2 + (1.0-steepness)/2.0 * 0.2);
+
+// deeper shadows when there is lots of direct light
+
+float shade_depth =  1.0 * smoothstep (0.6,0.95,ground_scattering) * (1.0-smoothstep(0.1,0.5,overcast)) * smoothstep(0.4,1.5,earthShade);
+
+   light_ambient.rgb = light_ambient.rgb * (1.0 - shade_depth);
+   light_diffuse.rgb = light_diffuse.rgb * (1.0 + 1.2 * shade_depth);
+
+if (use_IR_vision)
+	{
+	light_ambient.rgb = max(light_ambient.rgb, vec3 (0.5, 0.5, 0.5));
+	}
+
+
 // default lighting based on texture and material using the light we have just computed
 
     light_diffuse_comp = light_diffuse;
-    vec4 constant_term = (gl_LightModel.ambient +  light_ambient);
-    // Another hack for supporting two-sided lighting without using
-    // gl_FrontFacing in the fragment shader.
-    gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
-    gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+    //Testing phase code: ambient colours are not sent to fragement shader yet. 
+    //  They are all default except for water/ocean etc. currently
+    //  Emission is all set to the default of vec4(0.0, 0.0, 0.0, 1.0)
+    //To do: Fix this once ambient colour becomes available in the fragment shaders.
+    //const vec4 ambient_color = vec4(0.2, 0.2, 0.2, 1.0);
+    const vec4 ambient_color = vec4(1.0);
+    vec4 constant_term = ambient_color * (gl_LightModel.ambient +  light_ambient);
+
+    light_diffuse_comp.a = yprime_alt;
+    gl_FrontColor.rgb = constant_term.rgb;  // gl_FrontColor.a = 1.0;
+    gl_BackColor.rgb = constant_term.rgb; // gl_BackColor.a = 0.0;
+    gl_FrontColor.a = mie_angle;
+    gl_BackColor.a = mie_angle;
 
     setupShadows(ecPosition);
 }

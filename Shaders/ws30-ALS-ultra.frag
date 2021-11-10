@@ -55,9 +55,6 @@ varying vec4 ecPosition;
 
 uniform sampler2D landclass;
 uniform sampler2DArray textureArray;
-uniform sampler1D dimensionsArray;
-uniform sampler1D diffuseArray;
-uniform sampler1D specularArray;
 uniform sampler2D perlin;
 
 
@@ -109,6 +106,10 @@ uniform int swatch_size;  //in metres, typically 1000 or 2000
 
 // Passed from VPBTechnique, not the Effect
 uniform bool photoScenery;
+uniform vec4 dimensionsArray[128];
+uniform vec4 ambientArray[128];
+uniform vec4 diffuseArray[128];
+uniform vec4 specularArray[128];
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -181,7 +182,7 @@ int get_random_landclass(in vec2 co, in vec2 tile_size);
 //   the stretching of different textures, so that the correct mip-map level is looked 
 //   up and there are no seams.
 
-vec4 lookup_ground_texture_array(in float index, in vec2 tile_coord, in int landclass_id,
+vec4 lookup_ground_texture_array(in vec2 tile_coord, in int landclass_id,
   in vec2 dx, in vec2 dy);
 
 
@@ -377,12 +378,10 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   float index = float(lc)/512.0;
   vec4 index_n = vec4(lc_n)/512.0;
 
-  float mat_shininess = texture(dimensionsArray, index).z;
-  vec4 mat_diffuse = texture(diffuseArray, index);
-  vec4 mat_specular = texture(specularArray, index);
-
-  vec4 color = gl_Color;
-  color.a = 1.0;
+  float mat_shininess = dimensionsArray[lc].z;
+  vec4 mat_ambient = ambientArray[lc];
+  vec4 mat_diffuse = diffuseArray[lc];
+  vec4 mat_specular = specularArray[lc];
 
 
 
@@ -391,28 +390,44 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   // so any performance difference between the two is due to the texture lookup
   // color.rgb = color.rgb+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
 
-
-
-
-
-  // Look up ground textures by indexing into the texture array.
-  // Different textures are stretched along the ground to different 
-  // lengths along each axes as set by <xsize> and <ysize> 
-  // regional definitions parameters
-
-  // Look up texture coordinates and scale of ground textures
-
-  // Landclass for this fragment
   if (photoScenery) {
+    // In the photoscenery case we don't have landclass or materials available, so we
+    // just use constants for the material properties.
+    mat_ambient = vec4(0.2,0.2,0.2,1.0);
+    mat_diffuse = vec4(0.8,0.8,0.8,1.0);
+    mat_specular = vec4(0.0,0.0,0.0,1.0);
+
 		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
+
+    // Do not attempt any mixing
+    flag = 0;
+    mix_flag = 0;
   } else {
-    texel = lookup_ground_texture_array(index, tile_coord, lc, dx, dy);
+		// Color Mode is always AMBIENT_AND_DIFFUSE, which means
+		// using a base colour of white for ambient/diffuse,
+		// rather than the material color from ambientArray/diffuseArray.
+		mat_ambient = vec4(1.0,1.0,1.0,1.0);
+		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
+		mat_specular = specularArray[lc];
+		mat_shininess = dimensionsArray[lc].z;
+
+
+    // Look up ground textures by indexing into the texture array.
+    // Different textures are stretched along the ground to different 
+    // lengths along each axes as set by <xsize> and <ysize> 
+    // regional definitions parameters
+
+    // Look up texture coordinates and scale of ground textures
+
+    // Landclass for this fragment
+
+    texel = lookup_ground_texture_array(tile_coord, lc, dx, dy);
 
     // Mix texels - to work consistently it needs a more preceptual interpolation than mix()
     if (num_unique_neighbors != 0)
     {
       // Closest neighbor landclass
-      vec4 texel_closest = lookup_ground_texture_array(index_n[0], tile_coord, lc_n[0], dx, dy);
+      vec4 texel_closest = lookup_ground_texture_array(tile_coord, lc_n[0], dx, dy);
 
       // Neighbor contributions
       vec4 texel_nc=texel_closest;
@@ -420,8 +435,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
       if (num_unique_neighbors > 1)
       {
         // 2nd Closest neighbor landclass
-        vec4 texel_2nd_closest = lookup_ground_texture_array(index_n[1], tile_coord, lc_n[1],
-                                    dx, dy);
+        vec4 texel_2nd_closest = lookup_ground_texture_array(tile_coord, lc_n[1], dx, dy);
 
         texel_nc = mix(texel_closest, texel_2nd_closest, mfact[1]);
       }
@@ -429,6 +443,10 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
       texel = mix(texel, texel_nc, mfact[0]);
     }
   }
+
+
+  vec4 color = gl_Color;
+  color.a = 1.0;
 
   // Testing code: mix with green to show values of variables at each point
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);

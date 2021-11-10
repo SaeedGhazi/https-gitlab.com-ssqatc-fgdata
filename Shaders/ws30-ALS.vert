@@ -16,8 +16,6 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
-attribute vec2 orthophotoTexCoord;
-
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
@@ -25,7 +23,6 @@ attribute vec2 orthophotoTexCoord;
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec2 orthoTexCoord;
 varying vec4 ecPosition;
 
 varying float yprime_alt;
@@ -82,7 +79,6 @@ void main()
     ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-    orthoTexCoord = orthophotoTexCoord;
     normal = gl_NormalMatrix * gl_Normal;
 
     // here start computations for the haze layer
@@ -225,8 +221,7 @@ else // the faster, full-day version without lightfields
     //  Emission is all set to the default of vec4(0.0, 0.0, 0.0, 1.0)
     //To do: Fix this once ambient colour becomes available in the fragment shaders.
     //const vec4 ambient_color = vec4(0.2, 0.2, 0.2, 1.0);
-    const vec4 ambient_color = vec4(1.0);
-    vec4 constant_term = ambient_color * (gl_LightModel.ambient +  light_ambient);
+    vec4 constant_term = gl_LightModel.ambient +  light_ambient;
     // Another hack for supporting two-sided lighting without using
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;

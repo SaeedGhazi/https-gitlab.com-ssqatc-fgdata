@@ -5,51 +5,67 @@
 #extension GL_EXT_texture_array : enable
 
 varying vec3 normal;
+varying vec4 ecPosition;
 
 uniform sampler2D landclass;
 uniform sampler2DArray atlas;
-uniform sampler1D dimensionsArray;
-uniform sampler1D diffuseArray;
-uniform sampler1D specularArray;
 uniform sampler2D perlin;
 
 // Passed from VPBTechnique, not the Effect
 uniform float tile_width;
 uniform float tile_height;
 uniform bool photoScenery;
+uniform vec4 dimensionsArray[128];
+uniform vec4 ambientArray[128];
+uniform vec4 diffuseArray[128];
+uniform vec4 specularArray[128];
 
 // See include_fog.frag
 uniform int fogType;
 vec3 fog_Func(vec3 color, int type);
 
+// See Shaders/shadows-include.frag
+float getShadowing();
+
+// See Shaders/clustered-include.frag
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
+
 void main()
 {
+	float NdotL, NdotHV, fogFactor;
 	vec3 lightDir = gl_LightSource[0].position.xyz;
-    vec3 halfVector = gl_LightSource[0].halfVector.xyz;
-    vec4 texel;
-    vec4 fragColor;
-	vec4 color =    vec4(0.9, 0.9, 0.9, 1.0);
-	vec4 specular = vec4(0.1, 0.1, 0.1, 1.0);
+	vec3 halfVector = gl_LightSource[0].halfVector.xyz;
+	vec4 texel;
+	vec4 fragColor;
+	vec4 specular = vec4(0.0);
 
-    // If gl_Color.a == 0, this is a back-facing polygon and the
-    // normal should be reversed.
-    vec3 n = (2.0 * gl_Color.a - 1.0) * normal;
-    n = normalize(n);
-    float NdotL = dot(n, lightDir);
-	float NdotHV = max(dot(n, halfVector), 0.0);
+	// Material properties.
+	// Material properties.
+	vec4 mat_diffuse, mat_ambient, mat_specular;
+	float mat_shininess;
 
 	if (photoScenery) {
+		mat_ambient = vec4(1.0,1.0,1.0,1.0);
+		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
+		mat_specular = vec4(0.1, 0.1, 0.1, 1.0);
+		mat_shininess = 1.2;
+
 		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
 	} else {
 		// The Landclass for this particular fragment.  This can be used to
 		// index into the atlas textures.
 		int lc = int(texture2D(landclass, gl_TexCoord[0].st).g * 255.0 + 0.5);
 
+		// Color Mode is always AMBIENT_AND_DIFFUSE, which means
+		// using a base colour of white for ambient/diffuse,
+		// rather than the material color from ambientArray/diffuseArray.
+		mat_ambient = vec4(1.0,1.0,1.0,1.0);
+		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
+		mat_specular = specularArray[lc];
+		mat_shininess = dimensionsArray[lc].z;
+
 		// Different textures have different have different dimensions.
-		// Dimensions array is scaled to fit in [0...1.0] in the texture1D, so has to be scaled back up here.
-		//color = texture(diffuseArray, float(lc)/512.0) * (gl_LightSource[0].ambient + NdotL * gl_LightSource[0].diffuse);
-		//specular = texture(specularArray, float(lc)/512.0);
-		vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
+		vec2 atlas_dimensions = dimensionsArray[lc].st;
 		vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
 		vec2 st = atlas_scale * gl_TexCoord[0].st;
 
@@ -65,7 +81,34 @@ void main()
 		texel = texture(atlas, vec3(st, lc));
 	}
 
-    fragColor = color * texel + pow(NdotHV, gl_FrontMaterial.shininess) * gl_LightSource[0].specular * specular;
+	vec4 color = mat_ambient * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+
+	// If gl_Color.a == 0, this is a back-facing polygon and the
+	// normal should be reversed.
+	vec3 n = (2.0 * gl_Color.a - 1.0) * normal;
+	n = normalize(n);
+	NdotL = dot(n, lightDir);
+
+	if (NdotL > 0.0) {
+		float shadowmap = getShadowing();
+		color += mat_diffuse * NdotL * shadowmap;
+		NdotHV = max(dot(n, halfVector), 0.0);
+		if (mat_shininess > 0.0)
+			specular.rgb = (mat_specular.rgb
+							* gl_LightSource[0].specular.rgb
+							* pow(NdotHV, mat_shininess)
+							* shadowmap);
+	}
+	color.a = mat_diffuse.a;
+
+	// This shouldn't be necessary, but our lighting becomes very
+	// saturated. Clamping the color before modulating by the texture
+	// is closer to what the OpenGL fixed function pipeline does.
+	color = clamp(color, 0.0, 1.0);
+
+
+	fragColor = color * texel + specular;
+	fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
 	fragColor.rgb = fog_Func(fragColor.rgb, fogType);
 	gl_FragColor = fragColor;

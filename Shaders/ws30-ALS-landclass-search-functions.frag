@@ -227,15 +227,13 @@
 
 uniform sampler2D landclass;
 uniform sampler2DArray textureArray;
-uniform sampler1D dimensionsArray;
-uniform sampler1D diffuseArray;
-uniform sampler1D specularArray;
 uniform sampler2D perlin;
 
 // Passed from VPBTechnique, not the Effect
 uniform int tile_level;
 uniform float tile_width;
 uniform float tile_height;
+uniform vec4 dimensionsArray[128];
 
 // These should be sent as uniforms
 
@@ -259,12 +257,12 @@ int get_random_landclass(in vec2 co, in vec2 tile_size)
 
 
 // Look up texture coordinates and stretching scale of ground textures
-void get_ground_texture_data(in float textureIndex, in vec2 tile_coord, 
+void get_ground_texture_data(in int textureIndex, in vec2 tile_coord, 
   out vec2 st, out vec2 g_texture_scale, inout vec2 dx, inout vec2 dy)
 {
   // Look up stretching dimensions of ground textures in m - scaled to 
   // fit in [0..1], so rescale 
-  vec2 g_texture_stretch_dim = 10000.0 * texture(dimensionsArray, textureIndex).st;
+  vec2 g_texture_stretch_dim = dimensionsArray[textureIndex].st;
   g_texture_scale =  tile_size.xy / g_texture_stretch_dim.xy;
   // Correct partial derivatives to account for stretching of different textures
   dx = dx * g_texture_scale;
@@ -335,7 +333,7 @@ vec2 detile_texcoords_with_perlin_noise(in vec2 st, in vec2 ground_texture_scale
 //   the stretching of different textures, so that the correct mip-map level is looked 
 //   up and there are no seams.
 
-vec4 lookup_ground_texture_array(in float index, in vec2 tile_coord, in int landclass_id,
+vec4 lookup_ground_texture_array(in vec2 tile_coord, in int landclass_id,
   in vec2 dx, in vec2 dy)
 {
   // Testing: may be able to save 1 or 2 op slots by combining dx/dy in a vec4 and
@@ -346,7 +344,7 @@ vec4 lookup_ground_texture_array(in float index, in vec2 tile_coord, in int land
   vec4 texel;
   int lc = landclass_id;
 
-  get_ground_texture_data(index, tile_coord, st, g_texture_scale, dx, dy);
+  get_ground_texture_data(lc, tile_coord, st, g_texture_scale, dx, dy);
 
 
   st = detile_texcoords_with_perlin_noise(st, g_texture_scale, tile_coord, dx, dy);

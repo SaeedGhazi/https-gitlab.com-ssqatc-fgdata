@@ -21,10 +21,16 @@
 // component is set to 1 for front, 0 for back in order to work around
 // bugs with gl_FrontFacing in the fragment shader.
 varying vec3 normal;
+varying vec4 ecPosition;
+
+// See Shaders/shadows-include.vert
+void setupShadows(vec4 eyeSpacePos);
 
 void main()
 {
     gl_Position = ftransform();
+    ecPosition = gl_ModelViewMatrix * gl_Vertex;
+
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
 
@@ -32,6 +38,7 @@ void main()
     // gl_FrontFacing in the fragment shader.
     gl_FrontColor.a = 1.0;
     gl_BackColor.a = 0.0;
+    setupShadows(ecPosition);
 }
 
 

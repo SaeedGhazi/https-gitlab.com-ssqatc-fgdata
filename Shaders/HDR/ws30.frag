@@ -9,42 +9,52 @@ in vec2 texCoord;
 
 uniform sampler2D landclass;
 uniform sampler2DArray atlas;
-uniform sampler1D dimensionsArray;
-uniform sampler1D diffuseArray;
-uniform sampler1D specularArray;
 uniform sampler2D perlin;
 
 // Passed from VPBTechnique, not the Effect
 uniform float tile_width;
 uniform float tile_height;
+uniform vec4 dimensionsArray[128];
+uniform vec4 ambientArray[128];
+uniform vec4 diffuseArray[128];
+uniform vec4 specularArray[128];
+
 
 vec2 encodeNormal(vec3 n);
 vec3 decodeSRGB(vec3 screenRGB);
 
 void main()
 {
-    // The Landclass for this particular fragment.  This can be used to
-	// index into the atlas textures.
-    int lc = int(texture(landclass, texCoord).g * 255.0 + 0.5);
+	vec3 texel;
 
-	// Different textures have different have different dimensions.
-	// Dimensions array is scaled to fit in [0...1.0] in the texture1D, so has to be scaled back up here.
-	vec4 color = texture(diffuseArray, float(lc)/512.0);
-	vec4 specular = texture(specularArray, float(lc)/512.0);
-	vec2 atlas_dimensions = 10000.0 * texture(dimensionsArray, float(lc)/512.0).st;
-	vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
-	vec2 st = atlas_scale * texCoord;
+	if (photoScenery) {
+		texel = decodeSRGB(texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t)).rgb);
+	} else {
 
-	// Rotate texture using the perlin texture as a mask to reduce tiling
-	if (step(0.5, texture(perlin, atlas_scale * texCoord / 8.0).r) == 1.0) {
-		st = vec2(atlas_scale.s * texCoord.t, atlas_scale.t * texCoord.s);
+		// The Landclass for this particular fragment.  This can be used to
+		// index into the atlas textures.
+		int lc = int(texture2D(landclass, gl_TexCoord[0].st).g * 255.0 + 0.5);
+
+		color = ambientArray[lc] + diffuseArray[lc] * NdotL * gl_LightSource[0].diffuse;
+		specular = specularArray[lc];
+		
+		// Different textures have different have different dimensions.
+		vec2 atlas_dimensions = dimensionsArray[lc].st;
+		vec2 atlas_scale =  vec2(tile_width / atlas_dimensions.s, tile_height / atlas_dimensions.t );
+		vec2 st = atlas_scale * gl_TexCoord[0].st;
+
+		// Rotate texture using the perlin texture as a mask to reduce tiling
+		if (step(0.5, texture(perlin, atlas_scale * gl_TexCoord[0].st / 8.0).r) == 1.0) {
+			st = vec2(atlas_scale.s * gl_TexCoord[0].t, atlas_scale.t * gl_TexCoord[0].s);
+		}
+
+		if (step(0.5, texture(perlin, - atlas_scale * gl_TexCoord[0].st / 16.0).r) == 1.0) {
+			st = -st;
+		}
+
+		texel = decodeSRGB(texture(atlas, vec3(st, lc)).rgb);
 	}
 
-	if (step(0.5, texture(perlin, - atlas_scale * texCoord / 16.0).r) == 1.0) {
-		st = -st;
-	}
-
-    vec3 texel = decodeSRGB(texture(atlas, vec3(st, lc)).rgb);
     float specularity = clamp(dot(specular.rgb, vec3(0.333)), 0.0, 1.0);
 
     outGBuffer0.rg  = encodeNormal(normalVS);

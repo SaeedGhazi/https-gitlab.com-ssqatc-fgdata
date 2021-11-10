@@ -780,21 +780,6 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>dimensionsArray</name>
-        <type>sampler-1d</type>
-        <value type="int">2</value>
-      </uniform>
-      <uniform>
-        <name>diffuseArray</name>
-        <type>sampler-1d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
-        <name>specularArray</name>
-        <type>sampler-1d</type>
-        <value type="int">4</value>
-      </uniform>
-      <uniform>
         <name>perlin</name>
         <type>sampler-2d</type>
         <value type="int">6</value>
@@ -1128,21 +1113,6 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>dimensionsArray</name>
-        <type>sampler-1d</type>
-        <value type="int">2</value>
-      </uniform>
-      <uniform>
-        <name>diffuseArray</name>
-        <type>sampler-1d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
-        <name>specularArray</name>
-        <type>sampler-1d</type>
-        <value type="int">4</value>
-      </uniform>
-      <uniform>
         <name>perlin</name>
         <type>sampler-2d</type>
         <value type="int">6</value>
@@ -1152,12 +1122,6 @@
             <type>int</type>
             <value><use>xsize</use></value>
           </uniform>
-      <uniform>
-        <name>colorMode</name>
-        <type>int</type>
-        <value>2</value>
-        <!-- AMBIENT_AND_DIFFUSE -->
-      </uniform>
       <!-- BEGIN shadows include -->
       <uniform>
         <name>shadow_tex</name>
@@ -1403,33 +1367,7 @@
         <type>sampler-2d</type>
         <value type="int">1</value>
       </uniform>
-      <uniform>
-        <name>dimensionsArray</name>
-        <type>sampler-1d</type>
-        <value type="int">2</value>
-      </uniform>
-      <uniform>
-        <name>diffuseArray</name>
-        <type>sampler-1d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
-        <name>specularArray</name>
-        <type>sampler-1d</type>
-        <value type="int">4</value>
-      </uniform>
-			<uniform>
-				<name>perlin</name>
-				<type>sampler-2d</type>
-				<value type="int">6</value>
-			</uniform>
 
-      <uniform>
-        <name>colorMode</name>
-        <type>int</type>
-        <value>2</value>
-        <!-- AMBIENT_AND_DIFFUSE -->
-      </uniform>
       <!-- BEGIN shadows include -->
       <uniform>
         <name>shadow_tex</name>
@@ -1538,9 +1476,13 @@
       </texture-unit>
 
       <program>
+        <vertex-shader>Shaders/include_fog.vert</vertex-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <vertex-shader>Shaders/ws30.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
         <fragment-shader n="1">Shaders/ws30-q1.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
 
       <uniform>
@@ -1554,25 +1496,16 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>dimensionsArray</name>
-        <type>sampler-1d</type>
-        <value type="int">2</value>
+        <name>perlin</name>
+        <type>sampler-2d</type>
+        <value type="int">6</value>
       </uniform>
       <uniform>
-        <name>diffuseArray</name>
-        <type>sampler-1d</type>
-        <value type="int">3</value>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>2</value>
+        <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
-      <uniform>
-        <name>specularArray</name>
-        <type>sampler-1d</type>
-        <value type="int">4</value>
-      </uniform>
-			<uniform>
-				<name>perlin</name>
-				<type>sampler-2d</type>
-				<value type="int">6</value>
-			</uniform>
     </pass>
   </technique>
 
@@ -1637,9 +1570,13 @@
       </texture-unit>
 
       <program>
+        <vertex-shader>Shaders/include_fog.vert</vertex-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <vertex-shader>Shaders/ws30.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
         <fragment-shader n="1">Shaders/ws30.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
 
       <uniform>
@@ -1653,19 +1590,10 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>dimensionsArray</name>
-        <type>sampler-1d</type>
-        <value type="int">2</value>
-      </uniform>
-      <uniform>
-        <name>diffuseArray</name>
-        <type>sampler-1d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
-        <name>specularArray</name>
-        <type>sampler-1d</type>
-        <value type="int">4</value>
+        <name>colorMode</name>
+        <type>int</type>
+        <value>2</value>
+        <!-- AMBIENT_AND_DIFFUSE -->
       </uniform>
     </pass>
   </technique>
@@ -1757,21 +1685,6 @@
         <name>atlas</name>
         <type>sampler-2d</type>
         <value type="int">1</value>
-      </uniform>
-      <uniform>
-        <name>dimensionsArray</name>
-        <type>sampler-1d</type>
-        <value type="int">2</value>
-      </uniform>
-      <uniform>
-        <name>diffuseArray</name>
-        <type>sampler-1d</type>
-        <value type="int">3</value>
-      </uniform>
-      <uniform>
-        <name>specularArray</name>
-        <type>sampler-1d</type>
-        <value type="int">4</value>
       </uniform>
       <uniform>
         <name>perlin</name>

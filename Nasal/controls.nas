@@ -274,6 +274,9 @@ var slewProp = func(prop, delta) {
 # range of a trim axis is 2.0.  Should probably read this out of a
 # property...
 var TRIM_RATE = 0.045;
+
+#
+# Trim elevator to current stick position (on release)
 var setElevatorTrimToPosition_listener = nil;
 setElevatorTrimToPosition = func() {
     if (setElevatorTrimToPosition_listener != nil) {
@@ -292,6 +295,56 @@ setElevatorTrimToPosition = func() {
                 removelistener(setElevatorTrimToPosition_listener);
                 setElevatorTrimToPosition_listener = nil;
                 setprop("/controls/flight/elevator-trim", nv);
+            }
+        }, 0, 0);
+    }
+}
+
+#
+# Trim aileron to current stick position (on release)
+var setAileronTrimToPosition_listener = nil;
+setAileronTrimToPosition = func() {
+    if (setAileronTrimToPosition_listener != nil) {
+        removelistener(setAileronTrimToPosition_listener);
+        setAileronTrimToPosition_listener = nil;
+    }
+    var nv =  getprop("/controls/flight/aileron")+getprop("/controls/flight/aileron-trim");
+    nv = math.min(math.max(-1.0,nv),1.0);
+    var lv = getprop("/controls/flight/aileron");
+    if (math.abs(lv) <= 0.001){
+      setprop("/controls/flight/aileron-trim", 0);
+    } else {
+        setAileronTrimToPosition_listener = setlistener("/controls/flight/aileron", func(v){
+            if (math.abs(v.getValue()) <= 0.001) {
+                setprop("controls/flight/aileron",0);
+                removelistener(setAileronTrimToPosition_listener);
+                setAileronTrimToPosition_listener = nil;
+                setprop("/controls/flight/aileron-trim", nv);
+            }
+        }, 0, 0);
+    }
+}
+
+#
+# Trim rudder to current stick position (on release)
+var setRudderTrimToPosition_listener = nil;
+setRudderTrimToPosition = func() {
+    if (setRudderTrimToPosition_listener != nil) {
+        removelistener(setRudderTrimToPosition_listener);
+        setRudderTrimToPosition_listener = nil;
+    }
+    var nv =  getprop("/controls/flight/rudder")+getprop("/controls/flight/rudder-trim");
+    nv = math.min(math.max(-1.0,nv),1.0);
+    var lv = getprop("/controls/flight/rudder");
+    if (math.abs(lv) <= 0.001){
+      setprop("/controls/flight/rudder-trim", 0);
+    } else {
+        setRudderTrimToPosition_listener = setlistener("/controls/flight/rudder", func(v){
+            if (math.abs(v.getValue()) <= 0.001) {
+                setprop("controls/flight/rudder",0);
+                removelistener(setRudderTrimToPosition_listener);
+                setRudderTrimToPosition_listener = nil;
+                setprop("/controls/flight/rudder-trim", nv);
             }
         }, 0, 0);
     }

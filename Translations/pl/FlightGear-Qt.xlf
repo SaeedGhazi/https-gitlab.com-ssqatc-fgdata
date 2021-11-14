@@ -561,22 +561,22 @@
       </trans-unit>
       <trans-unit id="_msg107" approved="yes">
         <source xml:space="preserve">Re-open this window when exiting FlightGear, to start another flight immediately.</source>
-        <target xml:space="preserve">Otwórz ponownie to okno po wyjściu z FlightGear, aby rozpocząć kolejny lot.</target>
+        <target xml:space="preserve">Otwiera ponownie to okno po wyjściu z FlightGear, aby rozpocząć kolejny lot.</target>
         <context-group purpose="location"><context context-type="linenumber">169</context></context-group>
       </trans-unit>
       <trans-unit id="_msg108" approved="yes">
         <source xml:space="preserve">Multi-player</source>
-        <target xml:space="preserve">Tryb wielo-osobowy</target>
+        <target xml:space="preserve">Tryb wieloosobowy</target>
         <context-group purpose="location"><context context-type="linenumber">185</context></context-group>
       </trans-unit>
       <trans-unit id="_msg109" approved="yes">
         <source xml:space="preserve">multi-player</source>
-        <target xml:space="preserve">tryb wielo-osobowy</target>
+        <target xml:space="preserve">tryb wieloosobowy</target>
         <context-group purpose="location"><context context-type="linenumber">193</context></context-group>
       </trans-unit>
       <trans-unit id="_msg110" approved="yes">
         <source xml:space="preserve">Connect to the multi-player network</source>
-        <target xml:space="preserve">Połącz się do sieci wielo-osobowej</target>
+        <target xml:space="preserve">Połącz się do sieci wieloosobowej</target>
         <context-group purpose="location"><context context-type="linenumber">200</context></context-group>
       </trans-unit>
       <trans-unit id="_msg111" approved="yes">
@@ -591,7 +591,7 @@
       </trans-unit>
       <trans-unit id="_msg113" approved="yes">
         <source xml:space="preserve">Enter a callsign you will use online. This is visible to all users and is how ATC services and other pilots will refer to you. (Maximum of seven characters permitted)</source>
-        <target xml:space="preserve">Wprowadź znak wywoławczy, jaki będziesz używał w trybie wielo-osobowym (maksymalnie 7 znaków). Będzie on widoczny dla wszystkich użytkowników, czyli wieże kontroli lotów oraz inni piloci będą się tak do Ciebie zwracać.</target>
+        <target xml:space="preserve">Wprowadź znak wywoławczy, jaki będziesz używał w trybie wieloosobowym (maksymalnie 7 znaków). Będzie on widoczny dla wszystkich użytkowników, czyli wieże kontroli lotów oraz inni piloci będą się tak do Ciebie zwracać.</target>
         <context-group purpose="location"><context context-type="linenumber">218</context></context-group>
       </trans-unit>
       <trans-unit id="_msg114" approved="yes">
@@ -1321,7 +1321,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg245" approved="yes">
         <source xml:space="preserve">Detailed weather simulation based on local terrain and atmospheric simulation. Note that using advanced weather with real-world weather data (METAR) information may not show exactly the conditions recorded, and is not recommended for multi-player flight since the weather simulation is not shared over the network.</source>
-        <target xml:space="preserve">Szczegółowa symulacja pogody generowana na podstawie lokalnego terenu i symulacji atmosfery. Zauważ, że używając zaawansowanej pogody z opcją pobierania rzeczywistych warunków pogodowych (METAR), możesz nie widzieć dokładnie tych efektów, które podaje METAR oraz nie jest to zalecane dla trybu wielo-osobowego ze względu na to, że symulacja pogody nie jest przekazywana przez sieć.</target>
+        <target xml:space="preserve">Szczegółowa symulacja pogody generowana na podstawie lokalnego terenu i symulacji atmosfery. Zauważ, że używając zaawansowanej pogody z opcją pobierania rzeczywistych warunków pogodowych (METAR), możesz nie widzieć dokładnie tych efektów, które podaje METAR oraz nie jest to zalecane dla trybu wieloosobowego ze względu na to, że symulacja pogody nie jest przekazywana przez sieć.</target>
         <context-group purpose="location"><context context-type="linenumber">123</context></context-group>
       </trans-unit>
       <trans-unit id="_msg246" approved="yes">
@@ -2097,7 +2097,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg384" approved="yes">
         <source xml:space="preserve">FlightGear requires additional files to operate. (Also called the base package, or fg-data) You can restart FlightGear and choose a different data files location, or restore the default setting. %1</source>
-        <target xml:space="preserve">FlightGear wymagają dodatkowych plików do działania (także określanych jako podstawowe pliki danych lub fg-data). Możesz uruchomić ponownie FlightGear i wybrać inną lokalizację plików danych lub przywrócić domyślne ustawienia. %1</target>
+        <target xml:space="preserve">FlightGear wymaga dodatkowych plików do działania (także określanych jako podstawowe pliki danych lub FGData). Możesz uruchomić ponownie FlightGear i wybrać inną lokalizację plików danych lub przywrócić domyślne ustawienia. %1</target>
         <context-group purpose="location"><context context-type="linenumber">840</context></context-group>
       </trans-unit>
       <trans-unit id="_msg385" approved="yes">

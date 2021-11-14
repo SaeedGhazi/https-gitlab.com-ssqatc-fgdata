@@ -1080,6 +1080,10 @@
         <source xml:space="preserve">Hud displays number of triangles rendered</source>
         <target xml:space="preserve">HUD pokazuje liczbę renderowanych trójkątów.</target>
       </trans-unit>
+      <trans-unit id="options/igc-desc:0" approved="yes">
+        <source xml:space="preserve">Open connection using the International Gliding Commission protocol</source>
+        <target xml:space="preserve">Owtórz połączenie używając protokołu Międzynarodowej Komisji Szybowcowej (International Gliding Commission).</target>
+      </trans-unit>
       <trans-unit id="options/ignore-autosave-desc:0" approved="yes">
         <source xml:space="preserve">Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
         <target xml:space="preserve">Zignoruj plik autozapisu, tzn. ustawienia zapisane w tym pliku nie zostaną wczytane podczas uruchamiania, ani nie zostaną zapisane do tego pliku podczas zamykania symulatora.</target>

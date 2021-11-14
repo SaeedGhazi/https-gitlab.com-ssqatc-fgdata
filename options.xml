@@ -1245,6 +1245,12 @@
    </option>
 
    <option>
+    <name>igc</name>
+    <arg>params</arg>
+    <description>igc-desc</description>
+   </option>
+
+   <option>
     <name>joyclient</name>
     <arg>params</arg>
     <description>joyclient-desc</description>

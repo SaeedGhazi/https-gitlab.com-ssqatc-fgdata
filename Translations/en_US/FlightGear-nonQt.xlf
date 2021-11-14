@@ -1077,6 +1077,10 @@
           <source>Hud displays number of triangles rendered</source>
           <target />
         </trans-unit>
+        <trans-unit id="options/igc-desc:0" translate="yes" approved="no">
+          <source>Open connection using the International Gliding Commission protocol</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/ignore-autosave-desc:0" translate="yes" approved="no">
           <source>Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
           <target />

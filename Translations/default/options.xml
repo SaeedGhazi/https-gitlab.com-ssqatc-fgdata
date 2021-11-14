@@ -248,6 +248,7 @@
 	<atcsim-desc>Open connection using the ATC sim protocol (atc610x)</atcsim-desc>
 	<flarm-desc>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</flarm-desc>
 	<garmin-desc>Open connection using the Garmin GPS protocol</garmin-desc>
+	<igc-desc>Open connection using the International Gliding Commission protocol</igc-desc>
 	<joyclient-desc>Open connection to an Agwagon joystick</joyclient-desc>
 	<jsclient-desc>Open connection to a remote joystick</jsclient-desc>
 	<native-ctrls-desc>Open connection using the FG Native Controls protocol</native-ctrls-desc>

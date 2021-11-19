@@ -16,6 +16,10 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
+// From VPBTechnique.cxx
+uniform mat4 zUpTransform;
+uniform vec3 modelOffset;
+
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
@@ -88,14 +92,14 @@ void main()
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
     
     // and relative position to vector
-    relPos = gl_Vertex.xyz - ep.xyz;
+    relPos = (zUpTransform * vec4(vec4(modelOffset, 1.0) + gl_Vertex - ep)).xyz;
 
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
     // is later computed in the fragment shader again
     float dist = length(relPos);
 
     // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
-    vertex_alt = max(gl_Vertex.z,100.0);
+    vertex_alt = max(relPos.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
 
 

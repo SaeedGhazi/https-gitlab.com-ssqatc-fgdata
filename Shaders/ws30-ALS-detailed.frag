@@ -43,7 +43,7 @@
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec2 rawPos;
+varying vec3 rawPos;
 //varying vec3 worldPos;
 // Testing code:
 vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);

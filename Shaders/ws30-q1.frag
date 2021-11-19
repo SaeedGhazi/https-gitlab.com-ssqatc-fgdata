@@ -19,6 +19,8 @@ uniform vec4 dimensionsArray[128];
 uniform vec4 ambientArray[128];
 uniform vec4 diffuseArray[128];
 uniform vec4 specularArray[128];
+uniform mat4 zUpTransform;
+uniform vec3 modelOffset;
 
 // See include_fog.frag
 uniform int fogType;

@@ -43,7 +43,7 @@
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec2 rawPos;
+varying vec3 rawPos;
 //varying vec3 worldPos;
 // Testing code:
 vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
@@ -110,6 +110,8 @@ uniform vec4 dimensionsArray[128];
 uniform vec4 ambientArray[128];
 uniform vec4 diffuseArray[128];
 uniform vec4 specularArray[128];
+varying vec4 zUpPosition;
+uniform vec3 modelOffset;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -315,8 +317,8 @@ float dotnoisegrad_10m;
 
 // slope noise
 
-float slopenoise_50m = SlopeLines2D(rawPos, grad_dir, 50.0, steepness);
-float slopenoise_100m = SlopeLines2D(rawPos, grad_dir, 100.0, steepness);
+float slopenoise_50m = SlopeLines2D(rawPos.xy, grad_dir, 50.0, steepness);
+float slopenoise_100m = SlopeLines2D(rawPos.xy, grad_dir, 100.0, steepness);
 
 float snownoise_25m = mix(noise_25m, slopenoise_50m, clamp(3.0*(1.0-steepness),0.0,1.0));
 float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),0.0,1.0));

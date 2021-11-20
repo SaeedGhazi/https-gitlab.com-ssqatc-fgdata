@@ -32,7 +32,8 @@
         <halign>fill</halign>
         <valign>fill</valign>
         <stretch>true</stretch>
-        <pref-height>200</pref-height>
+        <pref-width>450</pref-width>
+        <pref-height>250</pref-height>
         <slider>15</slider>
         <editable>false</editable>
         <wrap>true</wrap>

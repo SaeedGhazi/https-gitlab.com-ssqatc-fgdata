@@ -57,8 +57,8 @@ uniform bool use_IR_vision;
 uniform mat4 osg_ViewMatrixInverse;
 
 // From VPBTechnique.cxx
-uniform mat4 zUpTransform;
-uniform vec3 modelOffset;
+uniform mat4 fg_zUpTransform;
+uniform vec3 fg_modelOffset;
 
 float earthShade;
 float yprime_alt;
@@ -103,11 +103,11 @@ void main()
   float vertex_alt;
   float scattering;
 
-   rawPos = (zUpTransform * gl_Vertex).xyz;
-   worldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
+  rawPos = (fg_zUpTransform * gl_Vertex).xyz;
+  worldPos = fg_modelOffset + gl_Vertex.xyz;
 	
 	
-   steepness = dot(normalize(gl_Normal), vec3 (0.0, 0.0, 1.0));
+   steepness = dot(normalize(vec3(fg_zUpTransform * vec4(gl_Normal,1.0))), vec3 (0.0, 0.0, 1.0));
    grad_dir = normalize(gl_Normal.xy);
 
    vec4 pos = gl_Vertex;
@@ -134,7 +134,7 @@ void main()
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
     
     // and relative position to vector
-    relPos = (zUpTransform * vec4(vec4(modelOffset, 1.0) + gl_Vertex - ep)).xyz;
+    relPos = (fg_zUpTransform * vec4(gl_Vertex - ep)).xyz;
     
     ecViewdir = (gl_ModelViewMatrix * (ep - gl_Vertex)).xyz;	
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
@@ -142,7 +142,7 @@ void main()
     float dist = length(relPos);
 
     // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
-    vertex_alt = max(relPos.z,100.0);
+    vertex_alt = max(rawPos.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
 
 

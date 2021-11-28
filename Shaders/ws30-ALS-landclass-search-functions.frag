@@ -230,17 +230,24 @@ uniform sampler2DArray textureArray;
 uniform sampler2D perlin;
 
 // Passed from VPBTechnique, not the Effect
-uniform int tile_level;
-uniform float tile_width;
-uniform float tile_height;
-uniform vec4 dimensionsArray[128];
+uniform float fg_tileWidth;
+uniform float fg_tileHeight;
+uniform bool fg_photoScenery;
+uniform vec4 fg_dimensionsArray[128];
+uniform vec4 fg_ambientArray[128];
+uniform vec4 fg_diffuseArray[128];
+uniform vec4 fg_specularArray[128];
+uniform vec4 fg_textureLookup1[128];
+uniform vec4 fg_textureLookup2[128];
+uniform mat4 fg_zUpTransform;
+uniform vec3 fg_modelOffset;
 
 // These should be sent as uniforms
 
 // Tile dimensions in meters
 // vec2 tile_size = vec2(tile_width , tile_height);
 // Testing: texture coords are sent flipped right now:
-vec2 tile_size = vec2(tile_height , tile_width);
+vec2 tile_size = vec2(fg_tileHeight , fg_tileWidth);
 
 // These are defined in noise.frag
 float rand2D(in vec2 co);
@@ -257,12 +264,12 @@ int get_random_landclass(in vec2 co, in vec2 tile_size)
 
 
 // Look up texture coordinates and stretching scale of ground textures
-void get_ground_texture_data(in int textureIndex, in vec2 tile_coord, 
+void get_ground_texture_data(in int lc, in vec2 tile_coord, 
   out vec2 st, out vec2 g_texture_scale, inout vec2 dx, inout vec2 dy)
 {
   // Look up stretching dimensions of ground textures in m - scaled to 
   // fit in [0..1], so rescale 
-  vec2 g_texture_stretch_dim = dimensionsArray[textureIndex].st;
+  vec2 g_texture_stretch_dim = fg_dimensionsArray[lc].st;
   g_texture_scale =  tile_size.xy / g_texture_stretch_dim.xy;
   // Correct partial derivatives to account for stretching of different textures
   dx = dx * g_texture_scale;
@@ -351,7 +358,8 @@ vec4 lookup_ground_texture_array(in vec2 tile_coord, in int landclass_id,
 
   //texel = texture(textureArray, vec3(st, lc));
   //texel = textureLod(textureArray, vec3(st, lc), 12.0);
-  texel = textureGrad(textureArray, vec3(st, lc), dx, dy);
+	uint tex1 = uint(fg_textureLookup1[lc].r * 255.0 + 0.5);
+  texel = textureGrad(textureArray, vec3(st, tex1), dx, dy);
   return texel;
 }
 
@@ -362,7 +370,7 @@ int read_landclass_id(in vec2 tile_coord)
   vec2 dy = dFdy(tile_coord.st);
   int lc;
 
-  if (landclass_source == 0) lc = (int(texture2D(landclass, tile_coord.st).g * 255.0 + 0.5));
+  if (landclass_source == 0) lc = (int(texture2D(landclass, tile_coord.st).r * 255.0 + 0.5));
   else lc = (get_random_landclass(tile_coord.st, tile_size));
   return lc;
 }

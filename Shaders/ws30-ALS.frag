@@ -62,14 +62,19 @@ uniform float eye_alt;
 uniform float cloud_self_shading;
 
 // Passed from VPBTechnique, not the Effect
-uniform int tile_level;
-uniform float tile_width;
-uniform float tile_height;
-uniform bool photoScenery;
-uniform vec4 dimensionsArray[128];
-uniform vec4 ambientArray[128];
-uniform vec4 diffuseArray[128];
-uniform vec4 specularArray[128];
+// Passed from VPBTechnique, not the Effect
+uniform float fg_tileWidth;
+uniform float fg_tileHeight;
+uniform bool fg_photoScenery;
+uniform vec4 fg_dimensionsArray[128];
+uniform vec4 fg_ambientArray[128];
+uniform vec4 fg_diffuseArray[128];
+uniform vec4 fg_specularArray[128];
+uniform vec4 fg_textureLookup1[128];
+uniform vec4 fg_textureLookup2[128];
+#define MAX_TEXTURES 8
+uniform mat4 fg_zUpTransform;
+uniform vec3 fg_modelOffset;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -225,7 +230,7 @@ void main()
 	vec4 mat_diffuse, mat_ambient, mat_specular;
 	float mat_shininess;
 
-  if (photoScenery) {
+  if (fg_photoScenery) {
 		mat_ambient = vec4(1.0,1.0,1.0,1.0);
 		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
 		mat_specular = vec4(0.1, 0.1, 0.1, 1.0);
@@ -238,8 +243,8 @@ void main()
 		// rather than the material color from ambientArray/diffuseArray.
 		mat_ambient = vec4(1.0,1.0,1.0,1.0);
 		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
-		mat_specular = specularArray[lc];
-		mat_shininess = dimensionsArray[lc].z;
+		mat_specular = fg_specularArray[lc];
+		mat_shininess = fg_dimensionsArray[lc].z;
 
     // Look up ground textures by indexing into the texture array.
     // Different textures are stretched along the ground to different 

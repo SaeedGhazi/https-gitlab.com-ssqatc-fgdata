@@ -44,9 +44,9 @@ varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
 varying vec3 rawPos;
-//varying vec3 worldPos;
+varying vec3 worldPos;
 // Testing code:
-vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
+//vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
 //varying vec2 orthoTexCoord;
@@ -105,13 +105,17 @@ uniform int use_alt_landing_light;
 uniform int swatch_size;  //in metres, typically 1000 or 2000
 
 // Passed from VPBTechnique, not the Effect
-uniform bool photoScenery;
-uniform vec4 dimensionsArray[128];
-uniform vec4 ambientArray[128];
-uniform vec4 diffuseArray[128];
-uniform vec4 specularArray[128];
-varying vec4 zUpPosition;
-uniform vec3 modelOffset;
+uniform float fg_tileWidth;
+uniform float fg_tileHeight;
+uniform bool fg_photoScenery;
+uniform vec4 fg_dimensionsArray[128];
+uniform vec4 fg_ambientArray[128];
+uniform vec4 fg_diffuseArray[128];
+uniform vec4 fg_specularArray[128];
+uniform vec4 fg_textureLookup1[128];
+uniform vec4 fg_textureLookup2[128];
+uniform mat4 fg_zUpTransform;
+uniform vec3 fg_modelOffset;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -380,19 +384,18 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   float index = float(lc)/512.0;
   vec4 index_n = vec4(lc_n)/512.0;
 
-  float mat_shininess = dimensionsArray[lc].z;
-  vec4 mat_ambient = ambientArray[lc];
-  vec4 mat_diffuse = diffuseArray[lc];
-  vec4 mat_specular = specularArray[lc];
-
-
+  float mat_shininess = fg_dimensionsArray[lc].z;
+  vec4 mat_ambient = fg_ambientArray[lc];
+  vec4 mat_diffuse = fg_diffuseArray[lc];
+  vec4 mat_specular = fg_specularArray[lc];
+	vec2 st = gl_TexCoord[0].st;
 
   // Testing code:
   // Use rlc even when looking up textures to recreate the extra performance hit
   // so any performance difference between the two is due to the texture lookup
   // color.rgb = color.rgb+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
 
-  if (photoScenery) {
+  if (fg_photoScenery) {
     // In the photoscenery case we don't have landclass or materials available, so we
     // just use constants for the material properties.
     mat_ambient = vec4(0.2,0.2,0.2,1.0);
@@ -410,14 +413,17 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 		// rather than the material color from ambientArray/diffuseArray.
 		mat_ambient = vec4(1.0,1.0,1.0,1.0);
 		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
-		mat_specular = specularArray[lc];
-		mat_shininess = dimensionsArray[lc].z;
+		mat_specular = fg_specularArray[lc];
+		mat_shininess = fg_dimensionsArray[lc].z;
 
 
     // Look up ground textures by indexing into the texture array.
     // Different textures are stretched along the ground to different 
     // lengths along each axes as set by <xsize> and <ysize> 
     // regional definitions parameters
+		vec2 atlas_dimensions = fg_dimensionsArray[lc].st;
+		vec2 atlas_scale =  vec2(fg_tileWidth / atlas_dimensions.s, fg_tileHeight / atlas_dimensions.t );
+		st = atlas_scale * gl_TexCoord[0].st;
 
     // Look up texture coordinates and scale of ground textures
 
@@ -454,13 +460,27 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
 
+  // Mix texture is material texture 12, which is mapped to the b channel of fg_textureLookup1
+  int tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
+  mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+  if (tex2 < 0) mix_flag = 0; // Disable if no index found
 
-  // Testing: temp values
-  dot_texel = texel;// texture2D(dot_texture, vec2 (stprime.y, stprime.x) );
-  detail_texel = texel;
-  mix_texel = texel;
-	grain_texel = texel;
-	gradient_texel = texel;
+  // Dot texture is material texture 15, which is mapped to the g channel of fg_textureLookup2
+  tex2 = int(fg_textureLookup2[lc].g * 255.0 + 0.5);
+  dot_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+
+  // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
+  tex2 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
+  detail_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+  if (tex2 < 0) flag = 0; // Disable if no index found
+
+  // Grain texture is material texture 14, which is mapped to the r channel of fg_textureLookup2
+  tex2 = int(fg_textureLookup2[lc].r * 255.0 + 0.5);
+  grain_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+
+  // Gradient texture is material texture 13, which is mapped to the a channel of fg_textureLookup1
+  tex2 = int(fg_textureLookup1[lc].a * 255.0 + 0.5);
+  gradient_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
 
   // Testing: WS2 code after this
 
@@ -492,12 +512,6 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(msl_altitude -snowlevel) );
 	}
 
-	// the mixture/gradient texture
-	if (mix_flag == 1) {
-		//mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3); // temp
-		if (mix_texel.a <0.1) {mix_flag = 0;}
-	}
-
 	// the hires overlay texture is loaded with parallax mapping
 	
 	if (flag == 1) {
@@ -507,7 +521,6 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 		stprime = stprime + normalize(relPos).xy * 0.022 * (noise_10m + 0.5 * noise_5m +0.25 * noise_2m - 0.875 );
 		
 		//detail_texel = texture2D(detail_texture, stprime); // temp
-		if (detail_texel.a <0.1) {flag = 0;}
 	}
 
 // texture preparation according to detail level
@@ -521,7 +534,8 @@ float mix_factor;
    // first the second texture overlay
    // transition model 0: random patch overlay without any gradient information
    // transition model 1: only gradient-driven transitions, no randomness
-   
+
+   mix_flag = 0;
    
    if (mix_flag == 1)
 	{

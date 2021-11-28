@@ -84,7 +84,7 @@
     <material-id>0</material-id>
     <grain_strength>0.5</grain_strength>
     <intrinsic_wetness>0.0</intrinsic_wetness>
-    <transition_model>0.5</transition_model>
+    <transition_model>0.9</transition_model>
     <hires_overlay_bias>0.0</hires_overlay_bias>
     <dot_density>1.0</dot_density>
     <dot_size>1.0</dot_size>

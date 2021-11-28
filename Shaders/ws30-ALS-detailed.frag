@@ -44,9 +44,9 @@ varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
 varying vec3 rawPos;
-//varying vec3 worldPos;
+varying vec3 worldPos;
 // Testing code:
-vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
+//vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
 //varying vec2 orthoTexCoord;
 varying vec4 eyePos;
 
@@ -84,11 +84,17 @@ uniform int quality_level;
 uniform int tquality_level;
 
 // Passed from VPBTechnique, not the Effect
-uniform bool photoScenery;
-uniform vec4 dimensionsArray[128];
-uniform vec4 ambientArray[128];
-uniform vec4 diffuseArray[128];
-uniform vec4 specularArray[128];
+uniform float fg_tileWidth;
+uniform float fg_tileHeight;
+uniform bool fg_photoScenery;
+uniform vec4 fg_dimensionsArray[128];
+uniform vec4 fg_ambientArray[128];
+uniform vec4 fg_diffuseArray[128];
+uniform vec4 fg_specularArray[128];
+uniform vec4 fg_textureLookup1[128];
+uniform vec4 fg_textureLookup2[128];
+uniform mat4 fg_zUpTransform;
+uniform vec3 fg_modelOffset;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -283,13 +289,11 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   float index = float(lc)/512.0;
   vec4 index_n = vec4(lc_n)/512.0;
 
-  float mat_shininess = dimensionsArray[lc].z;
-  vec4 mat_ambient = ambientArray[lc];
-  vec4 mat_diffuse = diffuseArray[lc];
-  vec4 mat_specular = specularArray[lc];
-
-
-
+  float mat_shininess = fg_dimensionsArray[lc].z;
+  vec4 mat_ambient = fg_ambientArray[lc];
+  vec4 mat_diffuse = fg_diffuseArray[lc];
+  vec4 mat_specular = fg_specularArray[lc];
+	vec2 st = gl_TexCoord[0].st;
 
   // Testing code:
   // Use rlc even when looking up textures to recreate the extra performance hit
@@ -297,7 +301,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   // color.rgb = color.rgb+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
 
 
-  if (photoScenery) {
+  if (fg_photoScenery) {
     // In the photoscenery case we don't have landclass or materials available, so we
     // just use constants for the material properties.
     mat_ambient = vec4(0.2,0.2,0.2,1.0);
@@ -311,8 +315,13 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 		// rather than the material color from ambientArray/diffuseArray.
 		mat_ambient = vec4(1.0,1.0,1.0,1.0);
 		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
-		mat_specular = specularArray[lc];
-		mat_shininess = dimensionsArray[lc].z;
+		mat_specular = fg_specularArray[lc];
+		mat_shininess = fg_dimensionsArray[lc].z;
+
+		// Different textures have different have different dimensions.
+		vec2 atlas_dimensions = fg_dimensionsArray[lc].st;
+		vec2 atlas_scale =  vec2(fg_tileWidth / atlas_dimensions.s, fg_tileHeight / atlas_dimensions.t );
+		st = atlas_scale * gl_TexCoord[0].st;
 
     // Look up ground textures by indexing into the texture array.
     // Different textures are stretched along the ground to different 
@@ -352,66 +361,76 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
 
-  // Testing code: temp
-  mix_texel = texel;
-  detail_texel = texel;
 
 	int flag = 1;
-    int mix_flag = 1;
+  int mix_flag = 1;
 
+  float local_autumn_factor = texel.a;
 
-    float local_autumn_factor = texel.a;
-
-  if (photoScenery) {
+  if (fg_photoScenery) {
     flag = 0;
     mix_flag = 0;
   }
 
-    float distortion_factor = 1.0;
-    vec2 stprime;
+  float distortion_factor = 1.0;
+  vec2 stprime;
 
-    float noise_term;
-    float snow_alpha;
+  float noise_term;
+  float snow_alpha;
 
-    //float view_angle = abs(dot(normal, normalize(ecViewdir)));
+  //float view_angle = abs(dot(normal, normalize(ecViewdir)));
 
-    if ((quality_level > 3)&&(relPos.z + eye_alt +500.0 > snowlevel))
+  if ((quality_level > 3)&&(rawPos.z +500.0 > snowlevel)) {
+    float sfactor;
+    snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
+    snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
+    snow_texel.g = snow_texel.g * (0.9 + 0.05 * (noise_10m + noise_5m));
+    snow_texel.a = 1.0;
+    noise_term = 0.1 * (noise_500m-0.5);
+    sfactor = sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
+    noise_term = noise_term + 0.2 * (noise_50m -0.5) * (1.0 - smoothstep(18000.0*sfactor, 40000.0*sfactor, dist)  ) ;
+    noise_term = noise_term + 0.3 * (noise_10m -0.5) * (1.0 - smoothstep(4000.0 * sfactor, 8000.0 * sfactor, dist)  ) ;
+
+    if (dist < 3000.0*sfactor) { 
+      noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );
+    }
+    
+    snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(rawPos.z -snowlevel) );
+      
+  }
+
+  mix_flag = 1;
+  flag = 0;
+
+  if ((tquality_level > 2) && (mix_flag == 1))
 	{
-	float sfactor;
-	snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
-	snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
-	snow_texel.g = snow_texel.g * (0.9 + 0.05 * (noise_10m + noise_5m));
-	snow_texel.a = 1.0;
-	noise_term = 0.1 * (noise_500m-0.5);
-	sfactor = sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
-	noise_term = noise_term + 0.2 * (noise_50m -0.5) * (1.0 - smoothstep(18000.0*sfactor, 40000.0*sfactor, dist)  ) ;
-	noise_term = noise_term + 0.3 * (noise_10m -0.5) * (1.0 - smoothstep(4000.0 * sfactor, 8000.0 * sfactor, dist)  ) ;
-	if (dist < 3000.0*sfactor){ noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );}
-	snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
-   	
-	}
+    // Mix texture is material texture 15, which is mapped to the b channel of fg_textureLookup1
+    int tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
+    mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
 
-    if ((tquality_level > 2) && (mix_flag == 1))
-	{
-	//mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3); // temp
-	if (mix_texel.a <0.1) {mix_flag = 0;}
+    //mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3); // temp
+    if (tex2 < 0) { mix_flag = 0;}
  	}
 
-
-    if (tquality_level > 3 && (flag == 1))  
+  if (tquality_level > 3 && (flag == 1))  
 	{
-	stprime = vec2 (0.86*gl_TexCoord[0].s + 0.5*gl_TexCoord[0].t, 0.5*gl_TexCoord[0].s - 0.86*gl_TexCoord[0].t);
-    	//distortion_factor = 0.9375 + (1.0 * nvL[2]);
-	distortion_factor = 0.97 + 0.06 * noise_500m;
-	stprime = stprime * distortion_factor * 15.0;
-	if (quality_level > 4)
+	  stprime = vec2 (0.86*gl_TexCoord[0].s + 0.5*gl_TexCoord[0].t, 0.5*gl_TexCoord[0].s - 0.86*gl_TexCoord[0].t);
+    //distortion_factor = 0.9375 + (1.0 * nvL[2]);
+	  distortion_factor = 0.97 + 0.06 * noise_500m;
+	  stprime = stprime * distortion_factor * 15.0;
+	  if (quality_level > 4)
 		{
-		stprime = stprime + normalize(relPos).xy * 0.02 * (noise_10m + 0.5 * noise_5m - 0.75);
+		  stprime = stprime + normalize(relPos).xy * 0.02 * (noise_10m + 0.5 * noise_5m - 0.75);
 		}
-    	//detail_texel = texture2D(detail_texture, stprime); // temp
-	if (detail_texel.a <0.1) {flag = 0;}
-	}
 
+    // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
+    int tex3 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
+    detail_texel = texture(textureArray, vec3(stprime, tex3));
+
+    //detail_texel = texture2D(detail_texture, stprime); // temp
+
+  	if (tex3 < 0) {flag = 0;}
+	}
 
 // texture preparation according to detail level
 
@@ -421,44 +440,40 @@ float dist_fact;
 float nSum;
 float mix_factor;
 
-if (tquality_level > 2)
-   {
-   // first the second texture overlay
-   // transition model 0: random patch overlay without any gradient information
-   // transition model 1: only gradient-driven transitions, no randomness
+if (tquality_level > 2) {
+  // first the second texture overlay
+  // transition model 0: random patch overlay without any gradient information
+  // transition model 1: only gradient-driven transitions, no randomness
    
    
-   if (mix_flag == 1)
-	{
-	nSum =  0.18 * (2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
-	nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
-	nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
-	mix_factor = smoothstep(0.5, 0.54, nSum);
-        texel = mix(texel, mix_texel, mix_factor);
-        local_autumn_factor = texel.a;
-	}
-   
-   // then the detail texture overlay	
+  if (mix_flag == 1)	{
+    nSum =  0.18 * (2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
+    nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
+    nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
+    mix_factor = smoothstep(0.5, 0.54, nSum);
+    texel = mix(texel, mix_texel, mix_factor);
+    local_autumn_factor = texel.a;
   }
+   
+}
 
-if (tquality_level > 3)
-     {	
-   if (dist < 40000.0)
-   	{
-	if (flag == 1)
-		{
-		//noise_50m = Noise2D(rawPos.xy, 50.0);
-		//noise_250m  = Noise2D(rawPos.xy, 250.0); 
-		dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
-		nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
-        	nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
-		mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias - dist_fact);
-		if (mix_factor > 0.8) {mix_factor = 0.8;}
-		texel =  mix(texel, detail_texel,mix_factor);
-		local_autumn_factor = texel.a;				
-		}
-	}
-   }
+if (tquality_level > 3) {
+  // then the detail texture overlay	
+  if (dist < 40000.0)
+  {
+    if (flag == 1) {
+      //noise_50m = Noise2D(rawPos.xy, 50.0);
+      //noise_250m  = Noise2D(rawPos.xy, 250.0); 
+      dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
+      nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
+      nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
+      mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias - dist_fact);
+      if (mix_factor > 0.8) {mix_factor = 0.8;}
+      texel =  mix(texel, detail_texel,mix_factor);
+      local_autumn_factor = texel.a;				
+    }
+  }
+}
 
 
 
@@ -493,18 +508,18 @@ if (quality_level > 3)
 	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 	
     	// mix snow
-	if (relPos.z + eye_alt +500.0 > snowlevel)
+	if (rawPos.z +500.0 > snowlevel)
 		{
    		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
 		//texel = mix(texel, snow_texel, texel_snow_fraction);
-		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z + eye_alt)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (rawPos.z)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 		}
 	}
-else if (relPos.z + eye_alt +500.0 > snowlevel)
+else if (rawPos.z +500.0 > snowlevel)
         {
-            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(relPos.z +eye_alt -snowlevel) );
+            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(rawPos.z -snowlevel) );
 //          texel = vec4(dot(vec3(0.2989, 0.5870, 0.1140), texel.rgb));
-            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (relPos.z + eye_alt)));
+            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (rawPos.z)));
         }
 
 

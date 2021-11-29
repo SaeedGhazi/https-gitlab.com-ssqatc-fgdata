@@ -300,11 +300,29 @@
 
 		<text>
 			<row>22</row><col>0</col>
-			<label>FG Version (recorder):</label>
+			<label>Tape Size (bytes)</label>
 			<halign>left</halign>
 		</text>
 		<text>
 			<row>22</row><col>1</col>
+			<property>/sim/gui/dialogs/flightrecorder/preview/tape-size-str</property>
+			<halign>left</halign>
+			<live>true</live>
+			<color>
+				<red>0.8</red>
+				<green>0.8</green>
+				<blue>0.0</blue>
+				<alpha>1</alpha>
+			</color>
+		</text>
+
+		<text>
+			<row>26</row><col>0</col>
+			<label>FG Version (recorder):</label>
+			<halign>left</halign>
+		</text>
+		<text>
+			<row>26</row><col>1</col>
 			<property>/sim/gui/dialogs/flightrecorder/preview/version/flightgear</property>
 			<halign>left</halign>
 			<live>true</live>
@@ -317,7 +335,7 @@
 		</text>
 
         <text>
-            <row>25</row>
+            <row>29</row>
             <col>0</col>
 			<colspan>3</colspan>
             <label>Description:</label>
@@ -362,6 +380,30 @@
 			</color>
 		</text>
     </group>
+    
+    <hrule/>
+    
+    <group>
+		<layout>vbox</layout>
+        <checkbox>
+            <property>/sim/gui/dialogs/flightrecorder-load/create-video</property>
+            <halign>left</halign>
+            <label>Auto-create video</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+        <input>
+            <property>/sim/gui/dialogs/flightrecorder-load/fixed-dt</property>
+            <halign>left</halign>
+            <label>Fixed dt</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </input>
+    </group>
+    
+    <hrule/>
 
 	<!-- button area -->
 	<hrule/>
@@ -385,7 +427,9 @@
 				settimer(func {
 					var Config = props.Node.new({
 						"tape": getprop("/sim/gui/dialogs/flightrecorder/selected-tape", ""),
-						"same-aircraft": 0
+						"same-aircraft": 0,
+                        "create-video": getprop("/sim/gui/dialogs/flightrecorder-load/create-video"),
+                        "fixed-dt": getprop("/sim/gui/dialogs/flightrecorder-load/fixed-dt"),
 						});
 					if (fgcommand("load-tape", Config))
 						gui.showDialog("replay");

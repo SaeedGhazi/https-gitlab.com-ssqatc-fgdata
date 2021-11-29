@@ -83,6 +83,16 @@
                 </script>
             </binding>
         </radio>
+        <input>
+            <property>/sim/time/fixed-dt</property>
+            <label>Fixed dt</label>
+            <live>true</live>
+            <halign>left</halign>
+            <label></label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </input>
     </group>
 
 </PropertyList>

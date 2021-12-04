@@ -148,6 +148,11 @@ var MessageSystem = {
     NO_PAGING: 0,
 
     new: func(page_length, prop_path) {
+        if (!isint(page_length) or page_length < 1 or page_length > 100) {
+            logprint(LOG_ALERT, "MessageSystem.new(): page_length must be an integer value between 1 and 100");
+            return;
+        }
+
         var obj = {
             parents: [me],
             rootN : props.getNode(prop_path,1),
@@ -467,12 +472,19 @@ var MessageSystem = {
 
     # pass an existing canvas group to create text elements on
     setCanvasGroup: func(group) {
-        me.canvas_group = group;
+        if (isa(group, canvas.Group)) {
+            me.canvas_group = group;
+        }
+        else {
+            me.canvas_group = nil;
+            logprint(DEV_ALERT, "setCanvasGroup: argument is not a canvas group");
+        }
         return me;
     },
 
     # create text elements for message lines in canvas group; call setCanvasGroup() first!
     createCanvasTextLines: func(left, top, line_spacing, font_size) {
+        if (me.canvas_group == nil) return;
         me.lines = me.canvas_group.createChildren("text", me.page_length);
         forindex (var i; me.lines) {
             var l = me.lines[i];
@@ -486,6 +498,7 @@ var MessageSystem = {
     # create text element for "page i of N"; call setCanvasGroup() first!
     # returns the text element
     createPageIndicator: func(left, top, font_size, format_string = nil) {
+        if (me.canvas_group == nil) return;
         me.page_indicator = me.canvas_group.createChild("text");
         me.page_indicator.setAlignment("left-top").setTranslation(left, top);
         me.page_indicator.setFont("LiberationFonts/LiberationSans-Regular.ttf");

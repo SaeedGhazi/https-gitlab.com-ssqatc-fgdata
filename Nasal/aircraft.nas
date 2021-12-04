@@ -816,7 +816,10 @@ var autotrim = {
 #
 var tyresmoke = {
 	new: func(number, auto = 0, diff_norm = 0.05, check_vspeed=1, rain_norm_trigger=0.2) {
-		var m = { parents: [tyresmoke] };
+		var m = { 
+		    parents: [tyresmoke],
+		    filtered_touchdown: 0
+		};
 		m.vertical_speed = (!check_vspeed) ? nil : props.globals.initNode("velocities/vertical-speed-fps");
 		m.diff_norm = diff_norm;
 		m.speed = props.globals.initNode("velocities/groundspeed-kt");

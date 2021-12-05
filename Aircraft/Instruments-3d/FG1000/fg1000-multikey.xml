@@ -8,7 +8,7 @@
   <key n="49">
     <name>1</name>
     <desc>Softkey 1</desc>
-    <exit/>
+    <!-- no <exit/> because it makes it impossible to enter 10, 11, 12 -->
     <binding>
       <command>FG1000SoftKeyPushed</command>
       <device>1</device>
@@ -163,7 +163,7 @@
   <key n="49">
     <name>1</name>
     <desc>Softkey 1</desc>
-    <exit/>
+    <!-- no <exit/> because it makes it impossible to enter 10, 11, 12 -->
     <binding>
       <command>FG1000SoftKeyPushed</command>
       <device>2</device>

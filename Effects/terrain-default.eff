@@ -193,6 +193,11 @@
   <!-- put techniques at a "high" index to allow derived effects to
        insert their own techniques first. -->
 
+
+   <!-- 
+        ALS ultra settings technique. The 1st pass of terrain-overlay.eff is a copy of
+        this pass, and changes should be made there as well.
+   --> 
 <technique n="3">
     <predicate>
       <and>

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
+<!-- 
+     WS30 terrain overlay effect. There are 2 passes over the terrain. 
+       The 1st pass is a normal ALS ultra shaders pass from ws30.eff. 
+         This pass should be kept up to date with ws30.eff.
+       The 2nd pass uses geometry shaders to add smaller scale volumetric detail with 
+         simplified lighting. 
+-->
+
     <name>Effects/terrain-overlay</name>
     <inherits-from>Effects/terrain-default</inherits-from>
 
@@ -664,6 +672,11 @@
         <type>sampler-2d</type>
         <value type="int">2</value>
       </uniform>
+          <uniform>
+            <name>swatch_size</name>
+            <type>int</type>
+            <value><use>xsize</use></value>
+          </uniform>
       <uniform>
         <name>colorMode</name>
         <type>int</type>

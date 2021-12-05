@@ -158,7 +158,7 @@
 				<exit/>
 				<binding>
 					<command>dialog-show</command>
-					<dialog-name>location-on-ground</dialog-name>
+					<dialog-name>airports</dialog-name>
 				</binding>
 			</key>
 		</key>
@@ -800,7 +800,7 @@
 				<desc>Remove first waypoint</desc>
 				<binding>
 					<command>nasal</command>
-					<script>setprop("/autopilot/route-manager/input", "@pop")</script>
+					<script>setprop("/autopilot/route-manager/input", "@delete0")</script>
 				</binding>
 			</key>
 		</key>

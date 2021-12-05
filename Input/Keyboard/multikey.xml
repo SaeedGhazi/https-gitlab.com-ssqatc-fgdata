@@ -215,44 +215,195 @@
 	</key>
 
 	<!-- environment -->
+	<nasal>
+		<script><![CDATA[
+			# Set weather scenario by multikey sequence (based on apply function in FG_ROOT/gui/dialogs/weather.xml).
+			# "scenario_name" paramiter is a string of scenario name like "CAT I minimum".
+			# "weather_engine" can be:
+			#    "local" (force to use detailed weather),
+			#    "global" (force to use basic weather) or
+			#    "same" (don't change the engine).
+			var set_weather_scenario_multikey = func(scenario_name, weather_engine = "same") {
+				if (scenario_name == "Manual input") {
+					gui.popupTip("\"Manual input\" scenario is not supported here");
+					return;
+				}
+
+				var scenario = weather_scenario.find_weather_scenario(scenario_name);
+				if (scenario == nil) {
+					gui.popupTip("Failed to load the \"" ~ scenario_name ~ "\" weather scenario");
+					return;
+				}
+
+				var is_live_data = scenario_name == "Live data";
+				var is_local_weather = weather_engine == "local"
+					? 1
+					: (weather_engine == "global" ? 0 : getprop("/nasal/local_weather/enabled"));
+				var metar = is_live_data
+					 ? getprop("environment/metar/data")
+					 : scenario.getNode("metar", 1).getValue();
+
+				setprop("/environment/params/metar-updates-environment", 1);
+				setprop("/environment/realwx/enabled", is_live_data ? 1 : 0);
+				setprop("/environment/config/enabled", 1);
+				setprop("/environment/weather-scenario", scenario_name);
+				setprop("environment/metar/data", metar);
+
+				if (is_local_weather) {
+					# Clear any local weather that might be running
+					local_weather.clear_all();
+
+					# If Local Weather is enabled, re-initialize with updated
+					# initial tile and tile selection.
+					setprop("/nasal/local_weather/enabled", 1);
+
+					# Re-initialize local weather.
+					settimer(func {local_weather.set_tile();}, 0.2);
+				} else {
+					setprop("/nasal/local_weather/enabled", 0);
+				}
+			};
+
+			var get_current_weather_scenario = func() {
+				if (getprop("/environment/realwx/enabled")) {
+					# "Live data" is not set to "/environment/weather-scenario" after first launch
+					return "Live data";
+				}
+
+				return getprop("/environment/weather-scenario");
+			};
+		]]></script>
+	</nasal>
 	<key n="69">
 		<name>E</name>
 		<desc>Environment</desc>
 		<key n="69">
 			<name>w</name>
 			<desc>Weather</desc>
+
+			<key n="98">
+				<name>b</name>
+				<desc>Enable Basic Weather</desc>
+				<exit/>
+				<binding>
+					<command>nasal</command>
+					<script>
+						set_weather_scenario_multikey(get_current_weather_scenario(), "global");
+					</script>
+				</binding>
+			</key>
+
+			<key n="100">
+				<name>d</name>
+				<desc>Enable Detailed Weather</desc>
+				<exit/>
+				<binding>
+					<command>nasal</command>
+					<script>
+						set_weather_scenario_multikey(get_current_weather_scenario(), "local");
+					</script>
+				</binding>
+			</key>
+
 			<key n="119">
 				<name>s</name>
 				<desc>Weather Scenario</desc>
-				<key n="115">
+
+				<key n="114">
+					<name>r</name>
+					<desc>Weather Scenario = Live data</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Live data");
+						</script>
+					</binding>
+				</key>
+
+				<key n="72">
+					<name>H</name>
+					<desc>Weather Scenario = Core high pressure region</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Core high pressure region");
+						</script>
+					</binding>
+				</key>
+
+				<key n="104">
+					<name>h</name>
+					<desc>Weather Scenario = High pressure region</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("High pressure region");
+						</script>
+					</binding>
+				</key>
+
+				<key n="66">
+					<name>B</name>
+					<desc>Weather Scenario = Border of a high pressure region</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Border of a high pressure region");
+						</script>
+					</binding>
+				</key>
+
+				<key n="98">
+					<name>b</name>
+					<desc>Weather Scenario = Border of a low pressure region</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Border of a low pressure region");
+						</script>
+					</binding>
+				</key>
+
+				<key n="108">
+					<name>l</name>
+					<desc>Weather Scenario = Low pressure region</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Low pressure region");
+						</script>
+					</binding>
+				</key>
+
+				<key n="76">
+					<name>L</name>
+					<desc>Weather Scenario = Core low pressure region</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Core low pressure region");
+						</script>
+					</binding>
+				</key>
+
+				<key n="119">
+					<name>w</name>
+					<desc>Weather Scenario = Warm sector</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Warm sector");
+						</script>
+					</binding>
+				</key>
+
+				<key n="102">
 					<name>f</name>
 					<desc>Weather Scenario = Fair weather</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
-							setprop("/environment/weather-scenario", "Fair weather");
-						</script>
-					</binding>
-				</key>
-
-				<key n="109">
-					<name>m</name>
-					<desc>Weather Scenario = METAR</desc>
-					<binding>
-						<command>nasal</command>
-						<script>
-							setprop("/environment/weather-scenario", "METAR");
-						</script>
-					</binding>
-				</key>
-
-				<key n="110">
-					<name>n</name>
-					<desc>Weather Scenario = none</desc>
-					<binding>
-						<command>nasal</command>
-						<script>
-							setprop("/environment/weather-scenario", "none");
+							set_weather_scenario_multikey("Fair weather");
 						</script>
 					</binding>
 				</key>
@@ -263,7 +414,73 @@
 					<binding>
 						<command>nasal</command>
 						<script>
-							setprop("/environment/weather-scenario", "Thunderstorm");
+							set_weather_scenario_multikey("Thunderstorm");
+						</script>
+					</binding>
+				</key>
+
+				<key n="115">
+					<name>s</name>
+					<desc>Weather Scenario = Stormy Monday</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Stormy Monday");
+						</script>
+					</binding>
+				</key>
+
+				<key n="109">
+					<name>m</name>
+					<desc>Weather Scenario = Marginal VFR</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Marginal VFR");
+						</script>
+					</binding>
+				</key>
+
+				<key n="49">
+					<name>1</name>
+					<desc>Weather Scenario = CAT I minimum</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("CAT I minimum");
+						</script>
+					</binding>
+				</key>
+
+				<key n="50">
+					<name>2</name>
+					<desc>Weather Scenario = CAT II minimum</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("CAT II minimum");
+						</script>
+					</binding>
+				</key>
+
+				<key n="51">
+					<name>3</name>
+					<desc>Weather Scenario = CAT IIIb minimum</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("CAT IIIb minimum");
+						</script>
+					</binding>
+				</key>
+
+				<key n="101">
+					<name>e</name>
+					<desc>Weather Scenario = Early morning fog</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("Early morning fog");
 						</script>
 					</binding>
 				</key>

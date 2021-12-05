@@ -28,6 +28,8 @@ varying vec3 lightdir;
 varying vec3 relPos;
 varying vec3 rawPos;
 varying vec2 TopoUV;
+varying vec4 ecPosition;
+
 uniform vec3 floor_color;
 
 varying float earthShade;
@@ -102,6 +104,8 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 filter_combined (in vec3 color) ;
 
+float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 //////////////////////
 
@@ -473,15 +477,12 @@ void main(void)
 	
 	vec4 finalColor;
 	
-	// compute cloud shadow effect
+	// compute cloud and object shadow effects
 
-	float shadowValue;
-	if (cloud_shadow_flag == 1)
-		{
-		shadowValue = shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);
-		specular = specular * shadowValue;
-		refl = refl * (0.7 + 0.3 *shadowValue);
-		}
+	float shadowValue = getShadowing();
+	if (cloud_shadow_flag == 1) { shadowValue *= shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist); }
+	specular = specular * shadowValue;
+	refl = refl * (0.7 + 0.3 *shadowValue);
 
 	// compute secondary light effect
 
@@ -506,7 +507,13 @@ void main(void)
 
 	
 
-	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering) + vec4 (secondary_light, 0.0) * light_distance_fading(dist) * 2.0 * pow(max(0.0,dot(E,N)), water_shininess);
+	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);
+
+	// For the clustered lighting function we use the simple up direction (Normal) to get an 
+	// approximate lighting contribution, as the procedural normal map is done afterwards.
+	//vec3 light_contribution = secondary_light + getClusteredLightsContribution(ecPosition.xyz, Normal, vec3(1.0));
+	vec3 light_contribution = secondary_light;
+	finalColor += vec4(light_contribution, 0.0) * light_distance_fading(dist) * 2.0 * pow(max(0.0,dot(E,N)), water_shininess);
 
 	finalColor = clamp(finalColor, 0.0,1.0);
 

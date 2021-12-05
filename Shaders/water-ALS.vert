@@ -13,6 +13,7 @@ varying vec4 waterTex4;
 varying vec3 relPos;
 varying vec3 rawPos;
 varying vec2 TopoUV;
+varying vec4 ecPosition;
 
 varying vec3 viewerdir;
 varying vec3 lightdir;
@@ -47,9 +48,12 @@ const float lonAdjust = 0.9999537058469516; //actual extents: +-180.008333333333
 
 vec3 specular_light;
 
+void setupShadows(vec4 eyeSpacePos);
+
 // This is the value used in the skydome scattering shader - use the same here for consistency?
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
+
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
 {
@@ -87,7 +91,7 @@ void main(void)
     vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     rawPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
 
-    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    ecPosition = gl_ModelViewMatrix * gl_Vertex;
 
     viewerdir = vec3(gl_ModelViewMatrixInverse[3]) - vec3(gl_Vertex);
     lightdir = normalize(vec3(gl_ModelViewMatrixInverse * gl_LightSource[0].position));
@@ -292,5 +296,5 @@ else // the faster, full-day version without lightfields
 gl_FrontColor.rgb = specular_light;
 gl_BackColor.rgb = gl_FrontColor.rgb;
 
-
+	setupShadows(ecPosition);
 }

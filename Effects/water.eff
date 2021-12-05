@@ -411,12 +411,15 @@
 
 			<program>
 				<vertex-shader>Shaders/water-ALS.vert</vertex-shader>
+				<vertex-shader>Shaders/shadows-include.vert</vertex-shader>
 				<fragment-shader>Shaders/water-ALS-high.frag</fragment-shader>
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/cloud-shadowfunc.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
 				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+				<fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+				<fragment-shader>Shaders/clustered-include.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>
@@ -458,6 +461,27 @@
                                 <type>sampler-2d</type>
                                 <value type="int">8</value>
                         </uniform>
+			<!-- BEGIN shadows include -->
+			<uniform>
+				<name>shadow_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">10</value>
+			</uniform>
+			<uniform>
+				<name>shadows_enabled</name>
+				<type>bool</type>
+				<value>
+					<use>shadows_enabled</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>sun_atlas_size</name>
+				<type>int</type>
+				<value>
+					<use>sun_atlas_size</use>
+				</value>
+			</uniform>
+			<!-- END shadows include -->
                         <uniform>
                                 <name>use_specified_water_shallowness</name>
                                 <type>int</type>
@@ -1183,10 +1207,14 @@
 
 			<program>
 				<vertex-shader>Shaders/water-ALS.vert</vertex-shader>
+				<vertex-shader>Shaders/shadows-include.vert</vertex-shader>
 				<fragment-shader>Shaders/water-ALS-base.frag</fragment-shader>
 				<fragment-shader>Shaders/hazes.frag</fragment-shader>
+				<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 				<fragment-shader>Shaders/noise.frag</fragment-shader>
 				<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+				<fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+				<fragment-shader>Shaders/clustered-include.frag</fragment-shader>
 			</program>
 			<!--<uniform>
 				<name>water_reflection</name>
@@ -1213,6 +1241,27 @@
 				<type>sampler-2d</type>
 				<value type="int">6</value>
 			</uniform>
+			<!-- BEGIN shadows include -->
+			<uniform>
+				<name>shadow_tex</name>
+				<type>sampler-2d</type>
+				<value type="int">10</value>
+			</uniform>
+			<uniform>
+				<name>shadows_enabled</name>
+				<type>bool</type>
+				<value>
+					<use>shadows_enabled</use>
+				</value>
+			</uniform>
+			<uniform>
+				<name>sun_atlas_size</name>
+				<type>int</type>
+				<value>
+					<use>sun_atlas_size</use>
+				</value>
+			</uniform>
+			<!-- END shadows include -->
             <!-- normalmap is .dds-->
             <uniform>
                 <name>normalmap_dds</name>

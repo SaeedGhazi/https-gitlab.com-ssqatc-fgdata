@@ -24,6 +24,7 @@ varying vec3 viewerdir;
 varying vec3 lightdir;
 //varying vec3 specular_light;
 varying vec3 relPos;
+varying vec4 ecPosition;
 
 varying float earthShade;
 varying float yprime_alt;
@@ -61,8 +62,12 @@ const float terminator_width = 200000.0;
 const float EarthRadius = 5800000.0;
 
 float fog_func (in float targ, in float alt);
+float light_distance_fading(in float dist);
 vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
+
+float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
 
 /////// functions /////////
 
@@ -385,9 +390,22 @@ void main(void)
 	
 	vec4 finalColor;
 
+	// compute object shadow effect
+
+	float shadowValue = getShadowing();
+	specular = specular * shadowValue;
+	refl = refl * (0.7 + 0.3 *shadowValue);
 
 
 	finalColor = refl + specular * smoothstep(0.3, 0.6, ground_scattering);
+
+
+	// For the clustered lighting function we use the simple up direction (Normal) to get an 
+	// approximate lighting contribution, as the procedural normal map is done afterwards.
+	//finalColor += vec4(getClusteredLightsContribution(ecPosition.xyz, Normal, vec3(1.0)), 0.0) * light_distance_fading(dist) * 2.0 * pow(max(0.0,dot(E,N)), water_shininess);
+
+
+
 
 	//add foam
 	vec4 foam_texel = texture2D(sea_foam, vec2(waterTex2 * tscale) * 25.0);

@@ -79,14 +79,6 @@ uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float season;
 uniform float air_pollution;
-// Used by regional definitions
-uniform float grain_strength;
-uniform float intrinsic_wetness;
-uniform float transition_model;
-uniform float hires_overlay_bias;
-uniform float dot_density;
-uniform float dot_size;
-uniform float dust_resistance;
 
 uniform float WindE;
 uniform float WindN;
@@ -114,6 +106,9 @@ uniform vec4 fg_diffuseArray[128];
 uniform vec4 fg_specularArray[128];
 uniform vec4 fg_textureLookup1[128];
 uniform vec4 fg_textureLookup2[128];
+uniform vec4 fg_materialParams1[128];
+uniform vec4 fg_materialParams2[128];
+
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
 
@@ -310,11 +305,6 @@ float noise_1500m = Noise3D(worldPos.xyz, swatch_size*0.3750);
 float noise_2000m = Noise3D(worldPos.xyz, swatch_size*0.5);
 float noise_4000m = Noise3D(worldPos.xyz, swatch_size);
 
-// dot noise
-
-float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5, dot_density);
-float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5, dot_density);
-float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
 
 float dotnoisegrad_10m;
 
@@ -452,8 +442,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
     }
   }
 
-
-  vec4 color = gl_Color;
+  vec4 color = gl_Color * mat_ambient;
   color.a = 1.0;
 
   // Testing code: mix with green to show values of variables at each point
@@ -463,7 +452,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   // Mix texture is material texture 12, which is mapped to the b channel of fg_textureLookup1
   int tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
   mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-  if (tex2 < 0) mix_flag = 0; // Disable if no index found
+  if (mix_texel.a < 0.1) { mix_flag = 0;}
 
   // Dot texture is material texture 15, which is mapped to the g channel of fg_textureLookup2
   tex2 = int(fg_textureLookup2[lc].g * 255.0 + 0.5);
@@ -472,7 +461,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
   tex2 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
   detail_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-  if (tex2 < 0) flag = 0; // Disable if no index found
+  if (detail_texel.a < 0.1) { flag = 0;}
 
   // Grain texture is material texture 14, which is mapped to the r channel of fg_textureLookup2
   tex2 = int(fg_textureLookup2[lc].r * 255.0 + 0.5);
@@ -481,6 +470,22 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
   // Gradient texture is material texture 13, which is mapped to the a channel of fg_textureLookup1
   tex2 = int(fg_textureLookup1[lc].a * 255.0 + 0.5);
   gradient_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+
+  // Other material parameters, which are mapped to various channels from fg_materialParams1 and fg_materialParams2
+  float transition_model   = fg_materialParams1[lc].r;
+  float hires_overlay_bias = fg_materialParams1[lc].g;
+  float grain_strength     = fg_materialParams1[lc].b;
+  float intrinsic_wetness  = fg_materialParams1[lc].a;
+
+  float dot_density     = fg_materialParams2[lc].r;
+  float dot_size        = fg_materialParams2[lc].g;
+  float dust_resistance = fg_materialParams2[lc].b;
+  float rock_strata     = fg_materialParams2[lc].a;
+
+  // dot noise
+  float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5, dot_density);
+  float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5, dot_density);
+  float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
 
   // Testing: WS2 code after this
 
@@ -531,45 +536,34 @@ float dist_fact;
 float nSum;
 float mix_factor;
 
-   // first the second texture overlay
-   // transition model 0: random patch overlay without any gradient information
-   // transition model 1: only gradient-driven transitions, no randomness
+  // first the second texture overlay
+  // transition model 0: random patch overlay without any gradient information
+  // transition model 1: only gradient-driven transitions, no randomness
+  if (mix_flag == 1) {
+    nSum =  0.167 * (noise_4000m + 2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
+    nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
+    nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
+    mix_factor = smoothstep(0.5, 0.54, nSum);
+    texel = mix(texel, mix_texel, mix_factor);
+    local_autumn_factor = texel.a;
+  }
 
-   mix_flag = 0;
-   
-   if (mix_flag == 1)
-	{
-	nSum =  0.167 * (noise_4000m + 2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
-	nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
-	nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
-	mix_factor = smoothstep(0.5, 0.54, nSum);
-  texel = mix(texel, mix_texel, mix_factor);
-	local_autumn_factor = texel.a;
-	}
-
-   // then the detail texture overlay	
-    
-	mix_factor = 0.0;
-   if (dist < 40000.0)
-   	{
-	if (flag == 1)
-		{
-		dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
-		nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
-        nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
-		mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias- dist_fact);
-		if (mix_factor > 0.8) {mix_factor = 0.8;}
-		texel =  mix(texel, detail_texel,mix_factor);
-		}
+  // then the detail texture overlay	  
+  mix_factor = 0.0;
+  if ((flag == 1) && (dist < 40000.0)) {
+    dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
+    nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
+    nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
+    mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias- dist_fact);
+    if (mix_factor > 0.8) {mix_factor = 0.8;}
+    texel =  mix(texel, detail_texel,mix_factor);
 	}
 	
-	// rock for very steep gradients
-	
-	if (gradient_texel.a > 0.0)
-		{
-		texel = mix(texel, gradient_texel, 1.0 - smoothstep(0.75,0.8,abs(steepness)+ 0.00002* msl_altitude + 0.05 * (noise_50m - 0.5)));
-		local_autumn_factor = texel.a;
-		}
+  // rock for very steep gradients
+  if (gradient_texel.a > 0.0) {
+    texel = mix(texel, gradient_texel, 1.0 - smoothstep(0.75,0.8,abs(steepness)+ 0.00002* msl_altitude + 0.05 * (noise_50m - 0.5)));
+    local_autumn_factor = texel.a;
+  }
 
 
 	// strata noise
@@ -577,22 +571,20 @@ float mix_factor;
 	float stratnoise_50m;
 	float stratnoise_10m;
 	
-	if (rock_strata==1)
-		{
-		stratnoise_50m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 50.0, 0.2);
-		stratnoise_10m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 10.0, 0.2);
-		stratnoise_50m = mix(stratnoise_50m, 1.0, smoothstep(0.8,0.9, steepness));
-		stratnoise_10m = mix(stratnoise_10m, 1.0, smoothstep(0.8,0.9, steepness));
-		texel *= (0.4 + 0.4 * stratnoise_50m + 0.2 * stratnoise_10m);
-		}
+  if (rock_strata >  0.99) {
+    stratnoise_50m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 50.0, 0.2);
+    stratnoise_10m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 10.0, 0.2);
+    stratnoise_50m = mix(stratnoise_50m, 1.0, smoothstep(0.8,0.9, steepness));
+    stratnoise_10m = mix(stratnoise_10m, 1.0, smoothstep(0.8,0.9, steepness));
+    texel *= (0.4 + 0.4 * stratnoise_50m + 0.2 * stratnoise_10m);
+  }
    
    // the dot vegetation texture overlay
-   
    texel.rgb = mix(texel.rgb, dot_texel.rgb, dot_texel.a * (dotnoise_10m + dotnoise_15m) * detail_fade(1.0 * (dot_size * (1.0 +0.1*dot_size)), view_angle,dist));
    texel.rgb = mix(texel.rgb, dot_texel.rgb, dot_texel.a * dotnoise_2m * detail_fade(0.1 * dot_size, view_angle,dist));
-
    
-   // then the grain texture overlay
+  // then the grain texture overlay
+
    
    texel.rgb = mix(texel.rgb, grain_texel.rgb, grain_strength * grain_texel.a * (1.0 - mix_factor) * (1.0-smoothstep(2000.0,5000.0, dist)));
 
@@ -924,7 +916,4 @@ if (remove_haze_and_lighting == 1)
         gl_FragColor = texel;
 }
 
-
-
-        
 }

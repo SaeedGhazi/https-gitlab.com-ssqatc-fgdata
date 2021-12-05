@@ -76,9 +76,6 @@ uniform float fogstructure;
 uniform float snow_thickness_factor;
 uniform float cloud_self_shading;
 uniform float season;
-// Used by regional definitions
-uniform float transition_model;
-uniform float hires_overlay_bias;
 
 uniform int quality_level;
 uniform int tquality_level;
@@ -93,6 +90,7 @@ uniform vec4 fg_diffuseArray[128];
 uniform vec4 fg_specularArray[128];
 uniform vec4 fg_textureLookup1[128];
 uniform vec4 fg_textureLookup2[128];
+uniform vec4 fg_materialParams1[128];
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
 
@@ -399,17 +397,12 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
       
   }
 
-  mix_flag = 1;
-  flag = 0;
-
   if ((tquality_level > 2) && (mix_flag == 1))
 	{
     // Mix texture is material texture 15, which is mapped to the b channel of fg_textureLookup1
     int tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
     mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-
-    //mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3); // temp
-    if (tex2 < 0) { mix_flag = 0;}
+    if (mix_texel.a < 0.1) { mix_flag = 0;}
  	}
 
   if (tquality_level > 3 && (flag == 1))  
@@ -426,10 +419,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
     // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
     int tex3 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
     detail_texel = texture(textureArray, vec3(stprime, tex3));
-
-    //detail_texel = texture2D(detail_texture, stprime); // temp
-
-  	if (tex3 < 0) {flag = 0;}
+    if (detail_texel.a < 0.1) { flag = 0;}
 	}
 
 // texture preparation according to detail level
@@ -439,6 +429,8 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 float dist_fact; 
 float nSum;
 float mix_factor;
+float transition_model   = fg_materialParams1[lc].r;
+float hires_overlay_bias = fg_materialParams1[lc].g;
 
 if (tquality_level > 2) {
   // first the second texture overlay
@@ -447,8 +439,13 @@ if (tquality_level > 2) {
    
    
   if (mix_flag == 1)	{
+    // Random patch overlay weighting with noise
     nSum =  0.18 * (2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
+
+    // Increase the weighting for the mix_texel if more gradient-driven.
     nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
+
+    // Add the gradient element
     nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
     mix_factor = smoothstep(0.5, 0.54, nSum);
     texel = mix(texel, mix_texel, mix_factor);

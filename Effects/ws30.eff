@@ -82,14 +82,6 @@
       <bin-name>RenderBin</bin-name>
     </render-bin>
     <material-id>0</material-id>
-    <grain_strength>0.5</grain_strength>
-    <intrinsic_wetness>0.0</intrinsic_wetness>
-    <transition_model>0.9</transition_model>
-    <hires_overlay_bias>0.0</hires_overlay_bias>
-    <dot_density>1.0</dot_density>
-    <dot_size>1.0</dot_size>
-    <dust_resistance>1.0</dust_resistance>
-    <rock_strata>0</rock_strata>
     <raise_vertex type="bool">false</raise_vertex>
     <visibility><use>/environment/ground-visibility-m</use></visibility>
     <avisibility><use>/environment/visibility-m</use></avisibility>
@@ -301,41 +293,6 @@
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
         <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
-	  <uniform>
-        <name>grain_strength</name>
-        <type>float</type>
-        <value><use>grain_strength</use></value>
-      </uniform>
-	  <uniform>
-        <name>intrinsic_wetness</name>
-        <type>float</type>
-        <value><use>intrinsic_wetness</use></value>
-      </uniform>
-      <uniform>
-        <name>transition_model</name>
-        <type>float</type>
-        <value><use>transition_model</use></value>
-      </uniform>
-      <uniform>
-        <name>hires_overlay_bias</name>
-        <type>float</type>
-        <value><use>hires_overlay_bias</use></value>
-      </uniform>
-	  <uniform>
-        <name>dot_density</name>
-        <type>float</type>
-        <value><use>dot_density</use></value>
-      </uniform>
-	  <uniform>
-        <name>dot_size</name>
-        <type>float</type>
-        <value><use>dot_size</use></value>
-      </uniform>
-	  <uniform>
-        <name>dust_resistance</name>
-        <type>float</type>
-        <value><use>dust_resistance</use></value>
-      </uniform>
       <uniform>
         <name>visibility</name>
         <type>float</type>
@@ -760,11 +717,6 @@
         <value><use>cloud_shadow_flag</use></value>
       </uniform>
       <uniform>
-        <name>rock_strata</name>
-        <type>int</type>
-        <value><use>rock_strata</use></value>
-      </uniform>
-      <uniform>
 	<name>raise_vertex</name>
 	<type>bool</type>
 	<value>	<use>raise_vertex</use></value>
@@ -980,16 +932,6 @@
         <name>eye_alt</name>
         <type>float</type>
         <value><use>eye_alt</use></value>
-      </uniform>
-      <uniform>
-        <name>transition_model</name>
-        <type>float</type>
-        <value><use>transition_model</use></value>
-      </uniform>
-      <uniform>
-        <name>hires_overlay_bias</name>
-        <type>float</type>
-        <value><use>hires_overlay_bias</use></value>
       </uniform>
       <uniform>
         <name>snowlevel</name>

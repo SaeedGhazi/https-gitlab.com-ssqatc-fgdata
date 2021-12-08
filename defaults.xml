@@ -869,6 +869,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <record-extra-properties type="bool" userarchive="y">true</record-extra-properties>
       <record-extra-properties-paths>
       </record-extra-properties-paths>
+      <record-continuous-compression type="bool" userarchive="y">true</record-continuous-compression>
     </replay>
     <airport>
       <min-tower-height-ft type="double">6</min-tower-height-ft>   <!-- a.k.a chap on the ground with a radio waving frantically --> 

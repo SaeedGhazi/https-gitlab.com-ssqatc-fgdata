@@ -36,23 +36,104 @@
         
         <layout>vbox</layout>
         
-        <checkbox>
-            <property>sim/replay/record-continuous</property>
+        <text>
+            <label>General</label>
+        </text>
+        
+        <button>
+            <legend>Replay in-memory recording</legend>
+            <enable><not><property>sim/replay/replay-state</property></not></enable>
             <halign>left</halign>
-            <label>Do continuous record to file</label>
+            <binding>
+                <command>replay</command>
+            </binding>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>replay</dialog-name>
+            </binding>
+        </button>
+        
+        <button>
+            <legend>Replay recording from file ...</legend>
+            <halign>left</halign>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-load</dialog-name>
+            </binding>
+        </button>
+        
+        <button>
+            <legend>(Re)show replay dialogue</legend>
+            <enable><property>sim/replay/replay-state</property></enable>
+            <halign>left</halign>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>replay</dialog-name>
+            </binding>
+        </button>
+    
+        <button>
+            <legend>Save in-memory recording to file ...</legend>
+            <halign>left</halign>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-save</dialog-name>
+            </binding>
+        </button>
+    
+        <checkbox>
+            <property>sim/replay/recovery-period</property>
+            <halign>left</halign>
+            <label>Maintain recovery snapshot</label>
             <binding>
                 <command>dialog-apply</command>
             </binding>
         </checkbox>
-
-        <hrule/>
     
+        <hrule/>
+
         <text>
-            <label>Continuous recording settings</label>
+            <label>Continuous record</label>
+        </text>
+        
+        <button>
+            <legend>Start Continuous recording to file</legend>
+            <halign>left</halign>
+            <enable>
+                <not>
+                    <property>sim/replay/record-continuous</property>
+                </not>
+            </enable>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    setprop("sim/replay/record-continuous", 1);
+                </script>
+            </binding>
+        </button>
+
+        <button>
+            <legend>Stop Continuous recording to file</legend>
+            <halign>left</halign>
+            <enable>
+                <property>sim/replay/record-continuous</property>
+            </enable>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    setprop("sim/replay/record-continuous", 0);
+                </script>
+            </binding>
+        </button>
+
+        <text>
+            <label>Settings</label>
+            <halign>left</halign>
         </text>
         
         <checkbox>
             <property>sim/replay/record-continuous-compression</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
             <halign>left</halign>
             <label>Use compression</label>
             <binding>
@@ -62,6 +143,7 @@
 
         <checkbox>
             <property>sim/replay/record-signals</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
             <halign>left</halign>
             <label>Include user aircraft in Continuous recordings</label>
             <binding>
@@ -71,6 +153,7 @@
     
         <checkbox>
             <property>sim/replay/record-multiplayer</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
             <halign>left</halign>
             <label>Include multiplayer aircraft in recordings</label>
             <binding>
@@ -80,6 +163,7 @@
     
         <checkbox>
             <property>sim/replay/record-main-window</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
             <halign>left</halign>
             <label>Record main window position and size</label>
             <binding>
@@ -89,6 +173,7 @@
     
         <checkbox>
             <property>sim/replay/record-main-view</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
             <halign>left</halign>
             <label>Record main window view</label>
             <binding>
@@ -129,44 +214,10 @@
             </binding>
         </checkbox>
     
-        <hrule/>
-    
         <text>
-            <label>Recovery snapshot</label>
+            <label></label>
         </text>
-                
-        <checkbox>
-            <property>sim/replay/recovery-period</property>
-            <halign>left</halign>
-            <label>Maintain recovery snapshot</label>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-        </checkbox>
     
-        <hrule/>
-    
-        <text>
-            <label>Normal recording</label>
-        </text>
-        
-        <button>
-            <legend>Save normal recording to file ...</legend>
-            <binding>
-                <command>dialog-show</command>
-                <dialog-name>flight-recorder-save</dialog-name>
-            </binding>
-        </button>
-    
-        <hrule/>
-        
-        <button>
-            <legend>Load recording from file ...</legend>
-            <binding>
-                <command>dialog-show</command>
-                <dialog-name>flight-recorder-load</dialog-name>
-            </binding>
-        </button>
     </group>
 
 </PropertyList>

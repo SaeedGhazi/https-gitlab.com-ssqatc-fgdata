@@ -1719,6 +1719,10 @@
           <source>initializing subsystems</source>
           <target>subsystemen voorbereiden</target>
         </trans-unit>
+        <trans-unit id="sys/license-url:0" translate="yes" approved="no">
+          <source>Licensed under the GNU GPL. See https://www.flightgear.org for more information.</source>
+          <target />
+        </trans-unit>
         <trans-unit id="sys/loading-aircraft:0" translate="yes" approved="yes">
           <source>loading aircraft</source>
           <target>vliegtuig laden</target>
@@ -1770,6 +1774,22 @@
         <trans-unit id="sys/settings-migration-title:0" translate="yes" approved="yes">
           <source>Settings migrated</source>
           <target>Instellingen meegenomen</target>
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes:0" translate="yes" approved="no">
+          <source>KB</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes-per-sec:0" translate="yes" approved="no">
+          <source>KB/s</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes:0" translate="yes" approved="no">
+          <source>MB</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes-per-sec:0" translate="yes" approved="no">
+          <source>MB/s</source>
+          <target />
         </trans-unit>
         <trans-unit id="sys/unstable-warning:0" translate="yes" approved="yes">
           <source>Unstable nightly build - some features may be under active development</source>

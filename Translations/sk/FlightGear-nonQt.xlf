@@ -1719,6 +1719,10 @@
           <source>initializing subsystems</source>
           <target>Inicializácia podsystémov</target>
         </trans-unit>
+        <trans-unit id="sys/license-url:0" translate="yes" approved="no">
+          <source>Licensed under the GNU GPL. See https://www.flightgear.org for more information.</source>
+          <target />
+        </trans-unit>
         <trans-unit id="sys/loading-aircraft:0" translate="yes" approved="no">
           <source>loading aircraft</source>
           <target>Načítavanie lietadla</target>
@@ -1769,6 +1773,22 @@
         </trans-unit>
         <trans-unit id="sys/settings-migration-title:0" translate="yes" approved="no">
           <source>Settings migrated</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes:0" translate="yes" approved="no">
+          <source>KB</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes-per-sec:0" translate="yes" approved="no">
+          <source>KB/s</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes:0" translate="yes" approved="no">
+          <source>MB</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes-per-sec:0" translate="yes" approved="no">
+          <source>MB/s</source>
           <target />
         </trans-unit>
         <trans-unit id="sys/unstable-warning:0" translate="yes" approved="no">

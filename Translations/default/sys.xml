@@ -5,6 +5,7 @@
 <PropertyList>
 
 		<init>initializing</init>
+		<license-url>Licensed under the GNU GPL. See https://www.flightgear.org for more information.</license-url>
 		<loading-aircraft-list>loading aircraft list</loading-aircraft-list>
 		<loading-aircraft>loading aircraft</loading-aircraft>
 		<loading-nav-dat>loading navigation data</loading-nav-dat>
@@ -80,4 +81,10 @@
 		<error-aircraft-systems>Errors occured loading aircraft systems (fuel, electrical, hydrualics)</error-aircraft-systems>
 		<error-input-device-config>Errors loading input device configuration</error-input-device-config>
 		<error-terraysnc>Errors downloading scenery from TerraSync</error-terraysnc>
+
+		<units-kbytes>KB</units-kbytes>
+		<units-kbytes-per-sec>KB/s</units-kbytes-per-sec>
+		<units-mbytes>MB</units-mbytes>
+		<units-mbytes-per-sec>MB/s</units-mbytes-per-sec>
+
 </PropertyList>

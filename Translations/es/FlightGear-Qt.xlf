@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
-  <file original="/home/devel/FGFS/flightgear/src/GUI/InstallSceneryDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="es"><body>
+  <file original="" datatype="plaintext" source-language="en" target-language="es"><body>
     <group restype="x-trolltech-linguist-context" resname="InstallSceneryDialog">
       <trans-unit id="_msg1" approved="yes">
         <source xml:space="preserve">Install scenery</source>
@@ -26,8 +26,6 @@
         <target xml:space="preserve">Se instalaron correctamente los archivos de escenario en &apos;%1&apos;. Esta ubicación se agregará a la lista de escenarios adicionales que se utilizarán.</target>
       </trans-unit>
     </group>
-  </body></file>
-  <file original="" datatype="plaintext" source-language="en" target-language="es"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftList">
       <trans-unit id="_msg6" translate="no" approved="yes">
         <source xml:space="preserve">Click here to switch between grid and list mode.</source>
@@ -240,8 +238,6 @@
         <target xml:space="preserve">Ingrese argumentos adicionales en la línea de comando si es necesario. Consulte &lt;a href=&quot;http://flightgear.sourceforge.net/getstart-en/getstart-enpa2.html#x5-450004.5&quot;&gt;aquí&lt;/a&gt; para documentación sobre posibles argumentos. &lt;br&gt;&lt;b&gt;Advertencia:&lt;/b&gt; los valores introducidos aquí siempre anulan otros ajustes; &lt;a href=&quot;#view-command-line&quot;&gt;haga clic&lt;/a&gt; para ver el conjunto final de argumentos que serán utilizados</target>
       </trans-unit>
     </group>
-  </body></file>
-  <file original="/home/devel/FGFS/flightgear/src/GUI/SetupRootDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="es"><body>
     <group restype="x-trolltech-linguist-context" resname="SetupRootDialog">
       <trans-unit id="_msg49" approved="yes">
         <source xml:space="preserve">Setup required data files</source>
@@ -1530,25 +1526,25 @@ Ruta local: %2</target>
         <target xml:space="preserve">Descargando</target>
         <context-group purpose="location"><context context-type="linenumber">110</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg280">
+      <trans-unit id="_msg280" approved="yes">
         <source xml:space="preserve">Size: </source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Tamaño: </target>
         <context-group purpose="location"><context context-type="linenumber">144</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg281">
+      <trans-unit id="_msg281" approved="yes">
         <source xml:space="preserve"> MB</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve"> MB</target>
         <context-group purpose="location"><context context-type="linenumber">144</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">186</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg282">
+      <trans-unit id="_msg282" approved="yes">
         <source xml:space="preserve">Downloaded </source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Descargados </target>
         <context-group purpose="location"><context context-type="linenumber">185</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg283">
+      <trans-unit id="_msg283" approved="yes">
         <source xml:space="preserve"> MB of </source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve"> MB de </target>
         <context-group purpose="location"><context context-type="linenumber">186</context></context-group>
       </trans-unit>
       <trans-unit id="_msg284" approved="yes">

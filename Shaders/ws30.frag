@@ -57,7 +57,7 @@ void main()
 	} else {
 		// The Landclass for this particular fragment.  This can be used to
 		// index into the atlas textures.
-		int lc = int(texture2D(landclass, gl_TexCoord[0].st).r * 255.0 + 0.5);
+		int lc = int(texture2D(landclass, gl_TexCoord[0].st).g * 255.0 + 0.5);
 
 		// Color Mode is always AMBIENT_AND_DIFFUSE, which means
 		// using a base colour of white for ambient/diffuse,

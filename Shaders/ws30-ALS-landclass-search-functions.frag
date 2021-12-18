@@ -370,7 +370,7 @@ int read_landclass_id(in vec2 tile_coord)
   vec2 dy = dFdy(tile_coord.st);
   int lc;
 
-  if (landclass_source == 0) lc = (int(texture2D(landclass, tile_coord.st).r * 255.0 + 0.5));
+  if (landclass_source == 0) lc = (int(texture2D(landclass, tile_coord.st).g * 255.0 + 0.5));
   else lc = (get_random_landclass(tile_coord.st, tile_size));
   return lc;
 }

@@ -39,82 +39,7 @@
   <nasal>
     <!-- Generalize all this, turn into helpers and load defaults via XML -->
     <open><![CDATA[
-      var MAX_RUNWAYS = 28; # number of entries at KEDW
-
-      var DIALOG = cmdarg();
-      var listeners = [];
-
-      ## "prologue" currently required by the canvas-generic-map
-       var dialog_name ="airports"; #TODO: use substr() and cmdarg() to get this dynamically
-       var dialog_property = func(p) return "/sim/gui/dialogs/airports/"~p; #TODO: generalize using cmdarg
-       var DIALOG_CANVAS = gui.findElementByName(DIALOG, "airport-selection");
-
-
-      setprop("/sim/gui/dialogs/airports/selected-airport/lat", 0);
-      setprop("/sim/gui/dialogs/airports/selected-airport/lon", 0);
-      setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
-      setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
-      setprop("/sim/gui/dialogs/airports/mode", "search");
-      setprop("/sim/gui/dialogs/airports/display-mode", "0");
-      setprop("/sim/gui/dialogs/airports/list", "");
-
-      if (getprop("/sim/gui/dialogs/airports/display-taxiways") == "") {
-        setprop("/sim/gui/dialogs/airports/display-taxiways", "1");
-      }
-
-      if (getprop("/sim/gui/dialogs/airports/display-parking") == "") {
-        setprop("/sim/gui/dialogs/airports/display-parking", "0");
-      }
-
-      if (getprop("/sim/gui/dialogs/airports/display-tower") == "") {
-        setprop("/sim/gui/dialogs/airports/display-tower", "1");
-      }
-
-      if (getprop("/sim/gui/dialogs/airports/show-helipads") == "") {
-        setprop("/sim/gui/dialogs/airports/show-helipads", "1");
-      }
-
-      # Start with the closest airport
-      var airport_id = airportinfo().id;
-
-      # Retrieve METAR
-      fgcommand("request-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar",
-                                                         "station": airport_id}));
-
-      var dlg = props.globals.getNode("/sim/gui/dialogs/airports", 1);
-      var avail_runways = dlg.getNode("available-runways", 1);
-      var avail_parking = {};
-
-      if (dlg.getNode("list") == nil)
-          dlg.getNode("list", 1).setValue("");
-
-      var airportlist = dlg.getNode("list");
-
-      var mode = {
-        runway:     dlg.getNode("use_runway", 1),
-        bestrunway: dlg.getNode("use_best_runway", 1),
-        parkpos:    dlg.getNode("use_parkpos", 1)
-      };
-
-      var set_radio = func(m) {
-        foreach (k; keys(mode)) {
-          mode[k].setBoolValue(m == k);
-        }
-      }
-
-      var initialized = 0;
-      foreach (k; keys(mode)) {
-        if (mode[k].getType() == "NONE" or initialized) {
-          mode[k].setBoolValue(0);
-        } else {
-          initialized += mode[k].getBoolValue();
-        }
-      }
-      if (!initialized) {
-        set_radio("bestrunway");
-      }
-
-      var update_info = func {
+      var update_info = func(open = 0) {
           var info = airportinfo(airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/id", airport_id);
           setprop("/sim/gui/dialogs/airports/selected-airport/name", info.name);
@@ -124,7 +49,9 @@
           setprop("/sim/gui/dialogs/airports/selected-airport/elevation-ft", 3.28 * info.elevation);
           setprop("/sim/gui/dialogs/airports/selected-airport/rwy", "");
           setprop("/sim/gui/dialogs/airports/selected-airport/parkpos", "");
-          AirportChart.getController().setPosition(info.lat, info.lon);
+          if (!open) {
+            AirportChart.getController().setPosition(info.lat, info.lon);
+          }
 
           if (info.has_metar) {
             # Retrieve an updated METAR, and indicate that we've not got one currently.
@@ -217,6 +144,81 @@
           setprop("/sim/gui/dialogs/airports/selected-airport/course-deg", crs);
 
           gui.dialog_update("airports", "runway-list");
+      }
+
+      var MAX_RUNWAYS = 28; # number of entries at KEDW
+
+      var DIALOG = cmdarg();
+      var listeners = [];
+
+      ## "prologue" currently required by the canvas-generic-map
+       var dialog_name ="airports"; #TODO: use substr() and cmdarg() to get this dynamically
+       var dialog_property = func(p) return "/sim/gui/dialogs/airports/"~p; #TODO: generalize using cmdarg
+       var DIALOG_CANVAS = gui.findElementByName(DIALOG, "airport-selection");
+
+      var displayMode = getprop("/sim/gui/dialogs/airports/display-mode");
+      if ((displayMode != 0) and (displayMode != 1)) {
+        setprop("/sim/gui/dialogs/airports/display-mode", 0);
+      }
+
+      var displayTaxiways = getprop("/sim/gui/dialogs/airports/display-taxiways");
+      if ((displayTaxiways != 0) and (displayTaxiways != 1)) {
+        setprop("/sim/gui/dialogs/airports/display-taxiways", 1);
+      }
+
+      var displayParking = getprop("/sim/gui/dialogs/airports/display-parking");
+      if ((displayParking != 0) and (displayParking != 1)) {
+        setprop("/sim/gui/dialogs/airports/display-parking", 0);
+      }
+
+      var displayTower = getprop("/sim/gui/dialogs/airports/display-tower");
+      if ((displayTower != 0) and (displayTower != 1)) {
+        setprop("/sim/gui/dialogs/airports/display-tower", 1);
+      }
+
+      var showHelipads = getprop("/sim/gui/dialogs/airports/show-helipads");
+      if ((showHelipads != 0) and (showHelipads != 1)) {
+        setprop("/sim/gui/dialogs/airports/show-helipads", 0);
+      }
+
+      var dlg = props.globals.getNode("/sim/gui/dialogs/airports", 1);
+      var avail_runways = dlg.getNode("available-runways", 1);
+      var avail_parking = {};
+
+      # Start with the closest airport
+      var airport_id = airportinfo().id;
+      update_info(open = 1);
+
+      # Retrieve METAR
+      fgcommand("request-metar", var n = props.Node.new({ "path": "/sim/gui/dialogs/airports/selected-airport/metar",
+                                                         "station": airport_id}));
+
+      dlg.getNode("list", 1).setValue("");
+
+      var airportlist = dlg.getNode("list");
+
+      var mode = {
+        runway:     dlg.getNode("use_runway", 1),
+        bestrunway: dlg.getNode("use_best_runway", 1),
+        parkpos:    dlg.getNode("use_parkpos", 1)
+      };
+
+      var set_radio = func(m) {
+        foreach (k; keys(mode)) {
+          mode[k].setBoolValue(m == k);
+        }
+      }
+
+      var initialized = 0;
+      foreach (k; keys(mode)) {
+        if (mode[k].getType() == "NONE" or initialized) {
+          mode[k].setBoolValue(0);
+        } else {
+          initialized += mode[k].getBoolValue();
+        }
+      }
+      if (!initialized) {
+        set_radio("bestrunway");
       }
 
       var listbox = func {
@@ -820,11 +822,9 @@
                     {
                       var range = AirportChart.getScreenRange();
                       if (e.deltaY >0) {
-                        if (range < 10000)
-                            AirportChart.setScreenRange(range*range_step);
+                        AirportChart.setScreenRange(math.min(range*range_step, 10000));
                       } else {
-                        if (range > 100)
-                          AirportChart.setScreenRange(range/range_step);
+                        AirportChart.setScreenRange(math.max(range/range_step, 100));
                       }
                       setprop("/sim/gui/dialogs/airports/zoom-range", AirportChart.getScreenRange());
                     });
@@ -893,8 +893,7 @@
                         <command>nasal</command>
                         <script>
                             var range = AirportChart.getScreenRange();
-                            if (range &lt; 10000)
-                                AirportChart.setScreenRange(range*range_step);
+                            AirportChart.setScreenRange(math.min(range*range_step, 10000));
                             setprop("/sim/gui/dialogs/airports/zoom-range", AirportChart.getScreenRange());
                         </script>
                     </binding>
@@ -902,8 +901,8 @@
 
                 <text>
                     <name>zoomdisplay</name>
-                    <label>MMMMMMMMMMMMM</label>
-                    <format>Zoom %d</format>
+                    <label>XXXXXXXXXXXX</label>
+                    <format>Zoom: %d%%</format>
                     <property>/sim/gui/dialogs/airports/zoom-range</property>
                     <live>true</live>
                 </text>
@@ -918,8 +917,7 @@
                         <command>nasal</command>
                         <script>
                             var range = AirportChart.getScreenRange();
-                            if (range &gt; 100)
-                                AirportChart.setScreenRange(range/range_step);
+                            AirportChart.setScreenRange(math.max(range/range_step, 100));
                             setprop("/sim/gui/dialogs/airports/zoom-range", AirportChart.getScreenRange());
                         </script>
                     </binding>

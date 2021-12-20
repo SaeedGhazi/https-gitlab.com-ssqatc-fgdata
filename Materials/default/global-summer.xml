@@ -279,6 +279,9 @@
   <name>Watercourse</name>
   <name>Saline</name>
   <texture>Terrain/water-lake.png</texture>
+  <parameters>
+    <ice_cover><use>/environment/surface/ice-cover</use></ice_cover>
+  </parameters>
   <xsize>400</xsize>
   <ysize>400</ysize>
   <ambient>
@@ -300,7 +303,7 @@
    <a>1.0</a>
   </specular>
   <shininess>1.2</shininess>
-  <solid>0</solid>
+  <solid><property>/environment/surface/ice-cover</property></solid>
   <rolling-friction>1.5</rolling-friction>
   <bumpiness>0.6</bumpiness>
 </material>

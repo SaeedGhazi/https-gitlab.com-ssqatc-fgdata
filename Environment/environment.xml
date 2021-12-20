@@ -486,6 +486,7 @@
     <wetness-set type="double" userarchive="y">0.0</wetness-set>
     <wetness type="double" userarchive="n">0.0</wetness>
     <snow-thickness-factor type="double" userarchive="y">1.0</snow-thickness-factor>
+    <ice-cover type="bool" userarchive="n">false</ice-cover>
     <delta-T-soil type="double" userarchive="n">0.0</delta-T-soil>
     <delta-T-vegetation type="double" userarchive="n">0.0</delta-T-vegetation>
     <delta-T-rock type="double" userarchive="n">0.0</delta-T-rock>

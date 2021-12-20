@@ -64,7 +64,7 @@
         </binding>
         <binding>
           <command>property-toggle</command>
-      </binding>
+        </binding>
       </checkbox>
 
       <checkbox>
@@ -209,6 +209,18 @@
      <binding>
        <command>dialog-apply</command>
        <object-name>ice-cover</object-name>
+     </binding>
+     <binding>
+       <command>nasal</command>
+       <script>
+         <![CDATA[
+          if (getprop( "/environment/sea/surface/ice-cover" ) < 0.05 ) {
+            setprop( "/environment/surface/ice-cover", 0 );
+          } else {
+            setprop( "/environment/surface/ice-cover", 1 );
+          }
+        ]]>
+       </script>
      </binding>
     </slider>
 

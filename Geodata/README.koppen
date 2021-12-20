@@ -6,9 +6,13 @@ Download: http://koeppen-geiger.vu-wien.ac.at/Rcode/Map_KG-Global.zip
 World terrain elevation data:
 https://visibleearth.nasa.gov/images/73934/topography
 
+Total precipitations per annum, over land:
+https://commons.wikimedia.org/wiki/File:World_precip_annual.png
+
 
 The red channel of the image contans the Köppen-Geiger code.
 The green channel of the image contains the world elevation map.
+The blue channel of the image contains annual precipitation.
 
 ASICII
 CODE      description

@@ -278,7 +278,10 @@
   <name>Estuary</name>
   <name>Watercourse</name>
   <name>Saline</name>
-  <texture>Terrain/water-lake.png</texture>
+  <texture-set>
+    <texture>Terrain/water-lake.png</texture>
+    <texture n="10">Terrain/frozen_lake.png</texture>
+  </texture-set>
   <parameters>
     <ice_cover><use>/environment/surface/ice-cover</use></ice_cover>
   </parameters>

@@ -151,192 +151,94 @@
       </trans-unit>
     </group>
   </body></file>
-  <file original="" datatype="plaintext" source-language="en" target-language="nl"><body>
-    <group restype="x-trolltech-linguist-context" resname="AddCatalogPanel">
-      <trans-unit id="_msg28" translate="no" approved="yes">
-        <source xml:space="preserve">The requested hangar seems to be invalid (damaged or incomplete). Please contact the hangar authors, or try again later</source>
-        <target xml:space="preserve">De aangevraagde hangar is ongeldig (beschadigd of incompleet). Neem contact op met de eigenaar van de hangar of probeer later opnieuw</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="Location">
-      <trans-unit id="_msg29" translate="no" approved="yes">
-        <source xml:space="preserve">&lt; Back</source>
-        <target xml:space="preserve">&lt; Terug</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="SettingExtraArguments">
-      <trans-unit id="_msg30" translate="no" approved="yes">
-        <source xml:space="preserve">Enter additional command-line arguments if any are required. See &lt;a href=&quot;http://flightgear.sourceforge.net/getstart-en/getstart-enpa2.html#x5-450004.5&quot;&gt;here&lt;/a&gt; for documentation on possible arguments. &lt;br&gt;&lt;b&gt;Warning:&lt;/b&gt; values entered here always override other settings; &lt;a href=&quot;#view-command-line&quot;&gt;click here&lt;/a&gt; to view the final set of arguments that will be used</source>
-        <target xml:space="preserve">Voeg indien gewenst extra command-line argumenten toe. Zie &lt;a href=&quot;http://flightgear.sourceforge.net/getstart-en/getstart-enpa2.html#x5-450004.5&quot;&gt;deze documentatie&lt;/a&gt; voor mogelijke argumenten. &lt;br&gt;&lt;b&gt;Waarschuwing:&lt;/b&gt; waardes die hier worden ingevoerd hebben altijd voorrang boven andere instellingen; &lt;a href=&quot;#view-command-line&quot;&gt;klik hier&lt;/a&gt; om de complete lijst met argumenten te zien die zal worden gebruikt</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="Settings">
-      <trans-unit id="_msg31" translate="no" approved="yes">
-        <source xml:space="preserve">Low-spec</source>
-        <target xml:space="preserve">Basis</target>
-      </trans-unit>
-      <trans-unit id="_msg32" translate="no" approved="yes">
-        <source xml:space="preserve">The low-spec renderer ensures maximum performance on older computers.</source>
-        <target xml:space="preserve">De basisweergave zorgt voor maximale prestaties op oudere computers.</target>
-      </trans-unit>
-      <trans-unit id="_msg33" translate="no" approved="yes">
-        <source xml:space="preserve">Renderer</source>
-        <target xml:space="preserve">Weergavesysteem</target>
-      </trans-unit>
-      <trans-unit id="_msg34" translate="no" approved="yes">
-        <source xml:space="preserve">Default</source>
-        <target xml:space="preserve">Standaard</target>
-      </trans-unit>
-      <trans-unit id="_msg35" translate="no" approved="yes">
-        <source xml:space="preserve">Atmospheric Light Scattering</source>
-        <target xml:space="preserve">Atmospheric Light Scattering</target>
-      </trans-unit>
-      <trans-unit id="_msg36" translate="no" approved="yes">
-        <source xml:space="preserve">Rembrandt</source>
-        <target xml:space="preserve">Rembrandt</target>
-      </trans-unit>
-      <trans-unit id="_msg37" translate="no" approved="yes">
-        <source xml:space="preserve">The default renderer provides standard visuals with maximum compatibility.</source>
-        <target xml:space="preserve">Het standaard weergavesysteem biedt simpele visuals met maximale zekerheid.</target>
-      </trans-unit>
-      <trans-unit id="_msg38" translate="no" approved="yes">
-        <source xml:space="preserve">The ALS renderer uses a sophisticated physical atmospheric model and several other effects to give realistic rendering of large distances.</source>
-        <target xml:space="preserve">Het ALS weergavesysteem maakt gebruik van een geavanceerd atmospherisch model en enkele andere effect om een realistische weergave te produceren over grote afstanden.</target>
-      </trans-unit>
-      <trans-unit id="_msg39" translate="no" approved="yes">
-        <source xml:space="preserve">Rembrandt is a configurable multi-pass renderer which supports shadow-maps, cinematic effects and more. However, not all aircraft appear correctly and performance will depend greatly on your system hardware.</source>
-        <target xml:space="preserve">Rembrandt is een flexibel multi-pass weergavesysteem met ondersteuning voor shadow-maps, filmische effecten en meer. Niet alle vliegtuig zullen echt correct worden weergegeven en de prestaties hangen sterk af van uw hardware.</target>
-      </trans-unit>
-      <trans-unit id="_msg40" translate="no" approved="yes">
-        <source xml:space="preserve">Anti-aliasing is disabled when Rembrandt is enabled.</source>
-        <target xml:space="preserve">Anti-aliasing is niet beschikbaar als Rembrandt is ingeschakeld.</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="Sidebar">
-      <trans-unit id="_msg41" translate="no" approved="yes">
-        <source xml:space="preserve">Fly!</source>
-        <target xml:space="preserve">Vliegen!</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="AddOnsController">
-      <trans-unit id="_msg42" translate="no" approved="yes">
-        <source xml:space="preserve">Added scenery should contain at least one of the following folders: Objects, Terrain, Buildings, Roads, Pylons, NavData, Airports.</source>
-        <target xml:space="preserve">Toegevoegde landschapsmappen moeten tenminste een van de volgende mappen te bevatten: Objects, Terrain, Buildings, Roads, Pylons, NavData, Airports.</target>
-      </trans-unit>
-      <trans-unit id="_msg43" translate="no" approved="yes">
-        <source xml:space="preserve">Added scenery should contain at least one of the following folders: Objects, Terrain, Buildings, Roads, Pylons, NavData.</source>
-        <target xml:space="preserve">Toegevoegde landschappen moeten tenminste een van de volgende mappen bevatten: Objects, Terrain, Buildings, Road, Pylons, NavData.</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="QObject">
-      <trans-unit id="_msg44" translate="no" approved="yes">
-        <source xml:space="preserve">Ready for Take-off</source>
-        <target xml:space="preserve">Klaar voor de start</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="LauncherMainWindow">
-      <trans-unit id="_msg45" translate="no" approved="yes">
-        <source xml:space="preserve">Problems occurred loading the user interface. This is often due to missing modules on your system. Please report this error to the FlightGear developer list or forum, and take care to mention your system distribution, etc. Please also include the information provided below.
-</source>
-        <target xml:space="preserve">Er zijn problemen opgetreden tijdens het laden van de gebruikersinterface. Dit komt meestal door ontbrekende modules op uw systeem. Meld dit probleem op het FlightGear forum onder vermelding van uw besturingssysteem. Voeg tevens onderstaande informatie toe.
-</target>
-      </trans-unit>
-    </group>
-    <group restype="x-trolltech-linguist-context" resname="FirstRun">
-      <trans-unit id="_msg46" translate="no" approved="yes">
-        <source xml:space="preserve">FlightGear can send crash and error reports to the development team. This helps to fix common problems and improve the software for everyone. The reports don&apos;t contain personal information, but depending on the problem, may contain information such as the aircraft in use, startup airport, or your graphics card.</source>
-        <target xml:space="preserve">Flightgear kan foutrapportages naar het ontwikkelteam sturen. Dit helpt om veelvoorkomende problemen op te lossen en de software voor iedereen te verbeteren. De rapportage bevat geen persoonlijke informatie, maar kan afhankelijk van het probleem informatie over het vliegtuig, vliegveld of uw grafische kaart bevatten.</target>
-      </trans-unit>
-    </group>
-  </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AddOns.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOns">
-      <trans-unit id="_msg47" approved="yes">
+      <trans-unit id="_msg51" approved="yes">
         <source xml:space="preserve">Aircraft hangars</source>
         <target xml:space="preserve">Vliegtuighangars</target>
         <context-group purpose="location"><context context-type="linenumber">55</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg48" approved="yes">
+      <trans-unit id="_msg52" approved="yes">
         <source xml:space="preserve">Aircraft hangars are managed collections of aircraft, which can be downloaded, installed and updated inside FlightGear.</source>
         <target xml:space="preserve">Vliegtuighangars zijn collecties van vliegtuigen die vanuit FlightGear gedownload, geïnstalleerd en geüpdatet kunnen worden.</target>
         <context-group purpose="location"><context context-type="linenumber">56</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg49" approved="yes">
+      <trans-unit id="_msg53" approved="yes">
         <source xml:space="preserve">The official FlightGear aircraft hangar is not set up. To add it, click here.</source>
         <target xml:space="preserve">De officiële FlightGear hangar is niet ingesteld. Klik hier om hem toe te voegen.</target>
         <context-group purpose="location"><context context-type="linenumber">97</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg50" approved="yes">
+      <trans-unit id="_msg54" approved="yes">
         <source xml:space="preserve">Additional aircraft folders</source>
         <target xml:space="preserve">Extra vliegtuigmappen</target>
         <context-group purpose="location"><context context-type="linenumber">207</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg51" approved="yes">
+      <trans-unit id="_msg55" approved="yes">
         <source xml:space="preserve">To use aircraft you download yourself, FlightGear needs to know the folder(s) containing the aircraft data.</source>
         <target xml:space="preserve">Om vliegtuigen te gebruiken die u zelf heeft gedownload moet FlightGear weten in welke mappen deze vliegtuigen te vinden zijn.</target>
         <context-group purpose="location"><context context-type="linenumber">208</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg52" approved="yes">
+      <trans-unit id="_msg56" approved="yes">
         <source xml:space="preserve">Remove the aircraft folder: &apos;%1&apos; from the list? (The folder contents will not be changed)</source>
         <target xml:space="preserve">De vliegtuigmap: &apos;%1&apos; van de lijst verwijderen? (De inhoud van de map wordt niet gewijzigd)</target>
         <context-group purpose="location"><context context-type="linenumber">232</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg53" approved="yes">
+      <trans-unit id="_msg57" approved="yes">
         <source xml:space="preserve">No custom aircraft paths are configured.</source>
         <target xml:space="preserve">Er zijn geen aangepaste vliegtuigmappen ingesteld.</target>
         <context-group purpose="location"><context context-type="linenumber">242</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg54" approved="yes">
+      <trans-unit id="_msg58" approved="yes">
         <source xml:space="preserve">Add-on Module folders</source>
         <target xml:space="preserve">Uitbreidingsmappen</target>
         <context-group purpose="location"><context context-type="linenumber">120</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg55" approved="yes">
+      <trans-unit id="_msg59" approved="yes">
         <source xml:space="preserve">To use Add-on Modules that you download yourself, FlightGear needs to know the folder(s) containing the Add-on Modules.</source>
         <target xml:space="preserve">Om uitbreidingen te gebruiken die u zelf heeft gedownload moet FlightGear weten in welke mappen deze uitbreidingen te vinden zijn.</target>
         <context-group purpose="location"><context context-type="linenumber">121</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg56" approved="yes">
+      <trans-unit id="_msg60" approved="yes">
         <source xml:space="preserve">Remove the add-on module folder: &apos;%1&apos; from the list? (The folder contents will not be changed)</source>
         <target xml:space="preserve">De uitbreiding: &apos;%1&apos; van de lijst verwijderen? (De inhoud van de map wordt niet gewijzigd)</target>
         <context-group purpose="location"><context context-type="linenumber">150</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg57" approved="yes">
+      <trans-unit id="_msg61" approved="yes">
         <source xml:space="preserve">No custom add-on module paths are configured.</source>
         <target xml:space="preserve">Er zijn geen uitbreidingen ingesteld.</target>
         <context-group purpose="location"><context context-type="linenumber">175</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg58">
+      <trans-unit id="_msg62">
         <source xml:space="preserve">Additional aircraft or scenery folders were specified on the command-line. These are not listed here, but will be used when starting the simulator.</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">195</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg59" approved="yes">
+      <trans-unit id="_msg63" approved="yes">
         <source xml:space="preserve">Additional scenery folders</source>
         <target xml:space="preserve">Extra landschapsmappen</target>
         <context-group purpose="location"><context context-type="linenumber">259</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg60" approved="yes">
+      <trans-unit id="_msg64" approved="yes">
         <source xml:space="preserve">To use scenery you download yourself, FlightGear needs to know the folders containing the scenery data. Adjust the order of the list to control which scenery is used in a region.</source>
         <target xml:space="preserve">Om landschappen te gebruiken die u zelf heeft gedownload moet FlightGear weten in welke mappen deze landschappen te vinden zijn. Pas de volgorde in de lijst aan om te kiezen welk landschap prioriteit krijgt bij het laden.</target>
         <context-group purpose="location"><context context-type="linenumber">260</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg61" approved="yes">
+      <trans-unit id="_msg65" approved="yes">
         <source xml:space="preserve">Remove the scenery folder: &apos;%1&apos; from the list? (The folder contents will not be changed)</source>
         <target xml:space="preserve">De landschapsmap: &apos;%1&apos; van de lijst verwijderen? (De inhoud van de map wordt niet gewijzigd)</target>
         <context-group purpose="location"><context context-type="linenumber">286</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg62" approved="yes">
+      <trans-unit id="_msg66" approved="yes">
         <source xml:space="preserve">No custom scenery paths are configured.</source>
         <target xml:space="preserve">Er zijn geen extra landschapsmappen ingesteld.</target>
         <context-group purpose="location"><context context-type="linenumber">296</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg63" approved="yes">
+      <trans-unit id="_msg67" approved="yes">
         <source xml:space="preserve">Install add-on scenery</source>
         <target xml:space="preserve">Extra landschappen installeren</target>
         <context-group purpose="location"><context context-type="linenumber">306</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg64" approved="yes">
+      <trans-unit id="_msg68" approved="yes">
         <source xml:space="preserve">If you have downloaded scenery manually from the official FlightGear website, you can use this button to extract and install it into a suitable folder. (Scenery downloaded this way should have a file name such as &apos;w40n020.tar.gz&apos;)</source>
         <target xml:space="preserve">Als u handmatig landschappen heeft gedownload van de officiële FlightGear website kunt u deze met deze knop uitpakken en installeren in een geschikte map. (Landschappen die op deze wijze zijn gedownload hebben een bestandsnaam zoals &apos;w50n020.tar.gz&apos;)</target>
         <context-group purpose="location"><context context-type="linenumber">329</context></context-group>
@@ -345,12 +247,12 @@
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AdvancedSettingsToggle.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AdvancedSettingsToggle">
-      <trans-unit id="_msg65" approved="yes">
+      <trans-unit id="_msg69" approved="yes">
         <source xml:space="preserve">Show more</source>
         <target xml:space="preserve">Meer weergeven</target>
         <context-group purpose="location"><context context-type="linenumber">17</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg66" approved="yes">
+      <trans-unit id="_msg70" approved="yes">
         <source xml:space="preserve">Show less</source>
         <target xml:space="preserve">Minder weergeven</target>
         <context-group purpose="location"><context context-type="linenumber">25</context></context-group>
@@ -359,14 +261,14 @@
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AircraftCompactDelegate.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftCompactDelegate">
-      <trans-unit id="_msg67" approved="yes">
+      <trans-unit id="_msg71" approved="yes">
         <source xml:space="preserve">URI: %1
 Local path: %2</source>
         <target xml:space="preserve">URI: %1
 Lokaal pad: %2</target>
         <context-group purpose="location"><context context-type="linenumber">26</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg68">
+      <trans-unit id="_msg72">
         <source xml:space="preserve">Click here to select different variants or models of this aircraft</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">125</context></context-group>
@@ -375,120 +277,120 @@ Lokaal pad: %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AircraftDetailsView.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftDetailsView">
-      <trans-unit id="_msg69" approved="yes">
+      <trans-unit id="_msg73" approved="yes">
         <source xml:space="preserve">by %1</source>
         <target xml:space="preserve">door %1</target>
         <context-group purpose="location"><context context-type="linenumber">119</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg70" approved="yes">
+      <trans-unit id="_msg74" approved="yes">
         <source xml:space="preserve">Website</source>
         <target xml:space="preserve">Website</target>
         <context-group purpose="location"><context context-type="linenumber">137</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg71" approved="yes">
+      <trans-unit id="_msg75" approved="yes">
         <source xml:space="preserve">Support and issue reporting</source>
         <target xml:space="preserve">Ondersteuning en problemen melden</target>
         <context-group purpose="location"><context context-type="linenumber">143</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg72" approved="yes">
+      <trans-unit id="_msg76" approved="yes">
         <source xml:space="preserve">Wikipedia</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">149</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg73">
+      <trans-unit id="_msg77">
         <source xml:space="preserve">Click here to mark this as a favourite aircraft</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">187</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg74" approved="yes">
+      <trans-unit id="_msg78" approved="yes">
         <source xml:space="preserve">Ratings:</source>
         <target xml:space="preserve">Beoordeling:</target>
-        <context-group purpose="location"><context context-type="linenumber">203</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg75" approved="yes">
-        <source xml:space="preserve">Flight model</source>
-        <target xml:space="preserve">Vliegeigenschappen</target>
-        <context-group purpose="location"><context context-type="linenumber">208</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg76" approved="yes">
-        <source xml:space="preserve">Systems</source>
-        <target xml:space="preserve">Systemen</target>
-        <context-group purpose="location"><context context-type="linenumber">216</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg77" approved="yes">
-        <source xml:space="preserve">Cockpit</source>
-        <target xml:space="preserve"></target>
-        <context-group purpose="location"><context context-type="linenumber">229</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg78" approved="yes">
-        <source xml:space="preserve">Exterior</source>
-        <target xml:space="preserve">Exterieur</target>
-        <context-group purpose="location"><context context-type="linenumber">237</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">204</context></context-group>
       </trans-unit>
       <trans-unit id="_msg79" approved="yes">
+        <source xml:space="preserve">Flight model</source>
+        <target xml:space="preserve">Vliegeigenschappen</target>
+        <context-group purpose="location"><context context-type="linenumber">209</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg80" approved="yes">
+        <source xml:space="preserve">Systems</source>
+        <target xml:space="preserve">Systemen</target>
+        <context-group purpose="location"><context context-type="linenumber">217</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg81" approved="yes">
+        <source xml:space="preserve">Cockpit</source>
+        <target xml:space="preserve"></target>
+        <context-group purpose="location"><context context-type="linenumber">230</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg82" approved="yes">
+        <source xml:space="preserve">Exterior</source>
+        <target xml:space="preserve">Exterieur</target>
+        <context-group purpose="location"><context context-type="linenumber">238</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg83" approved="yes">
         <source xml:space="preserve">Local file location: %1</source>
         <target xml:space="preserve">Lokale bestandslocatie: %1</target>
-        <context-group purpose="location"><context context-type="linenumber">247</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">248</context></context-group>
       </trans-unit>
     </group>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AircraftDownloadPanel.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftDownloadPanel">
-      <trans-unit id="_msg80" approved="yes">
+      <trans-unit id="_msg84" approved="yes">
         <source xml:space="preserve">Install</source>
         <target xml:space="preserve">Installeren</target>
         <context-group purpose="location"><context context-type="linenumber">46</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg81" approved="yes">
+      <trans-unit id="_msg85" approved="yes">
         <source xml:space="preserve">Uninstall</source>
         <target xml:space="preserve">Verwijderen</target>
         <context-group purpose="location"><context context-type="linenumber">60</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">195</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg82" approved="yes">
+      <trans-unit id="_msg86" approved="yes">
         <source xml:space="preserve">Update</source>
         <target xml:space="preserve">Bijwerken</target>
         <context-group purpose="location"><context context-type="linenumber">74</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg83" approved="yes">
+      <trans-unit id="_msg87" approved="yes">
         <source xml:space="preserve">Queued</source>
         <target xml:space="preserve">Gepauzeerd</target>
         <context-group purpose="location"><context context-type="linenumber">93</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg84" approved="yes">
+      <trans-unit id="_msg88" approved="yes">
         <source xml:space="preserve">Cancel</source>
         <target xml:space="preserve">Annuleren</target>
         <context-group purpose="location"><context context-type="linenumber">94</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">111</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">196</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg85" approved="yes">
+      <trans-unit id="_msg89" approved="yes">
         <source xml:space="preserve">Downloading</source>
         <target xml:space="preserve">Downloaden</target>
         <context-group purpose="location"><context context-type="linenumber">110</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg86">
+      <trans-unit id="_msg90">
         <source xml:space="preserve">Size: </source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">144</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg87">
+      <trans-unit id="_msg91">
         <source xml:space="preserve"> MB</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">144</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">186</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg88">
+      <trans-unit id="_msg92">
         <source xml:space="preserve">Downloaded </source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">185</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg89">
+      <trans-unit id="_msg93">
         <source xml:space="preserve"> MB of </source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">186</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg90" approved="yes">
+      <trans-unit id="_msg94" approved="yes">
         <source xml:space="preserve">Are you sure you want to uninstall this aircraft?</source>
         <target xml:space="preserve">Weet u zeker dat u dit vliegtuig wilt verwijderen?</target>
         <context-group purpose="location"><context context-type="linenumber">193</context></context-group>
@@ -497,62 +399,62 @@ Lokaal pad: %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AircraftList.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftList">
-      <trans-unit id="_msg91">
+      <trans-unit id="_msg95">
         <source xml:space="preserve">Toggle between grid and list view</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">59</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg92" approved="yes">
+      <trans-unit id="_msg96" approved="yes">
         <source xml:space="preserve">Installed Aircraft</source>
         <target xml:space="preserve">Geïnstalleerde vliegtuigen</target>
         <context-group purpose="location"><context context-type="linenumber">69</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg93">
+      <trans-unit id="_msg97">
         <source xml:space="preserve">Use this button to view installed aircraft</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">85</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg94">
+      <trans-unit id="_msg98">
         <source xml:space="preserve">Favourites</source>
         <target xml:space="preserve" state="needs-review-translation">Favorieten</target>
         <context-group purpose="location"><context context-type="linenumber">91</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg95" approved="yes">
+      <trans-unit id="_msg99" approved="yes">
         <source xml:space="preserve">Browse</source>
         <target xml:space="preserve">Bladeren</target>
         <context-group purpose="location"><context context-type="linenumber">101</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg96">
+      <trans-unit id="_msg100">
         <source xml:space="preserve">View available aircraft to download</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">117</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg97" approved="yes">
+      <trans-unit id="_msg101" approved="yes">
         <source xml:space="preserve">Updates</source>
         <target xml:space="preserve">Updates</target>
         <context-group purpose="location"><context context-type="linenumber">124</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg98">
+      <trans-unit id="_msg102">
         <source xml:space="preserve">Enter text to search aircraft names and descriptions.</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">159</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg99">
+      <trans-unit id="_msg103">
         <source xml:space="preserve">No aircraft match the search.</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">208</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg100">
+      <trans-unit id="_msg104">
         <source xml:space="preserve">No favourite aircraft selected: install some aircraft and mark them as favourites by clicking the ★</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">226</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg101">
+      <trans-unit id="_msg105">
         <source xml:space="preserve">To install additional aircraft, click the the &apos;Browse&apos; tab at the top of this page.</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">251</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg102" approved="yes">
+      <trans-unit id="_msg106" approved="yes">
         <source xml:space="preserve">No aircraft updates available right now</source>
         <target xml:space="preserve">Er zijn momenteel geen updates voor vliegtuigen</target>
         <context-group purpose="location"><context context-type="linenumber">309</context></context-group>
@@ -561,32 +463,32 @@ Lokaal pad: %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AircraftRatingsPanel.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftRatingsPanel">
-      <trans-unit id="_msg103" approved="yes">
+      <trans-unit id="_msg107" approved="yes">
         <source xml:space="preserve">Filter using ratings</source>
         <target xml:space="preserve">Filteren op beoordelingen</target>
         <context-group purpose="location"><context context-type="linenumber">23</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg104" approved="yes">
+      <trans-unit id="_msg108" approved="yes">
         <source xml:space="preserve">Adjust minimum ratings</source>
         <target xml:space="preserve">Minimale beoordelingen aanpassen</target>
         <context-group purpose="location"><context context-type="linenumber">41</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg105">
+      <trans-unit id="_msg109">
         <source xml:space="preserve">Click here to change which aircraft are shown or hidden based on their ratings</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">65</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg106" approved="yes">
+      <trans-unit id="_msg110" approved="yes">
         <source xml:space="preserve">Aircraft are rated by the community based on four critiera, on a scale from one to five. The ratings are designed to help make an informed guess how complete and functional an aircraft is.</source>
         <target xml:space="preserve">Vliegtuigen worden door de gemeenschap ingedeeld op basis van vier criteria op een schaal van een tot vijf. De criteria zijn ontworpen om een onderbouwde inschatting te kunnen maken over de compleetheid en functionaliteit van een vliegtuig.</target>
         <context-group purpose="location"><context context-type="linenumber">97</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg107" approved="yes">
+      <trans-unit id="_msg111" approved="yes">
         <source xml:space="preserve">Minimum flight-model (FDM) rating:</source>
         <target xml:space="preserve">Minimale vliegeigenschappen (FDM) beoordeling:</target>
         <context-group purpose="location"><context context-type="linenumber">106</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg108" approved="yes">
+      <trans-unit id="_msg112" approved="yes">
         <source xml:space="preserve">Minimum systems rating</source>
         <alt-trans>
           <source xml:space="preserve">Minimum visual model rating</source>
@@ -594,12 +496,12 @@ Lokaal pad: %2</target>
         </alt-trans>
         <context-group purpose="location"><context context-type="linenumber">112</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg109" approved="yes">
+      <trans-unit id="_msg113" approved="yes">
         <source xml:space="preserve">Minimum cockpit visual rating</source>
         <target xml:space="preserve">Minimale cockpit beoordeling</target>
         <context-group purpose="location"><context context-type="linenumber">118</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg110" approved="yes">
+      <trans-unit id="_msg114" approved="yes">
         <source xml:space="preserve">Minimum exterial visual model rating</source>
         <alt-trans>
           <source xml:space="preserve">Minimum FDM rating</source>
@@ -611,27 +513,27 @@ Lokaal pad: %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/CatalogDelegate.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="CatalogDelegate">
-      <trans-unit id="_msg111">
+      <trans-unit id="_msg115">
         <source xml:space="preserve">This hangar is not compatible with this version of FlightGear</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">91</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg112" approved="yes">
+      <trans-unit id="_msg116" approved="yes">
         <source xml:space="preserve">This hangar is currently disabled due to a problem. Click here to try updating the hangar information from the server. (An Internet connection is required for this)</source>
         <target xml:space="preserve">Deze hangar is momenteel uitgeschakeld vanwege een probleem. Klik hier om te proberen de hangarinformatie te updaten vanaf de server. (Dit vereist een internetverbinding)</target>
         <context-group purpose="location"><context context-type="linenumber">99</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg113" approved="yes">
+      <trans-unit id="_msg117" approved="yes">
         <source xml:space="preserve">Remove</source>
         <target xml:space="preserve">Verwijderen</target>
         <context-group purpose="location"><context context-type="linenumber">139</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg114" approved="yes">
+      <trans-unit id="_msg118" approved="yes">
         <source xml:space="preserve">Cancel</source>
         <target xml:space="preserve">Annuleren</target>
         <context-group purpose="location"><context context-type="linenumber">140</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg115" approved="yes">
+      <trans-unit id="_msg119" approved="yes">
         <source xml:space="preserve">Remove this hangar? (Downloaded aircraft will be deleted from your computer)</source>
         <target xml:space="preserve">Deze hangar verwijderen? (Gedownloade vliegtuigen worden verwijderd van uw computer)</target>
         <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
@@ -640,12 +542,12 @@ Lokaal pad: %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/DragToReorderButton.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="DragToReorderButton">
-      <trans-unit id="_msg116" approved="yes">
+      <trans-unit id="_msg120" approved="yes">
         <source xml:space="preserve">Move up</source>
         <target xml:space="preserve">Omhoog schuiven</target>
         <context-group purpose="location"><context context-type="linenumber">53</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg117" approved="yes">
+      <trans-unit id="_msg121" approved="yes">
         <source xml:space="preserve">Move down</source>
         <target xml:space="preserve">Omlaag schuiven</target>
         <context-group purpose="location"><context context-type="linenumber">53</context></context-group>
@@ -654,151 +556,131 @@ Lokaal pad: %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/Environment.qml" datatype="plaintext" source-language="en" target-language="nl"><body>
     <group restype="x-trolltech-linguist-context" resname="Environment">
-      <trans-unit id="_msg118" approved="yes">
+      <trans-unit id="_msg122" approved="yes">
         <source xml:space="preserve">Time &amp; Date</source>
         <target xml:space="preserve">Tijd &amp; datum</target>
         <context-group purpose="location"><context context-type="linenumber">33</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg119" approved="yes">
+      <trans-unit id="_msg123" approved="yes">
         <source xml:space="preserve">Time of day</source>
         <target xml:space="preserve">Tijd</target>
         <context-group purpose="location"><context context-type="linenumber">40</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg120" approved="yes">
+      <trans-unit id="_msg124" approved="yes">
         <source xml:space="preserve">Select the time of day used when the simulator starts, or enter a custom date and time.</source>
         <target xml:space="preserve">Kies de tijd en datum die de simulatie bij het opstarten heeft of voer een aangepaste datum en tijd in.</target>
         <context-group purpose="location"><context context-type="linenumber">41</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg121" approved="yes">
+      <trans-unit id="_msg125" approved="yes">
         <source xml:space="preserve">Current time</source>
         <target xml:space="preserve">Huidige tijd</target>
         <context-group purpose="location"><context context-type="linenumber">43</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg122" approved="yes">
+      <trans-unit id="_msg126" approved="yes">
         <source xml:space="preserve">Dawn</source>
         <target xml:space="preserve">Dageraad</target>
         <context-group purpose="location"><context context-type="linenumber">43</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg123" approved="yes">
+      <trans-unit id="_msg127" approved="yes">
         <source xml:space="preserve">Morning</source>
         <target xml:space="preserve">Ochtend</target>
         <context-group purpose="location"><context context-type="linenumber">43</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg124" approved="yes">
+      <trans-unit id="_msg128" approved="yes">
         <source xml:space="preserve">Noon</source>
         <target xml:space="preserve">Middaguur</target>
         <context-group purpose="location"><context context-type="linenumber">43</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg125" approved="yes">
+      <trans-unit id="_msg129" approved="yes">
         <source xml:space="preserve">Afternoon</source>
         <target xml:space="preserve">Middag</target>
         <context-group purpose="location"><context context-type="linenumber">44</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg126" approved="yes">
+      <trans-unit id="_msg130" approved="yes">
         <source xml:space="preserve">Dusk</source>
         <target xml:space="preserve">Schemering</target>
         <context-group purpose="location"><context context-type="linenumber">44</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg127" approved="yes">
+      <trans-unit id="_msg131" approved="yes">
         <source xml:space="preserve">Evening</source>
         <target xml:space="preserve">Avond</target>
         <context-group purpose="location"><context context-type="linenumber">44</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg128" approved="yes">
+      <trans-unit id="_msg132" approved="yes">
         <source xml:space="preserve">Midnight</source>
         <target xml:space="preserve">Middernacht</target>
         <context-group purpose="location"><context context-type="linenumber">45</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg129" approved="yes">
+      <trans-unit id="_msg133" approved="yes">
         <source xml:space="preserve">Custom time &amp; date</source>
         <target xml:space="preserve">Aangepaste tijd &amp; datum</target>
         <context-group purpose="location"><context context-type="linenumber">45</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">67</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg130" approved="yes">
+      <trans-unit id="_msg134" approved="yes">
         <source xml:space="preserve">Enter a date and time to begin the flight at. By default this is in local time for the chosen starting location - use the option below to request a time in GMT / UTC.</source>
         <target xml:space="preserve">Voer een datum en tijd in om de vlucht op te beginnen. Dit is standaard de lokale tijd van de gekozen locatie - gebruik onderstaande optie om een tijd in GMT / UTC te kiezen.</target>
         <context-group purpose="location"><context context-type="linenumber">69</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg131" approved="yes">
+      <trans-unit id="_msg135" approved="yes">
         <source xml:space="preserve">Custom time is GMT / UTC</source>
         <target xml:space="preserve">Aangepaste tijd is GMT / UTC</target>
         <context-group purpose="location"><context context-type="linenumber">77</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg132" approved="yes">
-        <source xml:space="preserve">Season</source>
-        <target xml:space="preserve">Seizoen</target>
-        <context-group purpose="location"><context context-type="linenumber">84</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg133" approved="yes">
-        <source xml:space="preserve">Select if normal (summer) or winter textures are used for the scenery. This does not affect other aspects of the simulation at present, such as icing or weather simulation</source>
-        <target xml:space="preserve">Kiez of de normale (zomer) of winter afbeeldingen worden gebruikt voor het landschap. Dit heeft geen effect op ander aspecten van de simulatie, zoals ijsvorming of het weer</target>
-        <context-group purpose="location"><context context-type="linenumber">85</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg134" approved="yes">
-        <source xml:space="preserve">Summer (default)</source>
-        <target xml:space="preserve">Zomer (standaard)</target>
-        <context-group purpose="location"><context context-type="linenumber">89</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg135" approved="yes">
-        <source xml:space="preserve">Winter</source>
-        <target xml:space="preserve">Winter</target>
-        <context-group purpose="location"><context context-type="linenumber">89</context></context-group>
-      </trans-unit>
       <trans-unit id="_msg136" approved="yes">
         <source xml:space="preserve">Weather</source>
         <target xml:space="preserve">Weer</target>
-        <context-group purpose="location"><context context-type="linenumber">116</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">103</context></context-group>
       </trans-unit>
       <trans-unit id="_msg137" approved="yes">
         <source xml:space="preserve">Advanced weather modelling</source>
         <target xml:space="preserve">Geavanceerde weersimulatie</target>
-        <context-group purpose="location"><context context-type="linenumber">122</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">109</context></context-group>
       </trans-unit>
       <trans-unit id="_msg138" approved="yes">
         <source xml:space="preserve">Detailed weather simulation based on local terrain and atmospheric simulation. Note that using advanced weather with real-world weather data (METAR) information may not show exactly the conditions recorded, and is not recommended for multi-player flight since the weather simulation is not shared over the network.</source>
         <target xml:space="preserve">Gedetaileerde weerssimulatie gebaseerd op de ondergrond en atmospherische simulatie. In combinatie met actueel weer (METAR) levert dit niet altijd de exacte waargenomen condities op. Het is daarom niet aanbevolen voor gebruik in een multiplayer omgeving omdat het weer niet over het netwerk wordt gedeeld.</target>
-        <context-group purpose="location"><context context-type="linenumber">123</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">110</context></context-group>
       </trans-unit>
       <trans-unit id="_msg139" approved="yes">
         <source xml:space="preserve">Real-world weather</source>
         <target xml:space="preserve">Actueel weer</target>
-        <context-group purpose="location"><context context-type="linenumber">133</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">120</context></context-group>
       </trans-unit>
       <trans-unit id="_msg140" approved="yes">
         <source xml:space="preserve">Download real-world weather from the NOAA servers based on location.</source>
         <target xml:space="preserve">Download actueel weer van de NOAA servers, passende bij uw gesimuleerde locatie.</target>
-        <context-group purpose="location"><context context-type="linenumber">134</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">121</context></context-group>
       </trans-unit>
       <trans-unit id="_msg141" approved="yes">
         <source xml:space="preserve">Weather scenario</source>
         <target xml:space="preserve">Weerscenario</target>
-        <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">129</context></context-group>
       </trans-unit>
       <trans-unit id="_msg142" approved="yes">
         <source xml:space="preserve">METAR</source>
         <target xml:space="preserve">METAR</target>
-        <context-group purpose="location"><context context-type="linenumber">162</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">149</context></context-group>
       </trans-unit>
       <trans-unit id="_msg143" approved="yes">
         <source xml:space="preserve">Enter a custom METAR string, e.g: &apos;%1&apos;</source>
         <target xml:space="preserve">Voer een aangepaste METAR in zoals &apos;%1&apos;</target>
-        <context-group purpose="location"><context context-type="linenumber">166</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">153</context></context-group>
       </trans-unit>
       <trans-unit id="_msg144" approved="yes">
         <source xml:space="preserve">The entered METAR string doesn&apos;t seem to be valid.</source>
         <target xml:space="preserve">De ingevoegde METAR is ongeldig.</target>
-        <context-group purpose="location"><context context-type="linenumber">167</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">154</context></context-group>
       </trans-unit>
       <trans-unit id="_msg145" approved="yes">
         <source xml:space="preserve">advanced weather</source>
         <target xml:space="preserve">geavanceerd weer</target>
-        <context-group purpose="location"><context context-type="linenumber">235</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">222</context></context-group>
       </trans-unit>
       <trans-unit id="_msg146" approved="yes">
         <source xml:space="preserve">real-world weather</source>
         <target xml:space="preserve">actueel weer</target>
-        <context-group purpose="location"><context context-type="linenumber">236</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">223</context></context-group>
       </trans-unit>
     </group>
   </body></file>

@@ -50,6 +50,7 @@
 
 		<item>
 			<name>video-start</name>
+			<enabled>true</enabled>
 			<binding>
 				<command>nasal</command>
 				<script>
@@ -60,6 +61,7 @@
 
 		<item>
 			<name>video-stop</name>
+			<enabled>false</enabled>
 			<binding>
 				<command>nasal</command>
 				<script>

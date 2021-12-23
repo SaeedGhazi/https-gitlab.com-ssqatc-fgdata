@@ -204,6 +204,7 @@
      <col>2</col>
      <min>0.0</min>
      <max>1.0</max>
+     <step>0.05</step>
      <live>true</live>
      <property>/environment/sea/surface/ice-cover</property>
      <binding>

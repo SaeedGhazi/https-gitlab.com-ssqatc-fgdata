@@ -563,7 +563,10 @@ void main(void)
 
 
 	// add ice
-        vec4 ice_texel = texture2D(ice_texture, gl_TexCoord[0].st);
+        vec2 ice_tex_pos;
+        if (ocean_flag == 0) ice_tex_pos = gl_TexCoord[0].st;
+        else ice_tex_pos = vec2(waterTex2) * 0.2;
+        vec4 ice_texel = texture2D(ice_texture, ice_tex_pos);
 
 	float nSum =  0.5 * (noise_250m +  noise_50m);
 	float mix_factor = smoothstep(1.0 - ice_cover, 1.04-ice_cover, nSum);

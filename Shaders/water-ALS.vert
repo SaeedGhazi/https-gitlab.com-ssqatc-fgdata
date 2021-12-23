@@ -87,6 +87,7 @@ void main(void)
 
     mat4 RotationMatrix;
   
+    gl_TexCoord[0] = gl_MultiTexCoord0;
 
     vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
     rawPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;

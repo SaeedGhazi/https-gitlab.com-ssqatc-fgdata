@@ -564,7 +564,7 @@ void main(void)
 
 	// add ice
         vec2 ice_tex_pos;
-        if (ocean_flag == 0) ice_tex_pos = gl_TexCoord[0].st;
+        if (ocean_flag == 0) ice_tex_pos = gl_TexCoord[0].st * 0.1;
         else ice_tex_pos = vec2(waterTex2) * 0.2;
         vec4 ice_texel = texture2D(ice_texture, ice_tex_pos);
 

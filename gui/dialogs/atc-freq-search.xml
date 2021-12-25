@@ -1,12 +1,37 @@
 <?xml version="1.0"?>
 <PropertyList>
+    <nasal>
+	  <open>
+	  <![CDATA[
+            var self = cmdarg();
+            var dlgname = self.getNode("name").getValue();
+
+			self.getNode("group").removeChildren("button");
+
+			var textgroup = self.getNode("group").getNode("button-template");
+
+			var apts = findAirportsWithinRange(50);
+			if (size(apts) > 0) {
+				forindex (var i; apts) {
+					var target = self.getNode("group").getChild("button", i, 1);
+					props.copy(textgroup, target);
+					target.getNode("legend").setValue(apts[i].id);
+					target.getNode("binding/value").setValue(apts[i].id);
+					target.getNode("enabled").setValue(1);
+				}
+				props.dump(target);
+			} else {
+				self.getNode("text/enabled").setValue(1);
+			}
+	  ]]>
+	  </open>
+	</nasal>
 	<name>atc-freq-search</name>
 	<layout>vbox</layout>
 
 	<text>
-		<label>Display Airport Frequencies</label>
+		<label>Display Nearest Airport Frequencies</label>
 	</text>
-
 	<hrule/>
 
 	<group>
@@ -17,8 +42,13 @@
 			<enabled>false</enabled>
 			<legend>ICAO</legend>
 			<binding>
-				<command>ATC-freq-display</command>
-				<icao type="string">ICAO</icao>
+			    <command>property-assign</command>
+				<property>/sim/atc/freq-airport</property>
+				<value type="string">ICAO</value>
+			</binding>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>atc-freq-display</dialog-name>
 			</binding>
 			<binding>
 				<command>dialog-close</command>
@@ -53,14 +83,20 @@
 		<empty><stretch>true</stretch></empty>
 
 		<button>
-			<legend>OK</legend>
+			<legend>Search</legend>
 			<default>true</default>
 			<equal>true</equal>
 			<binding>
 				<command>dialog-apply</command>
 			</binding>
 			<binding>
-				<command>ATC-freq-display</command>
+				<command>dialog-show</command>
+				<dialog-name>atc-freq-display</dialog-name>
+<!--
+					<params>
+  				  <icao type="string">ICAO</icao>
+				</params>
+-->
 			</binding>
 			<binding>
 				<command>dialog-close</command>
@@ -77,8 +113,6 @@
 				<command>dialog-close</command>
 			</binding>
 		</button>
-
 		<empty><stretch>true</stretch></empty>
 	</group>
-
 </PropertyList>

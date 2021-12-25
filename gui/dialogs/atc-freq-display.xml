@@ -1,5 +1,33 @@
 <?xml version="1.0"?>
 <PropertyList>
+    <nasal>
+	  <open>
+	  <![CDATA[
+            var self = cmdarg();
+			var icao = self.getNode("nasal/params/param/icao");
+			if (props.getNode("/sim/atc/freq-airport")!=nil) {
+                icao = props.getNode("/sim/atc/freq-airport");
+			}
+			var dialogTitle = sprintf("Airportfrequencies %s", icao.getValue());
+			self.getNode("text/label").setValue(dialogTitle);
+			var apt = airportinfo(icao.getValue());
+			var frequencies = apt.comms();
+			var textgroup = self.getNode("group").getNode("group-template");
+			var i = 0;
+			foreach (var c; frequencies) {
+				var target = self.getNode("group").getChild("group", i, 1);
+				props.copy(textgroup, target);
+				i = i + 1;
+				target.getNode("text/label").setValue(c.ident);
+				var formattedFreq = sprintf("%.3f MHz", c.frequency);
+				target.getNode("text[1]/label").setValue(formattedFreq);
+				target.getNode("button/binding/value").setValue(c.frequency);
+				target.getNode("button[1]/binding/value").setValue(c.frequency);
+				target.getNode("enabled").setValue(1);
+			}
+	  ]]>
+	  </open>
+	</nasal>
 	<name>atc-freq-display</name>
 	<layout>vbox</layout>
 

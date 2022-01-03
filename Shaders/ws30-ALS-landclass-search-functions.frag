@@ -110,7 +110,7 @@
 
 //   Enable large scale transitions: 1=on, 0=off
 //     Disable use landclass texel scale transition, if using this.
-  const int enable_large_scale_transition_search = 0;
+  const int enable_large_scale_transition_search = 1;
 
 
 //   The search pattern is center + n points in four directions forming a cross.
@@ -124,7 +124,7 @@
 //     Note: transitions occur on both sides of the landclass borders. 
 //       The width of the transition is equal to 2x this value.
 //     Default: 100m
-  const float transition_search_distance_in_m = 100.0;
+  const float transition_search_distance_in_m = 130.0;
 
 //   Number of points to search in any direction, in addition to this fragment
 //     Default:4 points. Fewer points results in a less smooth transition (more banding)
@@ -158,7 +158,7 @@
 //     This works by changing the weighting in the transition region using a 
 //       noise lookup
 //     Possibe values: 0=off, 1=on. Default:0
-  const int grow_landclass_borders_with_large_scale_transition = 0; 
+  const int grow_landclass_borders_with_large_scale_transition = 1; 
 
 
 
@@ -181,7 +181,7 @@
 //   Possible values: 0 = texture source, 1 = math source
 //   The texture source still shows some tiling. The math source detiles better, but might
 //     be slightly slower.
-  const int detiling_noise_type = 0;
+  const int detiling_noise_type = 1;
 
 // Development tools - 2 controls, now located at the top of WS30-ALS-ultra.frag:
 //   1. Reduce haze to almost zero, while preserving lighting. Useful for observing distant tiles.
@@ -190,6 +190,15 @@
 //     Useful for checking texture rendering and scenery.
 //     The compiler will likely optimise out the haze and lighting calculations.
 //
+
+//   Debugging: ground texture array lookup function
+//   Possible values:
+//     0: Normal: TextureGrad() with partial derivatives. GLSL 1.30.
+//     1: textureLod() using partial derivatives to manually calculate LoD. GLSL 1.20
+//     2: texture() without partial derivatives. GLSL 1.20
+  const int tex_lookup_type = 0;
+
+//     
 // End of test phase controls
 //////////////////////////////////////////////////////////////////
 
@@ -225,6 +234,7 @@
 // Uniforms used by landclass search functions.
 // If any uniforms change name or form, remember to update here and in fragment shaders.
 
+
 uniform sampler2D landclass;
 uniform sampler2DArray textureArray;
 uniform sampler2D perlin;
@@ -253,6 +263,33 @@ vec2 tile_size = vec2(fg_tileHeight , fg_tileWidth);
 float rand2D(in vec2 co);
 float Noise2D(in vec2 coord, in float wavelength);
 
+// Generates a full precision 32 bit random number from 2 seeds
+//     as well as 6 random integers between 0 and factor that are rescaled 0.0-1.0
+//     by re-using the significant figures from the full precision number.
+//     This avoids having to generate 6 random numbers when 
+//     limited variation is needed: say 6 numbers with 100 levels (i.e between 0 and 100).
+// Seed 2 is incremented so the function can be called again to generate
+//      a different set of numbers
+float get6_rand_nums(in float PRNGseed1, inout float PRNGseed2, float factor, out float [6] random_integers)
+{
+      
+    float r = fract(sin(dot(vec2(PRNGseed1,PRNGseed2),vec2(12.9898,78.233))) * 43758.5453);
+
+    // random number left over after extracting some decimal places
+    float rlo = r;
+    // To look at: can this be made simd friendly?
+    for (int i=0;i<6;i++)
+    {
+        rlo = (rlo*factor);
+        random_integers[i] = floor(rlo)/factor;
+        rlo = fract(rlo);
+    }
+      
+   PRNGseed2+=1.0;
+   return r;
+}
+
+
 // Create random landclasses without a texture lookup to stress test.
 // Each square of square_size in m is assigned a random landclass value.
 int get_random_landclass(in vec2 co, in vec2 tile_size)
@@ -263,17 +300,32 @@ int get_random_landclass(in vec2 co, in vec2 tile_size)
 }
 
 
-// Look up texture coordinates and stretching scale of ground textures
-void get_ground_texture_data(in int lc, in vec2 tile_coord, 
-  out vec2 st, out vec2 g_texture_scale, inout vec2 dx, inout vec2 dy)
+/*
+// Look up stretching scale of ground textures for the base texture.
+//   Note terrain default effect only has controls for the texture stretching dimensions for the base texture.
+//   Non-base textures use hardcoded stretching of the ground texture coords, which are in units of meters.
+vec2 get_ground_texture_scale(in int lc)
 {
   // Look up stretching dimensions of ground textures in m - scaled to 
   // fit in [0..1], so rescale 
   vec2 g_texture_stretch_dim = fg_dimensionsArray[lc].st;
-  g_texture_scale =  tile_size.xy / g_texture_stretch_dim.xy;
+  return (tile_size.xy / g_texture_stretch_dim.xy);
+}
+*/
+
+
+// Look up texture coordinates and stretching scale of ground textures for the base texture.
+//   Note terrain default effect only has controls for the texture stretching dimensions for the base texture.
+//   Non-base textures use hardcoded stretching of the ground texture coords, which are in units of meters.
+void get_ground_texture_data(in int lc, in vec2 tile_coord, 
+  out vec2 st, out vec2 g_texture_scale, inout vec4 dFdx_and_dFdy)
+{
+  // Look up stretching dimensions of ground textures in m - scaled to 
+  // fit in [0..1], so rescale 
+  vec2 g_texture_stretch_dim = fg_dimensionsArray[lc].st;
+  g_texture_scale = tile_size.xy / g_texture_stretch_dim.xy;
   // Correct partial derivatives to account for stretching of different textures
-  dx = dx * g_texture_scale;
-  dy = dy * g_texture_scale;
+  dFdx_and_dFdy = dFdx_and_dFdy * vec4(g_texture_scale.st, g_texture_scale.st);
   // Ground texture coords
   st = g_texture_scale * tile_coord.st;
 }
@@ -284,10 +336,12 @@ void get_ground_texture_data(in int lc, in vec2 tile_coord,
 // Testing: if this or get_ground_texture_data used in final WS3 to handle 
 // many base texture lookups, see if optimising to handle many inputs helps 
 // (vectorising Noise2D versus just many texture calls)
-
+// To do: adjust for non-tile based ground coords.
 vec2 detile_texcoords_with_perlin_noise(in vec2 st, in vec2 ground_texture_scale, 
-  in vec2 tile_coord, inout vec2 dx, inout vec2 dy)
+  in vec2 tile_coord, inout vec4 dFdx_and_dFdy)
 {
+  vec4 dxdy = dFdx_and_dFdy;
+
   vec2 pnoise;
 
   // Ratio tile dimensions are stretched relative to s.
@@ -315,21 +369,25 @@ vec2 detile_texcoords_with_perlin_noise(in vec2 st, in vec2 ground_texture_scale
 
   if (pnoise[0] >= 0.5) 
   {
+    // To do: fix once ground coords are no longer tile based
     st = ground_texture_scale.st * (tile_coord * stretch_r).ts;
     // Get back original partial derivatives by undoing 
     // previous texture stretching adjustment done in get_ground_data
-    dx = dx / ground_texture_scale.st;
-    dy = dy / ground_texture_scale.st;
+    dxdy = dxdy / vec4(ground_texture_scale.st, ground_texture_scale.st);
+
     // Recalculate new derivatives
-    dx = dx.ts * ground_texture_scale.st * stretch_r.ts;	
-    dy = dy.ts * ground_texture_scale.st * stretch_r.ts;
+    vec2 factor = ground_texture_scale.st * stretch_r.ts;
+    dxdy.st = dxdy.ts * factor;	
+    dxdy.pq = dxdy.qp * factor;
 
   } 
 
   if (pnoise[1] >= 0.5)
   {
-    st = -st; dx = -dx; dy = -dy;
+    st = -st; dxdy = -dxdy;
   }
+
+  dFdx_and_dFdy = dxdy;
   return st;
 }
 
@@ -339,35 +397,127 @@ vec2 detile_texcoords_with_perlin_noise(in vec2 st, in vec2 ground_texture_scale
 //   The partial derivatives of the tile_coord at the fragment is needed to adjust for 
 //   the stretching of different textures, so that the correct mip-map level is looked 
 //   up and there are no seams.
+//   Texture types: 0: base texture, 1: grain texture, 2: gradient texture, 3 dot texture, 
+//     4: mix texture, 5: detail texture.
 
-vec4 lookup_ground_texture_array(in vec2 tile_coord, in int landclass_id,
-  in vec2 dx, in vec2 dy)
+vec4 lookup_ground_texture_array(in int texture_type, in vec2 ground_texture_coord, in int landclass_id,
+  in vec4 dFdx_and_dFdy)
 {
   // Testing: may be able to save 1 or 2 op slots by combining dx/dy in a vec4 and
   // using swizzles which are free, but mostly operations are working independenly on s and t.
   // Only 1 place so far that just multiplies everything by a scalar.
   vec2 st;
+  vec2 g_tex_coord = ground_texture_coord;
   vec2 g_texture_scale;
   vec4 texel;
   int lc = landclass_id;
+  vec4 dxdy = dFdx_and_dFdy;
+  
+  // Find the index of the specified texture type (e.g. mix or gradient texture ) in 
+  // the ground texture lookup array.
+  // Since texture_type is a constant in the fragment shader, there should be no performance hit for branching.
 
-  get_ground_texture_data(lc, tile_coord, st, g_texture_scale, dx, dy);
+  int tex_idx = 0;
+  int type = texture_type;
+
+  // Index for the base texture is contained fg_textureLookup1[lc].r
+  if (type == 0) tex_idx = int(uint(fg_textureLookup1[lc].r * 255.0 + 0.5));
+
+  // Grain texture is material texture slot 14, the index of which is mapped to the r channel of fg_textureLookup2
+  else if (type == 1) tex_idx = int(fg_textureLookup2[lc].r * 255.0 + 0.5);
+
+  // Gradient texture is material texture 13, the index of which is mapped to the a channel of fg_textureLookup1
+  else if (type == 2) tex_idx = int(fg_textureLookup1[lc].a * 255.0 + 0.5);
+
+  // Dot texture is material texture 15, the index of which is mapped to the g channel of fg_textureLookup2
+  else if (type == 3) tex_idx = int(fg_textureLookup2[lc].g * 255.0 + 0.5);
+
+  // Mix texture is material texture 12, the index of which is mapped to the b channel of fg_textureLookup1
+  else if (type == 4) tex_idx = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
+
+  // Detail texture is material texture 11, the index of which is mapped to the g channel of fg_textureLookup1
+  else if (type == 5) tex_idx = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
 
 
-  st = detile_texcoords_with_perlin_noise(st, g_texture_scale, tile_coord, dx, dy);
+  if (type == 0)
+  {
+    // Scale normalised tile coords by stretching factor, and get info
+    vec2 tile_coord = g_tex_coord;
+    get_ground_texture_data(lc, tile_coord, st, g_texture_scale, dxdy);
+    st = detile_texcoords_with_perlin_noise(st, g_texture_scale, tile_coord, dxdy);
+  }
+  else
+  {
+    st = g_tex_coord;
+  }
 
-  //texel = texture(textureArray, vec3(st, lc));
-  //texel = textureLod(textureArray, vec3(st, lc), 12.0);
-	uint tex1 = uint(fg_textureLookup1[lc].r * 255.0 + 0.5);
-  texel = textureGrad(textureArray, vec3(st, tex1), dx, dy);
+
+  // Debugging: multiple texture lookup functions if there are issues
+  // with old GPUs and compilers.
+  if (tex_lookup_type == 0)
+  {
+    texel = textureGrad(textureArray, vec3(st, tex_idx), dxdy.st, dxdy.pq);
+  }
+  else if (tex_lookup_type == 1) 
+  { 
+    float lod = max(length(dxdy.sp), length(dxdy.tq)); 
+    lod = log2(lod); 
+    texel = textureLod(textureArray, vec3(st, tex_idx), lod); 
+  }
+  else texel = texture(textureArray, vec3(st, tex_idx));
+
+
+  //texel = textureGrad(textureArray, vec3(st, tex_idx), dxdy.st, dxdy.pq);
   return texel;
 }
+
+
+//  Look up the texel of the specified texture type (e.g. grain or detail textures) for this fragment
+//    and any neighbor texels, then mix.
+
+vec4 get_mixed_texel(in int texture_type, in vec2 g_texture_coord, 
+  in int landclass_id, in int num_unique_neighbors, 
+  in ivec4 neighbor_texel_landclass_ids, in vec4 neighbor_mix_factors,
+  in vec4 dFdx_and_dFdy
+  )
+{
+    vec2 st = g_texture_coord;
+    int lc = landclass_id;
+    ivec4 lc_n = neighbor_texel_landclass_ids;
+    // Not implemented yet
+    int type = texture_type;
+    vec4 dxdy = dFdx_and_dFdy;
+    vec4 mfact = neighbor_mix_factors;
+
+    vec4 texel = lookup_ground_texture_array(0, st, lc, dxdy);
+
+
+    // Mix texels - to work consistently it needs a more preceptual interpolation than mix()
+    if (num_unique_neighbors != 0)
+    {
+      // Closest neighbor landclass
+      vec4 texel_closest = lookup_ground_texture_array(0, st, lc_n[0], dxdy);
+  
+      // Neighbor contributions
+      vec4 texel_nc=texel_closest;
+  
+      if (num_unique_neighbors > 1)
+      {
+        // 2nd Closest neighbor landclass
+        vec4 texel_2nd_closest = lookup_ground_texture_array(0, st, lc_n[1], dxdy);
+  
+        texel_nc = mix(texel_closest, texel_2nd_closest, mfact[1]);
+      }
+  
+      texel = mix(texel, texel_nc, mfact[0]);
+    }
+    return texel;
+}
+
 
 // Landclass sources: texture or random 
 int read_landclass_id(in vec2 tile_coord)
 {
-  vec2 dx = dFdx(tile_coord.st);
-  vec2 dy = dFdy(tile_coord.st);
   int lc;
 
   if (landclass_source == 0) lc = (int(texture2D(landclass, tile_coord.st).g * 255.0 + 0.5));
@@ -411,13 +561,14 @@ float get_growth_priority(in int current_landclass, in int neighbor_landclass1, 
 }
 
 
-
-int lookup_landclass_id(in vec2 tile_coord, in vec2 dx, in vec2 dy,
+int lookup_landclass_id(in vec2 tile_coord, in vec4 dFdx_and_dFdy,
     out ivec4 neighbor_texel_landclass_ids, 
     out int number_of_unique_neighbors_found, out vec4 landclass_neighbor_texel_weights)
 {
 
-  // To do: fix landclass border artifacts, with all shaders. do small scale texel mixing for 2 neighbors
+  // To do: fix landclass border artifacts, with all shaders.
+
+  vec4 dxdy = dFdx_and_dFdy;
 
   // Number of unique neighbours found
   int num_n = 0;
@@ -622,7 +773,9 @@ if (remove_squareness_from_landclass_texture == 1)
     // Turn neighbor growth off at longer ranges, otherwise there is flickering noise
     // Testing: The exact cutoff could be done sooner to save some performance - needs
     // to be part of a larger solution to similar issues. User should set a tolerance factor.
-    float lod_factor = min(length(vec2(dx.s, dy.s)),length(vec2(dx.t, dy.t)));
+    // Effectively: lod_factor = min(length(vec2(dFdx(..).s, dFdy(..).s)),length(vec2(dFdx(..).t, dFdy(..).t)));
+    float lod_factor = min(length(vec2(dxdy.s, dxdy.p)),length(vec2(dxdy.t, dxdy.q)));
+
     // Estimate of frequency of growth noise in texels - i.e. how many peaks and troughs fit in one texel
     const float frequency_g_n = 1000.0;
     const float cutoff = 1.0/frequency_g_n;
@@ -732,18 +885,19 @@ if ( (use_landclass_texel_scale_transition_only == 1) &&
 // Searches are performed in upto 4 directions right now, but only one landclass is looked up
 // Create a mix factor werighting the influences of nearby landclasses
 
-void get_landclass_id(in vec2 tile_coord,   
-  const in float landclass_texel_size_m, in vec2 dx, in vec2 dy,
+void get_landclass_id(in vec2 tile_coord, in vec4 dFdx_and_dFdy,
   out int landclass_id, out ivec4 neighbor_landclass_ids, 
   out int num_unique_neighbors,out vec4 mix_factor
   )
+
 { 
   // Each tile has 1 texture containing landclass ids stetched over it
 
   // Landclass source type: 0=texture, 1=random squares
-  // Controls are defined at global scope. const int landclass_source
-  float ts = landclass_texel_size_m;
+  // Controls are defined at global scope. 
   vec2 sz = tile_size;
+
+  vec4 dxdy = dFdx_and_dFdy;
 
   // Number of unique neighbors found
   int num_n = 0;
@@ -756,7 +910,7 @@ void get_landclass_id(in vec2 tile_coord,
   // Number of unique neighbors in neighboring texels
   int num_n_tx = 0;
 
-  int lc = lookup_landclass_id(tile_coord, dx, dy, lc_n_tx, num_n_tx, lc_n_w);
+  int lc = lookup_landclass_id(tile_coord, dxdy, lc_n_tx, num_n_tx, lc_n_w);
 
   // Neighbor landclass ids
   ivec4 lc_n = ivec4(lc);
@@ -816,6 +970,11 @@ if ( (enable_large_scale_transition_search == 1) &&
   // Note: this returns the closest neighbor. There could be blobs
   // of multiple neighbors, or a tiny islands of neighbors among this
   // landclass.
+
+
+  // Testing: breaking the loop once the closest neighbour is found
+  //   results in very slightly lower FPS on a 10 series GPU for 100m search 
+  //   distance and 4 points. May be faster on old GPUs with slow caching.
 
 
   // +s direction
@@ -982,7 +1141,7 @@ if (grow_landclass_borders_with_large_scale_transition == 1)
   // Decide whether to extrude furthest neighbor or closest neighbor onto lc
   float grow_n1 = get_growth_priority(lc_n[0],lc_n[1]);
 
-  mfact[1] = mfact[1]+((grow_n > 0.0)?neighbor_growth_mixf:+neighbor_growth_mixf);
+  mfact[1] = mfact[1]+((grow_n > 0.0)?neighbor_growth_mixf:-neighbor_growth_mixf);
   mfact[1] = clamp(mfact[1],0.0,1.0);
 
 

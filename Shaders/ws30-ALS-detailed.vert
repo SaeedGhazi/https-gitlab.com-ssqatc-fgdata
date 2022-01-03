@@ -25,7 +25,8 @@ attribute vec2 orthophotoTexCoord;
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec3 rawPos;
+varying vec2 ground_tex_coord;
+varying vec2 rawPos;
 varying vec3 worldPos;
 //varying vec2 orthoTexCoord;
 varying vec4 eyePos;
@@ -95,7 +96,7 @@ void main()
   float vertex_alt;
   float scattering;
 
-    rawPos = (fg_zUpTransform * gl_Vertex).xyz;
+    rawPos = (fg_zUpTransform * gl_Vertex).xy;
     worldPos = fg_modelOffset + gl_Vertex.xyz;
     eyePos = gl_ModelViewMatrix * gl_Vertex;
     steepness = dot(normalize(vec3(fg_zUpTransform * vec4(gl_Normal,1.0))), vec3 (0.0, 0.0, 1.0));
@@ -109,6 +110,9 @@ void main()
     //orthoTexCoord = orthophotoTexCoord;
     normal = gl_NormalMatrix * gl_Normal;
     //nvec = (gl_NormalMatrix * gl_Normal).xy;
+
+    // Temporary value:
+    ground_tex_coord = gl_TexCoord[0].st;
 
     // here start computations for the haze layer
     // we need several geometrical quantities
@@ -126,7 +130,7 @@ void main()
     float dist = length(relPos);
 
     // altitude of the vertex in question, somehow zero leads to artefacts, so ensure it is at least 100m
-    vertex_alt = max(rawPos.z,100.0);
+    vertex_alt = max(relPos.z,100.0);
     scattering = ground_scattering + (1.0 - ground_scattering) * smoothstep(hazeLayerAltitude -100.0, hazeLayerAltitude + 100.0, vertex_alt); 
 
 

@@ -182,7 +182,11 @@
        insert their own techniques first. -->
 
 
-  <!-- ALS ultra shaders -->
+  <!-- 
+       ALS ultra shaders. The 1st pass of ws30-overlay.eff is a copy of
+       this pass, and changes should be made there as well.
+  -->  
+
   <technique n="5">
     <predicate>
       <and>

@@ -43,6 +43,7 @@
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec2 ground_tex_coord;
 
 uniform sampler2D landclass;
 uniform sampler2DArray textureArray;
@@ -144,18 +145,30 @@ int get_random_landclass(in vec2 co, in vec2 tile_size);
 //   The partial derivatives of the tile_coord at the fragment is needed to adjust for 
 //   the stretching of different textures, so that the correct mip-map level is looked 
 //   up and there are no seams.
+//   Texture types: 0: base texture, 1: grain texture, 2: gradient texture, 3 dot texture, 
+//     4: mix texture, 5: detail texture.
 
-vec4 lookup_ground_texture_array(in vec2 tile_coord, in int landclass_id, in vec2 dx, in vec2 dy);
+vec4 lookup_ground_texture_array(in int texture_type, in vec2 ground_texture_coord, in int landclass_id,
+  in vec4 dFdx_and_dFdy);
 
 
 // Look up the landclass id [0 .. 255] for this particular fragment.
 // Lookup id of any neighbouring landclass that is within the search distance.
 // Searches are performed in upto 4 directions right now, but only one landclass is looked up
 // Create a mix factor werighting the influences of nearby landclasses
-void get_landclass_id(in vec2 tile_coord,   
-  const in float landclass_texel_size_m, in vec2 dx, in vec2 dy,
+void get_landclass_id(in vec2 tile_coord, in vec4 dFdx_and_dFdy, 
   out int landclass_id, out ivec4 neighbor_landclass_ids, 
   out int num_unique_neighbors,out vec4 mix_factor
+  );
+
+
+//  Look up the texel of the specified texture type (e.g. grain or detail textures) for this fragment
+//    and any neighbor texels, then mix.
+
+vec4 get_mixed_texel(in int texture_type, in vec2 g_texture_coord, 
+  in int landclass_id, in int num_unique_neighbors, 
+  in ivec4 neighbor_texel_landclass_ids, in vec4 neighbor_mix_factors,
+  in vec4 dFdx_and_dFdy
   );
 
 
@@ -209,16 +222,15 @@ void main()
   vec4 mfact;
 
 
-  const float landclass_texel_size_m = 25.0;
 
   // Partial derivatives of s and t for this fragment, 
   // with respect to window (screen space) x and y axes.
   // Used to pick mipmap LoD levels, and turn off unneeded procedural detail
-  vec2 dx = dFdx(tile_coord); 
-  vec2 dy = dFdy(tile_coord);
+  // dFdx and dFdy are packed in a vec4 so multiplying 
+  // to scale takes 1 instruction slot.
+  vec4 dxdy_gc = vec4(dFdx(tile_coord) , dFdy(tile_coord));
 
-  get_landclass_id(tile_coord, landclass_texel_size_m, dx, dy,
-      lc, lc_n, num_unique_neighbors, mfact);
+  get_landclass_id(tile_coord, dxdy_gc, lc, lc_n, num_unique_neighbors, mfact);
 
   // The landclass id is used to index into arrays containing
   // material parameters and textures for the landclass as 
@@ -226,9 +238,18 @@ void main()
   float index = float(lc)/512.0;
   vec4 index_n = vec4(lc_n)/512.0;
 
-	// Material properties.
-	vec4 mat_diffuse, mat_ambient, mat_specular;
-	float mat_shininess;
+  // Material properties.
+  vec4 mat_diffuse, mat_ambient, mat_specular;
+  float mat_shininess;
+
+  // Calculate texture coords for ground textures
+  // Textures are stretched along the ground to different 
+  // lengths along each axes as set by <xsize> and <ysize> 
+  // regional definitions parameters.
+  vec2 stretch_dimensions = fg_dimensionsArray[lc].st;
+  vec2 tileSize = vec2(fg_tileWidth, fg_tileHeight);
+  vec2 texture_scaling =  tileSize.yx / stretch_dimensions.st;
+  vec2 st = texture_scaling.st * ground_tex_coord.st;
 
   if (fg_photoScenery) {
 		mat_ambient = vec4(1.0,1.0,1.0,1.0);
@@ -238,46 +259,26 @@ void main()
 
 		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
   } else {
-		// Color Mode is always AMBIENT_AND_DIFFUSE, which means
-		// using a base colour of white for ambient/diffuse,
-		// rather than the material color from ambientArray/diffuseArray.
-		mat_ambient = vec4(1.0,1.0,1.0,1.0);
-		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
-		mat_specular = fg_specularArray[lc];
-		mat_shininess = fg_dimensionsArray[lc].z;
+
+    // Color Mode is always AMBIENT_AND_DIFFUSE, which means
+    // using a base colour of white for ambient/diffuse,
+    // rather than the material color from ambientArray/diffuseArray.
+    mat_ambient = vec4(1.0,1.0,1.0,1.0);
+    mat_diffuse = vec4(1.0,1.0,1.0,1.0);
+    mat_specular = fg_specularArray[lc];
+    mat_shininess = fg_dimensionsArray[lc].z;
 
     // Look up ground textures by indexing into the texture array.
     // Different textures are stretched along the ground to different 
     // lengths along each axes as set by <xsize> and <ysize> 
     // regional definitions parameters
 
-    // Look up texture coordinates and scale of ground textures
-    // Landclass for this fragment
-    texel = lookup_ground_texture_array(tile_coord, lc, dx, dy);
+    // Lookup the base texture texel for this fragment and any neighbors, with mixing
+    texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
 
-    // Mix texels - to work consistently it needs a more preceptual interpolation than mix()
-    if (num_unique_neighbors != 0)
-    {
-      // Closest neighbor landclass
-      vec4 texel_closest = lookup_ground_texture_array(tile_coord, lc_n[0], dx, dy);
-
-      // Neighbor contributions
-      vec4 texel_nc=texel_closest;
-
-      if (num_unique_neighbors > 1)
-      {
-        // 2nd Closest neighbor landclass
-        vec4 texel_2nd_closest = lookup_ground_texture_array(tile_coord, lc_n[1],
-                                    dx, dy);
-
-        texel_nc = mix(texel_closest, texel_2nd_closest, mfact[1]);
-      }
-
-      texel = mix(texel, texel_nc, mfact[0]);
-    }
   }
 
-	vec4 color = mat_ambient * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+  vec4 color = mat_ambient * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 
   // Testing code:
   // Use rlc even when looking up textures to recreate the extra performance hit

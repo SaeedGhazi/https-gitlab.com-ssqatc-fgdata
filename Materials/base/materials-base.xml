@@ -635,7 +635,8 @@
 <material n="3002">
   <name>ws30Road</name>
   <texture>osm2city/roads.png</texture>
-  <!-- <effect>Effects/terrain-default</effect> -->
+  <effect>Effects/terrain-default</effect>
+  <!-- <effect>Effects/road-mid</effect> -->
   <line-feature-tex-x0>0.25</line-feature-tex-x0>
   <line-feature-tex-x1>0.375</line-feature-tex-x1>
   <line-feature-offset-m>0.75</line-feature-offset-m>
@@ -664,6 +665,7 @@
   <name>ws30Freeway</name>
   <texture>osm2city/roads.png</texture>
   <effect>Effects/terrain-default</effect>
+  <!-- <effect>Effects/road-high</effect> -->
   <line-feature-tex-x0>0.625</line-feature-tex-x0>
   <line-feature-tex-x1>0.75</line-feature-tex-x1>
   <line-feature-offset-m>1.0</line-feature-offset-m>

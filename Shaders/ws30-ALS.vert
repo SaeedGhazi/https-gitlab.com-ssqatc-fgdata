@@ -27,6 +27,7 @@ uniform vec3 fg_modelOffset;
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec2 ground_tex_coord;
 varying vec4 ecPosition;
 
 varying float yprime_alt;
@@ -84,6 +85,9 @@ void main()
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
     normal = gl_NormalMatrix * gl_Normal;
+
+    // Temporary value:
+    ground_tex_coord = gl_TexCoord[0].st;
 
     // here start computations for the haze layer
     // we need several geometrical quantities

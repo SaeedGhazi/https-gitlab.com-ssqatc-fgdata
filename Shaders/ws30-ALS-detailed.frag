@@ -43,7 +43,8 @@
 varying vec4 light_diffuse_comp;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec3 rawPos;
+varying vec2 ground_tex_coord;
+varying vec2 rawPos;
 varying vec3 worldPos;
 // Testing code:
 //vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
@@ -157,18 +158,30 @@ int get_random_landclass(in vec2 co, in vec2 tile_size);
 //   The partial derivatives of the tile_coord at the fragment is needed to adjust for 
 //   the stretching of different textures, so that the correct mip-map level is looked 
 //   up and there are no seams.
+//   Texture types: 0: base texture, 1: grain texture, 2: gradient texture, 3 dot texture, 
+//     4: mix texture, 5: detail texture.
 
-vec4 lookup_ground_texture_array(in vec2 tile_coord, in int landclass_id, in vec2 dx, in vec2 dy);
+vec4 lookup_ground_texture_array(in int texture_type, in vec2 ground_texture_coord, in int landclass_id,
+  in vec4 dFdx_and_dFdy);
 
 
 // Look up the landclass id [0 .. 255] for this particular fragment.
 // Lookup id of any neighbouring landclass that is within the search distance.
 // Searches are performed in upto 4 directions right now, but only one landclass is looked up
-// Create a mix factor werighting the influences of nearby landclasses
-void get_landclass_id(in vec2 tile_coord,   
-  const in float landclass_texel_size_m, in vec2 dx, in vec2 dy,
+// Create a mix factor weighting the influences of nearby landclasses
+void get_landclass_id(in vec2 tile_coord, in vec4 dFdx_and_dFdy,
   out int landclass_id, out ivec4 neighbor_landclass_ids, 
   out int num_unique_neighbors,out vec4 mix_factor
+  );
+
+
+//  Look up the texel of the specified texture type (e.g. grain or detail textures) for this fragment
+//    and any neighbor texels, then mix.
+
+vec4 get_mixed_texel(in int texture_type, in vec2 g_texture_coord, 
+  in int landclass_id, in int num_unique_neighbors, 
+  in ivec4 neighbor_texel_landclass_ids, in vec4 neighbor_mix_factors,
+  in vec4 dFdx_and_dFdy
   );
 
 
@@ -270,16 +283,15 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   vec4 mfact;
 
 
-  const float landclass_texel_size_m = 25.0;
 
-  // Partial derivatives of s and t for this fragment, 
+  // Partial derivatives of s and t of ground texture coords for this fragment, 
   // with respect to window (screen space) x and y axes.
   // Used to pick mipmap LoD levels, and turn off unneeded procedural detail
-  vec2 dx = dFdx(tile_coord); 
-  vec2 dy = dFdy(tile_coord);
+  // dFdx and dFdy are packed in a vec4 so multiplying everything
+  // to scale takes 1 instruction slot.
+  vec4 dxdy_gc = vec4(dFdx(ground_tex_coord) , dFdy(ground_tex_coord));
 
-  get_landclass_id(tile_coord, landclass_texel_size_m, dx, dy,
-      lc, lc_n, num_unique_neighbors, mfact);
+  get_landclass_id(tile_coord, dxdy_gc, lc, lc_n, num_unique_neighbors, mfact);
 
   // The landclass id is used to index into arrays containing
   // material parameters and textures for the landclass as 
@@ -291,13 +303,23 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   vec4 mat_ambient = fg_ambientArray[lc];
   vec4 mat_diffuse = fg_diffuseArray[lc];
   vec4 mat_specular = fg_specularArray[lc];
-	vec2 st = gl_TexCoord[0].st;
 
   // Testing code:
   // Use rlc even when looking up textures to recreate the extra performance hit
   // so any performance difference between the two is due to the texture lookup
   // color.rgb = color.rgb+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
 
+  // Calculate texture coords for ground textures
+  // Textures are stretched along the ground to different 
+  // lengths along each axes as set by <xsize> and <ysize> 
+  // regional definitions parameters.
+  vec2 stretch_dimensions = fg_dimensionsArray[lc].st;
+  vec2 tileSize = vec2(fg_tileWidth, fg_tileHeight);
+  vec2 texture_scaling =  tileSize.xy / stretch_dimensions.st;
+  vec2 st = texture_scaling.st * ground_tex_coord.st;
+
+  // Scale partial derivatives
+  vec4 dxdy = vec4(texture_scaling.st, texture_scaling.st)  * dxdy_gc;
 
   if (fg_photoScenery) {
     // In the photoscenery case we don't have landclass or materials available, so we
@@ -305,51 +327,25 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
     mat_ambient = vec4(0.2,0.2,0.2,1.0);
     mat_diffuse = vec4(0.8,0.8,0.8,1.0);
     mat_specular = vec4(0.0,0.0,0.0,1.0);
+    mat_shininess = 1.2;
 
 		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
-  } else {
-		// Color Mode is always AMBIENT_AND_DIFFUSE, which means
-		// using a base colour of white for ambient/diffuse,
-		// rather than the material color from ambientArray/diffuseArray.
-		mat_ambient = vec4(1.0,1.0,1.0,1.0);
-		mat_diffuse = vec4(1.0,1.0,1.0,1.0);
-		mat_specular = fg_specularArray[lc];
-		mat_shininess = fg_dimensionsArray[lc].z;
+  } else
+  {
 
-		// Different textures have different have different dimensions.
-		vec2 atlas_dimensions = fg_dimensionsArray[lc].st;
-		vec2 atlas_scale =  vec2(fg_tileWidth / atlas_dimensions.s, fg_tileHeight / atlas_dimensions.t );
-		st = atlas_scale * gl_TexCoord[0].st;
+    // Color Mode is always AMBIENT_AND_DIFFUSE, which means
+    // using a base colour of white for ambient/diffuse,
+    // rather than the material color from ambientArray/diffuseArray.
+    mat_ambient = vec4(1.0,1.0,1.0,1.0);
+    mat_diffuse = vec4(1.0,1.0,1.0,1.0);
+    mat_specular = fg_specularArray[lc];
+    mat_shininess = fg_dimensionsArray[lc].z;
 
-    // Look up ground textures by indexing into the texture array.
-    // Different textures are stretched along the ground to different 
-    // lengths along each axes as set by <xsize> and <ysize> 
-    // regional definitions parameters
+    // Lookup the base texture texel for this fragment and any neighbors, with mixing
+    texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
 
-    // Look up texture coordinates and scale of ground textures
-    // Landclass for this fragment
-    texel = lookup_ground_texture_array(tile_coord, lc, dx, dy);
+    //if (ground_tex_coord.x > 0.0) texel = vec4(1.0);
 
-    // Mix texels - to work consistently it needs a more preceptual interpolation than mix()
-    if (num_unique_neighbors != 0)
-    {
-      // Closest neighbor landclass
-      vec4 texel_closest = lookup_ground_texture_array(tile_coord, lc_n[0], dx, dy);
-
-      // Neighbor contributions
-      vec4 texel_nc=texel_closest;
-
-      if (num_unique_neighbors > 1)
-      {
-        // 2nd Closest neighbor landclass
-        vec4 texel_2nd_closest = lookup_ground_texture_array(tile_coord, lc_n[1],
-                                    dx, dy);
-
-        texel_nc = mix(texel_closest, texel_2nd_closest, mfact[1]);
-      }
-
-      texel = mix(texel, texel_nc, mfact[0]);
-    }
   }
 
   vec4 color = gl_Color * mat_ambient;
@@ -359,6 +355,9 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
 
+  //mix_texel = texel;
+  //detail_texel = texel;
+  vec4 t = texel;
 
 	int flag = 1;
   int mix_flag = 1;
@@ -378,7 +377,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
   //float view_angle = abs(dot(normal, normalize(ecViewdir)));
 
-  if ((quality_level > 3)&&(rawPos.z +500.0 > snowlevel)) {
+  if ((quality_level > 3)&&(relPos.z +500.0 > snowlevel)) {
     float sfactor;
     snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
     snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
@@ -393,17 +392,21 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
       noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );
     }
     
-    snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(rawPos.z -snowlevel) );
+    snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z -snowlevel) );
       
   }
 
   if ((tquality_level > 2) && (mix_flag == 1))
-	{
+  {
     // Mix texture is material texture 15, which is mapped to the b channel of fg_textureLookup1
-    int tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
-    mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+    //int tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
+    //mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
     if (mix_texel.a < 0.1) { mix_flag = 0;}
- 	}
+    //WS2: mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3); // temp
+
+    mix_texel = lookup_ground_texture_array(4, st * 1.3, lc, dxdy * 1.3);
+   if (mix_texel.a <0.1) {mix_flag = 0;}
+  }
 
   if (tquality_level > 3 && (flag == 1))  
 	{
@@ -417,9 +420,13 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 		}
 
     // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
-    int tex3 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
-    detail_texel = texture(textureArray, vec3(stprime, tex3));
+    //int tex3 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
+    //detail_texel = texture(textureArray, vec3(stprime, tex3));
     if (detail_texel.a < 0.1) { flag = 0;}
+    //WS2: detail_texel = texture2D(detail_texture, stprime); // temp
+
+    vec4 dxdy_prime = vec4(dFdx(stprime), dFdy(stprime));
+    detail_texel = lookup_ground_texture_array(5, stprime, lc, dxdy_prime);
 	}
 
 // texture preparation according to detail level
@@ -505,18 +512,18 @@ if (quality_level > 3)
 	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 	
     	// mix snow
-	if (rawPos.z +500.0 > snowlevel)
+	if (relPos.z +500.0 > snowlevel)
 		{
    		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
 		//texel = mix(texel, snow_texel, texel_snow_fraction);
-		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (rawPos.z)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 		}
 	}
-else if (rawPos.z +500.0 > snowlevel)
+else if (relPos.z +500.0 > snowlevel)
         {
-            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(rawPos.z -snowlevel) );
+            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(relPos.z -snowlevel) );
 //          texel = vec4(dot(vec3(0.2989, 0.5870, 0.1140), texel.rgb));
-            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (rawPos.z)));
+            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (relPos.z)));
         }
 
 

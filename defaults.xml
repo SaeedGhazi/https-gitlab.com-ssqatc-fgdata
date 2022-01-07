@@ -813,6 +813,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <draw-heliports type="bool" userarchive="y">false</draw-heliports>
         <draw-traffic type="bool" userarchive="y">false</draw-traffic>
         <draw-flight-history type="bool" userarchive="y">false</draw-flight-history>
+        <draw-pois type="bool" userarchive="y">true</draw-pois>
 
         <magnetic-headings type="bool" userarchive="y">true</magnetic-headings>
         <centre-on-aircraft type="bool" userarchive="y">true</centre-on-aircraft>

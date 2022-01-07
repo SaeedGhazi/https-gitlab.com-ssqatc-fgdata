@@ -122,6 +122,19 @@ command interface /autopilot/route-manager/input:
                   <command>property-toggle</command>
                 </binding>
             </checkbox>
+
+            <checkbox>
+                <label>Landmarks</label>
+                <halign>left</halign>
+                <property>/sim/gui/map/draw-pois</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
 <!--
             <button>
                 <legend>Airways</legend>

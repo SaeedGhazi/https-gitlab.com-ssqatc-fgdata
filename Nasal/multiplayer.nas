@@ -195,12 +195,13 @@ var dialog = {
             me.font = nil;
         }
         
-        me.header = ["view", " callsign", " model", func dialog.dist_hdr, func dialog.alt_hdr ~ " ", "", " brg", "chat", "ignore" ~ " ", " code", "ver", "airport", " set"];
+        me.header = ["view", " callsign", " model", func dialog.dist_hdr, " ", func dialog.alt_hdr ~ " ", "", " brg", "chat", "ignore" ~ " ", " code", "ver", "airport", " set"];
         me.columns = [
             { type: "checkbox", legend: "", property: "view", halign: "right", "pref-height": 14, "pref-width": 14, callback: "multiplayer.view_select", argprop: "callsign", },
             { type: "text", property: "callsign",    format: " %s",    label: "-----------",    halign: "fill" },
             { type: "text", property: "model-short", format: " %s",     label: "--------------", halign: "fill" },
             { type: "text", property: func dialog.dist_node, format:" %8.2f", label: "---------", halign: "right" },
+            { type: "text", property: "distance_delta", format: "%s", label: "--", halign: "right" },
             { type: "text", property: func dialog.alt_node,  format:" %7.0f", label: "---------", halign: "right" },
             { type: "text", property: "ascent_descent",          format: "%s", label: "-", halign: "right" },
             { type: "text", property: "bearing-to",  format: " %3.0f", label: "----",           halign: "right" },
@@ -290,6 +291,7 @@ var dialog = {
 
         var row = 0;
         var col = 0;
+        # First row is column headers.
         foreach (var h; me.header) {
             var w = content.addChild("text");
             var l = typeof(h) == "func" ? h() : h;
@@ -301,6 +303,7 @@ var dialog = {
         }
         row += 2;
         var odd = 1;
+        # Add a row for each multiplayer aircraft.
         foreach (var mp; model.list) {
             var col = 0;
             var color = me.fg[2];
@@ -424,12 +427,20 @@ var dialog = {
                     else ascent_descent = '';
                 }
                 
+                distance_delta_text = ' ';
+                var distance_km_old = n.getValue('distance-to-km');
+                if (distance_km_old != nil) {
+                    var distance_delta = distance - distance_km_old * 1000;
+                    if (distance_delta >  10)   distance_delta_text = ' +';
+                    if (distance_delta < -10)   distance_delta_text = ' -';
+                }
                 n.setValues({
                     "model-short": n.getNode("model-installed").getValue() ? mp.model : "[" ~ mp.model ~ "]",
                     "set-loaded": set_loaded ? "   *" : "    ",
                     "bearing-to": self.course_to(ac),
                     "distance-to-km": distance / 1000.0,
                     "distance-to-nm": distance * M2NM,
+                    "distance_delta": distance_delta_text,
                     "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
                     "ascent_descent": ascent_descent,
                     "controls/invisible": contains(ignore, mp.callsign),

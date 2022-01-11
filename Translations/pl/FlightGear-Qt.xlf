@@ -1425,17 +1425,17 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg264" approved="yes">
         <source xml:space="preserve">High-level (Jet) airways</source>
-        <target xml:space="preserve">górnych dróg lotniczych (Jet)</target>
+        <target xml:space="preserve">wysokich dróg lotniczych (Jet)</target>
         <context-group purpose="location"><context context-type="linenumber">317</context></context-group>
       </trans-unit>
       <trans-unit id="_msg265" approved="yes">
         <source xml:space="preserve">Low-level (Victor) airways</source>
-        <target xml:space="preserve">dolnych dróg lotniczych (Victor)</target>
+        <target xml:space="preserve">niskich dróg lotniczych (Victor)</target>
         <context-group purpose="location"><context context-type="linenumber">318</context></context-group>
       </trans-unit>
       <trans-unit id="_msg266" approved="yes">
         <source xml:space="preserve">High- &amp; low-level airways</source>
-        <target xml:space="preserve">górnych i dolnych dróg lotniczych</target>
+        <target xml:space="preserve">wysokich i niskich dróg lotniczych</target>
         <context-group purpose="location"><context context-type="linenumber">319</context></context-group>
       </trans-unit>
       <trans-unit id="_msg267" approved="yes">

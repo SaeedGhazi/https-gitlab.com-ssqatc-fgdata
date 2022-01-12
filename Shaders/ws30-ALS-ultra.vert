@@ -30,6 +30,7 @@ varying vec3 worldPos;
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
 varying vec4 ecPosition;
+varying vec3 vertVec;
 
 // Sent packed into alpha channels
 //varying float yprime_alt;
@@ -198,6 +199,7 @@ void main()
   */
 
   relPos = relPosZUp;
+  vertVec = relPosZUp;
   
   ecViewdir = (gl_ModelViewMatrix * (epMS - gl_Vertex)).xyz;	
   // unfortunately, we need the distance in the vertex shader, although the more accurate version

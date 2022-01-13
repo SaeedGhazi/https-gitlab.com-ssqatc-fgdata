@@ -126,6 +126,17 @@
    </option>
 
    <option>
+    <name>load-tape-create-video</name>
+    <description>load-tape-create-video</description>
+   </option>
+
+   <option>
+    <name>load-tape-fixed-dt</name>
+    <arg>value</arg>
+    <description>load-tape-fixed-dt</description>
+   </option>
+
+   <option>
     <name>restore-defaults</name>
     <description>restore-defaults-desc</description>
    </option>

@@ -5,7 +5,7 @@ var parents = [SVGSymbol];
 var __self__ = caller(0)[0];
 DotSym.makeinstance( name, __self__ );
 
-var svg_path = "Nasal/canvas/map/Images/boeingAirplane.svg";
+var svg_path = "Nasal/canvas/map/Images/outlinedAirplane.svg";
 var element_id = "airplane";
 
 # Rotate with the main aircraft.

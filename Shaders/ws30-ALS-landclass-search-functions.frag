@@ -160,6 +160,9 @@
 //     Possibe values: 0=off, 1=on. Default:0
   const int grow_landclass_borders_with_large_scale_transition = 1; 
 
+//  Use the edge-hardness parameter from materials.xml to determine
+//  weighting of the landclass in transitions
+  const int use_edge_hardness_with_large_scale_transition = 0;
 
 
 //////////////////////////////////////////////////////////////////
@@ -1153,6 +1156,15 @@ if (grow_landclass_borders_with_large_scale_transition == 1)
 
   //lc = int(t);
   //mfact[2] = t;
+
+  if (use_edge_hardness_with_large_scale_transition == 1)
+  {
+    // the edge-hardness material parameter has range 0.0 (soft) to 1.0 (hard)
+    // We use this to force the mix factor to 0 or 1
+    if ((num_n > 0) && fg_dimensionsArray[lc].w > 0.5) {
+      mfact[0] = step(0.5, mfact[0]);
+    }
+  }
 
   landclass_id = lc;
   neighbor_landclass_ids=lc_n;

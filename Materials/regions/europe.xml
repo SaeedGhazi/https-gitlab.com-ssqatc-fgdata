@@ -157,9 +157,9 @@
   <texture>Terrain/irrcrop.png</texture>
   <object-mask>Terrain/irrcrop.mask.png</object-mask>
   <parameters>
-      <rotation_flag>0</rotation_flag>
-      <rotation_scale>8000.0</rotation_scale>
-    </parameters>
+    <rotation_flag>0</rotation_flag>
+    <rotation_scale>8000.0</rotation_scale>
+  </parameters>
   <xsize>3000</xsize>
   <ysize>3000</ysize>
   <solid>1</solid>
@@ -185,6 +185,7 @@
     <parameters>
       <rotation_flag>0</rotation_flag>
       <rotation_scale>8000.0</rotation_scale>
+      <edge-hardness>1.0</edge-hardness>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -250,6 +251,9 @@
     <tree-varieties>8</tree-varieties>
     <tree-height-m>15.0</tree-height-m>
     <tree-width-m>10.0</tree-width-m>
+    <parameters>
+      <edge-hardness>1.0</edge-hardness>
+    </parameters>
   </material>
 
   <material>
@@ -271,6 +275,7 @@
       <urban_blend>1</urban_blend>
       <blend_bias>0.2</blend_bias>
       <hires_overlay_bias>-1.0</hires_overlay_bias>
+      <edge-hardness>1.0</edge-hardness>
     </parameters>
     <xsize>1024</xsize>
     <ysize>1024</ysize>
@@ -331,6 +336,9 @@
     <tree-varieties>8</tree-varieties>
     <tree-height-m>15.0</tree-height-m>
     <tree-width-m>10.0</tree-width-m>
+    <parameters>
+      <edge-hardness>1.0</edge-hardness>
+    </parameters>
   </material>
 
   <material>
@@ -408,6 +416,9 @@
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
+    <parameters>
+      <edge-hardness>1.0</edge-hardness>
+    </parameters>
   </material>
 
   <material>
@@ -434,6 +445,9 @@
     <tree-varieties>8</tree-varieties>
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
+    <parameters>
+      <edge-hardness>1.0</edge-hardness>
+    </parameters>
   </material>
 
   <material>
@@ -516,6 +530,7 @@
       <overlay_autumn_flag>1</overlay_autumn_flag>
       <overlay_brightness_top>1.4</overlay_brightness_top>
       <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+      <edge-hardness>1.0</edge-hardness>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -550,6 +565,7 @@
       <overlay_autumn_flag>1</overlay_autumn_flag>
       <overlay_brightness_top>1.4</overlay_brightness_top>
       <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+      <edge-hardness>1.0</edge-hardness>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

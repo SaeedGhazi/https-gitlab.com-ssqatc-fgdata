@@ -264,6 +264,19 @@ vec4 get_mixed_texel(in int texture_type, in vec2 g_texture_coord,
   in vec4 dFdx_and_dFdy
   );
 
+// Determine the texel and material parameters for a particular fragment, 
+// Taking into account photoscenery etc.
+void get_material(in  int   landclass, 
+                  in  vec2  ground_tex_coord,
+                  in  vec4  dxdy_gc,
+                  out float mat_shininess,
+                  out vec4  mat_ambient,
+                  out vec4  mat_diffuse,
+                  out vec4  mat_specular,
+                  out vec4  dxdy,
+                  out vec2  st
+  );
+
 
 // End Test-phase code
 ////////////////////////
@@ -295,6 +308,12 @@ void main()
   vec3 lightDir = gl_LightSource[0].position.xyz;
   vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));
   
+
+  // Material/texel properties
+  float mat_shininess;
+  vec2 st;
+  vec4 mat_ambient, mat_diffuse, mat_specular, dxdy;
+
   vec4 texel;
   vec4 snow_texel;
   vec4 detail_texel;
@@ -440,49 +459,9 @@ void main()
   vec4 dxdy_gc = vec4(dFdx(ground_tex_coord) , dFdy(ground_tex_coord));
   
   get_landclass_id(tile_coord, dxdy_gc, lc, lc_n, num_unique_neighbors, mfact);
-  
-  
-  // The landclass id is used to index into arrays containing
-  // material parameters and textures for the landclass as 
-  // defined in the regional definitions
-  float index = float(lc)/512.0;
-  vec4 index_n = vec4(lc_n)/512.0;
-  
-  float mat_shininess = fg_dimensionsArray[lc].z;
-  vec4 mat_ambient = fg_ambientArray[lc];
-  vec4 mat_diffuse = fg_diffuseArray[lc];
-  vec4 mat_specular = fg_specularArray[lc];
-
-  // Testing code:
-  // Use rlc even when looking up textures to recreate the extra performance hit
-  // so any performance difference between the two is due to the texture lookup
-  // color.rgb = color.rgb+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
-  
-  
-  // Look up ground textures by indexing into the texture array.
-  
-  // Calculate texture coords for ground textures
-  // Textures are stretched along the ground to different 
-  // lengths along each axes as set by <xsize> and <ysize> 
-  // regional definitions parameters.
-  vec2 stretch_dimensions = fg_dimensionsArray[lc].st;
-  vec2 tileSize = vec2(fg_tileWidth, fg_tileHeight);
-  vec2 texture_scaling =  tileSize.yx / stretch_dimensions.st;
-  vec2 st = texture_scaling.st * ground_tex_coord.st;
-
-
-  // Scale partial derivatives
-  vec4 dxdy = vec4(texture_scaling.st, texture_scaling.st)  * dxdy_gc;
-
+  get_material(lc, ground_tex_coord, dxdy_gc, mat_shininess, mat_ambient, mat_diffuse, mat_specular, dxdy, st);
   
   if (fg_photoScenery) {
-    // In the photoscenery case we don't have landclass or materials available, so we
-    // just use constants for the material properties.
-    mat_ambient = vec4(0.2,0.2,0.2,1.0);
-    mat_diffuse = vec4(0.8,0.8,0.8,1.0);
-    mat_specular = vec4(0.0,0.0,0.0,1.0);
-    mat_shininess = 1.2;
-  
     // The photoscenery orthophots are stored in the landclass texture
     // and use normalised tile coordinates
     texel = texture(landclass, vec2(tile_coord.s, 1.0 - tile_coord.t));
@@ -490,22 +469,9 @@ void main()
     // Do not attempt any mixing
     flag = 0;
     mix_flag = 0;
-  } 
-  else 
-  {
-
-    // Color Mode is always AMBIENT_AND_DIFFUSE, which means
-    // using a base colour of white for ambient/diffuse,
-    // rather than the material color from ambientArray/diffuseArray.
-    mat_ambient = vec4(1.0,1.0,1.0,1.0);
-    mat_diffuse = vec4(1.0,1.0,1.0,1.0);
-    mat_specular = fg_specularArray[lc];
-    mat_shininess = fg_dimensionsArray[lc].z;
-
-
+  } else {
     // Lookup the base texture texel for this fragment and any neighbors, with mixing
     texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
-
   }
   
   vec4 color = gl_Color * mat_ambient;
@@ -942,8 +908,7 @@ void main()
     float H;
     float distance_in_layer;
     float transmission_arg;
-    
-    
+      
     // we solve the geometry what part of the light path is attenuated normally and what is through the haze layer
     if (delta_z > 0.0) // we're inside the layer
     {

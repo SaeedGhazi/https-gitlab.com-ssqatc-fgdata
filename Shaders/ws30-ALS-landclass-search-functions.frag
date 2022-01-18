@@ -1177,3 +1177,46 @@ if (grow_landclass_borders_with_large_scale_transition == 1)
 // End Test-phase code
 ////////////////////////
 
+
+// Determine the texel and material parameters for a particular fragment, 
+// Taking into account photoscenery etc.
+void get_material(in  int   landclass, 
+                  in  vec2  ground_tex_coord,
+                  in  vec4  dxdy_gc,
+                  out float mat_shininess,
+                  out vec4  mat_ambient,
+                  out vec4  mat_diffuse,
+                  out vec4  mat_specular,
+                  out vec4  dxdy,
+                  out vec2  st
+  )
+{ 
+  // Calculate texture coords for ground textures
+  // Textures are stretched along the ground to different 
+  // lengths along each axes as set by <xsize> and <ysize> 
+  // regional definitions parameters.
+  vec2 stretch_dimensions = fg_dimensionsArray[landclass].st;
+  vec2 tileSize = vec2(fg_tileWidth, fg_tileHeight);
+  vec2 texture_scaling =  tileSize.yx / stretch_dimensions.st;
+  st = texture_scaling.st * ground_tex_coord.st;
+
+  // Scale partial derivatives
+  dxdy = vec4(texture_scaling.st, texture_scaling.st)  * dxdy_gc;
+
+  if (fg_photoScenery) {
+    // In the photoscenery case we don't have landclass or materials available, so we
+    // just use constants for the material properties.
+    mat_ambient = vec4(0.2,0.2,0.2,1.0);
+    mat_diffuse = vec4(0.8,0.8,0.8,1.0);
+    mat_specular = vec4(0.0,0.0,0.0,1.0);
+    mat_shininess = 1.2;
+  } else {
+    // Color Mode is always AMBIENT_AND_DIFFUSE, which means
+    // using a base colour of white for ambient/diffuse,
+    // rather than the material color from ambientArray/diffuseArray.
+    mat_ambient = vec4(1.0,1.0,1.0,1.0);
+    mat_diffuse = vec4(1.0,1.0,1.0,1.0);
+    mat_specular = fg_specularArray[landclass];
+    mat_shininess = fg_dimensionsArray[landclass].z;
+  }
+}

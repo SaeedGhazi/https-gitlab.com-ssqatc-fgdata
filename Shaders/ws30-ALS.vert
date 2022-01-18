@@ -232,8 +232,10 @@ else // the faster, full-day version without lightfields
     vec4 constant_term = gl_LightModel.ambient +  light_ambient;
     // Another hack for supporting two-sided lighting without using
     // gl_FrontFacing in the fragment shader.
-    gl_FrontColor.rgb = constant_term.rgb;  gl_FrontColor.a = 1.0;
-    gl_BackColor.rgb = constant_term.rgb; gl_BackColor.a = 0.0;
+    gl_FrontColor.rgb = constant_term.rgb;
+    gl_BackColor.rgb = constant_term.rgb;
+    gl_FrontColor.a = mie_angle;
+    gl_BackColor.a = mie_angle;
 
     setupShadows(ecPosition);
 }

@@ -298,6 +298,11 @@
         <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
       <uniform>
+        <name>quality_level</name>
+        <type>int</type>
+        <value><use>quality_level</use></value>
+      </uniform>
+      <uniform>
         <name>visibility</name>
         <type>float</type>
         <value><use>visibility</use></value>
@@ -1192,6 +1197,16 @@
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
         <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
+      <uniform>
+        <name>tquality_level</name>
+        <type>int</type>
+        <value><use>tquality_level</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
       <uniform>
         <name>visibility</name>
         <type>float</type>

@@ -167,6 +167,11 @@
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
         <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
+      <uniform>
+        <name>quality_level</name>
+        <type>int</type>
+        <value><use>quality_level</use></value>
+      </uniform>
 	  <uniform>
         <name>grain_strength</name>
         <type>float</type>

@@ -230,6 +230,8 @@ float dist = length(relPos);
 // angle of view vector with horizon
 float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
+// Altitude of fragment above sea level
+float msl_altitude = (relPos.z + eye_alt);
 
 
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
@@ -360,7 +362,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
   //float view_angle = abs(dot(normal, normalize(ecViewdir)));
 
-  if ((quality_level > 3)&&(relPos.z +500.0 > snowlevel)) {
+  if ((quality_level > 3)&&(msl_altitude +500.0 > snowlevel)) {
     float sfactor;
     snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
     snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
@@ -375,7 +377,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
       noise_term = noise_term + 0.3 * (noise_5m -0.5) * (1.0 - smoothstep(1000.0 * sfactor, 3000.0 *sfactor, dist)  );
     }
     
-    snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(relPos.z -snowlevel) );
+    snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(msl_altitude -snowlevel) );
       
   }
 
@@ -495,18 +497,18 @@ if (quality_level > 3)
 	texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor + 3.0 * dust_cover_factor * (((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
 	
     	// mix snow
-	if (relPos.z +500.0 > snowlevel)
+	if (msl_altitude +500.0 > snowlevel)
 		{
    		snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
 		//texel = mix(texel, snow_texel, texel_snow_fraction);
-		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (relPos.z)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
+		texel = mix(texel, snow_texel, snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * (msl_altitude)+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0));
 		}
 	}
-else if (relPos.z +500.0 > snowlevel)
+else if (msl_altitude +500.0 > snowlevel)
         {
-            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(relPos.z -snowlevel) );
+            float snow_alpha = 0.5+0.5* smoothstep(0.2,0.8, 0.3 + snow_thickness_factor +0.0001*(msl_altitude -snowlevel) );
 //          texel = vec4(dot(vec3(0.2989, 0.5870, 0.1140), texel.rgb));
-            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (relPos.z)));
+            texel = mix(texel, vec4(1.0), snow_alpha* smoothstep(snowlevel, snowlevel+200.0,  (msl_altitude)));
         }
 
 

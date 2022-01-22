@@ -124,7 +124,7 @@
 //     Note: transitions occur on both sides of the landclass borders. 
 //       The width of the transition is equal to 2x this value.
 //     Default: 100m
-  const float transition_search_distance_in_m = 130.0;
+  const float transition_search_distance_in_m = 25.0;
 
 //   Number of points to search in any direction, in addition to this fragment
 //     Default:4 points. Fewer points results in a less smooth transition (more banding)
@@ -162,7 +162,7 @@
 
 //  Use the edge-hardness parameter from materials.xml to determine
 //  weighting of the landclass in transitions
-  const int use_edge_hardness_with_large_scale_transition = 0;
+  const int use_edge_hardness_with_large_scale_transition = 1;
 
 
 //////////////////////////////////////////////////////////////////
@@ -915,6 +915,11 @@ void get_landclass_id(in vec2 tile_coord, in vec4 dFdx_and_dFdy,
 
   int lc = lookup_landclass_id(tile_coord, dxdy, lc_n_tx, num_n_tx, lc_n_w);
 
+  float edge_hardness = 0.0;
+  if (use_edge_hardness_with_large_scale_transition == 1) {
+    edge_hardness = fg_dimensionsArray[lc].a;
+  }
+
   // Neighbor landclass ids
   ivec4 lc_n = ivec4(lc);
 
@@ -948,13 +953,14 @@ if ( (enable_large_scale_transition_search == 1) &&
 
 
   // Transition search
-
   const int n = num_search_points_in_a_direction;
 
   const float search_dist = transition_search_distance_in_m;
   vec2 step_size_m = vec2(search_dist/float(n));
-  // step size in tile coords
-  vec2 steps = step_size_m.st / tile_size.st;
+  // step size in tile coords.  Modulated by the edge hardness which makes 
+  // the step size smaller and hence the range of adjacent landclasses
+  // smaller.
+  vec2 steps = step_size_m.st / tile_size.st * (1.0 - edge_hardness);
 
   vec2 c0 = tile_coord;
 
@@ -1156,15 +1162,6 @@ if (grow_landclass_borders_with_large_scale_transition == 1)
 
   //lc = int(t);
   //mfact[2] = t;
-
-  if (use_edge_hardness_with_large_scale_transition == 1)
-  {
-    // the edge-hardness material parameter has range 0.0 (soft) to 1.0 (hard)
-    // We use this to force the mix factor to 0 or 1
-    if ((num_n > 0) && fg_dimensionsArray[lc].w > 0.5) {
-      mfact[0] = step(0.5, mfact[0]);
-    }
-  }
 
   landclass_id = lc;
   neighbor_landclass_ids=lc_n;

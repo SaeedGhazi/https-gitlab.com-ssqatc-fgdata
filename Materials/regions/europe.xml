@@ -185,7 +185,7 @@
     <parameters>
       <rotation_flag>0</rotation_flag>
       <rotation_scale>8000.0</rotation_scale>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.5</edge-hardness>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -252,7 +252,7 @@
     <tree-height-m>15.0</tree-height-m>
     <tree-width-m>10.0</tree-width-m>
     <parameters>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.8</edge-hardness>
     </parameters>
   </material>
 
@@ -275,7 +275,7 @@
       <urban_blend>1</urban_blend>
       <blend_bias>0.2</blend_bias>
       <hires_overlay_bias>-1.0</hires_overlay_bias>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.8</edge-hardness>
     </parameters>
     <xsize>1024</xsize>
     <ysize>1024</ysize>
@@ -337,7 +337,7 @@
     <tree-height-m>15.0</tree-height-m>
     <tree-width-m>10.0</tree-width-m>
     <parameters>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.9</edge-hardness>
     </parameters>
   </material>
 
@@ -417,7 +417,7 @@
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
     <parameters>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.1</edge-hardness>
     </parameters>
   </material>
 
@@ -446,7 +446,7 @@
     <tree-height-m>20.0</tree-height-m>
     <tree-width-m>12.0</tree-width-m>
     <parameters>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.1</edge-hardness>
     </parameters>
   </material>
 
@@ -530,7 +530,7 @@
       <overlay_autumn_flag>1</overlay_autumn_flag>
       <overlay_brightness_top>1.4</overlay_brightness_top>
       <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.8</edge-hardness>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>
@@ -565,7 +565,7 @@
       <overlay_autumn_flag>1</overlay_autumn_flag>
       <overlay_brightness_top>1.4</overlay_brightness_top>
       <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
-      <edge-hardness>1.0</edge-hardness>
+      <edge-hardness>0.8</edge-hardness>
     </parameters>
     <xsize>2000</xsize>
     <ysize>2000</ysize>

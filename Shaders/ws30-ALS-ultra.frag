@@ -5,16 +5,14 @@
 #extension GL_EXT_texture_array : enable
 // written by Thorsten Renk, Oct 2011, based on default.frag
 
-
 //////////////////////////////////////////////////////////////////
 // TEST PHASE TOGGLES AND CONTROLS
 //
-
 //   Remove haze and lighting and shows just the texture. 
 //     Useful for checking texture rendering and scenery.
 //     The compiler will likely optimise out the haze and lighting calculations.
 //     Possible values: 0:Normal, 1:Just the texture.
-  const int remove_haze_and_lighting = 0;
+const int remove_haze_and_lighting = 0;
 
 //   Randomise texture lookups for 5 non-base textures e.g. mix_texture, detaile_texture etc.
 //    Each landclass is assigned 5 random textures from the ground texture array.
@@ -25,7 +23,7 @@
 //   Possible values: 0: disabled (default), 
 //                    1: enabled, 
 //                    2: remove texture array lookups for 5 textures - only base texture + neighbour base textures
-  const int randomise_texture_lookups = 0;
+const int randomise_texture_lookups = 0;
 //
 // End of test phase controls
 //////////////////////////////////////////////////////////////////
@@ -37,8 +35,6 @@ varying vec3 relPos;
 varying vec2 ground_tex_coord;
 varying vec3 worldPos;
 varying vec2 rawPos;
-// Testing code:
-//vec3 worldPos = vec3(5000.0, 6000.0, 7000.0) + vec3(vec2(rawPos), 600.0); // vec3(100.0, 10.0, 3.0);
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
 varying vec4 ecPosition;
@@ -263,8 +259,6 @@ vec4 applyHaze(inout vec4  fragColor,
 
 void main()
 {
-  float alt;
-  
   float yprime_alt = light_diffuse_comp.a;
   //diffuse_term.a = 1.0;
   float mie_angle = gl_Color.a;
@@ -278,10 +272,7 @@ void main()
   float msl_altitude = (relPos.z + eye_alt);
   
   
-  //  vec3 shadedFogColor = vec3(0.65, 0.67, 0.78);
-  vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   // this is taken from default.frag
-  vec3 n;
   float NdotL, NdotHV, fogFactor;
   vec3 lightDir = gl_LightSource[0].position.xyz;
   vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));
@@ -299,13 +290,10 @@ void main()
   vec4 grain_texel;
   vec4 dot_texel;
   vec4 gradient_texel;
-  //vec4 foam_texel;
   
   vec4 fragColor;
   vec4 specular = vec4(0.0);
   float intensity;
-  
-  
   
   // Wind motion of the overlay noise simulating movement of vegetation and loose debris
   
@@ -352,34 +340,19 @@ void main()
   float noise_1m = Noise2D(rawPos.xy ,1.0); 
   float noise_01m = Noise2D(windPos.xy, 0.1);
   
-  float noisegrad_10m;
-  float noisegrad_5m;
-  float noisegrad_2m;
-  float noisegrad_1m;
-  
   // Noise relative to swatch size
-  
   float noise_25m = Noise2D(rawPos.xy, swatch_size*0.000625);
   float noise_50m = Noise2D(rawPos.xy, swatch_size*0.00125);
-  
-  
   float noise_250m = Noise3D(worldPos.xyz,swatch_size*0.0625);
   float noise_500m = Noise3D(worldPos.xyz, swatch_size*0.125);
   float noise_1500m = Noise3D(worldPos.xyz, swatch_size*0.3750);
   float noise_2000m = Noise3D(worldPos.xyz, swatch_size*0.5);
   float noise_4000m = Noise3D(worldPos.xyz, swatch_size);
 
-  //WS2: uniforms aren't looked up until later in WS3
-  // dot noise
-  //float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5, dot_density);
-  //float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5, dot_density);
-  //float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
-  
   float dotnoisegrad_10m;
   
 
   // slope noise
-  
   float slopenoise_50m = SlopeLines2D(rawPos.xy, grad_dir, 50.0, steepness);
   float slopenoise_100m = SlopeLines2D(rawPos.xy, grad_dir, 100.0, steepness);
   
@@ -582,8 +555,6 @@ void main()
   // to know under what angle we see the surface
 
   float view_angle = abs(dot(normalize(normal), normalize(ecViewdir)));
-  float sfactor = sqrt(2.0 * (1.0-steepness)/0.03) + abs(ct)/0.15;
-
 
   // the snow texel is generated procedurally
   if (msl_altitude +500.0 > snowlevel)
@@ -602,7 +573,6 @@ void main()
     snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(msl_altitude -snowlevel) );
   }
   
-              
   if (mix_flag == 1) 
   {
     //WS2: mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
@@ -740,7 +710,7 @@ void main()
   // mix snow
   float snow_mix_factor = 0.0;
 
-  if (msl_altitude +500.0 > snowlevel)
+  if (msl_altitude + 500.0 > snowlevel)
   {
     snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
     snow_mix_factor = snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * msl_altitude+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0);
@@ -769,15 +739,15 @@ void main()
   // If gl_Color.a == 0, this is a back-facing polygon and the
   // normal should be reversed.
   //n = (2.0 * gl_Color.a - 1.0) * normal;
-  n = normal;//vec3 (nvec.x, nvec.y, sqrt(1.0 -pow(nvec.x,2.0) - pow(nvec.y,2.0) ));
+  vec3 n = normal;//vec3 (nvec.x, nvec.y, sqrt(1.0 -pow(nvec.x,2.0) - pow(nvec.y,2.0) ));
   n = normalize(n);
 
   NdotL = dot(n, lightDir);
 
-  noisegrad_10m = (noise_10m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0))/0.05;
-  noisegrad_5m = (noise_5m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),5.0))/0.05;
-  noisegrad_2m = (noise_2m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),2.0))/0.05;
-  noisegrad_1m = (noise_1m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),1.0))/0.05;
+  float noisegrad_10m = (noise_10m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0))/0.05;
+  float noisegrad_5m = (noise_5m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),5.0))/0.05;
+  float noisegrad_2m = (noise_2m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),2.0))/0.05;
+  float noisegrad_1m = (noise_1m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),1.0))/0.05;
   
   dotnoisegrad_10m = (dotnoise_10m - DotNoise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0 * dot_size,0.5, dot_density))/0.05;
   
@@ -833,7 +803,7 @@ void main()
   vec3 hazeColor = get_hazeColor(lightArg);
 
   // Rayleigh color shift due to out-scattering
-  float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+  float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, msl_altitude);
   float outscatter = 1.0-exp(-dist/rayleigh_length);
   fragColor.rgb = rayleigh_out_shift(fragColor.rgb,outscatter);
 
@@ -843,7 +813,7 @@ void main()
   //float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
   float lightIntensity = length(hazeColor * effective_scattering) * rShade;
   vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
-  float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+  float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, msl_altitude);
   fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
   
   gl_FragColor = applyHaze(fragColor, hazeColor, secondary_light, ct, hazeLayerAltitude, visibility, avisibility, dist, lightArg, mie_angle);

@@ -305,6 +305,77 @@
 
     </group>
 
+    <vrule/>
+
+    <group>
+      <layout>vbox</layout>
+      <halign>center</halign>
+      <valign>top</valign>
+
+      <text>
+        <label>Marker Pins</label>
+      </text>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Show</label>
+        <property>/sim/marker-pins/master</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <hrule/>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Airports</label>
+        <property>/sim/marker-pins/airports</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Navaids</label>
+        <property>/sim/marker-pins/navaids</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Fixes</label>
+        <property>/sim/marker-pins/fixes</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>POI</label>
+        <property>/sim/marker-pins/pois</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+      <hrule/>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Traffic</label>
+        <property>/sim/marker-pins/traffic</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </checkbox>
+
+    </group>
+
   </group>
 
   <hrule/>

@@ -56,4 +56,5 @@ geo.nas <- view.nas
     <file>multiplayer.nas</file>
     <file>geo.nas</file>
     <file>view.nas</file>
+    <file>markerpins.nas</file>
 </PropertyList>

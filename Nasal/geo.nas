@@ -330,11 +330,20 @@ var tile_path = func(lat, lon) {
 
 
 var put_model = func(path, c, arg...) {
-	call(_put_model, [path] ~ (isa(c, Coord) ? c.latlon() : [c]) ~ arg);
+	call(_put_model, [path, nil] ~ (isa(c, Coord) ? c.latlon() : [c]) ~ arg);
+}
+
+var put_marker = func(label, c, arg...) {
+    if (isa(c, Coord)) {
+        call(_put_marker, [label] ~ c.latlon() ~ arg);
+    }
+    else {
+        call(_put_marker, [label, c] ~ arg);
+    }
 }
 
 
-var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
+var _put_model = func(path, label, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0) {
 	if (elev_m == nil)
 		elev_m = elevation(lat, lon);
 	if (elev_m == nil)
@@ -343,6 +352,42 @@ var _put_model = func(path, lat, lon, elev_m = nil, hdg = 0, pitch = 0, roll = 0
 		"latitude-deg": lat, "longitude-deg": lon, "elevation-m": elev_m,
 		"heading-deg": hdg, "pitch-deg": pitch, "roll-deg": roll,
 	}));
+	return props.globals.getNode(n.getNode("property").getValue());
+}
+
+var _put_marker = func(label, lat, lon, elev = nil, color = nil, text_height_m = 1, pin_height_m = 1000, pin_tip_height_m = 0) {
+    params = {
+        "internal-model": "marker",
+		"heading-deg": 0, "pitch-deg": 0, "roll-deg": 0,
+        "marker": {
+            "text": label,
+            "color": color,
+            "size": text_height_m,
+            "height": pin_height_m,
+            "tip-height": pin_tip_height_m,
+        },
+    };
+    if (isnum(lat)) {
+        params['latitude-deg'] = lat;
+    }
+    elsif (isscalar(lat)) {
+        params['latitude-deg-prop'] = lat;
+    }
+    if (isnum(lon)) {
+        params['longitude-deg'] = lon;
+    }
+    elsif (isscalar(lon)) {
+        params['longitude-deg-prop'] = lon;
+    }
+    if (isnum(elev)) {
+        params['elevation-ft'] = elev;
+    }
+    elsif (isscalar(elev)) {
+        params['elevation-ft-prop'] = elev;
+    }
+    if (color == nil)
+        color = [1, 1, 1];
+	fgcommand("add-model", var n = props.Node.new(params));
 	return props.globals.getNode(n.getNode("property").getValue());
 }
 

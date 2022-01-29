@@ -770,6 +770,8 @@ var autotrim = {
 
 
 
+
+
 # tyresmoke
 # =============================================================================
 # Provides a property which can be used to contol particles used to simulate tyre
@@ -835,7 +837,8 @@ var tyresmoke = {
 		m.spraydensity = gear.initNode("spray-density", 0, "DOUBLE");
 		m.auto = auto;
 		m.listener = nil;
-		me.lastwow=0;
+		m.lastwow=0;
+		m.active=0;
 
 		if (getprop("sim/flight-model") == "jsb") {
 			var wheel_speed = "fdm/jsbsim/gear/unit[" ~ number ~ "]/wheel-speed-fps";
@@ -846,8 +849,8 @@ var tyresmoke = {
 			m.get_rollspeed = func m.rollspeed_node.getValue();
 		}
 
-		m.lp = lowpass.new(2);
-		m.lpf_touchdown = lowpass.new(0.15);
+		m.lp = aircraft.lowpass.new(2);
+		m.lpf_touchdown = aircraft.lowpass.new(0.15);
 		auto and m.update();
 		return m;
 	},
@@ -899,8 +902,8 @@ var tyresmoke = {
 		return ((0.03048 * 59175231 +  2.38119 * math.pow(groundspeed_kts, 5.08271))
 		       / (59175231 + math.pow(groundspeed_kts, 5.08271)) / 2.38105217250475)
                        ;
-        },
-        update: func {
+	},
+	update: func {
 		me.rollspeed = me.get_rollspeed();
 		me.vert_speed = (me.vertical_speed) != nil ? me.vertical_speed.getValue() : -999;
 		me.groundspeed_kts = me.speed.getValue();
@@ -919,8 +922,9 @@ var tyresmoke = {
 		me.touchdown = 0;
 		if (me.wow != me.lastwow){
 			if (me.wow){
-				me.lpf_touchdown.set(math.abs(me.vert_speed));
+			me.lpf_touchdown.set(math.abs(me.vert_speed));
 			}
+			else me.filtered_touchdown = me.lpf_touchdown.filter(0);
 		}
 		else me.filtered_touchdown = me.lpf_touchdown.filter(0);
 
@@ -933,26 +937,29 @@ var tyresmoke = {
 		# possibly using ground speed is somewhat irrelevant - but I'm leaving that here
 		# as it may filter out unwanted smoke.
 		if (me.filtered_touchdown > 1.0
-			and me.rollspeed_diff_norm > me.diff_norm
-			and me.friction_factor > 0.7
-			and me.groundspeed_kts > 50
-			and me.rain <me.rain_norm_trigger) {
+            and me.rollspeed_diff_norm > me.diff_norm
+		    and me.friction_factor > 0.7
+            and me.groundspeed_kts > 50
+            and me.rain <me.rain_norm_trigger) {
 			me.tyresmoke.setValue(1);
 			me.spray.setValue(0);
 			me.spraydensity.setValue(0);
+			me.active = 1;
 		} elsif (me.wow and me.rain >= me.rain_norm_trigger) {
 			me.tyresmoke.setValue(0);
 			me.spray.setValue(1);
 			me.sprayspeed.setValue(me.rollspeed * 6);
 			me.spraydensity.setValue(me.rain * me.spray_factor * me.groundspeed_kts);
+			me.active = 1;
 		} else {
+			me.active = 0;
 			me.tyresmoke.setValue(0);
 			me.spray.setValue(0);
 			me.sprayspeed.setValue(0);
 			me.spraydensity.setValue(0);
 		}
 		if (me.auto) {
-			if (me.wow) {
+			if (me.active or me.wow) {
 				settimer(func me.update(), 0);
 				if (me.listener != nil) {
 					removelistener(me.listener);
@@ -971,6 +978,7 @@ var tyresmoke = {
 		}
 	},
 };
+
 
 # tyresmoke_system
 # =============================================================================

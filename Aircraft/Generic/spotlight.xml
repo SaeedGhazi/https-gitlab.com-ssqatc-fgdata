@@ -4,6 +4,16 @@
  <path>light.ac</path>
  <nopreview/>
 
+ <model>
+  <name>sprite</name>
+  <path>sprite.ac</path>
+  <condition>
+   <not>
+    <property>/sim/rendering/shaders/skydome</property>
+   </not>
+  </condition>
+ </model>
+
  <params>
   <power-source>/controls/lighting/nav-lights</power-source>
   <name>spotlight</name>
@@ -41,15 +51,45 @@
  </params>
 
  <animation>
+  <type>noshadow</type>
+  <object-name>light</object-name>
+  <object-name>sprite</object-name>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>light</object-name>
+  <condition>
+   <property>/sim/rendering/shaders/skydome</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>sprite</object-name>
+  <condition>
+   <not>
+    <property>/sim/rendering/shaders/skydome</property>
+   </not>
+  </condition>
+ </animation>
+
+ <animation>
   <type>scale</type>
-  <x-offset>0.175</x-offset>
-  <y-offset>0.175</y-offset>
-  <z-offset>0.175</z-offset>
+  <object-name>light</object-name>
+  <property>/sim/rendering/shaders/skydome</property>
+  <x-min>0.175</x-min>
+  <y-min>0.175</y-min>
+  <z-min>0.175</z-min>
+  <x-factor>0.175</x-factor>
+  <y-factor>0.175</y-factor>
+  <z-factor>0.175</z-factor>
  </animation>
 
  <animation>
   <type>dist-scale</type>
   <object-name>light</object-name>
+  <property>/sim/rendering/shaders/skydome</property>
   <interpolation>
    <entry>
     <ind>0</ind>
@@ -67,19 +107,52 @@
  </animation>
 
  <animation>
-  <type>noshadow</type>
-  <object-name>light</object-name>
- </animation>
-
- <animation>
   <type>select</type>
   <object-name>light</object-name>
+  <object-name>sprite</object-name>
   <condition>
    <property alias="/params/power-source"/>
   </condition>
  </animation>
 
- <effect>
+ <animation>
+  <type>scale</type>
+  <object-name>sprite</object-name>
+  <property>sim/time/sun-angle-rad</property>
+  <x-min>1.0</x-min>
+  <y-min>1.0</y-min>
+  <z-min>1.0</z-min>
+  <x-factor>0.75</x-factor>
+  <y-factor>0.75</y-factor>
+  <z-factor>0.75</z-factor>
+ </animation>
+
+ <animation>
+  <type>material</type>
+  <object-name>sprite</object-name>
+  <ambient>
+   <red alias="/params/ambient/r"/>
+   <green alias="/params/ambient/g"/>
+   <blue alias="/params/ambient/b"/>
+  </ambient>
+  <diffuse>
+   <red alias="/params/ambient/r"/>
+   <green alias="/params/ambient/g"/>
+   <blue alias="/params/ambient/b"/>
+  </diffuse>
+  <specular>
+   <red alias="/params/specular/r"/>
+   <green alias="/params/specular/g"/>
+   <blue alias="/params/specular/b"/>
+  </specular>
+  <emission>
+   <red alias="/params/ambient/r"/>
+   <green alias="/params/ambient/g"/>
+   <blue alias="/params/ambient/b"/>
+  </emission>
+ </animation>
+
+  <effect>
   <name>Effects/spotlight</name>
   <object-name>light</object-name>
   <inherits-from>Effects/procedural-light</inherits-from>
@@ -111,47 +184,5 @@
    <terminator><use>/environment/terminator-relative-position-m</use></terminator>
   </parameters>
  </effect>
-
- <light>
-  <name alias="/params/name"/>
-  <type>spot</type>
-  <position>
-   <x alias="/params/x-m"/>
-   <y alias="/params/y-m"/>
-   <z alias="/params/z-m"/>
-  </position>
-  <direction>
-   <pointing_x alias="/params/direction/x"/>
-   <pointing_y alias="/params/direction/y"/>
-   <pointing_z alias="/params/direction/z"/>
-  </direction>
-  <ambient>
-   <r alias="/params/ambient/r"/>
-   <g alias="/params/ambient/g"/>
-   <b alias="/params/ambient/b"/>
-   <a>1.0</a>
-  </ambient>
-  <diffuse>
-   <r alias="/params/specular/r"/>
-   <g alias="/params/specular/g"/>
-   <b alias="/params/specular/b"/>
-   <a>1.0</a>
-  </diffuse>
-  <specular>
-   <r alias="/params/specular/r"/>
-   <g alias="/params/specular/g"/>
-   <b alias="/params/specular/b"/>
-   <a>1.0</a>
-  </specular>
-  <attenuation>
-   <c alias="/params/attenuation/c"/>
-   <l alias="/params/attenuation/l"/>
-   <q alias="/params/attenuation/q"/>
-  </attenuation>
-  <spot-cutoff alias="/params/spot-cutoff"/>
-  <spot-exponent alias="/params/spot-exponent"/>
-  <range-m alias="/params/range-m"/>
-  <dim-factor><property alias="/params/power-source"/></dim-factor>
- </light>
 
 </PropertyList>

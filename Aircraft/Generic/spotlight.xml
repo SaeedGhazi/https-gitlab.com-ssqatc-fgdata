@@ -26,9 +26,9 @@
    <b>1.0</b>
   </specular>
   <attenuation>
-   <c>1.3</c>
-   <l>1.5</l>
-   <q>4</q>
+   <c>1.0</c>
+   <l>0.7</l>
+   <q>1.1</q>
   </attenuation>
   <inner-angle>0.75</inner-angle>
   <outer-angle>0.85</outer-angle>
@@ -46,7 +46,7 @@
   <y-offset>0.175</y-offset>
   <z-offset>0.175</z-offset>
  </animation>
- 
+
  <animation>
   <type>dist-scale</type>
   <object-name>light</object-name>
@@ -80,6 +80,7 @@
  </animation>
 
  <effect>
+  <name>Effects/spotlight</name>
   <object-name>light</object-name>
   <inherits-from>Effects/procedural-light</inherits-from>
   <parameters>
@@ -92,7 +93,7 @@
    <light_color_center_r alias="/params/specular/r"/>
    <light_color_center_g alias="/params/specular/g"/>
    <light_color_center_b alias="/params/specular/b"/>
-   <intensity_scale alias="/params/power-source"/>
+   <intensity_scale>1.0</intensity_scale>
    <pointing_x alias="/params/direction/x"/>
    <pointing_y alias="/params/direction/y"/>
    <pointing_z alias="/params/direction/z"/>
@@ -150,6 +151,7 @@
   <spot-cutoff alias="/params/spot-cutoff"/>
   <spot-exponent alias="/params/spot-exponent"/>
   <range-m alias="/params/range-m"/>
+  <dim-factor><property alias="/params/power-source"/></dim-factor>
  </light>
 
 </PropertyList>

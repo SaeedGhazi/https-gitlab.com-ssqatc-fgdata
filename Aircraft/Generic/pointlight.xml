@@ -58,7 +58,10 @@
   <type>select</type>
   <object-name>light</object-name>
   <condition>
-   <property>/sim/rendering/shaders/skydome</property>
+   <and>
+    <property>/sim/rendering/shaders/skydome</property>
+    <property alias="/params/power-source"/>
+   </and>
   </condition>
  </animation>
 
@@ -66,9 +69,12 @@
   <type>select</type>
   <object-name>sprite</object-name>
   <condition>
-   <not>
-    <property>/sim/rendering/shaders/skydome</property>
-   </not>
+   <and>
+    <not>
+     <property>/sim/rendering/shaders/skydome</property>
+    </not>
+    <property alias="/params/power-source"/>
+   </and>
   </condition>
  </animation>
 
@@ -105,24 +111,46 @@
  </animation>
 
  <animation>
-  <type>select</type>
-  <object-name>light</object-name>
-  <object-name>sprite</object-name>
-  <condition>
-   <property alias="/params/power-source"/>
-  </condition>
- </animation>
-
- <animation>
   <type>scale</type>
   <object-name>sprite</object-name>
   <property>sim/time/sun-angle-rad</property>
-  <x-min>1.0</x-min>
-  <y-min>1.0</y-min>
-  <z-min>1.0</z-min>
-  <x-factor>0.75</x-factor>
-  <y-factor>0.75</y-factor>
-  <z-factor>0.75</z-factor>
+  <x-min>0.75</x-min>
+  <y-min>0.75</y-min>
+  <z-min>0.75</z-min>
+  <x-factor>0.5</x-factor>
+  <y-factor>0.5</y-factor>
+  <z-factor>0.5</z-factor>
+ </animation>
+
+ <animation>
+  <object-name>front</object-name>
+  <property>/sim/true</property>
+  <type>rotate</type>
+  <factor>90</factor>
+  <axis>
+   <x alias="/params/direction/x"/>
+   <y alias="/params/direction/z"/>
+   <z alias="/params/direction/y"/>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>dist-scale</type>
+  <object-name>sprite</object-name>
+  <interpolation>
+   <entry>
+    <ind>0</ind>
+    <dep>1</dep>
+   </entry>
+   <entry>
+    <ind>100</ind>
+    <dep alias="/params/dist-scale"/>
+   </entry>
+   <entry>
+    <ind>1500</ind>
+    <dep>8</dep>
+   </entry>
+  </interpolation>
  </animation>
 
  <animation>
@@ -144,9 +172,9 @@
    <blue alias="/params/specular/b"/>
   </specular>
   <emission>
-   <red alias="/params/ambient/r"/>
-   <green alias="/params/ambient/g"/>
-   <blue alias="/params/ambient/b"/>
+   <red alias="/params/specular/r"/>
+   <green alias="/params/specular/g"/>
+   <blue alias="/params/specular/b"/>
   </emission>
  </animation>
 

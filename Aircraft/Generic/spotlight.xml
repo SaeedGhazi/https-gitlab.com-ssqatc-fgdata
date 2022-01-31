@@ -48,8 +48,7 @@
   <spot-exponent>0.5</spot-exponent>
   <dist-scale>1.5</dist-scale>
   <range-m>50</range-m>
-  <is_directional>false</is_directional>
-  <rotation>1.0</rotation>
+  <is_directional>true</is_directional>
  </params>
 
  <animation>
@@ -71,7 +70,8 @@
 
  <animation>
   <type>select</type>
-  <object-name>sprite</object-name>
+  <object-name>front</object-name>
+  <object-name>sides</object-name>
   <condition>
    <and>
     <not>
@@ -136,9 +136,8 @@
 
  <animation>
   <object-name>front</object-name>
-  <property>/sim/true</property>
   <type>rotate</type>
-  <factor>90</factor>
+  <offset-deg>90</offset-deg>
   <axis>
    <x alias="/params/direction/x"/>
    <y alias="/params/direction/z"/>

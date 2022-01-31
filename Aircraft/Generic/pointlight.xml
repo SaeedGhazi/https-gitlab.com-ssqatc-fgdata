@@ -123,18 +123,6 @@
  </animation>
 
  <animation>
-  <object-name>front</object-name>
-  <property>/sim/true</property>
-  <type>rotate</type>
-  <factor>90</factor>
-  <axis>
-   <x alias="/params/direction/x"/>
-   <y alias="/params/direction/z"/>
-   <z alias="/params/direction/y"/>
-  </axis>
- </animation>
-
- <animation>
   <type>dist-scale</type>
   <object-name>sprite</object-name>
   <interpolation>

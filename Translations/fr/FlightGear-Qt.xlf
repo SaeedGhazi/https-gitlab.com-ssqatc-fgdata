@@ -670,7 +670,7 @@ Chemin local : %2</target>
 &lt;li&gt;&lt;a %3&gt;key commands reference&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a %4&gt;our wiki&lt;/a&gt; (which includes FAQs)&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</source>
-        <target xml:space="preserve">&lt;p&gt;FlightGear et un logiciel “open source”, entièrement développé par des volontaires. Le support utilisateur est assuré par notre excellente communauté. Le plus commode pour poser des questions et demander de l&apos;aide est de se rendre sur &lt;a %1&gt;nos forums&lt;/a&gt;.&lt;/p&gt;
+        <target xml:space="preserve">&lt;p&gt;FlightGear est un logiciel “open source”, entièrement développé par des volontaires. Le support utilisateur est assuré par notre excellente communauté. Le plus commode pour poser des questions et demander de l&apos;aide est de se rendre sur &lt;a %1&gt;nos forums&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Pour démarrer avec le simulateur, vous pouvez utiliser son système de tutoriels intégrés, accessibles depuis le menu « Aide ». Afin de prendre son envol dans de bonnes conditions d&apos;apprentissage, nous recommandons de commencer avec le Cessna 172.&lt;/p&gt;
 &lt;p&gt;Autres ressources utiles :&lt;ul&gt;&lt;li&gt;&lt;a %2&gt;le manuel officiel&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a %3&gt;la référence des raccourcis clavier&lt;/a&gt;&lt;/li&gt;

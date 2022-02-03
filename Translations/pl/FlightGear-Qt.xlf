@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
-  <file original="/home/devel/FGFS/flightgear/src/GUI/InstallSceneryDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="pl"><body>
+  <file original="" datatype="plaintext" source-language="en" target-language="pl"><body>
     <group restype="x-trolltech-linguist-context" resname="InstallSceneryDialog">
       <trans-unit id="_msg1" approved="yes">
         <source xml:space="preserve">Install scenery</source>
@@ -26,8 +26,6 @@
         <target xml:space="preserve">Poprawnie zainstalowano pliki scenerii do &apos;%1&apos;. Ta lokalizacja zostanie dodana do listy dodatkowych scenerii do użycia.</target>
       </trans-unit>
     </group>
-  </body></file>
-  <file original="/home/devel/FGFS/flightgear/src/GUI/SetupRootDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="pl"><body>
     <group restype="x-trolltech-linguist-context" resname="SetupRootDialog">
       <trans-unit id="_msg6" approved="yes">
         <source xml:space="preserve">Setup required data files</source>
@@ -146,7 +144,7 @@
       </trans-unit>
       <trans-unit id="_msg29" approved="yes">
         <source xml:space="preserve">Detected incompatible version of the data files: version %1 found, but this is FlightGear %2. (At location: &apos;%3&apos;) Please install or select a matching set of data files.</source>
-        <target xml:space="preserve">Wykryto niekompatybilną wersję %1 plików danych, niż aktualna wersja FlightGear %2 (w lokalizacji %3).Proszę zainstalować lub wybrać odpowiedni zestaw plików danych.</target>
+        <target xml:space="preserve">Wykryto niekompatybilną wersję %1 plików danych, niż aktualna wersja FlightGear %2 (w lokalizacji %3). Proszę zainstalować lub wybrać odpowiedni zestaw plików danych.</target>
         <context-group purpose="location"><context context-type="linenumber">257</context></context-group>
       </trans-unit>
       <trans-unit id="_msg30" approved="yes">
@@ -161,7 +159,7 @@
       </trans-unit>
       <trans-unit id="_msg32" approved="yes">
         <source xml:space="preserve">The choosen location (%1) contains files for version %2, but this is FlightGear %3. Please update or try another location</source>
-        <target xml:space="preserve">Wybrana lokalizacja (%1) zawiera pliki dla wersji %2, ale to jest FlightGear %3. Proszę zaktualizować lub wybrać inną lokalizację</target>
+        <target xml:space="preserve">Wybrana lokalizacja (%1) zawiera pliki dla wersji %2, ale to jest FlightGear %3. Proszę zaktualizować lub wybrać inną lokalizację.</target>
         <context-group purpose="location"><context context-type="linenumber">274</context></context-group>
       </trans-unit>
     </group>
@@ -280,17 +278,17 @@
       </trans-unit>
       <trans-unit id="_msg53" approved="yes">
         <source xml:space="preserve">Failed to find a hangar description at the URL: &apos;%1&apos;. Check you entered the URL correctly.</source>
-        <target xml:space="preserve">Nie można pobrać opisu hangaru z adresu &apos;%1&apos;. Sprawdź czy wprowadziłeś adres URL poprawnie.</target>
+        <target xml:space="preserve">Nie można pobrać opisu hangaru z adresu &apos;%1&apos;. Sprawdź czy wprowadzony adres URL jest poprawny.</target>
         <context-group purpose="location"><context context-type="linenumber">129</context></context-group>
       </trans-unit>
       <trans-unit id="_msg54" approved="yes">
         <source xml:space="preserve">Access to the hangar data was forbidden by the server. Please check the URL you entered, or contact the hangar authors.</source>
-        <target xml:space="preserve">Dostęp do danych hangaru jest zabroniony przez serwer. Proszę sprawdź adres URL, który wprowadziłeś, lub skontaktuj się z autorami hangaru.</target>
+        <target xml:space="preserve">Dostęp do danych hangaru jest zabroniony przez serwer. Proszę sprawdź wprowadzony adres URL lub skontaktuj się z autorami hangaru.</target>
         <context-group purpose="location"><context context-type="linenumber">132</context></context-group>
       </trans-unit>
       <trans-unit id="_msg55" approved="yes">
         <source xml:space="preserve">Failed to download from the server due to a network problem. Check your Internet connection is working, and that you entered the correct URL.</source>
-        <target xml:space="preserve">Nieudane pobranie danych z serwera z powodu problemów sieciowych. Sprawdź, czy twoje połącznie internetowe działa, i czy wprowadziłeś poprawny adres URL.</target>
+        <target xml:space="preserve">Nie udało się pobrać danych z serwera z powodu problemów sieciowych. Proszę sprawdź wprowadzony adres URL oraz połącznie internetowe.</target>
         <context-group purpose="location"><context context-type="linenumber">135</context></context-group>
       </trans-unit>
       <trans-unit id="_msg56" approved="yes">
@@ -300,7 +298,7 @@
       </trans-unit>
       <trans-unit id="_msg57" approved="yes">
         <source xml:space="preserve">The requested URL doesn&apos;t contain valid hangar data. Check you entered a valid hangar URL. If it&apos;s correct, please contact the hangar authors, or try again later.</source>
-        <target xml:space="preserve">Wprowadzony adres URL nie zawiera prawidłowych danych hangaru. Sprawdź, czy wpisałeś prawidłowy adres URL hangaru. Jeśli wszystko się zgadza, skontaktuj się z autorami hangaru lub spróbuj ponownie później.</target>
+        <target xml:space="preserve">Wprowadzony adres URL nie zawiera prawidłowych danych hangaru. Sprawdź czy wprowadzony adres URL hangaru jest poprawny. Jeśli wszystko się zgadza, skontaktuj się z autorami hangaru lub spróbuj ponownie później.</target>
         <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
       </trans-unit>
       <trans-unit id="_msg58" approved="yes">
@@ -703,7 +701,7 @@
       <trans-unit id="_msg133" approved="yes">
         <source xml:space="preserve">Problems occurred loading the user interface. This is usually due to missing modules on your system. Please report this error to the FlightGear developer list or forum, and take care to mention your system distribution, etc. Please also include the information provided below.
 </source>
-        <target xml:space="preserve">Wystąpił problem z wczytaniem interfejsu użytkownika. Często powodem są brakujące moduły w systemie. Proszę zgłosić ten błąd na listę dyskusyjną programistów FlightGear lub na forum. Pamiętaj o dołączeniu informacji o systemie operacyjnym, itp. Proszę uwzględnić również informację dostępną poniżej.
+        <target xml:space="preserve">Wystąpił problem z wczytaniem interfejsu użytkownika. Często powodem są brakujące moduły w systemie. Proszę zgłosić ten błąd na listę dyskusyjną programistów FlightGear lub na forum. Pamiętaj o dołączeniu informacji o systemie operacyjnym, itp. Proszę uwzględnić również informacje dostępne poniżej.
 </target>
         <context-group purpose="location"><context context-type="linenumber">163</context></context-group>
       </trans-unit>
@@ -2077,7 +2075,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg378" approved="yes">
         <source xml:space="preserve">W</source>
-        <target xml:space="preserve">wsch.</target>
+        <target xml:space="preserve">zach.</target>
         <context-group purpose="location"><context context-type="linenumber">1080</context></context-group>
       </trans-unit>
       <trans-unit id="_msg379" approved="yes">
@@ -2327,7 +2325,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg422" approved="yes">
         <source xml:space="preserve">above %1&apos;</source>
-        <target xml:space="preserve">Powyżej %1&apos;</target>
+        <target xml:space="preserve">powyżej %1&apos;</target>
         <context-group purpose="location"><context context-type="linenumber">88</context></context-group>
       </trans-unit>
       <trans-unit id="_msg423" approved="yes">
@@ -2573,7 +2571,7 @@ Lokalna ścieżka: %2</target>
 &lt;p&gt;Jeśli rozpoczynasz przygodę z symulatorem, proszę skorzystaj z naszych samouczków: są dostępne z menu &apos;Pomoc&apos; w symulatorze. Zalecamy rozpocząć loty z samolotem Cessna 172, aby nauczyć się jak wzbić się w powietrze.&lt;/p&gt;
 &lt;p&gt;Inne pomocne źródła:&lt;ul&gt;&lt;li&gt;&lt;a %2&gt;oficjalna instrukcja użytkownika&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a %3&gt;lista skrótów klawiszowych&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a %4&gt;nasze wiki &lt;/a&gt; (które zawiera listę FAQ)&lt;/li&gt;
+&lt;li&gt;&lt;a %4&gt;nasze wiki&lt;/a&gt; (które zawiera listę FAQ)&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</target>
         <context-group purpose="location"><context context-type="linenumber">41</context></context-group>
       </trans-unit>

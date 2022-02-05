@@ -22,6 +22,9 @@
 //     Possible values: 0:Normal, 1:Just the texture.
   const int remove_haze_and_lighting = 0;
 
+//   Use built-in water shader.  Use for testing impact of ws30-water.frag
+  const int water_shader = 1;
+
 //
 // End of test phase controls
 //////////////////////////////////////////////////////////////////
@@ -73,6 +76,8 @@ uniform vec4 fg_diffuseArray[128];
 uniform vec4 fg_specularArray[128];
 uniform vec4 fg_textureLookup1[128];
 uniform vec4 fg_textureLookup2[128];
+uniform vec4 fg_materialParams3[128];
+
 #define MAX_TEXTURES 8
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
@@ -107,6 +112,7 @@ vec3 filter_combined (in vec3 color) ;
 
 float getShadowing();
 vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
+vec4 generateWaterTexel();
 
 // Not used
 float luminance(vec3 color)
@@ -117,7 +123,6 @@ float luminance(vec3 color)
 
 //////////////////////////
 // Test-phase code:
-
 
 // These should be sent as uniforms
 
@@ -131,14 +136,15 @@ float luminance(vec3 color)
 // From noise.frag
 float rand2D(in vec2 co);
 
-// These functions, and other function they depend on, are defined
-// in ws30-ALS-landclass-search.frag.
-
-
 // Create random landclasses without a texture lookup to stress test.
 // Each square of square_size in m is assigned a random landclass value.
 int get_random_landclass(in vec2 co, in vec2 tile_size);
 
+// End Test-phase code
+////////////////////////
+
+// These functions, and other function they depend on, are defined
+// in ws30-ALS-landclass-search.frag.
 
 // Lookup a ground texture at a point based on the landclass at that point, without visible 
 //   seams at coordinate discontinuities or at landclass boundaries where texture are switched.
@@ -196,18 +202,15 @@ vec4 applyHaze(inout vec4  fragColor,
 			   in    float lightArg,
          in    float mie_angle);
 
-// End Test-phase code
-////////////////////////
-
+// Procedurally generate a water texel for this fragment
+vec4 generateWaterTexel();
 
 void main()
 {
-
-
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   // this is taken from default.frag
-  vec3 n;
   float NdotL, NdotHV, fogFactor;
+  vec3 n = normalize(normal);
   vec3 lightDir = gl_LightSource[0].position.xyz;
   vec3 halfVector = gl_LightSource[0].halfVector.xyz;
   vec4 texel;
@@ -220,26 +223,13 @@ void main()
   vec2 st;
   vec4 mat_ambient, mat_diffuse, mat_specular, dxdy;
 
-
-  // Oct 27 2021:
-  // Geometry is in the form of roughly rectangular 'tiles'
-  // with a mesh forming a grid with regular spacing. 
-  // Each vertex in the mesh is given an elevation
-
-  // Tile dimensions in m
-  // Testing: created from two float uniforms in global scope. Should be sent as a vec2
-  // vec2 tile_size
-
+  
   // Tile texture coordinates range [0..1] over the tile 'rectangle'
   vec2 tile_coord = gl_TexCoord[0].st;
-
-  // Test phase: Constants and toggles for transitions between landlcasses are defined at
-  // the top of this file.
 
   // Look up the landclass id [0 .. 255] for this particular fragment
   // and any neighbouring landclass that is close.
   // Each tile has 1 texture containing landclass ids stetched over it.
-
   // Landclass for current fragment, and up-to 4 neighboring landclasses - 2 used currently
   int lc;
   ivec4 lc_n;
@@ -266,67 +256,70 @@ void main()
     texel = lookup_ground_texture_array(0, st, lc, dxdy);
   }
 
-  vec4 color = mat_ambient * (gl_LightModel.ambient + gl_LightSource[0].ambient);
+  if ((water_shader == 1) && (fg_photoScenery == false) && fg_materialParams3[lc].x > 0.5) { 
+    // This is a water fragment, so calculate the fragment color procedurally
+    fragColor = generateWaterTexel();
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);
+    
+  } else {
+    // Photoscenery or land fragment, so determine the shading and color normally
+    vec4 color = mat_ambient * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 
-  // Testing code:
-  // Use rlc even when looking up textures to recreate the extra performance hit
-  // so any performance difference between the two is due to the texture lookup
-  // color = color+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
+    // Testing code:
+    // Use rlc even when looking up textures to recreate the extra performance hit
+    // so any performance difference between the two is due to the texture lookup
+    // color = color+0.00001*float(get_random_landclass(tile_coord.st, tile_size));
 
-  float effective_scattering = min(scattering, cloud_self_shading);
+    float effective_scattering = min(scattering, cloud_self_shading);
 
-  vec4 light_specular = gl_LightSource[0].specular;
+    vec4 light_specular = gl_LightSource[0].specular;
 
-  // If gl_Color.a == 0, this is a back-facing polygon and the
-  // normal should be reversed.
-  //n = (2.0 * gl_Color.a - 1.0) * normal;
-  n = normalize(normal);
+    // If gl_Color.a == 0, this is a back-facing polygon and the
+    // normal should be reversed.
+    //n = (2.0 * gl_Color.a - 1.0) * normal;
+    
 
 
-  NdotL = dot(n, lightDir);
-  vec4 diffuse_term = light_diffuse_comp * mat_diffuse;
-  if (NdotL > 0.0) {
-      float shadowmap = getShadowing();
-      vec4 diffuse_term = light_diffuse_comp * mat_diffuse;
-      color += diffuse_term * NdotL * shadowmap;
-      NdotHV = max(dot(n, halfVector), 0.0);
-      if (mat_shininess > 0.0)
-          specular.rgb = (mat_specular.rgb
-                          * light_specular.rgb
-                          * pow(NdotHV, gl_FrontMaterial.shininess)
-                          * shadowmap);
+    NdotL = dot(n, lightDir);
+    vec4 diffuse_term = light_diffuse_comp * mat_diffuse;
+    if (NdotL > 0.0) {
+        float shadowmap = getShadowing();
+        vec4 diffuse_term = light_diffuse_comp * mat_diffuse;
+        color += diffuse_term * NdotL * shadowmap;
+        NdotHV = max(dot(n, halfVector), 0.0);
+        if (mat_shininess > 0.0)
+            specular.rgb = (mat_specular.rgb
+                            * light_specular.rgb
+                            * pow(NdotHV, gl_FrontMaterial.shininess)
+                            * shadowmap);
+    }
+    color.a = diffuse_term.a;
+    // This shouldn't be necessary, but our lighting becomes very
+    // saturated. Clamping the color before modulating by the texture
+    // is closer to what the OpenGL fixed function pipeline does.
+    color = clamp(color, 0.0, 1.0);
+
+
+    // Testing code: mix with green to show values of variables at each point
+    //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
+    //texel = mix(texel, green, (mfact[2]));
+
+
+    fragColor = color * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
   }
-  color.a = diffuse_term.a;
-  // This shouldn't be necessary, but our lighting becomes very
-  // saturated. Clamping the color before modulating by the texture
-  // is closer to what the OpenGL fixed function pipeline does.
-  color = clamp(color, 0.0, 1.0);
-
-
-  // Testing code: mix with green to show values of variables at each point
-  //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
-  //texel = mix(texel, green, (mfact[2]));
-
-
-  fragColor = color * texel + specular;
-  fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
-
-  float dist = length(relPos);
 
   // angle with horizon
+  float dist = length(relPos);
   float ct = dot(vec3(0.0, 0.0, 1.0), relPos)/dist;
 
   float lightArg = (terminator-yprime_alt)/100000.0;
   vec3 hazeColor = get_hazeColor(lightArg);
   gl_FragColor = applyHaze(fragColor, hazeColor, vec3(0.0), ct, hazeLayerAltitude, visibility, avisibility, dist, lightArg, mie_angle);
 
-
-// Testing phase controls:
-if (remove_haze_and_lighting == 1)
-{
-        gl_FragColor = texel;
-}
-
-
-        
+  // Testing phase controls:
+  if (remove_haze_and_lighting == 1)
+  {
+    gl_FragColor = texel;
+  }
 }

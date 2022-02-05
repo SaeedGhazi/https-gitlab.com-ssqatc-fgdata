@@ -32,6 +32,18 @@ varying vec2 grad_dir;
 varying vec4 ecPosition;
 varying vec3 vertVec;
 
+// For water calculations
+varying float earthShade;
+varying vec3 lightdir;
+varying vec4 waterTex1;
+varying vec4 waterTex2;
+varying vec4 waterTex4;
+varying vec3 specular_light;
+
+uniform float osg_SimulationTime;
+uniform float WindN;
+uniform float WindE;
+
 // Sent packed into alpha channels
 //varying float yprime_alt;
 varying float mie_angle;
@@ -60,7 +72,6 @@ uniform mat4 osg_ViewMatrixInverse;
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
 
-float earthShade;
 float yprime_alt;
 
 vec3 moonlight_perception (in vec3 light);
@@ -82,6 +93,13 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
   return e / pow((1.0 + a * exp(-b * (x-c)) ),(1.0/d));
 }
 
+void createRotationMatrix(in float angle, out mat4 rotmat)
+{
+  rotmat = mat4( cos( angle ), -sin( angle ), 0.0, 0.0,
+      sin( angle ),  cos( angle ), 0.0, 0.0,
+      0.0         ,  0.0         , 1.0, 0.0,
+      0.0         ,  0.0         , 0.0, 1.0 );
+}
 
 void main()
 {
@@ -129,6 +147,28 @@ void main()
   //gl_Position = ftransform();
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
   normal = gl_NormalMatrix * gl_Normal;
+
+  // Required for water calculations
+  lightdir = normalize(vec3(fg_zUpTransform * vec4(gl_ModelViewMatrixInverse * gl_LightSource[0].position)));
+  waterTex4 = vec4( ecPosition.xzy, 0.0 );
+
+  vec4 t1 = vec4(0.0, osg_SimulationTime * 0.005217, 0.0, 0.0);
+  vec4 t2 = vec4(0.0, osg_SimulationTime * -0.0012, 0.0, 0.0);
+
+  float Angle;
+
+  float windFactor = sqrt(WindE * WindE + WindN * WindN) * 0.05;
+  if (WindN == 0.0 && WindE == 0.0) {
+      Angle = 0.0;
+  } else {
+      Angle = atan(-WindN, WindE) - atan(1.0);
+  }
+
+  mat4 RotationMatrix;
+  createRotationMatrix(Angle, RotationMatrix);
+  waterTex1 = gl_MultiTexCoord0 * RotationMatrix - t1 * windFactor;
+  waterTex2 = gl_MultiTexCoord0 * RotationMatrix - t2 * windFactor;
+
 
 ///////////////////////////////////////////
 // Test phase code:
@@ -256,6 +296,14 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     light_ambient.b = light_ambient.r * 0.5/0.33; //light_func(lightArg, 0.236, 0.253, 1.073, 0.572, 0.5);
     light_ambient.a = 1.0;
 
+    // Water specular calculations
+    specular_light.b = light_func(lightArg, 1.330e-05, 0.264, 3.827, 1.08e-05, 1.0);
+    specular_light.g = light_func(lightArg, 3.931e-06, 0.264, 3.827, 7.93e-06, 1.0);
+    specular_light.r = light_func(lightArg, 8.305e-06, 0.161, 3.827, 3.04e-05, 1.0);
+    specular_light = max(specular_light * scattering, vec3 (0.05, 0.05, 0.05));
+    intensity = length(specular_light.rgb);
+    specular_light.rgb = intensity * normalize(mix(specular_light.rgb,  shadedFogColor, 1.0 -smoothstep(0.1, 0.6,ground_scattering) ));
+    specular_light.rgb = intensity * normalize(mix(specular_light.rgb,  shadedFogColor, 1.0 -smoothstep(0.5, 0.7,earthShade)));
 
 
 
@@ -268,6 +316,13 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
       
       intensity = length(light_diffuse.rgb); 
       light_diffuse.rgb = intensity * normalize(mix(light_diffuse.rgb,  shadedFogColor, 1.0 -smoothstep(0.4, 0.7,earthShade) ));
+    }
+
+    // directional scattering for low sun
+    if (lightArg < 10.0) {
+        mie_angle = (0.5 *  dot(normalize(relPos), lightdir) ) + 0.5;
+    } else {
+        mie_angle = 1.0;
     }
 
 
@@ -302,6 +357,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     {
       light_diffuse = vec4 (1.0, 1.0, 1.0, 1.0);
       light_ambient = vec4 (0.33, 0.4, 0.5, 1.0);
+      specular_light = vec3 (1.0, 1.0, 1.0);
     }
     else
     {
@@ -317,9 +373,15 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
       light_ambient.g = light_ambient.r * 0.4/0.33; 
       light_ambient.b = light_ambient.r * 0.5/0.33;
       light_ambient.a = 1.0;
+
+      specular_light.b = 0.78  + lightArg * 0.21;
+      specular_light.g = 0.907 + lightArg * 0.091;
+      specular_light.r = 0.904 + lightArg * 0.092;
     }
 
     light_diffuse = light_diffuse * scattering;
+    specular_light = specular_light * scattering;
+
     yprime_alt = -sqrt(2.0 * EarthRadius * hazeLayerAltitude);
     
   } //End the faster, full-day version without lightfields
@@ -336,6 +398,7 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
   
   light_ambient.rgb = light_ambient.rgb * (1.0 - shade_depth);
   light_diffuse.rgb = light_diffuse.rgb * (1.0 + 1.2 * shade_depth);
+  specular_light.rgb *= (1.0 + 1.2 * shade_depth);
   
   if (use_IR_vision)
   {

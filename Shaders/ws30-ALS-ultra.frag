@@ -24,6 +24,10 @@ const int remove_haze_and_lighting = 0;
 //                    1: enabled, 
 //                    2: remove texture array lookups for 5 textures - only base texture + neighbour base textures
 const int randomise_texture_lookups = 0;
+
+//   Use built-in water shader.  Use for testing impact of ws30-water.frag
+const int water_shader = 1;
+
 //
 // End of test phase controls
 //////////////////////////////////////////////////////////////////
@@ -97,6 +101,7 @@ uniform vec4 fg_textureLookup2[128];
 // Each element of a vec4 contains a different materials parameter.
 uniform vec4 fg_materialParams1[128];
 uniform vec4 fg_materialParams2[128];
+uniform vec4 fg_materialParams3[128];
 
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
@@ -188,14 +193,16 @@ float get6_rand_nums(in float PRNGseed1,
 
 
 
-// These functions, and other function they depend on, are defined
-// in ws30-ALS-landclass-search.frag.
-
-
 // Create random landclasses without a texture lookup to stress test.
 // Each square of square_size in m is assigned a random landclass value.
 int get_random_landclass(in vec2 co, in vec2 tile_size);
 
+// End Test-phase code
+////////////////////////
+
+
+// These functions, and other function they depend on, are defined
+// in ws30-ALS-landclass-search.frag.
 
 // Lookup a ground texture at a point based on the landclass at that point, without visible 
 //   seams at coordinate discontinuities or at landclass boundaries where texture are switched.
@@ -253,8 +260,8 @@ vec4 applyHaze(inout vec4  fragColor,
 			   in    float lightArg,
          in    float mie_angle);
 
-// End Test-phase code
-////////////////////////
+// Procedurally generate a water texel for this fragment
+vec4 generateWaterTexel();
 
 
 void main()
@@ -274,8 +281,10 @@ void main()
   
   // this is taken from default.frag
   float NdotL, NdotHV, fogFactor;
+  vec3 n = normalize(normal);
   vec3 lightDir = gl_LightSource[0].position.xyz;
   vec3 halfVector = normalize(normalize(lightDir) + normalize(ecViewdir));
+  vec3 secondary_light = vec3 (0.0,0.0,0.0);
   
 
   // Material/texel properties
@@ -432,373 +441,376 @@ void main()
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
 
+  if ((water_shader == 1) && (fg_photoScenery == false) && fg_materialParams3[lc].x > 0.5) { 
+    // This is a water fragment, so calculate the fragment color procedurally
+    texel = generateWaterTexel();
+    fragColor = texel;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
+  } else {
+    // Lookup material parameters for the landclass at this fragment.
+    // Material parameters are from material definitions XML files (e.g. regional definitions in data/Materials/regions). They have the same names.
+    // These parameters are contained in arrays of uniforms fg_materialParams1 and fg_materialParams2.
+    // The uniforms are vec4s, and each parameter is mapped to a vec4 element (rgba channels).
+    // In WS2 these parameters were available as uniforms of the same name.
+    // Testing: The mapping is hardcoded at the moment.
+    float transition_model   = fg_materialParams1[lc].r;
+    float hires_overlay_bias = fg_materialParams1[lc].g;
+    float grain_strength     = fg_materialParams1[lc].b;
+    float intrinsic_wetness  = fg_materialParams1[lc].a;
+
+    float dot_density     = fg_materialParams2[lc].r;
+    float dot_size        = fg_materialParams2[lc].g;
+    float dust_resistance = fg_materialParams2[lc].b;
+    int rock_strata     = int(fg_materialParams2[lc].a);
+
+    // dot noise
+    float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5, dot_density);
+    float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5, dot_density);
+    float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
 
 
-
-  // Lookup material parameters for the landclass at this fragment.
-  // Material parameters are from material definitions XML files (e.g. regional definitions in data/Materials/regions). They have the same names.
-  // These parameters are contained in arrays of uniforms fg_materialParams1 and fg_materialParams2.
-  // The uniforms are vec4s, and each parameter is mapped to a vec4 element (rgba channels).
-  // In WS2 these parameters were available as uniforms of the same name.
-  // Testing: The mapping is hardcoded at the moment.
-  float transition_model   = fg_materialParams1[lc].r;
-  float hires_overlay_bias = fg_materialParams1[lc].g;
-  float grain_strength     = fg_materialParams1[lc].b;
-  float intrinsic_wetness  = fg_materialParams1[lc].a;
-
-  float dot_density     = fg_materialParams2[lc].r;
-  float dot_size        = fg_materialParams2[lc].g;
-  float dust_resistance = fg_materialParams2[lc].b;
-  int rock_strata     = int(fg_materialParams2[lc].a);
-
-  // dot noise
-  float dotnoise_2m = DotNoise2D(rawPos.xy, 2.0 * dot_size,0.5, dot_density);
-  float dotnoise_10m = DotNoise2D(rawPos.xy, 10.0 * dot_size, 0.5, dot_density);
-  float dotnoise_15m = DotNoise2D(rawPos.xy, 15.0 * dot_size, 0.33, dot_density);
+    // Testing code - set randomise_texture_lookups = 2 to only look up the base texture with no extra transitions.
+    detail_texel = texel;
+    mix_texel = texel;
+    grain_texel = texel;
+    dot_texel = texel;
+    gradient_texel = texel;
 
 
-  // Testing code - set randomise_texture_lookups = 2 to only look up the base texture with no extra transitions.
-  detail_texel = texel;
-  mix_texel = texel;
-  grain_texel = texel;
-  dot_texel = texel;
-  gradient_texel = texel;
+  /*  
+    // Texture lookup testing code:
+    //   To test this block, uncomment it and turn off normal and random texture lookups
+    //   by setting randomise_texture_lookups = 2 or more.
+    
+    int tex2;
 
 
-/*  
-  // Texture lookup testing code:
-  //   To test this block, uncomment it and turn off normal and random texture lookups
-  //   by setting randomise_texture_lookups = 2 or more.
-  
-  int tex2;
+    // Grain texture is material texture 14, which is mapped to the r channel of fg_textureLookup2
+    tex2 = int(fg_textureLookup2[lc].r * 255.0 + 0.5);
+    grain_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+    
+    // Gradient texture is material texture 13, which is mapped to the a channel of fg_textureLookup1
+    tex2 = int(fg_textureLookup1[lc].a * 255.0 + 0.5);
+    gradient_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+    
+    // Dot texture is material texture 15, which is mapped to the g channel of fg_textureLookup2
+    tex2 = int(fg_textureLookup2[lc].g * 255.0 + 0.5);
+    dot_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+
+    // Mix texture is material texture 12, which is mapped to the b channel of fg_textureLookup1
+    tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
+    mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+    if (mix_texel.a < 0.1) { mix_flag = 0;} // Disable if no index found
+    
+    // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
+    tex2 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
+    detail_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
+    if (detail_texel.a < 0.1) { flag = 0;} // Disable if no index found
+    
+    //Examples of how lookup_ground_texture array is used with the above grain/gradient texture lookups:
+    //grain_texel = lookup_ground_texture_array(1, st * 1.3, lc, dxdy * 1.3);
+    //gradient_texel = lookup_ground_texture_array(2, st * 1.3, lc, dxdy * 1.3);
+  */
 
 
-  // Grain texture is material texture 14, which is mapped to the r channel of fg_textureLookup2
-  tex2 = int(fg_textureLookup2[lc].r * 255.0 + 0.5);
-  grain_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-  
-  // Gradient texture is material texture 13, which is mapped to the a channel of fg_textureLookup1
-  tex2 = int(fg_textureLookup1[lc].a * 255.0 + 0.5);
-  gradient_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-  
-  // Dot texture is material texture 15, which is mapped to the g channel of fg_textureLookup2
-  tex2 = int(fg_textureLookup2[lc].g * 255.0 + 0.5);
-  dot_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-
-  // Mix texture is material texture 12, which is mapped to the b channel of fg_textureLookup1
-  tex2 = int(fg_textureLookup1[lc].b * 255.0 + 0.5);
-  mix_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-  if (mix_texel.a < 0.1) { mix_flag = 0;} // Disable if no index found
-  
-  // Detail texture is material texture 11, which is mapped to the g channel of fg_textureLookup1
-  tex2 = int(fg_textureLookup1[lc].g * 255.0 + 0.5);
-  detail_texel = texture(textureArray, vec3(gl_TexCoord[0].st * 1.3, tex2));
-  if (detail_texel.a < 0.1) { flag = 0;} // Disable if no index found
-  
-  //Examples of how lookup_ground_texture array is used with the above grain/gradient texture lookups:
-  //grain_texel = lookup_ground_texture_array(1, st * 1.3, lc, dxdy * 1.3);
-  //gradient_texel = lookup_ground_texture_array(2, st * 1.3, lc, dxdy * 1.3);
-*/
-
-
-  // Generate 6 random numbers 
-  
-  float pseed2 = 1.0;
-  int tex_id_lc[6];
-    float rn[6];
-  if (randomise_texture_lookups == 1)
-  {
-  
-    get6_rand_nums(float(lc)*33245.31, pseed2, 47.0, rn);
-    for (int i=0;i<6;i++) tex_id_lc[i] = int(mod( (float(lc)+(rn[i]*47.0)+1.0) , 48.0));
-  }
-  
-  //texel = mix(vec4(vec3(0.0),1.0), vec4(0.0,0.5,0.0,1.0), float(tex_id_lc[2])/48.0);
-  
-  // WS2:
-  //grain_texel = texture2D(grain_texture, gl_TexCoord[0].st * 25.0);
-  //gradient_texel = texture2D(gradient_texture, gl_TexCoord[0].st * 4.0);
-  //stprime = gl_TexCoord[0].st * 80.0;
-  //stprime = stprime + normalize(relPos).xy * 0.01 * (dotnoise_10m +  dotnoise_15m);
-  //dot_texel = texture2D(dot_texture, vec2 (stprime.y, stprime.x) );
-  
-
-  if (randomise_texture_lookups == 0)
-  {
-    grain_texel = lookup_ground_texture_array(1, st * 25.0, lc, dxdy * 25.0);
-    gradient_texel = lookup_ground_texture_array(2, st * 4.0, lc, dxdy * 4.0);
-  }
-  else if (randomise_texture_lookups == 1) 
-  {
-    grain_texel = lookup_ground_texture_array(0, st * 25.0, tex_id_lc[0], dxdy * 25.0);
-    gradient_texel = lookup_ground_texture_array(0, st * 4.0, tex_id_lc[1], dxdy * 4.0);
-  }
-  
-  stprime = st * 80.0;
-  stprime = stprime + normalize(relPos).xy * 0.01 * (dotnoise_10m +  dotnoise_15m);
-  vec4 dxdy_prime = vec4(dFdx(stprime), dFdy(stprime));
-  
-  if (randomise_texture_lookups == 0)
-  {
-    dot_texel = lookup_ground_texture_array(3, stprime.ts, lc, dxdy_prime.tsqp);
-  }
-  else if (randomise_texture_lookups == 1)
-  {
-    dot_texel = lookup_ground_texture_array(0, stprime.ts, tex_id_lc[2], dxdy_prime.tsqp);
-  }
-  
-  // Testing: WS2 code after this, except for random texture lookups and partial derivatives
-  
-  float local_autumn_factor = texel.a;
-
-  // we need to fade procedural structures when they get smaller than a single pixel, for this we need
-  // to know under what angle we see the surface
-
-  float view_angle = abs(dot(normalize(normal), normalize(ecViewdir)));
-
-  // the snow texel is generated procedurally
-  if (msl_altitude +500.0 > snowlevel)
-  {
-    snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
-    snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
-    snow_texel.g = snow_texel.g * (0.9 + 0.05 * (noise_10m + noise_5m));
-    snow_texel.a = 1.0;
-    noise_term = 0.1 * (noise_500m-0.5) ;
-    noise_term = noise_term + 0.2 * (snownoise_50m -0.5) * detail_fade(50.0, view_angle, 0.5*dist) ;
-    noise_term = noise_term + 0.2 * (snownoise_25m -0.5) * detail_fade(25.0, view_angle, 0.5*dist) ;
-    noise_term = noise_term + 0.3 * (noise_10m -0.5) * detail_fade(10.0, view_angle, 0.8*dist) ;
-    noise_term = noise_term + 0.3 * (noise_5m - 0.5) * detail_fade(5.0, view_angle, dist);
-    noise_term = noise_term + 0.15 * (noise_2m -0.5) *  detail_fade(2.0, view_angle, dist);
-    noise_term = noise_term + 0.08 * (noise_1m -0.5) * detail_fade(1.0, view_angle, dist);
-    snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(msl_altitude -snowlevel) );
-  }
-  
-  if (mix_flag == 1) 
-  {
-    //WS2: mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
+    // Generate 6 random numbers 
+    
+    float pseed2 = 1.0;
+    int tex_id_lc[6];
+      float rn[6];
+    if (randomise_texture_lookups == 1)
+    {
+    
+      get6_rand_nums(float(lc)*33245.31, pseed2, 47.0, rn);
+      for (int i=0;i<6;i++) tex_id_lc[i] = int(mod( (float(lc)+(rn[i]*47.0)+1.0) , 48.0));
+    }
+    
+    //texel = mix(vec4(vec3(0.0),1.0), vec4(0.0,0.5,0.0,1.0), float(tex_id_lc[2])/48.0);
+    
+    // WS2:
+    //grain_texel = texture2D(grain_texture, gl_TexCoord[0].st * 25.0);
+    //gradient_texel = texture2D(gradient_texture, gl_TexCoord[0].st * 4.0);
+    //stprime = gl_TexCoord[0].st * 80.0;
+    //stprime = stprime + normalize(relPos).xy * 0.01 * (dotnoise_10m +  dotnoise_15m);
+    //dot_texel = texture2D(dot_texture, vec2 (stprime.y, stprime.x) );
+    
 
     if (randomise_texture_lookups == 0)
     {
-      mix_texel = lookup_ground_texture_array(4, st * 1.3, lc, dxdy * 1.3);
+      grain_texel = lookup_ground_texture_array(1, st * 25.0, lc, dxdy * 25.0);
+      gradient_texel = lookup_ground_texture_array(2, st * 4.0, lc, dxdy * 4.0);
     }
     else if (randomise_texture_lookups == 1) 
     {
-      mix_texel = lookup_ground_texture_array(0, st * 1.3, tex_id_lc[3], dxdy * 1.3);
+      grain_texel = lookup_ground_texture_array(0, st * 25.0, tex_id_lc[0], dxdy * 25.0);
+      gradient_texel = lookup_ground_texture_array(0, st * 4.0, tex_id_lc[1], dxdy * 4.0);
     }
-    if (mix_texel.a <0.1) {mix_flag = 0;}
-  }
-  
-  // the hires overlay texture is loaded with parallax mapping
-  
-  if (flag == 1) 
-  {
-    stprime = vec2 (0.86*st.s + 0.5*st.t, 0.5*st.s - 0.86*st.t);
-    distortion_factor = 0.97 + 0.06 * noise_500m;
-    stprime = stprime * distortion_factor * 15.0;
-    stprime = stprime + normalize(relPos).xy * 0.022 * (noise_10m + 0.5 * noise_5m +0.25 * noise_2m - 0.875 );
     
-    //WS2: detail_texel = texture2D(detail_texture, stprime); // temp
+    stprime = st * 80.0;
+    stprime = stprime + normalize(relPos).xy * 0.01 * (dotnoise_10m +  dotnoise_15m);
+    vec4 dxdy_prime = vec4(dFdx(stprime), dFdy(stprime));
     
-    dxdy_prime = vec4(dFdx(stprime), dFdy(stprime));
     if (randomise_texture_lookups == 0)
     {
-      detail_texel = lookup_ground_texture_array(5, stprime , lc, dxdy_prime);
+      dot_texel = lookup_ground_texture_array(3, stprime.ts, lc, dxdy_prime.tsqp);
     }
-    else if (randomise_texture_lookups == 1) 
-    {  
-      detail_texel = lookup_ground_texture_array(0, stprime, tex_id_lc[4], dxdy_prime);
+    else if (randomise_texture_lookups == 1)
+    {
+      dot_texel = lookup_ground_texture_array(0, stprime.ts, tex_id_lc[2], dxdy_prime.tsqp);
     }
-    if (detail_texel.a <0.1) {flag = 0;}
-  } // End if (flag == 1)
-  
-  
-  // texture preparation according to detail level
-  
-  // mix in hires texture patches
+    
+    // Testing: WS2 code after this, except for random texture lookups and partial derivatives
+    
+    float local_autumn_factor = texel.a;
 
-  float dist_fact; 
-  float nSum;
-  float mix_factor;
-  
-  // first the second texture overlay
-  // transition model 0: random patch overlay without any gradient information
-  // transition model 1: only gradient-driven transitions, no randomness
-  
-  if (mix_flag == 1) 
-  {
-    nSum =  0.167 * (noise_4000m + 2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
-    nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
-    nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
-    mix_factor = smoothstep(0.5, 0.54, nSum);
-    texel = mix(texel, mix_texel, mix_factor);
-    local_autumn_factor = texel.a;
+    // we need to fade procedural structures when they get smaller than a single pixel, for this we need
+    // to know under what angle we see the surface
+
+    float view_angle = abs(dot(normalize(normal), normalize(ecViewdir)));
+
+    // the snow texel is generated procedurally
+    if (msl_altitude +500.0 > snowlevel)
+    {
+      snow_texel = vec4 (0.95, 0.95, 0.95, 1.0) * (0.9 + 0.1* noise_500m + 0.1* (1.0 - noise_10m) );
+      snow_texel.r = snow_texel.r * (0.9 + 0.05 * (noise_10m + noise_5m));
+      snow_texel.g = snow_texel.g * (0.9 + 0.05 * (noise_10m + noise_5m));
+      snow_texel.a = 1.0;
+      noise_term = 0.1 * (noise_500m-0.5) ;
+      noise_term = noise_term + 0.2 * (snownoise_50m -0.5) * detail_fade(50.0, view_angle, 0.5*dist) ;
+      noise_term = noise_term + 0.2 * (snownoise_25m -0.5) * detail_fade(25.0, view_angle, 0.5*dist) ;
+      noise_term = noise_term + 0.3 * (noise_10m -0.5) * detail_fade(10.0, view_angle, 0.8*dist) ;
+      noise_term = noise_term + 0.3 * (noise_5m - 0.5) * detail_fade(5.0, view_angle, dist);
+      noise_term = noise_term + 0.15 * (noise_2m -0.5) *  detail_fade(2.0, view_angle, dist);
+      noise_term = noise_term + 0.08 * (noise_1m -0.5) * detail_fade(1.0, view_angle, dist);
+      snow_texel.a = snow_texel.a * 0.2+0.8* smoothstep(0.2,0.8, 0.3 +noise_term + snow_thickness_factor +0.0001*(msl_altitude -snowlevel) );
+    }
+    
+    if (mix_flag == 1) 
+    {
+      //WS2: mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
+
+      if (randomise_texture_lookups == 0)
+      {
+        mix_texel = lookup_ground_texture_array(4, st * 1.3, lc, dxdy * 1.3);
+      }
+      else if (randomise_texture_lookups == 1) 
+      {
+        mix_texel = lookup_ground_texture_array(0, st * 1.3, tex_id_lc[3], dxdy * 1.3);
+      }
+      if (mix_texel.a <0.1) {mix_flag = 0;}
+    }
+    
+    // the hires overlay texture is loaded with parallax mapping
+    
+    if (flag == 1) 
+    {
+      stprime = vec2 (0.86*st.s + 0.5*st.t, 0.5*st.s - 0.86*st.t);
+      distortion_factor = 0.97 + 0.06 * noise_500m;
+      stprime = stprime * distortion_factor * 15.0;
+      stprime = stprime + normalize(relPos).xy * 0.022 * (noise_10m + 0.5 * noise_5m +0.25 * noise_2m - 0.875 );
+      
+      //WS2: detail_texel = texture2D(detail_texture, stprime); // temp
+      
+      dxdy_prime = vec4(dFdx(stprime), dFdy(stprime));
+      if (randomise_texture_lookups == 0)
+      {
+        detail_texel = lookup_ground_texture_array(5, stprime , lc, dxdy_prime);
+      }
+      else if (randomise_texture_lookups == 1) 
+      {  
+        detail_texel = lookup_ground_texture_array(0, stprime, tex_id_lc[4], dxdy_prime);
+      }
+      if (detail_texel.a <0.1) {flag = 0;}
+    } // End if (flag == 1)
+    
+    
+    // texture preparation according to detail level
+    
+    // mix in hires texture patches
+
+    float dist_fact; 
+    float nSum;
+    float mix_factor;
+    
+    // first the second texture overlay
+    // transition model 0: random patch overlay without any gradient information
+    // transition model 1: only gradient-driven transitions, no randomness
+    
+    if (mix_flag == 1) 
+    {
+      nSum =  0.167 * (noise_4000m + 2.0 * noise_2000m + 2.0 * noise_1500m + noise_500m);
+      nSum = mix(nSum, 0.5, max(0.0, 2.0 * (transition_model - 0.5)));
+      nSum = nSum + 0.4 * (1.0 -smoothstep(0.9,0.95, abs(steepness)+ 0.05 * (noise_50m - 0.5))) * min(1.0, 2.0 * transition_model);
+      mix_factor = smoothstep(0.5, 0.54, nSum);
+      texel = mix(texel, mix_texel, mix_factor);
+      local_autumn_factor = texel.a;
+    }
+      
+    // then the detail texture overlay	  
+    mix_factor = 0.0;
+    //WS2: condition was broken up - does it matter for dynamic branching?
+    if ((flag == 1) && (dist < 40000.0)) 
+    {
+      dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
+      nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
+      nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
+      mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias- dist_fact);
+      if (mix_factor > 0.8) {mix_factor = 0.8;}
+      texel =  mix(texel, detail_texel,mix_factor);
+    }
+    
+    // rock for very steep gradients  
+    if (gradient_texel.a > 0.0)
+    {
+      texel = mix(texel, gradient_texel, 1.0 - smoothstep(0.75,0.8,abs(steepness)+ 0.00002* msl_altitude + 0.05 * (noise_50m - 0.5)));
+      local_autumn_factor = texel.a;
+    }
+
+
+    // strata noise
+    float stratnoise_50m;
+    float stratnoise_10m;
+
+    // Testing: if rock_strata parameter is not cast into int, need (rock_strata > 0.99)
+    if (rock_strata==1)
+    {
+      stratnoise_50m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 50.0, 0.2);
+      stratnoise_10m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 10.0, 0.2);
+      stratnoise_50m = mix(stratnoise_50m, 1.0, smoothstep(0.8,0.9, steepness));
+      stratnoise_10m = mix(stratnoise_10m, 1.0, smoothstep(0.8,0.9, steepness));
+      texel *= (0.4 + 0.4 * stratnoise_50m + 0.2 * stratnoise_10m);
+    }
+    
+    // the dot vegetation texture overlay
+    texel.rgb = mix(texel.rgb, dot_texel.rgb, dot_texel.a * (dotnoise_10m + dotnoise_15m) * detail_fade(1.0 * (dot_size * (1.0 +0.1*dot_size)), view_angle,dist));
+    texel.rgb = mix(texel.rgb, dot_texel.rgb, dot_texel.a * dotnoise_2m * detail_fade(0.1 * dot_size, view_angle,dist));
+    
+    // then the grain texture overlay
+    texel.rgb = mix(texel.rgb, grain_texel.rgb, grain_strength * grain_texel.a * (1.0 - mix_factor) * (1.0-smoothstep(2000.0,5000.0, dist)));
+    
+    // for really hires, add procedural noise overlay
+    texel.rgb = texel.rgb * (1.0 + 0.4 * (noise_01m-0.5) * detail_fade(0.1, view_angle, dist)) ;
+    
+    // autumn colors  
+    float autumn_factor = season * 2.0 * (1.0 - local_autumn_factor) ;
+    
+    
+    texel.r = min(1.0, (1.0 + 2.5 * autumn_factor) * texel.r);
+    texel.g = texel.g;
+    texel.b = max(0.0, (1.0 - 4.0 * autumn_factor) *  texel.b);
+
+
+    if (local_autumn_factor < 1.0)
+    {
+      intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season));
+      texel.rgb = intensity * normalize(mix(texel.rgb, vec3(0.23,0.17,0.08), smoothstep(1.1,2.0, season)));
+    }
+
+    // slope line overlay
+    texel.rgb = texel.rgb * (1.0  - 0.12 * slopenoise_50m - 0.08 * slopenoise_100m);
+    
+    //const vec4 dust_color  = vec4 (0.76, 0.71, 0.56, 1.0);
+    const vec4 dust_color  = vec4 (0.76, 0.65, 0.45, 1.0);
+    const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);
+    
+    // mix vegetation
+    float gradient_factor = smoothstep(0.5, 1.0, steepness);
+    texel = mix(texel, lichen_color, gradient_factor * (0.4 * lichen_cover_factor +  0.8 * lichen_cover_factor * 0.5 * (noise_10m + (1.0 - noise_5m)))  );
+    // mix dust
+    texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor *dust_resistance + 3.0 * dust_cover_factor * dust_resistance *(((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
+    
+    // mix snow
+    float snow_mix_factor = 0.0;
+
+    if (msl_altitude + 500.0 > snowlevel)
+    {
+      snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
+      snow_mix_factor = snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * msl_altitude+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0);
+      texel = mix(texel, snow_texel, snow_mix_factor);
+    }
+
+    // get distribution of water when terrain is wet
+    float combined_wetness = min(1.0, wetness + intrinsic_wetness);
+    float water_threshold1;
+    float water_threshold2;
+    float water_factor =0.0;
+
+    if ((dist < 5000.0) && (combined_wetness>0.0))
+    {
+      water_threshold1 = 1.0-0.5* combined_wetness;
+      water_threshold2 = 1.0 - 0.3 * combined_wetness;
+      water_factor = smoothstep(water_threshold1, water_threshold2 ,   (0.3 * (2.0 * (1.0-noise_10m) + (1.0 -noise_5m)) *   (1.0 - smoothstep(2000.0, 5000.0, dist))) - 5.0 * (1.0 -steepness));
+    }
+
+    // darken wet terrain
+    texel.rgb = texel.rgb * (1.0 - 0.6 * combined_wetness);
+
+    // light computations
+    vec4 light_specular = gl_LightSource[0].specular;
+
+    // If gl_Color.a == 0, this is a back-facing polygon and the
+    // normal should be reversed.
+    //n = (2.0 * gl_Color.a - 1.0) * normal;
+    vec3 n = normal;//vec3 (nvec.x, nvec.y, sqrt(1.0 -pow(nvec.x,2.0) - pow(nvec.y,2.0) ));
+    n = normalize(n);
+
+    NdotL = dot(n, lightDir);
+
+    float noisegrad_10m = (noise_10m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0))/0.05;
+    float noisegrad_5m = (noise_5m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),5.0))/0.05;
+    float noisegrad_2m = (noise_2m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),2.0))/0.05;
+    float noisegrad_1m = (noise_1m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),1.0))/0.05;
+    
+    dotnoisegrad_10m = (dotnoise_10m - DotNoise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0 * dot_size,0.5, dot_density))/0.05;
+    
+    
+    NdotL = NdotL + (noisegrad_10m * detail_fade(10.0, view_angle,dist) + 0.5* noisegrad_5m * detail_fade(5.0, view_angle,dist)) * mix_factor/0.8;
+    NdotL = NdotL + 0.15 * noisegrad_2m * mix_factor/0.8 * detail_fade(2.0,view_angle,dist);
+    NdotL = NdotL + 0.1 * noisegrad_2m * detail_fade(2.0,view_angle,dist);
+    NdotL = NdotL + 0.05 * noisegrad_1m * detail_fade(1.0, view_angle,dist);
+    NdotL = NdotL + (1.0-snow_mix_factor) * 0.3* dot_texel.a * (0.5* dotnoisegrad_10m * detail_fade(1.0 * dot_size, view_angle, dist) +0.5 * dotnoisegrad_10m * noise_01m * detail_fade(0.1, view_angle, dist)) ;
+
+    // Testing: Very temporary - reduce procedural normal map features with photoscenery active without breaking profiling as the controls are default (by request)
+    if (fg_photoScenery) NdotL = mix(dot(n, lightDir), NdotL, 0.00001);
+    
+    if (NdotL > 0.0) 
+    {
+      float shadowmap = getShadowing();
+      if (cloud_shadow_flag == 1) {NdotL = NdotL * shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);}
+        vec4 diffuse_term = light_diffuse_comp * mat_diffuse;
+        color += diffuse_term * NdotL * shadowmap;
+        NdotHV = max(dot(n, halfVector), 0.0);
+        if (mat_shininess > 0.0)
+          specular.rgb = ((mat_specular.rgb * 0.1 + (water_factor * vec3 (1.0, 1.0, 1.0)))
+          * light_specular.rgb
+          * pow(NdotHV, mat_shininess + (20.0 * water_factor))
+          * shadowmap);
+    }
+    color.a = 1.0;//diffuse_term.a; // as gl_Color.a and light_diffuse.comp.a were packed with other values
+    // This shouldn't be necessary, but our lighting becomes very
+    // saturated. Clamping the color before modulating by the texture
+    // is closer to what the OpenGL fixed function pipeline does.
+    color = clamp(color, 0.0, 1.0);
+
+
+    if (use_searchlight == 1) {
+      secondary_light += searchlight();
+    }
+    
+    if (use_landing_light == 1) {
+      secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
+    }
+
+    if (use_alt_landing_light == 1) {
+      secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
+    }
+
+    color.rgb += secondary_light * light_distance_fading(dist);
+
+    fragColor = color * texel + specular;
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
   }
-     
-  // then the detail texture overlay	  
-  mix_factor = 0.0;
-  //WS2: condition was broken up - does it matter for dynamic branching?
-  if ((flag == 1) && (dist < 40000.0)) 
-  {
-    dist_fact =  0.1 * smoothstep(15000.0,40000.0, dist) - 0.03 * (1.0 - smoothstep(500.0,5000.0, dist));
-    nSum = ((1.0 -noise_2000m) + noise_1500m + 2.0 * noise_250m  +noise_50m)/5.0;
-    nSum = nSum - 0.08 * (1.0 -smoothstep(0.9,0.95, abs(steepness)));		
-    mix_factor = smoothstep(0.47, 0.54, nSum +hires_overlay_bias- dist_fact);
-    if (mix_factor > 0.8) {mix_factor = 0.8;}
-    texel =  mix(texel, detail_texel,mix_factor);
-  }
-  
-  // rock for very steep gradients  
-  if (gradient_texel.a > 0.0)
-  {
-    texel = mix(texel, gradient_texel, 1.0 - smoothstep(0.75,0.8,abs(steepness)+ 0.00002* msl_altitude + 0.05 * (noise_50m - 0.5)));
-    local_autumn_factor = texel.a;
-  }
-
-
-  // strata noise
-  float stratnoise_50m;
-  float stratnoise_10m;
-
-  // Testing: if rock_strata parameter is not cast into int, need (rock_strata > 0.99)
-  if (rock_strata==1)
-  {
-    stratnoise_50m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 50.0, 0.2);
-    stratnoise_10m = Strata3D(vec3 (rawPos.x, rawPos.y, msl_altitude), 10.0, 0.2);
-    stratnoise_50m = mix(stratnoise_50m, 1.0, smoothstep(0.8,0.9, steepness));
-    stratnoise_10m = mix(stratnoise_10m, 1.0, smoothstep(0.8,0.9, steepness));
-    texel *= (0.4 + 0.4 * stratnoise_50m + 0.2 * stratnoise_10m);
-  }
-  
-  // the dot vegetation texture overlay
-  texel.rgb = mix(texel.rgb, dot_texel.rgb, dot_texel.a * (dotnoise_10m + dotnoise_15m) * detail_fade(1.0 * (dot_size * (1.0 +0.1*dot_size)), view_angle,dist));
-  texel.rgb = mix(texel.rgb, dot_texel.rgb, dot_texel.a * dotnoise_2m * detail_fade(0.1 * dot_size, view_angle,dist));
-  
-  // then the grain texture overlay
-  texel.rgb = mix(texel.rgb, grain_texel.rgb, grain_strength * grain_texel.a * (1.0 - mix_factor) * (1.0-smoothstep(2000.0,5000.0, dist)));
-  
-  // for really hires, add procedural noise overlay
-  texel.rgb = texel.rgb * (1.0 + 0.4 * (noise_01m-0.5) * detail_fade(0.1, view_angle, dist)) ;
-  
-  // autumn colors  
-  float autumn_factor = season * 2.0 * (1.0 - local_autumn_factor) ;
-  
-  
-  texel.r = min(1.0, (1.0 + 2.5 * autumn_factor) * texel.r);
-  texel.g = texel.g;
-  texel.b = max(0.0, (1.0 - 4.0 * autumn_factor) *  texel.b);
-
-
-  if (local_autumn_factor < 1.0)
-  {
-    intensity = length(texel.rgb) * (1.0 - 0.5 * smoothstep(1.1,2.0,season));
-    texel.rgb = intensity * normalize(mix(texel.rgb, vec3(0.23,0.17,0.08), smoothstep(1.1,2.0, season)));
-  }
-
-  // slope line overlay
-  texel.rgb = texel.rgb * (1.0  - 0.12 * slopenoise_50m - 0.08 * slopenoise_100m);
-  
-  //const vec4 dust_color  = vec4 (0.76, 0.71, 0.56, 1.0);
-  const vec4 dust_color  = vec4 (0.76, 0.65, 0.45, 1.0);
-  const vec4 lichen_color = vec4 (0.17, 0.20, 0.06, 1.0);
-  
-  // mix vegetation
-  float gradient_factor = smoothstep(0.5, 1.0, steepness);
-  texel = mix(texel, lichen_color, gradient_factor * (0.4 * lichen_cover_factor +  0.8 * lichen_cover_factor * 0.5 * (noise_10m + (1.0 - noise_5m)))  );
-  // mix dust
-  texel = mix(texel, dust_color, clamp(0.5 * dust_cover_factor *dust_resistance + 3.0 * dust_cover_factor * dust_resistance *(((noise_1500m - 0.5) * 0.125)+0.125 ),0.0, 1.0) );
-  
-  // mix snow
-  float snow_mix_factor = 0.0;
-
-  if (msl_altitude + 500.0 > snowlevel)
-  {
-    snow_alpha = smoothstep(0.75, 0.85, abs(steepness));
-    snow_mix_factor = snow_texel.a* smoothstep(snowlevel, snowlevel+200.0,  snow_alpha * msl_altitude+ (noise_2000m + 0.1 * noise_10m -0.55) *400.0);
-    texel = mix(texel, snow_texel, snow_mix_factor);
-  }
-
-  // get distribution of water when terrain is wet
-  float combined_wetness = min(1.0, wetness + intrinsic_wetness);
-  float water_threshold1;
-  float water_threshold2;
-  float water_factor =0.0;
-
-  if ((dist < 5000.0) && (combined_wetness>0.0))
-  {
-    water_threshold1 = 1.0-0.5* combined_wetness;
-    water_threshold2 = 1.0 - 0.3 * combined_wetness;
-    water_factor = smoothstep(water_threshold1, water_threshold2 ,   (0.3 * (2.0 * (1.0-noise_10m) + (1.0 -noise_5m)) *   (1.0 - smoothstep(2000.0, 5000.0, dist))) - 5.0 * (1.0 -steepness));
-  }
-
-  // darken wet terrain
-  texel.rgb = texel.rgb * (1.0 - 0.6 * combined_wetness);
-
-  // light computations
-  vec4 light_specular = gl_LightSource[0].specular;
-
-  // If gl_Color.a == 0, this is a back-facing polygon and the
-  // normal should be reversed.
-  //n = (2.0 * gl_Color.a - 1.0) * normal;
-  vec3 n = normal;//vec3 (nvec.x, nvec.y, sqrt(1.0 -pow(nvec.x,2.0) - pow(nvec.y,2.0) ));
-  n = normalize(n);
-
-  NdotL = dot(n, lightDir);
-
-  float noisegrad_10m = (noise_10m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0))/0.05;
-  float noisegrad_5m = (noise_5m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),5.0))/0.05;
-  float noisegrad_2m = (noise_2m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),2.0))/0.05;
-  float noisegrad_1m = (noise_1m - Noise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),1.0))/0.05;
-  
-  dotnoisegrad_10m = (dotnoise_10m - DotNoise2D(rawPos.xy+ 0.05 * normalize(lightDir.xy),10.0 * dot_size,0.5, dot_density))/0.05;
-  
-  
-  NdotL = NdotL + (noisegrad_10m * detail_fade(10.0, view_angle,dist) + 0.5* noisegrad_5m * detail_fade(5.0, view_angle,dist)) * mix_factor/0.8;
-  NdotL = NdotL + 0.15 * noisegrad_2m * mix_factor/0.8 * detail_fade(2.0,view_angle,dist);
-  NdotL = NdotL + 0.1 * noisegrad_2m * detail_fade(2.0,view_angle,dist);
-  NdotL = NdotL + 0.05 * noisegrad_1m * detail_fade(1.0, view_angle,dist);
-  NdotL = NdotL + (1.0-snow_mix_factor) * 0.3* dot_texel.a * (0.5* dotnoisegrad_10m * detail_fade(1.0 * dot_size, view_angle, dist) +0.5 * dotnoisegrad_10m * noise_01m * detail_fade(0.1, view_angle, dist)) ;
-
-  // Testing: Very temporary - reduce procedural normal map features with photoscenery active without breaking profiling as the controls are default (by request)
-  if (fg_photoScenery) NdotL = mix(dot(n, lightDir), NdotL, 0.00001);
-	
-  if (NdotL > 0.0) 
-  {
-    float shadowmap = getShadowing();
-    if (cloud_shadow_flag == 1) {NdotL = NdotL * shadow_func(relPos.x, relPos.y, 0.3 * noise_250m + 0.5 * noise_500m+0.2 * noise_1500m, dist);}
-      vec4 diffuse_term = light_diffuse_comp * mat_diffuse;
-      color += diffuse_term * NdotL * shadowmap;
-      NdotHV = max(dot(n, halfVector), 0.0);
-      if (mat_shininess > 0.0)
-        specular.rgb = ((mat_specular.rgb * 0.1 + (water_factor * vec3 (1.0, 1.0, 1.0)))
-        * light_specular.rgb
-        * pow(NdotHV, mat_shininess + (20.0 * water_factor))
-        * shadowmap);
-  }
-  color.a = 1.0;//diffuse_term.a; // as gl_Color.a and light_diffuse.comp.a were packed with other values
-  // This shouldn't be necessary, but our lighting becomes very
-  // saturated. Clamping the color before modulating by the texture
-  // is closer to what the OpenGL fixed function pipeline does.
-  color = clamp(color, 0.0, 1.0);
-
-  vec3 secondary_light = vec3 (0.0,0.0,0.0);
-
-  if (use_searchlight == 1) {
-    secondary_light += searchlight();
-  }
-  
-  if (use_landing_light == 1) {
-    secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
-  }
-
-  if (use_alt_landing_light == 1) {
-    secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
-  }
-
-  color.rgb += secondary_light * light_distance_fading(dist);
-
-  fragColor = color * texel + specular;
-  fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
-  
+    
   float lightArg = (terminator-yprime_alt)/100000.0;
   vec3 hazeColor = get_hazeColor(lightArg);
 

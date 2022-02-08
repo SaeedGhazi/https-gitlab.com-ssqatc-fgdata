@@ -6,13 +6,14 @@
       /autopilot/locks/altitude
       /autopilot/locks/heading
       /autopilot/locks/speed
-      /autopilot/locks/passive-mode
       /autopilot/settings/heading-bug-deg
+      /autopilot/settings/target-roll-deg
       /autopilot/settings/target-agl-ft
       /autopilot/settings/target-altitude-ft
-      /autopilot/settings/target-aoa-deg
+      /autopilot/settings/target-fpa-deg
       /autopilot/settings/target-pitch-deg
       /autopilot/settings/target-speed-kt
+      /autopilot/settings/target-speed-mach
       /autopilot/settings/true-heading-deg
       /autopilot/settings/vertical-speed-fpm
     -->
@@ -117,9 +118,9 @@
       ## create and initialize input field properties if necessary
       #
       var apset = props.globals.getNode("/autopilot/settings", 1);
-      foreach (var p; ["heading-bug-deg", "true-heading-deg", "vertical-speed-fpm",
-                       "target-pitch-deg", "target-aoa-deg", "target-altitude-ft",
-                       "target-agl-ft", "target-speed-kt"]) {
+      foreach (var p; ["heading-bug-deg", "target-roll-deg", "true-heading-deg", "vertical-speed-fpm",
+                       "target-pitch-deg", "target-fpa-deg", "target-altitude-ft",
+                       "target-agl-ft", "target-speed-kt", "target-speed-mach"]) {
 
           if ((var n = apset.getNode(p)) == nil or n.getType() == "NONE") {
               apset.getNode(p, 1).setDoubleValue(0);
@@ -136,9 +137,9 @@
       var hdg = Group.new("heading",  ["dg-heading-hold", "wing-leveler", "true-heading-hold", "nav1-hold"]);
       var vel = Group.new("speed",    ["speed-with-throttle", "speed-with-pitch-trim"]);
       var alt = Group.new("altitude", ["altitude-hold", "vertical-speed-hold", "pitch-hold",
-                                       "aoa-hold", "agl-hold", "gs1-hold"]);
+                                       "fpa-hold", "agl-hold", "gs1-hold"]);
     </open>
-        <close>
+    <close>
       hdg.del();
       vel.del();
       alt.del();
@@ -421,7 +422,7 @@
                     </binding>
                 </input>
                 <text>
-                    <label>AoA Hold</label>
+                    <label>FPA Hold</label>
                     <halign>right</halign>
                     <row>2</row>
                     <col>0</col>
@@ -429,17 +430,17 @@
                 <radio>
                     <row>2</row>
                     <col>1</col>
-                    <property>/sim/gui/dialogs/autopilot/aoa-hold</property>
+                    <property>/sim/gui/dialogs/autopilot/fpa-hold</property>
                     <live>true</live>
                     <binding>
                         <command>nasal</command>
-                        <script>alt.set("aoa-hold")</script>
+                        <script>alt.set("fpa-hold")</script>
                     </binding>
                 </radio>
                 <input>
                     <row>2</row>
                     <col>2</col>
-                    <property>/autopilot/settings/target-aoa-deg</property>
+                    <property>/autopilot/settings/target-fpa-deg</property>
                     <live>true</live>
                     <binding>
                         <command>dialog-apply</command>
@@ -517,23 +518,6 @@
             </empty>
         </group>
         <!-- End of Pitch/Altitude VBox -->
-    </group>
-    <hrule/>
-    <group>
-        <!-- Passive Mode Toggle -->
-        <layout>hbox</layout>
-        <checkbox>
-            <label>FlightDirector Mode</label>
-            <halign>center</halign>
-            <property>/autopilot/locks/passive-mode</property>
-            <live>true</live>
-            <binding>
-                <command>dialog-apply</command>
-            </binding>
-            <binding>
-                <command>property-toggle</command>
-            </binding>
-        </checkbox>
     </group>
 
   <hrule/>

@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- No longer required by generic-autopilot.xml, left in for compatibility reasons -->
 <!-- 
      These are the autopilot helpers, currently implemented
      in the c++ code of xmlauto.cxx.

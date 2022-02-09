@@ -124,7 +124,7 @@ vec3 addLights(in vec3 color1, in vec3 color2);
 vec4 color_temperature (in float T);
 vec3 filter_combined (in vec3 color) ;
 vec3 moonlight_perception (in vec3 light) ;
-
+vec3 filter_combined (in vec3 color) ;
 
 float light_func (in float x, in float a, in float b, in float c, in float d, in float e)
     {
@@ -672,7 +672,7 @@ void main (void)
 
       fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
 
-
+    fragColor.rgb = filter_combined(fragColor.rgb);
     gl_FragColor = fragColor;
 
 

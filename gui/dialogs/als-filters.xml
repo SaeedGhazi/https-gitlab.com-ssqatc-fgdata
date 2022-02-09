@@ -296,6 +296,16 @@
 					<col>0</col>
 					<halign>right</halign>
 					<name>gamma-default</name>
+					<visible>
+					  <and>
+					    <not>
+					      <property>/sim/rendering/als-filters/use-night-vision</property>
+					    </not>
+					    <not>
+					      <property>/sim/rendering/als-filters/use-IR-vision</property>
+					    </not>
+					  </and>
+					</visible>
 					<enable>
 						<and>
 							<property>/sim/rendering/shaders/skydome</property>
@@ -319,6 +329,9 @@
 					<col>0</col>
 					<halign>right</halign>
 					<name>gamma-night</name>
+					<visible>
+						<property>/sim/rendering/als-filters/use-night-vision</property>
+					</visible>
 					<enable>
 						<and>
 							<property>/sim/rendering/shaders/skydome</property>
@@ -342,6 +355,9 @@
 					<col>0</col>
 					<halign>right</halign>
 					<name>gamma-IR</name>
+					<visible>
+						<property>/sim/rendering/als-filters/use-IR-vision</property>
+					</visible>
 					<enable>
 						<and>
 							<property>/sim/rendering/shaders/skydome</property>

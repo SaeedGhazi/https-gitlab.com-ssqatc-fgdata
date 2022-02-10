@@ -1,3 +1,13 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Copyright (C) 2009 by Torsten Renk
+# Copyright (C) 2013 by penta
+# Copyright (C) 2022 by Erik Hofman
+#
+# Based on:
+# https://forum.flightgear.org/viewtopic.php?f=6&t=6380&p=53863#p53681
+# https://forum.flightgear.org/viewtopic.php?f=19&t=7713&start=15#p180816
+
 var rotatescreen = func(heading_deg, pitch_deg, roll_deg)
 {
 	setprop("/sim/current-view/goal-heading-offset-deg", heading_deg);
@@ -39,21 +49,19 @@ var rollvalue=getprop("/sim/current-view/roll-offset-deg");
 
 var cube_screen_ticks = func()
 {
-print("i= ", i, " j= ", j, " k= ", k);
 	if (i==0 or i==2)
 	{
                 roll_deg=0;
-		heading_deg=0;
+		heading_deg=headingvalue;
 		if (i==0) pitch_deg=-90;
 		else pitch_deg=90;
 	}
 	else
 	{
 		pitch_deg=0;
-		heading_deg=-90*j;
+		heading_deg=headingvalue-90*j;
 		roll_deg = -270+j*90;
 	}
-print("  pitch= ", pitch_deg, " heading= ", heading_deg, " roll= ", roll_deg);
         if (k==0)
 	{
 		k = 1;

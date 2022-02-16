@@ -1023,7 +1023,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <codec>libx265</codec>
     </video>
     <model>
-      <civilian type="bool">false</civilian>
+      <civilian type="bool">true</civilian>
       <livery>
         <fresnel type="double">0.7</fresnel>
         <shininess type="double">-0.5</shininess>

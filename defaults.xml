@@ -1022,6 +1022,13 @@ Started September 2000 by David Megginson, david@megginson.com
       <speed type="double">1.0</speed>
       <codec>libx265</codec>
     </video>
+    <model>
+      <civilian type="bool">false</civilian>
+      <livery>
+        <fresnel type="double">0.7</fresnel>
+        <shininess type="double">-0.5</shininess>
+      </livery>
+    </model>
   </sim>
   <!-- accelerations -->
   <accelerations>

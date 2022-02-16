@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
+  Note:
+  To be able to see the glossy effect the shininess value for the color of the
+  affected model parts must be somewhere high, at least 100 and preferable 128:
+  https://learnopengl.com/Lighting/Materials
+
+
   Parameters:
   * Boolean to enable or disable the reflection.
     Civilian aircraft are usually glossy but military aircraft are not.

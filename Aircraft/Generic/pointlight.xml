@@ -91,21 +91,30 @@
  </animation>
 
  <animation>
+  <type>scale</type>
+  <object-name>light</object-name>
+  <property>sim/current-view/z-offset-m</property>
+  <x-min>1.0</x-min>
+  <y-min>1.0</y-min>
+  <z-min>1.0</z-min>
+  <x-factor>-0.065</x-factor>
+  <y-factor>-0.065</y-factor>
+  <z-factor>-0.065</z-factor>
+ </animation>
+
+ <animation>
   <type>dist-scale</type>
   <object-name>light</object-name>
   <property>/sim/rendering/shaders/skydome</property>
+  <factor>100</factor>
   <interpolation>
    <entry>
     <ind>0</ind>
     <dep alias="/params/dist-scale"/>
    </entry>
    <entry>
-    <ind>300</ind>
-    <dep>4</dep>
-   </entry>
-   <entry>
-    <ind>1500</ind>
-    <dep>8</dep>
+    <ind alias="/params/range-m"/>
+    <dep>1</dep>
    </entry>
   </interpolation>
  </animation>
@@ -123,6 +132,19 @@
  </animation>
 
  <animation>
+  <type>scale</type>
+  <object-name>sprite</object-name>
+  <property>sim/current-view/z-offset-m</property>
+  <factor>0.5</factor>
+  <x-min>0.5</x-min>
+  <y-min>0.5</y-min>
+  <z-min>0.5</z-min>
+  <x-factor>-0.013</x-factor>
+  <y-factor>-0.013</y-factor>
+  <z-factor>-0.013</z-factor>
+ </animation>
+
+ <animation>
   <type>dist-scale</type>
   <object-name>sprite</object-name>
   <interpolation>
@@ -131,12 +153,12 @@
     <dep>1</dep>
    </entry>
    <entry>
-    <ind>100</ind>
+    <ind>20</ind>
     <dep alias="/params/dist-scale"/>
    </entry>
    <entry>
-    <ind>1500</ind>
-    <dep>8</dep>
+    <ind alias="/params/range-m"/>
+    <dep>1</dep>
    </entry>
   </interpolation>
  </animation>

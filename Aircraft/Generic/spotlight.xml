@@ -48,20 +48,29 @@
  </animation>
 
  <animation>
+  <type>scale</type>
+  <object-name>light</object-name>
+  <property>sim/current-view/z-offset-m</property>
+  <x-min>1.0</x-min>
+  <y-min>1.0</y-min>
+  <z-min>1.0</z-min>
+  <x-factor>-0.065</x-factor>
+  <y-factor>-0.065</y-factor>
+  <z-factor>-0.065</z-factor>
+ </animation>
+
+ <animation>
   <type>dist-scale</type>
   <object-name>light</object-name>
+  <factor>100</factor>
   <interpolation>
    <entry>
     <ind>0</ind>
     <dep alias="/params/dist-scale"/>
    </entry>
    <entry>
-    <ind>300</ind>
-    <dep>4</dep>
-   </entry>
-   <entry>
-    <ind>1500</ind>
-    <dep>8</dep>
+    <ind alias="/params/range-m"/>
+    <dep>1</dep>
    </entry>
   </interpolation>
  </animation>

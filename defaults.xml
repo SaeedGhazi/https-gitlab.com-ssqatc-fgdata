@@ -980,6 +980,9 @@ Started September 2000 by David Megginson, david@megginson.com
       <mp-report-enabled type="bool">false</mp-report-enabled>
       <enable-in-developer-mode type="bool">false</enable-in-developer-mode>
     </error-report>
+    <model>
+      <civilian type="bool">true</civilian>
+    </model>
   </sim>
   <!-- accelerations -->
   <accelerations>

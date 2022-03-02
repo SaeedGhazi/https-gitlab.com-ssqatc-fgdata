@@ -58,7 +58,7 @@
 		<heavy>true</heavy>
 	</aircraft>
 	<aircraft>
-		<model>Aircraft/A333/A333-Corsair.xml</model>
+		<model>Aircraft/339/339-Corsair.xml</model>
 		<livery>CRL</livery>
 		<airline>CRL</airline>
 		<home-port>LFPO</home-port>
@@ -72,7 +72,7 @@
 		<heavy>true</heavy>
 	</aircraft>
 	<aircraft>
-		<model>Aircraft/A333/A333-Corsair.xml</model>
+		<model>Aircraft/339/339-Corsair.xml</model>
 		<livery>CRL</livery>
 		<airline>CRL</airline>
 		<home-port>LFML</home-port>
@@ -86,7 +86,7 @@
 		<heavy>true</heavy>
 	</aircraft>
 	<aircraft>
-		<model>Aircraft/A333/A333-Corsair.xml</model>
+		<model>Aircraft/339/339-Corsair.xml</model>
 		<livery>CRL</livery>
 		<airline>CRL</airline>
 		<home-port>LFPO</home-port>

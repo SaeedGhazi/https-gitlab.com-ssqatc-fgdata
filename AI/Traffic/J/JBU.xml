@@ -22403,7 +22403,7 @@
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
-      <port>TJFK</port>
+      <port>KJFK</port>
       <time>2/00:49:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -22418,7 +22418,7 @@
     </departure>
     <cruise-alt>380</cruise-alt>
     <arrival>
-      <port>TJFK</port>
+      <port>KJFK</port>
       <time>6/01:00:00</time>
     </arrival>
     <repeat>WEEK</repeat>

@@ -2883,7 +2883,7 @@
 </departure>104
 <cruise-alt>305</cruise-alt>
 <arrival>104
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/19:40:00</time>
 </arrival>104
 <repeat>WEEK</repeat>
@@ -2893,7 +2893,7 @@
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>105
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/20:26:00</time>
 </departure>105
 <cruise-alt>315</cruise-alt>
@@ -4218,7 +4218,7 @@
 </departure>620
 <cruise-alt>305</cruise-alt>
 <arrival>620
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/22:50:00</time>
 </arrival>620
 <repeat>WEEK</repeat>
@@ -4228,7 +4228,7 @@
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>621
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/23:25:00</time>
 </departure>621
 <cruise-alt>315</cruise-alt>
@@ -4398,7 +4398,7 @@
 </departure>740
 <cruise-alt>305</cruise-alt>
 <arrival>740
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/15:33:00</time>
 </arrival>740
 <repeat>WEEK</repeat>
@@ -4408,7 +4408,7 @@
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>741
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/16:08:00</time>
 </departure>741
 <cruise-alt>315</cruise-alt>
@@ -8223,7 +8223,7 @@
 </departure>2471
 <cruise-alt>305</cruise-alt>
 <arrival>2471
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/15:12:00</time>
 </arrival>2471
 <repeat>WEEK</repeat>
@@ -8233,7 +8233,7 @@
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>2472
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/15:42:00</time>
 </departure>2472
 <cruise-alt>315</cruise-alt>
@@ -8253,7 +8253,7 @@
 </departure>2473
 <cruise-alt>305</cruise-alt>
 <arrival>2473
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/19:06:00</time>
 </arrival>2473
 <repeat>WEEK</repeat>
@@ -8263,7 +8263,7 @@
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>2474
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/19:36:00</time>
 </departure>2474
 <cruise-alt>315</cruise-alt>
@@ -11238,7 +11238,7 @@
 </departure>3839
 <cruise-alt>305</cruise-alt>
 <arrival>3839
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/04:42:00</time>
 </arrival>3839
 <repeat>WEEK</repeat>
@@ -11248,7 +11248,7 @@
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3840
-<port>KHHH</port>
+<port>KHXD</port>
 <time>1/12:05:00</time>
 </departure>3840
 <cruise-alt>315</cruise-alt>
@@ -19308,7 +19308,7 @@
 </departure>622
 <cruise-alt>305</cruise-alt>
 <arrival>622
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/02:39:00</time>
 </arrival>622
 <repeat>WEEK</repeat>
@@ -19318,7 +19318,7 @@
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>623
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/12:25:00</time>
 </departure>623
 <cruise-alt>315</cruise-alt>
@@ -19338,7 +19338,7 @@
 </departure>624
 <cruise-alt>305</cruise-alt>
 <arrival>624
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/15:33:00</time>
 </arrival>624
 <repeat>WEEK</repeat>
@@ -19348,7 +19348,7 @@
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>625
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/16:08:00</time>
 </departure>625
 <cruise-alt>315</cruise-alt>
@@ -20388,7 +20388,7 @@
 </departure>1013
 <cruise-alt>305</cruise-alt>
 <arrival>1013
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/22:50:00</time>
 </arrival>1013
 <repeat>WEEK</repeat>
@@ -20398,7 +20398,7 @@
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1014
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/23:25:00</time>
 </departure>1014
 <cruise-alt>315</cruise-alt>
@@ -21318,7 +21318,7 @@
 </departure>1489
 <cruise-alt>305</cruise-alt>
 <arrival>1489
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/15:12:00</time>
 </arrival>1489
 <repeat>WEEK</repeat>
@@ -21328,7 +21328,7 @@
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1490
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/15:42:00</time>
 </departure>1490
 <cruise-alt>315</cruise-alt>
@@ -21348,7 +21348,7 @@
 </departure>1491
 <cruise-alt>305</cruise-alt>
 <arrival>1491
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/19:06:00</time>
 </arrival>1491
 <repeat>WEEK</repeat>
@@ -21358,7 +21358,7 @@
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1492
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/19:36:00</time>
 </departure>1492
 <cruise-alt>315</cruise-alt>
@@ -25503,7 +25503,7 @@
 </departure>3334
 <cruise-alt>305</cruise-alt>
 <arrival>3334
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/04:42:00</time>
 </arrival>3334
 <repeat>WEEK</repeat>
@@ -25513,7 +25513,7 @@
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3335
-<port>KHHH</port>
+<port>KHXD</port>
 <time>2/12:05:00</time>
 </departure>3335
 <cruise-alt>315</cruise-alt>
@@ -34968,7 +34968,7 @@ irlinefle
 </departure>758
 <cruise-alt>305</cruise-alt>
 <arrival>758
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/22:50:00</time>
 </arrival>758
 <repeat>WEEK</repeat>
@@ -34978,7 +34978,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>759
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/23:25:00</time>
 </departure>759
 <cruise-alt>315</cruise-alt>
@@ -35463,7 +35463,7 @@ irlinefle
 </departure>1015
 <cruise-alt>305</cruise-alt>
 <arrival>1015
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/02:39:00</time>
 </arrival>1015
 <repeat>WEEK</repeat>
@@ -35473,7 +35473,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1016
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/12:25:00</time>
 </departure>1016
 <cruise-alt>315</cruise-alt>
@@ -35493,7 +35493,7 @@ irlinefle
 </departure>1017
 <cruise-alt>305</cruise-alt>
 <arrival>1017
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/15:33:00</time>
 </arrival>1017
 <repeat>WEEK</repeat>
@@ -35503,7 +35503,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1018
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/16:08:00</time>
 </departure>1018
 <cruise-alt>315</cruise-alt>
@@ -40188,7 +40188,7 @@ irlinefle
 </departure>3263
 <cruise-alt>305</cruise-alt>
 <arrival>3263
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/17:29:00</time>
 </arrival>3263
 <repeat>WEEK</repeat>
@@ -40198,7 +40198,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3264
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/18:18:00</time>
 </departure>3264
 <cruise-alt>315</cruise-alt>
@@ -40218,7 +40218,7 @@ irlinefle
 </departure>3265
 <cruise-alt>305</cruise-alt>
 <arrival>3265
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/20:59:00</time>
 </arrival>3265
 <repeat>WEEK</repeat>
@@ -40228,7 +40228,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3266
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/21:43:00</time>
 </departure>3266
 <cruise-alt>315</cruise-alt>
@@ -41808,7 +41808,7 @@ irlinefle
 </departure>3971
 <cruise-alt>305</cruise-alt>
 <arrival>3971
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/04:42:00</time>
 </arrival>3971
 <repeat>WEEK</repeat>
@@ -41818,7 +41818,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3972
-<port>KHHH</port>
+<port>KHXD</port>
 <time>3/12:05:00</time>
 </departure>3972
 <cruise-alt>315</cruise-alt>
@@ -50058,7 +50058,7 @@ irlinefle
 </departure>760
 <cruise-alt>305</cruise-alt>
 <arrival>760
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/02:39:00</time>
 </arrival>760
 <repeat>WEEK</repeat>
@@ -50068,7 +50068,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>761
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/12:25:00</time>
 </departure>761
 <cruise-alt>315</cruise-alt>
@@ -50088,7 +50088,7 @@ irlinefle
 </departure>762
 <cruise-alt>305</cruise-alt>
 <arrival>762
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/15:33:00</time>
 </arrival>762
 <repeat>WEEK</repeat>
@@ -50098,7 +50098,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>763
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/16:08:00</time>
 </departure>763
 <cruise-alt>315</cruise-alt>
@@ -51048,7 +51048,7 @@ irlinefle
 </departure>1138
 <cruise-alt>305</cruise-alt>
 <arrival>1138
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/22:50:00</time>
 </arrival>1138
 <repeat>WEEK</repeat>
@@ -51058,7 +51058,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1139
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/23:25:00</time>
 </departure>1139
 <cruise-alt>315</cruise-alt>
@@ -56223,7 +56223,7 @@ irlinefle
 </departure>3386
 <cruise-alt>305</cruise-alt>
 <arrival>3386
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/04:42:00</time>
 </arrival>3386
 <repeat>WEEK</repeat>
@@ -56233,7 +56233,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3387
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/12:05:00</time>
 </departure>3387
 <cruise-alt>315</cruise-alt>
@@ -57933,7 +57933,7 @@ irlinefle
 </departure>4167
 <cruise-alt>305</cruise-alt>
 <arrival>4167
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/15:12:00</time>
 </arrival>4167
 <repeat>WEEK</repeat>
@@ -57943,7 +57943,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4168
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/15:42:00</time>
 </departure>4168
 <cruise-alt>315</cruise-alt>
@@ -57963,7 +57963,7 @@ irlinefle
 </departure>4169
 <cruise-alt>305</cruise-alt>
 <arrival>4169
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/19:06:00</time>
 </arrival>4169
 <repeat>WEEK</repeat>
@@ -57973,7 +57973,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4170
-<port>KHHH</port>
+<port>KHXD</port>
 <time>4/19:36:00</time>
 </departure>4170
 <cruise-alt>315</cruise-alt>
@@ -66648,7 +66648,7 @@ irlinefle
 </departure>1140
 <cruise-alt>305</cruise-alt>
 <arrival>1140
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/02:39:00</time>
 </arrival>1140
 <repeat>WEEK</repeat>
@@ -66658,7 +66658,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1141
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/12:25:00</time>
 </departure>1141
 <cruise-alt>315</cruise-alt>
@@ -66678,7 +66678,7 @@ irlinefle
 </departure>1142
 <cruise-alt>305</cruise-alt>
 <arrival>1142
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/15:33:00</time>
 </arrival>1142
 <repeat>WEEK</repeat>
@@ -66688,7 +66688,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1143
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/16:08:00</time>
 </departure>1143
 <cruise-alt>315</cruise-alt>
@@ -67578,7 +67578,7 @@ irlinefle
 </departure>1507
 <cruise-alt>305</cruise-alt>
 <arrival>1507
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/04:42:00</time>
 </arrival>1507
 <repeat>WEEK</repeat>
@@ -67588,7 +67588,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1508
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/12:05:00</time>
 </departure>1508
 <cruise-alt>315</cruise-alt>
@@ -73653,7 +73653,7 @@ irlinefle
 </departure>4255
 <cruise-alt>305</cruise-alt>
 <arrival>4255
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/15:12:00</time>
 </arrival>4255
 <repeat>WEEK</repeat>
@@ -73663,7 +73663,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4256
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/15:42:00</time>
 </departure>4256
 <cruise-alt>315</cruise-alt>
@@ -73683,7 +73683,7 @@ irlinefle
 </departure>4257
 <cruise-alt>305</cruise-alt>
 <arrival>4257
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/19:06:00</time>
 </arrival>4257
 <repeat>WEEK</repeat>
@@ -73693,7 +73693,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4258
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/19:36:00</time>
 </departure>4258
 <cruise-alt>315</cruise-alt>
@@ -79023,7 +79023,7 @@ irlinefle
 </departure>6672
 <cruise-alt>305</cruise-alt>
 <arrival>6672
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/22:50:00</time>
 </arrival>6672
 <repeat>WEEK</repeat>
@@ -79033,7 +79033,7 @@ irlinefle
 <required-aircraft>UAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>6673
-<port>KHHH</port>
+<port>KHXD</port>
 <time>5/23:25:00</time>
 </departure>6673
 <cruise-alt>315</cruise-alt>
@@ -87663,7 +87663,7 @@ irlinefle
 </departure>4457
 <cruise-alt>305</cruise-alt>
 <arrival>4457
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/04:42:00</time>
 </arrival>4457
 <repeat>WEEK</repeat>
@@ -87673,7 +87673,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4458
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/11:07:00</time>
 </departure>4458
 <cruise-alt>315</cruise-alt>
@@ -87693,7 +87693,7 @@ irlinefle
 </departure>4459
 <cruise-alt>305</cruise-alt>
 <arrival>4459
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/14:33:00</time>
 </arrival>4459
 <repeat>WEEK</repeat>
@@ -87703,7 +87703,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4460
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/15:42:00</time>
 </departure>4460
 <cruise-alt>315</cruise-alt>
@@ -87723,7 +87723,7 @@ irlinefle
 </departure>4461
 <cruise-alt>305</cruise-alt>
 <arrival>4461
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/19:06:00</time>
 </arrival>4461
 <repeat>WEEK</repeat>
@@ -87733,7 +87733,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>4462
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/19:36:00</time>
 </departure>4462
 <cruise-alt>315</cruise-alt>
@@ -92328,7 +92328,7 @@ irlinefle
 </departure>6674
 <cruise-alt>305</cruise-alt>
 <arrival>6674
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/02:39:00</time>
 </arrival>6674
 <repeat>WEEK</repeat>
@@ -92338,7 +92338,7 @@ irlinefle
 <required-aircraft>UAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>6675
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/12:25:00</time>
 </departure>6675
 <cruise-alt>315</cruise-alt>
@@ -92358,7 +92358,7 @@ irlinefle
 </departure>6676
 <cruise-alt>305</cruise-alt>
 <arrival>6676
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/16:16:00</time>
 </arrival>6676
 <repeat>WEEK</repeat>
@@ -92368,7 +92368,7 @@ irlinefle
 <required-aircraft>UAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>6677
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/16:50:00</time>
 </departure>6677
 <cruise-alt>315</cruise-alt>
@@ -92388,7 +92388,7 @@ irlinefle
 </departure>6678
 <cruise-alt>305</cruise-alt>
 <arrival>6678
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/20:15:00</time>
 </arrival>6678
 <repeat>WEEK</repeat>
@@ -92398,7 +92398,7 @@ irlinefle
 <required-aircraft>UAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>6679
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/20:50:00</time>
 </departure>6679
 <cruise-alt>315</cruise-alt>
@@ -92418,7 +92418,7 @@ irlinefle
 </departure>6680
 <cruise-alt>305</cruise-alt>
 <arrival>6680
-<port>KHHH</port>
+<port>KHXD</port>
 <time>6/00:33:00</time>
 </arrival>6680
 <repeat>WEEK</repeat>
@@ -94488,7 +94488,7 @@ irlinefle
 </departure>1077
 <cruise-alt>305</cruise-alt>
 <arrival>1077
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/22:50:00</time>
 </arrival>1077
 <repeat>WEEK</repeat>
@@ -94498,7 +94498,7 @@ irlinefle
 <required-aircraft>DAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>1078
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/23:25:00</time>
 </departure>1078
 <cruise-alt>315</cruise-alt>
@@ -99918,7 +99918,7 @@ irlinefle
 </departure>3912
 <cruise-alt>305</cruise-alt>
 <arrival>3912
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/04:42:00</time>
 </arrival>3912
 <repeat>WEEK</repeat>
@@ -99928,7 +99928,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3913
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/11:07:00</time>
 </departure>3913
 <cruise-alt>315</cruise-alt>
@@ -99948,7 +99948,7 @@ irlinefle
 </departure>3914
 <cruise-alt>305</cruise-alt>
 <arrival>3914
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/14:33:00</time>
 </arrival>3914
 <repeat>WEEK</repeat>
@@ -99958,7 +99958,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3915
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/15:42:00</time>
 </departure>3915
 <cruise-alt>315</cruise-alt>
@@ -99978,7 +99978,7 @@ irlinefle
 </departure>3916
 <cruise-alt>305</cruise-alt>
 <arrival>3916
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/19:06:00</time>
 </arrival>3916
 <repeat>WEEK</repeat>
@@ -99988,7 +99988,7 @@ irlinefle
 <required-aircraft>AAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>3917
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/19:36:00</time>
 </departure>3917
 <cruise-alt>315</cruise-alt>
@@ -105328,7 +105328,7 @@ irlinefle
 <required-aircraft>UAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>6681
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/12:25:00</time>
 </departure>6681
 <cruise-alt>315</cruise-alt>
@@ -105348,7 +105348,7 @@ irlinefle
 </departure>6682
 <cruise-alt>305</cruise-alt>
 <arrival>6682
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/15:33:00</time>
 </arrival>6682
 <repeat>WEEK</repeat>
@@ -105358,7 +105358,7 @@ irlinefle
 <required-aircraft>UAL-E70</required-aircraft>
 <fltrules>IFR</fltrules>
 <departure>6683
-<port>KHHH</port>
+<port>KHXD</port>
 <time>0/16:08:00</time>
 </departure>6683
 <cruise-alt>315</cruise-alt>

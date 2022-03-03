@@ -1,3 +1,17 @@
+# helper functions
+# ==============================================================================
+
+# creates (if necessary) and returns a property node from arg[0],
+# which can be a property node already, or a property path
+#
+var _makeNode = func(n) {
+	if (isa(n, props.Node))
+		return n;
+	else
+		return props.globals.getNode(n, 1);
+}
+
+
 # PropertyElement
 # ==============================================================================
 # Baseclass for all property controlled elements/objects
@@ -11,10 +25,10 @@ var PropertyElement = {
   new: func(node, id)
   {
     if (isvec(node)) {
-      var node = aircraft.makeNode(node[0]).addChild(node[1], 0, 0);
+      var node = _makeNode(node[0]).addChild(node[1], 0, 0);
     }
     else {
-      var node = aircraft.makeNode(node);
+      var node = _makeNode(node);
     }
 
     if( !isa(node, props.Node) )

@@ -62,6 +62,9 @@
         var carriers = props.globals.getNode( "/ai/models" );
 
         combo.removeChildren("value");
+        if (carriers == nil) 
+          return;
+
         foreach (var carrier; carriers.getChildren("carrier")) {
           nameNode = carrier.getNode("name");
           if(nameNode != nil and nameNode.getValue() != nil)
@@ -80,6 +83,9 @@
         combo.removeChildren("value");
         combo.addChild("value").setValue("FLOLS");
         combo.addChild("value").setValue("Abeam");
+
+        if (carriers == nil) 
+          return;
 
         foreach (var carrier; carriers.getChildren("carrier")) {
           if (carrier.getNode("name", 1).getValue() == getprop("/sim/presets/carrier")) {

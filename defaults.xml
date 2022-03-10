@@ -40,19 +40,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </controls>
     <startup>
 
-      <!-- Define the contents of the splash screen. The indexes should remain fixed  -->
-      <content n="0">
-        <name>main-title</name>
-        <text-prop>/sim/startup/title</text-prop>
-        <font>
-          <size>0.08</size>
-          <alignment>left-top</alignment>
-          <face>Fonts/LiberationFonts/LiberationSans-BoldItalic.ttf</face>
-        </font>
-        <x>0.025</x>
-        <y>0.02</y>
-      </content>
-
+      <!-- Define the contents of the splash screen. The indexes should remain fixed-->
       <content n="1">
         <!-- this will start with the licence; and then be changed to the next tip -->
         <name>licence-tips</name>

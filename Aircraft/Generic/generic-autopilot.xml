@@ -337,34 +337,6 @@ pitch-limit-min
 		<output>/autopilot/internal/vertical-speed-fpm</output>
 	</filter>
 	
-	<filter> <!-- Filter vertical speed target fpm -->
-		<name>Vertical Speed Filter</name>
-		<type>noise-spike</type>
-		<feedback-if-disabled>true</feedback-if-disabled>
-		<initialize-to>output</initialize-to>
-		<input>
-			<condition>
-				<equals>
-					<property>/autopilot/locks/altitude</property>
-					<value>vertical-speed-hold</value>
-				</equals>
-			</condition>
-			<property>/autopilot/settings/vertical-speed-fpm</property>
-		</input>
-		<input>/autopilot/internal/vertical-speed-fpm</input>
-		<output>/autopilot/internal/target-vs-fpm</output>
-		<max-rate-of-change>
-			<condition>
-				<equals>
-					<property>/autopilot/locks/altitude</property>
-					<value>vertical-speed-hold</value>
-				</equals>
-			</condition>
-			<value>300</value>
-		</max-rate-of-change>
-		<max-rate-of-change>2000</max-rate-of-change>
-	</filter>
-	
 	<filter> <!-- Clamp glideslope target fpm -->
 		<name>G/S FPM Calc</name>
 		<type>gain</type>
@@ -708,6 +680,32 @@ pitch-limit-min
 		<max>1000</max>
 	</filter>
 	
+	<filter> <!-- Filter vertical speed target fpm -->
+		<name>Vertical Speed Filter</name>
+		<type>noise-spike</type>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>vertical-speed-hold</value>
+				</equals>
+			</condition>
+			<property>/autopilot/settings/vertical-speed-fpm</property>
+		</input>
+		<input>/autopilot/internal/vertical-speed-fpm</input>
+		<output>/autopilot/internal/target-fpm-vs</output>
+		<max-rate-of-change>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>vertical-speed-hold</value>
+				</equals>
+			</condition>
+			<value>300</value>
+		</max-rate-of-change>
+		<max-rate-of-change>10000</max-rate-of-change>
+	</filter>
+	
 	<filter> <!-- Compute target fpm from target fpa -->
 		<name>IT-CONTROLLER: FPA</name>
 		<type>gain</type>
@@ -882,7 +880,7 @@ pitch-limit-min
 			</condition>
 			<property>/autopilot/internal/nav1-rate-of-climb-fpm</property>
 		</reference>
-		<reference>/autopilot/internal/target-vs-fpm</reference>
+		<reference>/autopilot/internal/target-fpm-vs</reference>
 		<output>/autopilot/internal/target-pitch-deg</output>
 		<config>
 			<Kp>

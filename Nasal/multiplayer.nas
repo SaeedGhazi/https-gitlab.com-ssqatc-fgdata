@@ -435,18 +435,18 @@ var dialog = {
                     if (distance_delta < -10)   distance_delta_text = ' -';
                 }
                 n.setValues({
-                    "model-short": n.getNode("model-installed").getValue() ? mp.model : "[" ~ mp.model ~ "]",
+                    "model-short": mp.modelInstallNode.getValue() ? mp.model : "[" ~ mp.model ~ "]",
                     "set-loaded": set_loaded ? "   *" : "    ",
                     "bearing-to": self.course_to(ac),
                     "distance-to-km": distance / 1000.0,
                     "distance-to-nm": distance * M2NM,
                     "distance_delta": distance_delta_text,
-                    "position/altitude-m": n.getNode("position/altitude-ft").getValue() * FT2M,
+                    "position/altitude-m": mp.altitudeNode.getValue() * FT2M,
                     "ascent_descent": ascent_descent,
                     "controls/invisible": contains(ignore, mp.callsign),
                     "id-code": idcode,
                     "airport-id": airport_id,
-                    "lag/lag-mod-averaged-ms": n.getNode("lag/lag-mod-averaged").getValue() * 1000,
+                    "lag/lag-mod-averaged-ms": (mp.lagModAveragedNode.getDoubleValue() or 0) * 1000,
                 });
             }
         }
@@ -596,8 +596,16 @@ var model = {
             model = me.remove_suffix(model, "-anim");
 
             var root = n.getPath();
-            var data = { node: n, callsign: callsign, model: model, root: root,
-                    sort: string.lc(callsign) };
+            var data = {
+                        node: n,
+                        callsign: callsign,
+                        model: model,
+                        root: root,
+                        sort: string.lc(callsign),
+                        modelInstallNode : n.getNode("model-installed",1),
+                        altitudeNode : n.getNode("position/altitude-ft",1),
+                        lagModAveragedNode: n.getNode("lag/lag-mod-averaged",1),
+                        };
 
             me.data[root] = data;
             me.callsign[callsign] = data;

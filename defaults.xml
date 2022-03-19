@@ -946,6 +946,9 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y">false</enabled>
         <edge-size type="int">5</edge-size>
       </autovisibility>
+      <legacy-multiplayer-view-selector>
+        <enabled type="bool" userarchive="y"/>
+      </legacy-multiplayer-view-selector>
     </menubar>
     <gui preserve="y">
       <current-style type="int" userarchive="y">1</current-style>

@@ -58,12 +58,22 @@ var Node = {
         return !!val;
     },
 
-    getIntValue : func {
-        return math.round(me.getValue());
+    getIntValue : func (defaultValue = 0) {
+        var v = me.getValue();
+        if (!v) {
+            return defaultValue;
+        }
+
+        return math.round(v);
     },
 
-    getDoubleValue : func {
-        return num(me.getValue());
+    getDoubleValue : func (defaultValue = 0.0) {
+        var v = me.getValue();
+        if (!v) {
+            return defaultValue;
+        }
+
+        return num(v);
     },
 
     remove : func {

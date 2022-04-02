@@ -840,6 +840,17 @@
 				<value><use>fact_black</use></value>
 			   </uniform>
 
+			   <uniform>
+				<name>quality_level</name>
+				<type>int</type>
+				<value><use>quality_level</use></value>
+			   </uniform>
+			   <uniform>
+				<name>tquality_level</name>
+				<type>int</type>
+				<value><use>tquality_level</use></value>
+			   </uniform>
+
 			  <!-- cloud shadows -->
  			   <uniform>
        				  <name>cloudpos1_x</name>

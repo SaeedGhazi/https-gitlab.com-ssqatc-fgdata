@@ -194,6 +194,8 @@ please see Docs/README.model-combined.eff for documentation
 		<cloudpos20_y><use>/local-weather/cloud-shadows/cloudpos-y[19]</use></cloudpos20_y>
 		<cloud_shadow_flag><use>/local-weather/cloud-shadows/cloud-shadow-flag</use></cloud_shadow_flag>
 		<building-flag type="int">0</building-flag>
+		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
+		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<!-- 		END fog include -->
 	</parameters>
 
@@ -1026,6 +1028,17 @@ please see Docs/README.model-combined.eff for documentation
 				<value><use>fact_black</use></value>
 			   </uniform>
 
+			   <uniform>
+				<name>quality_level</name>
+				<type>int</type>
+				<value><use>quality_level</use></value>
+			   </uniform>
+			   <uniform>
+				<name>tquality_level</name>
+				<type>int</type>
+				<value><use>tquality_level</use></value>
+			   </uniform>
+
 			  <!-- cloud shadows -->
  			   <uniform>
        				  <name>cloudpos1_x</name>
@@ -1267,7 +1280,6 @@ please see Docs/README.model-combined.eff for documentation
 	 			  <type>int</type>
 				  <value><use>building-flag</use></value>
      			   </uniform>
-
 
 		           <!-- 			END fog include -->
                    <!-- BEGIN shadows include -->

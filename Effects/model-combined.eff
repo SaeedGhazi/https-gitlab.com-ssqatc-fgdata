@@ -195,6 +195,8 @@ please see Docs/README.model-combined.eff for documentation
 		<cloud_shadow_flag><use>/local-weather/cloud-shadows/cloud-shadow-flag</use></cloud_shadow_flag>
 		<rembrandt><use>/sim/rendering/rembrandt/enabled</use></rembrandt>
 		<building-flag type="int">0</building-flag>
+		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
+		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<!-- 		END fog include -->
 	</parameters>
 
@@ -1023,6 +1025,17 @@ please see Docs/README.model-combined.eff for documentation
 				<name>fact_black</name>
 				<type>float</type>
 				<value><use>fact_black</use></value>
+			   </uniform>
+
+			   <uniform>
+				<name>quality_level</name>
+				<type>int</type>
+				<value><use>quality_level</use></value>
+			   </uniform>
+			   <uniform>
+				<name>tquality_level</name>
+				<type>int</type>
+				<value><use>tquality_level</use></value>
 			   </uniform>
 
 			  <!-- cloud shadows -->

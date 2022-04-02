@@ -76,6 +76,9 @@ uniform float air_pollution;
 uniform float snowlevel;
 uniform float snow_thickness_factor;
 
+uniform int quality_level;
+uniform int tquality_level;
+
 uniform float osg_SimulationTime;
 
 uniform float landing_light1_offset;
@@ -839,7 +842,9 @@ void main (void)
     	hazeColor = clamp(hazeColor, 0.0, 1.0);
 
     ///BEGIN Rayleigh fog ///
-
+    // Only compute fog if terrain level is 'Ultra'
+    if ((quality_level > 5) && (tquality_level > 5))
+    {
     	// Rayleigh color shift due to out-scattering
     	float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
     	float outscatter = 1.0-exp(-dist/rayleigh_length);
@@ -848,7 +853,7 @@ void main (void)
 	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
    	float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
   	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
-
+    }
     /// END Rayleigh fog
 
     // don't let the light fade out too rapidly

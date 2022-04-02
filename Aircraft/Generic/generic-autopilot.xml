@@ -61,7 +61,7 @@ pitch-limit-min
 			</condition>
 			<property>/fdm/yasim/gross-weight-lbs</property>
 		</input>
-		<input>5</input> <!-- Halfway, if you're using some weird FDM! -->
+		<input>50000</input> <!-- Halfway, if you're using some weird FDM! -->
 		<output>/autopilot/internal/gain-factor</output>
 		<min>1</min>
 		<max>10</max>

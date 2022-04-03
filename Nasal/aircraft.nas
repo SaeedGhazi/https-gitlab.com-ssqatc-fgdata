@@ -254,6 +254,7 @@ var lowpass = {
 		var m = { parents: [lowpass] };
 		m.coeff = coeff >= 0 ? coeff : die("aircraft.lowpass(): coefficient must be >= 0");
 		m.value = nil;
+		m.delta_sec_node = props.globals.getNode("/sim/time/delta-sec",1);
 		return m;
 	},
 	# filter(raw_value)    -> push new value, returns filtered value
@@ -270,9 +271,9 @@ var lowpass = {
 		me.value = v;
 	},
 	_filter_: func(v) {
-		var dt = getprop("/sim/time/delta-sec");
-		var c = dt / (me.coeff + dt);
-		me.value = v * c + me.value * (1 - c);
+		me.dt = me.delta_sec_node.getValue();
+		me.c = me.dt / (me.coeff + me.dt);
+		me.value = v * me.c + me.value * (1 - me.c);
 	},
 };
 

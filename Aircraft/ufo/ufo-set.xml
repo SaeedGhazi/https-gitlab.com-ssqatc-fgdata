@@ -248,6 +248,12 @@
 			<line>In the adjustment dialog (= key) holding the Ctrl or Shift key down</line>
 			<line>makes slider effects coarser/finer.</line>
 		</help>
+		
+		<systems>
+			<autopilot n="0">
+				<path>Aircraft/ufo/ufo-autopilot.xml</path>
+			</autopilot>
+		</systems>
 	</sim>
 	<controls>
 		<lighting>

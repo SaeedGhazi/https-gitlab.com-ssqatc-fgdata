@@ -52,6 +52,10 @@ varying vec4 waterTex2;
 varying vec4 waterTex4;
 varying vec3 specular_light;
 
+//WS3.0 varying
+varying float steepness;
+
+
 /////// functions /////////
 
 float getShadowing();
@@ -343,14 +347,14 @@ vec4 generateWaterTexel()
   if (dist < 10000.0)
   {
     float foamSlope = 0.10 + 0.1 * windScale;
-    float waveSlope = N.g;
+    float waveSlope = N.g + min(50.0*(1.0 - steepness), 0.1);
 
-    if ((windEffect >= 8.0) && (waveSlope >= foamSlope)) {
+    if ((steepness < 0.9999) || (windEffect >= 8.0) && (waveSlope >= foamSlope)) {
       //add foam
       st = vec2(waterTex2 * tscale) * 25.0;
       vec4 foam_texel = texture(textureArray, vec3(st, ATLAS_INDEX_SEA_FOAM) );
 
-      texel = mix(texel, max(texel, texel + foam_texel), smoothstep(0.01, 0.50, N.g));
+      texel = mix(texel, max(texel, texel + foam_texel), smoothstep(0.01, 0.50, waveSlope));
     }
   }
 

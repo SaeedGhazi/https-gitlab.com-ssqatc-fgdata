@@ -418,9 +418,14 @@
   <material include="Materials/base/water.xml">
     <name>Ocean</name>
     <effect>Effects/water</effect>
-    <texture>Terrain/water.png</texture>
+    <texture-set>
+      <texture n="0">Terrain/water.png</texture>
+      <texture n="15">Terrain/sand1.png</texture>
+    </texture-set>
     <parameters>
       <edge-hardness>0.8</edge-hardness>
+      <waterline-start>0.99</waterline-start>
+      <waterline-end>0.995</waterline-end>
     </parameters>
   </material>
 
@@ -565,6 +570,7 @@
       <texture>Terrain/tidal.png</texture>
       <texture n="10">Terrain/mud.png</texture>
       <texture n="14">Terrain/sand_overlay.png</texture>
+      <texture n="15">Terrain/sand1.png</texture>
       <texture n="20">Terrain/sand6_hires.png</texture>
     </texture-set>
     <parameters>
@@ -578,6 +584,8 @@
       <overlay_alpha>1.21</overlay_alpha>
       <use_grain>0</use_grain>
       <grain_layer_magnification>4.0</grain_layer_magnification>
+      <waterline-start>0.99</waterline-start>
+      <waterline-end>0.995</waterline-end>
     </parameters>
     <xsize>1000</xsize>
     <ysize>1000</ysize>

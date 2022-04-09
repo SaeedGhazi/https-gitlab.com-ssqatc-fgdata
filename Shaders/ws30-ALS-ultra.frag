@@ -443,11 +443,18 @@ void main()
 
   if ((water_shader == 1) && (fg_photoScenery == false) && fg_materialParams3[lc].x > 0.5) { 
     // This is a water fragment, so calculate the fragment color procedurally
-    // and mix with some sand colour if near an edge
-    //bool adjacentwater = fg_materialParams3[lc_n.x].x > 0.5;
-    //texel = mix(generateWaterTexel(), texel, adjacentwater ? 0.0 : smoothstep(0.1, 0.2, mfact[0]));
-    //texel = mix(generateWaterTexel(), vec4(0.6,0.6,0.4,1.0), adjacentwater ? 0.0 : smoothstep(0.1, 0.2, mfact[0]));
-    texel = mix(vec4(0.6,0.6,0.4,1.0), generateWaterTexel(), smoothstep(0.98,1.0,steepness));    
+    // and mix with some sand and cliff colour depending on steepness
+    vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
+    vec4 beach_texel = lookup_ground_texture_array(3, ground_tex_coord, lc, dxdy_gc);  // Use the dot texture, which is overloaded to be the beach texture
+    float waterline_min_steepness = fg_materialParams3[lc].y;
+    float waterline_max_steepness = fg_materialParams3[lc].z;
+
+    // Mix from a rocky texture to beach for steep slopes, which invariably represent the elevation mesh not being perfectly
+    // aligned with the landclass mesh.
+    texel = mix(steep_texel, beach_texel, smoothstep(waterline_max_steepness - 0.1, waterline_max_steepness - 0.03, steepness));
+
+    // Mix from the beach into the water, which produces a pleasing translucent shallow water effect.
+    texel = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
     fragColor = texel;
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
   } else {

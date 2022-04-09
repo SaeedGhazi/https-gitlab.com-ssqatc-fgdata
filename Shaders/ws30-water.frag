@@ -38,7 +38,6 @@ uniform float WaveAmp;
 uniform float WaveSharp;
 uniform float WaveAngle;
 uniform float WaveFactor;
-uniform float WaveDAngle;
 uniform float saturation;
 
 // WS30 varying
@@ -227,11 +226,6 @@ vec4 generateWaterTexel()
     wave3.freq = WaveFreq * 3.0 ;
     wave3.amp = waveamp * 0.75;
     wave3.dir =  vec2(0.866025, -0.5); //vec2(cos(radians(angle)), sin(radians(angle)));
-
-
-    //sumWaves(WaveAngle + WaveDAngle, -1.5, windScale, WaveFactor, ddx2, ddy2);
-    //sumWaves(WaveAngle + WaveDAngle, 1.5, windScale, WaveFactor, ddx3, ddy3);
-      
   }
   // end sine stuff
 

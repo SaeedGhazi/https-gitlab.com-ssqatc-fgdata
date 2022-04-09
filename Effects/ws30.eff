@@ -112,7 +112,6 @@
     <WaveSharp><use>/environment/wave/sharp</use></WaveSharp>
     <WaveAngle><use>/environment/wave/angle</use></WaveAngle>
     <WaveFactor><use>/environment/wave/factor</use></WaveFactor>
-    <WaveDAngle><use>/environment/wave/dangle</use></WaveDAngle>
     <sea_r><use>/environment/sea/color_r</use></sea_r>
     <sea_g><use>/environment/sea/color_g</use></sea_g>
     <sea_b><use>/environment/sea/color_b</use></sea_b>

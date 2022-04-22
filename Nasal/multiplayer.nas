@@ -625,7 +625,7 @@ var mp_mode_changed = func(n) {
         gui.menuEnable(menuitem, is_online or is_replaying);
     }
 
-    if (is_online) {
+    if (is_online or is_replaying) {
         if (getprop("/sim/multiplay/write-message-log") and (log_file == nil)) {
             var t = props.globals.getNode("/sim/time/real");
             if (t == nil)

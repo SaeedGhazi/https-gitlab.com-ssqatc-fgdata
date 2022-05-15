@@ -346,7 +346,7 @@ void main (void)
         {pf1 = pow(nDotHV1, 0.5*gl_FrontMaterial.shininess);}
   
    float shadowmap = getShadowing();
-   light_diffuse *= shadowmap;
+   light_diffuse *= (0.3+0.7*shadowmap);
 
     if (cloud_shadow_flag == 1) 
 	{

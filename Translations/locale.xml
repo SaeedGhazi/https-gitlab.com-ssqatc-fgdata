@@ -108,5 +108,10 @@
 		<xliff type="string">Translations/pt/FlightGear-nonQt.xlf</xliff>
 	</locale>
 
+	<locale>
+		<lang type="string">tr</lang>
+		<lang type="string">tr_TR</lang>
+		<xliff type="string">Translations/tr/FlightGear-nonQt.xlf</xliff>
+	</locale>
 
 </PropertyList>

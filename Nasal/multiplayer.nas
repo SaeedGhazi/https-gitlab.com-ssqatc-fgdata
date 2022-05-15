@@ -625,13 +625,18 @@ var model = {
 };
 
 var mp_mode_changed = func(n) {
-    var is_online = n.getBoolValue();
-    foreach (var menuitem;["mp-chat","mp-chat-menu","mp-list","mp-carrier"])
+    var is_online = getprop("/sim/multiplay/online");
+    var is_replaying = getprop("/sim/replay/replay-state");
+    
+    # Always activate multiplayer items if we are replaying, in case the
+    # recording contains MP info.
+    #
+    foreach (var menuitem; ["mp-chat","mp-chat-menu","mp-list","mp-carrier"])
     {
-        gui.menuEnable(menuitem, is_online);
+        gui.menuEnable(menuitem, is_online or is_replaying);
     }
 
-    if (is_online) {
+    if (is_online or is_replaying) {
         if (getprop("/sim/multiplay/write-message-log") and (log_file == nil)) {
             var t = props.globals.getNode("/sim/time/real");
             if (t == nil)
@@ -684,6 +689,8 @@ var mp_mode_changed = func(n) {
 
 model.init();
 setlistener("/sim/multiplay/online", mp_mode_changed, 1, 1);
+setlistener("/sim/replay/replay-state", mp_mode_changed, 1, 1);
+
 # Call-back to ensure we see our own messages.
 setlistener("/sim/multiplay/chat", chat_listener);
 

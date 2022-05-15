@@ -875,24 +875,24 @@
 					<binding>
 						<command>nasal</command>
 						<script>
-							setprop("/autopilot/settings/target-pitch-degree", arg[0]);
+							setprop("/autopilot/settings/target-pitch-deg", arg[0]);
 							setprop("/autopilot/locks/altitude", "pitch-hold");
 						</script>
 					</binding>
 				</key>
 			</key>
 
-			<key n="111">
-				<name>o</name>
-				<desc>AoA hold</desc>
+			<key n="102">
+				<name>f</name>
+				<desc>FPA hold</desc>
 				<key n="901">
 					<name>%f</name>
-					<desc>AoA angle = %.1f degree</desc>
+					<desc>FPA = %.1f degree</desc>
 					<binding>
 						<command>nasal</command>
 						<script>
-							setprop("/autopilot/settings/target-aoa-degree", arg[0]);
-							setprop("/autopilot/locks/altitude", "aoa-hold");
+							setprop("/autopilot/settings/target-fpa-deg", arg[0]);
+							setprop("/autopilot/locks/altitude", "fpa-hold");
 						</script>
 					</binding>
 				</key>

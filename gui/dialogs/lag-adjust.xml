@@ -121,7 +121,7 @@
         <slider>
           <row>2</row>
           <col>2</col>
-          <name>Range</name>
+          <name>range</name>
           <min>1</min>
           <max>15</max>
           <step>0.1</step>

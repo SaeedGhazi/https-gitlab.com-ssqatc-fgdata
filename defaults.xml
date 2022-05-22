@@ -1572,6 +1572,7 @@ Started September 2000 by David Megginson, david@megginson.com
     </tutorial>
     <local_weather>
       <enabled type="bool" userarchive="y">false</enabled>
+      <simbrief_alias type="string" userarchive="y"></simbrief_alias>
     </local_weather>
     <jetways>
       <enabled type="bool" userarchive="y">false</enabled>

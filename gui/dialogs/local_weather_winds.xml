@@ -286,6 +286,94 @@
   <hrule/>
 
   <group>
+    <layout>vbox</layout>
+    <halign>left</halign>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+      <text>
+        <label>Load wind from latest simbrief briefing:</label>
+      </text>
+
+      <text>
+        <label>Enable Wind Model 'aloft waypoints' before loading weather from simbrief!</label>
+        <color>
+          <red>1.0</red>
+          <green>0.0</green>
+          <blue>0.0</blue>
+        </color>
+        <visible>
+          <not-equals>
+            <property>/local-weather/config/wind-model</property>
+            <value>aloft waypoints</value>
+          </not-equals>
+        </visible>
+      </text>
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+
+    <text>
+      <label>Enter your simbrief alias:</label>
+    </text>
+
+    <input>
+      <pref-width>150</pref-width>
+      <property>/nasal/local_weather/simbrief_alias</property>
+      <enable>
+        <equals>
+          <property>/local-weather/config/wind-model</property>
+          <value>aloft waypoints</value>
+        </equals>
+      </enable>
+    </input>
+
+    <button>
+      <legend>Load</legend>
+      <enable>
+        <equals>
+          <property>/local-weather/config/wind-model</property>
+          <value>aloft waypoints</value>
+        </equals>
+      </enable>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          if (local_weather.wind_model_flag == 5)
+          { local_weather.load_simbrief_weather(); }
+        </script>
+      </binding>
+    </button>
+
+
+    <text>
+      <label>Last loaded flight:</label>
+      <visible>
+        <property>/sim/gui/dialogs/weather/simbrief-loaded</property>
+      </visible>
+    </text>
+
+    <text>
+      <label>MMMM</label>
+      <live>true</live>
+      <property>/sim/gui/dialogs/weather/simbrief-last-flight</property>
+      <visible>
+        <property>/sim/gui/dialogs/weather/simbrief-loaded</property>
+      </visible>
+    </text>
+
+  </group>
+  </group>
+
+  <hrule/>
+
+  <group>
     <layout>hbox</layout>
     <halign>left</halign>
 
@@ -326,6 +414,7 @@
         <script>
           props.globals.getNode("local-weather/interpolation", 1).removeChildren("wind");
           setprop("/local-weather/interpolation/ipoint-number",0);
+          setprop("/sim/gui/dialogs/weather/simbrief-loaded", "false");
         </script>
       </binding>
     </button>

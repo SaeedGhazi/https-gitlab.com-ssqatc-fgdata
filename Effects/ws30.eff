@@ -27,7 +27,14 @@
       <wrap-t>repeat</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
-
+    <texture n="8">
+      <image>Textures/Terrain/sand6.png</image>
+      <type>2d</type>
+      <filter>nearest</filter>
+      <wrap-s>repeat</wrap-s>
+      <wrap-t>repeat</wrap-t>
+      <internal-format>normalized</internal-format>
+    </texture>
     <texture n="10">
       <image>Textures/Terrain/snow3.png</image>
       <type>2d</type>
@@ -290,6 +297,15 @@
         <wrap-s><use>texture[6]/wrap-s</use></wrap-s>
         <wrap-t><use>texture[6]/wrap-t</use></wrap-t>
         <internal-format><use>texture[6]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>8</unit>
+        <image><use>texture[8]/image</use></image>
+        <filter><use>texture[8]/filter</use></filter>
+        <wrap-s><use>texture[8]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[8]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[8]/internal-format</use></internal-format>
       </texture-unit>
 
       <program>
@@ -828,6 +844,16 @@
         <name>perlin</name>
         <type>sampler-2d</type>
         <value type="int">6</value>
+      </uniform>
+      <uniform>
+        <name>coastline</name>
+        <type>sampler-2d</type>
+        <value type="int">7</value>
+      </uniform>
+      <uniform>
+        <name>sand</name>
+        <type>sampler-2d</type>
+        <value type="int">8</value>
       </uniform>
           <uniform>
             <name>swatch_size</name>

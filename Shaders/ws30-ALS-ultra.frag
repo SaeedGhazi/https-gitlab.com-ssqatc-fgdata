@@ -103,6 +103,12 @@ uniform vec4 fg_materialParams1[128];
 uniform vec4 fg_materialParams2[128];
 uniform vec4 fg_materialParams3[128];
 
+// Coastline texture - generated from VPBTechnique
+uniform sampler2D coastline;
+
+// Sand texture
+uniform sampler2D sand;
+
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
 
@@ -440,22 +446,32 @@ void main()
   // Testing code: mix with green to show values of variables at each point
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
-
-  if ((water_shader == 1) && (fg_photoScenery == false) && fg_materialParams3[lc].x > 0.5) { 
-    // This is a water fragment, so calculate the fragment color procedurally
-    // and mix with some sand and cliff colour depending on steepness
-    vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
-    vec4 beach_texel = lookup_ground_texture_array(3, ground_tex_coord, lc, dxdy_gc);  // Use the dot texture, which is overloaded to be the beach texture
+  vec4 coast = texture2D(coastline, tile_coord);
+  if (coast.b > 0.01) { 
     float waterline_min_steepness = fg_materialParams3[lc].y;
     float waterline_max_steepness = fg_materialParams3[lc].z;
+    vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
+    vec4 beach_texel = texture2D(sand, ground_tex_coord);  // Use the dot texture, which is overloaded to be the beach texture
+    texel = mix(steep_texel, beach_texel, smoothstep(waterline_max_steepness - 0.1, waterline_max_steepness - 0.03, steepness));
+    
+
+    // G channel used to force a beach texel and reduce artifacts between the beach and the land.
+    fragColor = mix(generateWaterTexel(), texel, smoothstep(0.1,0.9,(coast.b + coast.g - noise_500m) / steepness));    
+    //fragColor = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
+  } else if ((water_shader == 1) && (fg_photoScenery == false) && (fg_materialParams3[lc].x > 0.5)) { 
+    // This is a water fragment, so calculate the fragment color procedurally
+    // and mix with some sand and cliff colour depending on steepness
+    //vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
+    //vec4 beach_texel = lookup_ground_texture_array(3, ground_tex_coord, lc, dxdy_gc);  // Use the dot texture, which is overloaded to be the beach texture
 
     // Mix from a rocky texture to beach for steep slopes, which invariably represent the elevation mesh not being perfectly
     // aligned with the landclass mesh.
-    texel = mix(steep_texel, beach_texel, smoothstep(waterline_max_steepness - 0.1, waterline_max_steepness - 0.03, steepness));
+    // texel = mix(steep_texel, beach_texel, smoothstep(waterline_max_steepness - 0.1, waterline_max_steepness - 0.03, steepness));
 
     // Mix from the beach into the water, which produces a pleasing translucent shallow water effect.
-    texel = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
-    fragColor = texel;
+    //fragColor = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
+    fragColor = generateWaterTexel();
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
   } else {
     // Lookup material parameters for the landclass at this fragment.

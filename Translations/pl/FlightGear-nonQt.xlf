@@ -484,15 +484,15 @@
       </trans-unit>
       <trans-unit id="menu/view-clone:0" approved="yes">
         <source xml:space="preserve">Add Clone View</source>
-        <target xml:space="preserve">Pokaz okno z biezacym widokiem</target>
+        <target xml:space="preserve">Okno z biezacym widokiem</target>
       </trans-unit>
       <trans-unit id="menu/view-last-pair:0" approved="yes">
         <source xml:space="preserve">Add Pair View</source>
-        <target xml:space="preserve">Pokaz okno sparowanych widokow</target>
+        <target xml:space="preserve">Okno sparowanych widokow</target>
       </trans-unit>
       <trans-unit id="menu/view-last-pair-double:0" approved="yes">
         <source xml:space="preserve">Add Pair Foreground View</source>
-        <target xml:space="preserve">Pokaz okno sparowanych widokow z pierwszym planem</target>
+        <target xml:space="preserve">Okno sparowanych widokow z pierwszym planem</target>
       </trans-unit>
       <trans-unit id="menu/view-options:0" approved="yes">
         <source xml:space="preserve">View Options</source>

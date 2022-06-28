@@ -73,11 +73,12 @@ var Window = {
   # Constructor
   #
   # @param size ([width, height])
-  new: func(size, type = nil, id = nil)
+  new: func(size, type = nil, id = nil, allowfocus = 1)
   {
     var ghost = _newWindowGhost(id);
     var m = {
       parents: [Window, PropertyElement, ghost],
+      _allowfocus: allowfocus,
       _ghost: ghost,
       _node: props.wrapNode(ghost._node_ghost),
       _focused: 0,
@@ -214,6 +215,8 @@ var Window = {
 
     if( gui.focused_window != nil )
       gui.focused_window.clearFocus();
+
+    if (!me._allowfocus) return me; # Make the window not take focus, so focus returns to FGFS
 
     me._focused = 1;
 #    me.onFocusIn();

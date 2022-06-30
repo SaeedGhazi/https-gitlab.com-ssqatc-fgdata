@@ -31,11 +31,17 @@ loadGUIFile("Config.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
 loadGUIFile("styles/DefaultStyle.nas");
+
+# widgets
 loadWidget("Button");
 loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
 loadWidget("ScrollArea");
+loadWidget("Rule");
+loadWidget("Slider");
+
+# standard dialogs
 loadDialog("InputDialog");
 loadDialog("MessageBox");
 

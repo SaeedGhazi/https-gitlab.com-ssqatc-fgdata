@@ -196,7 +196,7 @@ DefaultStyle.widgets.label = {
   },
   setText: func(model, text)
   {
-    if( text == nil or size(text) == 0 )
+    if ( !isstr(text) or size(text) == 0 )
     {
       model.setHeightForWidthFunc(nil);
       return me._deleteElement('text');
@@ -451,3 +451,274 @@ DefaultStyle.widgets["scroll-area"] = {
     model._scroller_delta[dir] = model._size[dir] - model._scroller_size[dir];
   }
 };
+
+# A horizontal or vertical rule line
+# possibly with a text label embedded
+DefaultStyle.widgets.rule = {
+  new: func(parent, cfg)
+  {
+    me._root = parent.createChild("group", "rule");
+    me._createElement("bg", "image");
+    me._isVertical = cfg.get("isVertical");
+    if (me._isVertical) {
+      me._bg.set("slice", "0 20");
+      me._baseFile = "vrule";
+    } else {
+      me._bg.set("slice", "10 0");
+      me._baseFile = "hrule";
+    }
+  },
+  setSize: func(model, w, h)
+  {
+    if( me['_text'] != nil )
+    {
+      # first 20 px
+      me._bg.setTranslation(2, 0);
+      me._bg.setSize(20, h);
+
+      # TODO handle eliding for translations?
+      me._text.setTranslation(22, 2 + h / 2);
+      var maxW = model._cfg.get("maxTextWidth", -1);
+      if (maxW > 0) {
+         me._text.set("max-width", maxW);
+      }
+
+      var bg2Left = maxW > 0 ? maxW : me._text.maxWidth() + 22;
+      me._bg2.setTranslation(bg2Left, 0);
+      me._bg2.setSize(w - bg2Left, h);
+    } else {
+      me._bg.setSize(w, h);
+    }
+    return me;
+  },
+  setText: func(model, text)
+  {
+    if( text == nil or size(text) == 0 )
+    {
+      # force a resize?
+      me._deleteElement('bg2');
+      return me._deleteElement('text');
+    }
+
+    if (me._isVertical) {
+      logprint(LOG_DEVALERT, "Text label not supported for vertical rules, yet");
+      return;
+    }
+
+    me._createElement("text", "text")
+      .setText(text);
+
+    var width_hint =  me._text.maxWidth() + 40;
+    me._createElement("bg2", "image")
+       .set("slice", "10 0");
+
+    model.setLayoutMinimumSize([40, 14]);
+    # TODO mark as expanding?
+    model.setLayoutSizeHint([width_hint, 24]);
+
+    return me.update(model);
+  },
+  update: func(model)
+  {
+    var file = me._style._dir_widgets ~ "/";
+    file ~= me._baseFile;
+
+    if( !model._enabled )
+      file ~= "-disabled";
+
+    me._bg.set("src", file ~ ".png");
+    if ( me['_bg2'] != nil)
+      me._bg2.set("src", file ~ ".png");
+    
+    # different color if disabled?
+    if( me['_text'] != nil )
+    {
+      var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
+      me._text.set("fill", me._style.getColor(color_name));
+    }
+  },
+# protected:
+  _createElement: func(name, type)
+  {
+    var mem = '_' ~ name;
+    if( me[ mem ] == nil )
+    {
+      me[ mem ] = me._root.createChild(type, "rule-" ~ name);
+
+      if( type == "text" )
+      {
+         me[ mem ].set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+                  .set("character-size", 14)
+                  .set("alignment", "left-center");
+      }
+    }
+    return me[ mem ];
+  },
+  _deleteElement: func(name)
+  {
+    name = '_' ~ name;
+    if( me[ name ] != nil )
+    {
+      me[ name ].del();
+      me[ name ] = nil;
+    }
+    return me;
+  }
+};
+
+# a frame (sometimes called a group box), with optional label
+# and enable/disable checkbox
+DefaultStyle.widgets.frame = {
+  new: func(parent, cfg)
+  {
+    me._root = parent.createChild("group", "frame-box");
+    me._createElement("bg", "image")
+       .set("slice", "10 10");
+    me.content = me._root.createChild("group", "frame-content");
+
+    # handle label + checkable flag
+  },
+
+  update: func(model)
+  {
+    var file = me._style._dir_widgets ~ "/";
+    file ~= "backdrop-";
+
+    if( !model._enabled )
+      file ~= "-disabled";
+
+    me._bg.set("src", file ~ ".png");
+    
+
+  },
+  # protected:
+  _createElement: func(name, type)
+  {
+    var mem = '_' ~ name;
+    if( me[ mem ] == nil )
+    {
+      me[ mem ] = me._root.createChild(type, "frame-" ~ name);
+
+      if( type == "text" )
+      {
+         me[ mem ].set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+                  .set("character-size", 14)
+                  .set("alignment", "left-center");
+      }
+    }
+    return me[ mem ];
+  },
+  _deleteElement: func(name)
+  {
+    name = '_' ~ name;
+    if( me[ name ] != nil )
+    {
+      me[ name ].del();
+      me[ name ] = nil;
+    }
+    return me;
+  }
+
+};
+
+# a horionztal or vertical slider, for selecting /
+# dragging over a numerical range
+DefaultStyle.widgets.slider = {
+  new: func(parent, cfg)
+  {
+    me._root = parent.createChild("group", "slider");
+    me._createElement("bg", "image")
+       .set("slice", "10 10");
+
+     me._createElement("thumb", "image")
+       .set("slice", "10 10");
+
+      me._ticks = 0;
+      me._ticksPath = nil;
+  },
+
+  setNormValue: func(model, normValue)
+  {
+    var (w, h) = model._size;
+    var availWidthPos = w - h; # pixel range the thumb can move over
+    me._thumb.setTranslation(round(availWidthPos * normValue), 0);
+  },
+
+  update: func(model)
+  {
+  # set background state
+    var file = me._style._dir_widgets ~ "/";
+    file ~= "backdrop-";
+    if( !model._enabled )
+      file ~= "-disabled";
+
+    me._bg.set("src", file ~ ".png");
+    
+  # set thumb state
+    file = me._style._dir_widgets ~ "/";
+    file ~= "button-";  # should we use a seperate thumb?
+    if( !model._enabled )
+      file ~= "-disabled";
+    else if (model._down)
+      file ~= "-down";
+    elsif (model._hover)
+      file ~= "-hovered";
+
+    me._thumb.set("src", file ~ ".png");
+    
+  # set thumb size
+    var (w, h) = model._size;
+    # fixme assumes horizonal for now
+    me._thumb.setSize(h, h);
+
+  # update the position as well, since other stuff
+  # may have changed
+    me.setNormValue(model, model._normValue());
+  },
+
+  updateRanges: func(minValue, maxValue, numTicks = 0)
+  {
+    if (me._ticks != numTicks) {
+      # update tick marks
+      if (numTicks == 0) {
+        me._ticks = 0;
+        me._deleteElement('ticksPath');
+      } else {
+        me._createElement('ticksPath', 'path');
+        me._ticks = numTicks;
+        
+        # set style
+        # loop adding ticks
+
+      }
+    }
+  },
+
+   # protected:
+  _createElement: func(name, type)
+  {
+    var mem = '_' ~ name;
+    if( me[ mem ] == nil )
+    {
+      me[ mem ] = me._root.createChild(type, "slider-" ~ name);
+
+      if( type == "text" )
+      {
+         me[ mem ].set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+                  .set("character-size", 14)
+                  .set("alignment", "left-center");
+      }
+    }
+    return me[ mem ];
+  },
+  _deleteElement: func(name)
+  {
+    name = '_' ~ name;
+    if( me[ name ] != nil )
+    {
+      me[ name ].del();
+      me[ name ] = nil;
+    }
+    return me;
+  }
+}

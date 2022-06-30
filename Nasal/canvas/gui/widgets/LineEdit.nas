@@ -19,6 +19,11 @@ gui.widgets.LineEdit = {
   },
   setText: func(text)
   {
+     if (text == nil) {
+       me.clear();
+       return me;
+     }
+
     me._text = utf8.substr(text, 0, me._max_length);
     me._cursor = utf8.size(me._text);
     me._selection_start = me._cursor;
@@ -28,6 +33,16 @@ gui.widgets.LineEdit = {
       me._view.setText(me, me._text);
 
     return me;
+  },
+  clear: func
+  {
+    me._text = "";
+    me._cursor = 0;
+    me._selection_start = 0;
+    me._selection_end = 0;
+
+    if( me._view != nil )
+      me._view.setText(me, "");
   },
   text: func()
   {

@@ -108,6 +108,12 @@ gui.Widget = {
 
     return me;
   },
+  #
+  hasActiveFocus:func
+  {
+      return me.getCanvas()._focused_widget == me;
+  },
+  #
   listen: func(type, cb)
   {
     me._view._root.addEventListener("cb." ~ type, cb);

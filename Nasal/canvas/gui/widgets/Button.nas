@@ -7,6 +7,8 @@ gui.widgets.Button = {
     m._down = 0;
     m._checkable = 0;
     m._flat = cfg.get("flat", 0);
+    m._isDefault = cfg.get("default", 0);
+    m._destructive = cfg.get("destructive", 0);
 
     if( style != nil and !m._flat )
       m._setView( style.createWidget(parent, cfg.get("type", "button"), cfg) );
@@ -52,6 +54,16 @@ gui.widgets.Button = {
     else
       me.setChecked(!me._down);
 
+    return me;
+  },
+  setDefault: func(isDefault)
+  {
+    me._isDefault = isDefault;
+    return me;
+  },
+  setDestructive: func(isDestructive)
+  {
+    me._destructive = isDestructive;
     return me;
   },
 # protected:

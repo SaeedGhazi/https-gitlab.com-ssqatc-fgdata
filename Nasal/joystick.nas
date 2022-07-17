@@ -548,6 +548,7 @@ var buttonBindings = [
   NasalButton.new("Elevator Trim Pos", "controls.setElevatorTrimToPosition();", 1),
   NasalButton.new("Rudder Trim Left", "controls.rudderTrim(-1);", 1),
   NasalButton.new("Rudder Trim Right", "controls.rudderTrim(1);", 1),
+  NasalButton.new("Rudder Trim Pos", "controls.setRudderTrimToPosition();", 1),
   NasalButton.new("Aileron Trim Left", "controls.aileronTrim(-1);", 1),
   NasalButton.new("Aileron Trim Right", "controls.aileronTrim(1);", 1),
   NasalButton.new("Aileron Trim Pos", "controls.setAileronToPosition();", 1),

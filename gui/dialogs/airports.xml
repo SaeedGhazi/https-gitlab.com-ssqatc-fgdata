@@ -271,10 +271,12 @@
     <layout>hbox</layout>
     <default-padding>4</default-padding>
     <halign>fill</halign>
+    <stretch>true</stretch>
 
     <group>
       <layout>vbox</layout>
       <valign>top</valign>
+      <stretch>true</stretch>
 
       <group>
         <layout>hbox</layout>
@@ -641,6 +643,7 @@
       <halign>fill</halign>
       <valign>top</valign>
       <default-padding>0</default-padding>
+      <stretch>true</stretch>
 
       <group>
         <layout>hbox</layout>

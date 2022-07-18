@@ -34,22 +34,30 @@
 
   <group>
     <layout>hbox</layout>
-    <list>
-      <pref-width>170</pref-width>
-      <pref-height>500</pref-height>
-      <name>filename</name>
-      <halign>fill</halign>
-      <property>/sim/gui/dialogs/doc-browser/filename</property>
-      <value>clear</value>
-      <binding>
-        <command>dialog-apply</command>
-        <object-name>filename</object-name>
-      </binding>
-      <binding>
-        <command>dialog-update</command>
-        <object-name>editfield</object-name>
-      </binding>
-    </list>
+    <valign>fill</valign>
+    <stretch>true</stretch>
+
+    <group>
+      <layout>vbox</layout>
+      <list>
+        <pref-width>170</pref-width>
+        <pref-height>500</pref-height>
+        <name>filename</name>
+        <halign>fill</halign>
+        <valign>fill</valign>
+        <stretch>true</stretch>
+        <property>/sim/gui/dialogs/doc-browser/filename</property>
+        <value>clear</value>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>filename</object-name>
+        </binding>
+        <binding>
+          <command>dialog-update</command>
+          <object-name>editfield</object-name>
+        </binding>
+      </list>
+    </group>
     <textbox>
       <name>editfield</name>
       <halign>fill</halign>
@@ -59,7 +67,7 @@
       <pref-height>250</pref-height>
       <padding>6</padding>
       <slider>20</slider>
-      <editable>falsee</editable>
+      <editable>false</editable>
       <wrap>false</wrap>
       <font>
           <property>sim/gui/selected-style/fonts/fixed</property>
@@ -117,7 +125,7 @@
          "README.xmlpanel",
          "README.minipanel"
        ];
-       var filename_list = self.getNode("group[1]/list");
+       var filename_list = self.getNode("group[1]/group[0]/list");
        var n=0;
        # add the filenames to the list box
        foreach(var file; doc_files)

@@ -259,7 +259,7 @@
       <row>4</row>
       <col>1</col>
       <label> 1</label>
-      <format>   %.0f</format>
+      <format>      %.0f</format>
       <live>true</live>
       <halign>left</halign>
       <property>/controls/radios/comm-ptt</property>
@@ -267,7 +267,7 @@
     <text>
       <row>4</row>
       <col>1</col>
-      <label>      (/controls/radios/comm-ptt) </label>
+      <label>         (/controls/radios/comm-ptt) </label>
       <halign>left</halign>
     </text>
 

@@ -10,8 +10,8 @@
     <open>
       <![CDATA[
         var groups = cmdarg().getChildren("group")[1].getChildren("group");
-        var mtbfNodes = groups[0].getChildren("radio");
-        var mcbfNodes = groups[1].getChildren("radio");
+        var mtbfNodes = groups[1].getChildren("radio");
+        var mcbfNodes = groups[2].getChildren("radio");
 
         var set_mtbf = func(m) {
           for (var i = 0; i < size(mtbfNodes); i +=1) {

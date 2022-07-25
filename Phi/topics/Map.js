@@ -137,6 +137,12 @@ define([
             "Navigation Data": L.navdbLayer(),
             "Other Traffic": L.aiLayer(),
 
+            "OpenFlightMaps":  new L.TileLayer("https://nwy-tiles-api.prod.newaydata.com/tiles/{z}/{x}/{y}.png?path=2207/aero/latest", {
+                maxZoom: 13,
+                minZoom: 7,
+                attribution: '<a target="_blank" href="http://openflightmaps.org">&copy; open flightmaps association</a>'
+            }),
+
             "OpenAIP":  new L.TileLayer("http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.png", {
                 maxZoom: 14,
                 minZoom: 4,

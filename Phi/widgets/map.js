@@ -149,11 +149,22 @@ define(
                     var followAircraftControl = L.control();
 
                     followAircraftControl.onAdd = function(map) {
-                        this._div = L.DomUtil.create('div', 'followAircraft');
+                        this._div = L.DomUtil.create('div', 'mapOption');
                         this._div.innerHTML = '<img src="images/followAircraft.svg" title="Center Map on Aircraft Position" data-bind="css: { mapOptionEnabled: followAircraft() }, click: toggleFollowAircraft"/>';
                         return this._div;
                     }
                     followAircraftControl.addTo(self.map);
+                }
+
+                if (params && params.hasToggleOwnAircraftDrag) {
+                    var ownAircraftDragControl = L.control();
+
+                    ownAircraftDragControl.onAdd = function(map) {
+                        this._div = L.DomUtil.create('div', 'mapOption');
+                        this._div.innerHTML = '<img src="images/dragAircraft.svg" title="Allow dragging own aircraft" data-bind="css: { mapOptionEnabled: dragOwnAircraft() }, click: toggleDragOwnAircraft"/>';
+                        return this._div;
+                    }
+                    ownAircraftDragControl.addTo(self.map);
                 }
 
                 if (params && params.overlays) {
@@ -173,11 +184,11 @@ define(
                     L.control.scale(params.scale).addTo(self.map);
                 }
 
-                var aircraftMarker = L.aircraftMarker(self.map.getCenter(), {
+                self.aircraftMarker = L.aircraftMarker(self.map.getCenter(), {
                     className : 'you-aircraft-marker-icon'
                 });
 
-                aircraftMarker.addTo(self.map);
+                self.aircraftMarker.addTo(self.map);
 
                 var aircraftTrack = L.polyline([], {
                     color : 'red'
@@ -202,8 +213,8 @@ define(
                 });
 
                 self.position.subscribe(function(newValue) {
-                    if (!aircraftMarker.isDragging)
-                        aircraftMarker.setLatLng(newValue);
+                    if (!self.aircraftMarker.isDragging)
+                        self.aircraftMarker.setLatLng(newValue);
                 });
 
                 self.labelLines = [
@@ -237,7 +248,16 @@ define(
 
                 var center = leaflet.latLng(self.latitude(), self.longitude());
                 self.map.setView(center);
-                aircraftMarker.setLatLng(center);
+                self.aircraftMarker.setLatLng(center);
+
+                // Enable/disable own aircraft dragging
+                self.dragOwnAircraft = ko.observable(true);
+
+                self.toggleDragOwnAircraft = function(a) {
+                    self.dragOwnAircraft(!self.dragOwnAircraft());
+                    self.dragOwnAircraft() ? self.aircraftMarker.dragging.enable() : self.aircraftMarker.dragging.disable();
+                }
+
             }
 
             ViewModel.prototype.dispose = function() {

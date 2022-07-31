@@ -150,7 +150,7 @@ define(
 
                     followAircraftControl.onAdd = function(map) {
                         this._div = L.DomUtil.create('div', 'followAircraft');
-                        this._div.innerHTML = '<img src="images/followAircraft.svg" title="Center Map on Aircraft Position" data-bind="click: toggleFollowAircraft"/>';
+                        this._div.innerHTML = '<img src="images/followAircraft.svg" title="Center Map on Aircraft Position" data-bind="css: { mapOptionEnabled: followAircraft() }, click: toggleFollowAircraft"/>';
                         return this._div;
                     }
                     followAircraftControl.addTo(self.map);

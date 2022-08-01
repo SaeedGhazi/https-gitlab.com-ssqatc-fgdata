@@ -197,6 +197,7 @@ Bit  Binary     Hardware Function       Interpretation
  <name>Saitek Saitek X52 Flight Stick (USB)</name>
  <name>Saitek Saitek X52 Flight Control Stick</name>
  <name>Saitek Saitek X52 Flight Control System</name>
+ <name>X52 H.O.T.A.S.</name>
 
 <axis>	<!-- 0/0/0 -->
   <desc>Aileron</desc>

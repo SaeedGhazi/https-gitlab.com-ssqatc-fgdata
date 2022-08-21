@@ -3444,6 +3444,11 @@ append(windIpointArray, w);
 
 var set_wind_ipoint_metar = func (lat, lon, d0, v0) {
 
+if (getprop("/sim/gui/dialogs/weather/simbrief-loaded")) {
+	# METAR winds should not interfere with simbrief winds
+	return;
+}
+
 # insert a plausible pattern of aloft winds based on ground info
 
 
@@ -3689,6 +3694,11 @@ create_cloudbox(type, lat, lon, alt, x,y,z,n, f_core, r_core, h_core, n_core, f_
 }
 
 var load_simbrief_weather_from_xml = func {
+	setprop("/sim/gui/dialogs/weather/simbrief-loaded", "true");
+
+	# Clear existing wind data (e.g. from metar mode)
+	windIpointArray = [];
+
 	var file = getprop("/sim/fg-home") ~ "/Export/weater_simbrief.xml";
 
 	var node = io.readxml(file);
@@ -3757,7 +3767,6 @@ var load_simbrief_weather_from_xml = func {
 		}
 	}
 
-	setprop("/sim/gui/dialogs/weather/simbrief-loaded", "true");
 	setprop("/sim/gui/dialogs/weather/simbrief-last-flight", departure ~ " - " ~ arrival);
 }
 

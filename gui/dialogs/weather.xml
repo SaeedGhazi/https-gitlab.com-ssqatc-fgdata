@@ -505,11 +505,15 @@
             <label>                          </label>
   				</text>
 
-          <empty>
+          <button>
             <row>0</row>
             <col>2</col>
-            <stretch>true</stretch>
-          </empty>
+            <legend>Weather help</legend>
+            <binding>
+              <command>open-browser</command>
+               <path>Docs/README.local_weather.html</path>
+            </binding>
+          </button>
 
   				<button>
             <row>0</row>

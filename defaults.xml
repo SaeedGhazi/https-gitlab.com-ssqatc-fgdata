@@ -1610,6 +1610,9 @@ Started September 2000 by David Megginson, david@megginson.com
     <Autopush>
       <enabled type="bool">false</enabled>
     </Autopush>
+    <gui>
+          <enabled type="bool">false</enabled>
+    </gui>
   </nasal>
   <scenery>
     <share-events type="bool" userarchive="y">false</share-events>

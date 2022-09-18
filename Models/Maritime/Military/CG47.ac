@@ -2950,7 +2950,7 @@ refs 3
 6 0 0
 kids 0
 OBJECT poly
-name "rect"
+name "Wake"
 loc 148.267 0.671917 -0.435833
 texture "wake.png"
 crease 61.000000

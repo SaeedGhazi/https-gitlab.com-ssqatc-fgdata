@@ -154,13 +154,13 @@ apart from most of the very excellent textures, remain. -->
 
     	    # clean up listeners
 
-     	    removelistener(l_elev_1);
-     	    removelistener(l_elev_2);
+     	    removelistener(l_elev1);
+     	    removelistener(l_elev2);
 
-     	    removelistener(l_jbd_1);
-     	    removelistener(l_jbd_2);
-     	    removelistener(l_jbd_3);
-     	    removelistener(l_jbd_4);
+     	    removelistener(l_jbd1);
+     	    removelistener(l_jbd2);
+     	    removelistener(l_jbd3);
+     	    removelistener(l_jbd4);
 
      	    removelistener(l_lights);
             ]]>

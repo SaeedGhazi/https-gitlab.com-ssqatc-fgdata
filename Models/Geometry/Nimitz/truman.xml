@@ -470,15 +470,15 @@ by Thorsten Renk 2017
 
      # clean up listeners
 
-     removelistener(l_elev_1);
-     removelistener(l_elev_2);
-     removelistener(l_elev_3);
-     removelistener(l_elev_4);
+     removelistener(l_elev1);
+     removelistener(l_elev2);
+     removelistener(l_elev3);
+     removelistener(l_elev4);
 
-     removelistener(l_door_1);
-     removelistener(l_door_2);
-     removelistener(l_door_3);
-     removelistener(l_door_4);
+     removelistener(l_door1);
+     removelistener(l_door2);
+     removelistener(l_door3);
+     removelistener(l_door4);
 
      removelistener(l_wave);
      removelistener(l_lights);

@@ -134,11 +134,11 @@
 
      	    # clean up listeners
 
-     	    removelistener(l_elev_1);
-     	    removelistener(l_elev_2);
+     	    removelistener(l_elev1);
+     	    removelistener(l_elev2);
 
-     	    removelistener(l_jbd_1);
-     	    removelistener(l_jbd_2);
+     	    removelistener(l_jbd1);
+     	    removelistener(l_jbd2);
             ]]>
         </unload>
     </nasal>

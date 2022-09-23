@@ -54,9 +54,9 @@
 	<unload>
         <![CDATA[ 
      	# clean up listeners
-     	removelistener(l_jbd_0);
-     	removelistener(l_jbd_1);
-     	removelistener(l_jbd_2);
+     	removelistener(l_jbd0);
+     	removelistener(l_jbd1);
+     	removelistener(l_jbd2);
         ]]>
 	</unload>
 	<model>

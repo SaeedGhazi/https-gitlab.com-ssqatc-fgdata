@@ -1,6 +1,6 @@
 # RadioButton.nas : radio button, and group helper
 # to manage updating checked state conherently
-# Copyright (C) 2022 James Turner
+# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 gui.widgets.RadioButton = {

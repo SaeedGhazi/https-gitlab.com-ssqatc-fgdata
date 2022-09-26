@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: (C) 2016 Thomas Geymayer
+# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 gui.widgets.Button = {
   new: func(parent, style, cfg)
   {

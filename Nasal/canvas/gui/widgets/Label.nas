@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 gui.widgets.Label = {
   new: func(parent, style, cfg)
   {

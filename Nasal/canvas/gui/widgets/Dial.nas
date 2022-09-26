@@ -1,26 +1,23 @@
-# Slider.nas : show a user-draggable slider
-# with optional tick marks and value display
 # SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-gui.widgets.Slider = {
+gui.widgets.Dial = {
   new: func(parent, style, cfg)
   {
     var cfg = Config.new(cfg);
-    var m = gui.Widget.new(gui.widgets.Slider);
+    var m = gui.Widget.new(gui.widgets.Dial);
     m._focus_policy = m.StrongFocus;
     m._down = 0;
     m._minValue = 0;
     m._maxValue = cfg.get("max-value", 100);
     m._value = 50;
+
+    m._wraps = cfg.get("wrap", 0);
     m._pageStep = cfg.get("page-step", 0);
     m._numTicks = cfg.get("tick-count", 0);
-
     m._tickStyle = cfg.get("ticks-style", 0);
-    m._valueDisplayStyle = cfg.get("value-style", 0);
 
-    # TODO : select where value is shown
-    # TODO : select where tick marks are shown
+    # todo : optional value display in the center
 
     if( style != nil ) {
       m._setView( style.createWidget(parent, cfg.get("type", "slider"), cfg) );

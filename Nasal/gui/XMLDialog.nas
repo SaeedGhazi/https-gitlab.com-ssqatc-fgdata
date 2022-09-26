@@ -1,5 +1,5 @@
 # XML Dialog - XML dialog object without using PUI
-# Copyright (C) 2022 James Turner
+# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 # alias this module to keep things somewhat readable
@@ -405,6 +405,30 @@ var XMLSlider =
     }
 };
 
+var XMLDial =
+{ 
+    init: func(objectProps)
+    {
+        logprint(LOG_INFO, "Init of XMLDial");
+       
+        
+    },
+
+    show: func(viewParent)
+    {
+        me._view = cwidgets.Dial.new(viewParent, canvas.style, {});
+        me._layout = me._view;
+        me._applyLayoutConfig();
+        me.update();
+        return me._view;
+    },
+
+    update: func()
+    {
+
+    }
+};
+
 var XMLTextEdit =
 { 
     init: func(objectProps)
@@ -495,6 +519,10 @@ var _createCompatObject = func(type)
 
     if (type == "slider") {
         widget = XMLSlider;
+    }
+
+    if (type == "dial") {
+        widget = XMLDial;
     }
 
     if (type == "group") {

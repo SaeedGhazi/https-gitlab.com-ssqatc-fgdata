@@ -2,7 +2,7 @@
 # and optional checkbox / label (usuallt at the top / left)
 # to enable / disable it
 
-# Copyright (C) 2022 James Turner
+# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 

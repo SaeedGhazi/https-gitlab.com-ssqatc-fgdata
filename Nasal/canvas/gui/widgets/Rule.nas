@@ -1,6 +1,6 @@
 # Rule.nas : horizontal or vertical dividing line,
 # optionally with a text label, eg to name a section
-# Copyright (C) 2022 James Turner
+# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 

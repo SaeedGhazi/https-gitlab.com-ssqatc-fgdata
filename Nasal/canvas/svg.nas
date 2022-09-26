@@ -603,6 +603,12 @@ var parsesvg = func(group, path, options = nil)
       }
       stack[-1].setFile(ref);
     }
+    elsif (name == "sodipodi:namedview" or name == "metadata") 
+    {
+      # silently skip these
+      skip = level;
+      return;
+    }
     else
     {
       logpr(LOG_INFO, "Skipping unknown element '" ~ name ~ "'");

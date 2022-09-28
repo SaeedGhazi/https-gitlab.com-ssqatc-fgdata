@@ -1278,7 +1278,7 @@ var basic_keys = {
         { name: "F10",       desc: "toggle menubar" },
        #{ name: "Shift-F1",  desc: "load flight" },
        #{ name: "Shift-F2",  desc: "save flight" },
-        { name: "Shift-F10", desc: "cycle through GUI styles" },
+        { name: "Shift-F10", desc: "toggle fullscreen" },
     ],
 };
 

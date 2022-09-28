@@ -111,7 +111,7 @@
                                     r.heading);
 
               if (r.ils != nil) {
-                  rwyInfo = sprintf("%s %20.3f Mhz", rwyInfo,
+                  rwyInfo = sprintf("%s %20.3f MHz", rwyInfo,
                                     r.ils.frequency / 100);
               }
 

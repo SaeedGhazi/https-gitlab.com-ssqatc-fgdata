@@ -258,7 +258,6 @@ apart from most of the very excellent textures, remain. -->
 
         ]]>
         </load>
-	</nasal>
 
 	<unload>
         <![CDATA[ 
@@ -278,7 +277,7 @@ apart from most of the very excellent textures, remain. -->
 
         ]]>
 	</unload>
-
+	</nasal>
 
     <!--<model>
       <path>Models/Geometry/Nimitz/Crew/crew.xml</path>

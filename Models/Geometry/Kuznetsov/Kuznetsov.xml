@@ -50,7 +50,7 @@
 			setprop("/controls/kuznetsov/turn-to-base-course", 1);
 			]]>
 		</load>
-	</nasal>
+
 	<unload>
         <![CDATA[ 
      	# clean up listeners
@@ -59,6 +59,7 @@
      	removelistener(l_jbd2);
         ]]>
 	</unload>
+	</nasal>
 	<model>
 		<name>flols</name>
 		<path>Models/Geometry/Nimitz/Models/flols.xml</path>

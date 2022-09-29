@@ -1,5 +1,5 @@
 ##		FLARM
-##	Version 08/2021
+##	Version 09/2022
 ##	by Benedikt Wolf (D-ECHO)
 
 ##	References:
@@ -27,6 +27,8 @@ var volts	=	props.globals.initNode("systems/electrical/outputs/flarm", 0.0, "DOU
 var track	=	props.globals.getNode("/orientation/track-deg");
 var ai_models	=	props.globals.getNode("/ai/models");
 var elapsed_sec	=	props.globals.getNode("/sim/time/elapsed-sec");
+
+var version = 202209;	# used for backwards compatibility (e.g. Salus Combined Instrument)
 
 # Initialize Arrays to internally store targets and warnings
 var targets	=	[];
@@ -56,17 +58,19 @@ var new_contact = func ()  { #Sound message for new contact
 }
 
 #	Target class
-#var target1 = Target.new(n,scnd);
 var Target = {
-	new : func(n,scnd){
+	new : func(n, type, scnd){
 		m = { parents : [Target] };
 		m.id=n;
-		m.lat = ai_models.getNode("multiplayer["~n~"]/position/latitude-deg");
-		m.lon = ai_models.getNode("multiplayer["~n~"]/position/longitude-deg");
-		m.alt = ai_models.getNode("multiplayer["~n~"]/position/altitude-ft");
+		m.prop_path = ai_models.getNode(type ~ "[" ~n~ "]" );
+		m.lat = m.prop_path.getNode("position/latitude-deg");
+		m.lon = m.prop_path.getNode("position/longitude-deg");
+		m.alt = m.prop_path.getNode("position/altitude-ft");
 		m.pos = geo.Coord.new().set_latlon(	m.lat.getDoubleValue(),
 							m.lon.getDoubleValue(),
 							m.alt.getDoubleValue()	);
+		m.hdg = m.prop_path.getNode("orientation/true-heading-deg");
+		m.vario = m.prop_path.getNode("velocities/vertical-speed-fps");
 		m.second=0.0;
 		var ac = geo.aircraft_position();
 		m.last_dist = m.pos.direct_distance_to( ac );
@@ -154,19 +158,21 @@ setlistener("/sim/signals/fdm-initialized", func{
 
 
 var update_FLARM = func{
-	for(var f=0; f<=30; f=f+1){
-		if(getprop("/ai/models/multiplayer["~f~"]/position/latitude-deg") != nil){
-			var temp_pos = geo.Coord.set_latlon(	getprop("/ai/models/multiplayer["~f~"]/position/latitude-deg"),
-								getprop("/ai/models/multiplayer["~f~"]/position/longitude-deg"),
-								getprop("/ai/models/multiplayer["~f~"]/position/altitude-ft"));
+	# Check MP first, AI afterwards
+	var type = "multiplayer";
+	for(var f = 0; f < 15; f += 1){
+		if(getprop("/ai/models/"~ type ~"[" ~f~ "]/position/latitude-deg") != nil){
+			var temp_pos = geo.Coord.set_latlon(	getprop("/ai/models/"~ type ~"[" ~f~ "]/position/latitude-deg"),
+								getprop("/ai/models/"~ type ~"[" ~f~ "]/position/longitude-deg"),
+								getprop("/ai/models/"~ type ~"[" ~f~ "]/position/altitude-ft"));
 							
 			#Check whether in range and target not already existing
 			var distance_km = temp_pos.distance_to(geo.aircraft_position())/1000;
-			if(distance_km<max_dist and targets_tracked[f] == 0){
+			if( distance_km < max_dist and targets_tracked[f] == 0){
 				#Now generate a target
-				targets[f]=Target.new( f, elapsed_sec.getDoubleValue() );
+				targets[f]=Target.new( f, type, elapsed_sec.getDoubleValue() );
 				targets_tracked[f] = 1;
-			}else if(distance_km>max_dist and targets_tracked[f] == 1){
+			}else if( distance_km > max_dist and targets_tracked[f] == 1){
 				#Target existing, but has moved meanwhile out of range
 				targets[f] = nil;
 				targets_tracked[f] = 0;
@@ -175,6 +181,30 @@ var update_FLARM = func{
 			#Target existing, but has meanwhile logged out
 			targets[f]=nil;
 			targets_tracked[f] = 0;
+		}
+	}
+	type = "aircraft";
+	for(var f = 0; f < 15; f += 1){
+		if(getprop("/ai/models/"~ type ~"[" ~f~ "]/position/latitude-deg") != nil){
+			var temp_pos = geo.Coord.set_latlon(	getprop("/ai/models/"~ type ~"[" ~f~ "]/position/latitude-deg"),
+								getprop("/ai/models/"~ type ~"[" ~f~ "]/position/longitude-deg"),
+								getprop("/ai/models/"~ type ~"[" ~f~ "]/position/altitude-ft"));
+							
+			#Check whether in range and target not already existing
+			var distance_km = temp_pos.distance_to(geo.aircraft_position())/1000;
+			if( distance_km < max_dist and targets_tracked[ f+15 ] == 0){
+				#Now generate a target
+				targets[ f+15 ]=Target.new( f, type, elapsed_sec.getDoubleValue() );
+				targets_tracked[ f+15 ] = 1;
+			}else if( distance_km > max_dist and targets_tracked[ f+15 ] == 1){
+				#Target existing, but has moved meanwhile out of range
+				targets[ f+15 ] = nil;
+				targets_tracked[ f+15 ] = 0;
+			}
+		} else if ( targets_tracked[ f+15 ] == 1){
+			#Target existing, but has meanwhile logged out
+			targets[ f+15 ]=nil;
+			targets_tracked[ f+15 ] = 0;
 		}
 	}
 	
@@ -291,7 +321,8 @@ var update_FLARM = func{
 	}
 }
 
-var flarm_update	=	maketimer( 1, func() { update_FLARM(); } );
+var flarm_update = maketimer( 1, func() { update_FLARM(); } );
+flarm_update.simulatedTime = 1;
 
 # Startup as described in [1], p.6
 var phase1_timer = nil;

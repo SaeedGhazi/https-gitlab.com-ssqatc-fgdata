@@ -463,6 +463,18 @@
           <source>Tutorials</source>
           <target>Tutorial</target>
         </trans-unit>
+        <trans-unit id="menu/video-control:0" translate="yes" approved="no">
+          <source>Video Control</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/video-start:0" translate="yes" approved="no">
+          <source>Video Start</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/video-stop:0" translate="yes" approved="no">
+          <source>Video Stop</source>
+          <target />
+        </trans-unit>
         <trans-unit id="menu/view:0" translate="yes" approved="yes">
           <source>View</source>
           <target>Visualizza</target>
@@ -1129,9 +1141,17 @@
           <source>Select aircraft livery</source>
           <target>Seleziona la livrea dell'aereo</target>
         </trans-unit>
+        <trans-unit id="options/load-tape-create-video:0" translate="yes" approved="no">
+          <source>Encode video while replaying tape specified by --load-tape</source>
+          <target />
+        </trans-unit>
         <trans-unit id="options/load-tape-desc:0" translate="yes" approved="no">
           <source>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
           <target>Carica la registrazione di una sessione FlightGear precedente</target>
+        </trans-unit>
+        <trans-unit id="options/load-tape-fixed-dt:0" translate="yes" approved="no">
+          <source>Set fixed-dt mode while replaying tape specified by --load-tape</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/local-aircraft-time:0" translate="yes" approved="no">
           <source>local aircraft time</source>

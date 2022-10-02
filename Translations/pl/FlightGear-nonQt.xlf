@@ -248,7 +248,7 @@
       </trans-unit>
       <trans-unit id="menu/nasal-repl-interpreter:0" approved="yes">
         <source xml:space="preserve">Nasal REPL Interpreter</source>
-        <target xml:space="preserve">Interpreter Nasal</target>
+        <target xml:space="preserve">Interpreter REPL dla Nasal</target>
       </trans-unit>
       <trans-unit id="menu/next-waypoint:0" approved="yes">
         <source xml:space="preserve">Next Waypoint</source>
@@ -272,11 +272,11 @@
       </trans-unit>
       <trans-unit id="menu/print-rendering-statistics:0" approved="yes">
         <source xml:space="preserve">Print Rendering Statistics</source>
-        <target xml:space="preserve">Wyswietl statystyki renderowania</target>
+        <target xml:space="preserve">Wypisz statystyki renderowania</target>
       </trans-unit>
       <trans-unit id="menu/print-scene-info:0" approved="yes">
         <source xml:space="preserve">Print Visible Scene Info</source>
-        <target xml:space="preserve">Wyswietl informacje o widocznej scenie</target>
+        <target xml:space="preserve">Wypisz informacje o widocznej scenie</target>
       </trans-unit>
       <trans-unit id="menu/property-browser:0" approved="yes">
         <source xml:space="preserve">Browse Internal Properties</source>
@@ -966,7 +966,7 @@
       </trans-unit>
       <trans-unit id="options/json-report-desc:0" approved="yes">
         <source xml:space="preserve">Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</source>
-        <target xml:space="preserve">Wydrukuj raport w formacie JSON na standardowe wyjście, podając informacje, takie jak wersja FlightGear, $FG_ROOT, $FG_HOME, ścieżki statku powietrznego i scenerii, itp.</target>
+        <target xml:space="preserve">Wypisz raport w formacie JSON na standardowym wyjściu, podając informacje, takie jak wersja FlightGear, $FG_ROOT, $FG_HOME, ścieżki statku powietrznego i scenerii, itp.</target>
       </trans-unit>
       <trans-unit id="options/language-desc:0" approved="yes">
         <source xml:space="preserve">Select the language for this session</source>
@@ -1186,7 +1186,7 @@
       </trans-unit>
       <trans-unit id="options/show-aircraft-desc:0" approved="yes">
         <source xml:space="preserve">Print a list of the currently available aircraft types</source>
-        <target xml:space="preserve">Wyświetl listę aktualnie dostępnych typów samolotów.</target>
+        <target xml:space="preserve">Wypisz listę aktualnie dostępnych typów samolotów.</target>
       </trans-unit>
       <trans-unit id="options/show-sound-devices-desc:0" approved="yes">
         <source xml:space="preserve">Show a list of available audio device</source>

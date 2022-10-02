@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
-  <file original="" datatype="plaintext" source-language="en" target-language="fr"><body>
+  <file original="/home/devel/FGFS/flightgear/src/GUI/InstallSceneryDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="InstallSceneryDialog">
       <trans-unit id="_msg1" approved="yes">
         <source xml:space="preserve">Install scenery</source>
@@ -26,6 +26,8 @@
         <target xml:space="preserve">Installation réussie des fichiers de scènes à &apos;%1&apos;. Cet emplacement sera ajouté à la liste des scènes supplémentaires à utiliser.</target>
       </trans-unit>
     </group>
+  </body></file>
+  <file original="/home/devel/FGFS/flightgear/src/GUI/SetupRootDialog.ui" datatype="x-trolltech-designer-ui" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="SetupRootDialog">
       <trans-unit id="_msg6" approved="yes">
         <source xml:space="preserve">Setup required data files</source>
@@ -68,6 +70,8 @@
         <target xml:space="preserve">Pour accéder à une copie des fichiers téléchargée sur votre ordinateur, cliquez sur ce bouton</target>
       </trans-unit>
     </group>
+  </body></file>
+  <file original="" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="FirstRun">
       <trans-unit id="_msg16" translate="no" approved="yes">
         <source xml:space="preserve">FlightGear can send crash and error reports to the development team. This helps to fix common problems and improve the software for everyone. The reports don&apos;t contain personal information, but depending on the problem, may contain information such as the aircraft in use, startup airport, or your graphics card.</source>
@@ -1893,175 +1897,202 @@ Chemin local : %2</target>
         <target xml:space="preserve">FlightGear peut, si nécessaire, télécharger automatiquement des scènes et vérifier si celles que vous avez en local sont à jour. Si vous désactivez cette option, vous devrez télécharger et installer les scènes en utilisant une autre méthode.</target>
         <context-group purpose="location"><context context-type="linenumber">329</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg339" approved="yes">
-        <source xml:space="preserve">Download location</source>
-        <target xml:space="preserve">Emplacement des téléchargements</target>
+      <trans-unit id="_msg339">
+        <source xml:space="preserve">TerraSync DNS Server</source>
+        <target xml:space="preserve"></target>
+        <context-group purpose="location"><context context-type="linenumber">343</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg340">
+        <source xml:space="preserve">Select the DNS server used for TerraSync lookup.</source>
+        <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">344</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg340" approved="yes">
-        <source xml:space="preserve">FlightGear stores downloaded files (scenery and aircraft) in this location. Depending on your settings, it may grow to a considerable size (many gigabytes). If you change the download location, files will need to be downloaded again. When changing this setting, FlightGear will restart to use the new location correctly.</source>
-        <target xml:space="preserve">FlightGear stocke les fichiers téléchargés (scènes et aéronefs) à cet endroit. En fonction de vos paramètres, il peut atteindre une taille considérable (plusieurs gigaoctets). Si vous changez l&apos;emplacement de téléchargement, les fichiers devront être téléchargés à nouveau. Lorsque vous modifiez ce paramètre, FlightGear redémarrera pour utiliser correctement le nouvel emplacement.</target>
-        <context-group purpose="location"><context context-type="linenumber">345</context></context-group>
+      <trans-unit id="_msg341">
+        <source xml:space="preserve">Google</source>
+        <target xml:space="preserve"></target>
+        <context-group purpose="location"><context context-type="linenumber">346</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg341" approved="yes">
-        <source xml:space="preserve">Choose a location to store download files.</source>
-        <target xml:space="preserve">Choisissez un emplacement pour stocker les fichiers téléchargés.</target>
-        <context-group purpose="location"><context context-type="linenumber">352</context></context-group>
+      <trans-unit id="_msg342">
+        <source xml:space="preserve">Custom DNS Server</source>
+        <target xml:space="preserve"></target>
+        <context-group purpose="location"><context context-type="linenumber">346</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">357</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg342" approved="yes">
-        <source xml:space="preserve">View &amp; Window</source>
-        <target xml:space="preserve">Vue et fenêtre</target>
-        <context-group purpose="location"><context context-type="linenumber">387</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg343" approved="yes">
-        <source xml:space="preserve">full-screen</source>
-        <target xml:space="preserve">plein écran</target>
-        <context-group purpose="location"><context context-type="linenumber">394</context></context-group>
+      <trans-unit id="_msg343">
+        <source xml:space="preserve">Enter a custom DNS server IP address, for example &apos;8.8.8.8&apos;</source>
+        <target xml:space="preserve"></target>
+        <context-group purpose="location"><context context-type="linenumber">359</context></context-group>
       </trans-unit>
       <trans-unit id="_msg344" approved="yes">
-        <source xml:space="preserve">Start full-screen</source>
-        <target xml:space="preserve">Démarrer en plein écran</target>
-        <context-group purpose="location"><context context-type="linenumber">401</context></context-group>
+        <source xml:space="preserve">Download location</source>
+        <target xml:space="preserve">Emplacement des téléchargements</target>
+        <context-group purpose="location"><context context-type="linenumber">367</context></context-group>
       </trans-unit>
       <trans-unit id="_msg345" approved="yes">
-        <source xml:space="preserve">Start the simulator in full-screen mode.</source>
-        <target xml:space="preserve">Démarre le simulateur en mode plein écran.</target>
-        <context-group purpose="location"><context context-type="linenumber">402</context></context-group>
+        <source xml:space="preserve">FlightGear stores downloaded files (scenery and aircraft) in this location. Depending on your settings, it may grow to a considerable size (many gigabytes). If you change the download location, files will need to be downloaded again. When changing this setting, FlightGear will restart to use the new location correctly.</source>
+        <target xml:space="preserve">FlightGear stocke les fichiers téléchargés (scènes et aéronefs) à cet endroit. En fonction de vos paramètres, il peut atteindre une taille considérable (plusieurs gigaoctets). Si vous changez l&apos;emplacement de téléchargement, les fichiers devront être téléchargés à nouveau. Lorsque vous modifiez ce paramètre, FlightGear redémarrera pour utiliser correctement le nouvel emplacement.</target>
+        <context-group purpose="location"><context context-type="linenumber">368</context></context-group>
       </trans-unit>
       <trans-unit id="_msg346" approved="yes">
-        <source xml:space="preserve">Window size</source>
-        <target xml:space="preserve">Taille de la fenêtre</target>
-        <context-group purpose="location"><context context-type="linenumber">410</context></context-group>
+        <source xml:space="preserve">Choose a location to store download files.</source>
+        <target xml:space="preserve">Choisissez un emplacement pour stocker les fichiers téléchargés.</target>
+        <context-group purpose="location"><context context-type="linenumber">375</context></context-group>
       </trans-unit>
       <trans-unit id="_msg347" approved="yes">
-        <source xml:space="preserve">Select the initial size of the window (this has no effect in full-screen mode).</source>
-        <target xml:space="preserve">Sélectionnez la taille initiale de la fenêtre (cela n&apos;a aucun effet en mode plein écran).</target>
-        <context-group purpose="location"><context context-type="linenumber">411</context></context-group>
+        <source xml:space="preserve">View &amp; Window</source>
+        <target xml:space="preserve">Vue et fenêtre</target>
+        <context-group purpose="location"><context context-type="linenumber">417</context></context-group>
       </trans-unit>
       <trans-unit id="_msg348" approved="yes">
-        <source xml:space="preserve">Custom Size</source>
-        <target xml:space="preserve">Taille personnalisée</target>
-        <context-group purpose="location"><context context-type="linenumber">413</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg349" approved="yes">
-        <source xml:space="preserve">Custom size</source>
-        <target xml:space="preserve">Taille personnalisée</target>
+        <source xml:space="preserve">full-screen</source>
+        <target xml:space="preserve">plein écran</target>
         <context-group purpose="location"><context context-type="linenumber">424</context></context-group>
       </trans-unit>
+      <trans-unit id="_msg349" approved="yes">
+        <source xml:space="preserve">Start full-screen</source>
+        <target xml:space="preserve">Démarrer en plein écran</target>
+        <context-group purpose="location"><context context-type="linenumber">431</context></context-group>
+      </trans-unit>
       <trans-unit id="_msg350" approved="yes">
-        <source xml:space="preserve">Enter a custom window size in the form &apos;WWWWW x HHHHH&apos;, for example &apos;1280 x 900&apos;</source>
-        <target xml:space="preserve">Entrez une taille de fenêtre personnalisée sous la forme « WWWWW x HHHHH », par exemple « 1280 x 900 »</target>
-        <context-group purpose="location"><context context-type="linenumber">426</context></context-group>
+        <source xml:space="preserve">Start the simulator in full-screen mode.</source>
+        <target xml:space="preserve">Démarre le simulateur en mode plein écran.</target>
+        <context-group purpose="location"><context context-type="linenumber">432</context></context-group>
       </trans-unit>
       <trans-unit id="_msg351" approved="yes">
-        <source xml:space="preserve">Rendering</source>
-        <target xml:space="preserve">Rendu</target>
-        <context-group purpose="location"><context context-type="linenumber">446</context></context-group>
+        <source xml:space="preserve">Window size</source>
+        <target xml:space="preserve">Taille de la fenêtre</target>
+        <context-group purpose="location"><context context-type="linenumber">440</context></context-group>
       </trans-unit>
       <trans-unit id="_msg352" approved="yes">
-        <source xml:space="preserve">ALS</source>
-        <target xml:space="preserve">ALS</target>
-        <context-group purpose="location"><context context-type="linenumber">458</context></context-group>
+        <source xml:space="preserve">Select the initial size of the window (this has no effect in full-screen mode).</source>
+        <target xml:space="preserve">Sélectionnez la taille initiale de la fenêtre (cela n&apos;a aucun effet en mode plein écran).</target>
+        <context-group purpose="location"><context context-type="linenumber">441</context></context-group>
       </trans-unit>
       <trans-unit id="_msg353" approved="yes">
-        <source xml:space="preserve">anti-aliasing</source>
-        <target xml:space="preserve">anti-crénelage</target>
-        <context-group purpose="location"><context context-type="linenumber">459</context></context-group>
+        <source xml:space="preserve">Custom Size</source>
+        <target xml:space="preserve">Taille personnalisée</target>
+        <context-group purpose="location"><context context-type="linenumber">443</context></context-group>
       </trans-unit>
       <trans-unit id="_msg354" approved="yes">
-        <source xml:space="preserve">Low-spec</source>
-        <target xml:space="preserve">Le moins exigeant</target>
-        <context-group purpose="location"><context context-type="linenumber">469</context></context-group>
-        <note from="translator">Ce qualificatif s&apos;applique à « Moteur de rendu » (pour le “compositor” de FG).</note>
+        <source xml:space="preserve">Custom size</source>
+        <target xml:space="preserve">Taille personnalisée</target>
+        <context-group purpose="location"><context context-type="linenumber">454</context></context-group>
       </trans-unit>
       <trans-unit id="_msg355" approved="yes">
-        <source xml:space="preserve">The low-spec renderer ensures maximum performance on older computers.</source>
-        <target xml:space="preserve">Le moteur de rendu le moins exigeant assure des performances maximales sur les anciens ordinateurs.</target>
-        <context-group purpose="location"><context context-type="linenumber">477</context></context-group>
+        <source xml:space="preserve">Enter a custom window size in the form &apos;WWWWW x HHHHH&apos;, for example &apos;1280 x 900&apos;</source>
+        <target xml:space="preserve">Entrez une taille de fenêtre personnalisée sous la forme « WWWWW x HHHHH », par exemple « 1280 x 900 »</target>
+        <context-group purpose="location"><context context-type="linenumber">456</context></context-group>
       </trans-unit>
       <trans-unit id="_msg356" approved="yes">
-        <source xml:space="preserve">Renderer</source>
-        <target xml:space="preserve">Moteur de rendu</target>
-        <context-group purpose="location"><context context-type="linenumber">486</context></context-group>
+        <source xml:space="preserve">Rendering</source>
+        <target xml:space="preserve">Rendu</target>
+        <context-group purpose="location"><context context-type="linenumber">476</context></context-group>
       </trans-unit>
       <trans-unit id="_msg357" approved="yes">
-        <source xml:space="preserve">Default</source>
-        <target xml:space="preserve">Défaut</target>
-        <context-group purpose="location"><context context-type="linenumber">463</context></context-group>
-        <context-group purpose="location"><context context-type="linenumber">467</context></context-group>
+        <source xml:space="preserve">ALS</source>
+        <target xml:space="preserve">ALS</target>
+        <context-group purpose="location"><context context-type="linenumber">488</context></context-group>
       </trans-unit>
       <trans-unit id="_msg358" approved="yes">
-        <source xml:space="preserve">Atmospheric Light Scattering</source>
-        <target xml:space="preserve">Diffusion de la lumière à travers l&apos;atmosphère</target>
-        <context-group purpose="location"><context context-type="linenumber">464</context></context-group>
-        <context-group purpose="location"><context context-type="linenumber">468</context></context-group>
+        <source xml:space="preserve">anti-aliasing</source>
+        <target xml:space="preserve">anti-crénelage</target>
+        <context-group purpose="location"><context context-type="linenumber">489</context></context-group>
       </trans-unit>
       <trans-unit id="_msg359" approved="yes">
-        <source xml:space="preserve">Rembrandt</source>
-        <target xml:space="preserve">Rembrandt</target>
-        <context-group purpose="location"><context context-type="linenumber">457</context></context-group>
-        <context-group purpose="location"><context context-type="linenumber">465</context></context-group>
+        <source xml:space="preserve">Low-spec</source>
+        <target xml:space="preserve">Le moins exigeant</target>
+        <context-group purpose="location"><context context-type="linenumber">499</context></context-group>
+        <note from="translator">Ce qualificatif s&apos;applique à « Moteur de rendu » (pour le “compositor” de FG).</note>
       </trans-unit>
       <trans-unit id="_msg360" approved="yes">
-        <source xml:space="preserve">The default renderer provides standard visuals with maximum compatibility.</source>
-        <target xml:space="preserve">Le moteur de rendu par défaut fournit des graphismes standard avec une compatibilité maximale.</target>
-        <context-group purpose="location"><context context-type="linenumber">471</context></context-group>
+        <source xml:space="preserve">The low-spec renderer ensures maximum performance on older computers.</source>
+        <target xml:space="preserve">Le moteur de rendu le moins exigeant assure des performances maximales sur les anciens ordinateurs.</target>
+        <context-group purpose="location"><context context-type="linenumber">507</context></context-group>
       </trans-unit>
       <trans-unit id="_msg361" approved="yes">
-        <source xml:space="preserve">The ALS renderer uses a sophisticated physical atmospheric model and several other effects to give realistic rendering of large distances.</source>
-        <target xml:space="preserve">Le moteur de rendu ALS utilise un modèle physique atmosphérique sophistiqué et plusieurs autres effets pour donner un rendu réaliste des grandes distances.</target>
-        <context-group purpose="location"><context context-type="linenumber">472</context></context-group>
+        <source xml:space="preserve">Renderer</source>
+        <target xml:space="preserve">Moteur de rendu</target>
+        <context-group purpose="location"><context context-type="linenumber">516</context></context-group>
       </trans-unit>
       <trans-unit id="_msg362" approved="yes">
-        <source xml:space="preserve">Rembrandt is a configurable multi-pass renderer which supports shadow-maps, cinematic effects and more. However, not all aircraft appear correctly and performance will depend greatly on your system hardware.</source>
-        <target xml:space="preserve">Rembrandt est un moteur de rendu multi-passe configurable qui prend en charge les cartes d&apos;ombre, les effets de cinématique et bien plus encore. Cependant, tous les avions n&apos;apparaissent pas correctement et les performances dépendront en grande partie du matériel présent sur votre système.</target>
-        <context-group purpose="location"><context context-type="linenumber">474</context></context-group>
+        <source xml:space="preserve">Default</source>
+        <target xml:space="preserve">Défaut</target>
+        <context-group purpose="location"><context context-type="linenumber">346</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">493</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">497</context></context-group>
       </trans-unit>
       <trans-unit id="_msg363" approved="yes">
-        <source xml:space="preserve">Anti-aliasing</source>
-        <target xml:space="preserve">Anti-crénelage</target>
+        <source xml:space="preserve">Atmospheric Light Scattering</source>
+        <target xml:space="preserve">Diffusion de la lumière à travers l&apos;atmosphère</target>
+        <context-group purpose="location"><context context-type="linenumber">494</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">498</context></context-group>
       </trans-unit>
       <trans-unit id="_msg364" approved="yes">
-        <source xml:space="preserve">Anti-aliasing is disabled when Rembrandt is enabled.</source>
-        <target xml:space="preserve">L&apos;anti-crénelage est désactivé lorsque Rembrandt est activé.</target>
-        <context-group purpose="location"><context context-type="linenumber">500</context></context-group>
+        <source xml:space="preserve">Rembrandt</source>
+        <target xml:space="preserve">Rembrandt</target>
+        <context-group purpose="location"><context context-type="linenumber">487</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">495</context></context-group>
       </trans-unit>
       <trans-unit id="_msg365" approved="yes">
-        <source xml:space="preserve">Anti-aliasing improves the appearance of high-contrast edges and lines. This is especially noticeable on sloping or diagonal edges. Higher settings can reduce performance.</source>
-        <target xml:space="preserve">L&apos;anti-crénelage améliore l&apos;apparence des bords et des lignes à fort contraste. Cela est particulièrement visible sur les bords inclinés ou diagonaux. Des réglages plus élevés peuvent réduire les performances.</target>
+        <source xml:space="preserve">The default renderer provides standard visuals with maximum compatibility.</source>
+        <target xml:space="preserve">Le moteur de rendu par défaut fournit des graphismes standard avec une compatibilité maximale.</target>
         <context-group purpose="location"><context context-type="linenumber">501</context></context-group>
       </trans-unit>
       <trans-unit id="_msg366" approved="yes">
-        <source xml:space="preserve">Off</source>
-        <target xml:space="preserve">Désactivé</target>
-        <context-group purpose="location"><context context-type="linenumber">506</context></context-group>
+        <source xml:space="preserve">The ALS renderer uses a sophisticated physical atmospheric model and several other effects to give realistic rendering of large distances.</source>
+        <target xml:space="preserve">Le moteur de rendu ALS utilise un modèle physique atmosphérique sophistiqué et plusieurs autres effets pour donner un rendu réaliste des grandes distances.</target>
+        <context-group purpose="location"><context context-type="linenumber">502</context></context-group>
       </trans-unit>
       <trans-unit id="_msg367" approved="yes">
-        <source xml:space="preserve">Cache graphics for faster loading</source>
-        <target xml:space="preserve">Mise en cache des images pour un chargement plus rapide</target>
-        <context-group purpose="location"><context context-type="linenumber">519</context></context-group>
+        <source xml:space="preserve">Rembrandt is a configurable multi-pass renderer which supports shadow-maps, cinematic effects and more. However, not all aircraft appear correctly and performance will depend greatly on your system hardware.</source>
+        <target xml:space="preserve">Rembrandt est un moteur de rendu multi-passe configurable qui prend en charge les cartes d&apos;ombre, les effets de cinématique et bien plus encore. Cependant, tous les avions n&apos;apparaissent pas correctement et les performances dépendront en grande partie du matériel présent sur votre système.</target>
+        <context-group purpose="location"><context context-type="linenumber">504</context></context-group>
       </trans-unit>
       <trans-unit id="_msg368" approved="yes">
-        <source xml:space="preserve">By converting images used in rendering to an optimised format loading times and memory use can be improved. This will consume some disk space and take initial time while images are converted, but subsequent loads will be faster, and use less memory.</source>
-        <target xml:space="preserve">En convertissant les images utilisées pour le rendu en un format optimisé, les temps de chargement et l&apos;utilisation de la mémoire peuvent être améliorés. Cela consommera un peu d&apos;espace disque et prendra du temps au départ pendant la conversion des images, mais les chargements ultérieurs seront plus rapides et utiliseront moins de mémoire.</target>
-        <context-group purpose="location"><context context-type="linenumber">520</context></context-group>
+        <source xml:space="preserve">Anti-aliasing</source>
+        <target xml:space="preserve">Anti-crénelage</target>
+        <context-group purpose="location"><context context-type="linenumber">528</context></context-group>
       </trans-unit>
       <trans-unit id="_msg369" approved="yes">
+        <source xml:space="preserve">Anti-aliasing is disabled when Rembrandt is enabled.</source>
+        <target xml:space="preserve">L&apos;anti-crénelage est désactivé lorsque Rembrandt est activé.</target>
+        <context-group purpose="location"><context context-type="linenumber">530</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg370" approved="yes">
+        <source xml:space="preserve">Anti-aliasing improves the appearance of high-contrast edges and lines. This is especially noticeable on sloping or diagonal edges. Higher settings can reduce performance.</source>
+        <target xml:space="preserve">L&apos;anti-crénelage améliore l&apos;apparence des bords et des lignes à fort contraste. Cela est particulièrement visible sur les bords inclinés ou diagonaux. Des réglages plus élevés peuvent réduire les performances.</target>
+        <context-group purpose="location"><context context-type="linenumber">531</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg371" approved="yes">
+        <source xml:space="preserve">Off</source>
+        <target xml:space="preserve">Désactivé</target>
+        <context-group purpose="location"><context context-type="linenumber">536</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg372" approved="yes">
+        <source xml:space="preserve">Cache graphics for faster loading</source>
+        <target xml:space="preserve">Mise en cache des images pour un chargement plus rapide</target>
+        <context-group purpose="location"><context context-type="linenumber">549</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg373" approved="yes">
+        <source xml:space="preserve">By converting images used in rendering to an optimised format loading times and memory use can be improved. This will consume some disk space and take initial time while images are converted, but subsequent loads will be faster, and use less memory.</source>
+        <target xml:space="preserve">En convertissant les images utilisées pour le rendu en un format optimisé, les temps de chargement et l&apos;utilisation de la mémoire peuvent être améliorés. Cela consommera un peu d&apos;espace disque et prendra du temps au départ pendant la conversion des images, mais les chargements ultérieurs seront plus rapides et utiliseront moins de mémoire.</target>
+        <context-group purpose="location"><context context-type="linenumber">550</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg374" approved="yes">
         <source xml:space="preserve">Additional Settings</source>
         <target xml:space="preserve">Paramètres supplémentaires</target>
-        <context-group purpose="location"><context context-type="linenumber">553</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">583</context></context-group>
       </trans-unit>
     </group>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/UpdateAllPanel.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="UpdateAllPanel">
-      <trans-unit id="_msg370" approved="yes">
+      <trans-unit id="_msg375" approved="yes">
         <source xml:space="preserve">%1 aircraft have updates available - download and install them now?</source>
         <target xml:space="preserve">%1 aéronefs ont des mises à jour disponibles - les télécharger et les installer maintenant ?</target>
         <context-group purpose="location"><context context-type="linenumber">18</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg371" approved="yes">
+      <trans-unit id="_msg376" approved="yes">
         <source xml:space="preserve">Update all</source>
         <target xml:space="preserve">Tout mettre à jour</target>
         <context-group purpose="location"><context context-type="linenumber">25</context></context-group>
@@ -2070,53 +2101,53 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/AircraftModel.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftItemModel">
-      <trans-unit id="_msg372" approved="yes">
+      <trans-unit id="_msg377" approved="yes">
         <source xml:space="preserve">Missing description for: %1</source>
         <target xml:space="preserve">Description manquante pour : %1</target>
-        <context-group purpose="location"><context context-type="linenumber">303</context></context-group>
-        <context-group purpose="location"><context context-type="linenumber">352</context></context-group>
-        <context-group purpose="location"><context context-type="linenumber">360</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg373" approved="yes">
-        <source xml:space="preserve">Invalid package checksum</source>
-        <target xml:space="preserve">Somme de contrôle du paquet non valide</target>
-        <context-group purpose="location"><context context-type="linenumber">651</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg374" approved="yes">
-        <source xml:space="preserve">Download failed</source>
-        <target xml:space="preserve">Échec du téléchargement</target>
-        <context-group purpose="location"><context context-type="linenumber">653</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg375" approved="yes">
-        <source xml:space="preserve">Package could not be extracted</source>
-        <target xml:space="preserve">Le paquet n&apos;a pu être extrait</target>
-        <context-group purpose="location"><context context-type="linenumber">655</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg376" approved="yes">
-        <source xml:space="preserve">A local file-system error occurred</source>
-        <target xml:space="preserve">Une erreur du système de fichiers local s&apos;est produite</target>
-        <context-group purpose="location"><context context-type="linenumber">657</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg377" approved="yes">
-        <source xml:space="preserve">Package file missing from download server</source>
-        <target xml:space="preserve">Fichier de paquet manquant sur le serveur de téléchargement</target>
-        <context-group purpose="location"><context context-type="linenumber">659</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">308</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">357</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">365</context></context-group>
       </trans-unit>
       <trans-unit id="_msg378" approved="yes">
+        <source xml:space="preserve">Invalid package checksum</source>
+        <target xml:space="preserve">Somme de contrôle du paquet non valide</target>
+        <context-group purpose="location"><context context-type="linenumber">656</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg379" approved="yes">
+        <source xml:space="preserve">Download failed</source>
+        <target xml:space="preserve">Échec du téléchargement</target>
+        <context-group purpose="location"><context context-type="linenumber">658</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg380" approved="yes">
+        <source xml:space="preserve">Package could not be extracted</source>
+        <target xml:space="preserve">Le paquet n&apos;a pu être extrait</target>
+        <context-group purpose="location"><context context-type="linenumber">660</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg381" approved="yes">
+        <source xml:space="preserve">A local file-system error occurred</source>
+        <target xml:space="preserve">Une erreur du système de fichiers local s&apos;est produite</target>
+        <context-group purpose="location"><context context-type="linenumber">662</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg382" approved="yes">
+        <source xml:space="preserve">Package file missing from download server</source>
+        <target xml:space="preserve">Fichier de paquet manquant sur le serveur de téléchargement</target>
+        <context-group purpose="location"><context context-type="linenumber">664</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg383" approved="yes">
         <source xml:space="preserve">Unknown reason</source>
         <target xml:space="preserve">Raison inconnue</target>
-        <context-group purpose="location"><context context-type="linenumber">662</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">667</context></context-group>
       </trans-unit>
     </group>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/AircraftSearchFilterModel.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftProxyModel">
-      <trans-unit id="_msg379" approved="yes">
+      <trans-unit id="_msg384" approved="yes">
         <source xml:space="preserve">(%1 of %2 aircraft)</source>
         <target xml:space="preserve">(%1 of %2 aéronef)</target>
         <context-group purpose="location"><context context-type="linenumber">90</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg380" approved="yes">
+      <trans-unit id="_msg385" approved="yes">
         <source xml:space="preserve">(%1 aircraft)</source>
         <target xml:space="preserve">(%1 aéronef)</target>
         <context-group purpose="location"><context context-type="linenumber">93</context></context-group>
@@ -2125,12 +2156,12 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/CatalogListModel.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="CatalogListModel">
-      <trans-unit id="_msg381" approved="yes">
+      <trans-unit id="_msg386" approved="yes">
         <source xml:space="preserve">The catalog data was not found on the server at the expected location (URL)</source>
         <target xml:space="preserve">Les données du catalogue n&apos;ont pas été trouvées sur le serveur à l&apos;endroit prévu (URL)</target>
         <context-group purpose="location"><context context-type="linenumber">112</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg382" approved="yes">
+      <trans-unit id="_msg387" approved="yes">
         <source xml:space="preserve">The catalog is not compatible with the version of FlightGear</source>
         <alt-trans>
           <source xml:space="preserve">The catalog is not comaptible with the version of FlightGear</source>
@@ -2138,17 +2169,17 @@ Chemin local : %2</target>
         </alt-trans>
         <context-group purpose="location"><context context-type="linenumber">115</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg383" approved="yes">
+      <trans-unit id="_msg388" approved="yes">
         <source xml:space="preserve">The catalog server is blocking access from some reason (forbidden)</source>
         <target xml:space="preserve">Le serveur du catalogue bloque l&apos;accès pour une raison quelconque (interdit)</target>
         <context-group purpose="location"><context context-type="linenumber">118</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg384" approved="yes">
+      <trans-unit id="_msg389" approved="yes">
         <source xml:space="preserve">disabled due to an internal error</source>
         <target xml:space="preserve">désactivé en raison d&apos;une erreur interne</target>
         <context-group purpose="location"><context context-type="linenumber">121</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg385" approved="yes">
+      <trans-unit id="_msg390" approved="yes">
         <source xml:space="preserve">%1 - %2</source>
         <target xml:space="preserve">%1 - %2</target>
         <context-group purpose="location"><context context-type="linenumber">124</context></context-group>
@@ -2157,26 +2188,26 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/LaunchConfig.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="LaunchConfig">
-      <trans-unit id="_msg386" approved="yes">
+      <trans-unit id="_msg391" approved="yes">
         <source xml:space="preserve">&lt;p&gt;Options passed on the command line:&lt;/p&gt;
 </source>
         <target xml:space="preserve">&lt;p&gt;Options passées à la ligne de commande :&lt;/p&gt;
 </target>
         <context-group purpose="location"><context context-type="linenumber">128</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg387" approved="yes">
+      <trans-unit id="_msg392" approved="yes">
         <source xml:space="preserve">&lt;p&gt;Options set in the launcher:&lt;/p&gt;
 </source>
         <target xml:space="preserve">&lt;p&gt;Options définies dans le lanceur :&lt;/p&gt;
 </target>
         <context-group purpose="location"><context context-type="linenumber">141</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg388" approved="yes">
+      <trans-unit id="_msg393" approved="yes">
         <source xml:space="preserve"> (will be skipped due to being specified as an additional argument)</source>
         <target xml:space="preserve"> (sera ignoré car spécifié comme un argument supplémentaire)</target>
         <context-group purpose="location"><context context-type="linenumber">158</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg389" approved="yes">
+      <trans-unit id="_msg394" approved="yes">
         <source xml:space="preserve">&lt;p&gt;Options set as additional arguments:&lt;/p&gt;
 </source>
         <target xml:space="preserve">&lt;p&gt;Options définies comme arguments supplémentaires :&lt;/p&gt;
@@ -2187,248 +2218,248 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/LauncherController.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="LauncherController">
-      <trans-unit id="_msg390" approved="yes">
+      <trans-unit id="_msg395" approved="yes">
         <source xml:space="preserve">Create download folder?</source>
         <target xml:space="preserve">Créer un dossier de téléchargement ?</target>
-        <context-group purpose="location"><context context-type="linenumber">361</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg391" approved="yes">
-        <source xml:space="preserve">The selected location for downloads does not exist. (%1) Create it?</source>
-        <target xml:space="preserve">L&apos;emplacement sélectionné pour les téléchargements n&apos;existe pas. (%1) Le créer ?</target>
-        <context-group purpose="location"><context context-type="linenumber">362</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg392" approved="yes">
-        <source xml:space="preserve">Aircraft installation failed</source>
-        <target xml:space="preserve">L&apos;installation de l&apos;aéronef a échoué</target>
-        <context-group purpose="location"><context context-type="linenumber">788</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg393" approved="yes">
-        <source xml:space="preserve">An error occurred installing the aircraft %1: %2</source>
-        <target xml:space="preserve">Une erreur s&apos;est produite lors de l&apos;installation de l&apos;aéronef %1 : %2</target>
-        <context-group purpose="location"><context context-type="linenumber">789</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg394" approved="yes">
-        <source xml:space="preserve">Restore all settings to defaults?</source>
-        <target xml:space="preserve">Rétablir tous les paramètres par défaut ?</target>
-        <context-group purpose="location"><context context-type="linenumber">808</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg395" approved="yes">
-        <source xml:space="preserve">Restoring settings to their defaults may affect available add-ons such as scenery or aircraft.</source>
-        <target xml:space="preserve">La restauration des paramètres par défaut peut affecter les modules complémentaires disponibles tels que les scènes ou les aéronefs.</target>
-        <context-group purpose="location"><context context-type="linenumber">809</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">363</context></context-group>
       </trans-unit>
       <trans-unit id="_msg396" approved="yes">
-        <source xml:space="preserve">Restore and restart now</source>
-        <target xml:space="preserve">Restaurer et redémarrer maintenant</target>
-        <context-group purpose="location"><context context-type="linenumber">810</context></context-group>
+        <source xml:space="preserve">The selected location for downloads does not exist. (%1) Create it?</source>
+        <target xml:space="preserve">L&apos;emplacement sélectionné pour les téléchargements n&apos;existe pas. (%1) Le créer ?</target>
+        <context-group purpose="location"><context context-type="linenumber">364</context></context-group>
       </trans-unit>
       <trans-unit id="_msg397" approved="yes">
-        <source xml:space="preserve">Currently the built-in data files are being used</source>
-        <target xml:space="preserve">Actuellement, les fichiers de données intégrés sont utilisés</target>
-        <context-group purpose="location"><context context-type="linenumber">835</context></context-group>
+        <source xml:space="preserve">Aircraft installation failed</source>
+        <target xml:space="preserve">L&apos;installation de l&apos;aéronef a échoué</target>
+        <context-group purpose="location"><context context-type="linenumber">790</context></context-group>
       </trans-unit>
       <trans-unit id="_msg398" approved="yes">
-        <source xml:space="preserve">Currently using location: %1</source>
-        <target xml:space="preserve">Utilise actuellement l&apos;emplacement : %1</target>
-        <context-group purpose="location"><context context-type="linenumber">838</context></context-group>
+        <source xml:space="preserve">An error occurred installing the aircraft %1: %2</source>
+        <target xml:space="preserve">Une erreur s&apos;est produite lors de l&apos;installation de l&apos;aéronef %1 : %2</target>
+        <context-group purpose="location"><context context-type="linenumber">791</context></context-group>
       </trans-unit>
       <trans-unit id="_msg399" approved="yes">
-        <source xml:space="preserve">Change the data files used by FlightGear?</source>
-        <target xml:space="preserve">Modifier les fichiers de données utilisés par FlightGear ?</target>
-        <context-group purpose="location"><context context-type="linenumber">842</context></context-group>
+        <source xml:space="preserve">Restore all settings to defaults?</source>
+        <target xml:space="preserve">Rétablir tous les paramètres par défaut ?</target>
+        <context-group purpose="location"><context context-type="linenumber">810</context></context-group>
       </trans-unit>
       <trans-unit id="_msg400" approved="yes">
-        <source xml:space="preserve">FlightGear requires additional files to operate. (Also called the base package, or fg-data) You can restart FlightGear and choose a different data files location, or restore the default setting. %1</source>
-        <target xml:space="preserve">FlightGear a besoin de fichiers supplémentaires pour fonctionner (aussi appelé le paquet de base ou fg-data). Vous pouvez redémarrer FlightGear et choisir un emplacement différent pour les fichiers de données, ou rétablir le réglage par défaut. %1</target>
-        <context-group purpose="location"><context context-type="linenumber">843</context></context-group>
+        <source xml:space="preserve">Restoring settings to their defaults may affect available add-ons such as scenery or aircraft.</source>
+        <target xml:space="preserve">La restauration des paramètres par défaut peut affecter les modules complémentaires disponibles tels que les scènes ou les aéronefs.</target>
+        <context-group purpose="location"><context context-type="linenumber">811</context></context-group>
       </trans-unit>
       <trans-unit id="_msg401" approved="yes">
-        <source xml:space="preserve">Restart FlightGear now</source>
-        <target xml:space="preserve">Redémarrer FlightGear maintenant</target>
-        <context-group purpose="location"><context context-type="linenumber">847</context></context-group>
+        <source xml:space="preserve">Restore and restart now</source>
+        <target xml:space="preserve">Restaurer et redémarrer maintenant</target>
+        <context-group purpose="location"><context context-type="linenumber">812</context></context-group>
       </trans-unit>
       <trans-unit id="_msg402" approved="yes">
-        <source xml:space="preserve">Choose a saved configuration</source>
-        <target xml:space="preserve">Choisir une configuration sauvegardée</target>
-        <context-group purpose="location"><context context-type="linenumber">863</context></context-group>
+        <source xml:space="preserve">Currently the built-in data files are being used</source>
+        <target xml:space="preserve">Actuellement, les fichiers de données intégrés sont utilisés</target>
+        <context-group purpose="location"><context context-type="linenumber">837</context></context-group>
       </trans-unit>
       <trans-unit id="_msg403" approved="yes">
-        <source xml:space="preserve">Save the current configuration</source>
-        <target xml:space="preserve">Sauvegarder la configuration actuelle</target>
-        <context-group purpose="location"><context context-type="linenumber">873</context></context-group>
+        <source xml:space="preserve">Currently using location: %1</source>
+        <target xml:space="preserve">Utilise actuellement l&apos;emplacement : %1</target>
+        <context-group purpose="location"><context context-type="linenumber">840</context></context-group>
       </trans-unit>
       <trans-unit id="_msg404" approved="yes">
-        <source xml:space="preserve">Fly!</source>
-        <target xml:space="preserve">Voler !</target>
-        <context-group purpose="location"><context context-type="linenumber">932</context></context-group>
-        <context-group><context context-type="x-gettext-msgctxt">For a helicopter</context></context-group>
+        <source xml:space="preserve">Change the data files used by FlightGear?</source>
+        <target xml:space="preserve">Modifier les fichiers de données utilisés par FlightGear ?</target>
+        <context-group purpose="location"><context context-type="linenumber">844</context></context-group>
       </trans-unit>
       <trans-unit id="_msg405" approved="yes">
-        <source xml:space="preserve">Fly!</source>
-        <target xml:space="preserve">Voler !</target>
-        <context-group purpose="location"><context context-type="linenumber">935</context></context-group>
-        <context-group><context context-type="x-gettext-msgctxt">For a spaceship</context></context-group>
+        <source xml:space="preserve">FlightGear requires additional files to operate. (Also called the base package, or fg-data) You can restart FlightGear and choose a different data files location, or restore the default setting. %1</source>
+        <target xml:space="preserve">FlightGear a besoin de fichiers supplémentaires pour fonctionner (aussi appelé le paquet de base ou fg-data). Vous pouvez redémarrer FlightGear et choisir un emplacement différent pour les fichiers de données, ou rétablir le réglage par défaut. %1</target>
+        <context-group purpose="location"><context context-type="linenumber">845</context></context-group>
       </trans-unit>
       <trans-unit id="_msg406" approved="yes">
+        <source xml:space="preserve">Restart FlightGear now</source>
+        <target xml:space="preserve">Redémarrer FlightGear maintenant</target>
+        <context-group purpose="location"><context context-type="linenumber">849</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg407" approved="yes">
+        <source xml:space="preserve">Choose a saved configuration</source>
+        <target xml:space="preserve">Choisir une configuration sauvegardée</target>
+        <context-group purpose="location"><context context-type="linenumber">865</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg408" approved="yes">
+        <source xml:space="preserve">Save the current configuration</source>
+        <target xml:space="preserve">Sauvegarder la configuration actuelle</target>
+        <context-group purpose="location"><context context-type="linenumber">875</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg409" approved="yes">
         <source xml:space="preserve">Fly!</source>
         <target xml:space="preserve">Voler !</target>
-        <context-group purpose="location"><context context-type="linenumber">939</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">934</context></context-group>
+        <context-group><context context-type="x-gettext-msgctxt">For a helicopter</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg410" approved="yes">
+        <source xml:space="preserve">Fly!</source>
+        <target xml:space="preserve">Voler !</target>
+        <context-group purpose="location"><context context-type="linenumber">937</context></context-group>
+        <context-group><context context-type="x-gettext-msgctxt">For a spaceship</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg411" approved="yes">
+        <source xml:space="preserve">Fly!</source>
+        <target xml:space="preserve">Voler !</target>
+        <context-group purpose="location"><context context-type="linenumber">941</context></context-group>
       </trans-unit>
     </group>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/LocationController.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationController">
-      <trans-unit id="_msg407" approved="yes">
+      <trans-unit id="_msg412" approved="yes">
         <source xml:space="preserve">N</source>
         <target xml:space="preserve">N</target>
-        <context-group purpose="location"><context context-type="linenumber">1076</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg408" approved="yes">
-        <source xml:space="preserve">NE</source>
-        <target xml:space="preserve">NE</target>
-        <context-group purpose="location"><context context-type="linenumber">1077</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg409" approved="yes">
-        <source xml:space="preserve">E</source>
-        <target xml:space="preserve">E</target>
-        <context-group purpose="location"><context context-type="linenumber">1078</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg410" approved="yes">
-        <source xml:space="preserve">SE</source>
-        <target xml:space="preserve">SE</target>
-        <context-group purpose="location"><context context-type="linenumber">1079</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg411" approved="yes">
-        <source xml:space="preserve">S</source>
-        <target xml:space="preserve">S</target>
-        <context-group purpose="location"><context context-type="linenumber">1080</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg412" approved="yes">
-        <source xml:space="preserve">SW</source>
-        <target xml:space="preserve">SO</target>
-        <context-group purpose="location"><context context-type="linenumber">1081</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">1113</context></context-group>
       </trans-unit>
       <trans-unit id="_msg413" approved="yes">
-        <source xml:space="preserve">W</source>
-        <target xml:space="preserve">O</target>
-        <context-group purpose="location"><context context-type="linenumber">1082</context></context-group>
+        <source xml:space="preserve">NE</source>
+        <target xml:space="preserve">NE</target>
+        <context-group purpose="location"><context context-type="linenumber">1114</context></context-group>
       </trans-unit>
       <trans-unit id="_msg414" approved="yes">
-        <source xml:space="preserve">NW</source>
-        <target xml:space="preserve">NO</target>
-        <context-group purpose="location"><context context-type="linenumber">1083</context></context-group>
+        <source xml:space="preserve">E</source>
+        <target xml:space="preserve">E</target>
+        <context-group purpose="location"><context context-type="linenumber">1115</context></context-group>
       </trans-unit>
       <trans-unit id="_msg415" approved="yes">
-        <source xml:space="preserve">at position %1</source>
-        <target xml:space="preserve">à la position %1</target>
-        <context-group purpose="location"><context context-type="linenumber">1098</context></context-group>
+        <source xml:space="preserve">SE</source>
+        <target xml:space="preserve">SE</target>
+        <context-group purpose="location"><context context-type="linenumber">1116</context></context-group>
       </trans-unit>
       <trans-unit id="_msg416" approved="yes">
-        <source xml:space="preserve">%1nm abeam</source>
-        <target xml:space="preserve">%1 nm en vent arrière</target>
-        <context-group purpose="location"><context context-type="linenumber">1105</context></context-group>
+        <source xml:space="preserve">S</source>
+        <target xml:space="preserve">S</target>
+        <context-group purpose="location"><context context-type="linenumber">1117</context></context-group>
       </trans-unit>
       <trans-unit id="_msg417" approved="yes">
-        <source xml:space="preserve">on %1nm final to</source>
-        <target xml:space="preserve">sur %1 nm en finale de</target>
-        <context-group purpose="location"><context context-type="linenumber">1107</context></context-group>
+        <source xml:space="preserve">SW</source>
+        <target xml:space="preserve">SO</target>
+        <context-group purpose="location"><context context-type="linenumber">1118</context></context-group>
       </trans-unit>
       <trans-unit id="_msg418" approved="yes">
-        <source xml:space="preserve">on deck at %1 on</source>
-        <target xml:space="preserve">sur le pont d&apos;envol a %1 de</target>
-        <context-group purpose="location"><context context-type="linenumber">1109</context></context-group>
+        <source xml:space="preserve">W</source>
+        <target xml:space="preserve">O</target>
+        <context-group purpose="location"><context context-type="linenumber">1119</context></context-group>
       </trans-unit>
       <trans-unit id="_msg419" approved="yes">
-        <source xml:space="preserve">%1 carrier %2 (%3)</source>
-        <target xml:space="preserve">%1 porte-avions %2 (%3)</target>
-        <context-group purpose="location"><context context-type="linenumber">1111</context></context-group>
+        <source xml:space="preserve">NW</source>
+        <target xml:space="preserve">NO</target>
+        <context-group purpose="location"><context context-type="linenumber">1120</context></context-group>
       </trans-unit>
       <trans-unit id="_msg420" approved="yes">
-        <source xml:space="preserve">No location selected</source>
-        <target xml:space="preserve">Aucun emplacement sélectionné</target>
-        <context-group purpose="location"><context context-type="linenumber">1114</context></context-group>
-        <context-group purpose="location"><context context-type="linenumber">1177</context></context-group>
+        <source xml:space="preserve">at position %1</source>
+        <target xml:space="preserve">à la position %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1135</context></context-group>
       </trans-unit>
       <trans-unit id="_msg421" approved="yes">
-        <source xml:space="preserve">on %1-mile final to active runway</source>
-        <target xml:space="preserve">sur %1-mile en finale de la piste active</target>
-        <context-group purpose="location"><context context-type="linenumber">1132</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg422" approved="yes">
-        <source xml:space="preserve">on active runway</source>
-        <target xml:space="preserve">sur la piste active</target>
-        <context-group purpose="location"><context context-type="linenumber">1134</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg423" approved="yes">
-        <source xml:space="preserve">at an available parking position</source>
-        <target xml:space="preserve">à une place de parking disponible</target>
-        <context-group purpose="location"><context context-type="linenumber">1137</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg424" approved="yes">
-        <source xml:space="preserve">runway %1</source>
-        <target xml:space="preserve">piste %1</target>
-        <context-group purpose="location"><context context-type="linenumber">1139</context></context-group>
-      </trans-unit>
-      <trans-unit id="_msg425" approved="yes">
-        <source xml:space="preserve">on %2-mile final to %1</source>
-        <target xml:space="preserve">sur %2-mile en finale de %1</target>
+        <source xml:space="preserve">%1nm abeam</source>
+        <target xml:space="preserve">%1 nm en vent arrière</target>
         <context-group purpose="location"><context context-type="linenumber">1142</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg426" approved="yes">
-        <source xml:space="preserve">on %1</source>
-        <target xml:space="preserve">sur %1</target>
+      <trans-unit id="_msg422" approved="yes">
+        <source xml:space="preserve">on %1nm final to</source>
+        <target xml:space="preserve">sur %1 nm en finale de</target>
         <context-group purpose="location"><context context-type="linenumber">1144</context></context-group>
       </trans-unit>
+      <trans-unit id="_msg423" approved="yes">
+        <source xml:space="preserve">on deck at %1 on</source>
+        <target xml:space="preserve">sur le pont d&apos;envol a %1 de</target>
+        <context-group purpose="location"><context context-type="linenumber">1146</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg424" approved="yes">
+        <source xml:space="preserve">%1 carrier %2 (%3)</source>
+        <target xml:space="preserve">%1 porte-avions %2 (%3)</target>
+        <context-group purpose="location"><context context-type="linenumber">1148</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg425" approved="yes">
+        <source xml:space="preserve">No location selected</source>
+        <target xml:space="preserve">Aucun emplacement sélectionné</target>
+        <context-group purpose="location"><context context-type="linenumber">1151</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">1217</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg426" approved="yes">
+        <source xml:space="preserve">on %1-mile final to active runway</source>
+        <target xml:space="preserve">sur %1-mile en finale de la piste active</target>
+        <context-group purpose="location"><context context-type="linenumber">1169</context></context-group>
+      </trans-unit>
       <trans-unit id="_msg427" approved="yes">
-        <source xml:space="preserve">on pad %1</source>
-        <target xml:space="preserve">sur hélipad %1</target>
-        <context-group purpose="location"><context context-type="linenumber">1147</context></context-group>
+        <source xml:space="preserve">on active runway</source>
+        <target xml:space="preserve">sur la piste active</target>
+        <context-group purpose="location"><context context-type="linenumber">1171</context></context-group>
       </trans-unit>
       <trans-unit id="_msg428" approved="yes">
-        <source xml:space="preserve">at parking position %1</source>
-        <target xml:space="preserve">à la position de parking %1</target>
-        <context-group purpose="location"><context context-type="linenumber">1149</context></context-group>
+        <source xml:space="preserve">at an available parking position</source>
+        <target xml:space="preserve">à une place de parking disponible</target>
+        <context-group purpose="location"><context context-type="linenumber">1174</context></context-group>
       </trans-unit>
       <trans-unit id="_msg429" approved="yes">
-        <source xml:space="preserve">%2 (%1): %3</source>
-        <target xml:space="preserve">%2 (%1) : %3</target>
-        <context-group purpose="location"><context context-type="linenumber">1152</context></context-group>
+        <source xml:space="preserve">runway %1</source>
+        <target xml:space="preserve">piste %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1176</context></context-group>
       </trans-unit>
       <trans-unit id="_msg430" approved="yes">
-        <source xml:space="preserve">at</source>
-        <target xml:space="preserve">à</target>
-        <context-group purpose="location"><context context-type="linenumber">1154</context></context-group>
+        <source xml:space="preserve">on %2-mile final to %1</source>
+        <target xml:space="preserve">sur %2-mile en finale de %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1179</context></context-group>
       </trans-unit>
       <trans-unit id="_msg431" approved="yes">
-        <source xml:space="preserve">%1nm %2 of</source>
-        <target xml:space="preserve">%1 nm %2 de</target>
-        <context-group purpose="location"><context context-type="linenumber">1156</context></context-group>
+        <source xml:space="preserve">on %1</source>
+        <target xml:space="preserve">sur %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1181</context></context-group>
       </trans-unit>
       <trans-unit id="_msg432" approved="yes">
-        <source xml:space="preserve">%2 waypoint %1</source>
-        <target xml:space="preserve">%2 point de passage %1</target>
-        <context-group purpose="location"><context context-type="linenumber">1168</context></context-group>
+        <source xml:space="preserve">on pad %1</source>
+        <target xml:space="preserve">sur hélipad %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1184</context></context-group>
       </trans-unit>
       <trans-unit id="_msg433" approved="yes">
+        <source xml:space="preserve">at parking position %1</source>
+        <target xml:space="preserve">à la position de parking %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1186</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg434" approved="yes">
+        <source xml:space="preserve">%2 (%1): %3</source>
+        <target xml:space="preserve">%2 (%1) : %3</target>
+        <context-group purpose="location"><context context-type="linenumber">1189</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg435" approved="yes">
+        <source xml:space="preserve">at</source>
+        <target xml:space="preserve">à</target>
+        <context-group purpose="location"><context context-type="linenumber">1191</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg436" approved="yes">
+        <source xml:space="preserve">%1nm %2 of</source>
+        <target xml:space="preserve">%1 nm %2 de</target>
+        <context-group purpose="location"><context context-type="linenumber">1193</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg437" approved="yes">
+        <source xml:space="preserve">%2 waypoint %1</source>
+        <target xml:space="preserve">%2 point de passage %1</target>
+        <context-group purpose="location"><context context-type="linenumber">1208</context></context-group>
+      </trans-unit>
+      <trans-unit id="_msg438" approved="yes">
         <source xml:space="preserve">%4 %1 %2 (%3)</source>
         <target xml:space="preserve">%4 %1 %2 (%3)</target>
-        <context-group purpose="location"><context context-type="linenumber">1174</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">1214</context></context-group>
       </trans-unit>
     </group>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/MPServersModel.cpp" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="MPServersModel">
-      <trans-unit id="_msg434" approved="yes">
+      <trans-unit id="_msg439" approved="yes">
         <source xml:space="preserve">No servers available</source>
         <target xml:space="preserve">Aucun serveur disponible</target>
         <context-group purpose="location"><context context-type="linenumber">49</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg435" approved="yes">
+      <trans-unit id="_msg440" approved="yes">
         <source xml:space="preserve">Custom server</source>
         <target xml:space="preserve">Serveur personnalisé</target>
         <context-group purpose="location"><context context-type="linenumber">57</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg436" approved="yes">
+      <trans-unit id="_msg441" approved="yes">
         <source xml:space="preserve">%1 - %2</source>
         <target xml:space="preserve">%1 - %2</target>
         <context-group purpose="location"><context context-type="linenumber">67</context></context-group>
@@ -2437,37 +2468,37 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/QtLauncher.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="initNavCache">
-      <trans-unit id="_msg437" approved="yes">
+      <trans-unit id="_msg442" approved="yes">
         <source xml:space="preserve">Initialising navigation data, this may take several minutes</source>
         <target xml:space="preserve">Initialisation des données de navigation, cela peut prendre plusieurs minutes</target>
         <context-group purpose="location"><context context-type="linenumber">107</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg438" approved="yes">
+      <trans-unit id="_msg443" approved="yes">
         <source xml:space="preserve">Reading airport data</source>
         <target xml:space="preserve">Lecture des données d&apos;aéroports</target>
         <context-group purpose="location"><context context-type="linenumber">98</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg439" approved="yes">
+      <trans-unit id="_msg444" approved="yes">
         <source xml:space="preserve">Loading airports</source>
         <target xml:space="preserve">Chargement des aéroports</target>
         <context-group purpose="location"><context context-type="linenumber">99</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg440" approved="yes">
+      <trans-unit id="_msg445" approved="yes">
         <source xml:space="preserve">Loading waypoint data</source>
         <target xml:space="preserve">Chargement des données de points de cheminement</target>
         <context-group purpose="location"><context context-type="linenumber">100</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg441" approved="yes">
+      <trans-unit id="_msg446" approved="yes">
         <source xml:space="preserve">Loading navigation data</source>
         <target xml:space="preserve">Chargement des données de navigation</target>
         <context-group purpose="location"><context context-type="linenumber">101</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg442" approved="yes">
+      <trans-unit id="_msg447" approved="yes">
         <source xml:space="preserve">Loading point-of-interest data</source>
         <target xml:space="preserve">Chargement des données relatives aux points d&apos;intérêt</target>
         <context-group purpose="location"><context context-type="linenumber">102</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg443" approved="yes">
+      <trans-unit id="_msg448" approved="yes">
         <source xml:space="preserve">Another copy of FlightGear is creating the navigation database. Waiting for it to finish.</source>
         <target xml:space="preserve">Une autre copie de FlightGear est en train de créer la base de données de navigation. Veuillez patienter.</target>
         <context-group purpose="location"><context context-type="linenumber">113</context></context-group>
@@ -2475,30 +2506,30 @@ Chemin local : %2</target>
       </trans-unit>
     </group>
     <group restype="x-trolltech-linguist-context" resname="LockFileDialog">
-      <trans-unit id="_msg444" approved="yes">
+      <trans-unit id="_msg449" approved="yes">
         <source xml:space="preserve">Multiple copies of FlightGear running</source>
         <target xml:space="preserve">Copies multiples de FlightGear en cours d&apos;exécution</target>
         <context-group purpose="location"><context context-type="linenumber">742</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg445" approved="yes">
+      <trans-unit id="_msg450" approved="yes">
         <source xml:space="preserve">FlightGear has detected another copy is already running. This copy will run in read-only mode, so downloads will not be possible, and settings will not be saved.</source>
         <target xml:space="preserve">FlightGear a détecté qu&apos;une autre copie est déjà en cours d&apos;exécution. Cette copie fonctionnera en mode lecture seule, de sorte que les téléchargements ne seront pas possibles et que les paramètres ne seront pas sauvegardés.</target>
         <context-group purpose="location"><context context-type="linenumber">744</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg446" approved="yes">
+      <trans-unit id="_msg451" approved="yes">
         <source xml:space="preserve">If you are sure another copy is not running on this computer, you can choose to reset the lock file, and run this copy as normal. Alternatively, you can close this copy of the software.</source>
         <target xml:space="preserve">Si vous êtes sûr qu&apos;une autre copie ne fonctionne pas sur cet ordinateur, vous pouvez choisir de réinitialiser le fichier de verrouillage et de lancer cette copie normalement. Vous pouvez également fermer cette copie du logiciel.</target>
         <context-group purpose="location"><context context-type="linenumber">749</context></context-group>
       </trans-unit>
     </group>
     <group restype="x-trolltech-linguist-context" resname="macTranslationWarning">
-      <trans-unit id="_msg447" approved="yes">
+      <trans-unit id="_msg452" approved="yes">
         <source xml:space="preserve">Application running from download location</source>
         <target xml:space="preserve">Application qui tourne depuis l&apos;emplacement des téléchargements</target>
         <context-group purpose="location"><context context-type="linenumber">487</context></context-group>
         <note from="translator">XXX Sans doute une mauvaise traduction : je ne comprends pas grand-chose à la phrase en anglais !</note>
       </trans-unit>
-      <trans-unit id="_msg448" approved="yes">
+      <trans-unit id="_msg453" approved="yes">
         <source xml:space="preserve">FlightGear is running from the download image. For better performance and to avoid potential problems, please copy FlightGear to some other location, such as your desktop or Applications folder.</source>
         <target xml:space="preserve">FlightGear tourne à partir de l&apos;image téléchargée. Pour de meilleures performances et afin d&apos;éviter certains problèmes, veuillez copier FlightGear à un autre endroit, par exemple sur votre bureau ou dans le dossier Applications.</target>
         <context-group purpose="location"><context context-type="linenumber">488</context></context-group>
@@ -2508,12 +2539,12 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/PlanRouteDetails.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="PlanRouteDetails">
-      <trans-unit id="_msg449" approved="yes">
+      <trans-unit id="_msg454" approved="yes">
         <source xml:space="preserve">Previous Leg</source>
         <target xml:space="preserve">Étape précédente</target>
         <context-group purpose="location"><context context-type="linenumber">19</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg450" approved="yes">
+      <trans-unit id="_msg455" approved="yes">
         <source xml:space="preserve">Next Leg</source>
         <target xml:space="preserve">Étape suivante</target>
         <context-group purpose="location"><context context-type="linenumber">31</context></context-group>
@@ -2522,7 +2553,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/ViewCommandLine.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="ViewCommandLine">
-      <trans-unit id="_msg451" approved="yes">
+      <trans-unit id="_msg456" approved="yes">
         <source xml:space="preserve">Copy to clipboard</source>
         <target xml:space="preserve">Copier dans le presse-papiers</target>
         <context-group purpose="location"><context context-type="linenumber">20</context></context-group>
@@ -2531,41 +2562,41 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/FlightPlanController.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="FlightPlanController">
-      <trans-unit id="_msg452" approved="yes">
+      <trans-unit id="_msg457" approved="yes">
         <source xml:space="preserve">No flight-plan</source>
         <target xml:space="preserve">Pas de plan de vol</target>
-        <context-group purpose="location"><context context-type="linenumber">342</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">360</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg453" approved="yes">
+      <trans-unit id="_msg458" approved="yes">
         <source xml:space="preserve">From %1 (%2) to %3 (%4)</source>
         <target xml:space="preserve">De %1 (%2) à %3 (%4)</target>
-        <context-group purpose="location"><context context-type="linenumber">345</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">363</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg454" approved="yes">
+      <trans-unit id="_msg459" approved="yes">
         <source xml:space="preserve">Load a flight-plan</source>
         <target xml:space="preserve">Charger un plan de vol</target>
-        <context-group purpose="location"><context context-type="linenumber">536</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">558</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg455" approved="yes">
+      <trans-unit id="_msg460" approved="yes">
         <source xml:space="preserve">Save flight-plan</source>
         <target xml:space="preserve">Sauvegarder un plan de vol</target>
-        <context-group purpose="location"><context context-type="linenumber">552</context></context-group>
+        <context-group purpose="location"><context context-type="linenumber">574</context></context-group>
       </trans-unit>
     </group>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/RouteLegsView.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="RouteLegsView">
-      <trans-unit id="_msg456" approved="yes">
+      <trans-unit id="_msg461" approved="yes">
         <source xml:space="preserve">at %1&apos;</source>
         <target xml:space="preserve">à côté de %1&apos;</target>
         <context-group purpose="location"><context context-type="linenumber">86</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg457" approved="yes">
+      <trans-unit id="_msg462" approved="yes">
         <source xml:space="preserve">above %1&apos;</source>
         <target xml:space="preserve">au dessus de %1&apos;</target>
         <context-group purpose="location"><context context-type="linenumber">89</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg458" approved="yes">
+      <trans-unit id="_msg463" approved="yes">
         <source xml:space="preserve">below %1&apos;</source>
         <target xml:space="preserve">en dessous de %1&apos;</target>
         <context-group purpose="location"><context context-type="linenumber">92</context></context-group>
@@ -2574,22 +2605,22 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AddOnsDelegate.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="AddOnsDelegate">
-      <trans-unit id="_msg459" approved="yes">
+      <trans-unit id="_msg464" approved="yes">
         <source xml:space="preserve">%1 %2</source>
         <target xml:space="preserve">%1 %2</target>
         <context-group purpose="location"><context context-type="linenumber">18</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg460" approved="yes">
+      <trans-unit id="_msg465" approved="yes">
         <source xml:space="preserve"> (disabled due to incompatible FG version)</source>
         <target xml:space="preserve"> (désactivé en raison d&apos;une version de FG incompatible)</target>
         <context-group purpose="location"><context context-type="linenumber">18</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg461" approved="yes">
+      <trans-unit id="_msg466" approved="yes">
         <source xml:space="preserve">Remove</source>
         <target xml:space="preserve">Supprimer</target>
         <context-group purpose="location"><context context-type="linenumber">118</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg462" approved="yes">
+      <trans-unit id="_msg467" approved="yes">
         <source xml:space="preserve">Cancel</source>
         <target xml:space="preserve">Annuler</target>
         <context-group purpose="location"><context context-type="linenumber">119</context></context-group>
@@ -2598,67 +2629,67 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AddonsDetailsView.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="AddonsDetailsView">
-      <trans-unit id="_msg463" approved="yes">
+      <trans-unit id="_msg468" approved="yes">
         <source xml:space="preserve">%1: %2</source>
         <target xml:space="preserve">%1 : %2</target>
         <context-group purpose="location"><context context-type="linenumber">30</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg464" approved="yes">
+      <trans-unit id="_msg469" approved="yes">
         <source xml:space="preserve">Module</source>
         <target xml:space="preserve">Module</target>
         <context-group purpose="location"><context context-type="linenumber">51</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg465" approved="yes">
+      <trans-unit id="_msg470" approved="yes">
         <source xml:space="preserve">Description</source>
         <target xml:space="preserve">Description</target>
         <context-group purpose="location"><context context-type="linenumber">70</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg466" approved="yes">
+      <trans-unit id="_msg471" approved="yes">
         <source xml:space="preserve">Id</source>
         <target xml:space="preserve">Identifiant</target>
         <context-group purpose="location"><context context-type="linenumber">78</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg467" approved="yes">
+      <trans-unit id="_msg472" approved="yes">
         <source xml:space="preserve">Version</source>
         <target xml:space="preserve">Version</target>
         <context-group purpose="location"><context context-type="linenumber">86</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg468" approved="yes">
+      <trans-unit id="_msg473" approved="yes">
         <source xml:space="preserve">Minimum FlightGear version</source>
         <target xml:space="preserve">Version minimale de FlightGear</target>
         <context-group purpose="location"><context context-type="linenumber">94</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg469" approved="yes">
+      <trans-unit id="_msg474" approved="yes">
         <source xml:space="preserve">Maximum FlightGear version</source>
         <target xml:space="preserve">Version maximale de FlightGear</target>
         <context-group purpose="location"><context context-type="linenumber">102</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg470" approved="yes">
+      <trans-unit id="_msg475" approved="yes">
         <source xml:space="preserve">Authors</source>
         <target xml:space="preserve">Auteurs</target>
         <context-group purpose="location"><context context-type="linenumber">110</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg471" approved="yes">
+      <trans-unit id="_msg476" approved="yes">
         <source xml:space="preserve">Maintainers</source>
         <target xml:space="preserve">Mainteneurs</target>
         <context-group purpose="location"><context context-type="linenumber">119</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg472" approved="yes">
+      <trans-unit id="_msg477" approved="yes">
         <source xml:space="preserve">Website</source>
         <target xml:space="preserve">Site web</target>
         <context-group purpose="location"><context context-type="linenumber">138</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg473" approved="yes">
+      <trans-unit id="_msg478" approved="yes">
         <source xml:space="preserve">Support and issue reporting</source>
         <target xml:space="preserve">Support et rapport de problèmes</target>
         <context-group purpose="location"><context context-type="linenumber">144</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg474" approved="yes">
+      <trans-unit id="_msg479" approved="yes">
         <source xml:space="preserve">Download</source>
         <target xml:space="preserve">Téléchargement</target>
         <context-group purpose="location"><context context-type="linenumber">150</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg475" approved="yes">
+      <trans-unit id="_msg480" approved="yes">
         <source xml:space="preserve">Local file location</source>
         <target xml:space="preserve">Dossier local</target>
         <context-group purpose="location"><context context-type="linenumber">157</context></context-group>
@@ -2667,7 +2698,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/AircraftGridDelegate.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="AircraftGridDelegate">
-      <trans-unit id="_msg476" approved="yes">
+      <trans-unit id="_msg481" approved="yes">
         <source xml:space="preserve">Install</source>
         <target xml:space="preserve">Installation</target>
         <context-group purpose="location"><context context-type="linenumber">64</context></context-group>
@@ -2676,12 +2707,12 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/GridToggleButton.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="GridToggleButton">
-      <trans-unit id="_msg477" approved="yes">
+      <trans-unit id="_msg482" approved="yes">
         <source xml:space="preserve">Switch to grid view</source>
         <target xml:space="preserve">Passer à la vue en grille</target>
         <context-group purpose="location"><context context-type="linenumber">40</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg478" approved="yes">
+      <trans-unit id="_msg483" approved="yes">
         <source xml:space="preserve">Switch to list view</source>
         <target xml:space="preserve">Passer à la vue en liste</target>
         <context-group purpose="location"><context context-type="linenumber">41</context></context-group>
@@ -2690,7 +2721,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/AddonsModel.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="AddonsModel">
-      <trans-unit id="_msg479" approved="yes">
+      <trans-unit id="_msg484" approved="yes">
         <source xml:space="preserve">%1 - %2</source>
         <target xml:space="preserve">%1 - %2</target>
         <context-group purpose="location"><context context-type="linenumber">102</context></context-group>
@@ -2699,43 +2730,43 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/LocationCarrierView.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="LocationCarrierView">
-      <trans-unit id="_msg480" approved="yes">
+      <trans-unit id="_msg485" approved="yes">
         <source xml:space="preserve">Carrier: %1</source>
         <target xml:space="preserve">Porte-avions : %1</target>
         <context-group purpose="location"><context context-type="linenumber">76</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg481" approved="yes">
+      <trans-unit id="_msg486" approved="yes">
         <source xml:space="preserve">On final approach</source>
         <target xml:space="preserve">En approche finale</target>
         <context-group purpose="location"><context context-type="linenumber">102</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg482" approved="yes">
+      <trans-unit id="_msg487" approved="yes">
         <source xml:space="preserve">Abeam carrier at 180 degrees</source>
         <target xml:space="preserve">Vent arrière</target>
         <context-group purpose="location"><context context-type="linenumber">127</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg483" approved="yes">
+      <trans-unit id="_msg488" approved="yes">
         <source xml:space="preserve">at</source>
         <target xml:space="preserve">à</target>
         <context-group purpose="location"><context context-type="linenumber">222</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg484" approved="yes">
+      <trans-unit id="_msg489" approved="yes">
         <source xml:space="preserve"> from the FLOLS (aka the ball)</source>
         <target xml:space="preserve"> depuis l&apos;optique principale d&apos;apontage (Meatball)</target>
         <context-group purpose="location"><context context-type="linenumber">230</context></context-group>
         <note from="translator">FLOLS = Fresnel Lens Optical Landing System</note>
       </trans-unit>
-      <trans-unit id="_msg485" approved="yes">
+      <trans-unit id="_msg490" approved="yes">
         <source xml:space="preserve">Airspeed:</source>
         <target xml:space="preserve">Vitesse :</target>
         <context-group purpose="location"><context context-type="linenumber">253</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg486" approved="yes">
+      <trans-unit id="_msg491" approved="yes">
         <source xml:space="preserve">On deck</source>
         <target xml:space="preserve">Sur le pont d&apos;envol</target>
         <context-group purpose="location"><context context-type="linenumber">160</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg487" approved="yes">
+      <trans-unit id="_msg492" approved="yes">
         <source xml:space="preserve">Tune navigation radio (TACAN) to carrier</source>
         <target xml:space="preserve">Régler la radio de navigation (TACAN) sur porte-avions</target>
         <context-group purpose="location"><context context-type="linenumber">277</context></context-group>
@@ -2744,7 +2775,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/DidMigrateOfficialCatalogNotification.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="DidMigrateOfficialCatalogNotification">
-      <trans-unit id="_msg488" approved="yes">
+      <trans-unit id="_msg493" approved="yes">
         <source xml:space="preserve">An updated version of the official aircraft hangar &apos;%2&apos; was automatically installed. Existing aircraft have been marked for update, &lt;a href=%1&gt;click here to update them all&lt;/a&gt;</source>
         <target xml:space="preserve">Une version plus récente du hangar d&apos;aéronefs officiel a été mise en place. &apos;%2&apos; a été automatiquement installé. Les aéronefs existants ont été marqués pour mise à jour, &lt;a href=%1&gt;cliquez ici pour tous les mettre à jour&lt;/a&gt;</target>
         <context-group purpose="location"><context context-type="linenumber">10</context></context-group>
@@ -2753,7 +2784,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/DidMigrateOtherCatalogNotification.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="DidMigrateOtherCatalogNotification">
-      <trans-unit id="_msg489" approved="yes">
+      <trans-unit id="_msg494" approved="yes">
         <source xml:space="preserve">An updated version of the hangar &apos;%2&apos; was automatically installed. Existing aircraft have been marked for update, &lt;a href=%1&gt;click here to update them all&lt;/a&gt;</source>
         <target xml:space="preserve">Une version plus récente du hangar &apos;%2&apos; a été mise en place. Les aéronefs existants ont été marqués pour mise à jour, &lt;a href=%1&gt;cliquez ici pour tous les mettre à jour&lt;/a&gt;</target>
         <context-group purpose="location"><context context-type="linenumber">10</context></context-group>
@@ -2762,12 +2793,12 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/NewVersionNotification.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="NewVersionNotification">
-      <trans-unit id="_msg490" approved="yes">
+      <trans-unit id="_msg495" approved="yes">
         <source xml:space="preserve">A new release of FlightGear is available (%1): click for more information</source>
         <target xml:space="preserve">Une nouvelle version de FlightGear est disponible (%1) : cliquez pour plus d&apos;informations</target>
         <context-group purpose="location"><context context-type="linenumber">11</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg491" approved="yes">
+      <trans-unit id="_msg496" approved="yes">
         <source xml:space="preserve">Updated version %1 is available: click here to download</source>
         <target xml:space="preserve">La version plus récente %1 est disponible : cliquez ici pour la télécharger</target>
         <context-group purpose="location"><context context-type="linenumber">12</context></context-group>
@@ -2776,162 +2807,162 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/UnitsModel.cxx" datatype="cpp" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="UnitsModel">
-      <trans-unit id="_msg492" approved="yes">
+      <trans-unit id="_msg497" approved="yes">
         <source xml:space="preserve">ft</source>
         <target xml:space="preserve">&apos;</target>
         <context-group purpose="location"><context context-type="linenumber">73</context></context-group>
         <note from="translator">&apos; ou ft d&apos;après &lt;https://fr.wikipedia.org/wiki/Pied_(unité)&gt;</note>
       </trans-unit>
-      <trans-unit id="_msg493" approved="yes">
+      <trans-unit id="_msg498" approved="yes">
         <source xml:space="preserve">feet above sea-level (MSL)</source>
         <target xml:space="preserve">pieds au-dessus du niveau moyen de la mer (MSL)</target>
         <context-group purpose="location"><context context-type="linenumber">73</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg494" approved="yes">
+      <trans-unit id="_msg499" approved="yes">
         <source xml:space="preserve">ft AGL</source>
         <target xml:space="preserve">&apos; AGL</target>
         <context-group purpose="location"><context context-type="linenumber">74</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg495" approved="yes">
+      <trans-unit id="_msg500" approved="yes">
         <source xml:space="preserve">feet above ground level (AGL)</source>
         <target xml:space="preserve">pieds au-dessus du niveau du sol (AGL)</target>
         <context-group purpose="location"><context context-type="linenumber">74</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg496" approved="yes">
+      <trans-unit id="_msg501" approved="yes">
         <source xml:space="preserve">ft above field</source>
         <target xml:space="preserve">&apos; au-dessus de l&apos;altitude de l&apos;aérodrome</target>
         <context-group purpose="location"><context context-type="linenumber">75</context></context-group>
         <note from="translator">XXX peut-être pas terrible</note>
       </trans-unit>
-      <trans-unit id="_msg497" approved="yes">
+      <trans-unit id="_msg502" approved="yes">
         <source xml:space="preserve">feet above airfield</source>
         <target xml:space="preserve">pieds au-dessus de l&apos;altitude de l&apos;aérodrome</target>
         <context-group purpose="location"><context context-type="linenumber">75</context></context-group>
         <note from="translator">XXX peut-être pas terrible</note>
       </trans-unit>
-      <trans-unit id="_msg498" approved="yes">
+      <trans-unit id="_msg503" approved="yes">
         <source xml:space="preserve">FL</source>
         <target xml:space="preserve">FL</target>
         <context-group purpose="location"><context context-type="linenumber">76</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg499" approved="yes">
+      <trans-unit id="_msg504" approved="yes">
         <source xml:space="preserve">Flight-level</source>
         <target xml:space="preserve">niveau de vol</target>
         <context-group purpose="location"><context context-type="linenumber">76</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg500" approved="yes">
+      <trans-unit id="_msg505" approved="yes">
         <source xml:space="preserve">m</source>
         <target xml:space="preserve">m</target>
         <context-group purpose="location"><context context-type="linenumber">77</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg501" approved="yes">
+      <trans-unit id="_msg506" approved="yes">
         <source xml:space="preserve">meters above sea-level (MSL)</source>
         <target xml:space="preserve">mètres au-dessus du niveau moyen de la mer (MSL)</target>
         <context-group purpose="location"><context context-type="linenumber">77</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg502" approved="yes">
+      <trans-unit id="_msg507" approved="yes">
         <source xml:space="preserve">kts</source>
         <target xml:space="preserve">kt</target>
         <context-group purpose="location"><context context-type="linenumber">78</context></context-group>
         <note from="translator">D&apos;après &lt;https://fr.wikipedia.org/wiki/N%C5%93ud_(unit%C3%A9)&gt;, kts serait plutôt utilisé en anglais.</note>
       </trans-unit>
-      <trans-unit id="_msg503" approved="yes">
+      <trans-unit id="_msg508" approved="yes">
         <source xml:space="preserve">Knots</source>
         <target xml:space="preserve">Nœuds</target>
         <context-group purpose="location"><context context-type="linenumber">78</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg504" approved="yes">
+      <trans-unit id="_msg509" approved="yes">
         <source xml:space="preserve">M</source>
         <target xml:space="preserve">M</target>
         <context-group purpose="location"><context context-type="linenumber">79</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg505" approved="yes">
+      <trans-unit id="_msg510" approved="yes">
         <source xml:space="preserve">Mach</source>
         <target xml:space="preserve">Mach</target>
         <context-group purpose="location"><context context-type="linenumber">79</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg506" approved="yes">
+      <trans-unit id="_msg511" approved="yes">
         <source xml:space="preserve">KM/H</source>
         <target xml:space="preserve">km/h</target>
         <context-group purpose="location"><context context-type="linenumber">80</context></context-group>
         <note from="translator">Pourquoi diable ces lettres capitales ?</note>
       </trans-unit>
-      <trans-unit id="_msg507" approved="yes">
+      <trans-unit id="_msg512" approved="yes">
         <source xml:space="preserve">Kilometers/hour</source>
         <target xml:space="preserve">Kilomètres/heure</target>
         <context-group purpose="location"><context context-type="linenumber">80</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg508" approved="yes">
+      <trans-unit id="_msg513" approved="yes">
         <source xml:space="preserve">°True</source>
         <target xml:space="preserve">°vrais</target>
         <context-group purpose="location"><context context-type="linenumber">81</context></context-group>
         <note from="translator">XXX Est-ce une bonne traduction ?</note>
       </trans-unit>
-      <trans-unit id="_msg509" approved="yes">
+      <trans-unit id="_msg514" approved="yes">
         <source xml:space="preserve">degrees true</source>
         <target xml:space="preserve">degrés vrais</target>
         <context-group purpose="location"><context context-type="linenumber">81</context></context-group>
         <note from="translator">XXX Est-ce une bonne traduction ?</note>
       </trans-unit>
-      <trans-unit id="_msg510" approved="yes">
+      <trans-unit id="_msg515" approved="yes">
         <source xml:space="preserve">°Mag</source>
         <target xml:space="preserve">°mag</target>
         <context-group purpose="location"><context context-type="linenumber">82</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg511" approved="yes">
+      <trans-unit id="_msg516" approved="yes">
         <source xml:space="preserve">degrees magnetic</source>
         <target xml:space="preserve">degrés magnétiques</target>
         <context-group purpose="location"><context context-type="linenumber">82</context></context-group>
         <note from="translator">XXX Est-ce une bonne traduction ?</note>
       </trans-unit>
-      <trans-unit id="_msg512" approved="yes">
+      <trans-unit id="_msg517" approved="yes">
         <source xml:space="preserve">UTC</source>
         <target xml:space="preserve">UTC</target>
         <context-group purpose="location"><context context-type="linenumber">83</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg513" approved="yes">
+      <trans-unit id="_msg518" approved="yes">
         <source xml:space="preserve">Universal coordinated time</source>
         <target xml:space="preserve">Temps universel coordonné</target>
         <context-group purpose="location"><context context-type="linenumber">83</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg514" approved="yes">
+      <trans-unit id="_msg519" approved="yes">
         <source xml:space="preserve">Local</source>
         <target xml:space="preserve">Local</target>
         <context-group purpose="location"><context context-type="linenumber">84</context></context-group>
         <note from="translator">XXX Contexte ? Masculin, féminin ?</note>
       </trans-unit>
-      <trans-unit id="_msg515" approved="yes">
+      <trans-unit id="_msg520" approved="yes">
         <source xml:space="preserve">Local time</source>
         <target xml:space="preserve">Heure locale</target>
         <context-group purpose="location"><context context-type="linenumber">84</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg516" approved="yes">
+      <trans-unit id="_msg521" approved="yes">
         <source xml:space="preserve">Nm</source>
         <target xml:space="preserve">Nm</target>
         <context-group purpose="location"><context context-type="linenumber">85</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg517" approved="yes">
+      <trans-unit id="_msg522" approved="yes">
         <source xml:space="preserve">Nautical miles</source>
         <target xml:space="preserve">Milles marins</target>
         <context-group purpose="location"><context context-type="linenumber">85</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg518" approved="yes">
+      <trans-unit id="_msg523" approved="yes">
         <source xml:space="preserve">Km</source>
         <target xml:space="preserve">km</target>
         <context-group purpose="location"><context context-type="linenumber">86</context></context-group>
         <note from="translator">K = Kelvin, hum...</note>
       </trans-unit>
-      <trans-unit id="_msg519" approved="yes">
+      <trans-unit id="_msg524" approved="yes">
         <source xml:space="preserve">Kilometers</source>
         <target xml:space="preserve">Kilomètres</target>
         <context-group purpose="location"><context context-type="linenumber">86</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg520" approved="yes">
+      <trans-unit id="_msg525" approved="yes">
         <source xml:space="preserve">MHz</source>
         <target xml:space="preserve">MHz</target>
         <context-group purpose="location"><context context-type="linenumber">88</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg521" approved="yes">
+      <trans-unit id="_msg526" approved="yes">
         <source xml:space="preserve">kHz</source>
         <alt-trans>
           <source xml:space="preserve">KHz</source>
@@ -2943,7 +2974,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/DownloadsInDocumentsWarning.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="DownloadsInDocumentsWarning">
-      <trans-unit id="_msg522" approved="yes">
+      <trans-unit id="_msg527" approved="yes">
         <source xml:space="preserve">&lt;p&gt;FlightGear previously downloaded aircraft and scenery to a folder within your &apos;Documents&apos; folder. This can cause problems with some security features of Windows, so a new location is now recommended.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;To keep your existing aircraft and scenery downloads, please move the files from &lt;u&gt;&lt;a href=%1&gt;the old location&lt;/a&gt;&lt;/u&gt; to &lt;u&gt;&lt;a href=%2&gt;the new location&lt;/a&gt;&lt;/u&gt;&lt;/p&gt;</source>
         <target xml:space="preserve">&lt;p&gt;Précédemment, FlightGear a téléchargé des aéronefs et des scènes dans votre dossier « Documents ». Ceci peut interagir de manière problématique avec certaines fonctionnalités de Windows liées à la sécurité ; c&apos;est pourquoi un autre emplacement est désormais recommandé.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Afin de ne pas perdre les aéronefs et scènes déjà téléchargés, veuillez déplacer les fichiers de l&apos;&lt;u&gt;&lt;a href=%1&gt;ancien emplacement&lt;/a&gt;&lt;/u&gt; vers le &lt;u&gt;&lt;a href=%2&gt;nouvel emplacement&lt;/a&gt;&lt;/u&gt;&lt;/p&gt;.</target>
         <context-group purpose="location"><context context-type="linenumber">10</context></context-group>
@@ -2953,7 +2984,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/GettingStartedTipDisplay.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="GettingStartedTipDisplay">
-      <trans-unit id="_msg523" approved="yes">
+      <trans-unit id="_msg528" approved="yes">
         <source xml:space="preserve">Close</source>
         <target xml:space="preserve">Fermer</target>
         <context-group purpose="location"><context context-type="linenumber">97</context></context-group>
@@ -2962,7 +2993,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/Section.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="Section">
-      <trans-unit id="_msg524" approved="yes">
+      <trans-unit id="_msg529" approved="yes">
         <source xml:space="preserve">Click here to show advanced settings in this section</source>
         <target xml:space="preserve">Cliquez ici pour afficher les paramètres avancés de cette rubrique</target>
         <context-group purpose="location"><context context-type="linenumber">102</context></context-group>
@@ -2971,7 +3002,7 @@ Chemin local : %2</target>
   </body></file>
   <file original="/home/devel/FGFS/flightgear/src/GUI/qml/CatalogRefreshFailedNotification.qml" datatype="plaintext" source-language="en" target-language="fr"><body>
     <group restype="x-trolltech-linguist-context" resname="CatalogRefreshFailedNotification">
-      <trans-unit id="_msg525" approved="yes">
+      <trans-unit id="_msg530" approved="yes">
         <source xml:space="preserve">The catalog at &apos;%1&apos; failed to download and validate correctly. All aircraft it provides will be unavailable.</source>
         <target xml:space="preserve">Le catalogue situé à &apos;%1&apos; n&apos;a pu être correctement téléchargé et validé. Les aéronefs issus de ce catalogue ne seront pas disponibles.</target>
         <context-group purpose="location"><context context-type="linenumber">9</context></context-group>

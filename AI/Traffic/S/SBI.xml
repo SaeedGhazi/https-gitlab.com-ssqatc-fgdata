@@ -2085,7 +2085,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>17:55:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -2095,7 +2095,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>18:45:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -2115,7 +2115,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>08:30:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -2125,7 +2125,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>09:20:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -2145,7 +2145,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>13:10:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -2155,7 +2155,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>14:00:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -2505,7 +2505,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>04:50:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -2515,7 +2515,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>05:40:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -2535,7 +2535,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>20:05:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -2545,7 +2545,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>20:55:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -2565,7 +2565,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>06:15:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -2575,7 +2575,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>07:05:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -4230,7 +4230,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>08:45:00</time>
     </arrival>
     <repeat>24Hr</repeat>
@@ -4240,7 +4240,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>09:40:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -8385,7 +8385,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>2/19:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -8395,7 +8395,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>2/20:25:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -12510,7 +12510,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>4/19:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -12520,7 +12520,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>4/20:25:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -13260,7 +13260,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>5/06:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -13270,7 +13270,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>5/06:35:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -14700,7 +14700,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>5/19:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -14710,7 +14710,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>5/20:25:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -15390,7 +15390,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>6/06:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -15400,7 +15400,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>6/06:35:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -16875,7 +16875,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>6/19:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -16885,7 +16885,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>6/20:25:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -17625,7 +17625,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>0/06:45:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -17635,7 +17635,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>0/06:35:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>
@@ -19095,7 +19095,7 @@
     </departure>
     <cruise-alt>400</cruise-alt>
     <arrival>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>0/19:30:00</time>
     </arrival>
     <repeat>WEEK</repeat>
@@ -19105,7 +19105,7 @@
     <required-aircraft>SBI-738</required-aircraft>
     <fltrules>IFR</fltrules>
     <departure>
-      <port>URFF</port>
+      <port>UKFF</port>
       <time>0/20:25:00</time>
     </departure>
     <cruise-alt>390</cruise-alt>

@@ -7279,7 +7279,7 @@
 		</departure>
 		<cruise-alt>380</cruise-alt>
 		<arrival>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>09:25:00</time>
 		</arrival>
 		<repeat>24Hr</repeat>
@@ -7289,7 +7289,7 @@
 		<required-aircraft>AFL-321</required-aircraft>
 		<fltrules>IFR</fltrules>
 		<departure>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>10:25:00</time>
 		</departure>
 		<cruise-alt>370</cruise-alt>
@@ -7309,7 +7309,7 @@
 		</departure>
 		<cruise-alt>380</cruise-alt>
 		<arrival>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>13:55:00</time>
 		</arrival>
 		<repeat>24Hr</repeat>
@@ -7319,7 +7319,7 @@
 		<required-aircraft>AFL-73H</required-aircraft>
 		<fltrules>IFR</fltrules>
 		<departure>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>14:55:00</time>
 		</departure>
 		<cruise-alt>370</cruise-alt>
@@ -7339,7 +7339,7 @@
 		</departure>
 		<cruise-alt>380</cruise-alt>
 		<arrival>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>16:20:00</time>
 		</arrival>
 		<repeat>24Hr</repeat>
@@ -7349,7 +7349,7 @@
 		<required-aircraft>AFL-320</required-aircraft>
 		<fltrules>IFR</fltrules>
 		<departure>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>17:20:00</time>
 		</departure>
 		<cruise-alt>370</cruise-alt>
@@ -7369,7 +7369,7 @@
 		</departure>
 		<cruise-alt>380</cruise-alt>
 		<arrival>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>07:15:00</time>
 		</arrival>
 		<repeat>24Hr</repeat>
@@ -7379,7 +7379,7 @@
 		<required-aircraft>AFL-320</required-aircraft>
 		<fltrules>IFR</fltrules>
 		<departure>
-			<port>URFF</port>
+			<port>UKFF</port>
 			<time>08:25:00</time>
 		</departure>
 		<cruise-alt>370</cruise-alt>

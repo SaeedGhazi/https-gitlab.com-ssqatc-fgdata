@@ -3,7 +3,6 @@
 <PropertyList>
     <name>nasal-test</name>
     <layout>vbox</layout>
-    <pref-width>180</pref-width>
     <color>
         <red>0.1</red>
         <green>0.3</green>
@@ -36,9 +35,13 @@
     <group>
         <layout>vbox</layout>
         <valign>top</valign>
-        <text>Specify .nut file in $FGROOT/Nasal</text>
+        <padding>5</padding>
+        <text>
+            <label>Specify .nut file in $FG_ROOT/Nasal</label>
+        </text>
         <group>
             <layout>hbox</layout>
+            <halign>center</halign>
             <input>
                 <pref-width>100</pref-width>
                 <halign>left</halign>

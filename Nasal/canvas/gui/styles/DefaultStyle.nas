@@ -111,6 +111,7 @@ DefaultStyle.widgets.button = {
 DefaultStyle.widgets.checkbox = {
   new: func(parent, cfg)
   {
+    me._label_position = cfg.get("label-position", "right");
     me._root = parent.createChild("group", "checkbox");
     me._icon =
       me._root.createChild("image", "checkbox-icon")
@@ -123,8 +124,13 @@ DefaultStyle.widgets.checkbox = {
   },
   setSize: func(model, w, h)
   {
-    me._icon.setTranslation(0, int((h - 18) / 2));
-    me._label.setTranslation(24, int(h / 2) + 1);
+    if (me._label_position == "left") {
+      me._label.setTranslation(3, int((h / 2) + 1));
+      me._icon.setTranslation(me._label.maxWidth() + 6, int((h - 18) / 2));
+    } else {
+      me._icon.setTranslation(3, int((h - 18) / 2));
+      me._label.setTranslation(24, int(h / 2) + 1);
+    }
 
     return me;
   },
@@ -132,7 +138,7 @@ DefaultStyle.widgets.checkbox = {
   {
     me._label.setText(text);
 
-    var min_width = me._label.maxWidth() + 24;
+    var min_width = me._label.maxWidth() + 3 + 24;
     model.setLayoutMinimumSize([min_width, 18]);
     model.setLayoutSizeHint([min_width, 24]);
 

@@ -79,12 +79,13 @@ var Window = {
   # Constructor
   #
   # @param size ([width, height])
-  new: func(size, type = nil, id = nil, allowfocus = 1)
+  new: func(size, type = nil, id = nil, allowfocus = 1, destroy_on_close = 1)
   {
     var ghost = _newWindowGhost(id);
     var m = {
       parents: [Window, PropertyElement, ghost],
       _allowfocus: allowfocus,
+      _destroy_on_close: destroy_on_close,
       _ghost: ghost,
       _node: props.wrapNode(ghost._node_ghost),
       _focused: 0,
@@ -101,7 +102,11 @@ var Window = {
     
     # TODO better default position
     m.move(0,0);
-    m.setFocus();
+    if (destroy_on_close) {
+      m.setFocus();
+    } else {
+      m._ghost.hide();
+    }
 
     # arg = [child, listener_node, mode, is_child_event]
     setlistener(m._node, func m._propCallback(arg[0], arg[2]), 0, 2);
@@ -292,6 +297,36 @@ var Window = {
     me.setInt("z-index", me.get("z-index", gui.STACK_INDEX["default"]));
 
     me.setFocus();
+  },
+  hide: func()
+  {
+    me.clearFocus();
+    me._ghost.hide();
+  },
+  show: func()
+  {
+    me._ghost.show();
+    me.raise();
+  },
+  # Hide / show the window based on whether it's currently visible
+  toggle: func()
+  {
+    if (me.isVisible()) {
+      me.hide();
+    } else {
+      me.show();
+      me.raise();
+    }
+  },
+  # function to be executed when the close button is pressed
+  onClose: func()
+  {
+    if (me._destroy_on_close)
+    {
+      me.del();
+    } else {
+      me.hide();
+    }
   },
   onResize: func()
   {
@@ -492,7 +527,7 @@ var Window = {
 
     var button_close = WindowButton.new(title_bar, "close")
                                    .move(x, y);
-    button_close.listen("clicked", func me.del());
+    button_close.listen("clicked", func me.onClose());
 
     # title
     var title = me.get("title", "Canvas Dialog");

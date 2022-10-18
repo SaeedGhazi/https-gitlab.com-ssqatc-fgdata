@@ -1,10 +1,8 @@
 AUTOMATIC PUSHBACK FOR FLIGHTGEAR
-http://gitlab.com/mdanil/flightgear-autopush
 
 Version 2.0.1
 
 Copyright (c) 2018 Autopush authors:
- Michael Danilov <mike.d.ft402 -eh- gmail.com>
  Joshua Davidson http://github.com/Octal450
  Merspieler http://gitlab.com/merspieler
 Some of the code (c) FlightGear
@@ -159,12 +157,7 @@ your setup.
 5. Add gui/dialogs/autopush.xml to your aircraft's menu (see
    FlightGear documentation for editing the menu).
 
-6. If you have a bug tracker, please add a note, that autopush related
-   bugs should be reported here:
-
-https://gitlab.com/mdanil/flightgear-autopush/issues
-
-7. Launch the simulator and try Autopush. After making sure it works,
+6. Launch the simulator and try Autopush. After making sure it works,
    complete the support by implementing some logic in your aircraft
    and connecting the rest of the interface.
 

@@ -628,7 +628,7 @@
 <material n="3001" include="Materials/base/water.xml">
   <name>ws30water</name>
   <name>ws30coastline</name>
-  <effect>Effects/ws30water</effect>
+  <effect>Effects/ws30-water</effect>
   <texture>Terrain/water.png</texture>
 </material>
 
@@ -690,7 +690,7 @@
 </material>
 
 <material n="3004">
-  <effect>Effects/water-inland</effect>
+  <effect>Effects/ws30-water</effect>
   <name>ws30River</name>
   <texture>Terrain/water-lake.png</texture>
   <line-feature-tex-x0>0.0</line-feature-tex-x0>

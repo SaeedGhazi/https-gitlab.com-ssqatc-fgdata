@@ -447,7 +447,7 @@ void main()
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
   vec4 coast = texture2D(coastline, tile_coord);
-  if (coast.b > 0.01) { 
+  if (coast.b > 0.05) { 
     float waterline_min_steepness = fg_materialParams3[lc].y;
     float waterline_max_steepness = fg_materialParams3[lc].z;
     vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
@@ -456,7 +456,7 @@ void main()
     
 
     // G channel used to force a beach texel and reduce artifacts between the beach and the land.
-    fragColor = mix(generateWaterTexel(), texel, smoothstep(0.1,0.9,(coast.b + coast.g - noise_500m) / steepness));    
+    fragColor = mix(generateWaterTexel(), texel, smoothstep(0.1,0.9,(coast.b + coast.a) / steepness));    
     //fragColor = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
   } else if ((water_shader == 1) && (fg_photoScenery == false) && (fg_materialParams3[lc].x > 0.5)) { 

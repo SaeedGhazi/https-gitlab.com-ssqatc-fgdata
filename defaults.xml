@@ -222,7 +222,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <shaders>
         <clouds type="float" userarchive="y">0.0</clouds>
         <landmass type="float" userarchive="y">1.0</landmass>
-        <model type="float" userarchive="y">1.0</model>
+        <model type="float" userarchive="y">3.0</model>
         <skydome type="bool" userarchive="y">true</skydome>
         <transition type="float" userarchive="y">1.0</transition>
         <water type="float" userarchive="y">1.0</water>

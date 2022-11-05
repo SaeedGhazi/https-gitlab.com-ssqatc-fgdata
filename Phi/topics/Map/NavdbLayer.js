@@ -49,8 +49,27 @@
             onEachFeature : function(feature, layer) {
                 if (feature.properties) {
                     var popupString = '<div class="popup">';
-                    for ( var k in feature.properties) {
-                        var v = feature.properties[k];
+                    for (var k in feature.properties) {
+                        var v = ""
+                        switch (k) {
+                            case "runways":
+                                var runways = new Array();
+                                feature.properties.runways.forEach(element => {
+                                    runways.push(element.id);
+                                });
+                                v = runways.join(", ");
+                                break;
+                            case "comm":
+                                var comm = new Array();
+                                feature.properties.comm.forEach(element => {
+                                    comm.push(element.id+" ("+element.mhz+")");
+                                });
+                                v = comm.join(", ");
+                                break;
+                            default:
+                                v = feature.properties[k];
+                                break;
+                        }
                         popupString += k + ': ' + v + '<br />';
                     }
                     popupString += '</div>';

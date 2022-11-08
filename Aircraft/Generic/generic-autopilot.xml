@@ -199,6 +199,19 @@ pitch-limit-min
 		<output>/autopilot/internal/throttle-active</output>
 	</logic>
 	
+	<logic> <!-- Manage passive lock (used by controls.nas) -->
+		<input>
+			<not>
+				<or>
+					<property>/autopilot/internal/pitch-active</property>
+					<property>/autopilot/internal/roll-active</property>
+					<property>/autopilot/internal/throttle-active</property>
+				</or>
+			</not>
+		</input>
+		<output>/autopilot/locks/passive-mode</output>
+	</logic>
+	
 	<filter> <!-- Bank limit computer -->
 		<name>Bank Angle Max</name>
 		<type>gain</type>

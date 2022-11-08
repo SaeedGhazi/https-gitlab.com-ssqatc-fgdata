@@ -1622,7 +1622,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <constraint-gap-m type="float" userarchive="y">1.0</constraint-gap-m>
       <sample-ratio type="float" userarchive="y">1.0</sample-ratio>
       <vertical-scale type="float" userarchive="y">1.0</vertical-scale>
-      <separate-water-mesh type="bool" userarchive="y">false</separate-water-mesh>
     </elevation-mesh>
   </scenery>
   <earthview>

@@ -6,6 +6,10 @@ define([
         require : 'topics/Tools/Holding'
     });
 
+    ko.components.register('Tools/Wind Calculator', {
+        require : 'topics/Tools/WindCalculator'
+    });
+
     ko.components.register('Tools/Vertical Navigation', {
         require : 'topics/Tools/VerticalNavigation'
     });

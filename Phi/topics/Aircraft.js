@@ -13,6 +13,10 @@ define([
         require : 'topics/Aircraft/Checklists'
     });
 
+    ko.components.register('Aircraft/Failures', {
+        require : 'topics/Aircraft/Failures'
+    });
+
     ko.components.register('Aircraft/Help', {
         require : 'topics/Aircraft/Help'
     });

@@ -1117,6 +1117,15 @@
 				<dialog-name>about</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<name>scenery-sources</name>
+			<binding>
+				<command>dialog-show</command>
+				<dialog-name>scenery-sources</dialog-name>
+			</binding>
+		</item>
+
 	</menu>
 
 </PropertyList>

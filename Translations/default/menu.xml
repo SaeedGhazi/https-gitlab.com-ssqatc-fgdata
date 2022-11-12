@@ -148,6 +148,7 @@
 	<joystick-info>Joystick Information</joystick-info>
 	<tutorial-start>Tutorials</tutorial-start>
 	<menu-about>About</menu-about>
+	<scenery-sources>Scenery Sources</scenery-sources>
 
 	<!-- Aircraft menu (only frequent/common custom menu entries are supported) -->
 	<select-livery>Select Livery</select-livery>

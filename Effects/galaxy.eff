@@ -26,7 +26,6 @@
   <technique n="10">
     <predicate>
       <and>
-	<property>/sim/rendering/shader-effects</property>
 	<less-equal>
 	  <value type="float">3.0</value>
 	  <float-property>/sim/rendering/shaders/quality-level</float-property>

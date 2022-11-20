@@ -99,6 +99,9 @@ uniform vec4 fg_materialParams3[128];
 uniform mat4 fg_zUpTransform;
 uniform vec3 fg_modelOffset;
 
+// Coastline texture - generated from VPBTechnique
+uniform sampler2D coastline;
+
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
@@ -316,7 +319,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
   // Mix factor of base textures for 2 neighbour landclass(es)
   vec4 mfact;
 
-
+  bool water = false;
 
   // Partial derivatives of s and t of ground texture coords for this fragment, 
   // with respect to window (screen space) x and y axes.
@@ -330,12 +333,14 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
   if (fg_photoScenery) {
 		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
+    water = (texture(coastline, vec2(tile_coord.s, tile_coord.t)).r > 0.1);
   } else {
     // Lookup the base texture texel for this fragment and any neighbors, with mixing
     texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
+    water = texture(landclass, vec2(tile_coord.s, tile_coord.t)).z > 0.9;
   }
 
-  if ((water_shader == 1) && (fg_photoScenery == false) && fg_materialParams3[lc].x > 0.5) { 
+  if ((water_shader == 1) && water) { 
     // This is a water fragment, so calculate the fragment color procedurally
     fragColor = generateWaterTexel();
     fragColor.rgb += getClusteredLightsContribution(eyePos.xyz, n, fragColor.rgb);

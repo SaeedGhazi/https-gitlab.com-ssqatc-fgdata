@@ -416,6 +416,8 @@ void main()
   
   // Mix factor of base textures for 2 neighbour landclass(es)
   vec4 mfact;
+
+  bool water = false;
   
   // Partial derivatives of s and t of ground texture coords for this fragment, 
   // with respect to window (screen space) x and y axes.
@@ -428,16 +430,18 @@ void main()
   get_material(lc, ground_tex_coord, dxdy_gc, mat_shininess, mat_ambient, mat_diffuse, mat_specular, dxdy, st);
   
   if (fg_photoScenery) {
-    // The photoscenery orthophots are stored in the landclass texture
+    // The photoscenery orthophotos are stored in the landclass texture
     // and use normalised tile coordinates
     texel = texture(landclass, vec2(tile_coord.s, 1.0 - tile_coord.t));
-  
+    water = (texture(coastline, vec2(tile_coord.s, tile_coord.t)).r > 0.1);
+
     // Do not attempt any mixing
     flag = 0;
     mix_flag = 0;
   } else {
     // Lookup the base texture texel for this fragment and any neighbors, with mixing
     texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
+    water = texture(landclass, vec2(tile_coord.s, tile_coord.t)).z > 0.9;
   }
   
   vec4 color = gl_Color * mat_ambient;
@@ -459,7 +463,7 @@ void main()
     fragColor = mix(generateWaterTexel(), texel, smoothstep(0.1,0.9,(coast.b + coast.a) / steepness));    
     //fragColor = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
-  } else if ((water_shader == 1) && (fg_photoScenery == false) && (fg_materialParams3[lc].x > 0.5)) { 
+  } else if (water) { 
     // This is a water fragment, so calculate the fragment color procedurally
     // and mix with some sand and cliff colour depending on steepness
     //vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
@@ -470,7 +474,7 @@ void main()
     // texel = mix(steep_texel, beach_texel, smoothstep(waterline_max_steepness - 0.1, waterline_max_steepness - 0.03, steepness));
 
     // Mix from the beach into the water, which produces a pleasing translucent shallow water effect.
-    //fragColor = mix(texel, generateWaterTexel(), smoothstep(waterline_min_steepness,waterline_max_steepness,steepness));    
+    //fragColor = mix(texel, generateWaterTexel(), smoothstep(0.3,1.0,texture(coastline, vec2(tile_coord.s, tile_coord.t)).r));    
     fragColor = generateWaterTexel();
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
   } else {

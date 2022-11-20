@@ -299,6 +299,8 @@
         <internal-format><use>texture[6]/internal-format</use></internal-format>
       </texture-unit>
 
+      <!-- texture unit 7 direct from VPBBuilder.cxx -->
+
       <texture-unit>
         <unit>8</unit>
         <image><use>texture[8]/image</use></image>
@@ -1265,6 +1267,11 @@
         <name>perlin</name>
         <type>sampler-2d</type>
         <value type="int">6</value>
+      </uniform>
+      <uniform>
+        <name>coastline</name>
+        <type>sampler-2d</type>
+        <value type="int">7</value>
       </uniform>
           <uniform>
             <name>swatch_size</name>

@@ -3444,11 +3444,6 @@ append(windIpointArray, w);
 
 var set_wind_ipoint_metar = func (lat, lon, d0, v0) {
 
-if (getprop("/sim/gui/dialogs/weather/simbrief-loaded")) {
-	# METAR winds should not interfere with simbrief winds
-	return;
-}
-
 # insert a plausible pattern of aloft winds based on ground info
 
 
@@ -3693,92 +3688,6 @@ create_cloudbox(type, lat, lon, alt, x,y,z,n, f_core, r_core, h_core, n_core, f_
 
 }
 
-var load_simbrief_weather_from_xml = func {
-	setprop("/sim/gui/dialogs/weather/simbrief-loaded", "true");
-
-	# Clear existing wind data (e.g. from metar mode)
-	windIpointArray = [];
-
-	var file = getprop("/sim/fg-home") ~ "/Export/weater_simbrief.xml";
-
-	var node = io.readxml(file);
-	var ofp = node.getChild("OFP");
-
-	# Read departure/arrival
-	var departure = ofp.getChild("origin").getChild("icao_code").getValue();
-	var arrival = ofp.getChild("destination").getChild("icao_code").getValue();
-
-	var fixes = ofp.getChild("navlog").getChildren();
-
-	foreach (var fix; fixes) {
-		var lat = fix.getChild("pos_lat").getValue();
-		var lon = fix.getChild("pos_long").getValue();
-
-		var wind_data = [];
-
-		var winds = fix.getChild("wind_data").getChildren();
-		foreach (var windlevel; winds) {
-			var level_wind = { altitude: windlevel.getChild("altitude").getValue(),
-							   wind_dir: windlevel.getChild("wind_dir").getValue(),
-							   wind_spd: windlevel.getChild("wind_spd").getValue()};
-			append(wind_data, level_wind);
-		}
- 
-		assert(wind_data[0].altitude == 0);
-		var d0 = wind_data[0].wind_dir;
-		var v0 = wind_data[0].wind_spd;
-
-		assert(wind_data[1].altitude == 5000);
-		var d1 = wind_data[1].wind_dir;
-		var v1 = wind_data[1].wind_spd;
-
-		assert(wind_data[2].altitude == 10000);
-		var d2 = wind_data[2].wind_dir;
-		var v2 = wind_data[2].wind_spd;
-
-		assert(wind_data[4].altitude == 18000);
-		var d3 = wind_data[4].wind_dir;
-		var v3 = wind_data[4].wind_spd;
-
-		assert(wind_data[5].altitude == 24000);
-		var d4 = wind_data[5].wind_dir;
-		var v4 = wind_data[5].wind_spd;
-
-		assert(wind_data[6].altitude == 30000);
-		var d5 = wind_data[6].wind_dir;
-		var v5 = wind_data[6].wind_spd;
-
-		assert(wind_data[7].altitude == 34000);
-		var d6 = wind_data[7].wind_dir;
-		var v6 = wind_data[7].wind_spd;
-
-		assert(wind_data[8].altitude == 39000);
-		var d7 = wind_data[8].wind_dir;
-		var v7 = wind_data[8].wind_spd;
-
-		assert(wind_data[9].altitude == 45000);
-		var d8 = wind_data[9].wind_dir;
-		var v8 = wind_data[9].wind_spd;
-
-		set_wind_ipoint(lat, lon, d0, v0, d1, v1, d2, v2, d3, v3, d4, v4, d5, v5, d6, v6, d7, v7, d8, v8);
-
-		if (wind_model_flag == 5) {
-			setprop(lwi~"ipoint-number", getprop(lwi~"ipoint-number") + 1);
-		}
-	}
-
-	setprop("/sim/gui/dialogs/weather/simbrief-last-flight", departure ~ " - " ~ arrival);
-}
-
-var load_simbrief_weather = func {
-	var alias = getprop("/nasal/local_weather/simbrief_alias");
-
-	# Thanks to https://github.com/legoboyvdlp/A320-family/blob/65f354ee5fbd944d836a41e54efba854389059f4/Nasal/FMGC/SimbriefParser.nas#L16
-	http.save("https://www.simbrief.com/api/xml.fetcher.php?username=" ~ alias, getprop("/sim/fg-home") ~ "/Export/weater_simbrief.xml")
-			.done(func {
-				load_simbrief_weather_from_xml();
-			});
-}
 
 var set_aloft_wrapper = func {
 

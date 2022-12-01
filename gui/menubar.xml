@@ -794,6 +794,10 @@
 				<command>reinit</command>
 				<subsystem>xml-autopilot</subsystem>
 			</binding>
+			<binding>
+				<command>reinit</command>
+				<subsystem>xml-proprules</subsystem>
+			</binding>
 		</item>
 
 		<item>

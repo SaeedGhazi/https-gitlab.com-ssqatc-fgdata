@@ -10,6 +10,7 @@ varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
+varying vec2 orthoTexCoord;
 
 
 uniform sampler2D texture;
@@ -18,6 +19,7 @@ uniform sampler2D mix_texture;
 uniform sampler2D grain_texture;
 uniform sampler2D dot_texture;
 uniform sampler2D gradient_texture;
+uniform sampler2D orthophotoTexture;
 
 
 varying float steepness;
@@ -61,6 +63,8 @@ uniform int rock_strata;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+
+uniform bool orthophotoAvailable;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -232,6 +236,17 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 
     texel = texture2D(texture, gl_TexCoord[0].st);
     float local_autumn_factor = texel.a;
+	
+	if (orthophotoAvailable) {
+        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        if (sat_texel.a > 0) {
+            texel.rgb = sat_texel.rgb;
+			flag = 0;
+			mix_flag = 0;
+        }
+    }
+
+	
 	grain_texel = texture2D(grain_texture, gl_TexCoord[0].st * 25.0);
 	gradient_texel = texture2D(gradient_texture, gl_TexCoord[0].st * 4.0);
 
@@ -263,18 +278,22 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
 	}
 
 	// the mixture/gradient texture
-	mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
-	if (mix_texel.a <0.1) {mix_flag = 0;}
+	if (mix_flag == 1) {
+		mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
+		if (mix_texel.a <0.1) {mix_flag = 0;}
+	}
 
 	// the hires overlay texture is loaded with parallax mapping
 	
-	stprime = vec2 (0.86*gl_TexCoord[0].s + 0.5*gl_TexCoord[0].t, 0.5*gl_TexCoord[0].s - 0.86*gl_TexCoord[0].t);
-	distortion_factor = 0.97 + 0.06 * noise_500m;
-	stprime = stprime * distortion_factor * 15.0;
-	stprime = stprime + normalize(relPos).xy * 0.022 * (noise_10m + 0.5 * noise_5m +0.25 * noise_2m - 0.875 );
-	
-    	detail_texel = texture2D(detail_texture, stprime);
-	if (detail_texel.a <0.1) {flag = 0;}
+	if (flag == 1) {
+		stprime = vec2 (0.86*gl_TexCoord[0].s + 0.5*gl_TexCoord[0].t, 0.5*gl_TexCoord[0].s - 0.86*gl_TexCoord[0].t);
+		distortion_factor = 0.97 + 0.06 * noise_500m;
+		stprime = stprime * distortion_factor * 15.0;
+		stprime = stprime + normalize(relPos).xy * 0.022 * (noise_10m + 0.5 * noise_5m +0.25 * noise_2m - 0.875 );
+		
+		detail_texel = texture2D(detail_texture, stprime);
+		if (detail_texel.a <0.1) {flag = 0;}
+	}
 	
 
 

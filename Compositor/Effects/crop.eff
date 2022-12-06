@@ -29,6 +29,10 @@
         <property>/sim/rendering/shaders/crop</property>
         <equal>
           <value type="float">0.0</value>
+          <float-property>/sim/rendering/photoscenery/enabled</float-property>
+        </equal>
+        <equal>
+          <value type="float">0.0</value>
           <float-property>/sim/rendering/rembrandt/enabled</float-property>
         </equal>
         <or>

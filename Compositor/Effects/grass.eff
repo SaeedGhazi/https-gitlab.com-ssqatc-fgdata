@@ -209,6 +209,10 @@
         <fragment-shader>Shaders/ALS/secondary_lights.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/filters.frag</fragment-shader>
         <fragment-shader>Shaders/ALS/shadows-include.frag</fragment-shader>
+        <attribute>
+          <name>orthophotoTexCoord</name>
+          <index>14</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -863,6 +867,11 @@
         <type>int</type>
         <value>2</value>
         <!-- AMBIENT_AND_DIFFUSE -->
+      </uniform>
+      <uniform>
+        <name>orthophotoTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">15</value>
       </uniform>
       <!-- BEGIN shadows include -->
       <uniform>

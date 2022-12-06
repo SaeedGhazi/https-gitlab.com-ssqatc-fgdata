@@ -132,6 +132,9 @@ Started September 2000 by David Megginson, david@megginson.com
           </lighting>
         </debug>
       </rembrandt>
+      <photoscenery>
+        <enabled type="bool" userarchive="y">false</enabled>
+      </photoscenery>
       <debug type="bool">false</debug>
       <realism type="int">5</realism>
       <filtering type="int">8</filtering>

@@ -6,11 +6,13 @@
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
+varying vec2 orthoTexCoord;
 
 
 uniform float fg_Fcoef;
 
 uniform sampler2D texture;
+uniform sampler2D orthophotoTexture;
 
 
 varying float yprime_alt;
@@ -28,6 +30,8 @@ uniform float hazeLayerAltitude;
 uniform float overcast;
 uniform float eye_alt;
 uniform float cloud_self_shading;
+
+uniform bool orthophotoAvailable;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -90,6 +94,15 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
+
+	if (orthophotoAvailable) {
+        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        if (sat_texel.a > 0) {
+            texel.rgb = sat_texel.rgb;
+        }
+    }
+
+
     fragColor = color * texel + specular;
 
 

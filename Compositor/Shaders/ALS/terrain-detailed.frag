@@ -8,6 +8,7 @@ varying vec3 normal;
 varying vec3 relPos;
 varying vec2 rawPos;
 varying vec3 worldPos;
+varying vec2 orthoTexCoord;
 
 
 uniform float fg_Fcoef;
@@ -15,6 +16,7 @@ uniform float fg_Fcoef;
 uniform sampler2D texture;
 uniform sampler2D detail_texture;
 uniform sampler2D mix_texture;
+uniform sampler2D orthophotoTexture;
 
 //varying float yprime_alt;
 //varying float mie_angle;
@@ -43,6 +45,7 @@ uniform float transition_model;
 uniform float hires_overlay_bias;
 uniform int quality_level;
 uniform int tquality_level;
+uniform bool orthophotoAvailable;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -125,16 +128,26 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
 //
 
+	int flag = 1;
+    int mix_flag = 1;
 
 // get the texels
 
     texel = texture2D(texture, gl_TexCoord[0].st);
     float local_autumn_factor = texel.a;
 
+	if (orthophotoAvailable) {
+        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        if (sat_texel.a > 0) {
+            texel.rgb = sat_texel.rgb;
+			flag = 0;
+			mix_flag = 0;
+        }
+    }
+
+
     float distortion_factor = 1.0;
     vec2 stprime;
-    int flag = 1;
-    int mix_flag = 1;
     float noise_term;
     float snow_alpha;
 
@@ -159,14 +172,14 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
    	
 	}
 
-    if (tquality_level > 2)
+		if ((tquality_level > 2) && (mix_flag == 1))
 	{
 	mix_texel = texture2D(mix_texture, gl_TexCoord[0].st * 1.3);
 	if (mix_texel.a <0.1) {mix_flag = 0;}
  	}
 
 
-    if (tquality_level > 3)  
+    if ((tquality_level > 3) && (flag == 1))    
 	{
 	stprime = vec2 (0.86*gl_TexCoord[0].s + 0.5*gl_TexCoord[0].t, 0.5*gl_TexCoord[0].s - 0.86*gl_TexCoord[0].t);
     	//distortion_factor = 0.9375 + (1.0 * nvL[2]);

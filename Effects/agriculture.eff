@@ -153,6 +153,10 @@
     <predicate>
       <and>
         <property>/sim/rendering/shaders/skydome</property>
+        <equal>
+          <value type="float">0.0</value>
+          <float-property>/sim/rendering/photoscenery/enabled</float-property>
+        </equal>
         <and>
           <less-equal>
             <value type="float">6.0</value>

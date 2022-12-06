@@ -5,11 +5,15 @@
 
 varying vec4 diffuse_term;
 varying vec3 normal;
+varying vec2 orthoTexCoord;
 
 uniform sampler2D texture;
+uniform sampler2D orthophotoTexture;
 
 ////fog "include" /////
 uniform int fogType;
+
+uniform bool orthophotoAvailable;
 
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
@@ -50,6 +54,15 @@ void main()
     // is closer to what the OpenGL fixed function pipeline does.
     color = clamp(color, 0.0, 1.0);
     texel = texture2D(texture, gl_TexCoord[0].st);
+    
+    if (orthophotoAvailable) {
+        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        if (sat_texel.a > 0) {
+            texel.rgb = sat_texel.rgb;
+        }
+    }
+
+    
     fragColor = color * texel + specular;
 
     fragColor.rgb = fog_Func(fragColor.rgb, fogType);

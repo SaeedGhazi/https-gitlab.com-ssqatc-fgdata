@@ -9,11 +9,13 @@ varying vec3 relPos;
 varying vec3 worldPos;
 varying vec2 rawPos;
 varying vec3 ecViewdir;
+varying vec2 orthoTexCoord;
 
 
 uniform sampler2D texture;
 uniform sampler2D overlay_texture;
 uniform sampler2D grain_texture;
+uniform sampler2D orthophotoTexture;
 
 varying float steepness;
 
@@ -53,6 +55,8 @@ uniform int use_color_overlay;
 uniform int use_searchlight;
 uniform int use_landing_light;
 uniform int use_alt_landing_light;
+
+uniform bool orthophotoAvailable;
 
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
@@ -160,6 +164,14 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
     texel = texture2D(texture, gl_TexCoord[0].st * base_layer_magnification); 
     float local_autumn_factor = texel.a;
+
+	if (orthophotoAvailable) {
+        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        if (sat_texel.a > 0) {
+            texel.rgb = sat_texel.rgb;
+        }
+    }
+
 
     float distortion_factor = 1.0;
     float noise_term;

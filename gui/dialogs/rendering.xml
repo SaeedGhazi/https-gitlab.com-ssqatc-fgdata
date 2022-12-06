@@ -881,6 +881,23 @@
           </binding>
         </combo>
 
+		<checkbox>
+			<row>8</row>
+			<col>0</col>
+			<label>Satellite Photoscenery</label>
+			<name>satellite-photoscenery</name>
+			<enable>
+				<not>
+					<property>/sim/rendering/rembrandt/enabled</property>
+				</not>
+			</enable>
+			<property>/sim/rendering/photoscenery/enabled</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>satellite-photoscenery</object-name>
+			</binding>
+		</checkbox>
+
 			</group>
 
 			<group>
@@ -1101,6 +1118,7 @@
 			checkOSMWarning();
 
       var reload_props = [
+	  	"/sim/rendering/photoscenery/enabled",
         "/sim/rendering/materials-file",
         "/sim/rendering/osm-buildings",
         "/sim/rendering/random-buildings",

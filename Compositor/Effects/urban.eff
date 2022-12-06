@@ -53,6 +53,10 @@
       <and>
         <property>/sim/rendering/shaders/quality-level</property>
         <property>/sim/rendering/shaders/urban</property>
+        <equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/photoscenery/enabled</float-property>
+				</equal>
         <less-equal>
           <value type="float">4.0</value>
           <float-property>/sim/rendering/shaders/urban</float-property>
@@ -324,6 +328,10 @@
       <and>
         <property>/sim/rendering/shaders/quality-level</property>
         <property>/sim/rendering/shaders/urban</property>
+        <equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/photoscenery/enabled</float-property>
+				</equal>
         <less-equal>
           <value type="float">1.0</value>
           <float-property>/sim/rendering/shaders/urban</float-property>
@@ -542,6 +550,10 @@
           <value type="float">4.0</value>
           <float-property>/sim/rendering/shaders/urban</float-property>
         </less-equal>
+        <equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/photoscenery/enabled</float-property>
+				</equal>
         <or>
           <less-equal>
             <value type="float">2.0</value>
@@ -1396,6 +1408,10 @@
           <value type="float">1.0</value>
           <float-property>/sim/rendering/shaders/urban</float-property>
         </less-equal>
+        <equal>
+					<value type="float">0.0</value>
+					<float-property>/sim/rendering/photoscenery/enabled</float-property>
+				</equal>
         <or>
           <less-equal>
             <value type="float">2.0</value>

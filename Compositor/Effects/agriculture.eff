@@ -282,6 +282,10 @@
     <scheme>als-lighting</scheme>
     <predicate>
       <and>
+        <equal>
+          <value type="float">0.0</value>
+          <float-property>/sim/rendering/photoscenery/enabled</float-property>
+        </equal>
         <and>
           <less-equal>
             <value type="float">6.0</value>

@@ -40,6 +40,7 @@ loadWidget("LineEdit");
 loadWidget("ScrollArea");
 loadWidget("Rule");
 loadWidget("Slider");
+loadWidget("TabWidget");
 
 # standard dialogs
 loadDialog("InputDialog");

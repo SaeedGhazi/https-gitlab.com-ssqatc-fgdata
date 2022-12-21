@@ -37,6 +37,7 @@ loadWidget("Button");
 loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
+loadWidget("PropertyWidgets");
 loadWidget("ScrollArea");
 loadWidget("Rule");
 loadWidget("Slider");
@@ -308,6 +309,7 @@ var Window = {
   {
     me._ghost.show();
     me.raise();
+    me._canvas.update();
   },
   # Hide / show the window based on whether it's currently visible
   toggle: func()

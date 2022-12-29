@@ -459,26 +459,26 @@ DefaultStyle.widgets["scroll-area"] = {
 };
 
 DefaultStyle.widgets["tab-widget"] = {
+	tabBarHeight: 30,
 	new: func(parent, cfg) {
 		me._root = parent.createChild("group", "tab-widget");
-		me._bg = me._root.createChild("path", "background")
+		me.bg = me._root.createChild("path", "background")
 					.set("fill", "#e0e0e0");
 		me.tabBar = me._root.createChild("group", "tab-widget-tabbar");
-		me.tabBarHeight = 30;
 		me.content = me._root.createChild("group", "tab-widget-content");
-		me.content.setTranslation(0, me.tabBarHeight);
 	},
 	
 	update: func(model) {
-		me._bg.set("fill", me._style.getColor("bg_color"));
+		me.bg.set("fill", me._style.getColor("bg_color"));
+		me.tabBar.update();
+		me.content.update();
 	},
 	
 	setSize: func(model, w, h) {
-		me._bg.reset().rect(0, 0, model._size[0], model._size[1]);
-		me.tabBar.set("clip", sprintf("rect(0, %d, %d, 0)", model._size[0], me.tabBarHeight));
-		me.content.set("clip",	sprintf("rect(0, %d, %d, 0)", model._size[0], model._size[1] - me.tabBarHeight));
-		
-		return me.update(model);
+		me.bg.reset().rect(0, w, h, 0);
+		me.tabBar.set("clip", sprintf("rect(0, %d, %d, 0)", w, me.tabBarHeight));
+		me.content.setTranslation(0, me.tabBarHeight);
+		me.content.set("clip",	sprintf("rect(0, %d, %d, 0)", w, h));
 	},
 };
 

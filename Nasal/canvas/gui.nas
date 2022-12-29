@@ -46,6 +46,7 @@ loadWidget("TabWidget");
 # standard dialogs
 loadDialog("InputDialog");
 loadDialog("MessageBox");
+loadDialog("WidgetsFactoryDialog");
 
 var style = DefaultStyle.new("AmbianceClassic", "Humanity");
 var WindowButton = {

@@ -245,6 +245,13 @@
                 <script>canvas.MapStructure_selfTest();</script>
             </binding>
         </button>
+        <button>
+            <legend>Canvas widgets factory</legend>
+            <binding>
+                <command>nasal</command>
+                <script>canvas.WidgetsFactoryDialog.new();</script>
+            </binding>
+        </button>
     </group>
 
     <group>

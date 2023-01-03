@@ -1,17 +1,18 @@
 var WidgetsFactoryDialog = {
 	new: func {
 		var m = {
-			parents: [WidgetsFactoryDialog, canvas.Window.new([500, 500], "dialog")]
+			parents: [WidgetsFactoryDialog],
+			window: canvas.Window.new([500, 500], "dialog")
 		};
 		
-		m.setBool("resize", 1);
+		m.window.setBool("resize", 1);
 		
 		m.root = m.getCanvas(1)
 						.set("background", style.getColor("bg_color"))
 						.createGroup();
 		m.vbox = VBoxLayout.new();
 		#m.vbox.setContentsMargin(10);
-		m.setLayout(m.vbox);
+		m.window.setLayout(m.vbox);
 		
 		m.tabs = gui.widgets.TabWidget.new(m.root, style, {});
 		m.tabsContent = m.tabs.getContent();
@@ -37,6 +38,7 @@ var WidgetsFactoryDialog = {
 		m.tabs.addTab("tab-2", "Tab 2", m.tab_2);
 		m.button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("A button")
+						.setFixedSize(60, 30)
 						.listen("clicked", func {
 							InputDialog.getText("You clicked the button …", "Enter some text:", func (button, text) {
 								MessageBox.information("You clicked the button …", "… and entered '" ~ (text != nil ? text : "nothing") ~ "' !");
@@ -55,16 +57,26 @@ var WidgetsFactoryDialog = {
 						.setCheckable(1)
 						.setChecked(0)
 						.setText("Checkable button")
+						.setFixedSize(100, 30)
 						.listen("toggled", func (e) {
 							m.image.setVisible(int(e.detail.checked));
 						});
 		m.tab_2.addItem(m.checkable_button);
+		m.resize_button = gui.widgets.Button.new(m.tabsContent, style, {})
+						.setText("Resize this window")
+						.setFixedSize(100, 30)
+						.listen("clicked", func {
+							var s = m.getSize();
+							m.setSize(s[0] + 100, s[1] + 100);
+						});
+		m.tab_2.addItem(m.resize_button);
 		
 		return m;
 	},
 	
 	del: func {
 		me.property_checkbox.del();
+		me.window.del();
 	}
 };
 

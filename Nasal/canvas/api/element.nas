@@ -185,6 +185,22 @@ var Element = {
         }
         return center;
     },
+    
+    # Set size in pixels
+    # Use either with x, y size:
+    #     e.setSize(<x>, <y>)
+    # or with a vector containing x, y:
+    #     e.setSize([<x>, <y>])
+    setSize: func {
+        if (size(arg) == 1) {
+            var (x, y) = arg[0];
+        } else {
+        	var (x, y) = arg;
+        }
+        var (sx, sy) = me.getScale();
+        var (curx, cury) = me.getSize();
+        me.setScale(x / (curx / sy), y / (cury / sy));
+    },
 
     #return vector [sx, sy] with dimensions of bounding box
     getSize: func {

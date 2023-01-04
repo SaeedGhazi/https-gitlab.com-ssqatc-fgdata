@@ -126,7 +126,7 @@ DefaultStyle.widgets.checkbox = {
   {
     if (me._label_position == "left") {
       me._label.setTranslation(3, int((h / 2) + 1));
-      me._icon.setTranslation(me._label.maxWidth() + 6, int((h - 18) / 2));
+      me._icon.setTranslation(w - 24, int((h - 18) / 2));
     } else {
       me._icon.setTranslation(3, int((h - 18) / 2));
       me._label.setTranslation(24, int(h / 2) + 1);
@@ -456,6 +456,88 @@ DefaultStyle.widgets["scroll-area"] = {
     model._scroller_offset[dir] = 0;
     model._scroller_delta[dir] = model._size[dir] - model._scroller_size[dir];
   }
+};
+
+DefaultStyle.widgets["tab-widget"] = {
+	tabBarHeight: 30,
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "tab-widget");
+		me.bg = me._root.createChild("path", "background")
+					.set("fill", "#e0e0e0");
+		me.tabBar = me._root.createChild("group", "tab-widget-tabbar");
+		me.content = me._root.createChild("group", "tab-widget-content");
+	},
+	
+	update: func(model) {
+		me.bg.set("fill", me._style.getColor("bg_color"));
+		me.tabBar.update();
+		me.content.update();
+	},
+	
+	setSize: func(model, w, h) {
+		me.bg.reset().rect(0, w, h, 0);
+		me.tabBar.set("clip", sprintf("rect(0, %d, %d, 0)", w, me.tabBarHeight));
+		me.content.setTranslation(0, me.tabBarHeight);
+		me.content.set("clip",	sprintf("rect(0, %d, %d, 0)", w, h));
+	},
+};
+
+# Tab button for the tab widget
+DefaultStyle.widgets["tab-widget-tab-button"] = {
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "tab-widget-tab-button");
+		me._bg = me._root.createChild("path")
+						.set("fill", me._style.getColor("tab_widget_tab_button_bg_focused"))
+						.set("stroke", me._style.getColor("tab_widget_tab_button_border"))
+						.set("stroke-width", 1);
+		me._selected_indicator = me._root.createChild("path")
+						.set("stroke", me._style.getColor("tab_widget_tab_button_selected_indicator"))
+						.set("stroke-width", 3);
+		me._label = me._root.createChild("text")
+						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+						.set("character-size", 14)
+						.set("alignment", "center-baseline");
+	},
+	
+	setSize: func(model, w, h) {
+		me._bg.reset().rect(3, 0, w - 6, h);
+		me._selected_indicator.reset().moveTo(3, h).horiz(w - 6);
+	},
+	
+	setText: func(model, text) {
+		me._label.setText(text);
+
+		var min_width = math.max(80, me._label.maxWidth() + 16);
+		model.setLayoutMinimumSize([min_width, 30]);
+		model.setLayoutSizeHint([min_width, 30]);
+
+		return me;
+	},
+	
+	update: func(model) {
+		var backdrop = !model._windowFocus();
+		var (w, h) = model._size;
+		
+		me._label.setTranslation(w / 2, h / 2 + 5);
+		
+		var bg_color_name = "tab_widget_tab_button_bg_focused";
+		if (backdrop) {
+			bg_color_name = "tab_widget_tab_button_bg_unfocused";
+		} else if (model._selected) {
+			bg_color_name = "tab_widget_tab_button_bg_selected";
+		} else if (model._hover) {
+			bg_color_name = "tab_widget_tab_button_bg_hovered";
+		}
+		me._bg.set("fill", me._style.getColor(bg_color_name));
+		
+		me._selected_indicator.setVisible(model._selected);
+
+		if (backdrop) {
+			me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+		} else {
+			me._label.set("fill", me._style.getColor("fg_color"));
+		}
+	}
 };
 
 # A horizontal or vertical rule line

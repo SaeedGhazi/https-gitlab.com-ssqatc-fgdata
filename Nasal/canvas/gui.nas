@@ -37,13 +37,16 @@ loadWidget("Button");
 loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
+loadWidget("PropertyWidgets");
 loadWidget("ScrollArea");
 loadWidget("Rule");
 loadWidget("Slider");
+loadWidget("TabWidget");
 
 # standard dialogs
 loadDialog("InputDialog");
 loadDialog("MessageBox");
+loadDialog("WidgetsFactoryDialog");
 
 var style = DefaultStyle.new("AmbianceClassic", "Humanity");
 var WindowButton = {
@@ -307,6 +310,7 @@ var Window = {
   {
     me._ghost.show();
     me.raise();
+    me._canvas.update();
   },
   # Hide / show the window based on whether it's currently visible
   toggle: func()

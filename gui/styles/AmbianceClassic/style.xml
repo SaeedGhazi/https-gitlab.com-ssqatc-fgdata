@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <PropertyList>
 <!--
 	<folders>
@@ -8,7 +7,6 @@
 	</folders>
 -->
 	<colors>
-
 		<!-- Window decoration colors -->
 		<title>
 			<red   type="float">0.275</red>
@@ -95,7 +93,41 @@
 			<green type="float">0.89</green>
 			<blue  type="float">0.89</blue>
 		</button_bg_color_insensitive>
-
+		
+		<tab_widget_tab_button_border>
+			<red type="float">0.905</red>
+			<green type="float">0.897</green>
+			<blue type="float">0.885</blue>
+		</tab_widget_tab_button_border>
+		
+		<tab_widget_tab_button_selected_indicator>
+			<red type="float">0.11</red>
+			<green type="float">0.42</green>
+			<blue type="float">0.8</blue>
+		</tab_widget_tab_button_selected_indicator>
+		
+		<tab_widget_tab_button_bg_focused>
+			<red type="float">0.86</red>
+			<green type="float">0.855</green>
+			<blue type="float">0.85</blue>
+		</tab_widget_tab_button_bg_focused>
+		
+		<tab_widget_tab_button_bg_unfocused>
+			<red type="float">0.9</red>
+			<green type="float">0.895</green>
+			<blue type="float">0.89</blue>
+		</tab_widget_tab_button_bg_unfocused>
+		
+		<tab_widget_tab_button_bg_hovered>
+			<red type="float">0.93</red>
+			<green type="float">0.925</green>
+			<blue type="float">0.92</blue>
+		</tab_widget_tab_button_bg_hovered>
+		
+		<tab_widget_tab_button_bg_selected>
+			<red type="float">0.96</red>
+			<green type="float">0.955</green>
+			<blue type="float">0.95</blue>
+		</tab_widget_tab_button_bg_selected>
 	</colors>
-
 </PropertyList>

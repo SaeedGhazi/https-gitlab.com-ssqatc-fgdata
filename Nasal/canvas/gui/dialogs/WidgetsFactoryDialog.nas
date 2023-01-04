@@ -7,7 +7,7 @@ var WidgetsFactoryDialog = {
 		
 		m.window.setBool("resize", 1);
 		
-		m.root = m.getCanvas(1)
+		m.root = m.window.getCanvas(1)
 						.set("background", style.getColor("bg_color"))
 						.createGroup();
 		m.vbox = VBoxLayout.new();
@@ -57,19 +57,19 @@ var WidgetsFactoryDialog = {
 						.setCheckable(1)
 						.setChecked(0)
 						.setText("Checkable button")
-						.setFixedSize(100, 30)
+						.setFixedSize(120, 30)
 						.listen("toggled", func (e) {
 							m.image.setVisible(int(e.detail.checked));
 						});
 		m.tab_2.addItem(m.checkable_button);
 		m.resize_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("Resize this window")
-						.setFixedSize(100, 30)
+						.setFixedSize(130, 30)
 						.listen("clicked", func {
-							var s = m.getSize();
-							m.setSize(s[0] + 100, s[1] + 100);
+							var s = m.window.getSize();
+							m.window.setSize(s[0] + 100, s[1] + 100);
 						});
-		m.tab_2.addItem(m.resize_button);
+		m.tab_2.addItem(m.resize_button, 5);
 		
 		return m;
 	},

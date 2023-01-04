@@ -55,6 +55,7 @@ var Element = {
     # @param visible    Whether the element should be visible
     setVisible: func(visible = 1) {
         me.setBool("visible", visible);
+        return me;
     },
 
     getVisible: func {

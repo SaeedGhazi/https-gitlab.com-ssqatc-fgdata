@@ -47,12 +47,11 @@ var WidgetsFactoryDialog = {
 		m.tab_2.addItem(m.button);
 		m.image = gui.widgets.Label.new(m.tabsContent, style, {})
 						.setImage("Textures/Splash1.png")
+						.setVisible(0)
 						.setFixedSize(128, 128);
+
 		m.tab_2.addItem(m.image);
-		# XXX: setVisible(0) must be called AFTER adding the widget to the layout
-		# doing that before layout.addItem causes FG to crash with a SIGSEGV
-		# see https://sourceforge.net/p/flightgear/mailman/flightgear-devel/thread/CABg8F9Rb87Fy%252B2ppXjJouYcZH9xyiQxts-jkdrPq0GK_Ymq-6w%2540mail.gmail.com/
-		m.image.setVisible(0);
+
 		m.checkable_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setCheckable(1)
 						.setChecked(0)

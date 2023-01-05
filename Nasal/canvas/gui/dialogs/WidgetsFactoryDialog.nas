@@ -51,6 +51,20 @@ var WidgetsFactoryDialog = {
 						.setFixedSize(128, 128);
 
 		m.tab_2.addItem(m.image);
+		m.image._view._root.addEventListener("mousedown", func (e) {
+			logprint(LOG_INFO, "Image was clicked at:" ~ e.localX ~ "," ~ e.localY);
+			logprint(LOG_INFO, "Client pos:" ~ e.clientX ~ "," ~ e.clientY);
+			logprint(LOG_INFO, "Screen pos:" ~ e.screenX ~ "," ~ e.screenY);
+
+			var img = m.image._view._root;
+			var localPos = [e.localX, e.localY];
+			var canvasPos = img.localToCanvas(localPos);
+
+			logprint(LOG_INFO, "computed canvasPos pos:" ~ canvasPos[0] ~ "," ~ canvasPos[1]);
+
+			var screenPos = m.window.toScreenPosition(canvasPos);
+			logprint(LOG_INFO, "computed screen pos:" ~ screenPos[0] ~ "," ~ screenPos[1]);
+		});
 
 		m.checkable_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setCheckable(1)

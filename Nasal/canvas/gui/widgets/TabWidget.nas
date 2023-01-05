@@ -165,14 +165,17 @@ gui.widgets.TabWidget = {
 			die("tab with id '" ~ id ~ "' does not exist");
 		}
 		
+		if (me._currentTabId == id) {
+			return; # no need to do anything
+		}
+
 		if (me._currentTabId) {
 			me._tabButtons[me._currentTabId].setSelected(0);
 		}
 		me._tabButtons[id].setSelected();
 		foreach (var tabid; keys(me._tabs)) {
-			me._tabs[tabid].setVisible(0);
+			me._tabs[tabid].setVisible(tabid == id);
 		}
-		me._tabs[id].setVisible(1);
 		me._currentTabId = id;
 		me._currentTab = me._tabs[id];
 		

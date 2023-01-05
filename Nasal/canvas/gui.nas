@@ -12,6 +12,7 @@
 var gui = {
   widgets: {},
   focused_window: nil,
+  open_popups: [],
   region_highlight: nil,
 
   # Window/dialog stacking order
@@ -28,6 +29,8 @@ var loadWidget = func(name) loadGUIFile("widgets/" ~ name ~ ".nas");
 var loadDialog = func(name) loadGUIFile("dialogs/" ~ name ~ ".nas");
 
 loadGUIFile("Config.nas");
+loadGUIFile("Menu.nas");
+loadGUIFile("Popup.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
 loadGUIFile("styles/DefaultStyle.nas");
@@ -103,8 +106,10 @@ var Window = {
     m.setDouble("aspect-ratio", size[0]/size[1]);
     m.setBool("lock-aspect-ratio", 0);
     
-    # TODO better default position
-    m.move(0,0);
+    var desktopSize = [props.globals.getValue("/sim/gui/canvas/size[0]"), props.globals.getValue("/sim/gui/canvas/size[1]")];
+    var pos = [desktopSize[0] / 2 - size[0] / 2 + 10, desktopSize[1] / 2 - size[1] / 2 + 30];
+    m.move(pos[0], pos[1]);
+    
     if (destroy_on_close) {
       m.setFocus();
     } else {
@@ -351,6 +356,11 @@ var Window = {
   _onStateChange: func
   {
     var event = canvas.CustomEvent.new("wm.focus-" ~ (me._focused ? "in" : "out"));
+    if (me._focused) {
+      foreach(var p; gui.open_popups) {
+        p.hide();
+      }
+    }
 
     if( me._getCanvasDecoration() != nil )
     {
@@ -576,6 +586,12 @@ var Window = {
 getDesktop().addEventListener("mousedown", func {
   if( gui.focused_window != nil )
     gui.focused_window.clearFocus();
+  
+  if (size(gui.open_popups)) {
+    foreach (var p; gui.open_popups) {
+      p.hide();
+    }
+  }
 });
 
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)

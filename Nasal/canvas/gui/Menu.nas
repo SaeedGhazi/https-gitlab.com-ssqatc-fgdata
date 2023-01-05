@@ -1,0 +1,268 @@
+# SPDX-FileCopyrightText: (C) 2022 Frederic Croix <thefgfseagle@gmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Usage example for the menu, with submenu:
+#
+# var m = canvas.gui.Menu.new();
+# var i1 = m.createItem("Text");
+# var i2 = m.createItem("Text 2");
+# var sub = canvas.gui.Menu.new();
+# var s1 = sub.createItem("Sub", nil);
+# var s2 = sub.createItem("Sub", nil);
+# i1.setMenu(sub);
+# m.setPosition(200, 200);
+# m.show();
+
+gui.MenuItem = {
+        # @description Create a new menu item widget
+        # @cfg_field text: str Text of the new menu item
+        # @cfg_field cb: callable Function / method to call when the item is clicked
+        # @cfg_field icon: str Path of an icon to be displayed (relative to the path in `canvas.style._dir_widgets`)
+        # @cfg_field enabled: bool Initial state of the menu item: enabled (1) or disabled (0)
+        new: func(parent, style, cfg) {
+                var cfg = Config.new(cfg);
+                var m = gui.Widget.new(gui.MenuItem);
+                m._text = cfg.get("text", "Menu item");
+                m._cb = cfg.get("cb", nil);
+                m._icon = cfg.get("icon", nil);
+                m._enabled = cfg.get("enabled", 1);
+                m._hovered = 0;
+                m._menu = nil;
+                m._parent_menu = nil;
+
+                m._setView(style.createWidget(parent, cfg.get("type", "menu-item"), cfg));
+
+                m.setLayoutMinimumSize([48, 24]);
+                m.setLayoutSizeHint([64, 24]);
+                m.setLayoutMaximumSize([1024, 24]);
+                m._view.setText(m, m._text);
+                m._view.setIcon(m._icon);
+                return m;
+        },
+
+        setMenu: func(menu) {
+                me._menu = menu;
+
+                return me.update();
+        },
+        
+        onClicked: func(e) {
+                if (!me._menu and me._cb) {
+                        me._cb(e);
+                }
+        },
+
+        onMouseEnter: func(e) {
+                print("entered item ", me._enabled);
+                for (var i = 0; i < me._parent_menu._layout.count(); i += 1) {
+                        var item = me._parent_menu._layout.itemAt(i);
+                        item._hovered = 0;
+                        if (item._menu) {
+                                item._menu.hide();
+                        }
+                        item.update();
+                }
+                if (me._enabled) {
+                        me._hovered = 1;
+                        var x = e.screenX - e.localX + me.geometry()[2];
+                        var y = e.screenY - e.localY;
+                        me._showMenu(x, y);
+                }
+                me.update();
+        },
+
+        onMouseLeave: func(e) {
+                print("left item");
+                if (me._menu == nil) {
+                        me._hovered = 0;
+                }
+                me.update();
+        },
+
+        removeMenu: func() {
+                me._menu = nil;
+                return me.update();
+        },
+
+        _showMenu: func(x, y) {
+                if (me._menu) {
+                        me._menu.setPosition(x, y);
+                        me._menu.show();
+                        me._menu.setFocus();
+                }
+        },
+
+        setEnabled: func(enabled = 1) {
+                me._enabled = enabled;
+                return me.update();
+        },
+
+        setText: func(text) {
+                me._text = text;
+                me._view.setText(me, text);
+                return me.update();
+        },
+
+        setIcon: func(icon) {
+                me._icon = icon;
+                me._view.setIcon(icon);
+                return me.update();
+        },
+
+        setCallback: func(cb = nil) {
+                me._cb = cb;
+                return me;
+        },
+
+        update: func {
+                me._view.update(me);
+                return me;
+        },
+
+        _setView: func(view) {
+                call(gui.Widget._setView, [view], me);
+
+                var el = view._root;
+                el.addEventListener("click", func(e) me.onClicked(e));
+
+                el.addEventListener("mouseenter", func(e) me.onMouseEnter(e));
+                el.addEventListener("mouseleave", func(e) me.onMouseLeave(e));
+                el.addEventListener("drag", func(e) e.stopPropagation());
+        }
+};
+
+gui.Menu = {
+        new: func(id = nil) {
+                var m = gui.Popup.new([100, 60], id);
+                m.parents = [gui.Menu] ~ m.parents;
+                m.style = style;
+
+                m._canvas = m.createCanvas().setColorBackground(style.getColor("bg_color"));
+                m._root = m._canvas.createGroup();
+                m._layout = VBoxLayout.new();
+                m._layout.setSpacing(0);
+                m.setLayout(m._layout);
+                m.hide();
+
+                return m;
+        },
+
+        # @description Add the given menu item to the menu (normally a `canvas.gui.MenuItem`, but can be any `canvas.gui.Widget` in theory)
+        # @return canvas.gui.Menu Return me to enable method chaining
+        addItem: func(item) {
+                item._parent_menu = me;
+                me._layout.addItem(item);
+                me.setSize(me._layout.minimumSize()[0], me._layout.minimumSize()[1]);
+                return me;
+        },
+
+        # @description Create, insert and return a `canvas.gui.MenuItem` with given text and an optional callback, icon and enabled state.
+        # @param text: strrequired Text to display on the menu item
+        # @param cb: callable optional Function / method to call when the item is clicked - if no callback is wanted, nil can be used
+        # @param icon: str optional Path to the icon (relative to canvas.style._dir_widgets) or nil if none should be displayed
+        # @param enabled: bool optional Whether the item should be enabled (1) or disabled (0)
+        # @return canvas.gui.MenuItem The item that was created
+        createItem: func(text, cb = nil, icon = nil, enabled = 1) {
+                item = gui.MenuItem.new(me._root, me.style, {"text": text, "cb": cb, "icon": icon, "enabled": enabled});
+                me.addItem(item);
+                return item;
+        },
+
+        # @description Create, insert and return a `canvas.gui.MenuItem with the given text and assign the given submenu to it,
+        #                          optionally add the given icon and set the given enabled state
+        # @param text: strrequired Text to display on the menu item
+        # @param menu: canvas.gui.Menu Submenu that shall be assigned to the new menu item
+        # @param icon: str optional Path to the icon (relative to canvas.style._dir_widgets) or nil if none should be displayed
+        # @param enabled: bool optional Whether the item should be enabled (1) or disabled (0)
+        # @return canvas.gui.MenuItem The item that was created
+        addMenu: func(text, menu, icon = nil, enabled = 1) {
+                item = gui.MenuItem.new(me._root, me.style, {"text": text, cb: nil, "icon": icon, "enabled": enabled});
+                item.setMenu(menu);
+                me.addItem(item);
+                return item;
+        },
+
+        # @description Remove all items from the menu
+        # @return canvas.gui.Menu Return me to enable method chaining
+        clear: func {
+                me._layout.clear();
+                return me;
+        },
+
+        # @description If `item` is a `canvas.gui.Widget`, remove the given `canvas.gui.Widget` from the menu
+        #                         Else assume `item` to be a scalar and try to find an item of the menu that has a `getText` method
+        #                         and whose result of calling its `getText` method equals `item` and remove that item
+        # @param item: Union[str, canvas.gui.Widget] required The widget or the text of the menu item to remove
+        removeItem: func(item) {
+                if (isa(item, gui.Widget)) {
+                        me._layout.removeItem(item);
+                } else {
+                        for (var i = 0; i < me._layout.count(); i += 1) {
+                                if (me._layout.itemAt(i)["getText"] != nil and me._layout.itemAt(i).getText() == item) {
+                                        me._layout.takeAt(i);
+                                        return me;
+                                }
+                        }
+                        die("No menu item with given text '" ~ item ~ "' found, could not remove !");
+                }
+        },
+
+        # @description If `index` is an integer, remove and return the item at the given `index`
+        #                         Else assume `item` to be a scalar and try to find an item of the menu that has a `getText` method
+        #                         and whose result of calling its `getText` method equals `item` and remove and return that item
+        # @param index: Union[int, str] required The index or text of the menu item to remove
+        # @return canvas.gui.Widget The item with given text `index` or at the given position `index`
+        takeAt: func(index) {
+                if (isint(index)) {
+                        return me._layout.takeAt(index);
+                } else {
+                        for (var i = 0; i < me._layout.count(); i += 1) {
+                                if (me._layout.itemAt(i)["getText"] != nil and me._layout.itemAt(i).getText() == index) {
+                                        return me._layout.takeAt(i);
+                                }
+                        }
+                        die("No menu item with given text '" ~ index ~ "' found, could not remove !");
+                }
+        },
+
+        # @description Count the items of the menu
+        # @return int Number of items
+        count: func() {
+                return me._layout.count();
+        },
+
+        # @description If `index` is an integer, eturn the item at the given `index`
+        #                         Else assume `item` to be a scalar and try to find an item of the menu that has a `getText` method
+        #                         and whose result of calling its `getText` method equals `item` and eturn that item
+        # @param index: Union[int, str] required The index or text of the menu item to return
+        # @return canvas.gui.Widget The item with given text `index` or at the given position `index`
+        getItem: func(index) {
+                if (isint(index)) {
+                        return me._layout.itemAt(index);
+                } else {
+                        for (var i = 0; i < me._layout.count(); i += 1) {
+                                if (me._layout.itemAt(i)["getText"] != nil and me._layout.itemAt(i).getText() == index) {
+                                        return me._layout.itemAt(i);
+                                }
+                        }
+                        die("No menu item with given text '" ~ index ~ "' found, could not remove !");
+                }
+        },
+
+        # @description Destructor
+        del: func() {
+                me.hide();
+                me.clear();
+                me._canvas.del();
+        },
+
+        # @description Update the menu and its items
+        update: func() {
+                me.parents[1].update();
+                for (var i = 0; i < me._layout.count(); i += 1) {
+                        me._layout.itemAt(i).update();
+                }
+                return me;
+        },
+};
+

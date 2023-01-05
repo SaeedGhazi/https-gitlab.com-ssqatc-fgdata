@@ -853,4 +853,69 @@ DefaultStyle.widgets.slider = {
     }
     return me;
   }
+};
+
+DefaultStyle.widgets["menu-item"] = {
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "menu-item");
+		me._bg = me._root.createChild("path");
+		
+		me._icon = me._root.createChild("image");
+		
+		me._label = me._root.createChild("text")
+						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+						.set("character-size", 14)
+						.set("alignment", "left-center");
+		
+		me._submenu_indicator = me._root.createChild("path")
+						.vert(12).line(6, -7).close();
+	},
+	
+	setSize: func(model, w, h) {
+		me._bg.reset().rect(0, 0, w, h);
+		me._icon.setTranslation(3, int((h - 12) / 2));
+		me._label.setTranslation(24, int(h / 2) + 1);
+		me._submenu_indicator.setTranslation(w - 15, int((h - 12) / 2));
+		return me;
+	},
+	
+	setText: func(model, text) {
+		me._label.setText(text);
+
+		var min_width = me._label.maxWidth() + 6 + 48;
+		model.setLayoutMinimumSize([min_width, 24]);
+		model.setLayoutSizeHint([min_width, 24]);
+
+		return me;
+	},
+	
+	setIcon: func(icon) {
+		if (!icon) {
+			me._icon.hide();
+		} else {
+			me._icon.show();
+			var file = me._style._dir_widgets ~ "/" ~ icon;
+			me._icon.set("src", file);
+		}
+		return me;
+	},
+	
+	update: func(model) {
+		me._bg.set("fill", me._style.getColor("menu_item_bg" ~ (model._hovered ? "_hovered" : "")));
+		var text_color_name = "menu_item_fg";
+		if (model._hovered) {
+			text_color_name ~= "_hovered";
+		} else if (!model._enabled) {
+			text_color_name ~= "_disabled";
+		}
+		me._label.set("fill", me._style.getColor(text_color_name));
+		me._submenu_indicator.set("fill", me._style.getColor("menu_item_submenu_indicator" ~ (model._hovered ? "_hovered" : "")));
+		if (model._menu != nil) {
+			me._submenu_indicator.show();
+		} else {
+			me._submenu_indicator.hide();
+		}
+		
+		return me;
+	}
 }

@@ -137,5 +137,47 @@
 			<green type="float">0.955</green>
 			<blue type="float">0.95</blue>
 		</tab_widget_tab_button_bg_selected>
+		
+		<menu_item_fg>
+			<red type="float">0.298</red>
+			<green type="float">0.298</green>
+			<blue type="float">0.298</blue>
+		</menu_item_fg>
+		
+		<menu_item_fg_disabled>
+			<red type="float">0.89</red>
+			<green type="float">0.89</green>
+			<blue type="float">0.89</blue>
+		</menu_item_fg_disabled>
+		
+		<menu_item_fg_hovered>
+			<red type="float">0.95</red>
+			<green type="float">0.95</green>
+			<blue type="float">0.95</blue>
+		</menu_item_fg_hovered>
+		
+		<menu_item_bg>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</menu_item_bg>
+		
+		<menu_item_bg_hovered>
+			<red type="float">0.15</red>
+			<green type="float">0.15</green>
+			<blue type="float">1</blue>
+		</menu_item_bg_hovered>
+		
+		<menu_item_submenu_indicator>
+			<red type="float">0</red>
+			<green type="float">0</green>
+			<blue type="float">0</blue>
+		</menu_item_submenu_indicator>
+		
+		<menu_item_submenu_indicator_hovered>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</menu_item_submenu_indicator_hovered>
 	</colors>
 </PropertyList>

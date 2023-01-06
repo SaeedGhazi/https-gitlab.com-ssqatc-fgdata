@@ -85,3 +85,11 @@ var getDesktop = func()
 {
   return Group.new(_getDesktopGhost());
 };
+
+
+var unload = func
+{
+  unloadTooltips();
+  unloadErrorNotification();
+  logprint(LOG_INFO, "Unloaded canvas Nasal module");
+};

@@ -170,4 +170,12 @@ var showErrorNotification = func(node)
 
 addcommand("show-error-notification-popup", showErrorNotification);
 
-
+# called from unload() in api.nas
+var unloadErrorNotification = func
+{
+  removecommand("show-error-notification-popup");
+  if (errorNotificationCanvas) {
+    errorNotificationCanvas.del();
+    errorNotificationCanvas = nil;
+  }
+}

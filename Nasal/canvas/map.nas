@@ -430,7 +430,8 @@ var files_with = func(ext) {
 	return results;
 }
 
-setlistener("/nasal/canvas/loaded", func {
+var loadMapModules = func
+{
 	foreach(var ext; var extensions = ['.draw','.model','.layer'])
 		load_modules(files_with(ext));
 
@@ -440,4 +441,25 @@ setlistener("/nasal/canvas/loaded", func {
 	# canvas.MFD = {EFIS:}; # where we'll be storing all MFDs
 	# TODO: should be inside a separate subfolder, i.e. canvas/map/mfd
 	load_modules( files_with('.mfd'), 'canvas' );
+};
+
+var loadedListener = nil;
+
+var unloadMap =  func
+{
+	removelistener(loadedListener);
+};
+
+# listener is used to defer loading map modules until all of 
+# Canvas is loaded
+loadedListener = setlistener("/nasal/canvas/loaded", func (n){
+	 if (n.getBoolValue()) {
+		loadMapModules();
+		logprint(LOG_INFO, "loaded Canvas map");
+	 } else {
+		logprint(LOG_INFO, "Unloading Canvas map");
+		unloadMap();
+	 }
 });
+
+

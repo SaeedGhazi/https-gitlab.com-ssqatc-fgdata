@@ -427,3 +427,15 @@ addcommand("clear-message", clearMessage);
 # avoid sending commands before Nasal is inited, and hence
 # producing errors
 setprop("/sim/mouse/tooltip-commands-registered", 1);
+
+# called by the module unload callback in api.nas
+var unloadTooltips = func
+{
+  removecommand("update-hover");
+  removecommand("set-tooltip");
+  removecommand("tooltip-timeout");
+  removecommand("show-message");
+  removecommand("clear-message");
+
+  setprop("/sim/mouse/tooltip-commands-registered", 0);
+}

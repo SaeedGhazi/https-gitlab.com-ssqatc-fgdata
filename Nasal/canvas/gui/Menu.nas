@@ -175,7 +175,7 @@ gui.Menu = {
         # @param icon: str optional Path to the icon (relative to canvas.style._dir_widgets) or nil if none should be displayed
         # @param enabled: bool optional Whether the item should be enabled (1) or disabled (0)
         # @return canvas.gui.MenuItem The item that was created
-        createItem: func(text = nil, cb = "TheEagle", shortcut = "", icon = nil, enabled = 1) {
+        createItem: func(text = nil, cb = nil, shortcut = "", icon = nil, enabled = 1) {
                 if (text == nil) {
                         die("cannot create a menu item without text");
                 }

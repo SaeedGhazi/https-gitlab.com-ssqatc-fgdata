@@ -15,7 +15,17 @@ gui.widgets.LineEdit = {
     m._selection_start = 0;
     m._selection_end = 0;
 
+    m.context_menu = gui.Menu.new();
+    m.context_menu.createItem(text: "Copy", cb: func() { m.copy(); }, shortcut: "Ctrl+C");
+    m.context_menu.createItem(text: "Cut", cb: func() { m.cut(); }, shortcut: "Ctrl+X");
+    m.context_menu.createItem(text: "Paste", cb: func() { m.paste(); }, shortcut: "Ctrl+V");
+    m.context_menu.createItem(text: "Clear", cb: func() { m.clear(); }, shortcut: "Ctrl+D");
+    m.context_menu.createItem(text: "Select all", cb: func() { m.selectAll(); }, shortcut: "Ctrl+A");
+
     return m;
+  },
+  showContextMenu: func(e) {
+    me.context_menu.show(e.screenX, e.screenY);
   },
   setText: func(text)
   {
@@ -47,6 +57,9 @@ gui.widgets.LineEdit = {
   text: func()
   {
     return me._text;
+  },
+  selectedText: func() {
+    return utf8.substr(me._text, me._selection_start, me._selection_end);
   },
   setMaxLength: func(len)
   {
@@ -101,9 +114,20 @@ gui.widgets.LineEdit = {
 
     return me;
   },
+  copy: func() {
+    clipboard.setText(me.selectedText());
+  },
+  cut: func() {
+    clipboard.setText(me.selectedText());
+    me.removeSelection();
+  },
   paste: func(mode = nil)
   {
     me.insert(clipboard.getText(mode != nil ? mode : clipboard.CLIPBOARD));
+  },
+  selectAll: func() {
+    me._selection_start = 0;
+    me._selection_end = utf8.size(me._text) - 1;
   },
   # Remove selected text
   removeSelection: func()
@@ -138,7 +162,7 @@ gui.widgets.LineEdit = {
     return me;
   },
   # Remove selection or if nothing is selected the character after the cursor
-  del: func()
+  delete: func()
   {
     if( me._selection_start == me._selection_end )
     {
@@ -169,7 +193,7 @@ gui.widgets.LineEdit = {
       else if( e.key == "Backspace" )
         me.backspace();
       else if( e.key == "Delete" )
-        me.del();
+        me.delete();
       else if( e.key == "Left" )
         me.moveCursor(me._cursor - 1);
       else if( e.key == "Right")
@@ -178,8 +202,27 @@ gui.widgets.LineEdit = {
         me.home();
       else if( e.key == "End" )
         me.end();
-      else if( e.keyCode == `v` and e.ctrlKey )
-        me.paste();
+      else if (e.ctrlKey) {
+        if (e.keyCode == `c`) {
+          me.copy();
+        } elsif (e.keyCode == `v`) {
+          me.paste();
+        } elsif (e.keyCode == `x`) {
+          me.cut();
+        } elsif (e.keyCode == `d`) {
+          me.clear();
+        } elsif (e.keyCode == `a`) {
+          me.selectAll();
+        }
+      }
     });
+    el.addEventListener("click", func(e) {
+      if (e.button == 2) {
+        me.showContextMenu(e);
+      }
+    });
+  },
+  del: func() {
+    me.context_menu.del();
   }
 };

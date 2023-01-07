@@ -83,15 +83,25 @@ var WidgetsFactoryDialog = {
 							m.image.setVisible(int(e.detail.checked));
 						});
 		m.tab_2.addItem(m.checkable_button);
-		m.resize_button = gui.widgets.Button.new(m.tabsContent, style, {})
-						.setText("Resize this window")
+
+		m.upsize_button = gui.widgets.Button.new(m.tabsContent, style, {})
+						.setText("Upsize window")
 						.setFixedSize(130, 30)
 						.listen("clicked", func {
 							var s = m.window.getSize();
 							m.window.setSize(s[0] + 100, s[1] + 100);
 						});
-		m.tab_2.addItem(m.resize_button, 5);
+		m.tab_2.addItem(m.upsize_button, 5);
 		
+		m.downsize_button = gui.widgets.Button.new(m.tabsContent, style, {})
+						.setText("Downsize window")
+						.setFixedSize(130, 30)
+						.listen("clicked", func {
+							var s = m.window.getSize();
+							m.window.setSize(s[0] - 100, s[1] - 100);
+						});
+		m.tab_2.addItem(m.downsize_button, 5);
+
 		m.numericControlsTab = VBoxLayout.new();
 		m.tabs.addTab("ncTab", "Numeric Controls", m.numericControlsTab);
 		m.slider = gui.widgets.Slider.new(m.tabsContent, style, 
@@ -100,7 +110,7 @@ var WidgetsFactoryDialog = {
 			 "tick-count" : 10})
 			.setValue(42);
 		m.numericControlsTab.addItem(m.slider);
-
+		
 		return m;
 	},
 	

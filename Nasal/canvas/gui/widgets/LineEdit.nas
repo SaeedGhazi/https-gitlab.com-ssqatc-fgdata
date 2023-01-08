@@ -16,11 +16,12 @@ gui.widgets.LineEdit = {
     m._selection_end = 0;
 
     m.context_menu = gui.Menu.new();
-    m.context_menu.createItem(text: "Copy", cb: func() { m.copy(); }, shortcut: "Ctrl+C");
-    m.context_menu.createItem(text: "Cut", cb: func() { m.cut(); }, shortcut: "Ctrl+X");
-    m.context_menu.createItem(text: "Paste", cb: func() { m.paste(); }, shortcut: "Ctrl+V");
-    m.context_menu.createItem(text: "Clear", cb: func() { m.clear(); }, shortcut: "Ctrl+D");
-    m.context_menu.createItem(text: "Select all", cb: func() { m.selectAll(); }, shortcut: "Ctrl+A");
+    m.context_menu.createItem(text: "Copy", cb: func() { m.copy(); }, shortcut: "<Ctrl>+C");
+    m.context_menu.createItem(text: "Cut", cb: func() { m.cut(); }, shortcut: "<Ctrl>+X");
+    m.context_menu.createItem(text: "Paste", cb: func() { m.paste(); }, shortcut: "<Ctrl>+V");
+    m.context_menu.createItem(text: "Clear", cb: func() { m.clear(); }, shortcut: "<Ctrl>+D");
+    m.context_menu.createItem(text: "Select all", cb: func() { m.selectAll(); }, shortcut: "<Ctrl>+A");
+    m.context_menu.setCanvasItem(m);
 
     return m;
   },
@@ -182,7 +183,11 @@ gui.widgets.LineEdit = {
     call(gui.Widget._setView, [view], me);
 
     var el = view._root;
-    el.addEventListener("keypress", func (e) me.insert(e.key));
+    el.addEventListener("keypress", func (e) {
+      if (!e.ctrlKey and !e.altKey and !e.metaKey) {
+        me.insert(e.key);
+      }
+    });
     el.addEventListener("keydown", func (e)
     {
       if( me._view == nil )
@@ -202,19 +207,6 @@ gui.widgets.LineEdit = {
         me.home();
       else if( e.key == "End" )
         me.end();
-      else if (e.ctrlKey) {
-        if (e.keyCode == `c`) {
-          me.copy();
-        } elsif (e.keyCode == `v`) {
-          me.paste();
-        } elsif (e.keyCode == `x`) {
-          me.cut();
-        } elsif (e.keyCode == `d`) {
-          me.clear();
-        } elsif (e.keyCode == `a`) {
-          me.selectAll();
-        }
-      }
     });
     el.addEventListener("click", func(e) {
       if (e.button == 2) {

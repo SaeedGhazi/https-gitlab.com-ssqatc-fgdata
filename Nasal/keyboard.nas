@@ -357,10 +357,10 @@ var Shortcut = {
 			return 0;
 		}
 		var match = 1;
-		match &= veccontains(me.modifiers, ModifierKeys["Shift"]) == shift;
-		match &= veccontains(me.modifiers, ModifierKeys["Ctrl"]) == ctrl;
-		match &= veccontains(me.modifiers, ModifierKeys["Alt"]) == alt;
-		match &= veccontains(me.modifiers, ModifierKeys["Meta"]) == meta;
+		match &= contains(me.modifiers, ModifierKeys["Shift"]) == shift;
+		match &= contains(me.modifiers, ModifierKeys["Ctrl"]) == ctrl;
+		match &= contains(me.modifiers, ModifierKeys["Alt"]) == alt;
+		match &= contains(me.modifiers, ModifierKeys["Meta"]) == meta;
 		match &= size(keys) == size(me.keys);
 		if (!match) {
 			return 0;
@@ -376,7 +376,6 @@ var Shortcut = {
 			return "";
 		}
 		var names = [];
-		debug.dump(me.modifiers);
 		foreach (var mod; me.modifiers) {
 			append(names, findKeyName(mod));
 		}

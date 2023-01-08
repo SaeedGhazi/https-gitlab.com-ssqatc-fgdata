@@ -16,7 +16,7 @@
 gui.MenuItem = {
         # @description Create a new menu item widget
         # @cfg_field text: str Text of the new menu item
-        # @cfg_field shortcut: str String representation of the keyboard shortcut for the item 
+        # @cfg_field shortcut: str String representation of the keyboard shortcut for the item
         # @cfg_field cb: callable Function / method to call when the item is clicked
         # @cfg_field icon: str Path of an icon to be displayed (relative to the path in `canvas.style._dir_widgets`)
         # @cfg_field enabled: bool Initial state of the menu item: enabled (1) or disabled (0)
@@ -24,7 +24,7 @@ gui.MenuItem = {
                 var cfg = Config.new(cfg);
                 var m = gui.Widget.new(gui.MenuItem);
                 m._text = cfg.get("text", "Menu item");
-                m._shortcut = cfg.get("shortcut", "");
+                m._shortcut = cfg.get("shortcut", nil);
                 m._cb = cfg.get("cb", nil);
                 m._icon = cfg.get("icon", nil);
                 m._enabled = cfg.get("enabled", 1);
@@ -38,9 +38,9 @@ gui.MenuItem = {
                 m.setLayoutSizeHint([64, 24]);
                 m.setLayoutMaximumSize([1024, 24]);
                 
-                m._view.setText(m, m._text);
-                m._view.setIcon(m._icon);
-                m._view.setShortcut(m, m._shortcut);
+                m.setText(m._text);
+                m.setIcon(m._icon);
+                m.setShortcut(m._shortcut);
                 return m;
         },
 
@@ -110,9 +110,19 @@ gui.MenuItem = {
         },
         
         setShortcut: func(shortcut) {
-                me._shortcut = shortcut;
-                me._view.setShortcut(me, shortcut);
+                me._shortcut = keyboard.Shortcut.new(shortcut);
+                if (me._parent_menu != nil and me._parent_menu._canvas_item != nil and me._cb != nil) {
+                        me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
+                }
+                me._view.setShortcut(me, me._shortcut);
                 return me.update();
+        },
+
+        _setParentMenu: func(m) {
+                me._parent_menu = m;
+                if (me._parent_menu != nil and me._parent_menu._canvas_item != nil and me._cb != nil) {
+                        me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
+                }
         },
 
         setIcon: func(icon) {
@@ -153,16 +163,24 @@ gui.Menu = {
                 m._root = m._canvas.createGroup();
                 m._layout = VBoxLayout.new();
                 m._layout.setSpacing(0);
+                m._canvas_item = nil;
                 m.setLayout(m._layout);
                 m.hide();
 
                 return m;
         },
 
+        setCanvasItem: func(item) {
+                me._canvas_item = item;
+                for (var i = 0; i < me._layout.count(); i += 1) {
+                        me._layout.itemAt(i)._setParentMenu(me);
+                }
+        },
+
         # @description Add the given menu item to the menu (normally a `canvas.gui.MenuItem`, but can be any `canvas.gui.Widget` in theory)
         # @return canvas.gui.Menu Return me to enable method chaining
         addItem: func(item) {
-                item._parent_menu = me;
+                item._setParentMenu(me);
                 me._layout.addItem(item);
                 me.setSize(me._layout.minimumSize()[0], me._layout.minimumSize()[1]);
                 return me;
@@ -175,7 +193,7 @@ gui.Menu = {
         # @param icon: str optional Path to the icon (relative to canvas.style._dir_widgets) or nil if none should be displayed
         # @param enabled: bool optional Whether the item should be enabled (1) or disabled (0)
         # @return canvas.gui.MenuItem The item that was created
-        createItem: func(text = nil, cb = nil, shortcut = "", icon = nil, enabled = 1) {
+        createItem: func(text = nil, cb = nil, shortcut = nil, icon = nil, enabled = 1) {
                 if (text == nil) {
                         die("cannot create a menu item without text");
                 }
@@ -198,7 +216,7 @@ gui.Menu = {
                 if (menu == nil) {
                         die("cannot create a submenu item without submenu");
                 }
-                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: nil, shortcut: "", icon: icon, enabled: enabled});
+                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: nil, shortcut: nil, icon: icon, enabled: enabled});
                 item.setMenu(menu);
                 me.addItem(item);
                 return item;

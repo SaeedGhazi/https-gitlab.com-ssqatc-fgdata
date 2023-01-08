@@ -141,6 +141,9 @@ gui.Widget = {
   {
     me._view._root.setVisible(visible);
   },
+  bindShortcut: func(s, f) {
+    me._view._root.bindShortcut(s, f);
+  },
   _setView: func(view)
   {
     me._view = view;
@@ -169,6 +172,11 @@ gui.Widget = {
       me._hover = 0;
       me._trigger("mouse-leave");
       me._onStateChange();
+    });
+    root.addEventListener("keypress", func(e) {
+      if (me._focused) {
+        root.onKeyPressed(e);
+      }
     });
   },
   _trigger: func(type, data = nil)

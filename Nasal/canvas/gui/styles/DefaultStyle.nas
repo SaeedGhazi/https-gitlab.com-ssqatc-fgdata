@@ -900,7 +900,7 @@ DefaultStyle.widgets["menu-item"] = {
 	},
 	
 	setShortcut: func(model, shortcut) {
-		me._shortcut.setText(shortcut);
+		me._shortcut.setText(shortcut.repr());
 		return me._updateLayoutSizes(model);
 	},
 	

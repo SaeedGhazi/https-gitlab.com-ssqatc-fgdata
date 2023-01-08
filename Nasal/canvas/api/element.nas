@@ -16,8 +16,33 @@ var Element = {
         var obj = {
             parents: [Element, PropertyElement, ghost],
             _node: props.wrapNode(ghost._node_ghost),
+            _bindings: [],
         };
         return obj;
+    },
+
+    bindShortcut: func(s, f) {
+        if (!isa(s, keyboard.Shortcut)) {
+            s = keyboard.Shortcut.new(s);
+        }
+        foreach (var b; me._bindings) {
+            if (b.shortcut.equals(s)) {
+                b.f = f;
+                return;
+            }
+        }
+        append(me._bindings, keyboard.Binding.new(s, f));
+        if (size(me._bindings) == 1) {
+	        obj.addEventListener("keydown", func(e) obj.onKeyPressed(e));
+        }
+    },
+
+    onKeyPressed: func(e) {
+        foreach (var b; me._bindings) {
+            if (b.shortcut.match(keyboard.findKeyName(e.keyCode), e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)) {
+                b.fire(e);
+            }
+        }
     },
 
     getType: func () {

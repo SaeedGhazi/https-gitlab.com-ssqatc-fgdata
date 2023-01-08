@@ -252,6 +252,13 @@
                 <script>canvas.WidgetsFactoryDialog.new();</script>
             </binding>
         </button>
+        <button>
+            <legend>Reload Nasal canvas module</legend>
+            <binding>
+                <command>nasal-reload</command>
+                <module>canvas</module>
+            </binding>
+        </button>
     </group>
 
     <group>

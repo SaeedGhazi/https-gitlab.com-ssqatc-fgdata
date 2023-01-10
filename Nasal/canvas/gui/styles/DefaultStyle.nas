@@ -546,37 +546,52 @@ DefaultStyle.widgets.rule = {
   new: func(parent, cfg)
   {
     me._root = parent.createChild("group", "rule");
-    me._createElement("bg", "image");
+    var bgColor = me._style.getColor("fg_color");
+    var shadowColor = me._style.getColor("fg_color_shadow");
+
+    me._bg = me._root.createChild("path")
+						.set("fill", bgColor)
+						.set("stroke", bgColor)
+						.set("stroke-width", 1);
+    me._shadow = me._root.createChild("path")
+						.set("fill", shadowColor)
+						.set("stroke", shadowColor)
+						.set("stroke-width", 1);
+
     me._isVertical = cfg.get("isVertical");
-    if (me._isVertical) {
-      me._bg.set("slice", "0 20");
-      me._baseFile = "vrule";
-    } else {
-      me._bg.set("slice", "10 0");
-      me._baseFile = "hrule";
-    }
   },
   setSize: func(model, w, h)
   {
+    var firstWidth = w;
+    var firstHeight = h;
+    var hh = h * 0.5;
+    
     if( me['_text'] != nil )
     {
-      # first 20 px
-      me._bg.setTranslation(2, 0);
-      me._bg.setSize(20, h);
-
+      firstHeight = firstWidth = 20; # TODO make this settable in Style.xml
+      
       # TODO handle eliding for translations?
-      me._text.setTranslation(22, 2 + h / 2);
+      me._text.setTranslation(firstWidth + 3, hh);
       var maxW = model._cfg.get("maxTextWidth", -1);
       if (maxW > 0) {
          me._text.set("max-width", maxW);
       }
 
+      # assume horizontal for now, with a label
       var bg2Left = maxW > 0 ? maxW : me._text.maxWidth() + 22;
-      me._bg2.setTranslation(bg2Left, 0);
-      me._bg2.setSize(w - bg2Left, h);
-    } else {
-      me._bg.setSize(w, h);
+      var bg2Width = w - bg2Left;
+      me._bg2.reset().rect(bg2Left, hh - 1, bg2Width, 2);
+      me._shadow2.reset().moveTo(bg2Left + 1, hh).horiz(bg2Width - 1);
     }
+
+    if (me._isVertical ) {
+      me._bg.reset().rect(0, 0, 2, firstHeight);
+      me._shadow.reset().moveTo(1, 1).vert(firstHeight - 1);
+    } else {
+      me._bg.reset().rect(0, hh - 1, firstWidth, 2);
+      me._shadow.reset().moveTo(1, hh).horiz(firstWidth - 1);
+    }
+
     return me;
   },
   setText: func(model, text)
@@ -585,6 +600,7 @@ DefaultStyle.widgets.rule = {
     {
       # force a resize?
       me._deleteElement('bg2');
+      me._deleteElement('shadow2');
       return me._deleteElement('text');
     }
 
@@ -597,8 +613,19 @@ DefaultStyle.widgets.rule = {
       .setText(text);
 
     var width_hint =  me._text.maxWidth() + 40;
-    me._createElement("bg2", "image")
-       .set("slice", "10 0");
+
+
+    var bgColor = me._style.getColor("fg_color");
+    var shadowColor = me._style.getColor("fg_color_shadow");
+
+    me._bg2 = me._root.createChild("path")
+						.set("fill", bgColor)
+						.set("stroke", bgColor)
+						.set("stroke-width", 1);
+    me._shadow2 = me._root.createChild("path")
+						.set("fill", shadowColor)
+						.set("stroke", shadowColor)
+						.set("stroke-width", 1);
 
     model.setLayoutMinimumSize([40, 14]);
     # TODO mark as expanding?
@@ -608,16 +635,7 @@ DefaultStyle.widgets.rule = {
   },
   update: func(model)
   {
-    var file = me._style._dir_widgets ~ "/";
-    file ~= me._baseFile;
 
-    if( !model._enabled )
-      file ~= "-disabled";
-
-    me._bg.set("src", file ~ ".png");
-    if ( me['_bg2'] != nil)
-      me._bg2.set("src", file ~ ".png");
-    
     # different color if disabled?
     if( me['_text'] != nil )
     {
@@ -661,7 +679,7 @@ DefaultStyle.widgets.frame = {
   {
     me._root = parent.createChild("group", "frame-box");
     me._createElement("bg", "image")
-       .set("slice", "10 10");
+       .set("slice", "8 8");
     me.content = me._root.createChild("group", "frame-content");
 
     # handle label + checkable flag
@@ -670,14 +688,14 @@ DefaultStyle.widgets.frame = {
   update: func(model)
   {
     var file = me._style._dir_widgets ~ "/";
-    file ~= "backdrop-";
+    file ~= "frame";
 
-    if( !model._enabled )
-      file ~= "-disabled";
+#    if( !model._enabled )
+ #     file ~= "-disabled";
 
     me._bg.set("src", file ~ ".png");
     
-
+    me._bg.setSize(model._size[0], model._size[1]);
   },
   # protected:
   _createElement: func(name, type)

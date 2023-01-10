@@ -13,9 +13,9 @@ gui.widgets.HorizontalRule = {
     m._setView( style.createWidget(parent, "rule", m._cfg) );
 
 # should ask Style the rule height, not hard-code 1px
-    m.setLayoutMinimumSize([16, 1]);
-    m.setLayoutSizeHint([m._MAX_SIZE, 1]); # expand to fill
-    m.setLayoutMaximumSize([m._MAX_SIZE, 1]);
+    m.setLayoutMinimumSize([16, 2]);
+    m.setLayoutSizeHint([m._MAX_SIZE, 2]); # expand to fill
+    m.setLayoutMaximumSize([m._MAX_SIZE, 2]);
     return m;
   },
   setText: func(text)
@@ -34,9 +34,9 @@ gui.widgets.VerticalRule = {
     m._setView( style.createWidget(parent, "rule", m._cfg) );
 
 # should ask Style the rule height, not hard-code 1px
-    m.setLayoutMinimumSize([1, 16]);
-    m.setLayoutSizeHint([1, m._MAX_SIZE]); # expand to fill
-    m.setLayoutMaximumSize([1, m._MAX_SIZE]);
+    m.setLayoutMinimumSize([2, 16]);
+    m.setLayoutSizeHint([2, m._MAX_SIZE]); # expand to fill
+    m.setLayoutMaximumSize([2, m._MAX_SIZE]);
     return m;
   },
   setText: func(text)

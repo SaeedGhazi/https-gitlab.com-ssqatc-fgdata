@@ -46,11 +46,19 @@
 			<blue  type="float">0.941</blue>
 		</bg_color>
 
+
+
 		<fg_color>
 			<red   type="float">0.298</red>
 			<green type="float">0.298</green>
 			<blue  type="float">0.298</blue>
 		</fg_color>
+
+		<fg_color_shadow>
+			<red   type="float">0.398</red>
+			<green type="float">0.38</green>
+			<blue  type="float">0.398</blue>
+		</fg_color_shadow>
 
 		<text_color>
 			<red   type="float">0.235</red>

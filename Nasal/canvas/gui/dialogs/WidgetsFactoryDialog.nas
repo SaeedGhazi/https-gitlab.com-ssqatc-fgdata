@@ -24,6 +24,11 @@ var WidgetsFactoryDialog = {
 						.setText("A label")
 						.setBackground("#ffaaaa");
 		m.tab_1.addItem(m.label);
+
+		var r = gui.widgets.HorizontalRule.new(m.tabsContent, style, {});
+		r.setText("Checkboxes!");
+		m.tab_1.addItem(r);
+
 		m.checkbox_left = gui.widgets.CheckBox.new(m.tabsContent, style, {"label-position": "right"})
 						.setText("Wanna check something ?");
 		m.tab_1.addItem(m.checkbox_left);
@@ -34,6 +39,9 @@ var WidgetsFactoryDialog = {
 						.setText("Nav lights");
 		m.tab_1.addItem(m.property_checkbox);
 		
+		var r2 = gui.widgets.HorizontalRule.new(m.tabsContent, style, {});
+		m.tab_1.addItem(r2);
+
 		m.tab_2 = VBoxLayout.new();
 		m.tabs.addTab("tab-2", "Tab 2", m.tab_2);
 		m.button = gui.widgets.Button.new(m.tabsContent, style, {})

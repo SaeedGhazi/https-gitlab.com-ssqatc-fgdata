@@ -347,6 +347,10 @@ Configuration description:
         Set the maximum audible distance for the sound in meters.
         Sound is cut-off above this distance.
 
+        Known issue: if a sample with mode 'once' goes out of range,
+        it stops playing entirely, and going back into range of the
+        sound does not allow to hear the end of the sample.
+
 
 Creating a configuration file:
 ------------------------------

@@ -84,6 +84,15 @@ var WidgetsFactoryDialog = {
 						});
 		m.tab_2.addItem(m.resize_button, 5);
 		
+		m.numericControlsTab = VBoxLayout.new();
+		m.tabs.addTab("ncTab", "Numeric Controls", m.numericControlsTab);
+		m.slider = gui.widgets.Slider.new(m.tabsContent, style, 
+			{"max-value" : 100,
+			 "page-step" : 20,
+			 "tick-count" : 10})
+			.setValue(42);
+		m.numericControlsTab.addItem(m.slider);
+
 		return m;
 	},
 	

@@ -709,58 +709,84 @@ DefaultStyle.widgets.frame = {
 
 };
 
-# a horionztal or vertical slider, for selecting /
+# a horizontal or vertical slider, for selecting /
 # dragging over a numerical range
 DefaultStyle.widgets.slider = {
   new: func(parent, cfg)
   {
     me._root = parent.createChild("group", "slider");
     me._createElement("bg", "image")
-       .set("slice", "10 10");
+       .set("slice", "2 6");
 
-     me._createElement("thumb", "image")
-       .set("slice", "10 10");
+    me._createElement("fill", "image")
+       .set("slice", "2 6");
 
-      me._ticks = 0;
-      me._ticksPath = nil;
+    me._fillHeight = me._fill.imageSize()[1];
+    me._createElement("thumb", "image");
+    me._thumbSize = me._thumb.imageSize();
+
+    me._ticks = 0;
+    me._ticksPath = nil;
   },
 
   setNormValue: func(model, normValue)
   {
     var (w, h) = model._size;
-    var availWidthPos = w - h; # pixel range the thumb can move over
-    me._thumb.setTranslation(round(availWidthPos * normValue), 0);
+    var halfThumbWidth =  me._thumbSize[0] * 0.5;
+    var availWidthPos = w - me._thumbSize[0];
+    var thumbX = math.round(availWidthPos * normValue);
+    var thumbY = (h - me._thumbSize[1]) * 0.5;
+    me._thumb.setTranslation(thumbX - halfThumbWidth, thumbY);
+    me._fill.setSize(thumbX, me._fillHeight);
   },
 
   update: func(model)
   {
+    var direction = "horizontal";
   # set background state
     var file = me._style._dir_widgets ~ "/";
-    file ~= "backdrop-";
+    file ~= "scale-" ~ direction ~ "-trough";
     if( !model._enabled )
       file ~= "-disabled";
 
     me._bg.set("src", file ~ ".png");
     
+  # fill state
+    var file = me._style._dir_widgets ~ "/";
+    file ~= "scale-" ~ direction ~ "-fill";
+    if( !model._enabled ) {
+      file ~= "-disabled";
+    } else {
+ 
+    }
+
+    me._fill.set("src", file ~ ".png");
+
   # set thumb state
     file = me._style._dir_widgets ~ "/";
-    file ~= "button-";  # should we use a seperate thumb?
-    if( !model._enabled )
+    file ~= "slider-" ~ direction;  
+    if( !model._enabled ) {
       file ~= "-disabled";
-    else if (model._down)
-      file ~= "-down";
-    elsif (model._hover)
-      file ~= "-hovered";
+    } else {
+      if (model._down)
+        file ~= "-focused";
+      if (model._hover)
+        file ~= "-hover";
+    }
 
     me._thumb.set("src", file ~ ".png");
     
-  # set thumb size
-    var (w, h) = model._size;
-    # fixme assumes horizonal for now
-    me._thumb.setSize(h, h);
-
   # update the position as well, since other stuff
   # may have changed
+    me.setNormValue(model, model._normValue());
+  },
+
+  setSize: func(model, w, h)
+  {
+    var fillTop = (h - me._fillHeight) * 0.5;
+    me._bg.setTranslation(0, fillTop);
+    me._fill.setTranslation(0, fillTop);
+    me._bg.setSize(w, me._fillHeight);
     me.setNormValue(model, model._normValue());
   },
 

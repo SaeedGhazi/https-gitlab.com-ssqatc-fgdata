@@ -22,36 +22,62 @@ gui.widgets.Slider = {
     # TODO : select where value is shown
     # TODO : select where tick marks are shown
 
-    if( style != nil ) {
-      m._setView( style.createWidget(parent, cfg.get("type", "slider"), cfg) );
-      m._view.updateRanges(m._minValue, m._maxValue, m._numTicks);
-    }
+    m._setView( style.createWidget(parent, cfg.get("type", "slider"), cfg) );
+    m._view.updateRanges(m._minValue, m._maxValue, m._numTicks);
 
     return m;
   },
 
   setValue: func(val)
   {
+    me._value = val;
     if( me._view != nil ) {
-      me._view.setNormValue(me._normValue());
+      me._view.setNormValue(me, me._normValue());
     }
     return me;
   },
 
-  
+  setDown: func(down = 1)
+  {
+    if (me._down == down )
+      return me;
+
+    me._down = down;
+    me._onStateChange();
+    return me;
+  },
 
 # protected:
   _setView: func(view)
   {
     call(gui.Widget._setView, [view], me);
 
-    # var el = view._root;
-    # el.addEventListener("mousedown", func if( me._enabled ) me.setDown(1));
-    # el.addEventListener("mouseup",   func if( me._enabled ) me.setDown(0));
+    var el = view._root;
+    el.addEventListener("mousedown", func if( me._enabled ) me.setDown(1));
+    el.addEventListener("mouseup",   func if( me._enabled ) me.setDown(0));
     # el.addEventListener("click",     func if( me._enabled ) me.toggle());
+    el.addEventListener("mouseleave",func me.setDown(0));
+    
+    view._thumb.addEventListener("drag", func(e) {
+      me._dragThumb(e);
+      e.stopPropagation();
+    });
+  },
 
-    # el.addEventListener("mouseleave",func me.setDown(0));
-    # el.addEventListener("drag", func(e) e.stopPropagation());
+  _dragThumb: func(event)
+  { 
+    var vr =  me._view._root;
+    var viewPosX = vr.canvasToLocal([event.clientX, event.clientY])[0];
+    var width = me._size[0];
+
+    if (viewPosX < 0) {
+      me.setValue(me._minValue);
+    } elsif (viewPosX > width) {
+      me.setValue(me._maxValue);
+    } else {
+      var norm = viewPosX / width;
+      me.setValue(norm * ( me._maxValue - me._minValue));
+    }
   },
 
   # return value as its normalised equivalent

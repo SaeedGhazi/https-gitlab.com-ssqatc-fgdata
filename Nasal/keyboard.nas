@@ -433,6 +433,7 @@ var Binding = {
 	},
 	
 	fire: func(e) {
+		debug.dump(e);
 		if (isfunc(me.f)) {
 			me.f(e);
 		}

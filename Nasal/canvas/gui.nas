@@ -30,6 +30,7 @@ var loadDialog = func(name) loadGUIFile("dialogs/" ~ name ~ ".nas");
 
 loadGUIFile("Config.nas");
 loadGUIFile("Menu.nas");
+loadGUIFile("MenuBar.nas");
 loadGUIFile("Popup.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
@@ -40,6 +41,7 @@ loadWidget("Button");
 loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
+loadWidget("MenuBar");
 loadWidget("PropertyWidgets");
 loadWidget("ScrollArea");
 loadWidget("Rule");
@@ -584,15 +586,16 @@ var Window = {
 
 # Clear focus on click outside any window
 getDesktop().addEventListener("mousedown", func {
-  if( gui.focused_window != nil )
+  if (gui.focused_window != nil) {
     gui.focused_window.clearFocus();
+  }
   
-  if (size(gui.open_popups)) {
-    foreach (var p; gui.open_popups) {
-      p.hide();
-    }
+  foreach (var p; gui.open_popups) {
+    p.hide();
   }
 });
+
+gui.menubar = gui.MenuBar.new();
 
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
 var Dialog = {
@@ -602,3 +605,7 @@ var Dialog = {
     return Window.new(size, type, id);
   }
 };
+
+var unloadGUI = func() {
+	gui.menubar.del();
+}

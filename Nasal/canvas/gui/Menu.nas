@@ -14,6 +14,12 @@
 # m.show();
 
 gui.MenuItem = {
+        MenuPosition: {
+                Above: 0x0,
+                Right: 0x1,
+                Below: 0x2,
+                Left: 0x4
+        },
         # @description Create a new menu item widget
         # @cfg_field text: str Text of the new menu item
         # @cfg_field shortcut: str String representation of the keyboard shortcut for the item
@@ -28,9 +34,11 @@ gui.MenuItem = {
                 m._cb = cfg.get("cb", nil);
                 m._icon = cfg.get("icon", nil);
                 m._enabled = cfg.get("enabled", 1);
+                m._menu_position = cfg.get("menu_position", gui.MenuItem.MenuPosition.Right);
                 m._hovered = 0;
                 m._menu = nil;
                 m._parent_menu = nil;
+                m._is_menubar_item = 0;
 
                 m._setView(style.createWidget(parent, cfg.get("type", "menu-item"), cfg));
 
@@ -45,32 +53,34 @@ gui.MenuItem = {
         },
 
         setMenu: func(menu) {
+                menu._parent_item = me;
+                menu._canvas_item = me._parent_menu._canvas_item;
                 me._menu = menu;
 
                 return me.update();
         },
         
         onClicked: func(e) {
-                print("clicked", me._menu == nil, me._cb != nil);
                 if (!me._menu and me._cb) {
                         me._cb(e);
                 }
-                me._parent_menu.hide();
+                if (me._parent_menu != nil) {
+                        me._parent_menu.hide();
+                }
         },
 
         onMouseEnter: func(e) {
-                print("entered item ", me._enabled);
                 for (var i = 0; i < me._parent_menu._layout.count(); i += 1) {
                         var item = me._parent_menu._layout.itemAt(i);
                         item._hovered = 0;
-                        if (item._menu) {
+                        if (item._menu != nil) {
                                 item._menu.hide();
                         }
                         item.update();
                 }
                 if (me._enabled) {
                         me._hovered = 1;
-                        var x = e.screenX - e.localX + me.geometry()[2];
+                        var x = e.screenX - e.localX;
                         var y = e.screenY - e.localY;
                         me._showMenu(x, y);
                 }
@@ -78,7 +88,6 @@ gui.MenuItem = {
         },
 
         onMouseLeave: func(e) {
-                print("left item");
                 if (me._menu == nil) {
                         me._hovered = 0;
                 }
@@ -92,10 +101,29 @@ gui.MenuItem = {
 
         _showMenu: func(x, y) {
                 if (me._menu) {
-                        me._menu.setPosition(x, y);
+                        var pos = [0, 0];
+                        if (me._menu_position == gui.MenuItem.MenuPosition.Right) {
+                                pos = [x + me.geometry()[2], y];
+                        } elsif (me._menu_position == gui.MenuItem.MenuPosition.Below) {
+                                pos = [x, me.geometry()[3] + y];
+                        } elsif (me._menu_position == gui.MenuItem.MenuPosition.Above) {
+                                pos = [x, y - me._menu.getSize()[1]];
+                        } elsif (me._menu_position == gui.MenuItem.MenuPosition.Left) {
+                                pos = [x - me._menu.getSize()[0], y];
+                        }
+                        me._menu.setPosition(pos[0], pos[1]);
                         me._menu.show();
                         me._menu.setFocus();
                 }
+                me._hovered = 1;
+        },
+
+        _hideMenu: func {
+                if (me._menu) {
+                        me._menu.clearFocus();
+                        me._menu.hide();
+                }
+                me._hovered = 0;
         },
 
         setEnabled: func(enabled = 1) {
@@ -121,7 +149,14 @@ gui.MenuItem = {
         _setParentMenu: func(m) {
                 me._parent_menu = m;
                 if (me._parent_menu != nil and me._parent_menu._canvas_item != nil and me._cb != nil) {
-                        me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
+                        if (me._shortcut != nil) {
+	                        me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
+                        }
+                        if (me._menu != nil) {
+                                for (var i = 0; i < me._menu.count(); i += 1) {
+                                        me._menu.getItem(i).setCanvasItem(me._parent_menu._canvas_item);
+                                }
+                        }
                 }
         },
 
@@ -137,7 +172,9 @@ gui.MenuItem = {
         },
 
         update: func {
-                me._view.update(me);
+        	if (me._view != nil) {
+                	me._view.update(me);
+        	}
                 return me;
         },
 
@@ -158,6 +195,7 @@ gui.Menu = {
                 var m = gui.Popup.new([100, 60], id);
                 m.parents = [gui.Menu] ~ m.parents;
                 m.style = style;
+                m._parent_item = nil;
 
                 m._canvas = m.createCanvas().setColorBackground(style.getColor("bg_color"));
                 m._root = m._canvas.createGroup();
@@ -182,7 +220,7 @@ gui.Menu = {
         addItem: func(item) {
                 item._setParentMenu(me);
                 me._layout.addItem(item);
-                me.setSize(me._layout.minimumSize()[0], me._layout.minimumSize()[1]);
+                me.setSize(math.max(me._layout.minimumSize()[0], 64), math.max(me._layout.minimumSize()[1], 24));
                 return me;
         },
 
@@ -199,27 +237,39 @@ gui.Menu = {
                 }
                 var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: cb, shortcut: shortcut, icon: icon, enabled: enabled});
                 me.addItem(item);
-                return item;
+                return me;
         },
 
         # @description Create, insert and return a `canvas.gui.MenuItem with the given text and assign the given submenu to it,
         #                          optionally add the given icon and set the given enabled state
         # @param text: str required Text to display on the menu item
         # @param menu: canvas.gui.Menu Submenu that shall be assigned to the new menu item
-        # @param icon: str optional Path to the icon (relative to canvas.style._dir_widgets) or nil if none should be displayed
         # @param enabled: bool optional Whether the item should be enabled (1) or disabled (0)
         # @return canvas.gui.MenuItem The item that was created
-        addMenu: func(text = nil, menu = nil, icon = nil, enabled = 1) {
+        addMenu: func(text = nil, menu = nil, enabled = 1) {
                 if (text == nil) {
                         die("cannot create a menu item without text");
                 }
                 if (menu == nil) {
                         die("cannot create a submenu item without submenu");
                 }
-                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: nil, shortcut: nil, icon: icon, enabled: enabled});
+                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: nil, shortcut: nil, icon: nil, enabled: enabled});
+                menu._parent_item = item;
                 item.setMenu(menu);
                 me.addItem(item);
-                return item;
+                return me;
+        },
+
+        createMenu: func(text = nil, enabled = 1) {
+                if (text == nil) {
+                        die("cannot create a submenu item without text");
+                }
+                var menu = gui.Menu.new();
+                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: nil, shortcut: nil, icon: nil, enabled: enabled});
+                menu._parent_item = item;
+                item.setMenu(menu);
+                me.addItem(item);
+                return menu;
         },
 
         # @description Remove all items from the menu
@@ -295,6 +345,14 @@ gui.Menu = {
                         me.setPosition(x, y);
                 }
                 call(me.parents[1].show, [], me);
+        },
+
+        hide: func {
+                if (me._parent_item != nil) {
+                        me._parent_item._hovered = 0;
+                        me._parent_item.update();
+                }
+                call(me.parents[1].hide, [], me);
         },
 
         # @description Destructor

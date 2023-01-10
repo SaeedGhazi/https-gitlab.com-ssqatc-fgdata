@@ -33,7 +33,7 @@ var Element = {
         }
         append(me._bindings, keyboard.Binding.new(s, f));
         if (size(me._bindings) == 1) {
-	        obj.addEventListener("keydown", func(e) obj.onKeyPressed(e));
+                me.addEventListener("keydown", func(e) me.onKeyPressed(e));
         }
     },
 

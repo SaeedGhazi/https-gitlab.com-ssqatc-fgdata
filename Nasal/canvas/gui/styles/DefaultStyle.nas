@@ -866,12 +866,12 @@ DefaultStyle.widgets["menu-item"] = {
 		me._label = me._root.createChild("text")
 						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
 						.set("character-size", 14)
-						.set("alignment", "left-center");
+						.set("alignment", "left-baseline");
 		
 		me._shortcut = me._root.createChild("text")
 						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
 						.set("character-size", 14)
-						.set("alignment", "right-center");
+						.set("alignment", "right-baseline");
 		
 		me._submenu_indicator = me._root.createChild("path")
 						.vert(12).line(6, -7).close();
@@ -879,15 +879,29 @@ DefaultStyle.widgets["menu-item"] = {
 	
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(0, 0, w, h);
-		me._icon.setTranslation(3, int((h - 12) / 2));
-		me._label.setTranslation(24, int(h / 2) + 1);
-		me._shortcut.setTranslation(w - 3, int(h / 2) + 1);
-		me._submenu_indicator.setTranslation(w - 15, int((h - 12) / 2));
+		var offset = 0;
+		if (!model._is_menubar_item) {
+			offset += 5 + 18;
+		}
+		me._icon.setTranslation(5, int((h - 12) / 2));
+		me._label.setTranslation(offset + 5, int(h / 2) + 4);
+		me._shortcut.setTranslation(w - 5, int(h / 2) + 4);
+		me._submenu_indicator.setTranslation(w - 12, int((h - 12) / 2));
 		return me;
 	},
 	
 	_updateLayoutSizes: func(model) {
-		var min_width = 3 + 18 + 3 + me._label.maxWidth() + 3 + me._shortcut.maxWidth() + 3 + 12 + 3;
+		var min_width = 5 + me._label.maxWidth() + 5;
+		if (!model._is_menubar_item) {
+			# add icon space
+			min_width += 5 + 18;
+			# add shortcut space
+			min_width += me._shortcut.maxWidth() + 10;
+			if (model._menu != nil) {
+				# add submenu indicator space
+				min_width += 12;
+			}
+		}
 		model.setLayoutMinimumSize([min_width, 24]);
 		model.setLayoutSizeHint([min_width, 24]);
 		
@@ -927,12 +941,34 @@ DefaultStyle.widgets["menu-item"] = {
 		me._shortcut.set("fill", me._style.getColor(text_color_name));
 		me._submenu_indicator.set("fill", me._style.getColor("menu_item_submenu_indicator" ~ (model._hovered ? "_hovered" : "")));
 		if (model._menu != nil) {
-			me._submenu_indicator.show();
+			if (!model._is_menubar_item) {
+				me._submenu_indicator.show();
+			}
 			me._shortcut.hide();
 		} else {
 			me._submenu_indicator.hide();
 			me._shortcut.show();
 		}
+		
+		return me;
+	}
+};
+
+DefaultStyle.widgets["menu-bar"] = {
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "menu-bar");
+		me._bg = me._root.createChild("path");
+		me._items = me._root.createChild("group", "tab-widget-content");
+	},
+	
+	setSize: func(model, w, h) {
+		me._bg.reset().rect(0, 0, w, h);
+		me._items.setTranslation(0, 0);
+		return me;
+	},
+	
+	update: func(model) {
+		me._bg.set("fill", me._style.getColor("bg_color"));
 		
 		return me;
 	}

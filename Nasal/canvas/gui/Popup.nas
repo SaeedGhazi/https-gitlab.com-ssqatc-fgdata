@@ -7,10 +7,6 @@ gui.Popup = {
 	#
 	# @param size ([width, height])
 	new: func(size_, id = nil, parent = nil) {
-		if (id == nil or contains(gui.Popup.__used_ids, id)) {
-			id = "popup" ~ size(gui.Popup.__used_ids);
-		}
-		append(gui.Popup.__used_ids, id);
 		var ghost = _newWindowGhost(id);
 		var m = {
 			parents: [gui.Popup, PropertyElement, ghost],
@@ -127,7 +123,6 @@ gui.Popup = {
 		me._focused = 1;
 		me._onStateChange();
 		gui.focused_window = me;
-		setInputFocus(me);
 		return me;
 	},
 	#
@@ -137,7 +132,6 @@ gui.Popup = {
 		me._onStateChange();
 		if (gui.focused_window == me) {
 			gui.focused_window = nil;
-			setInputFocus(nil);
 		}
 		if (me._parent != nil and contains(gui.open_popups, me._parent)) {
 			me._parent.setFocus();

@@ -91,5 +91,6 @@ var unload = func
 {
   unloadTooltips();
   unloadErrorNotification();
+  unloadGUI();
   logprint(LOG_INFO, "Unloaded canvas Nasal module");
 };

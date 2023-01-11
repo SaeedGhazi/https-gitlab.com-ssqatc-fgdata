@@ -10,7 +10,8 @@ gui.Widget = {
       _enabled: 1,
       _view: nil,
       _pos: [0, 0],
-      _size: [32, 32]
+      _size: [32, 32],
+      _bindings: []
     });
 
     m.setLayoutMinimumSize([16, 16]);
@@ -141,9 +142,35 @@ gui.Widget = {
   {
     me._view._root.setVisible(visible);
   },
-  bindShortcut: func(s, f) {
-    me._view._root.bindShortcut(s, f);
+
+
+  bindShortcut: func(s, f) 
+  {
+      if (!isa(s, keyboard.Shortcut)) {
+          s = keyboard.Shortcut.new(s);
+      }
+      foreach (var b; me._bindings) {
+          if (b.shortcut.equals(s)) {
+              b.f = f;
+              return;
+          }
+      }
+      append(me._bindings, keyboard.Binding.new(s, f));
+      # add listener when first binding is added
+      # if this happens before the view is set, we instead do it in _setView below
+      if ((size(me._bindings) == 1) and me._view) {
+        me.addEventListener("keydown", func(e) me._onKeyPressed(e));
+      }
   },
+
+    _onKeyPressed: func(e) {
+        foreach (var b; me._bindings) {
+            if (b.shortcut.match(keyboard.findKeyName(e.keyCode), e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)) {
+                b.fire(e);
+            }
+        }
+    },
+
   _setView: func(view)
   {
     me._view = view;
@@ -178,6 +205,11 @@ gui.Widget = {
         root.onKeyPressed(e);
       }
     });
+
+    # if we have keyboard bindings defined, add the listener for them
+    if (size(me._bindings)) {
+      root.addEventListener("keydown", func(e) me._onKeyPressed(e));
+    }
   },
   _trigger: func(type, data = nil)
   {

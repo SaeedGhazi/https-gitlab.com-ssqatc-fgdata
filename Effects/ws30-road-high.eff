@@ -2,8 +2,7 @@
 <PropertyList>
 	<name>Effects/ws30-road-high</name>
 	<inherits-from>Effects/ws30-road</inherits-from>
-	<parameters>
-		<speed-factor>1.2</speed-factor>
-		<base-density>3.0</base-density>
+	<parameters n="0">
+		<road-traffic-density n="0">0.8</road-traffic-density>
 	</parameters>
 </PropertyList>

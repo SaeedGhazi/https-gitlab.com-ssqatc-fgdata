@@ -50,7 +50,7 @@
 		<normalmap-enabled>0</normalmap-enabled>
 			<lightmap-color type="vec3d" n="0"> 0.941 0.682 0.086 </lightmap-color>
 			<snow_level><use>/environment/snow-level-m</use></snow_level>
-			<snow_thickness_factor><use>/environment/surface/snow-thickness-factor</use></snow_thickness_factor>
+			<snow_thickness_factor>0</snow_thickness_factor>
 		<road-traffic-enabled><use>/sim/rendering/osm/road-traffic-enabled</use></road-traffic-enabled>
 		<road-traffic-density><use>/sim/rendering/osm/road-traffic-density</use></road-traffic-density>
 		<road-traffic-direction><use>/sim/rendering/osm/road-traffic-direction</use></road-traffic-direction>
@@ -142,7 +142,7 @@
 			   </bin-name>
 		   </render-bin>
 		   <!-- Diffuse texture unit-->
-		   <texture-unit>
+		   <texture-unit n="0">
 			   <unit>0</unit>
 			   <image>
 				   <use>texture[0]/image</use>

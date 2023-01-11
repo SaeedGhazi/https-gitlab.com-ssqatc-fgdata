@@ -383,10 +383,7 @@ var XMLSlider =
 { 
     init: func(objectProps)
     {
-        logprint(LOG_INFO, "Init of XMLSlider");
         # TODO: support vertical sliders
-
-        
     },
 
     show: func(viewParent)
@@ -481,10 +478,27 @@ var XMLHRule =
 { 
     show: func(viewParent)
     {
+        var label = me.configValue("label");
+
         me._view = cwidgets.HorizontalRule.new(viewParent, canvas.style, {});
+        if (label) {
+            me._view.setText(label);
+        }
+
         me._layout = me._view;
         me._applyLayoutConfig();
         return me._view;
+    },
+
+    update: func()
+    {
+        # allow label to be updated live
+        var l = me.value();
+        if (l) {
+            me._view.setText(l);
+        }
+
+        me._view.setSize(me._size);
     }
 };
 
@@ -496,6 +510,32 @@ var XMLVRule =
         me._layout = me._view;
         me._applyLayoutConfig();
         return me._view;
+    }
+};
+
+
+var XMLPopupMenu =
+{ 
+    init: func(objectProps)
+    {
+    },
+
+    show: func(viewParent)
+    {
+        # do we support a label or is that a seperate widget?
+
+        me._view = cwidgets.PopupMenu.new(viewParent, canvas.style, {});
+        me._layout = me._view;
+        me._applyLayoutConfig();
+        me.update();
+        return me._view;
+    },
+
+    update: func()
+    {
+        if (me._view and !me._view.hasActiveFocus()) {
+            me._view.setCurrentByValue(me.value);
+        }
     }
 };
 
@@ -543,6 +583,12 @@ var _createCompatObject = func(type)
 
     if (type == "vrule") {
         widget = XMLVRule;
+    }
+
+    # these are called combos in XML, but are really
+    # popup menus, no free value entry is possible
+    if (type == "combo") {
+        widget = XMLPopupMenu;
     }
 
     return gui.xml.Object.new({

@@ -41,6 +41,13 @@ gui.widgets.PopupMenu = {
     me.menu().append(gui.widgets.MenuItem.new());
   },
 
+# helper to set the current item by passing in
+# a value of an item
+  setCurrentByValue: func(value) {
+
+    
+  },
+
 # protected:
   _setView: func(view)
   {

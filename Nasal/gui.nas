@@ -11,7 +11,15 @@ var popupTip = func(label, delay = nil, override = nil, position = nil)
     if (position == nil) {
         position = {};
     }
-    fgcommand("show-message", props.Node.new({ "label": label, "delay":delay, "x": position['x'], "y": position['y'] }));
+
+    # Percent signs must be doubled because 'show-message' uses sprintf() on
+    # the label.
+    fgcommand("show-message",
+              props.Node.new(
+                {"label": string.replace(label, "%", "%%"),
+                 "delay": delay,
+                 "x": position['x'],
+                 "y": position['y']}));
 }
 
 var showDialog = func(name) {

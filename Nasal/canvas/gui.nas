@@ -14,6 +14,7 @@ var gui = {
   focused_window: nil,
   open_popups: [],
   region_highlight: nil,
+  menubar: nil,
 
   # Window/dialog stacking order
   STACK_INDEX: {
@@ -595,7 +596,8 @@ getDesktop().addEventListener("mousedown", func {
   }
 });
 
-gui.menubar = gui.MenuBar.new();
+# disabled until this is hooked up to the PUICompat code
+#gui.menubar = gui.MenuBar.new();
 
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
 var Dialog = {
@@ -607,5 +609,8 @@ var Dialog = {
 };
 
 var unloadGUI = func() {
-	gui.menubar.del();
+  if (gui.menubar) {
+  	gui.menubar.del();
+    gui.menubar = nil;
+  }
 }

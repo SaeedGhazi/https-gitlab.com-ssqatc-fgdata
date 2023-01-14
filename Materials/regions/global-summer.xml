@@ -944,4 +944,55 @@
     </parameters>
   </material>
 
+  <!-- Significant trees are typically trees planted on purpose
+  e.g. along an ally, a country road, a river or in a park.
+  In osm2city this material is used for specifically mapped
+  trees as well as for a portion of trees "planted" based on
+  heuristics in parks.
+
+  The height of these trees is typically lower than for the same
+  trees in woods, because they often are maintained and/or
+  cannot grow freely in built-up areas.
+  -->
+  <material>
+    <name>SignificantTrees</name>
+    <texture>Terrain/deciduous1.png</texture>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/deciduous.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>15.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+
+  <!-- Garden vegetation are trees and shrub typically found
+  in gardens in rural and urban areas. In osm2city this
+  material is used for vegetation "planted" based on heuristics
+  in gardens as well as for a portion of vegetation "planted"
+  based on heuristics in parks (aside significant trees).
+  In order to regionalize both the type of vegetation as well
+  as the distribution between trees and shrubs you have to
+  create a variant of texture garden-vegetation.png, e.g.
+  garden-vegetation-mediterranean.png and refer it in a regionalized
+  material definition.
+  -->
+  <material>
+    <name>GardenVegetation</name>
+    <texture>Terrain/deciduous1.png</texture>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/garden-vegetation.png</tree-texture>
+    <tree-varieties>16</tree-varieties>
+    <tree-height-m>10.0</tree-height-m>
+    <tree-width-m>5.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+
 </PropertyList>

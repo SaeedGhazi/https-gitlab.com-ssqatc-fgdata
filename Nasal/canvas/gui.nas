@@ -308,6 +308,10 @@ var Window = {
     me.setInt("z-index", me.get("z-index", gui.STACK_INDEX["default"]));
 
     me.setFocus();
+    
+    foreach(var p; gui.open_popups) {
+      p.hide();
+    }
   },
   hide: func()
   {
@@ -359,11 +363,6 @@ var Window = {
   _onStateChange: func
   {
     var event = canvas.CustomEvent.new("wm.focus-" ~ (me._focused ? "in" : "out"));
-    if (me._focused) {
-      foreach(var p; gui.open_popups) {
-        p.hide();
-      }
-    }
 
     if( me._getCanvasDecoration() != nil )
     {

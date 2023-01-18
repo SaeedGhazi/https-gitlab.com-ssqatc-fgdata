@@ -17,7 +17,8 @@ gui.widgets.MenuBar = {
                 m._canvas_item = nil;
 
                 m.setLayoutMinimumSize([48, 24]);
-                m.setLayoutSizeHint([64, 24]);
+                m.setLayoutSizeHint([48, 24]);
+                m.setLayoutMaximumSize([48, 24]);
 
                 return m;
         },
@@ -142,9 +143,8 @@ gui.widgets.MenuBar = {
                         var arg = arg[0];
                 }
                 var (x, y) = arg;
-                me._size = [x, y];
-                me.setLayoutMinimumSize([x, y]);
-                me.setLayoutSizeHint([x, y]);
+                me._size = [x, 24];
+                me.setAlignment(0x01 | 0x20);
                 return me.update();
         },
 

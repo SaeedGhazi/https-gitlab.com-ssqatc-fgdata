@@ -64,27 +64,44 @@ gui.MenuItem = {
                 if (!me._menu and me._cb) {
                         me._cb(e);
                 }
-                if (me._parent_menu != nil) {
+                me._unsetOthersHovered();
+                if (me._is_menubar_item and me._enabled) {
+                        me._hovered = 1;
+                        me.update();
+                        var x = e.screenX - e.localX;
+                        var y = e.screenY - e.localY;
+                        me._showMenu(x, y);
+                } elsif (me._parent_menu != nil) {
+                        me._hovered = 0;
+                        me.update();
                         me._parent_menu.hide();
                 }
         },
 
-        onMouseEnter: func(e) {
+        _unsetOthersHovered: func {
                 for (var i = 0; i < me._parent_menu._layout.count(); i += 1) {
                         var item = me._parent_menu._layout.itemAt(i);
                         item._hovered = 0;
+                        item.update();
                         if (item._menu != nil) {
                                 item._menu.hide();
                         }
-                        item.update();
                 }
-                if (me._enabled) {
+        },
+
+        onMouseEnter: func(e) {
+                var any_hovered = 0;
+                for (var i = 0; i < me._parent_menu._layout.count(); i += 1) {
+                        any_hovered |= me._parent_menu._layout.itemAt(i)._hovered;
+                }
+                me._unsetOthersHovered();
+                if ((!me._is_menubar_item or any_hovered) and me._enabled) {
                         me._hovered = 1;
-                        var x = e.screenX - e.localX;
+                        me.update();
+                         var x = e.screenX - e.localX;
                         var y = e.screenY - e.localY;
                         me._showMenu(x, y);
                 }
-                me.update();
         },
 
         onMouseLeave: func(e) {
@@ -113,7 +130,6 @@ gui.MenuItem = {
                         }
                         me._menu.setPosition(pos[0], pos[1]);
                         me._menu.show();
-                        me._menu.setFocus();
                 }
                 me._hovered = 1;
         },
@@ -344,7 +360,12 @@ gui.Menu = {
                 if (x != nil and y != nil) {
                         me.setPosition(x, y);
                 }
-                call(me.parents[1].show, [], me);
+		me._ghost.show();
+		me.setInt("z-index", me.get("z-index", gui.STACK_INDEX["always-on-top"]));
+		if (me._canvas != nil) {
+			me._canvas.update();
+		}
+		append(gui.open_popups, me);
         },
 
         hide: func {

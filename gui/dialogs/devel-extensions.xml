@@ -249,7 +249,7 @@
             <legend>Canvas widgets factory</legend>
             <binding>
                 <command>nasal</command>
-                <script>canvas.WidgetsFactoryDialog.new();</script>
+                <script>globals.widgets_factory_dialog_instance = canvas.WidgetsFactoryDialog.new();</script>
             </binding>
         </button>
         <button>

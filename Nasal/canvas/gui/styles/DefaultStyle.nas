@@ -476,9 +476,7 @@ DefaultStyle.widgets["tab-widget"] = {
 	
 	setSize: func(model, w, h) {
 		me.bg.reset().rect(0, w, h, 0);
-		me.tabBar.set("clip", sprintf("rect(0, %d, %d, 0)", w, me.tabBarHeight));
 		me.content.setTranslation(0, me.tabBarHeight);
-		me.content.set("clip",	sprintf("rect(0, %d, %d, 0)", w, h));
 	},
 };
 
@@ -491,8 +489,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 						.set("stroke", me._style.getColor("tab_widget_tab_button_border"))
 						.set("stroke-width", 1);
 		me._selected_indicator = me._root.createChild("path")
-						.set("stroke", me._style.getColor("tab_widget_tab_button_selected_indicator"))
-						.set("stroke-width", 3);
+						.set("stroke-width", 4);
 		me._label = me._root.createChild("text")
 						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
 						.set("character-size", 14)
@@ -501,7 +498,8 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 	
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(3, 0, w - 6, h);
-		me._selected_indicator.reset().moveTo(3, h).horiz(w - 6);
+		me._selected_indicator.reset().moveTo(3, h - 2).horiz(w - 6);
+		me._label.setTranslation(w / 2, h / 2 + 5);
 	},
 	
 	setText: func(model, text) {
@@ -518,8 +516,6 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 		var backdrop = !model._windowFocus();
 		var (w, h) = model._size;
 		
-		me._label.setTranslation(w / 2, h / 2 + 5);
-		
 		var bg_color_name = "tab_widget_tab_button_bg_focused";
 		if (backdrop) {
 			bg_color_name = "tab_widget_tab_button_bg_unfocused";
@@ -530,13 +526,14 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 		}
 		me._bg.set("fill", me._style.getColor(bg_color_name));
 		
-		me._selected_indicator.setVisible(model._selected);
-
-		if (backdrop) {
-			me._label.set("fill", me._style.getColor("backdrop_fg_color"));
-		} else {
-			me._label.set("fill", me._style.getColor("fg_color"));
+		me._selected_indicator.setVisible(model._selected or model._hover);
+		var selected_indicator_color_name = "tab_widget_tab_button_selected_indicator_selected";
+		if (!model._selected and model._hover) {
+			selected_indicator_color_name = "tab_widget_tab_button_selected_indicator_unselected_hovered";
 		}
+		me._selected_indicator.set("stroke", me._style.getColor(selected_indicator_color_name));
+
+		me._label.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "fg_color"));
 	}
 };
 
@@ -958,11 +955,11 @@ DefaultStyle.widgets["menu-bar"] = {
 	new: func(parent, cfg) {
 		me._root = parent.createChild("group", "menu-bar");
 		me._bg = me._root.createChild("path");
-		me._items = me._root.createChild("group", "tab-widget-content");
+		me._items = me._root.createChild("group", "menu-bar-items");
 	},
 	
 	setSize: func(model, w, h) {
-		me._bg.reset().rect(0, 0, w, h);
+		me._bg.reset().rect(0, 0, w, 24);
 		me._items.setTranslation(0, 0);
 		return me;
 	},

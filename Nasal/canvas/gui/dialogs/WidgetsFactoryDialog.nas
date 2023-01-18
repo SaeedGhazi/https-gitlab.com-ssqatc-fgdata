@@ -148,7 +148,7 @@ var WidgetsFactoryDialog = {
 			m.list.createItem("Item " ~ i);
 		}
 		m.list.listen("selection-changed", func {
-			m.list_selection_label.setText("Selected items: " ~ (string.join(", ", map(func(item) item._text, m.list.getSelectedItems())) or "none"));
+			m.list_selection_label.setText("Selected items: " ~ (string.join(", ", std.map(func(item) item._text, m.list.getSelectedItems())) or "none"));
 		});
 		m.list.setSizeHint([m.list._MAX_SIZE, m.list._MAX_SIZE]);
 		m.list_box.addItem(m.list);

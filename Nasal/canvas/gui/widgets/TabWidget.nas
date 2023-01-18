@@ -93,8 +93,11 @@ gui.widgets.TabWidget = {
 		m._setView(style.createWidget(parent, "tab-widget", m._cfg));
 		m._layout = VBoxLayout.new();
 		m._layout.setCanvas(m._view._root.getCanvas());
+		m._layout.setParent(m);
 		m._tabBar = HBoxLayout.new();
 		m._layout.addItem(m._tabBar);
+		m._content = VBoxLayout.new();
+		m._layout.addItem(m._content);
 		m._currentTab = nil;
 		m._currentTabId = nil;
 		m._tabs = {};
@@ -137,7 +140,9 @@ gui.widgets.TabWidget = {
 		
 		me._tabBar.addItem(me._tabButtons[id]);
 		me._tabs[id] = widget;
-		me._layout.addItem(widget);
+		me._content.addItem(widget);
+		# hack to force a doLayout for each tab
+		me.setCurrentTab(id);
 		me.setCurrentTab(keys(me._tabs)[0]);
 		
 		return me;
@@ -149,7 +154,7 @@ gui.widgets.TabWidget = {
 		}
 		
 		me._tabs[id].setVisible(0);
-		me._layout.removeItem(me._tabs[id]);
+		me._content.removeItem(me._tabs[id]);
 		delete(me._tabs, id);
 		me._tabBar.removeItem(me._tabButtons[id]);
 		delete(me._tabButtons, id);
@@ -196,11 +201,13 @@ gui.widgets.TabWidget = {
 		if(me._layout.getParent() == nil) {
 			me._layout.setParent(me);
 		}
-		
+		me._layout.setGeometry([0, 0, me._size[0], me._size[1]]);
 		me._tabBar.setGeometry([0, 0, me._size[0], me._view.tabBarHeight]);
-		if (me._currentTab) {
-			me._currentTab.setGeometry([0, me._view.tabBarHeight, me._size[0], me._size[1] - me._view.tabBarHeight]);
+		me._content.setGeometry([0, 0, me._size[0], me._size[1] - me._view.tabBarHeight]);
+		if (me._currentTab != nil) {
+			me._currentTab.setGeometry([0, 0, me._size[0], me._size[1] - me._view.tabBarHeight]);
 		}
+		me.setLayoutSizeHint(me._size);
 		me._view.setSize(me, me._size[0], me._size[1]);
 		
 		me._view.update(me);

@@ -969,4 +969,162 @@ DefaultStyle.widgets["menu-bar"] = {
 		
 		return me;
 	}
+};
+
+# A button
+DefaultStyle.widgets["combo-box"] = {
+  new: func(parent, cfg)
+  {
+    me._root = parent.createChild("group", "combo-box");
+    me._bg =
+      me._root.createChild("path");
+    me._border =
+      me._root.createChild("image", "border")
+              .set("slice", "10 6"); #"7")
+    me._buttonBorder =
+      me._root.createChild("image", "border-button")
+              .set("slice", "10 6"); #"7")
+    me._arrowIcon = me._root.createChild("image", "arrow");
+    me._label =
+      me._root.createChild("text")
+              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+              .set("character-size", 14)
+              .set("alignment", "left-center");
+  },
+  setSize: func(model, w, h)
+  {
+    var halfWidth = int(w * 0.5);
+    me._bg.reset()
+          .rect(3, 3, w - 6, h - 6, {"border-radius": 5});
+
+    # we split the two pieces
+    me._border.setSize(halfWidth, h);
+    me._buttonBorder.setTranslation(halfWidth, 0);
+    me._buttonBorder.setSize(w - halfWidth, h);
+
+    var arrowSize = me._arrowIcon.imageSize();
+    me._arrowIcon.setTranslation(w - (arrowSize[0] + 20), (h - arrowSize[1]) * 0.5);
+
+    me._label.setTranslation(20, h * 0.5);
+  },
+  setText: func(model, text)
+  {
+    me._label.setText(text);
+
+    var min_width = math.max(80, me._label.maxWidth() + 16 + me._arrowIcon.imageSize()[0]);
+    model.setLayoutMinimumSize([min_width, 16]);
+    model.setLayoutSizeHint([min_width, 28]);
+
+    return me;
+  },
+  update: func(model)
+  {
+    var backdrop = !model._windowFocus();
+    var (w, h) = model._size;
+    var file = me._style._dir_widgets ~ "/";
+
+    # TODO unify color names with image names
+    var bg_color_name = "button_bg_color";
+    if( backdrop )
+      bg_color_name = "button_backdrop_bg_color";
+    else if( !model._enabled )
+      bg_color_name = "button_bg_color_insensitive";
+    else if( model._down )
+      bg_color_name = "button_bg_color_down";
+    else if( model._hover )
+      bg_color_name = "button_bg_color_hover";
+    me._bg.set("fill", me._style.getColor(bg_color_name));
+
+    var arrowIconFile = file ~ "combobox-arrow";
+
+    if( backdrop )
+    {
+      file ~= "backdrop-";
+      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+    }
+    else
+      me._label.set("fill", me._style.getColor("fg_color"));
+    file ~= "combobox";
+
+    var buttonFile = file ~ "-button";
+    file ~= "-entry";
+
+    var suffix = "";
+    if( model._down )
+    { # no pressed image for the left half
+      buttonFile ~= "-pressed";
+    }
+
+    if( model._enabled ) {
+      if( model._focused and !backdrop )
+        suffix ~= "-focused";
+    } else {
+      suffix ~= "-disabled";
+      arrowIconFile ~= "-disabled";
+    }
+
+    me._border.set("src", file ~ suffix ~ ".png");
+    me._buttonBorder.set("src", buttonFile ~ suffix ~ ".png");
+    me._arrowIcon.set("src", arrowIconFile ~ ".png");
+  }
+};
+
+DefaultStyle.widgets["list-item"] = {
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "list-item");
+		me._bg = me._root.createChild("path");
+		
+		me._label = me._root.createChild("text")
+						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+						.set("character-size", 14)
+						.set("alignment", "left-baseline");
+	},
+	
+	setSize: func(model, w, h) {
+		me._bg.reset().rect(0, 0, w, 24);
+		me._label.setTranslation(5, int(h / 2) + 4);
+		return me;
+	},
+	
+	_updateLayoutSizes: func(model) {
+		var min_width = 5 + me._label.maxWidth() + 5;
+		model.setLayoutMinimumSize([min_width, 24]);
+		model.setLayoutSizeHint([min_width, 24]);
+		
+		return me;
+	},
+	
+	setText: func(model, text) {
+		me._label.setText(text);
+		return me._updateLayoutSizes(model);
+	},
+	
+	update: func(model) {
+		me._bg.set("fill", me._style.getColor("list_item_bg" ~ (model._selected ? "_selected" : "")));
+		var text_color_name = "list_item_fg";
+		if (model._selected) {
+			text_color_name ~= "_selected";
+		}
+		me._label.set("fill", me._style.getColor(text_color_name));
+		
+		return me;
+	}
+};
+
+DefaultStyle.widgets.list = {
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "list");
+		me._bg = me._root.createChild("path");
+	},
+	
+	setSize: func(model, w, h) {
+		me._bg.reset().rect(0, 0, w, h);
+		return me;
+	},
+	
+	update: func(model) {
+		me._bg.set("fill", me._style.getColor("bg_color"));
+		
+		return me;
+	}
 }

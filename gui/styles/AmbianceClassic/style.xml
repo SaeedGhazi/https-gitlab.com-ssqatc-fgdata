@@ -185,5 +185,29 @@
 			<green type="float">0.945</green>
 			<blue type="float">0.941</blue>
 		</menu_item_submenu_indicator_hovered>
+		
+		<list_item_fg>
+			<red type="float">0.298</red>
+			<green type="float">0.298</green>
+			<blue type="float">0.298</blue>
+		</list_item_fg>
+		
+		<list_item_fg_selected>
+			<red type="float">0.95</red>
+			<green type="float">0.95</green>
+			<blue type="float">0.95</blue>
+		</list_item_fg_selected>
+		
+		<list_item_bg>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</list_item_bg>
+		
+		<list_item_bg_selected>
+			<red type="float">0.15</red>
+			<green type="float">0.15</green>
+			<blue type="float">1</blue>
+		</list_item_bg_selected>
 	</colors>
 </PropertyList>

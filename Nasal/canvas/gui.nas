@@ -42,6 +42,7 @@ loadWidget("Button");
 loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
+loadWidget("List");
 loadWidget("MenuBar");
 loadWidget("PropertyWidgets");
 loadWidget("ScrollArea");

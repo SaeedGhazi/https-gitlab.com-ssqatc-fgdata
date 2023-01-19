@@ -57,8 +57,12 @@ var WidgetsFactoryDialog = {
 		var r2 = gui.widgets.HorizontalRule.new(m.tabsContent, style, {});
 		m.tab_1.addItem(r2);
 
-		m.tab_2 = VBoxLayout.new();
+		m.tab_2 = HBoxLayout.new();
 		m.tabs.addTab("tab-2", "Tab 2", m.tab_2);
+		
+		m.button_box = VBoxLayout.new();
+		m.tab_2.addItem(m.button_box);
+		
 		m.button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("A button")
 						.setFixedSize(60, 30)
@@ -67,13 +71,13 @@ var WidgetsFactoryDialog = {
 								MessageBox.information("You clicked the button …", "… and entered '" ~ (text != nil ? text : "nothing") ~ "' !");
 							});
 						});
-		m.tab_2.addItem(m.button);
+		m.button_box.addItem(m.button);
 		m.image = gui.widgets.Label.new(m.tabsContent, style, {})
 						.setImage("Textures/Splash1.png")
 						.setVisible(0)
 						.setFixedSize(128, 128);
 
-		m.tab_2.addItem(m.image);
+		m.button_box.addItem(m.image);
 		m.image._view._root.addEventListener("mousedown", func (e) {
 			logprint(LOG_INFO, "Image was clicked at:" ~ e.localX ~ "," ~ e.localY);
 			logprint(LOG_INFO, "Client pos:" ~ e.clientX ~ "," ~ e.clientY);
@@ -97,7 +101,7 @@ var WidgetsFactoryDialog = {
 						.listen("toggled", func (e) {
 							m.image.setVisible(int(e.detail.checked));
 						});
-		m.tab_2.addItem(m.checkable_button);
+		m.button_box.addItem(m.checkable_button);
 
 		m.upsize_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("Upsize window")
@@ -106,7 +110,7 @@ var WidgetsFactoryDialog = {
 							var s = m.window.getSize();
 							m.window.setSize(s[0] + 100, s[1] + 100);
 						});
-		m.tab_2.addItem(m.upsize_button, 5);
+		m.button_box.addItem(m.upsize_button);
 		
 		m.downsize_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("Downsize window")
@@ -115,11 +119,30 @@ var WidgetsFactoryDialog = {
 							var s = m.window.getSize();
 							m.window.setSize(s[0] - 100, s[1] - 100);
 						});
-		m.tab_2.addItem(m.downsize_button, 5);
+		m.button_box.addItem(m.downsize_button);
+		
+		m.list_box = VBoxLayout.new();
+		m.tab_2.addItem(m.list_box);
+		
+		m.list = gui.widgets.List.new(m.tabsContent);
+		for (var i = 0; i < 30; i += 1) {
+			m.list.createItem("Item " ~ i);
+		}
+		m.list.listen("selection-changed", func {
+			m.list_selection_label.setText("Selected items: " ~ (string.join(", ", map(func(item) item._text, m.list.getSelectedItems())) or "none"));
+		});
+		m.list.setSizeHint([m.list._MAX_SIZE, m.list._MAX_SIZE]);
+		m.list_box.addItem(m.list);
+		
+		m.list_selection_label = gui.widgets.Label.new(m.tabsContent, canvas.style, {})
+						.setText("Selected items: none");
+		m.list_selection_label.setAlignment(canvas.AlignBottom);
+		m.list_box.addItem(m.list_selection_label);
 		
 		m.benchmark_tab = VBoxLayout.new();
 		m.tabs.addTab("benchmark", "Benchmark", m.benchmark_tab);
 		m.benchmark_tab_scroll = canvas.gui.widgets.ScrollArea.new(m.tabsContent, canvas.style, {});
+		m.benchmark_tab_scroll.setSizeHint([m.list._MAX_SIZE, m.list._MAX_SIZE]);
 		m.benchmark_tab_scroll_layout = VBoxLayout.new();
 		m.benchmark_tab_scroll.setLayout(m.benchmark_tab_scroll_layout);
 		m.benchmark_tab.addItem(m.benchmark_tab_scroll);

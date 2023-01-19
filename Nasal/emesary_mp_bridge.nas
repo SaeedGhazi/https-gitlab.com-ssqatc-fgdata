@@ -15,7 +15,7 @@
  #
  #  Version              : 4.8
  #
- #  Copyright © 2016 Richard Harrison           Released under GPL V2
+ #  Copyright Â© 2016 Richard Harrison           Released under GPL V2
  #
  #---------------------------------------------------------------------------*/
 

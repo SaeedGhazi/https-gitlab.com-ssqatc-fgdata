@@ -109,10 +109,7 @@ var Window = {
     m.setInt("content-size[1]", size[1]);
     m.setDouble("aspect-ratio", size[0]/size[1]);
     m.setBool("lock-aspect-ratio", 0);
-    
-    var desktopSize = [props.globals.getValue("/sim/gui/canvas/size[0]"), props.globals.getValue("/sim/gui/canvas/size[1]")];
-    var pos = [desktopSize[0] / 2 - size[0] / 2 + 10, desktopSize[1] / 2 - size[1] / 2 + 30];
-    m.move(pos[0], pos[1]);
+    m.centerOnScreen();
     
     if (destroy_on_close) {
       m.setFocus();
@@ -270,6 +267,14 @@ var Window = {
     me.setInt("tf/t[0]", x);
     me.setInt("tf/t[1]", y);
     return me;
+  },
+  getPosition:  func {
+    return [me.get("tf/t[0]"), me.get("tf/t[1]")];
+  },
+  centerOnScreen: func {
+    var desktopSize = [props.globals.getValue("/sim/gui/canvas/size[0]"), props.globals.getValue("/sim/gui/canvas/size[1]")];
+    var pos = [desktopSize[0] / 2 - me.getSize()[0] / 2 - 1, desktopSize[1] / 2 - me.getSize()[1] / 2 - 12];
+    me.setPosition(pos);
   },
   setSize: func
   {

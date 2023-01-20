@@ -48,6 +48,7 @@ loadWidget("ScrollArea");
 loadWidget("Rule");
 loadWidget("Slider");
 loadWidget("TabWidget");
+loadWidget("ComboBox");
 
 # standard dialogs
 loadDialog("InputDialog");

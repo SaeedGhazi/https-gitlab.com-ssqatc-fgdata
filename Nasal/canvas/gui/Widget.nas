@@ -159,7 +159,7 @@ gui.Widget = {
       # add listener when first binding is added
       # if this happens before the view is set, we instead do it in _setView below
       if ((size(me._bindings) == 1) and me._view) {
-        me.addEventListener("keydown", func(e) me._onKeyPressed(e));
+        me._view._root.addEventListener("keydown", func(e) me._onKeyPressed(e));
       }
   },
 

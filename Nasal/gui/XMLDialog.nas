@@ -514,7 +514,7 @@ var XMLVRule =
 };
 
 
-var XMLPopupMenu =
+var XMLComboBox =
 { 
     init: func(objectProps)
     {
@@ -524,7 +524,7 @@ var XMLPopupMenu =
     {
         # do we support a label or is that a seperate widget?
 
-        me._view = cwidgets.PopupMenu.new(viewParent, canvas.style, {});
+        me._view = cwidgets.ComboBox.new(viewParent, canvas.style, {});
         me._layout = me._view;
         me._applyLayoutConfig();
         me.update();
@@ -585,10 +585,8 @@ var _createCompatObject = func(type)
         widget = XMLVRule;
     }
 
-    # these are called combos in XML, but are really
-    # popup menus, no free value entry is possible
     if (type == "combo") {
-        widget = XMLPopupMenu;
+        widget = XMLComboBox;
     }
 
     return gui.xml.Object.new({

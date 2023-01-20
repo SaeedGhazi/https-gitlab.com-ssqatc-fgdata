@@ -159,7 +159,15 @@ var WidgetsFactoryDialog = {
 			 "tick-count" : 10})
 			.setValue(42);
 		m.numericControlsTab.addItem(m.slider);
-		
+
+
+		m.combo1 = gui.widgets.ComboBox.new(m.tabsContent, style, {});
+		m.combo1.addMenuItem("Apples", 0);
+		m.combo1.addMenuItem("Pears", 1);
+		m.combo1.addMenuItem("Lemons", 2);
+		m.combo1.addMenuItem("Oranges", 3);
+
+		m.numericControlsTab.addItem(m.combo1);
 		return m;
 	},
 	

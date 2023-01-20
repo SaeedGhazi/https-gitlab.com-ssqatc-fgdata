@@ -973,7 +973,7 @@ DefaultStyle.widgets["menu-bar"] = {
 	}
 };
 
-# A button
+# A combo-box
 DefaultStyle.widgets["combo-box"] = {
   new: func(parent, cfg)
   {
@@ -1129,4 +1129,5 @@ DefaultStyle.widgets.list = {
 		
 		return me;
 	}
-}
+};
+

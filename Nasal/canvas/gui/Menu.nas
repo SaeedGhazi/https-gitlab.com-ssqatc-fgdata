@@ -52,6 +52,10 @@ gui.MenuItem = {
                 return m;
         },
 
+        text: func {
+                return me._text;
+        },
+
         setMenu: func(menu) {
                 menu._parent_item = me;
                 menu._canvas_item = me._parent_menu._canvas_item;

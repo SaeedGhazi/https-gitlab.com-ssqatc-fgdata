@@ -43,6 +43,7 @@ loadWidget("Label");
 loadWidget("LineEdit");
 loadWidget("List");
 loadWidget("MenuBar");
+loadWidget("PropertyTree");
 loadWidget("PropertyWidgets");
 loadWidget("ScrollArea");
 loadWidget("Rule");
@@ -54,6 +55,7 @@ loadWidget("ComboBox");
 loadDialog("InputDialog");
 loadDialog("MessageBox");
 loadDialog("WidgetsFactoryDialog");
+loadDialog("PropertyTreeBrowser");
 
 var style = DefaultStyle.new("AmbianceClassic", "Humanity");
 var WindowButton = {

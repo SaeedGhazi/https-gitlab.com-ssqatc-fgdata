@@ -209,5 +209,53 @@
 			<green type="float">0.15</green>
 			<blue type="float">1</blue>
 		</list_item_bg_selected>
+		
+		<radio_button_bg_color>
+			<red   type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue  type="float">0.941</blue>
+		</radio_button_bg_color>
+		
+		<radio_button_bg_color_hovered>
+			<red   type="float">0.989</red>
+			<green type="float">0.985</green>
+			<blue  type="float">0.981</blue>
+		</radio_button_bg_color_hovered>
+		
+		<radio_button_selected_indicator_bg_color>
+			<red type="float">1</red>
+			<green type="float">1</green>
+			<blue type="float">1</blue>
+		</radio_button_selected_indicator_bg_color>
+		
+		<radio_button_selected_indicator_bg_color_hovered>
+			<red type="float">0.95</red>
+			<green type="float">0.95</green>
+			<blue type="float">0.95</blue>
+		</radio_button_selected_indicator_bg_color_hovered>
+		
+		<radio_button_selected_indicator_bg_color_disabled>
+			<red type="float">0.9</red>
+			<green type="float">0.9</green>
+			<blue type="float">0.9</blue>
+		</radio_button_selected_indicator_bg_color_disabled>
+		
+		<radio_button_selected_indicator_border_color>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</radio_button_selected_indicator_border_color>
+		
+		<radio_button_selected_indicator_color>
+			<red type="float">0.25</red>
+			<green type="float">0.25</green>
+			<blue type="float">1</blue>
+		</radio_button_selected_indicator_color>
+		
+		<radio_button_selected_indicator_color_disabled>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">1</blue>
+		</radio_button_selected_indicator_color_disabled>
 	</colors>
 </PropertyList>

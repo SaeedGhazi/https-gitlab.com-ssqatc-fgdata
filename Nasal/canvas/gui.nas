@@ -46,6 +46,7 @@ loadWidget("MenuBar");
 loadWidget("PropertyTree");
 loadWidget("PropertyWidgets");
 loadWidget("ScrollArea");
+loadWidget("RadioButton");
 loadWidget("Rule");
 loadWidget("Slider");
 loadWidget("TabWidget");

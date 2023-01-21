@@ -11,7 +11,6 @@ var WidgetsFactoryDialog = {
 						.set("background", style.getColor("bg_color"))
 						.createGroup();
 		m.vbox = VBoxLayout.new();
-		#m.vbox.setContentsMargin(10);
 		m.window.setLayout(m.vbox);
 		
 		m.menubar = canvas.gui.widgets.MenuBar.new(m.root, canvas.style, {});
@@ -22,12 +21,18 @@ var WidgetsFactoryDialog = {
 		tabsMenu.createItem(text: "Select first tab", cb: func m.tabs.setCurrentTab("tab-1"));
 		tabsMenu.createItem(text: "Select second tab", cb: func m.tabs.setCurrentTab("tab-2"));
 		
-		m.menubar.createMenu("Widgets")
-						.createItem(text: "Benchmark label", cb: func {
-							m.benchmark_widget(canvas.gui.widgets.Label, func(w, i) {
-								w.setText("Label " ~ i);
-							});
-						});
+		var widgetsMenu = m.menubar.createMenu("Widgets");
+		widgetsMenu.createItem(text: "Benchmark label", cb: func {
+			m.benchmark_widget(canvas.gui.widgets.Label, func(w, i) {
+				w.setText("Label " ~ i);
+			});
+		});
+
+		widgetsMenu.createItem(text: "Benchmark radio button", cb: func {
+			m.benchmark_radio_button(func(w, i) {
+				w.setText("Radio button " ~ i);
+			});
+		});
 		m.vbox.addItem(m.menubar);
 		
 		m.tabs = gui.widgets.TabWidget.new(m.root, style, {});
@@ -45,11 +50,11 @@ var WidgetsFactoryDialog = {
 		r.setText("Checkboxes!");
 		m.tab_1.addItem(r);
 
-		m.checkbox_left = gui.widgets.CheckBox.new(m.tabsContent, style, {"label-position": "right"})
+		m.checkbox_left = gui.widgets.CheckBox.new(m.tabsContent, style, {})
 						.setText("Wanna check something ?");
 		m.tab_1.addItem(m.checkbox_left);
-		m.checkbox_right = gui.widgets.CheckBox.new(m.tabsContent, style, {"label-position": "right"})
-						.setText("Checkbox with text on the right side");
+		m.checkbox_right = gui.widgets.CheckBox.new(m.tabsContent, style, {"label-position": "left"})
+						.setText("Checkbox with text on the left side");
 		m.tab_1.addItem(m.checkbox_right);
 		m.property_checkbox = gui.widgets.PropertyCheckBox.new(props.globals.getNode("/controls/lighting/nav-lights"), m.tabsContent, style, {})
 						.setText("Nav lights");
@@ -57,6 +62,19 @@ var WidgetsFactoryDialog = {
 		
 		var r2 = gui.widgets.HorizontalRule.new(m.tabsContent, style, {});
 		m.tab_1.addItem(r2);
+		
+		m.radio1 = gui.widgets.RadioButton.new(m.tabsContent)
+						.setText("Radio button 1");
+		m.tab_1.addItem(m.radio1);
+		m.radio2 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
+						.setText("Radio button 2");
+		m.tab_1.addItem(m.radio2);
+		m.radio3 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
+						.setText("Radio button 3");
+		m.tab_1.addItem(m.radio3);
+		m.radio4 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
+						.setText("Radio button 4");
+		m.tab_1.addItem(m.radio4);
 
 		m.tab_2 = HBoxLayout.new();
 		m.tabs.addTab("tab-2", "Tab 2", m.tab_2);
@@ -145,6 +163,7 @@ var WidgetsFactoryDialog = {
 		m.benchmark_tab_scroll = canvas.gui.widgets.ScrollArea.new(m.tabsContent, canvas.style, {});
 		m.benchmark_tab_scroll.setSizeHint([m.list._MAX_SIZE, m.list._MAX_SIZE]);
 		m.benchmark_tab_scroll_layout = VBoxLayout.new();
+		m.benchmark_tab_scroll_layout.setSpacing(0);
 		m.benchmark_tab_scroll.setLayout(m.benchmark_tab_scroll_layout);
 		m.benchmark_tab.addItem(m.benchmark_tab_scroll);
 		m.benchmark_statistics = canvas.gui.widgets.Label.new(m.tabsContent, canvas.style, {});
@@ -176,6 +195,21 @@ var WidgetsFactoryDialog = {
 		me.benchmark_tab_scroll_layout.clear();
 		for (var i = 0; i < amount; i += 1) {
 			var w = widget.new(me.benchmark_tab_scroll.getContent(), canvas.style, {});
+			if (proc_func != nil) {
+				proc_func(w, i);
+			}
+			me.benchmark_tab_scroll_layout.addItem(w);
+		}
+		var time = systime() - start;
+		me.benchmark_statistics.setText("Took " ~ time ~ " seconds to add " ~ amount ~ " widgets.");
+	},
+	
+	benchmark_radio_button: func(proc_func=nil, amount=50) {
+		var start = systime();
+		me.benchmark_tab_scroll_layout.clear();
+		var r = canvas.gui.widgets.RadioButton.new(me.benchmark_tab_scroll.getContent());
+		for (var i = 1; i < amount; i += 1) {
+			var w = canvas.gui.widgets.RadioButton.new(me.benchmark_tab_scroll.getContent(), canvas.style, {parentRadio: r});
 			if (proc_func != nil) {
 				proc_func(w, i);
 			}

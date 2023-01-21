@@ -176,6 +176,73 @@ DefaultStyle.widgets.checkbox = {
   }
 };
 
+# A checkbox
+DefaultStyle.widgets["radio-button"] = {
+  new: func(parent, cfg) {
+    me._root = parent.createChild("group", "radio-button");
+    me._bg = me._root.createChild("path");
+    me._icon = me._root.createChild("group", "radio-button-icon");
+    me._icon_background = me._icon.createChild("path", "radio-button-icon-border")
+            .circle(8.5, 9, 9);
+    me._icon_selected_indicator = me._icon.createChild("path", "radio-button-icon-selected-indicator")
+            .circle(6, 9, 9)
+            .set("stroke-width", 5);
+    me._icon_border = me._icon.createChild("path", "radio-button-icon-border")
+            .circle(8, 9, 9)
+            .set("stroke-width", 1);
+    me._label = me._root.createChild("text")
+            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+            .set("character-size", 14)
+            .set("alignment", "left-center");
+  },
+  setSize: func(model, w, h) {
+    me._bg.reset().rect(0, 0, w, h);
+    me._icon.setTranslation(3, int((h - 18) / 2));
+    me._label.setTranslation(24, int(h / 2) + 1);
+
+    return me;
+  },
+  setText: func(model, text) {
+    me._label.setText(text);
+
+    var min_width = me._label.maxWidth() + 3 + 24;
+    model.setLayoutMinimumSize([min_width, 24]);
+    model.setLayoutSizeHint([min_width, 24]);
+
+    return me;
+  },
+  update: func(model) {
+    var backdrop = !model._windowFocus();
+    
+    me._bg.set("fill", me._style.getColor("radio_button_bg_color" ~ (model._hover ? "_hovered" : "")));
+
+    me._icon_border.set("stroke", me._style.getColor("radio_button_selected_indicator_border_color"));
+    if (backdrop) {
+      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+    } else {
+      me._label.set("fill", me._style.getColor("fg_color"));
+    }
+
+    if (model._checked) {
+      me._icon_selected_indicator.show();
+    } else {
+      me._icon_selected_indicator.hide();
+    }
+
+    if (model._enabled) {
+      if (model._hover) {
+        me._icon_background.set("fill", me._style.getColor("radio_button_selected_indicator_bg_color_hovered"));
+      } else {
+        me._icon_background.set("fill", me._style.getColor("radio_button_selected_indicator_bg_color"));
+      }
+      me._icon_selected_indicator.set("stroke", me._style.getColor("radio_button_selected_indicator_color"));
+    } else {
+      me._icon_background.set("fill", me._style.getColor("radio_button_selected_indicator_bg_color_disabled"));
+      me._icon_selected_indicator.set("stroke", me._style.getColor("radio_button_selected_indicator_color_disabled"));
+    }
+  }
+};
+
 # A label
 DefaultStyle.widgets.label = {
   new: func(parent, cfg)

@@ -5,17 +5,17 @@
 gui.widgets.Button = {
   new: func(parent, style, cfg)
   {
-    var cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.Button);
+    m._cfg = Config.new(cfg);
     m._focus_policy = m.StrongFocus;
     m._down = 0;
     m._checkable = 0;
-    m._flat = cfg.get("flat", 0);
-    m._isDefault = cfg.get("default", 0);
-    m._destructive = cfg.get("destructive", 0);
+    m._flat = m._cfg.get("flat", 0);
+    m._isDefault = m._cfg.get("default", 0);
+    m._destructive = m._cfg.get("destructive", 0);
 
     if( style != nil and !m._flat )
-      m._setView( style.createWidget(parent, cfg.get("type", "button"), cfg) );
+      m._setView( style.createWidget(parent, m._cfg.get("type", "button"), m._cfg) );
 
     return m;
   },

@@ -911,11 +911,13 @@ DefaultStyle.widgets["menu-item"] = {
 	},
 	
 	setShortcut: func(model, shortcut) {
-		me._shortcut.setText(shortcut.repr());
+    if (shortcut != nil) {
+  		me._shortcut.setText(shortcut.repr());
+    }
 		return me._updateLayoutSizes(model);
 	},
 	
-	setIcon: func(icon) {
+	setIcon: func(model, icon) {
 		if (!icon) {
 			me._icon.hide();
 		} else {

@@ -44,13 +44,12 @@ gui.widgets.MenuBar = {
                         die("cannot create a submenu item without submenu");
                 }
                 var item = gui.MenuItem.new(me._view._items, style, 
-                                                {
-                                                        text: text, cb: nil, shortcut: nil, icon: nil, enabled: enabled,
-                                                        menu_position: gui.MenuItem.MenuPosition.Below,
-                                                }
+                        {
+                                text: text, cb: nil, shortcut: nil, icon: nil, enabled: enabled,
+                                menu_position: gui.MenuItem.MenuPosition.Below,
+                        }
                 );
                 item._is_menubar_item = 1;
-                item._view._updateLayoutSizes(item);
                 item._setParentMenu(me);
                 item.setMenu(menu);
                 me._layout.addItem(item);

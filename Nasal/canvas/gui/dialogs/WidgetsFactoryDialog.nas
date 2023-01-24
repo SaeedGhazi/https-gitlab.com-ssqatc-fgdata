@@ -18,9 +18,10 @@ var WidgetsFactoryDialog = {
 		m.menubar.setCanvasItem(m.root);
 		m.menubar.createMenu("File")
 						.createItem(text: "Quit", cb: func m.del(), shortcut: "<Ctrl>+Q");
-		m.menubar.createMenu("Tabs")
-						.createItem(text: "Select first tab", cb: func m.tabs.setCurrentTab("tab-1"))
-						.createItem(text: "Select second tab", cb: func m.tabs.setCurrentTab("tab-2"));
+		var tabsMenu = m.menubar.createMenu("Tabs");
+		tabsMenu.createItem(text: "Select first tab", cb: func m.tabs.setCurrentTab("tab-1"));
+		tabsMenu.createItem(text: "Select second tab", cb: func m.tabs.setCurrentTab("tab-2"));
+		
 		m.menubar.createMenu("Widgets")
 						.createItem(text: "Benchmark label", cb: func {
 							m.benchmark_widget(canvas.gui.widgets.Label, func(w, i) {

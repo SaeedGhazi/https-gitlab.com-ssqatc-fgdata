@@ -153,6 +153,10 @@ gui.MenuItem = {
                 return me.update();
         },
         
+        text: func {
+                return me._text;
+        },
+
         setShortcut: func(shortcut) {
                 me._shortcut = keyboard.Shortcut.new(shortcut);
                 if (me._parent_menu != nil and me._parent_menu._canvas_item != nil and me._cb != nil) {
@@ -165,9 +169,10 @@ gui.MenuItem = {
         _setParentMenu: func(m) {
                 me._parent_menu = m;
                 if (me._parent_menu != nil and me._parent_menu._canvas_item != nil and me._cb != nil) {
-                        if (me._shortcut != nil) {
-	                        me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
-                        }
+                        # fixme: add window-level shortcurt handling
+                        # if (me._shortcut != nil) {
+	                #         me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
+                        # }
                         if (me._menu != nil) {
                                 for (var i = 0; i < me._menu.count(); i += 1) {
                                         me._menu.getItem(i).setCanvasItem(me._parent_menu._canvas_item);
@@ -178,7 +183,7 @@ gui.MenuItem = {
 
         setIcon: func(icon) {
                 me._icon = icon;
-                me._view.setIcon(icon);
+                me._view.setIcon(me, icon);
                 return me.update();
         },
 
@@ -190,6 +195,7 @@ gui.MenuItem = {
         update: func {
         	if (me._view != nil) {
                 	me._view.update(me);
+                        me._view._updateLayoutSizes(me);
         	}
                 return me;
         },
@@ -253,7 +259,7 @@ gui.Menu = {
                 }
                 var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: cb, shortcut: shortcut, icon: icon, enabled: enabled});
                 me.addItem(item);
-                return me;
+                return item;
         },
 
         # @description Create, insert and return a `canvas.gui.MenuItem with the given text and assign the given submenu to it,

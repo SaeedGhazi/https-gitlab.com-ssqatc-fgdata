@@ -258,4 +258,20 @@
 			<blue type="float">1</blue>
 		</radio_button_selected_indicator_color_disabled>
 	</colors>
+
+	<sizes>
+		<margin type="int">5</margin>
+		<frame-radius type="int">5</frame-radius>
+
+		<!-- inset is 4x the margin-->
+		<text-inset>
+			<base>margin</base>
+			<factor type="double">3.0</factor>
+		</text-inset>
+
+		<base-font-size type="int">14</base-font-size>
+		<list-font-size type="int">14</list-font-size>
+		<list-item-height type="int">24</list-item-height>
+
+	</sizes>
 </PropertyList>

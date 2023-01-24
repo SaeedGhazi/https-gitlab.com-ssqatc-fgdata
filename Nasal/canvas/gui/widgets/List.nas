@@ -16,10 +16,8 @@ gui.widgets.ListItem = {
                 m._list = nil;
 
                 m._setView(style.createWidget(parent, "list-item", m._cfg));
+                m._view._updateLayoutSizes(m);
 
-                m.setLayoutMinimumSize([48, 24]);
-                m.setLayoutMaximumSize([m._MAX_SIZE, 24]);
-                
                 m.setText(m._text);
                 m.setSelected(m._selected);
 

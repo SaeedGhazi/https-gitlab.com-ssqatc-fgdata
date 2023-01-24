@@ -1063,8 +1063,11 @@ DefaultStyle.widgets["combo-box"] = {
   setSize: func(model, w, h)
   {
     var halfWidth = int(w * 0.5);
+    var m = me._style.getSize("margin");
+    var inset = me._style.getSize("text-inset");
+
     me._bg.reset()
-          .rect(3, 3, w - 6, h - 6, {"border-radius": 5});
+          .rect(m, m, w - (m * 2), h - (m * 2), {"border-radius": me._style.getSize("frame-radius")});
 
     # we split the two pieces
     me._border.setSize(halfWidth, h);
@@ -1072,15 +1075,15 @@ DefaultStyle.widgets["combo-box"] = {
     me._buttonBorder.setSize(w - halfWidth, h);
 
     var arrowSize = me._arrowIcon.imageSize();
-    me._arrowIcon.setTranslation(w - (arrowSize[0] + 20), (h - arrowSize[1]) * 0.5);
+    me._arrowIcon.setTranslation(w - (arrowSize[0] + inset), (h - arrowSize[1]) * 0.5);
 
-    me._label.setTranslation(20, h * 0.5);
+    me._label.setTranslation(inset, h * 0.5);
   },
   setText: func(model, text)
   {
     me._label.setText(text);
-
-    var min_width = math.max(80, me._label.maxWidth() + 16 + me._arrowIcon.imageSize()[0]);
+    var inset = me._style.getSize("text-inset");
+    var min_width = math.max(80, me._label.maxWidth() + inset + me._arrowIcon.imageSize()[0]);
     model.setLayoutMinimumSize([min_width, 16]);
     model.setLayoutSizeHint([min_width, 28]);
 
@@ -1142,23 +1145,26 @@ DefaultStyle.widgets["list-item"] = {
 	new: func(parent, cfg) {
 		me._root = parent.createChild("group", "list-item");
 		me._bg = me._root.createChild("path");
-		
+		me._itemHeight = me._style.getSize("list-item-height");
+
 		me._label = me._root.createChild("text")
 						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-						.set("character-size", 14)
+						.set("character-size", me._style.getSize("list-font-size"))
 						.set("alignment", "left-baseline");
 	},
 	
 	setSize: func(model, w, h) {
-		me._bg.reset().rect(0, 0, w, 24);
-		me._label.setTranslation(5, int(h / 2) + 4);
+		me._bg.reset().rect(0, 0, w, me._itemHeight);
+    var m = me._style.getSize("margin");
+		me._label.setTranslation(m, int(h / 2) + m);
 		return me;
 	},
 	
 	_updateLayoutSizes: func(model) {
-		var min_width = 5 + me._label.maxWidth() + 5;
-		model.setLayoutMinimumSize([min_width, 24]);
-		model.setLayoutSizeHint([min_width, 24]);
+    var m = me._style.getSize("margin");
+		var min_width = m + me._label.maxWidth() + m;
+		model.setLayoutMinimumSize([min_width, me._itemHeight]);
+		model.setLayoutSizeHint([min_width, me._itemHeight]);
 		
 		return me;
 	},
@@ -1195,6 +1201,11 @@ DefaultStyle.widgets.list = {
 		me._bg.set("fill", me._style.getColor("bg_color"));
 		
 		return me;
-	}
+	},
+
+  _updateLayoutSizes: func(model) {
+      model.setLayoutMinimumSize([me._itemHeight * 2, me._itemHeight]);
+      model.setLayoutMaximumSize([model._MAX_SIZE, me._itemHeight]);
+  }
 };
 

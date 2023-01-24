@@ -23,24 +23,6 @@
 -->
 <PropertyList>
 
-  <!--
-    Normally /environment/config/enabled is disabled when Advanced Weather is
-    selected. But In case live weather fails values can get out of control.
-    So re-enable the interpolators is such case.
-    https://sourceforge.net/p/flightgear/codetickets/2537/
-  -->
-  <logic>
-    <input>
-      <or>
-        <property>/environment/config/enabled</property>
-        <not>
-          <property>/environment/metar/valid</property>
-        </not>
-      </or>
-    </input>
-    <output>/environment/config/livedata-disabled</output>
-  </logic>
-
   <filter>
     <name>EnvironmentInterpolator:temperature-sea-level-degc</name>
     <enable>
@@ -101,7 +83,7 @@
   <filter>
     <name>EnvironmentInterpolator:wind-from-north</name>
     <enable>
-      <property>/environment/config/livedata-disabled</property>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <condition>
@@ -118,7 +100,7 @@
   <filter>
     <name>EnvironmentInterpolator:wind-from-east</name>
     <enable>
-      <property>/environment/config/livedata-disabled</property>
+      <property>/environment/config/enabled</property>
     </enable>
     <input>
       <condition>

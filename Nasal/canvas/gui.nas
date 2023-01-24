@@ -31,7 +31,6 @@ var loadDialog = func(name) loadGUIFile("dialogs/" ~ name ~ ".nas");
 
 loadGUIFile("Config.nas");
 loadGUIFile("Menu.nas");
-loadGUIFile("MenuBar.nas");
 loadGUIFile("Popup.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");

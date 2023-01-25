@@ -49,6 +49,7 @@ loadWidget("ScrollArea");
 loadWidget("RadioButton");
 loadWidget("Rule");
 loadWidget("Slider");
+loadWidget("Switch");
 loadWidget("TabWidget");
 loadWidget("ComboBox");
 

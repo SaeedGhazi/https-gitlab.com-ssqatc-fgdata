@@ -15,20 +15,21 @@ var WidgetsFactoryDialog = {
 		
 		m.menubar = canvas.gui.widgets.MenuBar.new(m.root, canvas.style, {});
 		m.menubar.setCanvasItem(m.root);
-		m.menubar.createMenu("File")
-						.createItem(text: "Quit", cb: func m.del(), shortcut: "<Ctrl>+Q");
-		var tabsMenu = m.menubar.createMenu("Tabs");
-		tabsMenu.createItem(text: "Select first tab", cb: func m.tabs.setCurrentTab("tab-1"));
-		tabsMenu.createItem(text: "Select second tab", cb: func m.tabs.setCurrentTab("tab-2"));
+
+		m.fileMenu = m.menubar.createMenu("File");
+		m.fileMenu.createItem(text: "Quit", cb: func m.del(), shortcut: "<Ctrl>+Q");
 		
-		var widgetsMenu = m.menubar.createMenu("Widgets");
-		widgetsMenu.createItem(text: "Benchmark label", cb: func {
+		m.tabsMenu = m.menubar.createMenu("Tabs");
+		m.tabsMenu.createItem(text: "Select first tab", cb: func m.tabs.setCurrentTab("tab-1"));
+		m.tabsMenu.createItem(text: "Select second tab", cb: func m.tabs.setCurrentTab("tab-2"));
+		
+		m.widgetsMenu = m.menubar.createMenu("Widgets");
+		m.widgetsMenu.createItem(text: "Benchmark label", cb: func {
 			m.benchmark_widget(canvas.gui.widgets.Label, func(w, i) {
 				w.setText("Label " ~ i);
 			});
 		});
-
-		widgetsMenu.createItem(text: "Benchmark radio button", cb: func {
+		m.widgetsMenu.createItem(text: "Benchmark radio button", cb: func {
 			m.benchmark_radio_button(func(w, i) {
 				w.setText("Radio button " ~ i);
 			});
@@ -63,8 +64,15 @@ var WidgetsFactoryDialog = {
 		var r2 = gui.widgets.HorizontalRule.new(m.tabsContent, style, {});
 		m.tab_1.addItem(r2);
 		
+		m.radio_label = gui.widgets.Label.new(m.tabsContent, style, {})
+						.setText("Selected radio button: none");
+		m.tab_1.addItem(m.radio_label);
 		m.radio1 = gui.widgets.RadioButton.new(m.tabsContent)
 						.setText("Radio button 1");
+		m.radio1.listen("group-checked-radio-changed", func(e) {
+			m.radio_label.setText("Selected radio button: " ~ (e.detail.checkedRadio != nil ? e.detail.checkedRadio._text : "none"));
+		});
+		
 		m.tab_1.addItem(m.radio1);
 		m.radio2 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
 						.setText("Radio button 2");
@@ -139,6 +147,19 @@ var WidgetsFactoryDialog = {
 							m.window.setSize(s[0] - 100, s[1] - 100);
 						});
 		m.button_box.addItem(m.downsize_button);
+		
+		m.switch_box = HBoxLayout.new();
+		m.button_box.addItem(m.switch_box);
+		
+		m.switch_label = gui.widgets.Label.new(m.tabsContent, style, {})
+						.setText("Switch state: on");
+		m.switch_box.addItem(m.switch_label);
+		m.switch = gui.widgets.Switch.new(m.tabsContent)
+						.setChecked(1)
+						.listen("toggled", func(e) {
+							m.switch_label.setText("Switch state: " ~ (e.detail.checked ? "on" : "off"));
+						});
+		m.switch_box.addItem(m.switch);
 		
 		m.list_box = VBoxLayout.new();
 		m.tab_2.addItem(m.list_box);

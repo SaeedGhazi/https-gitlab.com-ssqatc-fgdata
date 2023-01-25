@@ -37,6 +37,11 @@ gui.widgets.RadioButton = {
 
     me._setRadioGroupSiblingsUnchecked();
     me._trigger("toggled", {checked: checked});
+    if (checked) {
+    	me._trigger("checked");
+    } else {
+    	me._trigger("unchecked");
+    }
     me._checked = checked;
     me._onStateChange();
     return me;
@@ -77,11 +82,16 @@ gui.widgets.RadioButtonsGroup = {
     return m;
   },
 
+  _onRadioToggled: func {
+    var checked = me.getCheckedRadio();
+    foreach (var radio; me.radios) {
+      radio._trigger("group-checked-radio-changed", {checkedRadio: checked});
+    }
+  },
+
   addRadio: func(r)
   {
-    r.listen("toggled", func(e) {
-      me._updateChecked(r);
-    });
+    r.listen("toggled", func me._onRadioToggled());
     append(me.radios, r);
   },
 
@@ -99,6 +109,16 @@ gui.widgets.RadioButtonsGroup = {
     foreach (var r; me.radios) {
       r.setEnabled(enabled);
     }
+    return me;
+  },
+  
+  getCheckedRadio: func {
+    foreach (var radio; me.radios) {
+      if (radio._checked) {
+        return radio;
+      }
+    }
+    return nil;
   },
 
   # update check state of all radios in the group
@@ -109,5 +129,6 @@ gui.widgets.RadioButtonsGroup = {
         r.setChecked(0);
       }
     }
+    return me;
   },
 };

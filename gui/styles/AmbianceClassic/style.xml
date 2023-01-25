@@ -257,6 +257,42 @@
 			<green type="float">0.5</green>
 			<blue type="float">1</blue>
 		</radio_button_selected_indicator_color_disabled>
+		
+		<switch_bg_color>
+			<red type="float">0.9</red>
+			<green type="float">0.9</green>
+			<blue type="float">0.9</blue>
+		</switch_bg_color>
+		
+		<switch_bg_color_disabled>
+			<red type="float">1</red>
+			<green type="float">1</green>
+			<blue type="float">1</blue>
+		</switch_bg_color_disabled>
+		
+		<switch_bg_color_checked>
+			<red type="float">0.3</red>
+			<green type="float">0.3</green>
+			<blue type="float">1</blue>
+		</switch_bg_color_checked>
+		
+		<switch_bg_border_color>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</switch_bg_border_color>
+		
+		<switch_thumb_color>
+			<red   type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue  type="float">0.941</blue>
+		</switch_thumb_color>
+		
+		<switch_thumb_border_color>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</switch_thumb_border_color>
 	</colors>
 
 	<sizes>

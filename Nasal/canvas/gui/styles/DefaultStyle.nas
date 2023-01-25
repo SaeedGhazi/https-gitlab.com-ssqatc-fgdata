@@ -176,6 +176,39 @@ DefaultStyle.widgets.checkbox = {
   }
 };
 
+DefaultStyle.widgets.switch = {
+        new: func(parent, cfg) {
+                me._root = parent.createChild("group", "switch");
+                me._bg = me._root.createChild("path", "switch-background");
+                me._thumb = me._root.createChild("path", "switch-thumb");
+        },
+
+        setSize: func(model, w, h) {
+                me._bg.reset()
+                                                .moveTo(w / 4, 0.5)
+                                                .arcSmallCCWTo((w - 1) / 4, (h - 1) / 2, 0, w / 4, h - 0.5)
+                                                .horiz(w / 2)
+                                                .arcSmallCCWTo((w - 1) / 4, (h - 1) / 2, 0, w / 4 * 3, 0.5)
+                                                .close();
+                me._thumb.reset()
+                                                .ellipse((w - 1) / 4, (h - 1) / 2, w / 4, h / 2);
+        },
+
+        update:  func(model) {
+                var bg_color = "switch_bg_color";
+                if (model._down) {
+                        bg_color ~= "_checked";
+                } elsif (!model._enabled) {
+                        bg_color ~= "_disabled";
+                }
+                me._bg.set("fill", me._style.getColor(bg_color));
+                me._bg.set("stroke", me._style.getColor("switch_bg_border_color"));
+                me._thumb.set("fill", me._style.getColor("switch_thumb_color"));
+                me._thumb.set("stroke", me._style.getColor("switch_thumb_border_color"));
+                me._thumb.setTranslation(model._down * 24, 0);
+        },
+};
+
 # A checkbox
 DefaultStyle.widgets["radio-button"] = {
   new: func(parent, cfg) {

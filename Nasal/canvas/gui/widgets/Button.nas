@@ -3,10 +3,11 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 gui.widgets.Button = {
-  new: func(parent, style, cfg)
+  new: func(parent, style = nil, cfg = nil)
   {
+    style = style or canvas.style;
     var m = gui.Widget.new(gui.widgets.Button);
-    m._cfg = Config.new(cfg);
+    m._cfg = Config.new(cfg or {});
     m._focus_policy = m.StrongFocus;
     m._down = 0;
     m._checkable = 0;

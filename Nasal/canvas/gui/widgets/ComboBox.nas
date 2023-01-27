@@ -38,7 +38,8 @@ gui.widgets.ComboBox = {
 # convenience helper to add simple items
   addMenuItem: func(text, value) {
     var index = size(me._items);
-    var item = me.menu().createItem(text, func { me._itemCallback(index);}, {});
+    var m = me;
+    var item = me.menu().createItem(text, func { m._itemCallback(index);}, {});
     item.menuValue = value;
     append(me._items, item);
     if (me._currentIndex == nil) {
@@ -89,7 +90,21 @@ gui.widgets.ComboBox = {
 # protected:
   _itemCallback: func(index)
   {
+    me._hideMenu();
     me.setCurrentByIndex(index);
+  },
+
+  setSize: func {
+    if (size(arg) == 1) {
+      var arg = arg[0];
+    }
+    var (x, y) = arg;
+    me._size = [x, y];
+    me._menu.setSize(x, me._menu.getSize()[1]);
+    if (me._view != nil) {
+      me._view.setSize(me, x, y);
+    }
+    return me;
   },
 
   _setView: func(view)
@@ -97,13 +112,22 @@ gui.widgets.ComboBox = {
     call(gui.Widget._setView, [view], me);
 
     var el = view._root;
-    el.addEventListener("mousedown", func if( me._enabled ) { me.setDown(1); me._openMenu(); });
-    el.addEventListener("mouseup",   func if( me._enabled ) me.setDown(0));
-    el.addEventListener("mouseleave",func me.setDown(0));
+    el.addEventListener("click", func(e) {
+      if (me._enabled) {
+        me.setDown(!me._down);
+        me._openMenu(e.screenX - e.localX, e.screenY - e.localY + me._size[1]);
+      }
+    });
   },
 
-  _openMenu: func
+  _openMenu: func(x, y)
   {
+    me.menu().setPosition(x, y);
     me.menu().show();
+  },
+  
+  _hideMenu: func {
+    me._menu.hide();
+    me.setDown(0);
   }
 };

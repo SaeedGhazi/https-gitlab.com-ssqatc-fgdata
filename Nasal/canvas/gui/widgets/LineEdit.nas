@@ -37,11 +37,11 @@ gui.widgets.LineEdit = {
 
     me._text = utf8.substr(text, 0, me._max_length);
     me._cursor = utf8.size(me._text);
-    me._selection_start = me._cursor;
-    me._selection_end = me._cursor;
+    me.clearSelection();
 
     if( me._view != nil )
       me._view.setText(me, me._text);
+    me._trigger("text-changed");
 
     return me;
   },
@@ -49,11 +49,12 @@ gui.widgets.LineEdit = {
   {
     me._text = "";
     me._cursor = 0;
-    me._selection_start = 0;
-    me._selection_end = 0;
+    me.clearSelection();
 
     if( me._view != nil )
       me._view.setText(me, "");
+    me._trigger("text-changed");
+    me._onStateChange();
   },
   text: func()
   {
@@ -66,10 +67,14 @@ gui.widgets.LineEdit = {
   {
     me._max_length = len;
 
-    if( utf8.size(me._text) <= len )
+    if (utf8.size(me._text) <= len) {
       return me;
+    }
 
     me._text = utf8.substr(me._text, 0, me._max_length);
+    if( me._view != nil )
+      me._view.setText(me, "");
+    me._trigger("text-changed");
     me.moveCursor(me._cursor);
     return me;
   },
@@ -78,41 +83,71 @@ gui.widgets.LineEdit = {
     var len = utf8.size(me._text);
     me._cursor = math.max(0, math.min(pos, len));
 
-    me._selection_start = me._cursor;
-    me._selection_end = me._cursor;
-
+    me._onStateChange();
+    return me;
+  },
+  clearSelection: func {
+    me._selection_start = me._selection_end = 0;
+    me._onStateChange();
+  },
+  setSelection: func(start, end) {
+    me._selection_start = start;
+    me._selection_end = end;
+    me._onStateChange();
+  },
+  getSelection: func {
+    if (me._selection_start != me._selection_end) {
+      return [me._selection_start, me._selection_end];
+    } else {
+      return nil;
+    }
+  },
+  _getNearestCursorPos: func(x) {
+    var crs = me._getNearestCursor(x);
+    return me._view._text.getCursorPos(crs[0], crs[1]);
+  },
+  _getNearestCursor: func(x) {
+    return me._view._text.getNearestCursor([x, 5]);
+  },
+  moveCursorX: func(x) {
+    me._cursor = me._getNearestCursor(x)[1];
     me._onStateChange();
     return me;
   },
   home: func()
   {
     me.moveCursor(0);
+    me.clearSelection();
   },
   end: func()
   {
     me.moveCursor(utf8.size(me._text));
+    me.clearSelection();
   },
   # Insert given text after cursor (and first remove selection if set)
   insert: func(text)
   {
-    var after = utf8.substr(me._text, me._selection_end);
-    me._text = utf8.substr(me._text, 0, me._selection_start);
+    var after = utf8.substr(me._text, me._cursor);
+    me._text = utf8.substr(me._text, 0, me._cursor);
 
     # Replace selected text, insert new text and place cursor after inserted
     # text
-    var remaining = me._max_length - me._selection_start - utf8.size(after);
-    if( remaining != 0 )
+    var remaining = me._max_length - me._cursor - utf8.size(after);
+    if (remaining > 0) {
       me._text ~= utf8.substr(text, 0, remaining);
+    }
 
+    #me.clearSelection();
     me._cursor = utf8.size(me._text);
-    me._selection_start = me._cursor;
-    me._selection_end = me._cursor;
 
     me._text ~= after;
 
-    if( me._view != nil )
+    if (me._view != nil) {
       me._view.setText(me, me._text);
+    }
+    me._trigger("text-changed");
 
+    me._onStateChange();
     return me;
   },
   copy: func() {
@@ -127,36 +162,40 @@ gui.widgets.LineEdit = {
     me.insert(clipboard.getText(mode != nil ? mode : clipboard.CLIPBOARD));
   },
   selectAll: func() {
-    me._selection_start = 0;
-    me._selection_end = utf8.size(me._text) - 1;
+    me.setSelection(0, utf8.size(me._text));
   },
   # Remove selected text
   removeSelection: func()
   {
-    if( me._selection_start == me._selection_end )
+    if (me._selection_start == me._selection_end) {
+      me._selection_start = me._selection_end = 0;
       return me;
+    }
 
     me._text = utf8.substr(me._text, 0, me._selection_start)
              ~ utf8.substr(me._text, me._selection_end);
 
     me._cursor = me._selection_start;
-    me._selection_end = me._selection_start;
+    me.clearSelection();
 
-    if( me._view != nil )
+    if (me._view != nil) {
       me._view.setText(me, me._text);
+    }
+    me._trigger("text-changed");
 
-    return me;
+    me._onStateChange();
+    return me
   },
   # Remove selection or if nothing is selected the character before the cursor
   backspace: func()
   {
-    if( me._selection_start == me._selection_end )
-    {
-      if( me._selection_start == 0 )
+    if (me._selection_start == me._selection_end) {
+      if (me._cursor == 0) {
         # Before first character...
         return me;
-
-      me._selection_start -= 1;
+      }
+      me._selection_start = me._cursor - 1;
+      me._selection_end = me._cursor;
     }
 
     me.removeSelection();
@@ -165,13 +204,14 @@ gui.widgets.LineEdit = {
   # Remove selection or if nothing is selected the character after the cursor
   delete: func()
   {
-    if( me._selection_start == me._selection_end )
-    {
-      if( me._selection_end == utf8.size(me._text) )
+    if (me._selection_start == me._selection_end) {
+      if (me._cursor == utf8.size(me._text)) {
         # After last character...
         return me;
+      }
 
-      me._selection_end += 1;
+      me._selection_start = me._cursor;
+      me._selection_end = me._cursor + 1;
     }
 
     me.removeSelection();
@@ -185,6 +225,7 @@ gui.widgets.LineEdit = {
     var el = view._root;
     el.addEventListener("keypress", func (e) {
       if (!e.ctrlKey and !e.altKey and !e.metaKey) {
+        me.removeSelection();
         me.insert(e.key);
       }
     });
@@ -193,28 +234,90 @@ gui.widgets.LineEdit = {
       if( me._view == nil )
         return;
 
-      if( e.key == "Enter" )
+      if (e.key == "Enter") {
         me._trigger("editingFinished", {text: me.text()}); # TODO validator/etc.
-      else if( e.key == "Backspace" )
+      } elsif (e.key == "Backspace") {
         me.backspace();
-      else if( e.key == "Delete" )
+      } elsif (e.key == "Delete") {
         me.delete();
-      else if( e.key == "Left" )
-        me.moveCursor(me._cursor - 1);
-      else if( e.key == "Right")
-        me.moveCursor(me._cursor + 1);
-      else if( e.key == "Home" )
+      } elsif (e.key == "Left") {
+        if (e.shiftKey) {
+          if (me._selection_start == 0 and me._selection_end == 0) {
+            var start = me._cursor;
+            var end = me._cursor;
+          } else {
+            var start = me._selection_start;
+            var end = me._selection_end;
+          }
+          if (start > 0) {
+            me.setSelection(start - 1, end);
+          } 
+        } else {
+          if (me._selection_start != 0 or me._selection_end != 0) {
+            me.moveCursor(me._selection_start);
+            me.clearSelection();
+          } else {
+            me.moveCursor(me._cursor - 1);
+          }
+        }
+      } elsif (e.key == "Right") {
+        if (e.shiftKey) {
+          if (me._selection_start == 0 and me._selection_end == 0) {
+            var start = me._cursor;
+            var end = me._cursor;
+          } else {
+            var start = me._selection_start;
+            var end = me._selection_end;
+          }
+          if (end + 1< utf8.size(me._text)) {
+            me.setSelection(start, end + 1);
+          } 
+        } else {
+          if (me._selection_end != 0 or me._selection_start != 0) {
+            me.moveCursor(me._selection_end);
+            me.clearSelection();
+          } else {
+            me.moveCursor(me._cursor + 1);
+          }
+        }
+      } elsif (e.key == "Home") {
         me.home();
-      else if( e.key == "End" )
+      } elsif (e.key == "End") {
         me.end();
+      }
     });
     el.addEventListener("click", func(e) {
       if (e.button == 2) {
         me.showContextMenu(e);
+      } elsif (e.button == 0) {
+      	me.clearSelection();
+      	me.moveCursorX(e.localX - view._text.getTranslation()[0]);
+      }
+    });
+    el.addEventListener("dblclick", func(e) {
+      me.selectAll();
+    });
+    el.addEventListener("drag", func(e) {
+      var pos = me._getNearestCursor(e.localX - view._text.getTranslation()[0])[1];
+      if (me._selection_start < pos and me._selection_end > pos) { # dragging within existing selection
+        # TODO: implement full drag / drop support
+      } elsif (me._selection_start != me._selection_end) { # existing selection, but dragging outside
+        if (e.deltaX < 0) {
+          me.setSelection(pos, me._selection_end);
+        } elsif (e.deltaX > 0) {
+          me.setSelection(me._selection_start, pos);
+        }
+      } else { # no existing selection, create one from drag position
+        if (math.abs(e.deltaX) > 1) {
+          var start = pos;
+          var end = pos + math.sgn(e.deltaX);
+          me.setSelection(math.min(start, end), math.max(start, end));
+        }
       }
     });
   },
   del: func() {
     me.context_menu.del();
+    me._view._cursor_blink_timer.stop();
   }
 };

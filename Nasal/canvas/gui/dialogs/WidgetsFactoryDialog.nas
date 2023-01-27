@@ -92,7 +92,7 @@ var WidgetsFactoryDialog = {
 		
 		m.button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("A button")
-						.setFixedSize(60, 30)
+						.setFixedSize(128, 30)
 						.listen("clicked", func {
 							InputDialog.getText("You clicked the button …", "Enter some text:", func (button, text) {
 								MessageBox.information("You clicked the button …", "… and entered '" ~ (text != nil ? text : "nothing") ~ "' !");
@@ -124,7 +124,7 @@ var WidgetsFactoryDialog = {
 						.setCheckable(1)
 						.setChecked(0)
 						.setText("Checkable button")
-						.setFixedSize(120, 30)
+						.setFixedSize(128, 30)
 						.listen("toggled", func (e) {
 							m.image.setVisible(int(e.detail.checked));
 						});
@@ -132,7 +132,7 @@ var WidgetsFactoryDialog = {
 
 		m.upsize_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("Upsize window")
-						.setFixedSize(130, 30)
+						.setFixedSize(128, 30)
 						.listen("clicked", func {
 							var s = m.window.getSize();
 							m.window.setSize(s[0] + 100, s[1] + 100);
@@ -141,12 +141,19 @@ var WidgetsFactoryDialog = {
 		
 		m.downsize_button = gui.widgets.Button.new(m.tabsContent, style, {})
 						.setText("Downsize window")
-						.setFixedSize(130, 30)
+						.setFixedSize(128, 30)
 						.listen("clicked", func {
 							var s = m.window.getSize();
 							m.window.setSize(s[0] - 100, s[1] - 100);
 						});
 		m.button_box.addItem(m.downsize_button);
+		m.combo1 = gui.widgets.ComboBox.new(m.tabsContent, style, {});
+		m.combo1.addMenuItem("Apples", 0);
+		m.combo1.addMenuItem("Pears", 1);
+		m.combo1.addMenuItem("Lemons", 2);
+		m.combo1.addMenuItem("Oranges", 3);
+		m.combo1.setFixedSize(128, 30);
+		m.button_box.addItem(m.combo1);
 		
 		m.switch_box = HBoxLayout.new();
 		m.button_box.addItem(m.switch_box);
@@ -201,13 +208,6 @@ var WidgetsFactoryDialog = {
 		m.numericControlsTab.addItem(m.slider);
 
 
-		m.combo1 = gui.widgets.ComboBox.new(m.tabsContent, style, {});
-		m.combo1.addMenuItem("Apples", 0);
-		m.combo1.addMenuItem("Pears", 1);
-		m.combo1.addMenuItem("Lemons", 2);
-		m.combo1.addMenuItem("Oranges", 3);
-
-		m.numericControlsTab.addItem(m.combo1);
 		return m;
 	},
 	

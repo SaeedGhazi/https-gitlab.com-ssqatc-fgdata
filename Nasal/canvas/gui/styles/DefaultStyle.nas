@@ -415,6 +415,15 @@ DefaultStyle.widgets["line-edit"] = {
               .set("character-size", 14)
               .set("alignment", "left-baseline")
               .set("clip-frame", Element.PARENT);
+    me._selection = me._root.createChild("path", "selection")
+              .set("clip-frame", Element.PARENT)
+              .set("fill", "#3333ff");
+    me._selected_text = me._root.createChild("text", "selected-text")
+              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+              .set("character-size", 14)
+              .set("alignment", "left-baseline")
+              .set("clip-frame", Element.PARENT)
+              .set("fill", "#ffffff");
     me._cursor =
       me._root.createChild("path", "cursor")
               .set("stroke", "#333")
@@ -422,11 +431,26 @@ DefaultStyle.widgets["line-edit"] = {
               .moveTo(me._hpadding, 5)
               .vert(10);
     me._hscroll = 0;
+    me._cursor_blink = 1;
+    me._cursor_blink_timer = maketimer(0.5, func {
+      me._cursor_blink = !me._cursor_blink;
+      me._cursor.setVisible(me._cursor_visible and me._cursor_blink);
+    });
+    me._cursor_blink_timer.simulatedTime = 0;
+    me._cursor_blink_timer.start();
   },
   setSize: func(model, w, h)
   {
     me._border.setSize(w, h);
     me._text.set(
+      "clip",
+      "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
+    );
+    me._selected_text.set(
+      "clip",
+      "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
+    );
+    me._selection.set(
       "clip",
       "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
     );
@@ -458,8 +482,17 @@ DefaultStyle.widgets["line-edit"] = {
 
     var color_name = backdrop ? "backdrop_fg_color" : "fg_color";
     me._text.set("fill", me._style.getColor(color_name));
+    me._selected_text.set("fill", me._style.getColor("text_color_selected"));
+    me._selection.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "text_color_bg_selected"));
 
-    me._cursor.setVisible(model._enabled and model._focused and !backdrop);
+    me._cursor_visible = model._enabled and model._focused and !backdrop and model._selection_start == model._selection_end;
+    me._cursor.setVisible(me._cursor_visible and me._cursor_blink);
+    me._selection.reset()
+            .moveTo(me._text.getCursorPos(0, model._selection_start)[0], 0)
+            .vert(16)
+            .horizTo(me._text.getCursorPos(0, model._selection_end)[0])
+            .vert(-16);
+    me._selected_text.setText(model.selectedText());
 
     var width = model._size[0] - 2 * me._hpadding;
     var cursor_pos = me._text.getCursorPos(0, model._cursor)[0];
@@ -486,6 +519,10 @@ DefaultStyle.widgets["line-edit"] = {
     me._cursor
       .setDouble("coord[0]", text_pos + cursor_pos)
       .update();
+    me._selection.setTranslation(text_pos, model._size[1] / 2 - 8)
+            .update();
+    me._selected_text.setTranslation(text_pos + me._text.getCursorPos(0, model._selection_start)[0], model._size[1] / 2 + 5)
+            .update();
   }
 };
 
@@ -1198,6 +1235,7 @@ DefaultStyle.widgets["list-item"] = {
 		var min_width = m + me._label.maxWidth() + m;
 		model.setLayoutMinimumSize([min_width, me._itemHeight]);
 		model.setLayoutSizeHint([min_width, me._itemHeight]);
+		model.setLayoutMaximumSize([model._MAX_SIZE, me._itemHeight]);
 		
 		return me;
 	},

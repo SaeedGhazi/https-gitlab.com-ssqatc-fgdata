@@ -353,6 +353,9 @@ var Shortcut = {
 	},
 	
 	match: func(keys, shift=0, ctrl=0, alt=0, meta=0) {
+		if (typeof(keys) != "vector") {
+			keys = [keys];
+		}
 		if (!me.modifiers and !me.keys) {
 			return 0;
 		}

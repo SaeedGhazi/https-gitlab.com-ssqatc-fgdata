@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <PropertyList>
-  <exclude-from-gui type=“bool”>true</exclude-from-gui>
+  <exclude-from-gui type="bool">true</exclude-from-gui>
   <sim>
     <flight-model>aisim</flight-model>
     <aero>c172p</aero>

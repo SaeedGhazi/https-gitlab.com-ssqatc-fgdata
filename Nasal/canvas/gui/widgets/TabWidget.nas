@@ -125,6 +125,10 @@ gui.widgets.TabWidget = {
 		return me._tabs[id];
 	},
 	
+	getTabs: func {
+		return me._tabs;
+	},
+	
 	addTab: func(id, label, widget) {
 		if (me.hasTab(id)) {
 			die("cannot add multiple tabs with the same id: " ~ id);

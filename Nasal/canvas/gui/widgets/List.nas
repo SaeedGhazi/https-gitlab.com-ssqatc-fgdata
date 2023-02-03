@@ -211,6 +211,20 @@ gui.widgets.List = {
                 return -1;
         },
         
+        # @description Find the index of the given item or item with the given data value at the given data key.
+        # @param key str required The data key to search for
+        # @param .value Any required The data value at the given data key to search for.
+        # @return int The index of the item with the given data value at the given data key,
+        #                       or -1 if no item with the given data value is found.
+        findItemByData: func(key, value) {
+                for (var i = 0; i < me.count(); i += 1) {
+                        if (me.getItem(i).getData(key) == value) {
+                                return i;
+                        }
+                }
+                return -1;
+        },
+        
         # @description Remove and return the item with the given text or index.
         # @param text_or_item Union[str, int] required The text or index of the item to remove and return
         # @return int The item with the given text or index, or nil if no item with the given text or index is found.

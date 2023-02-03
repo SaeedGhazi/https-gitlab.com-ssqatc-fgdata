@@ -11,18 +11,63 @@ gui.widgets.RadioButton = {
     m._focus_policy = m.StrongFocus;
     m._checked = 0;
     m.radioGroup = nil;
+    m._data = m._cfg.get("data", {});
 
     m._setView( style.createWidget(parent, m._cfg.get("type", "radio-button"), m._cfg) );
 
+    var radioButtonGroup = m._cfg.get("radioButtonGroup");
     var parentRadio = m._cfg.get("parentRadio", nil);
-    if (parentRadio != nil) {
+    var radioButtonGroupClass = m._cfg.get("radioButtonGroupClass");
+    if (radioButtonGroup != nil) {
+      m.radioGroup = radioButtonGroup;
+    } elsif (parentRadio != nil) {
       m.radioGroup = parentRadio.radioGroup;
+    } elsif (radioButtonGroupClass != nil) {
+      m.radioGroup = radioButtonGroupClass.new();
     } else {
       m.radioGroup = gui.widgets.RadioButtonsGroup.new();
     }
     m.radioGroup.addRadio(m);
 
     return m;
+  },
+  # @description Set the data for this radio button.
+  # @param key Union[scalar, hash] required If @param key is a hash, this item's data is replaced with that hash.
+  #                                                                           If @param key is a scalar, the data field with that name will be set to value.
+  #                                                                           If @param key is anything else, an error will be raised.
+  # @param value Any optional The value to set the data field with key @param key to, if @param key is a scalar;
+  #                                                    otherwise, this argument is ignored.
+  # @return canvas.gui.widgets.RadioButton This radio button to support method chaining.
+  setData: func(key, value = nil) {
+    if (isscalar(key)) {
+      me._data[key] = value;
+    } elsif (ishash(key)) {
+      me._data = key;
+    } else {
+      die("cannot set data field with non-scalar key !");
+    }
+    return me;
+  },
+  
+  # @description Get the data of this radio button.
+  # @param key Union[scalar, nil] The scalar key of the data field to return the value of, or nil to return the whole data.
+  # @return Any If @param key is a scalar, the value of the field with key @param key, else the whole data as a hash.
+  getData: func(key = nil) {
+    if (key != nil) {
+      if (!isscalar(key)) {
+        die("cannot get data field with non-scalar key !")
+      }
+      return me._data[key];
+    } else {
+      return me._data;
+    }
+  },
+  
+  # @description Clear data
+  # @return canvas.gui.widgets.RadioButton This radio button to support method chaining.
+  clearData: func {
+    me._data = {};
+    return me;
   },
 
   setText: func(text) {

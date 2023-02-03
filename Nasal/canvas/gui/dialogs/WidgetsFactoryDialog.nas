@@ -57,7 +57,7 @@ var WidgetsFactoryDialog = {
 		m.checkbox_right = gui.widgets.CheckBox.new(m.tabsContent, style, {"label-position": "left"})
 						.setText("Checkbox with text on the left side");
 		m.tab_1.addItem(m.checkbox_right);
-		m.property_checkbox = gui.widgets.PropertyCheckBox.new(props.globals.getNode("/controls/lighting/nav-lights"), m.tabsContent, style, {})
+		m.property_checkbox = gui.widgets.PropertyCheckBox.new(m.tabsContent, style, {"node": props.globals.getNode("/controls/lighting/nav-lights")})
 						.setText("Nav lights");
 		m.tab_1.addItem(m.property_checkbox);
 		

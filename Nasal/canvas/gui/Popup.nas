@@ -6,7 +6,7 @@ gui.Popup = {
 	# Constructor
 	#
 	# @param size ([width, height])
-	new: func(size_, id = nil, parent = nil) {
+	new: func(size_, id = nil, parent = nil, take_focus = 0) {
 		var ghost = _newWindowGhost(id);
 		var m = {
 			parents: [gui.Popup, PropertyElement, ghost],
@@ -16,10 +16,13 @@ gui.Popup = {
 			_widgets: [],
 			_parent: parent,
 			_canvas: nil,
+			_frame_width: 1,
+			_take_focus: take_focus,
 		};
 
 		m.setInt("content-size[0]", size_[0]);
 		m.setInt("content-size[1]", size_[1]);
+		m._updateDecoration();
 		
 		m.setFocus();
 
@@ -115,14 +118,14 @@ gui.Popup = {
 	},
 	#
 	setFocus: func {
-		if (gui.focused_window != nil) {
+		if (gui.focused_window != nil and me._take_focus) {
 			gui.focused_window.clearFocus();
+			gui.focused_window = me;
 		}
 		
 #		me.onFocusIn();
 		me._focused = 1;
 		me._onStateChange();
-		gui.focused_window = me;
 		return me;
 	},
 	#
@@ -130,11 +133,13 @@ gui.Popup = {
 #		me.onFocusOut();
 		me._focused = 0;
 		me._onStateChange();
-		if (gui.focused_window == me) {
-			gui.focused_window = nil;
-		}
-		if (me._parent != nil and contains(gui.open_popups, me._parent)) {
-			me._parent.setFocus();
+		if (me._take_focus) {
+			if (gui.focused_window == me) {
+				gui.focused_window = nil;
+			}
+			if (me._parent != nil and contains(gui.open_popups, me._parent)) {
+				me._parent.setFocus();
+			}
 		}
 		return me;
 	},
@@ -242,6 +247,12 @@ gui.Popup = {
 		} elsif (name == "bottom") {
 			me._handlePositionAbsolute(child, mode, name, 1);
 		}
+
+		if (mode == 0) {
+			if (name == "size") {
+				me._resizeDecoration();
+			}
+		}
 	},
 	_handlePositionAbsolute: func(child, mode, name, index) {
 		# mode
@@ -274,6 +285,35 @@ gui.Popup = {
 			getprop("/sim/gui/canvas/size[" ~ index ~ "]") - me.get(name) - me.get("content-size[" ~ index ~ "]")
 		);
 	},
+	getCanvasDecoration: func() {
+		return wrapCanvas(me._getCanvasDecoration());
+	},
+	_updateDecoration: func() {
+		me.set("decoration-border", "1 1 1");
+		me.set("shadow-inset", 5);
+		me.set("shadow-radius", 2);
+		me.setBool("update", 1);
+
+		var canvas_deco = me.getCanvasDecoration();
+		canvas_deco.addEventListener("mousedown", func me.raise());
+		canvas_deco.set("blend-source-rgb", "src-alpha");
+		canvas_deco.set("blend-destination-rgb", "one-minus-src-alpha");
+		canvas_deco.set("blend-source-alpha", "one");
+		canvas_deco.set("blend-destination-alpha", "one");
+
+		var group_deco = canvas_deco.getGroup("decoration");
+		me._frame = group_deco.createChild("path");
+		me._frame.set("fill", "none");
+		me._frame.set("stroke", "#888888");
+		me._frame.set("stroke-width", me._frame_width);
+
+		me._resizeDecoration();
+		me._onStateChange();
+	},
+	_resizeDecoration: func() {
+		me._frame.reset()
+			.rect(0, 0, me.get("size[0]"), me.get("size[1]"));
+	}
 };
 
 

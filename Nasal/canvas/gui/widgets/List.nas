@@ -20,6 +20,7 @@ gui.widgets.ListItem = {
 
                 m.setText(m._text);
                 m.setSelected(m._selected);
+                m.setLayoutMaximumSize([m._MAX_SIZE, 24]);
 
                 return m;
         },
@@ -137,6 +138,7 @@ gui.widgets.List = {
                 var (x, y) = arg;
                 me._size = [x, y];
                 me._scroll.setSize(x, y);
+                me._view.setSize(me, x, y);
                 return me.update();
         },
         
@@ -150,6 +152,7 @@ gui.widgets.List = {
         # @return canvas.gui.widgets.List This list to support method chaining.
         addItem: func(item) {
                 item.listen("selection-state-changed", func me._onItemSelectionStateChanged());
+                item.setAlignment(canvas.AlignTop);
                 me._scrollLayout.addItem(item);
                 item.setParent(me);
                 return me;

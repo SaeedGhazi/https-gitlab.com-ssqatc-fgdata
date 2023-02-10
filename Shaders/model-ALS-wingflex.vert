@@ -1,10 +1,14 @@
 // -*- mode: C; -*-
 // Licence: GPL v2
-// based on
 // © Emilian Huminiuc and Vivian Meazza 2011
-// addition for wingflex mesh distortion by Thorsten Renk 2015
-
 #version 120
+
+
+
+// the file is directly copied from model-combined.eff except the (three) WINGFLEX to END WINGLFEX parts
+// and the subsequent gl_Vertex integrations
+// I didnt find how to do a more beautiful way (including model-combined and only adding the wingflexer part)
+// if you know how to do this, please do :)
 
 varying	vec3	rawpos;
 varying	vec3	VNormal;
@@ -22,7 +26,12 @@ attribute	vec3	binormal;
 uniform	float		pitch;
 uniform	float		roll;
 uniform	float		hdg;
-uniform int		wingflex_type;
+uniform	int  		refl_dynamic;
+uniform int  		nmap_enabled;
+uniform int  		shader_qual;
+
+// WINGFLEX
+uniform int			wingflex_type;
 uniform float		body_width;
 uniform float 		wingflex_alpha;
 uniform float 		wingflex_trailing_alpha;
@@ -36,33 +45,14 @@ uniform float		rotation_x2;
 uniform float		rotation_y2;
 uniform float		rotation_z2;
 uniform float		rotation_rad;
-uniform	int  		refl_dynamic;
-uniform int  		nmap_enabled;
-uniform int  		shader_qual;
+// END WINGFLEX
 
 //////Fog Include///////////
 // uniform	int 	fogType;
 // void	fog_Func(int type);
 ////////////////////////////
 
-void setupShadows(vec4 eyeSpacePos);
-
-void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
-{
-	rotmat = mat4(	cosRy ,	sinRx * sinRy ,	cosRx * sinRy,	0.0,
-									0.0   ,	cosRx        ,	-sinRx * cosRx,	0.0,
-									-sinRy,	sinRx * cosRy,	cosRx * cosRy ,	0.0,
-									0.0   ,	0.0          ,	0.0           ,	1.0 );
-}
-
-void	rotationMatrixH(in float sinRz, in float cosRz, out mat4 rotmat)
-{
-	rotmat = mat4(	cosRz,	-sinRz,	0.0,	0.0,
-									sinRz,	cosRz,	0.0,	0.0,
-									0.0  ,	0.0  ,	1.0,	0.0,
-									0.0  ,	0.0  ,	0.0,	1.0 );
-}
-
+// WINGFLEX
 vec2 calc_deflection(float y){
 	float distance;
 	float bwh = body_width/2;
@@ -85,20 +75,37 @@ vec2 calc_deflection(float y){
 	vec2 returned = vec2 ( deflection, delta_y );
 	return returned;
 }
+// END WINGFLEX
+
+void setupShadows(vec4 eyeSpacePos);
+
+void	rotationMatrixPR(in float sinRx, in float cosRx, in float sinRy, in float cosRy, out mat4 rotmat)
+{
+	rotmat = mat4(	cosRy ,	sinRx * sinRy ,	cosRx * sinRy,	0.0,
+									0.0   ,	cosRx        ,	-sinRx * cosRx,	0.0,
+									-sinRy,	sinRx * cosRy,	cosRx * cosRy ,	0.0,
+									0.0   ,	0.0          ,	0.0           ,	1.0 );
+}
+
+void	rotationMatrixH(in float sinRz, in float cosRz, out mat4 rotmat)
+{
+	rotmat = mat4(	cosRz,	-sinRz,	0.0,	0.0,
+									sinRz,	cosRz,	0.0,	0.0,
+									0.0  ,	0.0  ,	1.0,	0.0,
+									0.0  ,	0.0  ,	0.0,	1.0 );
+}
 
 void	main(void)
 {
+		// WINGFLEX
 		vec4 vertex = gl_Vertex;
-		
+
 		if ( wingflex_type == 0 ) {
-			float x_factor = max((abs(vertex.x) - body_width),0);
-			float y_factor = max(vertex.y,0.0);
-			
-			vec2 deflection=calc_deflection(vertex.y);
-			
+			vec2 deflection = calc_deflection(vertex.y);
+
 			vertex.z += deflection[0];
 			vertex.y += deflection[1];
-			
+
 			if(rotation_rad != 0){
 				vec2 defl1=calc_deflection(rotation_y1);
 				vec2 defl2=calc_deflection(rotation_y2);
@@ -136,7 +143,7 @@ void	main(void)
 				vertex.y=new_point[1];
 				vertex.z=new_point[2];
 			}
-			
+
 		} else if (wingflex_type == 1 ) {
 			float arm_reach = 4.8;
 
@@ -152,14 +159,14 @@ void	main(void)
 			// basic flapping motion is linear to arm_reach, then parabolic
 
 			float intercept_point = 0.1 * arm_reach * arm_reach * flex_factor1;
-		
+
 			if (x_factor < arm_reach)
 				{
 				vertex.z += x_factor/arm_reach * intercept_point;
 				}
 
-			else	
-				{		
+			else
+				{
 				vertex.z += 0.1 * x_factor * x_factor * flex_factor1;
 				}
 
@@ -176,13 +183,16 @@ void	main(void)
 			if (vertex.x > 0.0) {sweep_x = - 0.5;}
 
 			vertex.x+= sweep_x * (1.0 + 0.5 *x_factor) *   wingsweep_factor;
-			
-			
-		}
 
+
+		}
+		// END WINGFLEX
 
 		rawpos = vertex.xyz;
 		vec4 ecPosition = gl_ModelViewMatrix * vertex;
+		//rawpos = gl_Vertex.xyz;
+		//vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+		//fog_Func(fogType);
 
 		VNormal = normalize(gl_NormalMatrix * gl_Normal);
 
@@ -240,12 +250,14 @@ void	main(void)
 			reflVec = reflVec_stat;
 		}
 
+
 		gl_FrontColor = gl_FrontMaterial.emission + gl_Color
 					  * (gl_LightModel.ambient + gl_LightSource[0].ambient);
 
 		gl_Position = gl_ModelViewProjectionMatrix * vertex;
 		//gl_Position = ftransform();
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+
 
         setupShadows(ecPosition);
 }

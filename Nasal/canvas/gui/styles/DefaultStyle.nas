@@ -596,7 +596,7 @@ DefaultStyle.widgets["scroll-area"] = {
 };
 
 DefaultStyle.widgets["tab-widget"] = {
-	tabBarHeight: 30,
+	tabBarHeight: 36,
 	new: func(parent, cfg) {
 		me._root = parent.createChild("group", "tab-widget");
 		me.bg = me._root.createChild("path", "background")
@@ -636,15 +636,16 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(3, 0, w - 6, h);
 		me._selected_indicator.reset().moveTo(3, h - 2).horiz(w - 6);
-		me._label.setTranslation(w / 2, h / 2 + 5);
+		me._label.setTranslation((w - 24 - 8) / 2, h / 2 + 5);
+		model._close_button.move(w - 24 - 8, h / 2 - 12);
 	},
 	
 	setText: func(model, text) {
 		me._label.setText(text);
 
-		var min_width = math.max(80, me._label.maxWidth() + 16);
-		model.setLayoutMinimumSize([min_width, 30]);
-		model.setLayoutSizeHint([min_width, 30]);
+		var min_width = math.max(80, me._label.maxWidth() + 12 + (model._cfg.get("tab-closeable") ? 24 + 12 : 0));
+		model.setLayoutMinimumSize([min_width, 36]);
+		model.setLayoutSizeHint([min_width, 36]);
 
 		return me;
 	},
@@ -671,6 +672,66 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 		me._selected_indicator.set("stroke", me._style.getColor(selected_indicator_color_name));
 
 		me._label.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "fg_color"));
+	}
+};
+
+DefaultStyle.widgets["tab-button-close-button"] = {
+	new: func(parent, cfg) {
+		me._root = parent.createChild("group", "button");
+		me._bg = me._root.createChild("path");
+		me._border = me._root.createChild("image", "button")
+						.set("slice", "10 12"); #"7")
+		me._cross = me._root.createChild("text")
+						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+						.set("character-size", 21)
+						.set("alignment", "center-baseline")
+						.setText("×");
+	},
+	setSize: func(model, w, h) {
+		me._bg.reset().rect(3, 3, w - 6, h - 6, {"border-radius": 5});
+		me._border.setSize(w, h);
+		me._cross.setTranslation(w / 2, h / 2 + 7);
+	},
+	update: func(model) {
+		var backdrop = !model._windowFocus();
+		var file = me._style._dir_widgets ~ "/";
+
+		# TODO unify color names with image names
+		var bg_color_name = "button_bg_color";
+		if (backdrop) {
+			bg_color_name = "button_backdrop_bg_color";
+		} elsif (model._down) {
+			bg_color_name = "button_bg_color_down";
+		} elsif (model._hover) {
+			bg_color_name = "button_bg_color_hover";
+		}
+		me._bg.set("fill", me._style.getColor(bg_color_name));
+
+		if (model._hover or model._down) {
+			me._cross.set("fill", me._style.getColor("fg_color"));
+			me._border.show();
+			me._bg.show();
+		} else {
+			me._cross.set("fill", me._style.getColor("backdrop_fg_color"));
+			me._border.hide();
+			me._bg.hide();
+		}
+		if (backdrop) {
+			file ~= "backdrop-";
+		}
+		file ~= "button";
+
+		if (model._down) {
+			file ~= "-active";
+		}
+
+		if (model._focused and !backdrop) {
+			file ~= "-focused";
+		}
+		if (model._hover and !model._down) {
+			file ~= "-hover";
+		}
+		me._border.set("src", file ~ ".png");
 	}
 };
 

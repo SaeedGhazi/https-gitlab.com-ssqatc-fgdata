@@ -36,7 +36,7 @@ var WidgetsFactoryDialog = {
 		});
 		m.vbox.addItem(m.menubar);
 		
-		m.tabs = gui.widgets.TabWidget.new(m.root, style, {});
+		m.tabs = gui.widgets.TabWidget.new(m.root, style, {"tabs-closeable": 1});
 		m.tabsContent = m.tabs.getContent();
 		m.vbox.addItem(m.tabs);
 		
@@ -57,7 +57,9 @@ var WidgetsFactoryDialog = {
 		m.checkbox_right = gui.widgets.CheckBox.new(m.tabsContent, style, {"label-position": "left"})
 						.setText("Checkbox with text on the left side");
 		m.tab_1.addItem(m.checkbox_right);
-		m.property_checkbox = gui.widgets.PropertyCheckBox.new(m.tabsContent, style, {"node": props.globals.getNode("/controls/lighting/nav-lights")})
+		m.property_checkbox = gui.widgets.PropertyCheckBox.new(m.tabsContent, style, {
+			"node": props.globals.getNode("/controls/lighting/nav-lights"),
+		})
 						.setText("Nav lights");
 		m.tab_1.addItem(m.property_checkbox);
 		

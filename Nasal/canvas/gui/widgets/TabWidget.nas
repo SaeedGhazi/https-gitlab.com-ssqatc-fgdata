@@ -46,14 +46,20 @@
 # tabs.addTab("tab3", "Texture 3", tab3);
 
 gui.widgets.TabWidgetTabButton = {
-	new: func(parent, style, cfg) {
-		var cfg = Config.new(cfg);
+	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.Widget.new(gui.widgets.TabWidgetTabButton);
+		m._cfg = Config.new(cfg or {});
+		m._style = style or canvas.style;
 		m._focus_policy = m.StrongFocus;
 		m._selected = 0;
 
-		m._setView(style.createWidget(parent, "tab-widget-tab-button", cfg));
-
+		m._setView(m._style.createWidget(parent, "tab-widget-tab-button", m._cfg));
+		m._close_button = gui.widgets.Button.new(m._view._root, style, {"type": "tab-button-close-button"})
+						.setSize(24, 24)
+						.listen("clicked", func(e) {
+							m._trigger("close-button-clicked");
+						});
+		m._close_button._onStateChange();
 		return m;
 	},
 	setText: func(text) {
@@ -68,8 +74,7 @@ gui.widgets.TabWidgetTabButton = {
 
 		me._selected = selected;
 		me._trigger("toggled", {selected: selected});
-		me._onStateChange();
-		me._view.update(me);
+		me.update();
 		return me;
 	},
 	_setView: func(view) {
@@ -82,15 +87,25 @@ gui.widgets.TabWidgetTabButton = {
 
 		el.addEventListener("drag", func(e) { e.stopPropagation() });
 		#el.addEventListener("drag", me.drag);
+	},
+	update: func {
+		if (me._cfg.get("tab-closeable")) {
+			me._close_button.show();
+		} else {
+			me._close_button.hide();
+		}
+		me._view.update(me);
+		me._close_button._onStateChange();
 	}
 };
 
 gui.widgets.TabWidget = {
-	new: func(parent, style, cfg) {
+	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.Widget.new(gui.widgets.TabWidget);
-		m._cfg = Config.new(cfg);
+		m._cfg = Config.new(cfg or {});
+		m._style = style or canvas.style;
 		m._focus_policy = m.NoFocus;
-		m._setView(style.createWidget(parent, "tab-widget", m._cfg));
+		m._setView(m._style.createWidget(parent, "tab-widget", m._cfg));
 		m._layout = VBoxLayout.new();
 		m._layout.setCanvas(m._view._root.getCanvas());
 		m._layout.setParent(m);
@@ -102,9 +117,10 @@ gui.widgets.TabWidget = {
 		m._currentTabId = nil;
 		m._tabs = {};
 		m._tabButtons = {};
+		m._closeable_tabs = m._cfg.get("tabs-closeable", 0);
 		
-		m.setLayoutMinimumSize([50, 30]);
-		m.setLayoutSizeHint([100, 30]);
+		m.setLayoutMinimumSize([50, 36]);
+		m.setLayoutSizeHint([100, 36]);
 		
 		return m;
 	},
@@ -134,8 +150,13 @@ gui.widgets.TabWidget = {
 			die("cannot add multiple tabs with the same id: " ~ id);
 		}
 		
-		me._tabButtons[id] = gui.widgets.TabWidgetTabButton.new(me._view.tabBar, canvas.style, {})
+		me._tabButtons[id] = gui.widgets.TabWidgetTabButton.new(me._view.tabBar, canvas.style, {
+			"tab-closeable": me._cfg.get("tabs-closeable"),
+		})
 								.setText(label)
+								.listen("close-button-clicked", func {
+									me.removeTab(id);
+								})
 								.listen("toggled", func (e) {
 									if (e.detail.selected and id != me._currentTabId) {
 										me.setCurrentTab(id);
@@ -178,7 +199,7 @@ gui.widgets.TabWidget = {
 			return; # no need to do anything
 		}
 
-		if (me._currentTabId) {
+		if (me._currentTabId and me._tabButtons[me._currentTabId] != nil) {
 			me._tabButtons[me._currentTabId].setSelected(0);
 		}
 		me._tabButtons[id].setSelected();

@@ -934,23 +934,55 @@ DefaultStyle.widgets.slider = {
     me._createElement("fill", "image")
        .set("slice", "2 6");
 
+    me._ticks = me._root.createChild("path")
+            .set("stroke-width", me._style.getSize("slider-ticks-width", 1));
+
     me._fillHeight = me._fill.imageSize()[1];
     me._createElement("thumb", "image");
     me._thumbSize = me._thumb.imageSize();
 
-    me._ticks = 0;
-    me._ticksPath = nil;
+    me._value = me._root.createChild("text")
+            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+            .set("character-size", me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size")))
+            .set("alignment", "center-top");
+  },
+
+  _updateLayoutSizes: func(model) {
+  	me.update(model);
+    var h = me._thumb.imageSize()[1] + 6;
+    if (model._valueDisplayPosition != model.ValuePosition.None) {
+      h += me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size")) +
+               me._style.getSize("slider-thumb-value-margin", 8);
+    }
+    if (model._ticksPosition != model.TicksPosition.None and model._valueDisplayPosition != model._ticksPosition) {
+      h += me._style.getSize("slider-fill-ticks-margin", 3) + me._style.getSize("slider-tick-length", 10);
+    } 
+    model.setLayoutMinimumSize([50, h]);
+    model.setLayoutSizeHint([(model._maxValue -  model._minValue) / (model._stepSize or 1), h]);
+    model.setLayoutMaximumSize([model._MAX_SIZE, h]);
   },
 
   setNormValue: func(model, normValue)
   {
-    var (w, h) = model._size;
+    var w = model._size[0];
     var halfThumbWidth =  me._thumbSize[0] * 0.5;
     var availWidthPos = w - me._thumbSize[0];
     var thumbX = math.round(availWidthPos * normValue);
-    var thumbY = (h - me._thumbSize[1]) * 0.5;
-    me._thumb.setTranslation(thumbX - halfThumbWidth, thumbY);
+
+    var valueX = 0;
+    if (model._valueDisplayStyle == model.ValueStyle.Moving) {
+      var startPos = me._value.maxWidth() / 2;
+      var thumbPos = thumbX + me._thumbSize[0] * 0.5;
+      var endPos = w - (me._value.maxWidth() / 2);
+      valueX = math.clamp(thumbPos, startPos, endPos);
+    } elsif (model._valueDisplayStyle == model.ValueStyle.Fixed) {
+      valueX = w / 2;
+    }
+    me._value.setTranslation(valueX, me._value.getTranslation()[1]);
+    me._thumb.setTranslation(thumbX, me._thumb.getTranslation()[1]);
     me._fill.setSize(thumbX, me._fillHeight);
+    me._fill.setTranslation(halfThumbWidth, me._fill.getTranslation()[1]);
+    me._value.setText(model._value);
   },
 
   update: func(model)
@@ -974,6 +1006,7 @@ DefaultStyle.widgets.slider = {
     }
 
     me._fill.set("src", file ~ ".png");
+    me._fillHeight = me._fill.imageSize()[1];
 
   # set thumb state
     file = me._style._dir_widgets ~ "/";
@@ -981,14 +1014,30 @@ DefaultStyle.widgets.slider = {
     if( !model._enabled ) {
       file ~= "-disabled";
     } else {
-      if (model._down)
+      if (model._thumbDown)
         file ~= "-focused";
       if (model._hover)
         file ~= "-hover";
     }
 
     me._thumb.set("src", file ~ ".png");
+    me._thumbSize = me._thumb.imageSize();
     
+    var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
+    me._value.set("fill", me._style.getColor(color_name));
+    if (model._valueDisplayPosition != model.ValuePosition.None) {
+      me._value.show();
+    } else {
+      me._value.hide();
+    }
+    
+    me._ticks.set("stroke", me._style.getColor("slider_ticks"));
+    if (model._ticksPosition != model.TicksPosition.None) {
+      me._ticks.show();
+    } else {
+      me._ticks.hide();
+    }
+
   # update the position as well, since other stuff
   # may have changed
     me.setNormValue(model, model._normValue());
@@ -996,28 +1045,67 @@ DefaultStyle.widgets.slider = {
 
   setSize: func(model, w, h)
   {
-    var fillTop = (h - me._fillHeight) * 0.5;
-    me._bg.setTranslation(0, fillTop);
-    me._fill.setTranslation(0, fillTop);
-    me._bg.setSize(w, me._fillHeight);
+    var valueFontSize = me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size"));
+    var thumbValueMargin = me._style.getSize("slider-thumb-value-margin", 8);
+    var fillTicksMargin = me._style.getSize("slider-fill-ticks-margin", 3);
+    var ticksOffset = fillTicksMargin + me._style.getSize("slider-tick-length", 10);
+
+    var thumbY = (h - me._thumbSize[1]) * 0.5;
+    if (model._valueDisplayPosition != model.ValuePosition.None) {
+      thumbY -= (valueFontSize + thumbValueMargin) * 0.5;
+    }
+    if (model._ticksPosition != model.TicksPosition.None and model._ticksPosition != model._valueDisplayPosition) {
+      thumbY -= ticksOffset * 0.5;
+    }
+
+    var valueY = thumbY;
+    if (model._valueDisplayPosition == model.ValuePosition.Above) {
+      thumbY += valueFontSize + thumbValueMargin;
+    } elsif (model._valueDisplayPosition == model.ValuePosition.Below) {
+      valueY += me._thumbSize[1] + thumbValueMargin;
+    }
+
+    var fillY = thumbY + (me._thumbSize[1] - me._fillHeight) * 0.5;
+
+    var ticksY = fillY;
+    if (model._ticksPosition == model.TicksPosition.Below) {
+      ticksY += me._fillHeight + fillTicksMargin;
+    } elsif (model._ticksPosition == model.TicksPosition.Above) {
+      if (model._valueDisplayPosition == model.ValuePosition.Below) {
+        thumbY += ticksOffset;
+        fillY += ticksOffset;
+        valueY += ticksOffset;
+      } else {
+        ticksY -= ticksOffset;
+      }
+    }
+
+    me._bg.setTranslation(me._thumbSize[0] / 2, fillY);
+    me._fill.setTranslation(me._fill.getTranslation()[0], fillY);
+    me._ticks.setTranslation(me._thumbSize[0] / 2, ticksY);
+    me._thumb.setTranslation(me._thumb.getTranslation()[0], thumbY);
+    me._value.setTranslation(me._value.getTranslation()[0], valueY);
+    me._bg.setSize(w - me._thumbSize[0], me._fillHeight);
     me.setNormValue(model, model._normValue());
+    me._drawTicks(model);
   },
 
-  updateRanges: func(minValue, maxValue, numTicks = 0)
-  {
-    if (me._ticks != numTicks) {
-      # update tick marks
-      if (numTicks == 0) {
-        me._ticks = 0;
-        me._deleteElement('ticksPath');
-      } else {
-        me._createElement('ticksPath', 'path');
-        me._ticks = numTicks;
-        
-        # set style
-        # loop adding ticks
-
-      }
+  _drawTicks: func(model) {
+    me._ticks.reset();
+    var range = model._maxValue - model._minValue;
+    if (range <= 0 or model._tickStep <= 0) {
+      return;
+    }
+    var availWidthPos = model._size[0] - me._thumbSize[0];
+    var pixelsPerUnit = availWidthPos / range;
+    var remainder = math.mod(range, model._tickStep);
+    var numTicks = int((range - remainder) / model._tickStep);
+    if (remainder == 0) {
+      numTicks -= 1;
+    }
+    for (var i = 1; i <= numTicks; i += 1) {
+      me._ticks.moveTo(i * pixelsPerUnit * model._tickStep, 0)
+                       .vert(me._style.getSize("slider-tick-length", 8));
     }
   },
 
@@ -1032,7 +1120,7 @@ DefaultStyle.widgets.slider = {
       if( type == "text" )
       {
          me[ mem ].set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-                  .set("character-size", 14)
+                  .set("character-size", me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size")))
                   .set("alignment", "left-center");
       }
     }

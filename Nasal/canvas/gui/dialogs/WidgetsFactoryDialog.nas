@@ -29,6 +29,15 @@ var WidgetsFactoryDialog = {
 				w.setText("Label " ~ i);
 			});
 		});
+		m.widgetsMenu.createItem(text: "Benchmark slider", cb: func {
+			m.benchmark_widget(widget: canvas.gui.widgets.Slider, proc_func: func(w, i) {
+				w.setValue(i);
+			}, cfg: {
+				"value-position": canvas.gui.widgets.Slider.ValuePosition.Below,
+				"value-style": canvas.gui.widgets.Slider.ValueStyle.Moving,
+				"ticks-position": gui.widgets.Slider.TicksPosition.Below,
+			});
+		});
 		m.widgetsMenu.createItem(text: "Benchmark radio button", cb: func {
 			m.benchmark_radio_button(func(w, i) {
 				w.setText("Radio button " ~ i);
@@ -201,11 +210,15 @@ var WidgetsFactoryDialog = {
 		m.benchmark_tab.addItem(m.benchmark_statistics);
 
 		m.numericControlsTab = VBoxLayout.new();
-		m.tabs.addTab("ncTab", "Numeric Controls", m.numericControlsTab);
-		m.slider = gui.widgets.Slider.new(m.tabsContent, style, 
-			{"max-value" : 100,
-			 "page-step" : 20,
-			 "tick-count" : 10})
+		m.tabs.addTab("numeric-controls", "Numeric controls", m.numericControlsTab);
+		m.slider = gui.widgets.Slider.new(m.tabsContent, style, {
+				"max-value" : 100,
+				"page-size" : 20,
+				"tick-step" : 10,
+				"value-style": gui.widgets.Slider.ValueStyle.Moving,
+				"value-position": gui.widgets.Slider.ValuePosition.Above,
+				"ticks-position": gui.widgets.Slider.TicksPosition.Above,
+		})
 			.setValue(42);
 		m.numericControlsTab.addItem(m.slider);
 
@@ -213,11 +226,12 @@ var WidgetsFactoryDialog = {
 		return m;
 	},
 	
-	benchmark_widget: func(widget, proc_func=nil, amount=50) {
+	benchmark_widget: func(widget, proc_func=nil, amount=50, cfg=nil) {
+		cfg = cfg or {};
 		var start = systime();
 		me.benchmark_tab_scroll_layout.clear();
 		for (var i = 0; i < amount; i += 1) {
-			var w = widget.new(me.benchmark_tab_scroll.getContent(), canvas.style, {});
+			var w = widget.new(me.benchmark_tab_scroll.getContent(), canvas.style, cfg);
 			if (proc_func != nil) {
 				proc_func(w, i);
 			}
@@ -227,12 +241,14 @@ var WidgetsFactoryDialog = {
 		me.benchmark_statistics.setText("Took " ~ time ~ " seconds to add " ~ amount ~ " widgets.");
 	},
 	
-	benchmark_radio_button: func(proc_func=nil, amount=50) {
+	benchmark_radio_button: func(proc_func=nil, amount=50, cfg= nil) {
+		cfg = cfg or {};
 		var start = systime();
 		me.benchmark_tab_scroll_layout.clear();
 		var r = canvas.gui.widgets.RadioButton.new(me.benchmark_tab_scroll.getContent());
+		cfg["parentRadio"] = r;
 		for (var i = 1; i < amount; i += 1) {
-			var w = canvas.gui.widgets.RadioButton.new(me.benchmark_tab_scroll.getContent(), canvas.style, {parentRadio: r});
+			var w = canvas.gui.widgets.RadioButton.new(me.benchmark_tab_scroll.getContent(), canvas.style, cfg);
 			if (proc_func != nil) {
 				proc_func(w, i);
 			}

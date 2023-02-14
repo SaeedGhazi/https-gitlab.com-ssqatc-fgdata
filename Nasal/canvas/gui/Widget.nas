@@ -200,11 +200,6 @@ gui.Widget = {
       me._trigger("mouse-leave");
       me._onStateChange();
     });
-    root.addEventListener("keypress", func(e) {
-      if (me._focused) {
-        root.onKeyPressed(e);
-      }
-    });
 
     # if we have keyboard bindings defined, add the listener for them
     if (size(me._bindings)) {

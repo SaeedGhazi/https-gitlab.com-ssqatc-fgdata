@@ -311,6 +311,12 @@
 			<green type="float">0.5</green>
 			<blue type="float">0.5</blue>
 		</switch_thumb_border_color>
+		
+		<slider_ticks>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</slider_ticks>
 	</colors>
 
 	<sizes>

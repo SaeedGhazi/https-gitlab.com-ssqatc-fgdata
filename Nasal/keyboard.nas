@@ -208,9 +208,9 @@ FunctionKeys = {
 	F9: 0xFFC6,
 	F10: 0xFFC7,
 	F11: 0xFFC8,
-	
-	# most keyboards only have F1 - F11, so better not use any of the below FunctionKeys
 	F12: 0xFFC9,
+	
+	# most keyboards only have F1 - F12, so better not use any of the below FunctionKeys
 	F13: 0xFFCA,
 	F14: 0xFFCB,
 	F15: 0xFFCC,
@@ -369,7 +369,7 @@ var Shortcut = {
 			return 0;
 		}
 		for (var i = 0; i < size(keys); i += 1) {
-			match &= keys[i] == me.keys[i];
+			match &= contains(me.keys, keys[i]);
 		}
 		return match;
 	},

@@ -1669,7 +1669,6 @@
     </pass>
   </technique>
 
-  <!-- Just for ocean tiles. For actual terrain we use ws30.eff. -->
   <technique n="109">
     <scheme>hdr-geometry</scheme>
     <pass>
@@ -1696,8 +1695,8 @@
       <rendering-hint>opaque</rendering-hint>
       <cull-face>back</cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/geometry.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/geometry-terrain.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry-terrain.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
       </program>
       <uniform>
@@ -1705,16 +1704,11 @@
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
+      <!-- Orthophoto include -->
       <uniform>
-        <name>color_mode</name>
-        <type>int</type>
-        <value>2</value>
-        <!-- AMBIENT_AND_DIFFUSE -->
-      </uniform>
-      <uniform>
-        <name>material_diffuse</name>
-        <type>float-vec4</type>
-        <value><use>material/diffuse</use></value>
+        <name>orthophoto_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">15</value>
       </uniform>
     </pass>
   </technique>

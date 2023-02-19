@@ -12,6 +12,11 @@
 			<!-- DIFFUSE -->
 		</material>
 		<material-id>0</material-id>
+		<render-bin>
+			<bin-number>1</bin-number>
+			<bin-name>RenderBin</bin-name>
+		</render-bin>
+		<write-depth type="bool">true</write-depth>
 		<!-- 		BEGIN fog include -->
 		<visibility><use>/environment/ground-visibility-m</use></visibility>
 		<avisibility><use>/environment/visibility-m</use></avisibility>
@@ -87,6 +92,9 @@
     </predicate>
     <pass>
       <lighting>true</lighting>
+      <depth>
+        <write-mask><use>write-depth</use></write-mask>
+      </depth>
       <material>
         <active><use>material/active</use></active>
         <ambient><use>material/ambient</use></ambient>
@@ -103,11 +111,10 @@
       </blend>
       <shade-model><use>shade-model</use></shade-model>
       <cull-face><use>cull-face</use></cull-face>
-	<!--<render-bin>
-		<bin-number>1</bin-number>
-		<bin-name>RenderBin</bin-name>
-	</render-bin>-->
-      <rendering-hint><use>rendering-hint</use></rendering-hint>
+      <render-bin>
+        <bin-number><use>render-bin/bin-number</use></bin-number>
+        <bin-name><use>render-bin/bin-name</use></bin-name>
+      </render-bin>
       <texture-unit>
         <!-- The texture unit is always active because the shaders expect
              that. -->
@@ -408,6 +415,9 @@
 		</predicate>
 		<pass>
 			<lighting>true</lighting>
+			<depth>
+				<write-mask><use>write-depth</use></write-mask>
+			</depth>
 			<material>
 				<active>
 					<use>material/active</use>
@@ -448,9 +458,10 @@
 			<cull-face>
 				<use>cull-face</use>
 			</cull-face>
-			<rendering-hint>
-				<use>rendering-hint</use>
-			</rendering-hint>
+			<render-bin>
+				<bin-number><use>render-bin/bin-number</use></bin-number>
+				<bin-name><use>render-bin/bin-name</use></bin-name>
+			</render-bin>
 			<texture-unit>
 				<!-- The texture unit is always active because the shaders expect
              that. -->
@@ -572,6 +583,9 @@
 	<technique n="13">
 		<pass>
 			<lighting>true</lighting>
+			<depth>
+				<write-mask><use>write-depth</use></write-mask>
+			</depth>
 			<material>
 				<active>
 					<use>material/active</use>
@@ -612,9 +626,10 @@
 			<cull-face>
 				<use>cull-face</use>
 			</cull-face>
-			<rendering-hint>
-				<use>rendering-hint</use>
-			</rendering-hint>
+			<render-bin>
+				<bin-number><use>render-bin/bin-number</use></bin-number>
+				<bin-name><use>render-bin/bin-name</use></bin-name>
+			</render-bin>
 			<texture-unit>
 				<active>
 					<use>texture[0]/active</use>

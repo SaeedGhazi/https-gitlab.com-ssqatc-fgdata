@@ -21,7 +21,7 @@ const vec3 EXTRATERRESTRIAL_SOLAR_ILLUMINANCE = vec3(128.0);
 
 vec3 decodeNormal(vec2 f);
 vec3 positionFromDepth(vec2 pos, float depth);
-vec3 addAerialPerspective(vec3 color, vec2 coord, float depth);
+vec3 add_aerial_perspective(vec3 color, vec2 coord, float depth);
 
 float F_Schlick(float VdotH, float F0)
 {
@@ -79,7 +79,7 @@ void main()
     // Add reflected Sun light
     color += RECIPROCAL_PI * fresnel * D_GGX(NdotH, 0.001) * sunIntensity * NdotL;
 
-    color = addAerialPerspective(color, texCoord, length(pos));
+    color = add_aerial_perspective(color, texCoord, length(pos));
 
     fragColor = color;
 }

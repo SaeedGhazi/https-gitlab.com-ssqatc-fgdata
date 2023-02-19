@@ -45,8 +45,8 @@ vec3 evaluateIBL(
     vec3 nWorldSpace,
     float NdotV,
     vec3 reflected);
-vec3 addAerialPerspective(vec3 color, vec2 coord, float depth);
-vec3 getSunIntensity();
+vec3 add_aerial_perspective(vec3 color, vec2 coord, float depth);
+vec3 get_sun_radiance(vec3 p);
 
 void main()
 {
@@ -74,14 +74,16 @@ void main()
 
     vec3 f0 = getF0Reflectance(baseColor.rgb, metallic);
 
-    vec3 sunIlluminance = getSunIntensity() * clamp(NdotL, 0.0, 1.0);
+    vec3 pos_world = (osg_ViewMatrixInverse * vec4(ecPos, 1.0)).xyz;
+    vec3 sun_radiance = get_sun_radiance(pos_world);
+
     float shadowFactor = getShadowing(ecPos, n, l, osg_ProjectionMatrix);
 
     vec3 color = evaluateLight(baseColor.rgb,
                                metallic,
                                roughness,
                                f0,
-                               sunIlluminance,
+                               sun_radiance,
                                shadowFactor,
                                n, l, v,
                                NdotL, NdotV);
@@ -99,7 +101,7 @@ void main()
                          worldReflected);
 
     vec2 coord = (gl_FragCoord.xy - fg_Viewport.xy) / fg_Viewport.zw;
-    color = addAerialPerspective(color, coord, length(ecPos));
+    color = add_aerial_perspective(color, coord, length(ecPos));
 
     fragColor = vec4(color, baseColor.a);
 }

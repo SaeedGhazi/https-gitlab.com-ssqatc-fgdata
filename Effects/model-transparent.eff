@@ -4,6 +4,12 @@
   <inherits-from>Effects/model-default</inherits-from>
 
   <parameters>
+    <render-bin>
+      <bin-number>111</bin-number>
+      <bin-name>DepthSortedBin</bin-name>
+    </render-bin>
+    <write-depth type="bool">false</write-depth>
+
     <texture n="8">
       <image>Textures/PBR/dfg_lut.dds</image>
       <type>2d</type>

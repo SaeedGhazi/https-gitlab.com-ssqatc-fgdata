@@ -531,6 +531,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <available type="bool" userarchive="n">false</available>
         <enabled type="bool" userarchive="y">true</enabled>
       </pilot-model>
+
       <hdr>
         <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
         <exposure-compensation type="float">0.0</exposure-compensation>
@@ -546,6 +547,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <show-shadow-cascades type="bool">false</show-shadow-cascades>
         </debug>
       </hdr>
+
       <composite-viewer-enabled type="bool">true</composite-viewer-enabled>
     </rendering>
     <vr>
@@ -1185,7 +1187,9 @@ Started September 2000 by David Megginson, david@megginson.com
       <max-rate-hz type="int">50</max-rate-hz>
       <rate-hz type="int">30</rate-hz>
     </emexec>
-
+    <debug>
+      <show-light-volumes type="bool">false</show-light-volumes>
+    </debug>
   </sim>
   <!-- accelerations -->
   <accelerations>

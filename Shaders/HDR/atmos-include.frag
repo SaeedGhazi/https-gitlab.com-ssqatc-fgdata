@@ -1,28 +1,99 @@
-// An implementation of Sébastien Hillaire's "A Scalable and Production Ready
-// Sky and Atmosphere Rendering Technique".
-
 #version 330 core
 
-const float PI = 3.141592653;
-
-// Atmosphere parameters
-// Section 2.1 of [Bruneton08], units are inverse meters
-const float mie_density_height_scale = 8.33333e-4;   // Hm=1.2km
-const float rayleigh_density_height_scale = 1.25e-4; // Hr=8km
-const float mie_scattering = 3.996e-6;
-const float mie_absorption = 4.4e-6;
-const vec3 rayleigh_scattering = vec3(5.802, 13.558, 33.1) * vec3(1e-6);
-const vec3 ozone_absorption = vec3(0.650, 1.881, 0.085) * vec3(1e-6);
-
+const float PI = 3.14159265358979323846;
+const float INV_PI = 0.31830988618379067154;
+const float INV_4PI = 0.25 * INV_PI;
+const float PHASE_ISOTROPIC = INV_4PI;
+const float RAYLEIGH_PHASE_SCALE = (3.0 / 16.0) * INV_PI;
 const float g = 0.8;
 const float gg = g*g;
-const float mie_phase_scale = 3.0/(8.0*PI);
-const float rayleigh_phase_scale = 3.0/(16.0*PI);
 
-// Returns the distance between ro and the first intersection with the sphere
-// or -1.0 if there is no intersection.
-// -1.0 is also returned if the ray is pointing away from the sphere.
-float raySphereIntersection(vec3 ro, vec3 rd, float radius)
+const float ATMOSPHERE_RADIUS = 6471e3;
+
+// Rayleigh scattering coefficient at sea level, units m^-1
+// "Rayleigh-scattering calculations for the terrestrial atmosphere"
+// by Anthony Bucholtz (1995).
+const vec4 molecular_scattering_coefficient_base =
+    vec4(6.605e-6, 1.067e-5, 1.842e-5, 3.156e-5);
+
+// Ozone absorption cross section, units m^2 / molecules
+// "High spectral resolution ozone absorption cross-sections"
+// by V. Gorshelev et al. (2014).
+const vec4 ozone_cross_section =
+    vec4(3.472e-21, 3.914e-21, 1.349e-21, 11.03e-23) * 1e-4f;
+
+const float ozone_mean_monthly_dobson[] = float[](
+    347.0, // January
+    370.0, // February
+    381.0, // March
+    384.0, // April
+    372.0, // May
+    352.0, // June
+    333.0, // July
+    317.0, // August
+    298.0, // September
+    285.0, // October
+    290.0, // November
+    315.0  // December
+    );
+const float ozone_height_distribution[] = float[](
+    9.0   / 210.0,
+    14.0  / 210.0,
+    111.0 / 210.0,
+    64.0  / 210.0,
+    6.0   / 210.0,
+    6.0   / 210.0,
+    0.0
+    );
+
+/*
+ * Every aerosol type expects 5 parameters:
+ * - Scattering cross section
+ * - Absorption cross section
+ * - Base density (km^-3)
+ * - Background density (km^-3)
+ * - Height scaling parameter
+ * These parameters can be sent as uniforms.
+ *
+ * This model for aerosols and their corresponding parameters come from
+ * "A Physically-Based Spatio-Temporal Sky Model"
+ * by Guimera et al. (2018).
+ */
+// Urban
+uniform vec4 aerosol_absorption_cross_section =
+    vec4(2.8722e-24, 4.6168e-24, 7.9706e-24, 1.3578e-23);
+uniform vec4 aerosol_scattering_cross_section =
+    vec4(1.5908e-22, 1.7711e-22, 2.0942e-22, 2.4033e-22);
+uniform float aerosol_base_density = 1.3681e20;
+uniform float aerosol_relative_background_density = 2e6 / 1.3681e20;
+uniform float aerosol_height_scale = 0.73;
+
+uniform float aerosol_turbidity = 1.0;
+
+uniform int month_of_the_year = 0;
+uniform vec4 ground_albedo = vec4(0.3);
+
+uniform float fg_EarthRadius;
+
+//------------------------------------------------------------------------------
+
+/*
+ * Helper function to obtain the transmittance to the top of the atmosphere
+ * from Buffer A.
+ */
+vec4 transmittance_from_lut(sampler2D lut, float cos_theta, float normalized_altitude)
+{
+    float u = clamp(cos_theta * 0.5 + 0.5, 0.0, 1.0);
+    float v = clamp(normalized_altitude, 0.0, 1.0);
+    return texture(lut, vec2(u, v));
+}
+
+/*
+ * Returns the distance between ro and the first intersection with the sphere
+ * or -1.0 if there is no intersection. The sphere's origin is (0,0,0).
+ * -1.0 is also returned if the ray is pointing away from the sphere.
+ */
+float ray_sphere_intersection(vec3 ro, vec3 rd, float radius)
 {
     float b = dot(ro, rd);
     float c = dot(ro, ro) - radius*radius;
@@ -33,46 +104,205 @@ float raySphereIntersection(vec3 ro, vec3 rd, float radius)
     return (-b-sqrt(d));
 }
 
-// Sample the sky medium properties at a height in meters, 0 being the ground
-// and ~100km being the top of the atmosphere.
-// Returns the total atmospheric extinction.
-vec3 sampleMedium(in float height,
-                  out float mieScattering, out float mieAbsorption,
-                  out vec3 rayleighScattering, out vec3 ozoneAbsorption)
+/*
+ * Rayleigh phase function.
+ */
+float molecular_phase_function(float cos_theta)
 {
-    float densityMie = exp(-mie_density_height_scale * height);
-    float densityRayleigh = exp(-rayleigh_density_height_scale * height);
-    float densityOzone = max(0.0, 1.0 - abs(height-25.0e3)/15.0e3);
-
-    mieScattering = mie_scattering * densityMie;
-    mieAbsorption = mie_absorption * densityMie;
-
-    rayleighScattering = rayleigh_scattering * densityRayleigh;
-
-    ozoneAbsorption = ozone_absorption * densityOzone;
-
-    return mieScattering + mieAbsorption + rayleighScattering + ozoneAbsorption;
+    return RAYLEIGH_PHASE_SCALE * (1.0 + cos_theta*cos_theta);
 }
 
-// Approximation of the Mie phase function with the Cornette-Shanks phase function
-float miePhaseFunction(float cosTheta)
+/*
+ * Henyey-Greenstrein phase function.
+ */
+float aerosol_phase_function(float cos_theta)
 {
-    float num = (1.0 - gg) * (1.0 + cosTheta*cosTheta);
-    float den = (2.0 + gg) * pow((1.0 + gg - 2.0 * g * cosTheta), 1.5);
-    return mie_phase_scale * num / den;
+    float den = 1.0 + gg + 2.0 * g * cos_theta;
+    return INV_4PI * (1.0 - gg) / (den * sqrt(den));
 }
 
-float rayleighPhaseFunction(float cosTheta)
+/*
+ * Get the approximated multiple scattering contribution for a given point
+ * within the atmosphere.
+ */
+vec4 get_multiple_scattering(sampler2D transmittance_lut,
+                             float cos_theta,
+                             float normalized_height,
+                             float d)
 {
-    return rayleigh_phase_scale * (1.0 + cosTheta*cosTheta);
+    // Solid angle subtended by the planet from a point at d distance
+    // from the planet center.
+    float omega = 2.0 * PI * (1.0 - sqrt(d*d - fg_EarthRadius*fg_EarthRadius) / d);
+    omega = max(0.0, omega);
+
+    vec4 T_to_ground = transmittance_from_lut(transmittance_lut, cos_theta, 0.0);
+
+    vec4 T_ground_to_sample =
+        transmittance_from_lut(transmittance_lut, 1.0, 0.0) /
+        transmittance_from_lut(transmittance_lut, 1.0, normalized_height);
+
+    // 2nd order scattering from the ground
+    vec4 L_ground = PHASE_ISOTROPIC * omega * (ground_albedo * INV_PI)
+        * T_to_ground * T_ground_to_sample * max(0.0, cos_theta);
+
+    // Fit of Earth's multiple scattering coming from other points in the atmosphere
+    vec4 L_ms = 0.02 * vec4(0.217, 0.347, 0.594, 1.0)
+        * (1.0 / (1.0 + 5.0 * exp(-17.92 * cos_theta)));
+
+    return L_ms + L_ground;
 }
 
-// Sample one of the LUTs (transmittance or multiple scattering) for a given
-// normalized height inside the atmosphere [0,1] and the cosine of the Sun
-// zenith angle.
-vec3 getValueFromLUT(sampler2D lut, float sunCosTheta, float normHeight)
+/*
+ * Return the molecular volume scattering coefficient (m^-1) for a given altitude
+ * in kilometers.
+ */
+vec4 get_molecular_scattering_coefficient(float h)
 {
-    float x = clamp(sunCosTheta * 0.5 + 0.5, 0.0, 1.0);
-    float y = clamp(normHeight, 0.0, 1.0);
-    return texture(lut, vec2(x, y)).rgb;
+    return molecular_scattering_coefficient_base
+        * exp(-0.07771971 * pow(h, 1.16364243));
+}
+
+/*
+ * Return the molecular volume absorption coefficient (km^-1) for a given altitude
+ * in kilometers.
+ */
+vec4 get_molecular_absorption_coefficient(float h)
+{
+    int i = int(clamp(h / 9.0, 0.0, 6.0));
+    float density = ozone_height_distribution[i] *
+        ozone_mean_monthly_dobson[month_of_the_year] * 2.6867e20f; // molecules / m^2
+    density /= 9e3; // m^-3
+    return ozone_cross_section * density; // m^-1
+}
+
+/*
+ * Return the aerosol density for a given altitude in kilometers.
+ */
+float get_aerosol_density(float h)
+{
+    return aerosol_base_density * (exp(-h / aerosol_height_scale)
+                                   + aerosol_relative_background_density);
+}
+
+/*
+ * Get the collision coefficients (scattering and absorption) of the
+ * atmospheric medium for a given point at an altitude h.
+ */
+void get_atmosphere_collision_coefficients(in float h,
+                                           out vec4 aerosol_absorption,
+                                           out vec4 aerosol_scattering,
+                                           out vec4 molecular_absorption,
+                                           out vec4 molecular_scattering,
+                                           out vec4 extinction)
+{
+    h = max(h, 0.0); // In case height is negative
+    float aerosol_density = get_aerosol_density(h * 1e-3) * aerosol_turbidity;
+    aerosol_absorption = aerosol_absorption_cross_section * aerosol_density * 1e-3;
+    aerosol_scattering = aerosol_scattering_cross_section * aerosol_density * 1e-3;
+    molecular_absorption = get_molecular_absorption_coefficient(h * 1e-3);
+    molecular_scattering = get_molecular_scattering_coefficient(h * 1e-3);
+    extinction =
+        aerosol_absorption + aerosol_scattering +
+        molecular_absorption + molecular_scattering;
+}
+
+/*
+ * Compute the in-scattering integral of the volume rendering equation (VRE)
+ *
+ * The integral is solved numerically by ray marching. The final in-scattering
+ * returned by this function is a 4D vector of the spectral radiance sampled for
+ * the 4 wavelengths at the top of this file. To obtain an RGB triplet, the
+ * spectral radiance must be multiplied by the spectral irradiance of the Sun
+ * and converted to sRGB.
+ */
+vec4 compute_inscattering(in vec3 ray_origin,
+                          in vec3 ray_dir,
+                          in float t_max,
+                          in vec3 sun_dir,
+                          in int steps,
+                          in sampler2D transmittance_lut,
+                          out vec4 transmittance)
+{
+    // Any given ray inside the atmospheric medium can end in one of 3 places:
+    // 1. The Earth's surface.
+    // 2. Outer space. We define the boundary between space and the atmosphere
+    //    at the Kármán line.
+    // 3. Any object within the atmosphere.
+    float ray_altitude = length(ray_origin);
+    // Handle the camera being underground
+    float earth_radius = min(ray_altitude, fg_EarthRadius);
+    float atmos_dist  = ray_sphere_intersection(ray_origin, ray_dir, ATMOSPHERE_RADIUS);
+    float ground_dist = ray_sphere_intersection(ray_origin, ray_dir, earth_radius);
+    float t_d;
+    if (ray_altitude < ATMOSPHERE_RADIUS) {
+        // We are inside the atmosphere
+        if (ground_dist < 0.0) {
+            // No ground collision, use the distance to the outer atmosphere
+            t_d = atmos_dist;
+        } else {
+            // We have a collision with the ground, use the distance to it
+            t_d = ground_dist;
+        }
+    } else {
+        // We are in outer space
+        // XXX: For now this is a flight simulator, not a space simulator
+        transmittance = vec4(1.0);
+        return vec4(0.0);
+    }
+
+    // Clip by the maximum distance
+    t_d = min(t_d, t_max);
+
+    float cos_theta = dot(-ray_dir, sun_dir);
+
+    float molecular_phase = molecular_phase_function(cos_theta);
+    float aerosol_phase = aerosol_phase_function(cos_theta);
+
+    float dt = t_d / float(steps);
+
+    vec4 L_inscattering = vec4(0.0);
+    transmittance = vec4(1.0);
+
+    for (int i = 0; i < steps; ++i) {
+        float t = (float(i) + 0.5) * dt;
+        vec3 x_t = ray_origin + ray_dir * t;
+
+        float distance_to_earth_center = length(x_t);
+        vec3 zenith_dir = x_t / distance_to_earth_center;
+        float altitude = distance_to_earth_center - fg_EarthRadius;
+        float normalized_altitude = altitude / (ATMOSPHERE_RADIUS - fg_EarthRadius);
+
+        float sample_cos_theta = dot(zenith_dir, sun_dir);
+
+        vec4 aerosol_absorption, aerosol_scattering;
+        vec4 molecular_absorption, molecular_scattering;
+        vec4 extinction;
+        get_atmosphere_collision_coefficients(
+            altitude,
+            aerosol_absorption, aerosol_scattering,
+            molecular_absorption, molecular_scattering,
+            extinction);
+
+        vec4 transmittance_to_sun = transmittance_from_lut(
+            transmittance_lut, sample_cos_theta, normalized_altitude);
+
+        vec4 ms = get_multiple_scattering(
+            transmittance_lut, sample_cos_theta, normalized_altitude,
+            distance_to_earth_center);
+
+        vec4 S =
+            molecular_scattering * (molecular_phase * transmittance_to_sun + ms) +
+            aerosol_scattering   * (aerosol_phase   * transmittance_to_sun + ms);
+
+        vec4 step_transmittance = exp(-dt * extinction);
+
+        // Energy-conserving analytical integration
+        // "Physically Based Sky, Atmosphere and Cloud Rendering in Frostbite"
+        // by Sébastien Hillaire
+        vec4 S_int = (S - S * step_transmittance) / max(extinction, 1e-7);
+        L_inscattering += transmittance * S_int;
+        transmittance *= step_transmittance;
+    }
+
+    return L_inscattering;
 }

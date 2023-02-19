@@ -13,11 +13,6 @@
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
-      <uniform>
-        <name>multiscattering_lut</name>
-        <type>sampler-2d</type>
-        <value type="int">1</value>
-      </uniform>
     </pass>
   </technique>
 </PropertyList>

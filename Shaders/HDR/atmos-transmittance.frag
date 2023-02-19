@@ -1,13 +1,6 @@
-// An implementation of Sébastien Hillaire's "A Scalable and Production Ready
-// Sky and Atmosphere Rendering Technique".
-//
-// This shader generates the transmittance LUT. It stores the transmittance to
-// the Sun through the atmosphere for a given Sun zenith angle and a height
-// inside the atmosphere (0 being the ground).
-
 #version 330 core
 
-out vec3 fragColor;
+out vec4 fragColor;
 
 in vec2 texCoord;
 
@@ -16,38 +9,46 @@ uniform float fg_EarthRadius;
 const float ATMOSPHERE_RADIUS = 6471e3;
 const int TRANSMITTANCE_STEPS = 40;
 
-float raySphereIntersection(vec3 ro, vec3 rd, float radius);
-vec3 sampleMedium(in float height,
-                  out float mieScattering, out float mieAbsorption,
-                  out vec3 rayleighScattering, out vec3 ozoneAbsorption);
+// atmos-include.frag
+float ray_sphere_intersection(vec3 ro, vec3 rd, float radius);
+void get_atmosphere_collision_coefficients(in float h,
+                                           out vec4 aerosol_absorption,
+                                           out vec4 aerosol_scattering,
+                                           out vec4 molecular_absorption,
+                                           out vec4 molecular_scattering,
+                                           out vec4 extinction);
 
 void main()
 {
-    float sunCosTheta = texCoord.x * 2.0 - 1.0;
-    vec3 sunDir = vec3(-sqrt(1.0 - sunCosTheta*sunCosTheta), 0.0, sunCosTheta);
+    float sun_cos_theta = texCoord.x * 2.0 - 1.0;
+    vec3 sun_dir = vec3(-sqrt(1.0 - sun_cos_theta*sun_cos_theta), 0.0, sun_cos_theta);
 
-    float altitude = mix(fg_EarthRadius, ATMOSPHERE_RADIUS, texCoord.y);
-    vec3 rayOrigin = vec3(0.0, 0.0, altitude);
+    float distance_to_earth_center = mix(fg_EarthRadius, ATMOSPHERE_RADIUS, texCoord.y);
+    vec3 ray_origin = vec3(0.0, 0.0, distance_to_earth_center);
 
-    float dist = raySphereIntersection(rayOrigin, sunDir, ATMOSPHERE_RADIUS);
-    float t = 0.0;
-    vec3 transmittance = vec3(1.0);
+    float t_d = ray_sphere_intersection(ray_origin, sun_dir, ATMOSPHERE_RADIUS);
+    float dt = t_d / float(TRANSMITTANCE_STEPS);
+
+    vec4 result = vec4(0.0);
 
     for (int i = 0; i < TRANSMITTANCE_STEPS; ++i) {
-        float newT = ((float(i) + 0.3) / TRANSMITTANCE_STEPS) * dist;
-        float dt = newT - t;
-        t = newT;
+        float t = (float(i) + 0.5) * dt;
+        vec3 x_t = ray_origin + sun_dir * t;
 
-        vec3 samplePos = rayOrigin + sunDir * t;
-        float height = length(samplePos) - fg_EarthRadius;
+        float altitude = length(x_t) - fg_EarthRadius;
 
-        float mieScattering, mieAbsorption;
-        vec3 rayleighScattering, ozoneAbsorption;
-        vec3 extinction = sampleMedium(height, mieScattering, mieAbsorption,
-                                       rayleighScattering, ozoneAbsorption);
+        vec4 aerosol_absorption, aerosol_scattering;
+        vec4 molecular_absorption, molecular_scattering;
+        vec4 extinction;
+        get_atmosphere_collision_coefficients(
+            altitude,
+            aerosol_absorption, aerosol_scattering,
+            molecular_absorption, molecular_scattering,
+            extinction);
 
-        transmittance *= exp(-dt * extinction);
+        result += extinction * dt;
     }
 
+    vec4 transmittance = exp(-result);
     fragColor = transmittance;
 }

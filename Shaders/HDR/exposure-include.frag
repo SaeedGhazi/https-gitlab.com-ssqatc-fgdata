@@ -13,7 +13,7 @@ float log10(float x)
 // http://resources.mpi-inf.mpg.de/hdr/peffects/krawczyk05sccg.pdf
 float keyValue(float L)
 {
-    return 1.03 - 2.0 / (log10(L + 1.0) + 2.0);
+    return 1.0 - 2.0 / (log10(L + 1.0) + 2.0);
 }
 
 vec3 applyExposure(vec3 color, float avgLuminance, float threshold)

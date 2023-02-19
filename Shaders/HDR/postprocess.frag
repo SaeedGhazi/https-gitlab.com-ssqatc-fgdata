@@ -74,6 +74,11 @@ vec3 encodeSRGB(vec3 linearRGB)
     return mix(a, b, c);
 }
 
+float rand2D(vec2 co)
+{
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
 void main()
 {
     vec3 hdrColor = texture(hdr_tex, texCoord).rgb;
@@ -94,6 +99,9 @@ void main()
     // Bloom
     vec3 bloom = texture(bloom_tex, texCoord).rgb;
     color += bloom.rgb * bloom_magnitude;
+
+    // Dithering
+    color += mix(-0.5/255.0, 0.5/255.0, rand2D(texCoord));
 
     fragColor = vec4(color, 1.0);
 }

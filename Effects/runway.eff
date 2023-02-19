@@ -886,4 +886,64 @@
       </alpha-test>
     </pass>
   </technique>
+
+  <technique n="108">
+    <scheme>hdr-geometry</scheme>
+    <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+      </depth>
+      <stencil>
+        <function>always</function>
+        <value>9</value>
+        <pass>replace</pass>
+      </stencil>
+      <texture-unit>
+        <unit>0</unit>
+        <type><use>texture[0]/type</use></type>
+        <image><use>texture[0]/image</use></image>
+        <filter><use>texture[0]/filter</use></filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+      </texture-unit>
+      <texture-unit>
+        <unit>1</unit>
+        <type><use>texture[4]/type</use></type>
+        <image><use>texture[4]/image</use></image>
+        <filter><use>texture[4]/filter</use></filter>
+        <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
+      </texture-unit>
+      <texture-unit>
+        <unit>2</unit>
+        <type>noise</type>
+      </texture-unit>
+      <blend>0</blend>
+      <rendering-hint>opaque</rendering-hint>
+      <cull-face>back</cull-face>
+      <program>
+        <vertex-shader>Shaders/HDR/geometry-runway.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/geometry-runway.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>color_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>normal_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>noise_tex</name>
+        <type>sampler-3d</type>
+        <value type="int">2</value>
+      </uniform>
+    </pass>
+  </technique>
 </PropertyList>

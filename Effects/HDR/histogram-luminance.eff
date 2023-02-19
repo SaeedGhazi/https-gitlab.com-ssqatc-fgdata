@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/adapt-luminance</name>
+  <name>Effects/HDR/histogram-luminance</name>
   <technique n="1">
     <pass>
       <program>
         <vertex-shader>Shaders/HDR/trivial-notexcoord.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/adapt-luminance.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/histogram-luminance.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/histogram-include.frag</fragment-shader>
       </program>
       <uniform>
-        <name>prev_lum_tex</name>
+        <name>histogram_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
       <uniform>
-        <name>current_lum_tex</name>
+        <name>prev_lum_tex</name>
         <type>sampler-2d</type>
         <value type="int">1</value>
       </uniform>

@@ -43,8 +43,17 @@ vec3 evaluateIBL(
     vec3 nWorldSpace,
     float NdotV,
     vec3 reflected);
-vec3 addAerialPerspective(vec3 color, vec2 coord, float depth);
-vec3 getSunIntensity();
+vec3 add_aerial_perspective(vec3 color, vec2 coord, float depth);
+vec3 get_sun_radiance(vec3 p);
+
+vec3 get_contribution_from_scene_lights(
+    vec3 p,
+    vec3 base_color,
+    float metallic,
+    float roughness,
+    vec3 f0,
+    vec3 n,
+    vec3 v);
 
 float GTAOMultiBounce(float x, vec3 albedo)
 {
@@ -81,17 +90,25 @@ void main()
 
     vec3 f0 = getF0Reflectance(baseColor, metallic);
 
-    vec3 sunIlluminance = getSunIntensity() * clamp(NdotL, 0.0, 1.0);
+    vec3 pos_world = (fg_ViewMatrixInverse * vec4(pos, 1.0)).xyz;
+    vec3 sun_radiance = get_sun_radiance(pos_world);
+
     float shadowFactor = getShadowing(pos, n, l, fg_ProjectionMatrix);
 
     vec3 color = evaluateLight(baseColor,
                                metallic,
                                roughness,
                                f0,
-                               sunIlluminance,
+                               sun_radiance,
                                shadowFactor,
                                n, l, v,
                                NdotL, NdotV);
+
+    color += get_contribution_from_scene_lights(pos,
+                                                baseColor,
+                                                metallic,
+                                                roughness,
+                                                f0, n, v);
 
     float ao = occlusion;
     if (ambient_occlusion_enabled) {
@@ -110,7 +127,7 @@ void main()
                          NdotV,
                          worldNormal);
 
-    color = addAerialPerspective(color, texCoord, length(pos));
+    color = add_aerial_perspective(color, texCoord, length(pos));
 
     if (debug_shadow_cascades)
         color *= debugShadowColor(pos, n, l);

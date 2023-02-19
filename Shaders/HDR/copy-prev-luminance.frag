@@ -2,9 +2,9 @@
 
 out float prevLum;
 
-uniform sampler2D lum_tex;
+uniform sampler2D tex;
 
 void main()
 {
-    prevLum = texelFetch(lum_tex, ivec2(0), 0).r;
+    prevLum = texelFetch(tex, ivec2(0), 0).r;
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/copy-prev-luminance</name>
+  <name>Effects/HDR/histogram-aggregate</name>
   <technique n="1">
     <pass>
       <program>
         <vertex-shader>Shaders/HDR/trivial-notexcoord.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/copy-prev-luminance.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/histogram-aggregate.frag</fragment-shader>
       </program>
       <uniform>
-        <name>tex</name>
+        <name>partial_histogram_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>

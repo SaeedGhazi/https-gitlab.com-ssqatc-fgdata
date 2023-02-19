@@ -41,6 +41,7 @@
         <fragment-shader>Shaders/HDR/shadows-include.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/lighting-include.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/aerial-perspective-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/clustered-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>gbuffer0_tex</name>

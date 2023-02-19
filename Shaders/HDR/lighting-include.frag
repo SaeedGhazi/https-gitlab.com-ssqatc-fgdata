@@ -180,6 +180,6 @@ vec3 evaluateLight(
 
     vec3 material = f_diffuse + f_specular;
 
-    vec3 color = material * intensity * visibility;
+    vec3 color = material * intensity * visibility * NdotL;
     return color;
 }

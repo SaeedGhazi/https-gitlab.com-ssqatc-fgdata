@@ -154,4 +154,50 @@
       <vertex-program-two-side>true</vertex-program-two-side>
     </pass>
   </technique>
+
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+  </technique>
+  <technique n="129">
+    <scheme>hdr-forward</scheme>
+    <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+        <write-mask>false</write-mask>
+      </depth>
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image><use>texture[0]/image</use></image>
+        <wrap-s>clamp-to-border</wrap-s>
+        <wrap-t>clamp-to-border</wrap-t>
+      </texture-unit>
+      <blend>1</blend>
+      <rendering-hint>transparent</rendering-hint>
+      <program>
+        <vertex-shader>Shaders/HDR/cloud-static.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/aerial-perspective-include.frag</vertex-shader>
+        <fragment-shader>Shaders/HDR/3dcloud.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>baseTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <!-- Aerial perspective include -->
+      <uniform>
+        <name>aerial_perspective_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <uniform>
+        <name>transmittance_lut</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
+    </pass>
+  </technique>
 </PropertyList>

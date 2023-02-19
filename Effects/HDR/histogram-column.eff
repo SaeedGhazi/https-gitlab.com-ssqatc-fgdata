@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/luminance</name>
+  <name>Effects/HDR/histogram-column</name>
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/luminance.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/trivial-notexcoord.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/histogram-column.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/histogram-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>hdr_tex</name>

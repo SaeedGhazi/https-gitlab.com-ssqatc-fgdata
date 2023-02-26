@@ -168,12 +168,12 @@
     <group restype="x-trolltech-linguist-context" resname="AddOnsController">
       <trans-unit id="_msg33" approved="yes">
         <source xml:space="preserve">Choose aircraft folder</source>
-        <target xml:space="preserve">Wybierz katalog samolotu</target>
+        <target xml:space="preserve">Wybierz katalog statku powietrznego</target>
         <context-group purpose="location"><context context-type="linenumber">137</context></context-group>
       </trans-unit>
       <trans-unit id="_msg34" approved="yes">
         <source xml:space="preserve">No aircraft found in the folder &apos;%1&apos; - add anyway?</source>
-        <target xml:space="preserve">Nie znaleziono samolotu w katalogu &apos;%1&apos; - dodać pomimo tego?</target>
+        <target xml:space="preserve">Nie znaleziono statku powietrznego w katalogu &apos;%1&apos; - dodać pomimo tego?</target>
         <context-group purpose="location"><context context-type="linenumber">161</context></context-group>
       </trans-unit>
       <trans-unit id="_msg35" approved="yes">
@@ -378,7 +378,7 @@
       </trans-unit>
       <trans-unit id="_msg71" approved="yes">
         <source xml:space="preserve">&lt;b&gt;Note:&lt;/b&gt; you have entered arguments relating to the selected aircraft. To prevent problems caused by conflicting settings, the aircraft page will be ignored.</source>
-        <target xml:space="preserve">&lt;b&gt;Uwaga:&lt;/b&gt; wprowadziłeś parametry dotyczące statku powietrznego. Aby zapobiec problemom spowodowanym przez sprzeczne ustawienia, statek powietrzny wybrany na stronie &apos;Samolot&apos; zostanie zignorowany.</target>
+        <target xml:space="preserve">&lt;b&gt;Uwaga:&lt;/b&gt; wprowadziłeś parametry dotyczące statku powietrznego. Aby zapobiec problemom spowodowanym przez sprzeczne ustawienia, statek powietrzny wybrany na stronie &apos;Statek powietrzny&apos; zostanie zignorowany.</target>
         <context-group purpose="location"><context context-type="linenumber">73</context></context-group>
       </trans-unit>
     </group>
@@ -487,7 +487,7 @@
       </trans-unit>
       <trans-unit id="_msg92" approved="yes">
         <source xml:space="preserve">FlightGear supporters maintain a network of servers to enable global multi-user flight. This requires a moderately fast Internet connection to be usable. Your aircraft will be visible to other users online, and you will see their aircraft.</source>
-        <target xml:space="preserve">Osoby wspierające FlightGear utrzymują sieć serwerów aby umożliwić globalny lot wielu użytkowników jednocześniej. To wymaga sprawnego połączenia internetowego. Twój samolot będzie widoczny dla innych użytkowników, a Ty będziesz widział inne samoloty.</target>
+        <target xml:space="preserve">Osoby wspierające FlightGear utrzymują sieć serwerów aby umożliwić globalny lot wielu użytkowników jednocześniej. To wymaga sprawnego połączenia internetowego. Twój statek powietrzny będzie widoczny dla innych użytkowników, a Ty będziesz widział inne statki powietrzne.</target>
         <context-group purpose="location"><context context-type="linenumber">201</context></context-group>
       </trans-unit>
       <trans-unit id="_msg93" approved="yes">
@@ -578,7 +578,7 @@
       </trans-unit>
       <trans-unit id="_msg110" approved="yes">
         <source xml:space="preserve">FlightGear stores downloaded files (scenery and aircraft) in this location. Depending on your settings, it may grow to a considerable size (many gigabytes). If you change the download location, files will need to be downloaded again. When changing this setting, FlightGear will restart to use the new location correctly.</source>
-        <target xml:space="preserve">FlightGear przechowuje pobrane pliki (scenerie i samoloty) w tej lokalizacji. W zależności od Twoich ustawień, mogą zająć dużo miejsca (wiele gigabajtów). Jeśli zmienisz lokalizację pobierania, pliki będą musiały być pobrane ponownie. Jeśli zmieniasz to ustawienie, FlightGear zrestartuje się aby poprawnie użyć nowej lokalizacji.</target>
+        <target xml:space="preserve">FlightGear przechowuje pobrane pliki (scenerie i statki powietrzne) w tej lokalizacji. W zależności od Twoich ustawień, mogą zająć dużo miejsca (wiele gigabajtów). Jeśli zmienisz lokalizację pobierania, pliki będą musiały być pobrane ponownie. Jeśli zmieniasz to ustawienie, FlightGear zrestartuje się aby poprawnie użyć nowej lokalizacji.</target>
         <context-group purpose="location"><context context-type="linenumber">378</context></context-group>
       </trans-unit>
       <trans-unit id="_msg111" approved="yes">
@@ -682,7 +682,7 @@
       </trans-unit>
       <trans-unit id="_msg130" approved="yes">
         <source xml:space="preserve">The selected aircraft is not installed or has updates pending</source>
-        <target xml:space="preserve">Wybrany samolot nie jest zainstalowany lub oczekuje na aktualizację</target>
+        <target xml:space="preserve">Wybrany statek powietrzny nie jest zainstalowany lub oczekuje na aktualizację</target>
         <context-group purpose="location"><context context-type="linenumber">93</context></context-group>
       </trans-unit>
     </group>
@@ -752,7 +752,7 @@
       </trans-unit>
       <trans-unit id="_msg142" approved="yes">
         <source xml:space="preserve">FlightGear can automatically report crashes and errors to the development team, which helps to improve the software for everyone. This reporting is anonymous but contains information such as the aircraft in use, your operating system and graphics driver. You can enable or disable this reporting in the &apos;Settings&apos; page.</source>
-        <target xml:space="preserve">FlightGear może automatycznie raportować błędy i awarie do zespołu programistów, które to pozwalają ulepszyć dla wszystkich to oprogramowanie. Raportowanie jest anonimowe, jedynie może zawierać informacje takie jak użyty samolot/statek powietrzny, Twój system operacyjny oraz sterownik karty graficznej. Możesz włączyć lub wyłączyć to raportowanie na stronie &apos;Ustawienia&apos;.</target>
+        <target xml:space="preserve">FlightGear może automatycznie raportować błędy i awarie do zespołu programistów, które to pozwalają ulepszyć dla wszystkich to oprogramowanie. Raportowanie jest anonimowe, jedynie może zawierać informacje takie jak użyty statek powietrzny, Twój system operacyjny oraz sterownik karty graficznej. Możesz włączyć lub wyłączyć to raportowanie na stronie &apos;Ustawienia&apos;.</target>
         <context-group purpose="location"><context context-type="linenumber">132</context></context-group>
       </trans-unit>
       <trans-unit id="_msg143" approved="yes">
@@ -905,12 +905,12 @@
     <group restype="x-trolltech-linguist-context" resname="AddOns">
       <trans-unit id="_msg170" approved="yes">
         <source xml:space="preserve">Aircraft hangars</source>
-        <target xml:space="preserve">Hangary samolotów</target>
+        <target xml:space="preserve">Hangary statków powietrznych</target>
         <context-group purpose="location"><context context-type="linenumber">55</context></context-group>
       </trans-unit>
       <trans-unit id="_msg171" approved="yes">
         <source xml:space="preserve">Aircraft hangars are managed collections of aircraft, which can be downloaded, installed and updated inside FlightGear.</source>
-        <target xml:space="preserve">Hangary to kolecje samolotów, zarządzane przez FlightGear. Samoloty z hangarów mogą być pobierane, instalowane, aktualizowane i usuwane za pomocą Launchera.</target>
+        <target xml:space="preserve">Hangary to kolekcje statków powietrznych, zarządzane przez FlightGear. Statki powietrzne z hangarów mogą być pobierane, instalowane, aktualizowane i usuwane za pomocą Launchera.</target>
         <context-group purpose="location"><context context-type="linenumber">56</context></context-group>
       </trans-unit>
       <trans-unit id="_msg172" approved="yes">
@@ -920,22 +920,22 @@
       </trans-unit>
       <trans-unit id="_msg173" approved="yes">
         <source xml:space="preserve">Additional aircraft folders</source>
-        <target xml:space="preserve">Dodatkowe katalogi samolotów</target>
+        <target xml:space="preserve">Dodatkowe katalogi statków powietrznych</target>
         <context-group purpose="location"><context context-type="linenumber">207</context></context-group>
       </trans-unit>
       <trans-unit id="_msg174" approved="yes">
         <source xml:space="preserve">To use aircraft you download yourself, FlightGear needs to know the folder(s) containing the aircraft data.</source>
-        <target xml:space="preserve">Aby móc latać samolotem, który pobrałeś samodzielnie, FlightGear musi znać katalog, w którym znajduje się ten samolot.</target>
+        <target xml:space="preserve">Aby móc latać statkiem powietrznym, który pobrałeś samodzielnie, FlightGear musi znać katalog, w którym się on znajduje.</target>
         <context-group purpose="location"><context context-type="linenumber">208</context></context-group>
       </trans-unit>
       <trans-unit id="_msg175" approved="yes">
         <source xml:space="preserve">Remove the aircraft folder: &apos;%1&apos; from the list? (The folder contents will not be changed)</source>
-        <target xml:space="preserve">Czy usunąć katalog samolotu: &apos;%1&apos; z listy? (zawartość katalogu nie zostanie zmieniona)</target>
+        <target xml:space="preserve">Czy usunąć katalog statków powietrznych: &apos;%1&apos; z listy? (zawartość katalogu nie zostanie zmieniona)</target>
         <context-group purpose="location"><context context-type="linenumber">232</context></context-group>
       </trans-unit>
       <trans-unit id="_msg176" approved="yes">
         <source xml:space="preserve">No custom aircraft paths are configured.</source>
-        <target xml:space="preserve">Nie zdefiniowano własnych ścieżek do samolotów.</target>
+        <target xml:space="preserve">Nie zdefiniowano własnych ścieżek do statków powietrznych.</target>
         <context-group purpose="location"><context context-type="linenumber">242</context></context-group>
       </trans-unit>
       <trans-unit id="_msg177" approved="yes">
@@ -960,7 +960,7 @@
       </trans-unit>
       <trans-unit id="_msg181" approved="yes">
         <source xml:space="preserve">Additional aircraft or scenery folders were specified on the command-line. These are not listed here, but will be used when starting the simulator.</source>
-        <target xml:space="preserve">W wierszu poleceń określono dodatkowe foldery samolotów lub scenerii. Nie są one tutaj wymienione, ale zostaną użyte podczas uruchamiania symulatora.</target>
+        <target xml:space="preserve">W wierszu poleceń określono dodatkowe foldery statków powietrznych lub scenerii. Nie są one tutaj wymienione, ale zostaną użyte podczas uruchamiania symulatora.</target>
         <context-group purpose="location"><context context-type="linenumber">195</context></context-group>
       </trans-unit>
       <trans-unit id="_msg182" approved="yes">
@@ -1142,7 +1142,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg213" approved="yes">
         <source xml:space="preserve">Are you sure you want to uninstall this aircraft?</source>
-        <target xml:space="preserve">Czy na pewno chcesz odinstalować ten samolot?</target>
+        <target xml:space="preserve">Czy na pewno chcesz odinstalować ten statek powietrzny?</target>
         <context-group purpose="location"><context context-type="linenumber">193</context></context-group>
       </trans-unit>
     </group>
@@ -1156,7 +1156,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg215" approved="yes">
         <source xml:space="preserve">Installed Aircraft</source>
-        <target xml:space="preserve">Zainstalowane samoloty</target>
+        <target xml:space="preserve">Zainstalowane</target>
         <context-group purpose="location"><context context-type="linenumber">69</context></context-group>
       </trans-unit>
       <trans-unit id="_msg216" approved="yes">
@@ -1186,12 +1186,12 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg221" approved="yes">
         <source xml:space="preserve">Enter text to search aircraft names and descriptions.</source>
-        <target xml:space="preserve">Wpisz tekst aby wyszukać samoloty po nazwie lub opisie.</target>
+        <target xml:space="preserve">Wpisz tekst aby wyszukać statki powietrzne po nazwie lub opisie.</target>
         <context-group purpose="location"><context context-type="linenumber">159</context></context-group>
       </trans-unit>
       <trans-unit id="_msg222" approved="yes">
         <source xml:space="preserve">No aircraft match the search.</source>
-        <target xml:space="preserve">Żaden statek powietrzny nie pasuje do wyszukiwanej frazy.</target>
+        <target xml:space="preserve">Żaden statek powietrzny nie pasuje do wyszukiwanej frazy</target>
         <context-group purpose="location"><context context-type="linenumber">208</context></context-group>
       </trans-unit>
       <trans-unit id="_msg223" approved="yes">
@@ -1230,7 +1230,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg229" approved="yes">
         <source xml:space="preserve">Aircraft are rated by the community based on four critiera, on a scale from one to five. The ratings are designed to help make an informed guess how complete and functional an aircraft is.</source>
-        <target xml:space="preserve">Samoloty są oceniane przez społeczność bazując na czterech kryteriach w skali od 1 do 5. Oceny są tak skonstruowane, aby dostarczały informacji o tym, jak bardzo samolot jest kompletny i funkcjonalny.</target>
+        <target xml:space="preserve">Statki powietrzne są oceniane przez społeczność bazując na czterech kryteriach w skali od 1 do 5. Oceny są tak skonstruowane, aby dostarczały informacji o tym, jak bardzo statek powietrzny jest kompletny i funkcjonalny.</target>
         <context-group purpose="location"><context context-type="linenumber">97</context></context-group>
       </trans-unit>
       <trans-unit id="_msg230" approved="yes">
@@ -1285,7 +1285,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg238" approved="yes">
         <source xml:space="preserve">Remove this hangar? (Downloaded aircraft will be deleted from your computer)</source>
-        <target xml:space="preserve">Czy usunąć ten hangar? (pobrane samoloty zostaną usunięte z tego komputera)</target>
+        <target xml:space="preserve">Czy usunąć ten hangar? (pobrane statki powietrzne zostaną usunięte z tego komputera)</target>
         <context-group purpose="location"><context context-type="linenumber">142</context></context-group>
       </trans-unit>
     </group>
@@ -1328,7 +1328,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg245" approved="yes">
         <source xml:space="preserve">Aircraft &amp; flight information</source>
-        <target xml:space="preserve">Samolot i informacja o locie</target>
+        <target xml:space="preserve">Statek powietrzny i informacje o locie</target>
         <context-group purpose="location"><context context-type="linenumber">86</context></context-group>
       </trans-unit>
       <trans-unit id="_msg246" approved="yes">
@@ -1338,7 +1338,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg247" approved="yes">
         <source xml:space="preserve">Aircraft type:</source>
-        <target xml:space="preserve">Typ samolotu:</target>
+        <target xml:space="preserve">Typ statku powietrznego:</target>
         <context-group purpose="location"><context context-type="linenumber">117</context></context-group>
       </trans-unit>
       <trans-unit id="_msg248" approved="yes">
@@ -1519,7 +1519,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg282" approved="yes">
         <source xml:space="preserve">Aircraft</source>
-        <target xml:space="preserve">Samolot</target>
+        <target xml:space="preserve">Statek&lt;br&gt;powietrzny</target>
         <context-group purpose="location"><context context-type="linenumber">11</context></context-group>
         <context-group purpose="location"><context context-type="linenumber">35</context></context-group>
       </trans-unit>
@@ -1788,12 +1788,12 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg329" approved="yes">
         <source xml:space="preserve">Aircraft:</source>
-        <target xml:space="preserve">Samolot:</target>
+        <target xml:space="preserve">Statek powietrzny:</target>
         <context-group purpose="location"><context context-type="linenumber">145</context></context-group>
       </trans-unit>
       <trans-unit id="_msg330" approved="yes">
         <source xml:space="preserve">No aircraft selected</source>
-        <target xml:space="preserve">Nie wybrano samolotu</target>
+        <target xml:space="preserve">Nie wybrano statku powietrznego</target>
         <context-group purpose="location"><context context-type="linenumber">153</context></context-group>
       </trans-unit>
       <trans-unit id="_msg331" approved="yes">
@@ -1854,7 +1854,7 @@ Lokalna ścieżka: %2</target>
     <group restype="x-trolltech-linguist-context" resname="UpdateAllPanel">
       <trans-unit id="_msg341" approved="yes">
         <source xml:space="preserve">%1 aircraft have updates available - download and install them now?</source>
-        <target xml:space="preserve">Są dostępne aktualizacje dla %1 samolotu/ów. Czy pobrać je i zainstalować teraz?</target>
+        <target xml:space="preserve">Ilość dostępnych aktualizacji statków powietrznych: %1. Czy pobrać i zainstalować je teraz?</target>
         <context-group purpose="location"><context context-type="linenumber">18</context></context-group>
       </trans-unit>
       <trans-unit id="_msg342" approved="yes">
@@ -1909,12 +1909,12 @@ Lokalna ścieżka: %2</target>
     <group restype="x-trolltech-linguist-context" resname="AircraftProxyModel">
       <trans-unit id="_msg350" approved="yes">
         <source xml:space="preserve">(%1 of %2 aircraft)</source>
-        <target xml:space="preserve">(%1 z %2 samolotów)</target>
+        <target xml:space="preserve">(%1 z %2 statków powietrznych)</target>
         <context-group purpose="location"><context context-type="linenumber">94</context></context-group>
       </trans-unit>
       <trans-unit id="_msg351" approved="yes">
         <source xml:space="preserve">(%1 aircraft)</source>
-        <target xml:space="preserve">(%1 samolot)</target>
+        <target xml:space="preserve">(%1 statków powietrznych)</target>
         <context-group purpose="location"><context context-type="linenumber">97</context></context-group>
       </trans-unit>
     </group>
@@ -1995,12 +1995,12 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg363" approved="yes">
         <source xml:space="preserve">Aircraft installation failed</source>
-        <target xml:space="preserve">Nieudana instalacja samolotu</target>
+        <target xml:space="preserve">Nieudana instalacja statku powietrznego</target>
         <context-group purpose="location"><context context-type="linenumber">787</context></context-group>
       </trans-unit>
       <trans-unit id="_msg364" approved="yes">
         <source xml:space="preserve">An error occurred installing the aircraft %1: %2</source>
-        <target xml:space="preserve">Wystąpił błąd podczas instalacji samolotu %1: %2</target>
+        <target xml:space="preserve">Wystąpił błąd podczas instalacji statku powietrznego %1: %2</target>
         <context-group purpose="location"><context context-type="linenumber">788</context></context-group>
       </trans-unit>
       <trans-unit id="_msg365" approved="yes">
@@ -2010,7 +2010,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg366" approved="yes">
         <source xml:space="preserve">Restoring settings to their defaults may affect available add-ons such as scenery or aircraft.</source>
-        <target xml:space="preserve">Przywracanie ustawień do ich domyślnych wartości może wpłynąć na dostępne dodatki takie jak scenerie lub samoloty.</target>
+        <target xml:space="preserve">Przywracanie ustawień do ich domyślnych wartości może wpłynąć na dostępne dodatki takie jak scenerie lub statki powietrzne.</target>
         <context-group purpose="location"><context context-type="linenumber">808</context></context-group>
       </trans-unit>
       <trans-unit id="_msg367" approved="yes">
@@ -2548,7 +2548,7 @@ Lokalna ścieżka: %2</target>
     <group restype="x-trolltech-linguist-context" resname="CatalogRefreshFailedNotification">
       <trans-unit id="_msg460" approved="yes">
         <source xml:space="preserve">The catalog at &apos;%1&apos; failed to download and validate correctly. All aircraft it provides will be unavailable.</source>
-        <target xml:space="preserve">Katalog &apos;%1&apos; nie został poprawnie pobrany i zweryfikowany. Wszystkie znajdujące się tam samoloty będą niedostępne.</target>
+        <target xml:space="preserve">Katalog &apos;%1&apos; nie został poprawnie pobrany i zweryfikowany. Wszystkie znajdujące się tam statki powietrzne będą niedostępne.</target>
         <context-group purpose="location"><context context-type="linenumber">9</context></context-group>
       </trans-unit>
     </group>
@@ -2575,7 +2575,7 @@ Lokalna ścieżka: %2</target>
     <group restype="x-trolltech-linguist-context" resname="DownloadsInDocumentsWarning">
       <trans-unit id="_msg463" approved="yes">
         <source xml:space="preserve">&lt;p&gt;FlightGear previously downloaded aircraft and scenery to a folder within your &apos;Documents&apos; folder. This can cause problems with some security features of Windows, so a new location is now recommended.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;To keep your existing aircraft and scenery downloads, please move the files from &lt;u&gt;&lt;a href=%1&gt;the old location&lt;/a&gt;&lt;/u&gt; to &lt;u&gt;&lt;a href=%2&gt;the new location&lt;/a&gt;&lt;/u&gt;&lt;/p&gt;</source>
-        <target xml:space="preserve">&lt;p&gt;FlightGear poprzednio przechowywał pobierane samoloty i scenerie wewnątrz katalogu &apos;Dokumenty&apos;. Ponieważ może to powodować problemy związane z funkcjami bezpieczeństwa systemu Windows, rekomendujemy nową lokalizację.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Aby zachować pobrane samoloty i scenerie, proszę przenieś pliki z &lt;u&gt;&lt;a href=%1&gt;starej lokalizacji&lt;/a&gt;&lt;/u&gt; do &lt;u&gt;&lt;a href=%2&gt;nowej lokalizacji&lt;/a&gt;&lt;/u&gt;&lt;/p&gt;</target>
+        <target xml:space="preserve">&lt;p&gt;FlightGear poprzednio przechowywał pobierane statki powietrzne i scenerie wewnątrz katalogu &apos;Dokumenty&apos;. Ponieważ może to powodować problemy związane z funkcjami bezpieczeństwa systemu Windows, rekomendujemy nową lokalizację.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Aby zachować pobrane statki powietrzne i scenerie, proszę przenieś pliki z &lt;u&gt;&lt;a href=%1&gt;starej lokalizacji&lt;/a&gt;&lt;/u&gt; do &lt;u&gt;&lt;a href=%2&gt;nowej lokalizacji&lt;/a&gt;&lt;/u&gt;&lt;/p&gt;</target>
         <context-group purpose="location"><context context-type="linenumber">10</context></context-group>
       </trans-unit>
     </group>

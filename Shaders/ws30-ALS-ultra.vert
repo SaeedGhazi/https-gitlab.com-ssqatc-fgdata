@@ -209,8 +209,7 @@ void main()
   // WS2: worldPos = (osg_ViewMatrixInverse *gl_ModelViewMatrix * gl_Vertex).xyz;
   worldPos = fg_modelOffset + gl_Vertex.xyz;
   
-
-  steepness = dot(normalize(vec3(fg_zUpTransform * vec4(gl_Normal,1.0))), vec3 (0.0, 0.0, 1.0));
+  steepness = abs(dot(normalize(vec3(fg_zUpTransform * vec4(gl_Normal,1.0))), vec3 (0.0, 0.0, 1.0)));
   // Gradient direction used for small scale noise. In the same space as noise coords, rawpos.xy.
   grad_dir = normalize(gl_Normal.xy);
   

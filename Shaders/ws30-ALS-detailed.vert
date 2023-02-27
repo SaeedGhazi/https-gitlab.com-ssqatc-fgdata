@@ -120,8 +120,7 @@ void main()
     rawPos = (fg_zUpTransform * gl_Vertex).xy;
     worldPos = fg_modelOffset + gl_Vertex.xyz;
     eyePos = gl_ModelViewMatrix * gl_Vertex;
-    steepness = dot(normalize(vec3(fg_zUpTransform * vec4(gl_Normal,1.0))), vec3 (0.0, 0.0, 1.0));
-
+    steepness = abs(dot(normalize(vec3(fg_zUpTransform * vec4(gl_Normal,1.0))), vec3 (0.0, 0.0, 1.0)));
 
 // this code is copied from default.vert
 
@@ -213,6 +212,8 @@ if (terminator < 1000000.0) // the full, sunrise and sunset computation
     // two times terminator width governs how quickly light fades into shadow
     // now the light-dimming factor
     earthShade = 0.6 * (1.0 - smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt)) + 0.4;
+
+    //earthShade = 1.0;
   
    // parametrized version of the Flightgear ground lighting function
     lightArg = (terminator-yprime_alt)/100000.0;

@@ -102,6 +102,9 @@ uniform vec3 fg_modelOffset;
 // Coastline texture - generated from VPBTechnique
 uniform sampler2D coastline;
 
+// Sand texture
+uniform sampler2D sand;
+
 const float EarthRadius = 5800000.0;
 const float terminator_width = 200000.0;
 
@@ -330,20 +333,37 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
 
   get_landclass_id(tile_coord, dxdy_gc, lc, lc_n, num_unique_neighbors, mfact);
   get_material(lc, ground_tex_coord, dxdy_gc, mat_shininess, mat_ambient, mat_diffuse, mat_specular, dxdy, st);
+  vec4 coast = texture2D(coastline, tile_coord);
 
   if (fg_photoScenery) {
 		texel = texture(landclass, vec2(gl_TexCoord[0].s, 1.0 - gl_TexCoord[0].t));
     water = (texture(coastline, vec2(tile_coord.s, tile_coord.t)).r > 0.1);
+  } else if (coast.g > 0.1) {
+    texel = lookup_ground_texture_array(0, tile_coord, lc, dxdy);
+    water = texture(landclass, vec2(tile_coord.s, tile_coord.t)).z > 0.9;
   } else {
     // Lookup the base texture texel for this fragment and any neighbors, with mixing
     texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
     water = texture(landclass, vec2(tile_coord.s, tile_coord.t)).z > 0.9;
   }
 
-  if ((water_shader == 1) && water) { 
-    // This is a water fragment, so calculate the fragment color procedurally
-    fragColor = generateWaterTexel();
+  float steep = 0.9;
+  float steepToBeach = 0.93;
+  float beachToWater = 0.95;
+  float waterStart = 0.97;
+
+  if ((water_shader == 1) && ((coast.b > 0.05) || (water && steepness < (waterStart + 0.02)))) { 
+
+    // This is a water fragment, so calculate the fragment color procedurally, but mix in the steep and beach
+    vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
+    vec4 beach_texel = texture2D(sand, ground_tex_coord);  // Use the dot texture, which is overloaded to be the beach texture
+    texel = mix(steep_texel, beach_texel, smoothstep(steep, steepToBeach, steepness));
+    fragColor = mix(texel, generateWaterTexel(), smoothstep(beachToWater,waterStart,steepness));    
+
     fragColor.rgb += getClusteredLightsContribution(eyePos.xyz, n, fragColor.rgb);
+  } else if ((water_shader == 1) && water) { 
+    fragColor = generateWaterTexel();
+    fragColor.rgb += getClusteredLightsContribution(eyePos.xyz, n, fragColor.rgb);    
   } else {
     // Photoscenery or land fragment, so determine the shading and color normally
     vec4 color = gl_Color * mat_ambient;

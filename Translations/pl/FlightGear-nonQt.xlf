@@ -16,15 +16,15 @@
       </trans-unit>
       <trans-unit id="menu/aircraft-center:0" approved="yes">
         <source xml:space="preserve">Aircraft Center (Experimental)</source>
-        <target xml:space="preserve">Centrum samolotow (Eksperymentalne)</target>
+        <target xml:space="preserve">Centrum statkow powietrznych (Eksperymentalne)</target>
       </trans-unit>
       <trans-unit id="menu/aircraft-checklists:0" approved="yes">
         <source xml:space="preserve">Aircraft Checklists</source>
-        <target xml:space="preserve">Checklisty samolotu</target>
+        <target xml:space="preserve">Listy kontrolne</target>
       </trans-unit>
       <trans-unit id="menu/aircraft-keys:0" approved="yes">
         <source xml:space="preserve">Aircraft Help</source>
-        <target xml:space="preserve">Dla tego samolotu</target>
+        <target xml:space="preserve">Dla tego statku powietrznego</target>
       </trans-unit>
       <trans-unit id="menu/atc-in-range:0" approved="yes">
         <source xml:space="preserve">ATC Services in Range</source>
@@ -320,7 +320,7 @@
       </trans-unit>
       <trans-unit id="menu/reload-model:0" approved="yes">
         <source xml:space="preserve">Reload Aircraft Model</source>
-        <target xml:space="preserve">Przeladuj model samolotu</target>
+        <target xml:space="preserve">Przeladuj model statku powietrznego</target>
       </trans-unit>
       <trans-unit id="menu/reload-network:0" approved="yes">
         <source xml:space="preserve">Reload Network</source>
@@ -368,7 +368,7 @@
       </trans-unit>
       <trans-unit id="menu/select-livery:0" approved="yes">
         <source xml:space="preserve">Select Livery</source>
-        <target xml:space="preserve">Wybierz malowanie samolotu</target>
+        <target xml:space="preserve">Wybierz malowanie</target>
       </trans-unit>
       <trans-unit id="menu/show-hide-yokes:0" approved="yes">
         <source xml:space="preserve">Show/hide yokes</source>
@@ -478,7 +478,7 @@
       </trans-unit>
       <trans-unit id="options/aero-desc:0" approved="yes">
         <source xml:space="preserve">Select aircraft aerodynamics model to load</source>
-        <target xml:space="preserve">Określ model aerodynamiki samolotu.</target>
+        <target xml:space="preserve">Określ model aerodynamiki statku powietrznego.</target>
       </trans-unit>
       <trans-unit id="options/ai-scenario:0" approved="yes">
         <source xml:space="preserve">Add and enable a new scenario. Multiple options are allowed.</source>
@@ -486,19 +486,19 @@
       </trans-unit>
       <trans-unit id="options/aircraft-desc:0" approved="yes">
         <source xml:space="preserve">Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</source>
-        <target xml:space="preserve">Określ samolot zgodnie z definicją w pliku &lt;nazwa&gt;-set.xml. Plik jest wyszukiwany w $FG_ROOT/Aircraft, w katalogu wskazanym przez zmienną środowiskową $FG_AIRCRAFT oraz w katalogach przekazanych do FlightGear przy użyciu --fg-aircraft.</target>
+        <target xml:space="preserve">Określ statek powietrzny zgodnie z definicją w pliku &lt;nazwa&gt;-set.xml. Plik jest wyszukiwany w $FG_ROOT/Aircraft, w katalogu wskazanym przez zmienną środowiskową $FG_AIRCRAFT oraz w katalogach przekazanych do FlightGear przy użyciu --fg-aircraft.</target>
       </trans-unit>
       <trans-unit id="options/aircraft-dir-desc:0" approved="yes">
         <source xml:space="preserve">Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
-        <target xml:space="preserve">Określ dokładny katalog, który ma być używany dla samolotu (normalnie nie wymagane, ale może być przydatne). Podana ścieżka musi być względna do bieżącego katalogu. Powoduje ominięcie opcji &lt;path-cache&gt; z pliku autosave_x_y.xml, linii komend --fg-aircraft oraz zmiennej środowiskowej $FG_AIRCRAFT.</target>
+        <target xml:space="preserve">Określ dokładny katalog, który ma być używany dla samolstatku powietrznegootu (normalnie nie wymagane, ale może być przydatne). Podana ścieżka musi być względna do bieżącego katalogu. Powoduje ominięcie opcji &lt;path-cache&gt; z pliku autosave_x_y.xml, linii komend --fg-aircraft oraz zmiennej środowiskowej $FG_AIRCRAFT.</target>
       </trans-unit>
       <trans-unit id="options/aircraft-model-options:0" approved="yes">
         <source xml:space="preserve">Aircraft model directory (UIUC FDM ONLY)</source>
-        <target xml:space="preserve">Katalog z modelem samolotu (tylko dla UIUC FDM)</target>
+        <target xml:space="preserve">Katalog z modelem statku powietrznego (tylko dla UIUC FDM)</target>
       </trans-unit>
       <trans-unit id="options/aircraft-options:0" approved="yes">
         <source xml:space="preserve">Aircraft</source>
-        <target xml:space="preserve">Samolot</target>
+        <target xml:space="preserve">Statek powietrzny</target>
       </trans-unit>
       <trans-unit id="options/airport-desc:0" approved="yes">
         <source xml:space="preserve">Specify starting position relative to an airport</source>
@@ -698,7 +698,7 @@
       </trans-unit>
       <trans-unit id="options/download-dir-desc:0" approved="yes">
         <source xml:space="preserve">Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
-        <target xml:space="preserve">Określ katalog jako miejsce dla pobranych samolotów i scenerii (katalog scenerii TerraSync może być określony dodatkowo przez opcję --terrasync-dir).</target>
+        <target xml:space="preserve">Określ katalog jako miejsce dla pobranych statków powietrznych i scenerii (katalog scenerii TerraSync może być określony dodatkowo przez opcję --terrasync-dir).</target>
       </trans-unit>
       <trans-unit id="options/enable-ai-models-desc:0" approved="yes">
         <source xml:space="preserve">Enable AI subsystem (required for multi-player, AI traffic and many other animations)</source>
@@ -850,7 +850,7 @@
       </trans-unit>
       <trans-unit id="options/fg-aircraft-desc:0" approved="yes">
         <source xml:space="preserve">Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</source>
-        <target xml:space="preserve">Określ dodatkowe ścieżki katalogów z samolotami (alternatywnie, możesz uzyć --aircraft-dir aby wskazać określony katalog danego samolotu).</target>
+        <target xml:space="preserve">Określ dodatkowe ścieżki katalogów ze statkami powietrznymi (alternatywnie, możesz uzyć --aircraft-dir aby wskazać określony katalog danego statku powietrznego).</target>
       </trans-unit>
       <trans-unit id="options/fg-root-desc:0" approved="yes">
         <source xml:space="preserve">Specify the root data path</source>
@@ -982,7 +982,7 @@
       </trans-unit>
       <trans-unit id="options/livery-desc:0" approved="yes">
         <source xml:space="preserve">Select aircraft livery</source>
-        <target xml:space="preserve">Wybierz malowanie samolotu.</target>
+        <target xml:space="preserve">Wybierz malowanie statku powietrznego.</target>
       </trans-unit>
       <trans-unit id="options/load-tape-desc:0" approved="yes">
         <source xml:space="preserve">Load recording of earlier flightgear session</source>
@@ -1186,7 +1186,7 @@
       </trans-unit>
       <trans-unit id="options/show-aircraft-desc:0" approved="yes">
         <source xml:space="preserve">Print a list of the currently available aircraft types</source>
-        <target xml:space="preserve">Wypisz listę aktualnie dostępnych typów samolotów.</target>
+        <target xml:space="preserve">Wypisz listę aktualnie dostępnych typów statków powietrznych.</target>
       </trans-unit>
       <trans-unit id="options/show-sound-devices-desc:0" approved="yes">
         <source xml:space="preserve">Show a list of available audio device</source>
@@ -1384,11 +1384,11 @@
       </trans-unit>
       <trans-unit id="sys/loading-aircraft:0" approved="yes">
         <source xml:space="preserve">loading aircraft</source>
-        <target xml:space="preserve">wczytywanie samolotu</target>
+        <target xml:space="preserve">wczytywanie statku powietrznego</target>
       </trans-unit>
       <trans-unit id="sys/loading-aircraft-list:0" approved="yes">
         <source xml:space="preserve">loading aircraft list</source>
-        <target xml:space="preserve">wczytywanie listy samolotów</target>
+        <target xml:space="preserve">wczytywanie listy statków powietrznych</target>
       </trans-unit>
       <trans-unit id="sys/loading-nav-dat:0" approved="yes">
         <source xml:space="preserve">loading navigation data</source>
@@ -1486,7 +1486,7 @@
       </trans-unit>
       <trans-unit id="tips/tip:11" approved="yes">
         <source xml:space="preserve">Select Environment → Weather to fly in different weather</source>
-        <target xml:space="preserve">Wybierz Środowisko → Pogoda aby latać podczas innej pogody</target>
+        <target xml:space="preserve">Wybierz Środowisko → Pogoda aby latać podczas innej pogody</target>
       </trans-unit>
       <trans-unit id="tips/tip:12" approved="yes">
         <source xml:space="preserve">Press F12 to change the radio frequencies easily</source>
@@ -1498,11 +1498,11 @@
       </trans-unit>
       <trans-unit id="tips/tip:14" approved="yes">
         <source xml:space="preserve">Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
-        <target xml:space="preserve">Wybierz Multiplayer → Ustawienia multiplayer aby dołączyć do środowiska wspólnych lotów</target>
+        <target xml:space="preserve">Wybierz Multiplayer → Ustawienia multiplayer aby dołączyć do środowiska wspólnych lotów</target>
       </trans-unit>
       <trans-unit id="tips/tip:15" approved="yes">
         <source xml:space="preserve">Can&apos;t get the engine started? - see Help → Aircraft Checklists</source>
-        <target xml:space="preserve">Nie potrafisz uruchomić silnika? - zobacz Pomoc → Checklisty samolotu</target>
+        <target xml:space="preserve">Nie potrafisz uruchomić silnika? - zobacz Pomoc → Listy kontrolne</target>
       </trans-unit>
       <trans-unit id="tips/tip:16" approved="yes">
         <source xml:space="preserve">Drag while holding the middle and right mouse buttons to move the viewpoint</source>

@@ -1882,7 +1882,7 @@
       </trans-unit>
       <trans-unit id="tips/tip:15" approved="yes">
         <source xml:space="preserve">Can&apos;t get the engine started? - see Help → Aircraft Checklists</source>
-        <target xml:space="preserve">Nie potrafisz uruchomić silnika? - zobacz Pomoc → Checklisty stateku powietrznego</target>
+        <target xml:space="preserve">Nie potrafisz uruchomić silnika? - zobacz Pomoc → Listy kontrolne</target>
       </trans-unit>
       <trans-unit id="tips/tip:16" approved="yes">
         <source xml:space="preserve">Drag while holding the middle and right mouse buttons to move the viewpoint</source>

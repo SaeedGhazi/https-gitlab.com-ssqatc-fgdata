@@ -256,3 +256,67 @@ gui.widgets.PropertyCheckBox = {
 	},
 };
 
+gui.widgets.PropertySlider = {
+	new: func(parent, style = nil, cfg = nil) {
+		style = style or canvas.style;
+		cfg = cfg or {};
+		if (cfg["node"] == nil) {
+			die("Missing configuration 'node' field");
+		}
+		if (!isa(cfg["node"], props.Node)) {
+			cfg["node"] = props.globals.getNode(cfg["node"], 1);
+		}
+		
+		var m = gui.widgets.Slider.new(parent, style, cfg);
+		m._node = cfg["node"];
+
+		append(m.parents, gui.widgets.PropertySlider);
+		
+		m.setValue(m._node.getValue());
+		m.listen("value-changed", func(e) {
+			m._node.setValue(num(e.detail.value));
+		});
+		m._listener = setlistener(m._node, func(n) {
+			m.setValue(n.getValue());
+		}, 1, 0);
+		
+		return m;
+	},
+	
+	del: func {
+		removelistener(me._listener);
+	},
+};
+
+gui.widgets.PropertyDial = {
+	new: func(parent, style = nil, cfg = nil) {
+		style = style or canvas.style;
+		cfg = cfg or {};
+		if (cfg["node"] == nil) {
+			die("Missing configuration 'node' field");
+		}
+		if (!isa(cfg["node"], props.Node)) {
+			cfg["node"] = props.globals.getNode(cfg["node"], 1);
+		}
+		
+		var m = gui.widgets.Dial.new(parent, style, cfg);
+		m._node = cfg["node"];
+
+		append(m.parents, gui.widgets.PropertyDial);
+		
+		m.setValue(m._node.getValue());
+		m.listen("value-changed", func(e) {
+			m._node.setValue(num(e.detail.value));
+		});
+		m._listener = setlistener(m._node, func(n) {
+			m.setValue(n.getValue());
+		}, 1, 0);
+		
+		return m;
+	},
+	
+	del: func {
+		removelistener(me._listener);
+	},
+};
+

@@ -317,6 +317,78 @@
 			<green type="float">0.5</green>
 			<blue type="float">0.5</blue>
 		</slider_ticks>
+
+		<dial_knob_bg>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</dial_knob_bg>
+
+		<dial_knob_bg_backdrop>
+			<red type="float">0.934</red>
+			<green type="float">0.930</green>
+			<blue type="float">0.926</blue>
+		</dial_knob_bg_backdrop>
+
+		<dial_knob_bg_focused>
+			<red type="float">0.966</red>
+			<green type="float">0.962</green>
+			<blue type="float">0.958</blue>
+		</dial_knob_bg_focused>
+
+		<dial_knob_bg_hovered>
+			<red   type="float">0.966</red>
+			<green type="float">0.962</green>
+			<blue  type="float">0.988</blue>
+		</dial_knob_bg_hovered>
+
+		<dial_knob_bg_focused_hovered>
+			<red   type="float">0.986</red>
+			<green type="float">0.982</green>
+			<blue  type="float">0.998</blue>
+		</dial_knob_bg_focused_hovered>
+
+		<dial_knob_bg_disabled>
+			<red type="float">0.89</red>
+			<green type="float">0.89</green>
+			<blue type="float">0.89</blue>
+		</dial_knob_bg_disabled>
+
+		<dial_knob_border>
+			<red type="float">0.6</red>
+			<green type="float">0.6</green>
+			<blue type="float">0.6</blue>
+		</dial_knob_border>
+
+		<dial_knob_border_hovered>
+			<red type="float">0.65</red>
+			<green type="float">0.65</green>
+			<blue type="float">0.65</blue>
+		</dial_knob_border_hovered>
+
+		<dial_knob_border_focused>
+			<red type="float">0.83</red>
+			<green type="float">0.54</green>
+			<blue type="float">0.43</blue>
+		</dial_knob_border_focused>
+
+		<dial_knob_border_focused_hovered>
+			<red type="float">0.79</red>
+			<green type="float">0.41</green>
+			<blue type="float">0.25</blue>
+		</dial_knob_border_focused_hovered>
+
+		<dial_knob_border_disabled>
+			<red type="float">0.71</red>
+			<green type="float">0.71</green>
+			<blue type="float">0.71</blue>
+		</dial_knob_border_disabled>
+
+		<dial_ticks>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</dial_ticks>
 	</colors>
 
 	<sizes>

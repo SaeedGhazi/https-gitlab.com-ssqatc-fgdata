@@ -1,11 +1,21 @@
 var testDialog = {
   
-  shape : func(cDefaultGroup) {
+  shape: func(cDefaultGroup) {
     cDefaultGroup.createChild("path")
                  .setColorFill(0,0,0)
                  .setColor(0,0,0);
   },
-  create_tbl : func(needle_tbl) {
+  label: func(cDefaultGroup,desc,posx,posy,rot=0) {
+    cDefaultGroup.createChild("text", desc)
+                  .setRotation(rot*0.0174532925)
+                  .setTranslation(posx,posy)
+                  .setAlignment("center-top")
+                  .setFont("typewriter.txf")
+                  .setFontSize(40,1.5)
+                  .setColor(0,0,0)
+                  .setText(desc);
+  },
+  create_tbl: func(needle_tbl) {
     # hash table for needle positions
     for (var i=1; i<21; i = i+1) {
         var r0 = 150; var r1 = 350;
@@ -182,6 +192,11 @@ var testDialog = {
     testDialog.create_tbl(needle_tbl);
     var needles = testDialog.shape(cDefaultGroup);
     testDialog.draw_vario(needles,needle_tbl,400,500);
+
+    testDialog.label(cDefaultGroup,"TOP",400,5,0.0);
+    testDialog.label(cDefaultGroup,"LEFT",5,500,-90.0);
+    testDialog.label(cDefaultGroup,"RIGHT",795,500,90.0);
+    testDialog.label(cDefaultGroup,"BOTTOM",400,995,180.0);
  
     return m;
   },

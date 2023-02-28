@@ -82,7 +82,7 @@
 
     <nasal>
         <cam>
-            <file>Aircraft/ufo/cam.nas</file>
+            <file>Aircraft/ufo/Nasal/cam.nas</file>
         </cam>
     </nasal>
 

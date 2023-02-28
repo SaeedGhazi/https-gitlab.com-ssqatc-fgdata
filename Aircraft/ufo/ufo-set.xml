@@ -127,6 +127,23 @@
 			</config>
 		</view>
 
+		<menubar>
+			<default>
+				<menu n="100">
+				<label>UFO</label>
+					<item>
+						<label>Show Test Pattern</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							canvas_test_pattern.testDialog.new();
+							</script>
+						</binding>
+					</item>
+				</menu>
+			</default>
+		</menubar>
+
 		<help>
 			<title>UFO</title>
 			<key>
@@ -627,12 +644,15 @@
 
 	<nasal>
 		<ufo>
-			<file>Aircraft/ufo/ufo.nas</file>
+			<file>Aircraft/ufo/Nasal/ufo.nas</file>
 		</ufo>
 
 		<aar>
 			<file>Aircraft/Generic/aar.nas</file>
 		</aar>
+		<canvas_test_pattern>
+			<file>Aircraft/ufo/Nasal/canvas_test_pattern.nas</file>
+		</canvas_test_pattern>
 	</nasal>
 
 	<systems>

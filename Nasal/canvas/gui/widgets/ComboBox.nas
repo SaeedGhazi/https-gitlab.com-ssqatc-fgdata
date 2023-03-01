@@ -115,7 +115,9 @@ gui.widgets.ComboBox = {
     el.addEventListener("click", func(e) {
       if (me._enabled) {
         me.setDown(!me._down);
-        me._openMenu(e.screenX - e.localX, e.screenY - e.localY + me._size[1]);
+        if (me._down) {
+          me._openMenu(e.screenX - e.localX, e.screenY - e.localY + me._size[1]);
+        }
       }
     });
   },

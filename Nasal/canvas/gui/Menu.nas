@@ -39,6 +39,7 @@ gui.MenuItem = {
                 m._menu = nil;
                 m._parent_menu = nil;
                 m._is_menubar_item = 0;
+                m._mouseOver = 0;
 
                 m._setView(style.createWidget(parent, cfg.get("type", "menu-item"), cfg));
 
@@ -70,12 +71,18 @@ gui.MenuItem = {
                 }
                 me._unsetOthersHovered();
                 if (me._is_menubar_item and me._enabled) {
-                        me._hovered = 1;
-                        me.update();
-                        var x = e.screenX - e.localX;
-                        var y = e.screenY - e.localY;
-                        me._showMenu(x, y);
-                } elsif (me._parent_menu != nil) {
+                        if (!me._menu.isVisible()) {
+                                me._hovered = 1;
+                                me.update();
+                                var x = e.screenX - e.localX;
+                                var y = e.screenY - e.localY;
+                                me._showMenu(x, y);
+                        } else {
+                        	me._hovered = 0;
+                        	me.update();
+                                me._hideMenu();
+                        }
+                } elsif (me._parent_menu != nil and me._menu == nil) {
                         me._hovered = 0;
                         me.update();
                         me._parent_menu.hide();
@@ -99,6 +106,7 @@ gui.MenuItem = {
                         any_hovered |= me._parent_menu._layout.itemAt(i)._hovered;
                 }
                 me._unsetOthersHovered();
+                me._mouseOver = 1;
                 if ((!me._is_menubar_item or any_hovered) and me._enabled) {
                         me._hovered = 1;
                         me.update();
@@ -109,6 +117,7 @@ gui.MenuItem = {
         },
 
         onMouseLeave: func(e) {
+                me._mouseOver = 0;
                 if (me._menu == nil) {
                         me._hovered = 0;
                 }
@@ -132,18 +141,14 @@ gui.MenuItem = {
                         } elsif (me._menu_position == gui.MenuItem.MenuPosition.Left) {
                                 pos = [x - me._menu.getSize()[0], y];
                         }
-                        me._menu.setPosition(pos[0], pos[1]);
-                        me._menu.show();
+                        me._menu.show(pos[0], pos[1]);
                 }
-                me._hovered = 1;
         },
 
         _hideMenu: func {
                 if (me._menu) {
-                        me._menu.clearFocus();
-                        me._menu.hide();
+                        me._menu.hide(1);
                 }
-                me._hovered = 0;
         },
 
         setEnabled: func(enabled = 1) {
@@ -378,12 +383,22 @@ gui.Menu = {
 		append(gui.open_popups, me);
         },
 
-        hide: func {
+        # @description Hide the menu (force should only be set to 1 from within the click handler of menu items)
+        hide: func(force=0) {
                 if (me._parent_item != nil) {
-                        me._parent_item._hovered = 0;
-                        me._parent_item.update();
+                        if (
+                                force or
+                                me._parent_item._parent_menu == nil or
+                                me._parent_item._parent_menu._view._root._node.getValue("id") != "menu-bar" or
+                                me._parent_item._mouseOver == 0
+                        ) {
+                                me._parent_item._hovered = 0;
+                                me._parent_item.update();
+                                call(me.parents[1].hide, [], me);
+                        }
+                } else {
+                        call(me.parents[1].hide, [], me);
                 }
-                call(me.parents[1].hide, [], me);
         },
 
         # @description Destructor

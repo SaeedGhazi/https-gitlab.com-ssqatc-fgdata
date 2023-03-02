@@ -44,25 +44,25 @@ To install this instrument into your aircraft, you need to do the following:
 	<condition>
 		<and>
 			<greater-than>
-				<property>/instrumentation/s3/te-reading-mps</property>
+				<property>instrumentation/s3/te-reading-mps</property>
 				<value>0.01</value>
 			</greater-than>
 			<greater-than-equals>
-				<property>/systems/electrical/outputs/S3</property>
+				<property>systems/electrical/outputs/S3</property>
 				<value>9</value>
 			</greater-than-equals>
 			<equals>
-				<property>/instrumentation/s3/start</property>
+				<property>instrumentation/s3/start</property>
 				<value>1.0</value>
 			</equals>
 		</and>
 	</condition>
 	<pitch>
-		<property>/instrumentation/s3/sound-pitch</property>
+		<property>instrumentation/s3/sound-pitch</property>
 		<offset>0</offset>
 	</pitch>
 	<volume>
-		<property>/instrumentation/s3/volume</property>
+		<property>instrumentation/s3/volume</property>
 		<factor>1</factor>
 		<max>1</max>
 	</volume>
@@ -83,29 +83,29 @@ To install this instrument into your aircraft, you need to do the following:
 	<condition>
 		<and>
 			<greater-than>
-				<property>/instrumentation/s3/te-reading-mps</property>
+				<property>instrumentation/s3/te-reading-mps</property>
 				<value>-10.00</value>
 			</greater-than>
 			<less-than>
-				<property>/instrumentation/s3/te-reading-mps</property>
+				<property>instrumentation/s3/te-reading-mps</property>
 				<value>-0.01</value>
 			</less-than>
 			<greater-than-equals>
-				<property>/systems/electrical/outputs/S3</property>
+				<property>systems/electrical/outputs/S3</property>
 				<value>9</value>
 			</greater-than-equals>
 			<equals>
-				<property>/instrumentation/s3/start</property>
+				<property>instrumentation/s3/start</property>
 				<value>1.0</value>
 			</equals>
 		</and>
 	</condition>
 	<pitch>
-		<property>/instrumentation/s3/sound-pitch</property>
+		<property>instrumentation/s3/sound-pitch</property>
 		<offset>0</offset>
 	</pitch>
 	<volume>
-		<property>/instrumentation/s3/volume</property>
+		<property>instrumentation/s3/volume</property>
 		<factor>1</factor>
 		<max>1</max>
 	</volume>

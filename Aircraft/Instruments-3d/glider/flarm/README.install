@@ -47,11 +47,11 @@ To install this instrument into your aircraft, you need to do the following:
 	<condition>
 		<and>
 			<greater-than>
-				<property>/systems/electrical/outputs/flarm</property>
+				<property>systems/electrical/outputs/flarm</property>
 				<value>9</value>
 			</greater-than>
 			<equals>
-				<property>/instrumentation/flarm/new-contact</property>
+				<property>instrumentation/flarm/new-contact</property>
 				<value>0</value>
 			</equals>
 		</and>
@@ -70,11 +70,11 @@ To install this instrument into your aircraft, you need to do the following:
 	<condition>
 		<and>
 			<greater-than>
-				<property>/systems/electrical/outputs/flarm</property>
+				<property>systems/electrical/outputs/flarm</property>
 				<value>9</value>
 			</greater-than>
 			<equals>
-				<property>/instrumentation/flarm/new-contact</property>
+				<property>instrumentation/flarm/new-contact</property>
 				<value>1</value>
 			</equals>
 		</and>
@@ -94,11 +94,11 @@ To install this instrument into your aircraft, you need to do the following:
 	<condition>
 		<and>
 			<greater-than>
-				<property>/systems/electrical/outputs/flarm</property>
+				<property>systems/electrical/outputs/flarm</property>
 				<value>9</value>
 			</greater-than>
 			<equals>
-				<property>/instrumentation/flarm/warn</property>
+				<property>instrumentation/flarm/warn</property>
 				<value>1</value>
 			</equals>
 		</and>
@@ -118,11 +118,11 @@ To install this instrument into your aircraft, you need to do the following:
 	<condition>
 		<and>
 			<greater-than>
-				<property>/systems/electrical/outputs/flarm</property>
+				<property>systems/electrical/outputs/flarm</property>
 				<value>9</value>
 			</greater-than>
 			<equals>
-				<property>/instrumentation/flarm/warn</property>
+				<property>instrumentation/flarm/warn</property>
 				<value>2</value>
 			</equals>
 		</and>

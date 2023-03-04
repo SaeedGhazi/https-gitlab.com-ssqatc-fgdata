@@ -4,6 +4,7 @@
 /*** Input *******************/
 in vec2 pos;
 in vec2 textureUV;
+uniform mat4 sh_View;
 uniform mat4 sh_Model;
 uniform mat4 sh_Ortho;
 uniform mat3 paintInverted;

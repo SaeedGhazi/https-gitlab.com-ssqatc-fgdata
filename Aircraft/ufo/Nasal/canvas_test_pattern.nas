@@ -1,20 +1,24 @@
 var testDialog = {
-  
-  shape: func(cDefaultGroup) {
-    cDefaultGroup.createChild("path")
-                 .setColorFill(0,0,0)
-                 .setColor(0,0,0);
+
+  cDefaultGroup : 0,
+
+  shape: func() {
+    me.cDefaultGroup.createChild("path")
+                    .setColorFill(0,0,0)
+                    .setColor(0,0,0);
+  },   
+
+  label: func(desc,posx,posy,rot=0) {
+    me.cDefaultGroup.createChild("text", desc)
+                    .setRotation(rot*0.0174532925)
+                    .setTranslation(posx,posy)
+                    .setAlignment("center-top")
+                    .setFont("typewriter.txf")
+                    .setFontSize(40,1.5)
+                    .setColor(0,0,0)
+                    .setText(desc);
   },
-  label: func(cDefaultGroup,desc,posx,posy,rot=0) {
-    cDefaultGroup.createChild("text", desc)
-                  .setRotation(rot*0.0174532925)
-                  .setTranslation(posx,posy)
-                  .setAlignment("center-top")
-                  .setFont("typewriter.txf")
-                  .setFontSize(40,1.5)
-                  .setColor(0,0,0)
-                  .setText(desc);
-  },
+
   create_tbl: func(needle_tbl) {
     # hash table for needle positions
     for (var i=1; i<21; i = i+1) {
@@ -142,6 +146,7 @@ var testDialog = {
       needles.close();
     }
   },
+
   new: func(width=400,height=500)
   {
     var m = {
@@ -161,43 +166,52 @@ var testDialog = {
 
     m._dlg.setCanvas(cDisplay);
 
-    var cDefaultGroup = cDisplay.createGroup();
+    me.cDefaultGroup = cDisplay.createGroup();
 
-    var arrow = testDialog.shape(cDefaultGroup);
+    var arrow = testDialog.shape();
     arrow.moveTo(0,0);
     arrow.lineTo(400,550);
     arrow.lineTo(400,500);
     arrow.lineTo(450,500);
     arrow.close();
 
-    var sqbl = testDialog.shape(cDefaultGroup);
+    var sqbl = testDialog.shape();
     sqbl.moveTo(0,1000);
     sqbl.lineTo(20,900);
     sqbl.lineTo(100,980);
     sqbl.close();
 
-    var sqbr = testDialog.shape(cDefaultGroup);
+    var sqbr = testDialog.shape();
     sqbr.moveTo(800,1000);
     sqbr.lineTo(780,900);
     sqbr.lineTo(700,980);
     sqbr.close();
 
-    var sqtr = testDialog.shape(cDefaultGroup);
+    var sqtr = testDialog.shape();
     sqtr.moveTo(800,0);
     sqtr.lineTo(780,100);
     sqtr.lineTo(700,20);
     sqtr.close();
-
-    var needle_tbl = [[0,0,0,0,0,0,0,0,0,0]];
-    testDialog.create_tbl(needle_tbl);
-    var needles = testDialog.shape(cDefaultGroup);
-    testDialog.draw_vario(needles,needle_tbl,400,500);
-
-    testDialog.label(cDefaultGroup,"TOP",400,5,0.0);
-    testDialog.label(cDefaultGroup,"LEFT",5,500,-90.0);
-    testDialog.label(cDefaultGroup,"RIGHT",795,500,90.0);
-    testDialog.label(cDefaultGroup,"BOTTOM",400,995,180.0);
  
     return m;
   },
+
+  update : func()
+  {
+    var needle_tbl = [[0,0,0,0,0,0,0,0,0,0]];
+    testDialog.create_tbl(needle_tbl);
+    var needles = testDialog.shape();
+    testDialog.draw_vario(needles,needle_tbl,400,500);
+
+    testDialog.label("TOP",400,5,0.0);
+    testDialog.label("LEFT",5,500,-90.0);
+    testDialog.label("RIGHT",795,500,90.0);
+    testDialog.label("BOTTOM",400,995,180.0);
+  }
 };
+
+var rtimer = maketimer(0.2, func {
+  testDialog.update();
+});
+rtimer.start();
+testDialog.new();

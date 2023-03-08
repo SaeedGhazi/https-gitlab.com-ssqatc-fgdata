@@ -1,7 +1,5 @@
 // -*-C++-*-
-#version 330
-
-/*** Enum constans ************************************/
+#version 330 core
 
 #define PAINT_TYPE_COLOR            0x1B00
 #define PAINT_TYPE_LINEAR_GRADIENT  0x1B01
@@ -14,40 +12,19 @@
 #define DRAW_MODE_PATH              0
 #define DRAW_MODE_IMAGE             1
 
-/*** Interpolated *************************************/
-
 in vec2 texImageCoord;
 in vec2 paintCoord;
 
-/*** Input ********************************************/
-
-// Basic rendering Mode
 uniform int drawMode;
-// Image
 uniform sampler2D imageSampler;
 uniform int imageMode;
-// Paint
 uniform int paintType;
 uniform vec4 paintColor;
 uniform vec2 paintParams[3];
-// Gradient
 uniform sampler2D rampSampler;
-// Pattern
 uniform sampler2D patternSampler;
-// Color transform
 uniform vec4 scaleFactorBias[2];
 
-/*** Output *******************************************/
-
-//out vec4 fragColor;
-
-/*** Built-in variables for shMain *******************************************/
-
-vec4 sh_Color;
-
-/*** Functions ****************************************/
-
-// 9.3.1 Linear Gradients
 float linearGradient(vec2 fragCoord, vec2 p0, vec2 p1){
 
     float x  = fragCoord.x;
@@ -64,7 +41,6 @@ float linearGradient(vec2 fragCoord, vec2 p0, vec2 p1){
      /  ( dx*dx + dy*dy );
 }
 
-// 9.3.2 Radial Gradients
 float radialGradient(vec2 fragCoord, vec2 centerCoord, vec2 focalCoord, float r){
 
     float x   = fragCoord.x;
@@ -83,16 +59,10 @@ float radialGradient(vec2 fragCoord, vec2 centerCoord, vec2 focalCoord, float r)
      /  ( r*r - (dfx*dfx + dfy*dfy) );
 }
 
-// User defined shader
-void shMain(void);
-
-/*** Main thread  *************************************/
-
 void main()
 {
     vec4 col;
 
-    /* Stage 6: Paint Generation */
     switch(paintType){
     case PAINT_TYPE_LINEAR_GRADIENT:
         {
@@ -125,15 +95,10 @@ void main()
         break;
     }
 
-    /* Stage 7: Image Interpolation */
     if(drawMode == DRAW_MODE_IMAGE) {
         col = texture(imageSampler, texImageCoord)
                   * (imageMode == DRAW_IMAGE_MULTIPLY ? col : vec4(1.0, 1.0, 1.0, 1.0));
     }
 
-    /* Stage 8: Color Transformation, Blending, and Antialiasing */
-    sh_Color = col * scaleFactorBias[0] + scaleFactorBias[1] ;
-
-    /* Extended Stage: User defined shader that affects gl_FragColor */
-    shMain();
+    gl_FragColor = col * scaleFactorBias[0] + scaleFactorBias[1];
 }

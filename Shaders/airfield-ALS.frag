@@ -10,7 +10,6 @@ varying vec3 worldPos;
 varying vec2 rawPos;
 varying vec3 ecViewdir;
 varying vec4 ecPosition;
-varying vec2 orthoTexCoord;
 
 
 uniform sampler2D texture;
@@ -170,7 +169,7 @@ float noise_2000m = Noise3D(worldPos.xyz, 2000.0);
     float local_autumn_factor = texel.a;
 
     if (orthophotoAvailable) {
-        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        vec4 sat_texel = texture2D(orthophotoTexture, gl_TexCoord[2].st);
         if (sat_texel.a > 0) {
             texel.rgb = sat_texel.rgb;
         }

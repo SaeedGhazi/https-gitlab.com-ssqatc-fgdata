@@ -10,7 +10,6 @@ varying vec2 rawPos;
 varying vec3 worldPos;
 varying vec3 ecViewdir;
 varying vec2 grad_dir;
-varying vec2 orthoTexCoord;
 varying vec4 ecPosition;
 
 
@@ -244,7 +243,7 @@ float snownoise_50m = mix(noise_50m, slopenoise_100m, clamp(3.0*(1.0-steepness),
     float local_autumn_factor = texel.a;
 
 	if (orthophotoAvailable) {
-        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        vec4 sat_texel = texture2D(orthophotoTexture, gl_TexCoord[2].st);
         if (sat_texel.a > 0) {
             texel.rgb = sat_texel.rgb;
 			flag = 0;

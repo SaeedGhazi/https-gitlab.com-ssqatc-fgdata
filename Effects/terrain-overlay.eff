@@ -169,10 +169,6 @@
         <fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
         <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
-        <attribute>
-          <name>orthophotoTexCoord</name>
-          <index>14</index>
-        </attribute>
       </program>
 	  <uniform>
         <name>grain_strength</name>

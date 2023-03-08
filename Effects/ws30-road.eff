@@ -233,11 +233,6 @@
 					    <name>binormal</name>
 					    <index>7</index>
 				</attribute>
-				<attribute>
-				<name>orthophotoTexCoord</name>
-				<index>14</index>
-				</attribute>
-				
 			   </program>
 			   
 			   <uniform>

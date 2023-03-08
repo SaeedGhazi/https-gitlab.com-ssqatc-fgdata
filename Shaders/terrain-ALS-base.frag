@@ -14,7 +14,6 @@ uniform sampler2D orthophotoTexture;
 
 varying float yprime_alt;
 varying float mie_angle;
-varying vec2 orthoTexCoord;
 varying vec4 ecPosition;
 
 
@@ -94,7 +93,7 @@ void main()
     texel = texture2D(texture, gl_TexCoord[0].st);
 
 	if (orthophotoAvailable) {
-        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        vec4 sat_texel = texture2D(orthophotoTexture, gl_TexCoord[2].st);
         if (sat_texel.a > 0) {
             texel.rgb = sat_texel.rgb;
         }

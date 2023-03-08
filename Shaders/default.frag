@@ -5,7 +5,6 @@
 
 varying vec4 diffuse_term;
 varying vec3 normal;
-varying vec2 orthoTexCoord;
 varying vec4 ecPosition;
 
 uniform sampler2D texture;
@@ -62,7 +61,7 @@ void main()
     texel = texture2D(texture, gl_TexCoord[0].st);
 
     if (orthophotoAvailable) {
-        vec4 sat_texel = texture2D(orthophotoTexture, orthoTexCoord);
+        vec4 sat_texel = texture2D(orthophotoTexture, gl_TexCoord[2].st);
         if (sat_texel.a > 0) {
             texel.rgb = sat_texel.rgb;
         }

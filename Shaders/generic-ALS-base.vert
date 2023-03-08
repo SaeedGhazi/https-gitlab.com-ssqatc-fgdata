@@ -15,8 +15,6 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
-attribute vec2 orthophotoTexCoord;
-
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
@@ -24,7 +22,6 @@ attribute vec2 orthophotoTexCoord;
 varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec3 relPos;
-varying vec2 orthoTexCoord;
 varying vec4 ecPosition;
 
 varying float yprime_alt;
@@ -81,7 +78,7 @@ void main()
     ecPosition = gl_ModelViewMatrix * gl_Vertex;
     gl_Position = ftransform();
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-    orthoTexCoord = orthophotoTexCoord;
+    gl_TexCoord[2] = gl_TextureMatrix[2] * gl_MultiTexCoord2;
     normal = gl_NormalMatrix * gl_Normal;
     vec4 ambient_color, diffuse_color;
     if (colorMode == MODE_DIFFUSE) {

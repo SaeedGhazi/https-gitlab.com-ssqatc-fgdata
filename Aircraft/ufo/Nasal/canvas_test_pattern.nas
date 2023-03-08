@@ -214,4 +214,4 @@ var rtimer = maketimer(0.2, func {
   testDialog.update();
 });
 rtimer.start();
-testDialog.new();
+#testDialog.new();

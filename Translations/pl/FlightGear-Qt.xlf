@@ -2079,7 +2079,7 @@ Lokalna ścieżka: %2</target>
     <group restype="x-trolltech-linguist-context" resname="UpdateAllPanel">
       <trans-unit id="_msg375" approved="yes">
         <source xml:space="preserve">%1 aircraft have updates available - download and install them now?</source>
-        <target xml:space="preserve">Ilość dostępnych aktualizacji statków powietrznych: 1. Czy pobrać i zainstalować je teraz?</target>
+        <target xml:space="preserve">Ilość dostępnych aktualizacji statków powietrznych: %1. Czy pobrać i zainstalować je teraz?</target>
         <context-group purpose="location"><context context-type="linenumber">18</context></context-group>
       </trans-unit>
       <trans-unit id="_msg376" approved="yes">

@@ -228,37 +228,76 @@ var complete = func(node, wait, from = nil)
 	
     foreach (var index; node.getChildren("index")) {
         var checklist = checklists_node.getChild("checklist", index.getValue());
-        foreach (var item; checklist.getChildren("item")) {
-            var condition = item.getNode("condition");
-            if (skipping) {
-                if (!item.equals(from)) {
-                    previous_condition = condition;
-                    continue;
-                }
-                skipping = 0;
-            }
-            if (wait) {
-                if (props.condition(previous_condition)) {
-                    reset_timeout();
-                } else {
-                    if (timed_out()) {
-                        var title = checklist.getNode("title").getValue();
-                        announce(title~": "~timeout_message.getValue());
-                    } else {
-                        wait_for_completion(node: node, from: item);
-                    }
-                    return;
-                }
-            }
-            if (!props.condition(condition)) {
-                foreach (var binding; item.getChildren("binding")) {
-                    active.setValue(1);
-                    props.runBinding(binding);
-                    active.setValue(0);
-                }
-            }
-            previous_condition = condition;
-        }
+	  if( size( checklist.getChildren("page") ) > 0 ){
+		foreach( var page; checklist.getChildren("page") ){
+			foreach (var item; page.getChildren("item")) {
+				var condition = item.getNode("condition");
+				if (skipping) {
+					if (!item.equals(from)) {
+						previous_condition = condition;
+						continue;
+					}
+					skipping = 0;
+				}
+				if (wait) {
+					if (props.condition(previous_condition)) {
+						reset_timeout();
+					} else {
+						if (timed_out()) {
+							var title = checklist.getNode("title").getValue();
+							announce(title~": "~timeout_message.getValue());
+						} else {
+							wait_for_completion(node: node, from: item);
+						}
+						return;
+					}
+				}
+				if (!props.condition(condition)) {
+					foreach (var binding; item.getChildren("binding")) {
+						active.setValue(1);
+						props.runBinding(binding);
+						active.setValue(0);
+					}
+				}
+				previous_condition = condition;
+			}
+
+		}
+
+	 } else {
+		foreach (var item; checklist.getChildren("item")) {
+			var condition = item.getNode("condition");
+			if (skipping) {
+			if (!item.equals(from)) {
+				previous_condition = condition;
+				continue;
+			}
+			skipping = 0;
+			}
+			if (wait) {
+			if (props.condition(previous_condition)) {
+				reset_timeout();
+			} else {
+				if (timed_out()) {
+					var title = checklist.getNode("title").getValue();
+					announce(title~": "~timeout_message.getValue());
+				} else {
+					wait_for_completion(node: node, from: item);
+				}
+				return;
+			}
+			}
+			if (!props.condition(condition)) {
+			foreach (var binding; item.getChildren("binding")) {
+				active.setValue(1);
+				props.runBinding(binding);
+				active.setValue(0);
+			}
+			}
+			previous_condition = condition;
+		}
+	 }
+
     }
     if (wait) {
         announce(completed_message.getValue());

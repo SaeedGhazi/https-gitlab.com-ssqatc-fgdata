@@ -315,7 +315,7 @@
             <visible>
                 <property>/sim/multiplay/online</property>
             </visible>
-            <row>7</row>
+            <row>8</row>
             <col>1</col>
             <halign>left</halign>
             <label>MMMMMMMMMMMMMMMMM</label>

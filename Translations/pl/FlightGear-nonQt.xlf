@@ -490,7 +490,7 @@
       </trans-unit>
       <trans-unit id="options/aircraft-dir-desc:0" approved="yes">
         <source xml:space="preserve">Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
-        <target xml:space="preserve">Określ dokładny katalog, który ma być używany dla samolstatku powietrznegootu (normalnie nie wymagane, ale może być przydatne). Podana ścieżka musi być względna do bieżącego katalogu. Powoduje ominięcie opcji &lt;path-cache&gt; z pliku autosave_x_y.xml, linii komend --fg-aircraft oraz zmiennej środowiskowej $FG_AIRCRAFT.</target>
+        <target xml:space="preserve">Określ dokładny katalog, który ma być używany dla statku powietrznego (normalnie nie wymagane, ale może być przydatne). Podana ścieżka musi być względna do bieżącego katalogu. Powoduje ominięcie opcji &lt;path-cache&gt; z pliku autosave_x_y.xml, linii komend --fg-aircraft oraz zmiennej środowiskowej $FG_AIRCRAFT.</target>
       </trans-unit>
       <trans-unit id="options/aircraft-model-options:0" approved="yes">
         <source xml:space="preserve">Aircraft model directory (UIUC FDM ONLY)</source>

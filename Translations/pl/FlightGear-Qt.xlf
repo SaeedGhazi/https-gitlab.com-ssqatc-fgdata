@@ -1885,7 +1885,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg338" approved="yes">
         <source xml:space="preserve">FlightGear can automatically download scenery as needed, and check for updates to the scenery. If you disable this option, you will need to download &amp; install scenery using an alternative method.</source>
-        <target xml:space="preserve">FlightGear może pobierać automatycznie scenerię, kiedy to jest potrzebne i sprawdzać aktualizację scenerii. Jeśli wyłączysz tą opcje, będziesz potrzebował pobrać i zainstalować scenerię używając alternatywnych metod.</target>
+        <target xml:space="preserve">FlightGear może automatycznie pobierać i aktualizować scenerię, kiedy jest to potrzebne. Jeśli wyłączysz tę opcję, wtedy musisz samodzielnie zainstalować scenerię używając innych metod.</target>
         <context-group purpose="location"><context context-type="linenumber">329</context></context-group>
       </trans-unit>
       <trans-unit id="_msg339" approved="yes">

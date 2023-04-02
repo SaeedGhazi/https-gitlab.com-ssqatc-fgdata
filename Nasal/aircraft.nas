@@ -349,36 +349,39 @@ var data = {
 		me.path = getprop("/sim/fg-home") ~ "/aircraft-data/" ~ getprop("/sim/aircraft") ~ ".xml";
 		me.signalN = props.globals.getNode("/sim/signals/save", 1);
 		me.catalog = [];
-        me._timer = maketimer(60, me, me._save_);
+		me._timer = maketimer(60, me, me._save_);
 
 		setlistener("/sim/signals/reinit", func(n) {
-            if (n.getBoolValue() and getprop("/sim/startup/save-on-exit")) {
-                me._save_();
-            }
-        });
+			if (n.getBoolValue() and getprop("/sim/startup/save-on-exit")) {
+				me._save_();
+			}
+		});
 		setlistener("/sim/signals/exit", func {
-            if (getprop("/sim/startup/save-on-exit")) {
-                me._save_();
-            }
-        });
+			if (getprop("/sim/startup/save-on-exit")) {
+				me._save_();
+			}
+		});
+		return me;
 	},
-    
+
 	load: func {
 		if (io.stat(me.path) != nil) {
 			logprint(LOG_INFO, "loading aircraft data from ", me.path);
 			io.read_properties(me.path, props.globals);
 		}
+		return me;
 	},
-    
+
 	save: func(v = nil) {
 		if (v == nil) {
 			me._save_();
-            me._timer.stop();
+			me._timer.stop();
 		} else {
 			me._timer.restart(60 * v);
 		}
+		return me;
 	},
-    
+
 	_save_: func {
 		size(me.catalog) or return;
 		logprint(LOG_INFO, "saving aircraft data to ", me.path);
@@ -387,16 +390,26 @@ var data = {
 		foreach (var c; me.catalog) {
 			if (c[0] == `/`) {
 				c = substr(c, 1);
-            }
+			}
 			props.copy(props.globals.getNode(c, 1), data.getNode(c, 1));
 		}
 		io.write_properties(me.path, data);
 	},
-    
+
 	add: func(p...) {
 		foreach (var n; props.nodeList(p)) {
 			append(me.catalog, n.getPath());
-        }
+		}
+		return me;
+	},
+	remove: func(p...) {
+		foreach (var n; props.nodeList(p)) {
+			var i = vecindex(me.catalog, n.getPath());
+			if (i != nil) {
+				me.catalog = subvec(me.catalog, 0, i) ~ subvec(me.catalog, i + 1);
+			}
+		}
+		return me;
 	},
 };
 

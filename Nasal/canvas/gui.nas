@@ -60,6 +60,7 @@ loadWidget("TextBox");
 loadWidget("WindowButton");
 
 # standard dialogs
+loadDialog("FontViewer");
 loadDialog("InputDialog");
 loadDialog("MessageBox");
 loadDialog("WidgetsFactoryDialog");

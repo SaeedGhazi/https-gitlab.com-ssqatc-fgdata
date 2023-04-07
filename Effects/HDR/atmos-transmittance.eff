@@ -4,9 +4,10 @@
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/atmos-transmittance.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/atmos-include.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/atmos_transmittance.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos.glsl</fragment-shader>
       </program>
     </pass>
   </technique>

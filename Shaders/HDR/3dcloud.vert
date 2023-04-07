@@ -1,13 +1,14 @@
 #version 330 core
 
 layout(location = 0) in vec4 pos;
-layout(location = 2) in vec4 vertexColor;
-layout(location = 3) in vec4 multiTexCoord0;
+layout(location = 2) in vec4 vertex_color;
+layout(location = 3) in vec4 multitexcoord0;
 layout(location = 10) in vec4 usrAttr1;
 layout(location = 11) in vec4 usrAttr2;
 
-out vec2 texCoord;
-out vec4 cloudColor;
+out vec2 texcoord;
+out vec4 cloud_color;
+out vec4 ap_color;
 
 uniform float range;
 uniform float detail_range;
@@ -17,8 +18,8 @@ uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat4 osg_ViewMatrixInverse;
 uniform vec3 fg_SunDirectionWorld;
 
-// aerial-perspective-include.frag
-vec3 add_aerial_perspective(vec3 color, vec2 coord, float depth);
+// aerial_perspective.glsl
+vec4 get_aerial_perspective(vec2 coord, float depth);
 vec3 get_sun_radiance(vec3 p);
 
 void main()
@@ -30,7 +31,7 @@ void main()
     float middle_factor = usrAttr2.g;
     float top_factor    = usrAttr2.b;
 
-    texCoord = multiTexCoord0.st;
+    texcoord = multitexcoord0.st;
 
     // XXX: Should be sent as an uniform
     mat4 inverseModelViewMatrix = inverse(osg_ModelViewMatrix);
@@ -52,20 +53,20 @@ void main()
     final_pos.xyz += pos.y * r;
     final_pos.xyz += pos.z * w;
     // Apply Z scaling to allow sprites to be squashed in the z-axis
-    final_pos.z = final_pos.z * vertexColor.w;
+    final_pos.z = final_pos.z * vertex_color.w;
 
     // Now shift the sprite to the correct position in the cloud.
-    final_pos.xyz += vertexColor.xyz;
+    final_pos.xyz += vertex_color.xyz;
 
     // Determine the position - used for fog and shading calculations
-    float fogCoord = length(vec3(osg_ModelViewMatrix * vec4(vertexColor.xyz, 1.0)));
+    float fogCoord = length(vec3(osg_ModelViewMatrix * vec4(vertex_color.xyz, 1.0)));
     float center_dist = length(vec3(osg_ModelViewMatrix * vec4(0.0, 0.0, 0.0, 1.0)));
 
     if ((fogCoord > detail_range) && (fogCoord > center_dist) && (shade_factor < 0.7)) {
         // More than detail_range away, so discard all sprites on opposite side of
         // cloud center by shifting them beyond the view fustrum
         gl_Position = vec4(0.0, 0.0, 10.0, 1.0);
-        cloudColor = vec4(0.0);
+        cloud_color = vec4(0.0);
     } else {
         gl_Position = osg_ModelViewProjectionMatrix * final_pos;
 
@@ -91,26 +92,25 @@ void main()
                                    final_pos.z * 2.0 / cloud_height - 1.0));
         }
 
-        cloudColor.rgb = shade * get_sun_radiance(final_world_pos.xyz);
+        cloud_color.rgb = shade * get_sun_radiance(final_world_pos.xyz);
 
         // Perspective division and scale to [0, 1] to get the screen position
         // of the vertex.
         vec2 coord = (gl_Position.xy / gl_Position.w) * 0.5 + 0.5;
-        cloudColor.rgb = add_aerial_perspective(
-            cloudColor.rgb, coord, length(final_view_pos));
+        ap_color = get_aerial_perspective(coord, length(final_view_pos));
 
         if ((fogCoord > (0.9 * detail_range))
             && (fogCoord > center_dist)
             && (shade_factor < 0.7)) {
             // cloudlet is almost at the detail range, so fade it out.
-            cloudColor.a = 1.0 - smoothstep(0.9 * detail_range, detail_range, fogCoord);
+            cloud_color.a = 1.0 - smoothstep(0.9 * detail_range, detail_range, fogCoord);
         } else {
             // As we get within 100m of the sprite, it is faded out.
             // Equally at large distances it also fades out.
-            cloudColor.a = min(smoothstep(10.0, 100.0, fogCoord),
+            cloud_color.a = min(smoothstep(10.0, 100.0, fogCoord),
                                1.0 - smoothstep(0.9 * range, range, fogCoord));
         }
 
-        cloudColor.a *= alpha_factor;
+        cloud_color.a *= alpha_factor;
     }
 }

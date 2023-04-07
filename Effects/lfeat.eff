@@ -120,19 +120,21 @@
       <rendering-hint>opaque</rendering-hint>
       <cull-face>back</cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-lfeat.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-lfeat.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/terrain_lfeat.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/terrain_lfeat.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
       </program>
       <uniform>
         <name>color_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
-			<polygon-offset>
-				<factor>2.0</factor>
-				<units>1.0</units>
-			</polygon-offset>
+      <polygon-offset>
+        <factor>2.0</factor>
+        <units>1.0</units>
+      </polygon-offset>
     </pass>
   </technique>
 </PropertyList>

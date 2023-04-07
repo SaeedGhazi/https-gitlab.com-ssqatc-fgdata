@@ -1405,70 +1405,71 @@
 		</pass>
 	</technique>
 
-	<technique n="7">
-		<scheme>hdr-geometry</scheme>
-		<pass>
-			<!-- Reverse floating point depth buffer -->
-			<depth>
+    <technique n="7">
+        <scheme>hdr-geometry</scheme>
+        <pass>
+            <!-- Reverse floating point depth buffer -->
+            <depth>
 				<function>gequal</function>
 				<near>1.0</near>
 				<far>0.0</far>
-			</depth>
-			<stencil>
+            </depth>
+            <stencil>
 				<function>always</function>
 				<value>8</value>
 				<pass>replace</pass>
-			</stencil>
-			<texture-unit>
+            </stencil>
+            <texture-unit>
 				<unit>0</unit>
 				<type><use>texture[0]/type</use></type>
 				<image><use>texture[0]/image</use></image>
 				<filter><use>texture[0]/filter</use></filter>
 				<wrap-s><use>texture[0]/wrap-s</use></wrap-s>
 				<wrap-t><use>texture[0]/wrap-t</use></wrap-t>
-			</texture-unit>
-			<texture-unit>
+            </texture-unit>
+            <texture-unit>
 				<unit>1</unit>
 				<type><use>texture[2]/type</use></type>
 				<image><use>texture[2]/image</use></image>
 				<filter><use>texture[2]/filter</use></filter>
 				<wrap-s><use>texture[2]/wrap-s</use></wrap-s>
 				<wrap-t><use>texture[2]/wrap-t</use></wrap-t>
-			</texture-unit>
-			<cull-face>back</cull-face>
-			<program>
-				<vertex-shader>Shaders/HDR/geometry-combined.vert</vertex-shader>
-				<fragment-shader>Shaders/HDR/geometry-combined.frag</fragment-shader>
-				<fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
-			</program>
-			<uniform>
+            </texture-unit>
+            <cull-face>back</cull-face>
+            <program>
+				<vertex-shader>Shaders/HDR/model_combined.vert</vertex-shader>
+				<fragment-shader>Shaders/HDR/model_combined.frag</fragment-shader>
+				<fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
+				<fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+				<fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+            </program>
+            <uniform>
 				<name>color_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">0</value>
-			</uniform>
-			<uniform>
+            </uniform>
+            <uniform>
 				<name>normal_tex</name>
 				<type>sampler-2d</type>
 				<value type="int">1</value>
-			</uniform>
-			<uniform>
+            </uniform>
+            <uniform>
 				<name>normalmap_enabled</name>
 				<type>int</type>
 				<value><use>normalmap-enabled</use></value>
-			</uniform>
-			<uniform>
+            </uniform>
+            <uniform>
 				<name>normalmap_dds</name>
 				<type>int</type>
 				<value><use>normalmap-dds</use></value>
-			</uniform>
-			<uniform>
+            </uniform>
+            <uniform>
 				<name>normalmap_tiling</name>
 				<type>float</type>
 				<value><use>normalmap-tiling</use></value>
-			</uniform>
-
-		</pass>
-	</technique>
+            </uniform>
+        </pass>
+    </technique>
 
 	<technique n="9">
 		<predicate><value type="bool">false</value></predicate>

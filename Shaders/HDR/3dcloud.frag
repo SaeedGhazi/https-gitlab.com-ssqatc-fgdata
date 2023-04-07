@@ -1,24 +1,28 @@
 #version 330 core
 
-out vec4 fragColor;
+layout(location = 0) out vec4 fragColor;
 
-in vec2 texCoord;
-in vec4 cloudColor;
+in vec2 texcoord;
+in vec4 cloud_color;
+in vec4 ap_color;
 
-uniform sampler2D baseTexture;
+uniform sampler2D base_tex;
 
 uniform mat4 osg_ProjectionMatrix;
 uniform vec4 fg_Viewport;
 uniform vec3 fg_SunDirection;
 
-const int STEPS = 8;
-
 uniform float density = 30.0;
 uniform float max_sample_dist = 0.05;
 
+const int STEPS = 8;
+
+// aerial_perspective.glsl
+vec3 mix_aerial_perspective(vec3 color, vec4 ap);
+
 void main()
 {
-    vec4 base = texture(baseTexture, texCoord);
+    vec4 base = texture(base_tex, texcoord);
 
     // Directly discard fragments below a threshold
     if (base.a < 0.02)
@@ -43,8 +47,8 @@ void main()
     float T = 1.0;
     for (int i = 0; i < STEPS; ++i) {
         float t = (float(i) + 0.5) * dt;
-        vec2 uv_t = texCoord - sun_dir * t;
-        vec4 texel = texture(baseTexture, uv_t);
+        vec2 uv_t = texcoord - sun_dir * t;
+        vec4 texel = texture(base_tex, uv_t);
         // Beer-Lambert's law
         T *= exp(-texel.a * dt * density);
     }
@@ -54,8 +58,10 @@ void main()
     // the perpendicular.
     float fade = smoothstep(0.1, 0.5, dot(vec3(0.0, 0.0, -1.0), fg_SunDirection));
 
-    vec4 color = base * cloudColor;
+    vec4 color = base * cloud_color;
     color.rgb *= base.a * mix(1.0, T, fade);
+
+    color.rgb = mix_aerial_perspective(color.rgb, ap_color);
 
     fragColor = color;
 }

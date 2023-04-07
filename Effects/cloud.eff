@@ -500,8 +500,10 @@
       <rendering-hint>transparent</rendering-hint>
       <program>
         <vertex-shader>Shaders/HDR/3dcloud.vert</vertex-shader>
-        <vertex-shader>Shaders/HDR/aerial-perspective-include.frag</vertex-shader>
+        <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/atmos_spectral.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/3dcloud.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
         <attribute>
           <name>usrAttr1</name>
           <index>10</index>
@@ -512,7 +514,7 @@
         </attribute>
       </program>
       <uniform>
-        <name>baseTexture</name>
+        <name>base_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
@@ -526,14 +528,14 @@
         <type>float</type>
         <value><use>detail</use></value>
       </uniform>
-      <!-- Aerial perspective include -->
+      <!-- aerial_perspective.glsl -->
       <uniform>
-        <name>aerial_perspective_lut</name>
+        <name>aerial_perspective_tex</name>
         <type>sampler-2d</type>
         <value type="int">11</value>
       </uniform>
       <uniform>
-        <name>transmittance_lut</name>
+        <name>transmittance_tex</name>
         <type>sampler-2d</type>
         <value type="int">12</value>
       </uniform>

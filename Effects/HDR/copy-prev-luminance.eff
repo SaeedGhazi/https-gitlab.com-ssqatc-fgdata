@@ -4,11 +4,11 @@
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial-notexcoord.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/copy-prev-luminance.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/quad_notexcoord.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/copy_prev_luminance.frag</fragment-shader>
       </program>
       <uniform>
-        <name>tex</name>
+        <name>lum_tex</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>

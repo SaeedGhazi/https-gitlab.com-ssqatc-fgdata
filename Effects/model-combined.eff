@@ -1338,9 +1338,11 @@ please see Docs/README.model-combined.eff for documentation
             </texture-unit>
             <cull-face>back</cull-face>
             <program>
-              <vertex-shader>Shaders/HDR/geometry-combined.vert</vertex-shader>
-              <fragment-shader>Shaders/HDR/geometry-combined.frag</fragment-shader>
-              <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+              <vertex-shader>Shaders/HDR/model_combined.vert</vertex-shader>
+              <fragment-shader>Shaders/HDR/model_combined.frag</fragment-shader>
+              <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
+              <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+              <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
             </program>
             <uniform>
               <name>color_tex</name>

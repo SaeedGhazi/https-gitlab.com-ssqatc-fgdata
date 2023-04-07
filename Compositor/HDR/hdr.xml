@@ -8,14 +8,15 @@
 
   <!--
       G-Buffer layout
-      ..........................................................................
-      :                       :    Red    :  Green  :    Blue    :    Alpha    :
-      :.......................:...........:.........:............:.............:
-      : G-Buffer 0 (RGB10_A2) :        Normal       : Roughness  : Material ID :
-      : G-Buffer 1 (RGBA8)    :             Base Color           : Metallic    :
-      : G-Buffer 2 (RGBA8)    :     Material specific params     : Occlusion   :
-      : Depth/Stencil         :       DEPTH32F_STENCIL8 (Reversed depth)       :
-      :.......................:............:.........:...........:.............:
+      ...........................................................................
+      :                        :    Red    :  Green  :    Blue    :    Alpha    :
+      :........................:...........:.........:............:.............:
+      : G-Buffer 0 (RGB10_A2)  :        Normal       : Roughness  : Material ID :
+      : G-Buffer 1 (RGBA8)     :             Base Color           : Metallic    :
+      : G-Buffer 2 (RGBA8)     :     Material specific params     : Occlusion   :
+      : G-Buffer 3 (R11G11B10) :             Emission             :      -      :
+      : Depth/Stencil          :       DEPTH32F_STENCIL8 (Reversed depth)       :
+      :........................:............:.........:...........:.............:
 
       Notes:
       - Two 10-bit channels is enough for normals, as long as we are using
@@ -52,6 +53,13 @@
     <format>rgba8</format>
   </buffer>
   <buffer>
+    <name>gbuffer3</name>
+    <type>2d</type>
+    <width>screen</width>
+    <height>screen</height>
+    <format>r11f-g11f-b10f</format>
+  </buffer>
+  <buffer>
     <name>depth-stencil</name>
     <type>2d</type>
     <width>screen</width>
@@ -59,7 +67,7 @@
     <format>depth32f-stencil</format>
   </buffer>
 
-  <!-- HDR lighting result -->
+  <!-- HDR shading result -->
   <buffer>
     <name>hdr-result</name>
     <type>2d</type>
@@ -289,6 +297,10 @@
     <attachment>
       <component>color2</component>
       <buffer>gbuffer2</buffer>
+    </attachment>
+    <attachment>
+      <component>color3</component>
+      <buffer>gbuffer3</buffer>
     </attachment>
   </pass>
 
@@ -641,6 +653,10 @@
       <buffer>gbuffer2</buffer>
     </attachment>
     <attachment>
+      <component>color3</component>
+      <buffer>gbuffer3</buffer>
+    </attachment>
+    <attachment>
       <component>depth</component>
       <buffer>depth-stencil</buffer>
     </attachment>
@@ -737,14 +753,14 @@
   </pass>
 
   <!--
-      Main lighting pass
+      Main shading pass (for opaque objects)
       Combine the G-Buffer and other buffers to compute the final shading value
       of the pixel in HDR.
   -->
   <pass>
-    <name>lighting</name>
+    <name>shading</name>
     <type>quad</type>
-    <effect>Effects/HDR/lighting</effect>
+    <effect>Effects/HDR/shading-opaque</effect>
     <use-shadow-pass>csm0</use-shadow-pass>
     <use-shadow-pass>csm1</use-shadow-pass>
     <use-shadow-pass>csm2</use-shadow-pass>
@@ -770,6 +786,10 @@
     </binding>
     <binding>
       <unit>3</unit>
+      <buffer>gbuffer3</buffer>
+    </binding>
+    <binding>
+      <unit>4</unit>
       <buffer>depth-stencil</buffer>
     </binding>
     <binding>
@@ -808,7 +828,7 @@
   <pass>
     <name>water</name>
     <type>quad</type>
-    <effect>Effects/HDR/water-lighting</effect>
+    <effect>Effects/HDR/water-shading</effect>
     <binding>
       <unit>0</unit>
       <buffer>gbuffer0</buffer>

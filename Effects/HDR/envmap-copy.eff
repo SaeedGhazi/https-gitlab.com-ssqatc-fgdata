@@ -4,11 +4,11 @@
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/envmap-prefilter.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/envmap-copy.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/envmap.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/envmap_copy.frag</fragment-shader>
       </program>
       <uniform>
-        <name>envmap</name>
+        <name>envmap_tex</name>
         <type>sampler-cube</type>
         <value type="int">0</value>
       </uniform>

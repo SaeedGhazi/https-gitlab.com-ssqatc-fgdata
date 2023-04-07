@@ -4,8 +4,8 @@
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial-notexcoord.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/histogram-aggregate.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/quad_notexcoord.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/histogram_aggregate.frag</fragment-shader>
       </program>
       <uniform>
         <name>partial_histogram_tex</name>

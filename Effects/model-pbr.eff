@@ -89,9 +89,11 @@
       <rendering-hint>opaque</rendering-hint>
       <cull-face><use>cull-face</use></cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-pbr.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-pbr.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/model_pbr.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/model_pbr.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>
@@ -160,8 +162,8 @@
         <units>4.0</units>
       </polygon-offset>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-shadow.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-shadow.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/model_shadow.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/model_shadow.frag</fragment-shader>
       </program>
     </pass>
   </technique>

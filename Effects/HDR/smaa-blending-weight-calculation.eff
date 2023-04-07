@@ -48,8 +48,8 @@
         <internal-format><use>texture[2]/internal-format</use></internal-format>
       </texture-unit>
       <program>
-        <vertex-shader>Shaders/HDR/smaa-blending-weight-calculation.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/smaa-blending-weight-calculation.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/smaa_blending_weight_calculation.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/smaa_blending_weight_calculation.frag</fragment-shader>
       </program>
       <uniform>
         <name>edges_tex</name>

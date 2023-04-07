@@ -2,18 +2,20 @@
 <PropertyList>
   <name>Effects/HDR/postprocess</name>
   <parameters>
+    <bloom-magnitude><use>/sim/rendering/hdr/bloom-magnitude</use></bloom-magnitude>
+    <debug-ev100><use>/sim/rendering/hdr/debug/display-ev100</use></debug-ev100>
     <exposure-compensation>
       <use>/sim/rendering/hdr/exposure-compensation</use>
     </exposure-compensation>
-    <bloom-magnitude><use>/sim/rendering/hdr/bloom-magnitude</use></bloom-magnitude>
-    <debug-ev100><use>/sim/rendering/hdr/debug/display-ev100</use></debug-ev100>
   </parameters>
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/postprocess.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/exposure-include.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/aces.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
       </program>
       <uniform>
         <name>hdr_tex</name>
@@ -31,11 +33,6 @@
         <value type="int">4</value>
       </uniform>
       <uniform>
-        <name>exposure_compensation</name>
-        <type>float</type>
-        <value><use>exposure-compensation</use></value>
-      </uniform>
-      <uniform>
         <name>bloom_magnitude</name>
         <type>float</type>
         <value><use>bloom-magnitude</use></value>
@@ -44,6 +41,12 @@
         <name>debug_ev100</name>
         <type>bool</type>
         <value><use>debug-ev100</use></value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
       </uniform>
     </pass>
   </technique>

@@ -314,6 +314,8 @@
       <program>
         <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
       </program>
       <uniform>
         <name>sun_disk</name>
@@ -321,12 +323,12 @@
         <value type="bool">true</value>
       </uniform>
       <uniform>
-        <name>transmittance_lut</name>
+        <name>transmittance_tex</name>
         <type>sampler-2d</type>
         <value type="int">12</value>
       </uniform>
       <uniform>
-        <name>sky_view_lut</name>
+        <name>sky_view_tex</name>
         <type>sampler-2d</type>
         <value type="int">13</value>
       </uniform>
@@ -342,6 +344,8 @@
       <program>
         <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
       </program>
       <uniform>
         <name>sun_disk</name>
@@ -349,12 +353,12 @@
         <value type="bool">false</value>
       </uniform>
       <uniform>
-        <name>transmittance_lut</name>
+        <name>transmittance_tex</name>
         <type>sampler-2d</type>
         <value type="int">12</value>
       </uniform>
       <uniform>
-        <name>sky_view_lut</name>
+        <name>sky_view_tex</name>
         <type>sampler-2d</type>
         <value type="int">13</value>
       </uniform>

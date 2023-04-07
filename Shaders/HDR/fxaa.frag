@@ -1,9 +1,9 @@
 #version 330 core
 
-out vec4 fragColor;
+layout(location = 0) out vec4 fragColor;
 
-in vec2 texCoord;
-in vec4 posPos;
+in vec2 texcoord;
+in vec4 pos_pos;
 
 uniform sampler2D color_tex;
 
@@ -15,11 +15,11 @@ void main()
 {
     vec2 rcpFrame = 1.0 / textureSize(color_tex, 0);
 
-    vec3 rgbNW = textureLod(color_tex, posPos.zw, 0.0).xyz;
-    vec3 rgbNE = textureLodOffset(color_tex, posPos.zw, 0.0, ivec2(1,0)).xyz;
-    vec3 rgbSW = textureLodOffset(color_tex, posPos.zw, 0.0, ivec2(0,1)).xyz;
-    vec3 rgbSE = textureLodOffset(color_tex, posPos.zw, 0.0, ivec2(1,1)).xyz;
-    vec3 rgbM  = textureLod(color_tex, posPos.xy, 0.0).xyz;
+    vec3 rgbNW = textureLod(color_tex, pos_pos.zw, 0.0).xyz;
+    vec3 rgbNE = textureLodOffset(color_tex, pos_pos.zw, 0.0, ivec2(1,0)).xyz;
+    vec3 rgbSW = textureLodOffset(color_tex, pos_pos.zw, 0.0, ivec2(0,1)).xyz;
+    vec3 rgbSE = textureLodOffset(color_tex, pos_pos.zw, 0.0, ivec2(1,1)).xyz;
+    vec3 rgbM  = textureLod(color_tex, pos_pos.xy, 0.0).xyz;
 
     const vec3 luma = vec3(0.299, 0.587, 0.114);
     float lumaNW = dot(rgbNW, luma);
@@ -43,11 +43,11 @@ void main()
                   dir * rcpDirMin)) * rcpFrame.xy;
 
     vec3 rgbA = 0.5 * (
-        textureLod(color_tex, posPos.xy + dir * (1.0/3.0 - 0.5), 0.0).xyz +
-        textureLod(color_tex, posPos.xy + dir * (2.0/3.0 - 0.5), 0.0).xyz);
+        textureLod(color_tex, pos_pos.xy + dir * (1.0/3.0 - 0.5), 0.0).xyz +
+        textureLod(color_tex, pos_pos.xy + dir * (2.0/3.0 - 0.5), 0.0).xyz);
     vec3 rgbB = rgbA * 0.5 + 0.25 * (
-        textureLod(color_tex, posPos.xy + dir * (0.0/3.0 - 0.5), 0.0).xyz +
-        textureLod(color_tex, posPos.xy + dir * (3.0/3.0 - 0.5), 0.0).xyz);
+        textureLod(color_tex, pos_pos.xy + dir * (0.0/3.0 - 0.5), 0.0).xyz +
+        textureLod(color_tex, pos_pos.xy + dir * (3.0/3.0 - 0.5), 0.0).xyz);
 
     float lumaB = dot(rgbB, luma);
     if((lumaB < lumaMin) || (lumaB > lumaMax))

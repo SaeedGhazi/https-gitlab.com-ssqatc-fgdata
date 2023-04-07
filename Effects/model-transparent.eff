@@ -9,7 +9,8 @@
       <bin-name>DepthSortedBin</bin-name>
     </render-bin>
     <write-depth type="bool">false</write-depth>
-
+    <rendering-hint>transparent</rendering-hint>
+    <!-- ibl.glsl -->
     <texture n="8">
       <image>Textures/PBR/dfg_lut.dds</image>
       <type>2d</type>
@@ -19,11 +20,6 @@
       <wrap-t>clamp-to-edge</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
-    <rendering-hint>transparent</rendering-hint>
-    <render-bin>
-      <bin-number>111</bin-number>
-      <bin-name>DepthSortedBin</bin-name>
-    </render-bin>
   </parameters>
 
   <!-- Place objects in render bin 111 (frontmost transparent objects).
@@ -97,12 +93,18 @@
       <rendering-hint>transparent</rendering-hint>
       <cull-face><use>cull-face</use></cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-transparent.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-transparent.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/shadows-include.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/lighting-include.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/aerial-perspective-include.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/model_transparent.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
+        <fragment-shader>Shaders/HDR/model_transparent.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/shading_transparent.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/surface.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/ibl.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/shadows.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/clustered.glsl</fragment-shader>
       </program>
       <uniform>
         <name>color_tex</name>
@@ -119,36 +121,36 @@
         <type>float-vec4</type>
         <value><use>material/diffuse</use></value>
       </uniform>
-      <!-- Shadows include -->
-      <uniform>
-        <name>depth_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">7</value>
-      </uniform>
+      <!-- shadows.glsl -->
       <uniform>
         <name>shadow_tex</name>
         <type>sampler-2d-shadow</type>
         <value type="int">10</value>
       </uniform>
-      <!-- Lighting include -->
       <uniform>
-        <name>dfg_lut</name>
+        <name>debug_shadow_cascades</name>
+        <type>bool</type>
+        <value><use>show-shadow-cascades</use></value>
+      </uniform>
+      <!-- ibl.glsl -->
+      <uniform>
+        <name>dfg_tex</name>
         <type>sampler-2d</type>
         <value type="int">8</value>
       </uniform>
       <uniform>
-        <name>prefiltered_envmap</name>
+        <name>prefiltered_envmap_tex</name>
         <type>sampler-cube</type>
         <value type="int">9</value>
       </uniform>
-      <!-- Aerial perspective include -->
+      <!-- aerial_perspective.glsl -->
       <uniform>
-        <name>aerial_perspective_lut</name>
+        <name>aerial_perspective_tex</name>
         <type>sampler-2d</type>
         <value type="int">11</value>
       </uniform>
       <uniform>
-        <name>transmittance_lut</name>
+        <name>transmittance_tex</name>
         <type>sampler-2d</type>
         <value type="int">12</value>
       </uniform>

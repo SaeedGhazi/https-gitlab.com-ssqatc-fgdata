@@ -2,17 +2,17 @@
 <PropertyList>
   <name>Effects/HDR/bloom-threshold</name>
   <parameters>
+    <bloom-threshold><use>/sim/rendering/hdr/bloom-threshold</use></bloom-threshold>
     <exposure-compensation>
       <use>/sim/rendering/hdr/exposure-compensation</use>
     </exposure-compensation>
-    <bloom-threshold><use>/sim/rendering/hdr/bloom-threshold</use></bloom-threshold>
   </parameters>
   <technique n="1">
     <pass>
       <program>
-        <vertex-shader>Shaders/HDR/trivial.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/bloom-threshold.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/exposure-include.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/bloom_threshold.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
       </program>
       <uniform>
         <name>hdr_tex</name>
@@ -25,14 +25,15 @@
         <value type="int">1</value>
       </uniform>
       <uniform>
-        <name>exposure_compensation</name>
-        <type>float</type>
-        <value><use>exposure-compensation</use></value>
-      </uniform>
-      <uniform>
         <name>bloom_threshold</name>
         <type>float</type>
         <value><use>bloom-threshold</use></value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
       </uniform>
     </pass>
   </technique>

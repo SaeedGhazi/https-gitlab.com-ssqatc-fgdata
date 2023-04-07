@@ -83,12 +83,14 @@
       <rendering-hint>opaque</rendering-hint>
       <cull-face><use>cull-face</use></cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-chrome.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-chrome.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer-include.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/model_chrome.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/model_chrome.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
       </program>
     </pass>
   </technique>
+
   <technique n="119">
     <scheme>hdr-shadow</scheme>
     <pass>
@@ -100,9 +102,10 @@
         <units>4.0</units>
       </polygon-offset>
       <program>
-        <vertex-shader>Shaders/HDR/geometry-shadow.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/geometry-shadow.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/model_shadow.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/model_shadow.frag</fragment-shader>
       </program>
     </pass>
   </technique>
+
 </PropertyList>

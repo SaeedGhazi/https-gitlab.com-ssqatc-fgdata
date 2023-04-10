@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<font>
+		<path>NotoSans-Regular.txf</path>
+		<family>Noto Sans</family>
+	</font>
+	<font>
+		<path>NotoSans-Bold.txf</path>
+		<family>Noto Sans</family>
+		<weight>bold</weight>
+	</font>
+	<font>
+		<path>NotoSans-BoldItalic.txf</path>
+		<family>Noto Sans</family>
+		<weight>bold</weight>
+		<style>italic</style>
+	</font>
+	<font>
+		<path>NotoSans-Italic.txf</path>
+		<family>Noto Sans</family>
+		<weight>medium</weight>
+		<style>italic</style>
+	</font>
+</PropertyList>

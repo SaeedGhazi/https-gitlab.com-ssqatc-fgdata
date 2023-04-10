@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<font>
+		<path>DSEG7ModernMini-Regular.ttf</path>
+		<path>DSEG7ModernMini-Regular.woff</path>
+		<family>DSEG7 Modern Mini</family>
+	</font>
+	<font>
+		<path>DSEG7ModernMini-Bold.ttf</path>
+		<path>DSEG7ModernMini-Bold.woff</path>
+		<family>DSEG7 Modern Mini</family>
+		<weight>bold</weight>
+	</font>
+	<font>
+		<path>DSEG7ModernMini-BoldItalic.ttf</path>
+		<path>DSEG7ModernMini-BoldItalic.woff</path>
+		<family>DSEG7 Modern Mini</family>
+		<weight>bold</weight>
+		<style>italic</style>
+	</font>
+	<font>
+		<path>DSEG7ModernMini-Italic.ttf</path>
+		<path>DSEG7ModernMini-Italic.woff</path>
+		<family>DSEG7 Modern Mini</family>
+		<style>italic</style>
+	</font>
+	<font>
+		<path>DSEG7ModernMini-Light.ttf</path>
+		<path>DSEG7ModernMini-Light.woff</path>
+		<family>DSEG7 Modern Mini</family>
+		<weight>light</weight>
+	</font>
+	<font>
+		<path>DSEG7ModernMini-LightItalic.ttf</path>
+		<path>DSEG7ModernMini-LightItalic.woff</path>
+		<family>DSEG7 Modern Mini</family>
+		<weight>light</weight>
+		<style>italic</style>
+	</font>
+</PropertyList>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<font>
+		<path>DSEG14ClassicMini-Regular.ttf</path>
+		<path>DSEG14ClassicMini-Regular.woff</path>
+		<family>DSEG14 Classic Mini</family>
+	</font>
+	<font>
+		<path>DSEG14ClassicMini-Bold.ttf</path>
+		<path>DSEG14ClassicMini-Bold.woff</path>
+		<family>DSEG14 Classic Mini</family>
+		<weight>bold</weight>
+	</font>
+	<font>
+		<path>DSEG14ClassicMini-BoldItalic.ttf</path>
+		<path>DSEG14ClassicMini-BoldItalic.woff</path>
+		<family>DSEG14 Classic Mini</family>
+		<weight>bold</weight>
+		<style>italic</style>
+	</font>
+	<font>
+		<path>DSEG14ClassicMini-Italic.ttf</path>
+		<path>DSEG14ClassicMini-Italic.woff</path>
+		<family>DSEG14 Classic Mini</family>
+		<style>italic</style>
+	</font>
+	<font>
+		<path>DSEG14ClassicMini-Light.ttf</path>
+		<path>DSEG14ClassicMini-Light.woff</path>
+		<family>DSEG14 Classic Mini</family>
+		<weight>light</weight>
+	</font>
+	<font>
+		<path>DSEG14ClassicMini-LightItalic.ttf</path>
+		<path>DSEG14ClassicMini-LightItalic.woff</path>
+		<family>DSEG14 Classic Mini</family>
+		<weight>light</weight>
+		<style>italic</style>
+	</font>
+</PropertyList>

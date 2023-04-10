@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<font>
+		<path>DSEG7SEGGCHANMINI-Regular.ttf</path>
+		<path>DSEG7SEGGCHANMINI-Regular.woff</path>
+		<family>7SEGGCHAN Mini</family>
+	</font>
+	<font>
+		<path>DSEG7SEGGCHAN-Regular.ttf</path>
+		<path>DSEG7SEGGCHAN-Regular.woff</path>
+		<family>7SEGGCHAN</family>
+	</font>
+</PropertyList>

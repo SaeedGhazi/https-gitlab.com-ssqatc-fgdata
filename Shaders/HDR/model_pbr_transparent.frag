@@ -54,5 +54,5 @@ void main()
         base_color.rgb, metallic, roughness, occlusion,
         vP, N, V, uv, ap_color, osg_ViewMatrixInverse);
 
-    fragColor = vec4(color, baseColor.a);
+    fragColor = vec4(color, base_color.a);
 }

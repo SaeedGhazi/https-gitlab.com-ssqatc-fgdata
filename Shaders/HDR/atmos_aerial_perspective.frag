@@ -23,6 +23,7 @@ uniform vec3 fg_SunDirectionWorld;
 
 const float AP_SLICE_COUNT = 32.0;
 const float AP_MAX_DEPTH = 128000.0;
+
 const int AERIAL_PERSPECTIVE_STEPS = 20;
 
 // pos_from_depth.glsl

@@ -6,13 +6,14 @@ layout(location = 3) in vec4 multiTexCoord0;
 out vec4 waterTex1;
 out vec4 waterTex2;
 out mat3 TBN;
-out vec3 ecPosition;
+out vec3 relpos;
 out vec2 TopoUV;
 
 uniform float WindE, WindN;
 
 uniform float osg_SimulationTime;
 uniform mat4 osg_ModelViewMatrix;
+uniform mat4 osg_ModelViewMatrixInverse;
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat4 osg_ViewMatrixInverse;
 uniform mat3 osg_NormalMatrix;
@@ -34,7 +35,13 @@ void rotationmatrix(float angle, out mat4 rotmat)
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
-    ecPosition = (osg_ModelViewMatrix * pos).xyz;
+
+    // first current altitude of eye position in model space
+    vec4 ep = osg_ModelViewMatrixInverse * vec4(0.0, 0.0, 0.0, 1.0);
+    // and relative position to vector
+    relpos = pos.xyz - ep.xyz;
+
+    vec3 rawPos = (osg_ViewMatrixInverse * osg_ModelViewMatrix * pos).xyz;
 
     // Using precalculated vectors
     // vec3 T = normalize(osg_NormalMatrix * tangent);
@@ -67,7 +74,6 @@ void main()
     waterTex2 = multiTexCoord0 * RotationMatrix - t2 * windFactor;
 
     // Geodesy lookup for depth map
-    vec3 rawPos = (osg_ViewMatrixInverse * vec4(ecPosition, 1.0)).xyz;
     float e2 = abs(1.0 - squash * squash);
     float ra2 = 1.0/(a * a);
     float e4 = e2 * e2;

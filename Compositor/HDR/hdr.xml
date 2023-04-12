@@ -209,44 +209,29 @@
 
   <!-- Bloom buffers -->
   <buffer include="bloom-buffer.xml">
-    <name>bloom0</name>
+    <name>bloomA</name>
     <screen-width-scale>0.5</screen-width-scale>
     <screen-height-scale>0.5</screen-height-scale>
   </buffer>
   <buffer include="bloom-buffer.xml">
-    <name>bloom1</name>
+    <name>bloomB</name>
     <screen-width-scale>0.25</screen-width-scale>
     <screen-height-scale>0.25</screen-height-scale>
   </buffer>
   <buffer include="bloom-buffer.xml">
-    <name>bloom2</name>
+    <name>bloomC</name>
     <screen-width-scale>0.125</screen-width-scale>
     <screen-height-scale>0.125</screen-height-scale>
   </buffer>
   <buffer include="bloom-buffer.xml">
-    <name>bloom3</name>
+    <name>bloomD</name>
     <screen-width-scale>0.0625</screen-width-scale>
     <screen-height-scale>0.0625</screen-height-scale>
   </buffer>
   <buffer include="bloom-buffer.xml">
-    <name>bloom0-tmp</name>
-    <screen-width-scale>0.5</screen-width-scale>
-    <screen-height-scale>0.5</screen-height-scale>
-  </buffer>
-  <buffer include="bloom-buffer.xml">
-    <name>bloom1-tmp</name>
-    <screen-width-scale>0.25</screen-width-scale>
-    <screen-height-scale>0.25</screen-height-scale>
-  </buffer>
-  <buffer include="bloom-buffer.xml">
-    <name>bloom2-tmp</name>
-    <screen-width-scale>0.125</screen-width-scale>
-    <screen-height-scale>0.125</screen-height-scale>
-  </buffer>
-  <buffer include="bloom-buffer.xml">
-    <name>bloom3-tmp</name>
-    <screen-width-scale>0.0625</screen-width-scale>
-    <screen-height-scale>0.0625</screen-height-scale>
+    <name>bloomE</name>
+    <screen-width-scale>0.03125</screen-width-scale>
+    <screen-height-scale>0.03125</screen-height-scale>
   </buffer>
 
   <!-- SMAA buffers -->
@@ -758,7 +743,7 @@
       of the pixel in HDR.
   -->
   <pass>
-    <name>shading</name>
+    <name>shading-opaque</name>
     <type>quad</type>
     <effect>Effects/HDR/shading-opaque</effect>
     <use-shadow-pass>csm0</use-shadow-pass>
@@ -769,7 +754,7 @@
       <pass>geometry</pass>
       <clusters-bind-unit>5</clusters-bind-unit>
       <indices-bind-unit>6</indices-bind-unit>
-      <pointlights-bind-unit>14</pointlights-bind-unit>
+      <pointlights-bind-unit>13</pointlights-bind-unit>
       <spotlights-bind-unit>15</spotlights-bind-unit>
     </use-clustered-uniforms>
     <binding>
@@ -815,6 +800,10 @@
       <unit>12</unit>
       <buffer>transmittance</buffer>
     </binding>
+    <binding>
+      <unit>14</unit>
+      <buffer>prev-luminance</buffer>
+    </binding>
     <attachment>
       <component>color0</component>
       <buffer>hdr-result</buffer>
@@ -852,6 +841,10 @@
     <binding>
       <unit>12</unit>
       <buffer>transmittance</buffer>
+    </binding>
+    <binding>
+      <unit>14</unit>
+      <buffer>prev-luminance</buffer>
     </binding>
     <attachment>
       <component>color0</component>
@@ -908,6 +901,10 @@
       <unit>13</unit>
       <buffer>sky-view</buffer>
     </binding>
+    <binding>
+      <unit>14</unit>
+      <buffer>prev-luminance</buffer>
+    </binding>
     <attachment>
       <component>color0</component>
       <buffer>hdr-result</buffer>
@@ -945,6 +942,10 @@
     <binding>
       <unit>0</unit>
       <buffer>hdr-result</buffer>
+    </binding>
+    <binding>
+      <unit>14</unit>
+      <buffer>prev-luminance</buffer>
     </binding>
     <attachment>
       <component>color0</component>
@@ -996,165 +997,110 @@
   </pass>
 
   <!--
-      Generate a threshold texture for bloom
-      The HDR lighting buffer is filtered so we are left with an image that only
-      contains the brightest spots. This image is then progressively
-      downscaled, blurred and upscaled until we are left with the final bloom
-      to be applied.
+      Bloom effect from:
+      "Next Generation Post Processing in Call of Duty Advanced Warfare",
+      ACM Siggraph (2014).
   -->
   <pass>
-    <name>bloom-threshold</name>
+    <name>bloom-downsample1</name>
     <type>quad</type>
-    <effect>Effects/HDR/bloom-threshold</effect>
+    <effect>Effects/HDR/bloom-downsample-first</effect>
     <binding>
       <unit>0</unit>
       <buffer>hdr-result</buffer>
     </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>bloomA</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-downsample-rest.xml">
+    <name>bloom-downsample2</name>
     <binding>
-      <unit>1</unit>
-      <buffer>histogram-luminance</buffer>
+      <unit>0</unit>
+      <buffer>bloomA</buffer>
     </binding>
     <attachment>
       <component>color0</component>
-      <buffer>bloom0</buffer>
+      <buffer>bloomB</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-downsample-rest.xml">
+    <name>bloom-downsample3</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloomB</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>bloomC</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-downsample-rest.xml">
+    <name>bloom-downsample4</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloomC</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>bloomD</buffer>
+    </attachment>
+  </pass>
+  <pass include="bloom-downsample-rest.xml">
+    <name>bloom-downsample5</name>
+    <binding>
+      <unit>0</unit>
+      <buffer>bloomD</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>bloomE</buffer>
     </attachment>
   </pass>
 
-  <pass include="bloom-copy-pass.xml">
-    <name>bloom-copy1</name>
+  <pass include="bloom-upsample.xml">
+    <name>bloom-upsample1</name>
     <binding>
       <unit>0</unit>
-      <buffer>bloom0</buffer>
+      <buffer>bloomE</buffer>
     </binding>
     <attachment>
       <component>color0</component>
-      <buffer>bloom1</buffer>
+      <buffer>bloomD</buffer>
     </attachment>
   </pass>
-  <pass include="bloom-copy-pass.xml">
-    <name>bloom-copy2</name>
+  <pass include="bloom-upsample.xml">
+    <name>bloom-upsample2</name>
     <binding>
       <unit>0</unit>
-      <buffer>bloom1</buffer>
+      <buffer>bloomD</buffer>
     </binding>
     <attachment>
       <component>color0</component>
-      <buffer>bloom2</buffer>
+      <buffer>bloomC</buffer>
     </attachment>
   </pass>
-  <pass include="bloom-copy-pass.xml">
-    <name>bloom-copy3</name>
+  <pass include="bloom-upsample.xml">
+    <name>bloom-upsample3</name>
     <binding>
       <unit>0</unit>
-      <buffer>bloom2</buffer>
+      <buffer>bloomC</buffer>
     </binding>
     <attachment>
       <component>color0</component>
-      <buffer>bloom3</buffer>
+      <buffer>bloomB</buffer>
     </attachment>
   </pass>
-
-  <pass include="bloom-horizontal-blur-pass.xml">
-    <name>bloom-hblur3</name>
+  <pass include="bloom-upsample.xml">
+    <name>bloom-upsample4</name>
     <binding>
       <unit>0</unit>
-      <buffer>bloom3</buffer>
+      <buffer>bloomB</buffer>
     </binding>
     <attachment>
       <component>color0</component>
-      <buffer>bloom3-tmp</buffer>
-    </attachment>
-  </pass>
-  <pass include="bloom-vertical-blur-pass.xml">
-    <name>bloom-vblur3</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom3-tmp</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom3</buffer>
-    </attachment>
-  </pass>
-
-  <pass include="bloom-horizontal-blur-pass.xml">
-    <name>bloom-hblur2</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom2</buffer>
-    </binding>
-    <binding>
-      <unit>1</unit>
-      <buffer>bloom3</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom2-tmp</buffer>
-    </attachment>
-  </pass>
-  <pass include="bloom-vertical-blur-pass.xml">
-    <name>bloom-vblur2</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom2-tmp</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom2</buffer>
-    </attachment>
-  </pass>
-
-  <pass include="bloom-horizontal-blur-pass.xml">
-    <name>bloom-hblur1</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom1</buffer>
-    </binding>
-    <binding>
-      <unit>1</unit>
-      <buffer>bloom2</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom1-tmp</buffer>
-    </attachment>
-  </pass>
-  <pass include="bloom-vertical-blur-pass.xml">
-    <name>bloom-vblur1</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom1-tmp</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom1</buffer>
-    </attachment>
-  </pass>
-
-  <pass include="bloom-horizontal-blur-pass.xml">
-    <name>bloom-hblur0</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom0</buffer>
-    </binding>
-    <binding>
-      <unit>1</unit>
-      <buffer>bloom1</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom0-tmp</buffer>
-    </attachment>
-  </pass>
-  <pass include="bloom-vertical-blur-pass.xml">
-    <name>bloom-vblur0</name>
-    <binding>
-      <unit>0</unit>
-      <buffer>bloom0-tmp</buffer>
-    </binding>
-    <attachment>
-      <component>color0</component>
-      <buffer>bloom0</buffer>
+      <buffer>bloomA</buffer>
     </attachment>
   </pass>
 
@@ -1174,11 +1120,7 @@
     </binding>
     <binding>
       <unit>1</unit>
-      <buffer>histogram-luminance</buffer>
-    </binding>
-    <binding>
-      <unit>4</unit>
-      <buffer>bloom0</buffer>
+      <buffer>bloomA</buffer>
     </binding>
     <attachment>
       <component>color0</component>

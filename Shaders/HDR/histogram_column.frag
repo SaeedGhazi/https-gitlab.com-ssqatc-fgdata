@@ -8,6 +8,8 @@ uniform sampler2D hdr_tex;
 float linear_srgb_to_luminance(vec3 color);
 // histogram.glsl
 uint luminance_to_bin_index(float luminance);
+// exposure.glsl
+vec3 undo_exposure(vec3 color);
 
 void main()
 {
@@ -19,6 +21,7 @@ void main()
 
     for (int row = 0; row < hdr_tex_size.y; ++row) {
         vec3 hdr_color = texelFetch(hdr_tex, ivec2(column, row), 0).rgb;
+        hdr_color = undo_exposure(hdr_color);
         // sRGB to relative luminance
         float lum = linear_srgb_to_luminance(hdr_color);
         // Get the bin index corresponding to the given pixel luminance

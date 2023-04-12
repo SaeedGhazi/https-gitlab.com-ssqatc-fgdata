@@ -19,6 +19,8 @@ const int STEPS = 8;
 
 // aerial_perspective.glsl
 vec3 mix_aerial_perspective(vec3 color, vec4 ap);
+// exposure.glsl
+vec3 apply_exposure(vec3 color);
 
 void main()
 {
@@ -59,9 +61,12 @@ void main()
     float fade = smoothstep(0.1, 0.5, dot(vec3(0.0, 0.0, -1.0), fg_SunDirection));
 
     vec4 color = base * cloud_color;
-    color.rgb *= base.a * mix(1.0, T, fade);
+    color.rgb *= base.a * mix(0.5, T, fade);
 
     color.rgb = mix_aerial_perspective(color.rgb, ap_color);
+
+    // Pre-expose
+    color.rgb = apply_exposure(color.rgb);
 
     fragColor = color;
 }

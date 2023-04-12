@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PropertyList>
-  <name>Effects/HDR/horizontal-blur</name>
-  <inherits-from>Effects/HDR/blur</inherits-from>
-  <parameters>
-    <is-vertical>false</is-vertical>
-  </parameters>
-</PropertyList>

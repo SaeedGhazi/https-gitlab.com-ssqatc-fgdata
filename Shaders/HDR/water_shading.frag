@@ -23,6 +23,8 @@ vec3 get_view_space_from_depth(vec2 uv);
 // aerial_perspective.glsl
 vec3 add_aerial_perspective(vec3 color, vec2 coord, float depth);
 vec3 get_sun_radiance_sea_level();
+// exposure.glsl
+vec3 apply_exposure(vec3 color);
 
 float F_Schlick(float VdotH, float F0)
 {
@@ -73,6 +75,9 @@ void main()
     color += M_1_PI() * fresnel * D_GGX(NdotH, 0.001) * sun_intensity * NdotL;
 
     color = add_aerial_perspective(color, texcoord, length(P));
+
+    // Pre-expose
+    color = apply_exposure(color);
 
     fragColor = color;
 }

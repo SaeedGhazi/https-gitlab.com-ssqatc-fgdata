@@ -2,7 +2,7 @@
 
 float linear_srgb_to_luminance(vec3 color)
 {
-    return dot(color, vec3(0.2125, 0.7154, 0.0721));
+    return dot(color, vec3(0.2126, 0.7152, 0.0722));
 }
 
 /*

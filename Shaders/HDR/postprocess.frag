@@ -5,16 +5,13 @@ layout(location = 0) out vec4 fragColor;
 in vec2 texcoord;
 
 uniform sampler2D hdr_tex;
-uniform sampler2D lum_tex;
 uniform sampler2D bloom_tex;
 
 uniform vec2 fg_BufferSize;
 
-uniform float bloom_magnitude;
+uniform float bloom_strength;
 uniform bool debug_ev100;
 
-// exposure.glsl
-vec3 apply_exposure(vec3 color, float avg_lum, float threshold);
 // aces.glsl
 vec3 aces_fitted(vec3 color);
 // color.glsl
@@ -53,23 +50,19 @@ float rand2D(vec2 co)
 void main()
 {
     vec3 hdr_color = texture(hdr_tex, texcoord).rgb;
-    float avg_lum = texelFetch(lum_tex, ivec2(0), 0).r;
-
-    // Exposure
-    vec3 exposed_hdr_color = apply_exposure(hdr_color, avg_lum, 0.0);
     if (debug_ev100) {
-        fragColor = vec4(get_ev100_color(exposed_hdr_color), 1.0);
+        fragColor = vec4(get_ev100_color(hdr_color), 1.0);
         return;
     }
 
+    // Apply bloom
+    vec3 bloom = texture(bloom_tex, texcoord).rgb;
+    hdr_color = mix(hdr_color, bloom, bloom_strength);
+
     // Tonemap
-    vec3 color = aces_fitted(exposed_hdr_color);
+    vec3 color = aces_fitted(hdr_color);
     // Gamma correction
     color = eotf_sRGB(color);
-
-    // Bloom
-    vec3 bloom = texture(bloom_tex, texcoord).rgb;
-    color += bloom.rgb * bloom_magnitude;
 
     // Dithering
     color += mix(-0.5/255.0, 0.5/255.0, rand2D(texcoord));

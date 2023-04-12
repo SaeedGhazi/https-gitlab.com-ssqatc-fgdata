@@ -24,6 +24,8 @@ vec3 get_sun_radiance(vec3 p);
 // clustered.glsl
 vec3 eval_scene_lights(vec3 base_color, float metallic, float roughness, vec3 f0,
                        vec3 P, vec3 N, vec3 V);
+// exposure.glsl
+vec3 apply_exposure(vec3 color);
 
 vec3 eval_lights(
     vec3 base_color, float metallic, float roughness, float occlusion,
@@ -59,6 +61,9 @@ vec3 eval_lights(
 
     // Add aerial perspective
     color = add_aerial_perspective(color, uv, length(P));
+
+    // Pre-expose
+    color = apply_exposure(color);
 
     color = debug_shadow_color(color, P, N, fg_SunDirection);
 

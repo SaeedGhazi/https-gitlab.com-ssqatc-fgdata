@@ -2,5 +2,5 @@
 
 <PropertyList>
   <type>quad</type>
-  <effect>Effects/HDR/vertical-blur</effect>
+  <effect>Effects/HDR/bloom-upsample</effect>
 </PropertyList>

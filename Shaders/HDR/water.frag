@@ -6,7 +6,7 @@ layout(location = 1) out vec4 outGBuffer1;
 in vec4 waterTex1;
 in vec4 waterTex2;
 in mat3 TBN;
-in vec3 ecPosition;
+in vec3 relpos;
 in vec2 TopoUV;
 
 uniform sampler2D perlin_normalmap;
@@ -132,10 +132,11 @@ void main()
     // there's no need to do wave patterns or foam for pixels which are so
     // far away that we can't actually see them
     // we only need detail in the near zone or where the sun reflection is
-    float dist = length(ecPosition);
-    bool detailed = (dist < 15000.0)
-        || (dot(fg_SunDirection, normalize(ecPosition)) >= 0.7);
-    if (detailed) {
+	int detail_flag;
+    float dist = length(relpos);
+	if ((dist > 15000.0) && (dot(normalize(vec3(fg_SunDirection.x, fg_SunDirection.y, 0.0) ), normalize(relpos)) < 0.7 ))  {detail_flag = 0;}
+	else {detail_flag = 1;}
+    if (detail_flag == 1) {
         angle = 0.0;
         wave0.freq = WaveFreq ;
         wave0.amp = WaveAmp;

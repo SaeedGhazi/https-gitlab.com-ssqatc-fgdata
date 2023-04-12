@@ -18,6 +18,10 @@
       <wrap-t>clamp-to-edge</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
+    <!-- exposure.glsl -->
+    <exposure-compensation>
+      <use>/sim/rendering/hdr/exposure-compensation</use>
+    </exposure-compensation>
   </parameters>
 
   <technique n="108">
@@ -100,6 +104,7 @@
         <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/clustered.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
         <attribute>
           <name>tangent</name>
           <index>6</index>
@@ -191,6 +196,17 @@
         <name>transmittance_tex</name>
         <type>sampler-2d</type>
         <value type="int">12</value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">14</value>
+      </uniform>
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
       </uniform>
     </pass>
   </technique>

@@ -1874,4 +1874,103 @@
     </pass>
   </technique>
 
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+    <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+      </depth>
+      <stencil>
+        <function>always</function>
+        <value>9</value>
+        <pass>replace</pass>
+      </stencil>
+
+      <blend><use>transparent</use></blend>
+      <alpha-test><use>transparent</use></alpha-test>
+      <shade-model>smooth</shade-model>
+      <cull-face>back</cull-face>
+      <render-bin>
+        <bin-number><use>render-bin/bin-number</use></bin-number>
+        <bin-name><use>render-bin/bin-name</use></bin-name>
+      </render-bin>
+
+      <!-- texture unit 0 direct from VPBBuilder.cxx -->
+
+      <texture-unit>
+        <unit>1</unit>
+        <image><use>texture[1]/image</use></image>
+        <filter>nearest-mipmap-nearest</filter>
+        <mag-filter>nearest-mipmap-nearest</mag-filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[0]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>2</unit>
+        <image><use>texture[2]/image</use></image>
+        <filter><use>texture[2]/filter</use></filter>
+        <wrap-s><use>texture[2]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[2]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[2]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>3</unit>
+        <image><use>texture[3]/image</use></image>
+        <filter><use>texture[3]/filter</use></filter>
+        <wrap-s><use>texture[3]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[3]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[3]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>4</unit>
+        <image><use>texture[4]/image</use></image>
+        <filter><use>texture[4]/filter</use></filter>
+        <wrap-s><use>texture[4]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[4]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[4]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <texture-unit>
+        <unit>6</unit>
+        <image><use>texture[6]/image</use></image>
+        <filter><use>texture[6]/filter</use></filter>
+        <wrap-s><use>texture[6]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[6]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[6]/internal-format</use></internal-format>
+      </texture-unit>
+
+      <cull-face>back</cull-face>
+      <program>
+        <vertex-shader>Shaders/HDR/terrain_default.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/ws30.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+      </program>
+
+      <uniform>
+        <name>landclass</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>atlas</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>perlin</name>
+        <type>sampler-2d</type>
+        <value type="int">6</value>
+      </uniform>
+    </pass>
+  </technique>
+
 </PropertyList>

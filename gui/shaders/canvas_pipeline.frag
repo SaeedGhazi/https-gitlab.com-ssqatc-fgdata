@@ -16,16 +16,16 @@ in vec2 texImageCoord;
 in vec2 paintCoord;
 
 uniform int drawMode;
-uniform sampler2D imageSampler;
 uniform int imageMode;
 uniform int paintType;
 uniform vec4 paintColor;
 uniform vec2 paintParams[3];
+uniform vec4 scaleFactorBias[2];
+uniform sampler2D imageSampler;
 uniform sampler2D rampSampler;
 uniform sampler2D patternSampler;
-uniform vec4 scaleFactorBias[2];
 
-float linearGradient(vec2 fragCoord, vec2 p0, vec2 p1){
+float linear_gradient(vec2 fragCoord, vec2 p0, vec2 p1){
 
     float x  = fragCoord.x;
     float y  = fragCoord.y;
@@ -41,7 +41,7 @@ float linearGradient(vec2 fragCoord, vec2 p0, vec2 p1){
      /  ( dx*dx + dy*dy );
 }
 
-float radialGradient(vec2 fragCoord, vec2 centerCoord, vec2 focalCoord, float r){
+float radial_gradient(vec2 fragCoord, vec2 centerCoord, vec2 focalCoord, float r){
 
     float x   = fragCoord.x;
     float y   = fragCoord.y;
@@ -68,7 +68,7 @@ void main()
         {
             vec2  x0 = paintParams[0];
             vec2  x1 = paintParams[1];
-            float factor = linearGradient(paintCoord, x0, x1);
+            float factor = linear_gradient(paintCoord, x0, x1);
             col = texture(rampSampler, vec2(factor, 0.5));
         }
         break;
@@ -77,7 +77,7 @@ void main()
             vec2  center = paintParams[0];
             vec2  focal  = paintParams[1];
             float radius = paintParams[2].x;
-            float factor = radialGradient(paintCoord, center, focal, radius);
+            float factor = radial_gradient(paintCoord, center, focal, radius);
             col = texture(rampSampler, vec2(factor, 0.5));
         }
         break;

@@ -1,14 +1,15 @@
 // -*-C++-*-
 #version 330 core
 
+out vec2 texImageCoord;
+out vec2 paintCoord;
+
 in vec2 pos;
 in vec2 textureUV;
+
 uniform mat4 sh_Model;
 uniform mat4 sh_Ortho;
 uniform mat3 paintInverted;
-
-out vec2 texImageCoord;
-out vec2 paintCoord;
 
 void main()
 {

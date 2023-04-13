@@ -1,9 +1,10 @@
 // -*-C++-*-
-#version 330
+#version 330 core
 
-in  vec2 step;
-in  vec4 stepColor;
 out vec4 interpolateColor;
+
+in vec2 step;
+in vec4 stepColor;
 
 void main()
 {

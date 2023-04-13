@@ -1,8 +1,9 @@
 // -*-C++-*-
-#version 330
+#version 330 core
 
-in  vec4 interpolateColor;
 out vec4 fragColor;
+
+in vec4 interpolateColor;
 
 void main()
 {

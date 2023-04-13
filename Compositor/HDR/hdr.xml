@@ -112,7 +112,7 @@
     <name>aerial-perspective</name>
     <type>2d</type>
     <width>1024</width>
-    <height>32</height>
+    <height>64</height>
     <format>rgba16f</format>
     <min-filter>linear</min-filter>
     <mag-filter>linear</mag-filter>

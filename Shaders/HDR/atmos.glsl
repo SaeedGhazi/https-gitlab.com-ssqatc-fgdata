@@ -216,27 +216,14 @@ void get_atmosphere_collision_coefficients(in float h,
 }
 
 /*
- * Compute the in-scattering integral of the volume rendering equation (VRE)
- *
- * The integral is solved numerically by ray marching. The final in-scattering
- * returned by this function is a 4D vector of the spectral radiance sampled for
- * the 4 wavelengths at the top of this file. To obtain an RGB triplet, the
- * spectral radiance must be multiplied by the spectral irradiance of the Sun
- * and converted to sRGB.
+ * Any given ray inside the atmospheric medium can end in one of 3 places:
+ * 1. The Earth's surface.
+ * 2. Outer space. We define the boundary between space and the atmosphere
+ *    at the Kármán line (100 km above sea level).
+ * 3. Any object within the atmosphere.
  */
-vec4 compute_inscattering(in vec3 ray_origin,
-                          in vec3 ray_dir,
-                          in float t_max,
-                          in vec3 sun_dir,
-                          in int steps,
-                          in sampler2D transmittance_lut,
-                          out vec4 transmittance)
+float get_ray_end(vec3 ray_origin, vec3 ray_dir, float t_max)
 {
-    // Any given ray inside the atmospheric medium can end in one of 3 places:
-    // 1. The Earth's surface.
-    // 2. Outer space. We define the boundary between space and the atmosphere
-    //    at the Kármán line.
-    // 3. Any object within the atmosphere.
     float ray_altitude = length(ray_origin);
     // Handle the camera being underground
     float earth_radius = min(ray_altitude, get_earth_radius());
@@ -255,19 +242,34 @@ vec4 compute_inscattering(in vec3 ray_origin,
     } else {
         // We are in outer space
         // XXX: For now this is a flight simulator, not a space simulator
-        transmittance = vec4(1.0);
-        return vec4(0.0);
+        t_d = -1.0;
     }
+    return min(t_d, t_max);
+}
 
-    // Clip by the maximum distance
-    t_d = min(t_d, t_max);
-
+/*
+ * Compute the in-scattering integral of the volume rendering equation (VRE)
+ *
+ * The integral is solved numerically by ray marching. The final in-scattering
+ * returned by this function is a 4D vector of the spectral radiance sampled for
+ * the 4 wavelengths at the top of this file. To obtain an RGB triplet, the
+ * spectral radiance must be multiplied by the spectral irradiance of the Sun
+ * and converted to sRGB.
+ */
+vec4 compute_inscattering(in vec3 ray_origin,
+                          in vec3 ray_dir,
+                          in float t_max,
+                          in vec3 sun_dir,
+                          in int steps,
+                          in sampler2D transmittance_lut,
+                          out vec4 transmittance)
+{
     float cos_theta = dot(-ray_dir, sun_dir);
 
     float molecular_phase = molecular_phase_function(cos_theta);
     float aerosol_phase = aerosol_phase_function(cos_theta);
 
-    float dt = t_d / float(steps);
+    float dt = t_max / float(steps);
 
     vec4 L_inscattering = vec4(0.0);
     transmittance = vec4(1.0);

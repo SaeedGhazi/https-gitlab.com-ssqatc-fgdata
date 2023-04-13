@@ -21,10 +21,10 @@ uniform mat4 fg_ViewMatrixInverse;
 uniform vec3 fg_CameraPositionCart;
 uniform vec3 fg_SunDirectionWorld;
 
-const float AP_SLICE_COUNT = 32.0;
+const float AP_SLICE_COUNT = 16.0;
 const float AP_MAX_DEPTH = 128000.0;
 
-const int AERIAL_PERSPECTIVE_STEPS = 20;
+const int AERIAL_PERSPECTIVE_STEPS = 10;
 
 // pos_from_depth.glsl
 vec3 get_view_space_from_depth(vec2 uv, float depth);

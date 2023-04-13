@@ -8,9 +8,9 @@ uniform float fg_CameraDistanceToEarthCenter;
 uniform float fg_SunZenithCosTheta;
 uniform float fg_EarthRadius;
 
-const float AP_SLICE_COUNT = 32.0;
+const float AP_SLICE_COUNT = 16.0;
 const float AP_MAX_DEPTH = 128000.0;
-const float AP_SLICE_WIDTH_PIXELS = 32.0;
+const float AP_SLICE_WIDTH_PIXELS = 64.0;
 const float AP_SLICE_SIZE = 1.0 / AP_SLICE_COUNT;
 const float AP_TEXEL_WIDTH = 1.0 / (AP_SLICE_COUNT * AP_SLICE_WIDTH_PIXELS);
 

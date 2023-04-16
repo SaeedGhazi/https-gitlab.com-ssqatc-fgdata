@@ -1,23 +1,29 @@
 #version 330 core
 
-// math.glsl
-float M_PI();
-float M_1_PI();
-float M_1_4PI();
+uniform int aerosol_type;
+uniform float aerosol_turbidity;
+uniform float ground_albedo;
+uniform int month_of_the_year;
+
+uniform float fg_EarthRadius;
 
 const float RAYLEIGH_PHASE_SCALE = 0.05968310365946075091; // 3/(16*pi)
 const float HENYEY_ASYMMETRY = 0.8;
 const float HENYEY_ASYMMETRY2 = HENYEY_ASYMMETRY*HENYEY_ASYMMETRY;
 
-// Rayleigh scattering coefficient at sea level, units m^-1
-// "Rayleigh-scattering calculations for the terrestrial atmosphere"
-// by Anthony Bucholtz (1995).
+/*
+ * Rayleigh scattering coefficient at sea level, units m^-1
+ * "Rayleigh-scattering calculations for the terrestrial atmosphere"
+ *     by Anthony Bucholtz (1995).
+ */
 const vec4 molecular_scattering_coefficient_base =
     vec4(6.605e-6, 1.067e-5, 1.842e-5, 3.156e-5);
 
-// Ozone absorption cross section, units m^2 / molecules
-// "High spectral resolution ozone absorption cross-sections"
-// by V. Gorshelev et al. (2014).
+/*
+ * Ozone absorption cross section, units m^2 / molecules
+ * "High spectral resolution ozone absorption cross-sections"
+ * by V. Gorshelev et al. (2014).
+ */
 const vec4 ozone_cross_section =
     vec4(3.472e-21, 3.914e-21, 1.349e-21, 11.03e-23) * 1e-4f;
 
@@ -45,34 +51,12 @@ const float ozone_height_distribution[] = float[](
     0.0
     );
 
-/*
- * Every aerosol type expects 5 parameters:
- * - Scattering cross section
- * - Absorption cross section
- * - Base density (km^-3)
- * - Background density (km^-3)
- * - Height scaling parameter
- * These parameters can be sent as uniforms.
- *
- * This model for aerosols and their corresponding parameters come from
- * "A Physically-Based Spatio-Temporal Sky Model"
- * by Guimera et al. (2018).
- */
-// Urban
-uniform vec4 aerosol_absorption_cross_section =
-    vec4(2.8722e-24, 4.6168e-24, 7.9706e-24, 1.3578e-23);
-uniform vec4 aerosol_scattering_cross_section =
-    vec4(1.5908e-22, 1.7711e-22, 2.0942e-22, 2.4033e-22);
-uniform float aerosol_base_density = 1.3681e20;
-uniform float aerosol_relative_background_density = 2e6 / 1.3681e20;
-uniform float aerosol_height_scale = 0.73;
-
-uniform float aerosol_turbidity = 1.0;
-
-uniform int month_of_the_year = 0;
-uniform vec4 ground_albedo = vec4(0.3);
-
-uniform float fg_EarthRadius;
+// math.glsl
+float M_PI();
+float M_2PI();
+float M_1_PI();
+float M_1_4PI();
+float sqr(float x);
 
 //------------------------------------------------------------------------------
 
@@ -141,7 +125,7 @@ vec4 get_multiple_scattering(sampler2D transmittance_lut,
 {
     // Solid angle subtended by the planet from a point at d distance
     // from the planet center.
-    float omega = 2.0 * M_PI() * (1.0 - sqrt(d*d - get_earth_radius()*fg_EarthRadius) / d);
+    float omega = M_2PI() * (1.0 - sqrt(sqr(d) - sqr(get_earth_radius())) / d);
     omega = max(0.0, omega);
 
     vec4 T_to_ground = transmittance_from_lut(transmittance_lut, cos_theta, 0.0);
@@ -179,7 +163,7 @@ vec4 get_molecular_absorption_coefficient(float h)
 {
     int i = int(clamp(h / 9.0, 0.0, 6.0));
     float density = ozone_height_distribution[i] *
-        ozone_mean_monthly_dobson[month_of_the_year] * 2.6867e20f; // molecules / m^2
+        ozone_mean_monthly_dobson[month_of_the_year-1] * 2.6867e20f; // molecules / m^2
     density /= 9e3; // m^-3
     return ozone_cross_section * density; // m^-1
 }
@@ -187,10 +171,111 @@ vec4 get_molecular_absorption_coefficient(float h)
 /*
  * Return the aerosol density for a given altitude in kilometers.
  */
-float get_aerosol_density(float h)
+float get_aerosol_density(float h, float base_density, float height_scale,
+                          float relative_background_density)
 {
-    return aerosol_base_density * (exp(-h / aerosol_height_scale)
-                                   + aerosol_relative_background_density);
+    if (aerosol_type == 0) {
+        // Only for the Background aerosol type, no dependency on height
+        return base_density * (1.0 + relative_background_density);
+    } else {
+        return base_density * (exp(-h / height_scale) + relative_background_density);
+    }
+}
+
+/*
+ * Get the aerosol collision coefficients for a given altitude h in km.
+ * The two main parameters are the aerosol type (0 to 8), and the turbidity.
+ * Every aerosol type expects 5 parameters:
+ * - Scattering cross section
+ * - Absorption cross section
+ * - Base density (km^-3)
+ * - Background density (km^-3)
+ * - Height scaling parameter
+ *
+ * This model for aerosols and their corresponding parameters come from
+ * "A Physically-Based Spatio-Temporal Sky Model"
+ *     by Guimera et al. (2018).
+ */
+void get_aerosol_collision_coefficients(in float h,
+                                        out vec4 absorption,
+                                        out vec4 scattering)
+{
+    vec4 aerosol_absorption_cross_section, aerosol_scattering_cross_section;
+    float aerosol_base_density, aerosol_background_density, aerosol_height_scale;
+    if (aerosol_type == 0) {
+        // Background
+        aerosol_absorption_cross_section = vec4(4.5517e-19, 5.9269e-19, 6.9143e-19, 8.5228e-19);
+        aerosol_scattering_cross_section = vec4(1.8921e-26, 1.6951e-26, 1.7436e-26, 2.1158e-26);
+        aerosol_base_density = 2.584e17;
+        aerosol_background_density = 2e6;
+    } else if (aerosol_type == 1) {
+        // Desert-Dust
+        aerosol_absorption_cross_section = vec4(4.6758e-16, 4.4654e-16, 4.1989e-16, 4.1493e-16);
+        aerosol_scattering_cross_section = vec4(2.9144e-16, 3.1463e-16, 3.3902e-16, 3.4298e-16);
+        aerosol_base_density = 1.8662e18;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 2.0;
+    } else if (aerosol_type == 2) {
+        // Maritime Clean
+        aerosol_absorption_cross_section = vec4(6.3312e-19, 7.5567e-19, 9.2627e-19, 1.0391e-18);
+        aerosol_scattering_cross_section = vec4(4.6539e-26, 2.721e-26, 4.1104e-26, 5.6249e-26);
+        aerosol_base_density = 2.0266e17;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 0.9;
+    } else if (aerosol_type == 3) {
+        // Maritime Mineral
+        aerosol_absorption_cross_section = vec4(6.9365e-19, 7.5951e-19, 8.2423e-19, 8.9101e-19);
+        aerosol_scattering_cross_section = vec4(2.3699e-19, 2.2439e-19, 2.2126e-19, 2.021e-19);
+        aerosol_base_density = 2.0266e17;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 2.0;
+    } else if (aerosol_type == 4) {
+        // Polar Antarctic
+        aerosol_absorption_cross_section = vec4(1.3399e-16, 1.3178e-16, 1.2909e-16, 1.3006e-16);
+        aerosol_scattering_cross_section = vec4(1.5506e-19, 1.809e-19, 2.3069e-19, 2.5804e-19);
+        aerosol_base_density = 2.3864e16;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 30.0;
+    } else if (aerosol_type == 5) {
+        // Polar Arctic
+        aerosol_absorption_cross_section = vec4(1.0364e-16, 1.0609e-16, 1.0193e-16, 1.0092e-16);
+        aerosol_scattering_cross_section = vec4(2.1609e-17, 2.2759e-17, 2.5089e-17, 2.6323e-17);
+        aerosol_base_density = 2.3864e16;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 30.0;
+    } else if (aerosol_type == 6) {
+        // Remote Continental
+        aerosol_absorption_cross_section = vec4(4.5307e-18, 5.0662e-18, 4.4877e-18, 3.7917e-18);
+        aerosol_scattering_cross_section = vec4(1.8764e-18, 1.746e-18, 1.6902e-18, 1.479e-18);
+        aerosol_base_density = 6.103e18;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 0.73;
+    } else if (aerosol_type == 7) {
+        // Rural
+        aerosol_absorption_cross_section = vec4(5.0393e-23, 8.0765e-23, 1.3823e-22, 2.3383e-22);
+        aerosol_scattering_cross_section = vec4(2.6004e-22, 2.4844e-22, 2.8362e-22, 2.7494e-22);
+        aerosol_base_density = 8.544e18;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 0.73;
+    } else if (aerosol_type == 8) {
+        // Urban
+        aerosol_absorption_cross_section = vec4(2.8722e-24, 4.6168e-24, 7.9706e-24, 1.3578e-23);
+        aerosol_scattering_cross_section = vec4(1.5908e-22, 1.7711e-22, 2.0942e-22, 2.4033e-22);
+        aerosol_base_density = 1.3681e20;
+        aerosol_background_density = 2e6;
+        aerosol_height_scale = 0.73;
+    }
+
+    float aerosol_relative_background_density =
+        aerosol_background_density / aerosol_base_density;
+
+    float aerosol_density = get_aerosol_density(
+        h, aerosol_base_density, aerosol_height_scale,
+        aerosol_relative_background_density);
+    aerosol_density *= aerosol_turbidity * 1e-3;
+
+    absorption = aerosol_absorption_cross_section * aerosol_density;
+    scattering = aerosol_scattering_cross_section * aerosol_density;
 }
 
 /*
@@ -204,12 +289,11 @@ void get_atmosphere_collision_coefficients(in float h,
                                            out vec4 molecular_scattering,
                                            out vec4 extinction)
 {
+    h *= 1e-3; // To km
     h = max(h, 0.0); // In case height is negative
-    float aerosol_density = get_aerosol_density(h * 1e-3) * aerosol_turbidity;
-    aerosol_absorption = aerosol_absorption_cross_section * aerosol_density * 1e-3;
-    aerosol_scattering = aerosol_scattering_cross_section * aerosol_density * 1e-3;
-    molecular_absorption = get_molecular_absorption_coefficient(h * 1e-3);
-    molecular_scattering = get_molecular_scattering_coefficient(h * 1e-3);
+    get_aerosol_collision_coefficients(h, aerosol_absorption, aerosol_scattering);
+    molecular_absorption = get_molecular_absorption_coefficient(h);
+    molecular_scattering = get_molecular_scattering_coefficient(h);
     extinction =
         aerosol_absorption + aerosol_scattering +
         molecular_absorption + molecular_scattering;

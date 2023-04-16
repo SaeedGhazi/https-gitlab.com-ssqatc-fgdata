@@ -111,12 +111,12 @@
 			</binding>
 		</item>
 
-		<item>
+		<!--item>
 			<name>aircraft-center</name>
 			<binding>
 				<command>open-launcher</command>
 			</binding>
-		</item>
+		</item-->
 
 		<item>
 			<name>error-reports</name>

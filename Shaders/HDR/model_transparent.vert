@@ -28,7 +28,7 @@ vec4 get_aerial_perspective(vec2 coord, float depth);
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
-    vN = normalize(osg_NormalMatrix * normal);
+    vN = osg_NormalMatrix * normal;
     vP = (osg_ModelViewMatrix * pos).xyz;
     texcoord = multitexcoord0.st;
 

@@ -929,6 +929,7 @@
         <fragment-shader>Shaders/HDR/terrain_runway.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
       </program>
       <uniform>

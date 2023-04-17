@@ -1306,7 +1306,7 @@ please see Docs/README.model-combined.eff for documentation
 		  </pass>
 		</technique>
 
-        <technique n="7">
+        <technique n="108">
           <scheme>hdr-geometry</scheme>
           <pass>
             <!-- Reverse floating point depth buffer -->
@@ -1342,6 +1342,7 @@ please see Docs/README.model-combined.eff for documentation
               <fragment-shader>Shaders/HDR/model_combined.frag</fragment-shader>
               <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
               <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+              <fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>
               <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
             </program>
             <uniform>
@@ -1372,6 +1373,9 @@ please see Docs/README.model-combined.eff for documentation
           </pass>
         </technique>
 
+        <technique n="7">
+          <predicate><value type="bool">false</value></predicate>
+        </technique>
         <technique n="9">
           <predicate><value type="bool">false</value></predicate>
         </technique>

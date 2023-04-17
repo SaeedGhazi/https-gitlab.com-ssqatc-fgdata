@@ -30,11 +30,6 @@
     <flip-vertically>false</flip-vertically>
   </parameters>
 
-  <generate>
-    <tangent type="int">6</tangent>
-    <binormal type="int">7</binormal>
-  </generate>
-
   <technique n="109">
     <scheme>hdr-geometry</scheme>
     <pass>
@@ -93,15 +88,8 @@
         <fragment-shader>Shaders/HDR/model_pbr.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
-        <attribute>
-          <name>tangent</name>
-          <index>6</index>
-        </attribute>
-        <attribute>
-          <name>binormal</name>
-          <index>7</index>
-        </attribute>
       </program>
       <uniform>
         <name>base_color_tex</name>

@@ -95,6 +95,7 @@
         <vertex-shader>Shaders/HDR/model_pbr_transparent.vert</vertex-shader>
         <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/model_pbr_transparent.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/shading_transparent.glsl</fragment-shader>
@@ -105,14 +106,6 @@
         <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/clustered.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
-        <attribute>
-          <name>tangent</name>
-          <index>6</index>
-        </attribute>
-        <attribute>
-          <name>binormal</name>
-          <index>7</index>
-        </attribute>
       </program>
       <uniform>
         <name>base_color_tex</name>

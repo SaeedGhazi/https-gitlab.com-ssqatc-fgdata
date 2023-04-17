@@ -1,8 +1,10 @@
 #version 330 core
 
-in vec3 vN;
-in vec2 texcoord;
-in vec4 material_color;
+in VS_OUT {
+    vec2 texcoord;
+    vec3 vertex_normal;
+    vec4 material_color;
+} fs_in;
 
 uniform sampler2D color_tex;
 
@@ -17,8 +19,10 @@ vec3 eotf_inverse_sRGB(vec3 srgb);
 
 void main()
 {
-    vec3 texel = texture(color_tex, texcoord).rgb;
-    vec3 color = eotf_inverse_sRGB(texel) * material_color.rgb;
+    vec3 texel = texture(color_tex, fs_in.texcoord).rgb;
+    vec3 color = eotf_inverse_sRGB(texel) * fs_in.material_color.rgb;
 
-    gbuffer_pack(vN, color, DEFAULT_METALLIC, DEFAULT_ROUGHNESS, 1.0, vec3(0.0), 3u);
+    vec3 N = normalize(fs_in.vertex_normal);
+
+    gbuffer_pack(N, color, DEFAULT_METALLIC, DEFAULT_ROUGHNESS, 1.0, vec3(0.0), 3u);
 }

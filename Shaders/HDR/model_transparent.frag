@@ -30,12 +30,13 @@ void main()
     vec3 base_color = eotf_inverse_sRGB(texel.rgb) * material_color.rgb;
     float alpha = material_color.a * texel.a;
 
+    vec3 N = normalize(vN);
     vec3 V = normalize(-vP);
     vec2 uv = (gl_FragCoord.xy - fg_Viewport.xy) / fg_Viewport.zw;
 
     vec3 color = eval_lights_transparent(
         base_color, TRANSPARENT_METALLIC, TRANSPARENT_ROUGHNESS, 1.0,
-        vP, vN, V, uv, ap_color, osg_ViewMatrixInverse);
+        vP, N, V, uv, ap_color, osg_ViewMatrixInverse);
 
     fragColor = vec4(color, alpha);
 }

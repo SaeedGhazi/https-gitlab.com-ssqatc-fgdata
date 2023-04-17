@@ -237,7 +237,7 @@ var Element = {
     },
 
     _setupCenterNodes: func(cx = nil, cy = nil) {
-        if (me["_center"] == nil) {
+        if (me["_center"] == nil or (size(me._center) >= 1 and me._center[0] == nil) or (size(me._center) >= 2 and me._center[1] == nil)) {
             me["_center"] = [me._node.getNode("center[0]", cx != nil),
                              me._node.getNode("center[1]", cy != nil)];
         }

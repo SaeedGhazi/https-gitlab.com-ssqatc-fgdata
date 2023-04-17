@@ -221,6 +221,48 @@ var WidgetsFactoryDialog = {
 		})
 			.setValue(42);
 		m.numericControlsTab.addItem(m.slider);
+		
+		m.dialBox = HBoxLayout.new();
+		m.dialBox.setContentsMargin(10);
+		m.numericControlsTab.addItem(m.dialBox);
+		
+		m.dial = gui.widgets.Dial.new(m.tabsContent, style, {
+			"min-value": 5,
+			"max-value": 50,
+			"step-size": 0.5,
+			"page-size": 5,
+			"tick-step": 2,
+			"show-value": 0,
+			"show-ticks": 0,
+			"value": 14,
+			"value-format": "%.1f",
+			"wrap": 0,
+		});
+		m.dialBox.addItem(m.dial);
+		
+		m.dialOptionsBox =VBoxLayout.new();
+		m.dialBox.addItem(m.dialOptionsBox);
+		m.dialShowValueCheckBox = gui.widgets.CheckBox.new(m.tabsContent, canvas.style, {})
+						.setText("Show value")
+						.listen("toggled", func(e) {
+							m.dial.setShowValue(e.detail.checked);
+						});
+		m.dialShowValueCheckBox.setAlignment(canvas.AlignTop);
+		m.dialOptionsBox.addItem(m.dialShowValueCheckBox);
+		m.dialShowTicksCheckBox = gui.widgets.CheckBox.new(m.tabsContent, canvas.style, {})
+						.setText("Show ticks")
+						.listen("toggled", func(e) {
+							m.dial.setShowTicks(e.detail.checked);
+						});
+		m.dialShowTicksCheckBox.setAlignment(canvas.AlignTop);
+		m.dialOptionsBox.addItem(m.dialShowTicksCheckBox);
+		m.dialWrapCheckBox = gui.widgets.CheckBox.new(m.tabsContent, canvas.style, {})
+						.setText("Wrap value")
+						.listen("toggled", func(e) {
+							m.dial.setWrap(e.detail.checked);
+						});
+		m.dialWrapCheckBox.setAlignment(canvas.AlignTop);
+		m.dialOptionsBox.addItem(m.dialWrapCheckBox);
 
 
 		return m;

@@ -1138,6 +1138,205 @@ DefaultStyle.widgets.slider = {
   }
 };
 
+DefaultStyle.widgets.dial = {
+  new: func(parent, cfg) {
+    me._root = parent.createChild("group", "dial");
+    me._knob = me._root.createChild("path", "dial-knob");
+    me._handle = me._root.createChild("image", "dial-handle");
+    me._handleTranslateTransform = me._handle.createTransform();
+    me._value = me._root.createChild("text", "dial-value")
+            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+            .set("character-size", me._style.getSize("dial-value-font-size", me._style.getSize("base-font-size", 14)))
+            .set("alignment", "center-center")
+            .setText(0);
+    me._ticks = me._root.createChild("path", "dial-ticks");
+
+    me._maxValueWidth = 20;
+  },
+
+  _updateLayoutSizes: func(model) {
+    var handleSize = me._handle.imageSize()[1];
+    var borderHandleMargin = math.clamp(
+      math.min(model._size[0], model._size[1]) * 0.0625,
+      2,
+      me._style.getSize("dial-border-handle-margin", 8),
+    );
+    var valueSize = [0, 0];
+    var valueHandleMargin = me._style.getSize("dial-value-handle-margin", 5);
+    if (model._showValue) {
+      valueSize = [
+        me._maxValueWidth + valueHandleMargin * 2,
+        me._style.getSize("dial-value-font-size", me._style.getSize("base-font-size", 14)) + valueHandleMargin * 2
+      ];
+    } else {
+      valueSize = me._style.getSize("dial-center-handle-margin", 2) * 2;
+      valueSize = [valueSize, valueSize];
+    }
+    var minW = borderHandleMargin * 2 + valueSize[0] + handleSize * 2;
+    var minH = borderHandleMargin * 2 + valueSize[1] + handleSize * 2;
+    var length = math.max(minW, minH);
+    if (model._showTicks) {
+      length += me._style.getSize("dial-knob-ticks-margin", 2) + me._style.getSize("dial-ticks-length", 10);
+    }
+    model.setLayoutMinimumSize([length, length]);
+  },
+
+  setSize: func(model, length) {
+    var knobTicksMargin = me._style.getSize("dial-knob-ticks-margin", 2);
+    var ticksLength = me._style.getSize("dial-ticks-length", 10);
+    var knobRadius = (length - me._style.getSize("dial-knob-border-width", 1)) / 2;
+    var halfLength = length / 2;
+    if (model._showTicks) {
+      knobRadius -= knobTicksMargin + ticksLength;
+    }
+    me._knob.reset()
+            .circle(knobRadius, halfLength, halfLength);
+    me._value.setTranslation(
+      halfLength,
+      halfLength
+    );
+    var handleOffset = [
+      halfLength - me._handle.imageSize()[0] / 2,
+      math.clamp(knobRadius * 0.125, 2, me._style.getSize("dial-border-handle-margin", 8))
+    ];
+    if (model._showTicks) {
+      handleOffset[1] += knobTicksMargin + ticksLength;
+    }
+    me._handleTranslateTransform.setTranslation(handleOffset[0], handleOffset[1]);
+    me._handle.setCenter(
+      me._handle.imageSize()[0] / 2,
+      halfLength - handleOffset[1]
+    );
+    var degreesRange = 360;
+    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30); 
+    var offset = 0;
+    if (!model._wraps) {
+      degreesRange -= nowrapMargin;
+      offset = nowrapMargin / 2;
+    }
+    me._handle.setRotation((model._normValue() * degreesRange + offset) * D2R);
+    me._drawTicks(model);
+  },
+
+  _drawTicks: func(model) {
+    var length = math.min(model._size[0], model._size[1]);
+    var halfLength = length / 2;
+    var knobTicksMargin = me._style.getSize("dial-knob-ticks-margin", 2);
+    var ticksLength = me._style.getSize("dial-ticks-length", 10);
+    var knobRadius = (length - me._style.getSize("dial-knob-border-width", 1)) / 2 - knobTicksMargin - ticksLength;
+    
+    var degreesRange = 360;
+    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30);
+    var offset = 0;
+    if (!model._wraps) {
+      degreesRange -= nowrapMargin;
+      offset = nowrapMargin / 2;
+    }
+    var range = model._maxValue - model._minValue;
+    var center = [halfLength, halfLength];
+    var degreesPerTickStep = (degreesRange / range) * model._tickStep;
+    var lengthBegin = knobRadius + knobTicksMargin;
+    var lengthEnd = lengthBegin + ticksLength;
+    me._ticks.reset();
+
+    for (var i = 0; i < degreesRange / degreesPerTickStep; i += 1) {
+      var radians = (i * degreesPerTickStep + offset) * D2R;
+      var sin = math.sin(radians);
+      var cos = -math.cos(radians);
+      var start = [center[0] + sin * lengthBegin, center[1] + cos * lengthBegin];
+      var tick = [center[0] + sin * lengthEnd, center[1] + cos * lengthEnd];
+      me._ticks.moveTo(start[0], start[1]).lineTo(tick[0], tick[1]);
+    }
+  },
+
+  _updateMaxValueWidth: func(model) {
+    if (model._valueFormat != nil) {
+      me._value.setText(sprintf(model._valueFormat, model._minValue));
+      var min = me._value.maxWidth();
+      me._value.setText(sprintf(model._valueFormat, model._maxValue));
+      var max = me._value.maxWidth();
+      me._value.setText(sprintf(model._valueFormat, model._minValue + model._stepSize));
+      var minStep = me._value.maxWidth();
+      me._value.setText(sprintf(model._valueFormat, model._value));
+    } else {
+      me._value.setText(model._minValue);
+      var min = me._value.maxWidth();
+      me._value.setText(model._maxValue);
+      var max = me._value.maxWidth();
+      me._value.setText(model._minValue + model._stepSize);
+      var minStep = me._value.maxWidth();
+      me._value.setText(model._value);
+    }
+    me._maxValueWidth = math.max(min, max, minStep);
+  },
+
+  setValue: func(model, value) {
+    var degreesRange = 360;
+    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30); 
+    var offset = 0;
+    if (!model._wraps) {
+      degreesRange -= nowrapMargin;
+      offset = nowrapMargin / 2;
+    }
+    me._handle.setRotation((model._normValue() * degreesRange + offset) * D2R);
+    if (model._valueFormat != nil) {
+      me._value.setText(sprintf(model._valueFormat, value));
+    } else {
+      me._value.setText(value);
+    }
+  },
+
+  update: func(model) {
+    var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
+    me._value.set("fill", me._style.getColor(color_name));
+
+    color_name = "dial_knob_bg";
+    if (!model._enabled) {
+      color_name ~= "_disabled";
+    } elsif (model._focused and model._windowFocus()) {
+      color_name ~= "_focused";
+    } elsif (!model._windowFocus()) {
+      color_name ~= "_backdrop";
+    }
+    if (model._hover and model._enabled and model._windowFocus()) {
+      color_name ~= "_hovered";
+    }
+    me._knob.set("fill", me._style.getColor(color_name));
+    
+    color_name = "dial_knob_border";
+    if (!model._enabled) {
+      color_name ~= "_disabled";
+    } elsif (model._focused and model._windowFocus()) {
+      color_name ~= "_focused";
+    }
+    if (model._hover and model._enabled and model._windowFocus()) {
+      color_name ~= "_hovered";
+    }
+    me._knob.set("stroke", me._style.getColor(color_name));
+    
+    var file = me._style._dir_widgets ~ "/dial-handle";
+    if (!model._enabled) {
+      file ~= "-disabled";
+    } elsif (model._handleDown) {
+      file ~= "-down";
+    }
+    me._handle.set("src", file ~ ".png");
+
+    me._ticks.set("stroke", me._style.getColor("dial_ticks"));
+
+    if (model._showValue) {
+      me._value.show();
+    } else {
+      me._value.hide();
+    }
+    if (model._showTicks) {
+      me._ticks.show();
+    } else {
+      me._ticks.hide();
+    }
+  }
+};
+
 DefaultStyle.widgets["menu-item"] = {
 	new: func(parent, cfg) {
 		me._root = parent.createChild("group", "menu-item");

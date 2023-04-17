@@ -39,6 +39,7 @@ loadGUIFile("styles/DefaultStyle.nas");
 # widgets
 loadWidget("Button");
 loadWidget("CheckBox");
+loadWidget("Dial");
 loadWidget("Label");
 loadWidget("LineEdit");
 loadWidget("List");

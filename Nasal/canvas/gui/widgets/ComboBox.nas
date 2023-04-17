@@ -54,7 +54,7 @@ gui.widgets.ComboBox = {
     var index = 0;
     foreach(var i; me._items) {
       if (i.menuValue == value) {
-        setCurrentByIndex(index);
+        me.setCurrentByIndex(index);
         break;
       }
 
@@ -68,13 +68,32 @@ gui.widgets.ComboBox = {
     if (me._currentIndex == index)
       return;
 
-    if (index >= size(me._items)) {
-      logprint(DEV_WARN, "Canvas.Gui ComboBox: invalid index passed to setCUrrentByIndex" ~ index);
+    if (index >= size(me._items) or index < 0) {
+      logprint(DEV_WARN, "Canvas.Gui ComboBox: invalid index passed to setCurrentByIndex" ~ index);
       return;
     }
 
     me._currentIndex = index;
     me._view.setText(me, me._items[index].text());
+    me._trigger("selected-item-changed", {"index": index, "text": me._items[index].text(), "value": me._items[index].menuValue});
+  },
+
+  findByValue: func(value) {
+    for (var i = 0; i < size(me._items); i += 1) {
+      if (me._items[i].menuValue == value) {
+        return i;
+      }
+    }
+    return -1;
+  },
+
+  findByText: func(text) {
+    for (var i = 0; i < size(me._items); i += 1) {
+      if (me._items[i].text() == text) {
+        return i;
+      }
+    }
+    return -1;
   },
 
   setDown: func(down = 1)
@@ -115,7 +134,9 @@ gui.widgets.ComboBox = {
     el.addEventListener("click", func(e) {
       if (me._enabled) {
         me.setDown(!me._down);
-        me._openMenu(e.screenX - e.localX, e.screenY - e.localY + me._size[1]);
+        if (me._down) {
+          me._openMenu(e.screenX - e.localX, e.screenY - e.localY + me._size[1]);
+        }
       }
     });
   },

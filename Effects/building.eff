@@ -119,19 +119,19 @@
 				<vertex-shader n="0">Shaders/building-model-ALS-ultra.vert</vertex-shader>
 				<attribute>
 					<name>instancePosition</name>
-					<index>10</index>
+					<index>9</index>
 				</attribute>
 				<attribute>
 					<name>instanceScale</name>
-					<index>11</index>
+					<index>10</index>
 				</attribute>
 				<attribute>
 					<name>attrib1</name>
-					<index>12</index>
+					<index>11</index>
 				</attribute>
 				<attribute>
 					<name>attrib2</name>
-					<index>13</index>
+					<index>12</index>
 				</attribute>
 			</program>
 		</pass>
@@ -144,19 +144,19 @@
 				<vertex-shader n="0">Shaders/building-ALS.vert</vertex-shader>
 				<attribute>
 					<name>instancePosition</name>
-					<index>10</index>
+					<index>9</index>
 				</attribute>
 				<attribute>
 					<name>instanceScale</name>
-					<index>11</index>
+					<index>10</index>
 				</attribute>
 				<attribute>
 					<name>attrib1</name>
-					<index>12</index>
+					<index>11</index>
 				</attribute>
 				<attribute>
 					<name>attrib2</name>
-					<index>13</index>
+					<index>12</index>
 				</attribute>
 			</program>
 		</pass>
@@ -168,19 +168,19 @@
 				<vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
 				<attribute>
 					<name>instancePosition</name>
-					<index>10</index>
+					<index>9</index>
 				</attribute>
 				<attribute>
 					<name>instanceScale</name>
-					<index>11</index>
+					<index>10</index>
 				</attribute>
 				<attribute>
 					<name>attrib1</name>
-					<index>12</index>
+					<index>11</index>
 				</attribute>
 				<attribute>
 					<name>attrib2</name>
-					<index>13</index>
+					<index>12</index>
 				</attribute>
 			</program>
 		</pass>

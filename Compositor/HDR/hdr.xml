@@ -64,7 +64,7 @@
     <type>2d</type>
     <width>screen</width>
     <height>screen</height>
-    <format>depth32f-stencil</format>
+    <format>depth32f-stencil8</format>
   </buffer>
 
   <!-- HDR shading result -->

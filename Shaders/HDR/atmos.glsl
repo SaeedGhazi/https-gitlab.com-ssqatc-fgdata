@@ -1,9 +1,24 @@
+/*
+ * Common atmosphere rendering functions
+ *
+ * See https://www.shadertoy.com/view/msXXDS for a more complete description
+ * of what the shader does and more references.
+ *
+ * All 4-component vectors in this file represent values sampled for the
+ * following wavelengths: 630, 560, 490, 430 nm
+ */
+
 #version 330 core
 
-uniform int aerosol_type;
-uniform float aerosol_turbidity;
-uniform float ground_albedo;
-uniform int month_of_the_year;
+uniform vec4 aerosol_absorption_cross_section;
+uniform vec4 aerosol_scattering_cross_section;
+uniform float aerosol_base_density;
+uniform float aerosol_relative_background_density;
+uniform float aerosol_scale_height;
+uniform float fog_density;
+uniform float fog_scale_height;
+uniform float ozone_mean_dobson;
+uniform vec4 ground_albedo;
 
 uniform float fg_EarthRadius;
 
@@ -20,36 +35,20 @@ const vec4 molecular_scattering_coefficient_base =
     vec4(6.605e-6, 1.067e-5, 1.842e-5, 3.156e-5);
 
 /*
+ * Fog scattering/extinction cross section, units m^2 / molecules
+ * Mie theory results for IOR of 1.333. Particle size is a log normal
+ * distribution of mean diameter=15 and std deviation=0.4
+ */
+const vec4 fog_scattering_cross_section =
+    vec4(5.015e-10, 4.987e-10, 4.966e-10, 4.949e-10);
+
+/*
  * Ozone absorption cross section, units m^2 / molecules
  * "High spectral resolution ozone absorption cross-sections"
  * by V. Gorshelev et al. (2014).
  */
-const vec4 ozone_cross_section =
-    vec4(3.472e-21, 3.914e-21, 1.349e-21, 11.03e-23) * 1e-4f;
-
-const float ozone_mean_monthly_dobson[] = float[](
-    347.0, // January
-    370.0, // February
-    381.0, // March
-    384.0, // April
-    372.0, // May
-    352.0, // June
-    333.0, // July
-    317.0, // August
-    298.0, // September
-    285.0, // October
-    290.0, // November
-    315.0  // December
-    );
-const float ozone_height_distribution[] = float[](
-    9.0   / 210.0,
-    14.0  / 210.0,
-    111.0 / 210.0,
-    64.0  / 210.0,
-    6.0   / 210.0,
-    6.0   / 210.0,
-    0.0
-    );
+const vec4 ozone_absorption_cross_section =
+    vec4(3.472e-25, 3.914e-25, 1.349e-25, 11.03e-27);
 
 // math.glsl
 float M_PI();
@@ -156,131 +155,46 @@ vec4 get_molecular_scattering_coefficient(float h)
 }
 
 /*
- * Return the molecular volume absorption coefficient (km^-1) for a given altitude
+ * Return the molecular volume absorption coefficient (m^-1) for a given altitude
  * in kilometers.
  */
 vec4 get_molecular_absorption_coefficient(float h)
 {
-    int i = int(clamp(h / 9.0, 0.0, 6.0));
-    float density = ozone_height_distribution[i] *
-        ozone_mean_monthly_dobson[month_of_the_year-1] * 2.6867e20f; // molecules / m^2
-    density /= 9e3; // m^-3
-    return ozone_cross_section * density; // m^-1
+    h += 1e-4; // Avoid division by 0
+    float t = log(h) - 3.22261;
+    float density = 3.78547397e17 * (1.0 / h) * exp(-t * t * 5.55555555);
+    return ozone_absorption_cross_section * ozone_mean_dobson * density;
 }
 
 /*
  * Return the aerosol density for a given altitude in kilometers.
  */
-float get_aerosol_density(float h, float base_density, float height_scale,
-                          float relative_background_density)
+float get_aerosol_density(float h)
 {
-    if (aerosol_type == 0) {
-        // Only for the Background aerosol type, no dependency on height
-        return base_density * (1.0 + relative_background_density);
-    } else {
-        return base_density * (exp(-h / height_scale) + relative_background_density);
-    }
+    return aerosol_base_density * (exp(-h / aerosol_scale_height)
+                                   + aerosol_relative_background_density);
 }
 
 /*
- * Get the aerosol collision coefficients for a given altitude h in km.
- * The two main parameters are the aerosol type (0 to 8), and the turbidity.
- * Every aerosol type expects 5 parameters:
- * - Scattering cross section
- * - Absorption cross section
- * - Base density (km^-3)
- * - Background density (km^-3)
- * - Height scaling parameter
+ * Return the fog volume scattering coefficient (m^-1) for a given altitude in
+ * kilometers.
  *
- * This model for aerosols and their corresponding parameters come from
- * "A Physically-Based Spatio-Temporal Sky Model"
- *     by Guimera et al. (2018).
+ * Fog (or mist, depending on density) is a special kind of aerosol consisting
+ * of water droplets or ice crystals. Visibility is mostly dependent on fog.
  */
-void get_aerosol_collision_coefficients(in float h,
-                                        out vec4 absorption,
-                                        out vec4 scattering)
+vec4 get_fog_scattering_coefficient(float h)
 {
-    vec4 aerosol_absorption_cross_section, aerosol_scattering_cross_section;
-    float aerosol_base_density, aerosol_background_density, aerosol_height_scale;
-    if (aerosol_type == 0) {
-        // Background
-        aerosol_absorption_cross_section = vec4(4.5517e-19, 5.9269e-19, 6.9143e-19, 8.5228e-19);
-        aerosol_scattering_cross_section = vec4(1.8921e-26, 1.6951e-26, 1.7436e-26, 2.1158e-26);
-        aerosol_base_density = 2.584e17;
-        aerosol_background_density = 2e6;
-    } else if (aerosol_type == 1) {
-        // Desert-Dust
-        aerosol_absorption_cross_section = vec4(4.6758e-16, 4.4654e-16, 4.1989e-16, 4.1493e-16);
-        aerosol_scattering_cross_section = vec4(2.9144e-16, 3.1463e-16, 3.3902e-16, 3.4298e-16);
-        aerosol_base_density = 1.8662e18;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 2.0;
-    } else if (aerosol_type == 2) {
-        // Maritime Clean
-        aerosol_absorption_cross_section = vec4(6.3312e-19, 7.5567e-19, 9.2627e-19, 1.0391e-18);
-        aerosol_scattering_cross_section = vec4(4.6539e-26, 2.721e-26, 4.1104e-26, 5.6249e-26);
-        aerosol_base_density = 2.0266e17;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 0.9;
-    } else if (aerosol_type == 3) {
-        // Maritime Mineral
-        aerosol_absorption_cross_section = vec4(6.9365e-19, 7.5951e-19, 8.2423e-19, 8.9101e-19);
-        aerosol_scattering_cross_section = vec4(2.3699e-19, 2.2439e-19, 2.2126e-19, 2.021e-19);
-        aerosol_base_density = 2.0266e17;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 2.0;
-    } else if (aerosol_type == 4) {
-        // Polar Antarctic
-        aerosol_absorption_cross_section = vec4(1.3399e-16, 1.3178e-16, 1.2909e-16, 1.3006e-16);
-        aerosol_scattering_cross_section = vec4(1.5506e-19, 1.809e-19, 2.3069e-19, 2.5804e-19);
-        aerosol_base_density = 2.3864e16;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 30.0;
-    } else if (aerosol_type == 5) {
-        // Polar Arctic
-        aerosol_absorption_cross_section = vec4(1.0364e-16, 1.0609e-16, 1.0193e-16, 1.0092e-16);
-        aerosol_scattering_cross_section = vec4(2.1609e-17, 2.2759e-17, 2.5089e-17, 2.6323e-17);
-        aerosol_base_density = 2.3864e16;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 30.0;
-    } else if (aerosol_type == 6) {
-        // Remote Continental
-        aerosol_absorption_cross_section = vec4(4.5307e-18, 5.0662e-18, 4.4877e-18, 3.7917e-18);
-        aerosol_scattering_cross_section = vec4(1.8764e-18, 1.746e-18, 1.6902e-18, 1.479e-18);
-        aerosol_base_density = 6.103e18;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 0.73;
-    } else if (aerosol_type == 7) {
-        // Rural
-        aerosol_absorption_cross_section = vec4(5.0393e-23, 8.0765e-23, 1.3823e-22, 2.3383e-22);
-        aerosol_scattering_cross_section = vec4(2.6004e-22, 2.4844e-22, 2.8362e-22, 2.7494e-22);
-        aerosol_base_density = 8.544e18;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 0.73;
-    } else if (aerosol_type == 8) {
-        // Urban
-        aerosol_absorption_cross_section = vec4(2.8722e-24, 4.6168e-24, 7.9706e-24, 1.3578e-23);
-        aerosol_scattering_cross_section = vec4(1.5908e-22, 1.7711e-22, 2.0942e-22, 2.4033e-22);
-        aerosol_base_density = 1.3681e20;
-        aerosol_background_density = 2e6;
-        aerosol_height_scale = 0.73;
+    if (fog_density > 0.0) {
+        return fog_scattering_cross_section * fog_density
+            * exp(-h / fog_scale_height);
+    } else {
+        return vec4(0.0);
     }
-
-    float aerosol_relative_background_density =
-        aerosol_background_density / aerosol_base_density;
-
-    float aerosol_density = get_aerosol_density(
-        h, aerosol_base_density, aerosol_height_scale,
-        aerosol_relative_background_density);
-    aerosol_density *= aerosol_turbidity * 1e-3;
-
-    absorption = aerosol_absorption_cross_section * aerosol_density;
-    scattering = aerosol_scattering_cross_section * aerosol_density;
 }
 
 /*
  * Get the collision coefficients (scattering and absorption) of the
- * atmospheric medium for a given point at an altitude h.
+ * atmospheric medium for a given point at an altitude h in meters.
  */
 void get_atmosphere_collision_coefficients(in float h,
                                            out vec4 aerosol_absorption,
@@ -291,9 +205,19 @@ void get_atmosphere_collision_coefficients(in float h,
 {
     h *= 1e-3; // To km
     h = max(h, 0.0); // In case height is negative
-    get_aerosol_collision_coefficients(h, aerosol_absorption, aerosol_scattering);
+
+    // Molecules
     molecular_absorption = get_molecular_absorption_coefficient(h);
     molecular_scattering = get_molecular_scattering_coefficient(h);
+
+    // Aerosols
+    float aerosol_density = get_aerosol_density(h);
+    aerosol_absorption = aerosol_absorption_cross_section * aerosol_density;
+    aerosol_scattering = aerosol_scattering_cross_section * aerosol_density;
+
+    // Add contribution from fog
+    aerosol_scattering += get_fog_scattering_coefficient(h);
+
     extinction =
         aerosol_absorption + aerosol_scattering +
         molecular_absorption + molecular_scattering;

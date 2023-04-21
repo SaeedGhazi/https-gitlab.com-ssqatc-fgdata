@@ -535,11 +535,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <hdr>
         <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
         <exposure-compensation type="float">0.0</exposure-compensation>
-        <atmos>
-          <aerosol-type type="int">8</aerosol-type>
-          <aerosol-turbidity type="float">1.0</aerosol-turbidity>
-          <ground-albedo type="float">0.4</ground-albedo>
-        </atmos>
         <bloom>
           <strength type="float">0.01</strength>
           <filter-radius type="float">0.005</filter-radius>

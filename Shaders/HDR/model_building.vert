@@ -1,4 +1,5 @@
 #version 330 core
+#extension GL_EXT_draw_instanced : enable
 
 layout(location = 0)  in vec4 pos;
 layout(location = 1)  in vec3 normal;

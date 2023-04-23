@@ -197,6 +197,10 @@ please see Docs/README.model-combined.eff for documentation
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<!-- 		END fog include -->
+
+        <!-- PBR -->
+        <pbr-metallic type="float">0.0</pbr-metallic>
+        <pbr-roughness type="float">0.1</pbr-roughness>
 	</parameters>
 
 	<!--<generate>
@@ -1369,6 +1373,16 @@ please see Docs/README.model-combined.eff for documentation
               <name>normalmap_tiling</name>
               <type>float</type>
               <value><use>normalmap-tiling</use></value>
+            </uniform>
+            <uniform>
+              <name>metallic</name>
+              <type>float</type>
+              <value><use>pbr-metallic</use></value>
+            </uniform>
+            <uniform>
+              <name>roughness</name>
+              <type>float</type>
+              <value><use>pbr-roughness</use></value>
             </uniform>
           </pass>
         </technique>

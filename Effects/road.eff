@@ -42,6 +42,10 @@
 	<road-traffic-direction><use>/sim/rendering/osm/road-traffic-direction</use></road-traffic-direction>
 	<road-traffic-variation><use>/sim/rendering/osm/road-traffic-daily-variation</use></road-traffic-variation>
 	<road-light-factor><use>/environment/lightmap-factor</use></road-light-factor>
+
+    <!-- PBR -->
+    <pbr-metallic type="float">0.0</pbr-metallic>
+    <pbr-roughness type="float">0.95</pbr-roughness>
   </parameters>
   
   <generate>

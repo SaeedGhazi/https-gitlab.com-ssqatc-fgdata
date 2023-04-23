@@ -10,9 +10,8 @@ uniform sampler2D color_tex;
 
 uniform int normalmap_enabled;
 uniform float normalmap_tiling;
-
-const float COMBINED_METALLIC  = 0.0;
-const float COMBINED_ROUGHNESS = 0.1;
+uniform float metallic;
+uniform float roughness;
 
 // gbuffer_pack.glsl
 void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
@@ -32,5 +31,5 @@ void main()
         N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord * normalmap_tiling);
     }
 
-    gbuffer_pack(N, color, COMBINED_METALLIC, COMBINED_ROUGHNESS, 1.0, vec3(0.0), 3u);
+    gbuffer_pack(N, color, metallic, roughness, 1.0, vec3(0.0), 3u);
 }

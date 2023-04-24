@@ -212,6 +212,10 @@
 		<quality_level><use>/sim/rendering/shaders/landmass</use></quality_level>
 		<tquality_level><use>/sim/rendering/shaders/transition</use></tquality_level>
 		<!-- 		END fog include -->
+
+		<!-- PBR -->
+        <pbr-metallic type="float">0.0</pbr-metallic>
+        <pbr-roughness type="float">0.1</pbr-roughness>
 	</parameters>
 
 
@@ -1405,7 +1409,7 @@
 		</pass>
 	</technique>
 
-    <technique n="7">
+    <technique n="108">
         <scheme>hdr-geometry</scheme>
         <pass>
             <!-- Reverse floating point depth buffer -->
@@ -1441,6 +1445,7 @@
 				<fragment-shader>Shaders/HDR/model_combined.frag</fragment-shader>
 				<fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
 				<fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+				<fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>
 				<fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
             </program>
             <uniform>
@@ -1468,9 +1473,22 @@
 				<type>float</type>
 				<value><use>normalmap-tiling</use></value>
             </uniform>
+            <uniform>
+				<name>metallic</name>
+				<type>float</type>
+				<value><use>pbr-metallic</use></value>
+            </uniform>
+            <uniform>
+				<name>roughness</name>
+				<type>float</type>
+				<value><use>pbr-roughness</use></value>
+            </uniform>
         </pass>
     </technique>
 
+    <technique n="7">
+        <predicate><value type="bool">false</value></predicate>
+    </technique>
 	<technique n="9">
 		<predicate><value type="bool">false</value></predicate>
 	</technique>

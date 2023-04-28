@@ -5,10 +5,10 @@ layout(location = 0)  in vec4 pos;
 layout(location = 1)  in vec3 normal;
 layout(location = 2)  in vec4 vertex_color;
 layout(location = 3)  in vec4 multitexcoord0;
-layout(location = 9)  in vec3 instancePosition; // (x,y,z)
-layout(location = 10) in vec3 instanceScale ;   // (width, depth, height)
-layout(location = 11) in vec3 attrib1;          // Generic packed attributes
-layout(location = 12) in vec3 attrib2;
+layout(location = 6)  in vec3 instancePosition; // (x,y,z)
+layout(location = 7)  in vec3 instanceScale ;   // (width, depth, height)
+layout(location = 10) in vec3 attrib1;          // Generic packed attributes
+layout(location = 11) in vec3 attrib2;
 
 out VS_OUT {
     vec2 texcoord;

@@ -1553,6 +1553,7 @@
                 <vertex-shader>Shaders/HDR/water.vert</vertex-shader>
                 <fragment-shader>Shaders/HDR/water.frag</fragment-shader>
                 <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+                <fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>
                 <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
             </program>
             <uniform>
@@ -1574,46 +1575,6 @@
                 <name>water_colormap</name>
                 <type>sampler-2d</type>
                 <value type="int">3</value>
-            </uniform>
-            <uniform>
-                <name>WindE</name>
-                <type>float</type>
-                <value><use>windE</use></value>
-            </uniform>
-            <uniform>
-                <name>WindN</name>
-                <type>float</type>
-                <value><use>windN</use></value>
-            </uniform>
-            <uniform>
-                <name>WaveFreq</name>
-                <type>float</type>
-                <value><use>WaveFreq</use></value>
-            </uniform>
-            <uniform>
-                <name>WaveAmp</name>
-                <type>float</type>
-                <value><use>WaveAmp</use></value>
-            </uniform>
-            <uniform>
-                <name>WaveSharp</name>
-                <type>float</type>
-                <value><use>WaveSharp</use></value>
-            </uniform>
-            <uniform>
-                <name>WaveAngle</name>
-                <type>float</type>
-                <value><use>WaveAngle</use></value>
-            </uniform>
-            <uniform>
-                <name>WaveFactor</name>
-                <type>float</type>
-                <value><use>WaveFactor</use></value>
-            </uniform>
-            <uniform>
-                <name>WaveDAngle</name>
-                <type>float</type>
-                <value><use>WaveDAngle</use></value>
             </uniform>
         </pass>
     </technique>

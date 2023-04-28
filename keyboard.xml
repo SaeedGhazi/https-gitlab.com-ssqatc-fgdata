@@ -525,6 +525,13 @@ top down before the key bindings are parsed.
      controls.incElevator(-0.05, 100)
    </script>
   </binding>
+  <mod-alt>
+   <desc>Toggle Auto-Coordination</desc>
+   <binding>
+     <command>property-toggle</command>
+     <property>/controls/flight/auto-coordination</property>
+   </binding>
+  </mod-alt>
   <mod-shift>
    <desc>Look back</desc>
    <binding>

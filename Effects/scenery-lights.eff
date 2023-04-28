@@ -74,19 +74,19 @@
         <fragment-shader>Shaders/noise.frag</fragment-shader>
         <attribute>
           <name>lightParams</name>
-          <index>9</index>
+          <index>6</index>
         </attribute>
         <attribute>
           <name>animationParams</name>
-          <index>10</index>
+          <index>7</index>
         </attribute>
         <attribute>
           <name>directionParams1</name>
-          <index>11</index>
+          <index>10</index>
         </attribute>
         <attribute>
           <name>directionParams2</name>
-          <index>12</index>
+          <index>11</index>
         </attribute>
       </program>
       <uniform>

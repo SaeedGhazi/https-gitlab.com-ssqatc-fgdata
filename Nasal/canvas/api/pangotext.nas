@@ -59,8 +59,8 @@ var PangoText = {
     },
 
     # Set font (by name of font file)
-    setFont: func(name) {
-        me.set("font", name);
+    setFont: func(family = "LiberationSans", weight = "Normal", style = "Normal", size = 14) {
+        me.set("font", sprintf("%s %s %s %dpx", family, weight, style, size));
     },
 
     # Enumeration of values for drawing mode:

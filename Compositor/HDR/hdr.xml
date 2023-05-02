@@ -343,6 +343,9 @@
       <buffer>envmap</buffer>
       <face>0</face>
     </attachment>
+    <render-condition>
+      <property>/sim/rendering/hdr/envmap/should-render-face-0</property>
+    </render-condition>
   </pass>
   <pass include="env-capture-pass.xml">
     <name>env-capture1</name>
@@ -352,6 +355,9 @@
       <buffer>envmap</buffer>
       <face>1</face>
     </attachment>
+    <render-condition>
+      <property>/sim/rendering/hdr/envmap/should-render-face-1</property>
+    </render-condition>
   </pass>
   <pass include="env-capture-pass.xml">
     <name>env-capture2</name>
@@ -361,6 +367,9 @@
       <buffer>envmap</buffer>
       <face>2</face>
     </attachment>
+    <render-condition>
+      <property>/sim/rendering/hdr/envmap/should-render-face-2</property>
+    </render-condition>
   </pass>
   <pass include="env-capture-pass.xml">
     <name>env-capture3</name>
@@ -370,6 +379,9 @@
       <buffer>envmap</buffer>
       <face>3</face>
     </attachment>
+    <render-condition>
+      <property>/sim/rendering/hdr/envmap/should-render-face-3</property>
+    </render-condition>
   </pass>
   <pass include="env-capture-pass.xml">
     <name>env-capture4</name>
@@ -379,6 +391,9 @@
       <buffer>envmap</buffer>
       <face>4</face>
     </attachment>
+    <render-condition>
+      <property>/sim/rendering/hdr/envmap/should-render-face-4</property>
+    </render-condition>
   </pass>
   <pass include="env-capture-pass.xml">
     <name>env-capture5</name>
@@ -390,6 +405,9 @@
       <!-- Generate the mips after writing to the last face -->
       <mipmap-generation>true</mipmap-generation>
     </attachment>
+    <render-condition>
+      <property>/sim/rendering/hdr/envmap/should-render-face-5</property>
+    </render-condition>
   </pass>
 
   <!--

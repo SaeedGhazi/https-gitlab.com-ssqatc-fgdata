@@ -535,6 +535,17 @@ Started September 2000 by David Megginson, david@megginson.com
       <hdr>
         <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
         <exposure-compensation type="float">0.0</exposure-compensation>
+        <envmap>
+          <force-update type="bool">false</force-update>
+          <update-rate-s type="float">90.0</update-rate-s>
+          <should-prefilter type="bool">false</should-prefilter>
+          <should-render-face-0 type="bool">false</should-render-face-0>
+          <should-render-face-1 type="bool">false</should-render-face-1>
+          <should-render-face-2 type="bool">false</should-render-face-2>
+          <should-render-face-3 type="bool">false</should-render-face-3>
+          <should-render-face-4 type="bool">false</should-render-face-4>
+          <should-render-face-5 type="bool">false</should-render-face-5>
+        </envmap>
         <bloom>
           <strength type="float">0.01</strength>
           <filter-radius type="float">0.005</filter-radius>

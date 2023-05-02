@@ -203,8 +203,8 @@ void get_atmosphere_collision_coefficients(in float h,
                                            out vec4 molecular_scattering,
                                            out vec4 extinction)
 {
+    h = max(h, 1e-3); // In case height is negative
     h *= 1e-3; // To km
-    h = max(h, 0.0); // In case height is negative
 
     // Molecules
     molecular_absorption = get_molecular_absorption_coefficient(h);

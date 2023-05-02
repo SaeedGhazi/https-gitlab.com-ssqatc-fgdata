@@ -53,6 +53,7 @@
         <fragment-shader>Shaders/HDR/ibl.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/shadows.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/gtao.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/sun.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/clustered.glsl</fragment-shader>
@@ -127,6 +128,7 @@
         <type>sampler-2d</type>
         <value type="int">11</value>
       </uniform>
+      <!-- sun.glsl -->
       <uniform>
         <name>transmittance_tex</name>
         <type>sampler-2d</type>

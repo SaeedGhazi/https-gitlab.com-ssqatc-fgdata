@@ -221,6 +221,7 @@
   <description>421 - Salt marshes</description>
   <landclass>37</landclass>
   <material-name>SaltMarsh</material-name>
+  <sea>true</sea>
 </map>
 
 <map>
@@ -228,6 +229,7 @@
   <landclass>38</landclass>
   <material-name>Saline</material-name>
   <water>true</water>
+  <sea>true</sea>
 </map>
 
 <map>
@@ -235,6 +237,7 @@
   <landclass>39</landclass>
   <material-name>Littoral</material-name>
   <water>true</water>
+  <sea>true</sea>
 </map>
 
 <map>
@@ -256,6 +259,7 @@
   <landclass>42</landclass>
   <material-name>Lagoon</material-name>
   <water>true</water>
+  <sea>true</sea>
 </map>
 
 <map>
@@ -263,6 +267,7 @@
   <landclass>43</landclass>
   <material-name>Estuary</material-name>
   <water>true</water>
+  <sea>true</sea>
 </map>
 
 <map>
@@ -270,6 +275,7 @@
   <landclass>44</landclass>
   <material-name>Ocean</material-name>
   <water>true</water>
+  <sea>true</sea>
 </map>
 
 <map>

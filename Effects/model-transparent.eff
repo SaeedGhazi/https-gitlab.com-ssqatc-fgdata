@@ -4,12 +4,6 @@
   <inherits-from>Effects/model-default</inherits-from>
 
   <parameters>
-    <render-bin>
-      <bin-number>111</bin-number>
-      <bin-name>DepthSortedBin</bin-name>
-    </render-bin>
-    <write-depth type="bool">false</write-depth>
-    <rendering-hint>transparent</rendering-hint>
     <!-- ibl.glsl -->
     <texture n="8">
       <image>Textures/PBR/dfg_lut.dds</image>
@@ -25,38 +19,6 @@
       <use>/sim/rendering/hdr/exposure-compensation</use>
     </exposure-compensation>
   </parameters>
-
-  <!-- Place objects in render bin 111 (frontmost transparent objects).
-
-       Remark: <render-bin> parameter is not set in Effects/model-default
-       to allow adjusting the bin based on material alpha. -->
-  <technique n="5">
-    <!-- ALS -->
-    <pass>
-      <render-bin>
-        <bin-number><use>render-bin/bin-number</use></bin-number>
-        <bin-name><use>render-bin/bin-name</use></bin-name>
-      </render-bin>
-    </pass>
-  </technique>
-  <technique n="11">
-    <!-- Non-ALS shaders -->
-    <pass>
-      <render-bin>
-        <bin-number><use>render-bin/bin-number</use></bin-number>
-        <bin-name><use>render-bin/bin-name</use></bin-name>
-      </render-bin>
-    </pass>
-  </technique>
-  <technique n="13">
-    <!-- Fallback (no shaders) -->
-    <pass>
-      <render-bin>
-        <bin-number><use>render-bin/bin-number</use></bin-number>
-        <bin-name><use>render-bin/bin-name</use></bin-name>
-      </render-bin>
-    </pass>
-  </technique>
 
   <technique n="108">
     <scheme>hdr-geometry</scheme>

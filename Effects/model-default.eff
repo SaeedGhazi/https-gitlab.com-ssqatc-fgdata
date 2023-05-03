@@ -566,9 +566,6 @@
 	<technique n="13">
 		<pass>
 			<lighting>true</lighting>
-			<depth>
-				<write-mask><use>write-depth</use></write-mask>
-			</depth>
 			<material>
 				<active>
 					<use>material/active</use>

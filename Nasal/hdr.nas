@@ -38,10 +38,21 @@ setprop("/sim/rendering/hdr/atmos/ground-albedo[3]", 0.4);
 ################################################################################
 # Environment map
 ################################################################################
+var envmap_frame_listener = nil;
 var is_envmap_updating = false;
+var is_prefiltering_active = false;
 var current_envmap_face = 0;
 
-var update_envmap_face = func {
+var envmap_update_frame = func {
+    if (is_prefiltering_active) {
+        # Last frame we activated the prefiltering, which is the last step.
+        # Now disable it and reset all variables for the next update cycle.
+        removelistener(envmap_frame_listener);
+        setprop("/sim/rendering/hdr/envmap/should-prefilter", false);
+        is_prefiltering_active = false;
+        is_envmap_updating = false;
+        return;
+    }
     if (current_envmap_face < 6) {
         # Render the current face
         setprop("/sim/rendering/hdr/envmap/should-render-face-"
@@ -55,42 +66,63 @@ var update_envmap_face = func {
     if (current_envmap_face < 6) {
         # Go to next face and update it next frame
         current_envmap_face += 1;
-        settimer(update_envmap_face, 0);
     } else {
-        # We have finished updating all faces, reset the face counter, end the
-        # update loop and prefilter the envmap.
+        # We have finished updating all faces. Reset the face counter and
+        # prefilter the envmap.
         current_envmap_face = 0;
+        is_prefiltering_active = true;
         setprop("/sim/rendering/hdr/envmap/should-prefilter", true);
-        settimer(func {
-            setprop("/sim/rendering/hdr/envmap/should-prefilter", false);
-            is_envmap_updating = false;
-        }, 0);
     }
 }
 
 var update_envmap = func {
     if (!is_envmap_updating) {
         is_envmap_updating = true;
-        settimer(update_envmap_face, 0);
+        # We use a listener to the frame signal because it is guaranteed to be
+        # fired at a defined moment, while a settimer() with interval 0 might
+        # not if subsystems are re-ordered.
+        envmap_frame_listener = setlistener("/sim/signals/frame",
+                                            envmap_update_frame);
     }
 }
 
-var update_envmap_periodically = func {
-    update_envmap();
-    var update_rate = getprop("/sim/rendering/hdr/envmap/update-rate-s");
-    settimer(update_envmap_periodically, update_rate);
-}
-
-# Start updating the envmap on FDM initialization
-setlistener("/sim/signals/fdm-initialized", func {
-    update_envmap_periodically();
-    # Do a single update after 5 seconds when most of the scenery is loaded
-    settimer(update_envmap, 5)
-});
-
+# Manual update
 setlistener("/sim/rendering/hdr/envmap/force-update", func(p) {
     if (p.getValue()) {
         update_envmap();
         p.setValue(false);
     }
 }, 0, 0);
+
+# Automatically update the envmap every so often
+var envmap_timer = maketimer(getprop("/sim/rendering/hdr/envmap/update-rate-s"),
+                             update_envmap);
+envmap_timer.simulatedTime = true;
+
+# Start updating when the FDM is initialized
+setlistener("/sim/signals/fdm-initialized", func {
+    update_envmap();
+    envmap_timer.start();
+    # Do a single update after 5 seconds when most of the scenery is loaded
+    settimer(update_envmap, 5);
+});
+
+setlistener("/sim/rendering/hdr/envmap/update-rate-s", func(p) {
+    if (envmap_timer.isRunning) {
+        update_envmap();
+        envmap_timer.restart(p.getValue());
+    }
+});
+
+# Update the envmap much faster when time warp is active
+var envmap_timer_warp = maketimer(1, update_envmap);
+setlistener("/sim/time/warp-delta", func(p) {
+    if (p.getValue() != 0) {
+        envmap_timer_warp.start();
+    } else {
+        envmap_timer_warp.stop();
+        # Do a final update a second later to make sure we have the correct
+        # envmap for the new time of day.
+        settimer(update_envmap, 1);
+    }
+});

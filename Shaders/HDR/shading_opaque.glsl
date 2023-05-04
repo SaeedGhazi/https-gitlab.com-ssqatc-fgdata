@@ -29,7 +29,7 @@ vec3 apply_exposure(vec3 color);
 
 vec3 eval_lights(
     vec3 base_color, float metallic, float roughness, float occlusion,
-    vec3 P, vec3 N, vec3 V, vec2 uv,
+    vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv,
     mat4 view_matrix_inverse, mat4 projection_matrix)
 {
     vec3 f0 = f0_from_pbr(base_color, metallic);
@@ -58,6 +58,9 @@ vec3 eval_lights(
     color += eval_ibl(
         base_color, metallic, roughness, f0,
         ao, ws_N, ws_refl, NdotV);
+
+    // Add emissive contribution
+    color += emissive;
 
     // Add aerial perspective
     color = add_aerial_perspective(color, uv, length(P));

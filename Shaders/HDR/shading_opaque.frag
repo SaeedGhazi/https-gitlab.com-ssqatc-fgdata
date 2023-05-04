@@ -18,7 +18,7 @@ void gbuffer_unpack(in vec2 texcoord,
 // shading_opaque.glsl
 vec3 eval_lights(
     vec3 base_color, float metallic, float roughness, float occlusion,
-    vec3 P, vec3 N, vec3 V, vec2 uv,
+    vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv,
     mat4 view_matrix_inverse, mat4 projection_matrix);
 // pos_from_depth.glsl
 vec3 get_view_space_from_depth(vec2 uv);
@@ -36,6 +36,6 @@ void main()
 
     fragColor = eval_lights(
         base_color, metallic, roughness, occlusion,
-        P, N, V, texcoord,
+        emissive, P, N, V, texcoord,
         fg_ViewMatrixInverse, fg_ProjectionMatrix);
 }

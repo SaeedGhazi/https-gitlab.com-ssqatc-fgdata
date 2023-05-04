@@ -21,7 +21,7 @@ vec3 eotf_inverse_sRGB(vec3 srgb);
 // shading_transparent.glsl
 vec3 eval_lights_transparent(
     vec3 base_color, float metallic, float roughness, float occlusion,
-    vec3 P, vec3 N, vec3 V, vec2 uv, vec4 ap,
+    vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv, vec4 ap,
     mat4 view_matrix_inverse);
 
 void main()
@@ -35,7 +35,7 @@ void main()
     vec2 uv = (gl_FragCoord.xy - fg_Viewport.xy) / fg_Viewport.zw;
 
     vec3 color = eval_lights_transparent(
-        base_color, TRANSPARENT_METALLIC, TRANSPARENT_ROUGHNESS, 1.0,
+        base_color, TRANSPARENT_METALLIC, TRANSPARENT_ROUGHNESS, 1.0, vec3(0.0),
         vP, N, V, uv, ap_color, osg_ViewMatrixInverse);
 
     fragColor = vec4(color, alpha);

@@ -28,7 +28,7 @@ vec3 eotf_inverse_sRGB(vec3 srgb);
 // shading_transparent.glsl
 vec3 eval_lights_transparent(
     vec3 base_color, float metallic, float roughness, float occlusion,
-    vec3 P, vec3 N, vec3 V, vec2 uv, vec4 ap,
+    vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv, vec4 ap,
     mat4 view_matrix_inverse);
 // normalmap.glsl
 vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord);
@@ -54,7 +54,7 @@ void main()
     N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord);
 
     vec3 color = eval_lights_transparent(
-        base_color.rgb, metallic, roughness, occlusion,
+        base_color.rgb, metallic, roughness, occlusion, emissive,
         fs_in.view_vector, N, V, uv, fs_in.ap_color, osg_ViewMatrixInverse);
 
     fragColor = vec4(color, base_color.a);

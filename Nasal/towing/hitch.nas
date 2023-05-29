@@ -459,6 +459,7 @@ var aerotow_hash = {
 			props.globals.initNode("sim/hitches/aerotow/tow/end-force-z", 0.0, "DOUBLE"),
 		],
 		node:			props.globals.initNode("sim/hitches/aerotow/tow/node", "", "STRING"),
+		length:		props.globals.initNode("sim/hitches/aerotow/tow/length", 60.0, "DOUBLE"),
 	},
 	rope: {
 		exist:			props.globals.initNode("sim/hitches/aerotow/rope/exist", 0, "BOOL"),

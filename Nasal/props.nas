@@ -40,7 +40,7 @@ var Node = {
     # current value of the node
     adjustValue    : func _adjustValue(me._g, arg),
     unalias        : func _unalias(me._g, arg),
-    alias          : func(n) _alias(me._g, [isa(n, Node) ? n._g : n]),
+    alias          : func(n, chainListener = 0) _alias(me._g, [isa(n, Node) ? n._g : n], chainListener),
     equals         : func(n) _equals(me._g, [isa(n, Node) ? n._g : n]),
     clearValue     : func _alias(me._g, [_globals()]) and me.unalias(),
 

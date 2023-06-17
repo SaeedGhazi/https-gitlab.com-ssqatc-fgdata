@@ -5,7 +5,7 @@
 				Joshua Davidson (canvas basic structure from A320)
 				Colin Geniet (SoundPitchController)
 				
-	#### Version	05/2020
+	#### Version	06/2023
 	-->
 <PropertyList>
 	<name>S3</name>
@@ -32,7 +32,7 @@
 	<!--   Main Knob    -->
 	<animation>
 		<type>pick</type>
-		<object-name>main.knob</object-name>
+		<object-name>S3.main_knob</object-name>
 		<action>
 			<button>0</button>
 			<binding>
@@ -91,7 +91,7 @@
 	</animation>
 	<animation>
 		<type>translate</type>
-		<object-name>main.knob</object-name>
+		<object-name>S3.main_knob</object-name>
 		<property>instrumentation/s3/knob-pushed</property>
 		<factor>-0.001</factor>
 		<axis>
@@ -100,7 +100,7 @@
 	</animation>
 	<animation>
 		<type>rotate</type>
-		<object-name>main.knob</object-name>
+		<object-name>S3.main_knob</object-name>
 		<property>instrumentation/s3/knob</property>
 		<factor>5</factor>
 		<center>
@@ -116,7 +116,7 @@
 	<!--	Vario needle	-->
 	<animation>
 		<type>rotate</type>
-		<object-name>vario.needle</object-name>
+		<object-name>S3.vario_needle</object-name>
 		<property>instrumentation/s3/needle-deg</property>
 		<center>
 			<y-m>0.0</y-m>
@@ -130,7 +130,7 @@
 	</animation>
 	<animation>
 		<type>rotate</type>
-		<object-name>vario.needle</object-name>
+		<object-name>S3.vario_needle</object-name>
 		<property>instrumentation/s3/start</property>
 		<interpolation>
 			<entry><ind> 0 </ind><dep>  0 </dep></entry>

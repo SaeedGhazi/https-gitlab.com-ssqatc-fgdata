@@ -857,7 +857,7 @@ var findBestAIObject = func (){
 		}
 		if ( running_as_autoconnect ) {
 			isSlave = 1;
-			aerotow_hash.is_slave.setBoolValue( isSlave );
+			aircraft_settings.aerotow.is_slave.setBoolValue( isSlave );
 		}
 		
 		aerotow_hash.mp_old_open.setBoolValue( 1 );
@@ -1034,7 +1034,7 @@ var aerotow = func (open){
 						
 						var breakforce_N = getprop("sim/hitches/aerotow/tow/break-force");  # could be different in both aircraft
 						
-						var isSlave = aerotow_hash.is_slave.getBoolValue();
+						var isSlave = aircraft_settings.aerotow.is_slave.getBoolValue();
 						if ( !isSlave ){  # if we are master, we have to calculate the forces
 							var elastic_constant = getprop("sim/hitches/aerotow/tow/elastic-constant");
 							var towlength_m = getprop("sim/hitches/aerotow/tow/length");

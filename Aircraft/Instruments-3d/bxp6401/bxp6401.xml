@@ -4,7 +4,7 @@
 				WooT (AR3201 that was used as a base)
 				Joshua Davidson (canvas basic structure from A320)
 				
-	#### Version	05/2020
+	#### Version	06/2023
 	-->
 <PropertyList>
 	<name>bxp6401</name>
@@ -284,8 +284,6 @@
 		</center>
 		<axis>
 			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
 		</axis>
 	</animation>
 	<animation>
@@ -304,9 +302,9 @@
 		<object-name>mode.knob</object-name>
 		<property>instrumentation/transponder/inputs/knob-mode</property>
 		<interpolation>
-			<entry><ind> 0 </ind><dep>    0 </dep></entry>
-			<entry><ind> 1 </ind><dep> 50 </dep></entry>
-			<entry><ind> 3 </ind><dep> 50 </dep></entry>
+			<entry><ind> 0 </ind><dep>   0 </dep></entry>
+			<entry><ind> 1 </ind><dep>  50 </dep></entry>
+			<entry><ind> 3 </ind><dep>  50 </dep></entry>
 			<entry><ind> 4 </ind><dep> 100 </dep></entry>
 			<entry><ind> 5 </ind><dep> 150 </dep></entry>
 		</interpolation>
@@ -316,17 +314,16 @@
 		</center>
 		<axis>
 			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
 		</axis>
 		<action>
 			<binding>
 				<command>property-cycle</command>
 				<property>instrumentation/transponder/inputs/knob-mode</property>
+				<value>0</value>
 				<value>1</value>
 				<value>4</value>
 				<value>5</value>
-				<value>0</value>
+				<wrap>0</wrap>
 			</binding>
 		</action>
 	</animation>

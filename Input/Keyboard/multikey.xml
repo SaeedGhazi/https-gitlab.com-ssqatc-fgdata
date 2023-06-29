@@ -320,6 +320,17 @@
 					</binding>
 				</key>
 
+				<key n="105">
+					<name>i</name>
+					<desc>Weather Scenario = International Standard Atmosphere</desc>
+					<binding>
+						<command>nasal</command>
+						<script>
+							set_weather_scenario_multikey("International Standard Atmosphere");
+						</script>
+					</binding>
+				</key>
+
 				<key n="72">
 					<name>H</name>
 					<desc>Weather Scenario = Core high pressure region</desc>

@@ -39,6 +39,12 @@
       </local-weather>
     </scenario>
     <scenario>
+      <id type="string">isa</id>
+      <name type="string">International Standard Atmosphere</name>
+      <metar type="string">XXXX 012345Z 00000KT 19SM SKC 15/M99 Q1013 NOSIG</metar>
+      <description type="string">A standard atmosphere model for testing and calibrating aircraft performance and design.</description>
+    </scenario>
+    <scenario>
         <id type="string">core-high-pressure-region</id>
       <name type="string">Core high pressure region</name>
       <metar type="string">XXXX 012345Z 15003KT 19SM FEW072 FEW350 25/07 Q1028 NOSIG</metar>

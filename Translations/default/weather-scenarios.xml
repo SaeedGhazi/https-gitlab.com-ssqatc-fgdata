@@ -9,6 +9,8 @@ in that script. -->
   <live-data-desc>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</live-data-desc>
   <manual-input-name>Manual input</manual-input-name>
   <manual-input-desc>Enter your favorite METAR weather. A valid METAR syntax is required.</manual-input-desc>
+  <isa-name>International Standard Atmosphere</isa-name>
+  <isa-desc>A standard atmosphere model for testing and calibrating aircraft performance and design.</isa-desc>
   <core-high-pressure-region-name>Core high pressure region</core-high-pressure-region-name>
   <core-high-pressure-region-desc>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</core-high-pressure-region-desc>
   <high-pressure-region-name>High pressure region</high-pressure-region-name>

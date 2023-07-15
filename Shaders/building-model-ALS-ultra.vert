@@ -177,6 +177,7 @@ void	main(void)
 	} else {
 		reflVec = reflVec_stat;
 	}
+	reflVec.z *= -1;
 
 	gl_FrontColor = gl_FrontMaterial.emission + vec4(1.0,1.0,1.0,1.0)
 				  * (gl_LightModel.ambient + gl_LightSource[0].ambient);

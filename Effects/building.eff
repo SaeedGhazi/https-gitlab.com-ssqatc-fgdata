@@ -35,7 +35,7 @@
 		<lightmap-enabled type="int"> 1 </lightmap-enabled>
 		<lightmap-multi type="int"> 0 </lightmap-multi>
 		<lightmap-factor type="float" n="0">
-			<use>/sim/time/sun-angle-rad</use>
+			<use>/environment/lightmap-factor</use>
 		</lightmap-factor>
 		<lightmap-color type="vec3d" n="0">0.5 0.5 0.5</lightmap-color>
 

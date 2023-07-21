@@ -42,19 +42,25 @@ setlistener("/environment/weather-scenario", func(n) {
         setprop( "/environment/params/metar-updates-environment", 0 );
         setprop( "/environment/realwx/enabled", 0 );
         setprop( "/environment/config/enabled", 0 );
+        setprop( "/environment/climate/is-isa", 0 );
     } else if( scenarioName == "Live data" ) {
         setprop( "/environment/params/metar-updates-environment", 1 );
         setprop( "/environment/realwx/enabled", 1 );
         setprop( "/environment/config/enabled", 1 );
+        setprop( "/environment/climate/is-isa", 0 );
     } else if( scenarioName == "Manual input" ) {
         setprop( "/environment/params/metar-updates-environment", 1 );
         setprop( "/environment/realwx/enabled", 0 );
         setprop( "/environment/config/enabled", 1 );
+        setprop( "/environment/climate/is-isa", 0 );
     } else {
         setprop( "/environment/params/metar-updates-environment", 1 );
         setprop( "/environment/realwx/enabled", 0 );
         setprop( "/environment/config/enabled", 1 );
         var metar = scenario.getNode("metar",1).getValue();
         setprop( "environment/metar/data", metar );
+
+        var isISA = scenarioName == "International Standard Atmosphere";
+        setprop( "/environment/climate/is-isa", isISA );
     }
 });

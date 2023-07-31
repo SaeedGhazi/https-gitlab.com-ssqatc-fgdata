@@ -513,6 +513,11 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y">false</enabled>
       </scenery-path-suffix>
 
+      <scenery-path-suffix n="98">
+        <name type="string">vpb</name>
+        <enabled type="bool" userarchive="y">false</enabled>
+      </scenery-path-suffix>
+
       <!-- Terrain must be last, as the suffixes are searched in order -->
       <scenery-path-suffix n="99">
         <name type="string">Terrain</name>

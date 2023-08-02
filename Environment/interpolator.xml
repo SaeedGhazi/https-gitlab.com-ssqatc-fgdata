@@ -217,7 +217,9 @@
 
   <logic>
     <name>EnvironmentInterpolator:wave:enabled</name>
-    <input>/environment/config/enabled</input>
+    <input>
+      <property>/environment/config/enabled</property>
+    </input>
     <output>/environment/sea/config/enabled</output>
   </logic>
 

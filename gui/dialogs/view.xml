@@ -184,7 +184,7 @@
         <binding>
           <command>dialog-apply</command>
         </binding>
-        <enable>/sim/view-name-popup</enable>
+        <enable><property>/sim/view-name-popup</property></enable>
       </checkbox>
 
       <checkbox>

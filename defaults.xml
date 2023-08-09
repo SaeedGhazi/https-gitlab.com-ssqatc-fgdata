@@ -986,6 +986,11 @@ Started September 2000 by David Megginson, david@megginson.com
     <model>
       <civilian type="bool">true</civilian>
     </model>
+    <emexec>
+      <max-rate-hz type="int">50</max-rate-hz>
+      <rate-hz type="int">30</rate-hz>
+    </emexec>
+
   </sim>
   <!-- accelerations -->
   <accelerations>

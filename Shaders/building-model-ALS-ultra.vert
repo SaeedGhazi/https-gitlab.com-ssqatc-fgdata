@@ -124,7 +124,7 @@ void	main(void)
 	// Rotate the normal as per the building.
 	normal.xy = vec2(dot(normal.xy, vec2(cr, sr)), dot(normal.xy, vec2(-sr, cr)));
 
-	VNormal = -normalize(gl_NormalMatrix * normal);
+	VNormal = normalize(gl_NormalMatrix * normal);
   vec3 n = normalize(normal);
   vec3 tempTangent = cross(n, vec3(1.0,0.0,0.0));
   vec3 tempBinormal = cross(n, tempTangent);

@@ -493,7 +493,7 @@ speed-by-pitch-accel
 	<filter> <!-- Filter mach rate -->
 		<name>Mach Rate Lag</name>
 		<type>exponential</type>
-		<input>/autopilot/internal/mach-rate-raw</input>
+		<input>/autopilot/internal/mach-rate-gain</input>
 		<output>/autopilot/internal/mach-rate</output>
 		<filter-time>0.04</filter-time>
 	</filter>

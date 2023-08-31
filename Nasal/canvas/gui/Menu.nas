@@ -167,11 +167,14 @@ gui.MenuItem = {
         },
 
         setShortcut: func(shortcut) {
-                me._shortcut = keyboard.Shortcut.new(shortcut);
-                if (me._parent_menu != nil and me._parent_menu._canvas_item != nil and me._cb != nil) {
-                        me._parent_menu._canvas_item.bindShortcut(me._shortcut, me._cb);
+                if (!isstr(shortcut)) {
+                        logprint(LOG_ALERT, "Menu.setShortcut: invalid shortcut");
+                        return;
                 }
-                me._view.setShortcut(me, me._shortcut);
+
+                me._keyBinding = KeyBinding.fromShortcut(shortcut, me._cb);
+                getDesktop().addKeyBinding(me._keyBinding);
+                me._view.setShortcut(me, KeyBinding.repr(me._keyBinding));
                 return me.update();
         },
 
@@ -198,6 +201,9 @@ gui.MenuItem = {
 
         setCallback: func(cb = nil) {
                 me._cb = cb;
+                if (me._keyBinding) {
+                        me._keyBinding.addBinding(cb);
+                }
                 return me;
         },
 

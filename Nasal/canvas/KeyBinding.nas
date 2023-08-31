@@ -281,117 +281,45 @@ ModifierKeys.Meta = (ModifierKeys.Meta_L | ModifierKeys.Meta_R);
 #ModifierKeys.Super = (ModifierKeys.Super_L | ModifierKeys.Super_R);
 #ModifierKeys.Hyper = (ModifierKeys.Hyper_L | ModifierKeys.Hyper_R);
 
-var Shortcut = {
-	new: func(modifiers, keys...) {
-		var m = {
-			parents: [Shortcut],
-			modifiers: modifiers,
-			keys: keys,
-		};
-		if (m.modifiers == nil) {
-			m.modifiers = [];
-			m.keys = [];
-		} elsif (isa(m.modifiers, Shortcut)) {
-			var shortcut = m.modifiers;
-			m.modifiers = shortcut.modifiers;
-			m.keys = shortcut.keys;
-		} elsif (typeof(m.modifiers) == "scalar") {
-			var res = m.parseString(m.modifiers);
-			if (typeof(res) == "scalar") {
-				logprint(LOG_ALERT, "keyboard.Shortcut.parseString failed parsing '" ~ m.modifiers ~ "' with the following reason:");
-				logprint(LOG_ALERT, "\t" ~ res);
-				m.modifiers = [];
-				m.keys = [];
-			} else {
-				m.modifiers = res[0];
-				m.keys = res[1];
-			}
-		}
-		
-		return m;
-	},
+var parseShortcut = func(s) 
+{
+	if (size(s) == 0) {
+		return "shortcut string is empty";
+	}
 	
-	parseString: func(s) {
-		if (size(s) == 0) {
-			return "shortcut string is empty";
+	var baseKey = nil;
+	var modifiers = [];
+	var input = split("+", s);
+	foreach (var key; input) {
+		if (string.match(key, "<*>")) {
+			append(modifiers, substr(key, 1, size(key) - 2));
+		} else {
+			baseKey = key;
 		}
-		
-		var found = [];
-		var modifiers  = [];
-		var input = split("+", s);
-		foreach (var key; input) {
-			if (string.match(key, "<*>")) {
-				append(modifiers, substr(key, 1, size(key) - 2));
-			} else {
-				append(found, key);
-			}
-		}
-		
-		var newmodifiers = [];
-		foreach (var mod; modifiers) {
-			if (ModifierKeys[mod] == nil) {
-				return "Unknown modifier key '" ~ mod ~ "' !";
-			} else {
-				append(newmodifiers, ModifierKeys[mod]);
-			}
-		}
-		
-		var newfound = [];
-		foreach (var key; found) {
-			if (PrintableKeys[key] == nil) {
-				if (FunctionKeys[key] == nil) {
-					return "Unknown key '" ~ key ~ "' !";
-				} else {
-					append(newfound, FunctionKeys[key]);
-				}
-			} else {
-				append(newfound, PrintableKeys[key]);
-			}
-		}
-		
-		return  [newmodifiers, newfound];
-	},
+	}
 	
-	match: func(keys, shift=0, ctrl=0, alt=0, meta=0) {
-		if (typeof(keys) != "vector") {
-			keys = [keys];
+	var modMask = 0;
+	foreach (var mod; modifiers) {
+		var mm = ModifierKeys[mod];
+		if (mm == nil) {
+			logprint(LOG_ALERT, "Unknown modifier key '" ~ mod ~ "' !");
+		} else {
+			modMask = modMask + mm;
 		}
-		if (!me.modifiers and !me.keys) {
-			return 0;
-		}
-		var match = 1;
-		match &= contains(me.modifiers, ModifierKeys["Shift"]) == shift;
-		match &= contains(me.modifiers, ModifierKeys["Ctrl"]) == ctrl;
-		match &= contains(me.modifiers, ModifierKeys["Alt"]) == alt;
-		match &= contains(me.modifiers, ModifierKeys["Meta"]) == meta;
-		match &= size(keys) == size(me.keys);
-		if (!match) {
-			return 0;
-		}
-		for (var i = 0; i < size(keys); i += 1) {
-			match &= contains(me.keys, keys[i]);
-		}
-		return match;
-	},
+	}
 	
-	repr: func {
-		if (!me.modifiers and !me.keys) {
-			return "";
-		}
-		var names = [];
-		foreach (var mod; me.modifiers) {
-			append(names, findKeyName(mod));
-		}
-		foreach (var key; me.keys) {
-			append(names, findKeyName(key));
-		}
-		return string.join(" + ", names);
-	},
-	
-	equals: func(other) {
-		return me.modifiers == other.modifiers and me.keys == other.keys;
-	},
-};
+	var keyCode = PrintableKeys[baseKey];
+	if (keyCode == nil) {
+		keyCode = FunctionKeys[baseKey];
+	}
+
+	if (keyCode == nil) {
+		logprint(LOG_ALERT, "Unknown key '" ~ baseKey ~ "'");
+	}
+
+	return  [modMask, keyCode];
+}
+
 
 var findKeyName = func(key) {
 	foreach (var mod; keys(ModifierKeys)) {
@@ -412,7 +340,8 @@ var findKeyName = func(key) {
 	return nil;
 };
 
-var namesToKeys = func(strings...) {
+var namesToKeys = func(strings...) 
+{
 	var res = [];
 	foreach (var s; strings) {
 		var key = ModifierKeys[s] or PrintableKeys[s] or FunctionKeys[s];
@@ -425,22 +354,39 @@ var namesToKeys = func(strings...) {
 	return res;
 };
 
-var Binding = {
-	new: func(shortcut, f) {
-		var m = {
-			parents: [Binding],
-			f: f,
-			shortcut: shortcut,
-		};
-		return m;
-	},
-	
-	fire: func(e) {
-		debug.dump(e);
-		if (isfunc(me.f)) {
-			me.f(e);
-		}
+# here we're extendin the built-in KeyBinding class defined in NasalCanvas.cxx,
+# with some helper functions which rely on the tables defined above.
+
+KeyBinding['fromShortcut'] = func(shortcutString, cb = nil)
+{
+	if (!isstr(shortcutString)) {
+		return nil;
 	}
+
+	var res = KeyBinding.new();
+	var t = parseShortcut(shortcutString);
+	
+	res.modifiers = t[0];
+	res.keyCode = t[1];
+
+	if (!isfunc(cb)) {
+		logprint(LOG_ALERT, "callback argument to KeyBinding.fromShortcut is not a function")
+	} else {
+		res.addBinding(cb);
+	}
+
+	return res;
 };
 
+KeyBinding['repr'] = func(kb)
+{
+	var names = [];
+	foreach (var mod; keys(ModifierKeys)) {
+		if (kb.modifiers & ModifierKeys[mod]) {
+			append(names, "<" ~ mod ~ ">");
+		}
+	}
+	append(names, findKeyName(kb.keyCode));
+	return string.join(" + ", names);
+};
 

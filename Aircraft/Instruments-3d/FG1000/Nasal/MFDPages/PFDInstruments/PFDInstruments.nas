@@ -347,7 +347,7 @@ var PFDInstruments =
     me.getElement("bankPointer")
       .setRotation(-roll * D2R);
     me.getElement("SlipSkid")
-      .setTranslation(slip * 10, 0);
+      .setTranslation(-20 * slip, 0);
   },
 
   updateFD : func(enabled, pitch, roll, fd_pitch, fd_roll) {

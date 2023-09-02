@@ -400,7 +400,7 @@ var PFDInstrumentsController =
 
     if (data["ADFSelectedFreq"] != nil) me._adf_freq = data["ADFSelectedFreq"];
     if (data["ADFInRange"] != nil) me._adf_in_range = data["ADFInRange"];
-    if (data["ADFHeadingDeg"] !=nil) me._adf_heading_deg = data["ADFInRange"];
+    if (data["ADFHeadingDeg"] !=nil) me._adf_heading_deg = data["ADFHeadingDeg"];
 
     if (data["TransponderMode"] != nil) me._transponder_mode = data["TransponderMode"];
     if (data["TransponderCode"] != nil) me._transponder_code = data["TransponderCode"];
@@ -413,11 +413,11 @@ var PFDInstrumentsController =
 
     if (me.getBRG1() == "NAV1") me.page.updateBRG1(me._nav1_in_range, me._nav1_id, me._nav1_distance_m * M2NM, me._heading_magnetic_deg, me._nav1_heading_deg);
     if (me.getBRG1() == "NAV2") me.page.updateBRG1(me._nav2_in_range, me._nav2_id, me._nav2_distance_m * M2NM, me._heading_magnetic_deg, me._nav2_heading_deg);
-    if (me.getBRG1() == "ADF")  me.page.updateBRG1(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, me._heading_magnetic_deg, me._adf_heading_deg);
+    if (me.getBRG1() == "ADF")  me.page.updateBRG1(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, 0, me._adf_heading_deg);
 
     if (me.getBRG2() == "NAV1") me.page.updateBRG2(me._nav1_in_range, me._nav1_id, me._nav1_distance_m * M2NM, me._heading_magnetic_deg, me._nav1_heading_deg);
     if (me.getBRG2() == "NAV2") me.page.updateBRG2(me._nav2_in_range, me._nav2_id, me._nav2_distance_m * M2NM, me._heading_magnetic_deg, me._nav2_heading_deg);
-    if (me.getBRG2() == "ADF")  me.page.updateBRG2(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, me._heading_magnetic_deg, me._adf_heading_deg);
+    if (me.getBRG2() == "ADF")  me.page.updateBRG2(me._adf_in_range, sprintf("%.1f", me._adf_freq), 0, 0, me._adf_heading_deg);
 
     if (me.getCDISource() == "NAV1") {
       me.page.updateCRS(me._nav1_radial_deg);

@@ -369,6 +369,7 @@
   <technique n="8">
     <predicate>
       <and>
+        <or>
           <property>/sim/rendering/photoscenery/enabled</property>
           <and>
             <property>/sim/rendering/shaders/quality-level</property>

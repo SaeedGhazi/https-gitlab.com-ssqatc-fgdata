@@ -207,6 +207,12 @@ top down before the key bindings are parsed.
      }
    </script>
   </binding>
+  <mod-shift>
+   <binding>
+    <command>nasal</command>
+    <script>globals.propertyTreeBrowserInstance = canvas.PropertyTreeBrowser.new();</script>
+   </binding>
+  </mod-shift>
  </key>
 
  <key n="18">

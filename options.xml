@@ -54,6 +54,7 @@
 
    <option>
     <name>launcher</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>launcher-desc</description>
     <brief/>
    </option>
@@ -67,6 +68,7 @@
 
    <option>
      <name>version</name>
+     <optional-arg>{1|0}</optional-arg>
      <description>version-desc</description>
    </option>
 
@@ -127,6 +129,7 @@
 
    <option>
     <name>load-tape-create-video</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>load-tape-create-video</description>
    </option>
 
@@ -138,17 +141,14 @@
 
    <option>
     <name>restore-defaults</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>restore-defaults-desc</description>
    </option>
 
    <option>
-    <name>disable-save-on-exit</name>
-    <description>disable-save-on-exit</description>
-   </option>
-
-   <option>
-    <name>enable-save-on-exit</name>
-    <description>enable-save-on-exit</description>
+    <name>save-on-exit</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>save-on-exit</description>
    </option>
 
    <option>
@@ -164,6 +164,12 @@
    </option>
 
    <option>
+    <name>prop:browser</name>
+    <arg>property</arg>
+    <description>prop-browser-desc</description>
+   </option>
+
+   <option>
     <name>config</name>
     <arg>path</arg>
     <description>config-desc</description>
@@ -171,6 +177,7 @@
 
    <option>
     <name>no-default-config</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>no-default-config-desc</description>
    </option>
 
@@ -182,11 +189,13 @@
 
    <option>
     <name>read-only</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>read-only-desc</description>
    </option>
 
    <option>
     <name>ignore-autosave</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>ignore-autosave-desc</description>
    </option>
 
@@ -202,12 +211,14 @@
 
    <option>
     <name>json-report</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>json-report-desc</description>
    </option>
 
    <option>
-    <name>disable-gui</name>
-    <description>disable-gui-desc</description>
+    <name>gui</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>gui-desc</description>
    </option>
 
    <option>
@@ -223,50 +234,35 @@
 
    <option>
     <name>composite-viewer</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>composite-viewer-desc</description>
-    <arg>{1|0}</arg>
     <brief/>
    </option>
 
    <option>
-    <name>disable-panel</name>
-    <description>disable-panel-desc</description>
+    <name>panel</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>panel-desc</description>
    </option>
 
    <option>
-    <name>enable-panel</name>
-    <description>enable-panel-desc</description>
+    <name>hud</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>hud-desc</description>
    </option>
 
    <option>
-    <name>disable-hud</name>
-    <description>disable-hud-desc</description>
+    <name>anti-alias-hud</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>anti-alias-hud-desc</description>
    </option>
 
    <option>
-    <name>enable-hud</name>
-    <description>enable-hud-desc</description>
+    <name>hud-3d</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>hud-3d-desc</description>
    </option>
 
-   <option>
-    <name>disable-anti-alias-hud</name>
-    <description>disable-anti-alias-hud-desc</description>
-   </option>
-
-   <option>
-    <name>enable-anti-alias-hud</name>
-    <description>enable-anti-alias-hud-desc</description>
-   </option>
-
-   <option>
-    <name>disable-hud-3d</name>
-    <description>disable-hud-3d-desc</description>
-   </option>
-
-   <option>
-    <name>enable-hud-3d</name>
-    <description>enable-hud-3d-desc</description>
-   </option>
 
    <option>
     <name>hud-tris</name>
@@ -279,59 +275,33 @@
    </option>
 
    <option>
-    <name>disable-random-objects</name>
-    <description>disable-random-objects-desc</description>
+    <name>random-objects</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>random-objects-desc</description>
    </option>
 
    <option>
-    <name>enable-random-objects</name>
-    <description>enable-random-objects-desc</description>
-    <description>random-objects-desc</description>
-   </option>
-
-   <option>
-    <name>disable-random-vegetation</name>
-    <description>disable-random-vegetation-desc</description>
+    <name>random-vegetation</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>random-vegetation-desc</description>
    </option>
 
    <option>
-    <name>enable-random-vegetation</name>
-    <description>enable-random-vegetation-desc</description>
-    <description>random-vegetation-desc</description>
-   </option>
-
-   <option>
-    <name>disable-random-buildings</name>
-    <description>disable-random-buildings-desc</description>
+    <name>random-buildings</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>random-buildings-desc</description>
    </option>
 
    <option>
-    <name>enable-random-buildings</name>
-    <description>enable-random-buildings-desc</description>
-    <description>random-buildings-desc</description>
+    <name>ai-models</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>ai-models-desc</description>
    </option>
 
    <option>
-    <name>disable-ai-models</name>
-    <description>disable-ai-models-desc</description>
-   </option>
-
-   <option>
-    <name>enable-ai-models</name>
-    <description>enable-ai-models-desc</description>
-   </option>
-
-   <option>
-    <name>disable-ai-traffic</name>
-    <description>disable-ai-traffic-desc</description>
-   </option>
-
-   <option>
-    <name>enable-ai-traffic</name>
-    <description>enable-ai-traffic-desc</description>
+    <name>ai-traffic</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>ai-traffic-desc</description>
    </option>
 
    <option>
@@ -341,47 +311,32 @@
    </option>
 
    <option>
-    <name>disable-freeze</name>
-    <description>disable-freeze-desc</description>
+    <name>freeze</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>freeze-desc</description>
    </option>
 
    <option>
-    <name>enable-freeze</name>
-    <description>enable-freeze-desc</description>
+    <name>fuel-freeze</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>fuel-freeze-desc</description>
    </option>
 
    <option>
-    <name>disable-fuel-freeze</name>
-    <description>disable-fuel-freeze-desc</description>
+    <name>clock-freeze</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>clock-freeze-desc</description>
    </option>
 
    <option>
-    <name>enable-fuel-freeze</name>
-    <description>enable-fuel-freeze-desc</description>
-   </option>
-
-   <option>
-    <name>disable-clock-freeze</name>
-    <description>disable-clock-freeze-desc</description>
-   </option>
-
-   <option>
-    <name>enable-clock-freeze</name>
-    <description>enable-clock-freeze-desc</description>
-   </option>
-
-   <option>
-    <name>disable-vr</name>
-    <description>disable-vr-desc</description>
-   </option>
-
-   <option>
-    <name>enable-vr</name>
-    <description>enable-vr-desc</description>
+    <name>vr</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>vr-desc</description>
    </option>
 
    <option>
     <name>restart-launcher</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>restart-launcher-desc</description>
    </option>
 
@@ -401,13 +356,9 @@
    </option>
 
    <option>
-    <name>disable-sound</name>
-    <description>disable-sound-desc</description>
-   </option>
-
-   <option>
-    <name>enable-sound</name>
-    <description>enable-sound-desc</description>
+    <name>sound</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>sound-desc</description>
    </option>
 
   </section>
@@ -429,23 +380,15 @@
    </option>
 
    <option>
-    <name>disable-splash-screen</name>
-    <description>disable-splash-screen-desc</description>
+    <name>splash-screen</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>splash-screen-desc</description>
    </option>
 
    <option>
-    <name>enable-splash-screen</name>
-    <description>enable-splash-screen-desc</description>
-   </option>
-
-   <option>
-    <name>disable-mouse-pointer</name>
-    <description>disable-mouse-pointer-desc</description>
-   </option>
-
-   <option>
-    <name>enable-mouse-pointer</name>
-    <description>enable-mouse-pointer-desc</description>
+    <name>mouse-pointer</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>mouse-pointer-desc</description>
    </option>
 
    <option>
@@ -476,43 +419,21 @@
    </option>
 
    <option>
-    <name>disable-enhanced-lighting</name>
-    <description>disable-enhanced-lighting</description>
+    <name>distance-attenuation</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>distance-attenuation-desc</description>
    </option>
 
    <option>
-    <name>enable-enhanced-lighting</name>
-    <description>enable-enhanced-lighting</description>
+     <name>horizon-effect</name>
+     <optional-arg>{1|0}</optional-arg>
+     <description>horizon-effect-desc</description>
    </option>
 
    <option>
-    <name>disable-distance-attenuation</name>
-    <description>disable-distance-attenuation</description>
-   </option>
-
-   <option>
-    <name>enable-distance-attenuation</name>
-    <description>enable-distance-attenuation</description>
-   </option>
-
-   <option>
-     <name>disable-horizon-effect</name>
-     <description>disable-horizon-effect</description>
-   </option>
-
-   <option>
-     <name>enable-horizon-effect</name>
-     <description>enable-horizon-effect</description>
-   </option>
-
-   <option>
-    <name>disable-specular-highlight</name>
-    <description>disable-specular-highlight</description>
-   </option>
-
-   <option>
-    <name>enable-specular-highlight</name>
-    <description>enable-specular-highlight</description>
+    <name>specular-highlight</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>specular-highlight-desc</description>
    </option>
 
    <option>
@@ -528,13 +449,9 @@
    </option>
 
    <option>
-    <name>disable-fullscreen</name>
-    <description>disable-fullscreen-desc</description>
-   </option>
-
-   <option>
-    <name>enable-fullscreen</name>
-    <description>enable-fullscreen-desc</description>
+    <name>fullscreen</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>fullscreen-desc</description>
    </option>
 
    <option>
@@ -560,13 +477,9 @@
    </option>
 
    <option>
-    <name>disable-wireframe</name>
-    <description>disable-wireframe-desc</description>
-   </option>
-
-   <option>
-    <name>enable-wireframe</name>
-    <description>enable-wireframe-desc</description>
+    <name>wireframe</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>wireframe-desc</description>
    </option>
 
    <option>
@@ -582,17 +495,14 @@
    </option>
 
    <option>
-    <name>disable-texture-cache</name>
-    <description>disable-texture-cache-desc</description>
-   </option>
-
-   <option>
-    <name>enable-texture-cache</name>
-    <description>enable-texture-cache-desc</description>
+    <name>texture-cache</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>texture-cache-desc</description>
    </option>
 
    <option>
     <name>texture-cache-dir</name>
+    <arg>path</arg>
     <description>texture-cache-dir-desc</description>
    </option>
 
@@ -693,32 +603,32 @@
 
    <option>
      <name>trim</name>
+     <optional-arg>{1|0}</optional-arg>
      <description>trim-desc</description>
    </option>
 
    <option>
     <name>notrim</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>notrim-desc</description>
    </option>
 
    <option>
     <name>on-ground</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>on-ground-desc</description>
    </option>
 
    <option>
     <name>in-air</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>in-air-desc</description>
    </option>
 
    <option>
-    <name>enable-auto-coordination</name>
-    <description>enable-auto-coordination-desc</description>
-   </option>
-
-   <option>
-    <name>disable-auto-coordination</name>
-    <description>disable-auto-coordination-desc</description>
+    <name>auto-coordination</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>auto-coordination-desc</description>
    </option>
 
    <option>
@@ -971,8 +881,9 @@
    </option>
 
    <option>
-    <name>disable-hold-short</name>
-    <description>disable-hold-short-desc</description>
+    <name>hold-short</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>hold-short-desc</description>
    </option>
 
   </section>
@@ -1052,33 +963,21 @@
    </option>
 
    <option>
-    <name>disable-real-weather-fetch</name>
-    <description>disable-real-weather-fetch-desc</description>
+    <name>real-weather-fetch</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>real-weather-fetch-desc</description>
    </option>
 
    <option>
-    <name>enable-real-weather-fetch</name>
-    <description>enable-real-weather-fetch-desc</description>
+    <name>clouds</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>clouds-desc</description>
    </option>
 
    <option>
-    <name>enable-clouds</name>
-    <description>enable-clouds-desc</description>
-   </option>
-
-   <option>
-    <name>disable-clouds</name>
-    <description>disable-clouds-desc</description>
-   </option>
-
-   <option>
-    <name>enable-clouds3d</name>
-    <description>enable-clouds3d-desc</description>
-   </option>
-
-   <option>
-    <name>disable-clouds3d</name>
-    <description>disable-clouds3d-desc</description>
+    <name>clouds3d</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>clouds3d-desc</description>
    </option>
 
    <option>
@@ -1123,6 +1022,7 @@
 
    <option>
     <name>callsign</name>
+    <arg>name</arg>
     <description>callsign-desc</description>
    </option>
 
@@ -1158,43 +1058,33 @@
    </option>
 
    <option>
-    <name>disable-terrasync</name>
-    <description>disable-terrasync-desc</description>
-   </option>
-
-   <option>
-    <name>enable-terrasync</name>
-    <description>enable-terrasync-desc</description>
+    <name>terrasync</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>terrasync-desc</description>
    </option>
 
    <option>
     <name>terrasync-dir</name>
+    <arg>path</arg>
     <description>terrasync-dir-desc</description>
    </option>
 
    <option>
-    <name>enable-fgcom</name>
-    <description>enable-fgcom-desc</description>
-   </option>
-
-   <option>
-    <name>disable-fgcom</name>
-    <description>disable-fgcom-desc</description>
+    <name>fgcom</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>fgcom-desc</description>
    </option>
 
    <option>
     <name>allow-nasal-from-sockets</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>allow-nasal-from-sockets-desc</description>
    </option>
 
    <option>
-    <name>disable-sentry</name>
-    <description>disable-sentry-desc</description>
-   </option>
-
-   <option>
-    <name>enable-sentry</name>
-    <description>enable-sentry-desc</description>
+    <name>sentry</name>
+    <optional-arg>{1|0}</optional-arg>
+    <description>sentry-desc</description>
    </option>
   </section>
 
@@ -1351,16 +1241,19 @@
 
    <option>
     <name>console</name>
+    <optional-arg>{1|0}</optional-arg>
     <description>console-desc</description>
    </option>
 
    <option>
      <name>developer</name>
+     <optional-arg>{1|0}</optional-arg>
      <description>developer-desc</description>
    </option>
 
    <option>
-     <name>enable-fpe</name>
+     <name>fpe</name>
+     <optional-arg>{1|0}</optional-arg>
      <description>fpe-desc</description>
    </option>
 
@@ -1386,7 +1279,7 @@
 
    <option>
     <name>log-dir</name>
-    <arg>DIR</arg>
+    <arg>{desktop|DIR}</arg>
     <description>log-dir-desc</description>
    </option>
 

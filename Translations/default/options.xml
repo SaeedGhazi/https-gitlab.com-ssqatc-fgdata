@@ -11,9 +11,9 @@
 	<general-options>General Options</general-options>
 	<help-desc>Show the most relevant command line options</help-desc>
 	<verbose-desc>Show all command line options when combined with --help or -h</verbose-desc>
-	<launcher-desc>Use GUI launcher</launcher-desc>
-	<composite-viewer-desc>Enable CompositeViewer (extra view windows)</composite-viewer-desc>
-	<version-desc>Display the current FlightGear version</version-desc>
+	<launcher-desc>Enable/Disable GUI launcher</launcher-desc>
+	<composite-viewer-desc>Enable/Disable CompositeViewer (extra view windows)</composite-viewer-desc>
+	<version-desc>Enable/Disable display the current FlightGear version</version-desc>
 	<fg-root-desc>Specify the root data path</fg-root-desc>
 	<fg-scenery-desc n="0">Specify the scenery path(s);</fg-scenery-desc>
 	<fg-scenery-desc n="1">Defaults to $FG_ROOT/Scenery</fg-scenery-desc>
@@ -21,50 +21,37 @@
 	<download-dir-desc>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</download-dir-desc>
 	<language-desc>Select the language for this session</language-desc>
 	<load-tape-desc>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</load-tape-desc>
-	<load-tape-create-video>Encode video while replaying tape specified by --load-tape</load-tape-create-video>
+	<load-tape-create-video>Enable/Disable encode video while replaying tape specified by --load-tape</load-tape-create-video>
 	<load-tape-fixed-dt>Set fixed-dt mode while replaying tape specified by --load-tape</load-tape-fixed-dt>
-	<disable-splash-screen-desc>Disable splash screen</disable-splash-screen-desc>
-	<enable-splash-screen-desc>Enable splash screen</enable-splash-screen-desc>
-	<restore-defaults-desc>Reset all user settings to their defaults (rendering options etc)</restore-defaults-desc>
-	<disable-save-on-exit>Don't save preferences upon program exit</disable-save-on-exit>
-	<enable-save-on-exit>Allow saving preferences at program exit</enable-save-on-exit>
-	<disable-mouse-pointer-desc>Disable extra mouse pointer</disable-mouse-pointer-desc>
-	<enable-mouse-pointer-desc n="0">Enable extra mouse pointer</enable-mouse-pointer-desc>
-	<enable-mouse-pointer-desc n="1">(i.e. for full screen Voodoo based cards)</enable-mouse-pointer-desc>
-	<disable-random-objects-desc>Exclude random scenery objects</disable-random-objects-desc>
-	<enable-random-objects-desc>Include random scenery objects</enable-random-objects-desc>
-	<disable-random-vegetation-desc>Exclude random vegetation objects</disable-random-vegetation-desc>
-	<enable-random-vegetation-desc>Include random vegetation objects</enable-random-vegetation-desc>
-	<disable-random-buildings-desc>Exclude random buildings objects</disable-random-buildings-desc>
-	<enable-random-buildings-desc>Include random buildings objects</enable-random-buildings-desc>
-	<disable-real-weather-fetch-desc>Disable METAR based real weather fetching</disable-real-weather-fetch-desc>
-	<enable-real-weather-fetch-desc>Enable METAR based real weather fetching (this requires an open internet connection)</enable-real-weather-fetch-desc>
+	<splash-screen-desc>Enable/Disable splash screen</splash-screen-desc>
+	<restore-defaults-desc>Enable/Disable resetting all user settings to their defaults (rendering options etc.)</restore-defaults-desc>
+	<save-on-exit>Enable/Disable saving preferences at program exit</save-on-exit>
+	<mouse-pointer-desc n="0">Enable/Disable extra mouse pointer</mouse-pointer-desc>
+	<mouse-pointer-desc n="1">(i.e. for full screen Voodoo based cards)</mouse-pointer-desc>
+	<random-objects-desc>Enable/Disable random scenery objects (buildings, etc.)</random-objects-desc>
+	<random-vegetation-desc>Enable/Disable random vegetation objects</random-vegetation-desc>
+	<random-buildings-desc>Enable/Disable random buildings objects</random-buildings-desc>
+	<real-weather-fetch-desc>Enable/Disable METAR based real weather fetching</real-weather-fetch-desc>
 	<metar-desc>Pass a METAR string to set up static weather (this implies --disable-real-weather-fetch)</metar-desc>
-	<random-objects-desc>(buildings, etc.)</random-objects-desc>
-	<disable-ai-models-desc>Deprecated option (disable internal AI subsystem)</disable-ai-models-desc>
-	<enable-ai-models-desc>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</enable-ai-models-desc>
-	<disable-ai-traffic-desc>Disable artificial traffic.</disable-ai-traffic-desc>
-	<enable-ai-traffic-desc>Enable artificial traffic.</enable-ai-traffic-desc>
+	<ai-models-desc>Enable/Disable AI subsystem (required for multi-player, AI traffic and many other animations.) Disabling it is deprecated.</ai-models-desc>
+	<ai-traffic-desc>Enable/Disable artificial traffic.</ai-traffic-desc>
 	<ai-scenario>Add and enable a new scenario. Multiple options are allowed.</ai-scenario>
-	<disable-freeze-desc>Start in a running state</disable-freeze-desc>
-	<enable-freeze-desc>Start in a frozen state</enable-freeze-desc>
-	<disable-fuel-freeze-desc>Fuel is consumed normally</disable-fuel-freeze-desc>
-	<enable-fuel-freeze-desc>Fuel tank quantity forced to remain constant</enable-fuel-freeze-desc>
-	<disable-clock-freeze-desc>Clock advances normally</disable-clock-freeze-desc>
-	<enable-clock-freeze-desc>Do not advance clock</enable-clock-freeze-desc>
-	<enable-auto-coordination-desc>Enable auto coordination</enable-auto-coordination-desc>
-	<disable-auto-coordination-desc>Disable auto coordination</disable-auto-coordination-desc>
+	<freeze-desc>Enable/Disable start in a frozen state</freeze-desc>
+	<fuel-freeze-desc>Enable/Disable fuel consumption freeze</fuel-freeze-desc>
+	<clock-freeze-desc>Enable/Disable clock freeze</clock-freeze-desc>
+	<auto-coordination-desc>Enable/Disable auto coordination</auto-coordination-desc>
 	<browser-app-desc>Specify path to your web browser</browser-app-desc>
-	<prop-desc>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool.</prop-desc>
+	<prop-desc>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool</prop-desc>
+	<prop-browser-desc>After starting the simulator, immediately open the properties dialog with the given property</prop-browser-desc>
 	<config-desc>Load additional properties from path</config-desc>
-	<no-default-config-desc>Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</no-default-config-desc>
+	<no-default-config-desc>Enable/Disable not loading any default configuration files (like .fgfsrc) unless explicitly specified with --config</no-default-config-desc>
 	<allow-nasal-read-desc>Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</allow-nasal-read-desc>
-	<read-only-desc>Make $FG_HOME read-only</read-only-desc>
-	<ignore-autosave-desc>Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</ignore-autosave-desc>
+	<read-only-desc>Enable/Disable $FG_HOME read-only</read-only-desc>
+	<ignore-autosave-desc>Enable/Disable ignoring the autosave file, i.e. the settings saved in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</ignore-autosave-desc>
 	<units-feet-desc>Use feet for distances</units-feet-desc>
 	<units-meters-desc>Use meters for distances</units-meters-desc>
-	<json-report-desc>Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</json-report-desc>
-	<disable-gui-desc>Enable headless mode</disable-gui-desc>
+	<json-report-desc>Enable/Disable printing a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</json-report-desc>
+	<gui-desc>Enable/Disable GUI (disabling GUI enables headless mode)</gui-desc>
 	<jsbsim-output-directive-file-desc>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type="CSV"&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</jsbsim-output-directive-file-desc>
 	<data-desc>Specify an additional base data directory (FGData), before the $FG_ROOT directory</data-desc>
 	<addon-desc>Specify a path to addon;</addon-desc>
@@ -72,17 +59,12 @@
 	<!-- Features options -->
 	<environment-options>Environment Options</environment-options>
 	<features-options>Features</features-options>
-	<disable-hud-desc>Disable Heads Up Display (HUD)</disable-hud-desc>
-	<enable-hud-desc>Enable Heads Up Display (HUD)</enable-hud-desc>
-	<disable-panel-desc>Disable instrument panel</disable-panel-desc>
-	<enable-panel-desc>Enable instrument panel</enable-panel-desc>
-	<disable-anti-alias-hud-desc>Disable anti-aliased HUD</disable-anti-alias-hud-desc>
-	<enable-anti-alias-hud-desc>Enable anti-aliased HUD</enable-anti-alias-hud-desc>
-	<disable-hud-3d-desc>Disable 3D HUD</disable-hud-3d-desc>
-	<enable-hud-3d-desc>Enable 3D HUD</enable-hud-3d-desc>
-	<disable-vr-desc>Disable VR</disable-vr-desc>
-	<enable-vr-desc>Enable VR</enable-vr-desc>
-	<restart-launcher-desc>Open Launcher automatically when exiting FlightGear</restart-launcher-desc>
+	<hud-desc>Enable/Disable Heads Up Display (HUD)</hud-desc>
+	<panel-desc>Enable/Disable instrument panel</panel-desc>
+	<anti-alias-hud-desc>Enable/Disable anti-aliased HUD</anti-alias-hud-desc>
+	<hud-3d-desc>Enable/Disable 3D HUD</hud-3d-desc>
+	<vr-desc>Enable/Disable virtual reality</vr-desc>
+	<restart-launcher-desc>Enable/Disable automatic opening of the Launcher when exiting FlightGear</restart-launcher-desc>
 
 	<!-- Aircraft options -->
 	<aircraft-options>Aircraft</aircraft-options>
@@ -100,12 +82,12 @@
 	<aero-desc>Select aircraft aerodynamics model to load</aero-desc>
 	<model-hz-desc>Run the FDM this rate (iterations per second)</model-hz-desc>
 	<speed-desc>Run the FDM 'n' times faster than real time</speed-desc>
-	<notrim-desc n="0">Do NOT attempt to trim the model</notrim-desc>
-	<notrim-desc n="1">(only with fdm=jsbsim)</notrim-desc>
-	<trim-desc n="0">Trim the model</trim-desc>
-	<trim-desc n="1">(only with fdm=jsbsim)</trim-desc>
-	<on-ground-desc>Start at ground level (default)</on-ground-desc>
-	<in-air-desc>Start in air (implied when using --altitude)</in-air-desc>
+	<notrim-desc n="0">Enable/Disable not attempting to trim the model</notrim-desc>
+	<notrim-desc n="1">(only with --fdm=jsbsim)</notrim-desc>
+	<trim-desc n="0">Enable/Disable trim the model</trim-desc>
+	<trim-desc n="1">(only with --fdm=jsbsim)</trim-desc>
+	<on-ground-desc>Enable/Disable starting at ground level (default enabled)</on-ground-desc>
+	<in-air-desc>Enable/Disable starting in air (implied when using --altitude)</in-air-desc>
 	<wind-desc>Specify wind coming from DIR (degrees) at SPEED (knots)</wind-desc>
 	<random-wind-desc>Set up random wind direction and speed</random-wind-desc>
 	<turbulence-desc>Specify turbulence from 0.0 (calm) to 1.0 (severe)</turbulence-desc>
@@ -143,12 +125,11 @@
 	<mach-desc>Specify initial mach number</mach-desc>
 	<glideslope-desc>Specify flight path angle (can be positive)</glideslope-desc>
 	<roc-desc>Specify initial climb rate (can be negative)</roc-desc>
-	<disable-hold-short-desc>Disable the move to hold short position for multiplayer</disable-hold-short-desc>
+	<hold-short-desc>Enable/Disable the move to hold short position for multiplayer</hold-short-desc>
 
 	<!-- Audio options -->
 	<audio-options>Audio Options</audio-options>
-	<disable-sound-desc>Disable sound effects</disable-sound-desc>
-	<enable-sound-desc>Enable sound effects</enable-sound-desc>
+	<sound-desc>Enable/Disable sound effects</sound-desc>
 	<show-sound-devices-desc>Show a list of available audio device</show-sound-devices-desc>
 	<sound-device-desc>Explicitly specify the audio device to use</sound-device-desc>
 
@@ -160,37 +141,25 @@
 	<fog-disable-desc>Disable fog/haze</fog-disable-desc>
 	<fog-fastest-desc>Enable fastest fog/haze</fog-fastest-desc>
 	<fog-nicest-desc>Enable nicest fog/haze</fog-nicest-desc>
-	<disable-horizon-effect>Disable celestial body growth illusion near the horizon</disable-horizon-effect>
-	<enable-horizon-effect>Enable celestial body growth illusion near the horizon</enable-horizon-effect>
-	<disable-enhanced-lighting>Disable enhanced runway lighting</disable-enhanced-lighting>
-	<enable-enhanced-lighting>Enable enhanced runway lighting</enable-enhanced-lighting>
-	<disable-distance-attenuation>Disable runway light distance attenuation</disable-distance-attenuation>
-	<enable-distance-attenuation>Enable runway light distance attenuation</enable-distance-attenuation>
-	<disable-specular-highlight>Disable specular reflections on textured objects</disable-specular-highlight>
-	<enable-specular-highlight>Enable specular reflections on textured objects</enable-specular-highlight>
-	<enable-clouds-desc>Enable 2D (flat) cloud layers</enable-clouds-desc>
-	<disable-clouds-desc>Disable 2D (flat) cloud layers</disable-clouds-desc>
-	<enable-clouds3d-desc>Enable 3D (volumetric) cloud layers</enable-clouds3d-desc>
-	<disable-clouds3d-desc>Disable 3D (volumetric) cloud layers</disable-clouds3d-desc>
+	<horizon-effect-desc>Enable/Disable celestial body growth illusion near the horizon</horizon-effect-desc>
+	<distance-attenuation-desc>Enable/Disable runway light distance attenuation</distance-attenuation-desc>
+	<specular-highlight-desc>Enable/Disable specular reflections on textured objects</specular-highlight-desc>
+	<clouds-desc>Enable/Disable 2D (flat) cloud layers</clouds-desc>
+	<clouds3d-desc>Enable/Disable 3D (volumetric) cloud layers</clouds3d-desc>
 	<fov-desc>Specify field of view angle</fov-desc>
 	<arm-desc>Specify a multiplier for the aspect ratio.</arm-desc>
-	<disable-fullscreen-desc>Disable fullscreen mode</disable-fullscreen-desc>
-	<enable-fullscreen-desc>Enable fullscreen mode</enable-fullscreen-desc>
+	<fullscreen-desc>Enable/Disable fullscreen mode</fullscreen-desc>
 	<shading-flat-desc>Enable flat shading</shading-flat-desc>
 	<shading-smooth-desc>Enable smooth shading</shading-smooth-desc>
-	<disable-textures-desc>Disable textures</disable-textures-desc>
-	<enable-textures-desc>Enable textures</enable-textures-desc>
 	<materials-file-desc>Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</materials-file-desc>
 	<texture-filtering-desc>Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</texture-filtering-desc>
-	<disable-wireframe-desc>Disable wireframe drawing mode</disable-wireframe-desc>
-	<enable-wireframe-desc>Enable wireframe drawing mode</enable-wireframe-desc>
+	<wireframe-desc>Enable/Disable wireframe drawing mode</wireframe-desc>
 	<geometry-desc>Specify window geometry (640x480, etc)</geometry-desc>
 	<view-offset-desc>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</view-offset-desc>
 	<visibility-desc>Specify initial visibility in meters</visibility-desc>
 	<visibility-miles-desc>Specify initial visibility in statute miles</visibility-miles-desc>
 	<max-fps-desc>Maximum frame rate in Hz.</max-fps-desc>
-	<disable-texture-cache-desc>Disable texture cache (DDS)</disable-texture-cache-desc>
-	<enable-texture-cache-desc>Enable texture cache (DDS)</enable-texture-cache-desc>
+	<texture-cache-desc>Enable/Disable texture cache (DDS)</texture-cache-desc>
 	<texture-cache-dir-desc>Specify the DDS texture cache directory to be different than the default location</texture-cache-dir-desc>
 	<terrain-engine-desc>Specify the terrain engine you want to use: tilecache or pagedLOD</terrain-engine-desc>
 	<lod-levels-desc>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is "1 3 5 7 9".</lod-levels-desc>
@@ -221,14 +190,11 @@
 	<proxy-desc>Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option.</proxy-desc>
 	<telnet-desc>Enable telnet server on the specified port</telnet-desc>
 	<jpg-httpd-desc>Enable screen shot http server on the specified port (replaced by --httpd)</jpg-httpd-desc>
-	<disable-terrasync-desc>Disable automatic scenery downloads/updates</disable-terrasync-desc>
-	<enable-terrasync-desc>Enable automatic scenery downloads/updates</enable-terrasync-desc>
+	<terrasync-desc>Enable/Disable automatic scenery downloads/updates</terrasync-desc>
 	<terrasync-dir-desc>Set target directory for scenery downloads</terrasync-dir-desc>
-	<enable-fgcom-desc>Enable FGCom built-in</enable-fgcom-desc>
-	<disable-fgcom-desc>Disable FGCom built-in</disable-fgcom-desc>
-	<allow-nasal-from-sockets-desc>Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</allow-nasal-from-sockets-desc>
-	<disable-sentry-desc>Disable crash and error reports from being sent to the development team for analysis</disable-sentry-desc>
-	<enable-sentry-desc>Enable crash and error reports to be sent to the development team for analysis</enable-sentry-desc>
+	<fgcom-desc>Enable/Disable FGCom built-in</fgcom-desc>
+	<allow-nasal-from-sockets-desc>Enable/Disable security flag. Enable means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</allow-nasal-from-sockets-desc>
+	<sentry-desc>Enable/Disable crash and error reports from being sent to the development team for analysis</sentry-desc>
 
 	<!-- MultiPlayer options -->
 	<multiplayer-options>MultiPlayer Options</multiplayer-options>
@@ -281,10 +247,10 @@
 
 	<!-- Debugging Options -->
 	<debugging-options>Debugging Options</debugging-options>
-	<console-desc>Display console (Windows specific)</console-desc>
-	<developer-desc>Enable developer mode</developer-desc>
-	<fpe-desc>Abort on encountering a floating point exception;</fpe-desc>
-	<fgviewer-desc>Use a model viewer rather than load the entire simulator;</fgviewer-desc>
+	<console-desc>Enable/Disable displaying console (Windows specific)</console-desc>
+	<developer-desc>Enable/Disable developer mode</developer-desc>
+	<fpe-desc>Enable/Disable aborting on encountering a floating point exception</fpe-desc>
+	<fgviewer-desc>Use a model viewer rather than load the entire simulator</fgviewer-desc>
 	<trace-read-desc>Trace the reads for a property;</trace-read-desc>
 	<trace-write-desc>Trace the writes for a property;</trace-write-desc>
 	<log-level-desc>Specify which logging level to use</log-level-desc>

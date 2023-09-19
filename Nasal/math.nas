@@ -1,6 +1,7 @@
 var abs = func(n) { n < 0 ? -n : n }
 
 var sgn = func(x) { x < 0 ? -1 : x > 0 }
+var sign = sgn;
 
 var max = func(x) {
     var n = x;

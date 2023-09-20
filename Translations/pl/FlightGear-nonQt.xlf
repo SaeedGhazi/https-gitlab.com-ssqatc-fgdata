@@ -390,6 +390,10 @@
         <source xml:space="preserve">Traffic and Scenario Settings</source>
         <target xml:space="preserve">Ruch lotniczy oraz scenariusze</target>
       </trans-unit>
+      <trans-unit id="menu/scenery-sources:0" approved="yes">
+        <source xml:space="preserve">Scenery Sources</source>
+        <target xml:space="preserve">Zrodla scenerii</target>
+      </trans-unit>
       <trans-unit id="menu/select-livery:0" approved="yes">
         <source xml:space="preserve">Select Livery</source>
         <target xml:space="preserve">Wybierz malowanie</target>
@@ -576,9 +580,17 @@
         <source xml:space="preserve">Select aircraft aerodynamics model to load</source>
         <target xml:space="preserve">Określ model aerodynamiki statku powietrznego.</target>
       </trans-unit>
+      <trans-unit id="options/ai-models-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable AI subsystem (required for multi-player, AI traffic and many other animations.) Disabling it is deprecated.</source>
+        <target xml:space="preserve">Włącz/wyłącz podsystem sztucznej inteligencji (wymagane dla tybu wieloosobowego, ruchu SI i wielu innych animacji). Wyłączenie jest przestarzałe.</target>
+      </trans-unit>
       <trans-unit id="options/ai-scenario:0" approved="yes">
         <source xml:space="preserve">Add and enable a new scenario. Multiple options are allowed.</source>
         <target xml:space="preserve">Dodaj i włącz nowy scenariusz SI. Można użyć tej opcji wielokrotnie.</target>
+      </trans-unit>
+      <trans-unit id="options/ai-traffic-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable artificial traffic.</source>
+        <target xml:space="preserve">Włącz/wyłącz sztuczny ruch lotniczy.</target>
       </trans-unit>
       <trans-unit id="options/aircraft-desc:0" approved="yes">
         <source xml:space="preserve">Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</source>
@@ -597,8 +609,8 @@
         <target xml:space="preserve">Określ lotnisko startowe.</target>
       </trans-unit>
       <trans-unit id="options/allow-nasal-from-sockets-desc:0" approved="yes">
-        <source xml:space="preserve">Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</source>
-        <target xml:space="preserve">Usuń flagę bezpieczeństwa, co oznacza, że połączenia sieciowe będą miały pełny dostęp do symulatora, w tym do uruchamiania dowolnych skryptów. Upewnij się, że masz odpowiednie zabezpieczenia (takie jak zapora, która blokuje połączenia zewnętrzne).</target>
+        <source xml:space="preserve">Enable/Disable security flag. Enable means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</source>
+        <target xml:space="preserve">Włącz/wyłącz uruchamianie skryptów Nasal z gniazda sieciowego. Włączenie oznacza, że połączenia sieciowe będą miały pełny dostęp do symulatora, w tym do uruchamiania dowolnych skryptów. Upewnij się, że masz odpowiednie zabezpieczenia (takie jak zapora, która blokuje połączenia zewnętrzne).</target>
       </trans-unit>
       <trans-unit id="options/allow-nasal-read-desc:0" approved="yes">
         <source xml:space="preserve">Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</source>
@@ -607,6 +619,10 @@
       <trans-unit id="options/altitude-desc:0" approved="yes">
         <source xml:space="preserve">Starting altitude</source>
         <target xml:space="preserve">Określ wysokość początkową (w stopach, chyba że włączono --units-meters).</target>
+      </trans-unit>
+      <trans-unit id="options/anti-alias-hud-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable anti-aliased HUD</source>
+        <target xml:space="preserve">Włącz/wyłącz antyaliasing HUD-a.</target>
       </trans-unit>
       <trans-unit id="options/arm-desc:0" approved="yes">
         <source xml:space="preserve">Specify a multiplier for the aspect ratio.</source>
@@ -623,6 +639,10 @@
       <trans-unit id="options/audio-options:0" approved="yes">
         <source xml:space="preserve">Audio Options</source>
         <target xml:space="preserve">Opcje audio</target>
+      </trans-unit>
+      <trans-unit id="options/auto-coordination-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable auto coordination</source>
+        <target xml:space="preserve">Włącz/wyłącz auto-koordynację steru kierunku.</target>
       </trans-unit>
       <trans-unit id="options/avionics-options:0" approved="yes">
         <source xml:space="preserve">Avionics Options</source>
@@ -652,6 +672,18 @@
         <source xml:space="preserve">Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</source>
         <target xml:space="preserve">Określ wysokość podstawy chmur (w stopach nad średnim poziomem morza), opcjonalnie z określoną grubością (domyślnie 2000 ft).</target>
       </trans-unit>
+      <trans-unit id="options/clock-freeze-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable clock freeze</source>
+        <target xml:space="preserve">Włącz/wyłącz zamrożenie zegara.</target>
+      </trans-unit>
+      <trans-unit id="options/clouds-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable 2D (flat) cloud layers</source>
+        <target xml:space="preserve">Włącz/wyłącz płaskie (2D) warstwy chmur.</target>
+      </trans-unit>
+      <trans-unit id="options/clouds3d-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable 3D (volumetric) cloud layers</source>
+        <target xml:space="preserve">Włącz/wyłącz przestrzenne (3D) warstwy chmur.</target>
+      </trans-unit>
       <trans-unit id="options/com1-desc:0" approved="yes">
         <source xml:space="preserve">Set the COM1 radio frequency</source>
         <target xml:space="preserve">Ustaw częstotliwość radia COM1.</target>
@@ -661,8 +693,8 @@
         <target xml:space="preserve">Ustaw częstotliwość radia COM2.</target>
       </trans-unit>
       <trans-unit id="options/composite-viewer-desc:0" approved="yes">
-        <source xml:space="preserve">Enable CompositeViewer (extra view windows)</source>
-        <target xml:space="preserve">Włącz CompositeViewer (dodatkowe widoki w osobnych oknach). Podanie wartości 0 wyłączy CompositeViewer.</target>
+        <source xml:space="preserve">Enable/Disable CompositeViewer (extra view windows)</source>
+        <target xml:space="preserve">Włącz/wyłącz CompositeViewer (dodatkowe widoki w osobnych oknach).</target>
       </trans-unit>
       <trans-unit id="options/compositor-desc:0" approved="yes">
         <source xml:space="preserve">Specify the path to XML file for multi-pass rendering. The path is relative to $FG_ROOT (defaults to Compositor/default.xml).</source>
@@ -670,11 +702,11 @@
       </trans-unit>
       <trans-unit id="options/config-desc:0" approved="yes">
         <source xml:space="preserve">Load additional properties from path</source>
-        <target xml:space="preserve">Załaduj dodatkowe właściwości z podanego pliku.</target>
+        <target xml:space="preserve">Wczytaj dodatkowe właściwości z podanego pliku.</target>
       </trans-unit>
       <trans-unit id="options/console-desc:0" approved="yes">
-        <source xml:space="preserve">Display console (Windows specific)</source>
-        <target xml:space="preserve">Wyświetl konsolę (dla systemów Windows).</target>
+        <source xml:space="preserve">Enable/Disable displaying console (Windows specific)</source>
+        <target xml:space="preserve">Włącz/wyłącz konsolę (dla systemów Windows).</target>
       </trans-unit>
       <trans-unit id="options/data-desc:0" approved="yes">
         <source xml:space="preserve">Specify an additional base data directory (FGData), before the $FG_ROOT directory</source>
@@ -685,144 +717,12 @@
         <target xml:space="preserve">Opcje debugowania</target>
       </trans-unit>
       <trans-unit id="options/developer-desc:0" approved="yes">
-        <source xml:space="preserve">Enable developer mode</source>
-        <target xml:space="preserve">Włącz tryb programisty.</target>
+        <source xml:space="preserve">Enable/Disable developer mode</source>
+        <target xml:space="preserve">Włącz/wyłącz tryb programisty.</target>
       </trans-unit>
-      <trans-unit id="options/disable-ai-models-desc:0" approved="yes">
-        <source xml:space="preserve">Deprecated option (disable internal AI subsystem)</source>
-        <target xml:space="preserve">Wyłacz podsystem SI (przestarzałe).</target>
-      </trans-unit>
-      <trans-unit id="options/disable-ai-traffic-desc:0" approved="yes">
-        <source xml:space="preserve">Disable artificial traffic.</source>
-        <target xml:space="preserve">Wyłącz sztuczny ruch lotniczy.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-anti-alias-hud-desc:0" approved="yes">
-        <source xml:space="preserve">Disable anti-aliased HUD</source>
-        <target xml:space="preserve">Wyłącz antyaliasing HUD-a.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-auto-coordination-desc:0" approved="yes">
-        <source xml:space="preserve">Disable auto coordination</source>
-        <target xml:space="preserve">Wyłącz auto-koordynację steru kierunku.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-clock-freeze-desc:0" approved="yes">
-        <source xml:space="preserve">Clock advances normally</source>
-        <target xml:space="preserve">Włącz upływ czas.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-clouds-desc:0" approved="yes">
-        <source xml:space="preserve">Disable 2D (flat) cloud layers</source>
-        <target xml:space="preserve">Wyłacz płaskie (2D) warstwy chmur.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-clouds3d-desc:0" approved="yes">
-        <source xml:space="preserve">Disable 3D (volumetric) cloud layers</source>
-        <target xml:space="preserve">Wyłącz przestrzenne (3D) warstwy chmur.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-distance-attenuation:0" approved="yes">
-        <source xml:space="preserve">Disable runway light distance attenuation</source>
-        <target xml:space="preserve">Wyłącz dostosowanie natężenia świateł pasa startowego.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-enhanced-lighting:0" approved="yes">
-        <source xml:space="preserve">Disable enhanced runway lighting</source>
-        <target xml:space="preserve">Wyłącz rozszerzone oświetlenie pasa startowego.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-fgcom-desc:0" approved="yes">
-        <source xml:space="preserve">Disable FGCom built-in</source>
-        <target xml:space="preserve">Wyłącz wbudowany FGCom.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-freeze-desc:0" approved="yes">
-        <source xml:space="preserve">Start in a running state</source>
-        <target xml:space="preserve">Uruchom w stanie odpauzowanym.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-fuel-freeze-desc:0" approved="yes">
-        <source xml:space="preserve">Fuel is consumed normally</source>
-        <target xml:space="preserve">Zużywanie paliwa jest włączone.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-fullscreen-desc:0" approved="yes">
-        <source xml:space="preserve">Disable fullscreen mode</source>
-        <target xml:space="preserve">Wyłącz tryb pelnoekranowy.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-gui-desc:0" approved="yes">
-        <source xml:space="preserve">Enable headless mode</source>
-        <target xml:space="preserve">Włącz tryb headless.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-hold-short-desc:0" approved="yes">
-        <source xml:space="preserve">Disable the move to hold short position for multiplayer</source>
-        <target xml:space="preserve">Wyłącz przesunięcie pozycji samolotu na pozycję hold short w trybie wieloosobowym.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-horizon-effect:0" approved="yes">
-        <source xml:space="preserve">Disable celestial body growth illusion near the horizon</source>
-        <target xml:space="preserve">Wyłącz iluzję powiększania ciał niebieskich w pobliżu horyzontu.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-hud-3d-desc:0" approved="yes">
-        <source xml:space="preserve">Disable 3D HUD</source>
-        <target xml:space="preserve">Wyłącz HUD 3D.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-hud-desc:0" approved="yes">
-        <source xml:space="preserve">Disable Heads Up Display (HUD)</source>
-        <target xml:space="preserve">Wyłącz wyświetlacz przezierny (HUD).</target>
-      </trans-unit>
-      <trans-unit id="options/disable-mouse-pointer-desc:0" approved="yes">
-        <source xml:space="preserve">Disable extra mouse pointer</source>
-        <target xml:space="preserve">Wyłącz dodatkowy wskaźnik myszy.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-panel-desc:0" approved="yes">
-        <source xml:space="preserve">Disable instrument panel</source>
-        <target xml:space="preserve">Wyłącz panel 2D.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-random-buildings-desc:0" approved="yes">
-        <source xml:space="preserve">Exclude random buildings objects</source>
-        <target xml:space="preserve">Wyłącz losowe budynki.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-random-objects-desc:0" approved="yes">
-        <source xml:space="preserve">Exclude random scenery objects</source>
-        <target xml:space="preserve">Wyłącz losowe obiekty scenerii</target>
-      </trans-unit>
-      <trans-unit id="options/disable-random-vegetation-desc:0" approved="yes">
-        <source xml:space="preserve">Exclude random vegetation objects</source>
-        <target xml:space="preserve">Wyłącz losową roślinność.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-real-weather-fetch-desc:0" approved="yes">
-        <source xml:space="preserve">Disable METAR based real weather fetching</source>
-        <target xml:space="preserve">Wyłącz pobieranie rzeczywistej pogody bazując na danych METAR.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-save-on-exit:0" approved="yes">
-        <source xml:space="preserve">Don&apos;t save preferences upon program exit</source>
-        <target xml:space="preserve">Nie zapisuj ustawień przy wyjściu z programu.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-sentry-desc:0" approved="yes">
-        <source xml:space="preserve">Disable crash and error reports from being sent to the development team for analysis</source>
-        <target xml:space="preserve">Wyłącz wysyłanie raportów o awariach i błędach do zespołu programistów w celu analizy.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-sound-desc:0" approved="yes">
-        <source xml:space="preserve">Disable sound effects</source>
-        <target xml:space="preserve">Wyłącz efekty dźwiekowe.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-specular-highlight:0" approved="yes">
-        <source xml:space="preserve">Disable specular reflections on textured objects</source>
-        <target xml:space="preserve">Wyłącz odbicia lustrzane na teksturowanych obiektach.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-splash-screen-desc:0" approved="yes">
-        <source xml:space="preserve">Disable splash screen</source>
-        <target xml:space="preserve">Wyłącz ekran powitalny.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-terrasync-desc:0" approved="yes">
-        <source xml:space="preserve">Disable automatic scenery downloads/updates</source>
-        <target xml:space="preserve">Wyłącz automatyczne pobieranie/aktualizacje scenerii.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-texture-cache-desc:0" approved="yes">
-        <source xml:space="preserve">Disable texture cache (DDS)</source>
-        <target xml:space="preserve">Wyłącz pamięć podręczną tekstur (DDS).</target>
-      </trans-unit>
-      <trans-unit id="options/disable-textures-desc:0" approved="yes">
-        <source xml:space="preserve">Disable textures</source>
-        <target xml:space="preserve">Wyłącz tekstury.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-vr-desc:0" approved="yes">
-        <source xml:space="preserve">Disable VR</source>
-        <target xml:space="preserve">Wyłącz VR.</target>
-      </trans-unit>
-      <trans-unit id="options/disable-wireframe-desc:0" approved="yes">
-        <source xml:space="preserve">Disable wireframe drawing mode</source>
-        <target xml:space="preserve">Wyłącz tryb rysowania siatki modeli 3D.</target>
+      <trans-unit id="options/distance-attenuation-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable runway light distance attenuation</source>
+        <target xml:space="preserve">Włącz/wyłącz tłumienie świateł drogi startowej wraz z odległością.</target>
       </trans-unit>
       <trans-unit id="options/dme-desc:0" approved="yes">
         <source xml:space="preserve">Slave the DME to one of the NAV radios, or set its internal frequency.</source>
@@ -831,138 +731,6 @@
       <trans-unit id="options/download-dir-desc:0" approved="yes">
         <source xml:space="preserve">Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
         <target xml:space="preserve">Określ katalog jako miejsce dla pobranych statków powietrznych i scenerii (katalog scenerii TerraSync może być określony dodatkowo przez opcję --terrasync-dir).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-ai-models-desc:0" approved="yes">
-        <source xml:space="preserve">Enable AI subsystem (required for multi-player, AI traffic and many other animations)</source>
-        <target xml:space="preserve">Włącz podsystem SI (wymagany dla trybu wieloosobowego, ruchu SI oraz wielu innych animacji).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-ai-traffic-desc:0" approved="yes">
-        <source xml:space="preserve">Enable artificial traffic.</source>
-        <target xml:space="preserve">Włącz sztuczny ruch lotniczy.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-anti-alias-hud-desc:0" approved="yes">
-        <source xml:space="preserve">Enable anti-aliased HUD</source>
-        <target xml:space="preserve">Włącz antyaliasing HUD-a.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-auto-coordination-desc:0" approved="yes">
-        <source xml:space="preserve">Enable auto coordination</source>
-        <target xml:space="preserve">Włącz auto-koordynacje steru kierunku.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-clock-freeze-desc:0" approved="yes">
-        <source xml:space="preserve">Do not advance clock</source>
-        <target xml:space="preserve">Wyłącz upływu czasu (jest to jednoznaczne z włączeniem pauzy).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-clouds-desc:0" approved="yes">
-        <source xml:space="preserve">Enable 2D (flat) cloud layers</source>
-        <target xml:space="preserve">Włącz płaskie (2D) warstwy chmur.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-clouds3d-desc:0" approved="yes">
-        <source xml:space="preserve">Enable 3D (volumetric) cloud layers</source>
-        <target xml:space="preserve">Włącz przestrzenne (3D) warstwy chmur.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-distance-attenuation:0" approved="yes">
-        <source xml:space="preserve">Enable runway light distance attenuation</source>
-        <target xml:space="preserve">Włącz dostosowanie natężenia świateł pasa startowego.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-enhanced-lighting:0" approved="yes">
-        <source xml:space="preserve">Enable enhanced runway lighting</source>
-        <target xml:space="preserve">Włącz rozszerzone oświetlenie pasa startowego.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-fgcom-desc:0" approved="yes">
-        <source xml:space="preserve">Enable FGCom built-in</source>
-        <target xml:space="preserve">Włącz wbudowany FGCom.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-freeze-desc:0" approved="yes">
-        <source xml:space="preserve">Start in a frozen state</source>
-        <target xml:space="preserve">Uruchom w stanie zapauzowanym.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-fuel-freeze-desc:0" approved="yes">
-        <source xml:space="preserve">Fuel tank quantity forced to remain constant</source>
-        <target xml:space="preserve">Zużywanie paliwa jest wyłączone.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-fullscreen-desc:0" approved="yes">
-        <source xml:space="preserve">Enable fullscreen mode</source>
-        <target xml:space="preserve">Włącz tryb pełnoekranowy.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-horizon-effect:0" approved="yes">
-        <source xml:space="preserve">Enable celestial body growth illusion near the horizon</source>
-        <target xml:space="preserve">Włącz iluzję zwiększania rozmiaru ciał niebieskich blisko horyzontu.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-hud-3d-desc:0" approved="yes">
-        <source xml:space="preserve">Enable 3D HUD</source>
-        <target xml:space="preserve">Włącz HUD 3D.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-hud-desc:0" approved="yes">
-        <source xml:space="preserve">Enable Heads Up Display (HUD)</source>
-        <target xml:space="preserve">Włącz wyświetlacz przezierny (HUD).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-mouse-pointer-desc:0" approved="yes">
-        <source xml:space="preserve">Enable extra mouse pointer</source>
-        <target xml:space="preserve">Włącz dodatkowy wskaźnik myszy.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-mouse-pointer-desc:1" approved="yes">
-        <source xml:space="preserve">(i.e. for full screen Voodoo based cards)</source>
-        <target xml:space="preserve">(np. dla trybu pełnoekranowego dla kart bazujacych na Voodoo).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-panel-desc:0" approved="yes">
-        <source xml:space="preserve">Enable instrument panel</source>
-        <target xml:space="preserve">Włącz panel 2D.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-random-buildings-desc:0" approved="yes">
-        <source xml:space="preserve">Include random buildings objects</source>
-        <target xml:space="preserve">Włącz losowe budynki.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-random-objects-desc:0" approved="yes">
-        <source xml:space="preserve">Include random scenery objects</source>
-        <target xml:space="preserve">Włącz losowe obiekty scenerii</target>
-      </trans-unit>
-      <trans-unit id="options/enable-random-vegetation-desc:0" approved="yes">
-        <source xml:space="preserve">Include random vegetation objects</source>
-        <target xml:space="preserve">Włącz losową roślinność.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-real-weather-fetch-desc:0" approved="yes">
-        <source xml:space="preserve">Enable METAR based real weather fetching (this requires an open internet connection)</source>
-        <target xml:space="preserve">Włącz pobieranie rzeczywistej pogody na podstawie METAR-u (wymaga połączenia z Internetem).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-save-on-exit:0" approved="yes">
-        <source xml:space="preserve">Allow saving preferences at program exit</source>
-        <target xml:space="preserve">Zapisuj ustawienia przy wyjściu z programu.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-sentry-desc:0" approved="yes">
-        <source xml:space="preserve">Enable crash and error reports to be sent to the development team for analysis</source>
-        <target xml:space="preserve">Włącz wysyłanie raportów o awariach i błędach do zespołu programistów w celu analizy.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-sound-desc:0" approved="yes">
-        <source xml:space="preserve">Enable sound effects</source>
-        <target xml:space="preserve">Włącz efekty dźwiekowe.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-specular-highlight:0" approved="yes">
-        <source xml:space="preserve">Enable specular reflections on textured objects</source>
-        <target xml:space="preserve">Włącz refleksy na teksturowanych obiektach.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-splash-screen-desc:0" approved="yes">
-        <source xml:space="preserve">Enable splash screen</source>
-        <target xml:space="preserve">Włącz ekran powitalny.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-terrasync-desc:0" approved="yes">
-        <source xml:space="preserve">Enable automatic scenery downloads/updates</source>
-        <target xml:space="preserve">Włącz automatyczne pobieranie/aktualizację scenerii.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-texture-cache-desc:0" approved="yes">
-        <source xml:space="preserve">Enable texture cache (DDS)</source>
-        <target xml:space="preserve">Włącz pamięć podręczną tekstur (DDS).</target>
-      </trans-unit>
-      <trans-unit id="options/enable-textures-desc:0" approved="yes">
-        <source xml:space="preserve">Enable textures</source>
-        <target xml:space="preserve">Włącz teksturowanie.</target>
-      </trans-unit>
-      <trans-unit id="options/enable-vr-desc:0" approved="yes">
-        <source xml:space="preserve">Enable VR</source>
-        <target xml:space="preserve">Włącz VR</target>
-      </trans-unit>
-      <trans-unit id="options/enable-wireframe-desc:0" approved="yes">
-        <source xml:space="preserve">Enable wireframe drawing mode</source>
-        <target xml:space="preserve">Włącz tryb rysowania siatki modeli 3D.</target>
       </trans-unit>
       <trans-unit id="options/environment-options:0" approved="yes">
         <source xml:space="preserve">Environment Options</source>
@@ -1004,9 +772,13 @@
         <source xml:space="preserve">Defaults to $FG_ROOT/Scenery</source>
         <target xml:space="preserve">Domyślna ścieżka to $FG_ROOT/Scenery.</target>
       </trans-unit>
+      <trans-unit id="options/fgcom-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable FGCom built-in</source>
+        <target xml:space="preserve">Włącz/wyłącz wbudowany FGCom.</target>
+      </trans-unit>
       <trans-unit id="options/fgviewer-desc:0" approved="yes">
-        <source xml:space="preserve">Use a model viewer rather than load the entire simulator;</source>
-        <target xml:space="preserve">Wykorzystaj przeglądarkę modeli zamiast ładować cały symulator.</target>
+        <source xml:space="preserve">Use a model viewer rather than load the entire simulator</source>
+        <target xml:space="preserve">Wykorzystaj przeglądarkę modeli zamiast wczytywać cały symulator.</target>
       </trans-unit>
       <trans-unit id="options/fix-desc:0" approved="yes">
         <source xml:space="preserve">Specify starting position relative to a fix</source>
@@ -1037,8 +809,20 @@
         <target xml:space="preserve">Określ kąt pola widzenia.</target>
       </trans-unit>
       <trans-unit id="options/fpe-desc:0" approved="yes">
-        <source xml:space="preserve">Abort on encountering a floating point exception;</source>
-        <target xml:space="preserve">Przerwij przy powtarzających się wyjątkach zmiennoprzecinkowych.</target>
+        <source xml:space="preserve">Enable/Disable aborting on encountering a floating point exception</source>
+        <target xml:space="preserve">Włącz/wyłącz przerwanie przy napotkaniu wyjątku zmiennoprzecinkowego.</target>
+      </trans-unit>
+      <trans-unit id="options/freeze-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable start in a frozen state</source>
+        <target xml:space="preserve">Włącz/wyłącz rozpoczęcie w stanie zapauzowanym.</target>
+      </trans-unit>
+      <trans-unit id="options/fuel-freeze-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable fuel consumption freeze</source>
+        <target xml:space="preserve">Włącz/wyłącz zamrożenie konsumpcji paliwa.</target>
+      </trans-unit>
+      <trans-unit id="options/fullscreen-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable fullscreen mode</source>
+        <target xml:space="preserve">Włącz/wyłącz tryb pełnoekranowy.</target>
       </trans-unit>
       <trans-unit id="options/garmin-desc:0" approved="yes">
         <source xml:space="preserve">Open connection using the Garmin GPS protocol</source>
@@ -1068,6 +852,10 @@
         <source xml:space="preserve">Set graphic options from one of the presets</source>
         <target xml:space="preserve">Ustaw opcje graficzne na jedno z gotowych ustawień.</target>
       </trans-unit>
+      <trans-unit id="options/gui-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable GUI (disabling GUI enables headless mode)</source>
+        <target xml:space="preserve">Włącz/wyłącz GUI (wyłączenie oznacza włączenie trybu headless).</target>
+      </trans-unit>
       <trans-unit id="options/heading-desc:0" approved="yes">
         <source xml:space="preserve">Specify heading (yaw) angle (Psi)</source>
         <target xml:space="preserve">Określ kąt kierunku/odchylenia (Psi).</target>
@@ -1076,13 +864,29 @@
         <source xml:space="preserve">Show the most relevant command line options</source>
         <target xml:space="preserve">Pokaż najczęściej stosowane opcje wiersza poleceń.</target>
       </trans-unit>
+      <trans-unit id="options/hold-short-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable the move to hold short position for multiplayer</source>
+        <target xml:space="preserve">Włącz/wyłącz przesunięcie na pozycję hold short w trybie multiplayer.</target>
+      </trans-unit>
+      <trans-unit id="options/horizon-effect-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable celestial body growth illusion near the horizon</source>
+        <target xml:space="preserve">Włącz/wyłącz iluzoryczne zwiększenie ciał niebieskich w pobliżu horyzontu.</target>
+      </trans-unit>
       <trans-unit id="options/httpd-desc:0" approved="yes">
         <source xml:space="preserve">Enable http server on the specified address. Specify the port or address:port to bind to.</source>
         <target xml:space="preserve">Włącz serwer HTTP na podanym adresie. Możesz określić numer portu jako address:port lub podać sam port.</target>
       </trans-unit>
+      <trans-unit id="options/hud-3d-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable 3D HUD</source>
+        <target xml:space="preserve">Włącz/wyłącz wyświetlacz przezierny 3D.</target>
+      </trans-unit>
       <trans-unit id="options/hud-culled-desc:0" approved="yes">
         <source xml:space="preserve">Hud displays percentage of triangles culled</source>
         <target xml:space="preserve">HUD pokazuje procent wyeliminowanych trójkątów.</target>
+      </trans-unit>
+      <trans-unit id="options/hud-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable Heads Up Display (HUD)</source>
+        <target xml:space="preserve">Włącz/wyłącz wyświetlacz przezierny.</target>
       </trans-unit>
       <trans-unit id="options/hud-options:0" approved="yes">
         <source xml:space="preserve">Hud Options</source>
@@ -1097,12 +901,12 @@
         <target xml:space="preserve">Owtórz połączenie używając protokołu Międzynarodowej Komisji Szybowcowej (International Gliding Commission).</target>
       </trans-unit>
       <trans-unit id="options/ignore-autosave-desc:0" approved="yes">
-        <source xml:space="preserve">Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
-        <target xml:space="preserve">Zignoruj plik autozapisu, tzn. ustawienia zapisane w tym pliku nie zostaną wczytane podczas uruchamiania, ani nie zostaną zapisane do tego pliku podczas zamykania symulatora.</target>
+        <source xml:space="preserve">Enable/Disable ignoring the autosave file, i.e. the settings saved in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
+        <target xml:space="preserve">Włącz/wyłącz ignorowanie pliku autozapisu, tzn. ustawienia zapisane w tym pliku nie zostaną wczytane podczas uruchamiania, ani nie zostaną zapisane do tego pliku podczas zamykania symulatora.</target>
       </trans-unit>
       <trans-unit id="options/in-air-desc:0" approved="yes">
-        <source xml:space="preserve">Start in air (implied when using --altitude)</source>
-        <target xml:space="preserve">Rozpocznij w powietrzu (domyślnie jeśli używamy parametru --altitude).</target>
+        <source xml:space="preserve">Enable/Disable starting in air (implied when using --altitude)</source>
+        <target xml:space="preserve">Włączy/wyłącz rozpoczęcie w powietrzu (włączone jeśli użyjemy opcji --altitude).</target>
       </trans-unit>
       <trans-unit id="options/io-options:0" approved="yes">
         <source xml:space="preserve">IO Options</source>
@@ -1125,8 +929,8 @@
         <target xml:space="preserve">Otwórz połączenie do zdalnego joysticka.</target>
       </trans-unit>
       <trans-unit id="options/json-report-desc:0" approved="yes">
-        <source xml:space="preserve">Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</source>
-        <target xml:space="preserve">Wypisz raport w formacie JSON na standardowym wyjściu, podając informacje, takie jak wersja FlightGear, $FG_ROOT, $FG_HOME, ścieżki statku powietrznego i scenerii, itp.</target>
+        <source xml:space="preserve">Enable/Disable printing a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</source>
+        <target xml:space="preserve">Włącz/wyłącz wypisanie raportu w formacie JSON na standardowym wyjściu, podając informacje, takie jak wersja FlightGear, $FG_ROOT, $FG_HOME, ścieżki statku powietrznego i scenerii itp.</target>
       </trans-unit>
       <trans-unit id="options/language-desc:0" approved="yes">
         <source xml:space="preserve">Select the language for this session</source>
@@ -1137,16 +941,16 @@
         <target xml:space="preserve">Początkowa szerokość geograficzna (południe ze znakiem minus).</target>
       </trans-unit>
       <trans-unit id="options/launcher-desc:0" approved="yes">
-        <source xml:space="preserve">Use GUI launcher</source>
-        <target xml:space="preserve">Użyj aplikacji startowej z graficznym interfejsem użytkownika.</target>
+        <source xml:space="preserve">Enable/Disable GUI launcher</source>
+        <target xml:space="preserve">Włącz/wyłącz uruchamianie aplikacji startowej z graficznym interfejsem użytkownika.</target>
       </trans-unit>
       <trans-unit id="options/livery-desc:0" approved="yes">
         <source xml:space="preserve">Select aircraft livery</source>
         <target xml:space="preserve">Wybierz malowanie statku powietrznego.</target>
       </trans-unit>
       <trans-unit id="options/load-tape-create-video:0" approved="yes">
-        <source xml:space="preserve">Encode video while replaying tape specified by --load-tape</source>
-        <target xml:space="preserve">Nagraj wideo podczas odtwarzania taśmy określonej przez --load-tape</target>
+        <source xml:space="preserve">Enable/Disable encode video while replaying tape specified by --load-tape</source>
+        <target xml:space="preserve">Włącz/wyłącz nagrywanie wideo podczas odtwarzania taśmy określonej przez --load-tape.</target>
       </trans-unit>
       <trans-unit id="options/load-tape-desc:0" approved="yes">
         <source xml:space="preserve">Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending &quot;.fgtape&quot;. For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
@@ -1216,6 +1020,14 @@
         <source xml:space="preserve">Run the FDM this rate (iterations per second)</source>
         <target xml:space="preserve">Uruchom model dynamiki lotu z częstotliwością &apos;n&apos; Hz (kroki na sekundę).</target>
       </trans-unit>
+      <trans-unit id="options/mouse-pointer-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable extra mouse pointer</source>
+        <target xml:space="preserve">Włącz/wyłącz dodatkowy wskaźnik myszy</target>
+      </trans-unit>
+      <trans-unit id="options/mouse-pointer-desc:1" approved="yes">
+        <source xml:space="preserve">(i.e. for full screen Voodoo based cards)</source>
+        <target xml:space="preserve">(np. dla kart opartych na Voodoo)</target>
+      </trans-unit>
       <trans-unit id="options/multiplay-desc:0" approved="yes">
         <source xml:space="preserve">Specify multipilot communication settings;</source>
         <target xml:space="preserve">Określ ustawienia połączenia w tybie wieloosobowym;</target>
@@ -1269,15 +1081,15 @@
         <target xml:space="preserve">Otwórz połączenie używając protokołu NMEA.</target>
       </trans-unit>
       <trans-unit id="options/no-default-config-desc:0" approved="yes">
-        <source xml:space="preserve">Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</source>
-        <target xml:space="preserve">Nie wczytuj żadnych domyślnych plików konfiguracyjnych (takich jak .fgfsrc), chyba że zostało to wyraźnie określone w opcji --config.</target>
+        <source xml:space="preserve">Enable/Disable not loading any default configuration files (like .fgfsrc) unless explicitly specified with --config</source>
+        <target xml:space="preserve">Włącz/wyłącz nie wczytywanie żadnych domyślnych plików konfiguracyjnych (takich jak .fgfsrc), chyba że zostało to wyraźnie określone w opcji --config.</target>
       </trans-unit>
       <trans-unit id="options/notrim-desc:0" approved="yes">
-        <source xml:space="preserve">Do NOT attempt to trim the model</source>
-        <target xml:space="preserve">NIE próbuj ustabilizować modelu dynamiki lotu</target>
+        <source xml:space="preserve">Enable/Disable not attempting to trim the model</source>
+        <target xml:space="preserve">Włącz/wyłącz brak próby ustabilizowania modelu dynamiki lotu</target>
       </trans-unit>
       <trans-unit id="options/notrim-desc:1" approved="yes">
-        <source xml:space="preserve">(only with fdm=jsbsim)</source>
+        <source xml:space="preserve">(only with --fdm=jsbsim)</source>
         <target xml:space="preserve">(tylko z --fdm=jsbsim).</target>
       </trans-unit>
       <trans-unit id="options/offset-azimuth-desc:0" approved="yes">
@@ -1289,12 +1101,16 @@
         <target xml:space="preserve">Określ odległość do punktu odniesienia (w milach morskich).</target>
       </trans-unit>
       <trans-unit id="options/on-ground-desc:0" approved="yes">
-        <source xml:space="preserve">Start at ground level (default)</source>
-        <target xml:space="preserve">Rozpocznij na ziemi (domyślnie).</target>
+        <source xml:space="preserve">Enable/Disable starting at ground level (default enabled)</source>
+        <target xml:space="preserve">Włącz/wyłącz rozpoczęcie na ziemi (domyślnie).</target>
       </trans-unit>
       <trans-unit id="options/opengc-desc:0" approved="yes">
         <source xml:space="preserve">Open connection using the OpenGC protocol</source>
         <target xml:space="preserve">Otwórz połączenie używając protokołu OpenGC.</target>
+      </trans-unit>
+      <trans-unit id="options/panel-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable instrument panel</source>
+        <target xml:space="preserve">Włącz/wyłącz panel z instrumentami.</target>
       </trans-unit>
       <trans-unit id="options/parking-id-desc:0" approved="yes">
         <source xml:space="preserve">Specify parking position at an airport (must also specify an airport)</source>
@@ -1312,8 +1128,12 @@
         <source xml:space="preserve">Initial Position and Orientation</source>
         <target xml:space="preserve">Początkowa pozycja i orientacja</target>
       </trans-unit>
+      <trans-unit id="options/prop-browser-desc:0" approved="yes">
+        <source xml:space="preserve">After starting the simulator, immediately open the properties dialog with the given property</source>
+        <target xml:space="preserve">Po uruchomieniu symulatora natychmiast otwórz okno dialogowe właściwości z daną właściwością.</target>
+      </trans-unit>
       <trans-unit id="options/prop-desc:0" approved="yes">
-        <source xml:space="preserve">Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool.</source>
+        <source xml:space="preserve">Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool</source>
         <target xml:space="preserve">Ustaw właściwość &lt;name&gt; na &lt;value&gt;. &lt;type&gt; może byc jednym z typów: string, double, float, long, int lub bool.</target>
       </trans-unit>
       <trans-unit id="options/props-desc:0" approved="yes">
@@ -1328,9 +1148,17 @@
         <source xml:space="preserve">Open connection using the PVE protocol</source>
         <target xml:space="preserve">Otwórz połączenie używając protokołu PVE.</target>
       </trans-unit>
+      <trans-unit id="options/random-buildings-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable random buildings objects</source>
+        <target xml:space="preserve">Włącz/wyłącz losowe budynki.</target>
+      </trans-unit>
       <trans-unit id="options/random-objects-desc:0" approved="yes">
-        <source xml:space="preserve">(buildings, etc.)</source>
-        <target xml:space="preserve">(budynki, itp.)</target>
+        <source xml:space="preserve">Enable/Disable random scenery objects (buildings, etc.)</source>
+        <target xml:space="preserve">Włącz/wyłącz losowe obiekty scenerii (budynki itp.)</target>
+      </trans-unit>
+      <trans-unit id="options/random-vegetation-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable random vegetation objects</source>
+        <target xml:space="preserve">Włącz/wyłącz losową roślinność.</target>
       </trans-unit>
       <trans-unit id="options/random-wind-desc:0" approved="yes">
         <source xml:space="preserve">Set up random wind direction and speed</source>
@@ -1341,20 +1169,24 @@
         <target xml:space="preserve">Otwórz połączenie przy użyciu protokołu ruchomego krzesła Raya Woodwortha.</target>
       </trans-unit>
       <trans-unit id="options/read-only-desc:0" approved="yes">
-        <source xml:space="preserve">Make $FG_HOME read-only</source>
-        <target xml:space="preserve">Ustaw $FG_HOME tylko do odczytu.</target>
+        <source xml:space="preserve">Enable/Disable $FG_HOME read-only</source>
+        <target xml:space="preserve">Włącz/wyłącz katalog $FG_HOME tylko do odczytu.</target>
+      </trans-unit>
+      <trans-unit id="options/real-weather-fetch-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable METAR based real weather fetching</source>
+        <target xml:space="preserve">Włącz/wyłącz pobieranie rzeczywistej pogody w oparciu o METAR.</target>
       </trans-unit>
       <trans-unit id="options/rendering-options:0" approved="yes">
         <source xml:space="preserve">Rendering Options</source>
         <target xml:space="preserve">Opcje renderowania</target>
       </trans-unit>
       <trans-unit id="options/restart-launcher-desc:0" approved="yes">
-        <source xml:space="preserve">Open Launcher automatically when exiting FlightGear</source>
-        <target xml:space="preserve">Otwórz Launcher automatycznie po wyjściu z FlightGear.</target>
+        <source xml:space="preserve">Enable/Disable automatic opening of the Launcher when exiting FlightGear</source>
+        <target xml:space="preserve">Włącz/wyłącz automatyczne uruchamianie Launchera po wyjściu z FlightGeara.</target>
       </trans-unit>
       <trans-unit id="options/restore-defaults-desc:0" approved="yes">
-        <source xml:space="preserve">Reset all user settings to their defaults (rendering options etc)</source>
-        <target xml:space="preserve">Resetuj wszystkie ustawienia użytkownika (opcje renderowania, pogody, itp.) do ich domyślnych wartości.</target>
+        <source xml:space="preserve">Enable/Disable resetting all user settings to their defaults (rendering options etc.)</source>
+        <target xml:space="preserve">Włącz/wyłącz resetowanie wszystkich ustawień użytkownika (opcje renderowania, pogody, itp.) do ich domyślnych wartości.</target>
       </trans-unit>
       <trans-unit id="options/roc-desc:0" approved="yes">
         <source xml:space="preserve">Specify initial climb rate (can be negative)</source>
@@ -1376,6 +1208,14 @@
         <source xml:space="preserve">Specify starting runway (must also specify an airport)</source>
         <target xml:space="preserve">Określ pas startowy (musisz podać również lotnisko).</target>
       </trans-unit>
+      <trans-unit id="options/save-on-exit:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable saving preferences at program exit</source>
+        <target xml:space="preserve">Włącz/wyłącz zapisywanie ustawiań podczas zamykania symulatora.</target>
+      </trans-unit>
+      <trans-unit id="options/sentry-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable crash and error reports from being sent to the development team for analysis</source>
+        <target xml:space="preserve">Włącz/wyłącz raportowanie błędów tj. wysłanie ich do zespołu programistów w celu analizy.</target>
+      </trans-unit>
       <trans-unit id="options/shading-flat-desc:0" approved="yes">
         <source xml:space="preserve">Enable flat shading</source>
         <target xml:space="preserve">Włącz płaskie cieniowanie.</target>
@@ -1396,13 +1236,25 @@
         <source xml:space="preserve">Situation Options</source>
         <target xml:space="preserve">Opcje sytuacyjne</target>
       </trans-unit>
+      <trans-unit id="options/sound-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable sound effects</source>
+        <target xml:space="preserve">Włącz/wyłącz dźwięk.</target>
+      </trans-unit>
       <trans-unit id="options/sound-device-desc:0" approved="yes">
         <source xml:space="preserve">Explicitly specify the audio device to use</source>
         <target xml:space="preserve">Określ urządzenie audio, którego chcesz użyć.</target>
       </trans-unit>
+      <trans-unit id="options/specular-highlight-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable specular reflections on textured objects</source>
+        <target xml:space="preserve">Włącz/wyłącz odbicia lustrzane na oteksturowanych obiektach.</target>
+      </trans-unit>
       <trans-unit id="options/speed-desc:0" approved="yes">
         <source xml:space="preserve">Run the FDM &apos;n&apos; times faster than real time</source>
         <target xml:space="preserve">Uruchom model dynamiki lotu &apos;n&apos; razy szybciej niż w czasie rzeczywistym.</target>
+      </trans-unit>
+      <trans-unit id="options/splash-screen-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable splash screen</source>
+        <target xml:space="preserve">Włącz/wyłącz ekran powitalny.</target>
       </trans-unit>
       <trans-unit id="options/start-date-desc:0" approved="yes">
         <source xml:space="preserve">Specify a starting date/time with respect to</source>
@@ -1424,9 +1276,17 @@
         <source xml:space="preserve">Specify the terrain engine you want to use: tilecache or pagedLOD</source>
         <target xml:space="preserve">Określ silnik terenu, którego chcesz użyć: tilecache lub pagedLOD.</target>
       </trans-unit>
+      <trans-unit id="options/terrasync-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable automatic scenery downloads/updates</source>
+        <target xml:space="preserve">Włącz/wyłącz automatyczne pobieranie scenerii.</target>
+      </trans-unit>
       <trans-unit id="options/terrasync-dir-desc:0" approved="yes">
         <source xml:space="preserve">Set target directory for scenery downloads</source>
         <target xml:space="preserve">Określ katalog, gdzie TerraSync będzie przechowywał pobieraną scenerię (domyślnie jest to katalog TerraSync w lokalizacji określonej przez --download-dir).</target>
+      </trans-unit>
+      <trans-unit id="options/texture-cache-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable texture cache (DDS)</source>
+        <target xml:space="preserve">Włącz/wyłącz przechowywanie tekstur w pamięci podręcznej (DDS).</target>
       </trans-unit>
       <trans-unit id="options/texture-cache-dir-desc:0" approved="yes">
         <source xml:space="preserve">Specify the DDS texture cache directory to be different than the default location</source>
@@ -1465,11 +1325,11 @@
         <target xml:space="preserve">Śledź zapisy dla podanej właściwości;</target>
       </trans-unit>
       <trans-unit id="options/trim-desc:0" approved="yes">
-        <source xml:space="preserve">Trim the model</source>
-        <target xml:space="preserve">Ustabilizuj model dynami lotu.</target>
+        <source xml:space="preserve">Enable/Disable trim the model</source>
+        <target xml:space="preserve">Włącz/wyłącz stabilizowanie modelu dynami lotu</target>
       </trans-unit>
       <trans-unit id="options/trim-desc:1" approved="yes">
-        <source xml:space="preserve">(only with fdm=jsbsim)</source>
+        <source xml:space="preserve">(only with --fdm=jsbsim)</source>
         <target xml:space="preserve">(tylko z --fdm=jsbsim).</target>
       </trans-unit>
       <trans-unit id="options/turbulence-desc:0" approved="yes">
@@ -1533,8 +1393,8 @@
         <target xml:space="preserve">W celu uzyskania pełnej listy opcji uruchom z: --help --verbose</target>
       </trans-unit>
       <trans-unit id="options/version-desc:0" approved="yes">
-        <source xml:space="preserve">Display the current FlightGear version</source>
-        <target xml:space="preserve">Wyświetl aktualną wersję FlightGear.</target>
+        <source xml:space="preserve">Enable/Disable display the current FlightGear version</source>
+        <target xml:space="preserve">Włącz/wyłącz wypisanie aktualnej wersji FlightGear.</target>
       </trans-unit>
       <trans-unit id="options/view-offset-desc:0" approved="yes">
         <source xml:space="preserve">Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</source>
@@ -1556,6 +1416,10 @@
         <source xml:space="preserve">Specify the frequency of the VOR. Use with --vor=ID</source>
         <target xml:space="preserve">Określ częstotliwość VOR-a. Używane razem z --vor=ID.</target>
       </trans-unit>
+      <trans-unit id="options/vr-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable virtual reality</source>
+        <target xml:space="preserve">Włącz/wyłącz wsparcie dla wirtualnej rzeczywistości.</target>
+      </trans-unit>
       <trans-unit id="options/wBody-desc:0" approved="yes">
         <source xml:space="preserve">Specify velocity along the body Z axis</source>
         <target xml:space="preserve">Określ prędkość wzdłuż osi Z.</target>
@@ -1563,6 +1427,10 @@
       <trans-unit id="options/wind-desc:0" approved="yes">
         <source xml:space="preserve">Specify wind coming from DIR (degrees) at SPEED (knots)</source>
         <target xml:space="preserve">Określ kierunek wiatru w stopniach (DIR) oraz jego prędkość w węzłach (SPEED). Jeśli kierunek wiatru jest zmienny, określ zakres (DIR:MAXDIR), jako minimalny i maksymalny kąt w stopniach. Opcjonalnie ustaw maksymalne natężenie porywów w węzłach (GUST).</target>
+      </trans-unit>
+      <trans-unit id="options/wireframe-desc:0" approved="yes">
+        <source xml:space="preserve">Enable/Disable wireframe drawing mode</source>
+        <target xml:space="preserve">Włącz/wyłącz tryb rysowania poligonów</target>
       </trans-unit>
       <trans-unit id="options/wp-desc:0" approved="yes">
         <source xml:space="preserve">Specify a waypoint for the GC autopilot;</source>
@@ -1584,83 +1452,83 @@
       </trans-unit>
       <trans-unit id="sys/error-3D-model-load:0" approved="yes">
         <source xml:space="preserve">Error loading 3D model</source>
-        <target xml:space="preserve">Błąd wczytywania modelu 3D</target>
+        <target xml:space="preserve">Blad wczytywania modelu 3D</target>
       </trans-unit>
       <trans-unit id="sys/error-aircraft-systems:0" approved="yes">
         <source xml:space="preserve">Errors occured loading aircraft systems (fuel, electrical, hydrualics)</source>
-        <target xml:space="preserve">Wystąpiły błędy podczas wczytywania systemów statku powietrznego (paliwo, elektryka, hydraulika)</target>
+        <target xml:space="preserve">Wystapily bledy podczas wczytywania systemow statku powietrznego (paliwo, elektryka, hydraulika)</target>
       </trans-unit>
       <trans-unit id="sys/error-audio-fx-load:0" approved="yes">
         <source xml:space="preserve">Audio FX description contains errors</source>
-        <target xml:space="preserve">Opis efektów dźwiękowych zawiera błędy</target>
+        <target xml:space="preserve">Opis efektow dzwiekowych zawiera bledy</target>
       </trans-unit>
       <trans-unit id="sys/error-btg-load:0" approved="yes">
         <source xml:space="preserve">Errors loading terrain (BTG)</source>
-        <target xml:space="preserve">Błędy wczytywania terenu (BTG)</target>
+        <target xml:space="preserve">Bledy wczytywania terenu (BTG)</target>
       </trans-unit>
       <trans-unit id="sys/error-category-addon:0" approved="yes">
         <source xml:space="preserve">The add-on &apos;%VALUE%&apos; contains errors. Please report this to the add-on developers.</source>
-        <target xml:space="preserve">Dodatek &quot;%VALUE%&quot; zawiera błędy. Prosimy o zgłoszenie tego programistom dodatku.</target>
+        <target xml:space="preserve">Dodatek &quot;%VALUE%&quot; zawiera bledy. Prosimy o zgloszenie tego programistom dodatku.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-aircraft:0" approved="yes">
         <source xml:space="preserve">This aircraft (%VALUE%) contains errors. This may include visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</source>
-        <target xml:space="preserve">Ten statek powietrzny (%VALUE%) zawiera błędy. Może to dotyczyć problemów wizualnych lub statek powietrzny może w ogóle nie latać. Sprawdź zaktualizowaną wersję statku powietrznego od jego twórców.</target>
+        <target xml:space="preserve">Ten statek powietrzny (%VALUE%) zawiera bledy. Moze to dotyczyc problemow wizualnych lub statek powietrzny moze w ogole nie latac. Sprawdz zaktualizowana wersje statku powietrznego od jego tworcow.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-aircraft-from-hangar:0" approved="yes">
         <source xml:space="preserve">The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar&apos;s maintainers.</source>
-        <target xml:space="preserve">Wybrany statek powietrzny (%VALUE%) zawiera błędy. Może to powodować problemy wizualne lub statek powietrzny może w ogóle nie latać. Prosimy o zgłoszenie poniższych informacji do opiekunów stateku powietrznego w hangarze.</target>
+        <target xml:space="preserve">Wybrany statek powietrzny (%VALUE%) zawiera bledy. Moze to powodowac problemy wizualne lub statek powietrzny moze w ogole nie latac. Prosimy o zgloszenie ponizszych informacji do opiekunow statku powietrznego w hangarze.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-custom-scenery:0" approved="yes">
         <source xml:space="preserve">The custom scenery at &apos;%VALUE%&apos; contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</source>
-        <target xml:space="preserve">Niestandardowa sceneria w &quot;%VALUE%&quot; zawiera błędy. Może to spowodować, że sceneria się nie wczyta, częściowo lub w całości. Sprawdź czy nie ma aktualizacji tej scenerii.</target>
+        <target xml:space="preserve">Niestandardowa sceneria w &quot;%VALUE%&quot; zawiera bledy. Moze to spowodowac, ze sceneria sie nie wczyta, czesciowo lub w calosci. Sprawdz czy nie ma aktualizacji tej scenerii.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-fgdata:0" approved="yes">
         <source xml:space="preserve">Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</source>
-        <target xml:space="preserve">Znaleziono błędy podczas wczytywania podstawowych plików symulatora (FGData). Zwykle oznacza to problem z instalacją lub dyskiem lokalnym.</target>
+        <target xml:space="preserve">Znaleziono bledy podczas wczytywania podstawowych plikow symulatora (FGData). Zwykle oznacza to problem z instalacja lub dyskiem lokalnym.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-input-device:0" approved="yes">
         <source xml:space="preserve">The joystick (input device) &apos;%VALUE%&apos; couldn&apos;t be loaded correctly. This usually means its configuration file is incorrect.</source>
-        <target xml:space="preserve">Nie można poprawnie wczytać joysticka (urządzenia wejściowego) &quot;%VALUE%&quot;. Zwykle oznacza to, że jego plik konfiguracyjny jest niepoprawny.</target>
+        <target xml:space="preserve">Nie mozna poprawnie wczytac joysticka (urzadzenia wejsciowego) &quot;%VALUE%&quot;. Zwykle oznacza to, ze jego plik konfiguracyjny jest niepoprawny.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-multiplayer:0" approved="yes">
         <source xml:space="preserve">Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</source>
-        <target xml:space="preserve">Wczytywanie modelu innego pilota (w trybie wieloosobowym) nie powiodło się. Drugi pilot pojawi się jako model domyślny (możesz wyłączyć te błędy w oknie ustawień multiplayer).</target>
+        <target xml:space="preserve">Wczytywanie modelu innego pilota (w trybie wieloosobowym) nie powiodlo sie. Drugi pilot pojawi sie jako model domyslny (mozesz wylaczyc te bledy w oknie ustawien multiplayer).</target>
       </trans-unit>
       <trans-unit id="sys/error-category-out-of-memory:0" approved="yes">
         <source xml:space="preserve">Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</source>
-        <target xml:space="preserve">Alokacja pamięci nie powiodła się. Niektóre zasoby nie zostaną wczytane. Dostosuj ustawienia, aby zmniejszyć odległość widzenia lub liczbę wczytanych obiektów.</target>
+        <target xml:space="preserve">Alokacja pamieci nie powiodla sie. Niektore zasoby nie zostana wczytane. Dostosuj ustawienia, aby zmniejszyc odleglosc widzenia lub liczbe wczytanych obiektow.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-scenario:0" approved="yes">
         <source xml:space="preserve">The scenario &apos;%VALUE%&apos; contains errors, and may not work correctly.</source>
-        <target xml:space="preserve">Scenariusz &quot;%VALUE%&quot; zawiera błędy i może nie działać poprawnie.</target>
+        <target xml:space="preserve">Scenariusz &quot;%VALUE%&quot; zawiera bledy i moze nie dzialac poprawnie.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-shaders:0" approved="yes">
         <source xml:space="preserve">Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</source>
-        <target xml:space="preserve">Wystąpiły problemy z wczytaniem efektów wizualnych (shaderów). Może to spowodować, że obiekty będą niewidoczne lub będą wyglądać nieprawidłowo. Czasami pomaga zmiana ustawień renderowania we FlightGear lub aktualizacja sterowników karty graficznej.</target>
+        <target xml:space="preserve">Wystapily problemy z wczytaniem efektow wizualnych (shaderow). Moze to spowodowac, ze obiekty beda niewidoczne lub beda wygladac nieprawidlowo. Czasami pomaga zmiana ustawien renderowania we FlightGear lub aktualizacja sterownikow karty graficznej.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-terrasync:0" approved="yes">
         <source xml:space="preserve">Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</source>
-        <target xml:space="preserve">Sceneria pobrana przez TerraSync nie wczytuje się poprawnie. Zwykle oznacza to problem z połączeniem sieciowym lub dyskiem lokalnym.</target>
+        <target xml:space="preserve">Sceneria pobrana przez TerraSync nie wczytuje sie poprawnie. Zwykle oznacza to problem z polaczeniem sieciowym lub dyskiem lokalnym.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-traffic:0" approved="yes">
         <source xml:space="preserve">Problems occured loading simulated aircaft traffic: some traffic may not appear.</source>
-        <target xml:space="preserve">Wystąpiły problemy podczas wczytywania sztucznego ruchu lotniczego: część samolotów może się nie pojawiać.</target>
+        <target xml:space="preserve">Wystapily problemy podczas wczytywania sztucznego ruchu lotniczego: czesc samolotow moze sie nie pojawiac.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-unknown:0" approved="yes">
         <source xml:space="preserve">Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</source>
-        <target xml:space="preserve">Wystąpiły błędy w nieznanej części FlightGear. Proszę zgłosić ten błąd do zespołu programistów FlightGear.</target>
+        <target xml:space="preserve">Wystapily bledy w nieznanej czesci FlightGear. Prosze zglosic ten blad do zespolu programistow FlightGeara.</target>
       </trans-unit>
       <trans-unit id="sys/error-dialog-load:0" approved="yes">
         <source xml:space="preserve">Errors loading user-interface</source>
-        <target xml:space="preserve">Błędy podczas wczytywania interfejsu użytkownika</target>
+        <target xml:space="preserve">Bledy podczas wczytywania interfejsu uzytkownika</target>
       </trans-unit>
       <trans-unit id="sys/error-input-device-config:0" approved="yes">
         <source xml:space="preserve">Errors loading input device configuration</source>
-        <target xml:space="preserve">Błędy podczas wczytywania konfiguracji urządzenia wejściowego</target>
+        <target xml:space="preserve">Bledy podczas wczytywania konfiguracji urzadzenia wejsciowego</target>
       </trans-unit>
       <trans-unit id="sys/error-loading-texture:0" approved="yes">
         <source xml:space="preserve">Texture failed to load</source>
-        <target xml:space="preserve">Nie udało się wczytać tekstury</target>
+        <target xml:space="preserve">Nie udalo sie wczytac tekstury</target>
       </trans-unit>
       <trans-unit id="sys/error-missing-shader:0" approved="yes">
         <source xml:space="preserve">Shader / Effect problems</source>
@@ -1668,35 +1536,35 @@
       </trans-unit>
       <trans-unit id="sys/error-next-steps:0" approved="yes">
         <source xml:space="preserve">This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</source>
-        <target xml:space="preserve">To okno dialogowe jest w trakcie projektowania. Informacje zawarte powyżej mogą nie być w pełni poprawne, więc sprawdź szczegółowe informacje poniżej i przekaż opinię, jeśli coś wydaje się nie tak. Podaj wszystkie informacje poniżej, a także powyższą wiadomość.</target>
+        <target xml:space="preserve">To okno dialogowe jest w trakcie projektowania. Informacje zawarte powyzej moga nie byc w pełni poprawne, wiec sprawdz szczegolowe informacje ponizej i przekaz opinie, jesli cos wydaje sie nie tak. Podaj wszystkie informacje ponizej, a takze powyzszą wiadomosc.</target>
       </trans-unit>
       <trans-unit id="sys/error-scenery-load:0" approved="yes">
         <source xml:space="preserve">Errors loading scenery</source>
-        <target xml:space="preserve">Błędy podczas wczytywania scenerii</target>
+        <target xml:space="preserve">Bledy podczas wczytywania scenerii</target>
       </trans-unit>
       <trans-unit id="sys/error-terraysnc:0" approved="yes">
         <source xml:space="preserve">Errors downloading scenery from TerraSync</source>
-        <target xml:space="preserve">Błędy podczas pobierania scenerii z TerraSync</target>
+        <target xml:space="preserve">Bledy podczas pobierania scenerii z TerraSync</target>
       </trans-unit>
       <trans-unit id="sys/error-type-bad-data:0" approved="yes">
         <source xml:space="preserve">File or resource is invalid or corrupted</source>
-        <target xml:space="preserve">Plik lub zasób jest nieprawidłowy lub uszkodzony</target>
+        <target xml:space="preserve">Plik lub zasob jest nieprawidlowy lub uszkodzony</target>
       </trans-unit>
       <trans-unit id="sys/error-type-bad-header:0" approved="yes">
         <source xml:space="preserve">File or resource header is incorrect</source>
-        <target xml:space="preserve">Nagłówek pliku lub zasobu jest nieprawidłowy</target>
+        <target xml:space="preserve">Naglowek pliku lub zasobu jest nieprawidlowy</target>
       </trans-unit>
       <trans-unit id="sys/error-type-io:0" approved="yes">
         <source xml:space="preserve">Unable to read/write files correctly (check permissions and disk space)</source>
-        <target xml:space="preserve">Nie można poprawnie odczytać/zapisać plików (sprawdź uprawnienia i miejsce na dysku)</target>
+        <target xml:space="preserve">Nie mozna poprawnie odczytac/zapisac plikow (sprawdz uprawnienia i miejsce na dysku)</target>
       </trans-unit>
       <trans-unit id="sys/error-type-misconfigured:0" approved="yes">
         <source xml:space="preserve">The resource contains a configuration problem</source>
-        <target xml:space="preserve">Zasób zawiera problem z konfiguracją</target>
+        <target xml:space="preserve">Zasob zawiera problem z konfiguracja</target>
       </trans-unit>
       <trans-unit id="sys/error-type-network:0" approved="yes">
         <source xml:space="preserve">Network connection failure</source>
-        <target xml:space="preserve">Awaria połączenia sieciowego</target>
+        <target xml:space="preserve">Awaria polaczenia sieciowego</target>
       </trans-unit>
       <trans-unit id="sys/error-type-not-found:0" approved="yes">
         <source xml:space="preserve">The file or resource was not found</source>
@@ -1704,19 +1572,19 @@
       </trans-unit>
       <trans-unit id="sys/error-type-out-of-memory:0" approved="yes">
         <source xml:space="preserve">Unable to allocate sufficient memory</source>
-        <target xml:space="preserve">Nie można przydzielić wystarczającej ilości pamięci</target>
+        <target xml:space="preserve">Nie mozna przydzielic wystarczajacej ilosci pamieci</target>
       </trans-unit>
       <trans-unit id="sys/error-type-unknown:0" approved="yes">
         <source xml:space="preserve">Unknown error</source>
-        <target xml:space="preserve">Nieznany błąd</target>
+        <target xml:space="preserve">Nieznany blad</target>
       </trans-unit>
       <trans-unit id="sys/error-xml-load-command:0" approved="yes">
         <source xml:space="preserve">Scripted loading of XML failed</source>
-        <target xml:space="preserve">Oskryptowane wczytywanie XML nie powiodło się</target>
+        <target xml:space="preserve">Oskryptowane wczytywanie XML nie powiodlo się</target>
       </trans-unit>
       <trans-unit id="sys/error-xml-model-load:0" approved="yes">
         <source xml:space="preserve">Errors loading model XML</source>
-        <target xml:space="preserve">Błędy podczas ładowania modelu XML</target>
+        <target xml:space="preserve">Bledy podczas ladowania modelu XML</target>
       </trans-unit>
       <trans-unit id="sys/finalize-position:0" approved="yes">
         <source xml:space="preserve">finalizing position</source>
@@ -1862,7 +1730,7 @@
       </trans-unit>
       <trans-unit id="tips/tip:10" approved="yes">
         <source xml:space="preserve">Frame-rate too low? - try disabling AI traffic</source>
-        <target xml:space="preserve">Niska liczba klatek na sekundę? - spróbuj wyłączyć ruch SI</target>
+        <target xml:space="preserve">Niska liczba klatek na sekundę? Spróbuj wyłączyć ruch SI</target>
       </trans-unit>
       <trans-unit id="tips/tip:11" approved="yes">
         <source xml:space="preserve">Select Environment → Weather to fly in different weather</source>
@@ -1882,7 +1750,7 @@
       </trans-unit>
       <trans-unit id="tips/tip:15" approved="yes">
         <source xml:space="preserve">Can&apos;t get the engine started? - see Help → Aircraft Checklists</source>
-        <target xml:space="preserve">Nie potrafisz uruchomić silnika? - zobacz Pomoc → Listy kontrolne</target>
+        <target xml:space="preserve">Nie potrafisz uruchomić silnika? Zobacz Pomoc → Listy kontrolne</target>
       </trans-unit>
       <trans-unit id="tips/tip:16" approved="yes">
         <source xml:space="preserve">Drag while holding the middle and right mouse buttons to move the viewpoint</source>
@@ -1977,6 +1845,14 @@
       <trans-unit id="weather-scenarios/high-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">High pressure region</source>
         <target xml:space="preserve">Region wysokiego ciśnienia</target>
+      </trans-unit>
+      <trans-unit id="weather-scenarios/isa-desc:0" approved="yes">
+        <source xml:space="preserve">A standard atmosphere model for testing and calibrating aircraft performance and design.</source>
+        <target xml:space="preserve">Standardowy model atmosfery do testowania osiągów i konstrukcji samolotów.</target>
+      </trans-unit>
+      <trans-unit id="weather-scenarios/isa-name:0" approved="yes">
+        <source xml:space="preserve">International Standard Atmosphere</source>
+        <target xml:space="preserve">Atmosfera wzorcowa (ISA)</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/live-data-desc:0" approved="yes">
         <source xml:space="preserve">Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>

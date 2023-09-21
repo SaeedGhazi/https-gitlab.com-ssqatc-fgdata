@@ -207,12 +207,6 @@ top down before the key bindings are parsed.
      }
    </script>
   </binding>
-  <mod-shift>
-   <binding>
-    <command>nasal</command>
-    <script>globals.propertyTreeBrowserInstance = canvas.PropertyTreeBrowser.new();</script>
-   </binding>
-  </mod-shift>
  </key>
 
  <key n="18">
@@ -470,6 +464,9 @@ top down before the key bindings are parsed.
     <not>
      <property>/sim/input/property-key-handler</property>
     </not>
+    <not>
+      <property>/devices/status/keyboard/ctrl</property>
+    </not>
    </condition>
    <command>nasal</command>
    <script>gui.property_browser()</script>
@@ -477,9 +474,22 @@ top down before the key bindings are parsed.
   <binding>
    <condition>
     <property>/sim/input/property-key-handler</property>
+    <not>
+      <property>/devices/status/keyboard/ctrl</property>
+    </not>
    </condition>
    <command>nasal</command>
    <script>prop_key_handler.start()</script>
+  </binding>
+  <binding>
+  <condition>
+    <not>
+     <property>/sim/input/property-key-handler</property>
+    </not>
+    <property>/devices/status/keyboard/ctrl</property>
+   </condition>
+   <command>nasal</command>
+   <script>globals.propertyTreeBrowserInstance = canvas.PropertyTreeBrowser.new();</script>
   </binding>
  </key>
 

@@ -14,7 +14,7 @@ gui.widgets.MenuBar = {
                 m._layout = HBoxLayout.new();
                 m._layout.setSpacing(0);
                 m._layout.setCanvas(m._view._root.getCanvas());
-                m._canvas_item = nil;
+                m.setCanvasItem(parent);
 
                 m.setLayoutMinimumSize([48, 24]);
                 m.setLayoutSizeHint([48, 24]);

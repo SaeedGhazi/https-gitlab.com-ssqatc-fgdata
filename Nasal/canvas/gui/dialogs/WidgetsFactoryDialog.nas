@@ -14,7 +14,6 @@ var WidgetsFactoryDialog = {
 		m.window.setLayout(m.vbox);
 		
 		m.menubar = canvas.gui.widgets.MenuBar.new(m.root, canvas.style, {});
-		m.menubar.setCanvasItem(m.root);
 
 		m.fileMenu = m.menubar.createMenu("File");
 		m.fileMenu.createItem(text: "Quit", cb: func m.del(), shortcut: "<Ctrl>+Q");

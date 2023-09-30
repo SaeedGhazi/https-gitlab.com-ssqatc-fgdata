@@ -12,6 +12,8 @@
 #define DRAW_MODE_PATH              0
 #define DRAW_MODE_IMAGE             1
 
+out vec4 fragColor;
+
 in vec2 texImageCoord;
 in vec2 paintCoord;
 
@@ -100,5 +102,5 @@ void main()
                   * (imageMode == DRAW_IMAGE_MULTIPLY ? col : vec4(1.0, 1.0, 1.0, 1.0));
     }
 
-    gl_FragColor = col * scaleFactorBias[0] + scaleFactorBias[1];
+    fragColor = col * scaleFactorBias[0] + scaleFactorBias[1];
 }

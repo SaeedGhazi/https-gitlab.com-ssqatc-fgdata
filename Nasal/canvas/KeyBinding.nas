@@ -284,7 +284,7 @@ ModifierKeys.Meta = (ModifierKeys.Meta_L | ModifierKeys.Meta_R);
 var parseShortcut = func(s) 
 {
 	if (size(s) == 0) {
-		return "shortcut string is empty";
+		return nil;
 	}
 	
 	var baseKey = nil;
@@ -366,8 +366,10 @@ KeyBinding['fromShortcut'] = func(shortcutString, cb = nil)
 	var res = KeyBinding.new();
 	var t = parseShortcut(shortcutString);
 	
-	res.modifiers = t[0];
-	res.keyCode = t[1];
+	if (t) {
+		res.modifiers = t[0];
+		res.keyCode = t[1];
+	}
 
 	if (!isfunc(cb)) {
 		logprint(LOG_ALERT, "callback argument to KeyBinding.fromShortcut is not a function")
@@ -380,6 +382,9 @@ KeyBinding['fromShortcut'] = func(shortcutString, cb = nil)
 
 KeyBinding['repr'] = func(kb)
 {
+	if (!kb) {
+		return "";
+	}
 	var names = [];
 	foreach (var mod; keys(ModifierKeys)) {
 		if (kb.modifiers & ModifierKeys[mod]) {

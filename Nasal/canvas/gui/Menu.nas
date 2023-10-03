@@ -32,6 +32,7 @@ gui.MenuItem = {
                 m._text = cfg.get("text", "Menu item");
                 m._shortcut = cfg.get("shortcut", nil);
                 m._cb = cfg.get("cb", nil);
+                m._cb_me = cfg.get("cb_me", m);
                 m._icon = cfg.get("icon", nil);
                 m._enabled = cfg.get("enabled", 1);
                 m._menu_position = cfg.get("menu_position", gui.MenuItem.MenuPosition.Right);
@@ -67,7 +68,11 @@ gui.MenuItem = {
         
         onClicked: func(e) {
                 if (!me._menu and me._cb) {
-                        me._cb(e);
+                        call(me._cb, [e], me._cb_me, var errors = []);
+                        if (size(errors)) {
+                        	logprint(LOG_ALERT, "Error(s) executing callback for menu item '" ~ me._text ~ "':");
+                        	debug.printerror(errors);
+                        }
                 }
                 me._unsetOthersHovered();
                 if (me._is_menubar_item and me._enabled) {
@@ -167,6 +172,10 @@ gui.MenuItem = {
         },
 
         setShortcut: func(shortcut) {
+        	if (!shortcut) {
+        		me._keyBinding = nil;
+        		return;
+        	}
                 if (!isstr(shortcut)) {
                         logprint(LOG_ALERT, "Menu.setShortcut: invalid shortcut");
                         return;
@@ -264,15 +273,16 @@ gui.Menu = {
         # @description Create, insert and return a `canvas.gui.MenuItem` with given text and an optional callback, icon and enabled state.
         # @param text: str required Text to display on the menu item
         # @param cb: callable optional Function / method to call when the item is clicked - if no callback is wanted, nil can be used
+        # @param cb_me: Union[hash, ghost] optional Object to use for any me references in the callback function (see `call`)
         # @param shortcut: str String representation of the keyboard shortcut for the item 
         # @param icon: str optional Path to the icon (relative to canvas.style._dir_widgets) or nil if none should be displayed
         # @param enabled: bool optional Whether the item should be enabled (1) or disabled (0)
         # @return canvas.gui.MenuItem The item that was created
-        createItem: func(text = nil, cb = nil, shortcut = nil, icon = nil, enabled = 1) {
+        createItem: func(text = nil, cb = nil, cb_me = nil, shortcut = nil, icon = nil, enabled = 1) {
                 if (text == nil) {
                         die("cannot create a menu item without text");
                 }
-                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: cb, shortcut: shortcut, icon: icon, enabled: enabled});
+                var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: cb, cb_me: cb_me, shortcut: shortcut, icon: icon, enabled: enabled});
                 me.addItem(item);
                 return item;
         },

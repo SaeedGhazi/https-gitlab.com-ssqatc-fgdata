@@ -484,6 +484,22 @@ var runBinding = func(node, module = nil) {
     condition(node.getNode("condition")) ? fgcommand(cmd, node) : 0;
 }
 
+##
+# Swaps the value of two property nodes, like the property-swap command
+#
+var swapValues = func(left, right) {
+	if (!isa(left, Node)) {
+		left = props.globals.getNode(left);
+	}
+	if (!isa(right, Node)) {
+		right = props.globals.getNode(right);
+	}
+	var leftValue = left.getValue();
+	var rightValue = right.getValue();
+	left.setValue(rightValue);
+	right.setValue(leftValue);
+}
+
  #---------------------------------------------------------------------------
  # Property / object update manager
  #

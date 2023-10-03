@@ -3,30 +3,30 @@
 uniform sampler2DShadow shadow_tex;
 uniform sampler2D depth_tex; // For Screen Space Shadows
 
-uniform bool debug_shadow_cascades;
-
 uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
 uniform mat4 fg_LightMatrix_csm2;
 uniform mat4 fg_LightMatrix_csm3;
 
-const float NORMAL_BIAS      = 0.02;
+uniform bool debug_shadow_cascades;
+uniform float normal_bias;
+uniform bool sss_enabled;
+uniform int sss_step_count;
+uniform float sss_max_distance;
+uniform float sss_depth_bias;
+
 const float BAND_SIZE        = 0.1;
 const vec2  BAND_BOTTOM_LEFT = vec2(BAND_SIZE);
 const vec2  BAND_TOP_RIGHT   = vec2(1.0 - BAND_SIZE);
 
-// Ideally these should be passed as an uniform, but we don't support uniform
-// arrays yet
-const vec2 uv_shifts[4] = vec2[4](
+const vec2 UV_SHIFTS[4] = vec2[4](
     vec2(0.0, 0.0), vec2(0.5, 0.0),
     vec2(0.0, 0.5), vec2(0.5, 0.5));
-const vec2 uv_factor = vec2(0.5, 0.5);
+const vec2 UV_FACTOR = vec2(0.5, 0.5);
 
-// Screen Space Shadows parameters
-const float SSS_THICKNESS = 0.1;
-const uint  SSS_NUM_STEPS = 16u;
-const float SSS_MAX_DISTANCE = 0.05;
-const vec3  DITHER_MAGIC = vec3(0.06711056, 0.00583715, 52.9829189);
+// math.glsl
+float saturate(float x);
+float interleaved_gradient_noise(vec2 uv);
 
 float sample_shadow_map(vec2 coord, vec2 offset, float depth)
 {
@@ -77,7 +77,7 @@ float sample_optimized_PCF(vec4 pos, vec2 map_size)
 float sample_cascade(vec4 P, vec2 shift, vec2 map_size)
 {
     vec4 pos = P;
-    pos.xy *= uv_factor;
+    pos.xy *= UV_FACTOR;
     pos.xy += shift;
     return sample_optimized_PCF(pos, map_size);
 }
@@ -113,56 +113,76 @@ bool is_inside_band(vec4 P)
 vec4 get_light_space_position(vec3 P, vec3 N, float NdotL, mat4 light_matrix)
 {
     float sin_theta = sqrt(1.0 - NdotL * NdotL);
-    vec3 offset_pos = P + N * (sin_theta * NORMAL_BIAS);
+    vec3 offset_pos = P + N * (sin_theta * normal_bias);
     return light_matrix * vec4(offset_pos, 1.0);
 }
 
 /*
  * Screen Space Shadows
+ *
  * Implementation mostly based on:
  * https://panoskarabelas.com/posts/screen_space_shadows/
- * Marching done in screen space instead of in view space.
+ *
+ * Marching done in screen space instead of in view space to save us from doing
+ * matrix multiplications inside the ray marching loop.
+ *
+ * Tolerance trick to avoid "floating shadows" based on Filament.
  */
 float get_contact_shadow(vec3 P, vec3 L, mat4 projection_matrix)
 {
-    // Ray start and end points in view space
+    if (!sss_enabled)
+        return 1.0;
+
     vec3 vs_ray_start = P;
-    vec3 vs_ray_end   = vs_ray_start + L * SSS_MAX_DISTANCE;
-    // To clip space
+    vec3 vs_ray_end   = vs_ray_start + L * sss_max_distance;
+
     vec4 cs_ray_start = projection_matrix * vec4(vs_ray_start, 1.0);
     vec4 cs_ray_end   = projection_matrix * vec4(vs_ray_end, 1.0);
-    // Perspective divide
-    vec3 ray_start = cs_ray_start.xyz / cs_ray_start.w;
-    vec3 ray_end   = cs_ray_end.xyz / cs_ray_end.w;
+    vec4 cs_view_ray_end = cs_ray_start + projection_matrix
+        * vec4(0.0, 0.0, sss_max_distance, 0.0);
+
+    cs_ray_start    /= cs_ray_start.w;
+    cs_ray_end      /= cs_ray_end.w;
+    cs_view_ray_end /= cs_view_ray_end.w;
+
     // From [-1,1] to [0,1] to sample directly from textures
-    ray_start = ray_start * 0.5 + 0.5;
-    ray_end   = ray_end * 0.5 + 0.5;
+    // z is also mapped to [0,1] to compare it with the depth buffer
+    vec3 ray_start = cs_ray_start.xyz * 0.5 + 0.5;
+    vec3 ray_end   = cs_ray_end.xyz * 0.5 + 0.5;
 
-    vec3 ray_dir = ray_end - ray_start;
+    vec3 ray = ray_end - ray_start;
+    float t_max = length(ray);
+    vec3 ray_dir = ray / t_max;
 
-    float dither = fract(DITHER_MAGIC.z * fract(dot(gl_FragCoord.xy, DITHER_MAGIC.xy)));
-
-    float dt = 1.0 / float(SSS_NUM_STEPS);
-    float t = dt * dither + dt;
+    float dt = t_max / float(sss_step_count);
+    float dither = interleaved_gradient_noise(gl_FragCoord.xy);
+    float tolerance = abs(cs_view_ray_end.z - cs_ray_start.z) / float(sss_step_count);
 
     float shadow = 0.0;
 
-    for (uint i = 0u; i < SSS_NUM_STEPS; ++i) {
-        vec3 sample_pos = ray_start + ray_dir * t;
-        // Reversed depth buffer, invert it
-        float sample_depth = 1.0 - texture(depth_tex, sample_pos.xy).r;
-        float dz = sample_pos.z - sample_depth;
-        if (dz > 0.00001 && dz < SSS_THICKNESS) {
+    for (int i = 0; i < sss_step_count; ++i) {
+        float t = (float(i) + dither) * dt;
+        vec3 x_t = ray_start + ray_dir * t;
+
+        // Sample the depth buffer. It's reversed, so invert it
+        float z = 1.0 - texture(depth_tex, x_t.xy).r;
+        // Depth difference between the current ray sample depth and the actual
+        // camera depth contained in the depth buffer.
+        float dz = x_t.z - z - sss_depth_bias;
+
+        if (abs(tolerance - dz) < tolerance) {
+            // We are in shadow
             shadow = 1.0;
-            vec2 screen_fade = smoothstep(vec2(0.0), vec2(0.07), sample_pos.xy)
-                - smoothstep(vec2(0.93), vec2(1.0), sample_pos.xy);
+            // Fade the shadows towards the edges of the screen
+            vec2 screen_fade =
+                smoothstep(vec2(0.0), vec2(0.07), x_t.xy) -
+                smoothstep(vec2(0.93), vec2(1.0), x_t.xy);
             shadow *= screen_fade.x * screen_fade.y;
             break;
         }
-        t += dt;
     }
 
-    return 1.0 - shadow;
+    return (1.0 - shadow);
 }
 
 /*
@@ -172,7 +192,7 @@ float get_contact_shadow(vec3 P, vec3 L, mat4 projection_matrix)
  */
 float get_shadowing(vec3 P, vec3 N, vec3 L)
 {
-    float NdotL = clamp(dot(N, L), 0.0, 1.0);
+    float NdotL = saturate(dot(N, L));
 
     vec4 ls_P[4];
     ls_P[0] = get_light_space_position(P, N, NdotL, fg_LightMatrix_csm0);
@@ -195,7 +215,7 @@ float get_shadowing(vec3 P, vec3 N, vec3 L)
                                                BAND_BOTTOM_LEFT,
                                                BAND_TOP_RIGHT);
                 float cascade0 = sample_cascade(ls_P[i],
-                                                uv_shifts[i],
+                                                UV_SHIFTS[i],
                                                 map_size);
                 float cascade1;
                 if (i == 3) {
@@ -203,7 +223,7 @@ float get_shadowing(vec3 P, vec3 N, vec3 L)
                     cascade1 = 1.0;
                 } else {
                     cascade1 = sample_cascade(ls_P[i+1],
-                                              uv_shifts[i+1],
+                                              UV_SHIFTS[i+1],
                                               map_size);
                 }
                 visibility = mix(cascade0, cascade1, blend);
@@ -212,13 +232,13 @@ float get_shadowing(vec3 P, vec3 N, vec3 L)
                 // we skip the blending to avoid the performance cost
                 // of sampling the shadow map twice.
                 visibility = sample_cascade(ls_P[i],
-                                            uv_shifts[i],
+                                            UV_SHIFTS[i],
                                             map_size);
             }
             break;
         }
     }
-    visibility = clamp(visibility, 0.0, 1.0);
+    visibility = saturate(visibility);
 
     return visibility;
 }
@@ -228,7 +248,7 @@ vec3 debug_shadow_color(vec3 color, vec3 P, vec3 N, vec3 L)
     if (!debug_shadow_cascades)
         return color;
 
-    float NdotL = clamp(dot(N, L), 0.0, 1.0);
+    float NdotL = saturate(dot(N, L));
 
     vec4 ls_P[4];
     ls_P[0] = get_light_space_position(P, N, NdotL, fg_LightMatrix_csm0);

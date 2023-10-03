@@ -559,6 +559,13 @@ Started September 2000 by David Megginson, david@megginson.com
           <enabled type="bool" userarchive="y">true</enabled>
           <world-radius type="float">0.2</world-radius>
         </ambient-occlusion>
+        <shadows>
+          <normal-bias type="float">0.02</normal-bias>
+          <sss-enabled type="bool" userarchive="y">true</sss-enabled>
+          <sss-step-count type="int">32</sss-step-count>
+          <sss-max-distance type="float">0.2</sss-max-distance>
+          <sss-depth-bias type="float">0.00001</sss-depth-bias>
+        </shadows>
         <debug>
           <display-ev100 type="bool">false</display-ev100>
           <show-gbuffer type="bool">false</show-gbuffer>

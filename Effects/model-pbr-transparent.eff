@@ -18,6 +18,25 @@
       <wrap-t>clamp-to-edge</wrap-t>
       <internal-format>normalized</internal-format>
     </texture>
+    <!-- shadows.glsl -->
+    <show-shadow-cascades>
+      <use>/sim/rendering/hdr/debug/show-shadow-cascades</use>
+    </show-shadow-cascades>
+    <normal-bias>
+      <use>/sim/rendering/hdr/shadows/normal-bias</use>
+    </normal-bias>
+    <sss-enabled>
+      <use>/sim/rendering/hdr/shadows/sss-enabled</use>
+    </sss-enabled>
+    <sss-step-count>
+      <use>/sim/rendering/hdr/shadows/sss-step-count</use>
+    </sss-step-count>
+    <sss-max-distance>
+      <use>/sim/rendering/hdr/shadows/sss-max-distance</use>
+    </sss-max-distance>
+    <sss-depth-bias>
+      <use>/sim/rendering/hdr/shadows/sss-depth-bias</use>
+    </sss-depth-bias>
     <!-- exposure.glsl -->
     <exposure-compensation>
       <use>/sim/rendering/hdr/exposure-compensation</use>
@@ -168,6 +187,31 @@
         <name>debug_shadow_cascades</name>
         <type>bool</type>
         <value><use>show-shadow-cascades</use></value>
+      </uniform>
+      <uniform>
+        <name>normal_bias</name>
+        <type>float</type>
+        <value><use>normal-bias</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_enabled</name>
+        <type>bool</type>
+        <value><use>sss-enabled</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_step_count</name>
+        <type>int</type>
+        <value><use>sss-step-count</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_max_distance</name>
+        <type>float</type>
+        <value><use>sss-max-distance</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_depth_bias</name>
+        <type>float</type>
+        <value><use>sss-depth-bias</use></value>
       </uniform>
       <!-- ibl.glsl -->
       <uniform>

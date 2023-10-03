@@ -34,3 +34,12 @@ float pow5(float x) {
     float x2 = x*x;
     return x2 * x2 * x;
 }
+
+/*
+ * Random number between 0 and 1, using interleaved gradient noise.
+ * uv must not be normalized.
+ */
+float interleaved_gradient_noise(vec2 uv) {
+    const vec3 m = vec3(0.06711056, 0.00583715, 52.9829189);
+    return fract(m.z * fract(dot(uv, m.xy)));
+}

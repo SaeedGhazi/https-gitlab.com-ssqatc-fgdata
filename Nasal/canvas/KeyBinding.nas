@@ -283,7 +283,7 @@ ModifierKeys.Meta = (ModifierKeys.Meta_L | ModifierKeys.Meta_R);
 
 var parseShortcut = func(s) 
 {
-	if (size(s) == 0) {
+	if (!s or !isstr(s) or size(s) == 0) {
 		return nil;
 	}
 	
@@ -315,6 +315,7 @@ var parseShortcut = func(s)
 
 	if (keyCode == nil) {
 		logprint(LOG_ALERT, "Unknown key '" ~ baseKey ~ "'");
+		return nil;
 	}
 
 	return  [modMask, keyCode];

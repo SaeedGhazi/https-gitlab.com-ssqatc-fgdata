@@ -14,7 +14,6 @@ var gui = {
   focused_window: nil,
   open_popups: [],
   region_highlight: nil,
-  menubar: nil,
 
   # Window/dialog stacking order
   STACK_INDEX: {
@@ -31,6 +30,8 @@ var loadDialog = func(name) loadGUIFile("dialogs/" ~ name ~ ".nas");
 
 loadGUIFile("Config.nas");
 loadGUIFile("Menu.nas");
+loadGUIFile("MenuBar.nas");
+loadGUIFile("Overlay.nas");
 loadGUIFile("Popup.nas");
 loadGUIFile("Style.nas");
 loadGUIFile("Widget.nas");
@@ -606,21 +607,14 @@ getDesktop().addEventListener("mousedown", func {
   }
 });
 
-# disabled until this is hooked up to the PUICompat code
-#gui.menubar = gui.MenuBar.new();
-
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
 var Dialog = {
   new: func(size, type = nil, id = nil)
   {
-    debug.warn("'canvas.Dialog' is deprectated! (use canvas.Window instead)");
+    debug.warn("'canvas.Dialog' is deprecated! (use canvas.Window instead)");
     return Window.new(size, type, id);
   }
 };
 
 var unloadGUI = func() {
-  if (gui.menubar) {
-  	gui.menubar.del();
-    gui.menubar = nil;
-  }
 }

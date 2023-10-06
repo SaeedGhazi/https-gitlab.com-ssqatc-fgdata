@@ -1,60 +1,56 @@
-# SPDX-FileCopyrightText: (C) 2022 James Turner <james@flightgear.org>
+# SPDX-FileCopyrightText: (C) 2023 TheFGFSEagle <thefgfseagle@gmail.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+var menubar = nil;
 
-var GUIMenuItem = {
-
-    aboutToShow: func() {
-
-    },
-
-    # return a Canvas object (group) of the contents
-    show: func(viewParent) {
-
-    }
-
-};
-
-var GUIMenu = {
-
-    aboutToShow: func() {
-
-    },
-
-    # return a Canvas object (group) of the contents
-    show: func(viewParent) {
-        # loop over children
-    }
-
-};
-
-var GUIMenuBar = {
-    aboutToShow: func() {
-
-    },
-
-    # return a Canvas object (group) of the contents
-    show: func(viewParent) {
-
-    }
-
-};
-
-# this is the callback function invoked by C++ to build Nasal peers
-# for the C++ menu objects.
-var _createMenuObject = func(type)
-{
-    if (type == "menubar") {
-
-    } else if (type == "menuitem") {
-
-    } else if (type == "seperator") {
-
-    } else if (type == "menu") {
-        # do we need to distuinguish submenus here:
-    }
-
-    return nil;
+var _addItem = func(parent, itemGhost) {
+	var item = parent.createItem(
+		text: itemGhost.label,
+		cb: itemGhost.fire,
+		cb_me: itemGhost,
+		shortcut: itemGhost.shortcut,
+		enabled: itemGhost.enabled,
+	);
 }
 
-logprint(LOG_INFO, "Did load GUI menubar");
+var _addMenu = func(parent, menuGhost) {
+	var menu = parent.createMenu(menuGhost.label);
+	foreach (var item; menuGhost.items) {
+		_addItem(menu, item);
+	}
+}
+
+var _createMenuBar = func(menubarGhost) {
+	if (menubar != nil) {
+		menubar.del();
+		menubar = nil;
+	}
+	menubar = canvas.gui.MenuBar.new();
+	foreach (var menu; menubarGhost.menus) {
+		_addMenu(menubar, menu);
+	}
+	menubar.show();
+}
+
+var _destroyMenuBar = func(menubarGhost) {
+	if (menubar != nil) {
+		return;
+	}
+	menubar.del();
+	menubar = nil;
+}
+
+var _showMenuBar = func(menubarGhost) {
+	if (menubar == nil) {
+		return;
+	}
+	menubar.show();
+}
+
+var _hideMenuBar = func(menubarGhost) {
+	if (menubar == nil) {
+		return;
+	}
+	menubar.hide();
+}
+

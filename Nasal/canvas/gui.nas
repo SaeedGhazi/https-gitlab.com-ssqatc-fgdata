@@ -608,8 +608,9 @@ getDesktop().addEventListener("mousedown", func {
   }
 });
 
-# disabled until this is hooked up to the PUICompat code
-#gui.menubar = gui.MenuBar.new();
+if (!props.globals.getBoolValue("/sim/gui/use-pui")) {
+	gui.menubar = gui.MenuBar.new();
+}
 
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
 var Dialog = {

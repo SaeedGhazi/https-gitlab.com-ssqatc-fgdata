@@ -2,7 +2,13 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 var _addItem = func(parent, itemGhost) {
-	var item = parent.createItem(itemGhost.label, itemGhost.fire, itemGhost, itemGhost.shortcut, itemGhost.enabled);
+	var item = parent.createItem(
+		text: itemGhost.label,
+		cb: itemGhost.fire,
+		cb_me: itemGhost,
+		shortcut: itemGhost.shortcut,
+		enabled: itemGhost.enabled,
+	);
 }
 
 var _addMenu = func(parent, menuGhost) {

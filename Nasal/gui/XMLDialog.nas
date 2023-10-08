@@ -48,6 +48,10 @@ onWindowClosed: func
 {
     logprint(LOG_WARN, "XMLDialog window was requested to closed");
     me.dialog().close();
+
+    # hack: manually trigger onClose for now. This should happen automatically
+    # in response to dialog().close().
+    me.onClose();
 },
 
 onBringToFront: func()

@@ -48,6 +48,7 @@ onWindowClosed: func
 {
     logprint(LOG_WARN, "XMLDialog window was requested to closed");
     me.dialog().close();
+    me.onClose();
 },
 
 onBringToFront: func()

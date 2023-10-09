@@ -541,6 +541,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
         <exposure-compensation type="float">0.0</exposure-compensation>
         <envmap>
+          <cubemap-size type="int" userarchive="y">128</cubemap-size>
           <force-update type="bool">false</force-update>
           <update-rate-s type="float">90.0</update-rate-s>
           <should-prefilter type="bool">false</should-prefilter>
@@ -560,6 +561,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <world-radius type="float">0.2</world-radius>
         </ambient-occlusion>
         <shadows>
+          <sun-atlas-size type="int" userarchive="y">8192</sun-atlas-size>
           <normal-bias type="float">0.02</normal-bias>
           <sss-enabled type="bool" userarchive="y">true</sss-enabled>
           <sss-step-count type="int">32</sss-step-count>

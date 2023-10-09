@@ -124,8 +124,8 @@
   <buffer>
     <name>envmap</name>
     <type>cubemap</type>
-    <width>128</width>
-    <height>128</height>
+    <width><property>/sim/rendering/hdr/envmap/cubemap-size</property></width>
+    <height><property>/sim/rendering/hdr/envmap/cubemap-size</property></height>
     <format>r11f-g11f-b10f</format>
     <min-filter>linear-mipmap-linear</min-filter>
     <mag-filter>linear</mag-filter>
@@ -136,8 +136,8 @@
   <buffer>
     <name>prefiltered-envmap</name>
     <type>cubemap</type>
-    <width>128</width>
-    <height>128</height>
+    <width><property>/sim/rendering/hdr/envmap/cubemap-size</property></width>
+    <height><property>/sim/rendering/hdr/envmap/cubemap-size</property></height>
     <format>r11f-g11f-b10f</format>
     <min-filter>linear-mipmap-linear</min-filter>
     <mag-filter>linear</mag-filter>
@@ -150,8 +150,8 @@
   <buffer>
     <name>sun-shadowmap-atlas</name>
     <type>2d</type>
-    <width>8192</width>
-    <height>8192</height>
+    <width><property>/sim/rendering/hdr/shadows/sun-atlas-size</property></width>
+    <height><property>/sim/rendering/hdr/shadows/sun-atlas-size</property></height>
     <format>depth16</format>
     <wrap-s>clamp-to-border</wrap-s>
     <wrap-t>clamp-to-border</wrap-t>

@@ -542,6 +542,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <exposure-compensation type="float">0.0</exposure-compensation>
         <envmap>
           <cubemap-size type="int" userarchive="y">128</cubemap-size>
+          <update-continuously type="bool">false</update-continuously>
           <force-update type="bool">false</force-update>
           <update-rate-s type="float">90.0</update-rate-s>
           <should-prefilter type="bool">false</should-prefilter>

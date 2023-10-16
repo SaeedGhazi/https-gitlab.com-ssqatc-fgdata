@@ -14,7 +14,6 @@ var gui = {
   focused_window: nil,
   open_popups: [],
   region_highlight: nil,
-  menubar: nil,
 
   # Window/dialog stacking order
   STACK_INDEX: {
@@ -608,10 +607,6 @@ getDesktop().addEventListener("mousedown", func {
   }
 });
 
-if (!props.globals.getBoolValue("/sim/gui/use-pui")) {
-	gui.menubar = gui.MenuBar.new();
-}
-
 # Provide old 'Dialog' for backwards compatiblity (should be removed for 3.0)
 var Dialog = {
   new: func(size, type = nil, id = nil)
@@ -622,8 +617,4 @@ var Dialog = {
 };
 
 var unloadGUI = func() {
-  if (gui.menubar) {
-  	gui.menubar.del();
-    gui.menubar = nil;
-  }
 }

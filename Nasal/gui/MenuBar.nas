@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: (C) 2023 TheFGFSEagle <thefgfseagle@gmail.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+var menubar = nil;
+
 var _addItem = func(parent, itemGhost) {
 	var item = parent.createItem(
 		text: itemGhost.label,
@@ -19,9 +21,36 @@ var _addMenu = func(parent, menuGhost) {
 }
 
 var _createMenuBar = func(menubarGhost) {
-	foreach (var menu; menubarGhost.menus) {
-		_addMenu(canvas.gui.menubar, menu);
+	if (menubar != nil) {
+		menubar.del();
+		menubar = nil;
 	}
-	canvas.gui.menubar.show();
+	menubar = canvas.gui.MenuBar.new();
+	foreach (var menu; menubarGhost.menus) {
+		_addMenu(menubar, menu);
+	}
+	menubar.show();
+}
+
+var _destroyMenuBar = func(menubarGhost) {
+	if (menubar != nil) {
+		return;
+	}
+	menubar.del();
+	menubar = nil;
+}
+
+var _showMenuBar = func(menubarGhost) {
+	if (menubar == nil) {
+		return;
+	}
+	menubar.show();
+}
+
+var _hideMenuBar = func(menubarGhost) {
+	if (menubar == nil) {
+		return;
+	}
+	menubar.hide();
 }
 

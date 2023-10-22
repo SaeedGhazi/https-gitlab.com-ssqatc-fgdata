@@ -186,25 +186,6 @@
         </output>
     </filter>
 
-    <filter>
-        <name>Engine Total Hobbs Hours</name>
-        <type>gain</type>
-        <input>
-            <expression>
-                <div>
-                    <sum>
-                        <property>/sim/time/hobbs/engine[0]</property>
-                        <property>/sim/time/hobbs/engine[1]</property>
-                    </sum>
-                    <value>3600.0</value>
-                </div>
-            </expression>
-        </input>
-        <output>
-            <property>/instrumentation/clock/hobbs-meter-hours</property>
-        </output>
-    </filter>
-
     <logic>
         <name>Comm 0 Serviceable</name>
         <input>
@@ -292,7 +273,7 @@
     </filter>
 
     <filter>
-        <name>ADF On/Off</name>
+        <name>ADF Dim/Bright</name>
         <type>gain</type>
         <input>
             <condition>
@@ -309,7 +290,7 @@
     </filter>
 
     <filter>
-        <name>ADF-fg1000 On/Off</name>
+        <name>ADF-fg1000 Dim/Bright</name>
         <type>gain</type>
         <input>
             <condition>
@@ -397,6 +378,23 @@
         </input>
         <output>
             <property>/sim/model/c172p/lighting/ap</property>
+        </output>
+    </filter>
+
+    <filter>
+        <name>AP Dim/Bright FG-1000</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>/sim/model/c172p/lighting/ap-power</property>
+            </condition>
+            <property>/controls/lighting/stby</property>
+        </input>
+        <input>
+            <value>0.0</value>
+        </input>
+        <output>
+            <property>/sim/model/c172p/lighting/ap-fg1000</property>
         </output>
     </filter>
 

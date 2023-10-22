@@ -26,19 +26,19 @@
         <vtailarea unit="FT2"> 16.5 </vtailarea>
         <vtailarm unit="FT"> 0 </vtailarm>
         <location name="AERORP" unit="IN">
-            <x> 40.6 </x>
+            <x> 41.2 </x> <!-- initial: 40.6 (25% Mean Aerodynamic Chord) -->
             <y> 0 </y>
-            <z> 59.4 </z>
+            <z> 29.3 </z>
         </location>
         <location name="EYEPOINT" unit="IN">
             <x> 37 </x>
             <y> 0 </y>
             <z> 48 </z>
         </location>
-        <location name="VRP" unit="IN">
-            <x> 42.6 </x>
+        <location name="VRP" unit="IN">            
+            <x> 34 </x>
             <y> 0 </y>
-            <z> 38.5 </z>
+            <z> 35.75 </z>
         </location>
     </metrics>
 
@@ -57,7 +57,7 @@
         <location name="CG" unit="IN">
             <x> 39.06 </x>
             <y> 0 </y>
-            <z> 34 </z>
+            <z> 25 </z>
         </location>
 
         <pointmass name="Pilot">
@@ -218,9 +218,9 @@
 
         <contact type="BOGEY" name="NOSE">
             <location unit="IN">
-                <x> -6.8 </x>
+                <x> -7.3 </x>
                 <y> 0 </y>
-                <z> -20.3 </z>
+                <z> -20.3 </z> <!-- managed in Systems/c172p-ground-effects.xml -->
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
@@ -233,9 +233,9 @@
         </contact>
         <contact type="BOGEY" name="LEFT_MAIN">
             <location unit="IN">
-                <x> 58.2 </x>
+                <x> 57.3 </x>
                 <y> -43 </y>
-                <z> -15.3 </z>
+                <z> -15.3 </z> <!-- managed in Systems/c172p-ground-effects.xml -->
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
@@ -248,9 +248,9 @@
         </contact>
         <contact type="BOGEY" name="RIGHT_MAIN">
             <location unit="IN">
-                <x> 58.2 </x>
+                <x> 57.3 </x>
                 <y> 43 </y>
-                <z> -15.1 </z>
+                <z> -15.1 </z> <!-- managed in Systems/c172p-ground-effects.xml -->
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
@@ -450,37 +450,37 @@
         <!-- contact 19, 20, 21, 22 -->
         <contact type="BOGEY" name="LFFloatGear">
             <location unit="IN">
-                <x>-78</x>
+                <x>-44.8</x>
                 <y>-56.889</y>
                 <z>0</z>
             </location>
             <static_friction> 0.05</static_friction>
             <dynamic_friction>0.05</dynamic_friction>
             <rolling_friction>0.02</rolling_friction>
-            <spring_coeff unit="LBS/FT"> 1000 </spring_coeff>
-            <damping_coeff unit="LBS/FT/SEC"> 600 </damping_coeff>
+            <spring_coeff unit="LBS/FT"> 5400 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 1600 </damping_coeff>
             <max_steer unit="DEG">360</max_steer>
             <brake_group>NONE</brake_group>
             <retractable>1</retractable>
         </contact>
         <contact type="BOGEY" name="RFFloatGear">
             <location unit="IN">
-                <x>-78</x>
+                <x>-44.8</x>
                 <y>56.889</y>
                 <z>0</z>
             </location>
             <static_friction> 0.05</static_friction>
             <dynamic_friction>0.05</dynamic_friction>
             <rolling_friction>0.02</rolling_friction>
-            <spring_coeff unit="LBS/FT"> 1000 </spring_coeff>
-            <damping_coeff unit="LBS/FT/SEC"> 600 </damping_coeff>
+            <spring_coeff unit="LBS/FT"> 5400 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 1600 </damping_coeff>
             <max_steer unit="DEG">360</max_steer>
             <brake_group>NONE</brake_group>
             <retractable>1</retractable>
         </contact>
         <contact type="BOGEY" name="LMFloatGear">
             <location unit="IN">
-                <x>76</x>
+                <x>73.1</x>
                 <y>-56.889</y>
                 <z>0</z>
             </location>
@@ -495,7 +495,7 @@
         </contact>
         <contact type="BOGEY" name="RMFloatGear">
             <location unit="IN">
-                <x>76</x>
+                <x>73.1</x>
                 <y>56.889</y>
                 <z>0</z>
             </location>
@@ -531,30 +531,30 @@
         </contact>
         <contact type="BOGEY" name="LEFT_SKI">
             <location unit="IN">
-                <x> 93 </x>
+                <x> 86.4 </x>
                 <y> -51 </y>
                 <z> -10 </z>
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
-            <spring_coeff unit="LBS/FT"> 5400 </spring_coeff>
-            <damping_coeff unit="LBS/FT/SEC"> 400 </damping_coeff>
+            <spring_coeff unit="LBS/FT"> 50 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 15 </damping_coeff>
             <max_steer unit="DEG"> 0.0 </max_steer>
             <brake_group> NONE </brake_group>
             <retractable>0</retractable>
         </contact>
         <contact type="BOGEY" name="RIGHT_SKI">
             <location unit="IN">
-                <x> 93 </x>
+                <x> 86.4 </x>
                 <y> 52 </y>
                 <z> -10 </z>
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
-            <spring_coeff unit="LBS/FT"> 5400 </spring_coeff>
-            <damping_coeff unit="LBS/FT/SEC"> 400 </damping_coeff>
+            <spring_coeff unit="LBS/FT"> 50 </spring_coeff>
+            <damping_coeff unit="LBS/FT/SEC"> 15 </damping_coeff>
             <max_steer unit="DEG"> 0.0 </max_steer>
             <brake_group>NONE </brake_group>
             <retractable>0</retractable>
@@ -564,6 +564,7 @@
 
     <propulsion>
         <engine file="eng_io320">
+            <!-- 
             <location unit="IN">
                 <x> -19.7 </x>
                 <y> 0 </y>
@@ -574,13 +575,14 @@
                 <pitch> 0 </pitch>
                 <yaw> 0 </yaw>
             </orient>
+            -->
             <feed>4</feed> <!-- from intermediate tank (float chamber 4) -->
             <thruster file="prop_75in2f">
             <!-- <thruster file="prop_75in_2f_NACA_15-30deg"> --> <!-- for settling -->
                 <location unit="IN">
                     <x> -37.7 </x>
                     <y> 0 </y>
-                    <z> 26.6 </z>
+                    <z> 29.3 </z>
                 </location>
                 <orient unit="DEG">
                     <roll> 0.0 </roll>
@@ -593,6 +595,7 @@
         </engine>
 
         <engine file="eng_io360">
+            <!--
             <location unit="IN">
                 <x> -19.7 </x>
                 <y> 0 </y>
@@ -603,13 +606,14 @@
                 <pitch> 0 </pitch>
                 <yaw> 0 </yaw>
             </orient>
+            -->
             <feed>4</feed> <!-- from intermediate tank (float chamber 4) -->
             <thruster file="prop_76in2f_NACA_20deg">
             <!-- <thruster file="prop_76in2f_NACA_15-25deg"> --> <!-- for settling -->
                 <location unit="IN">
                     <x> -37.7 </x>
                     <y> 0 </y>
-                    <z> 26.6 </z>
+                    <z> 29.3 </z>
                 </location>
                 <orient unit="DEG">
                     <roll> 0.0 </roll>
@@ -695,7 +699,7 @@
                     </setting>
                     <setting>
                         <position>1</position>
-                        <time>0.15</time>
+                        <time>0.30</time>
                     </setting>
                 </traverse>
                 <output>/sim/model/c172p/cockpit/yoke-elevator</output>
@@ -1596,10 +1600,11 @@
                     <property>aero/bi2vel</property>
                     <property>velocities/r-aero-rad_sec</property>
                     <table>
-                        <independentVar lookup="row">fcs/flap-pos-deg</independentVar>
+                        <independentVar lookup="row">aero/alpha-wing-rad</independentVar>                        
                         <tableData>
-                             0.0000  0.0798
-                             30      0.1246
+                             0.00  0.0798
+                             0.07  0.2039
+                             0.09  0.1869
                         </tableData>
                     </table>
                     <table>
@@ -1632,7 +1637,7 @@
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/bw-ft</property>
                     <property>fcs/aileron-pos-rad-avgd</property>
-                    <value>0.229</value>
+                    <value>0.2</value>
                     <!--
                         stall and spin (4):
                         less efficient ailerons
@@ -1714,10 +1719,8 @@
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/cbarw-ft</property>
-                    <sin>
-                        <property>aero/alpha-rad</property>
-                    </sin>
-                    <value>-1.8</value>
+                    <property>aero/alpha-rad</property>
+                    <value>-1</value> <!-- -0.61 to -0.65 Megginson, -0.89 Roskam-->
                     <!--
                         stall and spin (5):
                         horizontal tail stall (for flat spin)
@@ -1772,7 +1775,7 @@
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/cbarw-ft</property>
                     <property>fcs/elevator-pos-rad</property>
-                    <value>-1.28</value>
+                    <value>-1</value>
                     <!--
                         stall and spin (6):
                         elevator loss of efficiency when stalled
@@ -1835,7 +1838,7 @@
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/bw-ft</property>
                     <value>-0.05</value>
-                    <property>aero/coefficient/spiral-propwash-coeff</property> <!-- tuning factor -->
+                    <property>aero/coefficient/spiral-propwash-coeff</property> <!-- in-flight tuning factor  -->
                 </product>
             </function>
 
@@ -1890,7 +1893,7 @@
                 <description>Yaw_moment_due_to_aileron</description>
                 <!--
                     stall and spin (8):
-                    adverse yaw: can induce a adverse turn and spin when stalled
+                    adverse yaw: can also induce a adverse turn and spin when stalled
                 -->
                 <product>
                     <property>aero/qbar-psf</property>
@@ -1914,6 +1917,27 @@
                             1.0000  0
                         </tableData>
                     </table>
+                    <property>/controls/flight/adv-yaw-fact1</property> <!-- tuning factor for tests in flight -->
+                </product>
+            </function>
+
+            <function name="aero/coefficient/Cnp">
+                <description>Yaw_moment_due_to_roll-rate</description>
+                <product>
+                    <property>aero/qbar-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <property>metrics/bw-ft</property>
+                    <property>aero/bi2vel</property>
+                    <property>velocities/p-aero-rad_sec</property>
+                    <table>
+                        <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
+                        <tableData>
+                            0        -0.0278
+                            0.070    -0.0960
+                            0.094    -0.0649
+                        </tableData>
+                    </table>
+                    <property>/controls/flight/adv-yaw-fact2</property> <!-- tuning factor for tests in flight -->              
                 </product>
             </function>
 

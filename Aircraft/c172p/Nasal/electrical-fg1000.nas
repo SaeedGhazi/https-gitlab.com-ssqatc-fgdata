@@ -1,25 +1,3 @@
-var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
-io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000");
-var aircraft_dir = getprop("/sim/aircraft-dir");
-io.load_nasal(aircraft_dir ~ '/Nasal/Interfaces/SelectableInterfaceController.nas', "fg1000");
-
-var interfaceController = fg1000.SelectableInterfaceController.getOrCreateInstance();
-interfaceController.start();
-
-# Create the FG1000
-var fg1000system = fg1000.FG1000.getOrCreateInstance();
-
-# Create a PFD as device 1, MFD as device 2
-fg1000system.addPFD(1);
-fg1000system.addMFD(2);
-
-# Display the devices
-fg1000system.display(1);
-fg1000system.display(2);
-
-#  Display a GUI version of device 1 at 50% scale.
-#fg1000system.displayGUI(1, 0.5);
-
 ##
 # Procedural model of a Cessna 172S electrical system.  Includes a
 # preliminary battery charge/discharge model and realistic ammeter
@@ -311,7 +289,6 @@ var ElectricalSystemUpdater = {
 # Model the system of relays and connections that join the battery,
 # alternator, starter, master/alt switches, external power supply.
 #
-var old_load = 0;
 var update_virtual_bus = func (dt) {
     var serviceable = getprop("/systems/electrical/serviceable");
     var external_volts = 0.0;
@@ -355,7 +332,7 @@ var update_virtual_bus = func (dt) {
     if ( master_bat ) {
         bus_volts = battery_volts;
         power_source = "battery";
-    } 
+    }
 
     if ( master_bat_stby == 2 and (!master_bat or bus_volts < 20) ){
         stby_bus_volts = battery_stby_volts;
@@ -366,7 +343,7 @@ var update_virtual_bus = func (dt) {
         bus_volts = alternator_volts;
         power_source = "alternator";
     }
- 
+
     if ( external_volts > bus_volts ) {
         bus_volts = external_volts;
         power_source = "external";
@@ -375,13 +352,13 @@ var update_virtual_bus = func (dt) {
     if ( power_source == "alternator" and master_bat_stby == 2) {
         stby_bus_volts = alternator_volts;
     }
-    
+
     if ( power_source == "external" ) {
         stby_bus_volts = external_volts;
     }
 
     # bus network (
-    # 1. these must be called in the right order, 
+    # 1. these must be called in the right order,
     # 2. the bus routine itself determins where it draws power from.
     # )
     draw += electrical_bus_1();
@@ -420,9 +397,9 @@ var update_virtual_bus = func (dt) {
                 if (eammeter < 0.5) {
                     setprop("controls/lighting/batt-test-lamp-norm", 1);
                 }
-            }, 10.0)    
+            }, 10.0)
         }
-    } else 
+    } else
         if ( master_bat_stby == 2 and power_source == "alternator") {
             eammeter = battery_stby.charge_amps;
             setprop("controls/lighting/batt-test-lamp-norm", 0);
@@ -434,10 +411,10 @@ var update_virtual_bus = func (dt) {
     # charge/discharge the battery
     if (power_source == "battery") {
         battery.apply_load( load, dt, "a");
-    } 
+    }
     if (power_source == "battery_stby") {
         battery_stby.apply_load( load_ess, dt, "b");
-    } 
+    }
     if (bus_volts > battery_volts) {
         battery.apply_load(-battery.charge_amps, dt, "a");
     }
@@ -492,15 +469,6 @@ var update_virtual_bus = func (dt) {
     setprop("/systems/electrical/volts", bus_volts);
     setprop("/systems/electrical/eamps", eammeter);
     setprop("/systems/electrical/evolts", stby_bus_volts);
-
-    # debug internals
-    #if (load > 0 and load != "nil") {if (old_load < load) {setprop("/systems/electrical/highest-load", load);old_load = load;}setprop("/systems/electrical/current-load", load);   }
-    #if (load_ess > 0 and load_ess != "nil") {setprop("/systems/electrical/current-load-ess", load_ess);}
-    #setprop("/systems/electrical/load-watts", draw);
-    #setprop("/systems/electrical/elect-powersource", power_source);
-    #setprop("/systems/electrical/elect-vbus-stby-volts", vbus_stby_volts);
-    #setprop("/systems/electrical/elect-stby-bus-volts", stby_bus_volts);
-    #setprop("/systems/electrical/elect-battery-stby-volts", battery_stby_volts);
 
     return load;
 }
@@ -643,17 +611,17 @@ var avionics_bus_1 = func() {
     if ( getprop("/controls/circuit-breakers/pfd-avn") ) {
         setprop("/systems/electrical/outputs/pfd-avn", bus_volts);
         if (pfd_avn and (bus_volts > 0)) {
-            load += (6 * pfd_avn) * bus_volts;
-            fg1000system.show(1);
+            load += ((getprop("/controls/lighting/avionics-norm/")+5) * pfd_avn) * bus_volts;
+            setprop("/systems/electrical/outputs/fg1000-pfd", 1);
         } else {
-            fg1000system.hide(1);
+            setprop("/systems/electrical/outputs/fg1000-pfd", 0);
         }
     } else {
         setprop("/systems/electrical/outputs/pfd-avn", 0.0);
         fg1000system.hide(1);
     }
     pfd_display = bus_volts;
- 
+
     # Air Data Computer
     if ( getprop("/controls/circuit-breakers/adc-ahrs-avn") ) {
       setprop("/systems/electrical/outputs/adc-ahrs", bus_volts);
@@ -676,16 +644,6 @@ var avionics_bus_1 = func() {
       load += 5 * bus_volts;
     } else {
       setprop("/systems/electrical/outputs/is", 0.0);
-    }
-
-    # DME and ADF Power
-    if ( getprop("/controls/circuit-breakers/dme-adf") ) {
-      setprop("/systems/electrical/outputs/dme", bus_volts);
-      setprop("/systems/electrical/outputs/adf", bus_volts);
-      load += 5 * bus_volts;
-    } else {
-      setprop("/systems/electrical/outputs/dme", 0.0);
-      setprop("/systems/electrical/outputs/adf", 0.0);
     }
 
      ##############????????#############
@@ -716,10 +674,10 @@ var avionics_bus_2 = func() {
     if ( getprop("/controls/circuit-breakers/mfd") ) {
         setprop("/systems/electrical/outputs/mfd", bus_volts);
         if (mfd and (bus_volts > 0)) {
-            load += (6 * mfd) * bus_volts;
-            fg1000system.show(2);
+            load += ((getprop("/controls/lighting/avionics-norm/")+5) * mfd) * bus_volts;
+            setprop("/systems/electrical/outputs/fg1000-mfd", 1);
         } else {
-            fg1000system.hide(2);
+            setprop("/systems/electrical/outputs/fg1000-mfd", 0);
         }
     } else {
         setprop("/systems/electrical/outputs/mfd", 0.0);
@@ -768,6 +726,16 @@ var avionics_bus_2 = func() {
         setprop("/systems/electrical/outputs/autopilot", 0.0);
     }
 
+    # DME and ADF Power
+    if ( getprop("/controls/circuit-breakers/dme-adf") ) {
+      setprop("/systems/electrical/outputs/dme", bus_volts);
+      setprop("/systems/electrical/outputs/adf", bus_volts);
+      load += 5 * bus_volts;
+    } else {
+      setprop("/systems/electrical/outputs/dme", 0.0);
+      setprop("/systems/electrical/outputs/adf", 0.0);
+    }
+
     # register avn2 voltage
     avn2_volts = bus_volts;
 
@@ -776,7 +744,7 @@ var avionics_bus_2 = func() {
 
 var essential_bus = func() {
     var bus_volts = 0.0;
-    var load = 0.0; 
+    var load = 0.0;
 
     # feed through bus1 and bus2 or stby-batt-breaker
     var total_bus_volts = ebus1_volts + ebus2_volts;
@@ -789,7 +757,7 @@ var essential_bus = func() {
               bus_volts = vbus_stby_volts;
             } else {
               bus_volts = 0.0;
-            } 
+            }
         } else
             bus_volts = 0.0;
     }
@@ -799,10 +767,10 @@ var essential_bus = func() {
     if (getprop("/controls/circuit-breakers/pfd-ess") ) {
         setprop("/systems/electrical/outputs/pfd-ess", bus_volts);
         if (pfd_ess and (bus_volts > 0)){
-            load += (6 * pfd_ess) * bus_volts;
-            fg1000system.show(1);
+            load += ((getprop("/controls/lighting/avionics-norm/")+5) * pfd_ess) * bus_volts;
+            setprop("/systems/electrical/outputs/fg1000-pfd", 1);
         } else {
-            fg1000system.hide(1);
+            setprop("/systems/electrical/outputs/fg1000-pfd", 0);
         }
     } else {
         setprop("/systems/electrical/outputs/pfd-ess", 0.0);
@@ -893,4 +861,49 @@ system_updater.enable();
 
 print("Electrical system initialized");
 
+var nasal_dir = getprop("/sim/fg-root") ~ "/Aircraft/Instruments-3d/FG1000/Nasal/";
+io.load_nasal(nasal_dir ~ 'FG1000.nas', "fg1000");
+var aircraft_dir = getprop("/sim/aircraft-dir");
+io.load_nasal(aircraft_dir ~ '/Nasal/Interfaces/SelectableInterfaceController.nas', "fg1000");
+var interfaceController = fg1000.SelectableInterfaceController.getOrCreateInstance();
 
+#point at the c182t files
+#io.load_nasal('G:/Aircraft/Development-Aircraft/c182s/Nasal/c182t-InterfaceController.nas', "fg1000");  # use custom controller
+#var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
+
+interfaceController.start();
+
+# Create the FG1000
+var fg1000system = fg1000.FG1000.getOrCreateInstance();
+
+# Create a PFD as device 1, MFD as device 2
+fg1000system.addPFD(1);
+fg1000system.addMFD(2);
+
+# Display the devices
+fg1000system.display(1);
+fg1000system.display(2);
+
+#  Display a GUI version of device 1 at 50% scale.
+var toggle_fg1000_PFD = func {
+  fg1000system.displayGUI(1, 0.5);
+};
+var toggle_fg1000_MFD = func {
+  fg1000system.displayGUI(2, 0.5);
+};
+
+# Switch the FG1000 on/off depending on power.
+setlistener("/systems/electrical/outputs/fg1000-pfd", func(n) {
+    if (n.getValue() > 0) {
+      fg1000system.show(1);
+    } else {
+      fg1000system.hide(1);
+    }
+}, 0, 0);
+setlistener("/systems/electrical/outputs/fg1000-mfd", func(n) {
+    if (n.getValue() > 0) {
+      fg1000system.show(2);
+    } else {
+      fg1000system.hide(2);
+    }
+}, 0, 0);

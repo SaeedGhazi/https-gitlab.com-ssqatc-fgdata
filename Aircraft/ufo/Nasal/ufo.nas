@@ -444,15 +444,18 @@ var modelmgr = {
 		adjust_dialog.center_sliders();
 
 		if (KbdAlt.getValue() and KbdCtrl.getValue()) { # Provide information on the selected point
-      var geod = geodinfo(me.mouse_coord.lat(), me.mouse_coord.lon());
-      var landclass = string.join(" ", geod[1].names);
-      var str = sprintf("%s: lat:%.4f lon:%.4f alt:%.0fm class(es): %s",
-                         geod[1].region,
-                         me.mouse_coord.lat(), me.mouse_coord.lon(),
-                         me.mouse_coord.alt(), landclass);
-      gui.popupTip(str, 3);
-      print(str);
-		  return;
+			var geod = geodinfo(me.mouse_coord.lat(), me.mouse_coord.lon());
+			var landclass = "";
+			var region = "";
+			if (geod != nil and geod[1] != nil and geod[1].names != nil) landclass = string.join(" ", geod[1].names);
+			if (geod != nil and geod[1] != nil and geod[1].region != nil) region = geod[1].region;
+			var str = sprintf("%s: lat:%.4f lon:%.4f alt:%.0fm class(es): %s",
+								region,
+								me.mouse_coord.lat(), me.mouse_coord.lon(),
+								me.mouse_coord.alt(), landclass);
+			gui.popupTip(str, 3);
+			print(str);
+			return;
 		}
 
 		if (KbdAlt.getValue()) {	# move active object here (and other selected ones along with it)

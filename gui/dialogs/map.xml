@@ -176,10 +176,26 @@ command interface /autopilot/route-manager/input:
             </checkbox>
 
             <checkbox>
+                <label>Aircraft</label>
+                <halign>left</halign>
+                <property>/sim/gui/map/draw-aircraft</property>
+                <live>true</live>
+                <binding>
+                  <command>dialog-apply</command>
+                </binding>
+                <binding>
+                  <command>property-toggle</command>
+                </binding>
+            </checkbox>
+
+            <checkbox>
                 <label>Flight History</label>
                 <halign>left</halign>
                 <property>/sim/gui/map/draw-flight-history</property>
                 <live>true</live>
+                <enable>
+                  <property>/sim/gui/map/draw-aircraft</property>
+                </enable>
                 <binding>
                   <command>dialog-apply</command>
                 </binding>
@@ -198,6 +214,9 @@ command interface /autopilot/route-manager/input:
 -->
                 <property>/sim/gui/map/magnetic-headings</property>
                 <live>true</live>
+                <enable>
+                  <property>/sim/gui/map/draw-aircraft</property>
+                </enable>
                 <binding>
                   <command>dialog-apply</command>
                 </binding>
@@ -211,6 +230,9 @@ command interface /autopilot/route-manager/input:
                 <halign>left</halign>
                 <property>/sim/gui/map/centre-on-aircraft</property>
                 <live>true</live>
+                <enable>
+                  <property>/sim/gui/map/draw-aircraft</property>
+                </enable>
                 <binding>
                   <command>dialog-apply</command>
                 </binding>
@@ -224,6 +246,9 @@ command interface /autopilot/route-manager/input:
                 <halign>left</halign>
                 <property>/sim/gui/map/aircraft-heading-up</property>
                 <live>true</live>
+                <enable>
+                  <property>/sim/gui/map/draw-aircraft</property>
+                </enable>
                 <binding>
                   <command>dialog-apply</command>
                 </binding>

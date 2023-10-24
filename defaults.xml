@@ -993,6 +993,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <draw-data type="bool" userarchive="y">false</draw-data>
         <draw-heliports type="bool" userarchive="y">false</draw-heliports>
         <draw-traffic type="bool" userarchive="y">false</draw-traffic>
+        <draw-aircraft type="bool" userarchive="y">true</draw-aircraft>
         <draw-flight-history type="bool" userarchive="y">false</draw-flight-history>
         <draw-pois type="bool" userarchive="y">true</draw-pois>
 

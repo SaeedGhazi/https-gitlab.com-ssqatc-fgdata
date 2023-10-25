@@ -8,14 +8,14 @@ var PropertyTreeBrowser = {
                 };
                 
                 m.resetTitleTimer = maketimer(5, func {
-                        m.window.setTitle(m.propertyTree.getNode().getPath() ~ " - Property browser");
+                        m.window.setTitle(m.getWindowTitle(m.propertyTree.getNode()));
                         m.resetTitleTimer.stop();
                 });
                 m.simulatedTime = 0;
                 m.singleShot = 1;
                 
                 m.window = canvas.Window.new([400, 550], "dialog")
-                                                .setTitle((node != nil ? node.getPath() : "/") ~ " - Property browser")
+                                                .setTitle(m.getWindowTitle(node))
                                                 .set("resize", 1);
                 m.window.onClose = func m.onClose();
                 m.root = m.window.getCanvas(1)
@@ -31,7 +31,7 @@ var PropertyTreeBrowser = {
                 }
                 m.propertyTree._view._root.addEventListener("click", func {
                         props.globals.setValue("/sim/gui/dialogs/property-browser/selected", m.propertyTree.getNode().getPath());
-                        m.window.setTitle(m.propertyTree.getNode().getPath() ~ " - Property browser");
+                        m.window.setTitle(m.getWindowTitle(m.propertyTree.getNode()));
                         var selected = m.propertyTree.getSelectedItems();
                         if (!size(selected)) {
                                 return;
@@ -53,7 +53,7 @@ var PropertyTreeBrowser = {
                                 }
                                 m.valueEntry.setText(value);
                         } else {
-                                m.window.setTitle(m.propertyTree.getNode().getPath() ~ " - Property browser");
+                                m.window.setTitle(m.getWindowTitle(m.propertyTree.getNode()));
                                 m.valueEntry.clear();
                         }
                 });
@@ -130,5 +130,14 @@ var PropertyTreeBrowser = {
                 me.resetTitleTimer.stop();
                 me.propertyTree.del();
                 me.window.del();
+        },
+
+        getWindowTitle: func(node) {
+                var path = (node == nil ? "/" : node.getPath());
+                if (path == "" or path == nil) {
+                        path = "/";
+                }
+
+                return path ~ " - Property browser";
         },
 };

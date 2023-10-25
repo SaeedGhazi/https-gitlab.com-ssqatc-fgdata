@@ -127,6 +127,7 @@ var PropertyTreeBrowser = {
         },
         
         del: func {
+                me.resetTitleTimer.stop();
                 me.propertyTree.del();
                 me.window.del();
         },

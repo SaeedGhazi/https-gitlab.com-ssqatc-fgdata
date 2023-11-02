@@ -158,11 +158,6 @@
     </condition>
   </animation>
 
-  <animation>
-    <name>screen1</name>
-    <object-name>Screen</object-name>
-  </animation>
-
 <!--
   <animation>
     <type>material</type>

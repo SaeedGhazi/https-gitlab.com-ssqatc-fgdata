@@ -918,9 +918,10 @@ var PFDInstruments =
 
   # Update the Transponder display
   updateTransponder : func(mode, code, ident, edit=0) {
-    # Data validation on the mode
+    # Data validation on the mode and code itself
     if (mode < 0) mode = 0;
     if (mode > 5) mode = 5;
+    if ((code == nil) or (! isnum(code))) code = 0;
 
     # Ensure the code is a 4 digit string representation of a number.
     # Normally this means padding with 0's at the left e.g.  42 becomes 0042.

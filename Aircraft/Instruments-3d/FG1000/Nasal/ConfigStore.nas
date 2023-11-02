@@ -117,6 +117,8 @@ var ConfigStore = {
     "Vr-visible" : 1,
     "Vglide-visible" : 1,
     "Vne-visible": 1,
+
+    "TransponderVFRCode": 1200, # Factory set Transponder code
   },
 
   new : func()

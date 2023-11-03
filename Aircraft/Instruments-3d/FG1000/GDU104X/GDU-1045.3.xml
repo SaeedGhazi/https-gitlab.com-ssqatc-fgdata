@@ -300,6 +300,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>AP</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -320,6 +321,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>FD</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -339,7 +341,8 @@
       <binding>
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
-        <notification>FD</notification>
+        <notification>NAV</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -360,6 +363,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>ALT</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -380,6 +384,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>VS</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -400,6 +405,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>FLC</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -420,6 +426,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>YD</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -440,6 +447,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>HDG</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -460,6 +468,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>APR</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -480,6 +489,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>VNV</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -500,6 +510,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>NOSE_UP</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>
@@ -520,6 +531,7 @@
         <command>FG1000HardKeyPushed</command>
         <device>3</device>
         <notification>NOSE_DOWN</notification>
+        <offset>1</offset>
       </binding>
     </action>
     <hovered>

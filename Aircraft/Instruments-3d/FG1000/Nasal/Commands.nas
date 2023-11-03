@@ -23,7 +23,8 @@ addcommand("FG1000HardKeyPushed",
     var device = node.getNode("device", 1).getValue();
     var name = node.getNode("notification",1).getValue();
 
-    # The knob animation stores the value as an offset property
+    # The knob animation stores the value as an offset property.  Other animations need to set this
+    # explicitly int the animation code.
     var value = node.getNode("offset", 1).getValue();
 
     if (name == nil) {

@@ -3,6 +3,10 @@
 <PropertyList>
   <name>Effects/stars</name>
 
+  <parameters>
+    <max-radiance type="float">2.0</max-radiance>
+  </parameters>
+
   <!-- Fixed-pipeline fallback -->
   <technique n="11">
     <pass>
@@ -13,7 +17,32 @@
     </pass>
   </technique>
 
-  <technique n="109">
-    <scheme>hdr-geometry</scheme>
+  <technique n="129">
+    <scheme>hdr-forward</scheme>
+    <pass>
+      <depth>
+        <enabled>false</enabled>
+      </depth>
+      <!-- Only render the stars on top of the skydome -->
+      <stencil>
+        <function>equal</function>
+        <value>0</value>
+      </stencil>
+      <cull-face>off</cull-face>
+      <blend>
+        <active>true</active>
+        <source>src-alpha</source>
+        <destination>one-minus-src-alpha</destination>
+      </blend>
+      <program>
+        <vertex-shader>Shaders/HDR/stars.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/stars.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>max_radiance</name>
+        <type>float</type>
+        <value><use>max-radiance</use></value>
+      </uniform>
+    </pass>
   </technique>
 </PropertyList>

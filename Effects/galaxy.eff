@@ -161,7 +161,4 @@
     
   </technique>
 
-  <technique n="109">
-    <scheme>hdr-geometry</scheme>
-  </technique>
 </PropertyList>

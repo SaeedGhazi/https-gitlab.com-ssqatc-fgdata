@@ -77,8 +77,6 @@ void main()
             kw4 * group4;
         downsample /= kw_sum;
     } else {
-        // Apply weighted distribution:
-        // 0.5 + 0.125 + 0.125 + 0.125 + 0.125 = 1
         downsample = e*0.125;
         downsample += (a+c+g+i)*0.03125;
         downsample += (b+d+f+h)*0.0625;

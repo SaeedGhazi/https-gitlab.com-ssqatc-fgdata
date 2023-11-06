@@ -20,6 +20,7 @@ vec3 eval_ibl(vec3 base_color, float metallic, float roughness, vec3 f0,
               float occlusion, vec3 ws_N, vec3 ws_refl, float NdotV);
 // aerial_perspective.glsl
 vec3 add_aerial_perspective(vec3 color, vec2 coord, float depth);
+// sun.glsl
 vec3 get_sun_radiance(vec3 p);
 // clustered.glsl
 vec3 eval_scene_lights(vec3 base_color, float metallic, float roughness, vec3 f0,

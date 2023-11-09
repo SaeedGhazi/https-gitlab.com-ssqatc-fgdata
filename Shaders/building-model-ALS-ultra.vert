@@ -29,6 +29,8 @@ uniform int  		nmap_enabled;
 uniform int  		shader_qual;
 uniform int     color_is_position;
 
+const float epsilon = 1e-7;
+
 //////Fog Include///////////
 // uniform	int 	fogType;
 // void	fog_Func(int type);
@@ -109,7 +111,17 @@ void	main(void)
   float wtex1x = attr2.x; // Front/Roof texture X1
   float stex1x = attr3.y; // Side texture X1
   float wtex1y = attr2.y; // Front/Roof/Side texture Y1
-  float mtcx = (1.0 - gl_Color.z) * gl_MultiTexCoord0.x + gl_Color.z * ((gl_MultiTexCoord0.x + 0.5) * attr3.z - 0.5);
+
+  float mtcx;
+  // TODO: (Fahim) convert to arithmetic expressions
+  if (gl_Normal.y < epsilon) {
+    // front and back face
+    mtcx = (1.0 - gl_Color.z) * gl_MultiTexCoord0.x + gl_Color.z * ((gl_MultiTexCoord0.x + 0.5) * attrib2.y - 0.5);
+  } else {
+    // left and right face
+    mtcx = (1.0 - gl_Color.z) * gl_MultiTexCoord0.x + gl_Color.z * ((gl_MultiTexCoord0.x + 0.5) * attr3.z - 0.5);
+  }
+
   vec2 tex0 = vec2(sign(mtcx) * (gl_Color.x*wtex0x + gl_Color.y*rtex0x + gl_Color.a*wtex0x),
                    gl_Color.x*wtex0y + gl_Color.y*rtex0y + gl_Color.a*wtex0y);
 

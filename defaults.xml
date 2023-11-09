@@ -1206,8 +1206,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <model>
       <civilian type="bool">true</civilian>
       <livery>
-        <fresnel type="double">0.7</fresnel>
-        <shininess type="double">-0.5</shininess>
+        <fresnel type="double">0.0</fresnel>
+        <shininess type="double">-0.9</shininess>
       </livery>
     </model>
     <emexec>

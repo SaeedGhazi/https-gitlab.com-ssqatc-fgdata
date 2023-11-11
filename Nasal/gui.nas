@@ -817,9 +817,10 @@ var showWeightDialog = func {
     # FDM dependent settings
     if(fdm == "yasim") {
         var fdmdata = {
-            grosswgt : "/yasim/gross-weight-lbs",
+            grosswgt : "/fdm/yasim/gross-weight-lbs",
             payload  : "/sim",
             cg       : "/fdm/yasim/cg-x-m",
+            cgMAC    : "/fdm/yasim/cg-x-mac",
         };
 		setprop("/limits/mass-and-balance/cg/dimension","m");
     } elsif(fdm == "jsb") {
@@ -827,6 +828,7 @@ var showWeightDialog = func {
             grosswgt : "/fdm/jsbsim/inertia/weight-lbs",
             payload  : "/payload",
             cg       : "/fdm/jsbsim/inertia/cg-x-in",
+            cgMAC    : nil,
         };
     }
 
@@ -882,6 +884,10 @@ var showWeightDialog = func {
     if( fdmdata.cg != nil ) { 
         var n = props.globals.getNode("/limits/mass-and-balance/cg/dimension");
         tablerow("Center of Gravity", props.globals.getNode(fdmdata.cg), "%.2f " ~ (n == nil ? "in" : n.getValue()));
+    }
+
+    if( fdmdata.cgMAC != nil ) {
+        tablerow("CoG vs Mean Aero Chord", props.globals.getNode(fdmdata.cgMAC), "%.2f " );
     }
 
     dialog[name].addChild("hrule");

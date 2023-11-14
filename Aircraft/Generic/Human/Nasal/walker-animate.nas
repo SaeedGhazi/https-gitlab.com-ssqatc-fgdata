@@ -391,7 +391,7 @@ var sequence = {
 			"The checkbox at the bottom enables the triggering of animations, " ~
 			"and is automatically turned off when editing a sequence.\n\n" ~
 			"To close this dialog box, press [Esc] or click on the button in the " ~
-			"upper right corner.", "STRING");
+			"upper right corner.");
 		w = walker_dialog3.addChild("textbox");
 		w.set("halign", "fill");
 		w.set("pref-width", 350);
@@ -1945,7 +1945,7 @@ var animate = {
 			"change the trigger setting, save it, exit the dialog, and re-enable " ~
 			"the Trigger checkbox on the other (sequence) dialog.\n\n" ~
 			"To test your animation before enabling the trigger, just click in the " ~
-			"checkbox at the bottom, to enable this current animation.", "STRING");
+			"checkbox at the bottom, to enable this current animation.");
 		w = walker_dialog4.addChild("textbox");
 		w.set("halign", "fill");
 		w.set("pref-width", 380);

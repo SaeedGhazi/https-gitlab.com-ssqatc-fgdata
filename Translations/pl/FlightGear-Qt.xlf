@@ -57,11 +57,11 @@
       </trans-unit>
       <trans-unit id="_msg13" approved="yes">
         <source xml:space="preserve">To use the files included with this copy of FlightGear, click this button</source>
-        <target xml:space="preserve">Aby wykorzystać pliki dostarczane z tą kopią FlightGear, wybierz ten przycisk</target>
+        <target xml:space="preserve">Aby wykorzystać pliki dostarczane z tą kopią FlightGeara, wybierz ten przycisk</target>
       </trans-unit>
       <trans-unit id="_msg14" approved="yes">
         <source xml:space="preserve">To download a compressed archive of the files, click the &apos;Download&apos; button. Once the download is complete, extract the files to a suitable location and choose the folder using the button above.</source>
-        <target xml:space="preserve">Aby pobrać skompresowane archiwum plików, wybierz przycisk &apos;Pobierz&apos;. Po zakończeniu pobierania, rozpakuj pliki do odpowiedniego dla Ciebie katalogu i wybierz go używając przycisku powyżej.</target>
+        <target xml:space="preserve">Aby pobrać paczkę z plikami, wybierz przycisk &apos;Pobierz&apos;. Po zakończeniu pobierania, rozpakuj pliki do odpowiedniego dla Ciebie katalogu i wybierz go używając przycisku &apos;Wybierz katalog...&apos;.</target>
       </trans-unit>
       <trans-unit id="_msg15" approved="yes">
         <source xml:space="preserve">To browse to a downloaded copy of the files on your computer, click this button</source>
@@ -129,32 +129,32 @@
       </trans-unit>
       <trans-unit id="_msg26" approved="yes">
         <source xml:space="preserve">Choose FlightGear data folder</source>
-        <target xml:space="preserve">Wybierz katalog danych FlightGear</target>
+        <target xml:space="preserve">Wybierz katalog danych FlightGeara</target>
         <context-group purpose="location"><context context-type="linenumber">197</context></context-group>
       </trans-unit>
       <trans-unit id="_msg27" approved="yes">
         <source xml:space="preserve">This copy of FlightGear does not include the base data files. Please select a suitable folder containing a previously download set of files.</source>
-        <target xml:space="preserve">Ta kopia FlightGear nie zawiera podstawowych plików danych. Proszę wybrać odpowiedni katalog zawierający uprzednio pobrany zestaw plików.</target>
+        <target xml:space="preserve">Ta kopia FlightGeara nie zawiera podstawowych plików danych. Proszę wybrać odpowiedni katalog zawierający uprzednio pobrany zestaw plików.</target>
         <context-group purpose="location"><context context-type="linenumber">246</context></context-group>
       </trans-unit>
       <trans-unit id="_msg28" approved="yes">
         <source xml:space="preserve">The requested location &apos;%1&apos; does not appear to be a valid set of data files for FlightGear</source>
-        <target xml:space="preserve">Wprowadzona lokalizacja &apos;%1&apos; nie wygląda, aby zawierała poprawny zestaw danych dla FlightGear</target>
+        <target xml:space="preserve">Wprowadzona lokalizacja &apos;%1&apos; nie wygląda, aby zawierała poprawny zestaw danych dla FlightGeara</target>
         <context-group purpose="location"><context context-type="linenumber">251</context></context-group>
       </trans-unit>
       <trans-unit id="_msg29" approved="yes">
         <source xml:space="preserve">Detected incompatible version of the data files: version %1 found, but this is FlightGear %2. (At location: &apos;%3&apos;) Please install or select a matching set of data files.</source>
-        <target xml:space="preserve">Wykryto niekompatybilną wersję %1 plików danych, niż aktualna wersja FlightGear %2 (w lokalizacji %3). Proszę zainstalować lub wybrać odpowiedni zestaw plików danych.</target>
+        <target xml:space="preserve">Wykryto niekompatybilną wersję %1 plików danych, niż aktualna wersja FlightGeara %2 (w lokalizacji %3). Proszę zainstalować lub wybrać odpowiedni zestaw plików danych.</target>
         <context-group purpose="location"><context context-type="linenumber">257</context></context-group>
       </trans-unit>
       <trans-unit id="_msg30" approved="yes">
         <source xml:space="preserve">Please select or download a copy of the FlightGear data files.</source>
-        <target xml:space="preserve">Proszę wybrać lub pobrać kopię danych plików FlightGear.</target>
+        <target xml:space="preserve">Proszę wybrać lub pobrać kopię danych plików FlightGeara.</target>
         <context-group purpose="location"><context context-type="linenumber">264</context></context-group>
       </trans-unit>
       <trans-unit id="_msg31" approved="yes">
         <source xml:space="preserve">The choosen location (%1) does not appear to contain FlightGear data files. Please try another location.</source>
-        <target xml:space="preserve">Wybrana lokalizacja (%1) nie wygląda aby zawierała pliki danych FlightGear. Proszę wybrać inną lokalizację.</target>
+        <target xml:space="preserve">Wybrana lokalizacja (%1) nie wygląda aby zawierała pliki danych FlightGeara. Proszę wybrać inną lokalizację.</target>
         <context-group purpose="location"><context context-type="linenumber">268</context></context-group>
       </trans-unit>
       <trans-unit id="_msg32" approved="yes">

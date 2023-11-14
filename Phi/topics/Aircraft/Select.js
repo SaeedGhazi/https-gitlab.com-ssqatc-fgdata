@@ -10,7 +10,6 @@ define([
         self.install = function(pack) {
             console.log("install", pack);
 //            jquery.get('/pkg/install/'+pack.id);
-            fgcommand.switchAircraft(pack.id);
         }
         
         self.uninstall = function(pack) {
@@ -19,6 +18,7 @@ define([
         
         self.select = function(pack) {
             console.log("select", pack );
+            fgcommand.switchAircraft(pack.id);
         }
         
         jquery.get('/pkg/catalogs', null, function(data) {

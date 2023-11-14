@@ -38,10 +38,12 @@ Sorry, but no package catalogs were found by your FlightGear.
                 <td><span data-bind="text: ratingCockpit"></span></td>
                 <td><span data-bind="text: ratingModel"></span></td>
                 <td><span data-bind="text: (fileSize/1024).toFixed(0)"></span></td>
-                <td data-bind="if: installed">installed</td>
-                <td data-bind="ifnot: installed">
-                  <button data-bind=" click: $parents[1].install">Install</button>
-                </td>
+                <!--  ko if: installed -->
+                <td><button data-bind="click: $parents[1].select">Select</button></td>
+                <!-- /ko -->
+                <!--  ko ifnot: installed -->
+                <td><button data-bind="click: $parents[1].install">Install</button></td>
+                <!-- /ko -->
             </tr>
         </tbody>
     </table>

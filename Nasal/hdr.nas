@@ -230,3 +230,11 @@ envmap_warp_listener = setlistener("/sim/time/warp",
 setlistener("/sim/current-view/view-number", func {
     update_envmap(true);
 }, 0, 0);
+
+# Update fog density when the visibility changes
+setlistener("/environment/visibility-m", func {
+   var max = 30000000.0;
+   var visibility = getprop("/environment/visibility-m");
+   var vis = math.min(visibility, max);
+   setprop("/sim/rendering/hdr/atmos/fog-density", max*math.pow(0.99937, vis));
+}, 1, 0);

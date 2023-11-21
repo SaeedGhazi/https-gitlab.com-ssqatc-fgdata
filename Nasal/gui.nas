@@ -752,6 +752,7 @@ _setlistener("sim/gui/dialogs/payload-reload", func(v){
       weightChangeHandler();
 });
 
+var percentMacListener = nil;
 
 ##
 # Dynamically generates a weight & fuel configuration dialog specific to
@@ -760,7 +761,14 @@ _setlistener("sim/gui/dialogs/payload-reload", func(v){
 var weightAndFuel_x = nil;
 var weightAndFuel_y = nil;
 
-var dlg_nasal_close = "gui.weightAndFuel_y = cmdarg().getNode(\"lasty\").getValue();gui.weightAndFuel_x = cmdarg().getNode(\"lastx\").getValue();gui.weightDialogOpen = 0;";
+var dlg_nasal_close = 
+    "gui.weightAndFuel_y = cmdarg().getNode(\"lasty\").getValue();" ~
+    "gui.weightAndFuel_x = cmdarg().getNode(\"lastx\").getValue();" ~
+    "gui.weightDialogOpen = 0;" ~
+    "if (gui.percentMacListener != nil) { " ~
+        "removelistener(gui.percentMacListener); " ~
+        "gui.percentMacListener = nil; " ~
+    "}";
 
 var showWeightDialog = func {
     var name = "WeightAndFuel";
@@ -887,7 +895,17 @@ var showWeightDialog = func {
     }
 
     if( fdmdata.cgMAC != nil ) {
-        tablerow("CoG vs Mean Aero Chord", props.globals.getNode(fdmdata.cgMAC), "%.2f " );
+        var percentMac = props.globals.getNode("/limits/mass-and-balance/cg/percent-mac");
+        if (percentMac == nil) {
+            percentMac = props.globals.initNode("/limits/mass-and-balance/cg/percent-mac", 0, "DOUBLE");
+        }
+
+        percentMacListener = _setlistener(fdmdata.cgMAC, func {
+            var value = props.globals.getNode(fdmdata.cgMAC).getDoubleValue() * 100;
+            percentMac.setDoubleValue(value);
+        }, 1, 0);
+
+        tablerow("Center of Gravity", percentMac, "%.2f%% MAC" );
     }
 
     dialog[name].addChild("hrule");

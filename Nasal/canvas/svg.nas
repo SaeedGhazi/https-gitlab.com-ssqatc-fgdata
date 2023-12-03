@@ -32,6 +32,9 @@ var parsesvg = func(group, path, options = nil)
   # Helper to get number without unit (eg. px)
   var evalCSSNum = func(css_num)
   {
+    if (css_num == nil)
+      return;
+      
     if( css_num.ends_with("px") )
       return substr(css_num, 0, size(css_num) - 2);
     else if( css_num.ends_with("%") )
@@ -486,6 +489,10 @@ var parsesvg = func(group, path, options = nil)
       {
         var width = evalCSSNum(attr['width']);
         var height = evalCSSNum(attr['height']);
+        if (!contains(attr, 'x'))
+          attr['x'] = 0;
+        if (!contains(attr, 'y'))
+          attr['y'] = 0;
         var x = evalCSSNum(attr['x']);
         var y = evalCSSNum(attr['y']);
         var rx = attr['rx'];

@@ -109,7 +109,7 @@ addMFD : func(index=nil, targetcanvas=nil) {
             "name" : "MFD Canvas",
             "size" : [1024, 768],
             "view" : [1024, 768],
-            "mipmapping": 1,
+            "mipmapping": 0,
           });
   }
 
@@ -135,7 +135,7 @@ addPFD : func(index=nil, targetcanvas=nil) {
             "name" : "PFD Canvas",
             "size" : [1024, 768],
             "view" : [1024, 768],
-            "mipmapping": 1,
+            "mipmapping": 0,
           });
   }
 

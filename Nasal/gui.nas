@@ -301,7 +301,7 @@ var Dialog = {
 #       OverlaySelector.new(<title>, <dir>, <nameprop> [, <sortprop> [, <mpprop> [, <callback>]]]);
 #
 #       title    ... dialog title
-#       dir      ... directory where to find the XML overlay files,
+#       dirs     ... directory or vector of directories where to find the XML overlay files,
 #                    relative to FG_ROOT
 #       nameprop ... property in an overlay file that contains the name
 #                    The result is written to this place in the
@@ -327,7 +327,10 @@ var Dialog = {
 #
 #
 var OverlaySelector = {
-    new: func(title, dir, nameprop, sortprop = nil, mpprop = nil, callback = nil) {
+    new: func(title, dirs, nameprop, sortprop = nil, mpprop = nil, callback = nil) {
+        if (!isvec(dirs)) {
+            dirs = [dirs];
+        }
         var name = "overlay-select-";
         var data = props.globals.getNode("/sim/gui/dialogs/", 1);
         for (var i = 1; 1; i += 1)
@@ -339,7 +342,10 @@ var OverlaySelector = {
         m.parents = [OverlaySelector, Dialog];
 
         # resolve the path in FG_ROOT, and --fg-aircraft dir, etc
-        m.dir = resolvepath(dir) ~ "/";
+        m.dirs = [];
+        for (var i = 0; i < size(dirs); i += 1) {
+            append(m.dirs, os.path.new(resolvepath(dirs[i])));
+        }
 
         var relpath = func(p) substr(p, p[0] == `/`);
         m.nameprop = relpath(nameprop);
@@ -375,21 +381,27 @@ var OverlaySelector = {
     },
     rescan: func {
         me.data = [];
-        var files = directory(me.dir);
-        if (size(files)) {
-            foreach (var file; files) {
-                if (substr(file, -4) != ".xml")
-                    continue;
-                var n = io.read_properties(me.dir ~ file);
-                var name = n.getNode(me.nameprop, 1).getValue();
-                var index = n.getNode(me.sortprop, 1).getValue();
-                if (name == nil or index == nil)
-                    continue;
-                append(me.data, [name, index, substr(file, 0, size(file) - 4), me.dir ~ file]);
+        var files = [];
+        foreach (var dir; me.dirs) {
+            files = directory(dir.realpath);
+
+            if (size(files)) {
+                foreach (var file; files) {
+                    path = os.path.new(dir.realpath);
+                    path.append(file);
+                    if (path.lower_extension != "xml")
+                        continue;
+                    var n = io.read_properties(path.realpath);
+                    var name = n.getNode(me.nameprop, 1).getValue();
+                    var index = n.getNode(me.sortprop, 1).getValue();
+                    if (name == nil or index == nil)
+                        continue;
+                    append(me.data, [name, index, substr(file, 0, size(file) - 4), path.realpath]);
+                }
             }
-            me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
-                    ? cmp(a[1], b[1]) : a[1] - b[1]);
         }
+        me.data = sort(me.data, func(a, b) num(a[1]) == nil or num(b[1]) == nil
+                ? cmp(a[1], b[1]) : a[1] - b[1]);
 
         me.list.removeChildren("value");
         forindex (var i; me.data)

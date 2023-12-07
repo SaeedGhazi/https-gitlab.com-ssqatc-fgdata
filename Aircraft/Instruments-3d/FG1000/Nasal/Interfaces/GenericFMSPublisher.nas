@@ -19,7 +19,7 @@
 var GenericFMSPublisher =
 {
 
-  new : func (period=0.5) {
+  new : func (period=1.0) {
     var obj = {
       parents : [
         GenericFMSPublisher,
@@ -36,8 +36,8 @@ var GenericFMSPublisher =
     obj._triggeredPublisher = TriggeredPropertyPublisher.new(notifications.PFDEventNotification.FMSData);
     obj._periodicPublisher = PeriodicPropertyPublisher.new(notifications.PFDEventNotification.FMSData, period);
 
-    obj._triggeredPublisher.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg");
-    obj._triggeredPublisher.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft");
+    obj._triggeredPublisher.addPropMap("FMSHeadingBug", "/autopilot/settings/heading-bug-deg", 1);
+    obj._triggeredPublisher.addPropMap("FMSSelectedAlt", "/autopilot/settings/target-alt-ft", 10);
     obj._triggeredPublisher.addPropMap("FMSFlightPlanActive", "/autopilot/route-manager/active");
     obj._triggeredPublisher.addPropMap("FMSFlightPlanCurrentWP", "/autopilot/route-manager/current-wp");
     obj._triggeredPublisher.addPropMap("FMSFlightPlanSequenced", "/autopilot/route-manager/signals/sequenced");
@@ -49,14 +49,15 @@ var GenericFMSPublisher =
     obj._periodicPublisher.addPropMap("FMSLegValid", "/instrumentation/gps/wp/wp[1]/valid");
     obj._periodicPublisher.addPropMap("FMSPreviousLegID", "/instrumentation/gps/wp/wp[0]/ID");
     obj._periodicPublisher.addPropMap("FMSLegID", "/instrumentation/gps/wp/wp[1]/ID");
-    obj._periodicPublisher.addPropMap("FMSLegBearingMagDeg", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg");
-    obj._periodicPublisher.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm");
-    obj._periodicPublisher.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
-    obj._periodicPublisher.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/wp/wp[1]/desired-course-deg");
-    obj._periodicPublisher.addPropMap("FMSLegTrackErrorAngle", "/instrumentation/gps/wp/wp[1]/course-deviation-deg");
-    obj._periodicPublisher.addPropMap("FMSWayPointCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm");
+    
+    obj._periodicPublisher.addPropMap("FMSLegBearingMagDeg", "/instrumentation/gps/wp/wp[1]/bearing-mag-deg", 1);
+    obj._periodicPublisher.addPropMap("FMSLegDistanceNM", "/instrumentation/gps/wp/wp[1]/distance-nm", 0.1);
+    obj._periodicPublisher.addPropMap("FMSLegCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm", 0.1);
+    obj._periodicPublisher.addPropMap("FMSLegDesiredTrack", "/instrumentation/gps/wp/wp[1]/desired-course-deg", 1);
+    obj._periodicPublisher.addPropMap("FMSLegTrackErrorAngle", "/instrumentation/gps/wp/wp[1]/course-deviation-deg", 1);
+    obj._periodicPublisher.addPropMap("FMSWayPointCourseError", "/instrumentation/gps/wp/wp[1]/course-error-nm", 0.1);
 
-    obj._periodicPublisher.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt");
+    obj._periodicPublisher.addPropMap("FMSGroundspeed",  "/instrumentation/gps/indicated-ground-speed-kt", 1);
 
     obj._periodicPublisher.addPropMap("FMSNav1From", "/instrumentation/nav/from-flag");
     obj._periodicPublisher.addPropMap("FMSNav2From", "/instrumentation/nav[1]/from-flag");
@@ -67,7 +68,10 @@ var GenericFMSPublisher =
 
       foreach (var propmap; me._propmaps) {
         var name = propmap.getName();
-        gpsdata[name] = propmap.getValue();
+        if (propmap.hasChanged()) {
+          gpsdata[name] = propmap.getValue();
+          propmap.updateValue();
+        }
       }
 
       # Some GPS properties have odd values to indicate that nothing is set, so

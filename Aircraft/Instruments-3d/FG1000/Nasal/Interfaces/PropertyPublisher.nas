@@ -25,11 +25,13 @@
 #
 
 var PropMap = {
-  new : func(name, property)
+  new : func(name, property, epsilon)
   {
     var obj = { parents : [ PropMap ] };
     obj._name = name;
     obj._prop = globals.props.getNode(property, 1);
+    obj._epsilon = epsilon;
+    obj._lastValue = nil;
     return obj;
   },
 
@@ -40,6 +42,15 @@ var PropMap = {
     if (val == nil) val = 0;
     return val;
   },
+  hasChanged : func() {
+    var val = me._prop.getValue();
+    if (me._epsilon == nil) return 1;
+    if ((me._lastValue == nil) and (val != nil)) return 1;
+    if (! isnum(val) and val != me._lastValue) return 1;
+    if (isnum(val) and abs(val - me._lastValue) > me._epsilon) return 1;
+    return 0;
+  }, 
+  updateValue : func() { me._lastValue = me.getValue(); },
   getProp: func() { return me._prop; },
 };
 
@@ -58,25 +69,33 @@ var PeriodicPropertyPublisher =
     return obj;
   },
 
-  addPropMap : func(name, prop) {
-    append(me._propmaps, PropMap.new(name, prop));
+  addPropMap : func(name, prop, epsilon=nil) {
+    append(me._propmaps, PropMap.new(name, prop, epsilon));
   },
 
   publish : func() {
     var data = {};
+    var names = "";
 
     foreach (var propmap; me._propmaps) {
       var name = propmap.getName();
-      data[name] = propmap.getValue();
+      if (propmap.hasChanged()) {
+        data[name] = propmap.getValue();
+        propmap.updateValue();
+        names = sprintf("%s %s", names, name);
+      }
     }
 
-    var notification = notifications.PFDEventNotification.new(
-      "MFD",
-      1,
-      me._notification,
-      data);
+    if (size(data) > 0) {
+      var notification = notifications.PFDEventNotification.new(
+        "MFD",
+        1,
+        me._notification,
+        data);
 
-    me._transmitter.NotifyAll(notification);
+      me._transmitter.NotifyAll(notification);
+      #print(sprintf("NOTIFY total of %i properties changed out of %i: %s", size(data), size(me._propmaps), names));
+    }
   },
 
   start : func() {
@@ -106,32 +125,35 @@ var TriggeredPropertyPublisher =
     return obj;
   },
 
-  addPropMap : func(name, prop) {
-    me._propmaps[prop] = name;
+  addPropMap : func(name, prop, epsilon=nil) {
+    me._propmaps[prop] = PropMap.new(name, prop, epsilon);
   },
 
   publish : func(propNode) {
     var data = {};
-    var name = me._propmaps[propNode.getPath()];
-    assert(name != nil, "Unable to find property map for " ~ name);
-    data[name] = propNode.getValue();
+    var propmap = me._propmaps[propNode.getPath()];
+    assert(propmap != nil, "Unable to find property map for " ~ propNode.getPath());
+    if (propmap.hasChanged()) {
+      data[propmap._name] = propNode.getValue();
+      propmap.updateValue();
 
-    var notification = notifications.PFDEventNotification.new(
-      "MFD",
-      1,
-      me._notification,
-      data);
+      var notification = notifications.PFDEventNotification.new(
+        "MFD",
+        1,
+        me._notification,
+        data);
 
-    me._transmitter.NotifyAll(notification);
+      me._transmitter.NotifyAll(notification);
+    }
   },
 
   publishAll : func() {
     var data = {};
 
     foreach (var prop; keys(me._propmaps)) {
-      var name = me._propmaps[prop];
-      var value = props.globals.getNode(prop, 1).getValue();
-      data[name] = value;
+      var propmap = me._propmaps[prop];
+      data[propmap._name] = propmap.getValue();
+      propmap.updateValue();
     }
 
     var notification = notifications.PFDEventNotification.new(
@@ -149,7 +171,8 @@ var TriggeredPropertyPublisher =
       # Set up a listener triggering on create (to ensure all values are set at
       # start of day) and only on changed values.  These are the last two
       # arguments to the setlistener call.
-      var listener = setlistener(prop, func(p) { me.publish(p); }, 1, 1);
+      var propmap = me._propmaps[prop];
+      var listener = setlistener(propmap.getPropPath(), func(p) { me.publish(p); }, 1, 1);
       append(me._listeners, listener);
     }
 

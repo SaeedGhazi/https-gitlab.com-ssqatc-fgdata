@@ -29,18 +29,18 @@ var GenericEISPublisher =
     # Hack to handle most aircraft not having proper engine hours
     if (getprop("/engines/engine[0]/hours") == nil) setprop("/engines/engine[0]/hours", 157.0);
 
-    obj.addPropMap("RPM", "/engines/engine[0]/rpm");
-    obj.addPropMap("Man", "/engines/engine[0]/mp-osi");
-    obj.addPropMap("MBusVolts", "/systems/electrical/volts");
-    obj.addPropMap("EBusVolts", "/systems/electrical/volts");
-    obj.addPropMap("MBattAmps", "/systems/electrical/amps");
-    obj.addPropMap("SBattAmps", "/systems/electrical/amps");
-    obj.addPropMap("EngineHours", "/engines/engine[0]/hours");
-    obj.addPropMap("FuelFlowGPH", "/engines/engine[0]/fuel-flow-gph");
-    obj.addPropMap("OilPressurePSI", "/engines/engine[0]/oil-pressure-psi");
-    obj.addPropMap("OilTemperatureF", "/engines/engine[0]/oil-temperature-degf");
-    obj.addPropMap("EGTNorm", "/engines/engine[0]/egt-norm");
-    obj.addPropMap("VacuumSuctionInHG", "/systems/vacuum/suction-inhg");
+    obj.addPropMap("RPM", "/engines/engine[0]/rpm", 10);
+    obj.addPropMap("Man", "/engines/engine[0]/mp-osi", 10);
+    obj.addPropMap("MBusVolts", "/systems/electrical/volts", 1);
+    obj.addPropMap("EBusVolts", "/systems/electrical/volts", 1);
+    obj.addPropMap("MBattAmps", "/systems/electrical/amps", 1);
+    obj.addPropMap("SBattAmps", "/systems/electrical/amps", 1);
+    obj.addPropMap("EngineHours", "/engines/engine[0]/hours", 1);
+    obj.addPropMap("FuelFlowGPH", "/engines/engine[0]/fuel-flow-gph", 0.25);
+    obj.addPropMap("OilPressurePSI", "/engines/engine[0]/oil-pressure-psi", 0.1);
+    obj.addPropMap("OilTemperatureF", "/engines/engine[0]/oil-temperature-degf", 1);
+    obj.addPropMap("EGTNorm", "/engines/engine[0]/egt-norm", 0.5);
+    obj.addPropMap("VacuumSuctionInHG", "/systems/vacuum/suction-inhg", 1);
 
     return obj;
   },

@@ -66,18 +66,18 @@ var GenericNavComPublisher =
 
     obj._triggeredPublisher.addPropMap("Nav1SelectedFreq", "/instrumentation/nav/frequencies/selected-mhz");
     obj._triggeredPublisher.addPropMap("Nav1StandbyFreq", "/instrumentation/nav/frequencies/standby-mhz");
-    obj._triggeredPublisher.addPropMap("Nav1ID", "/instrumentation/nav/nav-id");
-    obj._periodicPublisher.addPropMap("Nav1InRange", "/instrumentation/nav/in-range");
-    obj._periodicPublisher.addPropMap("Nav1HeadingDeg", "/instrumentation/nav/heading-deg");
-    obj._periodicPublisher.addPropMap("Nav1RadialDeg", "/instrumentation/nav/radials/selected-deg");
-    obj._periodicPublisher.addPropMap("Nav1DistanceMeters", "/instrumentation/nav/nav-distance");
-    obj._periodicPublisher.addPropMap("Nav1CourseDeviationDeg", "/instrumentation/nav/crosstrack-heading-error-deg");
-    obj._periodicPublisher.addPropMap("Nav1CrosstrackErrorM", "/instrumentation/nav/crosstrack-error-m");
-    obj._periodicPublisher.addPropMap("Nav1Localizer", "/instrumentation/nav/nav-loc");
-    obj._periodicPublisher.addPropMap("Nav1Deflection", "/instrumentation/nav/heading-needle-deflection-norm");
-    obj._periodicPublisher.addPropMap("Nav1GSDeflection", "/instrumentation/nav/gs-needle-deflection-norm");
-    obj._periodicPublisher.addPropMap("Nav1GSInRange", "/instrumentation/nav/gs-in-range");
-    obj._periodicPublisher.addPropMap("Nav1From", "/instrumentation/nav/from-flag");
+    obj._triggeredPublisher.addPropMap("Nav1ID", "/instrumentation/nav/nav-id", "");
+    obj._periodicPublisher.addPropMap("Nav1InRange", "/instrumentation/nav/in-range", 0.1);
+    obj._periodicPublisher.addPropMap("Nav1HeadingDeg", "/instrumentation/nav/heading-deg", 1);
+    obj._periodicPublisher.addPropMap("Nav1RadialDeg", "/instrumentation/nav/radials/selected-deg", 1);
+    obj._periodicPublisher.addPropMap("Nav1DistanceMeters", "/instrumentation/nav/nav-distance", 100);
+    obj._periodicPublisher.addPropMap("Nav1CourseDeviationDeg", "/instrumentation/nav/crosstrack-heading-error-deg", 1);
+    obj._periodicPublisher.addPropMap("Nav1CrosstrackErrorM", "/instrumentation/nav/crosstrack-error-m", 100);
+    obj._periodicPublisher.addPropMap("Nav1Localizer", "/instrumentation/nav/nav-loc", 0.1);
+    obj._periodicPublisher.addPropMap("Nav1Deflection", "/instrumentation/nav/heading-needle-deflection-norm", 0.05);
+    obj._periodicPublisher.addPropMap("Nav1GSDeflection", "/instrumentation/nav/gs-needle-deflection-norm", 0.05);
+    obj._periodicPublisher.addPropMap("Nav1GSInRange", "/instrumentation/nav/gs-in-range", 0.1);
+    obj._periodicPublisher.addPropMap("Nav1From", "/instrumentation/nav/from-flag", 0.1);
 
     obj._triggeredPublisher.addPropMap("Nav1Volume", "/instrumentation/nav/volume-selected");
     obj._triggeredPublisher.addPropMap("Nav1AudioID", "/instrumentation/nav/audio-btn");
@@ -85,25 +85,26 @@ var GenericNavComPublisher =
 
     obj._triggeredPublisher.addPropMap("Nav2SelectedFreq", "/instrumentation/nav[1]/frequencies/selected-mhz");
     obj._triggeredPublisher.addPropMap("Nav2StandbyFreq", "/instrumentation/nav[1]/frequencies/standby-mhz");
-    obj._periodicPublisher.addPropMap("Nav2ID", "/instrumentation/nav[1]/nav-id");
-    obj._periodicPublisher.addPropMap("Nav2InRange", "/instrumentation/nav[1]/in-range");
-    obj._periodicPublisher.addPropMap("Nav2HeadingDeg", "/instrumentation/nav[1]/heading-deg");
-    obj._periodicPublisher.addPropMap("Nav2RadialDeg", "/instrumentation/nav[1]/radials/selected-deg");
-    obj._periodicPublisher.addPropMap("Nav2DistanceMeters", "/instrumentation/nav[1]/nav-distance");
-    obj._periodicPublisher.addPropMap("Nav2CourseDeviationDeg", "/instrumentation/nav[1]/crosstrack-heading-error-deg");
-    obj._periodicPublisher.addPropMap("Nav2CrosstrackErrorM", "/instrumentation/nav[1]/crosstrack-error-m");
-    obj._periodicPublisher.addPropMap("Nav2Localizer", "/instrumentation/nav[1]/nav-loc");
-    obj._periodicPublisher.addPropMap("Nav2Deflection", "/instrumentation/nav[1]/heading-needle-deflection-norm");
-    obj._periodicPublisher.addPropMap("Nav2GSDeflection", "/instrumentation/nav[1]/gs-needle-deflection-norm");
-    obj._periodicPublisher.addPropMap("Nav2GSInRange", "/instrumentation/nav[1]/gs-in-range");
-    obj._periodicPublisher.addPropMap("Nav2From", "/instrumentation/nav/from-flag");
+
+    obj._periodicPublisher.addPropMap("Nav2ID", "/instrumentation/nav[1]/nav-id", "");
+    obj._periodicPublisher.addPropMap("Nav2InRange", "/instrumentation/nav[1]/in-range", 0.1);
+    obj._periodicPublisher.addPropMap("Nav2HeadingDeg", "/instrumentation/nav[1]/heading-deg", 1);
+    obj._periodicPublisher.addPropMap("Nav2RadialDeg", "/instrumentation/nav[1]/radials/selected-deg", 1);
+    obj._periodicPublisher.addPropMap("Nav2DistanceMeters", "/instrumentation/nav[1]/nav-distance", 100);
+    obj._periodicPublisher.addPropMap("Nav2CourseDeviationDeg", "/instrumentation/nav[1]/crosstrack-heading-error-deg", 1);
+    obj._periodicPublisher.addPropMap("Nav2CrosstrackErrorM", "/instrumentation/nav[1]/crosstrack-error-m", 100);
+    obj._periodicPublisher.addPropMap("Nav2Localizer", "/instrumentation/nav[1]/nav-loc", 0.1);
+    obj._periodicPublisher.addPropMap("Nav2Deflection", "/instrumentation/nav[1]/heading-needle-deflection-norm", 0.05);
+    obj._periodicPublisher.addPropMap("Nav2GSDeflection", "/instrumentation/nav[1]/gs-needle-deflection-norm", 0.05);
+    obj._periodicPublisher.addPropMap("Nav2GSInRange", "/instrumentation/nav[1]/gs-in-range", 0.1);
+    obj._periodicPublisher.addPropMap("Nav2From", "/instrumentation/nav/from-flag", 0.1);
     obj._triggeredPublisher.addPropMap("Nav2AudioID", "/instrumentation/nav[1]/audio-btn");
     obj._triggeredPublisher.addPropMap("Nav2Serviceable", "/instrumentation/nav[1]/operable");
 
 
     obj._triggeredPublisher.addPropMap("ADFSelectedFreq", "/instrumentation/adf/frequencies/selected-khz");
-    obj._periodicPublisher.addPropMap("ADFInRange", "/instrumentation/adf/in-range");
-    obj._periodicPublisher.addPropMap("ADFHeadingDeg", "/instrumentation/adf/indicated-bearing-deg");
+    obj._periodicPublisher.addPropMap("ADFInRange", "/instrumentation/adf/in-range", 0.1);
+    obj._periodicPublisher.addPropMap("ADFHeadingDeg", "/instrumentation/adf/indicated-bearing-deg", 1);
     obj._triggeredPublisher.addPropMap("ADFVolume", "/instrumentation/adf/volume-norm");
     obj._triggeredPublisher.addPropMap("ADFServiceable", "/instrumentation/adf/operable");
 

@@ -32,9 +32,14 @@ var PFDInstrumentsController =
       _BRG1Source : 0,
       _BRG2Source : 0,
 
+      _pitch : 0.0,
+      _roll: 0.0,
+      _slip: 0.0,
+
       _last_ias_kt : 0,
       _last_alt_ft : 0,
-      _last_trend : systime(),
+      _last_ias_trend : systime(),
+      _last_alt_trend : systime(),
       _selected_alt_ft : 0,
       _heading_magnetic_deg : 0,
       _mag_var : 0,
@@ -208,43 +213,64 @@ var PFDInstrumentsController =
   getBRG2 : func() { return PFDInstrumentsController.BRG_SOURCE[me._BRG2Source]; },
 
   # Handle update of the airdata information.
-  # ADC data is produced periodically as an entire set
+  # ADC data is produced periodically
   handleADCData : func(data) {
+    var now = systime();
     var ias = data["ADCIndicatedAirspeed"];
     var alt = data["ADCAltitudeFT"];
-    # estimated speed and altitude in 6s
-    var now = systime();
-    var lookahead_ias_6sec = 6 * (ias - me._last_ias_kt) / (now - me._last_trend);
-    var lookahead_alt_6sec = .3 * (alt - me._last_alt_ft) / (now - me._last_trend); # scale = 1/20ft
-    me.page.updateIAS(ias, lookahead_ias_6sec);
-    me.page.updateALT(alt, lookahead_alt_6sec, me._selected_alt_ft);
-    me._last_ias_kt = ias;
-    me._last_alt_ft = alt;
-    me._last_trend = now;
 
-    var pitch = data["ADCPitchDeg"];
-    var roll = data["ADCRollDeg"];
-    var slip = data["ADCSlipSkid"];
-    me.page.updateAI(pitch, roll, slip);
-    me.page.updateFD((me._fd_enabled or me._ap_enabled), pitch, roll, me._fd_pitch, me._fd_roll);
+    # estimated speed and altitude in 6s if we have updated data
 
-    me.page.updateVSI(data["ADCVerticalSpeedFPM"]);
-    me.page.updateTAS(data["ADCTrueAirspeed"]);
-    me.page.updateBARO(data["ADCPressureSettingInHG"]);
+    if (ias != nil) {
+      var lookahead_ias_6sec = 6 * (ias - me._last_ias_kt) / (now - me._last_ias_trend);
+      me.page.updateIAS(ias, lookahead_ias_6sec);
+      me._last_ias_kt = ias;
+      me._last_ias_trend = now;
+    }
 
-    me.page.updateOAT(data["ADCOutsideAirTemperatureC"]);
-    me.page.updateHSI(data["ADCHeadingMagneticDeg"]);
-    me._heading_magnetic_deg = data["ADCHeadingMagneticDeg"];
-    me._mag_var = data["ADCMagneticVariationDeg"];
+    if (alt != nil) {
+      var lookahead_alt_6sec = .3 * (alt - me._last_alt_ft) / (now - me._last_alt_trend); # scale = 1/20ft
+      me.page.updateALT(alt, lookahead_alt_6sec, me._selected_alt_ft);
+      me._last_alt_ft = alt;
+      me._last_alt_trend = now;
+    }
+
+    if ((data["ADCPitchDeg"] != nil) or (data["ADCRollDeg"] != nil) or (data["ADCSlipSkid"] != nil)) {
+      # These all have to be updated together
+      if (data["ADCPitchDeg"] != nil) me._pitch = data["ADCPitchDeg"];
+      if (data["ADCRollDeg"] != nil) me._roll = data["ADCRollDeg"];
+      if (data["ADCSlipSkid"] != nil) me._slip = data["ADCSlipSkid"];
+      me.page.updateAI(me._pitch, me._roll, me._slip);
+      me.page.updateFD((me._fd_enabled or me._ap_enabled), me._pitch, me._roll, me._fd_pitch, me._fd_roll);
+    }
+
+    if (data["ADCVerticalSpeedFPM"] != nil)     me.page.updateVSI(data["ADCVerticalSpeedFPM"]);
+    if (data["ADCTrueAirspeed"] != nil)         me.page.updateTAS(data["ADCTrueAirspeed"]);
+    if (data["ADCPressureSettingInHG"] != nil) me.page.updateBARO(data["ADCPressureSettingInHG"]);
+
+    if (data["ADCOutsideAirTemperatureC"] != nil) me.page.updateOAT(data["ADCOutsideAirTemperatureC"]);
+    if (data["ADCHeadingMagneticDeg"] != nil) {
+      me.page.updateHSI(data["ADCHeadingMagneticDeg"]);
+      me._heading_magnetic_deg = data["ADCHeadingMagneticDeg"];
+    }
+
+    if (data["ADCMagneticVariationDeg"] != nil) me._mag_var = data["ADCMagneticVariationDeg"];
 
     # If we're "flying" at < 10kts, then we won't have sufficient delta between
     # airspeed and groundspeed to determine wind
-    me.page.updateWindData(
-      hdg : data["ADCHeadingMagneticDeg"],
-      wind_hdg : data["ADCWindHeadingDeg"],
-      wind_spd : data ["ADCWindSpeedKt"],
-      no_data: (data["ADCIndicatedAirspeed"] < 1.0)
-    );
+    if ((data["ADCHeadingMagneticDeg"] != nil) and
+        (data["ADCWindHeadingDeg"]     != nil) and
+        (data["ADCWindSpeedKt"]        != nil) and
+        (data["ADCIndicatedAirspeed"]  != nil)    )
+    {
+      me.page.updateWindData(
+        hdg : data["ADCHeadingMagneticDeg"],
+        wind_hdg : data["ADCWindHeadingDeg"],
+        wind_spd : data["ADCWindSpeedKt"],
+        no_data: (data["ADCIndicatedAirspeed"] < 1.0)
+      );
+    }
+
 
     if ((data["ADCTimeLocalSec"] != nil) and (me._time_sec != data["ADCTimeLocalSec"])) {
       me._time_sec = data["ADCTimeLocalSec"];

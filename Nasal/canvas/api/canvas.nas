@@ -64,6 +64,10 @@ var Canvas = {
     #
     # releases associated canvas and makes this object unusable
     del: func {
+        # explicitly remove placement nodes. This should in principle not
+        # be required (since _node.remove() should also clean them up)
+        me._node.removeChildren("placement");
+
         me._node.remove();
         me.parents = nil; # ensure all ghosts get destroyed
     }

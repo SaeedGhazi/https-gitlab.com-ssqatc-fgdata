@@ -252,7 +252,7 @@ FunctionKeys = {
 	#Hyper_R: 0xFFEE,
 };
 
-ModifierKeys = {
+_ModifierKeys = {
 	Shift_L: 0x0001,
 	Shift_R: 0x0002,
 	Control_L: 0x0004,
@@ -271,11 +271,12 @@ ModifierKeys = {
 	Caps_Lock: 0x2000,
 };
 	
-# Only use the below keys !
-ModifierKeys.Ctrl = (ModifierKeys.Control_L | ModifierKeys.Control_R);
-ModifierKeys.Shift = (ModifierKeys.Shift_L | ModifierKeys.Shift_R);
-ModifierKeys.Alt = (ModifierKeys.Alt_L | ModifierKeys.Alt_R);
-ModifierKeys.Meta = (ModifierKeys.Meta_L | ModifierKeys.Meta_R);
+ModifierKeys = {
+	Ctrl: (_ModifierKeys.Control_L | _ModifierKeys.Control_R),
+	Shift: (_ModifierKeys.Shift_L | _ModifierKeys.Shift_R),
+	Alt: (_ModifierKeys.Alt_L | _ModifierKeys.Alt_R),
+	Meta: (_ModifierKeys.Meta_L | _ModifierKeys.Meta_R),
+};
 
 # These do not seem to be available in OSG events
 #ModifierKeys.Super = (ModifierKeys.Super_L | ModifierKeys.Super_R);

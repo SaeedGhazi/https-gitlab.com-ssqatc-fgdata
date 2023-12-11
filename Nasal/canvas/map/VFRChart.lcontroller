@@ -34,7 +34,7 @@ var new = func(layer) {
 				min_lon : -179, max_lon: -60
 			},
 			{ name: 'DE',
-			 url : 'https://secais.dfs.de/static-maps/ICAO500-2015-EUR-Reprojected_07/tiles/{z}/{x}/{y}.png',
+			 url : 'https://secais.dfs.de/static-maps/icao500/tiles/{z}/{x}/{y}.png',
 			 path : layer.maps_base ~ '/secais/{z}/{x}/{y}.png',
 			 min_zoom : 5, max_zoom : 15,
 			 min_lat : 46, max_lat : 55.1,

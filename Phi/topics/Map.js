@@ -166,14 +166,14 @@ define([
             }),
 
             "Germany VFR" : new L.TileLayer(
-                    'https://secais.dfs.de/static-maps/ICAO500-2015-EUR-Reprojected_07/tiles/{z}/{x}/{y}.png', {
+                    'https://secais.dfs.de/static-maps/icao500/tiles/{z}/{x}/{y}.png', {
                         minZoom : 5,
                         maxZoom : 15,
                         attribution : '&copy; <a target="_blank" href="http://www.dfs.de">DFS</a>',
                         bounds : L.latLngBounds(L.latLng(46.0, 5.0), L.latLng(55.1, 16.5)),
                     }),
 
-            "Germany Lower Airspace" : new L.TileLayer('https://secais.dfs.de/static-maps/lower_20131114/tiles/{z}/{x}/{y}.png',
+            "Germany Lower Airspace" : new L.TileLayer('https://secais.dfs.de/static-maps/lower/tiles/{z}/{x}/{y}.png',
                     {
                         minZoom : 5,
                         maxZoom : 15,

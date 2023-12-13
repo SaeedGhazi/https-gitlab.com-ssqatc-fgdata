@@ -92,7 +92,7 @@ if(0){
     foreach(var type; [r('DME',0),r('APT'),  ] )
       me.pages.map.addLayer(factory: canvas.SymbolLayer, type_arg: type.name, visible: type.vis, priority: type.zindex,style:style);
 
-    canvas.parsesvg( var symbol=me.pages.map.createChild("group","airplane-symbol"), 'Nasal/canvas/map/boeingAirplane.svg');
+    canvas.parsesvg( var symbol=me.pages.map.createChild("group","airplane-symbol"), 'Nasal/canvas/map/Images/boeingAirplane.svg');
     symbol.setScale( 0.25 );
   },
 

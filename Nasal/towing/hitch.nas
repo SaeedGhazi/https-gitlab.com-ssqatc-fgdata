@@ -2,7 +2,7 @@
 #			TOWING NASAL CODE
 #
 #		original version by D-NXKT up to version 30.12.2014
-#		updates by Benedikt Wolf and D-NXKT, version 01/2023
+#		updates by Bea Wolf and D-NXKT, version 12/2023
 #
 #
 # Purpose of this routine:
@@ -1315,8 +1315,20 @@ var winch = func (open){
 			if ( winch_hash.clutched.getBoolValue() ) {
 				
 				if( winch_hash.type == 0 ){
-					# Concept: force is given
-					forcetow_N = force_setting;
+					# Concept: force is conrolled
+					
+					towlength_new_m = towlength_m - spoolspeed * delta_t;
+					delta_towlength_m = distance - towlength_new_m;
+					var delta_spoolspeed =  spool_acceleration * delta_t;
+					spoolspeed = spoolspeed + delta_spoolspeed ;
+					if ( spoolspeed > spool_max ) spoolspeed = spool_max;
+					
+					if ( delta_towlength_m < 0. ) {
+						forcetow_N = 0.;
+					}
+					else{
+						forcetow_N = elastic_constant * delta_towlength_m / towlength_new_m;
+					}
 					
 				} else if ( winch_hash.type == 1 ){
 					# Concept: regulate force to reach target speed
@@ -1328,12 +1340,11 @@ var winch = func (open){
 							forcetow_N -= acceleration_N_s * delta_t;
 						}
 					}
+					# New towlength is distance from hook to winch; previous towlength is stored in winch_hash.towlength_m
+					towlength_new_m = distance;
+					delta_towlength_m = -1 * ( distance - towlength_m );
+					spoolspeed = delta_towlength_m / delta_t;
 				}
-				
-				# New towlength is distance from hook to winch; previous towlength is stored in winch_hash.towlength_m
-				towlength_new_m = distance;
-				delta_towlength_m = -1 * ( distance - towlength_m );
-				spoolspeed = delta_towlength_m / delta_t;	
 				
 			} else {   # un-clutched
 				# --- experimental --- #
@@ -1355,12 +1366,14 @@ var winch = func (open){
 				spoolspeed = spoolspeed - delta_spoolspeed;
 				if ( spoolspeed < - unspool_max ) spoolspeed = - unspool_max;
 				
-				
-				#if ( delta_towlength_m < 0. ) {
-				#	forcetow_N = 0.;
-				#}
+				if ( delta_towlength_m < 0. ) {
+					forcetow_N = 0.;
+				}
+				else{
+					forcetow_N = elastic_constant * delta_towlength_m / towlength_new_m;
+				}
 			}
-
+			
 			if ( forcetow_N > max_force_N ) {
 				forcetow_N = max_force_N;
 				var towlength_new_m = distance / ( forcetow_N / elastic_constant + 1. );

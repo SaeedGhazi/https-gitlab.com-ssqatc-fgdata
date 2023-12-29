@@ -515,9 +515,10 @@ Syntax
 
 Where:
 - <filename> is the name of a file containing linear feature positions, may be a .gz file
-- <material name> is the name of the material that will be used to render.
+- <material name> is the name of the material that will be used to render the feature.
+  This can use an Effect as normal, e.g. for road traffic.
 
-See README.materials for details on configuring the random vegetation parameters.
+See README.materials for details on configuring the linear feature parameters.
 
 The referenced <filename> (in the example road.txt.gz) contains lines of the form
 
@@ -528,7 +529,10 @@ Where:
 - W is the feature width in meters.
 - ATTR is an integer value used to store packed attributes (e.g. bitwise.  Bit 1 is for lit)
 - A,B,C,D are float values used to store attributes (currently unused)
-- lonN, latN are lon/lat pairs on the center of the line feature.  There must be at least two pairs
+- lonN, latN are lon/lat pairs on the center of the line feature.  There must be at least two pairs.
+
+The linear feature will be built on top of the terrain, offset by the line-feature-offset-m parameter
+of the material definition.
 
 3.12  OBJECT_LIGHT
 ------------------

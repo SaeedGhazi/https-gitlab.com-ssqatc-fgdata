@@ -15,6 +15,7 @@ void get_atmosphere_collision_coefficients(in float h,
                                            out vec4 aerosol_scattering,
                                            out vec4 molecular_absorption,
                                            out vec4 molecular_scattering,
+                                           out vec4 fog_scattering,
                                            out vec4 extinction);
 
 void main()
@@ -40,11 +41,13 @@ void main()
 
         vec4 aerosol_absorption, aerosol_scattering;
         vec4 molecular_absorption, molecular_scattering;
+        vec4 fog_scattering;
         vec4 extinction;
         get_atmosphere_collision_coefficients(
             altitude,
             aerosol_absorption, aerosol_scattering,
             molecular_absorption, molecular_scattering,
+            fog_scattering,
             extinction);
 
         result += extinction * dt;

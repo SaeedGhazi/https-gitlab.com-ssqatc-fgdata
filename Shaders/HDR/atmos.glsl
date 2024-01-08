@@ -203,6 +203,7 @@ void get_atmosphere_collision_coefficients(in float h,
                                            out vec4 aerosol_scattering,
                                            out vec4 molecular_absorption,
                                            out vec4 molecular_scattering,
+                                           out vec4 fog_scattering,
                                            out vec4 extinction)
 {
     h = max(h, 1e-3); // In case height is negative
@@ -217,12 +218,13 @@ void get_atmosphere_collision_coefficients(in float h,
     aerosol_absorption = aerosol_absorption_cross_section * aerosol_density;
     aerosol_scattering = aerosol_scattering_cross_section * aerosol_density;
 
-    // Add contribution from fog
-    aerosol_scattering += get_fog_scattering_coefficient(h);
+    // Fog
+    fog_scattering = get_fog_scattering_coefficient(h);
 
     extinction =
         aerosol_absorption + aerosol_scattering +
-        molecular_absorption + molecular_scattering;
+        molecular_absorption + molecular_scattering +
+        fog_scattering;
 }
 
 /*
@@ -297,11 +299,13 @@ vec4 compute_inscattering(in vec3 ray_origin,
 
         vec4 aerosol_absorption, aerosol_scattering;
         vec4 molecular_absorption, molecular_scattering;
+        vec4 fog_scattering;
         vec4 extinction;
         get_atmosphere_collision_coefficients(
             altitude,
             aerosol_absorption, aerosol_scattering,
             molecular_absorption, molecular_scattering,
+            fog_scattering,
             extinction);
 
         vec4 transmittance_to_sun = transmittance_from_lut(
@@ -312,8 +316,8 @@ vec4 compute_inscattering(in vec3 ray_origin,
             distance_to_earth_center);
 
         vec4 S =
-            molecular_scattering * (molecular_phase * transmittance_to_sun + ms) +
-            aerosol_scattering   * (aerosol_phase   * transmittance_to_sun + ms);
+            molecular_scattering                  * (molecular_phase * transmittance_to_sun + ms) +
+            (aerosol_scattering + fog_scattering) * (aerosol_phase   * transmittance_to_sun + ms);
 
         vec4 step_transmittance = exp(-dt * extinction);
 

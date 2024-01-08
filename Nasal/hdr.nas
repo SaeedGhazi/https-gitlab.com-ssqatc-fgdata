@@ -25,8 +25,8 @@ setlistener("/environment/aerosols/type", func(p) {
         setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[1]", 2.4844e-22);
         setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[2]", 2.8362e-22);
         setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[3]", 2.7494e-22);
-        setprop("/sim/rendering/hdr/atmos/aerosol-base-density",                8.544e18);
-        setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 2.340824e-16);
+        setprop("/sim/rendering/hdr/atmos/aerosol-base-density",                8.5440e15);
+        setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 2.3408e-13);
         setprop("/sim/rendering/hdr/atmos/aerosol-scale-height",                0.73);
     } else { # Urban (default)
         setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[0]", 2.8722e-24);
@@ -38,7 +38,7 @@ setlistener("/environment/aerosols/type", func(p) {
         setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[2]", 2.0942e-22);
         setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[3]", 2.4033e-22);
         setprop("/sim/rendering/hdr/atmos/aerosol-base-density",                1.3681e17);
-        setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 1.4619e-17);
+        setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 1.4618e-14);
         setprop("/sim/rendering/hdr/atmos/aerosol-scale-height",                0.73);
     }
 }, 1, 0);

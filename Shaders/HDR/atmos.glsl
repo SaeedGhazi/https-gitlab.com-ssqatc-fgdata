@@ -15,8 +15,10 @@ uniform vec4 aerosol_scattering_cross_section;
 uniform float aerosol_base_density;
 uniform float aerosol_relative_background_density;
 uniform float aerosol_scale_height;
+uniform float aerosol_turbidity;
 uniform float fog_density;
 uniform float fog_scale_height;
+uniform float fog_height_offset;
 uniform float ozone_mean_dobson;
 uniform vec4 ground_albedo;
 
@@ -171,8 +173,8 @@ vec4 get_molecular_absorption_coefficient(float h)
  */
 float get_aerosol_density(float h)
 {
-    return aerosol_base_density * (exp(-h / aerosol_scale_height)
-                                   + aerosol_relative_background_density);
+    return aerosol_turbidity * aerosol_base_density
+        * (exp(-h / aerosol_scale_height) + aerosol_relative_background_density);
 }
 
 /*
@@ -186,7 +188,7 @@ vec4 get_fog_scattering_coefficient(float h)
 {
     if (fog_density > 0.0) {
         return fog_scattering_cross_section * fog_density
-            * exp(-h / fog_scale_height);
+            * min(1.0, exp((-h + fog_height_offset) / fog_scale_height));
     } else {
         return vec4(0.0);
     }

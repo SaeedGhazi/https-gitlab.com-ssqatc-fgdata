@@ -13,27 +13,84 @@
 ################################################################################
 # Atmosphere
 ################################################################################
-setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[0]", 2.8722e-24);
-setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[1]", 4.6168e-24);
-setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[2]", 7.9706e-24);
-setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[3]", 1.3578e-23);
 
-setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[0]", 1.5908e-22);
-setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[1]", 1.7711e-22);
-setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[2]", 2.0942e-22);
-setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[3]", 2.4033e-22);
+setlistener("/environment/aerosols/type", func(p) {
+    var type = p.getValue();
+    if (type == 7) { # Rural
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[0]", 5.0393e-23);
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[1]", 8.0765e-23);
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[2]", 1.3823e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[3]", 2.3383e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[0]", 2.6004e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[1]", 2.4844e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[2]", 2.8362e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[3]", 2.7494e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-base-density",                8.544e18);
+        setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 2.340824e-16);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scale-height",                0.73);
+    } else { # Urban (default)
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[0]", 2.8722e-24);
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[1]", 4.6168e-24);
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[2]", 7.9706e-24);
+        setprop("/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[3]", 1.3578e-23);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[0]", 1.5908e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[1]", 1.7711e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[2]", 2.0942e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[3]", 2.4033e-22);
+        setprop("/sim/rendering/hdr/atmos/aerosol-base-density",                1.3681e17);
+        setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 1.4619e-17);
+        setprop("/sim/rendering/hdr/atmos/aerosol-scale-height",                0.73);
+    }
+}, 1, 0);
 
-setprop("/sim/rendering/hdr/atmos/aerosol-base-density", 1.3681e17);
-setprop("/sim/rendering/hdr/atmos/aerosol-relative-background-density", 1.4619e-17);
-setprop("/sim/rendering/hdr/atmos/aerosol-scale-height", 0.73);
-setprop("/sim/rendering/hdr/atmos/fog-density", 0.0);
-setprop("/sim/rendering/hdr/atmos/fog-scale-height", 1.0);
-setprop("/sim/rendering/hdr/atmos/ozone-mean-dobson", 347.0);
+setlistener("/environment/aerosols/turbidity", func(p) {
+    setprop("/sim/rendering/hdr/atmos/aerosol-turbidity", p.getValue());
+}, 1, 0);
 
-setprop("/sim/rendering/hdr/atmos/ground-albedo[0]", 0.4);
-setprop("/sim/rendering/hdr/atmos/ground-albedo[1]", 0.4);
-setprop("/sim/rendering/hdr/atmos/ground-albedo[2]", 0.4);
-setprop("/sim/rendering/hdr/atmos/ground-albedo[3]", 0.4);
+setlistener("/environment/ground-albedo", func(p) {
+    var albedo = p.getValue();
+    # Use the same albedo value for all wavelengths
+    for (var i = 0; i < 4; i += 1) {
+        setprop("/sim/rendering/hdr/atmos/ground-albedo[" ~ i ~ "]", albedo);
+    }
+}, 1, 0);
+
+# Update fog density when the visibility changes
+setlistener("/environment/visibility-m", func {
+   var max = 30000000.0;
+   var visibility = getprop("/environment/visibility-m");
+   var vis = math.min(visibility, max);
+   setprop("/sim/rendering/hdr/atmos/fog-density", max*math.pow(0.99937, vis));
+}, 1, 0);
+
+setlistener("/environment/fog-height-falloff", func(p) {
+    setprop("/sim/rendering/hdr/atmos/fog-scale-height", p.getValue());
+}, 1, 0);
+
+setlistener("/environment/fog-height-offset", func(p) {
+    setprop("/sim/rendering/hdr/atmos/fog-height-offset", p.getValue());
+}, 1, 0);
+
+# Ozone concentration depends on the month of the year
+setlistener("/sim/time/utc/month", func {
+    var ozone_mean_monthly_dobson = [
+        347.0, # January
+        370.0, # February
+        381.0, # March
+        384.0, # April
+        372.0, # May
+        352.0, # June
+        333.0, # July
+        317.0, # August
+        298.0, # September
+        285.0, # October
+        290.0, # November
+        315.0  # December
+    ];
+    var month = getprop("/sim/time/utc/month") or 1;
+    var index = math.clamp(month - 1, 0, 11);
+    setprop("/sim/rendering/hdr/atmos/ozone-mean-dobson", ozone_mean_monthly_dobson[index]);
+}, 1, 0);
 
 ################################################################################
 # Environment map
@@ -230,11 +287,3 @@ envmap_warp_listener = setlistener("/sim/time/warp",
 setlistener("/sim/current-view/view-number", func {
     update_envmap(true);
 }, 0, 0);
-
-# Update fog density when the visibility changes
-setlistener("/environment/visibility-m", func {
-   var max = 30000000.0;
-   var visibility = getprop("/environment/visibility-m");
-   var vis = math.min(visibility, max);
-   setprop("/sim/rendering/hdr/atmos/fog-density", max*math.pow(0.99937, vis));
-}, 1, 0);

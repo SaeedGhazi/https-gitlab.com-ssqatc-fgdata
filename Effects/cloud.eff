@@ -53,12 +53,18 @@
     <aerosol-scale-height>
       <use>/sim/rendering/hdr/atmos/aerosol-scale-height</use>
     </aerosol-scale-height>
+    <aerosol-turbidity>
+      <use>/sim/rendering/hdr/atmos/aerosol-turbidity</use>
+    </aerosol-turbidity>
     <fog-density>
       <use>/sim/rendering/hdr/atmos/fog-density</use>
     </fog-density>
     <fog-scale-height>
       <use>/sim/rendering/hdr/atmos/fog-scale-height</use>
     </fog-scale-height>
+    <fog-height-offset>
+      <use>/sim/rendering/hdr/atmos/fog-height-offset</use>
+    </fog-height-offset>
     <ozone-mean-dobson>
       <use>/sim/rendering/hdr/atmos/ozone-mean-dobson</use>
     </ozone-mean-dobson>
@@ -683,6 +689,11 @@
         <value><use>aerosol-scale-height</use></value>
       </uniform>
       <uniform>
+        <name>aerosol_turbidity</name>
+        <type>float</type>
+        <value><use>aerosol-turbidity</use></value>
+      </uniform>
+      <uniform>
         <name>fog_density</name>
         <type>float</type>
         <value><use>fog-density</use></value>
@@ -691,6 +702,11 @@
         <name>fog_scale_height</name>
         <type>float</type>
         <value><use>fog-scale-height</use></value>
+      </uniform>
+      <uniform>
+        <name>fog_height_offset</name>
+        <type>float</type>
+        <value><use>fog-height-offset</use></value>
       </uniform>
       <uniform>
         <name>ozone_mean_dobson</name>

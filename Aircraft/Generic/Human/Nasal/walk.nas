@@ -809,6 +809,28 @@ var init_common = func {
 	setlistener("sim/walker/key-triggers/slide", func {
 		calc_heading();
 	});
+	
+	setlistener("sim/walker/flashlight/mode", func(n) {
+		var mode = n.getValue();
+		
+		# flashlight on/off
+		if (mode == 0){
+			setprop("sim/walker/flashlight/dim-factor", 0.0);
+		} else {
+			setprop("sim/walker/flashlight/dim-factor", getprop("sim/walker/flashlight/brightness-norm"));
+		}
+		
+		# flashlight color
+		if (mode == 2) {
+			setprop("sim/walker/flashlight/color-red-factor",   1.0);
+			setprop("sim/walker/flashlight/color-green-factor", 0.0);
+			setprop("sim/walker/flashlight/color-blue-factor",  0.0);
+		} else {
+			setprop("sim/walker/flashlight/color-red-factor",   1.0);
+			setprop("sim/walker/flashlight/color-green-factor", 1.0);
+			setprop("sim/walker/flashlight/color-blue-factor",  1.0);
+		}
+	}, 1);
 
 	setlistener("sim/model/bluebird/crew/walker/visible", func(n) {
 		if (n.getValue()) {

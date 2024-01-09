@@ -192,6 +192,13 @@
 			<slide type="int">0</slide>
 			<speed type="float">0</speed>
 		</key-triggers>
+		<flashlight>
+			<mode type="int">0</mode> <!-- 0=off, 1=white, 2=red; defined in walk.nas -->
+			<brightness-norm type="double">0.25</brightness-norm>
+			<pos-x-m type="double">0.0</pos-x-m>
+			<pos-y-m type="double">0.0</pos-y-m>
+			<pos-z-m type="double">1.5</pos-z-m>
+		</flashlight>
 	</walker>
 
 		<view n="110">
@@ -286,7 +293,17 @@
 						</binding>
 					</item>
 					<item>
-						<label>Toggle Walker outside</label>
+						<label>Flashlight</label>
+						<binding>
+							<command>property-cycle</command>
+							<property>/sim/walker/flashlight/mode</property>
+							<value type="int">0</value> <!-- off -->
+							<value type="int">1</value> <!-- white -->
+							<value type="int">2</value> <!-- red -->
+						</binding>
+					</item>
+					<item>
+						<label>Toggle Walker out/in</label>
 						<name>walker-toggle-outside</name>
 						<binding>
 							<command>property-toggle</command>
@@ -691,6 +708,18 @@
 					<property>sim/walker/speed-mps</property>
 				</binding>
 			</mod-up>
+		</key>
+		
+		<key n="6">
+			<name>CTRL+F</name>
+			<desc>Toggle Flashlight</desc>
+			<binding n="0">
+				<command>property-cycle</command>
+				<property>/sim/walker/flashlight/mode</property>
+				<value type="int">0</value> <!-- off -->
+				<value type="int">1</value> <!-- white -->
+				<value type="int">2</value> <!-- red -->
+			</binding>
 		</key>
 
 	</keyboard>

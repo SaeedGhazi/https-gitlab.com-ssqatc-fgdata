@@ -292,7 +292,7 @@
     </group>
     <group restype="x-trolltech-linguist-context" resname="Settings">
       <trans-unit id="_msg53" translate="no">
-        <source xml:space="preserve">Scenery version 2.0 is available for the whole world and works well for lower powered systems. Scenery version 3.0 is currently under development, but is only available available for limited areas. It is more detailed and performs better on high powered systems.</source>
+        <source xml:space="preserve">Scenery version 2.0 is available for the whole world and works well for lower powered systems. Scenery version 3.0 is currently under development, but is only available for limited areas. It is more detailed and performs better on high powered systems.</source>
         <target xml:space="preserve"></target>
       </trans-unit>
     </group>

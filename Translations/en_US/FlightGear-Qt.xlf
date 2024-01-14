@@ -1585,7 +1585,7 @@ Local path: %2</source>
       </trans-unit>
       <trans-unit id="_msg293">
         <source xml:space="preserve">scenery-version-description-text</source>
-        <target xml:space="preserve">Scenery version 2.0 is available for the whole world and works well for lower powered systems. Scenery version 3.0 is currently under development, but is only available available for limited areas. It is more detailed and performs better on high powered systems.</target>
+        <target xml:space="preserve">Scenery version 2.0 is available for the whole world and works well for lower powered systems. Scenery version 3.0 is currently under development, but is only available for limited areas. It is more detailed and performs better on high powered systems.</target>
         <context-group purpose="location"><context context-type="linenumber">535</context></context-group>
       </trans-unit>
       <trans-unit id="_msg294">

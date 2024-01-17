@@ -47,7 +47,19 @@
     </button>
   </group>
 
-  <hrule/>
+  <group>
+    <layout>hbox</layout>
+    <hrule>
+      <stretch>true</stretch>
+    </hrule>
+    <text>
+      <label>Timetable-Based AI Traffic</label>
+      <halign>center</halign>
+    </text>
+    <hrule>
+      <stretch>true</stretch>
+    </hrule>
+  </group>
 
   <group>
     <layout>vbox</layout>
@@ -110,7 +122,19 @@
     </group>
   </group>
 
-  <hrule />
+  <group>
+    <layout>hbox</layout>
+    <hrule>
+      <stretch>true</stretch>
+    </hrule>
+    <text>
+      <label>Scenarios</label>
+      <halign>center</halign>
+    </text>
+    <hrule>
+      <stretch>true</stretch>
+    </hrule>
+  </group>
 
   <group>
     <layout>hbox</layout>
@@ -219,7 +243,7 @@
       for(i=0;i<size(scenarios);i += 1) {
         processScenario( i, col, scenarios[i]);
         coli += 1;
-        if (coli > colsz){
+        if (coli >= colsz){
           coli = 0;
           col += 1;
         }

@@ -248,12 +248,12 @@ var Tooltip = {
 
   showMessage: func(timeout = nil, node = nil)
   {
-    if(var y = me._haveNode(node, 'y') != nil ) {
+    if((var y = me._haveNode(node, 'y')) != nil ) {
       me.setInt("y", y);
     } else {
       me.setInt("y", getprop('/sim/startup/ysize') * 0.2);
     }
-    if(var x = me._haveNode(node, 'x')  != nil) {
+    if((var x = me._haveNode(node, 'x')) != nil) {
       me.setInt("x", x);
     } else {
       var screenW = getprop('/sim/startup/xsize');

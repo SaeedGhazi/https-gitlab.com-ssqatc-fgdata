@@ -683,9 +683,9 @@
         <target xml:space="preserve">wygładzanie krawędzi</target>
         <context-group purpose="location"><context context-type="linenumber">496</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg127">
+      <trans-unit id="_msg127" approved="yes">
         <source xml:space="preserve">scenery v3.0</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">sceneria v3.0</target>
         <context-group purpose="location"><context context-type="linenumber">497</context></context-group>
       </trans-unit>
       <trans-unit id="_msg128" approved="yes">
@@ -713,14 +713,14 @@
         <target xml:space="preserve">Opcja ta konwertuje obrazy używane podczas wyświetlania grafiki do bardziej zoptymalizowanego formatu. Przyśpiesza to wczytywanie się symulatora i zmniejsza zużycie pamięci, kosztem większego zużycia miejsca na dysku. Wydłuży czas podczas pierwszego uruchomienia, gdy obrazy są konwertowane, ale kolejne uruchomienia będą szybsze i będą zużywały mniej pamięci.</target>
         <context-group purpose="location"><context context-type="linenumber">523</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg133">
+      <trans-unit id="_msg133" approved="yes">
         <source xml:space="preserve">Scenery version</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Wersja scenerii</target>
         <context-group purpose="location"><context context-type="linenumber">534</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg134">
+      <trans-unit id="_msg134" approved="yes">
         <source xml:space="preserve">Scenery version 2.0 is available for the whole world and works well for lower powered systems. Scenery version 3.0 is currently under development, but is only available for limited areas. It is more detailed and performs better on high powered systems.</source>
-        <target xml:space="preserve"></target>
+        <target xml:space="preserve">Sceneria w wersji 2.0 jest dostępna dla całego świata i działa dobrze dla słabszych systemów. Sceneria w wersji 3.0 jest obecnie w fazie rozwoju i jest dostępna tylko dla ograniczonych obszarów. Jest bardziej szczegółowa i działa lepiej na wydajnych systemach.</target>
         <context-group purpose="location"><context context-type="linenumber">535</context></context-group>
       </trans-unit>
       <trans-unit id="_msg135" approved="yes">

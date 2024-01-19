@@ -15,11 +15,12 @@ uniform int normalmap_enabled;
 uniform mat4 osg_ModelViewMatrix;
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat3 osg_NormalMatrix;
+uniform mat4 fg_TextureMatrix;
 
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
-    vs_out.texcoord = multitexcoord0.st;
+    vs_out.texcoord = vec2(fg_TextureMatrix * multitexcoord0);
     vs_out.vertex_normal = osg_NormalMatrix * normal;
     vs_out.view_vector = (osg_ModelViewMatrix * pos).xyz;
 }

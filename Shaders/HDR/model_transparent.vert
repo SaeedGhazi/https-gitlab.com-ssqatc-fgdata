@@ -21,6 +21,7 @@ uniform vec4 material_diffuse;
 uniform mat4 osg_ModelViewMatrix;
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat3 osg_NormalMatrix;
+uniform mat4 fg_TextureMatrix;
 
 // aerial_perspective.glsl
 vec4 get_aerial_perspective(vec2 coord, float depth);
@@ -30,7 +31,7 @@ void main()
     gl_Position = osg_ModelViewProjectionMatrix * pos;
     vN = osg_NormalMatrix * normal;
     vP = (osg_ModelViewMatrix * pos).xyz;
-    texcoord = multitexcoord0.st;
+    texcoord = vec2(fg_TextureMatrix * multitexcoord0);
 
     // Legacy material handling
     if (color_mode == MODE_DIFFUSE)

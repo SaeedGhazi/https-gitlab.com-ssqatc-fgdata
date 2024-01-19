@@ -16,6 +16,7 @@ uniform bool flip_vertically;
 uniform mat4 osg_ModelViewMatrix;
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat3 osg_NormalMatrix;
+uniform mat4 fg_TextureMatrix;
 
 // aerial_perspective.glsl
 vec4 get_aerial_perspective(vec2 coord, float depth);
@@ -23,7 +24,7 @@ vec4 get_aerial_perspective(vec2 coord, float depth);
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
-    vs_out.texcoord = multitexcoord0.st;
+    vs_out.texcoord = vec2(fg_TextureMatrix * multitexcoord0);
     if (flip_vertically)
         vs_out.texcoord.y = 1.0 - vs_out.texcoord.y;
 

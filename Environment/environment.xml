@@ -119,10 +119,6 @@
       <name type="string">Fair weather</name>
       <metar type="string">XXXX 012345Z 15003KT 12SM SCT041 FEW200 20/08 Q1015 NOSIG</metar>
       <description type="string">A lovely day for trip to your favorite 100$ hamburger airfield</description>
-      <local-weather>
-        <tile-type>High-pressure-core</tile-type>
-        <tile-management>realistic weather</tile-management>        
-      </local-weather>
     </scenario>
     <scenario>
         <id type="string">thunderstorm</id>

@@ -18,7 +18,7 @@ uniform vec4 fg_Viewport;
 const vec3  TEXT_BASE_COLOR = vec3(1.0);
 const float TEXT_METALLIC   = 0.0;
 const float TEXT_ROUGHNESS  = 1.0;
-const vec3  TEXT_EMISSION   = vec3(1.0);
+const vec3  TEXT_EMISSION   = vec3(0.0);
 
 // color.glsl
 vec3 eotf_inverse_sRGB(vec3 srgb);

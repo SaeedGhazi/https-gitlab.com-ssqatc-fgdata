@@ -1,4 +1,3 @@
-// -*-C++-*-
 #version 330 core
 
 #define PAINT_TYPE_COLOR            0x1B00

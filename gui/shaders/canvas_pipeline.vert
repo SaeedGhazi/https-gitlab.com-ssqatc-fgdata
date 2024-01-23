@@ -1,4 +1,3 @@
-// -*-C++-*-
 #version 330 core
 
 out vec2 texImageCoord;
@@ -13,7 +12,7 @@ uniform mat3 paintInverted;
 
 void main()
 {
-    gl_Position = vec4(pos, 0, 1);
+    gl_Position = sh_Ortho * sh_Model * vec4(pos, 0.0, 1.0);
     texImageCoord = textureUV;
-    paintCoord = (paintInverted * vec3(pos, 1)).xy;
+    paintCoord = (paintInverted * vec3(pos, 1.0)).xy;
 }

@@ -471,6 +471,7 @@
       <name>checklist-combo</name>
       <property>/sim/gui/dialogs/checklist/selected-checklist</property>
       <editable>false</editable>
+      <live>true</live>
       <pref-width>180</pref-width>
       <halign>fill</halign>
       <binding>

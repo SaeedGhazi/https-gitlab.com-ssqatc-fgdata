@@ -12,10 +12,17 @@ uniform vec2 fg_BufferSize;
 uniform float bloom_strength;
 uniform bool debug_ev100;
 
-// aces.glsl
-vec3 aces_fitted(vec3 color);
+const float NOISE_GRANULARITY = 0.5 / 255.0;
+
 // color.glsl
 vec3 eotf_sRGB(vec3 linear_srgb);
+// aces.glsl
+vec3 aces_fitted(vec3 color);
+// redout.glsl
+vec2 redout_distort(vec2 uv);
+vec3 redout_apply(vec3 color, vec2 uv);
+// noise.glsl
+float rand_2d(vec2 co);
 
 vec3 get_debug_color(float value)
 {
@@ -42,30 +49,28 @@ vec3 get_ev100_color(vec3 hdr)
     return get_debug_color(norm);
 }
 
-float rand2D(vec2 co)
-{
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
 void main()
 {
-    vec3 hdr_color = texture(hdr_tex, texcoord).rgb;
     if (debug_ev100) {
-        fragColor = vec4(get_ev100_color(hdr_color), 1.0);
+        fragColor = vec4(get_ev100_color(texture(hdr_tex, texcoord).rgb), 1.0);
         return;
     }
 
-    // Apply bloom
-    vec3 bloom = texture(bloom_tex, texcoord).rgb;
-    hdr_color = mix(hdr_color, bloom, bloom_strength);
+    // Blackout/redout applies a small distortion effect
+    vec2 uv = redout_distort(texcoord);
 
+    vec3 hdr_color = texture(hdr_tex, uv).rgb;
+    // Apply bloom
+    vec3 bloom = texture(bloom_tex, uv).rgb;
+    hdr_color = mix(hdr_color, bloom, bloom_strength);
     // Tonemap
     vec3 color = aces_fitted(hdr_color);
+    // Apply blackout/redout
+    color = redout_apply(color, uv);
     // Gamma correction
     color = eotf_sRGB(color);
-
     // Dithering
-    color += mix(-0.5/255.0, 0.5/255.0, rand2D(texcoord));
+    color += mix(-NOISE_GRANULARITY, NOISE_GRANULARITY, rand_2d(texcoord));
 
     fragColor = vec4(color, 1.0);
 }

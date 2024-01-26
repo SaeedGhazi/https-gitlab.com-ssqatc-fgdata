@@ -4,14 +4,21 @@
   <parameters>
     <bloom-strength><use>/sim/rendering/hdr/bloom/strength</use></bloom-strength>
     <debug-ev100><use>/sim/rendering/hdr/debug/display-ev100</use></debug-ev100>
+    <!-- redout.glsl -->
+    <alpha><use>/sim/rendering/redout/alpha</use></alpha>
+    <red><use>/sim/rendering/redout/red</use></red>
+    <max-distorsion-amount type="float">0.2</max-distorsion-amount>
   </parameters>
   <technique n="1">
     <pass>
       <program>
         <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/postprocess.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/aces.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/aces.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/redout.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/noise.glsl</fragment-shader>
       </program>
       <uniform>
         <name>hdr_tex</name>
@@ -32,6 +39,22 @@
         <name>debug_ev100</name>
         <type>bool</type>
         <value><use>debug-ev100</use></value>
+      </uniform>
+      <!-- redout.glsl -->
+      <uniform>
+        <name>alpha</name>
+        <type>float</type>
+        <value><use>alpha</use></value>
+      </uniform>
+      <uniform>
+        <name>red</name>
+        <type>bool</type>
+        <value><use>red</use></value>
+      </uniform>
+      <uniform>
+        <name>max_distorsion_amount</name>
+        <type>float</type>
+        <value><use>max-distorsion-amount</use></value>
       </uniform>
     </pass>
   </technique>

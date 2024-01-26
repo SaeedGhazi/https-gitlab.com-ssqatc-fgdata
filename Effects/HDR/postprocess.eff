@@ -8,6 +8,8 @@
     <alpha><use>/sim/rendering/redout/alpha</use></alpha>
     <red><use>/sim/rendering/redout/red</use></red>
     <max-distorsion-amount type="float">0.2</max-distorsion-amount>
+    <!-- night_vision.glsl -->
+    <night-vision-enabled><use>/sim/rendering/hdr/night-vision/enabled</use></night-vision-enabled>
   </parameters>
   <technique n="1">
     <pass>
@@ -17,8 +19,9 @@
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/aces.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/redout.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/noise.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/redout.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/night_vision.glsl</fragment-shader>
       </program>
       <uniform>
         <name>hdr_tex</name>
@@ -55,6 +58,12 @@
         <name>max_distorsion_amount</name>
         <type>float</type>
         <value><use>max-distorsion-amount</use></value>
+      </uniform>
+      <!-- night_vision.glsl -->
+      <uniform>
+        <name>night_vision_enabled</name>
+        <type>bool</type>
+        <value><use>night-vision-enabled</use></value>
       </uniform>
     </pass>
   </technique>

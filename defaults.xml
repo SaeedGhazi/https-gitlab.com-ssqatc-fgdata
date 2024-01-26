@@ -569,6 +569,9 @@ Started September 2000 by David Megginson, david@megginson.com
           <sss-max-distance type="float">0.2</sss-max-distance>
           <sss-depth-bias type="float">0.00001</sss-depth-bias>
         </shadows>
+        <night-vision>
+          <enabled type="bool">false</enabled>
+        </night-vision>
         <debug>
           <display-ev100 type="bool">false</display-ev100>
           <show-gbuffer type="bool">false</show-gbuffer>

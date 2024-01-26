@@ -18,11 +18,13 @@ const float NOISE_GRANULARITY = 0.5 / 255.0;
 vec3 eotf_sRGB(vec3 linear_srgb);
 // aces.glsl
 vec3 aces_fitted(vec3 color);
+// noise.glsl
+float rand_2d(vec2 co);
 // redout.glsl
 vec2 redout_distort(vec2 uv);
 vec3 redout_apply(vec3 color, vec2 uv);
-// noise.glsl
-float rand_2d(vec2 co);
+// night-vision.glsl
+vec3 night_vision_apply(vec3 color, vec2 uv);
 
 vec3 get_debug_color(float value)
 {
@@ -65,6 +67,8 @@ void main()
     hdr_color = mix(hdr_color, bloom, bloom_strength);
     // Tonemap
     vec3 color = aces_fitted(hdr_color);
+    // Apply night vision filter
+    color = night_vision_apply(color, uv);
     // Apply blackout/redout
     color = redout_apply(color, uv);
     // Gamma correction

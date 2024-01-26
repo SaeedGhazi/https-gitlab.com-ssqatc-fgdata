@@ -313,7 +313,7 @@ gui.Menu = {
                 }
                 var menu = gui.Menu.new();
                 var item = gui.MenuItem.new(me._root, me.style, {text: text, cb: nil, shortcut: nil, icon: nil, enabled: enabled});
-                menu._parent_item = item;
+                item._setParentMenu(me);
                 item.setMenu(menu);
                 me.addItem(item);
                 return menu;
@@ -405,7 +405,7 @@ gui.Menu = {
                         if (
                                 force or
                                 me._parent_item._parent_menu == nil or
-                                me._parent_item._parent_menu._view._root._node.getValue("id") != "menu-bar" or
+                                #me._parent_item._parent_menu._view._root._node.getValue("id") != "menu-bar" or
                                 me._parent_item._mouseOver == 0
                         ) {
                                 me._parent_item._hovered = 0;

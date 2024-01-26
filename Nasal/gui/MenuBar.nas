@@ -16,7 +16,11 @@ var _addItem = func(parent, itemGhost) {
 var _addMenu = func(parent, menuGhost) {
 	var menu = parent.createMenu(menuGhost.label);
 	foreach (var item; menuGhost.items) {
-		_addItem(menu, item);
+		if (var submenu = item.submenu) {
+			_addMenu(menu, submenu);
+		} else {
+			_addItem(menu, item);
+		}
 	}
 }
 

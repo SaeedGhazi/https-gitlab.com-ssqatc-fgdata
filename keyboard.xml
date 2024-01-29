@@ -173,6 +173,14 @@ top down before the key bindings are parsed.
    <property>/controls/flight/rudder</property>
    <step type="double">0.05</step>
   </binding>
+
+  <!-- Ctrl-M generates Enter, but we want to show the map in that case -->
+  <mod-ctrl>
+   <binding>
+    <command>dialog-show</command>
+    <dialog-name>map</dialog-name>
+   </binding>
+  </mod-ctrl>
  </key>
 
  <key n="14">

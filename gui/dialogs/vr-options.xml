@@ -71,7 +71,7 @@
 
     <text>
       <halign>left</halign>
-      <label>OpenXR Runtime: MMMMMMMMMMMMMMMMMMMMMMMM</label>
+      <label>OpenXR Runtime: MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
       <format>OpenXR Runtime: %s</format>
       <property>/sim/vr/openxr/runtime/name</property>
       <live>true</live>
@@ -80,7 +80,7 @@
 
     <text>
       <halign>left</halign>
-      <label>OpenXR System: MMMMMMMMMMMMMMMMMMMMMMMM</label>
+      <label>OpenXR System: MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
       <format>OpenXR System: %s</format>
       <property>/sim/vr/openxr/system/name</property>
       <live>true</live>
@@ -89,11 +89,19 @@
 
     <text>
       <halign>left</halign>
-      <label>VR State: MMMMMMMMMMMMMMMMMMMMMMMM</label>
+      <label>VR State: MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</label>
       <format>VR State: %s</format>
       <property>/sim/vr/state-string</property>
       <live>true</live>
       <enable><property>/sim/vr/present</property></enable>
+    </text>
+    <text>
+      <halign>left</halign>
+      <label></label>
+    </text>
+    <text>
+      <halign>left</halign>
+      <label></label>
     </text>
   </group>
 

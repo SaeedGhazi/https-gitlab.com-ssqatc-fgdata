@@ -97,11 +97,10 @@
   <technique n="107">
     <scheme>hdr-geometry</scheme>
     <pass>
-      <!-- Reverse floating point depth buffer -->
       <depth>
-        <function>gequal</function>
-        <near>1.0</near>
-        <far>0.0</far>
+        <enabled>true</enabled>
+        <function>less</function>
+        <write-mask>true</write-mask>
       </depth>
       <stencil>
         <function>always</function>
@@ -121,7 +120,9 @@
       <cull-face>back</cull-face>
       <program>
         <vertex-shader>Shaders/HDR/terrain_lfeat.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/terrain_lfeat.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>

@@ -307,11 +307,9 @@
   <technique n="129">
     <scheme>hdr-forward</scheme>
     <pass>
-      <!-- Reverse floating point depth buffer -->
       <depth>
-        <function>greater</function>
-        <near>1.0</near>
-        <far>0.0</far>
+        <enabled>true</enabled>
+        <function>less</function>
         <write-mask>false</write-mask>
       </depth>
       <cull-face>back</cull-face>
@@ -354,6 +352,8 @@
     <scheme>hdr-envmap</scheme>
     <pass>
       <depth>
+        <enabled>true</enabled>
+        <function>less</function>
         <write-mask>false</write-mask>
       </depth>
       <cull-face>back</cull-face>

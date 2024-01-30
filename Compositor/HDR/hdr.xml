@@ -15,7 +15,7 @@
       : G-Buffer 1 (RGBA8)     :             Base Color           : Metallic    :
       : G-Buffer 2 (RGBA8)     :     Material specific params     : Occlusion   :
       : G-Buffer 3 (R11G11B10) :             Emission             :      -      :
-      : Depth/Stencil          :       DEPTH32F_STENCIL8 (Reversed depth)       :
+      : Depth/Stencil          :      DEPTH24_STENCIL8 (Logarithmic depth)      :
       :........................:............:.........:...........:.............:
 
       Notes:
@@ -64,7 +64,7 @@
     <type>2d</type>
     <width>screen</width>
     <height>screen</height>
-    <format>depth32f-stencil8</format>
+    <format>depth24-stencil8</format>
   </buffer>
 
   <!-- HDR shading result -->
@@ -632,7 +632,7 @@
     <type>scene</type>
     <effect-scheme>hdr-geometry</effect-scheme>
     <clear-mask>depth stencil</clear-mask>
-    <clear-depth>0.0</clear-depth>
+    <clear-depth>1.0</clear-depth>
     <cull-mask>0xfffff7ff</cull-mask>
     <clustered-shading>
       <tile-size>128</tile-size>

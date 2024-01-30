@@ -2,11 +2,14 @@
 
 layout(location = 0) out vec4 fragColor;
 
-in vec3 vN;
-in vec3 vP;
-in vec2 texcoord;
-in vec4 material_color;
-in vec4 ap_color;
+in VS_OUT {
+    float flogz;
+    vec2 texcoord;
+    vec3 vertex_normal;
+    vec3 view_vector;
+    vec4 material_color;
+    vec4 ap_color;
+} fs_in;
 
 uniform sampler2D color_tex;
 
@@ -23,20 +26,23 @@ vec3 eval_lights_transparent(
     vec3 base_color, float metallic, float roughness, float occlusion,
     vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv, vec4 ap,
     mat4 view_matrix_inverse);
+// logarithmic_depth.glsl
+float logdepth_encode(float z);
 
 void main()
 {
-    vec4 texel = texture(color_tex, texcoord);
-    vec3 base_color = eotf_inverse_sRGB(texel.rgb) * material_color.rgb;
-    float alpha = material_color.a * texel.a;
+    vec4 texel = texture(color_tex, fs_in.texcoord);
+    vec3 base_color = eotf_inverse_sRGB(texel.rgb) * fs_in.material_color.rgb;
+    float alpha = fs_in.material_color.a * texel.a;
 
-    vec3 N = normalize(vN);
-    vec3 V = normalize(-vP);
+    vec3 N = normalize(fs_in.vertex_normal);
+    vec3 V = normalize(-fs_in.view_vector);
     vec2 uv = (gl_FragCoord.xy - fg_Viewport.xy) / fg_Viewport.zw;
 
     vec3 color = eval_lights_transparent(
         base_color, TRANSPARENT_METALLIC, TRANSPARENT_ROUGHNESS, 1.0, vec3(0.0),
-        vP, N, V, uv, ap_color, osg_ViewMatrixInverse);
+        fs_in.view_vector, N, V, uv, fs_in.ap_color, osg_ViewMatrixInverse);
 
     fragColor = vec4(color, alpha);
+    gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

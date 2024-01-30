@@ -1,6 +1,7 @@
 #version 330 core
 
 in VS_OUT {
+    float flogz;
     vec2 texcoord;
     vec3 vertex_normal;
     vec3 view_vector;
@@ -20,6 +21,8 @@ void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
 vec3 eotf_inverse_sRGB(vec3 srgb);
 // normalmap.glsl
 vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord);
+// logarithmic_depth.glsl
+float logdepth_encode(float z);
 
 void main()
 {
@@ -32,4 +35,5 @@ void main()
     }
 
     gbuffer_pack(N, color, metallic, roughness, 1.0, vec3(0.0), 3u);
+    gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

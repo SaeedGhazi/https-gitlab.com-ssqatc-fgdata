@@ -3,13 +3,20 @@
 layout(location = 0) in vec4 pos;
 layout(location = 1) in vec3 normal;
 
-out vec3 vertex_normal;
+out VS_OUT {
+    float flogz;
+    vec3 vertex_normal;
+} vs_out;
 
 uniform mat4 osg_ModelViewProjectionMatrix;
 uniform mat3 osg_NormalMatrix;
 
+// logarithmic_depth.glsl
+float logdepth_prepare_vs_depth(float z);
+
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
-    vertex_normal = osg_NormalMatrix * normal;
+    vs_out.flogz = logdepth_prepare_vs_depth(gl_Position.w);
+    vs_out.vertex_normal = osg_NormalMatrix * normal;
 }

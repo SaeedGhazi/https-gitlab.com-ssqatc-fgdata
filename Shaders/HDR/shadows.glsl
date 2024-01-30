@@ -27,6 +27,8 @@ const vec2 UV_FACTOR = vec2(0.5, 0.5);
 // math.glsl
 float saturate(float x);
 float interleaved_gradient_noise(vec2 uv);
+// logarithmic_depth.glsl
+float logdepth_decode_normalized(float z);
 
 float sample_shadow_map(vec2 coord, vec2 offset, float depth)
 {
@@ -164,8 +166,9 @@ float get_contact_shadow(vec3 P, vec3 L, mat4 projection_matrix)
         float t = (float(i) + dither) * dt;
         vec3 x_t = ray_start + ray_dir * t;
 
-        // Sample the depth buffer. It's reversed, so invert it
-        float z = 1.0 - texture(depth_tex, x_t.xy).r;
+        // Sample the depth buffer
+        float z = texture(depth_tex, x_t.xy).r;
+        z = logdepth_decode_normalized(z);
         // Depth difference between the current ray sample depth and the actual
         // camera depth contained in the depth buffer.
         float dz = x_t.z - z - sss_depth_bias;

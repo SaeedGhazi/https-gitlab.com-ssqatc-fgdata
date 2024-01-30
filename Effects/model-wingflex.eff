@@ -1412,12 +1412,11 @@
     <technique n="108">
         <scheme>hdr-geometry</scheme>
         <pass>
-            <!-- Reverse floating point depth buffer -->
-            <depth>
-				<function>gequal</function>
-				<near>1.0</near>
-				<far>0.0</far>
-            </depth>
+			<depth>
+				<enabled>true</enabled>
+				<function>less</function>
+				<write-mask>true</write-mask>
+			</depth>
             <stencil>
 				<function>always</function>
 				<value>8</value>
@@ -1442,7 +1441,9 @@
             <cull-face>back</cull-face>
             <program>
 				<vertex-shader>Shaders/HDR/model_combined.vert</vertex-shader>
+				<vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
 				<fragment-shader>Shaders/HDR/model_combined.frag</fragment-shader>
+				<fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
 				<fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
 				<fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
 				<fragment-shader>Shaders/HDR/normalmap.glsl</fragment-shader>

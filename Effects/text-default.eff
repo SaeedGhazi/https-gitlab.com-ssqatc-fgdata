@@ -60,11 +60,9 @@
   <technique n="129">
     <scheme>hdr-forward</scheme>
     <pass>
-      <!-- Reverse floating point depth buffer -->
       <depth>
-        <function>gequal</function>
-        <near>1.0</near>
-        <far>0.0</far>
+        <enabled>true</enabled>
+        <function>less</function>
         <write-mask>false</write-mask>
       </depth>
       <blend>1</blend>
@@ -72,10 +70,12 @@
       <cull-face>back</cull-face>
       <program>
         <vertex-shader>Shaders/HDR/text.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
         <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/text.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/shading_transparent.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/surface.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/ibl.glsl</fragment-shader>

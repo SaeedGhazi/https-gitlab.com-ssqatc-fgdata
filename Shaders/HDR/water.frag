@@ -4,6 +4,7 @@ layout(location = 0) out vec4 out_gbuffer0;
 layout(location = 1) out vec4 out_gbuffer1;
 
 in VS_OUT {
+    float flogz;
     vec2 water_texcoord;
     vec2 topo_texcoord;
     vec3 vertex_normal;
@@ -29,6 +30,8 @@ vec2 encode_normal(vec3 n);
 vec3 eotf_inverse_sRGB(vec3 srgb);
 // normalmap.glsl
 mat3 cotangent_frame(vec3 N, vec3 p, vec2 uv);
+// logarithmic_depth.glsl
+float logdepth_encode(float z);
 
 void get_rotation_matrix(float angle, out mat2 rotmat)
 {
@@ -63,4 +66,6 @@ void main()
 
     out_gbuffer0.rg  = encode_normal(N);
     out_gbuffer1.rgb = floor_color;
+
+    gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

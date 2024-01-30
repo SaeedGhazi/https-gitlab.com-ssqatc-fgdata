@@ -52,11 +52,9 @@ It's kept for backwards compatibility and should not be used on new projects.
   <technique n="127">
     <scheme>hdr-forward</scheme>
     <pass>
-      <!-- Reverse floating point depth buffer -->
       <depth>
-        <function>gequal</function>
-        <near>1.0</near>
-        <far>0.0</far>
+        <enabled>true</enabled>
+        <function>less</function>
         <write-mask>false</write-mask>
       </depth>
       <texture-unit>
@@ -83,10 +81,12 @@ It's kept for backwards compatibility and should not be used on new projects.
       <cull-face><use>cull-face</use></cull-face>
       <program>
         <vertex-shader>Shaders/HDR/model_transparent.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
         <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/model_transparent.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/shading_transparent.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/surface.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/ibl.glsl</fragment-shader>

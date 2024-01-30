@@ -37,9 +37,9 @@ void main()
 {
     float depth = textureLod(depth_tex, texcoord, 0.0).r;
     // Ignore the background
-    if (depth == 0.0) {
-        fragColor = 0.0;
-        discard;
+    if (depth == 1.0) {
+        fragColor = 1.0;
+        return;
     }
     // Slightly push the depth towards the camera to avoid imprecision artifacts
     depth = clamp(depth * 1.00001, 0.0, 1.0);
@@ -64,7 +64,7 @@ void main()
     // 1 / tan(fovy / 2), so we can use that directly.
     // z_distance is the distance from the camera to the fragment, which is
     // just the positive z component of the view space fragment position.
-	float radius_pixels = world_radius * (fg_ProjectionMatrix[1][1] / abs(P.z))
+    float radius_pixels = world_radius * (fg_ProjectionMatrix[1][1] / abs(P.z))
         * fg_Viewport.w * 0.5;
 
     float visibility = 0.0;
@@ -95,7 +95,7 @@ void main()
 
             vec2 s_texcoord1 = texcoord - s_offset;
             float s_depth1 = textureLod(depth_tex, s_texcoord1, 0.0).r;
-            if (s_depth1 == 0.0) {
+            if (s_depth1 == 1.0) {
                 // Skip background
                 continue;
             }
@@ -103,7 +103,7 @@ void main()
 
             vec2 s_texcoord2 = texcoord + s_offset;
             float s_depth2 = textureLod(depth_tex, s_texcoord2, 0.0).r;
-            if (s_depth2 == 0.0) {
+            if (s_depth2 == 1.0) {
                 // Skip background
                 continue;
             }

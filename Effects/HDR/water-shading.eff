@@ -18,6 +18,7 @@
         <fragment-shader>Shaders/HDR/water_shading.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/pos_from_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/sun.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>

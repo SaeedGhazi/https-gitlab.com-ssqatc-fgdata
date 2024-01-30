@@ -288,11 +288,9 @@
   <technique n="129">
     <scheme>hdr-forward</scheme>
     <pass>
-      <!-- Reverse floating point depth buffer -->
       <depth>
-        <function>gequal</function>
-        <near>1.0</near>
-        <far>0.0</far>
+        <enabled>true</enabled>
+        <function>less</function>
         <write-mask>false</write-mask>
       </depth>
       <texture-unit>
@@ -307,11 +305,13 @@
       <program>
         <vertex-shader>Shaders/HDR/cloud_static.vert</vertex-shader>
         <vertex-shader>Shaders/HDR/cloud_static_common.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
         <vertex-shader>Shaders/HDR/sun.glsl</vertex-shader>
         <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
         <vertex-shader>Shaders/HDR/atmos_spectral.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/3dcloud.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/3dcloud_common.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
       </program>
@@ -350,6 +350,8 @@
     <scheme>hdr-envmap</scheme>
     <pass>
       <depth>
+        <enabled>true</enabled>
+        <function>less</function>
         <write-mask>false</write-mask>
       </depth>
       <texture-unit>

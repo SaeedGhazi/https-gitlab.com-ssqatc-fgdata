@@ -7,6 +7,7 @@ layout(location = 3) in vec4 multitexcoord0;
 layout(location = 12) in float fogcoord;
 
 out VS_OUT {
+    float flogz;
     vec2 texcoord;
     vec3 vertex_normal;
     float autumn_flag;
@@ -25,6 +26,8 @@ uniform mat4 osg_ModelViewProjectionMatrix;
 
 // noise.glsl
 float voronoi_noise_2d(vec2 coord, float wavelength, float xrand, float yrand);
+// logarithmic_depth.glsl
+float logdepth_prepare_vs_depth(float z);
 
 void main()
 {
@@ -67,6 +70,7 @@ void main()
 
     position = position + vertex_color.xyz;
     gl_Position = osg_ModelViewProjectionMatrix * vec4(position, 1.0);
+    vs_out.flogz = logdepth_prepare_vs_depth(gl_Position.w);
 
     vec3 view_vector = (osg_ModelViewMatrix * vec4(position, 1.0)).xyz;
     vs_out.vertex_normal = normalize(-view_vector);

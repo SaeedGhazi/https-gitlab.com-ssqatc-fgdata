@@ -3,6 +3,7 @@
 layout(location = 0) out vec4 fragColor;
 
 in VS_OUT {
+    float flogz;
     vec2 texcoord;
     vec3 vertex_normal;
     vec3 view_vector;
@@ -32,6 +33,8 @@ vec3 eval_lights_transparent(
     mat4 view_matrix_inverse);
 // normalmap.glsl
 vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord);
+// logarithmic_depth.glsl
+float logdepth_encode(float z);
 
 void main()
 {
@@ -58,4 +61,5 @@ void main()
         fs_in.view_vector, N, V, uv, fs_in.ap_color, osg_ViewMatrixInverse);
 
     fragColor = vec4(color, base_color.a);
+    gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

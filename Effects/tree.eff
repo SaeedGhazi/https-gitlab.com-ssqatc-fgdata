@@ -1880,11 +1880,10 @@
       <property>/sim/rendering/random-vegetation</property>
     </predicate>
     <pass>
-      <!-- Reverse floating point depth buffer -->
       <depth>
-        <function>gequal</function>
-        <near>1.0</near>
-        <far>0.0</far>
+        <enabled>true</enabled>
+        <function>less</function>
+        <write-mask>true</write-mask>
       </depth>
       <stencil>
         <function>always</function>
@@ -1905,7 +1904,9 @@
       <program>
         <vertex-shader>Shaders/HDR/tree.vert</vertex-shader>
         <vertex-shader>Shaders/HDR/noise.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/tree.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>

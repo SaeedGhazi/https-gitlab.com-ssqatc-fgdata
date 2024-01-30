@@ -61,6 +61,7 @@
         <fragment-shader>Shaders/HDR/shading_opaque.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/gbuffer_unpack.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/pos_from_depth.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/shading_opaque.glsl</fragment-shader>

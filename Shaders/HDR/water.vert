@@ -4,6 +4,7 @@ layout(location = 0) in vec4 pos;
 layout(location = 3) in vec4 multiTexCoord0;
 
 out VS_OUT {
+    float flogz;
     vec2 water_texcoord;
     vec2 topo_texcoord;
     vec3 vertex_normal;
@@ -21,6 +22,9 @@ const float a = 6378137.0;                  //float a = equRad;
 const float squash = 0.9966471893352525192801545;
 const float latAdjust = 0.9999074159800018; //geotiff source for the depth map
 const float lonAdjust = 0.9999537058469516; //actual extents: +-180.008333333333326/+-90.008333333333340
+
+// logarithmic_depth.glsl
+float logdepth_prepare_vs_depth(float z);
 
 void get_rotation_matrix(float angle, out mat4 rotmat)
 {
@@ -71,6 +75,7 @@ vec2 get_topo_coords(vec3 rawPos)
 void main()
 {
     gl_Position = osg_ModelViewProjectionMatrix * pos;
+    vs_out.flogz = logdepth_prepare_vs_depth(gl_Position.w);
     vs_out.water_texcoord = multiTexCoord0.st;
     vs_out.vertex_normal = osg_NormalMatrix * vec3(0.0, 0.0, 1.0);
     vs_out.view_vector = (osg_ModelViewMatrix * pos).xyz;

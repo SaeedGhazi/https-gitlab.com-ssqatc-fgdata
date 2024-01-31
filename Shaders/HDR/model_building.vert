@@ -11,6 +11,7 @@ layout(location = 10) in vec3 attrib1;          // Generic packed attributes
 layout(location = 11) in vec3 attrib2;
 
 out VS_OUT {
+    float flogz;
     vec2 texcoord;
     vec3 vertex_normal;
     vec3 view_vector;
@@ -22,6 +23,9 @@ uniform mat3 osg_NormalMatrix;
 
 const float c_precision = 128.0;
 const float c_precisionp1 = c_precision + 1.0;
+
+// logarithmic_depth.glsl
+float logdepth_prepare_vs_depth(float z);
 
 vec3 float2vec(float value)
 {
@@ -63,6 +67,7 @@ void main()
     position = position + instancePosition.xyz;
 
     gl_Position = osg_ModelViewProjectionMatrix * vec4(position, 1.0);
+    vs_out.flogz = logdepth_prepare_vs_depth(gl_Position.w);
 
     // Texture coordinates are stored as:
     // - a separate offset (x0, y0) for the wall (wtex0x, wtex0y),

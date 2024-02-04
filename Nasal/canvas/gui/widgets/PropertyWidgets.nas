@@ -174,14 +174,19 @@ gui.widgets.PropertyList = {
 
 		m.parents = [gui.widgets.PropertyList] ~ m.parents;
 		
-		if (str(m.findItemByData(m._node.getValue()))) {
-			m.setItemSelection(m.findItemByData("property-value", m._node.getValue()));
+		if (var value = str(m.findItemByData("property-value", m._node.getValue()))) {
+			m.setItemSelection(value);
 		}
 		m.listen("selection-changed", func(e) {
 			if (!m._propertySynced) {
 				return;
 			}
-			m._node.setValue(m.getSelectedItems()[0].getData("property-value"));
+			var selectedItems = m.getSelectedItems();
+			if (size(selectedItems)) {
+				m._node.setValue(selectedItems[0].getData("property-value"));
+			} else {
+				m._node.setValue("");
+			}
 		});
 		m._listener = setlistener(m._node, func(n) {
 			if (!m._propertySynced) {

@@ -12,6 +12,7 @@ gui.widgets.ListItem = {
                 
                 m._data = m._cfg.get("data", {});
                 m._text = m._cfg.get("text", "");
+                m._data["text"] = m._text;
                 m._selected = m._cfg.get("selected", 0);
                 m._list = nil;
 
@@ -127,7 +128,19 @@ gui.widgets.List = {
                 m._scrollLayout.setSpacing(0);
 
                 m.setLayoutMinimumSize([48, 24]);
-                
+
+                if (contains(m._cfg, "items")) {
+                	foreach (var item; cfg["items"]) {
+                		if (isa(item, gui.widgets.ListItem)) {
+                			m.addItem(item);
+                		} elsif (ishash(item)) {
+                			m.createItem(cfg: item);
+                		} else {
+                			m.createItem(text: item);
+                		}
+                	}
+                }
+
                 return m;
         },
         
@@ -147,6 +160,16 @@ gui.widgets.List = {
                 me._trigger("selection-changed");
         },
         
+        filter: func(filter = nil, dataItem = "text") {
+                foreach (var item; me.items()) {
+                        if (filter == nil or find(filter, item.getData(dataItem)) > -1) {
+                                item.setVisible(1);
+                        } else {
+                                item.setVisible(0);
+                        }
+                }
+        },
+        
         # @description Add the given item to this list.
         # @param item canvas.gui.widgets.ListItem required The item to be added to this list.
         # @return canvas.gui.widgets.List This list to support method chaining.
@@ -162,9 +185,11 @@ gui.widgets.List = {
         # @param text str required Text of the new item.
         # @param cfg hash optional Additional configuration of the item.
         # @return canvas.gui.widgets.ListItem The created list item.
-        createItem: func(text, cfg = nil) {
+        createItem: func(text = nil, cfg = nil) {
                 cfg = cfg or {};
-                cfg["text"] = text;
+                if (text) {
+	                cfg["text"] = text;
+	        }
                 var item = gui.widgets.ListItem.new(me._scroll.getContent(), me._style, cfg);
                 me.addItem(item);
                 return item;
@@ -197,6 +222,12 @@ gui.widgets.List = {
                                 }
                         }
                 }
+        },
+        
+        # @description Return a vector containing all items of this list
+        # @return vector[canvas.gui.widgets.ListItem] Vector containing all items of this list
+        getItems: func() {
+                return me._scrollLayout.items();
         },
         
         # @description Find the index of the given item or item with the given text.

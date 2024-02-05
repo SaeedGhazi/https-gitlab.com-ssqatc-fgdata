@@ -528,6 +528,13 @@ int read_landclass_id(in vec2 tile_coord)
   return lc;
 }
 
+// Landclass sources: texture or random 
+ivec2 read_landclass_id_and_water(in vec2 tile_coord)
+{
+  int lc = (int(texture2D(landclass, tile_coord.st).g * 255.0 + 0.5));
+  return ivec2(lc, (texture2D(landclass, tile_coord.st).b > 0.9) ? 1 : 0);
+}
+
 
 int read_landclass_id_non_pixelated(in vec2 tile_coord, 
   const in float landclass_texel_size_m)
@@ -991,8 +998,8 @@ if ( (enable_large_scale_transition_search == 1) &&
 
   for (int i=1;i<=n;i++) {
       vec2 c = c0+float(i)*dir;
-      int v = read_landclass_id(c);
-      if ((v != lc) && (mi[0] > n)) {l[0] = v; mi[0] = i; }
+      ivec2 v = read_landclass_id_and_water(c);
+      if ((v[0] != lc) && (v[1] != 1) && (mi[0] > n)) {l[0] = v[0]; mi[0] = i; }
   }
 
 
@@ -1001,8 +1008,8 @@ if ( (enable_large_scale_transition_search == 1) &&
   for (int i=1;i<=n;i++) 
   {
       vec2 c = c0+float(i)*dir; 
-      int v = read_landclass_id(c);
-      if ((v != lc) && (mi[1] > n)) {l[1] = v; mi[1] = i; }
+      ivec2 v = read_landclass_id_and_water(c);
+      if ((v[0] != lc) && (v[1] != 1) && (mi[1] > n)) {l[1] = v[0]; mi[1] = i; }
   }
 
 
@@ -1011,8 +1018,8 @@ if ( (enable_large_scale_transition_search == 1) &&
   for (int i=1;i<=n;i++) 
   {
       vec2 c = c0+float(i)*dir;  
-      int v = read_landclass_id(c);
-      if ((v != lc) && (mi[2] > n)) {l[2] = v; mi[2] = i; }
+      ivec2 v = read_landclass_id_and_water(c);
+      if ((v[0] != lc) && (v[1] != 1) && (mi[2] > n)) {l[2] = v[0]; mi[2] = i; }
   }
 
 
@@ -1021,8 +1028,8 @@ if ( (enable_large_scale_transition_search == 1) &&
   for (int i=1;i<=n;i++) 
   {
       vec2 c = c0+float(i)*dir;
-      int v = read_landclass_id(c);
-      if ((v != lc) && (mi[3] > n)) {l[3] = v; mi[3] = i; }
+      ivec2 v = read_landclass_id_and_water(c);
+       if ((v[0] != lc) && (v[1] != 1) && (mi[3] > n)) {l[3] = v[0]; mi[3] = i; }
   }
 
 

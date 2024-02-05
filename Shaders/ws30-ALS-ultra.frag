@@ -28,6 +28,15 @@ const int randomise_texture_lookups = 0;
 //   Use built-in water shader.  Use for testing impact of ws30-water.frag
 const int water_shader = 1;
 
+
+// Constants controlling the transition from water
+// to terrain depending on the terrain normal
+//  A normal of 1.0 is completely horizontal.
+const float WATER_START = 0.995;   //  Deeper water.
+const float WATER_BEACH_TO_WATER = 0.99; //  Transition point between the shoreline and the shallow water
+const float WATER_STEEP_TO_BEACH = 0.985; //  The transition point between the shoreline and the land
+const float WATER_STEEP = 0.98; //  Anything with less than this value is considered not water or shoreline
+
 //
 // End of test phase controls
 //////////////////////////////////////////////////////////////////
@@ -102,6 +111,9 @@ uniform vec4 fg_textureLookup2[128];
 uniform vec4 fg_materialParams1[128];
 uniform vec4 fg_materialParams2[128];
 uniform vec4 fg_materialParams3[128];
+
+// Index into the material definition for shorelines
+uniform int fg_shoreAtlasIndex;
 
 // Coastline texture - generated from VPBTechnique
 uniform sampler2D coastline;
@@ -417,7 +429,8 @@ void main()
   // Mix factor of base textures for 2 neighbour landclass(es)
   vec4 mfact;
 
-  bool water = false;
+  bool water_lc = false;
+  bool mix_water_texel = false;
   
   // Partial derivatives of s and t of ground texture coords for this fragment, 
   // with respect to window (screen space) x and y axes.
@@ -428,47 +441,64 @@ void main()
   
   get_landclass_id(tile_coord, dxdy_gc, lc, lc_n, num_unique_neighbors, mfact);
   get_material(lc, ground_tex_coord, dxdy_gc, mat_shininess, mat_ambient, mat_diffuse, mat_specular, dxdy, st);
-  vec4 coast = texture2D(coastline, tile_coord);
   
   if (fg_photoScenery) {
     // The photoscenery orthophotos are stored in the landclass texture
     // and use normalised tile coordinates
     texel = texture(landclass, vec2(tile_coord.s, 1.0 - tile_coord.t));
-    water = (texture(coastline, vec2(tile_coord.s, tile_coord.t)).r > 0.1);
+    water_lc = (texture(coastline, vec2(tile_coord.s, tile_coord.t)).r > 0.1);
 
     // Do not attempt any mixing
     flag = 0;
     mix_flag = 0;
-  } else if (coast.g > 0.1) {
-    texel = lookup_ground_texture_array(0, tile_coord, lc, dxdy);
-    water = texture(landclass, vec2(tile_coord.s, tile_coord.t)).z > 0.9;
   } else {
     // Lookup the base texture texel for this fragment and any neighbors, with mixing
     texel = get_mixed_texel(0, ground_tex_coord, lc, num_unique_neighbors, lc_n, mfact, dxdy_gc);
-    water = texture(landclass, vec2(tile_coord.s, tile_coord.t)).z > 0.9;
+    water_lc = texture(landclass, vec2(tile_coord.s, tile_coord.t)).b > 0.5;
   }
   
   vec4 color = gl_Color * mat_ambient;
   color.a = 1.0;
-  
+
   // Testing code: mix with green to show values of variables at each point
   //vec4 green = vec4(0.0, 0.5, 0.0, 0.0);
   //texel = mix(texel, green, (mfact[2]));
 
-  float steep = 0.9;
-  float steepToBeach = 0.93;
-  float beachToWater = 0.95;
-  float waterStart = 0.97;
+  //  The coastline BLUE channel provides a higher detail level for waters.  The coastline G channel provides a
+  //  steepness modified that is used so that rivers and lakes are displayed with water on more angled surfaces.  Otherwise
+  //  rivers tend to just be sand, as they flow downhill.
+  float steepness_modifier = texture2D(coastline, tile_coord).g * 0.1;
+  bool water = water_lc || texture2D(coastline, tile_coord).b > 0.05;
+  if (water && (steepness + steepness_modifier < WATER_START)) {
+    // For water surfaces that are simply too steep to be plausible we look for an adjacent landclass and mix it with 
+    // a possible shoreline
+    if (water_lc) {
+      if (lc == lc_n[0]) {
+        // Default to the shore material definition
+        lc = fg_shoreAtlasIndex;
+      } else {
+        lc = lc_n[0];
+      }
+    }
 
-  if ((coast.b > 0.05) || (water && steepness < (waterStart + 0.02))) { 
-    float waterline_min_steepness = fg_materialParams3[lc].y;
-    float waterline_max_steepness = fg_materialParams3[lc].z;
-    vec4 steep_texel = lookup_ground_texture_array(2, ground_tex_coord, lc, dxdy_gc);  // Uses the same index as the gradient texture, which it is
-    vec4 beach_texel = texture2D(sand, ground_tex_coord);  // Use the dot texture, which is overloaded to be the beach texture
-    texel = mix(steep_texel, beach_texel, smoothstep(steep, steepToBeach, steepness));
-    fragColor = mix(texel, generateWaterTexel(), smoothstep(beachToWater,waterStart,steepness));    
-    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
-  } else if (water) { 
+    get_material(lc, ground_tex_coord, dxdy_gc, mat_shininess, mat_ambient, mat_diffuse, mat_specular, dxdy, st);
+    vec4 color = gl_Color * mat_ambient;
+    color.a = 1.0;
+
+    vec4 steep_texel = lookup_ground_texture_array(0, ground_tex_coord, lc, dxdy);  // look up the secondary texture
+    vec4 beach_texel = lookup_ground_texture_array(0, ground_tex_coord, fg_shoreAtlasIndex, dxdy);  // Use the shore texture 
+    texel = mix(steep_texel, beach_texel, smoothstep(WATER_STEEP, WATER_STEEP_TO_BEACH, steepness + steepness_modifier));
+
+    // Flag that we need to mix in a water texel later if appropriate.
+    mix_water_texel = (steepness + steepness_modifier > WATER_BEACH_TO_WATER);
+    water = false;
+  }
+
+  // Test code to view the coastline rasters in-sim
+  //texel.r = texture2D(coastline, tile_coord).b;
+  //water = false;
+
+  if (water) {
     fragColor = generateWaterTexel();
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, fragColor.rgb);    
   } else {
@@ -833,6 +863,9 @@ void main()
     color.rgb += secondary_light * light_distance_fading(dist);
 
     fragColor = color * texel + specular;
+
+    if (mix_water_texel) { fragColor = mix(fragColor, generateWaterTexel(), smoothstep(WATER_BEACH_TO_WATER, WATER_START, steepness + steepness_modifier)); }
+
     fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
   }
     

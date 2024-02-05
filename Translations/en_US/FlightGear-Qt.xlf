@@ -1761,7 +1761,7 @@ Local path: %2</source>
         <context-group purpose="location"><context context-type="linenumber">249</context></context-group>
       </trans-unit>
       <trans-unit id="_msg325">
-        <source xml:space="preserve">Added scenery should contain at least one of the following folders: Objects, Terrain, Buildings, Roads, Pylons, NavData, Airports, Orthophotos.</source>
+        <source xml:space="preserve">Added scenery should contain at least one of the following folders: Objects, Terrain, Buildings, Roads, Pylons, NavData, Airports, Orthophotos, vpb.</source>
         <target xml:space="preserve"></target>
         <context-group purpose="location"><context context-type="linenumber">252</context></context-group>
       </trans-unit>

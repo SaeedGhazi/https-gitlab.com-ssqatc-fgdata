@@ -179,7 +179,7 @@
 #
 # Aircraft-specific properties are
 #	* weak link (aerotow/winch)
-#		sim/hitches/aerotow/tow/break-fource [N]
+#		sim/hitches/aerotow/tow/break-force [N]
 #		sim/hitches/winch/tow/break-force [N]
 #	* typical tow speed (winch)
 #		sim/hitches/winch/typical-tow-speed-kph [kph]

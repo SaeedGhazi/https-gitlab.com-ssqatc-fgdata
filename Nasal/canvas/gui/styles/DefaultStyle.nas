@@ -409,6 +409,12 @@ DefaultStyle.widgets["line-edit"] = {
     me._border =
       me._root.createChild("image", "border")
               .set("slice", "10 12"); #"7")
+    me._placeholder =
+      me._root.createChild("text", "placeholder")
+              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+              .set("character-size", 14)
+              .set("alignment", "left-baseline")
+              .set("clip-frame", Element.PARENT);
     me._text =
       me._root.createChild("text", "input")
               .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
@@ -442,6 +448,10 @@ DefaultStyle.widgets["line-edit"] = {
   setSize: func(model, w, h)
   {
     me._border.setSize(w, h);
+    me._placeholder.set(
+      "clip",
+      "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
+    );
     me._text.set(
       "clip",
       "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
@@ -460,7 +470,13 @@ DefaultStyle.widgets["line-edit"] = {
   },
   setText: func(model, text)
   {
+    me._placeholder.setVisible(text or me._cursor_visible ? 0 : 1);
     me._text.setText(text);
+    model._onStateChange();
+  },
+  setPlaceholder: func(model, placeholder)
+  {
+    me._placeholder.setText(placeholder);
     model._onStateChange();
   },
   update: func(model)
@@ -481,6 +497,7 @@ DefaultStyle.widgets["line-edit"] = {
     me._border.set("src", file ~ ".png");
 
     var color_name = backdrop ? "backdrop_fg_color" : "fg_color";
+    me._placeholder.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "placeholder_color"));
     me._text.set("fill", me._style.getColor(color_name));
     me._selected_text.set("fill", me._style.getColor("text_color_selected"));
     me._selection.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "text_color_bg_selected"));
@@ -493,6 +510,8 @@ DefaultStyle.widgets["line-edit"] = {
             .horizTo(me._text.getCursorPos(0, model._selection_end)[0])
             .vert(-16);
     me._selected_text.setText(model.selectedText());
+
+    me._placeholder.setVisible(model._text or me._cursor_visible ? 0 : 1);
 
     var width = model._size[0] - 2 * me._hpadding;
     var cursor_pos = me._text.getCursorPos(0, model._cursor)[0];
@@ -513,6 +532,9 @@ DefaultStyle.widgets["line-edit"] = {
 
     var text_pos = me._hscroll + me._hpadding;
 
+    me._placeholder
+      .setTranslation(text_pos, model._size[1] / 2 + 5)
+      .update();
     me._text
       .setTranslation(text_pos, model._size[1] / 2 + 5)
       .update();

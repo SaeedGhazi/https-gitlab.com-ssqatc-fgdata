@@ -66,6 +66,20 @@
 			<blue  type="float">0.235</blue>
 		</text_color>
 
+		<placeholder_color>
+			<red   type="float">0.235</red>
+			<green type="float">0.235</green>
+			<blue  type="float">0.235</blue>
+			<alpha type="float">0.5</alpha>
+		</placeholder_color>
+
+		<backdrop_placeholder_color>
+			<red   type="float">0.235</red>
+			<green type="float">0.235</green>
+			<blue  type="float">0.235</blue>
+			<alpha type="float">0.4</alpha>
+		</backdrop_placeholder_color>
+
 		<text_color_selected>
 			<red   type="float">1</red>
 			<green type="float">1</green>

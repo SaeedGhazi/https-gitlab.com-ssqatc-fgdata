@@ -1667,13 +1667,16 @@ var releaseHitch = func (device){
 	
 	if ( fdm == "yasim" ) return;	# bypass this routine for Yasim-aircraft
 		
-		setprop("sim/hitches/" ~ device ~ "/open", "true");
+	setprop("sim/hitches/" ~ device ~ "/open", "true");
 	
 	var hitchname = getprop("sim/hitches/" ~ device ~ "/force_name_jsbsim");
 	setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/magnitude", 0.);
 	setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/x", 0.);
 	setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/y", 0.);
 	setprop("fdm/jsbsim/external_reactions/" ~ hitchname ~ "/z", 0.);
+	
+	winch_hash.actual_force.setDoubleValue( 0.0 );
+	winch_hash.clutched.setBoolValue( 0 );
 	
 	if ( device == "aerotow" ) {
 		setprop("sim/hitches/aerotow/tow/end-force-x", 0.);		 # MP tow-end forces

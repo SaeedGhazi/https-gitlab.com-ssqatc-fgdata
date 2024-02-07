@@ -543,6 +543,36 @@ var XMLComboBox =
     }
 };
 
+var XMLList = { 
+    show: func(viewParent) {
+        me._view = canvas.gui.widgets.List.new(viewParent);
+
+        foreach (var valueNode; me.config.getChildren("value")) {
+            me._view.createItem(valueNode);
+        }
+        me._view.listen("selection-changed", func {
+            var propertyPath = me._configValue("property");
+            var selection = me._view.getSelectedItems();
+            if (propertyPath and size(selection)) {
+                props.globals.getNode(propertyPath, 1).setValue(selection[0].getData("text"));
+            }
+            me.activateBindings();
+        });
+
+        me._layout = me._view;
+        me._applyLayoutConfig();
+        return me._view;
+    },
+
+    update: func() {
+        me._view.setSize(me._size);
+    },
+    
+    valueChanged: func() {
+        me._view.filter(me.value);
+    }
+};
+
 # this is the callback function invoked by C++ to build Nasal peers
 # for the C++ objects defined by XML (PUICompatObject). It's primarly
 # a factory method: once the peer object is created, all other behaviour
@@ -591,6 +621,10 @@ var _createCompatObject = func(type)
 
     if (type == "combo") {
         widget = XMLComboBox;
+    }
+
+    if (type == "list") {
+        widget = XMLList;
     }
 
     return gui.xml.Object.new({

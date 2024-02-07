@@ -4,9 +4,10 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 gui.widgets.MenuBar = {
-        new: func(parent, style, cfg) {
+        new: func(parent, style = nil, cfg = nil) {
+                style = style or canvas.style;
                 var m = gui.Widget.new(gui.widgets.MenuBar);
-                m._cfg = Config.new(cfg);
+                m._cfg = Config.new(cfg or {});
                 m._focus_policy = m.NoFocus;
 
                 m._setView(style.createWidget(parent, "menu-bar", m._cfg));

@@ -22,7 +22,7 @@ gui.widgets.Button = {
   },
   setText: func(text)
   {
-    if( me._view != nil )
+    if( me._view != nil and me._view["setText"] != nil )
       me._view.setText(me, text);
     return me;
   },

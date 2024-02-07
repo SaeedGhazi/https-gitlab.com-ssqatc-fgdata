@@ -2,9 +2,10 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 gui.widgets.ComboBox = {
-  new: func(parent, style, cfg)
+  new: func(parent, style = nil, cfg = nil)
   {
-    var cfg = Config.new(cfg);
+    style = style or canvas.style;
+    var cfg = Config.new(cfg or {});
     var m = gui.Widget.new(gui.widgets.ComboBox);
     m._focus_policy = m.StrongFocus;
 #    m._flat = cfg.get("flat", 0);

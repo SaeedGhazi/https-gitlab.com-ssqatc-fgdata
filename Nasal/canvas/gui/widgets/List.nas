@@ -115,9 +115,9 @@ gui.widgets.ListItem = {
 
 gui.widgets.List = {
         new: func(parent, style = nil, cfg = nil) {
-                var m = gui.Widget.new(gui.widgets.List);
-                m._style = style = style or canvas.style;
-                m._cfg = Config.new(cfg or {});
+                cfg = Config.new(cfg);
+                var m = gui.Widget.new(gui.widgets.List, cfg);
+                m._style = style or canvas.style;
                 m._focus_policy = m.NoFocus;
 
                 m._setView(style.createWidget(parent, "list", m._cfg));

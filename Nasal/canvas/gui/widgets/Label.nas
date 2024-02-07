@@ -2,10 +2,11 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 gui.widgets.Label = {
-  new: func(parent, style, cfg)
+  new: func(parent, style = nil, cfg = nil)
   {
+    style = style or {};
     var m = gui.Widget.new(gui.widgets.Label);
-    m._cfg = Config.new(cfg);
+    m._cfg = Config.new(cfg or {});
     m._focus_policy = m.NoFocus;
     m._setView( style.createWidget(parent, "label", m._cfg) );
 

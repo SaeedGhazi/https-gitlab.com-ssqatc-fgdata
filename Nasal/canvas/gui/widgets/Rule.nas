@@ -5,10 +5,11 @@
 
 
 gui.widgets.HorizontalRule = {
-  new: func(parent, style, cfg)
+  new: func(parent, style = nil, cfg = nil)
   {
+    style = style or canvas.style;
     var m = gui.Widget.new(gui.widgets.HorizontalRule);
-    m._cfg = Config.new(cfg);
+    m._cfg = Config.new(cfg or {});
     m._focus_policy = m.NoFocus;
     m._setView( style.createWidget(parent, "rule", m._cfg) );
 
@@ -26,10 +27,11 @@ gui.widgets.HorizontalRule = {
 };
 
 gui.widgets.VerticalRule = {
-  new: func(parent, style, cfg)
+  new: func(parent, style = nil, cfg = nil)
   {
+    style = style or canvas.style;
     var m = gui.Widget.new(gui.widgets.VerticalRule);
-    m._cfg = Config.new(cfg);
+    m._cfg = Config.new(cfg or {});
     m._focus_policy = m.NoFocus;
     m._setView( style.createWidget(parent, "rule", m._cfg) );
 

@@ -18,9 +18,10 @@ gui.widgets.Slider = {
     Above: 1,
     Below: 2,
   },
-  new: func(parent, style, cfg)
+  new: func(parent, style = nil, cfg = nil)
   {
-    var cfg = Config.new(cfg);
+    style = style or canvas.style;
+    var cfg = Config.new(cfg or {});
     var m = gui.Widget.new(gui.widgets.Slider);
     m._focus_policy = m.StrongFocus;
     m._thumbDown = 0;

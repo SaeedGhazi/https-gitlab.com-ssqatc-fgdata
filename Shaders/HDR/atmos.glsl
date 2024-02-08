@@ -240,7 +240,7 @@ float get_ray_end(vec3 ray_origin, vec3 ray_dir, float t_max)
     // Handle the camera being underground
     float earth_radius = min(ray_altitude, get_earth_radius());
     float atmos_dist  = ray_sphere_intersection(ray_origin, ray_dir, get_atmosphere_radius());
-    float ground_dist = ray_sphere_intersection(ray_origin, ray_dir, earth_radius);
+    float ground_dist = ray_sphere_intersection(ray_origin, ray_dir, earth_radius + 1e-3);
     float t_d;
     if (ray_altitude < get_atmosphere_radius()) {
         // We are inside the atmosphere

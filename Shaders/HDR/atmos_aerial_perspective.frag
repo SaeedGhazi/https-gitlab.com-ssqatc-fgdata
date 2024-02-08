@@ -68,7 +68,7 @@ void main()
 
         ray_dir = ray_end - ray_origin;
         t_max = length(ray_dir);
-        ray_dir /= t_max;
+        ray_dir /= max(t_max, 1e-5);
     }
 
     vec4 transmittance;

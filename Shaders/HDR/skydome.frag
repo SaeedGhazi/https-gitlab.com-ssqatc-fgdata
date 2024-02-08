@@ -24,6 +24,7 @@ const float SUN_SIN_HALF_ANGULAR_DIAMETER = 0.0047560042817014138; // sin(radian
 float M_PI();
 float sqr(float x);
 float saturate(float x);
+float safe_asin(float x);
 // atmos_spectral.glsl
 vec4 get_sun_spectral_irradiance();
 vec3 linear_srgb_from_spectral_samples(vec4 L);
@@ -51,7 +52,7 @@ void main()
     vec3 frag_ray_dir = normalize(ray_dir);
     float azimuth = atan(frag_ray_dir.y, frag_ray_dir.x) / M_PI() * 0.5 + 0.5;
     // Undo the non-linear transformation from the sky-view LUT
-    float l = asin(frag_ray_dir.z);
+    float l = safe_asin(frag_ray_dir.z);
     float elev = sqrt(abs(l) / (M_PI() * 0.5)) * sign(l) * 0.5 + 0.5;
 
     vec4 sky_radiance = texture(sky_view_tex, vec2(azimuth, elev));

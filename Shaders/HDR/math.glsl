@@ -26,6 +26,10 @@ float safe_sqrt(float x) {
     return sqrt(max(x, 0.0));
 }
 
+float safe_asin(float x) {
+    return asin(clamp(x, -1.0, 1.0));
+}
+
 float safe_acos(float x) {
     return acos(clamp(x, -1.0, 1.0));
 }

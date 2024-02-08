@@ -87,7 +87,7 @@ vec3 surface_eval_analytical(
     float G = G1_Smith_GGX(NdotV, a2) * G1_Smith_GGX(NdotL, a2);
     float D = D_GGX(NdotH, a2);
 
-    vec3 f_specular = (F * a2) / (D * G);
+    vec3 f_specular = (F * a2) / max(D * G, 1e-5);
     vec3 f_diffuse = (vec3(1.0) - F) * c_diff * M_1_PI();
     vec3 bsdf = f_diffuse + f_specular;
 

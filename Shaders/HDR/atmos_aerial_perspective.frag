@@ -25,7 +25,6 @@ const float AP_SLICE_COUNT = 32.0;
 const float AP_MAX_DEPTH = 128000.0;
 
 const int AERIAL_PERSPECTIVE_STEPS = 10;
-const float RADIUS_OFFSET = 10.0;
 
 // pos_from_depth.glsl
 vec3 get_view_space_from_depth(vec2 uv, float depth);
@@ -60,21 +59,10 @@ void main()
 
     vec3 ray_origin = fg_CameraPositionCart;
 
-    vec3 ray_end = ray_origin + ray_dir * depth;
-    float t_max = depth;
-
-    if (length(ray_end) <= (get_earth_radius() + RADIUS_OFFSET)) {
-        ray_end = normalize(ray_end) * (get_earth_radius() + RADIUS_OFFSET + 1.0);
-
-        ray_dir = ray_end - ray_origin;
-        t_max = length(ray_dir);
-        ray_dir /= max(t_max, 1e-5);
-    }
-
     vec4 transmittance;
     vec4 L = compute_inscattering(ray_origin,
                                   ray_dir,
-                                  t_max,
+                                  depth,
                                   fg_SunDirectionWorld,
                                   AERIAL_PERSPECTIVE_STEPS,
                                   transmittance_lut,

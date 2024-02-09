@@ -46,16 +46,10 @@ void main()
 
     vec3 ray_origin = vec3(0.0, 0.0, fg_CameraDistanceToEarthCenter);
 
-    float t_max = get_ray_end(ray_origin, ray_dir, 1e7);
-    if (t_max < 0.0) {
-        fragColor = vec4(0.0);
-        return;
-    }
-
     vec4 transmittance;
     vec4 L = compute_inscattering(ray_origin,
                                   ray_dir,
-                                  t_max,
+                                  1e7,
                                   sun_dir,
                                   SKY_STEPS,
                                   transmittance_lut,

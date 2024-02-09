@@ -40,7 +40,7 @@ void main()
     vec3 sun_radiance = get_sun_radiance_sea_level();
 
     vec3 N = normalize(fs_in.vertex_normal);
-    float NdotL = max(dot(N, fg_SunDirectionWorld), 1e-4);
+    float NdotL = max(0.0, dot(N, fg_SunDirectionWorld));
 
     // Assume a perfectly diffuse Lambertian surface
     color = M_1_PI() * color * sun_radiance * NdotL;

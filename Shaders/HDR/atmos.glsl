@@ -237,24 +237,28 @@ void get_atmosphere_collision_coefficients(in float h,
 float get_ray_end(vec3 ray_origin, vec3 ray_dir, float t_max)
 {
     float ray_altitude = length(ray_origin);
-    // Handle the camera being underground
-    float earth_radius = min(ray_altitude, get_earth_radius());
-    float atmos_dist  = ray_sphere_intersection(ray_origin, ray_dir, get_atmosphere_radius());
-    float ground_dist = ray_sphere_intersection(ray_origin, ray_dir, earth_radius + 1e-3);
-    float t_d;
-    if (ray_altitude < get_atmosphere_radius()) {
-        // We are inside the atmosphere
-        if (ground_dist < 0.0) {
-            // No ground collision, use the distance to the outer atmosphere
-            t_d = atmos_dist;
+    // If the ray origin is underground, put the ground a bit below it
+    float earth_radius = min(get_earth_radius(), ray_altitude - 1.0);
+
+    if (ray_altitude >= get_atmosphere_radius()) {
+        // We are in outer space, move the ray origin to the atmospheric boundary
+        // XXX: No atmosphere rendering from space yet
+        return -1.0;
+    }
+
+    float t_atmos  = ray_sphere_intersection(ray_origin, ray_dir, get_atmosphere_radius());
+    float t_ground = ray_sphere_intersection(ray_origin, ray_dir, earth_radius);
+    float t_d = 0.0;
+    if (t_ground < 0.0) {
+        if (t_atmos < 0.0) {
+            t_d = -1.0;
         } else {
-            // We have a collision with the ground, use the distance to it
-            t_d = ground_dist;
+            t_d = t_atmos;
         }
     } else {
-        // We are in outer space
-        // XXX: For now this is a flight simulator, not a space simulator
-        t_d = -1.0;
+        if (t_atmos > 0.0) {
+            t_d = min(t_atmos, t_ground);
+        }
     }
     return min(t_d, t_max);
 }
@@ -276,12 +280,18 @@ vec4 compute_inscattering(in vec3 ray_origin,
                           in sampler2D transmittance_lut,
                           out vec4 transmittance)
 {
+    float t_d = get_ray_end(ray_origin, ray_dir, t_max);
+    if (t_d < 1e-3) {
+        // No intersection with the atmosphere or the ray origin and end points
+        // are too close too each other. In both cases there is no inscattering.
+        return vec4(0.0);
+    }
+    float dt = t_d / float(steps);
+
     float cos_theta = dot(-ray_dir, sun_dir);
 
     float molecular_phase = molecular_phase_function(cos_theta);
     float aerosol_phase = aerosol_phase_function(cos_theta);
-
-    float dt = t_max / float(steps);
 
     vec4 L_inscattering = vec4(0.0);
     transmittance = vec4(1.0);

@@ -26,18 +26,9 @@ vec4 get_aerial_perspective(vec3 pos)
     vec3 ray_origin = fg_CameraPositionCart;
     vec3 ray_end = pos;
 
-    // Make sure both ray ends are above the ground.
-    // We also apply a small bias to the ray end to prevent both points from
-    // being at the exact same place due to floating point precision.
-    float radius = get_earth_radius();
-    ray_origin += max(0.0, radius - length(ray_origin));
-    ray_end    += max(0.0, radius - length(ray_end)) + 1.0;
-
     vec3 ray_dir = ray_end - ray_origin;
-    float t_d = length(ray_dir);
-    ray_dir /= t_d;
-
-    float t_max = get_ray_end(ray_origin, ray_dir, t_d);
+    float t_max = length(ray_dir);
+    ray_dir = normalize(ray_dir);
 
     vec4 transmittance;
     vec4 L = compute_inscattering(ray_origin,

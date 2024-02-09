@@ -1929,7 +1929,7 @@
 
       <cull-face>back</cull-face>
       <program>
-        <vertex-shader>Shaders/HDR/terrain_default.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/ws30.vert</vertex-shader>
         <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
         <fragment-shader>Shaders/HDR/ws30.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>

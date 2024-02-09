@@ -3,7 +3,6 @@
 in VS_OUT {
 	float flogz;
     vec2 texcoord;
-    vec2 orthophoto_texcoord;
     vec3 vertex_normal;
 } fs_in;
 

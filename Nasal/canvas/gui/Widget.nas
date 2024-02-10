@@ -1,17 +1,19 @@
 gui.Widget = {
   #
-  new: func(derived)
+  new: func(derived, cfg = nil)
   {
+    cfg = Config.new(cfg);
     var m = canvas.Widget.new({
       parents: [derived, gui.Widget],
       _focused: 0,
-      _focus_policy: gui.Widget.NoFocus,
+      _focus_policy: cfg.get("focus-policy", gui.Widget.NoFocus),
       _hover: 0,
       _enabled: 1,
       _view: nil,
       _pos: [0, 0],
       _size: [32, 32],
-      _bindings: []
+      _bindings: cfg.get("bindings", []),
+      _cfg: cfg,
     });
 
     m.setLayoutMinimumSize([16, 16]);
@@ -19,6 +21,14 @@ gui.Widget = {
     m.setLayoutMaximumSize([m._MAX_SIZE, m._MAX_SIZE]);
 
     m.setSetGeometryFunc(m._impl.setGeometry);
+
+    if ((var alignment = m._cfg.get("alignment")) != nil) {
+      m.setAlignment(alignment);
+    }
+    if ((var fixedSize = m._cfg.get("fixed-size")) != nil) {
+      m.setFixedSize(fixedSize[0], fixedSize[1]);
+    }
+    m.setEnabled(m._cfg.get("enabled", 1));
 
     return m;
   },

@@ -5,24 +5,31 @@
 gui.widgets.Button = {
   new: func(parent, style = nil, cfg = nil)
   {
+    cfg = Config.new(cfg);
     style = style or canvas.style;
-    var m = gui.Widget.new(gui.widgets.Button);
-    m._cfg = Config.new(cfg or {});
+    var m = gui.Widget.new(gui.widgets.Button, cfg);
     m._focus_policy = m.StrongFocus;
-    m._down = 0;
-    m._checkable = 0;
-    m._flat = m._cfg.get("flat", 0);
-    m._isDefault = m._cfg.get("default", 0);
-    m._destructive = m._cfg.get("destructive", 0);
+
+    m._checkable = cfg.get("checkable", 0);
+    if (m._checkable) {
+        m._down = cfg.get("checked", 0);
+    } else {
+    	m._down = 0;
+    }
+    m._flat = cfg.get("flat", 0);
+    m._isDefault = cfg.get("default", 0);
+    m._destructive = cfg.get("destructive", 0);
 
     if( style != nil and !m._flat )
-      m._setView( style.createWidget(parent, m._cfg.get("type", "button"), m._cfg) );
+      m._setView( style.createWidget(parent, cfg.get("type", "button"), cfg) );
+
+    m.setText(cfg.get("text", ""));
 
     return m;
   },
   setText: func(text)
   {
-    if( me._view != nil and me._view["setText"] != nil )
+    if ( me._view != nil )
       me._view.setText(me, text);
     return me;
   },

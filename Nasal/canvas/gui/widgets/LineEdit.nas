@@ -2,10 +2,10 @@ gui.widgets.LineEdit = {
   new: func(parent, style = nil, cfg = nil)
   {
     style = style or canvas.style;
-    var m = gui.Widget.new(gui.widgets.LineEdit);
-    m._cfg = Config.new(cfg or {});
+    cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.LineEdit, cfg);
     m._focus_policy = m.StrongFocus;
-    m._setView( style.createWidget(parent, "line-edit", m._cfg) );
+    m._setView( style.createWidget(parent, "line-edit", cfg) );
     
     m.setLayoutMinimumSize([28, 16]);
     m.setLayoutSizeHint([150, 28]);
@@ -25,8 +25,9 @@ gui.widgets.LineEdit = {
     m.context_menu.createItem(text: "Select all", cb: func() { m.selectAll(); }, shortcut: "<Ctrl>+A");
     m.context_menu.setCanvasItem(m);
 
-    m.setText(m._cfg.get("text", ""));
-    m.setPlaceholder(m._cfg.get("placeholder", ""));
+    m.setText(cfg.get("text", ""));
+    m.setPlaceholder(cfg.get("placeholder", ""));
+    m.setMaxLength(cfg.get("max-length", m._max_length));
 
     return m;
   },

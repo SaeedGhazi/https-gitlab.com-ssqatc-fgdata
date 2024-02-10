@@ -47,13 +47,14 @@
 
 gui.widgets.TabWidgetTabButton = {
 	new: func(parent, style = nil, cfg = nil) {
-		var m = gui.Widget.new(gui.widgets.TabWidgetTabButton);
-		m._cfg = Config.new(cfg or {});
-		m._style = style or canvas.style;
+		cfg = Config.new(cfg);
+		style = style or canvas.style;
+		var m = gui.Widget.new(gui.widgets.TabWidgetTabButton, cfg);
 		m._focus_policy = m.StrongFocus;
 		m._selected = 0;
+		m._tab_closeable = cfg.get("tab-closeable");
 
-		m._setView(m._style.createWidget(parent, "tab-widget-tab-button", m._cfg));
+		m._setView(style.createWidget(parent, "tab-widget-tab-button", cfg));
 		m._close_button = gui.widgets.Button.new(m._view._root, style, {"type": "tab-button-close-button"})
 						.setSize(24, 24)
 						.listen("clicked", func(e) {
@@ -89,7 +90,7 @@ gui.widgets.TabWidgetTabButton = {
 		#el.addEventListener("drag", me.drag);
 	},
 	update: func {
-		if (me._cfg.get("tab-closeable")) {
+		if (me._tab_closeable) {
 			me._close_button.show();
 		} else {
 			me._close_button.hide();
@@ -101,11 +102,12 @@ gui.widgets.TabWidgetTabButton = {
 
 gui.widgets.TabWidget = {
 	new: func(parent, style = nil, cfg = nil) {
-		var m = gui.Widget.new(gui.widgets.TabWidget);
-		m._cfg = Config.new(cfg or {});
-		m._style = style or canvas.style;
+		style = style or canvas.style;
+		cfg = Config.new(cfg);
+		var m = gui.Widget.new(gui.widgets.TabWidget, cfg);
+		m._style = style;
 		m._focus_policy = m.NoFocus;
-		m._setView(m._style.createWidget(parent, "tab-widget", m._cfg));
+		m._setView(m._style.createWidget(parent, "tab-widget", cfg));
 		m._layout = VBoxLayout.new();
 		m._layout.setCanvas(m._view._root.getCanvas());
 		m._layout.setParent(m);
@@ -117,7 +119,7 @@ gui.widgets.TabWidget = {
 		m._currentTabId = nil;
 		m._tabs = {};
 		m._tabButtons = {};
-		m._closeable_tabs = m._cfg.get("tabs-closeable", 0);
+		m._closeable_tabs = cfg.get("tabs-closeable", 0);
 		
 		m.setLayoutMinimumSize([50, 36]);
 		m.setLayoutSizeHint([100, 36]);
@@ -151,7 +153,7 @@ gui.widgets.TabWidget = {
 		}
 		
 		me._tabButtons[id] = gui.widgets.TabWidgetTabButton.new(me._view.tabBar, canvas.style, {
-			"tab-closeable": me._cfg.get("tabs-closeable"),
+			"tab-closeable": me._closeable_tabs,
 		})
 								.setText(label)
 								.listen("close-button-clicked", func {

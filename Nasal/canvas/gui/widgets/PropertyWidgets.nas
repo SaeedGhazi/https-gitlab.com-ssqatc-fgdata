@@ -6,16 +6,16 @@
 gui.widgets.PropertyWidget = {
 	new: func(base, parent, style = nil, cfg = nil) {
 		style = style or canvas.style;
-		cfg = cfg or {};
-		if (cfg["node"] == nil) {
+		cfg = Config.new(cfg);
+		if (cfg.get("node") == nil) {
 			die("Missing configuration 'node' field");
 		}
-		if (!isa(cfg["node"], props.Node)) {
-			cfg["node"] = props.globals.getNode(cfg["node"], 1);
+		if (!isa(cfg.get("node"), props.Node)) {
+			cfg.set("node", props.globals.getNode(cfg.get("node"), 1));
 		}
 		var m = base.new(parent, style, cfg);
 		m.parents = [gui.widgets.PropertyWidget] ~ m.parents;
-		m._node = cfg["node"];
+		m._node = cfg.get("node");
 		m._propertySynced = 1;
 		
 		return m;
@@ -109,6 +109,8 @@ gui.widgets.PropertyRadioButtonsGroup = {
 			}
 			m._ignore_radio_toggles = 0;
 		});
+		
+		return m;
 	},
 	
 	setPropertySynced: func(synced = 1) {
@@ -123,7 +125,7 @@ gui.widgets.PropertyRadioButtonsGroup = {
 		foreach (var radio; me.radios) {
 			radio._trigger("group-checked-radio-changed", {checkedRadio: checked});
 		}
-		if (m._propertySynced) {
+		if (me._propertySynced) {
 			m._node.setValue(checked != nil ? checked.getData("property-value") : nil);
 		}
 	},
@@ -250,6 +252,8 @@ gui.widgets.PropertyLabel = {
 			}
 			m.setText(n.getValue());
 		}, 0, 0);
+		
+		return m;
 	},
 	
 	del: func {
@@ -278,6 +282,7 @@ gui.widgets.PropertyLineEdit = {
 			}
 			m.setText(n.getValue());
 		}, 0, 0);
+		return m;
 	},
 	
 	del: func {

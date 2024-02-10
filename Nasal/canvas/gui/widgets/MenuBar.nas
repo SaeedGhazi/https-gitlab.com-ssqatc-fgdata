@@ -6,11 +6,11 @@
 gui.widgets.MenuBar = {
         new: func(parent, style = nil, cfg = nil) {
                 style = style or canvas.style;
-                var m = gui.Widget.new(gui.widgets.MenuBar);
-                m._cfg = Config.new(cfg or {});
+                cfg = Config.new(cfg);
+                var m = gui.Widget.new(gui.widgets.MenuBar, cfg);
                 m._focus_policy = m.NoFocus;
 
-                m._setView(style.createWidget(parent, "menu-bar", m._cfg));
+                m._setView(style.createWidget(parent, "menu-bar", cfg));
 
                 m._layout = HBoxLayout.new();
                 m._layout.setSpacing(0);

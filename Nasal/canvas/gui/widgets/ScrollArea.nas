@@ -2,8 +2,8 @@ gui.widgets.ScrollArea = {
   new: func(parent, style = nil, cfg = nil)
   {
     style = style or canvas.style;
-    var cfg = Config.new(cfg or {});
-    var m = gui.Widget.new(gui.widgets.ScrollArea);
+    var cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.ScrollArea, cfg);
     m._focus_policy = m.NoFocus;
     m._content_pos = [0, 0];
     m._scroller_pos = [0, 0];

@@ -5,18 +5,18 @@
 
 gui.widgets.ListItem = {
         new: func(parent, style = nil, cfg = nil) {
-                var m = gui.Widget.new(gui.widgets.ListItem);
                 style = style or canvas.style;
-                m._cfg = Config.new(cfg or {});
+                cfg = Config.new(cfg);
+                var m = gui.Widget.new(gui.widgets.ListItem, cfg);
                 m._focus_policy = m.NoFocus;
                 
-                m._data = m._cfg.get("data", {});
-                m._text = m._cfg.get("text", "");
+                m._data = cfg.get("data", {});
+                m._text = cfg.get("text", "");
                 m._data["text"] = m._text;
-                m._selected = m._cfg.get("selected", 0);
+                m._selected = cfg.get("selected", 0);
                 m._list = nil;
 
-                m._setView(style.createWidget(parent, "list-item", m._cfg));
+                m._setView(style.createWidget(parent, "list-item", cfg));
                 m._view._updateLayoutSizes(m);
 
                 m.setText(m._text);
@@ -120,7 +120,7 @@ gui.widgets.List = {
                 m._style = style or canvas.style;
                 m._focus_policy = m.NoFocus;
 
-                m._setView(style.createWidget(parent, "list", m._cfg));
+                m._setView(m._style.createWidget(parent, "list", m._cfg));
                 
                 m._scroll = gui.widgets.ScrollArea.new(m._view._root, style, {});
                 m._scrollLayout = VBoxLayout.new();
@@ -130,7 +130,7 @@ gui.widgets.List = {
                 m.setLayoutMinimumSize([48, 24]);
 
                 if (contains(m._cfg, "items")) {
-                	foreach (var item; cfg["items"]) {
+                	foreach (var item; m._cfg["items"]) {
                 		if (isa(item, gui.widgets.ListItem)) {
                 			m.addItem(item);
                 		} elsif (ishash(item)) {

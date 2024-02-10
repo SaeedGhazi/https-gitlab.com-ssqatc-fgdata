@@ -183,6 +183,8 @@ DefaultStyle.widgets.switch = {
                 me._thumb = me._root.createChild("path", "switch-thumb");
         },
 
+        setText: func {},
+
         setSize: func(model, w, h) {
                 me._bg.reset()
                                                 .moveTo(w / 4, 0.5)
@@ -665,7 +667,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 	setText: func(model, text) {
 		me._label.setText(text);
 
-		var min_width = math.max(80, me._label.maxWidth() + 12 + (model._cfg.get("tab-closeable") ? 24 + 12 : 0));
+		var min_width = math.max(80, me._label.maxWidth() + 12 + (model._tab_closeable ? 24 + 12 : 0));
 		model.setLayoutMinimumSize([min_width, 36]);
 		model.setLayoutSizeHint([min_width, 36]);
 
@@ -709,6 +711,7 @@ DefaultStyle.widgets["tab-button-close-button"] = {
 						.set("alignment", "center-baseline")
 						.setText("×");
 	},
+	setText: func {},
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(3, 3, w - 6, h - 6, {"border-radius": 5});
 		me._border.setSize(w, h);

@@ -12,10 +12,11 @@ gui.widgets.PropertyTree = {
         },
         
         new: func(parent, style = nil, cfg = nil) {
+                cfg = Config.new(cfg);
                 var m = gui.widgets.List.new(parent, style, cfg);
                 m.parents = [gui.widgets.PropertyTree] ~ m.parents;
                 m.showAttrs = 0;
-                m._node = m._cfg.get("node", props.globals);
+                m._node = cfg.get("node", props.globals);
                 m.rebuildList();
                 m.listen("selection-changed", func {
                         var selected = m.getSelectedItems();

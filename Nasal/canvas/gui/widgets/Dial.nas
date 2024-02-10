@@ -6,25 +6,25 @@
 gui.widgets.Dial = {
   new: func(parent, style = nil, cfg = nil) {
     style = style or canvas.style;
-    var m = gui.Widget.new(gui.widgets.Dial);
-    m._cfg = Config.new(cfg or {});
+    cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.Dial, cfg);
     m._focus_policy = m.StrongFocus;
-    m._minValue = m._cfg.get("min-value", 0);
-    m._maxValue = m._cfg.get("max-value", 100);
-    m._value = m._mouseValue = m._cfg.get("value", 50);
-    m._stepSize = m._cfg.get("step-size", 1);
-    m._pageSize = m._cfg.get("page-size", 10);
-    m._tickStep = m._cfg.get("tick-step", 10);
-    m._showTicks = m._cfg.get("show-ticks", 0);
-    m._showValue = m._cfg.get("show-value", 1);
-    m._valueFormat = m._cfg.get("value-format", nil);
-    m._wraps = m._cfg.get("wrap", 0);
+    m._minValue = cfg.get("min-value", 0);
+    m._maxValue = cfg.get("max-value", 100);
+    m._value = m._mouseValue = cfg.get("value", 50);
+    m._stepSize = cfg.get("step-size", 1);
+    m._pageSize = cfg.get("page-size", 10);
+    m._tickStep = cfg.get("tick-step", 10);
+    m._showTicks = cfg.get("show-ticks", 0);
+    m._showValue = cfg.get("show-value", 1);
+    m._valueFormat = cfg.get("value-format", nil);
+    m._wraps = cfg.get("wrap", 0);
 
     m._handleDown = 0;
     m._lastMouseAngle = 0;
     m._dragging = 0;
 
-    m._setView(style.createWidget(parent, m._cfg.get("type", "dial"), m._cfg));
+    m._setView(style.createWidget(parent, cfg.get("type", "dial"), cfg));
     m.setValueFormat(m._valueFormat);
     m.setValue(m._value);
     m.setMinValue(m._minValue);

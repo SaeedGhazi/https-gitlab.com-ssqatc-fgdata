@@ -4,11 +4,13 @@
 gui.widgets.Label = {
   new: func(parent, style = nil, cfg = nil)
   {
-    style = style or {};
-    var m = gui.Widget.new(gui.widgets.Label);
-    m._cfg = Config.new(cfg or {});
+    style = style or canvas.style;
+    cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.Label, cfg);
     m._focus_policy = m.NoFocus;
     m._setView( style.createWidget(parent, "label", m._cfg) );
+
+    m.setText(m._cfg.get("text", ""));
 
     return m;
   },

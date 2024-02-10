@@ -21,8 +21,8 @@ gui.widgets.Slider = {
   new: func(parent, style = nil, cfg = nil)
   {
     style = style or canvas.style;
-    var cfg = Config.new(cfg or {});
-    var m = gui.Widget.new(gui.widgets.Slider);
+    var cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.Slider, cfg);
     m._focus_policy = m.StrongFocus;
     m._thumbDown = 0;
     m._minValue = cfg.get("min-value", 0);

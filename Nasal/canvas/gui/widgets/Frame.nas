@@ -10,10 +10,10 @@ gui.widgets.Frame = {
   new: func(parent, style = nil, cfg = nil)
   {
     style = style or canvas.style;
-    var m = gui.Widget.new(gui.widgets.Frame);
-    m._cfg = Config.new(cfg or {});
+    cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.Frame, cfg);
     # m._focus_policy = m.NoFocus; maybe?
-    m._setView( style.createWidget(parent, "frame", m._cfg) );
+    m._setView( style.createWidget(parent, "frame", cfg) );
     m._checkable = cfg.get("checkable", 0);
     m._label = cfg.get("label");
     m._layout = nil;

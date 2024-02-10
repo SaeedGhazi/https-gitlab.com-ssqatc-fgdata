@@ -5,8 +5,8 @@ gui.widgets.ComboBox = {
   new: func(parent, style = nil, cfg = nil)
   {
     style = style or canvas.style;
-    var cfg = Config.new(cfg or {});
-    var m = gui.Widget.new(gui.widgets.ComboBox);
+    var cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.ComboBox, cfg);
     m._focus_policy = m.StrongFocus;
 #    m._flat = cfg.get("flat", 0);
     m._menu = gui.Menu.new();
@@ -15,7 +15,39 @@ gui.widgets.ComboBox = {
     m._currentIndex = nil;
     m._style = style; # cache reference to style for creating items
     m._down = 0;
-    
+
+    if (contains(cfg, "items")) {
+      if (typeof(cfg["items"]) == "vector") {
+        foreach (var item; cfg["items"]) {
+          if (isa(item, gui.MenuItem)) {
+            var index = size(me._items);
+            append(me._items, item);
+            if (me._currentIndex == nil) {
+              # select first item added, if we were previously empty
+              me.setCurrentByIndex(0);
+            }
+          } elsif (ishash(item)) {
+            m.addMenuItem(item["text"], item["value"]);
+          } elsif (isvec(item) and size(item) == 2) {
+            m.addMenuItem(item[0], item[1]);
+          } else {
+            m.addMenuItem(item, item);
+          }
+        }
+      } elsif (typeof(cfg["items"]) == "hash") {
+        foreach (var text; keys(cfg["items"])) {
+          m.addMenuItem(text, cfg["items"][text]);
+        }
+      }
+    }
+
+    if (var index = cfg.get("current-index")) {
+      m.setCurrentByIndex(index);
+    }
+    if (var value = cfg.get("current-value")) {
+      m.setCurrentByValue(value);
+    }
+
     return m;
   },
 
@@ -52,11 +84,15 @@ gui.widgets.ComboBox = {
 # helper to set the current item by passing in
 # a value of an item
   setCurrentByValue: func(value) {
+    if (me._items[me._currentIndex].menuValue == value) {
+      return;
+    }
+
     var index = 0;
     foreach(var i; me._items) {
       if (i.menuValue == value) {
         me.setCurrentByIndex(index);
-        break;
+        return;
       }
 
       index+=1;

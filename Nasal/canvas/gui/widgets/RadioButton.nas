@@ -5,19 +5,19 @@
 
 gui.widgets.RadioButton = {
   new: func(parent, style = nil, cfg = nil) {
-    var m = gui.Widget.new(gui.widgets.RadioButton);
     style = style or canvas.style;
-    m._cfg = Config.new(cfg or {});
+    cfg = Config.new(cfg);
+    var m = gui.Widget.new(gui.widgets.RadioButton, cfg);
     m._focus_policy = m.StrongFocus;
     m._checked = 0;
     m.radioGroup = nil;
-    m._data = m._cfg.get("data", {});
+    m._data = cfg.get("data", {});
 
-    m._setView( style.createWidget(parent, m._cfg.get("type", "radio-button"), m._cfg) );
+    m._setView( style.createWidget(parent, cfg.get("type", "radio-button"), cfg) );
 
-    var radioButtonGroup = m._cfg.get("radioButtonGroup");
-    var parentRadio = m._cfg.get("parentRadio", nil);
-    var radioButtonGroupClass = m._cfg.get("radioButtonGroupClass");
+    var radioButtonGroup = cfg.get("radioButtonGroup");
+    var parentRadio = cfg.get("parentRadio", nil);
+    var radioButtonGroupClass = cfg.get("radioButtonGroupClass");
     if (radioButtonGroup != nil) {
       m.radioGroup = radioButtonGroup;
     } elsif (parentRadio != nil) {

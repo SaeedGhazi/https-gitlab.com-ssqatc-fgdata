@@ -1,6 +1,9 @@
 var Config = {
   new: func(cfg)
   {
+    if (isa(cfg, Config)) {
+      return cfg;
+    }
     var m = {
       parents: [Config],
       _cfg: cfg

@@ -29,7 +29,6 @@ gui.widgets.PropertyWidget = {
 gui.widgets.PropertySwitch = {
 	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.Switch, parent, style, cfg);
-		m._checkable = 1;
 
 		m.parents = [gui.widgets.PropertySwitch] ~ m.parents;
 		
@@ -143,7 +142,6 @@ gui.widgets.PropertyRadioButton = {
 		cfg["radioButtonGroup"] = gui.widgets.PropertyRadioButtonsGroup.new(cfg["node"]);
 		
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.RadioButton, parent, style, cfg);
-		m._checkable = 1;
 
 		m.parents = [gui.widgets.PropertyRadioButton] ~ m.parents;
 		
@@ -172,7 +170,6 @@ gui.widgets.PropertyRadioButton = {
 gui.widgets.PropertyList = {
 	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.List, parent, style, cfg);
-		m._checkable = 1;
 
 		m.parents = [gui.widgets.PropertyList] ~ m.parents;
 		
@@ -210,7 +207,6 @@ gui.widgets.PropertyList = {
 gui.widgets.PropertyComboBox = {
 	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.ComboBox, parent, style, cfg);
-		m._checkable = 1;
 
 		m.parents = [gui.widgets.PropertyComboBox] ~ m.parents;
 		
@@ -240,17 +236,18 @@ gui.widgets.PropertyComboBox = {
 
 gui.widgets.PropertyLabel = {
 	new: func(parent, style = nil, cfg = nil) {
+		cfg = Config.new(cfg);
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.Label, parent, style, cfg);
-		m._checkable = 1;
-		
 		m.parents = [gui.widgets.PropertyLabel] ~ m.parents;
+		
+		m._format = cfg.get("text", "%s");
 		
 		m.setText(m._node.getValue());
 		m._listener = setlistener(m._node, func(n) {
 			if (!m._propertySynced) {
 				return;
 			}
-			m.setText(n.getValue());
+			m.setText(sprintf(m._format, n.getValue()));
 		}, 0, 0);
 		
 		return m;
@@ -265,7 +262,6 @@ gui.widgets.PropertyLabel = {
 gui.widgets.PropertyLineEdit = {
 	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.LineEdit, parent, style, cfg);
-		m._checkable = 1;
 		
 		m.parents = [gui.widgets.PropertyLineEdit] ~ m.parents;
 		
@@ -293,7 +289,6 @@ gui.widgets.PropertyLineEdit = {
 gui.widgets.PropertyCheckBox = {
 	new: func(parent, style = nil, cfg = nil) {
 		var m = gui.widgets.PropertyWidget.new(gui.widgets.CheckBox, parent, style, cfg);
-		m._checkable = 1;
 
 		m.parents = [gui.widgets.PropertyCheckBox] ~ m.parents;
 		

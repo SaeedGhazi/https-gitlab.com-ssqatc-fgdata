@@ -16,9 +16,9 @@ gui.widgets.ComboBox = {
     m._style = style; # cache reference to style for creating items
     m._down = 0;
 
-    if (contains(cfg, "items")) {
-      if (typeof(cfg["items"]) == "vector") {
-        foreach (var item; cfg["items"]) {
+    if (var items = cfg.get("items")) {
+      if (typeof(items) == "vector") {
+        foreach (var item; items) {
           if (isa(item, gui.MenuItem)) {
             var index = size(me._items);
             append(me._items, item);
@@ -34,9 +34,9 @@ gui.widgets.ComboBox = {
             m.addMenuItem(item, item);
           }
         }
-      } elsif (typeof(cfg["items"]) == "hash") {
-        foreach (var text; keys(cfg["items"])) {
-          m.addMenuItem(text, cfg["items"][text]);
+      } elsif (typeof(items) == "hash") {
+        foreach (var text; keys(items)) {
+          m.addMenuItem(text, items[text]);
         }
       }
     }
@@ -156,7 +156,6 @@ gui.widgets.ComboBox = {
     }
     var (x, y) = arg;
     me._size = [x, y];
-    me._menu.setSize(x, me._menu.getSize()[1]);
     if (me._view != nil) {
       me._view.setSize(me, x, y);
     }

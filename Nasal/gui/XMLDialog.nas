@@ -538,7 +538,7 @@ var XMLComboBox =
     update: func()
     {
         if (me._view and !me._view.hasActiveFocus()) {
-            me._view.setCurrentByValue(me.value);
+            me._view.setSelectedByValue(me.value);
         }
     }
 };

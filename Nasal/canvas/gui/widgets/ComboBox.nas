@@ -24,7 +24,7 @@ gui.widgets.ComboBox = {
             append(me._items, item);
             if (me._currentIndex == nil) {
               # select first item added, if we were previously empty
-              me.setCurrentByIndex(0);
+              me.setSelectedByIndex(0);
             }
           } elsif (ishash(item)) {
             m.addMenuItem(item["text"], item["value"]);
@@ -41,10 +41,10 @@ gui.widgets.ComboBox = {
       }
     }
 
-    if (var index = cfg.get("current-index")) {
+    if (var index = cfg.get("selected-index")) {
       m.setCurrentByIndex(index);
     }
-    if (var value = cfg.get("current-value")) {
+    if (var value = cfg.get("selected-value")) {
       m.setCurrentByValue(value);
     }
 
@@ -77,13 +77,13 @@ gui.widgets.ComboBox = {
     append(me._items, item);
     if (me._currentIndex == nil) {
       # select first item added, if we were previously empty
-      me.setCurrentByIndex(0);
+      me.setSelectedByIndex(0);
     }
   },
 
 # helper to set the current item by passing in
 # a value of an item
-  setCurrentByValue: func(value) {
+  setSelectedByValue: func(value) {
     if (me._items[me._currentIndex].menuValue == value) {
       return;
     }
@@ -91,22 +91,22 @@ gui.widgets.ComboBox = {
     var index = 0;
     foreach(var i; me._items) {
       if (i.menuValue == value) {
-        me.setCurrentByIndex(index);
+        me.setSelectedByIndex(index);
         return;
       }
 
       index+=1;
     }
 
-    logprint(DEV_WARN, "Canvas.Gui ComboBox: no such value in menu:" ~ value);
+    logprint(DEV_WARN, "Canvas.Gui ComboBox: no such value in menu: " ~ value);
   },
 
-  setCurrentByIndex: func(index) {
+  setSelectedByIndex: func(index) {
     if (me._currentIndex == index)
       return;
 
     if (index >= size(me._items) or index < 0) {
-      logprint(DEV_WARN, "Canvas.Gui ComboBox: invalid index passed to setCurrentByIndex" ~ index);
+      logprint(DEV_WARN, "Canvas.Gui ComboBox: invalid index " ~ index ~ " passed to setCurrentByIndex");
       return;
     }
 
@@ -147,7 +147,7 @@ gui.widgets.ComboBox = {
   _itemCallback: func(index)
   {
     me._hideMenu();
-    me.setCurrentByIndex(index);
+    me.setSelectedByIndex(index);
   },
 
   setSize: func {

@@ -283,42 +283,46 @@ DefaultStyle.widgets.label = {
   new: func(parent, cfg)
   {
     me._root = parent.createChild("group", "label");
+    me._text = me._root.createChild("text", "text")
+            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
+            .set("character-size", 14)
+            .set("alignment", "left-baseline")
+            .setVisible(0);
+    me._bg = me._root.createChild("path", "bg")
+            .setVisible(0);
+    me._img = me._root.createChild("image", "image")
+            .set("preserveAspectRatio", "xMidYMid slice")
+            .setVisible(0);
   },
   setSize: func(model, w, h)
   {
-    if( me['_bg'] != nil )
-      me._bg.reset().rect(0, 0, w, h);
-    if( me['_img'] != nil )
-      me._img.set("size[0]", w)
+    me._bg.reset().rect(0, 0, w, h);
+    me._img.set("size[0]", w)
              .set("size[1]", h);
-    if( me['_text'] != nil )
-    {
-      # TODO different alignment
-      me._text.setTranslation(2, 2 + h / 2);
-      me._text.set(
-        "max-width",
-        model._cfg.get("wordWrap", 0) ? (w - 4) : 0
-      );
-    }
+    # TODO different alignment
+    me._text.setTranslation(2, 2 + h / 2);
+    me._text.set(
+      "max-width",
+      model._cfg.get("wordWrap", 0) ? (w - 4) : 0
+    );
     return me;
   },
   setText: func(model, text)
   {
-    if ( !isstr(text) or size(text) == 0 )
-    {
+    if (!isstr(text) or size(text) == 0) {
       model.setHeightForWidthFunc(nil);
-      return me._deleteElement('text');
+      me._text.setVisible(0);
+      return me;
     }
 
-    me._createElement("text", "text")
-      .setText(text);
+    me._text.setText(text);
+    me._text.setVisible(1);
 
     var hfw_func = nil;
     var min_width = me._text.maxWidth() + 4;
     var width_hint = min_width;
 
-    if( model._cfg.get("wordWrap", 0) )
-    {
+    if (model._cfg.get("wordWrap", 0)) {
       var m = me;
       hfw_func = func(w) m.heightForWidth(w);
       min_width = math.min(32, min_width);
@@ -336,38 +340,40 @@ DefaultStyle.widgets.label = {
   },
   setImage: func(model, img)
   {
-    if( img == nil or size(img) == 0 )
-      return me._deleteElement('img');
+    if (img == nil or size(img) == 0) {
+      me._img.setVisible(0);
+      me._img.clear();
+      return me;
+    }
 
-    me._createElement("img", "image")
-      .set("src", img)
-      .set("preserveAspectRatio", "xMidYMid slice");
-
+    me._img.setVisible(1);
+    me._img.set("src", img);
     return me;
   },
-  # @param bg CSS color or 'none'
+  # @description Set or clear the background color of the label
+  # @param bg scalar CSS color or 'none'
   setBackground: func(model, bg)
   {
-    if( bg == nil or bg == "none" )
-      return me._deleteElement("bg");
+    if (bg == nil or bg == "none") {
+      me._bg.setVisible(0);
+      return me;
+    }
 
-    me._createElement("bg", "path")
-      .set("fill", bg);
-
-    me.setSize(model, model._size[0], model._size[1]);
+    me._bg.setVisible(1);
+    me._bg.set("fill", bg);
     return me;
   },
   heightForWidth: func(w)
   {
-    if( me['_text'] == nil )
+    if (!me._text.getVisible()) {
       return -1;
+    }
 
     return math.max(14, me._text.heightForWidth(w - 4));
   },
   update: func(model)
   {
-    if( me['_text'] != nil )
-    {
+    if (me._text.getVisible()) {
       var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
       me._text.set("fill", me._style.getColor(color_name));
     }

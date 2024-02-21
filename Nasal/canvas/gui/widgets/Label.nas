@@ -16,17 +16,23 @@ gui.widgets.Label = {
   },
   setText: func(text)
   {
-    me._view.setText(me, text);
+    if (me._view != nil) {
+      me._view.setText(me, text);
+    }
     return me;
   },
   setImage: func(img)
   {
-    me._view.setImage(me, img);
+    if (me._view != nil) {
+      me._view.setImage(me, img);
+    }
     return me;
   },
   setBackground: func(bg)
   {
-    me._view.setBackground(me, bg);
+    if (me._view != nil) {
+      me._view.setBackground(me, bg);
+    }
     return me;
   }
 };

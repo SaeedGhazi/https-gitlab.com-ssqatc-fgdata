@@ -10,14 +10,15 @@ gui.widgets.RadioButton = {
     var m = gui.Widget.new(gui.widgets.RadioButton, cfg);
     m._focus_policy = m.StrongFocus;
     m._checked = 0;
+    m._text = "";
     m.radioGroup = nil;
     m._data = cfg.get("data", {});
 
     m._setView( style.createWidget(parent, cfg.get("type", "radio-button"), cfg) );
 
-    var radioButtonGroup = cfg.get("radioButtonGroup");
-    var parentRadio = cfg.get("parentRadio", nil);
-    var radioButtonGroupClass = cfg.get("radioButtonGroupClass");
+    var radioButtonGroup = cfg.get("radio-button-group");
+    var parentRadio = cfg.get("parent-radio", nil);
+    var radioButtonGroupClass = cfg.get("radio-button-group-class");
     if (radioButtonGroup != nil) {
       m.radioGroup = radioButtonGroup;
     } elsif (parentRadio != nil) {
@@ -29,7 +30,15 @@ gui.widgets.RadioButton = {
     }
     m.radioGroup.addRadio(m);
 
+    m.setText(m._cfg.get("text", ""));
+    m.setChecked(m._cfg.get("checked", 0));
+
     return m;
+  },
+  # @description Get the radio button group this radio button is in
+  # @return gui.widgets.RadioButtonsGroup
+  getRadioButtonsGroup: func {
+  	return me.radioGroup;
   },
   # @description Set the data for this radio button.
   # @param key Union[scalar, hash] required If @param key is a hash, this item's data is replaced with that hash.
@@ -70,15 +79,25 @@ gui.widgets.RadioButton = {
     return me;
   },
 
+  getText: func {
+    return me._text;
+  },
+
   setText: func(text) {
+    me._text = text;
     me._view.setText(me, text);
     return me;
+  },
+
+  getChecked: func {
+    return me._checked;
   },
 
   setChecked: func(checked = 1) {
     if (me._checked == checked) {
       return me;
     }
+    me._checked = checked;
 
     me._setRadioGroupSiblingsUnchecked();
     me._trigger("toggled", {checked: checked});
@@ -87,7 +106,6 @@ gui.widgets.RadioButton = {
     } else {
     	me._trigger("unchecked");
     }
-    me._checked = checked;
     me._onStateChange();
     return me;
   },

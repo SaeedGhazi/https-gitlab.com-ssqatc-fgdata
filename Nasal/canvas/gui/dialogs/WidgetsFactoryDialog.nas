@@ -80,17 +80,18 @@ var WidgetsFactoryDialog = {
 		m.radio1 = gui.widgets.RadioButton.new(m.tabsContent)
 						.setText("Radio button 1");
 		m.radio1.listen("group-checked-radio-changed", func(e) {
-			m.radio_label.setText("Selected radio button: " ~ (e.detail.checkedRadio != nil ? e.detail.checkedRadio._text : "none"));
+			var checkedRadio = m.radio1.getRadioButtonsGroup().getCheckedRadio();
+			m.radio_label.setText("Selected radio button: " ~ (checkedRadio != nil ? checkedRadio._text : "none"));
 		});
 		
 		m.tab_1.addItem(m.radio1);
-		m.radio2 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
+		m.radio2 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {"parent-radio": m.radio1})
 						.setText("Radio button 2");
 		m.tab_1.addItem(m.radio2);
-		m.radio3 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
+		m.radio3 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {"parent-radio": m.radio1})
 						.setText("Radio button 3");
 		m.tab_1.addItem(m.radio3);
-		m.radio4 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {parentRadio: m.radio1})
+		m.radio4 = gui.widgets.RadioButton.new(parent: m.tabsContent, cfg: {"parent-radio": m.radio1})
 						.setText("Radio button 4");
 		m.tab_1.addItem(m.radio4);
 

@@ -23,6 +23,7 @@ Contents ----------------------------------------------------------------------
    3.11 LINEAR_FEATURE_LIST
    3.12 OBJECT_LIGHT
    3.13 LIGHT_LIST
+   3.14 OBJECT_INSTANCED
 
 4  model manager ("/models/model")
    4.1  static objects
@@ -644,6 +645,54 @@ The type of the light is automatically detected based on the number of parameter
 Where:
 - X,Y,Z are the cartesian coordinates of the light. +X is South and +Y is East.
 - The rest of the parameters are the same as OBJECT_LIGHT (Section 3.12)
+
+3.14 OBJECT_INSTANCED
+---------------------
+Defines a model and properties to place multiple instances of the object
+
+Example:
+
+  OBJECT_INSTANCED Models/Commercial/tower-glass-dark-blue.ac instances.txt default -129.00115321 -8.98951092 0
+
+Syntax:
+
+  OBJECT_INSTANCED <object-path> <filename> <effect-path> <lon> <lat> <elev-m>
+
+Where:
+- <object-path> is the path to an object relative to the data directory (same as OBJECT_SHARED). Models used should be raw models (e.g. *.ac) and not *.xml's, and should contain as few objects as possible (recommendation is single object per model), using a texture atlas for representing different semantic parts in the model instead of splitting them into various objects.
+- <filename> is the name of the file containing instance positions and other properties
+- <effect-path> is the name of the effect that will be applied. See below for currently available options.
+- <lon>, <lat>, <elev-m> defines the position relative to which all the instances will be placed (similar to BUILDING_LIST)
+
+The referenced <filename> (in the example instances.txt) contains lines defining one instance per line:
+
+<X> <Y> <Z> <hdg> <pitch> <roll> <scale>
+
+Where:
+- X, Y, Z are the cartsian coordiates of the instance, +X is South and +Y is East.
+- (optional) hdg, pitch and roll define the rotation of the instance, matching OBJECT_SHARED exactly
+- (optional) scale is a multiplier for the scale of the instance, with a value of 1 indicate no scaling
+
+Each line will therefore contain 3 (position only), 6 (position+rotation), 4 (position+scale) or 7 (all properties) parameters. In the case of both rotation and scaling, the scaling is applied before rotation.
+
+If the effect being used supports custom attributes, the line *must contain* 4 additional custom parameters:
+
+<X> <Y> <Z> <hdg> <pitch> <roll> <scale> <custom-attrib-1> <custom-attrib-2> <custom-attrib-3> <custom-attrib-4>
+
+Again, the intermediate rotation and scaling parameters are optional and can be skipped if the instance does not require any rotation/scaling, leading to 7 (position+custom), 10 (position+rotation+custom), 8 (position+scale+custom) or 11 (all properties) parameters.
+
+The function of custom attributes will differ from effect to effect, see below.
+
+### Instancing Effects
+There are two types of effects supported by the instancing framework:
+
+- Effects with default parameters
+  - "default": The default instancing effect described above which does basic instance position, rotation and scaling
+  - "Effects/object-instancing": Same as "default"
+- Effects with additional custom parameters
+  - "Effects/object-instancing-colored": Requires four additional custom attributes, which are the colors <red> <green> <blue> <factor> respectively. The instance's color/texture will be blended with the (r,g,b) values provided based on the given factor. A factor of 0 implies keeping the original color, while a factor of 1 replaces the original color with the provided (r,g,b) completely.
+
+Note: Implementing new effects with additional custom parameters requires a small source-side change in ObjectInstanceBin.hxx
 
 4 model manager ("/models/model") --------------------------------------------
 

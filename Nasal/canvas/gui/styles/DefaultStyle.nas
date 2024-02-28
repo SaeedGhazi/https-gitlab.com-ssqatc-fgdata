@@ -51,7 +51,7 @@ DefaultStyle.widgets.button = {
   {
     me._label.setText(text);
 
-    var min_width = math.max(80, me._label.maxWidth() + 16);
+    var min_width = text ? math.max(80, me._label.maxWidth() + 16) : 16;
     model.setLayoutMinimumSize([min_width, 16]);
     model.setLayoutSizeHint([min_width, 28]);
 
@@ -215,7 +215,6 @@ DefaultStyle.widgets.switch = {
 DefaultStyle.widgets["radio-button"] = {
   new: func(parent, cfg) {
     me._root = parent.createChild("group", "radio-button");
-    me._bg = me._root.createChild("path");
     me._icon = me._root.createChild("group", "radio-button-icon");
     me._icon_background = me._icon.createChild("path", "radio-button-icon-border")
             .circle(8.5, 9, 9);
@@ -231,7 +230,6 @@ DefaultStyle.widgets["radio-button"] = {
             .set("alignment", "left-center");
   },
   setSize: func(model, w, h) {
-    me._bg.reset().rect(0, 0, w, h);
     me._icon.setTranslation(3, int((h - 18) / 2));
     me._label.setTranslation(24, int(h / 2) + 1);
 
@@ -240,7 +238,7 @@ DefaultStyle.widgets["radio-button"] = {
   setText: func(model, text) {
     me._label.setText(text);
 
-    var min_width = me._label.maxWidth() + 3 + 24;
+    var min_width = text ? (me._label.maxWidth() + 3 + 24) : 0;
     model.setLayoutMinimumSize([min_width, 24]);
     model.setLayoutSizeHint([min_width, 24]);
 
@@ -248,8 +246,6 @@ DefaultStyle.widgets["radio-button"] = {
   },
   update: func(model) {
     var backdrop = !model._windowFocus();
-    
-    me._bg.set("fill", me._style.getColor("radio_button_bg_color" ~ (model._hover ? "_hovered" : "")));
 
     me._icon_border.set("stroke", me._style.getColor("radio_button_selected_indicator_border_color"));
     if (backdrop) {

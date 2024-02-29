@@ -264,18 +264,48 @@ var Window = {
     setInputFocus(nil);
     return me;
   },
-  setPosition: func
+  setPosition: func(left=nil, top=nil, right=nil, bottom=nil)
   {
-    if( size(arg) == 1 )
-      var arg = arg[0];
-    var (x, y) = arg;
+    if (typeof(left) == "vector") {
+     if (size(left) == 2) {
+        var (left, top) = left;
+      } elsif (size(left) == 4) {
+        var (left, top, right, bottom) = left;
+      } else {
+        die("canvas.Window.setPosition called with a vector as first argument, which is of unsupported length " ~ size(left));
+      }
+    }
+    if (typeof(top) == "vector") {
+      if (size(top) == 2) {
+        var (right, bottom) = top;
+      } else {
+        die("canvas.Window.setPosition called with a vector as second argument, which is of unsupported length " ~ size(top));
+      }
+    }
 
-    me.setInt("tf/t[0]", x);
-    me.setInt("tf/t[1]", y);
+    if (left != nil) {
+      me.setInt("tf/t[0]", left);
+    }
+    if (top != nil) {
+      me.setInt("tf/t[1]", top);
+    }
+    if (right != nil) {
+      me.setInt("right", right);
+    }
+    if (bottom != nil) {
+      me.setInt("bottom", bottom);
+    }
     return me;
   },
   getPosition:  func {
     return [me.get("tf/t[0]"), me.get("tf/t[1]")];
+  },
+  getCSSPosition: func {
+    var top = me.get("tf/t[0]");
+    var left = me.get("tf/t[1]");
+    var right = me.get("right");
+    var bottom = me.get("bottom");
+    return [top, left, bottom, right];
   },
   centerOnScreen: func {
     var desktopSize = [props.globals.getValue("/sim/gui/canvas/size[0]"), props.globals.getValue("/sim/gui/canvas/size[1]")];

@@ -295,8 +295,16 @@ DefaultStyle.widgets.label = {
     me._bg.reset().rect(0, 0, w, h);
     me._img.set("size[0]", w)
              .set("size[1]", h);
-    # TODO different alignment
-    me._text.setTranslation(2, 2 + h / 2);
+    if (model._text_align == "left") {
+      me._text.set("alignment", "left-baseline");
+      me._text.setTranslation(2, 2 + h / 2);
+    } elsif (model._text_align == "center") {
+      me._text.set("alignment", "center-baseline");
+      me._text.setTranslation(2 + w / 2, 2 + h / 2)
+    } elsif (model._text_align == "right") {
+      me._text.set("alignment", "right-baseline");
+      me._text.setTranslation(w - 2, 2 + h / 2);
+    }
     me._text.set(
       "max-width",
       model._cfg.get("wordWrap", 0) ? (w - 4) : 0
@@ -359,6 +367,9 @@ DefaultStyle.widgets.label = {
     me._bg.set("fill", bg);
     return me;
   },
+  setColor: func(model, color) {
+    me._text.set("fill", color);
+  },
   heightForWidth: func(w)
   {
     if (!me._text.getVisible()) {
@@ -369,7 +380,7 @@ DefaultStyle.widgets.label = {
   },
   update: func(model)
   {
-    if (me._text.getVisible()) {
+    if (me._text.getVisible() and model._color == nil) {
       var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
       me._text.set("fill", me._style.getColor(color_name));
     }

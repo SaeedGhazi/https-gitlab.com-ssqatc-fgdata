@@ -67,11 +67,11 @@
 		<!-- Add the following line to enable snow: -->
 		<snow-enabled>1</snow-enabled>
 		<!--Ambient correction -->
-		<ambient-correction type="float"> 0.0 </ambient-correction>
+		<ambient-correction type="float"> 0.05 </ambient-correction>
 		<material>
 			<active>true</active>
 			<color-mode-uniform>1</color-mode-uniform>
-			<ambient type="vec4d">0.6 0.6 0.6 1.0</ambient>
+			<ambient type="vec4d">1.0 1.0 1.0 1.0</ambient>
 			<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
 			<specular type="vec4d">0.0 0.0 0.0 1.0</specular>
 			<emissive type="vec4d">0.02 0.02 0.02 1.0</emissive>

@@ -179,18 +179,19 @@ var FASCIA = {
   COPLT  : 69
 };
 
-var SURFACE_TYPES = {
-  1 : "HARD SURFACE",  # Asphalt
-  2 : "HARD SURFACE", # Concrete
-  3 : "TURF",
-  4 : "DIRT",
-  5 : "GRAVEL",
-  #  Helipads
-  6 : "HARD SURFACE",  # Asphalt
-  7 : "HARD SURFACE", # Concrete
-  8 : "TURF",
-  9 : "DIRT",
-  0 : "GRAVEL",
+var get_SURFACE_TYPES = func(type) {
+  if (type <= 2 or (type >= 20 and type <= 38) or (type >= 50 and type <= 57)) {
+    return "HARD SURFACE";
+  }
+  if (type == 3) {
+    return "TURF";
+  }
+  if (type == 4) {
+    return "DIRT";
+  }
+  if (type == 5) {
+    return "GRAVEL";
+  }
 };
 
 # Vertical ranges, and labels.

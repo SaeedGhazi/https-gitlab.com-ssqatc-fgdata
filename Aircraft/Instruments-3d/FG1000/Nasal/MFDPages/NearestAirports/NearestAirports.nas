@@ -234,7 +234,7 @@ var NearestAirports =
     if (rwy_info != nil ) {
       var dim = sprintf("%ift x %ift", 3.28 * rwy_info.length, 3.28 * rwy_info.width);
       me.setTextElement("RunwayDimensions", dim);
-      me.setTextElement("RunwaySurface", SURFACE_TYPES[rwy_info.surface]);
+      me.setTextElement("RunwaySurface", get_SURFACE_TYPES(rwy_info.surface));
     } else {
       me.setTextElement("RunwayDimensions", "");
       me.setTextElement("RunwaySurface", "");

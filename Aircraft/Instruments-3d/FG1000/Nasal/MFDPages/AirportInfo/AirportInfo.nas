@@ -180,7 +180,7 @@ var AirportInfo =
       var dim = sprintf("%ift x %ift", 3.28 * rwy_info.length, 3.28 * rwy_info.width);
       me.setTextElement("RwyDimensions", dim);
 
-      me.setTextElement("RwySurface", SURFACE_TYPES[rwy_info.surface]);
+      me.setTextElement("RwySurface", get_SURFACE_TYPES(rwy_info.surface));
       #me.setTextElement("RwyLighting", rwy_info.surface);
     }
   },

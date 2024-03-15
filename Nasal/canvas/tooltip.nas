@@ -190,7 +190,15 @@ var Tooltip = {
     if (me._mapping == "open-close") return (val == 1) ? "OPEN" : "CLOSED";
     if (me._mapping == "close-open") return (val == 1) ? "CLOSED" : "OPEN";
 
-    if (me._mapping == "heading") return geo.normdeg(val);
+    if (me._mapping == "heading") {
+      # ensure 0 degree heading is shown as 360. Note this means we
+      # assume integer headings, but that is hopefully correct
+      # for use in a tooltip.
+      # https://sourceforge.net/p/flightgear/codetickets/2874/
+      var hdg = math.round(geo.normdeg(val));
+      return hdg == 0 ? 360 : hdg;
+    }
+
     if (me._mapping == "nasal") return me._mappingFunc(val);
 
     return val;

@@ -94,6 +94,7 @@ FlightGear 2020.3.6
 <PropertyList>
   <name type="string">Honeycomb Aeronautical Bravo Throttle Quadrant</name>
   <debug-events type="bool">true</debug-events>
+  <step type="double">5.0</step>
   
   <event> <!-- Axis 0 -->
     <desc>Throttle Engine 1</desc>
@@ -176,7 +177,8 @@ FlightGear 2020.3.6
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
+              <!--node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1); -->
+              node = props.globals.getNode("/autopilot/locks/heading", 1);
               if ( node.getValue() == "dg-heading-hold" ) {
                 node.setValue( "" );
               } else {
@@ -192,11 +194,11 @@ FlightGear 2020.3.6
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
-              if ( node.getValue() == "dg-nav1-hold" ) {
+              node = props.globals.getNode("/autopilot/locks/heading", 1);
+              if ( node.getValue() == "nav1-hold" ) {
                 node.setValue( "" );
               } else {
-                node.setValue( "dg-nav1-hold" );
+                node.setValue( "nav1-hold" );
               }
           </script>
       </binding>
@@ -208,29 +210,30 @@ FlightGear 2020.3.6
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
-              if ( node.getValue() == "dg-apr-hold" ) {
+              node = props.globals.getNode("/autopilot/locks/heading", 1);
+              if ( node.getValue() == "nav1-hold" ) {
                 node.setValue( "" );
               } else {
-                node.setValue( "dg-apr-hold" );
+                node.setValue( "nav1-hold" );
               }
-              node = props.globals.getNode("/controls/autopilot/inputs/vertical", 1);
-              if ( node.getValue() == "dg-apr-hold" ) {
+              node = props.globals.getNode("/autopilot/locks/altitude", 1);
+              if ( node.getValue() == "gs1-hold" ) {
                 node.setValue( "" );
               } else {
-                node.setValue( "dg-apr-hold" );
+                node.setValue( "gs1-hold" );
               }
           </script>
       </binding>
   </event>
   
+  <!-- Note that the generic autopilot for flightgear doesn't appear to support rev hold -->
   <event>
     <name>button-top</name>
     <desc type="string">AP: Select REV Hold</desc>
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/lateral", 1);
+              node = props.globals.getNode("/autopilot/locks/heading", 1);
               if ( node.getValue() == "dg-rev-hold" ) {
                 node.setValue( "" );
               } else {
@@ -246,11 +249,11 @@ FlightGear 2020.3.6
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/vertical", 1);
-              if ( node.getValue() == "dg-alt-hold" ) {
+              node = props.globals.getNode("/autopilot/locks/altitude", 1);
+              if ( node.getValue() == "altitude-hold" ) {
                 node.setValue( "" );
               } else {
-                node.setValue( "dg-alt-hold" );
+                node.setValue( "altitude-hold" );
               }
           </script>
       </binding>
@@ -263,11 +266,11 @@ FlightGear 2020.3.6
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/vertical", 1);
-              if ( node.getValue() == "dg-vs-hold" ) {
+              node = props.globals.getNode("/autopilot/locks/altitude", 1);
+              if ( node.getValue() == "vertical-speed-hold" ) {
                 node.setValue( "" );
               } else {
-                node.setValue( "dg-vs-hold" );
+                node.setValue( "vertical-speed-hold" );
               }
           </script>
       </binding>
@@ -279,11 +282,11 @@ FlightGear 2020.3.6
       <binding>
           <command type="string">nasal</command>
           <script>
-              node = props.globals.getNode("/controls/autopilot/inputs/speed", 1);
-              if ( node.getValue() == "ias" ) {
+              node = props.globals.getNode("/autopilot/locks/speed", 1);
+            if ( node.getValue() == "speed-with-throttle" ) {
                 node.setValue( "" );
               } else {
-                node.setValue( "ias" );
+                node.setValue( "speed-with-throttle" );
               }
           </script>
       </binding>
@@ -304,6 +307,161 @@ FlightGear 2020.3.6
           </script>
       </binding>
   </event>
+  
+  <event>
+    <name>button-300</name>
+    <desc type="string">Increase Autopilot setting</desc>
+    <binding>
+          <command type="string">nasal</command>
+          <script>
+              <!-- NOTE: this property should probably be made more consistent with the generic autopilot, i.e. use /autopilot/locks/ or something -->
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+              if ( node.getValue() == "ias" ) {
+                target = props.globals.getNode("/autopilot/settings/target-speed-kt",1);
+                val = target.getValue();
+                if (val == nil) {
+                   val = 0;
+                } else {
+                   val = val + 10;
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Target airspeed set to: %d kts", val));
+              }
+              
+              if ( node.getValue() == "crs" ) {
+                target = props.globals.getNode("/instrumentation/nav/radials/selected-deg",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val + 1;
+                    if (val > 359) {
+                        val = 0;
+                    }
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Selected course: %d deg", val));
+                
+              }
+              
+              if ( node.getValue() == "hdg" ) {
+                target = props.globals.getNode("/autopilot/settings/heading-bug-deg",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val + 1;
+                    if (val > 359) {
+                        val = 0;
+                    }
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Selected heading: %d deg", val));
+              }
+              if ( node.getValue() == "vs" ) {
+                target = props.globals.getNode("/autopilot/settings/vertical-speed-fpm",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val + 10;
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Target vertical speed set to: %d fpm", val));
+              }
+              if ( node.getValue() == "alt" ) {
+                target = props.globals.getNode("/autopilot/settings/target-altitude-ft",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val + 100;
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Target target altitude set to: %d ft", val));
+              }
+          </script>
+      </binding>
+   
+  </event>
+  
+    <event>
+    <name>button-301</name>
+    <desc type="string">Decrease Autopilot setting</desc>
+    <binding>
+          <command type="string">nasal</command>
+          <script>
+              <!-- NOTE: this property should probably be made more consistent with the generic autopilot, i.e. use /autopilot/locks/ or something -->
+              node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
+              if ( node.getValue() == "ias" ) {
+                target = props.globals.getNode("/autopilot/settings/target-speed-kt",1);
+                val = target.getValue();
+                if (val == nil) {
+                   val = 0;
+                } else {
+                   val = val - 10;
+                }
+                target.setValue(val);
+                 gui.popupTip(sprintf("Target airspeed set to: %d kts", val));
+              }
+              
+              if ( node.getValue() == "crs" ) {
+                target = props.globals.getNode("/instrumentation/nav/radials/selected-deg",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val - 1;
+                    if (val== 0) {
+                        val = 360;
+                    }
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Selected course: %d deg", val));
+                
+              }
+              
+              if ( node.getValue() == "hdg" ) {
+                target = props.globals.getNode("/autopilot/settings/heading-bug-deg",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val - 1;
+                    if (val == 0) {
+                        val = 360;
+                    }
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Selected heading: %d deg", val));
+              }
+              if ( node.getValue() == "vs" ) {
+                target = props.globals.getNode("/autopilot/settings/vertical-speed-fpm",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val - 10;
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Target vertical speed set to: %d fpm", val));
+              }
+              if ( node.getValue() == "alt" ) {
+                target = props.globals.getNode("/autopilot/settings/target-altitude-ft",1);
+                val = target.getValue();
+                if (val == nil) {
+                    val = 0;
+                } else {
+                    val = val - 100;
+                }
+                target.setValue(val);
+                gui.popupTip(sprintf("Target target altitude set to: %d ft", val));
+              }
+              
+          </script>
+      </binding>
+  </event>
+  
   
   <event>
     <name>button-302</name>
@@ -332,7 +490,8 @@ FlightGear 2020.3.6
           <command type="string">nasal</command>
           <script>
               node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
-                node.setValue( "ias" );
+              node.setValue( "ias" );
+              gui.popupTip(sprintf("Setting selector to change air speed"));
           </script>
       </binding>
   </event>
@@ -345,6 +504,7 @@ FlightGear 2020.3.6
           <script>
               node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
               node.setValue( "crs" );
+              gui.popupTip(sprintf("Setting selector to change course"));
           </script>
       </binding>
   </event>
@@ -357,6 +517,7 @@ FlightGear 2020.3.6
           <script>
               node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
               node.setValue( "hdg" );
+              gui.popupTip(sprintf("Setting selector to change heading"));
           </script>
       </binding>
   </event>
@@ -370,6 +531,7 @@ FlightGear 2020.3.6
           <script>
               node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
               node.setValue( "vs" );
+              gui.popupTip(sprintf("Setting selector to change vertical air speed"));
           </script>
       </binding>
   </event>
@@ -382,6 +544,7 @@ FlightGear 2020.3.6
           <script>
               node = props.globals.getNode("/controls/autopilot/inputs/selector", 1);
               node.setValue( "alt" );
+              gui.popupTip(sprintf("Setting selector to change altitude"));
           </script>
       </binding>
   </event>
@@ -441,5 +604,22 @@ FlightGear 2020.3.6
             }
      </script>
     </binding>
+  </event>
+  
+  <event>
+    <name>button-733</name>
+
+    <desc type="string">Toggle Tailwheel lock</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/gear/tailwheel-lock", 1);</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/gear/tailwheel-lock", 0)</script>
+          </binding>
+      </mod-up>
   </event>
 </PropertyList>

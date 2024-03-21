@@ -77,6 +77,8 @@ FlightGear 2020.3.6
 
 <PropertyList>
   <name type="string">Honeycomb Aeronautical Alpha Flight Controls</name>
+  
+  <!--
 
   <axis>
       <desc>Aileron</desc>
@@ -97,6 +99,8 @@ FlightGear 2020.3.6
           <offset type="double">0</offset>
       </binding>
   </axis>
+  
+  -->
 
   <axis n="2">
       <desc>View, Direction</desc>
@@ -143,7 +147,7 @@ FlightGear 2020.3.6
           </binding>
       </high>
   </axis>
-  
+  <!--
   <button n="0">
       <desc>View, Cycle Forwards</desc>
       <repeatable>false</repeatable>
@@ -356,6 +360,8 @@ FlightGear 2020.3.6
           <script>setprop("/controls/switches/magnetos", 1)</script>
       </binding>
   </button>
+  
+  -->           
 
 <!-- Linux and FlightGear does not handle more than 32 USB buttons.
      See FlightGear Ticket 2212.

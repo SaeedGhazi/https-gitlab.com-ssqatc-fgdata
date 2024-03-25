@@ -17,7 +17,7 @@ define([
                 "Afternoon" : "afternoon",
                 "Dusk" : "dusk",
                 "Evening" : "evening",
-                "Night" : "night",
+                "Night" : "midnight",
             }
             offsetType = offsetTypes[type] || null;
             if (!offsetType) {

@@ -134,17 +134,7 @@ float light_func (in float x, in float a, in float b, in float c, in float d, in
     }
 
 
-// Apply the ALS haze model to a specific fragment
-vec4 applyHaze(inout vec4  fragColor, 
-                inout vec3  hazeColor, 
-                in    vec3  secondary_light,
-                in    float ct,
-                in    float hazeLayerAltitude,
-                in    float visibility,
-                in    float avisibility,
-                in    float dist,
-                in    float lightArg,
-                in    float mie_angle);
+   
 
 
 void main (void)
@@ -427,10 +417,10 @@ void main (void)
                 reflFactor = gl_FrontMaterial.shininess* 0.0078125 + transparency_offset;
                 }
 
-            // enhance low angle reflection by a fresnel term
-            float fresnel_enhance = (1.0-smoothstep(0.0,0.4, dot(N,-normalize(vertVec)))) * refl_fresnel_factor;
+	    // enhance low angle reflection by a fresnel term
+	    float fresnel_enhance = (1.0-smoothstep(0.0,0.4, dot(N,-normalize(vertVec)))) * refl_fresnel_factor;
 
-            reflFactor+=fresnel_enhance;
+	    reflFactor+=fresnel_enhance;
 
             reflFactor = clamp(reflFactor, 0.0, 1.0);
 
@@ -440,14 +430,14 @@ void main (void)
             vec4 reflfrescolor = mix(reflcolor, fresnel, refl_fresnel  * v);
             vec4 noisecolor = mix(reflfrescolor, noisevec, refl_noise);
             //vec4 raincolor = vec4(noisecolor.rgb * reflFactor, 1.0);
-            vec4 raincolor = vec4(noisecolor.rgb, 1.0);
+	    vec4 raincolor = vec4(noisecolor.rgb, 1.0);
             raincolor += Specular;
             raincolor *= light_diffuse;
 
-            if (refl_type == 1)
-                {mixedcolor = mix(texel, raincolor, reflFactor * refl_d).rgb;}
-            else if (refl_type == 2)
-                {mixedcolor = ((texel +(reflcolor * reflFactor * refl_d))-(0.5*reflFactor * refl_d)).rgb;}
+	    if (refl_type == 1)
+            	{mixedcolor = mix(texel, raincolor, reflFactor * refl_d).rgb;}
+	    else if (refl_type == 2)
+		{mixedcolor = ((texel +(reflcolor * reflFactor * refl_d))-(0.5*reflFactor * refl_d)).rgb;}
 
         } else {
             mixedcolor = texel.rgb;
@@ -459,7 +449,7 @@ void main (void)
     //////////////////////////////////////////////////////////////////////
     //begin DIRT
     //////////////////////////////////////////////////////////////////////
-    if (dirt_enabled >= 1) {
+    if (dirt_enabled >= 1){
         vec3 dirtFactorIn = vec3 (dirt_r_factor, dirt_g_factor, dirt_b_factor);
         vec3 dirtFactor = reflmap.rgb * dirtFactorIn.rgb;
         //dirtFactor.r = smoothstep(0.0, 1.0, dirtFactor.r);
@@ -551,29 +541,153 @@ void main (void)
     // END lightmap
     /////////////////////////////////////////////////////////////////////
 
+
+    /// BEGIN fog amount
+
+    float transmission;
+    float vAltitude;
+    float delta_zv;
+    float H;
+    float distance_in_layer;
+    float transmission_arg;
+    float eqColorFactor;
+
+    float mvisibility = min(visibility, avisibility);
+
+    if (dist >  0.04 * mvisibility) 
+        {
+        if (delta_z > 0.0) // we're inside the layer
+            {
+            if (ct < 0.0) // we look down 
+                {
+                distance_in_layer = dist;
+                vAltitude = min(distance_in_layer,mvisibility) * ct;
+                delta_zv = delta_z - vAltitude;
+                }
+            else 	// we may look through upper layer edge
+                {
+                H = dist * ct;
+                if (H > delta_z) {distance_in_layer = dist/H * delta_z;}
+                else {distance_in_layer = dist;}
+                vAltitude = min(distance_in_layer,visibility) * ct;
+                delta_zv = delta_z - vAltitude;	
+                }
+            }
+        else // we see the layer from above, delta_z < 0.0
+            {	
+            H = dist * -ct;
+            if (H  < (-delta_z)) // we don't see into the layer at all, aloft visibility is the only fading
+                {
+                distance_in_layer = 0.0;
+                delta_zv = 0.0;
+                }		
+            else
+                {
+                vAltitude = H + delta_z;
+                distance_in_layer = vAltitude/H * dist; 
+                vAltitude = min(distance_in_layer,visibility) * (-ct);
+                delta_zv = vAltitude;
+                } 
+            }
+
+        transmission_arg = (dist-distance_in_layer)/avisibility;
+
+
+        if (visibility < avisibility)
+            {
+            transmission_arg = transmission_arg + (distance_in_layer/visibility);
+            eqColorFactor = 1.0 - 0.1 * delta_zv/visibility - (1.0 -effective_scattering);
+            }
+        else 
+            {
+            transmission_arg = transmission_arg + (distance_in_layer/avisibility);
+            eqColorFactor = 1.0 - 0.1 * delta_zv/avisibility - (1.0 -effective_scattering);
+            }
+        transmission =  fog_func(transmission_arg, alt);
+        if (eqColorFactor < 0.2) eqColorFactor = 0.2;
+        }
+    else
+        {
+        eqColorFactor = 1.0;
+        transmission = 1.0;
+        }
+
+    /// END fog amount
+
+    /// BEGIN fog color
+
+    vec3 hazeColor = get_hazeColor(fog_lightArg);
+
+	float rShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt + 420000.0);
+	float lightIntensity = length(hazeColor * effective_scattering) * rShade;
+
+    if (transmission<  1.0)
+        {
+
+        
+
+        if (fog_lightArg < 10.0)
+            {
+            intensity = length(hazeColor);
+            float mie_magnitude = 0.5 * smoothstep(350000.0, 150000.0, terminator-sqrt(2.0 * EarthRadius * terrain_alt));
+            hazeColor = intensity * ((1.0 - mie_magnitude) + mie_magnitude * mie_angle) * normalize(mix(hazeColor,  vec3 (0.5, 0.58, 0.65), mie_magnitude * (0.5 - 0.5 * mie_angle)) ); 
+            }
+
+        intensity = length(hazeColor);
+        hazeColor = intensity * normalize (mix(hazeColor, intensity * vec3 (1.0,1.0,1.0), 0.7* smoothstep(5000.0, 50000.0, alt)));
+
+        hazeColor.r = hazeColor.r * 0.83;
+        hazeColor.g = hazeColor.g * 0.9; 
+
+        float fade_out = max(0.65 - 0.3 *overcast, 0.45);
+        intensity = length(hazeColor);
+        hazeColor = intensity * normalize(mix(hazeColor,  1.5* shadedFogColor, 1.0 -smoothstep(0.25, fade_out,fog_earthShade) )); 
+        hazeColor = intensity * normalize(mix(hazeColor,  shadedFogColor, (1.0-smoothstep(0.5,0.9,eqColorFactor)))); 
+
+        float shadow = mix( min(1.0 + dot(VNormal,gl_LightSource[0].position.xyz),1.0), 1.0, 1.0-smoothstep(0.1, 0.4, transmission));
+        hazeColor = mix(shadow * hazeColor, hazeColor, 0.3 + 0.7* smoothstep(250000.0, 400000.0, terminator));
+        }
+    else
+        {
+        hazeColor = vec3 (1.0, 1.0, 1.0);
+        }
+
+    if (use_IR_vision)
+	{
+	//hazeColor.rgb = max(hazeColor.rgb, vec3 (0.5, 0.5, 0.5));
+	}
+
+
+    /// END fog color
 	fragColor = clamp(fragColor, 0.0, 1.0);
-    vec3 hazeColor = get_hazeColor(lightArg);
+    	//hazeColor = clamp(hazeColor, 0.0, 1.0);
 
     ///BEGIN Rayleigh fog ///
     // Only compute fog if terrain level is 'Ultra'
     if ((quality_level > 5) && (tquality_level > 5))
     {
-        // Rayleigh color shift due to out-scattering
-        float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
-        float outscatter = 1.0-exp(-dist/rayleigh_length);
-        fragColor.rgb = rayleigh_out_shift(fragColor.rgb,outscatter);
+    	// Rayleigh color shift due to out-scattering
+    	float rayleigh_length = 0.5 * avisibility * (2.5 - 1.9 * air_pollution)/alt_factor(eye_alt, eye_alt+relPos.z);
+    	float outscatter = 1.0-exp(-dist/rayleigh_length);
+    	fragColor.rgb = rayleigh_out_shift(fragColor.rgb,outscatter);
 
-        // Rayleigh color shift due to in-scattering
-
-        float rShade = 1.0 - 0.9 * smoothstep(-terminator_width+ terminator, terminator_width + terminator, yprime_alt + 420000.0);
-        //float lightIntensity = length(diffuse_term.rgb)/1.73 * rShade;
-        float lightIntensity = length(hazeColor * effective_scattering) * rShade;
-        vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
-        float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
-        fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
+	vec3 rayleighColor = vec3 (0.17, 0.52, 0.87) * lightIntensity;
+   	float rayleighStrength = rayleigh_in_func(dist, air_pollution, avisibility/max(lightIntensity,0.05), eye_alt, eye_alt + relPos.z);
+  	fragColor.rgb = mix(fragColor.rgb, rayleighColor,rayleighStrength);
     }
     /// END Rayleigh fog
 
-    gl_FragColor = applyHaze(fragColor, hazeColor, secondary_light, ct, hazeLayerAltitude, visibility, avisibility, dist, lightArg, mie_angle);
+    // don't let the light fade out too rapidly
+	lightArg = (terminator + 200000.0)/100000.0;
+	float minLightIntensity = min(0.2,0.16 * lightArg + 0.5);
+	vec3 minLight = minLightIntensity * vec3 (0.2, 0.3, 0.4);
+	hazeColor *= eqColorFactor * fog_earthShade;
+	hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
+
+      fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
+
+
+      fragColor.rgb = filter_combined(fragColor.rgb);
+    gl_FragColor = fragColor;
     }

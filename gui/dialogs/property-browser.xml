@@ -7,47 +7,57 @@
 	<default-padding>3</default-padding>
 
 	<group>
-		<layout>hbox</layout>
-		<default-padding>1</default-padding>
+		<layout>vbox</layout>
+		<group>
+			<layout>hbox</layout>
+				<default-padding>1</default-padding>
 
-		<button>
-			<legend></legend>
-			<pref-width>16</pref-width>
-			<pref-height>16</pref-height>
-			<border>2</border>
-		<!-- looks better in anthrax style -->
-			<color>
-				<red>0.34</red>
-				<green>0.33</green>
-				<blue>0.35</blue>
-			</color>
-		<!-- -->
-			<binding>
-				<command>nasal</command>
-				<script>clone(dir)</script>
-			</binding>
-		</button>
+				<button>
+					<legend>clone</legend>
+					<pref-width>64</pref-width>
+					<pref-height>16</pref-height>
+					<border>2</border>
+				<!-- looks better in anthrax style -->
+					<color>
+						<red>0.34</red>
+						<green>0.33</green>
+						<blue>0.35</blue>
+					</color>
+				<!-- -->
+					<binding>
+						<command>nasal</command>
+						<script>clone(dir)</script>
+					</binding>
+				</button>
+				<empty><whatever/></empty>
 
-		<empty><whatever/></empty>
+				<text>
+					<label>/</label>
+					<property>/sim/gui/dialogs/property-browser/title</property>
+					<live>true</live>
+				</text>
 
-		<text>
-			<label>/</label>
-			<property>/sim/gui/dialogs/property-browser/title</property>
-			<live>true</live>
-		</text>
+				<empty><stretch>true</stretch></empty>
 
-		<empty><stretch>true</stretch></empty>
-
-		<button>
-			<legend></legend>
-			<key>Esc</key>
-			<pref-width>16</pref-width>
-			<pref-height>16</pref-height>
-			<border>2</border>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
+				<button>
+					<legend>X</legend>
+					<key>Esc</key>
+					<pref-width>16</pref-width>
+					<pref-height>16</pref-height>
+					<border>2</border>
+					<binding>
+						<command>dialog-close</command>
+					</binding>
+				</button>
+		</group>
+		<group>
+			<layout>hbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label>Ctrl click '.' for verbose; Shift click '.' to dump</label>
+			</text>
+			<empty><stretch>true</stretch></empty>
+		</group>
 	</group>
 
 	<hrule/>
@@ -190,7 +200,7 @@
 				self.setValues({
 					"name": name ~ i,
 					"dialog-name": name ~ i,
-					"group[0]/text/property": base ~ "/title",
+					"group[0]/group[0]/text/property": base ~ "/title",
 					"property-list/property": base ~ "/list",
 					"group[1]/text/property": base ~ "/label",
 					"group[1]/input/property": base ~ "/input",
@@ -205,7 +215,7 @@
 				self.setValues({
 					"name": "property-browser",
 					"dialog-name": "property-browser",
-					"group[0]/text/property": originalPath ~ "/title",
+					"group[0]/group[0]/text/property": originalPath ~ "/title",
 					"property-list/property": originalPath ~ "/list",
 					"group[1]/text/property": originalPath ~ "/label",
 					"group[1]/input/property": originalPath ~ "/input",

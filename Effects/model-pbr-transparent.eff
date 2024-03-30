@@ -8,16 +8,6 @@
     <!-- Alpha Coverage -->
     <blend>1</blend>
     <alpha-cutoff>-1.0</alpha-cutoff>
-    <!-- ibl.glsl -->
-    <texture n="8">
-      <image>Textures/PBR/dfg_lut.dds</image>
-      <type>2d</type>
-      <filter>linear</filter>
-      <mag-filter>linear</mag-filter>
-      <wrap-s>clamp-to-edge</wrap-s>
-      <wrap-t>clamp-to-edge</wrap-t>
-      <internal-format>normalized</internal-format>
-    </texture>
     <!-- shadows.glsl -->
     <show-shadow-cascades>
       <use>/sim/rendering/hdr/debug/show-shadow-cascades</use>

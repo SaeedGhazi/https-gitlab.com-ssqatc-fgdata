@@ -29,23 +29,10 @@ float M_PI();
 float M_2PI();
 float M_4PI();
 float sqr(float x);
+// hammersley.glsl
+vec2 Hammersley(uint i, uint N);
 
-float RadicalInverse_VdC(uint bits)
-{
-    bits = (bits << 16u) | (bits >> 16u);
-    bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);
-    bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);
-    bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);
-    bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);
-    return float(bits) * 2.3283064365386963e-10; // / 0x100000000
-}
-
-vec2 Hammersley(uint i, uint N)
-{
-    return vec2(float(i) / float(N), RadicalInverse_VdC(i));
-}
-
-vec3 ImportanceSampleGGX(vec2 Xi, vec3 n, float a)
+vec3 importance_sample_GGX(vec2 Xi, float a)
 {
     float phi = M_2PI() * Xi.x;
     float cos_theta = sqrt((1.0 - Xi.y) / (1.0 + (sqr(a) - 1.0) * Xi.y));
@@ -68,16 +55,18 @@ vec3 prefilter(vec3 N)
     vec3 result = vec3(0.0);
     float weight = 0.0;
 
-    vec3 up = abs(N.z) < 0.999f ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);
-    vec3 T = normalize(cross(up, N));
-    vec3 B = cross(N, T);
-    mat3 TBN = mat3(T, B, N);
+    vec3 up = abs(N.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);
+    vec3 tangent = normalize(cross(up, N));
+    vec3 binormal = cross(N, tangent);
 
     uint sample_count = uint(num_samples);
 
     for (uint i = 0u; i < sample_count; ++i) {
         vec2 Xi = Hammersley(i, sample_count);
-        vec3 H = TBN * ImportanceSampleGGX(Xi, N, a);
+        vec3 H_tangent = importance_sample_GGX(Xi, a);
+        // From tangent space to world space
+        vec3 H = tangent * H_tangent.x + binormal * H_tangent.y + N * H_tangent.z;
+
         vec3 L = normalize(2.0 * dot(V, H) * H - V);
 
         float NdotL = max(dot(N, L), 0.0);

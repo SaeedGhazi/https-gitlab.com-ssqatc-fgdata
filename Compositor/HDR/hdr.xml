@@ -120,6 +120,19 @@
     <wrap-t>clamp-to-edge</wrap-t>
   </buffer>
 
+  <!-- Environment BRDF LUT -->
+  <buffer>
+    <name>envmap-brdf-lut</name>
+    <type>2d</type>
+    <width>512</width>
+    <height>512</height>
+    <format>rg16f</format>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <wrap-s>clamp-to-edge</wrap-s>
+    <wrap-t>clamp-to-edge</wrap-t>
+  </buffer>
+
   <!-- Environment cubemap -->
   <buffer>
     <name>envmap</name>
@@ -286,6 +299,20 @@
     <attachment>
       <component>color3</component>
       <buffer>gbuffer3</buffer>
+    </attachment>
+  </pass>
+
+  <!--
+      BRDF convolution for the IBL split sum integral approximation.
+  -->
+  <pass>
+    <name>envmap-brdf</name>
+    <type>quad</type>
+    <render-once>true</render-once>
+    <effect>Effects/HDR/envmap-brdf</effect>
+    <attachment>
+      <component>color0</component>
+      <buffer>envmap-brdf-lut</buffer>
     </attachment>
   </pass>
 
@@ -803,6 +830,10 @@
       </condition>
     </binding>
     <binding>
+      <unit>8</unit>
+      <buffer>envmap-brdf-lut</buffer>
+    </binding>
+    <binding>
       <unit>9</unit>
       <buffer>prefiltered-envmap</buffer>
     </binding>
@@ -905,6 +936,10 @@
     <binding>
       <unit>7</unit>
       <buffer>depth-stencil</buffer>
+    </binding>
+    <binding>
+      <unit>8</unit>
+      <buffer>envmap-brdf-lut</buffer>
     </binding>
     <binding>
       <unit>9</unit>

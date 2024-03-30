@@ -12,6 +12,7 @@
         <vertex-shader>Shaders/HDR/envmap.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/envmap_prefilter.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/hammersley.glsl</fragment-shader>
       </program>
       <uniform>
         <name>envmap_tex</name>

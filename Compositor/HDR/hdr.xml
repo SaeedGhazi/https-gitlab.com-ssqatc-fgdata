@@ -889,6 +889,13 @@
     <use-shadow-pass>csm1</use-shadow-pass>
     <use-shadow-pass>csm2</use-shadow-pass>
     <use-shadow-pass>csm3</use-shadow-pass>
+    <use-clustered-uniforms>
+      <pass>geometry</pass>
+      <clusters-bind-unit>5</clusters-bind-unit>
+      <indices-bind-unit>6</indices-bind-unit>
+      <pointlights-bind-unit>16</pointlights-bind-unit>
+      <spotlights-bind-unit>15</spotlights-bind-unit>
+    </use-clustered-uniforms>
     <!--
         We should not be binding and attaching the depth buffer as that usually
         implies reading and writing to it at the same time, which will result in

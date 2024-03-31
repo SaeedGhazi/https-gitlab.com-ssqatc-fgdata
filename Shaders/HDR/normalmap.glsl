@@ -32,7 +32,9 @@ mat3 cotangent_frame(vec3 N, vec3 p, vec2 uv)
  */
 vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord)
 {
-    vec3 normal = texture(normal_tex, texcoord).rgb * 2.0 - 1.0;
+    vec3 normal = texture(normal_tex, texcoord).rgb;
+    // Sign expansion because the normal map format is unsigned
+    normal = normal * 255.0 / 127.0 - 128.0 / 127.0;
     if (normalmap_dds > 0) {
         // DDS has flipped normals
         normal = -normal;

@@ -132,10 +132,6 @@
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
-      <polygon-offset>
-        <factor>2.0</factor>
-        <units>1.0</units>
-      </polygon-offset>
     </pass>
   </technique>
 </PropertyList>

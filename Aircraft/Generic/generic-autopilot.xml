@@ -1026,12 +1026,19 @@ speed-by-pitch-accel
 		<config>
 			<Kp>
 				<expression>
-					<table>
-						<property>/velocities/airspeed-kt</property>
-						<entry><ind> 80</ind><dep>0.0035</dep></entry>
-						<entry><ind>360</ind><dep>0.0009</dep></entry>
-						<entry><ind>600</ind><dep>0.0004</dep></entry>
-					</table>
+					<product>
+						<table>
+							<property>/velocities/airspeed-kt</property>
+							<entry><ind> 80</ind><dep>0.00350</dep></entry>
+							<entry><ind>410</ind><dep>0.00045</dep></entry>
+							<entry><ind>600</ind><dep>0.00035</dep></entry>
+						</table>
+						<table>
+							<property>/position/altitude-ft</property>
+							<entry><ind>    0</ind><dep>1.0</dep></entry>
+							<entry><ind>45000</ind><dep>0.5</dep></entry>
+						</table>
+					</product>
 				</expression>
 			</Kp>
 			<Ti>2.5</Ti>
@@ -1236,6 +1243,22 @@ speed-by-pitch-accel
 	</filter>
 	
 	<!-- Throttle Axis -->
+	<filter> <!-- Filter current knots -->
+		<name>A/THR Knots Lag</name>
+		<type>exponential</type>
+		<input>/autopilot/internal/airspeed-kt</input>
+		<output>/autopilot/internal/airspeed-kt-lag</output>
+		<filter-time>0.04</filter-time>
+	</filter>
+	
+	<filter> <!-- Filter current mach -->
+		<name>A/THR Mach Lag</name>
+		<type>exponential</type>
+		<input>/autopilot/internal/mach</input>
+		<output>/autopilot/internal/mach-lag</output>
+		<filter-time>0.04</filter-time>
+	</filter>
+	
 	<filter> <!-- Clamp target knots -->
 		<name>A/THR Knots Input Gain</name>
 		<type>gain</type>
@@ -1294,7 +1317,7 @@ speed-by-pitch-accel
 				</equals>
 			</condition>
 		</enable>
-		<input>/autopilot/internal/airspeed-kt</input>
+		<input>/autopilot/internal/airspeed-kt-lag</input>
 		<reference>/autopilot/internal/athr-kts</reference>
 		<output>/autopilot/internal/throttle-cmd-pid</output>
 		<config>
@@ -1365,7 +1388,7 @@ speed-by-pitch-accel
 			</condition>
 		</enable>
 		<input>
-			<property>/autopilot/internal/mach</property>
+			<property>/autopilot/internal/mach-lag</property>
 			<scale>1000</scale>
 		</input>
 		<reference>

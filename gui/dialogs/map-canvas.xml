@@ -39,7 +39,6 @@
     <group>
         <layout>hbox</layout>
         <default-padding>1</default-padding>
-        <empty><stretch>1</stretch></empty>
 
         <text>
             <label>Map (Canvas)</label>
@@ -48,12 +47,10 @@
         <empty><stretch>1</stretch></empty>
 
         <button>
-            <pref-width>16</pref-width>
-            <pref-height>16</pref-height>
-            <legend></legend>
-            <keynum>27</keynum>
-            <border>2</border>
-
+            <legend>X</legend>
+            <key>Esc</key>
+            <pref-width>20</pref-width>
+            <pref-height>20</pref-height>
             <binding>
                 <command>dialog-close</command>
             </binding>
@@ -593,7 +590,7 @@
 
                 <button>
                     <name>zoomout</name>
-                    <legend>out</legend>
+                    <legend>-</legend>
                     <pref-width>52</pref-width>
                     <pref-height>22</pref-height>
 
@@ -617,7 +614,7 @@
 
                 <button>
                     <name>zoomin</name>
-                    <legend>in</legend>
+                    <legend>+</legend>
                     <pref-width>52</pref-width>
                     <pref-height>22</pref-height>
 

@@ -1194,14 +1194,13 @@ var showHelpDialog = func(path, toggle=0) {
     # title bar
     var titlebar = dialog[name].addChild("group");
     titlebar.set("layout", "hbox");
-    titlebar.addChild("empty").set("stretch", 1);
     titlebar.addChild("text").set("label", name);
     titlebar.addChild("empty").set("stretch", 1);
 
     var w = titlebar.addChild("button");
-    w.set("pref-width", 16);
-    w.set("pref-height", 16);
-    w.set("legend", "");
+    w.set("pref-width", 20);
+    w.set("pref-height", 20);
+    w.set("legend", "X");
     w.set("default", 1);
     w.set("key", "esc");
     w.setBinding("nasal", "delete(gui.dialog, \"" ~ name ~ "\")");

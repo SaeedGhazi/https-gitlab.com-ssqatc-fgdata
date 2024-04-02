@@ -11,9 +11,6 @@
     </color>
     <group>
         <layout>hbox</layout>
-        <empty>
-            <stretch>1</stretch>
-        </empty>
         <text>
             <label>Run Nasal test</label>
         </text>
@@ -21,11 +18,10 @@
             <stretch>1</stretch>
         </empty>
         <button>
-            <pref-width>16</pref-width>
-            <pref-height>16</pref-height>
             <legend>X</legend>
-            <keynum>27</keynum>
-            <border>2</border>
+            <key>Esc</key>
+            <pref-width>20</pref-width>
+            <pref-height>20</pref-height>
             <binding>
                 <command>dialog-close</command>
             </binding>

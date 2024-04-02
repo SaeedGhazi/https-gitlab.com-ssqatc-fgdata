@@ -88,9 +88,6 @@
   <!-- titlebar -->
   <group>
     <layout>hbox</layout>
-    <empty>
-      <stretch>1</stretch>
-    </empty>
 
     <text>
       <label>FGCom Settings</label>
@@ -101,9 +98,8 @@
     </empty>
 
     <button>
-      <pref-width>16</pref-width>
-      <pref-height>16</pref-height>
-      <border>2</border>
+      <pref-width>20</pref-width>
+      <pref-height>20</pref-height>
       <legend>?</legend>
       <binding>
         <command>open-browser</command>
@@ -112,11 +108,10 @@
     </button>
 
     <button>
-      <legend/>
+      <legend>X</legend>
       <key>Esc</key>
-      <pref-width>16</pref-width>
-      <pref-height>16</pref-height>
-      <border>2</border>
+      <pref-width>20</pref-width>
+      <pref-height>20</pref-height>
       <binding>
         <command>dialog-close</command>
       </binding>

@@ -11,11 +11,16 @@
   <group>
     <layout>hbox</layout>
 
+    <text>
+      <label>Multiplayer Chat</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
     <button>
       <legend>-</legend>
-      <pref-width>16</pref-width>
-      <pref-height>16</pref-height>
-      <border>2</border>
+      <pref-width>20</pref-width>
+      <pref-height>20</pref-height>
       <binding>
        <command>dialog-show</command>
        <dialog-name>chat</dialog-name>
@@ -25,20 +30,11 @@
       </binding>
     </button>
 
-    <empty><stretch>1</stretch></empty>
-
-    <text>
-      <label>Multiplayer Chat</label>
-    </text>
-
-    <empty><stretch>1</stretch></empty>
-
     <button>
-      <legend></legend>
+      <legend>X</legend>
       <key>Esc</key>
-      <pref-width>16</pref-width>
-      <pref-height>16</pref-height>
-      <border>2</border>
+      <pref-width>20</pref-width>
+      <pref-height>20</pref-height>
       <binding>
         <command>dialog-close</command>
       </binding>

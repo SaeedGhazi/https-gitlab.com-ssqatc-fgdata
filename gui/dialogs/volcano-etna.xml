@@ -7,17 +7,27 @@
 	<modal>false</modal>
 	<width>400</width>
 
-	<empty>
-		<pref-height>6</pref-height>
-	</empty>
+	<group>
+		<layout>hbox</layout>
+		
+		<text>
+			<label>Etna Activity</label>
+		</text>
 
-	<text>
-		<label>Etna activity</label>
-	</text>
+		<empty>
+			<stretch>1</stretch>
+		</empty>
 
-	<empty>
-		<pref-height>4</pref-height>
-	</empty>
+		<button>
+			<legend>X</legend>
+			<key>Esc</key>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
 
 	<hrule/>
 
@@ -120,17 +130,6 @@
 			<command>dialog-apply</command>
 		</binding>
 
-		<binding>
-			<command>dialog-close</command>
-		</binding>
-	</button>
-
-	<button>
-       		<row>0</row>
-        	<col>1</col>
-		<legend>Close</legend>
-		<default>true</default>
-		<key>Esc</key>
 		<binding>
 			<command>dialog-close</command>
 		</binding>

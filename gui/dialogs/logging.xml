@@ -4,7 +4,34 @@
  <name>logging</name>
  <layout>vbox</layout>
 
+	<group>
+
+		<layout>hbox</layout>
+
+		<text>
+			<label>Logging</label>
+		</text>
+
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+
+		<button>
+			<legend>X</legend>
+			<key>Esc</key>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+	</group>
+
+	<hrule/>
+
  <group>
+	
    <layout>hbox</layout>
 
    <text><label>Log File:</label></text>

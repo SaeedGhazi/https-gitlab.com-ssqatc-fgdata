@@ -7,9 +7,6 @@
   <!-- title bar -->
   <group>
     <layout>hbox</layout>
-    <empty>
-      <stretch>1</stretch>
-    </empty>
     <text>
       <label>Default light switches</label>
     </text>
@@ -21,7 +18,6 @@
       <key>Esc</key>
       <pref-width>20</pref-width>
       <pref-height>20</pref-height>
-      <border>2</border>
       <binding>
         <command>dialog-close</command>
       </binding>

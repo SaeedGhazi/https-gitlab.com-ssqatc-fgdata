@@ -258,13 +258,13 @@ var dialog = {
         titlebar.set("layout", "hbox");
 
         var view_self = titlebar.addChild("button");
-        view_self.node.setValues({ "pref-height": 16, legend: "view self", default: 0 });
+        view_self.node.setValues({ "pref-height": 20, legend: "View Self", default: 0 });
         view_self.setBinding("nasal", "view.model_view_handler.select(getprop('/sim/multiplayer/callsign'), 1);");
 
         titlebar.addChild("empty").set("stretch", 1);
         
         var w = titlebar.addChild("button");
-        w.node.setValues({ "pref-width": 24, "pref-height": 16, legend: me.unit_button, default: 0 });
+        w.node.setValues({ "pref-width": 24, "pref-height": 20, legend: me.unit_button, default: 0 });
         w.setBinding("nasal", "multiplayer.dialog.toggle_unit(); multiplayer.dialog._redraw_()");
 
         titlebar.addChild("empty").set("stretch", 1);
@@ -278,7 +278,7 @@ var dialog = {
         titlebar.addChild("empty").set("stretch", 1);
 
         var w = titlebar.addChild("button");
-        w.node.setValues({ "pref-width": 16, "pref-height": 16, legend: "", default: 0 });
+        w.node.setValues({ "pref-width": 20, "pref-height": 20, legend: "X", default: 0 });
         # "Esc" causes dialog-close
         w.set("key", "Esc");
         w.setBinding("nasal", "multiplayer.dialog.del()");

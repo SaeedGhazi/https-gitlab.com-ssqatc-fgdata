@@ -39,7 +39,7 @@
 	<adjust-hud>Adjust HUD Properties</adjust-hud>
 	<toggle-glide-slope>Toggle Glide Slope Tunnel</toggle-glide-slope>
 	<replay>Instant Replay</replay>
-	<earthview>Earthview orbital rendering</earthview>
+	<earthview>Earthview Orbital Rendering</earthview>
 	<stereoscopic-options>Stereoscopic View Options</stereoscopic-options>
 	<vr-options>VR Options</vr-options>
     <als-filter-effects>ALS Filter Effects</als-filter-effects>
@@ -76,7 +76,7 @@
 	<radio>Radio Settings</radio>
 	<gps>GPS Settings</gps>
 	<instrument-settings>Instrument Settings</instrument-settings>
-	<light-switches>Light switches</light-switches>
+	<light-switches>Light Switches</light-switches>
 	<failure-submenu>--- Failures ---</failure-submenu>
 	<random-failures>Random Failures</random-failures>
 	<system-failures>System Failures</system-failures>
@@ -101,7 +101,7 @@
 	<mp-list>Pilot List</mp-list>
 	<mp-carrier>MPCarrier Selection</mp-carrier>
 	<lag-adjust>Lag Settings</lag-adjust>
-	<swift_connection>swift Connection</swift_connection>
+	<swift_connection>Swift Connection</swift_connection>
 
 	<!-- Debug menu -->
 	<debug>Debug</debug>

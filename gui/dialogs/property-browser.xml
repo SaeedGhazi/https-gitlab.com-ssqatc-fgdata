@@ -10,55 +10,45 @@
 		<layout>vbox</layout>
 		<group>
 			<layout>hbox</layout>
-				<default-padding>1</default-padding>
-
-				<button>
-					<legend>clone</legend>
-					<pref-width>64</pref-width>
-					<pref-height>16</pref-height>
-					<border>2</border>
-				<!-- looks better in anthrax style -->
-					<color>
-						<red>0.34</red>
-						<green>0.33</green>
-						<blue>0.35</blue>
-					</color>
-				<!-- -->
-					<binding>
-						<command>nasal</command>
-						<script>clone(dir)</script>
-					</binding>
-				</button>
-				<empty><whatever/></empty>
-
-				<text>
-					<label>/</label>
-					<property>/sim/gui/dialogs/property-browser/title</property>
-					<live>true</live>
-				</text>
-
-				<empty><stretch>true</stretch></empty>
-
-				<button>
-					<legend>X</legend>
-					<key>Esc</key>
-					<pref-width>16</pref-width>
-					<pref-height>16</pref-height>
-					<border>2</border>
-					<binding>
-						<command>dialog-close</command>
-					</binding>
-				</button>
-		</group>
-		<group>
-			<layout>hbox</layout>
+			
 			<default-padding>1</default-padding>
+
+			<button>
+				<legend>Clone</legend>
+				<pref-width>60</pref-width>
+				<pref-height>20</pref-height>
+				<border>2</border>
+				<binding>
+					<command>nasal</command>
+					<script>clone(dir)</script>
+				</binding>
+			</button>
+
 			<text>
-				<label>Ctrl click '.' for verbose; Shift click '.' to dump</label>
+				<label>/</label>
+				<property>/sim/gui/dialogs/property-browser/title</property>
+				<live>true</live>
 			</text>
+
 			<empty><stretch>true</stretch></empty>
+
+			<button>
+				<legend>X</legend>
+				<key>Esc</key>
+				<pref-width>20</pref-width>
+				<pref-height>20</pref-height>
+				<binding>
+					<command>dialog-close</command>
+				</binding>
+			</button>
 		</group>
 	</group>
+
+	<hrule/>
+
+	<text>
+		<label>Clicking '.' symbol: CTRL to toggle verbose, SHIFT to dump</label>
+	</text>
 
 	<hrule/>
 

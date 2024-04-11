@@ -273,6 +273,56 @@
   <!-- end group 6 -->
   </group>
 
+  <!-- start group 7 -->
+  <group>
+
+    <halign>left</halign>
+    <valign>top</valign>
+    <layout>hbox</layout>
+
+    <!-- gap to left border -->
+    <text>
+        <halign>left</halign>
+        <label>   </label>
+    </text>
+
+    <text>
+      <halign>left</halign>
+      <label>Mouse wheel elevator-trim factor: </label>
+    </text>
+    <combo>
+      <name>wheel-elevator-trim-factor</name>
+      <halign>right</halign>
+      <stretch>true</stretch>
+      <pref-width>75</pref-width>
+      <property>/sim/mouse/wheel-elevator-trim-factor</property>
+      <value>0.1</value>
+      <value>0.2</value>
+      <value>0.5</value>
+      <value>1.0</value>
+      <value>2.0</value>
+      <value>5.0</value>
+      <value>10.0</value>
+      <binding>
+          <command>dialog-apply</command>
+          <object-name>wheel-elevator-trim-factor</object-name>
+      </binding>
+      <binding>
+          <command>dialog-update</command>
+      </binding>
+    </combo>
+
+    <!-- empty line before next -->
+    <text>
+      <row>1</row>
+      <col>0</col>
+      <label> </label>
+      <halign>left</halign>
+    </text>
+
+  <!-- end group 7 -->
+  </group>
+
   <hrule/>
 
   <button>

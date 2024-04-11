@@ -1027,6 +1027,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <skip-flight-controls-mode type="bool" userarchive="y">false</skip-flight-controls-mode>
       <flight-controls-sensitivity type="double" userarchive="y">4.0</flight-controls-sensitivity>
       <mouse-rudder-elevator type="bool" userarchive="y">false</mouse-rudder-elevator>
+      <wheel-elevator-trim-factor type="double" userarchive="y">1.0</wheel-elevator-trim-factor>
     </mouse>
     <replay>
       <duration type="double" userarchive="y">90</duration>

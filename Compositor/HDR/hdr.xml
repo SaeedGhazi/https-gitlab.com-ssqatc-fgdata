@@ -31,57 +31,36 @@
       whatever they need in the G-Buffer without adhering to this layout and use
       the stencil buffer and a separate render pass.
   -->
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>gbuffer0</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgb10-a2</format>
   </buffer>
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>gbuffer1</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgba8</format>
   </buffer>
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>gbuffer2</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgba8</format>
   </buffer>
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>gbuffer3</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>r11f-g11f-b10f</format>
   </buffer>
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>depth-stencil</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>depth24-stencil8</format>
   </buffer>
 
   <!-- HDR shading result -->
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>hdr-result</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgb16f</format>
   </buffer>
 
   <!-- Final LDR buffer -->
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>final</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgb8</format>
   </buffer>
 
@@ -179,6 +158,7 @@
     <name>histogram-partial</name>
     <type>2d</type>
     <width>screen</width>
+    <screen-width-scale><property>/sim/rendering/hdr/render-scale</property></screen-width-scale>
     <height>256</height>
     <format>r32ui</format>
     <min-filter>nearest</min-filter>
@@ -248,22 +228,16 @@
   </buffer>
 
   <!-- SMAA buffers -->
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>smaa-edges</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgba8</format>
     <wrap-s>clamp</wrap-s>
     <wrap-t>clamp</wrap-t>
     <min-filter>linear-mipmap-linear</min-filter>
     <mag-filter>linear</mag-filter>
   </buffer>
-  <buffer>
+  <buffer include="screen-buffer.xml">
     <name>smaa-blend</name>
-    <type>2d</type>
-    <width>screen</width>
-    <height>screen</height>
     <format>rgba8</format>
     <wrap-s>clamp</wrap-s>
     <wrap-t>clamp</wrap-t>

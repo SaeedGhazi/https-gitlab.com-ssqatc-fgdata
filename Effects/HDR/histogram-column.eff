@@ -12,6 +12,7 @@
       <program>
         <vertex-shader>Shaders/HDR/quad_notexcoord.vert</vertex-shader>
         <fragment-shader>Shaders/HDR/histogram_column.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/histogram.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>

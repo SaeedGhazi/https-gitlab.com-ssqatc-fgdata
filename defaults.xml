@@ -577,6 +577,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <display-ev100 type="bool">false</display-ev100>
           <show-gbuffer type="bool">false</show-gbuffer>
           <show-shadow-cascades type="bool">false</show-shadow-cascades>
+          <show-histogram type="bool">false</show-histogram>
         </debug>
       </hdr>
 

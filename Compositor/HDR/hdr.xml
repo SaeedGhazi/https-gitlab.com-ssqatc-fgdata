@@ -155,6 +155,17 @@
 
   <!-- Histogram for automatic exposure -->
   <buffer>
+    <name>histogram-bins</name>
+    <type>2d</type>
+    <width>screen</width>
+    <screen-width-scale><property>/sim/rendering/hdr/render-scale</property></screen-width-scale>
+    <height>screen</height>
+    <screen-height-scale><property>/sim/rendering/hdr/render-scale</property></screen-height-scale>
+    <format>r8ui</format>
+    <min-filter>nearest</min-filter>
+    <mag-filter>nearest</mag-filter>
+  </buffer>
+  <buffer>
     <name>histogram-partial</name>
     <type>2d</type>
     <width>screen</width>
@@ -958,8 +969,11 @@
       Based on the article by Alex Tardif:
       https://www.alextardif.com/HistogramLuminance.html
 
+      The first step calculates the bin numbers of every pixel of the input HDR
+      texture.
+
       Instead of using a compute shader, we run two fragment shaders. The first
-      calculates a partial histogram of the rows of the input HDR texture, and
+      calculates a partial histogram of the rows of the bin numbers texture, and
       the second aggregates them together to obtain a single histogram.
 
       The last step, which calculates the average scene luminance from the
@@ -970,9 +984,9 @@
       texture) is too expensive and not worth the trouble.
   -->
   <pass>
-    <name>histogram-column</name>
+    <name>histogram-bin</name>
     <type>quad</type>
-    <effect>Effects/HDR/histogram-column</effect>
+    <effect>Effects/HDR/histogram-bin</effect>
     <binding>
       <unit>0</unit>
       <buffer>hdr-result</buffer>
@@ -980,6 +994,19 @@
     <binding>
       <unit>14</unit>
       <buffer>prev-luminance</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>histogram-bins</buffer>
+    </attachment>
+  </pass>
+  <pass>
+    <name>histogram-column</name>
+    <type>quad</type>
+    <effect>Effects/HDR/histogram-column</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>histogram-bins</buffer>
     </binding>
     <attachment>
       <component>color0</component>

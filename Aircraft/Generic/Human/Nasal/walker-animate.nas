@@ -169,6 +169,8 @@ var sequence = {
 			return;
 		}
 
+		var margin = 2;
+
 		walker_dialog1 = gui.Widget.new();
 		walker_dialog1.set("layout", "vbox");
 		walker_dialog1.set("name", name1);
@@ -183,11 +185,10 @@ var sequence = {
 		titlebar.addChild("empty").set("stretch", 1);
 
 		w = titlebar.addChild("button");
-		w.set("pref-width", 16);
-		w.set("pref-height", 14);
-		w.set("legend", "");
+		w.set("pref-width", 20);
+		w.set("pref-height", 20);
+		w.set("legend", "X");
 		w.set("keynum", 27);
-		w.set("border", 1);
 		w.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		w.prop().getNode("binding[0]/script", 1).setValue("walker.walker_dialog1 = nil");
 		w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
@@ -196,12 +197,12 @@ var sequence = {
 
 		var g = walker_dialog1.addChild("group");
 		g.set("layout", "hbox");
-		g.addChild("empty").set("pref-width", 8);
+		g.addChild("empty").set("pref-width", margin);
 		var content = g.addChild("input");
 		content.set("name", "input");
 		content.set("layout", "hbox");
 		content.set("halign", "fill");
-		content.set("border", 1);
+		content.set("pref-width", 200);
 		content.set("editable", 1);
 		content.set("property", "/sim/gui/dialogs/anim-sequence/list");
 		content.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
@@ -222,8 +223,6 @@ var sequence = {
 		box2.set("halign", "left");
 		box2.set("label", "");
 		box2.set("pref-width", 50);
-		box2.set("pref-height", 18);
-		box2.set("border", 2);
 		box2.set("legend", "New");
 		box2.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 		box2.prop().getNode("binding[0]/object-name", 1).setValue("input");
@@ -237,11 +236,15 @@ var sequence = {
 		box2.prop().getNode("binding[4]/script", 1).setValue("walker.sequence.edit_animation()");
 		g.addChild("empty").set("stretch", 1);
 
-		var a = walker_dialog1.addChild("list");
+		var listGroup = walker_dialog1.addChild("group");
+		listGroup.set("layout", "hbox");
+		listGroup.addChild("empty").set("pref-width", margin);
+		var a = listGroup.addChild("list");
 		a.set("name", "sequence-list");
-		a.set("pref-width", 300);
 		a.set("pref-height", 160);
-		a.set("slider", 18);
+		a.set("halign", "fill");
+		a.set("valign", "fill");
+		a.set("stretch", 1);
 		a.set("property", "/sim/gui/dialogs/anim-sequence/list");
 		sequence_count = size(w1a_list_node.getChildren("sequence"));
 		var sList = [];
@@ -268,16 +271,15 @@ var sequence = {
 		a.prop().getNode("binding[0]/object-name", 1).setValue("sequence-list");
 		a.prop().getNode("binding[1]/command", 1).setValue("nasal");
 		a.prop().getNode("binding[1]/script", 1).setValue("walker.listbox_apply()");
+		listGroup.addChild("empty").set("pref-width", margin);
 
 		var g = walker_dialog1.addChild("group");
 		g.set("layout", "hbox");
-		g.addChild("empty").set("pref-width", 8);
+		g.addChild("empty").set("pref-width", margin);
 		var box2 = g.addChild("button");
 		box2.set("halign", "left");
 		box2.set("label", "");
-		box2.set("pref-width", 60);
-		box2.set("pref-height", 18);
-		box2.set("border", 2);
+		box2.set("pref-width", 80); # including Tortola fonts
 		box2.set("default", 1);
 		box2.set("legend", "Edit/Run");
 		box2.prop().getNode("binding[0]/command", 1).setValue("nasal");
@@ -286,38 +288,32 @@ var sequence = {
 		box3.set("halign", "left");
 		box3.set("label", "");
 		box3.set("pref-width", 50);
-		box3.set("pref-height", 18);
 		box3.set("legend", "Help");
-		box3.set("border", 2);
 		box3.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		box3.prop().getNode("binding[0]/script", 1).setValue("walker.sequence.helpDialog()");
 		g.addChild("empty").set("stretch", 1);
 
-		g.addChild("empty").set("pref-width", 8);
+		g.addChild("empty").set("pref-width", margin);
 		g.addChild("text").set("label", "File:");
 		var box4 = g.addChild("button");
 		box4.set("halign", "right");
 		box4.set("legend", "Load");
 		box4.set("pref-width", 50);
-		box4.set("pref-height", 18);
-		box4.set("border", 2);
 		box4.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		box4.prop().getNode("binding[0]/script", 1).setValue("walker.sequence.load_animation()");
 		var box5 = g.addChild("button");
 		box5.set("halign", "right");
 		box5.set("legend", "Save");
 		box5.set("pref-width", 50);
-		box5.set("pref-height", 18);
-		box5.set("border", 2);
 		box5.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		box5.prop().getNode("binding[0]/script", 1).setValue("walker.sequence.save_animation()");
-		g.addChild("empty").set("pref-width", 8);
+		g.addChild("empty").set("pref-width", margin);
 
 		walker_dialog1.addChild("hrule").addChild("dummy");
 
 		var g = walker_dialog1.addChild("group");
 		g.set("layout", "hbox");
-		g.addChild("empty").set("pref-width", 8);
+		g.addChild("empty").set("pref-width", margin);
 		var box = g.addChild("checkbox");
 		box.set("halign", "left");
 		box.set("live", 1);
@@ -360,11 +356,10 @@ var sequence = {
 		titlebar.addChild("empty").set("stretch", 1);
 
 		w = titlebar.addChild("button");
-		w.set("pref-width", 16);
-		w.set("pref-height", 14);
-		w.set("legend", "");
+		w.set("pref-width", 20);
+		w.set("pref-height", 20);
+		w.set("legend", "X");
 		w.set("keynum", 27);
-		w.set("border", 1);
 		w.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		w.prop().getNode("binding[0]/script", 1).setValue("walker.walker_dialog3 = nil");
 		w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");
@@ -383,8 +378,6 @@ var sequence = {
 			"as depicted by the dashed lines around it's edge.)\n\n " ~
 			"The number in parenthesis is the ID number for each sequence.\n\n" ~
 			"The letter following the parenthesis indicated a trigger is set for this sequence.\n\n" ~
-			"If some sequences do not show in the list box, and the scroll bar " ~
-			"is not visible, just click in the text box.\n\n" ~
 			"Your creations can be saved, shared with friends, and loaded from here. " ~
 			"The animation files will be saved in:\n " ~
 			"{home directory}/.fgfs/aircraft-data/\n\n" ~
@@ -653,11 +646,10 @@ var animate = {
 		walker_dialog2.addChild("hrule").addChild("dummy");
 
 		w = titlebar.addChild("button");
-		w.set("pref-width", 16);
-		w.set("pref-height", 14);
-		w.set("legend", "");
+		w.set("pref-width", 20);
+		w.set("pref-height", 20);
+		w.set("legend", "X");
 		w.set("keynum", 27);
-		w.set("border", 1);
 		w.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		w.prop().getNode("binding[0]/script", 1).setValue("walker.sequence.showDialog()");
 		w.prop().getNode("binding[1]/command", 1).setValue("nasal");
@@ -1909,11 +1901,10 @@ var animate = {
 		titlebar.addChild("empty").set("stretch", 1);
 
 		w = titlebar.addChild("button");
-		w.set("pref-width", 16);
-		w.set("pref-height", 14);
-		w.set("legend", "");
+		w.set("pref-width", 20);
+		w.set("pref-height", 20);
+		w.set("legend", "X");
 		w.set("keynum", 27);
-		w.set("border", 1);
 		w.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		w.prop().getNode("binding[0]/script", 1).setValue("walker.walker_dialog4 = nil");
 		w.prop().getNode("binding[1]/command", 1).setValue("dialog-close");

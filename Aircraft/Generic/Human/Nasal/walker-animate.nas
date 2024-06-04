@@ -2171,7 +2171,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 1;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for walking");
-				bluebird.popupTip2("Trigger walking set to position ("~trigger_walking_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for walking",6);
 			}
 		} elsif (t == "Running") {
@@ -2184,7 +2183,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 2;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for running");
-				bluebird.popupTip2("Trigger running set to position ("~trigger_running_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for running",6);
 			}
 		} elsif (t == "Backwards") {
@@ -2197,7 +2195,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 4;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for backwards");
-				bluebird.popupTip2("Trigger backwards set to position ("~trigger_backwards_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for backwards",6);
 			}
 		} elsif (t == "Standing") {
@@ -2210,7 +2207,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 8;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for standing");
-				bluebird.popupTip2("Trigger standing set to position ("~trigger_standing_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for standing",6);
 			}
 		} elsif (t == "Falling") {
@@ -2223,7 +2219,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 16;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for falling");
-				bluebird.popupTip2("Trigger falling set to position ("~trigger_falling_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for falling",6);
 			}
 		} elsif (t == "Open-Parachute") {
@@ -2236,7 +2231,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 32;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for open-parachute");
-				bluebird.popupTip2("Trigger open-parachute set to position ("~trigger_open_parachute_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for open-parachute",6);
 			}
 		} elsif (t == "Landing") {
@@ -2249,7 +2243,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 64;
 			} else {
 				print ("  ignoring duplicate trigger ((",i,")) for landing");
-				bluebird.popupTip2("Trigger landing set to position ("~trigger_landing_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for landing",6);
 			}
 		} elsif (t == "Crashing") {
@@ -2262,7 +2255,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 128;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") for crashing");
-				bluebird.popupTip2("Trigger crashing set to position ("~trigger_crashing_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") for crashing",6);
 			}
 		} elsif (t == "free1") {
@@ -2275,7 +2267,6 @@ var discover_triggers = func (verbose) {
 				trig_c += 32;
 			} else {
 				print ("  ignoring duplicate trigger (",i,") free1");
-				bluebird.popupTip2("Trigger free1 set to position ("~trigger_open_parachute_node.getValue()~")",5);
 				gui.popupTip("Ignoring duplicate trigger ("~i~") free1",6);
 			}
 		}

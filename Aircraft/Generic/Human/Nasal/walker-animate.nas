@@ -148,6 +148,7 @@ var sequence = {
 				sequence_count = size(w1a_list_node.getChildren("sequence"));
 				w1a_sequence_selected_node.setValue(int(sequence_count - 1));
 				sequence.reloadDialog();
+				discover_triggers(0);
 			} else {
 				w1a_list_node.removeChild("sequence", (size(w1a_list_node.getChildren("sequence")) - 1));
 			}

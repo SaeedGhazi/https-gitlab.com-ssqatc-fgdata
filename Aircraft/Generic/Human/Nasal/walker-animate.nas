@@ -416,15 +416,17 @@ var animate = {
 	},
 	ins_position:	func {
 		var dialog_position = w1a_dialog_position_node.getValue();
-		i = position_count;
-		while (i > dialog_position) {
-			animate.copy_position(sequence_node.getNode("position[" ~ (i - 1) ~ "]", 1), 
-				sequence_node.getNode("position[" ~ i ~ "]", 1));
-			i -= 1;
+		if (dialog_position > -1) {
+			i = position_count;
+			while (i > dialog_position) {
+				animate.copy_position(sequence_node.getNode("position[" ~ (i - 1) ~ "]", 1), 
+					sequence_node.getNode("position[" ~ i ~ "]", 1));
+				i -= 1;
+			}
+			animate.save_position();
+			position_count = size(sequence_node.getChildren("position"));
+			content_modified_node.setValue(5);
 		}
-		animate.save_position();
-		position_count = size(sequence_node.getChildren("position"));
-		content_modified_node.setValue(5);
 	},
 	del_position:	func {
 		position_count = size(sequence_node.getChildren("position"));

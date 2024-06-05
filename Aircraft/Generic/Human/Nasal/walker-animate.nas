@@ -9,15 +9,6 @@ var w1a_list_node = props.globals.getNode("sim/model/walker[1]/animate/list", 1)
 var w1a_sequence_selected_node = props.globals.getNode("sim/model/walker[1]/animate/sequence-selected", 1);
 var sequence_node = w1a_list_node.getNode("sequence[" ~ w1a_sequence_selected_node.getValue() ~ "]", 1);
 var triggered_seq_node = nil;
-var trigger_standing_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/standing", 1);
-var trigger_walking_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/walking", 1);
-var trigger_running_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/running", 1);
-var trigger_backwards_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/backwards", 1);
-var trigger_falling_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/falling", 1);
-var trigger_landing_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/landing", 1);
-var trigger_open_parachute_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/open-parachute", 1);
-var trigger_crashing_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/crashing", 1);
-var trigger_free1_node = props.globals.getNode("sim/model/walker[1]/animate/triggers/free1", 1);
 var seq_node_now = nil;
 var content_modified_node = props.globals.getNode("sim/gui/dialogs/position-modified", 1);
 var walker_dialog1 = nil;
@@ -29,9 +20,24 @@ var position_count = 0;
 var anim_enabled = 0;
 var anim_running = -1;
 var triggers_enabled = 1;
-var triggers_list = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-var triggers_names = ["standing","walking","running","backwards","falling","open-parachute","landing","crashing","free1"];
-var triggers_abbrev = ["S","W","R","B","F","P","L","C"];
+
+var triggers = {
+	"standing"      : { abbrev: "S", state: 0, trig_c: 8 },
+	"walking"       : { abbrev: "W", state: 0, trig_c: 1 },
+	"running"       : { abbrev: "R", state: 0, trig_c: 2 },
+	"backwards"     : { abbrev: "B", state: 0, trig_c: 4 },
+	"falling"       : { abbrev: "F", state: 0, trig_c: 16 },
+	"open-parachute": { abbrev: "P", state: 0, trig_c: 32 },
+	"landing"       : { abbrev: "L", state: 0, trig_c: 64 },
+	"crashing"      : { abbrev: "C", state: 0, trig_c: 128 },
+	"free1"         : { abbrev: "",  state: 0, trig_c: 32 },
+};
+
+# Initialize trigger nodes
+foreach (var key; keys(triggers)) {
+	triggers[key].node = props.globals.getNode("sim/model/walker[1]/animate/triggers/" ~ key, 1);
+}
+
 var log_priority = getprop("sim/logging/priority");
 var log_level = 0;
 if (log_priority == "info" or log_priority == "debug") {
@@ -252,13 +258,11 @@ var sequence = {
 		for (var i = 0 ; i < sequence_count ; i += 1) {
 			var name_in = w1a_list_node.getNode("sequence[" ~ i ~ "]", 1).getNode("name", 1).getValue();
 			var trigger_in = w1a_list_node.getNode("sequence[" ~ i ~ "]", 1).getNode("trigger-upon", 1).getValue();
-			var trigger_ab = "";
-			for (var j = 0 ; j < size(triggers_names) ; j += 1) {
-				if (string.lc(trigger_in) == string.lc(triggers_names[j])) {
-#					print ("found trigger ",j," ",trigger_in," at ",i);
-					trigger_ab = triggers_abbrev[j];
-				}
-			}
+			trigger_in = string.lc(trigger_in);
+			var trigger_ab = contains(triggers, trigger_in)
+				? triggers[trigger_in].abbrev 
+				: "";
+
 			if (name_in != nil) {
 				append(sList, { index: i , name: name_in,
 					comb: w1a_list_node.getNode("sequence[" ~ i ~ "]", 1).getNode("name", 1).getValue() ~ " (" ~ i ~ ")" ~ trigger_ab });
@@ -555,34 +559,17 @@ var animate = {
 	save_header:	func {
 		sequence_node.getNode("loop-enabled", 1).setBoolValue(w1_loop_enabled_node.getValue());
 		sequence_node.getNode("loop-to", 1).setIntValue(walker1_node.getNode("loop-to", 1).getValue());
-		var t = walker1_node.getNode("trigger-upon", 1).getValue();
-		if (t != sequence_node.getNode("trigger-upon", 1).getValue()) {
-			sequence_node.getNode("trigger-upon", 1).setValue(t);
-			if (t == "Walking") {
-				trigger_walking_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: walking to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Running") {
-				trigger_running_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: running to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Backwards") {
-				trigger_backwards_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: backwards to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Standing") {
-				trigger_standing_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: standing to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Falling") {
-				trigger_falling_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: falling to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Landing") {
-				trigger_landing_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: landing to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Open-Parachute") {
-				trigger_open_parachute_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: open-parachute to position ", w1a_sequence_selected_node.getValue());
-			} elsif (t == "Crashing") {
-				trigger_crashing_node.setValue(int(w1a_sequence_selected_node.getValue()));
-				print ("  saving animation: crashing to position ", w1a_sequence_selected_node.getValue());
+		var trigger_name = walker1_node.getNode("trigger-upon", 1).getValue();
+		if (trigger_name != sequence_node.getNode("trigger-upon", 1).getValue()) {
+			sequence_node.getNode("trigger-upon", 1).setValue(trigger_name);
+
+			trigger_name = string.lc(trigger_name);
+
+			if (contains(triggers, trigger_name)) {
+				triggers[trigger_name].node.setValue(int(w1a_sequence_selected_node.getValue()));
+				print ("  saving animation: " ~ trigger_name ~ " to position ", w1a_sequence_selected_node.getValue());
 			}
+
 			discover_triggers(0);
 		}
 	},
@@ -2120,26 +2107,26 @@ var check_walk_animations = func {	# keyboard handling for osg version
 			if (walking_momentum) {
 				if (getprop("sim/current-view/view-number") != 0) {
 					if (w_direction < 0) {
-						if (triggers_list[3] >= 0) {
-							s = int(trigger_backwards_node.getValue());
+						if (triggers["backwards"].state >= 0) {
+							s = int(triggers["backwards"].node.getValue());
 						}
 					} elsif (w_direction > 0 or w_slide != 0) {
 						#print ("listener: walking ",walking_momentum," ",w_direction," w_key_speed= ",w_key_speed,"  speed_mps= ",w_speed_mps);
 						if (w_key_speed < (w_speed_mps * 2)) {
-							if (triggers_list[1] >= 0) {
-								s = int(trigger_walking_node.getValue());
+							if (triggers["walking"].state >= 0) {
+								s = int(triggers["walking"].node.getValue());
 							}
 						} else {
-							if (triggers_list[2] >= 0) {
-								s = int(trigger_running_node.getValue());
+							if (triggers["running"].state >= 0) {
+								s = int(triggers["running"].node.getValue());
 							}
 						}
 					}
 				}
 			} else {
-				if (triggers_list[0] >= 0) {
+				if (triggers["standing"].state >= 0) {
 					if (w_outside) {
-						s = int(trigger_standing_node.getValue());
+						s = int(triggers["standing"].node.getValue());
 					} else {
 						stop_animation();
 						animate.reset_position();
@@ -2158,127 +2145,40 @@ var check_walk_animations = func {	# keyboard handling for osg version
 	}
 }
 
+var reset_triggers_state = func () {
+	foreach (var key; keys(triggers)) {
+		triggers[key].state = 0;
+	}
+}
+
 var discover_triggers = func (verbose) {
 	var a = size(w1a_list_node.getChildren("sequence"));
-	triggers_list = [0, 0, 0, 0, 0, 0, 0, 0];
+	reset_triggers_state();
 	var trig_c = 0;
 	for (var i = 0; i < a; i += 1) {
-		var t = props.globals.getNode("sim/model/walker[1]/animate/list/sequence[" ~ i ~"]", 1).getNode("trigger-upon", 1).getValue();
-		if (t == "Walking") {
-			if (triggers_list[1] == 0) {
-				trigger_walking_node.setValue(int(i));
+		var trigger_name = props.globals.getNode("sim/model/walker[1]/animate/list/sequence[" ~ i ~"]", 1).getNode("trigger-upon", 1).getValue();
+		trigger_name = string.lc(trigger_name);
+		if (contains(triggers, trigger_name)) {
+			if (triggers[trigger_name].state == 0) {
+				triggers[trigger_name].node.setValue(int(i));
 				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for walking to position ",i);
+					print ("    found trigger: loading animation for "~trigger_name~" to position ", i);
 				}
-				triggers_list[1] = 1;
-				trig_c += 1;
+				triggers[trigger_name].state = 1;
+				trig_c += triggers[trigger_name].trig_c;
 			} else {
-				print ("  ignoring duplicate trigger (",i,") for walking");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for walking",6);
-			}
-		} elsif (t == "Running") {
-			if (triggers_list[2] == 0) {
-				trigger_running_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for running to position ",i);
-				}
-				triggers_list[2] = 1;
-				trig_c += 2;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") for running");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for running",6);
-			}
-		} elsif (t == "Backwards") {
-			if (triggers_list[3] == 0) {
-				trigger_backwards_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for backwards to position ",i);
-				}
-				triggers_list[3] = 1;
-				trig_c += 4;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") for backwards");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for backwards",6);
-			}
-		} elsif (t == "Standing") {
-			if (triggers_list[0] == 0) {
-				trigger_standing_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for standing to position ",i);
-				}
-				triggers_list[0] = 1;
-				trig_c += 8;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") for standing");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for standing",6);
-			}
-		} elsif (t == "Falling") {
-			if (triggers_list[4] == 0) {
-				trigger_falling_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for falling to position ",i);
-				}
-				triggers_list[4] = 1;
-				trig_c += 16;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") for falling");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for falling",6);
-			}
-		} elsif (t == "Open-Parachute") {
-			if (triggers_list[5] == 0) {
-				trigger_open_parachute_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for open-parachute to position ",i);
-				}
-				triggers_list[5] = 1;
-				trig_c += 32;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") for open-parachute");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for open-parachute",6);
-			}
-		} elsif (t == "Landing") {
-			if (triggers_list[6] == 0) {
-				trigger_landing_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for landing to position ",i);
-				}
-				triggers_list[6] = 1;
-				trig_c += 64;
-			} else {
-				print ("  ignoring duplicate trigger ((",i,")) for landing");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for landing",6);
-			}
-		} elsif (t == "Crashing") {
-			if (triggers_list[7] == 0) {
-				trigger_crashing_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation for crashing to position ",i);
-				}
-				triggers_list[7] = 1;
-				trig_c += 128;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") for crashing");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") for crashing",6);
-			}
-		} elsif (t == "free1") {
-			if (triggers_list[8] == 0) {
-				trigger_free1_node.setValue(int(i));
-				if (verbose and log_level > 0) {
-					print ("    found trigger: loading animation free1 to position ",i);
-				}
-				triggers_list[8] = 1;
-				trig_c += 32;
-			} else {
-				print ("  ignoring duplicate trigger (",i,") free1");
-				gui.popupTip("Ignoring duplicate trigger ("~i~") free1",6);
+				print ("  ignoring duplicate trigger ("~i~") for "~trigger_name);
+				gui.popupTip("Ignoring duplicate trigger ("~i~") for "~trigger_name, 6);
 			}
 		}
 	}
-	for (var i = 0; i <= 7; i += 1) {
-		if (triggers_list[i] == 0) {
-			setprop("sim/model/walker[1]/animate/triggers/" ~ triggers_names[i], -1);
+
+	foreach (var key; keys(triggers)) {
+		if (triggers[key].state == 0) {
+			triggers[key].node.setValue(-1);
 		}
 	}
+
 	# add listener for each animation.
 	if (trig_c > 0) {
 		if (tm_L_id == nil) {
@@ -2300,15 +2200,15 @@ var discover_triggers = func (verbose) {
 				if (w_outside and triggers_enabled) {
 					var s = nil;
 					if (in_air) {
-						if (triggers_list[4]) {
-							s = int(trigger_falling_node.getValue());
+						if (triggers["falling"].state) {
+							s = int(triggers["falling"].node.getValue());
 						}
 					} else {
 						var crash_landing = getprop("sim/walker/crashed");
-						if (!crash_landing and triggers_list[6] and getprop("sim/walker/parachute-opened-sec") > 2) {
-							s = int(trigger_landing_node.getValue());
-						} elsif (crash_landing and triggers_list[7]) {
-							s = int(trigger_crashing_node.getValue());
+						if (!crash_landing and triggers["landing"].state and getprop("sim/walker/parachute-opened-sec") > 2) {
+							s = int(triggers["landing"].node.getValue());
+						} elsif (crash_landing and triggers["crashing"].state) {
+							s = int(triggers["crashing"].node.getValue());
 						} else {
 							stop_animation();
 						}
@@ -2330,8 +2230,8 @@ var discover_triggers = func (verbose) {
 					var s = nil;
 					if (parachute_deployed_ft > 0) {
 						if (in_air) {
-							if (triggers_list[5]) {
-								s = int(trigger_open_parachute_node.getValue());
+							if (triggers["open-parachute"].state) {
+								s = int(triggers["open-parachute"].node.getValue());
 							}
 						}
 						if ((s != nil) and (s >= 0)) {

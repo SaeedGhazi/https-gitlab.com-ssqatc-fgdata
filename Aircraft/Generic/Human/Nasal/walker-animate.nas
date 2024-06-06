@@ -461,41 +461,45 @@ var animate = {
 		if (t.getValue() <= 0) {
 			t.setValue(0.1);
 		}
+
 		to_node.getNode("transit-sec", 1).setValue(t.getValue());
-		to_node.getNode("limb[0]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[0]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[0]", 1).getNode("z-m", 1).setValue(from_node.getNode("limb[0]", 1).getNode("z-m", 1).getValue());
-		to_node.getNode("limb[1]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[1]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[1]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[1]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[2]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[2]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[2]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[2]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[3]", 1).getNode("x-deg", 1).setValue(from_node.getNode("limb[3]", 1).getNode("x-deg", 1).getValue());
-		to_node.getNode("limb[3]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[3]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[3]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[3]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[4]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[4]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[4]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[4]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[5]", 1).getNode("x-deg", 1).setValue(from_node.getNode("limb[5]", 1).getNode("x-deg", 1).getValue());
-		to_node.getNode("limb[5]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[5]", 1).getNode("y-deg", 1).getValue());
 
-		to_node.getNode("limb[5]", 1).getNode("hand-pose", 1).setValue(from_node.getNode("limb[5]", 1).getNode("hand-pose", 1).getValue());
-
-		to_node.getNode("limb[6]", 1).getNode("x-deg", 1).setValue(from_node.getNode("limb[6]", 1).getNode("x-deg", 1).getValue());
-		to_node.getNode("limb[6]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[6]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[6]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[6]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[7]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[7]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[7]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[7]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[8]", 1).getNode("x-deg", 1).setValue(from_node.getNode("limb[8]", 1).getNode("x-deg", 1).getValue());
-		to_node.getNode("limb[8]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[8]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[8]", 1).getNode("hand-pose", 1).setValue(from_node.getNode("limb[8]", 1).getNode("hand-pose", 1).getValue());
-		to_node.getNode("limb[9]", 1).getNode("x-deg", 1).setValue(from_node.getNode("limb[9]", 1).getNode("x-deg", 1).getValue());
-		to_node.getNode("limb[9]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[9]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[9]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[9]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[10]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[10]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[11]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[11]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[12]", 1).getNode("x-deg", 1).setValue(from_node.getNode("limb[12]", 1).getNode("x-deg", 1).getValue());
-		to_node.getNode("limb[12]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[12]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[12]", 1).getNode("z-deg", 1).setValue(from_node.getNode("limb[12]", 1).getNode("z-deg", 1).getValue());
-		to_node.getNode("limb[13]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[13]", 1).getNode("y-deg", 1).getValue());
-		to_node.getNode("limb[14]", 1).getNode("y-deg", 1).setValue(from_node.getNode("limb[14]", 1).getNode("y-deg", 1).getValue());
+		animate.copy_limb("limb[0]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[0]",  "z-m",   from_node, to_node);
+		animate.copy_limb("limb[1]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[1]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[2]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[2]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[3]",  "x-deg", from_node, to_node);
+		animate.copy_limb("limb[3]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[3]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[4]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[4]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[5]",  "x-deg", from_node, to_node);
+		animate.copy_limb("limb[5]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[5]",  "hand-pose", from_node, to_node);
+		animate.copy_limb("limb[6]",  "x-deg", from_node, to_node);
+		animate.copy_limb("limb[6]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[6]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[7]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[7]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[8]",  "x-deg", from_node, to_node);
+		animate.copy_limb("limb[8]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[8]",  "hand-pose", from_node, to_node);
+		animate.copy_limb("limb[9]",  "x-deg", from_node, to_node);
+		animate.copy_limb("limb[9]",  "y-deg", from_node, to_node);
+		animate.copy_limb("limb[9]",  "z-deg", from_node, to_node);
+		animate.copy_limb("limb[10]", "y-deg", from_node, to_node);
+		animate.copy_limb("limb[11]", "y-deg", from_node, to_node);
+		animate.copy_limb("limb[12]", "x-deg", from_node, to_node);
+		animate.copy_limb("limb[12]", "y-deg", from_node, to_node);
+		animate.copy_limb("limb[12]", "z-deg", from_node, to_node);
+		animate.copy_limb("limb[13]", "y-deg", from_node, to_node);
+		animate.copy_limb("limb[14]", "y-deg", from_node, to_node);
+	},
+	copy_limb: func (parent_node, child_node, from_node, to_node) {
+		var value = from_node.getNode(parent_node, 1).getNode(child_node, 1).getValue();
+		to_node.getNode(parent_node, 1).getNode(child_node, 1).setValue(value);
 	},
 	incr_position:	func {
 		if (position_count > 0) {
@@ -730,38 +734,38 @@ var animate = {
 
 		walker_dialog2.addChild("hrule").addChild("dummy");
 
-		animate.addSliderToDialog("0.y",  15,   3, "Hip 0y",    300, "limb[0]/y-deg",   -180.0, 180.0, nil,     "%6.1f", "Hip forward  < >  backward   ");
-		animate.addSliderToDialog("0.z",  20,  25, "Body 0z",   270, "limb[0]/z-m",    -0.8225,   1.0, nil,     "%6.2f", "Body down  < >  up                   ");
-		animate.addSliderToDialog("1.y",  20,   3, "Chest 1y",  200, "limb[1]/y-deg",   -135.0,  45.0, nil,     "%6.1f", "               Chest forward  < >  backward");
-		animate.addSliderToDialog("1.z",  20,  16, "Chest 1z",  264, "limb[1]/z-deg",    -30.0,  30.0, nil,     "%6.1f", "Chest left  < >  right        ");
-		animate.addSliderToDialog("2.y",  20,  49, "Head 2y",   170, "limb[2]/y-deg",    -90.5,  62.5, nil,     "%6.1f", " Head forward  < >  backward");
-		animate.addSliderToDialog("2.z",  20,  48, "Head 2z",   200, "limb[2]/z-deg",    -90.0,  90.0, nil,     "%6.1f", "Head left  < >  right       ");
-		animate.addSliderToDialog("3.x",  20,  53, "Arm1R 3x",  200, "limb[3]/x-deg",    -85.0,  95.0, "green", "%6.1f", "Right Arm1 down  < >  up                        ");
-		animate.addSliderToDialog("3.y",  20,  63, "Arm1R 3y",  240, "limb[3]/y-deg",    -90.0, 180.0, "green", "%6.1f", "counter-clockwise < > clockwise                               ");
-		animate.addSliderToDialog("3.z",  20,  30, "Arm1R 3z",  220, "limb[3]/z-deg",   -106.0,  92.0, "green", "%6.1f", "Right Arm1 forward left  < >  back right                ");
-		# animate.addSliderToDialog("4.y",  20, nil, "Arm2R 4y",  300, "limb[4]/y-deg",    -90.0,  90.0, nil,     "%6.1f", "Right Arm2 counter-clockwise < > clockwise");
-		animate.addSliderToDialog("4.z",  20, 139, "Arm2R 4z",  165, "limb[4]/z-deg",      0.0, 150.0, nil,     "%6.1f", "Right Arm2 straighten  < >  bend                                                             ");
-		animate.addSliderToDialog("5.x",  20,  50, "HandR 5x",  176, "limb[5]/x-deg",    -90.0,  70.0, nil,     "%6.1f", "Right Hand down  < >  up                 ");
-		animate.addSliderToDialog("5.y",  20,  67, "HandR 5y",  233, "limb[5]/y-deg",    -90.0, 180.0, nil,     "%6.1f", "counter-clockwise < > clockwise                               ");
-		animate.addHandPoseToDialog("Right Hand Pose Nr.", "sim/model/walker[1]/limb[5]/hand-pose");
-		animate.addSliderToDialog("6.x",  20,  53, "Arm1L 6x",  200, "limb[6]/x-deg",     -85.0,  95.0, "red",    "%6.1f", "Left Arm1 down  < >  up                      ");
-		animate.addSliderToDialog("6.y",  15, nil, "Arm1L 6y",  240, "limb[6]/y-deg",    -180.0,  90.0, "red",    "%6.1f", "     counter-clockwise < > clockwise");
-		animate.addSliderToDialog("6.z",  20,  30, "Arm1L 6z",  220, "limb[6]/z-deg",    -106.0,  92.0, "red",    "%6.1f", "Left Arm1 forward right  < >  back left                 ");
-		# animate.addSliderToDialog("7.y",  20, nil, "Arm2L 7y",  300, "limb[7]/y-deg",     -90.0,  90.0, nil,      "%6.1f", "counter-clockwise < > clockwise");
-		animate.addSliderToDialog("7.z",  20, 139, "Arm2L 7z",  165, "limb[7]/z-deg",       0.0, 150.0, nil,      "%6.1f", "Left Arm2 straighten  < >  bend                                                           ");
-		animate.addSliderToDialog("8.x",  20,  50, "HandL 8x",  176, "limb[8]/x-deg",     -90.0,  70.0, nil,      "%6.1f", "Left Hand down  < >  up               ");
-		animate.addSliderToDialog("8.y",  21, nil, "HandL 8y",  233, "limb[8]/y-deg",    -180.0,  90.0, nil,      "%6.1f", "    counter-clockwise < > clockwise");
-		animate.addHandPoseToDialog("Left Hand Pose Nr.", "sim/model/walker[1]/limb[8]/hand-pose");
-		animate.addSliderToDialog("9.x",  20,  53, "Leg1R 9x",  100, "limb[9]/x-deg",   -90.0,   0.0, "green", "%6.1f", "   Right Leg1 out  < >  in");
-		animate.addSliderToDialog("9.y",  20,   1, "Leg1R 9y",  240, "limb[9]/y-deg",  -135.0,  81.0, "green", "%6.1f", "Right Leg1 forward  < >  back       ");
-		animate.addSliderToDialog("9.z",  20,  60, "Leg1R 9z",  140, "limb[9]/z-deg",   -81.0,  45.0, "green", "%6.1f", "counter-clockwise in < > clockwise out   ");
-		animate.addSliderToDialog("10.y", 20, 125, "Leg2R 10y", 160, "limb[10]/y-deg",  -14.0, 130.0, nil,     "%6.1f", "Right Leg2 straighten  < >  bend                                                     ");
-		animate.addSliderToDialog("11.y", 20,  98, "FootR 11y", 100, "limb[11]/y-deg",  -45.0,  45.0, nil,     "%6.1f", "Right Foot down  < >  up                     ");
-		animate.addSliderToDialog("12.x", 20,  53, "Leg1L 12x", 100, "limb[12]/x-deg",  -90.0,   0.0, "red",   "%6.1f", "     Left Leg1 out  < >  in");
-		animate.addSliderToDialog("12.y", 20,   1, "Leg1L 12y", 240, "limb[12]/y-deg", -135.0,  81.0, "red",   "%6.1f", "Left Leg1 forward  < >  back      ");
-		animate.addSliderToDialog("12.z", 20,  95, "Leg1L 12z", 140, "limb[12]/z-deg",  -45.0,  81.0, "red",   "%6.1f", "counter-clockwise out < > clockwise in                        ");
-		animate.addSliderToDialog("13.y", 20, 125, "Leg2L 13y", 160, "limb[13]/y-deg",  -14.0, 130.0, nil,     "%6.1f", "Left Leg2 straighten  < >  bend                                                   ");
-		animate.addSliderToDialog("14.y", 20,  98, "FootL 14y", 100, "limb[14]/y-deg",  -45.0,  45.0, nil,     "%6.1f", "Left Foot down  < >  up                   ");
+		animate.addSliderToDialog("0.y",  15,   3, "Hip 0y",    300,  -180.0, 180.0, nil,     "Hip forward  < >  backward   ");
+		animate.addSliderToDialog("0.z",  20,  25, "Body 0z",   270, -0.8225,   1.0, nil,     "Body down  < >  up                   ");
+		animate.addSliderToDialog("1.y",  20,   3, "Chest 1y",  200,  -135.0,  45.0, nil,     "               Chest forward  < >  backward");
+		animate.addSliderToDialog("1.z",  20,  16, "Chest 1z",  264,   -30.0,  30.0, nil,     "Chest left  < >  right        ");
+		animate.addSliderToDialog("2.y",  20,  49, "Head 2y",   170,   -90.5,  62.5, nil,     " Head forward  < >  backward");
+		animate.addSliderToDialog("2.z",  20,  48, "Head 2z",   200,   -90.0,  90.0, nil,     "Head left  < >  right       ");
+		animate.addSliderToDialog("3.x",  20,  53, "Arm1R 3x",  200,   -85.0,  95.0, "green", "Right Arm1 down  < >  up                        ");
+		animate.addSliderToDialog("3.y",  20,  63, "Arm1R 3y",  240,   -90.0, 180.0, "green", "counter-clockwise < > clockwise                               ");
+		animate.addSliderToDialog("3.z",  20,  30, "Arm1R 3z",  220,  -106.0,  92.0, "green", "Right Arm1 forward left  < >  back right                ");
+		# animate.addSliderToDialog("4.y",  20, nil, "Arm2R 4y",  300,   -90.0,  90.0, nil,     "Right Arm2 counter-clockwise < > clockwise");
+		animate.addSliderToDialog("4.z",  20, 139, "Arm2R 4z",  165,     0.0, 150.0, nil,     "Right Arm2 straighten  < >  bend                                                             ");
+		animate.addSliderToDialog("5.x",  20,  50, "HandR 5x",  176,   -90.0,  70.0, nil,     "Right Hand down  < >  up                 ");
+		animate.addSliderToDialog("5.y",  20,  67, "HandR 5y",  233,   -90.0, 180.0, nil,     "counter-clockwise < > clockwise                               ");
+		animate.addHandPoseToDialog("Right Hand Pose Nr.", "limb[5]/hand-pose");
+		animate.addSliderToDialog("6.x",  20,  53, "Arm1L 6x",  200,   -85.0,  95.0, "red",   "Left Arm1 down  < >  up                      ");
+		animate.addSliderToDialog("6.y",  15, nil, "Arm1L 6y",  240,  -180.0,  90.0, "red",   "     counter-clockwise < > clockwise");
+		animate.addSliderToDialog("6.z",  20,  30, "Arm1L 6z",  220,  -106.0,  92.0, "red",   "Left Arm1 forward right  < >  back left                 ");
+		# animate.addSliderToDialog("7.y",  20, nil, "Arm2L 7y",  300,   -90.0,  90.0, nil,     "counter-clockwise < > clockwise");
+		animate.addSliderToDialog("7.z",  20, 139, "Arm2L 7z",  165,     0.0, 150.0, nil,     "Left Arm2 straighten  < >  bend                                                           ");
+		animate.addSliderToDialog("8.x",  20,  50, "HandL 8x",  176,   -90.0,  70.0, nil,     "Left Hand down  < >  up               ");
+		animate.addSliderToDialog("8.y",  21, nil, "HandL 8y",  233,  -180.0,  90.0, nil,     "    counter-clockwise < > clockwise");
+		animate.addHandPoseToDialog("Left Hand Pose Nr.", "limb[8]/hand-pose");
+		animate.addSliderToDialog("9.x",  20,  53, "Leg1R 9x",  100,   -90.0,   0.0, "green", "   Right Leg1 out  < >  in");
+		animate.addSliderToDialog("9.y",  20,   1, "Leg1R 9y",  240,  -135.0,  81.0, "green", "Right Leg1 forward  < >  back       ");
+		animate.addSliderToDialog("9.z",  20,  60, "Leg1R 9z",  140,   -81.0,  45.0, "green", "counter-clockwise in < > clockwise out   ");
+		animate.addSliderToDialog("10.y", 20, 125, "Leg2R 10y", 160,   -14.0, 130.0, nil,     "Right Leg2 straighten  < >  bend                                                     ");
+		animate.addSliderToDialog("11.y", 20,  98, "FootR 11y", 100,   -45.0,  45.0, nil,     "Right Foot down  < >  up                     ");
+		animate.addSliderToDialog("12.x", 20,  53, "Leg1L 12x", 100,   -90.0,   0.0, "red",   "     Left Leg1 out  < >  in");
+		animate.addSliderToDialog("12.y", 20,   1, "Leg1L 12y", 240,  -135.0,  81.0, "red",   "Left Leg1 forward  < >  back      ");
+		animate.addSliderToDialog("12.z", 20,  95, "Leg1L 12z", 140,   -45.0,  81.0, "red",   "counter-clockwise out < > clockwise in                        ");
+		animate.addSliderToDialog("13.y", 20, 125, "Leg2L 13y", 160,   -14.0, 130.0, nil,     "Left Leg2 straighten  < >  bend                                                   ");
+		animate.addSliderToDialog("14.y", 20,  98, "FootL 14y", 100,   -45.0,  45.0, nil,     "Left Foot down  < >  up                   ");
 
 		var g = walker_dialog2.addChild("group");
 		g.set("layout", "hbox");
@@ -890,8 +894,18 @@ var animate = {
 		btn.prop().getNode("binding[0]/command", 1).setValue("nasal");
 		btn.prop().getNode("binding[0]/script", 1).setValue(script);
 	},
-	addSliderToDialog: func (limbTxt, limbTxtW, emptyW, name, sliderW, propPath, min, max, color, frm, legend) {
-		propPath = "sim/model/walker[1]/" ~ propPath;
+	getPropPathFromLimbId: func (limbId) {
+		var parts = split(".", limbId);
+		# exception that "0.z" is in "m", not "deg"
+		var unit = limbId == "0.z" ? "m" : "deg";
+		return sprintf("sim/model/walker[1]/limb[%s]/%s-%s", parts[0], parts[1], unit);
+	},
+	getNumberFormatFromLimbId: func (limbId) {
+		return limbId == "0.z" ? "%6.2f" : "%6.1f";
+	},
+	addSliderToDialog: func (limbId, limbIdW, emptyW, name, sliderW, min, max, color, legend) {
+		var propPath = animate.getPropPathFromLimbId(limbId);
+		var format = animate.getNumberFormatFromLimbId(limbId);
 
 		var grpSlider = walker_dialog2.addChild("group");
 		grpSlider.set("layout", "hbox");
@@ -899,8 +913,8 @@ var animate = {
 		grpSlider.addChild("empty").set("pref-width", 4);
 
 		var txtLimb = grpSlider.addChild("text");
-		txtLimb.set("label", limbTxt);
-		txtLimb.set("pref-width", limbTxtW);
+		txtLimb.set("label", limbId);
+		txtLimb.set("pref-width", limbIdW);
 		if (emptyW != nil) {
 			grpSlider.addChild("empty").set("pref-width", emptyW);
 		}
@@ -930,11 +944,13 @@ var animate = {
 		var txtNumber = grpSlider.addChild("text");
 		txtNumber.set("property", propPath);
 		txtNumber.set("pref-width", 32);
-		txtNumber.set("format", frm);
+		txtNumber.set("format", format);
 		txtNumber.set("live", 1);
 		grpSlider.addChild("empty").set("pref-width", 4);
 	},
 	addHandPoseToDialog: func (label, propPath) {
+		propPath = "sim/model/walker[1]/" ~ propPath;
+
 		var grp = walker_dialog2.addChild("group");
 		grp.set("layout", "hbox");
 		grp.set("default-padding", 2);
@@ -1090,39 +1106,47 @@ var animate_update = func (seq_node) {
 			var to_node = seq_node.getNode("position[" ~ next_position ~ "]", 1);
 		}
 	}
-	walker1_node.getNode("limb[0]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[0]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[0]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[0]", 1).getNode("z-m", 1).setValue(interpolate_limb(from_node.getNode("limb[0]", 1).getNode("z-m", 1).getValue(), to_node.getNode("limb[0]", 1).getNode("z-m", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[1]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[1]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[1]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[1]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[1]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[1]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[2]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[2]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[2]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[2]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[2]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[2]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[3]", 1).getNode("x-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[3]", 1).getNode("x-deg", 1).getValue(), to_node.getNode("limb[3]", 1).getNode("x-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[3]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[3]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[3]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[3]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[3]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[3]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[4]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[4]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[4]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[4]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[4]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[4]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[5]", 1).getNode("x-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[5]", 1).getNode("x-deg", 1).getValue(), to_node.getNode("limb[5]", 1).getNode("x-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[5]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[5]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[5]", 1).getNode("y-deg", 1).getValue(), move_percent));
 
-# 	walker1_node.getNode("limb[5]", 1).getNode("hand-pose", 1).setValue(interpolate_limb(from_node.getNode("limb[5]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[5]", 1).getNode("hand-pose", 1).getValue(), move_percent));
+	animate_update_limb("limb[0]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[0]", "z-m",   from_node, to_node, move_percent);
+	animate_update_limb("limb[1]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[1]", "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[2]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[2]", "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[3]", "x-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[3]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[3]", "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[4]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[4]", "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[5]", "x-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[5]", "y-deg", from_node, to_node, move_percent);
 
-	walker1_node.getNode("limb[6]", 1).getNode("x-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[6]", 1).getNode("x-deg", 1).getValue(), to_node.getNode("limb[6]", 1).getNode("x-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[6]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[6]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[6]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[6]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[6]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[6]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[7]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[7]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[7]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[7]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[7]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[7]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[8]", 1).getNode("x-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[8]", 1).getNode("x-deg", 1).getValue(), to_node.getNode("limb[8]", 1).getNode("x-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[8]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[8]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[8]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[9]", 1).getNode("x-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[9]", 1).getNode("x-deg", 1).getValue(), to_node.getNode("limb[9]", 1).getNode("x-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[9]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[9]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[9]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[9]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[9]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[9]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[10]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[10]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[10]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[11]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[11]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[11]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[12]", 1).getNode("x-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[12]", 1).getNode("x-deg", 1).getValue(), to_node.getNode("limb[12]", 1).getNode("x-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[12]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[12]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[12]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[12]", 1).getNode("z-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[12]", 1).getNode("z-deg", 1).getValue(), to_node.getNode("limb[12]", 1).getNode("z-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[13]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[13]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[13]", 1).getNode("y-deg", 1).getValue(), move_percent));
-	walker1_node.getNode("limb[14]", 1).getNode("y-deg", 1).setValue(interpolate_limb(from_node.getNode("limb[14]", 1).getNode("y-deg", 1).getValue(), to_node.getNode("limb[14]", 1).getNode("y-deg", 1).getValue(), move_percent));
+	# walker1_node.getNode("limb[5]", 1).getNode("hand-pose", 1).setValue(
+	# 	interpolate_limb(
+	# 		from_node.getNode("limb[5]", 1).getNode("y-deg", 1).getValue(),
+	# 		to_node.getNode("limb[5]", 1).getNode("hand-pose", 1).getValue(),
+	# 		move_percent
+	# 	)
+	# );
+
+	animate_update_limb("limb[6]",  "x-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[6]",  "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[6]",  "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[7]",  "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[7]",  "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[8]",  "x-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[8]",  "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[9]",  "x-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[9]",  "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[9]",  "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[10]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[11]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[12]", "x-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[12]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[12]", "z-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[13]", "y-deg", from_node, to_node, move_percent);
+	animate_update_limb("limb[14]", "y-deg", from_node, to_node, move_percent);
+	
 	if (i == 99) {
 		if (anim_enabled) {
 			w1a_enabled_current_node.setValue(0);
@@ -1130,7 +1154,16 @@ var animate_update = func (seq_node) {
 		seq_node_now = nil;
 		settimer(func { animate.reloadDialog() }, 0);
 	}
+}
 
+var animate_update_limb = func (parent_node, child_node, from_node, to_node, move_percent) {
+	walker1_node.getNode(parent_node, 1).getNode(child_node, 1).setValue(
+		interpolate_limb(
+			from_node.getNode(parent_node, 1).getNode(child_node, 1).getValue(),
+			to_node.getNode(parent_node, 1).getNode(child_node, 1).getValue(),
+			move_percent
+		)
+	);
 }
 
 var animate_loop_id = 0;

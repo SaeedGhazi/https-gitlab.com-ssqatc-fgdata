@@ -936,9 +936,13 @@ var animate = {
 		}
 		slider.prop().getNode("binding[0]/command", 1).setValue("dialog-apply");
 		slider.prop().getNode("binding[0]/object-name", 1).setValue(name);
-		slider.prop().getNode("binding[1]/command", 1).setValue("property-assign");
-		slider.prop().getNode("binding[1]/property", 1).setValue("sim/gui/dialogs/position-modified");
-		slider.prop().getNode("binding[1]/value", 1).setValue(1);
+
+		# Assign /sim/gui/dialogs/position-modified here causes Segmentation fault
+		# (flightgear/src/GUI/FGPUIDialog.cxx:334 fgPopup::checkHit)
+		# because it triggers the listener to reload the dialog when using the slider.
+		# slider.prop().getNode("binding[1]/command", 1).setValue("property-assign");
+		# slider.prop().getNode("binding[1]/property", 1).setValue("sim/gui/dialogs/position-modified");
+		# slider.prop().getNode("binding[1]/value", 1).setValue(1);
 
 		grpSlider.addChild("empty").set("stretch", 1);
 		var txtNumber = grpSlider.addChild("text");

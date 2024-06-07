@@ -240,6 +240,45 @@
                 </binding>
             </input>
         </group>
+
+        <hrule/>
+
+        <group>
+            <layout>vbox</layout>
+            <text>
+                <label>Control</label>
+            </text>
+            
+            <group>
+                <layout>hbox</layout>
+                <button>
+                    <legend>Start</legend>
+                    <equal>true</equal>
+                    <color>
+                        <alpha type="float">0.8</alpha>
+                    </color>
+                    <binding>
+                        <command>nasal</command>
+                        <script>fgcommand("video-start");</script>
+                    </binding>
+                    <binding>
+                        <command>dialog-close</command>
+                    </binding>
+                </button>
+                
+                <button>
+                    <legend>Stop</legend>
+                    <equal>true</equal>
+                    <color>
+                        <alpha type="float">0.8</alpha>
+                    </color>
+                    <binding>
+                        <command>nasal</command>
+                        <script>fgcommand("video-stop");</script>
+                    </binding>
+                </button>
+            </group>
+        </group>
     </group>
     
     <nasal>

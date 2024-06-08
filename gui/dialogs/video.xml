@@ -254,9 +254,6 @@
                 <button>
                     <legend>Start</legend>
                     <equal>true</equal>
-                    <color>
-                        <alpha type="float">0.8</alpha>
-                    </color>
                     <binding>
                         <command>nasal</command>
                         <script>fgcommand("video-start");</script>
@@ -269,9 +266,6 @@
                 <button>
                     <legend>Stop</legend>
                     <equal>true</equal>
-                    <color>
-                        <alpha type="float">0.8</alpha>
-                    </color>
                     <binding>
                         <command>nasal</command>
                         <script>fgcommand("video-stop");</script>

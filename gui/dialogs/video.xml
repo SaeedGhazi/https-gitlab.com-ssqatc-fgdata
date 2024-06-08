@@ -254,6 +254,9 @@
                 <button>
                     <legend>Start</legend>
                     <equal>true</equal>
+                    <enable>
+                        <not><property>/sim/video/is-encoding</property></not>
+                    </enable>
                     <binding>
                         <command>nasal</command>
                         <script>fgcommand("video-start");</script>
@@ -266,6 +269,9 @@
                 <button>
                     <legend>Stop</legend>
                     <equal>true</equal>
+                    <enable>
+                        <property>/sim/video/is-encoding</property>
+                    </enable>
                     <binding>
                         <command>nasal</command>
                         <script>fgcommand("video-stop");</script>

@@ -1425,4 +1425,28 @@
       <buffer>histogram-luminance</buffer>
     </binding>
   </pass>
+
+  <pass>
+    <name>debug-aerial-perspective</name>
+    <type>quad</type>
+    <clear-mask>depth</clear-mask>
+    <effect>Effects/HDR/debug-aerial-perspective</effect>
+    <condition>
+      <property>/sim/rendering/hdr/debug/show-aerial-perspective</property>
+    </condition>
+    <geometry>
+      <left>0.0</left>
+      <bottom>0.23</bottom>
+      <width>0.2</width>
+      <height>0.2</height>
+    </geometry>
+    <binding>
+      <unit>1</unit>
+      <buffer>histogram-luminance</buffer>
+    </binding>
+    <binding>
+      <unit>11</unit>
+      <buffer>aerial-perspective</buffer>
+    </binding>
+  </pass>
 </PropertyList>

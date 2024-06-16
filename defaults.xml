@@ -267,37 +267,27 @@ Started September 2000 by David Megginson, david@megginson.com
         <aimp-bare type="double" userarchive="y">0</aimp-bare>
         <aimp-interior type="double" userarchive="y">200</aimp-interior>
         <line-features-lod-level type="int" userarchive="y">5</line-features-lod-level>
-        <area-features-lod-level type="int" userarchive="y">5</area-features-lod-level>
         <vegetation-lod-level type="int" userarchive="y">6</vegetation-lod-level>
         <water-texture-size type="int" userarchive="y">2048</water-texture-size>
-        <coastline-lod-level type="int" userarchive="y">3</coastline-lod-level>
-        <coastline-width type="float" userarchive="y">150.0</coastline-width>
         <lod-level n="0">
-          <area-features-min-width>10000</area-features-min-width>
           <line-features-min-width>9999.9</line-features-min-width>
         </lod-level>
         <lod-level n="1">
-          <area-features-min-width>10000</area-features-min-width>
           <line-features-min-width>9999.9</line-features-min-width>
         </lod-level>
         <lod-level n="2">
-          <area-features-min-width>1000</area-features-min-width>
           <line-features-min-width>9999.9</line-features-min-width>
         </lod-level>
         <lod-level n="3">
-          <area-features-min-width>1000</area-features-min-width>
           <line-features-min-width>20.0</line-features-min-width>
         </lod-level>
         <lod-level n="4">
-          <area-features-min-width>1000</area-features-min-width>
           <line-features-min-width>10.0</line-features-min-width>
         </lod-level>
         <lod-level n="5">
-          <area-features-min-width>100</area-features-min-width>
           <line-features-min-width>7.0</line-features-min-width>
         </lod-level>
         <lod-level n="6">
-          <area-features-min-width>100</area-features-min-width>
           <line-features-min-width>3.0</line-features-min-width>
         </lod-level>
         

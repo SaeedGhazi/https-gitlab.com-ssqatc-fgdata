@@ -48,7 +48,7 @@ vec3 eval_lights_transparent(
     // Evaluate image-based lights
     vec3 ws_N = (view_matrix_inverse * vec4(N, 0.0)).xyz;
     vec3 ws_refl = get_reflected(N, V, view_matrix_inverse);
-    float NdotV = max(abs(dot(N, V)), 1e-4);
+    float NdotV = max(dot(N, V), 1e-4);
     color += eval_ibl(
         base_color, metallic, roughness, f0,
         occlusion, ws_N, ws_refl, NdotV);

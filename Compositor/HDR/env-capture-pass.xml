@@ -4,7 +4,7 @@
   <type>scene</type>
   <implicit-attachment-mask>depth</implicit-attachment-mask>
   <effect-scheme>hdr-envmap</effect-scheme>
-  <clear-mask>color depth</clear-mask>
+  <clear-mask>depth</clear-mask>
   <!--
       Only render:
       - Terrain (both WS 2.0 and 3.0)

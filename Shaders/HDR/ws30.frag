@@ -10,6 +10,8 @@ uniform sampler2D landclass;
 uniform sampler2DArray atlas;
 uniform sampler2D perlin;
 
+uniform vec3 fg_CameraViewUp;
+
 // Passed from VPBTechnique, not the Effect
 uniform float fg_tileWidth;
 uniform float fg_tileHeight;
@@ -31,6 +33,7 @@ const vec3 WATER_COLOR = vec3(0.1, 0.1, 0.3);
 const float WATER_METALLIC = 0.0;
 const float WATER_ROUGHNESS = 0.25;
 
+// water.glsl
 // Procedurally generate a water normal for this fragment
 vec3 generateWaterNormal(in vec2 texCoords);
 
@@ -80,7 +83,10 @@ void main()
 		texel = texture(atlas, vec3(st, tex1)).rgb;
 
 		if (water) {
-			N = generateWaterNormal(fs_in.texcoord);
+			vec3 T = normalize(cross(N, fg_CameraViewUp));
+			vec3 B = cross(T, N);
+			mat3 tbn = mat3(T, B, N);
+			N = tbn * generateWaterNormal(fs_in.texcoord);
 			texel = WATER_COLOR;
 			roughness = WATER_ROUGHNESS;
 			metallic = WATER_METALLIC;

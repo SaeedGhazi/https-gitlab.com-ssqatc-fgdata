@@ -56,8 +56,8 @@ void main()
 
 		// The Landclass for this particular fragment.  This can be used to
 		// index into the atlas textures.
-		int lc = int(texture2D(landclass, fs_in.texcoord).g * 255.0 + 0.5);
-		bool water = (texture2D(landclass, fs_in.texcoord).z > 0.9) || (texture2D(coastline, fs_in.texcoord).b > 0.05);
+		int lc = int(texture(landclass, fs_in.texcoord).g * 255.0 + 0.5);
+		bool water = (texture(landclass, fs_in.texcoord).z > 0.9) || (texture(coastline, fs_in.texcoord).b > 0.05);
 		uint tex1 = uint(fg_textureLookup1[lc].r * 255.0 + 0.5);
 
 		//color = ambientArray[lc] + diffuseArray[lc] * NdotL * gl_LightSource[0].diffuse;

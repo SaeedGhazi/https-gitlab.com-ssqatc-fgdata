@@ -10,7 +10,7 @@ uniform sampler2D landclass;
 uniform sampler2DArray atlas;
 uniform sampler2D perlin;
 
-uniform vec3 fg_CameraViewUp;
+uniform mat4 osg_ViewMatrix;
 
 // Passed from VPBTechnique, not the Effect
 uniform float fg_tileWidth;
@@ -83,8 +83,9 @@ void main()
 		texel = texture(atlas, vec3(st, tex1)).rgb;
 
 		if (water) {
-			vec3 T = normalize(cross(N, fg_CameraViewUp));
-			vec3 B = cross(T, N);
+			vec3 vs_north = (osg_ViewMatrix * vec4(0.0, 0.0, 1.0, 0.0)).xyz;
+			vec3 T = normalize(cross(vs_north, N));
+			vec3 B = cross(N, T);
 			mat3 tbn = mat3(T, B, N);
 			N = tbn * generateWaterNormal(fs_in.texcoord);
 			texel = WATER_COLOR;

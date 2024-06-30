@@ -290,7 +290,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <lod-level n="6">
           <line-features-min-width>3.0</line-features-min-width>
         </lod-level>
-        
+
       </static-lod>
       <random-objects type="bool" userarchive="y">true</random-objects>
       <random-vegetation type="bool" userarchive="y">true</random-vegetation>
@@ -755,6 +755,10 @@ Started September 2000 by David Megginson, david@megginson.com
         <name>g force effects</name>
         <path>Aircraft/Generic/g-forces.xml</path>
       </property-rule>
+      <property-rule>
+        <name>annunciators</name>
+        <path>Aircraft/Generic/generic-annunciators.xml</path>
+      </property-rule>
     </systems>
     <instrumentation>
       <path>Aircraft/Generic/generic-instrumentation.xml</path>
@@ -971,7 +975,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <at-model type="bool">true</at-model>
         <z-offset-m alias="/sim/chase-distance-m"/>
       </config>
-    </view>    
+    </view>
     <menubar>
       <visibility type="bool" userarchive="y">true</visibility>
       <default include="gui/menubar.xml"/>
@@ -1058,7 +1062,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <record-continuous-compression type="bool" userarchive="y">true</record-continuous-compression>
     </replay>
     <airport>
-      <min-tower-height-ft type="double">6</min-tower-height-ft>   <!-- a.k.a chap on the ground with a radio waving frantically --> 
+      <min-tower-height-ft type="double">6</min-tower-height-ft>   <!-- a.k.a chap on the ground with a radio waving frantically -->
       <max-tower-height-ft type="double">70</max-tower-height-ft>  <!-- the average tower height is 10.51m; so this is a reasonable limit-->
       <default-tower-height-ft type="double">30</default-tower-height-ft>  <!-- based on the average tower height of ~10.5m-->
       <runways>
@@ -1384,6 +1388,8 @@ Started September 2000 by David Megginson, david@megginson.com
     <mice include="mice.xml"/>
   </input>
   <instrumentation>
+    <annunciators include="annunciators.xml"/>
+
     <!-- Radio settings -->
     <comm n="0">
       <volume type="double">0.6</volume>

@@ -381,10 +381,9 @@ var setAll = func(base, child, value) {
     var name = node.getName();
     node = node.getParent();
     if(node == nil) return;
-    var children = node.getChildren();
+    var children = node.getChildren(name);
     foreach(var c; children)
-        if(c.getName() == name)
-            c.getNode(child, 1).setValue(value);
+        c.getNode(child, 1).setValue(value);
 }
 
 # createNodeObjectsFromHash - create nasal node objects from hash

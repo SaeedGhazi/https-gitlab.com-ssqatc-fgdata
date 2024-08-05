@@ -66,18 +66,10 @@
 		</item>
 
 		<item>
-			<name>mouse-config</name>
+			<name>input-systems</name>
 			<binding>
 				<command>dialog-show</command>
-				<dialog-name>mouse-config</dialog-name>
-			</binding>
-		</item>
-
-		<item>
-			<name>joystick-config</name>
-			<binding>
-				<command>dialog-show</command>
-				<dialog-name>joystick-config</dialog-name>
+				<dialog-name>input-systems</dialog-name>
 			</binding>
 		</item>
 

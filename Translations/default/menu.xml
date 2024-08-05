@@ -15,7 +15,7 @@
 	<snap-shot-dir>Screenshot Directory</snap-shot-dir>
 	<video-control>Video Control</video-control>
 	<sound-config>Sound Configuration</sound-config>
-	<input-config>Mouse Configuration</input-config>
+	<mouse-config>Mouse Configuration</mouse-config>
 	<joystick-config>Joystick Configuration</joystick-config>
 	<terrasync>Scenery Download</terrasync>
 	<aircraft-center>Aircraft Center (Experimental)</aircraft-center>

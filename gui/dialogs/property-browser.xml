@@ -47,7 +47,12 @@
 	<hrule/>
 
 	<text>
-		<label>Toggle verbose: CTRL click '.'; Dump: SHIFT click '.'; goto root: CTRL click '..'</label>
+		<halign>left</halign>
+		<label>CTRL click '.' = toggle verbose; SHIFT click '.' = dump props to console</label>
+	</text>
+	<text>
+		<halign>left</halign>
+		<label>CTRL click = toggle bool; ALT click = toggle trace_w; CTRL+ALT click = toggle trace_r </label>
 	</text>
 
 	<hrule/>
@@ -136,6 +141,10 @@
 				node = props.globals.getNode(lst);
 				if (node == nil)
 					node = props.globals;
+
+				# trigger for property display in Nasal/screen.nas 
+				# TODO: move trigger logic here, current design is confusing
+				setprop("/sim/gui/dialogs/property-browser/selected", node.getPath());
 
 				if (node.getAttribute("children")) {
 					dir = node.getPath();

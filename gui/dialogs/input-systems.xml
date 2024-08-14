@@ -8,6 +8,7 @@
 
     <nasal>
         <open>
+            var dlgRoot = cmdarg();
             var dlg_prefix = "/sim/gui/dialogs/input-systems/";
             var systems = {
                 "js": "Joystick",
@@ -55,8 +56,37 @@
                         last_value.alias(path_selected.getValue()~"/last-event/value");
                         setprop(dlg_prefix~"cfgfile", 
                             string.squeeze(dev.getChild("source").getValue(), 75));
+                        update_variant_listbox();
                     }                    
                 }
+            }
+
+            var update_variant_listbox = func() {
+                var cfg = props.getNode(path_selected.getValue(), 1);
+                var variants = cfg.getNode("config-variants", 1).getChildren("variant");
+                var list_items = props.globals.getNode(dlg_prefix~"variants", 1);
+                list_items.removeChildren();
+
+                if (size(variants)) {
+                    foreach (var v; variants) {
+                        list_items.addChild("value").setValue(v.getNode("description").getValue());
+                        list_items.addChild("id").setValue(v.getNode("id").getValue());                        
+                    }
+                }
+                dlgRoot.setValues({ "dialog-name": dlgRoot.getNode("name", 1).getValue(), "object-name": "listvariant"});
+				fgcommand("dialog-update", dlgRoot);
+            }
+
+            var apply_variant = func() {
+                var cfg = props.getNode(path_selected.getValue(), 1);
+                var selected = getprop(dlg_prefix~"variant");
+                var list = props.globals.getNode(dlg_prefix~"variants", 1);
+                foreach (var v; list.getChildren("value")) {
+                    if (v.getValue() == selected) {
+                        props.getNode(cfg.getNode("config-variants/variant-selected-prop", 1).getValue(), 1)
+                            .setValue(list.getChild("id", v.getIndex()).getValue());
+                    }                    
+                }                
             }
 
             var show_props = func() {
@@ -69,7 +99,7 @@
         <layout>hbox</layout>
 
         <text>
-            <label>Input systems overview</label>
+            <label>Input Devices Overview</label>
         </text>
         
         <empty><stretch>true</stretch></empty>
@@ -88,7 +118,7 @@
     <hrule/>
         
     <group>
-        <layout>vbox</layout>
+        <layout>hbox</layout>
         <group>
             <layout>vbox</layout>
 
@@ -125,7 +155,9 @@
                 </binding>
                 <binding>
                     <command>nasal</command>
-                    <script>update_info("js")</script>
+                    <script>
+                    update_info("js");
+                    </script>
                 </binding>
             </list>
 
@@ -162,7 +194,9 @@
                 </binding>
                 <binding>
                     <command>nasal</command>
-                    <script>update_info("hid")</script>
+                    <script>
+                    update_info("hid");
+                    </script>
                 </binding>
             </list>
 
@@ -199,79 +233,117 @@
                 </binding>
                 <binding>
                     <command>nasal</command>
-                    <script>update_info("linux")</script>
+                    <script>
+                    update_info("linux");
+                    </script>
                 </binding>
             </list>    
         </group>
 
-        <hrule/>
-
+        <vrule/>
         <group>
-            <name>devinfo</name>
-            <layout>table</layout>
+            <layout>vbox</layout>
+            <valign>top</valign>
             <text>
-                <row>0</row><col>0</col>
-                <pref-width>50</pref-width>
-                <label>Device:</label>
+                <label>Config variant</label>
                 <halign>left</halign>
             </text>
-            <text>
-                <row>0</row><col>1</col>
-                <name>system</name>
+            <!--combo>
+                <name>combovariant</name>
                 <halign>left</halign>
-                <live>true</live>
-                <property>/sim/gui/dialogs/input-systems/system</property>
-            </text>
-            <text>
-                <row>0</row><col>2</col>
+                <property>/sim/gui/dialogs/input-systems/config-variant</property>
+                <value>default</value>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>combovariant</object-name>
+                </binding>
+            </combo-->
+            <list>
+                <name>listvariant</name>
+                <halign>left</halign>
                 <pref-width>200</pref-width>
-                <name>devname</name>
-                <halign>left</halign>
-                <live>true</live>
-                <property>/sim/gui/dialogs/input-systems/devname</property>
-            </text>
-
-            <text>
-                <row>1</row><col>0</col>
-                <label>Config file:</label>
-                <halign>left</halign>
-            </text>
-            <text>
-                <row>1</row><col>1</col>
-                <colspan>3</colspan>
-                <name>cfgfile</name>
-                <halign>left</halign>
-                <live>true</live>
-                <property>/sim/gui/dialogs/input-systems/cfgfile</property>
-            </text>
-            <text>
-                <row>2</row><col>0</col>
-                <pref-width>50</pref-width>
-                <label>Last event:</label>
-                <halign>left</halign>
-                <visible>
-                    <not-equals>
-                        <property>/sim/gui/dialogs/input-systems/system</property>
-                        <value>Joystick</value>
-                    </not-equals>
-                </visible>
-            </text>
-            <text>
-                <row>2</row><col>1</col>
-                <pref-width>100</pref-width>
-                <name>lastname</name>
-                <halign>left</halign>
-                <live>true</live>
-                <property>/sim/gui/dialogs/input-systems/last-name</property>
-            </text>
-            <text>
-                <row>2</row><col>2</col>
-                <name>lastvalue</name>
-                <halign>left</halign>
-                <live>true</live>
-                <property>/sim/gui/dialogs/input-systems/last-value</property>
-            </text>
+                <pref-height>150</pref-height>
+                <property>/sim/gui/dialogs/input-systems/variant</property>
+                <properties>/sim/gui/dialogs/input-systems/variants</properties>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>listvariant</object-name>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                    apply_variant();
+                    </script>
+                </binding>
+            </list>
         </group>
+    </group>
+    <hrule />
+    <group>
+        <name>devinfo</name>
+        <layout>table</layout>
+        <text>
+            <row>0</row><col>0</col>
+            <pref-width>50</pref-width>
+            <label>Device:</label>
+            <halign>left</halign>
+        </text>
+        <text>
+            <row>0</row><col>1</col>
+            <name>system</name>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/gui/dialogs/input-systems/system</property>
+        </text>
+        <text>
+            <row>0</row><col>2</col>
+            <pref-width>200</pref-width>
+            <name>devname</name>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/gui/dialogs/input-systems/devname</property>
+        </text>
+
+        <text>
+            <row>1</row><col>0</col>
+            <label>Config file:</label>
+            <halign>left</halign>
+        </text>
+        <text>
+            <row>1</row><col>1</col>
+            <colspan>3</colspan>
+            <name>cfgfile</name>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/gui/dialogs/input-systems/cfgfile</property>
+        </text>
+        <text>
+            <row>2</row><col>0</col>
+            <pref-width>50</pref-width>
+            <label>Last event:</label>
+            <halign>left</halign>
+            <visible>
+                <not-equals>
+                    <property>/sim/gui/dialogs/input-systems/system</property>
+                    <value>Joystick</value>
+                </not-equals>
+            </visible>
+        </text>
+        <text>
+            <row>2</row><col>1</col>
+            <pref-width>100</pref-width>
+            <name>lastname</name>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/gui/dialogs/input-systems/last-name</property>
+        </text>
+        <text>
+            <row>2</row><col>2</col>
+            <name>lastvalue</name>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/gui/dialogs/input-systems/last-value</property>
+        </text>
     </group>
     <hrule/>
     <group>

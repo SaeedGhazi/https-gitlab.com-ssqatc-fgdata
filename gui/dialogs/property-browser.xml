@@ -33,6 +33,27 @@
 				</binding>
 			</button>
 			<button>
+				<legend>/</legend>
+				<pref-width>20</pref-width>
+				<pref-height>20</pref-height>
+				<binding>
+					<command>nasal</command>
+					<script>
+					select("/");
+					</script>
+				</binding>
+			</button>
+			<button>
+				<legend>?</legend>
+				<key>?</key>
+				<pref-width>20</pref-width>
+				<pref-height>20</pref-height>
+				<binding>
+					<command>dialog-show</command>
+					<dialog-name>help-property-browser</dialog-name>
+				</binding>
+			</button>
+			<button>
 				<legend>X</legend>
 				<key>Esc</key>
 				<pref-width>20</pref-width>
@@ -43,17 +64,6 @@
 			</button>
 		</group>
 	</group>
-
-	<hrule/>
-
-	<text>
-		<halign>left</halign>
-		<label>CTRL click '.' = toggle verbose; SHIFT click '.' = dump props to console</label>
-	</text>
-	<text>
-		<halign>left</halign>
-		<label>CTRL click = toggle bool; ALT click = toggle trace_w; CTRL+ALT click = toggle trace_r </label>
-	</text>
 
 	<hrule/>
 
@@ -136,8 +146,13 @@
 				fgcommand("dialog-update", self);
 			}
 
-			var select = func {
-				var lst = list.getValue();
+			var select = func(path = nil) {
+				if (path == nil) {
+					var lst = list.getValue();
+				}
+				else {
+					var lst = path;
+				}
 				node = props.globals.getNode(lst);
 				if (node == nil)
 					node = props.globals;
@@ -148,7 +163,7 @@
 
 				if (node.getAttribute("children")) {
 					dir = node.getPath();
-					title.setValue(node.getPath() == "" ? dlgname : lst);
+					title.setValue(node.getPath() == "" ? "Property Browser" : lst);
 					node = nil;
 					label.setValue(no_selection);
 					input.setValue("");
@@ -198,6 +213,8 @@
 					"property-list/property": path ~ "/list",
 					"group[1]/text/property": path ~ "/label",
 					"group[1]/input/property": path ~ "/input",
+					"x": self.getNode("__bx").getValue() + 20,
+					"y": self.getNode("__by").getValue() - 20,
 				});
 				
 				# ... and create new dialog

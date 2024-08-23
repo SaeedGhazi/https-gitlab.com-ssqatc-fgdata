@@ -147,6 +147,21 @@
 			}
 
 			var select = func(path = nil) {
+
+				# Shift-click       adds the selected property to the property display
+				# Shift-Alt-click   adds all children of the selected property to the property display
+				# Shift-Ctrl-click  removes all properties from the display
+				var update_prop_display = func(n) {
+					if (n.getPath() != "" and getprop("/devices/status/keyboard/shift")) {
+						if (getprop("/devices/status/keyboard/ctrl"))
+							return screen.property_display.reset();
+						if (!n.getAttribute("children"))
+							screen.property_display.add(n);
+						elsif (getprop("/devices/status/keyboard/alt"))
+							screen.property_display.add(n.getChildren());
+					}
+				};
+
 				if (path == nil) {
 					var lst = list.getValue();
 				}
@@ -157,9 +172,7 @@
 				if (node == nil)
 					node = props.globals;
 
-				# trigger for property display in Nasal/screen.nas 
-				# TODO: move trigger logic here, current design is confusing
-				setprop("/sim/gui/dialogs/property-browser/selected", node.getPath());
+				update_prop_display(node);
 
 				if (node.getAttribute("children")) {
 					dir = node.getPath();
@@ -167,6 +180,8 @@
 					node = nil;
 					label.setValue(no_selection);
 					input.setValue("");
+					list.setValue(dir);
+					update("property-list");
 				} else {
 					var name = node.getName();
 					var index = node.getIndex();
@@ -233,6 +248,7 @@
 			dir = startdir.getValue();
 			if (dir == nil) {
 				dir = "/";
+				startdir.setValue(dir);
 			}
 			list.setValue(dir);
 			select();

@@ -9,8 +9,11 @@ layout(location = 12) in float fogcoord;
 out VS_OUT {
     float flogz;
     vec2 texcoord;
-    vec3 view_vector;
+    vec3 vs_up;
+    vec3 vs_pos;
+    vec3 vs_tree_pos;
     float autumn_flag;
+    float scale;
 } vs_out;
 
 uniform int num_deciduous_trees;
@@ -72,5 +75,12 @@ void main()
     gl_Position = osg_ModelViewProjectionMatrix * vec4(position, 1.0);
     vs_out.flogz = logdepth_prepare_vs_depth(gl_Position.w);
 
-    vs_out.view_vector = (osg_ModelViewMatrix * vec4(position, 1.0)).xyz;
+    // Up direction in view space
+    vs_out.vs_up = vec3(osg_ModelViewMatrix * vec4(0.0, 0.0, 1.0, 0.0));
+    // Vertex position in view space
+    vs_out.vs_pos = vec3(osg_ModelViewMatrix * vec4(position, 1.0));
+    // Tree position center in view space
+    vs_out.vs_tree_pos = vec3(osg_ModelViewMatrix * vec4(vertex_color.xyz, 1.0));
+    // Tree radius
+    vs_out.scale = normal.x;
 }

@@ -89,10 +89,6 @@
 		<shade-model>flat</shade-model>
 		<cull-face>back</cull-face>
 		<building-flag type="int">1</building-flag>
-
-		<!-- PBR -->
-		<pbr-metallic type="float">0.0</pbr-metallic>
-        <pbr-roughness type="float">1.0</pbr-roughness>
 	</parameters>
 
 	<technique n="4">
@@ -170,32 +166,6 @@
 		<pass>
 			<program n="0">
 				<vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
-				<attribute>
-					<name>instancePosition</name>
-					<index>6</index>
-				</attribute>
-				<attribute>
-					<name>instanceScale</name>
-					<index>7</index>
-				</attribute>
-				<attribute>
-					<name>attrib1</name>
-					<index>10</index>
-				</attribute>
-				<attribute>
-					<name>attrib2</name>
-					<index>11</index>
-				</attribute>
-			</program>
-		</pass>
-	</technique>
-
-	<!-- HDR deferred pass -->
-	<!-- Overwrite the corresponding model-combined technique -->
-	<technique n="108">
-		<pass>
-			<program>
-				<vertex-shader n="0">Shaders/HDR/model_building.vert</vertex-shader>
 				<attribute>
 					<name>instancePosition</name>
 					<index>6</index>

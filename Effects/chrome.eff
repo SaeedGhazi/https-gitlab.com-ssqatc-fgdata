@@ -65,48 +65,4 @@
     </pass>
   </technique>
 
-  <technique n="109">
-    <scheme>hdr-geometry</scheme>
-    <pass>
-      <depth>
-        <enabled>true</enabled>
-        <function>less</function>
-        <write-mask>true</write-mask>
-      </depth>
-      <stencil>
-        <function>always</function>
-        <value>8</value>
-        <pass>replace</pass>
-      </stencil>
-      <blend>0</blend>
-      <rendering-hint>opaque</rendering-hint>
-      <cull-face><use>cull-face</use></cull-face>
-      <program>
-        <vertex-shader>Shaders/HDR/model_chrome.vert</vertex-shader>
-        <vertex-shader>Shaders/HDR/logarithmic_depth.glsl</vertex-shader>
-        <fragment-shader>Shaders/HDR/model_chrome.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
-      </program>
-    </pass>
-  </technique>
-
-  <technique n="119">
-    <scheme>hdr-shadow</scheme>
-    <pass>
-      <color-mask type="vec4d">0 0 0 0</color-mask>
-      <cull-face>back</cull-face>
-      <blend>0</blend>
-      <polygon-offset>
-        <factor>1.1</factor>
-        <units>4.0</units>
-      </polygon-offset>
-      <program>
-        <vertex-shader>Shaders/HDR/model_shadow.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/model_shadow.frag</fragment-shader>
-      </program>
-    </pass>
-  </technique>
-
 </PropertyList>

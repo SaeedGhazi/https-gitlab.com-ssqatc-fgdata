@@ -184,9 +184,6 @@
             # Re-initialize local weather.
             settimer( func {local_weather.set_tile();}, 0.2);
           }
-
-          # Force an update of the HDR environment map after a few seconds
-          settimer(func {setprop("/sim/rendering/hdr/envmap/force-update", "true");}, 5.0);
         },
 
         findScenarioByName : func(name) {

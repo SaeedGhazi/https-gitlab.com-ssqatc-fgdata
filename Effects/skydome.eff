@@ -44,10 +44,6 @@
     <fact_black><use>/sim/rendering/als-filters/black-factor</use></fact_black>
     <delta_T>-50.0</delta_T>
     <air_pollution><use>/environment/air-pollution-norm</use></air_pollution>
-    <!-- exposure.glsl -->
-    <exposure-compensation>
-      <use>/sim/rendering/hdr/exposure-compensation</use>
-    </exposure-compensation>
   </parameters>
   <technique n="8">
     <predicate>
@@ -298,98 +294,6 @@
       <lighting>false</lighting>
       <shade-model>smooth</shade-model>
       <cull-face>back</cull-face>
-    </pass>
-  </technique>
-
-  <technique n="109">
-    <scheme>hdr-geometry</scheme>
-  </technique>
-  <technique n="129">
-    <scheme>hdr-forward</scheme>
-    <pass>
-      <depth>
-        <enabled>true</enabled>
-        <function>less</function>
-        <write-mask>false</write-mask>
-      </depth>
-      <cull-face>back</cull-face>
-      <program>
-        <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
-      </program>
-      <uniform>
-        <name>is_envmap</name>
-        <type>bool</type>
-        <value type="bool">false</value>
-      </uniform>
-      <uniform>
-        <name>transmittance_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">12</value>
-      </uniform>
-      <uniform>
-        <name>sky_view_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">13</value>
-      </uniform>
-      <!-- exposure.glsl -->
-      <uniform>
-        <name>lum_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">14</value>
-      </uniform>
-      <uniform>
-        <name>exposure_compensation</name>
-        <type>float</type>
-        <value><use>exposure-compensation</use></value>
-      </uniform>
-    </pass>
-  </technique>
-  <technique n="139">
-    <scheme>hdr-envmap</scheme>
-    <pass>
-      <depth>
-        <enabled>true</enabled>
-        <function>less</function>
-        <write-mask>false</write-mask>
-      </depth>
-      <cull-face>back</cull-face>
-      <program>
-        <vertex-shader>Shaders/HDR/skydome.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/skydome.frag</fragment-shader>
-        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
-        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
-      </program>
-      <uniform>
-        <name>is_envmap</name>
-        <type>bool</type>
-        <value type="bool">true</value>
-      </uniform>
-      <uniform>
-        <name>transmittance_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">12</value>
-      </uniform>
-      <uniform>
-        <name>sky_view_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">13</value>
-      </uniform>
-      <!-- exposure.glsl -->
-      <uniform>
-        <name>lum_tex</name>
-        <type>sampler-2d</type>
-        <value type="int">14</value>
-      </uniform>
-      <uniform>
-        <name>exposure_compensation</name>
-        <type>float</type>
-        <value><use>exposure-compensation</use></value>
-      </uniform>
     </pass>
   </technique>
 

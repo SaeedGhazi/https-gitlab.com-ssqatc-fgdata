@@ -536,14 +536,5 @@
 
   <darksky-brightness-magnitude type="float">22.0</darksky-brightness-magnitude>
   <galaxy-bulge-brightness-magnitude type="float">20.3</galaxy-bulge-brightness-magnitude>
-
-  <!-- Parameters used by the HDR atmosphere shaders -->
-  <aerosols>
-    <type type="int" userarchive="y">8</type>
-    <turbidity type="float" userarchive="y">1.0</turbidity>
-  </aerosols>
-  <ground-albedo type="float" userarchive="y">0.3</ground-albedo>
-  <fog-height-falloff type="float" userarchive="y">1.0</fog-height-falloff>
-  <fog-height-offset type="float" userarchive="y">0.0</fog-height-offset>
   
 </PropertyList>

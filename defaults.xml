@@ -527,54 +527,6 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y">true</enabled>
       </pilot-model>
 
-      <hdr>
-        <render-scale type="float" userarchive="y">1.0</render-scale>
-        <antialiasing-technique type="int" userarchive="y">2</antialiasing-technique>
-        <exposure-compensation type="float">0.0</exposure-compensation>
-        <envmap>
-          <cubemap-size type="int" userarchive="y">128</cubemap-size>
-          <update-continuously type="bool">false</update-continuously>
-          <force-update type="bool">false</force-update>
-          <update-rate-s type="float">90.0</update-rate-s>
-          <should-prefilter type="bool">false</should-prefilter>
-          <should-render-face-0 type="bool">false</should-render-face-0>
-          <should-render-face-1 type="bool">false</should-render-face-1>
-          <should-render-face-2 type="bool">false</should-render-face-2>
-          <should-render-face-3 type="bool">false</should-render-face-3>
-          <should-render-face-4 type="bool">false</should-render-face-4>
-          <should-render-face-5 type="bool">false</should-render-face-5>
-        </envmap>
-        <bloom>
-          <strength type="float">0.01</strength>
-          <filter-radius type="float">0.005</filter-radius>
-        </bloom>
-        <ambient-occlusion>
-          <enabled type="bool" userarchive="y">true</enabled>
-          <world-radius type="float">0.2</world-radius>
-        </ambient-occlusion>
-        <shadows>
-          <sun-atlas-size type="int" userarchive="y">8192</sun-atlas-size>
-          <normal-bias type="float">0.02</normal-bias>
-          <sss-enabled type="bool" userarchive="y">true</sss-enabled>
-          <sss-step-count type="int">32</sss-step-count>
-          <sss-max-distance type="float">0.2</sss-max-distance>
-          <sss-depth-bias type="float">0.00001</sss-depth-bias>
-        </shadows>
-        <night-vision>
-          <enabled type="bool">false</enabled>
-        </night-vision>
-        <histogram>
-          <compute type="bool">true</compute>
-        </histogram>
-        <debug>
-          <display-ev100 type="bool">false</display-ev100>
-          <show-gbuffer type="bool">false</show-gbuffer>
-          <show-shadow-cascades type="bool">false</show-shadow-cascades>
-          <show-histogram type="bool">false</show-histogram>
-          <show-aerial-perspective type="bool">false</show-aerial-perspective>
-        </debug>
-      </hdr>
-
       <composite-viewer-enabled type="bool">true</composite-viewer-enabled>
       <database-pager>
         <threads type="int" userarchive="y">4</threads>

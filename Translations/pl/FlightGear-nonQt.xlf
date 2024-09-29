@@ -175,9 +175,9 @@
           <source>Immatriculation</source>
           <target>Rejestracja</target>
         </trans-unit>
-        <trans-unit id="menu/input-systems:0" translate="yes" approved="no">
+        <trans-unit id="menu/input-systems:0" translate="yes" approved="yes">
           <source>Input Devices</source>
-          <target />
+          <target>Urzadzenia wejsciowe</target>
         </trans-unit>
         <trans-unit id="menu/instrument-failures:0" translate="yes" approved="yes">
           <source>Instrument Failures</source>

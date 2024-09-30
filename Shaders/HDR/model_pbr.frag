@@ -31,12 +31,15 @@ void main()
 {
     vec4 base_color_texel = texture(base_color_tex, fs_in.texcoord);
     vec3 base_color = eotf_inverse_sRGB(base_color_texel.rgb) * base_color_factor.rgb;
+    // Ignore alpha in base color. We assume this is a completely opaque object
 
     vec3 orm = texture(orm_tex, fs_in.texcoord).rgb;
     float occlusion = orm.r;
     float roughness = orm.g * roughness_factor;
     float metallic = orm.b * metallic_factor;
-    vec3 emissive = texture(emissive_tex, fs_in.texcoord).rgb * emissive_factor;
+
+    vec3 emissive_texel = texture(emissive_tex, fs_in.texcoord).rgb;
+    vec3 emissive = eotf_inverse_sRGB(emissive_texel) * emissive_factor;
 
     vec3 N = normalize(fs_in.vertex_normal);
     N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord, normal_tex);

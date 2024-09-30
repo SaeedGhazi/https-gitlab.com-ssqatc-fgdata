@@ -49,7 +49,9 @@ void main()
     float occlusion = orm.r;
     float roughness = orm.g * roughness_factor;
     float metallic = orm.b * metallic_factor;
-    vec3 emissive = texture(emissive_tex, fs_in.texcoord).rgb * emissive_factor;
+
+    vec3 emissive_texel = texture(emissive_tex, fs_in.texcoord).rgb;
+    vec3 emissive = eotf_inverse_sRGB(emissive_texel) * emissive_factor;
 
     vec3 V = normalize(-fs_in.view_vector);
     vec2 uv = (gl_FragCoord.xy - fg_Viewport.xy) / fg_Viewport.zw;

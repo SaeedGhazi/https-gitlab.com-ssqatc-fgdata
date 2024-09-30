@@ -8,8 +8,10 @@ in VS_OUT {
 } fs_in;
 
 uniform sampler2D color_tex;
+uniform sampler2D normal_tex;
 
 uniform int normalmap_enabled;
+uniform int normalmap_dds;
 uniform float normalmap_tiling;
 uniform float metallic;
 uniform float roughness;
@@ -20,7 +22,7 @@ void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
 // color.glsl
 vec3 eotf_inverse_sRGB(vec3 srgb);
 // normalmap.glsl
-vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord);
+vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord, sampler2D tex);
 // logarithmic_depth.glsl
 float logdepth_encode(float z);
 
@@ -31,7 +33,7 @@ void main()
 
     vec3 N = normalize(fs_in.vertex_normal);
     if (normalmap_enabled > 0) {
-        N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord * normalmap_tiling);
+        N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord * normalmap_tiling, normal_tex);
     }
 
     gbuffer_pack(N, color, metallic, roughness, 1.0, vec3(0.0), 3u);

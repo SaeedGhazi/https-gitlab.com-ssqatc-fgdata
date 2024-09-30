@@ -11,6 +11,7 @@ in VS_OUT {
 } fs_in;
 
 uniform sampler2D base_color_tex;
+uniform sampler2D normal_tex;
 uniform sampler2D orm_tex;
 uniform sampler2D emissive_tex;
 
@@ -32,7 +33,7 @@ vec3 eval_lights_transparent(
     vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv, vec4 ap,
     mat4 view_matrix_inverse);
 // normalmap.glsl
-vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord);
+vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord, sampler2D tex);
 // logarithmic_depth.glsl
 float logdepth_encode(float z);
 
@@ -54,7 +55,7 @@ void main()
     vec2 uv = (gl_FragCoord.xy - fg_Viewport.xy) / fg_Viewport.zw;
 
     vec3 N = normalize(fs_in.vertex_normal);
-    N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord);
+    N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord, normal_tex);
 
     vec3 color = eval_lights_transparent(
         base_color.rgb, metallic, roughness, occlusion, emissive,

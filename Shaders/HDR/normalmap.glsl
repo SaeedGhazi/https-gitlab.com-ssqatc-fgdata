@@ -1,8 +1,5 @@
 #version 330 core
 
-uniform sampler2D normal_tex;
-uniform int normalmap_dds = 0;
-
 /*
  * Create a cotangent frame without a pre-computed tangent basis.
  * "Normal Mapping Without Precomputed Tangents" by Christian Schüler (2013).
@@ -30,15 +27,11 @@ mat3 cotangent_frame(vec3 N, vec3 p, vec2 uv)
  * V is the view vector (eye to vertex, not normalized). Both N and V must be
  * in the same space.
  */
-vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord)
+vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord, sampler2D tex)
 {
-    vec3 normal = texture(normal_tex, texcoord).rgb;
+    vec3 normal = texture(tex, texcoord).rgb;
     // Sign expansion because the normal map format is unsigned
     normal = normal * 255.0 / 127.0 - 128.0 / 127.0;
-    if (normalmap_dds > 0) {
-        // DDS has flipped normals
-        normal = -normal;
-    }
     mat3 TBN = cotangent_frame(N, V, texcoord);
     return normalize(TBN * normal);
 }

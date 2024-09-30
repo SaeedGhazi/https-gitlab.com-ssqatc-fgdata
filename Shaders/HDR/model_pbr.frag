@@ -8,6 +8,7 @@ in VS_OUT {
 } fs_in;
 
 uniform sampler2D base_color_tex;
+uniform sampler2D normal_tex;
 uniform sampler2D orm_tex;
 uniform sampler2D emissive_tex;
 
@@ -22,7 +23,7 @@ void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
 // color.glsl
 vec3 eotf_inverse_sRGB(vec3 srgb);
 // normalmap.glsl
-vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord);
+vec3 perturb_normal(vec3 N, vec3 V, vec2 texcoord, sampler2D tex);
 // logarithmic_depth.glsl
 float logdepth_encode(float z);
 
@@ -38,7 +39,7 @@ void main()
     vec3 emissive = texture(emissive_tex, fs_in.texcoord).rgb * emissive_factor;
 
     vec3 N = normalize(fs_in.vertex_normal);
-    N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord);
+    N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord, normal_tex);
 
     gbuffer_pack(N, base_color, metallic, roughness, occlusion, emissive, 3u);
     gl_FragDepth = logdepth_encode(fs_in.flogz);

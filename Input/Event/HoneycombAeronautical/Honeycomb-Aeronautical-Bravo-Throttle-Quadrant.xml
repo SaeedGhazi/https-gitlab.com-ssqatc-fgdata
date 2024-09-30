@@ -93,7 +93,7 @@ Button 47:  TOGA on Handle 4
   <vendor-id>honeycomb</vendor-id>
   <model-id>bravo</model-id>
   <name>Honeycomb Aeronautical Bravo Throttle Quadrant</name>
-
+  <device-dialog>honeycomb-bravo</device-dialog>
   <debug-events type="bool">false</debug-events>
   <hid-debug-raw type="bool">false</hid-debug-raw>
   <nasal>
@@ -116,34 +116,42 @@ Button 47:  TOGA on Handle 4
       <id>jet2</id>
       <description>Airliner (two engines)</description>
       <mapping>
+        <id>lev0</id>
         <input>/input/honeycomb/bravo/lever[0]</input>
         <output>/controls/flight/speed-brake</output>
       </mapping>
       <mapping>
+        <id>lev2</id>
         <input>/input/honeycomb/bravo/lever[2]</input>
         <output>/controls/engines/engine[0]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev3</id>
         <input>/input/honeycomb/bravo/lever[3]</input>
         <output>/controls/engines/engine[1]/throttle</output>
       </mapping>
       <mapping>
+        <id>lb2</id>
         <input>/input/honeycomb/bravo/lever-down-button[2]</input>
         <output>/controls/engines/engine[0]/cutoff</output>
       </mapping>
       <mapping>
+        <id>lb3</id>
         <input>/input/honeycomb/bravo/lever-down-button[3]</input>
         <output>/controls/engines/engine[1]/cutoff</output>
       </mapping>
       <mapping>
+        <id>rev2</id>
         <input>/input/honeycomb/bravo/reverser[2]</input>
         <output>/controls/engines/engine[0]/reverser-cmd</output>
       </mapping>
       <mapping>
+        <id>rev3</id>
         <input>/input/honeycomb/bravo/reverser[3]</input>
         <output>/controls/engines/engine[1]/reverser-cmd</output>
       </mapping>
       <mapping>
+        <id>lev5</id>
         <input>/input/honeycomb/bravo/lever[5]</input>
         <output>/controls/flaps-lever-continuous</output>
       </mapping>
@@ -152,58 +160,72 @@ Button 47:  TOGA on Handle 4
       <id>jet4</id>
       <description>Airliner (four engines)</description>
       <mapping>
+        <id>lev0</id>
         <input>/input/honeycomb/bravo/lever[0]</input>
         <output>/controls/flight/speed-brake</output>
       </mapping>
       <mapping>
+        <id>lev1</id>
         <input>/input/honeycomb/bravo/lever[1]</input>
         <output>/controls/engines/engine[0]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev2</id>
         <input>/input/honeycomb/bravo/lever[2]</input>
         <output>/controls/engines/engine[1]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev3</id>
         <input>/input/honeycomb/bravo/lever[3]</input>
         <output>/controls/engines/engine[2]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev4</id>
         <input>/input/honeycomb/bravo/lever[4]</input>
         <output>/controls/engines/engine[3]/throttle</output>
       </mapping>
       <mapping>
+        <id>lb1</id>
         <input>/input/honeycomb/bravo/lever-down-button[1]</input>
         <output>/controls/engines/engine[0]/cutoff</output>
       </mapping>
       <mapping>
+        <id>lb2</id>
         <input>/input/honeycomb/bravo/lever-down-button[2]</input>
         <output>/controls/engines/engine[1]/cutoff</output>
       </mapping>
       <mapping>
+        <id>lb3</id>
         <input>/input/honeycomb/bravo/lever-down-button[3]</input>
         <output>/controls/engines/engine[2]/cutoff</output>
       </mapping>
       <mapping>
+        <id>lb4</id>
         <input>/input/honeycomb/bravo/lever-down-button[4]</input>
         <output>/controls/engines/engine[3]/cutoff</output>
       </mapping>
       <mapping>
+        <id>rev1</id>
         <input>/input/honeycomb/bravo/reverser[1]</input>
         <output>/controls/engines/engine[0]/reverser-cmd</output>
       </mapping>
       <mapping>
+        <id>rev2</id>
         <input>/input/honeycomb/bravo/reverser[2]</input>
         <output>/controls/engines/engine[1]/reverser-cmd</output>
       </mapping>
       <mapping>
+        <id>rev3</id>
         <input>/input/honeycomb/bravo/reverser[3]</input>
         <output>/controls/engines/engine[2]/reverser-cmd</output>
       </mapping>
       <mapping>
+        <id>rev4</id>
         <input>/input/honeycomb/bravo/reverser[4]</input>
         <output>/controls/engines/engine[3]/reverser-cmd</output>
       </mapping>
       <mapping>
+        <id>lev5</id>
         <input>/input/honeycomb/bravo/lever[5]</input>
         <output>/controls/flaps-lever-continuous</output>
       </mapping>
@@ -212,10 +234,12 @@ Button 47:  TOGA on Handle 4
       <id>tm</id>
       <description>Throttle/Mixture</description>
       <mapping>
+        <id>lev0</id>
         <input>/input/honeycomb/bravo/lever[0]</input>
         <output>/controls/engines/engine[0]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev1</id>
         <input>/input/honeycomb/bravo/lever[1]</input>
         <output>/controls/engines/engine[0]/mixture</output>
       </mapping>
@@ -224,14 +248,17 @@ Button 47:  TOGA on Handle 4
       <id>tpm</id>
       <description>Throttle/Prop/Mixture</description>
       <mapping>
+        <id>lev0</id>
         <input>/input/honeycomb/bravo/lever[0]</input>
         <output>/controls/engines/engine[0]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev1</id>
         <input>/input/honeycomb/bravo/lever[1]</input>
         <output>/controls/engines/engine[0]/propeller-pitch</output>
       </mapping>
       <mapping>
+        <id>lev2</id>
         <input>/input/honeycomb/bravo/lever[2]</input>
         <output>/controls/engines/engine[0]/mixture</output>
       </mapping>
@@ -240,18 +267,22 @@ Button 47:  TOGA on Handle 4
       <id>ttmm</id>
       <description>Throttle/Mixture (two engines)</description>
       <mapping>
+        <id>lev0</id>
         <input>/input/honeycomb/bravo/lever[0]</input>
         <output>/controls/engines/engine[0]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev1</id>
         <input>/input/honeycomb/bravo/lever[1]</input>
         <output>/controls/engines/engine[1]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev2</id>
         <input>/input/honeycomb/bravo/lever[2]</input>
         <output>/controls/engines/engine[0]/mixture</output>
       </mapping>
       <mapping>
+        <id>lev3</id>
         <input>/input/honeycomb/bravo/lever[3]</input>
         <output>/controls/engines/engine[1]/mixture</output>
       </mapping>
@@ -260,26 +291,32 @@ Button 47:  TOGA on Handle 4
       <id>ttppmm</id>
       <description>Throttle/Prop/Mixture (two engines)</description>
       <mapping>
+        <id>lev0</id>
         <input>/input/honeycomb/bravo/lever[0]</input>
         <output>/controls/engines/engine[0]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev1</id>
         <input>/input/honeycomb/bravo/lever[1]</input>
         <output>/controls/engines/engine[1]/throttle</output>
       </mapping>
       <mapping>
+        <id>lev2</id>
         <input>/input/honeycomb/bravo/lever[2]</input>
         <output>/controls/engines/engine[0]/propeller-pitch</output>
       </mapping>
       <mapping>
+        <id>lev3</id>
         <input>/input/honeycomb/bravo/lever[3]</input>
         <output>/controls/engines/engine[1]/propeller-pitch</output>
       </mapping>
       <mapping>
+        <id>lev4</id>
         <input>/input/honeycomb/bravo/lever[4]</input>
         <output>/controls/engines/engine[0]/mixture</output>
       </mapping>
       <mapping>
+        <id>lev5</id>
         <input>/input/honeycomb/bravo/lever[5]</input>
         <output>/controls/engines/engine[1]/mixture</output>
       </mapping>
@@ -292,11 +329,6 @@ Button 47:  TOGA on Handle 4
     <interval-sec>0.5</interval-sec>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/hdg</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -304,144 +336,84 @@ Button 47:  TOGA on Handle 4
     <name>vendor-1</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/nav</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
   <event>
     <desc>LED APR</desc>
     <name>vendor-2</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/apr</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
   <event>
     <desc>LED REV</desc>
     <name>vendor-3</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/rev</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
   <event>
     <desc>LED HDG</desc>
     <name>vendor-4</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/alt</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
   <event>
     <desc>LED NAV</desc>
     <name>vendor-5</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/vs</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
   <event>
     <desc>LED APR</desc>
     <name>vendor-6</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/mode/ias</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
   <event>
     <desc>LED REV</desc>
     <name>vendor-7</name>
     <setting>
       <property>/instrumentation/annunciators/autoflight/ap/enabled</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
+
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
+
   </event>
 
   <event>
     <desc>LG left green</desc>
     <name>vendor-8</name>
     <setting>
-      <value>1</value>
-      <condition>
-        <property>/instrumentation/annunciators/serviceable</property>
-        <not><property>/instrumentation/annunciators/gear/left/up</property></not>
-      </condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition>
-        <or>
-          <not><property>/instrumentation/annunciators/serviceable</property></not>
-          <property>/instrumentation/annunciators/gear/left/up</property>
-        </or>
-      </condition>
+      <property>/instrumentation/annunciators/gear/left/down</property>
     </setting>
   </event>
   <event>
     <desc>LG nose green</desc>
     <name>vendor-10</name>
     <setting>
-      <value>1</value>
-      <condition>
-        <property>/instrumentation/annunciators/serviceable</property>
-        <not><property>/instrumentation/annunciators/gear/nose/up</property></not>
-      </condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition>
-        <or>
-          <not><property>/instrumentation/annunciators/serviceable</property></not>
-          <property>/instrumentation/annunciators/gear/nose/up</property>
-        </or>
-      </condition>
+      <property>/instrumentation/annunciators/gear/nose/down</property>
     </setting>
   </event>
   <event>
     <desc>LG right green</desc>
     <name>vendor-12</name>
     <setting>
-      <value>1</value>
-      <condition>
-        <property>/instrumentation/annunciators/serviceable</property>
-        <not><property>/instrumentation/annunciators/gear/right/up</property></not>
-      </condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition>
-        <or>
-          <not><property>/instrumentation/annunciators/serviceable</property></not>
-          <property>/instrumentation/annunciators/gear/right/up</property>
-        </or>
-      </condition>
+      <property>/instrumentation/annunciators/gear/right/down</property>
     </setting>
   </event>
 
@@ -450,15 +422,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-9</name>
     <setting>
       <property>/instrumentation/annunciators/gear/left/in-transition</property>
-      <condition>
-        <property>/instrumentation/annunciators/serviceable</property>
-      </condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition>
-        <not><property>/instrumentation/annunciators/serviceable</property></not>
-      </condition>
     </setting>
   </event>
   <event>
@@ -466,15 +429,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-11</name>
     <setting>
       <property>/instrumentation/annunciators/gear/nose/in-transition</property>
-      <condition>
-        <property>/instrumentation/annunciators/serviceable</property>
-      </condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition>
-        <not><property>/instrumentation/annunciators/serviceable</property></not>
-      </condition>
     </setting>
   </event>
   <event>
@@ -482,15 +436,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-13</name>
     <setting>
       <property>/instrumentation/annunciators/gear/right/in-transition</property>
-      <condition>
-        <property>/instrumentation/annunciators/serviceable</property>
-      </condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition>
-        <not><property>/instrumentation/annunciators/serviceable</property></not>
-      </condition>
     </setting>
   </event>
 
@@ -499,11 +444,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-14</name>
     <setting>
       <property>/instrumentation/annunciators/master-warning/state</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -511,11 +451,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-15</name>
     <setting>
       <property>/instrumentation/annunciators/engines/fire</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -523,11 +458,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-16</name>
     <setting>
       <property>/instrumentation/annunciators/engines/oil-pressure-low</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -535,11 +465,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-17</name>
     <setting>
       <property>/instrumentation/annunciators/systems/fuel/pressure-low</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -547,11 +472,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-18</name>
     <setting>
       <property>/instrumentation/annunciators/systems/anti-ice/enabled</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -559,11 +479,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-19</name>
     <setting>
       <property>/instrumentation/annunciators/engines/starter</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -571,24 +486,13 @@ Button 47:  TOGA on Handle 4
     <name>vendor-20</name>
     <setting>
       <property>/instrumentation/annunciators/engines/apu/enabled</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
-
   <event>
     <desc>Master Caution</desc>
     <name>vendor-21</name>
     <setting>
       <property>/instrumentation/annunciators/master-caution/state</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -596,11 +500,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-22</name>
     <setting>
       <property>/instrumentation/annunciators/systems/vacuum</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -608,11 +507,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-23</name>
     <setting>
       <property>/instrumentation/annunciators/systems/hyd/pressure-low</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -620,11 +514,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-24</name>
     <setting>
       <property>/instrumentation/annunciators/systems/fuel/aux-pump</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -632,11 +521,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-25</name>
     <setting>
       <property>/instrumentation/annunciators/gear/parking-brake</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -644,11 +528,6 @@ Button 47:  TOGA on Handle 4
     <name>vendor-26</name>
     <setting>
       <property>/instrumentation/annunciators/systems/electric/low-voltage</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
-    </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
     </setting>
   </event>
   <event>
@@ -656,14 +535,8 @@ Button 47:  TOGA on Handle 4
     <name>vendor-27</name>
     <setting>
       <property>/instrumentation/annunciators/doors</property>
-      <condition><property>/instrumentation/annunciators/serviceable</property></condition>
     </setting>
-    <setting>
-      <value>0</value>
-      <condition><not><property>/instrumentation/annunciators/serviceable</property></not></condition>
-    </setting>
-  </event>
-  <!-- end LED section-->
+  </event> <!-- end LED section-->
   <!-- levers; LinuxEvent input has a different mapping than USB HID input -->
   <event>
     <desc>Lever 0</desc>
@@ -1162,6 +1035,18 @@ Button 47:  TOGA on Handle 4
     <desc>Gear UP</desc>
     <repeatable>false</repeatable>
     <binding>
+      <command>property-assign</command>
+      <property>/input/honeycomb/bravo/gear-lever-up</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/input/honeycomb/bravo/gear-lever-up</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+    <binding>
       <command>nasal</command>
       <script>controls.gearDown(-1);</script>
     </binding>
@@ -1170,6 +1055,18 @@ Button 47:  TOGA on Handle 4
     <name>button-32</name>
     <desc>Gear DOWN</desc>
     <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>/input/honeycomb/bravo/gear-lever-down</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/input/honeycomb/bravo/gear-lever-down</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
     <binding>
       <command>nasal</command>
       <script>controls.gearDown(1);</script>

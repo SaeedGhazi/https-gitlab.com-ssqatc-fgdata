@@ -71,14 +71,16 @@
 
                         setprop(dlg_prefix~"cfgfile",
                             string.squeeze(device_config.getChild("source").getValue(), 75));
-                        updateVariantListbox();
+
+                        # update variants and open device specific dialog if available
+                        updateVariantListbox(device_config);
+                        deviceDialog(device_config);
                     }
                 }
             }
 
             # update config variant listbox
-            var updateVariantListbox = func() {
-                var cfg = props.getNode(path_selected.getValue(), 1);
+            var updateVariantListbox = func(cfg) {
                 var variants = cfg.getNode("config-variants", 1).getChildren("variant");
                 var selected = cfg.getNode("_selected-variant", 1).getValue() or '';
                 var list_items = props.globals.getNode(dlg_prefix~"variants", 1);
@@ -102,6 +104,14 @@
                     "object-name": "listvariant"
                     });
 				fgcommand("dialog-update", DLGROOT);
+            }
+
+            # a device specific dialog can be opened provided that
+            # such dialog exists in FGDATA/gui/dialogs/
+            # and the config contains a device-dialog tag with the name of the dialog
+            var deviceDialog = func(cfg) {
+                var d = cfg.getNode("device-dialog");
+                if (d) fgcommand("dialog-show", props.Node.new({"dialog-name": d.getValue()}));
             }
 
             # apply config variant

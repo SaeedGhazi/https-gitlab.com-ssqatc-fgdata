@@ -10,7 +10,7 @@ The goal of this property subtree is to have a common place for annunciator
 status data for external devices like joystick, yoke, throttle quadrant,
 custom cockpit hardware, but also elements in the 3D cockpit or canvas can
 use them.
-FG aircraft should write their state info for annunciator lights to the 
+FG aircraft should write their state info for annunciator lights to the
 property that matches best or alias properties as far as practical.
 In the best case, a large number of aircrafts could work mostly automatically
 with any annunciator 'device' consuming these props as input.
@@ -21,6 +21,9 @@ see also https://wiki.flightgear.org/Aircraft_properties_reference
 <PropertyList>
     <!-- master switch -->
     <serviceable type="bool">true</serviceable>
+
+    <!-- enable property rules in generic-annunciators.xml -->
+    <auto-update type="bool">true</auto-update>
 
     <!-- generic door warning: true = at least one door is not save for flight -->
     <doors type="bool">false</doors>
@@ -137,4 +140,3 @@ see also https://wiki.flightgear.org/Aircraft_properties_reference
         <vacuum type="bool">false</vacuum>
     </systems>
 </PropertyList>
-

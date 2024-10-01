@@ -38,9 +38,16 @@ float D_GGX(float NdotH, float a2)
 
 void main()
 {
-    // Unpack G-Buffer
+    // Read the G-Buffer
     vec4 gbuffer0 = texture(gbuffer0_tex, texcoord);
+    // Immediately discard fragments that do not have matid=2
+    if (uint(gbuffer0.a * 3.0) != 2u) {
+        discard;
+        return;
+    }
     vec4 gbuffer1 = texture(gbuffer1_tex, texcoord);
+
+    // Unpack G-Buffer
     vec3 N = decode_normal(gbuffer0.rg);
     vec3 sea_color = gbuffer1.rgb;
 

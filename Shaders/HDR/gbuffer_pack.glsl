@@ -25,3 +25,10 @@ void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
     out_gbuffer2.a   = occlusion;
     out_gbuffer3.rgb = emissive;
 }
+
+void gbuffer_pack_water(vec3 normal, vec3 floor_color)
+{
+    out_gbuffer0.rg  = encode_normal(normal);
+    out_gbuffer1.rgb = floor_color;
+    out_gbuffer0.a   = float(2u) * (1.0 / 3.0);
+}

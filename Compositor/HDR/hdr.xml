@@ -849,9 +849,9 @@
   </pass>
 
   <pass>
-    <name>water</name>
+    <name>shading-water</name>
     <type>quad</type>
-    <effect>Effects/HDR/water-shading</effect>
+    <effect>Effects/HDR/shading-water</effect>
     <binding>
       <unit>0</unit>
       <buffer>gbuffer0</buffer>

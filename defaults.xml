@@ -778,6 +778,9 @@ Started September 2000 by David Megginson, david@megginson.com
     </instrument-options>
     <input>
       <property-key-handler type="bool" userarchive="y">false</property-key-handler>
+      <no-event-input type="bool">true</no-event-input>
+      <no-joystick-input type="bool">false</no-joystick-input>
+      <no-hid-input type="bool">false</no-hid-input>
     </input>
     <chase-distance-m type="double">-25.0</chase-distance-m>
     <allow-toggle-cockpit type="bool">false</allow-toggle-cockpit>

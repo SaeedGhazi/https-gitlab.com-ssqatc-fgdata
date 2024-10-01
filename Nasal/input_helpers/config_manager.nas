@@ -33,6 +33,12 @@ config_manager = {
             prefix: me.prefix~vendor~'/'~model~'/',
         };
 
+        # add node objects for the device raw config
+        m.deviceN = config;
+
+        # add node objects for predictable path
+        m.prefixN = props.getNode(m.prefix, 1);
+
         # get/create node for the selected config variant (likely in /input/event/device[i])
         m.selectedN = config.getNode("_selected-variant", 1);
         if (!m.selectedN.getValue()) {
@@ -41,9 +47,9 @@ config_manager = {
 
         # alias the node to a more predictable path /input/<vendor>/<model>/
         # to store it in aircraft.data
-        m.selectedAlias = props.getNode(m.prefix~"_selected-variant", 1);
+        m.selectedAlias = m.prefixN.getNode("_selected-variant", 1);
         var stored = m.selectedAlias.getValue() or '';
-        logprint(LOG_INFO, "Last used config variant: ", stored);
+        logprint(LOG_INFO, "Last used config variant for "~m.vendor~" "~m.model~": ", stored);
         m.selectedAlias.alias(m.selectedN);
         m.selectedAlias.setValue(stored);
         aircraft.data.add(m.prefix~"_selected-variant");
@@ -53,7 +59,7 @@ config_manager = {
         if (variants) {
             foreach (var variant; variants.getChildren("variant")) {
                 var id = variant.getNode("id").getValue();
-                var description = variant.getNode("description");
+                var description = variant.getNode("description").getValue();
                 me.variants[id] = description;
                 me.mappings[id] = variant.getChildren("mapping");
             }
@@ -79,19 +85,32 @@ config_manager = {
         me._mapped_inputs = [];
     },
 
+    getMappings: func(variant_id) {
+        if (!contains(me.variants, variant_id)) {
+            logprint(LOG_WARN, me.vendor~" "~me.model~": unknown config variant '"~variant_id~"'");
+            return {}
+        }
+        return me.mappings[variant_id];
+    },
+
     # load a config variant
     # input props are aliased with the corresponding control props
-    configure: func(variant) {
-        if (!contains(me.variants, variant)) {
-            logprint(LOG_WARN, me.vendor~" "~me.model~": unknown config variant '"~variant~"'");
+    configure: func(variant_id) {
+        if (!contains(me.variants, variant_id)) {
+            logprint(LOG_WARN, me.vendor~" "~me.model~": unknown config variant '"~variant_id~"'");
             return;
         }
-        logprint(LOG_INFO,"config_manager "~me.vendor~" "~me.model~" configure("~variant~")");
+        logprint(LOG_INFO,"config_manager "~me.vendor~" "~me.model~" configure("~me.variants[variant_id]~")");
         me._unalias();
-        foreach (var mapping; me.mappings[variant]) {
+        foreach (var mapping; me.prefixN.getNode("mappings", 1).getChildren()) {
+            mapping.setValue("");
+        };
+        foreach (var mapping; me.getMappings(variant_id)) {
             var input = mapping.getNode("input").getValue();
-            props.getNode(input, 1).alias(mapping.getNode("output", 1).getValue());
+            var output = mapping.getNode("output").getValue();
+            props.getNode(input, 1).alias(output);
             append(me._mapped_inputs, input);
+            me.prefixN.getNode("mappings/"~mapping.getNode("id").getValue(), 1).setValue(output);
         }
         aircraft.data.save();
     },

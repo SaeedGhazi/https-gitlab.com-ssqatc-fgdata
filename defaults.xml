@@ -543,7 +543,7 @@ Started September 2000 by David Megginson, david@megginson.com
         </envmap>
         <bloom>
           <strength type="float">0.01</strength>
-          <filter-radius type="float">2.0</filter-radius>
+          <filter-radius type="float">0.005</filter-radius>
         </bloom>
         <ambient-occlusion>
           <enabled type="bool" userarchive="y">true</enabled>

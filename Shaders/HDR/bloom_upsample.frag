@@ -17,10 +17,10 @@ uniform float filter_radius;
 
 void main()
 {
-    // The filter kernel is applied with a radius, specified in texture
-    // coordinates, so that the radius will vary across mip resolutions.
-    float x = filter_radius;
-    float y = filter_radius;
+    vec2 texel_size = 1.0 / vec2(textureSize(tex, 0));
+
+    float x = filter_radius * texel_size.x;
+    float y = filter_radius * texel_size.y;
 
     // Take 9 samples around current texel:
     // a - b - c

@@ -21,6 +21,11 @@
   </scheme>
   <scheme>
     <name>hdr-shadow</name>
-    <description>HDR: Using during the shadow mapping passes.</description>
+    <description>HDR: Used during the shadow mapping passes.</description>
+  </scheme>
+  <scheme>
+    <name>hdr-highlight</name>
+    <description>HDR: For rendering highlighted objects with the pick animation.</description>
+    <fallback>Effects/Fallback/hdr-highlight</fallback>
   </scheme>
 </PropertyList>

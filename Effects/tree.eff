@@ -1905,6 +1905,7 @@
         <fragment-shader>Shaders/HDR/gbuffer_pack.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/dither.glsl</fragment-shader>
       </program>
       <uniform>
         <name>color_tex</name>

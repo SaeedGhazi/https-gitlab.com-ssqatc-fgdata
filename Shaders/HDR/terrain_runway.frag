@@ -15,8 +15,12 @@ uniform sampler3D noise_tex;
 const float NORMALMAP_SCALE = 8.0;
 
 // gbuffer_pack.glsl
-void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
-                  float occlusion, vec3 emissive, uint mat_id);
+void gbuffer_pack_pbr_opaque(vec3 normal,
+                             vec3 base_color,
+                             float metallic,
+                             float roughness,
+                             float occlusion,
+                             vec3 emissive);
 // color.glsl
 vec3 eotf_inverse_sRGB(vec3 srgb);
 // normalmap.glsl
@@ -42,6 +46,6 @@ void main()
 
     float roughness = mix(0.94, 0.98, mix_factor);
 
-    gbuffer_pack(N, color, 0.0, roughness, 1.0, vec3(0.0), 3u);
+    gbuffer_pack_pbr_opaque(N, color, 0.0, roughness, 1.0, vec3(0.0));
     gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

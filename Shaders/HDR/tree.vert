@@ -59,12 +59,13 @@ void main()
     // Rotation of the generic quad to specific one for the tree.
     position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
 
+    // XXX: Wind makes things shimmer too much, disable it for now
     // Shear by wind. Note that this only applies to the top vertices
-    float vertex_color_sum = vertex_color.x + vertex_color.y + vertex_color.z;
-    float wind_offset = position.z * (
-        sin(osg_SimulationTime * 1.8 + vertex_color_sum * 0.01) + 1.0) * 0.0025;
-    position.x = position.x + wind_offset * WindN;
-    position.y = position.y + wind_offset * WindE;
+    // float vertex_color_sum = vertex_color.x + vertex_color.y + vertex_color.z;
+    // float wind_offset = position.z * (
+    //     sin(osg_SimulationTime * 1.8 + vertex_color_sum * 0.01) + 1.0) * 0.0025;
+    // position.x = position.x + wind_offset * WindN;
+    // position.y = position.y + wind_offset * WindE;
 
     // Scale by random domains
     float voronoi = 0.5 + 1.0 * voronoi_noise_2d(

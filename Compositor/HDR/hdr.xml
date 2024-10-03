@@ -12,8 +12,8 @@
       :                        :    Red    :  Green  :    Blue    :    Alpha    :
       :........................:...........:.........:............:.............:
       : G-Buffer 0 (RGB10_A2)  :        Normal       : Roughness  : Material ID :
-      : G-Buffer 1 (RGBA8)     :             Base Color           : Metallic    :
-      : G-Buffer 2 (RGBA8)     :     Material specific params     : Occlusion   :
+      : G-Buffer 1 (RGBA8)     :             Base Color           : Dithering   :
+      : G-Buffer 2 (RGBA8)     :  Material specific  : Metallic   : Occlusion   :
       : G-Buffer 3 (R11G11B10) :             Emission             :      -      :
       : Depth/Stencil          :      DEPTH24_STENCIL8 (Logarithmic depth)      :
       :........................:............:.........:...........:.............:
@@ -24,7 +24,7 @@
       - Since the Material ID is stored in 2 bits, we can only have 4 different
       material types. The maximum value (3 or 1.0) is reserved for the standard
       PBR metallic-roughness material.
-      - In 'Material specific params' fancier materials can use up to 24 bits
+      - In 'Material specific params' fancier materials can use up to 16 bits
       to encode any information they might need (e.g. a clearcoat layer needs
       to store the clearcoat amount and roughness).
       - Materials that are very different from the standard should write
@@ -55,6 +55,12 @@
   <!-- HDR shading result -->
   <buffer include="screen-buffer.xml">
     <name>hdr-result</name>
+    <format>rgb16f</format>
+  </buffer>
+
+  <!-- HDR buffer after demosaicing -->
+  <buffer include="screen-buffer.xml">
+    <name>hdr-demosaiced</name>
     <format>rgb16f</format>
   </buffer>
 
@@ -963,6 +969,32 @@
   </pass>
 
   <!--
+      This pass essentially performs demosaicing on the bayer pattern produced
+      by some semi-transparent objects in the deferred geometry pass.
+  -->
+  <pass>
+    <name>demosaic</name>
+    <type>quad</type>
+    <effect>Effects/HDR/demosaic</effect>
+    <binding>
+      <unit>0</unit>
+      <buffer>hdr-result</buffer>
+    </binding>
+    <binding>
+      <unit>1</unit>
+      <buffer>gbuffer1</buffer>
+    </binding>
+    <binding>
+      <unit>2</unit>
+      <buffer>depth-stencil</buffer>
+    </binding>
+    <attachment>
+      <component>color0</component>
+      <buffer>hdr-demosaiced</buffer>
+    </attachment>
+  </pass>
+
+  <!--
       Auto exposure using a luminance histogram
       Based on the article by Alex Tardif:
       https://www.alextardif.com/HistogramLuminance.html
@@ -1108,7 +1140,7 @@
     <effect>Effects/HDR/bloom-downsample-first</effect>
     <binding>
       <unit>0</unit>
-      <buffer>hdr-result</buffer>
+      <buffer>hdr-demosaiced</buffer>
     </binding>
     <attachment>
       <component>color0</component>
@@ -1239,7 +1271,7 @@
     <effect>Effects/HDR/postprocess</effect>
     <binding>
       <unit>0</unit>
-      <buffer>hdr-result</buffer>
+      <buffer>hdr-demosaiced</buffer>
     </binding>
     <binding>
       <unit>1</unit>

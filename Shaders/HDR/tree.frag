@@ -15,10 +15,17 @@ uniform sampler2D color_tex;
 uniform float cseason;
 
 // gbuffer_pack.glsl
-void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
-                  float occlusion, vec3 emissive, uint mat_id);
+void gbuffer_pack_pbr_dither(vec3 normal,
+                             vec3 base_color,
+                             float metallic,
+                             float roughness,
+                             float occlusion,
+                             vec3 emissive,
+                             float dither);
 // color.glsl
 vec3 eotf_inverse_sRGB(vec3 srgb);
+// dither.glsl
+float dither_checkerboard(vec2 pixel_coord, float t);
 // logarithmic_depth.glsl
 float logdepth_encode(float z);
 
@@ -50,8 +57,10 @@ vec4 ray_cylinder_intersect(vec3 ro, vec3 rd, vec3 pa, vec3 va, float ra)
 void main()
 {
     vec4 texel = texture(color_tex, fs_in.texcoord);
-    if (texel.a < 0.33)
+    if (dither_checkerboard(gl_FragCoord.xy, texel.a) < 1.0) {
         discard;
+        return;
+    }
 
     // Seasonal color changes
     if (cseason < 1.5 && fs_in.autumn_flag > 0.0) {
@@ -67,6 +76,6 @@ void main()
         vec3(0.0), ray_dir, fs_in.vs_tree_pos, fs_in.vs_up, fs_in.scale);
     vec3 N = intersect.yzw;
 
-    gbuffer_pack(N, color, 0.0, 1.0, 1.0, vec3(0.0), 3u);
+    gbuffer_pack_pbr_dither(N, color, 0.0, 1.0, 1.0, vec3(0.0), texel.a);
     gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

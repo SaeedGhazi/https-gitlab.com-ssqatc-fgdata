@@ -133,8 +133,12 @@ float noise_3d(vec3 coord, float wavelength);
 float dot_noise_2d(vec2 coord, float wavelength, float fractional_max_dot_size, float d_density);
 float slope_lines_2d(vec2 coord, vec2 grad_dir, float wavelength, float steepness);
 // gbuffer_pack.glsl
-void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
-                  float occlusion, vec3 emissive, uint mat_id);
+void gbuffer_pack_pbr_opaque(vec3 normal,
+                             vec3 base_color,
+                             float metallic,
+                             float roughness,
+                             float occlusion,
+                             vec3 emissive);
 void gbuffer_pack_water(vec3 normal, vec3 floor_color);
 // logarithmic_depth.glsl
 float logdepth_encode(float z);
@@ -543,7 +547,7 @@ void main()
         // linear at the end and assume everything looked great in WS20.
         texel.rgb = eotf_inverse_sRGB(texel.rgb);
 
-        gbuffer_pack(N, texel.rgb, TERRAIN_METALLIC, TERRAIN_ROUGHNESS, 1.0, vec3(0.0), 3u);
+        gbuffer_pack_pbr_opaque(N, texel.rgb, TERRAIN_METALLIC, TERRAIN_ROUGHNESS, 1.0, vec3(0.0));
     }
 
     gl_FragDepth = logdepth_encode(fs_in.flogz);

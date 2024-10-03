@@ -17,8 +17,12 @@ uniform float metallic;
 uniform float roughness;
 
 // gbuffer_pack.glsl
-void gbuffer_pack(vec3 normal, vec3 base_color, float metallic, float roughness,
-                  float occlusion, vec3 emissive, uint mat_id);
+void gbuffer_pack_pbr_opaque(vec3 normal,
+                             vec3 base_color,
+                             float metallic,
+                             float roughness,
+                             float occlusion,
+                             vec3 emissive);
 // color.glsl
 vec3 eotf_inverse_sRGB(vec3 srgb);
 // normalmap.glsl
@@ -36,6 +40,6 @@ void main()
         N = perturb_normal(N, fs_in.view_vector, fs_in.texcoord * normalmap_tiling, normal_tex);
     }
 
-    gbuffer_pack(N, color, metallic, roughness, 1.0, vec3(0.0), 3u);
+    gbuffer_pack_pbr_opaque(N, color, metallic, roughness, 1.0, vec3(0.0));
     gl_FragDepth = logdepth_encode(fs_in.flogz);
 }

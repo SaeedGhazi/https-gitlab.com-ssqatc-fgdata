@@ -542,7 +542,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <should-render-face-5 type="bool">false</should-render-face-5>
         </envmap>
         <bloom>
-          <strength type="float">0.01</strength>
+          <strength type="float">0.03</strength>
           <filter-radius type="float">0.005</filter-radius>
         </bloom>
         <ambient-occlusion>

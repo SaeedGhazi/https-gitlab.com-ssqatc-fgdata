@@ -8,6 +8,6 @@
  */
 float dither_checkerboard(vec2 pixel_coord, float t)
 {
-    float v = fract(dot(gl_FragCoord.xy, vec2(0.5)));
+    float v = fract(dot(pixel_coord, vec2(0.5)));
     return step(0.75, t) + step(0.25, t) * step(0.5, v);
 }

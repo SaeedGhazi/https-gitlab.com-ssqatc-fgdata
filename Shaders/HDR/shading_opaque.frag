@@ -15,10 +15,15 @@ uniform mat4 fg_ProjectionMatrix;
 // normal_encoding.glsl
 vec3 decode_normal(vec2 f);
 // shading_opaque.glsl
-vec3 eval_lights(
-    vec3 base_color, float metallic, float roughness, float occlusion,
-    vec3 emissive, vec3 P, vec3 N, vec3 V, vec2 uv,
-    mat4 view_matrix_inverse, mat4 projection_matrix);
+vec3 eval_lights(vec3 base_color,
+                 float metallic,
+                 float roughness,
+                 float occlusion,
+                 vec3 emissive,
+                 vec3 P, vec3 N, vec3 V,
+                 vec2 uv,
+                 mat4 view_matrix_inverse,
+                 mat4 projection_matrix);
 // pos_from_depth.glsl
 vec3 get_view_space_from_depth(vec2 uv);
 
@@ -48,8 +53,13 @@ void main()
     vec3 P = get_view_space_from_depth(texcoord);
     vec3 V = normalize(-P);
 
-    fragColor = eval_lights(
-        base_color, metallic, roughness, occlusion, emissive,
-        P, N, V, texcoord,
-        fg_ViewMatrixInverse, fg_ProjectionMatrix);
+    fragColor = eval_lights(base_color,
+                            metallic,
+                            roughness,
+                            occlusion,
+                            emissive,
+                            P, N, V,
+                            texcoord,
+                            fg_ViewMatrixInverse,
+                            fg_ProjectionMatrix);
 }

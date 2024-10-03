@@ -26,12 +26,6 @@ vec3 eval_ibl(vec3 base_color,
 vec3 mix_aerial_perspective(vec3 color, vec4 ap);
 // sun.glsl
 vec3 get_sun_radiance(vec3 p);
-// clustered.glsl
-vec3 eval_scene_lights(vec3 base_color,
-                       float metallic,
-                       float roughness,
-                       vec3 f0,
-                       vec3 P, vec3 N, vec3 V);
 // exposure.glsl
 vec3 apply_exposure(vec3 color);
 
@@ -54,11 +48,6 @@ vec3 eval_lights_transparent(vec3 base_color,
         base_color, metallic, roughness, f0,
         sun_radiance, shadow_factor,
         N, fg_SunDirection, V);
-
-    // Evaluate all scene lights
-    color += eval_scene_lights(
-        base_color, metallic, roughness, f0,
-        P, N, V);
 
     // Evaluate image-based lights
     vec3 ws_N = (view_matrix_inverse * vec4(N, 0.0)).xyz;

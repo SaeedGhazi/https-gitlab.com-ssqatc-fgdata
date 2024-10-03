@@ -150,7 +150,7 @@ void main()
 {
     vec3 N = normalize(fs_in.vertex_normal);
 
-	// For detail_fade()
+    // For detail_fade()
     float denom = max(pow4(fs_in.steepness), 0.1);
     // distance to fragment
     float dist = length(fs_in.rel_pos);
@@ -304,7 +304,10 @@ void main()
 
     if (water) {
         // This is a pure water fragment
-		N = ws30_perturb_water_normal(N, fs_in.vs_pos, tile_coord);
+        // Get a LOD-independent texture coordinate to sample the water textures
+        const float WATER_TEXTURE_SCALE = 0.001;
+        vec2 water_texcoord = fs_in.raw_pos.xy * WATER_TEXTURE_SCALE;
+        N = ws30_perturb_water_normal(N, fs_in.vs_pos, water_texcoord);
         gbuffer_pack_water(N, ws30_get_water_color());
     } else {
         // Lookup material parameters for the landclass at this fragment.
@@ -532,13 +535,13 @@ void main()
             (0.5 * dotnoise_10m * detail_fade(1.0 * dot_size, view_angle, dist, denom) +
              0.5 * dotnoise_10m * noise_01m * detail_fade(0.1, view_angle, dist, denom));
 
-		// Modify the vertex normal according to the procedurally generated height
+        // Modify the vertex normal according to the procedurally generated height
         N = perturb_normal_from_height(N, fs_in.vs_pos, height);
 
-		// This should probably be done earlier, but all of the WS20 procedural
-		// texturing calculations took place in sRGB space. Just convert it to
-		// linear at the end and assume everything looked great in WS20.
-		texel.rgb = eotf_inverse_sRGB(texel.rgb);
+        // This should probably be done earlier, but all of the WS20 procedural
+        // texturing calculations took place in sRGB space. Just convert it to
+        // linear at the end and assume everything looked great in WS20.
+        texel.rgb = eotf_inverse_sRGB(texel.rgb);
 
         gbuffer_pack(N, texel.rgb, TERRAIN_METALLIC, TERRAIN_ROUGHNESS, 1.0, vec3(0.0), 3u);
     }

@@ -171,8 +171,8 @@ void main()
       float moon_logI = log10_moon_illuminance_fc(moonlight);
             
       // log10(Bmoon) with Bmoon in nanoLambert
-      float logBnL = logf90 + log10(scattering_angular_dependency(cosMoonView)) \
-	+ moon_logI - 0.4*k*Xmoon + log10(1.0-pow(10.0,-0.4*k*Xview));
+      float logBnL = logf90 + log10(scattering_angular_dependency(cosMoonView))
+        + moon_logI - 0.4*k*Xmoon + log10(1.0-pow(10.0,-0.4*k*Xview));
     
       // sky brightness from the moon in mag/arcsec^2
       float mumoon = magnitude_from_lognL(logBnL);

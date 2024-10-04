@@ -255,7 +255,7 @@
     <format>rgba8</format>
     <wrap-s>clamp</wrap-s>
     <wrap-t>clamp</wrap-t>
-    <min-filter>linear-mipmap-linear</min-filter>
+    <min-filter>linear</min-filter>
     <mag-filter>linear</mag-filter>
   </buffer>
   <buffer include="screen-buffer.xml">
@@ -263,7 +263,7 @@
     <format>rgba8</format>
     <wrap-s>clamp</wrap-s>
     <wrap-t>clamp</wrap-t>
-    <min-filter>linear-mipmap-linear</min-filter>
+    <min-filter>linear</min-filter>
     <mag-filter>linear</mag-filter>
   </buffer>
 

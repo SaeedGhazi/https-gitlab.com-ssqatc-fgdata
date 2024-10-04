@@ -530,17 +530,18 @@ void main()
             // water and non-water, no in-between.
         }
 
-        float height = 0.0;
-        height += (noise_10m * detail_fade(10.0, view_angle,dist, denom) + 0.5* noise_5m * detail_fade(5.0, view_angle,dist, denom)) * mix_factor/0.8;
-        height += 0.15 * noise_2m * mix_factor / 0.8 * detail_fade(2.0, view_angle, dist, denom);
-        height += 0.1  * noise_2m * detail_fade(2.0, view_angle, dist, denom);
-        height += 0.05 * noise_1m * detail_fade(1.0, view_angle,dist, denom);
-        height += (1.0 - snow_mix_factor) * 0.3 * dot_texel.a *
-            (0.5 * dotnoise_10m * detail_fade(1.0 * dot_size, view_angle, dist, denom) +
-             0.5 * dotnoise_10m * noise_01m * detail_fade(0.1, view_angle, dist, denom));
+        if (fg_photoScenery) {
+            // Heuristic to determine the approximated height based on the
+            // satellite image color.
+            // - roofs (red) => high elevation
+            // - grass (light green) and water (blue) => low elevation
+            // - wood (dark green) => high elevation
+            // - rocks, snow and concrete buildings (white) => high elevation
+            float height = max(texel.r, 1.0 - texel.g - texel.b);
 
-        // Modify the vertex normal according to the procedurally generated height
-        N = perturb_normal_from_height(N, fs_in.vs_pos, height);
+            // Modify the vertex normal according to the procedurally generated height
+            N = perturb_normal_from_height(N, fs_in.vs_pos, height);
+        }
 
         // This should probably be done earlier, but all of the WS20 procedural
         // texturing calculations took place in sRGB space. Just convert it to

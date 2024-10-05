@@ -1,6 +1,6 @@
 #version 330 core
 
-#pragma import_defines(USE_CHUTE_DEFORMATION)
+#pragma import_defines(USE_WINGFLEX_DEFORMATION USE_CHUTE_DEFORMATION)
 
 layout(location = 0) in vec4 pos;
 layout(location = 1) in vec3 normal;
@@ -23,6 +23,10 @@ uniform mat4 fg_TextureMatrix;
 // logarithmic_depth.glsl
 float logdepth_prepare_vs_depth(float z);
 
+#ifdef USE_WINGFLEX_DEFORMATION
+// wingflex.glsl
+vec3 wingflex_apply_deformation(vec3 pos);
+#endif
 #ifdef USE_CHUTE_DEFORMATION
 // chute.glsl
 vec3 chute_apply_deformation(vec3 pos);
@@ -31,6 +35,9 @@ vec3 chute_apply_deformation(vec3 pos);
 void main()
 {
     vec4 new_pos = pos;
+#ifdef USE_WINGFLEX_DEFORMATION
+    new_pos.xyz = wingflex_apply_deformation(new_pos.xyz);
+#endif
 #ifdef USE_CHUTE_DEFORMATION
     new_pos.xyz = chute_apply_deformation(new_pos.xyz);
 #endif

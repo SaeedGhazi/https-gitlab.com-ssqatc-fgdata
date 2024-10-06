@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: James Turner <james@flightgear.org>
+#
+# SPDX-License-Identifier: GPL-2.0
+
+
+variables:
+
+  TEST_DATA_DIR: $CI_PROJECT_DIR/testFGData
+
+create-test-data:
+  stage: deploy
+  # rules:
+  #   - if: $CI_PIPELINE_SOURCE != "schedule"
+  script:
+    - echo "Nothing scripted to do here"
+    - mkdir $TEST_DATA_DIR
+
+    - cp defaults.xml $TEST_DATA_DIR
+    - cp version $TEST_DATA_DIR
+    - cp -r Airports $TEST_DATA_DIR
+    - cp -r Navaids $TEST_DATA_DIR
+    - cp -r Timezone $TEST_DATA_DIR
+    - cp -r Nasal $TEST_DATA_DIR
+    - cp -r Environment $TEST_DATA_DIR
+  # needs:
+  #   - project: flightgear/openscenegraph
+  #     job: linux-build
+  #     ref: fgfs-osg-36-2
+  #     artifacts: true
+  artifacts:
+    paths:
+      - $TEST_DATA_DIR

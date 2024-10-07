@@ -43,6 +43,7 @@
             # update dialog elements
             var update = func(device) {
                 setprop(dlg_prefix~"devname", device.getNode("name").getValue());
+                setprop(dlg_prefix~"devpath", device.getPath());
                 setprop(dlg_prefix~"variant", '');
                 setprop(dlg_prefix~"has-device-dialog", 0);
                 var variants = device.getNode("config-variants", 1).getChildren("variant");
@@ -121,6 +122,13 @@
             <halign>left</halign>
             <live>true</live>
             <property>/sim/gui/dialogs/input-config-select/devname</property>
+        </text>
+        <text>
+            <pref-width>200</pref-width>
+            <name>devpath</name>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/gui/dialogs/input-config-select/devpath</property>
         </text>
         <text>
             <label>Available variants</label>

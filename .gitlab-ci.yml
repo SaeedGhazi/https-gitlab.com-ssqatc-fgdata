@@ -9,7 +9,7 @@ variables:
 
 create-test-data:
   stage: deploy
-  
+
   script:
     - echo "Nothing scripted to do here"
     - mkdir $TEST_DATA_DIR
@@ -23,4 +23,4 @@ create-test-data:
   #     artifacts: true
   artifacts:
     paths:
-      - $TEST_DATA_DIRq
+      - $TEST_DATA_DIR

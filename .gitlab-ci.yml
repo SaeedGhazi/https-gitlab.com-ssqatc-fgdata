@@ -15,7 +15,7 @@ create-test-data:
     - mkdir $TEST_DATA_DIR
     - cp *.xml $TEST_DATA_DIR
     - cp version $TEST_DATA_DIR
-    - cp -r Environment Nasal Timezone Navaids Airports $TEST_DATA_DIR
+    - cp -r Environment Nasal Timezone Navaids Airports Input $TEST_DATA_DIR
   # needs:
   #   - project: flightgear/openscenegraph
   #     job: linux-build

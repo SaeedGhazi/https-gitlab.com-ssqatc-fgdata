@@ -11,10 +11,11 @@ create-test-data:
   stage: deploy
 
   script:
-    - echo "Nothing scripted to do here"
     - mkdir $TEST_DATA_DIR
     - cp *.xml $TEST_DATA_DIR
     - cp version $TEST_DATA_DIR
+    - cp AI/Aircaft/*.xml $TEST_DATA_DIR/AI/Aircraft/
+
     - cp -r Environment Nasal Timezone Navaids Airports Input $TEST_DATA_DIR
   # needs:
   #   - project: flightgear/openscenegraph

@@ -17,9 +17,12 @@ create-test-data:
 
     - mkdir -p $TEST_DATA_DIR/AI/Aircraft
     - cp AI/Aircraft/*.xml $TEST_DATA_DIR/AI/Aircraft/
+    - cp AI/*.xml $TEST_DATA_DIR/AI/
 
     - mkdir -p $TEST_DATA_DIR/ATC/
     - cp ATC/*.xml $TEST_DATA_DIR/ATC/
+
+
 
     - cp -r Environment Nasal Timezone Navaids Airports Input $TEST_DATA_DIR
   # needs:

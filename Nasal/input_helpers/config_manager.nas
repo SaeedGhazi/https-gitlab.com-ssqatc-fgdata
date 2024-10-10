@@ -118,7 +118,14 @@ config_manager = {
     #static methods
     devicesWithVariants: func() {
         var devices = [];
-        foreach (var device; props.getNode("/input/event",1).getChildren("device")) {
+        foreach (var input_system; ["event", "hid"]) {
+            foreach (var device; props.getNode("/input/"~input_system, 1).getChildren("device")) {
+                if (device.getNode("config-variants")) {
+                    append(devices, device);
+                }
+            }
+        }
+        foreach (var device; props.getNode("/input/joysticks", 1).getChildren("js")) {
             if (device.getNode("config-variants")) {
                 append(devices, device);
             }

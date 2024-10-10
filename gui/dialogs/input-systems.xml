@@ -44,7 +44,7 @@
 
             # populate list boxes for all three input systems
             setupList("js-devs", "joysticks", "", "js");
-            setupList("hid-devs", "event", "FGHIDDevice");
+            setupList("hid-devs", "hid", "FGHIDDevice");
             setupList("linux-devs", "event", "FGLinuxInputDevice");
 
             # get nodes to display last input event of selected device

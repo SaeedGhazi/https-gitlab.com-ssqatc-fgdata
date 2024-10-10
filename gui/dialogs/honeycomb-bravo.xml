@@ -14,7 +14,7 @@
 		</empty>
         <checkbox>
             <label>annunciators live</label>
-            <property>/instrumentation/annunciators/auto-update</property>
+            <property>/instrumentation/annunciators/property-rules-enabled</property>
             <live>1</live>
             <binding>
                 <command>dialog-apply</command>
@@ -428,7 +428,7 @@
                     <col>6</col>
                     <halign>left</halign>
                     <label>s6</label>
-                    <property>/input/honeycomb/bravo/switches/s[61]</property>
+                    <property>/input/honeycomb/bravo/switches/s[6]</property>
                     <live>1</live>
                 </checkbox>
                 <checkbox>

@@ -24,33 +24,41 @@ $Id$
     <name>ProFlight Cessna Rudder Pedals</name>
     <name>Pro Flight Cessna Rudder Pedals</name>
     <name>Mad Catz Pro Flight Rudder Pedals</name>
-
+    <device-dialog>generic-pedals</device-dialog>
     <debug-events type="bool">false</debug-events>
 
     <event>
         <desc>Brake left</desc>
-        <name>abs-x-translate</name>
+        <name>abs-y-translate</name>
+        <min-range>0</min-range>
+        <max-range>127</max-range>
         <binding>
             <command>property-scale</command>
             <property>/controls/gear/brake-left</property>
+            <offset>1</offset>
+            <factor>0.5</factor>
         </binding>
     </event>
     <event>
         <desc>Brake right</desc>
-        <name>abs-y-translate</name>
+        <name>abs-x-translate</name>
+        <min-range>0</min-range>
+        <max-range>127</max-range>
         <binding>
             <command>property-scale</command>
             <property>/controls/gear/brake-right</property>
+            <offset>1</offset>
+            <factor>0.5</factor>
         </binding>
     </event>
     <event>
         <desc>Rudder</desc>
         <name>abs-z-rotate</name>
+        <min-range>0</min-range>
+        <max-range>511</max-range>
         <binding>
             <command>property-scale</command>
             <property>/controls/flight/rudder</property>
-            <offset>-0.5</offset>
-            <factor>2</factor>
         </binding>
     </event>
 </PropertyList>

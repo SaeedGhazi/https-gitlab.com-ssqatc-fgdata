@@ -21,9 +21,10 @@ config_manager = {
     new: func(config) {
         var vendor = config.getNode("vendor-id", 1).getValue() or "";
         var model = config.getNode("model-id", 1).getValue() or "";
+        var name = config.getNode("name", 1).getValue() or "";
         if (vendor == "" or model == "") {
-            logprint(LOG_ALERT, "input_helpers.config_manager: Error! XML file must contain vendor-id and model-id.");
-            gui.popupTip("input_helpers.config_manager: Error!\nXML file must contain vendor-id and model-id.", 30);
+            logprint(LOG_ALERT, "input_helpers.config_manager: Error! XML file must contain vendor-id and model-id ("~name~").");
+            gui.popupTip("input_helpers.config_manager: Error!\nXML file must contain vendor-id and model-id.\n"~name, 30);
             return;
         }
         var m = {
@@ -132,15 +133,18 @@ config_manager = {
         }
         return devices;
     },
+
+    # show popup if we have input devices with config variants
+    variants_popup: func {
+        var devices = config_manager.devicesWithVariants();
+        if (size(devices)) {
+            gui.popupTip(size(devices)~" input device"~(size(devices) > 1 ? 's' : '')~" supporting config variants.");
+            gui.showDialog("input-config-select");
+        }
+    },
 };
 
 # inform user about devices that support config variants
-var timer = maketimer(5, func {
-    var devices = config_manager.devicesWithVariants();
-    if (size(devices)) {
-        gui.popupTip("There are "~size(devices)~" input devices supporting config variants.");
-        gui.showDialog("input-config-select");
-    }
-});
-timer.singleShot=1;
-timer.start();
+config_manager._init_timer = maketimer(5, config_manager.variants_popup);
+config_manager._init_timer.singleShot = 1;
+config_manager._init_timer.start();

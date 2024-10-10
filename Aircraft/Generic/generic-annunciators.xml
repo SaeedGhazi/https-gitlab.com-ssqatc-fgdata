@@ -10,11 +10,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-nose-down</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<equals>
 				<property>/gear/gear[0]/position-norm</property>
@@ -26,11 +21,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-nose-up</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<equals>
 				<property>/gear/gear[0]/position-norm</property>
@@ -42,11 +32,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-nose-in-transition</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<not><or>
 				<property>/instrumentation/annunciators/gear/nose/down</property>
@@ -59,11 +44,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-left-down</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<equals>
 				<property>/gear/gear[1]/position-norm</property>
@@ -75,11 +55,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-left-up</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<equals>
 				<property>/gear/gear[1]/position-norm</property>
@@ -91,11 +66,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-left-in-transition</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<not><or>
 				<property>/instrumentation/annunciators/gear/left/down</property>
@@ -108,11 +78,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-right-down</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<equals>
 				<property>/gear/gear[2]/position-norm</property>
@@ -124,11 +89,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-right-up</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<equals>
 				<property>/gear/gear[2]/position-norm</property>
@@ -140,11 +100,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-right-in-transition</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<not><or>
 				<property>/instrumentation/annunciators/gear/right/down</property>
@@ -157,11 +112,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-down</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<property>/instrumentation/annunciators/gear/left/down</property>
 			<property>/instrumentation/annunciators/gear/right/down</property>
@@ -172,11 +122,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-up</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<property>/instrumentation/annunciators/gear/left/up</property>
 			<property>/instrumentation/annunciators/gear/right/up</property>
@@ -187,11 +132,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-gear-in-transition</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<not>
 				<or>
@@ -206,11 +146,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-summary-engine-fire</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<or>
 				<property>instrumentation/annunciators/engines/engine[0]/fire</property>
@@ -227,11 +162,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-summary-engine-starter</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<or>
 				<property>instrumentation/annunciators/engines/engine[0]/starter</property>
@@ -248,11 +178,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-summary-engine-oil</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<or>
 				<property>instrumentation/annunciators/engines/engine[0]/oil-pressure-low</property>
@@ -270,11 +195,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-summary-fuel-pressure</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<or>
 				<property>instrumentation/annunciators/systems/fuel/system[0]/pressure-low</property>
@@ -288,11 +208,6 @@ Author:  jsb
 	<logic>
 		<debug type="bool">false</debug>
 		<name>annunciator-summary-hydraulic-pressure</name>
-		<enable>
-			<condition>
-				<property>/instrumentation/annunciators/auto-update</property>
-			</condition>
-		</enable>
 		<input>
 			<or>
 				<property>instrumentation/annunciators/systems/hyd/system[0]/pressure-low</property>

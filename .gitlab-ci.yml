@@ -56,7 +56,7 @@ create-bundled-data:
     - cp -r Environment Nasal Timezone Navaids Airports Input ATC 
         Fonts Phi Protocol Shaders gui Translations 
         Video Astro Compositor Effects Geodata Huds Lighting MP
-        Marerials
+        Materials
         $BUNDLED_DATA_DIR
 
   # anything in Aircraft?

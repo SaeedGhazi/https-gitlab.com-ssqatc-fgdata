@@ -8,6 +8,8 @@ variables:
   TEST_DATA_DIR: $CI_PROJECT_DIR/testFGData
   BUNDLED_DATA_DIR: $CI_PROJECT_DIR/bundledFGData
 
+# minimal data for running FGTestSuite, keep this as small as possible
+# since we frequently copy it to the code builders
 create-test-data:
   stage: deploy
 
@@ -29,6 +31,9 @@ create-test-data:
     paths:
       - $TEST_DATA_DIR
 
+# all the files from FGData which we bunlde with the application / image
+# installers. Keep this small since this impacts file mirrors, code-signing, 
+# etc.
 create-bundled-data:
   stage: deploy
   variables:
@@ -51,10 +56,31 @@ create-bundled-data:
     - cp -r Environment Nasal Timezone Navaids Airports Input ATC 
         Fonts Phi Protocol Shaders gui Translations 
         Video Astro Compositor Effects Geodata Huds Lighting MP
+        Marerials
         $BUNDLED_DATA_DIR
 
   # anything in Aircraft?
 
+  # ToDo: if we have a base version, then find all files which are changed
+  # since that tag in Git, 
+  # this is going to use 'git diff --name-only --diff-filter=AMR' and
+  # then copying all the resulting files over to $BUNDLED_DATA_DIR
+
   artifacts:
     paths:
       - $BUNDLED_DATA_DIR
+
+create-base-package:
+  stage: deploy
+  variables:
+    OUT_DIR: $CI_PROJECT_DIR/FlightGear_BaseData
+  script:
+    - mkdir $OUT_DIR
+    - cp version $OUT_DIR
+
+    - cp -r AI Aircraft Textures Models Sounds $OUT_DIR
+
+    # ToDo: include BasePackage scenery
+  artifacts:
+    paths:
+      - $OUT_DIR

@@ -41,7 +41,9 @@ create-bundled-data:
     - mkdir -p $AI_DIR/Aircraft
     - cp AI/Aircraft/*.xml $AI_DIR/Aircraft/
     - cp AI/*.xml $AI_DIR
-    - cp -r AI/Traffic $AI_DIR
+    
+    # skip traffic, it's huge
+    #- cp -r AI/Traffic $AI_DIR
 
     # do we need the yellow glider?
 

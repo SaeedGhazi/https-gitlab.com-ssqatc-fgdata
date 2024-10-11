@@ -55,4 +55,4 @@ create-bundled-data:
 
   artifacts:
     paths:
-      - $TEST_DATA_DIR
+      - $BUNDLED_DATA_DIR

@@ -72,16 +72,8 @@
     <vendor-id>honeycomb</vendor-id>
     <model-id>alpha</model-id>
     <name type="string">Honeycomb Aeronautical Alpha Flight Controls</name>
-    <debug-events type="bool">true</debug-events>
+    <debug-events type="bool">false</debug-events>
     <hid-debug-raw type="bool">false</hid-debug-raw>
-    <meta-config>
-        <linux-event>
-            <enabled type="bool">true</enabled>
-            <device-ignore-list>
-                <name-prefix>js</name-prefix>
-            </device-ignore-list>
-        </linux-event>
-    </meta-config>
     <nasal>
         <open>
             <![CDATA[

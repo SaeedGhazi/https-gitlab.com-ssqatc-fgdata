@@ -6,6 +6,7 @@
 variables:
 
   TEST_DATA_DIR: $CI_PROJECT_DIR/testFGData
+  BUNDLED_DATA_DIR: $CI_PROJECT_DIR/bundledFGData
 
 create-test-data:
   stage: deploy
@@ -22,14 +23,36 @@ create-test-data:
     - mkdir -p $TEST_DATA_DIR/ATC/
     - cp ATC/*.xml $TEST_DATA_DIR/ATC/
 
-
-
     - cp -r Environment Nasal Timezone Navaids Airports Input $TEST_DATA_DIR
-  # needs:
-  #   - project: flightgear/openscenegraph
-  #     job: linux-build
-  #     ref: fgfs-osg-36-2
-  #     artifacts: true
+
+  artifacts:
+    paths:
+      - $TEST_DATA_DIR
+
+create-bundled-data:
+  stage: deploy
+  variables:
+    AI_DIR: $BUNDLED_DATA_DIR/AI
+  script:
+    - mkdir $BUNDLED_DATA_DIR
+    - cp version *.xml $BUNDLED_DATA_DIR
+
+  # AI is a pain
+    - mkdir -p $AI_DIR/Aircraft
+    - cp AI/Aircraft/*.xml $AI_DIR/Aircraft/
+    - cp AI/*.xml $AI_DIR
+    - cp -r AI/Traffic $AI_DIR
+
+    # do we need the yellow glider?
+
+  # all the straightforward dirs
+    - cp -r Environment Nasal Timezone Navaids Airports Input ATC 
+        Fonts Phi Protocol Shaders gui Translations 
+        Video Astro Compositor Effects Geodata Huds Lighting MP
+        $BUNDLED_DATA_DIR
+
+  # anything in Aircraft?
+
   artifacts:
     paths:
       - $TEST_DATA_DIR

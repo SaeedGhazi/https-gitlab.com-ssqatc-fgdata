@@ -70,17 +70,19 @@ create-bundled-data:
     paths:
       - $BUNDLED_DATA_DIR
 
-create-base-package:
-  stage: deploy
-  variables:
-    OUT_DIR: $CI_PROJECT_DIR/FlightGear_BaseData
-  script:
-    - mkdir $OUT_DIR
-    - cp version $OUT_DIR
+# disabled for now, too large
 
-    - cp -r AI Aircraft Textures Models Sounds $OUT_DIR
+# create-base-package:
+#   stage: deploy
+#   variables:
+#     OUT_DIR: $CI_PROJECT_DIR/FlightGear_BaseData
+#   script:
+#     - mkdir $OUT_DIR
+#     - cp version $OUT_DIR
 
-    # ToDo: include BasePackage scenery
-  artifacts:
-    paths:
-      - $OUT_DIR
+#     - cp -r AI Aircraft Textures Models Sounds $OUT_DIR
+
+#     # ToDo: include BasePackage scenery
+#   artifacts:
+#     paths:
+#       - $OUT_DIR

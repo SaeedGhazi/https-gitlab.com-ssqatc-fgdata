@@ -116,20 +116,23 @@ config_manager = {
         aircraft.data.save();
     },
 
-    #static methods
+    #-- static methods
     devicesWithVariants: func() {
         var devices = [];
-        foreach (var input_system; ["event", "hid"]) {
-            foreach (var device; props.getNode("/input/"~input_system, 1).getChildren("device")) {
-                if (device.getNode("config-variants")) {
-                    append(devices, device);
-                }
-            }
-        }
-        foreach (var device; props.getNode("/input/joysticks", 1).getChildren("js")) {
-            if (device.getNode("config-variants")) {
+        var checkAndAppend = func(device) {
+            if (device.getNode("config-variants") != nil and size(device.getNode("config-variants").getChildren("variant"))) {
                 append(devices, device);
             }
+        }
+
+        foreach (var input_system; ["event", "hid"]) {
+            foreach (var device; props.getNode("/input/"~input_system, 1).getChildren("device")) {
+                checkAndAppend(device);
+            }
+        }
+        # legacy joysticks
+        foreach (var device; props.getNode("/input/joysticks", 1).getChildren("js")) {
+            checkAndAppend(device);
         }
         return devices;
     },
@@ -138,9 +141,15 @@ config_manager = {
     variants_popup: func {
         var devices = config_manager.devicesWithVariants();
         if (size(devices)) {
-            gui.popupTip(size(devices)~" input device"~(size(devices) > 1 ? 's' : '')~" supporting config variants.");
-            gui.showDialog("input-config-select");
+            gui.popupTip("Found "~size(devices)~" input device(s) supporting config variants.");
         }
+        var unconfigured = 0;
+        foreach (var dev; devices) {
+            if (dev.getNode("_selected-variant") == nil)
+                unconfigured += 1;
+        }
+        if (unconfigured)
+            gui.showDialog("input-config-select");
     },
 };
 

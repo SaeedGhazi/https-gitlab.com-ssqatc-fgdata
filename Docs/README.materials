@@ -260,7 +260,7 @@ building-large-min-depth-m : Min. depth of large buildings. (default 50)
 building-large-max-depth-m : Max. depth of large buildings. (default 75)
 
 building-texture : The texture used for all buildings. See Docs/buildings.png for
-                   details. (default Texture/buildings.png)
+                   details. (default Textures/Buildings/buildings.png)
 
 building-lightmap: Emissive texture for all buildings, which is faded in at night to
                    provide illusion of lit windows.  Same texture coordinates and

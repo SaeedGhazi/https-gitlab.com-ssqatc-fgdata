@@ -4,6 +4,8 @@ varying vec4 diffuse_term;
 varying vec3 normal;
 varying vec4 ecPosition;
 
+void setupShadows(vec4 eyeSpacePos);
+
 void main()
 {
     gl_Position = ftransform();
@@ -13,4 +15,5 @@ void main()
     diffuse_term = gl_FrontMaterial.diffuse * gl_LightSource[0].diffuse;
     gl_FrontColor = gl_FrontMaterial.emission + gl_FrontMaterial.ambient *
         (gl_LightModel.ambient + gl_LightSource[0].ambient);
+    setupShadows(ecPosition);
 }

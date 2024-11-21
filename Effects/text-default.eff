@@ -2,7 +2,38 @@
 <PropertyList>
   <name>Effects/text-default</name>
 
+  <parameters>
+    <!-- BEGIN shadows include -->
+    <shadows_enabled>
+      <use>/sim/rendering/shadows/enabled</use>
+    </shadows_enabled>
+    <sun_atlas_size>
+      <use>/sim/rendering/shadows/sun-atlas-size</use>
+    </sun_atlas_size>
+    <!-- END shadows include -->
+  </parameters>
+
   <technique n="10">
+    <predicate>
+      <and>
+        <!-- We have no fixed-pipeline rendering for text, so always try to use
+             shaders for it. -->
+        <!-- <property>/sim/rendering/shaders/use-shaders</property> -->
+        <or>
+          <less-equal>
+            <value type="float">2.0</value>
+            <glversion/>
+          </less-equal>
+          <and>
+            <extension-supported>GL_ARB_shader_objects</extension-supported>
+            <extension-supported>GL_ARB_shading_language_100</extension-supported>
+            <extension-supported>GL_ARB_vertex_shader</extension-supported>
+            <extension-supported>GL_ARB_fragment_shader</extension-supported>
+          </and>
+        </or>
+      </and>
+    </predicate>
+
     <pass>
       <lighting>true</lighting>
       <blend>
@@ -11,14 +42,38 @@
       <rendering-hint>transparent</rendering-hint>
       <program>
         <vertex-shader>Shaders/text.vert</vertex-shader>
+        <fragment-shader>Shaders/shadows-include.vert</fragment-shader>
         <fragment-shader>Shaders/text.frag</fragment-shader>
         <fragment-shader>Shaders/include_fog.frag</fragment-shader>
+        <fragment-shader>Shaders/shadows-include.frag</fragment-shader>
+        <fragment-shader>Shaders/clustered-include.frag</fragment-shader>
       </program>
       <uniform>
         <name>glyphTexture</name>
         <type>sampler-2d</type>
         <value type="int">0</value>
       </uniform>
+      <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
     </pass>
   </technique>
 

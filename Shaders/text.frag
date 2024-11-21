@@ -10,6 +10,9 @@ varying vec4 ecPosition;
 vec3 fog_Func(vec3 color, int type);
 //////////////////////
 
+float getShadowing();
+vec3 getClusteredLightsContribution(vec3 p, vec3 n, vec3 texel);
+
 void main()
 {
     float alpha = texture2D(glyphTexture, gl_TexCoord[0].st).a;
@@ -24,12 +27,14 @@ void main()
 
     NdotL = dot(normal, lightDir);
     if (NdotL > 0.0) {
-        color += diffuse_term * NdotL;
+        float shadowmap = getShadowing();
+        color += diffuse_term * NdotL * shadowmap;
         NdotHV = max(dot(normal, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * gl_LightSource[0].specular.rgb
-                            * pow(NdotHV, gl_FrontMaterial.shininess));
+                            * pow(NdotHV, gl_FrontMaterial.shininess)
+                            * shadowmap);
     }
     // This shouldn't be necessary, but our lighting becomes very
     // saturated. Clamping the color before modulating by the texture
@@ -38,6 +43,7 @@ void main()
 
     fragColor = color + specular;
     fragColor = vec4(fragColor.rgb, fragColor.a * alpha);
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
 
     fragColor.rgb = fog_Func(fragColor.rgb, 0);
     gl_FragColor = fragColor;

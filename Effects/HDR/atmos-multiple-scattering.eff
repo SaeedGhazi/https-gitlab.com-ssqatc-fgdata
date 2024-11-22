@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
-  <name>Effects/HDR/atmos-sky-view</name>
+  <name>Effects/HDR/atmos-multiple-scattering</name>
   <parameters>
     <!-- atmos.glsl -->
     <aerosol-absorption-cross-section type="vec4d">
@@ -48,9 +48,12 @@
   </parameters>
   <technique n="1">
     <pass>
+      <define>
+        <name>COMPUTE_MULTIPLE_SCATTERING</name>
+      </define>
       <program>
         <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/atmos_sky_view.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_multiple_scattering.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/atmos.glsl</fragment-shader>
       </program>

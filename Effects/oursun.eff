@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PropertyList>
-  <name>Effects/stars</name>
+  <name>Effects/oursun</name>
 
   <parameters>
     <!-- exposure.glsl -->
@@ -20,7 +20,7 @@
       </depth>
       <!-- Make sure we render after the skydome -->
       <render-bin>
-        <bin-number>-9</bin-number>
+        <bin-number>-6</bin-number>
         <bin-name>RenderBin</bin-name>
       </render-bin>
       <cull-face>off</cull-face>
@@ -31,8 +31,8 @@
         <destination>one</destination>
       </blend>
       <program>
-        <vertex-shader>Shaders/HDR/stars.vert</vertex-shader>
-        <fragment-shader>Shaders/HDR/stars.frag</fragment-shader>
+        <vertex-shader>Shaders/HDR/oursun.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/oursun.frag</fragment-shader>
         <fragment-shader>Shaders/HDR/celestial_body.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>

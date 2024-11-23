@@ -22,14 +22,15 @@ void main()
     vec4 color = gl_Color;
     vec3 lightDir = gl_LightSource[0].position.xyz;
     vec3 halfVector = gl_LightSource[0].halfVector.xyz;
+    vec3 n = normalize(normal);
     vec4 fragColor;
     vec4 specular = vec4(0.0);
 
-    NdotL = dot(normal, lightDir);
+    NdotL = dot(n, lightDir);
     if (NdotL > 0.0) {
         float shadowmap = getShadowing();
         color += diffuse_term * NdotL * shadowmap;
-        NdotHV = max(dot(normal, halfVector), 0.0);
+        NdotHV = max(dot(n, halfVector), 0.0);
         if (gl_FrontMaterial.shininess > 0.0)
             specular.rgb = (gl_FrontMaterial.specular.rgb
                             * gl_LightSource[0].specular.rgb
@@ -43,7 +44,7 @@ void main()
 
     fragColor = color + specular;
     fragColor = vec4(fragColor.rgb, fragColor.a * alpha);
-    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, texel.rgb);
+    fragColor.rgb += getClusteredLightsContribution(ecPosition.xyz, n, gl_Color.rgb);
 
     fragColor.rgb = fog_Func(fragColor.rgb, 0);
     gl_FragColor = fragColor;

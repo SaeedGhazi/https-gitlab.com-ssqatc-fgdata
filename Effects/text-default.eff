@@ -42,7 +42,7 @@
       <rendering-hint>transparent</rendering-hint>
       <program>
         <vertex-shader>Shaders/text.vert</vertex-shader>
-        <fragment-shader>Shaders/shadows-include.vert</fragment-shader>
+        <vertex-shader>Shaders/shadows-include.vert</vertex-shader>
         <fragment-shader>Shaders/text.frag</fragment-shader>
         <fragment-shader>Shaders/include_fog.frag</fragment-shader>
         <fragment-shader>Shaders/shadows-include.frag</fragment-shader>

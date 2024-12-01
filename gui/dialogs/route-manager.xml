@@ -22,6 +22,7 @@ command interface /autopilot/route-manager/input:
             var dlg = props.globals.getNode("/sim/gui/dialogs/route-manager", 1);
             var selection = dlg.getNode("selection", 1);
             var input = dlg.getNode("input", 1);
+
             var routem = props.globals.getNode("/autopilot/route-manager", 1);
 
             selection.setIntValue(-1);
@@ -40,6 +41,7 @@ command interface /autopilot/route-manager/input:
             var clear = func {
                 flightplan().clearAll();
                 selection.setIntValue(-1);
+                gui.dialog_update("route-manager");
             }
 
             var insert = func {
@@ -91,7 +93,6 @@ command interface /autopilot/route-manager/input:
             var load_route = func(path) {
                 routem.getNode("file-path", 1).setValue(path.getValue());
                 cmd.setValue("@load");
-                gui.dialog_update("route-manager");
             }
 
             var save_route = func(path) {
@@ -140,8 +141,6 @@ command interface /autopilot/route-manager/input:
                         i += 1;
                     }
                 }
-
-                gui.dialog_update("route-manager");
             }
 
             var updateSIDs = func {
@@ -252,8 +251,6 @@ command interface /autopilot/route-manager/input:
                 return;
               }
 
-
-
               # we're on the ground, find the nearest airport to start from
               if (fp.departure == nil) {
                 var apts = findAirportsWithinRange(25.0);
@@ -264,6 +261,7 @@ command interface /autopilot/route-manager/input:
               if (fp.departure_runway == nil) {
                 var rwy = fp.departure.findBestRunwayForPos( geo.aircraft_position() );
                 fp.departure_runway = rwy;
+                logprint(LOG_INFO, "Selected runway:", rwy);
               }
             }
 
@@ -272,14 +270,26 @@ command interface /autopilot/route-manager/input:
 
             updateRunways();
             updateSIDs();
-            updateSTARs();
             updateApproaches();
+            updateSTARs();
         ]]></open>
 
         <close>
             file_selector.del();
             save_selector.del();
         </close>
+
+        <departure-changed><![CDATA[
+            updateRunways();
+            updateSIDs();
+        ]]></departure-changed>
+
+        <arrival-changed><![CDATA[
+            updateRunways();
+            updateApproaches();
+            updateSTARs();
+        ]]></arrival-changed>
+
     </nasal>
 
     <group>
@@ -324,11 +334,6 @@ command interface /autopilot/route-manager/input:
                 <command>dialog-apply</command>
                 <object-name>departure-airport</object-name>
             </binding>
-
-            <binding>
-                <command>nasal</command>
-                <script>updateRunways();</script>
-            </binding>
         </input>
 
         <text>
@@ -359,10 +364,6 @@ command interface /autopilot/route-manager/input:
             <binding>
                 <command>dialog-apply</command>
                 <object-name>departure-runway</object-name>
-            </binding>
-            <binding>
-                <command>nasal</command>
-                <script>updateSIDs();</script>
             </binding>
         </combo>
 
@@ -405,10 +406,6 @@ command interface /autopilot/route-manager/input:
                 <command>dialog-apply</command>
                 <object-name>destination-airport</object-name>
             </binding>
-            <binding>
-                <command>nasal</command>
-                <script>updateRunways();</script>
-            </binding>
         </input>
         <text>
             <row>1</row>
@@ -439,14 +436,6 @@ command interface /autopilot/route-manager/input:
             <binding>
                 <command>dialog-apply</command>
                 <object-name>destination-runway</object-name>
-            </binding>
-
-            <binding>
-                <command>nasal</command>
-                <script>
-                    updateSTARs();
-                    updateApproaches();
-                </script>
             </binding>
         </combo>
 

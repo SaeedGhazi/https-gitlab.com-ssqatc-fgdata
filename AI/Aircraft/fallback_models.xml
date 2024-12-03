@@ -18,10 +18,10 @@
   51-100 Multi-engine GA aircraft
   101-150 Business Jets
   151-200 Turboprop airliners
-  201-250 Twin engined narrow body jet airliners
+  201-250 Twin/three engined narrow body jet airliners
   251-300 Twin engined wide body jet airliners
   301-350 Four engined jet narrow body airliners
-  351-400 Four engined jet wide body airliners
+  351-400 Three/four engined jet wide body airliners
   401-450 Single engine prop military aircraft
   451-500 Multi-engine prop military aircraft
   501-550 Jet combat aircraft
@@ -78,7 +78,7 @@
 <model n="160" type="string">AI/Aircraft/SF3/SF3-WestJet.xml</model>
 
 
-<!-- 201-250 Twin engined narrow body jet airliners -->
+<!-- 201-250 Twin/three engined narrow body jet airliners -->
 <model n="201" type="string">AI/Aircraft/717/717-Qantas.xml</model>
 <model n="202" type="string">AI/Aircraft/733/733-Norwegian.xml</model>
 <model n="203" type="string">AI/Aircraft/735/735-Default.xml</model>
@@ -116,7 +116,7 @@
 <model n="301" type="string">AI/Aircraft/Bae146-200/Bae146-200-Lufthansa.xml</model>
 <model n="302" type="string">AI/Aircraft/BAE146-300/BAE146-300-Brussels.xml</model>
 
-<!-- 351-400 Four engined jet wide body airliners -->
+<!-- 351-400 Three/four engined jet wide body airliners -->
 <model n="351" type="string">AI/Aircraft/747/744-Lufthansa.xml</model>
 <model n="352" type="string">AI/Aircraft/747/74F-Saudia.xml</model>
 <model n="353" type="string">AI/Aircraft/A342/A342-RoyalJordanian.xml</model>
@@ -124,6 +124,7 @@
 <model n="355" type="string">AI/Aircraft/A345/A345-SingaporeAirlines.xml</model>
 <model n="356" type="string">AI/Aircraft/A346/A346-Iberia.xml</model>
 <model n="357" type="string">AI/Aircraft/A380/388-AirFrance.xml</model>
+<model n="358" type="string">AI/Aircraft/M11/M1F-FedEx.xml</model>
 
 <!-- 401-450 Single engine prop military aircraft -->
 <model n="401" type="string">AI/Aircraft/A6M2/Models/a6m2-anim.xml</model>

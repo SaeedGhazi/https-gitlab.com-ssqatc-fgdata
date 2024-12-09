@@ -23,10 +23,22 @@
   </parameters>
   <technique n="1">
     <predicate>
-     <equal>
-       <property>/sim/rendering/shaders/skydome</property>
-       <value type="bool" >false</value>
-     </equal>
+      <or>
+        <equal>
+          <property>/sim/rendering/shaders/skydome</property>
+          <value type="bool">false</value>
+        </equal>
+        <and>
+          <equal>
+            <property>/sim/rendering/shaders/skydome</property>
+            <value type="bool">true</value>
+          </equal>
+          <less>
+            <float-property>/sim/rendering/shaders/landmass</float-property>
+            <value type="float">4.0</value>
+          </less>
+        </and>
+      </or>
     </predicate>
     <pass>
 		<lighting>true</lighting>

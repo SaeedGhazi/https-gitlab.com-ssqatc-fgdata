@@ -446,4 +446,6 @@ var unloadTooltips = func
   removecommand("clear-message");
 
   setprop("/sim/mouse/tooltip-commands-registered", 0);
+
+  tooltip.del();
 }

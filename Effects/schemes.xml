@@ -10,6 +10,10 @@
     <description>HDR: Forward pass, mainly for transparent objects and other things that do not fit in the G-buffer.</description>
   </scheme>
   <scheme>
+    <name>hdr-decal</name>
+    <description>HDR: Forward pass, mainly for transparent objects and other things that do not fit in the G-buffer.</description>
+  </scheme>
+  <scheme>
     <name>hdr-envmap</name>
     <description>HDR: Used for rendering to the environment map.</description>
   </scheme>

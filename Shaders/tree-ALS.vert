@@ -1,5 +1,6 @@
 // -*-C++-*-
 #version 120
+#extension GL_EXT_draw_instanced : enable
 
 // Shader that uses OpenGL state values to do per-pixel lighting
 //
@@ -15,11 +16,12 @@
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
 
+attribute vec3 instancePosition; // (x,y,z)
+
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
 // component is set to 1 for front, 0 for back in order to work around
 // bugs with gl_FrontFacing in the fragment shader.
-
 
 varying vec3 relPos;
 varying float yprime_alt;
@@ -86,27 +88,26 @@ void main()
 // this code is copied from tree.vert
 
   float numVarieties = gl_Normal.z;
-  float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
+  float texFract = floor(fract(instancePosition.x) * numVarieties) / numVarieties;
 
 // determine whether the tree changes color in autumn
-  if (texFract <  float(num_deciduous_trees)/float(numVarieties)) {autumn_flag = 0.5 + fract(gl_Color.x);}
+  if (texFract <  float(num_deciduous_trees)/float(numVarieties)) {autumn_flag = 0.5 + fract(instancePosition.x);}
   else {autumn_flag = 0.0;}
 
 	
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
   
-  // Determine the rotation for the tree.  The Fog Coordinate provides rotation information
-  // to rotate one of the quands by 90 degrees.  We then apply an additional position seed
-  // so that trees aren't all oriented N/S
-  float sr = sin(gl_FogCoord + gl_Color.x);
-  float cr = cos(gl_FogCoord + gl_Color.x);
+  // Determine the rotation for the tree.  
+  float sr = sin(instancePosition.x);
+  float cr = cos(instancePosition.x);
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
   
   // Determine the y texture coordinate based on whether it's summer, winter, snowy.
-  gl_TexCoord[0].y =  gl_TexCoord[0].y + 0.25 * step(snow_level, gl_Color.z) + 0.5 * season;
+  gl_TexCoord[0].y =  gl_TexCoord[0].y + 0.25 * step(snow_level, instancePosition.z) + 0.5 * season;
 
   // scaling
-  vec3 position = gl_Vertex.xyz * gl_Normal.xxy;
+  float scale = (fract(instancePosition.x) + fract(instancePosition.y))/2.0f + 0.5f;
+  vec3 position = gl_Vertex.xyz * gl_Normal.xxy * scale;
 
   // Rotation of the generic quad to specific one for the tree.
   position.xy = vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
@@ -115,20 +116,20 @@ void main()
  // Shear by wind.  Note that this only applies to the top vertices    
   if (wind_effects > 0)           
   	{
-	position.x = position.x + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindN;
-  	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindE;
+	position.x = position.x + position.z * (sin(osg_SimulationTime * 1.8 + (instancePosition.x + instancePosition.y + instancePosition.z) * 0.01) + 1.0) * 0.0025 * WindN;
+  	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (instancePosition.x + instancePosition.y + instancePosition.z) * 0.01) + 1.0) * 0.0025 * WindE;
 	}
 	
   // Scale by random domains	
   float voronoi;
   if ((forest_effects > 0)&& use_forest_effect)
 	{
-	voronoi = 0.5 + 1.0 * VoronoiNoise2D(gl_Color.xy, forest_effect_size, forest_effect_shape, forest_effect_shape);	
+	voronoi = 0.5 + 1.0 * VoronoiNoise2D(instancePosition.xy, forest_effect_size, forest_effect_shape, forest_effect_shape);	
 	position.xyz = position.xyz * voronoi;  
  	}
  
-  // Move to correct location (stored in gl_Color)
-  position = position + gl_Color.xyz;
+  // Move to correct location
+  position = position + instancePosition.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
 
   vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));

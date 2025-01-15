@@ -160,6 +160,14 @@
 	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 	<fragment-shader>Shaders/hazes.frag</fragment-shader>
 	<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <attribute>
+          <name>instancePosition</name>
+          <index>6</index>
+        </attribute>
+        <attribute>
+          <name>instanceTerrainNormal</name>
+          <index>7</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -659,6 +667,10 @@
 	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 	<fragment-shader>Shaders/hazes.frag</fragment-shader>
 	<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <attribute>
+          <name>instancePosition</name>
+          <index>6</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1148,6 +1160,10 @@
 	<fragment-shader>Shaders/secondary_lights.frag</fragment-shader>
 	<fragment-shader>Shaders/hazes.frag</fragment-shader>
 	<fragment-shader>Shaders/filters-ALS.frag</fragment-shader>
+        <attribute>
+          <name>instancePosition</name>
+          <index>6</index>
+        </attribute>
       </program>
       <uniform>
         <name>visibility</name>
@@ -1632,6 +1648,10 @@
 				<vertex-shader>Shaders/tree.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>
+        <attribute>
+          <name>instancePosition</name>
+          <index>6</index>
+        </attribute>
 			</program>
 			<uniform>
 				<name>baseTexture</name>
@@ -1725,6 +1745,10 @@
 				<vertex-shader>Shaders/tree.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>
+        <attribute>
+          <name>instancePosition</name>
+          <index>6</index>
+        </attribute>
 			</program>
 			<uniform>
 				<name>baseTexture</name>
@@ -1818,6 +1842,10 @@
 				<vertex-shader n="1">Shaders/tree.vert</vertex-shader>
 				<fragment-shader n="0">Shaders/include_fog.frag</fragment-shader>
 				<fragment-shader n="1">Shaders/tree.frag</fragment-shader>
+        <attribute>
+          <name>instancePosition</name>
+          <index>6</index>
+        </attribute>
 			</program>
 			<uniform>
 				<name>baseTexture</name>

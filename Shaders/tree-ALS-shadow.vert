@@ -1,5 +1,6 @@
 // -*-C++-*-
 #version 120
+#extension GL_EXT_draw_instanced : enable
 
 // Shader that uses OpenGL state values to do per-pixel lighting
 //
@@ -14,6 +15,10 @@
 #define MODE_OFF 0
 #define MODE_DIFFUSE 1
 #define MODE_AMBIENT_AND_DIFFUSE 2
+
+attribute vec3 instancePosition; // (x,y,z)
+attribute vec3 instanceTerrainNormal;
+
 
 // The constant term of the lighting equation that doesn't depend on
 // the surface normal is passed in gl_{Front,Back}Color. The alpha
@@ -97,8 +102,8 @@ void main()
    //  eye position in model space
    vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
 
-  float rn_dist = length(gl_Color.xyz - ep.xyz) + 300.0 * mod(10.0 * gl_Color.x,1.0);
-  float rn = mod(100.0 * gl_Color.x + 100.0 * gl_Color.y,1.0);
+  float rn_dist = length(instancePosition.xyz - ep.xyz) + 300.0 * mod(10.0 * instancePosition.x,1.0);
+  float rn = mod(100.0 * instancePosition.x + 100.0 * instancePosition.y,1.0);
 
   float numVarieties = gl_Normal.z;
 
@@ -132,23 +137,19 @@ void main()
   else
 	{
 
-  float texFract = floor(fract(gl_MultiTexCoord0.x) * numVarieties) / numVarieties;
+  float texFract = floor(fract(instancePosition.x) * numVarieties) / numVarieties;
 
 // determine whether the tree changes color in autumn
-  if (texFract <  float(num_deciduous_trees)/float(numVarieties)) {autumn_flag = 0.5 + fract(gl_Color.x);}
+  if (texFract <  float(num_deciduous_trees)/float(numVarieties)) {autumn_flag = 0.5 + fract(instancePosition.x);}
   else {autumn_flag = 0.0;}
 
   texFract += floor(gl_MultiTexCoord0.x) / numVarieties;
   
-  // Determine the rotation for the tree.  The Fog Coordinate provides rotation information
-  // to rotate one of the quands by 90 degrees.  We then apply an additional position seed
-  // so that trees aren't all oriented N/S
-  float sr;
-  float cr;
-  sr = sin(gl_FogCoord + gl_Color.x);
-  cr = cos(gl_FogCoord + gl_Color.x);
+  // Determine the rotation for the tree.  
+  float sr = sin(instancePosition.x);
+  float cr = cos(instancePosition.x);
   
-  if (gl_FogCoord < 0.0)
+  if (gl_Color.r > 0.0)
 	{
 	sr = dot(lightHorizon.xy, vec2 (0.0,1.0));
 	cr = dot(lightHorizon.xy, vec2 (-1.0,0.0));
@@ -158,10 +159,11 @@ void main()
   gl_TexCoord[0] = vec4(texFract, gl_MultiTexCoord0.y, 0.0, 0.0);
   
   // Determine the y texture coordinate based on whether it's summer, winter, snowy.
-  gl_TexCoord[0].y =  gl_TexCoord[0].y + 0.25 * step(snow_level, gl_Color.z) + 0.5 * season;
+  gl_TexCoord[0].y =  gl_TexCoord[0].y + 0.25 * step(snow_level, instancePosition.z) + 0.5 * season;
 
   // scaling
-  vec3 position = gl_Vertex.xyz * gl_Normal.xxy;
+  float scale = (fract(instancePosition.x) + fract(instancePosition.y))/2.0f + 0.5f;
+  vec3 position = gl_Vertex.xyz * gl_Normal.xxy * scale;
 
   // Rotation of the generic quad to specific one for the tree.
   position.xy = factor *  vec2(dot(position.xy, vec2(cr, sr)), dot(position.xy, vec2(-sr, cr)));
@@ -170,8 +172,8 @@ void main()
  // Shear by wind.  Note that this only applies to the top vertices    
   if (wind_effects > 0)           
   	{
-	position.x = position.x + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindN;
-  	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (gl_Color.x + gl_Color.y + gl_Color.z) * 0.01) + 1.0) * 0.0025 * WindE;
+	position.x = position.x + position.z * (sin(osg_SimulationTime * 1.8 + (instancePosition.x + instancePosition.y + instancePosition.z) * 0.01) + 1.0) * 0.0025 * WindN;
+  	position.y = position.y + position.z * (sin(osg_SimulationTime * 1.8 + (instancePosition.x + instancePosition.y + instancePosition.z) * 0.01) + 1.0) * 0.0025 * WindE;
 	}
 
 
@@ -183,23 +185,23 @@ void main()
   float voronoi;
   if ((forest_effects > 0)&& use_forest_effect)
 	{
-	voronoi = 0.5 + 1.0 * VoronoiNoise2D(gl_Color.xy, forest_effect_size, forest_effect_shape, forest_effect_shape);	
+	voronoi = 0.5 + 1.0 * VoronoiNoise2D(instancePosition.xy, forest_effect_size, forest_effect_shape, forest_effect_shape);	
 	position.xyz = position.xyz * voronoi;  
  	}
 
   // check if this is a shadow quad
-  if ((gl_FogCoord <0.0)&&(use_tree_shadows))
+  if ((gl_Color.r > 0.0)&&(use_tree_shadows))
 	{
 	is_shadow = 1.0;
 	float sinAlpha = dot(lightFull, vec3 (0.0,0.0,1.0));
 	float cosAlpha = sqrt(1.0 - sinAlpha*sinAlpha);
-	float slope = dot(gl_SecondaryColor.xyz, vec3(0.0,0.0,1.0));
+	float slope = dot(instanceTerrainNormal, vec3(0.0,0.0,1.0));
 	//float slope = 1.0;
 	position.x += position.z * clamp(cosAlpha/sinAlpha,-5.0,5.0) * -dot(lightHorizon.xy, vec2(1.0,0.0));
 	position.y += position.z * clamp(cosAlpha/sinAlpha,-5.0,5.0) * -dot(lightHorizon.xy, vec2 (0.0,1.0));
 	if (position.z > 3.0) // we deal with an upper vertex
 		{
-		vec3 terrainNormal = gl_SecondaryColor.xyz;
+		vec3 terrainNormal = instanceTerrainNormal;
 		position.z = 0.4 + 10.0*(1.0 - slope) ;
 		float sinPhi = dot(terrainNormal, vec3(1.0,0.0,0.0));
 		float sinPsi = dot(terrainNormal, vec3(0.0,1.0,0.0));
@@ -212,8 +214,8 @@ void main()
 	}
 
  
-  // Move to correct location (stored in gl_Color)
-  position = position + gl_Color.xyz;
+  // Move to correct location
+  position = position + instancePosition.xyz;
   gl_Position   = gl_ModelViewProjectionMatrix * vec4(position,1.0);
 
   vec3 ecPosition = vec3(gl_ModelViewMatrix * vec4(position, 1.0));
@@ -245,12 +247,12 @@ void main()
 
     if (is_shadow >0.0)
 	{
-	float view_angle = dot ((gl_SecondaryColor.xyz), normalize(relPos));
+	float view_angle = dot ((instanceTerrainNormal), normalize(relPos));
 	if (view_angle < 0.0) {is_shadow = -view_angle;}
 	else {is_shadow = 5.0;}
 	
 	// the surface element will be in shadow
-	if (dot(normalize(lightFull),(gl_SecondaryColor.xyz)) < 0.0)
+	if (dot(normalize(lightFull),(instanceTerrainNormal)) < 0.0)
 		{ is_shadow = 5.0;}
 	}
 

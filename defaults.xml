@@ -939,7 +939,12 @@ Started September 2000 by David Megginson, david@megginson.com
         <enabled type="bool" userarchive="y"/>
       </legacy-multiplayer-view-selector>
     </menubar>
-    <gui preserve="y">
+    <gui>
+      <dialogs preserve="y">
+        <!-- We need a dummy property to declare the parent "dialogs" tree
+             as preserve="y" -->
+        <dummy type="bool">false</dummy>
+      </dialogs>
       <current-style type="int" userarchive="y">1</current-style>
       <style n="0" include="gui/styles/tortola.xml"/>
       <style n="1" include="gui/styles/anthrax.xml"/>

@@ -624,11 +624,11 @@
       </trans-unit>
       <trans-unit id="options/atcsim-desc:0" approved="yes">
         <source xml:space="preserve">Open connection using the ATC sim protocol (atc610x)</source>
-        <target xml:space="preserve">Owtórz połączenie używając protokołu ATC (atc610x).</target>
+        <target xml:space="preserve">Otwórz połączenie używając protokołu ATC (atc610x).</target>
       </trans-unit>
       <trans-unit id="options/atlas-desc:0" approved="yes">
         <source xml:space="preserve">Open connection using the Atlas protocol</source>
-        <target xml:space="preserve">Owtórz połączenie używając protokołu Atlas.</target>
+        <target xml:space="preserve">Otwórz połączenie używając protokołu Atlas.</target>
       </trans-unit>
       <trans-unit id="options/audio-options:0" approved="yes">
         <source xml:space="preserve">Audio Options</source>
@@ -720,7 +720,7 @@
       </trans-unit>
       <trans-unit id="options/dme-desc:0" approved="yes">
         <source xml:space="preserve">Slave the DME to one of the NAV radios, or set its internal frequency.</source>
-        <target xml:space="preserve">Powiąż DME z jednym z radiali NAV, lub ustaw jego wewnętrzną czestotliwość.</target>
+        <target xml:space="preserve">Powiąż DME z jednym z radiali NAV lub ustaw jego wewnętrzną częstotliwość.</target>
       </trans-unit>
       <trans-unit id="options/download-dir-desc:0" approved="yes">
         <source xml:space="preserve">Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
@@ -752,7 +752,7 @@
       </trans-unit>
       <trans-unit id="options/fg-aircraft-desc:0" approved="yes">
         <source xml:space="preserve">Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</source>
-        <target xml:space="preserve">Określ dodatkowe ścieżki katalogów ze statkami powietrznymi (alternatywnie, możesz uzyć --aircraft-dir aby wskazać określony katalog danego statku powietrznego).</target>
+        <target xml:space="preserve">Określ dodatkowe ścieżki katalogów ze statkami powietrznymi (alternatywnie, możesz użyć --aircraft-dir aby wskazać określony katalog danego statku powietrznego).</target>
       </trans-unit>
       <trans-unit id="options/fg-root-desc:0" approved="yes">
         <source xml:space="preserve">Specify the root data path</source>
@@ -760,7 +760,7 @@
       </trans-unit>
       <trans-unit id="options/fg-scenery-desc:0" approved="yes">
         <source xml:space="preserve">Specify the scenery path(s);</source>
-        <target xml:space="preserve">Określ ściezkę(i) do scenerii.</target>
+        <target xml:space="preserve">Określ ścieżkę(i) do scenerii.</target>
       </trans-unit>
       <trans-unit id="options/fg-scenery-desc:1" approved="yes">
         <source xml:space="preserve">Defaults to $FG_ROOT/Scenery</source>
@@ -892,7 +892,7 @@
       </trans-unit>
       <trans-unit id="options/igc-desc:0" approved="yes">
         <source xml:space="preserve">Open connection using the International Gliding Commission protocol</source>
-        <target xml:space="preserve">Owtórz połączenie używając protokołu Międzynarodowej Komisji Szybowcowej (International Gliding Commission).</target>
+        <target xml:space="preserve">Otwórz połączenie używając protokołu Międzynarodowej Komisji Szybowcowej (International Gliding Commission).</target>
       </trans-unit>
       <trans-unit id="options/ignore-autosave-desc:0" approved="yes">
         <source xml:space="preserve">Enable/Disable ignoring the autosave file, i.e. the settings saved in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
@@ -996,7 +996,7 @@
       </trans-unit>
       <trans-unit id="options/materials-file-desc:0" approved="yes">
         <source xml:space="preserve">Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</source>
-        <target xml:space="preserve">Określ plik materiałów uźywanych do wyświetlania scenerii (domyślnie: Materials/regions/materials.xml).</target>
+        <target xml:space="preserve">Określ plik materiałów używanych do wyświetlania scenerii (domyślnie: Materials/regions/materials.xml).</target>
       </trans-unit>
       <trans-unit id="options/max-fps-desc:0" approved="yes">
         <source xml:space="preserve">Maximum frame rate in Hz.</source>
@@ -1004,7 +1004,7 @@
       </trans-unit>
       <trans-unit id="options/metar-desc:0" approved="yes">
         <source xml:space="preserve">Pass a METAR string to set up static weather (this implies --disable-real-weather-fetch)</source>
-        <target xml:space="preserve">Określ włąsną depeszę METAR, z której zostanie ustawiona statyczna pogoda (powoduje włączenie opcji --disable-real-weather-fetch).</target>
+        <target xml:space="preserve">Określ własną depeszę METAR, z której zostanie ustawiona statyczna pogoda (powoduje włączenie opcji --disable-real-weather-fetch).</target>
       </trans-unit>
       <trans-unit id="options/min-aircraft-status:0" approved="yes">
         <source xml:space="preserve">Allows you to define a minimum status level (=development status) for all listed aircraft</source>
@@ -1024,7 +1024,7 @@
       </trans-unit>
       <trans-unit id="options/multiplay-desc:0" approved="yes">
         <source xml:space="preserve">Specify multipilot communication settings;</source>
-        <target xml:space="preserve">Określ ustawienia połączenia w tybie wieloosobowym;</target>
+        <target xml:space="preserve">Określ ustawienia połączenia w trybie wieloosobowym;</target>
       </trans-unit>
       <trans-unit id="options/multiplayer-options:0" approved="yes">
         <source xml:space="preserve">MultiPlayer Options</source>
@@ -1240,7 +1240,7 @@
       </trans-unit>
       <trans-unit id="options/specular-highlight-desc:0" approved="yes">
         <source xml:space="preserve">Enable/Disable specular reflections on textured objects</source>
-        <target xml:space="preserve">Włącz/wyłącz odbicia lustrzane na oteksturowanych obiektach.</target>
+        <target xml:space="preserve">Włącz/wyłącz odbicia lustrzane na teksturowanych obiektach.</target>
       </trans-unit>
       <trans-unit id="options/speed-desc:0" approved="yes">
         <source xml:space="preserve">Run the FDM &apos;n&apos; times faster than real time</source>
@@ -1252,7 +1252,7 @@
       </trans-unit>
       <trans-unit id="options/start-date-desc:0" approved="yes">
         <source xml:space="preserve">Specify a starting date/time with respect to</source>
-        <target xml:space="preserve">Określ datę/czas startu ze wzgędu na</target>
+        <target xml:space="preserve">Określ datę/czas startu ze względu na</target>
       </trans-unit>
       <trans-unit id="options/state-desc:0" approved="yes">
         <source xml:space="preserve">Specify the initial state of the aircraft to the given value</source>
@@ -1368,7 +1368,7 @@
       </trans-unit>
       <trans-unit id="options/vNorth-desc:0" approved="yes">
         <source xml:space="preserve">Specify velocity along a South-North axis</source>
-        <target xml:space="preserve">Określ prędkośc wzdłuż osi południe-północ.</target>
+        <target xml:space="preserve">Określ prędkość wzdłuż osi południe-północ.</target>
       </trans-unit>
       <trans-unit id="options/vc-desc:0" approved="yes">
         <source xml:space="preserve">Specify initial airspeed</source>
@@ -1578,7 +1578,7 @@
       </trans-unit>
       <trans-unit id="sys/error-xml-model-load:0" approved="yes">
         <source xml:space="preserve">Errors loading model XML</source>
-        <target xml:space="preserve">Bledy podczas ladowania modelu XML</target>
+        <target xml:space="preserve">Bledy podczas wczytywania modelu XML</target>
       </trans-unit>
       <trans-unit id="sys/finalize-position:0" approved="yes">
         <source xml:space="preserve">finalizing position</source>
@@ -1638,7 +1638,7 @@
       </trans-unit>
       <trans-unit id="sys/navdata-navaids:0" approved="yes">
         <source xml:space="preserve">loading navigation aid data</source>
-        <target xml:space="preserve">wczytywanie danych pomocy nawigacyjnej</target>
+        <target xml:space="preserve">wczytywanie danych pomocy nawigacyjnych</target>
       </trans-unit>
       <trans-unit id="sys/navdata-pois:0" approved="yes">
         <source xml:space="preserve">loading points of interest</source>
@@ -1654,11 +1654,11 @@
       </trans-unit>
       <trans-unit id="sys/settings-migration-text:0" approved="yes">
         <source xml:space="preserve">Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
-        <target xml:space="preserve">Ustawienia zostaną przemigrowane z poprzedniej wersji FlightGear. Jeśli napotkasz na jakiekolwiek problemy używając aplikacji, spróbuj przywrócić domyślne ustawienia przed zaraportowaniem problemu. Zapisane ustawienia mogą mieć wpływ na wygląd, wydajność i funkcje symulatora.</target>
+        <target xml:space="preserve">Ustawienia zostaną przeniesione z poprzedniej wersji FlightGeara. Jeśli napotkasz na jakiekolwiek problemy, spróbuj przywrócić domyślne ustawienia sprzed zaraportowania problemu. Zapisane ustawienia mogą mieć wpływ na wygląd, wydajność i funkcje symulatora.</target>
       </trans-unit>
       <trans-unit id="sys/settings-migration-title:0" approved="yes">
         <source xml:space="preserve">Settings migrated</source>
-        <target xml:space="preserve">Ustawienia przemigrowane</target>
+        <target xml:space="preserve">Ustawienia przeniesione</target>
       </trans-unit>
       <trans-unit id="sys/units-kbytes:0" approved="yes">
         <source xml:space="preserve">KB</source>
@@ -1740,7 +1740,7 @@
       </trans-unit>
       <trans-unit id="tips/tip:14" approved="yes">
         <source xml:space="preserve">Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
-        <target xml:space="preserve">Wybierz Multiplayer → Ustawienia multiplayer aby dołączyć do środowiska wspólnych lotów</target>
+        <target xml:space="preserve">Wybierz Multiplayer → Ustawienia multiplayer aby dołączyć do wspólnych lotów</target>
       </trans-unit>
       <trans-unit id="tips/tip:15" approved="yes">
         <source xml:space="preserve">Can&apos;t get the engine started? - see Help → Aircraft Checklists</source>
@@ -1752,7 +1752,7 @@
       </trans-unit>
       <trans-unit id="tips/tip:17" approved="yes">
         <source xml:space="preserve">Press / to explore the internals of the simulator</source>
-        <target xml:space="preserve">Naciśnij przycisk / aby przeglądać wewnętrzne ustawienia symulatora</target>
+        <target xml:space="preserve">Naciśnij / aby przeglądać wewnętrzne ustawienia symulatora</target>
       </trans-unit>
       <trans-unit id="tips/tip:18" approved="yes">
         <source xml:space="preserve">Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
@@ -1762,19 +1762,19 @@
     <group restype="x-trolltech-linguist-context" resname="weather-scenarios">
       <trans-unit id="weather-scenarios/border-high-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</source>
-        <target xml:space="preserve">Granica regionu wysokiego ciśnienia, w którym masa powietrza staje się niestabilna i mogą pojawić się różne chmury konwekcyjne i warstwowe.</target>
+        <target xml:space="preserve">Granica obszaru wysokiego ciśnienia, w którym masa powietrza staje się niestabilna i mogą pojawić się różne chmury konwekcyjne i warstwowe.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/border-high-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Border of a high pressure region</source>
-        <target xml:space="preserve">Granica regionu wysokiego ciśnienia</target>
+        <target xml:space="preserve">Granica obszaru wysokiego ciśnienia</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/border-low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
-        <target xml:space="preserve">Granica regionu niskiego ciśnienia, w którym masa powietrza jest niestabilna, a chmury konwekcyjne zaczynają tworzyć warstwy i łączyć się w chmury stratus.</target>
+        <target xml:space="preserve">Granica obszaru niskiego ciśnienia, w którym masa powietrza jest niestabilna, a chmury konwekcyjne zaczynają tworzyć warstwy i łączyć się w chmury stratus.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/border-low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Border of a low pressure region</source>
-        <target xml:space="preserve">Granica regionu niskiego ciśnienia</target>
+        <target xml:space="preserve">Granica obszaru niskiego ciśnienia</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/cat-one-minimum-desc:0" approved="yes">
         <source xml:space="preserve">If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
@@ -1802,19 +1802,19 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/core-high-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
-        <target xml:space="preserve">Centrum regionu wysokiego ciśnienia, charakteryzującego się opadającym powietrzem, a zatem słabym rozwojem chmur oraz daleką widocznością.</target>
+        <target xml:space="preserve">Centralny obszar wysokiego ciśnienia, cechujący się opadającym powietrzem, a zatem słabym rozwojem chmur oraz daleką widocznością.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/core-high-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Core high pressure region</source>
-        <target xml:space="preserve">Rdzeń regionu wysokiego ciśnienia</target>
+        <target xml:space="preserve">Centralny obszar wysokiego ciśnienia</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/core-low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
-        <target xml:space="preserve">Rdzeń regionu niskiego ciśnienia, charakteryzującego się całkowitym zachmurzeniem, słabą widocznością na ziemi i znacznymi opadami deszczu.</target>
+        <target xml:space="preserve">Centralny obszar niskiego ciśnienia, cechujący się całkowitym zachmurzeniem, słabą widocznością na ziemi i znacznymi opadami deszczu.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/core-low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Core low pressure region</source>
-        <target xml:space="preserve">Rdzeń regionu niskiego ciśnienia</target>
+        <target xml:space="preserve">Centralny obszar niskiego ciśnienia</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/early-morning-fog-desc:0" approved="yes">
         <source xml:space="preserve">Fog developed this autumn&apos;s morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500&apos; climb and you&apos;ll see the sun!</source>
@@ -1834,11 +1834,11 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/high-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
-        <target xml:space="preserve">Region wysokiego ciśnienia, charakteryzujący się umiarkowanym tworzeniem chmur typu cumulus, aż do silnego ich rozwoju po południu, oraz dość dobrą widocznością.</target>
+        <target xml:space="preserve">Obszar wysokiego ciśnienia, cechujący się rozwojem chmur typu cumulus, od umiarkowanego po silny po południu oraz dość dobrą widzialnością</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/high-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">High pressure region</source>
-        <target xml:space="preserve">Region wysokiego ciśnienia</target>
+        <target xml:space="preserve">Obszar wysokiego ciśnienia</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/isa-desc:0" approved="yes">
         <source xml:space="preserve">A standard atmosphere model for testing and calibrating aircraft performance and design.</source>
@@ -1858,11 +1858,11 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/low-pressure-region-desc:0" approved="yes">
         <source xml:space="preserve">A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
-        <target xml:space="preserve">Region niskiego ciśnienia, charakteryzujący się podnoszącym się powietrzem, powszechnym tworzeniem się chmur warstwowych (stratus) i początkowym deszczem.</target>
+        <target xml:space="preserve">Obszar niskiego ciśnienia, cechujący się podnoszącym się powietrzem, powszechnym tworzeniem się chmur warstwowych (stratus) i początkowym deszczem.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/low-pressure-region-name:0" approved="yes">
         <source xml:space="preserve">Low pressure region</source>
-        <target xml:space="preserve">Region niskiego ciśnienia</target>
+        <target xml:space="preserve">Obszar niskiego ciśnienia</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/manual-input-desc:0" approved="yes">
         <source xml:space="preserve">Enter your favorite METAR weather. A valid METAR syntax is required.</source>

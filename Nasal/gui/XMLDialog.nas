@@ -228,9 +228,42 @@ var XMLObjectBase =
 
     },
 
+    _changeLocalValue: func(newValue)
+    {
+        me._localValue = newValue;
+        if (me.live and me.property) {
+            me.property.setValue(newValue);
+        }
+
+        # this call to update might be excessive: it depends if we can rely on the widget
+        # implementation to update itself, before it tells us about a local change.
+        me.update();
+    },
+
+    valueChanged: func
+    {
+        if (me._localValue == me.value)
+            return;
+
+        me._localValue = me.value;
+        me.update();
+    },
+
+    apply: func()
+    {
+        if (!me.property) {
+            return;
+        }
+
+        if (me._localValue == me.value)
+            return;
+
+        logprint(LOG_INFO, "Applying XML-Widget value to property ", me.property.getPath());
+        me.property.setValue(me._localValue);
+    },
+
     visibleChanged: func() 
     {
-        logprint(LOG_INFO, "Updating widget visiblity");
         me._view.setVisible(me.visible);
     },
 
@@ -284,32 +317,25 @@ var XMLCheckbox =
         me._view.visible = me.visible;
 
         me._view.listen("toggled", func(e) {
-            if (me.property) {
-                me.property.setValue(e.detail.checked);
-            }
+            me._changeLocalValue(e.detail.checked);
             me.activateBindings();
         });
 
         me._layout = me._view;
         me._applyLayoutConfig(true);
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         if (me.view == nil) {
             return;
         }
 
-        me._view.setChecked(me.value);
-    },
+        me._view.setChecked(me._localValue);
+    }
 };
 
 
@@ -323,32 +349,25 @@ var XMLRadioButton =
         me._view.visible = me.visible;
 
         me._view.listen("toggled", func(e) {
-            if (me.property) {
-                me.property.setValue(e.detail.checked);
-            }
+            me._changeLocalValue(e.detail.checked);
             me.activateBindings();
         });
 
         me._layout = me._view;
         me._applyLayoutConfig(true);
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         if (me.view == nil) {
             return;
         }
 
-        me._view.setChecked(me.value);
-    },
+        me._view.setChecked(me._localValue);
+    }
 };
 
 var XMLLabel =
@@ -364,22 +383,17 @@ var XMLLabel =
         me._format = me._configValue("format");
         me._layout = me._view;
         me._applyLayoutConfig(true);
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func() {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         if (me._view == nil) {
             return;
         }
 
-        var v = me.value;
+        var v = me._localValue;
         if (v == nil) {
             v = me._label;
         }
@@ -490,30 +504,23 @@ var XMLSlider =
         me._view.visible = me.visible;
 
         me._view.listen("value-changed", func(e) {
-            if (me.property) {
-                me.property.setValue(e.detail.value);
-            }
+            me._changeLocalValue(e.detail.value);
             me.activateBindings();
         });
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         if (me._view == nil) {
             return;
         }
 
-        me._view.setValue(me.value);
+        me._view.setValue(me._localValue);
     }
 };
 
@@ -527,30 +534,23 @@ var XMLDial =
             "wrap": me._configBool("wrap", 0),
         });
         me._view.listen("value-changed", func(e) {
-            if (me.property) {
-                me.property.setValue(e.detail.value);
-            }
+            me._changeLocalValue(e.detail.value);
             me.activateBindings();
         });
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
-        if (me._view == nil) {
+         if (me._view == nil) {
             return;
         }
 
-        me._view.setValue(me.value);
+        me._view.setValue(me._localValue);
     }
 };
 
@@ -565,28 +565,21 @@ var XMLTextEdit =
     {
         me._view = cwidgets.LineEdit.new(viewParent, canvas.style, {});
         me._view.listen("text-changed", func(e) {
-            if (me.property) {
-                me.property.setValue(e.detail.text);
-            }
+            me._changeLocalValue(e.detail.text);
             me.activateBindings();
         });
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         # don't overwrite if it has focus
         if (me._view and !me._view.hasActiveFocus()) {
-            me._view.setText(str(me.value));
+            me._view.setText(str(me._localValue));
         }
     }
 };
@@ -619,22 +612,16 @@ var XMLHRule =
         me._view = cwidgets.HorizontalRule.new(viewParent, canvas.style, {});
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         # allow label to be updated live
-        var l = me.value;
-        if (l) {
-            me._view.setText(l);
+        if (me._localValue) {
+            me._view.setText(_localValue);
         }
     }
 };
@@ -646,7 +633,7 @@ var XMLVRule =
         me._view = cwidgets.VerticalRule.new(viewParent, canvas.style, {});
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
@@ -680,28 +667,21 @@ var XMLComboBox =
             me._view.createItem(valueNode.getValue(), valueNode.getValue());
         }
         me._view.listen("selected-item-changed", func(e) {
-            if (me.property) {
-                me.property.setValue(e.detail.value);
-            }
+            me._changeLocalValue(e.detail.value);
             me.activateBindings();
         });
 
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func()
     {
-        me.valueChanged();
-    },
-
-    valueChanged: func()
-    {
         if (me._view and !me._view.hasActiveFocus()) {
-            me._view.setSelectedByValue(me.value);
+            me._view.setSelectedByValue(me._localValue);
         }
     }
 };
@@ -715,26 +695,22 @@ var XMLList = {
         }
         me._view.listen("selection-changed", func {
             var selection = me._view.getSelectedItems();
-            if (me.property and size(selection)) {
-                me.property.setValue(selection[0].getData("text"));
+            if (size(selection)) {
+                me._changeLocalValue(selection[0].getData("text"));
             }
             me.activateBindings();
         });
 
         me._layout = me._view;
         me._applyLayoutConfig();
-        me.update();
+        me.valueChanged();
 
         return me._view;
     },
 
     update: func() {
-        me.valueChanged();
+       me._view.filter(me._localValue);
     },
-
-    valueChanged: func() {
-        me._view.filter(me.value);
-    }
 };
 
 var _createCompatObjectLookupHash = {
@@ -767,7 +743,8 @@ var _createCompatObject = func(type)
     }
 
     return gui.xml.Object.new({
-        parents: [widgetClass, XMLObjectBase]
+        parents: [widgetClass, XMLObjectBase],
+        _localValue: nil
     }, type);
 };
 

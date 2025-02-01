@@ -834,12 +834,7 @@
         <name>gradient_texture</name>
         <type>sampler-2d</type>
         <value type="int">2</value>
-          </uniform>
-          <uniform>
-            <name>swatch_size</name>
-            <type>int</type>
-            <value><use>xsize</use></value>
-          </uniform>
+      </uniform>
       <uniform>
         <name>colorMode</name>
         <type>int</type>

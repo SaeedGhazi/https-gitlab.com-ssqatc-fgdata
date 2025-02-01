@@ -108,27 +108,6 @@
 	<technique n="4">
 		<!-- Atmospheric scattering technique with model shader-->
 		<pass>
-			<texture-unit n="4">
-				<unit>4</unit>
-				<image>
-					<use>texture[4]/image</use>
-				</image>
-				<type>
-					<use>texture[4]/type</use>
-				</type>
-				<filter>
-					<use>texture[4]/filter</use>
-				</filter>
-				<wrap-s>
-					<use>texture[4]/wrap-s</use>
-				</wrap-s>
-				<wrap-t>
-					<use>texture[4]/wrap-t</use>
-				</wrap-t>
-				<internal-format>
-					<use>texture[4]/internal-format</use>
-				</internal-format>
-			</texture-unit>
 			<program>
 				<vertex-shader n="0">Shaders/building-model-ALS-ultra.vert</vertex-shader>
 				<attribute>
@@ -180,14 +159,6 @@
 					<name>attrib2</name>
 					<index>11</index>
 				</attribute>
-				<attribute>
-					<name>tangent</name>
-					<index>12</index>
-				</attribute>
-				<attribute>
-					<name>binormal</name>
-					<index>13</index>
-				</attribute>
 			</program>
 		</pass>
 	</technique>
@@ -211,14 +182,6 @@
 				<attribute>
 					<name>attrib2</name>
 					<index>11</index>
-				</attribute>
-				<attribute>
-					<name>tangent</name>
-					<index>12</index>
-				</attribute>
-				<attribute>
-					<name>binormal</name>
-					<index>13</index>
 				</attribute>
 			</program>
 		</pass>

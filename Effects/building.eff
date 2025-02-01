@@ -12,7 +12,7 @@
 			<internal-format>normalized</internal-format>
 		</texture>
 		<!-- Normal Map -->
-		<normalmap-enabled type="int"> 1 </normalmap-enabled>
+		<normalmap-enabled type="int"> 0 </normalmap-enabled>
 		<normalmap-dds type="int"> 0 </normalmap-dds>
 		<normalmap-tiling type="float"> 1.0 </normalmap-tiling>
 		<texture n="2">
@@ -100,11 +100,6 @@
 		<building-flag type="int">1</building-flag>
 	</parameters>
 
-	<generate>
-		<tangent type="int">12</tangent>
-		<binormal type="int">13</binormal>
-	</generate>
-
 	<technique n="4">
 		<!-- Atmospheric scattering technique with model shader-->
 		<pass>
@@ -125,14 +120,6 @@
 				<attribute>
 					<name>attrib2</name>
 					<index>11</index>
-				</attribute>
-				<attribute>
-					<name>tangent</name>
-					<index>12</index>
-				</attribute>
-				<attribute>
-					<name>binormal</name>
-					<index>13</index>
 				</attribute>
 			</program>
 		</pass>

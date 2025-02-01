@@ -118,6 +118,7 @@
         <property>/sim/rendering/shaders/skydome</property>
         <property>/sim/rendering/random-vegetation</property>
         <property>/sim/rendering/multi-sample-buffers</property>
+        <property>/sim/rendering/window-has-multi-sample-buffers</property>
 	<property>/sim/rendering/random-vegetation-shadows</property>
 	<less-equal>
            <value type="float">1.0</value>
@@ -630,6 +631,7 @@
         <property>/sim/rendering/shaders/skydome</property>
         <property>/sim/rendering/random-vegetation</property>
         <property>/sim/rendering/multi-sample-buffers</property>
+        <property>/sim/rendering/window-has-multi-sample-buffers</property>
 			  <less-equal>
            <value type="float">1.0</value>
 					 <float-property>/sim/rendering/multi-samples</float-property>

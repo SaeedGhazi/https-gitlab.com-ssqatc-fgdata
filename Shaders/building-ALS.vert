@@ -188,7 +188,7 @@ void main()
     vec4 ep = gl_ModelViewMatrixInverse * vec4(0.0,0.0,0.0,1.0);
 
     // and relative position to vector
-    relPos = gl_Vertex.xyz + gl_Color.xyz - ep.xyz;
+    relPos = position - ep.xyz;
 
     // unfortunately, we need the distance in the vertex shader, although the more accurate version
     // is later computed in the fragment shader again

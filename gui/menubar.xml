@@ -47,7 +47,8 @@
 				<script>gui.set_screenshotdir()</script>
 			</binding>
 		</item>
-
+		
+		<!-- TODO: Fix in 2024.1.2 as per https://gitlab.com/flightgear/flightgear/-/issues/3049
 		<item>
 			<name>video-control</name>
 			<binding>
@@ -55,6 +56,7 @@
 				<dialog-name>video-control</dialog-name>
 			</binding>
 		</item>
+		-->
 
 		<item>
 			<name>sound-config</name>

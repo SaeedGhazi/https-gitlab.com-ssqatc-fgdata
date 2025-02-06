@@ -234,31 +234,41 @@ var XMLObjectBase =
         if (me.live and me.property) {
             me.property.setValue(newValue);
         }
-
-        # this call to update might be excessive: it depends if we can rely on the widget
-        # implementation to update itself, before it tells us about a local change.
-        me.update();
     },
 
     valueChanged: func
     {
-        if (me._localValue == me.value)
-            return;
+        # if (me._localValue == me.value)
+        #     return;
 
-        me._localValue = me.value;
+        if (me.property) {
+            me._localValue = me.value;
+        }
+
         me.update();
+    },
+
+    _activateBindings: func
+    {
+        me.activateBindings();
     },
 
     apply: func()
     {
-        if (!me.property) {
+        # we must not apply() on live properties, since me.value is
+        # already in sync, but _localValue might not be, if a binding calls dialog-apply 
+        if (!me.property or me.live) {
             return;
         }
 
         if (me._localValue == me.value)
             return;
 
-        logprint(LOG_INFO, "Applying XML-Widget value to property ", me.property.getPath());
+        if (me._localValue == nil) {
+            debug.bt();
+            return;
+        }
+
         me.property.setValue(me._localValue);
     },
 
@@ -297,7 +307,7 @@ var XMLButton =
         me._view.visible = me.visible;
 
         # hook up the button to our bindings
-        me._view.listen("clicked", func  me.activateBindings(); );
+        me._view.listen("clicked", func  me._activateBindings(); );
         me._applyLayoutConfig(true);
 
         return me._view;
@@ -311,19 +321,21 @@ var XMLCheckbox =
 {
     show: func(viewParent)
     {
-        me._view = cwidgets.CheckBox.new(viewParent, canvas.style, {"text": me._configValue("label")});
+        me._view = cwidgets.CheckBox.new(viewParent, canvas.style, {
+            "text": me._configValue("label"),
+            "checked": me.value     # avoid toggled event on setting value
+        });
 
          # copy initial visiblity
         me._view.visible = me.visible;
-
-        me._view.listen("toggled", func(e) {
-            me._changeLocalValue(e.detail.checked);
-            me.activateBindings();
-        });
-
         me._layout = me._view;
         me._applyLayoutConfig(true);
         me.valueChanged();
+
+        me._view.listen("toggled", func(e) {
+            me._changeLocalValue(e.detail.checked);
+            me._activateBindings();
+        });
 
         return me._view;
     },
@@ -348,14 +360,14 @@ var XMLRadioButton =
          # copy initial visiblity
         me._view.visible = me.visible;
 
-        me._view.listen("toggled", func(e) {
-            me._changeLocalValue(e.detail.checked);
-            me.activateBindings();
-        });
-
         me._layout = me._view;
         me._applyLayoutConfig(true);
         me.valueChanged();
+
+        me._view.listen("toggled", func(e) {
+            me._changeLocalValue(e.detail.checked);
+            me._activateBindings();
+        });
 
         return me._view;
     },
@@ -397,6 +409,7 @@ var XMLLabel =
         if (v == nil) {
             v = me._label;
         }
+
         if (me._format) {
             me._view.setText(sprintf(me._format, v));
         } else {
@@ -498,18 +511,19 @@ var XMLSlider =
             "max-value": me._configDouble("max", 1),
             "step-size": me._configDouble("step", 0),
             "page-size": me._configDouble("page", 0),
+            "value":     me.value   # essential to avoid triggering our value-changed callback on init
         });
 
         # copy initial visiblity
         me._view.visible = me.visible;
-
-        me._view.listen("value-changed", func(e) {
-            me._changeLocalValue(e.detail.value);
-            me.activateBindings();
-        });
         me._layout = me._view;
         me._applyLayoutConfig();
         me.valueChanged();
+
+        me._view.listen("value-changed", func(e) {
+            me._changeLocalValue(e.detail.value);
+            me._activateBindings();
+        });
 
         return me._view;
     },
@@ -531,15 +545,18 @@ var XMLDial =
         me._view = cwidgets.Dial.new(viewParent, canvas.style, {
             "min-value": me._configDouble("min", 0),
             "max-value": me._configDouble("max", 1),
-            "wrap": me._configBool("wrap", 0),
+            "wrap":      me._configBool("wrap", 0),
+            "value":     me.value   # essential to avoid triggering our value-changed callback on init
         });
-        me._view.listen("value-changed", func(e) {
-            me._changeLocalValue(e.detail.value);
-            me.activateBindings();
-        });
+  
         me._layout = me._view;
         me._applyLayoutConfig();
         me.valueChanged();
+      
+        me._view.listen("value-changed", func(e) {
+            me._changeLocalValue(e.detail.value);
+            me._activateBindings();
+        });
 
         return me._view;
     },
@@ -564,13 +581,14 @@ var XMLTextEdit =
     show: func(viewParent)
     {
         me._view = cwidgets.LineEdit.new(viewParent, canvas.style, {});
-        me._view.listen("text-changed", func(e) {
-            me._changeLocalValue(e.detail.text);
-            me.activateBindings();
-        });
         me._layout = me._view;
         me._applyLayoutConfig();
         me.valueChanged();
+
+        me._view.listen("text-changed", func(e) {
+            me._changeLocalValue(e.detail.text);
+            me._activateBindings();
+        });
 
         return me._view;
     },
@@ -666,14 +684,15 @@ var XMLComboBox =
         foreach (var valueNode; me.config.getChildren("value")) {
             me._view.createItem(valueNode.getValue(), valueNode.getValue());
         }
-        me._view.listen("selected-item-changed", func(e) {
-            me._changeLocalValue(e.detail.value);
-            me.activateBindings();
-        });
-
+ 
         me._layout = me._view;
         me._applyLayoutConfig();
         me.valueChanged();
+
+       me._view.listen("selected-item-changed", func(e) {
+            me._changeLocalValue(e.detail.value);
+            me._activateBindings();
+        });
 
         return me._view;
     },
@@ -693,17 +712,18 @@ var XMLList = {
         foreach (var valueNode; me.config.getChildren("value")) {
             me._view.createItem(valueNode);
         }
+
+        me._layout = me._view;
+        me._applyLayoutConfig();
+        me.valueChanged();
+
         me._view.listen("selection-changed", func {
             var selection = me._view.getSelectedItems();
             if (size(selection)) {
                 me._changeLocalValue(selection[0].getData("text"));
             }
-            me.activateBindings();
+            me._activateBindings();
         });
-
-        me._layout = me._view;
-        me._applyLayoutConfig();
-        me.valueChanged();
 
         return me._view;
     },

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: James Turner <james@flightgear.org>
+#
+# SPDX-License-Identifier: GPL-2.0
+
+
+variables:
+
+  TEST_DATA_DIR: $CI_PROJECT_DIR/testFGData
+  BUNDLED_DATA_DIR: $CI_PROJECT_DIR/bundledFGData
+
+# minimal data for running FGTestSuite, keep this as small as possible
+# since we frequently copy it to the code builders
+create-test-data:
+  stage: deploy
+
+  script:
+    - mkdir $TEST_DATA_DIR
+    - cp *.xml $TEST_DATA_DIR
+    - cp version $TEST_DATA_DIR
+
+    - mkdir -p $TEST_DATA_DIR/AI/Aircraft
+    - cp AI/Aircraft/*.xml $TEST_DATA_DIR/AI/Aircraft/
+    - cp AI/*.xml $TEST_DATA_DIR/AI/
+
+    - mkdir -p $TEST_DATA_DIR/ATC/
+    - cp ATC/*.xml $TEST_DATA_DIR/ATC/
+
+    - cp -r Environment Nasal Timezone Navaids Airports Input $TEST_DATA_DIR
+
+  artifacts:
+    paths:
+      - $TEST_DATA_DIR
+

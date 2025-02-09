@@ -207,6 +207,8 @@ gui.widgets.TabWidget = {
 			die("tab with id '" ~ id ~ "' does not exist");
 		}
 
+		var tabKeys = keys(me._tabs);
+		var tabIndex = vecindex()
 		if (me._currentTabId == id) {
 			return; # no need to do anything
 		}
@@ -215,11 +217,12 @@ gui.widgets.TabWidget = {
 			me._tabButtons[me._currentTabId].setSelected(0);
 		}
 		me._tabButtons[id].setSelected();
-		foreach (var tabid; keys(me._tabs)) {
+		foreach (var tabid; tabKeys) {
 			me._tabs[tabid].setVisible(tabid == id);
 		}
 		me._currentTabId = id;
 		me._currentTab = me._tabs[id];
+      	me._trigger("selected-item-changed", {"index": tabIndex, "value": me._currentTabId});
 
 		return me.update();
 	},

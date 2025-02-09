@@ -58,7 +58,7 @@ var XMLDialog = {
     {
         logprint(LOG_INFO, "Dialog help requested");
         me.dialog().requestHelp();
-    }
+    },
 
     onBringToFront: func()
     {
@@ -338,7 +338,7 @@ var XMLButton =
         "reset":    50,
         # default weight for no role
         "apply":    150,
-        "accept"    200
+        "accept":   200
     },
 
         # return the ordering value based on the role and other datta
@@ -373,7 +373,7 @@ var XMLStandardButton =
         if (ws == "okay") {
             me._role = "accept";
             me._action = func { 
-                me.dialog().apply()
+                me.dialog().apply();
                 me.dialog().requestClose(); 
             };
         } elsif (ws == "cancel") {
@@ -971,8 +971,8 @@ var _createCompatObjectLookupHash = {
     "list": XMLList,
     "text": XMLLabel,
     "radio": XMLRadioButton,
-    "button-box", XMLButtonBox,
-    "tabs", XMLTabs
+    "button-box": XMLButtonBox,
+    "tabs": XMLTabs
 };
 
 # this is the callback function invoked by C++ to build Nasal peers

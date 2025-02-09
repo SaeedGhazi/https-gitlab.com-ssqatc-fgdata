@@ -208,7 +208,7 @@ gui.widgets.TabWidget = {
 		}
 
 		var tabKeys = keys(me._tabs);
-		var tabIndex = vecindex()
+		var tabIndex = vecindex(tabKeys, id);
 		if (me._currentTabId == id) {
 			return; # no need to do anything
 		}

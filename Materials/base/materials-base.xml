@@ -657,6 +657,7 @@
     <b>0.7</b>
     <a>1.0</a>
   </light-edge-color>
+  <light-model>Models/Transport/streetlamp-small.gltf</light-model>
 </material>
 
 <material n="3003">
@@ -679,6 +680,8 @@
   <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
   <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
   <light-edge-offset>false</light-edge-offset>
+  <light-edge-left>true</light-edge-left>
+  <light-edge-right>false</light-edge-right>
   <light-edge-color>
     <!-- Mercury Vapour -->
     <r>0.84</r>
@@ -686,6 +689,7 @@
     <b>1.0</b>
     <a>1.0</a>
   </light-edge-color>
+  <light-model>Models/Transport/streetlamp-large.gltf</light-model>
 </material>
 
 <material n="3004">

@@ -54,6 +54,7 @@ vec3 searchlight();
 vec3 landing_light(in float offset, in float offsetv);
 vec3 get_hazeColor(in float light_arg);
 vec3 filter_combined (in vec3 color) ;
+float Noise2D(in vec2 coord, in float wavelength);
 
 float luminance(vec3 color)
 {
@@ -99,43 +100,6 @@ else
 	{
 	return exp(- targ * targ - pow(targ,4.0));
 	}
-
-}
-
-float rand2D(in vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
-
-float simple_interpolate(in float a, in float b, in float x)
-{
-return a + smoothstep(0.0,1.0,x) * (b-a);
-}
-
-float interpolatedNoise2D(in float x, in float y)
-{
-      float integer_x    = x - fract(x);
-      float fractional_x = x - integer_x;
-
-      float integer_y    = y - fract(y);
-      float fractional_y = y - integer_y;
-
-      float v1 = rand2D(vec2(integer_x, integer_y));
-      float v2 = rand2D(vec2(integer_x+1.0, integer_y));
-      float v3 = rand2D(vec2(integer_x, integer_y+1.0));
-      float v4 = rand2D(vec2(integer_x+1.0, integer_y +1.0));
-
-      float i1 = simple_interpolate(v1 , v2 , fractional_x);
-      float i2 = simple_interpolate(v3 , v4 , fractional_x);
-
-      return simple_interpolate(i1 , i2 , fractional_y);
-}
-
-
-
-float Noise2D(in vec2 coord, in float wavelength)
-{
-return interpolatedNoise2D(coord.x/wavelength, coord.y/wavelength);
 
 }
 

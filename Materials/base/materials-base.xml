@@ -680,8 +680,8 @@
   <light-edge-angle-horizontal-deg>360</light-edge-angle-horizontal-deg>
   <light-edge-angle-vertical-deg>360</light-edge-angle-vertical-deg>
   <light-edge-offset>false</light-edge-offset>
-  <light-edge-left>true</light-edge-left>
-  <light-edge-right>false</light-edge-right>
+  <light-edge-left>false</light-edge-left>
+  <light-edge-right>true</light-edge-right>
   <light-edge-color>
     <!-- Mercury Vapour -->
     <r>0.84</r>

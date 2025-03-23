@@ -17,7 +17,7 @@
 			<menu>Translations/default/menu.xml</menu>
 			<sys>Translations/default/sys.xml</sys>
 			<tips>Translations/default/tips.xml</tips>
-			<atc>Translations/default/atc.xml</atc>
+			<atc>Translations/default/atc.no_translate.xml</atc>
 			<weather-scenarios>Translations/default/weather-scenarios.xml</weather-scenarios>
 		</strings>
 	</locale>

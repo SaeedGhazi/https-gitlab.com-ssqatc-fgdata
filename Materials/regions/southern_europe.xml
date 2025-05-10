@@ -556,4 +556,13 @@
     <bumpiness>0.3</bumpiness>
   </material>
 
+  <material>
+    <name>OSMBuildings</name>
+
+    <building-texture>Textures/Buildings/buildings-southern-europe.png</building-texture>
+    <building-lightmap>Textures/Buildings/buildings-southern-europe-lightmap.png</building-lightmap>
+    <building-normalmap>Textures/Buildings/buildings-southern-europe-normalmap.png</building-normalmap>
+    <building-reflectionmap>Textures/Buildings/buildings-southern-europe-reflectionmap.png</building-reflectionmap>
+  </material>
+
 </PropertyList>

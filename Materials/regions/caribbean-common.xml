@@ -6,6 +6,8 @@
   <!-- both towns and cities                                              -->
   <building-texture>Textures/Buildings/buildings-caribbean.png</building-texture>
   <building-lightmap>Textures/Buildings/buildings-caribbean-lightmap.png</building-lightmap>
+  <building-normalmap>Textures/Buildings/buildings-caribbean-normalmap.png</building-normalmap>
+  <building-reflectionmap>Textures/Buildings/buildings-caribbean-reflectionmap.png</building-reflectionmap>
   <building-small-min-floors>1</building-small-min-floors>
   <building-small-max-floors>2</building-small-max-floors>
   <building-small-max-width-m>20.0</building-small-max-width-m>

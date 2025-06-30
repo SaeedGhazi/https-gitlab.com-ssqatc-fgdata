@@ -378,7 +378,7 @@ command interface /autopilot/route-manager/input:
             <col>8</col>
             <halign>left</halign>
             <name>sid</name>
-            <property>/autopilot/route-manager/departure/sid</property>
+            <property>/autopilot/route-manager/departure/sid-with-trans</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/sids</properties>
 
@@ -451,7 +451,7 @@ command interface /autopilot/route-manager/input:
             <pref-width>120</pref-width>
             <halign>left</halign>
             <name>approach</name>
-            <property>/autopilot/route-manager/destination/approach</property>
+            <property>/autopilot/route-manager/destination/approach-with-trans</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/approaches</properties>
 
@@ -473,7 +473,7 @@ command interface /autopilot/route-manager/input:
             <col>8</col>
             <halign>left</halign>
             <name>star</name>
-            <property>/autopilot/route-manager/destination/star</property>
+            <property>/autopilot/route-manager/destination/star-with-trans</property>
             <editable>false</editable>
             <properties>/sim/gui/dialogs/route-manager/stars</properties>
 

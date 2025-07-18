@@ -460,7 +460,7 @@ var OverlaySelector = {
 #     selector.open();
 #
 var FileSelector = {
-    new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0, show_files=1) {
+    new: func(callback, title, button, pattern = nil, dir = "", file = "", dotfiles = 0, show_files=1, location="") {
 
 
         var usage = gui.FILE_DIALOG_OPEN_FILE;
@@ -476,7 +476,13 @@ var FileSelector = {
 
         m.set_title(title);
         m.set_button(button);
-        m.set_directory(dir);
+        if (location != "") {
+            m.set_location(location);
+        }
+        if (dir != "") {
+            m.set_directory(dir);
+        }
+        
         m.set_file(file);
         m.set_dotfiles(dotfiles);
         m.set_pattern(pattern);
@@ -496,6 +502,7 @@ var FileSelector = {
     set_file: func(file) { me._inner.placeholder = file },
     set_dotfiles: func(dot) { me._inner.show_hidden = dot },
     set_pattern: func(pattern) { me._inner.pattern = (pattern == nil) ? [] : pattern },
+    set_location: func(loc) { me._inner.location = loc },
 
     open: func() { me._inner.open(); },
     close: func() { me._inner.close(); },

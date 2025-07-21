@@ -2033,6 +2033,10 @@
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
           <target />
         </trans-unit>
+        <trans-unit id="tips/tip:19" translate="yes" approved="no">
+          <source>Love FlightGear? Donate to keep our infrastructure running at https://flightgear.org/donate</source>
+          <target />
+        </trans-unit>
       </group>
       <group restype="x-trolltech-linguist-context" resname="weather-scenarios">
         <trans-unit id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes" approved="no">

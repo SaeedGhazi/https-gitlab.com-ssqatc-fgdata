@@ -17,6 +17,9 @@ var _makeNode = func(n) {
 # Baseclass for all property controlled elements/objects
 #
 var PropertyElement = {
+  _CLASS: "canvas.PropertyElement",
+  _COUNTER:1,
+
   # Constructor
   #
   # @param node     Node to be used for element or vector [parent, type] for
@@ -39,8 +42,9 @@ var PropertyElement = {
       _node: node
     };
 
-    if( id != nil )
+    if ( id != nil ) {
       m.set("id", id);
+    }
 
     return m;
   },

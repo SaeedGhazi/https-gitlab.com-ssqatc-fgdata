@@ -55,6 +55,7 @@ var Tooltip = {
       view: size,
       placement: {
         type: "window",
+        id: "primary-tooltip",
         index: me._node.getIndex()
       },
       name: "Tooltip"
@@ -321,7 +322,7 @@ var Tooltip = {
   }
 };
 
-var tooltip = canvas.Tooltip.new([300, 100]);
+var tooltip = canvas.Tooltip.new([300, 100], 'primary-tooltip');
 tooltip.createCanvas();
 
 var innerSetTooltip = func(node)

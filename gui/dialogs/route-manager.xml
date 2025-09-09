@@ -120,11 +120,9 @@ command interface /autopilot/route-manager/input:
             var stars = dlg.getNode("stars", 1);
             var approaches = dlg.getNode("approaches", 1);
 
-            var updateRunways = func {
+            var updateDepartureRunways = func {
                 departureRunways.removeChildren("value");
-                destRunways.removeChildren("value");
-
-                var apt = flightplan().departure;
+                apt = flightplan().departure;
                 if (apt != nil) {
                     var i=0;
                     foreach (var rwy; keys(apt.runways)) {
@@ -133,7 +131,12 @@ command interface /autopilot/route-manager/input:
                     }
                 }
 
-                apt = flightplan().destination;
+                gui.dialog_update("route-manager", "departure-runway");
+            }
+
+            var updateArrivalRunways = func {
+                destRunways.removeChildren("value");
+                var apt = flightplan().destination;
                 if (apt != nil) {
                     var i=0;
                     foreach (var rwy; keys(apt.runways)) {
@@ -141,6 +144,8 @@ command interface /autopilot/route-manager/input:
                         i += 1;
                     }
                 }
+
+                gui.dialog_update("route-manager", "destination-runway");
             }
 
             var updateSIDs = func {
@@ -227,6 +232,12 @@ command interface /autopilot/route-manager/input:
                     return;
                 }
 
+                if (rwy == nil) {
+                    logprint(LOG_INFO, "no destination runway selected");
+                } else {
+                    logprint(LOG_INFO, "updateApproaches: destinatiom runway is:" ~ rwy.id);
+                }
+
                 var i=1;
                 approaches.getNode("value[0]", 1).setValue("(none)");
                 foreach (var s; apt.getApproachList(rwy)) {
@@ -261,14 +272,15 @@ command interface /autopilot/route-manager/input:
               if (fp.departure_runway == nil) {
                 var rwy = fp.departure.findBestRunwayForPos( geo.aircraft_position() );
                 fp.departure_runway = rwy;
-                logprint(LOG_INFO, "Selected runway:", rwy);
+                logprint(LOG_INFO, "Selected runway:", rwy.id);
               }
             }
 
         # initialise departure values based on current position
             initPosition();
 
-            updateRunways();
+            updateDepartureRunways();
+            updateArrivalRunways();
             updateSIDs();
             updateApproaches();
             updateSTARs();
@@ -280,12 +292,14 @@ command interface /autopilot/route-manager/input:
         </close>
 
         <departure-changed><![CDATA[
-            updateRunways();
+            logprint(LOG_INFO, "dialog updating departure info");
+            updateDepartureRunways();
             updateSIDs();
         ]]></departure-changed>
 
         <arrival-changed><![CDATA[
-            updateRunways();
+            logprint(LOG_INFO, "dialog updating arrival info");
+            updateArrivalRunways();
             updateApproaches();
             updateSTARs();
         ]]></arrival-changed>

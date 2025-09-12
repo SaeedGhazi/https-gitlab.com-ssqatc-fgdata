@@ -87,8 +87,6 @@ float rayleighPhase(in float cosTheta)
 
 void main()
 {
-
-
   vec3 shadedFogColor = vec3(0.55, 0.67, 0.88);
   float cosTheta = dot(normalize(eye), gl_LightSource[0].position.xyz);
  
@@ -337,20 +335,23 @@ color = mix(color, terrainHazeColor ,smoothstep(hazeBlendAngle + ctterrain, 0.0+
 
 // add the brightening of fog by lights
 
-    vec3 secondary_light = vec3 (0.0,0.0,0.0);
+  vec3 secondary_light = vec3 (0.0,0.0,0.0);
 
-    if (use_searchlight == 1)
-	{
-	secondary_light.rgb += searchlight();
-	}
-    if (use_landing_light == 1)
-	{
-	secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
-	}
-    if (use_alt_landing_light == 1)
-	{
-	secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
-	}
+  // macOS: disabling this block gets the basic sky rendering with ALS on Apple Silicon
+  // with this block enabled, the shader returns black
+  
+  //   if (use_searchlight == 1)
+	// {
+	// secondary_light.rgb += searchlight();
+	// }
+  //   if (use_landing_light == 1)
+	// {
+	// secondary_light += landing_light(landing_light1_offset, landing_light3_offset);
+	// }
+  //   if (use_alt_landing_light == 1)
+	// {
+	// secondary_light += landing_light(landing_light2_offset, landing_light3_offset);
+	// }
 
 
 
@@ -367,11 +368,9 @@ color = mix(hColor+secondary_light * fog_backscatter(avisibility),color, transmi
 // blur the upper skydome edge when we're outside the atmosphere
 
 float asf = smoothstep (75000.0, 90000.0, alt);
-
 float asf_corr = clamp((alt-115000.0)/45000.0, 0.0,1.0) * 0.08;
-
-
 color *= (1.0 - smoothstep( -0.12 -asf_corr, -0.06 - asf_corr, costheta) * asf);
+
 color = filter_combined(color);
 
 

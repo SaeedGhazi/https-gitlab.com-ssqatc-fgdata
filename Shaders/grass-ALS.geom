@@ -2,9 +2,12 @@
 #version 120
 #extension GL_EXT_geometry_shader4 : enable
 
-#define MAX_LAYERS 20
+// macOS: redcued the layout count to see if this impacts the
+// 'too many geometry outputs' error, but no impact.
+
+#define MAX_LAYERS 4
 #define MIN_LAYERS 2
-#define MAX_MINUS_MIN_LAYERS 18
+#define MAX_MINUS_MIN_LAYERS 2
 
 uniform float max_height;
 
@@ -18,6 +21,7 @@ uniform mat4 fg_LightMatrix_csm0;
 uniform mat4 fg_LightMatrix_csm1;
 uniform mat4 fg_LightMatrix_csm2;
 uniform mat4 fg_LightMatrix_csm3;
+
 varying out vec4 lightSpacePos[4];
 void setupShadows(vec4 eyeSpacePos)
 {

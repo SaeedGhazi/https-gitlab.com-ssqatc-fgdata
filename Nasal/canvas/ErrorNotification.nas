@@ -72,7 +72,7 @@ var ErrorNotification =
 
     me._text =
       root.createChild("text", "error-description")
-          .setText("An error occurred")
+          .setText(translate("error-popup-heading", "sys"))
           .setAlignment("left-top")
           .setFontSize(14)
           .setFont("LiberationFonts/LiberationSans-Bold.ttf")
@@ -87,15 +87,25 @@ var ErrorNotification =
 
   clicked: func()
   {
+    # always hide on click
     me.hideNow();
-    fgcommand("show-error-report", props.Node.new({ "index": me._reportIndex})); # should we show the current one?
+
+    # only show the report if we are a notification, not
+    # if we're a simple message
+    if (me._reportIndex >= 0) {
+      fgcommand("show-error-report", props.Node.new({ "index": me._reportIndex})); # should we show the current one?
+    }
   },
 
-  updateText: func()
+  updateText: func(msg = nil)
   {
-    var msg = getprop("/sim/error-report/display/category");
-    var clickForMoreMsg = "\n\nClick to show further details.";
-    me._text.setText(msg ~ clickForMoreMsg);
+    if (msg == nil) {
+      msg = getprop("/sim/error-report/display/category");
+      var clickForMoreMsg = translate("error-popup-click-for-more", "sys");
+      me._text.setText(msg ~ "\n\n" ~ clickForMoreMsg);
+    } else {
+      me._text.setText(msg);
+    }
     me._updateBounds();
   },
 
@@ -138,7 +148,11 @@ var ErrorNotification =
     me._reportIndex = index;
     me._hideTimer.stop();
     me.setBool("visible", 1);
-    me._hideTimer.start();
+
+    if (me._reportIndex >= 0) {
+      # auto hide for notifications but not for messages
+      me._hideTimer.start();
+    }
   },
 
   hideNow: func()
@@ -150,6 +164,12 @@ var ErrorNotification =
   _hideTimeout: func()
   {
     me.setBool("visible", 0);
+
+    # if the popup auto-hides, dismiss the report as well, or we will
+    # never process any future report
+    if (me._reportIndex >= 0) {
+      fgcommand("dismiss-error-report");
+    }
   }
 };
 
@@ -168,7 +188,21 @@ var showErrorNotification = func(node)
     errorNotificationCanvas.show(reportIndex);
 }
 
+var showErrorMessage = func(node)
+{
+    if (errorNotificationCanvas == nil) {
+        # create instance
+        errorNotificationCanvas = canvas.ErrorNotification.new();
+        errorNotificationCanvas._createCanvas();
+    }
+
+    var msg = node.getNode("message").getValue();
+    errorNotificationCanvas.updateText(msg);
+    errorNotificationCanvas.show(-1);
+}
+
 addcommand("show-error-notification-popup", showErrorNotification);
+addcommand("show-error-message-popup", showErrorMessage);
 
 # called from unload() in api.nas
 var unloadErrorNotification = func

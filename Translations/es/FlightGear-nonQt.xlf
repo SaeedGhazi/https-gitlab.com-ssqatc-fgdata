@@ -1787,9 +1787,13 @@
           <source>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</source>
           <target>El joystick (dispositibo de entrada) '%VALUE' no se pudo cargar correctamente. Esto habitualmente significa que su archivo de configuración es incorrecto.</target>
         </trans-unit>
-        <trans-unit id="sys/error-category-multiplayer:0" translate="yes" approved="yes">
-          <source>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</source>
-          <target>Fallo al cargar un modelo para otro piloto (vía multijugador). El otro piloto aparecerá como un modelo por defecto. (Puede deshabilitar estos errores desde el diálogo de ajustes de multijugador)</target>
+        <trans-unit id="sys/error-category-multiplayer:0" translate="yes" approved="no">
+          <source>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog.)</source>
+          <target state="needs-review-translation">Fallo al cargar un modelo para otro piloto (vía multijugador). El otro piloto aparecerá como un modelo por defecto. (Puede deshabilitar estos errores desde el diálogo de ajustes de multijugador)</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-network:0" translate="yes" approved="no">
+          <source>Network errors occurred while downloading data. Check your network connection is working correctly.</source>
+          <target state="new" />
         </trans-unit>
         <trans-unit id="sys/error-category-out-of-memory:0" translate="yes" approved="yes">
           <source>Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</source>
@@ -1803,13 +1807,17 @@
           <source>Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</source>
           <target>Han ocurrido problemas al cargar los efectos visuales (sombreado). Esto puede que determinados objetos no se visualicen o aparezcan incorrectamente. Esto puede ser solucionado algunas veces cambiando los ajustes del renderizador dentro de FlightGear, u ocasionalmente actualizando los drivers de su tarjeta gráfica.</target>
         </trans-unit>
-        <trans-unit id="sys/error-category-terrasync:0" translate="yes" approved="yes">
-          <source>Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</source>
-          <target>El escenario descargado via TerraSync no se está cargando correctamente. Esto normalmente indica un problema con la conexión de red o con el disco local.</target>
+        <trans-unit id="sys/error-category-shared-models:0" translate="yes" approved="no">
+          <source>The shared models data is missing or incomplete. This means all scenery will be missing some 3D models. To fix this, please enable TerraSync or download the current shared models data from https://www.flightgear.org/scenery/shared-models</source>
+          <target state="new" />
         </trans-unit>
-        <trans-unit id="sys/error-category-traffic:0" translate="yes" approved="yes">
-          <source>Problems occured loading simulated aircaft traffic: some traffic may not appear.</source>
-          <target>Problemas al cargar tráfico de aeronaves simuladas: algún tráfico puede no aparecer.</target>
+        <trans-unit id="sys/error-category-terrasync:0" translate="yes" approved="no">
+          <source>Scenery downloaded via TerraSync is not loading correctly. This usually indicates a problem with your network connection or local disk.</source>
+          <target state="needs-review-translation">El escenario descargado via TerraSync no se está cargando correctamente. Esto normalmente indica un problema con la conexión de red o con el disco local.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-traffic:0" translate="yes" approved="no">
+          <source>Problems occurred loading simulated aircraft traffic: some traffic may not appear.</source>
+          <target state="needs-review-translation">Problemas al cargar tráfico de aeronaves simuladas: algún tráfico puede no aparecer.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-unknown:0" translate="yes" approved="yes">
           <source>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</source>
@@ -1831,9 +1839,19 @@
           <source>Shader / Effect problems</source>
           <target>Problemas de Sombreado / Efecto</target>
         </trans-unit>
-        <trans-unit id="sys/error-next-steps:0" translate="yes" approved="yes">
-          <source>This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</source>
-          <target>Este diálogo está en desarrollo. La información incluida anteriormente puede no ser completamente correcta, así que por favor compruebe la información detallada a continuación y aporte sus comentarios si algo parece incorrecto. Por favor, incluya toda la información siguiente, así como el mensaje anterior.</target>
+        <trans-unit id="sys/error-next-steps:0" translate="yes" approved="no">
+          <source>This dialog is work-in-progress. The information shown may not be fully correct, so please check the detailed information (below) and give feedback if something seems wrong.</source>
+          <target state="needs-review-translation">Este diálogo está en desarrollo. La información incluida anteriormente puede no ser completamente correcta, así que por favor compruebe la información detallada a continuación y aporte sus comentarios si algo parece incorrecto. Por favor, incluya toda la información siguiente, así como el mensaje anterior.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-popup-click-for-more:0" translate="yes" approved="no">
+          <source>Click to show further details.</source>
+          <target state="new" />
+          <note from="developer" annotates="source">Added to error message popup notification to prompt user how to get more info</note>
+        </trans-unit>
+        <trans-unit id="sys/error-popup-heading:0" translate="yes" approved="no">
+          <source>An error occurred</source>
+          <target state="new" />
+          <note from="developer" annotates="source">Title of the error message/popup window</note>
         </trans-unit>
         <trans-unit id="sys/error-scenery-load:0" translate="yes" approved="yes">
           <source>Errors loading scenery</source>
@@ -1963,6 +1981,18 @@
           <source>Settings migrated</source>
           <target>Ajustes migrados</target>
         </trans-unit>
+        <trans-unit id="sys/shared-models-missing:0" translate="yes" approved="no">
+          <source>The shared scenery models are not installed correctly. This will cause missing elements in all scenery. Enable automatic scenery downloading, or download the shared models from https://www.flightgear.org/scenery/shared-models and add them to your scenery list.</source>
+          <target state="new" />
+        </trans-unit>
+        <trans-unit id="sys/shared-models-missing-terrasync:0" translate="yes" approved="no">
+          <source>The shared scenery models have not downloaded correctly. This will cause missing elements in all scenery. Automatic scenery downloading is enabled, check your network connection is working as expected.</source>
+          <target state="new" />
+        </trans-unit>
+        <trans-unit id="sys/shared-models-missing-title:0" translate="yes" approved="no">
+          <source>Missing shared models</source>
+          <target state="new" />
+        </trans-unit>
         <trans-unit id="sys/units-kbytes:0" translate="yes" approved="yes">
           <source>KB</source>
           <target>KB</target>
@@ -2060,6 +2090,10 @@
         <trans-unit id="tips/tip:18" translate="yes" approved="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
           <target>Presione Tab para mover el punto de vista con el ratón y mueva la rueda de desplazamiento para hacer zoom</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:19" translate="yes" approved="no">
+          <source>Love FlightGear? Donate to keep our infrastructure running at https://flightgear.org/donate</source>
+          <target state="new" />
         </trans-unit>
       </group>
       <group restype="x-trolltech-linguist-context" resname="weather-scenarios">

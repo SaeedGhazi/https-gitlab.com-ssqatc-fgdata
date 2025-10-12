@@ -1770,8 +1770,12 @@
         <note from="translator">Le « loaded » semble incorrect.</note>
       </trans-unit>
       <trans-unit id="sys/error-category-multiplayer:0" approved="yes">
-        <source xml:space="preserve">Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</source>
-        <target xml:space="preserve">Le chargement de modèle d&apos;aéronef pour un autre pilote en multi-joueurs a échoué. Le modèle par défaut va être utilisé. Vous pouvez désactiver l&apos;affichage de ces erreurs depuis la boîte de dialogue « Paramètres multijoueurs ».</target>
+        <source xml:space="preserve">Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog.)</source>
+        <target xml:space="preserve">Le chargement de modèle d&apos;aéronef pour un autre pilote (via le mode multi-joueurs) a échoué. Le modèle par défaut va être utilisé pour l&apos;autre pilote. (Vous pouvez désactiver l&apos;affichage de ces erreurs depuis la boîte de dialogue « Paramètres multijoueurs ».)</target>
+      </trans-unit>
+      <trans-unit id="sys/error-category-network:0" approved="yes">
+        <source xml:space="preserve">Network errors occurred while downloading data. Check your network connection is working correctly.</source>
+        <target xml:space="preserve">Des erreurs liées au réseau se sont produites lors du téléchargement des données. Veuillez vérifier que votre connexion réseau fonctionne correctement.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-out-of-memory:0" approved="yes">
         <source xml:space="preserve">Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</source>
@@ -1785,12 +1789,16 @@
         <source xml:space="preserve">Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</source>
         <target xml:space="preserve">Des problèmes ont été rencontrés lors du chargement d&apos;effets visuels (“shaders”). Ceci peut rendre des objets invisibles ou les faire afficher de manière incorrecte. Ces problèmes peuvent parfois être corrigés en modifiant les paramètres de rendu de FlightGear ou, occasionnellement, en mettant à jour les pilotes de la carte graphique.</target>
       </trans-unit>
+      <trans-unit id="sys/error-category-shared-models:0" approved="yes">
+        <source xml:space="preserve">The shared models data is missing or incomplete. This means all scenery will be missing some 3D models. To fix this, please enable TerraSync or download the current shared models data from https://www.flightgear.org/scenery/shared-models</source>
+        <target xml:space="preserve">Les données de modèles partagés manquent ou sont incomplètes. Ceci implique que certains modèles seront manquants dans les scènes (partout où ils sont utilisés). Pour corriger ce problème, activez TerraSync ou téléchargez depuis https://www.flightgear.org/scenery/shared-models la version actuelle des données de modèles partagés.</target>
+      </trans-unit>
       <trans-unit id="sys/error-category-terrasync:0" approved="yes">
-        <source xml:space="preserve">Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</source>
+        <source xml:space="preserve">Scenery downloaded via TerraSync is not loading correctly. This usually indicates a problem with your network connection or local disk.</source>
         <target xml:space="preserve">Les scènes téléchargées avec TerraSync ne se chargent pas correctement. Ceci est généralement dû à des problèmes de connexion réseau ou de disque dur local.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-traffic:0" approved="yes">
-        <source xml:space="preserve">Problems occured loading simulated aircaft traffic: some traffic may not appear.</source>
+        <source xml:space="preserve">Problems occurred loading simulated aircraft traffic: some traffic may not appear.</source>
         <target xml:space="preserve">Des problèmes ont été rencontrés en essayant de charger le trafic aérien simulé ; une partie du trafic risque de ne pas apparaître.</target>
       </trans-unit>
       <trans-unit id="sys/error-category-unknown:0" approved="yes">
@@ -1814,8 +1822,18 @@
         <target xml:space="preserve">Problèmes avec un effet ou un “shader”</target>
       </trans-unit>
       <trans-unit id="sys/error-next-steps:0" approved="yes">
-        <source xml:space="preserve">This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</source>
-        <target xml:space="preserve">Cette boîte de dialogue est en cours d&apos;élaboration. Il se peut que les informations ci-dessus ne soient pas parfaitement correctes ; merci de bien vouloir vérifier les informations détaillées ci-dessous et faire un retour si quelque chose semble incorrect. Merci d&apos;y inclure la totalité des informations ci-dessous, ainsi que le message ci-dessus.</target>
+        <source xml:space="preserve">This dialog is work-in-progress. The information shown may not be fully correct, so please check the detailed information (below) and give feedback if something seems wrong.</source>
+        <target xml:space="preserve">Cette boîte de dialogue est en cours d&apos;élaboration. Il se peut que les informations ci-dessous ne soient pas parfaitement correctes ; merci de bien vouloir les vérifier et signaler aux développeurs si quelque chose vous semble incorrect.</target>
+      </trans-unit>
+      <trans-unit id="sys/error-popup-click-for-more:0" approved="yes">
+        <source xml:space="preserve">Click to show further details.</source>
+        <target xml:space="preserve">Veuillez cliquer pour plus de détails.</target>
+        <note annotates="source" from="developer">Added to error message popup notification to prompt user how to get more info</note>
+      </trans-unit>
+      <trans-unit id="sys/error-popup-heading:0" approved="yes">
+        <source xml:space="preserve">An error occurred</source>
+        <target xml:space="preserve">Une erreur s&apos;est produite</target>
+        <note annotates="source" from="developer">Title of the error message/popup window</note>
       </trans-unit>
       <trans-unit id="sys/error-scenery-load:0" approved="yes">
         <source xml:space="preserve">Errors loading scenery</source>
@@ -1946,6 +1964,19 @@
         <source xml:space="preserve">Settings migrated</source>
         <target xml:space="preserve">Paramètres migrés</target>
       </trans-unit>
+      <trans-unit id="sys/shared-models-missing:0" approved="yes">
+        <source xml:space="preserve">The shared scenery models are not installed correctly. This will cause missing elements in all scenery. Enable automatic scenery downloading, or download the shared models from https://www.flightgear.org/scenery/shared-models and add them to your scenery list.</source>
+        <target xml:space="preserve">Les modèles de scènes partagés ne sont pas installés correctement. Certains éléments seront donc manquants dans les scènes (partout où ils sont utilisés). Activez le téléchargement automatique des scènes, ou bien téléchargez les modèles partagés depuis https://www.flightgear.org/scenery/shared-models et ajoutez-les à votre liste des scènes.</target>
+        <note from="translator">La fin (“add them to your scenery list”) est un peu approximative, sans doute exprès pour ne pas noyer le lecteur dans les détails.</note>
+      </trans-unit>
+      <trans-unit id="sys/shared-models-missing-terrasync:0" approved="yes">
+        <source xml:space="preserve">The shared scenery models have not downloaded correctly. This will cause missing elements in all scenery. Automatic scenery downloading is enabled, check your network connection is working as expected.</source>
+        <target xml:space="preserve">Les données de modèles partagés n&apos;ont pu être correctement téléchargées. Certains éléments seront donc manquants dans les scènes (partout où ils sont utilisés). Le téléchargement automatique des scènes étant activé, veuillez vérifier que votre connexion réseau fonctionne correctement.</target>
+      </trans-unit>
+      <trans-unit id="sys/shared-models-missing-title:0" approved="yes">
+        <source xml:space="preserve">Missing shared models</source>
+        <target xml:space="preserve">Modèles partagés manquants</target>
+      </trans-unit>
       <trans-unit id="sys/units-kbytes:0" approved="yes">
         <source xml:space="preserve">KB</source>
         <target xml:space="preserve">Ko</target>
@@ -2043,6 +2074,10 @@
       <trans-unit id="tips/tip:18" approved="yes">
         <source xml:space="preserve">Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
         <target xml:space="preserve">Appuyez plusieurs fois sur Tab pour déplacer le point de vue avec la souris (on peut alors zoomer avec la molette)</target>
+      </trans-unit>
+      <trans-unit id="tips/tip:19" approved="yes">
+        <source xml:space="preserve">Love FlightGear? Donate to keep our infrastructure running at https://flightgear.org/donate</source>
+        <target xml:space="preserve">Vous aimez FlightGear ? Merci de faire un don sur https://flightgear.org/donate pour contribuer au maintien de notre infrastructure.</target>
       </trans-unit>
     </group>
     <group restype="x-trolltech-linguist-context" resname="weather-scenarios">

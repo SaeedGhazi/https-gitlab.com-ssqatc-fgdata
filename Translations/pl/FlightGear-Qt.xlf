@@ -2472,7 +2472,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg440" approved="yes">
         <source xml:space="preserve">Loading point-of-interest data</source>
-        <target xml:space="preserve">Ładowanie danych punktów zainteresowań (POI)</target>
+        <target xml:space="preserve">Wczytywanie danych punktów zainteresowań (POI)</target>
         <context-group purpose="location"><context context-type="linenumber">107</context></context-group>
       </trans-unit>
       <trans-unit id="_msg441" approved="yes">
@@ -2494,7 +2494,7 @@ Lokalna ścieżka: %2</target>
       </trans-unit>
       <trans-unit id="_msg444" approved="yes">
         <source xml:space="preserve">If you are sure another copy is not running on this computer, you can choose to reset the lock file, and run this copy as normal. Alternatively, you can close this copy of the software.</source>
-        <target xml:space="preserve">Jeśli jesteś pewien/na, że inna kopia programu nie jest uruchomiona na tym komputerze, to możesz wybrać opcję usunięcia pliku blokady i uruchomić aplikację normalnie. Alternatywnie, możesz zamknąć tę kopię programu.</target>
+        <target xml:space="preserve">Jeśli masz pewność, że inna kopia programu nie jest uruchomiona na tym komputerze, to możesz wybrać opcję usunięcia pliku blokady i uruchomić aplikację normalnie. Alternatywnie, możesz zamknąć tę kopię programu.</target>
         <context-group purpose="location"><context context-type="linenumber">768</context></context-group>
       </trans-unit>
     </group>

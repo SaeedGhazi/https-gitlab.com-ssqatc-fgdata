@@ -808,7 +808,7 @@
       </trans-unit>
       <trans-unit id="options/freeze-desc:0" approved="yes">
         <source xml:space="preserve">Enable/Disable start in a frozen state</source>
-        <target xml:space="preserve">Włącz/wyłącz rozpoczęcie w stanie zapauzowanym.</target>
+        <target xml:space="preserve">Włącz/wyłącz rozpoczęcie w stanie pauzy.</target>
       </trans-unit>
       <trans-unit id="options/fuel-freeze-desc:0" approved="yes">
         <source xml:space="preserve">Enable/Disable fuel consumption freeze</source>
@@ -1592,7 +1592,7 @@
       </trans-unit>
       <trans-unit id="sys/error-xml-load-command:0" approved="yes">
         <source xml:space="preserve">Scripted loading of XML failed</source>
-        <target xml:space="preserve">Oskryptowane wczytywanie XML nie powiodlo sie</target>
+        <target xml:space="preserve">Oskryptowane wczytywanie XML-a nie powiodlo sie</target>
       </trans-unit>
       <trans-unit id="sys/error-xml-model-load:0" approved="yes">
         <source xml:space="preserve">Errors loading model XML</source>
@@ -1628,7 +1628,7 @@
       </trans-unit>
       <trans-unit id="sys/loading-aircraft:0" approved="yes">
         <source xml:space="preserve">loading aircraft</source>
-        <target xml:space="preserve">wczytywanie stateku powietrznego</target>
+        <target xml:space="preserve">wczytywanie statku powietrznego</target>
       </trans-unit>
       <trans-unit id="sys/loading-aircraft-list:0" approved="yes">
         <source xml:space="preserve">loading aircraft list</source>
@@ -1932,7 +1932,7 @@
       </trans-unit>
       <trans-unit id="weather-scenarios/warm-sector-desc:0" approved="yes">
         <source xml:space="preserve">A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
-        <target xml:space="preserve">Ciepły sektor, charakteryzujący się wysoką wilgotnością powietrza i zamgleniem sięgającym dużych wysokości, poza tym w dużej mierze konwekcyjnym rozwojem chmur.</target>
+        <target xml:space="preserve">Ciepły sektor, cechujący się wysoką wilgotnością powietrza i zamgleniem sięgającym dużych wysokości, przy czym rozwój chmur jest głównie konwekcyjny.</target>
       </trans-unit>
       <trans-unit id="weather-scenarios/warm-sector-name:0" approved="yes">
         <source xml:space="preserve">Warm sector</source>

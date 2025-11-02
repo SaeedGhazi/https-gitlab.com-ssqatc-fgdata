@@ -529,6 +529,7 @@ Started September 2000 by David Megginson, david@megginson.com
         <threads type="int" userarchive="y">4</threads>
       </database-pager>
     </rendering>
+    <thread-cpu-affinity type="string">none</thread-cpu-affinity> <!-- https://gitlab.com/flightgear/flightgear/-/issues/2787 -->
     <vr>
       <depth-info type="bool" userarchive="y">true</depth-info>
       <enabled type="bool" userarchive="y">false</enabled>

@@ -256,7 +256,7 @@ define(
                     self.dragOwnAircraft = ko.observable(true);
 
                     self.setAircraftMarkerCursor = function(cursorStyle) {
-                        const el = self.aircraftMarker.getElement();
+                        const el = self.aircraftMarker._icon || null;
                         if (el) {
                             el.style.cursor = cursorStyle;
                         }

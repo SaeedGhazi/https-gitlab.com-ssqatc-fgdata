@@ -7,6 +7,7 @@ out float flogz;
 out vec4 ap_color;
 out vec3 texcoord;
 out vec4 vs_pos;
+out vec4 ws_pos;
 
 uniform mat4 osg_ModelViewMatrix;
 uniform mat4 osg_ModelViewProjectionMatrix;
@@ -22,7 +23,6 @@ float logdepth_prepare_vs_depth(float z);
 
 void main()
 {
-    vec4 ws_pos;
     gl_Position = osg_ModelViewProjectionMatrix * pos;
     vs_pos = osg_ModelViewMatrix * pos;
     ws_pos = osg_ViewMatrixInverse * vs_pos;

@@ -111,7 +111,9 @@
         <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/noise.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/logarithmic_depth.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/sun.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/mvr.frag</fragment-shader>
         <attribute>

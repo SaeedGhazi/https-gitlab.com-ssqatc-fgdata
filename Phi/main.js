@@ -250,4 +250,11 @@ require([
         }, 1000);
     });
 
+    // Fix for prevent the page from refreshing when you click on the spinner
+    // button (buttons next to inputs to increase/decrease values). The spinner
+    // button is <a> without href, so it will refresh the page and for some
+    // reason the jQuery UI itself doesn't prevent it.
+    jquery(document).on('click', '.ui-spinner-button', function(event) {
+        event.preventDefault();
+    });
 });

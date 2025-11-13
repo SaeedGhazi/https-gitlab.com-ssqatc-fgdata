@@ -267,3 +267,32 @@ var MainWindow = {
 
 setlistener("/sim/startup/xsize", MainWindow._callSizeChangedCallbacks, 1);
 setlistener("/sim/startup/ysize", MainWindow._callSizeChangedCallbacks, 1);
+
+var TestPangoText = {
+    new: func()
+    {
+        me.window = canvas.Window.new([400, 100], "dialog")
+						.setTitle("Pango text test");
+
+        var cv = me.window.getCanvas(1);
+        cv.setColorBackground(canvas.style.getColor("bg_color"));
+        me.root = cv.createGroup();
+        me.root.createChild("text", "")
+                        .setText("Hello <b>World</b> <big>BIG</big> <red>RED</red>")
+                        .setAlignment("left-top")
+                        .setFontSize(14)
+                        .setFont("LiberationFonts/LiberationSans-Bold.ttf")
+                        .setColor(0,0,1)
+                        .setTranslation(10, 10);
+        me.root.createChild("pangotext", "pangotext")
+                        .setMarkup("Hello")
+                        .setAlignment("left-top")
+                        .setFont("LiberationSans")
+                        .setForeground(1, 1, 0)
+                        .setBackground(1,0,1)
+                        .show()
+                        .setTranslation(10, 30);
+
+    return me;
+  }
+};

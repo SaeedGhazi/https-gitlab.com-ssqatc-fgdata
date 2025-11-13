@@ -283,6 +283,16 @@
                 <module>canvas</module>
             </binding>
         </button>
+        <button>
+            <row>1</row>
+            <col>2</col>
+            <halign>fill</halign>
+            <legend>Pango Text Test</legend>
+            <binding>
+                <command>nasal</command>
+                <script>globals.TestPangoText.new()</script>
+            </binding>
+        </button>
     </group>
 
     <group>

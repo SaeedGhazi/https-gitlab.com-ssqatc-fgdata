@@ -206,7 +206,7 @@ var updateConfig = func() {
 
 	<text>
 	  <halign>left</halign>
-	  <label>    Your selection will take effect immediately.</label>
+	  <label>      Your selection will take effect immediately.</label>
   </text>
 
 	<text>
@@ -340,7 +340,7 @@ var updateConfig = func() {
       <text>
         <row>0</row>
         <col>3</col>
-        <label>Inverted?</label>
+        <label>Invert Axis</label>
       </text>
 
 

@@ -192,7 +192,7 @@
             </binding>
         </button>
         <button>
-            <legend>Device dialog</legend>
+            <legend>Device Dialog</legend>
             <enable>
                 <property>/sim/gui/dialogs/input-config-select/has-device-dialog</property>
             </enable>

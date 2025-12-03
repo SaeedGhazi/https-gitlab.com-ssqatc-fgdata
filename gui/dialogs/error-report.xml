@@ -8,18 +8,30 @@
 	<layout>vbox</layout>
 	<resizable>true</resizable>
 	
-	<pref-width>700</pref-width>
+	<pref-width>900</pref-width>
 
 
 	<group>
 		<layout>hbox</layout>
-		<empty><stretch>1</stretch></empty>
 
 		<text>
 			<label>Error Report</label>
 		</text>
 
 		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<legend>X</legend>
+			<key>Esc</key>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
+			<binding>
+				<command>dismiss-error-report</command>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
 	</group>
 
 	<hrule/>

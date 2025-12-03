@@ -173,7 +173,7 @@
         </button>
         <button>
             <name>hid-config</name>
-            <legend>HID config</legend>
+            <legend>HID Config</legend>
             <enable>
                 <not><property>/sim/input/no-hid-input</property></not>
             </enable>

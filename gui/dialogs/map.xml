@@ -289,11 +289,10 @@ command interface /autopilot/route-manager/input:
 
             <button>
                 <name>clear-history</name>
-                <legend>Clear Flight History</legend>
-                <pref-width>100</pref-width>
-                <default>true</default>
+                <legend>Clear History</legend>
+                <pref-width>120</pref-width>
                 <binding>
-                  <command>dialog-close</command>
+                  <command>clear-flight-history</command>
                 </binding>
             </button>
 

@@ -271,7 +271,8 @@ setlistener("/sim/startup/ysize", MainWindow._callSizeChangedCallbacks, 1);
 var TestPangoText = {
     new: func()
     {
-        me.window = canvas.Window.new([400, 100], "dialog")
+        me.window = canvas.Window.new([1000, 700], "dialog")
+                        .set("resize", 1)
 						.setTitle("Pango text test");
 
         var cv = me.window.getCanvas(1);

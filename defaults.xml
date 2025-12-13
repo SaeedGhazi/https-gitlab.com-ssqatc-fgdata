@@ -568,6 +568,7 @@ Started September 2000 by David Megginson, david@megginson.com
         </night-vision>
         <debug>
           <display-ev100 type="bool">false</display-ev100>
+          <show-clouds type="bool">false</show-clouds>
           <show-gbuffer type="bool">false</show-gbuffer>
           <show-shadow-cascades type="bool">false</show-shadow-cascades>
           <show-histogram type="bool">false</show-histogram>
@@ -575,6 +576,24 @@ Started September 2000 by David Megginson, david@megginson.com
           <histogram-color type="bool">true</histogram-color>
           <show-aerial-perspective type="bool">false</show-aerial-perspective>
         </debug>
+        <clouds>
+          <detailed-voxel-field-width type="int">1024</detailed-voxel-field-width>
+          <detailed-voxel-field-height type="int">1024</detailed-voxel-field-height>
+          <detailed-voxel-size-m type="int">10</detailed-voxel-size-m>
+          <rough-voxel-field-width type="int">128</rough-voxel-field-width>
+          <rough-voxel-field-height type="int">128</rough-voxel-field-height>
+          <rough-voxel-size-m type="int">800</rough-voxel-size-m>
+          <direct-intensity-scale type="float">0.000005</direct-intensity-scale>
+          <ambient-intensity-scale type="float">0.00005</ambient-intensity-scale>
+          <debug>
+            <height type="float">28</height>
+            <width type="float">58</width>
+            <bottom-type type="float">1.0</bottom-type>
+            <top-type type="float">1.0</top-type>
+            <density type="float">1.0</density>
+            <erosion type="float">0.0</erosion>
+          </debug>
+        </clouds>
       </hdr>
 
       <database-pager>

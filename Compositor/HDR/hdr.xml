@@ -1106,6 +1106,10 @@
       <unit>12</unit>
       <buffer>transmittance</buffer>
     </binding>
+    <binding>
+      <unit>14</unit>
+      <buffer>prev-luminance</buffer>
+    </binding>
     <attachment>
       <component>color0</component>
       <buffer>clouds</buffer>

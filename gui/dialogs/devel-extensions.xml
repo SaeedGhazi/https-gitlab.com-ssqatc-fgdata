@@ -506,7 +506,7 @@
 			<col>1</col>
 			<halign>fill</halign>
 			<min>0.0</min>
-			<max>0.0001</max>
+			<max>4.0</max>
 			<live>true</live>
 			<property>/sim/rendering/hdr/clouds/ambient-intensity-scale</property>
             <binding>
@@ -538,7 +538,7 @@
 			<col>1</col>
 			<halign>fill</halign>
 			<min>0.0</min>
-			<max>0.00001</max>
+			<max>4.0</max>
 			<live>true</live>
 			<property>/sim/rendering/hdr/clouds/direct-intensity-scale</property>
             <binding>

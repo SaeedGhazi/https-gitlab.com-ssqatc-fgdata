@@ -583,8 +583,8 @@ Started September 2000 by David Megginson, david@megginson.com
           <rough-voxel-field-width type="int">128</rough-voxel-field-width>
           <rough-voxel-field-height type="int">128</rough-voxel-field-height>
           <rough-voxel-size-m type="int">800</rough-voxel-size-m>
-          <direct-intensity-scale type="float">0.000005</direct-intensity-scale>
-          <ambient-intensity-scale type="float">0.00005</ambient-intensity-scale>
+          <direct-intensity-scale type="float">2.5</direct-intensity-scale>
+          <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
           <debug>
             <height type="float">28</height>
             <width type="float">58</width>

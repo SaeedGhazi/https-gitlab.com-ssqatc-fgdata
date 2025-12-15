@@ -49,16 +49,15 @@ vec3 get_world_space_from_depth(vec2 uv, float depth);
 
 
 const int MAX_MARCHING_STEPS = 500;
+const int MAX_LIGHT_STEPS = 50;
 const float MIN_DIST = 0.000;
 const float MAX_DIST = 2.0;
 const float EPSILON = 0.0001;
-const float IN_CLOUD_STEPS = 1;
-const float IN_CLOUD_STEP_SIZE = 1 / IN_CLOUD_STEPS / voxel_field_size;
+const float IN_CLOUD_STEP_SIZE = 1 / voxel_field_size;
+const float IN_CLOUD_SUN_RAY_STEP_SIZE = 1 / voxel_field_size;
 
-const float IN_CLOUD_SUN_RAY_STEPS = 1;
-const float IN_CLOUD_SUN_RAY_STEP_SIZE = 1 / IN_CLOUD_SUN_RAY_STEPS / voxel_field_size;
 
-const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.2;
+const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.3;
 
 //
 // Function to erode a value given an erosion amount. A simplified version of SetRange.
@@ -109,8 +108,7 @@ float calculateDensity(vec3 samplePoint) {
         float billowy_noise = mix(noise.b * 0.3, noise.a * 0.3, billowy_type_gradient);
 
         // Define Noise composite: blend to wispy depending on the cloud type
-        float noise_composite = mix(wispy_noise, billowy_noise, cloudType);
-        
+        float noise_composite = mix(wispy_noise, billowy_noise, cloudType);        
         float uprezzed_density = noise_composite;
 
         // Composite Noises and use as a Value Erosion
@@ -133,14 +131,18 @@ float calculateDensity(vec3 samplePoint) {
 float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
     float density = 0.0;
     float distance = start;
+    vec3 p = eye + distance * marchingDirection;
 
-    for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        vec4 t = texture(detailed_tex, eye + distance * marchingDirection);
+    //return clamp(texture(shade_tex, p).r, 0.0, 1.0);
+
+    for (int i = 0; i < MAX_LIGHT_STEPS; i++) {
+        p = eye + distance * marchingDirection;
+        vec4 t = texture(detailed_tex, p);
 
         if (t.a < EPSILON) {
-            // Inside a cloud, so integrate the density, but with increasing distances
-            density  += t.z; // * in_cloud_steps * IN_CLOUD_SUN_RAY_STEP_SIZE * voxel_field_size;
-            distance += IN_CLOUD_SUN_RAY_STEP_SIZE; // * in_cloud_steps;
+            // Inside a cloud, so add density
+            density  += calculateDensity(p);
+            distance += IN_CLOUD_SUN_RAY_STEP_SIZE;
         } else {
             distance += t.a;
         }
@@ -154,7 +156,12 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
             return density;
         }
     }
-    return density;
+
+    // At this point just look up the pre-calculated shade texture
+    p = eye + distance * marchingDirection;
+    return clamp(texture(shade_tex, p).r * ambient_intensity_scale + density, 0.0, 1.0);
+    //  return density;// + clamp(texture(shade_tex, p).g * ambient_intensity_scale, 0.0, 1.0);;
+
 }
 
 struct sample_information {
@@ -163,7 +170,7 @@ struct sample_information {
     float direct_scattering;
     float ambient_scattering;
     // debug
-    // vec3 sundir;
+    vec3 sundir;
     // end debug
 };
 
@@ -195,8 +202,8 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
         vec3 sundir = zup * fg_SunDirectionWorld;
 
         vec3 eyedir = normalize(samplePoint - eye);
-        //float densityToSun = getRayDensity(samplePoint, sundir, IN_CLOUD_SUN_RAY_STEP_SIZE, 1.0);
-        float densityToSun = clamp(0.0,1.0, texture(shade_tex, samplePoint).r);
+        float densityToSun = getRayDensity(samplePoint, sundir, IN_CLOUD_SUN_RAY_STEP_SIZE, 1.0);
+        //float densityToSun = clamp(texture(shade_tex, samplePoint).r * ambient_intensity_scale, 0.0, 1.0);
         float transmittance = exp(- densityToSun);
         float CoSSunAngle = dot(sundir, eyedir);
 
@@ -206,16 +213,16 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
 
         lreturn.direct_scattering = transmittance * phase  + inScattering * phase;
 
-        // Debug
-        //lreturn.sundir = sundir;
-        // end debug
-
-
         // Ambient scatter is approximated to the dimensional profile and the density towards the sky.
-        //float summedUpDensity = getRayDensity(samplePoint, vec3(0.0,0.0,1.0), IN_CLOUD_SUN_RAY_STEP_SIZE, 1.0);
-        float summedUpDensity = clamp(0.0, 1.0, texture(shade_tex, samplePoint).g);
+        // Instead of an expensive ray march vertically, just read it straight from the shade texture
+        float summedUpDensity = clamp(texture(shade_tex, samplePoint).g * ambient_intensity_scale, 0.0, 1.0);
         float dimensionalProfile = texture(detailed_tex, samplePoint).r;  // Red channel contains a cloud dimension
         lreturn.ambient_scattering = pow(1.0 - dimensionalProfile, 0.5) * exp(- summedUpDensity);
+
+        // Debug
+        // lreturn.sundir = vec3(densityToSun, summedUpDensity, 0.0);
+        // end debug
+
     }
 
     return lreturn;
@@ -251,8 +258,8 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
             lreturn.ambient_intensity += s.ambient_scattering * s.density * occlusion;
 
             // debug
-            // lreturn.sundir = s.sundir;
-            // return lreturn;
+            //lreturn.sundir = s.sundir;
+            //return lreturn;
             // end debug
             
         }

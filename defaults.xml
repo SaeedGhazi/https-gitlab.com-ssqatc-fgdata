@@ -577,9 +577,12 @@ Started September 2000 by David Megginson, david@megginson.com
           <show-aerial-perspective type="bool">false</show-aerial-perspective>
         </debug>
         <clouds>
+          <!-- The detailed cloud field should be 10km x 10km to give a 5km range -->
           <detailed-voxel-field-width type="int">1024</detailed-voxel-field-width>
           <detailed-voxel-field-height type="int">1024</detailed-voxel-field-height>
-          <detailed-voxel-size-m type="int">10</detailed-voxel-size-m>
+          <detailed-voxel-size-m type="int">20</detailed-voxel-size-m>
+
+
           <rough-voxel-field-width type="int">128</rough-voxel-field-width>
           <rough-voxel-field-height type="int">128</rough-voxel-field-height>
           <rough-voxel-size-m type="int">800</rough-voxel-size-m>

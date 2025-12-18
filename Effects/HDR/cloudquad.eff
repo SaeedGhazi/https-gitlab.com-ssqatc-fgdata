@@ -138,7 +138,7 @@
       </uniform>
       <uniform>
         <name>voxel_field_size</name>
-        <type>float</type>
+        <type>int</type>
         <value><use>voxel-field-size</use></value>
       </uniform>
       <uniform>

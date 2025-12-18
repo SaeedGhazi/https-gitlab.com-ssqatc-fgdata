@@ -589,8 +589,8 @@ Started September 2000 by David Megginson, david@megginson.com
           <direct-intensity-scale type="float">2.5</direct-intensity-scale>
           <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
           <debug>
-            <height type="float">28</height>
-            <width type="float">58</width>
+            <height type="float">10</height>
+            <width type="float">31</width>
             <bottom-type type="float">1.0</bottom-type>
             <top-type type="float">1.0</top-type>
             <density type="float">1.0</density>
@@ -789,7 +789,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <no-joystick-input type="bool">false</no-joystick-input>
       <no-hid-input type="bool">false</no-hid-input>
     </input>
-    <chase-distance-m type="double">-25.0</chase-distance-m>
+    <chase-distance-m type="double">-500.0</chase-distance-m>
     <allow-toggle-cockpit type="bool">false</allow-toggle-cockpit>
     <!-- "tower" positioned to right of runway at KSFO -->
     <tower>

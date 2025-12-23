@@ -577,16 +577,16 @@ Started September 2000 by David Megginson, david@megginson.com
           <show-aerial-perspective type="bool">false</show-aerial-perspective>
         </debug>
         <clouds>
-          <!-- The detailed cloud field should be 10km x 10km to give a 5km range -->
+          <!-- The detailed cloud field should be 40km x 40km to give a 20km range -->
           <detailed-voxel-field-width type="int">1024</detailed-voxel-field-width>
           <detailed-voxel-field-height type="int">1024</detailed-voxel-field-height>
-          <detailed-voxel-size-m type="int">20</detailed-voxel-size-m>
+          <detailed-voxel-size-m type="int">40</detailed-voxel-size-m>
 
-
-          <rough-voxel-field-width type="int">128</rough-voxel-field-width>
-          <rough-voxel-field-height type="int">128</rough-voxel-field-height>
-          <rough-voxel-size-m type="int">800</rough-voxel-size-m>
-          <direct-intensity-scale type="float">2.5</direct-intensity-scale>
+          <!-- The rough cloud field should be 200km x 200km-->
+          <rough-voxel-field-width type="int">1024</rough-voxel-field-width>
+          <rough-voxel-field-height type="int">1024</rough-voxel-field-height>
+          <rough-voxel-size-m type="int">200</rough-voxel-size-m>
+          <direct-intensity-scale type="float">1.0</direct-intensity-scale>
           <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
           <debug>
             <height type="float">10</height>

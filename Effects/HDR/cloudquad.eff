@@ -156,12 +156,6 @@
         <type>float-vec4</type>
         <value><use>ground-albedo</use></value>
       </uniform>
-      <!-- aerial_perspective.glsl -->
-      <uniform>
-        <name>aerial_perspective_tex</name>
-        <type>sampler-3d</type>
-        <value type="int">11</value>
-      </uniform>
       <!-- sun.glsl -->
       <uniform>
         <name>transmittance_tex</name>

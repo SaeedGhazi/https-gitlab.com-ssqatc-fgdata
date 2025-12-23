@@ -18,6 +18,8 @@ uniform mat4 fg_ViewMatrix[FG_NUM_VIEWS];
 
 FG_VIEW_GLOBAL
 uniform mat4 fg_ViewMatrixInverse[FG_NUM_VIEWS];
+uniform vec4 fg_Viewport[FG_NUM_VIEWS];
+uniform uint osg_FrameNumber;
 
 uniform vec3 cloud_field_center;
 uniform float voxel_resolution_m;
@@ -48,7 +50,7 @@ vec3 get_view_space_from_depth(vec2 uv, float depth);
 vec3 get_world_space_from_depth(vec2 uv, float depth);
 
 const int MAX_MARCHING_STEPS = voxel_field_size;
-const int MAX_LIGHT_STEPS = 10;
+const int MAX_LIGHT_STEPS = 5;
 const float MIN_DIST = 0.000;
 const float MAX_DIST = 2.0;
 const float EPSILON = 0.000001;
@@ -86,7 +88,7 @@ float calculateDensity(vec3 samplePoint) {
     float cloudDensity = cloud.z;
 
     if (cloudDimension > 0.0) {
-        vec4 noise = texture(cloud_noise_tex, samplePoint * 5.7);
+        vec4 noise = texture(cloud_noise_tex, samplePoint * 7.7);
 
         float wispy_noise = mix(noise.r, noise.g, cloudDimension);
 
@@ -99,8 +101,8 @@ float calculateDensity(vec3 samplePoint) {
         float uprezzed_density = noise_composite;
 
         // Composite Noises and use as a Value Erosion
-        //uprezzed_density = ValueErosion(cloudDimension, noise_composite);
-        uprezzed_density = ValueErosion(cloudDimension*cloudDensity, noise_composite);
+        uprezzed_density = ValueErosion(cloudDimension*cloudDimension*cloudDimension, noise_composite);
+        //uprezzed_density = ValueErosion(cloudDimension*cloudDensity, noise_composite);
 
         // Apply User Density Scale Data to Result
         uprezzed_density *= cloudDensity; 
@@ -264,6 +266,10 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
 
 void main()
 {
+    // Options to update 1/4 of the pixels each frame. Probably better to somehow mask instead of discard?
+    //if (mod(uint(texcoord * fg_Viewport[FG_VIEW_ID].zw) + vec2(osg_FrameNumber, osg_FrameNumber), 4u) != vec2(0u,0u)) discard;
+    //if (mod(osg_FrameNumber, 4) > 0u) discard;
+
     float voxel_field_size_m = float(voxel_field_size) * voxel_resolution_m;
 
     mat3 zup = mat3(fg_CameraZUpMatrix);
@@ -302,5 +308,4 @@ void main()
     // We want the non-exposed radiance values for IBL.
     color.rgb = apply_exposure(color.rgb);
     fragColor = color;
-    
 }

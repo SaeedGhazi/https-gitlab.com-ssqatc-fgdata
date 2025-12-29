@@ -11,9 +11,18 @@
     <voxel-resolution-m>
       <use>/sim/rendering/hdr/clouds/detailed-voxel-size-m</use>
     </voxel-resolution-m>
-    <voxel-field-size>
+    <voxel-field-width>
       <use>/sim/rendering/hdr/clouds/detailed-voxel-field-width</use>
-    </voxel-field-size>
+    </voxel-field-width>
+    <voxel-field-height>
+      <use>/sim/rendering/hdr/clouds/detailed-voxel-field-height</use>
+    </voxel-field-height>
+    <rough-field-factor>
+      <use>/sim/rendering/hdr/clouds/rough-voxel-field-factor</use>
+    </rough-field-factor>
+    <rough-size-factor>
+      <use>/sim/rendering/hdr/clouds/rough-voxel-size-factor</use>
+    </rough-size-factor>
     <direct-intensity-scale>
       <use>/sim/rendering/hdr/clouds/direct-intensity-scale</use>
     </direct-intensity-scale>
@@ -75,7 +84,7 @@
 
       <texture-unit>
         <unit>0</unit>
-        <type>cloudvoxelspace</type>
+        <type>clouddetailedvoxelspace</type>
       </texture-unit>
 
       <texture-unit>
@@ -137,9 +146,24 @@
         <value><use>voxel-resolution-m</use></value>
       </uniform>
       <uniform>
-        <name>voxel_field_size</name>
+        <name>voxel_field_width</name>
         <type>int</type>
-        <value><use>voxel-field-size</use></value>
+        <value><use>voxel-field-width</use></value>
+      </uniform>
+      <uniform>
+        <name>voxel_field_height</name>
+        <type>int</type>
+        <value><use>voxel-field-height</use></value>
+      </uniform>
+      <uniform>
+        <name>rough_field_factor</name>
+        <type>int</type>
+        <value><use>rough-field-factor</use></value>
+      </uniform>
+      <uniform>
+        <name>rough_size_factor</name>
+        <type>int</type>
+        <value><use>rough-size-factor</use></value>
       </uniform>
       <uniform>
         <name>direct_intensity_scale</name>

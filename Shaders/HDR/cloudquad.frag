@@ -23,7 +23,10 @@ uniform uint osg_FrameNumber;
 
 uniform vec3 cloud_field_center;
 uniform float voxel_resolution_m;
-uniform int voxel_field_size;
+uniform int voxel_field_width;
+uniform int voxel_field_height;
+uniform int rough_field_factor;
+uniform int rough_size_factor;
 uniform float ambient_intensity_scale;
 uniform float direct_intensity_scale;
 
@@ -49,16 +52,20 @@ vec3 get_sun_radiance_sea_level();
 vec3 get_view_space_from_depth(vec2 uv, float depth);
 vec3 get_world_space_from_depth(vec2 uv, float depth);
 
-const int MAX_MARCHING_STEPS = voxel_field_size;
+const int MAX_MARCHING_STEPS = 4* voxel_field_width;
 const int MAX_LIGHT_STEPS = 5;
 const float MIN_DIST = 0.000;
-const float MAX_DIST = 2.0;
+const float MAX_DIST = 4.0;
 const float EPSILON = 0.000001;
-const float IN_CLOUD_STEP_SIZE = 1.0 / float(voxel_field_size);
-const float IN_CLOUD_SUN_RAY_STEP_SIZE = 1.0 / float(voxel_field_size);
-
-
+const float NOISE_SCALE = 23.6;
+const float IN_CLOUD_STEP_SIZE = 1.0 / float(voxel_field_width);
+const float IN_CLOUD_SUN_RAY_STEP_SIZE = 1.0 / float(voxel_field_width);
+const float VOXEL_FIELD_WIDTH_M = float(voxel_field_width * voxel_resolution_m);
+const float VOXEL_FIELD_HEIGHT_M = float(voxel_field_height * voxel_resolution_m);
 const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.3;
+
+// Scaling factor to account for the voxel space not being a cube.
+const vec3 VOXEL_SCALE = vec3(1.0, 1.0, float(voxel_field_width) / float(voxel_field_height));
 
 //
 // Function to erode a value given an erosion amount. A simplified version of SetRange.
@@ -88,7 +95,7 @@ float calculateDensity(vec3 samplePoint) {
     float cloudDensity = cloud.z;
 
     if (cloudDimension > 0.0) {
-        vec4 noise = texture(cloud_noise_tex, samplePoint * 7.7);
+        vec4 noise = texture(cloud_noise_tex, samplePoint * NOISE_SCALE);
 
         float wispy_noise = mix(noise.r, noise.g, cloudDimension);
 
@@ -148,10 +155,9 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
     }
 
     // At this point just look up the pre-calculated shade texture
-    p = eye + (distance + IN_CLOUD_SUN_RAY_STEP_SIZE) * marchingDirection;
+    //p = eye + (distance + IN_CLOUD_SUN_RAY_STEP_SIZE) * marchingDirection;
     //density = clamp(texture(shade_tex, p).r * 0.6+ density, 0.0, 1.0);
     return density;
-
 }
 
 struct sample_information {
@@ -189,7 +195,7 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
 
         // fg_SunDirectionWorld is in _normalized_ world space coordinates
         mat3 zup = mat3(fg_CameraZUpMatrix);
-        vec3 sundir = zup * fg_SunDirectionWorld;
+        vec3 sundir = normalize(zup * fg_SunDirectionWorld * VOXEL_SCALE);
 
         vec3 eyedir = normalize(samplePoint - eye);
         float densityToSun = getRayDensity(samplePoint, sundir, IN_CLOUD_SUN_RAY_STEP_SIZE, 1.0);
@@ -270,19 +276,18 @@ void main()
     //if (mod(uint(texcoord * fg_Viewport[FG_VIEW_ID].zw) + vec2(osg_FrameNumber, osg_FrameNumber), 4u) != vec2(0u,0u)) discard;
     //if (mod(osg_FrameNumber, 4) > 0u) discard;
 
-    float voxel_field_size_m = float(voxel_field_size) * voxel_resolution_m;
-
     mat3 zup = mat3(fg_CameraZUpMatrix);
-    vec3 wdir = normalize(w_pos - fg_CameraPositionCart);
+    vec3 wdir = w_pos - fg_CameraPositionCart;
     vec3 dir = zup * wdir;
-    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / voxel_field_size_m + vec3(0.5, 0.5, 0.0);
+    dir = normalize(dir * VOXEL_SCALE);  // Take into account that the voxel space is not a cube by increasing the Z-factor
 
+    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / vec3(VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_HEIGHT_M) + vec3(0.5, 0.5, 0.0);
     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
 
     // Convert the logarithmic depth value into metres, and then scale to the voxel resolution 
     // so we know how far to search before we reach something solid
     float max_depth_m = logdepth_decode(texture(depth_tex, texcoord).r);
-    float max_depth_vx = min(max_depth_m / voxel_field_size_m, MAX_DIST);
+    float max_depth_vx = min(max_depth_m / VOXEL_FIELD_WIDTH_M, MAX_DIST);
     
     ray_data ray = cloudRayMarch(eye, dir, MIN_DIST, max_depth_vx);
     
@@ -295,7 +300,7 @@ void main()
 
         color.a = ray.light_absorption;
 
-        float z = logdepth_prepare_vs_depth(ray.distance * voxel_field_size_m);
+        float z = logdepth_prepare_vs_depth(ray.distance * VOXEL_FIELD_WIDTH_M);
         gl_FragDepth = logdepth_encode(z);
 
         // debug

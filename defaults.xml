@@ -578,24 +578,18 @@ Started September 2000 by David Megginson, david@megginson.com
         </debug>
         <clouds>
           <!-- The detailed cloud field should be 50km x 50km x 12800m to give a 25km range and approx 40,000 ft of troposphere-->
-          <detailed-voxel-field-width type="int">1024</detailed-voxel-field-width>
-          <detailed-voxel-field-height type="int">256</detailed-voxel-field-height>
-          <detailed-voxel-size-m type="int">50</detailed-voxel-size-m>
+          <detailed-voxel-field-width type="int">256</detailed-voxel-field-width>
+          <detailed-voxel-field-height type="int">64</detailed-voxel-field-height>
+          <detailed-voxel-size-m type="int">200</detailed-voxel-size-m>
 
-          <!-- The rough cloud field should be 200km x 200km-->
-          <rough-voxel-field-width type="int">1024</rough-voxel-field-width>
-          <rough-voxel-field-height type="int">1024</rough-voxel-field-height>
-          <rough-voxel-size-m type="int">200</rough-voxel-size-m>
+          <!-- How much larger rough field voxels are compared with detailed -->
+          <rough-voxel-size-factor type="int">2</rough-voxel-size-factor>
+
+          <!-- How much larger the rough field is compared with the detailed in voxel units. -->
+          <rough-voxel-field-factor type="int">2</rough-voxel-field-factor>
+
           <direct-intensity-scale type="float">1.0</direct-intensity-scale>
           <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
-          <debug>
-            <height type="float">10</height>
-            <width type="float">31</width>
-            <bottom-type type="float">1.0</bottom-type>
-            <top-type type="float">1.0</top-type>
-            <density type="float">1.0</density>
-            <erosion type="float">0.0</erosion>
-          </debug>
         </clouds>
       </hdr>
 

@@ -8,6 +8,9 @@
       <use>/sim/rendering/hdr/clouds/cloud-center-y</use>
       <use>/sim/rendering/hdr/clouds/cloud-center-z</use>
     </cloud-field-center>
+    <cloud-field-repeating>
+    <use>/sim/rendering/hdr/clouds/cloud-field-repeating</use>
+    </cloud-field-repeating>
     <voxel-resolution-m>
       <use>/sim/rendering/hdr/clouds/detailed-voxel-size-m</use>
     </voxel-resolution-m>
@@ -149,6 +152,11 @@
         <name>cloud_field_center</name>
         <type>float-vec3</type>
         <value><use>cloud-field-center</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_field_repeating</name>
+        <type>bool</type>
+        <value><use>cloud-field-repeating</use></value>
       </uniform>
       <uniform>
         <name>voxel_resolution_m</name>

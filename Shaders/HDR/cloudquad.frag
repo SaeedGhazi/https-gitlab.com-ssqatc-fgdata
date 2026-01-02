@@ -23,6 +23,7 @@ uniform vec4 fg_Viewport[FG_NUM_VIEWS];
 uniform uint osg_FrameNumber;
 
 uniform vec3 cloud_field_center;
+uniform bool cloud_field_repeating;
 uniform float voxel_resolution_m;
 uniform int voxel_field_width;
 uniform int voxel_field_height;
@@ -94,7 +95,7 @@ float HenyeyGreenstein(float inCosAngle, float inG)
  * or rough data as appropriate
  */
 vec4 getCloud(vec3 samplePoint)  {
-    //return texture(rough_tex, samplePoint);
+    if (cloud_field_repeating) return texture(detailed_tex, samplePoint);
     if ((abs(samplePoint.x - 0.5) < DETAILED_X_Y_BOUNDARY) && (abs(samplePoint.y - 0.5) < DETAILED_X_Y_BOUNDARY)) {
         // We're in the detailed space.  Scale the xy UV to the detailed voxel space
         vec3 uv = vec3((samplePoint.x - DETAILED_X_Y_BOUNDARY) * float(rough_field_factor),
@@ -106,7 +107,6 @@ vec4 getCloud(vec3 samplePoint)  {
         return texture(rough_tex, samplePoint);
     }
 }
-
 
 /**
  * Calculate the density of a given samplePoint
@@ -310,16 +310,18 @@ void main()
 
     mat3 zup = mat3(fg_CameraZUpMatrix);
     vec3 wdir = w_pos - fg_CameraPositionCart;
-    vec3 dir = zup * wdir;
+    vec3 dir = normalize(zup * wdir);
+    float zscaleFactor = length(dir * VOXEL_SCALE);
     dir = normalize(dir * VOXEL_SCALE);  // Take into account that the voxel space is not a cube by increasing the Z-factor
 
-    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / vec3(VOXEL_FIELD_WIDTH_M * float(rough_field_factor), VOXEL_FIELD_WIDTH_M  * float(rough_field_factor), VOXEL_FIELD_HEIGHT_M) + vec3(0.5, 0.5, 0.0);
+    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / vec3(VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_HEIGHT_M) + vec3(0.5, 0.5, 0.0);
     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
 
     // Convert the logarithmic depth value into metres, and then scale to the voxel resolution 
-    // so we know how far to search before we reach something solid
+    // so we know how far to search before we reach something solid.  This needs to take into account that the voxel space is not a cube by adjusting for the
+    // actual length of the "normalized" direction.
     float max_depth_m = logdepth_decode(texture(depth_tex, texcoord).r);
-    float max_depth_vx = min(max_depth_m / VOXEL_FIELD_WIDTH_M, MAX_DIST);
+    float max_depth_vx = min(max_depth_m * zscaleFactor / VOXEL_FIELD_WIDTH_M, MAX_DIST);
     
     ray_data ray = cloudRayMarch(eye, dir, MIN_DIST, max_depth_vx);
     
@@ -332,7 +334,7 @@ void main()
 
         color.a = ray.light_absorption;
 
-        float z = logdepth_prepare_vs_depth(ray.distance * VOXEL_FIELD_WIDTH_M);
+        float z = logdepth_prepare_vs_depth(ray.distance * VOXEL_FIELD_WIDTH_M / zscaleFactor);
         gl_FragDepth = logdepth_encode(z);
 
         // debug

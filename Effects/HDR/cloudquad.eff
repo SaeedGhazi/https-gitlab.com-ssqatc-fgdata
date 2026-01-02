@@ -99,6 +99,11 @@
         <type>cloudnoise</type>
       </texture-unit>
 
+      <texture-unit>
+        <unit>4</unit>
+        <type>cloudroughvoxelspace</type>
+      </texture-unit>
+
       <program>
         <vertex-shader>Shaders/HDR/cloudquad.vert</vertex-shader>
         <vertex-shader>Shaders/HDR/mvr.vert</vertex-shader>
@@ -134,6 +139,11 @@
         <name>cloud_noise_tex</name>
         <type>sampler-3d</type>
         <value type="int">3</value>
+      </uniform>
+      <uniform>
+        <name>rough_tex</name>
+        <type>sampler-3d</type>
+        <value type="int">4</value>
       </uniform>
       <uniform>
         <name>cloud_field_center</name>

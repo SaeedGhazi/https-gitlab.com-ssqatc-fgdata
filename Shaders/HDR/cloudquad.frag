@@ -6,6 +6,7 @@ in vec2 texcoord;
 in vec3 w_pos;
 
 uniform sampler3D detailed_tex;
+uniform sampler3D rough_tex;
 uniform sampler3D shade_tex;
 uniform sampler2D depth_tex;
 uniform sampler3D cloud_noise_tex;
@@ -57,7 +58,7 @@ const int MAX_LIGHT_STEPS = 5;
 const float MIN_DIST = 0.000;
 const float MAX_DIST = 4.0;
 const float EPSILON = 0.000001;
-const float NOISE_SCALE = 24.0;
+const float NOISE_SCALE = 48.0;
 const float IN_CLOUD_STEP_SIZE = 0.1f / float(voxel_field_width);
 const float IN_CLOUD_SUN_RAY_STEP_SIZE = 1.0 / float(voxel_field_width);
 const float VOXEL_FIELD_WIDTH_M = float(voxel_field_width * voxel_resolution_m);
@@ -66,6 +67,9 @@ const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.3;
 
 // Scaling factor to account for the voxel space not being a cube.
 const vec3 VOXEL_SCALE = vec3(1.0, 1.0, float(voxel_field_width) / float(voxel_field_height));
+
+// Boundary where we use the detailed voxel space rather than the rough voxel space in UV coordinates
+const float DETAILED_X_Y_BOUNDARY = 0.5 / float(rough_field_factor);
 
 //
 // Function to erode a value given an erosion amount. A simplified version of SetRange.
@@ -86,10 +90,29 @@ float HenyeyGreenstein(float inCosAngle, float inG)
 }
 
 /**
+ * Get cloud information for a given sample point, using either the detailed
+ * or rough data as appropriate
+ */
+vec4 getCloud(vec3 samplePoint)  {
+    //return texture(rough_tex, samplePoint);
+    if ((abs(samplePoint.x - 0.5) < DETAILED_X_Y_BOUNDARY) && (abs(samplePoint.y - 0.5) < DETAILED_X_Y_BOUNDARY)) {
+        // We're in the detailed space.  Scale the xy UV to the detailed voxel space
+        vec3 uv = vec3((samplePoint.x - DETAILED_X_Y_BOUNDARY) * float(rough_field_factor),
+                       (samplePoint.y - DETAILED_X_Y_BOUNDARY) * float(rough_field_factor),
+                        samplePoint.z);
+        return texture(detailed_tex, uv);
+    } else {
+        // We're in the rough space, so just use it as-is
+        return texture(rough_tex, samplePoint);
+    }
+}
+
+
+/**
  * Calculate the density of a given samplePoint
  */
 float calculateDensity(vec3 samplePoint) {
-    vec4 cloud = texture(detailed_tex, samplePoint);
+    vec4 cloud = getCloud(samplePoint);
     float cloudDimension = cloud.x;
     float cloudType = cloud.y;
     float cloudDensity = cloud.z;
@@ -141,7 +164,7 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
 
     for (int i = 0; i < MAX_LIGHT_STEPS; i++) {
         p = eye + distance * marchingDirection;
-        vec4 t = texture(detailed_tex, p);
+        vec4 t = getCloud(p);
 
         if (t.a < EPSILON) {
             // Inside a cloud, so add density
@@ -185,7 +208,9 @@ struct sample_information {
 sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
     sample_information lreturn;
 
-    lreturn.sdf = texture(detailed_tex, samplePoint).a;  // Alpha channel contains an SDF
+    vec4 cloud = getCloud(samplePoint);
+
+    lreturn.sdf = cloud.a;  // Alpha channel contains an SDF
     lreturn.density = 0.0;
     lreturn.direct_scattering = 0.0;
     lreturn.ambient_scattering = 0.0;
@@ -218,7 +243,7 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
         // Ambient scatter is approximated to the dimensional profile and the density towards the sky.
         // Instead of an expensive ray march vertically, just read it straight from the shade texture
         float summedUpDensity = clamp(texture(shade_tex, samplePoint).g * ambient_intensity_scale, 0.0, 1.0);
-        float dimensionalProfile = texture(detailed_tex, samplePoint).r;  // Red channel contains a cloud dimension
+        float dimensionalProfile = cloud.r;  // Red channel contains a cloud dimension
         lreturn.ambient_scattering = pow(1.0 - dimensionalProfile, 0.5) * exp(- summedUpDensity);
 
         // Debug
@@ -288,7 +313,7 @@ void main()
     vec3 dir = zup * wdir;
     dir = normalize(dir * VOXEL_SCALE);  // Take into account that the voxel space is not a cube by increasing the Z-factor
 
-    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / vec3(VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_HEIGHT_M) + vec3(0.5, 0.5, 0.0);
+    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / vec3(VOXEL_FIELD_WIDTH_M * float(rough_field_factor), VOXEL_FIELD_WIDTH_M  * float(rough_field_factor), VOXEL_FIELD_HEIGHT_M) + vec3(0.5, 0.5, 0.0);
     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
 
     // Convert the logarithmic depth value into metres, and then scale to the voxel resolution 

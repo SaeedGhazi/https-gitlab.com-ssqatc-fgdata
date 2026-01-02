@@ -583,7 +583,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <detailed-voxel-size-m type="int">200</detailed-voxel-size-m>
 
           <!-- How much larger rough field voxels are compared with detailed -->
-          <rough-voxel-size-factor type="int">2</rough-voxel-size-factor>
+          <rough-voxel-size-factor type="int">4</rough-voxel-size-factor>
 
           <!-- How much larger the rough field is compared with the detailed in voxel units. -->
           <rough-voxel-field-factor type="int">2</rough-voxel-field-factor>

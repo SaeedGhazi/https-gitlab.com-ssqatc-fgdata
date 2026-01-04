@@ -3,6 +3,7 @@ $FG_GLSL_VERSION
 layout(location = 0) out vec4 fragColor;
 
 in vec2 texcoord;
+in vec2 raw_texcoord; // QUAD_TEXCOORD_RAW
 in vec3 w_pos;
 
 uniform sampler3D detailed_tex;
@@ -52,7 +53,9 @@ vec3 get_sun_radiance_sea_level();
 
 // pos_from_depth.glsl
 vec3 get_view_space_from_depth(vec2 uv, float depth);
-vec3 get_world_space_from_depth(vec2 uv, float depth);
+
+// aerial_perspective.glsl
+vec3 add_aerial_perspective(vec3 color, vec2 raw_coord, vec3 P);
 
 const int MAX_MARCHING_STEPS = 4 * voxel_field_width;
 const int MAX_LIGHT_STEPS = 5;
@@ -195,9 +198,6 @@ struct sample_information {
     float density;
     float direct_scattering;
     float ambient_scattering;
-    // debug
-    vec3 sundir;
-    // end debug
 };
 
 /**
@@ -245,11 +245,6 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
         float summedUpDensity = clamp(texture(shade_tex, samplePoint).g * ambient_intensity_scale, 0.0, 1.0);
         float dimensionalProfile = cloud.r;  // Red channel contains a cloud dimension
         lreturn.ambient_scattering = pow(1.0 - dimensionalProfile, 0.5) * exp(- summedUpDensity);
-
-        // Debug
-        //lreturn.sundir = vec3(densityToSun, summedUpDensity, 0.0);
-        // end debug
-
     }
 
     return lreturn;
@@ -259,18 +254,18 @@ struct ray_data {
     float light_absorption;
     float direct_intensity;
     float ambient_intensity;
-    float distance;
-    vec3 sundir;
+    float first_hit;
 };
 
 ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end) {
-    ray_data lreturn; 
-    lreturn.distance = start;
+    ray_data lreturn;
+    float distance = start;
+    lreturn.first_hit = -1.0;
 
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        vec3 p = eye + lreturn.distance * marchingDirection;
+        vec3 p = eye + distance * marchingDirection;
 
-        if ((lreturn.distance >= end)) {
+        if ((distance >= end)) {
             // Reached the end of the raymarch
 			return lreturn;
         }
@@ -284,11 +279,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
             lreturn.direct_intensity  += s.direct_scattering * s.density * occlusion;
             lreturn.ambient_intensity += s.ambient_scattering * s.density * occlusion;
 
-            // debug
-            //lreturn.sundir = s.sundir;
-            //return lreturn;
-            // end debug
-            
+            if (lreturn.first_hit < EPSILON) lreturn.first_hit = distance;
         }
 
         if (lreturn.light_absorption > 0.99) {
@@ -297,7 +288,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
 			return lreturn;
         }
 
-        lreturn.distance += s.sdf;
+        distance += s.sdf;
     }
 	return lreturn;
 }
@@ -327,20 +318,15 @@ void main()
     
     if (ray.light_absorption > 0.01) {
         // XXXX : Need some better value for the ambient lighting value than ground_albedo.
-        vec3 sun_intensity = get_sun_radiance_sea_level();
-        //color.rgb = get_sun_radiance_sea_level() * ray.direct_intensity * direct_intensity_scale + ground_albedo.xyz * ray.ambient_intensity * ambient_intensity_scale;
-        color.rgb = sun_intensity * ray.direct_intensity * direct_intensity_scale + ground_albedo.xyz * ray.ambient_intensity * ambient_intensity_scale;
-        //color.rgb = vec3(0, ray.direct_intensity, 0);
-
+        color.rgb = get_sun_radiance_sea_level() * ray.direct_intensity * direct_intensity_scale + ground_albedo.xyz * ray.ambient_intensity * ambient_intensity_scale;
         color.a = ray.light_absorption;
 
-        float z = logdepth_prepare_vs_depth(ray.distance * VOXEL_FIELD_WIDTH_M / zscaleFactor);
+        float z = logdepth_prepare_vs_depth(ray.first_hit * VOXEL_FIELD_WIDTH_M / zscaleFactor);
         gl_FragDepth = logdepth_encode(z);
 
-        // debug
-        //color.rgb = ray.sundir;
-        // end debug
-        
+        // Add aerial perspective
+        vec3 P = get_view_space_from_depth(texcoord, gl_FragDepth);
+        color.rgb = add_aerial_perspective(color.rgb, raw_texcoord, P);
     }
     
     // Only pre-expose when not rendering to the environment map.

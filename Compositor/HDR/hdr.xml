@@ -1103,6 +1103,10 @@
       <buffer>depth-stencil</buffer>
     </binding>
     <binding>
+      <unit>11</unit>
+      <buffer>aerial-perspective</buffer>
+    </binding>
+    <binding>
       <unit>12</unit>
       <buffer>transmittance</buffer>
     </binding>

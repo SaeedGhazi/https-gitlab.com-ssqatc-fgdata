@@ -123,6 +123,13 @@
         <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
         <fragment-shader>Shaders/HDR/mvr.frag</fragment-shader>
       </program>
+
+      <!-- quad.vert -->
+      <define>
+        <name>QUAD_TEXCOORD_RAW</name>
+      </define>
+
+      <!-- cloudquad.vert -->
       <uniform>
         <name>detailed_tex</name>
         <type>sampler-3d</type>
@@ -197,6 +204,12 @@
         <name>ground_albedo</name>
         <type>float-vec4</type>
         <value><use>ground-albedo</use></value>
+      </uniform>
+      <!-- aerial_perspective.glsl -->
+      <uniform>
+        <name>aerial_perspective_tex</name>
+        <type>sampler-3d</type>
+        <value type="int">11</value>
       </uniform>
       <!-- sun.glsl -->
       <uniform>

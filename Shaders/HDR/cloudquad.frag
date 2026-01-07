@@ -57,23 +57,24 @@ vec3 get_view_space_from_depth(vec2 uv, float depth);
 // aerial_perspective.glsl
 vec3 add_aerial_perspective(vec3 color, vec2 raw_coord, vec3 P);
 
-const int MAX_MARCHING_STEPS = 4 * voxel_field_width;
-const int MAX_LIGHT_STEPS = 5;
 const float MIN_DIST = 0.000;
 const float MAX_DIST = 4.0;
 const float EPSILON = 0.000001;
 const float NOISE_SCALE = 48.0;
-const float IN_CLOUD_STEP_SIZE = 0.1f / float(voxel_field_width);
-const float IN_CLOUD_SUN_RAY_STEP_SIZE = 1.0 / float(voxel_field_width);
-const float VOXEL_FIELD_WIDTH_M = float(voxel_field_width * voxel_resolution_m);
-const float VOXEL_FIELD_HEIGHT_M = float(voxel_field_height * voxel_resolution_m);
 const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.3;
+const int MAX_LIGHT_STEPS = 5;
+
+int MAX_MARCHING_STEPS = 4 * voxel_field_width;
+float IN_CLOUD_STEP_SIZE = 0.1f / float(voxel_field_width);
+float IN_CLOUD_SUN_RAY_STEP_SIZE = 1.0 / float(voxel_field_width);
+float VOXEL_FIELD_WIDTH_M = float(voxel_field_width * voxel_resolution_m);
+float VOXEL_FIELD_HEIGHT_M = float(voxel_field_height * voxel_resolution_m);
 
 // Scaling factor to account for the voxel space not being a cube.
-const vec3 VOXEL_SCALE = vec3(1.0, 1.0, float(voxel_field_width) / float(voxel_field_height));
+vec3 VOXEL_SCALE = vec3(1.0, 1.0, float(voxel_field_width) / float(voxel_field_height));
 
 // Boundary where we use the detailed voxel space rather than the rough voxel space in UV coordinates
-const float DETAILED_X_Y_BOUNDARY = 0.5 / float(rough_field_factor);
+float DETAILED_X_Y_BOUNDARY = 0.5 / float(rough_field_factor);
 
 //
 // Function to erode a value given an erosion amount. A simplified version of SetRange.

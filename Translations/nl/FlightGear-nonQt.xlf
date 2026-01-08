@@ -487,25 +487,25 @@
           <source>View</source>
           <target>Beeld</target>
         </trans-unit>
-        <trans-unit id="menu/view-clone:0">
+        <trans-unit id="menu/view-clone:0" translate="yes" approved="no">
           <source>Add Clone View</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="menu/view-last-pair:0">
+        <trans-unit id="menu/view-last-pair:0" translate="yes" approved="no">
           <source>Add Pair View</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="menu/view-last-pair-double:0">
+        <trans-unit id="menu/view-last-pair-double:0" translate="yes" approved="no">
           <source>Add Pair Foreground View</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="menu/view-options:0" translate="yes" approved="yes">
           <source>View Options</source>
           <target>Zicht instellingen</target>
         </trans-unit>
-        <trans-unit id="menu/view-push:0">
+        <trans-unit id="menu/view-push:0" translate="yes" approved="no">
           <source>Push Pair View</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="menu/volcanoes:0" translate="yes" approved="yes">
           <source>Volcanoes</source>
@@ -558,12 +558,12 @@
           <target>Gebruik het AV400 protocol, vereist om een Garmin 400 GPS aan te sturen vanuit FlightGear</target>
         </trans-unit>
         <trans-unit id="options/AV400WSimA-desc:0" translate="yes" approved="yes">
-          <source>Open connection for &quot;A&quot; channel using Garmin WAAS GPS protocol</source>
-          <target>Open verbinding voor &quot;A&quot; kanaal via het Garmin WAAS GPS protocol</target>
+          <source>Open connection for "A" channel using Garmin WAAS GPS protocol</source>
+          <target>Open verbinding voor "A" kanaal via het Garmin WAAS GPS protocol</target>
         </trans-unit>
         <trans-unit id="options/AV400WSimB-desc:0" translate="yes" approved="yes">
-          <source>Open connection for &quot;B&quot; channel using Garmin WAAS GPS protocol</source>
-          <target>Open verbinding voor &quot;B&quot; kanaal via het Garmin WAAS GPS protocol</target>
+          <source>Open connection for "B" channel using Garmin WAAS GPS protocol</source>
+          <target>Open verbinding voor "B" kanaal via het Garmin WAAS GPS protocol</target>
         </trans-unit>
         <trans-unit id="options/addon-desc:0" translate="yes" approved="yes">
           <source>Specify a path to addon;</source>
@@ -666,7 +666,7 @@
           <target>Kies een startpositie op een vliegdekschip</target>
         </trans-unit>
         <trans-unit id="options/carrier-position-desc:0" translate="yes" approved="yes">
-          <source>Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier&apos;s parking position. Must also specify a carrier.</source>
+          <source>Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier's parking position. Must also specify a carrier.</source>
           <target>Kies een startpositie ten op zichte van het vliegdekschip, gebruik abeam (downwind abeam) or FLOLS (eindnadering) waarden, of kies een parkeerplaats op het schip. Kies eerst een vliegdekschip.</target>
         </trans-unit>
         <trans-unit id="options/ceiling-desc:0" translate="yes" approved="yes">
@@ -818,7 +818,7 @@
           <target>Schakel actueel weer op basis van METAR uit</target>
         </trans-unit>
         <trans-unit id="options/disable-save-on-exit:0" translate="no" approved="yes">
-          <source>Don&apos;t save preferences upon program exit</source>
+          <source>Don't save preferences upon program exit</source>
           <target>Sla de instellingen niet op bij het afsluiten</target>
         </trans-unit>
         <trans-unit id="options/disable-sentry-desc:0" translate="no" approved="yes">
@@ -841,9 +841,9 @@
           <source>Disable automatic scenery downloads/updates</source>
           <target>Schakel het automatisch downloaden/updaten van landschappen uit</target>
         </trans-unit>
-        <trans-unit id="options/disable-texture-cache-desc:0" translate="no">
+        <trans-unit id="options/disable-texture-cache-desc:0" translate="no" approved="no">
           <source>Disable texture cache (DDS)</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/disable-textures-desc:0" translate="no" approved="yes">
           <source>Disable textures</source>
@@ -857,13 +857,13 @@
           <source>Disable wireframe drawing mode</source>
           <target>Model frame opbouw niet gebruiken</target>
         </trans-unit>
-        <trans-unit id="options/distance-attenuation-desc:0">
+        <trans-unit id="options/distance-attenuation-desc:0" translate="yes" approved="no">
           <source>Enable/Disable runway light distance attenuation</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/dme-desc:0" translate="yes" approved="yes">
           <source>Slave the DME to one of the NAV radios, or set its internal frequency.</source>
-          <target>Maak de DME afhankelijk van een van de NAV radio&apos;s, of stel zijn interne frequentie in.</target>
+          <target>Maak de DME afhankelijk van een van de NAV radio's, of stel zijn interne frequentie in.</target>
         </trans-unit>
         <trans-unit id="options/download-dir-desc:0" translate="yes" approved="yes">
           <source>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
@@ -985,9 +985,9 @@
           <source>Enable automatic scenery downloads/updates</source>
           <target>Schakel het automatisch downloaden/updaten van landschappen in</target>
         </trans-unit>
-        <trans-unit id="options/enable-texture-cache-desc:0" translate="no">
+        <trans-unit id="options/enable-texture-cache-desc:0" translate="no" approved="no">
           <source>Enable texture cache (DDS)</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/enable-textures-desc:0" translate="no" approved="yes">
           <source>Enable textures</source>
@@ -1137,9 +1137,9 @@
           <source>Enable/Disable the move to hold short position for multiplayer</source>
           <target>Verplaatsing naar de hold-short positie in multiplayer in-/uitschakelen</target>
         </trans-unit>
-        <trans-unit id="options/horizon-effect-desc:0">
+        <trans-unit id="options/horizon-effect-desc:0" translate="yes" approved="no">
           <source>Enable/Disable celestial body growth illusion near the horizon</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/httpd-desc:0" translate="yes" approved="yes">
           <source>Enable http server on the specified address. Specify the port or address:port to bind to.</source>
@@ -1169,9 +1169,9 @@
           <source>Open connection using the International Gliding Commission protocol</source>
           <target>Verbinding openen met het Interational Gliding Commission protocol</target>
         </trans-unit>
-        <trans-unit id="options/ignore-autosave-desc:0">
+        <trans-unit id="options/ignore-autosave-desc:0" translate="yes" approved="no">
           <source>Enable/Disable ignoring the autosave file, i.e. the settings saved in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/in-air-desc:0" translate="yes" approved="yes">
           <source>Enable/Disable starting in air (implied when using --altitude)</source>
@@ -1189,9 +1189,9 @@
           <source>Enable screen shot http server on the specified port (replaced by --httpd)</source>
           <target>Activeer de schermafdruk server op dit poortnummer (vervangen door --httpd)</target>
         </trans-unit>
-        <trans-unit id="options/jsbsim-output-directive-file-desc:0">
-          <source>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type=&quot;CSV&quot;&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</source>
-          <target></target>
+        <trans-unit id="options/jsbsim-output-directive-file-desc:0" translate="yes" approved="no">
+          <source>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type="CSV"&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</source>
+          <target />
         </trans-unit>
         <trans-unit id="options/jsclient-desc:0" translate="yes" approved="yes">
           <source>Open connection to a remote joystick</source>
@@ -1217,29 +1217,29 @@
           <source>Select aircraft livery</source>
           <target>Kies een verfuitvoering</target>
         </trans-unit>
-        <trans-unit id="options/load-tape-create-video:0">
+        <trans-unit id="options/load-tape-create-video:0" translate="yes" approved="no">
           <source>Enable/Disable encode video while replaying tape specified by --load-tape</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="options/load-tape-desc:0">
-          <source>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending &quot;.fgtape&quot;. For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
+        <trans-unit id="options/load-tape-desc:0" translate="yes" approved="no">
+          <source>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
           <target state="needs-review-translation">Laad een opname van een eerdere FlightGear-sessie</target>
         </trans-unit>
-        <trans-unit id="options/load-tape-fixed-dt:0">
+        <trans-unit id="options/load-tape-fixed-dt:0" translate="yes" approved="no">
           <source>Set fixed-dt mode while replaying tape specified by --load-tape</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/local-aircraft-time:0" translate="yes" approved="yes">
           <source>local aircraft time</source>
           <target>lokale tijd van het vliegtuig</target>
         </trans-unit>
-        <trans-unit id="options/lod-levels-desc:0">
-          <source>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is &quot;1 3 5 7 9&quot;.</source>
-          <target></target>
+        <trans-unit id="options/lod-levels-desc:0" translate="yes" approved="no">
+          <source>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is "1 3 5 7 9".</source>
+          <target />
         </trans-unit>
-        <trans-unit id="options/lod-range-mult-desc:0">
+        <trans-unit id="options/lod-range-mult-desc:0" translate="yes" approved="no">
           <source>Specify the range multiplier (point from low to fine detail). Defaults is 2.</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/lod-res-desc:0" translate="yes" approved="yes">
           <source>Specify the resolution of the terrain grid. Defaults is 1.</source>
@@ -1254,8 +1254,8 @@
           <target>Kies welke log class(es) gebruikt moeten worden</target>
         </trans-unit>
         <trans-unit id="options/log-dir-desc:0" translate="yes" approved="yes">
-          <source>Log to directory DIR. The special value &apos;desktop&apos; causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc.</source>
-          <target>Schrijf een logboek in de map DIR. De speciale waarde &apos;desktop zorgt voor het schrijven van het logboek naar de desktop (locatie afhankelijk van het besturingssysteem). Deze optie kan meerdere keren worden opgegeven, telkens met een andere waarde. Het logbestand krijgt de naam FlightGear_YYYY-MM-DD_&lt;num&gt;.log waarbij &lt;num&gt; de waardes 0, 1, 2 etc. aanneemt.</target>
+          <source>Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc.</source>
+          <target>Schrijf een logboek in de map DIR. De speciale waarde 'desktop zorgt voor het schrijven van het logboek naar de desktop (locatie afhankelijk van het besturingssysteem). Deze optie kan meerdere keren worden opgegeven, telkens met een andere waarde. Het logbestand krijgt de naam FlightGear_YYYY-MM-DD_&lt;num&gt;.log waarbij &lt;num&gt; de waardes 0, 1, 2 etc. aanneemt.</target>
         </trans-unit>
         <trans-unit id="options/log-level-desc:0" translate="yes" approved="yes">
           <source>Specify which logging level to use</source>
@@ -1349,9 +1349,9 @@
           <source>Open connection using the NMEA protocol</source>
           <target>Open een verbinding met het NMEA protocol</target>
         </trans-unit>
-        <trans-unit id="options/no-default-config-desc:0">
+        <trans-unit id="options/no-default-config-desc:0" translate="yes" approved="no">
           <source>Enable/Disable not loading any default configuration files (like .fgfsrc) unless explicitly specified with --config</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/notrim-desc:0" translate="yes" approved="yes">
           <source>Enable/Disable not attempting to trim the model</source>
@@ -1453,7 +1453,7 @@
           <source>Enable/Disable automatic opening of the Launcher when exiting FlightGear</source>
           <target>Automatisch openen van de launcher na het afsluiten van Flightgear in-/uitschakelen</target>
         </trans-unit>
-        <trans-unit id="options/restore-defaults-desc:0">
+        <trans-unit id="options/restore-defaults-desc:0" translate="yes" approved="no">
           <source>Enable/Disable resetting all user settings to their defaults (rendering options etc.)</source>
           <target state="needs-review-translation">Reset alle instellingen naar de standaardinstellingen (weergave opties etc.)</target>
         </trans-unit>
@@ -1513,25 +1513,25 @@
           <source>Explicitly specify the audio device to use</source>
           <target>Specifeer expliciet het te gebruiken audio-apparaat</target>
         </trans-unit>
-        <trans-unit id="options/specular-highlight-desc:0">
+        <trans-unit id="options/specular-highlight-desc:0" translate="yes" approved="no">
           <source>Enable/Disable specular reflections on textured objects</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/speed-desc:0" translate="yes" approved="yes">
-          <source>Run the FDM &apos;n&apos; times faster than real time</source>
-          <target>Voer de FDM &apos;n&apos; maal sneller uit dan normaal</target>
+          <source>Run the FDM 'n' times faster than real time</source>
+          <target>Voer de FDM 'n' maal sneller uit dan normaal</target>
         </trans-unit>
-        <trans-unit id="options/splash-screen-desc:0">
+        <trans-unit id="options/splash-screen-desc:0" translate="yes" approved="no">
           <source>Enable/Disable splash screen</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/start-date-desc:0" translate="yes" approved="yes">
           <source>Specify a starting date/time with respect to</source>
           <target>Geef een start tijd/datum relatief tot</target>
         </trans-unit>
-        <trans-unit id="options/state-desc:0">
+        <trans-unit id="options/state-desc:0" translate="yes" approved="no">
           <source>Specify the initial state of the aircraft to the given value</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/system-time:0" translate="yes" approved="yes">
           <source>system time</source>
@@ -1541,9 +1541,9 @@
           <source>Enable telnet server on the specified port</source>
           <target>Activeer de telnet server op dit poortnummer</target>
         </trans-unit>
-        <trans-unit id="options/terrain-engine-desc:0">
+        <trans-unit id="options/terrain-engine-desc:0" translate="yes" approved="no">
           <source>Specify the terrain engine you want to use: tilecache or pagedLOD</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/terrasync-desc:0" translate="yes" approved="yes">
           <source>Enable/Disable automatic scenery downloads/updates</source>
@@ -1553,13 +1553,13 @@
           <source>Set target directory for scenery downloads</source>
           <target>Kies een doelmap voor landschapsdownloads</target>
         </trans-unit>
-        <trans-unit id="options/texture-cache-desc:0">
+        <trans-unit id="options/texture-cache-desc:0" translate="yes" approved="no">
           <source>Enable/Disable texture cache (DDS)</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="options/texture-cache-dir-desc:0">
+        <trans-unit id="options/texture-cache-dir-desc:0" translate="yes" approved="no">
           <source>Specify the DDS texture cache directory to be different than the default location</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="options/texture-filtering-desc:0" translate="yes" approved="yes">
           <source>Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</source>
@@ -1736,28 +1736,28 @@
           <target>Fout bij laden landschap (BTG)</target>
         </trans-unit>
         <trans-unit id="sys/error-category-addon:0" translate="yes" approved="yes">
-          <source>The add-on &apos;%VALUE%&apos; contains errors. Please report this to the add-on developers.</source>
-          <target>De extensie &apos;%VALUE&apos; bevat fouten. Meld dit bij de ontwikkelaars van de extensie.</target>
+          <source>The add-on '%VALUE%' contains errors. Please report this to the add-on developers.</source>
+          <target>De extensie '%VALUE' bevat fouten. Meld dit bij de ontwikkelaars van de extensie.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-aircraft:0" translate="yes" approved="yes">
           <source>This aircraft (%VALUE%) contains errors. This may include visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</source>
           <target>Dit vliegtuig (%VALUE%) bevat fouten. Dit kan leiden tot visuele problemen, of een niet-werkend vliegtuig. Controleer of de ontwikkelaars een nieuwe versie hebben van het vliegtuig.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-aircraft-from-hangar:0" translate="yes" approved="yes">
-          <source>The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar&apos;s maintainers.</source>
+          <source>The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar's maintainers.</source>
           <target>Het gekozen vliegtuig (%VALUE%) bevat fouten. Dit kan leiden tot visuele problemen, of een niet-werkend vliegtuig. Meld onderstaande informatie bij de ontwikkelaars van het vliegtuig.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-custom-scenery:0" translate="yes" approved="yes">
-          <source>The custom scenery at &apos;%VALUE%&apos; contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</source>
-          <target>Het landschap van &apos;%VALUE%&apos; bevat fouten. Delen kunnen ontbreken, of het landschap laadt in zijn geheel niet. Controleer of er een nieuwe versie is.</target>
+          <source>The custom scenery at '%VALUE%' contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</source>
+          <target>Het landschap van '%VALUE%' bevat fouten. Delen kunnen ontbreken, of het landschap laadt in zijn geheel niet. Controleer of er een nieuwe versie is.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-fgdata:0" translate="yes" approved="yes">
           <source>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</source>
           <target>Problemen gevonden tijdens het laden van de simulatorbestanden (FGData). Dit duidt meestal op een probleem met de installatie of uw lokale schijf.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-input-device:0" translate="yes" approved="yes">
-          <source>The joystick (input device) &apos;%VALUE%&apos; couldn&apos;t be loaded correctly. This usually means its configuration file is incorrect.</source>
-          <target>De joystick (invoerapparaat) &apos;%VALUE%&apos; kon niet worden geladen. Dit duidt meestal op een fout configuratiebestand.</target>
+          <source>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</source>
+          <target>De joystick (invoerapparaat) '%VALUE%' kon niet worden geladen. Dit duidt meestal op een fout configuratiebestand.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-multiplayer:0" translate="yes" approved="yes">
           <source>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog.)</source>
@@ -1772,8 +1772,8 @@
           <target>Geheugen toewijzen mislukt. Sommige onderdelen worden niet geladen. Pas uw instellingen aan op de weergaveafstand of het aantal objecten te verminderen.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-scenario:0" translate="yes" approved="yes">
-          <source>The scenario &apos;%VALUE%&apos; contains errors, and may not work correctly.</source>
-          <target>Het scenario &apos;%VALUE%&apos; bevat fouten en werkt mogelijk niet correct.</target>
+          <source>The scenario '%VALUE%' contains errors, and may not work correctly.</source>
+          <target>Het scenario '%VALUE%' bevat fouten en werkt mogelijk niet correct.</target>
         </trans-unit>
         <trans-unit id="sys/error-category-shaders:0" translate="yes" approved="yes">
           <source>Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</source>
@@ -1818,12 +1818,12 @@
         <trans-unit id="sys/error-popup-click-for-more:0" translate="yes" approved="yes">
           <source>Click to show further details.</source>
           <target>Klik voor meer details.</target>
-          <note annotates="source" from="developer">Added to error message popup notification to prompt user how to get more info</note>
+          <note from="developer" annotates="source">Added to error message popup notification to prompt user how to get more info</note>
         </trans-unit>
         <trans-unit id="sys/error-popup-heading:0" translate="yes" approved="yes">
           <source>An error occurred</source>
           <target>Er is een probleem opgetreden</target>
-          <note annotates="source" from="developer">Title of the error message/popup window</note>
+          <note from="developer" annotates="source">Title of the error message/popup window</note>
         </trans-unit>
         <trans-unit id="sys/error-scenery-load:0" translate="yes" approved="yes">
           <source>Errors loading scenery</source>
@@ -1941,9 +1941,9 @@
           <source>reading airport data</source>
           <target>vliegvelddata inlezen</target>
         </trans-unit>
-        <trans-unit id="sys/scenery-extract:0">
+        <trans-unit id="sys/scenery-extract:0" translate="yes" approved="no">
           <source>extracting [VALUE]</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="sys/settings-migration-text:0" translate="yes" approved="yes">
           <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
@@ -1953,33 +1953,33 @@
           <source>Settings migrated</source>
           <target>Instellingen meegenomen</target>
         </trans-unit>
-        <trans-unit id="sys/shared-models-missing:0">
+        <trans-unit id="sys/shared-models-missing:0" translate="yes" approved="no">
           <source>The shared scenery models are not installed correctly. This will cause missing elements in all scenery. Enable automatic scenery downloading, or download the shared models from https://www.flightgear.org/scenery/shared-models and add them to your scenery list.</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="sys/shared-models-missing-terrasync:0">
+        <trans-unit id="sys/shared-models-missing-terrasync:0" translate="yes" approved="no">
           <source>The shared scenery models have not downloaded correctly. This will cause missing elements in all scenery. Automatic scenery downloading is enabled, check your network connection is working as expected.</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="sys/shared-models-missing-title:0" translate="yes" approved="yes">
           <source>Missing shared models</source>
           <target>Gedeelde modellen ontbreken</target>
         </trans-unit>
-        <trans-unit id="sys/units-kbytes:0">
+        <trans-unit id="sys/units-kbytes:0" translate="yes" approved="no">
           <source>KB</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="sys/units-kbytes-per-sec:0">
+        <trans-unit id="sys/units-kbytes-per-sec:0" translate="yes" approved="no">
           <source>KB/s</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="sys/units-mbytes:0">
+        <trans-unit id="sys/units-mbytes:0" translate="yes" approved="no">
           <source>MB</source>
-          <target></target>
+          <target />
         </trans-unit>
-        <trans-unit id="sys/units-mbytes-per-sec:0">
+        <trans-unit id="sys/units-mbytes-per-sec:0" translate="yes" approved="no">
           <source>MB/s</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="sys/unstable-warning:0" translate="yes" approved="yes">
           <source>Unstable nightly build - some features may be under active development</source>
@@ -1991,79 +1991,79 @@
           <source>Drag while holding the right mouse button to look around</source>
           <target>Sleep met de rechtermuisknop ingedrukt om rond te kijken</target>
         </trans-unit>
-        <trans-unit id="tips/tip:1">
+        <trans-unit id="tips/tip:1" translate="yes" approved="no">
           <source>Hold Ctrl while looking around to move the view up, down, left or right</source>
           <target state="needs-review-translation">Houd [Shift] ingedrukt tijdens het rondkijken om het beeld omhoog, omlaag, naar links of naar rechts te bewegen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:2" approved="yes">
+        <trans-unit id="tips/tip:2" translate="yes" approved="yes">
           <source>Press a/A to adjust the simulation speed</source>
           <target>Druk op a/A om de simulatiesnelheid aan te passen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:3" approved="yes">
+        <trans-unit id="tips/tip:3" translate="yes" approved="yes">
           <source>Press x/X to zoom in and out</source>
           <target>Druk op x/X om in en uit te zoomen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:4" approved="yes">
+        <trans-unit id="tips/tip:4" translate="yes" approved="yes">
           <source>Find frequencies of nearby ATC services from the Radios dialog</source>
           <target>Vind frequenties van nabijgelegen ATC services in het Radiovenster</target>
         </trans-unit>
-        <trans-unit id="tips/tip:5" approved="yes">
+        <trans-unit id="tips/tip:5" translate="yes" approved="yes">
           <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
           <target>Druk op v om uw zicht te wijzigen en Ctrl-V om terug te keren naar de cockpit</target>
         </trans-unit>
-        <trans-unit id="tips/tip:6" approved="yes">
+        <trans-unit id="tips/tip:6" translate="yes" approved="yes">
           <source>Press F3 to take a screenshot</source>
           <target>Druk op F3 om een schermopname te maken</target>
         </trans-unit>
-        <trans-unit id="tips/tip:7">
+        <trans-unit id="tips/tip:7" translate="yes" approved="no">
           <source>Join the FlightGear community at https://forum.flightgear.org</source>
           <target state="needs-review-translation">Neem deel aan de FlightGear gemeenschap op forum.flightgear.org</target>
         </trans-unit>
-        <trans-unit id="tips/tip:8" approved="yes">
+        <trans-unit id="tips/tip:8" translate="yes" approved="yes">
           <source>Press h to bring up a Heads Up Display</source>
           <target>Druk op h op een Heads Up Display te tonen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:9" approved="yes">
+        <trans-unit id="tips/tip:9" translate="yes" approved="yes">
           <source>Show or hide the menu bar by pressing F10</source>
           <target>Toon en verberg de menubalk met F10</target>
         </trans-unit>
-        <trans-unit id="tips/tip:10" approved="yes">
+        <trans-unit id="tips/tip:10" translate="yes" approved="yes">
           <source>Frame-rate too low? - try disabling AI traffic</source>
           <target>Frame rate te laag? Probeer computergestuurd verkeer uit te schakelen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:11" approved="yes">
+        <trans-unit id="tips/tip:11" translate="yes" approved="yes">
           <source>Select Environment → Weather to fly in different weather</source>
           <target>Kies Omgeving → Weer om in ander weer te vliegen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:12" approved="yes">
+        <trans-unit id="tips/tip:12" translate="yes" approved="yes">
           <source>Press F12 to change the radio frequencies easily</source>
           <target>Druk op F12 om de radiofrequenties makkelijk te wijzigen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:13" approved="yes">
+        <trans-unit id="tips/tip:13" translate="yes" approved="yes">
           <source>Look around by holding down the right mouse button and moving the mouse</source>
           <target>Kijk rond door de rechtermuisknop ingedrukt te houden en de muis te bewegen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:14" approved="yes">
+        <trans-unit id="tips/tip:14" translate="yes" approved="yes">
           <source>Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
           <target>Ga naar Multiplayer → Multiplayerinstellingen om samen online te vliegen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:15" approved="yes">
-          <source>Can&apos;t get the engine started? - see Help → Aircraft Checklists</source>
+        <trans-unit id="tips/tip:15" translate="yes" approved="yes">
+          <source>Can't get the engine started? - see Help → Aircraft Checklists</source>
           <target>Lukt het niet om de motor te starten? Zie Help → Vliegtuig checklists</target>
         </trans-unit>
-        <trans-unit id="tips/tip:16" approved="yes">
+        <trans-unit id="tips/tip:16" translate="yes" approved="yes">
           <source>Drag while holding the middle and right mouse buttons to move the viewpoint</source>
           <target>Druk de middelste en rechter muisknop in en beweeg de muis om het zichtpunt te verplaatsen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:17" approved="yes">
+        <trans-unit id="tips/tip:17" translate="yes" approved="yes">
           <source>Press / to explore the internals of the simulator</source>
           <target>Druk op / om de binnenkant van de simulator te inspecteren</target>
         </trans-unit>
-        <trans-unit id="tips/tip:18" approved="yes">
+        <trans-unit id="tips/tip:18" translate="yes" approved="yes">
           <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
           <target>Druk op Tab om het gezichtspunt te verplaatsen met de muis en gebruik het scrollwieltje om te zoomen</target>
         </trans-unit>
-        <trans-unit id="tips/tip:19" approved="yes">
+        <trans-unit id="tips/tip:19" translate="yes" approved="yes">
           <source>Love FlightGear? Donate to keep our infrastructure running at https://flightgear.org/donate</source>
           <target>Blij met FlightGear? Doneer om onze infrastructuur draaiende te houden: https://flightgear.org/donate</target>
         </trans-unit>
@@ -2102,7 +2102,7 @@
           <target>CAT IIIb minimum</target>
         </trans-unit>
         <trans-unit id="weather-scenarios/cat-two-minimum-desc:0" translate="yes" approved="yes">
-          <source>With just a 1/4 mile visibility and clouds at 100ft, you don&apos;t see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
+          <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
           <target>Met slechts een kwart mijl zicht en wolken op 100ft is de landingsbaan pas kort voor de landing zichtbaar. Vertrouw op uw instrumenten om te overleven.</target>
         </trans-unit>
         <trans-unit id="weather-scenarios/cat-two-minimum-name:0" translate="yes" approved="yes">
@@ -2126,7 +2126,7 @@
           <target>Centrum van een lagedrukgebied</target>
         </trans-unit>
         <trans-unit id="weather-scenarios/early-morning-fog-desc:0" translate="yes" approved="yes">
-          <source>Fog developed this autumn&apos;s morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500&apos; climb and you&apos;ll see the sun!</source>
+          <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
           <target>Mist kwam deze herfstochtend opzetten. Verwacht good zicht boven de mist, maar er doorheen komen kan een uitdaging zijn. Als u 500ft bereikt zult u de zon zien!</target>
         </trans-unit>
         <trans-unit id="weather-scenarios/early-morning-fog-name:0" translate="yes" approved="yes">
@@ -2153,9 +2153,9 @@
           <source>A standard atmosphere model for testing and calibrating aircraft performance and design.</source>
           <target>Een standaard weermodel voor het testen en kalibreren van vliegtuigprestaties en -ontwerpen.</target>
         </trans-unit>
-        <trans-unit id="weather-scenarios/isa-name:0">
+        <trans-unit id="weather-scenarios/isa-name:0" translate="yes" approved="no">
           <source>International Standard Atmosphere</source>
-          <target></target>
+          <target />
         </trans-unit>
         <trans-unit id="weather-scenarios/live-data-desc:0" translate="yes" approved="yes">
           <source>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
@@ -2190,7 +2190,7 @@
           <target>Marginale VFR</target>
         </trans-unit>
         <trans-unit id="weather-scenarios/stormy-monday-desc:0" translate="yes" approved="yes">
-          <source>You&apos;re out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
+          <source>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
           <target>In voor een avontuur? Vlagerige wind vanuit het westen en onweersbuien moeten ontweken worden. Riemen vast!</target>
         </trans-unit>
         <trans-unit id="weather-scenarios/stormy-monday-name:0" translate="yes" approved="yes">

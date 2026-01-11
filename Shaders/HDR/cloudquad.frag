@@ -72,6 +72,7 @@ float VOXEL_FIELD_HEIGHT_M = float(voxel_field_height * voxel_resolution_m);
 
 // Scaling factor to account for the voxel space not being a cube.
 vec3 VOXEL_SCALE = vec3(1.0, 1.0, float(voxel_field_width) / float(voxel_field_height));
+vec3 EYE_SCALE = vec3(VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_HEIGHT_M);
 
 // Boundary where we use the detailed voxel space rather than the rough voxel space in UV coordinates
 float DETAILED_X_Y_BOUNDARY = 0.5 / float(rough_field_factor);
@@ -98,7 +99,12 @@ float HenyeyGreenstein(float inCosAngle, float inG)
  * Get cloud information for a given sample point, using either the detailed
  * or rough data as appropriate
  */
-vec4 getCloud(vec3 samplePoint)  {
+vec4 getCloud(vec3 samplePoint, vec3 dir)  {
+    // If outside the voxel space then calculate an SDF directly.  This is basically the
+    // z coordinate - 1.0, plus a little bit to ensure it ends up within the voxel space.
+    if (samplePoint.z < 0.0) return vec4(0.0,0.0,0.0, -samplePoint.z / length(dir));
+    if (samplePoint.z > 1.0) return vec4(0.0,0.0,0.0, (samplePoint.z - 1.0) / length(dir));
+
     if (cloud_field_repeating) return texture(detailed_tex, samplePoint);
     if ((abs(samplePoint.x - 0.5) < DETAILED_X_Y_BOUNDARY) && (abs(samplePoint.y - 0.5) < DETAILED_X_Y_BOUNDARY)) {
         // We're in the detailed space.  Scale the xy UV to the detailed voxel space
@@ -115,8 +121,8 @@ vec4 getCloud(vec3 samplePoint)  {
 /**
  * Calculate the density of a given samplePoint
  */
-float calculateDensity(vec3 samplePoint) {
-    vec4 cloud = getCloud(samplePoint);
+float calculateDensity(vec3 samplePoint, vec3 dir) {
+    vec4 cloud = getCloud(samplePoint, dir);
     float cloudDimension = cloud.x;
     float cloudType = cloud.y;
     float cloudDensity = cloud.z;
@@ -168,11 +174,11 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
 
     for (int i = 0; i < MAX_LIGHT_STEPS; i++) {
         p = eye + distance * marchingDirection;
-        vec4 t = getCloud(p);
+        vec4 t = getCloud(p, marchingDirection);
 
         if (t.a < EPSILON) {
             // Inside a cloud, so add density
-            density  += calculateDensity(p);
+            density  += calculateDensity(p, marchingDirection);
             distance += IN_CLOUD_SUN_RAY_STEP_SIZE;
         } else {
             distance += t.a;
@@ -206,10 +212,10 @@ struct sample_information {
  * Sign indicates whether the point is inside or outside the surface,
  * negative indicating inside.
  */
-sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
+sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye, vec3 dir) {
     sample_information lreturn;
 
-    vec4 cloud = getCloud(samplePoint);
+    vec4 cloud = getCloud(samplePoint, dir);
 
     lreturn.sdf = cloud.a;  // Alpha channel contains an SDF
     lreturn.density = 0.0;
@@ -218,7 +224,7 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
 
     if (lreturn.sdf < EPSILON) {
         // Point is inside the cloud, so work out the density and lighting information
-        lreturn.density = calculateDensity(samplePoint);
+        lreturn.density = calculateDensity(samplePoint, dir);
         lreturn.sdf = IN_CLOUD_STEP_SIZE; // SDF is set to a fixed amount for ray-marching
 
         // Determine the light energy at this point, made up of direct and ambient scattering
@@ -228,12 +234,12 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye) {
 
         // fg_SunDirectionWorld is in _normalized_ world space coordinates
         mat3 zup = mat3(fg_CameraZUpMatrix);
-        vec3 sundir = normalize(zup * fg_SunDirectionWorld * VOXEL_SCALE);
+        vec3 sundir = normalize(zup * fg_SunDirectionWorld) * VOXEL_SCALE;
 
         vec3 eyedir = normalize(samplePoint - eye);
         float densityToSun = getRayDensity(samplePoint, sundir, IN_CLOUD_SUN_RAY_STEP_SIZE, 1.0);
         float transmittance = exp(- densityToSun);
-        float CoSSunAngle = dot(sundir, eyedir);
+        float CoSSunAngle = dot(normalize(sundir), eyedir);
 
         // TODO:  Have multiple of these phases?
         float phase = HenyeyGreenstein(CoSSunAngle, HENYEY_GREENSTEIN_ECCENTRICITY);
@@ -271,7 +277,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
 			return lreturn;
         }
 
-        sample_information s = sceneDensitySDF(p, eye);
+        sample_information s = sceneDensitySDF(p, eye, marchingDirection);
 
         if (s.density > 0.0) {
             // As the ray travels, the influence of each step reduces due to the amount of absorption infront.  E.g. the amount of cloud occluding the sample.
@@ -302,11 +308,10 @@ void main()
 
     mat3 zup = mat3(fg_CameraZUpMatrix);
     vec3 wdir = w_pos - fg_CameraPositionCart;
-    vec3 dir = normalize(zup * wdir);
-    float zscaleFactor = length(dir * VOXEL_SCALE);
-    dir = normalize(dir * VOXEL_SCALE);  // Take into account that the voxel space is not a cube by increasing the Z-factor
+    vec3 dir = normalize(zup * wdir) * VOXEL_SCALE; // Take into account that the voxel space is not a cube by increasing the Z-factor
+    float zscaleFactor = length(dir);
 
-    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / vec3(VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_HEIGHT_M) + vec3(0.5, 0.5, 0.0);
+    vec3 eye = (zup * (fg_CameraPositionCart - cloud_field_center)) / EYE_SCALE + vec3(0.5, 0.5, 0.0);
     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
 
     // Convert the logarithmic depth value into metres, and then scale to the voxel resolution 
@@ -314,7 +319,7 @@ void main()
     // actual length of the "normalized" direction.
     float max_depth_m = logdepth_decode(texture(depth_tex, texcoord).r);
     float max_depth_vx = min(max_depth_m * zscaleFactor / VOXEL_FIELD_WIDTH_M, MAX_DIST);
-    
+
     ray_data ray = cloudRayMarch(eye, dir, MIN_DIST, max_depth_vx);
     
     if (ray.light_absorption > 0.01) {

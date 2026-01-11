@@ -337,9 +337,6 @@ Started September 2000 by David Megginson, david@megginson.com
       </precipitation>
       <specular-highlight type="bool" userarchive="y">false</specular-highlight>
       <clouds3d-enable type="bool" userarchive="y">true</clouds3d-enable>
-      <clouds3d-vis-range type="float" userarchive="y">10000.0</clouds3d-vis-range>
-      <clouds3d-detail-range type="float" userarchive="y">10000.0</clouds3d-detail-range>
-      <clouds3d-density type="float" userarchive="y">0.25</clouds3d-density>
       <!-- legacy property to control drawing 'out the window', i.e
             non-cockpit + aircraft elements. Use draw-mask instead. -->
       <draw-otw type="bool">true</draw-otw>

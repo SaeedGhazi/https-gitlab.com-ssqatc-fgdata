@@ -52,33 +52,67 @@ var PangoText = {
         me.set("alignment", align);
     },
 
-    # Set the font size
-    setFontSize: func(size, aspect = 1) {
-        me.setDouble("character-size", size);
-        me.setDouble("character-aspect-ratio", aspect);
-    },
+    # Set font family, weight, style and size
+	# Any unset arguments will be reused from the currently applied font, or if no font is applied yet, a default font of 
+	# LiberationSans Normal Normal 14px will be used.
+    setFont: func(family = nil, weight = nil, style = nil, size = nil) {
+        var currentFamily = nil;
+        var currentWeight = "Normal";
+        var currentStyle = "Normal";
+        var currentSize = 14;
+        var fontStringParts = split(" ", me.get("font", ""));
+        foreach (var part; fontStringParts) {
+			var scannedSize = [];
+            if (string.scanf(part, "%dpx", scannedSize)) {
+                currentSize = scannedSize[0];
+            } elsif (contains(["Normal", "Italic"], part)) {
+                currentStyle = part;
+            } elsif (contains(["Thin", "Light", "Normal", "Medium", "Bold"], part)) {
+                currentWeight = part;
+            } else {
+				if (currentFamily == nil) {
+					currentFamily = part;
+				} else {
+					currentFamily = string.join(" ", [currentFamily, part]);
+				}
+			}
+        }
+		if (currentFamily == nil) {
+			currentFamily = "LiberationSans"
+		}
 
-    # Set font (by name of font file)
-    setFont: func(family = "LiberationSans", weight = "Normal", style = "Normal", size = 14) {
+        if (!family) {
+            family = currentFamily;
+        }
+        if (!weight) {
+            weight = currentWeight;
+        }
+        if (!style) {
+            style = currentStyle;
+        }
+        if (!size) {
+            size = currentSize;
+        }
+
         me.set("font", sprintf("%s %s %s %dpx", family, weight, style, size));
     },
 
-    # Enumeration of values for drawing mode:
-    TEXT:               0x01, # The text itself
-    BOUNDINGBOX:        0x02, # A bounding box (only lines)
-    FILLEDBOUNDINGBOX:  0x04, # A filled bounding box
-    ALIGNMENT:          0x08, # Draw a marker (cross) at the position of the text
-    # Set draw mode. Binary combination of the values above. Since I have not
-    # found a bitwise "or" we have to use a "+" instead.
-    # e.g. my_text.setDrawMode(Text.TEXT + Text.BOUNDINGBOX);
-    setDrawMode: func(mode) {
-        me.setInt("draw-mode", mode);
-    },
+    ## Enumeration of values for drawing mode:
+    #TEXT:               0x01, # The text itself
+    #BOUNDINGBOX:        0x02, # A bounding box (only lines)
+    #FILLEDBOUNDINGBOX:  0x04, # A filled bounding box
+    #ALIGNMENT:          0x08, # Draw a marker (cross) at the position of the text
+    ## Set draw mode. Binary combination of the values above. Since I have not
+    ## found a bitwise "or" we have to use a "+" instead.
+    ## e.g. my_text.setDrawMode(Text.TEXT + Text.BOUNDINGBOX);
+    #setDrawMode: func(mode) {
+    #    me.setInt("draw-mode", mode);
+    #},
 
-    # Set bounding box padding
-    setPadding: func(pad) {
-        me.setDouble("padding", pad);
-    },
+    ## Set bounding box padding
+    #setPadding: func(pad) {
+    #    me.setDouble("padding", pad);
+    #},
 
     setMaxWidth: func(w) {
         me.setDouble("max-width", w);

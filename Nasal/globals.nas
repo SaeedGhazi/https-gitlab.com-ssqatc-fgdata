@@ -286,11 +286,11 @@ var TestPangoText = {
                         .setColor(0,0,1)
                         .setTranslation(10, 10);
         me.root.createChild("pangotext", "pangotext")
-                        .setMarkup("Hello")
+                        .setMarkup("dgPQ&amp;")
                         .setAlignment("left-top")
-                        .setFont("LiberationSans")
+                        .setFont(family: "LiberationSans", size: 140)
                         .setForeground(1, 1, 0)
-                        .setBackground(1,0,1)
+                        .setBackground(1, 0, 1)
                         .show()
                         .setTranslation(10, 30);
 

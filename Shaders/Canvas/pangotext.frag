@@ -12,6 +12,6 @@ uniform sampler2D glyphTexture;
 void main()
 {
     vec4 texel = texture(glyphTexture, fs_in.texcoord);
-    // Modulate by the fill color (stored in the vertex color)
-    fragColor = texel;
+    fragColor.rgb = fs_in.vertex_color.rgb;
+    fragColor.a = texel.r;
 }

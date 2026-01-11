@@ -318,7 +318,7 @@ void main()
     // so we know how far to search before we reach something solid.  This needs to take into account that the voxel space is not a cube by adjusting for the
     // actual length of the "normalized" direction.
     float max_depth_m = logdepth_decode(texture(depth_tex, texcoord).r);
-    float max_depth_vx = min(max_depth_m * zscaleFactor / VOXEL_FIELD_WIDTH_M, MAX_DIST);
+    float max_depth_vx = min(max_depth_m / VOXEL_FIELD_WIDTH_M, MAX_DIST);
 
     ray_data ray = cloudRayMarch(eye, dir, MIN_DIST, max_depth_vx);
     

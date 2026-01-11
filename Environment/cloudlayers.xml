@@ -75,10 +75,8 @@ ns = Nimbostratus (Rain cloud)
       <min-sprite-height-m>600</min-sprite-height-m>
       <max-sprite-height-m>900</max-sprite-height-m>
       <height-map-texture>true</height-map-texture>
-      <voxel-texture-detailed>/Textures/Sky/cu.large.detailed.voxels.png</voxel-texture-detailed>
-      <voxel-texture-detailed>/Textures/Sky/cu.medium.detailed.voxels.png</voxel-texture-detailed>
-      <voxel-texture-rough>/Textures/Sky/cu.large.rough.voxels.png</voxel-texture-rough>
-      <voxel-texture-rough>/Textures/Sky/cu.medium.rough.voxels.png</voxel-texture-rough>
+      <voxel-texture>/Textures/Sky/cu.large.detailed.voxels.png</voxel-texture>
+      <voxel-texture>/Textures/Sky/cu.medium.detailed.voxels.png</voxel-texture>
     </cu-con>
     <cu-large>
       <min-cloud-width-m>1300</min-cloud-width-m>
@@ -96,10 +94,8 @@ ns = Nimbostratus (Rain cloud)
       <min-sprite-height-m>600</min-sprite-height-m>
       <max-sprite-height-m>900</max-sprite-height-m>
       <height-map-texture>true</height-map-texture>
-      <voxel-texture-detailed>/Textures/Sky/cu.large.detailed.voxels.png</voxel-texture-detailed>
-      <voxel-texture-detailed>/Textures/Sky/cu.medium.detailed.voxels.png</voxel-texture-detailed>
-      <voxel-texture-rough>/Textures/Sky/cu.large.rough.voxels.png</voxel-texture-rough>
-      <voxel-texture-rough>/Textures/Sky/cu.medium.rough.voxels.png</voxel-texture-rough>
+      <voxel-texture>/Textures/Sky/cu.large.detailed.voxels.png</voxel-texture>
+      <voxel-texture>/Textures/Sky/cu.medium.detailed.voxels.png</voxel-texture>
     </cu-large>
     <cu-small>
       <min-cloud-width-m>900</min-cloud-width-m>
@@ -117,10 +113,8 @@ ns = Nimbostratus (Rain cloud)
       <min-sprite-height-m>500</min-sprite-height-m>
       <max-sprite-height-m>700</max-sprite-height-m>
       <height-map-texture>true</height-map-texture>
-      <voxel-texture-detailed>/Textures/Sky/cu.small.detailed.voxels.png</voxel-texture-detailed>
-      <voxel-texture-detailed>/Textures/Sky/cu.tiny.detailed.voxels.png</voxel-texture-detailed>
-      <voxel-texture-rough>/Textures/Sky/cu.small.rough.voxels.png</voxel-texture-rough>
-      <voxel-texture-rough>/Textures/Sky/cu.tiny.rough.voxels.png</voxel-texture-rough>
+      <voxel-texture>/Textures/Sky/cu.small.detailed.voxels.png</voxel-texture>
+      <voxel-texture>/Textures/Sky/cu.tiny.detailed.voxels.png</voxel-texture>
     </cu-small>
     <ns-large>
       <min-cloud-width-m>1200</min-cloud-width-m>

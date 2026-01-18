@@ -575,8 +575,9 @@ Started September 2000 by David Megginson, david@megginson.com
         </debug>
         <clouds>
           <!-- The detailed cloud field should be 50km x 50km x 12800m to give a 25km range and approx 40,000 ft of troposphere-->
+          <!-- Note that the height of the voxel field is calculated dynamically to save memory, so this value is a maximum. -->
           <detailed-voxel-field-width type="int">256</detailed-voxel-field-width>
-          <detailed-voxel-field-height type="int">64</detailed-voxel-field-height>
+          <max-detailed-voxel-field-height type="int">64</max-detailed-voxel-field-height>
           <detailed-voxel-size-m type="int">200</detailed-voxel-size-m>
 
           <!-- How much larger rough field voxels are compared with detailed -->

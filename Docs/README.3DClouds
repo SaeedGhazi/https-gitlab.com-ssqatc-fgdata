@@ -25,20 +25,42 @@ Location is defined by the following properties:
 <x-offset-m> - Offset in m from the lon-deg. +ve is south (default 0)
 <y-offset-m> - Offset in m from the lat-deg. +ve is east (default 0)
 
-The cloud itself is built up from a voxel field - a PNG file that is interpretted
-as being of a number of square layers.  E.g. of size W x (W x H) pixels.
+The cloud itself can either be defined as a voxel field from a texture,
+or can be procedurally generated layer that will cover the entire sky using
+perlin noise.
 
-The cloud is defined by the following properties:
+A voxel texture cloud is defined by the following properties:
 
-<voxel-texture-detailed> - One or more voxels textures to use for the cloud at a detailed
-                           Level of Detail (LOD).  If more than one is defined, then one 
-                           will be selected at random at runtime.
+<voxel-texture> - One or more voxels textures to use for the cloud.  If more than 
+                  one is defined, then one will be selected at random at runtime.
 
-<voxel-texture-rough>    - One or more voxel textures to to for the cloud at a rough
-                           Level of Detail (LOD).  If more than one is defined, then one 
-                           will be selected at random at runtime.  This should map
-                           to the detailed voxel texture of the same index but with
-                           half the resolution.
+The voxel texture if a 3D texture of WxWxH voxels.  It is stored as a PNG file of 
+height W and width WxH, which is chopped into WxW slices to create the 3D texture.
+
+Rather than describing the cloud colour, the RGBA channels are used as follows:
+
+R - Dimension.  This is a positive gradient with 1.0 at the center of the cloud, and 0.0 at the edge.
+G - Type.  From wispy (0.0) to billowy (1.0)
+B - Density.  0.0 is no cloud density, 1.0 is fully opaque density.  Use this to determine if there is any cloud at this location.
+A - Signed Distance Field in UV space.  The maximum radius sphere centered on this point that doesn't contain any cloud density.  
+    Used for adaptive ray marching.  Negative values represent areas inside the cloud.
+
+However, the PNG file should only set the G and B channels, as the R and A channels are calculated
+by FlightGear itself.
+
+A layer cloud is defined by the following properties:
+
+<thickness-m>   - the maximum layer thickness in m.
+<coverage-norm> - normalized coverage.  1.0 means completely overcast (default 0.5)
+<min-density-norm> - minimum density per voxel. 0.0 is no density, 1.0 is complete density (default 0.5)
+<max-density-norm> - maximum density per voxel (default 0.5)
+<min-type-norm>    - minimum type.  0.0 is wispy, 1.0 is cauliflower / cumulus like (default 0.5)
+<max-type-norm>    - maximum type (default 0.5)
+
+<perlin-noise-frequency> - Perlin noise parameter (default 4)
+<perlin-alpha>           - Perlin noise parameter (default 0.7)
+<perlin-beta>            - Perlin noise parameter (default 2.5)
+<perlin-n>               - Perlin noise parameter (default 4)
 
 For example, the following Nasal snippet will create a cloud immediately above the
 aircraft at an altitude of 1000 ft above /environment/clouds/layer[0]/elevation-ft :
@@ -47,7 +69,8 @@ var p = props.Node.new({ "layer" : 0,
                          "index": 1,
                          "lat-deg": getprop("/position/latitude-deg"),
                          "lon-deg": getprop("/position/longitude-deg"),
-                         "alt-ft" : 1000 });
+                         "alt-ft" : 1000,
+                         "voxel-texture" : "Textures/Sky/cu.medium.detailed.voxels.png" });
 fgcommand("add-cloud", p);
 
 Moving Individual Clouds
@@ -101,8 +124,8 @@ Clouds
 ======
 
 The cloud definitions are as described above for placing individual
-clouds, but no position information is used (this is defined in the
-cloud box and layers below).
+clouds, but no position information is used for voxel texture clouds,
+as this this is defined in the cloud box and layers below.
 
 Cloud Boxes
 ===========
@@ -162,8 +185,15 @@ The layer type is derived from the METAR/Weather settings by FG itself.
 Each layer type is a named XML tag, i.e.: ns, sc, st, ac, cb, cu.
 If a layer type is not defined, then a 2D layer is used instead.
 
-The layer type contains one or more <cloud> definitions. This
-defines a type of cloud box, and a weighting for that type (<count>).
+The layer type contains one or more <layer> and <cloud> definitions. 
+
+A <layer>  defines a layer covering the entire sky.  e.g.
+
+<layer>
+  <name>st-layer</name>
+</layer>
+
+A <cloud> defines a type of cloud box, and a weighting for that type (<count>).
 
 For example, the following XML fragment will produce 3 "cb" cloud boxes
 for every 1 "cu":

@@ -267,6 +267,10 @@ struct ray_data {
 ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end) {
     ray_data lreturn;
     float distance = start;
+
+    lreturn.light_absorption = 0.0;
+    lreturn.direct_intensity = 0.0;
+    lreturn.ambient_intensity = 0.0;
     lreturn.first_hit = -1.0;
 
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {

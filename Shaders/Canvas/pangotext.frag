@@ -26,4 +26,7 @@ void main()
 	} else {
 		fragColor = fs_in.vertex_color;
 	}
+	if (fragColor.a == 0) {
+		discard;
+	}
 }

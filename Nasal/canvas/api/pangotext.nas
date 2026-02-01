@@ -44,10 +44,6 @@ var PangoText = {
     #     left-baseline
     #     center-baseline
     #     right-baseline
-    #     left-bottom-baseline
-    #     center-bottom-baseline
-    #     right-bottom-baseline
-    #
     setAlignment: func(align) {
         me.set("alignment", align);
     },
@@ -113,6 +109,10 @@ var PangoText = {
     #setPadding: func(pad) {
     #    me.setDouble("padding", pad);
     #},
+
+    maxWidth: func() {
+        return me.width();
+    },
 
     setMaxWidth: func(w) {
         me.setDouble("max-width", w);

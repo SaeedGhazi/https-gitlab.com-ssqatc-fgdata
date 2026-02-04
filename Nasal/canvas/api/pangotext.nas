@@ -22,7 +22,7 @@ var PangoText = {
 
     # Set the text
     setText: func(text) {
-        me.set("text", typeof(text) == "scalar" ? text : "");
+        return me.set("text", typeof(text) == "scalar" ? text : "");
     },
 
     getText: func() {
@@ -45,7 +45,7 @@ var PangoText = {
     #     center-baseline
     #     right-baseline
     setAlignment: func(align) {
-        me.set("alignment", align);
+        return me.set("alignment", align);
     },
 
     # Set font family, weight, style and size
@@ -90,7 +90,7 @@ var PangoText = {
             size = currentSize;
         }
 
-        me.set("font", sprintf("%s %s %s %dpx", family, weight, style, size));
+        return me.set("font", sprintf("%s %s %s %dpx", family, weight, style, size));
     },
 
     ## Enumeration of values for drawing mode:
@@ -110,27 +110,35 @@ var PangoText = {
     #    me.setDouble("padding", pad);
     #},
 
-    maxWidth: func() {
-        return me.width();
-    },
-
     setMaxWidth: func(w) {
-        me.setDouble("max-width", w);
+        return me.setInt("max-width", w);
     },
+    
+    setMaxHeight: func(h) {
+        return me.setInt("max-height", h);
+    }
 
     setForeground: func {
-        me.set("foreground", _getColor(arg));
+        return me.set("foreground", _getColor(arg));
     },
 
     getForeground: func {
-        me.get("foreground");
+        return me.get("foreground");
     },
 
     setBackground: func {
-        me.set("background", _getColor(arg));
+        return me.set("background", _getColor(arg));
     },
 
     getBackground: func {
-        me.get("background");
+        return me.get("background");
     },
+
+    setLineSpacing: func(spacing) {
+        return me.setDouble("line-spacing", spacing);
+    },
+
+    getLineSpacing: func {
+        return me.get("line-spacing");
+    }
 };

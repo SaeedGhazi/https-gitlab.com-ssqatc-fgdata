@@ -20,9 +20,13 @@ void main()
 {
 	int render_part = int(fs_in.render_part);
 	if (render_part == RENDER_PART_FOREGROUND) {
-		vec4 texel = texture(glyphTexture, fs_in.texcoord);
-		fragColor.rgb = fs_in.vertex_color.rgb;
-		fragColor.a = texel.r;
+		float alpha = texture(glyphTexture, fs_in.texcoord).r;
+		if (alpha == 0.0) {
+			fragColor = vec4(0.0, 0.0, 0.0, 0.0);
+		} else {
+			fragColor.rgb = fs_in.vertex_color.rgb;
+			fragColor.a = fs_in.vertex_color.a * alpha;
+		}
 	} else {
 		fragColor = fs_in.vertex_color;
 	}

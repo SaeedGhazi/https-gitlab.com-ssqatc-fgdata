@@ -588,6 +588,9 @@ Started September 2000 by David Megginson, david@megginson.com
 
           <direct-intensity-scale type="float">1.0</direct-intensity-scale>
           <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
+
+          <!-- Cloud buffer scale, as a factor of the screen size.-->
+          <render-scale>0.5</render-scale>
         </clouds>
       </hdr>
 

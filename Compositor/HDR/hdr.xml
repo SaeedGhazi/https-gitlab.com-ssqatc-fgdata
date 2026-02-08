@@ -74,11 +74,11 @@
   </buffer>
 
   <!-- HDR buffer just containing clouds -->
-  <buffer include="screen-buffer.xml">
+  <buffer include="cloud-buffer.xml">
     <name>clouds</name>
     <format>rgba16f</format>
   </buffer>
-  <buffer include="screen-buffer.xml">
+  <buffer include="cloud-buffer.xml">
     <name>clouds-depth-stencil</name>
     <format>depth24-stencil8</format>
   </buffer>

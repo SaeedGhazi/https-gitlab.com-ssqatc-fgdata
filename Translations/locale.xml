@@ -23,6 +23,12 @@
 	</locale>
 
 	<locale>
+		<lang type="string">cs</lang>
+		<lang type="string">cs_CZ</lang>
+		<xliff type="string">Translations/cs/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
 		<lang type="string">es</lang>
 		<lang type="string">es_AR</lang>
 		<lang type="string">es_MX</lang>

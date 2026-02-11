@@ -116,7 +116,7 @@ var PangoText = {
     
     setMaxHeight: func(h) {
         return me.setInt("max-height", h);
-    }
+    },
 
     setForeground: func {
         return me.set("foreground", _getColor(arg));

@@ -86,6 +86,13 @@
 				<command>save-error-report-data</command>
                 <where>!desktop</where>
 			</binding>
+
+			<enable>
+				<greater-than>
+	                <property>/sim/error-report/display/index</property>
+					<value>-1</value>
+				</greater-than>
+            </enable>
         </button>
 
         <button>
@@ -94,6 +101,13 @@
 				<command>save-error-report-data</command>
                 <where>!clipboard</where>
 			</binding>
+
+			<enable>
+				<greater-than>
+	                <property>/sim/error-report/display/index</property>
+					<value>-1</value>
+				</greater-than>
+            </enable>
         </button>
 
         <empty><stretch>1</stretch></empty>

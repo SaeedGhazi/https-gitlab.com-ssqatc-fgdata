@@ -13,8 +13,7 @@ gui.widgets.LineEdit = {
 
     m._text = "";
     m._placeholder = "";
-    m._max_length = 32767;
-    m._cursor = 0;
+    #m._max_length = 32767;
     m._selection_start = 0;
     m._selection_end = 0;
 
@@ -28,7 +27,7 @@ gui.widgets.LineEdit = {
 
     m.setText(cfg.get("text", ""));
     m.setPlaceholder(cfg.get("placeholder", ""));
-    m.setMaxLength(cfg.get("max-length", m._max_length));
+    #m.setMaxLength(cfg.get("max-length", m._max_length));
 
     return m;
   },
@@ -37,17 +36,18 @@ gui.widgets.LineEdit = {
   },
   setText: func(text)
   {
-     if (text == nil) {
-       me.clear();
-       return me;
-     }
+    if (text == nil) {
+      me.clear();
+      return me;
+    }
 
-    me._text = utf8.substr(text, 0, me._max_length);
-    me._cursor = utf8.size(me._text);
+    me._text = text;
     me.clearSelection();
 
-    if( me._view != nil )
+    if (me._view != nil) {
       me._view.setText(me, me._text);
+      me._view._text.moveCursorToByteIndex(size(me._text));
+    }
     me._trigger("text-changed", {"text": me._text});
 
     return me;
@@ -63,11 +63,12 @@ gui.widgets.LineEdit = {
   clear: func
   {
     me._text = "";
-    me._cursor = 0;
+    me._moveCursorToByteIndex(0);
     me.clearSelection();
 
-    if( me._view != nil )
+    if (me._view != nil) {
       me._view.setText(me, "");
+    }
     me._trigger("text-changed", {"text": me._text});
     me._onStateChange();
   },
@@ -87,16 +88,34 @@ gui.widgets.LineEdit = {
     }
 
     me._text = utf8.substr(me._text, 0, me._max_length);
-    if( me._view != nil )
-      me._view.setText(me, "");
+    if (me._view != nil) {
+      me._view.setText(me, me._text);
+    }
     me._trigger("text-changed", {"text": me._text});
-    me.moveCursor(me._cursor);
+    me._moveCursorToByteIndex(size(me._text));
     return me;
   },
-  moveCursor: func(pos, mark = 0)
+  _moveCursorToByteIndex: func(pos, mark = 0)
   {
-    var len = utf8.size(me._text);
-    me._cursor = math.max(0, math.min(pos, len));
+    if (me._view != nil) {
+      me._view._text.moveCursorToByteIndex(pos);
+    }
+
+    me._onStateChange();
+    return me;
+  },
+  _moveCursorToPosition: func(x, y) {
+    if (me._view != nil) {
+      me._view._text.moveCursorToPosition([x, y]);
+    }
+    
+    me._onStateChange();
+    return me;
+  },
+  moveCursor: func(direction) {
+    if (me._view != nil) {
+      me._view._text.moveCursor(direction);
+    }
 
     me._onStateChange();
     return me;
@@ -117,48 +136,22 @@ gui.widgets.LineEdit = {
       return nil;
     }
   },
-  _getNearestCursorPos: func(x) {
-    var crs = me._getNearestCursor(x);
-    return me._view._text.getCursorPos(crs[0], crs[1]);
-  },
-  _getNearestCursor: func(x) {
-    return me._view._text.getNearestCursor([x, 5]);
-  },
-  moveCursorX: func(x) {
-    me._cursor = me._getNearestCursor(x)[1];
-    me._onStateChange();
-    return me;
-  },
   home: func()
   {
-    me.moveCursor(0);
+    me._moveCursorToByteIndex(0);
     me.clearSelection();
   },
   end: func()
   {
-    me.moveCursor(utf8.size(me._text));
+    me._moveCursorToByteIndex(size(me._text));
     me.clearSelection();
   },
   # Insert given text after cursor (and first remove selection if set)
   insert: func(text)
   {
-    var after = utf8.substr(me._text, me._cursor);
-    me._text = utf8.substr(me._text, 0, me._cursor);
-
-    # Replace selected text, insert new text and place cursor after inserted
-    # text
-    var remaining = me._max_length - me._cursor - utf8.size(after);
-    if (remaining > 0) {
-      me._text ~= utf8.substr(text, 0, remaining);
-    }
-
-    #me.clearSelection();
-    me._cursor = utf8.size(me._text);
-
-    me._text ~= after;
-
     if (me._view != nil) {
-      me._view.setText(me, me._text);
+      me._view._text.insertAtCursor(text);
+      me._text = me._view._text.text();
     }
     me._trigger("text-changed", {"text": me._text});
 
@@ -190,7 +183,6 @@ gui.widgets.LineEdit = {
     me._text = utf8.substr(me._text, 0, me._selection_start)
              ~ utf8.substr(me._text, me._selection_end);
 
-    me._cursor = me._selection_start;
     me.clearSelection();
 
     if (me._view != nil) {
@@ -201,9 +193,20 @@ gui.widgets.LineEdit = {
     me._onStateChange();
     return me
   },
+  _removeAtCursor: func(beforeOrAfter) {
+    if (me._view != nil) {
+      me._view._text.removeAtCursor(beforeOrAfter);
+      me._text = me._view._text.text();
+    }
+    me._trigger("text-changed", {"text": me._text});
+    me._onStateChange();
+    return me;
+  },
   # Remove selection or if nothing is selected the character before the cursor
   backspace: func()
   {
+    me._removeAtCursor(-1);
+    return me;
     if (me._selection_start == me._selection_end) {
       if (me._cursor == 0) {
         # Before first character...
@@ -219,6 +222,8 @@ gui.widgets.LineEdit = {
   # Remove selection or if nothing is selected the character after the cursor
   delete: func()
   {
+    me._removeAtCursor(1);
+    return me;
     if (me._selection_start == me._selection_end) {
       if (me._cursor == utf8.size(me._text)) {
         # After last character...
@@ -269,10 +274,10 @@ gui.widgets.LineEdit = {
           }
         } else {
           if (me._selection_start != 0 or me._selection_end != 0) {
-            me.moveCursor(me._selection_start);
+            me._moveCursorToByteIndex(me._selection_start);
             me.clearSelection();
           } else {
-            me.moveCursor(me._cursor - 1);
+            me.moveCursor(-1);
           }
         }
       } elsif (e.key == "Right") {
@@ -289,10 +294,10 @@ gui.widgets.LineEdit = {
           }
         } else {
           if (me._selection_end != 0 or me._selection_start != 0) {
-            me.moveCursor(me._selection_end);
+            me._moveCursorToByteIndex(me._selection_end);
             me.clearSelection();
           } else {
-            me.moveCursor(me._cursor + 1);
+            me.moveCursor(1);
           }
         }
       } elsif (e.key == "Home") {
@@ -305,8 +310,8 @@ gui.widgets.LineEdit = {
       if (e.button == 2) {
         me.showContextMenu(e);
       } elsif (e.button == 0) {
+        me._moveCursorToPosition(e.localX - view._text.getTranslation()[0], e.localY - view._text.getTranslation()[1]);
       	me.clearSelection();
-      	me.moveCursorX(e.localX - view._text.getTranslation()[0]);
       }
     });
     el.addEventListener("dblclick", func(e) {

@@ -53,16 +53,12 @@ DefaultStyle.widgets.button = {
   new: func(parent, cfg)
   {
     me._root = parent.createChild("group", "button");
-    me._bg =
-      me._root.createChild("path");
-    me._border =
-      me._root.createChild("image", "button")
-              .set("slice", "10 12"); #"7")
-    me._label =
-      me._root.createChild("text")
-              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-              .set("character-size", 14)
-              .set("alignment", "center-baseline");
+    me._bg = me._root.createChild("path");
+    me._border = me._root.createChild("image", "button")
+            .set("slice", "10 12"); #"7")
+    me._label = me._root.createChild("pangotext")
+            .setFont("LiberationSans", "Normal", "Normal", 14)
+            .setAlignment("center-baseline");
     if (cfg.get("flat")) {
       me._border.hide();
       me._bg.hide();
@@ -70,15 +66,14 @@ DefaultStyle.widgets.button = {
   },
   setSize: func(model, w, h)
   {
-    me._bg.reset()
-          .rect(3, 3, w - 6, h - 6, {"border-radius": 5});
+    me._bg.reset().rect(3, 3, w - 6, h - 6, {"border-radius": 5});
     me._border.setSize(w, h);
   },
   setText: func(model, text)
   {
     me._label.setText(text);
 
-    var min_width = text ? math.max(80, me._label.maxWidth() + 16) : 28;
+    var min_width = text ? math.max(80, me._label.width() + 16) : 28;
     model.setLayoutMinimumSize([min_width, 28]);
     model.setLayoutSizeHint([min_width, 28]);
     model.setLayoutMaximumSize([1024, 28]);
@@ -106,10 +101,10 @@ DefaultStyle.widgets.button = {
     if( backdrop )
     {
       file ~= "backdrop-";
-      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+      me._label.setForeground(me._style.getColor("backdrop_fg_color"));
     }
     else
-      me._label.set("fill", me._style.getColor("fg_color"));
+      me._label.setForeground(me._style.getColor("fg_color"));
     file ~= "button";
 
     if( model._down )
@@ -470,36 +465,22 @@ DefaultStyle.widgets["line-edit"] = {
     me._hpadding = cfg.get("hpadding", 8);
 
     me._root = parent.createChild("group", "line-edit");
-    me._border =
-      me._root.createChild("image", "border")
-              .set("slice", "10 12"); #"7")
-    me._placeholder =
-      me._root.createChild("text", "placeholder")
-              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-              .set("character-size", 14)
-              .set("alignment", "left-baseline")
-              .set("clip-frame", Element.PARENT);
-    me._text =
-      me._root.createChild("text", "input")
-              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-              .set("character-size", 14)
-              .set("alignment", "left-baseline")
-              .set("clip-frame", Element.PARENT);
-    me._selection = me._root.createChild("path", "selection")
-              .set("clip-frame", Element.PARENT)
-              .set("fill", "#3333ff");
-    me._selected_text = me._root.createChild("text", "selected-text")
-              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-              .set("character-size", 14)
-              .set("alignment", "left-baseline")
-              .set("clip-frame", Element.PARENT)
-              .set("fill", "#ffffff");
-    me._cursor =
-      me._root.createChild("path", "cursor")
-              .set("stroke", "#333")
-              .set("stroke-width", 1)
-              .moveTo(me._hpadding, 5)
-              .vert(10);
+    me._border = me._root.createChild("image", "border")
+            .set("slice", "10 12"); #"7")
+    me._placeholder = me._root.createChild("pangotext", "placeholder")
+            .setFont(family: "LiberationSans", size: 14)
+            .setAlignment("left-baseline")
+            .set("clip-frame", Element.PARENT);
+    me._text = me._root.createChild("pangotext", "input")
+            .setFont(family: "LiberationSans", size: 14)
+            .setAlignment("left-baseline")
+            .set("clip-frame", Element.PARENT);
+
+    me._cursor = me._root.createChild("path", "cursor")
+            .set("stroke", "#333")
+            .set("stroke-width", 1)
+            .moveTo(me._hpadding, 5)
+            .vert(10);
     me._hscroll = 0;
     me._cursor_blink = 1;
     me._cursor_blink_timer = maketimer(0.5, func {
@@ -517,14 +498,6 @@ DefaultStyle.widgets["line-edit"] = {
       "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
     );
     me._text.set(
-      "clip",
-      "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
-    );
-    me._selected_text.set(
-      "clip",
-      "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
-    );
-    me._selection.set(
       "clip",
       "rect(0, " ~ (w - me._hpadding) ~ ", " ~ h ~ ", " ~ me._hpadding ~ ")"
     );
@@ -566,25 +539,17 @@ DefaultStyle.widgets["line-edit"] = {
     me._border.set("src", file ~ ".png");
 
     var color_name = backdrop ? "backdrop_fg_color" : "fg_color";
-    me._placeholder.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "placeholder_color"));
-    me._text.set("fill", me._style.getColor(color_name));
-    me._selected_text.set("fill", me._style.getColor("text_color_selected"));
-    me._selection.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "text_color_bg_selected"));
+    me._placeholder.setForeground(me._style.getColor((backdrop ? "backdrop_" : "") ~ "placeholder_color"));
+    me._text.setForeground(me._style.getColor(color_name));
 
     me._cursor_visible = model._enabled and model._focused and !backdrop and model._selection_start == model._selection_end;
     me._cursor.setVisible(me._cursor_visible and me._cursor_blink);
-    me._selection.reset()
-            .moveTo(me._text.getCursorPos(0, model._selection_start)[0], 0)
-            .vert(16)
-            .horizTo(me._text.getCursorPos(0, model._selection_end)[0])
-            .vert(-16);
-    me._selected_text.setText(model.selectedText());
 
     me._placeholder.setVisible(model._text or me._cursor_visible ? 0 : 1);
 
     var width = model._size[0] - 2 * me._hpadding;
-    var cursor_pos = me._text.getCursorPos(0, model._cursor)[0];
-    var text_width = me._text.getCursorPos(0, me._text.lineLength(0))[0];
+    var cursor_pos = me._text.cursorRect()[0];
+    var text_width = me._text.width();
 
     if( text_width <= width )
       # fit -> align left (TODO handle different alignment)
@@ -610,10 +575,6 @@ DefaultStyle.widgets["line-edit"] = {
     me._cursor
       .setDouble("coord[0]", text_pos + cursor_pos)
       .update();
-    me._selection.setTranslation(text_pos, model._size[1] / 2 - 8)
-            .update();
-    me._selected_text.setTranslation(text_pos + me._text.getCursorPos(0, model._selection_start)[0], model._size[1] / 2 + 5)
-            .update();
   }
 };
 

@@ -3,74 +3,74 @@
 <PropertyList>
 
 
-	<name>error-report</name>
-	<dialog-name>error-report</dialog-name>
-	<layout>vbox</layout>
-	<resizable>true</resizable>
-	
-	<pref-width>900</pref-width>
+    <name>error-report</name>
+    <dialog-name>error-report</dialog-name>
+    <layout>vbox</layout>
+    <resizable>true</resizable>
+    
+    <pref-width>900</pref-width>
 
 
-	<group>
-		<layout>hbox</layout>
+    <group>
+        <layout>hbox</layout>
 
-		<text>
-			<label>Error Report</label>
-		</text>
+        <text>
+            <label>Error Report</label>
+        </text>
 
-		<empty><stretch>1</stretch></empty>
+        <empty><stretch>1</stretch></empty>
 
-		<button>
-			<legend>X</legend>
-			<key>Esc</key>
-			<pref-width>20</pref-width>
-			<pref-height>20</pref-height>
-			<binding>
-				<command>dismiss-error-report</command>
-			</binding>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-	</group>
+        <button>
+            <legend>X</legend>
+            <key>Esc</key>
+            <pref-width>20</pref-width>
+            <pref-height>20</pref-height>
+            <binding>
+                <command>dismiss-error-report</command>
+            </binding>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
 
-	<hrule/>
+    <hrule/>
 
     <textbox>
-		<halign>fill</halign>
-		<!-- <pref-width>450</pref-width> -->
-		<pref-height>100</pref-height>
-		<padding>6</padding>
-		<wrap>true</wrap>
-		<editable>false</editable>
+        <halign>fill</halign>
+        <!-- <pref-width>450</pref-width> -->
+        <pref-height>100</pref-height>
+        <padding>6</padding>
+        <wrap>true</wrap>
+        <editable>false</editable>
 
         <property>/sim/error-report/display/category</property>
     </textbox>
     
-	<textbox>
-		<halign>fill</halign>
+    <textbox>
+        <halign>fill</halign>
 
-		<pref-height>100</pref-height>
-		<padding>6</padding>
-		<wrap>true</wrap>
-		<editable>false</editable>
+        <pref-height>100</pref-height>
+        <padding>6</padding>
+        <wrap>true</wrap>
+        <editable>false</editable>
 
-		<property>/sim/error-report/display/next-steps</property>
+        <property>/sim/error-report/display/next-steps</property>
     </textbox>
     <hrule/>
 
     <textbox>
-		<pref-width>500</pref-width>
+        <pref-width>500</pref-width>
 
-		<halign>fill</halign>
-		<valign>fill</valign>
-		<stretch>true</stretch>
+        <halign>fill</halign>
+        <valign>fill</valign>
+        <stretch>true</stretch>
 
-		<pref-height>200</pref-height>
-		<padding>6</padding>
-		<slider>20</slider>
-		<editable>false</editable>
-		<wrap>true</wrap>
+        <pref-height>200</pref-height>
+        <padding>6</padding>
+        <slider>20</slider>
+        <editable>false</editable>
+        <wrap>true</wrap>
 
         <property>/sim/error-report/display/details-text</property>
     </textbox>
@@ -83,61 +83,61 @@
         <button>
             <legend>Save report to desktop</legend>
             <binding>
-				<command>save-error-report-data</command>
+                <command>save-error-report-data</command>
                 <where>!desktop</where>
-			</binding>
+            </binding>
 
-			<enable>
-				<greater-than>
-	                <property>/sim/error-report/display/index</property>
-					<value>-1</value>
-				</greater-than>
+            <enable>
+                <greater-than>
+                    <property>/sim/error-report/display/index</property>
+                    <value>-1</value>
+                </greater-than>
             </enable>
         </button>
 
         <button>
             <legend>Copy report to clipboard</legend>
             <binding>
-				<command>save-error-report-data</command>
+                <command>save-error-report-data</command>
                 <where>!clipboard</where>
-			</binding>
+            </binding>
 
-			<enable>
-				<greater-than>
-	                <property>/sim/error-report/display/index</property>
-					<value>-1</value>
-				</greater-than>
+            <enable>
+                <greater-than>
+                    <property>/sim/error-report/display/index</property>
+                    <value>-1</value>
+                </greater-than>
             </enable>
         </button>
 
         <empty><stretch>1</stretch></empty>
 
-		<button>
+        <button>
             <legend>Previous error</legend>
             <binding>
-				<command>show-error-report</command>
+                <command>show-error-report</command>
                 <previous type="bool">true</previous>
-			</binding>
-			 <binding>
-				<command>dialog-update</command>
-			</binding>
+            </binding>
+             <binding>
+                <command>dialog-update</command>
+            </binding>
 
-			<visible>
+            <visible>
                 <property>/sim/error-report/display/have-previous</property>
             </visible>
         </button>
 
-		<button>
+        <button>
             <legend>Next error</legend>
             <binding>
-				<command>show-error-report</command>
+                <command>show-error-report</command>
                 <next type="bool">true</next>
-			</binding>
-			 <binding>
-				<command>dialog-update</command>
-			</binding>
+            </binding>
+             <binding>
+                <command>dialog-update</command>
+            </binding>
 
-			<visible>
+            <visible>
                 <property>/sim/error-report/display/have-next</property>
             </visible>
         </button>
@@ -145,11 +145,11 @@
         <button>
             <legend>Close</legend>
             <binding>
-				<command>dismiss-error-report</command>
-			</binding>
+                <command>dismiss-error-report</command>
+            </binding>
              <binding>
-				<command>dialog-close</command>
-			</binding>
+                <command>dialog-close</command>
+            </binding>
         </button>
     </group>
 </PropertyList>

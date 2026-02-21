@@ -222,7 +222,6 @@ Started September 2000 by David Megginson, david@megginson.com
       <filtering type="int">8</filtering>
       <shaders>
         <tessellation type="bool" userarchive="y">false</tessellation>
-        <clouds type="float" userarchive="y">0.0</clouds>
         <landmass type="float" userarchive="y">1.0</landmass>
         <model type="float" userarchive="y">3.0</model>
         <skydome type="bool" userarchive="y">true</skydome>
@@ -577,7 +576,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <!-- The detailed cloud field should be 50km x 50km x 12800m to give a 25km range and approx 40,000 ft of troposphere-->
           <!-- Note that the height of the voxel field is calculated dynamically to save memory, so this value is a maximum. -->
           <detailed-voxel-field-width type="int">256</detailed-voxel-field-width>
-          <max-detailed-voxel-field-height type="int">64</max-detailed-voxel-field-height>
+          <detailed-voxel-field-height type="int">64</detailed-voxel-field-height>
           <detailed-voxel-size-m type="int">200</detailed-voxel-size-m>
 
           <!-- How much larger rough field voxels are compared with detailed -->
@@ -590,7 +589,7 @@ Started September 2000 by David Megginson, david@megginson.com
           <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
 
           <!-- Cloud buffer scale, as a factor of the screen size.-->
-          <render-scale>0.5</render-scale>
+          <render-scale type="float" userarchive="y">0.5</render-scale>
         </clouds>
       </hdr>
 

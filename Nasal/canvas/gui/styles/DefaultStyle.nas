@@ -101,10 +101,10 @@ DefaultStyle.widgets.button = {
     if( backdrop )
     {
       file ~= "backdrop-";
-      me._label.setForeground(me._style.getColor("backdrop_fg_color"));
+      me._label.setForegroundColor(me._style.getColor("backdrop_fg_color"));
     }
     else
-      me._label.setForeground(me._style.getColor("fg_color"));
+      me._label.setForegroundColor(me._style.getColor("fg_color"));
     file ~= "button";
 
     if( model._down )
@@ -483,6 +483,7 @@ DefaultStyle.widgets["line-edit"] = {
             .vert(10);
     me._hscroll = 0;
     me._cursor_blink = 1;
+    me._cursor_visible = 0;
     me._cursor_blink_timer = maketimer(0.5, func {
       me._cursor_blink = !me._cursor_blink;
       me._cursor.setVisible(me._cursor_visible and me._cursor_blink);
@@ -539,10 +540,10 @@ DefaultStyle.widgets["line-edit"] = {
     me._border.set("src", file ~ ".png");
 
     var color_name = backdrop ? "backdrop_fg_color" : "fg_color";
-    me._placeholder.setForeground(me._style.getColor((backdrop ? "backdrop_" : "") ~ "placeholder_color"));
-    me._text.setForeground(me._style.getColor(color_name));
+    me._placeholder.setForegroundColor(me._style.getColor((backdrop ? "backdrop_" : "") ~ "placeholder_color"));
+    me._text.setForegroundColor(me._style.getColor(color_name));
 
-    me._cursor_visible = model._enabled and model._focused and !backdrop and model._selection_start == model._selection_end;
+    me._cursor_visible = model._enabled and model._focused and !backdrop and me._cursor_visible;
     me._cursor.setVisible(me._cursor_visible and me._cursor_blink);
 
     me._placeholder.setVisible(model._text or me._cursor_visible ? 0 : 1);

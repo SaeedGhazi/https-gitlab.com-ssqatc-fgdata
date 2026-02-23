@@ -28,6 +28,7 @@ uniform bool cloud_field_repeating;
 uniform float voxel_resolution_m;
 uniform int voxel_field_width;
 uniform int voxel_field_height;
+uniform float active_voxel_field_height_norm;
 uniform int rough_field_factor;
 uniform int rough_size_factor;
 uniform float ambient_intensity_scale;
@@ -61,6 +62,7 @@ const float MIN_DIST = 0.000;
 const float MAX_DIST = 4.0;
 const float EPSILON = 0.000001;
 const float NOISE_SCALE = 48.0;
+const float NOISE_SKIP_THRESHOLD = 0.95;
 const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.3;
 const int MAX_LIGHT_STEPS = 5;
 
@@ -76,6 +78,12 @@ vec3 EYE_SCALE = vec3(VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_WIDTH_M, VOXEL_FIELD_HEIG
 
 // Boundary where we use the detailed voxel space rather than the rough voxel space in UV coordinates
 float DETAILED_X_Y_BOUNDARY = 0.5 / float(rough_field_factor);
+
+float hash12(vec2 p) {
+    vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
 
 //
 // Function to erode a value given an erosion amount. A simplified version of SetRange.
@@ -121,11 +129,12 @@ vec4 getCloud(vec3 samplePoint, vec3 dir)  {
 /**
  * Calculate the density of a given samplePoint
  */
-float calculateDensity(vec3 samplePoint, vec3 dir) {
-    vec4 cloud = getCloud(samplePoint, dir);
+float calculateDensity(vec3 samplePoint, vec3 dir, vec4 cloud) {
     float cloudDimension = cloud.x;
     float cloudType = cloud.y;
     float cloudDensity = cloud.z;
+
+    if (cloudDimension > NOISE_SKIP_THRESHOLD) return cloudDensity * cloudDimension; // Skip expensive noise if we're deep inside cloud
 
     if (cloudDimension > 0.0) {
         vec4 noise = texture(cloud_noise_tex, samplePoint * NOISE_SCALE / VOXEL_SCALE);
@@ -133,7 +142,7 @@ float calculateDensity(vec3 samplePoint, vec3 dir) {
         float wispy_noise = mix(noise.r, noise.g, cloudDimension);
 
         // Define billowy noise 
-        float billowy_type_gradient = pow(cloudDimension, 0.25);
+        float billowy_type_gradient = sqrt(sqrt(cloudDimension));
         float billowy_noise = mix(noise.b * 0.3, noise.a * 0.3, billowy_type_gradient);
 
         // Define Noise composite: blend to wispy depending on the cloud type
@@ -174,11 +183,14 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
 
     for (int i = 0; i < MAX_LIGHT_STEPS; i++) {
         p = eye + distance * marchingDirection;
+
+        if (p.z > active_voxel_field_height_norm) return density; // Reached the top of the actual cloud space
+
         vec4 t = getCloud(p, marchingDirection);
 
         if (t.a < EPSILON) {
             // Inside a cloud, so add density
-            density  += calculateDensity(p, marchingDirection);
+            density  += calculateDensity(p, marchingDirection, t);
             distance += IN_CLOUD_SUN_RAY_STEP_SIZE;
         } else {
             distance += t.a;
@@ -188,7 +200,7 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
             // Reached maximum density, so no point in marching further.
 			return 1.0;
         }
-        if (distance >= end) {
+        if (distance > end) {
             // Reached the end of the raymarch.
             return density;
         }
@@ -224,7 +236,7 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye, vec3 dir) {
 
     if (lreturn.sdf < EPSILON) {
         // Point is inside the cloud, so work out the density and lighting information
-        lreturn.density = calculateDensity(samplePoint, dir);
+        lreturn.density = calculateDensity(samplePoint, dir, cloud);
         lreturn.sdf = IN_CLOUD_STEP_SIZE; // SDF is set to a fixed amount for ray-marching
 
         // Determine the light energy at this point, made up of direct and ambient scattering
@@ -265,21 +277,56 @@ struct ray_data {
 };
 
 ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end) {
+    
     ray_data lreturn;
-    float distance = start;
-
     lreturn.light_absorption = 0.0;
     lreturn.direct_intensity = 0.0;
     lreturn.ambient_intensity = 0.0;
     lreturn.first_hit = -1.0;
+    
+    float dirZ = marchingDirection.z;
 
-    for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
+    // -------------------------------------------------------
+    // Intersect ray with Z slab [0, active_voxel_field_height_norm]
+    // -------------------------------------------------------
+    float tEnter = start;
+    float tExit  = end;
+
+    if (abs(dirZ) > EPSILON) {
+        float t0 = (0.0 - eye.z) / dirZ;
+        float t1 = (active_voxel_field_height_norm - eye.z) / dirZ;
+
+        float slabEnter = min(t0, t1);
+        float slabExit  = max(t0, t1);
+
+        tEnter = max(start, slabEnter);
+        tExit  = min(end, slabExit);
+    } else {
+        // Ray is parallel to slab.
+        // If eye is outside slab, no intersection.
+        if (eye.z < 0.0 || eye.z > active_voxel_field_height_norm)
+            return lreturn;
+    }
+
+    if (tExit <= tEnter)
+        return lreturn;
+
+    // -------------------------------------------------------
+    // Standard raymarch, now guaranteed inside slab.
+    // Calculate some dynamic limits and step sizes.
+    // -------------------------------------------------------        
+    
+    float distance = tEnter;
+    float maxTravel = tExit - tEnter;
+
+    int dynamicMaxSteps = int(maxTravel / IN_CLOUD_STEP_SIZE) + 1;
+    dynamicMaxSteps = min(dynamicMaxSteps, MAX_MARCHING_STEPS);
+
+    for (int i = 0; i < dynamicMaxSteps; i++) {
+
+        if (distance >= tExit) return lreturn; // Reached the end of the raymarch
+
         vec3 p = eye + distance * marchingDirection;
-
-        if ((distance >= end)) {
-            // Reached the end of the raymarch
-			return lreturn;
-        }
 
         sample_information s = sceneDensitySDF(p, eye, marchingDirection);
 
@@ -306,10 +353,6 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
 
 void main()
 {
-    // Options to update 1/4 of the pixels each frame. Probably better to somehow mask instead of discard?
-    //if (mod(uint(texcoord * fg_Viewport[FG_VIEW_ID].zw) + vec2(osg_FrameNumber, osg_FrameNumber), 4u) != vec2(0u,0u)) discard;
-    //if (mod(osg_FrameNumber, 4) > 0u) discard;
-
     mat3 zup = mat3(fg_CameraZUpMatrix);
     vec3 wdir = w_pos - fg_CameraPositionCart;
     vec3 dir = normalize(zup * wdir) * VOXEL_SCALE; // Take into account that the voxel space is not a cube by increasing the Z-factor

@@ -1,19 +1,18 @@
 gui.widgets.LineEdit = {
   _CLASS: "LineEdit",
 
-  new: func(parent, style = nil, cfg = nil)
-  {
+  new: func(parent, style = nil, cfg = nil) {
     style = style or canvas.style;
     cfg = Config.new(cfg);
     var m = gui.Widget.new(gui.widgets.LineEdit, cfg);
     m._focus_policy = m.StrongFocus;
-    m._setView( style.createWidget(parent, "line-edit", cfg) );
+    m._setView(style.createWidget(parent, "line-edit", cfg));
 
     m._view._updateLayoutSizes(m);
 
     m._text = "";
     m._placeholder = "";
-    #m._max_length = 32767;
+    m._max_length = 32767;
     me._ignoreDrag = 0;
 
     m.context_menu = gui.Menu.new();
@@ -26,53 +25,42 @@ gui.widgets.LineEdit = {
 
     m.setText(cfg.get("text", ""));
     m.setPlaceholder(cfg.get("placeholder", ""));
-    #m.setMaxLength(cfg.get("max-length", m._max_length));
+    m.setMaxLength(cfg.get("max-length", m._max_length));
 
     return m;
   },
-  _showContextMenu: func(e) {
-    me.context_menu.show(e.screenX, e.screenY);
-  },
-  setText: func(text)
-  {
-    if (text == nil) {
+  setText: func(text) {
+    if (text == nil or text == "") {
       me.clear();
       return me;
     }
 
-    me._text = text;
+    me._text = utf8.substr(text, 0, me._max_length);
     me._clearSelection();
 
-    if (me._view != nil) {
-      me._view.setText(me, me._text);
-      me._view._text.moveCursorToByteIndex(size(me._text));
-    }
+    me._view.setText(me, me._text);
+    me._moveCursorToByteIndex(size(me._text));
     me._trigger("text-changed", {"text": me._text});
+    me._onStateChange();
 
     return me;
   },
   setPlaceholder: func(placeholder) {
     me._placeholder = placeholder;
-    if (me._view != nil) {
-      me._view.setPlaceholder(me, me._placeholder);
-    }
+    me._view.setPlaceholder(me, me._placeholder);
 
     return me;
   },
-  clear: func
-  {
+  clear: func {
     me._text = "";
     me._moveCursorToByteIndex(0);
     me._clearSelection();
 
-    if (me._view != nil) {
-      me._view.setText(me, "");
-    }
+    me._view.setText(me, "");
     me._trigger("text-changed", {"text": me._text});
     me._onStateChange();
   },
-  text: func()
-  {
+  text: func() {
     return me._text;
   },
   selectedText: func() {
@@ -80,85 +68,23 @@ gui.widgets.LineEdit = {
       return me._view._text.selectedText();
     }
   },
-  setMaxLength: func(len)
-  {
+  setMaxLength: func(len) {
     me._max_length = len;
 
     if (utf8.size(me._text) <= len) {
       return me;
     }
 
-    #me._text = utf8.substr(me._text, 0, me._max_length);
-    if (me._view != nil) {
-      me._view.setText(me, me._text);
-    }
+    me._text = utf8.substr(me._text, 0, me._max_length);
+    me._view.setText(me, me._text);
     me._trigger("text-changed", {"text": me._text});
     me._moveCursorToByteIndex(size(me._text));
-    return me;
-  },
-  _moveCursorToByteIndex: func(pos)
-  {
-    if (me._view != nil) {
-      me._view._text.moveCursorToByteIndex(pos);
-      me._view._cursor_blink = 1;
-      me._view._cursor_blink_timer.stop();
-      me._view._cursor_blink_timer.start();
-    }
-
-    me._onStateChange();
-    return me;
-  },
-  _moveCursorToPosition: func(x, y) {
-    if (me._view != nil) {
-      me._view._text.moveCursorToPosition([x, y]);
-      me._view._cursor_blink = 1;
-      me._view._cursor_blink_timer.stop();
-      me._view._cursor_blink_timer.start();
-    }
-    
-    me._onStateChange();
-    return me;
-  },
-  _moveCursor: func(direction) {
-    if (me._view != nil) {
-      me._view._text.moveCursor(direction);
-      me._view._cursor_blink = 1;
-      me._view._cursor_blink_timer.stop();
-      me._view._cursor_blink_timer.start();
-    }
-
-    me._onStateChange();
     return me;
   },
   getSelection: func {
-    if (me._view != nil) {
-      var selection = me._view._text.selection();
-      return selection;
-    }
+    var selection = me._view._text.selection();
+    return selection;
     return nil;
-  },
-  _home: func()
-  {
-    me._moveCursorToByteIndex(0);
-    me._clearSelection();
-  },
-  _end: func()
-  {
-    me._moveCursorToByteIndex(size(me._text));
-    me._clearSelection();
-  },
-  # Insert given text after cursor (and first remove selection if set)
-  _insert: func(text)
-  {
-    if (me._view != nil) {
-      me._removeSelection();
-      me._view._text.insertAtCursor(text);
-      me._text = me._view._text.text();
-    }
-    me._trigger("text-changed", {"text": me._text});
-
-    me._onStateChange();
-    return me;
   },
   copy: func() {
     clipboard.setText(me.selectedText());
@@ -167,44 +93,84 @@ gui.widgets.LineEdit = {
     clipboard.setText(me.selectedText());
     me._removeSelection();
   },
-  paste: func(mode = nil)
-  {
+  paste: func(mode = nil) {
     me._insert(clipboard.getText(mode != nil ? mode : clipboard.CLIPBOARD));
   },
   selectAll: func() {
     me._setSelection(0, size(me._text));
   },
+  _showContextMenu: func(e) {
+    me.context_menu.show(e.screenX, e.screenY);
+  },
   # Remove selected text
+  _moveCursorToByteIndex: func(pos) {
+    me._view._text.moveCursorToByteIndex(pos);
+    me._view._cursor_blink = 1;
+    me._view._cursor_blink_timer.stop();
+    me._view._cursor_blink_timer.start();
+
+    me._onStateChange();
+    return me;
+  },
+  _moveCursorToPosition: func(x, y) {
+    me._view._text.moveCursorToPosition([x, y]);
+    me._view._cursor_blink = 1;
+    me._view._cursor_blink_timer.stop();
+    me._view._cursor_blink_timer.start();
+    
+    me._onStateChange();
+    return me;
+  },
+  _moveCursor: func(direction) {
+    me._view._text.moveCursor(direction);
+    me._view._cursor_blink = 1;
+    me._view._cursor_blink_timer.stop();
+    me._view._cursor_blink_timer.start();
+
+    me._onStateChange();
+    return me;
+  },
+  _home: func() {
+    me._moveCursorToByteIndex(0);
+    me._clearSelection();
+  },
+  _end: func() {
+    me._moveCursorToByteIndex(size(me._text));
+    me._clearSelection();
+  },
+  # Insert given text after cursor (and first remove selection if set)
+  _insert: func(text) {
+    me._removeSelection();
+    me._view._text.insertAtCursor(text);
+    me._text = me._view._text.text();
+    me._trigger("text-changed", {"text": me._text});
+
+    me._onStateChange();
+    return me;
+  },
   _clearSelection: func {
-    if (me._view != nil) {
-      me._view._text.clearSelection();
-      me._view._cursor_visible = 1;
-      me._view._cursor_blink = 1;
-      me._view._cursor_blink_timer.stop();
-      me._view._cursor_blink_timer.start();
-    }
+    me._view._text.clearSelection();
+    me._view._cursor_visible = 1;
+    me._view._cursor_blink = 1;
+    me._view._cursor_blink_timer.stop();
+    me._view._cursor_blink_timer.start();
     me._onStateChange();
   },
   _setSelection: func(anchor, index) {
-    if (me._view != nil) {
-      me._view._text.setSelection(anchor, index);
-      if (anchor == index) {
-        me._view._cursor_visible = 1;
-      } else {
-        me._view._cursor_visible = 0;
-      }
-      me._view._cursor_blink = 1;
-      me._view._cursor_blink_timer.stop();
-      me._view._cursor_blink_timer.start();
+    me._view._text.setSelection(anchor, index);
+    if (anchor == index) {
+      me._view._cursor_visible = 1;
+    } else {
+      me._view._cursor_visible = 0;
     }
+    me._view._cursor_blink = 1;
+    me._view._cursor_blink_timer.stop();
+    me._view._cursor_blink_timer.start();
     me._onStateChange();
   },
-  _removeSelection: func()
-  {
-    if (me._view != nil) {
-      me._view._text.removeSelection();
-      me._text = me._view._text.text();
-    }
+  _removeSelection: func() {
+    me._view._text.removeSelection();
+    me._text = me._view._text.text();
     me._clearSelection();
     me._trigger("text-changed", {"text": me._text});
 
@@ -212,18 +178,15 @@ gui.widgets.LineEdit = {
     return me;
   },
   _removeAtCursor: func(beforeOrAfter) {
-    if (me._view != nil) {
-      me._view._text.removeAtCursor(beforeOrAfter);
-      me._text = me._view._text.text();
-    }
+    me._view._text.removeAtCursor(beforeOrAfter);
+    me._text = me._view._text.text();
     me._trigger("text-changed", {"text": me._text});
     me._onStateChange();
     return me;
   },
   # Remove selection or if nothing is selected the character before the cursor
-  _backspace: func()
-  {
-    if (me._view != nil and me.getSelection()[0] >= 0) {
+  _backspace: func() {
+    if (me.getSelection()[0] >= 0) {
       me._removeSelection();
     } else {
       me._removeAtCursor(-1);
@@ -231,9 +194,8 @@ gui.widgets.LineEdit = {
     return me;
   },
   # Remove selection or if nothing is selected the character after the cursor
-  _delete: func()
-  {
-    if (me._view != nil and me.getSelection()[0] >= 0) {
+  _delete: func() {
+    if (me.getSelection()[0] >= 0) {
       me._removeSelection();
     } else {
       me._removeAtCursor(1);
@@ -241,8 +203,7 @@ gui.widgets.LineEdit = {
     return me;
   },
 # protected:
-  _setView: func(view)
-  {
+  _setView: func(view) {
     call(gui.Widget._setView, [view], me);
 
     var el = view._root;

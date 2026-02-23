@@ -20,6 +20,9 @@
     <voxel-field-height>
       <use>/sim/rendering/hdr/clouds/detailed-voxel-field-height</use>
     </voxel-field-height>
+    <active-voxel-field-height-norm>
+      <use>/sim/rendering/hdr/clouds/active-voxel-field-height-norm</use>
+    </active-voxel-field-height-norm>
     <rough-field-factor>
       <use>/sim/rendering/hdr/clouds/rough-voxel-field-factor</use>
     </rough-field-factor>
@@ -179,6 +182,11 @@
         <name>voxel_field_height</name>
         <type>int</type>
         <value><use>voxel-field-height</use></value>
+      </uniform>
+      <uniform>
+        <name>active_voxel_field_height_norm</name>
+        <type>float</type>
+        <value><use>active-voxel-field-height-norm</use></value>
       </uniform>
       <uniform>
         <name>rough_field_factor</name>

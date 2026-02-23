@@ -16,17 +16,9 @@ var PangoText = {
         me.set("markup", markup);
     },
 
-    getMarkup: func() {
-        return me.get("markup");
-    },
-
     # Set the text
     setText: func(text) {
         return me.set("text", typeof(text) == "scalar" ? text : "");
-    },
-
-    getText: func() {
-        return me.get("text");
     },
 
     # Set alignment
@@ -118,27 +110,34 @@ var PangoText = {
         return me.setInt("max-height", h);
     },
 
-    setForeground: func {
-        return me.set("foreground", _getColor(arg));
+    setForegroundColor: func {
+        return me.set("foreground-color", _getColor(arg));
     },
 
-    getForeground: func {
-        return me.get("foreground");
+    foregroundColor: func {
+        return me.get("foreground-color");
     },
 
-    setBackground: func {
-        return me.set("background", _getColor(arg));
+    setBackgroundColor: func {
+        return me.set("background-color", _getColor(arg));
     },
 
-    getBackground: func {
-        return me.get("background");
+    backgroundColor: func {
+        return me.get("background-color");
+    },
+
+    setSelectionColor: func {
+        return me.set("selection-color", _getColor(arg));
+    },
+    selectionColor: func {
+        return me.get("selection-color");
     },
 
     setLineSpacing: func(spacing) {
         return me.setDouble("line-spacing", spacing);
     },
 
-    getLineSpacing: func {
+    lineSpacing: func {
         return me.get("line-spacing");
     }
 };

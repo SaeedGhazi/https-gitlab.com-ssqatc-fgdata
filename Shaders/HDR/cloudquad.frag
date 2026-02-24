@@ -157,8 +157,9 @@ float calculateDensity(vec3 samplePoint, vec3 dir, vec4 cloud) {
         float uprezzed_density = noise_composite;        
 
         // Composite Noises and use as a Value Erosion
-        uprezzed_density = ValueErosion(cloudDimension*cloudDimension*cloudDimension, noise_composite);
-        //uprezzed_density = ValueErosion(cloudDimension*cloudDensity, noise_composite);
+        float dim = cloudDimension;
+        dim = smoothstep(0.0, 1.0, dim);
+        uprezzed_density = ValueErosion(dim * dim, noise_composite);        
 
         // Apply User Density Scale Data to Result
         uprezzed_density *= cloudDensity; 
@@ -208,7 +209,9 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
 
     // At this point just look up the pre-calculated shade texture
     p = eye + (distance + IN_CLOUD_SUN_RAY_STEP_SIZE) * marchingDirection;
-    density = clamp(texture(shade_tex, p).r + density, 0.0, 1.0);
+
+    float storedTransmittance = texture(shade_tex, p).r;
+    density = clamp(1.0 - storedTransmittance + density, 0.0, 1.0);    
     return density;
 }
 
@@ -257,13 +260,13 @@ sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye, vec3 dir) {
         float phase = HenyeyGreenstein(CoSSunAngle, HENYEY_GREENSTEIN_ECCENTRICITY);
         float inScattering = 1 - exp(- lreturn.density);
 
-        lreturn.direct_scattering = transmittance * phase  + inScattering * phase;
+        lreturn.direct_scattering = transmittance * phase * (0.5 + 0.5 * lreturn.density);
 
         // Ambient scatter is approximated to the dimensional profile and the density towards the sky.
         // Instead of an expensive ray march vertically, just read it straight from the shade texture
-        float summedUpDensity = clamp(texture(shade_tex, samplePoint).g * ambient_intensity_scale, 0.0, 1.0);
-        float dimensionalProfile = cloud.r;  // Red channel contains a cloud dimension
-        lreturn.ambient_scattering = pow(1.0 - dimensionalProfile, 0.5) * exp(- summedUpDensity);
+        float skyTransmittance = texture(shade_tex, samplePoint).g;
+        float dimensionalProfile = cloud.r;  // Red channel contains a cloud dimension        
+        lreturn.ambient_scattering = pow(1.0 - dimensionalProfile, 0.5) * skyTransmittance;        
     }
 
     return lreturn;
@@ -302,8 +305,6 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
         tEnter = max(start, slabEnter);
         tExit  = min(end, slabExit);
     } else {
-        // Ray is parallel to slab.
-        // If eye is outside slab, no intersection.
         if (eye.z < 0.0 || eye.z > active_voxel_field_height_norm)
             return lreturn;
     }
@@ -315,8 +316,13 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
     // Standard raymarch, now guaranteed inside slab.
     // Calculate some dynamic limits and step sizes.
     // -------------------------------------------------------        
-    
-    float distance = tEnter;
+
+    // Stable per-pixel jitter (screen-space stable)
+    float jitter = hash12(gl_FragCoord.xy);
+    float stepSize = IN_CLOUD_STEP_SIZE;
+    // Offset initial march position slightly
+    float distance = tEnter + jitter * stepSize;
+
     float maxTravel = tExit - tEnter;
 
     int dynamicMaxSteps = int(maxTravel / IN_CLOUD_STEP_SIZE) + 1;
@@ -337,10 +343,10 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
             lreturn.direct_intensity  += s.direct_scattering * s.density * occlusion;
             lreturn.ambient_intensity += s.ambient_scattering * s.density * occlusion;
 
-            if (lreturn.first_hit < EPSILON) lreturn.first_hit = distance;
+            if (lreturn.first_hit < 0.0) lreturn.first_hit = distance;
         }
 
-        if (lreturn.light_absorption > 0.99) {
+        if (lreturn.light_absorption > 0.98) {
             // Reached maximum density or end of ray so no point in marching further.
             lreturn.light_absorption = 1.0;
 			return lreturn;
@@ -348,6 +354,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
 
         distance += s.sdf;
     }
+
 	return lreturn;
 }
 

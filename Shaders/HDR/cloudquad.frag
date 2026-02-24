@@ -180,6 +180,14 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
     float distance = start;
     vec3 p = eye + distance * marchingDirection;
 
+    float storedTransmittance = texture(shade_tex, p).r;
+
+    // If already heavily shadowed, skip local march
+    if (storedTransmittance < 0.5)
+    {
+        return -log(max(storedTransmittance, 0.0001));
+    }
+
     //return texture(shade_tex, p).r;
 
     for (int i = 0; i < MAX_LIGHT_STEPS; i++) {
@@ -210,10 +218,16 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
     // At this point just look up the pre-calculated shade texture
     p = eye + (distance + IN_CLOUD_SUN_RAY_STEP_SIZE) * marchingDirection;
 
-    float storedTransmittance = texture(shade_tex, p).r;
     density = clamp(1.0 - storedTransmittance + density, 0.0, 1.0);    
     return density;
 }
+
+
+/**
+ * Absolute value of the SDF value indicates the distance to the surface.
+ * Sign indicates whether the point is inside or outside the surface,
+ * negative indicating inside.
+ */
 
 struct sample_information {
     float sdf;
@@ -221,56 +235,6 @@ struct sample_information {
     float direct_scattering;
     float ambient_scattering;
 };
-
-/**
- * Absolute value of the SDF value indicates the distance to the surface.
- * Sign indicates whether the point is inside or outside the surface,
- * negative indicating inside.
- */
-sample_information sceneDensitySDF(vec3 samplePoint, vec3 eye, vec3 dir) {
-    sample_information lreturn;
-
-    vec4 cloud = getCloud(samplePoint, dir);
-
-    lreturn.sdf = cloud.a;  // Alpha channel contains an SDF
-    lreturn.density = 0.0;
-    lreturn.direct_scattering = 0.0;
-    lreturn.ambient_scattering = 0.0;
-
-    if (lreturn.sdf < EPSILON) {
-        // Point is inside the cloud, so work out the density and lighting information
-        lreturn.density = calculateDensity(samplePoint, dir, cloud);
-        lreturn.sdf = IN_CLOUD_STEP_SIZE; // SDF is set to a fixed amount for ray-marching
-
-        // Determine the light energy at this point, made up of direct and ambient scattering
-
-        // Use Beers-Lambert law to work out the transmittance at this sample point, based on the density from 
-        // sample point to the sun.
-
-        // fg_SunDirectionWorld is in _normalized_ world space coordinates
-        mat3 zup = mat3(fg_CameraZUpMatrix);
-        vec3 sundir = normalize(zup * fg_SunDirectionWorld) * VOXEL_SCALE;
-
-        vec3 eyedir = normalize(samplePoint - eye);
-        float densityToSun = getRayDensity(samplePoint, sundir, IN_CLOUD_SUN_RAY_STEP_SIZE, 1.0);
-        float transmittance = exp(- densityToSun);
-        float CoSSunAngle = dot(normalize(sundir), eyedir);
-
-        // TODO:  Have multiple of these phases?
-        float phase = HenyeyGreenstein(CoSSunAngle, HENYEY_GREENSTEIN_ECCENTRICITY);
-        float inScattering = 1 - exp(- lreturn.density);
-
-        lreturn.direct_scattering = transmittance * phase * (0.5 + 0.5 * lreturn.density);
-
-        // Ambient scatter is approximated to the dimensional profile and the density towards the sky.
-        // Instead of an expensive ray march vertically, just read it straight from the shade texture
-        float skyTransmittance = texture(shade_tex, samplePoint).g;
-        float dimensionalProfile = cloud.r;  // Red channel contains a cloud dimension        
-        lreturn.ambient_scattering = pow(1.0 - dimensionalProfile, 0.5) * skyTransmittance;        
-    }
-
-    return lreturn;
-}
 
 struct ray_data {
     float light_absorption;
@@ -328,13 +292,62 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
     int dynamicMaxSteps = int(maxTravel / IN_CLOUD_STEP_SIZE) + 1;
     dynamicMaxSteps = min(dynamicMaxSteps, MAX_MARCHING_STEPS);
 
+    float cachedSunDensity = -1.0;
+    float cachedDensity = -1.0;
+
     for (int i = 0; i < dynamicMaxSteps; i++) {
 
         if (distance >= tExit) return lreturn; // Reached the end of the raymarch
 
         vec3 p = eye + distance * marchingDirection;
 
-        sample_information s = sceneDensitySDF(p, eye, marchingDirection);
+        sample_information s;
+
+        vec4 cloud = getCloud(p, marchingDirection);
+
+        s.sdf = cloud.a;
+        s.density = 0.0;
+        s.direct_scattering = 0.0;
+        s.ambient_scattering = 0.0;
+
+        if (s.sdf < EPSILON)
+        {
+            s.density = calculateDensity(p, marchingDirection, cloud);
+            s.sdf = IN_CLOUD_STEP_SIZE;
+
+            mat3 zup = mat3(fg_CameraZUpMatrix);
+            vec3 sundir = normalize(zup * fg_SunDirectionWorld) * VOXEL_SCALE;
+            vec3 eyedir = normalize(p - eye);
+
+            float densityToSun;
+
+            // Cache density information and save on expensive ray cast when the cloud density hasn't
+            // changed much.  This is a major performance bottleneck.
+            if (cachedSunDensity < 0.0 || abs(s.density - cachedDensity) > 0.05) {
+                densityToSun = getRayDensity(p, sundir,
+                                            IN_CLOUD_SUN_RAY_STEP_SIZE,
+                                            1.0);
+
+                cachedSunDensity = densityToSun;
+                cachedDensity = s.density;            
+            } else {
+                densityToSun = cachedSunDensity;
+            }
+
+            float transmittance = exp(-densityToSun);
+            float CoSSunAngle = dot(normalize(sundir), eyedir);
+
+            float phase = HenyeyGreenstein(CoSSunAngle,
+                                        HENYEY_GREENSTEIN_ECCENTRICITY);
+
+            s.direct_scattering = transmittance * phase * (0.5 + 0.5 * s.density);
+
+            float skyTransmittance = texture(shade_tex, p).g;
+            float dimensionalProfile = cloud.r;
+
+            s.ambient_scattering =
+                pow(1.0 - dimensionalProfile, 0.5) * skyTransmittance;
+        }
 
         if (s.density > 0.0) {
             // As the ray travels, the influence of each step reduces due to the amount of absorption infront.  E.g. the amount of cloud occluding the sample.

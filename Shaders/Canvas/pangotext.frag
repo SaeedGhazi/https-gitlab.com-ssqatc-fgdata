@@ -45,6 +45,16 @@ void main() {
 		} else {
 			fragColor = fs_in.vertex_color;
 		}
+	} else {
+		fragColor = fs_in.vertex_color;
+		if (fs_in.selected) {
+			if (colorIsLight(selectionColor.rgb)) {
+				fragColor.rgb = vec3(0, 0, 0);
+			} else {
+				fragColor.rgb = vec3(1, 1, 1);
+			}
+		}
+		fragColor.a = 1;
 	}
 	if (fragColor.a == 0) {
 		discard;

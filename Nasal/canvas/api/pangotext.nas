@@ -126,6 +126,13 @@ var PangoText = {
         return me.get("background-color");
     },
 
+    setLineColor: func {
+        return me.set("line-color", _getColor(arg));
+    },
+    lineColor: func {
+        return me.get("line-color");
+    },
+
     setSelectionColor: func {
         return me.set("selection-color", _getColor(arg));
     },

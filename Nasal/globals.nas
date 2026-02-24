@@ -278,19 +278,13 @@ var TestPangoText = {
         var cv = me.window.getCanvas(1);
         cv.setColorBackground(canvas.style.getColor("bg_color"));
         me.root = cv.createGroup();
-        me.root.createChild("text", "")
-                        .setText("Hello <b>World</b> <big>BIG</big> <red>RED</red>")
-                        .setAlignment("left-top")
-                        .setFontSize(14)
-                        .setFont("LiberationFonts/LiberationSans-Bold.ttf")
-                        .setColor(0,0,1)
-                        .setTranslation(10, 10);
         me.root.createChild("pangotext", "pangotext")
-                        .setMarkup("dgPQ&amp;")
+                        .setMarkup("<s>dgPQ&amp;</s>")
                         .setAlignment("left-top")
                         .setFont(family: "LiberationSans", size: 140)
-                        .setForeground(1, 1, 0)
-                        .setBackground(1, 0, 1)
+                        .setForegroundColor(1, 1, 0)
+                        .setBackgroundColor(1, 0, 1)
+                        .setLineColor(0, 1, 0)
                         .show()
                         .setTranslation(10, 30);
 

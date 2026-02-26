@@ -63,7 +63,6 @@ const float MAX_DIST = 4.0;
 const float EPSILON = 0.000001;
 const float NOISE_SCALE = 48.0;
 const float NOISE_SKIP_THRESHOLD = 0.95;
-const float HENYEY_GREENSTEIN_ECCENTRICITY  = 0.3;
 const int MAX_LIGHT_STEPS = 5;
 
 int MAX_MARCHING_STEPS = 4 * voxel_field_width;
@@ -138,7 +137,6 @@ float calculateDensity(vec3 samplePoint, vec3 dir, vec4 cloud) {
 
     if (cloudDimension > 0.0) {
         vec4 noise = texture(cloud_noise_tex, samplePoint * NOISE_SCALE / VOXEL_SCALE);
-
         float wispy_noise = mix(noise.r, noise.g, cloudDimension);
 
         // Define billowy noise 
@@ -183,7 +181,7 @@ float getRayDensity(vec3 eye, vec3 marchingDirection, float start, float end) {
     float storedTransmittance = texture(shade_tex, p).r;
 
     // If already heavily shadowed, skip local march
-    if (storedTransmittance < 0.5)
+    if (storedTransmittance < 0.15)
     {
         return -log(max(storedTransmittance, 0.0001));
     }
@@ -316,15 +314,30 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
             s.sdf = IN_CLOUD_STEP_SIZE;
 
             mat3 zup = mat3(fg_CameraZUpMatrix);
-            vec3 sundir = normalize(zup * fg_SunDirectionWorld) * VOXEL_SCALE;
-            vec3 eyedir = normalize(p - eye);
 
+            // sample -> camera
+            vec3 V = normalize(eye - p);
+
+            // fg_SunDirectionWorld points FROM sun TOWARD world (incident direction)
+            // Negate to get FROM sample TOWARD sun
+            vec3 toSunDir = normalize(zup * -fg_SunDirectionWorld);
+            float sunElevation = clamp(-toSunDir.z, 0.0, 1.0);
+
+            // Smooth transition through twilight
+            float dayFactor = smoothstep(0.0, 0.1, sunElevation);
+
+            // cosTheta > 0 = looking toward sun (forward scatter)
+            // cosTheta < 0 = looking away from sun (back scatter)
+            float cosTheta = clamp(dot(V, toSunDir), -1.0, 1.0);
+
+            // March from sample toward sun
+            vec3 sunDirMarch = -normalize(toSunDir / EYE_SCALE) * VOXEL_SCALE;
             float densityToSun;
 
             // Cache density information and save on expensive ray cast when the cloud density hasn't
             // changed much.  This is a major performance bottleneck.
-            if (cachedSunDensity < 0.0 || abs(s.density - cachedDensity) > 0.05) {
-                densityToSun = getRayDensity(p, sundir,
+            if (cachedSunDensity < 0.0 || abs(s.density - cachedDensity) > 0.02) {
+                densityToSun = getRayDensity(p, sunDirMarch,
                                             IN_CLOUD_SUN_RAY_STEP_SIZE,
                                             1.0);
 
@@ -335,27 +348,44 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end)
             }
 
             float transmittance = exp(-densityToSun);
-            float CoSSunAngle = dot(normalize(sundir), eyedir);
 
-            float phase = HenyeyGreenstein(CoSSunAngle,
-                                        HENYEY_GREENSTEIN_ECCENTRICITY);
+            float phaseForward  = HenyeyGreenstein(cosTheta,  0.7);
+            float phaseBackward = HenyeyGreenstein(cosTheta, -0.4);
+            float phase = mix(phaseBackward, phaseForward, 0.6);
 
-            s.direct_scattering = transmittance * phase * (0.5 + 0.5 * s.density);
+            // Silver lining
+            float rim = pow(clamp(1.0 + cosTheta, 0.0, 1.0), 6.0);
+            phase += rim * 0.15;            
+
+            // Raise transmittance to a power to increase contrast between lit and shadowed faces
+            float contrastTransmittance = pow(transmittance, 2.0);
+            float singleScatter = contrastTransmittance * phase * s.density;
+            //float singleScatter = transmittance * phase * s.density;
+
+            // multiScatter is indirect/diffuse - should be ambient colored, not sun colored
+            float multiScatter =
+                (1.0 - transmittance) *
+                0.20 *
+                (0.3 + 0.7 * s.density) *
+                s.density;
+
+            s.direct_scattering = singleScatter;  // sun colored - only direct scatter
 
             float skyTransmittance = texture(shade_tex, p).g;
             float dimensionalProfile = cloud.r;
 
-            s.ambient_scattering =
-                pow(1.0 - dimensionalProfile, 0.5) * skyTransmittance;
+            // ambient gets both sky terms AND the indirect multiple scatter
+            float skyAmbient = pow(1.0 - dimensionalProfile, 0.5) * skyTransmittance;
+            float groundBounce = (1.0 - skyTransmittance) * (1.0 - p.z) * 0.2;
+            float multiScatterAmbient = 0.05 * dimensionalProfile;
+            s.ambient_scattering = (skyAmbient + groundBounce + multiScatterAmbient + multiScatter) * dayFactor;
         }
 
         if (s.density > 0.0) {
-            // As the ray travels, the influence of each step reduces due to the amount of absorption infront.  E.g. the amount of cloud occluding the sample.
             float occlusion = (1.0 - clamp(lreturn.light_absorption, 0.0, 1.0));
             lreturn.light_absorption  += s.density * occlusion;
-            lreturn.direct_intensity  += s.direct_scattering * s.density * occlusion;
-            lreturn.ambient_intensity += s.ambient_scattering * s.density * occlusion;
-
+            lreturn.direct_intensity  += s.direct_scattering * occlusion;  // density already in singleScatter
+            lreturn.ambient_intensity += s.ambient_scattering * s.density;
             if (lreturn.first_hit < 0.0) lreturn.first_hit = distance;
         }
 
@@ -390,8 +420,8 @@ void main()
     ray_data ray = cloudRayMarch(eye, dir, MIN_DIST, max_depth_vx);
     
     if (ray.light_absorption > 0.01) {
-        // XXXX : Need some better value for the ambient lighting value than ground_albedo.
-        color.rgb = get_sun_radiance_sea_level() * ray.direct_intensity * direct_intensity_scale + ground_albedo.xyz * ray.ambient_intensity * ambient_intensity_scale;
+        color.rgb = get_sun_radiance_sea_level() * ray.direct_intensity * direct_intensity_scale
+                                     + vec3(1.0) * ray.ambient_intensity * ambient_intensity_scale;
         color.a = ray.light_absorption;
 
         float z = logdepth_prepare_vs_depth(ray.first_hit * VOXEL_FIELD_WIDTH_M / zscaleFactor);

@@ -57,7 +57,7 @@ DefaultStyle.widgets.button = {
     me._border = me._root.createChild("image", "button")
             .set("slice", "10 12"); #"7")
     me._label = me._root.createChild("pangotext")
-            .setFont("LiberationSans", "Normal", "Normal", 14)
+            .setFont("Liberation Sans", "Normal", "Normal", 14)
             .setAlignment("center-baseline");
     if (cfg.get("flat")) {
       me._border.hide();
@@ -468,11 +468,11 @@ DefaultStyle.widgets["line-edit"] = {
     me._border = me._root.createChild("image", "border")
             .set("slice", "10 12"); #"7")
     me._placeholder = me._root.createChild("pangotext", "placeholder")
-            .setFont(family: "LiberationSans", size: 14)
+            .setFont(family: "Liberation Sans", size: 14)
             .setAlignment("left-baseline")
             .set("clip-frame", Element.PARENT);
     me._text = me._root.createChild("pangotext", "input")
-            .setFont(family: "LiberationSans", size: 14)
+            .setFont(family: "Liberation Sans", size: 14)
             .setAlignment("left-baseline")
             .set("clip-frame", Element.PARENT);
 

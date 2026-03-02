@@ -281,7 +281,7 @@ var TestPangoText = {
         me.root.createChild("pangotext", "pangotext")
                         .setMarkup("<s>dgPQ&amp;</s>")
                         .setAlignment("left-top")
-                        .setFont(family: "LiberationSans", size: 140)
+                        .setFont(family: "Liberation Sans", size: 140)
                         .setForegroundColor(1, 1, 0)
                         .setBackgroundColor(1, 0, 1)
                         .setLineColor(0, 1, 0)

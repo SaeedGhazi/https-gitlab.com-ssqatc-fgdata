@@ -78,9 +78,9 @@
       <min-type>0.0</min-type>
       <max-type>0.3</max-type>
       <perlin-noise-frequency>4</perlin-noise-frequency>
-      <perlin-alpha>0.7</perlin-alpha>
-      <perlin-beta>2.5</perlin-beta>
-      <perlin-n>4</perlin-n>
+      <perlin-alpha>1.0</perlin-alpha>
+      <perlin-beta>2.0</perlin-beta>
+      <perlin-n>6</perlin-n>
     </st>
   </clouds>
   <boxes>

@@ -582,10 +582,8 @@ var Symbol = {
 	# Add a text element with styling
 	newText: func(text=nil, color=nil) {
 		var t = me.element.createChild("text")
-			.setDrawMode( canvas.Text.TEXT )
 			.setText(text)
-			.setFont(me.layer.style.font)
-			.setFontSize(me.layer.style.font_size);
+			.setFont(family: me.layer.style.font, size: me.layer.style.font_size);
 		if (color != nil)
 			t.setColor(color);
 		return t;

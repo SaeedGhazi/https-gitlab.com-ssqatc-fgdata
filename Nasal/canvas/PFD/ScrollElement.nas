@@ -80,17 +80,16 @@ var ScrollElement =
   },
   _flashElement : func() {
     if (me._highlightEnabled == 0) {
-      me._symbol.setDrawMode(canvas.Text.TEXT);
+      me._symbol.setBackgroundColor(0, 0, 0, 0);
       me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
       me._highlighted = 0;
     } else {
       if (me._highlighted == 0) {
-        me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
-        me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
+        me._symbol.setBackgroundColor(me._style.HIGHLIGHT_COLOR);
         me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
         me._highlighted = 1;
       } else {
-        me._symbol.setDrawMode(canvas.Text.TEXT);
+        me._symbol.setBackgroundColor(0, 0, 0, 0);
         me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
         me._highlighted = 0;
       }

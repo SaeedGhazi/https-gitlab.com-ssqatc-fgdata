@@ -26,9 +26,8 @@ var DefaultStyle = {
           me[ mem ] = me._root.createChild(type, "label-" ~ name);
 
           if (type == "text") {
-             me[mem].set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-                      .set("character-size", 14)
-                      .set("alignment", "left-center");
+             me[mem].setFont(me._style.getFont(name))
+                      .setAlignment("left-center");
           }
         }
         return me[mem];
@@ -56,8 +55,8 @@ DefaultStyle.widgets.button = {
     me._bg = me._root.createChild("path");
     me._border = me._root.createChild("image", "button")
             .set("slice", "10 12"); #"7")
-    me._label = me._root.createChild("pangotext")
-            .setFont("Liberation Sans", "Normal", "Normal", 14)
+    me._label = me._root.createChild("text")
+            .setFont(me._style.getFont("button"))
             .setAlignment("center-baseline");
     if (cfg.get("flat")) {
       me._border.hide();
@@ -167,9 +166,8 @@ DefaultStyle.widgets.checkbox = {
               .setSize(18, 18);
     me._label =
       me._root.createChild("text")
-              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-              .set("character-size", 14)
-              .set("alignment", "left-center");
+              .setFont(me._style.getFont("checkbox"))
+              .setAlignment("left-center");
   },
   setSize: func(model, w, h)
   {
@@ -187,7 +185,7 @@ DefaultStyle.widgets.checkbox = {
   {
     me._label.setText(text);
 
-    var min_width = me._label.maxWidth() + 3 + 28;
+    var min_width = me._label.width() + 3 + 28;
     model.setLayoutMinimumSize([min_width, 28]);
     model.setLayoutSizeHint([min_width, 28]);
     model.setLayoutMaximumSize([1024, 28]);
@@ -203,10 +201,10 @@ DefaultStyle.widgets.checkbox = {
     if( backdrop )
     {
       file ~= "backdrop-";
-      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+      me._label.setColor(me._style.getColor("backdrop_fg_color"));
     }
     else
-      me._label.set("fill", me._style.getColor("fg_color"));
+      me._label.setColor(me._style.getColor("fg_color"));
     file ~= "check";
 
     if( model._down )
@@ -275,9 +273,8 @@ DefaultStyle.widgets["radio-button"] = {
             .circle(8, 9, 9)
             .set("stroke-width", 1);
     me._label = me._root.createChild("text")
-            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-            .set("character-size", 14)
-            .set("alignment", "left-center");
+            .setFont(me._style.getFont("radio-button"))
+            .setAlignment("left-center");
   },
   setSize: func(model, w, h) {
     me._icon.setTranslation(3, int((h - 18) / 2));
@@ -288,7 +285,7 @@ DefaultStyle.widgets["radio-button"] = {
   setText: func(model, text) {
     me._label.setText(text);
 
-    var min_width = 3 + 18 + 3 + (text ? me._label.maxWidth() : 0);
+    var min_width = 3 + 18 + 3 + (text ? me._label.width() : 0);
     model.setLayoutMinimumSize([min_width, 28]);
     model.setLayoutSizeHint([min_width, 28]);
     model.setLayoutMaximumSize([MAX_SIZE, 28]);
@@ -300,9 +297,9 @@ DefaultStyle.widgets["radio-button"] = {
 
     me._icon_border.set("stroke", me._style.getColor("radio_button_selected_indicator_border_color"));
     if (backdrop) {
-      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+      me._label.setColor(me._style.getColor("backdrop_fg_color"));
     } else {
-      me._label.set("fill", me._style.getColor("fg_color"));
+      me._label.setColor(me._style.getColor("fg_color"));
     }
 
     if (model._checked) {
@@ -336,9 +333,8 @@ DefaultStyle.widgets.label = {
             .set("preserveAspectRatio", "xMidYMid slice")
             .setVisible(0);
     me._text = me._root.createChild("text", "text")
-            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-            .set("character-size", 14)
-            .set("alignment", "left-baseline")
+            .setFont(me._style.getFont("label"))
+            .setAlignment("left-baseline")
             .setVisible(0);
   },
   setSize: func(model, w, h)
@@ -347,19 +343,16 @@ DefaultStyle.widgets.label = {
     me._img.set("size[0]", w)
              .set("size[1]", h);
     if (model._text_align == "left") {
-      me._text.set("alignment", "left-baseline");
+      me._text.setAlignment("left-baseline");
       me._text.setTranslation(2, 2 + h / 2);
     } elsif (model._text_align == "center") {
-      me._text.set("alignment", "center-baseline");
+      me._text.setAlignment("center-baseline");
       me._text.setTranslation(2 + w / 2, 2 + h / 2)
     } elsif (model._text_align == "right") {
-      me._text.set("alignment", "right-baseline");
+      me._text.setAlignment("right-baseline");
       me._text.setTranslation(w - 2, 2 + h / 2);
     }
-    me._text.set(
-      "max-width",
-      model._cfg.get("wordWrap", 0) ? (w - 4) : 0
-    );
+    me._text.setMaxWidth(model._cfg.get("wordWrap", 0) ? (w - 4) : -1);
     return me;
   },
   setText: func(model, text)
@@ -379,7 +372,7 @@ DefaultStyle.widgets.label = {
     # which breaks BoxLayout when we overflow.
     # might need to consider an different algorithm in BoxLayout 
     # when min-width is too big
-    var min_width = me._text.maxWidth() + 4;
+    var min_width = me._text.width() + 4;
     var width_hint = min_width;
 
     if (model._cfg.get("wordWrap", 0)) {
@@ -427,19 +420,18 @@ DefaultStyle.widgets.label = {
     me._bg.set("fill", bg);
     return me;
   },
-  setFont: func(model, path) {
-    if (path != nil) {
-      me._text.setFont(path);
+  setFont: func(model, desc) {
+    if (isa(desc, FontDescription)) {
+      me._text.setFont(desc);
     } else {
       me._text.setFont(me._style.getFont("default"));
     }
-    me.setText(model, me._text.get("text"));
   },
   setColor: func(model, color) {
     if (color == nil) {
       color = me._style.getColor("fg_color");
     }
-    me._text.set("fill", color);
+    me._text.setColor(color);
   },
   heightForWidth: func(w)
   {
@@ -453,7 +445,7 @@ DefaultStyle.widgets.label = {
   {
     if (me._text.getVisible() and model._color == nil) {
       var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
-      me._text.set("fill", me._style.getColor(color_name));
+      me._text.setColor(me._style.getColor(color_name));
     }
   },
 };
@@ -467,12 +459,12 @@ DefaultStyle.widgets["line-edit"] = {
     me._root = parent.createChild("group", "line-edit");
     me._border = me._root.createChild("image", "border")
             .set("slice", "10 12"); #"7")
-    me._placeholder = me._root.createChild("pangotext", "placeholder")
-            .setFont(family: "Liberation Sans", size: 14)
+    me._placeholder = me._root.createChild("text", "placeholder")
+            .setFont(me._style.getFont("line-edit-placeholder", me._style.getFont("line-edit")))
             .setAlignment("left-baseline")
             .set("clip-frame", Element.PARENT);
-    me._text = me._root.createChild("pangotext", "input")
-            .setFont(family: "Liberation Sans", size: 14)
+    me._text = me._root.createChild("text", "input")
+            .setFont(me._style.getFont("line-edit-text", me._style.getFont("line-edit")))
             .setAlignment("left-baseline")
             .set("clip-frame", Element.PARENT);
 
@@ -681,9 +673,8 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 		me._selected_indicator = me._root.createChild("path")
 						.set("stroke-width", 4);
 		me._label = me._root.createChild("text")
-						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-						.set("character-size", 14)
-						.set("alignment", "center-baseline");
+						.setFont(me._style.getFont("tab-widget-tab-button"))
+						.setAlignment("center-baseline");
 	},
 	
 	setSize: func(model, w, h) {
@@ -696,7 +687,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 	setText: func(model, text) {
 		me._label.setText(text);
 
-		var min_width = math.max(80, me._label.maxWidth() + 12 + (model._tab_closeable ? 24 + 12 : 0));
+		var min_width = math.max(80, me._label.width() + 12 + (model._tab_closeable ? 24 + 12 : 0));
 		model.setLayoutMinimumSize([min_width, 28]);
 		model.setLayoutSizeHint([min_width, 28]);
 
@@ -724,27 +715,27 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 		}
 		me._selected_indicator.set("stroke", me._style.getColor(selected_indicator_color_name));
 
-		me._label.set("fill", me._style.getColor((backdrop ? "backdrop_" : "") ~ "fg_color"));
+		me._label.setColor(me._style.getColor((backdrop ? "backdrop_" : "") ~ "fg_color"));
 	}
 };
 
 DefaultStyle.widgets["tab-button-close-button"] = {
 	new: func(parent, cfg) {
-		me._root = parent.createChild("group", "button");
-		me._bg = me._root.createChild("path");
+		me._root = parent.createChild("group", "tab-button-close-button");
+		me._bg = me._root.createChild("path", "bg");
 		me._border = me._root.createChild("image", "button")
 						.set("slice", "10 12"); #"7")
-		me._cross = me._root.createChild("text")
-						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-						.set("character-size", 21)
-						.set("alignment", "center-baseline")
-						.setText("×");
+		me._cross = me._root.createChild("path", "button-icon")
+            .moveTo(-6, -6)
+            .lineTo(6, 6)
+            .moveTo(-6, 6)
+            .lineTo(6, -6);
 	},
 	setText: func {},
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(3, 3, w - 6, h - 6, {"border-radius": 5});
 		me._border.setSize(w, h);
-		me._cross.setTranslation(w / 2, h / 2 + 7);
+		me._cross.setTranslation(w / 2, h / 2);
 	},
 	update: func(model) {
 		var backdrop = !model._windowFocus();
@@ -762,11 +753,11 @@ DefaultStyle.widgets["tab-button-close-button"] = {
 		me._bg.set("fill", me._style.getColor(bg_color_name));
 
 		if (model._hover or model._down) {
-			me._cross.set("fill", me._style.getColor("fg_color"));
+			me._cross.set("stroke", me._style.getColor("fg_color"));
 			me._border.show();
 			me._bg.show();
 		} else {
-			me._cross.set("fill", me._style.getColor("backdrop_fg_color"));
+			me._cross.set("stroke", me._style.getColor("backdrop_fg_color"));
 			me._border.hide();
 			me._bg.hide();
 		}
@@ -823,11 +814,11 @@ DefaultStyle.widgets.rule = {
       me._text.setTranslation(firstWidth + 3, hh);
       var maxW = model._cfg.get("maxTextWidth", -1);
       if (maxW > 0) {
-         me._text.set("max-width", maxW);
+         me._text.setMaxWidth(maxW);
       }
 
       # assume horizontal for now, with a label
-      var bg2Left = maxW > 0 ? maxW : me._text.maxWidth() + 22;
+      var bg2Left = maxW > 0 ? maxW : me._text.width() + 22;
       var bg2Width = w - bg2Left;
       me._bg2.reset().rect(bg2Left, hh - 1, bg2Width, 2);
       me._shadow2.reset().moveTo(bg2Left + 1, hh).horiz(bg2Width - 1);
@@ -850,7 +841,7 @@ DefaultStyle.widgets.rule = {
     var lineWidth = 4;
 
     if( me['_text'] != nil ) {
-      minLayoutSize =  me._text.maxWidth() + 40;
+      minLayoutSize =  me._text.width() + 40;
       lineWidth = 28; # text height
     }
 
@@ -881,6 +872,7 @@ DefaultStyle.widgets.rule = {
     }
 
     me._createElement("text", "text")
+      .setFont(me._style.getFont("rule"))
       .setText(text);
 
     var bgColor = me._style.getColor("fg_color");
@@ -908,7 +900,7 @@ DefaultStyle.widgets.rule = {
     if( me['_text'] != nil )
     {
       var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
-      me._text.set("fill", me._style.getColor(color_name));
+      me._text.setColor(me._style.getColor(color_name));
     }
   },
 };
@@ -960,9 +952,8 @@ DefaultStyle.widgets.slider = {
     me._thumbSize = me._thumb.imageSize();
 
     me._value = me._root.createChild("text")
-            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-            .set("character-size", me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size")))
-            .set("alignment", "center-top");
+            .setFont(me._style.getFont("slider"))
+            .setAlignment("center-top");
   },
 
   _updateLayoutSizes: func(model) 
@@ -973,7 +964,7 @@ DefaultStyle.widgets.slider = {
 
     var h = me._thumb.imageSize()[1] + 6;
     if (model._valueDisplayPosition != model.ValuePosition.None) {
-      h += me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size")) +
+      h += me._style.getFont("slider").size +
                me._style.getSize("slider-thumb-value-margin", 8);
     }
     if (model._ticksPosition != model.TicksPosition.None and model._valueDisplayPosition != model._ticksPosition) {
@@ -1002,9 +993,9 @@ DefaultStyle.widgets.slider = {
 
     var valueX = 0;
     if (model._valueDisplayStyle == model.ValueStyle.Moving) {
-      var startPos = me._value.maxWidth() / 2;
+      var startPos = me._value.width() / 2;
       var thumbPos = thumbX + me._thumbSize[0] * 0.5;
-      var endPos = w - (me._value.maxWidth() / 2);
+      var endPos = w - (me._value.width() / 2);
       valueX = math.clamp(thumbPos, startPos, endPos);
     } elsif (model._valueDisplayStyle == model.ValueStyle.Fixed) {
       valueX = w / 2;
@@ -1055,7 +1046,7 @@ DefaultStyle.widgets.slider = {
     me._thumbSize = me._thumb.imageSize();
     
     var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
-    me._value.set("fill", me._style.getColor(color_name));
+    me._value.setColor(me._style.getColor(color_name));
     if (model._valueDisplayPosition != model.ValuePosition.None) {
       me._value.show();
     } else {
@@ -1076,7 +1067,7 @@ DefaultStyle.widgets.slider = {
 
   setSize: func(model, w, h)
   {
-    var valueFontSize = me._style.getSize("slider-value-font-size", me._style.getSize("base-font-size"));
+    var valueFontSize = me._style.getFont("slider").size;
     var thumbValueMargin = me._style.getSize("slider-thumb-value-margin", 8);
     var fillTicksMargin = me._style.getSize("slider-fill-ticks-margin", 3);
     var ticksOffset = fillTicksMargin + me._style.getSize("slider-tick-length", 10);
@@ -1151,9 +1142,8 @@ DefaultStyle.widgets.dial = {
     me._handle = me._root.createChild("image", "dial-handle");
     me._handleTranslateTransform = me._handle.createTransform();
     me._value = me._root.createChild("text", "dial-value")
-            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-            .set("character-size", me._style.getSize("dial-value-font-size", me._style.getSize("base-font-size", 14)))
-            .set("alignment", "center-center")
+            .setFont(me._style.getFont("dial"))
+            .setAlignment("center-center")
             .setText(0);
     me._ticks = me._root.createChild("path", "dial-ticks");
 
@@ -1172,7 +1162,7 @@ DefaultStyle.widgets.dial = {
     if (model._showValue) {
       valueSize = [
         me._maxValueWidth + valueHandleMargin * 2,
-        me._style.getSize("dial-value-font-size", me._style.getSize("base-font-size", 14)) + valueHandleMargin * 2
+        me._style.getFont("dial").size + valueHandleMargin * 2
       ];
     } else {
       valueSize = me._style.getSize("dial-center-handle-margin", 2) * 2;
@@ -1258,19 +1248,19 @@ DefaultStyle.widgets.dial = {
   _updateMaxValueWidth: func(model) {
     if (model._valueFormat != nil) {
       me._value.setText(sprintf(model._valueFormat, model._minValue));
-      var min = me._value.maxWidth();
+      var min = me._value.width();
       me._value.setText(sprintf(model._valueFormat, model._maxValue));
-      var max = me._value.maxWidth();
+      var max = me._value.width();
       me._value.setText(sprintf(model._valueFormat, model._minValue + model._stepSize));
-      var minStep = me._value.maxWidth();
+      var minStep = me._value.width();
       me._value.setText(sprintf(model._valueFormat, model._value));
     } else {
       me._value.setText(model._minValue);
-      var min = me._value.maxWidth();
+      var min = me._value.width();
       me._value.setText(model._maxValue);
-      var max = me._value.maxWidth();
+      var max = me._value.width();
       me._value.setText(model._minValue + model._stepSize);
-      var minStep = me._value.maxWidth();
+      var minStep = me._value.width();
       me._value.setText(model._value);
     }
     me._maxValueWidth = math.max(min, max, minStep);
@@ -1294,7 +1284,7 @@ DefaultStyle.widgets.dial = {
 
   update: func(model) {
     var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
-    me._value.set("fill", me._style.getColor(color_name));
+    me._value.setColor(me._style.getColor(color_name));
 
     color_name = "dial_knob_bg";
     if (!model._enabled) {
@@ -1352,14 +1342,12 @@ DefaultStyle.widgets["menu-item"] = {
 						.set("slice", "18 18");
 		
 		me._label = me._root.createChild("text")
-						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-						.set("character-size", 14)
-						.set("alignment", "left-baseline");
+						.setFont(me._style.getFont("menu-item-label"))
+						.setAlignment("left-baseline");
 		
 		me._shortcut = me._root.createChild("text")
-						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-						.set("character-size", 14)
-						.set("alignment", "right-baseline");
+						.setFont(me._style.getFont("menu-item-shortcut"))
+						.setAlignment("right-baseline");
 		
 		me._submenu_indicator = me._root.createChild("path")
 						.vert(12).line(6, -7).close();
@@ -1379,12 +1367,12 @@ DefaultStyle.widgets["menu-item"] = {
 	},
 	
 	_updateLayoutSizes: func(model) {
-		var min_width = 5 + me._label.maxWidth() + 5;
+		var min_width = 5 + me._label.width() + 5;
 		if (!model._is_menubar_item) {
 			# add icon space
 			min_width += 5 + 18;
 			# add shortcut space
-			min_width += me._shortcut.maxWidth() + 10;
+			min_width += me._shortcut.width() + 10;
 			if (model._menu != nil) {
 				# add submenu indicator space
 				min_width += 12;
@@ -1402,7 +1390,7 @@ DefaultStyle.widgets["menu-item"] = {
 	},
 
   getTextWidth: func() {
-    return me._label.getSize()[0];
+    return me._label.width();
   },
 	
 	setShortcut: func(model, shortcut) {
@@ -1431,8 +1419,8 @@ DefaultStyle.widgets["menu-item"] = {
 		} else if (!model._enabled) {
 			text_color_name ~= "_disabled";
 		}
-		me._label.set("fill", me._style.getColor(text_color_name));
-		me._shortcut.set("fill", me._style.getColor(text_color_name));
+		me._label.setColor(me._style.getColor(text_color_name));
+		me._shortcut.setColor(me._style.getColor(text_color_name));
 		me._submenu_indicator.set("fill", me._style.getColor("menu_item_submenu_indicator" ~ (model._hovered ? "_hovered" : "")));
 		if (model._menu != nil) {
 			if (!model._is_menubar_item) {
@@ -1484,9 +1472,8 @@ DefaultStyle.widgets["combo-box"] = {
     me._arrowIcon = me._root.createChild("image", "arrow");
     me._label =
       me._root.createChild("text")
-              .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-              .set("character-size", 14)
-              .set("alignment", "left-center");
+              .setFont(me._style.getFont("combo-box"))
+              .setAlignment("left-center");
 
     me._maxItemWidth = nil;
   },
@@ -1538,10 +1525,10 @@ DefaultStyle.widgets["combo-box"] = {
     if( backdrop )
     {
       file ~= "backdrop-";
-      me._label.set("fill", me._style.getColor("backdrop_fg_color"));
+      me._label.setColor(me._style.getColor("backdrop_fg_color"));
     }
     else
-      me._label.set("fill", me._style.getColor("fg_color"));
+      me._label.setColor(me._style.getColor("fg_color"));
     file ~= "combobox";
 
     var buttonFile = file ~ "-button";
@@ -1602,9 +1589,8 @@ DefaultStyle.widgets["list-item"] = {
 		me._itemHeight = me._style.getSize("list-item-height");
 
 		me._label = me._root.createChild("text")
-						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-						.set("character-size", me._style.getSize("list-font-size"))
-						.set("alignment", "left-baseline");
+						.setFont(me._style.getFont("list-item"))
+						.setAlignment("left-baseline");
 	},
 	
 	setSize: func(model, w, h) {
@@ -1616,7 +1602,7 @@ DefaultStyle.widgets["list-item"] = {
 	
 	_updateLayoutSizes: func(model) {
 		var m = me._style.getSize("margin");
-		var min_width = m + me._label.maxWidth() + m;
+		var min_width = m + me._label.width() + m;
 		model.setLayoutMinimumSize([min_width, me._itemHeight]);
 		model.setLayoutSizeHint([min_width, me._itemHeight]);
 		
@@ -1634,7 +1620,7 @@ DefaultStyle.widgets["list-item"] = {
 		if (model._selected) {
 			text_color_name ~= "_selected";
 		}
-		me._label.set("fill", me._style.getColor(text_color_name));
+		me._label.setColor(me._style.getColor(text_color_name));
 		
 		return me;
 	}
@@ -1666,27 +1652,26 @@ DefaultStyle.widgets["text-box"] = {
     me._bg = me._root.createChild("path", "bg")
             .setVisible(0);
     me._text = me._root.createChild("text", "text")
-            .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
-            .set("character-size", 14)
-            .set("alignment", "left-baseline")
+            .setFont(me._style.getFont("text-box"))
+            .setAlignment("left-baseline")
             .setVisible(0);
   },
   setSize: func(model, w, h)
   {
     me._bg.reset().rect(0, 0, w, h);
     if (model._text_align == "left") {
-      me._text.set("alignment", "left-baseline");
+      me._text.setAlignment("left-baseline");
       me._text.setTranslation(2, 2 + h / 2);
     } elsif (model._text_align == "center") {
-      me._text.set("alignment", "center-baseline");
+      me._text.setAlignment("center-baseline");
       me._text.setTranslation(2 + w / 2, 2 + h / 2)
     } elsif (model._text_align == "right") {
-      me._text.set("alignment", "right-baseline");
+      me._text.setAlignment("right-baseline");
       me._text.setTranslation(w - 2, 2 + h / 2);
     }
 
     # always word-wrap
-    me._text.set("max-width", w - 4);
+    me._text.setMaxWidth(w - 4);
     return me;
   },
   setText: func(model, text)
@@ -1705,10 +1690,8 @@ DefaultStyle.widgets["text-box"] = {
     var min_width = 32;
 
     # prefer approximately quadratic text blocks
-    var width_hint = me._text.maxWidth() + 4;
+    var width_hint = me._text.width() + 4;
     width_hint = int(math.sqrt(width_hint * 24));
-
-    logprint(LOG_INFO, "Textbox width hint is:", width_hint);
 
     model.setHeightForWidthFunc(hfw_func);
     model.setLayoutMinimumSize([min_width, 28]);
@@ -1729,19 +1712,18 @@ DefaultStyle.widgets["text-box"] = {
     me._bg.set("fill", bg);
     return me;
   },
-  setFont: func(model, path) {
-    if (path != nil) {
+  setFont: func(model, desc) {
+    if (desc != nil) {
       me._text.setFont(path);
     } else {
       me._text.setFont(me._style.getFont("default"));
     }
-    me.setText(model, me._text.get("text"));
   },
   setColor: func(model, color) {
     if (color == nil) {
       color = me._style.getColor("fg_color");
     }
-    me._text.set("fill", color);
+    me._text.setColor(color);
   },
   heightForWidth: func(w)
   {
@@ -1755,7 +1737,7 @@ DefaultStyle.widgets["text-box"] = {
   {
     if (me._text.getVisible() and model._color == nil) {
       var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
-      me._text.set("fill", me._style.getColor(color_name));
+      me._text.setColor(me._style.getColor(color_name));
     }
   },
 };

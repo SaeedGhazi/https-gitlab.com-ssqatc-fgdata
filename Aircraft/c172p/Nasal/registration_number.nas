@@ -55,7 +55,6 @@ var set_registration_number = func (namespace, immat) {
     var registrationCanvasUpdater = maketimer(0.5, func(){
         # Should run deferred, so the livery has time to overload the properties
         var livery_font   = namespace.getNode("sim/model/livery/immat/font_name",1).getValue();  # to be defined from livery xml
-        var livery_size   = namespace.getNode("sim/model/livery/immat/font_size",1).getValue();
         var livery_font_r = namespace.getNode("sim/model/livery/immat/colour_r",1).getValue();
         var livery_font_g = namespace.getNode("sim/model/livery/immat/colour_g",1).getValue();
         var livery_font_b = namespace.getNode("sim/model/livery/immat/colour_b",1).getValue();
@@ -63,8 +62,7 @@ var set_registration_number = func (namespace, immat) {
             # Update the canvas registration elements
             print("C172 immat/registration: update registration: "~immat);
             canvas_immat_text.setText(immat)
-                .setFont(livery_font) # Fonts are loaded either from $AIRCRAFT_DIR/Fonts or $FG_ROOT/Fonts
-                .setFontSize(livery_size, 1.0)       # Set fontsize and optionally character aspect ratio
+                .setFont(canvas.FontDescription.fromString(livery_font)) # Fonts are loaded either from $AIRCRAFT_DIR/Fonts or $FG_ROOT/Fonts
                 .setColor(livery_font_r, livery_font_g, livery_font_b)           # Text color
                 .setText(immat);
         } else {

@@ -18,11 +18,9 @@ var draw_traffic = func(group, traffic, lod=0)
 			var tcas_grp = tcas_group.createChild("group", callsign);
 			
 			var text_tcas = tcas_grp.createChild("text")
-				.setDrawMode( canvas.Text.TEXT )
 				.setText(sprintf("%+02.0f",altDiff/100))
-				.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+				.setFont(family: "Liberation Sans", size: 28)
 				.setColor(1,1,1)
-				.setFontSize(28)
 				.setAlignment("center-center");
 			if (altDiff > 0)
 				text_tcas.setTranslation(0,-40);

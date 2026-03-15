@@ -8,7 +8,7 @@ DotSym.makeinstance( name, __self__ );
 SymbolLayer.get(name).df_style = {
 	line_width: 3,
 	scale_factor: 1,
-	font: "LiberationFonts/LiberationSans-Regular.ttf",
+	font: "Liberation Sans",
 	font_color: [0,0,0],
 	font_size: 28,
 	icon_color: [0.5, 0, 0.5],
@@ -107,7 +107,6 @@ var init = func {
 		var txt_alignment = me.getStyle('text_alignment', 'center-bottom');
 		var txt_color = me.getStyle('text_color', [0,0.6,0.85]);
 		var txt_bgcolor = me.getStyle('text_bgcolor', [0,0,0,0]);
-		var txt_mode = me.getStyle('text_mode', canvas.Text.TEXT);
 		var txt_padding = me.getStyle('text_padding', 0);
 		var txt_size = me.getStyle('font_size', 14);
 
@@ -115,12 +114,11 @@ var init = func {
 		setScale(me.style.scale_factor).
 		setTranslation(txt_offset).
 		setRotation(- me.model.magvar * D2R).
-		setFontSize(txt_size).
+		setFont(family: "Liberation Sans", size: txt_size).
 		setAlignment(txt_alignment).
 		setPadding(txt_padding).
-		setDrawMode(txt_mode).
 		setColor(txt_color).
-		setColorFill(txt_bgcolor);
+		setBackgroundColor(txt_bgcolor);
 	}
 }
 var draw = func {me.callback('draw');};

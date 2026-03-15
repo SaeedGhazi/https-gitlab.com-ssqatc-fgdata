@@ -9,8 +9,7 @@
                 <texture>Liveries/custom_callsign_2/fuselage.png</texture>
                 
                 <immat>
-                    <font_name>LiberationFonts/LiberationSansNarrow-BoldItalic.ttf</font_name>
-                    <font_size type="int">520</font_size>
+                    <font_name>Liberation Sans Narrow Bold Italic 520px</font_name>
                     <colour_r type="double"> 0.196 </colour_r>
                     <colour_g type="double"> 0.310 </colour_g>
                     <colour_b type="double"> 0.390 </colour_b>

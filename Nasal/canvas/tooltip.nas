@@ -83,10 +83,8 @@ var Tooltip = {
       root.createChild("text", "tooltip-caption")
           .setText("Aircraft Help")
           .setAlignment("left-top")
-          .setFontSize(14)
-          .setFont("LiberationFonts/LiberationSans-Bold.ttf")
+          .setFont(family: "Liberation Sans", size: 14, weight: "Bold")
           .setColor(1,1,1)
-          .setDrawMode(Text.TEXT)
           .setTranslation(me._slice, me._slice)
           .setMaxWidth(size[0]);
 

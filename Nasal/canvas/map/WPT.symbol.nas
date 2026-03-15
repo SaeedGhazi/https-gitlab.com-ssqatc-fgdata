@@ -8,7 +8,7 @@ DotSym.makeinstance( name, __self__ );
 SymbolLayer.get(name).df_style = { # style to use by default
 	line_width: 3,
 	scale_factor: 1,
-	font: "LiberationFonts/LiberationSans-Regular.ttf",
+	font: "Liberation Sans",
 	font_size: 28,
 	font_color: [1,0,1],
 	active_color: [1,0,1],

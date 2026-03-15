@@ -19,10 +19,8 @@ var drawprofile =  func (group, property, disptext)
 		    .arcLargeCW(radius, radius, 0,  -2 * radius, 0)
 			.setColor(0.195,0.96,0.097);
 		sym_group.createChild("text", property)
-			.setDrawMode( canvas.Text.TEXT )
 			.setText(disptext)
-			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-			.setFontSize(28)
+			.setFont(family: "Liberation Sans", size: 38)
 			.setTranslation(25,35)
 			.setColor(0.195,0.96,0.097);
 		sym_group.setGeoPosition(lat, lon)

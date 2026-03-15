@@ -26,10 +26,8 @@ var drawwp =  func (group, lat, lon, alt, name, i, wp) {
 	if (alt != 0)
 		name ~= "\n"~alt;
 	var text_wps = wp_group.createChild("text", "wp-text-" ~ i)
-		.setDrawMode( canvas.Text.TEXT )
 		.setText(name)
-		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-		.setFontSize(28)
+		.setFont(family: "Liberation Sans", size: 28)
 		.setTranslation(25,35)
 		.setColor(1,1,1);
 	wp_group.setGeoPosition(lat, lon);

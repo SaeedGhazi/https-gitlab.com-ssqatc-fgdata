@@ -52,10 +52,8 @@ var _draw_rwy_nd = func (group, lat, lon, length, width, rwyhdg, id) {
 		.setDataGeo([2,4],crds)
 		.setColor(1,1,1);
 	group.createChild("text", "rwy-text")
-		.setDrawMode( canvas.Text.TEXT )
 		.setText(id)
-		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-		.setFontSize(28)
+		.setFont(family: "Liberation Sans", size: 28)
 		.setTranslation(35,0)
 		.setColor(1,1,1);
 }

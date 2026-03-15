@@ -36,12 +36,11 @@ var TextElement =
   setVisible : func(vis) { me._symbol.setVisible(vis); },
   _flashElement : func() {
     if (me._flash == 0) {
-      me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
       me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
       me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
       me._flash = 1;
     } else {
-      me._symbol.setDrawMode(canvas.Text.TEXT);
+      me._symbol.setBackgroundColor(0, 0, 0, 0);
       me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
       me._flash = 0;
     }
@@ -56,7 +55,7 @@ var TextElement =
     if (me._endText != nil) me.setValue(me._endText);
     me._endText = nil;
     me._highlighted = 0;
-    me._symbol.setDrawMode(canvas.Text.TEXT);
+    me._symbol.setBackgroundColor(0, 0, 0, 0);
     me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
     PFD.HighlightTimer.stopHighlight(me);
   },

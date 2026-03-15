@@ -26,7 +26,7 @@ var NDStyles = {
 	'Boeing': {
 		font_mapper: func(family, weight) {
 			if( family == "Liberation Sans" and weight == "normal" )
-				return "LiberationFonts/LiberationSans-Regular.ttf";
+				return "Liberation Sans";
 		},
 
 		# where all the symbols are stored
@@ -506,9 +506,9 @@ var NDStyles = {
 					common: func(nd) nd.symbols.gs.setText(sprintf("%3.0f",nd.aircraft_source.get_gnd_spd() )),
 					predicate: func(nd) nd.aircraft_source.get_gnd_spd() >= 30,
 					is_true: func(nd) {
-						nd.symbols.gs.setFontSize(36);
+						nd.symbols.gs.setFont(size: 36);
 					},
-					is_false: func(nd) nd.symbols.gs.setFontSize(52),
+					is_false: func(nd) nd.symbols.gs.setFont(size: 52),
 				},
 			},
 			{
@@ -1146,7 +1146,7 @@ var NDStyles = {
 		"Airbus" : {
 			font_mapper: func(family, weight) {
 				if( family == "Liberation Sans" and weight == "normal" )
-						return "LiberationFonts/LiberationSans-Regular.ttf";
+						return "Liberation Sans";
 			},
 
 			# where all the symbols are stored
@@ -1508,10 +1508,8 @@ var NDStyles = {
 						init_after_callback: func{
 							#me.element.removeAllChildren();
 							me.text_ndb = me.element.createChild("text")
-								.setDrawMode( canvas.Text.TEXT )
 								.setText(me.model.id)
-								.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-								.setFontSize(28)
+								.setFont(family: "Liberation Sans", size: 28)
 								.setTranslation(25,10);
 							me.ndb_sym = me.element.createChild('path');
 							me.ndb_sym.moveTo(-15,15)
@@ -2027,7 +2025,7 @@ var NDStyles = {
 						predicate: func(nd) nd.aircraft_source.get_gnd_spd() >= 30,
 						is_true: func(nd) {
 							#nd.symbols.gs.show();
-							nd.symbols.gs.setFontSize(36);
+							nd.symbols.gs.setFont(size: 36);
 						},
 						is_false: func(nd) {},#nd.symbols.gs.hide(),
 					},

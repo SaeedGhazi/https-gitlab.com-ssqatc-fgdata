@@ -47,10 +47,8 @@ var init = func {
         me.wp_sym.setTranslation(translation[navtype]);
     }
     me.text_wps = wp_group.createChild("text", "wp-text-" ~ me.model.idx)
-    .setDrawMode( canvas.Text.TEXT )
     .setText(me.model.name)
-    .setFont("LiberationFonts/LiberationSans-Regular.ttf")
-    .setFontSize(28)
+    .setFont(family: "Liberation Sans", size: 28)
     .setTranslation(25,15)
     .setColor(1,1,1);
     me.text_alt = nil;
@@ -70,10 +68,8 @@ var init = func {
                 cstr_txt ~= sprintf('%3.0fKT', int(spd));
         }
         me.text_alt = wp_group.createChild("text", "wp-alt-text-" ~ me.model.idx)
-        .setDrawMode( canvas.Text.TEXT )
         .setText(cstr_txt)
-        .setFont("LiberationFonts/LiberationSans-Regular.ttf")
-        .setFontSize(28)
+        .setFont(family: "Liberation Sans", size: 28)
         .setTranslation(25,15);
     }
 }

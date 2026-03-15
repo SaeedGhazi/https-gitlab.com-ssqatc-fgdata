@@ -110,7 +110,7 @@ Scale.draw = func(cgroup, start, count, increment, style=nil) {
         labels[i]
             .setText(txt)
             .setAlignment(alignment)
-            .setFontSize(style.fontsize)
+            .setFont(size: style.fontsize)
             .setColor(style.label_color);
         if (style.orientation == "d") {
             labels[i].setTranslation(offset, translation);

@@ -42,10 +42,8 @@ var draw = func {
 	# Init
 	if (me.text_tcas == nil) {
 		me.text_tcas = me.element.createChild("text")
-			.setDrawMode( canvas.Text.TEXT )
-			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+			.setFont(family: "Liberation Sans", size: 20)
 			.setColor(1,1,1)
-			.setFontSize(20)
 			.setAlignment("center-center");
 		me.icon_tcas = me.element.createChild("path")
 			.setStrokeLineWidth(3);

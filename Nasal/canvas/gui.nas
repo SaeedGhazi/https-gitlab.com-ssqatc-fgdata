@@ -80,10 +80,9 @@ getDesktop().addEventListener("mousedown", func {
 });
 
 var frameLatencyDisplay = getDesktop().createChild("text", "frame-latency-display")
-    .set("font", "accid.txf")
-    .set("character-size", 16)
-    .set("fill", "rgba(230, 100 50, 1)")
-    .set("alignment", "left-bottom")
+    .setFont(family: "Liberation Sans", size: 16)
+    .setColor("rgba(230, 100, 50, 1)")
+    .setAlignment("left-bottom")
     .setText("0 ms");
 var frameLatencyNode = props.globals.getNode("/sim/frame-latency-max-ms", 1);
 var frameLatencyListener = setlistener(frameLatencyNode, func(n) {
@@ -91,10 +90,9 @@ var frameLatencyListener = setlistener(frameLatencyNode, func(n) {
 });
 
 var fpsDisplay = getDesktop().createChild("text", "fps-display")
-    .set("font", "accid.txf")
-    .set("character-size", 16)
-    .set("fill", "rgba(230, 100, 50, 1)")
-    .set("alignment", "right-bottom")
+    .setFont(family: "Liberation Sans", size: 16)
+    .setColor("rgba(230, 100, 50, 1)")
+    .setAlignment("right-bottom")
     .setText("0 fps");
 var fpsNode = props.globals.getNode("/sim/frame-rate", 1);
 var fpsListener = setlistener(fpsNode, func(n) {

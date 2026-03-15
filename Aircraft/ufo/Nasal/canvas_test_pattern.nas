@@ -10,8 +10,7 @@ var testDialog = {
                   .setRotation(rot*0.0174532925)
                   .setTranslation(posx,posy)
                   .setAlignment("center-top")
-                  .setFont("typewriter.txf")
-                  .setFontSize(40,1.5)
+                  .setFont(family: "Liberation Mono", size: 40)
                   .setColor(0,0,0)
                   .setText(desc);
   },

@@ -21,10 +21,8 @@ var draw_fix = func (group, fix, controller=nil, lod=0) {
 
 	# the fix label
 	var text_fix = fix_grp.createChild("text", 'fix-label-'~name)
-		.setDrawMode( canvas.Text.TEXT )
 		.setText(name)
-		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-		.setFontSize(28)
+		.setFont(family: "Liberation Sans", size: 28)
 		.setTranslation(5,25);
 
 	# the fix position

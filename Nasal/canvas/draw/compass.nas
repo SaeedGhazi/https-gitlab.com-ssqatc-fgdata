@@ -17,8 +17,8 @@ var CompassRose = {
                 mark_color:   [255,255,255,1],
                 label_color:  [255,255,255,1],
                 center_mark: 0,       # draw a mark in the center of the rose
-                font: "sans",         # fontsize for labels
-                font_weight: "bold",  # fontsize for labels
+                font: "Liberation Sans",         # fontsize for labels
+                font_weight: "Bold",  # fontsize for labels
                 fontsize: 0,          # fontsize for labels
                 nesw: 1,              # replace labels 0,90,180,270 by N,E,S,W
             };
@@ -95,8 +95,7 @@ CompassRose.draw = func(cgroup, radius, style=nil) {
             }
             labels[i]
                 .setText(txt)
-                .setFontSize(fontsize)
-                .setFont(font)
+                .setFont(family: font, size: fontsize)
                 .setColor(style.label_color)
                 .setAlignment("center-"~(style.mark_offset < 0 ? "top" : "bottom"))
                 .setTranslation(0,-radius-offset)

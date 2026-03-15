@@ -278,7 +278,7 @@ var TestPangoText = {
         var cv = me.window.getCanvas(1);
         cv.setColorBackground(canvas.style.getColor("bg_color"));
         me.root = cv.createGroup();
-        me.root.createChild("pangotext", "pangotext")
+        me.text = me.root.createChild("text", "text")
                         .setMarkup("<s>dgPQ&amp;</s>")
                         .setAlignment("left-top")
                         .setFont(family: "Liberation Sans", size: 140)
@@ -287,6 +287,11 @@ var TestPangoText = {
                         .setLineColor(0, 1, 0)
                         .show()
                         .setTranslation(10, 30);
+        debug.dump(me.text.getTightBoundingBox());
+        me.text.addEventListener("click", func {
+            debug.dump(me.text.getTightBoundingBox());
+        });
+
 
     return me;
   }

@@ -53,7 +53,7 @@ var PFDDisplay =
 
     var fontmapper = func (family, weight) {
       #if( family == "Liberation Sans" and weight == "narrow" ) {
-        return "LiberationFonts/LiberationSansNarrow-Regular.ttf";
+        return canvas.FontDescription.new(family: "Liberation Sans Narrow");
       #}
       # If we don't return anything the default font is used
     };

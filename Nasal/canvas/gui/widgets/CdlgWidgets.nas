@@ -276,9 +276,7 @@ var cdlg_widget_property_label = {
 	pl.text = pl.graph.createChild("text")
       		.setText(text)
 		.setColor(text_color)
-		.setFontSize(15)
-		#.setFont("LiberationFonts/LiberationMono-Bold.ttf")
-		.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+		.setFont(family: "Liberation Sans", weight: "Bold", size: 15)
 		.setAlignment("center-bottom")
 		.setRotation(0.0);
 
@@ -374,7 +372,7 @@ var cdlg_widget_property_label = {
 	setFontSize: func (size) {
 
 		me.font_scale_factor = size/15.0;
-		me.text.setFontSize(size);
+		me.text.setFont(size: size);
 	},
 
 	setScale: func (x,y = nil) {
@@ -511,8 +509,7 @@ var cdlg_widget_infobox = {
 		ib.title_text = ib.graph.createChild("text")
 	      		.setText(title)
 			.setColor(text_color)
-			.setFontSize(15)
-			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+			.setFont(family: "Liberation Sans", weight: "Bold", size: 15)
 			.setAlignment("center-bottom")
 			.setTranslation(0, offset)
 			.setRotation(0.0);
@@ -537,8 +534,7 @@ var cdlg_widget_infobox = {
 			var tmp_text = ib.graph.createChild("text")
 	      		.setText(texts[i][0])
 			.setColor(text_color)
-			.setFontSize(15)
-			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+			.setFont(family: "Liberation Sans", weight: "Bold", size: 15)
 			.setAlignment(alignment)
 			.setTranslation(translation, 5.0 + (i+1) * ib.font_height)
 			.setRotation(0.0);
@@ -559,8 +555,7 @@ var cdlg_widget_infobox = {
 				var tmp_value = ib.graph.createChild("text")
 		      		.setText(texts[i][1])
 				.setColor(text_color)
-				.setFontSize(15)
-				.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+				.setFont(family: "Liberation Sans", weight: "Bold", size: 15)
 				.setAlignment("left-bottom")
 				.setTranslation(0.05 * ib.width, 5.0 + (i+1) * ib.font_height)
 				.setRotation(0.0);

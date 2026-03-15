@@ -133,10 +133,8 @@ var init = func {
 	}
 	if(me.getOption('draw_text', 0)){
 		me.dme_text = me.element.createChild("text")
-			.setDrawMode( canvas.Text.TEXT )
 			.setText(me.model.id)
-			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-			.setFontSize(28)
+			.setFont(family: "Liberation Sans", size: 28)
 			.setColor(me.getStyle('text_color', [1,1,1]))
 			.setTranslation(me.getStyle('translation', [45,25]));
 	}

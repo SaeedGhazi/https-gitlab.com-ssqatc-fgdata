@@ -293,5 +293,11 @@ var Text = {
 
     lineSpacing: func {
         return me.get("line-spacing");
+    },
+    setPadding: func(padding) {
+        return me.setInt("padding", padding);
+    },
+    padding: func {
+        return me.get("padding");
     }
 };

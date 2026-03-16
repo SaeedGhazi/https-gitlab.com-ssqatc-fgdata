@@ -285,6 +285,7 @@ var TestPangoText = {
                         .setForegroundColor(1, 1, 0)
                         .setBackgroundColor(1, 0, 1)
                         .setLineColor(0, 1, 0)
+                        .setPadding(20)
                         .show()
                         .setTranslation(10, 30);
         debug.dump(me.text.getTightBoundingBox());

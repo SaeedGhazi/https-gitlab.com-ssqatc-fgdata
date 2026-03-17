@@ -114,7 +114,9 @@ var Node = {
                 }
                 else v = max;
             }
-            if (me.setIntValue(v)) return v;
+            me.setValue(v);
+            # readback from prop as integer props removes decimals
+            return me.getValue();
         }
         else  {
             logprint(DEV_ALERT, "props.add() can be used only on numeric props "~
@@ -140,7 +142,9 @@ var Node = {
                 }
                 else v = min;
             }
-            if (me.setIntValue(v)) return v;
+            me.setValue(v);
+            # readback from prop as integer props removes decimals
+            return me.getValue();
         }
         else {
             logprint(DEV_ALERT, "props.sub() can be used only on numeric props"~

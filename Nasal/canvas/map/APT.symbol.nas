@@ -30,10 +30,12 @@ var init = func {
 		text = me.model.id;
 	}
 	var text_apt = me.element.createChild("text", name ~ " label")
+		.setDrawMode( canvas.Text.TEXT )
 		.setTranslation(style.text_offset)
 		.setText(text)
-		.setFont(family: "Liberation Sans", size: style.label_font_size)
-		.setColor(style.label_font_color);
+		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+		.setColor(style.label_font_color)
+		.setFontSize(style.label_font_size);
 
 	# FIXME: this applies scale to the whole group, better do this separately for each element?
 	me.element.setScale(style.scale_factor);

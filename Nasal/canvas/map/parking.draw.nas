@@ -4,9 +4,12 @@ var draw_parking = func(group, apt, lod) {
 	foreach(var park; apt.parking()) {
 	var icon_park =
 	group.createChild("text", "parking-" ~ park.name)
-		.setMarkup("<u>" ~ park.name ~ "</u>")
-		.setFont(family: "Liberation Mono", weight: "Bold", size: 15)
+		.setDrawMode( canvas.Text.ALIGNMENT
+		            + canvas.Text.TEXT )
+		.setText(park.name)
+		.setFont("LiberationFonts/LiberationMono-Bold.ttf")
 		.setGeoPosition(park.lat, park.lon)
+		.setFontSize(15, 1.3);
 	}
 }
 

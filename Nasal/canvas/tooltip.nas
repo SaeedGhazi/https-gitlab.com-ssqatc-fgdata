@@ -80,7 +80,7 @@ var Tooltip = {
           .setSize(size);
 
     me._text =
-      root.createChild("text", "tooltip-caption")
+      root.createChild("richtext", "tooltip-caption")
           .setText("Aircraft Help")
           .setAlignment("left-top")
           .setFont(family: "Liberation Sans", size: 14, weight: "Bold")

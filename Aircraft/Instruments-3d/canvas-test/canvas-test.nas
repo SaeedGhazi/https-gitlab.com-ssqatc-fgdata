@@ -30,16 +30,19 @@ var canvas_demo = {
     
     m.text_title =
       g.createChild("text", "line-title")
+       .setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX)
        .setColor(0,0,0)
-       .setBackgroundColor(0,1,0)
+       .setColorFill(0,1,0)
        .setAlignment("center-top")
-       .setFont(family: "Liberation Mono", size: 70)
+       .setFont("LiberationFonts/LiberationMono-Bold.ttf")
+       .setFontSize(70, 1.5)
        .setTranslation(384, 5);
 
     m.dynamic_text =
       g.createChild("text", "dynamic-text")
        .setText("Text node created at runtime.")
-       .setFont(family: "Liberation Serif", size: 50)
+       .setFont("Helvetica.txf")
+       .setFontSize(50)
        .setAlignment("center-center");
     m.tf = m.dynamic_text.createTransform();
     m.tf.setTranslation(384, 200);

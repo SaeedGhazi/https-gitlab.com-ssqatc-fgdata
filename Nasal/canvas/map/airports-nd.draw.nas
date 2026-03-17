@@ -20,10 +20,12 @@ var draw_apt = func (group, apt, controller=nil, lod=0) {
 			.setColor(0,0.6,0.85)
 			.setStrokeLineWidth(3);
 		var text_apt = apt_grp.createChild("text", name ~ " label")
+			.setDrawMode( canvas.Text.TEXT )
 			.setTranslation(17,35)
 			.setText(name)
-			.setFont(family: "Liberation Sans", size: 28)
-			.setColor(0,0.6,0.85);
+			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+			.setColor(0,0.6,0.85)
+			.setFontSize(28);
 		apt_grp.setGeoPosition(lat, lon); # FIXME: this needs to be configurable!!
 	#}
 

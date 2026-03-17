@@ -53,7 +53,7 @@ var instrument_dir	=	"Aircraft/Instruments-3d/bxp6401/";
 var canvas_BXP6401_base = {
 	init: func(canvas_group, file) {
 		var font_mapper = func(family, weight) {
-			return canvas.FontDescription.new(family: "Liberation Sans", weight: "Bold");
+			return "LiberationFonts/LiberationSans-Bold.ttf";
 		};
 
 		

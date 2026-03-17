@@ -25,7 +25,7 @@ var DefaultStyle = {
         if (me[mem] == nil) {
           me[ mem ] = me._root.createChild(type, "label-" ~ name);
 
-          if (type == "text") {
+          if (type == "richtext") {
              me[mem].setFont(me._style.getFont(name))
                       .setAlignment("left-center");
           }
@@ -55,7 +55,7 @@ DefaultStyle.widgets.button = {
     me._bg = me._root.createChild("path");
     me._border = me._root.createChild("image", "button")
             .set("slice", "10 12"); #"7")
-    me._label = me._root.createChild("text")
+    me._label = me._root.createChild("richtext")
             .setFont(me._style.getFont("button"))
             .setAlignment("center-baseline");
     if (cfg.get("flat")) {
@@ -165,7 +165,7 @@ DefaultStyle.widgets.checkbox = {
       me._root.createChild("image", "checkbox-icon")
               .setSize(18, 18);
     me._label =
-      me._root.createChild("text")
+      me._root.createChild("richtext")
               .setFont(me._style.getFont("checkbox"))
               .setAlignment("left-center");
   },
@@ -272,7 +272,7 @@ DefaultStyle.widgets["radio-button"] = {
     me._icon_border = me._icon.createChild("path", "radio-button-icon-border")
             .circle(8, 9, 9)
             .set("stroke-width", 1);
-    me._label = me._root.createChild("text")
+    me._label = me._root.createChild("richtext")
             .setFont(me._style.getFont("radio-button"))
             .setAlignment("left-center");
   },
@@ -332,7 +332,7 @@ DefaultStyle.widgets.label = {
     me._img = me._root.createChild("image", "image")
             .set("preserveAspectRatio", "xMidYMid slice")
             .setVisible(0);
-    me._text = me._root.createChild("text", "text")
+    me._text = me._root.createChild("richtext", "text")
             .setFont(me._style.getFont("label"))
             .setAlignment("left-baseline")
             .setVisible(0);
@@ -459,11 +459,11 @@ DefaultStyle.widgets["line-edit"] = {
     me._root = parent.createChild("group", "line-edit");
     me._border = me._root.createChild("image", "border")
             .set("slice", "10 12"); #"7")
-    me._placeholder = me._root.createChild("text", "placeholder")
+    me._placeholder = me._root.createChild("richtext", "placeholder")
             .setFont(me._style.getFont("line-edit-placeholder", me._style.getFont("line-edit")))
             .setAlignment("left-baseline")
             .set("clip-frame", Element.PARENT);
-    me._text = me._root.createChild("text", "input")
+    me._text = me._root.createChild("richtext", "input")
             .setFont(me._style.getFont("line-edit-text", me._style.getFont("line-edit")))
             .setAlignment("left-baseline")
             .set("clip-frame", Element.PARENT);
@@ -672,7 +672,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 						.set("stroke-width", 1);
 		me._selected_indicator = me._root.createChild("path")
 						.set("stroke-width", 4);
-		me._label = me._root.createChild("text")
+		me._label = me._root.createChild("richtext")
 						.setFont(me._style.getFont("tab-widget-tab-button"))
 						.setAlignment("center-baseline");
 	},
@@ -871,7 +871,7 @@ DefaultStyle.widgets.rule = {
       return;
     }
 
-    me._createElement("text", "text")
+    me._createElement("richtext", "richtext")
       .setFont(me._style.getFont("rule"))
       .setText(text);
 
@@ -951,7 +951,7 @@ DefaultStyle.widgets.slider = {
     me._thumb = me._root.createChild("image", "thumb");
     me._thumbSize = me._thumb.imageSize();
 
-    me._value = me._root.createChild("text")
+    me._value = me._root.createChild("richtext")
             .setFont(me._style.getFont("slider"))
             .setAlignment("center-top");
   },
@@ -1141,7 +1141,7 @@ DefaultStyle.widgets.dial = {
     me._knob = me._root.createChild("path", "dial-knob");
     me._handle = me._root.createChild("image", "dial-handle");
     me._handleTranslateTransform = me._handle.createTransform();
-    me._value = me._root.createChild("text", "dial-value")
+    me._value = me._root.createChild("richtext", "dial-value")
             .setFont(me._style.getFont("dial"))
             .setAlignment("center-center")
             .setText(0);
@@ -1341,11 +1341,11 @@ DefaultStyle.widgets["menu-item"] = {
 		me._icon = me._root.createChild("image")
 						.set("slice", "18 18");
 		
-		me._label = me._root.createChild("text")
+		me._label = me._root.createChild("richtext")
 						.setFont(me._style.getFont("menu-item-label"))
 						.setAlignment("left-baseline");
 		
-		me._shortcut = me._root.createChild("text")
+		me._shortcut = me._root.createChild("richtext")
 						.setFont(me._style.getFont("menu-item-shortcut"))
 						.setAlignment("right-baseline");
 		
@@ -1471,7 +1471,7 @@ DefaultStyle.widgets["combo-box"] = {
               .set("slice", "10 6"); #"7")
     me._arrowIcon = me._root.createChild("image", "arrow");
     me._label =
-      me._root.createChild("text")
+      me._root.createChild("richtext")
               .setFont(me._style.getFont("combo-box"))
               .setAlignment("left-center");
 
@@ -1588,7 +1588,7 @@ DefaultStyle.widgets["list-item"] = {
 		me._bg = me._root.createChild("path");
 		me._itemHeight = me._style.getSize("list-item-height");
 
-		me._label = me._root.createChild("text")
+		me._label = me._root.createChild("richtext")
 						.setFont(me._style.getFont("list-item"))
 						.setAlignment("left-baseline");
 	},
@@ -1651,7 +1651,7 @@ DefaultStyle.widgets["text-box"] = {
     me._root = parent.createChild("group", "label");
     me._bg = me._root.createChild("path", "bg")
             .setVisible(0);
-    me._text = me._root.createChild("text", "text")
+    me._text = me._root.createChild("richtext", "text")
             .setFont(me._style.getFont("text-box"))
             .setAlignment("left-baseline")
             .setVisible(0);

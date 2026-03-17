@@ -191,7 +191,8 @@ createDigitTape : func(parent, name, suffix = nil)
         }
     }
     t.setText(s);
-    t.setFont(family: "Liberation Mono", size: 44);
+    t.setFont("LiberationFonts/LiberationMono-Regular.ttf");
+    t.setFontSize(44);
    # t.set('line-height', 0.9);
     t.setAlignment("left-bottom");
     return t;
@@ -309,13 +310,15 @@ createPitchLadder : func()
         textUp.setText(d);
         textUp.setAlignment("right-center");
         textUp.setTranslation(-tenDegreeWidth, d * sp);
-        textUp.setFont(family: "Liberation Mono", weight: "Bold", size: 36);
+        textUp.setFontSize(36);
+        textUp.setFont("LiberationFonts/LiberationMono-Bold.ttf");
 
         var textDown = ladderGroup.createChild("text", "pitch-ladder-legend-" ~ d);
         textDown.setText(d);
         textDown.setAlignment("right-center");
         textDown.setTranslation(-tenDegreeWidth, -d * sp);
-        textDown.setFont(family: "Liberation Mono", weight: "Bold", size: 36);
+        textDown.setFontSize(36);
+        textDown.setFont("LiberationFonts/LiberationMono-Bold.ttf");
     }
 },
 
@@ -355,7 +358,8 @@ createSpeedTape : func()
         var text = me._speedTapeGroup.createChild("text", "speed-tape-legend-" ~ twentyKnot);
         text.setText(twentyKnot);
         text.setAlignment("right-center");
-        text.setFont(family: "Liberation Mono", weight: "Bold", size: 36);
+        text.setFont("LiberationFonts/LiberationMono-Bold.ttf");
+        text.setFontSize(36);
         text.setTranslation(-twentyKnotWidth-2, -twentyKnot * knotSpacing);
     }
 },
@@ -406,8 +410,9 @@ createAltitudeTape : func()
 
         var text = me._altTapeGroup.createChild("text", "altitude-tape-legend-" ~ i);
         text.setText(text);
-        text.setFont(family: "Liberation Mono", size: 36);
+        text.setFontSize(36);
         text.setAlignment("left-center");
+        text.setFont("LiberationFonts/LiberationMono-Regular.ttf");
         text.setTranslation(2, -y);
         
         # we will update the text very often, ensure we only do
@@ -495,8 +500,9 @@ createCompassRose : func()
 
         var text = me._roseGroup.createChild("text", "compass-rose-" ~ i);
         text.setText(i);
-        text.setFont(family: "Liberation Mono", weight: "Bold", size: 36);
+        text.setFontSize(36);
         text.setAlignment("center-top");
+        text.setFont("LiberationFonts/LiberationMono-Bold.ttf");
 
         var horAngle = 90 - (i * 10); # angle from +ve X axis
         var sa = math.sin(horAngle * D2R);
@@ -532,11 +538,12 @@ createAltitudeBox : func()
     me._altitudeBoxText = text;
 
     text.setText('88 ');
-    text.setFont(family: "Liberation Mono", size: 44);
+    text.setFontSize(44);
     text.setAlignment("left-center");
+    text.setFont("LiberationFonts/LiberationMono-Regular.ttf");
 
     me._altitudeDigits00 = me.createDigitTape(clipGroup, 'altitude-digits00', '0');
-    me._altitudeDigits00.setFont(size: 32);
+    me._altitudeDigits00.setFontSize(32);
     me._altitudeDigits00.set('z-index', 4);
 },
 
@@ -560,8 +567,9 @@ createSpeedBox : func()
     me._speedBoxText = text;
 
     text.setText('88 ');
-    text.setFont(family: "Liberation Mono", size: 44);
+    text.setFontSize(44);
     text.setAlignment("left-center");
+    text.setFont("LiberationFonts/LiberationMono-Regular.ttf");
 
     me._speedDigit0 = me.createDigitTape(clipGroup, 'speed-digit0');
     me._speedDigit0.set('z-index', 4);
@@ -572,7 +580,7 @@ createAltimeterSetting: func()
     me._altimeterText = me.root.createChild('text', 'altimeter-setting-text');
     me._altimeterText.setText('1013');
     me._altimeterText.setAlignment("right-center");
-    me._altimeterText.setFont(family: "Liberation Mono", size: 44);
+    me._altimeterText.setFont("LiberationFonts/LiberationMono-Regular.ttf");
     me._altimeterText.setColor('#00ff00');
 
     var midTextY = -ISFD.halfSize + (ISFD.modeBoxHeight * 0.5);
@@ -582,9 +590,10 @@ createAltimeterSetting: func()
 createModeText : func()
 {
     me._modeText = me.root.createChild('text', 'mode-text');
+    me._modeText.setFontSize(44);
     me._modeText.setText('APP');
     me._modeText.setAlignment("left-center");
-    me._modeText.setFont(family: "Liberation Mono", size: 44);
+    me._modeText.setFont("LiberationFonts/LiberationMono-Regular.ttf");
     me._modeText.setColor('#00ff00');
 
     var midTextY = -ISFD.halfSize + (ISFD.modeBoxHeight * 0.5);
@@ -732,7 +741,7 @@ update : func()
 
 # barometric
     if (me._controller.isSTDBarometricPressure()) {
-        me._altimeterText.setFont(size: 44);
+        me._altimeterText.setFontSize(44);
         me._altimeterText.setText('STD');
     } else {
         var s = '';
@@ -743,7 +752,7 @@ update : func()
         }
 
         # smaller text to fit
-        me._altimeterText.setFont(size: 32);
+        me._altimeterText.setFontSize(32);
         me._altimeterText.setText(s);
     }
 

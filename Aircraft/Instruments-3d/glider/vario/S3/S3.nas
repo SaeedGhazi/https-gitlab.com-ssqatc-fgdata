@@ -49,7 +49,7 @@ var instrument_dir	=	"Aircraft/Instruments-3d/glider/vario/S3/";
 var canvas_S3_base = {
 	init: func(canvas_group, file) {
 		var font_mapper = func(family, weight) {
-			return canvas.FontDescription.new(family: "Liberation Sans", weight: "Bold");
+			return "LiberationFonts/LiberationSans-Bold.ttf";
 		};
 
 		

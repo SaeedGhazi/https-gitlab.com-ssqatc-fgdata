@@ -10,8 +10,10 @@ SymbolLayer.get(name).df_style = {
 	text_alignment:  "center-center",
 	text_bgcolor: [0,0,0,0],
 	text_color: [0,0.6,0.85],
+	text_mode: canvas.Text.TEXT,
+	text_padding: 0,
 	text_size: 14,
-	text_font: "Liberation Sans",
+	text_font: "LiberationFonts/LiberationSans-Regular.ttf",
 	show_labels: 0,
 };
 
@@ -146,18 +148,24 @@ var init = func {
 			var txt1 = me.element.createChild("text", "rwy1label")
 				.setText(rw1.id)
 				.setGeoPosition(coord1.lat(), coord1.lon())
-				.setFont(family: me.style.text_font, size: me.style.text_size)
+				.setFont(me.style.text_font)
+				.setFontSize(me.style.text_size)
 				.setAlignment(me.style.text_alignment)
+				.setPadding(me.style.text_padding)
+				.setDrawMode(me.style.text_mode)
 				.setColor(me.style.text_color)
-				.setBackgroundColor(me.style.text_bgcolor);
+				.setColorFill(me.style.text_bgcolor);
 
 			var txt1 =  me.element.createChild("text", "rwy2label")
 				.setText(rw2.id)
 				.setGeoPosition(coord2.lat(), coord2.lon())
-				.setFont(family: me.style.text_font, size: me.style.text_size)
+				.setFont(me.style.text_font)
+				.setFontSize(me.style.text_size)
 				.setAlignment(me.style.text_alignment)
+				.setPadding(me.style.text_padding)
+				.setDrawMode(me.style.text_mode)
 				.setColor(me.style.text_color)
-				.setBackgroundColor(me.style.text_bgcolor);
+				.setColorFill(me.style.text_bgcolor);
 		}
 	}
 
@@ -202,10 +210,13 @@ var init = func {
 			var txt1 = me.element.createChild("text", "hplabel")
 				.setText(hp.id)
 				.setGeoPosition(coord1.lat(), coord1.lon())
-				.setFont(family: me.style.text_font, size: me.style.text_size)
+				.setFont(me.style.text_font)
+				.setFontSize(me.style.text_size)
 				.setAlignment(me.style.text_alignment)
+				.setPadding(me.style.text_padding)
+				.setDrawMode(me.style.text_mode)
 				.setColor(me.style.text_color)
-				.setBackgroundColor(me.style.text_bgcolor);
+				.setColorFill(me.style.text_bgcolor);
 		}
   }
 };

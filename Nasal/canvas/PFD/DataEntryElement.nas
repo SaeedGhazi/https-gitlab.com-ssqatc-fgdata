@@ -58,11 +58,12 @@ var DataEntryElement =
   _flashElement : func() {
     if ((me._highlightEnabled == 1) and (me._highlightCharEnabled == 0)) {
       if (me._flash == 0) {
-        me._symbol.setBackgroundColor(me._style.HIGHLIGHT_COLOR);
+        me._symbol.setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
+        me._symbol.setColorFill(me._style.HIGHLIGHT_COLOR);
         me._symbol.setColor(me._style.HIGHLIGHT_TEXT_COLOR);
         me._flash = 1;
       } else {
-        me._symbol.setBackgroundColor(0, 0, 0, 0);
+        me._symbol.setDrawMode(canvas.Text.TEXT);
         me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
         me._flash = 0;
       }
@@ -70,11 +71,12 @@ var DataEntryElement =
 
     if (me._highlightCharEnabled == 1) {
       if (me._flashChar == 0) {
-        me._dataEntrySymbol[me._dataEntryPos].setBackgroundColor(me._style.HIGHLIGHT_COLOR);
+        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX);
+        me._dataEntrySymbol[me._dataEntryPos].setColorFill(me._style.HIGHLIGHT_COLOR);
         me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.HIGHLIGHT_TEXT_COLOR);
         me._flashChar = 1;
       } else {
-        me._dataEntrySymbol[me._dataEntryPos].setBackgroundColor(0, 0, 0, 0);
+        me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
         me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
         me._flashChar = 0;
       }
@@ -87,7 +89,7 @@ var DataEntryElement =
   },
   unhighlightElement : func() {
     me._highlightEnabled = 0;
-    me._symbol.setBackgroundColor(0, 0, 0, 0);
+    me._symbol.setDrawMode(canvas.Text.TEXT);
     me._symbol.setColor(me._style.NORMAL_TEXT_COLOR);
     PFD.HighlightTimer.stopHighlight(me);
   },
@@ -98,7 +100,7 @@ var DataEntryElement =
   },
   _unhighlightCharElement : func() {
     me._highlightCharEnabled = 0;
-    me._dataEntrySymbol[me._dataEntryPos].setBackgroundColor(0, 0, 0, 0);
+    me._dataEntrySymbol[me._dataEntryPos].setDrawMode(canvas.Text.TEXT);
     me._dataEntrySymbol[me._dataEntryPos].setColor(me._style.NORMAL_TEXT_COLOR);
   },
 

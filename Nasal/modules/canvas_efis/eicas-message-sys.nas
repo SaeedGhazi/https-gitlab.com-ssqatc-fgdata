@@ -508,7 +508,8 @@ var MessageSystem = {
         forindex (var i; me.lines) {
             var l = me.lines[i];
             l.setAlignment("left-top").setTranslation(left, top + i*line_spacing);
-            l.setFont(family:"Liberation Sans", size: font_size);
+            l.setFont("LiberationFonts/LiberationSans-Regular.ttf");
+            l.setFontSize(font_size);
         }
         return me.lines;
     },
@@ -519,7 +520,8 @@ var MessageSystem = {
         if (me.canvas_group == nil) return;
         me.page_indicator = me.canvas_group.createChild("text");
         me.page_indicator.setAlignment("left-top").setTranslation(left, top);
-        me.page_indicator.setFont(family:"Liberation Sans", size: font_size);
+        me.page_indicator.setFont("LiberationFonts/LiberationSans-Regular.ttf");
+        me.page_indicator.setFontSize(font_size);
         if (format_string != nil)
             me.page_indicator_format = format_string;
         return me.page_indicator;

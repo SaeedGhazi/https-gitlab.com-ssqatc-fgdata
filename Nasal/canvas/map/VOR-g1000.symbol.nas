@@ -29,8 +29,10 @@ var draw = func{
         var transl = me.getStyle('translation', [-10,20]);
         var text_color = me.getStyle('text_color', [1,1,1]);
         me.text_vor = me.element.createChild("text")
+        .setDrawMode( canvas.Text.TEXT )
         .setText(me.model.id)
-        .setFont(family: "Liberation Sans", size: 12)
+        .setFont("LiberationFonts/LiberationSans-Regular.ttf")
+        .setFontSize(12)
         .setColor(text_color)
         .setTranslation(transl);
     }

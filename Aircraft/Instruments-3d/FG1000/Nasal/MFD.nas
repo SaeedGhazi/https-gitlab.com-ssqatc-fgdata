@@ -86,7 +86,7 @@ var MFDDisplay =
 
     var fontmapper = func (family, weight) {
       #if( family == "Liberation Sans" and weight == "narrow" ) {
-        return canvas.FontDescription.new(family: "Liberation Sans Narrow");
+        return "LiberationFonts/LiberationSansNarrow-Regular.ttf";
       #}
       # If we don't return anything the default font is used
     };

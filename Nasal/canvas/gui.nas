@@ -79,7 +79,7 @@ getDesktop().addEventListener("mousedown", func {
   }
 });
 
-var frameLatencyDisplay = getDesktop().createChild("text", "frame-latency-display")
+var frameLatencyDisplay = getDesktop().createChild("richtext", "frame-latency-display")
     .setFont(family: "Liberation Sans", size: 16)
     .setColor("rgba(230, 100, 50, 1)")
     .setAlignment("left-bottom")
@@ -89,7 +89,7 @@ var frameLatencyListener = setlistener(frameLatencyNode, func(n) {
     frameLatencyDisplay.setText(sprintf("%4.0f ms", n.getValue()));
 });
 
-var fpsDisplay = getDesktop().createChild("text", "fps-display")
+var fpsDisplay = getDesktop().createChild("richtext", "fps-display")
     .setFont(family: "Liberation Sans", size: 16)
     .setColor("rgba(230, 100, 50, 1)")
     .setAlignment("right-bottom")

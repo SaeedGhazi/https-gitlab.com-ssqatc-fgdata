@@ -89,18 +89,7 @@ var parsesvg = func(group, path, options = nil)
   # Remove the topmost element from the stack
   var popElement = func
   {
-    var err = [];
-    call(stack[-1].updateCenter, [], stack[-1], nil, err);
-    if (err) {
-      debug.dump(
-        stack[-1].getTightBoundingBox(),
-        stack[-1].get("center-offset-x"),
-        stack[-1].get("center-offset-y"),
-        stack[-1].get("center[0]"),
-        stack[-1].get("center[1]")
-      );
-      debug.printerror(err);
-    }
+    stack[-1].updateCenter();
     # Create rotation matrix after all SVG defined transformations
     stack[-1].set("tf-rot-index", stack[-1].createTransform()._node.getIndex());
 
@@ -354,15 +343,16 @@ var parsesvg = func(group, path, options = nil)
     var font_family = style["font-family"];
     var font_weight = style["font-weight"];
     var font_style = style["font-style"];
+    if( font_family != nil or font_weight != nil or font_style != nil )
+      stack[-1].set("font", font_mapper(font_family, font_weight, font_style, options));
+
     var font_size = style["font-size"];
-    if( font_family != nil or font_weight != nil or font_style != nil or font_size != nil) {
-      stack[-1].set("font", font_mapper(font_family, font_weight, font_style, options).setSize(evalCSSNum(font_size)).toString());
-      stack[-1].set("font-size", evalCSSNum(font_size));
-    }
+    if( font_size != nil )
+      stack[-1].setDouble("character-size", evalCSSNum(font_size));
 
     var line_height = style["line-height"];
     if( line_height != nil )
-      stack[-1].set("line-spacing", evalCSSNum(line_height));
+      stack[-1].setDouble("line-height", evalCSSNum(line_height));
   }
 
   # ----------------------------------------------------------------------------
@@ -687,7 +677,7 @@ var parsesvg = func(group, path, options = nil)
         parseTextStyles(text.style);
         parseTransform(text.attr['transform']);
 
-        character_size = stack[-1].get("font-size", character_size);
+        character_size = stack[-1].get("character-size", character_size);
       }
 
       # Helper for getting first number in space separated list of numbers.
@@ -715,8 +705,8 @@ var parsesvg = func(group, path, options = nil)
           # TODO should we combine multiple lines into a single text separated
           #      with newline characters?
           y += line
-             * stack[-1].get("line-spacing", 1.25)
-             * stack[-1].get("font-size", character_size);
+             * stack[-1].get("line-height", 1.25)
+             * stack[-1].get("character-size", character_size);
 
         # Use id of text element with single tspan child, fall back to id of
         # tspan if text has no id.

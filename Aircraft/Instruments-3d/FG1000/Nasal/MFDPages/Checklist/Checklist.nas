@@ -369,8 +369,9 @@ displayGroup : func () {
           # We need to fill the bounding box with black so that we don't
           # see the underlying dots.
           element.setText(value[k])
+                 .setDrawMode(canvas.Text.TEXT + canvas.Text.FILLEDBOUNDINGBOX)
                  .setPadding(2)
-                 .setBackgroundColor("#000000");
+                 .setColorFill("#000000");
 
           if (crsr) {
             # White - current cursor

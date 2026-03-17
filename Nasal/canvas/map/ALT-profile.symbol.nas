@@ -35,8 +35,10 @@ var init = func {
 		.arcLargeCW(radius, radius, 0,  -2 * radius, 0)
 		.setColor(0.195,0.96,0.097);
 		me.element.createChild("text")
+		.setDrawMode( canvas.Text.TEXT )
 		.setText(disptext)
-		.setFont(family: "Liberation Sans", size: 28)
+		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+		.setFontSize(28)
 		.setTranslation(25,35)
 		.setColor(0.195,0.96,0.097);
 	}

@@ -794,11 +794,13 @@ var CDU = {
     {
         me._canvas = canvas.new(CDU.canvas_settings);        
         var text_style = {
-            'font': "BoeingCDULarge 28px",
+            'font': "BoeingCDU-Large.ttf",
+            'character-size': 28,
             'alignment': 'left-bottom'
         };
         var text_style_s = {
-            'font': "BoeingCDUSmall 28px",
+            'font': "BoeingCDU-Small.ttf",
+            'character-size': 28,
             'alignment': 'left-bottom'
         };
         

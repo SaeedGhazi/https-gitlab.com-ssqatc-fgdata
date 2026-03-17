@@ -80,7 +80,7 @@ var saveFrequency = func () {
 var canvas_AR6201_base = {
 	init: func(canvas_group, file) {
 		var font_mapper = func(family, weight) {
-			return FontDescription.new(family: "Liberation Sans", weight: "Bold");
+			return "LiberationFonts/LiberationSans-Bold.ttf";
 		};
 
 		

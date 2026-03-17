@@ -33,10 +33,13 @@ var init = func {
 		}
 
 		p.createChild("text", "parking-" ~ park.name)
+			.setDrawMode( canvas.Text.ALIGNMENT
+			            + canvas.Text.TEXT )
 			.setTranslation([style.scale_factor * style.text_offset[0], style.scale_factor * style.text_offset[1]])
 			.setText(park.name)
-			.setFont(family: "Liberation Sans", size: style.label_font_size)
+			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
 			.setColor(style.label_font_color)
+			.setFontSize(style.label_font_size, 1.3)
 			.setScale(style.scale_factor);
 	}
 };

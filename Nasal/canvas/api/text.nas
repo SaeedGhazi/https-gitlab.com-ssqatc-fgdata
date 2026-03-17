@@ -1,14 +1,14 @@
 #-------------------------------------------------------------------------------
 # canvas.Text
 #-------------------------------------------------------------------------------
-# Class for a text element on a canvas, with markup support through Pango
+# Class for a text element on a canvas
 #
 var font_mapper = func(family = nil, weight = nil, style = nil, options = nil)
 {
     var defaults = {
-        "default-font-family": "Liberation Sans",
-        "default-font-weight": nil,
-        "default-font-style": nil,
+        "default-font-family": "LiberationSans",
+        "default-font-weight": "",
+        "default-font-style": "",
     };
 
     # setup defaults if no options are given
@@ -32,7 +32,7 @@ var font_mapper = func(family = nil, weight = nil, style = nil, options = nil)
 
     if (isfunc(options["font-mapper"])) {
         var font = options["font-mapper"](family, weight, style);
-        if (isa(font, FontDescription)) {
+        if (font != nil) {
             return font;
         }
     }
@@ -43,120 +43,19 @@ var font_mapper = func(family = nil, weight = nil, style = nil, options = nil)
 
     # map generic Inkscape sans serif to our default font
     if (string.lc(family) == "sans" or string.lc(family) == "sans-serif") {
-        family = "Liberation Sans";
+        family = "LiberationSans";
     }
     if (left(family, 10) == "Liberation") {
-        style = style == "italic" or style == "Italic" ? "Italic" : nil;
-        weight = weight == "bold" or weight == "Bold" ? "Bold" : nil;
+        style = style == "italic" ? "Italic" : "";
+        weight = weight == "bold" ? "Bold" : "";
 
-        return FontDescription.new(family: family, weight: weight, style: style);
+        var s = weight~style;
+        if (s == "") s = "Regular";
+
+        return "LiberationFonts/"~string.replace(family, " ", "")~"-"~s~".ttf";
     }
 
-    return FontDescription.default();
-};
-
-var FontDescription = {
-    new: func(family = nil, weight = nil, style = nil, size = nil) {
-        var obj = {
-            parents: [FontDescription],
-            family: family,
-            weight: weight,
-            style: style,
-            size: size,
-        };
-
-        return obj;
-    },
-
-    setFamily: func(family) {
-        if (isstr(family)) {
-            me.family = family;
-        } else {
-            me.family = nil;
-        }
-        return me;
-    },
-    setWeight: func(weight) {
-        if (isstr(weight)) {
-            me.weight = weight;
-        } else {
-            me.weight = nil;
-        }
-        return me;
-    },
-    setStyle: func(style) {
-        if (isstr(style)) {
-            me.style = style;
-        } else {
-            me.style = nil;
-        }
-        return me;
-    },
-    setSize: func (size) {
-        if (isnum(size) and size > 0) {
-            me.size = size;
-        } else {
-            me.size = nil;
-        }
-        return me;
-    },
-
-    default: func() {
-        return FontDescription.new(family: "Liberation Sans", size: 14);
-    },
-
-    isEmpty: func() {
-        return family == nil and weight == nil and style == nil and size == nil;
-    },
-
-    fromString: func(str) {
-        if (!str) {
-            return FontDescription.new();
-        }
-        var family = nil;
-        var weight = nil;
-        var style = nil;
-        var size = nil;
-        var fontStringParts = split(" ", str);
-        foreach (var part; fontStringParts) {
-			var scannedSize = [];
-            if (string.scanf(part, "%dpx", scannedSize)) {
-               size = scannedSize[0];
-            } elsif (contains(["Normal", "Italic"], part)) {
-                style = part;
-            } elsif (contains(["Thin", "Light", "Normal", "Medium", "Bold"], part)) {
-                weight = part;
-            } else {
-				if (family == nil) {
-					family = part;
-				} else {
-					family = string.join(" ", [family, part]);
-				}
-			}
-        }
-        return FontDescription.new(family, weight, style, size);
-    },
-
-    toString: func() {
-        var parts = [];
-        if (isstr(me.family)) {
-            append(parts, me.family);
-        }
-        if (isstr(me.weight)) {
-            append(parts, me.weight);
-        }
-        if (isstr(me.style)) {
-            append(parts, me.style);
-        }
-        if (isnum(me.size) and me.size > 0) {
-            append(parts, sprintf("%dpx", me.size));
-        }
-        return string.join(" ", parts);
-    },
-
-    copy: func() {
-        return FontDescription.new(family: me.family, weight: me.weight, style: me.style, size: me.size);
-    }
+    return "LiberationFonts/LiberationMono-Bold.ttf";
 };
 
 var Text = {
@@ -164,25 +63,51 @@ var Text = {
         var obj = {
             parents: [Text, Element.new(ghost)],
         };
-        obj.setFont(FontDescription.default());
-
         return obj;
-    },
-
-    setMarkup: func(markup) {
-        me.set("markup", typeof(markup) == "scalar" ? markup : "");
     },
 
     # Set the text
     setText: func(text) {
-        return me.set("text", typeof(text) == "scalar" ? text : "");
+        me.set("text", typeof(text) == "scalar" ? text : "");
     },
 
     getText: func() {
-        return me.text();
+        return me.get("text");
     },
-    getMarkup: func() {
-        return me.markup();
+
+    # enable reduced property I/O update function
+    enableUpdate: func () {
+        me._lasttext = "INIT_BLANK";
+        me.updateText = func (text)
+        {
+            if (text == me._lasttext) {return;}
+            me._lasttext = text;
+            me.set("text", typeof(text) == "scalar" ? text : "");
+        };
+    },
+
+    # reduced property I/O text update template
+    updateText: func (text) {
+        die("updateText() requires enableUpdate() to be called first");
+    },
+
+
+    # enable fast setprop-based text writing
+    enableFast: func () {
+        me._node_path = me._node.getPath()~"/text";
+        me.setTextFast = func(text) {
+            setprop(me._node_path, text);
+        };
+    },
+
+    # fast, setprop-based text writing template
+    setTextFast: func (text) {
+        die("setTextFast() requires enableFast() to be called first");
+    },
+
+    # append text to an existing string
+    appendText: func(text) {
+        me.set("text", (me.get("text") or "")~(typeof(text) == "scalar" ? text : ""));
     },
 
     # Set alignment
@@ -200,104 +125,59 @@ var Text = {
     #     left-baseline
     #     center-baseline
     #     right-baseline
+    #     left-bottom-baseline
+    #     center-bottom-baseline
+    #     right-bottom-baseline
+    #
     setAlignment: func(align) {
-        return me.set("alignment", align);
+        me.set("alignment", align);
     },
 
-    # Set font family, weight, style and size
-	# Any unset arguments will be reused from the currently applied font, or if no font is applied yet, a default font of 
-	# Liberation Sans Normal Normal 14px will be used.
-    setFont: func(family = nil, weight = nil, style = nil, size = nil) {
-        var currentFont = FontDescription.fromString(me.get("font", ""));
-		if (!currentFont.family) {
-			currentFont.family = FontDescription.default().family;
-        }
-        if (!isnum(currentFont.size) or currentFont.size < 1) {
-            currentFont.size = FontDescription.default().size;
-        }
+    # Set the font size
+    setFontSize: func(size, aspect = 1) {
+        me.setDouble("character-size", size);
+        me.setDouble("character-aspect-ratio", aspect);
+    },
 
-        var newFont = nil;
-        if (isa(family, FontDescription)) {
-            newFont = family.copy();
-        } else {
-            newFont = FontDescription.new(family: family, weight: weight, style: style, size: size);
-        }
+    # Set font (by name of font file)
+    setFont: func(name) {
+        me.set("font", name);
+    },
 
-        if (!isstr(newFont.family) or !newFont.family) {
-            newFont.family = currentFont.family;
-        }
-        if (!isstr(newFont.weight) or !newFont.weight) {
-            newFont.weight = currentFont.weight;
-        }
-        if (!isstr(newFont.style) or !newFont.style) {
-            newFont.style = currentFont.style;
-        }
-        if (!isnum(newFont.size) or newFont.size < 1) {
-            newFont.size = currentFont.size;
-        }
+    # Enumeration of values for drawing mode:
+    TEXT:               0x01, # The text itself
+    BOUNDINGBOX:        0x02, # A bounding box (only lines)
+    FILLEDBOUNDINGBOX:  0x04, # A filled bounding box
+    ALIGNMENT:          0x08, # Draw a marker (cross) at the position of the text
+    # Set draw mode. Binary combination of the values above. Since I have not
+    # found a bitwise "or" we have to use a "+" instead.
+    # e.g. my_text.setDrawMode(Text.TEXT + Text.BOUNDINGBOX);
+    setDrawMode: func(mode) {
+        me.setInt("draw-mode", mode);
+    },
 
-        return me.set("font", newFont.toString());
+    # Set bounding box padding
+    setPadding: func(pad) {
+        me.setDouble("padding", pad);
     },
 
     setMaxWidth: func(w) {
-        if (!isnum(w) or w < 0) {
-            w = -1;
-        }
-        return me.setInt("max-width", w);
-    },
-    
-    setMaxHeight: func(h) {
-        if (!isnum(h) or h < 0) {
-            h = -1;
-        }
-        return me.setInt("max-height", h);
+        me.setDouble("max-width", w);
     },
 
     setColor: func {
-        return me.set("foreground-color", _getColor(arg));
+        me.set("fill", _getColor(arg));
     },
 
-    setForegroundColor: func {
-        return me.set("foreground-color", _getColor(arg));
+    getColor: func {
+        me.get("fill");
     },
 
-    foregroundColor: func {
-        return me.get("foreground-color");
+    setColorFill: func {
+        me.set("background", _getColor(arg));
     },
 
-    setBackgroundColor: func {
-        return me.set("background-color", _getColor(arg));
+    getColorFill: func {
+        me.get("background");
     },
-
-    backgroundColor: func {
-        return me.get("background-color");
-    },
-
-    setLineColor: func {
-        return me.set("line-color", _getColor(arg));
-    },
-    lineColor: func {
-        return me.get("line-color");
-    },
-
-    setSelectionColor: func {
-        return me.set("selection-color", _getColor(arg));
-    },
-    selectionColor: func {
-        return me.get("selection-color");
-    },
-
-    setLineSpacing: func(spacing) {
-        return me.setDouble("line-spacing", spacing);
-    },
-
-    lineSpacing: func {
-        return me.get("line-spacing");
-    },
-    setPadding: func(padding) {
-        return me.setInt("padding", padding);
-    },
-    padding: func {
-        return me.get("padding");
-    }
 };

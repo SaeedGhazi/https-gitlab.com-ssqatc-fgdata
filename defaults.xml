@@ -784,7 +784,7 @@ Started September 2000 by David Megginson, david@megginson.com
       <no-joystick-input type="bool">false</no-joystick-input>
       <no-hid-input type="bool">false</no-hid-input>
     </input>
-    <chase-distance-m type="double">-500.0</chase-distance-m>
+    <chase-distance-m type="double">-25.0</chase-distance-m>
     <allow-toggle-cockpit type="bool">false</allow-toggle-cockpit>
     <!-- "tower" positioned to right of runway at KSFO -->
     <tower>

@@ -5,20 +5,6 @@
 
 gui.widgets.Slider = {
   _CLASS: "Slider",
-  ValueStyle: {
-    Fixed: 0,
-    Moving: 1,
-  },
-  ValuePosition: {
-    None: 0,
-    Above: 1,
-    Below: 2,
-  },
-  TicksPosition: {
-    None: 0,
-    Above: 1,
-    Below: 2,
-  },
   new: func(parent, style = nil, cfg = nil)
   {
     style = style or canvas.style;
@@ -31,11 +17,10 @@ gui.widgets.Slider = {
     m._value = cfg.get("value", 50);
     m._stepSize = cfg.get("step-size", 1);
     m._pageSize = cfg.get("page-size", 10);
-    m._tickStep = cfg.get("tick-step", math.ceil((m._maxValue - m._minValue) / 20));
+    m._tickStep = cfg.get("tick-step", m._pageSize);
 
-    m._ticksPosition = cfg.get("ticks-position", m.TicksPosition.None);
-    m._valueDisplayStyle = cfg.get("value-style", m.ValueStyle.Moving);
-    m._valueDisplayPosition = cfg.get("value-position", m.ValuePosition.None);
+    m._showValue = cfg.get("show-value", 1);
+    m._showTicks = cfg.get("show-ticks", 1);
 
     m._setView(style.createWidget(parent, cfg.get("type", "slider"), cfg));
     m._view._updateLayoutSizes(m);
@@ -49,29 +34,27 @@ gui.widgets.Slider = {
       return me;
     }
     value = math.clamp(val, me._minValue, me._maxValue);
+    if (value == me._value) {
+      return me;
+    }
+    me._value = value;
+    me._trigger("value-changed", {"value": value});
     if (me._view != nil) {
       me._view.setNormValue(me, me._normValue());
-    }
-    if (me._value != value) {
-      me._value = value;
-      me._trigger("value-changed", {"value": value});
     }
     return me;
   },
 
-  setValuePosition: func(pos) {
-    me._valueDisplayPosition = pos;
+  setShowValue: func(show) {
+    me._showValue = show;
     me._view._updateLayoutSizes(me);
+    return me;
   },
 
-  setValueStyle: func(style) {
-    me._valueDisplayStyle = style;
+  setShowTicks: func(show) {
+    me._showTicks = show;
     me._view._updateLayoutSizes(me);
-  },
-
-  setTicksPosition: func(pos) {
-    me._ticksPosition = pos;
-    me._view._updateLayoutSizes(me);
+    return me;
   },
 
 # protected:
@@ -137,8 +120,9 @@ gui.widgets.Slider = {
       return;
     }
     var vr =  me._view._root;
-    var viewPosX = vr.canvasToLocal([event.clientX, event.clientY])[0];
-    var width = me._size[0];
+    var padding = me._view._style.getFont("slider").size * me._view._style.getSize("slider", "padding");
+    var viewPosX = vr.canvasToLocal([event.clientX, event.clientY])[0] - padding - me._view._thumbSize[0] / 2;
+    var width = me._size[0] - padding * 2 - me._view._thumbSize[0];
 
     if (viewPosX < 0) {
       me.setValue(me._minValue);

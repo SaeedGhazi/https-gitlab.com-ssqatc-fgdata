@@ -121,9 +121,13 @@ gui.Style = {
   {
     return me._colors[name] or def;
   },
-  getSize: func(name, def = 1.0)
+  getSize: func(name, type = nil)
   {
-    return me._sizes[name] or def;
+    if (isstr(type) and size(type) > 0) {
+      return me._sizes[name ~ "-" ~ type] or me._sizes[type] or -1;
+    } else {
+      return me._sizes[name] or -1;
+    }
   },
   getFont: func(name, def = nil) {
     def = isa(def, FontDescription) ? def : me._fonts["default"];

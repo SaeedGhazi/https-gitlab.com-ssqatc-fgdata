@@ -65,7 +65,7 @@ DefaultStyle.widgets.button = {
   },
   setSize: func(model, w, h)
   {
-    me._bg.reset().rect(0, 0, w - 0, h - 0, {"border-radius": 5});
+    me._bg.reset().rect(0, 0, w, h, {"border-radius": 5});
     me._border.setSize(w, h);
   },
   setText: func(model, text)

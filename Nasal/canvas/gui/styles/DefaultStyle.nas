@@ -1006,7 +1006,7 @@ DefaultStyle.widgets.slider = {
 
     # TODO handle vertical sliders in the future
 
-    var h = me._thumb.imageSize()[1] + padding * 2;
+    var h = me._thumbSize[1] + padding * 2;
     if (model._showValue) {
       h += me._style.getFont("slider").size +
                me._style.getSize("slider-thumb-value-margin");

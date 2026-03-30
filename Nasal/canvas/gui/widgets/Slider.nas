@@ -23,11 +23,11 @@ gui.widgets.Slider = {
     m._showTicks = cfg.get("show-ticks", 1);
 
     m._setView(style.createWidget(parent, cfg.get("type", "slider"), cfg));
-    m._view._updateLayoutSizes(m);
     m.setValue(m._value);
     
     # not sure why we need this here again since we already call _onStateChange in setValue, but the slider doesnt display correctly without this until you click on it.
     m._onStateChange();
+    m._view._updateLayoutSizes(m);
 
     return m;
   },
@@ -96,24 +96,24 @@ gui.widgets.Slider = {
     view._root.addEventListener("keydown", func(e) {
       var value = me._value;
       if (contains([
-        keyboard.FunctionKeys.Left, keyboard.FunctionKeys.KP_Left,
-        keyboard.FunctionKeys.Down, keyboard.FunctionKeys.KP_Down,
-        keyboard.PrintableKeys.Minus, keyboard.FunctionKeys.KP_Subtract,
+        FunctionKeys.Left, FunctionKeys.KP_Left,
+        FunctionKeys.Down, FunctionKeys.KP_Down,
+        PrintableKeys.Minus, FunctionKeys.KP_Subtract,
       ], e.keyCode)) {
         value -= me._stepSize;
       } elsif (contains([
-        keyboard.FunctionKeys.Right, keyboard.FunctionKeys.KP_Right,
-        keyboard.FunctionKeys.Up, keyboard.FunctionKeys.KP_Up,
-        keyboard.PrintableKeys.Plus, keyboard.FunctionKeys.KP_Add,
+        FunctionKeys.Right, FunctionKeys.KP_Right,
+        FunctionKeys.Up, FunctionKeys.KP_Up,
+        PrintableKeys.Plus, FunctionKeys.KP_Add,
       ], e.keyCode)) {
         value += me._stepSize;
-      } elsif (contains([keyboard.FunctionKeys.Page_Down, keyboard.FunctionKeys.KP_Page_Down], e.keyCode)) {
+      } elsif (contains([FunctionKeys.Page_Down, FunctionKeys.KP_Page_Down], e.keyCode)) {
         value -= me._pageSize;
-      } elsif (contains([keyboard.FunctionKeys.Page_Up, keyboard.FunctionKeys.KP_Page_Up], e.keyCode)) {
+      } elsif (contains([FunctionKeys.Page_Up, FunctionKeys.KP_Page_Up], e.keyCode)) {
         value += me._pageSize;
-      } elsif (contains([keyboard.FunctionKeys.Home, keyboard.FunctionKeys.KP_Home], e.keyCode)) {
+      } elsif (contains([FunctionKeys.Home, FunctionKeys.KP_Home], e.keyCode)) {
         value = me._minValue;
-      } elsif (contains([keyboard.FunctionKeys.End, keyboard.FunctionKeys.KP_End], e.keyCode)) {
+      } elsif (contains([FunctionKeys.End, FunctionKeys.KP_End], e.keyCode)) {
         value = me._maxValue;
       }
       me.setValue(value);

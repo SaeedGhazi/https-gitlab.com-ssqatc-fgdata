@@ -24,6 +24,10 @@ gui.widgets.Slider = {
 
     m._setView(style.createWidget(parent, cfg.get("type", "slider"), cfg));
     m._view._updateLayoutSizes(m);
+    m.setValue(m._value);
+    
+    # not sure why we need this here again since we already call _onStateChange in setValue, but the slider doesnt display correctly without this until you click on it.
+    m._onStateChange();
 
     return m;
   },
@@ -42,6 +46,8 @@ gui.widgets.Slider = {
     if (me._view != nil) {
       me._view.setNormValue(me, me._normValue());
     }
+    me._onStateChange();
+
     return me;
   },
 

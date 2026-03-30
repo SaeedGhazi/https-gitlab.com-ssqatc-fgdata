@@ -73,7 +73,7 @@ DefaultStyle.widgets.button = {
     me._label.setText(text);
 
     var fontSize = me._style.getFont("button").size;
-    var padding = me._style.getSize("button", "padding") * fontSize;
+    var padding = me._style.getPadding("button");
     var height =  fontSize + padding * 2;
     var min_width = text ? me._label.width() + padding * 2: height;
     model.setLayoutMinimumSize([min_width, height]);
@@ -176,7 +176,7 @@ DefaultStyle.widgets.checkbox = {
   {
     var iconSize = me._style.getSize("checkbox", "icon");
     var fontSize = me._style.getFont("checkbox").size;
-    var padding = me._style.getSize("checkbox", "padding") * math.max(fontSize, iconSize);
+    var padding = me._style.getPadding("checkbox");
     me._icon.setTranslation(padding, (h - iconSize) / 2);
     me._label.setTranslation(padding + iconSize + padding, int(h / 2));
 
@@ -188,7 +188,7 @@ DefaultStyle.widgets.checkbox = {
 
     var iconSize = me._style.getSize("checkbox", "icon");
     var fontSize = me._style.getFont("checkbox").size;
-    var padding = me._style.getSize("checkbox", "padding") * fontSize;
+    var padding = me._style.getPadding("checkbox");
     var height = math.max(fontSize, iconSize) + padding * 2;
     var min_width = text ? padding + iconSize + padding + me._label.width() + padding: height;
     model.setLayoutMinimumSize([min_width, height]);
@@ -285,7 +285,7 @@ DefaultStyle.widgets["radio-button"] = {
   setSize: func(model, w, h) {
     var iconSize = me._style.getSize("radio-button", "icon");
     var fontSize = me._style.getFont("radio-button").size;
-    var padding = me._style.getSize("radio-button", "padding") * fontSize;
+    var padding = me._style.getPadding("radio-button");
     me._icon.setTranslation(padding + iconSize / 2, padding + int(h / 2));
     me._label.setTranslation(padding + iconSize + padding, padding + int(h / 2));
 
@@ -296,7 +296,7 @@ DefaultStyle.widgets["radio-button"] = {
 
     var iconSize = me._style.getSize("radio-button", "icon");
     var fontSize = me._style.getFont("radio-button").size;
-    var padding = me._style.getSize("radio-button", "padding") * fontSize;
+    var padding = me._style.getPadding("radio-button");
     var height = math.max(fontSize, iconSize) + padding * 2;
     var min_width = padding + iconSize + padding + (text ? me._label.width() : 0) + padding;
     model.setLayoutMinimumSize([min_width, height]);
@@ -353,7 +353,7 @@ DefaultStyle.widgets.label = {
   setSize: func(model, w, h)
   {
     var fontSize = me._style.getFont("label").size;
-    var padding = me._style.getSize("label", "padding") * fontSize;
+    var padding = me._style.getPadding("label");
 
     me._bg.reset().rect(0, 0, w, h);
     me._img.set("size[0]", w)
@@ -385,7 +385,7 @@ DefaultStyle.widgets.label = {
     var hfw_func = nil;
 
     var fontSize = me._style.getFont("label").size;
-    var padding = me._style.getSize("label", "padding") * fontSize;
+    var padding = me._style.getPadding("label");
     var height = fontSize + padding * 2;
     # this implies no clipping of long strings, 
     # which breaks BoxLayout when we overflow.
@@ -455,7 +455,7 @@ DefaultStyle.widgets.label = {
     }
 
     var fontSize = me._style.getFont("label").size;
-    var padding = me._style.getSize("label", "padding") * fontSize;
+    var padding = me._style.getPadding("label");
     if (me._text.lineCount() == 1) {
       return fontSize + 2 * padding;
     }
@@ -502,7 +502,7 @@ DefaultStyle.widgets["line-edit"] = {
   setSize: func(model, w, h)
   {
     var fontSize = me._style.getFont("line-edit-text", me._style.getFont("line-edit")).size;
-    var padding = me._style.getSize("line-edit", "padding") * fontSize;
+    var padding = me._style.getPadding("line-edit");
 
     me._border.setSize(w, h);
     me._placeholder.set(
@@ -533,7 +533,7 @@ DefaultStyle.widgets["line-edit"] = {
   },
   _updateLayoutSizes: func(model) {
     var fontSize = me._style.getFont("line-edit-text", me._style.getFont("line-edit")).size;
-    var padding = me._style.getSize("line-edit", "padding") * fontSize;
+    var padding = me._style.getPadding("line-edit");
     var height = fontSize + padding * 2;
     model.setLayoutMinimumSize([fontSize * 3 + padding * 2, height]);
     model.setLayoutSizeHint([math.max(me._text.width(), me._placeholder.width()) + padding * 2, height]);
@@ -542,7 +542,7 @@ DefaultStyle.widgets["line-edit"] = {
   update: func(model)
   {
     var fontSize = me._style.getFont("line-edit-text", me._style.getFont("line-edit")).size;
-    var padding = me._style.getSize("line-edit", "padding") * fontSize;
+    var padding = me._style.getPadding("line-edit");
     var backdrop = !model._windowFocus();
     var file = me._style._dir_widgets ~ "/";
 
@@ -707,7 +707,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
     var closeButtonSize = model._close_button._size;
     var selectedIndicatorThickness = me._style.getSize("tab-button-selected-indicator-thickness");
     var fontSize = me._style.getFont("tab-widget-tab-button").size;
-    var padding = me._style.getSize("tab-widget-tab-button", "padding") * fontSize;
+    var padding = me._style.getPadding("tab-widget-tab-button");
  		me._bg.reset().rect(0, 0, w, h);
 		me._selected_indicator.reset().moveTo(0, h - selectedIndicatorThickness / 2).horiz(w);
     if (model._tab_closeable) {
@@ -724,7 +724,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
     var closeButtonSize = model._close_button._size;
     var selectedIndicatorThickness = me._style.getSize("tab-button-selected-indicator-thickness");
     var fontSize = me._style.getFont("tab-widget-tab-button").size;
-    var padding = me._style.getSize("tab-widget-tab-button", "padding") * fontSize;
+    var padding = me._style.getPadding("tab-widget-tab-button");
     var height = padding * 2;
 		var min_width = padding + me._label.width() + padding;
     if (model._tab_closeable) {
@@ -834,7 +834,7 @@ DefaultStyle.widgets["tab-close-button"] = {
 		me._border.set("src", file ~ ".png");
 
     var iconSize = me._style.getSize("tab-close-button", "icon");
-    var padding = me._style.getSize("tab-close-button", "padding") * me._style.getFont("tab-widget-tab-button").size;
+    var padding = me._style.getPadding("tab-close-button");
     var size = iconSize + padding * 2;
     model.setLayoutMinimumSize([size, size]);
     model.setLayoutSizeHint([size, size]);
@@ -863,7 +863,7 @@ DefaultStyle.widgets.rule = {
   setSize: func(model, w, h)
   {
     var fontSize = me._style.getFont("rule").size;
-    var padding = me._style.getSize("rule", "padding") * fontSize;
+    var padding = me._style.getPadding("rule");
     var labelOffset = me._style.getSize("rule-label-offset");
     var labelWidth = me._label.width();
 
@@ -898,7 +898,7 @@ DefaultStyle.widgets.rule = {
   {
     var fontSize = me._style.getFont("rule").size;
     var lineThickness = me._style.getSize("rule-thickness");
-    var padding = me._style.getSize("rule", "padding") * fontSize;
+    var padding = me._style.getPadding("rule");
     var labelOffset = me._style.getSize("rule-label-offset") + padding;
     var labelWidth = me._label.width();
 
@@ -1002,7 +1002,7 @@ DefaultStyle.widgets.slider = {
   _updateLayoutSizes: func(model) 
   {
     var fontSize = me._style.getFont("slider").size;
-    var padding = me._style.getSize("slider", "padding") * fontSize;
+    var padding = me._style.getPadding("slider");
 
     # TODO handle vertical sliders in the future
 
@@ -1030,7 +1030,7 @@ DefaultStyle.widgets.slider = {
   setNormValue: func(model, normValue)
   {
     var valueFontSize = me._style.getFont("slider").size;
-    var padding = me._style.getSize("slider", "padding") * valueFontSize;
+    var padding = me._style.getPadding("slider");
     var w = model._size[0];
     var halfThumbWidth = me._thumbSize[0] * 0.5;
     var availWidthPos = w - me._thumbSize[0] - padding * 2;
@@ -1046,7 +1046,6 @@ DefaultStyle.widgets.slider = {
     me._value.setTranslation(valueX, me._value.getTranslation()[1]);
     me._thumb.setTranslation(thumbX, me._thumb.getTranslation()[1]);
     me._fill.setSize(thumbX, me._fillHeight);
-    me._fill.setTranslation(padding + halfThumbWidth, me._fill.getTranslation()[1]);
     me._value.setText(model._value);
   },
 
@@ -1111,7 +1110,7 @@ DefaultStyle.widgets.slider = {
   setSize: func(model, w, h)
   {
     var valueFontSize = me._style.getFont("slider").size;
-    var padding = me._style.getSize("slider", "padding") * valueFontSize;
+    var padding = me._style.getPadding("slider");
     var thumbValueMargin = me._style.getSize("slider-thumb-value-margin");
     var fillTicksMargin = me._style.getSize("slider-fill-ticks-margin");
     var ticksOffset = fillTicksMargin + me._style.getSize("slider-ticks-length");
@@ -1130,10 +1129,10 @@ DefaultStyle.widgets.slider = {
     }
 
     me._bg.setTranslation(padding + me._thumbSize[0] / 2, fillY);
-    me._fill.setTranslation(padding + me._fill.getTranslation()[0], fillY);
+    me._fill.setTranslation(padding + me._thumbSize[0] / 2, fillY);
     me._ticks.setTranslation(padding + me._thumbSize[0] / 2, ticksY);
-    me._thumb.setTranslation(padding + me._thumb.getTranslation()[0], thumbY);
-    me._value.setTranslation(padding + me._value.getTranslation()[0], valueY);
+    me._thumb.setTranslation(me._thumb.getTranslation()[0], thumbY);
+    me._value.setTranslation(me._value.getTranslation()[0], valueY);
     me._bg.setSize(w - me._thumbSize[0] - padding * 2, me._fillHeight);
     me.setNormValue(model, model._normValue());
     me._drawTicks(model);
@@ -1386,7 +1385,7 @@ DefaultStyle.widgets["menu-item"] = {
 		me._bg.reset().rect(0, 0, w, h);
     # allow different font for the shortcut (e.g. bold) but inherit from the menu-item font if defined instead of the global default font directly
     var fontSize = math.max(me._style.getFont("menu-item").size, me._style.getFont("menu-item-shortcut", me._style.getFont("menu-item")).size);
-    var padding = me._style.getSize("menu-item", "padding") * fontSize;
+    var padding = me._style.getPadding("menu-item");
     var iconSize = me._style.getSize("menu-item", "icon");
     var submenuIconSize = me._style.getSize("menu-item-submenu", "icon");
 		var offset = padding;
@@ -1403,7 +1402,7 @@ DefaultStyle.widgets["menu-item"] = {
 	_updateLayoutSizes: func(model) {
     # allow different font for the shortcut (e.g. bold) but inherit from the menu-item font if defined instead of the global default font directly
     var fontSize = math.max(me._style.getFont("menu-item").size, me._style.getFont("menu-item-shortcut", me._style.getFont("menu-item")).size);
-    var padding = me._style.getSize("menu-item", "padding") * fontSize;
+    var padding = me._style.getPadding("menu-item");
     var iconSize = me._style.getSize("menu-item", "icon");
     var submenuIconSize = me._style.getSize("menu-item-submenu", "icon");
     var height = math.max(fontSize, iconSize, submenuIconSize) + padding * 2;
@@ -1513,7 +1512,7 @@ DefaultStyle.widgets["combo-box"] = {
   {
     var halfWidth = int(w * 0.5);
     var fontSize = me._style.getFont("combo-box").size;
-    var padding = me._style.getSize("combo-box", "padding") * fontSize;
+    var padding = me._style.getPadding("combo-box");
     var iconSize = me._style.getSize("combo-box", "icon");
 
     me._bg.reset()
@@ -1534,7 +1533,7 @@ DefaultStyle.widgets["combo-box"] = {
     me._label.setText(text);
 
     var fontSize = me._style.getFont("combo-box").size;
-    var padding = me._style.getSize("combo-box", "padding") * fontSize;
+    var padding = me._style.getPadding("combo-box");
     var iconSize = me._style.getSize("combo-box", "icon");
     var textWidth = me._label.width();
     if (me._maxItemWidth == nil) {
@@ -1632,7 +1631,7 @@ DefaultStyle.widgets["list-item"] = {
 	
 	setSize: func(model, w, h) {
     var fontSize = me._style.getFont("list-item").size;
-    var padding = me._style.getSize("list-item", "padding") * fontSize;
+    var padding = me._style.getPadding("list-item");
 		me._bg.reset().rect(0, 0, w, h);
 		me._label.setTranslation(padding, h / 2);
 		return me;
@@ -1640,7 +1639,7 @@ DefaultStyle.widgets["list-item"] = {
 	
 	_updateLayoutSizes: func(model) {
     var fontSize = me._style.getFont("list-item").size;
-    var padding = me._style.getSize("list-item", "padding") * fontSize;
+    var padding = me._style.getPadding("list-item");
 		var min_width = padding + me._label.width() + padding;
     var height = fontSize + padding * 2;
 		model.setLayoutMinimumSize([min_width, height]);
@@ -1698,7 +1697,7 @@ DefaultStyle.widgets["text-box"] = {
   setSize: func(model, w, h)
   {
     var fontSize = me._style.getFont("text-box").size;
-    var padding = me._style.getSize("text-box", "padding") * fontSize;
+    var padding = me._style.getPadding("text-box");
     me._bg.reset().rect(0, 0, w, h);
     if (model._text_align == "left") {
       me._text.setAlignment("left-top");
@@ -1731,7 +1730,7 @@ DefaultStyle.widgets["text-box"] = {
     var min_width = 32;
 
     var fontSize = me._style.getFont("text-box").size;
-    var padding = me._style.getSize("text-box", "padding") * fontSize;
+    var padding = me._style.getPadding("text-box");
     var height = fontSize + padding * 2;
 
     # prefer approximately quadratic text blocks
@@ -1777,7 +1776,7 @@ DefaultStyle.widgets["text-box"] = {
     }
 
     var fontSize = me._style.getFont("text-box").size;
-    var padding = me._style.getSize("text-box", "padding") * fontSize;
+    var padding = me._style.getPadding("text-box");
     return me._text.heightForWidth(w - padding * 2);
   },
   update: func(model)

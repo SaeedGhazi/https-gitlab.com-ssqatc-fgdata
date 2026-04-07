@@ -133,10 +133,53 @@ var getDesktop = func()
 };
 
 
+## /canvas/by-name 
+# store nodes we create in /canvas/by-name for easy removal
+var _canvasByName = {};
+var _canvasCreateDeleteListener = setlistener("/canvas/by-index", func(changed, listened_to, op, is_child) {
+  # trigger if a texture/name
+  if (changed.getName() == "name") {
+    var t = changed.getParent();
+    if (t.getName() != "texture")
+      return;
+    #debug.dump(t, changed);
+
+    var path = t.getPath();
+    var index = t.getIndex();
+
+    # texture/name created but appears to be empty on create so we monitor it
+    var _listener = setlistener(changed, func(c,l,o) {
+      removelistener(_listener);
+      debug.dump(c);
+      var name = c.getValue();
+      if (!name) return;
+      # child add
+      if (op == 1) {
+        var n = props.getNode("/canvas/by-name", 1).addChild(name);
+        n.alias(path);
+        #n.setValue(path);
+        _canvasByName[index] = n;
+      }
+    }, 0, 1);
+
+  }
+  elsif (changed.getName() == "texture") {
+    # child remove
+    if (op == -1) {
+      var index = changed.getIndex();
+      debug.dump("remove", changed, index);
+      if (_canvasByName[index])
+        _canvasByName[index].remove();
+    }
+  }
+  #else {debug.dump(".");} # show how often this listener is fired.
+}, 1, 2); # _canvasCreateDeleteListener
+
 var unload = func
 {
   unloadTooltips();
   unloadErrorNotification();
   unloadGUI();
+  removelistener(_canvasCreateDeleteListener);
   logprint(LOG_INFO, "Unloaded canvas Nasal module");
 };

@@ -97,3 +97,22 @@ var test_sub = func() {
 
     # negative tests (tbd)
 }
+
+var test_alias = func () {
+    myProp = props.Node.new();
+    var foo = myProp.getNode("/foo",1);
+    var bar = myProp.getNode("/bar",1);
+
+    var type = foo.getType();
+    unitTest.assert(type != "ALIAS", "foo should not have type ALIAS");
+    unitTest.assert(foo.alias("/bar"), "Alias failed");
+
+    var target = foo.getAliasTarget();
+    unitTest.assert(isa(target, props.Node), "target is not a props.Node");
+
+    var path = target.getPath();
+    unitTest.assert(path == "/bar", "getAliasTarget returned unexprected value " ~ path);
+
+    type = foo.getType();
+    unitTest.assert(type == "ALIAS", "foo type should have type ALIAS but has type " ~ type);
+}

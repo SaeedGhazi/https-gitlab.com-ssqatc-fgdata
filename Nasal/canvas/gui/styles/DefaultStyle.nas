@@ -63,9 +63,19 @@ DefaultStyle.widgets.button = {
               .set("font", "LiberationFonts/LiberationSans-Regular.ttf")
               .set("character-size", 14)
               .set("alignment", "center-baseline");
+
+    me.padding_x = 16;
+    me.min_size_x = me._style.getSize("button-default-width");
+    me.min_size_y = me._style.getSize("button-default-height");
+    me.max_size_x = me.max_size_y = 9999;
+
     if (cfg.get("flat")) {
       me._border.hide();
       me._bg.hide();
+    }
+    if (cfg.get("compact")) {
+      me.min_size_x = me._style.getSize("button-min-width");
+      me.min_size_y = me._style.getSize("button-min-height");
     }
   },
   setSize: func(model, w, h)
@@ -78,10 +88,10 @@ DefaultStyle.widgets.button = {
   {
     me._label.setText(text);
 
-    var min_width = text ? math.max(80, me._label.maxWidth() + 16) : 28;
-    model.setLayoutMinimumSize([min_width, 28]);
-    model.setLayoutSizeHint([min_width, 28]);
-    model.setLayoutMaximumSize([1024, 28]);
+    var min_width = text ? math.max(me.min_size_x, me._label.maxWidth() + me.padding_x) : me.min_size_x;
+    model.setLayoutMinimumSize([min_width, me.min_size_y]);
+    model.setLayoutSizeHint([min_width, me.min_size_y]);
+    model.setLayoutMaximumSize([me.max_size_x, me.max_size_y]);
 
     return me;
   },
@@ -380,9 +390,9 @@ DefaultStyle.widgets.label = {
 
     var hfw_func = nil;
 
-    # this implies no clipping of long strings, 
+    # this implies no clipping of long strings,
     # which breaks BoxLayout when we overflow.
-    # might need to consider an different algorithm in BoxLayout 
+    # might need to consider an different algorithm in BoxLayout
     # when min-width is too big
     var min_width = me._text.maxWidth() + 4;
     var width_hint = min_width;
@@ -695,13 +705,13 @@ DefaultStyle.widgets["tab-widget"] = {
 		me.tabBar = me._root.createChild("group", "tab-widget-tabbar");
 		me.content = me._root.createChild("group", "tab-widget-content");
 	},
-	
+
 	update: func(model) {
 		me.bg.set("fill", me._style.getColor("bg_color"));
 		me.tabBar.update();
 		me.content.update();
 	},
-	
+
 	setSize: func(model, w, h) {
 		me.bg.reset().rect(0, w, h, 0);
 		me.content.setTranslation(0, me.tabBarHeight);
@@ -723,14 +733,14 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 						.set("character-size", 14)
 						.set("alignment", "center-baseline");
 	},
-	
+
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(3, 0, w - 6, h);
 		me._selected_indicator.reset().moveTo(3, h - 2).horiz(w - 6);
 		me._label.setTranslation((w - 24 - 8) / 2, h / 2 + 5);
 		model._close_button.move(w - 24 - 8, h / 2 - 12);
 	},
-	
+
 	setText: func(model, text) {
 		me._label.setText(text);
 
@@ -740,11 +750,11 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 
 		return me;
 	},
-	
+
 	update: func(model) {
 		var backdrop = !model._windowFocus();
 		var (w, h) = model._size;
-		
+
 		var bg_color_name = "tab_widget_tab_button_bg_focused";
 		if (backdrop) {
 			bg_color_name = "tab_widget_tab_button_bg_unfocused";
@@ -754,7 +764,7 @@ DefaultStyle.widgets["tab-widget-tab-button"] = {
 			bg_color_name = "tab_widget_tab_button_bg_hovered";
 		}
 		me._bg.set("fill", me._style.getColor(bg_color_name));
-		
+
 		me._selected_indicator.setVisible(model._selected or model._hover);
 		var selected_indicator_color_name = "tab_widget_tab_button_selected_indicator_selected";
 		if (!model._selected and model._hover) {
@@ -852,11 +862,11 @@ DefaultStyle.widgets.rule = {
     var firstWidth = w;
     var firstHeight = h;
     var hh = h * 0.5;
-    
+
     if( me['_text'] != nil )
     {
       firstHeight = firstWidth = 20; # TODO make this settable in Style.xml
-      
+
       # TODO handle eliding for translations?
       me._text.setTranslation(firstWidth + 3, hh);
       var maxW = model._cfg.get("maxTextWidth", -1);
@@ -973,7 +983,7 @@ DefaultStyle.widgets.frame = {
  #     file ~= "-disabled";
 
     me._bg.set("src", file ~ ".png");
-    
+
     me._bg.setSize(model._size[0], model._size[1]);
   },
 };
@@ -1003,7 +1013,7 @@ DefaultStyle.widgets.slider = {
             .set("alignment", "center-top");
   },
 
-  _updateLayoutSizes: func(model) 
+  _updateLayoutSizes: func(model)
   {
   	me.update(model);
 
@@ -1016,14 +1026,14 @@ DefaultStyle.widgets.slider = {
     }
     if (model._ticksPosition != model.TicksPosition.None and model._valueDisplayPosition != model._ticksPosition) {
       h += me._style.getSize("slider-fill-ticks-margin", 3) + me._style.getSize("slider-tick-length", 10);
-    } 
+    }
     h = math.max(h, 28);
 
     # value of 80 here is based off PUI slider min width in old layout.cxx
     var minSz = [85, h];
     model.setLayoutMinimumSize(minSz);
 
-    # calculate preferred size 
+    # calculate preferred size
     # disabled becuase using the numerical range for the preferred size works super badly,
     # we have sliders with ranges of eg [-450, 7000]
 
@@ -1064,14 +1074,14 @@ DefaultStyle.widgets.slider = {
       file ~= "-disabled";
 
     me._bg.set("src", file ~ ".png");
-    
+
   # fill state
     var file = me._style._dir_widgets ~ "/";
     file ~= "scale-" ~ direction ~ "-fill";
     if( !model._enabled ) {
       file ~= "-disabled";
     } else {
- 
+
     }
 
     me._fill.set("src", file ~ ".png");
@@ -1079,7 +1089,7 @@ DefaultStyle.widgets.slider = {
 
   # set thumb state
     file = me._style._dir_widgets ~ "/";
-    file ~= "slider-" ~ direction;  
+    file ~= "slider-" ~ direction;
     if( !model._enabled ) {
       file ~= "-disabled";
     } else {
@@ -1091,7 +1101,7 @@ DefaultStyle.widgets.slider = {
 
     me._thumb.set("src", file ~ ".png");
     me._thumbSize = me._thumb.imageSize();
-    
+
     var color_name = model._windowFocus() ? "fg_color" : "backdrop_fg_color";
     me._value.set("fill", me._style.getColor(color_name));
     if (model._valueDisplayPosition != model.ValuePosition.None) {
@@ -1099,7 +1109,7 @@ DefaultStyle.widgets.slider = {
     } else {
       me._value.hide();
     }
-    
+
     me._ticks.set("stroke", me._style.getColor("slider_ticks"));
     if (model._ticksPosition != model.TicksPosition.None) {
       me._ticks.show();
@@ -1252,13 +1262,13 @@ DefaultStyle.widgets.dial = {
       halfLength - handleOffset[1]
     );
     var degreesRange = 360;
-    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30); 
+    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30);
     var offset = 0;
     if (!model._wraps) {
       degreesRange -= nowrapMargin;
       offset = nowrapMargin / 2;
     }
-    me._handle.setRotation((model._normValue() * degreesRange + offset) * D2R); 
+    me._handle.setRotation((model._normValue() * degreesRange + offset) * D2R);
     me._drawTicks(model);
   },
 
@@ -1268,7 +1278,7 @@ DefaultStyle.widgets.dial = {
     var knobTicksMargin = me._style.getSize("dial-knob-ticks-margin", 2);
     var ticksLength = me._style.getSize("dial-ticks-length", 10);
     var knobRadius = (length - me._style.getSize("dial-knob-border-width", 1)) / 2 - knobTicksMargin - ticksLength;
-    
+
     var degreesRange = 360;
     var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30);
     var offset = 0;
@@ -1316,7 +1326,7 @@ DefaultStyle.widgets.dial = {
 
   setValue: func(model, value) {
     var degreesRange = 360;
-    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30); 
+    var nowrapMargin = me._style.getSize("dial-nowrap-margin-deg", 30);
     var offset = 0;
     if (!model._wraps) {
       degreesRange -= nowrapMargin;
@@ -1346,7 +1356,7 @@ DefaultStyle.widgets.dial = {
       color_name ~= "_hovered";
     }
     me._knob.set("fill", me._style.getColor(color_name));
-    
+
     color_name = "dial_knob_border";
     if (!model._enabled) {
       color_name ~= "_disabled";
@@ -1357,7 +1367,7 @@ DefaultStyle.widgets.dial = {
       color_name ~= "_hovered";
     }
     me._knob.set("stroke", me._style.getColor(color_name));
-    
+
     var file = me._style._dir_widgets ~ "/dial-handle";
     if (!model._enabled) {
       file ~= "-disabled";
@@ -1385,24 +1395,24 @@ DefaultStyle.widgets["menu-item"] = {
 	new: func(parent, cfg) {
 		me._root = parent.createChild("group", "menu-item");
 		me._bg = me._root.createChild("path");
-		
+
 		me._icon = me._root.createChild("image")
 						.set("slice", "18 18");
-		
+
 		me._label = me._root.createChild("text")
 						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
 						.set("character-size", 14)
 						.set("alignment", "left-baseline");
-		
+
 		me._shortcut = me._root.createChild("text")
 						.set("font", "LiberationFonts/LiberationSans-Regular.ttf")
 						.set("character-size", 14)
 						.set("alignment", "right-baseline");
-		
+
 		me._submenu_indicator = me._root.createChild("path")
 						.vert(12).line(6, -7).close();
 	},
-	
+
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(0, 0, w, h);
 		var offset = 0;
@@ -1415,7 +1425,7 @@ DefaultStyle.widgets["menu-item"] = {
 		me._submenu_indicator.setTranslation(w - 12, int((h - 12) / 2));
 		return me;
 	},
-	
+
 	_updateLayoutSizes: func(model) {
 		var min_width = 5 + me._label.maxWidth() + 5;
 		if (!model._is_menubar_item) {
@@ -1430,10 +1440,10 @@ DefaultStyle.widgets["menu-item"] = {
 		}
 		model.setLayoutMinimumSize([min_width, 28]);
 		model.setLayoutSizeHint([min_width, 28]);
-		
+
 		return me;
 	},
-	
+
 	setText: func(model, text) {
 		me._label.setText(text);
 		return me._updateLayoutSizes(model);
@@ -1442,14 +1452,14 @@ DefaultStyle.widgets["menu-item"] = {
   getTextWidth: func() {
     return me._label.getSize()[0];
   },
-	
+
 	setShortcut: func(model, shortcut) {
 		if (shortcut != nil) {
 			me._shortcut.setText(shortcut);
 		}
 		return me._updateLayoutSizes(model);
 	},
-	
+
 	setIcon: func(model, icon) {
 		if (!icon) {
 			me._icon.hide();
@@ -1460,7 +1470,7 @@ DefaultStyle.widgets["menu-item"] = {
 		}
 		return me;
 	},
-	
+
 	update: func(model) {
 		me._bg.set("fill", me._style.getColor("menu_item_bg" ~ (model._hovered ? "_hovered" : "")));
 		var text_color_name = "menu_item_fg";
@@ -1481,7 +1491,7 @@ DefaultStyle.widgets["menu-item"] = {
 			me._submenu_indicator.hide();
 			me._shortcut.show();
 		}
-		
+
 		return me;
 	}
 };
@@ -1492,16 +1502,16 @@ DefaultStyle.widgets["menu-bar"] = {
 		me._bg = me._root.createChild("path");
 		me._items = me._root.createChild("group", "menu-bar-items");
 	},
-	
+
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(0, 0, w, 28);
 		me._items.setTranslation(0, 0);
 		return me;
 	},
-	
+
 	update: func(model) {
 		me._bg.set("fill", me._style.getColor("bg_color"));
-		
+
 		return me;
 	}
 };
@@ -1608,7 +1618,7 @@ DefaultStyle.widgets["combo-box"] = {
 
       model.setLayoutMinimumSize([me._maxItemWidth, 28]);
       model.setLayoutSizeHint([me._maxItemWidth, 28]);
-    }    
+    }
   },
 
   # Calculate how many pixels the longest text in the list has.
@@ -1644,28 +1654,28 @@ DefaultStyle.widgets["list-item"] = {
 						.set("character-size", me._style.getSize("list-font-size"))
 						.set("alignment", "left-baseline");
 	},
-	
+
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(0, 0, w, me._itemHeight);
 		var m = me._style.getSize("margin");
 		me._label.setTranslation(m, int(h / 2) + m);
 		return me;
 	},
-	
+
 	_updateLayoutSizes: func(model) {
 		var m = me._style.getSize("margin");
 		var min_width = m + me._label.maxWidth() + m;
 		model.setLayoutMinimumSize([min_width, me._itemHeight]);
 		model.setLayoutSizeHint([min_width, me._itemHeight]);
-		
+
 		return me;
 	},
-	
+
 	setText: func(model, text) {
 		me._label.setText(text);
 		return me._updateLayoutSizes(model);
 	},
-	
+
 	update: func(model) {
 		me._bg.set("fill", me._style.getColor("list_item_bg" ~ (model._selected ? "_selected" : "")));
 		var text_color_name = "list_item_fg";
@@ -1673,7 +1683,7 @@ DefaultStyle.widgets["list-item"] = {
 			text_color_name ~= "_selected";
 		}
 		me._label.set("fill", me._style.getColor(text_color_name));
-		
+
 		return me;
 	}
 };
@@ -1683,15 +1693,15 @@ DefaultStyle.widgets.list = {
 		me._root = parent.createChild("group", "list");
 		me._bg = me._root.createChild("path");
 	},
-	
+
 	setSize: func(model, w, h) {
 		me._bg.reset().rect(0, 0, w, h);
 		return me;
 	},
-	
+
 	update: func(model) {
 		me._bg.set("fill", me._style.getColor("bg_color"));
-		
+
 		return me;
 	},
 };

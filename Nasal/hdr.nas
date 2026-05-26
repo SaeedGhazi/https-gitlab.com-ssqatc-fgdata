@@ -223,7 +223,7 @@ setlistener("/sim/rendering/hdr/envmap/force-update", func(p) {
 }, 0, 0);
 
 # Automatically update the envmap every so often
-var envmap_timer = maketimer(getprop("/sim/rendering/hdr/envmap/update-rate-s"),
+var envmap_timer = maketimer(getprop("/sim/rendering/hdr/envmap/update-rate-s", 60),
                              func {
                                  update_envmap(false);
                              });

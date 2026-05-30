@@ -191,7 +191,7 @@ float calculateDensity(vec3 samplePoint, vec3 dir, vec4 cloud) {
         // Composite Noises and use as a Value Erosion
         float dim = cloudDimension;
         dim = smoothstep(0.0, 1.0, dim);
-        uprezzed_density = ValueErosion(dim * dim, noise_composite);        
+        uprezzed_density = ValueErosion(dim, noise_composite);
 
         // Apply User Density Scale Data to Result
         uprezzed_density *= cloudDensity; 
@@ -338,11 +338,14 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
 
     float cachedSunDensity = -1.0;
     float cachedDensity = -1.0;
+    float multiScatterTerm = 0.0;
 
     float lastAir = 0.0;
     float lastCloud = 0.0;
     vec4 lastAP = vec4(0.0, 0.0, 0.0, 1.0);
     vec3 sunRadiance = get_sun_radiance_sea_level() * direct_intensity_scale;
+    vec3 groundBounce = vec3(0.0);
+    vec3 skyAmbientColor = vec3(1.0);  // default to white until first cloud sample
 
     for (int i = 0; i < dynamicMaxSteps; i++) {
 
@@ -403,23 +406,20 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
 
             float transmittance = exp(-densityToSun);
 
-            float phaseForward  = HenyeyGreenstein(cosTheta,  0.7);
-            float phaseBackward = HenyeyGreenstein(cosTheta, -0.4);
-            float phase = mix(phaseBackward, phaseForward, 0.6);
+            float phaseForward  = HenyeyGreenstein(cosTheta,  0.5);
+            float phaseBackward = HenyeyGreenstein(cosTheta, -0.3);
+            float phase = mix(phaseBackward, phaseForward, 0.5);
 
             // Silver lining
             float rim = pow(clamp(1.0 + cosTheta, 0.0, 1.0), 6.0);
-            phase += rim * 0.15;            
+            phase += rim * 0.15 * transmittance * (1.0 - s.density);
 
-            // Raise transmittance to a power to increase contrast between lit and shadowed faces
-            float contrastTransmittance = pow(transmittance, 2.0);
-            float singleScatter = contrastTransmittance * phase * s.density;
-            //float singleScatter = transmittance * phase * s.density;
+            float singleScatter = transmittance * phase * s.density;
 
             // multiScatter is indirect/diffuse - should be ambient colored, not sun colored
             float multiScatter =
                 (1.0 - transmittance) *
-                0.20 *
+                0.05 *
                 (0.3 + 0.7 * s.density) *
                 s.density;
 
@@ -429,10 +429,25 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
             float dimensionalProfile = cloud.r;
 
             // ambient gets both sky terms AND the indirect multiple scatter
-            float skyAmbient = pow(1.0 - dimensionalProfile, 0.5) * skyTransmittance;
-            float groundBounce = (1.0 - skyTransmittance) * (1.0 - p.z) * 0.2;
+            float skyAmbient = pow(1.0 - dimensionalProfile, 1.2) * skyTransmittance;
+
+            // Sky is blue because Rayleigh scatters short wavelengths preferentially
+            // Approximate sky colour as sunRadiance with slightly boosted blue, reduced red, green.
+            // However we also need to guard against sunRadiance=0 at twilight.
+            vec3 tinted = vec3(sunRadiance.r * 0.6, sunRadiance.g * 0.7, sunRadiance.b * 1.1);
+            float tintedLen = length(tinted);
+            skyAmbientColor = (tintedLen > EPSILON) ? (tinted / tintedLen) : vec3(0.6, 0.7, 1.0);
+
             float multiScatterAmbient = 0.05 * dimensionalProfile;
-            s.ambient_scattering = (skyAmbient + groundBounce + multiScatterAmbient + multiScatter) * dayFactor;
+
+            groundBounce = ground_albedo.rgb
+                  * (1.0 - skyTransmittance)
+                  * (1.0 - p.z)
+                  * 0.2
+                  * dayFactor;
+
+            s.ambient_scattering = (skyAmbient + multiScatterAmbient) * dayFactor;
+            multiScatterTerm = multiScatter * dayFactor;
         }
 
         if (s.density > 0.0) {
@@ -451,8 +466,12 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
             }
             float occlusion = (1.0 - clamp(lreturn.light_absorption, 0.0, 1.0));
             lreturn.light_absorption  += s.density * occlusion;
+
+            // Then in compositing:
             lreturn.intensity += sunRadiance * (s.direct_scattering * occlusion)
-                                 + vec3(1.0) * (s.ambient_scattering * s.density * ambient_intensity_scale);
+                            + skyAmbientColor * (s.ambient_scattering * s.density * ambient_intensity_scale)
+                            + vec3(1.0) * (multiScatterTerm * ambient_intensity_scale)
+                            + groundBounce * (s.density * ambient_intensity_scale);
             if (lreturn.first_hit < 0.0) lreturn.first_hit = distance;
             lastCloud = distance;
         } else {

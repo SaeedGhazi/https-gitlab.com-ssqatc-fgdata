@@ -585,8 +585,6 @@ Started September 2000 by David Megginson, david@megginson.com
           <!-- How much larger the rough field is compared with the detailed in voxel units. -->
           <rough-voxel-field-factor type="int">2</rough-voxel-field-factor>
 
-          <direct-intensity-scale type="float">1.0</direct-intensity-scale>
-          <ambient-intensity-scale type="float">1.0</ambient-intensity-scale>
           <extinction-factor type="float">1.2</extinction-factor>
 
           <!-- Cloud buffer scale, as a factor of the screen size.-->

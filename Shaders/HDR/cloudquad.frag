@@ -125,8 +125,8 @@ float HenyeyGreenstein(float inCosAngle, float inG)
 // Peaks for partially transparent clouds, falls to zero for fully opaque
 float getSilverLining(const float light_absorption, const float cosTheta)
 {
-    const float MIN_DENSITY    = 0.2;        // The minimum density of cloud we will generate a lining for.  Anything less than this is assumed transparent.
-    const float SUN_DIRECTIONALITY  = 10.0;   // How directional the silver lining is to the sun.  Higher values limit it closer to the sun.
+    const float MIN_DENSITY         = 0.2;   // The minimum density of cloud we will generate a lining for.  Anything less than this is assumed transparent.
+    const float SUN_DIRECTIONALITY  = 20.0;  // How directional the silver lining is to the sun.  Higher values limit it closer to the sun.
     const float cloudPresence = clamp((light_absorption - MIN_DENSITY) * 4.0, 0.0, 1.0); // ramps up quickly
     const float cloudEdge = cloudPresence * (1.0 - light_absorption);     // falls to opaque
     const float rim = pow(clamp((1.0 + cosTheta) * 0.5, 0.0, 1.0), SUN_DIRECTIONALITY);
@@ -361,7 +361,11 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
     // to the normalisation convention used by FlightGear's atmospheric LUT pipeline.
     // Derived empirically to match sky/terrain brightness scale.
     const float PIPELINE_RADIANCE_SCALE = 0.2;
-    vec3 sunRadiance = get_sun_radiance_sea_level() * PIPELINE_RADIANCE_SCALE;    
+    vec3 sunRadiance = get_sun_radiance_sea_level() * PIPELINE_RADIANCE_SCALE;
+
+    // Multi-scatter desaturates toward white so we don't use raw sunRadiance colour
+    vec3 sunLuminance = vec3(dot(sunRadiance, vec3(0.2126, 0.7152, 0.0722)));
+    vec3 multiScatterColor = mix(sunLuminance, vec3(sunLuminance.r), 0.7); // nearly grey
     vec3 groundBounce = vec3(0.0);
 
     // fg_SunDirectionWorld points FROM world TOWARD sun
@@ -384,7 +388,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
     vec3 rawSkyColor = (tintedLen > EPSILON) ? (tinted / tintedLen) : vec3(0.6, 0.7, 1.0);
 
     // Prevent over-warming at low sun angles by blending toward neutral blue
-    vec3 skyAmbientColor = mix(vec3(0.7, 0.8, 1.0), rawSkyColor, clamp(dayFactor * 2.0, 0.0, 1.0));
+    vec3 skyAmbientColor = mix(vec3(0.4, 0.5, 0.7), vec3(0.7, 0.8, 1.0), dayFactor);
 
     for (int i = 0; i < dynamicMaxSteps; i++) {
 
@@ -439,10 +443,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
             float phaseBackward = HenyeyGreenstein(cosTheta, -0.3);
             float phase = mix(phaseBackward, phaseForward, 0.3);
 
-
-            float singleScatter = transmittance * phase * s.density;
-
-            s.direct_scattering = singleScatter; // sun colored - only direct scatter
+            s.direct_scattering = transmittance * phase * s.density; // sun colored - only direct scatter
 
             // multiScatter is indirect/diffuse - should be ambient colored, not sun colored
             float multiScatter =
@@ -495,7 +496,7 @@ ray_data cloudRayMarch(vec3 eye, vec3 marchingDirection, float start, float end,
             lreturn.intensity += sunRadiance * skyAmbientColor * s.ambient_scattering * s.density * occlusion;
 
             // Multiscatter term
-            lreturn.intensity += sunRadiance * vec3(1.0) * multiScatterTerm * occlusion;
+            lreturn.intensity += multiScatterColor * multiScatterTerm * occlusion;            
 
             // Ground bounce
             lreturn.intensity += sunRadiance * groundBounce * s.density * occlusion;

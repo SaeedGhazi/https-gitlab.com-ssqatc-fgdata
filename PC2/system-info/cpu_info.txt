@@ -1,0 +1,36 @@
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64
+model name	: 12th Gen Intel(R) Core(TM) i5-12400
+cache size	: 18432 KB
+cache_alignment	: 64

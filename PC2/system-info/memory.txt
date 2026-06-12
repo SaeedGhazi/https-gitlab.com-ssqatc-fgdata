@@ -1,0 +1,24 @@
+	Speed: 2133 MT/s
+	Manufacturer: Corsair
+	Part Number: CMG32GX4M2E3200C16  
+	Configured Memory Speed: 2133 MT/s
+	Module Manufacturer ID: Bank 3, Hex 0x9E
+	Memory Subsystem Controller Manufacturer ID: Unknown
+	Speed: 2133 MT/s
+	Manufacturer: Corsair
+	Part Number: CMG32GX4M2E3200C16  
+	Configured Memory Speed: 2133 MT/s
+	Module Manufacturer ID: Bank 3, Hex 0x9E
+	Memory Subsystem Controller Manufacturer ID: Unknown
+	Speed: 2133 MT/s
+	Manufacturer: Corsair
+	Part Number: CMG32GX4M2E3200C16  
+	Configured Memory Speed: 2133 MT/s
+	Module Manufacturer ID: Bank 3, Hex 0x9E
+	Memory Subsystem Controller Manufacturer ID: Unknown
+	Speed: 2133 MT/s
+	Manufacturer: Corsair
+	Part Number: CMG32GX4M2E3200C16  
+	Configured Memory Speed: 2133 MT/s
+	Module Manufacturer ID: Bank 3, Hex 0x9E
+	Memory Subsystem Controller Manufacturer ID: Unknown

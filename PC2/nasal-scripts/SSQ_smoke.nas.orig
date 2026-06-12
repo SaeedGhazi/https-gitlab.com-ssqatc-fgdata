@@ -1,0 +1,40 @@
+# تعریف سابروتین کلیک و ایجاد شعله
+var spawn_fire_on_click = func {
+    # دریافت موقعیت جغرافیایی محل کلیک ماوس بر روی زمین (Scenery)
+    var click_pos = geo.click_position();
+    
+    if (click_pos == nil) {
+        print("Click was not on a valid scenery object or terrain.");
+        return;
+    }
+
+    # استخراج مختصات سه‌بعدی متناسب با فرمت FlightGear
+    var lat = click_pos.lat();
+    var lon = click_pos.lon();
+    var alt = click_pos.alt();
+
+    print("Spawning fire at: Lat: " ~ lat ~ " Lon: " ~ lon ~ " Alt: " ~ alt);
+
+    # آدرس فایل افکتی که در گام اول ساختیم
+    var effect_path = "Models/SSQ_flame.xml";
+
+    # ایجاد یک گره (Node) جدید در پارت رندرینگ موقت محیطی یا مدل‌ها برای شعله جدید
+    # استفاده از دستور بومی fgcommand برای بارگذاری مدل در موقعیت جغرافیایی خاص
+    fgcommand("add-model", props.Node.new({
+        "path": effect_path,
+        "latitude-deg": lat,
+        "longitude-deg": lon,
+        "elevation-ft": alt * 3.28084, # تبدیل متر به فوت برای سیستم درخواستی FG
+        "heading-deg": 0
+    }));
+};
+
+# اتصال (Binding) کلیک ماوس به این تابع
+# در فایت‌گیر، کلیک ماوس معمولا از طریق اِستِداردِ پینر (Listener) یا بایندینگ مستقیم به فایروال منتقل می‌شود.
+# راه استاندارد تست سریع، اضافه کردن Listener به وضعیت کلیک ماوس است:
+
+setlistener("/sim/input/click", func(v) {
+    if (v.getValue()) {
+        spawn_fire_on_click();
+    }
+}, 1, 0);

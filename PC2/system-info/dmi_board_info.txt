@@ -1,0 +1,15 @@
+Default string
+PRIME B660M-A D4
+230317695401886
+ASUSTeK COMPUTER INC.
+Rev 1.xx
+12/13/2022
+22.12
+American Megatrends Inc.
+2212
+To be filled by O.E.M.
+System Product Name
+System Serial Number
+SKU
+18a56625-f1ea-cec7-a19b-08bfb815a487
+System Version

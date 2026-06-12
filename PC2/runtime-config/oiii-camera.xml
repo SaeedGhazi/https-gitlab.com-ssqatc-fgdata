@@ -1,0 +1,423 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<camera-group>
+
+		<window>
+			<name>OIII_1</name>
+			<display>0</display>
+			<screen>0</screen>
+			<width>1920</width>
+			<height>1080</height>
+		</window>
+
+		<window>
+			<name>OIII_2</name>
+			<display>0</display>
+			<screen>0</screen>
+			<width>1920</width>
+			<height>1080</height>
+		</window>
+
+		<window>
+			<name>OIII_3</name>
+			<display>0</display>
+			<screen>0</screen>
+			<width>1920</width>
+			<height>1080</height>
+		</window>
+
+		<window>
+			<name>OIII_4</name>
+			<display>0</display>
+			<screen>0</screen>
+			<width>1920</width>
+			<height>1080</height>
+		</window>
+
+		<!-- 1 -->
+		<camera>
+			<window>
+				<name>OIII_1</name>
+			</window>
+			<viewport>
+				<x>0</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">0</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 2 -->
+		<camera>
+			<window>
+				<name>OIII_1</name>
+			</window>
+			<viewport>
+				<x>480</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-17.3</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 3 -->
+		<camera>
+			<window>
+				<name>OIII_1</name>
+			</window>
+			<viewport>
+				<x>960</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-34.6</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 4 -->
+		<camera>
+			<window>
+				<name>OIII_1</name>
+			</window>
+			<viewport>
+				<x>1440</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-51.9</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 5 -->
+		<camera>
+			<window>
+				<name>OIII_2</name>
+			</window>
+			<viewport>
+				<x>0</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-69.2</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 6 -->
+		<camera>
+			<window>
+				<name>OIII_2</name>
+			</window>
+			<viewport>
+				<x>480</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-86.5</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 7 -->
+		<camera>
+			<window>
+				<name>OIII_2</name>
+			</window>
+			<viewport>
+				<x>960</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-103.8</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 8 -->
+		<camera>
+			<window>
+				<name>OIII_2</name>
+			</window>
+			<viewport>
+				<x>1440</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-121.1</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 9 -->
+		<camera>
+			<window>
+				<name>OIII_3</name>
+			</window>
+			<viewport>
+				<x>0</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-138.4</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 10 -->
+		<camera>
+			<window>
+				<name>OIII_3</name>
+			</window>
+			<viewport>
+				<x>480</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-155.7</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 11 -->
+		<camera>
+			<window>
+				<name>OIII_3</name>
+			</window>
+			<viewport>
+				<x>960</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-173.0</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 12 -->
+		<camera>
+			<window>
+				<name>OIII_3</name>
+			</window>
+			<viewport>
+				<x>1440</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-190.3</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 13 -->
+		<camera>
+			<window>
+				<name>OIII_4</name>
+			</window>
+			<viewport>
+				<x>0</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-207.6</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 14 -->
+		<camera>
+			<window>
+				<name>OIII_4</name>
+			</window>
+			<viewport>
+				<x>480</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-224.9</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<!-- 15 -->
+		<camera>
+			<window>
+				<name>OIII_4</name>
+			</window>
+			<viewport>
+				<x>960</x>
+				<y>0</y>
+				<width>480</width>
+				<height>1080</height>
+			</viewport>
+			<view>
+				<heading-deg type="double">-242.2</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+			</view>
+			<frustum>
+				<top>0.108</top>
+				<bottom>-0.108</bottom>
+				<left>-0.061</left>
+				<right>0.061</right>
+				<near>0.4</near>
+				<far>120000.0</far>
+			</frustum>
+		</camera>
+
+		<gui>
+			<window>
+				<name>OIII</name>
+				<width>480</width>
+				<height>320</height>
+			</window>
+		</gui>
+
+	</camera-group>
+
+</PropertyList>

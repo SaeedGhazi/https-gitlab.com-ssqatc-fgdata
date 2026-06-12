@@ -1,0 +1,115 @@
+var FXManager = {
+
+    init : func {
+
+        print("FXManager started");
+
+        setprop("/instructor/command", "");
+
+        setlistener("/instructor/command",
+            func {
+
+                var cmd = getprop("/instructor/command");
+
+                if (cmd != nil and cmd != "")
+                    me.parse_command(cmd);
+            }
+        );
+
+        me.reset_environment();
+    },
+
+    parse_command : func(cmd) {
+
+        print("COMMAND = ", cmd);
+
+        var parts = split(cmd, ";");
+
+        if (size(parts) < 3)
+            return;
+
+        if (parts[0] == "WEATHER")
+            me.set_weather(parts[1], parts[2]);
+    },
+
+    set_weather : func(type, intensity) {
+
+        print("WEATHER ", type, " ", intensity);
+
+        if (type == "STORM") {
+
+            if (intensity == "HEAVY") {
+
+                #
+                # Visibility
+                #
+
+                setprop("/environment/visibility-m", 1000);
+
+                #
+                # Clouds
+                #
+
+                setprop("/environment/clouds/layer[0]/coverage-type",
+                        "overcast");
+
+                setprop("/environment/clouds/layer[0]/elevation-ft",
+                        1000);
+
+                setprop("/environment/clouds/layer[0]/thickness-ft",
+                        6000);
+
+                #
+                # Rain
+                #
+
+                setprop("/environment/rain-norm", 1.0);
+
+                #
+                # Wind
+                #
+
+                setprop("/environment/config/boundary/entry/wind-from-heading-deg",
+                        180);
+
+                setprop("/environment/config/boundary/entry/wind-speed-kt",
+                        35);
+
+                print("HEAVY STORM APPLIED");
+            }
+
+            if (intensity == "OFF") {
+
+                me.reset_environment();
+
+                print("STORM REMOVED");
+            }
+        }
+
+        if (type == "FOG") {
+
+            setprop("/environment/visibility-m", 300);
+
+            print("FOG APPLIED");
+        }
+    },
+
+    reset_environment : func {
+
+        setprop("/environment/visibility-m", 50000);
+
+        setprop("/environment/rain-norm", 0.0);
+
+        setprop("/environment/clouds/layer[0]/coverage-type",
+                "clear");
+
+        setprop("/environment/config/boundary/entry/wind-speed-kt",
+                0);
+    }
+};
+
+var t = maketimer(5, func {
+    FXManager.init();
+});
+
+t.start();

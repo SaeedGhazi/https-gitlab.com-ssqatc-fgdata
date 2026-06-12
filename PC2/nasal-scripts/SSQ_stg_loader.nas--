@@ -1,0 +1,43 @@
+var base_path = getprop("/sim/fg-home") ~ "/Export/";
+var stg_input = base_path ~ "3792745.stg";
+var stg_output = base_path ~ "3792745_updated.stg";
+
+var load_for_tuning = func() {
+    var f = io.open(stg_input, "r");
+    if (f == nil) return gui.popupTip("Error: 3792745.stg.bak not found!");
+
+    var i = 0;
+    var line = "";
+    while ((line = io.readln(f)) != nil) {
+        var d = split(" ", line);
+        if (size(d) >= 5 and d[0] == "OBJECT_SHARED") {
+            var path_ac = d[1];
+            var node = props.globals.getNode("/models/tuning/model["~i~"]", 1);
+            
+            # استفاده از تابع num() و بررسی عدم وجود مقدار nil
+            var m_lon = num(d[2]) != nil ? num(d[2]) : 0.0;
+            var m_lat = num(d[3]) != nil ? num(d[3]) : 0.0;
+            var m_alt = num(d[4]) != nil ? num(d[4]) : 0.0;
+            var m_hdg = num(d[5]) != nil ? num(d[5]) : 0.0;
+            var m_pitch = (size(d) > 6 and num(d[6]) != nil) ? num(d[6]) : 0.0;
+            var m_roll  = (size(d) > 7 and num(d[7]) != nil) ? num(d[7]) : 0.0;
+
+            node.getNode("path", 1).setValue(path_ac);
+            node.getNode("lon", 1).setValue(m_lon);
+            node.getNode("lat", 1).setValue(m_lat);
+            node.getNode("alt", 1).setValue(m_alt);
+            node.getNode("hdg", 1).setValue(m_hdg);
+            node.getNode("pitch", 1).setValue(m_pitch);
+            node.getNode("roll", 1).setValue(m_roll);
+            
+            # لود مدل بصورت موقت جهت مشاهده موقعیت
+            geo.put_model(path_ac, m_lat, m_lon, m_alt, m_hdg);
+            i += 1;
+        }
+    }
+    io.close(f);
+    gui.popupTip("Loaded " ~ i ~ " models for tuning.");
+}
+
+# اجرای لودر با تاخیر 5 ثانیه
+settimer(load_for_tuning, 5.0);

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  چراغ‌های فرود و تاکسی برای A346 (پروژه‌ی برج مراقبت SSQ)
+  ساخته‌شده بر اساس سیستم نور <light> سیمگیر (الگوی ufo-spotlight.xml).
+
+  فریم مختصات مدل (همان <offsets> در A346-main.xml):
+     -x = جلو (دماغه)   +x = عقب (دم)
+     +y = راست (سمت بال راست)   -y = چپ
+     +z = بالا   -z = پایین
+     (از روی موقعیت موتورها در main.xml تأیید شد: موتور بیرونی y=±19، داخلی y=±9)
+
+  جهت نور (direction):
+     pitch-deg مثبت = رو به پایین ؛ heading-deg=0 = رو به جلو (دماغه)
+
+  property کنترلی به‌صورت «نسبی» است تا هم برای هواپیمای کاربر و هم برای هر
+  بلیپ AI کار کند:
+     controls/lighting/landing-lights  → روشن/خاموش چراغ فرود
+     controls/lighting/taxi-light       → روشن/خاموش چراغ تاکسی
+-->
+<PropertyList>
+
+  <!-- ============ چراغ فرود چپ (ریشه‌ی بال) ============ -->
+  <animation>
+    <type>select</type>
+    <object-name>LandingLightL</object-name>
+    <condition>
+      <property>controls/lighting/landing-lights</property>
+    </condition>
+  </animation>
+  <light>
+    <name>LandingLightL</name>
+    <type>spot</type>
+    <position>
+      <x>-7.0</x>     <!-- کمی جلوتر از مرکز، نزدیک ریشه‌ی بال -->
+      <y>-4.0</y>     <!-- سمت چپ -->
+      <z>-1.5</z>     <!-- پایین (شکم) -->
+    </position>
+    <direction>
+      <pitch-deg>4.0</pitch-deg>   <!-- ۴ درجه رو به پایین -->
+      <roll-deg>0</roll-deg>
+      <heading-deg>0</heading-deg> <!-- رو به جلو -->
+    </direction>
+    <ambient>  <r>0.0</r><g>0.0</g><b>0.0</b><a>1.0</a> </ambient>
+    <diffuse>  <r>1.0</r><g>0.97</g><b>0.9</b><a>1.0</a> </diffuse>
+    <specular> <r>1.0</r><g>0.97</g><b>0.9</b><a>1.0</a> </specular>
+    <debug-color> <r>1</r><g>0</g><b>0</b><a>1</a> </debug-color>
+    <attenuation> <c>1.0</c> <l>0.002</l> <q>0.0008</q> </attenuation>
+    <spot-exponent>2</spot-exponent>
+    <spot-cutoff>16</spot-cutoff>   <!-- مخروط باریک (چراغ فرود) -->
+    <range-m>900</range-m>          <!-- برد بلند -->
+  </light>
+
+  <!-- ============ چراغ فرود راست (ریشه‌ی بال) ============ -->
+  <animation>
+    <type>select</type>
+    <object-name>LandingLightR</object-name>
+    <condition>
+      <property>controls/lighting/landing-lights</property>
+    </condition>
+  </animation>
+  <light>
+    <name>LandingLightR</name>
+    <type>spot</type>
+    <position>
+      <x>-7.0</x>
+      <y>4.0</y>      <!-- سمت راست -->
+      <z>-1.5</z>
+    </position>
+    <direction>
+      <pitch-deg>4.0</pitch-deg>
+      <roll-deg>0</roll-deg>
+      <heading-deg>0</heading-deg>
+    </direction>
+    <ambient>  <r>0.0</r><g>0.0</g><b>0.0</b><a>1.0</a> </ambient>
+    <diffuse>  <r>1.0</r><g>0.97</g><b>0.9</b><a>1.0</a> </diffuse>
+    <specular> <r>1.0</r><g>0.97</g><b>0.9</b><a>1.0</a> </specular>
+    <debug-color> <r>0</r><g>1</g><b>0</b><a>1</a> </debug-color>
+    <attenuation> <c>1.0</c> <l>0.002</l> <q>0.0008</q> </attenuation>
+    <spot-exponent>2</spot-exponent>
+    <spot-cutoff>16</spot-cutoff>
+    <range-m>900</range-m>
+  </light>
+
+  <!-- ============ چراغ تاکسی (روی ارابه‌ی دماغه) ============ -->
+  <animation>
+    <type>select</type>
+    <object-name>TaxiLight</object-name>
+    <condition>
+      <property>controls/lighting/taxi-light</property>
+    </condition>
+  </animation>
+  <light>
+    <name>TaxiLight</name>
+    <type>spot</type>
+    <position>
+      <x>-28.0</x>    <!-- جلو، روی ارابه‌ی دماغه -->
+      <y>0.0</y>      <!-- مرکز -->
+      <z>-3.0</z>     <!-- پایین‌تر (ساق ارابه) -->
+    </position>
+    <direction>
+      <pitch-deg>11.0</pitch-deg>  <!-- بیشتر رو به پایین (نزدیک‌بین) -->
+      <roll-deg>0</roll-deg>
+      <heading-deg>0</heading-deg>
+    </direction>
+    <ambient>  <r>0.0</r><g>0.0</g><b>0.0</b><a>1.0</a> </ambient>
+    <diffuse>  <r>1.0</r><g>0.95</g><b>0.85</b><a>1.0</a> </diffuse>
+    <specular> <r>1.0</r><g>0.95</g><b>0.85</b><a>1.0</a> </specular>
+    <debug-color> <r>0</r><g>0.5</g><b>1</b><a>1</a> </debug-color>
+    <attenuation> <c>1.0</c> <l>0.02</l> <q>0.004</q> </attenuation>
+    <spot-exponent>1</spot-exponent>
+    <spot-cutoff>28</spot-cutoff>   <!-- مخروط پهن‌تر (چراغ تاکسی) -->
+    <range-m>120</range-m>          <!-- برد کوتاه‌تر -->
+  </light>
+
+</PropertyList>

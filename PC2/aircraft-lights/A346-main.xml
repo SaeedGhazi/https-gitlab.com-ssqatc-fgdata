@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>A340-600</description>
+  <author>3D Model Innis Cunningham, UV map liveries Brett Harrison</author>
+  <path>Models/A346.ac</path>
+  <animation>
+    <type>select</type>
+    <object-name>gear</object-name>
+    <condition>
+      <greater-than>
+        <property>gear/gear[0]/position-norm</property>
+        <value>0.25</value>
+      </greater-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>Effects/346-LightMap</inherits-from>
+    <object-name>fuselage</object-name>
+    <object-name>gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/346-NavLights.xml</path>
+  </model>
+
+  <!-- ★ چراغ‌های فرود و تاکسی (افزوده‌شده) -->
+  <model>
+    <path>Lights/346-LandingLights.xml</path>
+  </model>
+
+  <model>
+    <name>fire-engine-1</name>
+    <path>AI/Aircraft/A346/Models/SSQ_flame.xml</path> <offsets>
+      <x-m> -2 </x-m>
+      <y-m> -19 </y-m>
+      <z-m> 4 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>fire-engine-2</name>
+    <path>AI/Aircraft/A346/Models/SSQ_flame.xml</path>
+    <offsets>
+      <x-m> -7 </x-m>
+      <y-m> -9 </y-m>
+      <z-m> 2.5 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>fire-engine-3</name>
+    <path>AI/Aircraft/A346/Models/SSQ_flame.xml</path>
+    <offsets>
+      <x-m> -7 </x-m>
+      <y-m>  9 </y-m>
+      <z-m> 2.5 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>fire-engine-4</name>
+    <path>AI/Aircraft/A346/Models/SSQ_flame.xml</path>
+    <offsets>
+      <x-m> -2 </x-m>
+      <y-m>  19 </y-m>
+      <z-m> 4 </z-m>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>fire-engine-1</object-name>
+    <condition>
+      <property>engines/engine[0]/failed</property> </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>fire-engine-2</object-name>
+    <condition>
+      <property>engines/engine[1]/failed</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>fire-engine-3</object-name>
+    <condition>
+      <property>engines/engine[2]/failed</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>fire-engine-4</object-name>
+    <condition>
+      <property>engines/engine[3]/failed</property>
+    </condition>
+  </animation>
+
+</PropertyList>

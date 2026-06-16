@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  چراغ فرود/تاکسی A346 — نسخه‌ی اصلاح‌شده
+  دو لایه با هم:
+   (۱) مخروط دیداریِ نور (light-cone)  → ستون نوری که می‌بینی
+   (۲) نور واقعی spot (<light>)         → زمین و موانع را روشن می‌کند  ★ افزوده‌شده
+  نیازمند رندر Compositor/HDR (یا ALS) با clustered lighting است (توضیح در README).
+
+  فریم: -x=جلو  +y=راست  +z=بالا ؛ در <direction> مقدار مثبت pitch-deg = رو به پایین.
+  property کنترلی «نسبی» تا برای هواپیمای کاربر و هر بلیپ AI کار کند.
+-->
+<PropertyList>
+
+  <!-- ===================== (۱) مخروط‌های دیداری (همان مال تو) ===================== -->
+  <model>
+    <name>landing-light-left</name>
+    <path>landinglight.xml</path>
+    <offsets>
+      <x-m>-26.5</x-m>
+      <y-m>10.0</y-m>
+      <z-m>2</z-m>
+      <pitch-deg>-15</pitch-deg>
+    </offsets>
+  </model>
+  <model>
+    <name>landing-light-right</name>
+    <path>landinglight.xml</path>
+    <offsets>
+      <x-m>-26.5</x-m>
+      <y-m>-10.0</y-m>
+      <z-m>2</z-m>
+      <pitch-deg>-15</pitch-deg>
+    </offsets>
+  </model>
+  <model>
+    <name>taxi-light-object</name>
+    <path>taxilight.xml</path>
+    <offsets>
+      <x-m>-26.5</x-m>
+      <y-m>0.0</y-m>
+      <z-m>2</z-m>
+      <pitch-deg>-5</pitch-deg>
+    </offsets>
+  </model>
+
+  <!-- روشن/خاموش مخروط‌ها (اصلاح‌شده: object-nameها مستقیم؛ بدون گروهِ معیوب) -->
+  <animation>
+    <type>select</type>
+    <object-name>landing-light-left</object-name>
+    <object-name>landing-light-right</object-name>
+    <condition>
+      <property>controls/lighting/landing-lights</property>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>taxi-light-object</object-name>
+    <condition>
+      <property>controls/lighting/taxi-light</property>   <!-- مفرد (استاندارد FG) -->
+    </condition>
+  </animation>
+
+  <!-- ============ (۲) نورهای واقعی spot — روشن‌کننده‌ی زمین/موانع ★ ============ -->
+  <!-- جهت با lookat دقیقاً روی محور مخروط (جلو، ۱۵° پایین)؛ پهنا و برد افزایش یافت -->
+  <!-- چراغ فرود چپ -->
+  <animation>
+    <type>select</type>
+    <object-name>LandingSpotL</object-name>
+    <condition><property>controls/lighting/landing-lights</property></condition>
+  </animation>
+  <light>
+    <name>LandingSpotL</name>
+    <type>spot</type>
+    <position> <x-m>-26.5</x-m> <y-m>10.0</y-m> <z-m>2.0</z-m> </position>
+    <!-- نقطه‌ی هدف روی محور مخروط: جلو(-x) و ۱۵° پایین -->
+    <direction> <lookat-x-m>-316.3</lookat-x-m> <lookat-y-m>10.0</lookat-y-m> <lookat-z-m>-75.6</lookat-z-m> </direction>
+    <ambient>  <r>0</r><g>0</g><b>0</b><a>1</a> </ambient>
+    <diffuse>  <r>1.0</r><g>0.97</g><b>0.9</b><a>1</a> </diffuse>
+    <specular> <r>1.0</r><g>0.97</g><b>0.9</b><a>1</a> </specular>
+    <debug-color> <r>1</r><g>0</g><b>0</b><a>1</a> </debug-color>
+    <attenuation> <c>1.0</c> <l>0.0008</l> <q>0.00003</q> </attenuation>
+    <spot-exponent>4</spot-exponent>     <!-- پخش یکنواخت (نه لکه‌ی نقطه‌ای) -->
+    <spot-cutoff>38</spot-cutoff>        <!-- مخروط پهن‌تر = منطقه‌ی بزرگ‌تر -->
+    <range-m>1200</range-m>              <!-- برد بلند -->
+  </light>
+
+  <!-- چراغ فرود راست -->
+  <animation>
+    <type>select</type>
+    <object-name>LandingSpotR</object-name>
+    <condition><property>controls/lighting/landing-lights</property></condition>
+  </animation>
+  <light>
+    <name>LandingSpotR</name>
+    <type>spot</type>
+    <position> <x-m>-26.5</x-m> <y-m>-10.0</y-m> <z-m>2.0</z-m> </position>
+    <direction> <lookat-x-m>-316.3</lookat-x-m> <lookat-y-m>-10.0</lookat-y-m> <lookat-z-m>-75.6</lookat-z-m> </direction>
+    <ambient>  <r>0</r><g>0</g><b>0</b><a>1</a> </ambient>
+    <diffuse>  <r>1.0</r><g>0.97</g><b>0.9</b><a>1</a> </diffuse>
+    <specular> <r>1.0</r><g>0.97</g><b>0.9</b><a>1</a> </specular>
+    <debug-color> <r>0</r><g>1</g><b>0</b><a>1</a> </debug-color>
+    <attenuation> <c>1.0</c> <l>0.0008</l> <q>0.00003</q> </attenuation>
+    <spot-exponent>4</spot-exponent>
+    <spot-cutoff>38</spot-cutoff>
+    <range-m>1200</range-m>
+  </light>
+
+  <!-- چراغ تاکسی (نزدیک‌تر، پهن‌تر، ۵° پایین) -->
+  <animation>
+    <type>select</type>
+    <object-name>TaxiSpot</object-name>
+    <condition><property>controls/lighting/taxi-light</property></condition>
+  </animation>
+  <light>
+    <name>TaxiSpot</name>
+    <type>spot</type>
+    <position> <x-m>-26.5</x-m> <y-m>0.0</y-m> <z-m>2.0</z-m> </position>
+    <direction> <lookat-x-m>-175.9</lookat-x-m> <lookat-y-m>0.0</lookat-y-m> <lookat-z-m>-11.1</lookat-z-m> </direction>
+    <ambient>  <r>0</r><g>0</g><b>0</b><a>1</a> </ambient>
+    <diffuse>  <r>1.0</r><g>0.95</g><b>0.85</b><a>1</a> </diffuse>
+    <specular> <r>1.0</r><g>0.95</g><b>0.85</b><a>1</a> </specular>
+    <debug-color> <r>0</r><g>0.5</g><b>1</b><a>1</a> </debug-color>
+    <attenuation> <c>1.0</c> <l>0.006</l> <q>0.0003</q> </attenuation>
+    <spot-exponent>3</spot-exponent>
+    <spot-cutoff>34</spot-cutoff>
+    <range-m>250</range-m>
+  </light>
+
+</PropertyList>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- استخر نورِ زمینی: کوادِ تختِ روشن روی زمین.
+     چون geometry است (نه نور پویا)، در هر ۱۵ دوربین یکسان رندر می‌شود.
+     مادهٔ emis در .ac آن را خوددرخشان می‌کند؛ alpha تکسچر شکلِ نرم می‌دهد. -->
+<PropertyList>
+  <path>landing-pool.ac</path>
+</PropertyList>

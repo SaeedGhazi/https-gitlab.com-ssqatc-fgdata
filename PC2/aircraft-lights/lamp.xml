@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- لامپِ دیداری: کوادِ کوچکِ خوددرخشان که همیشه رو به دوربین می‌چرخد (billboard)
+     تا از جلو و هر زاویه دیده شود. geometry است → در همه‌ی دوربین‌ها رندر می‌شود. -->
+<PropertyList>
+  <path>lamp.ac</path>
+  <animation>
+    <type>billboard</type>
+    <object-name>Lamp</object-name>
+  </animation>
+</PropertyList>

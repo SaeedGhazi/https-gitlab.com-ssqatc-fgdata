@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  چراغ فرود/تاکسی A346 — نسخه‌ی «استخر نور + لامپِ دیداری» (camera-independent)
+  لایه‌ها:
+   (۱) مخروط دیداری (light-cone)   → ستون نور در هوا  [مال تو]
+   (۲) استخر نور زمینی (پهن/کم‌زاویه) → روشناییِ ظاهریِ زمین، همه‌ی دوربین‌ها ★
+   (۳) لامپِ دیداری (billboard)     → خودِ چراغ که از جلو دیده می‌شود ★ جدید
+  همه geometry هستند → در هر ۱۵ دوربین رندر می‌شوند.
+
+  فریم: -x=جلو  +y=راست  +z=بالا ؛ property نسبی (برای بلیپ AI هم کار می‌کند).
+  تغییرِ این نسخه: مخروط کم‌زاویه‌تر (pitch -8 به‌جای -15) و استخر بلندتر (تا x=-210)
+  → سطح بیشتری پوشش داده می‌شود.
+-->
+<PropertyList>
+
+  <!-- ===================== (۱) مخروط‌های دیداری (کم‌زاویه‌تر) ===================== -->
+  <model>
+    <name>landing-light-left</name>
+    <path>landinglight.xml</path>
+    <offsets> <x-m>-26.5</x-m> <y-m>10.0</y-m> <z-m>2</z-m> <pitch-deg>-8</pitch-deg> </offsets>
+  </model>
+  <model>
+    <name>landing-light-right</name>
+    <path>landinglight.xml</path>
+    <offsets> <x-m>-26.5</x-m> <y-m>-10.0</y-m> <z-m>2</z-m> <pitch-deg>-8</pitch-deg> </offsets>
+  </model>
+  <model>
+    <name>taxi-light-object</name>
+    <path>taxilight.xml</path>
+    <offsets> <x-m>-26.5</x-m> <y-m>0.0</y-m> <z-m>2</z-m> <pitch-deg>-4</pitch-deg> </offsets>
+  </model>
+
+  <!-- ============ (۲) استخرهای نور زمینی (پهن/کم‌زاویه) ★ ============ -->
+  <model>
+    <name>pool-landing-left</name>
+    <path>landing-pool.xml</path>
+    <offsets> <x-m>0</x-m> <y-m>6.0</y-m> <z-m>0.3</z-m> <pitch-deg>0</pitch-deg> </offsets>
+  </model>
+  <model>
+    <name>pool-landing-right</name>
+    <path>landing-pool.xml</path>
+    <offsets> <x-m>0</x-m> <y-m>-6.0</y-m> <z-m>0.3</z-m> <pitch-deg>0</pitch-deg> </offsets>
+  </model>
+  <model>
+    <name>pool-taxi</name>
+    <path>landing-pool.xml</path>
+    <offsets> <x-m>25</x-m> <y-m>0.0</y-m> <z-m>0.3</z-m> <pitch-deg>0</pitch-deg> </offsets>
+  </model>
+
+  <!-- ============ (۳) لامپ‌های دیداری ★ (سرِ هر چراغ، دیده‌شدنی از جلو) ============ -->
+  <model>
+    <name>lamp-landing-left</name>
+    <path>lamp.xml</path>
+    <offsets> <x-m>-26.5</x-m> <y-m>10.0</y-m> <z-m>2</z-m> </offsets>
+  </model>
+  <model>
+    <name>lamp-landing-right</name>
+    <path>lamp.xml</path>
+    <offsets> <x-m>-26.5</x-m> <y-m>-10.0</y-m> <z-m>2</z-m> </offsets>
+  </model>
+  <model>
+    <name>lamp-taxi</name>
+    <path>lamp.xml</path>
+    <offsets> <x-m>-26.5</x-m> <y-m>0.0</y-m> <z-m>2</z-m> </offsets>
+  </model>
+
+  <!-- ===================== روشن/خاموش ===================== -->
+  <!-- چراغ فرود: مخروط + استخر + لامپ‌های فرود -->
+  <animation>
+    <type>select</type>
+    <object-name>landing-light-left</object-name>
+    <object-name>landing-light-right</object-name>
+    <object-name>pool-landing-left</object-name>
+    <object-name>pool-landing-right</object-name>
+    <object-name>lamp-landing-left</object-name>
+    <object-name>lamp-landing-right</object-name>
+    <condition>
+      <property>controls/lighting/landing-lights</property>
+    </condition>
+  </animation>
+  <!-- چراغ تاکسی: مخروط + استخر + لامپ تاکسی -->
+  <animation>
+    <type>select</type>
+    <object-name>taxi-light-object</object-name>
+    <object-name>pool-taxi</object-name>
+    <object-name>lamp-taxi</object-name>
+    <condition>
+      <property>controls/lighting/taxi-light</property>
+    </condition>
+  </animation>
+
+</PropertyList>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  نسخه‌ی خودِ تو — فقط دو تغییر حداقلی:
+   ۱) دود: emissive=true → false   ← رفعِ «مربع‌شدن» (دود تیره باید blending معمولی alpha داشته باشد)
+   ۲) دود: gravity=true  → false   ← رفعِ «ارتفاع کم» (با جاذبه، دود بالا می‌رفت و برمی‌گشت پایین)
+  بقیه‌ی همه‌ی مقادیر دقیقاً مثل فایل خودت است.
+  (آتش اصلاً تغییر نکرد.)
+-->
+<PropertyList>
+
+    <particlesystem>
+        <name>ssq-fire-flame</name>
+        <texture>flame.png</texture>
+        <emissive>true</emissive>
+        <lighting>false</lighting>
+        <attach>world</attach>
+
+        <placer>
+            <type>sector</type>
+            <radius-min-m>0.0</radius-min-m>
+            <radius-max-m>0.4</radius-max-m> <phi-min-deg>0</phi-min-deg>
+            <phi-max-deg>360</phi-max-deg>
+        </placer>
+
+        <shooter>
+            <theta-min-deg>85.0</theta-min-deg>
+            <theta-max-deg>95.0</theta-max-deg>
+            <phi-min-deg>-4.0</phi-min-deg>
+            <phi-max-deg>4.0</phi-max-deg>
+            <speed-mps>
+                <value>35.0</value> <spread>4.0</spread>
+            </speed-mps>
+        </shooter>
+
+        <counter>
+            <particles-per-sec>
+                <value>100</value> <spread>15</spread>
+            </particles-per-sec>
+        </counter>
+
+        <align>billboard</align>
+
+        <particle>
+            <start>
+                <color>
+                    <red><value>1.0</value></red>
+                    <green><value>0.5</value></green>
+                    <blue><value>0.1</value></blue>
+                    <alpha><value>0.95</value></alpha>
+                </color>
+                <size><value>0.6</value></size>
+            </start>
+            <end>
+                <color>
+                    <red><value>0.8</value></red>
+                    <green><value>0.1</value></green>
+                    <blue><value>0.0</value></blue>
+                    <alpha><value>0.0</value></alpha>
+                </color>
+                <size><value>3.5</value></size> </end>
+            <life-sec><value>0.4</value></life-sec> <mass-kg>0.02</mass-kg>
+        </particle>
+
+        <program>
+            <fluid>air</fluid>
+            <gravity>true</gravity>
+            <wind>true</wind>
+        </program>
+    </particlesystem>
+
+    <particlesystem>
+        <name>ssq-fire-smoke</name>
+        <texture>smoke-black.png</texture>
+        <emissive>false</emissive>          <!-- ★ تنها تغییر #۱ (بود: true) -->
+        <lighting>false</lighting>
+        <attach>world</attach>
+
+        <placer>
+            <type>sector</type>
+            <radius-min-m>0.1</radius-min-m>
+            <radius-max-m>0.5</radius-max-m>
+            <phi-min-deg>0</phi-min-deg>
+            <phi-max-deg>360</phi-max-deg>
+        </placer>
+
+        <shooter>
+            <speed-mps>
+                <value>5.0</value>
+                <spread>2.0</spread>
+            </speed-mps>
+        </shooter>
+
+        <counter>
+            <particles-per-sec>
+                <value>75</value>
+                <spread>10</spread>
+            </particles-per-sec>
+        </counter>
+
+        <align>billboard</align>
+
+        <particle>
+            <drag>
+                <value>0.12</value>
+            </drag>
+            <start>
+                <color>
+                    <red><value>0.15</value></red>
+                    <green><value>0.15</value></green>
+                    <blue><value>0.15</value></blue>
+                    <alpha><value>0.22</value></alpha> </color>
+                <size><value>1</value></size>
+            </start>
+            <end>
+                <color>
+                    <red><value>0.25</value></red>
+                    <green><value>0.25</value></green>
+                    <blue><value>0.25</value></blue>
+                    <alpha><value>0.00</value></alpha>
+                </color>
+                <size><value>7.5</value></size>
+            </end>
+
+            <life-sec><value>10.0</value></life-sec>
+            <mass-kg>120</mass-kg>
+            <radius-m>3.0</radius-m>
+        </particle>
+
+        <program>
+            <fluid>air</fluid>
+            <gravity>false</gravity>     <!-- ★ تنها تغییر #۲ (بود: true) -->
+            <wind>true</wind>
+        </program>
+    </particlesystem>
+
+</PropertyList>

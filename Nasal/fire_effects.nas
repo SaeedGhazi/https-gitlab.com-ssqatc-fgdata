@@ -1,17 +1,24 @@
-# Spawns/removes the realistic placeable fire effect (Models/Effects/Fire/fire.xml).
+# Spawns/removes the realistic placeable fire effects (Models/Effects/Fire/*.xml).
 # Step 1 of the fire/smoke/extinguish feature set: visual flame placement only.
 
-var FIRE_MODEL = "Models/Effects/Fire/fire.xml";
+var FIRE_MODELS = {
+	plain: "Models/Effects/Fire/fire.xml",
+	smoke: "Models/Effects/Fire/fire-with-smoke.xml",
+	tall: "Models/Effects/Fire/tall-fire.xml",
+	tall_smoke: "Models/Effects/Fire/tall-fire-with-smoke.xml",
+};
 
 var fire_effects = {
 	active: {},
 	next_id: 0,
 };
 
-# ignite(pos, heading=0) : geo.Coord, double -> int
+# ignite(pos, heading=0, kind="plain") : geo.Coord, double, string -> int
+#   kind is one of "plain", "smoke", "tall", "tall_smoke" (see FIRE_MODELS).
 #   Spawns a fire at pos and returns a handle for extinguish().
-fire_effects.ignite = func(pos, heading = 0) {
-	var model = geo.put_model(FIRE_MODEL, pos, heading);
+fire_effects.ignite = func(pos, heading = 0, kind = "plain") {
+	var path = contains(FIRE_MODELS, kind) ? FIRE_MODELS[kind] : FIRE_MODELS["plain"];
+	var model = geo.put_model(path, pos, heading);
 	var id = fire_effects.next_id += 1;
 	fire_effects.active[id] = model;
 	return id;
@@ -26,8 +33,8 @@ fire_effects.extinguish = func(id) {
 	}
 };
 
-# Shift+Ctrl+Click to ignite a fire at the clicked position (same convention
-# documented in Docs/README.wildfire for wildfire.ignite()).
+# Shift+Ctrl+Click to ignite a plain fire at the clicked position (same
+# convention documented in Docs/README.wildfire for wildfire.ignite()).
 setlistener("/sim/signals/click", func {
 	if (__kbd.shift.getBoolValue() and __kbd.ctrl.getBoolValue()) {
 		fire_effects.ignite(geo.click_position());

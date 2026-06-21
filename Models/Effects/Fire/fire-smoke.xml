@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<!-- Black smoke column rising from a fire. Shared by the smoke-enabled fire wrappers. -->
+<PropertyList>
+
+	<particlesystem>
+		<name>fire-smoke</name>
+		<type>normal</type>
+		<texture>../../Geometry/Crater/smoke.png</texture>
+		<emissive>false</emissive>
+		<lighting>true</lighting>
+
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>1.3</z-m>
+		</offsets>
+
+		<attach>world</attach>
+
+		<placer>
+			<type>sector</type>
+			<radius-min-m>0</radius-min-m>
+			<radius-max-m>0.6</radius-max-m>
+			<phi-min-deg>0</phi-min-deg>
+			<phi-max-deg>359.5</phi-max-deg>
+		</placer>
+
+		<shooter>
+			<theta-min-deg>0</theta-min-deg>
+			<theta-max-deg>22</theta-max-deg>
+			<phi-min-deg>0</phi-min-deg>
+			<phi-max-deg>360</phi-max-deg>
+			<speed-mps>
+				<value>1.1</value>
+				<spread>0.4</spread>
+			</speed-mps>
+			<rotation-speed>
+				<x-min-deg-sec>0</x-min-deg-sec>
+				<y-min-deg-sec>0</y-min-deg-sec>
+				<z-min-deg-sec>-20</z-min-deg-sec>
+				<x-max-deg-sec>0</x-max-deg-sec>
+				<y-max-deg-sec>0</y-max-deg-sec>
+				<z-max-deg-sec>20</z-max-deg-sec>
+			</rotation-speed>
+		</shooter>
+
+		<counter>
+			<particles-per-sec>
+				<value>16</value>
+				<spread>4</spread>
+			</particles-per-sec>
+		</counter>
+
+		<align>billboard</align>
+
+		<particle>
+			<start>
+				<color>
+					<red><value>0.04</value></red>
+					<green><value>0.04</value></green>
+					<blue><value>0.04</value></blue>
+					<alpha><value>0.55</value></alpha>
+				</color>
+				<size><value>1.1</value><spread>0.3</spread></size>
+			</start>
+			<end>
+				<color>
+					<red><value>0.1</value></red>
+					<green><value>0.1</value></green>
+					<blue><value>0.1</value></blue>
+					<alpha><value>0.0</value></alpha>
+				</color>
+				<size><value>6.0</value><spread>1.0</spread></size>
+			</end>
+			<life-sec><value>9</value><spread>2</spread></life-sec>
+			<mass-kg>0.02</mass-kg>
+			<radius-m>0.4</radius-m>
+		</particle>
+
+		<program>
+			<fluid>air</fluid>
+			<gravity>false</gravity>
+			<wind>true</wind>
+		</program>
+	</particlesystem>
+
+</PropertyList>
